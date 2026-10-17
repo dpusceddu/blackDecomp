@@ -99,6 +99,10 @@ def reconcile(slug, ghidra):
     text = (ROOT / 'asm' / slug / 'text.s').read_text()
     for m in re.finditer(r'\bjal\s+func_([0-9A-F]{8})', text):
         jal_targets.add(int(m.group(1), 16))
+    data_refs = set()
+    for p in sorted((ROOT / 'asm' / slug / 'data').glob('*.s')):
+        data_refs.update(int(m.group(1), 16) for m in re.finditer(r'\bfunc_([0-9A-F]{8})\b', p.read_text()))
+    addr_loads = {int(m.group(1), 16) for m in re.finditer(r'%(?:hi|lo)\(func_([0-9A-F]{8})', text)}
     starts = [f['addr'] for f in sf]
     sset = set(starts)
     gaddrs = sorted(ghidra)
@@ -131,8 +135,12 @@ def reconcile(slug, ghidra):
                 kind = 'Ghidra has no function here: called (jal) - missed function'
             elif prev is not None and not ends_with_return(function_words(slug, prev)):
                 kind = 'Ghidra has no function here: previous function falls through - over-split'
+            elif a in data_refs:
+                kind = 'Ghidra has no function here: address stored in data (vtable or callback table) - missed function'
+            elif a in addr_loads:
+                kind = 'Ghidra has no function here: address built with lui/addiu - missed function'
             else:
-                kind = 'Ghidra has no function here: not called, follows a return - missed or dead code'
+                kind = 'Ghidra has no function here: unreferenced, follows a return - stub or fragment'
         res['splat_only'][kind] = res['splat_only'].get(kind, 0) + 1
         examples.setdefault('splat_only: ' + kind, []).append('%08X' % a)
     for a in gaddrs:
