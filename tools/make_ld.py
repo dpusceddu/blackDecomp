@@ -46,6 +46,7 @@ def main():
         return name if a == addr else '%s + 0x%X' % (name, addr - a)
 
     replaced, aliases, problems = {}, [], []
+    trims = {u['name']: u.get('trim') or {} for u in load_units(variant=slug)}
     # Symbol names. A compiled unit defines its functions under the exact mangled name; the image's own names
     # (func_XXXXXXXX, referenced by assembly) become aliases of those. The same mangled name can be defined at several
     # addresses (identical inline copies), and the name a unit leaves undefined is bound to one original address, so a
@@ -154,6 +155,7 @@ def main():
         if n in rename:
             o['rename'] = rename[n]
             o['redefine'] = redefine.get(n[len('units/'):], {})
+            o['trim'] = trims.get(n[len('units/'):], {})
         listing.append(o)
     (build / 'objects.json').write_text(json.dumps(listing, indent=1))
     print('link.ld: %d objects (%d replaced by source)' % (len(listing), len(replaced)))

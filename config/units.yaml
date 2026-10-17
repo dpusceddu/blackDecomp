@@ -1569,9 +1569,10 @@ units:
   - addr: '0x2dfc38'
     symbol: _$_Q24Kaim16PointerBankOwner
     size: 208
-    status: asm
-    reason: section
+    status: source
   externs:
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
+    _vt$Q24Kaim16PointerBankOwner: '0x3e6cf8'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2e3408
   source: src/kynapse/owned_arrays_2e3408.cpp
@@ -1600,10 +1601,11 @@ units:
   - addr: '0x2e34b8'
     symbol: _$_Q24Kaim12ChildBuffers
     size: 192
-    status: asm
-    reason: section
+    status: source
   externs:
     DeleteChildren__Q24Kaim12ChildBuffers: '0x2e37a0'
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
+    _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2e37a0
   source: src/kynapse/owned_arrays_2e37a0.cpp
@@ -1630,9 +1632,10 @@ units:
   - addr: '0x2e9280'
     symbol: _$_Q24Kaim10BufferTrio
     size: 164
-    status: asm
-    reason: section
+    status: source
   externs:
+    _vt$Q24Kaim10BufferTrio: '0x3eb7b0'
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2f2578
   source: src/kynapse/owned_arrays_2f2578.cpp
@@ -1646,10 +1649,11 @@ units:
   - addr: '0x2f2578'
     symbol: _$_Q24Kaim9PoolArray
     size: 228
-    status: asm
-    reason: section
+    status: source
   externs:
     ReleaseSharedPool__4Kaimv: '0x2ed1e8'
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
+    _vt$Q24Kaim9PoolArray: '0x3eda30'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2f32c0
   source: src/kynapse/owned_arrays_2f32c0.cpp
@@ -1663,9 +1667,10 @@ units:
   - addr: '0x2f32c0'
     symbol: _$_Q24Kaim9SlotOwner
     size: 216
-    status: asm
-    reason: section
+    status: source
   externs:
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
+    _vt$Q24Kaim9SlotOwner: '0x3eda70'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2fb558
   source: src/kynapse/owned_arrays_2fb558.cpp
@@ -1694,9 +1699,10 @@ units:
   - addr: '0x2fd800'
     symbol: _$_Q24Kaim15ShortBlockTable
     size: 196
-    status: asm
-    reason: section
+    status: source
   externs:
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
+    _vt$Q24Kaim15ShortBlockTable: '0x3ef368'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2feb08
   source: src/kynapse/owned_arrays_2feb08.cpp
@@ -1710,9 +1716,10 @@ units:
   - addr: '0x2feb08'
     symbol: _$_Q24Kaim10BlockTable
     size: 196
-    status: asm
-    reason: section
+    status: source
   externs:
+    _vt$Q24Kaim10BlockTable: '0x3ef7b0'
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_393288
   source: src/kynapse/owned_arrays_393288.cpp
@@ -1726,9 +1733,10 @@ units:
   - addr: '0x393288'
     symbol: _$_Q24Kaim10BufferPair
     size: 148
-    status: asm
-    reason: section
+    status: source
   externs:
+    _vt$Q24Kaim10BufferPair: '0x3ef3a0'
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
     memoryRelease: '0x3c87e0'
 - name: kynapse_pair_owner_30fdf8
   source: src/kynapse/pair_owner_30fdf8.cpp
@@ -2817,10 +2825,10 @@ units:
   - addr: '0x2f36a8'
     symbol: __Q24Kaim11SquareTablePQ24Kaim11Description
     size: 200
-    status: asm
-    reason: section
+    status: source
   externs:
     __throw: '0x292b40'
+    _vt$Q24Kaim10ObjectRoot: '0x3e0040'
     _vt$Q24Kaim11SquareTable: '0x3ede90'
     gKaimAllocateHook: '0x3c87ec'
     gKaimAllocator: '0x3c87e8'
@@ -2849,14 +2857,14 @@ units:
   - addr: '0x2f4c58'
     symbol: __7Tracker
     size: 156
-    status: asm
-    reason: section
+    status: source
   externs:
     Entity_ApplyA__FP12EntityObjectii: '0x2e1038'
     Entity_ApplyC__FP12EntityObjectii: '0x2e1078'
     TrackerOnAdded__FP7TrackedP7Tracker: '0x2f5868'
     TrackerOnRemoved__FP7TrackedP7Tracker: '0x2f58e8'
     __throw: '0x292b40'
+    _vt$10ObjectBase: '0x3e0040'
     _vt$7Tracker: '0x3ee398'
     gEngine: '0x3c9ed4'
 - name: kynapse_tracker_2f4e90
@@ -3518,13 +3526,11 @@ units:
   - addr: '0x17a0a8'
     symbol: AdvanceRouteRequest__9BlackGamePQ29BlackGame12RouteRequest
     size: 196
-    status: asm
-    reason: size
+    status: source
   - addr: '0x17a170'
     symbol: BeginQueuedRoute__9BlackGamePQ29BlackGame12RouteRequest
     size: 176
-    status: asm
-    reason: size
+    status: source
   externs:
     Begin__Q29BlackGame10NodeSearchx: '0x17b3d0'
     CheckFinalRouteLeg__9BlackGamePQ29BlackGame12RouteRequest: '0x17a8d8'
@@ -3537,6 +3543,8 @@ units:
     RunTimedRouteSearch__9BlackGamePQ29BlackGame12RouteRequest: '0x17a4a8'
     TryDirectRoute__9BlackGamePQ29BlackGame12RouteRequest: '0x17a220'
     _9BlackGame$gManager: '0x40f4d4'
+  trim:
+    .rodata: 44
 - name: game_ai_route_stages_17a320
   source: src/game/ai_route_stages_17a320.cpp
   origin: game

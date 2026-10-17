@@ -61,6 +61,21 @@ def undefine_dropped(data, keep):
             o = h[4] + k * 16
             n, value, size, info, other, shndx = struct.unpack_from('<IIIBBH', data, o)
             if shndx in dropped and (info >> 4) != 0:
-                struct.pack_into('<IIIBBH', out, o, n, 0, 0, info & 0xF0, other, 0)
+                struct.pack_into('<IIIBBH', out, o, n, 0, 0, 0x10 | (info & 0xF), other, 0)   # global: weak undefined would link as 0
                 count += 1
     return bytes(out), count
+
+
+def trim_sections(data, sizes):
+    """Shorten sections (name -> new size). Used to drop the alignment padding the assembler appends to the end of a
+    constants section when the original continues straight away; only zero bytes may be removed (checked by the caller)."""
+    shoff, = struct.unpack_from('<I', data, 32)
+    shentsize, shnum, shstrndx = struct.unpack_from('<HHH', data, 46)
+    out = bytearray(data)
+    hdrs = [struct.unpack_from('<IIIIIIIIII', data, shoff + i * shentsize) for i in range(shnum)]
+    names = data[hdrs[shstrndx][4]:hdrs[shstrndx][4] + hdrs[shstrndx][5]]
+    for i, h in enumerate(hdrs):
+        name = names[h[0]:].split(b'\0', 1)[0].decode()
+        if name in sizes and sizes[name] < h[5]:
+            struct.pack_into('<I', out, shoff + i * shentsize + 20, sizes[name])
+    return bytes(out)

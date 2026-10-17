@@ -81,9 +81,11 @@ if failed:
     print('%d jobs failed' % failed)
     sys.exit(1)
 for r in plan.get('rename', []):   # give a unit's sections the sort key of the slot they take over
-    from elfobj import undefine_dropped
+    from elfobj import undefine_dropped, trim_sections
     raw = open(r['obj'], 'rb').read()
     edited, n = undefine_dropped(raw, set(r['sections']))   # duplicates in sections that are not linked
+    if r.get('trim'):
+        edited = trim_sections(edited, r['trim'])
     open(r['obj'], 'wb').write(edited)
     args = ['mipsel-linux-gnu-objcopy']
     for old, new in r['sections'].items():

@@ -76,7 +76,11 @@ def data_sections(e, syms, u, live, placement):
                 off, info = struct.unpack_from('<II', c, o)
                 y = syms[info >> 8]
                 if y['shndx'] not in (0, 0xfff1, 0xfff2):
-                    referenced.add(e.sections[y['shndx']]['name'])
+                    name = e.sections[y['shndx']]['name']
+                    # a global defined in a dropped section (a vtable emitted here) is bound to the original instead
+                    if y['bind'] in (1, 2) and y['name'] and name not in ('.text', '.rodata', '.lit4', '.gcc_except_table'):
+                        continue
+                    referenced.add(name)
     for sec in sorted(referenced - {'.text', '.rodata', '.lit4', '.gcc_except_table'}):
         return 'section'              # own data or bss: not placed
     for sec in ('.rodata', '.lit4', '.gcc_except_table'):
@@ -91,8 +95,16 @@ def data_sections(e, syms, u, live, placement):
         if slots != list(range(slots[0], slots[0] + len(slots))):
             return 'layout'           # other objects sit between the slots
         end = ents[slots[-1] + 1]['key'] if slots[-1] + 1 < len(ents) and 'key' in ents[slots[-1] + 1] else None
-        if end is not None and not 0 <= end - ents[slots[0]]['key'] - size < 16:
-            return 'size'
+        if end is not None:
+            span = end - ents[slots[0]]['key']
+            if span < size and so and all(b == 0 for b in e.content(so)[span:]) and \
+                    not any(y['shndx'] == so['index'] and y['value'] + y['size'] > span for y in syms) and \
+                    not any(struct.unpack_from('<I', e.content(t), o)[0] >= span
+                            for t in e.sections if t['type'] == 9 and t['info'] == so['index']
+                            for o in range(0, t['size'], 8)):
+                u.setdefault('trim', {})[sec] = span     # trailing alignment pad the original does not have
+            elif not 0 <= span - size < 16:
+                return 'size'
     return None
 
 
@@ -144,7 +156,10 @@ def prepare():
                 c = e.content(t)
                 for o in range(0, len(c), 8):
                     used.add(struct.unpack_from('<I', c, o + 4)[0] >> 8)
-        want = sorted({syms[i]['name'] for i in used if syms[i]['shndx'] == 0 and syms[i]['name'] and syms[i]['bind'] == 1})
+        kept_names = ('.text', '.rodata', '.lit4', '.gcc_except_table')
+        want = sorted({syms[i]['name'] for i in used if syms[i]['name'] and syms[i]['bind'] in (1, 2) and
+                       (syms[i]['shndx'] == 0 or (syms[i]['shndx'] < 0xff00 and e.sections[syms[i]['shndx']]['name'] not in kept_names
+                                                  and i not in [j for j, y in enumerate(syms) if y['type'] == 2 and y['shndx'] == e.section('.text')['index']]))})
         ex, missing = {}, []
         for name in want:
             if name in bind.get(u['name'], {}):

@@ -59,7 +59,7 @@ def main():
                        args=list(o['flags']) + ['-I', 'include'])
         keys[name] = key
         if o.get('rename') and not compile_only:
-            plan['rename'].append(dict(obj='obj/%s.o' % name, sections=o['rename'], redefine=o.get('redefine', {})))
+            plan['rename'].append(dict(obj='obj/%s.o' % name, sections=o['rename'], redefine=o.get('redefine', {}), trim=o.get('trim', {})))
         cached = cache / (key + '.o')
         if cached.exists():
             if not compile_only:
