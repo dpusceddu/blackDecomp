@@ -2981,3 +2981,786 @@ units:
     gKaimAllocateHook: '0x3c87ec'
     gKaimAllocator: '0x3c87e8'
     gTypeRegistryClass: '0x452158'
+- name: game_ai_action_1815d8
+  source: src/game/ai_action_1815d8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1815d8'
+    symbol: NotifyIdentityRemoved__Q29BlackGame11ActionStackPv
+    size: 132
+    status: source
+  externs:
+    Resolve__CQ29BlackGame11ActionStackUi: '0x181a90'
+- name: game_ai_action_181a18
+  source: src/game/ai_action_181a18.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x181a18'
+    symbol: FindAction__CQ29BlackGame11ActionStackPCQ29BlackGame6Action
+    size: 120
+    status: source
+  externs:
+    Resolve__CQ29BlackGame11ActionStackUi: '0x181a90'
+- name: game_ai_action_1829a8
+  source: src/game/ai_action_1829a8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1829a8'
+    symbol: IsContinuingState__CQ29BlackGame10Controller
+    size: 64
+    status: source
+- name: game_ai_action_197d48
+  source: src/game/ai_action_197d48.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x197d48'
+    symbol: LeaveReactionWait__Q29BlackGame6Action
+    size: 76
+    status: source
+  externs:
+    BaseLeave__Q29BlackGame6Action: '0x193988'
+    SetAllowed__Q29BlackGame10PermissionUc: '0x188148'
+    SetUpdate__Q29BlackGame10ControllerUc: '0x182318'
+- name: game_ai_action_198458
+  source: src/game/ai_action_198458.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x198458'
+    symbol: LeaveMovementPermission__Q29BlackGame6Action
+    size: 76
+    status: source
+  externs:
+    BaseLeave__Q29BlackGame6Action: '0x193988'
+    SetAllowed__Q29BlackGame10PermissionUc: '0x188148'
+- name: game_ai_action_stack_181660
+  source: src/game/ai_action_stack_181660.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x181660'
+    symbol: PushAndEnter__Q29BlackGame11ActionStackUii
+    size: 428
+    status: source
+  externs:
+    Reset__Q29BlackGame16CompletionRecord: '0x193880'
+    Resolve__CQ29BlackGame11ActionStackUi: '0x181a90'
+    RetireFinished__Q29BlackGame11ActionStack: '0x181df8'
+    SetDefaults__Q29BlackGame12ActionPolicy: '0x1938c0'
+    TopKind__CQ29BlackGame11ActionStack: '0x1819f0'
+- name: game_ai_action_stack_1818a8
+  source: src/game/ai_action_stack_1818a8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1818a8'
+    symbol: Pop__Q29BlackGame11ActionStack
+    size: 96
+    status: source
+  externs:
+    Resolve__CQ29BlackGame11ActionStackUi: '0x181a90'
+    TopKind__CQ29BlackGame11ActionStack: '0x1819f0'
+- name: game_ai_action_stack_181b88
+  source: src/game/ai_action_stack_181b88.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x181b88'
+    symbol: DispatchEvent__Q29BlackGame11ActionStackPQ29BlackGame17QueuedActionEvent
+    size: 148
+    status: source
+  - addr: '0x181c20'
+    symbol: ExpireTimers__Q29BlackGame11ActionStack
+    size: 252
+    status: source
+  - addr: '0x181d20'
+    symbol: DeliverEvents__Q29BlackGame11ActionStack
+    size: 124
+    status: source
+  externs:
+    Clear__Q29BlackGame11ActionTimer: '0x173690'
+    Clear__Q29BlackGame17QueuedActionEvent: '0x18c168'
+    Enabled__CQ29BlackGame11ActionTimer: '0x1735e0'
+    Event__Q29BlackGame14ModeDispatcherPQ29BlackGame17QueuedActionEvent: '0x18d210'
+    Expired__CQ29BlackGame11ActionTimer: '0x173610'
+    Resolve__CQ29BlackGame11ActionStackUi: '0x181a90'
+    RetireFinished__Q29BlackGame11ActionStack: '0x181df8'
+    Start__Q29BlackGame11ActionTimerf: '0x173640'
+- name: game_ai_action_stack_193990
+  source: src/game/ai_action_stack_193990.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x193990'
+    symbol: Complete__Q29BlackGame6Actionb
+    size: 80
+    status: source
+  externs:
+    Record__CQ29BlackGame6Action: '0x193b40'
+    UnwindAbove__Q29BlackGame6Action: '0x1939e0'
+- name: game_ai_action_stack_193a28
+  source: src/game/ai_action_stack_193a28.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x193a28'
+    symbol: RequestSuccessor__Q29BlackGame6ActionUii
+    size: 48
+    status: asm
+    reason: extra
+  externs:
+    FindAction__CQ29BlackGame11ActionStackPCQ29BlackGame6Action: '0x181a18'
+    PushAndEnter__Q29BlackGame11ActionStackUii: '0x181660'
+    UnwindAbove__Q29BlackGame11ActionStacki: '0x181908'
+- name: game_ai_action_stack_193af8
+  source: src/game/ai_action_stack_193af8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x193af8'
+    symbol: IsDeadlineReady__CQ29BlackGame6Action
+    size: 72
+    status: source
+  - addr: '0x193b40'
+    symbol: Record__CQ29BlackGame6Action
+    size: 88
+    status: source
+  externs:
+    Expired__CQ29BlackGame11ActionTimer: '0x173610'
+    FindAction__CQ29BlackGame11ActionStackPCQ29BlackGame6Action: '0x181a18'
+- name: game_ai_movement_family_18da40
+  source: src/game/ai_movement_family_18da40.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x18da40'
+    symbol: FamilySpeed__9BlackGamePCQ29BlackGame9FamilyRef
+    size: 68
+    status: source
+- name: game_ai_movement_helpers_1915d8
+  source: src/game/ai_movement_helpers_1915d8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x1915d8'
+    symbol: UpdateStallRecovery__Q29BlackGame16MovementModeBase
+    size: 268
+    status: asm
+    reason: extern
+  externs:
+    IsOffRoute__CQ29BlackGame16MovementModeBase: '0x191b78'
+    MoveToRouteProjection__Q29BlackGame16MovementModeBase: '0x191bb8'
+    Pending__CQ29BlackGame10StallGrace: '0x18b168'
+  unbound:
+  - Expired__CQ29BlackGame11ActionTimer
+  - Start__Q29BlackGame11ActionTimerf
+- name: game_ai_movement_helpers_191bb8
+  source: src/game/ai_movement_helpers_191bb8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x191bb8'
+    symbol: MoveToRouteProjection__Q29BlackGame16MovementModeBase
+    size: 96
+    status: source
+  externs:
+    FamilySpeed__9BlackGamePCQ29BlackGame9FamilyRef: '0x18da40'
+    ProjectOntoSegment__9BlackGamePCQ29BlackGame16MovementModeBasexx: '0x191af8'
+    RequestDestinationMotion__9BlackGamefPQ29BlackGame16MovementModeBasexbf: '0x1917a0'
+- name: game_ai_movement_helpers_193818
+  source: src/game/ai_movement_helpers_193818.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x193818'
+    symbol: ContinueToGoal__Q29BlackGame13FormationMode
+    size: 100
+    status: source
+  externs:
+    FormationGoalPoint__9BlackGamePQ29BlackGame13FormationGoal: '0x183380'
+    RequestDestinationMotion__9BlackGamefPQ29BlackGame16MovementModeBasexbf: '0x1917a0'
+- name: game_ai_movement_modes_179c60
+  source: src/game/ai_movement_modes_179c60.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x179c60'
+    symbol: Clear__Q29BlackGame12RouteRequest
+    size: 40
+    status: source
+- name: game_ai_movement_modes_179cd0
+  source: src/game/ai_movement_modes_179cd0.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x179cd0'
+    symbol: PointCount__CQ29BlackGame12RouteRequest
+    size: 12
+    status: source
+- name: game_ai_movement_modes_179ed0
+  source: src/game/ai_movement_modes_179ed0.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x179ed0'
+    symbol: Resubmit__Q29BlackGame12RouteRequestx
+    size: 32
+    status: source
+  - addr: '0x179ef0'
+    symbol: Release__Q29BlackGame12RouteRequest
+    size: 36
+    status: source
+  externs:
+    SubmitRouteRequest__9BlackGamePQ29BlackGame12RouteRequestxxUc: '0x179d58'
+- name: game_ai_movement_modes_17a9c8
+  source: src/game/ai_movement_modes_17a9c8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x17a9c8'
+    symbol: UpdateDestination__Q29BlackGame12RouteRequestx
+    size: 44
+    status: source
+- name: game_ai_movement_modes_18b168
+  source: src/game/ai_movement_modes_18b168.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x18b168'
+    symbol: Pending__CQ29BlackGame10StallGrace
+    size: 36
+    status: source
+  externs:
+    Expired__CQ29BlackGame11ActionTimer: '0x173610'
+- name: game_ai_movement_modes_191568
+  source: src/game/ai_movement_modes_191568.cpp
+  origin: vector
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x191568'
+    symbol: BindBase__Q29BlackGame16MovementModeBasePQ29BlackGame5Brain
+    size: 16
+    status: source
+  - addr: '0x191578'
+    symbol: ResetBase__Q29BlackGame16MovementModeBase
+    size: 96
+    status: source
+  externs:
+    Clear__Q29BlackGame11ActionTimer: '0x173690'
+- name: game_ai_movement_modes_191778
+  source: src/game/ai_movement_modes_191778.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x191778'
+    symbol: Retarget__Q29BlackGame16MovementModeBasex
+    size: 16
+    status: asm
+    reason: extra
+  - addr: '0x191788'
+    symbol: Recover__Q29BlackGame16MovementModeBase
+    size: 8
+    status: asm
+    reason: extra
+  - addr: '0x191790'
+    symbol: Stop__Q29BlackGame16MovementModeBase
+    size: 8
+    status: asm
+    reason: extra
+  - addr: '0x191798'
+    symbol: GetTarget__CQ29BlackGame16MovementModeBase
+    size: 8
+    status: asm
+    reason: extra
+  externs:
+    ClassifyRouteResult__9BlackGamePCQ29BlackGame12RouteRequest: '0x17a008'
+    PointCount__CQ29BlackGame12RouteRequest: '0x179cd0'
+    Release__Q29BlackGame12RouteRequest: '0x179ef0'
+    Resubmit__Q29BlackGame12RouteRequestx: '0x179ed0'
+    RoutePointAt__9BlackGamePCQ29BlackGame12RouteRequesti: '0x179ce0'
+    SubmitRouteRequest__9BlackGamePQ29BlackGame12RouteRequestxxUc: '0x179d58'
+    UpdateTarget__Q29BlackGame16MovementModeBasex: '0x191c18'
+- name: game_ai_movement_modes_191b40
+  source: src/game/ai_movement_modes_191b40.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x191b40'
+    symbol: SetSegment__Q29BlackGame16MovementModeBasexx
+    size: 56
+    status: source
+  - addr: '0x191b78'
+    symbol: IsOffRoute__CQ29BlackGame16MovementModeBase
+    size: 64
+    status: source
+  externs:
+    Clear__Q29BlackGame11ActionTimer: '0x173690'
+    PlanarSegmentDistance__9BlackGamePCQ29BlackGame16MovementModeBasexx: '0x191aa0'
+- name: game_ai_movement_modes_191c18
+  source: src/game/ai_movement_modes_191c18.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x191c18'
+    symbol: UpdateTarget__Q29BlackGame16MovementModeBasex
+    size: 8
+    status: asm
+    reason: extra
+  - addr: '0x191c20'
+    symbol: Bind__Q29BlackGame9RouteModePQ29BlackGame5Brain
+    size: 40
+    status: asm
+    reason: extra
+  externs:
+    BindBase__Q29BlackGame16MovementModeBasePQ29BlackGame5Brain: '0x191568'
+    RetargetLive__9BlackGamePQ29BlackGame9RouteModex: '0x193040'
+    UpdateDestination__Q29BlackGame12RouteRequestx: '0x17a9c8'
+- name: game_ai_movement_modes_1920d8
+  source: src/game/ai_movement_modes_1920d8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x1920d8'
+    symbol: Start__Q29BlackGame9RouteModex
+    size: 100
+    status: source
+  - addr: '0x192140'
+    symbol: Retarget__Q29BlackGame9RouteModex
+    size: 152
+    status: source
+  externs:
+    ReleaseMovementRoute__9BlackGamePQ29BlackGame9RouteMode: '0x191f28'
+    Release__Q29BlackGame12RouteRequest: '0x179ef0'
+    Retarget__Q29BlackGame16MovementModeBasex: '0x191778'
+    SetDestination__Q29BlackGame16MovementModeBasex: '0x1916e8'
+    SubmitRouteRequest__9BlackGamePQ29BlackGame12RouteRequestxxUc: '0x179d58'
+- name: game_ai_movement_modes_192570
+  source: src/game/ai_movement_modes_192570.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x192570'
+    symbol: ResolveSubmitted__Q29BlackGame9RouteMode
+    size: 100
+    status: source
+  - addr: '0x1925d8'
+    symbol: ResolveCurrent__Q29BlackGame9RouteMode
+    size: 188
+    status: source
+  externs:
+    AcceptCompletedRoute__9BlackGamePQ29BlackGame9RouteModePQ29BlackGame12RouteRequest: '0x192a78'
+    ClassifyRouteResult__9BlackGamePCQ29BlackGame12RouteRequest: '0x17a008'
+    ReleaseMovementRoute__9BlackGamePQ29BlackGame9RouteMode: '0x191f28'
+- name: game_ai_movement_modes_192a00
+  source: src/game/ai_movement_modes_192a00.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x192a00'
+    symbol: StepPhase__Q29BlackGame9RouteMode
+    size: 120
+    status: source
+  externs:
+    FollowCurrentDestination__9BlackGamePQ29BlackGame9RouteMode: '0x192698'
+    ResolveCurrent__Q29BlackGame9RouteMode: '0x1925d8'
+    ResolveSubmitted__Q29BlackGame9RouteMode: '0x192570'
+- name: game_ai_movement_modes_192dc0
+  source: src/game/ai_movement_modes_192dc0.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x192dc0'
+    symbol: Recover__Q29BlackGame9RouteMode
+    size: 144
+    status: source
+  - addr: '0x192e50'
+    symbol: Stop__Q29BlackGame9RouteMode
+    size: 92
+    status: source
+  externs:
+    ClassifyRouteResult__9BlackGamePCQ29BlackGame12RouteRequest: '0x17a008'
+    Release__Q29BlackGame12RouteRequest: '0x179ef0'
+    Resubmit__Q29BlackGame12RouteRequestx: '0x179ed0'
+    Stop__Q29BlackGame16MovementModeBase: '0x191790'
+- name: game_ai_movement_modes_193488
+  source: src/game/ai_movement_modes_193488.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x193488'
+    symbol: Reset__Q29BlackGame10DirectMode
+    size: 28
+    status: asm
+    reason: extern
+  externs:
+    GetTarget__CQ29BlackGame16MovementModeBase: '0x191798'
+    Recover__Q29BlackGame16MovementModeBase: '0x191788'
+    ResetBase__Q29BlackGame16MovementModeBase: '0x191578'
+    Retarget__Q29BlackGame16MovementModeBasex: '0x191778'
+    Start__Q29BlackGame10DirectModex: '0x193568'
+    Stop__Q29BlackGame16MovementModeBase: '0x191790'
+    UpdateTarget__Q29BlackGame10DirectModex: '0x1936c0'
+    Update__Q29BlackGame10DirectMode: '0x1934a8'
+  unbound:
+  - __rtti_si
+  - __tfQ29BlackGame16MovementModeBase
+  - __tiQ29BlackGame16MovementModeBase
+- name: game_ai_movement_modes_193700
+  source: src/game/ai_movement_modes_193700.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x193700'
+    symbol: Reset__Q29BlackGame13FormationMode
+    size: 32
+    status: asm
+    reason: extern
+  - addr: '0x193720'
+    symbol: Update__Q29BlackGame13FormationMode
+    size: 84
+    status: asm
+    reason: extern
+  externs:
+    GetTarget__CQ29BlackGame16MovementModeBase: '0x191798'
+    Recover__Q29BlackGame16MovementModeBase: '0x191788'
+    ResetBase__Q29BlackGame16MovementModeBase: '0x191578'
+    Retarget__Q29BlackGame16MovementModeBasex: '0x191778'
+    Start__Q29BlackGame13FormationModex: '0x193778'
+    Stop__Q29BlackGame16MovementModeBase: '0x191790'
+    UpdateTarget__Q29BlackGame16MovementModeBasex: '0x191c18'
+  unbound:
+  - ContinueToGoal__Q29BlackGame13FormationMode
+  - UpdateStallRecovery__Q29BlackGame16MovementModeBase
+  - __rtti_si
+  - __tfQ29BlackGame16MovementModeBase
+  - __tiQ29BlackGame16MovementModeBase
+- name: game_ai_route_service_179ce0
+  source: src/game/ai_route_service_179ce0.cpp
+  origin: vector
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x179ce0'
+    symbol: RoutePointAt__9BlackGamePCQ29BlackGame12RouteRequesti
+    size: 92
+    status: source
+  - addr: '0x179d40'
+    symbol: RoutePointAddress__9BlackGamePCQ29BlackGame12RouteRequesti
+    size: 24
+    status: source
+  externs:
+    _9BlackGame$gRouteLift: '0x414dc0'
+- name: game_ai_route_service_179f18
+  source: src/game/ai_route_service_179f18.cpp
+  origin: vector
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x179f18'
+    symbol: EndpointDistance__9BlackGamePCQ29BlackGame12RouteRequest
+    size: 72
+    status: source
+  - addr: '0x179f60'
+    symbol: BorrowStorage__9BlackGamePCQ29BlackGame12RouteRequestPQ29BlackGame12RouteStorage
+    size: 112
+    status: source
+- name: game_ai_route_service_191f28
+  source: src/game/ai_route_service_191f28.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x191f28'
+    symbol: ReleaseMovementRoute__9BlackGamePQ29BlackGame9RouteMode
+    size: 432
+    status: source
+  externs:
+    ClearActivation__9BlackGamePQ29BlackGame15ActionBankOwner: '0x2dfbf8'
+    Release__Q29BlackGame12RouteRequest: '0x179ef0'
+    _9BlackGame$gUnsetPoint: '0x4514f8'
+- name: game_ai_route_service_192560
+  source: src/game/ai_route_service_192560.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x192560'
+    symbol: AcceptAvoidance__9BlackGamePQ29BlackGame9RouteModePUiPf
+    size: 8
+    status: source
+  - addr: '0x192568'
+    symbol: FinishFollow__9BlackGamePQ29BlackGame9RouteMode
+    size: 8
+    status: source
+- name: game_ai_route_service_193040
+  source: src/game/ai_route_service_193040.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x193040'
+    symbol: RetargetLive__9BlackGamePQ29BlackGame9RouteModex
+    size: 184
+    status: source
+  externs:
+    SubmitRouteFromNode__9BlackGamePQ29BlackGame12RouteRequestPQ29BlackGame9RouteNodexUc: '0x179e50'
+    UpdateDestination__Q29BlackGame12RouteRequestx: '0x17a9c8'
+- name: game_ai_route_stages_17a0a8
+  source: src/game/ai_route_stages_17a0a8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x17a0a8'
+    symbol: AdvanceRouteRequest__9BlackGamePQ29BlackGame12RouteRequest
+    size: 196
+    status: asm
+    reason: size
+  - addr: '0x17a170'
+    symbol: BeginQueuedRoute__9BlackGamePQ29BlackGame12RouteRequest
+    size: 176
+    status: asm
+    reason: size
+  externs:
+    Begin__Q29BlackGame10NodeSearchx: '0x17b3d0'
+    CheckFinalRouteLeg__9BlackGamePQ29BlackGame12RouteRequest: '0x17a8d8'
+    CollectRouteGoal__9BlackGamePQ29BlackGame12RouteRequest: '0x17a3a0'
+    CollectRouteStart__9BlackGamePQ29BlackGame12RouteRequest: '0x17a320'
+    CompressRouteEnd__9BlackGamePQ29BlackGame12RouteRequest: '0x17a720'
+    CompressRouteStart__9BlackGamePQ29BlackGame12RouteRequest: '0x17a588'
+    Contains__CQ29BlackGame10RouteQueuePCQ29BlackGame12RouteRequest: '0x17b178'
+    Head__CQ29BlackGame10RouteQueue: '0x17b158'
+    RunTimedRouteSearch__9BlackGamePQ29BlackGame12RouteRequest: '0x17a4a8'
+    TryDirectRoute__9BlackGamePQ29BlackGame12RouteRequest: '0x17a220'
+    _9BlackGame$gManager: '0x40f4d4'
+- name: game_ai_route_stages_17a320
+  source: src/game/ai_route_stages_17a320.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x17a320'
+    symbol: CollectRouteStart__9BlackGamePQ29BlackGame12RouteRequest
+    size: 128
+    status: source
+  - addr: '0x17a3a0'
+    symbol: CollectRouteGoal__9BlackGamePQ29BlackGame12RouteRequest
+    size: 264
+    status: source
+  - addr: '0x17a4a8'
+    symbol: RunTimedRouteSearch__9BlackGamePQ29BlackGame12RouteRequest
+    size: 224
+    status: source
+  externs:
+    ActorModel__9BlackGamePQ29BlackGame5Actor: '0x135570'
+    AdvancePathSearch__9BlackGamePQ29BlackGame12RouteStoragePQ29BlackGame9RouteNodeT2PQ29BlackGame13ActorMovement: '0x174158'
+    Advance__Q29BlackGame10NodeSearch: '0x17b3f0'
+    Begin__Q29BlackGame10NodeSearchx: '0x17b3d0'
+    ModelKind__9BlackGamePv: '0x138320'
+    ResetSearchStatistics__9BlackGamev: '0x174110'
+    TestFamilyRoute__9BlackGamePQ29BlackGame16NodeConnectivityPQ29BlackGame9RouteNodeT2lUi: '0x28b638'
+    ValidateRoute__Q29BlackGame12RouteRequest: '0x179fd0'
+    _9BlackGame$gGameClock: '0x40f4d0'
+    _9BlackGame$gManager: '0x40f4d4'
+- name: game_ai_route_stages_17a8d8
+  source: src/game/ai_route_stages_17a8d8.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x17a8d8'
+    symbol: CheckFinalRouteLeg__9BlackGamePQ29BlackGame12RouteRequest
+    size: 164
+    status: source
+  - addr: '0x17a980'
+    symbol: SkipPoint__Q29BlackGame12RouteRequest
+    size: 16
+    status: source
+  - addr: '0x17a990'
+    symbol: DropFinalPoint__Q29BlackGame12RouteRequest
+    size: 52
+    status: source
+  externs:
+    CheckLocalRoute__9BlackGamePQ29BlackGame10Controllerxx: '0x182bc8'
+    _9BlackGame$gRouteLift: '0x414dc0'
+- name: game_ai_route_stages_17b5e8
+  source: src/game/ai_route_stages_17b5e8.cpp
+  origin: vector
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x17b5e8'
+    symbol: TestCandidate__CQ29BlackGame10NodeSearchPCQ29BlackGame9RouteNode
+    size: 124
+    status: source
+  externs:
+    IsVolumeBlocked__9BlackGamePQ29BlackGame10ProbeWorldxxif: '0x175fa0'
+    _9BlackGame$gManager: '0x40f4d4'
+    _9BlackGame$gRouteLift: '0x414dc0'
+- name: game_ai_route_stages_1933f0
+  source: src/game/ai_route_stages_1933f0.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1933f0'
+    symbol: TrimConsumedRoutePoints__9BlackGamePQ29BlackGame9RouteMode
+    size: 152
+    status: source
+  externs:
+    PointCount__CQ29BlackGame12RouteRequest: '0x179cd0'
+    RemoveFirstPoint__9BlackGamePQ29BlackGame12RouteRequest: '0x17a9f8'
+    RoutePointAddress__9BlackGamePCQ29BlackGame12RouteRequesti: '0x179d40'
