@@ -65,7 +65,7 @@ black-decomp/
 | Assembler for asm files | EE GNU assembler 2.10-ee from the compiler catalog | Reassembles the whole executable identically. Short backward branches (five words or fewer) are emitted as raw `.word` (the assembler rejects them); splat already emits undecoded words as `.word`. The assembler has no `.incbin` and no `%gp_rel`, is quadratic in file size (the code is cut into chunks of about 20,000 lines) and needs `.extern sym, 1` for gp-relative accesses |
 | C/C++ compiler | SN `ee-gcc2.95.3-136` under Wine through the build backend | Same model as `the companion project/tools/ps2`; never run it directly on the host |
 | Compiler output assembler | SN assembler (`-snas`) inside the same container | It mattered for matching in `the companion project` tests |
-| Linker | Mainline GNU `ld` 2.40 (Debian `binutils-mipsel-linux-gnu` 2.40-2cross2, signed archive) | Per-section ordering from a generated script; `tools/pack_elf.py` writes the retail container and `e_flags` `0x20924001`. SN-assembled objects need their symbol table normalised (`tools/elfobj.py`) before ld accepts them |
+| Linker | Mainline GNU `ld` 2.40 (Debian `binutils-mipsel-linux-gnu` 2.40-2cross2, signed archive) | Per-section ordering from a generated script (sorted input-section names, not one statement per object); `tools/pack_elf.py` writes the retail container and `e_flags` `0x20924001`. SN-assembled objects need their symbol table normalised (`tools/elfobj.py`) before ld accepts them |
 | Build | `configure.py` → Ninja | Standard decomp template; one command builds and verifies |
 | Decompiler | m2c, little-endian MIPS GCC target | EE-specific instructions (MMI, 128-bit moves, VU0) will often need agent work |
 | Diff and scoring | objdiff (CLI and report), asm-differ | objdiff report gives per-TU and overall progress |
@@ -110,22 +110,28 @@ Japanese retail, in about 20 s of which 8 s are the build backend. Facts that ch
 
 Exit reached: `ninja` prints `OK`; the shifted test build links.
 
-### Phase 2: symbols and existing results (2–3 sessions)
+### Phase 2: symbols and existing results (done)
 
-- Export Ghidra names, prototypes, data labels and sizes to `config/symbols.txt` with a script
-  (`tools/ghidra_export.py`). Use GCC 2.95 mangled names for C++ functions once their declaration is
-  known; until then use `func_XXXXXXXX`.
-- Split `.text` into one assembly file per function, so that the replacement unit is a function.
-- Bring in `the companion project` results:
-  - the 213 PS2-exact Kynapse bodies and their class declarations;
-  - the 65 PS2-exact game functions (AI action stack, movement, route service and stages);
-  - the VU0 inline-assembly vector header from the study.
+Result (details in `README.md`):
 
-  Port them as source, not copies of the old modules, into provisional TUs. Each must stay exact
-  inside the full build.
+- **One object per function.** `tools/split_objects.py` cuts splat's `.text` into 11,775 function files; the objects are
+  cached by input hash and linked in the original order. A build from nothing takes about 40 s, a changed source unit
+  about 15 s. The linker script places input sections by sorted name (`.text.<address>`, `.rodata.<address>`, ...): one ld
+  statement per object is quadratic and did not finish in 15 minutes for 12,000 objects.
+- **Constants travel with their function** (rodata migration done by the same tool): 74 % of `.rodata`, 88 % of `.lit4`;
+  the rest is shared (data references, several users) or, for `.gcc_except_table`, belongs to a whole object file.
+- **Symbols.** `config/symbols.txt` holds Ghidra's 9,946 functions (268 with a recovered name, 272 with prototypes) and 175
+  data labels; `tools/ghidra_export.py` rewrites it from raw Ghidra pages and reconciles with splat (9,943 common starts;
+  1,832 functions only splat finds: Ghidra misses, mostly vtable/callback targets and 8-byte stubs).
+- **Existing results imported as source units** (`config/units.yaml`, `src/`, `include/`): 191 of the 206 PS2-exact Kynapse
+  bodies and all 65 PS2-exact game functions (7 of them using the VU0 vector layer) replace their assembly in the full
+  build, which stays identical for all five retail images. `tools/progress.py` reports 256 functions and 0.7 % of `.text`
+  (about 19 KB) from source.
+- C++ emissions of a unit that the original placed elsewhere are not linked: unwind groups in `.data`, vtables and inline
+  copies in `.gnu.linkonce.*`; the symbols they define are bound to the originals.
 
-Exit: the full build is still identical with every imported function in C/C++; `tools/progress.py`
-reports the first non-zero percentage.
+Exit reached: the full build is identical with every imported function in C/C++; `tools/progress.py` reports the first
+non-zero percentage.
 
 ### Phase 3: translation-unit boundaries (3–5 sessions, then continuous)
 
