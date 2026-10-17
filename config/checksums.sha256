@@ -1,0 +1,6 @@
+# SHA-256 of the boot executables the rebuild targets: hash, variant slug, file name
+141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c  usa-retail SLUS_213.76
+7e6f25966389656a9bdc534c2514a3a56f205054ee66b43c27a18b111add309f  eu-au-retail SLES_540.30
+bbed3444a22d28b7fdc641e15a1759b6ece1c9cbc5a13331586025ff8fc2b948  eu-retail SLES_538.86
+bf70d92152237eae6908e973d44dde8ce49d9e7e32b34e9b7ad41f79ad569f43  jp-retail SLPM_663.54
+fb59440b00444ff64be1436fd757452c3eead9e560532fad74e4d05e913a6b94  kr-retail SLKA_253.72
