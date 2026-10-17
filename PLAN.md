@@ -28,7 +28,7 @@ depend on `the companion project` code at build time; useful pieces are copied i
 | Input | Use |
 | --- | --- |
 | `SLUS_213.76` (USA retail), SHA-256 `141b0520…6254ffe4c` | Primary matching target unless a variant with symbols changes that (Phase 0) |
-| Other variants: PAL, Japanese, demos, prototypes | Symbol and type sources, TU-boundary evidence, compiler-flag evidence |
+| Other variants (triaged in `docs/inputs.md`) | PAL, Korean and Japanese retail: layout and TU-boundary evidence (member offsets shift by 0x80 in about a fifth of the code); EU/AU: a second image for shiftability tests; USA beta (2005-08-16) and demos: class-name and ordering hints. No variant has symbols. |
 | Ghidra `/SLUS_213.76` | Recovered names, prototypes and types, exported to symbol files |
 | SN GCC 2.95.3 build 1.36 (`ee-gcc2.95.3-136`, decomp.me compiler release) | Game compiler; `-O2 -G0 -snas` reproduced 45/52 sample bodies in `the companion project` |
 | `the companion project` results | 65 PS2-exact game functions, 213 PS2-exact Kynapse bodies, the Xbox-to-PS2 counterpart map, the VU0 inline-assembly study, RTTI-derived class names |
@@ -62,10 +62,10 @@ black-decomp/
 | Piece | Choice | Notes |
 | --- | --- | --- |
 | Splitting | splat (`splat64`), spimdisasm, rabbitizer | splat supports PS2/R5900; pin versions |
-| Assembler for asm files | GNU binutils for MIPS with `-march=r5900` (ps2dev build or distro cross package) | Must reassemble MMI, 128-bit and COP2 macro instructions identically (Phase 1 check) |
+| Assembler for asm files | EE GNU assembler 2.10-ee from the compiler catalog | Phase 0 reassembled all sampled instruction kinds identically. Short backward branches (five words or fewer), undecoded words and `0x00ff00ff` words are emitted as raw `.word`, because the assembler inserts short-loop NOPs |
 | C/C++ compiler | SN `ee-gcc2.95.3-136` under Wine through the build backend | Same model as `the companion project/tools/ps2`; never run it directly on the host |
 | Compiler output assembler | SN assembler (`-snas`) inside the same container | It mattered for matching in `the companion project` tests |
-| Linker | GNU `ld` with a splat-generated linker script | Per-section ordering from `units.yaml` |
+| Linker | Mainline GNU `ld` from the distribution's signed MIPS cross-binutils package, installed in the build backend image | Per-section ordering from `units.yaml`; final `e_flags` set explicitly to the retail `0x20924001` |
 | Build | `configure.py` → Ninja | Standard decomp template; one command builds and verifies |
 | Decompiler | m2c, little-endian MIPS GCC target | EE-specific instructions (MMI, 128-bit moves, VU0) will often need agent work |
 | Diff and scoring | objdiff (CLI and report), asm-differ | objdiff report gives per-TU and overall progress |
@@ -129,7 +129,8 @@ reports the first non-zero percentage.
 
 Evidence for file boundaries, in rough order of strength:
 
-- source file names in strings (asserts, the encoded `kyastar.cpp`) and variant symbols, if any;
+- source file names in strings (the encoded `kyastar.cpp`, `vibuf.c`); no variant has symbols;
+- regional builds: code that shifts together between USA and the PAL, Korean and Japanese builds;
 - per-object exception and unwind groups: 281 CIE/FDE groups in `.data` are likely one per C++ object
   with exception tables;
 - alignment padding between functions, and section-start alignment repeated in `.rodata`, `.data`,
@@ -213,13 +214,12 @@ missing types, or m2c gaps with EE instructions.
 - **VU microcode** (`.vutext`, DVP overlays) stays as binary data.
 - **Third-party libraries** (Sony runtime, RenderWare, C++ runtime) may never be matched from source
   without their original libraries; count them separately.
-- **No symbols** unless a variant has them. Names come from Ghidra, RTTI strings and Xbox knowledge.
+- **No symbols** in any variant. Names come from Ghidra, RTTI strings, beta profiler names and Xbox knowledge.
 - **Full-file identity** may need extra handling for ELF headers, `.reginfo` and `.mdebug` remnants.
 
-## What to look for in other variants
+## Variant findings
 
-- **Unstripped executables**, especially in demos and prototypes: any `.symtab`, `.mdebug` or DWARF
-  section is valuable.
-- **Debug or development builds**, with assert strings that contain file paths and line numbers.
-- **PAL and Japanese retail executables**, which show what changed between builds and help separate TUs.
-- **Xbox demo or prototype XBEs**, which may have symbol paths or less optimized code.
+Phase 0 triaged nine disc images (`docs/inputs.md`). No EE executable carries symbols, debug sections or
+compiler banners. The EU "beta" executable is identical to EU retail. The USA beta (2005-08-16) is an
+earlier build with about ten `Class::Method` profiler names and RenderWare Studio development modules on
+the IOP side; it is a source of naming hints, not a byte target.
