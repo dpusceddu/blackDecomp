@@ -51,7 +51,7 @@ def main():
     # addresses (identical inline copies), and the name a unit leaves undefined is bound to one original address, so a
     # name that would be defined twice or bound to two addresses is made unique per address with a `$XXXXXX` suffix.
     live_units = []
-    for u in load_units():
+    for u in load_units(variant=slug):
         src = [f for f in u['functions'] if f.get('status') == 'source']
         if src:
             live_units.append((u, src))

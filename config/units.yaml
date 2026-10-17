@@ -1,5 +1,6 @@
 # Provisional translation units that replace assembly functions with source; see README.md.
 # status: source = provided by the unit; asm = stays assembly, with a one-word reason.
+variant: usa-retail
 units:
 - name: kynapse_accessors_2dfbf8
   source: src/kynapse/accessors_2dfbf8.cpp
@@ -1527,13 +1528,7 @@ units:
   - addr: '0x3921a0'
     symbol: Begin__20NearestSimpleVisitorP9NodeGraph
     size: 20
-    status: asm
-    reason: extern
-  unbound:
-  - Consider__20NearestSimpleVisitorP7NavNode
-  - __builtin_delete
-  - __rtti_si
-  - __rtti_user
+    status: source
 - name: kynapse_nearest_node_392a50
   source: src/kynapse/nearest_node_392a50.cpp
   origin: kynapse
@@ -1546,13 +1541,7 @@ units:
   - addr: '0x392a50'
     symbol: Begin__18NearestNodeVisitorP9NodeGraph
     size: 24
-    status: asm
-    reason: extern
-  unbound:
-  - Consider__18NearestNodeVisitorP7NavNode
-  - __builtin_delete
-  - __rtti_si
-  - __rtti_user
+    status: source
 - name: kynapse_owned_arrays_2df8c8
   source: src/kynapse/owned_arrays_2df8c8.cpp
   origin: kynapse
@@ -1565,25 +1554,9 @@ units:
   - addr: '0x2df8c8'
     symbol: __Q24Kaim9BufferAt4
     size: 28
-    status: asm
-    reason: extern
+    status: source
   externs:
-    __throw: '0x292b40'
     _vt$Q24Kaim9BufferAt4: '0x3e6888'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
-    memoryRelease: '0x3c87e0'
-  unbound:
-  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementA
-  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementB
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementAZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementBZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementCZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementDZQ24Kaim5NodeD
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementEZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementFZQ24Kaim10SharedNode
-  - __rtti_si
-  - __rtti_user
 - name: kynapse_owned_arrays_2dfc38
   source: src/kynapse/owned_arrays_2dfc38.cpp
   origin: kynapse
@@ -1599,9 +1572,6 @@ units:
     status: asm
     reason: section
   externs:
-    __throw: '0x292b40'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2e3408
   source: src/kynapse/owned_arrays_2e3408.cpp
@@ -1615,25 +1585,9 @@ units:
   - addr: '0x2e3408'
     symbol: __Q24Kaim12ChildBuffers
     size: 52
-    status: asm
-    reason: extern
+    status: source
   externs:
-    __throw: '0x292b40'
     _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
-    memoryRelease: '0x3c87e0'
-  unbound:
-  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementA
-  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementB
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementAZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementBZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementCZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementDZQ24Kaim5NodeD
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementEZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementFZQ24Kaim10SharedNode
-  - __rtti_si
-  - __rtti_user
 - name: kynapse_owned_arrays_2e34b8
   source: src/kynapse/owned_arrays_2e34b8.cpp
   origin: kynapse
@@ -1650,9 +1604,6 @@ units:
     reason: section
   externs:
     DeleteChildren__Q24Kaim12ChildBuffers: '0x2e37a0'
-    __throw: '0x292b40'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2e37a0
   source: src/kynapse/owned_arrays_2e37a0.cpp
@@ -1666,24 +1617,7 @@ units:
   - addr: '0x2e37a0'
     symbol: DeleteChildren__Q24Kaim12ChildBuffers
     size: 132
-    status: asm
-    reason: extern
-  externs:
-    __throw: '0x292b40'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
-    memoryRelease: '0x3c87e0'
-  unbound:
-  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementA
-  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementB
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementAZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementBZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementCZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementDZQ24Kaim5NodeD
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementEZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementFZQ24Kaim10SharedNode
-  - __rtti_si
-  - __rtti_user
+    status: source
 - name: kynapse_owned_arrays_2e9280
   source: src/kynapse/owned_arrays_2e9280.cpp
   origin: kynapse
@@ -1699,9 +1633,6 @@ units:
     status: asm
     reason: section
   externs:
-    __throw: '0x292b40'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2f2578
   source: src/kynapse/owned_arrays_2f2578.cpp
@@ -1719,9 +1650,6 @@ units:
     reason: section
   externs:
     ReleaseSharedPool__4Kaimv: '0x2ed1e8'
-    __throw: '0x292b40'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2f32c0
   source: src/kynapse/owned_arrays_2f32c0.cpp
@@ -1738,9 +1666,6 @@ units:
     status: asm
     reason: section
   externs:
-    __throw: '0x292b40'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2fb558
   source: src/kynapse/owned_arrays_2fb558.cpp
@@ -1754,25 +1679,9 @@ units:
   - addr: '0x2fb558'
     symbol: __Q24Kaim10BufferQuad
     size: 52
-    status: asm
-    reason: extern
+    status: source
   externs:
-    __throw: '0x292b40'
     _vt$Q24Kaim10BufferQuad: '0x3ee580'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
-    memoryRelease: '0x3c87e0'
-  unbound:
-  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementA
-  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementB
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementAZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementBZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementCZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementDZQ24Kaim5NodeD
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementEZQ24Kaim10SharedNode
-  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementFZQ24Kaim10SharedNode
-  - __rtti_si
-  - __rtti_user
 - name: kynapse_owned_arrays_2fd800
   source: src/kynapse/owned_arrays_2fd800.cpp
   origin: kynapse
@@ -1788,9 +1697,6 @@ units:
     status: asm
     reason: section
   externs:
-    __throw: '0x292b40'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_2feb08
   source: src/kynapse/owned_arrays_2feb08.cpp
@@ -1807,9 +1713,6 @@ units:
     status: asm
     reason: section
   externs:
-    __throw: '0x292b40'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
 - name: kynapse_owned_arrays_393288
   source: src/kynapse/owned_arrays_393288.cpp
@@ -1826,9 +1729,6 @@ units:
     status: asm
     reason: section
   externs:
-    __throw: '0x292b40'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
 - name: kynapse_pair_owner_30fdf8
   source: src/kynapse/pair_owner_30fdf8.cpp
@@ -2924,7 +2824,6 @@ units:
     _vt$Q24Kaim11SquareTable: '0x3ede90'
     gKaimAllocateHook: '0x3c87ec'
     gKaimAllocator: '0x3c87e8'
-    memoryRelease: '0x3c87e0'
 - name: kynapse_tiny3_390758
   source: src/kynapse/tiny3_390758.cpp
   origin: kynapse
@@ -2960,7 +2859,6 @@ units:
     __throw: '0x292b40'
     _vt$7Tracker: '0x3ee398'
     gEngine: '0x3c9ed4'
-    memoryRelease: '0x3c87e0'
 - name: kynapse_tracker_2f4e90
   source: src/kynapse/tracker_2f4e90.cpp
   origin: kynapse
@@ -3064,27 +2962,37 @@ units:
     symbol: PushAndEnter__Q29BlackGame11ActionStackUii
     size: 428
     status: source
+  - addr: '0x181810'
+    symbol: RequestSuccessor__Q29BlackGame11ActionStackPQ29BlackGame6ActionUii
+    size: 148
+    status: source
+  - addr: '0x1818a8'
+    symbol: Pop__Q29BlackGame11ActionStack
+    size: 96
+    status: source
   externs:
+    FindAction__CQ29BlackGame11ActionStackPCQ29BlackGame6Action: '0x181a18'
     Reset__Q29BlackGame16CompletionRecord: '0x193880'
     Resolve__CQ29BlackGame11ActionStackUi: '0x181a90'
     RetireFinished__Q29BlackGame11ActionStack: '0x181df8'
     SetDefaults__Q29BlackGame12ActionPolicy: '0x1938c0'
     TopKind__CQ29BlackGame11ActionStack: '0x1819f0'
-- name: game_ai_action_stack_1818a8
-  source: src/game/ai_action_stack_1818a8.cpp
+    UnwindAbove__Q29BlackGame11ActionStacki: '0x181908'
+- name: game_ai_action_stack_181960
+  source: src/game/ai_action_stack_181960.cpp
   origin: game
   flags:
   - -O2
   - -G0
   - -snas
   functions:
-  - addr: '0x1818a8'
-    symbol: Pop__Q29BlackGame11ActionStack
-    size: 96
+  - addr: '0x181960'
+    symbol: UnwindAction__Q29BlackGame11ActionStackPQ29BlackGame6Action
+    size: 48
     status: source
   externs:
-    Resolve__CQ29BlackGame11ActionStackUi: '0x181a90'
-    TopKind__CQ29BlackGame11ActionStack: '0x1819f0'
+    FindAction__CQ29BlackGame11ActionStackPCQ29BlackGame6Action: '0x181a18'
+    UnwindAbove__Q29BlackGame11ActionStacki: '0x181908'
 - name: game_ai_action_stack_181b88
   source: src/game/ai_action_stack_181b88.cpp
   origin: game
@@ -3126,9 +3034,13 @@ units:
     symbol: Complete__Q29BlackGame6Actionb
     size: 80
     status: source
+  - addr: '0x1939e0'
+    symbol: UnwindAbove__Q29BlackGame6Action
+    size: 36
+    status: source
   externs:
     Record__CQ29BlackGame6Action: '0x193b40'
-    UnwindAbove__Q29BlackGame6Action: '0x1939e0'
+    UnwindAction__Q29BlackGame11ActionStackPQ29BlackGame6Action: '0x181960'
 - name: game_ai_action_stack_193a28
   source: src/game/ai_action_stack_193a28.cpp
   origin: game
@@ -3140,12 +3052,9 @@ units:
   - addr: '0x193a28'
     symbol: RequestSuccessor__Q29BlackGame6ActionUii
     size: 48
-    status: asm
-    reason: extra
+    status: source
   externs:
-    FindAction__CQ29BlackGame11ActionStackPCQ29BlackGame6Action: '0x181a18'
-    PushAndEnter__Q29BlackGame11ActionStackUii: '0x181660'
-    UnwindAbove__Q29BlackGame11ActionStacki: '0x181908'
+    RequestSuccessor__Q29BlackGame11ActionStackPQ29BlackGame6ActionUii: '0x181810'
 - name: game_ai_action_stack_193af8
   source: src/game/ai_action_stack_193af8.cpp
   origin: game
@@ -3190,15 +3099,13 @@ units:
   - addr: '0x1915d8'
     symbol: UpdateStallRecovery__Q29BlackGame16MovementModeBase
     size: 268
-    status: asm
-    reason: extern
+    status: source
   externs:
+    Expired__CQ29BlackGame11ActionTimer: '0x173610'
     IsOffRoute__CQ29BlackGame16MovementModeBase: '0x191b78'
     MoveToRouteProjection__Q29BlackGame16MovementModeBase: '0x191bb8'
     Pending__CQ29BlackGame10StallGrace: '0x18b168'
-  unbound:
-  - Expired__CQ29BlackGame11ActionTimer
-  - Start__Q29BlackGame11ActionTimerf
+    Start__Q29BlackGame11ActionTimerf: '0x173640'
 - name: game_ai_movement_helpers_191bb8
   source: src/game/ai_movement_helpers_191bb8.cpp
   origin: game
@@ -3336,31 +3243,19 @@ units:
   - addr: '0x191778'
     symbol: Retarget__Q29BlackGame16MovementModeBasex
     size: 16
-    status: asm
-    reason: extra
+    status: source
   - addr: '0x191788'
     symbol: Recover__Q29BlackGame16MovementModeBase
     size: 8
-    status: asm
-    reason: extra
+    status: source
   - addr: '0x191790'
     symbol: Stop__Q29BlackGame16MovementModeBase
     size: 8
-    status: asm
-    reason: extra
+    status: source
   - addr: '0x191798'
     symbol: GetTarget__CQ29BlackGame16MovementModeBase
     size: 8
-    status: asm
-    reason: extra
-  externs:
-    ClassifyRouteResult__9BlackGamePCQ29BlackGame12RouteRequest: '0x17a008'
-    PointCount__CQ29BlackGame12RouteRequest: '0x179cd0'
-    Release__Q29BlackGame12RouteRequest: '0x179ef0'
-    Resubmit__Q29BlackGame12RouteRequestx: '0x179ed0'
-    RoutePointAt__9BlackGamePCQ29BlackGame12RouteRequesti: '0x179ce0'
-    SubmitRouteRequest__9BlackGamePQ29BlackGame12RouteRequestxxUc: '0x179d58'
-    UpdateTarget__Q29BlackGame16MovementModeBasex: '0x191c18'
+    status: source
 - name: game_ai_movement_modes_191b40
   source: src/game/ai_movement_modes_191b40.cpp
   origin: game
@@ -3393,17 +3288,13 @@ units:
   - addr: '0x191c18'
     symbol: UpdateTarget__Q29BlackGame16MovementModeBasex
     size: 8
-    status: asm
-    reason: extra
+    status: source
   - addr: '0x191c20'
     symbol: Bind__Q29BlackGame9RouteModePQ29BlackGame5Brain
     size: 40
-    status: asm
-    reason: extra
+    status: source
   externs:
     BindBase__Q29BlackGame16MovementModeBasePQ29BlackGame5Brain: '0x191568'
-    RetargetLive__9BlackGamePQ29BlackGame9RouteModex: '0x193040'
-    UpdateDestination__Q29BlackGame12RouteRequestx: '0x17a9c8'
 - name: game_ai_movement_modes_1920d8
   source: src/game/ai_movement_modes_1920d8.cpp
   origin: game
@@ -3499,21 +3390,9 @@ units:
   - addr: '0x193488'
     symbol: Reset__Q29BlackGame10DirectMode
     size: 28
-    status: asm
-    reason: extern
+    status: source
   externs:
-    GetTarget__CQ29BlackGame16MovementModeBase: '0x191798'
-    Recover__Q29BlackGame16MovementModeBase: '0x191788'
     ResetBase__Q29BlackGame16MovementModeBase: '0x191578'
-    Retarget__Q29BlackGame16MovementModeBasex: '0x191778'
-    Start__Q29BlackGame10DirectModex: '0x193568'
-    Stop__Q29BlackGame16MovementModeBase: '0x191790'
-    UpdateTarget__Q29BlackGame10DirectModex: '0x1936c0'
-    Update__Q29BlackGame10DirectMode: '0x1934a8'
-  unbound:
-  - __rtti_si
-  - __tfQ29BlackGame16MovementModeBase
-  - __tiQ29BlackGame16MovementModeBase
 - name: game_ai_movement_modes_193700
   source: src/game/ai_movement_modes_193700.cpp
   origin: game
@@ -3526,27 +3405,15 @@ units:
   - addr: '0x193700'
     symbol: Reset__Q29BlackGame13FormationMode
     size: 32
-    status: asm
-    reason: extern
+    status: source
   - addr: '0x193720'
     symbol: Update__Q29BlackGame13FormationMode
     size: 84
-    status: asm
-    reason: extern
+    status: source
   externs:
-    GetTarget__CQ29BlackGame16MovementModeBase: '0x191798'
-    Recover__Q29BlackGame16MovementModeBase: '0x191788'
+    ContinueToGoal__Q29BlackGame13FormationMode: '0x193818'
     ResetBase__Q29BlackGame16MovementModeBase: '0x191578'
-    Retarget__Q29BlackGame16MovementModeBasex: '0x191778'
-    Start__Q29BlackGame13FormationModex: '0x193778'
-    Stop__Q29BlackGame16MovementModeBase: '0x191790'
-    UpdateTarget__Q29BlackGame16MovementModeBasex: '0x191c18'
-  unbound:
-  - ContinueToGoal__Q29BlackGame13FormationMode
-  - UpdateStallRecovery__Q29BlackGame16MovementModeBase
-  - __rtti_si
-  - __tfQ29BlackGame16MovementModeBase
-  - __tiQ29BlackGame16MovementModeBase
+    UpdateStallRecovery__Q29BlackGame16MovementModeBase: '0x1915d8'
 - name: game_ai_route_service_179ce0
   source: src/game/ai_route_service_179ce0.cpp
   origin: vector

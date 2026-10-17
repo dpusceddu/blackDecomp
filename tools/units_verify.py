@@ -35,7 +35,7 @@ def save(units):
     (ROOT / 'config/units.yaml').write_text(
         '# Provisional translation units that replace assembly functions with source; see README.md.\n'
         '# status: source = provided by the unit; asm = stays assembly, with a one-word reason.\n' +
-        yaml.safe_dump({'units': out}, sort_keys=False, width=140))
+        yaml.safe_dump({'variant': SLUG, 'units': out}, sort_keys=False, width=140))
 
 
 def demote(unit, funcs, reason):
@@ -138,7 +138,13 @@ def prepare():
             if why:
                 stats[why] = stats.get(why, 0) + demote(u, None, why)
         # bind what the object leaves undefined
-        want = sorted({s['name'] for s in syms if s['shndx'] == 0 and s['name'] and s['bind'] == 1})
+        used = set()     # only what the linked sections refer to; the dropped ones (unwind data, linkonce copies) do not count
+        for t in e.sections:
+            if t['type'] == 9 and e.sections[t['info']]['name'] in ('.text', '.rodata', '.lit4', '.gcc_except_table'):
+                c = e.content(t)
+                for o in range(0, len(c), 8):
+                    used.add(struct.unpack_from('<I', c, o + 4)[0] >> 8)
+        want = sorted({syms[i]['name'] for i in used if syms[i]['shndx'] == 0 and syms[i]['name'] and syms[i]['bind'] == 1})
         ex, missing = {}, []
         for name in want:
             if name in bind.get(u['name'], {}):

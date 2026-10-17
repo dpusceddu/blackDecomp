@@ -18,4 +18,26 @@ void ActionStack::PushAndEnter(unsigned int kind, int argument)
     RetireFinished();
 }
 
+// /SLUS_213.76 0x181810
+// PS2 0x181810; Xbox expands this into Action::RequestSuccessor.
+void ActionStack::RequestSuccessor(Action* action, unsigned int kind, int argument)
+{
+    int ordinal = FindAction(action);
+    if (ordinal == count - 1) {
+        PushAndEnter(kind, argument);
+    } else if (kinds[ordinal + 1] != kind) {
+        UnwindAbove(ordinal);
+        PushAndEnter(kind, argument);
+    }
+}
+
+// /SLUS_213.76 0x1818a8
+// Expanded into Xbox callers; PS2 0x1818a8 is out of line.
+void ActionStack::Pop()
+{
+    Top()->Leave();
+    --count;
+    kinds[count] = 74;
+}
+
 }  // namespace BlackGame

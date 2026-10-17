@@ -1,6 +1,7 @@
 """Loader for config/units.yaml: the provisional translation units that replace assembly functions.
 
 Format (see README.md):
+  variant: usa-retail               # the image whose addresses the units use
   units:
     - name: kynapse_children          # object name; also build/<slug>/units/<name>.o
       source: src/kynapse/children.cpp
@@ -26,9 +27,12 @@ def _num(v):
     return int(v, 0) if isinstance(v, str) else int(v)
 
 
-def load_units(path=None):
+def load_units(path=None, variant=None):
+    """Units of config/units.yaml. They hold addresses of the USA retail image: for another `variant` there are none."""
     path = Path(path or ROOT / 'config/units.yaml')
     data = yaml.safe_load(path.read_text()) if path.exists() else None
+    if variant and (data or {}).get('variant', 'usa-retail') != variant:
+        return []
     units = (data or {}).get('units') or []
     for u in units:
         if os.environ.get('BLACK_UNITS_ALL'):      # diagnostics: pretend every listed function is provided by source

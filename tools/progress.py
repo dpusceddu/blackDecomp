@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Report how much of .text is provided by source (config/units.yaml, status source), overall and by region.
 
-Regions come from the Xbox-to-PS2 counterpart map of the companion project, when a copy is configured (the map's
-`region` field: game, kynapse, animation, physics, other), else from `config/regions.json` (a copy of address ->
-region pairs; ignored if absent). An unmapped function takes the region of its neighbours when both sides agree,
-otherwise it is `unclassified`. Regions are therefore approximate; the overall number is exact.
-A function counts as source when its unit lists it with `status: source` and its object replaced the assembly in the
-last link (build/<slug>/objects.json); bytes are the original byte span of the function (to the next function).
+Regions come from config/regions.txt (PS2 address -> game, kynapse, animation, physics or other), derived from the
+companion project's Xbox-to-PS2 counterpart map (`progress.py --refresh` rewrites it). An unmapped function takes the
+region of its neighbours when both sides agree, otherwise it is `unclassified`. Regions are therefore approximate;
+the overall number is exact.
+A function counts as source when config/units.yaml lists it with `status: source` (units_verify.py/settle_units.py keep
+that list identical to the target); bytes are the original span of the function up to the next function.
 Usage: progress.py [SLUG]       writes build/<slug>/progress.json and prints a table
 """
 import json, sys
@@ -16,16 +16,27 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from units import load_units
 
 ROOT = Path(__file__).resolve().parents[1]
-MAP_CANDIDATES = [ROOT / 'config/xbox_ps2_map.json', ROOT.parent / 'the counterpart map']
+REGIONS = ROOT / 'config/regions.txt'
+PARENT_MAP = ROOT.parent / 'the counterpart map'
+
+
+def refresh_regions():
+    """Rewrite config/regions.txt (address, region) from the companion project's Xbox-to-PS2 counterpart map."""
+    pairs = json.loads(PARENT_MAP.read_text())['pairs']
+    rows = sorted({(int(p['ps2'], 16), p['region']) for p in pairs})
+    REGIONS.write_text('# PS2 function address -> region (game, kynapse, animation, physics, other), from the\n'
+                       '# companion project counterpart map (discovery leads, not byte-compared); tools/progress.py --refresh\n' +
+                       ''.join('0x%08X %s\n' % r for r in rows))
+    print('wrote %s: %d functions' % (REGIONS.name, len(rows)))
 
 
 def regions(addrs):
     reg = {}
-    for p in MAP_CANDIDATES:
-        if p.exists():
-            for pair in json.loads(p.read_text())['pairs']:
-                reg[int(pair['ps2'], 16)] = pair['region']
-            break
+    if REGIONS.exists():
+        for line in REGIONS.read_text().split('\n'):
+            if line and not line.startswith('#'):
+                a, r = line.split()
+                reg[int(a, 16)] = r
     lab = [reg.get(a) for a in addrs]
     nxt, n = [None] * len(lab), None
     for i in range(len(lab) - 1, -1, -1):
@@ -42,7 +53,9 @@ def regions(addrs):
 
 
 def main():
-    slug = sys.argv[1] if len(sys.argv) > 1 else 'usa-retail'
+    if '--refresh' in sys.argv:
+        return refresh_regions()
+    slug = next((a for a in sys.argv[1:] if not a.startswith('-')), 'usa-retail')
     build = ROOT / 'build' / slug
     fs = json.loads((build / 'placement.json').read_text())['functions']
     layout = json.loads((ROOT / 'config' / ('%s.layout.json' % json.loads(
@@ -51,7 +64,7 @@ def main():
     spans = [(fs[i + 1]['addr'] if i + 1 < len(fs) else text['addr'] + text['orig_size']) - fs[i]['addr']
              for i in range(len(fs))]
     source = {}
-    for u in load_units():
+    for u in load_units(variant=slug):
         for f in u['functions']:
             if f.get('status') == 'source':
                 source[f['addr']] = u.get('origin', u['name'].split('_')[0])

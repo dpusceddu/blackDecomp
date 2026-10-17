@@ -13,4 +13,11 @@ void Action::Complete(bool result)
     record->complete = 1;
 }
 
+// /SLUS_213.76 0x1939e0
+// PS2 0x1939e0; Xbox expands the action-side unwind helper.
+void Action::UnwindAbove()
+{
+    brain->stack.UnwindAction(this);
+}
+
 }  // namespace BlackGame
