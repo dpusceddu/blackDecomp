@@ -1,0 +1,35 @@
+{
+ "id": "binutils-mipsel-linux-gnu",
+ "package": "binutils-mipsel-linux-gnu",
+ "version": "2.40-2cross2",
+ "source": "official Debian bookworm archive (apt, signed by debian-archive-keyring)",
+ "debs": {
+  "binutils-mipsel-linux-gnu_2.40-2cross2_amd64.deb": "e803da3a36d96b7e16ae54a0e84c850a10e959d39f4a83efd02bcadc18db9e11"
+ },
+ "root": "binutils/root",
+ "bin": "binutils/root/usr/bin",
+ "lib": "binutils/root/usr/lib/x86_64-linux-gnu",
+ "installed_files": {
+  "usr/bin/mipsel-linux-gnu-addr2line": "af1180f644b1d8a6166c605fa4a44a751b8c63acd2049116a5cdfe1a9d730b2c",
+  "usr/bin/mipsel-linux-gnu-ar": "b359b58b04db51ba1025a10cb343c36ef4096629a88ccc9876b3b3424e0bf923",
+  "usr/bin/mipsel-linux-gnu-as": "9df5a84f369c339186eb13531490852a4ae2851bb07ddc49fe17c4fdf534d809",
+  "usr/bin/mipsel-linux-gnu-c++filt": "b46918a82feca60c0360cce6f564faeebed5a6825fd1d1bcfbe46c951df68394",
+  "usr/bin/mipsel-linux-gnu-dwp": "ff88dd3f0b37466bfa02aa6af91a47bd19504c0ae315681701c1e19aebffac08",
+  "usr/bin/mipsel-linux-gnu-elfedit": "3f5fc9148bc30895c8dd7e24a4918ba4ec2ab6d09b6f38d2f926e13a5a8eebf0",
+  "usr/bin/mipsel-linux-gnu-gprof": "d7173701aa8971ca476ec47e8116fcfb0d461f8f1b3d82bd8cb78bc47ef51c42",
+  "usr/bin/mipsel-linux-gnu-ld.bfd": "2fd4eb2992ca34671e6169fcff0766776d018d3d3f5d7256940da5ae9d8ffedc",
+  "usr/bin/mipsel-linux-gnu-ld.gold": "b2e9b148c4604b7afc54f60658486db3b9a8bc6af999223cfb51c250519285c9",
+  "usr/bin/mipsel-linux-gnu-nm": "938a3b0e2f7ece36ff5f24ea455a0318ae353de0d25c1bacab94e3df214192bc",
+  "usr/bin/mipsel-linux-gnu-objcopy": "12a83383ec00c132be180cc5242e8098e6e535bda5f965b93ff70b526b74a690",
+  "usr/bin/mipsel-linux-gnu-objdump": "d4501bc3a951dcd731bd4fa6f4d6cccf0eb6d4c2d2bf4bd0c444e826380cb000",
+  "usr/bin/mipsel-linux-gnu-ranlib": "7eea506ae56e3655aa46fa508621e7e594f510f0b8c36cfe2ed491d16148757d",
+  "usr/bin/mipsel-linux-gnu-readelf": "0c58b31419147b9cb6d2bf2dc3239ef9a01aaf6cd7982f35a22a07f069201c38",
+  "usr/bin/mipsel-linux-gnu-size": "a5befd15b17446009e748200a8164798ab6b4cd8f15acd92917ad83d66ca8151",
+  "usr/bin/mipsel-linux-gnu-strings": "ca35276555edbed44f81897c9b03db84047f6b6f132a7a99f93d7eff5764ccef",
+  "usr/bin/mipsel-linux-gnu-strip": "678e18a9b3e4afa3b099d00b21faeeddbb9b50d6786403bec1995c34107c4f99",
+  "usr/lib/x86_64-linux-gnu/libbfd-2.40-mipsel.so": "0c6baf9ffe676aa4994eba5ccb0cb82bfaf1c2bbc417ef24788a0e253720b208",
+  "usr/lib/x86_64-linux-gnu/libctf-mipsel.so.0.0.0": "4fde6fa50eeac061dfe458ff253c455181d315ec10fc617b9d52632470cfbc62",
+  "usr/lib/x86_64-linux-gnu/libctf-nobfd-mipsel.so.0.0.0": "0cd8aae0efb7f26eee2d5eb4c54f7a7fab90abfc4d49ba8fe7682c0df470409f",
+  "usr/lib/x86_64-linux-gnu/libopcodes-2.40-mipsel.so": "cc485478a73d8f2b2f4af422e97b224b48942f8fe9cd4fecb724b959e656e686"
+ }
+}

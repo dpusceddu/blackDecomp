@@ -5,9 +5,13 @@ Usage: compile.py COMPILER [flags] -c source.c|.cpp|.s -o output.o
 Reads .local/config.json; that file is private and never committed.
 Inputs are sent to the build backend; only standalone sources are
 supported. Outputs must go under build/ or .local/.
+Objects get one header fix (tools/elfobj.py: .symtab sh_info) so that mainline GNU ld accepts SN-assembled output.
 """
 import base64, json, shlex, subprocess, sys, uuid
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from elfobj import fix_symtab_info
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -54,7 +58,8 @@ def main():
     for name, dest in outputs.items():
         if name in reply['artifacts']:
             dest.parent.mkdir(parents=True, exist_ok=True)
-            dest.write_bytes(base64.b64decode(reply['artifacts'][name], validate=True))
+            data = base64.b64decode(reply['artifacts'][name], validate=True)
+            dest.write_bytes(fix_symtab_info(data) if dest.suffix == '.o' else data)  # header fix for GNU ld
     return reply['returncode']
 
 

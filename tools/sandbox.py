@@ -3,7 +3,8 @@
 
 Usage: sandbox.py SCRIPT.py [--file NAME=PATH ...] [--out NAME=PATH ...]
 The script runs as `python3` in the container with the private toolchain catalog mounted read-only at
-/toolchains and a scratch /work. Each --file is copied to /work/NAME first (read it from the script);
+/toolchains and a scratch /work. PATH includes the catalog's MIPS binutils (`mipsel-linux-gnu-ld`, `-objcopy`,
+`-readelf`, `-objdump`, ...); the EE assembler is /toolchains/compilers/ee-gcc2.96/ee/bin/as. Each --file is copied to /work/NAME first (read it from the script);
 each --out copies /work/NAME back to PATH afterwards. The script's stdout/stderr are relayed. The
 network is disabled; nothing persists. Reads .local/config.json (private).
 """
@@ -14,12 +15,14 @@ ROOT = Path(__file__).resolve().parents[1]
 WRAPPER = r'''
 import base64, json, sys, os, subprocess
 req = json.load(sys.stdin)
+B = '/toolchains/binutils/root/usr'  # catalog: mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm,...}
+env = dict(os.environ, PATH=B + '/bin:' + os.environ.get('PATH', ''), LD_LIBRARY_PATH=B + '/lib/x86_64-linux-gnu')
 os.makedirs('/work/job', exist_ok=True); os.chdir('/work/job')
 for n, d in req['files'].items():
     os.makedirs(os.path.dirname(n) or '.', exist_ok=True)
     open(n, 'wb').write(base64.b64decode(d))
 open('/work/job/_script.py', 'w').write(req['script'])
-p = subprocess.run([sys.executable, '/work/job/_script.py'], capture_output=True, timeout=req['timeout'])
+p = subprocess.run([sys.executable, '/work/job/_script.py'], capture_output=True, timeout=req['timeout'], env=env)
 art = {}
 for n in req['out']:
     if os.path.isfile(n):
