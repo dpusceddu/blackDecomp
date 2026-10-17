@@ -50,7 +50,7 @@ Stages (one `ninja` rule each; everything generated is under the ignored `asm/`,
    `tools/check_elf.py` compares the result with `config/checksums.sha256`.
 
 Times (USA retail, a 2-core build backend): a build from nothing (extract, splat, split, assemble 12,000 objects,
-link, pack) takes about 40 s; with the objects cached and one source unit changed about 15 s, of which the link and the
+link, pack) takes about 42 s; with the objects cached and one source unit changed about 13 s, of which the link and the
 transfer of the cached objects to the build backend are most (about 11 s); with nothing changed `ninja` does nothing.
 
 ld cannot write the retail container: section-header order, the non-loaded `.reginfo`, `.DVP.*` and `.debug_str`

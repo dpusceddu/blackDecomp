@@ -11,5 +11,7 @@
 - Check free disk space before unpacking disc images and process one image at a time.
 - Once the build exists (Phase 1): build with `ninja`, claim a translation unit in `config/units.yaml` before
   editing it, and make every commit leave the build identical to the target.
+- Replace functions with source through `config/units.yaml` (see README, "Replacing a function with source") and
+  `tools/settle_units.py`; the units file is maintained by those tools. Report progress with `ninja progress`.
 - Keep docs short. No per-function proof journals; a one-line `// Unmatched:` comment on non-matching functions.
 - Commit without attribution lines. Do not push.
