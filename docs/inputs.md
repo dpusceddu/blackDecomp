@@ -57,8 +57,8 @@ covered by an 8-word masked run that also occurs in retail.
 | `usa-retail` | 0 | | | | | 281 | 88 |
 
 The PAL, Korean and Japanese builds are the USA code plus small changes. The 19% of windows that differ
-only in exact masking differ by a constant `+0x80` shift of member offsets from one base register (a
-structure that grew by 128 bytes), which the loose column absorbs; the `.rodata` differences are a few
+only in exact masking, as sampled in the Korean build, differ by a constant `+0x80` shift of member
+offsets from one base register (a structure that grew by 128 bytes), which the loose column absorbs; the `.rodata` differences are a few
 dozen bytes. `eu-au-retail` has no such shift and is the closest relative of USA (it still differs
 elsewhere: the `.rodata` and `.text` deltas above). The demos and the beta are earlier builds with 6%, 40%
 and 31% less `.text` and visibly different code. All variants have the same CIE form of embedded unwind
@@ -129,10 +129,10 @@ with `e_flags 0x20924001`, the same flags as the retail executable.
 - `-G0 -snas`: `.text`, `.data`, `.reginfo`, `.symtab`; no `.mdebug` (the SN assembler does not emit one); global
   uninitialised data is an ordinary common symbol; addresses use `HI16/LO16` pairs only; no `GPREL16`.
 - `-G8` with the GNU assembler: also `.bss` and `.mdebug` (536 bytes for the C file, 2.6 KB for C++); the global
-  `counter` becomes a small common symbol (`SHN_ACOMMON`-style index `0xff03`) and three `R_MIPS_GPREL16`
+  `counter` becomes a small common symbol (section index `0xff03`, MIPS small common) and three `R_MIPS_GPREL16`
   relocations appear. With `-snas` the same flag gives the small-common index and a `GPREL16` for it, but no
   `.mdebug` and no separate `.bss`.
-- In C++ output `-G8` creates a 15 byte `.sdata` (vtable-related strings), GPREL16 relocations in a `.gnu.linkonce.t.*`
+- In C++ output `-G8` creates a 15 byte `.sdata`, GPREL16 relocations in a `.gnu.linkonce.t.*`
   section and, in both modes, the GCC 2.95 layout of one `.gnu.linkonce.d.*`/`.t.*` section per vtable, type
   info and inline function. The tool pitfall encountered: `-snas` must be a separate argument (it is an
   option of the driver, not of `cc1`).
