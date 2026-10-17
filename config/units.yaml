@@ -1274,8 +1274,7 @@ units:
   - addr: '0x2f34b0'
     symbol: Resolve__Q24Kaim8IdHolderPQ24Kaim10NameSource
     size: 108
-    status: asm
-    reason: extra
+    status: source
   externs:
     FindByClass__Q24Kaim12EntityObjectPQ24Kaim9ClassInfo: '0x2ec058'
     IdByName__Q24Kaim8ItemListPCc: '0x2f2f58'
@@ -1755,6 +1754,32 @@ units:
     __6Taggedi: '0x2e75b8'
     _vt$9PairOwner: '0x3f13f8'
     gPairOwnerCount: '0x3ce5ac'
+- name: kynapse_parameter_assign_2d8770
+  source: src/kynapse/parameter_assign_2d8770.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d8770'
+    symbol: __as__9ParamFlagRC13ParameterRoot
+    size: 116
+    status: source
+- name: kynapse_parameter_assign_2d9598
+  source: src/kynapse/parameter_assign_2d9598.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d9598'
+    symbol: __as__8ParamIntRC13ParameterRoot
+    size: 116
+    status: source
 - name: kynapse_parameter_classes_2d7970
   source: src/kynapse/parameter_classes_2d7970.cpp
   origin: kynapse
@@ -2634,6 +2659,19 @@ units:
     symbol: __8Settingsii
     size: 128
     status: source
+- name: kynapse_settings_2e4070
+  source: src/kynapse/settings_2e4070.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e4070'
+    symbol: __as__8SettingsRC8Settings
+    size: 240
+    status: source
 - name: kynapse_small_families_2e9540
   source: src/kynapse/small_families_2e9540.cpp
   origin: kynapse
@@ -2682,8 +2720,7 @@ units:
   - addr: '0x2e1248'
     symbol: Notifiable_TryAccept__FP10NotifiableP8SlotUser
     size: 56
-    status: asm
-    reason: name
+    status: source
   externs:
     Accept__10NotifiablePC8SlotUser: '0x2eabb0'
 - name: kynapse_small_misc_2e4188
@@ -2726,8 +2763,7 @@ units:
   - addr: '0x2e9cc8'
     symbol: Kaim_ReleaseService__Fv
     size: 68
-    status: asm
-    reason: name
+    status: source
   externs:
     gService: '0x3c9588'
 - name: kynapse_small_misc_38aed8

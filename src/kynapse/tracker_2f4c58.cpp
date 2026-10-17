@@ -1,7 +1,6 @@
 // Ported from the companion project (an unpublished companion project).
 #include "kynapse/tracker.hpp"
 
-namespace Kaim {
 // /SLUS_213.76 0x2f4c58
 Tracker::Tracker()
 {
@@ -14,5 +13,3 @@ Tracker::Tracker()
     unknown18 = 0;
     capacity = 0;
 }
-
-}  // namespace Kaim

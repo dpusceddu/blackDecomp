@@ -1,7 +1,6 @@
 // Ported from the companion project (an unpublished companion project).
 #include "kynapse/tracker.hpp"
 
-namespace Kaim {
 // /SLUS_213.76 0x2f4e90
 bool Tracker::Init(ChildBuffers* config)
 {
@@ -14,5 +13,3 @@ bool Tracker::Init(ChildBuffers* config)
         items[i] = 0;
     return true;
 }
-
-}  // namespace Kaim

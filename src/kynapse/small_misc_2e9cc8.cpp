@@ -1,7 +1,6 @@
 // Ported from the companion project (an unpublished companion project).
 #include "kynapse/small_misc.hpp"
 
-namespace Kaim {
 // /SLUS_213.76 0x2e9cc8
 void Kaim_ReleaseService()
 {
@@ -9,5 +8,3 @@ void Kaim_ReleaseService()
         delete gService;
     gService = 0;
 }
-
-}  // namespace Kaim
