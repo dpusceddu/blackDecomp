@@ -62,10 +62,10 @@ black-decomp/
 | Piece | Choice | Notes |
 | --- | --- | --- |
 | Splitting | splat (`splat64`), spimdisasm, rabbitizer | splat supports PS2/R5900; pin versions |
-| Assembler for asm files | EE GNU assembler 2.10-ee from the compiler catalog | Phase 0 reassembled all sampled instruction kinds identically. Short backward branches (five words or fewer), undecoded words and `0x00ff00ff` words are emitted as raw `.word`, because the assembler inserts short-loop NOPs |
+| Assembler for asm files | EE GNU assembler 2.10-ee from the compiler catalog | Reassembles the whole executable identically. Short backward branches (five words or fewer) are emitted as raw `.word` (the assembler rejects them); splat already emits undecoded words as `.word`. The assembler has no `.incbin` and no `%gp_rel`, is quadratic in file size (the code is cut into chunks of about 20,000 lines) and needs `.extern sym, 1` for gp-relative accesses |
 | C/C++ compiler | SN `ee-gcc2.95.3-136` under Wine through the build backend | Same model as `the companion project/tools/ps2`; never run it directly on the host |
 | Compiler output assembler | SN assembler (`-snas`) inside the same container | It mattered for matching in `the companion project` tests |
-| Linker | Mainline GNU `ld` from the distribution's signed MIPS cross-binutils package, installed in the build backend image | Per-section ordering from `units.yaml`; final `e_flags` set explicitly to the retail `0x20924001` |
+| Linker | Mainline GNU `ld` 2.40 (Debian `binutils-mipsel-linux-gnu` 2.40-2cross2, signed archive) | Per-section ordering from a generated script; `tools/pack_elf.py` writes the retail container and `e_flags` `0x20924001`. SN-assembled objects need their symbol table normalised (`tools/elfobj.py`) before ld accepts them |
 | Build | `configure.py` → Ninja | Standard decomp template; one command builds and verifies |
 | Decompiler | m2c, little-endian MIPS GCC target | EE-specific instructions (MMI, 128-bit moves, VU0) will often need agent work |
 | Diff and scoring | objdiff (CLI and report), asm-differ | objdiff report gives per-TU and overall progress |
@@ -94,19 +94,21 @@ Each phase ends with a check that a fresh agent can run.
 Exit: `tools/inputs.py` summary committed (hashes and findings only); the container compiles both test
 files; binutils assembles a sample of EE instructions identically.
 
-### Phase 1: the identical rebuild (2–4 sessions)
+### Phase 1: the identical rebuild (done)
 
-- Generate `config/SLUS_213.76.yaml` from the ELF section table. Start with coarse segments: all of
-  `.text` as assembly, data sections as binary, `.vutext`, `.vudata` and the DVP overlays as binary
-  blobs.
-- `ninja` assembles, links and compares. Target: identical bytes for the whole ELF file. If ELF headers
-  or section-header details make that impractical, the documented fallback is identical loaded sections,
-  entry point and section layout.
-- Make the build **shiftable**: references between functions and data go through symbols, not hardcoded
-  addresses, so changing a function's size still links. Test by inserting a NOP in one function and
-  checking that the result still links and boots in an emulator such as PCSX2.
+Result: `ninja` rebuilds the whole boot ELF byte for byte (SHA-256 equal to retail) for USA, EU/AU, EU, Korean and
+Japanese retail, in about 20 s of which 8 s are the build backend. Facts that changed the plan:
 
-Exit: `ninja` prints `OK` against `checksums.sha1`; the shifted test build links.
+- ld cannot write the retail container (section-header order, non-loaded `.DVP.*`/`.reginfo`/`.debug_str`, `e_flags`),
+  so `tools/pack_elf.py` re-packs ld's linked sections from `config/<boot>.layout.json`; code and data bytes still come
+  only from the reassembled sources, and the DVP overlays and `.vutext`/`.vudata` are extracted blobs.
+- The loaded sections are placed by alignment only. Splat finds 11,774 functions in `.text`; gp-relative accesses
+  (2,997) exist, so some translation units use small data.
+- Shiftable: 200 NOPs inserted into one function relink with every symbolic reference moved; the non-shiftable spots
+  are raw numbers in data that look like addresses (see README).
+- Splat's own linker script is not used (one output section); `tools/make_ld.py` writes the script.
+
+Exit reached: `ninja` prints `OK`; the shifted test build links.
 
 ### Phase 2: symbols and existing results (2–3 sessions)
 
