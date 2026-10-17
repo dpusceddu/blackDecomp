@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
-"""Write the GNU ld script for the rebuild from the section layout and the assembled objects.
+"""Write the GNU ld script and the object list for the rebuild.
 
-splat's own script puts everything in one output section; the packer needs each ELF section on its own, with
-the retail alignments, so this generator is used instead (splat still decides the splits and the object names).
-Each loaded section is placed by alignment only (no hard-coded addresses except the image base), so a change
-in size moves everything behind it. Usage: make_ld.py VARIANT_SLUG [WORK]
-Reads config/<boot>.layout.json, asm/<slug> (splat output) and build/<slug>/asm (post-processed code chunks);
-writes build/<slug>/link.ld (objects are named after their .s files under build/<slug>/obj/).
+Every loaded section is placed by alignment only (no hard-coded addresses except the image base), so sizes can change.
+The input order of each section is the original order recorded by split_objects.py (build/<slug>/placement.json):
+one object per function, shared constant runs, and splat's data files. A function listed with `status: source` in
+config/units.yaml is replaced by its unit's compiled object: the object takes the slot of the unit's first function in
+every section it occupies, and the unit's other functions are dropped from the order. Their `func_XXXXXXXX` names are
+defined as aliases of the compiled symbols, so assembly callers link against the source definition.
+Writes build/<slug>/link.ld and build/<slug>/objects.json (name, kind, source, sections).
+Usage: make_ld.py VARIANT_SLUG [WORK]
 """
-import json, re, sys
+import json, sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from units import load_units
+
 ROOT = Path(__file__).resolve().parents[1]
-
-
-def input_section(path):
-    m = re.search(r'^\.section (\.[\w.]+)', path.read_text(), re.M)
-    return m.group(1)
 
 
 def main():
@@ -25,22 +25,60 @@ def main():
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
     layout = json.loads((ROOT / 'config' / ('%s.layout.json' % boot)).read_text())
     build = ROOT / 'build' / work
-    obj = lambda p, base: 'build/%s/obj/%s.o' % (work, p.relative_to(base).with_suffix('').as_posix())
-    files = {n: [] for n in ('.text', '.vutext', '.data', '.vudata', '.rodata', '.gcc_except_table', '.lit4', '.sdata',
-                             '.sbss', '.bss')}
-    for p in sorted((build / 'asm').glob('text.*.s')):
-        files['.text'].append((obj(p, build / 'asm'), '.text'))
-    for p in sorted((ROOT / 'asm' / work / 'data').glob('*.s')):
-        key = '.' + p.name.split('.')[0]
-        if key in files:
-            files[key].append((obj(p, ROOT / 'asm' / work), input_section(p)))
+    placement = json.loads((build / 'placement.json').read_text())
+    objects = {name: dict(o, name=name) for name, o in placement['objects'].items()}
+    func_by_name = {f['name']: f for f in placement['functions']}
+    func_by_addr = {f['addr']: f for f in placement['functions']}
+    replaced, aliases, problems = {}, [], []
+    for u in load_units():
+        src = [f for f in u['functions'] if f.get('status') == 'source']
+        if not src:
+            continue
+        uname = 'units/' + u['name']
+        objects[uname] = dict(name=uname, kind='cc', src=u['source'], compiler=u['compiler'], flags=u['flags'])
+        order = [f['addr'] for f in placement['functions'] if f['addr'] in {x['addr'] for x in src}]
+        index = {f['addr']: i for i, f in enumerate(placement['functions'])}
+        positions = [index[a] for a in order]
+        if positions != list(range(positions[0], positions[0] + len(positions))):
+            problems.append('%s: source functions are not contiguous in the original order' % u['name'])
+        for f in src:
+            if f['addr'] not in func_by_addr:
+                problems.append('%s: %#x is not a function start' % (u['name'], f['addr']))
+                continue
+            replaced[func_by_addr[f['addr']]['name']] = uname
+            if f.get('symbol'):
+                aliases.append('%s = %s;' % (func_by_addr[f['addr']]['name'], f['symbol']))
+        # an object also carries the function's migrated constants, in the same order slot
+    if problems:
+        raise SystemExit('\n'.join(problems))
+    # Input order. ld resolves a script with one statement per object quadratically (hours for 12,000 objects), so
+    # the migrated sections are placed by sorted input-section names instead: every input section is called
+    # `<section>.<8 hex digits of its original address>` and `*(SORT_BY_NAME(<section>.*))` restores the order.
+    # A unit's object takes the key of the first slot it replaces in each section (its sections are renamed at link
+    # time); the slots of its other functions simply disappear.
+    sorted_secs = ('.text', '.rodata', '.lit4', '.gcc_except_table')
+    objs_in_link, rename = [], {}
+    sections = {}
+    for sec, entries in placement['sections'].items():
+        seq = []
+        for e in entries:
+            obj = e['obj']
+            fn = e.get('owner') or (obj[len('text/'):] if obj.startswith('text/') and not obj.endswith('.lit4') else None)
+            if fn in replaced:
+                uname = replaced[fn]
+                if sec in sorted_secs:
+                    rename.setdefault(uname, {}).setdefault(sec, '%s.%08X' % (sec, e['key']))
+                continue
+            seq.append(e)
+            objs_in_link.append(obj)
+        sections[sec] = seq
+    for uname in rename:
+        objs_in_link.append(uname)
     out = ['/* Generated by tools/make_ld.py; do not edit. */', 'ENTRY(%s)' % layout['entry_symbol'], '']
     sym = build / 'symbols.ld'
     if sym.exists():
         out += [sym.read_text(), '']
-    out.append('SECTIONS\n{')
-    out.append('    . = 0x%X;' % layout['segment']['vaddr'])
-    first = True
+    out += aliases + ['', 'SECTIONS\n{', '    . = 0x%X;' % layout['segment']['vaddr']]
     for r in layout['sections']:
         if r['source'] != 'linked':
             continue
@@ -50,8 +88,11 @@ def main():
             continue
         noload = ' (NOLOAD)' if r['type'] == 8 else ''
         out.append('    %s ALIGN(%d)%s :\n    {' % (n, r['align'], noload))
-        for f, sec in files[n]:
-            out.append('        %s(%s);' % (f, sec))
+        if n in sorted_secs:
+            out.append('        *(SORT_BY_NAME(%s.*));' % n)
+        else:
+            for e in sections.get(n, []):
+                out.append('        obj/%s.o(%s);' % (e['obj'], e['sec']))
         out.append('    }')
         if n == layout['gp']['section']:
             out.append('    _gp = ADDR(%s) + 0x%X;' % (n, layout['gp']['offset']))
@@ -59,9 +100,14 @@ def main():
             out.append('    __end_bss = .;')
     out += ['', '    /DISCARD/ : { *(*) }', '}', '']
     (build / 'link.ld').write_text('\n'.join(out))
-    objs = [f for fs in files.values() for f, _ in fs]
-    (build / 'objects.txt').write_text('\n'.join(objs) + '\n')
-    print('link.ld: %d objects' % len(objs))
+    listing = []
+    for n in dict.fromkeys(objs_in_link):
+        o = dict(objects[n])
+        if n in rename:
+            o['rename'] = rename[n]
+        listing.append(o)
+    (build / 'objects.json').write_text(json.dumps(listing, indent=1))
+    print('link.ld: %d objects (%d replaced by source)' % (len(listing), len(replaced)))
 
 
 if __name__ == '__main__':

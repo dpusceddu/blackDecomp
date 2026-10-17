@@ -35,19 +35,24 @@ rule split
 rule support
   command = $py tools/link_support.py {slug}
   description = define symbols splat cannot (labels inside code, offsets into data)
-rule fix
-  command = $py tools/fixasm.py asm/{slug}/text.s {b}/asm --labels {b}/extra_labels.txt && touch $out
-  description = post-process assembly for the EE assembler
+rule objsplit
+  command = $py tools/split_objects.py {slug}
+  description = one assembly file per function; constants migrate to their only user
 rule ldscript
   command = $py tools/make_ld.py {slug}
-  description = write the linker script
+  description = write the linker script (original order, source units replace functions)
 rule link
   command = $py tools/build_objects.py {slug}
-  description = assemble and link in the build backend
+  description = assemble and compile what changed, then link, in the build backend
+  depfile = {b}/link.d
   pool = console
 rule pack
   command = $py tools/pack_elf.py {b}/linked.elf config/{boot}.layout.json data/{slug}/elf {b}/{boot}.elf
   description = pack the ELF container
+rule progress
+  command = $py tools/progress.py {slug}
+  description = share of .text provided by source
+  pool = console
 rule check
   command = $py tools/check_elf.py {slug} {b}/{boot}.elf --stamp $out
   description = compare with the target
@@ -56,11 +61,12 @@ rule check
 build {b}/extract.stamp config/{boot}.yaml config/{boot}.layout.json: extract orig/{slug}/files/{boot} | {tools('splat_config.py', 'elf_layout.py', 'elfinfo.py')}
 build {b}/split.stamp: split | {b}/extract.stamp
 build {b}/extra_labels.txt {b}/symbols.ld: support | {b}/split.stamp tools/link_support.py
-build {b}/fix.stamp: fix | {b}/split.stamp {b}/extra_labels.txt tools/fixasm.py
-build {b}/link.ld {b}/objects.txt: ldscript | {b}/fix.stamp {b}/symbols.ld tools/make_ld.py config/{boot}.layout.json
-build {b}/linked.elf {b}/link.map: link | {b}/link.ld {b}/fix.stamp include/macro.inc {tools('build_objects.py', 'build_job.py', 'sandbox.py')}
+build {b}/placement.json: objsplit | {b}/extra_labels.txt tools/split_objects.py tools/fixasm.py
+build {b}/link.ld {b}/objects.json: ldscript | {b}/placement.json {b}/symbols.ld tools/make_ld.py tools/units.py config/units.yaml config/{boot}.layout.json
+build {b}/linked.elf: link | {b}/link.ld {b}/objects.json include/macro.inc {tools('build_objects.py', 'build_job.py', 'sandbox.py', 'elfobj.py', 'units.py')}
 build {b}/{boot}.elf: pack | {b}/linked.elf tools/pack_elf.py
 build {b}/ok.stamp: check | {b}/{boot}.elf tools/check_elf.py config/checksums.sha256
+build progress: progress | {b}/linked.elf
 build all: phony {b}/ok.stamp
 default all
 """

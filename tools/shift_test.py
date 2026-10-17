@@ -49,7 +49,7 @@ def build(slug, work):
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
     b = ROOT / 'build' / work
     run('tools/link_support.py', slug, work)
-    run('tools/fixasm.py', 'asm/%s/text.s' % work, b / 'asm', '--labels', b / 'extra_labels.txt')
+    run('tools/split_objects.py', slug, work)
     run('tools/make_ld.py', slug, work)
     run('tools/build_objects.py', work)
     run('tools/pack_elf.py', b / 'linked.elf', 'config/%s.layout.json' % boot, 'data/%s/elf' % slug,

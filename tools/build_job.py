@@ -1,12 +1,18 @@
 # Runs inside the build backend (sent by tools/build_objects.py through tools/sandbox.py).
-# Reads plan.json: {"assemble": [[src, obj], ...], "link": [ld arguments], "out": "linked.elf"}; the sources
-# were unpacked from inputs.tgz. Assembles with the EE GNU assembler 2.10, links with mainline GNU ld.
+# Reads plan.json:
+#   assemble: [[src, obj], ...]     EE GNU assembler 2.10 (objects keep whatever the assembler writes)
+#   compile:  [{src, obj, compiler, args}, ...]   SN GCC under wibo; the object's symbol table is normalised for ld
+#   link:     [ld arguments]        mainline GNU ld, run once if present
+#   pack:     name of a tgz that receives every object assembled or compiled in this job
+# The inputs were unpacked from inputs.tgz (sources, cached objects under obj/, include/, the linker script).
 import json, os, struct, subprocess, sys, tarfile
 from concurrent.futures import ThreadPoolExecutor
 
 AS = '/toolchains/compilers/ee-gcc2.96/ee/bin/as'
+CC = '/toolchains/compilers'
 tarfile.open('inputs.tgz').extractall('.')
 plan = json.load(open('plan.json'))
+sys.path.insert(0, 'tools')
 
 
 def expand_incbin(src):
@@ -36,15 +42,49 @@ def assemble(job):
     return src, p.returncode, (p.stdout + p.stderr).strip()
 
 
+def compile_one(job):
+    from elfobj import normalize_object
+    root = '%s/%s' % (CC, job['compiler'])
+    backend = '%s/lib/gcc-lib/ee/%s' % (root, '2.95.3' if '2.95.3-' in job['compiler'] else '2.95.2')
+    env = dict(os.environ, TMPDIR='/work', WINEDEBUG='-all', WIBO_PATH=backend)
+    os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
+    cmd = ['wibo', root + '/bin/ee-gcc.exe', '-B' + backend + '/'] + job['args'] + ['-c', job['src'], '-o', job['obj']]
+    p = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=300)
+    if p.returncode == 0 and os.path.exists(job['obj']):
+        data = open(job['obj'], 'rb').read()
+        open(job['obj'], 'wb').write(normalize_object(data))
+    return job['src'], p.returncode, (p.stdout + p.stderr).strip()
+
+
 failed = 0
+built = []
 with ThreadPoolExecutor(2) as pool:
-    for src, rc, msg in pool.map(assemble, plan['assemble']):
+    for src, rc, msg in pool.map(assemble, plan.get('assemble', [])):
         if rc or msg:
             print('AS %s rc=%d\n%s' % (src, rc, '\n'.join(msg.split('\n')[:40])))
         failed += bool(rc)
+    for src, rc, msg in pool.map(compile_one, plan.get('compile', [])):
+        if rc or msg:
+            print('CC %s rc=%d\n%s' % (src, rc, '\n'.join(msg.split('\n')[:80])))
+        failed += bool(rc)
+built = [o for _, o in plan.get('assemble', [])] + [j['obj'] for j in plan.get('compile', [])]
+if plan.get('pack'):
+    with tarfile.open(plan['pack'], 'w:gz', compresslevel=1) as tar:
+        for o in built:
+            if os.path.exists(o):
+                tar.add(o)
 if failed:
-    print('assembler failed on %d files' % failed)
+    print('%d jobs failed' % failed)
     sys.exit(1)
-p = subprocess.run(['mipsel-linux-gnu-ld'] + plan['link'], capture_output=True, text=True)
-print((p.stdout + p.stderr).strip()[:6000])
-sys.exit(p.returncode)
+for r in plan.get('rename', []):   # give a unit's sections the sort key of the slot they take over
+    args = ['mipsel-linux-gnu-objcopy']
+    for old, new in r['sections'].items():
+        args += ['--rename-section', '%s=%s' % (old, new)]
+    p = subprocess.run(args + [r['obj']], capture_output=True, text=True)
+    if p.returncode:
+        print('objcopy %s: %s' % (r['obj'], p.stderr))
+        sys.exit(1)
+if plan.get('link'):
+    p = subprocess.run(['mipsel-linux-gnu-ld'] + plan['link'], capture_output=True, text=True)
+    print((p.stdout + p.stderr).strip()[:6000])
+    sys.exit(p.returncode)
