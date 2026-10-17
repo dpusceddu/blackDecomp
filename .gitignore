@@ -1,0 +1,11 @@
+orig/
+asm/
+data/
+build/
+.local/
+.venv/
+*.iso
+*.zip
+*.o
+*.elf
+__pycache__/
