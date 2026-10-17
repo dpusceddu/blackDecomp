@@ -90,6 +90,12 @@ def main():
                 continue
             replaced[func_by_addr[f['addr']]['name']] = uname
             aliases.append('%s = %s;' % (func_by_addr[f['addr']]['name'], f['link_name']))
+            # labels inside the function (exception handlers, jump targets) that other objects still refer to:
+            # the compiled code is byte-identical, so they sit at the same offsets from the function
+            i = bisect.bisect_right(label_addrs, f['addr'])
+            while i < len(labels) and labels[i][0] < f['addr'] + f['size']:
+                aliases.append('%s = %s + 0x%X;' % (labels[i][1], f['link_name'], labels[i][0] - f['addr']))
+                i += 1
     if problems:
         raise SystemExit('\n'.join(problems))
     aliases = list(dict.fromkeys(aliases))

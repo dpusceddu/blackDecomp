@@ -12,7 +12,7 @@ Format (see README.md):
         - {addr: 0x2e7ac0, symbol: __15ParameterTables, status: asm, reason: layout}
 Only `status: source` functions are provided by the unit's object; the others stay assembly.
 """
-import re
+import os, re
 from pathlib import Path
 
 import yaml
@@ -31,6 +31,9 @@ def load_units(path=None):
     data = yaml.safe_load(path.read_text()) if path.exists() else None
     units = (data or {}).get('units') or []
     for u in units:
+        if os.environ.get('BLACK_UNITS_ALL'):      # diagnostics: pretend every listed function is provided by source
+            for f in u.get('functions', []):
+                f['status'] = 'source'
         u.setdefault('compiler', DEFAULT_COMPILER)
         u.setdefault('flags', list(DEFAULT_FLAGS))
         u['functions'] = [dict(f, addr=_num(f['addr'])) for f in u.get('functions', [])]

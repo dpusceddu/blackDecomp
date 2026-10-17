@@ -131,8 +131,7 @@ units:
   - addr: '0x2d1610'
     symbol: CreateBehavior2845BC__4KaimPQ24Kaim7Context
     size: 168
-    status: asm
-    reason: labels
+    status: source
   externs:
     __Q24Kaim14Behavior2845BCPQ24Kaim7Context: '0x2d2d48'
     __throw: '0x292b40'
@@ -152,8 +151,7 @@ units:
   - addr: '0x2d3c90'
     symbol: CreateBehavior28441C__4KaimPQ24Kaim7Context
     size: 168
-    status: asm
-    reason: labels
+    status: source
   externs:
     __Q24Kaim14Behavior28441CPQ24Kaim7Context: '0x2d5068'
     __throw: '0x292b40'
@@ -901,8 +899,7 @@ units:
   - addr: '0x2da208'
     symbol: CreateObject4E410__Fv
     size: 152
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object4E410: '0x2da2a0'
     __throw: '0x292b40'
@@ -922,8 +919,7 @@ units:
   - addr: '0x2dca40'
     symbol: CreateObject4E750__Fv
     size: 152
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object4E750: '0x2dcad8'
     __throw: '0x292b40'
@@ -943,8 +939,7 @@ units:
   - addr: '0x2ec918'
     symbol: CreateObject55180__Fii
     size: 184
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object55180ii: '0x2ec1b8'
     __throw: '0x292b40'
@@ -964,13 +959,11 @@ units:
   - addr: '0x2f0e80'
     symbol: CreateObjectV284F64__Fv
     size: 104
-    status: asm
-    reason: labels
+    status: source
   - addr: '0x2f0ee8'
     symbol: CreateObject5A210__Fv
     size: 152
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object5A210: '0x2f0f80'
     __throw: '0x292b40'
@@ -991,8 +984,7 @@ units:
   - addr: '0x2f12c0'
     symbol: CreateObject59D40__Fv
     size: 152
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object59D40: '0x2f1358'
     __throw: '0x292b40'
@@ -1012,8 +1004,7 @@ units:
   - addr: '0x2f15e0'
     symbol: CreateObject59DB0__Fv
     size: 152
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object59DB0: '0x2f1678'
     __throw: '0x292b40'
@@ -1060,8 +1051,7 @@ units:
   - addr: '0x2f2438'
     symbol: CreateObject56980__Fv
     size: 152
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object56980: '0x2f24d0'
     __throw: '0x292b40'
@@ -1098,8 +1088,7 @@ units:
   - addr: '0x2f3600'
     symbol: CreateObject5CD50__Fi
     size: 168
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object5CD50i: '0x2f36a8'
     __throw: '0x292b40'
@@ -1119,8 +1108,7 @@ units:
   - addr: '0x2f4bc0'
     symbol: CreateObject59AC0__Fv
     size: 152
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object59AC0: '0x2f4c58'
     __throw: '0x292b40'
@@ -1140,8 +1128,7 @@ units:
   - addr: '0x2fec10'
     symbol: CreateObject619F0__Fi
     size: 168
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object619F0i: '0x2fecb8'
     __throw: '0x292b40'
@@ -1161,8 +1148,7 @@ units:
   - addr: '0x305538'
     symbol: CreateObject62D40__Fi
     size: 168
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object62D40i: '0x3055e0'
     __throw: '0x292b40'
@@ -1182,8 +1168,7 @@ units:
   - addr: '0x30ea38'
     symbol: CreateObject67FC0__Fi
     size: 168
-    status: asm
-    reason: labels
+    status: source
   externs:
     __11Object67FC0i: '0x30fdf8'
     __throw: '0x292b40'
