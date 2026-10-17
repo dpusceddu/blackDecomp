@@ -1,0 +1,255 @@
+#!/usr/bin/env python3
+"""Check the source units of config/units.yaml and demote what cannot be placed identically.
+
+  units_verify.py prepare   after `build_objects.py --compile-only`: read each unit's compiled object, bind the symbols
+                            it refers to (from .local/import/*_bindings.json, original addresses), and mark functions
+                            whose object does not fit (no symbol, other size, extra code) as `asm` with a reason
+  units_verify.py link      after a failed link: read build/<slug>/link.log and demote the units it names
+  units_verify.py compare   after a link: compare the linked image with the target section by section and demote the
+                            units that own the differing bytes
+Reasons: compile, name, size, extra, extern, section, link, bytes. Writes config/units.yaml (a machine-maintained file).
+"""
+import json, re, struct, sys
+from pathlib import Path
+
+import yaml
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from elfinfo import Elf
+from units import load_units, ROOT
+
+SLUG = 'usa-retail'
+BUILD = ROOT / 'build' / SLUG
+
+
+def save(units):
+    out = []
+    for u in units:
+        d = {k: v for k, v in u.items() if k not in ('compiler',) or v != 'ee-gcc2.95.3-136'}
+        d['functions'] = [{k: (hex(v) if k == 'addr' else v) for k, v in f.items()} for f in u['functions']]
+        if not d.get('externs'):
+            d.pop('externs', None)
+        else:
+            d['externs'] = {k: hex(v) for k, v in sorted(d['externs'].items())}
+        out.append(d)
+    (ROOT / 'config/units.yaml').write_text(
+        '# Provisional translation units that replace assembly functions with source; see README.md.\n'
+        '# status: source = provided by the unit; asm = stays assembly, with a one-word reason.\n' +
+        yaml.safe_dump({'units': out}, sort_keys=False, width=140))
+
+
+def demote(unit, funcs, reason):
+    n = 0
+    for f in unit['functions']:
+        if f.get('status') == 'source' and (funcs is None or f['addr'] in funcs):
+            f['status'], f['reason'] = 'asm', reason
+            n += 1
+    return n
+
+
+def cached_object(name):
+    m = json.loads((BUILD / 'objects_cache.json').read_text())
+    p = BUILD / m.get('units/' + name, 'missing')
+    return Elf(p.read_bytes()) if p.exists() else None
+
+
+def bindings():
+    out = {}
+    for p in (ROOT / '.local/import').glob('*_bindings.json'):
+        for unit, b in json.loads(p.read_text()).items():
+            out.setdefault(unit, {}).update({k: int(v) if isinstance(v, int) else int(v, 0) for k, v in b.items()})
+    return out
+
+
+def data_sections(e, syms, u, live, placement):
+    """Constants and data the compiled unit brings along. Returns a reason when they cannot take the place of what the
+    assembly objects carried: code refers to a section no original slot exists for, the slots are not adjacent, or the
+    sizes differ."""
+    text = e.section('.text')
+    by_name = {f['name']: f for f in placement['functions']}
+    addrs = {f['addr'] for f in live}
+    referenced = set()
+    for t in e.sections:
+        if t['type'] == 9 and e.sections[t['info']]['name'] == '.text':
+            c = e.content(t)
+            for o in range(0, len(c), 8):
+                off, info = struct.unpack_from('<II', c, o)
+                y = syms[info >> 8]
+                if y['shndx'] not in (0, 0xfff1, 0xfff2):
+                    referenced.add(e.sections[y['shndx']]['name'])
+    for sec in sorted(referenced - {'.text', '.rodata', '.lit4', '.gcc_except_table'}):
+        return 'section'              # own data or bss: not placed
+    for sec in ('.rodata', '.lit4', '.gcc_except_table'):
+        ents = placement['sections'][sec]
+        slots = [i for i, ent in enumerate(ents) if ent.get('owner') and by_name[ent['owner']]['addr'] in addrs]
+        so = e.section(sec)
+        size = so['size'] if so else 0
+        if not slots:
+            if sec in referenced:
+                return 'shared'       # the original constants are not migrated to these functions
+            continue
+        if slots != list(range(slots[0], slots[0] + len(slots))):
+            return 'layout'           # other objects sit between the slots
+        end = ents[slots[-1] + 1]['key'] if slots[-1] + 1 < len(ents) and 'key' in ents[slots[-1] + 1] else None
+        if end is not None and not 0 <= end - ents[slots[0]]['key'] - size < 16:
+            return 'size'
+    return None
+
+
+def prepare():
+    units = load_units()
+    bind = bindings()
+    results = json.loads((BUILD / 'results.json').read_text()) if (BUILD / 'results.json').exists() else {}
+    stats = {}
+    placement = json.loads((BUILD / 'placement.json').read_text())
+    starts = [f['addr'] for f in placement['functions']]
+    for u in units:
+        if not any(f.get('status') == 'source' for f in u['functions']):
+            continue
+        # a cached object means the compile worked
+        e = cached_object(u['name'])
+        if e is None:
+            stats['compile'] = stats.get('compile', 0) + demote(u, None, 'compile')
+            continue
+        syms = e.symbols()
+        text = e.section('.text')
+        defined = {s['name']: s for s in syms if s['shndx'] == text['index'] and s['type'] == 2}
+        total = 0
+        for f in u['functions']:
+            if f.get('status') != 'source':
+                continue
+            s = defined.get(f['symbol'])
+            if s is None:
+                stats['name'] = stats.get('name', 0) + demote(u, {f['addr']}, 'name')
+            elif s['size'] != f['size']:
+                stats['size'] = stats.get('size', 0) + demote(u, {f['addr']}, 'size')
+            else:
+                total += s['size']
+        # the object's code must fill exactly the original span (first function to the next one behind the unit)
+        live = [f for f in u['functions'] if f.get('status') == 'source']
+        if live:
+            first, last = min(f['addr'] for f in live), max(f['addr'] for f in live)
+            nxt = starts[starts.index(last) + 1] if starts.index(last) + 1 < len(starts) else None
+            if text['size'] != nxt - first:
+                stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
+        live = [f for f in u['functions'] if f.get('status') == 'source']
+        if live:
+            why = data_sections(e, syms, u, live, placement)
+            if why:
+                stats[why] = stats.get(why, 0) + demote(u, None, why)
+        # bind what the object leaves undefined
+        want = sorted({s['name'] for s in syms if s['shndx'] == 0 and s['name'] and s['bind'] == 1})
+        ex, missing = {}, []
+        for name in want:
+            if name in bind.get(u['name'], {}):
+                ex[name] = bind[u['name']][name]
+            else:
+                missing.append(name)
+        u['externs'] = ex
+        if missing and any(f.get('status') == 'source' for f in u['functions']):
+            u['unbound'] = missing
+            stats['extern'] = stats.get('extern', 0) + demote(u, None, 'extern')
+        else:
+            u.pop('unbound', None)
+    save(units)
+    print('demoted:', stats)
+
+
+def link_errors():
+    """Demote the units a failed link names: their object is the one that is wrong, or the label another object needs
+    (an exception handler or jump target inside the replaced function) no longer exists."""
+    import bisect
+    log = (BUILD / 'link.log').read_text()
+    placement = json.loads((BUILD / 'placement.json').read_text())
+    funcs = placement['functions']
+    starts = [f['addr'] for f in funcs]
+    by_name = {f['name']: f['addr'] for f in funcs}
+    owned = sorted((e['key'], by_name[e['owner']]) for sec in ('.rodata', '.lit4', '.gcc_except_table')
+                   for e in placement['sections'][sec] if e.get('owner'))
+    okeys = [k for k, _ in owned]
+    units = load_units()
+    owner = {f['addr']: u['name'] for u in units for f in u['functions'] if f.get('status') == 'source'}
+    bad = {}
+    for line in log.split('\n'):
+        m = re.search(r'obj/units/(\w+)\.o', line)
+        if m and ('undefined reference' in line or 'discarded section' in line or 'multiple definition' in line
+                  or 'relocation' in line):
+            bad.setdefault(m.group(1), (line, 'link'))
+        m = re.search(r"undefined reference to `[^`']*?([0-9A-F]{8})'", line)
+        if m:
+            a = int(m.group(1), 16)
+            fa = starts[bisect.bisect_right(starts, a) - 1]
+            if fa in owner:
+                bad.setdefault(owner[fa], (line, 'labels'))
+            elif 'ehtbl_' in line or 'D_' in line or 'jtbl_' in line:    # a constant that moved with a replaced function
+                i = bisect.bisect_right(okeys, a) - 1
+                if i >= 0 and owned[i][1] in owner:
+                    bad.setdefault(owner[owned[i][1]], (line, 'labels'))
+    n = 0
+    for u in units:
+        if u['name'] in bad:
+            n += demote(u, None, bad[u['name']][1])
+    save(units)
+    print('demoted %d functions in %d units' % (n, len(bad)))
+    for k, (line, why) in list(bad.items())[:12]:
+        print('  %s (%s): %s' % (k, why, line[:150]))
+    if not bad:
+        print(log[-2000:])
+
+
+def compare():
+    """Attribute every differing word of the linked image to the unit (or assembly function) that owns it."""
+    import bisect
+    ref = Elf((ROOT / 'orig' / SLUG / 'files' / 'SLUS_213.76').read_bytes())
+    got = Elf((BUILD / 'linked.elf').read_bytes())
+    placement = json.loads((BUILD / 'placement.json').read_text())
+    funcs = placement['functions']
+    starts = [f['addr'] for f in funcs]
+    units = load_units()
+    owner = {f['addr']: u for u in units for f in u['functions'] if f.get('status') == 'source'}
+    ents = {sec: [(e['key'], e) for e in placement['sections'][sec] if 'key' in e]
+            for sec in ('.rodata', '.lit4', '.gcc_except_table')}
+    bad = {}
+    other = []
+    for sec in ('.text', '.rodata', '.lit4', '.gcc_except_table', '.data', '.sdata'):
+        a, b = ref.section(sec), got.section(sec)
+        ca, cb = ref.content(a), got.content(b)
+        for i in range(0, min(len(ca), len(cb)), 4):
+            if ca[i:i + 4] == cb[i:i + 4]:
+                continue
+            addr = a['addr'] + i
+            who = None
+            if sec == '.text':
+                fa = starts[bisect.bisect_right(starts, addr) - 1]
+                who = owner.get(fa)
+                where = 'func_%08X' % fa
+            elif sec in ents:
+                keys = [k for k, _ in ents[sec]]
+                k = bisect.bisect_right(keys, addr) - 1
+                e = ents[sec][k][1] if k >= 0 else None
+                fa = next((f['addr'] for f in funcs if e and f['name'] == e.get('owner')), None)
+                who = owner.get(fa)
+                where = e['obj'] if e else '?'
+            else:
+                where = sec
+            if who is not None:
+                bad.setdefault(who['name'], []).append((sec, addr))
+            else:
+                other.append((sec, addr, where))
+    for name, v in bad.items():
+        print('unit %s: %d words differ, first %s %#x' % (name, len(v), *v[0]))
+    print('differences outside units: %d' % len(other))
+    for sec, addr, where in other[:25]:
+        print('  %s %#x in %s' % (sec, addr, where))
+    if '--fix' in sys.argv:
+        n = 0
+        for u in units:
+            if u['name'] in bad:
+                n += demote(u, None, 'bytes')
+        save(units)
+        print('demoted', n)
+
+
+if __name__ == '__main__':
+    cmd = sys.argv[1] if len(sys.argv) > 1 else ''
+    {'prepare': prepare, 'link': link_errors, 'compare': compare}.get(cmd, lambda: print(__doc__))()

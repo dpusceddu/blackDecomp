@@ -6,6 +6,7 @@ Format (see README.md):
       source: src/kynapse/children.cpp
       compiler: ee-gcc2.95.3-136      # optional, this is the default
       flags: [-O2, -G0, -snas]        # optional, these are the defaults
+      externs: {gIdA: 0x2b3a3c}       # symbols the source refers to but does not define: name -> original address
       functions:
         - {addr: 0x2e3100, symbol: FindChild__12ChildBuffersPCcT1, status: source}
         - {addr: 0x2e7ac0, symbol: __15ParameterTables, status: asm, reason: layout}
@@ -21,6 +22,10 @@ DEFAULT_COMPILER = 'ee-gcc2.95.3-136'
 DEFAULT_FLAGS = ['-O2', '-G0', '-snas']
 
 
+def _num(v):
+    return int(v, 0) if isinstance(v, str) else int(v)
+
+
 def load_units(path=None):
     path = Path(path or ROOT / 'config/units.yaml')
     data = yaml.safe_load(path.read_text()) if path.exists() else None
@@ -28,7 +33,8 @@ def load_units(path=None):
     for u in units:
         u.setdefault('compiler', DEFAULT_COMPILER)
         u.setdefault('flags', list(DEFAULT_FLAGS))
-        u['functions'] = [dict(f, addr=int(f['addr'])) for f in u.get('functions', [])]
+        u['functions'] = [dict(f, addr=_num(f['addr'])) for f in u.get('functions', [])]
+        u['externs'] = {k: _num(v) for k, v in (u.get('externs') or {}).items()}
     return units
 
 

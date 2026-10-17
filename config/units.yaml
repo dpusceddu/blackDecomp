@@ -1,2 +1,2998 @@
 # Provisional translation units that replace assembly functions with source; see README.md.
-units: []
+# status: source = provided by the unit; asm = stays assembly, with a one-word reason.
+units:
+- name: kynapse_accessors_2dfbf8
+  source: src/kynapse/accessors_2dfbf8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2dfbf8'
+    symbol: ClearActivation__10ActionBank
+    size: 64
+    status: source
+- name: kynapse_accessors_2e10b8
+  source: src/kynapse/accessors_2e10b8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e10b8'
+    symbol: GrowthCounter_Double__Fv
+    size: 32
+    status: source
+  externs:
+    gGrowthCounter: '0x3c7a24'
+- name: kynapse_ai_route_follower_304de8
+  source: src/kynapse/ai_route_follower_304de8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x304de8'
+    symbol: FollowRequest__15AIRouteFollowerP12RouteRequest
+    size: 80
+    status: source
+  externs:
+    FollowPoint__15AIRouteFollowerPCfP12RouteRequest: '0x304f08'
+- name: kynapse_ai_route_follower_304ee8
+  source: src/kynapse/ai_route_follower_304ee8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x304ee8'
+    symbol: FollowPointOnly__15AIRouteFollowerPCf
+    size: 28
+    status: source
+  externs:
+    FollowPoint__15AIRouteFollowerPCfP12RouteRequest: '0x304f08'
+- name: kynapse_batch10_2f2380
+  source: src/kynapse/batch10_2f2380.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f2380'
+    symbol: Init__12ProviderUseri
+    size: 100
+    status: source
+  externs:
+    FindByClass__12EngineObjectP9ClassInfo: '0x2ec058'
+    Find__12TypeRegistryiP9ClassInfo: '0x2f30e8'
+    gEngine: '0x3c9ed4'
+    gProviderClass: '0x452388'
+    gTypeRegistryClass: '0x452158'
+- name: kynapse_batch10_2f30e8
+  source: src/kynapse/batch10_2f30e8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f30e8'
+    symbol: Find__12TypeRegistryiP9ClassInfo
+    size: 288
+    status: source
+- name: kynapse_batch11_2f2f58
+  source: src/kynapse/batch11_2f2f58.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f2f58'
+    symbol: IdByName__8ItemListPCc
+    size: 148
+    status: source
+  externs:
+    _stricmp: '0x360838'
+- name: kynapse_batch9_2f3208
+  source: src/kynapse/batch9_2f3208.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f3208'
+    symbol: Contains__10MemberListi
+    size: 68
+    status: source
+- name: kynapse_behavior_factories_2d1610
+  source: src/kynapse/behavior_factories_2d1610.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d1610'
+    symbol: CreateBehavior2845BC__4KaimPQ24Kaim7Context
+    size: 168
+    status: asm
+    reason: labels
+  externs:
+    __Q24Kaim14Behavior2845BCPQ24Kaim7Context: '0x2d2d48'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_behavior_factories_2d3c90
+  source: src/kynapse/behavior_factories_2d3c90.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d3c90'
+    symbol: CreateBehavior28441C__4KaimPQ24Kaim7Context
+    size: 168
+    status: asm
+    reason: labels
+  externs:
+    __Q24Kaim14Behavior28441CPQ24Kaim7Context: '0x2d5068'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_behavior_methods_2d51c0
+  source: src/kynapse/behavior_methods_2d51c0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d51c0'
+    symbol: ResetState__Q24Kaim14Behavior28441C
+    size: 116
+    status: source
+  externs:
+    _4Kaim$gOrigin: '0x4514f8'
+- name: kynapse_buffers3_2eef88
+  source: src/kynapse/buffers3_2eef88.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2eef88'
+    symbol: CreateBoundBuffers__FP11BufferOwner
+    size: 168
+    status: asm
+    reason: labels
+  externs:
+    __12BoundBuffersP11BufferOwner: '0x2f0a00'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_buffers3_2f0a00
+  source: src/kynapse/buffers3_2f0a00.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f0a00'
+    symbol: __12BoundBuffersP11BufferOwner
+    size: 48
+    status: source
+  externs:
+    _vt$12BoundBuffers: '0x3ec1c8'
+- name: kynapse_callbacks_2f0da8
+  source: src/kynapse/callbacks_2f0da8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f0da8'
+    symbol: Kaim_AllRegisteredIdsValid__Fv
+    size: 216
+    status: source
+  externs:
+    gId0: '0x454788'
+    gId1: '0x454670'
+    gId10: '0x451890'
+    gId11: '0x4519a8'
+    gId12: '0x4524a0'
+    gId13: '0x452270'
+    gId14: '0x4525b8'
+    gId15: '0x452158'
+    gId2: '0x451658'
+    gId3: '0x452388'
+    gId4: '0x451e08'
+    gId5: '0x452038'
+    gId6: '0x451f20'
+    gId7: '0x451778'
+    gId8: '0x451ac0'
+    gId9: '0x451bd8'
+- name: kynapse_child_buffers_2e3100
+  source: src/kynapse/child_buffers_2e3100.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e3100'
+    symbol: FindChild__CQ24Kaim12ChildBuffersPCcT1
+    size: 224
+    status: source
+  - addr: '0x2e31e0'
+    symbol: FindBySecond__CQ24Kaim12ChildBuffersPCc
+    size: 164
+    status: source
+  externs:
+    _stricmp: '0x360838'
+- name: kynapse_child_buffers_2e3330
+  source: src/kynapse/child_buffers_2e3330.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e3330'
+    symbol: FindThirdBySecond__CQ24Kaim12ChildBuffersPCc
+    size: 172
+    status: source
+  - addr: '0x2e33e0'
+    symbol: GetChild__CQ24Kaim12ChildBuffersUi
+    size: 40
+    status: source
+  externs:
+    _stricmp: '0x360838'
+- name: kynapse_child_buffers_2e3578
+  source: src/kynapse/child_buffers_2e3578.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e3578'
+    symbol: SetFirst__Q24Kaim12ChildBuffersPCc
+    size: 180
+    status: source
+  - addr: '0x2e3630'
+    symbol: SetSecond__Q24Kaim12ChildBuffersPCc
+    size: 180
+    status: source
+  - addr: '0x2e36e8'
+    symbol: SetThird__Q24Kaim12ChildBuffersPCc
+    size: 180
+    status: source
+  externs:
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    strcpy: '0x35cbc0'
+    strlen: '0x35ccd8'
+- name: kynapse_child_buffers_2e3920
+  source: src/kynapse/child_buffers_2e3920.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e3920'
+    symbol: GetSecond__CQ24Kaim12ChildBuffers
+    size: 8
+    status: source
+- name: kynapse_class_info_389290
+  source: src/kynapse/class_info_389290.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389290'
+    symbol: GetClassInfoOf4B0F0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B3A38: '0x44ecd0'
+- name: kynapse_class_info_3894d0
+  source: src/kynapse/class_info_3894d0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x3894d0'
+    symbol: GetClassInfoOf4AAE0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B3920: '0x44ede8'
+- name: kynapse_class_info_389550
+  source: src/kynapse/class_info_389550.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389550'
+    symbol: GetClassInfoOf4A910__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B3808: '0x44ef00'
+- name: kynapse_class_info_3895c8
+  source: src/kynapse/class_info_3895c8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x3895c8'
+    symbol: GetClassInfoOf49B80__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B36F0: '0x44f018'
+- name: kynapse_class_info_389668
+  source: src/kynapse/class_info_389668.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389668'
+    symbol: GetClassInfoOf49000__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B35D8: '0x44f130'
+- name: kynapse_class_info_389770
+  source: src/kynapse/class_info_389770.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389770'
+    symbol: GetClassInfoOf488C0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B34C0: '0x44f248'
+- name: kynapse_class_info_389818
+  source: src/kynapse/class_info_389818.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389818'
+    symbol: GetClassInfoOf484B0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B33A8: '0x44f360'
+- name: kynapse_class_info_38afa8
+  source: src/kynapse/class_info_38afa8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38afa8'
+    symbol: GetClassInfoOf4E230__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B5AB0: '0x450eb8'
+- name: kynapse_class_info_38b140
+  source: src/kynapse/class_info_38b140.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38b140'
+    symbol: GetClassInfoOf4DC00__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B5998: '0x450fd8'
+- name: kynapse_class_info_38b2b8
+  source: src/kynapse/class_info_38b2b8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38b2b8'
+    symbol: GetClassInfoOf4E5A0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B5BC8: '0x4510f0'
+- name: kynapse_class_info_38ef98
+  source: src/kynapse/class_info_38ef98.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38ef98'
+    symbol: GetClassInfoOf55260__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B8BF0: '0x451540'
+- name: kynapse_class_info_38ffc0
+  source: src/kynapse/class_info_38ffc0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38ffc0'
+    symbol: GetClassInfoOf555D0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B8D10: '0x451658'
+- name: kynapse_class_info_390260
+  source: src/kynapse/class_info_390260.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390260'
+    symbol: GetClassInfoOf59C50__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B9880: '0x451890'
+- name: kynapse_class_info_3902f8
+  source: src/kynapse/class_info_3902f8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x3902f8'
+    symbol: GetClassInfoOf5A260__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B9DF8: '0x4519a8'
+- name: kynapse_class_info_3903a0
+  source: src/kynapse/class_info_3903a0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x3903a0'
+    symbol: GetClassInfoOf59DA0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B9998: '0x451ac0'
+- name: kynapse_class_info_390440
+  source: src/kynapse/class_info_390440.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390440'
+    symbol: GetClassInfoOf59E00__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B9CE0: '0x451bd8'
+- name: kynapse_class_info_390548
+  source: src/kynapse/class_info_390548.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390548'
+    symbol: GetClassInfoOf59C60__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B9F10: '0x451cf0'
+- name: kynapse_class_info_390630
+  source: src/kynapse/class_info_390630.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390630'
+    symbol: GetClassInfoOf59C70__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B9BC8: '0x451e08'
+- name: kynapse_class_info_390748
+  source: src/kynapse/class_info_390748.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390748'
+    symbol: GetClassInfoOf59CC0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2BA028: '0x451f20'
+- name: kynapse_class_info_390808
+  source: src/kynapse/class_info_390808.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390808'
+    symbol: GetClassInfoOf59CE0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B9AB0: '0x452038'
+- name: kynapse_class_info_390ce8
+  source: src/kynapse/class_info_390ce8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390ce8'
+    symbol: GetClassInfoOf565E0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B9230: '0x452158'
+- name: kynapse_class_info_390e20
+  source: src/kynapse/class_info_390e20.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390e20'
+    symbol: GetClassInfoOf5CCE0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2BC318: '0x452270'
+- name: kynapse_class_info_391120
+  source: src/kynapse/class_info_391120.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x391120'
+    symbol: GetClassInfoOf5CDC0__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2BC430: '0x452388'
+- name: kynapse_class_info_3914b0
+  source: src/kynapse/class_info_3914b0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x3914b0'
+    symbol: GetClassInfoOf59B10__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B9360: '0x4525b8'
+- name: kynapse_class_info_392da0
+  source: src/kynapse/class_info_392da0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x392da0'
+    symbol: GetClassInfoOf5D490__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2BC548: '0x454670'
+- name: kynapse_class_info_393598
+  source: src/kynapse/class_info_393598.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x393598'
+    symbol: GetClassInfoOf5DD60__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2BC660: '0x454788'
+- name: kynapse_class_info_393928
+  source: src/kynapse/class_info_393928.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x393928'
+    symbol: GetClassInfoOf5FA10__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2BDDC0: '0x4548b8'
+- name: kynapse_class_info_394220
+  source: src/kynapse/class_info_394220.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x394220'
+    symbol: GetClassInfoOf66700__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2BE010: '0x455be8'
+- name: kynapse_class_info_394d68
+  source: src/kynapse/class_info_394d68.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x394d68'
+    symbol: GetClassInfoOf68020__Fv
+    size: 12
+    status: source
+  externs:
+    gClassInfo2BE148: '0x455e18'
+- name: kynapse_configure_2e74e0
+  source: src/kynapse/configure_2e74e0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e74e0'
+    symbol: ConfigureAll__Q24Kaim10ConfigHostPQ24Kaim12ChildBuffers
+    size: 216
+    status: source
+  externs:
+    GetChild__CQ24Kaim12ChildBuffersUi: '0x2e33e0'
+    GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
+    _stricmp: '0x360838'
+- name: kynapse_configure_2ec9d0
+  source: src/kynapse/configure_2ec9d0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2ec9d0'
+    symbol: ConfigureAll__Q24Kaim11ConfigHostBPQ24Kaim12ChildBuffers
+    size: 216
+    status: source
+  externs:
+    GetChild__CQ24Kaim12ChildBuffersUi: '0x2e33e0'
+    GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
+    _stricmp: '0x360838'
+- name: kynapse_configure_2fd8c8
+  source: src/kynapse/configure_2fd8c8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2fd8c8'
+    symbol: Apply__Q24Kaim11RawDataUserPQ24Kaim12ChildBuffers
+    size: 60
+    status: source
+  externs:
+    FindBySecond__CQ24Kaim12ChildBuffersPCc: '0x2e31e0'
+    Load__Q24Kaim11RawDataUserPQ24Kaim12ChildBuffers: '0x2fcec0'
+- name: kynapse_ctors2_373250
+  source: src/kynapse/ctors2_373250.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x373250'
+    symbol: __Q24Kaim11EmptyObject
+    size: 20
+    status: source
+  externs:
+    _vt$Q24Kaim11EmptyObject: '0x3f2048'
+- name: kynapse_engine_class_2eb280
+  source: src/kynapse/engine_class_2eb280.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2eb280'
+    symbol: AddService__Q24Kaim6EnginePQ24Kaim6Object
+    size: 276
+    status: source
+  externs:
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_engine_class_2ec020
+  source: src/kynapse/engine_class_2ec020.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2ec020'
+    symbol: __Q24Kaim6EnginePQ24Kaim6Object
+    size: 56
+    status: source
+  externs:
+    _vt$Q24Kaim6Engine: '0x3eba18'
+- name: kynapse_engine_create_2d8448
+  source: src/kynapse/engine_create_2d8448.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d8448'
+    symbol: Kaim_AllClassesRegistered__4Kaimv
+    size: 300
+    status: source
+  externs:
+    _4Kaim$gClassId2B3B54: '0x44f7c0'
+    _4Kaim$gClassId2B3C6C: '0x44f9f0'
+    _4Kaim$gClassId2B3D84: '0x450940'
+    _4Kaim$gClassId2B3FB4: '0x4504e0'
+    _4Kaim$gClassId2B40CC: '0x450198'
+    _4Kaim$gClassId2B41E4: '0x44fe50'
+    _4Kaim$gClassId2B42FC: '0x4505f8'
+    _4Kaim$gClassId2B4414: '0x44f8d8'
+    _4Kaim$gClassId2B452C: '0x44fb08'
+    _4Kaim$gClassId2B4644: '0x44f6a8'
+    _4Kaim$gClassId2B475C: '0x44f590'
+    _4Kaim$gClassId2B4874: '0x44f478'
+    _4Kaim$gClassId2B498C: '0x44fd38'
+    _4Kaim$gClassId2B4AA4: '0x44fc20'
+    _4Kaim$gClassId2B4BBC: '0x450710'
+    _4Kaim$gClassId2B4CD4: '0x450828'
+    _4Kaim$gClassId2B4DEC: '0x4502b0'
+    _4Kaim$gClassId2B4F04: '0x450080'
+    _4Kaim$gClassId2B501C: '0x44ff68'
+    _4Kaim$gClassId2B5134: '0x450da0'
+    _4Kaim$gClassId2B524C: '0x450c88'
+    _4Kaim$gClassId2B5364: '0x450b70'
+    _4Kaim$gClassId2B547C: '0x450a58'
+- name: kynapse_factories_2da208
+  source: src/kynapse/factories_2da208.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2da208'
+    symbol: CreateObject4E410__Fv
+    size: 152
+    status: asm
+    reason: labels
+  externs:
+    __11Object4E410: '0x2da2a0'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_2dca40
+  source: src/kynapse/factories_2dca40.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2dca40'
+    symbol: CreateObject4E750__Fv
+    size: 152
+    status: asm
+    reason: labels
+  externs:
+    __11Object4E750: '0x2dcad8'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_2ec918
+  source: src/kynapse/factories_2ec918.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2ec918'
+    symbol: CreateObject55180__Fii
+    size: 184
+    status: asm
+    reason: labels
+  externs:
+    __11Object55180ii: '0x2ec1b8'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_2f0e80
+  source: src/kynapse/factories_2f0e80.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f0e80'
+    symbol: CreateObjectV284F64__Fv
+    size: 104
+    status: asm
+    reason: labels
+  - addr: '0x2f0ee8'
+    symbol: CreateObject5A210__Fv
+    size: 152
+    status: asm
+    reason: labels
+  externs:
+    __11Object5A210: '0x2f0f80'
+    __throw: '0x292b40'
+    _vt$13ObjectV284F64: '0x3eca50'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_2f12c0
+  source: src/kynapse/factories_2f12c0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f12c0'
+    symbol: CreateObject59D40__Fv
+    size: 152
+    status: asm
+    reason: labels
+  externs:
+    __11Object59D40: '0x2f1358'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_2f15e0
+  source: src/kynapse/factories_2f15e0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f15e0'
+    symbol: CreateObject59DB0__Fv
+    size: 152
+    status: asm
+    reason: labels
+  externs:
+    __11Object59DB0: '0x2f1678'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_2f1d70
+  source: src/kynapse/factories_2f1d70.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f1d70'
+    symbol: CreateObjectV284F84__Fv
+    size: 104
+    status: source
+  - addr: '0x2f1dd8'
+    symbol: CreateObjectV284F94__Fv
+    size: 104
+    status: source
+  - addr: '0x2f1e40'
+    symbol: CreateObjectV284FA4__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$13ObjectV284F84: '0x3ec960'
+    _vt$13ObjectV284F94: '0x3ec930'
+    _vt$13ObjectV284FA4: '0x3ec900'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_factories_2f2438
+  source: src/kynapse/factories_2f2438.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f2438'
+    symbol: CreateObject56980__Fv
+    size: 152
+    status: asm
+    reason: labels
+  externs:
+    __11Object56980: '0x2f24d0'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_2f33e8
+  source: src/kynapse/factories_2f33e8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f33e8'
+    symbol: CreateObjectV285188__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$13ObjectV285188: '0x3edc38'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_factories_2f3600
+  source: src/kynapse/factories_2f3600.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f3600'
+    symbol: CreateObject5CD50__Fi
+    size: 168
+    status: asm
+    reason: labels
+  externs:
+    __11Object5CD50i: '0x2f36a8'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_2f4bc0
+  source: src/kynapse/factories_2f4bc0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f4bc0'
+    symbol: CreateObject59AC0__Fv
+    size: 152
+    status: asm
+    reason: labels
+  externs:
+    __11Object59AC0: '0x2f4c58'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_2fec10
+  source: src/kynapse/factories_2fec10.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2fec10'
+    symbol: CreateObject619F0__Fi
+    size: 168
+    status: asm
+    reason: labels
+  externs:
+    __11Object619F0i: '0x2fecb8'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_305538
+  source: src/kynapse/factories_305538.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x305538'
+    symbol: CreateObject62D40__Fi
+    size: 168
+    status: asm
+    reason: labels
+  externs:
+    __11Object62D40i: '0x3055e0'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_factories_30ea38
+  source: src/kynapse/factories_30ea38.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x30ea38'
+    symbol: CreateObject67FC0__Fi
+    size: 168
+    status: asm
+    reason: labels
+  externs:
+    __11Object67FC0i: '0x30fdf8'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_forwarders_2e1038
+  source: src/kynapse/forwarders_2e1038.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e1038'
+    symbol: Entity_ApplyA__FP12EntityObjectii
+    size: 28
+    status: source
+  externs:
+    ApplyA__12EntityObjectii: '0x2ea388'
+- name: kynapse_forwarders_2e1078
+  source: src/kynapse/forwarders_2e1078.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e1078'
+    symbol: Entity_ApplyC__FP12EntityObjectii
+    size: 28
+    status: source
+  externs:
+    ApplyC__12EntityObjectii: '0x2ea610'
+- name: kynapse_forwarders_2e1280
+  source: src/kynapse/forwarders_2e1280.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e1280'
+    symbol: Entity_Query__FP12EntityObjecti
+    size: 44
+    status: source
+  externs:
+    Query__12EntityObjecti: '0x2ead58'
+- name: kynapse_grid_393320
+  source: src/kynapse/grid_393320.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x393320'
+    symbol: AllocateFlags__4GridPC10GridSource
+    size: 120
+    status: source
+  - addr: '0x393398'
+    symbol: Classify__4GridP8GridCell
+    size: 84
+    status: source
+  - addr: '0x3933f0'
+    symbol: AllocateValues__4GridPC10GridSource
+    size: 128
+    status: source
+  externs:
+    Kaim_TestPoints__FPC4Vec3T0ii: '0x2e27d0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_host_2850c0_2f4b50
+  source: src/kynapse/host_2850c0_2f4b50.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f4b50'
+    symbol: Notify__Q24Kaim10Host2850C0Pv
+    size: 44
+    status: source
+  externs:
+    Notify__16ListenerRegistryPvT1: '0x2f5ae0'
+- name: kynapse_index_queries_2f34b0
+  source: src/kynapse/index_queries_2f34b0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f34b0'
+    symbol: Resolve__Q24Kaim8IdHolderPQ24Kaim10NameSource
+    size: 108
+    status: asm
+    reason: extra
+  externs:
+    FindByClass__Q24Kaim12EntityObjectPQ24Kaim9ClassInfo: '0x2ec058'
+    IdByName__Q24Kaim8ItemListPCc: '0x2f2f58'
+    _4Kaim$gEngine: '0x3c9ed4'
+    _4Kaim$gTypeRegistryClass: '0x452158'
+- name: kynapse_label_2df650
+  source: src/kynapse/label_2df650.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2df650'
+    symbol: SetChanged__5Labelc
+    size: 8
+    status: source
+- name: kynapse_leaf_functions_2d15a0
+  source: src/kynapse/leaf_functions_2d15a0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d15a0'
+    symbol: Kaim_AllIdsValid__Fv
+    size: 108
+    status: source
+  externs:
+    gIdA: '0x44ecd0'
+    gIdB: '0x44ede8'
+    gIdC: '0x44ef00'
+    gIdD: '0x44f018'
+    gIdE: '0x44f130'
+    gIdF: '0x44f248'
+    gIdG: '0x44f360'
+- name: kynapse_leaves2_30d130
+  source: src/kynapse/leaves2_30d130.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x30d130'
+    symbol: Kaim_PairIdsValid__Fv
+    size: 48
+    status: source
+  externs:
+    gIdH: '0x455e18'
+    gIdI: '0x455d00'
+- name: kynapse_leaves2_390038
+  source: src/kynapse/leaves2_390038.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390038'
+    symbol: Vec3_Component__FPvPC4Vec3i
+    size: 40
+    status: source
+- name: kynapse_lookups_2e11a0
+  source: src/kynapse/lookups_2e11a0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e11a0'
+    symbol: Kaim_DestroyEngine__4KaimPQ24Kaim16ReleasableEngine
+    size: 104
+    status: source
+  externs:
+    _4Kaim$gEngine: '0x3c9ed4'
+    _4Kaim$gEngineSlots: '0x45129c'
+- name: kynapse_lookups_2e1b08
+  source: src/kynapse/lookups_2e1b08.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e1b08'
+    symbol: Sweep__Q24Kaim14ComponentSweep
+    size: 184
+    status: source
+- name: kynapse_misc4_2d5398
+  source: src/kynapse/misc4_2d5398.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d5398'
+    symbol: ResetRange__10RangeOwner
+    size: 20
+    status: asm
+    reason: size
+- name: kynapse_misc4_2dc8a0
+  source: src/kynapse/misc4_2dc8a0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2dc8a0'
+    symbol: FindIndex__8NameListPCcPUi
+    size: 140
+    status: source
+  externs:
+    _stricmp: '0x360838'
+- name: kynapse_misc4_383d48
+  source: src/kynapse/misc4_383d48.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x383d48'
+    symbol: Kaim_NoOp__Fi
+    size: 8
+    status: asm
+    reason: extra
+  - addr: '0x383d50'
+    symbol: Kaim_NoOp__Fi
+    size: 8
+    status: asm
+    reason: extra
+- name: kynapse_misc4_389200
+  source: src/kynapse/misc4_389200.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389200'
+    symbol: GetPosition__13PositionOwner
+    size: 8
+    status: source
+- name: kynapse_misc4_38efa8
+  source: src/kynapse/misc4_38efa8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38efa8'
+    symbol: SetFlag__9FlagOwnerb
+    size: 8
+    status: source
+- name: kynapse_misc5_2f3520
+  source: src/kynapse/misc5_2f3520.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f3520'
+    symbol: GetField__C9TableView
+    size: 12
+    status: source
+- name: kynapse_misc6_3053f0
+  source: src/kynapse/misc6_3053f0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x3053f0'
+    symbol: Kaim_ApplyToTarget__FiP6Target
+    size: 52
+    status: source
+  - addr: '0x305428'
+    symbol: MarkDirty__5Moveri
+    size: 12
+    status: source
+- name: kynapse_misc6_393940
+  source: src/kynapse/misc6_393940.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x393940'
+    symbol: MarkDirtyNow__5Mover
+    size: 12
+    status: source
+- name: kynapse_misc7_30ba10
+  source: src/kynapse/misc7_30ba10.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x30ba10'
+    symbol: Rewind__8Cursor94
+    size: 8
+    status: source
+- name: kynapse_misc8_2e4ca8
+  source: src/kynapse/misc8_2e4ca8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e4ca8'
+    symbol: RunTarget__9Forwarder
+    size: 52
+    status: source
+- name: kynapse_nearest_node_3921a0
+  source: src/kynapse/nearest_node_3921a0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x3921a0'
+    symbol: Begin__20NearestSimpleVisitorP9NodeGraph
+    size: 20
+    status: asm
+    reason: extern
+  unbound:
+  - Consider__20NearestSimpleVisitorP7NavNode
+  - __builtin_delete
+  - __rtti_si
+  - __rtti_user
+- name: kynapse_nearest_node_392a50
+  source: src/kynapse/nearest_node_392a50.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x392a50'
+    symbol: Begin__18NearestNodeVisitorP9NodeGraph
+    size: 24
+    status: asm
+    reason: extern
+  unbound:
+  - Consider__18NearestNodeVisitorP7NavNode
+  - __builtin_delete
+  - __rtti_si
+  - __rtti_user
+- name: kynapse_owned_arrays_2df8c8
+  source: src/kynapse/owned_arrays_2df8c8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2df8c8'
+    symbol: __Q24Kaim9BufferAt4
+    size: 28
+    status: asm
+    reason: extern
+  externs:
+    __throw: '0x292b40'
+    _vt$Q24Kaim9BufferAt4: '0x3e6888'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+  unbound:
+  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementA
+  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementB
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementAZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementBZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementCZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementDZQ24Kaim5NodeD
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementEZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementFZQ24Kaim10SharedNode
+  - __rtti_si
+  - __rtti_user
+- name: kynapse_owned_arrays_2dfc38
+  source: src/kynapse/owned_arrays_2dfc38.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2dfc38'
+    symbol: _$_Q24Kaim16PointerBankOwner
+    size: 208
+    status: asm
+    reason: section
+  externs:
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_owned_arrays_2e3408
+  source: src/kynapse/owned_arrays_2e3408.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e3408'
+    symbol: __Q24Kaim12ChildBuffers
+    size: 52
+    status: asm
+    reason: extern
+  externs:
+    __throw: '0x292b40'
+    _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+  unbound:
+  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementA
+  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementB
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementAZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementBZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementCZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementDZQ24Kaim5NodeD
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementEZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementFZQ24Kaim10SharedNode
+  - __rtti_si
+  - __rtti_user
+- name: kynapse_owned_arrays_2e34b8
+  source: src/kynapse/owned_arrays_2e34b8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e34b8'
+    symbol: _$_Q24Kaim12ChildBuffers
+    size: 192
+    status: asm
+    reason: section
+  externs:
+    DeleteChildren__Q24Kaim12ChildBuffers: '0x2e37a0'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_owned_arrays_2e37a0
+  source: src/kynapse/owned_arrays_2e37a0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e37a0'
+    symbol: DeleteChildren__Q24Kaim12ChildBuffers
+    size: 132
+    status: asm
+    reason: extern
+  externs:
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+  unbound:
+  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementA
+  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementB
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementAZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementBZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementCZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementDZQ24Kaim5NodeD
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementEZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementFZQ24Kaim10SharedNode
+  - __rtti_si
+  - __rtti_user
+- name: kynapse_owned_arrays_2e9280
+  source: src/kynapse/owned_arrays_2e9280.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e9280'
+    symbol: _$_Q24Kaim10BufferTrio
+    size: 164
+    status: asm
+    reason: section
+  externs:
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_owned_arrays_2f2578
+  source: src/kynapse/owned_arrays_2f2578.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f2578'
+    symbol: _$_Q24Kaim9PoolArray
+    size: 228
+    status: asm
+    reason: section
+  externs:
+    ReleaseSharedPool__4Kaimv: '0x2ed1e8'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_owned_arrays_2f32c0
+  source: src/kynapse/owned_arrays_2f32c0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f32c0'
+    symbol: _$_Q24Kaim9SlotOwner
+    size: 216
+    status: asm
+    reason: section
+  externs:
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_owned_arrays_2fb558
+  source: src/kynapse/owned_arrays_2fb558.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2fb558'
+    symbol: __Q24Kaim10BufferQuad
+    size: 52
+    status: asm
+    reason: extern
+  externs:
+    __throw: '0x292b40'
+    _vt$Q24Kaim10BufferQuad: '0x3ee580'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+  unbound:
+  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementA
+  - _$_Q24Kaimt10OwnedArray1ZQ24Kaim8ElementB
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementAZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementBZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementCZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementDZQ24Kaim5NodeD
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementEZQ24Kaim10SharedNode
+  - _$_Q24Kaimt11ArrayHolder2ZQ24Kaim13ArrayElementFZQ24Kaim10SharedNode
+  - __rtti_si
+  - __rtti_user
+- name: kynapse_owned_arrays_2fd800
+  source: src/kynapse/owned_arrays_2fd800.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2fd800'
+    symbol: _$_Q24Kaim15ShortBlockTable
+    size: 196
+    status: asm
+    reason: section
+  externs:
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_owned_arrays_2feb08
+  source: src/kynapse/owned_arrays_2feb08.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2feb08'
+    symbol: _$_Q24Kaim10BlockTable
+    size: 196
+    status: asm
+    reason: section
+  externs:
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_owned_arrays_393288
+  source: src/kynapse/owned_arrays_393288.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x393288'
+    symbol: _$_Q24Kaim10BufferPair
+    size: 148
+    status: asm
+    reason: section
+  externs:
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_pair_owner_30fdf8
+  source: src/kynapse/pair_owner_30fdf8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x30fdf8'
+    symbol: __9PairOwneri
+    size: 160
+    status: source
+  externs:
+    __6Taggedi: '0x2e75b8'
+    _vt$9PairOwner: '0x3f13f8'
+    gPairOwnerCount: '0x3ce5ac'
+- name: kynapse_parameter_classes_2d7970
+  source: src/kynapse/parameter_classes_2d7970.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d7970'
+    symbol: CreateParameter284828__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter284828: '0x3e3d10'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d7af8
+  source: src/kynapse/parameter_classes_2d7af8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d7af8'
+    symbol: CreateParameter284808__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter284808: '0x3e3f30'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d7c80
+  source: src/kynapse/parameter_classes_2d7c80.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d7c80'
+    symbol: CreateParameter2847EC__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter2847EC: '0x3e4070'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d7e08
+  source: src/kynapse/parameter_classes_2d7e08.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d7e08'
+    symbol: CreateParameter2846A0__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter2846A0: '0x3e41b0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d7f90
+  source: src/kynapse/parameter_classes_2d7f90.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d7f90'
+    symbol: CreateParameter2847AC__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter2847AC: '0x3e42f0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d8138
+  source: src/kynapse/parameter_classes_2d8138.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d8138'
+    symbol: CreateParameter2846C4__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter2846C4: '0x3e4480'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d82c0
+  source: src/kynapse/parameter_classes_2d82c0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d82c0'
+    symbol: CreateParameter2847CC__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter2847CC: '0x3e45c0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d86a8
+  source: src/kynapse/parameter_classes_2d86a8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d86a8'
+    symbol: CreateParameter28486C__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter28486C: '0x3e4700'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d8828
+  source: src/kynapse/parameter_classes_2d8828.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d8828'
+    symbol: CreateParameter28484C__Fv
+    size: 104
+    status: source
+  externs:
+    _vt$15Parameter28484C: '0x3e4920'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d89b8
+  source: src/kynapse/parameter_classes_2d89b8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d89b8'
+    symbol: CreateParameter284768__Fv
+    size: 104
+    status: source
+  externs:
+    _vt$15Parameter284768: '0x3e4a60'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d8b48
+  source: src/kynapse/parameter_classes_2d8b48.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d8b48'
+    symbol: CreateParameter284928__Fv
+    size: 104
+    status: source
+  externs:
+    _vt$15Parameter284928: '0x3e4ba0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d8cd8
+  source: src/kynapse/parameter_classes_2d8cd8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d8cd8'
+    symbol: CreateParameter284900__Fv
+    size: 104
+    status: source
+  externs:
+    _vt$15Parameter284900: '0x3e4ce0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d9000
+  source: src/kynapse/parameter_classes_2d9000.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d9000'
+    symbol: CreateParameter2848DC__Fv
+    size: 104
+    status: source
+  externs:
+    _vt$15Parameter2848DC: '0x3e4f60'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d94c8
+  source: src/kynapse/parameter_classes_2d94c8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d94c8'
+    symbol: CreateParameter28478C__Fv
+    size: 116
+    status: source
+  externs:
+    _vt$15Parameter28478C: '0x3e5320'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d9650
+  source: src/kynapse/parameter_classes_2d9650.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d9650'
+    symbol: CreateParameter28488C__Fv
+    size: 104
+    status: source
+  externs:
+    _vt$15Parameter28488C: '0x3e5460'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d9b98
+  source: src/kynapse/parameter_classes_2d9b98.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d9b98'
+    symbol: CreateParameter2849BC__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter2849BC: '0x3e5848'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d9d20
+  source: src/kynapse/parameter_classes_2d9d20.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d9d20'
+    symbol: CreateParameter284998__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter284998: '0x3e5988'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2d9eb0
+  source: src/kynapse/parameter_classes_2d9eb0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d9eb0'
+    symbol: CreateParameter284974__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter284974: '0x3e5b18'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_2da040
+  source: src/kynapse/parameter_classes_2da040.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2da040'
+    symbol: CreateParameter28494C__Fv
+    size: 112
+    status: source
+  externs:
+    _vt$15Parameter28494C: '0x3e5ca8'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+- name: kynapse_parameter_classes_3898e0
+  source: src/kynapse/parameter_classes_3898e0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x3898e0'
+    symbol: GetClassInfo__C15Parameter284828
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4870: '0x44f478'
+- name: kynapse_parameter_classes_389a90
+  source: src/kynapse/parameter_classes_389a90.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389a90'
+    symbol: GetClassInfo__C15Parameter284808
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4758: '0x44f590'
+- name: kynapse_parameter_classes_389b58
+  source: src/kynapse/parameter_classes_389b58.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389b58'
+    symbol: GetClassInfo__C15Parameter2847EC
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4640: '0x44f6a8'
+- name: kynapse_parameter_classes_389c20
+  source: src/kynapse/parameter_classes_389c20.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389c20'
+    symbol: GetClassInfo__C15Parameter2846A0
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B3B50: '0x44f7c0'
+- name: kynapse_parameter_classes_389ce8
+  source: src/kynapse/parameter_classes_389ce8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389ce8'
+    symbol: GetClassInfo__C15Parameter2847AC
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4410: '0x44f8d8'
+- name: kynapse_parameter_classes_389de0
+  source: src/kynapse/parameter_classes_389de0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389de0'
+    symbol: GetClassInfo__C15Parameter2846C4
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B3C68: '0x44f9f0'
+- name: kynapse_parameter_classes_389ea8
+  source: src/kynapse/parameter_classes_389ea8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389ea8'
+    symbol: GetClassInfo__C15Parameter2847CC
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4528: '0x44fb08'
+- name: kynapse_parameter_classes_389f70
+  source: src/kynapse/parameter_classes_389f70.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x389f70'
+    symbol: GetClassInfo__C15Parameter28486C
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4AA0: '0x44fc20'
+- name: kynapse_parameter_classes_38a118
+  source: src/kynapse/parameter_classes_38a118.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a118'
+    symbol: GetClassInfo__C15Parameter28484C
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4988: '0x44fd38'
+- name: kynapse_parameter_classes_38a210
+  source: src/kynapse/parameter_classes_38a210.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a210'
+    symbol: GetClassInfo__C15Parameter284768
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B41E0: '0x44fe50'
+- name: kynapse_parameter_classes_38a308
+  source: src/kynapse/parameter_classes_38a308.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a308'
+    symbol: GetClassInfo__C15Parameter284928
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B5018: '0x44ff68'
+- name: kynapse_parameter_classes_38a400
+  source: src/kynapse/parameter_classes_38a400.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a400'
+    symbol: GetClassInfo__C15Parameter284900
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4F00: '0x450080'
+- name: kynapse_parameter_classes_38a508
+  source: src/kynapse/parameter_classes_38a508.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a508'
+    symbol: GetClassInfo__C15Parameter284748
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B40C8: '0x450198'
+- name: kynapse_parameter_classes_38a5c8
+  source: src/kynapse/parameter_classes_38a5c8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a5c8'
+    symbol: GetClassInfo__C15Parameter2848DC
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4DE8: '0x4502b0'
+- name: kynapse_parameter_classes_38a6e8
+  source: src/kynapse/parameter_classes_38a6e8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a6e8'
+    symbol: GetClassInfo__C15Parameter284708
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B3E98: '0x4503c8'
+- name: kynapse_parameter_classes_38a7c8
+  source: src/kynapse/parameter_classes_38a7c8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a7c8'
+    symbol: GetClassInfo__C15Parameter284728
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B3FB0: '0x4504e0'
+- name: kynapse_parameter_classes_38a890
+  source: src/kynapse/parameter_classes_38a890.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a890'
+    symbol: GetClassInfo__C15Parameter28478C
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B42F8: '0x4505f8'
+- name: kynapse_parameter_classes_38a950
+  source: src/kynapse/parameter_classes_38a950.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38a950'
+    symbol: GetClassInfo__C15Parameter28488C
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4BB8: '0x450710'
+- name: kynapse_parameter_classes_38aa58
+  source: src/kynapse/parameter_classes_38aa58.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38aa58'
+    symbol: GetClassInfo__C15Parameter2848B4
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B4CD0: '0x450828'
+- name: kynapse_parameter_classes_38ab68
+  source: src/kynapse/parameter_classes_38ab68.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38ab68'
+    symbol: GetClassInfo__C15Parameter2846E4
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B3D80: '0x450940'
+- name: kynapse_parameter_classes_38ac28
+  source: src/kynapse/parameter_classes_38ac28.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38ac28'
+    symbol: GetClassInfo__C15Parameter2849BC
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B5478: '0x450a58'
+- name: kynapse_parameter_classes_38acf0
+  source: src/kynapse/parameter_classes_38acf0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38acf0'
+    symbol: GetClassInfo__C15Parameter284998
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B5360: '0x450b70'
+- name: kynapse_parameter_classes_38add0
+  source: src/kynapse/parameter_classes_38add0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38add0'
+    symbol: GetClassInfo__C15Parameter284974
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B5248: '0x450c88'
+- name: kynapse_parameter_classes_38aeb0
+  source: src/kynapse/parameter_classes_38aeb0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38aeb0'
+    symbol: GetClassInfo__C15Parameter28494C
+    size: 12
+    status: source
+  externs:
+    gClassInfo2B5130: '0x450da0'
+- name: kynapse_perception_310120
+  source: src/kynapse/perception_310120.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x310120'
+    symbol: GetRecord__10PerceptionP8SlotUser
+    size: 108
+    status: source
+  externs:
+    GetIndex__8SlotUser: '0x2e4c60'
+    Refresh__10PerceptionUi: '0x30f160'
+- name: kynapse_predicates_2d2e48
+  source: src/kynapse/predicates_2d2e48.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d2e48'
+    symbol: IsSet__C7Chain0C
+    size: 32
+    status: source
+  - addr: '0x2d2e68'
+    symbol: HasBoth__C9BothIds60
+    size: 40
+    status: source
+- name: kynapse_predicates_2d35b8
+  source: src/kynapse/predicates_2d35b8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d35b8'
+    symbol: IsSet__C7IsSet0C
+    size: 12
+    status: source
+  - addr: '0x2d35c8'
+    symbol: HasId__C7HasId2C
+    size: 16
+    status: source
+- name: kynapse_predicates_2d3a68
+  source: src/kynapse/predicates_2d3a68.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d3a68'
+    symbol: IsSet__C7IsSet0C
+    size: 12
+    status: source
+- name: kynapse_predicates_2d5198
+  source: src/kynapse/predicates_2d5198.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d5198'
+    symbol: HasBoth__C9BothIds28
+    size: 40
+    status: source
+- name: kynapse_predicates_2d5238
+  source: src/kynapse/predicates_2d5238.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d5238'
+    symbol: IsSet__C7IsSet50
+    size: 12
+    status: source
+- name: kynapse_predicates_2d63c0
+  source: src/kynapse/predicates_2d63c0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d63c0'
+    symbol: IsSet__C7IsSet0C
+    size: 12
+    status: source
+  - addr: '0x2d63d0'
+    symbol: IsSet__C7IsSet10
+    size: 12
+    status: source
+- name: kynapse_predicates_2d6460
+  source: src/kynapse/predicates_2d6460.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d6460'
+    symbol: IsSet__C7HasLink
+    size: 32
+    status: source
+- name: kynapse_predicates_2d70c0
+  source: src/kynapse/predicates_2d70c0.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d70c0'
+    symbol: IsSet__C7Chain50
+    size: 32
+    status: source
+  - addr: '0x2d70e0'
+    symbol: IsSet__C8Either54
+    size: 40
+    status: source
+  - addr: '0x2d7108'
+    symbol: HasId__C7HasId68
+    size: 16
+    status: source
+- name: kynapse_predicates_2d7690
+  source: src/kynapse/predicates_2d7690.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2d7690'
+    symbol: IsSet__C7IsSet24
+    size: 12
+    status: source
+- name: kynapse_predicates_304d98
+  source: src/kynapse/predicates_304d98.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x304d98'
+    symbol: IsSet__C8IsSet15C
+    size: 12
+    status: source
+  - addr: '0x304da8'
+    symbol: IsSet__C8IsSet160
+    size: 12
+    status: source
+- name: kynapse_predicates_3053c8
+  source: src/kynapse/predicates_3053c8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x3053c8'
+    symbol: Get__C10Flags5F550
+    size: 40
+    status: source
+- name: kynapse_settings_2e3fc8
+  source: src/kynapse/settings_2e3fc8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e3fc8'
+    symbol: __8Settingsii
+    size: 128
+    status: source
+- name: kynapse_small_families_2e9540
+  source: src/kynapse/small_families_2e9540.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e9540'
+    symbol: SetFloatB__15ParameterTablesif
+    size: 44
+    status: asm
+    reason: extra
+  - addr: '0x2e9570'
+    symbol: SetFloatC__15ParameterTablesif
+    size: 44
+    status: asm
+    reason: extra
+  - addr: '0x2e95a0'
+    symbol: SetIntB__15ParameterTablesii
+    size: 44
+    status: asm
+    reason: extra
+  - addr: '0x2e95d0'
+    symbol: SetFloatA__15ParameterTablesif
+    size: 44
+    status: asm
+    reason: extra
+  - addr: '0x2e9600'
+    symbol: SetFloatC2__15ParameterTablesif
+    size: 44
+    status: asm
+    reason: extra
+  externs:
+    _stricmp: '0x360838'
+- name: kynapse_small_misc_2e1248
+  source: src/kynapse/small_misc_2e1248.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e1248'
+    symbol: Notifiable_TryAccept__FP10NotifiableP8SlotUser
+    size: 56
+    status: asm
+    reason: name
+  externs:
+    Accept__10NotifiablePC8SlotUser: '0x2eabb0'
+- name: kynapse_small_misc_2e4188
+  source: src/kynapse/small_misc_2e4188.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e4188'
+    symbol: Kaim_GetFlag__Fv
+    size: 12
+    status: source
+  externs:
+    gFlag: '0x3c87dc'
+- name: kynapse_small_misc_2e9630
+  source: src/kynapse/small_misc_2e9630.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e9630'
+    symbol: GetValue__10FloatTablei
+    size: 20
+    status: source
+- name: kynapse_small_misc_2e9cc8
+  source: src/kynapse/small_misc_2e9cc8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e9cc8'
+    symbol: Kaim_ReleaseService__Fv
+    size: 68
+    status: asm
+    reason: name
+  externs:
+    gService: '0x3c9588'
+- name: kynapse_small_misc_38aed8
+  source: src/kynapse/small_misc_38aed8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38aed8'
+    symbol: Kaim_Nop__Fv
+    size: 8
+    status: source
+- name: kynapse_small_misc_38bb28
+  source: src/kynapse/small_misc_38bb28.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38bb28'
+    symbol: Kaim_Nop__Fv
+    size: 8
+    status: source
+- name: kynapse_small_misc_38e7b8
+  source: src/kynapse/small_misc_38e7b8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x38e7b8'
+    symbol: Kaim_Nop__Fv
+    size: 8
+    status: source
+- name: kynapse_sound_pool_30e100
+  source: src/kynapse/sound_pool_30e100.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x30e100'
+    symbol: Restart__Q24Kaim9SoundPool
+    size: 40
+    status: source
+  externs:
+    Reset__Q24Kaim9SoundPool: '0x30e400'
+    _4Kaim$gNow: '0x3c958c'
+- name: kynapse_sound_pool_30e6b8
+  source: src/kynapse/sound_pool_30e6b8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x30e6b8'
+    symbol: GetCounter__Q24Kaim9SoundPoolUi
+    size: 108
+    status: source
+- name: kynapse_sound_pool_394c10
+  source: src/kynapse/sound_pool_394c10.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x394c10'
+    symbol: GetClassInfo__Q24Kaim9SoundPool
+    size: 12
+    status: source
+  externs:
+    _4Kaim$gClassInfo2BE268: '0x455d00'
+- name: kynapse_source_objects_2f36a8
+  source: src/kynapse/source_objects_2f36a8.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f36a8'
+    symbol: __Q24Kaim11SquareTablePQ24Kaim11Description
+    size: 200
+    status: asm
+    reason: section
+  externs:
+    __throw: '0x292b40'
+    _vt$Q24Kaim11SquareTable: '0x3ede90'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_tiny3_390758
+  source: src/kynapse/tiny3_390758.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x390758'
+    symbol: NoValue__Q24Kaim5ProbeiiiPi
+    size: 12
+    status: source
+- name: kynapse_tracker_2f4c58
+  source: src/kynapse/tracker_2f4c58.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f4c58'
+    symbol: __7Tracker
+    size: 156
+    status: asm
+    reason: section
+  externs:
+    Entity_ApplyA__FP12EntityObjectii: '0x2e1038'
+    Entity_ApplyC__FP12EntityObjectii: '0x2e1078'
+    TrackerOnAdded__FP7TrackedP7Tracker: '0x2f5868'
+    TrackerOnRemoved__FP7TrackedP7Tracker: '0x2f58e8'
+    __throw: '0x292b40'
+    _vt$7Tracker: '0x3ee398'
+    gEngine: '0x3c9ed4'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_tracker_2f4e90
+  source: src/kynapse/tracker_2f4e90.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f4e90'
+    symbol: Init__7TrackerPQ24Kaim12ChildBuffers
+    size: 240
+    status: source
+  externs:
+    ConfigureAll__7TrackerPQ24Kaim12ChildBuffers: '0x2e74e0'
+    FindByClass__12EntityObjectP9ClassInfo: '0x2ec058'
+    gEngine: '0x3c9ed4'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    gTypeRegistryClass: '0x452158'

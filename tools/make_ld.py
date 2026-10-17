@@ -10,7 +10,7 @@ defined as aliases of the compiled symbols, so assembly callers link against the
 Writes build/<slug>/link.ld and build/<slug>/objects.json (name, kind, source, sections).
 Usage: make_ld.py VARIANT_SLUG [WORK]
 """
-import json, sys
+import bisect, json, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -29,16 +29,59 @@ def main():
     objects = {name: dict(o, name=name) for name, o in placement['objects'].items()}
     func_by_name = {f['name']: f for f in placement['functions']}
     func_by_addr = {f['addr']: f for f in placement['functions']}
+    labels = json.loads((build / 'labels.json').read_text())
+    label_addrs = [a for a, _ in labels]
+    secs = [(r['name'], r['addr'], r['addr'] + r['orig_size']) for r in layout['sections']
+            if r['source'] == 'linked' and r['orig_size']]
+
+    def resolve(addr):
+        """Express an original address as `label + delta` with the nearest label in the same section."""
+        sec = next(s for s in secs if s[1] <= addr < s[2])
+        i = bisect.bisect_right(label_addrs, addr) - 1
+        while i >= 0 and (label_addrs[i] < sec[1] or labels[i][1].startswith(('.', '$'))):
+            i -= 1
+        if i < 0:
+            raise SystemExit('no label before %#x' % addr)
+        a, name = labels[i]
+        return name if a == addr else '%s + 0x%X' % (name, addr - a)
+
     replaced, aliases, problems = {}, [], []
+    # Symbol names. A compiled unit defines its functions under the exact mangled name; the image's own names
+    # (func_XXXXXXXX, referenced by assembly) become aliases of those. The same mangled name can be defined at several
+    # addresses (identical inline copies), and the name a unit leaves undefined is bound to one original address, so a
+    # name that would be defined twice or bound to two addresses is made unique per address with a `$XXXXXX` suffix.
+    live_units = []
     for u in load_units():
         src = [f for f in u['functions'] if f.get('status') == 'source']
-        if not src:
-            continue
+        if src:
+            live_units.append((u, src))
+    defs, binds = {}, {}
+    for u, src in live_units:
+        for f in src:
+            defs.setdefault(f['symbol'], set()).add(f['addr'])
+        for name, addr in u['externs'].items():
+            binds.setdefault(name, set()).add(addr)
+    redefine = {}
+    for u, src in live_units:
+        r = redefine.setdefault(u['name'], {})
+        for f in src:
+            f['link_name'] = f['symbol']
+            if len(defs[f['symbol']]) > 1 or f['symbol'] in binds:
+                f['link_name'] = '%s$%X' % (f['symbol'], f['addr'])
+                r[f['symbol']] = f['link_name']
+    defined = {f['link_name'] for _, src in live_units for f in src}
+    for u, src in live_units:
+        r = redefine[u['name']]
+        for name, addr in sorted(u['externs'].items()):
+            if name in defs or len(binds[name]) > 1:
+                r[name] = '%s$%X' % (name, addr)
+            if r.get(name, name) not in defined:      # else a unit already defines it, at this very address
+                aliases.append('%s = %s;' % (r.get(name, name), resolve(addr)))
+    index = {f['addr']: i for i, f in enumerate(placement['functions'])}
+    for u, src in live_units:
         uname = 'units/' + u['name']
         objects[uname] = dict(name=uname, kind='cc', src=u['source'], compiler=u['compiler'], flags=u['flags'])
-        order = [f['addr'] for f in placement['functions'] if f['addr'] in {x['addr'] for x in src}]
-        index = {f['addr']: i for i, f in enumerate(placement['functions'])}
-        positions = [index[a] for a in order]
+        positions = sorted(index[f['addr']] for f in src if f['addr'] in index)
         if positions != list(range(positions[0], positions[0] + len(positions))):
             problems.append('%s: source functions are not contiguous in the original order' % u['name'])
         for f in src:
@@ -46,11 +89,10 @@ def main():
                 problems.append('%s: %#x is not a function start' % (u['name'], f['addr']))
                 continue
             replaced[func_by_addr[f['addr']]['name']] = uname
-            if f.get('symbol'):
-                aliases.append('%s = %s;' % (func_by_addr[f['addr']]['name'], f['symbol']))
-        # an object also carries the function's migrated constants, in the same order slot
+            aliases.append('%s = %s;' % (func_by_addr[f['addr']]['name'], f['link_name']))
     if problems:
         raise SystemExit('\n'.join(problems))
+    aliases = list(dict.fromkeys(aliases))
     # Input order. ld resolves a script with one statement per object quadratically (hours for 12,000 objects), so
     # the migrated sections are placed by sorted input-section names instead: every input section is called
     # `<section>.<8 hex digits of its original address>` and `*(SORT_BY_NAME(<section>.*))` restores the order.
@@ -105,6 +147,7 @@ def main():
         o = dict(objects[n])
         if n in rename:
             o['rename'] = rename[n]
+            o['redefine'] = redefine.get(n[len('units/'):], {})
         listing.append(o)
     (build / 'objects.json').write_text(json.dumps(listing, indent=1))
     print('link.ld: %d objects (%d replaced by source)' % (len(listing), len(replaced)))

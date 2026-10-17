@@ -40,3 +40,27 @@ def normalize_object(data):
                         info, = struct.unpack_from('<I', data, o + 4)
                         struct.pack_into('<I', out, o + 4, (new_index[info >> 8] << 8) | (info & 0xFF))
     return bytes(out)
+
+
+def undefine_dropped(data, keep):
+    """Make the global symbols defined in sections the link will not place undefined, so that they resolve to the
+    original definitions elsewhere in the image (vtables, unwind data and other duplicates a compiled unit emits).
+    `keep` is the set of section names that will be linked; only allocated sections outside it are dropped."""
+    shoff, = struct.unpack_from('<I', data, 32)
+    shentsize, shnum, shstrndx = struct.unpack_from('<HHH', data, 46)
+    out = bytearray(data)
+    hdrs = [struct.unpack_from('<IIIIIIIIII', data, shoff + i * shentsize) for i in range(shnum)]
+    names = data[hdrs[shstrndx][4]:hdrs[shstrndx][4] + hdrs[shstrndx][5]]
+    name = lambda i: names[hdrs[i][0]:].split(b'\0', 1)[0].decode()
+    dropped = {i for i in range(1, shnum) if hdrs[i][2] & 2 and name(i) not in keep}
+    count = 0
+    for i, h in enumerate(hdrs):
+        if h[1] != 2:
+            continue
+        for k in range(h[5] // 16):
+            o = h[4] + k * 16
+            n, value, size, info, other, shndx = struct.unpack_from('<IIIBBH', data, o)
+            if shndx in dropped and (info >> 4) != 0:
+                struct.pack_into('<IIIBBH', out, o, n, 0, 0, info & 0xF0, other, 0)
+                count += 1
+    return bytes(out), count

@@ -347,6 +347,19 @@ def main():
         stats[sec] = dict(why=why, total=total, migrated=moved, functions=sum(1 for o in func_runs.values() if sec in o),
                           shared_runs=sum(1 for r in final[sec] if r['owner'] is None))
     placement['stats'] = stats
+    # every global label with its address, for resolving external references of compiled code
+    lab = re.compile(r'^\s*(?:glabel|jlabel|alabel|dlabel|ehlabel)\s+(\S+)')
+    labels_out = {}
+    sources = [p for p in raw] + [l for p in sorted((asm / 'data').glob('*.s')) for l in p.read_text().split('\n')]
+    for l in sources:
+        m = lab.match(l)
+        if m and re.search(r'[0-9A-F]{8}$', m.group(1)):
+            labels_out[int(m.group(1)[-8:], 16)] = m.group(1)
+    for ln in (build / 'extra_labels.txt').read_text().split('\n'):
+        if ln.strip():
+            n, a = ln.split()
+            labels_out.setdefault(int(a, 16), n)
+    (build / 'labels.json').write_text(json.dumps(sorted(labels_out.items())))
     (build / 'placement.json').write_text(json.dumps(placement, indent=1))
     for sec, v in stats.items():
         print(sec, 'by reason (bytes):', v['why'])

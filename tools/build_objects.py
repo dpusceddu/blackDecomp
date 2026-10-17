@@ -35,8 +35,11 @@ def main():
     files = {}   # archive name -> path
     plan = dict(assemble=[], compile=[], rename=[], pack='newobjs.tgz', out='linked.elf')
     keys, have = {}, 0
+    compile_only = '--compile-only' in sys.argv   # build the missing source units, do not link
     for o in objects:
         name = o['name']
+        if compile_only and o['kind'] == 'asm':
+            continue
         if o['kind'] == 'asm':
             src = ROOT / o['src']
             data = src.read_bytes()
@@ -55,11 +58,12 @@ def main():
             job = dict(src=o['src'], obj='obj/%s.o' % name, compiler=o['compiler'],
                        args=list(o['flags']) + ['-I', 'include'])
         keys[name] = key
-        if o.get('rename'):
-            plan['rename'].append(dict(obj='obj/%s.o' % name, sections=o['rename']))
+        if o.get('rename') and not compile_only:
+            plan['rename'].append(dict(obj='obj/%s.o' % name, sections=o['rename'], redefine=o.get('redefine', {})))
         cached = cache / (key + '.o')
         if cached.exists():
-            files['obj/%s.o' % name] = cached
+            if not compile_only:
+                files['obj/%s.o' % name] = cached
             have += 1
         else:
             for d in deps:
@@ -70,9 +74,10 @@ def main():
     files['include/macro.inc'] = ROOT / 'include/macro.inc'
     files['link.ld'] = build / 'link.ld'
     files['tools/elfobj.py'] = ROOT / 'tools/elfobj.py'
-    plan['link'] = ['-m', 'elf32ltsmip', '-nostdlib', '-static', '-z', 'norelro', '-z', 'noseparate-code',
-                    '--no-warn-rwx-segments', '-T', 'link.ld', '-Map', 'linked.map', '-o', 'linked.elf'] + \
-                   ['obj/%s.o' % o['name'] for o in objects]
+    if not compile_only:
+        plan['link'] = ['-m', 'elf32ltsmip', '-nostdlib', '-static', '-z', 'norelro', '-z', 'noseparate-code',
+                        '--no-warn-rwx-segments', '-T', 'link.ld', '-Map', 'linked.map', '-o', 'linked.elf'] + \
+                       ['obj/%s.o' % o['name'] for o in objects]
     # the linker script lists objects in section order; ld takes the file order from the script, the command line
     # only has to name every file.
     buf = io.BytesIO()
@@ -86,9 +91,15 @@ def main():
     cmd = [sys.executable, str(ROOT / 'tools/sandbox.py'), str(ROOT / 'tools/build_job.py'), '--timeout', '1800',
            '--file', 'inputs.tgz=' + str(build / 'inputs.tgz'), '--file', 'plan.json=' + str(build / 'plan.json'),
            '--out', 'linked.elf=' + str(build / 'linked.elf'), '--out', 'linked.map=' + str(build / 'link.map'),
-           '--out', 'newobjs.tgz=' + str(build / 'newobjs.tgz')]
+           '--out', 'newobjs.tgz=' + str(build / 'newobjs.tgz'), '--out', 'results.json=' + str(build / 'results.json')]
     (build / 'newobjs.tgz').unlink(missing_ok=True)
-    rc = subprocess.run(cmd).returncode
+    (build / 'results.json').unlink(missing_ok=True)
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    rc = r.returncode
+    sys.stdout.write(r.stdout[-20000:])
+    sys.stderr.write(r.stderr[-5000:])
+    (build / 'link.log').write_text(r.stdout + r.stderr)
+    (build / 'objects_cache.json').write_text(json.dumps({n: 'cache/%s.o' % k for n, k in keys.items()}))
     new = 0
     if (build / 'newobjs.tgz').exists():
         with tarfile.open(build / 'newobjs.tgz') as tar:
@@ -97,7 +108,7 @@ def main():
                 if name in keys and m.isfile():
                     (cache / (keys[name] + '.o')).write_bytes(tar.extractfile(m).read())
                     new += 1
-    if rc == 0:   # drop cached objects nothing refers to any more
+    if rc == 0 and not compile_only:   # drop cached objects nothing refers to any more
         live = {k + '.o' for k in keys.values()}
         stale = [p for p in cache.iterdir() if p.name not in live]
         if len(stale) > 500:

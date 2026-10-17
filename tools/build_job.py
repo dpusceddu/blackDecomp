@@ -58,15 +58,19 @@ def compile_one(job):
 
 failed = 0
 built = []
+results = {}
 with ThreadPoolExecutor(2) as pool:
     for src, rc, msg in pool.map(assemble, plan.get('assemble', [])):
         if rc or msg:
             print('AS %s rc=%d\n%s' % (src, rc, '\n'.join(msg.split('\n')[:40])))
         failed += bool(rc)
+        results[src] = dict(rc=rc, msg=msg)
     for src, rc, msg in pool.map(compile_one, plan.get('compile', [])):
         if rc or msg:
             print('CC %s rc=%d\n%s' % (src, rc, '\n'.join(msg.split('\n')[:80])))
         failed += bool(rc)
+        results[src] = dict(rc=rc, msg=msg)
+json.dump(results, open('results.json', 'w'))
 built = [o for _, o in plan.get('assemble', [])] + [j['obj'] for j in plan.get('compile', [])]
 if plan.get('pack'):
     with tarfile.open(plan['pack'], 'w:gz', compresslevel=1) as tar:
@@ -77,9 +81,15 @@ if failed:
     print('%d jobs failed' % failed)
     sys.exit(1)
 for r in plan.get('rename', []):   # give a unit's sections the sort key of the slot they take over
+    from elfobj import undefine_dropped
+    raw = open(r['obj'], 'rb').read()
+    edited, n = undefine_dropped(raw, set(r['sections']))   # duplicates in sections that are not linked
+    open(r['obj'], 'wb').write(edited)
     args = ['mipsel-linux-gnu-objcopy']
     for old, new in r['sections'].items():
         args += ['--rename-section', '%s=%s' % (old, new)]
+    for old, new in r.get('redefine', {}).items():
+        args += ['--redefine-sym', '%s=%s' % (old, new)]
     p = subprocess.run(args + [r['obj']], capture_output=True, text=True)
     if p.returncode:
         print('objcopy %s: %s' % (r['obj'], p.stderr))
