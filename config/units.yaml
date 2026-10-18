@@ -42642,3 +42642,159 @@ units:
     symbol: func_0010F620
     size: 36
     status: source
+- name: kynapse_route_campaign
+  source: src/kynapse/route_campaign.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2fecb8'
+    symbol: func_002FECB8
+    size: 760
+    status: asm
+  - addr: '0x2fefb0'
+    symbol: func_002FEFB0
+    size: 408
+    status: asm
+  - addr: '0x2ff148'
+    symbol: func_002FF148
+    size: 264
+    status: asm
+  - addr: '0x2ff250'
+    symbol: func_002FF250
+    size: 1600
+    status: asm
+  - addr: '0x2ff890'
+    symbol: func_002FF890
+    size: 2532
+    status: asm
+  - addr: '0x300278'
+    symbol: ResolveRequestNode__15AIRouteFollowerP12RouteRequest
+    size: 312
+    status: source
+  - addr: '0x3003b0'
+    symbol: func_003003B0
+    size: 1676
+    status: asm
+  - addr: '0x300a40'
+    symbol: func_00300A40
+    size: 2520
+    status: asm
+  - addr: '0x301418'
+    symbol: func_00301418
+    size: 720
+    status: asm
+  - addr: '0x3016e8'
+    symbol: func_003016E8
+    size: 840
+    status: asm
+  - addr: '0x301a30'
+    symbol: func_00301A30
+    size: 568
+    status: asm
+  - addr: '0x301c68'
+    symbol: func_00301C68
+    size: 248
+    status: asm
+  - addr: '0x301d60'
+    symbol: func_00301D60
+    size: 276
+    status: asm
+  - addr: '0x301e78'
+    symbol: func_00301E78
+    size: 796
+    status: asm
+  - addr: '0x302198'
+    symbol: func_00302198
+    size: 492
+    status: asm
+  - addr: '0x302388'
+    symbol: func_00302388
+    size: 2904
+    status: asm
+  - addr: '0x302ee0'
+    symbol: func_00302EE0
+    size: 1192
+    status: asm
+  - addr: '0x303388'
+    symbol: func_00303388
+    size: 680
+    status: asm
+  - addr: '0x303630'
+    symbol: func_00303630
+    size: 392
+    status: asm
+  - addr: '0x3037b8'
+    symbol: func_003037B8
+    size: 540
+    status: asm
+  - addr: '0x3039d8'
+    symbol: func_003039D8
+    size: 4624
+    status: asm
+  - addr: '0x304be8'
+    symbol: func_00304BE8
+    size: 196
+    status: asm
+  - addr: '0x304cb0'
+    symbol: func_00304CB0
+    size: 116
+    status: asm
+  - addr: '0x304d28'
+    symbol: func_00304D28
+    size: 52
+    status: asm
+  - addr: '0x304d60'
+    symbol: func_00304D60
+    size: 52
+    status: asm
+  - addr: '0x304db8'
+    symbol: IsDefaultCollector__15AIRouteFollower
+    size: 44
+    status: source
+  - addr: '0x304e38'
+    symbol: func_00304E38
+    size: 176
+    status: asm
+  - addr: '0x304f08'
+    symbol: FollowPoint__15AIRouteFollowerPCfP12RouteRequest
+    size: 260
+    status: source
+  - addr: '0x305010'
+    symbol: func_00305010
+    size: 124
+    status: asm
+  - addr: '0x305090'
+    symbol: func_00305090
+    size: 128
+    status: asm
+  - addr: '0x305190'
+    symbol: func_00305190
+    size: 108
+    status: asm
+  - addr: '0x305200'
+    symbol: AIRouteFollower_ResetSegment__FP15AIRouteFollowerPi
+    size: 80
+    status: source
+  - addr: '0x305250'
+    symbol: func_00305250
+    size: 76
+    status: source
+  - addr: '0x3052a0'
+    symbol: func_003052A0
+    size: 156
+    status: asm
+  - addr: '0x305378'
+    symbol: func_00305378
+    size: 80
+    status: source
+  externs:
+    AIRouteFollower_CollectNodeLoose__FP15AIRouteFollowerPCfUiUi: '0x305378'
+    AIRouteFollower_GenerateMove__FP15AIRouteFollowerPfPCf: '0x301a30'
+    ClearActivation__10ActionBank: '0x2dfbf8'
+    FindNextMove__15AIRouteFollowerP10MoveRecordP12RouteRequest: '0x300a40'
+    NavigationGraph_QueryNode__FPCfP5ActorfP15NavigationGraphUiUi: '0x2fbc20'
