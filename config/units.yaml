@@ -39565,8 +39565,7 @@ units:
   - addr: '0x108818'
     symbol: func_00108818
     size: 116
-    status: asm
-    reason: extra
+    status: source
 - name: game_frontend_string_request
   source: src/game/frontend_string_request.cpp
   origin: game
@@ -39581,8 +39580,7 @@ units:
   - addr: '0x108890'
     symbol: func_00108890
     size: 196
-    status: asm
-    reason: extra
+    status: source
 - name: animation_instance_345500
   source: src/tu/animation_instance_345500.cpp
   origin: animation
