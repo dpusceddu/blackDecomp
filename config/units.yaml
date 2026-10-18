@@ -4725,6 +4725,7 @@ units:
     symbol: func_00345508
     size: 8
     status: source
+  owner: wave1-animation
 - name: auto_animation_345bc8
   source: src/auto/animation/345bc8.c
   origin: auto
@@ -4741,6 +4742,7 @@ units:
     symbol: func_00345C78
     size: 108
     status: source
+  owner: wave1-animation
 - name: auto_animation_345e30
   source: src/auto/animation/345e30.c
   origin: auto
@@ -4753,6 +4755,7 @@ units:
     symbol: func_00345E30
     size: 44
     status: source
+  owner: wave1-animation
 - name: auto_animation_345e90
   source: src/auto/animation/345e90.c
   origin: auto
@@ -4765,6 +4768,7 @@ units:
     symbol: func_00345E90
     size: 64
     status: source
+  owner: wave1-animation
 - name: auto_animation_345f28
   source: src/auto/animation/345f28.c
   origin: auto
@@ -4777,6 +4781,7 @@ units:
     symbol: func_00345F28
     size: 112
     status: source
+  owner: wave1-animation
 - name: auto_animation_345fb8
   source: src/auto/animation/345fb8.c
   origin: auto
@@ -4789,6 +4794,7 @@ units:
     symbol: func_00345FB8
     size: 28
     status: source
+  owner: wave1-animation
 - name: tuf_3461d0
   source: src/tu/animation_tu_3461d0.c
   origin: auto
@@ -39565,3 +39571,29 @@ units:
     size: 196
     status: asm
     reason: extra
+- name: animation_instance_345500
+  source: src/tu/animation_instance_345500.cpp
+  origin: animation
+  owner: wave1-animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x345ce8'
+    symbol: func_00345CE8
+    size: 216
+    status: source
+  - addr: '0x345e60'
+    symbol: func_00345E60
+    size: 48
+    status: source
+  - addr: '0x345ed0'
+    symbol: func_00345ED0
+    size: 84
+    status: source
+  - addr: '0x345f98'
+    symbol: func_00345F98
+    size: 32
+    status: source

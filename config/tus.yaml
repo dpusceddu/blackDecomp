@@ -19979,7 +19979,7 @@ tus:
   evidence: [eh, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 8 of 17 functions
+  flags_basis: matched 12 of 17 functions
   data:
     .data: ['0x3d1e18', '0x3d20d0']
     .bss: ['0x45ecb0', '0x45f0c0']
