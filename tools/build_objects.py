@@ -39,8 +39,6 @@ def main():
     compile_only = '--compile-only' in sys.argv   # build the missing source units, do not link
     for o in objects:
         name = o['name']
-        if compile_only and o['kind'] == 'asm':
-            continue
         if o['kind'] == 'asm':
             src = ROOT / o['src']
             data = src.read_bytes()
@@ -59,6 +57,11 @@ def main():
             job = dict(src=o['src'], obj='obj/%s.o' % name, compiler=o['compiler'],
                        args=list(o['flags']) + ['-I', 'include'])
         keys[name] = key
+        if compile_only and o['kind'] == 'asm':
+            # prepare validates natural tail padding against the next real input
+            # section. Keep its current cached-object mapping, without assembling
+            # or packaging assembly in this source-only compilation pass.
+            continue
         if o.get('rename') and not compile_only:
             plan['rename'].append(dict(obj='obj/%s.o' % name, sections=o['rename'], redefine=o.get('redefine', {}), trim=o.get('trim', {})))
         cached = cache / (key + '.o')
