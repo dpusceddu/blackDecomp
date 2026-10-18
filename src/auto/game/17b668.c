@@ -1,0 +1,7 @@
+#include "auto/prelude.h"
+
+extern s32 func_00174210();
+
+s32 func_0017B668(s32 arg0) {
+    return func_00174210(arg0, 0x20);
+}

@@ -1,0 +1,14 @@
+#include "auto/prelude.h"
+
+extern s32 func_0016F9A8();
+extern s32 func_0016EA80();
+extern void func_0016FB48();
+
+s32 func_0016EDF0(void *arg0) {
+    func_0016F9A8();
+    func_0016EA80(arg0 + 0x7C);
+    func_0016EA80(arg0 + 0x88);
+    func_0016FB48();
+    M2C_FIELD(arg0, s8 *, 0x4C) = 1;
+    return 1;
+}

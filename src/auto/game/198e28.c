@@ -1,0 +1,8 @@
+#include "auto/prelude.h"
+
+extern s32 func_00198568();
+
+void func_00198E28(void *arg0) {
+    func_00198568();
+    M2C_FIELD(arg0, s8 *, 0x20) = 0;
+}
