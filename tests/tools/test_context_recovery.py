@@ -150,10 +150,69 @@ class SignatureTests(unittest.TestCase):
         caller = fn([0x0c080000, 0, 0x03e00008, 0], 0x100000,
                     {'0': ['jal', 0x200000, 0, 'func_00200000']})
         caller['size'] = 2048
-        inv = [caller, callee]
+        consumer = fn([0x0c040000, 0, i(0x1f, 5, 2, 0), 0x03e00008, 0], 0x300000,
+                      {'0': ['jal', caller['addr'], 0, caller['name']]})
+        inv = [consumer, caller, callee]
         signatures, links = cr.recover_signatures(inv, {f['addr']: cr.analyze_function(f) for f in inv}, {})
         self.assertEqual(signatures[0x100000]['ret'], 's128')
         self.assertEqual(signatures[0x200000]['ret'], 's128')
+
+
+class WideReturnDemandTests(unittest.TestCase):
+    def infer(self, functions, seeds=None):
+        return cr.recover_signatures(functions,
+            {f['addr']: cr.analyze_function(f) for f in functions}, seeds or {})[0]
+
+    def seed(self, ret, quality=4, params=None):
+        return dict(params=params or [('void *', None)], ret=ret,
+                    quality=quality, cls=None, source='authored.c')
+
+    def test_incidental_vector_copy_is_not_return_abi_evidence(self):
+        f = fn([i(0x1e, 4, 2, 0), i(0x1f, 5, 2, 0), 0x03e00008, 0])
+        row = self.infer([f])[f['addr']]
+        self.assertEqual(row['ret'], 'unknown')
+        self.assertEqual(row['return_evidence']['direct_types']['gpr'], ['s128'])
+        self.assertFalse(row['return_evidence']['gpr_demand'])
+        weak = self.infer([f], {f['addr']: self.seed('s128', 1.5)})[f['addr']]
+        self.assertEqual(weak['ret'], 'unknown')
+        self.assertEqual(weak['return_hint'], 's128')
+
+    def test_source_anchored_vector_return_survives_without_callers(self):
+        f = fn([i(0x1e, 4, 2, 0), 0x03e00008, 0])
+        for typ in ('s128', 'u128'):
+            self.assertEqual(self.infer([f], {f['addr']: self.seed(typ)})[f['addr']]['ret'], typ)
+
+    def test_demand_flows_backward_through_copy_and_tail_wrappers_only(self):
+        getter = fn([i(0x1e, 4, 2, 0), 0x03e00008, 0], 0x300000)
+        for tail in (False, True):
+            words = [0x080c0000, 0] if tail else [0x0c0c0000, 0, 0x03e00008, 0]
+            # Inventory normalizes both direct calls and tail jumps as 'jal'.
+            wrapper = fn(words, 0x200000, {'0': ['jal', getter['addr'], 0, getter['name']]})
+            dead = fn([0x0c0c0000, 0, 0x03e00008, 0], 0x400000,
+                      {'0': ['jal', getter['addr'], 0, getter['name']]})
+            consumer = fn([0x0c080000, 0, i(0x1f, 5, 2, 0), 0x03e00008, 0], 0x100000,
+                          {'0': ['jal', wrapper['addr'], 0, wrapper['name']]})
+            rows = self.infer([consumer, wrapper, getter, dead])
+            self.assertEqual(rows[getter['addr']]['ret'], 's128')
+            self.assertEqual(rows[wrapper['addr']]['ret'], 's128')
+            self.assertEqual(rows[dead['addr']]['ret'], 'unknown')
+            self.assertNotIn('s128', rows[dead['addr']]['params'])
+
+    def test_return_passed_to_typed_sink_is_real_demand(self):
+        sink = fn([0x03e00008, 0], 0x300000)
+        for typ in ('s128', 'f64'):
+            # por copies all 128 bits; daddu suffices for the software double.
+            to_v0 = 0x708014a9 if typ == 's128' else r(4, 0, 2, 0x2d)
+            to_a0 = 0x704024a9 if typ == 's128' else r(2, 0, 4, 0x2d)
+            producer = fn([to_v0, 0x03e00008, 0], 0x200000)
+            caller = fn([0x0c080000, 0, to_a0, 0x0c0c0000, 0, 0x03e00008, 0],
+                        rel={'0': ['jal', producer['addr'], 0, producer['name']],
+                             '3': ['jal', sink['addr'], 0, sink['name']]})
+            rows = self.infer([caller, producer, sink],
+                {sink['addr']: self.seed('void', params=[(typ, None)])})
+            self.assertEqual(rows[producer['addr']]['ret'], typ)
+            self.assertEqual(rows[producer['addr']]['params'][0], typ)
+            self.assertEqual(rows[producer['addr']]['return_evidence']['consumers'], 0)
 
 
 class LayoutTests(unittest.TestCase):

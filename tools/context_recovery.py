@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 6
+VERSION = 7
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -659,6 +659,36 @@ def recover_signatures(inv, analysis, seeds):
             constraints[(a, 'ret', 0)].add(seed['ret'])
         if seed['quality'] >= 2 and seed['ret'] != 'unknown':
             authoritative[(a, 'ret', 0)] = seed['ret']
+    # An lq/sq initialization can leave a vector temporary in v0 on exit.
+    # Its physical width alone does not prove a 128-bit return. Track actual
+    # demand backward through forwarding wrappers; a live callee must not make
+    # an otherwise unused wrapper's leftover return register authoritative.
+    gpr_demand = {a for a, consumers in return_consumers.items()
+                  if any(bank == 'gpr' for _, bank, _ in consumers)}
+    gpr_demand |= {a for a, seed in seeds.items() if seed['quality'] >= 2
+                   and seed['ret'] not in ('unknown', 'void', 'f32')}
+    forwarded = collections.defaultdict(set)
+    for f in inv:
+        a, result = f['addr'], analysis[f['addr']]
+        for gpr, _ in result['returns']:
+            forwarded[a].update(n for kind, n, off in gpr.origins
+                                if kind == 'ret' and not off)
+        for (_, dest, tail), values in result['calls'].items():
+            if dest is None:
+                continue
+            if tail:
+                forwarded[a].add(dest)
+            target = seeds.get(dest)
+            if target and target['quality'] >= 2:
+                for slot, typ in abi_slots(target['params']):
+                    if slot < 8 and slot < len(values) and typ in ('s128', 'u128', 's64', 'u64', 'f64'):
+                        gpr_demand.update(n for kind, n, off in values[slot].origins
+                                          if kind == 'ret' and not off)
+    demand_queue = collections.deque(gpr_demand)
+    while demand_queue:
+        for callee in forwarded[demand_queue.popleft()] - gpr_demand:
+            gpr_demand.add(callee)
+            demand_queue.append(callee)
     links, fixed = set(), collections.defaultdict(set)
     for f in inv:
         a, result = f['addr'], analysis[f['addr']]
@@ -685,7 +715,8 @@ def recover_signatures(inv, analysis, seeds):
         for gpr, fpr in result['returns']:
             banks = [fpr] if known_ret == 'f32' else [gpr] if known_ret and known_ret != 'unknown' else ([gpr] if gpr.origins or gpr.types else [fpr])
             for value in banks:
-                fixed[(a, 'ret', 0)] |= value.types
+                fixed[(a, 'ret', 0)] |= {typ for typ in value.types
+                    if typ not in ('s128', 'u128') or a in gpr_demand}
                 for kind, n, off in value.origins:
                     if kind == 'ret' and not off:
                         links.add(((a, 'ret', 0), (n, 'ret', 0)))
@@ -702,11 +733,15 @@ def recover_signatures(inv, analysis, seeds):
     while queue:
         key = queue.popleft()
         typ = authoritative.get(key) or resolve_type(constraints[key])[0]
+        if typ in ('s128', 'u128') and key[1] == 'ret' and key[0] not in gpr_demand:
+            continue
         scalar_return = key[1] == 'ret' and typ in ('s32', 'u32')
         if (not scalar_return and typ not in ('void *', 'f32', 'f64', 's64', 'u64', 's128', 'u128') and '*' not in typ) or (key, typ) in sent:
             continue
         sent.add((key, typ))
         for other in adjacency[key]:
+            if typ in ('s128', 'u128') and other[1] == 'ret' and other[0] not in gpr_demand:
+                continue
             if scalar_return and other[1] != 'ret':
                 continue             # exact returned copies, not generic API arguments
             if other not in authoritative and typ not in constraints[other]:
@@ -729,7 +764,7 @@ def recover_signatures(inv, analysis, seeds):
         row['syscall'] = analysis[a].get('syscall', False)
         row['return_evidence'] = dict(direct_types=direct_returns[a],
                                      consumed_banks=sorted({bank for _, bank, _ in return_consumers[a]}),
-                                     consumers=len(return_consumers[a]))
+                                     consumers=len(return_consumers[a]), gpr_demand=a in gpr_demand)
         if a in variadic:
             row['variadic'] = True
             row['arity_kind'] = 'variadic signature' if seed and seed['quality'] >= 2 else 'SN variadic register-save ABI'
@@ -750,7 +785,8 @@ def recover_signatures(inv, analysis, seeds):
             hint = seed['ret']
             row['return_hint'] = hint
             facts = constraints[(a, 'ret', 0)] - {'used', 'unknown', 'void'}
-            if not facts and hint not in ('unknown', 'void'):
+            if (not facts and hint not in ('unknown', 'void')
+                    and (hint not in ('s128', 'u128') or a in gpr_demand)):
                 row['ret'] = hint
             elif row['ret'] != 'unknown' and hint not in ('unknown', 'void', row['ret']):
                 compatible, incompatible = resolve_type({hint, row['ret']})
