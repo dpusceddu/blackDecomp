@@ -6,7 +6,8 @@
 typedef struct Recovered_Perception {
     u8 opaque_0[4];
     void * field_4; /* PS2 +0x4 */
-    u8 opaque_8[16];
+    f32 field_8; /* PS2 +0x8 */
+    u8 opaque_C[12];
     s32 field_18; /* PS2 +0x18 */
     s32 field_1C; /* PS2 +0x1C */
     s32 field_20; /* PS2 +0x20 */
@@ -14,20 +15,19 @@ typedef struct Recovered_Perception {
     s32 field_28; /* PS2 +0x28 */
     s32 field_2C; /* PS2 +0x2C */
     s32 field_30; /* PS2 +0x30 */
-    u32 field_34; /* PS2 +0x34 */
-    u32 field_38; /* PS2 +0x38 */
-    u32 field_3C; /* PS2 +0x3C */
-    u32 field_40; /* PS2 +0x40 */
-    u32 field_44; /* PS2 +0x44 */
+    s32 field_34; /* PS2 +0x34 */
+    void * field_38; /* PS2 +0x38 */
+    void * field_3C; /* PS2 +0x3C */
+    void * field_40; /* PS2 +0x40 */
+    void * field_44; /* PS2 +0x44 */
     u8 field_48; /* PS2 +0x48 */
     u8 field_49; /* PS2 +0x49 */
     u8 opaque_4A[2];
-    u32 field_4C; /* PS2 +0x4C */
-    u8 field_50; /* PS2 +0x50 */
-    u8 field_51; /* PS2 +0x51 */
-    u8 field_52; /* PS2 +0x52 */
+    s32 field_4C; /* PS2 +0x4C */
+    u8 opaque_50[4];
 } Recovered_Perception;
 typedef char assert_Recovered_Perception_4[(((int)&((Recovered_Perception *)0)->field_4) == 4) ? 1 : -1];
+typedef char assert_Recovered_Perception_8[(((int)&((Recovered_Perception *)0)->field_8) == 8) ? 1 : -1];
 typedef char assert_Recovered_Perception_18[(((int)&((Recovered_Perception *)0)->field_18) == 24) ? 1 : -1];
 typedef char assert_Recovered_Perception_1C[(((int)&((Recovered_Perception *)0)->field_1C) == 28) ? 1 : -1];
 typedef char assert_Recovered_Perception_20[(((int)&((Recovered_Perception *)0)->field_20) == 32) ? 1 : -1];
@@ -43,7 +43,4 @@ typedef char assert_Recovered_Perception_44[(((int)&((Recovered_Perception *)0)-
 typedef char assert_Recovered_Perception_48[(((int)&((Recovered_Perception *)0)->field_48) == 72) ? 1 : -1];
 typedef char assert_Recovered_Perception_49[(((int)&((Recovered_Perception *)0)->field_49) == 73) ? 1 : -1];
 typedef char assert_Recovered_Perception_4C[(((int)&((Recovered_Perception *)0)->field_4C) == 76) ? 1 : -1];
-typedef char assert_Recovered_Perception_50[(((int)&((Recovered_Perception *)0)->field_50) == 80) ? 1 : -1];
-typedef char assert_Recovered_Perception_51[(((int)&((Recovered_Perception *)0)->field_51) == 81) ? 1 : -1];
-typedef char assert_Recovered_Perception_52[(((int)&((Recovered_Perception *)0)->field_52) == 82) ? 1 : -1];
 #endif

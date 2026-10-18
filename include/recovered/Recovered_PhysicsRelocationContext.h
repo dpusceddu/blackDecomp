@@ -4,7 +4,8 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_PhysicsRelocationContext {
-    s32 field_0; /* PS2 +0x0 */
+    u8 opaque_0[8];
+    s32 field_8; /* PS2 +0x8 */
 } Recovered_PhysicsRelocationContext;
-typedef char assert_Recovered_PhysicsRelocationContext_0[(((int)&((Recovered_PhysicsRelocationContext *)0)->field_0) == 0) ? 1 : -1];
+typedef char assert_Recovered_PhysicsRelocationContext_8[(((int)&((Recovered_PhysicsRelocationContext *)0)->field_8) == 8) ? 1 : -1];
 #endif

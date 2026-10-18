@@ -126,9 +126,7 @@ typedef struct Recovered_AnimationInstanceView {
     u32 field_1BC; /* PS2 +0x1BC */
     u32 field_1C0; /* PS2 +0x1C0 */
     u16 field_1C4; /* PS2 +0x1C4 */
-    u8 opaque_1C6[6];
-    s32 field_1CC; /* PS2 +0x1CC */
-    u8 opaque_1D0[640];
+    u8 opaque_1C6[650];
     u32 field_450; /* PS2 +0x450 */
     u8 opaque_454[156];
     u32 field_4F0; /* PS2 +0x4F0 */
@@ -156,9 +154,9 @@ typedef struct Recovered_AnimationInstanceView {
     u32 field_980; /* PS2 +0x980 */
     u8 opaque_984[4];
     u32 field_988; /* PS2 +0x988 */
-    s32 field_98C; /* PS2 +0x98C */
+    u32 field_98C; /* PS2 +0x98C */
     u8 opaque_990[4];
-    s32 field_994; /* PS2 +0x994 */
+    u32 field_994; /* PS2 +0x994 */
     u32 field_998; /* PS2 +0x998 */
     u8 opaque_99C[16];
     u32 field_9AC; /* PS2 +0x9AC */
@@ -282,7 +280,6 @@ typedef char assert_Recovered_AnimationInstanceView_1B8[(((int)&((Recovered_Anim
 typedef char assert_Recovered_AnimationInstanceView_1BC[(((int)&((Recovered_AnimationInstanceView *)0)->field_1BC) == 444) ? 1 : -1];
 typedef char assert_Recovered_AnimationInstanceView_1C0[(((int)&((Recovered_AnimationInstanceView *)0)->field_1C0) == 448) ? 1 : -1];
 typedef char assert_Recovered_AnimationInstanceView_1C4[(((int)&((Recovered_AnimationInstanceView *)0)->field_1C4) == 452) ? 1 : -1];
-typedef char assert_Recovered_AnimationInstanceView_1CC[(((int)&((Recovered_AnimationInstanceView *)0)->field_1CC) == 460) ? 1 : -1];
 typedef char assert_Recovered_AnimationInstanceView_450[(((int)&((Recovered_AnimationInstanceView *)0)->field_450) == 1104) ? 1 : -1];
 typedef char assert_Recovered_AnimationInstanceView_4F0[(((int)&((Recovered_AnimationInstanceView *)0)->field_4F0) == 1264) ? 1 : -1];
 typedef char assert_Recovered_AnimationInstanceView_590[(((int)&((Recovered_AnimationInstanceView *)0)->field_590) == 1424) ? 1 : -1];

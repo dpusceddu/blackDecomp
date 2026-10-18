@@ -4,27 +4,14 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Vtable_003DB4E8 {
-    s32 field_0; /* PS2 +0x0 */
-    void * field_4; /* PS2 +0x4 */
-    u8 opaque_8[8];
-    s64 field_10; /* PS2 +0x10 */
-    u64 field_18; /* PS2 +0x18 */
+    u8 opaque_0[16];
+    u64 field_10; /* PS2 +0x10 */
+    u8 opaque_18[8];
     s32 field_20; /* PS2 +0x20 */
-    u8 field_24; /* PS2 +0x24 */
-    u8 field_25; /* PS2 +0x25 */
-    u8 opaque_26[2];
-    f32 field_28; /* PS2 +0x28 */
-    f32 field_2C; /* PS2 +0x2C */
+    u8 opaque_24[12];
     void * field_30; /* PS2 +0x30 */
 } Recovered_Vtable_003DB4E8;
-typedef char assert_Recovered_Vtable_003DB4E8_0[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_0) == 0) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DB4E8_4[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_4) == 4) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DB4E8_10[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_10) == 16) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DB4E8_18[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_18) == 24) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DB4E8_20[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_20) == 32) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DB4E8_24[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_24) == 36) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DB4E8_25[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_25) == 37) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DB4E8_28[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_28) == 40) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DB4E8_2C[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_2C) == 44) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DB4E8_30[(((int)&((Recovered_Vtable_003DB4E8 *)0)->field_30) == 48) ? 1 : -1];
 #endif

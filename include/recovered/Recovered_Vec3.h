@@ -4,52 +4,11 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Vec3 {
-    u8 opaque_0[4];
+    f32 field_0; /* PS2 +0x0 */
     f32 field_4; /* PS2 +0x4 */
-    u8 opaque_8[4];
-    f32 field_C; /* PS2 +0xC */
-    u8 opaque_10[12];
-    s32 field_1C; /* PS2 +0x1C */
-    s32 field_20; /* PS2 +0x20 */
-    s32 field_24; /* PS2 +0x24 */
-    u8 opaque_28[20];
-    s8 field_3C; /* PS2 +0x3C */
-    u8 opaque_3D[3];
-    s32 field_40; /* PS2 +0x40 */
-    s32 field_44; /* PS2 +0x44 */
-    s32 field_48; /* PS2 +0x48 */
-    u8 opaque_4C[4];
-    void * field_50; /* PS2 +0x50 */
-    u8 field_54; /* PS2 +0x54 */
-    u8 field_55; /* PS2 +0x55 */
-    u8 opaque_56[2];
-    s32 field_58; /* PS2 +0x58 */
-    u8 opaque_5C[8];
-    f32 field_64; /* PS2 +0x64 */
-    u8 field_68; /* PS2 +0x68 */
-    u8 opaque_69[7];
-    s32 field_70; /* PS2 +0x70 */
-    s32 field_74; /* PS2 +0x74 */
-    f32 field_78; /* PS2 +0x78 */
-    s32 field_7C; /* PS2 +0x7C */
+    f32 field_8; /* PS2 +0x8 */
 } Recovered_Vec3;
+typedef char assert_Recovered_Vec3_0[(((int)&((Recovered_Vec3 *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_Vec3_4[(((int)&((Recovered_Vec3 *)0)->field_4) == 4) ? 1 : -1];
-typedef char assert_Recovered_Vec3_C[(((int)&((Recovered_Vec3 *)0)->field_C) == 12) ? 1 : -1];
-typedef char assert_Recovered_Vec3_1C[(((int)&((Recovered_Vec3 *)0)->field_1C) == 28) ? 1 : -1];
-typedef char assert_Recovered_Vec3_20[(((int)&((Recovered_Vec3 *)0)->field_20) == 32) ? 1 : -1];
-typedef char assert_Recovered_Vec3_24[(((int)&((Recovered_Vec3 *)0)->field_24) == 36) ? 1 : -1];
-typedef char assert_Recovered_Vec3_3C[(((int)&((Recovered_Vec3 *)0)->field_3C) == 60) ? 1 : -1];
-typedef char assert_Recovered_Vec3_40[(((int)&((Recovered_Vec3 *)0)->field_40) == 64) ? 1 : -1];
-typedef char assert_Recovered_Vec3_44[(((int)&((Recovered_Vec3 *)0)->field_44) == 68) ? 1 : -1];
-typedef char assert_Recovered_Vec3_48[(((int)&((Recovered_Vec3 *)0)->field_48) == 72) ? 1 : -1];
-typedef char assert_Recovered_Vec3_50[(((int)&((Recovered_Vec3 *)0)->field_50) == 80) ? 1 : -1];
-typedef char assert_Recovered_Vec3_54[(((int)&((Recovered_Vec3 *)0)->field_54) == 84) ? 1 : -1];
-typedef char assert_Recovered_Vec3_55[(((int)&((Recovered_Vec3 *)0)->field_55) == 85) ? 1 : -1];
-typedef char assert_Recovered_Vec3_58[(((int)&((Recovered_Vec3 *)0)->field_58) == 88) ? 1 : -1];
-typedef char assert_Recovered_Vec3_64[(((int)&((Recovered_Vec3 *)0)->field_64) == 100) ? 1 : -1];
-typedef char assert_Recovered_Vec3_68[(((int)&((Recovered_Vec3 *)0)->field_68) == 104) ? 1 : -1];
-typedef char assert_Recovered_Vec3_70[(((int)&((Recovered_Vec3 *)0)->field_70) == 112) ? 1 : -1];
-typedef char assert_Recovered_Vec3_74[(((int)&((Recovered_Vec3 *)0)->field_74) == 116) ? 1 : -1];
-typedef char assert_Recovered_Vec3_78[(((int)&((Recovered_Vec3 *)0)->field_78) == 120) ? 1 : -1];
-typedef char assert_Recovered_Vec3_7C[(((int)&((Recovered_Vec3 *)0)->field_7C) == 124) ? 1 : -1];
+typedef char assert_Recovered_Vec3_8[(((int)&((Recovered_Vec3 *)0)->field_8) == 8) ? 1 : -1];
 #endif

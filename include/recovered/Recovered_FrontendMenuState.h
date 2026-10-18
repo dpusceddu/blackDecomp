@@ -4,11 +4,33 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_FrontendMenuState {
-    u8 opaque_0[68];
+    s32 field_0; /* PS2 +0x0 */
+    u8 opaque_4[64];
     u32 field_44; /* PS2 +0x44 */
-    u8 opaque_48[3328];
-    u32 field_D48; /* PS2 +0xD48 */
+    u32 field_48; /* PS2 +0x48 */
+    u8 opaque_4C[424];
+    s32 field_1F4; /* PS2 +0x1F4 */
+    u8 opaque_1F8[16];
+    s32 field_208; /* PS2 +0x208 */
+    s32 field_20C; /* PS2 +0x20C */
+    s32 field_210; /* PS2 +0x210 */
+    u8 opaque_214[12];
+    u8 field_220; /* PS2 +0x220 */
+    u8 opaque_221[2859];
+    u8 field_D4C; /* PS2 +0xD4C */
+    u8 field_D4D; /* PS2 +0xD4D */
+    u8 opaque_D4E[2];
+    s32 field_D50; /* PS2 +0xD50 */
 } Recovered_FrontendMenuState;
+typedef char assert_Recovered_FrontendMenuState_0[(((int)&((Recovered_FrontendMenuState *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_FrontendMenuState_44[(((int)&((Recovered_FrontendMenuState *)0)->field_44) == 68) ? 1 : -1];
-typedef char assert_Recovered_FrontendMenuState_D48[(((int)&((Recovered_FrontendMenuState *)0)->field_D48) == 3400) ? 1 : -1];
+typedef char assert_Recovered_FrontendMenuState_48[(((int)&((Recovered_FrontendMenuState *)0)->field_48) == 72) ? 1 : -1];
+typedef char assert_Recovered_FrontendMenuState_1F4[(((int)&((Recovered_FrontendMenuState *)0)->field_1F4) == 500) ? 1 : -1];
+typedef char assert_Recovered_FrontendMenuState_208[(((int)&((Recovered_FrontendMenuState *)0)->field_208) == 520) ? 1 : -1];
+typedef char assert_Recovered_FrontendMenuState_20C[(((int)&((Recovered_FrontendMenuState *)0)->field_20C) == 524) ? 1 : -1];
+typedef char assert_Recovered_FrontendMenuState_210[(((int)&((Recovered_FrontendMenuState *)0)->field_210) == 528) ? 1 : -1];
+typedef char assert_Recovered_FrontendMenuState_220[(((int)&((Recovered_FrontendMenuState *)0)->field_220) == 544) ? 1 : -1];
+typedef char assert_Recovered_FrontendMenuState_D4C[(((int)&((Recovered_FrontendMenuState *)0)->field_D4C) == 3404) ? 1 : -1];
+typedef char assert_Recovered_FrontendMenuState_D4D[(((int)&((Recovered_FrontendMenuState *)0)->field_D4D) == 3405) ? 1 : -1];
+typedef char assert_Recovered_FrontendMenuState_D50[(((int)&((Recovered_FrontendMenuState *)0)->field_D50) == 3408) ? 1 : -1];
 #endif

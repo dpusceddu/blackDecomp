@@ -4,17 +4,24 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_PhysicsInstance {
-    u8 opaque_0[60];
-    s32 field_3C; /* PS2 +0x3C */
-    u8 opaque_40[32];
+    void * field_0; /* PS2 +0x0 */
+    u8 opaque_4[12];
+    s128 field_10; /* PS2 +0x10 */
+    s128 field_20; /* PS2 +0x20 */
+    s128 field_30; /* PS2 +0x30 */
+    s128 field_40; /* PS2 +0x40 */
+    void * field_50; /* PS2 +0x50 */
+    u8 opaque_54[4];
+    void * field_58; /* PS2 +0x58 */
+    u8 opaque_5C[4];
     s32 field_60; /* PS2 +0x60 */
-    u8 opaque_64[44];
-    s32 field_90; /* PS2 +0x90 */
-    u8 opaque_94[8];
-    s32 field_9C; /* PS2 +0x9C */
 } Recovered_PhysicsInstance;
-typedef char assert_Recovered_PhysicsInstance_3C[(((int)&((Recovered_PhysicsInstance *)0)->field_3C) == 60) ? 1 : -1];
+typedef char assert_Recovered_PhysicsInstance_0[(((int)&((Recovered_PhysicsInstance *)0)->field_0) == 0) ? 1 : -1];
+typedef char assert_Recovered_PhysicsInstance_10[(((int)&((Recovered_PhysicsInstance *)0)->field_10) == 16) ? 1 : -1];
+typedef char assert_Recovered_PhysicsInstance_20[(((int)&((Recovered_PhysicsInstance *)0)->field_20) == 32) ? 1 : -1];
+typedef char assert_Recovered_PhysicsInstance_30[(((int)&((Recovered_PhysicsInstance *)0)->field_30) == 48) ? 1 : -1];
+typedef char assert_Recovered_PhysicsInstance_40[(((int)&((Recovered_PhysicsInstance *)0)->field_40) == 64) ? 1 : -1];
+typedef char assert_Recovered_PhysicsInstance_50[(((int)&((Recovered_PhysicsInstance *)0)->field_50) == 80) ? 1 : -1];
+typedef char assert_Recovered_PhysicsInstance_58[(((int)&((Recovered_PhysicsInstance *)0)->field_58) == 88) ? 1 : -1];
 typedef char assert_Recovered_PhysicsInstance_60[(((int)&((Recovered_PhysicsInstance *)0)->field_60) == 96) ? 1 : -1];
-typedef char assert_Recovered_PhysicsInstance_90[(((int)&((Recovered_PhysicsInstance *)0)->field_90) == 144) ? 1 : -1];
-typedef char assert_Recovered_PhysicsInstance_9C[(((int)&((Recovered_PhysicsInstance *)0)->field_9C) == 156) ? 1 : -1];
 #endif

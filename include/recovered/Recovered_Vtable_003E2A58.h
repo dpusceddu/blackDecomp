@@ -4,56 +4,24 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Vtable_003E2A58 {
-    u8 opaque_0[4];
-    void * field_4; /* PS2 +0x4 */
-    void * field_8; /* PS2 +0x8 */
-    void * field_C; /* PS2 +0xC */
+    u8 opaque_0[12];
+    s32 field_C; /* PS2 +0xC */
     s32 field_10; /* PS2 +0x10 */
     s32 field_14; /* PS2 +0x14 */
-    u32 field_18; /* PS2 +0x18 */
-    s32 field_1C; /* PS2 +0x1C */
+    u8 opaque_18[8];
     s32 field_20; /* PS2 +0x20 */
-    u8 opaque_24[4];
-    s32 field_28; /* PS2 +0x28 */
+    u8 opaque_24[8];
     s32 field_2C; /* PS2 +0x2C */
-    u8 opaque_30[4];
-    f32 field_34; /* PS2 +0x34 */
-    f32 field_38; /* PS2 +0x38 */
-    f32 field_3C; /* PS2 +0x3C */
-    s32 field_40; /* PS2 +0x40 */
-    s32 field_44; /* PS2 +0x44 */
-    u8 field_48; /* PS2 +0x48 */
-    u8 opaque_49[23];
+    u8 opaque_30[48];
     s32 field_60; /* PS2 +0x60 */
-    f32 field_64; /* PS2 +0x64 */
-    f32 field_68; /* PS2 +0x68 */
+    u8 opaque_64[8];
     s32 field_6C; /* PS2 +0x6C */
-    u8 field_70; /* PS2 +0x70 */
-    u8 field_71; /* PS2 +0x71 */
-    u8 opaque_72[6];
-    u8 field_78; /* PS2 +0x78 */
 } Recovered_Vtable_003E2A58;
-typedef char assert_Recovered_Vtable_003E2A58_4[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_4) == 4) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_8[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_8) == 8) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E2A58_C[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_C) == 12) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E2A58_10[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E2A58_14[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_14) == 20) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_18[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_18) == 24) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_1C[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_1C) == 28) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E2A58_20[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_20) == 32) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_28[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_28) == 40) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E2A58_2C[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_2C) == 44) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_34[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_34) == 52) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_38[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_38) == 56) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_3C[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_3C) == 60) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_40[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_40) == 64) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_44[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_44) == 68) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_48[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_48) == 72) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E2A58_60[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_60) == 96) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_64[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_64) == 100) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_68[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_68) == 104) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E2A58_6C[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_6C) == 108) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_70[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_70) == 112) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_71[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_71) == 113) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E2A58_78[(((int)&((Recovered_Vtable_003E2A58 *)0)->field_78) == 120) ? 1 : -1];
 #endif

@@ -5,51 +5,15 @@
 
 typedef struct Recovered_PhysicsCompound {
     s32 field_0; /* PS2 +0x0 */
-    u8 opaque_4[12];
-    void * field_10; /* PS2 +0x10 */
-    u8 opaque_14[4];
-    s32 field_18; /* PS2 +0x18 */
-    u8 opaque_1C[20];
-    s32 field_30; /* PS2 +0x30 */
-    s32 field_34; /* PS2 +0x34 */
-    s32 field_38; /* PS2 +0x38 */
-    u8 opaque_3C[4];
-    s32 field_40; /* PS2 +0x40 */
-    s32 field_44; /* PS2 +0x44 */
-    s32 field_48; /* PS2 +0x48 */
-    u8 opaque_4C[4];
-    s32 field_50; /* PS2 +0x50 */
-    s32 field_54; /* PS2 +0x54 */
-    s32 field_58; /* PS2 +0x58 */
-    u8 opaque_5C[4];
-    s32 field_60; /* PS2 +0x60 */
-    u8 opaque_64[8];
-    s32 field_6C; /* PS2 +0x6C */
-    u8 opaque_70[20];
-    s32 field_84; /* PS2 +0x84 */
-    u8 opaque_88[8];
-    s32 field_90; /* PS2 +0x90 */
-    u8 opaque_94[8];
-    s32 field_9C; /* PS2 +0x9C */
-    u8 opaque_A0[8];
-    s32 field_A8; /* PS2 +0xA8 */
+    u8 opaque_4[4];
+    s32 field_8; /* PS2 +0x8 */
+    s32 field_C; /* PS2 +0xC */
+    s32 field_10; /* PS2 +0x10 */
+    void * field_14; /* PS2 +0x14 */
 } Recovered_PhysicsCompound;
 typedef char assert_Recovered_PhysicsCompound_0[(((int)&((Recovered_PhysicsCompound *)0)->field_0) == 0) ? 1 : -1];
+typedef char assert_Recovered_PhysicsCompound_8[(((int)&((Recovered_PhysicsCompound *)0)->field_8) == 8) ? 1 : -1];
+typedef char assert_Recovered_PhysicsCompound_C[(((int)&((Recovered_PhysicsCompound *)0)->field_C) == 12) ? 1 : -1];
 typedef char assert_Recovered_PhysicsCompound_10[(((int)&((Recovered_PhysicsCompound *)0)->field_10) == 16) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_18[(((int)&((Recovered_PhysicsCompound *)0)->field_18) == 24) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_30[(((int)&((Recovered_PhysicsCompound *)0)->field_30) == 48) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_34[(((int)&((Recovered_PhysicsCompound *)0)->field_34) == 52) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_38[(((int)&((Recovered_PhysicsCompound *)0)->field_38) == 56) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_40[(((int)&((Recovered_PhysicsCompound *)0)->field_40) == 64) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_44[(((int)&((Recovered_PhysicsCompound *)0)->field_44) == 68) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_48[(((int)&((Recovered_PhysicsCompound *)0)->field_48) == 72) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_50[(((int)&((Recovered_PhysicsCompound *)0)->field_50) == 80) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_54[(((int)&((Recovered_PhysicsCompound *)0)->field_54) == 84) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_58[(((int)&((Recovered_PhysicsCompound *)0)->field_58) == 88) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_60[(((int)&((Recovered_PhysicsCompound *)0)->field_60) == 96) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_6C[(((int)&((Recovered_PhysicsCompound *)0)->field_6C) == 108) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_84[(((int)&((Recovered_PhysicsCompound *)0)->field_84) == 132) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_90[(((int)&((Recovered_PhysicsCompound *)0)->field_90) == 144) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_9C[(((int)&((Recovered_PhysicsCompound *)0)->field_9C) == 156) ? 1 : -1];
-typedef char assert_Recovered_PhysicsCompound_A8[(((int)&((Recovered_PhysicsCompound *)0)->field_A8) == 168) ? 1 : -1];
+typedef char assert_Recovered_PhysicsCompound_14[(((int)&((Recovered_PhysicsCompound *)0)->field_14) == 20) ? 1 : -1];
 #endif
