@@ -19152,8 +19152,8 @@ tus:
   confidence: high
   evidence: [ctor-list, ctor-end, calls]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 7 of 26 functions
+  flags: [-O2, -G0, -snas, -x, c++]
+  flags_basis: matched 9 of 26 functions
   data:
     .sbss: ['0x40e848', '0x40e858']
     .bss: ['0x45cc30', '0x45cc70']
