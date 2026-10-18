@@ -1,0 +1,97 @@
+#include "auto/prelude.h"
+
+#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "types_ghidra.h"
+#undef TYPES_GHIDRA_NO_PROTOTYPES
+extern s32 func_0020DF68(void *, s32, s32);
+extern M2C_UNK D_003FB608;
+extern s32 func_00212940(s32);
+extern s32 func_0020DCB0(s32 *);
+extern s32 D_00492220;
+extern s32 D_00492230;
+extern s32 D_00492240;
+extern s32 D_00492250;
+extern s32 D_00492260;
+extern s32 D_00492270;
+extern s32 D_00492280;
+extern s32 D_00492290;
+extern s32 D_004922A0;
+extern s32 D_004922B0;
+extern s32 D_004922C0;
+extern s32 D_004922D0;
+extern s32 D_004922E0;
+extern s32 D_004922F0;
+extern s32 func_0020DCF8(void *, void *);
+extern M2C_UNK D_003FAFD8;
+extern M2C_UNK D_003FAFE8;
+extern M2C_UNK D_003FAD90;
+extern M2C_UNK D_003FB030;
+extern s32 func_0020DF90(s32, s32);
+extern s32 func_0020DD48(void *);
+extern s32 func_0020DF30(s32 *);
+
+s32 func_00212528(void *arg0) {
+    func_0020DF68(arg0, (s32) &D_003FB608, (s32) func_00212940);
+    func_0020DCB0(&D_00492220);
+    func_0020DCB0(&D_00492230);
+    func_0020DCB0(&D_00492240);
+    func_0020DCB0(&D_00492250);
+    func_0020DCB0(&D_00492260);
+    func_0020DCB0(&D_00492270);
+    func_0020DCB0(&D_00492280);
+    func_0020DCB0(&D_00492290);
+    func_0020DCB0(&D_004922A0);
+    func_0020DCB0(&D_004922B0);
+    func_0020DCB0(&D_004922C0);
+    func_0020DCB0(&D_004922D0);
+    func_0020DCB0(&D_004922E0);
+    func_0020DCB0(&D_004922F0);
+    func_0020DCF8(&D_00492220, "FE_RESULTSLEVELNAME");
+    func_0020DCF8(&D_00492230, "FE_MISSIONSTATUS");
+    func_0020DCF8(&D_00492240, "FE_PRIMARYSCORE");
+    func_0020DCF8(&D_00492250, "FE_SECONDARYSCORE");
+    func_0020DCF8(&D_00492260, "FE_BLACKMAILSCORE");
+    func_0020DCF8(&D_00492270, "FE_INTELSCORE");
+    func_0020DCF8(&D_00492280, &D_003FAFD8);
+    func_0020DCF8(&D_00492290, &D_003FAFE8);
+    func_0020DCF8(&D_004922A0, "FE_OVERALLRATING");
+    func_0020DCF8(&D_004922B0, "FE_BODYCOUNT");
+    func_0020DCF8(&D_004922C0, "FE_MISSIONTIME");
+    func_0020DCF8(&D_004922D0, &D_003FAD90);
+    func_0020DCF8(&D_004922E0, "FE_OBJECTIVESTOTAL");
+    func_0020DCF8(&D_004922F0, &D_003FB030);
+    return 1;
+}
+
+s32 func_00212770(s32 arg0) {
+    func_0020DF90(arg0, (s32) &D_003FB608);
+    func_0020DD48(&D_00492220);
+    func_0020DD48(&D_00492230);
+    func_0020DD48(&D_00492240);
+    func_0020DD48(&D_00492250);
+    func_0020DD48(&D_00492260);
+    func_0020DD48(&D_00492270);
+    func_0020DD48(&D_00492280);
+    func_0020DD48(&D_00492290);
+    func_0020DD48(&D_004922A0);
+    func_0020DD48(&D_004922B0);
+    func_0020DD48(&D_004922C0);
+    func_0020DD48(&D_004922D0);
+    func_0020DD48(&D_004922E0);
+    func_0020DD48(&D_004922F0);
+    func_0020DF30(&D_00492220);
+    func_0020DF30(&D_00492230);
+    func_0020DF30(&D_00492240);
+    func_0020DF30(&D_00492250);
+    func_0020DF30(&D_00492260);
+    func_0020DF30(&D_00492270);
+    func_0020DF30(&D_00492280);
+    func_0020DF30(&D_00492290);
+    func_0020DF30(&D_004922A0);
+    func_0020DF30(&D_004922B0);
+    func_0020DF30(&D_004922C0);
+    func_0020DF30(&D_004922D0);
+    func_0020DF30(&D_004922E0);
+    func_0020DF30(&D_004922F0);
+    return 1;
+}

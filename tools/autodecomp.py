@@ -416,7 +416,11 @@ def run_m2c(fns, options=(), ctx='ctx.c'):
                                decls={}, ee=flags[f['name']])}
     if r.returncode and 'Syntax error when parsing C context' in r.stdout + r.stderr:
         raise SystemExit('m2c context is invalid; stopping instead of recording every function as failed.\n' + (r.stdout + r.stderr)[-2000:])
+    if r.returncode and not any(FUNC_START.match(line) for line in r.stdout.splitlines()) and not FAIL.search(r.stdout):
+        raise SystemExit('m2c failed before analyzing the batch; stopping instead of hiding an input failure.\n' + (r.stdout + r.stderr)[-2500:])
     out = split_m2c(r.stdout + ('\n/* STDERR %s */' % r.stderr if r.returncode else ''), fns)
+    STATS['m2c_body_functions'] += sum('body' in row for row in out.values())
+    STATS['m2c_function_failures'] += sum(bool(row.get('error')) for row in out.values())
     for name, fl in flags.items():
         out.setdefault(name, {})['ee'] = fl
     return out

@@ -1,0 +1,39 @@
+#include "auto/prelude.h"
+
+#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "types_ghidra.h"
+#undef TYPES_GHIDRA_NO_PROTOTYPES
+extern s32 func_0020DF68(void *, s32, s32);
+extern M2C_UNK D_003FBF20;
+extern s32 func_00216438();
+extern s32 func_0020DCB0(s32 *);
+extern s32 D_004924F8;
+extern s32 D_00492508;
+extern s32 D_00492518;
+extern s32 D_00492528;
+extern s32 D_00492538;
+extern s32 D_00492548;
+extern s32 D_00492558;
+extern s32 D_00492568;
+extern s32 func_0020DCF8(void *, void *);
+
+s32 func_002162C8(void *arg0) {
+    func_0020DF68(arg0, (s32) &D_003FBF20, (s32) func_00216438);
+    func_0020DCB0(&D_004924F8);
+    func_0020DCB0(&D_00492508);
+    func_0020DCB0(&D_00492518);
+    func_0020DCB0(&D_00492528);
+    func_0020DCB0(&D_00492538);
+    func_0020DCB0(&D_00492548);
+    func_0020DCB0(&D_00492558);
+    func_0020DCB0(&D_00492568);
+    func_0020DCF8(&D_004924F8, "FE_PLAYERNAME");
+    func_0020DCF8(&D_00492508, "FE_RANK");
+    func_0020DCF8(&D_00492518, "FE_COMPLETIONRESULTS");
+    func_0020DCF8(&D_00492528, "FE_GAMETIMERESULTS");
+    func_0020DCF8(&D_00492538, "FE_TOTALENEMYCOUNTRESULTS");
+    func_0020DCF8(&D_00492548, "FE_HEADSHOTSRESULTS");
+    func_0020DCF8(&D_00492558, "FE_TOTALBULLETSFIREDRESULTS");
+    func_0020DCF8(&D_00492568, "FE_WEAPONOFCHOICERESULTS");
+    return 1;
+}

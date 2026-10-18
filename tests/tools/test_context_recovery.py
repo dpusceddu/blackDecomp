@@ -211,5 +211,64 @@ class CppAbiTests(unittest.TestCase):
         self.assertEqual(signatures[0x200000]['arity'], 1)
 
 
+
+
+class CalleeReturnEvidenceTests(unittest.TestCase):
+    def float_call_fixture(self):
+        # A realistic caller saves ra, calls a helper, then consumes its f0 result.
+        caller = fn([i(9, 29, 29, -16), i(0x3f, 29, 31, 0), 0x0c080000, 0,
+                     0x46000002, i(0x37, 29, 31, 0), 0x03e00008, i(9, 29, 29, 16)],
+                    0x100000, {'2': ['jal', 0x200000, 0, 'func_00200000']})
+        # lwc1 f0,0(a0); jr ra; nop -- the helper physically returns a float.
+        callee = fn([i(0x31, 4, 0, 0), 0x03e00008, 0], 0x200000)
+        return caller, callee
+
+    def seed(self, quality, ret):
+        return dict(params=[('void *', None)], ret=ret, body='return 0;',
+                    quality=quality, cls=None, source='guarded.c', matched=quality >= 2)
+
+    def test_float_return_consumption_is_recorded_without_incoming_argument(self):
+        caller, callee = self.float_call_fixture()
+        analysis = cr.analyze_function(caller)
+        self.assertIn(('ret', callee['addr'], 'f32', 4), analysis['uses'])
+        rows, _ = cr.recover_signatures([caller, callee],
+            {f['addr']: cr.analyze_function(f) for f in (caller, callee)}, {})
+        self.assertLessEqual(rows[caller['addr']]['arity'] or 0, 16)
+        self.assertEqual(rows[callee['addr']]['ret'], 'f32')
+
+    def test_unmatched_wrong_integer_return_is_hint_not_authority(self):
+        caller, callee = self.float_call_fixture()
+        rows, _ = cr.recover_signatures([caller, callee],
+            {f['addr']: cr.analyze_function(f) for f in (caller, callee)},
+            {callee['addr']: self.seed(1.75, 's32')})
+        helper = rows[callee['addr']]
+        self.assertEqual(helper['ret'], 'f32')
+        self.assertEqual(helper['return_hint'], 's32')
+        self.assertTrue(any(conflict.get('kind') == 'source-hint-disagrees' for conflict in helper['conflicts']))
+
+    def test_matched_signature_stays_anchored_and_conflict_is_retained(self):
+        caller, callee = self.float_call_fixture()
+        rows, _ = cr.recover_signatures([caller, callee],
+            {f['addr']: cr.analyze_function(f) for f in (caller, callee)},
+            {callee['addr']: self.seed(4, 's32')})
+        self.assertEqual(rows[callee['addr']]['ret'], 's32')
+        self.assertTrue(rows[callee['addr']]['conflicts'])
+
+    def test_return_used_as_address_does_not_create_caller_argument(self):
+        caller = fn([0x0c080000, 0, i(0x23, 2, 3, 0), 0x03e00008, 0],
+                    0x100000, {'0': ['jal', 0x200000, 0, 'func_00200000']})
+        analysis = cr.analyze_function(caller)
+        self.assertIn(('ret', 0x200000, 'void *', 2), analysis['uses'])
+        rows, _ = cr.recover_signatures([caller], {caller['addr']: analysis}, {})
+        self.assertIsNone(rows[caller['addr']]['arity'])
+
+
+    def test_compatible_unmatched_pointer_hint_preserves_pointee(self):
+        callee = fn([i(0x23, 4, 2, 0), 0x03e00008, 0], 0x200000)
+        rows, _ = cr.recover_signatures([callee], {callee['addr']: cr.analyze_function(callee)},
+            {callee['addr']: self.seed(1.75, 'f32 *')})
+        self.assertEqual(rows[callee['addr']]['ret'], 'f32 *')
+
+
 if __name__ == '__main__':
     unittest.main()

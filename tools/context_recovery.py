@@ -205,7 +205,7 @@ def source_seeds(root=ROOT):
             p, d = candidates[0]
             # Automatic drafts prove emitted behavior, but their scalar/pointer annotations
             # are lower-quality than an authored signature or field-use evidence.
-            quality = 4 if matched and not (u.get('origin') == 'auto' or 'auto/' in u['source']) else (1.5 if matched else 2)
+            quality = 4 if matched and not (u.get('origin') == 'auto' or 'auto/' in u['source']) else (1.5 if matched else 1.75)
             s = dict(d, source=p, matched=matched, quality=quality, symbol=symbol,
                      this_usage=bool(d.get('implicit_this') or re.search(r'\(\s*[^,]*\b(this|self)\b', d['raw'])))
             previous = seeds.get(addr)
@@ -303,7 +303,7 @@ def analyze_function(f):
 
     def constrain(v, typ, pc):
         for kind, n, off in v.origins:
-            if kind in ('arg', 'farg'):
+            if kind in ('arg', 'farg', 'ret'):
                 uses.add((kind, n, typ, pc))
 
     def step(i, state):
@@ -469,6 +469,7 @@ def recover_signatures(inv, analysis, seeds):
     constraints = collections.defaultdict(set)
     register_slots, caller_counts = {}, collections.defaultdict(collections.Counter)
     authoritative = {}
+    observed_returns = collections.defaultdict(set)
     # Inline syscall stubs can byte-match a void(void) definition while consuming
     # implicit syscall arguments. That source signature is not ABI evidence.
     surface_seeds = seeds
@@ -477,6 +478,11 @@ def recover_signatures(inv, analysis, seeds):
         a, result = f['addr'], analysis[f['addr']]
         used = set()
         for kind, k, typ, pc in result['uses']:
+            if kind == 'ret':
+                if typ != 'used':
+                    observed_returns[k].add(typ)
+                    constraints[(k, 'ret', 0)].add(typ)
+                continue
             slot = k + (8 if kind == 'farg' else 0)
             used.add(slot)
             if kind == 'farg' or typ != 'f32':
@@ -509,7 +515,9 @@ def recover_signatures(inv, analysis, seeds):
                 constraints[(a, 'arg', slot)].add(typ)
                 if seed['quality'] >= 2:
                     authoritative[(a, 'arg', slot)] = typ
-        if seed['ret'] != 'void' or seed['quality'] >= 2:
+        # Unmatched source and automatic draft return annotations are hints. Do
+        # not mix a wrong draft's s32 into an observed f0 result's f32 constraint.
+        if seed['quality'] >= 2:
             constraints[(a, 'ret', 0)].add(seed['ret'])
         if seed['quality'] >= 2 and seed['ret'] != 'unknown':
             authoritative[(a, 'ret', 0)] = seed['ret']
@@ -534,7 +542,8 @@ def recover_signatures(inv, analysis, seeds):
             if tail:
                 links.add(((a, 'ret', 0), (dest, 'ret', 0)))
         seed = seeds.get(a)
-        known_ret = seed['ret'] if seed else None
+        observed_ret, _ = resolve_type(observed_returns[a])
+        known_ret = seed['ret'] if seed and seed['quality'] >= 2 else (observed_ret if observed_ret != 'unknown' else None)
         for gpr, fpr in result['returns']:
             banks = [fpr] if known_ret == 'f32' else [gpr] if known_ret and known_ret != 'unknown' else ([gpr] if gpr.origins or gpr.types else [fpr])
             for value in banks:
@@ -586,6 +595,20 @@ def recover_signatures(inv, analysis, seeds):
                 row['classes'][str(ordinal)] = [seed['params'][ordinal][1]]
         row['ret'], conflict = resolve_type(constraints[(a, 'ret', 0)])
         row['ret'] = authoritative.get((a, 'ret', 0)) or row['ret']
+        if seed and seed['quality'] < 2:
+            hint = seed['ret']
+            row['return_hint'] = hint
+            facts = constraints[(a, 'ret', 0)] - {'used', 'unknown', 'void'}
+            if not facts and hint not in ('unknown', 'void'):
+                row['ret'] = hint
+            elif row['ret'] != 'unknown' and hint not in ('unknown', 'void', row['ret']):
+                compatible, incompatible = resolve_type({hint, row['ret']})
+                if incompatible:
+                    row['conflicts'].append(dict(slot='ret', kind='source-hint-disagrees', types=incompatible))
+                else:
+                    # Preserve useful pointee hints when machine facts only prove
+                    # a low-word/pointer ABI; incompatible float/int hints never win.
+                    row['ret'] = compatible
         if conflict:
             row['conflicts'].append(dict(slot='ret', types=conflict))
         out[a] = row

@@ -20,7 +20,7 @@ class Sections(unittest.TestCase):
 '''
         result = decode_raw_instructions(text)
         self.assertIn('.Lm2c_00F00000:', result)
-        self.assertIn('bnez', result)
+        self.assertIn('bne $4, $0,', result)
         self.assertIn('cvt.w.s', result)
         self.assertIn('$f1, $f0', result)
         self.assertIn('/* C 00F10000 64000046 */ .word 0x46000064', result)

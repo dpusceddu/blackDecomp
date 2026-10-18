@@ -1,0 +1,33 @@
+#include "auto/prelude.h"
+
+#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "types_ghidra.h"
+#undef TYPES_GHIDRA_NO_PROTOTYPES
+extern s32 D_003BD3F8;
+extern s32 D_003BD3FC;
+extern s32 D_003BD400;
+extern s32 D_003BD404;
+extern s32 D_003BD408;
+extern s32 D_003BD40C;
+extern s32 D_003BD410;
+
+s32 func_001E3018(void *arg0, s32 arg1, s32 arg2) {
+    switch (arg1) {
+    case 0:
+        return D_003BD3F8;
+    case 1:
+        return D_003BD3FC;
+    case 2:
+        return D_003BD400;
+    case 4:
+        return D_003BD404;
+    case 8:
+        return D_003BD408;
+    case 16:
+        return D_003BD40C;
+    case 32:
+        return D_003BD410;
+    default:
+        return 0;
+    }
+}

@@ -1372,20 +1372,6 @@ units:
     symbol: Sweep__Q24Kaim14ComponentSweep
     size: 184
     status: source
-- name: kynapse_misc4_2d5398
-  source: src/kynapse/misc4_2d5398.cpp
-  origin: kynapse
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  functions:
-  - addr: '0x2d5398'
-    symbol: ResetRange__10RangeOwner
-    size: 20
-    status: asm
-    reason: size
 - name: kynapse_misc4_2dc8a0
   source: src/kynapse/misc4_2dc8a0.cpp
   origin: kynapse
@@ -1401,25 +1387,6 @@ units:
     status: source
   externs:
     _stricmp: '0x360838'
-- name: kynapse_misc4_383d48
-  source: src/kynapse/misc4_383d48.cpp
-  origin: kynapse
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  functions:
-  - addr: '0x383d48'
-    symbol: Kaim_NoOp__Fi
-    size: 8
-    status: asm
-    reason: extra
-  - addr: '0x383d50'
-    symbol: Kaim_NoOp__Fi
-    size: 8
-    status: asm
-    reason: extra
 - name: kynapse_misc4_389200
   source: src/kynapse/misc4_389200.cpp
   origin: kynapse
@@ -2672,42 +2639,6 @@ units:
     symbol: __as__8SettingsRC8Settings
     size: 240
     status: source
-- name: kynapse_small_families_2e9540
-  source: src/kynapse/small_families_2e9540.cpp
-  origin: kynapse
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  functions:
-  - addr: '0x2e9540'
-    symbol: SetFloatB__15ParameterTablesif
-    size: 44
-    status: asm
-    reason: extra
-  - addr: '0x2e9570'
-    symbol: SetFloatC__15ParameterTablesif
-    size: 44
-    status: asm
-    reason: extra
-  - addr: '0x2e95a0'
-    symbol: SetIntB__15ParameterTablesii
-    size: 44
-    status: asm
-    reason: extra
-  - addr: '0x2e95d0'
-    symbol: SetFloatA__15ParameterTablesif
-    size: 44
-    status: asm
-    reason: extra
-  - addr: '0x2e9600'
-    symbol: SetFloatC2__15ParameterTablesif
-    size: 44
-    status: asm
-    reason: extra
-  externs:
-    _stricmp: '0x360838'
 - name: kynapse_small_misc_2e1248
   source: src/kynapse/small_misc_2e1248.cpp
   origin: kynapse
@@ -38225,3 +38156,960 @@ units:
     size: 68
     status: asm
     reason: registers
+- name: auto_game_109f68
+  source: src/auto/game/109f68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x109f68'
+    symbol: func_00109F68
+    size: 60
+    status: source
+  trim:
+    .rodata: 72
+- name: auto_game_10ac48
+  source: src/auto/game/10ac48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x10ac48'
+    symbol: func_0010AC48
+    size: 976
+    status: source
+- name: auto_other_110698
+  source: src/auto/other/110698.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x110698'
+    symbol: func_00110698
+    size: 32
+    status: source
+- name: auto_game_140ca0
+  source: src/auto/game/140ca0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x140ca0'
+    symbol: func_00140CA0
+    size: 84
+    status: source
+- name: auto_game_141418
+  source: src/auto/game/141418.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x141418'
+    symbol: func_00141418
+    size: 36
+    status: source
+- name: auto_game_14c160
+  source: src/auto/game/14c160.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x14c160'
+    symbol: func_0014C160
+    size: 28
+    status: source
+- name: auto_game_153588
+  source: src/auto/game/153588.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x153588'
+    symbol: func_00153588
+    size: 36
+    status: source
+- name: auto_game_16e2b8
+  source: src/auto/game/16e2b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x16e2b8'
+    symbol: func_0016E2B8
+    size: 96
+    status: source
+- name: auto_game_173658
+  source: src/auto/game/173658.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x173658'
+    symbol: func_00173658
+    size: 32
+    status: source
+- name: auto_game_182380
+  source: src/auto/game/182380.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x182380'
+    symbol: func_00182380
+    size: 44
+    status: source
+  - addr: '0x1823b0'
+    symbol: func_001823B0
+    size: 96
+    status: source
+- name: auto_unclassified_182a10
+  source: src/auto/unclassified/182a10.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x182a10'
+    symbol: func_00182A10
+    size: 44
+    status: source
+- name: auto_game_183c80
+  source: src/auto/game/183c80.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x183c80'
+    symbol: func_00183C80
+    size: 164
+    status: source
+- name: auto_game_1894c8
+  source: src/auto/game/1894c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1894c8'
+    symbol: func_001894C8
+    size: 132
+    status: source
+- name: auto_game_18dce0
+  source: src/auto/game/18dce0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x18dce0'
+    symbol: func_0018DCE0
+    size: 124
+    status: source
+- name: auto_game_18ed50
+  source: src/auto/game/18ed50.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x18ed50'
+    symbol: func_0018ED50
+    size: 176
+    status: source
+- name: auto_game_18f0b8
+  source: src/auto/game/18f0b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x18f0b8'
+    symbol: func_0018F0B8
+    size: 68
+    status: source
+- name: auto_game_18f2e0
+  source: src/auto/game/18f2e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x18f2e0'
+    symbol: func_0018F2E0
+    size: 116
+    status: source
+- name: auto_game_190bc0
+  source: src/auto/game/190bc0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-schedule-insns2
+  functions:
+  - addr: '0x190bc0'
+    symbol: func_00190BC0
+    size: 84
+    status: source
+- name: auto_game_195b20
+  source: src/auto/game/195b20.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x195b20'
+    symbol: func_00195B20
+    size: 128
+    status: source
+- name: auto_game_197bb0
+  source: src/auto/game/197bb0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x197bb0'
+    symbol: func_00197BB0
+    size: 112
+    status: source
+- name: auto_game_1994c0
+  source: src/auto/game/1994c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1994c0'
+    symbol: func_001994C0
+    size: 48
+    status: source
+- name: auto_game_19a5e0
+  source: src/auto/game/19a5e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x19a5e0'
+    symbol: func_0019A5E0
+    size: 104
+    status: source
+- name: auto_game_1b08a8
+  source: src/auto/game/1b08a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b08a8'
+    symbol: func_001B08A8
+    size: 104
+    status: source
+- name: auto_game_1b19e8
+  source: src/auto/game/1b19e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b19e8'
+    symbol: func_001B19E8
+    size: 316
+    status: source
+- name: auto_game_1b1f48
+  source: src/auto/game/1b1f48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b1f48'
+    symbol: func_001B1F48
+    size: 300
+    status: source
+- name: auto_game_1d5e10
+  source: src/auto/game/1d5e10.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d5e10'
+    symbol: func_001D5E10
+    size: 48
+    status: source
+- name: auto_game_1db140
+  source: src/auto/game/1db140.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1db140'
+    symbol: func_001DB140
+    size: 112
+    status: source
+- name: auto_game_1e2b48
+  source: src/auto/game/1e2b48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e2b48'
+    symbol: func_001E2B48
+    size: 156
+    status: source
+  trim:
+    .rodata: 24
+- name: auto_game_1e3018
+  source: src/auto/game/1e3018.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e3018'
+    symbol: func_001E3018
+    size: 128
+    status: source
+  trim:
+    .rodata: 136
+- name: auto_game_1e3bb0
+  source: src/auto/game/1e3bb0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e3bb0'
+    symbol: func_001E3BB0
+    size: 220
+    status: source
+- name: auto_game_1ea8e0
+  source: src/auto/game/1ea8e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ea8e0'
+    symbol: func_001EA8E0
+    size: 80
+    status: source
+- name: auto_game_1f2c68
+  source: src/auto/game/1f2c68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f2c68'
+    symbol: func_001F2C68
+    size: 44
+    status: source
+- name: auto_game_20e200
+  source: src/auto/game/20e200.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20e200'
+    symbol: func_0020E200
+    size: 312
+    status: source
+- name: auto_game_20f6c8
+  source: src/auto/game/20f6c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20f6c8'
+    symbol: func_0020F6C8
+    size: 600
+    status: source
+  - addr: '0x20f920'
+    symbol: func_0020F920
+    size: 464
+    status: source
+- name: auto_game_212528
+  source: src/auto/game/212528.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x212528'
+    symbol: func_00212528
+    size: 584
+    status: source
+  - addr: '0x212770'
+    symbol: func_00212770
+    size: 464
+    status: source
+- name: auto_game_2162c8
+  source: src/auto/game/2162c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2162c8'
+    symbol: func_002162C8
+    size: 364
+    status: source
+- name: auto_game_2174e0
+  source: src/auto/game/2174e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2174e0'
+    symbol: func_002174E0
+    size: 396
+    status: source
+- name: auto_game_26f258
+  source: src/auto/game/26f258.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26f258'
+    symbol: func_0026F258
+    size: 136
+    status: source
+- name: auto_game_272af8
+  source: src/auto/game/272af8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x272af8'
+    symbol: func_00272AF8
+    size: 92
+    status: source
+- name: auto_game_272c28
+  source: src/auto/game/272c28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x272c28'
+    symbol: func_00272C28
+    size: 44
+    status: source
+- name: auto_game_279700
+  source: src/auto/game/279700.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x279700'
+    symbol: func_00279700
+    size: 144
+    status: source
+- name: auto_game_2860f0
+  source: src/auto/game/2860f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2860f0'
+    symbol: func_002860F0
+    size: 48
+    status: source
+- name: auto_unclassified_2a78d8
+  source: src/auto/unclassified/2a78d8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x2a78d8'
+    symbol: func_002A78D8
+    size: 88
+    status: source
+- name: auto_other_2a93e0
+  source: src/auto/other/2a93e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2a93e0'
+    symbol: func_002A93E0
+    size: 68
+    status: source
+- name: auto_other_2ac850
+  source: src/auto/other/2ac850.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2ac850'
+    symbol: func_002AC850
+    size: 68
+    status: source
+- name: auto_other_2af5a8
+  source: src/auto/other/2af5a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2af5a8'
+    symbol: func_002AF5A8
+    size: 68
+    status: source
+- name: auto_other_2b2388
+  source: src/auto/other/2b2388.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2b2388'
+    symbol: func_002B2388
+    size: 324
+    status: source
+- name: auto_unclassified_2d0a18
+  source: src/auto/unclassified/2d0a18.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2d0a18'
+    symbol: func_002D0A18
+    size: 56
+    status: source
+- name: auto_kynapse_2e9540
+  source: src/auto/kynapse/2e9540.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2e9540'
+    symbol: func_002E9540
+    size: 44
+    status: source
+  - addr: '0x2e9570'
+    symbol: func_002E9570
+    size: 44
+    status: source
+  - addr: '0x2e95a0'
+    symbol: func_002E95A0
+    size: 44
+    status: source
+  - addr: '0x2e95d0'
+    symbol: func_002E95D0
+    size: 44
+    status: source
+  - addr: '0x2e9600'
+    symbol: func_002E9600
+    size: 44
+    status: source
+- name: auto_kynapse_305110
+  source: src/auto/kynapse/305110.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x305110'
+    symbol: func_00305110
+    size: 52
+    status: source
+- name: auto_kynapse_305150
+  source: src/auto/kynapse/305150.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x305150'
+    symbol: func_00305150
+    size: 52
+    status: source
+- name: auto_kynapse_305340
+  source: src/auto/kynapse/305340.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x305340'
+    symbol: func_00305340
+    size: 52
+    status: source
+- name: auto_other_30b750
+  source: src/auto/other/30b750.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x30b750'
+    symbol: func_0030B750
+    size: 84
+    status: source
+- name: auto_other_30dfc0
+  source: src/auto/other/30dfc0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x30dfc0'
+    symbol: func_0030DFC0
+    size: 96
+    status: source
+- name: auto_kynapse_30e728
+  source: src/auto/kynapse/30e728.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x30e728'
+    symbol: func_0030E728
+    size: 108
+    status: source
+- name: auto_other_3194a0
+  source: src/auto/other/3194a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x3194a0'
+    symbol: func_003194A0
+    size: 52
+    status: source
+- name: auto_other_3195d0
+  source: src/auto/other/3195d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x3195d0'
+    symbol: func_003195D0
+    size: 60
+    status: source
+- name: auto_other_321ee0
+  source: src/auto/other/321ee0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x321ee0'
+    symbol: func_00321EE0
+    size: 44
+    status: source
+- name: auto_other_328c08
+  source: src/auto/other/328c08.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x328c08'
+    symbol: func_00328C08
+    size: 68
+    status: source
+- name: auto_unclassified_3428c8
+  source: src/auto/unclassified/3428c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x3428c8'
+    symbol: func_003428C8
+    size: 108
+    status: source
+- name: auto_animation_347b90
+  source: src/auto/animation/347b90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x347b90'
+    symbol: func_00347B90
+    size: 116
+    status: source
+- name: auto_animation_347d28
+  source: src/auto/animation/347d28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x347d28'
+    symbol: func_00347D28
+    size: 32
+    status: source
+- name: auto_animation_3485b8
+  source: src/auto/animation/3485b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x3485b8'
+    symbol: func_003485B8
+    size: 12
+    status: source
+- name: auto_animation_3490a8
+  source: src/auto/animation/3490a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x3490a8'
+    symbol: func_003490A8
+    size: 124
+    status: source
+- name: auto_animation_349158
+  source: src/auto/animation/349158.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x349158'
+    symbol: func_00349158
+    size: 140
+    status: source
+- name: auto_animation_34a7c8
+  source: src/auto/animation/34a7c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x34a7c8'
+    symbol: func_0034A7C8
+    size: 388
+    status: source
+  - addr: '0x34a950'
+    symbol: func_0034A950
+    size: 452
+    status: source
+  - addr: '0x34ab18'
+    symbol: func_0034AB18
+    size: 340
+    status: source
+- name: auto_unclassified_35ace0
+  source: src/auto/unclassified/35ace0.c
+  origin: auto
+  compiler: ee-gcc2.9-991111-01
+  flags:
+  - -O2
+  - -G0
+  functions:
+  - addr: '0x35ace0'
+    symbol: func_0035ACE0
+    size: 112
+    status: source
+- name: auto_other_360800
+  source: src/auto/other/360800.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x360800'
+    symbol: func_00360800
+    size: 52
+    status: source
+- name: auto_other_364da8
+  source: src/auto/other/364da8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x364da8'
+    symbol: func_00364DA8
+    size: 52
+    status: source
+- name: auto_kynapse_383d48
+  source: src/auto/kynapse/383d48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x383d48'
+    symbol: func_00383D48
+    size: 8
+    status: source
+- name: auto_unclassified_383d50
+  source: src/auto/unclassified/383d50.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x383d50'
+    symbol: func_00383D50
+    size: 8
+    status: source
+- name: auto_kynapse_389500
+  source: src/auto/kynapse/389500.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x389500'
+    symbol: func_00389500
+    size: 80
+    status: source
+- name: auto_kynapse_393f78
+  source: src/auto/kynapse/393f78.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x393f78'
+    symbol: func_00393F78
+    size: 80
+    status: source
+  trim:
+    .rodata: 44
+- name: auto_kynapse_3941d0
+  source: src/auto/kynapse/3941d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x3941d0'
+    symbol: func_003941D0
+    size: 80
+    status: source
+- name: auto_kynapse_394b30
+  source: src/auto/kynapse/394b30.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x394b30'
+    symbol: func_00394B30
+    size: 80
+    status: source
+- name: auto_kynapse_394bc0
+  source: src/auto/kynapse/394bc0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x394bc0'
+    symbol: func_00394BC0
+    size: 80
+    status: source

@@ -133,7 +133,7 @@ def prepare():
     results = json.loads((BUILD / 'results.json').read_text()) if (BUILD / 'results.json').exists() else {}
     stats = {}
     placement = json.loads((BUILD / 'placement.json').read_text())
-    starts = [f['addr'] for f in placement['functions']]
+    ends = {f['addr']: f['end'] for f in placement['functions']}
     for u in units:
         if not any(f.get('status') == 'source' for f in u['functions']):
             continue
@@ -167,17 +167,17 @@ def prepare():
             for f in live:
                 s = defined.get(f['symbol'])
                 sec = e.sections[s['shndx']] if s else None
-                nxt = starts[starts.index(f['addr']) + 1] if starts.index(f['addr']) + 1 < len(starts) else None
+                nxt = ends[f['addr']]
                 if sec is None or not sec['name'].startswith('.text.') or sec['size'] != nxt - f['addr']:
                     bad.add(f['addr'])
             if bad:
                 stats['extra'] = stats.get('extra', 0) + demote(u, bad, 'extra')
             elif (text and text['size']) or sum(e.sections[i]['size'] for i in fsecs) != sum(
-                    (starts[starts.index(f['addr']) + 1] - f['addr']) for f in live):
+                    (ends[f['addr']] - f['addr']) for f in live):
                 stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
         elif live:
             first, last = min(f['addr'] for f in live), max(f['addr'] for f in live)
-            nxt = starts[starts.index(last) + 1] if starts.index(last) + 1 < len(starts) else None
+            nxt = ends[last]
             if text['size'] != nxt - first:
                 stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
         live = [f for f in u['functions'] if f.get('status') == 'source']

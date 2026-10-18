@@ -43,10 +43,20 @@ def decode_raw_instructions(text):
         offset = branch_offset(word)
         if offset is not None:
             target = pc + 4 + offset * 4
-            disassembly = instruction.disassemble()
-            if '. + 4 +' not in disassembly:
-                continue
-            replacements[index] = (match.group(1) + disassembly.split('. + 4 +')[0] + '.Lm2c_%08X' % target, target)
+            opcode, rs, rt = word >> 26, word >> 21 & 31, word >> 16 & 31
+            # Split files use numeric GPRs. m2c rejects a mixture of aliases
+            # ($v0 and $2), even when they identify the same register.
+            if opcode in (4, 5, 0x14, 0x15):
+                name = {4: 'beq', 5: 'bne', 0x14: 'beql', 0x15: 'bnel'}[opcode]
+                branch = '%s $%d, $%d, ' % (name, rs, rt)
+            elif opcode in (6, 7, 0x16, 0x17):
+                name = {6: 'blez', 7: 'bgtz', 0x16: 'blezl', 0x17: 'bgtzl'}[opcode]
+                branch = '%s $%d, ' % (name, rs)
+            elif opcode == 1:
+                branch = '%s $%d, ' % (instruction.getOpcodeName(), rs)
+            else:
+                branch = instruction.getOpcodeName() + ' '
+            replacements[index] = (match.group(1) + branch + '.Lm2c_%08X' % target, target)
             targets.add(target)
         elif word >> 26 == 0x11 and word >> 21 & 31 in (16, 20):
             disassembly = instruction.disassemble()
