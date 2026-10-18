@@ -16777,8 +16777,8 @@ tus:
   confidence: medium
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G8, -snas]
-  flags_basis: default with small data (gp-relative access)
+  flags: [-O2, -G8]
+  flags_basis: matched 2 of 6 functions
   data:
     .rodata: ['0x403f50', '0x404030']
     .sdata: ['0x40e0a0', '0x40e0a4']
