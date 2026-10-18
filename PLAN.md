@@ -193,6 +193,50 @@ and calls leave open.
   runtime needs readable source.
 - Keep the shiftable build, so PS2 mods remain possible.
 
+### Phase 5 pilot results
+
+Three parallel sessions on 2026-10-18 used separate worktrees, units files and build trees. Worker calls
+were isolated by UUID-named containers with private scratch filesystems; no job collision occurred.
+The higher-ranked `tu_353118` proved to be allocator code under a fallback game classification, so the
+game session retained the requested `tu_105bc0`. Kynapse and animation have exact unwind boundaries;
+the game boundary remains provisional.
+
+| TU | Source functions, before → after | New text bytes | Full build attempts | Trial batches (candidate jobs) | Minutes including setup |
+| --- | --- | ---: | ---: | ---: | ---: |
+| `kynapse/tu_30ea38` | 15/22 → 16/22 | 856 | 5 | 38 (38) | 16.46 |
+| `animation/tu_34b498` | 13/62 → 33/62 | 2,328 | 12 | 16 (684) | 16.63 |
+| `tu_105bc0` | 54/99 → 64/99 | 752 | 7 | 32 (374) | 17.95 |
+
+Bytes use `ninja progress` spans, including alignment. The sessions also made 61 matched functions
+readable: eight Kynapse C++ functions, 31 animation C callbacks/handlers, and 22 game C++ functions and
+callbacks (16 methods); 30 were existing matches rewritten. Trial counts exclude 12 compile-only
+preparation passes and five standalone probes. Integration and final variant checks are outside the
+session timings. Every commit and all three integrated merges rebuilt identically; all five retail
+images passed. Overall: 4,556 → 4,587 source functions (38.29 → 38.55%), 214,376 → 218,312 text bytes
+(7.89 → 8.04%). No whole TU, including its data, was completed; 70 functions remain in these three TUs.
+
+Blockers, ranked by impact on remaining bytes:
+
+1. Types and object lifetimes: callee/callback signatures, float arguments, polymorphic PS2 layouts,
+   iterators and stack aggregates. Correcting these matched even an 856-byte initializer.
+2. Scheduling and register allocation after typing; near-identical destructors and loops exhausted
+   bounded attempts without yielding whole-TU completion.
+3. Pipeline gaps: switch-table ownership, mixed EE 64/128-bit preparation, small-data flags, custom
+   header packaging and assembly aliases whose function-section names differ from their symbols.
+
+Continue with three agents on disjoint subsystems and one owner per shared header; there is no evidence
+yet to justify more. Choose semantically checked, exact-boundary TUs with coherent classes and useful
+counterpart sources, rather than ranking by existing match count alone. First improve callee arity and
+float propagation, iterator/aggregate modeling, jump-table migration, custom-header packaging and
+section-alias handling. Add automatic per-session build/candidate/time telemetry.
+
+Observed throughput was 1,312 bytes and 10.3 new functions per session on average, or 4.63 kB per agent
+hour (individual byte rates: 3.12, 8.40 and 2.51 kB/hour). Straight-line arithmetic for the remaining
+2,497,152 text bytes gives about 1,900 comparable sessions / 540 agent-hours. This is optimistic, not a
+completion forecast: about 76% of the remaining bytes are in functions over 300 bytes, this pilot mainly
+finished smaller functions, and data completion was not measured. Measure another pilot after the type
+and pipeline fixes, including a completed large-function TU, before estimating whole-project completion.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.
