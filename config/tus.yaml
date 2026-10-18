@@ -19967,7 +19967,7 @@ tus:
   evidence: [eh, calls]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags_basis: matched 1 of 5 functions
   data:
     .rodata: ['0x40a5b0', '0x40a660']
 - name: animation/tu_345500
