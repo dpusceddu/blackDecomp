@@ -45,8 +45,11 @@ extern void* gPairThirdTable;
 extern void* gPairValuesTable;
 
 struct Element : ObjectBase {
-    int value;
+    float coneExpiry, pairExpiry, distance;
+    bool inCone, blocked, heard, otherGroup;
+    static void operator delete[](void* block) { memoryRelease(block); }
 };
+typedef char assert_PairOwnerElement_size[(sizeof(Element) == 0x14) ? 1 : -1];
 
 struct PairOwnerBase : Tagged {
     float low;
@@ -79,11 +82,5 @@ struct PairOwner : PairOwnerBase {
     bool Configure(ChildBuffers* config);
     virtual __declspec(noinline) ~PairOwner();   // Ghidra /default.xbe 0x68030 (deleting 0x68330)
 };
-
-
-
-
-
-
 
 #endif
