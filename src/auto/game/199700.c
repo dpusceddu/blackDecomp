@@ -1,0 +1,21 @@
+#include "auto/prelude.h"
+
+#include "types_ghidra.h"
+extern s32 func_001984F0();
+extern s32 func_00193A08();
+extern s32 func_001829E8();
+extern s32 func_0017E428();
+extern s128 func_00189048();
+
+void func_00199700(RecoveredAIActionHeader *arg0) {
+    void *temp_16;
+
+    func_001984F0();
+    if (func_00193A08(arg0) == 0) {
+        if ((func_001829E8(arg0->brain + 0x810) != 0) || (func_001829A8(arg0->brain + 0x810) == 0)) {
+            temp_16 = arg0->brain;
+            func_0017E428(temp_16 + 0x650, func_00189048(temp_16 + 0x150));
+            func_00193990(arg0, 0U);
+        }
+    }
+}

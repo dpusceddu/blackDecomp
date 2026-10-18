@@ -1,0 +1,18 @@
+#include "auto/prelude.h"
+
+#include "types_ghidra.h"
+extern s32 func_001A1D20();
+
+s32 func_001A1CD0(s32 arg0, s32 arg1) {
+    s32 temp_5;
+
+    temp_5 = M2C_FIELD(arg1, s32 *, 0);
+    if (temp_5 == 0xA) {
+        func_00193A28((RecoveredAIActionHeader *) arg0, 0x16U, 0);
+        return 1;
+    }
+    if (temp_5 == 0xB) {
+        func_001A1D20(arg0);
+    }
+    return 0;
+}
