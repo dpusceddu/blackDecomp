@@ -30032,13 +30032,33 @@ units:
     size: 32
     status: source
 - name: auto_physics_334390
-  source: src/auto/physics/334390.c
-  origin: auto
+  source: src/physics/tu_334120.cpp
+  origin: physics
   flags:
   - -O2
   - -G0
   - -snas
+  - -ffunction-sections
   functions:
+  - addr: '0x334120'
+    symbol: func_00334120
+    size: 324
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x334268'
+    symbol: func_00334268
+    size: 100
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x3342d0'
+    symbol: func_003342D0
+    size: 104
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x334340'
+    symbol: func_00334340
+    size: 80
+    status: source
   - addr: '0x334390'
     symbol: func_00334390
     size: 32
