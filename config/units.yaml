@@ -27482,6 +27482,7 @@ units:
     symbol: func_00312900
     size: 52
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_312a10
   source: src/auto/other/312a10.c
   origin: auto
@@ -27498,6 +27499,7 @@ units:
     symbol: func_00312A28
     size: 20
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_312bc8
   source: src/auto/other/312bc8.c
   origin: auto
@@ -43124,3 +43126,12 @@ units:
     size: 64
     status: source
   claim: wave2-rw-audio
+- name: rwa_wave2_property_hypotheses
+  source: src/rwa_ee/tu_311e60.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  claim: wave2-rw-audio
+  functions: []
