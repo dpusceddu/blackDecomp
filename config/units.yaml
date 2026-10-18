@@ -43575,3 +43575,33 @@ units:
     size: 3792
     status: asm
     reason: schedule
+- name: physics_mass_32fbc0
+  source: src/physics/tu_32fbc0.c
+  origin: physics
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -mvu0-use-vf0-vf15
+  - -ffunction-sections
+  functions:
+  - addr: '0x32fbc0'
+    symbol: func_0032FBC0
+    size: 224
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32fca0'
+    symbol: func_0032FCA0
+    size: 4184
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x330cf8'
+    symbol: func_00330CF8
+    size: 780
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x331008'
+    symbol: func_00331008
+    size: 3432
+    status: asm
+    reason: claimed physics campaign
