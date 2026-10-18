@@ -21789,6 +21789,7 @@ units:
     symbol: func_001AB3C0
     size: 32
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ab760
   source: src/auto/game/1ab760.c
   origin: auto
@@ -21805,6 +21806,7 @@ units:
     symbol: func_001AB768
     size: 8
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1abe08
   source: src/auto/game/1abe08.c
   origin: auto
@@ -21825,6 +21827,7 @@ units:
     symbol: func_001ABE18
     size: 28
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1abeb8
   source: src/auto/game/1abeb8.c
   origin: auto
@@ -21837,6 +21840,7 @@ units:
     symbol: func_001ABEB8
     size: 40
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1abfa8
   source: src/auto/game/1abfa8.c
   origin: auto
@@ -21853,6 +21857,7 @@ units:
     symbol: func_001ABFD8
     size: 68
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ac020
   source: src/auto/game/1ac020.c
   origin: auto
@@ -21865,6 +21870,7 @@ units:
     symbol: func_001AC020
     size: 28
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ac040
   source: src/auto/game/1ac040.c
   origin: auto
@@ -21877,6 +21883,7 @@ units:
     symbol: func_001AC040
     size: 8
     status: source
+  claim: wave1-game-actor
 - name: tu_1ac050
   source: src/tu/1ac050.c
   origin: auto
@@ -21901,6 +21908,7 @@ units:
     symbol: func_001AC0D0
     size: 16
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ac268
   source: src/auto/game/1ac268.c
   origin: auto
@@ -21913,6 +21921,7 @@ units:
     symbol: func_001AC268
     size: 16
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ac398
   source: src/auto/game/1ac398.c
   origin: auto
@@ -21925,6 +21934,7 @@ units:
     symbol: func_001AC398
     size: 92
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ac3f8
   source: src/auto/game/1ac3f8.c
   origin: auto
@@ -21937,6 +21947,7 @@ units:
     symbol: func_001AC3F8
     size: 72
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ac940
   source: src/auto/game/1ac940.c
   origin: auto
@@ -21949,6 +21960,7 @@ units:
     symbol: func_001AC940
     size: 28
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ad030
   source: src/auto/game/1ad030.c
   origin: auto
@@ -21965,6 +21977,7 @@ units:
     symbol: func_001AD050
     size: 28
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ad070
   source: src/auto/game/1ad070.c
   origin: auto
@@ -21977,6 +21990,7 @@ units:
     symbol: func_001AD070
     size: 40
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ad368
   source: src/auto/game/1ad368.c
   origin: auto
@@ -21989,6 +22003,7 @@ units:
     symbol: func_001AD368
     size: 12
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ad9b0
   source: src/auto/game/1ad9b0.c
   origin: auto
@@ -22017,6 +22032,7 @@ units:
     symbol: func_001ADA70
     size: 48
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1adaf8
   source: src/auto/game/1adaf8.c
   origin: auto
@@ -22029,6 +22045,7 @@ units:
     symbol: func_001ADAF8
     size: 48
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1adbf0
   source: src/auto/game/1adbf0.c
   origin: auto
@@ -22041,6 +22058,7 @@ units:
     symbol: func_001ADBF0
     size: 28
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1add58
   source: src/auto/game/1add58.c
   origin: auto
@@ -35031,6 +35049,7 @@ units:
     symbol: func_001A8E30
     size: 220
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1a8f10
   source: src/auto/game/1a8f10.c
   origin: auto
@@ -35043,6 +35062,7 @@ units:
     symbol: func_001A8F10
     size: 104
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1aa7e8
   source: src/auto/game/1aa7e8.c
   origin: auto
@@ -35079,6 +35099,7 @@ units:
     symbol: func_001AA9D0
     size: 8
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1aad90
   source: src/auto/game/1aad90.c
   origin: auto
@@ -35103,6 +35124,7 @@ units:
     symbol: func_001AAEB0
     size: 96
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1ab338
   source: src/auto/game/1ab338.c
   origin: auto
@@ -35115,6 +35137,7 @@ units:
     symbol: func_001AB338
     size: 132
     status: source
+  claim: wave1-game-actor
 - name: auto_unclassified_1b79c0
   source: src/auto/unclassified/1b79c0.c
   origin: auto
@@ -39897,4 +39920,100 @@ units:
   - addr: '0x105058'
     symbol: func_00105058
     size: 80
+    status: source
+- name: actor_player_move_multiplier
+  source: src/game/actor/player_move_multiplier.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    D_003BD184: '0x3bd184'
+    D_003BD188: '0x3bd188'
+    func_00135550: '0x135550'
+    func_001AC040: '0x1ac040'
+  functions:
+  - addr: '0x1ac330'
+    symbol: func_001AC330
+    status: source
+    size: 100
+- name: actor_aim_bearing
+  source: src/game/actor/aim_bearing.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    func_00135550: '0x135550'
+    func_0013EF08: '0x13ef08'
+    func_001AC040: '0x1ac040'
+  functions:
+  - addr: '0x1ac440'
+    symbol: func_001AC440
+    status: source
+    size: 120
+- name: actor_torso_pitch
+  source: src/game/actor/torso_pitch.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    D_003BD18C: '0x3bd18c'
+    func_00135550: '0x135550'
+    func_0013EE68: '0x13ee68'
+    func_001AC040: '0x1ac040'
+  functions:
+  - addr: '0x1ac4b8'
+    symbol: func_001AC4B8
+    status: source
+    size: 172
+- name: actor_player_move_rate
+  source: src/game/actor/player_move_rate.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    func_00135550: '0x135550'
+    func_0018D9F8: '0x18d9f8'
+    func_001AC040: '0x1ac040'
+  functions:
+  - addr: '0x1ac278'
+    symbol: func_001AC278
+    size: 184
+    status: source
+- name: actor_animation_variables
+  source: src/game/actor/animation_variables.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    D_0048F708: '0x48f708'
+    func_001AC268: '0x1ac268'
+    func_001AC278: '0x1ac278'
+    func_001AC330: '0x1ac330'
+    func_001AC398: '0x1ac398'
+    func_001AC3F8: '0x1ac3f8'
+    func_001AC440: '0x1ac440'
+    func_001AC4B8: '0x1ac4b8'
+    func_001AC568: '0x1ac568'
+    func_001AC5B8: '0x1ac5b8'
+    func_001AC648: '0x1ac648'
+    func_00348A10: '0x348a10'
+  functions:
+  - addr: '0x1aba98'
+    symbol: func_001ABA98
+    size: 400
     status: source
