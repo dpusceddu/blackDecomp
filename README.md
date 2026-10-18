@@ -188,6 +188,9 @@ Type and instruction support, all of it mechanical and checked by exact matches:
   64-bit access. Callee results and arguments of 128-bit type are found from the callee's code (`wide_info`) and enter the
   context as `s64`. `max.s`/`min.s` and MMI/VU0 instructions m2c cannot read are reported by instruction (`next.py ee`).
   The vector layer (`include/game/ai_vector.hpp`, compile with `-mvu0-use-vf0-vf31`) is the form SN accepts for them.
+- **Tail calls and indexed globals.** m2c drops the delay-slot instruction of a `j func` tail call (an argument set there is lost):
+  `ee_prep.py` puts it before the jump. m2c writes `&D_x + n` for byte arithmetic on a global of unknown type, which C scales by the
+  size of `D_x`: `byte_addresses` makes such addresses integers and types the dereferences (`*(s32 *)(...)`). Together +22 functions.
 - **Owned rodata** (`autodecomp.py rodata`). An exact draft that owns `.rodata` gets the run defined in its unit, as
   `const u32 rodata_XXXXXXXX[] __asm__("D_XXXXXXXX")` words or a `const char` string array laid out as the original run, and
   string literals point at the array. Then `register`/`settle` place it.
@@ -242,7 +245,7 @@ What the executable shows (USA retail):
   barely differ at known boundaries and inside objects (breaks 6.5 % vs 3.0 %, shift changes 7.0 % vs 8.8 %): supporting evidence only.
 - **Compilers.** Callee-saved registers are saved with `sq` in the SN 1.36 output (5,415 functions); 334 functions save them with `sd` in
   16-byte slots, in three solid blocks (`0x28fab0-0x2a5038`, `0x355278-0x35c308`, `0x367e28-0x372d68`: Sony's precompiled libraries).
-  The catalog compiler `ee-gcc2.9-991111-01 -O2 -G0` (no `-snas`) emits exactly that style: 37 of the functions of these blocks match
+  The catalog compiler `ee-gcc2.9-991111-01 -O2 -G0` (no `-snas`) emits exactly that style: 36 of the functions of these blocks match
   with it and none matches with SN 1.36. `ee-gcc2.95.3-114`, `ee-gcc2.95.2-273a` and the 2.96 build match nothing more than SN 1.36 does.
   `-O1` (127 functions), `-G8` (22) and `-fno-schedule-insns2` (16) match in scattered TUs and need no zone of their own.
 - **Libraries** (strings, style, frames; `libraries:` in `tus.yaml`; edges between libraries are certain only where a style or frame

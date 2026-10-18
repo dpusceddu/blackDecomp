@@ -29,6 +29,14 @@ def prep(text):
         m = LINE.match(l)
         if m:
             parsed[i] = (m.group(1), m.group(2), m.group(3), m.group(4))
+    # m2c drops the delay-slot instruction of a `j func` tail call (an argument set there is lost): put it before the jump
+    for i, (pre, op, sp, args) in sorted(parsed.items()):
+        if op == 'j' and args.startswith('func_') and i + 1 in parsed and parsed[i + 1][1] not in ('nop', 'j', 'jr', 'jal', 'jalr') \
+                and not parsed[i + 1][1].startswith(('b', 'c1')):
+            dpre, dop, dsp, dargs = parsed[i + 1]
+            out[i] = '%s%s%s%s' % (dpre.replace('*/ ', '*/', 1) if dpre.endswith('*/  ') else dpre, dop, dsp, dargs)
+            out[i + 1] = '%s%s%s%s\n%snop' % (pre, op, sp, args, pre)
+            parsed[i], parsed[i + 1] = (dpre, dop, dsp, dargs), (pre, op, sp, args)
     written = set()
     argreg = {'a0': 0, 'a1': 1, 'a2': 2, 'a3': 3, '4': 0, '5': 1, '6': 2, '7': 3}
     for i, (pre, op, sp, args) in sorted(parsed.items()):

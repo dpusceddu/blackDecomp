@@ -526,8 +526,60 @@ def clean_function(name, r, sigs, strings=None, stack=None):
                 lines.append('extern s32 %s;' % ident if ident.startswith('D_') else 'extern s32 %s();' % ident)
     if r.get('ee') and r['ee']['q'] and not r['ee']['real64']:
         lines = [re.sub(r'\bu64\b', 'u128', re.sub(r'\bs64\b', 's128', l)) for l in lines]
+    body2, changed = byte_addresses(body, lines)
+    if changed and not os.environ.get('AUTODECOMP_NO_BYTEADDR'):
+        body = body2
     src = '\n'.join(lines) + '\n\n' + sig + ' {\n' + body + '\n}\n'
     return src, sig
+
+
+ADDR_OF = re.compile(r'&(D_[0-9A-F]{8})\b')
+
+
+def byte_addresses(body, lines):
+    """`&D_x + n` in m2c's C scales n by the size of D_x, but the assembly adds bytes: make the address an integer wherever it is
+    an operand of + or - (`(s32) &D_x`) and give the dereferences of such sums the type D_x is declared with."""
+    dtype = {}
+    for l in lines:
+        m = re.match(r'^extern (.+?)\s+(D_[0-9A-F]{8});$', l)
+        if m:
+            dtype[m.group(2)] = m.group(1)
+
+    def operand(m):
+        pre, post = body[:m.start()].rstrip(), body[m.end():].lstrip()
+        if re.search(r'[+-]$', pre) and not pre.endswith(('++', '--')) or re.match(r'[+-](?![+-=])', post) and not post.startswith(('+=', '-=')):
+            return '((s32) &%s)' % m.group(1)
+        return m.group(0)
+    out = ADDR_OF.sub(operand, body)
+    if '(s32) &D_' not in out:
+        return out, False
+    # `*(<sum with an integer address>)`: the pointer is gone, so say what is read
+    res, i = [], 0
+    while i < len(out):
+        j = out.find('*(', i)
+        if j < 0 or (j > 0 and (out[j - 1].isalnum() or out[j - 1] in '_)]')):      # a multiplication, not a dereference
+            if j < 0:
+                break
+            res.append(out[i:j + 2])
+            i = j + 2
+            continue
+        depth, k = 0, j + 1
+        while k < len(out):
+            depth += out[k] == '('
+            depth -= out[k] == ')'
+            if depth == 0:
+                break
+            k += 1
+        inner = out[j + 1:k + 1]
+        m = re.search(r'\(s32\) &(D_[0-9A-F]{8})', inner)
+        if m:
+            res.append(out[i:j] + '*(%s *)%s' % (dtype.get(m.group(1), 's32'), inner))
+            i = k + 1
+        else:
+            res.append(out[i:j + 2])
+            i = j + 2
+    res.append(out[i:])
+    return ''.join(res), True
 
 
 def decl_function(ident, d):
