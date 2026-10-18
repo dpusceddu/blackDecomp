@@ -42990,3 +42990,103 @@ units:
     status: asm
     reason: schedule
     size: 72
+- name: effect_slots_1b2e08
+  source: src/game/effects/slot_unmatched.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -x
+  - c++
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1b2e08'
+    symbol: func_001B2E08
+    status: asm
+    reason: claimed
+  - addr: '0x1b3420'
+    symbol: func_001B3420
+    status: asm
+    reason: claimed
+  - addr: '0x1b3590'
+    symbol: func_001B3590
+    status: asm
+    reason: claimed
+  - addr: '0x1b3818'
+    symbol: func_001B3818
+    status: asm
+    reason: claimed
+  - addr: '0x1b38f8'
+    symbol: func_001B38F8
+    status: asm
+    reason: claimed
+  - addr: '0x1b3ae8'
+    symbol: func_001B3AE8
+    status: asm
+    reason: claimed
+  - addr: '0x1b3bd0'
+    symbol: func_001B3BD0
+    status: asm
+    reason: claimed
+- name: effect_1b33b8
+  source: src/game/effects/slot_lookup.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b33b8'
+    symbol: func_001B33B8
+    size: 104
+    status: source
+- name: effect_1b37c8
+  source: src/game/effects/slot_release.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b37c8'
+    symbol: func_001B37C8
+    size: 76
+    status: source
+- name: effect_1b3a50
+  source: src/game/effects/slot_actor.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b3a50'
+    symbol: func_001B3A50
+    size: 64
+    status: source
+- name: effect_1b3a90
+  source: src/game/effects/slot_bone.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b3a90'
+    symbol: func_001B3A90
+    size: 88
+    status: source
+- name: effect_1b3cf8
+  source: src/game/effects/slot_set.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b3cf8'
+    symbol: func_001B3CF8
+    size: 32
+    status: source
