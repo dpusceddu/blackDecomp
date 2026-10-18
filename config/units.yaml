@@ -1,5 +1,3 @@
-# Provisional translation units that replace assembly functions with source; see README.md.
-# status: source = provided by the unit; asm = stays assembly, with a one-word reason.
 variant: usa-retail
 units:
 - name: kynapse_accessors_2dfbf8
@@ -36004,14 +36002,101 @@ units:
     size: 68
     status: source
 - name: tuf_32e0e0
-  source: src/tu/physics_tu_32bc70.c
-  origin: auto
+  source: src/tu/physics_tu_32bc70.cpp
+  origin: physics
   flags:
   - -O2
   - -G0
   - -snas
+  - -x
+  - c++
   - -ffunction-sections
   functions:
+  - addr: '0x32bc70'
+    symbol: func_0032BC70
+    size: 332
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32bdc0'
+    symbol: func_0032BDC0
+    size: 788
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32c0d8'
+    symbol: func_0032C0D8
+    size: 1224
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32c5a0'
+    symbol: func_0032C5A0
+    size: 664
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32c838'
+    symbol: func_0032C838
+    size: 560
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32ca68'
+    symbol: func_0032CA68
+    size: 236
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32cb58'
+    symbol: func_0032CB58
+    size: 648
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32cde0'
+    symbol: func_0032CDE0
+    size: 808
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32d108'
+    symbol: func_0032D108
+    size: 304
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32d248'
+    symbol: func_0032D248
+    size: 268
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32d358'
+    symbol: func_0032D358
+    size: 568
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32d590'
+    symbol: func_0032D590
+    size: 560
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32d7c0'
+    symbol: func_0032D7C0
+    size: 460
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32d990'
+    symbol: func_0032D990
+    size: 856
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32dce8'
+    symbol: func_0032DCE8
+    size: 532
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32df00'
+    symbol: func_0032DF00
+    size: 324
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32e048'
+    symbol: func_0032E048
+    size: 148
+    status: asm
+    reason: claimed physics campaign
   - addr: '0x32e0e0'
     symbol: func_0032E0E0
     size: 60
@@ -36019,6 +36104,10 @@ units:
   - addr: '0x32e1b0'
     symbol: func_0032E1B0
     size: 88
+    status: source
+  - addr: '0x32e218'
+    symbol: func_0032E218
+    size: 136
     status: source
   - addr: '0x32e2a0'
     symbol: func_0032E2A0
@@ -40016,4 +40105,16 @@ units:
   - addr: '0x1aba98'
     symbol: func_001ABA98
     size: 400
+    status: source
+- name: physics_scene_bind_32e120
+  source: src/tu/physics_scene_bind_32e120.c
+  origin: physics
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x32e120'
+    symbol: func_0032E120
+    size: 144
     status: source
