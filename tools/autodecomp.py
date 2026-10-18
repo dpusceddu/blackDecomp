@@ -1050,7 +1050,16 @@ SONY_EXTRA = [['--cc=' + SONY] + f for f in (['-O1', '-G0'], ['-O3', '-G0'], ['-
 
 def extra_sets(fn):
     tf = tu_flags(fn['addr'])
-    return force_cc(SONY_EXTRA if tf and tf[0] != COMPILER else EXTRA_FLAG_SETS)
+    if tf and tf[0] != COMPILER:
+        return force_cc(SONY_EXTRA)
+    # The bundled GNU assembler and SN assembler differ on short-loop/hazard
+    # padding. Both have full-image-verified campaign matches; try both rather
+    # than treating an assembler NOP difference as an unfixable C mismatch.
+    sets = EXTRA_FLAG_SETS + [['-O2', '-G0'], ['-O2', '-G0', '-fbyte-bool']]
+    if any(value[0] == 'gprel' for value in fn['rel'].values()):
+        sets += [['-O2', flag] + extra for flag in ('-G1', '-G8')
+                 for extra in ([], ['-fbyte-bool'])]
+    return force_cc(sets)
 
 
 def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=True):

@@ -8,6 +8,18 @@ import autodecomp as auto
 
 
 class IntegrationTests(unittest.TestCase):
+    def test_gnu_assembler_is_a_real_fallback_with_conditional_small_data_flags(self):
+        with patch.object(auto, 'tu_flags', return_value=None), patch.object(auto, 'force_cc', side_effect=lambda x: x):
+            regular = auto.extra_sets({'addr': 0x100000, 'rel': {}})
+            small = auto.extra_sets({'addr': 0x100000, 'rel': {'0': ['gprel', 0x400000, 0, 'value']}})
+        self.assertIn(['-O2', '-G0'], regular)
+        self.assertIn(['-O2', '-G0', '-fbyte-bool'], regular)
+        self.assertNotIn(['-O2', '-G1'], regular)
+        self.assertIn(['-O2', '-G1'], small)
+        self.assertIn(['-O2', '-G8', '-fbyte-bool'], small)
+        with patch.object(auto, 'tu_flags', return_value=(auto.SONY, [], 'default')), patch.object(auto, 'force_cc', side_effect=lambda x: x):
+            self.assertEqual(auto.extra_sets({'addr': 0x100000, 'rel': {}}), auto.SONY_EXTRA)
+
     def test_permuter_expansion_removes_header_comments_and_preserves_literals(self):
         source = '#include "recovered/Recovered_Vtable_003DBDC8.h"\nint f(void) { return 1; /* note */ }\n'
         expanded = auto.expand_macros(source)
