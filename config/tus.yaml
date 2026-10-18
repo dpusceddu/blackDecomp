@@ -9251,7 +9251,7 @@ tus:
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 8 of 21 functions
+  flags_basis: matched 13 of 21 functions
 - name: tu_1b0068
   kind: isolated
   library: game

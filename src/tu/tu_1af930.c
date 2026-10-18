@@ -1,64 +1,46 @@
-/* Translation unit tu_1af930 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
 #include "auto/prelude.h"
+#include "game/actor/asset.h"
 
-void func_001AFC78(void) {
-
-}
-
-/* Assembly between the functions: func_001AFC80 (72 bytes) */
+void func_001AFC78(void) {}
 
 s32 func_001AFCC8(void) {
     return 1;
 }
 
-void func_001AFCD0(void) {
+void func_001AFCD0(void) {}
 
-}
-
-s32 func_001AFCD8(void *arg0, f32 fparg0) {
-    f32 temp_f0;
-
-    if (M2C_FIELD(arg0, s32 *, 4) != -1) {
-        temp_f0 = M2C_FIELD(arg0, f32 *, 0) - fparg0;
-        M2C_FIELD(arg0, f32 *, 0) = temp_f0;
-        if (temp_f0 <= 0.0f) {
-            M2C_FIELD(arg0, f32 *, 0) = 0.0f;
+s32 func_001AFCD8(BkActorTimerPS2 *timer, float elapsed) {
+    float remaining;
+    if (timer->index != -1) {
+        remaining = timer->remaining - elapsed;
+        timer->remaining = remaining;
+        if (remaining <= 0.0f) {
+            timer->remaining = 0.0f;
             return 1;
         }
     }
     return 0;
 }
 
-/* Assembly between the functions: func_001AFD18 (104 bytes), func_001AFD80 (40 bytes) */
-
-s32 func_001AFDA8(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 4);
+s32 func_001AFDA8(BkActorTimerPS2 *timer) {
+    return timer->index;
 }
 
-f32 func_001AFDB0(f32 *arg0) {
-    return *arg0;
+float func_001AFDB0(BkActorTimerPS2 *timer) {
+    return timer->remaining;
 }
 
-s32 func_001AFDB8(s32 arg0) {
-    if (arg0 == 0) {
-        goto block_3;
-    }
-    if (arg0 == 1) {
-        goto block_4;
-    }
+s32 func_001AFDB8(s32 mode) {
+    if (mode == 0) goto quarter;
+    if (mode == 1) goto half;
     return 1;
-block_3:
+quarter:
     return 4;
-block_4:
+half:
     return 2;
 }
 
-/* Assembly between the functions: func_001AFDE0 (88 bytes), func_001AFE38 (168 bytes), func_001AFEE0 (168 bytes) */
-
-s32 func_001AFF88(s32 arg0, s32 arg1)
-{
-  int new_var;
-  new_var = arg0 + (arg1 * 4);
-  return M2C_FIELD(new_var, s32 *, 0x214);
+void *func_001AFF88(s32 context_address, s32 kind) {
+    int entry_address = context_address + kind * 4;
+    return M2C_FIELD(entry_address, void **, 0x214);
 }
