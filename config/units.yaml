@@ -1372,21 +1372,6 @@ units:
     symbol: Sweep__Q24Kaim14ComponentSweep
     size: 184
     status: source
-- name: kynapse_misc4_2dc8a0
-  source: src/kynapse/misc4_2dc8a0.cpp
-  origin: kynapse
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  functions:
-  - addr: '0x2dc8a0'
-    symbol: FindIndex__8NameListPCcPUi
-    size: 140
-    status: source
-  externs:
-    _stricmp: '0x360838'
 - name: kynapse_misc4_389200
   source: src/kynapse/misc4_389200.cpp
   origin: kynapse
@@ -9889,12 +9874,13 @@ units:
     size: 60
     status: source
 - name: tuf_2dada8
-  source: src/tu/kynapse_tu_2dad10.c
-  origin: auto
+  source: src/kynapse/point_mapper_core.cpp
+  origin: kynapse
   flags:
   - -O2
   - -G0
   - -snas
+  - -fbyte-bool
   - -ffunction-sections
   functions:
   - addr: '0x2dada8'
@@ -9921,6 +9907,11 @@ units:
     symbol: func_002DCA20
     size: 32
     status: source
+  - addr: '0x2dc8a0'
+    symbol: func_002DC8A0
+    size: 140
+    status: source
+  owner: wave1-kynapse
 - name: tuf_2e1058
   source: src/tu/kynapse_tu_2e0140.c
   origin: auto
@@ -39474,4 +39465,49 @@ units:
   - addr: '0x34e5c0'
     symbol: func_0034E5C0
     size: 404
+    status: source
+- name: point_mapper_factory
+  source: src/kynapse/point_mapper_factory.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2dad10'
+    symbol: func_002DAD10
+    size: 152
+    status: source
+  externs:
+    __throw: '0x292b40'
+    terminate__Fv: '0x36f978'
+- name: point_mapper_configure
+  source: src/kynapse/point_mapper_configure.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2daf40'
+    symbol: func_002DAF40
+    size: 512
+    status: source
+- name: point_mapper_nearest
+  source: src/kynapse/point_mapper_nearest.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2db848'
+    symbol: func_002DB848
+    size: 380
     status: source
