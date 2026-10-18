@@ -15628,18 +15628,6 @@ units:
     symbol: func_00103918
     size: 16
     status: source
-- name: auto_game_103db0
-  source: src/auto/game/103db0.c
-  origin: auto
-  flags:
-  - -O1
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x103db0'
-    symbol: func_00103DB0
-    size: 60
-    status: source
 - name: auto_game_105308
   source: src/auto/game/105308.c
   origin: auto
@@ -22384,18 +22372,6 @@ units:
     symbol: func_001C05F8
     size: 8
     status: source
-- name: auto_game_103ff0
-  source: src/auto/game/103ff0.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x103ff0'
-    symbol: func_00103FF0
-    size: 96
-    status: source
 - name: auto_game_104050
   source: src/auto/game/104050.c
   origin: auto
@@ -22416,30 +22392,7 @@ units:
     symbol: func_001040C0
     size: 24
     status: source
-- name: auto_game_1040d8
-  source: src/auto/game/1040d8.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x1040d8'
-    symbol: func_001040D8
-    size: 32
-    status: source
-- name: auto_game_1040f8
-  source: src/auto/game/1040f8.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x1040f8'
-    symbol: func_001040F8
-    size: 16
-    status: source
+  claim: wave1-game-frontend
 - name: auto_game_104108
   source: src/auto/game/104108.c
   origin: auto
@@ -22452,18 +22405,7 @@ units:
     symbol: func_00104108
     size: 160
     status: source
-- name: auto_game_105058
-  source: src/auto/game/105058.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x105058'
-    symbol: func_00105058
-    size: 80
-    status: source
+  claim: wave1-game-frontend
 - name: auto_game_105228
   source: src/auto/game/105228.c
   origin: auto
@@ -22480,6 +22422,7 @@ units:
     symbol: func_00105258
     size: 12
     status: source
+  claim: wave1-game-frontend
 - name: auto_game_105268
   source: src/auto/game/105268.c
   origin: auto
@@ -22492,6 +22435,7 @@ units:
     symbol: func_00105268
     size: 56
     status: source
+  claim: wave1-game-frontend
 - name: tuf_109410
   source: src/tu/tu_109308.c
   origin: auto
@@ -24348,6 +24292,7 @@ units:
     symbol: func_00103C28
     size: 212
     status: source
+  claim: wave1-game-frontend
 - name: tu_105c40
   source: src/tu/105c40.c
   origin: auto
@@ -39621,4 +39566,172 @@ units:
   - addr: '0x343508'
     symbol: func_00343508
     size: 12
+    status: source
+- name: game_frontend_menu_reset_selection
+  source: src/game/frontend_menu_reset_selection.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x103930'
+    symbol: func_00103930
+    size: 92
+    status: source
+- name: game_frontend_menu_return
+  source: src/game/frontend_menu_return.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G1
+  - -snas
+  functions:
+  - addr: '0x103990'
+    symbol: func_00103990
+    size: 148
+    status: source
+- name: game_frontend_menu_level_selection
+  source: src/game/frontend_menu_level_selection.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G1
+  - -snas
+  functions:
+  - addr: '0x103d08'
+    symbol: func_00103D08
+    size: 168
+    status: source
+- name: game_frontend_menu_movie_callback
+  source: src/game/frontend_menu_movie_callback.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G1
+  - -snas
+  functions:
+  - addr: '0x103df0'
+    symbol: func_00103DF0
+    size: 352
+    status: source
+- name: game_frontend_menu_queue_movie
+  source: src/game/frontend_menu_queue_movie.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x103f50'
+    symbol: func_00103F50
+    size: 160
+    status: source
+- name: game_frontend_menu_initialize
+  source: src/game/frontend_menu_initialize.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1041a8'
+    symbol: func_001041A8
+    size: 100
+    status: source
+- name: game_frontend_menu_choose_screen
+  source: src/game/frontend_menu_choose_screen.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1050a8'
+    symbol: func_001050A8
+    size: 380
+    status: source
+- name: game_frontend_menu_notify
+  source: src/game/frontend_menu_notify.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x103db0'
+    symbol: func_00103DB0
+    size: 60
+    status: source
+- name: game_frontend_menu_apply_name
+  source: src/game/frontend_menu_apply_name.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x103ff0'
+    symbol: func_00103FF0
+    size: 96
+    status: source
+- name: game_frontend_menu_load
+  source: src/game/frontend_menu_load.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1040d8'
+    symbol: func_001040D8
+    size: 32
+    status: source
+- name: game_frontend_menu_request
+  source: src/game/frontend_menu_request.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1040f8'
+    symbol: func_001040F8
+    size: 16
+    status: source
+- name: game_frontend_menu_destroy
+  source: src/game/frontend_menu_destroy.cpp
+  origin: game
+  tu: tu_103930
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x105058'
+    symbol: func_00105058
+    size: 80
     status: source
