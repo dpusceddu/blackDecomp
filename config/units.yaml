@@ -12516,35 +12516,6 @@ units:
     symbol: func_00341848
     size: 32
     status: source
-- name: tuf_342a60
-  source: src/tu/animation_tu_342a60.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x342a60'
-    symbol: func_00342A60
-    size: 28
-    status: source
-  - addr: '0x3434d8'
-    symbol: func_003434D8
-    size: 12
-    status: source
-  - addr: '0x3434e8'
-    symbol: func_003434E8
-    size: 12
-    status: source
-  - addr: '0x3434f8'
-    symbol: func_003434F8
-    size: 12
-    status: source
-  - addr: '0x343508'
-    symbol: func_00343508
-    size: 12
-    status: source
 - name: auto_unclassified_36a138
   source: src/auto/unclassified/36a138.c
   origin: auto
@@ -39606,4 +39577,42 @@ units:
   - addr: '0x345f98'
     symbol: func_00345F98
     size: 32
+    status: source
+- name: animation_collection_342a60
+  source: src/tu/animation_collection_342a60.cpp
+  origin: animation
+  owner: wave1-animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x342a60'
+    symbol: func_00342A60
+    size: 28
+    status: source
+  - addr: '0x3430d8'
+    symbol: func_003430D8
+    size: 68
+    status: source
+  - addr: '0x343120'
+    symbol: func_00343120
+    size: 36
+    status: source
+  - addr: '0x3434d8'
+    symbol: func_003434D8
+    size: 12
+    status: source
+  - addr: '0x3434e8'
+    symbol: func_003434E8
+    size: 12
+    status: source
+  - addr: '0x3434f8'
+    symbol: func_003434F8
+    size: 12
+    status: source
+  - addr: '0x343508'
+    symbol: func_00343508
+    size: 12
     status: source
