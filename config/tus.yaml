@@ -20167,7 +20167,7 @@ tus:
   evidence: [eh, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 6 of 13 functions
+  flags_basis: matched 8 of 13 functions
   data:
     .data: ['0x3d4460', '0x3d5060']
 - name: animation/tu_34f360
