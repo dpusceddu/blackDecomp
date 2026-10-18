@@ -2,6 +2,7 @@
 #define GAME_FRONTEND_RESOURCES_HPP
 
 // PS2 layout views; names describe behavior because original class names are unknown.
+extern "C" void* func_001282D0(void*);
 struct FrontendResourceSlot {
     char opaque[0x14];
     int status;
@@ -56,6 +57,62 @@ struct FrontendCallbackQueue {
     int Enqueue(void (*next)(void*), void* data) __asm__("func_001080A0");
 };
 
+struct FrontendVirtualEntry {
+    short adjustment;
+    short reserved;
+    int (*function)(void*);
+};
+struct FrontendUpdateTarget {
+    int reserved;
+    FrontendVirtualEntry* virtualTable;
+};
+struct FrontendLoadingState {
+    int state;
+    FrontendUpdateTarget* owner;
+    FrontendVirtualEntry* virtualTable;
+    int reservedc;
+    long request, result;
+    unsigned flags;
+    unsigned char waiting, forced;
+    short reserved26;
+    float timeout, elapsed;
+    void* specification;
+    void Update() __asm__("func_00106200");
+    int Enter() __asm__("func_00106080");
+};
+struct FrontendSequentialLoadingState {
+    int state;
+    FrontendUpdateTarget* owner;
+    FrontendVirtualEntry* virtualTable;
+    char counter[0x1c];
+    long request, result;
+    unsigned flags;
+    unsigned char waiting, forced;
+    short reserved3e;
+    float timeout, elapsed;
+    void* specification;
+    void Update() __asm__("func_001069F8");
+    int Enter() __asm__("func_00106868");
+};
+
+struct FrontendControllerSample { char opaque[0xf0]; };
+struct FrontendControllerChannel { char opaque[0x16c]; };
+struct FrontendControllerScreen {
+    char reserved[0x2c0];
+    FrontendControllerSample samples[2];
+    FrontendControllerChannel channels[2];
+    int state;
+    unsigned char feedback[0x20];
+    unsigned char feedbackEnabled;
+    char reserved79d[11];
+    char textBox[1];
+    int Enter() __asm__("func_00107020");
+    void Update() __asm__("func_00107228");
+};
+
+typedef char FrontendVirtualEntrySize[(sizeof(FrontendVirtualEntry)==8)?1:-1];
+typedef char FrontendLoadingStateSize[(sizeof(FrontendLoadingState)==0x38)?1:-1];
+typedef char FrontendSequentialLoadingStateSize[(sizeof(FrontendSequentialLoadingState)==0x50)?1:-1];
 typedef char FrontendResourceSlotSize[(sizeof(FrontendResourceSlot)==0x24)?1:-1];
 typedef char FrontendCacheEntrySize[(sizeof(FrontendCacheEntry)==0xc)?1:-1];
 #endif
