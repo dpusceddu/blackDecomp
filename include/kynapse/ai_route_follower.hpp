@@ -9,14 +9,25 @@
 
 struct RouteSource;
 struct NavigationGraph {
-    unsigned char unknown00[0x28];
+    struct NodeRecord { int id; unsigned char unknown04[0x10]; };
+    unsigned char unknown00[0x0c];
+    unsigned int nodeCapacity;
+    unsigned char unknown10[8];
+    NodeRecord* nodes;
+    unsigned char unknown1c[0x0c];
     unsigned int edgeCapacity;
     unsigned char unknown2c[8];
     struct EdgeRef* edges;                                 // 0x34 (8 bytes each)
     unsigned char unknown38[0x1c];
     void* costPolicy;
     void* heuristic;
-    void* NodeAt(unsigned int ordinal);
+    // PS2 ResolveRequestNode checks capacity+0x0c, 20-byte nodes+0x18 and id==-1.
+    void* NodeAt(unsigned int ordinal)
+    {
+        if (ordinal >= nodeCapacity) return 0;
+        NodeRecord* node = &nodes[ordinal];
+        return node->id == -1 ? 0 : node;
+    }
     bool FindRoute(struct RouteBlock* route, void* start, void* goal, struct Actor* actor);
     unsigned int AdvanceTimed(struct RouteBlock* route, void* start, void* goal, struct Actor* actor,
                               unsigned int* samples, float* mean, float* deviation, float deviationScale,
@@ -199,8 +210,11 @@ struct SpeedTable { unsigned char unknown00[4]; float speed; };            // sp
 struct RadiusHolder { unsigned char unknown00[4]; float radius; };         // radius at 0x04
 struct HeightFlag { unsigned char unknown00[4]; unsigned char enabled; };  // flag at 0x04
 
-struct AIRouteFollower {
-    virtual void Slot0();
+// SN GCC2.95 puts the vptr of an unbased data class at its end. The original
+// follower inherits a polymorphic base, so controller starts at 0x04.
+struct AIRouteFollowerBase { virtual void Slot0(); };
+// Linked ResolveRequestNode and callback matches verify the leading base and used PS2 fields.
+struct AIRouteFollower : AIRouteFollowerBase {
     Controller* controller;
     void* world;
     ServiceObject** serviceList;
@@ -614,4 +628,6 @@ static __forceinline void SetProbeSegment(SegmentGraph* graph, const float* end,
 unsigned int __cdecl AIRouteFollower_AdvanceSubgoalSmooth(AIRouteFollower* owner);
 
 
+typedef char VerifiedRouteFollowerSize[sizeof(AIRouteFollower) == 0x1b8 ? 1 : -1];
+typedef char VerifiedGraphNodeRecordSize[sizeof(NavigationGraph::NodeRecord) == 20 ? 1 : -1];
 #endif
