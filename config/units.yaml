@@ -42630,3 +42630,15 @@ units:
     symbol: func_001B7A00
     size: 112
     status: source
+- name: frontend_profile_campaign
+  source: src/game/frontend_profile_remember.cpp
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x10f620'
+    symbol: func_0010F620
+    size: 36
+    status: source
