@@ -6,67 +6,44 @@
 typedef struct Recovered_ChildBuffers {
     void * field_0; /* PS2 +0x0 */
     u8 opaque_4[4];
-    s32 field_8; /* PS2 +0x8 */
+    void * field_8; /* PS2 +0x8 */
     u32 field_C; /* PS2 +0xC */
     u32 field_10; /* PS2 +0x10 */
-    u32 field_14; /* PS2 +0x14 */
-    u8 opaque_18[4];
-    u32 field_1C; /* PS2 +0x1C */
-    u32 field_20; /* PS2 +0x20 */
+    u8 opaque_14[12];
+    s32 field_20; /* PS2 +0x20 */
     s32 field_24; /* PS2 +0x24 */
     s32 field_28; /* PS2 +0x28 */
     u32 field_2C; /* PS2 +0x2C */
     s32 field_30; /* PS2 +0x30 */
-    f32 field_34; /* PS2 +0x34 */
-    f32 field_38; /* PS2 +0x38 */
-    f32 field_3C; /* PS2 +0x3C */
-    u8 opaque_40[8];
-    u8 field_48; /* PS2 +0x48 */
-    u8 opaque_49[3];
-    f32 field_4C; /* PS2 +0x4C */
-    f32 field_50; /* PS2 +0x50 */
-    f32 field_54; /* PS2 +0x54 */
-    f32 field_58; /* PS2 +0x58 */
+    u8 opaque_34[12];
+    u32 field_40; /* PS2 +0x40 */
+    u32 field_44; /* PS2 +0x44 */
+    u8 opaque_48[20];
     u32 field_5C; /* PS2 +0x5C */
-    u32 field_60; /* PS2 +0x60 */
-    u32 field_64; /* PS2 +0x64 */
-    f32 field_68; /* PS2 +0x68 */
+    u8 opaque_60[12];
     u32 field_6C; /* PS2 +0x6C */
     u8 field_70; /* PS2 +0x70 */
     u8 field_71; /* PS2 +0x71 */
     u8 opaque_72[2];
     u32 field_74; /* PS2 +0x74 */
-    u8 field_78; /* PS2 +0x78 */
-    u8 opaque_79[11];
+    u8 opaque_78[12];
     f32 field_84; /* PS2 +0x84 */
 } Recovered_ChildBuffers;
 typedef char assert_Recovered_ChildBuffers_0[(((int)&((Recovered_ChildBuffers *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_8[(((int)&((Recovered_ChildBuffers *)0)->field_8) == 8) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_C[(((int)&((Recovered_ChildBuffers *)0)->field_C) == 12) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_10[(((int)&((Recovered_ChildBuffers *)0)->field_10) == 16) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_14[(((int)&((Recovered_ChildBuffers *)0)->field_14) == 20) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_1C[(((int)&((Recovered_ChildBuffers *)0)->field_1C) == 28) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_20[(((int)&((Recovered_ChildBuffers *)0)->field_20) == 32) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_24[(((int)&((Recovered_ChildBuffers *)0)->field_24) == 36) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_28[(((int)&((Recovered_ChildBuffers *)0)->field_28) == 40) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_2C[(((int)&((Recovered_ChildBuffers *)0)->field_2C) == 44) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_30[(((int)&((Recovered_ChildBuffers *)0)->field_30) == 48) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_34[(((int)&((Recovered_ChildBuffers *)0)->field_34) == 52) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_38[(((int)&((Recovered_ChildBuffers *)0)->field_38) == 56) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_3C[(((int)&((Recovered_ChildBuffers *)0)->field_3C) == 60) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_48[(((int)&((Recovered_ChildBuffers *)0)->field_48) == 72) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_4C[(((int)&((Recovered_ChildBuffers *)0)->field_4C) == 76) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_50[(((int)&((Recovered_ChildBuffers *)0)->field_50) == 80) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_54[(((int)&((Recovered_ChildBuffers *)0)->field_54) == 84) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_58[(((int)&((Recovered_ChildBuffers *)0)->field_58) == 88) ? 1 : -1];
+typedef char assert_Recovered_ChildBuffers_40[(((int)&((Recovered_ChildBuffers *)0)->field_40) == 64) ? 1 : -1];
+typedef char assert_Recovered_ChildBuffers_44[(((int)&((Recovered_ChildBuffers *)0)->field_44) == 68) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_5C[(((int)&((Recovered_ChildBuffers *)0)->field_5C) == 92) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_60[(((int)&((Recovered_ChildBuffers *)0)->field_60) == 96) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_64[(((int)&((Recovered_ChildBuffers *)0)->field_64) == 100) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_68[(((int)&((Recovered_ChildBuffers *)0)->field_68) == 104) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_6C[(((int)&((Recovered_ChildBuffers *)0)->field_6C) == 108) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_70[(((int)&((Recovered_ChildBuffers *)0)->field_70) == 112) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_71[(((int)&((Recovered_ChildBuffers *)0)->field_71) == 113) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_74[(((int)&((Recovered_ChildBuffers *)0)->field_74) == 116) ? 1 : -1];
-typedef char assert_Recovered_ChildBuffers_78[(((int)&((Recovered_ChildBuffers *)0)->field_78) == 120) ? 1 : -1];
 typedef char assert_Recovered_ChildBuffers_84[(((int)&((Recovered_ChildBuffers *)0)->field_84) == 132) ? 1 : -1];
 #endif

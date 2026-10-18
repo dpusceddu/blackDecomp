@@ -8,8 +8,16 @@ typedef struct Recovered_Actor {
     s32 field_28; /* PS2 +0x28 */
     s32 field_2C; /* PS2 +0x2C */
     s32 field_30; /* PS2 +0x30 */
+    u8 opaque_34[12];
+    s32 field_40; /* PS2 +0x40 */
+    u8 opaque_44[4];
+    s32 field_48; /* PS2 +0x48 */
+    s32 field_4C; /* PS2 +0x4C */
 } Recovered_Actor;
 typedef char assert_Recovered_Actor_28[(((int)&((Recovered_Actor *)0)->field_28) == 40) ? 1 : -1];
 typedef char assert_Recovered_Actor_2C[(((int)&((Recovered_Actor *)0)->field_2C) == 44) ? 1 : -1];
 typedef char assert_Recovered_Actor_30[(((int)&((Recovered_Actor *)0)->field_30) == 48) ? 1 : -1];
+typedef char assert_Recovered_Actor_40[(((int)&((Recovered_Actor *)0)->field_40) == 64) ? 1 : -1];
+typedef char assert_Recovered_Actor_48[(((int)&((Recovered_Actor *)0)->field_48) == 72) ? 1 : -1];
+typedef char assert_Recovered_Actor_4C[(((int)&((Recovered_Actor *)0)->field_4C) == 76) ? 1 : -1];
 #endif
