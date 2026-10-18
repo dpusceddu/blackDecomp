@@ -36354,12 +36354,14 @@ units:
     size: 32
     status: source
 - name: tuf_32e5d8
-  source: src/tu/physics_tu_32e3d0.c
-  origin: auto
+  source: src/tu/physics_tu_32e3d0.cpp
+  origin: physics
   flags:
   - -O2
   - -G0
   - -snas
+  - -x
+  - c++
   - -ffunction-sections
   functions:
   - addr: '0x32e5d8'
@@ -36374,6 +36376,21 @@ units:
     symbol: func_0032E6F0
     size: 32
     status: source
+  - addr: '0x32e3d0'
+    symbol: func_0032E3D0
+    size: 188
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32e490'
+    symbol: func_0032E490
+    size: 324
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32e618'
+    symbol: func_0032E618
+    size: 184
+    status: asm
+    reason: claimed physics campaign
 - name: auto_animation_3477f0
   source: src/auto/animation/3477f0.c
   origin: auto
