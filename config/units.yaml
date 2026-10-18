@@ -42322,3 +42322,19 @@ units:
     symbol: __15ParameterTables
     size: 2128
     status: asm
+- name: frontend_dialog_campaign
+  source: src/game/frontend_dialog_campaign.cpp
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x10b338'
+    symbol: func_0010B338
+    size: 112
+    status: source
+  - addr: '0x10b5b0'
+    symbol: func_0010B5B0
+    size: 88
+    status: source
