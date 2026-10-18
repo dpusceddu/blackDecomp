@@ -137,7 +137,7 @@ RwaStream *func_00313278(RwaStream *stream) {
         saved.driver=(s32)bank->driver;saved.first=(s32)bank->first;saved.last=(s32)bank->last;
         func_00314278(bank);bank->flags1b=stream->flags;bank->driver=(RwaDriver *)saved.driver;bank->first=(RwaLink *)saved.first;bank->last=(void *)saved.last;bank->allocation=stream->buffer;
         func_003137D8(bank,(s32)stream->buffer,swapped);
-        func_00316400(D_0040E15C,(char *)header->name);
+        func_00316400(D_0040E15C,(char *)header->bank_id);
         saved.field0=1;saved.flags=stream->ownership;
         func_003143D8(bank,(void *)func_00313F00,&saved);
         if(stream->ownership&4)stream->state=0x300;

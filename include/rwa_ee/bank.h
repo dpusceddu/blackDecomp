@@ -55,12 +55,12 @@ struct RwaStream {
     u32 cursor;
     u32 mode;
 };
-typedef struct {s64 a,b;} __attribute__((packed)) RwaName;
+typedef struct {s64 a,b;} __attribute__((packed)) RwaIdBytes;
 typedef struct RwaDiskHeader {
     u32 tag;
     u8 endian,version,flags,format;
     u32 size,bank_offset,field10,bank_size;
-    u8 name[16];
+    u8 bank_id[16];
     u32 field28;
 } RwaDiskHeader;
 #endif

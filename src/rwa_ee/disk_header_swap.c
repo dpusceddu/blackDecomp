@@ -14,8 +14,8 @@ void func_00313650(RwaDiskHeader *header) {
     func_00318600(&cursor,&header->bank_offset,4);
     func_00318600(&cursor,&header->field10,4);
     func_00318600(&cursor,&header->bank_size,4);
-    func_00316438(header->name);
-    *(RwaName *)cursor=*(RwaName *)header->name;
+    func_00316438(header->bank_id);
+    *(RwaIdBytes *)cursor=*(RwaIdBytes *)header->bank_id;
     cursor+=16;
     func_00318600(&cursor,&header->field28,4);
     *header=copy;
