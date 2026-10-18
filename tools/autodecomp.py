@@ -400,7 +400,20 @@ def run_m2c(fns, options=(), ctx='ctx.c'):
             lit.write_text(m2c_input.normalize_sections((BUILD / 's/text' / (f['name'] + '.lit4.s')).read_text()))
             paths.append(str(lit))
     cmd = [sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--valid-syntax', '--context', str(AUTO / ctx), '--no-cache'] + list(options) + paths
-    r = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, timeout=3600)
+    timeout = float(os.environ.get('AUTODECOMP_M2C_TIMEOUT', '180'))
+    try:
+        r = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, timeout=timeout)
+    except subprocess.TimeoutExpired:
+        if len(fns) > 1:
+            # One pathological CFG must not lose the rest of an unrestricted run.
+            middle = len(fns) // 2
+            print('m2c timeout; bisecting %d functions' % len(fns), file=sys.stderr, flush=True)
+            result = run_m2c(fns[:middle], options, ctx)
+            result.update(run_m2c(fns[middle:], options, ctx))
+            return result
+        f = fns[0]
+        return {f['name']: dict(error='m2c failure: decompiler timeout after %.0fs' % timeout,
+                               decls={}, ee=flags[f['name']])}
     if r.returncode and 'Syntax error when parsing C context' in r.stdout + r.stderr:
         raise SystemExit('m2c context is invalid; stopping instead of recording every function as failed.\n' + (r.stdout + r.stderr)[-2000:])
     out = split_m2c(r.stdout + ('\n/* STDERR %s */' % r.stderr if r.returncode else ''), fns)
