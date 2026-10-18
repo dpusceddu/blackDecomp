@@ -1,0 +1,105 @@
+#include "game/frontend_resources.hpp"
+
+extern "C" void func_00274F60(void*);
+extern "C" void func_00274F58(void*,int);
+extern "C" void func_00274F70(void*);
+extern "C" int func_00274FD8(void*,void*);
+extern "C" int func_00275340(void*);
+extern "C" float func_0029D950(float);
+
+void FrontendResourceTable::Release(int index) {
+    func_00274F60(&slots[index]);
+}
+
+int FrontendResourceTable::Find(void* resource) {
+    FrontendResourceSlot* slot=slots;
+    for (int index=0; index<26; ++index,++slot) {
+        if (func_00274FD8(slot,resource)) return index;
+    }
+    return -1;
+}
+
+void* FrontendResourceCache::Acquire(int key, short variant) {
+    FrontendResourceCache* cursor=this;
+    int count=0;
+    do {
+        ++count;
+        if (cursor->entries[0].key==key && cursor->entries[0].variant==variant) {
+            ++cursor->entries[0].references;
+            return cursor->entries[0].resource;
+        }
+        cursor=(FrontendResourceCache*)((char*)cursor+sizeof(FrontendCacheEntry));
+    } while (count<17);
+    return 0;
+}
+
+void FrontendResourceCache::Release(int key, short variant) {
+    FrontendResourceCache* cursor=this;
+    int count=0;
+    do {
+        ++count;
+        if (cursor->entries[0].key==key && cursor->entries[0].variant==variant) {
+            --cursor->entries[0].references;
+            return;
+        }
+        cursor=(FrontendResourceCache*)((char*)cursor+sizeof(FrontendCacheEntry));
+    } while (count<17);
+}
+
+unsigned short FrontendResourceCache::ScaledCount(void* resource, float numerator, float denominator) {
+    int count=func_00275340(resource);
+    int scaled=(int)func_0029D950(count*(numerator/denominator));
+    if (count<scaled) scaled=count;
+    return scaled;
+}
+
+void FrontendResourceTable::Select(int index) {
+    selectedIndex=index;
+    FrontendResourceSlot* slot=&slots[index];
+    selected=slot;
+    func_00274F58(slot,0x80);
+    func_00274F70(selected);
+}
+
+void FrontendResourceTable::ClearSelection() {
+    selected=0;
+    selectedIndex=-1;
+}
+
+void FrontendResourceTable::SetSelectedFlags(int unused, int flags) {
+    func_00274F58(selected,flags);
+}
+
+extern "C" int func_001080F0();
+extern "C" void func_00274F80(void*,void*);
+extern "C" void func_0035E7D8(void*);
+extern FrontendResourceTable D_0040F0F0;
+extern "C" void func_00107D20(void*);
+
+void FrontendResourceTable::ReleaseData(void* data) {
+    if (retain || func_001080F0()) {
+        func_00274F80(selected,data);
+        return;
+    }
+    func_0035E7D8(data);
+}
+
+void* FrontendResourceTable::GetSlotData(int index) {
+    return slots[index].data;
+}
+
+void FrontendResourceTable::InstallPair(FrontendResourcePair* pair) {
+    SetCurrentFlags(pair->flags);
+    func_00107D20(pair->data);
+}
+
+void FrontendResourceTable::SetCurrentFlags(int flags) {
+    func_00274F58(selected,flags);
+}
+
+int FrontendResourceTable::CurrentStatus() { return selected->status; }
+
+extern "C" void func_00107CF8(void* data) { D_0040F0F0.ReleaseData(data); }
+extern "C" void func_00107D20(void* data) { D_0040F0F0.ReleaseData(data); }
+extern "C" void func_00107D48() {}
+extern "C" void func_00107D50() {}

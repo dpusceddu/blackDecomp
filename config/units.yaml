@@ -24457,6 +24457,8 @@ units:
     symbol: func_00105CE8
     size: 8
     status: source
+  tu: tu_105bc0
+  claim: phase5-game
 - name: auto_game_106008
   source: src/auto/game/106008.c
   origin: auto
@@ -24636,78 +24638,6 @@ units:
   - addr: '0x107a88'
     symbol: func_00107A88
     size: 48
-    status: source
-- name: auto_unclassified_107ab8
-  source: src/auto/unclassified/107ab8.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x107ab8'
-    symbol: func_00107AB8
-    size: 80
-    status: source
-  - addr: '0x107b08'
-    symbol: func_00107B08
-    size: 16
-    status: source
-- name: auto_unclassified_107b78
-  source: src/auto/unclassified/107b78.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x107b78'
-    symbol: func_00107B78
-    size: 32
-    status: source
-- name: tu_107c20
-  source: src/tu/107c20.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x107c20'
-    symbol: func_00107C20
-    size: 96
-    status: source
-  - addr: '0x107c80'
-    symbol: func_00107C80
-    size: 20
-    status: source
-  - addr: '0x107c98'
-    symbol: func_00107C98
-    size: 48
-    status: source
-  - addr: '0x107cc8'
-    symbol: func_00107CC8
-    size: 28
-    status: source
-  - addr: '0x107ce8'
-    symbol: func_00107CE8
-    size: 12
-    status: source
-  - addr: '0x107cf8'
-    symbol: func_00107CF8
-    size: 36
-    status: source
-  - addr: '0x107d20'
-    symbol: func_00107D20
-    size: 36
-    status: source
-  - addr: '0x107d48'
-    symbol: func_00107D48
-    size: 8
-    status: source
-  - addr: '0x107d50'
-    symbol: func_00107D50
-    size: 8
     status: source
 - name: auto_game_116de8
   source: src/auto/game/116de8.c
@@ -38140,3 +38070,158 @@ units:
     symbol: func_0034EAA0
     size: 60
     status: source
+- name: game_frontend_resources
+  source: src/game/frontend_resources.cpp
+  origin: game
+  tu: tu_105bc0
+  claim: phase5-game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x107ab8'
+    symbol: func_00107AB8
+    size: 80
+    status: source
+  - addr: '0x107b08'
+    symbol: func_00107B08
+    size: 16
+    status: source
+  - addr: '0x107b78'
+    symbol: func_00107B78
+    size: 32
+    status: source
+  - addr: '0x107b98'
+    symbol: func_00107B98
+    size: 40
+    status: source
+  - addr: '0x107bc0'
+    symbol: func_00107BC0
+    size: 96
+    status: source
+  - addr: '0x107c20'
+    symbol: func_00107C20
+    size: 96
+    status: source
+  - addr: '0x107c80'
+    symbol: func_00107C80
+    size: 20
+    status: source
+  - addr: '0x107c98'
+    symbol: func_00107C98
+    size: 48
+    status: source
+  - addr: '0x107cc8'
+    symbol: func_00107CC8
+    size: 28
+    status: source
+  - addr: '0x107ce8'
+    symbol: func_00107CE8
+    size: 12
+    status: source
+  - addr: '0x107cf8'
+    symbol: func_00107CF8
+    size: 36
+    status: source
+  - addr: '0x107d20'
+    symbol: func_00107D20
+    size: 36
+    status: source
+  - addr: '0x107d48'
+    symbol: func_00107D48
+    size: 8
+    status: source
+  - addr: '0x107d50'
+    symbol: func_00107D50
+    size: 8
+    status: source
+  - addr: '0x108458'
+    symbol: func_00108458
+    size: 80
+    status: source
+  - addr: '0x1084a8'
+    symbol: func_001084A8
+    size: 76
+    status: source
+  - addr: '0x1089b0'
+    symbol: func_001089B0
+    size: 108
+    status: source
+- name: game_frontend_callback
+  source: src/game/frontend_callback.cpp
+  origin: game
+  tu: tu_105bc0
+  claim: phase5-game
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1080a0'
+    symbol: func_001080A0
+    size: 32
+    status: source
+- name: game_frontend_resource_thread
+  source: src/game/frontend_resource_thread.cpp
+  origin: game
+  tu: tu_105bc0
+  claim: phase5-game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x107fb8'
+    symbol: func_00107FB8
+    size: 80
+    status: source
+  - addr: '0x108008'
+    symbol: func_00108008
+    size: 72
+    status: source
+  - addr: '0x108050'
+    symbol: func_00108050
+    size: 80
+    status: source
+- name: game_frontend_strings_loaded
+  source: src/game/frontend_strings_loaded.cpp
+  origin: game
+  tu: tu_105bc0
+  claim: phase5-game
+  flags:
+  - -O2
+  - -G1
+  functions:
+  - addr: '0x108958'
+    symbol: func_00108958
+    size: 80
+    status: source
+- name: game_frontend_pending
+  source: src/game/frontend_pending.cpp
+  origin: game
+  tu: tu_105bc0
+  claim: phase5-game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x106068'
+    symbol: func_00106068
+    size: 24
+    status: asm
+    reason: scheduling
+  - addr: '0x1065d0'
+    symbol: func_001065D0
+    size: 192
+    status: asm
+    reason: layout
+  - addr: '0x1077b8'
+    symbol: func_001077B8
+    size: 68
+    status: asm
+    reason: registers
