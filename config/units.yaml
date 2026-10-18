@@ -30936,6 +30936,7 @@ units:
     symbol: func_00348E78
     size: 12
     status: source
+  claim: wave2-animation
 - name: auto_animation_3490a8
   source: src/auto/animation/3490a8.c
   origin: auto
@@ -30948,6 +30949,7 @@ units:
     symbol: func_003490A8
     size: 124
     status: source
+  claim: wave2-animation
 - name: auto_animation_349158
   source: src/auto/animation/349158.c
   origin: auto
@@ -30960,6 +30962,7 @@ units:
     symbol: func_00349158
     size: 140
     status: source
+  claim: wave2-animation
 - name: auto_animation_349220
   source: src/auto/animation/349220.c
   origin: auto
@@ -30976,6 +30979,7 @@ units:
     symbol: func_00349278
     size: 16
     status: source
+  claim: wave2-animation
 - name: auto_animation_349288
   source: src/auto/animation/349288.c
   origin: auto
@@ -30988,6 +30992,7 @@ units:
     symbol: func_00349288
     size: 84
     status: source
+  claim: wave2-animation
 - name: auto_animation_3492e0
   source: src/auto/animation/3492e0.c
   origin: auto
@@ -31000,6 +31005,7 @@ units:
     symbol: func_003492E0
     size: 16
     status: source
+  claim: wave2-animation
 - name: auto_animation_3492f0
   source: src/auto/animation/3492f0.c
   origin: auto
@@ -31012,6 +31018,7 @@ units:
     symbol: func_003492F0
     size: 84
     status: source
+  claim: wave2-animation
 - name: auto_animation_349348
   source: src/auto/animation/349348.c
   origin: auto
@@ -31032,6 +31039,7 @@ units:
     symbol: func_003493A8
     size: 68
     status: source
+  claim: wave2-animation
 - name: auto_animation_34a7c8
   source: src/auto/animation/34a7c8.c
   origin: auto
@@ -42916,3 +42924,69 @@ units:
     symbol: func_001C0760
     size: 224
     status: source
+- name: animation_channel_set
+  source: src/animation/tu_348d00/set_clip.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x348e88'
+    symbol: func_00348E88
+    status: source
+    size: 160
+- name: animation_channel_fade
+  source: src/animation/tu_348d00/fade_transition.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x348f28'
+    symbol: func_00348F28
+    status: source
+    size: 384
+- name: animation_channel_wrappers
+  source: src/animation/tu_348d00/wrappers.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x349128'
+    symbol: func_00349128
+    status: source
+    size: 48
+  - addr: '0x3491e8'
+    symbol: func_003491E8
+    status: source
+    size: 56
+- name: animation_channel_unmatched
+  source: src/animation/tu_348d00/unmatched.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x348d00'
+    symbol: func_00348D00
+    status: asm
+    reason: schedule
+    size: 300
+  - addr: '0x348e30'
+    symbol: func_00348E30
+    status: asm
+    reason: schedule
+    size: 72
