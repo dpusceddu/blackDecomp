@@ -28161,6 +28161,7 @@ units:
     symbol: func_00317300
     size: 60
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_3174d0
   source: src/auto/other/3174d0.c
   origin: auto
@@ -28172,6 +28173,7 @@ units:
     symbol: func_003174D0
     size: 32
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_3176d0
   source: src/auto/other/3176d0.c
   origin: auto
@@ -28184,6 +28186,7 @@ units:
     symbol: func_003176D0
     size: 16
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_317868
   source: src/auto/other/317868.c
   origin: auto
@@ -28199,6 +28202,7 @@ units:
     symbol: func_00317888
     size: 44
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_3178b8
   source: src/auto/other/3178b8.c
   origin: auto
@@ -28211,6 +28215,7 @@ units:
     symbol: func_003178B8
     size: 8
     status: source
+  claim: wave2-rw-audio
 - name: tuf_318250
   source: src/tu/rwa_ee_tu_3168c8.c
   origin: auto
@@ -28304,6 +28309,7 @@ units:
     symbol: func_0031A400
     size: 16
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_3194a0
   source: src/auto/other/3194a0.c
   origin: auto
@@ -28316,6 +28322,7 @@ units:
     symbol: func_003194A0
     size: 52
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_3195d0
   source: src/auto/other/3195d0.c
   origin: auto
@@ -28328,6 +28335,7 @@ units:
     symbol: func_003195D0
     size: 60
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_31a4e8
   source: src/auto/other/31a4e8.c
   origin: auto
@@ -43090,3 +43098,29 @@ units:
     symbol: func_001B3CF8
     size: 32
     status: source
+- name: rwa_wave2_317838
+  source: src/rwa_ee/tu_3168c8.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G8
+  - -DRWA_MATCH_317838
+  functions:
+  - addr: '0x317838'
+    symbol: func_00317838
+    size: 48
+    status: source
+  claim: wave2-rw-audio
+- name: rwa_wave2_319ca8
+  source: src/rwa_ee/tu_3168c8.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G8
+  - -DRWA_MATCH_319CA8
+  functions:
+  - addr: '0x319ca8'
+    symbol: func_00319CA8
+    size: 64
+    status: source
+  claim: wave2-rw-audio

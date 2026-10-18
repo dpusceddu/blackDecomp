@@ -18017,7 +18017,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 29 of 106 functions
+  flags_basis: matched 31 of 106 functions
   data:
     .rodata: ['0x409400', '0x4096e0']
     .lit4: ['0x40d89c', '0x40d8a4']
