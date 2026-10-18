@@ -37725,7 +37725,7 @@ units:
 - name: animation_graph_34b498
   source: src/tu/animation_graph_34b498.c
   origin: animation
-  owner: phase5-animation
+  owner: wave1-animation
   flags:
   - -O2
   - -G0
@@ -37966,11 +37966,6 @@ units:
     symbol: func_0034E530
     size: 140
     status: source
-  - addr: '0x34e5c0'
-    symbol: func_0034E5C0
-    size: 404
-    status: asm
-    reason: types
   - addr: '0x34e758'
     symbol: func_0034E758
     size: 100
@@ -39465,4 +39460,18 @@ units:
   - addr: '0x29d470'
     symbol: func_0029D470
     size: 8
+    status: source
+- name: animation_graph_runtime_34b498
+  source: src/tu/animation_graph_runtime_34b498.cpp
+  origin: animation
+  owner: wave1-animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x34e5c0'
+    symbol: func_0034E5C0
+    size: 404
     status: source
