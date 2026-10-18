@@ -132,6 +132,10 @@ of the first sources: `tools/import_kynapse.py` and `tools/import_game.py` port 
 `tools/objdump.py` (sections, symbols, relocations of an object), `BLACK_UNITS_ALL=1` (pretend every unit function is
 source, to compile demoted units).
 
+Text may end before its slot boundary when the actual next cached input section's alignment fills exactly that gap
+and the original gap contains only zeros. This accepts natural linker alignment without changing the object or adding
+instructions; the full-image comparison remains mandatory.
+
 ## Automatic pipeline (tools/autodecomp.py)
 
 Drafts C for assembly functions with no per-function judgment and keeps what rebuilds byte-identically. Setup, once:

@@ -128,12 +128,35 @@ def image_names():
 
 
 def prepare():
+    from text_placement import InputAlignments, natural_text_span
     units = load_units()
     bind = bindings()
     results = json.loads((BUILD / 'results.json').read_text()) if (BUILD / 'results.json').exists() else {}
     stats = {}
     placement = json.loads((BUILD / 'placement.json').read_text())
     ends = {f['addr']: f['end'] for f in placement['functions']}
+    alignments, original_text, text_base = None, None, 0
+
+    def fits_text(section, start, stop):
+        nonlocal alignments, original_text, text_base
+        if section is None:
+            return False
+        if section['size'] == stop - start:
+            return True
+        if not 0 < stop - start - section['size'] < 16:
+            return False
+        if alignments is None:
+            alignments = InputAlignments(BUILD)
+            original = Elf((ROOT / 'orig' / SLUG / 'files' / 'SLUS_213.76').read_bytes())
+            text = original.section('.text')
+            original_text, text_base = original.content(text), text['addr']
+        padding_start = start + section['size'] - text_base
+        padding_end = stop - text_base
+        if not 0 <= padding_start <= padding_end <= len(original_text):
+            return False
+        return natural_text_span(section['size'], start, stop, alignments.at(stop),
+                                 original_text[padding_start:padding_end], section['align'])
+
     for u in units:
         if not any(f.get('status') == 'source' for f in u['functions']):
             continue
@@ -161,24 +184,24 @@ def prepare():
         # the object's code must fill exactly the original span (first function to the next one behind the unit)
         live = [f for f in u['functions'] if f.get('status') == 'source']
         if live and fsecs:
-            # one section per function (-ffunction-sections): each must fill the original span of its function exactly, and the
-            # object holds no other code
+            # One section per function. The next actual input's alignment may fill
+            # a verified zero tail; no extra code or invented padding is accepted.
             bad = set()
             for f in live:
                 s = defined.get(f['symbol'])
                 sec = e.sections[s['shndx']] if s else None
                 nxt = ends[f['addr']]
-                if sec is None or not sec['name'].startswith('.text.') or sec['size'] != nxt - f['addr']:
+                if sec is None or not sec['name'].startswith('.text.') or not fits_text(sec, f['addr'], nxt):
                     bad.add(f['addr'])
             if bad:
                 stats['extra'] = stats.get('extra', 0) + demote(u, bad, 'extra')
             elif (text and text['size']) or sum(e.sections[i]['size'] for i in fsecs) != sum(
-                    (ends[f['addr']] - f['addr']) for f in live):
+                    e.sections[defined[f['symbol']]['shndx']]['size'] for f in live):
                 stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
         elif live:
             first, last = min(f['addr'] for f in live), max(f['addr'] for f in live)
             nxt = ends[last]
-            if text['size'] != nxt - first:
+            if not fits_text(text, first, nxt):
                 stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
         live = [f for f in u['functions'] if f.get('status') == 'source']
         if live:
