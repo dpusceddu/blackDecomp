@@ -245,6 +245,7 @@ Bytes are full-image-verified `.text` spans including alignment. Code and owned-
 | --- | --- | --- | --- | --- | --- |
 | 0, tooling | 115 / 15,720 | 0 / 0 | about 1.8 h coordinator wall time; not a TU-agent rate | automatic 15/2,316 (0.65%); none >1,000 B | stack/tagged aggregates; code-generation mismatches; EE vector and mixed-width code |
 | 1, seven area queues | 147 / 19,528 (0.719%) | 3 code; data not completed/audited | manual 3.66 kB/active agent-hour, 3.96 agent-hours | manual 18/173 (10.4%); 0/21 above 1,000 B; automatic 0/2,285 | stack/aggregate lifetimes; register allocation and scheduling; EE vector/mixed widths |
+| 2, seven area queues | 53 / 9,008 (0.332%) | 0 / 0 | manual 3.33 kB/active or 2.25 kB/inclusive agent-hour; 2.68 active / 3.97 inclusive hours | manual 8/137 (5.8%); 0/36 above 1,000 B; automatic 0/2,277 | aggregate/iterator lifetimes; register allocation and scheduling; VU lanes/mixed widths |
 
 Wave 0: 4,587 functions / 218,312 bytes became 4,702 / 234,032 (39.52% / 8.62%). Incremental
 automatic rates among previously unmatched real functions were 65/1,586 (4.10%) below 100 B,
@@ -270,6 +271,33 @@ the void pass added eight object candidates. Four large near searches solved non
 variadics and direct return ABI evidence, recognize MIPS stack escapes and split switch extents, improve
 GNU-assembler candidates and alignment/cache checks, protect prior source through settlement and retry
 cleanup, and retain build telemetry. All five retail images passed; no prior source addresses were lost.
+
+Wave 2: 4,849 functions / 253,560 bytes became 4,902 / 262,568 (41.20% / 9.67%). Manual work
+visited 22 TUs and added 52 readable matches / 8,920 bytes plus 80 owned-data bytes. Every unmatched
+function above 300 B in those queues received a full typed, worker-scored hypothesis; no partial probes
+remain in the denominator. Worktrees recorded 61 link and 24 compile-only calls, including rebase
+baselines, plus 9,999 candidate compilations in 443 deduplicated batches. Active time is approximate;
+inclusive time includes integration waits. Coordinator tooling/integration and automatic runs are additional.
+The unrestricted automatic pass, 460-function return-context retries and one bounded large near search
+used 9,464 compilations in 123 batches. Fifteen exact objects yielded one placeable 88-byte function:
+incremental rates were 1/1,405 (0.071%) below 100 B, 0/2,642 at 100–300 B, and 0/2,277 above 300 B.
+All five retail images passed, with no source-address regressions.
+
+Tooling now preserves implicit `this` in class-scoped declarations and scores resolved absolute-address
+instructions strictly. PS2 leading-vptr layouts and C++ temporary lifetimes unlocked manual matches.
+Return-demand propagation prevents unused 128-bit register temporaries from becoming return ABI
+claims, preserving consumed/anchored returns and software doubles; 105 tool tests pass. This corrected
+365 prototypes and reduced signature conflicts from 1,203 to 1,067; its focused retries added no matches.
+Layout proof uses matched definitions independently of ABI signature ranking. VU helpers compile but
+remain unverified hypotheses.
+
+Stopped at the requested threshold: waves 1 and 2 both gained under 1% of text. Recommend three
+focused agents for stack/iterator and ABI models, independently matched EE primitives, and TUs with
+strong counterpart-source leads. Demonstrate a complete TU containing a function above 1,000 B before
+another broad campaign; use context dependency changes to select retries. At this wave's manual rate,
+the remaining 2.45 MB suggests about 740 active agent-hours (1,090 including observed waits), an
+optimistic extrapolation. No new match above 1,000 B emerged from 57 full manual attempts across the
+two waves; 893 kB remains in that band, so there is no defensible completion date yet.
 
 Campaigns rotate seven area queues through three workers: four agent slots including the coordinator
 are available; worker contention has not reduced concurrency. Integrate each TU checkpoint, then rerun

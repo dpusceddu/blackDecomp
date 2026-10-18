@@ -43181,15 +43181,6 @@ units:
     size: 64
     status: source
   claim: wave2-rw-audio
-- name: rwa_wave2_property_hypotheses
-  source: src/rwa_ee/tu_311e60.c
-  origin: rwa_ee
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  claim: wave2-rw-audio
-  functions: []
 - name: animation_playback_allocation
   source: src/animation/tu_34eae0/allocate_banks.cpp
   origin: animation
@@ -43804,3 +43795,16 @@ units:
     size: 4
     status: asm
     reason: claimed
+- name: auto_kynapse_2f1358
+  source: src/auto/kynapse/2f1358.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2f1358'
+    symbol: func_002F1358
+    size: 88
+    status: source

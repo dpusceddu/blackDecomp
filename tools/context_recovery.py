@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 7
+VERSION = 8
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -189,7 +189,7 @@ def demangle_method(symbol):
     return cls + '::' + method
 
 
-def source_seeds(root=ROOT):
+def source_seeds(root=ROOT, matched_only=False):
     from units import load_units, dependencies
     seeds, evidence, parsed, definitions = {}, [], {}, {}
     units = load_units(root / 'config/units.yaml', variant='usa-retail')
@@ -223,6 +223,8 @@ def source_seeds(root=ROOT):
         targets += [(addr, sym, False) for sym, addr in u['externs'].items()]
         targets += [(d['address'], d['name'], False) for _, d in decls if d['address']]
         for addr, symbol, matched in targets:
+            if matched_only and not matched:
+                continue
             names = {symbol, aliases.get(addr), demangle_method(symbol), symbol.split('__F')[0]}
             candidates = [(p, d) for p, d in decls if d['name'] in names]
             # A definition resolves parameter names that the declaration omits.
@@ -964,7 +966,10 @@ def verified_layout_users(names, root=ROOT):
     """
     from units import dependencies
     result = {name: set() for name in names}
-    seeds, _ = source_seeds(root)
+    # ABI ranking may prefer an authored, still-unmatched declaration over an
+    # exact automatic definition. Layout proof must inspect the matched body,
+    # independently of that signature choice.
+    seeds, _ = source_seeds(root, matched_only=True)
     paths = {}
     for address, seed in seeds.items():
         if not seed.get('matched') or not seed.get('body'):

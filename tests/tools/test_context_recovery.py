@@ -285,6 +285,32 @@ class FieldPointerTests(unittest.TestCase):
 
 
 class VerificationTests(unittest.TestCase):
+    def test_unmatched_signature_does_not_hide_matched_layout_user(self):
+        import tempfile
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ('src/auto', 'include/recovered'):
+                (root / name).mkdir(parents=True)
+            (root / 'src/owner.cpp').write_text('')
+            (root / 'include/owner.h').write_text(
+                'struct OriginalOwner { int Read() __asm__("func_00100000"); };')
+            (root / 'include/recovered/Recovered_Node.h').write_text('')
+            (root / 'src/auto/a.c').write_text(
+                'int func_00100000(Recovered_Node *p) { return p->field_4; }')
+            units = [dict(source='src/owner.cpp', functions=[], externs={}),
+                     dict(source='src/auto/a.c', origin='auto', externs={},
+                          functions=[dict(addr=0x100000, symbol='func_00100000', status='source')])]
+            def dependencies(source):
+                header = ('include/owner.h' if source == 'src/owner.cpp'
+                          else 'include/recovered/Recovered_Node.h')
+                return [Path(source), Path(header)]
+            with patch('units.load_units', return_value=units), patch('units.dependencies', side_effect=dependencies):
+                seeds, _ = cr.source_seeds(root)
+                self.assertFalse(seeds[0x100000]['matched'])
+                self.assertEqual(cr.verified_layout_users(['Recovered_Node'], root),
+                                 {'Recovered_Node': [0x100000]})
+
     def test_layout_verification_counts_only_matched_member_users(self):
         from unittest.mock import patch
         seeds = {1: dict(matched=True, source='src/a.c', raw='void a(Recovered_Node *n)', body='n->field_4 = 1;'),
