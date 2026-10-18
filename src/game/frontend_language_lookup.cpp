@@ -1,4 +1,3 @@
-// Unmatched: func_00108818: GNU assembler section padding.
 // Inferred PS2 frontend layout and behavior.
 extern unsigned char D_0040D99A;
 extern "C" void* func_002750B8(void*,int);

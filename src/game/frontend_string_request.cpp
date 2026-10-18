@@ -1,4 +1,3 @@
-// Unmatched: func_00108890: GNU assembler section padding.
 // Inferred PS2 frontend layout and behavior.
 extern unsigned char D_0040D99A,D_0040D99B;
 extern char* D_0040F4C4;
