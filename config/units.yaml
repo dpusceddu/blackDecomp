@@ -4749,12 +4749,15 @@ units:
     size: 32
     status: source
 - name: auto_physics_33b890
-  source: src/auto/physics/33b890.c
-  origin: auto
+  source: src/tu/physics_tu_33b708.cpp
+  origin: physics
   flags:
   - -O2
   - -G0
   - -snas
+  - -x
+  - c++
+  - -ffunction-sections
   functions:
   - addr: '0x33b890'
     symbol: func_0033B890
@@ -4763,6 +4766,15 @@ units:
   - addr: '0x33b8b0'
     symbol: func_0033B8B0
     size: 32
+    status: source
+  - addr: '0x33b708'
+    symbol: func_0033B708
+    size: 324
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x33b858'
+    symbol: func_0033B858
+    size: 56
     status: source
 - name: auto_physics_33bbd8
   source: src/auto/physics/33bbd8.c
