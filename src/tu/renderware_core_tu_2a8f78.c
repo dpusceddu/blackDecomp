@@ -44,6 +44,6 @@ void * func_002A9518(void *arg0) {
 
 /* Assembly between the functions: func_002A9588 (88 bytes), func_002A95E0 (96 bytes), func_002A9640 (496 bytes), func_002A9830 (8 bytes), func_002A9838 (112 bytes), func_002A98A8 (104 bytes), func_002A9910 (200 bytes), func_002A99D8 (272 bytes), func_002A9AE8 (136 bytes), func_002A9B70 (320 bytes), func_002A9CB0 (8 bytes), func_002A9CB8 (312 bytes) */
 
-void func_002A9DF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_002CFAC0(&D_003C3210, arg0, arg1, arg2, arg3, 0);
+s32 func_002A9DF0(s32 size, s32 plugin_id, s32 construct, s32 destroy) {
+    return func_002CFAC0(&D_003C3210, size, plugin_id, construct, destroy, 0);
 }

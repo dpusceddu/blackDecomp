@@ -9,8 +9,8 @@ extern void func_002CF888();
 extern s32 (*D_004494C0)();
 extern s32 (*D_004494E0)();
 
-void func_002AA018(s32 *arg0) {
-    D_00449540(*arg0);
+s32 func_002AA018(s32 *size) {
+    return D_00449540(*size);
 }
 
 /* Assembly between the functions: func_002AA040 (56 bytes), func_002AA078 (8 bytes), func_002AA080 (232 bytes), func_002AA168 (32 bytes), func_002AA188 (240 bytes), func_002AA278 (16 bytes) */
