@@ -638,7 +638,7 @@ tus:
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 4 of 12 functions
+  flags_basis: matched 5 of 12 functions
   data:
     .rodata: ['0x3f3b00', '0x3f3b90']
 - name: tu_10f700
