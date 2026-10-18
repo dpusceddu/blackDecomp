@@ -59,6 +59,37 @@ class ControlFlowTests(unittest.TestCase):
 
 
 class SignatureTests(unittest.TestCase):
+    def test_varargs_register_homing_is_not_fifteen_fixed_arguments(self):
+        words = [i(9, 29, 29, -128), r(4, 0, 2, 0x2d)]
+        words += [i(0x3f, 29, reg, 0x48 + 8*(reg - 5)) for reg in range(5, 12)]
+        words += [i(0x39, 29, reg, 0x38 + 4*n) for n, reg in enumerate((12, 14, 16, 18))]
+        leaf = fn(words + [0x03e00008, i(9, 29, 29, 128)], 0x200000)
+        analysis = {leaf['addr']: cr.analyze_function(leaf)}
+        seed = dict(params=[('s32', None)]*8 + [('f32', None)]*7, ret='s32',
+                    quality=1.5, source='auto', cls=None)
+        rows, _ = cr.recover_signatures([leaf], analysis, {leaf['addr']: seed})
+        row = rows[leaf['addr']]
+        self.assertEqual(row['register_slots'], [0])
+        self.assertTrue(row['variadic'])
+        self.assertEqual(cr.prototype(row), 's32 func_00200000(s32, ...);')
+        self.assertEqual(cr.prototype(row, True), 's32 func_00200000(s32, ...);')
+        # One missing FP home or nonconsecutive GPR home is not this ABI.
+        broken = fn(leaf['words'][:])
+        broken['words'][9] = 0
+        self.assertIsNone(cr.variadic_register_saves(broken))
+        broken['words'] = leaf['words'][:]
+        broken['words'][3] += 8
+        self.assertIsNone(cr.variadic_register_saves(broken))
+
+    def test_authored_variadic_signature_has_only_fixed_register_slots(self):
+        leaf = fn([r(4, 0, 2), 0x03e00008, 0])
+        declaration = cr.parse_declarations('int func_00100000(int code, ...);')[0]
+        self.assertEqual(cr.abi_slots(declaration['params']), [(0, 's32')])
+        declaration.update(quality=4, source='authored', cls=None)
+        rows, _ = cr.recover_signatures([leaf], {leaf['addr']: cr.analyze_function(leaf)}, {leaf['addr']: declaration})
+        self.assertEqual(rows[leaf['addr']]['register_slots'], [0])
+        self.assertEqual(cr.prototype(rows[leaf['addr']]), 's32 func_00100000(s32, ...);')
+
     def test_closed_leaf_ignores_caller_temporaries_and_weak_draft_extra_parameters(self):
         leaf = fn([i(0x23, 4, 2, 4), 0x03e00008, r(2, 4, 2)], 0x200000)
         caller = fn([i(9, 0, 9, 6), 0x0c080000, i(9, 0, 4, 1), 0x03e00008, 0],

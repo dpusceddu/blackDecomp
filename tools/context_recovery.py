@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 3
+VERSION = 4
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -290,6 +290,40 @@ def writes_integer(op):
                   'nor', 'sll', 'srl', 'sra', 'sllv', 'srlv', 'srav', 'slt', 'sltu', 'slti', 'sltiu', 'lui', 'mflo', 'mfhi')
 
 
+def variadic_register_saves(f):
+    """Recognize SN's varargs home area, not ordinary argument uses.
+
+    Require a contiguous suffix of incoming GPRs and the complete even FP bank
+    in disjoint, consecutive stack slots before any control transfer. A lone
+    spill or a normal callee-save prologue is insufficient evidence.
+    """
+    import rabbitizer
+    gpr, fp, written = {}, {}, set()
+    for pc, word in enumerate(f['words'][:48]):
+        ins = rabbitizer.Instruction(word, f['addr'] + 4*pc, rabbitizer.InstrCategory.R5900)
+        if ins.isBranch() or ins.isJump() or ins.isFunctionCall():
+            break
+        op = ins.getOpcodeName()
+        rs, rt = word >> 21 & 31, word >> 16 & 31
+        offset = (word & 0xffff) - (0x10000 if word & 0x8000 else 0)
+        if op == 'sd' and rs == 29 and 5 <= rt <= 11 and rt not in written:
+            gpr[rt] = (pc, offset)
+        if op == 'swc1' and rs == 29 and rt in (12, 14, 16, 18) and 32 + rt not in written:
+            fp[rt] = (pc, offset)
+        written.update(effects(ins)[1])
+    if len(gpr) < 2 or set(gpr) != set(range(min(gpr), 12)) or set(fp) != {12, 14, 16, 18}:
+        return None
+    go = [gpr[k][1] for k in sorted(gpr)]
+    fo = [fp[k][1] for k in sorted(fp)]
+    if go != list(range(go[0], go[0] + 8*len(go), 8)) or fo != list(range(fo[0], fo[0] + 16, 4)):
+        return None
+    if go[0] % 8 or fo[0] % 4 or max(fo) + 4 > min(go):
+        return None
+    return dict(fixed_gpr=min(gpr) - 4,
+                saves={pc: reg for reg, (pc, _) in gpr.items()} |
+                      {pc: 32 + reg for reg, (pc, _) in fp.items()})
+
+
 def analyze_function(f):
     """Forward fixpoint with branch joins, executed delay slots and caller clobbers.
 
@@ -301,6 +335,7 @@ def analyze_function(f):
     ins = [rabbitizer.Instruction(w, f['addr'] + 4*i, rabbitizer.InstrCategory.R5900) for i, w in enumerate(f['words'])]
     incoming, queue = {0: initial_state()}, collections.deque([0])
     uses, fields, calls, returns, nested = set(), set(), {}, set(), set()
+    varargs = variadic_register_saves(f)
 
     def constrain(v, typ, pc):
         for kind, n, off in v.origins:
@@ -314,6 +349,8 @@ def analyze_function(f):
         rs, rt, fs = w >> 21 & 31, w >> 16 & 31, 32 + (w >> 11 & 31)
         imm = (w & 0xffff) - (0x10000 if w & 0x8000 else 0)
         for reg in reads:
+            if varargs and varargs['saves'].get(i) == reg:
+                continue             # va_start register homing is not a named argument
             constrain(old[reg], 'used', i)
         if op in MEMORY:
             typ, size = MEMORY[op]
@@ -462,6 +499,8 @@ def abi_slots(params):
     """
     gpr, fpr, stack, out = 0, 0, 0, []
     for typ, _ in params:
+        if typ == '...':
+            break
         if typ == 'f32':
             slot, fpr = 8 + fpr, fpr + 1
         else:
@@ -515,6 +554,10 @@ def recover_signatures(inv, analysis, seeds):
     constraints = collections.defaultdict(set)
     register_slots, caller_counts = {}, collections.defaultdict(collections.Counter)
     authoritative = {}
+    variadic = {f['addr']: saves for f in inv if (saves := variadic_register_saves(f))}
+    for addr, seed in seeds.items():
+        if any(typ == '...' for typ, _ in seed['params']) and seed['quality'] >= 2:
+            variadic[addr] = dict(fixed_gpr=None, saves={})
     observed_returns = collections.defaultdict(set)
     # Inline syscall stubs can byte-match a void(void) definition while consuming
     # implicit syscall arguments. That source signature is not ABI evidence.
@@ -538,6 +581,8 @@ def recover_signatures(inv, analysis, seeds):
         ng = max((k+1 for k in used if k < 8), default=0)
         nf = max((k-7 for k in used if k >= 8), default=0)
         register_slots[a] = list(range(ng)) + list(range(8, 8+nf))
+        if a in variadic and variadic[a]['fixed_gpr'] is not None:
+            register_slots[a] = list(range(variadic[a]['fixed_gpr'])) + list(range(8, 8+nf))
         for (pc, dest, tail), values in result['calls'].items():
             if dest is None:
                 continue
@@ -547,7 +592,7 @@ def recover_signatures(inv, analysis, seeds):
                 fp = max((k-7 for k in defined if k >= 8), default=0)
                 caller_counts[dest][(g, fp)] += 1
     for a, counter in caller_counts.items():
-        if a in leaf_minima:
+        if a in leaf_minima or a in variadic:
             continue                 # caller temporaries do not become unused leaf arguments
         g, fp = max(counter, key=lambda key: (counter[key], -sum(key)))
         slots = register_slots.get(a, [])
@@ -558,7 +603,7 @@ def recover_signatures(inv, analysis, seeds):
         mapped = abi_slots(seed['params'])
         if seed['quality'] >= 2:
             register_slots[a] = [slot for slot, _ in mapped]
-        elif a not in leaf_minima or seed['quality'] > 1.5:
+        elif a not in variadic and (a not in leaf_minima or seed['quality'] > 1.5):
             register_slots[a] = sorted(set(register_slots.get(a, [])) | {slot for slot, _ in mapped})
         for slot, typ in mapped:
             if typ != 'unknown':
@@ -634,6 +679,9 @@ def recover_signatures(inv, analysis, seeds):
                    source=seed['source'] if seed else None, source_quality=seed['quality'] if seed else 0,
                    surface_abi_ambiguity=surface_seeds.get(a, {}).get('abi_uncertainty', []),
                    ret_class=seed.get('retclass') if seed else None)
+        if a in variadic:
+            row['variadic'] = True
+            row['arity_kind'] = 'variadic signature' if seed and seed['quality'] >= 2 else 'SN variadic register-save ABI'
         for ordinal, slot in enumerate(slots):
             key = (a, 'arg', slot)
             typ, conflict = resolve_type(constraints[key])
@@ -799,6 +847,8 @@ def prototype(row, m2c=False):
     params = ', '.join(row.get('param_views', {}).get(str(k), context_type(t, m2c)) for k, t in enumerate(row['params'])) if row['arity'] is not None else ''
     if row['arity'] == 0:
         params = 'void'
+    if row.get('variadic') and row['arity']:
+        params += ', ...'
     return '%s %s(%s);' % (ret, row['name'], params)
 
 
