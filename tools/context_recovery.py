@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 2
+VERSION = 3
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -488,6 +488,28 @@ def ghidra_seeds(root=ROOT):
     return out
 
 
+def closed_leaf(f):
+    """A small straight-line leaf whose live argument registers are fully observed.
+
+    This proves the minimum machine ABI, not the number of unused C parameters.
+    Do not infer it through calls, branches, system/VU/MMI operations or raw words.
+    """
+    import rabbitizer
+    words = f['words']
+    if not 2 <= len(words) <= 32 or words[-2] != 0x03e00008:
+        return False
+    allowed = set(MEMORY) - {'lqc2', 'sqc2'}
+    allowed |= {'nop', 'jr', 'addu', 'daddu', 'addiu', 'daddiu', 'subu', 'dsubu', 'and', 'andi',
+                'or', 'ori', 'xor', 'xori', 'nor', 'sll', 'srl', 'sra', 'sllv', 'srlv', 'srav',
+                'slt', 'sltu', 'slti', 'sltiu', 'lui', 'mov.s', 'add.s', 'sub.s', 'mul.s',
+                'neg.s', 'abs.s', 'mtc1', 'mfc1', 'cvt.s.w', 'cvt.w.s', 'trunc.w.s'}
+    for index, word in enumerate(words):
+        op = rabbitizer.Instruction(word, f['addr'] + 4*index, rabbitizer.InstrCategory.R5900).getOpcodeName()
+        if op not in allowed or op == 'jr' and index != len(words) - 2:
+            return False
+    return True
+
+
 def recover_signatures(inv, analysis, seeds):
     """Whole-callgraph constraints with separate EE integer/floating argument banks."""
     constraints = collections.defaultdict(set)
@@ -498,6 +520,8 @@ def recover_signatures(inv, analysis, seeds):
     # implicit syscall arguments. That source signature is not ABI evidence.
     surface_seeds = seeds
     seeds = {a: s for a, s in seeds.items() if not s.get('abi_uncertainty') and not (not s['params'] and 'syscall' in s.get('body', ''))}
+    leaf_minima = {f['addr'] for f in inv if closed_leaf(f) and not analysis[f['addr']]['calls']
+                   and any(kind in ('arg', 'farg') for kind, _, _, _ in analysis[f['addr']]['uses'])}
     for f in inv:
         a, result = f['addr'], analysis[f['addr']]
         used = set()
@@ -523,6 +547,8 @@ def recover_signatures(inv, analysis, seeds):
                 fp = max((k-7 for k in defined if k >= 8), default=0)
                 caller_counts[dest][(g, fp)] += 1
     for a, counter in caller_counts.items():
+        if a in leaf_minima:
+            continue                 # caller temporaries do not become unused leaf arguments
         g, fp = max(counter, key=lambda key: (counter[key], -sum(key)))
         slots = register_slots.get(a, [])
         g = max(g, max((k+1 for k in slots if k < 8), default=0))
@@ -532,7 +558,7 @@ def recover_signatures(inv, analysis, seeds):
         mapped = abi_slots(seed['params'])
         if seed['quality'] >= 2:
             register_slots[a] = [slot for slot, _ in mapped]
-        else:
+        elif a not in leaf_minima or seed['quality'] > 1.5:
             register_slots[a] = sorted(set(register_slots.get(a, [])) | {slot for slot, _ in mapped})
         for slot, typ in mapped:
             if typ != 'unknown':
@@ -599,8 +625,10 @@ def recover_signatures(inv, analysis, seeds):
     for f in inv:
         a, seed = f['addr'], seeds.get(f['addr'])
         slots = register_slots.get(a, [])
-        row = dict(name=f['name'], arity=len(slots) if slots or seed and seed['quality'] >= 2 else None,
-                   register_slots=slots, arity_kind='signature' if seed and seed['quality'] >= 2 else 'lower-bound+caller-mode; mixed order unknown',
+        leaf_minimum = a in leaf_minima and not (seed and seed['quality'] >= 2)
+        row = dict(name=f['name'], arity=len(slots) if slots or leaf_minimum or seed and seed['quality'] >= 2 else None,
+                   register_slots=slots, arity_kind='signature' if seed and seed['quality'] >= 2 else
+                   ('closed-leaf live minimum; unused parameters unknown' if leaf_minimum else 'lower-bound+caller-mode; mixed order unknown'),
                    caller_counts={'g%d/f%d' % key: n for key, n in caller_counts[a].items()},
                    params=[], ret='unknown', conflicts=[], classes={}, this=bool(seed and seed.get('this_usage', seed.get('cls'))),
                    source=seed['source'] if seed else None, source_quality=seed['quality'] if seed else 0,

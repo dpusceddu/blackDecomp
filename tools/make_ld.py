@@ -19,6 +19,33 @@ from units import load_units
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def migrated_data_aliases(placement, labels, replaced, layout):
+    """Keep names referenced by retained objects when source replaces owned constants.
+
+    Compiler-generated tables usually expose different local names. Their original
+    labels retain section-relative positions; full-image comparison still verifies
+    every byte and relocation. PROVIDE leaves an explicit source definition intact.
+    """
+    aliases = []
+    addresses = [address for address, _ in labels]
+    for section in layout['sections']:
+        name = section['name']
+        if name not in ('.rodata', '.lit4', '.gcc_except_table'):
+            continue
+        entries = placement['sections'].get(name, [])
+        for index, entry in enumerate(entries):
+            owner = entry.get('owner')
+            if owner not in replaced:
+                continue
+            start = entry['key']
+            end = entries[index + 1]['key'] if index + 1 < len(entries) else section['addr'] + section['orig_size']
+            for address, label in labels[bisect.bisect_left(addresses, start):bisect.bisect_left(addresses, end)]:
+                if not label.startswith(('.', '$')):
+                    aliases.append('PROVIDE(%s = ADDR(%s) + 0x%X);' %
+                                   (label, name, address - section['addr']))
+    return aliases
+
+
 def main():
     slug = sys.argv[1]
     work = sys.argv[2] if len(sys.argv) > 2 else slug
@@ -104,6 +131,7 @@ def main():
                 i += 1
     if problems:
         raise SystemExit('\n'.join(problems))
+    aliases += migrated_data_aliases(placement, labels, replaced, layout)
     aliases = list(dict.fromkeys(aliases))
     # Input order. ld resolves a script with one statement per object quadratically (hours for 12,000 objects), so
     # the migrated sections are placed by sorted input-section names instead: every input section is called

@@ -59,6 +59,22 @@ class ControlFlowTests(unittest.TestCase):
 
 
 class SignatureTests(unittest.TestCase):
+    def test_closed_leaf_ignores_caller_temporaries_and_weak_draft_extra_parameters(self):
+        leaf = fn([i(0x23, 4, 2, 4), 0x03e00008, r(2, 4, 2)], 0x200000)
+        caller = fn([i(9, 0, 9, 6), 0x0c080000, i(9, 0, 4, 1), 0x03e00008, 0],
+                    rel={'4': ['jal', 0x200000, 0, 'func_00200000']})
+        analysis = {f['addr']: cr.analyze_function(f) for f in (leaf, caller)}
+        seed = dict(params=[('void *', None)] + [('s32', None)]*5, ret='s32', quality=1.5,
+                    source='auto', cls=None)
+        rows, _ = cr.recover_signatures([leaf, caller], analysis, {leaf['addr']: seed})
+        self.assertEqual(rows[leaf['addr']]['register_slots'], [0])
+        self.assertIn('minimum', rows[leaf['addr']]['arity_kind'])
+        seed['quality'] = 4
+        rows, _ = cr.recover_signatures([leaf, caller], analysis, {leaf['addr']: seed})
+        self.assertEqual(rows[leaf['addr']]['arity'], 6)  # authored unused parameters remain real
+        self.assertFalse(cr.closed_leaf(caller))
+        self.assertFalse(cr.closed_leaf(fn([i(4, 4, 0, 1), 0, 0x03e00008, 0])))
+
     def test_named_c_alias_float_and_pointer_parameters(self):
         ds = cr.parse_declarations('float *Pose(void *owner, Node *node, float time) ANIMATION_FUNCTION(0034BFB8);\nfloat *Pose(void *owner, Node *node, float time) { return 0; }')
         self.assertEqual(ds[0]['address'], 0x34bfb8)
