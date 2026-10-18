@@ -110,6 +110,53 @@ of the first sources: `tools/import_kynapse.py` and `tools/import_game.py` port 
 `tools/objdump.py` (sections, symbols, relocations of an object), `BLACK_UNITS_ALL=1` (pretend every unit function is
 source, to compile demoted units).
 
+## Automatic pipeline (tools/autodecomp.py)
+
+Drafts C for assembly functions with no per-function judgment and keeps what rebuilds byte-identically. Setup, once:
+
+```sh
+.venv/bin/pip install -r requirements.txt            # m2c (pinned git commit), pycparser, toml
+.venv/bin/python tools/autodecomp.py setup           # decomp-permuter at its pinned commit, into .venv/ (git clone)
+```
+
+m2c and the scoring run on the host (they only read and write text); every compile runs in the build backend, hundreds
+of candidates per call (about 0.8 s latency per call, about 90 compiles per second). m2c's little-endian MIPS GCC target
+is `-t mipsee-gcc-c` (with `--valid-syntax`, which turns unknown field accesses into `M2C_FIELD` macros, see
+`include/auto/prelude.h`).
+
+```sh
+python3 tools/autodecomp.py run --max-size 100            # all assembly functions under 100 bytes -> build/auto.json
+python3 tools/autodecomp.py run --min-size 100 --max-size 300 --region game
+python3 tools/autodecomp.py run --max-size 100 --status near --status mismatch --ctx ctx2.c --tag arity-int
+python3 tools/autodecomp.py permute --max-score 8         # decomp-permuter on near misses (one member per family)
+python3 tools/autodecomp.py family                        # clone exact sources onto identical-body functions
+python3 tools/autodecomp.py register                      # exact drafts -> src/auto/<region>/*.c + config/units.yaml
+python3 tools/autodecomp.py settle                        # compile, link, demote what cannot be placed, retry alone; ninja must say OK
+python3 tools/autodecomp.py report [--max-size N]         # outcome classes, failure reasons
+python3 tools/next.py [near|types|families|data|ee]       # best next work
+```
+
+Per function: (1) m2c on its `.s` (plus the sibling `.lit4.s`), with a C context made of the typedefs and the Ghidra
+prototypes of `config/symbols.txt` (`ctx.c`), or the same plus an int (`ctx2.c`) or pointer (`ctx3.c`) prototype with the
+argument count inferred for every other function (registers read before written in the callee, and the argument
+registers set before each call, majority over call sites); (2) mechanical cleaning: missing leading parameters, K&R
+declarations for callees, function-pointer globals, strings the function owns turned back into literals; (3) compile as
+C named `func_XXXXXXXX` with `-O2 -G0 -snas`, plus `-G8` when the original addresses small data through `$gp`; on a miss
+the flag set is varied (`-O1`, `-O3`, `-fbyte-bool`, `-G8`, `-fno-peephole`, `-fno-schedule-insns2`); (4) score: the
+compiled `.text` is compared with the original words, relocated fields masked, and each relocation target (symbol address
+plus addend; constants by their bytes) must equal the symbolic operand of the original assembly; (5) up to 8 differing
+instructions: decomp-permuter's randomizer, a hill climb on the compile score, 50 candidates per function and round
+compiled together in one worker call; (6) identical bodies (`family`): an exact source is cloned onto the members of its
+family by renaming symbols; (7) functions m2c cannot read but that are a few special instructions (`li $v1, N; syscall`,
+`ei`, `di`, `sync`) come from one inline-asm template.
+
+An exact draft is only a candidate: `register` writes it as a unit (adjacent exact drafts are grouped, at most 24) and
+`settle` uses `tools/settle_units.py` to demote whatever does not link identically; a demoted group is retried one function
+per unit. Results and reasons (`verify-failed`: `size` = the function owns rodata that the source does not define, `extra`,
+`layout`, `bytes`) are kept in `build/auto.json` (ignored). The drafts keep m2c's variable names (`temp_5`, `var_3`) and
+`M2C_FIELD` accesses; they compile as C under the image's `func_XXXXXXXX` names, so assembly callers link unchanged, and
+carry `origin: auto` in `config/units.yaml`. Later phases turn them into C++ methods once classes are known.
+
 ## Symbols and progress
 
 `python3 tools/ghidra_export.py` writes `config/symbols.txt` from raw Ghidra pages in `.local/ghidra/` (the three Ghidra MCP

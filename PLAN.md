@@ -155,22 +155,21 @@ its flags and a confidence level. Splat splits follow it.
 Exit: at least the game and Kynapse regions have proposed TUs; imported functions sit in their TUs and
 the build is still identical.
 
-### Phase 4: the automatic pipeline (2–4 sessions)
+### Phase 4: the automatic pipeline (pilot done; the pipeline keeps running as units are claimed)
 
-- `tools/autodecomp.py TU|ADDR`:
-  1. run m2c with the TU's known types;
-  2. compile the result in its TU;
-  3. score it with objdiff;
-  4. if it is close, run the permuter with a time budget;
-  5. if it matches, replace the assembly file and rebuild.
-
-  Results are recorded in `build/auto.json` (ignored) and summarized by `tools/progress.py`.
-- Run it over all small functions first: getters, setters, thunks, empty virtuals, simple loops.
-- `tools/next.py` lists the best next work: TUs closest to complete, functions the pipeline almost
-  matched, and functions whose types are now known.
-
-Exit: the pipeline has run over every function under 100 bytes. Report its automatic match rate; this is
-the main measure of whether the approach scales.
+- `tools/autodecomp.py` (README, "Automatic pipeline"): m2c draft, mechanical cleaning, compile with a short list of
+  flag variants in the build backend (hundreds of candidates per call), score against the original words with
+  relocation targets compared, decomp-permuter for up to 8 differing instructions, family cloning for identical bodies,
+  inline-asm templates for syscall and interrupt stubs, then `register` and `settle` turn exact drafts into units. Results
+  stay in `build/auto.json` (ignored).
+- `tools/next.py` lists near misses by differing instructions and kind, functions blocked on a missing type (grouped by
+  what they need), families of identical bodies, owned-rodata blockers and EE instructions.
+- Pilot result (USA retail): functions under 100 bytes 57.9 % automatic (3,516 of 6,075; 61.7 % without the 380
+  one-instruction split fragments), 100-300 bytes 9.2 % (283 of 3,084; game region 9.0 %), a 400-function sample over
+  300 bytes 0 %. The build stays identical; `ninja progress` went from 2.17 % to 34.4 % of the functions and from 0.79 %
+  to 6.6 % of `.text`. Small functions are cheap and almost all sources are plain C over untyped pointers; what blocks the
+  rest is typing (callee signatures, struct layouts, stack objects) and EE-specific code, not search time. `tools/next.py`
+  prints the current failure table.
 
 ### Phase 5: file-by-file campaigns (continuous)
 
@@ -206,7 +205,7 @@ the main measure of whether the approach scales.
 | --- | --- |
 | Phase 1 exit | Identical rebuild exists |
 | Phase 2 exit | Imported functions build identically in place |
-| Phase 4 exit | Automatic match rate on small functions; it sets the expected cost of the rest |
+| Phase 4 exit | Reached: 57.9 % of the functions under 100 bytes, 9.2 % of 100-300 bytes, nothing above 300 without types |
 | Every week | Matched bytes and functions, complete TUs, functions per agent session |
 
 If the automatic rate in Phase 4 is low, investigate why before scaling up the agents: compiler flags,
@@ -218,7 +217,11 @@ missing types, or m2c gaps with EE instructions.
   produce compatible ELF objects for `ld`. Checked in Phase 0.
 - **Per-file flags.** `-G` values and other flags vary between files and must be recovered per TU.
 - **EE instructions.** MMI, 128-bit values and VU0 inline assembly need the study's header and agent
-  work; m2c will not handle them.
+  work; m2c will not handle them (pilot: 307 of the 6,075 small functions and 320 of 3,084 in 100-300 bytes fail on them,
+  `syscall` stubs excepted: those come from one asm template).
+- **Function boundaries.** Ghidra's starts are wrong in places: 380 one-instruction "functions" (delay slots of the
+  previous function) and about 140 functions that begin with a stray `addiu $sp, $sp, N; nop` pair; both stop a source
+  unit from matching and should be repaired in the split before Phase 3.
 - **VU microcode** (`.vutext`, DVP overlays) stays as binary data.
 - **Third-party libraries** (Sony runtime, RenderWare, C++ runtime) may never be matched from source
   without their original libraries; count them separately.
