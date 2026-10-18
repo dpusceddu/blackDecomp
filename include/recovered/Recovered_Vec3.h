@@ -7,8 +7,15 @@ typedef struct Recovered_Vec3 {
     f32 field_0; /* PS2 +0x0 */
     f32 field_4; /* PS2 +0x4 */
     f32 field_8; /* PS2 +0x8 */
+    u8 opaque_C[16];
+    s32 field_1C; /* PS2 +0x1C */
+    s32 field_20; /* PS2 +0x20 */
+    s32 field_24; /* PS2 +0x24 */
 } Recovered_Vec3;
 typedef char assert_Recovered_Vec3_0[(((int)&((Recovered_Vec3 *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_Vec3_4[(((int)&((Recovered_Vec3 *)0)->field_4) == 4) ? 1 : -1];
 typedef char assert_Recovered_Vec3_8[(((int)&((Recovered_Vec3 *)0)->field_8) == 8) ? 1 : -1];
+typedef char assert_Recovered_Vec3_1C[(((int)&((Recovered_Vec3 *)0)->field_1C) == 28) ? 1 : -1];
+typedef char assert_Recovered_Vec3_20[(((int)&((Recovered_Vec3 *)0)->field_20) == 32) ? 1 : -1];
+typedef char assert_Recovered_Vec3_24[(((int)&((Recovered_Vec3 *)0)->field_24) == 36) ? 1 : -1];
 #endif

@@ -4,7 +4,7 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Vtable_003E7558 {
-    void * field_0; /* PS2 +0x0 */
+    u32 field_0; /* PS2 +0x0 */
     void * field_4; /* PS2 +0x4 */
 } Recovered_Vtable_003E7558;
 typedef char assert_Recovered_Vtable_003E7558_0[(((int)&((Recovered_Vtable_003E7558 *)0)->field_0) == 0) ? 1 : -1];
