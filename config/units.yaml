@@ -7654,35 +7654,6 @@ units:
     symbol: func_00335FD0
     size: 32
     status: source
-- name: tuf_350060
-  source: src/tu/animation_tu_350060.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x350060'
-    symbol: func_00350060
-    size: 52
-    status: source
-  - addr: '0x350098'
-    symbol: func_00350098
-    size: 8
-    status: source
-  - addr: '0x3500a0'
-    symbol: func_003500A0
-    size: 8
-    status: source
-  - addr: '0x3500a8'
-    symbol: func_003500A8
-    size: 52
-    status: source
-  - addr: '0x350130'
-    symbol: func_00350130
-    size: 12
-    status: source
 - name: tu_35d378
   source: src/tu/35d378.c
   origin: auto
@@ -39622,3 +39593,33 @@ units:
     symbol: func_00343508
     size: 12
     status: source
+- name: animation_parameter_bank_350060
+  source: src/tu/animation_parameter_bank_350060.cpp
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x350060'
+    symbol: func_00350060
+    size: 52
+    status: source
+  - addr: '0x350098'
+    symbol: func_00350098
+    size: 8
+    status: source
+  - addr: '0x3500a0'
+    symbol: func_003500A0
+    size: 8
+    status: source
+  - addr: '0x3500a8'
+    symbol: func_003500A8
+    size: 52
+    status: source
+  - addr: '0x350130'
+    symbol: func_00350130
+    size: 12
+    status: source
+  owner: wave1-animation
