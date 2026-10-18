@@ -33,4 +33,3 @@ bool Perception::Init(ChildBuffers* config)
     Entity_ApplyC(gWorld, OnSubjectRemoved, this);
     return true;
 }
-

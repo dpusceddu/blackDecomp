@@ -10313,18 +10313,20 @@ units:
     symbol: func_0030EA28
     size: 16
     status: source
-- name: auto_kynapse_30ff90
-  source: src/auto/kynapse/30ff90.c
-  origin: auto
+- name: kynapse_perception_clear
+  source: src/kynapse/perception_clear.cpp
+  origin: kynapse
   flags:
   - -O1
   - -G0
   - -snas
+  - -fbyte-bool
   functions:
   - addr: '0x30ff90'
-    symbol: func_0030FF90
+    symbol: ClearRequests__10Perception
     size: 12
     status: source
+  owner: phase5-kynapse
 - name: auto_unclassified_310940
   source: src/auto/unclassified/310940.c
   origin: auto
@@ -15072,33 +15074,9 @@ units:
   - -snas
   - -ffunction-sections
   functions:
-  - addr: '0x30ffa0'
-    symbol: func_0030FFA0
-    size: 60
-    status: source
-  - addr: '0x30ffe0'
-    symbol: func_0030FFE0
-    size: 60
-    status: source
-  - addr: '0x310020'
-    symbol: func_00310020
-    size: 60
-    status: source
-  - addr: '0x310060'
-    symbol: func_00310060
-    size: 60
-    status: source
   - addr: '0x3100a0'
     symbol: func_003100A0
     size: 60
-    status: source
-  - addr: '0x3100e0'
-    symbol: func_003100E0
-    size: 60
-    status: source
-  - addr: '0x310190'
-    symbol: func_00310190
-    size: 148
     status: source
   - addr: '0x310228'
     symbol: func_00310228
@@ -37888,3 +37866,41 @@ units:
     gSoundPoolClass: '0x455d00'
     gWorld: '0x3c9ed4'
     memset: '0x35c6ec'
+- name: kynapse_perception_queries
+  source: src/kynapse/perception_queries.cpp
+  origin: kynapse
+  owner: phase5-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x30ffa0'
+    symbol: NearestVisible__10Perception
+    size: 60
+    status: source
+  - addr: '0x30ffe0'
+    symbol: NearestClear__10Perception
+    size: 60
+    status: source
+  - addr: '0x310020'
+    symbol: NearestAny__10Perception
+    size: 60
+    status: source
+  - addr: '0x310060'
+    symbol: NearestVisibleOtherGroup__10Perception
+    size: 60
+    status: source
+  - addr: '0x3100e0'
+    symbol: NearestAnyOtherGroup__10Perception
+    size: 60
+    status: source
+  - addr: '0x310190'
+    symbol: OnSubjectRemoved__FP6EntityP10Perception
+    size: 148
+    status: source
+  externs:
+    FindNearest__10Perception: '0x30f678'

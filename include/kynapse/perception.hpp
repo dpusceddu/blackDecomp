@@ -16,6 +16,7 @@
 struct Vec3 {
     float x, y, z;
     Vec3() {}
+    Vec3(const Vec3& other) : x(other.x), y(other.y), z(other.z) {}
     Vec3(float a,float b,float c) : x(a),y(b),z(c) {}
     Vec3& operator=(const Vec3& other)
     {
@@ -57,10 +58,18 @@ struct EntityEntry {
     bool active;
 };
 
-// Compatible eight-byte result of the bounded-list accessor at 0x4f9b0.
-struct EntityEntryIterator {
-    void* rootVtable;
+// The PS2 iterator has a polymorphic root followed by its entry pointer.
+struct EntityIteratorBase { virtual ~EntityIteratorBase() {} };
+
+struct EntityEntryIterator : EntityIteratorBase {
     EntityEntry* entry;
+    EntityEntryIterator() {}
+    EntityEntryIterator(const EntityEntryIterator& other) : entry(other.entry) {}
+    EntityEntryIterator& operator=(const EntityEntryIterator& other) {
+        entry = other.entry;
+        return *this;
+    }
+    EntityEntryIterator(EntityEntry* value) : entry(value) {}
 };
 
 struct EntityTable {
@@ -69,12 +78,15 @@ struct EntityTable {
     EntityEntry* first;
     unsigned char unknown0c[0xc];
     unsigned int count;
-    void GetEntry(EntityEntryIterator* result, int index) {
-        result->entry = (unsigned int)index < count ? &entries[index] : 0;
+    EntityEntryIterator Begin() { return EntityEntryIterator(first); }
+    EntityEntryIterator GetEntry(unsigned int index) {
+        if (index < count) return EntityEntryIterator(&entries[index]);
+        return EntityEntryIterator(0);
     }
 };
 
-struct ClassHandle;
+struct ClassHandle { unsigned char unknown00[0x10c]; unsigned int mask; };
+extern ClassHandle gEntityManagerClass;
 struct World {
     unsigned char unknown00[0x10];
     int maxEntities;
@@ -104,18 +116,23 @@ extern unsigned char* gPairFlags;
 extern float* gPairDistances;
 extern float* gPairExpiry;
 extern float* gPairLineExpiry;
-extern unsigned int gPerceivableMask;
 extern ClassHandle gSoundPoolClass;
 extern int gKeyPosition;
 extern int gKeyAxis;
 extern int gKeyGroup;
 extern int gKeyCone;
 
-float __stdcall Kaim_GetPairValue(int a, int b);
-unsigned char __stdcall Kaim_GetPairFlag(int a, int b);
+inline float Kaim_GetPairValue(int a, int b) {
+    int index = a > b ? a * (a - 1) / 2 + b : b * (b - 1) / 2 + a;
+    return gPairDistances[index];
+}
+inline unsigned char Kaim_GetPairFlag(int a, int b) {
+    int index = a > b ? a * (a - 1) / 2 + b : b * (b - 1) / 2 + a;
+    return gPairFlags[index];
+}
 float Vec3_Length(const Vec3* a, const Vec3* b);
 bool Kaim_CallHook(const Vec3* from, const Vec3* to, Entity* ignore, int mode);
-bool InCone(const Vec3* point, const Vec3* origin, const Vec3* axis, float angle, float range);
+bool InCone(float angle, float range, const Vec3* point, const Vec3* origin, const Vec3* axis);
 struct Perception;
 int Entity_ApplyC(World* world, void (__cdecl *callback)(Entity*, Perception*), Perception* context);
 
@@ -123,7 +140,7 @@ struct SoundPool {
     bool Hears(Entity* listener, Entity* other);
 };
 
-// What the perception knows about one other entity (vtable 0x284cf4).
+// Records inherit the polymorphic root so the vptr precedes their data on PS2.
 struct PerceptionRecordBase { virtual ~PerceptionRecordBase() {} };
 
 struct PerceptionRecord : PerceptionRecordBase {
@@ -147,8 +164,6 @@ struct PerceptionRecord : PerceptionRecordBase {
     }
     static void* operator new[](unsigned int size) { return KaimAllocate(size); }
 };
-
-
 
 // The entity manager the perception reads slots from.
 struct EntityManager;
@@ -190,40 +205,20 @@ struct Perception {
     Entity* NearestVisibleOtherGroup();
     Entity* NearestClearOtherGroup();
     Entity* NearestAnyOtherGroup();
-    void UpdatePair(int a, int b, bool lineCheck);
+    void UpdatePair(int a, int b, unsigned char lineCheck);
     bool Refresh(unsigned int index);
     PerceptionRecord* GetRecord(SlotUser* user);
 };
 
-
-// Forgets a removed entity: every tracked slot holding it is cleared and the perception marked dirty.
+// Clear tracked references when the entity table removes a subject.
 void __cdecl OnSubjectRemoved(Entity* subject, Perception* perception);
 
-
-
-// Unmatched: transcribed from the disassembly.
-// Allocates the records and (once) the shared pair tables, looks up the sound pool and the authored
-// properties and registers for entity removal.
-
-
-
-// Unmatched: transcribed from the decompilation.
-// Clears the shared pair tables and every record.
-
-
-
-// Unmatched: eight-byte iterator/global table corrected; authored-vector copy lifetimes enlarge the frame (508 vs 507 bytes).
-// Refreshes the pair data of two entities: their distance, and (when asked) whether a line between their
-// authored positions is free.
-
-
-
-// Unmatched: vector aggregate copies restore spill intent; visibility/frame/register scheduling still differs (766 vs 810 bytes).
-// Brings the record of one other entity up to date and returns true when something changed.
-
-
-
-// The record of a user (the first record when no user is given), marking the perception as read.
-
+typedef char assert_PerceptionRecord_size[(sizeof(PerceptionRecord) == 0x14) ? 1 : -1];
+typedef char assert_PerceptionRecord_coneExpiry[((int)&((PerceptionRecord*)0)->coneExpiry == 4) ? 1 : -1];
+typedef char assert_PerceptionRecord_flags[((int)&((PerceptionRecord*)0)->inCone == 0x10) ? 1 : -1];
+typedef char assert_Perception_records[((int)&((Perception*)0)->records == 0x30) ? 1 : -1];
+typedef char assert_Perception_requests[((int)&((Perception*)0)->pendingCone == 0x50) ? 1 : -1];
+typedef char assert_EntityEntryIterator_size[(sizeof(EntityEntryIterator) == 8) ? 1 : -1];
+typedef char assert_EntityEntryIterator_entry[((int)&((EntityEntryIterator*)0)->entry == 4) ? 1 : -1];
 
 #endif
