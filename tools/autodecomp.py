@@ -589,7 +589,7 @@ def worker_compile(jobs, tag='auto'):
             tar.addfile(ti, io.BytesIO(data))
             plan['compile'].append(dict(src='src/%s.c' % h, obj='obj/%s.o' % h, compiler=COMPILER,
                                         args=list(flags) + ['-I', 'include'], timeout=30))
-    d = AUTO / 'job'
+    d = AUTO / ('job-%d' % os.getpid())          # one directory per process: several runs may share the build backend
     d.mkdir(exist_ok=True)
     (d / 'inputs.tgz').write_bytes(buf.getvalue())
     (d / 'plan.json').write_text(json.dumps(plan))

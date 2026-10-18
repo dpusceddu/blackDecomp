@@ -170,6 +170,11 @@ the build is still identical.
   to 6.6 % of `.text`. Small functions are cheap and almost all sources are plain C over untyped pointers; what blocks the
   rest is typing (callee signatures, struct layouts, stack objects) and EE-specific code, not search time. `tools/next.py`
   prints the current failure table.
+- Second pass (boundaries, types, EE moves, rodata, families; README, "Function boundaries" and "Automatic pipeline"): the
+  123 functions that were fused with an orphan `<instruction>; nop` piece are separate now (48 match), the 1,169 orphan
+  pieces are classified instead of counted as failures, and the rates are 70.2 % under 100 bytes, 11.6 % for 100-300 bytes
+  and 0 % in a 400-function sample above 300 bytes. `ninja progress`: 4,490 of 11,898 functions (37.7 %), 7.7 % of `.text`.
+  Left: VU0/MMI code (`lqc2`, `qmtc2`, `pcpyld`, `pextlw`), stack aggregates passed to callees, functions over 300 bytes.
 
 ### Phase 5: file-by-file campaigns (continuous)
 
@@ -219,9 +224,8 @@ missing types, or m2c gaps with EE instructions.
 - **EE instructions.** MMI, 128-bit values and VU0 inline assembly need the study's header and agent
   work; m2c will not handle them (pilot: 307 of the 6,075 small functions and 320 of 3,084 in 100-300 bytes fail on them,
   `syscall` stubs excepted: those come from one asm template).
-- **Function boundaries.** Ghidra's starts are wrong in places: 380 one-instruction "functions" (delay slots of the
-  previous function) and about 140 functions that begin with a stray `addiu $sp, $sp, N; nop` pair; both stop a source
-  unit from matching and should be repaired in the split before Phase 3.
+- **Function boundaries.** Repaired (`tools/boundaries.py`): the stray `<instruction>; nop` pieces are orphans between
+  functions, not code of either neighbour; splat's other extents hold where Ghidra's differ.
 - **VU microcode** (`.vutext`, DVP overlays) stays as binary data.
 - **Third-party libraries** (Sony runtime, RenderWare, C++ runtime) may never be matched from source
   without their original libraries; count them separately.
