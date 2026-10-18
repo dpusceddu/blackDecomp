@@ -52,7 +52,8 @@ struct Entity {
 struct EntityEntry {
     unsigned char unknown00[4];
     Entity* entity;
-    unsigned char unknown08[8];
+    unsigned char unknown08[4];
+    EntityEntry* next;
     bool active;
 };
 
@@ -65,9 +66,12 @@ struct EntityEntryIterator {
 struct EntityTable {
     unsigned char unknown00[4];
     EntityEntry* entries;
-    unsigned char unknown08[0x10];
+    EntityEntry* first;
+    unsigned char unknown0c[0xc];
     unsigned int count;
-    void GetEntry(EntityEntryIterator* result, int index);
+    void GetEntry(EntityEntryIterator* result, int index) {
+        result->entry = (unsigned int)index < count ? &entries[index] : 0;
+    }
 };
 
 struct ClassHandle;
@@ -120,8 +124,10 @@ struct SoundPool {
 };
 
 // What the perception knows about one other entity (vtable 0x284cf4).
-struct PerceptionRecord {
-    virtual ~PerceptionRecord();
+struct PerceptionRecordBase { virtual ~PerceptionRecordBase() {} };
+
+struct PerceptionRecord : PerceptionRecordBase {
+    virtual ~PerceptionRecord() {}
     float coneExpiry;
     float pairExpiry;
     float distance;
@@ -130,8 +136,16 @@ struct PerceptionRecord {
     bool heard;
     bool otherGroup;
 
-    PerceptionRecord();
-    static void* operator new[](unsigned int size);
+    PerceptionRecord() {
+        coneExpiry = 0;
+        pairExpiry = 0;
+        distance = 0;
+        inCone = false;
+        blocked = false;
+        heard = false;
+        otherGroup = false;
+    }
+    static void* operator new[](unsigned int size) { return KaimAllocate(size); }
 };
 
 
@@ -168,6 +182,14 @@ struct Perception {
     bool ConfigureAll(ChildBuffers* config);
     bool Init(ChildBuffers* config);
     void Reset();
+    void FindNearest();
+    void ClearRequests();
+    Entity* NearestVisible();
+    Entity* NearestClear();
+    Entity* NearestAny();
+    Entity* NearestVisibleOtherGroup();
+    Entity* NearestClearOtherGroup();
+    Entity* NearestAnyOtherGroup();
     void UpdatePair(int a, int b, bool lineCheck);
     bool Refresh(unsigned int index);
     PerceptionRecord* GetRecord(SlotUser* user);

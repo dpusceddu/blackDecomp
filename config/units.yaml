@@ -15063,6 +15063,7 @@ units:
     size: 32
     status: source
 - name: tuf_30ffa0
+  owner: phase5-kynapse
   source: src/tu/kynapse_tu_30ea38.c
   origin: auto
   flags:
@@ -37850,3 +37851,40 @@ units:
     symbol: func_00339C28
     size: 32
     status: source
+- name: kynapse_perception_30eca8
+  source: src/kynapse/perception_30eca8.cpp
+  origin: kynapse
+  owner: phase5-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  functions:
+  - addr: '0x30eca8'
+    symbol: Init__10PerceptionP12ChildBuffers
+    size: 856
+    status: source
+  externs:
+    ConfigureAll__10PerceptionP12ChildBuffers: '0x2e74e0'
+    Entity_ApplyC__FP5WorldPFP6EntityP10Perception_vP10Perception: '0x2e1078'
+    FindByClass__5WorldP11ClassHandle: '0x2ec058'
+    FindName__10NameTable8PCc: '0x2e93b8'
+    GetAuthoredProperty__6EntityPCv: '0x2e4ce0'
+    GetNameTable8__Fv: '0x2e91c0'
+    OnSubjectRemoved__FP6EntityP10Perception: '0x310190'
+    _vt$16PerceptionRecord: '0x3f1430'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    gKeyAxis: '0x44ff68'
+    gKeyCone: '0x450828'
+    gKeyGroup: '0x4505f8'
+    gKeyPosition: '0x44fd38'
+    gPairDistances: '0x3ce5a0'
+    gPairExpiry: '0x3ce5a4'
+    gPairFlags: '0x3ce59c'
+    gPairLineExpiry: '0x3ce5a8'
+    gSoundPoolClass: '0x455d00'
+    gWorld: '0x3c9ed4'
+    memset: '0x35c6ec'
