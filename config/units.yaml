@@ -43605,3 +43605,135 @@ units:
     size: 3432
     status: asm
     reason: claimed physics campaign
+- name: wave2_rw_core_2ad668
+  source: src/renderware_core/tu_2ad668.c
+  origin: renderware_core
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  claim: wave2-rw-core
+  functions:
+  - addr: '0x2ad668'
+    symbol: func_002AD668
+    size: 912
+    status: asm
+    reason: claimed
+  - addr: '0x2ad9f8'
+    symbol: func_002AD9F8
+    size: 1084
+    status: asm
+    reason: claimed
+  - addr: '0x2ade38'
+    symbol: func_002ADE38
+    size: 628
+    status: asm
+    reason: claimed
+  - addr: '0x2ae0b0'
+    symbol: func_002AE0B0
+    size: 1760
+    status: asm
+    reason: claimed
+  - addr: '0x2ae790'
+    symbol: func_002AE790
+    size: 1472
+    status: asm
+    reason: claimed
+  - addr: '0x2aed50'
+    symbol: func_002AED50
+    size: 400
+    status: asm
+    reason: claimed
+  - addr: '0x2aeee0'
+    symbol: func_002AEEE0
+    size: 532
+    status: asm
+    reason: claimed
+  - addr: '0x2af0f8'
+    symbol: func_002AF0F8
+    size: 28
+    status: asm
+    reason: claimed
+  - addr: '0x2af118'
+    symbol: func_002AF118
+    size: 64
+    status: asm
+    reason: claimed
+  - addr: '0x2af158'
+    symbol: func_002AF158
+    size: 52
+    status: source
+  - addr: '0x2af190'
+    symbol: func_002AF190
+    size: 12
+    status: asm
+    reason: claimed
+  - addr: '0x2af1a0'
+    symbol: func_002AF1A0
+    size: 156
+    status: asm
+    reason: claimed
+  - addr: '0x2af240'
+    symbol: func_002AF240
+    size: 156
+    status: asm
+    reason: claimed
+  - addr: '0x2af2e0'
+    symbol: func_002AF2E0
+    size: 28
+    status: asm
+    reason: claimed
+  - addr: '0x2af300'
+    symbol: func_002AF300
+    size: 136
+    status: source
+  - addr: '0x2af388'
+    symbol: func_002AF388
+    size: 168
+    status: asm
+    reason: claimed
+  - addr: '0x2af430'
+    symbol: func_002AF430
+    size: 4
+    status: asm
+    reason: claimed
+  - addr: '0x2af438'
+    symbol: func_002AF438
+    size: 236
+    status: asm
+    reason: claimed
+  - addr: '0x2af528'
+    symbol: func_002AF528
+    size: 4
+    status: asm
+    reason: claimed
+  - addr: '0x2af530'
+    symbol: func_002AF530
+    size: 112
+    status: asm
+    reason: claimed
+  - addr: '0x2af5a0'
+    symbol: func_002AF5A0
+    size: 4
+    status: asm
+    reason: claimed
+  - addr: '0x2af5f0'
+    symbol: func_002AF5F0
+    size: 20
+    status: asm
+    reason: claimed
+  - addr: '0x2af608'
+    symbol: func_002AF608
+    size: 156
+    status: asm
+    reason: claimed
+  - addr: '0x2af6a8'
+    symbol: func_002AF6A8
+    size: 72
+    status: asm
+    reason: claimed
+  - addr: '0x2af6f0'
+    symbol: func_002AF6F0
+    size: 136
+    status: asm
+    reason: claimed

@@ -16419,8 +16419,8 @@ tus:
   confidence: medium
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 1 of 19 functions
+  flags: [-O2, -G8]
+  flags_basis: matched 3 of 19 functions
   data:
     .rodata: ['0x402f08', '0x402f20']
     .data: ['0x3c3388', '0x3c33a0']
