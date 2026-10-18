@@ -31442,6 +31442,7 @@ units:
     symbol: func_0034F2E0
     size: 68
     status: source
+  claim: wave2-animation
 - name: auto_animation_34f328
   source: src/auto/animation/34f328.c
   origin: auto
@@ -31454,6 +31455,7 @@ units:
     symbol: func_0034F328
     size: 52
     status: source
+  claim: wave2-animation
 - name: tuf_34f360
   source: src/tu/animation_tu_34f360.c
   origin: auto
@@ -43124,3 +43126,106 @@ units:
     size: 64
     status: source
   claim: wave2-rw-audio
+- name: animation_playback_allocation
+  source: src/animation/tu_34eae0/allocate_banks.cpp
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34eb88'
+    symbol: func_0034EB88
+    size: 332
+    status: source
+- name: animation_playback_release
+  source: src/animation/tu_34eae0/release_banks.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34ecd8'
+    symbol: func_0034ECD8
+    size: 168
+    status: source
+- name: animation_playback_reset
+  source: src/animation/tu_34eae0/reset.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34eae0'
+    symbol: func_0034EAE0
+    size: 168
+    status: asm
+    reason: schedule
+- name: animation_playback_advance
+  source: src/animation/tu_34eae0/advance.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34ee90'
+    symbol: func_0034EE90
+    size: 496
+    status: asm
+    reason: schedule
+- name: animation_playback_evaluate
+  source: src/animation/tu_34eae0/evaluate.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34f080'
+    symbol: func_0034F080
+    size: 316
+    status: asm
+    reason: schedule
+- name: animation_playback_apply_span
+  source: src/animation/tu_34eae0/apply_span.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34edb8'
+    symbol: func_0034EDB8
+    size: 212
+    status: asm
+    reason: schedule
+- name: animation_playback_evaluate_header
+  source: src/animation/tu_34eae0/evaluate_header.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34f1c0'
+    symbol: func_0034F1C0
+    size: 268
+    status: asm
+    reason: schedule
