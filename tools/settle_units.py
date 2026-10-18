@@ -10,11 +10,22 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 PY = sys.executable
-SLUG = sys.argv[1] if len(sys.argv) > 1 else 'usa-retail'
+SLUG = 'usa-retail'
+
+
+def infrastructure_failure(output):
+    return any(message in output for message in (
+        'Build backend failed', 'Connection refused',
+        'Connection reset by peer', 'subprocess.TimeoutExpired',
+    ))
 
 
 def run(*args, check=True):
     r = subprocess.run([PY] + [str(a) for a in args], cwd=ROOT, capture_output=True, text=True)
+    if infrastructure_failure(r.stdout + r.stderr):
+        raise SystemExit(r.stdout + r.stderr)
+    if check and r.returncode:
+        raise SystemExit(r.stdout + r.stderr)
     return r
 
 
@@ -25,14 +36,23 @@ def ninja():
 
 def main():
     print(run('tools/make_ld.py', SLUG).stdout.strip())
-    print(run('tools/build_objects.py', SLUG, '--compile-only').stdout.strip().split('\n')[-1])
+    results = ROOT / 'build' / SLUG / 'results.json'
+    results.unlink(missing_ok=True)
+    compiled = run('tools/build_objects.py', SLUG, '--compile-only', check=False)
+    # Compiler failures can be settled, but a missing worker response cannot.
+    if compiled.returncode and not results.exists():
+        raise SystemExit(compiled.stdout + compiled.stderr)
+    print(compiled.stdout.strip().split('\n')[-1])
     print(run('tools/units_verify.py', 'prepare').stdout.strip())
     for i in range(10):
         rc, out = ninja()
+        if infrastructure_failure(out):
+            raise SystemExit(out)
         if 'build:' in out and 'rc=0' not in out:
             print('link failed:', run('tools/units_verify.py', 'link').stdout.strip().split('\n')[0])
             continue
         if rc == 0:
+            print(out.strip())
             print('identical')
             return 0
         r = run('tools/units_verify.py', 'compare', '--fix')
@@ -41,4 +61,5 @@ def main():
 
 
 if __name__ == '__main__':
+    SLUG = sys.argv[1] if len(sys.argv) > 1 else 'usa-retail'
     sys.exit(main())
