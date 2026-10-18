@@ -236,6 +236,37 @@ class VerificationTests(unittest.TestCase):
 
 
 class CppAbiTests(unittest.TestCase):
+    def test_class_scoped_alias_preserves_receiver_and_static_methods(self):
+        declarations = cr.parse_declarations('''namespace Sample {
+struct View {
+    const char* Read() const __asm__("func_00100000");
+    static int Count(unsigned short n);
+    virtual ~View();
+};
+}''')
+        methods = {d['short']: d for d in declarations}
+        self.assertEqual(methods['Read']['name'], 'View::Read')
+        self.assertEqual(methods['Read']['address'], 0x100000)
+        self.assertEqual(methods['Read']['params'], [('void *', 'View')])
+        self.assertTrue(methods['Read']['implicit_this'])
+        self.assertEqual(methods['Count']['params'], [('u16', None)])
+        self.assertFalse(methods['Count']['implicit_this'])
+        self.assertEqual(methods['~View']['ret'], 'void')
+        self.assertTrue(methods['~View']['abi_uncertainty'])
+
+    def test_lexical_scope_ignores_literals_and_function_local_declarations(self):
+        declarations = cr.parse_declarations('''struct Outer {
+struct Inner {
+    const char* Name() { return "}"; }
+    int Read() { extern int helper(int); return helper(1); }
+};
+};''')
+        methods = {d['short']: d for d in declarations}
+        self.assertEqual(methods['Name']['name'], 'Outer::Inner::Name')
+        self.assertEqual(methods['Read']['params'], [('void *', 'Outer::Inner')])
+        self.assertEqual(methods['helper']['params'], [('s32', None)])
+        self.assertFalse(methods['helper']['implicit_this'])
+
     def test_namespace_and_static_method_have_no_this(self):
         from unittest.mock import patch
         with patch.object(cr, 'CLASS_NAMES', {'Object'}), patch.object(cr, 'NAMESPACE_NAMES', {'Library'}), patch.object(cr, 'STATIC_METHODS', {('Object', 'Static')}):

@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 5
+VERSION = 6
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -80,6 +80,28 @@ def param_type(text):
     return normalize_type(text)
 
 
+def lexical_class_scopes(text):
+    """Direct member depth, excluding braces inside literals and nested function bodies."""
+    mask = re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'',
+                  lambda m: ''.join('\n' if c == '\n' else ' ' for c in m.group()), text)
+    stack, ends, depths = [], {}, []
+    for i, c in enumerate(mask):
+        depths.append(len(stack))
+        if c == '{':
+            stack.append(i)
+        elif c == '}' and stack:
+            ends[stack.pop()] = i
+    scopes = []
+    for m in re.finditer(r'\b(?:class|struct)\s+(\w+)\s*(?:final\s*)?(?::[^;{]+)?\{', mask):
+        if re.search(r'\benum\s*$', mask[max(0, m.start()-30):m.start()]):
+            continue
+        opening = m.end()-1
+        if opening in ends:
+            scopes.append((opening, ends[opening], m.group(1), depths[opening]+1))
+            CLASS_NAMES.add(m.group(1))
+    return scopes, depths
+
+
 def parse_declarations(text):
     """Find C/C++ signatures and function bodies without requiring a modern C++ parser.
 
@@ -87,7 +109,8 @@ def parse_declarations(text):
     and the *_FUNCTION(address) aliases used by PS2 headers are recognized before preprocessing.
     """
     text = COMMENT.sub('', text)
-    pattern = re.compile(r'(?:^|[;{}\n])\s*([^;{}#\n]*?)\b([A-Za-z_]\w*(?:::[~A-Za-z_]\w*)*)\s*\(', re.M)
+    scopes, depths = lexical_class_scopes(text)
+    pattern = re.compile(r'(?:^|[;{}\n])\s*([^;{}#\n]*?)(?<!\w)(~?[A-Za-z_]\w*(?:::[~A-Za-z_]\w*)*)\s*\(', re.M)
     result = []
     for m in pattern.finditer(text):
         name, left = m.group(2), m.group(1).strip()
@@ -95,6 +118,10 @@ def parse_declarations(text):
             continue
         if name in ('if', 'for', 'while', 'switch', 'return', '__attribute__', '__asm__', 'sizeof'):
             continue
+        if '::' not in name:
+            containing = [s for s in scopes if s[0] < m.start(2) < s[1]]
+            if containing and depths[m.start(2)] == containing[-1][3]:
+                name = '::'.join(s[2] for s in containing) + '::' + name
         depth, j = 1, m.end()
         while j < len(text) and depth:
             depth += text[j] == '('
