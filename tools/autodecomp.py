@@ -31,7 +31,7 @@ COMPILER = 'ee-gcc2.95.3-136'
 BASE_FLAGS = ['-O2', '-G0', '-snas']
 INSN = re.compile(r'^\s+/\* ([0-9A-F]+) ([0-9A-F]{8}) ([0-9A-F]{8}) \*/\s+(\S+)\s*(.*?)\s*$')
 SYM = re.compile(r'^([A-Za-z_$.][\w$.]*)(?:\s*([+-])\s*(0x[0-9A-Fa-f]+))?$')
-ADDRNAME = re.compile(r'^(?:func|D|jtbl|ehtbl)_([0-9A-F]{6,8})$')
+ADDRNAME = re.compile(r'^(?:func|D|jtbl|ehtbl)_([0-9A-Fa-f]{1,8})$')
 # mnemonics m2c cannot handle (EE multimedia, 128-bit, VU0 coprocessor 2); used only to label failures
 EE_MNEMONICS = re.compile(r'^(p[a-z0-9]+|lq|sq|q[a-z]+|v[a-z0-9.]+|c[ft]c2|mf(sa|hi1|lo1)|mt(sa|sah|hi1|lo1)|madd1|mult1|div1|divu1|'
                           r'multu1|maddu1|msub1|ei|di|syscall|sync.*|cache|tlb.*|eret|mfc0|mtc0|mfc2|mtc2|bc2.*|lqc2|sqc2|c1|cvt.*|adda.*|suba.*|madda.*)$')
@@ -110,7 +110,7 @@ def load_inventory():
     stamp = (BUILD / 'placement.json').stat().st_mtime
     if cache.exists():
         d = json.loads(cache.read_text())
-        if d['stamp'] == stamp and d.get('version') == 4:
+        if d['stamp'] == stamp and d.get('version') == 5:
             return d['functions']
     sys.path.insert(0, str(ROOT / 'tools'))
     from progress import regions
@@ -123,7 +123,7 @@ def load_inventory():
         out.append(dict(addr=f['addr'], name=f['name'], span=f['end'] - f['addr'], size=4 * len(words), words=words,
                         rel={str(k): list(v) for k, v in rel.items()}, mnem=mnem, region=r, owned=sorted(f['owned']), strings=strings,
                         lit4=(BUILD / 's/text' / (f['name'] + '.lit4.s')).exists()))
-    cache.write_text(json.dumps(dict(stamp=stamp, version=4, functions=out)))
+    cache.write_text(json.dumps(dict(stamp=stamp, version=5, functions=out)))
     return out
 
 
@@ -938,6 +938,16 @@ class Target:
             return ('hi', (base + add) >> 16) if kind == 'hi' else (kind, base + add)
         return (kind, base, add)
 
+    def literal_match(self, index, token):
+        """A compiler may resolve an absolute address without emitting a relocation.
+
+        Compare the complete original instruction, including its encoded immediate;
+        do not infer HI16 carry rules or forgive an unresolved symbolic target.
+        """
+        relocation = self.fn['rel'].get(str(index))
+        return bool(relocation and relocation[0] in ('hi', 'lo') and isinstance(relocation[1], int)
+                    and token == (self.fn['words'][index], None))
+
 
 def compiled_tokens(obj_bytes, symbol, consts=None):
     """Tokens of `symbol`'s code in a compiled object, or (None, reason)."""
@@ -1021,7 +1031,8 @@ def score(target, toks, orig_const):
 
     want = target.tokens
     if len(want) == len(toks):
-        d = sum(0 if same(a, b) else 1 for a, b in zip(want, toks))
+        d = sum(0 if same(a, b) or target.literal_match(i, b) else 1
+                for i, (a, b) in enumerate(zip(want, toks)))
         if d == 0:
             return True, 0, ''
 
