@@ -255,29 +255,98 @@ def recovered_context(refresh=False):
     return RECOVERED
 
 
+def header_declarations():
+    """Keep authored pointee names and parameter spellings available to every consumer."""
+    return {m.group(1): line for line in HEADER.read_text().splitlines()
+            if line.startswith('extern ') and (m := re.search(r'\b(func_[0-9A-F]{8})\(', line))} if HEADER.exists() else {}
+
+
+def return_abi(typ):
+    """Only the physical return bank and width; low-word pointer evidence stays compatible."""
+    if '*' in typ:
+        return 'gpr', 4
+    if typ == 'f32':
+        return 'fpr', 4
+    if typ in ('s8', 'u8', 's16', 'u16', 's32', 'u32'):
+        return 'gpr', 4
+    if typ in ('s64', 'u64', 'f64'):
+        return 'gpr', 8
+    if typ in ('s128', 'u128'):
+        return 'gpr', 16
+    return None
+
+
+def selected_prototype(row, header=None, m2c=False, scalar=None):
+    """Merge only proved ABI corrections into weak HEADER declarations.
+
+    A direct producer must agree with the resolved return before replacing its
+    width/bank. A void return also needs a real caller consumption in that bank.
+    Low-word GPR facts cannot narrow an existing wider header return.
+    Keep the header's useful parameter and pointee spellings; caller counts and
+    propagated types alone never replace them. Anchored/variadic rows retain
+    their existing precedence. Unsupported header syntax is left untouched.
+    """
+    import context_recovery as cr
+    anchored = row.get('source_quality', 0) >= 2 or row.get('variadic')
+    if header and not anchored:
+        declaration = re.fullmatch(r'extern\s+(.+?)\s+' + re.escape(row['name']) + r'\((.*)\);(.*)', header)
+        if not declaration:
+            return header
+        ret, params, tail = declaration.groups()
+        header_ret, _ = cr.normalize_type(ret)
+        # Syscalls have implicit operands absent from the stub instructions.
+        # Relax their false zero-argument declaration without guessing a return.
+        if row.get('syscall') and header_ret == 'void' and params.strip() == 'void':
+            return 'extern %s %s();%s' % (ret, row['name'], tail)
+        evidence = row.get('return_evidence', {})
+        abi = return_abi(row['ret'])
+        if abi and not row.get('syscall'):
+            direct, conflicts = cr.resolve_type(evidence.get('direct_types', {}).get(abi[0], []))
+            incompatible = any(c.get('slot') == 'ret' and c.get('kind') != 'source-hint-disagrees'
+                               for c in row.get('conflicts', []))
+            produced = not conflicts and return_abi(direct) == abi
+            consumed = abi[0] in evidence.get('consumed_banks', [])
+            header_abi = return_abi(header_ret)
+            contradiction = header_abi and (header_abi[0] != abi[0] or abi[1] > header_abi[1])
+            if produced and not incompatible and ((header_ret == 'void' and consumed)
+                                                    or contradiction):
+                ret = cr.context_type(row['ret'], m2c)
+        return 'extern %s %s(%s);%s' % (ret, row['name'], params, tail)
+    alternate = row
+    if scalar and not anchored:
+        simple = {'unknown', 's32', 'u32', 'void *'}
+        if scalar == 'void':
+            alternate = dict(row, ret='void' if row['ret'] in ('unknown', 's32', 'u32') else row['ret'])
+        else:
+            params = [scalar if t in simple and str(k) not in row.get('param_views', {}) else t
+                      for k, t in enumerate(row['params'])]
+            alternate = dict(row, params=params, ret=scalar if row['ret'] in simple else row['ret'])
+    return 'extern ' + cr.prototype(alternate, m2c)
+
+
 def write_context(refresh=False):
     """Whole-callgraph signatures, PS2 aggregate views and Ghidra layouts for m2c."""
-    import context_recovery
     context = recovered_context(refresh)
     if os.environ.get('AUTODECOMP_FREEZE_CONTEXT') == '1':
         return len(context['signatures'])
     out = ['typedef signed char s8; typedef unsigned char u8; typedef short s16; typedef unsigned short u16;',
            'typedef int s32; typedef unsigned int u32; typedef long s64; typedef unsigned long u64;',
            'typedef float f32; typedef double f64;']
+    declared = header_declarations()
     if HEADER.exists():
         for line in HEADER.read_text().split('\n'):
             if line.startswith('#') or line.startswith('typedef char assert_') or line.startswith('/*') or line.startswith(' *'):
                 continue
             match = re.search(r'\bfunc_([0-9A-F]{8})\(', line) if line.startswith('extern ') else None
             row = context['signatures'].get(str(int(match.group(1), 16))) if match else None
-            if row and (row.get('source_quality', 0) >= 2 or row.get('variadic')):
+            if row:
                 continue
             out.append(line)
     known = set(re.findall(r'\b(func_[0-9A-F]{8})\(', '\n'.join(out)))
     out.append((AUTO / 'recovered_layouts.c').read_text())
     for row in context['signatures'].values():
         if row['name'] not in known:
-            out.append(context_recovery.prototype(row, m2c=True))
+            out.append(selected_prototype(row, declared.get(row['name']), m2c=True))
     import ee_prep
     out += ee_prep.PLACEHOLDERS
     (AUTO / 'ctx.c').write_text('\n'.join(out) + '\n')
@@ -372,27 +441,14 @@ def write_context_arity(inv):
     """Scalar/pointer alternatives retain all anchored source and EE/float signatures."""
     if os.environ.get('AUTODECOMP_FREEZE_CONTEXT') == '1':
         return
-    import context_recovery
     context = recovered_context()
-    declared = {re.search(r'\b(func_[0-9A-F]{8})\(', line).group(1): line for line in HEADER.read_text().splitlines() if line.startswith('extern ') and re.search(r'\bfunc_[0-9A-F]{8}\(', line)} if HEADER.exists() else {}
+    declared = header_declarations()
     base = '\n'.join(line for line in (AUTO / 'ctx.c').read_text().splitlines()
                      if not re.match(r'^(?:extern )?[^;{}]*\bfunc_[0-9A-F]{8}\(', line))
     for name, typ in (('ctx2.c', 's32'), ('ctx3.c', 'void *'), ('ctx_void.c', 'void')):
         out = [base]
         for row in context['signatures'].values():
-            if row['name'] in declared and row.get('source_quality', 0) < 2 and not row.get('variadic'):
-                out.append(declared[row['name']])
-                continue
-            anchored = row.get('source_quality', 0) >= 2 or row.get('variadic')
-            alternate = row
-            if not anchored:
-                scalar = {'unknown', 's32', 'u32', 'void *'}
-                if typ == 'void':
-                    alternate = dict(row, ret='void' if row['ret'] in ('unknown', 's32', 'u32') else row['ret'])
-                else:
-                    params = [typ if t in scalar and str(k) not in row.get('param_views', {}) else t for k, t in enumerate(row['params'])]
-                    alternate = dict(row, params=params, ret=typ if row['ret'] in scalar else row['ret'])
-            out.append(context_recovery.prototype(alternate, m2c=True))
+            out.append(selected_prototype(row, declared.get(row['name']), m2c=True, scalar=typ))
         (AUTO / name).write_text('\n'.join(out) + '\n')
 
 
@@ -619,7 +675,7 @@ def clean_function(name, r, sigs, strings=None, stack=None):
     sig = '%s %s(%s)' % (ret, name, params)
     lines = ['#include "auto/prelude.h"', '#define TYPES_GHIDRA_NO_PROTOTYPES', '#include "types_ghidra.h"', '#undef TYPES_GHIDRA_NO_PROTOTYPES', '']
     seen = set()
-    known = {re.search(r'\b(func_[0-9A-F]{8})\(', line).group(1): line for line in HEADER.read_text().splitlines() if line.startswith('extern ') and re.search(r'\bfunc_[0-9A-F]{8}\(', line)} if HEADER.exists() else {}
+    known = header_declarations()
     for ident in IDENT.findall(sig + ' ' + body):
         if ident in seen or ident == name:
             continue
@@ -628,11 +684,10 @@ def clean_function(name, r, sigs, strings=None, stack=None):
         if ident.startswith('__ee_'):
             continue
         row = recovered_context()['signatures'].get(str(int(ident[5:], 16))) if re.fullmatch(r'func_[0-9A-F]{8}', ident) else None
-        if ident in known and (not row or row.get('source_quality', 0) < 2 and not row.get('variadic')):
+        if row:
+            lines.append(selected_prototype(row, known.get(ident)))
+        elif ident in known:
             lines.append(known[ident])
-        elif row:
-            import context_recovery
-            lines.append('extern ' + context_recovery.prototype(row))
         elif d and d[0] == 'func':
             lines.append(decl_function(ident, d))
         elif d and d[0] == 'data' and re.search(r'\b%s\(' % ident, body):

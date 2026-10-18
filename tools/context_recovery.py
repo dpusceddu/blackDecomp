@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 4
+VERSION = 5
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -335,6 +335,7 @@ def analyze_function(f):
     ins = [rabbitizer.Instruction(w, f['addr'] + 4*i, rabbitizer.InstrCategory.R5900) for i, w in enumerate(f['words'])]
     incoming, queue = {0: initial_state()}, collections.deque([0])
     uses, fields, calls, returns, nested = set(), set(), {}, set(), set()
+    return_consumers = set()
     varargs = variadic_register_saves(f)
 
     def constrain(v, typ, pc):
@@ -348,10 +349,16 @@ def analyze_function(f):
         reads, writes = effects(x)
         rs, rt, fs = w >> 21 & 31, w >> 16 & 31, 32 + (w >> 11 & 31)
         imm = (w & 0xffff) - (0x10000 if w & 0x8000 else 0)
+        copy = op in ('addu', 'daddu', 'or', 'por') and (rs == 0 or rt == 0)
+        return_copy = copy or op in ('mov.s', 'mov.d') or (op in ('addiu', 'daddiu') and imm == 0)
         for reg in reads:
             if varargs and varargs['saves'].get(i) == reg:
                 continue             # va_start register homing is not a named argument
             constrain(old[reg], 'used', i)
+            if not return_copy:
+                for kind, callee, _ in old[reg].origins:
+                    if kind == 'ret':
+                        return_consumers.add((callee, 'fpr' if reg >= 32 else 'gpr', i))
         if op in MEMORY:
             typ, size = MEMORY[op]
             base = old[rs]
@@ -381,7 +388,6 @@ def analyze_function(f):
             for reg in reads:
                 if reg >= 32:
                     constrain(old[reg], 'f32', i)
-        copy = op in ('addu', 'daddu', 'or', 'por') and (rs == 0 or rt == 0)
         if writes and op not in MEMORY and not copy and op not in ('addiu', 'daddiu'):
             # Unknown indexed arithmetic/escapes must not disappear while retaining
             # only the easy zero-displacement accesses for the same pointer field.
@@ -460,7 +466,8 @@ def analyze_function(f):
             else:
                 emit_call(i, delayed, True)
         # Unresolved computed jumps end this path; never scan their unreachable tail linearly.
-    return dict(uses=uses, fields=fields, calls=calls, returns=returns, nested=nested)
+    return dict(uses=uses, fields=fields, calls=calls, returns=returns, nested=nested,
+                return_consumers=return_consumers, syscall=any(x.getOpcodeName() == 'syscall' for x in ins))
 
 
 def ft_register(w):
@@ -561,6 +568,8 @@ def recover_signatures(inv, analysis, seeds):
         if any(typ == '...' for typ, _ in seed['params']) and seed['quality'] >= 2:
             variadic[addr] = dict(fixed_gpr=None, saves={})
     observed_returns = collections.defaultdict(set)
+    return_consumers = collections.defaultdict(set)
+    direct_returns, live_slots = {}, {}
     # Inline syscall stubs can byte-match a void(void) definition while consuming
     # implicit syscall arguments. That source signature is not ABI evidence.
     surface_seeds = seeds
@@ -569,6 +578,10 @@ def recover_signatures(inv, analysis, seeds):
                    and any(kind in ('arg', 'farg') for kind, _, _, _ in analysis[f['addr']]['uses'])}
     for f in inv:
         a, result = f['addr'], analysis[f['addr']]
+        direct_returns[a] = {bank: sorted({typ for values in result['returns'] for typ in values[index].types})
+                             for index, bank in enumerate(('gpr', 'fpr'))}
+        for callee, bank, pc in result.get('return_consumers', []):
+            return_consumers[callee].add((a, bank, pc))
         used = set()
         for kind, k, typ, pc in result['uses']:
             if kind == 'ret':
@@ -583,6 +596,7 @@ def recover_signatures(inv, analysis, seeds):
         ng = max((k+1 for k in used if k < 8), default=0)
         nf = max((k-7 for k in used if k >= 8), default=0)
         register_slots[a] = list(range(ng)) + list(range(8, 8+nf))
+        live_slots[a] = sorted(used)
         if a in variadic and variadic[a]['fixed_gpr'] is not None:
             register_slots[a] = list(range(variadic[a]['fixed_gpr'])) + list(range(8, 8+nf))
         for (pc, dest, tail), values in result['calls'].items():
@@ -684,6 +698,11 @@ def recover_signatures(inv, analysis, seeds):
                    source=seed['source'] if seed else None, source_quality=seed['quality'] if seed else 0,
                    surface_abi_ambiguity=surface_seeds.get(a, {}).get('abi_uncertainty', []),
                    ret_class=seed.get('retclass') if seed else None)
+        row['live_register_slots'] = live_slots[a]
+        row['syscall'] = analysis[a].get('syscall', False)
+        row['return_evidence'] = dict(direct_types=direct_returns[a],
+                                     consumed_banks=sorted({bank for _, bank, _ in return_consumers[a]}),
+                                     consumers=len(return_consumers[a]))
         if a in variadic:
             row['variadic'] = True
             row['arity_kind'] = 'variadic signature' if seed and seed['quality'] >= 2 else 'SN variadic register-save ABI'
