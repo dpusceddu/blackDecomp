@@ -79,11 +79,15 @@ def main():
             if r.get(name, name) not in defined:      # else a unit already defines it, at this very address
                 aliases.append('%s = %s;' % (r.get(name, name), resolve(addr)))
     index = {f['addr']: i for i, f in enumerate(placement['functions'])}
+    fsym = {}                                         # address -> symbol, for the functions of units compiled with -ffunction-sections
     for u, src in live_units:
         uname = 'units/' + u['name']
         objects[uname] = dict(name=uname, kind='cc', src=u['source'], compiler=u['compiler'], flags=u['flags'])
         positions = sorted(index[f['addr']] for f in src if f['addr'] in index)
-        if positions != list(range(positions[0], positions[0] + len(positions))):
+        if '-ffunction-sections' in u['flags']:      # one section per function: the unit may have assembly functions between its own
+            for f in src:
+                fsym[f['addr']] = f['symbol']
+        elif positions != list(range(positions[0], positions[0] + len(positions))):
             problems.append('%s: source functions are not contiguous in the original order' % u['name'])
         for f in src:
             if f['addr'] not in func_by_addr:
@@ -117,7 +121,11 @@ def main():
             if fn in replaced:
                 uname = replaced[fn]
                 if sec in sorted_secs:
-                    rename.setdefault(uname, {}).setdefault(sec, '%s.%08X' % (sec, e['key']))
+                    addr = func_by_name[fn]['addr']
+                    if sec == '.text' and addr in fsym:        # the function's own section takes the function's slot
+                        rename.setdefault(uname, {})['.text.' + fsym[addr]] = '%s.%08X' % (sec, e['key'])
+                    else:
+                        rename.setdefault(uname, {}).setdefault(sec, '%s.%08X' % (sec, e['key']))
                 continue
             seq.append(e)
             objs_in_link.append(obj)

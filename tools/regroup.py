@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
 """Merge the source units of one translation unit (config/tus.yaml) into one source file and one unit.
 
-  regroup.py plan              show what would be merged
-  regroup.py merge [--limit N] merge, settle (compile, link, compare) and keep the merges that leave the image identical
+  regroup.py plan [--sections]   show what would be merged
+  regroup.py merge [--limit N] [--sections]
+                                 merge, settle (compile, link, compare) and keep the merges that leave the image identical
+
+Without --sections only runs of adjacent functions are merged. With --sections one unit holds every source function of a TU,
+compiled with -ffunction-sections: each function gets its own section (`.text.<symbol>`) and make_ld.py places it in the slot of
+its original function, so assembly functions (orphan pieces, hard cases) may sit between the source functions of the TU and the
+source file still shows the TU in address order. The constants of the unit keep one section, which must find adjacent slots.
 
 The automatic pipeline registers adjacent exact drafts in groups of at most 24 without knowing the translation units. A
 group is a run of adjacent functions that a unit replaces as a whole, so any run of adjacent functions with the same
@@ -46,8 +52,9 @@ def split_source(text):
     return inc, pre, '\n'.join(lines[i:]).strip('\n')
 
 
-def plan(units, tus, limit=None):
-    """Groups of units to merge: [(tu name, [units])]. Units must be wholly source, plain C, adjacent, same compiler and flags."""
+def plan(units, tus, limit=None, sections=False):
+    """Groups of units to merge: [(tu name, [units])]. Units must be wholly source, plain C, same compiler and flags, and (unless
+    `sections`) adjacent."""
     placement = json.loads((BUILD / 'placement.json').read_text())['functions']
     index = {f['addr']: i for i, f in enumerate(placement)}
     starts = [int(t['text'][0], 16) for t in tus]
@@ -71,7 +78,7 @@ def plan(units, tus, limit=None):
     cand.sort(key=lambda c: c[0])
     groups, cur = [], []
     for first, last, k, u in cand:
-        if cur and cur[-1][2] == k and cur[-1][1] + 1 == first and cur[-1][3]['flags'] == u['flags'] \
+        if cur and cur[-1][2] == k and (sections or cur[-1][1] + 1 == first) and cur[-1][3]['flags'] == u['flags'] \
                 and cur[-1][3]['compiler'] == u['compiler']:
             cur.append((first, last, k, u))
         else:
@@ -81,14 +88,27 @@ def plan(units, tus, limit=None):
     if len(cur) > 1:
         groups.append(cur)
     out = [(tus[g[0][2]]['name'], [c[3] for c in g]) for g in groups]
+    if sections:                                   # one function per symbol: a section is named after its symbol
+        out = [(n, g) for n, g in out if len({f['symbol'] for u in g for f in u['functions']}) == sum(len(u['functions']) for u in g)]
     return out[:limit] if limit else out
 
 
-def merged_unit(name, group):
-    pre_all, inc_all, bodies, externs = [], [], [], {}
+def merged_unit(name, group, sections=False, taken=None):
+    taken = set() if taken is None else taken
+    pre_all, inc_all, bodies, externs, notes = [], [], [], {}, []
+    placement = json.loads((BUILD / 'placement.json').read_text())['functions'] if sections else []
+    prev_last = None
     for u in group:
         text = (ROOT / u['source']).read_text()
         inc, pre, body = split_source(text)
+        note = ''
+        if sections and prev_last is not None:             # the assembly functions that sit between this run and the one before
+            gap = [f for f in placement if prev_last < f['addr'] < u['functions'][0]['addr']]
+            if gap:
+                note = '/* Assembly between the functions: %s */\n\n' % (
+                    ', '.join('%s (%d bytes)' % (f['name'], f['end'] - f['addr']) for f in gap[:12]) + (' ...' if len(gap) > 12 else ''))
+        notes.append(note)
+        prev_last = u['functions'][-1]['addr']
         for l in inc:
             if l not in inc_all:
                 inc_all.append(l)
@@ -101,22 +121,30 @@ def merged_unit(name, group):
                 return None
     defined = {re.search(r'\b(\w+)\s*\(', b.split('{')[0]).group(1) for b in bodies if '{' in b}
     pre_all = [l for l in pre_all if not (l.startswith('extern') and re.search(r'\b(%s)\s*\(' % '|'.join(map(re.escape, defined)), l))]
-    text = '\n'.join(inc_all) + '\n\n' + ('\n'.join(pre_all) + '\n\n' if pre_all else '') + '\n\n'.join(bodies) + '\n'
+    text = '\n'.join(inc_all) + '\n\n' + ('\n'.join(pre_all) + '\n\n' if pre_all else '') + '\n\n'.join(n + b for n, b in zip(notes, bodies)) + '\n'
     first = group[0]['functions'][0]['addr']
     rel = 'src/tu/%06x.c' % first
+    flags = list(group[0]['flags'])
+    if sections:
+        base = name.replace('/', '_')
+        rel = 'src/tu/%s.c' % (base if base not in taken else '%s_%06x' % (base, first))
+        taken.add(base)
+        flags.append('-ffunction-sections')
+        text = '/* Translation unit %s of the TU map: its source functions in address order; assembly functions between them stay\n   in the image and are placed by address. */\n' % name + text
     funcs = [dict(f) for u in group for f in u['functions']]
-    return dict(name='tu_%06x' % first, source=rel, origin='auto', compiler=group[0]['compiler'], flags=list(group[0]['flags']),
-                externs=externs, functions=funcs), text
+    return dict(name=('tuf_' if sections else 'tu_') + '%06x' % first, source=rel, origin='auto', compiler=group[0]['compiler'],
+                flags=flags, externs=externs, functions=funcs), text
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('what', choices=['plan', 'merge'])
     ap.add_argument('--limit', type=int)
+    ap.add_argument('--sections', action='store_true', help='one unit per TU compiled with -ffunction-sections (assembly may sit between its functions)')
     a = ap.parse_args()
     tus = yaml.safe_load((ROOT / 'config/tus.yaml').read_text())['tus']
     units = load_units(variant=SLUG)
-    groups = plan(units, tus, a.limit)
+    groups = plan(units, tus, a.limit, a.sections)
     print('%d groups of units in one TU: %d units -> %d' % (len(groups), sum(len(g) for _, g in groups), len(groups)))
     if a.what == 'plan':
         for name, g in groups[:30]:
@@ -124,9 +152,9 @@ def main():
         return 0
     backup = BUILD / 'units.before_regroup.yaml'
     shutil.copy(ROOT / 'config/units.yaml', backup)
-    merged, replaced = {}, set()
+    merged, replaced, taken = {}, set(), set()
     for name, g in groups:
-        r = merged_unit(name, g)
+        r = merged_unit(name, g, a.sections, taken)
         if r is None:
             continue
         mu, text = r

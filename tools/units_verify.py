@@ -61,16 +61,20 @@ def bindings():
     return out
 
 
+def is_text(name):
+    """`.text`, or a per-function section (-ffunction-sections)."""
+    return name == '.text' or name.startswith('.text.')
+
+
 def data_sections(e, syms, u, live, placement):
     """Constants and data the compiled unit brings along. Returns a reason when they cannot take the place of what the
     assembly objects carried: code refers to a section no original slot exists for, the slots are not adjacent, or the
     sizes differ."""
-    text = e.section('.text')
     by_name = {f['name']: f for f in placement['functions']}
     addrs = {f['addr'] for f in live}
     referenced = set()
     for t in e.sections:
-        if t['type'] == 9 and e.sections[t['info']]['name'] == '.text':
+        if t['type'] == 9 and is_text(e.sections[t['info']]['name']):
             c = e.content(t)
             for o in range(0, len(c), 8):
                 off, info = struct.unpack_from('<II', c, o)
@@ -78,10 +82,10 @@ def data_sections(e, syms, u, live, placement):
                 if y['shndx'] not in (0, 0xfff1, 0xfff2):
                     name = e.sections[y['shndx']]['name']
                     # a global defined in a dropped section (a vtable emitted here) is bound to the original instead
-                    if y['bind'] in (1, 2) and y['name'] and name not in ('.text', '.rodata', '.lit4', '.gcc_except_table'):
+                    if y['bind'] in (1, 2) and y['name'] and not is_text(name) and name not in ('.rodata', '.lit4', '.gcc_except_table'):
                         continue
                     referenced.add(name)
-    for sec in sorted(referenced - {'.text', '.rodata', '.lit4', '.gcc_except_table'}):
+    for sec in sorted(x for x in referenced if not is_text(x) and x not in ('.rodata', '.lit4', '.gcc_except_table')):
         return 'section'              # own data or bss: not placed
     for sec in ('.rodata', '.lit4', '.gcc_except_table'):
         ents = placement['sections'][sec]
@@ -140,7 +144,9 @@ def prepare():
             continue
         syms = e.symbols()
         text = e.section('.text')
-        defined = {s['name']: s for s in syms if s['shndx'] == text['index'] and s['type'] == 2}
+        fsecs = {t['index'] for t in e.sections if t['name'].startswith('.text.')}
+        tidx = text['index'] if text else -1
+        defined = {s['name']: s for s in syms if s['type'] == 2 and (s['shndx'] == tidx or s['shndx'] in fsecs)}
         total = 0
         for f in u['functions']:
             if f.get('status') != 'source':
@@ -154,7 +160,22 @@ def prepare():
                 total += s['size']
         # the object's code must fill exactly the original span (first function to the next one behind the unit)
         live = [f for f in u['functions'] if f.get('status') == 'source']
-        if live:
+        if live and fsecs:
+            # one section per function (-ffunction-sections): each must fill the original span of its function exactly, and the
+            # object holds no other code
+            bad = set()
+            for f in live:
+                s = defined.get(f['symbol'])
+                sec = e.sections[s['shndx']] if s else None
+                nxt = starts[starts.index(f['addr']) + 1] if starts.index(f['addr']) + 1 < len(starts) else None
+                if sec is None or not sec['name'].startswith('.text.') or sec['size'] != nxt - f['addr']:
+                    bad.add(f['addr'])
+            if bad:
+                stats['extra'] = stats.get('extra', 0) + demote(u, bad, 'extra')
+            elif (text and text['size']) or sum(e.sections[i]['size'] for i in fsecs) != sum(
+                    (starts[starts.index(f['addr']) + 1] - f['addr']) for f in live):
+                stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
+        elif live:
             first, last = min(f['addr'] for f in live), max(f['addr'] for f in live)
             nxt = starts[starts.index(last) + 1] if starts.index(last) + 1 < len(starts) else None
             if text['size'] != nxt - first:
@@ -167,14 +188,15 @@ def prepare():
         # bind what the object leaves undefined
         used = set()     # only what the linked sections refer to; the dropped ones (unwind data, linkonce copies) do not count
         for t in e.sections:
-            if t['type'] == 9 and e.sections[t['info']]['name'] in ('.text', '.rodata', '.lit4', '.gcc_except_table'):
+            if t['type'] == 9 and (is_text(e.sections[t['info']]['name']) or e.sections[t['info']]['name'] in ('.rodata', '.lit4', '.gcc_except_table')):
                 c = e.content(t)
                 for o in range(0, len(c), 8):
                     used.add(struct.unpack_from('<I', c, o + 4)[0] >> 8)
         kept_names = ('.text', '.rodata', '.lit4', '.gcc_except_table')
         want = sorted({syms[i]['name'] for i in used if syms[i]['name'] and syms[i]['bind'] in (1, 2) and
                        (syms[i]['shndx'] == 0 or (syms[i]['shndx'] < 0xff00 and e.sections[syms[i]['shndx']]['name'] not in kept_names
-                                                  and i not in [j for j, y in enumerate(syms) if y['type'] == 2 and y['shndx'] == e.section('.text')['index']]))})
+                                                  and not is_text(e.sections[syms[i]['shndx']]['name'])
+                                                  and i not in [j for j, y in enumerate(syms) if y['type'] == 2 and y['shndx'] == tidx]))})
         ex, missing = {}, []
         known = dict(u.get('externs') or {})
         known.update(bind.get(u['name'], {}))
