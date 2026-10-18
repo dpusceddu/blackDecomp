@@ -48,7 +48,11 @@ def parse_operand(expr):
 
 
 def parse_function(path):
-    """Instructions of a split function file up to its endlabel: words, symbolic operands and notes."""
+    """All text blocks of a split function, excluding final alignment and owned data.
+
+    Switch cases can have secondary function labels and their own endlabels in
+    the same input section. The last endlabel bounds the code, not the first.
+    """
     words, rel, mnem = [], {}, []
     text = path.read_text().split('\n')
     strings, label = {}, None
@@ -61,9 +65,16 @@ def parse_function(path):
             m = re.search(r'\.asciz "(.*)"\s*$', line)
             if m and label not in strings:
                 strings[label] = m.group(1)
+    code, in_text, last_end = [], True, None
     for line in text:
-        if line.startswith('endlabel'):
-            break
+        section = re.match(r'\s*\.section\s+([^,\s]+)', line)
+        if section:
+            in_text = section.group(1).startswith('.text')
+        if in_text:
+            code.append(line)
+            if line.startswith('endlabel'):
+                last_end = len(code)
+    for line in code[:last_end]:
         m = INSN.match(line)
         if not m:
             continue
@@ -98,7 +109,7 @@ def load_inventory():
     stamp = (BUILD / 'placement.json').stat().st_mtime
     if cache.exists():
         d = json.loads(cache.read_text())
-        if d['stamp'] == stamp and d.get('version') == 3:
+        if d['stamp'] == stamp and d.get('version') == 4:
             return d['functions']
     sys.path.insert(0, str(ROOT / 'tools'))
     from progress import regions
@@ -111,7 +122,7 @@ def load_inventory():
         out.append(dict(addr=f['addr'], name=f['name'], span=f['end'] - f['addr'], size=4 * len(words), words=words,
                         rel={str(k): list(v) for k, v in rel.items()}, mnem=mnem, region=r, owned=sorted(f['owned']), strings=strings,
                         lit4=(BUILD / 's/text' / (f['name'] + '.lit4.s')).exists()))
-    cache.write_text(json.dumps(dict(stamp=stamp, version=3, functions=out)))
+    cache.write_text(json.dumps(dict(stamp=stamp, version=4, functions=out)))
     return out
 
 

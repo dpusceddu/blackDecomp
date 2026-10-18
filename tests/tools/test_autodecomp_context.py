@@ -8,6 +8,29 @@ import autodecomp as auto
 
 
 class IntegrationTests(unittest.TestCase):
+    def test_split_switch_includes_secondary_labels_but_not_tail_or_owned_data(self):
+        import tempfile
+        source = '''.section .text.00100000, "ax"
+glabel func_00100000
+    /* 0 00100000 0800E003 */ jr $31
+endlabel func_00100000
+    /* 4 00100004 00000000 */ nop
+jlabel func_00100008
+    /* 8 00100008 0000023C */ lui $2, %hi(D_00400000)
+endlabel func_00100008
+    /* C 0010000C 00000000 */ nop
+.section .rodata.00400000, "a"
+dlabel D_00400000
+    /* 10 00400000 00000000 */ .word 0
+'''
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'switch.s'
+            path.write_text(source)
+            words, rel, mnemonics, _ = auto.parse_function(path)
+        self.assertEqual(len(words), 3)
+        self.assertEqual(mnemonics, ['jr', 'nop', 'lui'])
+        self.assertEqual(rel[2], ('hi', 0x400000, 0, 'D_00400000'))
+
     def test_gnu_assembler_is_a_real_fallback_with_conditional_small_data_flags(self):
         with patch.object(auto, 'tu_flags', return_value=None), patch.object(auto, 'force_cc', side_effect=lambda x: x):
             regular = auto.extra_sets({'addr': 0x100000, 'rel': {}})
