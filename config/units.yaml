@@ -40126,3 +40126,51 @@ units:
     symbol: func_0032E120
     size: 144
     status: source
+- name: actor_firing_animation
+  source: src/game/actor/firing_animation.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  externs:
+    D_003F6C00: '0x3f6c00'
+    D_003F6C10: '0x3f6c10'
+    D_003F6C20: '0x3f6c20'
+    D_003F6C30: '0x3f6c30'
+    D_003F6C40: '0x3f6c40'
+  functions:
+  - addr: '0x1aa280'
+    symbol: func_001AA280
+    size: 524
+    status: source
+  - addr: '0x1aa490'
+    symbol: func_001AA490
+    size: 728
+    status: source
+  trim:
+    .rodata: 408
+- name: actor_debug_draw
+  source: src/game/actor/debug_draw.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    D_003BCFB4: '0x3bcfb4'
+    D_003D1CD4: '0x3d1cd4'
+    D_0040F514: '0x40f514'
+    func_001AB468: '0x1ab468'
+    func_001AB6C0: '0x1ab6c0'
+    func_00266088: '0x266088'
+    func_002662A8: '0x2662a8'
+    func_00268250: '0x268250'
+  functions:
+  - addr: '0x1ab500'
+    symbol: func_001AB500
+    size: 444
+    status: source

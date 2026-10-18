@@ -9189,7 +9189,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 49 of 103 functions
+  flags_basis: matched 52 of 103 functions
   data:
     .rodata: ['0x3f6850', '0x3f7188']
     .data: ['0x3bcfc0', '0x3d1e18']
