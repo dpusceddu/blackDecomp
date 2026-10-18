@@ -42338,3 +42338,23 @@ units:
     symbol: func_0010B5B0
     size: 88
     status: source
+- name: frontend_movie_campaign
+  source: src/game/frontend_movie_campaign.cpp
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1093c0'
+    symbol: func_001093C0
+    size: 76
+    status: source
+  - addr: '0x109dc0'
+    symbol: func_00109DC0
+    size: 172
+    status: source
+  - addr: '0x109ee0'
+    symbol: func_00109EE0
+    size: 132
+    status: source
