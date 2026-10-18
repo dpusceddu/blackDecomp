@@ -147,6 +147,41 @@ dlabel D_00400000
                 auto.cmd_settle(argparse.Namespace(group=1))
             self.assertEqual(run.call_count, 1)
 
+    def test_settlement_uses_provenance_and_current_records_not_auto_prefix(self):
+        unit = dict(name='auto_physics_old', origin='physics', functions=[dict(addr=1), dict(addr=2)])
+        records = {unit['name']: {1: {}, 2: {}}}
+        self.assertFalse(auto.retryable_auto_unit(unit, records))
+        unit['origin'] = 'auto'
+        self.assertTrue(auto.retryable_auto_unit(unit, records))
+        self.assertFalse(auto.retryable_auto_unit(unit, {}))
+        self.assertFalse(auto.retryable_auto_unit(unit, {unit['name']: {1: {}}}))
+
+    def test_settlement_preserves_authored_and_partly_matched_source_files(self):
+        import argparse
+        import tempfile
+        import units
+        import units_verify
+        from subprocess import CompletedProcess
+        for origin in ('physics', 'auto'):
+            with self.subTest(origin=origin), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                source = root / 'owned.c'
+                source.write_text('int kept(void) { return 1; }')
+                unit = dict(name='auto_old', origin=origin, source='owned.c', functions=[
+                    dict(addr=1, status='source'), dict(addr=2, status='asm', reason='size')])
+                records = {'0x1': dict(registered='auto_old', status='matched'),
+                           '0x2': dict(registered='auto_old', status='matched')}
+                with patch.object(auto, 'ROOT', root), patch.object(units, 'load_units', return_value=[unit]), \
+                        patch.object(auto, 'load_results', return_value=records), \
+                        patch.object(auto, 'save_results'), patch.object(units_verify, 'save') as save, \
+                        patch.object(auto.subprocess, 'run', return_value=CompletedProcess([], 0, 'identical', '')):
+                    auto.cmd_settle(argparse.Namespace(group=1))
+                    self.assertTrue(source.exists())
+                    self.assertEqual(save.call_args.args[0], [unit])
+                    if origin == 'auto':
+                        self.assertEqual(records['0x2']['status'], 'verify-failed')
+                        self.assertNotIn('registered', records['0x2'])
+
     def test_forwarded128_abi_uses_physical_gpr_slot_and_preserves_true64(self):
         rows = {'1048576': dict(name='func_00100000', ret='s128', params=['f32', 's128', 's64'], register_slots=[8, 3, 4]),
                 '2097152': dict(name='func_00200000', ret='s128', params=[], register_slots=[])}

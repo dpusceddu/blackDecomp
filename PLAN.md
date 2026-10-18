@@ -244,6 +244,7 @@ Bytes are full-image-verified `.text` spans including alignment. Code and owned-
 | Wave | New functions / bytes | Complete TUs (code / data) | Throughput | Functions >300 B | Main blockers |
 | --- | --- | --- | --- | --- | --- |
 | 0, tooling | 115 / 15,720 | 0 / 0 | about 1.8 h coordinator wall time; not a TU-agent rate | automatic 15/2,316 (0.65%); none >1,000 B | stack/tagged aggregates; code-generation mismatches; EE vector and mixed-width code |
+| 1, seven area queues | 147 / 19,528 (0.719%) | 3 code; data not completed/audited | manual 3.66 kB/active agent-hour, 3.96 agent-hours | manual 18/173 (10.4%); 0/21 above 1,000 B; automatic 0/2,285 | stack/aggregate lifetimes; register allocation and scheduling; EE vector/mixed widths |
 
 Wave 0: 4,587 functions / 218,312 bytes became 4,702 / 234,032 (39.52% / 8.62%). Incremental
 automatic rates among previously unmatched real functions were 65/1,586 (4.10%) below 100 B,
@@ -258,6 +259,17 @@ retries scheduled stack prologues. Batch parse/worker failures stop explicitly. 
 tagged payloads, stack lifetimes, indirect calls and mixed EE widths remain unresolved; view verification
 requires matching member users. The largest remaining automatic failure categories are stack objects
 (587 kB), general mismatches (481 kB), and unsupported EE operations (401 kB).
+
+Wave 1: 4,702 functions / 234,032 bytes became 4,849 / 253,560 (40.75% / 9.34%). Manual work
+visited 24 TUs and added 79 functions / 14,512 bytes plus 1,416 owned-data bytes, using 109 Ninja
+invocations; some early candidate counts are lower bounds. The ChildBuffers TU became code-complete;
+automation completed two additional small TUs. Incremental automatic rates were 54/1,481 (3.65%) below
+100 B, 14/2,678 (0.52%) at 100–300 B and 0/2,285 above 300 B. Three full context passes plus bounded
+near search used 49,428 actual compilations in 366 worker batches; the pointer pass added nothing and
+the void pass added eight object candidates. Four large near searches solved none. New tools preserve
+variadics and direct return ABI evidence, recognize MIPS stack escapes and split switch extents, improve
+GNU-assembler candidates and alignment/cache checks, protect prior source through settlement and retry
+cleanup, and retain build telemetry. All five retail images passed; no prior source addresses were lost.
 
 Campaigns rotate seven area queues through three workers: four agent slots including the coordinator
 are available; worker contention has not reduced concurrency. Integrate each TU checkpoint, then rerun

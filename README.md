@@ -132,9 +132,10 @@ of the first sources: `tools/import_kynapse.py` and `tools/import_game.py` port 
 `tools/objdump.py` (sections, symbols, relocations of an object), `BLACK_UNITS_ALL=1` (pretend every unit function is
 source, to compile demoted units).
 
-Text may end before its slot boundary when the actual next cached input section's alignment fills exactly that gap
+Text and owned data may end before their slot boundary when the actual next cached input section's alignment fills exactly that gap
 and the original gap contains only zeros. This accepts natural linker alignment without changing the object or adding
 instructions; the full-image comparison remains mandatory.
+An absent owned-data section cannot stand in for a table or constant.
 Settlement protects the source addresses committed in `HEAD` and restores its input units file if a candidate causes
 their demotion, so a placement error cannot silently discard earlier matches.
 

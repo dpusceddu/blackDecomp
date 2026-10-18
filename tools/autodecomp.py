@@ -1754,6 +1754,12 @@ def cmd_register(a):
     print('registered %d functions in %d units' % (len(todo), len(out)))
 
 
+def retryable_auto_unit(unit, records):
+    """A historical auto name can now belong to an authored, partially matched TU."""
+    return (unit.get('origin') == 'auto' and unit['name'] in records
+            and all(f['addr'] in records[unit['name']] for f in unit['functions']))
+
+
 def cmd_settle(a):
     """Link the registered drafts (tools/settle_units.py), record why any were demoted, retry demoted group members alone."""
     sys.path.insert(0, str(ROOT / 'tools'))
@@ -1773,12 +1779,22 @@ def cmd_settle(a):
                 byunit.setdefault(v['registered'], {})[int(k, 16)] = v
         keep, retry = [], 0
         for u in units:
-            if not u['name'].startswith('auto_'):
+            if not retryable_auto_unit(u, byunit):
                 keep.append(u)
                 continue
             fs = u['functions']
             if all(f['status'] == 'source' for f in fs):
                 keep.append(u)
+                continue
+            if any(f['status'] == 'source' for f in fs):
+                # Preserve the already verified members and their source file.
+                # Failed members can later be registered as independent units.
+                keep.append(u)
+                for f in fs:
+                    if f['status'] != 'source':
+                        rec = byunit[u['name']][f['addr']]
+                        rec.pop('registered', None)
+                        rec['status'], rec['reason'] = 'verify-failed', f.get('reason') or 'unknown'
                 continue
             for f in fs:
                 rec = byunit.get(u['name'], {}).get(f['addr'])

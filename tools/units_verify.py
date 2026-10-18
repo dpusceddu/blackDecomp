@@ -66,6 +66,23 @@ def is_text(name):
     return name == '.text' or name.startswith('.text.')
 
 
+def owned_data_gap_fits(size, start, stop, section, input_alignment):
+    """A shorter data input may leave only real, naturally aligned zero fill."""
+    from text_placement import InputAlignments, natural_text_span
+    if size <= 0:
+        return False
+    original = Elf((ROOT / 'orig' / SLUG / 'files' / 'SLUS_213.76').read_bytes())
+    record = original.section(section)
+    if record is None:
+        return False
+    data = original.content(record)
+    low, high = start + size - record['addr'], stop - record['addr']
+    if not 0 <= low <= high <= len(data):
+        return False
+    return natural_text_span(size, start, stop, InputAlignments(BUILD).data_at(section, stop),
+                             data[low:high], input_alignment)
+
+
 def data_sections(e, syms, u, live, placement):
     """Constants and data the compiled unit brings along. Returns a reason when they cannot take the place of what the
     assembly objects carried: code refers to a section no original slot exists for, the slots are not adjacent, or the
@@ -107,7 +124,8 @@ def data_sections(e, syms, u, live, placement):
                             for t in e.sections if t['type'] == 9 and t['info'] == so['index']
                             for o in range(0, t['size'], 8)):
                 u.setdefault('trim', {})[sec] = span     # trailing alignment pad the original does not have
-            elif not 0 <= span - size < 16:
+            elif size != span and not (so and owned_data_gap_fits(
+                    size, ents[slots[0]]['key'], end, sec, so['align'])):
                 return 'size'
     return None
 

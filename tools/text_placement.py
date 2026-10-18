@@ -1,4 +1,4 @@
-"""Recognize natural linker alignment after source text, without adding code bytes."""
+"""Recognize natural linker alignment after source sections, without inventing bytes."""
 import json
 from pathlib import Path
 from elfinfo import Elf
@@ -18,8 +18,10 @@ class InputAlignments:
     def __init__(self, build):
         self.build = Path(build)
         self.cache = json.loads((self.build / 'objects_cache.json').read_text())
-        self.slots, self.objects = {}, {}
-        for obj in json.loads((self.build / 'objects.json').read_text()):
+        self.slots, self.objects, self.data_slots = {}, {}, {}
+        objects = json.loads((self.build / 'objects.json').read_text())
+        names = {obj['name'] for obj in objects}
+        for obj in objects:
             sections = obj.get('rename', {})
             if obj['name'].startswith('text/func_') and '.' not in obj['name']:
                 address = obj['name'].removeprefix('text/func_')
@@ -31,9 +33,29 @@ class InputAlignments:
                     except ValueError:
                         continue
                     self.slots.setdefault(address, []).append((obj['name'], old))
+                for sec in ('.rodata', '.lit4', '.gcc_except_table'):
+                    if new.startswith(sec + '.'):
+                        try:
+                            address = int(new.removeprefix(sec + '.'), 16)
+                        except ValueError:
+                            continue
+                        self.data_slots.setdefault((sec, address), []).append((obj['name'], old))
+        placement = self.build / 'placement.json'
+        if placement.exists():
+            for sec, entries in json.loads(placement.read_text())['sections'].items():
+                if sec not in ('.rodata', '.lit4', '.gcc_except_table'):
+                    continue
+                for entry in entries:
+                    if entry['obj'] in names and 'key' in entry:
+                        self.data_slots.setdefault((sec, entry['key']), []).append((entry['obj'], entry['sec']))
 
     def at(self, address):
-        slots = self.slots.get(address, [])
+        return self._alignment(self.slots.get(address, []))
+
+    def data_at(self, section, address):
+        return self._alignment(self.data_slots.get((section, address), []))
+
+    def _alignment(self, slots):
         if len(slots) != 1:
             return None
         obj, section = slots[0]
