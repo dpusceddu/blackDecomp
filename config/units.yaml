@@ -22099,6 +22099,7 @@ units:
     symbol: func_001AF180
     size: 28
     status: source
+  claim: wave1-game-actor
 - name: tuf_1af1a0
   source: src/tu/tu_1ae2e8_1af1a0.c
   origin: auto
@@ -22128,6 +22129,7 @@ units:
     symbol: func_001AF768
     size: 44
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1b0910
   source: src/auto/game/1b0910.c
   origin: auto
@@ -25688,6 +25690,7 @@ units:
     symbol: func_001AE9F8
     size: 28
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1aeb18
   source: src/auto/game/1aeb18.c
   origin: auto
@@ -25701,6 +25704,7 @@ units:
     symbol: func_001AEB18
     size: 52
     status: source
+  claim: wave1-game-actor
 - name: auto_game_16e660
   source: src/auto/game/16e660.c
   origin: auto
@@ -39375,6 +39379,7 @@ units:
     symbol: func_001AF580
     size: 332
     status: source
+  claim: wave1-game-actor
 - name: auto_game_1d1dc8
   source: src/auto/game/1d1dc8.c
   origin: auto
@@ -40173,4 +40178,63 @@ units:
   - addr: '0x1ab500'
     symbol: func_001AB500
     size: 444
+    status: source
+- name: actor_opacity
+  source: src/game/actor/opacity.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1aebd0'
+    symbol: func_001AEBD0
+    size: 36
+    status: source
+- name: actor_reset_buffers
+  source: src/game/actor/reset_buffers.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    func_001B08A8: '0x1b08a8'
+    func_0027B2F0: '0x27b2f0'
+  functions:
+  - addr: '0x1ae860'
+    symbol: func_001AE860
+    size: 144
+    status: source
+- name: actor_set_buffer
+  source: src/game/actor/set_buffer.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    func_0027B2E0: '0x27b2e0'
+  functions:
+  - addr: '0x1ae938'
+    symbol: func_001AE938
+    size: 96
+    status: source
+- name: actor_get_buffer
+  source: src/game/actor/get_buffer.c
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    func_001B0910: '0x1b0910'
+  functions:
+  - addr: '0x1ae998'
+    symbol: func_001AE998
+    size: 92
     status: source
