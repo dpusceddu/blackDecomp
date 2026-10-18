@@ -3955,6 +3955,10 @@ units:
     symbol: func_002D0890
     size: 52
     status: source
+  - addr: '0x2d08c8'
+    symbol: func_002D08C8
+    size: 72
+    status: source
 - name: auto_other_2e3918
   source: src/auto/other/2e3918.c
   origin: auto
@@ -4434,11 +4438,13 @@ units:
   - addr: '0x324650'
     symbol: func_00324650
     size: 12
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x324de8'
     symbol: func_00324DE8
     size: 76
-    status: source
+    status: asm
+    reason: compile
 - name: auto_other_324f98
   source: src/auto/other/324f98.c
   origin: auto
@@ -9321,6 +9327,18 @@ units:
     symbol: func_00108748
     size: 116
     status: source
+- name: auto_game_108a20
+  source: src/auto/game/108a20.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x108a20'
+    symbol: func_00108A20
+    size: 32
+    status: source
 - name: tuf_10f258
   source: src/tu/tu_10ebd0.c
   origin: auto
@@ -10235,6 +10253,10 @@ units:
   - addr: '0x2fca90'
     symbol: func_002FCA90
     size: 20
+    status: source
+  - addr: '0x2fca38'
+    symbol: func_002FCA38
+    size: 88
     status: source
 - name: tuf_305148
   source: src/tu/kynapse_tu_2fec10.c
@@ -17071,11 +17093,13 @@ units:
   - addr: '0x12d458'
     symbol: func_0012D458
     size: 56
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x12d508'
     symbol: func_0012D508
     size: 36
-    status: source
+    status: asm
+    reason: compile
 - name: auto_game_12f058
   source: src/auto/game/12f058.c
   origin: auto
@@ -17257,35 +17281,43 @@ units:
   - addr: '0x137318'
     symbol: func_00137318
     size: 8
-    status: source
+    status: asm
+    reason: name
   - addr: '0x1378f0'
     symbol: func_001378F0
     size: 24
-    status: source
+    status: asm
+    reason: name
   - addr: '0x137ae0'
     symbol: func_00137AE0
     size: 36
-    status: source
+    status: asm
+    reason: name
   - addr: '0x138320'
     symbol: func_00138320
     size: 8
-    status: source
+    status: asm
+    reason: name
   - addr: '0x138338'
     symbol: func_00138338
     size: 8
-    status: source
+    status: asm
+    reason: name
   - addr: '0x138340'
     symbol: func_00138340
     size: 8
-    status: source
+    status: asm
+    reason: name
   - addr: '0x138378'
     symbol: func_00138378
     size: 20
-    status: source
+    status: asm
+    reason: name
   - addr: '0x138470'
     symbol: func_00138470
     size: 88
-    status: source
+    status: asm
+    reason: name
 - name: auto_game_138970
   source: src/auto/game/138970.c
   origin: auto
@@ -22530,27 +22562,33 @@ units:
   - addr: '0x1bec68'
     symbol: func_001BEC68
     size: 92
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1becc8'
     symbol: func_001BECC8
     size: 8
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1bf720'
     symbol: func_001BF720
     size: 32
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1bfea0'
     symbol: func_001BFEA0
     size: 36
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1c05d8'
     symbol: func_001C05D8
     size: 28
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1c05f8'
     symbol: func_001C05F8
     size: 8
-    status: source
+    status: asm
+    reason: compile
 - name: auto_game_103ff0
   source: src/auto/game/103ff0.c
   origin: auto
@@ -24361,6 +24399,18 @@ units:
     symbol: func_001B1318
     size: 40
     status: source
+- name: auto_game_1b1b28
+  source: src/auto/game/1b1b28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b1b28'
+    symbol: func_001B1B28
+    size: 400
+    status: source
 - name: auto_game_1b1dc0
   source: src/auto/game/1b1dc0.c
   origin: auto
@@ -25241,6 +25291,18 @@ units:
     symbol: func_001580E0
     size: 12
     status: source
+- name: auto_game_158a98
+  source: src/auto/game/158a98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x158a98'
+    symbol: func_00158A98
+    size: 68
+    status: source
 - name: tuf_158f08
   source: src/tu/tu_158f08.c
   origin: auto
@@ -25326,39 +25388,48 @@ units:
   - addr: '0x16eb80'
     symbol: func_0016EB80
     size: 248
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x16ed80'
     symbol: func_0016ED80
     size: 108
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x16edf0'
     symbol: func_0016EDF0
     size: 72
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x16ee70'
     symbol: func_0016EE70
     size: 28
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x16eee8'
     symbol: func_0016EEE8
     size: 8
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x16eef0'
     symbol: func_0016EEF0
     size: 8
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x16eef8'
     symbol: func_0016EEF8
     size: 8
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x16fa38'
     symbol: func_0016FA38
     size: 24
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x16fb18'
     symbol: func_0016FB18
     size: 44
-    status: source
+    status: asm
+    reason: compile
 - name: auto_game_173fb8
   source: src/auto/game/173fb8.c
   origin: auto
@@ -27083,31 +27154,38 @@ units:
   - addr: '0x1ea7c0'
     symbol: func_001EA7C0
     size: 8
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1eaac8'
     symbol: func_001EAAC8
     size: 48
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1eaaf8'
     symbol: func_001EAAF8
     size: 52
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1eab30'
     symbol: func_001EAB30
     size: 48
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1eaba0'
     symbol: func_001EABA0
     size: 56
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1eabd8'
     symbol: func_001EABD8
     size: 64
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1eb490'
     symbol: func_001EB490
     size: 44
-    status: source
+    status: asm
+    reason: compile
 - name: auto_game_1ec458
   source: src/auto/game/1ec458.c
   origin: auto
@@ -27680,23 +27758,28 @@ units:
   - addr: '0x1fd3e8'
     symbol: func_001FD3E8
     size: 80
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1fd438'
     symbol: func_001FD438
     size: 8
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1fd8a0'
     symbol: func_001FD8A0
     size: 80
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1fd978'
     symbol: func_001FD978
     size: 28
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x1fd998'
     symbol: func_001FD998
     size: 36
-    status: source
+    status: asm
+    reason: compile
 - name: auto_game_1fdbf8
   source: src/auto/game/1fdbf8.c
   origin: auto
@@ -27831,19 +27914,23 @@ units:
   - addr: '0x204ea0'
     symbol: func_00204EA0
     size: 28
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x204ec0'
     symbol: func_00204EC0
     size: 64
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x204f00'
     symbol: func_00204F00
     size: 48
-    status: source
+    status: asm
+    reason: compile
   - addr: '0x204f90'
     symbol: func_00204F90
     size: 28
-    status: source
+    status: asm
+    reason: compile
 - name: auto_game_204ff0
   source: src/auto/game/204ff0.c
   origin: auto
@@ -29177,6 +29264,10 @@ units:
     symbol: func_00265C18
     size: 32
     status: source
+  - addr: '0x25cc48'
+    symbol: func_0025CC48
+    size: 84
+    status: source
 - name: tuf_268e90
   source: src/tu/tu_268c68.c
   origin: auto
@@ -29747,6 +29838,10 @@ units:
   - addr: '0x27c278'
     symbol: func_0027C278
     size: 48
+    status: source
+  - addr: '0x27c2a8'
+    symbol: func_0027C2A8
+    size: 76
     status: source
 - name: auto_game_27c320
   source: src/auto/game/27c320.c
@@ -30550,13 +30645,14 @@ units:
     symbol: func_001E3FA0
     size: 88
     status: source
-- name: tu_1ea4f0
-  source: src/tu/1ea4f0.c
+- name: tuf_1ea4f0
+  source: src/tu/tu_1e9d30.c
   origin: auto
   flags:
   - -O2
   - -G0
   - -snas
+  - -ffunction-sections
   functions:
   - addr: '0x1ea4f0'
     symbol: func_001EA4F0
@@ -30565,6 +30661,10 @@ units:
   - addr: '0x1ea510'
     symbol: func_001EA510
     size: 8
+    status: source
+  - addr: '0x1ea518'
+    symbol: func_001EA518
+    size: 100
     status: source
 - name: auto_game_1ed3c0
   source: src/auto/game/1ed3c0.c
@@ -35562,6 +35662,10 @@ units:
     symbol: func_001E6088
     size: 32
     status: source
+  - addr: '0x1e5408'
+    symbol: func_001E5408
+    size: 24
+    status: source
 - name: tuf_1e6650
   source: src/tu/tu_1e4e50_1e6650.c
   origin: auto
@@ -37016,18 +37120,6 @@ units:
     symbol: func_003855D8
     size: 108
     status: source
-- name: auto_unclassified_2902c8
-  source: src/auto/unclassified/2902c8.c
-  origin: auto
-  compiler: ee-gcc2.9-991111-01
-  flags:
-  - -O2
-  - -G0
-  functions:
-  - addr: '0x2902c8'
-    symbol: func_002902C8
-    size: 48
-    status: source
 - name: tuf_2904e8
   source: src/tu/sony_unidentified_tu_2902f8.c
   origin: auto
@@ -37130,13 +37222,14 @@ units:
     symbol: func_0029C5E8
     size: 56
     status: source
-- name: auto_unclassified_29d158
-  source: src/auto/unclassified/29d158.c
+- name: tuf_29d158
+  source: src/tu/libdma_libpad2_tu_29cee8.c
   origin: auto
   compiler: ee-gcc2.9-991111-01
   flags:
   - -O2
   - -G0
+  - -ffunction-sections
   functions:
   - addr: '0x29d158'
     symbol: func_0029D158
@@ -37145,6 +37238,10 @@ units:
   - addr: '0x29d1c0'
     symbol: func_0029D1C0
     size: 104
+    status: source
+  - addr: '0x29d388'
+    symbol: func_0029D388
+    size: 48
     status: source
 - name: auto_unclassified_2a45f0
   source: src/auto/unclassified/2a45f0.c
@@ -37542,18 +37639,6 @@ units:
     symbol: func_00100218
     size: 8
     status: source
-- name: auto_game_108a20
-  source: src/auto/game/108a20.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x108a20'
-    symbol: func_00108A20
-    size: 32
-    status: source
 - name: auto_game_12fc78
   source: src/auto/game/12fc78.c
   origin: auto
@@ -37566,26 +37651,19 @@ units:
     symbol: func_0012FC78
     size: 72
     status: source
-- name: auto_game_138348
-  source: src/auto/game/138348.c
+- name: tuf_138348
+  source: src/tu/tu_136f10.c
   origin: auto
   flags:
   - -O2
   - -G0
   - -snas
+  - -ffunction-sections
   functions:
   - addr: '0x138348'
     symbol: func_00138348
     size: 24
     status: source
-- name: auto_game_138360
-  source: src/auto/game/138360.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
   - addr: '0x138360'
     symbol: func_00138360
     size: 24
@@ -37614,125 +37692,22 @@ units:
     symbol: func_00155208
     size: 40
     status: source
-- name: auto_game_158a98
-  source: src/auto/game/158a98.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x158a98'
-    symbol: func_00158A98
-    size: 68
-    status: source
-- name: auto_game_1b1b28
-  source: src/auto/game/1b1b28.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x1b1b28'
-    symbol: func_001B1B28
-    size: 400
-    status: source
-- name: auto_game_1e5408
-  source: src/auto/game/1e5408.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x1e5408'
-    symbol: func_001E5408
-    size: 24
-    status: source
-- name: auto_game_1ea518
-  source: src/auto/game/1ea518.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x1ea518'
-    symbol: func_001EA518
-    size: 100
-    status: source
-- name: auto_game_25cc48
-  source: src/auto/game/25cc48.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x25cc48'
-    symbol: func_0025CC48
-    size: 84
-    status: source
-- name: auto_game_27c2a8
-  source: src/auto/game/27c2a8.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x27c2a8'
-    symbol: func_0027C2A8
-    size: 76
-    status: source
-- name: auto_unclassified_28fbb8
-  source: src/auto/unclassified/28fbb8.c
+- name: tuf_28fbb8
+  source: src/tu/sony_unidentified_tu_28fab0.c
   origin: auto
   compiler: ee-gcc2.9-991111-01
   flags:
   - -O2
   - -G0
+  - -ffunction-sections
   functions:
   - addr: '0x28fbb8'
     symbol: func_0028FBB8
     size: 32
     status: source
-- name: auto_unclassified_29d388
-  source: src/auto/unclassified/29d388.c
-  origin: auto
-  compiler: ee-gcc2.9-991111-01
-  flags:
-  - -O2
-  - -G0
-  functions:
-  - addr: '0x29d388'
-    symbol: func_0029D388
+  - addr: '0x2902c8'
+    symbol: func_002902C8
     size: 48
-    status: source
-- name: auto_unclassified_2d08c8
-  source: src/auto/unclassified/2d08c8.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x2d08c8'
-    symbol: func_002D08C8
-    size: 72
-    status: source
-- name: auto_kynapse_2fca38
-  source: src/auto/kynapse/2fca38.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x2fca38'
-    symbol: func_002FCA38
-    size: 88
     status: source
 - name: auto_animation_351a08
   source: src/auto/animation/351a08.c
@@ -37746,26 +37721,19 @@ units:
     symbol: func_00351A08
     size: 52
     status: source
-- name: auto_unclassified_35b6d0
-  source: src/auto/unclassified/35b6d0.c
+- name: tuf_35b6d0
+  source: src/tu/libmc2_tu_35b470.c
   origin: auto
   compiler: ee-gcc2.9-991111-01
   flags:
   - -O2
   - -G0
+  - -ffunction-sections
   functions:
   - addr: '0x35b6d0'
     symbol: func_0035B6D0
     size: 40
     status: source
-- name: auto_unclassified_35c470
-  source: src/auto/unclassified/35c470.c
-  origin: auto
-  compiler: ee-gcc2.9-991111-01
-  flags:
-  - -O2
-  - -G0
-  functions:
   - addr: '0x35c470'
     symbol: func_0035C470
     size: 48

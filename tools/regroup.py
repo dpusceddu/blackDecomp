@@ -52,6 +52,10 @@ def split_source(text):
     return inc, pre, '\n'.join(lines[i:]).strip('\n')
 
 
+def base_flags(u):
+    return [f for f in u['flags'] if f != '-ffunction-sections']
+
+
 def plan(units, tus, limit=None, sections=False):
     """Groups of units to merge: [(tu name, [units])]. Units must be wholly source, plain C, same compiler and flags, and (unless
     `sections`) adjacent."""
@@ -78,7 +82,7 @@ def plan(units, tus, limit=None, sections=False):
     cand.sort(key=lambda c: c[0])
     groups, cur = [], []
     for first, last, k, u in cand:
-        if cur and cur[-1][2] == k and (sections or cur[-1][1] + 1 == first) and cur[-1][3]['flags'] == u['flags'] \
+        if cur and cur[-1][2] == k and (sections or cur[-1][1] + 1 == first) and base_flags(cur[-1][3]) == base_flags(u) \
                 and cur[-1][3]['compiler'] == u['compiler']:
             cur.append((first, last, k, u))
         else:
@@ -100,6 +104,8 @@ def merged_unit(name, group, sections=False, taken=None):
     prev_last = None
     for u in group:
         text = (ROOT / u['source']).read_text()
+        text = re.sub(r'/\* Translation unit .*?\*/\n', '', text, flags=re.S)           # notes of an earlier regrouping
+        text = re.sub(r'/\* Assembly between the functions: .*?\*/\n\n', '', text, flags=re.S)
         inc, pre, body = split_source(text)
         note = ''
         if sections and prev_last is not None:             # the assembly functions that sit between this run and the one before
@@ -124,7 +130,7 @@ def merged_unit(name, group, sections=False, taken=None):
     text = '\n'.join(inc_all) + '\n\n' + ('\n'.join(pre_all) + '\n\n' if pre_all else '') + '\n\n'.join(n + b for n, b in zip(notes, bodies)) + '\n'
     first = group[0]['functions'][0]['addr']
     rel = 'src/tu/%06x.c' % first
-    flags = list(group[0]['flags'])
+    flags = base_flags(group[0])
     if sections:
         base = name.replace('/', '_')
         rel = 'src/tu/%s.c' % (base if base not in taken else '%s_%06x' % (base, first))
@@ -140,11 +146,15 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('what', choices=['plan', 'merge'])
     ap.add_argument('--limit', type=int)
+    ap.add_argument('--retry', action='store_true', help='try the groups that failed before again')
     ap.add_argument('--sections', action='store_true', help='one unit per TU compiled with -ffunction-sections (assembly may sit between its functions)')
     a = ap.parse_args()
     tus = yaml.safe_load((ROOT / 'config/tus.yaml').read_text())['tus']
     units = load_units(variant=SLUG)
     groups = plan(units, tus, a.limit, a.sections)
+    failed_path = BUILD / 'regroup_failed.json'
+    failed_before = set(json.loads(failed_path.read_text())) if failed_path.exists() and not a.retry else set()
+    groups = [(n, g) for n, g in groups if '%s:%d' % (a.sections, g[0]['functions'][0]['addr']) not in failed_before or a.what == 'plan']
     print('%d groups of units in one TU: %d units -> %d' % (len(groups), sum(len(g) for _, g in groups), len(groups)))
     if a.what == 'plan':
         for name, g in groups[:30]:
@@ -180,6 +190,9 @@ def main():
         if not failed and r.returncode == 0:
             break
         bad = {u['name'] for u in failed}
+        known = set(json.loads(failed_path.read_text())) if failed_path.exists() else set()
+        known.update('%s:%d' % (a.sections, merged[n][1][0]['functions'][0]['addr']) for n in bad)
+        failed_path.write_text(json.dumps(sorted(known)))
         restored = []
         for u in cur:
             if u['name'] in bad:
