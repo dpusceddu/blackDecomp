@@ -2,23 +2,17 @@
 #define RWA_EE_BANK_H
 #include "auto/prelude.h"
 
-/* Inferred names; bank and disk-header offsets are verified by matching users.
+/* Inferred names; accessed bank and disk-header offsets are verified by matching users.
+   This bank view does not establish the complete bank size.
    Stream offsets remain an access view, pending a matching typed user. */
 typedef struct RwaBank RwaBank;
 typedef struct RwaStream RwaStream;
 typedef struct RwaLink { struct RwaLink *previous, *next; void *object; } RwaLink;
-typedef struct RwaDriver {
-    void *slots00[8];
-    void *(*create)(void *);
-    void (*destroy)(RwaBank *);
-    u32 (*read)(s32, void *, u32, u32);
-    void (*enable)(RwaBank *, s32, s32);
-} RwaDriver;
 struct RwaBank {
     u32 tag;
     void *name;
     u32 size;
-    RwaDriver *driver;
+    RwaLink *list_previous;
     RwaLink *first;
     void *last;
     u16 id;
@@ -33,7 +27,6 @@ struct RwaBank {
     u32 field38;
     u32 field3c;
     u32 field40;
-    u32 field44, field48, field4c, field50, field54, field58;
 };
 struct RwaStream {
     RwaBank *bank;

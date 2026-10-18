@@ -41462,3 +41462,104 @@ units:
     symbol: func_00314B98
     size: 456
     status: source
+- name: rwa_campaign_31bd20
+  source: src/rwa_ee/tu_31bd20.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x31bd20'
+    symbol: func_0031BD20
+    size: 712
+    status: asm
+  - addr: '0x31bfe8'
+    symbol: func_0031BFE8
+    size: 476
+    status: asm
+  - addr: '0x31c1c8'
+    symbol: func_0031C1C8
+    size: 796
+    status: asm
+  - addr: '0x31c600'
+    symbol: func_0031C600
+    size: 220
+    status: asm
+  - addr: '0x31c728'
+    symbol: func_0031C728
+    size: 136
+    status: asm
+  - addr: '0x31c820'
+    symbol: func_0031C820
+    size: 248
+    status: asm
+  - addr: '0x31c918'
+    symbol: func_0031C918
+    size: 68
+    status: asm
+  - addr: '0x31c978'
+    symbol: func_0031C978
+    size: 84
+    status: asm
+  - addr: '0x31ca08'
+    symbol: func_0031CA08
+    size: 192
+    status: asm
+  - addr: '0x31cac8'
+    symbol: func_0031CAC8
+    size: 172
+    status: asm
+  - addr: '0x31cb80'
+    symbol: func_0031CB80
+    size: 212
+    status: asm
+  - addr: '0x31cc58'
+    symbol: func_0031CC58
+    size: 136
+    status: asm
+  - addr: '0x31cd28'
+    symbol: func_0031CD28
+    size: 124
+    status: asm
+  - addr: '0x31cda8'
+    symbol: func_0031CDA8
+    size: 28
+    status: asm
+  - addr: '0x31cdc8'
+    symbol: func_0031CDC8
+    size: 28
+    status: asm
+  - addr: '0x31cde8'
+    symbol: func_0031CDE8
+    size: 72
+    status: asm
+  - addr: '0x31ce58'
+    symbol: func_0031CE58
+    size: 108
+    status: asm
+- name: rwa_voice_construct_callback
+  source: src/rwa_ee/voice_construct_callback.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x31c578'
+    symbol: func_0031C578
+    size: 136
+    status: source
+- name: rwa_playback_queued
+  source: src/rwa_ee/playback_queued.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x31cce8'
+    symbol: func_0031CCE8
+    size: 36
+    status: source

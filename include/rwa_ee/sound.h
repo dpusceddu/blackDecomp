@@ -8,7 +8,7 @@ typedef struct RwaFormatId {u32 words[4];} RwaFormatId;
 typedef struct RwaFormat {
     u32 rate;
     const RwaFormatId *encoding;
-    void *codec;
+    u32 extent;
     u8 bits,channels;
     u16 padding0e;
     void *extension;
@@ -24,7 +24,12 @@ typedef struct RwaSoundDriver {
     s32 (*initialize)(RwaSound *,void *);
     void *slot10;
     RwaSound *(*process)(RwaSound *,u32,void *,u32);
-    void *slots18[7];
+    void *slots18[2];
+    void *(*create)(RwaSound *);
+    void (*destroy)(RwaSound *);
+    u32 (*read)(s32,void *,u32,u32);
+    void (*enable)(RwaSound *,s32,s32);
+    void *slot30;
     u32 format_count;
     RwaFormat **formats;
     u32 format_index;

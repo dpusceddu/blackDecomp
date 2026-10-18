@@ -1,9 +1,9 @@
 /* Medium-confidence bank/stream TU: call and shared-data edges. */
 #ifdef NONMATCHING_RWA_BANK_STREAM
-#include "rwa_ee/bank.h"
+#include "rwa_ee/sound.h"
 extern s32 func_00313EA8(s32);
 extern void func_00324BA0(s32,void *,u32,s32,s32,void *);
-extern RwaBank *func_00314488(RwaBank *,s32);
+extern RwaSound *func_00314488(RwaBank *,s32);
 extern s32 func_00324D98(s32,s32);
 extern void func_00324A88(s32,void *,u32,u32,s32,s32,void *);
 extern u32 D_0040E164;
@@ -27,10 +27,10 @@ RwaStream *func_003134E0(RwaStream *stream) {
             func_00324BA0(stream->handle,stream->data,block,0,0,0);
             break;
         case 3: {
-            RwaBank *bank=func_00314488(stream->bank,0);
+            RwaSound *sound=func_00314488(stream->bank,0);
             block=D_0040E164;
             if(block>=stream->block_size)block=stream->block_size;
-            amount=bank->driver->read(stream->handle,stream->data,stream->cursor,remaining>=block?block:remaining);
+            amount=sound->driver->read(stream->handle,stream->data,stream->cursor,remaining>=block?block:remaining);
             break; }
         case 2:
             block=stream->block_size;
@@ -48,12 +48,12 @@ RwaStream *func_003134E0(RwaStream *stream) {
 // Unmatched: relocation loop register allocation and one short-loop nop differ.
 void func_003137D8(RwaBank *bank,s32 base,s32 initialize) {
     RwaLink *link,*sentinel,*current;u32 *sound;
-    if(initialize){func_003164D0(bank);func_003182C8(&bank->driver);}
+    if(initialize){func_003164D0(bank);func_003182C8(&bank->list_previous);}
     if(bank->name)bank->name=(char *)bank->name+base;
-    if(bank->driver)bank->driver=(RwaDriver *)((char *)bank->driver+base);
+    if(bank->list_previous)bank->list_previous=(RwaLink *)((char *)bank->list_previous+base);
     if(bank->first)bank->first=(RwaLink *)((char *)bank->first+base);
     if(bank->last)bank->last=(char *)bank->last+base;
-    sentinel=(RwaLink *)bank->driver;
+    sentinel=(RwaLink *)bank->list_previous;
     link=bank->first;
     do {
         current=link;
@@ -92,7 +92,7 @@ fail:stream->state=status;return stream;
 #endif
 
 #ifdef NONMATCHING_RWA_BANK_STATE
-#include "rwa_ee/bank.h"
+#include "rwa_ee/sound.h"
 extern s32 func_00313EA8(s32);
 extern void func_00313650(RwaDiskHeader *);
 extern void *func_00312CC8(u32,u32);
@@ -134,8 +134,8 @@ RwaStream *func_00313278(RwaStream *stream) {
     case 0x50:
         bank=(RwaBank *)((char *)stream->buffer+header->bank_offset);
         stream->read_size=stream->position;stream->bank=bank;stream->format=header->bank_size;stream->field38=0;stream->remaining=header->bank_size;stream->field3c=0;
-        saved.driver=(s32)bank->driver;saved.first=(s32)bank->first;saved.last=(s32)bank->last;
-        func_00314278(bank);bank->flags1b=stream->flags;bank->driver=(RwaDriver *)saved.driver;bank->first=(RwaLink *)saved.first;bank->last=(void *)saved.last;bank->allocation=stream->buffer;
+        saved.driver=(s32)bank->list_previous;saved.first=(s32)bank->first;saved.last=(s32)bank->last;
+        func_00314278(bank);bank->flags1b=stream->flags;bank->list_previous=(RwaLink *)saved.driver;bank->first=(RwaLink *)saved.first;bank->last=(void *)saved.last;bank->allocation=stream->buffer;
         func_003137D8(bank,(s32)stream->buffer,swapped);
         func_00316400(D_0040E15C,(char *)header->bank_id);
         saved.field0=1;saved.flags=stream->ownership;
@@ -153,7 +153,7 @@ RwaStream *func_00313278(RwaStream *stream) {
 }
 // Unmatched: shared-bank list traversal scheduling and register allocation differ.
 void func_00313FD0(RwaBank *bank) {
-    RwaLink *link,*owner,*sentinel=(RwaLink *)&bank->driver;
+    RwaLink *link,*owner,*sentinel=(RwaLink *)&bank->list_previous;
     *bank->previous=bank->next;bank->next->previous=bank->previous;
     if(bank==D_0040E178)D_0040E178=D_0040E174;
     if((bank->flags1b&0x40)&&(bank->data||(bank->flags1a&1)))func_00313DC8(bank);
