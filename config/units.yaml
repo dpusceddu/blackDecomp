@@ -41141,8 +41141,7 @@ units:
   - addr: '0x3131c0'
     symbol: func_003131C0
     size: 52
-    status: asm
-    reason: compile
+    status: source
 - name: rwa_bank_enable
   source: src/rwa_ee/bank_enable.c
   origin: rwa_ee
@@ -41273,4 +41272,193 @@ units:
   - addr: '0x2a76c0'
     symbol: func_002A76C0
     size: 32
+    status: source
+- name: rwa_campaign_314630
+  source: src/rwa_ee/tu_314630.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x314630'
+    symbol: func_00314630
+    size: 300
+    status: asm
+  - addr: '0x314760'
+    symbol: func_00314760
+    size: 228
+    status: asm
+  - addr: '0x314848'
+    symbol: func_00314848
+    size: 848
+    status: asm
+  - addr: '0x314d60'
+    symbol: func_00314D60
+    size: 128
+    status: asm
+  - addr: '0x314de0'
+    symbol: func_00314DE0
+    size: 296
+    status: asm
+  - addr: '0x314f08'
+    symbol: func_00314F08
+    size: 316
+    status: asm
+  - addr: '0x315048'
+    symbol: func_00315048
+    size: 132
+    status: asm
+  - addr: '0x315208'
+    symbol: func_00315208
+    size: 108
+    status: asm
+  - addr: '0x3152c8'
+    symbol: func_003152C8
+    size: 176
+    status: asm
+  - addr: '0x315380'
+    symbol: func_00315380
+    size: 60
+    status: asm
+  - addr: '0x315440'
+    symbol: func_00315440
+    size: 264
+    status: asm
+  - addr: '0x315548'
+    symbol: func_00315548
+    size: 80
+    status: asm
+  - addr: '0x3155e0'
+    symbol: func_003155E0
+    size: 108
+    status: asm
+  - addr: '0x315650'
+    symbol: func_00315650
+    size: 108
+    status: asm
+  - addr: '0x3156c8'
+    symbol: func_003156C8
+    size: 80
+    status: asm
+  - addr: '0x315718'
+    symbol: func_00315718
+    size: 120
+    status: asm
+  - addr: '0x315790'
+    symbol: func_00315790
+    size: 568
+    status: asm
+  - addr: '0x3159c8'
+    symbol: func_003159C8
+    size: 400
+    status: asm
+  - addr: '0x315ee8'
+    symbol: func_00315EE8
+    size: 44
+    status: asm
+  - addr: '0x315f28'
+    symbol: func_00315F28
+    size: 196
+    status: asm
+  - addr: '0x315ff0'
+    symbol: func_00315FF0
+    size: 400
+    status: asm
+  - addr: '0x3161c8'
+    symbol: func_003161C8
+    size: 80
+    status: asm
+  - addr: '0x316240'
+    symbol: func_00316240
+    size: 140
+    status: asm
+  - addr: '0x3162d0'
+    symbol: func_003162D0
+    size: 296
+    status: asm
+  - addr: '0x316400'
+    symbol: func_00316400
+    size: 44
+    status: asm
+  - addr: '0x316438'
+    symbol: func_00316438
+    size: 148
+    status: asm
+  - addr: '0x316548'
+    symbol: func_00316548
+    size: 80
+    status: asm
+- name: rwa_driver_reset
+  source: src/rwa_ee/driver_reset.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  functions:
+  - addr: '0x315598'
+    symbol: func_00315598
+    size: 64
+    status: source
+- name: rwa_sound_pool_reset
+  source: src/rwa_ee/sound_pool_reset.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  functions:
+  - addr: '0x316218'
+    symbol: func_00316218
+    size: 36
+    status: source
+- name: rwa_format_pool_reset
+  source: src/rwa_ee/format_pool_reset.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  functions:
+  - addr: '0x316598'
+    symbol: func_00316598
+    size: 36
+    status: source
+- name: rwa_object_header_swap
+  source: src/rwa_ee/object_header_swap.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x3164d0'
+    symbol: func_003164D0
+    size: 120
+    status: source
+- name: rwa_sound_swap
+  source: src/rwa_ee/sound_swap.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x315b60'
+    symbol: func_00315B60
+    size: 608
+    status: source
+- name: rwa_format_block_size
+  source: src/rwa_ee/format_block_size.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x314b98'
+    symbol: func_00314B98
+    size: 456
     status: source

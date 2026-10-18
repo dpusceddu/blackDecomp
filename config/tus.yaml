@@ -17952,7 +17952,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 29 of 54 functions
+  flags_basis: matched 30 of 54 functions
   data:
     .rodata: ['0x4092c0', '0x4092d0']
     .data: ['0x3cec68', '0x3ced40']
@@ -17969,7 +17969,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 13 of 46 functions
+  flags_basis: matched 19 of 46 functions
   data:
     .rodata: ['0x4092f0', '0x409400']
     .lit4: ['0x40d894', '0x40d89c']
