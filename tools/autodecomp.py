@@ -929,6 +929,152 @@ def cmd_setup(a):
     print('permuter at', PERMUTER_COMMIT, '; m2c:', M2C, M2C.exists())
 
 
+def try_source(f, src, flags=None):
+    """Compile `src` (a source for function record `f`) with the pipeline's flag variants. Returns (differing, flags, tokens, note)
+    of the best variant, or (None, None, None, message) when nothing compiles."""
+    sets = [flags] if flags else variants_for(f) + [x for x in EXTRA_FLAG_SETS if x not in variants_for(f)]
+    outs = worker_compile([((f['name'], i), src, fl) for i, fl in enumerate(sets)])
+    orig = OrigImage()
+    target = Target(f, orig)
+    best, msg = None, ''
+    for (name, i), (rc, m, obj) in sorted(outs.items(), key=lambda kv: kv[0][1]):
+        if rc:
+            msg = m
+            continue
+        toks, why = compiled_tokens(obj, f['name'])
+        if toks is None:
+            msg = why
+            continue
+        exact, d, note = score(target, toks, orig.word)
+        if best is None or d < best[0]:
+            best = (d, sets[i], toks, note)
+        if exact:
+            break
+    return best if best else (None, None, None, msg)
+
+
+def cmd_adopt(a):
+    """Record an exact hand-written or templated source for a function (status matched, stage `template`)."""
+    f = next(x for x in load_inventory() if x['addr'] == int(a.addr, 16))
+    src = Path(a.source).read_text()
+    d, flags, toks, note = try_source(f, src)
+    if d != 0:
+        raise SystemExit('%s is not exact (%s)' % (f['name'], note if d is not None else 'compile failed: ' + note))
+    res = load_results()
+    rec = res.get('0x%x' % f['addr'], dict(name=f['name'], size=f['size'], region=f['region']))
+    rec.update(status='matched', stage='template', source=src, flags=flags, score=0)
+    rec.pop('reason', None)
+    res['0x%x' % f['addr']] = rec
+    save_results(res)
+    print('adopted', f['name'])
+
+
+# ---------------------------------------------------------------------------------------------------------- owned data
+def c_bytes(b):
+    """C string literal pieces for a byte run: text stays readable, NUL runs become \\000 escapes."""
+    out, i = [], 0
+    while i < len(b):
+        j = i
+        if 32 <= b[i] < 127:
+            while j < len(b) and 32 <= b[j] < 127:
+                j += 1
+            out.append('"%s"' % b[i:j].decode().replace('\\', '\\\\').replace('"', '\\"'))
+        else:
+            while j < len(b) and not (32 <= b[j] < 127):
+                j += 1
+            out.append('"%s"' % ''.join('\\%03o' % x for x in b[i:j]))
+        i = j
+    return ' '.join(out)
+
+
+def owned_rodata(f, orig):
+    """Definitions of the .rodata a function owns: [(label, address, bytes, alignment)], one per dlabel of its runs."""
+    placement = json.loads((BUILD / 'placement.json').read_text())
+    ents = placement['sections']['.rodata']
+    sec = next(s for s in orig.e.sections if s['name'] == '.rodata')
+    text = (BUILD / 's/text' / (f['name'] + '.s')).read_text().split('\n')
+    labels = []
+    align = None
+    for i, l in enumerate(text):
+        if l.startswith('.align ') and align is None:
+            align = int(l.split()[1])
+        m = re.match(r'dlabel (D_([0-9A-F]{8}))', l)
+        if m:
+            labels.append((int(m.group(2), 16), m.group(1), 2 ** (align if align is not None else 2) if not labels else None))
+            align = None
+    out = []
+    for i, e in enumerate(ents):
+        if e.get('owner') != f['name']:
+            continue
+        lo, hi = e['key'], ents[i + 1]['key'] if i + 1 < len(ents) else sec['addr'] + sec['size']
+        inside = [x for x in labels if lo <= x[0] < hi]
+        for k, (addr, name, al) in enumerate(inside):
+            end = inside[k + 1][0] if k + 1 < len(inside) else hi
+            data = orig.e.data[sec['offset'] + addr - sec['addr']:sec['offset'] + end - sec['addr']]
+            out.append((name, addr, data, al or min(8, addr & -addr)))
+    return out
+
+
+def owned_base(f, src, orig):
+    """The draft with string literals that sit in the function's owned .rodata replaced by the array's name (declared
+    extern), or None when the function owns no .rodata."""
+    defs = owned_rodata(f, orig)
+    if not defs:
+        return None
+    replaced = []
+    for name, addr, data, al in defs:
+        multi = [x for x in data.split(b'\0') if x]
+        if multi and all(all(32 <= c < 127 for c in x) and len(x) >= 2 for x in multi) and '"%s"' % multi[0].decode() in src:
+            src = src.replace('"%s"' % multi[0].decode(), name, 1)
+            replaced.append(name)
+    head, body = src.split('\n', 1)
+    return head + '\n' + '\n'.join('extern char %s[];' % n for n in replaced) + ('\n' if replaced else '') + body
+
+
+def add_owned_defs(f, base, orig):
+    """`base` plus the definitions of the .rodata the function owns (asm label = the image's D_ name), laid out as the
+    original run: strings as text, other data as words."""
+    out = []
+    for name, addr, data, al in owned_rodata(f, orig):
+        ident = 'rodata_%08X' % addr
+        multi = [x for x in data.split(b'\0') if x]
+        if multi and all(all(32 <= c < 127 for c in x) and len(x) >= 2 for x in multi):
+            out.append('const char %s[%d] __asm__("%s") __attribute__((aligned(%d))) = %s;' % (ident, len(data), name, al, c_bytes(data)))
+        elif len(data) % 4 == 0:
+            words = ', '.join('0x%08X' % int.from_bytes(data[i:i + 4], 'little') for i in range(0, len(data), 4))
+            out.append('const u32 %s[%d] __asm__("%s") __attribute__((aligned(%d))) = { %s };' % (ident, len(data) // 4, name, al, words))
+        else:
+            out.append('const u8 %s[%d] __asm__("%s") __attribute__((aligned(%d))) = { %s };' % (
+                ident, len(data), name, al, ', '.join('0x%02X' % c for c in data)))
+    head, body = base.split('\n', 1)
+    return head + '\n' + '\n'.join(out) + '\n' + body
+
+
+def cmd_rodata(a):
+    """Define the owned .rodata of exact drafts that could not be placed (`size`) and adopt the ones that stay exact."""
+    res = load_results()
+    inv = {f['addr']: f for f in load_inventory()}
+    orig = OrigImage()
+    n = 0
+    for k, v in sorted(res.items()):
+        if not (v['status'] == 'verify-failed' and v.get('reason') == 'size' and 'source' in v):
+            continue
+        f = inv[int(k, 16)]
+        base = owned_base(f, v['source'], orig)
+        if base is None:
+            continue
+        new = add_owned_defs(f, base, orig)
+        d, flags, toks, note = try_source(f, new, v.get('flags'))
+        if d == 0:
+            v.update(status='matched', source=new, base_source=base, flags=flags, stage='rodata', single=True)
+            v.pop('reason', None)
+            n += 1
+        elif a.verbose:
+            print(hex(f['addr']), 'not exact after defining the data:', d, note)
+    save_results(res)
+    print('defined owned rodata for %d functions' % n)
+
+
 def cmd_show(a):
     import rabbitizer
     f = next(x for x in load_inventory() if x['addr'] == int(a.addr, 16))
@@ -1139,7 +1285,7 @@ def propagate_families(res, inv, orig):
     for k, v in sorted(res.items()):
         f = by[int(k, 16)]
         key, ok = family_key(f)
-        if ok and v['status'] == 'matched' and 'source' in v and key not in rep:
+        if ok and v['status'] == 'matched' and 'source' in v and key not in rep and (not f['owned'] or 'base_source' in v):
             rep[key] = (f, v)
     jobs, who = [], {}
     for k, v in res.items():
@@ -1148,8 +1294,10 @@ def propagate_families(res, inv, orig):
         f = by[int(k, 16)]
         key, ok = family_key(f)
         if ok and key in rep and rep[key][0]['addr'] != f['addr']:
-            src = clone_source(rep[key][1]['source'], rep[key][0], f)
-            if src:
+            src = clone_source(rep[key][1].get('base_source') or rep[key][1]['source'], rep[key][0], f)
+            if src and f['owned']:
+                src = add_owned_defs(f, src, orig)
+            if src and bool(f['owned']) == bool(rep[key][0]['owned']):
                 jobs.append(((f['name'], 'family'), src, rep[key][1]['flags']))
                 who[f['name']] = (k, src, rep[key][1]['flags'], rep[key][0]['name'])
     done = 0
@@ -1258,7 +1406,7 @@ def family_key(f):
             masked.append(w & (0xFC000000 if kind == 'jal' else 0xFFFF0000))
         else:
             masked.append(w)
-    return json.dumps([masked, sig]), f['strings'] == {} and not f['owned'] and not f['lit4']
+    return json.dumps([masked, sig]), not f['lit4'] and (not f['owned'] or f['owned'] == ['.rodata'])
 
 
 def symbol_names(f):
@@ -1288,6 +1436,9 @@ def reconcile(res):
     """Records of functions that are source units now say so (units.yaml is the truth)."""
     from units import load_units
     n = 0
+    live = {'0x%x' % f['addr'] for f in load_inventory()}
+    for k in [k for k in res if k not in live]:          # a boundary repair removed this start
+        res.pop(k)
     for u in load_units(variant=SLUG):
         if not u['name'].startswith('auto_'):
             continue
@@ -1388,12 +1539,19 @@ def main():
     pm.add_argument('--per-round', type=int, default=60, help='candidates per function and round')
     pm.set_defaults(fn=cmd_permute)
     fm = sub.add_parser('family')
-    fm.set_defaults(fn=lambda a: (lambda res: (propagate_families(res, load_inventory(), OrigImage()), save_results(res)))(load_results()))
+    fm.set_defaults(fn=lambda a: (lambda res: (reconcile(res), propagate_families(res, load_inventory(), OrigImage()), save_results(res)))(load_results()))
     mg = sub.add_parser('merge')
     mg.add_argument('file')
     mg.set_defaults(fn=lambda a: (lambda res: (res.update(merge_records(res, {k: v for k, v in json.loads(Path(a.file).read_text()).items()})), save_results(res)))(load_results()))
     su = sub.add_parser('setup')
     su.set_defaults(fn=cmd_setup)
+    ro = sub.add_parser('rodata')
+    ro.add_argument('--verbose', action='store_true')
+    ro.set_defaults(fn=cmd_rodata)
+    ad = sub.add_parser('adopt')
+    ad.add_argument('addr')
+    ad.add_argument('source')
+    ad.set_defaults(fn=cmd_adopt)
     sh = sub.add_parser('show')
     sh.add_argument('addr')
     sh.set_defaults(fn=cmd_show)
