@@ -1,0 +1,13 @@
+#include "auto/prelude.h"
+
+void func_0028BB68(void *arg0, s32 arg1) {
+    M2C_FIELD(arg0, u8 *, 0xE) = (u8) (M2C_FIELD(arg0, u8 *, 0xE) | ((arg1 & 0xF) * 0x10));
+}
+
+void func_0028BB80(void *arg0, u32 arg1) {
+    M2C_FIELD(arg0, u8 *, 0xE) = (u8) (M2C_FIELD(arg0, u8 *, 0xE) | (arg1 & 0xF));
+}
+
+void func_0028BB98(void) {
+
+}

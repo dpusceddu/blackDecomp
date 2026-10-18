@@ -31447,3 +31447,7840 @@ units:
     symbol: func_0019A578
     size: 100
     status: source
+- name: auto_game_1c05d8
+  source: src/auto/game/1c05d8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c05d8'
+    symbol: func_001C05D8
+    size: 28
+    status: source
+  - addr: '0x1c05f8'
+    symbol: func_001C05F8
+    size: 8
+    status: source
+- name: auto_game_1c0730
+  source: src/auto/game/1c0730.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c0730'
+    symbol: func_001C0730
+    size: 16
+    status: source
+  - addr: '0x1c0740'
+    symbol: func_001C0740
+    size: 16
+    status: source
+  - addr: '0x1c0750'
+    symbol: func_001C0750
+    size: 16
+    status: source
+- name: auto_game_1c0840
+  source: src/auto/game/1c0840.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c0840'
+    symbol: func_001C0840
+    size: 76
+    status: source
+- name: auto_game_1c1b78
+  source: src/auto/game/1c1b78.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c1b78'
+    symbol: func_001C1B78
+    size: 12
+    status: source
+- name: auto_game_1c1b88
+  source: src/auto/game/1c1b88.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c1b88'
+    symbol: func_001C1B88
+    size: 24
+    status: source
+  - addr: '0x1c1ba0'
+    symbol: func_001C1BA0
+    size: 8
+    status: source
+- name: auto_game_1c1c40
+  source: src/auto/game/1c1c40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c1c40'
+    symbol: func_001C1C40
+    size: 8
+    status: source
+- name: auto_game_1c1cc8
+  source: src/auto/game/1c1cc8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c1cc8'
+    symbol: func_001C1CC8
+    size: 8
+    status: source
+- name: auto_game_1c2248
+  source: src/auto/game/1c2248.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2248'
+    symbol: func_001C2248
+    size: 8
+    status: source
+- name: auto_game_1c2760
+  source: src/auto/game/1c2760.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2760'
+    symbol: func_001C2760
+    size: 52
+    status: source
+- name: auto_game_1c2838
+  source: src/auto/game/1c2838.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2838'
+    symbol: func_001C2838
+    size: 60
+    status: source
+- name: auto_game_1c28a0
+  source: src/auto/game/1c28a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c28a0'
+    symbol: func_001C28A0
+    size: 16
+    status: source
+- name: auto_game_1c2990
+  source: src/auto/game/1c2990.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2990'
+    symbol: func_001C2990
+    size: 12
+    status: source
+- name: auto_game_1c29a0
+  source: src/auto/game/1c29a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c29a0'
+    symbol: func_001C29A0
+    size: 8
+    status: source
+  - addr: '0x1c29a8'
+    symbol: func_001C29A8
+    size: 8
+    status: source
+- name: auto_game_1c2a48
+  source: src/auto/game/1c2a48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2a48'
+    symbol: func_001C2A48
+    size: 32
+    status: source
+- name: auto_game_1c2e30
+  source: src/auto/game/1c2e30.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2e30'
+    symbol: func_001C2E30
+    size: 12
+    status: source
+- name: auto_game_1c2ea8
+  source: src/auto/game/1c2ea8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2ea8'
+    symbol: func_001C2EA8
+    size: 8
+    status: source
+- name: auto_game_1c3e08
+  source: src/auto/game/1c3e08.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c3e08'
+    symbol: func_001C3E08
+    size: 8
+    status: source
+- name: auto_game_1c4130
+  source: src/auto/game/1c4130.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c4130'
+    symbol: func_001C4130
+    size: 20
+    status: source
+- name: auto_game_1c45c0
+  source: src/auto/game/1c45c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c45c0'
+    symbol: func_001C45C0
+    size: 32
+    status: source
+- name: auto_game_1c4f08
+  source: src/auto/game/1c4f08.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c4f08'
+    symbol: func_001C4F08
+    size: 36
+    status: source
+- name: auto_game_1c65e8
+  source: src/auto/game/1c65e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c65e8'
+    symbol: func_001C65E8
+    size: 28
+    status: source
+  - addr: '0x1c6608'
+    symbol: func_001C6608
+    size: 88
+    status: source
+- name: auto_game_1c6a68
+  source: src/auto/game/1c6a68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c6a68'
+    symbol: func_001C6A68
+    size: 56
+    status: source
+- name: auto_game_1c6aa0
+  source: src/auto/game/1c6aa0.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c6aa0'
+    symbol: func_001C6AA0
+    size: 24
+    status: source
+- name: auto_game_1c8550
+  source: src/auto/game/1c8550.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c8550'
+    symbol: func_001C8550
+    size: 8
+    status: source
+  - addr: '0x1c8558'
+    symbol: func_001C8558
+    size: 8
+    status: source
+- name: auto_game_1c8c28
+  source: src/auto/game/1c8c28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c8c28'
+    symbol: func_001C8C28
+    size: 8
+    status: source
+  - addr: '0x1c8c30'
+    symbol: func_001C8C30
+    size: 8
+    status: source
+- name: auto_game_1c9088
+  source: src/auto/game/1c9088.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c9088'
+    symbol: func_001C9088
+    size: 80
+    status: source
+- name: auto_game_1ca200
+  source: src/auto/game/1ca200.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ca200'
+    symbol: func_001CA200
+    size: 8
+    status: source
+- name: auto_game_1ca5d8
+  source: src/auto/game/1ca5d8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ca5d8'
+    symbol: func_001CA5D8
+    size: 8
+    status: source
+- name: auto_game_1cadd0
+  source: src/auto/game/1cadd0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cadd0'
+    symbol: func_001CADD0
+    size: 8
+    status: source
+- name: auto_game_1cb7c8
+  source: src/auto/game/1cb7c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cb7c8'
+    symbol: func_001CB7C8
+    size: 8
+    status: source
+- name: auto_game_1cc398
+  source: src/auto/game/1cc398.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cc398'
+    symbol: func_001CC398
+    size: 8
+    status: source
+- name: auto_game_1ccf40
+  source: src/auto/game/1ccf40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ccf40'
+    symbol: func_001CCF40
+    size: 8
+    status: source
+- name: auto_game_1cdaa8
+  source: src/auto/game/1cdaa8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cdaa8'
+    symbol: func_001CDAA8
+    size: 8
+    status: source
+- name: auto_game_1cdb90
+  source: src/auto/game/1cdb90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cdb90'
+    symbol: func_001CDB90
+    size: 8
+    status: source
+- name: auto_game_1ce1a0
+  source: src/auto/game/1ce1a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ce1a0'
+    symbol: func_001CE1A0
+    size: 8
+    status: source
+  - addr: '0x1ce1a8'
+    symbol: func_001CE1A8
+    size: 8
+    status: source
+  - addr: '0x1ce1b0'
+    symbol: func_001CE1B0
+    size: 8
+    status: source
+- name: auto_game_1ce768
+  source: src/auto/game/1ce768.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ce768'
+    symbol: func_001CE768
+    size: 8
+    status: source
+  - addr: '0x1ce770'
+    symbol: func_001CE770
+    size: 8
+    status: source
+  - addr: '0x1ce778'
+    symbol: func_001CE778
+    size: 8
+    status: source
+- name: auto_game_1ceb48
+  source: src/auto/game/1ceb48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ceb48'
+    symbol: func_001CEB48
+    size: 8
+    status: source
+- name: auto_game_1cef30
+  source: src/auto/game/1cef30.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cef30'
+    symbol: func_001CEF30
+    size: 8
+    status: source
+- name: auto_game_1cf338
+  source: src/auto/game/1cf338.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cf338'
+    symbol: func_001CF338
+    size: 8
+    status: source
+- name: auto_game_1cf6c0
+  source: src/auto/game/1cf6c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cf6c0'
+    symbol: func_001CF6C0
+    size: 8
+    status: source
+- name: auto_game_1cfa50
+  source: src/auto/game/1cfa50.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cfa50'
+    symbol: func_001CFA50
+    size: 8
+    status: source
+- name: auto_game_1cfac8
+  source: src/auto/game/1cfac8.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cfac8'
+    symbol: func_001CFAC8
+    size: 56
+    status: source
+- name: auto_game_1cfb30
+  source: src/auto/game/1cfb30.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cfb30'
+    symbol: func_001CFB30
+    size: 32
+    status: source
+- name: auto_game_1cff78
+  source: src/auto/game/1cff78.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cff78'
+    symbol: func_001CFF78
+    size: 24
+    status: source
+- name: auto_game_1d1b28
+  source: src/auto/game/1d1b28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d1b28'
+    symbol: func_001D1B28
+    size: 8
+    status: source
+  - addr: '0x1d1b30'
+    symbol: func_001D1B30
+    size: 8
+    status: source
+  - addr: '0x1d1b38'
+    symbol: func_001D1B38
+    size: 8
+    status: source
+- name: auto_game_1d1d18
+  source: src/auto/game/1d1d18.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d1d18'
+    symbol: func_001D1D18
+    size: 8
+    status: source
+- name: auto_game_1d4030
+  source: src/auto/game/1d4030.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d4030'
+    symbol: func_001D4030
+    size: 56
+    status: source
+- name: auto_game_1d4068
+  source: src/auto/game/1d4068.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d4068'
+    symbol: func_001D4068
+    size: 8
+    status: source
+  - addr: '0x1d4070'
+    symbol: func_001D4070
+    size: 8
+    status: source
+  - addr: '0x1d4078'
+    symbol: func_001D4078
+    size: 8
+    status: source
+- name: auto_game_1d4c78
+  source: src/auto/game/1d4c78.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d4c78'
+    symbol: func_001D4C78
+    size: 20
+    status: source
+- name: auto_game_1d5028
+  source: src/auto/game/1d5028.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d5028'
+    symbol: func_001D5028
+    size: 28
+    status: source
+  - addr: '0x1d5048'
+    symbol: func_001D5048
+    size: 32
+    status: source
+- name: auto_game_1d5808
+  source: src/auto/game/1d5808.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d5808'
+    symbol: func_001D5808
+    size: 32
+    status: source
+- name: auto_game_1d59c8
+  source: src/auto/game/1d59c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d59c8'
+    symbol: func_001D59C8
+    size: 32
+    status: source
+- name: auto_game_1d5e40
+  source: src/auto/game/1d5e40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d5e40'
+    symbol: func_001D5E40
+    size: 8
+    status: source
+  - addr: '0x1d5e48'
+    symbol: func_001D5E48
+    size: 8
+    status: source
+  - addr: '0x1d5e50'
+    symbol: func_001D5E50
+    size: 8
+    status: source
+  - addr: '0x1d5e58'
+    symbol: func_001D5E58
+    size: 76
+    status: source
+- name: auto_game_1d6388
+  source: src/auto/game/1d6388.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d6388'
+    symbol: func_001D6388
+    size: 28
+    status: source
+- name: auto_game_1d7238
+  source: src/auto/game/1d7238.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d7238'
+    symbol: func_001D7238
+    size: 28
+    status: source
+  - addr: '0x1d7258'
+    symbol: func_001D7258
+    size: 28
+    status: source
+- name: auto_game_1d72b8
+  source: src/auto/game/1d72b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d72b8'
+    symbol: func_001D72B8
+    size: 8
+    status: source
+  - addr: '0x1d72c0'
+    symbol: func_001D72C0
+    size: 40
+    status: source
+  - addr: '0x1d72e8'
+    symbol: func_001D72E8
+    size: 40
+    status: source
+  - addr: '0x1d7310'
+    symbol: func_001D7310
+    size: 40
+    status: source
+  - addr: '0x1d7338'
+    symbol: func_001D7338
+    size: 40
+    status: source
+- name: auto_game_1d7498
+  source: src/auto/game/1d7498.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d7498'
+    symbol: func_001D7498
+    size: 48
+    status: source
+- name: auto_game_1d7b98
+  source: src/auto/game/1d7b98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d7b98'
+    symbol: func_001D7B98
+    size: 32
+    status: source
+- name: auto_game_1d84c8
+  source: src/auto/game/1d84c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d84c8'
+    symbol: func_001D84C8
+    size: 8
+    status: source
+- name: auto_game_1d8d68
+  source: src/auto/game/1d8d68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d8d68'
+    symbol: func_001D8D68
+    size: 8
+    status: source
+- name: auto_game_1d8de8
+  source: src/auto/game/1d8de8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d8de8'
+    symbol: func_001D8DE8
+    size: 8
+    status: source
+  - addr: '0x1d8df0'
+    symbol: func_001D8DF0
+    size: 8
+    status: source
+- name: auto_game_1d90f8
+  source: src/auto/game/1d90f8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d90f8'
+    symbol: func_001D90F8
+    size: 8
+    status: source
+- name: auto_game_1d9250
+  source: src/auto/game/1d9250.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d9250'
+    symbol: func_001D9250
+    size: 68
+    status: source
+- name: auto_game_1d96e8
+  source: src/auto/game/1d96e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d96e8'
+    symbol: func_001D96E8
+    size: 8
+    status: source
+  - addr: '0x1d96f0'
+    symbol: func_001D96F0
+    size: 8
+    status: source
+- name: auto_game_1d9760
+  source: src/auto/game/1d9760.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d9760'
+    symbol: func_001D9760
+    size: 8
+    status: source
+- name: auto_game_1d97c8
+  source: src/auto/game/1d97c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d97c8'
+    symbol: func_001D97C8
+    size: 8
+    status: source
+- name: auto_game_1d9ea8
+  source: src/auto/game/1d9ea8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d9ea8'
+    symbol: func_001D9EA8
+    size: 28
+    status: source
+- name: auto_game_1d9f40
+  source: src/auto/game/1d9f40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d9f40'
+    symbol: func_001D9F40
+    size: 28
+    status: source
+  - addr: '0x1d9f60'
+    symbol: func_001D9F60
+    size: 20
+    status: source
+- name: auto_game_1daad0
+  source: src/auto/game/1daad0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1daad0'
+    symbol: func_001DAAD0
+    size: 12
+    status: source
+- name: auto_game_1dacb0
+  source: src/auto/game/1dacb0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1dacb0'
+    symbol: func_001DACB0
+    size: 44
+    status: source
+  - addr: '0x1dace0'
+    symbol: func_001DACE0
+    size: 40
+    status: source
+- name: auto_game_1dad60
+  source: src/auto/game/1dad60.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1dad60'
+    symbol: func_001DAD60
+    size: 48
+    status: source
+- name: auto_game_1db2f0
+  source: src/auto/game/1db2f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1db2f0'
+    symbol: func_001DB2F0
+    size: 8
+    status: source
+- name: auto_game_1dd4c8
+  source: src/auto/game/1dd4c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1dd4c8'
+    symbol: func_001DD4C8
+    size: 8
+    status: source
+- name: auto_game_1dd728
+  source: src/auto/game/1dd728.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1dd728'
+    symbol: func_001DD728
+    size: 28
+    status: source
+- name: auto_game_1e0440
+  source: src/auto/game/1e0440.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e0440'
+    symbol: func_001E0440
+    size: 60
+    status: source
+- name: auto_game_1e10c0
+  source: src/auto/game/1e10c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e10c0'
+    symbol: func_001E10C0
+    size: 60
+    status: source
+- name: auto_game_1e1240
+  source: src/auto/game/1e1240.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e1240'
+    symbol: func_001E1240
+    size: 8
+    status: source
+- name: auto_game_1e1690
+  source: src/auto/game/1e1690.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e1690'
+    symbol: func_001E1690
+    size: 76
+    status: source
+  - addr: '0x1e16e0'
+    symbol: func_001E16E0
+    size: 40
+    status: source
+  - addr: '0x1e1708'
+    symbol: func_001E1708
+    size: 24
+    status: source
+- name: auto_game_1e1ba0
+  source: src/auto/game/1e1ba0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e1ba0'
+    symbol: func_001E1BA0
+    size: 60
+    status: source
+- name: auto_game_1e1ea8
+  source: src/auto/game/1e1ea8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e1ea8'
+    symbol: func_001E1EA8
+    size: 12
+    status: source
+  - addr: '0x1e1eb8'
+    symbol: func_001E1EB8
+    size: 16
+    status: source
+- name: auto_game_1e1f18
+  source: src/auto/game/1e1f18.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e1f18'
+    symbol: func_001E1F18
+    size: 12
+    status: source
+  - addr: '0x1e1f28'
+    symbol: func_001E1F28
+    size: 12
+    status: source
+- name: auto_game_1e2c38
+  source: src/auto/game/1e2c38.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e2c38'
+    symbol: func_001E2C38
+    size: 44
+    status: source
+- name: auto_game_1e31a8
+  source: src/auto/game/1e31a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e31a8'
+    symbol: func_001E31A8
+    size: 40
+    status: source
+- name: auto_game_1e3418
+  source: src/auto/game/1e3418.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e3418'
+    symbol: func_001E3418
+    size: 20
+    status: source
+- name: auto_game_1e36a0
+  source: src/auto/game/1e36a0.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e36a0'
+    symbol: func_001E36A0
+    size: 48
+    status: source
+- name: auto_game_1e4ac8
+  source: src/auto/game/1e4ac8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e4ac8'
+    symbol: func_001E4AC8
+    size: 16
+    status: source
+- name: auto_game_1e4b38
+  source: src/auto/game/1e4b38.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e4b38'
+    symbol: func_001E4B38
+    size: 56
+    status: source
+- name: auto_game_1e4f40
+  source: src/auto/game/1e4f40.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e4f40'
+    symbol: func_001E4F40
+    size: 28
+    status: source
+- name: auto_game_1e5900
+  source: src/auto/game/1e5900.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e5900'
+    symbol: func_001E5900
+    size: 64
+    status: source
+- name: auto_game_1e5cd8
+  source: src/auto/game/1e5cd8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e5cd8'
+    symbol: func_001E5CD8
+    size: 8
+    status: source
+- name: auto_game_1e5d80
+  source: src/auto/game/1e5d80.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e5d80'
+    symbol: func_001E5D80
+    size: 8
+    status: source
+- name: auto_game_1e5fa8
+  source: src/auto/game/1e5fa8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e5fa8'
+    symbol: func_001E5FA8
+    size: 32
+    status: source
+- name: auto_game_1e6050
+  source: src/auto/game/1e6050.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e6050'
+    symbol: func_001E6050
+    size: 8
+    status: source
+- name: auto_game_1e6088
+  source: src/auto/game/1e6088.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e6088'
+    symbol: func_001E6088
+    size: 32
+    status: source
+- name: auto_game_1e62d0
+  source: src/auto/game/1e62d0.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e62d0'
+    symbol: func_001E62D0
+    size: 12
+    status: source
+- name: auto_game_1e69e0
+  source: src/auto/game/1e69e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e69e0'
+    symbol: func_001E69E0
+    size: 8
+    status: source
+- name: auto_game_1e6b70
+  source: src/auto/game/1e6b70.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e6b70'
+    symbol: func_001E6B70
+    size: 24
+    status: source
+- name: auto_game_1e7118
+  source: src/auto/game/1e7118.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e7118'
+    symbol: func_001E7118
+    size: 52
+    status: source
+- name: auto_game_1e75f0
+  source: src/auto/game/1e75f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e75f0'
+    symbol: func_001E75F0
+    size: 16
+    status: source
+- name: auto_game_1e7800
+  source: src/auto/game/1e7800.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e7800'
+    symbol: func_001E7800
+    size: 16
+    status: source
+- name: auto_game_1e79f0
+  source: src/auto/game/1e79f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e79f0'
+    symbol: func_001E79F0
+    size: 92
+    status: source
+- name: auto_game_1e80c0
+  source: src/auto/game/1e80c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e80c0'
+    symbol: func_001E80C0
+    size: 96
+    status: source
+- name: auto_game_1e8248
+  source: src/auto/game/1e8248.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e8248'
+    symbol: func_001E8248
+    size: 8
+    status: source
+- name: auto_game_1e8798
+  source: src/auto/game/1e8798.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e8798'
+    symbol: func_001E8798
+    size: 8
+    status: source
+- name: auto_game_1e8b38
+  source: src/auto/game/1e8b38.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e8b38'
+    symbol: func_001E8B38
+    size: 40
+    status: source
+- name: auto_game_1e9640
+  source: src/auto/game/1e9640.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e9640'
+    symbol: func_001E9640
+    size: 28
+    status: source
+  - addr: '0x1e9660'
+    symbol: func_001E9660
+    size: 40
+    status: source
+- name: auto_game_1e9ac8
+  source: src/auto/game/1e9ac8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e9ac8'
+    symbol: func_001E9AC8
+    size: 8
+    status: source
+- name: auto_game_1e9b30
+  source: src/auto/game/1e9b30.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e9b30'
+    symbol: func_001E9B30
+    size: 40
+    status: source
+- name: auto_game_1e9c48
+  source: src/auto/game/1e9c48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e9c48'
+    symbol: func_001E9C48
+    size: 28
+    status: source
+- name: auto_game_1e9d28
+  source: src/auto/game/1e9d28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e9d28'
+    symbol: func_001E9D28
+    size: 8
+    status: source
+- name: auto_game_1ea510
+  source: src/auto/game/1ea510.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ea510'
+    symbol: func_001EA510
+    size: 8
+    status: source
+- name: auto_game_1ea7c0
+  source: src/auto/game/1ea7c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ea7c0'
+    symbol: func_001EA7C0
+    size: 8
+    status: source
+- name: auto_game_1eaac8
+  source: src/auto/game/1eaac8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1eaac8'
+    symbol: func_001EAAC8
+    size: 48
+    status: source
+- name: auto_game_1eb490
+  source: src/auto/game/1eb490.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1eb490'
+    symbol: func_001EB490
+    size: 44
+    status: source
+- name: auto_game_1ec458
+  source: src/auto/game/1ec458.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ec458'
+    symbol: func_001EC458
+    size: 20
+    status: source
+- name: auto_game_1ec768
+  source: src/auto/game/1ec768.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ec768'
+    symbol: func_001EC768
+    size: 12
+    status: source
+- name: auto_game_1ec840
+  source: src/auto/game/1ec840.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ec840'
+    symbol: func_001EC840
+    size: 20
+    status: source
+- name: auto_game_1ecad8
+  source: src/auto/game/1ecad8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ecad8'
+    symbol: func_001ECAD8
+    size: 28
+    status: source
+- name: auto_game_1ed3a0
+  source: src/auto/game/1ed3a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ed3a0'
+    symbol: func_001ED3A0
+    size: 28
+    status: source
+- name: auto_game_1ed478
+  source: src/auto/game/1ed478.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ed478'
+    symbol: func_001ED478
+    size: 32
+    status: source
+- name: auto_game_1ed640
+  source: src/auto/game/1ed640.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ed640'
+    symbol: func_001ED640
+    size: 8
+    status: source
+- name: auto_game_1ed820
+  source: src/auto/game/1ed820.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ed820'
+    symbol: func_001ED820
+    size: 12
+    status: source
+- name: auto_game_1eddb8
+  source: src/auto/game/1eddb8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1eddb8'
+    symbol: func_001EDDB8
+    size: 36
+    status: source
+- name: auto_game_1ee150
+  source: src/auto/game/1ee150.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ee150'
+    symbol: func_001EE150
+    size: 8
+    status: source
+- name: auto_game_1ee270
+  source: src/auto/game/1ee270.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ee270'
+    symbol: func_001EE270
+    size: 8
+    status: source
+- name: auto_game_1ee670
+  source: src/auto/game/1ee670.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ee670'
+    symbol: func_001EE670
+    size: 8
+    status: source
+- name: auto_game_1ee850
+  source: src/auto/game/1ee850.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ee850'
+    symbol: func_001EE850
+    size: 56
+    status: source
+- name: auto_game_1eed58
+  source: src/auto/game/1eed58.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1eed58'
+    symbol: func_001EED58
+    size: 52
+    status: source
+- name: auto_game_1ef6f0
+  source: src/auto/game/1ef6f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ef6f0'
+    symbol: func_001EF6F0
+    size: 28
+    status: source
+- name: auto_game_1f19d0
+  source: src/auto/game/1f19d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f19d0'
+    symbol: func_001F19D0
+    size: 48
+    status: source
+- name: auto_game_1f1c00
+  source: src/auto/game/1f1c00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f1c00'
+    symbol: func_001F1C00
+    size: 8
+    status: source
+  - addr: '0x1f1c08'
+    symbol: func_001F1C08
+    size: 8
+    status: source
+- name: auto_game_1f1db0
+  source: src/auto/game/1f1db0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f1db0'
+    symbol: func_001F1DB0
+    size: 68
+    status: source
+- name: auto_game_1f1e20
+  source: src/auto/game/1f1e20.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f1e20'
+    symbol: func_001F1E20
+    size: 52
+    status: source
+  - addr: '0x1f1e58'
+    symbol: func_001F1E58
+    size: 52
+    status: source
+- name: auto_game_1f1e90
+  source: src/auto/game/1f1e90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f1e90'
+    symbol: func_001F1E90
+    size: 36
+    status: source
+  - addr: '0x1f1eb8'
+    symbol: func_001F1EB8
+    size: 36
+    status: source
+- name: auto_game_1f27f0
+  source: src/auto/game/1f27f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f27f0'
+    symbol: func_001F27F0
+    size: 8
+    status: source
+- name: auto_game_1f2828
+  source: src/auto/game/1f2828.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f2828'
+    symbol: func_001F2828
+    size: 8
+    status: source
+  - addr: '0x1f2830'
+    symbol: func_001F2830
+    size: 8
+    status: source
+  - addr: '0x1f2838'
+    symbol: func_001F2838
+    size: 56
+    status: source
+  - addr: '0x1f2870'
+    symbol: func_001F2870
+    size: 36
+    status: source
+  - addr: '0x1f2898'
+    symbol: func_001F2898
+    size: 56
+    status: source
+- name: auto_game_1f2910
+  source: src/auto/game/1f2910.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f2910'
+    symbol: func_001F2910
+    size: 8
+    status: source
+- name: auto_game_1f2c98
+  source: src/auto/game/1f2c98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f2c98'
+    symbol: func_001F2C98
+    size: 8
+    status: source
+- name: auto_game_1f2ca8
+  source: src/auto/game/1f2ca8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f2ca8'
+    symbol: func_001F2CA8
+    size: 40
+    status: source
+  - addr: '0x1f2cd0'
+    symbol: func_001F2CD0
+    size: 40
+    status: source
+- name: auto_game_1f2d70
+  source: src/auto/game/1f2d70.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f2d70'
+    symbol: func_001F2D70
+    size: 60
+    status: source
+- name: auto_game_1f35b8
+  source: src/auto/game/1f35b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f35b8'
+    symbol: func_001F35B8
+    size: 32
+    status: source
+- name: auto_game_1f42a0
+  source: src/auto/game/1f42a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f42a0'
+    symbol: func_001F42A0
+    size: 40
+    status: source
+- name: auto_game_1f44b8
+  source: src/auto/game/1f44b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f44b8'
+    symbol: func_001F44B8
+    size: 8
+    status: source
+- name: auto_game_1f44c0
+  source: src/auto/game/1f44c0.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f44c0'
+    symbol: func_001F44C0
+    size: 44
+    status: source
+- name: auto_game_1f5928
+  source: src/auto/game/1f5928.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f5928'
+    symbol: func_001F5928
+    size: 40
+    status: source
+- name: auto_game_1f59c0
+  source: src/auto/game/1f59c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f59c0'
+    symbol: func_001F59C0
+    size: 40
+    status: source
+- name: auto_game_1f7c40
+  source: src/auto/game/1f7c40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f7c40'
+    symbol: func_001F7C40
+    size: 8
+    status: source
+- name: auto_game_1f81d8
+  source: src/auto/game/1f81d8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f81d8'
+    symbol: func_001F81D8
+    size: 48
+    status: source
+- name: auto_game_1f85d0
+  source: src/auto/game/1f85d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f85d0'
+    symbol: func_001F85D0
+    size: 56
+    status: source
+- name: auto_game_1f8ff8
+  source: src/auto/game/1f8ff8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f8ff8'
+    symbol: func_001F8FF8
+    size: 24
+    status: source
+- name: auto_game_1f9980
+  source: src/auto/game/1f9980.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f9980'
+    symbol: func_001F9980
+    size: 12
+    status: source
+- name: auto_game_1f9eb0
+  source: src/auto/game/1f9eb0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f9eb0'
+    symbol: func_001F9EB0
+    size: 72
+    status: source
+- name: auto_game_1fab98
+  source: src/auto/game/1fab98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fab98'
+    symbol: func_001FAB98
+    size: 8
+    status: source
+- name: auto_game_1fbb40
+  source: src/auto/game/1fbb40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fbb40'
+    symbol: func_001FBB40
+    size: 8
+    status: source
+- name: auto_game_1fc4f8
+  source: src/auto/game/1fc4f8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fc4f8'
+    symbol: func_001FC4F8
+    size: 8
+    status: source
+  - addr: '0x1fc500'
+    symbol: func_001FC500
+    size: 8
+    status: source
+  - addr: '0x1fc508'
+    symbol: func_001FC508
+    size: 80
+    status: source
+- name: auto_game_1fd3e8
+  source: src/auto/game/1fd3e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fd3e8'
+    symbol: func_001FD3E8
+    size: 80
+    status: source
+  - addr: '0x1fd438'
+    symbol: func_001FD438
+    size: 8
+    status: source
+- name: auto_game_1fd978
+  source: src/auto/game/1fd978.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fd978'
+    symbol: func_001FD978
+    size: 28
+    status: source
+- name: auto_game_1fdbf8
+  source: src/auto/game/1fdbf8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-schedule-insns2
+  functions:
+  - addr: '0x1fdbf8'
+    symbol: func_001FDBF8
+    size: 80
+    status: source
+- name: auto_game_1fdf28
+  source: src/auto/game/1fdf28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fdf28'
+    symbol: func_001FDF28
+    size: 28
+    status: source
+- name: auto_game_1fdff8
+  source: src/auto/game/1fdff8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fdff8'
+    symbol: func_001FDFF8
+    size: 8
+    status: source
+- name: auto_game_200a68
+  source: src/auto/game/200a68.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x200a68'
+    symbol: func_00200A68
+    size: 12
+    status: source
+- name: auto_game_200f00
+  source: src/auto/game/200f00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x200f00'
+    symbol: func_00200F00
+    size: 8
+    status: source
+- name: auto_game_201518
+  source: src/auto/game/201518.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x201518'
+    symbol: func_00201518
+    size: 44
+    status: source
+- name: auto_game_2019a0
+  source: src/auto/game/2019a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2019a0'
+    symbol: func_002019A0
+    size: 84
+    status: source
+- name: auto_game_2041b0
+  source: src/auto/game/2041b0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2041b0'
+    symbol: func_002041B0
+    size: 32
+    status: source
+  - addr: '0x2041d0'
+    symbol: func_002041D0
+    size: 40
+    status: source
+- name: auto_game_204a30
+  source: src/auto/game/204a30.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x204a30'
+    symbol: func_00204A30
+    size: 32
+    status: source
+- name: auto_game_204ea0
+  source: src/auto/game/204ea0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x204ea0'
+    symbol: func_00204EA0
+    size: 28
+    status: source
+  - addr: '0x204ec0'
+    symbol: func_00204EC0
+    size: 64
+    status: source
+- name: auto_game_204f90
+  source: src/auto/game/204f90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x204f90'
+    symbol: func_00204F90
+    size: 28
+    status: source
+- name: auto_game_204ff0
+  source: src/auto/game/204ff0.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x204ff0'
+    symbol: func_00204FF0
+    size: 16
+    status: source
+- name: auto_game_2050b0
+  source: src/auto/game/2050b0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2050b0'
+    symbol: func_002050B0
+    size: 8
+    status: source
+- name: auto_game_205170
+  source: src/auto/game/205170.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x205170'
+    symbol: func_00205170
+    size: 12
+    status: source
+- name: auto_game_2053c0
+  source: src/auto/game/2053c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2053c0'
+    symbol: func_002053C0
+    size: 28
+    status: source
+- name: auto_game_205808
+  source: src/auto/game/205808.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x205808'
+    symbol: func_00205808
+    size: 40
+    status: source
+- name: auto_game_205830
+  source: src/auto/game/205830.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-schedule-insns2
+  functions:
+  - addr: '0x205830'
+    symbol: func_00205830
+    size: 68
+    status: source
+- name: auto_game_205980
+  source: src/auto/game/205980.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x205980'
+    symbol: func_00205980
+    size: 28
+    status: source
+  - addr: '0x2059a0'
+    symbol: func_002059A0
+    size: 96
+    status: source
+- name: auto_game_205bf0
+  source: src/auto/game/205bf0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x205bf0'
+    symbol: func_00205BF0
+    size: 28
+    status: source
+  - addr: '0x205c10'
+    symbol: func_00205C10
+    size: 64
+    status: source
+- name: auto_game_2060b8
+  source: src/auto/game/2060b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2060b8'
+    symbol: func_002060B8
+    size: 28
+    status: source
+  - addr: '0x2060d8'
+    symbol: func_002060D8
+    size: 52
+    status: source
+  - addr: '0x206110'
+    symbol: func_00206110
+    size: 28
+    status: source
+- name: auto_game_2061e8
+  source: src/auto/game/2061e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2061e8'
+    symbol: func_002061E8
+    size: 8
+    status: source
+  - addr: '0x2061f0'
+    symbol: func_002061F0
+    size: 32
+    status: source
+- name: auto_game_206a00
+  source: src/auto/game/206a00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x206a00'
+    symbol: func_00206A00
+    size: 32
+    status: source
+- name: auto_game_206a28
+  source: src/auto/game/206a28.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x206a28'
+    symbol: func_00206A28
+    size: 44
+    status: source
+- name: auto_game_206b28
+  source: src/auto/game/206b28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x206b28'
+    symbol: func_00206B28
+    size: 8
+    status: source
+  - addr: '0x206b30'
+    symbol: func_00206B30
+    size: 32
+    status: source
+- name: auto_game_206b58
+  source: src/auto/game/206b58.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-schedule-insns2
+  functions:
+  - addr: '0x206b58'
+    symbol: func_00206B58
+    size: 48
+    status: source
+- name: auto_game_2075f0
+  source: src/auto/game/2075f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2075f0'
+    symbol: func_002075F0
+    size: 28
+    status: source
+- name: auto_game_2092b8
+  source: src/auto/game/2092b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2092b8'
+    symbol: func_002092B8
+    size: 32
+    status: source
+  - addr: '0x2092d8'
+    symbol: func_002092D8
+    size: 12
+    status: source
+  - addr: '0x2092e8'
+    symbol: func_002092E8
+    size: 36
+    status: source
+- name: auto_game_209340
+  source: src/auto/game/209340.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x209340'
+    symbol: func_00209340
+    size: 36
+    status: source
+- name: auto_game_2094a8
+  source: src/auto/game/2094a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2094a8'
+    symbol: func_002094A8
+    size: 8
+    status: source
+- name: auto_game_2097b8
+  source: src/auto/game/2097b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2097b8'
+    symbol: func_002097B8
+    size: 8
+    status: source
+- name: auto_game_209a50
+  source: src/auto/game/209a50.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x209a50'
+    symbol: func_00209A50
+    size: 8
+    status: source
+  - addr: '0x209a58'
+    symbol: func_00209A58
+    size: 8
+    status: source
+  - addr: '0x209a60'
+    symbol: func_00209A60
+    size: 60
+    status: source
+- name: auto_game_209bd8
+  source: src/auto/game/209bd8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x209bd8'
+    symbol: func_00209BD8
+    size: 36
+    status: source
+- name: auto_game_209c08
+  source: src/auto/game/209c08.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x209c08'
+    symbol: func_00209C08
+    size: 36
+    status: source
+- name: auto_game_209c38
+  source: src/auto/game/209c38.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x209c38'
+    symbol: func_00209C38
+    size: 36
+    status: source
+  - addr: '0x209c60'
+    symbol: func_00209C60
+    size: 8
+    status: source
+  - addr: '0x209c68'
+    symbol: func_00209C68
+    size: 8
+    status: source
+  - addr: '0x209c70'
+    symbol: func_00209C70
+    size: 8
+    status: source
+  - addr: '0x209c78'
+    symbol: func_00209C78
+    size: 8
+    status: source
+  - addr: '0x209c80'
+    symbol: func_00209C80
+    size: 8
+    status: source
+  - addr: '0x209c88'
+    symbol: func_00209C88
+    size: 8
+    status: source
+  - addr: '0x209c90'
+    symbol: func_00209C90
+    size: 44
+    status: source
+- name: auto_game_209e78
+  source: src/auto/game/209e78.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x209e78'
+    symbol: func_00209E78
+    size: 8
+    status: source
+- name: auto_game_20aff8
+  source: src/auto/game/20aff8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20aff8'
+    symbol: func_0020AFF8
+    size: 80
+    status: source
+- name: auto_game_20b8c0
+  source: src/auto/game/20b8c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20b8c0'
+    symbol: func_0020B8C0
+    size: 36
+    status: source
+- name: auto_game_20b980
+  source: src/auto/game/20b980.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20b980'
+    symbol: func_0020B980
+    size: 8
+    status: source
+- name: auto_game_20bc00
+  source: src/auto/game/20bc00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20bc00'
+    symbol: func_0020BC00
+    size: 20
+    status: source
+- name: auto_game_20be90
+  source: src/auto/game/20be90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20be90'
+    symbol: func_0020BE90
+    size: 40
+    status: source
+  - addr: '0x20beb8'
+    symbol: func_0020BEB8
+    size: 44
+    status: source
+  - addr: '0x20bee8'
+    symbol: func_0020BEE8
+    size: 44
+    status: source
+  - addr: '0x20bf18'
+    symbol: func_0020BF18
+    size: 8
+    status: source
+- name: auto_game_20bfe8
+  source: src/auto/game/20bfe8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20bfe8'
+    symbol: func_0020BFE8
+    size: 8
+    status: source
+  - addr: '0x20bff0'
+    symbol: func_0020BFF0
+    size: 8
+    status: source
+- name: auto_game_20c098
+  source: src/auto/game/20c098.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20c098'
+    symbol: func_0020C098
+    size: 8
+    status: source
+  - addr: '0x20c0a0'
+    symbol: func_0020C0A0
+    size: 8
+    status: source
+  - addr: '0x20c0a8'
+    symbol: func_0020C0A8
+    size: 36
+    status: source
+  - addr: '0x20c0d0'
+    symbol: func_0020C0D0
+    size: 8
+    status: source
+  - addr: '0x20c0d8'
+    symbol: func_0020C0D8
+    size: 8
+    status: source
+  - addr: '0x20c0e0'
+    symbol: func_0020C0E0
+    size: 8
+    status: source
+- name: auto_game_20c440
+  source: src/auto/game/20c440.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20c440'
+    symbol: func_0020C440
+    size: 8
+    status: source
+- name: auto_game_20c5e8
+  source: src/auto/game/20c5e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20c5e8'
+    symbol: func_0020C5E8
+    size: 8
+    status: source
+- name: auto_game_20c848
+  source: src/auto/game/20c848.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20c848'
+    symbol: func_0020C848
+    size: 8
+    status: source
+- name: auto_game_20ca38
+  source: src/auto/game/20ca38.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20ca38'
+    symbol: func_0020CA38
+    size: 8
+    status: source
+  - addr: '0x20ca40'
+    symbol: func_0020CA40
+    size: 8
+    status: source
+  - addr: '0x20ca48'
+    symbol: func_0020CA48
+    size: 8
+    status: source
+  - addr: '0x20ca50'
+    symbol: func_0020CA50
+    size: 8
+    status: source
+  - addr: '0x20ca58'
+    symbol: func_0020CA58
+    size: 8
+    status: source
+  - addr: '0x20ca60'
+    symbol: func_0020CA60
+    size: 8
+    status: source
+- name: auto_game_20ca78
+  source: src/auto/game/20ca78.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20ca78'
+    symbol: func_0020CA78
+    size: 12
+    status: source
+  - addr: '0x20ca88'
+    symbol: func_0020CA88
+    size: 12
+    status: source
+  - addr: '0x20ca98'
+    symbol: func_0020CA98
+    size: 52
+    status: source
+- name: auto_game_20cc58
+  source: src/auto/game/20cc58.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20cc58'
+    symbol: func_0020CC58
+    size: 8
+    status: source
+- name: auto_game_20cc98
+  source: src/auto/game/20cc98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20cc98'
+    symbol: func_0020CC98
+    size: 8
+    status: source
+- name: auto_game_20ccf8
+  source: src/auto/game/20ccf8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20ccf8'
+    symbol: func_0020CCF8
+    size: 8
+    status: source
+- name: auto_game_20d910
+  source: src/auto/game/20d910.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20d910'
+    symbol: func_0020D910
+    size: 76
+    status: source
+  - addr: '0x20d960'
+    symbol: func_0020D960
+    size: 92
+    status: source
+- name: auto_game_20dc60
+  source: src/auto/game/20dc60.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20dc60'
+    symbol: func_0020DC60
+    size: 80
+    status: source
+- name: auto_game_20dcf8
+  source: src/auto/game/20dcf8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20dcf8'
+    symbol: func_0020DCF8
+    size: 76
+    status: source
+  - addr: '0x20dd48'
+    symbol: func_0020DD48
+    size: 60
+    status: source
+  - addr: '0x20dd88'
+    symbol: func_0020DD88
+    size: 12
+    status: source
+- name: auto_game_20de78
+  source: src/auto/game/20de78.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20de78'
+    symbol: func_0020DE78
+    size: 80
+    status: source
+- name: auto_game_20df30
+  source: src/auto/game/20df30.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20df30'
+    symbol: func_0020DF30
+    size: 32
+    status: source
+  - addr: '0x20df50'
+    symbol: func_0020DF50
+    size: 8
+    status: source
+  - addr: '0x20df58'
+    symbol: func_0020DF58
+    size: 8
+    status: source
+  - addr: '0x20df60'
+    symbol: func_0020DF60
+    size: 8
+    status: source
+  - addr: '0x20df68'
+    symbol: func_0020DF68
+    size: 36
+    status: source
+  - addr: '0x20df90'
+    symbol: func_0020DF90
+    size: 36
+    status: source
+- name: auto_game_20dfc8
+  source: src/auto/game/20dfc8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20dfc8'
+    symbol: func_0020DFC8
+    size: 84
+    status: source
+  - addr: '0x20e020'
+    symbol: func_0020E020
+    size: 68
+    status: source
+  - addr: '0x20e068'
+    symbol: func_0020E068
+    size: 96
+    status: source
+  - addr: '0x20e0c8'
+    symbol: func_0020E0C8
+    size: 80
+    status: source
+- name: auto_game_210db8
+  source: src/auto/game/210db8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x210db8'
+    symbol: func_00210DB8
+    size: 68
+    status: source
+- name: auto_game_211380
+  source: src/auto/game/211380.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x211380'
+    symbol: func_00211380
+    size: 52
+    status: source
+- name: auto_game_211580
+  source: src/auto/game/211580.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x211580'
+    symbol: func_00211580
+    size: 36
+    status: source
+- name: auto_game_211f70
+  source: src/auto/game/211f70.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x211f70'
+    symbol: func_00211F70
+    size: 8
+    status: source
+  - addr: '0x211f78'
+    symbol: func_00211F78
+    size: 8
+    status: source
+- name: auto_game_2122d0
+  source: src/auto/game/2122d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2122d0'
+    symbol: func_002122D0
+    size: 32
+    status: source
+- name: auto_game_212318
+  source: src/auto/game/212318.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x212318'
+    symbol: func_00212318
+    size: 28
+    status: source
+- name: auto_game_2134f0
+  source: src/auto/game/2134f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2134f0'
+    symbol: func_002134F0
+    size: 8
+    status: source
+- name: auto_game_215028
+  source: src/auto/game/215028.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x215028'
+    symbol: func_00215028
+    size: 48
+    status: source
+- name: auto_game_215a00
+  source: src/auto/game/215a00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x215a00'
+    symbol: func_00215A00
+    size: 44
+    status: source
+- name: auto_game_215bb0
+  source: src/auto/game/215bb0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x215bb0'
+    symbol: func_00215BB0
+    size: 56
+    status: source
+- name: auto_game_215d68
+  source: src/auto/game/215d68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x215d68'
+    symbol: func_00215D68
+    size: 64
+    status: source
+- name: auto_game_218350
+  source: src/auto/game/218350.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x218350'
+    symbol: func_00218350
+    size: 32
+    status: source
+- name: auto_game_218398
+  source: src/auto/game/218398.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x218398'
+    symbol: func_00218398
+    size: 8
+    status: source
+- name: auto_game_218870
+  source: src/auto/game/218870.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x218870'
+    symbol: func_00218870
+    size: 28
+    status: source
+- name: auto_game_21a1f0
+  source: src/auto/game/21a1f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x21a1f0'
+    symbol: func_0021A1F0
+    size: 28
+    status: source
+- name: auto_game_21dd30
+  source: src/auto/game/21dd30.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x21dd30'
+    symbol: func_0021DD30
+    size: 12
+    status: source
+- name: auto_game_21f0f8
+  source: src/auto/game/21f0f8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x21f0f8'
+    symbol: func_0021F0F8
+    size: 28
+    status: source
+- name: auto_game_221050
+  source: src/auto/game/221050.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x221050'
+    symbol: func_00221050
+    size: 72
+    status: source
+- name: auto_game_2210e8
+  source: src/auto/game/2210e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2210e8'
+    symbol: func_002210E8
+    size: 8
+    status: source
+  - addr: '0x2210f0'
+    symbol: func_002210F0
+    size: 76
+    status: source
+  - addr: '0x221140'
+    symbol: func_00221140
+    size: 76
+    status: source
+- name: auto_game_221320
+  source: src/auto/game/221320.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x221320'
+    symbol: func_00221320
+    size: 8
+    status: source
+  - addr: '0x221328'
+    symbol: func_00221328
+    size: 8
+    status: source
+- name: auto_game_2245e8
+  source: src/auto/game/2245e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2245e8'
+    symbol: func_002245E8
+    size: 8
+    status: source
+- name: auto_game_224778
+  source: src/auto/game/224778.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x224778'
+    symbol: func_00224778
+    size: 8
+    status: source
+  - addr: '0x224780'
+    symbol: func_00224780
+    size: 8
+    status: source
+- name: auto_game_224ae8
+  source: src/auto/game/224ae8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x224ae8'
+    symbol: func_00224AE8
+    size: 8
+    status: source
+  - addr: '0x224af0'
+    symbol: func_00224AF0
+    size: 8
+    status: source
+  - addr: '0x224af8'
+    symbol: func_00224AF8
+    size: 8
+    status: source
+- name: auto_game_225260
+  source: src/auto/game/225260.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x225260'
+    symbol: func_00225260
+    size: 12
+    status: source
+- name: auto_game_22ba50
+  source: src/auto/game/22ba50.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x22ba50'
+    symbol: func_0022BA50
+    size: 8
+    status: source
+- name: auto_game_22c6a0
+  source: src/auto/game/22c6a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x22c6a0'
+    symbol: func_0022C6A0
+    size: 8
+    status: source
+- name: auto_game_231338
+  source: src/auto/game/231338.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x231338'
+    symbol: func_00231338
+    size: 32
+    status: source
+- name: auto_game_233cf8
+  source: src/auto/game/233cf8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x233cf8'
+    symbol: func_00233CF8
+    size: 28
+    status: source
+- name: auto_game_23bca0
+  source: src/auto/game/23bca0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x23bca0'
+    symbol: func_0023BCA0
+    size: 28
+    status: source
+  - addr: '0x23bcc0'
+    symbol: func_0023BCC0
+    size: 32
+    status: source
+  - addr: '0x23bce0'
+    symbol: func_0023BCE0
+    size: 32
+    status: source
+  - addr: '0x23bd00'
+    symbol: func_0023BD00
+    size: 36
+    status: source
+- name: auto_game_23dd28
+  source: src/auto/game/23dd28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x23dd28'
+    symbol: func_0023DD28
+    size: 64
+    status: source
+  - addr: '0x23dd68'
+    symbol: func_0023DD68
+    size: 68
+    status: source
+- name: auto_game_23eac8
+  source: src/auto/game/23eac8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x23eac8'
+    symbol: func_0023EAC8
+    size: 32
+    status: source
+- name: auto_game_23f020
+  source: src/auto/game/23f020.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x23f020'
+    symbol: func_0023F020
+    size: 56
+    status: source
+- name: auto_game_240758
+  source: src/auto/game/240758.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x240758'
+    symbol: func_00240758
+    size: 64
+    status: source
+- name: auto_game_241268
+  source: src/auto/game/241268.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x241268'
+    symbol: func_00241268
+    size: 8
+    status: source
+- name: auto_game_241c40
+  source: src/auto/game/241c40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x241c40'
+    symbol: func_00241C40
+    size: 8
+    status: source
+  - addr: '0x241c48'
+    symbol: func_00241C48
+    size: 64
+    status: source
+- name: auto_game_242148
+  source: src/auto/game/242148.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x242148'
+    symbol: func_00242148
+    size: 8
+    status: source
+- name: auto_game_244d98
+  source: src/auto/game/244d98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x244d98'
+    symbol: func_00244D98
+    size: 92
+    status: source
+- name: auto_game_24a530
+  source: src/auto/game/24a530.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x24a530'
+    symbol: func_0024A530
+    size: 12
+    status: source
+- name: auto_game_24ae48
+  source: src/auto/game/24ae48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x24ae48'
+    symbol: func_0024AE48
+    size: 80
+    status: source
+  - addr: '0x24ae98'
+    symbol: func_0024AE98
+    size: 80
+    status: source
+- name: auto_game_24cba0
+  source: src/auto/game/24cba0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x24cba0'
+    symbol: func_0024CBA0
+    size: 12
+    status: source
+- name: auto_game_24f578
+  source: src/auto/game/24f578.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x24f578'
+    symbol: func_0024F578
+    size: 96
+    status: source
+- name: auto_game_24f760
+  source: src/auto/game/24f760.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x24f760'
+    symbol: func_0024F760
+    size: 8
+    status: source
+  - addr: '0x24f768'
+    symbol: func_0024F768
+    size: 8
+    status: source
+  - addr: '0x24f770'
+    symbol: func_0024F770
+    size: 32
+    status: source
+  - addr: '0x24f790'
+    symbol: func_0024F790
+    size: 28
+    status: source
+  - addr: '0x24f7b0'
+    symbol: func_0024F7B0
+    size: 28
+    status: source
+- name: auto_game_250018
+  source: src/auto/game/250018.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x250018'
+    symbol: func_00250018
+    size: 28
+    status: source
+  - addr: '0x250038'
+    symbol: func_00250038
+    size: 28
+    status: source
+- name: auto_game_250550
+  source: src/auto/game/250550.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x250550'
+    symbol: func_00250550
+    size: 28
+    status: source
+  - addr: '0x250570'
+    symbol: func_00250570
+    size: 28
+    status: source
+- name: auto_game_2521f0
+  source: src/auto/game/2521f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2521f0'
+    symbol: func_002521F0
+    size: 8
+    status: source
+- name: auto_game_252310
+  source: src/auto/game/252310.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x252310'
+    symbol: func_00252310
+    size: 20
+    status: source
+- name: auto_game_252928
+  source: src/auto/game/252928.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x252928'
+    symbol: func_00252928
+    size: 20
+    status: source
+  - addr: '0x252940'
+    symbol: func_00252940
+    size: 20
+    status: source
+- name: auto_game_2529e0
+  source: src/auto/game/2529e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2529e0'
+    symbol: func_002529E0
+    size: 20
+    status: source
+  - addr: '0x2529f8'
+    symbol: func_002529F8
+    size: 20
+    status: source
+- name: auto_game_252a98
+  source: src/auto/game/252a98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x252a98'
+    symbol: func_00252A98
+    size: 20
+    status: source
+  - addr: '0x252ab0'
+    symbol: func_00252AB0
+    size: 20
+    status: source
+  - addr: '0x252ac8'
+    symbol: func_00252AC8
+    size: 64
+    status: source
+- name: auto_game_259d68
+  source: src/auto/game/259d68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x259d68'
+    symbol: func_00259D68
+    size: 32
+    status: source
+  - addr: '0x259d88'
+    symbol: func_00259D88
+    size: 32
+    status: source
+- name: auto_game_25c020
+  source: src/auto/game/25c020.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25c020'
+    symbol: func_0025C020
+    size: 8
+    status: source
+  - addr: '0x25c028'
+    symbol: func_0025C028
+    size: 24
+    status: source
+- name: auto_game_25cae8
+  source: src/auto/game/25cae8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25cae8'
+    symbol: func_0025CAE8
+    size: 28
+    status: source
+- name: auto_game_25ce28
+  source: src/auto/game/25ce28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25ce28'
+    symbol: func_0025CE28
+    size: 20
+    status: source
+  - addr: '0x25ce40'
+    symbol: func_0025CE40
+    size: 80
+    status: source
+- name: auto_game_25da10
+  source: src/auto/game/25da10.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25da10'
+    symbol: func_0025DA10
+    size: 16
+    status: source
+- name: auto_game_25dac0
+  source: src/auto/game/25dac0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25dac0'
+    symbol: func_0025DAC0
+    size: 44
+    status: source
+- name: auto_game_25dc80
+  source: src/auto/game/25dc80.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25dc80'
+    symbol: func_0025DC80
+    size: 20
+    status: source
+- name: auto_game_260f80
+  source: src/auto/game/260f80.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x260f80'
+    symbol: func_00260F80
+    size: 28
+    status: source
+  - addr: '0x260fa0'
+    symbol: func_00260FA0
+    size: 12
+    status: source
+- name: auto_game_2611c8
+  source: src/auto/game/2611c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2611c8'
+    symbol: func_002611C8
+    size: 8
+    status: source
+- name: auto_game_263360
+  source: src/auto/game/263360.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x263360'
+    symbol: func_00263360
+    size: 40
+    status: source
+  - addr: '0x263388'
+    symbol: func_00263388
+    size: 8
+    status: source
+- name: auto_game_2633d0
+  source: src/auto/game/2633d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2633d0'
+    symbol: func_002633D0
+    size: 16
+    status: source
+- name: auto_game_265c18
+  source: src/auto/game/265c18.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x265c18'
+    symbol: func_00265C18
+    size: 32
+    status: source
+- name: auto_game_268e90
+  source: src/auto/game/268e90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x268e90'
+    symbol: func_00268E90
+    size: 16
+    status: source
+  - addr: '0x268ea0'
+    symbol: func_00268EA0
+    size: 44
+    status: source
+- name: auto_game_2694d8
+  source: src/auto/game/2694d8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2694d8'
+    symbol: func_002694D8
+    size: 16
+    status: source
+- name: auto_game_2697d0
+  source: src/auto/game/2697d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2697d0'
+    symbol: func_002697D0
+    size: 8
+    status: source
+  - addr: '0x2697d8'
+    symbol: func_002697D8
+    size: 8
+    status: source
+- name: auto_game_2698e8
+  source: src/auto/game/2698e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2698e8'
+    symbol: func_002698E8
+    size: 16
+    status: source
+- name: auto_game_269a90
+  source: src/auto/game/269a90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x269a90'
+    symbol: func_00269A90
+    size: 36
+    status: source
+- name: auto_game_26a450
+  source: src/auto/game/26a450.c
+  origin: auto
+  flags:
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x26a450'
+    symbol: func_0026A450
+    size: 16
+    status: source
+- name: auto_game_26aa60
+  source: src/auto/game/26aa60.c
+  origin: auto
+  flags:
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x26aa60'
+    symbol: func_0026AA60
+    size: 8
+    status: source
+- name: auto_game_26baf0
+  source: src/auto/game/26baf0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26baf0'
+    symbol: func_0026BAF0
+    size: 8
+    status: source
+- name: auto_game_26bc50
+  source: src/auto/game/26bc50.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26bc50'
+    symbol: func_0026BC50
+    size: 44
+    status: source
+  - addr: '0x26bc80'
+    symbol: func_0026BC80
+    size: 8
+    status: source
+- name: auto_game_26be68
+  source: src/auto/game/26be68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26be68'
+    symbol: func_0026BE68
+    size: 12
+    status: source
+- name: auto_game_26bea0
+  source: src/auto/game/26bea0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26bea0'
+    symbol: func_0026BEA0
+    size: 28
+    status: source
+  - addr: '0x26bec0'
+    symbol: func_0026BEC0
+    size: 76
+    status: source
+  - addr: '0x26bf10'
+    symbol: func_0026BF10
+    size: 76
+    status: source
+- name: auto_game_26c8d0
+  source: src/auto/game/26c8d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26c8d0'
+    symbol: func_0026C8D0
+    size: 12
+    status: source
+- name: auto_game_26f4a8
+  source: src/auto/game/26f4a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26f4a8'
+    symbol: func_0026F4A8
+    size: 8
+    status: source
+  - addr: '0x26f4b0'
+    symbol: func_0026F4B0
+    size: 8
+    status: source
+  - addr: '0x26f4b8'
+    symbol: func_0026F4B8
+    size: 8
+    status: source
+- name: auto_game_26f560
+  source: src/auto/game/26f560.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26f560'
+    symbol: func_0026F560
+    size: 28
+    status: source
+- name: auto_game_26f908
+  source: src/auto/game/26f908.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26f908'
+    symbol: func_0026F908
+    size: 60
+    status: source
+- name: auto_game_270138
+  source: src/auto/game/270138.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x270138'
+    symbol: func_00270138
+    size: 40
+    status: source
+  - addr: '0x270160'
+    symbol: func_00270160
+    size: 36
+    status: source
+- name: auto_game_2701e8
+  source: src/auto/game/2701e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2701e8'
+    symbol: func_002701E8
+    size: 60
+    status: source
+- name: auto_game_2703d0
+  source: src/auto/game/2703d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2703d0'
+    symbol: func_002703D0
+    size: 56
+    status: source
+- name: auto_game_271348
+  source: src/auto/game/271348.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x271348'
+    symbol: func_00271348
+    size: 28
+    status: source
+- name: auto_game_2715f0
+  source: src/auto/game/2715f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2715f0'
+    symbol: func_002715F0
+    size: 28
+    status: source
+- name: auto_game_271968
+  source: src/auto/game/271968.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x271968'
+    symbol: func_00271968
+    size: 32
+    status: source
+  - addr: '0x271988'
+    symbol: func_00271988
+    size: 32
+    status: source
+  - addr: '0x2719a8'
+    symbol: func_002719A8
+    size: 40
+    status: source
+- name: auto_game_2722b8
+  source: src/auto/game/2722b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2722b8'
+    symbol: func_002722B8
+    size: 12
+    status: source
+  - addr: '0x2722c8'
+    symbol: func_002722C8
+    size: 8
+    status: source
+- name: auto_game_272308
+  source: src/auto/game/272308.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x272308'
+    symbol: func_00272308
+    size: 8
+    status: source
+  - addr: '0x272310'
+    symbol: func_00272310
+    size: 12
+    status: source
+- name: auto_game_272328
+  source: src/auto/game/272328.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x272328'
+    symbol: func_00272328
+    size: 8
+    status: source
+  - addr: '0x272330'
+    symbol: func_00272330
+    size: 12
+    status: source
+  - addr: '0x272340'
+    symbol: func_00272340
+    size: 52
+    status: source
+  - addr: '0x272378'
+    symbol: func_00272378
+    size: 48
+    status: source
+- name: auto_game_272b58
+  source: src/auto/game/272b58.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x272b58'
+    symbol: func_00272B58
+    size: 28
+    status: source
+- name: auto_game_274018
+  source: src/auto/game/274018.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x274018'
+    symbol: func_00274018
+    size: 36
+    status: source
+- name: auto_game_2740d8
+  source: src/auto/game/2740d8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2740d8'
+    symbol: func_002740D8
+    size: 12
+    status: source
+- name: auto_game_2741f0
+  source: src/auto/game/2741f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2741f0'
+    symbol: func_002741F0
+    size: 52
+    status: source
+- name: auto_game_274350
+  source: src/auto/game/274350.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x274350'
+    symbol: func_00274350
+    size: 12
+    status: source
+- name: auto_game_274920
+  source: src/auto/game/274920.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x274920'
+    symbol: func_00274920
+    size: 8
+    status: source
+- name: auto_game_274f58
+  source: src/auto/game/274f58.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x274f58'
+    symbol: func_00274F58
+    size: 8
+    status: source
+  - addr: '0x274f60'
+    symbol: func_00274F60
+    size: 16
+    status: source
+  - addr: '0x274f70'
+    symbol: func_00274F70
+    size: 16
+    status: source
+- name: auto_game_274fc8
+  source: src/auto/game/274fc8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x274fc8'
+    symbol: func_00274FC8
+    size: 12
+    status: source
+- name: auto_game_275090
+  source: src/auto/game/275090.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x275090'
+    symbol: func_00275090
+    size: 28
+    status: source
+- name: auto_game_276410
+  source: src/auto/game/276410.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x276410'
+    symbol: func_00276410
+    size: 68
+    status: source
+- name: auto_game_276960
+  source: src/auto/game/276960.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x276960'
+    symbol: func_00276960
+    size: 20
+    status: source
+- name: auto_game_277c98
+  source: src/auto/game/277c98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x277c98'
+    symbol: func_00277C98
+    size: 28
+    status: source
+- name: auto_game_278f00
+  source: src/auto/game/278f00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x278f00'
+    symbol: func_00278F00
+    size: 44
+    status: source
+- name: auto_game_278f40
+  source: src/auto/game/278f40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x278f40'
+    symbol: func_00278F40
+    size: 28
+    status: source
+- name: auto_game_2791b0
+  source: src/auto/game/2791b0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2791b0'
+    symbol: func_002791B0
+    size: 8
+    status: source
+- name: auto_game_279790
+  source: src/auto/game/279790.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x279790'
+    symbol: func_00279790
+    size: 16
+    status: source
+- name: auto_game_279930
+  source: src/auto/game/279930.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x279930'
+    symbol: func_00279930
+    size: 16
+    status: source
+- name: auto_game_27a798
+  source: src/auto/game/27a798.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27a798'
+    symbol: func_0027A798
+    size: 16
+    status: source
+- name: auto_game_27a7a8
+  source: src/auto/game/27a7a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27a7a8'
+    symbol: func_0027A7A8
+    size: 8
+    status: source
+- name: auto_game_27acb8
+  source: src/auto/game/27acb8.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27acb8'
+    symbol: func_0027ACB8
+    size: 12
+    status: source
+- name: auto_game_27acc8
+  source: src/auto/game/27acc8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27acc8'
+    symbol: func_0027ACC8
+    size: 8
+    status: source
+- name: auto_game_27bc38
+  source: src/auto/game/27bc38.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27bc38'
+    symbol: func_0027BC38
+    size: 8
+    status: source
+  - addr: '0x27bc40'
+    symbol: func_0027BC40
+    size: 8
+    status: source
+  - addr: '0x27bc48'
+    symbol: func_0027BC48
+    size: 8
+    status: source
+  - addr: '0x27bc50'
+    symbol: func_0027BC50
+    size: 8
+    status: source
+  - addr: '0x27bc58'
+    symbol: func_0027BC58
+    size: 8
+    status: source
+- name: auto_game_27bd00
+  source: src/auto/game/27bd00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27bd00'
+    symbol: func_0027BD00
+    size: 28
+    status: source
+- name: auto_game_27c110
+  source: src/auto/game/27c110.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27c110'
+    symbol: func_0027C110
+    size: 20
+    status: source
+- name: auto_game_27c1a0
+  source: src/auto/game/27c1a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27c1a0'
+    symbol: func_0027C1A0
+    size: 8
+    status: source
+- name: auto_game_27c278
+  source: src/auto/game/27c278.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27c278'
+    symbol: func_0027C278
+    size: 48
+    status: source
+- name: auto_game_27c320
+  source: src/auto/game/27c320.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27c320'
+    symbol: func_0027C320
+    size: 8
+    status: source
+  - addr: '0x27c328'
+    symbol: func_0027C328
+    size: 20
+    status: source
+- name: auto_game_27c348
+  source: src/auto/game/27c348.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27c348'
+    symbol: func_0027C348
+    size: 8
+    status: source
+- name: auto_game_27c408
+  source: src/auto/game/27c408.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27c408'
+    symbol: func_0027C408
+    size: 8
+    status: source
+- name: auto_game_27c460
+  source: src/auto/game/27c460.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27c460'
+    symbol: func_0027C460
+    size: 52
+    status: source
+- name: auto_game_27c990
+  source: src/auto/game/27c990.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27c990'
+    symbol: func_0027C990
+    size: 12
+    status: source
+- name: auto_game_27cd48
+  source: src/auto/game/27cd48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27cd48'
+    symbol: func_0027CD48
+    size: 24
+    status: source
+- name: auto_game_27cf20
+  source: src/auto/game/27cf20.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27cf20'
+    symbol: func_0027CF20
+    size: 8
+    status: source
+- name: auto_game_27f5e0
+  source: src/auto/game/27f5e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27f5e0'
+    symbol: func_0027F5E0
+    size: 8
+    status: source
+- name: auto_game_27f778
+  source: src/auto/game/27f778.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27f778'
+    symbol: func_0027F778
+    size: 20
+    status: source
+- name: auto_game_27f818
+  source: src/auto/game/27f818.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27f818'
+    symbol: func_0027F818
+    size: 60
+    status: source
+- name: auto_game_27f858
+  source: src/auto/game/27f858.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27f858'
+    symbol: func_0027F858
+    size: 56
+    status: source
+- name: auto_game_27f9c0
+  source: src/auto/game/27f9c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27f9c0'
+    symbol: func_0027F9C0
+    size: 8
+    status: source
+- name: auto_game_27fba0
+  source: src/auto/game/27fba0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27fba0'
+    symbol: func_0027FBA0
+    size: 32
+    status: source
+- name: auto_game_27fbc0
+  source: src/auto/game/27fbc0.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27fbc0'
+    symbol: func_0027FBC0
+    size: 24
+    status: source
+- name: auto_game_27fe68
+  source: src/auto/game/27fe68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27fe68'
+    symbol: func_0027FE68
+    size: 8
+    status: source
+- name: auto_game_280fe0
+  source: src/auto/game/280fe0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x280fe0'
+    symbol: func_00280FE0
+    size: 36
+    status: source
+  - addr: '0x281008'
+    symbol: func_00281008
+    size: 8
+    status: source
+- name: auto_game_2818d0
+  source: src/auto/game/2818d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2818d0'
+    symbol: func_002818D0
+    size: 52
+    status: source
+  - addr: '0x281908'
+    symbol: func_00281908
+    size: 52
+    status: source
+- name: auto_game_281988
+  source: src/auto/game/281988.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x281988'
+    symbol: func_00281988
+    size: 84
+    status: source
+- name: auto_game_281a38
+  source: src/auto/game/281a38.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x281a38'
+    symbol: func_00281A38
+    size: 28
+    status: source
+- name: auto_game_281b50
+  source: src/auto/game/281b50.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x281b50'
+    symbol: func_00281B50
+    size: 52
+    status: source
+- name: auto_game_281f88
+  source: src/auto/game/281f88.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x281f88'
+    symbol: func_00281F88
+    size: 20
+    status: source
+- name: auto_game_282170
+  source: src/auto/game/282170.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x282170'
+    symbol: func_00282170
+    size: 52
+    status: source
+  - addr: '0x2821a8'
+    symbol: func_002821A8
+    size: 68
+    status: source
+  - addr: '0x2821f0'
+    symbol: func_002821F0
+    size: 28
+    status: source
+- name: auto_game_282880
+  source: src/auto/game/282880.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x282880'
+    symbol: func_00282880
+    size: 8
+    status: source
+  - addr: '0x282888'
+    symbol: func_00282888
+    size: 32
+    status: source
+- name: auto_game_282c18
+  source: src/auto/game/282c18.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x282c18'
+    symbol: func_00282C18
+    size: 64
+    status: source
+- name: auto_game_282ef8
+  source: src/auto/game/282ef8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x282ef8'
+    symbol: func_00282EF8
+    size: 80
+    status: source
+  - addr: '0x282f48'
+    symbol: func_00282F48
+    size: 56
+    status: source
+- name: auto_game_2830e8
+  source: src/auto/game/2830e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2830e8'
+    symbol: func_002830E8
+    size: 28
+    status: source
+- name: auto_game_283648
+  source: src/auto/game/283648.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x283648'
+    symbol: func_00283648
+    size: 8
+    status: source
+  - addr: '0x283650'
+    symbol: func_00283650
+    size: 28
+    status: source
+- name: auto_game_283898
+  source: src/auto/game/283898.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x283898'
+    symbol: func_00283898
+    size: 28
+    status: source
+- name: auto_game_283ac0
+  source: src/auto/game/283ac0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x283ac0'
+    symbol: func_00283AC0
+    size: 8
+    status: source
+- name: auto_game_283b10
+  source: src/auto/game/283b10.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x283b10'
+    symbol: func_00283B10
+    size: 36
+    status: source
+  - addr: '0x283b38'
+    symbol: func_00283B38
+    size: 40
+    status: source
+  - addr: '0x283b60'
+    symbol: func_00283B60
+    size: 28
+    status: source
+  - addr: '0x283b80'
+    symbol: func_00283B80
+    size: 12
+    status: source
+  - addr: '0x283b90'
+    symbol: func_00283B90
+    size: 16
+    status: source
+  - addr: '0x283ba0'
+    symbol: func_00283BA0
+    size: 32
+    status: source
+  - addr: '0x283bc0'
+    symbol: func_00283BC0
+    size: 80
+    status: source
+  - addr: '0x283c10'
+    symbol: func_00283C10
+    size: 8
+    status: source
+  - addr: '0x283c18'
+    symbol: func_00283C18
+    size: 28
+    status: source
+- name: auto_game_284378
+  source: src/auto/game/284378.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x284378'
+    symbol: func_00284378
+    size: 56
+    status: source
+  - addr: '0x2843b0'
+    symbol: func_002843B0
+    size: 84
+    status: source
+  - addr: '0x284408'
+    symbol: func_00284408
+    size: 32
+    status: source
+- name: auto_game_284668
+  source: src/auto/game/284668.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x284668'
+    symbol: func_00284668
+    size: 28
+    status: source
+- name: auto_game_2848a0
+  source: src/auto/game/2848a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2848a0'
+    symbol: func_002848A0
+    size: 8
+    status: source
+- name: auto_game_284918
+  source: src/auto/game/284918.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x284918'
+    symbol: func_00284918
+    size: 8
+    status: source
+- name: auto_game_284990
+  source: src/auto/game/284990.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x284990'
+    symbol: func_00284990
+    size: 44
+    status: source
+- name: auto_game_284a60
+  source: src/auto/game/284a60.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x284a60'
+    symbol: func_00284A60
+    size: 52
+    status: source
+  - addr: '0x284a98'
+    symbol: func_00284A98
+    size: 80
+    status: source
+- name: auto_game_285190
+  source: src/auto/game/285190.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x285190'
+    symbol: func_00285190
+    size: 80
+    status: source
+- name: auto_game_285510
+  source: src/auto/game/285510.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x285510'
+    symbol: func_00285510
+    size: 56
+    status: source
+- name: auto_game_285868
+  source: src/auto/game/285868.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x285868'
+    symbol: func_00285868
+    size: 8
+    status: source
+  - addr: '0x285870'
+    symbol: func_00285870
+    size: 8
+    status: source
+  - addr: '0x285878'
+    symbol: func_00285878
+    size: 8
+    status: source
+- name: auto_game_285aa8
+  source: src/auto/game/285aa8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x285aa8'
+    symbol: func_00285AA8
+    size: 36
+    status: source
+- name: auto_game_285c20
+  source: src/auto/game/285c20.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x285c20'
+    symbol: func_00285C20
+    size: 28
+    status: source
+  - addr: '0x285c40'
+    symbol: func_00285C40
+    size: 28
+    status: source
+  - addr: '0x285c60'
+    symbol: func_00285C60
+    size: 28
+    status: source
+  - addr: '0x285c80'
+    symbol: func_00285C80
+    size: 28
+    status: source
+- name: auto_game_286220
+  source: src/auto/game/286220.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x286220'
+    symbol: func_00286220
+    size: 84
+    status: source
+- name: auto_game_286c80
+  source: src/auto/game/286c80.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x286c80'
+    symbol: func_00286C80
+    size: 32
+    status: source
+- name: auto_game_2870f8
+  source: src/auto/game/2870f8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2870f8'
+    symbol: func_002870F8
+    size: 8
+    status: source
+  - addr: '0x287100'
+    symbol: func_00287100
+    size: 8
+    status: source
+- name: auto_game_287118
+  source: src/auto/game/287118.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x287118'
+    symbol: func_00287118
+    size: 8
+    status: source
+- name: auto_game_287618
+  source: src/auto/game/287618.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x287618'
+    symbol: func_00287618
+    size: 28
+    status: source
+  - addr: '0x287638'
+    symbol: func_00287638
+    size: 28
+    status: source
+  - addr: '0x287658'
+    symbol: func_00287658
+    size: 28
+    status: source
+  - addr: '0x287678'
+    symbol: func_00287678
+    size: 28
+    status: source
+- name: auto_game_2876e0
+  source: src/auto/game/2876e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2876e0'
+    symbol: func_002876E0
+    size: 28
+    status: source
+  - addr: '0x287700'
+    symbol: func_00287700
+    size: 28
+    status: source
+  - addr: '0x287720'
+    symbol: func_00287720
+    size: 28
+    status: source
+  - addr: '0x287740'
+    symbol: func_00287740
+    size: 28
+    status: source
+  - addr: '0x287760'
+    symbol: func_00287760
+    size: 28
+    status: source
+  - addr: '0x287780'
+    symbol: func_00287780
+    size: 28
+    status: source
+  - addr: '0x2877a0'
+    symbol: func_002877A0
+    size: 28
+    status: source
+  - addr: '0x2877c0'
+    symbol: func_002877C0
+    size: 28
+    status: source
+  - addr: '0x2877e0'
+    symbol: func_002877E0
+    size: 28
+    status: source
+  - addr: '0x287800'
+    symbol: func_00287800
+    size: 28
+    status: source
+  - addr: '0x287820'
+    symbol: func_00287820
+    size: 28
+    status: source
+- name: auto_game_287920
+  source: src/auto/game/287920.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x287920'
+    symbol: func_00287920
+    size: 28
+    status: source
+- name: auto_game_2879f8
+  source: src/auto/game/2879f8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2879f8'
+    symbol: func_002879F8
+    size: 28
+    status: source
+- name: auto_game_287a60
+  source: src/auto/game/287a60.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x287a60'
+    symbol: func_00287A60
+    size: 28
+    status: source
+- name: auto_game_287a90
+  source: src/auto/game/287a90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x287a90'
+    symbol: func_00287A90
+    size: 28
+    status: source
+  - addr: '0x287ab0'
+    symbol: func_00287AB0
+    size: 28
+    status: source
+  - addr: '0x287ad0'
+    symbol: func_00287AD0
+    size: 28
+    status: source
+  - addr: '0x287af0'
+    symbol: func_00287AF0
+    size: 28
+    status: source
+  - addr: '0x287b10'
+    symbol: func_00287B10
+    size: 28
+    status: source
+  - addr: '0x287b30'
+    symbol: func_00287B30
+    size: 28
+    status: source
+  - addr: '0x287b50'
+    symbol: func_00287B50
+    size: 28
+    status: source
+  - addr: '0x287b70'
+    symbol: func_00287B70
+    size: 28
+    status: source
+  - addr: '0x287b90'
+    symbol: func_00287B90
+    size: 28
+    status: source
+  - addr: '0x287bb0'
+    symbol: func_00287BB0
+    size: 28
+    status: source
+  - addr: '0x287bd0'
+    symbol: func_00287BD0
+    size: 28
+    status: source
+  - addr: '0x287bf0'
+    symbol: func_00287BF0
+    size: 28
+    status: source
+  - addr: '0x287c10'
+    symbol: func_00287C10
+    size: 28
+    status: source
+  - addr: '0x287c30'
+    symbol: func_00287C30
+    size: 8
+    status: source
+  - addr: '0x287c38'
+    symbol: func_00287C38
+    size: 8
+    status: source
+  - addr: '0x287c40'
+    symbol: func_00287C40
+    size: 8
+    status: source
+  - addr: '0x287c48'
+    symbol: func_00287C48
+    size: 28
+    status: source
+  - addr: '0x287c68'
+    symbol: func_00287C68
+    size: 28
+    status: source
+  - addr: '0x287c88'
+    symbol: func_00287C88
+    size: 28
+    status: source
+  - addr: '0x287ca8'
+    symbol: func_00287CA8
+    size: 28
+    status: source
+  - addr: '0x287cc8'
+    symbol: func_00287CC8
+    size: 28
+    status: source
+  - addr: '0x287ce8'
+    symbol: func_00287CE8
+    size: 28
+    status: source
+- name: auto_game_287e68
+  source: src/auto/game/287e68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x287e68'
+    symbol: func_00287E68
+    size: 28
+    status: source
+- name: auto_game_287ea0
+  source: src/auto/game/287ea0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x287ea0'
+    symbol: func_00287EA0
+    size: 28
+    status: source
+  - addr: '0x287ec0'
+    symbol: func_00287EC0
+    size: 8
+    status: source
+- name: auto_game_288788
+  source: src/auto/game/288788.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x288788'
+    symbol: func_00288788
+    size: 8
+    status: source
+- name: auto_game_288910
+  source: src/auto/game/288910.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x288910'
+    symbol: func_00288910
+    size: 16
+    status: source
+- name: auto_game_288c18
+  source: src/auto/game/288c18.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x288c18'
+    symbol: func_00288C18
+    size: 32
+    status: source
+- name: auto_game_288c70
+  source: src/auto/game/288c70.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x288c70'
+    symbol: func_00288C70
+    size: 28
+    status: source
+- name: auto_game_288cf8
+  source: src/auto/game/288cf8.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x288cf8'
+    symbol: func_00288CF8
+    size: 16
+    status: source
+- name: auto_game_288d08
+  source: src/auto/game/288d08.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x288d08'
+    symbol: func_00288D08
+    size: 8
+    status: source
+- name: auto_game_289660
+  source: src/auto/game/289660.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x289660'
+    symbol: func_00289660
+    size: 52
+    status: source
+- name: auto_game_289948
+  source: src/auto/game/289948.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x289948'
+    symbol: func_00289948
+    size: 8
+    status: source
+  - addr: '0x289950'
+    symbol: func_00289950
+    size: 52
+    status: source
+  - addr: '0x289988'
+    symbol: func_00289988
+    size: 8
+    status: source
+  - addr: '0x289990'
+    symbol: func_00289990
+    size: 8
+    status: source
+  - addr: '0x289998'
+    symbol: func_00289998
+    size: 8
+    status: source
+- name: auto_game_289da8
+  source: src/auto/game/289da8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x289da8'
+    symbol: func_00289DA8
+    size: 36
+    status: source
+- name: auto_game_28b928
+  source: src/auto/game/28b928.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x28b928'
+    symbol: func_0028B928
+    size: 24
+    status: source
+- name: auto_game_28b940
+  source: src/auto/game/28b940.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x28b940'
+    symbol: func_0028B940
+    size: 8
+    status: source
+- name: auto_game_28bb68
+  source: src/auto/game/28bb68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x28bb68'
+    symbol: func_0028BB68
+    size: 24
+    status: source
+  - addr: '0x28bb80'
+    symbol: func_0028BB80
+    size: 20
+    status: source
+  - addr: '0x28bb98'
+    symbol: func_0028BB98
+    size: 8
+    status: source
+- name: auto_game_1c08f0
+  source: src/auto/game/1c08f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c08f0'
+    symbol: func_001C08F0
+    size: 32
+    status: source
+- name: auto_game_1c1548
+  source: src/auto/game/1c1548.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c1548'
+    symbol: func_001C1548
+    size: 36
+    status: source
+- name: auto_game_1c1c10
+  source: src/auto/game/1c1c10.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c1c10'
+    symbol: func_001C1C10
+    size: 44
+    status: source
+- name: auto_game_1c2a18
+  source: src/auto/game/1c2a18.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2a18'
+    symbol: func_001C2A18
+    size: 44
+    status: source
+- name: auto_game_1c31e0
+  source: src/auto/game/1c31e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c31e0'
+    symbol: func_001C31E0
+    size: 12
+    status: source
+- name: auto_game_1c3278
+  source: src/auto/game/1c3278.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c3278'
+    symbol: func_001C3278
+    size: 64
+    status: source
+- name: auto_game_1c4d00
+  source: src/auto/game/1c4d00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c4d00'
+    symbol: func_001C4D00
+    size: 36
+    status: source
+- name: auto_game_1cad48
+  source: src/auto/game/1cad48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cad48'
+    symbol: func_001CAD48
+    size: 36
+    status: source
+- name: auto_game_1cb740
+  source: src/auto/game/1cb740.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cb740'
+    symbol: func_001CB740
+    size: 36
+    status: source
+- name: auto_game_1cbea8
+  source: src/auto/game/1cbea8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cbea8'
+    symbol: func_001CBEA8
+    size: 36
+    status: source
+- name: auto_game_1cceb8
+  source: src/auto/game/1cceb8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cceb8'
+    symbol: func_001CCEB8
+    size: 36
+    status: source
+- name: auto_game_1d3040
+  source: src/auto/game/1d3040.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d3040'
+    symbol: func_001D3040
+    size: 52
+    status: source
+- name: auto_game_1d7100
+  source: src/auto/game/1d7100.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d7100'
+    symbol: func_001D7100
+    size: 40
+    status: source
+- name: auto_game_1d9d00
+  source: src/auto/game/1d9d00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d9d00'
+    symbol: func_001D9D00
+    size: 28
+    status: source
+- name: auto_game_1dad08
+  source: src/auto/game/1dad08.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1dad08'
+    symbol: func_001DAD08
+    size: 88
+    status: source
+- name: auto_game_1db4a0
+  source: src/auto/game/1db4a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1db4a0'
+    symbol: func_001DB4A0
+    size: 80
+    status: source
+- name: auto_game_1e3fa0
+  source: src/auto/game/1e3fa0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e3fa0'
+    symbol: func_001E3FA0
+    size: 88
+    status: source
+- name: auto_game_1e66f0
+  source: src/auto/game/1e66f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e66f0'
+    symbol: func_001E66F0
+    size: 16
+    status: source
+- name: auto_game_1ea4f0
+  source: src/auto/game/1ea4f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ea4f0'
+    symbol: func_001EA4F0
+    size: 32
+    status: source
+- name: auto_game_1eaaf8
+  source: src/auto/game/1eaaf8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1eaaf8'
+    symbol: func_001EAAF8
+    size: 52
+    status: source
+  - addr: '0x1eab30'
+    symbol: func_001EAB30
+    size: 48
+    status: source
+- name: auto_game_1eaba0
+  source: src/auto/game/1eaba0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1eaba0'
+    symbol: func_001EABA0
+    size: 56
+    status: source
+- name: auto_game_1ed3c0
+  source: src/auto/game/1ed3c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ed3c0'
+    symbol: func_001ED3C0
+    size: 32
+    status: source
+- name: auto_game_1ef508
+  source: src/auto/game/1ef508.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ef508'
+    symbol: func_001EF508
+    size: 60
+    status: source
+- name: auto_game_1f1df8
+  source: src/auto/game/1f1df8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f1df8'
+    symbol: func_001F1DF8
+    size: 36
+    status: source
+- name: auto_game_1f1ee0
+  source: src/auto/game/1f1ee0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f1ee0'
+    symbol: func_001F1EE0
+    size: 40
+    status: source
+- name: auto_game_1f29a0
+  source: src/auto/game/1f29a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f29a0'
+    symbol: func_001F29A0
+    size: 72
+    status: source
+  - addr: '0x1f29e8'
+    symbol: func_001F29E8
+    size: 72
+    status: source
+- name: auto_game_1f2a38
+  source: src/auto/game/1f2a38.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f2a38'
+    symbol: func_001F2A38
+    size: 36
+    status: source
+- name: auto_game_1f2ff8
+  source: src/auto/game/1f2ff8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f2ff8'
+    symbol: func_001F2FF8
+    size: 80
+    status: source
+- name: auto_game_1fd998
+  source: src/auto/game/1fd998.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fd998'
+    symbol: func_001FD998
+    size: 36
+    status: source
+- name: auto_game_207938
+  source: src/auto/game/207938.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x207938'
+    symbol: func_00207938
+    size: 56
+    status: source
+- name: auto_game_209cc0
+  source: src/auto/game/209cc0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x209cc0'
+    symbol: func_00209CC0
+    size: 44
+    status: source
+- name: auto_game_20c4b8
+  source: src/auto/game/20c4b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-schedule-insns2
+  functions:
+  - addr: '0x20c4b8'
+    symbol: func_0020C4B8
+    size: 56
+    status: source
+- name: auto_game_20d188
+  source: src/auto/game/20d188.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20d188'
+    symbol: func_0020D188
+    size: 28
+    status: source
+  - addr: '0x20d1a8'
+    symbol: func_0020D1A8
+    size: 28
+    status: source
+- name: auto_game_211e60
+  source: src/auto/game/211e60.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x211e60'
+    symbol: func_00211E60
+    size: 88
+    status: source
+  - addr: '0x211eb8'
+    symbol: func_00211EB8
+    size: 88
+    status: source
+- name: auto_game_212008
+  source: src/auto/game/212008.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x212008'
+    symbol: func_00212008
+    size: 64
+    status: source
+- name: auto_game_2122f0
+  source: src/auto/game/2122f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2122f0'
+    symbol: func_002122F0
+    size: 40
+    status: source
+- name: auto_game_212338
+  source: src/auto/game/212338.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x212338'
+    symbol: func_00212338
+    size: 76
+    status: source
+- name: auto_game_2123f0
+  source: src/auto/game/2123f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2123f0'
+    symbol: func_002123F0
+    size: 80
+    status: source
+- name: auto_game_2169a0
+  source: src/auto/game/2169a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2169a0'
+    symbol: func_002169A0
+    size: 44
+    status: source
+  - addr: '0x2169d0'
+    symbol: func_002169D0
+    size: 36
+    status: source
+- name: auto_game_216a98
+  source: src/auto/game/216a98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x216a98'
+    symbol: func_00216A98
+    size: 44
+    status: source
+  - addr: '0x216ac8'
+    symbol: func_00216AC8
+    size: 36
+    status: source
+  - addr: '0x216af0'
+    symbol: func_00216AF0
+    size: 12
+    status: source
+- name: auto_game_218370
+  source: src/auto/game/218370.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x218370'
+    symbol: func_00218370
+    size: 36
+    status: source
+- name: auto_game_226380
+  source: src/auto/game/226380.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x226380'
+    symbol: func_00226380
+    size: 32
+    status: source
+- name: auto_game_22b080
+  source: src/auto/game/22b080.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x22b080'
+    symbol: func_0022B080
+    size: 32
+    status: source
+- name: auto_game_2365c8
+  source: src/auto/game/2365c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2365c8'
+    symbol: func_002365C8
+    size: 80
+    status: source
+  - addr: '0x236618'
+    symbol: func_00236618
+    size: 80
+    status: source
+- name: auto_game_241270
+  source: src/auto/game/241270.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x241270'
+    symbol: func_00241270
+    size: 28
+    status: source
+- name: auto_game_249cc8
+  source: src/auto/game/249cc8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x249cc8'
+    symbol: func_00249CC8
+    size: 40
+    status: source
+- name: auto_game_249d40
+  source: src/auto/game/249d40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x249d40'
+    symbol: func_00249D40
+    size: 44
+    status: source
+  - addr: '0x249d70'
+    symbol: func_00249D70
+    size: 44
+    status: source
+- name: auto_game_24a000
+  source: src/auto/game/24a000.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x24a000'
+    symbol: func_0024A000
+    size: 60
+    status: source
+- name: auto_game_24ad08
+  source: src/auto/game/24ad08.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x24ad08'
+    symbol: func_0024AD08
+    size: 84
+    status: source
+- name: auto_game_24adf0
+  source: src/auto/game/24adf0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x24adf0'
+    symbol: func_0024ADF0
+    size: 84
+    status: source
+- name: auto_game_24fa38
+  source: src/auto/game/24fa38.c
+  origin: auto
+  flags:
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x24fa38'
+    symbol: func_0024FA38
+    size: 92
+    status: source
+- name: auto_game_24fe68
+  source: src/auto/game/24fe68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x24fe68'
+    symbol: func_0024FE68
+    size: 36
+    status: source
+- name: auto_game_251a60
+  source: src/auto/game/251a60.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x251a60'
+    symbol: func_00251A60
+    size: 36
+    status: source
+- name: auto_game_25c2c8
+  source: src/auto/game/25c2c8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25c2c8'
+    symbol: func_0025C2C8
+    size: 88
+    status: source
+- name: auto_game_25c690
+  source: src/auto/game/25c690.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25c690'
+    symbol: func_0025C690
+    size: 40
+    status: source
+- name: auto_game_25ccd8
+  source: src/auto/game/25ccd8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25ccd8'
+    symbol: func_0025CCD8
+    size: 16
+    status: source
+- name: auto_game_2667e8
+  source: src/auto/game/2667e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2667e8'
+    symbol: func_002667E8
+    size: 28
+    status: source
+- name: auto_game_269e78
+  source: src/auto/game/269e78.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x269e78'
+    symbol: func_00269E78
+    size: 8
+    status: source
+  - addr: '0x269e80'
+    symbol: func_00269E80
+    size: 12
+    status: source
+  - addr: '0x269e90'
+    symbol: func_00269E90
+    size: 8
+    status: source
+  - addr: '0x269e98'
+    symbol: func_00269E98
+    size: 8
+    status: source
+- name: auto_game_26fb60
+  source: src/auto/game/26fb60.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26fb60'
+    symbol: func_0026FB60
+    size: 96
+    status: source
+- name: auto_game_270188
+  source: src/auto/game/270188.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x270188'
+    symbol: func_00270188
+    size: 96
+    status: source
+- name: auto_game_2740e8
+  source: src/auto/game/2740e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2740e8'
+    symbol: func_002740E8
+    size: 76
+    status: source
+- name: auto_game_274e40
+  source: src/auto/game/274e40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x274e40'
+    symbol: func_00274E40
+    size: 40
+    status: source
+- name: auto_game_275068
+  source: src/auto/game/275068.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x275068'
+    symbol: func_00275068
+    size: 36
+    status: source
+- name: auto_game_276258
+  source: src/auto/game/276258.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x276258'
+    symbol: func_00276258
+    size: 52
+    status: source
+- name: auto_game_278ea0
+  source: src/auto/game/278ea0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x278ea0'
+    symbol: func_00278EA0
+    size: 32
+    status: source
+- name: auto_game_279940
+  source: src/auto/game/279940.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x279940'
+    symbol: func_00279940
+    size: 80
+    status: source
+- name: auto_game_281948
+  source: src/auto/game/281948.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x281948'
+    symbol: func_00281948
+    size: 60
+    status: source
+- name: auto_game_283858
+  source: src/auto/game/283858.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x283858'
+    symbol: func_00283858
+    size: 28
+    status: source
+  - addr: '0x283878'
+    symbol: func_00283878
+    size: 28
+    status: source
+- name: auto_game_284628
+  source: src/auto/game/284628.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x284628'
+    symbol: func_00284628
+    size: 28
+    status: source
+  - addr: '0x284648'
+    symbol: func_00284648
+    size: 28
+    status: source
+- name: auto_game_285880
+  source: src/auto/game/285880.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x285880'
+    symbol: func_00285880
+    size: 32
+    status: source
+- name: auto_game_2860d0
+  source: src/auto/game/2860d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2860d0'
+    symbol: func_002860D0
+    size: 32
+    status: source
+- name: auto_game_286120
+  source: src/auto/game/286120.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x286120'
+    symbol: func_00286120
+    size: 32
+    status: source
+- name: auto_game_286558
+  source: src/auto/game/286558.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x286558'
+    symbol: func_00286558
+    size: 60
+    status: source
+- name: auto_game_2886d0
+  source: src/auto/game/2886d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-schedule-insns2
+  functions:
+  - addr: '0x2886d0'
+    symbol: func_002886D0
+    size: 72
+    status: source
+- name: auto_game_288bc8
+  source: src/auto/game/288bc8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x288bc8'
+    symbol: func_00288BC8
+    size: 76
+    status: source
+- name: auto_game_288e00
+  source: src/auto/game/288e00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x288e00'
+    symbol: func_00288E00
+    size: 32
+    status: source
+- name: auto_game_289360
+  source: src/auto/game/289360.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x289360'
+    symbol: func_00289360
+    size: 44
+    status: source
+- name: auto_game_281388
+  source: src/auto/game/281388.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x281388'
+    symbol: func_00281388
+    size: 24
+    status: source
+- name: auto_game_2813a0
+  source: src/auto/game/2813a0.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2813a0'
+    symbol: func_002813A0
+    size: 48
+    status: source
+- name: auto_game_1c0890
+  source: src/auto/game/1c0890.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c0890'
+    symbol: func_001C0890
+    size: 28
+    status: source
+  - addr: '0x1c08b0'
+    symbol: func_001C08B0
+    size: 28
+    status: source
+  - addr: '0x1c08d0'
+    symbol: func_001C08D0
+    size: 28
+    status: source
+- name: auto_game_1c2798
+  source: src/auto/game/1c2798.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2798'
+    symbol: func_001C2798
+    size: 56
+    status: source
+- name: auto_game_1c2e40
+  source: src/auto/game/1c2e40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c2e40'
+    symbol: func_001C2E40
+    size: 36
+    status: source
+- name: auto_game_1c6ab8
+  source: src/auto/game/1c6ab8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c6ab8'
+    symbol: func_001C6AB8
+    size: 16
+    status: source
+- name: auto_game_1ca578
+  source: src/auto/game/1ca578.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ca578'
+    symbol: func_001CA578
+    size: 24
+    status: source
+- name: auto_game_1cad70
+  source: src/auto/game/1cad70.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cad70'
+    symbol: func_001CAD70
+    size: 24
+    status: source
+- name: auto_game_1cb768
+  source: src/auto/game/1cb768.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cb768'
+    symbol: func_001CB768
+    size: 24
+    status: source
+- name: auto_game_1cc338
+  source: src/auto/game/1cc338.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cc338'
+    symbol: func_001CC338
+    size: 24
+    status: source
+- name: auto_game_1ccee0
+  source: src/auto/game/1ccee0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ccee0'
+    symbol: func_001CCEE0
+    size: 24
+    status: source
+- name: auto_game_1ceae8
+  source: src/auto/game/1ceae8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ceae8'
+    symbol: func_001CEAE8
+    size: 24
+    status: source
+- name: auto_game_1ceed0
+  source: src/auto/game/1ceed0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ceed0'
+    symbol: func_001CEED0
+    size: 24
+    status: source
+- name: auto_game_1cf2d8
+  source: src/auto/game/1cf2d8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cf2d8'
+    symbol: func_001CF2D8
+    size: 24
+    status: source
+- name: auto_game_1cf660
+  source: src/auto/game/1cf660.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cf660'
+    symbol: func_001CF660
+    size: 24
+    status: source
+- name: auto_game_1cf9f0
+  source: src/auto/game/1cf9f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cf9f0'
+    symbol: func_001CF9F0
+    size: 24
+    status: source
+- name: auto_game_1cfcf8
+  source: src/auto/game/1cfcf8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1cfcf8'
+    symbol: func_001CFCF8
+    size: 200
+    status: source
+- name: auto_game_1d5ea8
+  source: src/auto/game/1d5ea8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d5ea8'
+    symbol: func_001D5EA8
+    size: 172
+    status: source
+- name: auto_game_1d6c48
+  source: src/auto/game/1d6c48.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d6c48'
+    symbol: func_001D6C48
+    size: 108
+    status: source
+- name: auto_game_1d9c68
+  source: src/auto/game/1d9c68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1d9c68'
+    symbol: func_001D9C68
+    size: 100
+    status: source
+- name: auto_game_1daa68
+  source: src/auto/game/1daa68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1daa68'
+    symbol: func_001DAA68
+    size: 104
+    status: source
+- name: auto_game_1e1068
+  source: src/auto/game/1e1068.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e1068'
+    symbol: func_001E1068
+    size: 88
+    status: source
+- name: auto_game_1e1be0
+  source: src/auto/game/1e1be0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e1be0'
+    symbol: func_001E1BE0
+    size: 112
+    status: source
+- name: auto_game_1e3500
+  source: src/auto/game/1e3500.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e3500'
+    symbol: func_001E3500
+    size: 24
+    status: source
+- name: auto_game_1e5ce0
+  source: src/auto/game/1e5ce0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e5ce0'
+    symbol: func_001E5CE0
+    size: 160
+    status: source
+- name: auto_game_1e6af8
+  source: src/auto/game/1e6af8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e6af8'
+    symbol: func_001E6AF8
+    size: 120
+    status: source
+- name: auto_game_1e81c0
+  source: src/auto/game/1e81c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1e81c0'
+    symbol: func_001E81C0
+    size: 132
+    status: source
+- name: auto_game_1eabd8
+  source: src/auto/game/1eabd8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1eabd8'
+    symbol: func_001EABD8
+    size: 64
+    status: source
+- name: auto_game_1ec560
+  source: src/auto/game/1ec560.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ec560'
+    symbol: func_001EC560
+    size: 100
+    status: source
+  - addr: '0x1ec5c8'
+    symbol: func_001EC5C8
+    size: 56
+    status: source
+- name: auto_game_1ec690
+  source: src/auto/game/1ec690.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ec690'
+    symbol: func_001EC690
+    size: 100
+    status: source
+- name: auto_game_1ed0a0
+  source: src/auto/game/1ed0a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ed0a0'
+    symbol: func_001ED0A0
+    size: 104
+    status: source
+- name: auto_game_1ed170
+  source: src/auto/game/1ed170.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ed170'
+    symbol: func_001ED170
+    size: 88
+    status: source
+  - addr: '0x1ed1c8'
+    symbol: func_001ED1C8
+    size: 80
+    status: source
+- name: auto_game_1f1a70
+  source: src/auto/game/1f1a70.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f1a70'
+    symbol: func_001F1A70
+    size: 104
+    status: source
+- name: auto_game_1f28d0
+  source: src/auto/game/1f28d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f28d0'
+    symbol: func_001F28D0
+    size: 60
+    status: source
+- name: auto_game_1f2918
+  source: src/auto/game/1f2918.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f2918'
+    symbol: func_001F2918
+    size: 60
+    status: source
+  - addr: '0x1f2958'
+    symbol: func_001F2958
+    size: 68
+    status: source
+- name: auto_game_1f43f0
+  source: src/auto/game/1f43f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1f43f0'
+    symbol: func_001F43F0
+    size: 100
+    status: source
+- name: auto_game_1fd8a0
+  source: src/auto/game/1fd8a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fd8a0'
+    symbol: func_001FD8A0
+    size: 80
+    status: source
+- name: auto_game_1fe000
+  source: src/auto/game/1fe000.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fe000'
+    symbol: func_001FE000
+    size: 104
+    status: source
+- name: auto_game_201a68
+  source: src/auto/game/201a68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x201a68'
+    symbol: func_00201A68
+    size: 100
+    status: source
+- name: auto_game_205878
+  source: src/auto/game/205878.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x205878'
+    symbol: func_00205878
+    size: 116
+    status: source
+- name: auto_game_205c50
+  source: src/auto/game/205c50.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x205c50'
+    symbol: func_00205C50
+    size: 76
+    status: source
+- name: auto_game_205ca0
+  source: src/auto/game/205ca0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x205ca0'
+    symbol: func_00205CA0
+    size: 156
+    status: source
+- name: auto_game_2097c0
+  source: src/auto/game/2097c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2097c0'
+    symbol: func_002097C0
+    size: 152
+    status: source
+- name: auto_game_20ae20
+  source: src/auto/game/20ae20.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20ae20'
+    symbol: func_0020AE20
+    size: 128
+    status: source
+- name: auto_game_20b0c0
+  source: src/auto/game/20b0c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20b0c0'
+    symbol: func_0020B0C0
+    size: 164
+    status: source
+- name: auto_game_20c448
+  source: src/auto/game/20c448.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20c448'
+    symbol: func_0020C448
+    size: 108
+    status: source
+- name: auto_game_20c4f0
+  source: src/auto/game/20c4f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20c4f0'
+    symbol: func_0020C4F0
+    size: 156
+    status: source
+- name: auto_game_20c998
+  source: src/auto/game/20c998.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20c998'
+    symbol: func_0020C998
+    size: 156
+    status: source
+- name: auto_game_20cbc0
+  source: src/auto/game/20cbc0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20cbc0'
+    symbol: func_0020CBC0
+    size: 148
+    status: source
+- name: auto_game_20dd98
+  source: src/auto/game/20dd98.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x20dd98'
+    symbol: func_0020DD98
+    size: 144
+    status: source
+- name: auto_game_2105f8
+  source: src/auto/game/2105f8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2105f8'
+    symbol: func_002105F8
+    size: 192
+    status: source
+- name: auto_game_210e00
+  source: src/auto/game/210e00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x210e00'
+    symbol: func_00210E00
+    size: 104
+    status: source
+  - addr: '0x210e68'
+    symbol: func_00210E68
+    size: 104
+    status: source
+- name: auto_game_211ac0
+  source: src/auto/game/211ac0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x211ac0'
+    symbol: func_00211AC0
+    size: 280
+    status: source
+  - addr: '0x211bd8'
+    symbol: func_00211BD8
+    size: 184
+    status: source
+- name: auto_game_211f80
+  source: src/auto/game/211f80.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x211f80'
+    symbol: func_00211F80
+    size: 136
+    status: source
+- name: auto_game_212190
+  source: src/auto/game/212190.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x212190'
+    symbol: func_00212190
+    size: 160
+    status: source
+  - addr: '0x212230'
+    symbol: func_00212230
+    size: 112
+    status: source
+- name: auto_game_212388
+  source: src/auto/game/212388.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x212388'
+    symbol: func_00212388
+    size: 104
+    status: source
+- name: auto_game_2133c0
+  source: src/auto/game/2133c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2133c0'
+    symbol: func_002133C0
+    size: 164
+    status: source
+  - addr: '0x213468'
+    symbol: func_00213468
+    size: 132
+    status: source
+- name: auto_game_214408
+  source: src/auto/game/214408.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x214408'
+    symbol: func_00214408
+    size: 256
+    status: source
+  - addr: '0x214508'
+    symbol: func_00214508
+    size: 212
+    status: source
+- name: auto_game_2156b0
+  source: src/auto/game/2156b0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2156b0'
+    symbol: func_002156B0
+    size: 68
+    status: source
+  - addr: '0x2156f8'
+    symbol: func_002156F8
+    size: 68
+    status: source
+- name: auto_game_215810
+  source: src/auto/game/215810.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x215810'
+    symbol: func_00215810
+    size: 72
+    status: source
+- name: auto_game_215d20
+  source: src/auto/game/215d20.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x215d20'
+    symbol: func_00215D20
+    size: 72
+    status: source
+- name: auto_game_216878
+  source: src/auto/game/216878.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x216878'
+    symbol: func_00216878
+    size: 292
+    status: source
+- name: auto_game_217670
+  source: src/auto/game/217670.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x217670'
+    symbol: func_00217670
+    size: 244
+    status: source
+  - addr: '0x217768'
+    symbol: func_00217768
+    size: 176
+    status: source
+- name: auto_game_2183a8
+  source: src/auto/game/2183a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2183a8'
+    symbol: func_002183A8
+    size: 176
+    status: source
+- name: auto_game_231288
+  source: src/auto/game/231288.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x231288'
+    symbol: func_00231288
+    size: 128
+    status: source
+- name: auto_game_232e00
+  source: src/auto/game/232e00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x232e00'
+    symbol: func_00232E00
+    size: 60
+    status: source
+- name: auto_game_233c60
+  source: src/auto/game/233c60.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x233c60'
+    symbol: func_00233C60
+    size: 148
+    status: source
+- name: auto_game_23e698
+  source: src/auto/game/23e698.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x23e698'
+    symbol: func_0023E698
+    size: 52
+    status: source
+- name: auto_game_23eae8
+  source: src/auto/game/23eae8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x23eae8'
+    symbol: func_0023EAE8
+    size: 140
+    status: source
+- name: auto_game_242778
+  source: src/auto/game/242778.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x242778'
+    symbol: func_00242778
+    size: 136
+    status: source
+- name: auto_game_248640
+  source: src/auto/game/248640.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x248640'
+    symbol: func_00248640
+    size: 52
+    status: source
+- name: auto_game_249958
+  source: src/auto/game/249958.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x249958'
+    symbol: func_00249958
+    size: 220
+    status: source
+- name: auto_game_249cf0
+  source: src/auto/game/249cf0.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x249cf0'
+    symbol: func_00249CF0
+    size: 76
+    status: source
+- name: auto_game_2503a8
+  source: src/auto/game/2503a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2503a8'
+    symbol: func_002503A8
+    size: 112
+    status: source
+- name: auto_game_250418
+  source: src/auto/game/250418.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x250418'
+    symbol: func_00250418
+    size: 104
+    status: source
+- name: auto_game_252830
+  source: src/auto/game/252830.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x252830'
+    symbol: func_00252830
+    size: 108
+    status: source
+- name: auto_game_252bb8
+  source: src/auto/game/252bb8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x252bb8'
+    symbol: func_00252BB8
+    size: 156
+    status: source
+- name: auto_game_25ce90
+  source: src/auto/game/25ce90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x25ce90'
+    symbol: func_0025CE90
+    size: 100
+    status: source
+- name: auto_game_260c18
+  source: src/auto/game/260c18.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x260c18'
+    symbol: func_00260C18
+    size: 88
+    status: source
+  - addr: '0x260c70'
+    symbol: func_00260C70
+    size: 132
+    status: source
+- name: auto_game_268a50
+  source: src/auto/game/268a50.c
+  origin: auto
+  flags:
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x268a50'
+    symbol: func_00268A50
+    size: 40
+    status: source
+  - addr: '0x268a78'
+    symbol: func_00268A78
+    size: 40
+    status: source
+  - addr: '0x268aa0'
+    symbol: func_00268AA0
+    size: 40
+    status: source
+- name: auto_game_269c40
+  source: src/auto/game/269c40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x269c40'
+    symbol: func_00269C40
+    size: 132
+    status: source
+- name: auto_game_26bff0
+  source: src/auto/game/26bff0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26bff0'
+    symbol: func_0026BFF0
+    size: 60
+    status: source
+  - addr: '0x26c030'
+    symbol: func_0026C030
+    size: 104
+    status: source
+  - addr: '0x26c098'
+    symbol: func_0026C098
+    size: 104
+    status: source
+- name: auto_game_26ca00
+  source: src/auto/game/26ca00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26ca00'
+    symbol: func_0026CA00
+    size: 32
+    status: source
+- name: auto_game_26f320
+  source: src/auto/game/26f320.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26f320'
+    symbol: func_0026F320
+    size: 28
+    status: source
+- name: auto_game_26f508
+  source: src/auto/game/26f508.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26f508'
+    symbol: func_0026F508
+    size: 84
+    status: source
+- name: auto_game_26f9d0
+  source: src/auto/game/26f9d0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26f9d0'
+    symbol: func_0026F9D0
+    size: 160
+    status: source
+- name: auto_game_26fe80
+  source: src/auto/game/26fe80.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26fe80'
+    symbol: func_0026FE80
+    size: 144
+    status: source
+  - addr: '0x26ff10'
+    symbol: func_0026FF10
+    size: 172
+    status: source
+- name: auto_game_271650
+  source: src/auto/game/271650.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x271650'
+    symbol: func_00271650
+    size: 20
+    status: source
+- name: auto_game_271710
+  source: src/auto/game/271710.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x271710'
+    symbol: func_00271710
+    size: 20
+    status: source
+- name: auto_game_272c18
+  source: src/auto/game/272c18.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x272c18'
+    symbol: func_00272C18
+    size: 16
+    status: source
+- name: auto_game_274ea8
+  source: src/auto/game/274ea8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x274ea8'
+    symbol: func_00274EA8
+    size: 96
+    status: source
+- name: auto_game_2798b0
+  source: src/auto/game/2798b0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2798b0'
+    symbol: func_002798B0
+    size: 124
+    status: source
+- name: auto_game_27b6d8
+  source: src/auto/game/27b6d8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27b6d8'
+    symbol: func_0027B6D8
+    size: 164
+    status: source
+- name: auto_game_27c860
+  source: src/auto/game/27c860.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x27c860'
+    symbol: func_0027C860
+    size: 80
+    status: source
+- name: auto_game_280100
+  source: src/auto/game/280100.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x280100'
+    symbol: func_00280100
+    size: 84
+    status: source
+- name: auto_game_2811e8
+  source: src/auto/game/2811e8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2811e8'
+    symbol: func_002811E8
+    size: 20
+    status: source
+  - addr: '0x281200'
+    symbol: func_00281200
+    size: 52
+    status: source
+- name: auto_game_282100
+  source: src/auto/game/282100.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x282100'
+    symbol: func_00282100
+    size: 112
+    status: source
+- name: auto_game_282ad8
+  source: src/auto/game/282ad8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x282ad8'
+    symbol: func_00282AD8
+    size: 132
+    status: source
+- name: auto_game_286140
+  source: src/auto/game/286140.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x286140'
+    symbol: func_00286140
+    size: 208
+    status: source
+- name: auto_game_2867c0
+  source: src/auto/game/2867c0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2867c0'
+    symbol: func_002867C0
+    size: 44
+    status: source
+- name: auto_game_28bba0
+  source: src/auto/game/28bba0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x28bba0'
+    symbol: func_0028BBA0
+    size: 84
+    status: source
+- name: auto_game_28bc10
+  source: src/auto/game/28bc10.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x28bc10'
+    symbol: func_0028BC10
+    size: 112
+    status: source
+- name: auto_game_28bd68
+  source: src/auto/game/28bd68.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x28bd68'
+    symbol: func_0028BD68
+    size: 24
+    status: source
+- name: auto_game_35e750
+  source: src/auto/game/35e750.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x35e750'
+    symbol: func_0035E750
+    size: 40
+    status: source
+- name: auto_game_23e830
+  source: src/auto/game/23e830.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x23e830'
+    symbol: func_0023E830
+    size: 132
+    status: source
+- name: auto_game_23e8b8
+  source: src/auto/game/23e8b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x23e8b8'
+    symbol: func_0023E8B8
+    size: 156
+    status: source
+- name: auto_game_23e958
+  source: src/auto/game/23e958.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x23e958'
+    symbol: func_0023E958
+    size: 132
+    status: source
