@@ -7654,9 +7654,9 @@ units:
     symbol: func_00335FD0
     size: 32
     status: source
-- name: tuf_350060
-  source: src/tu/animation_tu_350060.c
-  origin: auto
+- name: animation_parameter_bank_350060
+  source: src/tu/animation_parameter_bank_350060.cpp
+  origin: animation
   flags:
   - -O2
   - -G0
@@ -7683,6 +7683,7 @@ units:
     symbol: func_00350130
     size: 12
     status: source
+  owner: wave1-animation
 - name: tu_35d378
   source: src/tu/35d378.c
   origin: auto
