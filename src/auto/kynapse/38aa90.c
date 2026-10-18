@@ -1,0 +1,5 @@
+#include "auto/prelude.h"
+
+f32 func_0038AA90(void *arg0) {
+    return M2C_FIELD(arg0, f32 *, 4);
+}

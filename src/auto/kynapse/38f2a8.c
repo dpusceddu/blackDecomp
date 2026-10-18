@@ -1,0 +1,5 @@
+#include "auto/prelude.h"
+
+void func_0038F2A8(void) {
+
+}
