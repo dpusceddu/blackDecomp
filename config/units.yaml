@@ -29894,17 +29894,45 @@ units:
     status: asm
     reason: claimed physics campaign
 - name: tuf_32faf0
-  source: src/tu/physics_tu_32e810.c
-  origin: auto
+  source: src/physics/tu_32e810.cpp
+  origin: physics
   flags:
   - -O2
   - -G0
   - -snas
   - -ffunction-sections
   functions:
+  - addr: '0x32e810'
+    symbol: func_0032E810
+    size: 1388
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32ed80'
+    symbol: func_0032ED80
+    size: 1048
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32f1a0'
+    symbol: func_0032F1A0
+    size: 1924
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32f928'
+    symbol: func_0032F928
+    size: 324
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x32fa70'
+    symbol: func_0032FA70
+    size: 124
+    status: source
   - addr: '0x32faf0'
     symbol: func_0032FAF0
     size: 8
+    status: source
+  - addr: '0x32faf8'
+    symbol: func_0032FAF8
+    size: 132
     status: source
   - addr: '0x32fb80'
     symbol: func_0032FB80
