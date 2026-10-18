@@ -6,10 +6,50 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
-from m2c_input import normalize_sections
+from m2c_input import normalize_sections, decode_raw_instructions
 
 
 class Sections(unittest.TestCase):
+    def test_raw_short_branch_and_ee_odd_float_are_instructions(self):
+        text = '''.section .text.00F00000, "ax"
+    /* 0 00F00000 00000000 */ nop
+    /* 4 00F00004 FEFF8014 */ .word 0x1480FFFE
+    /* 8 00F00008 64000046 */ .word 0x46000064
+.section .rodata.00F10000, "a"
+    /* C 00F10000 64000046 */ .word 0x46000064
+'''
+        result = decode_raw_instructions(text)
+        self.assertIn('.Lm2c_00F00000:', result)
+        self.assertIn('bnez', result)
+        self.assertIn('cvt.w.s', result)
+        self.assertIn('$f1, $f0', result)
+        self.assertIn('/* C 00F10000 64000046 */ .word 0x46000064', result)
+
+    def test_raw_branch_outside_function_stays_opaque(self):
+        text = '.section .text\n/* 0 00F00000 FEFF8014 */ .word 0x1480FFFE\n'
+        self.assertEqual(decode_raw_instructions(text), text)
+
+    def test_m2c_reads_raw_odd_register_conversion(self):
+        import subprocess
+        text = '''.section .text
+glabel probe_convert
+    /* 0 00F00000 64600046 */ .word 0x46006064
+    mfc1 $v0, $f1
+    jr $ra
+     nop
+'''
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'probe.s'
+            context = Path(directory) / 'ctx.c'
+            path.write_text(decode_raw_instructions(text))
+            context.write_text('int probe_convert(float value);')
+            result = subprocess.run([sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--context', str(context), '--no-cache', str(path)], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertNotIn('second half of f64', result.stdout)
+        self.assertNotIn('Decompilation failure', result.stdout)
+        self.assertIn('value', result.stdout)
+        self.assertIn('return', result.stdout)
+
     def test_split_sections_and_small_data(self):
         text = '.section .rodata.003F0000, "a"\n.section .lit4.00440000, "wa"\n.section .sbss.00440010, "wa"\n'
         self.assertEqual(normalize_sections(text), '.section .rodata, "a"\n.section .rodata, "wa"\n.section .bss, "wa"\n')
