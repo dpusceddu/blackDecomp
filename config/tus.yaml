@@ -521,7 +521,7 @@ tus:
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 8 of 21 functions
+  flags_basis: matched 11 of 21 functions
   data:
     .rodata: ['0x3f3040', '0x3f30f8']
     .data: ['0x3bc584', '0x3bc5e0']
