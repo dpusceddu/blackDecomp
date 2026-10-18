@@ -1,0 +1,14 @@
+#include "auto/prelude.h"
+
+#include "types_ghidra.h"
+extern s32 D_0049BEE0;
+extern s32 * func_00370580();
+extern s32 D_0049BEF0;
+
+s32 * func_00370468(void) {
+    if (D_0049BEE0 == 0) {
+        func_00370580();
+        func_00370168(&D_0049BEE0, "17__class_type_info", &D_0049BEF0);
+    }
+    return &D_0049BEE0;
+}

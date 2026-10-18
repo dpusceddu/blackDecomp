@@ -559,6 +559,17 @@ def is_control(x):
             or (op in (0x10, 0x11, 0x12) and (x >> 21) & 0x1F == 8))
 
 
+def split_cc(flags):
+    """(compiler, flags): a flag set may start with `--cc=NAME` to select another compiler than the SN default."""
+    cc, out = COMPILER, []
+    for f in flags:
+        if f.startswith('--cc='):
+            cc = f[5:]
+        else:
+            out.append(f)
+    return cc, out
+
+
 def worker_compile(jobs, tag='auto'):
     """jobs: list of (key, source text, flags). Compiles in one worker call. Returns {key: (rc, message, object bytes)}.
     Results are cached by hash of source and flags in build/auto/cache/."""
@@ -587,8 +598,9 @@ def worker_compile(jobs, tag='auto'):
             ti = tarfile.TarInfo('src/%s.c' % h)
             ti.size = len(data)
             tar.addfile(ti, io.BytesIO(data))
-            plan['compile'].append(dict(src='src/%s.c' % h, obj='obj/%s.o' % h, compiler=COMPILER,
-                                        args=list(flags) + ['-I', 'include'], timeout=30))
+            cc, fl = split_cc(flags)
+            plan['compile'].append(dict(src='src/%s.c' % h, obj='obj/%s.o' % h, compiler=cc,
+                                        args=fl + ['-I', 'include'], timeout=30))
     d = AUTO / ('job-%d' % os.getpid())          # one directory per process: several runs may share the build backend
     d.mkdir(exist_ok=True)
     (d / 'inputs.tgz').write_bytes(buf.getvalue())
@@ -786,16 +798,67 @@ def save_results(res):
     RESULTS.write_text(json.dumps(res, indent=1, sort_keys=True))
 
 
+SONY = 'ee-gcc2.9-991111-01'
+_TUMAP = None
+
+
+def tu_flags(addr):
+    """(compiler, flags, basis) the TU map (config/tus.yaml) gives the TU of this function, or None. Used when the environment
+    variable AUTODECOMP_TU is set; see tools/tus.py."""
+    global _TUMAP
+    if not os.environ.get('AUTODECOMP_TU'):
+        return None
+    if _TUMAP is None:
+        import bisect, yaml
+        d = yaml.safe_load((ROOT / 'config/tus.yaml').read_text())
+        rows = sorted((int(t['text'][0], 16), int(t['text'][1], 16), t['compiler'], t['flags'], t['flags_basis']) for t in d['tus'])
+        _TUMAP = (rows, [r[0] for r in rows])
+    import bisect
+    rows, starts = _TUMAP
+    k = bisect.bisect_right(starts, addr) - 1
+    if k >= 0 and rows[k][0] <= addr < rows[k][1]:
+        return rows[k][2:]
+    return None
+
+
+SNAS_OK = ('ee-gcc2.95.2-273a', 'ee-gcc2.95.3-114', 'ee-gcc2.95.3-136')       # builds whose driver accepts -snas
+
+
+def force_cc(flag_sets):
+    """Experiments (run --cc NAME): the same flag sets with another compiler."""
+    cc = os.environ.get('AUTODECOMP_CC')
+    if not cc:
+        return flag_sets
+    return [['--cc=' + cc] + [x for x in fl if x != '-snas' or cc in SNAS_OK] for fl in flag_sets]
+
+
 def variants_for(fn):
+    return force_cc(variants_for_sn(fn))
+
+
+def variants_for_sn(fn):
     """Flag sets tried in order. -G8 only when the original addresses small data through $gp."""
     uses_gp = any(v[0] == 'gprel' for v in fn['rel'].values())
+    tf = tu_flags(fn['addr'])
+    if tf and tf[0] != COMPILER:                      # another compiler: its flags only (no -snas)
+        base = ['--cc=' + tf[0]] + [x for x in tf[1] if x != '-snas']
+        return [base] + ([['--cc=' + tf[0], '-O2', '-G8']] if uses_gp else [])
     first = [BASE_FLAGS] if not uses_gp else [BASE_FLAGS, ['-O2', '-G8', '-snas']]
+    if tf and tf[2].startswith(('matched', 'override')) and tf[1] not in first:
+        first = [tf[1]] + first                       # the flags that matched the TU's other functions go first
     return first
 
 
 EXTRA_FLAG_SETS = [['-O1', '-G0', '-snas'], ['-O3', '-G0', '-snas'], ['-O2', '-G0', '-snas', '-fbyte-bool'],
                    ['-O2', '-G8', '-snas'], ['-O2', '-G0', '-snas', '-fno-peephole'], ['-O2', '-G0', '-snas', '-fno-schedule-insns2'],
                    ['-O2', '-G0', '-snas', '-fno-optimize-sibling-calls']]
+SONY_EXTRA = [['--cc=' + SONY] + f for f in (['-O1', '-G0'], ['-O3', '-G0'], ['-O2', '-G8'], ['-O2', '-G0', '-fno-peephole'],
+                                                 ['-O2', '-G0', '-fno-schedule-insns2'], ['-O0', '-G0'])]
+
+
+def extra_sets(fn):
+    tf = tu_flags(fn['addr'])
+    return force_cc(SONY_EXTRA if tf and tf[0] != COMPILER else EXTRA_FLAG_SETS)
 
 
 def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=True):
@@ -890,7 +953,7 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
         for f in fns:
             b = best.get(f['name'])
             if f['name'] in srcs and (b is None or not b[2]) and b is not None:
-                for k, flags in enumerate(EXTRA_FLAG_SETS):
+                for k, flags in enumerate(extra_sets(f)):
                     if flags not in variants_for(f):
                         jobs.append(((f['name'], 100 + k), b[5], flags))
                         srcof[(f['name'], 100 + k)] = b[5]
@@ -898,7 +961,7 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
         for i in range(0, len(jobs), 400):
             res2.update(worker_compile(jobs[i:i + 400]))
         for (name, k), res in res2.items():
-            consider(byname[name], k, EXTRA_FLAG_SETS[k - 100], res)
+            consider(byname[name], k, extra_sets(byname[name])[k - 100], res)
     for f in fns:
         rec = recs['0x%x' % f['addr']]
         b = best.get(f['name'])
@@ -1071,7 +1134,7 @@ def cmd_setup(a):
 def try_source(f, src, flags=None):
     """Compile `src` (a source for function record `f`) with the pipeline's flag variants. Returns (differing, flags, tokens, note)
     of the best variant, or (None, None, None, message) when nothing compiles."""
-    sets = [flags] if flags else variants_for(f) + [x for x in EXTRA_FLAG_SETS if x not in variants_for(f)]
+    sets = [flags] if flags else variants_for(f) + [x for x in extra_sets(f) if x not in variants_for(f)]
     outs = worker_compile([((f['name'], i), src, fl) for i, fl in enumerate(sets)])
     orig = OrigImage()
     target = Target(f, orig)
@@ -1362,8 +1425,9 @@ def cmd_register(a):
         rel = 'src/auto/%s/%06x.c' % (region, first)
         (ROOT / rel).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / rel).write_text(text)
-        out.append(dict(name='auto_%s_%06x' % (region, first), source=rel, origin='auto', compiler='ee-gcc2.95.3-136',
-                        flags=g[0][1]['flags'], externs={},
+        cc, fl = split_cc(g[0][1]['flags'])
+        out.append(dict(name='auto_%s_%06x' % (region, first), source=rel, origin='auto', compiler=cc,
+                        flags=fl, externs={},
                         functions=[dict(addr=addr, symbol=rec['name'], size=rec['size'], status='source') for addr, rec in g]))
         for addr, rec in g:
             rec['registered'] = out[-1]['name']
@@ -1466,7 +1530,8 @@ def cmd_permute(a):
     res = load_results()
     orig = OrigImage()
     todo = sorted(((v['score'], k) for k, v in res.items() if v['status'] == 'near' and v['score'] <= a.max_score
-                   and 's128' not in v['source'] and 'permuter' not in v and (a.max_size is None or v['size'] < a.max_size)))
+                   and 's128' not in v['source'] and 'permuter' not in v and (a.max_size is None or v['size'] < a.max_size)
+                   and (not a.cc or ('--cc=' + a.cc) in v.get('flags', []))))
     seen = set()
     reps = []
     for sc, k in todo:                      # one member per family: the others get the result by cloning
@@ -1502,7 +1567,7 @@ def cmd_permute(a):
                                               sum(1 for v in res.values() if v.get('stage') == 'permuter')), flush=True)
 
 
-RANK = {'matched': 0, 'verify-failed': 0, 'near': 1, 'mismatch': 2, 'compile-failed': 3, 'm2c-failed': 4, 'fragment': 5}
+RANK = {'matched': 0, 'verify-failed': 0, 'near': 1, 'mismatch': 2, 'compile-failed': 3, 'm2c-failed': 4, 'fragment': 5, 'orphan': 6}
 
 
 def better(new, old):
@@ -1601,6 +1666,12 @@ def cmd_run(a):
     if a.addr:
         want = {int(x, 16) for x in a.addr}
         sel = [f for f in sel if f['addr'] in want]
+    if a.cc:
+        os.environ['AUTODECOMP_CC'] = a.cc
+    if a.tu:                                                # the TU map's compiler and flags go first (tools/tus.py)
+        os.environ['AUTODECOMP_TU'] = '1'
+        if a.tu != 'all':
+            sel = [f for f in sel if (tu_flags(f['addr']) or (COMPILER,))[0] == a.tu]
     if a.max_size is not None:
         sel = [f for f in sel if f['size'] < a.max_size]
     if a.min_size:
@@ -1657,6 +1728,8 @@ def main():
     r.add_argument('--m2c-option', action='append', help='extra m2c option (repeatable), e.g. --m2c-option=--no-andor')
     r.add_argument('--status', action='append', help='redo the functions whose earlier outcome was this')
     r.add_argument('--refresh-context', action='store_true')
+    r.add_argument('--cc', help='experiment: compile every flag set with this compiler (use AUTODECOMP_RESULTS to keep the records apart)')
+    r.add_argument('--tu', help='use the TU map flags (config/tus.yaml): `all`, or a compiler name to select only the functions of those TUs')
     r.set_defaults(fn=cmd_run)
     rp = sub.add_parser('report')
     rp.add_argument('--max-size', type=int)
@@ -1673,6 +1746,7 @@ def main():
     pm = sub.add_parser('permute')
     pm.add_argument('--max-score', type=int, default=8)
     pm.add_argument('--max-size', type=int)
+    pm.add_argument('--cc', help='only near misses compiled with this compiler (a --cc= flag set)')
     pm.add_argument('--limit', type=int)
     pm.add_argument('--group', type=int, default=60, help='functions climbed together')
     pm.add_argument('--rounds', type=int, default=6)
