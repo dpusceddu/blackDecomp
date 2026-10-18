@@ -1076,8 +1076,9 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
         src, note = clean_function(f['name'], r, sigs, f.get('strings'))
         rec = dict(name=f['name'], size=f['size'], region=f['region'])
         recs['0x%x' % f['addr']] = rec
-        if src is None and note.startswith('stack-object') and f['words'][0] >> 16 == 0x27BD and f['words'][0] & 0x8000:
-            frame = 0x10000 - (f['words'][0] & 0xFFFF)
+        from stack_context import detect_frame_size
+        frame = detect_frame_size(f['words']) if src is None and note.startswith('stack-object') else None
+        if frame is not None:
             for n in sorted({frame - 16 - 8 * j for j in range(9)} | {16, 32}):
                 if n > 0:
                     alt, altsig = clean_function(f['name'], r, sigs, f.get('strings'), stack=n)

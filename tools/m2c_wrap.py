@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """m2c with one formatting change for the pipeline: a dereference at offset 0 of an expression that m2c has not typed as
 a pointer (an integer holding an address, say `lw $v0, 0($a0)` with $a0 an untyped argument) is written as
-`M2C_FIELD(expr, T *, 0)` instead of `*expr`, which is not valid C. Everything else is m2c unchanged.
+`M2C_FIELD(expr, T *, 0)` instead of `*expr`, which is not valid C. The local EE ABI adapter also keeps software doubles in GPRs; it does not modify the installed package.
 Usage: m2c_wrap.py <m2c arguments>"""
 import sys
 from m2c import translate
@@ -39,6 +39,66 @@ def format(self, fmt):
 
 
 StructAccess.format = format
+
+# SN EE's software double ABI differs from upstream m2c's generic EE ABI:
+# one f64 uses one GPR argument slot and returns in v0. A float still uses
+# its own f12..f19 bank. Keep f64 as a floating C type, not an integer typedef.
+from dataclasses import replace
+from m2c.arch_mips import MipseeArch
+from m2c.asm_instruction import Register
+from m2c.error import DecompFailure
+from m2c.translate import ErrorExpr
+from m2c.types import FunctionParam
+
+_ee_function_abi = MipseeArch.function_abi
+_ee_function_return = MipseeArch.function_return
+_ee_base_return_regs = list(MipseeArch.base_return_regs)
+
+
+def is_ee_double(type):
+    return type.is_float() and type.get_size_bits() == 64
+
+
+def ee_function_abi(self, fn_sig, likely_regs, *, for_call):
+    """Correct known register parameters; never guess double stack/varargs layout.
+
+    Unknown signatures retain m2c's inference. Double register parameters and known
+    double returns are supported. A double signature that spills either argument
+    bank to the stack, or has varargs, is explicitly unsupported until the build backend
+    establishes its alignment and promotion rules.
+    """
+    if not for_call:
+        self.base_return_regs = [(Register('v0'), False)] if is_ee_double(fn_sig.return_type) else list(_ee_base_return_regs)
+    doubles = fn_sig.params_known and any(is_ee_double(p.type.decay()) for p in fn_sig.params)
+    if not doubles:
+        return _ee_function_abi(self, fn_sig, likely_regs, for_call=for_call)
+    if fn_sig.is_variadic:
+        raise DecompFailure('SN EE double ABI: variadic double parameters are not verified')
+    fp = sum(p.type.decay().is_float() and not is_ee_double(p.type.decay()) for p in fn_sig.params)
+    gp = len(fn_sig.params) - fp
+    if gp > 8 or fp > 8:
+        raise DecompFailure('SN EE double ABI: stack arguments with doubles are not verified')
+    # Reuse upstream location allocation/filtering with an integer proxy, then
+    # restore each double's real C type in the resulting ABI slot.
+    params = [FunctionParam(type=Type.s64(), name=p.name) if is_ee_double(p.type.decay()) else p for p in fn_sig.params]
+    abi = _ee_function_abi(self, replace(fn_sig, params=params), likely_regs, for_call=for_call)
+    for slot, param in zip(abi.arg_slots, fn_sig.params):
+        if is_ee_double(param.type.decay()):
+            slot.type = param.type.decay()
+    return abi
+
+
+def ee_function_return(expr):
+    if not is_ee_double(expr.type):
+        return _ee_function_return(expr)
+    result = {reg: ErrorExpr('SN EE double result is only in $v0') for reg in MipseeArch.all_return_regs}
+    result[Register('v0')] = expr
+    return result
+
+
+MipseeArch.function_abi = ee_function_abi
+MipseeArch.function_return = staticmethod(ee_function_return)
+
 
 if __name__ == '__main__':
     sys.exit(main())

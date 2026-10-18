@@ -323,7 +323,8 @@ def analyze_function(f):
                     fields.add((kind, n, off + imm, size, typ, i))
                 elif kind == 'field' and 0 <= off < 0x10000:
                     fields.add(('arg', n, off, 4, 'void *', i))
-            if x.doesStore() and rs != 29:
+            # VU register numbers are a separate bank, not aliases of GPRs.
+            if x.doesStore() and rs != 29 and op != 'sqc2':
                 constrain(old[rt if op not in ('swc1',) else ft_register(w)], typ, i)
         if op.startswith('p') and op != 'pref' and not (op == 'por' and (rs == 0 or rt == 0)):
             for reg in reads:
@@ -433,14 +434,15 @@ def abi_slots(params):
     Original parameter ordering is preserved for source signatures. Without a source
     signature, integer-then-float ordering describes the same register ABI; the original
     mixed ordering remains unknown. Wider integers occupy one 128-bit GPR slot.
+    SN's software double uses the integer bank, as confirmed by a worker probe.
     """
     gpr, fpr, stack, out = 0, 0, 0, []
     for typ, _ in params:
-        if typ in ('f32', 'f64'):
+        if typ == 'f32':
             slot, fpr = 8 + fpr, fpr + 1
         else:
             slot, gpr = gpr, gpr + 1
-        if (typ in ('f32', 'f64') and fpr > 8) or (typ not in ('f32', 'f64') and gpr > 8):
+        if (typ == 'f32' and fpr > 8) or (typ != 'f32' and gpr > 8):
             slot, stack = 16 + stack, stack + 1
         out.append((slot, typ))
     return out
@@ -477,7 +479,7 @@ def recover_signatures(inv, analysis, seeds):
         for kind, k, typ, pc in result['uses']:
             slot = k + (8 if kind == 'farg' else 0)
             used.add(slot)
-            if kind == 'farg' or typ not in ('f32', 'f64'):
+            if kind == 'farg' or typ != 'f32':
                 constraints[(a, 'arg', slot)].add(typ)
         ng = max((k+1 for k in used if k < 8), default=0)
         nf = max((k-7 for k in used if k >= 8), default=0)
@@ -534,7 +536,7 @@ def recover_signatures(inv, analysis, seeds):
         seed = seeds.get(a)
         known_ret = seed['ret'] if seed else None
         for gpr, fpr in result['returns']:
-            banks = [fpr] if known_ret in ('f32', 'f64') else [gpr] if known_ret and known_ret != 'unknown' else ([gpr] if gpr.origins or gpr.types else [fpr])
+            banks = [fpr] if known_ret == 'f32' else [gpr] if known_ret and known_ret != 'unknown' else ([gpr] if gpr.origins or gpr.types else [fpr])
             for value in banks:
                 fixed[(a, 'ret', 0)] |= value.types
                 for kind, n, off in value.origins:

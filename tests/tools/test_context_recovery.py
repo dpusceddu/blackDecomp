@@ -120,6 +120,24 @@ class LayoutTests(unittest.TestCase):
 
 
 class EvidenceBoundaryTests(unittest.TestCase):
+    def test_software_double_uses_integer_argument_bank(self):
+        params = [('s32', None), ('f64', None), ('f32', None), ('s128', None)]
+        self.assertEqual(cr.abi_slots(params), [(0, 's32'), (1, 'f64'), (8, 'f32'), (2, 's128')])
+
+    def test_double_return_links_integer_argument(self):
+        f = fn([r(4, 0, 2, 0x2d), 0x03e00008, 0])
+        seed = dict(params=[('f64', None)], ret='f64', quality=3, cls=None, source='double.c')
+        signatures, _ = cr.recover_signatures([f], {f['addr']: cr.analyze_function(f)}, {f['addr']: seed})
+        self.assertEqual(signatures[f['addr']]['params'][0], 'f64')
+        self.assertEqual(signatures[f['addr']]['ret'], 'f64')
+
+    def test_vector_store_does_not_type_unrelated_integer_argument(self):
+        f = fn([i(0x3e, 4, 5, 0), 0x03e00008, 0])
+        result = cr.analyze_function(f)
+        self.assertFalse(any(kind == 'arg' and slot == 1 and typ in ('u128', 's128')
+                             for kind, slot, typ, pc in result['uses']))
+        self.assertTrue(any(size == 16 for kind, slot, off, size, typ, pc in result['fields']))
+
     def test_statements_are_not_declarations(self):
         parsed = cr.parse_declarations('int Caller(int x) {\n return Callee(x, 1);\n}\nextern float Callee(int, float);')
         self.assertEqual([p['name'] for p in parsed], ['Caller', 'Callee'])
