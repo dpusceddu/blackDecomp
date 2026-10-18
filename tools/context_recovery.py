@@ -554,7 +554,9 @@ def recover_signatures(inv, analysis, seeds):
     constraints = collections.defaultdict(set)
     register_slots, caller_counts = {}, collections.defaultdict(collections.Counter)
     authoritative = {}
-    variadic = {f['addr']: saves for f in inv if (saves := variadic_register_saves(f))}
+    variadic = {f['addr']: saves for f in inv if (saves := variadic_register_saves(f))
+                and not (seeds.get(f['addr'], {}).get('quality', 0) >= 2
+                         and not any(t == '...' for t, _ in seeds[f['addr']]['params']))}
     for addr, seed in seeds.items():
         if any(typ == '...' for typ, _ in seed['params']) and seed['quality'] >= 2:
             variadic[addr] = dict(fixed_gpr=None, saves={})

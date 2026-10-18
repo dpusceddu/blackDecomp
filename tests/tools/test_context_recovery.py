@@ -73,6 +73,10 @@ class SignatureTests(unittest.TestCase):
         self.assertTrue(row['variadic'])
         self.assertEqual(cr.prototype(row), 's32 func_00200000(s32, ...);')
         self.assertEqual(cr.prototype(row, True), 's32 func_00200000(s32, ...);')
+        seed['quality'] = 4
+        rows, _ = cr.recover_signatures([leaf], analysis, {leaf['addr']: seed})
+        self.assertEqual(rows[leaf['addr']]['arity'], 15)
+        self.assertFalse(rows[leaf['addr']].get('variadic', False))
         # One missing FP home or nonconsecutive GPR home is not this ABI.
         broken = fn(leaf['words'][:])
         broken['words'][9] = 0
