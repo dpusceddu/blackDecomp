@@ -33537,12 +33537,13 @@ units:
     size: 56
     status: source
 - name: tuf_2d5008
-  source: src/tu/kynapse_tu_2d3c90.c
-  origin: auto
+  source: src/kynapse/hide_agent_2d3c90.cpp
+  origin: kynapse
   flags:
   - -O2
   - -G0
   - -snas
+  - -fbyte-bool
   - -ffunction-sections
   functions:
   - addr: '0x2d5008'
@@ -33569,6 +33570,11 @@ units:
     symbol: func_002D53D0
     size: 32
     status: source
+  - addr: '0x2d5328'
+    symbol: func_002D5328
+    size: 64
+    status: source
+  owner: wave1-kynapse
 - name: tuf_2d74a0
   source: src/tu/kynapse_tu_2d7260.c
   origin: auto

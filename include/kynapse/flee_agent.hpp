@@ -86,7 +86,10 @@ namespace FleeRecovery {
     };
     extern Engine* gEngine __asm__("D_003C9ED4");
 
-    struct TargetEntity : ObjectBase {
+    struct EntityInterfaceBase {
+        virtual void Slot0();
+    };
+    struct TargetEntity : EntityInterfaceBase {
         unsigned char unknown04[4];
         void* id;
         virtual void Slot0();
