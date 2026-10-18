@@ -40480,3 +40480,169 @@ units:
     symbol: func_002CE950
     size: 48
     status: source
+- name: rwa_campaign_312bd0
+  source: src/rwa_ee/tu_312bd0.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x312bd0'
+    symbol: func_00312BD0
+    size: 120
+    status: asm
+  - addr: '0x312db8'
+    symbol: func_00312DB8
+    size: 292
+    status: asm
+  - addr: '0x312ee0'
+    symbol: func_00312EE0
+    size: 292
+    status: asm
+  - addr: '0x313048'
+    symbol: func_00313048
+    size: 56
+    status: asm
+  - addr: '0x3130a0'
+    symbol: func_003130A0
+    size: 128
+    status: asm
+  - addr: '0x313120'
+    symbol: func_00313120
+    size: 36
+    status: asm
+  - addr: '0x313148'
+    symbol: func_00313148
+    size: 120
+    status: asm
+  - addr: '0x3131f8'
+    symbol: func_003131F8
+    size: 80
+    status: asm
+  - addr: '0x313278'
+    symbol: func_00313278
+    size: 612
+    status: asm
+  - addr: '0x3134e0'
+    symbol: func_003134E0
+    size: 364
+    status: asm
+  - addr: '0x3137d8'
+    symbol: func_003137D8
+    size: 368
+    status: asm
+  - addr: '0x3139a8'
+    symbol: func_003139A8
+    size: 364
+    status: asm
+  - addr: '0x313b18'
+    symbol: func_00313B18
+    size: 212
+    status: asm
+  - addr: '0x313c48'
+    symbol: func_00313C48
+    size: 60
+    status: asm
+  - addr: '0x313dc8'
+    symbol: func_00313DC8
+    size: 148
+    status: asm
+  - addr: '0x313f00'
+    symbol: func_00313F00
+    size: 80
+    status: asm
+  - addr: '0x313fd0'
+    symbol: func_00313FD0
+    size: 348
+    status: asm
+  - addr: '0x314130'
+    symbol: func_00314130
+    size: 176
+    status: asm
+  - addr: '0x3141e0'
+    symbol: func_003141E0
+    size: 152
+    status: asm
+  - addr: '0x314278'
+    symbol: func_00314278
+    size: 176
+    status: asm
+  - addr: '0x314370'
+    symbol: func_00314370
+    size: 88
+    status: asm
+  - addr: '0x3144c8'
+    symbol: func_003144C8
+    size: 104
+    status: asm
+  - addr: '0x314548'
+    symbol: func_00314548
+    size: 40
+    status: asm
+  - addr: '0x314570'
+    symbol: func_00314570
+    size: 84
+    status: asm
+- name: rwa_allocator_selector
+  source: src/rwa_ee/allocator_selector.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  functions:
+  - addr: '0x3131c0'
+    symbol: func_003131C0
+    size: 52
+    status: asm
+    reason: compile
+- name: rwa_bank_enable
+  source: src/rwa_ee/bank_enable.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x313f50'
+    symbol: func_00313F50
+    size: 64
+    status: source
+- name: rwa_bank_disable
+  source: src/rwa_ee/bank_disable.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x313f90'
+    symbol: func_00313F90
+    size: 64
+    status: source
+- name: rwa_disk_header_swap
+  source: src/rwa_ee/disk_header_swap.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x313650'
+    symbol: func_00313650
+    size: 372
+    status: source
+- name: rwa_bank_create_data
+  source: src/rwa_ee/bank_create_data.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x313c90'
+    symbol: func_00313C90
+    size: 308
+    status: source
