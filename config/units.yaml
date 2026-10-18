@@ -43737,3 +43737,50 @@ units:
     size: 136
     status: asm
     reason: claimed
+- name: wave2_rw_core_2ce160
+  source: src/renderware_core/tu_2ce160.c
+  origin: renderware_core
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  claim: wave2-rw-core
+  functions:
+  - addr: '0x2ce160'
+    symbol: func_002CE160
+    size: 396
+    status: asm
+    reason: claimed
+  - addr: '0x2ce2f0'
+    symbol: func_002CE2F0
+    size: 384
+    status: asm
+    reason: claimed
+  - addr: '0x2ce470'
+    symbol: func_002CE470
+    size: 660
+    status: asm
+    reason: claimed
+  - addr: '0x2ce708'
+    symbol: func_002CE708
+    size: 188
+    status: asm
+    reason: claimed
+  - addr: '0x2ce7c8'
+    symbol: func_002CE7C8
+    size: 92
+    status: source
+  - addr: '0x2ce828'
+    symbol: func_002CE828
+    size: 28
+    status: asm
+    reason: claimed
+  - addr: '0x2ce848'
+    symbol: func_002CE848
+    size: 252
+    status: source
+  - addr: '0x2ce948'
+    symbol: func_002CE948
+    size: 4
+    status: asm
+    reason: claimed
