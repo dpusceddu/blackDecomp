@@ -37798,11 +37798,6 @@ units:
     symbol: func_0034C8C8
     size: 156
     status: source
-  - addr: '0x34c968'
-    symbol: func_0034C968
-    size: 48
-    status: asm
-    reason: scheduling
   - addr: '0x34c998'
     symbol: func_0034C998
     size: 60
@@ -39112,4 +39107,140 @@ units:
   - addr: '0x394bc0'
     symbol: func_00394BC0
     size: 80
+    status: source
+- name: auto_unclassified_107730
+  source: src/auto/unclassified/107730.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x107730'
+    symbol: func_00107730
+    size: 84
+    status: source
+- name: auto_game_118158
+  source: src/auto/game/118158.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x118158'
+    symbol: func_00118158
+    size: 48
+    status: source
+- name: auto_game_123bf0
+  source: src/auto/game/123bf0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x123bf0'
+    symbol: func_00123BF0
+    size: 44
+    status: source
+- name: auto_game_182320
+  source: src/auto/game/182320.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x182320'
+    symbol: func_00182320
+    size: 96
+    status: source
+- name: auto_game_1fc490
+  source: src/auto/game/1fc490.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1fc490'
+    symbol: func_001FC490
+    size: 100
+    status: source
+- name: auto_game_210450
+  source: src/auto/game/210450.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x210450'
+    symbol: func_00210450
+    size: 420
+    status: source
+- name: auto_game_212048
+  source: src/auto/game/212048.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x212048'
+    symbol: func_00212048
+    size: 64
+    status: source
+- name: auto_game_26bc88
+  source: src/auto/game/26bc88.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x26bc88'
+    symbol: func_0026BC88
+    size: 112
+    status: source
+- name: auto_game_284bb0
+  source: src/auto/game/284bb0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x284bb0'
+    symbol: func_00284BB0
+    size: 32
+    status: source
+  - addr: '0x284bd0'
+    symbol: func_00284BD0
+    size: 32
+    status: source
+- name: auto_animation_34c968
+  source: src/auto/animation/34c968.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x34c968'
+    symbol: func_0034C968
+    size: 48
+    status: source
+- name: auto_unclassified_35d8b0
+  source: src/auto/unclassified/35d8b0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x35d8b0'
+    symbol: func_0035D8B0
+    size: 128
     status: source
