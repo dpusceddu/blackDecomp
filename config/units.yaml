@@ -42457,3 +42457,176 @@ units:
     gUserCount: '0x3cd894'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
+- name: effect_batches_1b7758
+  source: src/game/effects/unmatched.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1b7758'
+    symbol: func_001B7758
+    status: asm
+    reason: claimed
+  - addr: '0x1b78d8'
+    symbol: func_001B78D8
+    status: asm
+    reason: claimed
+  - addr: '0x1b7a70'
+    symbol: func_001B7A70
+    status: asm
+    reason: claimed
+  - addr: '0x1b7b80'
+    symbol: func_001B7B80
+    status: asm
+    reason: claimed
+  - addr: '0x1b7e60'
+    symbol: func_001B7E60
+    status: asm
+    reason: claimed
+  - addr: '0x1b7f28'
+    symbol: func_001B7F28
+    status: asm
+    reason: claimed
+  - addr: '0x1b7f50'
+    symbol: func_001B7F50
+    status: asm
+    reason: claimed
+  - addr: '0x1b7fc8'
+    symbol: func_001B7FC8
+    status: asm
+    reason: claimed
+  - addr: '0x1b8138'
+    symbol: func_001B8138
+    status: asm
+    reason: claimed
+  - addr: '0x1b8180'
+    symbol: func_001B8180
+    status: asm
+    reason: claimed
+  - addr: '0x1b82e0'
+    symbol: func_001B82E0
+    status: asm
+    reason: claimed
+  - addr: '0x1b86f8'
+    symbol: func_001B86F8
+    status: asm
+    reason: claimed
+  - addr: '0x1b8798'
+    symbol: func_001B8798
+    status: asm
+    reason: claimed
+  - addr: '0x1b89c8'
+    symbol: func_001B89C8
+    status: asm
+    reason: claimed
+  - addr: '0x1b90d0'
+    symbol: func_001B90D0
+    status: asm
+    reason: claimed
+  - addr: '0x1b9198'
+    symbol: func_001B9198
+    status: asm
+    reason: claimed
+  - addr: '0x1b96b8'
+    symbol: func_001B96B8
+    status: asm
+    reason: claimed
+  - addr: '0x1b9a40'
+    symbol: func_001B9A40
+    status: asm
+    reason: claimed
+  - addr: '0x1b9b58'
+    symbol: func_001B9B58
+    status: asm
+    reason: claimed
+  - addr: '0x1bab90'
+    symbol: func_001BAB90
+    status: asm
+    reason: claimed
+  - addr: '0x1bad90'
+    symbol: func_001BAD90
+    status: asm
+    reason: claimed
+  - addr: '0x1baf90'
+    symbol: func_001BAF90
+    status: asm
+    reason: claimed
+  - addr: '0x1bb190'
+    symbol: func_001BB190
+    status: asm
+    reason: claimed
+  - addr: '0x1bc428'
+    symbol: func_001BC428
+    status: asm
+    reason: claimed
+  - addr: '0x1bc548'
+    symbol: func_001BC548
+    status: asm
+    reason: claimed
+  - addr: '0x1bc880'
+    symbol: func_001BC880
+    status: asm
+    reason: claimed
+  - addr: '0x1bca30'
+    symbol: func_001BCA30
+    status: asm
+    reason: claimed
+  - addr: '0x1bcc30'
+    symbol: func_001BCC30
+    status: asm
+    reason: claimed
+  - addr: '0x1bcdf8'
+    symbol: func_001BCDF8
+    status: asm
+    reason: claimed
+  - addr: '0x1bcf50'
+    symbol: func_001BCF50
+    status: asm
+    reason: claimed
+  - addr: '0x1bd508'
+    symbol: func_001BD508
+    status: asm
+    reason: claimed
+  - addr: '0x1bd638'
+    symbol: func_001BD638
+    status: asm
+    reason: claimed
+- name: effect_1b7968
+  source: src/game/effects/dispatch.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b7968'
+    symbol: func_001B7968
+    size: 84
+    status: source
+- name: effect_1b8640
+  source: src/game/effects/remove_records.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b8640'
+    symbol: func_001B8640
+    size: 144
+    status: source
+- name: effect_1b7a00
+  source: src/game/effects/find_effect.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1b7a00'
+    symbol: func_001B7A00
+    size: 112
+    status: source
