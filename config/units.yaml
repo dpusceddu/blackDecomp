@@ -44021,3 +44021,135 @@ units:
     symbol: func_003962A0
     size: 68
     status: source
+- name: auto_game_155118
+  source: src/auto/game/155118.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x155118'
+    symbol: func_00155118
+    size: 20
+    status: source
+- name: auto_game_155130
+  source: src/auto/game/155130.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x155130'
+    symbol: func_00155130
+    size: 16
+    status: source
+- name: auto_game_17bdc0
+  source: src/auto/game/17bdc0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x17bdc0'
+    symbol: func_0017BDC0
+    size: 48
+    status: source
+- name: auto_game_1ca590
+  source: src/auto/game/1ca590.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1ca590'
+    symbol: func_001CA590
+    size: 72
+    status: source
+- name: auto_game_243060
+  source: src/auto/game/243060.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x243060'
+    symbol: func_00243060
+    size: 212
+    status: source
+- name: auto_unclassified_280680
+  source: src/auto/unclassified/280680.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x280680'
+    symbol: func_00280680
+    size: 16
+    status: source
+- name: auto_unclassified_280808
+  source: src/auto/unclassified/280808.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x280808'
+    symbol: func_00280808
+    size: 64
+    status: source
+- name: auto_other_374ee8
+  source: src/auto/other/374ee8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x374ee8'
+    symbol: func_00374EE8
+    size: 96
+    status: source
+- name: auto_other_386100
+  source: src/auto/other/386100.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x386100'
+    symbol: func_00386100
+    size: 132
+    status: source
+- name: auto_other_3861f8
+  source: src/auto/other/3861f8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x3861f8'
+    symbol: func_003861F8
+    size: 108
+    status: source
+- name: auto_unclassified_394dd0
+  source: src/auto/unclassified/394dd0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x394dd0'
+    symbol: func_00394DD0
+    size: 80
+    status: source

@@ -23,7 +23,7 @@ def prep(text):
     """(new assembly text, {'q': 128-bit ops seen, 'u': unaligned pairs seen, 'real64': ld/sd away from $sp})."""
     lines = text.split('\n')
     out = list(lines)
-    flags = dict(q=False, u=False, real64=False, qargs=[])
+    flags = dict(q=False, u=False, real64=False, qargs=[], ph=False)
     parsed = {}
     for i, l in enumerate(lines):
         m = LINE.match(l)
@@ -46,6 +46,9 @@ def prep(text):
             mm = MEM.match(args)
             if mm and mm.group(3) not in ('sp', '29'):
                 flags['real64'] = True
+        elif placeholder(pre, op, sp, args) and not (i - 1 in parsed and parsed[i - 1][1] in ('jr', 'jal', 'j', 'jalr', 'beq', 'bne', 'beqz', 'bnez')):
+            out[i] = '\n'.join(placeholder(pre, op, sp, args))
+            flags['ph'] = True
         elif op in ('lq', 'sq'):
             flags['q'] = True
             out[i] = '%s%s%s%s' % (pre, 'ld' if op == 'lq' else 'sd', sp, args)
@@ -79,6 +82,28 @@ def prep(text):
             out[b] = '%snop' % parsed[b][0]
             flags['u'] = True
     return '\n'.join(out), flags
+
+
+# Instructions m2c has no model for that are plain statements or expressions in the source: shown to m2c as calls of
+# placeholder functions, which include/auto/prelude.h defines as inline assembly (SN accepts the instructions as text).
+PLACEHOLDERS = ['void __ee_ei(void);', 'void __ee_di(void);', 'f32 __ee_max_s(f32, f32);', 'f32 __ee_min_s(f32, f32);'] + \
+    ['s32 __ee_mfc0_%d(void);' % n for n in range(32)] + ['void __ee_mtc0_%d(s32);' % n for n in range(32)]
+
+
+def placeholder(pre, op, sp, args):
+    """Replacement lines for one instruction, or None."""
+    a = [x.strip() for x in args.split(',')]
+    nop = '%snop' % pre
+    if op in ('ei', 'di'):
+        return ['%sjal%s__ee_%s' % (pre, sp, op), nop]
+    if op in ('max.s', 'min.s') and len(a) == 3 and all(x.startswith('$f') for x in a):
+        return ['%smov.s%s$f12, %s' % (pre, sp, a[1]), '%smov.s%s$f14, %s' % (pre, sp, a[2]),
+                '%sjal%s__ee_%s' % (pre, sp, op.replace('.', '_')), nop, '%smov.s%s%s, $f0' % (pre, sp, a[0])]
+    if op == 'mfc0' and len(a) == 2 and a[1].startswith('$') and a[1][1:].isdigit():
+        return ['%sjal%s__ee_mfc0_%s' % (pre, sp, a[1][1:]), nop, '%sdaddu%s%s, $2, $0' % (pre, sp, a[0])]
+    if op == 'mtc0' and len(a) == 2 and a[1].startswith('$') and a[1][1:].isdigit():
+        return ['%sdaddu%s$4, %s, $0' % (pre, sp, a[0]), '%sjal%s__ee_mtc0_%s' % (pre, sp, a[1][1:]), nop]
+    return None
 
 
 def post(src, flags):

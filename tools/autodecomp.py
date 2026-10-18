@@ -238,6 +238,8 @@ def write_context():
     known = set(re.findall(r'\b(func_[0-9A-F]{8})\(', '\n'.join(out)))
     wide = wide_prototypes(load_inventory(), known)
     out += wide
+    import ee_prep
+    out += ee_prep.PLACEHOLDERS
     (AUTO / 'ctx.c').write_text('\n'.join(out) + '\n')
     return n + len(wide)
 
@@ -454,6 +456,8 @@ def stack_rewrite(body, size):
         off = int(n, 16)
         return '(sp + %d)' % off if m.group(1) else '*(%s *)(sp + %d)' % (t, off)
     body = re.sub(r'(&?)\bsp([0-9A-Fa-f]+)\b', value, body)
+    # a quadword copied out of the frame: m2c converts the narrower variable, the source reads the 16 bytes
+    body = re.sub(r'\((s|u)128\) \*\(\w+ \*\)\(sp \+ (\d+)\)', lambda m: '*(%s128 *)(sp + %s)' % (m.group(1), m.group(2)), body)
     return '    u8 sp[%d] __attribute__((aligned(16)));\n' % size + body
 
 
@@ -474,7 +478,7 @@ def clean_function(name, r, sigs, strings=None, stack=None):
     for reg in re.findall(r'M2C_ERROR\(/\* Read from unset register \$a([0-3]) \*/\)', body):
         body = body.replace('M2C_ERROR(/* Read from unset register $a%s */)' % reg, 'arg%s' % reg)
     errs = re.findall(r'M2C_ERROR\(/\* (.*?) \*/\)', body)
-    if re.search(r'\bsp\b', body):
+    if re.search(r'\bsp\b|&sp[0-9A-Fa-f]+\b', body):
         if not stack:
             return None, 'stack-object: address of a local aggregate (sp)'
         body = stack_rewrite(body, stack)      # a local buffer; its size is searched so that the frame size matches
@@ -507,7 +511,7 @@ def clean_function(name, r, sigs, strings=None, stack=None):
             continue
         seen.add(ident)
         d = r['decls'].get(ident)
-        if ident in known:
+        if ident in known or ident.startswith('__ee_'):
             continue
         if d and d[0] == 'func':
             lines.append(decl_function(ident, d))
@@ -927,6 +931,11 @@ def expand_macros(src):
     prelude = (ROOT / 'include/auto/prelude.h').read_text()
     types = '\n'.join(l for l in prelude.split('\n') if l.startswith('typedef'))
     body = src.replace('#include "auto/prelude.h"\n', '')
+    if '#include "types_ghidra.h"' in body:
+        names = re.findall(r'^typedef struct (\w+)', (ROOT / 'include/types_ghidra.h').read_text(), re.M)
+        if any(re.search(r'\b%s\b' % n, body) for n in names):
+            raise ValueError('uses a Ghidra structure: the permuter\'s parser does not read the header')
+        body = body.replace('#include "types_ghidra.h"\n', '')
 
     def call(text, name, make):
         out, i = [], 0
@@ -1021,6 +1030,7 @@ class Climb:
 
 def committed_form(text):
     """Source of an exact permuter result in the repository's form: prelude include instead of typedefs, macros back."""
+    text = re.sub(r'(typedef struct\s*)?\{\s*s64 v;\s*\}\s*__attribute__\(\(packed\)\)\s*M2C_U64;', '', text)    # the permuter prints it over lines
     lines = text.split('\n')
     i = 0
     while i < len(lines) and (lines[i].startswith('typedef') or not lines[i].strip() or lines[i].startswith('#pragma')):
@@ -1028,7 +1038,7 @@ def committed_form(text):
     body = '\n'.join(l for l in lines[i:] if not l.startswith('#pragma _permuter'))
     body = re.sub(r'\*\(\((\w+ \*)\) \(\(\(s8 \*\) (\w+)\) \+ (0x[0-9A-Fa-f]+|\d+)\)\)', r'M2C_FIELD(\2, \1, \3)', body)
     body = body.replace('((void *) 0)', 'NULL')
-    return '#include "auto/prelude.h"\n\n' + body.strip() + '\n'
+    return '#include "auto/prelude.h"\n#include "types_ghidra.h"\n\n' + body.strip() + '\n'
 
 
 def permute_many(climbs, rounds, per_round, label=''):
