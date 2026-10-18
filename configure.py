@@ -59,7 +59,7 @@ rule check
   pool = console
 
 build {b}/extract.stamp config/{boot}.yaml config/{boot}.layout.json: extract orig/{slug}/files/{boot} | {tools('splat_config.py', 'elf_layout.py', 'elfinfo.py')}
-build {b}/split.stamp: split | {b}/extract.stamp
+build {b}/split.stamp: split | {b}/extract.stamp config/boundaries.{slug}.txt
 build {b}/extra_labels.txt {b}/symbols.ld: support | {b}/split.stamp tools/link_support.py
 build {b}/placement.json: objsplit | {b}/extra_labels.txt tools/split_objects.py tools/fixasm.py
 build {b}/link.ld {b}/objects.json: ldscript | {b}/placement.json {b}/symbols.ld tools/make_ld.py tools/units.py config/units.yaml config/{boot}.layout.json

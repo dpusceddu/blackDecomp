@@ -93,6 +93,14 @@ def ends_with_return(words):
     return False
 
 
+def orphan_piece(le_words):
+    """`<non-branch instruction>; nop` pieces (the words here are byte-swapped hex, see ends_with_return)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from boundaries import control
+    dec = [int.from_bytes(w.to_bytes(4, 'big'), 'little') for w in le_words]
+    return bool(dec) and all((w == 0) if i % 2 else (w != 0 and not control(w)) for i, w in enumerate(dec))
+
+
 def reconcile(slug, ghidra):
     sf = splat_functions(slug)
     jal_targets = set()
@@ -127,13 +135,15 @@ def reconcile(slug, ghidra):
             continue
         if zero_function(slug, f):
             kind = 'padding (all-zero words)'
+        elif orphan_piece(function_words(slug, f)):
+            kind = 'orphan piece (instruction + nop between functions, tools/boundaries.py)'
         elif covered_by_ghidra(a):
             kind = 'splat splits inside a Ghidra function'
         else:
             prev = sf[sf.index(f) - 1] if f is not sf[0] else None
             if a in jal_targets:
                 kind = 'Ghidra has no function here: called (jal) - missed function'
-            elif prev is not None and not ends_with_return(function_words(slug, prev)):
+            elif prev is not None and not orphan_piece(function_words(slug, prev)) and not ends_with_return(function_words(slug, prev)):
                 kind = 'Ghidra has no function here: previous function falls through - over-split'
             elif a in data_refs:
                 kind = 'Ghidra has no function here: address stored in data (vtable or callback table) - missed function'

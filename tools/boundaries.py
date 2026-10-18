@@ -1,0 +1,158 @@
+#!/usr/bin/env python3
+"""Function boundaries splat cannot see: write config/boundaries.<slug>.txt (splat's symbol_addrs format).
+
+Usage: boundaries.py VARIANT_SLUG [--check]      (--check: report counts, do not write)
+
+Found from the instructions of the boot executable alone:
+
+orphan pairs   After the end of a function (`jr $ra` and its delay slot, plus an optional padding nop) the image holds
+               runs of 8-byte pieces `<one non-branch instruction>; nop` at 8-byte alignment, for example
+               `addiu $sp, $sp, 0x60; nop` or `sw $0, 0x7C($4); nop`. No call, jump, address built by lui/addiu or data
+               pointer reaches them, the instruction has nothing to do with the neighbouring frames (the pairing with the
+               previous function's frame size is no better than chance), and a function compiled from C does not emit
+               them (functions that match with the pair left outside prove it). They are not code of the function that
+               follows: when that function is referenced, the reference points behind the run (for example
+               `%lo(func_00103928 + 0x8)`). Splat sees no boundary there when the real function start is unreferenced and
+               fuses the run with the function. This tool puts a function start behind every run that begins at a
+               function end and is itself unreferenced; the run stays a function of its own (assembly only). A real
+               function may begin with such a pair too (`mtc1 $0, $f1; nop`): on USA retail the Ghidra function starts
+               of config/symbols.txt end a run early where they fall inside it. Independent check: Ghidra starts a
+               function exactly behind the run in 531 of the 535 runs it has an opinion on.
+
+Everything else that was suspected is not a boundary error and is not listed here (see README, "Function boundaries"):
+extents where Ghidra ends earlier than splat (Ghidra leaves out the delay slot, or stops at an indirect `jr` that is a
+computed jump inside the function), and "falls through" over-splits (the words after the function are its jump table).
+"""
+import json, struct, sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from elfinfo import Elf
+
+ROOT = Path(__file__).resolve().parents[1]
+JR_RA = 0x03E00008
+
+
+def control(x):
+    """Branches, jumps, syscall/break, and the COP branches: instructions with a delay slot or a trap."""
+    op = x >> 26
+    if op in (1, 2, 3, 4, 5, 6, 7, 0x14, 0x15, 0x16, 0x17):
+        return True
+    if op == 0 and (x & 0x3F) in (8, 9, 12, 13):
+        return True
+    return op in (0x10, 0x11, 0x12) and (x >> 21) & 0x1F == 8
+
+
+def sext16(v):
+    return v - 0x10000 if v & 0x8000 else v
+
+
+def reference_targets(elf, text_addr, words):
+    """Addresses reached by jal/j, by lui+addiu/ori pairs and by 32-bit data words."""
+    out = set()
+    last_lui = {}
+    for i, x in enumerate(words):
+        op = x >> 26
+        a = text_addr + 4 * i
+        if op in (2, 3):
+            out.add(((a & 0xF0000000) | ((x & 0x3FFFFFF) << 2)))
+        elif op == 0x0F:                                   # lui
+            last_lui[(x >> 16) & 31] = (i, (x & 0xFFFF) << 16)
+        elif op in (9, 13):                                # addiu / ori
+            rs = (x >> 21) & 31
+            if rs in last_lui and i - last_lui[rs][0] <= 12:
+                hi = last_lui[rs][1]
+                out.add((hi + (sext16(x & 0xFFFF) if op == 9 else (x & 0xFFFF))) & 0xFFFFFFFF)
+    for s in elf.sections:
+        if s['index'] and s['type'] == 1 and s['flags'] & 2 and not s['flags'] & 4 and s['size'] >= 4:
+            c = elf.content(s)
+            out.update(struct.unpack_from('<%dI' % (len(c) // 4), c))
+    return out
+
+
+def branch_spans(base, words):
+    """(low, high) address of every pc-relative branch: a function boundary cannot lie inside one."""
+    out = []
+    for i, x in enumerate(words):
+        op = x >> 26
+        if op in (4, 5, 6, 7, 0x14, 0x15, 0x16, 0x17) or (op == 1 and (x >> 16) & 0x1F in (0, 1, 2, 3, 0x10, 0x11, 0x12, 0x13)) \
+                or (op in (0x10, 0x11, 0x12) and (x >> 21) & 0x1F == 8):
+            a = base + 4 * i
+            t = a + 4 + 4 * sext16(x & 0xFFFF)
+            out.append((min(a, t), max(a, t)))
+    return out
+
+
+def ghidra_starts(slug):
+    """Function starts of the Ghidra export (config/symbols.txt); only meaningful for USA retail, which Ghidra analysed."""
+    out = set()
+    if slug == 'usa-retail':
+        for line in (ROOT / 'config/symbols.txt').read_text().split('\n'):
+            f = line.split('\t')
+            if len(f) > 3 and f[2] == 'func':
+                out.add(int(f[0], 16))
+    return out
+
+
+def orphan_splits(elf, ghidra=frozenset()):
+    t = elf.section('.text')
+    data = elf.content(t)
+    words = struct.unpack('<%dI' % (len(data) // 4), data)
+    base = t['addr']
+    refs = reference_targets(elf, base, words)
+    import bisect
+    spans = sorted(branch_spans(base, words))
+    los = [lo for lo, _ in spans]
+    # prefix maximum of the high ends: a position p is crossed when some span has lo < p <= hi
+    pmax, m = [], 0
+    for lo, hi in spans:
+        m = max(m, hi)
+        pmax.append(m)
+
+    def crossed(p):
+        i = bisect.bisect_left(los, p) - 1          # spans with lo < p
+        return i >= 0 and pmax[i] >= p
+    w = lambda a: words[(a - base) // 4]
+    splits, orphans = [], 0
+    a = base + 16
+    end = base + len(data)
+    while a < end - 8:
+        # a function end: jr $ra with its delay slot just before a, optionally followed by one padding nop
+        prev_end = w(a - 8) == JR_RA or (w(a - 4) == 0 and w(a - 12) == JR_RA and w(a - 8) != JR_RA)
+        if not (a % 8 == 0 and prev_end and a not in refs and a not in ghidra and not crossed(a)):
+            a += 4
+            continue
+        r = a
+        while r + 8 <= end and w(r + 4) == 0 and w(r) != 0 and not control(w(r)):
+            r += 8
+        # a real function can itself begin with `<instruction>; nop` (an FPU hazard nop, say): when Ghidra starts one
+        # inside the run, the orphans end there
+        inner = [x for x in range(a + 8, r, 8) if x in ghidra]
+        if inner:
+            r = inner[0]
+        if r > a:
+            orphans += (r - a) // 8
+            if r < end and w(r) != 0 and not crossed(r):
+                splits.append(r)
+            a = r
+        else:
+            a += 4
+    return splits, orphans
+
+
+def main():
+    args = [x for x in sys.argv[1:] if not x.startswith('--')]
+    slug = args[0]
+    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    elf = Elf((ROOT / 'orig' / slug / 'files' / boot).read_bytes())
+    splits, orphans = orphan_splits(elf, ghidra_starts(slug))
+    print('%s: %d orphan pieces, %d function starts added behind them' % (slug, orphans, len(splits)))
+    if '--check' in sys.argv:
+        return
+    lines = ['// Generated by tools/boundaries.py (see its docstring); splat symbol_addrs format.']
+    lines += ['func_%08X = 0x%08X; // type:func' % (a, a) for a in splits]
+    (ROOT / 'config' / ('boundaries.%s.txt' % slug)).write_text('\n'.join(lines) + '\n')
+
+
+if __name__ == '__main__':
+    main()

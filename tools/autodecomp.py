@@ -410,6 +410,24 @@ def decl_function(ident, d):
 
 
 # ---------------------------------------------------------------------------------------------------------- worker
+def is_orphan(words):
+    """Pieces of the form `<one non-branch instruction>; nop` (see tools/boundaries.py): not code of any function."""
+    if not words:
+        return False
+    for i, w in enumerate(words):
+        if i % 2 == 1 and w != 0:
+            return False
+        if i % 2 == 0 and (w == 0 or is_control(w)):
+            return False
+    return True
+
+
+def is_control(x):
+    op = x >> 26
+    return (op in (1, 2, 3, 4, 5, 6, 7, 0x14, 0x15, 0x16, 0x17) or (op == 0 and (x & 0x3F) in (8, 9, 12, 13))
+            or (op in (0x10, 0x11, 0x12) and (x >> 21) & 0x1F == 8))
+
+
 def worker_compile(jobs, tag='auto'):
     """jobs: list of (key, source text, flags). Compiles in one worker call. Returns {key: (rc, message, object bytes)}.
     Results are cached by hash of source and flags in build/auto/cache/."""
@@ -662,6 +680,10 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
     srcs = {}
     stack_alts = {}
     for f in fns:
+        if is_orphan(f['words']):
+            recs['0x%x' % f['addr']] = dict(name=f['name'], size=f['size'], region=f['region'], status='orphan',
+                                            reason='orphan piece (instruction + nop between functions): not code of a function')
+            continue
         if f['size'] <= 4:
             recs['0x%x' % f['addr']] = dict(name=f['name'], size=f['size'], region=f['region'], status='fragment',
                                             reason='a single instruction: not a function (split artifact)')

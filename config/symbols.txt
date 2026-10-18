@@ -2070,32 +2070,32 @@
 0x00179B58	0x8	func	func_00179B58	-	-
 0x00179B60	0x6C	func	func_00179B60	-	-
 0x00179BD0	0x8C	func	func_00179BD0	-	-
-0x00179C60	0x28	func	func_00179C60	RouteRequest_Clear	void RouteRequest_Clear(void * this)
+0x00179C60	0x28	func	Clear__Q29BlackGame12RouteRequest	RouteRequest_Clear	void RouteRequest_Clear(void * this)
 0x00179C88	0x34	func	func_00179C88	RouteRequest_Pump	void RouteRequest_Pump(void * this)
 0x00179CC0	0xC	func	func_00179CC0	-	-
-0x00179CD0	0xC	func	func_00179CD0	RouteRequest_PointCount	void RouteRequest_PointCount(void * this)
-0x00179CE0	0x5C	func	func_00179CE0	AIRoute_PointAt	undefined8 AIRoute_PointAt(RecoveredRouteRequest * request, int index)
-0x00179D40	0x18	func	func_00179D40	AIRoute_PointAddress	float * AIRoute_PointAddress(RecoveredRouteRequest * request, int index)
+0x00179CD0	0xC	func	PointCount__CQ29BlackGame12RouteRequest	RouteRequest_PointCount	void RouteRequest_PointCount(void * this)
+0x00179CE0	0x5C	func	RoutePointAt__9BlackGamePCQ29BlackGame12RouteRequesti	AIRoute_PointAt	undefined8 AIRoute_PointAt(RecoveredRouteRequest * request, int index)
+0x00179D40	0x18	func	RoutePointAddress__9BlackGamePCQ29BlackGame12RouteRequesti	AIRoute_PointAddress	float * AIRoute_PointAddress(RecoveredRouteRequest * request, int index)
 0x00179D58	0xF8	func	func_00179D58	AINavigation_SubmitRouteRequest	void AINavigation_SubmitRouteRequest(RecoveredRouteRequest * request, undefined8 from, undefined8 to, uchar reuse)
 0x00179E50	0x74	func	func_00179E50	AINavigation_SubmitRouteFromNode	void AINavigation_SubmitRouteFromNode(RecoveredRouteRequest * request, void * node, undefined8 to, uchar reuse)
-0x00179ED0	0x20	func	func_00179ED0	RouteRequest_Resubmit	void RouteRequest_Resubmit(void * this)
-0x00179EF0	0x24	func	func_00179EF0	RouteRequest_Release	void RouteRequest_Release(void * this)
-0x00179F18	0x48	func	func_00179F18	AIRoute_EndpointDistance	float AIRoute_EndpointDistance(RecoveredRouteRequest * request)
-0x00179F60	0x70	func	func_00179F60	AIRoute_BorrowStorage	void AIRoute_BorrowStorage(RecoveredRouteRequest * request, void * into)
+0x00179ED0	0x20	func	Resubmit__Q29BlackGame12RouteRequestx	RouteRequest_Resubmit	void RouteRequest_Resubmit(void * this)
+0x00179EF0	0x24	func	Release__Q29BlackGame12RouteRequest	RouteRequest_Release	void RouteRequest_Release(void * this)
+0x00179F18	0x48	func	EndpointDistance__9BlackGamePCQ29BlackGame12RouteRequest	AIRoute_EndpointDistance	float AIRoute_EndpointDistance(RecoveredRouteRequest * request)
+0x00179F60	0x70	func	BorrowStorage__9BlackGamePCQ29BlackGame12RouteRequestPQ29BlackGame12RouteStorage	AIRoute_BorrowStorage	void AIRoute_BorrowStorage(RecoveredRouteRequest * request, void * into)
 0x00179FD0	0x38	func	func_00179FD0	RouteRequest_ValidateRoute	void RouteRequest_ValidateRoute(RecoveredRouteRequest * request)
 0x0017A008	0x9C	func	func_0017A008	-	-
-0x0017A0A8	0xC4	func	func_0017A0A8	AIMovement_AdvanceRouteRequest	bool AIMovement_AdvanceRouteRequest(RecoveredRouteRequest * request)
-0x0017A170	0xB0	func	func_0017A170	AIMovement_BeginQueuedRoute	bool AIMovement_BeginQueuedRoute(RecoveredRouteRequest * request)
+0x0017A0A8	0xC4	func	AdvanceRouteRequest__9BlackGamePQ29BlackGame12RouteRequest	AIMovement_AdvanceRouteRequest	bool AIMovement_AdvanceRouteRequest(RecoveredRouteRequest * request)
+0x0017A170	0xB0	func	BeginQueuedRoute__9BlackGamePQ29BlackGame12RouteRequest	AIMovement_BeginQueuedRoute	bool AIMovement_BeginQueuedRoute(RecoveredRouteRequest * request)
 0x0017A220	0x100	func	func_0017A220	AIMovement_TryDirectRoute	bool AIMovement_TryDirectRoute(RecoveredRouteRequest * request)
-0x0017A320	0x80	func	func_0017A320	AIMovement_CollectRouteStart	bool AIMovement_CollectRouteStart(RecoveredRouteRequest * request)
-0x0017A3A0	0x108	func	func_0017A3A0	AIMovement_CollectRouteGoal	bool AIMovement_CollectRouteGoal(RecoveredRouteRequest * request)
-0x0017A4A8	0xE0	func	func_0017A4A8	AIMovement_RunTimedRouteSearch	bool AIMovement_RunTimedRouteSearch(RecoveredRouteRequest * request)
+0x0017A320	0x80	func	CollectRouteStart__9BlackGamePQ29BlackGame12RouteRequest	AIMovement_CollectRouteStart	bool AIMovement_CollectRouteStart(RecoveredRouteRequest * request)
+0x0017A3A0	0x108	func	CollectRouteGoal__9BlackGamePQ29BlackGame12RouteRequest	AIMovement_CollectRouteGoal	bool AIMovement_CollectRouteGoal(RecoveredRouteRequest * request)
+0x0017A4A8	0xE0	func	RunTimedRouteSearch__9BlackGamePQ29BlackGame12RouteRequest	AIMovement_RunTimedRouteSearch	bool AIMovement_RunTimedRouteSearch(RecoveredRouteRequest * request)
 0x0017A588	0x194	func	func_0017A588	AIMovement_CompressRouteStart	bool AIMovement_CompressRouteStart(RecoveredRouteRequest * request)
 0x0017A720	0x1B8	func	func_0017A720	AIMovement_CompressRouteEnd	bool AIMovement_CompressRouteEnd(RecoveredRouteRequest * request)
-0x0017A8D8	0xA4	func	func_0017A8D8	AIMovement_CheckFinalRouteLeg	bool AIMovement_CheckFinalRouteLeg(RecoveredRouteRequest * request)
-0x0017A980	0x10	func	func_0017A980	RouteRequest_SkipPoint	void RouteRequest_SkipPoint(RecoveredRouteRequest * request)
-0x0017A990	0x34	func	func_0017A990	RouteRequest_DropFinalPoint	void RouteRequest_DropFinalPoint(RecoveredRouteRequest * request)
-0x0017A9C8	0x2C	func	func_0017A9C8	RouteRequest_UpdateDestination	bool RouteRequest_UpdateDestination(void * this, longlong point)
+0x0017A8D8	0xA4	func	CheckFinalRouteLeg__9BlackGamePQ29BlackGame12RouteRequest	AIMovement_CheckFinalRouteLeg	bool AIMovement_CheckFinalRouteLeg(RecoveredRouteRequest * request)
+0x0017A980	0x10	func	SkipPoint__Q29BlackGame12RouteRequest	RouteRequest_SkipPoint	void RouteRequest_SkipPoint(RecoveredRouteRequest * request)
+0x0017A990	0x34	func	DropFinalPoint__Q29BlackGame12RouteRequest	RouteRequest_DropFinalPoint	void RouteRequest_DropFinalPoint(RecoveredRouteRequest * request)
+0x0017A9C8	0x2C	func	UpdateDestination__Q29BlackGame12RouteRequestx	RouteRequest_UpdateDestination	bool RouteRequest_UpdateDestination(void * this, longlong point)
 0x0017A9F8	0x148	func	func_0017A9F8	AIRoute_RemoveFirstPoint	void AIRoute_RemoveFirstPoint(RecoveredRouteRequest * request)
 0x0017AB40	0x394	func	func_0017AB40	AIRoute_AppendNode	void AIRoute_AppendNode(RecoveredRouteRequest * request, RecoveredRouteNode * node)
 0x0017AED8	0x48	func	func_0017AED8	AIRoute_SetEndpoint	void AIRoute_SetEndpoint(RecoveredRouteRequest * request)
@@ -2121,7 +2121,7 @@
 0x0017B3D0	0x1C	func	func_0017B3D0	AICover_BeginSearch	void AICover_BeginSearch(RecoveredNodeSearch * search)
 0x0017B3F0	0x13C	func	func_0017B3F0	AICover_AdvanceSearch	bool AICover_AdvanceSearch(RecoveredNodeSearch * search)
 0x0017B530	0xB8	func	func_0017B530	-	-
-0x0017B5E8	0x7C	func	func_0017B5E8	-	-
+0x0017B5E8	0x7C	func	TestCandidate__CQ29BlackGame10NodeSearchPCQ29BlackGame9RouteNode	-	-
 0x0017B668	0x1C	func	func_0017B668	-	-
 0x0017B688	0x34	func	func_0017B688	-	-
 0x0017B6C0	0x2C	func	func_0017B6C0	-	-
@@ -2223,22 +2223,22 @@
 0x00181470	0x74	func	func_00181470	-	-
 0x001814E8	0x74	func	func_001814E8	-	-
 0x00181560	0x74	func	func_00181560	-	-
-0x001815D8	0x84	func	func_001815D8	AIActionOwner_NotifyIdentityRemoved	void AIActionOwner_NotifyIdentityRemoved(RecoveredAIActionStack * stack, void * identity)
-0x00181660	0x1AC	func	func_00181660	AIActionStack_PushAndEnter	void AIActionStack_PushAndEnter(RecoveredAIActionStack * stack, uint kind, int argument)
-0x00181810	0x94	func	func_00181810	AIActionStack_RequestSuccessor	void AIActionStack_RequestSuccessor(RecoveredAIActionStack * stack, RecoveredAIActionHeader * action, uint kind, int argument)
-0x001818A8	0x60	func	func_001818A8	AIActionStack_Pop	void AIActionStack_Pop(RecoveredAIActionStack * stack)
+0x001815D8	0x84	func	NotifyIdentityRemoved__Q29BlackGame11ActionStackPv	AIActionOwner_NotifyIdentityRemoved	void AIActionOwner_NotifyIdentityRemoved(RecoveredAIActionStack * stack, void * identity)
+0x00181660	0x1AC	func	PushAndEnter__Q29BlackGame11ActionStackUii	AIActionStack_PushAndEnter	void AIActionStack_PushAndEnter(RecoveredAIActionStack * stack, uint kind, int argument)
+0x00181810	0x94	func	RequestSuccessor__Q29BlackGame11ActionStackPQ29BlackGame6ActionUii	AIActionStack_RequestSuccessor	void AIActionStack_RequestSuccessor(RecoveredAIActionStack * stack, RecoveredAIActionHeader * action, uint kind, int argument)
+0x001818A8	0x60	func	Pop__Q29BlackGame11ActionStack	AIActionStack_Pop	void AIActionStack_Pop(RecoveredAIActionStack * stack)
 0x00181908	0x54	func	func_00181908	AIActionStack_UnwindAbove	void AIActionStack_UnwindAbove(RecoveredAIActionStack * stack, int ordinal)
-0x00181960	0x30	func	func_00181960	AIActionStack_UnwindAction	void AIActionStack_UnwindAction(RecoveredAIActionStack * stack, RecoveredAIActionHeader * action)
+0x00181960	0x30	func	UnwindAction__Q29BlackGame11ActionStackPQ29BlackGame6Action	AIActionStack_UnwindAction	void AIActionStack_UnwindAction(RecoveredAIActionStack * stack, RecoveredAIActionHeader * action)
 0x00181990	0x5C	func	func_00181990	-	-
 0x001819F0	0x24	func	func_001819F0	-	-
-0x00181A18	0x78	func	func_00181A18	AIActionStack_FindAction	int AIActionStack_FindAction(RecoveredAIActionStack * stack, RecoveredAIActionHeader * action)
+0x00181A18	0x78	func	FindAction__CQ29BlackGame11ActionStackPCQ29BlackGame6Action	AIActionStack_FindAction	int AIActionStack_FindAction(RecoveredAIActionStack * stack, RecoveredAIActionHeader * action)
 0x00181A90	0x20	func	func_00181A90	-	-
 0x00181AB0	0x1C	func	func_00181AB0	-	-
 0x00181AD0	0x38	func	func_00181AD0	-	-
 0x00181B08	0x80	func	func_00181B08	-	-
-0x00181B88	0x94	func	func_00181B88	AIActionStack_DispatchEvent	void AIActionStack_DispatchEvent(RecoveredAIActionStack * stack, RecoveredAIQueuedActionEvent * event)
-0x00181C20	0xFC	func	func_00181C20	AIActionStack_ExpireTimers	void AIActionStack_ExpireTimers(RecoveredAIActionStack * stack)
-0x00181D20	0x7C	func	func_00181D20	AIActionStack_DeliverEvents	void AIActionStack_DeliverEvents(RecoveredAIActionStack * stack)
+0x00181B88	0x94	func	DispatchEvent__Q29BlackGame11ActionStackPQ29BlackGame17QueuedActionEvent	AIActionStack_DispatchEvent	void AIActionStack_DispatchEvent(RecoveredAIActionStack * stack, RecoveredAIQueuedActionEvent * event)
+0x00181C20	0xFC	func	ExpireTimers__Q29BlackGame11ActionStack	AIActionStack_ExpireTimers	void AIActionStack_ExpireTimers(RecoveredAIActionStack * stack)
+0x00181D20	0x7C	func	DeliverEvents__Q29BlackGame11ActionStack	AIActionStack_DeliverEvents	void AIActionStack_DeliverEvents(RecoveredAIActionStack * stack)
 0x00181DA0	0x58	func	func_00181DA0	-	-
 0x00181DF8	0xEC	func	func_00181DF8	AIActionStack_RetireFinished	void AIActionStack_RetireFinished(RecoveredAIActionStack * stack)
 0x00181EE8	0x38	func	func_00181EE8	-	-
@@ -2265,7 +2265,7 @@
 0x00182960	0x8	func	func_00182960	-	-
 0x00182968	0x38	func	func_00182968	-	-
 0x001829A0	0x8	func	func_001829A0	-	-
-0x001829A8	0x40	func	func_001829A8	AIAction_IsContinuingState	uint AIAction_IsContinuingState(RecoveredAIController * controller)
+0x001829A8	0x40	func	IsContinuingState__CQ29BlackGame10Controller	AIAction_IsContinuingState	uint AIAction_IsContinuingState(RecoveredAIController * controller)
 0x001829E8	0x24	func	func_001829E8	-	-
 0x00182A10	0x2C	func	func_00182A10	-	-
 0x00182A40	0x1C	func	func_00182A40	-	-
@@ -2471,7 +2471,7 @@
 0x0018AD88	0x54	func	func_0018AD88	-	-
 0x0018ADE0	0x1C	func	func_0018ADE0	-	-
 0x0018AE00	0x368	func	func_0018AE00	-	-
-0x0018B168	0x24	func	func_0018B168	StallGrace_Pending	void StallGrace_Pending(void * this)
+0x0018B168	0x24	func	Pending__CQ29BlackGame10StallGrace	StallGrace_Pending	void StallGrace_Pending(void * this)
 0x0018B190	0x26C	func	func_0018B190	-	-
 0x0018B400	0x54	func	func_0018B400	-	-
 0x0018B458	0x34	func	func_0018B458	-	-
@@ -2539,7 +2539,7 @@
 0x0018D9E8	0x8	func	func_0018D9E8	-	-
 0x0018D9F0	0x8	func	func_0018D9F0	-	-
 0x0018D9F8	0x44	func	func_0018D9F8	-	-
-0x0018DA40	0x44	func	func_0018DA40	-	-
+0x0018DA40	0x44	func	FamilySpeed__9BlackGamePCQ29BlackGame9FamilyRef	-	-
 0x0018DA88	0x2C	func	func_0018DA88	-	-
 0x0018DAB8	0x2C	func	func_0018DAB8	-	-
 0x0018DAE8	0x10	func	func_0018DAE8	-	-
@@ -2646,69 +2646,69 @@
 0x00191328	0x38	func	func_00191328	-	-
 0x00191360	0xF0	func	func_00191360	-	-
 0x00191450	0x114	func	func_00191450	-	-
-0x00191568	0x10	func	func_00191568	MovementMode_BindBase	void MovementMode_BindBase(void * this)
-0x00191578	0x60	func	func_00191578	MovementMode_ResetBase	void MovementMode_ResetBase(void * this)
-0x001915D8	0x10C	func	func_001915D8	-	-
+0x00191568	0x10	func	BindBase__Q29BlackGame16MovementModeBasePQ29BlackGame5Brain	MovementMode_BindBase	void MovementMode_BindBase(void * this)
+0x00191578	0x60	func	ResetBase__Q29BlackGame16MovementModeBase	MovementMode_ResetBase	void MovementMode_ResetBase(void * this)
+0x001915D8	0x10C	func	UpdateStallRecovery__Q29BlackGame16MovementModeBase	-	-
 0x001916E8	0x8C	func	func_001916E8	-	-
-0x00191778	0x10	func	func_00191778	MovementMode_Retarget	void MovementMode_Retarget(void * this, longlong point)
-0x00191788	0x1	func	func_00191788	MovementMode_Recover	bool MovementMode_Recover(void * this)
-0x00191790	0x8	func	func_00191790	MovementMode_Stop	void MovementMode_Stop(void * this)
-0x00191798	0x1	func	func_00191798	MovementMode_GetTarget	void MovementMode_GetTarget(void * this, longlong * result)
+0x00191778	0x10	func	Retarget__Q29BlackGame16MovementModeBasex	MovementMode_Retarget	void MovementMode_Retarget(void * this, longlong point)
+0x00191788	0x1	func	Recover__Q29BlackGame16MovementModeBase	MovementMode_Recover	bool MovementMode_Recover(void * this)
+0x00191790	0x8	func	Stop__Q29BlackGame16MovementModeBase	MovementMode_Stop	void MovementMode_Stop(void * this)
+0x00191798	0x1	func	GetTarget__CQ29BlackGame16MovementModeBase	MovementMode_GetTarget	void MovementMode_GetTarget(void * this, longlong * result)
 0x001917A0	0x284	func	func_001917A0	-	-
 0x00191A28	0x74	func	func_00191A28	-	-
 0x00191AA0	0x58	func	func_00191AA0	-	-
 0x00191AF8	0x44	func	func_00191AF8	-	-
-0x00191B40	0x38	func	func_00191B40	MovementMode_SetSegment	void MovementMode_SetSegment(void * this)
-0x00191B78	0x40	func	func_00191B78	MovementMode_IsOffRoute	void MovementMode_IsOffRoute(void * this)
-0x00191BB8	0x60	func	func_00191BB8	-	-
-0x00191C18	0x1	func	func_00191C18	MovementMode_UpdateTarget	bool MovementMode_UpdateTarget(void * this, longlong point)
-0x00191C20	0x28	func	func_00191C20	RouteMovementMode_Bind	void RouteMovementMode_Bind(void * this, void * brain)
+0x00191B40	0x38	func	SetSegment__Q29BlackGame16MovementModeBasexx	MovementMode_SetSegment	void MovementMode_SetSegment(void * this)
+0x00191B78	0x40	func	IsOffRoute__CQ29BlackGame16MovementModeBase	MovementMode_IsOffRoute	void MovementMode_IsOffRoute(void * this)
+0x00191BB8	0x60	func	MoveToRouteProjection__Q29BlackGame16MovementModeBase	-	-
+0x00191C18	0x1	func	UpdateTarget__Q29BlackGame16MovementModeBasex	MovementMode_UpdateTarget	bool MovementMode_UpdateTarget(void * this, longlong point)
+0x00191C20	0x28	func	Bind__Q29BlackGame9RouteModePQ29BlackGame5Brain	RouteMovementMode_Bind	void RouteMovementMode_Bind(void * this, void * brain)
 0x00191C48	0x38	func	func_00191C48	-	-
 0x00191C80	0xBC	func	func_00191C80	RouteMovementMode_Reset	bool RouteMovementMode_Reset(void * this)
 0x00191D40	0x1E8	func	func_00191D40	RouteMovementMode_Update	void RouteMovementMode_Update(void * this)
-0x00191F28	0x1B0	func	func_00191F28	AINavigation_ReleaseMovementRoute	void AINavigation_ReleaseMovementRoute(void * mode)
-0x001920D8	0x64	func	func_001920D8	RouteMovementMode_Start	void RouteMovementMode_Start(void * this, longlong point)
-0x00192140	0x98	func	func_00192140	RouteMovementMode_Retarget	void RouteMovementMode_Retarget(void * this, longlong point)
+0x00191F28	0x1B0	func	ReleaseMovementRoute__9BlackGamePQ29BlackGame9RouteMode	AINavigation_ReleaseMovementRoute	void AINavigation_ReleaseMovementRoute(void * mode)
+0x001920D8	0x64	func	Start__Q29BlackGame9RouteModex	RouteMovementMode_Start	void RouteMovementMode_Start(void * this, longlong point)
+0x00192140	0x98	func	Retarget__Q29BlackGame9RouteModex	RouteMovementMode_Retarget	void RouteMovementMode_Retarget(void * this, longlong point)
 0x001921D8	0x10C	func	func_001921D8	AIMovement_CompleteDestination	void AIMovement_CompleteDestination(void * mode, long resumeMotion)
 0x001922E8	0x94	func	func_001922E8	RouteMovementMode_GetTarget	void RouteMovementMode_GetTarget(void * this, longlong * result)
 0x00192380	0xF0	func	func_00192380	AIMovement_SetRoutePolicy	void AIMovement_SetRoutePolicy(void * mode, int policy)
 0x00192470	0xF0	func	func_00192470	-	-
-0x00192560	0x8	func	func_00192560	AIMovement_AcceptAvoidance	undefined8 AIMovement_AcceptAvoidance(void * mode, uint * heading, float * speed)
-0x00192568	0x8	func	func_00192568	AIMovement_FinishFollow	void AIMovement_FinishFollow(void * mode)
-0x00192570	0x64	func	func_00192570	RouteMode_ResolveSubmitted	void RouteMode_ResolveSubmitted(void * this)
-0x001925D8	0xBC	func	func_001925D8	-	-
+0x00192560	0x8	func	AcceptAvoidance__9BlackGamePQ29BlackGame9RouteModePUiPf	AIMovement_AcceptAvoidance	undefined8 AIMovement_AcceptAvoidance(void * mode, uint * heading, float * speed)
+0x00192568	0x8	func	FinishFollow__9BlackGamePQ29BlackGame9RouteMode	AIMovement_FinishFollow	void AIMovement_FinishFollow(void * mode)
+0x00192570	0x64	func	ResolveSubmitted__Q29BlackGame9RouteMode	RouteMode_ResolveSubmitted	void RouteMode_ResolveSubmitted(void * this)
+0x001925D8	0xBC	func	ResolveCurrent__Q29BlackGame9RouteMode	-	-
 0x00192698	0x364	func	func_00192698	AIMovement_FollowCurrentDestination	undefined8 AIMovement_FollowCurrentDestination(void * mode)
-0x00192A00	0x78	func	func_00192A00	RouteMode_StepPhase	void RouteMode_StepPhase(void * this)
+0x00192A00	0x78	func	StepPhase__Q29BlackGame9RouteMode	RouteMode_StepPhase	void RouteMode_StepPhase(void * this)
 0x00192A78	0x2CC	func	func_00192A78	AIMovement_AcceptCompletedRoute	void AIMovement_AcceptCompletedRoute(void * mode, RecoveredRouteRequest * request)
 0x00192D48	0x74	func	func_00192D48	AIMovement_IsAtFinalRoutePoint	uint AIMovement_IsAtFinalRoutePoint(void * mode)
-0x00192DC0	0x90	func	func_00192DC0	RouteMovementMode_Recover	bool RouteMovementMode_Recover(void * this)
-0x00192E50	0x5C	func	func_00192E50	RouteMovementMode_Stop	void RouteMovementMode_Stop(void * this)
+0x00192DC0	0x90	func	Recover__Q29BlackGame9RouteMode	RouteMovementMode_Recover	bool RouteMovementMode_Recover(void * this)
+0x00192E50	0x5C	func	Stop__Q29BlackGame9RouteMode	RouteMovementMode_Stop	void RouteMovementMode_Stop(void * this)
 0x00192EB0	0xFC	func	func_00192EB0	-	-
 0x00192FB0	0x90	func	func_00192FB0	RouteMovementMode_UpdateTarget	bool RouteMovementMode_UpdateTarget(void * this, longlong point)
-0x00193040	0xB8	func	func_00193040	AIMovement_RetargetLive	uint AIMovement_RetargetLive(void * mode, undefined8 point)
+0x00193040	0xB8	func	RetargetLive__9BlackGamePQ29BlackGame9RouteModex	AIMovement_RetargetLive	uint AIMovement_RetargetLive(void * mode, undefined8 point)
 0x001930F8	0x2F8	func	func_001930F8	AIMovement_JoinCompletedRoute	void AIMovement_JoinCompletedRoute(void * mode, RecoveredRouteRequest * next)
-0x001933F0	0x94	func	func_001933F0	AIMovement_TrimConsumedRoutePoints	void AIMovement_TrimConsumedRoutePoints(void * mode)
-0x00193488	0x1C	func	func_00193488	DirectMovementMode_Reset	bool DirectMovementMode_Reset(void * this)
+0x001933F0	0x94	func	TrimConsumedRoutePoints__9BlackGamePQ29BlackGame9RouteMode	AIMovement_TrimConsumedRoutePoints	void AIMovement_TrimConsumedRoutePoints(void * mode)
+0x00193488	0x1C	func	Reset__Q29BlackGame10DirectMode	DirectMovementMode_Reset	bool DirectMovementMode_Reset(void * this)
 0x001934A8	0xC0	func	func_001934A8	DirectMovementMode_Update	void DirectMovementMode_Update(void * this)
 0x00193568	0xA0	func	func_00193568	DirectMovementMode_Start	void DirectMovementMode_Start(void * this, longlong point)
 0x00193608	0xB4	func	func_00193608	-	-
 0x001936C0	0x1	func	func_001936C0	DirectMovementMode_UpdateTarget	bool DirectMovementMode_UpdateTarget(void * this, longlong point)
-0x00193700	0x20	func	func_00193700	FormationMovementMode_Reset	bool FormationMovementMode_Reset(void * this)
-0x00193720	0x54	func	func_00193720	FormationMovementMode_Update	void FormationMovementMode_Update(void * this)
+0x00193700	0x20	func	Reset__Q29BlackGame13FormationMode	FormationMovementMode_Reset	bool FormationMovementMode_Reset(void * this)
+0x00193720	0x54	func	Update__Q29BlackGame13FormationMode	FormationMovementMode_Update	void FormationMovementMode_Update(void * this)
 0x00193778	0xA0	func	func_00193778	FormationMovementMode_Start	void FormationMovementMode_Start(void * this, longlong point)
-0x00193818	0x64	func	func_00193818	FormationMovementMode_ContinueToGoal	void FormationMovementMode_ContinueToGoal(void)
+0x00193818	0x64	func	ContinueToGoal__Q29BlackGame13FormationMode	FormationMovementMode_ContinueToGoal	void FormationMovementMode_ContinueToGoal(void)
 0x00193880	0x3C	func	func_00193880	-	-
 0x001938C0	0xAC	func	func_001938C0	-	-
 0x00193980	0x8	func	func_00193980	-	-
 0x00193988	0x8	func	func_00193988	-	-
-0x00193990	0x50	func	func_00193990	AIAction_Complete	void AIAction_Complete(RecoveredAIActionHeader * action, bool result)
-0x001939E0	0x24	func	func_001939E0	AIAction_UnwindAbove	void AIAction_UnwindAbove(RecoveredAIActionHeader * action)
+0x00193990	0x50	func	Complete__Q29BlackGame6Actionb	AIAction_Complete	void AIAction_Complete(RecoveredAIActionHeader * action, bool result)
+0x001939E0	0x24	func	UnwindAbove__Q29BlackGame6Action	AIAction_UnwindAbove	void AIAction_UnwindAbove(RecoveredAIActionHeader * action)
 0x00193A08	0x20	func	func_00193A08	-	-
-0x00193A28	0x30	func	func_00193A28	AIAction_RequestSuccessor	void AIAction_RequestSuccessor(RecoveredAIActionHeader * action, uint kind, int argument)
+0x00193A28	0x30	func	RequestSuccessor__Q29BlackGame6ActionUii	AIAction_RequestSuccessor	void AIAction_RequestSuccessor(RecoveredAIActionHeader * action, uint kind, int argument)
 0x00193A60	0x68	func	func_00193A60	-	-
 0x00193AC8	0x30	func	func_00193AC8	-	-
-0x00193AF8	0x48	func	func_00193AF8	AIAction_IsDeadlineReady	bool AIAction_IsDeadlineReady(RecoveredAIActionHeader * action)
-0x00193B40	0x58	func	func_00193B40	AIAction_Record	RecoveredAICompletionRecord * AIAction_Record(RecoveredAIActionHeader * action)
+0x00193AF8	0x48	func	IsDeadlineReady__CQ29BlackGame6Action	AIAction_IsDeadlineReady	bool AIAction_IsDeadlineReady(RecoveredAIActionHeader * action)
+0x00193B40	0x58	func	Record__CQ29BlackGame6Action	AIAction_Record	RecoveredAICompletionRecord * AIAction_Record(RecoveredAIActionHeader * action)
 0x00193B98	0x20	func	func_00193B98	-	-
 0x00193BE8	0xDC	func	func_00193BE8	-	-
 0x00193CC8	0x4C	func	func_00193CC8	-	-
@@ -2816,7 +2816,7 @@
 0x00197C40	0x1C	func	func_00197C40	-	-
 0x00197C60	0x8C	func	func_00197C60	-	-
 0x00197CF0	0x54	func	func_00197CF0	-	-
-0x00197D48	0x4C	func	func_00197D48	AIAction_LeaveReactionWait	void AIAction_LeaveReactionWait(RecoveredAIActionHeader * action)
+0x00197D48	0x4C	func	LeaveReactionWait__Q29BlackGame6Action	AIAction_LeaveReactionWait	void AIAction_LeaveReactionWait(RecoveredAIActionHeader * action)
 0x00197DA0	0x80	func	func_00197DA0	-	-
 0x00197E20	0x144	func	func_00197E20	-	-
 0x00197F68	0x64	func	func_00197F68	-	-
@@ -2824,7 +2824,7 @@
 0x00198018	0x334	func	func_00198018	-	-
 0x00198350	0x34	func	func_00198350	-	-
 0x00198388	0xCC	func	func_00198388	-	-
-0x00198458	0x4C	func	func_00198458	AIAction_LeaveMovementPermission	void AIAction_LeaveMovementPermission(RecoveredAIActionHeader * action)
+0x00198458	0x4C	func	LeaveMovementPermission__Q29BlackGame6Action	AIAction_LeaveMovementPermission	void AIAction_LeaveMovementPermission(RecoveredAIActionHeader * action)
 0x001984A8	0x1C	func	func_001984A8	-	-
 0x001984F0	0x74	func	func_001984F0	-	-
 0x00198568	0x1C	func	func_00198568	-	-
@@ -6725,8 +6725,8 @@
 0x002D11D0	0x64	func	func_002D11D0	-	-
 0x002D1240	0x2F0	func	func_002D1240	-	-
 0x002D1530	0x3C	func	func_002D1530	-	-
-0x002D15A0	0x6C	func	func_002D15A0	-	-
-0x002D1610	0x80	func	func_002D1610	-	-
+0x002D15A0	0x6C	func	Kaim_AllIdsValid__Fv	-	-
+0x002D1610	0x80	func	CreateBehavior2845BC__4KaimPQ24Kaim7Context	-	-
 0x002D16B8	0x25C	func	func_002D16B8	-	-
 0x002D1918	0x2B0	func	func_002D1918	-	-
 0x002D1BC8	0x17C	func	func_002D1BC8	-	-
@@ -6738,8 +6738,8 @@
 0x002D2CE8	0x60	func	func_002D2CE8	-	-
 0x002D2D48	0x70	func	func_002D2D48	-	-
 0x002D2DB8	0x8C	func	func_002D2DB8	-	-
-0x002D2E48	0x20	func	func_002D2E48	-	-
-0x002D2E68	0x28	func	func_002D2E68	-	-
+0x002D2E48	0x20	func	IsSet__C7Chain0C	-	-
+0x002D2E68	0x28	func	HasBoth__C9BothIds60	-	-
 0x002D2F48	0x34	func	func_002D2F48	-	-
 0x002D2F80	0x38	func	func_002D2F80	-	-
 0x002D2FB8	0x20	func	func_002D2FB8	-	-
@@ -6751,8 +6751,8 @@
 0x002D34C0	0x60	func	func_002D34C0	-	-
 0x002D3520	0x40	func	func_002D3520	-	-
 0x002D3560	0x58	func	func_002D3560	-	-
-0x002D35B8	0xC	func	func_002D35B8	-	-
-0x002D35C8	0x10	func	func_002D35C8	-	-
+0x002D35B8	0xC	func	IsSet__C7IsSet0C	-	-
+0x002D35C8	0x10	func	HasId__C7HasId2C	-	-
 0x002D35D8	0x38	func	func_002D35D8	-	-
 0x002D3610	0x98	func	func_002D3610	-	-
 0x002D36A8	0x130	func	func_002D36A8	-	-
@@ -6763,13 +6763,13 @@
 0x002D3970	0x60	func	func_002D3970	-	-
 0x002D39D0	0x40	func	func_002D39D0	-	-
 0x002D3A10	0x58	func	func_002D3A10	-	-
-0x002D3A68	0xC	func	func_002D3A68	-	-
+0x002D3A68	0xC	func	IsSet__C7IsSet0C	-	-
 0x002D3A78	0x88	func	func_002D3A78	-	-
 0x002D3B08	0xA0	func	func_002D3B08	-	-
 0x002D3BA8	0x2C	func	func_002D3BA8	-	-
 0x002D3C50	0x20	func	func_002D3C50	-	-
 0x002D3C70	0x20	func	func_002D3C70	-	-
-0x002D3C90	0x80	func	func_002D3C90	-	-
+0x002D3C90	0x80	func	CreateBehavior28441C__4KaimPQ24Kaim7Context	-	-
 0x002D3D38	0x1D4	func	func_002D3D38	-	-
 0x002D3F10	0x238	func	func_002D3F10	-	-
 0x002D4148	0x17C	func	func_002D4148	-	-
@@ -6782,9 +6782,9 @@
 0x002D5068	0x80	func	func_002D5068	-	-
 0x002D50E8	0x8C	func	func_002D50E8	-	-
 0x002D5178	0x1C	func	func_002D5178	-	-
-0x002D5198	0x28	func	func_002D5198	-	-
-0x002D51C0	0x74	func	func_002D51C0	-	-
-0x002D5238	0xC	func	func_002D5238	-	-
+0x002D5198	0x28	func	HasBoth__C9BothIds28	-	-
+0x002D51C0	0x74	func	ResetState__Q24Kaim14Behavior28441C	-	-
+0x002D5238	0xC	func	IsSet__C7IsSet50	-	-
 0x002D5248	0xE0	func	func_002D5248	-	-
 0x002D5398	0x14	func	func_002D5398	-	-
 0x002D53B0	0x20	func	func_002D53B0	-	-
@@ -6797,11 +6797,11 @@
 0x002D6218	0x60	func	func_002D6218	-	-
 0x002D6278	0x58	func	func_002D6278	-	-
 0x002D62D0	0xF0	func	func_002D62D0	-	-
-0x002D63C0	0xC	func	func_002D63C0	-	-
-0x002D63D0	0xC	func	func_002D63D0	-	-
+0x002D63C0	0xC	func	IsSet__C7IsSet0C	-	-
+0x002D63D0	0xC	func	IsSet__C7IsSet10	-	-
 0x002D63E0	0x60	func	func_002D63E0	-	-
 0x002D6440	0x1C	func	func_002D6440	-	-
-0x002D6460	0x20	func	func_002D6460	-	-
+0x002D6460	0x20	func	IsSet__C7HasLink	-	-
 0x002D6480	0x54	func	func_002D6480	-	-
 0x002D65A8	0x20	func	func_002D65A8	-	-
 0x002D65C8	0x20	func	func_002D65C8	-	-
@@ -6814,9 +6814,9 @@
 0x002D6FA8	0x60	func	func_002D6FA8	-	-
 0x002D7008	0x60	func	func_002D7008	-	-
 0x002D7068	0x58	func	func_002D7068	-	-
-0x002D70C0	0x20	func	func_002D70C0	-	-
-0x002D70E0	0x28	func	func_002D70E0	-	-
-0x002D7108	0x10	func	func_002D7108	-	-
+0x002D70C0	0x20	func	IsSet__C7Chain50	-	-
+0x002D70E0	0x28	func	IsSet__C8Either54	-	-
+0x002D7108	0x10	func	HasId__C7HasId68	-	-
 0x002D7118	0xCC	func	func_002D7118	-	-
 0x002D7220	0x20	func	func_002D7220	-	-
 0x002D7240	0x20	func	func_002D7240	-	-
@@ -6826,71 +6826,71 @@
 0x002D7500	0x58	func	func_002D7500	-	-
 0x002D7558	0x58	func	func_002D7558	-	-
 0x002D75B0	0xE0	func	func_002D75B0	-	-
-0x002D7690	0xC	func	func_002D7690	-	-
+0x002D7690	0xC	func	IsSet__C7IsSet24	-	-
 0x002D76A0	0xA4	func	func_002D76A0	-	-
 0x002D7748	0x54	func	func_002D7748	-	-
 0x002D77A0	0x9C	func	func_002D77A0	-	-
 0x002D7840	0xEC	func	func_002D7840	-	-
 0x002D7930	0x20	func	func_002D7930	-	-
 0x002D7950	0x20	func	func_002D7950	-	-
-0x002D7970	0x70	func	func_002D7970	-	-
+0x002D7970	0x70	func	CreateParameter284828__Fv	-	-
 0x002D79E0	0x54	func	func_002D79E0	-	-
 0x002D7A38	0x7C	func	func_002D7A38	-	-
 0x002D7AB8	0x20	func	func_002D7AB8	-	-
 0x002D7AD8	0x20	func	func_002D7AD8	-	-
-0x002D7AF8	0x70	func	func_002D7AF8	-	-
+0x002D7AF8	0x70	func	CreateParameter284808__Fv	-	-
 0x002D7B68	0x54	func	func_002D7B68	-	-
 0x002D7BC0	0x7C	func	func_002D7BC0	-	-
 0x002D7C40	0x20	func	func_002D7C40	-	-
 0x002D7C60	0x20	func	func_002D7C60	-	-
-0x002D7C80	0x70	func	func_002D7C80	-	-
+0x002D7C80	0x70	func	CreateParameter2847EC__Fv	-	-
 0x002D7CF0	0x54	func	func_002D7CF0	-	-
 0x002D7D48	0x7C	func	func_002D7D48	-	-
 0x002D7DC8	0x20	func	func_002D7DC8	-	-
 0x002D7DE8	0x20	func	func_002D7DE8	-	-
-0x002D7E08	0x70	func	func_002D7E08	-	-
+0x002D7E08	0x70	func	CreateParameter2846A0__Fv	-	-
 0x002D7E78	0x54	func	func_002D7E78	-	-
 0x002D7ED0	0x7C	func	func_002D7ED0	-	-
 0x002D7F50	0x20	func	func_002D7F50	-	-
 0x002D7F70	0x20	func	func_002D7F70	-	-
-0x002D7F90	0x70	func	func_002D7F90	-	-
+0x002D7F90	0x70	func	CreateParameter2847AC__Fv	-	-
 0x002D8000	0x54	func	func_002D8000	-	-
 0x002D8058	0x9C	func	func_002D8058	-	-
 0x002D80F8	0x20	func	func_002D80F8	-	-
 0x002D8118	0x20	func	func_002D8118	-	-
-0x002D8138	0x70	func	func_002D8138	-	-
+0x002D8138	0x70	func	CreateParameter2846C4__Fv	-	-
 0x002D81A8	0x54	func	func_002D81A8	-	-
 0x002D8200	0x7C	func	func_002D8200	-	-
 0x002D8280	0x20	func	func_002D8280	-	-
 0x002D82A0	0x20	func	func_002D82A0	-	-
-0x002D82C0	0x70	func	func_002D82C0	-	-
+0x002D82C0	0x70	func	CreateParameter2847CC__Fv	-	-
 0x002D8330	0x54	func	func_002D8330	-	-
 0x002D8388	0x7C	func	func_002D8388	-	-
 0x002D8408	0x20	func	func_002D8408	-	-
 0x002D8428	0x20	func	func_002D8428	-	-
-0x002D8448	0x12C	func	func_002D8448	-	-
+0x002D8448	0x12C	func	Kaim_AllClassesRegistered__4Kaimv	-	-
 0x002D8578	0x130	func	func_002D8578	-	-
-0x002D86A8	0x70	func	func_002D86A8	-	-
+0x002D86A8	0x70	func	CreateParameter28486C__Fv	-	-
 0x002D8718	0x54	func	func_002D8718	-	-
-0x002D8770	0x74	func	func_002D8770	-	-
+0x002D8770	0x74	func	__as__9ParamFlagRC13ParameterRoot	-	-
 0x002D87E8	0x20	func	func_002D87E8	-	-
 0x002D8808	0x20	func	func_002D8808	-	-
-0x002D8828	0x68	func	func_002D8828	-	-
+0x002D8828	0x68	func	CreateParameter28484C__Fv	-	-
 0x002D8890	0x54	func	func_002D8890	-	-
 0x002D88E8	0x8C	func	func_002D88E8	-	-
 0x002D8978	0x20	func	func_002D8978	-	-
 0x002D8998	0x20	func	func_002D8998	-	-
-0x002D89B8	0x68	func	func_002D89B8	-	-
+0x002D89B8	0x68	func	CreateParameter284768__Fv	-	-
 0x002D8A20	0x54	func	func_002D8A20	-	-
 0x002D8A78	0x8C	func	func_002D8A78	-	-
 0x002D8B08	0x20	func	func_002D8B08	-	-
 0x002D8B28	0x20	func	func_002D8B28	-	-
-0x002D8B48	0x68	func	func_002D8B48	-	-
+0x002D8B48	0x68	func	CreateParameter284928__Fv	-	-
 0x002D8BB0	0x54	func	func_002D8BB0	-	-
 0x002D8C08	0x8C	func	func_002D8C08	-	-
 0x002D8C98	0x20	func	func_002D8C98	-	-
 0x002D8CB8	0x20	func	func_002D8CB8	-	-
-0x002D8CD8	0x68	func	func_002D8CD8	-	-
+0x002D8CD8	0x68	func	CreateParameter284900__Fv	-	-
 0x002D8D40	0x54	func	func_002D8D40	-	-
 0x002D8D98	0x88	func	func_002D8D98	-	-
 0x002D8E20	0x20	func	func_002D8E20	-	-
@@ -6900,7 +6900,7 @@
 0x002D8F50	0x70	func	func_002D8F50	-	-
 0x002D8FC0	0x20	func	func_002D8FC0	-	-
 0x002D8FE0	0x20	func	func_002D8FE0	-	-
-0x002D9000	0x68	func	func_002D9000	-	-
+0x002D9000	0x68	func	CreateParameter2848DC__Fv	-	-
 0x002D9068	0x54	func	func_002D9068	-	-
 0x002D90C0	0x8C	func	func_002D90C0	-	-
 0x002D9150	0x20	func	func_002D9150	-	-
@@ -6915,12 +6915,12 @@
 0x002D9418	0x70	func	func_002D9418	-	-
 0x002D9488	0x20	func	func_002D9488	-	-
 0x002D94A8	0x20	func	func_002D94A8	-	-
-0x002D94C8	0x74	func	func_002D94C8	-	-
+0x002D94C8	0x74	func	CreateParameter28478C__Fv	-	-
 0x002D9540	0x54	func	func_002D9540	-	-
-0x002D9598	0x74	func	func_002D9598	-	-
+0x002D9598	0x74	func	__as__8ParamIntRC13ParameterRoot	-	-
 0x002D9610	0x20	func	func_002D9610	-	-
 0x002D9630	0x20	func	func_002D9630	-	-
-0x002D9650	0x68	func	func_002D9650	-	-
+0x002D9650	0x68	func	CreateParameter28488C__Fv	-	-
 0x002D96B8	0x54	func	func_002D96B8	-	-
 0x002D9710	0x8C	func	func_002D9710	-	-
 0x002D97A0	0x20	func	func_002D97A0	-	-
@@ -6936,28 +6936,28 @@
 0x002D9AE8	0x70	func	func_002D9AE8	-	-
 0x002D9B58	0x20	func	func_002D9B58	-	-
 0x002D9B78	0x20	func	func_002D9B78	-	-
-0x002D9B98	0x70	func	func_002D9B98	-	-
+0x002D9B98	0x70	func	CreateParameter2849BC__Fv	-	-
 0x002D9C08	0x54	func	func_002D9C08	-	-
 0x002D9C60	0x7C	func	func_002D9C60	-	-
 0x002D9CE0	0x20	func	func_002D9CE0	-	-
 0x002D9D00	0x20	func	func_002D9D00	-	-
-0x002D9D20	0x70	func	func_002D9D20	-	-
+0x002D9D20	0x70	func	CreateParameter284998__Fv	-	-
 0x002D9D90	0x54	func	func_002D9D90	-	-
 0x002D9DE8	0x84	func	func_002D9DE8	-	-
 0x002D9E70	0x20	func	func_002D9E70	-	-
 0x002D9E90	0x20	func	func_002D9E90	-	-
-0x002D9EB0	0x70	func	func_002D9EB0	-	-
+0x002D9EB0	0x70	func	CreateParameter284974__Fv	-	-
 0x002D9F20	0x54	func	func_002D9F20	-	-
 0x002D9F78	0x84	func	func_002D9F78	-	-
 0x002DA000	0x20	func	func_002DA000	-	-
 0x002DA020	0x20	func	func_002DA020	-	-
-0x002DA040	0x70	func	func_002DA040	-	-
+0x002DA040	0x70	func	CreateParameter28494C__Fv	-	-
 0x002DA0B0	0x54	func	func_002DA0B0	-	-
 0x002DA108	0x7C	func	func_002DA108	-	-
 0x002DA188	0x20	func	func_002DA188	-	-
 0x002DA1A8	0x20	func	func_002DA1A8	-	-
 0x002DA1C8	0x3C	func	func_002DA1C8	-	-
-0x002DA208	0x70	func	func_002DA208	-	-
+0x002DA208	0x70	func	CreateObject4E410__Fv	-	-
 0x002DA2A0	0x90	func	func_002DA2A0	-	-
 0x002DA348	0xE0	func	func_002DA348	-	-
 0x002DA428	0x28C	func	func_002DA428	-	-
@@ -6982,11 +6982,11 @@
 0x002DC238	0x5A8	func	func_002DC238	-	-
 0x002DC7E0	0x60	func	func_002DC7E0	-	-
 0x002DC840	0x60	func	func_002DC840	-	-
-0x002DC8A0	0x8C	func	func_002DC8A0	-	-
+0x002DC8A0	0x8C	func	FindIndex__8NameListPCcPUi	-	-
 0x002DC930	0xBC	func	func_002DC930	-	-
 0x002DCA00	0x20	func	func_002DCA00	-	-
 0x002DCA20	0x20	func	func_002DCA20	-	-
-0x002DCA40	0x70	func	func_002DCA40	-	-
+0x002DCA40	0x70	func	CreateObject4E750__Fv	-	-
 0x002DCAD8	0x90	func	func_002DCAD8	-	-
 0x002DCB80	0xE0	func	func_002DCB80	-	-
 0x002DCC60	0x28C	func	func_002DCC60	-	-
@@ -7013,17 +7013,17 @@
 0x002DF2A0	0xE0	func	func_002DF2A0	-	-
 0x002DF380	0x3C	func	func_002DF380	-	-
 0x002DF3D8	0xB4	func	func_002DF3D8	-	-
-0x002DF650	0x8	func	func_002DF650	-	-
+0x002DF650	0x8	func	SetChanged__5Labelc	-	-
 0x002DF658	0x150	func	func_002DF658	-	-
 0x002DF7A8	0x120	func	func_002DF7A8	-	-
-0x002DF8C8	0x1C	func	func_002DF8C8	-	-
+0x002DF8C8	0x1C	func	__Q24Kaim9BufferAt4	-	-
 0x002DF8E8	0x78	func	func_002DF8E8	-	-
 0x002DF960	0x3C	func	func_002DF960	-	-
 0x002DF9B8	0xAC	func	func_002DF9B8	-	-
 0x002DFA68	0x98	func	func_002DFA68	-	-
 0x002DFB00	0xDC	func	func_002DFB00	-	-
-0x002DFBF8	0x40	func	func_002DFBF8	-	-
-0x002DFC38	0xD0	func	func_002DFC38	-	-
+0x002DFBF8	0x40	func	ClearActivation__10ActionBank	-	-
+0x002DFC38	0xD0	func	_$_Q24Kaim16PointerBankOwner	-	-
 0x002DFD08	0xC0	func	func_002DFD08	-	-
 0x002DFDC8	0x40	func	func_002DFDC8	-	-
 0x002DFE08	0x34	func	func_002DFE08	-	-
@@ -7041,19 +7041,19 @@
 0x002E0C30	0xC4	func	func_002E0C30	-	-
 0x002E0D20	0x1DC	func	func_002E0D20	-	-
 0x002E0F00	0x120	func	func_002E0F00	-	-
-0x002E1038	0x1C	func	func_002E1038	-	-
+0x002E1038	0x1C	func	Entity_ApplyA__FP12EntityObjectii	-	-
 0x002E1058	0x1C	func	func_002E1058	-	-
-0x002E1078	0x1C	func	func_002E1078	-	-
+0x002E1078	0x1C	func	Entity_ApplyC__FP12EntityObjectii	-	-
 0x002E1098	0x1C	func	func_002E1098	-	-
-0x002E10B8	0x20	func	func_002E10B8	-	-
+0x002E10B8	0x20	func	GrowthCounter_Double__Fv	-	-
 0x002E10D8	0x1C	func	func_002E10D8	-	-
 0x002E10F8	0x1C	func	func_002E10F8	-	-
 0x002E1118	0x84	func	func_002E1118	-	-
-0x002E11A0	0x68	func	func_002E11A0	-	-
+0x002E11A0	0x68	func	Kaim_DestroyEngine__4KaimPQ24Kaim16ReleasableEngine	-	-
 0x002E1208	0x20	func	func_002E1208	-	-
 0x002E1228	0x20	func	func_002E1228	-	-
-0x002E1248	0x38	func	func_002E1248	-	-
-0x002E1280	0x2C	func	func_002E1280	-	-
+0x002E1248	0x38	func	Notifiable_TryAccept__FP10NotifiableP8SlotUser	-	-
+0x002E1280	0x2C	func	Entity_Query__FP12EntityObjecti	-	-
 0x002E12B0	0xCC	func	func_002E12B0	-	-
 0x002E1380	0x34	func	func_002E1380	-	-
 0x002E13B8	0x7C	func	func_002E13B8	-	-
@@ -7064,7 +7064,7 @@
 0x002E1548	0x154	func	func_002E1548	-	-
 0x002E16B8	0x160	func	func_002E16B8	-	-
 0x002E1818	0x2F0	func	func_002E1818	-	-
-0x002E1B08	0xB8	func	func_002E1B08	-	-
+0x002E1B08	0xB8	func	Sweep__Q24Kaim14ComponentSweep	-	-
 0x002E1BC0	0x98	func	func_002E1BC0	-	-
 0x002E1C58	0xB8	func	func_002E1C58	-	-
 0x002E1D10	0x98	func	func_002E1D10	-	-
@@ -7082,29 +7082,29 @@
 0x002E2B78	0x19C	func	func_002E2B78	-	-
 0x002E2D40	0x1AC	func	func_002E2D40	Kaim_ChildBuffer_AddChild	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_AddChild(PS2KaimChildBuffer * self)
 0x002E2EF0	0x1D0	func	func_002E2EF0	-	-
-0x002E3100	0xE0	func	func_002E3100	Kaim_ChildBuffer_FindChild	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_FindChild(PS2KaimChildBuffer * self, char * name, char * first)
-0x002E31E0	0xA4	func	func_002E31E0	Kaim_ChildBuffer_FindByName	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_FindByName(PS2KaimChildBuffer * self, char * name)
+0x002E3100	0xE0	func	FindChild__CQ24Kaim12ChildBuffersPCcT1	Kaim_ChildBuffer_FindChild	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_FindChild(PS2KaimChildBuffer * self, char * name, char * first)
+0x002E31E0	0xA4	func	FindBySecond__CQ24Kaim12ChildBuffersPCc	Kaim_ChildBuffer_FindByName	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_FindByName(PS2KaimChildBuffer * self, char * name)
 0x002E3288	0xA4	func	func_002E3288	-	-
-0x002E3330	0xAC	func	func_002E3330	Kaim_ChildBuffer_FindValue	char * __stdcall Kaim_ChildBuffer_FindValue(PS2KaimChildBuffer * buffer, char * name)
-0x002E33E0	0x28	func	func_002E33E0	Kaim_ChildBuffer_GetChildAt	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_GetChildAt(PS2KaimChildBuffer * buffer, uint index)
-0x002E3408	0x34	func	func_002E3408	-	-
+0x002E3330	0xAC	func	FindThirdBySecond__CQ24Kaim12ChildBuffersPCc	Kaim_ChildBuffer_FindValue	char * __stdcall Kaim_ChildBuffer_FindValue(PS2KaimChildBuffer * buffer, char * name)
+0x002E33E0	0x28	func	GetChild__CQ24Kaim12ChildBuffersUi	Kaim_ChildBuffer_GetChildAt	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_GetChildAt(PS2KaimChildBuffer * buffer, uint index)
+0x002E3408	0x34	func	__Q24Kaim12ChildBuffers	-	-
 0x002E3440	0x5C	func	func_002E3440	-	-
-0x002E34B8	0xC0	func	func_002E34B8	-	-
-0x002E3578	0xB4	func	func_002E3578	Kaim_ChildBuffer_SetFirst	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_SetFirst(PS2KaimChildBuffer * self, char * text)
-0x002E3630	0xB4	func	func_002E3630	Kaim_ChildBuffer_SetName	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_SetName(PS2KaimChildBuffer * self, char * text)
-0x002E36E8	0xB4	func	func_002E36E8	Kaim_ChildBuffer_SetValue	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_SetValue(PS2KaimChildBuffer * self, char * text)
-0x002E37A0	0x84	func	func_002E37A0	-	-
+0x002E34B8	0xC0	func	_$_Q24Kaim12ChildBuffers	-	-
+0x002E3578	0xB4	func	SetFirst__Q24Kaim12ChildBuffersPCc	Kaim_ChildBuffer_SetFirst	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_SetFirst(PS2KaimChildBuffer * self, char * text)
+0x002E3630	0xB4	func	SetSecond__Q24Kaim12ChildBuffersPCc	Kaim_ChildBuffer_SetName	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_SetName(PS2KaimChildBuffer * self, char * text)
+0x002E36E8	0xB4	func	SetThird__Q24Kaim12ChildBuffersPCc	Kaim_ChildBuffer_SetValue	PS2KaimChildBuffer * __stdcall Kaim_ChildBuffer_SetValue(PS2KaimChildBuffer * self, char * text)
+0x002E37A0	0x84	func	DeleteChildren__Q24Kaim12ChildBuffers	-	-
 0x002E3828	0xF0	func	func_002E3828	-	-
 0x002E3918	0x8	func	func_002E3918	-	-
-0x002E3920	0x8	func	func_002E3920	Kaim_ChildBuffer_GetName	char * __stdcall Kaim_ChildBuffer_GetName(PS2KaimChildBuffer * buffer)
+0x002E3920	0x8	func	GetSecond__CQ24Kaim12ChildBuffers	Kaim_ChildBuffer_GetName	char * __stdcall Kaim_ChildBuffer_GetName(PS2KaimChildBuffer * buffer)
 0x002E3928	0x3B8	func	func_002E3928	-	-
 0x002E3D28	0x1E4	func	func_002E3D28	-	-
 0x002E3F28	0x9C	func	func_002E3F28	-	-
-0x002E3FC8	0x80	func	func_002E3FC8	-	-
+0x002E3FC8	0x80	func	__8Settingsii	-	-
 0x002E4048	0x28	func	func_002E4048	-	-
-0x002E4070	0xF0	func	func_002E4070	-	-
+0x002E4070	0xF0	func	__as__8SettingsRC8Settings	-	-
 0x002E4160	0x24	func	func_002E4160	-	-
-0x002E4188	0xC	func	func_002E4188	-	-
+0x002E4188	0xC	func	Kaim_GetFlag__Fv	-	-
 0x002E4198	0x20	func	func_002E4198	-	-
 0x002E41B8	0x20	func	func_002E41B8	-	-
 0x002E41D8	0x39C	func	func_002E41D8	-	-
@@ -7112,7 +7112,7 @@
 0x002E4860	0x2F4	func	func_002E4860	-	-
 0x002E4B98	0xC8	func	func_002E4B98	-	-
 0x002E4C60	0x44	func	func_002E4C60	-	-
-0x002E4CA8	0x34	func	func_002E4CA8	Kaim_Entity_ResetBrain	void __stdcall Kaim_Entity_ResetBrain(void * entity)
+0x002E4CA8	0x34	func	RunTarget__9Forwarder	Kaim_Entity_ResetBrain	void __stdcall Kaim_Entity_ResetBrain(void * entity)
 0x002E4CE0	0x34	func	func_002E4CE0	Kaim_Entity_GetAttribute	void * __stdcall Kaim_Entity_GetAttribute(void * entity, int * key)
 0x002E4D18	0x6C	func	func_002E4D18	-	-
 0x002E4D88	0x3C	func	func_002E4D88	-	-
@@ -7161,7 +7161,7 @@
 0x002E7440	0x3C	func	func_002E7440	-	-
 0x002E74A0	0x20	func	func_002E74A0	-	-
 0x002E74C0	0x20	func	func_002E74C0	-	-
-0x002E74E0	0xD8	func	func_002E74E0	Kaim_BrainService_Configure	int __stdcall Kaim_BrainService_Configure(void * service, PS2KaimChildBuffer * buffer)
+0x002E74E0	0xD8	func	ConfigureAll__Q24Kaim10ConfigHostPQ24Kaim12ChildBuffers	Kaim_BrainService_Configure	int __stdcall Kaim_BrainService_Configure(void * service, PS2KaimChildBuffer * buffer)
 0x002E75B8	0x18	func	func_002E75B8	Kaim_BrainService_Construct	void * __stdcall Kaim_BrainService_Construct(void * service, void * owner)
 0x002E75D0	0x3C	func	func_002E75D0	-	-
 0x002E7610	0x3C	func	func_002E7610	-	-
@@ -7178,7 +7178,7 @@
 0x002E8FA0	0x118	func	func_002E8FA0	-	-
 0x002E90B8	0x108	func	func_002E90B8	-	-
 0x002E91C0	0x94	func	func_002E91C0	Kaim_ParameterTables_Get	PS2KaimParameterTables * Kaim_ParameterTables_Get(void)
-0x002E9280	0xA4	func	func_002E9280	-	-
+0x002E9280	0xA4	func	_$_Q24Kaim10BufferTrio	-	-
 0x002E9328	0x8C	func	func_002E9328	-	-
 0x002E93B8	0x80	func	func_002E93B8	-	-
 0x002E9438	0x80	func	func_002E9438	-	-
@@ -7189,7 +7189,7 @@
 0x002E95A0	0x2C	func	func_002E95A0	-	-
 0x002E95D0	0x2C	func	func_002E95D0	-	-
 0x002E9600	0x2C	func	func_002E9600	-	-
-0x002E9630	0x14	func	func_002E9630	-	-
+0x002E9630	0x14	func	GetValue__10FloatTablei	-	-
 0x002E9648	0xAC	func	func_002E9648	-	-
 0x002E96F8	0xB4	func	func_002E96F8	-	-
 0x002E97B0	0xB4	func	func_002E97B0	-	-
@@ -7200,7 +7200,7 @@
 0x002E9B30	0x98	func	func_002E9B30	-	-
 0x002E9BC8	0xE8	func	func_002E9BC8	-	-
 0x002E9CB0	0x14	func	func_002E9CB0	-	-
-0x002E9CC8	0x44	func	func_002E9CC8	-	-
+0x002E9CC8	0x44	func	Kaim_ReleaseService__Fv	-	-
 0x002E9D10	0x3C	func	func_002E9D10	-	-
 0x002E9D50	0x64	func	func_002E9D50	-	-
 0x002E9DB8	0x64	func	func_002E9DB8	-	-
@@ -7221,12 +7221,12 @@
 0x002EABB0	0x1A8	func	func_002EABB0	-	-
 0x002EAD58	0x1B4	func	func_002EAD58	-	-
 0x002EAF30	0x304	func	func_002EAF30	-	-
-0x002EB280	0x114	func	func_002EB280	-	-
+0x002EB280	0x114	func	AddService__Q24Kaim6EnginePQ24Kaim6Object	-	-
 0x002EB398	0x98	func	func_002EB398	-	-
 0x002EB450	0x9BC	func	func_002EB450	-	-
 0x002EBE90	0xC8	func	func_002EBE90	-	-
 0x002EBF58	0xC8	func	func_002EBF58	-	-
-0x002EC020	0x38	func	func_002EC020	-	-
+0x002EC020	0x38	func	__Q24Kaim6EnginePQ24Kaim6Object	-	-
 0x002EC058	0xB8	func	func_002EC058	-	-
 0x002EC110	0x98	func	func_002EC110	-	-
 0x002EC1B8	0x288	func	func_002EC1B8	-	-
@@ -7234,8 +7234,8 @@
 0x002EC5B8	0x120	func	func_002EC5B8	-	-
 0x002EC6D8	0xFC	func	func_002EC6D8	-	-
 0x002EC8A0	0x74	func	func_002EC8A0	-	-
-0x002EC918	0x90	func	func_002EC918	-	-
-0x002EC9D0	0xD8	func	func_002EC9D0	-	-
+0x002EC918	0x90	func	CreateObject55180__Fii	-	-
+0x002EC9D0	0xD8	func	ConfigureAll__Q24Kaim11ConfigHostBPQ24Kaim12ChildBuffers	-	-
 0x002ECAA8	0x44	func	func_002ECAA8	-	-
 0x002ECAF0	0x3C	func	func_002ECAF0	-	-
 0x002ECB40	0x20	func	func_002ECB40	-	-
@@ -7258,63 +7258,63 @@
 0x002F02E8	0x3D8	func	func_002F02E8	-	-
 0x002F06C0	0x2E8	func	func_002F06C0	-	-
 0x002F09A8	0x54	func	func_002F09A8	-	-
-0x002F0A00	0x30	func	func_002F0A00	-	-
+0x002F0A00	0x30	func	__12BoundBuffersP11BufferOwner	-	-
 0x002F0A30	0xA4	func	func_002F0A30	-	-
 0x002F0AD8	0xBC	func	func_002F0AD8	-	-
 0x002F0B98	0xE8	func	func_002F0B98	-	-
 0x002F0C80	0xE8	func	func_002F0C80	-	-
 0x002F0D68	0x20	func	func_002F0D68	-	-
 0x002F0D88	0x20	func	func_002F0D88	-	-
-0x002F0DA8	0xD8	func	func_002F0DA8	-	-
-0x002F0E80	0x68	func	func_002F0E80	-	-
-0x002F0EE8	0x70	func	func_002F0EE8	-	-
+0x002F0DA8	0xD8	func	Kaim_AllRegisteredIdsValid__Fv	-	-
+0x002F0E80	0x68	func	CreateObjectV284F64__Fv	-	-
+0x002F0EE8	0x70	func	CreateObject5A210__Fv	-	-
 0x002F0F80	0x78	func	func_002F0F80	-	-
 0x002F0FF8	0x2C4	func	func_002F0FF8	-	-
-0x002F12C0	0x70	func	func_002F12C0	-	-
+0x002F12C0	0x70	func	CreateObject59D40__Fv	-	-
 0x002F1358	0x58	func	func_002F1358	-	-
 0x002F13B0	0x22C	func	func_002F13B0	-	-
-0x002F15E0	0x70	func	func_002F15E0	-	-
+0x002F15E0	0x70	func	CreateObject59DB0__Fv	-	-
 0x002F1678	0x68	func	func_002F1678	-	-
 0x002F16E0	0x1F8	func	func_002F16E0	-	-
 0x002F18D8	0x27C	func	func_002F18D8	-	-
 0x002F1B58	0x80	func	func_002F1B58	-	-
 0x002F1BD8	0x198	func	func_002F1BD8	-	-
-0x002F1D70	0x68	func	func_002F1D70	-	-
-0x002F1DD8	0x68	func	func_002F1DD8	-	-
-0x002F1E40	0x70	func	func_002F1E40	-	-
+0x002F1D70	0x68	func	CreateObjectV284F84__Fv	-	-
+0x002F1DD8	0x68	func	CreateObjectV284F94__Fv	-	-
+0x002F1E40	0x70	func	CreateObjectV284FA4__Fv	-	-
 0x002F1EB0	0x1F0	func	func_002F1EB0	-	-
 0x002F20A0	0xE0	func	func_002F20A0	-	-
 0x002F22D8	0x3C	func	func_002F22D8	-	-
 0x002F2318	0x64	func	func_002F2318	-	-
-0x002F2380	0x64	func	func_002F2380	-	-
+0x002F2380	0x64	func	Init__12ProviderUseri	-	-
 0x002F23F8	0x20	func	func_002F23F8	-	-
 0x002F2418	0x20	func	func_002F2418	-	-
-0x002F2438	0x70	func	func_002F2438	-	-
+0x002F2438	0x70	func	CreateObject56980__Fv	-	-
 0x002F24D0	0x90	func	func_002F24D0	-	-
-0x002F2578	0xE4	func	func_002F2578	-	-
+0x002F2578	0xE4	func	_$_Q24Kaim9PoolArray	-	-
 0x002F2660	0x294	func	func_002F2660	-	-
 0x002F28F8	0x2B8	func	func_002F28F8	-	-
 0x002F2BF8	0x208	func	func_002F2BF8	-	-
 0x002F2E28	0x60	func	func_002F2E28	-	-
 0x002F2E88	0xCC	func	func_002F2E88	-	-
-0x002F2F58	0x94	func	func_002F2F58	-	-
+0x002F2F58	0x94	func	IdByName__8ItemListPCc	-	-
 0x002F2FF0	0xF4	func	func_002F2FF0	-	-
-0x002F30E8	0x120	func	func_002F30E8	-	-
-0x002F3208	0x44	func	func_002F3208	-	-
+0x002F30E8	0x120	func	Find__12TypeRegistryiP9ClassInfo	-	-
+0x002F3208	0x44	func	Contains__10MemberListi	-	-
 0x002F3250	0x54	func	func_002F3250	-	-
-0x002F32C0	0xD8	func	func_002F32C0	-	-
+0x002F32C0	0xD8	func	_$_Q24Kaim9SlotOwner	-	-
 0x002F33A8	0x20	func	func_002F33A8	-	-
 0x002F33C8	0x20	func	func_002F33C8	-	-
-0x002F33E8	0x70	func	func_002F33E8	-	-
+0x002F33E8	0x70	func	CreateObjectV285188__Fv	-	-
 0x002F3458	0x58	func	func_002F3458	-	-
-0x002F34B0	0x6C	func	func_002F34B0	-	-
-0x002F3520	0xC	func	func_002F3520	-	-
+0x002F34B0	0x6C	func	Resolve__Q24Kaim8IdHolderPQ24Kaim10NameSource	-	-
+0x002F3520	0xC	func	GetField__C9TableView	-	-
 0x002F3530	0x40	func	func_002F3530	-	-
 0x002F3570	0x20	func	func_002F3570	-	-
 0x002F3590	0x20	func	func_002F3590	-	-
 0x002F35B0	0x40	func	func_002F35B0	-	-
-0x002F3600	0x80	func	func_002F3600	-	-
-0x002F36A8	0xB0	func	func_002F36A8	-	-
+0x002F3600	0x80	func	CreateObject5CD50__Fi	-	-
+0x002F36A8	0xB0	func	__Q24Kaim11SquareTablePQ24Kaim11Description	-	-
 0x002F3770	0x1D8	func	func_002F3770	-	-
 0x002F3948	0x168	func	func_002F3948	-	-
 0x002F3AB0	0x5F8	func	func_002F3AB0	-	-
@@ -7330,13 +7330,13 @@
 0x002F49F0	0x54	func	func_002F49F0	-	-
 0x002F4A48	0x48	func	func_002F4A48	-	-
 0x002F4A90	0xBC	func	func_002F4A90	-	-
-0x002F4B50	0x2C	func	func_002F4B50	-	-
+0x002F4B50	0x2C	func	Notify__Q24Kaim10Host2850C0Pv	-	-
 0x002F4B80	0x20	func	func_002F4B80	-	-
 0x002F4BA0	0x20	func	func_002F4BA0	-	-
-0x002F4BC0	0x70	func	func_002F4BC0	-	-
-0x002F4C58	0x84	func	func_002F4C58	-	-
+0x002F4BC0	0x70	func	CreateObject59AC0__Fv	-	-
+0x002F4C58	0x84	func	__7Tracker	-	-
 0x002F4CF8	0x194	func	func_002F4CF8	-	-
-0x002F4E90	0xF0	func	func_002F4E90	-	-
+0x002F4E90	0xF0	func	Init__7TrackerPQ24Kaim12ChildBuffers	-	-
 0x002F4F80	0x22C	func	func_002F4F80	-	-
 0x002F51B0	0x194	func	func_002F51B0	-	-
 0x002F5348	0x418	func	func_002F5348	-	-
@@ -7369,7 +7369,7 @@
 0x002FB3C8	0x110	func	func_002FB3C8	-	-
 0x002FB4D8	0x60	func	func_002FB4D8	-	-
 0x002FB538	0x20	func	func_002FB538	-	-
-0x002FB558	0x34	func	func_002FB558	-	-
+0x002FB558	0x34	func	__Q24Kaim10BufferQuad	-	-
 0x002FB590	0xBC	func	func_002FB590	-	-
 0x002FB650	0x84	func	func_002FB650	-	-
 0x002FB6D8	0x174	func	func_002FB6D8	-	-
@@ -7387,8 +7387,8 @@
 0x002FD4A0	0x2DC	func	func_002FD4A0	-	-
 0x002FD780	0x54	func	func_002FD780	-	-
 0x002FD7D8	0x28	func	func_002FD7D8	-	-
-0x002FD800	0xC4	func	func_002FD800	-	-
-0x002FD8C8	0x3C	func	func_002FD8C8	-	-
+0x002FD800	0xC4	func	_$_Q24Kaim15ShortBlockTable	-	-
+0x002FD8C8	0x3C	func	Apply__Q24Kaim11RawDataUserPQ24Kaim12ChildBuffers	-	-
 0x002FD958	0x20	func	func_002FD958	-	-
 0x002FD978	0x20	func	func_002FD978	-	-
 0x002FD998	0x80	func	func_002FD998	-	-
@@ -7400,10 +7400,10 @@
 0x002FE570	0x514	func	func_002FE570	-	-
 0x002FEA88	0x54	func	func_002FEA88	-	-
 0x002FEAE0	0x28	func	func_002FEAE0	-	-
-0x002FEB08	0xC4	func	func_002FEB08	-	-
+0x002FEB08	0xC4	func	_$_Q24Kaim10BlockTable	-	-
 0x002FEBD0	0x20	func	func_002FEBD0	-	-
 0x002FEBF0	0x20	func	func_002FEBF0	-	-
-0x002FEC10	0x80	func	func_002FEC10	-	-
+0x002FEC10	0x80	func	CreateObject619F0__Fi	-	-
 0x002FECB8	0x2B8	func	func_002FECB8	-	-
 0x002FEFB0	0x198	func	func_002FEFB0	-	-
 0x002FF250	0x5D8	func	func_002FF250	-	-
@@ -7428,12 +7428,12 @@
 0x00304CB0	0x74	func	func_00304CB0	-	-
 0x00304D28	0x34	func	func_00304D28	-	-
 0x00304D60	0x34	func	func_00304D60	-	-
-0x00304D98	0xC	func	func_00304D98	-	-
-0x00304DA8	0xC	func	func_00304DA8	-	-
+0x00304D98	0xC	func	IsSet__C8IsSet15C	-	-
+0x00304DA8	0xC	func	IsSet__C8IsSet160	-	-
 0x00304DB8	0x2C	func	func_00304DB8	-	-
-0x00304DE8	0x50	func	func_00304DE8	-	-
+0x00304DE8	0x50	func	FollowRequest__15AIRouteFollowerP12RouteRequest	-	-
 0x00304E38	0xB0	func	func_00304E38	-	-
-0x00304EE8	0x1C	func	func_00304EE8	-	-
+0x00304EE8	0x1C	func	FollowPointOnly__15AIRouteFollowerPCf	-	-
 0x00304F08	0x104	func	func_00304F08	-	-
 0x00305010	0x7C	func	func_00305010	-	-
 0x00305090	0x80	func	func_00305090	-	-
@@ -7445,13 +7445,13 @@
 0x003052A0	0x9C	func	func_003052A0	-	-
 0x00305340	0x34	func	func_00305340	-	-
 0x00305378	0x50	func	func_00305378	-	-
-0x003053C8	0x28	func	func_003053C8	-	-
-0x003053F0	0x34	func	func_003053F0	-	-
-0x00305428	0xC	func	func_00305428	-	-
+0x003053C8	0x28	func	Get__C10Flags5F550	-	-
+0x003053F0	0x34	func	Kaim_ApplyToTarget__FiP6Target	-	-
+0x00305428	0xC	func	MarkDirty__5Moveri	-	-
 0x003054B8	0x20	func	func_003054B8	-	-
 0x003054D8	0x20	func	func_003054D8	-	-
 0x003054F8	0x3C	func	func_003054F8	-	-
-0x00305538	0x80	func	func_00305538	-	-
+0x00305538	0x80	func	CreateObject62D40__Fi	-	-
 0x003055E0	0x1F0	func	func_003055E0	-	-
 0x003057E8	0x208	func	func_003057E8	-	-
 0x003059F0	0x5CC	func	func_003059F0	-	-
@@ -7482,7 +7482,7 @@
 0x0030B7A8	0x34	func	func_0030B7A8	-	-
 0x0030B898	0x1C	func	func_0030B898	-	-
 0x0030B988	0x84	func	func_0030B988	-	-
-0x0030BA10	0x8	func	func_0030BA10	-	-
+0x0030BA10	0x8	func	Rewind__8Cursor94	-	-
 0x0030BA18	0x20	func	func_0030BA18	-	-
 0x0030BA38	0x20	func	func_0030BA38	-	-
 0x0030BA58	0x21C	func	func_0030BA58	-	-
@@ -7491,7 +7491,7 @@
 0x0030CF90	0xA8	func	func_0030CF90	-	-
 0x0030D038	0xA8	func	func_0030D038	-	-
 0x0030D0E0	0x40	func	func_0030D0E0	-	-
-0x0030D130	0x30	func	func_0030D130	-	-
+0x0030D130	0x30	func	Kaim_PairIdsValid__Fv	-	-
 0x0030D160	0x70	func	func_0030D160	-	-
 0x0030D1F8	0x2C	func	func_0030D1F8	-	-
 0x0030D228	0x148	func	func_0030D228	-	-
@@ -7504,7 +7504,7 @@
 0x0030DDE8	0x1D8	func	func_0030DDE8	-	-
 0x0030DFC0	0x60	func	func_0030DFC0	-	-
 0x0030E020	0xE0	func	func_0030E020	-	-
-0x0030E100	0x28	func	func_0030E100	-	-
+0x0030E100	0x28	func	Restart__Q24Kaim9SoundPool	-	-
 0x0030E128	0x58	func	func_0030E128	-	-
 0x0030E180	0xF8	func	func_0030E180	-	-
 0x0030E278	0xA4	func	func_0030E278	-	-
@@ -7512,14 +7512,14 @@
 0x0030E400	0xB8	func	func_0030E400	-	-
 0x0030E4B8	0x94	func	func_0030E4B8	-	-
 0x0030E5A0	0x118	func	func_0030E5A0	-	-
-0x0030E6B8	0x6C	func	func_0030E6B8	Kaim_CSoundManager_GetCounter	int * Kaim_CSoundManager_GetCounter(void * self, uint mask)
+0x0030E6B8	0x6C	func	GetCounter__Q24Kaim9SoundPoolUi	Kaim_CSoundManager_GetCounter	int * Kaim_CSoundManager_GetCounter(void * self, uint mask)
 0x0030E728	0x6C	func	func_0030E728	-	-
 0x0030E798	0x13C	func	func_0030E798	-	-
 0x0030E8D8	0xB0	func	func_0030E8D8	-	-
 0x0030E988	0x20	func	func_0030E988	-	-
 0x0030E9A8	0x20	func	func_0030E9A8	-	-
 0x0030E9C8	0x28	func	func_0030E9C8	-	-
-0x0030EA38	0x80	func	func_0030EA38	-	-
+0x0030EA38	0x80	func	CreateObject67FC0__Fi	-	-
 0x0030EAE0	0x1C4	func	func_0030EAE0	-	-
 0x0030ECA8	0x358	func	func_0030ECA8	-	-
 0x0030F000	0x15C	func	func_0030F000	-	-
@@ -7527,7 +7527,7 @@
 0x0030F678	0x2B0	func	func_0030F678	-	-
 0x0030F940	0x3F8	func	func_0030F940	-	-
 0x0030FD68	0x60	func	func_0030FD68	-	-
-0x0030FDF8	0xA0	func	func_0030FDF8	-	-
+0x0030FDF8	0xA0	func	__9PairOwneri	-	-
 0x0030FE98	0xF8	func	func_0030FE98	-	-
 0x0030FFA0	0x3C	func	func_0030FFA0	-	-
 0x0030FFE0	0x3C	func	func_0030FFE0	-	-
@@ -7535,7 +7535,7 @@
 0x00310060	0x3C	func	func_00310060	-	-
 0x003100A0	0x3C	func	func_003100A0	-	-
 0x003100E0	0x3C	func	func_003100E0	-	-
-0x00310120	0x6C	func	func_00310120	-	-
+0x00310120	0x6C	func	GetRecord__10PerceptionP8SlotUser	-	-
 0x00310228	0x20	func	func_00310228	-	-
 0x00310248	0x20	func	func_00310248	-	-
 0x003102D8	0x54	func	func_003102D8	-	-
@@ -9098,7 +9098,7 @@
 0x00372D68	0xC8	func	func_00372D68	-	-
 0x00372E30	0xE8	func	func_00372E30	-	-
 0x00373148	0x104	func	func_00373148	-	-
-0x00373250	0x14	func	func_00373250	-	-
+0x00373250	0x14	func	__Q24Kaim11EmptyObject	-	-
 0x00373268	0x38	func	func_00373268	-	-
 0x003732A0	0x60	func	func_003732A0	-	-
 0x00373300	0x44	func	func_00373300	-	-
@@ -9464,10 +9464,10 @@
 0x00389140	0x24	func	func_00389140	-	-
 0x00389178	0x38	func	func_00389178	Kaim_Object_DeletingDestructor	void __stdcall Kaim_Object_DeletingDestructor(void * object, int flags)
 0x003891B0	0x50	func	func_003891B0	-	-
-0x00389200	0x8	func	func_00389200	-	-
+0x00389200	0x8	func	GetPosition__13PositionOwner	-	-
 0x00389208	0x34	func	func_00389208	-	-
 0x00389240	0x50	func	func_00389240	-	-
-0x00389290	0xC	func	func_00389290	Kaim_CFleeAgent_GetClassInfo	void * __stdcall Kaim_CFleeAgent_GetClassInfo(void * self)
+0x00389290	0xC	func	GetClassInfoOf4B0F0__Fv	Kaim_CFleeAgent_GetClassInfo	void * __stdcall Kaim_CFleeAgent_GetClassInfo(void * self)
 0x003892E0	0x38	func	func_003892E0	-	-
 0x00389318	0x50	func	func_00389318	-	-
 0x00389368	0x8	func	func_00389368	-	-
@@ -9476,111 +9476,111 @@
 0x00389400	0x50	func	func_00389400	-	-
 0x00389450	0x30	func	func_00389450	-	-
 0x00389480	0x50	func	func_00389480	-	-
-0x003894D0	0xC	func	func_003894D0	Kaim_CFollowerAgent_GetClassInfo	void * __stdcall Kaim_CFollowerAgent_GetClassInfo(void * self)
+0x003894D0	0xC	func	GetClassInfoOf4AAE0__Fv	Kaim_CFollowerAgent_GetClassInfo	void * __stdcall Kaim_CFollowerAgent_GetClassInfo(void * self)
 0x00389500	0x50	func	func_00389500	-	-
-0x00389550	0xC	func	func_00389550	Kaim_CGotoAgent_GetClassInfo	void * __stdcall Kaim_CGotoAgent_GetClassInfo(void * self)
+0x00389550	0xC	func	GetClassInfoOf4A910__Fv	Kaim_CGotoAgent_GetClassInfo	void * __stdcall Kaim_CGotoAgent_GetClassInfo(void * self)
 0x00389578	0x50	func	func_00389578	-	-
-0x003895C8	0xC	func	func_003895C8	Kaim_CHideAgent_GetClassInfo	void * __stdcall Kaim_CHideAgent_GetClassInfo(void * self)
+0x003895C8	0xC	func	GetClassInfoOf49B80__Fv	Kaim_CHideAgent_GetClassInfo	void * __stdcall Kaim_CHideAgent_GetClassInfo(void * self)
 0x00389618	0x50	func	func_00389618	-	-
-0x00389668	0xC	func	func_00389668	Kaim_CPathWayAgent_GetClassInfo	void * __stdcall Kaim_CPathWayAgent_GetClassInfo(void * self)
+0x00389668	0xC	func	GetClassInfoOf49000__Fv	Kaim_CPathWayAgent_GetClassInfo	void * __stdcall Kaim_CPathWayAgent_GetClassInfo(void * self)
 0x003896A8	0x78	func	func_003896A8	-	-
 0x00389720	0x50	func	func_00389720	-	-
-0x00389770	0xC	func	func_00389770	Kaim_CShooterAgent_GetClassInfo	void * __stdcall Kaim_CShooterAgent_GetClassInfo(void * self)
+0x00389770	0xC	func	GetClassInfoOf488C0__Fv	Kaim_CShooterAgent_GetClassInfo	void * __stdcall Kaim_CShooterAgent_GetClassInfo(void * self)
 0x003897C8	0x50	func	func_003897C8	-	-
-0x00389818	0xC	func	func_00389818	Kaim_CWanderAgent_GetClassInfo	void * __stdcall Kaim_CWanderAgent_GetClassInfo(void * self)
+0x00389818	0xC	func	GetClassInfoOf484B0__Fv	Kaim_CWanderAgent_GetClassInfo	void * __stdcall Kaim_CWanderAgent_GetClassInfo(void * self)
 0x00389840	0x50	func	func_00389840	-	-
 0x003898A8	0x38	func	func_003898A8	-	-
-0x003898E0	0xC	func	func_003898E0	Kaim_CActionAcceleration_GetClassInfo	void * __stdcall Kaim_CActionAcceleration_GetClassInfo(void * self)
+0x003898E0	0xC	func	GetClassInfo__C15Parameter284828	Kaim_CActionAcceleration_GetClassInfo	void * __stdcall Kaim_CActionAcceleration_GetClassInfo(void * self)
 0x00389908	0x78	func	func_00389908	-	-
 0x00389980	0x40	func	func_00389980	-	-
 0x003899C0	0x30	func	func_003899C0	-	-
 0x003899F0	0x50	func	func_003899F0	-	-
 0x00389A58	0x38	func	func_00389A58	-	-
-0x00389A90	0xC	func	func_00389A90	Kaim_CActionCrouch_GetClassInfo	void * __stdcall Kaim_CActionCrouch_GetClassInfo(void * self)
+0x00389A90	0xC	func	GetClassInfo__C15Parameter284808	Kaim_CActionCrouch_GetClassInfo	void * __stdcall Kaim_CActionCrouch_GetClassInfo(void * self)
 0x00389AB8	0x50	func	func_00389AB8	-	-
 0x00389B20	0x38	func	func_00389B20	-	-
-0x00389B58	0xC	func	func_00389B58	Kaim_CActionJump_GetClassInfo	void * __stdcall Kaim_CActionJump_GetClassInfo(void * self)
+0x00389B58	0xC	func	GetClassInfo__C15Parameter2847EC	Kaim_CActionJump_GetClassInfo	void * __stdcall Kaim_CActionJump_GetClassInfo(void * self)
 0x00389B80	0x50	func	func_00389B80	-	-
 0x00389BE8	0x38	func	func_00389BE8	-	-
-0x00389C20	0xC	func	func_00389C20	Kaim_CActionRotate_GetClassInfo	void * __stdcall Kaim_CActionRotate_GetClassInfo(void * self)
+0x00389C20	0xC	func	GetClassInfo__C15Parameter2846A0	Kaim_CActionRotate_GetClassInfo	void * __stdcall Kaim_CActionRotate_GetClassInfo(void * self)
 0x00389C48	0x50	func	func_00389C48	-	-
 0x00389CB0	0x38	func	func_00389CB0	-	-
-0x00389CE8	0xC	func	func_00389CE8	Kaim_CActionShoot_GetClassInfo	void * __stdcall Kaim_CActionShoot_GetClassInfo(void * self)
+0x00389CE8	0xC	func	GetClassInfo__C15Parameter2847AC	Kaim_CActionShoot_GetClassInfo	void * __stdcall Kaim_CActionShoot_GetClassInfo(void * self)
 0x00389D40	0x50	func	func_00389D40	-	-
 0x00389DA8	0x38	func	func_00389DA8	-	-
-0x00389DE0	0xC	func	func_00389DE0	Kaim_CActionSpeed_GetClassInfo	void * __stdcall Kaim_CActionSpeed_GetClassInfo(void * self)
+0x00389DE0	0xC	func	GetClassInfo__C15Parameter2846C4	Kaim_CActionSpeed_GetClassInfo	void * __stdcall Kaim_CActionSpeed_GetClassInfo(void * self)
 0x00389E08	0x50	func	func_00389E08	-	-
 0x00389E70	0x38	func	func_00389E70	-	-
-0x00389EA8	0xC	func	func_00389EA8	Kaim_CActionSteering_GetClassInfo	void * __stdcall Kaim_CActionSteering_GetClassInfo(void * self)
+0x00389EA8	0xC	func	GetClassInfo__C15Parameter2847CC	Kaim_CActionSteering_GetClassInfo	void * __stdcall Kaim_CActionSteering_GetClassInfo(void * self)
 0x00389ED0	0x50	func	func_00389ED0	-	-
 0x00389F38	0x38	func	func_00389F38	-	-
-0x00389F70	0xC	func	func_00389F70	Kaim_CEntityCanFly_GetClassInfo	void * __stdcall Kaim_CEntityCanFly_GetClassInfo(void * self)
+0x00389F70	0xC	func	GetClassInfo__C15Parameter28486C	Kaim_CEntityCanFly_GetClassInfo	void * __stdcall Kaim_CEntityCanFly_GetClassInfo(void * self)
 0x00389F90	0x78	func	func_00389F90	-	-
 0x0038A008	0x40	func	func_0038A008	-	-
 0x0038A048	0x30	func	func_0038A048	-	-
 0x0038A078	0x50	func	func_0038A078	-	-
 0x0038A0E0	0x38	func	func_0038A0E0	-	-
-0x0038A118	0xC	func	func_0038A118	Kaim_CEntityEyePosition_GetClassInfo	void * __stdcall Kaim_CEntityEyePosition_GetClassInfo(void * self)
+0x0038A118	0xC	func	GetClassInfo__C15Parameter28484C	Kaim_CEntityEyePosition_GetClassInfo	void * __stdcall Kaim_CEntityEyePosition_GetClassInfo(void * self)
 0x0038A170	0x50	func	func_0038A170	-	-
 0x0038A1D8	0x38	func	func_0038A1D8	-	-
-0x0038A210	0xC	func	func_0038A210	Kaim_CEntityGunPosition_GetClassInfo	void * __stdcall Kaim_CEntityGunPosition_GetClassInfo(void * self)
+0x0038A210	0xC	func	GetClassInfo__C15Parameter284768	Kaim_CEntityGunPosition_GetClassInfo	void * __stdcall Kaim_CEntityGunPosition_GetClassInfo(void * self)
 0x0038A268	0x50	func	func_0038A268	-	-
 0x0038A2D0	0x38	func	func_0038A2D0	-	-
-0x0038A308	0xC	func	func_0038A308	Kaim_CEntityHeadDirection_GetClassInfo	void * __stdcall Kaim_CEntityHeadDirection_GetClassInfo(void * self)
+0x0038A308	0xC	func	GetClassInfo__C15Parameter284928	Kaim_CEntityHeadDirection_GetClassInfo	void * __stdcall Kaim_CEntityHeadDirection_GetClassInfo(void * self)
 0x0038A360	0x50	func	func_0038A360	-	-
 0x0038A3C8	0x38	func	func_0038A3C8	-	-
-0x0038A400	0xC	func	func_0038A400	Kaim_CEntityHearingAcuteness_GetClassInfo	void * __stdcall Kaim_CEntityHearingAcuteness_GetClassInfo(void * self)
+0x0038A400	0xC	func	GetClassInfo__C15Parameter284900	Kaim_CEntityHearingAcuteness_GetClassInfo	void * __stdcall Kaim_CEntityHearingAcuteness_GetClassInfo(void * self)
 0x0038A440	0x50	func	func_0038A440	-	-
 0x0038A4D0	0x38	func	func_0038A4D0	-	-
-0x0038A508	0xC	func	func_0038A508	Kaim_CEntityHeight_GetClassInfo	void * __stdcall Kaim_CEntityHeight_GetClassInfo(void * self)
+0x0038A508	0xC	func	GetClassInfo__C15Parameter284748	Kaim_CEntityHeight_GetClassInfo	void * __stdcall Kaim_CEntityHeight_GetClassInfo(void * self)
 0x0038A528	0x50	func	func_0038A528	-	-
 0x0038A590	0x38	func	func_0038A590	-	-
-0x0038A5C8	0xC	func	func_0038A5C8	Kaim_CEntityKneePosition_GetClassInfo	void * __stdcall Kaim_CEntityKneePosition_GetClassInfo(void * self)
+0x0038A5C8	0xC	func	GetClassInfo__C15Parameter2848DC	Kaim_CEntityKneePosition_GetClassInfo	void * __stdcall Kaim_CEntityKneePosition_GetClassInfo(void * self)
 0x0038A620	0x50	func	func_0038A620	-	-
 0x0038A6B0	0x38	func	func_0038A6B0	-	-
-0x0038A6E8	0xC	func	func_0038A6E8	Kaim_CEntityLength_GetClassInfo	void * __stdcall Kaim_CEntityLength_GetClassInfo(void * self)
+0x0038A6E8	0xC	func	GetClassInfo__C15Parameter284708	Kaim_CEntityLength_GetClassInfo	void * __stdcall Kaim_CEntityLength_GetClassInfo(void * self)
 0x0038A708	0x50	func	func_0038A708	-	-
 0x0038A790	0x38	func	func_0038A790	-	-
-0x0038A7C8	0xC	func	func_0038A7C8	Kaim_CEntityMaxSpeed_GetClassInfo	void * __stdcall Kaim_CEntityMaxSpeed_GetClassInfo(void * self)
+0x0038A7C8	0xC	func	GetClassInfo__C15Parameter284728	Kaim_CEntityMaxSpeed_GetClassInfo	void * __stdcall Kaim_CEntityMaxSpeed_GetClassInfo(void * self)
 0x0038A7E8	0x50	func	func_0038A7E8	-	-
 0x0038A858	0x38	func	func_0038A858	-	-
-0x0038A890	0xC	func	func_0038A890	Kaim_CEntityTeamSide_GetClassInfo	void * __stdcall Kaim_CEntityTeamSide_GetClassInfo(void * self)
+0x0038A890	0xC	func	GetClassInfo__C15Parameter28478C	Kaim_CEntityTeamSide_GetClassInfo	void * __stdcall Kaim_CEntityTeamSide_GetClassInfo(void * self)
 0x0038A8B0	0x50	func	func_0038A8B0	-	-
 0x0038A918	0x38	func	func_0038A918	-	-
-0x0038A950	0xC	func	func_0038A950	Kaim_CEntityTorsoOrientation_GetClassInfo	void * __stdcall Kaim_CEntityTorsoOrientation_GetClassInfo(void * self)
+0x0038A950	0xC	func	GetClassInfo__C15Parameter28488C	Kaim_CEntityTorsoOrientation_GetClassInfo	void * __stdcall Kaim_CEntityTorsoOrientation_GetClassInfo(void * self)
 0x0038A988	0x50	func	func_0038A988	-	-
 0x0038AA20	0x38	func	func_0038AA20	-	-
-0x0038AA58	0xC	func	func_0038AA58	Kaim_CEntityVisualAcuteness_GetClassInfo	void * __stdcall Kaim_CEntityVisualAcuteness_GetClassInfo(void * self)
+0x0038AA58	0xC	func	GetClassInfo__C15Parameter2848B4	Kaim_CEntityVisualAcuteness_GetClassInfo	void * __stdcall Kaim_CEntityVisualAcuteness_GetClassInfo(void * self)
 0x0038AAA0	0x50	func	func_0038AAA0	-	-
 0x0038AB30	0x38	func	func_0038AB30	-	-
-0x0038AB68	0xC	func	func_0038AB68	Kaim_CEntityWidth_GetClassInfo	void * __stdcall Kaim_CEntityWidth_GetClassInfo(void * self)
+0x0038AB68	0xC	func	GetClassInfo__C15Parameter2846E4	Kaim_CEntityWidth_GetClassInfo	void * __stdcall Kaim_CEntityWidth_GetClassInfo(void * self)
 0x0038AB88	0x50	func	func_0038AB88	-	-
 0x0038ABF0	0x38	func	func_0038ABF0	-	-
-0x0038AC28	0xC	func	func_0038AC28	Kaim_CActionActivate_GetClassInfo	void * __stdcall Kaim_CActionActivate_GetClassInfo(void * self)
+0x0038AC28	0xC	func	GetClassInfo__C15Parameter2849BC	Kaim_CActionActivate_GetClassInfo	void * __stdcall Kaim_CActionActivate_GetClassInfo(void * self)
 0x0038AC50	0x50	func	func_0038AC50	-	-
 0x0038ACB8	0x38	func	func_0038ACB8	-	-
-0x0038ACF0	0xC	func	func_0038ACF0	Kaim_CActionHeadRotate_GetClassInfo	void * __stdcall Kaim_CActionHeadRotate_GetClassInfo(void * self)
+0x0038ACF0	0xC	func	GetClassInfo__C15Parameter284998	Kaim_CActionHeadRotate_GetClassInfo	void * __stdcall Kaim_CActionHeadRotate_GetClassInfo(void * self)
 0x0038AD30	0x50	func	func_0038AD30	-	-
 0x0038AD98	0x38	func	func_0038AD98	-	-
-0x0038ADD0	0xC	func	func_0038ADD0	Kaim_CActionTorsoRotate_GetClassInfo	void * __stdcall Kaim_CActionTorsoRotate_GetClassInfo(void * self)
+0x0038ADD0	0xC	func	GetClassInfo__C15Parameter284974	Kaim_CActionTorsoRotate_GetClassInfo	void * __stdcall Kaim_CActionTorsoRotate_GetClassInfo(void * self)
 0x0038AE10	0x50	func	func_0038AE10	-	-
 0x0038AE78	0x38	func	func_0038AE78	-	-
-0x0038AEB0	0xC	func	func_0038AEB0	Kaim_CActionVerticalSpeed_GetClassInfo	void * __stdcall Kaim_CActionVerticalSpeed_GetClassInfo(void * self)
-0x0038AED8	0x8	func	func_0038AED8	-	-
+0x0038AEB0	0xC	func	GetClassInfo__C15Parameter28494C	Kaim_CActionVerticalSpeed_GetClassInfo	void * __stdcall Kaim_CActionVerticalSpeed_GetClassInfo(void * self)
+0x0038AED8	0x8	func	Kaim_Nop__Fv	-	-
 0x0038AEE0	0x78	func	func_0038AEE0	-	-
 0x0038AF58	0x50	func	func_0038AF58	-	-
-0x0038AFA8	0xC	func	func_0038AFA8	Kaim_CPathWayManager_GetClassInfo	void * __stdcall Kaim_CPathWayManager_GetClassInfo(void * self)
+0x0038AFA8	0xC	func	GetClassInfoOf4E230__Fv	Kaim_CPathWayManager_GetClassInfo	void * __stdcall Kaim_CPathWayManager_GetClassInfo(void * self)
 0x0038AFB8	0x50	func	func_0038AFB8	-	-
 0x0038B008	0x40	func	func_0038B008	-	-
 0x0038B048	0x30	func	func_0038B048	-	-
 0x0038B078	0x1C	func	func_0038B078	-	-
 0x0038B098	0x54	func	func_0038B098	-	-
 0x0038B0F0	0x50	func	func_0038B0F0	-	-
-0x0038B140	0xC	func	func_0038B140	Kaim_CPointMapper_GetClassInfo	void * __stdcall Kaim_CPointMapper_GetClassInfo(void * self)
+0x0038B140	0xC	func	GetClassInfoOf4DC00__Fv	Kaim_CPointMapper_GetClassInfo	void * __stdcall Kaim_CPointMapper_GetClassInfo(void * self)
 0x0038B150	0xA0	func	func_0038B150	-	-
 0x0038B1F0	0x78	func	func_0038B1F0	-	-
 0x0038B268	0x50	func	func_0038B268	-	-
-0x0038B2B8	0xC	func	func_0038B2B8	Kaim_CScriptManager_GetClassInfo	void * __stdcall Kaim_CScriptManager_GetClassInfo(void * self)
+0x0038B2B8	0xC	func	GetClassInfoOf4E5A0__Fv	Kaim_CScriptManager_GetClassInfo	void * __stdcall Kaim_CScriptManager_GetClassInfo(void * self)
 0x0038B2C8	0x78	func	func_0038B2C8	-	-
 0x0038B340	0x38	func	func_0038B340	-	-
 0x0038B378	0x78	func	func_0038B378	-	-
@@ -9601,7 +9601,7 @@
 0x0038BA30	0x54	func	func_0038BA30	Kaim_AgentClass_GetRegistry	PS2KaimClassRegistry * Kaim_AgentClass_GetRegistry(void)
 0x0038BA88	0x50	func	func_0038BA88	-	-
 0x0038BAD8	0x50	func	func_0038BAD8	-	-
-0x0038BB28	0x8	func	func_0038BB28	-	-
+0x0038BB28	0x8	func	Kaim_Nop__Fv	-	-
 0x0038BB30	0x30	func	func_0038BB30	-	-
 0x0038BB60	0x50	func	func_0038BB60	-	-
 0x0038BBB0	0x190	func	func_0038BBB0	-	-
@@ -9700,7 +9700,7 @@
 0x0038E6E0	0x50	func	func_0038E6E0	-	-
 0x0038E730	0x38	func	func_0038E730	-	-
 0x0038E768	0x50	func	func_0038E768	Kaim_BrainService_IsPrivateChild	int __stdcall Kaim_BrainService_IsPrivateChild(void * service, PS2KaimChildBuffer * child)
-0x0038E7B8	0x8	func	func_0038E7B8	-	-
+0x0038E7B8	0x8	func	Kaim_Nop__Fv	-	-
 0x0038E7C0	0x4C	func	func_0038E7C0	-	-
 0x0038E810	0x30	func	func_0038E810	-	-
 0x0038E840	0x50	func	func_0038E840	-	-
@@ -9714,8 +9714,8 @@
 0x0038EE08	0x78	func	func_0038EE08	-	-
 0x0038EE80	0xA0	func	func_0038EE80	-	-
 0x0038EF20	0x78	func	func_0038EF20	-	-
-0x0038EF98	0xC	func	func_0038EF98	Kaim_CTeam_GetClassInfo	void * __stdcall Kaim_CTeam_GetClassInfo(void * self)
-0x0038EFA8	0x8	func	func_0038EFA8	-	-
+0x0038EF98	0xC	func	GetClassInfoOf55260__Fv	Kaim_CTeam_GetClassInfo	void * __stdcall Kaim_CTeam_GetClassInfo(void * self)
+0x0038EFA8	0x8	func	SetFlag__9FlagOwnerb	-	-
 0x0038EFB0	0x50	func	func_0038EFB0	-	-
 0x0038F000	0x190	func	func_0038F000	-	-
 0x0038F190	0x40	func	func_0038F190	-	-
@@ -9735,8 +9735,8 @@
 0x0038F618	0x50	func	func_0038F618	-	-
 0x0038F668	0x8CC	func	func_0038F668	-	-
 0x0038FF70	0x50	func	func_0038FF70	-	-
-0x0038FFC0	0xC	func	func_0038FFC0	Kaim_CFindNearestData_GetClassInfo	void * __stdcall Kaim_CFindNearestData_GetClassInfo(void * self)
-0x00390038	0x28	func	func_00390038	-	-
+0x0038FFC0	0xC	func	GetClassInfoOf555D0__Fv	Kaim_CFindNearestData_GetClassInfo	void * __stdcall Kaim_CFindNearestData_GetClassInfo(void * self)
+0x00390038	0x28	func	Vec3_Component__FPvPC4Vec3i	-	-
 0x00390060	0x78	func	func_00390060	-	-
 0x003900D8	0x40	func	func_003900D8	-	-
 0x00390118	0x30	func	func_00390118	-	-
@@ -9744,30 +9744,30 @@
 0x00390168	0x54	func	func_00390168	-	-
 0x003901C0	0x38	func	func_003901C0	-	-
 0x003901F8	0x50	func	func_003901F8	-	-
-0x00390260	0xC	func	func_00390260	Kaim_CConstraintShortestPath_GetClassInfo	void * __stdcall Kaim_CConstraintShortestPath_GetClassInfo(void * self)
+0x00390260	0xC	func	GetClassInfoOf59C50__Fv	Kaim_CConstraintShortestPath_GetClassInfo	void * __stdcall Kaim_CConstraintShortestPath_GetClassInfo(void * self)
 0x00390270	0x38	func	func_00390270	-	-
 0x003902A8	0x50	func	func_003902A8	-	-
-0x003902F8	0xC	func	func_003902F8	Kaim_CConstraintStealthPath_GetClassInfo	void * __stdcall Kaim_CConstraintStealthPath_GetClassInfo(void * self)
+0x003902F8	0xC	func	GetClassInfoOf5A260__Fv	Kaim_CConstraintStealthPath_GetClassInfo	void * __stdcall Kaim_CConstraintStealthPath_GetClassInfo(void * self)
 0x00390318	0x38	func	func_00390318	-	-
 0x00390350	0x50	func	func_00390350	-	-
-0x003903A0	0xC	func	func_003903A0	Kaim_CConstraintConeVisionStealthPath_GetClassInfo	void * __stdcall Kaim_CConstraintConeVisionStealthPath_GetClassInfo(void * self)
+0x003903A0	0xC	func	GetClassInfoOf59DA0__Fv	Kaim_CConstraintConeVisionStealthPath_GetClassInfo	void * __stdcall Kaim_CConstraintConeVisionStealthPath_GetClassInfo(void * self)
 0x003903B8	0x38	func	func_003903B8	-	-
 0x003903F0	0x50	func	func_003903F0	-	-
-0x00390440	0xC	func	func_00390440	Kaim_CConstraintPointToFleePath_GetClassInfo	void * __stdcall Kaim_CConstraintPointToFleePath_GetClassInfo(void * self)
+0x00390440	0xC	func	GetClassInfoOf59E00__Fv	Kaim_CConstraintPointToFleePath_GetClassInfo	void * __stdcall Kaim_CConstraintPointToFleePath_GetClassInfo(void * self)
 0x00390460	0x38	func	func_00390460	-	-
 0x00390498	0x88	func	func_00390498	-	-
-0x00390548	0xC	func	func_00390548	Kaim_CSphereConstraint_GetClassInfo	void * __stdcall Kaim_CSphereConstraint_GetClassInfo(void * self)
+0x00390548	0xC	func	GetClassInfoOf59C60__Fv	Kaim_CSphereConstraint_GetClassInfo	void * __stdcall Kaim_CSphereConstraint_GetClassInfo(void * self)
 0x003905A8	0x38	func	func_003905A8	-	-
 0x003905E0	0x50	func	func_003905E0	-	-
-0x00390630	0xC	func	func_00390630	Kaim_CHeuristicEuclidianDistance_GetClassInfo	void * __stdcall Kaim_CHeuristicEuclidianDistance_GetClassInfo(void * self)
+0x00390630	0xC	func	GetClassInfoOf59C70__Fv	Kaim_CHeuristicEuclidianDistance_GetClassInfo	void * __stdcall Kaim_CHeuristicEuclidianDistance_GetClassInfo(void * self)
 0x00390640	0x80	func	func_00390640	-	-
 0x003906C0	0x38	func	func_003906C0	-	-
 0x003906F8	0x50	func	func_003906F8	-	-
-0x00390748	0xC	func	func_00390748	Kaim_CZeroHeuristic_GetClassInfo	void * __stdcall Kaim_CZeroHeuristic_GetClassInfo(void * self)
-0x00390758	0xC	func	func_00390758	-	-
+0x00390748	0xC	func	GetClassInfoOf59CC0__Fv	Kaim_CZeroHeuristic_GetClassInfo	void * __stdcall Kaim_CZeroHeuristic_GetClassInfo(void * self)
+0x00390758	0xC	func	NoValue__Q24Kaim5ProbeiiiPi	-	-
 0x00390768	0x38	func	func_00390768	-	-
 0x003907A0	0x50	func	func_003907A0	-	-
-0x00390808	0xC	func	func_00390808	Kaim_CPathCostHeuristic_GetClassInfo	void * __stdcall Kaim_CPathCostHeuristic_GetClassInfo(void * self)
+0x00390808	0xC	func	GetClassInfoOf59CE0__Fv	Kaim_CPathCostHeuristic_GetClassInfo	void * __stdcall Kaim_CPathCostHeuristic_GetClassInfo(void * self)
 0x00390818	0x190	func	func_00390818	-	-
 0x003909A8	0x50	func	func_003909A8	-	-
 0x003909F8	0x40	func	func_003909F8	-	-
@@ -9779,17 +9779,17 @@
 0x00390BC8	0x54	func	func_00390BC8	-	-
 0x00390C20	0x78	func	func_00390C20	-	-
 0x00390C98	0x50	func	func_00390C98	-	-
-0x00390CE8	0xC	func	func_00390CE8	Kaim_CGraphManager_GetClassInfo	void * __stdcall Kaim_CGraphManager_GetClassInfo(void * self)
+0x00390CE8	0xC	func	GetClassInfoOf565E0__Fv	Kaim_CGraphManager_GetClassInfo	void * __stdcall Kaim_CGraphManager_GetClassInfo(void * self)
 0x00390CF8	0xA0	func	func_00390CF8	-	-
 0x00390D98	0x38	func	func_00390D98	-	-
 0x00390DD0	0x50	func	func_00390DD0	-	-
-0x00390E20	0xC	func	func_00390E20	Kaim_CGraphWrapper_GetClassInfo	void * __stdcall Kaim_CGraphWrapper_GetClassInfo(void * self)
+0x00390E20	0xC	func	GetClassInfoOf5CCE0__Fv	Kaim_CGraphWrapper_GetClassInfo	void * __stdcall Kaim_CGraphWrapper_GetClassInfo(void * self)
 0x00390E48	0x78	func	func_00390E48	-	-
 0x00390EC0	0x30	func	func_00390EC0	-	-
 0x00390EF0	0x50	func	func_00390EF0	-	-
 0x00390F40	0x190	func	func_00390F40	-	-
 0x003910D0	0x50	func	func_003910D0	-	-
-0x00391120	0xC	func	func_00391120	Kaim_CPathCostData_GetClassInfo	void * __stdcall Kaim_CPathCostData_GetClassInfo(void * self)
+0x00391120	0xC	func	GetClassInfoOf5CDC0__Fv	Kaim_CPathCostData_GetClassInfo	void * __stdcall Kaim_CPathCostData_GetClassInfo(void * self)
 0x003911B0	0x38	func	func_003911B0	-	-
 0x003911E8	0x50	func	func_003911E8	-	-
 0x00391238	0x50	func	func_00391238	-	-
@@ -9798,7 +9798,7 @@
 0x003913B0	0x38	func	func_003913B0	-	-
 0x003913E8	0x78	func	func_003913E8	-	-
 0x00391460	0x50	func	func_00391460	-	-
-0x003914B0	0xC	func	func_003914B0	Kaim_CPathObjectManager_GetClassInfo	void * __stdcall Kaim_CPathObjectManager_GetClassInfo(void * self)
+0x003914B0	0xC	func	GetClassInfoOf59B10__Fv	Kaim_CPathObjectManager_GetClassInfo	void * __stdcall Kaim_CPathObjectManager_GetClassInfo(void * self)
 0x003914C0	0x78	func	func_003914C0	-	-
 0x00391548	0x78	func	func_00391548	-	-
 0x003915C0	0x8	func	func_003915C0	-	-
@@ -9815,7 +9815,7 @@
 0x00391E20	0x38	func	func_00391E20	-	-
 0x00391E58	0xA4	func	func_00391E58	-	-
 0x00391F00	0x29C	func	func_00391F00	-	-
-0x003921A0	0x14	func	func_003921A0	-	-
+0x003921A0	0x14	func	Begin__20NearestSimpleVisitorP9NodeGraph	-	-
 0x003921B8	0x38	func	func_003921B8	-	-
 0x003921F0	0xA4	func	func_003921F0	-	-
 0x00392298	0x2B4	func	func_00392298	-	-
@@ -9823,24 +9823,24 @@
 0x00392568	0x38	func	func_00392568	-	-
 0x003925A0	0xA4	func	func_003925A0	-	-
 0x00392648	0x408	func	func_00392648	-	-
-0x00392A50	0x18	func	func_00392A50	-	-
+0x00392A50	0x18	func	Begin__18NearestNodeVisitorP9NodeGraph	-	-
 0x00392A68	0x38	func	func_00392A68	-	-
 0x00392AA0	0xA4	func	func_00392AA0	-	-
 0x00392B48	0x1F0	func	func_00392B48	-	-
 0x00392D38	0x14	func	func_00392D38	-	-
 0x00392D50	0x50	func	func_00392D50	-	-
-0x00392DA0	0xC	func	func_00392DA0	Kaim_CAccessWaysData_GetClassInfo	void * __stdcall Kaim_CAccessWaysData_GetClassInfo(void * self)
+0x00392DA0	0xC	func	GetClassInfoOf5D490__Fv	Kaim_CAccessWaysData_GetClassInfo	void * __stdcall Kaim_CAccessWaysData_GetClassInfo(void * self)
 0x00392DC0	0x38	func	func_00392DC0	-	-
 0x00392DF8	0x50	func	func_00392DF8	-	-
 0x00392E48	0x8	func	func_00392E48	-	-
 0x00392E50	0x344	func	func_00392E50	-	-
 0x00393200	0x88	func	func_00393200	-	-
-0x00393288	0x94	func	func_00393288	-	-
-0x00393320	0x78	func	func_00393320	-	-
-0x00393398	0x54	func	func_00393398	-	-
-0x003933F0	0x80	func	func_003933F0	-	-
+0x00393288	0x94	func	_$_Q24Kaim10BufferPair	-	-
+0x00393320	0x78	func	AllocateFlags__4GridPC10GridSource	-	-
+0x00393398	0x54	func	Classify__4GridP8GridCell	-	-
+0x003933F0	0x80	func	AllocateValues__4GridPC10GridSource	-	-
 0x00393548	0x50	func	func_00393548	-	-
-0x00393598	0xC	func	func_00393598	Kaim_CAstarData_GetClassInfo	void * __stdcall Kaim_CAstarData_GetClassInfo(void * self)
+0x00393598	0xC	func	GetClassInfoOf5DD60__Fv	Kaim_CAstarData_GetClassInfo	void * __stdcall Kaim_CAstarData_GetClassInfo(void * self)
 0x003935B8	0x1C	func	func_003935B8	-	-
 0x003935D8	0x54	func	func_003935D8	-	-
 0x00393630	0x1C	func	func_00393630	-	-
@@ -9855,8 +9855,8 @@
 0x00393828	0x38	func	func_00393828	-	-
 0x00393860	0x78	func	func_00393860	-	-
 0x003938D8	0x50	func	func_003938D8	-	-
-0x00393928	0xC	func	func_00393928	Kaim_CPathFinder_GetClassInfo	void * __stdcall Kaim_CPathFinder_GetClassInfo(void * self)
-0x00393940	0xC	func	func_00393940	-	-
+0x00393928	0xC	func	GetClassInfoOf5FA10__Fv	Kaim_CPathFinder_GetClassInfo	void * __stdcall Kaim_CPathFinder_GetClassInfo(void * self)
+0x00393940	0xC	func	MarkDirtyNow__5Mover	-	-
 0x00393950	0x24	func	func_00393950	-	-
 0x00393978	0xA0	func	func_00393978	-	-
 0x00393A18	0xA4	func	func_00393A18	-	-
@@ -9881,7 +9881,7 @@
 0x003940E0	0x78	func	func_003940E0	-	-
 0x00394158	0x78	func	func_00394158	-	-
 0x003941D0	0x50	func	func_003941D0	-	-
-0x00394220	0xC	func	func_00394220	Kaim_CGapDynamicAvoidance_GetClassInfo	void * __stdcall Kaim_CGapDynamicAvoidance_GetClassInfo(void * self)
+0x00394220	0xC	func	GetClassInfoOf66700__Fv	Kaim_CGapDynamicAvoidance_GetClassInfo	void * __stdcall Kaim_CGapDynamicAvoidance_GetClassInfo(void * self)
 0x00394230	0x38	func	func_00394230	-	-
 0x003942B8	0x78	func	func_003942B8	-	-
 0x00394330	0x3C	func	func_00394330	-	-
@@ -9903,12 +9903,12 @@
 0x00394B30	0x50	func	func_00394B30	-	-
 0x00394B80	0x3C	func	func_00394B80	-	-
 0x00394BC0	0x50	func	func_00394BC0	-	-
-0x00394C10	0xC	func	func_00394C10	Kaim_CSoundManager_GetClassInfo	void * __stdcall Kaim_CSoundManager_GetClassInfo(void * self)
+0x00394C10	0xC	func	GetClassInfo__Q24Kaim9SoundPool	Kaim_CSoundManager_GetClassInfo	void * __stdcall Kaim_CSoundManager_GetClassInfo(void * self)
 0x00394C20	0x40	func	func_00394C20	-	-
 0x00394C68	0x78	func	func_00394C68	-	-
 0x00394CE0	0x38	func	func_00394CE0	-	-
 0x00394D18	0x50	func	func_00394D18	Kaim_CEntityManager_TypeInfo	void * Kaim_CEntityManager_TypeInfo(void)
-0x00394D68	0xC	func	func_00394D68	Kaim_CEntityManager_GetClassInfo	void * __stdcall Kaim_CEntityManager_GetClassInfo(void * self)
+0x00394D68	0xC	func	GetClassInfoOf68020__Fv	Kaim_CEntityManager_GetClassInfo	void * __stdcall Kaim_CEntityManager_GetClassInfo(void * self)
 0x00394E20	0x38	func	func_00394E20	-	-
 0x00394E58	0x38	func	func_00394E58	-	-
 0x00394E90	0x4C	func	func_00394E90	-	-
