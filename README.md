@@ -135,6 +135,8 @@ source, to compile demoted units).
 Text may end before its slot boundary when the actual next cached input section's alignment fills exactly that gap
 and the original gap contains only zeros. This accepts natural linker alignment without changing the object or adding
 instructions; the full-image comparison remains mandatory.
+Settlement protects the source addresses committed in `HEAD` and restores its input units file if a candidate causes
+their demotion, so a placement error cannot silently discard earlier matches.
 
 ## Automatic pipeline (tools/autodecomp.py)
 

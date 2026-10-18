@@ -7,10 +7,27 @@ Usage: settle_units.py [SLUG]         (needs the build backend; ends by running 
 """
 import subprocess, sys
 from pathlib import Path
+import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 PY = sys.executable
 SLUG = 'usa-retail'
+
+
+def source_addresses(text):
+    data = yaml.safe_load(text) or {}
+    return {int(f['addr'], 0) if isinstance(f['addr'], str) else f['addr']
+            for unit in data.get('units', []) for f in unit['functions'] if f.get('status') == 'source'}
+
+
+def check_source_regression(path, original, protected, stage):
+    missing = protected - source_addresses(path.read_bytes())
+    if missing:
+        path.write_bytes(original)
+        sample = ', '.join(hex(a) for a in sorted(missing)[:8])
+        raise SystemExit('Source regression after %s: settlement demoted %d committed functions (%s). '
+                         'Restored the input units file; fix the candidate or placement before retrying.' %
+                         (stage, len(missing), sample))
 
 
 def infrastructure_failure(output):
@@ -35,6 +52,10 @@ def ninja():
 
 
 def main():
+    units = ROOT / 'config/units.yaml'
+    original_units = units.read_bytes()
+    committed = subprocess.run(['git', 'show', 'HEAD:config/units.yaml'], cwd=ROOT, capture_output=True)
+    protected = source_addresses(committed.stdout) if committed.returncode == 0 else set()
     print(run('tools/make_ld.py', SLUG).stdout.strip())
     results = ROOT / 'build' / SLUG / 'results.json'
     results.unlink(missing_ok=True)
@@ -44,18 +65,21 @@ def main():
         raise SystemExit(compiled.stdout + compiled.stderr)
     print(compiled.stdout.strip().split('\n')[-1])
     print(run('tools/units_verify.py', 'prepare').stdout.strip())
+    check_source_regression(units, original_units, protected, 'prepare')
     for i in range(10):
         rc, out = ninja()
         if infrastructure_failure(out):
             raise SystemExit(out)
         if 'build:' in out and 'rc=0' not in out:
             print('link failed:', run('tools/units_verify.py', 'link').stdout.strip().split('\n')[0])
+            check_source_regression(units, original_units, protected, 'link')
             continue
         if rc == 0:
             print(out.strip())
             print('identical')
             return 0
         r = run('tools/units_verify.py', 'compare', '--fix')
+        check_source_regression(units, original_units, protected, 'compare')
         print(r.stdout.strip())
     return 1
 
