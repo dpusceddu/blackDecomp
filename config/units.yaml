@@ -8890,12 +8890,14 @@ units:
     size: 32
     status: source
 - name: tuf_33ad90
-  source: src/tu/physics_tu_33a488.c
-  origin: auto
+  source: src/tu/physics_tu_33a488.cpp
+  origin: physics
   flags:
   - -O2
   - -G0
   - -snas
+  - -x
+  - c++
   - -ffunction-sections
   functions:
   - addr: '0x33ad90'
@@ -8913,6 +8915,34 @@ units:
   - addr: '0x33aec8'
     symbol: func_0033AEC8
     size: 32
+    status: source
+  - addr: '0x33a488'
+    symbol: func_0033A488
+    size: 1548
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x33aa98'
+    symbol: func_0033AA98
+    size: 428
+    status: source
+  - addr: '0x33ac48'
+    symbol: func_0033AC48
+    size: 324
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x33add0'
+    symbol: func_0033ADD0
+    size: 104
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x33ae38'
+    symbol: func_0033AE38
+    size: 4
+    status: asm
+    reason: claimed physics campaign
+  - addr: '0x33ae68'
+    symbol: func_0033AE68
+    size: 60
     status: source
 - name: auto_animation_344118
   source: src/auto/animation/344118.c
