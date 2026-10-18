@@ -158,10 +158,8 @@ python3 tools/autodecomp.py report [--max-size N]         # outcome classes, fai
 python3 tools/next.py [near|types|families|data|ee]       # best next work
 ```
 
-Per function: (1) m2c on its `.s` (plus the sibling `.lit4.s`), with a C context made of the typedefs and the Ghidra
-prototypes of `config/symbols.txt` (`ctx.c`), or the same plus an int (`ctx2.c`) or pointer (`ctx3.c`) prototype with the
-argument count inferred for every other function (registers read before written in the callee, and the argument
-registers set before each call, majority over call sites); (2) mechanical cleaning: missing leading parameters, K&R
+Per function: (1) m2c on its `.s` (plus the sibling `.lit4.s`), with the recovered whole-callgraph context (`ctx.c`);
+`ctx2.c` and `ctx3.c` retain scalar/pointer fallback variants; `ctx_void.c` tests unresolved scalar returns as void; (2) mechanical cleaning: missing leading parameters, K&R
 declarations for callees, function-pointer globals, strings the function owns turned back into literals; (3) compile as
 C named `func_XXXXXXXX` with `-O2 -G0 -snas`, plus `-G8` when the original addresses small data through `$gp`; on a miss
 the flag set is varied (`-O1`, `-O3`, `-fbyte-bool`, `-G8`, `-fno-peephole`, `-fno-schedule-insns2`); (4) score: the
@@ -172,14 +170,29 @@ compiled together in one worker call; (6) identical bodies (`family`): an exact 
 family by renaming symbols; (7) functions m2c cannot read but that are a few special instructions (`li $v1, N; syscall`,
 `ei`, `di`, `sync`) come from one inline-asm template.
 
+`python3 tools/autodecomp.py context --refresh` exports both contexts and analyzes every function, matched C/C++ signatures, read-only Ghidra
+snapshots and counterpart source leads. Normal `run` refreshes stale context automatically; `--refresh-context` forces
+it. `build/auto/context.json` keeps evidence, unresolved arities and conflicts. Integer and floating argument banks are
+independent on the EE. Caller counts and register-use constraints are lower bounds; the original order of mixed
+parameters is unknown without a signature. Xbox types remain leads and never establish PS2 field offsets.
+
+`include/recovered/` holds shared PS2 access views with field-offset assertions, plus a compile signature context.
+Normal drafts include only the views they use, and worker jobs package their quoted-header dependencies. Overlapping,
+unaligned or conflicting fields stay opaque. A view's extent is an accessed prefix, not an allocation-size assertion;
+its UNVERIFIED mark changes only after a matched source function actually accesses members through that view.
+`include/recovered/signatures.h` is a complete compile context for experiments; normal drafts declare referenced
+callees individually so speculative signatures do not conflict with unrelated definitions. Re-run recovery after
+settling to refresh verification marks. During parallel campaigns, `AUTODECOMP_FREEZE_CONTEXT=1` consumes the
+centrally exported context without rewriting shared headers; a missing context is an error.
+
 Type and instruction support, all of it mechanical and checked by exact matches:
 
 - **Types.** `python3 tools/ghidra_types.py` writes `include/types_ghidra.h` from the raw Ghidra pages in `.local/ghidra/`
   (`structures_N.json`, one `get-structure-info` response per structure listed by `list-structures`, and the signatures in
   `config/symbols.txt`): 25 structures (the PS2 collision, game-object, Kynapse and AI/route types the Ghidra program holds)
   and 267 signatures under the image's `func_XXXXXXXX` names, with compile-time offset and size asserts. They are recovered
-  guesses; each structure is marked `UNVERIFIED` until a unit that includes the header and names it is in `config/units.yaml`.
-  `ctx.c` for m2c is made of the typedefs, this header and `long long` prototypes (below); every draft includes the header.
+  guesses; each structure is marked `UNVERIFIED` until a matched function actually accesses its members.
+  `ctx.c` combines these layouts with recovered signatures and access views; every draft includes the Ghidra header.
   `tools/m2c_wrap.py` is m2c with one change: a dereference of an untyped expression becomes `M2C_FIELD(expr, T *, 0)` (valid
   C) instead of `*expr`.
 - **Stack objects.** m2c's frame objects (`sp`, `&spN`, `spN`) become one `u8 sp[N] __attribute__((aligned(16)))` buffer whose

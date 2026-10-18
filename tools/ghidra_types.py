@@ -9,8 +9,7 @@ Read-only with respect to Ghidra. Inputs, in .local/ghidra/ (ignored; same conve
 Enums, typedefs and unions: the program has none beyond the ELF header types, which are not exported.
 
 Ghidra's types are recovered guesses. Every structure is marked as such in the header, and the mark changes to "used by N
-matching functions" once a source unit that includes the header and names the structure is in config/units.yaml (status
-source): a layout is trusted only when a function using it matches. Offsets and sizes are asserted at compile time.
+matching functions" once a matched function actually accesses members through that structure type: a layout is trusted only when a function using it matches. Offsets and sizes are asserted at compile time.
 Usage: ghidra_types.py [--pages DIR]
 """
 import argparse, json, re, sys
@@ -67,24 +66,27 @@ def order(structs):
 
 
 def users(names):
-    """Matching functions that use each structure: source units that include the header and mention its name."""
-    from units import load_units
+    """Count matched functions with actual member accesses through this exact type.
+
+    Merely including a header or mentioning a type elsewhere in a TU cannot verify
+    its layout. Conservative omissions remain UNVERIFIED until their use is explicit.
+    """
+    from context_recovery import source_seeds
+    from units import dependencies
     count = {n: 0 for n in names}
-    try:
-        units = load_units(variant='usa-retail')
-    except Exception:
-        return count
-    for u in units:
-        src = ROOT / u['source']
-        if not src.exists():
+    seeds, _ = source_seeds()
+    for addr, seed in seeds.items():
+        if not seed.get('matched') or not seed.get('body') or seed['source'] == 'ghidra':
             continue
-        text = src.read_text()
-        if 'types_ghidra.h' not in text:
+        if not any(str(p) == 'include/types_ghidra.h' for p in dependencies(seed['source'])):
             continue
-        n = sum(1 for f in u['functions'] if f.get('status') == 'source')
+        text = seed['raw'] + ' ' + seed['body']
         for name in names:
-            if re.search(r'\b%s\b' % name, text):
-                count[name] += n
+            variables = re.findall(r'\b' + re.escape(name) + r'\s*\*\s*(\w+)', text)
+            direct = any(re.search(r'\b' + re.escape(v) + r'\s*->\s*\w+', seed['body']) for v in variables)
+            cast = re.search(r'\(\s*\(\s*' + re.escape(name) + r'\s*\*\s*\)[^;]+?\)\s*->', seed['body'])
+            if direct or cast:
+                count[name] += 1
     return count
 
 
@@ -135,6 +137,7 @@ def main():
         asserts.append('typedef char assert_%s_size[(sizeof(%s) == %d) ? 1 : -1];' % (n, n, s['size']))
         lines.append('')
     lines.append('/* Function signatures of the named functions (Ghidra names in the comments; the symbols are the image\'s). */')
+    lines.append('#ifndef TYPES_GHIDRA_NO_PROTOTYPES')
     nsig = 0
     for addr, name, ret, params in signatures():
         try:
@@ -154,7 +157,7 @@ def main():
             nsig += 1
         except (ValueError, KeyError):
             continue
-    lines += ['', '/* Compile-time checks of the recovered layouts. */'] + asserts + ['', '#endif', '']
+    lines += ['#endif', '', '/* Compile-time checks of the recovered layouts. */'] + asserts + ['', '#endif', '']
     (ROOT / 'include/types_ghidra.h').write_text('\n'.join(lines))
     print('include/types_ghidra.h: %d structures, %d signatures' % (len(structs), nsig))
 

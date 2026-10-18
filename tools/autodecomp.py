@@ -222,26 +222,54 @@ def wide_prototypes(inv, known):
     return out
 
 
-def write_context():
-    """C context for m2c: the integer typedefs plus include/types_ghidra.h (Ghidra's structures and the signatures of the
-    named functions, under the image's func_XXXXXXXX names). Run tools/ghidra_types.py first."""
+RECOVERED = None
+
+
+def recovered_context(refresh=False):
+    """The same recovery feeds m2c and the build backend; retain diagnostics in ignored JSON."""
+    global RECOVERED
+    if RECOVERED is None or refresh:
+        if os.environ.get('AUTODECOMP_FREEZE_CONTEXT') == '1':
+            if refresh:
+                raise SystemExit('Frozen context cannot be refreshed; refresh centrally before the campaign.')
+            cache = AUTO / 'context.json'
+            if not cache.exists() or not (ROOT / 'include/recovered/layouts.h').exists() or not (AUTO / 'ctx.c').exists():
+                raise SystemExit('Frozen recovery context is missing; export it centrally before the campaign.')
+            RECOVERED = json.loads(cache.read_text())
+        else:
+            import context_recovery
+            RECOVERED = context_recovery.recover(refresh=refresh)
+            context_recovery.write_outputs(RECOVERED)
+    return RECOVERED
+
+
+def write_context(refresh=False):
+    """Whole-callgraph signatures, PS2 aggregate views and Ghidra layouts for m2c."""
+    import context_recovery
+    context = recovered_context(refresh)
+    if os.environ.get('AUTODECOMP_FREEZE_CONTEXT') == '1':
+        return len(context['signatures'])
     out = ['typedef signed char s8; typedef unsigned char u8; typedef short s16; typedef unsigned short u16;',
            'typedef int s32; typedef unsigned int u32; typedef long s64; typedef unsigned long u64;',
            'typedef float f32; typedef double f64;']
-    n = 0
     if HEADER.exists():
         for line in HEADER.read_text().split('\n'):
             if line.startswith('#') or line.startswith('typedef char assert_') or line.startswith('/*') or line.startswith(' *'):
                 continue
+            match = re.search(r'\bfunc_([0-9A-F]{8})\(', line) if line.startswith('extern ') else None
+            row = context['signatures'].get(str(int(match.group(1), 16))) if match else None
+            if row and row.get('source_quality', 0) >= 2:
+                continue
             out.append(line)
-            n += line.startswith('extern ')
     known = set(re.findall(r'\b(func_[0-9A-F]{8})\(', '\n'.join(out)))
-    wide = wide_prototypes(load_inventory(), known)
-    out += wide
+    out.append((AUTO / 'recovered_layouts.c').read_text())
+    for row in context['signatures'].values():
+        if row['name'] not in known:
+            out.append(context_recovery.prototype(row, m2c=True))
     import ee_prep
     out += ee_prep.PLACEHOLDERS
     (AUTO / 'ctx.c').write_text('\n'.join(out) + '\n')
-    return n + len(wide)
+    return len(context['signatures'])
 
 
 # ---------------------------------------------------------------------------------------------------------- arity
@@ -277,7 +305,7 @@ def analyze_arity(f):
     targets = set()
     for i, x in enumerate(ins):
         if x.isBranch() and not x.isJumptableJump():
-            targets.add(i + 1 + (x.getBranchOffsetGeneric() >> 2))
+            targets.add(i + (x.getBranchOffsetGeneric() >> 2))
     used, defined, window, sites = set(), set(), set(), []
     cut_after = -1
     for i, x in enumerate(ins):
@@ -310,7 +338,7 @@ def compute_arities(inv):
     stamp = (BUILD / 'placement.json').stat().st_mtime
     if cache.exists():
         d = json.loads(cache.read_text())
-        if d['stamp'] == stamp and d.get('version') == 3:
+        if d['stamp'] == stamp and d.get('version') == 4:
             return {int(k): v for k, v in d['arity'].items()}
     own, seen = {}, collections.defaultdict(collections.Counter)
     for f in inv:
@@ -324,40 +352,57 @@ def compute_arities(inv):
     for callee, c in seen.items():
         mode = max(c.items(), key=lambda t: (t[1], t[0]))[0]      # the usual count; one odd caller does not decide
         arity[callee] = max(own.get(callee, 0), mode)
-    cache.write_text(json.dumps(dict(stamp=stamp, version=3, arity={str(k): v for k, v in arity.items()})))
+    cache.write_text(json.dumps(dict(stamp=stamp, version=4, arity={str(k): v for k, v in arity.items()})))
     return arity
 
 
 def write_context_arity(inv):
-    """ctx2.c: ctx.c plus an int-typed prototype with the inferred argument count for every other function."""
-    arity = compute_arities(inv)
-    base = (AUTO / 'ctx.c').read_text()
-    have = set(re.findall(r'\b(func_[0-9A-F]{8})\(', base))
-    for name, t in (('ctx2.c', 's32'), ('ctx3.c', 'void *')):
-        out = [base.rstrip('\n')]
-        for f in inv:
-            if f['name'] in have:
+    """Scalar/pointer alternatives retain all anchored source and EE/float signatures."""
+    if os.environ.get('AUTODECOMP_FREEZE_CONTEXT') == '1':
+        return
+    import context_recovery
+    context = recovered_context()
+    declared = {re.search(r'\b(func_[0-9A-F]{8})\(', line).group(1): line for line in HEADER.read_text().splitlines() if line.startswith('extern ') and re.search(r'\bfunc_[0-9A-F]{8}\(', line)} if HEADER.exists() else {}
+    base = '\n'.join(line for line in (AUTO / 'ctx.c').read_text().splitlines()
+                     if not re.match(r'^(?:extern )?[^;{}]*\bfunc_[0-9A-F]{8}\(', line))
+    for name, typ in (('ctx2.c', 's32'), ('ctx3.c', 'void *'), ('ctx_void.c', 'void')):
+        out = [base]
+        for row in context['signatures'].values():
+            if row['name'] in declared and row.get('source_quality', 0) < 2:
+                out.append(declared[row['name']])
                 continue
-            n = arity.get(f['addr'], 0)
-            out.append('%s %s(%s);' % (t, f['name'], ', '.join([t] * n) if n else 'void'))
+            anchored = row.get('source_quality', 0) >= 2
+            alternate = row
+            if not anchored:
+                scalar = {'unknown', 's32', 'u32', 'void *'}
+                if typ == 'void':
+                    alternate = dict(row, ret='void' if row['ret'] in ('unknown', 's32', 'u32') else row['ret'])
+                else:
+                    params = [typ if t in scalar and str(k) not in row.get('param_views', {}) else t for k, t in enumerate(row['params'])]
+                    alternate = dict(row, params=params, ret=typ if row['ret'] in scalar else row['ret'])
+            out.append(context_recovery.prototype(alternate, m2c=True))
         (AUTO / name).write_text('\n'.join(out) + '\n')
 
 
 # ---------------------------------------------------------------------------------------------------------- m2c
 def run_m2c(fns, options=(), ctx='ctx.c'):
     """Decompile `fns` in one m2c process. Returns {name: dict(c=..., sig=..., decls={}, error=...)}."""
-    import ee_prep
+    import m2c_input
     paths, flags = [], {}
     prep_dir = AUTO / 'prep'
     prep_dir.mkdir(exist_ok=True)
     for f in fns:
-        text, flags[f['name']] = ee_prep.prep((BUILD / 's/text' / (f['name'] + '.s')).read_text())
+        text, flags[f['name']] = m2c_input.prepare((BUILD / 's/text' / (f['name'] + '.s')).read_text())
         (prep_dir / (f['name'] + '.s')).write_text(text)
         paths.append(str(prep_dir / (f['name'] + '.s')))
         if f['lit4']:
-            paths.append(str(BUILD / 's/text' / (f['name'] + '.lit4.s')))
+            lit = prep_dir / (f['name'] + '.lit4.s')
+            lit.write_text(m2c_input.normalize_sections((BUILD / 's/text' / (f['name'] + '.lit4.s')).read_text()))
+            paths.append(str(lit))
     cmd = [sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--valid-syntax', '--context', str(AUTO / ctx), '--no-cache'] + list(options) + paths
     r = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, timeout=3600)
+    if r.returncode and 'Syntax error when parsing C context' in r.stdout + r.stderr:
+        raise SystemExit('m2c context is invalid; stopping instead of recording every function as failed.\n' + (r.stdout + r.stderr)[-2000:])
     out = split_m2c(r.stdout + ('\n/* STDERR %s */' % r.stderr if r.returncode else ''), fns)
     for name, fl in flags.items():
         out.setdefault(name, {})['ee'] = fl
@@ -461,6 +506,45 @@ def stack_rewrite(body, size):
     return '    u8 sp[%d] __attribute__((aligned(16)));\n' % size + body
 
 
+def restore_abi_widths(name, ret, params, body):
+    """Restore known EE128 ABI values without widening unrelated true64 locals.
+
+    m2c represents both with s64. Explicit incoming slots, direct call results and
+    copies of those results can be recovered; arbitrary mixed-width expressions
+    remain a limitation rather than a blanket replacement of every s64 token.
+    """
+    rows = recovered_context()['signatures']
+    row = rows.get(str(int(name[5:], 16))) if re.fullmatch(r'func_[0-9A-F]{8}', name) else None
+    wide = set()
+    if row:
+        if row['ret'] in ('s128', 'u128'):
+            ret = row['ret']
+        for typ, slot in zip(row['params'], row.get('register_slots', [])):
+            if typ not in ('s128', 'u128') or slot >= 8:
+                continue
+            var = 'arg%d' % slot
+            params = re.sub(r'\b(?:s64|u64|s128|u128|s32|u32)\s+' + var + r'\b', typ + ' ' + var, params)
+            wide.add(var)
+    wide_calls = {value['name'] for value in rows.values() if value['ret'] in ('s128', 'u128')}
+    declarations = set(re.findall(r'\b(?:s64|u64)\s+(\w+)\s*(?:[;=])', body))
+    assignments = re.findall(r'\b(\w+)\s*=\s*([^;]+);', body)
+    changed = True
+    while changed:
+        changed = False
+        for target, expression in assignments:
+            if target not in declarations or target in wide:
+                continue
+            expression = expression.strip()
+            direct = expression in wide
+            call = re.match(r'^(func_[0-9A-F]{8})\(.*\)$', expression, re.S)
+            if direct or call and call.group(1) in wide_calls:
+                wide.add(target)
+                changed = True
+    for var in wide & declarations:
+        body = re.sub(r'\b(s64|u64)(\s+' + re.escape(var) + r'\b)', lambda match: ('s128' if match.group(1) == 's64' else 'u128') + match.group(2), body)
+    return ret, params, body
+
+
 def clean_function(name, r, sigs, strings=None, stack=None):
     """Compose a compilable C file for one decompiled function (the mechanical cleaning step). Returns (source, note)."""
     if r.get('error'):
@@ -474,6 +558,7 @@ def clean_function(name, r, sigs, strings=None, stack=None):
         if whole is None:
             return None, 'ee-instruction: 128-bit or unaligned access mixed with real 64-bit accesses'
         ret, params, body = whole.split('\x00')
+    ret, params, body = restore_abi_widths(name, ret, params, body)
     # a register that is read before it is set is an argument the function receives and passes on (or ignores)
     for reg in re.findall(r'M2C_ERROR\(/\* Read from unset register \$a([0-3]) \*/\)', body):
         body = body.replace('M2C_ERROR(/* Read from unset register $a%s */)' % reg, 'arg%s' % reg)
@@ -503,17 +588,23 @@ def clean_function(name, r, sigs, strings=None, stack=None):
         if re.search(r'\b%s\b' % sym, body):
             body = re.sub(r'&?\b%s\b' % sym, lambda m: '"%s"' % lit, body)
     sig = '%s %s(%s)' % (ret, name, params)
-    lines = ['#include "auto/prelude.h"', '#include "types_ghidra.h"', '']
+    lines = ['#include "auto/prelude.h"', '#define TYPES_GHIDRA_NO_PROTOTYPES', '#include "types_ghidra.h"', '#undef TYPES_GHIDRA_NO_PROTOTYPES', '']
     seen = set()
-    known = header_functions()
+    known = {re.search(r'\b(func_[0-9A-F]{8})\(', line).group(1): line for line in HEADER.read_text().splitlines() if line.startswith('extern ') and re.search(r'\bfunc_[0-9A-F]{8}\(', line)} if HEADER.exists() else {}
     for ident in IDENT.findall(sig + ' ' + body):
         if ident in seen or ident == name:
             continue
         seen.add(ident)
         d = r['decls'].get(ident)
-        if ident in known or ident.startswith('__ee_'):
+        if ident.startswith('__ee_'):
             continue
-        if d and d[0] == 'func':
+        row = recovered_context()['signatures'].get(str(int(ident[5:], 16))) if re.fullmatch(r'func_[0-9A-F]{8}', ident) else None
+        if ident in known and (not row or row.get('source_quality', 0) < 2):
+            lines.append(known[ident])
+        elif row:
+            import context_recovery
+            lines.append('extern ' + context_recovery.prototype(row))
+        elif d and d[0] == 'func':
             lines.append(decl_function(ident, d))
         elif d and d[0] == 'data' and re.search(r'\b%s\(' % ident, body):
             lines.append('extern s32 (*%s)();' % ident)     # called through a pointer held in a global
@@ -524,11 +615,11 @@ def clean_function(name, r, sigs, strings=None, stack=None):
                 lines.append('extern s32 (*%s)();' % ident)
             else:
                 lines.append('extern s32 %s;' % ident if ident.startswith('D_') else 'extern s32 %s();' % ident)
-    if r.get('ee') and r['ee']['q'] and not r['ee']['real64']:
-        lines = [re.sub(r'\bu64\b', 'u128', re.sub(r'\bs64\b', 's128', l)) for l in lines]
     body2, changed = byte_addresses(body, lines)
     if changed and not os.environ.get('AUTODECOMP_NO_BYTEADDR'):
         body = body2
+    views = sorted(set(re.findall(r'\bRecovered_\w+\b', '\n'.join(lines) + sig + body)))
+    lines[2:2] = ['#include "recovered/%s.h"' % view for view in views]
     src = '\n'.join(lines) + '\n\n' + sig + ' {\n' + body + '\n}\n'
     return src, sig
 
@@ -587,7 +678,7 @@ def decl_function(ident, d):
     when a float or double parameter must not be promoted."""
     _, ret, params = d
     ret = 's32' if ret.replace('M2C_UNK', '').strip() == '' else ret
-    if re.search(r'\bf(32|64)\b', params):
+    if params.strip() and 'M2C_UNK' not in params:
         return 'extern %s %s(%s);' % (ret, ident, params)
     return 'extern %s %s();' % (ret, ident)
 
@@ -622,14 +713,39 @@ def split_cc(flags):
     return cc, out
 
 
+def compile_dependencies(source):
+    """Quoted-header closure for a draft, including custom area and recovered headers."""
+    seen, todo = {}, [(source, ROOT / 'src')]
+    while todo:
+        text, parent = todo.pop()
+        for name in re.findall(r'^\s*#\s*include\s+"([^"]+)"', text, re.M):
+            for candidate in (parent / name, ROOT / 'include' / name, ROOT / name):
+                if candidate.is_file():
+                    path = candidate.resolve()
+                    try:
+                        relative = path.relative_to(ROOT).as_posix()
+                    except ValueError:
+                        raise ValueError('draft header is outside the repository')
+                    if relative not in seen:
+                        seen[relative] = path.read_bytes()
+                        todo.append((seen[relative].decode(), path.parent))
+                    break
+    return seen
+
+
 def worker_compile(jobs, tag='auto'):
     """jobs: list of (key, source text, flags). Compiles in one worker call. Returns {key: (rc, message, object bytes)}.
     Results are cached by hash of source and flags in build/auto/cache/."""
     cache = AUTO / 'cache'
     cache.mkdir(parents=True, exist_ok=True)
-    out, todo = {}, []
+    out, todo, headers = {}, [], {}
     for key, src, flags in jobs:
-        h = hashlib.sha256((src + '\0' + ' '.join(flags) + '\0' + PRELUDE_HASH).encode()).hexdigest()[:24]
+        deps = compile_dependencies(src)
+        headers.update(deps)
+        digest = hashlib.sha256((src + '\0' + ' '.join(flags) + '\0' + PRELUDE_HASH).encode())
+        for path, data in sorted(deps.items()):
+            digest.update(path.encode() + b'\0' + data)
+        h = digest.hexdigest()[:24]
         cj = cache / (h + '.json')
         if cj.exists():
             d = json.loads(cj.read_text())
@@ -643,8 +759,12 @@ def worker_compile(jobs, tag='auto'):
     buf = io.BytesIO()
     plan = dict(compile=[], pack='newobjs.tgz')
     with tarfile.open(fileobj=buf, mode='w:gz', compresslevel=1) as tar:
-        for rel in ('include/macro.inc', 'tools/elfobj.py', 'include/auto/prelude.h', 'include/types_ghidra.h'):
+        for rel in ('include/macro.inc', 'tools/elfobj.py'):
             tar.add(ROOT / rel, arcname=rel)
+        for rel, data in sorted(headers.items()):
+            item = tarfile.TarInfo(rel)
+            item.size = len(data)
+            tar.addfile(item, io.BytesIO(data))
         for key, src, flags, h in todo:
             data = src.encode()
             ti = tarfile.TarInfo('src/%s.c' % h)
@@ -771,8 +891,11 @@ def compiled_tokens(obj_bytes, symbol, consts=None):
             # symbol defined in the compiled unit itself (a constant it brought along): compare the bytes it points at
             sec = e.sections[y['shndx']]
             where = y['value'] + add
-            data = e.content(sec)
-            toks.append((masked, (k, ('const', sec['name'], data[where:where + 4].hex()))))
+            from constant_relocs import constant_word
+            image = ADDRNAME.match(symbol)
+            word = constant_word(e, syms, sec, where, fs, int(image.group(1), 16) if image else None)
+            value = word.hex() if word is not None else 'unresolved-constant-relocation'
+            toks.append((masked, (k, ('const', sec['name'], value))))
             continue
         if am:
             base = int(am.group(1), 16)
@@ -1046,6 +1169,11 @@ def expand_macros(src):
     prelude = (ROOT / 'include/auto/prelude.h').read_text()
     types = '\n'.join(l for l in prelude.split('\n') if l.startswith('typedef'))
     body = src.replace('#include "auto/prelude.h"\n', '')
+    body = body.replace('#define TYPES_GHIDRA_NO_PROTOTYPES\n', '').replace('#undef TYPES_GHIDRA_NO_PROTOTYPES\n', '')
+    for view in re.findall(r'^#include "recovered/(Recovered_\w+\.h)"$', body, re.M):
+        header = (ROOT / 'include/recovered' / view).read_text()
+        layout = '\n'.join(line for line in header.splitlines() if not line.startswith('#') and not line.startswith('typedef char assert_'))
+        body = body.replace('#include "recovered/%s"' % view, layout)
     if '#include "types_ghidra.h"' in body:
         names = re.findall(r'^typedef struct (\w+)', (ROOT / 'include/types_ghidra.h').read_text(), re.M)
         if any(re.search(r'\b%s\b' % n, body) for n in names):
@@ -1410,7 +1538,7 @@ def cmd_report(a):
     if ee:
         print('unsupported instructions:', ee.most_common(a.top))
     print('by size:')
-    for lo, hi in ((0, 12), (12, 24), (24, 48), (48, 100), (100, 200), (200, 300)):
+    for lo, hi in ((0, 12), (12, 24), (24, 48), (48, 100), (100, 200), (200, 300), (300, 1000), (1000, 1000000)):
         b = [v for _, v in sel if lo <= v['size'] < hi]
         if b:
             m = sum(v['status'] == 'matched' for v in b)
@@ -1430,6 +1558,16 @@ def decl_name(line):
     return m.group(1) if m else line
 
 
+def retire_asm_entries(units, addresses):
+    """Retire only replaced ASM placeholders; preserve every baseline source entry."""
+    result = []
+    for unit in units:
+        functions = [f for f in unit['functions'] if f['addr'] not in addresses or f.get('status') == 'source']
+        if functions:
+            result.append(dict(unit, functions=functions))
+    return result
+
+
 def cmd_register(a):
     """Write src/auto/<region>/*.c and add units to config/units.yaml for every exact draft that is not registered yet."""
     sys.path.insert(0, str(ROOT / 'tools'))
@@ -1440,7 +1578,7 @@ def cmd_register(a):
     placement = json.loads((BUILD / 'placement.json').read_text())['functions']
     index = {f['addr']: i for i, f in enumerate(placement)}
     units = load_units(variant=SLUG)
-    have = {f['addr'] for u in units for f in u['functions']}
+    have = {f['addr'] for u in units for f in u['functions'] if f.get('status') == 'source'}
     todo = sorted((int(k, 16), v) for k, v in res.items()
                   if v['status'] == 'matched' and 'registered' not in v and int(k, 16) not in have and 'source' in v)
     if a.limit:
@@ -1460,6 +1598,9 @@ def cmd_register(a):
         decls.update(dn)
     if cur:
         groups.append(cur)
+    replacing = {addr for addr, _ in todo}
+    units = retire_asm_entries(units, replacing)
+    used_names = {u['name'] for u in units}
     out = []
     for g in groups:
         first = g[0][0]
@@ -1474,11 +1615,19 @@ def cmd_register(a):
         names = {rec['name'] for _, rec in g}
         lines = [l for k, l in decls.items() if k not in names]
         text = '#include "auto/prelude.h"\n\n' + ('\n'.join(lines) + '\n\n' if lines else '') + '\n'.join(bodies)
-        rel = 'src/auto/%s/%06x.c' % (region, first)
+        base = '%06x' % first
+        suffix = ''
+        attempt = 0
+        while (ROOT / ('src/auto/%s/%s%s.c' % (region, base, suffix))).exists() or ('auto_%s_%s%s' % (region, base, suffix)) in used_names:
+            attempt += 1
+            suffix = '_retry%d' % attempt
+        rel = 'src/auto/%s/%s%s.c' % (region, base, suffix)
+        unit_name = 'auto_%s_%s%s' % (region, base, suffix)
+        used_names.add(unit_name)
         (ROOT / rel).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / rel).write_text(text)
         cc, fl = split_cc(g[0][1]['flags'])
-        out.append(dict(name='auto_%s_%06x' % (region, first), source=rel, origin='auto', compiler=cc,
+        out.append(dict(name=unit_name, source=rel, origin='auto', compiler=cc,
                         flags=fl, externs={},
                         functions=[dict(addr=addr, symbol=rec['name'], size=rec['size'], status='source') for addr, rec in g]))
         for addr, rec in g:
@@ -1495,7 +1644,10 @@ def cmd_settle(a):
     import units_verify
     for rnd in range(3):
         r = subprocess.run([sys.executable, str(ROOT / 'tools/settle_units.py')], cwd=ROOT, capture_output=True, text=True)
-        print(r.stdout.strip().split('\n')[-1], '' if r.returncode == 0 else '(settle failed)')
+        if r.returncode:
+            sys.stderr.write(r.stdout + r.stderr)
+            raise SystemExit('Settle failed; stopping before further unit changes.')
+        print(r.stdout.strip().split('\n')[-1])
         units = load_units(variant=SLUG)
         res = load_results()
         byunit = {}
@@ -1530,6 +1682,9 @@ def cmd_settle(a):
         print('retrying %d group members as single units' % retry)
         cmd_register(argparse.Namespace(group=a.group, limit=None))
     r = subprocess.run(['ninja'], cwd=ROOT, capture_output=True, text=True)
+    if r.returncode:
+        sys.stderr.write(r.stdout + r.stderr)
+        raise SystemExit('Final identical build failed.')
     print(r.stdout.strip().split('\n')[-1])
 
 
@@ -1707,12 +1862,18 @@ def reconcile(res):
     return n
 
 
+def cmd_context(a):
+    AUTO.mkdir(parents=True, exist_ok=True)
+    print('context: %d prototypes' % write_context(refresh=a.refresh))
+    write_context_arity(load_inventory())
+    print(json.dumps(recovered_context()['summary'], indent=2))
+
+
 def cmd_run(a):
     AUTO.mkdir(parents=True, exist_ok=True)
     inv = load_inventory()
-    if not (AUTO / 'ctx.c').exists() or a.refresh_context:
-        print('context: %d prototypes' % write_context())
-        write_context_arity(inv)
+    print('context: %d prototypes' % write_context(refresh=a.refresh_context))
+    write_context_arity(inv)
     done = source_functions()
     sel = [f for f in inv if f['addr'] not in done]
     if a.addr:
@@ -1742,7 +1903,7 @@ def cmd_run(a):
         sel = sel[:a.limit]
     if not a.redo and not a.status:
         sel = [f for f in sel if '0x%x' % f['addr'] not in res]
-    if 'verify-failed' in (a.status or []):
+    if a.redo or 'verify-failed' in (a.status or []):
         for f in sel:
             if res.get('0x%x' % f['addr'], {}).get('status') == 'verify-failed':
                 res.pop('0x%x' % f['addr'])        # the earlier exact draft could not be placed: draft it again
@@ -1765,6 +1926,9 @@ def cmd_run(a):
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest='cmd', required=True)
+    context = sub.add_parser('context', help='refresh the shared m2c and compile contexts')
+    context.add_argument('--refresh', action='store_true')
+    context.set_defaults(fn=cmd_context)
     r = sub.add_parser('run')
     r.add_argument('--max-size', type=int, help='functions smaller than this many bytes')
     r.add_argument('--min-size', type=int)
@@ -1775,7 +1939,7 @@ def main():
     r.add_argument('--batch', type=int, default=200, help='functions per m2c process')
     r.add_argument('--chunk', type=int, default=600, help='functions per checkpoint of auto.json')
     r.add_argument('--redo', action='store_true')
-    r.add_argument('--ctx', default='ctx.c', help='m2c context file in build/auto/ (ctx.c, ctx2.c, ctx3.c)')
+    r.add_argument('--ctx', default='ctx.c', help='m2c context file in build/auto/ (ctx.c, ctx2.c, ctx3.c, ctx_void.c)')
     r.add_argument('--tag', help='name of this m2c variant in the records')
     r.add_argument('--m2c-option', action='append', help='extra m2c option (repeatable), e.g. --m2c-option=--no-andor')
     r.add_argument('--status', action='append', help='redo the functions whose earlier outcome was this')

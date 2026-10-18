@@ -159,7 +159,7 @@ struct RecoveredAIActionEvent {
     u32 payload[5]; /* 0x4 */
 };
 
-/* RecoveredAIActionHeader, 40 bytes: UNVERIFIED Ghidra guess */
+/* RecoveredAIActionHeader, 40 bytes: used by 8 matching functions */
 struct RecoveredAIActionHeader {
     void *brain; /* 0x0 */
     void *vtable; /* 0x4 */
@@ -327,6 +327,7 @@ struct RecoveredRouteStorage {
 };
 
 /* Function signatures of the named functions (Ghidra names in the comments; the symbols are the image's). */
+#ifndef TYPES_GHIDRA_NO_PROTOTYPES
 extern PS2GameObjectRecord * func_00129160(PS2GameObjectManager *, u64); /* GameObjectManager_FindByName */
 extern s32 func_00171A40(void *, void *); /* GameBrain_Configure */
 extern void func_00174110(void); /* AIMovement_ResetSearchStatistics */
@@ -594,6 +595,7 @@ extern void * func_00394220(void *); /* Kaim_CGapDynamicAvoidance_GetClassInfo *
 extern void * func_00394C10(void *); /* Kaim_CSoundManager_GetClassInfo */
 extern void * func_00394D18(void); /* Kaim_CEntityManager_TypeInfo */
 extern void * func_00394D68(void *); /* Kaim_CEntityManager_GetClassInfo */
+#endif
 
 /* Compile-time checks of the recovered layouts. */
 typedef char assert_PS2AnimationExpression_kind[(((int) &((PS2AnimationExpression *) 0)->kind) == 0) ? 1 : -1];
