@@ -41,6 +41,10 @@ struct ChildBuffers : ObjectBase {
         second = 0;
         third = 0;
     }
+    ChildBuffers(const char* text);
+    ChildBuffers(const ChildBuffers& other);
+    ChildBuffers& operator=(const ChildBuffers& other);
+    void DeleteChildren();
     virtual ~ChildBuffers();
 
     ChildBuffers* SetFirst(const char* text);
@@ -52,6 +56,11 @@ struct ChildBuffers : ObjectBase {
     const char* FindThirdBySecond(const char* second) const;
     ChildBuffers* GetChild(unsigned int index) const;
     ChildBuffers* AddChild();
+    ChildBuffers* AddText(const char* text) __asm__("func_002E2B78");
+    ChildBuffers* AddCopy(const ChildBuffers* other) __asm__("func_002E2EF0");
+    ChildBuffers* FindByFirst(const char* key) const __asm__("func_002E3288");
+    void RemoveChild(ChildBuffers* child) __asm__("func_002E3828");
+    const char* GetValue() const __asm__("func_002E3918");
 };
 
 // Replaces an owned string with a copy of `text` (inline strlen/strcpy).
@@ -61,24 +70,6 @@ struct ChildBuffers : ObjectBase {
     member = (char*)KaimAllocate(strlen(text) + 1); \
     strcpy(member, text); \
     return this;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }  // namespace Kaim
 
