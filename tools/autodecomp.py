@@ -1182,6 +1182,13 @@ PERMUTER = ROOT / '.venv/decomp-permuter'
 PERMUTER_COMMIT = '8556c81d80d1c1af98a858c8f4dc951357f29139'    # pinned like requirements.txt
 
 
+def strip_c_comments(text):
+    """Remove parser-unsupported comments while preserving literals and token boundaries."""
+    tokens = r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'|/\*.*?\*/|//[^\n]*'
+    return re.sub(tokens, lambda m: (' ' + '\n' * m[0].count('\n'))
+                  if m[0].startswith(('/*', '//')) else m[0], text, flags=re.S)
+
+
 def expand_macros(src):
     """Self-contained C for the permuter's parser: inline the prelude's typedefs and expand its macros."""
     prelude = (ROOT / 'include/auto/prelude.h').read_text()
@@ -1197,6 +1204,8 @@ def expand_macros(src):
         if any(re.search(r'\b%s\b' % n, body) for n in names):
             raise ValueError('uses a Ghidra structure: the permuter\'s parser does not read the header')
         body = body.replace('#include "types_ghidra.h"\n', '')
+
+    body = strip_c_comments(types + '\n' + body)
 
     def call(text, name, make):
         out, i = [], 0
@@ -1226,7 +1235,7 @@ def expand_macros(src):
             i = k + 1
     body = call(body, 'M2C_FIELD', lambda a: '(*(%s)((s8 *)(%s) + (%s)))' % (a[1], a[0], a[2]))
     body = call(body, 'M2C_BITWISE', lambda a: '((%s)(%s))' % (a[0], a[1]))
-    return types + '\n' + body.replace('NULL', '((void *)0)')
+    return body.replace('NULL', '((void *)0)')
 
 
 def hamming(a, b):
@@ -1265,14 +1274,20 @@ class Climb:
         from src.candidate import Candidate
         from src.perm.perm import EvalState
         self.cands = {}
+        first_error = None
         for i in range(k):
             try:
                 c = Candidate.from_source(self.src, EvalState(), self.f['name'], self.weights, rng_seed=self.rnd.randrange(1, 10 ** 12))
                 for _ in range(self.rnd.choice((1, 1, 2, 3))):
                     c.randomize_ast()
                 self.cands[i] = c.get_source()
-            except Exception:
+            except Exception as error:
+                if first_error is None:
+                    first_error = error
                 continue
+        if k and not self.cands:
+            raise RuntimeError('Permuter generated no candidates for %s: %s' %
+                               (self.f['name'], first_error)) from first_error
         return [((self.f['name'], i), self.plain(t), self.flags) for i, t in self.cands.items()]
 
     def feed(self, results):

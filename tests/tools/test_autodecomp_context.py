@@ -8,6 +8,32 @@ import autodecomp as auto
 
 
 class IntegrationTests(unittest.TestCase):
+    def test_permuter_expansion_removes_header_comments_and_preserves_literals(self):
+        source = '#include "recovered/Recovered_Vtable_003DBDC8.h"\nint f(void) { return 1; /* note */ }\n'
+        expanded = auto.expand_macros(source)
+        self.assertNotIn('/*', expanded)
+        sys.path.insert(0, str(auto.PERMUTER))
+        try:
+            from perm_pycparser import c_parser
+        except ImportError:
+            self.skipTest('optional pinned permuter is not installed')
+        c_parser.CParser().parse(expanded)
+        self.assertEqual(auto.strip_c_comments('int/**/x; // note\nchar *s="/*literal*/ //";'),
+                         'int x;  \nchar *s="/*literal*/ //";')
+
+    def test_permuter_reports_zero_candidates_instead_of_silent_rounds(self):
+        sys.path.insert(0, str(auto.PERMUTER))
+        try:
+            from src.candidate import Candidate
+        except ImportError:
+            self.skipTest('optional pinned permuter is not installed')
+        import random
+        climb = auto.Climb.__new__(auto.Climb)
+        climb.src, climb.f, climb.weights, climb.rnd = 'invalid', {'name': 'f'}, {}, random.Random(1)
+        with patch.object(Candidate, 'from_source', side_effect=ValueError('bad source')):
+            with self.assertRaisesRegex(RuntimeError, 'no candidates for f: bad source'):
+                climb.generate(3)
+
     def test_header_closure_includes_custom_area_dependencies(self):
         result = auto.compile_dependencies('#include "animation/graph.h"\n#include "auto/prelude.h"\n')
         self.assertIn('include/animation/graph.h', result)
