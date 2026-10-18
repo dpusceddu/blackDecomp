@@ -16402,7 +16402,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 14 of 79 functions
+  flags_basis: matched 17 of 79 functions
   data:
     .rodata: ['0x402ec8', '0x402f08']
     .lit4: ['0x40d80c', '0x40d83c']

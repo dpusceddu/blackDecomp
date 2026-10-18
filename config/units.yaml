@@ -3645,6 +3645,311 @@ units:
     symbol: func_002A9DF0
     size: 60
     status: source
+  - addr: '0x2a8f78'
+    symbol: func_002A8F78
+    size: 332
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9178'
+    symbol: func_002A9178
+    size: 92
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a91d8'
+    symbol: func_002A91D8
+    size: 100
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9240'
+    symbol: func_002A9240
+    size: 204
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9310'
+    symbol: func_002A9310
+    size: 204
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9430'
+    symbol: func_002A9430
+    size: 104
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9498'
+    symbol: func_002A9498
+    size: 124
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9588'
+    symbol: func_002A9588
+    size: 88
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a95e0'
+    symbol: func_002A95E0
+    size: 96
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9640'
+    symbol: func_002A9640
+    size: 492
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9838'
+    symbol: func_002A9838
+    size: 112
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a98a8'
+    symbol: func_002A98A8
+    size: 104
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9910'
+    symbol: func_002A9910
+    size: 196
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a99d8'
+    symbol: func_002A99D8
+    size: 268
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9ae8'
+    symbol: func_002A9AE8
+    size: 136
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9b70'
+    symbol: func_002A9B70
+    size: 316
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9cb8'
+    symbol: func_002A9CB8
+    size: 312
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9e88'
+    symbol: func_002A9E88
+    size: 120
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2a9f08'
+    symbol: func_002A9F08
+    size: 260
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa080'
+    symbol: func_002AA080
+    size: 228
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa188'
+    symbol: func_002AA188
+    size: 240
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa2e8'
+    symbol: func_002AA2E8
+    size: 88
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa340'
+    symbol: func_002AA340
+    size: 184
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa420'
+    symbol: func_002AA420
+    size: 104
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa488'
+    symbol: func_002AA488
+    size: 136
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa510'
+    symbol: func_002AA510
+    size: 88
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa570'
+    symbol: func_002AA570
+    size: 416
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa710'
+    symbol: func_002AA710
+    size: 304
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aa840'
+    symbol: func_002AA840
+    size: 548
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aaa68'
+    symbol: func_002AAA68
+    size: 1248
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2aaf48'
+    symbol: func_002AAF48
+    size: 772
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ab250'
+    symbol: func_002AB250
+    size: 292
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ab378'
+    symbol: func_002AB378
+    size: 444
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ab538'
+    symbol: func_002AB538
+    size: 936
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ab8e0'
+    symbol: func_002AB8E0
+    size: 516
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2abaf8'
+    symbol: func_002ABAF8
+    size: 160
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2abb98'
+    symbol: func_002ABB98
+    size: 108
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2abc08'
+    symbol: func_002ABC08
+    size: 272
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2abd68'
+    symbol: func_002ABD68
+    size: 280
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2abe90'
+    symbol: func_002ABE90
+    size: 496
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac0d0'
+    symbol: func_002AC0D0
+    size: 88
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac128'
+    symbol: func_002AC128
+    size: 220
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac210'
+    symbol: func_002AC210
+    size: 100
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac278'
+    symbol: func_002AC278
+    size: 100
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac2e0'
+    symbol: func_002AC2E0
+    size: 164
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac388'
+    symbol: func_002AC388
+    size: 216
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac468'
+    symbol: func_002AC468
+    size: 252
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac568'
+    symbol: func_002AC568
+    size: 112
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac5d8'
+    symbol: func_002AC5D8
+    size: 80
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac628'
+    symbol: func_002AC628
+    size: 156
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac750'
+    symbol: func_002AC750
+    size: 64
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac7d0'
+    symbol: func_002AC7D0
+    size: 56
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac8a0'
+    symbol: func_002AC8A0
+    size: 104
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ac908'
+    symbol: func_002AC908
+    size: 732
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2acbe8'
+    symbol: func_002ACBE8
+    size: 636
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ace68'
+    symbol: func_002ACE68
+    size: 840
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ad1b0'
+    symbol: func_002AD1B0
+    size: 276
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ad2c8'
+    symbol: func_002AD2C8
+    size: 480
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ad4a8'
+    symbol: func_002AD4A8
+    size: 100
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ad510'
+    symbol: func_002AD510
+    size: 196
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
+  - addr: '0x2ad5d8'
+    symbol: func_002AD5D8
+    size: 136
+    status: asm
+    reason: 'claimed: RW camera/image/frame campaign'
 - name: auto_other_2aa010
   source: src/auto/other/2aa010.c
   origin: auto
@@ -40462,4 +40767,52 @@ units:
   - addr: '0x2ce950'
     symbol: func_002CE950
     size: 48
+    status: source
+- name: rwcore_2aa040
+  source: src/tu/renderware_core_tu_2a8f78_2aa040.c
+  origin: renderware_core
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2aa040'
+    symbol: func_002AA040
+    size: 52
+    status: source
+- name: rwcore_2ac090
+  source: src/tu/renderware_core_tu_2a8f78_2ac090.c
+  origin: renderware_core
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2ac090'
+    symbol: func_002AC090
+    size: 48
+    status: asm
+    reason: extra
+- name: rwcore_2abd18
+  source: src/tu/renderware_core_tu_2a8f78_2abd18.c
+  origin: renderware_core
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x2abd18'
+    symbol: func_002ABD18
+    size: 76
+    status: source
+- name: rwcore_2a9e38
+  source: src/tu/renderware_core_tu_2a8f78_2a9e38.c
+  origin: renderware_core
+  flags:
+  - -O2
+  - -G8
+  functions:
+  - addr: '0x2a9e38'
+    symbol: func_002A9E38
+    size: 68
     status: source

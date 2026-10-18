@@ -1,7 +1,7 @@
 #ifndef BLACK_RENDERWARE_CORE_IMAGE_H
 #define BLACK_RENDERWARE_CORE_IMAGE_H
 #include "auto/prelude.h"
-/* UNVERIFIED PS2 access view; offsets follow image consumers. Allocation extent is unknown. */
+/* VERIFIED accessed prefix: the matching pixel-release function uses flags, pixels and palette. Allocation extent is unknown. */
 typedef struct RwColorPS2 { u8 red, green, blue, alpha; } RwColorPS2;
 typedef struct RwImagePS2 {
     s32 flags, width, height, depth, stride;
