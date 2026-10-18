@@ -16457,7 +16457,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 1 of 18 functions
+  flags_basis: matched 3 of 18 functions
   data:
     .lit4: ['0x40d83c', '0x40d860']
     .sdata: ['0x40df60', '0x40df6c']

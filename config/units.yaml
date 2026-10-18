@@ -43402,3 +43402,101 @@ units:
     size: 568
     status: asm
     reason: schedule
+- name: wave2_rw_core_2af800
+  source: src/renderware_core/tu_2af800.c
+  origin: renderware_core
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-rw-core
+  functions:
+  - addr: '0x2af800'
+    symbol: func_002AF800
+    size: 308
+    status: asm
+    reason: claimed
+  - addr: '0x2af938'
+    symbol: func_002AF938
+    size: 268
+    status: asm
+    reason: claimed
+  - addr: '0x2afa48'
+    symbol: func_002AFA48
+    size: 324
+    status: asm
+    reason: claimed
+  - addr: '0x2afb90'
+    symbol: func_002AFB90
+    size: 296
+    status: asm
+    reason: claimed
+  - addr: '0x2afcb8'
+    symbol: func_002AFCB8
+    size: 248
+    status: asm
+    reason: claimed
+  - addr: '0x2afdb0'
+    symbol: func_002AFDB0
+    size: 1244
+    status: asm
+    reason: claimed
+  - addr: '0x2b0290'
+    symbol: func_002B0290
+    size: 572
+    status: asm
+    reason: claimed
+  - addr: '0x2b04d0'
+    symbol: func_002B04D0
+    size: 684
+    status: asm
+    reason: claimed
+  - addr: '0x2b0780'
+    symbol: func_002B0780
+    size: 1568
+    status: asm
+    reason: claimed
+  - addr: '0x2b0da0'
+    symbol: func_002B0DA0
+    size: 2596
+    status: asm
+    reason: claimed
+  - addr: '0x2b17c8'
+    symbol: func_002B17C8
+    size: 1684
+    status: asm
+    reason: claimed
+  - addr: '0x2b1e60'
+    symbol: func_002B1E60
+    size: 4
+    status: asm
+    reason: claimed
+  - addr: '0x2b1e68'
+    symbol: func_002B1E68
+    size: 292
+    status: asm
+    reason: claimed
+  - addr: '0x2b1f90'
+    symbol: func_002B1F90
+    size: 288
+    status: asm
+    reason: claimed
+  - addr: '0x2b20b0'
+    symbol: func_002B20B0
+    size: 468
+    status: asm
+    reason: claimed
+  - addr: '0x2b2288'
+    symbol: func_002B2288
+    size: 256
+    status: source
+  - addr: '0x2b24d0'
+    symbol: func_002B24D0
+    size: 68
+    status: source
+  - addr: '0x2b2518'
+    symbol: func_002B2518
+    size: 284
+    status: asm
+    reason: claimed
