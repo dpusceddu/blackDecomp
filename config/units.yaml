@@ -31491,6 +31491,7 @@ units:
     symbol: func_0034FE10
     size: 92
     status: source
+  claim: wave2-animation
 - name: auto_animation_34fe70
   source: src/auto/animation/34fe70.c
   origin: auto
@@ -43257,3 +43258,119 @@ units:
     symbol: func_00311048
     size: 100
     status: source
+- name: animation_sampling_sample_root
+  source: src/animation/tu_34f360/sample_root.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34f980'
+    symbol: func_0034F980
+    size: 80
+    status: source
+- name: animation_sampling_sample_pose
+  source: src/animation/tu_34f360/sample_pose.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34f9d0'
+    symbol: func_0034F9D0
+    size: 140
+    status: source
+- name: animation_sampling_sample_header
+  source: src/animation/tu_34f360/sample_header.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34fa60'
+    symbol: func_0034FA60
+    size: 148
+    status: source
+- name: animation_sampling_allocate_header
+  source: src/animation/tu_34f360/allocate_header.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34f668'
+    symbol: func_0034F668
+    size: 200
+    status: source
+- name: animation_sampling_blend_header
+  source: src/animation/tu_34f360/blend_header.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34fc80'
+    symbol: func_0034FC80
+    size: 400
+    status: asm
+    reason: schedule
+- name: animation_sampling_blend_pose
+  source: src/animation/tu_34f360/blend_pose.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34fb58'
+    symbol: func_0034FB58
+    size: 296
+    status: asm
+    reason: schedule
+- name: animation_sampling_evaluate_header
+  source: src/animation/tu_34f360/evaluate_header.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34f730'
+    symbol: func_0034F730
+    size: 544
+    status: asm
+    reason: schedule
+- name: animation_sampling_evaluate_pose
+  source: src/animation/tu_34f360/evaluate_pose.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x34f430'
+    symbol: func_0034F430
+    size: 568
+    status: asm
+    reason: schedule
