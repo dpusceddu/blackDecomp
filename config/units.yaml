@@ -27405,6 +27405,7 @@ units:
     symbol: func_00311248
     size: 48
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_3112e0
   source: src/auto/other/3112e0.c
   origin: auto
@@ -27417,6 +27418,7 @@ units:
     symbol: func_003112E0
     size: 32
     status: source
+  claim: wave2-rw-audio
 - name: auto_other_311430
   source: src/auto/other/311430.c
   origin: auto
@@ -27429,6 +27431,7 @@ units:
     symbol: func_00311430
     size: 8
     status: source
+  claim: wave2-rw-audio
 - name: tuf_311498
   source: src/tu/rwa_ee_tu_310978.c
   origin: auto
@@ -27446,6 +27449,7 @@ units:
     symbol: func_00311558
     size: 12
     status: source
+  claim: wave2-rw-audio
 - name: tu_311b50
   source: src/tu/311b50.c
   origin: auto
@@ -43240,3 +43244,16 @@ units:
     size: 268
     status: asm
     reason: schedule
+- name: rwa_wave2_311048
+  source: src/rwa_ee/tu_310978.c
+  origin: rwa_ee
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  claim: wave2-rw-audio
+  functions:
+  - addr: '0x311048'
+    symbol: func_00311048
+    size: 100
+    status: source
