@@ -110,9 +110,43 @@ struct FrontendControllerScreen {
     void Update() __asm__("func_00107228");
 };
 
+struct FrontendMenuState {
+    int state;
+    char reserved4[0x40];
+    int pending;
+    int mode;
+    char loader[0x1bc];
+    int currentScreen, requestedScreen, forced;
+    int reserved214;
+    char message[0xb30];
+    float elapsed;
+    unsigned char initialized, musicStarted;
+    short reservedd4e;
+    void* archive;
+    void Initialize() __asm__("func_001041A8");
+    int Enter() __asm__("func_00104210");
+    void Update() __asm__("func_001046B0");
+    int Exit() __asm__("func_00104E10");
+    void Destroy() __asm__("func_00105058");
+    void Request(int screen, int force) __asm__("func_001040F8");
+    int Load(const char* name, int kind, int force) __asm__("func_001040D8");
+    void ChangeMode(int next) __asm__("func_00105228");
+    void MarkPending() __asm__("func_00105258");
+};
+struct FrontendScreenManager {
+    char reserved[0x3820];
+    char requestedName[0x20];
+    signed char alternate;
+    char reserved3841[0x43];
+    int alternatePending;
+    int reserved3888;
+    int primaryPending;
+};
+
 typedef char FrontendVirtualEntrySize[(sizeof(FrontendVirtualEntry)==8)?1:-1];
 typedef char FrontendLoadingStateSize[(sizeof(FrontendLoadingState)==0x38)?1:-1];
 typedef char FrontendSequentialLoadingStateSize[(sizeof(FrontendSequentialLoadingState)==0x50)?1:-1];
 typedef char FrontendResourceSlotSize[(sizeof(FrontendResourceSlot)==0x24)?1:-1];
 typedef char FrontendCacheEntrySize[(sizeof(FrontendCacheEntry)==0xc)?1:-1];
+typedef char FrontendMenuStateSize[(sizeof(FrontendMenuState)==0xd54)?1:-1];
 #endif
