@@ -8,6 +8,9 @@ the overall number is exact.
 A function counts as source when config/units.yaml lists it with `status: source` (units_verify.py/settle_units.py keep
 that list identical to the target); bytes are the original span of the function up to the next function.
 Usage: progress.py [SLUG]       writes build/<slug>/progress.json and prints a table
+       progress.py --tus [N]     also list the N (default 15) partially done translation units with most bytes still in assembly
+When config/tus.yaml exists (tools/tus.py) the report adds the progress by TU: complete TUs (every function from source),
+partially done ones and bytes per TU, by confidence of the TU boundaries.
 """
 import json, sys
 from pathlib import Path
@@ -52,10 +55,72 @@ def regions(addrs):
     return out, bool(reg)
 
 
+def tu_report(slug, fs, spans, source, top):
+    """Progress by translation unit (config/tus.yaml): rows by confidence and the TUs closest to completion."""
+    path = ROOT / 'config/tus.yaml'
+    if not path.exists() or slug != 'usa-retail':
+        return None
+    import bisect, yaml
+    tus = yaml.safe_load(path.read_text())['tus']
+    starts = [int(t['text'][0], 16) for t in tus]
+    rows = [dict(name=t['name'], kind=t['kind'], conf=t['confidence'], lib=t['library'], lo=starts[k], functions=0,
+                 source_functions=0, bytes=0, source_bytes=0) for k, t in enumerate(tus)]
+    orphan = set()                 # unreferenced `<instruction>; nop` runs stay assembly and do not count against a TU
+    auto = ROOT / 'build/auto.json'
+    if auto.exists():
+        orphan = {int(k, 16) for k, v in json.loads(auto.read_text()).items() if v.get('status') == 'orphan'}
+    for f, span in zip(fs, spans):
+        k = bisect.bisect_right(starts, f['addr']) - 1
+        r = rows[k]
+        if f['addr'] in orphan:
+            r['bytes'] += span
+            continue
+        r['functions'] += 1
+        r['bytes'] += span
+        if f['addr'] in source:
+            r['source_functions'] += 1
+            r['source_bytes'] += span
+    kinds = {}
+    for r in rows:
+        for key in ('ALL', 'conf: ' + r['conf'], 'kind: ' + r['kind']):
+            k = kinds.setdefault(key, dict(tus=0, complete=0, partial=0, untouched=0, complete_bytes=0, source_bytes=0, bytes=0))
+            k['tus'] += 1
+            k['bytes'] += r['bytes']
+            k['source_bytes'] += r['source_bytes']
+            if r['source_functions'] == r['functions']:
+                k['complete'] += 1
+                k['complete_bytes'] += r['bytes']
+            elif r['source_functions']:
+                k['partial'] += 1
+            else:
+                k['untouched'] += 1
+    print()
+    print('by translation unit (config/tus.yaml; boundaries of the TUs below `exact` are proposals)')
+    print('%-18s %6s %9s %8s %10s   %11s %11s %9s' % ('', 'TUs', 'complete', 'partial', 'untouched', 'complete B', 'source B', 'bytes'))
+    for key in sorted(kinds, key=lambda k: (k != 'ALL', k)):
+        k = kinds[key]
+        print('%-18s %6d %9d %8d %10d   %11d %11d %9d' % (key, k['tus'], k['complete'], k['partial'], k['untouched'],
+                                                         k['complete_bytes'], k['source_bytes'], k['bytes']))
+    if top:
+        part = [r for r in rows if r['source_functions'] and r['source_functions'] < r['functions']]
+        part.sort(key=lambda r: (r['bytes'] - r['source_bytes']))
+        print()
+        print('partially done TUs with the fewest bytes left in assembly')
+        for r in part[:top]:
+            print('  %-34s 0x%06x %-9s %-6s %4d/%-4d functions  %6d of %6d bytes left' % (
+                r['name'][:34], r['lo'], r['lib'][:9], r['conf'], r['functions'] - r['source_functions'], r['functions'],
+                r['bytes'] - r['source_bytes'], r['bytes']))
+    return dict(rows=kinds, tus=rows)
+
+
 def main():
     if '--refresh' in sys.argv:
         return refresh_regions()
-    slug = next((a for a in sys.argv[1:] if not a.startswith('-')), 'usa-retail')
+    top = 0
+    if '--tus' in sys.argv:
+        k = sys.argv.index('--tus')
+        top = int(sys.argv[k + 1]) if k + 1 < len(sys.argv) and sys.argv[k + 1].isdigit() else 15
+    slug = next((a for a in sys.argv[1:] if not a.startswith('-') and not a.isdigit()), 'usa-retail')
     build = ROOT / 'build' / slug
     fs = json.loads((build / 'placement.json').read_text())['functions']
     layout = json.loads((ROOT / 'config' / ('%s.layout.json' % json.loads(
@@ -96,6 +161,10 @@ def main():
         print('%-22s %7d %7d %5.2f%%   %9d %9d %5.2f%%' % (
             key, r['functions'], r['source_functions'], 100.0 * r['source_functions'] / r['functions'],
             r['bytes'], r['source_bytes'], 100.0 * r['source_bytes'] / max(r['bytes'], 1)))
+    tur = tu_report(slug, fs, spans, source, top)
+    if tur:
+        out['by_tu'] = tur['rows']
+        (build / 'progress.json').write_text(json.dumps(out, indent=1))
 
 
 if __name__ == '__main__':
