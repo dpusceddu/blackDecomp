@@ -1,0 +1,8 @@
+#include "auto/prelude.h"
+
+extern s32 func_00311CA0(M2C_UNK *);
+extern M2C_UNK D_0045C098;
+
+void func_003286B0(void) {
+    func_00311CA0(&D_0045C098);
+}

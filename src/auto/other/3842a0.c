@@ -1,0 +1,18 @@
+#include "auto/prelude.h"
+
+extern s32 (*D_003C87E0)();
+extern s32 func_002E6D10();
+
+void func_003842A0(void) {
+    D_003C87E0();
+}
+
+s32 func_003842C8(s32 arg0, s32 arg1) {
+    s32 var_2;
+
+    var_2 = func_002E6D10(arg0, 0);
+    if (arg1 & 1) {
+        var_2 = D_003C87E0(arg0);
+    }
+    return var_2;
+}
