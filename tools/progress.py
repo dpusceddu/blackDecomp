@@ -82,7 +82,7 @@ def tu_report(slug, fs, spans, source, top):
             r['source_bytes'] += span
     kinds = {}
     for r in rows:
-        for key in ('ALL', 'conf: ' + r['conf'], 'kind: ' + r['kind']):
+        for key in ('ALL', 'conf: ' + r['conf'], 'kind: ' + r['kind'], 'lib: ' + (r['lib'] or '?')):
             k = kinds.setdefault(key, dict(tus=0, complete=0, partial=0, untouched=0, complete_bytes=0, source_bytes=0, bytes=0))
             k['tus'] += 1
             k['bytes'] += r['bytes']
@@ -97,7 +97,7 @@ def tu_report(slug, fs, spans, source, top):
     print()
     print('by translation unit (config/tus.yaml; boundaries of the TUs below `exact` are proposals)')
     print('%-18s %6s %9s %8s %10s   %11s %11s %9s' % ('', 'TUs', 'complete', 'partial', 'untouched', 'complete B', 'source B', 'bytes'))
-    for key in sorted(kinds, key=lambda k: (k != 'ALL', k)):
+    for key in sorted(kinds, key=lambda k: (k != 'ALL', k.startswith('lib'), k)):
         k = kinds[key]
         print('%-18s %6d %9d %8d %10d   %11d %11d %9d' % (key, k['tus'], k['complete'], k['partial'], k['untouched'],
                                                          k['complete_bytes'], k['source_bytes'], k['bytes']))
