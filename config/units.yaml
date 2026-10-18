@@ -140,6 +140,7 @@ units:
     gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
+  owner: wave1-kynapse
 - name: kynapse_behavior_factories_2d3c90
   source: src/kynapse/behavior_factories_2d3c90.cpp
   origin: kynapse
@@ -2448,6 +2449,7 @@ units:
     symbol: HasBoth__C9BothIds60
     size: 40
     status: source
+  owner: wave1-kynapse
 - name: kynapse_predicates_2d35b8
   source: src/kynapse/predicates_2d35b8.cpp
   origin: kynapse
@@ -6531,12 +6533,13 @@ units:
     size: 72
     status: source
 - name: tuf_2d2ce8
-  source: src/tu/kynapse_tu_2d1610.c
-  origin: auto
+  source: src/kynapse/flee_agent_2d1610.cpp
+  origin: kynapse
   flags:
   - -O2
   - -G0
   - -snas
+  - -fbyte-bool
   - -ffunction-sections
   functions:
   - addr: '0x2d2ce8'
@@ -6567,6 +6570,15 @@ units:
     symbol: func_002D2FD8
     size: 32
     status: source
+  - addr: '0x2d2e90'
+    size: 88
+    symbol: func_002D2E90
+    status: source
+  - addr: '0x2d2f00'
+    size: 64
+    symbol: func_002D2F00
+    status: source
+  owner: wave1-kynapse
 - name: tuf_2d34c0
   source: src/tu/kynapse_tu_2d2ff8.c
   origin: auto
