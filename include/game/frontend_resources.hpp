@@ -143,10 +143,46 @@ struct FrontendScreenManager {
     int primaryPending;
 };
 
+struct FrontendSaveProfile { unsigned long words[239]; };
+struct FrontendSaveState {
+    int state, reserved4, reserved8, mode;
+    int loadState, profileState, saveState, overwriteState;
+    int deleteState, formatState, createState, enableState, disableState;
+    int operation;
+    unsigned long events;
+    char reserved40[0x4b4];
+    int itemCount, selected, reserved4fc, choice;
+    float timer;
+    int reserved508, slot;
+    unsigned char flag510, flag511, flag512, waiting, flag514, complete;
+    short reserved516;
+    int reserved518, reserved51c, status, activeSlot;
+    unsigned char available[3], readOnly[3];
+    char reserved52e[0x482];
+    char io[0xdc];
+    const char* text[49];
+    FrontendSaveProfile profiles[3];
+    void Load() __asm__("func_0010C398");
+    void SelectProfile() __asm__("func_0010C8E8");
+    void Save() __asm__("func_0010CF18");
+    void Overwrite() __asm__("func_0010D9F0");
+    void Delete() __asm__("func_0010E0F0");
+    void Enable() __asm__("func_0010E498");
+    void Disable() __asm__("func_0010E5F0");
+    void Format() __asm__("func_0010E740");
+    int Wait() __asm__("func_0010EAF8");
+    void Finish() __asm__("func_0010E720");
+    int Begin(int next) __asm__("func_0010EAC0");
+    int Ready() __asm__("func_0010EBC0");
+};
+struct FrontendDebugColor { float red, green, blue, alpha; } __attribute__((aligned(16)));
+
 typedef char FrontendVirtualEntrySize[(sizeof(FrontendVirtualEntry)==8)?1:-1];
 typedef char FrontendLoadingStateSize[(sizeof(FrontendLoadingState)==0x38)?1:-1];
 typedef char FrontendSequentialLoadingStateSize[(sizeof(FrontendSequentialLoadingState)==0x50)?1:-1];
 typedef char FrontendResourceSlotSize[(sizeof(FrontendResourceSlot)==0x24)?1:-1];
 typedef char FrontendCacheEntrySize[(sizeof(FrontendCacheEntry)==0xc)?1:-1];
 typedef char FrontendMenuStateSize[(sizeof(FrontendMenuState)==0xd54)?1:-1];
+typedef char FrontendSaveProfileSize[(sizeof(FrontendSaveProfile)==0x778)?1:-1];
+typedef char FrontendSaveStateSize[(sizeof(FrontendSaveState)==0x21b8)?1:-1];
 #endif

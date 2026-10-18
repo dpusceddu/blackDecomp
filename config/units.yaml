@@ -15810,8 +15810,8 @@ units:
     size: 8
     status: source
 - name: auto_game_10bbf8
-  source: src/auto/game/10bbf8.c
-  origin: auto
+  source: src/game/frontend_debug_toggle.cpp
+  origin: game
   flags:
   - -O2
   - -G8
@@ -15821,9 +15821,11 @@ units:
     symbol: func_0010BBF8
     size: 8
     status: source
+  claim: wave1-game-frontend
+  tu: tu_10bbf8
 - name: tuf_10bc00
-  source: src/tu/tu_10bbf8.c
-  origin: auto
+  source: src/game/frontend_save_state.cpp
+  origin: game
   flags:
   - -O2
   - -G0
@@ -15850,6 +15852,8 @@ units:
     symbol: func_0010EBC0
     size: 16
     status: source
+  claim: wave1-game-frontend
+  tu: tu_10bbf8
 - name: auto_game_114968
   source: src/auto/game/114968.c
   origin: auto
@@ -39260,8 +39264,8 @@ units:
     size: 128
     status: source
 - name: auto_unclassified_10c2f8
-  source: src/auto/unclassified/10c2f8.c
-  origin: auto
+  source: src/game/frontend_save_dispatch.cpp
+  origin: game
   flags:
   - -O2
   - -G0
@@ -39273,6 +39277,8 @@ units:
     status: source
   trim:
     .rodata: 40
+  claim: wave1-game-frontend
+  tu: tu_10bbf8
 - name: auto_game_143f90
   source: src/auto/game/143f90.c
   origin: auto
