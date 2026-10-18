@@ -5216,7 +5216,7 @@ units:
     status: source
 - name: tuf_34b5a8
   source: src/tu/animation_tu_34b498.c
-  origin: auto
+  origin: animation
   flags:
   - -O2
   - -G0
@@ -5275,6 +5275,7 @@ units:
     symbol: func_0034EAA0
     size: 60
     status: source
+  owner: phase5-animation
 - name: tuf_34ed80
   source: src/tu/animation_tu_34eae0.c
   origin: auto
@@ -37849,4 +37850,70 @@ units:
   - addr: '0x339c28'
     symbol: func_00339C28
     size: 32
+    status: source
+- name: animation_graph_34b498
+  source: src/tu/animation_graph_34b498.c
+  origin: animation
+  owner: phase5-animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x34b498'
+    symbol: func_0034B498
+    size: 80
+    status: source
+  - addr: '0x34bfb8'
+    symbol: func_0034BFB8
+    size: 48
+    status: source
+  - addr: '0x34c998'
+    symbol: func_0034C998
+    size: 60
+    status: source
+  - addr: '0x34c9d8'
+    symbol: func_0034C9D8
+    size: 60
+    status: source
+  - addr: '0x34d960'
+    symbol: func_0034D960
+    size: 76
+    status: source
+  - addr: '0x34dbf8'
+    symbol: func_0034DBF8
+    size: 52
+    status: source
+  - addr: '0x34dc68'
+    symbol: func_0034DC68
+    size: 92
+    status: source
+  - addr: '0x34dcc8'
+    symbol: func_0034DCC8
+    size: 112
+    status: source
+  - addr: '0x34de98'
+    symbol: func_0034DE98
+    size: 52
+    status: source
+  - addr: '0x34df70'
+    symbol: func_0034DF70
+    size: 240
+    status: source
+  - addr: '0x34e060'
+    symbol: func_0034E060
+    size: 248
+    status: source
+  - addr: '0x34e388'
+    symbol: func_0034E388
+    size: 36
+    status: source
+  - addr: '0x34e3c0'
+    symbol: func_0034E3C0
+    size: 88
+    status: source
+  - addr: '0x34e530'
+    symbol: func_0034E530
+    size: 140
     status: source
