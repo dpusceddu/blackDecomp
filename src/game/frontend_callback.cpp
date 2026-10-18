@@ -1,6 +1,6 @@
 #include "game/frontend_resources.hpp"
 
-int FrontendCallbackQueue::Enqueue(void (*next)(), void* data) {
+int FrontendCallbackQueue::Enqueue(void (*next)(void*), void* data) {
     if (callback) return 0;
     callbackData=data;
     callback=next;
