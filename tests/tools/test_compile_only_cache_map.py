@@ -27,7 +27,7 @@ class CompileOnlyCacheTests(unittest.TestCase):
             objects = [dict(name='original', kind='asm', src='original.s'),
                        dict(name='unit', kind='cc', src='unit.c', compiler='test', flags=[])]
             (target / 'objects.json').write_text(json.dumps(objects))
-            asm_key = build.sha('as', build.VERSION, assembly.read_bytes(), b'')
+            asm_key = build.sha('as', build.VERSION, assembly.read_bytes(), b'', b'')
             unit_key = build.sha('cc', build.VERSION, 'test', '[]')
             for key in (asm_key, unit_key):
                 (target / 'cache' / (key + '.o')).write_bytes(b'cached')
@@ -36,8 +36,13 @@ class CompileOnlyCacheTests(unittest.TestCase):
                  patch.object(sys, 'argv', ['build_objects.py', 'test', '--compile-only']), \
                  patch.object(build.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, '', '')):
                 self.assertEqual(build.main(), 0)
+                first_mapping = json.loads((target / 'objects_cache.json').read_text())
+                (root / 'include/macro.inc').write_text('.macro glabel name\n.align 4\n.endm\n')
+                self.assertEqual(build.main(), 0)
             mapping = json.loads((target / 'objects_cache.json').read_text())
-            self.assertEqual(mapping, dict(original='cache/' + asm_key + '.o', unit='cache/' + unit_key + '.o'))
+            self.assertEqual(first_mapping, dict(original='cache/' + asm_key + '.o', unit='cache/' + unit_key + '.o'))
+            self.assertNotEqual(mapping['original'], first_mapping['original'])
+            self.assertEqual(mapping['unit'], first_mapping['unit'])
             plan = json.loads((target / 'plan.json').read_text())
             self.assertEqual(plan['assemble'], [])
             self.assertNotIn('link', plan)

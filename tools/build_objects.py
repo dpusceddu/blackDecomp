@@ -37,6 +37,7 @@ def main():
     plan = dict(assemble=[], compile=[], rename=[], pack='newobjs.tgz', out='linked.elf')
     keys, have = {}, 0
     compile_only = '--compile-only' in sys.argv   # build the missing source units, do not link
+    macros = (ROOT / 'include/macro.inc').read_bytes()
     for o in objects:
         name = o['name']
         if o['kind'] == 'asm':
@@ -47,7 +48,7 @@ def main():
                 if line.startswith(b'.incbin'):
                     blob = Path(line.decode().split('"')[1])
                     extra += (ROOT / blob).read_bytes()
-            key = sha('as', VERSION, data, extra)
+            key = sha('as', VERSION, data, extra, macros)
             deps = [Path(o['src'])] + ([Path(line.decode().split('"')[1]) for line in data.split(b'\n')
                                         if line.startswith(b'.incbin')])
             job = [o['src'], 'obj/%s.o' % name]
