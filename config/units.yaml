@@ -43500,3 +43500,78 @@ units:
     size: 284
     status: asm
     reason: claimed
+- name: animation_tracks_sample_bone
+  source: src/animation/tu_3441d0/sample_bone.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x345480'
+    symbol: func_00345480
+    size: 128
+    status: source
+- name: animation_tracks_unpack_float24
+  source: src/animation/tu_3441d0/unpack_float24.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x3441d0'
+    symbol: func_003441D0
+    size: 108
+    status: asm
+    reason: schedule
+- name: animation_tracks_skip_track
+  source: src/animation/tu_3441d0/skip_track.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x344240'
+    symbol: func_00344240
+    size: 412
+    status: asm
+    reason: schedule
+- name: animation_tracks_sample_masked_pose
+  source: src/animation/tu_3441d0/sample_masked_pose.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: wave2-animation
+  functions:
+  - addr: '0x3452b0'
+    symbol: func_003452B0
+    size: 460
+    status: asm
+    reason: schedule
+- name: animation_tracks_evaluate_track
+  source: src/animation/tu_3441d0/evaluate_track.c
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  claim: wave2-animation
+  functions:
+  - addr: '0x3443e0'
+    symbol: func_003443E0
+    size: 3792
+    status: asm
+    reason: schedule
