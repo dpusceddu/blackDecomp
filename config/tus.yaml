@@ -19337,7 +19337,7 @@ tus:
   evidence: [ctor-list, ctor-end, calls]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 2 of 6 functions
+  flags_basis: matched 3 of 6 functions
   data:
     .data: ['0x3d1368', '0x3d1b7c']
     .sbss: ['0x40e8c8', '0x40e8d8']
