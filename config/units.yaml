@@ -42358,3 +42358,102 @@ units:
     symbol: func_00109EE0
     size: 132
     status: source
+- name: kynapse_avoidance_manual
+  source: src/kynapse/avoidance_manual.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x3067a0'
+    symbol: CreateAvoidance__FPv
+    size: 168
+    status: source
+  - addr: '0x306848'
+    symbol: func_00306848
+    size: 1928
+    status: asm
+  - addr: '0x306fd0'
+    symbol: _$_10SharedUser
+    size: 472
+    status: source
+  - addr: '0x3071a8'
+    symbol: func_003071A8
+    size: 728
+    status: asm
+  - addr: '0x307480'
+    symbol: func_00307480
+    size: 876
+    status: asm
+  - addr: '0x3077f0'
+    symbol: func_003077F0
+    size: 380
+    status: asm
+  - addr: '0x307970'
+    symbol: func_00307970
+    size: 1600
+    status: asm
+  - addr: '0x307fb0'
+    symbol: func_00307FB0
+    size: 260
+    status: asm
+  - addr: '0x3080b8'
+    symbol: func_003080B8
+    size: 676
+    status: asm
+  - addr: '0x308360'
+    symbol: func_00308360
+    size: 4640
+    status: asm
+  - addr: '0x309580'
+    symbol: func_00309580
+    size: 1424
+    status: asm
+  - addr: '0x309b10'
+    symbol: func_00309B10
+    size: 5416
+    status: asm
+  - addr: '0x30b038'
+    symbol: func_0030B038
+    size: 564
+    status: asm
+  - addr: '0x30b270'
+    symbol: func_0030B270
+    size: 568
+    status: asm
+  - addr: '0x30b4a8'
+    symbol: func_0030B4A8
+    size: 680
+    status: asm
+  - addr: '0x30b7e0'
+    symbol: func_0030B7E0
+    size: 184
+    status: asm
+  - addr: '0x30b988'
+    symbol: func_0030B988
+    size: 132
+    status: asm
+  externs:
+    Entity_ApplyB__FP15AvoidanceEngineii: '0x2e1058'
+    Entity_ApplyD__FP15AvoidanceEngineii: '0x2e1098'
+    SharedOnAdded__FP10SharedUserPv: '0x30b7a8'
+    SharedOnRemoved__FP10SharedUserPv: '0x30b7e0'
+    __10SharedUserPv: '0x306848'
+    __throw: '0x292b40'
+    _vt$10ObjectBase: '0x3e0040'
+    _vt$10SharedUser: '0x3f0960'
+    gCallbacksRegistered: '0x3cd897'
+    gEngine: '0x3c9ed4'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    gSharedA: '0x3cd8a8'
+    gSharedB: '0x3cd8ac'
+    gSharedC: '0x3cd8b0'
+    gSharedCount: '0x3cd8a4'
+    gSharedList: '0x3cd8b4'
+    gSharedReady: '0x3cd896'
+    gUserCount: '0x3cd894'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
