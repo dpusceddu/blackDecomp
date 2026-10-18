@@ -19,6 +19,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from elfinfo import Elf
+from build_telemetry import record as record_build
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = 'usa-retail'
@@ -766,7 +767,7 @@ def worker_compile(jobs, tag='auto'):
     Results are cached by hash of source and flags in build/auto/cache/."""
     cache = AUTO / 'cache'
     cache.mkdir(parents=True, exist_ok=True)
-    out, todo, headers = {}, [], {}
+    out, todo, headers, aliases = {}, [], {}, {}
     for key, src, flags in jobs:
         deps = compile_dependencies(src)
         headers.update(deps)
@@ -779,9 +780,13 @@ def worker_compile(jobs, tag='auto'):
             d = json.loads(cj.read_text())
             obj = (cache / (h + '.o')).read_bytes() if d['rc'] == 0 else b''
             out[key] = (d['rc'], d['msg'], obj)
+        elif h in aliases:
+            aliases[h].append(key)           # never race compilers on the same object path
         else:
+            aliases[h] = [key]
             todo.append((key, src, flags, h))
     if not todo:
+        record_build(AUTO, 'candidate', 'cached', requested=len(jobs), cached=len(out), compile_jobs=0, tag=tag)
         return out
     t0 = time.time()
     buf = io.BytesIO()
@@ -807,10 +812,13 @@ def worker_compile(jobs, tag='auto'):
     (d / 'plan.json').write_text(json.dumps(plan))
     for n in ('newobjs.tgz', 'results.json'):
         (d / n).unlink(missing_ok=True)
+    call_id = record_build(AUTO, 'candidate', 'submitted', requested=len(jobs), cached=len(out), compile_jobs=len(todo), tag=tag)
     r = subprocess.run([sys.executable, str(ROOT / 'tools/sandbox.py'), str(ROOT / 'tools/build_job.py'), '--timeout', '1800',
                         '--file', 'inputs.tgz=' + str(d / 'inputs.tgz'), '--file', 'plan.json=' + str(d / 'plan.json'),
                         '--out', 'newobjs.tgz=' + str(d / 'newobjs.tgz'), '--out', 'results.json=' + str(d / 'results.json')],
                        capture_output=True, text=True)
+    record_build(AUTO, 'candidate', 'completed', call_id, worker_rc=r.returncode,
+                 elapsed_seconds=time.time() - t0, has_results=(d / 'results.json').exists())
     if not (d / 'results.json').exists():
         sys.stderr.write(r.stdout[-2000:] + r.stderr[-2000:])
         raise SystemExit('Build backend failed; check the build backend configuration.')
@@ -833,7 +841,8 @@ def worker_compile(jobs, tag='auto'):
         (cache / (h + '.json')).write_text(json.dumps(dict(rc=res['rc'], msg=msg)))
         if obj:
             (cache / (h + '.o')).write_bytes(obj)
-        out[key] = (res['rc'], msg, obj)
+        for alias in aliases[h]:
+            out[alias] = (res['rc'], msg, obj)
     STATS['compiles'] += len(todo)
     STATS['compile_calls'] += 1
     STATS['compile_seconds'] += time.time() - t0

@@ -8,6 +8,40 @@ import autodecomp as auto
 
 
 class IntegrationTests(unittest.TestCase):
+    def test_duplicate_candidates_compile_once_and_persistent_counts_include_cache_reuse(self):
+        import json
+        import subprocess
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ('include/macro.inc', 'tools/elfobj.py'):
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text('')
+            auto_dir = root / 'build/auto'
+            def worker(*args, **kwargs):
+                job = auto_dir / ('job-%d' % auto.os.getpid())
+                plan = json.loads((job / 'plan.json').read_text())
+                self.assertEqual(len(plan['compile']), 1)
+                (job / 'results.json').write_text(json.dumps({plan['compile'][0]['src']: dict(rc=1, msg='rejected')}))
+                return subprocess.CompletedProcess([], 1, '', '')
+            jobs = [('first', 'int f(void) {return 0;}', ['-O2', '-G0']),
+                    ('same', 'int f(void) {return 0;}', ['-O2', '-G0'])]
+            with patch.object(auto, 'ROOT', root), patch.object(auto, 'AUTO', auto_dir), \
+                 patch.object(auto, 'compile_dependencies', return_value={}), \
+                 patch.object(auto.subprocess, 'run', side_effect=worker) as run:
+                first = auto.worker_compile(jobs)
+                second = auto.worker_compile(jobs)
+            self.assertEqual(first, second)
+            self.assertEqual(set(first), {'first', 'same'})
+            self.assertEqual(run.call_count, 1)
+            rows = [json.loads(line) for path in (auto_dir / 'telemetry').glob('*.jsonl') for line in path.read_text().splitlines()]
+            self.assertEqual([row['status'] for row in rows], ['submitted', 'completed', 'cached'])
+            self.assertEqual(rows[0]['requested'], 2)
+            self.assertEqual(rows[0]['compile_jobs'], 1)
+            self.assertEqual(rows[0]['call_id'], rows[1]['call_id'])
+            self.assertEqual(rows[2]['cached'], 2)
+
     def test_variadic_abi_overrides_stale_header_in_all_contexts_and_compile_drafts(self):
         import tempfile
         row = dict(name='func_002A5548', ret='s32', arity=1, params=['s32'],

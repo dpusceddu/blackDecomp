@@ -12,6 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from units import dependencies
+from build_telemetry import record as record_build
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = 'v1'  # bump to invalidate the cache when the build recipe changes
@@ -94,7 +95,13 @@ def main():
            '--out', 'newobjs.tgz=' + str(build / 'newobjs.tgz'), '--out', 'results.json=' + str(build / 'results.json')]
     (build / 'newobjs.tgz').unlink(missing_ok=True)
     (build / 'results.json').unlink(missing_ok=True)
+    call_id = record_build(build, 'compile-only' if compile_only else 'link', 'submitted',
+                           compile_jobs=len(plan['compile']), assemble_jobs=len(plan['assemble']),
+                           cached_objects=have, pack_seconds=t1 - t0)
     r = subprocess.run(cmd, capture_output=True, text=True)
+    record_build(build, 'compile-only' if compile_only else 'link', 'completed', call_id,
+                 worker_rc=r.returncode, worker_seconds=time.time() - t1,
+                 has_results=(build / 'results.json').exists())
     rc = r.returncode
     sys.stdout.write(r.stdout[-20000:])
     sys.stderr.write(r.stderr[-5000:])
