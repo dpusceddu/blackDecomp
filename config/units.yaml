@@ -37986,7 +37986,7 @@ units:
   source: src/game/frontend_resources.cpp
   origin: game
   tu: tu_105bc0
-  claim: phase5-game
+  claim: wave1-game-frontend
   flags:
   - -O2
   - -G0
@@ -38127,11 +38127,6 @@ units:
     size: 24
     status: asm
     reason: scheduling
-  - addr: '0x1065d0'
-    symbol: func_001065D0
-    size: 192
-    status: asm
-    reason: layout
   - addr: '0x1077b8'
     symbol: func_001077B8
     size: 68
@@ -39511,3 +39506,62 @@ units:
     symbol: func_002DB848
     size: 380
     status: source
+- name: game_frontend_load_exit
+  source: src/game/frontend_load_exit.cpp
+  origin: game
+  tu: tu_105bc0
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1065d0'
+    symbol: func_001065D0
+    size: 192
+    status: source
+- name: game_frontend_sequential_exit
+  source: src/game/frontend_sequential_exit.cpp
+  origin: game
+  tu: tu_105bc0
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x106df0'
+    symbol: func_00106DF0
+    size: 232
+    status: source
+- name: game_frontend_language_lookup
+  source: src/game/frontend_language_lookup.cpp
+  origin: game
+  tu: tu_105bc0
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G1
+  - -ffunction-sections
+  functions:
+  - addr: '0x108818'
+    symbol: func_00108818
+    size: 116
+    status: asm
+    reason: extra
+- name: game_frontend_string_request
+  source: src/game/frontend_string_request.cpp
+  origin: game
+  tu: tu_105bc0
+  claim: wave1-game-frontend
+  flags:
+  - -O2
+  - -G1
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x108890'
+    symbol: func_00108890
+    size: 196
+    status: asm
+    reason: extra
