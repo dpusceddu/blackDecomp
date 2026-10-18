@@ -108,6 +108,21 @@ def data_sections(e, syms, u, live, placement):
     return None
 
 
+_IMAGE_NAMES = None
+
+
+def image_names():
+    """Names the split assembly defines (functions, data labels, jump tables, linker-script constants)."""
+    global _IMAGE_NAMES
+    if _IMAGE_NAMES is None:
+        names = {n for _, n in json.loads((BUILD / 'labels.json').read_text())}
+        sym = BUILD / 'symbols.ld'
+        if sym.exists():
+            names |= set(re.findall(r'^(\w+)\s*=', sym.read_text(), re.M))
+        _IMAGE_NAMES = names
+    return _IMAGE_NAMES
+
+
 def prepare():
     units = load_units()
     bind = bindings()
@@ -161,9 +176,13 @@ def prepare():
                        (syms[i]['shndx'] == 0 or (syms[i]['shndx'] < 0xff00 and e.sections[syms[i]['shndx']]['name'] not in kept_names
                                                   and i not in [j for j, y in enumerate(syms) if y['type'] == 2 and y['shndx'] == e.section('.text')['index']]))})
         ex, missing = {}, []
+        known = dict(u.get('externs') or {})
+        known.update(bind.get(u['name'], {}))
         for name in want:
-            if name in bind.get(u['name'], {}):
-                ex[name] = bind[u['name']][name]
+            if name in known:
+                ex[name] = known[name]
+            elif name in image_names():
+                continue                  # a label the image's own assembly defines (func_XXXXXXXX, D_XXXXXXXX): ld resolves it
             else:
                 missing.append(name)
         u['externs'] = ex

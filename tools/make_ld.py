@@ -90,7 +90,8 @@ def main():
                 problems.append('%s: %#x is not a function start' % (u['name'], f['addr']))
                 continue
             replaced[func_by_addr[f['addr']]['name']] = uname
-            aliases.append('%s = %s;' % (func_by_addr[f['addr']]['name'], f['link_name']))
+            if func_by_addr[f['addr']]['name'] != f['link_name']:     # a draft keeps the image's own name
+                aliases.append('%s = %s;' % (func_by_addr[f['addr']]['name'], f['link_name']))
             # labels inside the function (exception handlers, jump targets) that other objects still refer to:
             # the compiled code is byte-identical, so they sit at the same offsets from the function
             i = bisect.bisect_right(label_addrs, f['addr'])
