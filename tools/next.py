@@ -8,6 +8,7 @@
   families  groups of assembly functions with identical bodies (candidates for one template or one shared source)
   data      exact drafts that could not be placed because the function owns rodata (strings, tables)
   ee        functions m2c cannot read (EE instructions), grouped by instruction
+  tus       candidate translation units for a Phase 5 agent (config/tus.yaml): shown first by `all`
 Functions already provided by source units are left out everywhere.
 """
 import argparse, collections, json, re, struct, sys
@@ -123,12 +124,86 @@ def ee(res, top, max_size):
         print('  %4d  %s' % (n, m))
 
 
+EE_VECTOR = re.compile(r'^(p[a-z0-9]+|lq|sq|q[a-z]+|v[a-z0-9.]+|c[ft]c2|lqc2|sqc2|mf(sa|hi1|lo1)|mt(sa|sah|hi1|lo1)|madd1|mult1|div1|adda.*|suba.*|madda.*)$')
+
+
+def candidates(top, args=None):
+    """TUs a Phase 5 agent can finish by hand: most of the TU already in source, a moderate rest, known classes, few EE vector
+    functions. Scored from config/tus.yaml, the source units and the function inventory."""
+    import bisect, yaml
+    path = ROOT / 'config/tus.yaml'
+    if not path.exists():
+        return
+    sys.path.insert(0, str(ROOT / 'tools'))
+    import autodecomp
+    tus = [t for t in yaml.safe_load(path.read_text())['tus'] if t['kind'] == 'object']
+    inv = autodecomp.load_inventory()
+    done = {f['addr'] for u in load_units(variant='usa-retail') for f in u['functions'] if f.get('status') == 'source'}
+    alias = {}
+    for line in (ROOT / 'config/symbols.txt').read_text().split('\n'):
+        f = line.split('\t')
+        if len(f) > 4 and f[2] == 'func' and f[4] not in ('-', ''):
+            alias[int(f[0], 16)] = f[4]
+    starts = [int(t['text'][0], 16) for t in tus]
+    rows = [dict(t=t, n=0, src=0, bytes=0, left=0, vec=0, left_n=0, named=0, orphans=0) for t in tus]
+    for f in inv:
+        k = bisect.bisect_right(starts, f['addr']) - 1
+        if k < 0 or f['addr'] >= int(tus[k]['text'][1], 16):
+            continue
+        r = rows[k]
+        if autodecomp.is_orphan(f['words']):
+            r['orphans'] += 1
+            continue
+        r['n'] += 1
+        r['bytes'] += f['span']
+        r['named'] += f['addr'] in alias
+        if f['addr'] in done:
+            r['src'] += 1
+        else:
+            r['left'] += f['span']
+            r['left_n'] += 1
+            r['vec'] += any(EE_VECTOR.match(m) for m in f['mnem'])
+    out = []
+    for r in rows:
+        t = r['t']
+        if t['library'] not in ('game', 'kynapse', 'animation', 'physics', 'apt', 'rwa_ee') or r['n'] < 4 or r['left_n'] < 2 or not 250 <= r['left'] <= 14000 or r['left_n'] > 60:
+            continue
+        share = r['src'] / r['n']
+        if share < 0.15 or r['vec'] > max(1, r['left_n'] // 8):
+            continue
+        conf = {'exact': 1.0, 'high': 0.8, 'medium': 0.5, 'low': 0.2}[t['confidence']]
+        known = (r['named'] / r['n']) + (0.3 if t['library'] in ('kynapse', 'animation', 'physics') else 0)
+        score = 2 * share + conf + known - 0.15 * r['vec'] + min(r['left'], 4000) / 4000.0 - r['left'] / 40000.0
+        out.append((score, r))
+    out.sort(key=lambda x: -x[0])
+    seen, per_lib, picked = set(), collections.Counter(), []
+    for score, r in out:                  # one of each shape, at most three per library
+        shape = (r['t']['library'], r['n'], r['src'], r['left'])
+        if shape in seen or per_lib[r['t']['library']] >= 3:
+            continue
+        seen.add(shape)
+        per_lib[r['t']['library']] += 1
+        picked.append((score, r))
+    out = picked
+    print('Phase 5 candidates: translation units to finish by hand (most already in source, moderate rest, few EE vector functions)')
+    print('  %-34s %-9s %-6s %9s %12s %9s %5s' % ('TU', 'library', 'bounds', 'functions', 'in source', 'left (B)', 'vec'))
+    for score, r in out[:top]:
+        t = r['t']
+        print('  %-34s %-9s %-6s %9d %5d (%3d%%) %9d %5d   %s-%s' % (t['name'][:34], t['library'][:9], t['confidence'], r['n'], r['src'],
+              100 * r['src'] // r['n'], r['left'], r['vec'], t['text'][0], t['text'][1]))
+    print()
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('what', nargs='?', default='all', choices=['near', 'types', 'families', 'data', 'ee', 'all'])
+    ap.add_argument('what', nargs='?', default='all', choices=['near', 'types', 'families', 'data', 'ee', 'tus', 'all'])
     ap.add_argument('--top', type=int, default=15)
     ap.add_argument('--max-size', type=int)
     a = ap.parse_args()
+    if a.what in ('tus', 'all'):
+        candidates(max(a.top, 10) if a.what == 'all' else a.top)
+        if a.what == 'tus':
+            return
     res = load()
     if not res:
         raise SystemExit('no results: run tools/autodecomp.py run first')
