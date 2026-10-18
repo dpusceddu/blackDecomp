@@ -144,7 +144,7 @@ signals do not mark boundaries.
 Result: `tools/tus.py` writes `config/tus.yaml`: 599 object TUs of two or more functions (120 exact from frames), 1,586 isolated
 functions and 852 link-once sections, each with text and data ranges, compiler and flags, confidence and evidence; `progress.py`
 reports by TU and library; `next.py tus` lists Phase 5 candidates. The automatic pipeline takes the TU's compiler and flags first
-(`ee-gcc2.9-991111-01` for the `sd` libraries, +37 functions), `tools/regroup.py` merges source units into one file per TU (241 TUs
+(`ee-gcc2.9-991111-01` for the `sd` libraries, 36 functions), `tools/regroup.py` merges source units into one file per TU (241 TUs
 with `-ffunction-sections`, assembly left in place between their functions) and the build stays identical.
 
 Left: the boundaries of the 2,000 proposed TUs are likelier than certain (a stretch of related functions may hold several objects);

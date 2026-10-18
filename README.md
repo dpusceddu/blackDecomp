@@ -87,6 +87,9 @@ instructions of the image (all five retail images behave alike):
   matching; the tool starts a function behind every run (not across a branch, not where Ghidra starts a function inside the
   run). On USA retail Ghidra independently starts a function exactly behind the run in 531 of the 535 runs it has an opinion on.
   The runs stay assembly (`orphan` in `build/auto.json`).
+- **Constructor list.** `__CTOR_LIST__` in `.data` (count word, that many pointers, zero) names every `_GLOBAL__I_*` stub. One of the
+  116 entries in USA retail, 0x339c28, sat behind five orphan pieces that splat fused with it: `boundaries.py` adds the entries of the
+  list as function starts (the stub then matches like the others).
 - **Extent disagreements with Ghidra** (312): Ghidra leaves out the last instruction (the `jr` delay slot) in 158, and ends at
   an indirect `jr` that is a computed jump inside the function in 180 more; splat's extent holds (internal branches or jump
   tables reach the rest, no frame is allocated behind Ghidra's end). Nothing to repair.
@@ -227,8 +230,8 @@ What the executable shows (USA retail):
   the I stubs, in link order, into `__CTOR_LIST__` (`.data` 0x3d9cc8: count word, then 116 pointers); `func_0028FB08` walks it backwards
   from the start-up code (`crt0` = `func_00100008`, a hand-written function). The stub pair is the last thing in its object (all 29 in
   frame groups are followed by a frame-group edge), so each of the 116 entries is a certain TU end. Three entries are special: `0x339c28`
-  lies inside the function `func_00339C00` (splat fused it with the orphan pieces before it), `0x1f1220` is a 56-byte variant and
-  `0x3822b8` a `j` to a registration helper.
+  lay inside the function `func_00339C00` (splat fused it with the orphan pieces before it; `boundaries.py` now splits it),
+  `0x1f1220` is a 56-byte variant and `0x3822b8` a `j` to a registration helper.
 - **Orphan pieces do not mark boundaries.** The 1,157 `<instruction>; nop` pieces (637 runs) are as frequent inside gaps that constants
   join (4.0 %) or that no relation crosses (5.5 %) as overall (6.2 %), occur in none of the 1,225 gaps inside frame groups and at 2.7 % of
   the certain boundaries. They look like the last two words of functions whose bodies were removed, and they exist only in code compiled

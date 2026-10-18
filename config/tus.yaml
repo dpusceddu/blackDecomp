@@ -3,12 +3,12 @@
 variant: usa-retail
 generated_by: 'tools/tus.py map (hand corrections: config/tus_overrides.yaml)'
 summary:
-  tus: 3037
+  tus: 3036
   by_confidence:
     exact: {tus: 822, functions: 2047, bytes: 393640, share: 0.145}
     high: {tus: 30, functions: 268, bytes: 78980, share: 0.0291}
     medium: {tus: 165, functions: 4789, bytes: 1434548, share: 0.5283}
-    low: {tus: 2020, functions: 4128, bytes: 808296, share: 0.2977}
+    low: {tus: 2019, functions: 4128, bytes: 808296, share: 0.2977}
 libraries:
 - name: game
   text: ['0x100000', '0x383b50']
@@ -72,7 +72,7 @@ libraries:
   bytes: 109560
 - name: physics
   text: ['0x32ae70', '0x33faa8']
-  tus: 53
+  tus: 52
   functions: 183
   bytes: 78240
 - name: animation
@@ -1407,7 +1407,7 @@ tus:
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 10 of 27 functions
+  flags_basis: matched 12 of 27 functions
   data:
     .rodata: ['0x3f4508', '0x3f4640']
     .data: ['0x3dc920', '0x3dc9b8']
@@ -2010,7 +2010,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 2 of 32 functions
+  flags_basis: matched 10 of 32 functions
   data:
     .rodata: ['0x3f4948', '0x3f5198']
     .data: ['0x3bce64', '0x3bce9c']
@@ -5232,7 +5232,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 27 of 70 functions
+  flags_basis: matched 36 of 70 functions
   data:
     .rodata: ['0x3f5370', '0x3f5474']
     .data: ['0x3bcef0', '0x3dd510']
@@ -9737,7 +9737,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 9 of 35 functions
+  flags_basis: matched 15 of 35 functions
   data:
     .data: ['0x3bd1c8', '0x3bd1cc']
     .sdata: ['0x40d9f1', '0x40d9f2']
@@ -10944,7 +10944,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 11 of 55 functions
+  flags_basis: matched 18 of 55 functions
   data:
     .rodata: ['0x3f8800', '0x3f94d0']
     .data: ['0x3bd978', '0x3bd9dc']
@@ -11823,7 +11823,7 @@ tus:
   evidence: [ctor-list, ctor-end, join-hard, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 10 of 50 functions
+  flags_basis: matched 15 of 50 functions
   data:
     .rodata: ['0x3f9d18', '0x3fa050']
     .data: ['0x3bdc60', '0x3bdca0']
@@ -11895,7 +11895,7 @@ tus:
   evidence: [ctor-list, ctor-end, join-hard, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 31 of 74 functions
+  flags_basis: matched 35 of 74 functions
   data:
     .rodata: ['0x3fa070', '0x3fa290']
     .data: ['0x3bdca0', '0x3e0cc8']
@@ -18952,7 +18952,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 57 of 165 functions
+  flags_basis: matched 59 of 165 functions
   data:
     .rodata: ['0x4097b4', '0x40a2d8']
     .lit4: ['0x40d8c4', '0x40d904']
@@ -19443,33 +19443,24 @@ tus:
 - name: physics/tu_339a90
   kind: object
   library: physics
-  text: ['0x339a90', '0x339c48']
-  functions: 3
+  text: ['0x339a90', '0x339c68']
+  functions: 4
+  orphan_pieces: 5
   confidence: low
   evidence: [ctor-list, ctor-end, calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G8, -snas]
-  flags_basis: default with small data (gp-relative access)
+  flags: [-O2, -G0, -snas]
+  flags_basis: matched 2 of 4 functions
   data:
     .sbss: ['0x40e8f8', '0x40e908']
     .bss: ['0x45e760', '0x45e7a0']
-- name: physics/tu_339c48
-  kind: object
-  library: physics
-  text: ['0x339c48', '0x339c68']
-  functions: 1
-  confidence: low
-  evidence: [ctor-end, proposed-cut]
-  compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 1 of 1 functions
 - name: physics/tu_339c68
-  kind: isolated
+  kind: object
   library: physics
   text: ['0x339c68', '0x33a260']
   functions: 1
   confidence: low
-  evidence: [proposed-cut]
+  evidence: [ctor-end, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
   flags_basis: default

@@ -137,6 +137,11 @@ def merged_unit(name, group, sections=False, taken=None):
         taken.add(base)
         flags.append('-ffunction-sections')
         text = '/* Translation unit %s of the TU map: its source functions in address order; assembly functions between them stay\n   in the image and are placed by address. */\n' % name + text
+    k = 1
+    stem = rel[:-2]
+    while (ROOT / rel).exists():                       # never overwrite a source a unit still refers to (a failed merge is undone)
+        k += 1
+        rel = '%s_%d.c' % (stem, k)
     funcs = [dict(f) for u in group for f in u['functions']]
     return dict(name=('tuf_' if sections else 'tu_') + '%06x' % first, source=rel, origin='auto', compiler=group[0]['compiler'],
                 flags=flags, externs=externs, functions=funcs), text
