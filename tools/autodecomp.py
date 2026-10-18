@@ -269,7 +269,7 @@ def write_context(refresh=False):
                 continue
             match = re.search(r'\bfunc_([0-9A-F]{8})\(', line) if line.startswith('extern ') else None
             row = context['signatures'].get(str(int(match.group(1), 16))) if match else None
-            if row and row.get('source_quality', 0) >= 2:
+            if row and (row.get('source_quality', 0) >= 2 or row.get('variadic')):
                 continue
             out.append(line)
     known = set(re.findall(r'\b(func_[0-9A-F]{8})\(', '\n'.join(out)))
@@ -379,10 +379,10 @@ def write_context_arity(inv):
     for name, typ in (('ctx2.c', 's32'), ('ctx3.c', 'void *'), ('ctx_void.c', 'void')):
         out = [base]
         for row in context['signatures'].values():
-            if row['name'] in declared and row.get('source_quality', 0) < 2:
+            if row['name'] in declared and row.get('source_quality', 0) < 2 and not row.get('variadic'):
                 out.append(declared[row['name']])
                 continue
-            anchored = row.get('source_quality', 0) >= 2
+            anchored = row.get('source_quality', 0) >= 2 or row.get('variadic')
             alternate = row
             if not anchored:
                 scalar = {'unknown', 's32', 'u32', 'void *'}
@@ -627,7 +627,7 @@ def clean_function(name, r, sigs, strings=None, stack=None):
         if ident.startswith('__ee_'):
             continue
         row = recovered_context()['signatures'].get(str(int(ident[5:], 16))) if re.fullmatch(r'func_[0-9A-F]{8}', ident) else None
-        if ident in known and (not row or row.get('source_quality', 0) < 2):
+        if ident in known and (not row or row.get('source_quality', 0) < 2 and not row.get('variadic')):
             lines.append(known[ident])
         elif row:
             import context_recovery

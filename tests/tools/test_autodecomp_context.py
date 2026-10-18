@@ -8,6 +8,27 @@ import autodecomp as auto
 
 
 class IntegrationTests(unittest.TestCase):
+    def test_variadic_abi_overrides_stale_header_in_all_contexts_and_compile_drafts(self):
+        import tempfile
+        row = dict(name='func_002A5548', ret='s32', arity=1, params=['s32'],
+                   register_slots=[0], source_quality=1.5, variadic=True)
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            header = root / 'types.h'
+            header.write_text('extern int func_002A5548(int, float, float);\n')
+            (root / 'recovered_layouts.c').write_text('')
+            with patch.object(auto, 'AUTO', root), patch.object(auto, 'HEADER', header), \
+                 patch.object(auto, 'recovered_context', return_value={'signatures': {str(0x2a5548): row}}), \
+                 patch.dict(auto.os.environ, {'AUTODECOMP_FREEZE_CONTEXT': '0'}):
+                auto.write_context()
+                auto.write_context_arity([])
+                for name in ('ctx.c', 'ctx2.c', 'ctx3.c', 'ctx_void.c'):
+                    self.assertIn('s32 func_002A5548(s32, ...);', (root / name).read_text())
+                    self.assertNotIn('(int, float, float)', (root / name).read_text())
+                draft, _ = auto.clean_function('func_00100000', dict(ret='s32', params='s32 arg0',
+                    body='return func_002A5548(arg0, 9);', decls={}), {})
+                self.assertIn('extern s32 func_002A5548(s32, ...);', draft)
+
     def test_split_switch_includes_secondary_labels_but_not_tail_or_owned_data(self):
         import tempfile
         source = '''.section .text.00100000, "ax"
