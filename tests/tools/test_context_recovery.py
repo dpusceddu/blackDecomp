@@ -265,6 +265,19 @@ class CppAbiTests(unittest.TestCase):
 
 
 class CalleeReturnEvidenceTests(unittest.TestCase):
+    def test_weak_void_wrapper_preserves_integer_callee_return(self):
+        callee = fn([i(9, 0, 2, 1), 0x03e00008, 0], 0x200000)
+        wrapper = fn([i(9, 29, 29, -16), i(0x3f, 29, 31, 0), 0x0c080000, 0,
+                      i(0x37, 29, 31, 0), 0x03e00008, i(9, 29, 29, 16)],
+                     rel={'2': ['jal', 0x200000, 0, callee['name']]})
+        seed = dict(params=[], ret='void', quality=1.5, source='auto.c', cls=None)
+        analysis = {f['addr']: cr.analyze_function(f) for f in (wrapper, callee)}
+        signatures, _ = cr.recover_signatures([wrapper, callee], analysis, {wrapper['addr']: seed})
+        self.assertEqual(signatures[wrapper['addr']]['ret'], 's32')
+        seed['quality'] = 4
+        signatures, _ = cr.recover_signatures([wrapper, callee], analysis, {wrapper['addr']: seed})
+        self.assertEqual(signatures[wrapper['addr']]['ret'], 'void')
+
     def float_call_fixture(self):
         # A realistic caller saves ra, calls a helper, then consumes its f0 result.
         caller = fn([i(9, 29, 29, -16), i(0x3f, 29, 31, 0), 0x0c080000, 0,

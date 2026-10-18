@@ -661,10 +661,13 @@ def recover_signatures(inv, analysis, seeds):
     while queue:
         key = queue.popleft()
         typ = authoritative.get(key) or resolve_type(constraints[key])[0]
-        if (typ not in ('void *', 'f32', 'f64', 's64', 'u64', 's128', 'u128') and '*' not in typ) or (key, typ) in sent:
+        scalar_return = key[1] == 'ret' and typ in ('s32', 'u32')
+        if (not scalar_return and typ not in ('void *', 'f32', 'f64', 's64', 'u64', 's128', 'u128') and '*' not in typ) or (key, typ) in sent:
             continue
         sent.add((key, typ))
         for other in adjacency[key]:
+            if scalar_return and other[1] != 'ret':
+                continue             # exact returned copies, not generic API arguments
             if other not in authoritative and typ not in constraints[other]:
                 constraints[other].add(typ)
                 queue.append(other)
