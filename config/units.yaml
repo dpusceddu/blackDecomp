@@ -5216,7 +5216,7 @@ units:
     status: source
 - name: tuf_34b5a8
   source: src/tu/animation_tu_34b498.c
-  origin: auto
+  origin: animation
   flags:
   - -O2
   - -G0
@@ -5227,54 +5227,11 @@ units:
     symbol: func_0034B5A8
     size: 8
     status: source
-  - addr: '0x34cbf8'
-    symbol: func_0034CBF8
-    size: 8
-    status: source
-  - addr: '0x34d8f0'
-    symbol: func_0034D8F0
-    size: 48
-    status: source
   - addr: '0x34d920'
     symbol: func_0034D920
     size: 64
     status: source
-  - addr: '0x34e328'
-    symbol: func_0034E328
-    size: 96
-    status: source
-  - addr: '0x34e3b0'
-    symbol: func_0034E3B0
-    size: 16
-    status: source
-  - addr: '0x34e418'
-    symbol: func_0034E418
-    size: 140
-    status: source
-  - addr: '0x34e4a8'
-    symbol: func_0034E4A8
-    size: 96
-    status: source
-  - addr: '0x34e508'
-    symbol: func_0034E508
-    size: 36
-    status: source
-  - addr: '0x34e758'
-    symbol: func_0034E758
-    size: 100
-    status: source
-  - addr: '0x34e7c0'
-    symbol: func_0034E7C0
-    size: 100
-    status: source
-  - addr: '0x34e908'
-    symbol: func_0034E908
-    size: 212
-    status: source
-  - addr: '0x34eaa0'
-    symbol: func_0034EAA0
-    size: 60
-    status: source
+  owner: phase5-animation
 - name: tuf_34ed80
   source: src/tu/animation_tu_34eae0.c
   origin: auto
@@ -37904,3 +37861,282 @@ units:
     status: source
   externs:
     FindNearest__10Perception: '0x30f678'
+- name: animation_graph_34b498
+  source: src/tu/animation_graph_34b498.c
+  origin: animation
+  owner: phase5-animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x34b498'
+    symbol: func_0034B498
+    size: 80
+    status: source
+  - addr: '0x34b4e8'
+    symbol: func_0034B4E8
+    size: 192
+    status: asm
+    reason: flags
+  - addr: '0x34b5b0'
+    symbol: func_0034B5B0
+    size: 304
+    status: asm
+    reason: types
+  - addr: '0x34b6e0'
+    symbol: func_0034B6E0
+    size: 556
+    status: asm
+    reason: types
+  - addr: '0x34b910'
+    symbol: func_0034B910
+    size: 316
+    status: asm
+    reason: types
+  - addr: '0x34ba50'
+    symbol: func_0034BA50
+    size: 476
+    status: asm
+    reason: types
+  - addr: '0x34bc30'
+    symbol: func_0034BC30
+    size: 904
+    status: asm
+    reason: types
+  - addr: '0x34bfb8'
+    symbol: func_0034BFB8
+    size: 48
+    status: source
+  - addr: '0x34bfe8'
+    symbol: func_0034BFE8
+    size: 224
+    status: asm
+    reason: types
+  - addr: '0x34c0c8'
+    symbol: func_0034C0C8
+    size: 92
+    status: asm
+    reason: scheduling
+  - addr: '0x34c128'
+    symbol: func_0034C128
+    size: 1712
+    status: asm
+    reason: types
+  - addr: '0x34c7d8'
+    symbol: func_0034C7D8
+    size: 188
+    status: asm
+    reason: scheduling
+  - addr: '0x34c898'
+    symbol: func_0034C898
+    size: 44
+    status: source
+  - addr: '0x34c8c8'
+    symbol: func_0034C8C8
+    size: 156
+    status: source
+  - addr: '0x34c968'
+    symbol: func_0034C968
+    size: 48
+    status: asm
+    reason: scheduling
+  - addr: '0x34c998'
+    symbol: func_0034C998
+    size: 60
+    status: source
+  - addr: '0x34c9d8'
+    symbol: func_0034C9D8
+    size: 60
+    status: source
+  - addr: '0x34ca18'
+    symbol: func_0034CA18
+    size: 80
+    status: asm
+    reason: scheduling
+  - addr: '0x34ca68'
+    symbol: func_0034CA68
+    size: 128
+    status: asm
+    reason: scheduling
+  - addr: '0x34cae8'
+    symbol: func_0034CAE8
+    size: 272
+    status: asm
+    reason: types
+  - addr: '0x34cbf8'
+    symbol: func_0034CBF8
+    size: 8
+    status: source
+  - addr: '0x34cc00'
+    symbol: func_0034CC00
+    size: 544
+    status: asm
+    reason: types
+  - addr: '0x34ce20'
+    symbol: func_0034CE20
+    size: 544
+    status: asm
+    reason: types
+  - addr: '0x34d040'
+    symbol: func_0034D040
+    size: 108
+    status: asm
+    reason: scheduling
+  - addr: '0x34d0b0'
+    symbol: func_0034D0B0
+    size: 304
+    status: asm
+    reason: types
+  - addr: '0x34d1e0'
+    symbol: func_0034D1E0
+    size: 288
+    status: asm
+    reason: types
+  - addr: '0x34d300'
+    symbol: func_0034D300
+    size: 556
+    status: asm
+    reason: types
+  - addr: '0x34d530'
+    symbol: func_0034D530
+    size: 516
+    status: asm
+    reason: types
+  - addr: '0x34d738'
+    symbol: func_0034D738
+    size: 256
+    status: asm
+    reason: types
+  - addr: '0x34d838'
+    symbol: func_0034D838
+    size: 180
+    status: asm
+    reason: register-allocation
+  - addr: '0x34d8f0'
+    symbol: func_0034D8F0
+    size: 48
+    status: source
+  - addr: '0x34d960'
+    symbol: func_0034D960
+    size: 76
+    status: source
+  - addr: '0x34d9b0'
+    symbol: func_0034D9B0
+    size: 584
+    status: asm
+    reason: types
+  - addr: '0x34dbf8'
+    symbol: func_0034DBF8
+    size: 52
+    status: source
+  - addr: '0x34dc30'
+    symbol: func_0034DC30
+    size: 56
+    status: asm
+    reason: scheduling
+  - addr: '0x34dc68'
+    symbol: func_0034DC68
+    size: 92
+    status: source
+  - addr: '0x34dcc8'
+    symbol: func_0034DCC8
+    size: 112
+    status: source
+  - addr: '0x34dd38'
+    symbol: func_0034DD38
+    size: 148
+    status: source
+  - addr: '0x34ddd0'
+    symbol: func_0034DDD0
+    size: 196
+    status: asm
+    reason: register-allocation
+  - addr: '0x34de98'
+    symbol: func_0034DE98
+    size: 52
+    status: source
+  - addr: '0x34ded0'
+    symbol: func_0034DED0
+    size: 160
+    status: source
+  - addr: '0x34df70'
+    symbol: func_0034DF70
+    size: 240
+    status: source
+  - addr: '0x34e060'
+    symbol: func_0034E060
+    size: 248
+    status: source
+  - addr: '0x34e158'
+    symbol: func_0034E158
+    size: 196
+    status: source
+  - addr: '0x34e220'
+    symbol: func_0034E220
+    size: 264
+    status: asm
+    reason: scheduling
+  - addr: '0x34e328'
+    symbol: func_0034E328
+    size: 96
+    status: source
+  - addr: '0x34e388'
+    symbol: func_0034E388
+    size: 36
+    status: source
+  - addr: '0x34e3b0'
+    symbol: func_0034E3B0
+    size: 16
+    status: source
+  - addr: '0x34e3c0'
+    symbol: func_0034E3C0
+    size: 88
+    status: source
+  - addr: '0x34e418'
+    symbol: func_0034E418
+    size: 140
+    status: source
+  - addr: '0x34e4a8'
+    symbol: func_0034E4A8
+    size: 96
+    status: source
+  - addr: '0x34e508'
+    symbol: func_0034E508
+    size: 36
+    status: source
+  - addr: '0x34e530'
+    symbol: func_0034E530
+    size: 140
+    status: source
+  - addr: '0x34e5c0'
+    symbol: func_0034E5C0
+    size: 404
+    status: asm
+    reason: types
+  - addr: '0x34e758'
+    symbol: func_0034E758
+    size: 100
+    status: source
+  - addr: '0x34e7c0'
+    symbol: func_0034E7C0
+    size: 100
+    status: source
+  - addr: '0x34e828'
+    symbol: func_0034E828
+    size: 220
+    status: asm
+    reason: scheduling
+  - addr: '0x34e908'
+    symbol: func_0034E908
+    size: 212
+    status: source
+  - addr: '0x34e9e0'
+    symbol: func_0034E9E0
+    size: 188
+    status: source
+  - addr: '0x34eaa0'
+    symbol: func_0034EAA0
+    size: 60
+    status: source
