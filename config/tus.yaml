@@ -9737,7 +9737,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 15 of 35 functions
+  flags_basis: matched 18 of 35 functions
   data:
     .data: ['0x3bd1c8', '0x3bd1cc']
     .sdata: ['0x40d9f1', '0x40d9f2']

@@ -42798,3 +42798,121 @@ units:
     ClearActivation__10ActionBank: '0x2dfbf8'
     FindNextMove__15AIRouteFollowerP10MoveRecordP12RouteRequest: '0x300a40'
     NavigationGraph_QueryNode__FPCfP5ActorfP15NavigationGraphUiUi: '0x2fbc20'
+- name: effect_emitters_1bec18
+  source: src/game/effects/emitter_unmatched.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -x
+  - c++
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf15
+  functions:
+  - addr: '0x1bec18'
+    symbol: func_001BEC18
+    status: asm
+    reason: claimed
+  - addr: '0x1becd0'
+    symbol: func_001BECD0
+    status: asm
+    reason: claimed
+  - addr: '0x1bef70'
+    symbol: func_001BEF70
+    status: asm
+    reason: claimed
+  - addr: '0x1bf740'
+    symbol: func_001BF740
+    status: asm
+    reason: claimed
+  - addr: '0x1bf918'
+    symbol: func_001BF918
+    status: asm
+    reason: claimed
+  - addr: '0x1bfed0'
+    symbol: func_001BFED0
+    status: asm
+    reason: claimed
+  - addr: '0x1bffe0'
+    symbol: func_001BFFE0
+    status: asm
+    reason: claimed
+  - addr: '0x1c01e0'
+    symbol: func_001C01E0
+    status: asm
+    reason: claimed
+  - addr: '0x1c02a0'
+    symbol: func_001C02A0
+    status: asm
+    reason: claimed
+  - addr: '0x1c0518'
+    symbol: func_001C0518
+    status: asm
+    reason: claimed
+  - addr: '0x1c0600'
+    symbol: func_001C0600
+    status: asm
+    reason: claimed
+  - addr: '0x1c0910'
+    symbol: func_001C0910
+    status: asm
+    reason: claimed
+  - addr: '0x1c0a78'
+    symbol: func_001C0A78
+    status: asm
+    reason: claimed
+  - addr: '0x1c15d0'
+    symbol: func_001C15D0
+    status: asm
+    reason: claimed
+  - addr: '0x1c1740'
+    symbol: func_001C1740
+    status: asm
+    reason: claimed
+  - addr: '0x1c1810'
+    symbol: func_001C1810
+    status: asm
+    reason: claimed
+  - addr: '0x1c19b0'
+    symbol: func_001C19B0
+    status: asm
+    reason: claimed
+- name: effect_1c1578
+  source: src/game/effects/light_reset.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -fno-schedule-insns
+  functions:
+  - addr: '0x1c1578'
+    symbol: func_001C1578
+    size: 84
+    status: source
+- name: effect_1c1930
+  source: src/game/effects/light_render.c
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x1c1930'
+    symbol: func_001C1930
+    size: 124
+    status: source
+- name: effect_1c0760
+  source: src/game/effects/recycle_emitters.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1c0760'
+    symbol: func_001C0760
+    size: 224
+    status: source
