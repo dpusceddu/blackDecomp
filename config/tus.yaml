@@ -624,7 +624,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 6 of 17 functions
+  flags_basis: matched 7 of 17 functions
   data:
     .rodata: ['0x3f2530', '0x3f3b00']
     .sdata: ['0x40d988', '0x40d9a3']
@@ -2497,7 +2497,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 7 of 18 functions
+  flags_basis: matched 9 of 18 functions
   data:
     .rodata: ['0x3f4b10', '0x3f4b70']
     .data: ['0x3bceac', '0x3bceb0']
@@ -2521,7 +2521,7 @@ tus:
   evidence: [join-soft, calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 11 of 56 functions
+  flags_basis: matched 12 of 56 functions
   data:
     .rodata: ['0x3f4b70', '0x3f4ba0']
     .sdata: ['0x40d9b1', '0x40d9b2']
@@ -5232,7 +5232,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 36 of 70 functions
+  flags_basis: matched 37 of 70 functions
   data:
     .rodata: ['0x3f5370', '0x3f5474']
     .data: ['0x3bcef0', '0x3dd510']
@@ -5316,7 +5316,7 @@ tus:
   evidence: [join-hard, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 21 of 53 functions
+  flags_basis: matched 22 of 53 functions
   data:
     .rodata: ['0x3f5474', '0x3f6250']
     .bss: ['0x415720', '0x4157f0']
@@ -6628,7 +6628,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 18 of 48 functions
+  flags_basis: matched 19 of 48 functions
   data:
     .rodata: ['0x3f55fc', '0x3f6580']
 - name: tu_1854b8
@@ -8955,7 +8955,7 @@ tus:
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 1 of 5 functions
+  flags_basis: matched 2 of 5 functions
   data:
     .rodata: ['0x3f5f30', '0x3f6000']
 - name: tu_1a10e0
@@ -9238,7 +9238,7 @@ tus:
   evidence: [ctor-end, calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 14 of 31 functions
+  flags_basis: matched 15 of 31 functions
   data:
     .rodata: ['0x3f71a0', '0x3f7200']
     .data: ['0x3bd1a0', '0x3bd1a4']
@@ -10600,7 +10600,7 @@ tus:
   evidence: [ctor-list, ctor-end, join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 14 of 66 functions
+  flags_basis: matched 15 of 66 functions
   data:
     .rodata: ['0x3f72e0', '0x3f7520']
     .data: ['0x3bd268', '0x3bd280']
@@ -10753,7 +10753,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 7 of 53 functions
+  flags_basis: matched 8 of 53 functions
   data:
     .rodata: ['0x3f7c48', '0x3f91d8']
     .data: ['0x3bd2ec', '0x3bd3a8']
@@ -10768,7 +10768,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 15 of 45 functions
+  flags_basis: matched 16 of 45 functions
   data:
     .rodata: ['0x3f7e18', '0x3f9208']
     .data: ['0x3bd3a8', '0x3bd470']
@@ -11895,7 +11895,7 @@ tus:
   evidence: [ctor-list, ctor-end, join-hard, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 35 of 74 functions
+  flags_basis: matched 37 of 74 functions
   data:
     .rodata: ['0x3fa070', '0x3fa290']
     .data: ['0x3bdca0', '0x3e0cc8']
@@ -11986,7 +11986,7 @@ tus:
   evidence: [ctor-list, ctor-end, join-hard, join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 140 of 289 functions
+  flags_basis: matched 141 of 289 functions
   data:
     .rodata: ['0x3fa290', '0x3fcd70']
     .data: ['0x3be724', '0x3e0cf0']
@@ -14360,7 +14360,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 5 of 18 functions
+  flags_basis: matched 6 of 18 functions
   data:
     .data: ['0x3bfb2c', '0x3bfb30']
 - name: tu_271348
@@ -15161,7 +15161,7 @@ tus:
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 6 of 19 functions
+  flags_basis: matched 7 of 19 functions
 - name: tu_280e10
   kind: isolated
   library: game

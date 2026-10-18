@@ -50,6 +50,28 @@ glabel probe_convert
         self.assertIn('value', result.stdout)
         self.assertIn('return', result.stdout)
 
+    def test_m2c_keeps_numeric_register_loop_with_raw_branch(self):
+        import subprocess
+        text = '''.section .text
+glabel probe_loop
+    /* 0 00F00000 21100000 */ addu $2, $0, $0
+    /* 4 00F00004 01004224 */ addiu $2, $2, 1
+    /* 8 00F00008 FFFF8424 */ addiu $4, $4, -1
+    /* C 00F0000C FDFF8014 */ .word 0x1480FFFD
+     nop
+    jr $31
+     nop
+'''
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'probe.s'
+            context = Path(directory) / 'ctx.c'
+            path.write_text(decode_raw_instructions(text))
+            context.write_text('int probe_loop(int count);')
+            result = subprocess.run([sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--context', str(context), '--no-cache', str(path)], capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertNotIn('Decompilation failure', result.stdout)
+        self.assertIn('while', result.stdout)
+
     def test_split_sections_and_small_data(self):
         text = '.section .rodata.003F0000, "a"\n.section .lit4.00440000, "wa"\n.section .sbss.00440010, "wa"\n'
         self.assertEqual(normalize_sections(text), '.section .rodata, "a"\n.section .rodata, "wa"\n.section .bss, "wa"\n')

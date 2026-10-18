@@ -219,7 +219,7 @@ def source_seeds(root=ROOT):
 @dataclass(frozen=True)
 class Value:
     """Origins survive register aliases; a displacement is retained only when constant."""
-    origins: frozenset = frozenset()       # ('arg', slot, byte_offset) or ('ret', callee, 0)
+    origins: frozenset = frozenset()       # arg(slot,offset), ret(callee,0), field((slot,parent),pointee_offset)
     types: frozenset = frozenset()
 
 
@@ -230,7 +230,7 @@ def join_value(a, b):
 
 
 def shift_value(v, off):
-    return Value(frozenset((k, n, delta + off if k not in ('unknown', 'field') else delta) for k, n, delta in v.origins), v.types)
+    return Value(frozenset((k, n, delta + off if k != 'unknown' else delta) for k, n, delta in v.origins), v.types)
 
 
 def initial_state():
@@ -269,7 +269,8 @@ def instruction_value(x, state, reads):
     if op == 'mfc1':
         return Value(state[fs].origins, frozenset({'s32'}))
     if x.doesLoad():
-        origins = frozenset(('field', n, off + imm) for kind, n, off in state[rs].origins if kind == 'arg' and op in ('lw', 'lwu'))
+        origins = frozenset(('field', (n, off + imm), 0) for kind, n, off in state[rs].origins if kind == 'arg' and op in ('lw', 'lwu'))
+        origins |= frozenset(('pointee', n, off + imm) for kind, n, off in state[rs].origins if kind == 'field' and op in ('lw', 'lwu'))
         return Value(origins, frozenset({MEMORY[op][0]}) if op in MEMORY else frozenset())
     if op.startswith(('p', 'qmfc2')) and op != 'pref':
         return Value(types=frozenset({'s128'}))
@@ -299,7 +300,7 @@ def analyze_function(f):
     import rabbitizer
     ins = [rabbitizer.Instruction(w, f['addr'] + 4*i, rabbitizer.InstrCategory.R5900) for i, w in enumerate(f['words'])]
     incoming, queue = {0: initial_state()}, collections.deque([0])
-    uses, fields, calls, returns = set(), set(), {}, set()
+    uses, fields, calls, returns, nested = set(), set(), {}, set(), set()
 
     def constrain(v, typ, pc):
         for kind, n, off in v.origins:
@@ -321,8 +322,15 @@ def analyze_function(f):
             for kind, n, off in base.origins:
                 if kind in ('arg', 'farg') and 0 <= off + imm < 0x10000:
                     fields.add((kind, n, off + imm, size, typ, i))
-                elif kind == 'field' and 0 <= off < 0x10000:
-                    fields.add(('arg', n, off, 4, 'void *', i))
+                elif kind == 'field':
+                    slot, parent = n
+                    if 0 <= parent < 0x10000:
+                        fields.add(('arg', slot, parent, 4, 'void *', i))
+                        nested.add((slot, parent, off + imm, size, typ, i))
+                elif kind == 'pointee':
+                    # A loaded element is itself a pointer: no scalar-pointee claim.
+                    slot, parent = n
+                    nested.add((slot, parent, None, 0, 'nested-pointer', i))
             # VU register numbers are a separate bank, not aliases of GPRs.
             if x.doesStore() and rs != 29 and op != 'sqc2':
                 constrain(old[rt if op not in ('swc1',) else ft_register(w)], typ, i)
@@ -336,6 +344,22 @@ def analyze_function(f):
             for reg in reads:
                 if reg >= 32:
                     constrain(old[reg], 'f32', i)
+        copy = op in ('addu', 'daddu', 'or', 'por') and (rs == 0 or rt == 0)
+        if writes and op not in MEMORY and not copy and op not in ('addiu', 'daddiu'):
+            # Unknown indexed arithmetic/escapes must not disappear while retaining
+            # only the easy zero-displacement accesses for the same pointer field.
+            for reg in reads:
+                for kind, identity, off in old[reg].origins:
+                    if kind == 'field':
+                        slot, parent = identity
+                        nested.add((slot, parent, None, 0, 'unknown-use', i))
+        if op in ('addiu', 'daddiu') and imm:
+            # Preserve uncertainty even if a loop later widens away the precise
+            # displaced origins before its next dereference.
+            for kind, identity, displacement in old[rs].origins:
+                if kind == 'field':
+                    slot, parent = identity
+                    nested.add((slot, parent, displacement + imm, 0, 'pointer-arithmetic', i))
         if op == 'mtc1':
             # Bit transfer alone does not prove the source is a C float argument.
             pass
@@ -399,7 +423,7 @@ def analyze_function(f):
             else:
                 emit_call(i, delayed, True)
         # Unresolved computed jumps end this path; never scan their unreachable tail linearly.
-    return dict(uses=uses, fields=fields, calls=calls, returns=returns)
+    return dict(uses=uses, fields=fields, calls=calls, returns=returns, nested=nested)
 
 
 def ft_register(w):
@@ -662,6 +686,32 @@ def layout_fields(fields):
     return result
 
 
+def refine_scalar_pointees(fields, nested):
+    """Refine a pointer only from consistent, zero-displacement scalar accesses.
+
+    Nested rows are (parent offset, pointee displacement, width, scalar type,
+    function, instruction). The pointer's parent-field identity never changes
+    when its loaded value is incremented. Nonzero/unknown accesses, pointer
+    chasing and conflicting interpretations leave the parent as void*.
+    """
+    by_parent = collections.defaultdict(list)
+    for parent, displacement, size, typ, function, pc in nested:
+        by_parent[parent].append((displacement, size, typ, function, pc))
+    out = []
+    for original in fields:
+        field = dict(original)
+        rows = by_parent[field['offset']]
+        if field['type'] == 'void *' and rows:
+            scalar, conflict = resolve_type(row[2] for row in rows)
+            valid = scalar in WIDTH and scalar != 'void *' and not conflict
+            valid = valid and all(row[0] == 0 and row[1] == WIDTH[scalar] for row in rows)
+            if valid:
+                field['type'] = scalar + ' *'
+                field['pointee_accesses'] = len(rows)
+        out.append(field)
+    return out
+
+
 def recover_layouts(inv, analysis, seeds, signatures, root=ROOT):
     groups, membership = collections.defaultdict(set), collections.defaultdict(set)
     for a, s in seeds.items():
@@ -687,20 +737,23 @@ def recover_layouts(inv, analysis, seeds, signatures, root=ROOT):
     # not merge unrelated object arguments into one enormous invented structure.
     out = {}
     for name, nodes in sorted(groups.items()):
-        fields = []
+        fields, nested = [], []
         for a, k in nodes:
             for kind, slot, off, size, typ, pc in analysis.get(a, {}).get('fields', []):
                 if kind == 'arg' and slot == k:
                     fields.append((off, size, typ, a, pc))
+            for slot, parent, displacement, size, typ, pc in analysis.get(a, {}).get('nested', []):
+                if slot == k:
+                    nested.append((parent, displacement, size, typ, a, pc))
         if not fields:
             continue
-        emitted = layout_fields(fields)
+        emitted = refine_scalar_pointees(layout_fields(fields), nested)
         if not emitted:
             continue
         ident = 'Recovered_' + re.sub(r'\W+', '_', name)
         out[ident] = dict(class_name=name, nodes=sorted(nodes), fields=emitted,
                           extent=max(o+s for o,s,_,_,_ in fields), allocation_size='unknown',
-                          verified_by=[], ambiguous_accesses=len(fields) - sum(len(x['functions']) for x in emitted))
+                          verified_by=[], nested_accesses=sorted(nested, key=repr), ambiguous_accesses=len(fields) - sum(len(x['functions']) for x in emitted))
     return out, vtables
 
 

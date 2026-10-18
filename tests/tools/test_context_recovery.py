@@ -270,5 +270,44 @@ class CalleeReturnEvidenceTests(unittest.TestCase):
         self.assertEqual(rows[callee['addr']]['ret'], 'f32 *')
 
 
+
+
+class ScalarPointeeTests(unittest.TestCase):
+    def field(self):
+        return [dict(offset=8, size=4, type='void *', functions=[1])]
+
+    def test_compatible_zero_offset_scalars_refine_across_users(self):
+        fields = cr.refine_scalar_pointees(self.field(), [(8,0,4,'s32',1,0),(8,0,4,'u32',2,0)])
+        self.assertEqual(fields[0]['type'], 's32 *')
+        self.assertEqual(fields[0]['pointee_accesses'], 2)
+        self.assertEqual(cr.refine_scalar_pointees(self.field(), [(8,0,4,'f32',1,0)])[0]['type'], 'f32 *')
+
+    def test_conflicting_nonzero_and_unknown_accesses_stay_opaque(self):
+        for nested in ([(8,0,4,'s32',1,0),(8,0,4,'f32',2,0)],
+                       [(8,4,4,'s32',1,0)],[(8,None,0,'unknown-use',1,0)],
+                       [(8,0,4,'s32',1,0),(8,None,0,'nested-pointer',1,1)]):
+            self.assertEqual(cr.refine_scalar_pointees(self.field(), nested)[0]['type'], 'void *')
+
+    def test_pointer_arithmetic_preserves_parent_and_records_pointee_offset(self):
+        f = fn([i(0x23,4,2,8),i(9,2,2,4),i(0x23,2,3,0),0x03e00008,0])
+        analysis = cr.analyze_function(f)
+        self.assertIn((0,8,4,4,'s32',2), analysis['nested'])
+        self.assertFalse(any(off == 12 for kind, slot, off, size, typ, pc in analysis['fields']))
+        self.assertIn(('arg',0,8,4,'void *',2),analysis['fields'])
+
+    def test_nested_pointer_chasing_blocks_scalar_pointee(self):
+        f = fn([i(0x23,4,2,8),i(0x23,2,3,0),i(0x23,3,5,0),0x03e00008,0])
+        analysis=cr.analyze_function(f)
+        rows=[(parent,off,size,typ,f['addr'],pc) for slot,parent,off,size,typ,pc in analysis['nested']]
+        self.assertEqual(cr.refine_scalar_pointees(self.field(), rows)[0]['type'],'void *')
+
+
+    def test_null_check_does_not_disqualify_scalar_pointee(self):
+        f=fn([i(0x23,4,2,8),i(4,2,0,2),0,i(0x23,2,3,0),0x03e00008,0])
+        analysis=cr.analyze_function(f)
+        rows=[(parent,off,size,typ,f['addr'],pc) for slot,parent,off,size,typ,pc in analysis['nested']]
+        self.assertEqual(cr.refine_scalar_pointees(self.field(),rows)[0]['type'],'s32 *')
+
+
 if __name__ == '__main__':
     unittest.main()

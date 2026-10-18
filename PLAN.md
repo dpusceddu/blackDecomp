@@ -237,6 +237,33 @@ completion forecast: about 76% of the remaining bytes are in functions over 300 
 finished smaller functions, and data completion was not measured. Measure another pilot after the type
 and pipeline fixes, including a completed large-function TU, before estimating whole-project completion.
 
+### Phase 5 campaign results
+
+Bytes are full-image-verified `.text` spans including alignment. Code and owned-data completion are separate.
+
+| Wave | New functions / bytes | Complete TUs (code / data) | Throughput | Functions >300 B | Main blockers |
+| --- | --- | --- | --- | --- | --- |
+| 0, tooling | 115 / 15,720 | 0 / 0 | about 1.8 h coordinator wall time; not a TU-agent rate | automatic 15/2,316 (0.65%); none >1,000 B | stack/tagged aggregates; code-generation mismatches; EE vector and mixed-width code |
+
+Wave 0: 4,587 functions / 218,312 bytes became 4,702 / 234,032 (39.52% / 8.62%). Incremental
+automatic rates among previously unmatched real functions were 65/1,586 (4.10%) below 100 B,
+35/2,736 (1.28%) at 100–300 B, and 15/2,316 (0.65%) above 300 B. These are additional yields
+after the earlier pipeline. Five unrestricted context passes used over 100,000 candidate compilations
+in 507 worker batches; focused retries covered changed views/callers. Near-search solved one of ten
+large candidates. All five retail images passed; no source addresses regressed.
+
+Tooling now propagates argument and consumed-return evidence, exports PS2 access views, corrects SN
+software-double/EE128 handling, recognizes switch sections/relocations and escaped instructions, and
+retries scheduled stack prologues. Batch parse/worker failures stop explicitly. Complete class sizes,
+tagged payloads, stack lifetimes, indirect calls and mixed EE widths remain unresolved; view verification
+requires matching member users. The largest remaining automatic failure categories are stack objects
+(587 kB), general mismatches (481 kB), and unsupported EE operations (401 kB).
+
+Campaigns rotate seven area queues through three workers: four agent slots including the coordinator
+are available; worker contention has not reduced concurrency. Integrate each TU checkpoint, then rerun
+automation and all retail checks per wave. Two consecutive campaign waves below one percentage point
+of text (27,155 bytes each) trigger the requested throughput stop.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.
