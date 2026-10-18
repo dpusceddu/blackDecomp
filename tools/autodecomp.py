@@ -134,30 +134,112 @@ def ctype(t):
     return CTYPES.get(t)
 
 
+HEADER = ROOT / 'include/types_ghidra.h'
+
+
+def header_functions():
+    """Names of the functions include/types_ghidra.h declares (from the Ghidra signatures)."""
+    if not HEADER.exists():
+        return set()
+    return set(re.findall(r'^extern [^(]*?\b(func_[0-9A-F]{8})\(', HEADER.read_text(), re.M))
+
+
+WIDE_PRODUCERS = {'lq', 'por', 'qmfc2.ni', 'qmfc2.i'}
+
+
+def wide_info(f):
+    """(return value, [indices of 128-bit arguments]) of a function. The return value is True when the value in $v0 at a
+    return comes from lq/por/MMI/qmfc2, False when it does not, or the address of the callee whose result is returned
+    unchanged. An argument register is 128-bit when its first use is a 128-bit source (por, sq, MMI)."""
+    import rabbitizer
+    cat = rabbitizer.InstrCategory.R5900
+    ins = [rabbitizer.Instruction(w, f['addr'] + 4 * i, cat) for i, w in enumerate(f['words'])]
+    name = lambda x: x.getOpcodeName()
+    wide_op = lambda x: name(x) in WIDE_PRODUCERS or (name(x).startswith('p') and name(x) != 'pref')
+
+    def writes_v0(x):
+        if x.isBranch() or name(x) in ('sd', 'sq', 'sw', 'sb', 'sh', 'swc1'):
+            return False
+        return (x.modifiesRd() and int(x.rd.value) == 2) or (x.modifiesRt() and int(x.rt.value) == 2)
+    ret = False
+    last = None
+    for i, x in enumerate(ins):
+        if x.isFunctionCall():
+            rel = f['rel'].get(str(i))
+            last = ('call', rel[1] if rel and rel[0] == 'jal' and isinstance(rel[1], int) else None)
+        elif writes_v0(x):
+            last = x
+        if x.isJrRa():
+            lw = last
+            d = ins[i + 1] if i + 1 < len(ins) else None
+            if d is not None and writes_v0(d):
+                lw = d
+            if isinstance(lw, tuple):
+                if lw[1] is not None and ret is False:
+                    ret = lw[1]
+            elif lw is not None and wide_op(lw):
+                ret = True
+    args = []
+    written = set()
+    for x in ins:
+        reads = set()
+        if x.readsRs():
+            reads.add(int(x.rs.value))
+        if x.readsRt():
+            reads.add(int(x.rt.value))
+        for k in range(4):
+            r = 4 + k
+            if r in reads and r not in written:
+                if (name(x) in ('sq', 'por') or (name(x).startswith('p') and name(x) != 'pref')) and k not in args:
+                    args.append(k)
+                written.add(r)             # the first use decides
+        for reg in (int(x.rd.value) if x.modifiesRd() else None, int(x.rt.value) if x.modifiesRt() else None):
+            if reg is not None:
+                written.add(reg)
+    return ret, sorted(args)
+
+
+def wide_prototypes(inv, known):
+    """Context prototypes of functions that return or take `long long` values (128 bits in SN GCC), as s64 for m2c;
+    tools/ee_prep.py turns s64 into the 128-bit type afterwards."""
+    arity = compute_arities(inv)
+    out = []
+    info = {f['addr']: wide_info(f) for f in inv}
+    for _ in range(4):                          # a result returned unchanged from a callee takes the callee's width
+        for a, (ret, args) in list(info.items()):
+            if isinstance(ret, int) and not isinstance(ret, bool):
+                callee = info.get(ret)
+                info[a] = (callee[0] if callee and not isinstance(callee[0], int) or (callee and isinstance(callee[0], bool)) else False, args)
+    for f in inv:
+        if f['name'] in known or f['size'] > 600:
+            continue
+        ret, args = info[f['addr']]
+        ret = ret is True
+        if not ret and not args:
+            continue
+        n = max(arity.get(f['addr'], 0), (max(args) + 1) if args else 0)
+        out.append('%s %s(%s);' % ('s64' if ret else 's32', f['name'], ', '.join('s64' if k in args else 's32' for k in range(n)) or 'void'))
+    return out
+
+
 def write_context():
-    """C context for m2c: typedefs plus the Ghidra prototypes of config/symbols.txt, reduced to scalar and pointer types
-    and rewritten under the image's func_XXXXXXXX names. Pointers to Ghidra structs become void *."""
+    """C context for m2c: the integer typedefs plus include/types_ghidra.h (Ghidra's structures and the signatures of the
+    named functions, under the image's func_XXXXXXXX names). Run tools/ghidra_types.py first."""
     out = ['typedef signed char s8; typedef unsigned char u8; typedef short s16; typedef unsigned short u16;',
            'typedef int s32; typedef unsigned int u32; typedef long s64; typedef unsigned long u64;',
            'typedef float f32; typedef double f64;']
     n = 0
-    for line in (ROOT / 'config/symbols.txt').read_text().split('\n'):
-        c = line.split('\t')
-        if len(c) < 6 or c[2] != 'func' or c[5] == '-':
-            continue
-        m = re.match(r'^(.*?)\s*(?:__stdcall|__cdecl|__thiscall|__fastcall)?\s*([\w:~]+)\((.*)\)$', c[5])
-        if not m:
-            continue
-        ret = ctype(m.group(1))
-        params = [] if m.group(3).strip() in ('', 'void') else [p.rsplit(' ', 1)[0] if ' ' in p.strip() else p
-                                                                for p in m.group(3).split(',')]
-        types = [ctype(re.sub(r'\s*\w+$', '', p.strip()) if not p.strip().endswith('*') else p) for p in params]
-        if ret is None or any(t is None or t == 'void' for t in types) or c[0] == '0x00100008':
-            continue
-        out.append('%s %s(%s);' % (ret, c[3], ', '.join(types) or 'void'))
-        n += 1
+    if HEADER.exists():
+        for line in HEADER.read_text().split('\n'):
+            if line.startswith('#') or line.startswith('typedef char assert_') or line.startswith('/*') or line.startswith(' *'):
+                continue
+            out.append(line)
+            n += line.startswith('extern ')
+    known = set(re.findall(r'\b(func_[0-9A-F]{8})\(', '\n'.join(out)))
+    wide = wide_prototypes(load_inventory(), known)
+    out += wide
     (AUTO / 'ctx.c').write_text('\n'.join(out) + '\n')
-    return n
+    return n + len(wide)
 
 
 # ---------------------------------------------------------------------------------------------------------- arity
@@ -262,14 +344,22 @@ def write_context_arity(inv):
 # ---------------------------------------------------------------------------------------------------------- m2c
 def run_m2c(fns, options=(), ctx='ctx.c'):
     """Decompile `fns` in one m2c process. Returns {name: dict(c=..., sig=..., decls={}, error=...)}."""
-    paths = []
+    import ee_prep
+    paths, flags = [], {}
+    prep_dir = AUTO / 'prep'
+    prep_dir.mkdir(exist_ok=True)
     for f in fns:
-        paths.append(str(BUILD / 's/text' / (f['name'] + '.s')))
+        text, flags[f['name']] = ee_prep.prep((BUILD / 's/text' / (f['name'] + '.s')).read_text())
+        (prep_dir / (f['name'] + '.s')).write_text(text)
+        paths.append(str(prep_dir / (f['name'] + '.s')))
         if f['lit4']:
             paths.append(str(BUILD / 's/text' / (f['name'] + '.lit4.s')))
-    cmd = [str(M2C), '-t', 'mipsee-gcc-c', '--valid-syntax', '--context', str(AUTO / ctx), '--no-cache'] + list(options) + paths
+    cmd = [sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--valid-syntax', '--context', str(AUTO / ctx), '--no-cache'] + list(options) + paths
     r = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, timeout=3600)
-    return split_m2c(r.stdout + ('\n/* STDERR %s */' % r.stderr if r.returncode else ''), fns)
+    out = split_m2c(r.stdout + ('\n/* STDERR %s */' % r.stderr if r.returncode else ''), fns)
+    for name, fl in flags.items():
+        out.setdefault(name, {})['ee'] = fl
+    return out
 
 
 FUNC_START = re.compile(r'^(?!\s)([^\n(;]*?)\b(func_[0-9A-F]{8})\((.*)\) \{$')
@@ -344,6 +434,29 @@ def idiom_source(f):
     return '#include "auto/prelude.h"\n\nvoid %s(void) {\n    __asm__ volatile("%s");\n}\n' % (f['name'], body), kind
 
 
+def stack_rewrite(body, size):
+    """The frame objects of an m2c body as one local buffer `sp`: bare `sp` is the buffer's address, `&spN` the address at
+    byte offset N (hex) and `spN` the value there; the type comes from m2c's own declaration `T spN;` (s32 otherwise)."""
+    types = {}
+    kept = []
+    for line in body.split('\n'):
+        m = re.match(r'^\s+([A-Za-z_][\w ]*?\s*\**)\s*sp([0-9A-Fa-f]+);\s*$', line)
+        if m and m.group(1).split()[0] not in ('return', 'goto', 'else', 'case'):
+            types[m.group(2).upper()] = m.group(1).strip()
+        else:
+            kept.append(line)
+    body = '\n'.join(kept)
+
+    def value(m):
+        n = m.group(2).upper()
+        n = n if n != '' else '0'
+        t = types.get(n, 's32')
+        off = int(n, 16)
+        return '(sp + %d)' % off if m.group(1) else '*(%s *)(sp + %d)' % (t, off)
+    body = re.sub(r'(&?)\bsp([0-9A-Fa-f]+)\b', value, body)
+    return '    u8 sp[%d] __attribute__((aligned(16)));\n' % size + body
+
+
 def clean_function(name, r, sigs, strings=None, stack=None):
     """Compose a compilable C file for one decompiled function (the mechanical cleaning step). Returns (source, note)."""
     if r.get('error'):
@@ -351,11 +464,20 @@ def clean_function(name, r, sigs, strings=None, stack=None):
     if 'body' not in r:
         return None, 'm2c failure: no output'
     body, ret, params = r['body'], r['ret'], r['params']
+    if r.get('ee') and (r['ee']['q'] or r['ee']['u']):
+        import ee_prep
+        whole = ee_prep.post('\x00'.join((ret, params, body)), r['ee'])
+        if whole is None:
+            return None, 'ee-instruction: 128-bit or unaligned access mixed with real 64-bit accesses'
+        ret, params, body = whole.split('\x00')
+    # a register that is read before it is set is an argument the function receives and passes on (or ignores)
+    for reg in re.findall(r'M2C_ERROR\(/\* Read from unset register \$a([0-3]) \*/\)', body):
+        body = body.replace('M2C_ERROR(/* Read from unset register $a%s */)' % reg, 'arg%s' % reg)
     errs = re.findall(r'M2C_ERROR\(/\* (.*?) \*/\)', body)
     if re.search(r'\bsp\b', body):
         if not stack:
             return None, 'stack-object: address of a local aggregate (sp)'
-        body = '    u8 sp[%d];\n' % stack + body      # a local buffer; its size is searched so that the frame size matches
+        body = stack_rewrite(body, stack)      # a local buffer; its size is searched so that the frame size matches
     if errs or 'M2C_ERROR' in body or 'M2C_TRAP_IF' in body or 'M2C_BREAK' in body:
         why = errs[0] if errs else 'unsupported construct'
         kind = 'ee-instruction' if 'unknown instruction' in why else ('unset-register' if 'unset register' in why else 'm2c-error')
@@ -377,13 +499,16 @@ def clean_function(name, r, sigs, strings=None, stack=None):
         if re.search(r'\b%s\b' % sym, body):
             body = re.sub(r'&?\b%s\b' % sym, lambda m: '"%s"' % lit, body)
     sig = '%s %s(%s)' % (ret, name, params)
-    lines = ['#include "auto/prelude.h"', '']
+    lines = ['#include "auto/prelude.h"', '#include "types_ghidra.h"', '']
     seen = set()
+    known = header_functions()
     for ident in IDENT.findall(sig + ' ' + body):
         if ident in seen or ident == name:
             continue
         seen.add(ident)
         d = r['decls'].get(ident)
+        if ident in known:
+            continue
         if d and d[0] == 'func':
             lines.append(decl_function(ident, d))
         elif d and d[0] == 'data' and re.search(r'\b%s\(' % ident, body):
@@ -395,6 +520,8 @@ def clean_function(name, r, sigs, strings=None, stack=None):
                 lines.append('extern s32 (*%s)();' % ident)
             else:
                 lines.append('extern s32 %s;' % ident if ident.startswith('D_') else 'extern s32 %s();' % ident)
+    if r.get('ee') and r['ee']['q'] and not r['ee']['real64']:
+        lines = [re.sub(r'\bu64\b', 'u128', re.sub(r'\bs64\b', 's128', l)) for l in lines]
     src = '\n'.join(lines) + '\n\n' + sig + ' {\n' + body + '\n}\n'
     return src, sig
 
@@ -449,7 +576,7 @@ def worker_compile(jobs, tag='auto'):
     buf = io.BytesIO()
     plan = dict(compile=[], pack='newobjs.tgz')
     with tarfile.open(fileobj=buf, mode='w:gz', compresslevel=1) as tar:
-        for rel in ('include/macro.inc', 'tools/elfobj.py', 'include/auto/prelude.h'):
+        for rel in ('include/macro.inc', 'tools/elfobj.py', 'include/auto/prelude.h', 'include/types_ghidra.h'):
             tar.add(ROOT / rel, arcname=rel)
         for key, src, flags, h in todo:
             data = src.encode()
@@ -485,6 +612,8 @@ def worker_compile(jobs, tag='auto'):
         if res['rc']:
             ls = [x.split(': ', 1)[-1] if ': ' in x else x for x in res['msg'].strip().split('\n') if x.strip() and 'In function' not in x and 'warning' not in x]
             msg = (ls[0] if ls else res['msg'][:100])[:200]
+            if os.environ.get('AUTODECOMP_VERBOSE'):
+                msg = res['msg'][-600:]
         (cache / (h + '.json')).write_text(json.dumps(dict(rc=res['rc'], msg=msg)))
         if obj:
             (cache / (h + '.o')).write_bytes(obj)
@@ -496,7 +625,7 @@ def worker_compile(jobs, tag='auto'):
 
 
 STATS = collections.Counter()
-PRELUDE_HASH = hashlib.sha256((ROOT / 'include/auto/prelude.h').read_bytes()).hexdigest()
+PRELUDE_HASH = hashlib.sha256((ROOT / 'include/auto/prelude.h').read_bytes() + ((ROOT / 'include/types_ghidra.h').read_bytes() if (ROOT / 'include/types_ghidra.h').exists() else b'')).hexdigest()
 
 
 # ---------------------------------------------------------------------------------------------------------- scoring
@@ -1456,6 +1585,7 @@ def cmd_run(a):
     inv = load_inventory()
     if not (AUTO / 'ctx.c').exists() or a.refresh_context:
         print('context: %d prototypes' % write_context())
+        write_context_arity(inv)
     done = source_functions()
     sel = [f for f in inv if f['addr'] not in done]
     if a.addr:

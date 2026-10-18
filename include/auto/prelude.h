@@ -27,4 +27,8 @@ typedef s64 M2C_UNK64;
 #define M2C_FIELD(expr, type_ptr, offset) (*(type_ptr)((s8 *)(expr) + (offset)))
 #define M2C_BITWISE(type, expr) ((type)(expr))
 
+/* Eight bytes at any byte alignment (SN emits ldl/ldr, sdl/sdr for this; see tools/ee_prep.py). */
+typedef struct { s64 v; } __attribute__((packed)) M2C_U64;
+#define M2C_UNALIGNED64(expr, offset) (((M2C_U64 *)((s8 *)(expr) + (offset)))->v)
+
 #endif
