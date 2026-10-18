@@ -261,6 +261,7 @@ units:
     status: source
   externs:
     _stricmp: '0x360838'
+  owner: wave1-kynapse
 - name: kynapse_child_buffers_2e3330
   source: src/kynapse/child_buffers_2e3330.cpp
   origin: kynapse
@@ -280,6 +281,7 @@ units:
     status: source
   externs:
     _stricmp: '0x360838'
+  owner: wave1-kynapse
 - name: kynapse_child_buffers_2e3578
   source: src/kynapse/child_buffers_2e3578.cpp
   origin: kynapse
@@ -307,6 +309,7 @@ units:
     memoryRelease: '0x3c87e0'
     strcpy: '0x35cbc0'
     strlen: '0x35ccd8'
+  owner: wave1-kynapse
 - name: kynapse_child_buffers_2e3920
   source: src/kynapse/child_buffers_2e3920.cpp
   origin: kynapse
@@ -320,6 +323,7 @@ units:
     symbol: GetSecond__CQ24Kaim12ChildBuffers
     size: 8
     status: source
+  owner: wave1-kynapse
 - name: kynapse_class_info_389290
   source: src/kynapse/class_info_389290.cpp
   origin: kynapse
@@ -1541,6 +1545,7 @@ units:
     status: source
   externs:
     _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
+  owner: wave1-kynapse
 - name: kynapse_owned_arrays_2e34b8
   source: src/kynapse/owned_arrays_2e34b8.cpp
   origin: kynapse
@@ -1559,6 +1564,7 @@ units:
     _vt$Q24Kaim10ObjectBase: '0x3e0040'
     _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
     memoryRelease: '0x3c87e0'
+  owner: wave1-kynapse
 - name: kynapse_owned_arrays_2e37a0
   source: src/kynapse/owned_arrays_2e37a0.cpp
   origin: kynapse
@@ -1572,6 +1578,7 @@ units:
     symbol: DeleteChildren__Q24Kaim12ChildBuffers
     size: 132
     status: source
+  owner: wave1-kynapse
 - name: kynapse_owned_arrays_2e9280
   source: src/kynapse/owned_arrays_2e9280.cpp
   origin: kynapse
@@ -3874,17 +3881,19 @@ units:
     size: 52
     status: source
 - name: auto_other_2e3918
-  source: src/auto/other/2e3918.c
-  origin: auto
+  source: src/kynapse/child_buffers_2e3918.cpp
+  origin: kynapse
   flags:
   - -O2
   - -G0
   - -snas
+  - -fbyte-bool
   functions:
   - addr: '0x2e3918'
     symbol: func_002E3918
     size: 8
     status: source
+  owner: wave1-kynapse
 - name: auto_other_3112e0
   source: src/auto/other/3112e0.c
   origin: auto
@@ -39623,3 +39632,156 @@ units:
     size: 12
     status: source
   owner: wave1-animation
+- name: kynapse_child_buffers_2e2828
+  source: src/kynapse/child_buffers_2e2828.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e2828'
+    symbol: __Q24Kaim12ChildBuffersPCc
+    size: 228
+    status: source
+  externs:
+    __throw: '0x292b40'
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
+    _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    strcpy: '0x35cbc0'
+    strlen: '0x35ccd8'
+- name: kynapse_child_buffers_2e2910
+  source: src/kynapse/child_buffers_2e2910.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e2910'
+    symbol: __as__Q24Kaim12ChildBuffersRCQ24Kaim12ChildBuffers
+    size: 612
+    status: source
+  externs:
+    DeleteChildren__Q24Kaim12ChildBuffers: '0x2e37a0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    strcpy: '0x35cbc0'
+    strlen: '0x35ccd8'
+- name: kynapse_child_buffers_2e2b78
+  source: src/kynapse/child_buffers_2e2b78.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e2b78'
+    symbol: func_002E2B78
+    size: 452
+    status: source
+  externs:
+    __Q24Kaim12ChildBuffersPCc: '0x2e2828'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_child_buffers_2e2d40
+  source: src/kynapse/child_buffers_2e2d40.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e2d40'
+    symbol: AddChild__Q24Kaim12ChildBuffers
+    size: 428
+    status: source
+  externs:
+    _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+- name: kynapse_child_buffers_2e2ef0
+  source: src/kynapse/child_buffers_2e2ef0.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e2ef0'
+    symbol: func_002E2EF0
+    size: 528
+    status: source
+  externs:
+    __as__Q24Kaim12ChildBuffersRCQ24Kaim12ChildBuffers: '0x2e2910'
+    __throw: '0x292b40'
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
+    _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+- name: kynapse_child_buffers_2e3288
+  source: src/kynapse/child_buffers_2e3288.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e3288'
+    symbol: func_002E3288
+    size: 164
+    status: source
+  externs:
+    _stricmp: '0x360838'
+- name: kynapse_child_buffers_2e3440
+  source: src/kynapse/child_buffers_2e3440.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e3440'
+    symbol: __Q24Kaim12ChildBuffersRCQ24Kaim12ChildBuffers
+    size: 116
+    status: source
+  externs:
+    __as__Q24Kaim12ChildBuffersRCQ24Kaim12ChildBuffers: '0x2e2910'
+    __throw: '0x292b40'
+    _vt$Q24Kaim10ObjectBase: '0x3e0040'
+    _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
+- name: kynapse_child_buffers_2e3828
+  source: src/kynapse/child_buffers_2e3828.cpp
+  origin: kynapse
+  owner: wave1-kynapse
+  flags:
+  - -O2
+  - -G0
+  - -fbyte-bool
+  functions:
+  - addr: '0x2e3828'
+    symbol: func_002E3828
+    size: 240
+    status: source

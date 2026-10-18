@@ -17380,7 +17380,7 @@ tus:
   evidence: [eh, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas, -fbyte-bool]
-  flags_basis: matched 12 of 20 functions
+  flags_basis: matched 20 of 20 functions
   data:
     .data: ['0x3e8dd0', '0x3e8ed0']
 - name: kynapse/tu_2e3928
