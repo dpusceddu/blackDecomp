@@ -1,0 +1,11 @@
+# Hand corrections for tools/tus.py (small on purpose; the map is regenerated from the evidence).
+# cuts:      addresses where a TU certainly starts
+# joins:     [first, last] function address ranges that certainly belong to one TU
+# names:     TU start address -> name
+# libraries: name -> [first, last) text range, replacing what the strings and zones say
+# flags:     TU start address -> [compiler, flags]
+cuts: [0x100008, 0x100218, 0x100338]       # crt0 (hand-written start-up), its thunks, then the first object with static initialisers
+names:
+  0x100008: crt0
+libraries:
+  apt: [0x218000, 0x258000]               # EA Apt/Flash UI: strings from 0x218000 to 0x254000, game code before and after
