@@ -9741,6 +9741,7 @@ units:
     symbol: func_001AFF88
     size: 16
     status: source
+  claim: wave1-game-actor
 - name: auto_unclassified_1b0068
   source: src/auto/unclassified/1b0068.c
   origin: auto
@@ -40462,4 +40463,48 @@ units:
   - addr: '0x2ce950'
     symbol: func_002CE950
     size: 48
+    status: source
+- name: actor_render_dispatch
+  source: src/game/actor/render_dispatch.cpp
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    func_001AFF88: '0x1aff88'
+  functions:
+  - addr: '0x1aff98'
+    symbol: func_001AFF98
+    size: 64
+    status: source
+  - addr: '0x1affd8'
+    symbol: func_001AFFD8
+    size: 80
+    status: source
+  - addr: '0x1b0028'
+    symbol: func_001B0028
+    size: 64
+    status: source
+- name: actor_record_flags
+  source: src/game/actor/record_flags.cpp
+  origin: game
+  claim: wave1-game-actor
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  externs:
+    func_001AFBF0: '0x1afbf0'
+  functions:
+  - addr: '0x1afba8'
+    symbol: func_001AFBA8
+    size: 72
+    status: source
+  - addr: '0x1afc30'
+    symbol: func_001AFC30
+    size: 72
     status: source
