@@ -49,7 +49,10 @@ def compile_one(job):
     env = dict(os.environ, TMPDIR='/work', WINEDEBUG='-all', WIBO_PATH=backend)
     os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
     cmd = ['wibo', root + '/bin/ee-gcc.exe', '-B' + backend + '/'] + job['args'] + ['-c', job['src'], '-o', job['obj']]
-    p = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=300)
+    try:
+        p = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=job.get('timeout', 300))
+    except subprocess.TimeoutExpired:       # a pathological candidate must not take the whole batch down
+        return job['src'], 124, 'compiler timeout'
     if p.returncode == 0 and os.path.exists(job['obj']):
         data = open(job['obj'], 'rb').read()
         open(job['obj'], 'wb').write(normalize_object(data))

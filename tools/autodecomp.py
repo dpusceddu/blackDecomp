@@ -344,7 +344,7 @@ def idiom_source(f):
     return '#include "auto/prelude.h"\n\nvoid %s(void) {\n    __asm__ volatile("%s");\n}\n' % (f['name'], body), kind
 
 
-def clean_function(name, r, sigs, strings=None):
+def clean_function(name, r, sigs, strings=None, stack=None):
     """Compose a compilable C file for one decompiled function (the mechanical cleaning step). Returns (source, note)."""
     if r.get('error'):
         return None, r['error']
@@ -353,7 +353,9 @@ def clean_function(name, r, sigs, strings=None):
     body, ret, params = r['body'], r['ret'], r['params']
     errs = re.findall(r'M2C_ERROR\(/\* (.*?) \*/\)', body)
     if re.search(r'\bsp\b', body):
-        return None, 'stack-object: address of a local aggregate (sp)'
+        if not stack:
+            return None, 'stack-object: address of a local aggregate (sp)'
+        body = '    u8 sp[%d];\n' % stack + body      # a local buffer; its size is searched so that the frame size matches
     if errs or 'M2C_ERROR' in body or 'M2C_TRAP_IF' in body or 'M2C_BREAK' in body:
         why = errs[0] if errs else 'unsupported construct'
         kind = 'ee-instruction' if 'unknown instruction' in why else ('unset-register' if 'unset register' in why else 'm2c-error')
@@ -437,7 +439,7 @@ def worker_compile(jobs, tag='auto'):
             ti.size = len(data)
             tar.addfile(ti, io.BytesIO(data))
             plan['compile'].append(dict(src='src/%s.c' % h, obj='obj/%s.o' % h, compiler=COMPILER,
-                                        args=list(flags) + ['-I', 'include']))
+                                        args=list(flags) + ['-I', 'include'], timeout=30))
     d = AUTO / 'job'
     d.mkdir(exist_ok=True)
     (d / 'inputs.tgz').write_bytes(buf.getvalue())
@@ -658,6 +660,7 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
     STATS['m2c_seconds'] += time.time() - t0
     sigs = {}
     srcs = {}
+    stack_alts = {}
     for f in fns:
         if f['size'] <= 4:
             recs['0x%x' % f['addr']] = dict(name=f['name'], size=f['size'], region=f['region'], status='fragment',
@@ -667,6 +670,17 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
         src, note = clean_function(f['name'], r, sigs, f.get('strings'))
         rec = dict(name=f['name'], size=f['size'], region=f['region'])
         recs['0x%x' % f['addr']] = rec
+        if src is None and note.startswith('stack-object') and f['words'][0] >> 16 == 0x27BD and f['words'][0] & 0x8000:
+            frame = 0x10000 - (f['words'][0] & 0xFFFF)
+            for n in sorted({frame - 16 - 8 * j for j in range(9)} | {16, 32}):
+                if n > 0:
+                    alt, altsig = clean_function(f['name'], r, sigs, f.get('strings'), stack=n)
+                    if alt:
+                        stack_alts.setdefault(f['name'], []).append(alt)
+                        note = altsig
+            if stack_alts.get(f['name']):
+                src = stack_alts[f['name']][0]
+                rec['stack_local'] = True
         if src is None and (idiom := idiom_source(f)):
             src, rec['idiom'] = idiom
             note = 'void %s(void)' % f['name']
@@ -679,11 +693,15 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
         rec.update(sig=note)
         srcs[f['name']] = src
     # compile the default variants (first try)
-    jobs, meta = [], []
+    jobs, srcof = [], {}
     for f in fns:
         if f['name'] in srcs:
             for k, flags in enumerate(variants_for(f)):
                 jobs.append(((f['name'], k), srcs[f['name']], flags))
+                srcof[(f['name'], k)] = srcs[f['name']]
+            for j, alt in enumerate(stack_alts.get(f['name'], [])[1:]):
+                jobs.append(((f['name'], 200 + j), alt, variants_for(f)[0]))
+                srcof[(f['name'], 200 + j)] = alt
     results = {}
     for i in range(0, len(jobs), 400):
         results.update(worker_compile(jobs[i:i + 400]))
@@ -705,12 +723,12 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
         exact, d, note = score(targets[f['name']], toks, orig.word)
         cur = best.get(f['name'])
         if cur is None or d < cur[0]:
-            best[f['name']] = (d, flags, exact, note, tag)
+            best[f['name']] = (d, flags, exact, note, tag, srcof.get(key, srcs[f['name']]))
         return exact, d
 
     for (name, k), res in results.items():
         f = byname[name]
-        consider(f, k, variants_for(f)[k], res)
+        consider(f, k, variants_for(f)[min(k, len(variants_for(f)) - 1)], res)
     # flag variants for the rest
     if flag_extra:
         jobs = []
@@ -719,7 +737,8 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
             if f['name'] in srcs and (b is None or not b[2]) and b is not None:
                 for k, flags in enumerate(EXTRA_FLAG_SETS):
                     if flags not in variants_for(f):
-                        jobs.append(((f['name'], 100 + k), srcs[f['name']], flags))
+                        jobs.append(((f['name'], 100 + k), b[5], flags))
+                        srcof[(f['name'], 100 + k)] = b[5]
         res2 = {}
         for i in range(0, len(jobs), 400):
             res2.update(worker_compile(jobs[i:i + 400]))
@@ -730,16 +749,16 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
         b = best.get(f['name'])
         if f['name'] not in srcs:
             continue
-        rec['source'] = srcs[f['name']]
+        rec['source'] = b[5] if b else srcs[f['name']]
         if b is None:
             rec['status'] = 'compile-failed'
             rec['reason'] = rec.get('compile_error', '')
             continue
-        d, flags, exact, note, _ = b
+        d, flags, exact, note, _, _ = b
         rec.update(score=d, flags=flags, note=note, variant=tag)
         if exact:
             rec['status'] = 'matched'
-            rec['stage'] = 'template' if rec.get('idiom') else (
+            rec['stage'] = 'template' if rec.get('idiom') else 'stack-local' if rec.get('stack_local') else (
                 'flags' if flags not in variants_for(f)[:1] else ('first' if tag in ('ctx.c', 'default') else 'm2c-variant'))
         else:
             rec['status'] = 'near' if d <= 8 else 'mismatch'
@@ -933,7 +952,7 @@ def cmd_report(a):
     byt = collections.Counter()
     for k, v in sel:
         if v['status'] == 'matched':
-            c = 'matched: ' + {'first': 'first try', 'flags': 'after flag variants', 'permuter': 'after permuter', 'm2c-variant': 'after m2c variant (callee arity context)', 'template': 'idiom template (asm stub)', 'family': 'cloned from a family member'}.get(v.get('stage'), v.get('stage', '?'))
+            c = 'matched: ' + {'first': 'first try', 'flags': 'after flag variants', 'permuter': 'after permuter', 'm2c-variant': 'after m2c variant (callee arity context)', 'template': 'idiom template (asm stub)', 'family': 'cloned from a family member', 'stack-local': 'after a local buffer for sp'}.get(v.get('stage'), v.get('stage', '?'))
         elif v['status'] == 'fragment':
             c = 'not a function (4-byte split artifact)'
         elif v['status'] == 'verify-failed':
@@ -1280,6 +1299,9 @@ def cmd_run(a):
     reconcile(res)
     if a.status:
         sel = [f for f in sel if res.get('0x%x' % f['addr'], {}).get('status') in a.status]
+    if a.sample and len(sel) > a.sample:
+        import random
+        sel = sorted(random.Random(a.sample).sample(sel, a.sample), key=lambda f: f['addr'])
     if a.limit:
         sel = sel[:a.limit]
     if not a.redo and not a.status:
@@ -1313,6 +1335,7 @@ def main():
     r.add_argument('--region', action='append')
     r.add_argument('--addr', action='append')
     r.add_argument('--limit', type=int)
+    r.add_argument('--sample', type=int, help='a random sample of this many functions (fixed seed)')
     r.add_argument('--batch', type=int, default=200, help='functions per m2c process')
     r.add_argument('--chunk', type=int, default=600, help='functions per checkpoint of auto.json')
     r.add_argument('--redo', action='store_true')
@@ -1344,6 +1367,9 @@ def main():
     pm.set_defaults(fn=cmd_permute)
     fm = sub.add_parser('family')
     fm.set_defaults(fn=lambda a: (lambda res: (propagate_families(res, load_inventory(), OrigImage()), save_results(res)))(load_results()))
+    mg = sub.add_parser('merge')
+    mg.add_argument('file')
+    mg.set_defaults(fn=lambda a: (lambda res: (res.update(merge_records(res, {k: v for k, v in json.loads(Path(a.file).read_text()).items()})), save_results(res)))(load_results()))
     su = sub.add_parser('setup')
     su.set_defaults(fn=cmd_setup)
     sh = sub.add_parser('show')
