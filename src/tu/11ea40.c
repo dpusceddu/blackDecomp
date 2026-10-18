@@ -1,0 +1,12 @@
+#include "auto/prelude.h"
+#include "types_ghidra.h"
+
+extern s32 func_0011D430();
+
+void func_0011EA40(void) {
+
+}
+
+s32 func_0011EA48(s32 arg0) {
+    return func_0011D430(arg0, 6);
+}
