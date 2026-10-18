@@ -686,6 +686,8 @@ def assemble(img, seg, libs, ov):
             conf = 'medium'
         else:
             conf = 'low'
+        if kind == 'object' and len(fn) == 1 and all(proposed) and not (egroup or any(i in img.ctor_i for i in fn)):
+            kind = 'isolated'                    # one function that no relation ties to either neighbour: an object of its own or a part of one
         # library and class name
         labs = collections.Counter(label[i] for i in fn if i in label)
         regc = collections.Counter(reg[i] for i in fn)
@@ -714,7 +716,7 @@ def assign_libraries(img, seg, tus, ov):
     """Library of each TU: the strings it uses; else the zone it is in. Zones are runs between cuts that mark a change of
     compiler style, library or counterpart-map region."""
     zone_cuts = {p for p, k in seg.cuts.items() if k & {'lib', 'style', 'region', 'override', 'ehzone'}}
-    objs = [t for t in tus if t['kind'] == 'object']
+    objs = [t for t in tus if t['kind'] in ('object', 'isolated')]
     zone, zones = 0, collections.defaultdict(lambda: dict(labs=collections.Counter(), regc=collections.Counter(), styles=collections.Counter()))
     for t in objs:
         if t['a'] in zone_cuts:
@@ -752,7 +754,7 @@ def flags_of(img, t, ov):
     for i in t['fn']:
         u = img.src.get(i)
         if u:
-            units[(u['compiler'], tuple(u['flags']))] += 1
+            units[(u['compiler'], tuple(f for f in u['flags'] if f != '-ffunction-sections'))] += 1
     sd = t['styles'].get('sd', 0)
     gp = sum(1 for i in t['fn'] if img.gprel[i])
     if t['lo'] in ov.get('flags', {}):
@@ -784,7 +786,7 @@ def name_of(img, t, ov):
         t['name'] = '%s_%06x' % (next(iter(t['classes'])), t['lo'])
     else:
         t['name'] = base
-    if t['library'] not in (None, 'game', 'linkonce') and t['kind'] == 'object':
+    if t['library'] not in (None, 'game', 'linkonce') and t['kind'] in ('object', 'isolated'):
         t['name'] = '%s/%s' % (t['library'], t['name'])
 
 
@@ -989,6 +991,23 @@ def evidence(img, out=print):
     out('  entries that are not a plain stub or not a split function start: %s' % ', '.join(hx(a) for a in odd))
     st = collections.Counter(img.style)
     out('save style: ' + ', '.join('%s %d' % kv for kv in sorted(st.items())))
+    lo = [g for g in img.eh if g['lo'] >= img.linkonce_start]
+    nlo = sum(1 for i in range(img.N) if img.F[i] >= img.linkonce_start)
+    out('link-once area: %s-%s, %d functions in %d one-function-sized unwind sections (%d with an exception table pointer)' % (
+        hx(img.linkonce_start), hx(img.END[-1]), nlo, len(lo), sum(1 for g in lo if g['aug'] == 'eh')))
+    d = img.elf.section('.data')
+    dc, base = img.elf.content(d), d['addr']
+    vt = runs = 0
+    o = 0
+    while o < len(dc) - 16:
+        k = 0
+        while o + 8 * k + 8 <= len(dc) and struct.unpack_from('<I', dc, o + 8 * k)[0] == 0 and struct.unpack_from('<I', dc, o + 8 * k + 4)[0] in img.fidx:
+            k += 1
+        if k >= 3:
+            vt, runs, o = vt + 1, runs + k, o + 8 * k
+        else:
+            o += 4
+    out('vtables: %d runs of (0, method) pairs in .data, %d entries' % (vt, runs))
     libs = detect_libs(img)
     out('libraries by strings: ' + ', '.join('%s %s-%s' % (k, hx(img.F[v['lo']]), hx(img.END[v['hi']])) for k, v in sorted(libs.items(), key=lambda kv: kv[1]['lo'])))
     return libs
@@ -1014,6 +1033,14 @@ def main():
         tus = assemble(img, seg, libs, ov)
         write_map(img, tus, libs, a.out)
         by, lb = summarize(img, tus)
+        fl = collections.defaultdict(collections.Counter)
+        for i, u in img.src.items():
+            t = next((t for t in tus if t['lo'] <= img.F[i] < t['hi']), None)
+            if t:
+                fl[t['library']][(u['compiler'].replace('ee-gcc', ''), ' '.join(f for f in u['flags'] if f not in ('-snas', '-ffunction-sections')))] += 1
+        print('flags of the functions already matched, by library:')
+        for lib, c in sorted(fl.items()):
+            print('  %-20s %s' % (lib, ', '.join('%s %s: %d' % (k[0], k[1], v) for k, v in c.most_common())))
         print('wrote %s: %d TUs' % (Path(a.out).name, len(tus)))
         for c, v in by.items():
             print('  %-7s %5d TUs %6d functions %8d bytes (%.1f%% of .text)' % (c, v['tus'], v['functions'], v['bytes'], 100 * v['share']))

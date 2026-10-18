@@ -133,27 +133,24 @@ Result (details in `README.md`):
 Exit reached: the full build is identical with every imported function in C/C++; `tools/progress.py` reports the first
 non-zero percentage.
 
-### Phase 3: translation-unit boundaries (3–5 sessions, then continuous)
+### Phase 3: translation-unit boundaries (first pass done; the map improves as functions are matched)
 
-Evidence for file boundaries, in rough order of strength:
+Evidence for file boundaries (README, "Translation units", has the numbers): unwind-frame groups in `.data` (one per object
+compiled with exceptions, exactly), the `__CTOR_LIST__` and the `_GLOBAL__I/D` stubs that end a TU with global objects, string
+signatures of libraries, the code-generation style (`sd` saves are Sony's precompiled libraries), data-order joins (constants and
+statics only one object can own), call edges and shared items between neighbours. Alignment, orphan pieces and the cross-build
+signals do not mark boundaries.
 
-- source file names in strings (the encoded `kyastar.cpp`, `vibuf.c`); no variant has symbols;
-- regional builds: code that shifts together between USA and the PAL, Korean and Japanese builds;
-- per-object exception and unwind groups: 281 CIE/FDE groups in `.data` are likely one per C++ object
-  with exception tables;
-- alignment padding between functions, and section-start alignment repeated in `.rodata`, `.data`,
-  `.sdata` and `.bss`;
-- vtable and RTTI emission (GCC 2.95 emits them in the TU of the first non-inline virtual function);
-- per-file compiler flags (`-G0` vs small-data use, optimization level), visible in code generation;
-- static functions and their callers clustering together;
-- library code (Sony runtime, RenderWare, Kynapse, the C++ runtime), identified by signatures and
-  strings.
+Result: `tools/tus.py` writes `config/tus.yaml`: 599 object TUs of two or more functions (120 exact from frames), 1,586 isolated
+functions and 852 link-once sections, each with text and data ranges, compiler and flags, confidence and evidence; `progress.py`
+reports by TU and library; `next.py tus` lists Phase 5 candidates. The automatic pipeline takes the TU's compiler and flags first
+(`ee-gcc2.9-991111-01` for the `sd` libraries, +37 functions), `tools/regroup.py` merges source units into one file per TU (241 TUs
+with `-ffunction-sections`, assembly left in place between their functions) and the build stays identical.
 
-Output: `config/units.yaml` with each TU's range across `.text`, `.rodata`, `.data`, `.sdata` and `.bss`,
-its flags and a confidence level. Splat splits follow it.
-
-Exit: at least the game and Kynapse regions have proposed TUs; imported functions sit in their TUs and
-the build is still identical.
+Left: the boundaries of the 2,000 proposed TUs are likelier than certain (a stretch of related functions may hold several objects);
+Sony library code beyond the leaf functions needs the Sony compiler's idioms; the physics and animation libraries are leads from
+the Xbox counterpart map, not verified; no signal marks the edge of a TU without exceptions or global objects except the gaps data
+and calls leave open.
 
 ### Phase 4: the automatic pipeline (pilot done; the pipeline keeps running as units are claimed)
 
@@ -220,7 +217,7 @@ missing types, or m2c gaps with EE instructions.
 
 - **Mixed assemblers.** C compiles through the SN assembler; asm files go through GNU `as`. Both must
   produce compatible ELF objects for `ld`. Checked in Phase 0.
-- **Per-file flags.** `-G` values and other flags vary between files and must be recovered per TU.
+- **Per-file flags.** `-G` values and other flags vary between files and must be recovered per TU; the Sony libraries need another compiler (`tools/tus.py`).
 - **EE instructions.** MMI, 128-bit values and VU0 inline assembly need the study's header and agent
   work; m2c will not handle them (pilot: 307 of the 6,075 small functions and 320 of 3,084 in 100-300 bytes fail on them,
   `syscall` stubs excepted: those come from one asm template).
