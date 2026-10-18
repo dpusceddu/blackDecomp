@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """m2c with one formatting change for the pipeline: a dereference at offset 0 of an expression that m2c has not typed as
 a pointer (an integer holding an address, say `lw $v0, 0($a0)` with $a0 an untyped argument) is written as
-`M2C_FIELD(expr, T *, 0)` instead of `*expr`, which is not valid C. The local EE ABI adapter also keeps software doubles in GPRs; it does not modify the installed package.
+`M2C_FIELD(expr, T *, 0)` instead of `*expr`, which is not valid C. Local adapters keep software doubles in GPRs and escaped stack locals out of call arguments; they do not modify the installed package.
 Usage: m2c_wrap.py <m2c arguments>"""
 import sys
 from m2c import translate
@@ -49,10 +49,37 @@ from m2c.asm_instruction import Register
 from m2c.error import DecompFailure
 from m2c.translate import ErrorExpr
 from m2c.types import FunctionParam
+from m2c.options import Target
 
 _ee_function_abi = MipseeArch.function_abi
 _ee_function_return = MipseeArch.function_return
 _ee_base_return_regs = list(MipseeArch.base_return_regs)
+_get_stack_info = translate.get_stack_info
+
+
+def get_stack_info(function, persistent_state, global_info, flow_graph):
+    """A MIPS copy of sp/fp can expose a local at stack offset zero.
+
+    Upstream handles addiu dst,sp,offset and ARM mov, but normalized MIPS
+    move dst,sp otherwise leaves these local stores classified as call args.
+    Let upstream identify the frame pointer before checking for escapes.
+    """
+    info = _get_stack_info(function, persistent_state, global_info, flow_graph)
+    arch = global_info.arch
+    if arch.arch == Target.ArchEnum.MIPS and not info.is_leaf:
+        for node in flow_graph.nodes:
+            for inst in node.block.instructions:
+                if (inst.arch_mnemonic(arch) == 'mips:move'
+                        and isinstance(inst.args[0], Register)
+                        and isinstance(inst.args[1], Register)
+                        and info.is_stack_reg(inst.args[1])
+                        and inst.args[0] != Register('zero')
+                        and not info.is_stack_reg(inst.args[0])):
+                    info.subroutine_arg_top = 0
+    return info
+
+
+translate.get_stack_info = get_stack_info
 
 
 def is_ee_double(type):
