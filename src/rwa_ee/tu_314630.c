@@ -20,7 +20,7 @@ RwaFormat *func_00314848(RwaFormat *format,u8 *bytes,s32 writing,s32 swap) {
         cursor=bytes;
         if(swap){
             has_codec=format->encoding!=0;
-            func_00318600(&cursor,&format->rate,4);func_00318600(&cursor,&has_codec,4);func_00318600(&cursor,&format->codec,4);func_00318600(&cursor,&format->bits,1);func_00318600(&cursor,&format->channels,1);func_0035C6EC(cursor,0,2);cursor+=2;
+            func_00318600(&cursor,&format->rate,4);func_00318600(&cursor,&has_codec,4);func_00318600(&cursor,&format->extent,4);func_00318600(&cursor,&format->bits,1);func_00318600(&cursor,&format->channels,1);func_0035C6EC(cursor,0,2);cursor+=2;
             func_00318600(&cursor,&format->extension,4);func_00318600(&cursor,&format->extension_size,4);func_00318600(&cursor,&format->flags,1);func_00318600(&cursor,&format->field19,1);func_0035C6EC(cursor,0,2);cursor+=2;
         }else{*(RwaFormat *)bytes=*format;cursor+=28;}
         if(format->encoding){func_00316770((void *)format->encoding,cursor,swap);cursor+=16;}
@@ -102,7 +102,7 @@ allocate:
     sound=created;created->flags=1;
 initialized:
     func_00316758(sound);sound->field4c=0;sound->driver=driver;sound->field48=0;sound->user=user;
-    sound->source_format.rate=0;sound->source_format.encoding=0;sound->source_format.codec=0;sound->source_format.bits=0;sound->source_format.channels=0;sound->source_format.flags=0;sound->source_format.field19=0;sound->source_format.extension=0;sound->source_format.extension_size=0;
+    sound->source_format.rate=0;sound->source_format.encoding=0;sound->source_format.extent=0;sound->source_format.bits=0;sound->source_format.channels=0;sound->source_format.flags=0;sound->source_format.field19=0;sound->source_format.extension=0;sound->source_format.extension_size=0;
     sound->source_format=*format;
     if(format->extension&&format->extension_size){sound->source_format.extension=func_00312C48(format->extension_size,0x30806);if(!sound->source_format.extension)return 0;func_0035C544(sound->source_format.extension,format->extension,format->extension_size);}
     func_003159C8(sound,format,output);
@@ -148,8 +148,8 @@ u32 func_003159C8(RwaSound *sound,RwaFormat *source,RwaFormat *output) {
         else {func_00315048(fallback,&local,1);selected=&local;local.rate=source->rate;local.extension=source->extension;local.extension_size=source->extension_size;}
     }
     if(func_00314D60(source,selected)){selected->extension=source->extension;selected->extension_size=source->extension_size;}
-    result=func_00321F10(source,0,selected);selected->codec=(void *)result;
-    sound->output_format.rate=0;sound->output_format.encoding=0;sound->output_format.codec=0;sound->output_format.bits=0;sound->output_format.channels=0;sound->output_format.flags=0;sound->output_format.field19=0;sound->output_format.extension=0;sound->output_format.extension_size=0;
+    result=func_00321F10(source,0,selected);selected->extent=result;
+    sound->output_format.rate=0;sound->output_format.encoding=0;sound->output_format.extent=0;sound->output_format.bits=0;sound->output_format.channels=0;sound->output_format.flags=0;sound->output_format.field19=0;sound->output_format.extension=0;sound->output_format.extension_size=0;
     if(selected){sound->output_format=*selected;if(selected->extension&&(result=selected->extension_size)!=0){result=(u32)func_00312C48(result,0x30806);sound->output_format.extension=(void *)result;if(result)result=(u32)func_0035C544((void *)result,selected->extension,selected->extension_size);}}
     return result;
 }
@@ -186,7 +186,7 @@ RwaSound *func_00315FF0(RwaSound *sound,u32 count,void *data,u32 requested) {
     RwaSound *result;
     if(!process)return 0;
     if(!func_00314D60(&sound->source_format,output)){
-        local=sound->source_format;amount=func_00321EE0(&local,data,count,output);local.codec=(void *)requested;size=func_00321F10(&local,data,output);allocated=func_00312CC8(size,0x30806);
+        local=sound->source_format;amount=func_00321EE0(&local,data,count,output);local.extent=requested;size=func_00321F10(&local,data,output);allocated=func_00312CC8(size,0x30806);
         if(!allocated)return 0;
         if(!func_0031EC28(&local,data,0,output,allocated)){func_00312D08(allocated);return 0;}data=allocated;
     }else size=requested;

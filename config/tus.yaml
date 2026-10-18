@@ -18530,7 +18530,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 9 of 28 functions
+  flags_basis: matched 11 of 28 functions
   data:
     .data: ['0x3cfe50', '0x3cfe68']
 - name: rwa_ee/tu_31cee0
