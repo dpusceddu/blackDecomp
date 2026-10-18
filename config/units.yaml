@@ -42264,3 +42264,61 @@ units:
     symbol: func_00396E78
     size: 80
     status: source
+- name: kynapse_parameter_tables_manual
+  source: src/kynapse/parameter_tables_manual.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  externs:
+    __throw: '0x292b40'
+    _vt$10IndexTable: '0x3eb798'
+    _vt$10ObjectBase: '0x3e0040'
+    _vt$15ParameterTables: '0x3eb780'
+    _vt$9BufferSet: '0x3eb7b0'
+    gCompare: '0x3c95a4'
+    gElapsed: '0x3c95b0'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    gPreUpdateHook: '0x451234'
+    gSavedFloat: '0x3c958c'
+    gSelected: '0x3c9594'
+    gSlotOwner: '0x3c9ed4'
+    gTableSizeA: '0x3c9598'
+    gTableSizeB: '0x3c959c'
+    gTableSizeC: '0x3c95a0'
+    gUpdateStep: '0x3c95ac'
+    gUpdateZero: '0x3c95a8'
+    memoryRelease: '0x3c87e0'
+    qsort: '0x35ec50'
+  functions:
+  - addr: '0x2e7670'
+    symbol: __9BufferSet
+    size: 608
+    status: source
+  - addr: '0x2e78d0'
+    symbol: __10IndexTable
+    size: 492
+    status: source
+  - addr: '0x2e8920'
+    symbol: Update__15ParameterTablesf
+    size: 404
+    status: source
+  - addr: '0x2e8310'
+    symbol: _$_15ParameterTables
+    size: 832
+    status: source
+  - addr: '0x2e8ab8'
+    symbol: Consume__15ParameterTablesiP8SlotUser
+    size: 404
+    status: asm
+  - addr: '0x2e8c50'
+    symbol: ConsumeList__15ParameterTablesiP9IndexUser
+    size: 844
+    status: asm
+  - addr: '0x2e7ac0'
+    symbol: __15ParameterTables
+    size: 2128
+    status: asm
