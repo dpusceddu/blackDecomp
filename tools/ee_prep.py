@@ -19,6 +19,30 @@ def _num(s):
     return int(s, 0)
 
 
+def frame_transfers(parsed):
+    """Callee-save sq/lq pairs carry ABI state, not 128-bit source expressions."""
+    aliases = {'sp': '29', 'fp': '30', 's8': '30', 'ra': '31'}
+    aliases.update({'s%d' % n: str(16 + n) for n in range(8)})
+    canonical = lambda reg: aliases.get(reg, reg)
+    written, saves, restores = set(), {}, []
+    stores = {'sw', 'sd', 'sb', 'sh', 'sq', 'sdl', 'sdr', 'swc1', 'sqc2'}
+    branches = {'beq', 'bne', 'beqz', 'bnez', 'b', 'jr', 'jal', 'j', 'jalr'}
+    for i, (_, op, _, args) in sorted(parsed.items()):
+        mem = MEM.match(args)
+        if mem and canonical(mem.group(3)) == '29':
+            reg = canonical(mem.group(1))
+            key = (reg, _num(mem.group(2)))
+            if op == 'sq' and reg in {str(n) for n in range(16, 24)} | {'30', '31'} and reg not in written:
+                saves.setdefault(key, i)
+            elif op == 'lq':
+                restores.append((i, key))
+        regs = re.findall(r'\$(\w+)', args)
+        if regs and op not in stores | branches and not op.startswith('b'):
+            written.add(canonical(regs[0]))
+    paired = {key for _, key in restores if key in saves}
+    return {saves[key] for key in paired} | {i for i, key in restores if key in paired}
+
+
 def prep(text):
     """(new assembly text, {'q': 128-bit ops seen, 'u': unaligned pairs seen, 'real64': ld/sd away from $sp})."""
     lines = text.split('\n')
@@ -29,6 +53,7 @@ def prep(text):
         m = LINE.match(l)
         if m:
             parsed[i] = (m.group(1), m.group(2), m.group(3), m.group(4))
+    frame_q = frame_transfers(parsed)
     # m2c drops the delay-slot instruction of a `j func` tail call (an argument set there is lost): put it before the jump
     for i, (pre, op, sp, args) in sorted(parsed.items()):
         if op == 'j' and args.startswith('func_') and i + 1 in parsed and parsed[i + 1][1] not in ('nop', 'j', 'jr', 'jal', 'jalr') \
@@ -38,7 +63,9 @@ def prep(text):
             out[i + 1] = '%s%s%s%s\n%snop' % (pre, op, sp, args, pre)
             parsed[i], parsed[i + 1] = (dpre, dop, dsp, dargs), (pre, op, sp, args)
     written = set()
-    argreg = {'a0': 0, 'a1': 1, 'a2': 2, 'a3': 3, '4': 0, '5': 1, '6': 2, '7': 3}
+    argreg = {str(n + 4): n for n in range(8)}
+    argreg.update({'a%d' % n: n for n in range(8)})
+    argreg.update({'t%d' % n: n + 4 for n in range(4)})
     for i, (pre, op, sp, args) in sorted(parsed.items()):
         regs = re.findall(r'\$(\w+)', args)
         if op == 'por':
@@ -58,7 +85,8 @@ def prep(text):
             out[i] = '\n'.join(placeholder(pre, op, sp, args))
             flags['ph'] = True
         elif op in ('lq', 'sq'):
-            flags['q'] = True
+            if i not in frame_q:
+                flags['q'] = True
             out[i] = '%s%s%s%s' % (pre, 'ld' if op == 'lq' else 'sd', sp, args)
         elif op == 'por':
             a = [x.strip() for x in args.split(',')]
