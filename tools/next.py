@@ -124,7 +124,7 @@ def ee(res, top, max_size):
         print('  %4d  %s' % (n, m))
 
 
-EE_VECTOR = re.compile(r'^(p[a-z0-9]+|lq|sq|q[a-z]+|v[a-z0-9.]+|c[ft]c2|lqc2|sqc2|mf(sa|hi1|lo1)|mt(sa|sah|hi1|lo1)|madd1|mult1|div1|adda.*|suba.*|madda.*)$')
+EE_VECTOR = re.compile(r'^(p(add|sub|cpy|ext|pac|mul|div|and|or|nor|xor|abs|min|max|lzc|sll|srl|sra|rot|ack|mfh|mth|mfl|mtl|ceq|cgt|inc|sat)[a-z0-9]*|lqc2|sqc2|qm[ft]c2.*|c[ft]c2|v[a-z0-9.]+|mf(sa|hi1|lo1)|mt(sa|sah|hi1|lo1)|madd1|mult1|multu1|div1|divu1|adda.*|suba.*|madda.*)$')
 
 
 def candidates(top, args=None):
@@ -166,17 +166,21 @@ def candidates(top, args=None):
     out = []
     for r in rows:
         t = r['t']
-        if t['library'] not in ('game', 'kynapse', 'animation', 'physics', 'apt', 'rwa_ee') or r['n'] < 4 or r['left_n'] < 2 or not 250 <= r['left'] <= 14000 or r['left_n'] > 60:
+        if t['library'] not in ('game', 'kynapse', 'animation', 'physics', 'apt', 'rwa_ee') or r['n'] < 4 or r['left_n'] < 2 or not 250 <= r['left'] <= 20000 or r['left_n'] > 60:
             continue
         share = r['src'] / r['n']
-        if share < 0.15 or r['vec'] > max(1, r['left_n'] // 8):
+        if share < 0.15 or r['vec'] > max(1, r['left_n'] // 6):
             continue
         conf = {'exact': 1.0, 'high': 0.8, 'medium': 0.5, 'low': 0.2}[t['confidence']]
-        known = (r['named'] / r['n']) + (0.3 if t['library'] in ('kynapse', 'animation', 'physics') else 0)
-        score = 2 * share + conf + known - 0.15 * r['vec'] + min(r['left'], 4000) / 4000.0 - r['left'] / 40000.0
+        known = (r['named'] / r['n']) + (0.3 if t['library'] in ('kynapse', 'animation', 'physics') else 0) \
+            + (0.9 if 0x1a0000 <= int(t['text'][0], 16) < 0x1b8000 else 0)         # the AI action and movement code (CBkRwAI* strings)
+        score = 2 * share + conf + known - 0.15 * r['vec'] + min(r['left'], 6000) / 4000.0 - r['left'] / 40000.0
         out.append((score, r))
     out.sort(key=lambda x: -x[0])
     seen, per_lib, picked = set(), collections.Counter(), []
+    if args and getattr(args, 'debug', False):
+        for score, r in out[:60]:
+            print('   %.2f %s n=%d src=%d left=%d vec=%d' % (score, r['t']['name'], r['n'], r['src'], r['left'], r['vec']))
     for score, r in out:                  # one of each shape, at most three per library
         shape = (r['t']['library'], r['n'], r['src'], r['left'])
         if shape in seen or per_lib[r['t']['library']] >= 3:

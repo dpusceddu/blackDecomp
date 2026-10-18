@@ -145,7 +145,9 @@ Result: `tools/tus.py` writes `config/tus.yaml`: 599 object TUs of two or more f
 functions and 852 link-once sections, each with text and data ranges, compiler and flags, confidence and evidence; `progress.py`
 reports by TU and library; `next.py tus` lists Phase 5 candidates. The automatic pipeline takes the TU's compiler and flags first
 (`ee-gcc2.9-991111-01` for the `sd` libraries, 36 functions), `tools/regroup.py` merges source units into one file per TU (241 TUs
-with `-ffunction-sections`, assembly left in place between their functions) and the build stays identical.
+with `-ffunction-sections`, assembly left in place between their functions) and the build stays identical. `ninja progress`: 4,556 of
+11,899 functions (38.3 %), 7.9 % of `.text` (from 4,490 and 7.73 %; the pipeline fixes for tail-call delay slots and byte arithmetic on untyped
+globals gave 26 of the 66 new functions).
 
 Left: the boundaries of the 2,000 proposed TUs are likelier than certain (a stretch of related functions may hold several objects);
 Sony library code beyond the leaf functions needs the Sony compiler's idioms; the physics and animation libraries are leads from
