@@ -1,0 +1,129 @@
+{
+ "comment": "Compilers in the private catalog (decompme organization). Per-file hashes stay in the private manifest.",
+ "compilers": [
+  {
+   "id": "ee-gcc2.9-990721",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.9-990721.tar.xz",
+   "archive": "ee-gcc2.9-990721.tar.xz",
+   "archive_sha256": "ad2ea68afff2be25d21a1d51a75e8a0eea8f259018e6580622355cd01b95676b",
+   "files": 8
+  },
+  {
+   "id": "ee-gcc2.9-991111",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.9-991111.tar.xz",
+   "archive": "ee-gcc2.9-991111.tar.xz",
+   "archive_sha256": "99cb5db603cd985b50fc6851157020ad69489f2227309ccf825bd43ac7bc19dd",
+   "files": 5
+  },
+  {
+   "id": "ee-gcc2.9-991111-01",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.9-991111-01.tar.xz",
+   "archive": "ee-gcc2.9-991111-01.tar.xz",
+   "archive_sha256": "ed684fd98f89d36b0121caab311052089103e3b36241fcef4338cc9ea41c75b8",
+   "files": 5
+  },
+  {
+   "id": "ee-gcc2.9-991111-01-dtls13010",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.9-991111-01-dtls13010.tar.gz",
+   "archive": "ee-gcc2.9-991111-01-dtls13010.tar.gz",
+   "archive_sha256": "3ab52a7ea962100f2a7df3e04d3e7a758aad669eb365251682e769b755d9d586",
+   "files": 12
+  },
+  {
+   "id": "ee-gcc2.9-991111a",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.9-991111a.tar.xz",
+   "archive": "ee-gcc2.9-991111a.tar.xz",
+   "archive_sha256": "f07d1f38afa847197fb816237dbce64e79b2d37b738cb93fa4df3ac7aa1d16f3",
+   "files": 5
+  },
+  {
+   "id": "ee-gcc2.9-991111b-r4",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.9-991111.tar.gz",
+   "archive": "ee-gcc2.9-991111.tar.gz",
+   "archive_sha256": "9ebbb042eb1e5d33d772293c5e9286a54dbec29865a3d7fbb398c97436f33583",
+   "note": "ghcr.io/decompme/compilers/ps2/ee-gcc2.9-991111b-r4 is built from this release archive (ee-gcc2.9-991111.tar.gz)",
+   "files": 14
+  },
+  {
+   "id": "ee-gcc2.95.2-273a",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.95.2-273a.tar.gz",
+   "archive": "ee-gcc2.95.2-273a.tar.gz",
+   "archive_sha256": "ee9d9a7fccb59aebfa78a5587f6f8059660b91f705acddbc292ad2243c8e562e",
+   "files": 7
+  },
+  {
+   "id": "ee-gcc2.95.2-274",
+   "source": "ghcr.io/decompme/compilers/ps2/ee-gcc2.95.2-274",
+   "manifest_digest": "sha256:1c9548180a57f1c2fc4611cae785b70faea73048e922c56fa4fb42d429c96064",
+   "layer_digests": [
+    "sha256:6966e6971ecde1a6c476ae92d4d0346334bd36de08fe88b95185b5171232d62d"
+   ],
+   "files": 6
+  },
+  {
+   "id": "ee-gcc2.95.3-107",
+   "source": "ghcr.io/decompme/compilers/ps2/ee-gcc2.95.3-107",
+   "manifest_digest": "sha256:c482f78f6a6d9ec33f94a8621cbdea393a9e2e5ae89731bbfc820074168e68c2",
+   "layer_digests": [
+    "sha256:e76f389a872c53bf76db0edee05f2f2aefbaebd022ba0c386bec43746beda4ce"
+   ],
+   "files": 6
+  },
+  {
+   "id": "ee-gcc2.95.3-114",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.95.3-114.tar.gz",
+   "archive": "ee-gcc2.95.3-114.tar.gz",
+   "archive_sha256": "dbc2c8c764631788d4cbb4c848c3cb0002fded0f4a95bae39e6d8b794391a6cb",
+   "files": 7
+  },
+  {
+   "id": "ee-gcc2.95.3-136",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.95.3-136.tar.gz",
+   "archive": "ee-gcc2.95.3-136.tar.gz",
+   "archive_sha256": "3b6ae6897229ad005aaf1b0afaa1f3cb46e74b4c21a42e01130c07c0c598067f",
+   "files": 7
+  },
+  {
+   "id": "ee-gcc2.96",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/ee-gcc2.96.tar.xz",
+   "archive": "ee-gcc2.96.tar.xz",
+   "archive_sha256": "0590d2ca9da8f5903889d66761220d14b47a8d14ba987ca53db84a1650a1fd0a",
+   "files": 10
+  },
+  {
+   "id": "mwcps2-3.0.1b119-040914",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/mwcps2-3.0.1b119-040914.tar.gz",
+   "archive": "mwcps2-3.0.1b119-040914.tar.gz",
+   "archive_sha256": "5c6984d5d52f21b62b6bc9161749bde7bb14e136fbee41f0f4df7fcee7b06c13",
+   "files": 4
+  },
+  {
+   "id": "mwcps2-3.0.1b145-050209",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/mwcps2-3.0.1b145-050209.tar.gz",
+   "archive": "mwcps2-3.0.1b145-050209.tar.gz",
+   "archive_sha256": "d021f7d02ab63da770c13dc246637276141321ca08221ee2333a7acadf82482b",
+   "files": 8
+  },
+  {
+   "id": "mwcps2-3.0.1b151-050317",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/mwcps2-3.0.1b151-050317.tar.gz",
+   "archive": "mwcps2-3.0.1b151-050317.tar.gz",
+   "archive_sha256": "5050a211954f0828cf1c0f56333943407d20f7e85bc68b23e3c539bb5d8ee947",
+   "files": 8
+  },
+  {
+   "id": "mwcps2-3.0.1b198-051011",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/mwcps2-3.0.1b198-051011.tar.gz",
+   "archive": "mwcps2-3.0.1b198-051011.tar.gz",
+   "archive_sha256": "436af8060249e7ea0aa2dfa98a86b4667ee3716b3384cca577c52c5b68e4934a",
+   "files": 8
+  },
+  {
+   "id": "mwcps2-3.0.1b205-051227",
+   "source": "https://github.com/decompme/compilers/releases/download/compilers/mwcps2-3.0.1b205-051227.tar.gz",
+   "archive": "mwcps2-3.0.1b205-051227.tar.gz",
+   "archive_sha256": "456cdfc1894f20bcaecc627ff674222888f093c3ec37c91e4f0fe6baae3b5a9d",
+   "files": 8
+  }
+ ]
+}
