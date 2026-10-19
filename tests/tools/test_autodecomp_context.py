@@ -8,6 +8,28 @@ import autodecomp as auto
 
 
 class IntegrationTests(unittest.TestCase):
+    def test_changed_headers_invalidate_a_saved_near_score(self):
+        old = dict(status='near', score=2, source='source')
+        with patch.object(auto, 'compiled_tokens', return_value=(['tokens'], None)), \
+             patch.object(auto, 'Target'), patch.object(auto, 'score', return_value=(False, 27, 'changed layout')):
+            updated = auto.rescore_saved_record(old, (0, '', b'object'), dict(name='f'), type('Image', (), {'word': None})())
+        self.assertEqual((updated['status'], updated['score']), ('mismatch', 27))
+        self.assertEqual(old['score'], 2)
+
+    def test_deleted_draft_header_cannot_keep_a_historical_score(self):
+        updated = auto.rescore_saved_record(dict(status='near', score=1, note='old'),
+                                            (1, 'missing header', None), dict(name='f'), None)
+        self.assertEqual(updated['status'], 'compile-failed')
+        self.assertNotIn('score', updated)
+        self.assertNotIn('note', updated)
+
+    def test_instruction_rescore_does_not_erase_a_placement_failure(self):
+        with patch.object(auto, 'compiled_tokens', return_value=(['tokens'], None)), \
+             patch.object(auto, 'Target'), patch.object(auto, 'score', return_value=(True, 0, 'exact')):
+            updated = auto.rescore_saved_record(dict(status='verify-failed', reason='extra'),
+                (0, '', b'object'), dict(name='f'), type('Image', (), {'word': None})())
+        self.assertEqual((updated['status'], updated['reason'], updated['score']), ('verify-failed', 'extra', 0))
+
     def test_duplicate_candidates_compile_once_and_persistent_counts_include_cache_reuse(self):
         import json
         import subprocess

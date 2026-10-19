@@ -161,6 +161,7 @@ is `-t mipsee-gcc-c` (with `--valid-syntax`, which turns unknown field accesses 
 
 ```sh
 python3 tools/autodecomp.py run --max-size 100            # all assembly functions under 100 bytes -> build/auto.json
+python3 tools/autodecomp.py rescore                     # revalidate saved drafts after shared headers change
 python3 tools/autodecomp.py run --min-size 100 --max-size 300 --region game
 python3 tools/autodecomp.py run --max-size 100 --status near --status mismatch --ctx ctx2.c --tag arity-int
 python3 tools/autodecomp.py permute --max-score 8         # decomp-permuter on near misses (one member per family)

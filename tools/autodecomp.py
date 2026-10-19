@@ -2031,6 +2031,43 @@ def cmd_context(a):
     print(json.dumps(recovered_context()['summary'], indent=2))
 
 
+def rescore_saved_record(record, result, function, original):
+    """A saved score is valid only with the headers used by this compilation."""
+    record = dict(record)
+    rc, message, obj = result
+    tokens, why = compiled_tokens(obj, function['name']) if rc == 0 and obj else (None, message)
+    if tokens is None:
+        record.update(status='compile-failed', reason=why or 'saved draft did not compile')
+        record.pop('score', None)
+        record.pop('note', None)
+        return record
+    exact, difference, note = score(Target(function, original), tokens, original.word)
+    record.update(score=difference, note=note)
+    if not (exact and record.get('status') == 'verify-failed'):
+        record['status'] = 'matched' if exact else 'near' if difference <= 8 else 'mismatch'
+        record.pop('reason', None)
+    return record
+
+
+def cmd_rescore(a):
+    """Recompile saved best drafts before comparing them with newly generated candidates."""
+    records, original = load_results(), OrigImage()
+    inventory, sourced = {f['addr']: f for f in load_inventory()}, source_functions()
+    todo = sorted(k for k, r in records.items()
+                  if int(k, 16) in inventory and int(k, 16) not in sourced and r.get('source'))
+    counts = collections.Counter()
+    for offset in range(0, len(todo), a.chunk):
+        keys = todo[offset:offset + a.chunk]
+        jobs = [(k, records[k]['source'], records[k].get('flags', BASE_FLAGS)) for k in keys]
+        results = worker_compile(jobs, tag='saved-context-rescore')
+        for key in keys:
+            records[key] = rescore_saved_record(records[key], results[key], inventory[int(key, 16)], original)
+            counts[records[key]['status']] += 1
+        save_results(records)
+        print('rescored %d/%d saved drafts: %s' %
+              (min(offset + a.chunk, len(todo)), len(todo), dict(counts)), flush=True)
+
+
 def cmd_run(a):
     AUTO.mkdir(parents=True, exist_ok=True)
     inv = load_inventory()
@@ -2091,6 +2128,9 @@ def main():
     context = sub.add_parser('context', help='refresh the shared m2c and compile contexts')
     context.add_argument('--refresh', action='store_true')
     context.set_defaults(fn=cmd_context)
+    saved = sub.add_parser('rescore', help='revalidate saved scores after shared-header changes')
+    saved.add_argument('--chunk', type=int, default=400)
+    saved.set_defaults(fn=cmd_rescore)
     r = sub.add_parser('run')
     r.add_argument('--max-size', type=int, help='functions smaller than this many bytes')
     r.add_argument('--min-size', type=int)
