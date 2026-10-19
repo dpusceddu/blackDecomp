@@ -13,7 +13,7 @@ struct ActorEntries : BlackPS2Classes::UnknownVtable_003DC838 {
     inline unsigned char & Field_01ED() { return *(unsigned char *)((char *)this + 0x1ed); }
     inline unsigned char Count() { return Field_01F5(); }
     void Update(float delta);
-    int ResetEntries(int reason);
+    void ResetEntries(int reason);
     unsigned int Initialize();
     int Collision(void *event);
 };
