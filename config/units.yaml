@@ -46553,11 +46553,6 @@ units:
     symbol: func_002D6CB0
     status: asm
     reason: campaign
-  - addr: '0x2d7008'
-    size: 96
-    symbol: func_002D7008
-    status: asm
-    reason: campaign
   - addr: '0x2d7118'
     size: 204
     symbol: Prepare__Q24Kaim12ShooterAgent
@@ -46977,3 +46972,21 @@ units:
   externs:
     _vt$Q24Kaim13CSpatialGraph: '0x3ee538'
     _vt$Q24Kaim7CObject: '0x3e0040'
+- name: campaign_behaviors_cshooteragent_constructor
+  source: src/campaign/behaviors_cshooteragent_constructor.cpp
+  origin: kynapse
+  owner: cpp-campaign-w2-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d7008'
+    size: 96
+    symbol: __Q24Kaim12ShooterAgentPQ24Kaim15BehaviorContext
+    status: source
+  externs:
+    __Q24Kaim8BehaviorPQ24Kaim15BehaviorContext: '0x2dff10'
+    _vt$Q24Kaim12ShooterAgent: '0x3e3888'

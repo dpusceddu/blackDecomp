@@ -64,7 +64,6 @@ bool ShooterAgent::Prepare()
     }
     return true;
 }
-// Unmatched: IsClear code matches; its mask shares ownership with a following RTTI name.
 // Unmatched: Init retains different validation-result scheduling.
 // Unmatched: Update needs the controller and virtual-call context.
 // Unmatched: Aim needs the original scalar/vector temporary lifetimes.

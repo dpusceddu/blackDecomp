@@ -318,4 +318,7 @@ bool InCone(const Vec3* point, const Vec3* origin, const Vec3* axis, float angle
 
 }  // namespace Kaim
 
+typedef char ShooterAgentSize[sizeof(Kaim::ShooterAgent) == 0x74 ? 1 : -1];
+typedef char ActorIteratorSize[sizeof(Kaim::ActorIterator) == 8 ? 1 : -1];
+
 #endif
