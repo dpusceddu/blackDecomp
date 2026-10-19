@@ -48023,3 +48023,24 @@ units:
     symbol: func_00181FF0
     size: 132
     status: source
+- name: campaign_actor_route_wave3
+  source: src/campaign/actor_route_wave3.cpp
+  origin: C++ RouteMode class cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x191c80'
+    status: asm
+  - addr: '0x192fb0'
+    status: source
+    size: 144
+    symbol: UpdateTarget__Q29BlackGame9RouteModex
+  - addr: '0x1930f8'
+    status: asm
+  externs:
+    RetargetLive__9BlackGamePQ29BlackGame9RouteModex: '0x193040'
+    UpdateDestination__Q29BlackGame12RouteRequestx: '0x17a9c8'
