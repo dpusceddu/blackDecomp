@@ -1143,7 +1143,11 @@ SONY_EXTRA = [['--cc=' + SONY] + f for f in (['-O1', '-G0'], ['-O3', '-G0'], ['-
 
 def extra_sets(fn):
     from assembler import FALLBACKS
-    assembler_sets = [variants_for_sn(fn)[0] + ['--assembler=' + choice] for choice in FALLBACKS]
+    # A recovered TU recipe may already select an assembler. Each fallback
+    # replaces that selection; two --assembler options invalidate the job.
+    assembler_base = [flag for flag in variants_for_sn(fn)[0]
+                      if not flag.startswith('--assembler=')]
+    assembler_sets = [assembler_base + ['--assembler=' + choice] for choice in FALLBACKS]
     tf = tu_flags(fn['addr'])
     if tf and tf[0] != COMPILER:
         return force_cc(SONY_EXTRA + assembler_sets)

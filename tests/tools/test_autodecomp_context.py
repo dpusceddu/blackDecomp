@@ -100,6 +100,16 @@ dlabel D_00400000
             self.assertEqual(candidates[:len(auto.SONY_EXTRA)], auto.SONY_EXTRA)
             self.assertIn(['--cc=' + auto.SONY, '--assembler=sn-2.73a'], candidates)
 
+    def test_tu_assembler_selection_is_replaced_by_each_fallback(self):
+        from assembler import FALLBACKS, selection
+        for compiler in (auto.COMPILER, auto.SONY):
+            recipe = ['-O2', '-G0', '--assembler=sn-min6']
+            with patch.object(auto, 'tu_flags', return_value=(compiler, recipe, 'matched')), \
+                 patch.object(auto, 'force_cc', side_effect=lambda x: x):
+                candidates = auto.extra_sets({'addr': 0x100000, 'rel': {}})
+            choices = [selection(flags)[0] for flags in candidates]
+            self.assertEqual([choice for choice in choices if choice], list(FALLBACKS))
+
     def test_permuter_expansion_removes_header_comments_and_preserves_literals(self):
         source = '#include "recovered/Recovered_Vtable_003DBDC8.h"\nint f(void) { return 1; /* note */ }\n'
         expanded = auto.expand_macros(source)

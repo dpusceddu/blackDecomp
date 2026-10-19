@@ -47878,3 +47878,31 @@ units:
   externs:
     _13KaimAvoidance$avoidanceTime: '0x3cd898'
     _13KaimAvoidance$world: '0x3c9ed4'
+- name: campaign_actor_player_wave3
+  source: src/campaign/actor_player_wave3.cpp
+  origin: C++ actor campaign:0x3dc5f8 class cluster; identity unverified
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x13a300'
+    status: asm
+  - addr: '0x13a6e8'
+    status: asm
+  - addr: '0x13b4c0'
+    status: asm
+  - addr: '0x13b628'
+    status: asm
+  - addr: '0x13bb78'
+    status: asm
+  - addr: '0x13bdf8'
+    status: asm
+  - addr: '0x13c3e8'
+    status: asm
+  - addr: '0x13c528'
+    status: asm
+  - addr: '0x383920'
+    status: asm
