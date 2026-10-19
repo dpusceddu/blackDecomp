@@ -47602,3 +47602,65 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: context_behaviors_repulsor
+  source: src/context/behaviors_repulsor.cpp
+  origin: kynapse
+  owner: context-wave3-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x3055e0'
+    size: 520
+    status: source
+    symbol: func_003055E0
+  - addr: '0x3057e8'
+    size: 520
+    status: source
+    symbol: func_003057E8
+  - addr: '0x3059f0'
+    size: 1508
+    status: asm
+    reason: registers
+    symbol: func_003059F0
+  - addr: '0x305fd8'
+    size: 972
+    status: asm
+    reason: registers
+    symbol: func_00305FD8
+  - addr: '0x306448'
+    size: 240
+    status: source
+    symbol: func_00306448
+  - addr: '0x306538'
+    size: 336
+    status: asm
+    reason: registers
+    symbol: func_00306538
+  - addr: '0x306688'
+    size: 216
+    status: source
+    symbol: func_00306688
+  externs:
+    GenerateRouteMove__13KaimAvoidancePQ213KaimAvoidance13RouteFollowerPQ213KaimAvoidance8MovementPCQ213KaimAvoidance4Vec3: '0x301a30'
+    GetAuthoredProperty__Q213KaimAvoidance6EntityPCQ213KaimAvoidance11PropertyKey: '0x2e4ce0'
+    GetKey__CQ213KaimAvoidance8Property: '0x2e3920'
+    GetText__CQ213KaimAvoidance8Property: '0x2e3918'
+    _13KaimAvoidance$gameTime: '0x3c958c'
+    _13KaimAvoidance$movementSpeedKey: '0x4504e0'
+    _13KaimAvoidance$obstacleHeightKey: '0x450198'
+    _13KaimAvoidance$obstacleWidthKey: '0x450940'
+    _13KaimAvoidance$world: '0x3c9ed4'
+    __throw: '0x292b40'
+    _stricmp: '0x360838'
+    _vt$Q213KaimAvoidance8Steering: '0x3f0760'
+    _vt$Q24Kaim8PolyRoot: '0x3e0040'
+    atof: '0x35e730'
+    dptofp: '0x291c68'
+    func_003059F0: '0x3059f0'
+    func_00305FD8: '0x305fd8'
+    memset: '0x35c6ec'
