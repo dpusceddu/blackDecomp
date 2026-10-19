@@ -2521,7 +2521,7 @@ tus:
   evidence: [join-soft, calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 16 of 56 functions
+  flags_basis: matched 17 of 56 functions
   data:
     .rodata: ['0x3f4b70', '0x3f4ba0']
     .sdata: ['0x40d9b1', '0x40d9b2']

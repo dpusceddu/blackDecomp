@@ -46497,3 +46497,17 @@ units:
     symbol: ResetEntries__Q216BlackPS2Campaign12ActorEntriesi
     size: 196
     status: source
+- name: campaign_graphics_controller
+  source: src/campaign/graphics_controller.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26be78'
+    symbol: Open__Q216CampaignGraphics10ControllerUiUi
+    size: 36
+    status: asm
+    reason: compile
