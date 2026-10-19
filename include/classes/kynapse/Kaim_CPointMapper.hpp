@@ -16,6 +16,10 @@ struct Kaim_CPointMapper {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0004() { return *(float *)((unsigned char *)this + 0x4); }
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
     // 0xC: UNVERIFIED type; PS2 access offset.
     inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
     // 0x10: UNVERIFIED type; PS2 access offset.

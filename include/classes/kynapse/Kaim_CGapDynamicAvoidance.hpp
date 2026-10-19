@@ -15,6 +15,20 @@ struct Kaim_CGapDynamicAvoidance {
     // Destructor identity: 0x00306FD0.
     // Destructor identity: 0x00306FD0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
+    // 0x94: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0094() { return *(unsigned int *)((unsigned char *)this + 0x94); }
+    // 0xE8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00E8() { return *(float *)((unsigned char *)this + 0xE8); }
+    // 0xEC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00EC() { return *(float *)((unsigned char *)this + 0xEC); }
+    // 0xF0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00F0() { return *(float *)((unsigned char *)this + 0xF0); }
+    // 0xF4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00F4() { return *(float *)((unsigned char *)this + 0xF4); }
+    // 0xF8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00F8() { return *(float *)((unsigned char *)this + 0xF8); }
     // 0x00306FD0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00306FD0();
     // 0x00307970: UNVERIFIED signature (include/context/behaviors/gap.hpp).

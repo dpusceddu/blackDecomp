@@ -16,8 +16,26 @@ struct Kaim_CEntityManager {
     // Destructor identity: 0x0030EAE0.
     // Destructor identity: 0x0030EAE0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_000C() { return *(float *)((unsigned char *)this + 0xC); }
     // 0x30: UNVERIFIED type; PS2 access offset.
     inline int & Field_0030() { return *(int *)((unsigned char *)this + 0x30); }
+    // 0x34: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0034() { return *(int *)((unsigned char *)this + 0x34); }
+    // 0x38: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0038() { return *(void * *)((unsigned char *)this + 0x38); }
+    // 0x3C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_003C() { return *(void * *)((unsigned char *)this + 0x3C); }
+    // 0x40: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0040() { return *(void * *)((unsigned char *)this + 0x40); }
+    // 0x44: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0044() { return *(void * *)((unsigned char *)this + 0x44); }
+    // 0x4C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_004C() { return *(int *)((unsigned char *)this + 0x4C); }
     // 0x50: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0050() { return *(unsigned char *)((unsigned char *)this + 0x50); }
     // 0x51: UNVERIFIED type; PS2 access offset.

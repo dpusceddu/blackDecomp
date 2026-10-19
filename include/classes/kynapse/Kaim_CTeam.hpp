@@ -22,6 +22,8 @@ struct Kaim_CTeam {
     inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
     // 0xC: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_000C() { return *(unsigned int *)((unsigned char *)this + 0xC); }
+    // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0014() { return *(unsigned char *)((unsigned char *)this + 0x14); }
     // 0x002EC4B0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002EC4B0();
     // 0x002EC5B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).

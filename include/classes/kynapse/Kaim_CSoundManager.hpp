@@ -15,6 +15,8 @@ struct Kaim_CSoundManager {
     // Destructor identity: 0x0030E020.
     // Destructor identity: 0x0030E020.
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.

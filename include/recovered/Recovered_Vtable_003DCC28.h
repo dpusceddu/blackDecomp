@@ -40,8 +40,7 @@ typedef struct Recovered_Vtable_003DCC28 {
     u8 field_FA; /* PS2 +0xFA */
     u8 field_FB; /* PS2 +0xFB */
     u8 field_FC; /* PS2 +0xFC */
-    u8 opaque_FD[3];
-    s32 field_100; /* PS2 +0x100 */
+    u8 opaque_FD[7];
     s32 field_104; /* PS2 +0x104 */
 } Recovered_Vtable_003DCC28;
 typedef char assert_Recovered_Vtable_003DCC28_C[(((int)&((Recovered_Vtable_003DCC28 *)0)->field_C) == 12) ? 1 : -1];
@@ -71,6 +70,5 @@ typedef char assert_Recovered_Vtable_003DCC28_F8[(((int)&((Recovered_Vtable_003D
 typedef char assert_Recovered_Vtable_003DCC28_FA[(((int)&((Recovered_Vtable_003DCC28 *)0)->field_FA) == 250) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DCC28_FB[(((int)&((Recovered_Vtable_003DCC28 *)0)->field_FB) == 251) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DCC28_FC[(((int)&((Recovered_Vtable_003DCC28 *)0)->field_FC) == 252) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DCC28_100[(((int)&((Recovered_Vtable_003DCC28 *)0)->field_100) == 256) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DCC28_104[(((int)&((Recovered_Vtable_003DCC28 *)0)->field_104) == 260) ? 1 : -1];
 #endif

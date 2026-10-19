@@ -14,12 +14,32 @@ struct Kaim_CFleeAgent {
     typedef Hierarchy_Kaim_CFleeAgent Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002D2DB8.
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
+    // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0014() { return *(int *)((unsigned char *)this + 0x14); }
     // 0x20: UNVERIFIED type; PS2 access offset.
     inline int & Field_0020() { return *(int *)((unsigned char *)this + 0x20); }
+    // 0x24: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0024() { return *(int *)((unsigned char *)this + 0x24); }
     // 0x2C: UNVERIFIED type; PS2 access offset.
     inline int & Field_002C() { return *(int *)((unsigned char *)this + 0x2C); }
+    // 0x30: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0030() { return *(int *)((unsigned char *)this + 0x30); }
+    // 0x60: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0060() { return *(int *)((unsigned char *)this + 0x60); }
+    // 0x68: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0068() { return *(float *)((unsigned char *)this + 0x68); }
+    // 0x6C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_006C() { return *(int *)((unsigned char *)this + 0x6C); }
+    // 0x74: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0074() { return *(int *)((unsigned char *)this + 0x74); }
+    // 0x78: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0078() { return *(unsigned char *)((unsigned char *)this + 0x78); }
+    // 0x84: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0084() { return *(float *)((unsigned char *)this + 0x84); }
     // 0x002D16B8: UNVERIFIED signature (src/campaign/behaviors_flee.cpp).
     unsigned char Function_002D16B8(void * argument0);
     // 0x002D1918: UNVERIFIED signature (src/kynapse/flee_agent_2d1610.cpp).

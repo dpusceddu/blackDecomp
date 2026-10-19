@@ -10,6 +10,16 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DB5E8 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0000() { return *(int *)((unsigned char *)this + 0x0); }
+    // 0x48: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0048() { return *(unsigned int *)((unsigned char *)this + 0x48); }
+    // 0xD4C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0D4C() { return *(unsigned char *)((unsigned char *)this + 0xD4C); }
+    // 0xD4D: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0D4D() { return *(unsigned char *)((unsigned char *)this + 0xD4D); }
+    // 0xD50: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0D50() { return *(int *)((unsigned char *)this + 0xD50); }
     // 0x001041A8: UNVERIFIED signature (src/game/frontend_menu_initialize.cpp).
     void Function_001041A8();
     // 0x00104210: UNVERIFIED signature (include/game/frontend_resources.hpp).

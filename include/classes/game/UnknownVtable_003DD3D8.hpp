@@ -10,6 +10,94 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DD3D8 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0018() { return *(int *)((unsigned char *)this + 0x18); }
+    // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_001C() { return *(unsigned int *)((unsigned char *)this + 0x1C); }
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0020() { return *(int *)((unsigned char *)this + 0x20); }
+    // 0x64: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0064() { return *(int *)((unsigned char *)this + 0x64); }
+    // 0x68: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0068() { return *(unsigned int *)((unsigned char *)this + 0x68); }
+    // 0x74: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0074() { return *(unsigned int *)((unsigned char *)this + 0x74); }
+    // 0x90: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0090() { return *(unsigned int *)((unsigned char *)this + 0x90); }
+    // 0x98: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0098() { return *(int *)((unsigned char *)this + 0x98); }
+    // 0xB0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_00B0() { return *(unsigned char *)((unsigned char *)this + 0xB0); }
+    // 0xB1: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_00B1() { return *(unsigned char *)((unsigned char *)this + 0xB1); }
+    // 0xB2: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_00B2() { return *(unsigned char *)((unsigned char *)this + 0xB2); }
+    // 0xB4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_00B4() { return *(unsigned char *)((unsigned char *)this + 0xB4); }
+    // 0xD0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00D0() { return *(float *)((unsigned char *)this + 0xD0); }
+    // 0xD4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00D4() { return *(float *)((unsigned char *)this + 0xD4); }
+    // 0xD8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00D8() { return *(float *)((unsigned char *)this + 0xD8); }
+    // 0xE8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00E8() { return *(float *)((unsigned char *)this + 0xE8); }
+    // 0xEC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00EC() { return *(float *)((unsigned char *)this + 0xEC); }
+    // 0xF0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00F0() { return *(float *)((unsigned char *)this + 0xF0); }
+    // 0xF4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00F4() { return *(float *)((unsigned char *)this + 0xF4); }
+    // 0xF8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00F8() { return *(float *)((unsigned char *)this + 0xF8); }
+    // 0xFC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00FC() { return *(float *)((unsigned char *)this + 0xFC); }
+    // 0x138: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0138() { return *(unsigned int *)((unsigned char *)this + 0x138); }
+    // 0x13C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_013C() { return *(unsigned int *)((unsigned char *)this + 0x13C); }
+    // 0x140: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0140() { return *(unsigned int *)((unsigned char *)this + 0x140); }
+    // 0x144: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0144() { return *(unsigned int *)((unsigned char *)this + 0x144); }
+    // 0x154: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0154() { return *(unsigned int *)((unsigned char *)this + 0x154); }
+    // 0x158: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0158() { return *(unsigned int *)((unsigned char *)this + 0x158); }
+    // 0x15C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_015C() { return *(int *)((unsigned char *)this + 0x15C); }
+    // 0x160: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0160() { return *(int *)((unsigned char *)this + 0x160); }
+    // 0x168: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0168() { return *(void * *)((unsigned char *)this + 0x168); }
+    // 0x16C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_016C() { return *(void * *)((unsigned char *)this + 0x16C); }
+    // 0x170: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0170() { return *(void * *)((unsigned char *)this + 0x170); }
+    // 0x174: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0174() { return *(void * *)((unsigned char *)this + 0x174); }
+    // 0x178: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0178() { return *(void * *)((unsigned char *)this + 0x178); }
+    // 0x17C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_017C() { return *(unsigned int *)((unsigned char *)this + 0x17C); }
+    // 0x180: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0180() { return *(int *)((unsigned char *)this + 0x180); }
+    // 0x184: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0184() { return *(void * *)((unsigned char *)this + 0x184); }
+    // 0x18C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_018C() { return *(int *)((unsigned char *)this + 0x18C); }
+    // 0x198: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0198() { return *(unsigned char *)((unsigned char *)this + 0x198); }
+    // 0x1A8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_01A8() { return *(float *)((unsigned char *)this + 0x1A8); }
+    // 0x1B0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_01B0() { return *(void * *)((unsigned char *)this + 0x1B0); }
     // 0x1B5: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_01B5() { return *(unsigned char *)((unsigned char *)this + 0x1B5); }
     // 0x001723E8: UNVERIFIED signature (src/auto/unclassified/1723e8.c).

@@ -16,6 +16,10 @@ struct Kaim_CGraphManager {
     // Destructor identity: 0x002F2578.
     // Destructor identity: 0x002F2578.
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0010() { return *(unsigned char *)((unsigned char *)this + 0x10); }
     // 0x002F2578: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).

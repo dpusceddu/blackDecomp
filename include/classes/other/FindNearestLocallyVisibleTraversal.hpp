@@ -20,6 +20,8 @@ struct FindNearestLocallyVisibleTraversal {
     inline long & Field_0008() { return *(long *)((unsigned char *)this + 0x8); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
+    // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
     // 0x18: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0018() { return *(unsigned int *)((unsigned char *)this + 0x18); }
     // 0x1C: UNVERIFIED type; PS2 access offset.

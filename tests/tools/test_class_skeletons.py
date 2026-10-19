@@ -6,7 +6,7 @@ import tempfile
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
 from class_skeletons import (decode_name, identifier, cpp_type, field_type, table_inventory,
-                             vptr_stores, signature, render_header, rendered_files, generate, load_context)
+                             vptr_stores, signature, render_header, rendered_files, generate, load_context, table_fields)
 
 
 class SyntheticImage:
@@ -85,6 +85,31 @@ class VtableEvidence(unittest.TestCase):
 
 
 class TypesAndGeneration(unittest.TestCase):
+    def test_exact_named_receiver_retains_fields_after_vtable_group_split(self):
+        field = dict(offset=0x100, size=4, type='s32', functions=[0x1200])
+        table = dict(context_group=0x2000, slots=[dict(function=0x1200)])
+        context = dict(signatures={'4608': dict(this=True, source_quality=4)}, layouts={
+            'Recovered_Named': dict(nodes=[[0x1200, 0]], fields=[field])})
+        fields = list(table_fields(table, context, {0x1200}))
+        self.assertEqual(fields[0][0], field)
+        self.assertEqual(fields[0][1], [0x1200])
+        context['layouts']['Recovered_Named']['nodes'] = [[0x1200, 1]]
+        self.assertEqual(list(table_fields(table, context, {0x1200})), [])
+        context['layouts']['Recovered_Named']['nodes'] = [[0x1200, 0]]
+        table['slots'][0]['adjustment'] = 8
+        self.assertEqual(list(table_fields(table, context, {0x1200})), [])
+
+    def test_named_receiver_does_not_replace_an_existing_or_explicit_view(self):
+        old = dict(offset=0x100, size=4, type='u32', functions=[0x1200])
+        new = dict(old, type='s32')
+        table = dict(context_group=0x2000, slots=[dict(function=0x1200)])
+        context = dict(signatures={'4608': dict(this=True, source_quality=4)}, layouts={
+            'Recovered_Vtable_00002000': dict(fields=[old]),
+            'Recovered_Named': dict(nodes=[[0x1200, 0]], fields=[new])})
+        self.assertEqual([f[0] for f in table_fields(table, context, {0x1200})], [old])
+        del context['layouts']['Recovered_Vtable_00002000']
+        self.assertEqual(list(table_fields(table, context, {0x1200}, {0x100})), [])
+
     def test_missing_context_fails_with_the_required_recovery_command(self):
         with tempfile.TemporaryDirectory() as directory:
             with self.assertRaisesRegex(SystemExit, 'tools/autodecomp.py context --refresh'):

@@ -64,7 +64,7 @@ struct UnknownVtable_003DCC20 {
     inline unsigned char & Field_00FB() { return *(unsigned char *)((unsigned char *)this + 0xFB); }
     // 0xFC: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_00FC() { return *(unsigned char *)((unsigned char *)this + 0xFC); }
-    // 0x100: UNVERIFIED type; PS2 access offset.
+    // 0x100: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0100() { return *(int *)((unsigned char *)this + 0x100); }
     // 0x104: UNVERIFIED type; PS2 access offset.
     inline int & Field_0104() { return *(int *)((unsigned char *)this + 0x104); }
@@ -74,10 +74,10 @@ struct UnknownVtable_003DCC20 {
     unsigned int Function_0013EE60();
     // 0x0013F618: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0013F618();
-    // 0x0013FFA0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0013FFA0(unsigned int argument0, unsigned int argument1, unsigned int argument2);
-    // 0x00140A40: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00140A40();
+    // 0x0013FFA0: UNVERIFIED signature (src/campaign/actor_input_wave3.cpp).
+    void Function_0013FFA0(int argument0, int argument1, unsigned int argument2);
+    // 0x00140A40: UNVERIFIED signature (src/campaign/actor_input_wave3.cpp).
+    void Function_00140A40();
     // 0x00140AA8: UNVERIFIED signature (src/auto/game/140aa8.c).
     unsigned int Function_00140AA8();
 
@@ -87,13 +87,13 @@ struct UnknownVtable_003DCC20 {
         // slot 0, table+0x8, this delta 0, function 0x0013F618; UNVERIFIED signature.
         virtual int Slot000();
         // slot 1, table+0x10, this delta 0, function 0x00140A40; UNVERIFIED signature.
-        virtual int Slot001();
+        virtual void Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00140AA8; UNVERIFIED signature.
         virtual unsigned int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x0013EE50; UNVERIFIED signature.
         virtual unsigned int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x0013FFA0; UNVERIFIED signature.
-        virtual int Slot004(unsigned int argument0, unsigned int argument1, unsigned int argument2);
+        virtual void Slot004(int argument0, int argument1, unsigned int argument2);
         // slot 5, table+0x30, this delta 0, function 0x0013EE60; UNVERIFIED signature.
         virtual unsigned int Slot005();
     };

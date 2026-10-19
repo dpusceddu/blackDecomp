@@ -16,6 +16,26 @@ struct Kaim_CRepulsorDynamicAvoidance {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
+    // 0x38: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0038() { return *(unsigned char *)((unsigned char *)this + 0x38); }
+    // 0xC4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_00C4() { return *(unsigned char *)((unsigned char *)this + 0xC4); }
+    // 0xCC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00CC() { return *(float *)((unsigned char *)this + 0xCC); }
+    // 0xD0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00D0() { return *(float *)((unsigned char *)this + 0xD0); }
+    // 0xD4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00D4() { return *(float *)((unsigned char *)this + 0xD4); }
+    // 0xD8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00D8() { return *(float *)((unsigned char *)this + 0xD8); }
+    // 0xDC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00DC() { return *(float *)((unsigned char *)this + 0xDC); }
+    // 0xE0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00E0() { return *(float *)((unsigned char *)this + 0xE0); }
+    // 0xE4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_00E4() { return *(float *)((unsigned char *)this + 0xE4); }
     // 0x003057E8: UNVERIFIED signature (src/context/behaviors_repulsor.cpp).
     unsigned char Function_003057E8(void * argument0);
     // 0x00306400: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).

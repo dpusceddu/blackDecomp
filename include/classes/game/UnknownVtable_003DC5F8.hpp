@@ -12,6 +12,10 @@ struct UnknownVtable_003DC5F8 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline U128 & Field_0000() { return *(U128 *)((unsigned char *)this + 0x0); }
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_000C() { return *(unsigned char *)((unsigned char *)this + 0xC); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline U128 & Field_0010() { return *(U128 *)((unsigned char *)this + 0x10); }
     // 0x20: UNVERIFIED type; PS2 access offset.

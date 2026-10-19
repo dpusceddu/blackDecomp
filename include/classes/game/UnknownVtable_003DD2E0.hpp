@@ -12,12 +12,18 @@ struct UnknownVtable_003DD2E0 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline U128 & Field_0010() { return *(U128 *)((unsigned char *)this + 0x10); }
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline U128 & Field_0020() { return *(U128 *)((unsigned char *)this + 0x20); }
     // 0x30: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0030() { return *(unsigned int *)((unsigned char *)this + 0x30); }
     // 0x34: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0034() { return *(void * *)((unsigned char *)this + 0x34); }
+    // 0x38: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0038() { return *(unsigned char *)((unsigned char *)this + 0x38); }
     // 0x3C: UNVERIFIED type; PS2 access offset.
     inline float & Field_003C() { return *(float *)((unsigned char *)this + 0x3C); }
+    // 0x50: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0050() { return *(unsigned char *)((unsigned char *)this + 0x50); }
     // 0x00191778: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).
     void Function_00191778(S128 argument0);
     // 0x00191788: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).

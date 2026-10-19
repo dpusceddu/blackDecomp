@@ -15,6 +15,12 @@ struct Kaim_CPathObjectManager {
     // Constructor identity: 0x002F4C58; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x002F4CF8.
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_000C() { return *(unsigned int *)((unsigned char *)this + 0xC); }
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
     // 0x002F4CF8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F4CF8(unsigned int argument0);
     // 0x002F4E90: UNVERIFIED signature (src/kynapse/tracker_2f4e90.cpp).

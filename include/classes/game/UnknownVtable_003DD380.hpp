@@ -10,10 +10,20 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DD380 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline S128 & Field_0010() { return *(S128 *)((unsigned char *)this + 0x10); }
+    // 0x30: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0030() { return *(int *)((unsigned char *)this + 0x30); }
     // 0x34: UNVERIFIED type; PS2 access offset.
     inline int & Field_0034() { return *(int *)((unsigned char *)this + 0x34); }
+    // 0x80: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0080() { return *(void * *)((unsigned char *)this + 0x80); }
     // 0x90: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0090() { return *(void * *)((unsigned char *)this + 0x90); }
+    // 0x94: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0094() { return *(unsigned char *)((unsigned char *)this + 0x94); }
+    // 0x95: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_0095() { return *(unsigned char *)((unsigned char *)this + 0x95); }
     // 0x98: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0098() { return *(unsigned int *)((unsigned char *)this + 0x98); }
     // 0x180: UNVERIFIED type; PS2 access offset.

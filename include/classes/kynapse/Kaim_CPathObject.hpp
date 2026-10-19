@@ -15,6 +15,16 @@ struct Kaim_CPathObject {
     // Destructor identity: 0x002F4A90.
     // Destructor identity: 0x002F4A90.
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0018() { return *(void * *)((unsigned char *)this + 0x18); }
+    // 0x60: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0060() { return *(void * *)((unsigned char *)this + 0x60); }
+    // 0x64: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0064() { return *(int *)((unsigned char *)this + 0x64); }
+    // 0x68: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0068() { return *(int *)((unsigned char *)this + 0x68); }
     // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
     unsigned int Function_002904E8();
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).

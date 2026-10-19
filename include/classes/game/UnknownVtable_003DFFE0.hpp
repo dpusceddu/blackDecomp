@@ -10,6 +10,44 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DFFE0 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_000C() { return *(unsigned int *)((unsigned char *)this + 0xC); }
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0010() { return *(unsigned int *)((unsigned char *)this + 0x10); }
+    // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0018() { return *(int *)((unsigned char *)this + 0x18); }
+    // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_001C() { return *(int *)((unsigned char *)this + 0x1C); }
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0020() { return *(int *)((unsigned char *)this + 0x20); }
+    // 0x24: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0024() { return *(int *)((unsigned char *)this + 0x24); }
+    // 0x28: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0028() { return *(unsigned int *)((unsigned char *)this + 0x28); }
+    // 0x2C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_002C() { return *(unsigned int *)((unsigned char *)this + 0x2C); }
+    // 0x30: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0030() { return *(unsigned int *)((unsigned char *)this + 0x30); }
+    // 0x34: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0034() { return *(int *)((unsigned char *)this + 0x34); }
+    // 0x38: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0038() { return *(int *)((unsigned char *)this + 0x38); }
+    // 0x3C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_003C() { return *(int *)((unsigned char *)this + 0x3C); }
+    // 0x40: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0040() { return *(int *)((unsigned char *)this + 0x40); }
+    // 0x44: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0044() { return *(int *)((unsigned char *)this + 0x44); }
+    // 0x48: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0048() { return *(int *)((unsigned char *)this + 0x48); }
+    // 0x4C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_004C() { return *(int *)((unsigned char *)this + 0x4C); }
+    // 0x50: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0050() { return *(int *)((unsigned char *)this + 0x50); }
     // 0x002F6880: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F6880(void * argument0, unsigned int argument1);
     // 0x002F6E08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).

@@ -294,6 +294,35 @@ def load_context(root=ROOT):
     return json.loads(path.read_text())
 
 
+def table_fields(table, context, matched, reserved_offsets=()):
+    """Keep exact receiver fields when source naming splits a vtable group.
+
+    Other arguments are separate objects. Named receiver evidence only fills
+    missing offsets, preserving existing views and explicit field overrides.
+    """
+    layouts = context.get('layouts', {})
+    primary_name = 'Recovered_Vtable_%08X' % table['context_group']
+    primary = layouts.get(primary_name, {})
+    occupied = {field['offset'] for field in primary.get('fields', [])} | set(reserved_offsets)
+    receivers = {slot['function'] for slot in table['slots']
+                 if slot['function'] in matched
+                 and slot.get('adjustment', 0) == 0
+                 and context.get('signatures', {}).get(str(slot['function']), {}).get('this')
+                 and context['signatures'][str(slot['function'])].get('source_quality', 0) >= 4}
+    for name, layout in layouts.items():
+        proven = {node[0] for node in layout.get('nodes', []) if node[1] == 0 and node[0] in receivers}
+        if name != primary_name and not proven:
+            continue
+        for field in layout.get('fields', []):
+            functions = set(field['functions'])
+            if name != primary_name and (field['offset'] in occupied or not functions & proven):
+                continue
+            verified = functions & (set(layout.get('verified_by', [])) | proven)
+            basis = ('PS2 receiver offset and exact source probe' if name != primary_name else
+                     'PS2 access grouping; class extent and overlapping interpretations unverified')
+            yield field, sorted(verified), basis
+
+
 def collect_model(root=ROOT):
     import autodecomp as auto
     from units import load_units
@@ -355,14 +384,14 @@ def collect_model(root=ROOT):
             base['cpp_name'] = target['cpp_name'] if target else None
         rows = {}
         for table in row['vtables']:
-            layout = context.get('layouts', {}).get('Recovered_Vtable_%08X' % table['context_group'], {})
-            for field in layout.get('fields', []):
+            reserved = {f['offset'] for slot in table['slots']
+                        for f in method_overrides.get(hex(slot['function']), {}).get('fields', [])}
+            for field, verified, basis in table_fields(table, context, matched, reserved):
                 typ = field_type(field['type'], field['size'])
                 if typ is None:
                     continue
                 key = field['offset'], field['size'], typ
-                rows[key] = dict(field, type=key[2], verified_by=sorted(set(field['functions']) & set(layout.get('verified_by', []))),
-                                 basis='PS2 access grouping; class extent and overlapping interpretations unverified')
+                rows[key] = dict(field, type=key[2], verified_by=verified, basis=basis)
             for slot in table['slots']:
                 override = method_overrides.get(hex(slot['function']), {})
                 for field in override.get('fields', []):

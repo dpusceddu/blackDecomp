@@ -10,10 +10,16 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DD198 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0018() { return *(void * *)((unsigned char *)this + 0x18); }
     // 0x60: UNVERIFIED type; PS2 access offset.
     inline int & Field_0060() { return *(int *)((unsigned char *)this + 0x60); }
     // 0x64: UNVERIFIED type; PS2 access offset.
     inline int & Field_0064() { return *(int *)((unsigned char *)this + 0x64); }
+    // 0x68: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0068() { return *(int *)((unsigned char *)this + 0x68); }
     // 0x7C: UNVERIFIED type; PS2 access offset.
     inline int & Field_007C() { return *(int *)((unsigned char *)this + 0x7C); }
     // 0x00171158: UNVERIFIED signature (src/auto/unclassified/171110.c).

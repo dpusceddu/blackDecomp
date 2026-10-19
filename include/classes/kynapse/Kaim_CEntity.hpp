@@ -14,6 +14,8 @@ struct Kaim_CEntity {
     typedef Hierarchy_Kaim_CEntity Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002E45F8.
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0018() { return *(void * *)((unsigned char *)this + 0x18); }
     // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
     unsigned int Function_002904E8();
     // 0x002E45F8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).

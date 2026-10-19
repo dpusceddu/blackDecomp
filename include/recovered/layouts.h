@@ -12,6 +12,7 @@
 #include "recovered/Recovered_ActorEntries.h"
 #include "recovered/Recovered_ActorFanout3.h"
 #include "recovered/Recovered_ActorMotion.h"
+#include "recovered/Recovered_ActorStateMachine.h"
 #include "recovered/Recovered_AnimationAllocationTag.h"
 #include "recovered/Recovered_AnimationChannelState.h"
 #include "recovered/Recovered_AnimationClipIndex.h"

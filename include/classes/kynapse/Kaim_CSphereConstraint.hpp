@@ -16,6 +16,14 @@ struct Kaim_CSphereConstraint {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0004() { return *(float *)((unsigned char *)this + 0x4); }
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_000C() { return *(float *)((unsigned char *)this + 0xC); }
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
     // 0x002F1BD8: UNVERIFIED signature (src/context/behaviors_constraints.cpp).
     unsigned char Function_002F1BD8(void * argument0, void * argument1, float * argument2);
     // 0x00383D48: UNVERIFIED signature (src/auto/kynapse/383d48.c).

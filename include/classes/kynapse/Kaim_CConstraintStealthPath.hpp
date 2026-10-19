@@ -16,6 +16,78 @@ struct Kaim_CConstraintStealthPath {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0004() { return *(float *)((unsigned char *)this + 0x4); }
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_000C() { return *(float *)((unsigned char *)this + 0xC); }
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
+    // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0014() { return *(float *)((unsigned char *)this + 0x14); }
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
+    // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
+    // 0x24: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0024() { return *(float *)((unsigned char *)this + 0x24); }
+    // 0x28: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0028() { return *(float *)((unsigned char *)this + 0x28); }
+    // 0x2C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_002C() { return *(float *)((unsigned char *)this + 0x2C); }
+    // 0x30: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0030() { return *(float *)((unsigned char *)this + 0x30); }
+    // 0x34: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0034() { return *(float *)((unsigned char *)this + 0x34); }
+    // 0x38: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0038() { return *(float *)((unsigned char *)this + 0x38); }
+    // 0x3C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_003C() { return *(float *)((unsigned char *)this + 0x3C); }
+    // 0x40: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0040() { return *(float *)((unsigned char *)this + 0x40); }
+    // 0x44: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0044() { return *(float *)((unsigned char *)this + 0x44); }
+    // 0x48: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0048() { return *(float *)((unsigned char *)this + 0x48); }
+    // 0x4C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_004C() { return *(float *)((unsigned char *)this + 0x4C); }
+    // 0x50: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0050() { return *(float *)((unsigned char *)this + 0x50); }
+    // 0x54: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0054() { return *(float *)((unsigned char *)this + 0x54); }
+    // 0x58: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0058() { return *(float *)((unsigned char *)this + 0x58); }
+    // 0x5C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_005C() { return *(float *)((unsigned char *)this + 0x5C); }
+    // 0x60: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0060() { return *(float *)((unsigned char *)this + 0x60); }
+    // 0xF4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_00F4() { return *(void * *)((unsigned char *)this + 0xF4); }
+    // 0xF8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_00F8() { return *(void * *)((unsigned char *)this + 0xF8); }
+    // 0xFC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_00FC() { return *(void * *)((unsigned char *)this + 0xFC); }
+    // 0x100: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0100() { return *(void * *)((unsigned char *)this + 0x100); }
+    // 0x104: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0104() { return *(void * *)((unsigned char *)this + 0x104); }
+    // 0x108: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0108() { return *(void * *)((unsigned char *)this + 0x108); }
+    // 0x10C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_010C() { return *(void * *)((unsigned char *)this + 0x10C); }
+    // 0x110: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0110() { return *(void * *)((unsigned char *)this + 0x110); }
+    // 0x144: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0144() { return *(int *)((unsigned char *)this + 0x144); }
+    // 0x148: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0148() { return *(int *)((unsigned char *)this + 0x148); }
+    // 0x14C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_014C() { return *(float *)((unsigned char *)this + 0x14C); }
+    // 0x150: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0150() { return *(float *)((unsigned char *)this + 0x150); }
     // 0x002F0FF8: UNVERIFIED signature (src/context/behaviors_constraints.cpp).
     unsigned char Function_002F0FF8(void * argument0, void * argument1, float * argument2);
     // 0x00383D48: UNVERIFIED signature (src/auto/kynapse/383d48.c).

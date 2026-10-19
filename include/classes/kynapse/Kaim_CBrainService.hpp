@@ -14,6 +14,8 @@ struct Kaim_CBrainService {
     typedef Hierarchy_Kaim_CBrainService Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x0038E7C0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
     // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
     unsigned int Function_002904E8();
     // 0x002E74E0: UNVERIFIED signature (src/kynapse/configure_2e74e0.cpp).

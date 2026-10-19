@@ -16,6 +16,16 @@ struct Kaim_CFollowerAgent {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
+    // 0x2C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_002C() { return *(int *)((unsigned char *)this + 0x2C); }
+    // 0x3C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_003C() { return *(void * *)((unsigned char *)this + 0x3C); }
+    // 0x40: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0040() { return *(float *)((unsigned char *)this + 0x40); }
+    // 0x44: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0044() { return *(float *)((unsigned char *)this + 0x44); }
     // 0x002D30A0: UNVERIFIED signature (src/campaign/behaviors_follower.cpp).
     unsigned char Function_002D30A0(void * argument0);
     // 0x002D31F0: UNVERIFIED signature (include/campaign/behaviors/follower.hpp).

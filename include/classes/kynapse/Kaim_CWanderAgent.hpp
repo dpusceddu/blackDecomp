@@ -16,8 +16,12 @@ struct Kaim_CWanderAgent {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
     // 0x14: UNVERIFIED type; PS2 access offset.
@@ -26,6 +30,8 @@ struct Kaim_CWanderAgent {
     inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
     // 0x1C: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_001C() { return *(unsigned int *)((unsigned char *)this + 0x1C); }
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0020() { return *(int *)((unsigned char *)this + 0x20); }
     // 0x24: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0024() { return *(unsigned int *)((unsigned char *)this + 0x24); }
     // 0x28: UNVERIFIED type; PS2 access offset.

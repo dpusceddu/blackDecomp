@@ -16,6 +16,28 @@ struct Kaim_CConstraintConeVisionStealthPath {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_000C() { return *(void * *)((unsigned char *)this + 0xC); }
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
+    // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0014() { return *(void * *)((unsigned char *)this + 0x14); }
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0018() { return *(void * *)((unsigned char *)this + 0x18); }
+    // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_001C() { return *(void * *)((unsigned char *)this + 0x1C); }
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0020() { return *(void * *)((unsigned char *)this + 0x20); }
+    // 0x54: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0054() { return *(int *)((unsigned char *)this + 0x54); }
+    // 0x58: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0058() { return *(float *)((unsigned char *)this + 0x58); }
+    // 0x5C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_005C() { return *(float *)((unsigned char *)this + 0x5C); }
     // 0x002F13B0: UNVERIFIED signature (src/context/behaviors_constraints.cpp).
     unsigned char Function_002F13B0(void * argument0, void * argument1, float * argument2);
     // 0x00383D48: UNVERIFIED signature (src/auto/kynapse/383d48.c).

@@ -31,6 +31,12 @@ struct Kaim_CShooterAgent {
     inline unsigned int & Field_0018() { return *(unsigned int *)((unsigned char *)this + 0x18); }
     // 0x1C: UNVERIFIED type; PS2 access offset.
     inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
+    // 0x24: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0024() { return *(float *)((unsigned char *)this + 0x24); }
+    // 0x28: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline float & Field_0028() { return *(float *)((unsigned char *)this + 0x28); }
     // 0x2C: UNVERIFIED type; PS2 access offset.
     inline float & Field_002C() { return *(float *)((unsigned char *)this + 0x2C); }
     // 0x30: UNVERIFIED type; PS2 access offset.
