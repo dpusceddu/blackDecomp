@@ -46616,6 +46616,7 @@ units:
     FindBound__Q24Kaim16CFindNearestDataiUcf: '0x2f06c0'
     _vt$Q24Kaim16CFindNearestData: '0x3ec1c8'
     _vt$Q24Kaim7CObject: '0x3e0040'
+  claim: context-graph
 - name: campaign_graph_cpathobject
   source: src/campaign/graph_cpathobject.cpp
   origin: kynapse
