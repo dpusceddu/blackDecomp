@@ -45,6 +45,18 @@ def assemble(job):
 def compile_one(job):
     from elfobj import normalize_object
     root = '%s/%s' % (CC, job['compiler'])
+    if job['compiler'].startswith('mwcps2-'):
+        os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
+        cmd = ['wibo', root + '/mwccps2.exe'] + job['args'] + ['-c', job['src'], '-o', job['obj']]
+        try:
+            p = subprocess.run(cmd, env=dict(os.environ, TMPDIR='/work', WINEDEBUG='-all'),
+                               capture_output=True, text=True, timeout=job.get('timeout', 300))
+        except subprocess.TimeoutExpired:
+            return job['src'], 124, 'compiler timeout'
+        if p.returncode == 0 and os.path.exists(job['obj']):
+            data = open(job['obj'], 'rb').read()
+            open(job['obj'], 'wb').write(normalize_object(data))
+        return job['src'], p.returncode, (p.stdout + p.stderr).strip()
     if not os.path.isfile(root + '/bin/ee-gcc.exe'):          # native Linux compilers (Sony 2.9 / 2.96)
         os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
         env = dict(os.environ, TMPDIR='/work')
@@ -58,7 +70,9 @@ def compile_one(job):
             open(job['obj'], 'wb').write(normalize_object(data))
         msg = '\n'.join(l for l in (p.stdout + p.stderr).strip().split('\n') if 'file path prefix' not in l)
         return job['src'], p.returncode, msg
-    backend = '%s/lib/gcc-lib/ee/%s' % (root, '2.95.3' if '2.95.3-' in job['compiler'] else '2.95.2')
+    versions = root + '/lib/gcc-lib/ee'
+    backend = next(versions + '/' + v for v in sorted(os.listdir(versions))
+                   if not v.startswith('.') and os.path.isdir(versions + '/' + v))
     env = dict(os.environ, TMPDIR='/work', WINEDEBUG='-all', WIBO_PATH=backend)
     os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
     cmd = ['wibo', root + '/bin/ee-gcc.exe', '-B' + backend + '/'] + job['args'] + ['-c', job['src'], '-o', job['obj']]

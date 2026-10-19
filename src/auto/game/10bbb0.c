@@ -1,0 +1,14 @@
+#include "auto/prelude.h"
+
+#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "recovered/Recovered_FrontendResourceCache.h"
+#include "types_ghidra.h"
+#undef TYPES_GHIDRA_NO_PROTOTYPES
+extern s32 func_0010BAE0(void *, s32 *, s32);
+extern void func_001084A8(Recovered_FrontendResourceCache *, s32, s16);
+extern Recovered_FrontendResourceCache * D_0040F4C4;
+
+void func_0010BBB0(void *arg0) {
+    func_0010BAE0(arg0, NULL, 0);
+    func_001084A8(D_0040F4C4, 0xD, 0);
+}

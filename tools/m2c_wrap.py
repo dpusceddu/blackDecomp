@@ -40,6 +40,54 @@ def format(self, fmt):
 
 StructAccess.format = format
 
+# Raw BinaryOp additions/subtractions model machine byte addresses. Upstream
+# converts recognized element accesses to ArrayAccess/AddressOf instead. A loop
+# induction variable (or a pointer discovered late) can retain a raw BinaryOp;
+# printing `float_pointer += 4` would incorrectly advance it sixteen bytes.
+_binary_format = BinaryOp.format
+_format_assignment = translate.format_assignment
+
+
+def byte_pointer_op(expression):
+    return (isinstance(expression, BinaryOp) and expression.op in ('+', '-')
+            and (expression.left.type.is_pointer_or_array()
+                 or expression.right.type.is_pointer_or_array()))
+
+
+def byte_binary_format(self, fmt):
+    if not fmt.valid_syntax or not byte_pointer_op(self):
+        return _binary_format(self, fmt)
+    left, right = late_unwrap(self.left), late_unwrap(self.right)
+    lp, rp = left.type.is_pointer_or_array(), right.type.is_pointer_or_array()
+    # Two addresses are integer arithmetic; C pointer subtraction would divide
+    # by the element size. Preserve a genuinely wide result before subtracting
+    # (a 32-bit unsigned subtraction followed by a 64-bit cast loses its sign).
+    width = self.type.get_size_bits() or 32
+    integer = (lp and rp) or width > 32 or (rp and not lp and self.op == '-')
+    cast = 'u128' if width > 64 else 'u64' if width > 32 else 'u32'
+    def address(expression):
+        value = expression.format(fmt)
+        if not integer:
+            return '((s8 *) %s)' % value
+        if width > 32:
+            return '((%s) (s32) %s)' % (cast, value)
+        return '((u32) %s)' % value
+    lhs = address(left) if lp else left.format(fmt)
+    rhs = address(right) if rp else right.format(fmt)
+    return '((%s) (%s %s %s))' % (self.type.decay().format(fmt), lhs, self.op, rhs)
+
+
+def byte_format_assignment(dest, source, fmt):
+    source = late_unwrap(source)
+    if fmt.valid_syntax and byte_pointer_op(source):
+        # Upstream's compound-assignment shortcut bypasses BinaryOp.format.
+        return '%s = %s;' % (dest.format(fmt), translate.format_expr(source, fmt))
+    return _format_assignment(dest, source, fmt)
+
+
+BinaryOp.format = byte_binary_format
+translate.format_assignment = byte_format_assignment
+
 # SN EE's software double ABI differs from upstream m2c's generic EE ABI:
 # one f64 uses one GPR argument slot and returns in v0. A float still uses
 # its own f12..f19 bank. Keep f64 as a floating C type, not an integer typedef.

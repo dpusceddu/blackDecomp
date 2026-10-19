@@ -299,10 +299,55 @@ the remaining 2.45 MB suggests about 740 active agent-hours (1,090 including obs
 optimistic extrapolation. No new match above 1,000 B emerged from 57 full manual attempts across the
 two waves; 893 kB remains in that band, so there is no defensible completion date yet.
 
-Campaigns rotate seven area queues through three workers: four agent slots including the coordinator
-are available; worker contention has not reduced concurrency. Integrate each TU checkpoint, then rerun
-automation and all retail checks per wave. Two consecutive campaign waves below one percentage point
-of text (27,155 bytes each) trigger the requested throughput stop.
+The campaigns rotated seven area queues through three workers; worker contention did not reduce
+concurrency. Broad campaigns are stopped. The focused study below supersedes queue rotation.
+
+### Large-function study
+
+Calibration: 25 near misses across game, RenderWare and Kynapse, stratified to include nine above
+1,000 B, plus the eight previously matched controls (312–832 B). The catalog sweep attempted 77,715
+source/compiler/flag combinations across all 12 GCC builds and five Metrowerks builds; 45,972 scored,
+31,743 rejected incompatible flags or sources. Metrowerks compiled seven of the original GCC-specific
+sources. The reproducible worker-only harness is `tools/large_study.py`; detailed fixtures/results stay
+under ignored `build/large-study/`. Only SN 2.95.3 build 1.36 reproduced all eight controls. No compiler
+or flag set consistently improved the set. Keep `-O2 -G0 -snas` as the game/Kynapse/RenderWare default
+and Sony flags for Sony libraries; retain verified per-unit ABI flags and assembler choices.
+
+Concrete failures precede register allocation: m2c emitted byte increments on typed pointers (a float
+iterator advanced 16 B instead of 4), lost a HI/LO displacement across a constructor branch, narrowed
+a 64-bit multiply helper, inferred extra allocator arguments, and omitted four exception-cleanup calls.
+The byte-address adapter fixes raw arithmetic while preserving typed array indices and genuine wide
+results. Paired large-function diffs improved 44→43 and 154→145; allocator arity alone gave 154→145.
+The former `registers` score label also covered wrong immediates; it now says `operands`.
+
+Five source-shape tests: inline accessors changed 32→33 (container helper 32→49); VU vector operators
+and normalization methods left 38 unchanged; error-object lifetime changes gave 15→31 and shrank
+the frame 0x70→0x60; scoped locals/error-tail reshaping gave 350→330 (209 with an isolated Sony
+compiler combination); correcting named bindings reduced 11→1, then reversing multiplication
+operands gave an exact 680-byte C++ method. Preserve PS2 types, float operand order and object
+lifetimes, and define inline/static helpers before use. Sections/isolation/unrelated-definition order
+changed none of eight controls or ten near misses; moving a required inline body after its caller
+changed 0→33 diffs and 312→232 B. Some whole-TU combinations remain blocked by conflicting headers
+and prototypes; unavailable original definitions limit that comparison.
+
+The repaired pipeline retried all 6,996 remaining entries, followed by `-Os` and
+`-fno-schedule-insns` candidates. These remain per-function fallbacks: the former completed an
+892-byte function after the byte fix; the latter solved a 392-byte function at 6→0 diffs.
+Incremental, full-image-verified automatic rates exclude orphan/fragment entries:
+
+| Code size | New source / remaining real functions | Rate |
+| --- | --- | --- |
+| <100 B | 69 / 1,404 | 4.91% |
+| 100–300 B | 32 / 2,642 | 1.21% |
+| 301–1,000 B | 4 / 1,834 | 0.22% |
+| >1,000 B | 0 / 442 | 0% |
+
+Including the manual method, progress rose from 4,902 functions / 262,568 text bytes to 5,008 /
+274,776 (42.09% / 10.12%): +106 functions / 12,208 bytes. Five calibration near misses now match;
+none of its nine functions above 1,000 B does. All five retail images remain identical; 118 tool tests
+pass. Prioritize correct address/ABI/control-flow recovery, C++ cleanup and consistent shared headers
+before further campaigns. The evidence demonstrates several source-generation causes; it does not
+establish one explanation for all 36 earlier large-function failures.
 
 ## Agent rules (`AGENTS.md`)
 

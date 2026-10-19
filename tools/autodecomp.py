@@ -827,6 +827,8 @@ def worker_compile(jobs, tag='auto'):
         deps = compile_dependencies(src)
         headers.update(deps)
         digest = hashlib.sha256((src + '\0' + ' '.join(flags) + '\0' + PRELUDE_HASH).encode())
+        if split_cc(flags)[0].startswith('mwcps2-'):
+            digest.update(b'\0catalog-mw-joined-include-v1')
         for path, data in sorted(deps.items()):
             digest.update(path.encode() + b'\0' + data)
         h = digest.hexdigest()[:24]
@@ -860,7 +862,7 @@ def worker_compile(jobs, tag='auto'):
             tar.addfile(ti, io.BytesIO(data))
             cc, fl = split_cc(flags)
             plan['compile'].append(dict(src='src/%s.c' % h, obj='obj/%s.o' % h, compiler=cc,
-                                        args=fl + ['-I', 'include'], timeout=30))
+                                        args=fl + (['-Iinclude'] if cc.startswith('mwcps2-') else ['-I', 'include']), timeout=30))
     d = AUTO / ('job-%d' % os.getpid())          # one directory per process: several runs may share the build backend
     d.mkdir(exist_ok=True)
     (d / 'inputs.tgz').write_bytes(buf.getvalue())
@@ -949,17 +951,18 @@ class Target:
                     and token == (self.fn['words'][index], None))
 
 
-def compiled_tokens(obj_bytes, symbol, consts=None):
+def compiled_tokens(obj_bytes, symbol, consts=None, bindings=None):
     """Tokens of `symbol`'s code in a compiled object, or (None, reason)."""
     e = Elf(obj_bytes)
-    text = e.section('.text')
-    if text is None:
-        return None, 'no .text'
     syms = e.symbols()
-    code = e.content(text)
-    fs = next((s for s in syms if s['name'] == symbol and s['shndx'] == text['index']), None)
+    bindings = bindings or {}
+    fs = next((s for s in syms if s['name'] == symbol and 0 < s['shndx'] < len(e.sections)
+               and (e.sections[s['shndx']]['name'] == '.text'
+                    or e.sections[s['shndx']]['name'].startswith('.text.'))), None)
     if fs is None:
         return None, 'function symbol missing'
+    text = e.sections[fs['shndx']]
+    code = e.content(text)
     start, size = fs['value'], fs['size']
     rels = {}
     for t in e.sections:
@@ -989,18 +992,19 @@ def compiled_tokens(obj_bytes, symbol, consts=None):
         masked = w & MASK[k]
         name = y['name']
         am = ADDRNAME.match(name) if name else None
-        if y['shndx'] not in (0, 0xFFF1, 0xFFF2) and not (name and am):
+        base = int(am.group(1), 16) if am else bindings.get(name)
+        if y['shndx'] not in (0, 0xFFF1, 0xFFF2) and base is None:
             # symbol defined in the compiled unit itself (a constant it brought along): compare the bytes it points at
             sec = e.sections[y['shndx']]
             where = y['value'] + add
             from constant_relocs import constant_word
             image = ADDRNAME.match(symbol)
-            word = constant_word(e, syms, sec, where, fs, int(image.group(1), 16) if image else None)
+            word = constant_word(e, syms, sec, where, fs,
+                                 int(image.group(1), 16) if image else bindings.get(symbol))
             value = word.hex() if word is not None else 'unresolved-constant-relocation'
             toks.append((masked, (k, ('const', sec['name'], value))))
             continue
-        if am:
-            base = int(am.group(1), 16)
+        if base is not None:
             toks.append((masked, ('hi', (base + add) >> 16) if k == 'hi' else (k, base + add)))
         else:
             toks.append((masked, (k, name, add)))
@@ -1040,7 +1044,7 @@ def score(target, toks, orig_const):
             w = t[0]
             return (w >> 26, w & 0x3F if w >> 26 == 0 else 0)
         if [op(t) for t in want] == [op(t) for t in toks]:
-            kind = 'registers'          # same opcodes everywhere: register allocation, operand order or immediates
+            kind = 'operands'           # identical opcodes do not distinguish registers from wrong immediates/types
         elif sorted(op(t) for t in want) == sorted(op(t) for t in toks):
             kind = 'order'              # same instructions in another order: scheduling or branch layout
         else:
@@ -1127,11 +1131,12 @@ def variants_for_sn(fn):
     return first
 
 
-EXTRA_FLAG_SETS = [['-O1', '-G0', '-snas'], ['-O3', '-G0', '-snas'], ['-O2', '-G0', '-snas', '-fbyte-bool'],
+EXTRA_FLAG_SETS = [['-O1', '-G0', '-snas'], ['-O3', '-G0', '-snas'], ['-Os', '-G0', '-snas'], ['-O2', '-G0', '-snas', '-fbyte-bool'],
                    ['-O2', '-G8', '-snas'], ['-O2', '-G0', '-snas', '-fno-peephole'], ['-O2', '-G0', '-snas', '-fno-schedule-insns2'],
+                   ['-O2', '-G0', '-snas', '-fno-schedule-insns'],
                    ['-O2', '-G0', '-snas', '-fno-optimize-sibling-calls']]
-SONY_EXTRA = [['--cc=' + SONY] + f for f in (['-O1', '-G0'], ['-O3', '-G0'], ['-O2', '-G8'], ['-O2', '-G0', '-fno-peephole'],
-                                                 ['-O2', '-G0', '-fno-schedule-insns2'], ['-O0', '-G0'])]
+SONY_EXTRA = [['--cc=' + SONY] + f for f in (['-O1', '-G0'], ['-O3', '-G0'], ['-Os', '-G0'], ['-O2', '-G8'], ['-O2', '-G0', '-fno-peephole'],
+                                                 ['-O2', '-G0', '-fno-schedule-insns2'], ['-O2', '-G0', '-fno-schedule-insns'], ['-O0', '-G0'])]
 
 
 def extra_sets(fn):
@@ -1141,7 +1146,8 @@ def extra_sets(fn):
     # The bundled GNU assembler and SN assembler differ on short-loop/hazard
     # padding. Both have full-image-verified campaign matches; try both rather
     # than treating an assembler NOP difference as an unfixable C mismatch.
-    sets = EXTRA_FLAG_SETS + [['-O2', '-G0'], ['-O2', '-G0', '-fbyte-bool']]
+    sets = EXTRA_FLAG_SETS + [['-O2', '-G0'], ['-O2', '-G0', '-fbyte-bool'], ['-Os', '-G0'],
+                              ['-O2', '-G0', '-fno-schedule-insns']]
     if any(value[0] == 'gprel' for value in fn['rel'].values()):
         sets += [['-O2', flag] + extra for flag in ('-G1', '-G8')
                  for extra in ([], ['-fbyte-bool'])]
