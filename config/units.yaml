@@ -47795,3 +47795,86 @@ units:
     status: source
     symbol: GetWorldMatrix__Q213CampaignActor11ActorMotion
     size: 200
+- name: context_behaviors_gap
+  source: src/context/behaviors_gap.cpp
+  origin: kynapse
+  owner: context-wave3-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x306848'
+    size: 1928
+    status: asm
+    reason: registers
+    symbol: func_00306848
+  - addr: '0x3071a8'
+    size: 728
+    status: asm
+    reason: registers
+    symbol: func_003071A8
+  - addr: '0x307480'
+    size: 876
+    status: asm
+    reason: registers
+    symbol: func_00307480
+  - addr: '0x3077f0'
+    size: 380
+    status: asm
+    reason: registers
+    symbol: func_003077F0
+  - addr: '0x307970'
+    size: 1600
+    status: asm
+    reason: registers
+    symbol: func_00307970
+  - addr: '0x307fb0'
+    size: 260
+    status: source
+    symbol: func_00307FB0
+  - addr: '0x3080b8'
+    size: 676
+    status: asm
+    reason: registers
+    symbol: func_003080B8
+  - addr: '0x308360'
+    size: 4640
+    status: asm
+    reason: registers
+    symbol: func_00308360
+  - addr: '0x309580'
+    size: 1424
+    status: asm
+    reason: registers
+    symbol: func_00309580
+  - addr: '0x309b10'
+    size: 5416
+    status: asm
+    reason: registers
+    symbol: func_00309B10
+  - addr: '0x30b038'
+    size: 564
+    status: asm
+    reason: registers
+    symbol: func_0030B038
+  - addr: '0x30b270'
+    size: 568
+    status: asm
+    reason: registers
+    symbol: func_0030B270
+  - addr: '0x30b7e0'
+    size: 184
+    status: asm
+    reason: registers
+    symbol: func_0030B7E0
+  - addr: '0x30b988'
+    size: 132
+    status: source
+    symbol: func_0030B988
+  externs:
+    _13KaimAvoidance$avoidanceTime: '0x3cd898'
+    _13KaimAvoidance$world: '0x3c9ed4'

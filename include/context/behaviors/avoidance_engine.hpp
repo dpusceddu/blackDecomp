@@ -18,6 +18,7 @@ struct Vec3 {
     Vec3(const Vec3& p):x(p.x),y(p.y),z(p.z){}
     Vec3& operator=(const Vec3& p){x=p.x;y=p.y;z=p.z;return *this;}
     float Squared() const __asm__("func_00389140");
+    Vec3 Orientation() const __asm__("func_002E9F40");
     Vec3 operator+(const Vec3& b) const { return Vec3(x+b.x,y+b.y,z+b.z); }
     Vec3 operator-(const Vec3& b) const { return Vec3(x-b.x,y-b.y,z-b.z); }
     Vec3 operator*(float k) const { return Vec3(x*k,y*k,z*k); }
