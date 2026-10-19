@@ -84,15 +84,15 @@ struct UnknownVtable_003E2508 {
     inline float & Field_00C8() { return *(float *)((unsigned char *)this + 0xC8); }
     // 0xCC: UNVERIFIED type; PS2 access offset.
     inline float & Field_00CC() { return *(float *)((unsigned char *)this + 0xCC); }
-    // 0xE8: UNVERIFIED type; PS2 access offset.
+    // 0xE8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_00E8() { return *(unsigned int *)((unsigned char *)this + 0xE8); }
-    // 0xEC: UNVERIFIED type; PS2 access offset.
+    // 0xEC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_00EC() { return *(unsigned int *)((unsigned char *)this + 0xEC); }
     // 0x0026BD30: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0026BD30();
     // 0x0026BE68: UNVERIFIED signature (src/auto/game/26be68.c).
     unsigned int Function_0026BE68(int argument0);
-    // 0x0026BE78: UNVERIFIED signature (PS2 exact source probe; full-build status recorded separately).
+    // 0x0026BE78: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_0026BE78(unsigned int argument0, unsigned int argument1);
     // 0x0026BEA0: UNVERIFIED signature (src/auto/game/26bea0.c).
     int Function_0026BEA0();
@@ -108,7 +108,7 @@ struct UnknownVtable_003E2508 {
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x0026BE68; UNVERIFIED signature.
         virtual unsigned int Slot002(int argument0);
-        // slot 3, table+0x20, this delta 0, function 0x0026BE78; UNVERIFIED signature.
+        // slot 3, table+0x20, this delta 0, function 0x0026BE78; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual bool Slot003(unsigned int argument0, unsigned int argument1);
         // slot 4, table+0x28, this delta 0, function 0x0026BEA0; UNVERIFIED signature.
         virtual int Slot004();
