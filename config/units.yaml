@@ -48074,3 +48074,22 @@ units:
     reason: claim
   source: src/campaign/actor_camera_wave3.cpp
   origin: C++ actor camera cluster; remaining functions claimed before source reconstruction
+- name: campaign_actor_input_wave3
+  source: src/campaign/actor_input_wave3.cpp
+  origin: C++ actor input cluster; inferred fields and narrow inline input methods
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x13f618'
+    status: asm
+  - addr: '0x13ffa0'
+    status: source
+    symbol: Event__Q216BlackPS2Campaign17ActorStateMachineiiUi
+    size: 104
+  - addr: '0x140a40'
+    status: source
+    symbol: Leave__Q216BlackPS2Campaign17ActorStateMachine
+    size: 104
