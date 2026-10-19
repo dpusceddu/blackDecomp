@@ -69,3 +69,8 @@ bool ShooterAgent::Prepare()
 // Unmatched: Update needs the controller and virtual-call context.
 // Unmatched: Aim needs the original scalar/vector temporary lifetimes.
 }
+
+#include "campaign/behaviors/shooter.hpp"
+namespace Kaim {
+ShooterAgent* ShooterAgent::Create(BehaviorContext* context) { return new ShooterAgent(context); }
+}

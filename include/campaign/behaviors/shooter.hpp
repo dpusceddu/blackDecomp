@@ -3,6 +3,8 @@
 #ifndef BLACK_CAMPAIGN_SHOOTER_AGENT_HPP
 #define BLACK_CAMPAIGN_SHOOTER_AGENT_HPP
 #include "kynapse/compat.hpp"
+#include "kynapse/alloc.hpp"
+extern void (*gKaimFree)(void*);
 #include "classes/kynapse/Kaim_CShooterAgent.hpp"
 
 // The wander agent's per-frame update and the shooter agent behaviour (aims at and fires on a target
@@ -18,6 +20,7 @@ namespace Kaim {
 struct Vec3 {
     float x, y, z;
     Vec3() {}
+    Vec3(float v):x(v),y(v),z(v) {}
     Vec3(const Vec3& v) : x(v.x),y(v.y),z(v.z) {}
     void Set(float a, float b, float c)
     {
@@ -202,6 +205,8 @@ extern const void* gKeyA;
 extern const void* gKeyB;
 
 struct Behavior : PolyRoot {
+    Behavior();
+    Behavior(BehaviorContext*);
     virtual ~Behavior();
     virtual bool Init(ChildBuffers* config);   // slot 1
     bool ConfigureAll(ChildBuffers* config);   // shared routine at 0x54bf0
@@ -246,6 +251,10 @@ struct WanderAgent : Behavior {
 // Fires on a named target bot: keeps its aim and trigger controls current, and only shoots when no
 // other actor stands inside the danger cone.
 struct ShooterAgent : Behavior {
+    ShooterAgent(BehaviorContext*);
+    static ShooterAgent* Create(BehaviorContext*);
+    static void* operator new(unsigned int size) {return KaimAllocate(size);}
+    static void operator delete(void* p) {gKaimFree(p);}
     Actor* target;
     float gunRange;
     float dangerousConeAngle;
