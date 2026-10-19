@@ -42496,10 +42496,6 @@ units:
     symbol: func_0030B270
     size: 568
     status: asm
-  - addr: '0x30b4a8'
-    symbol: func_0030B4A8
-    size: 680
-    status: asm
   - addr: '0x30b7e0'
     symbol: func_0030B7E0
     size: 184
@@ -43807,4 +43803,22 @@ units:
   - addr: '0x2f1358'
     symbol: func_002F1358
     size: 88
+    status: source
+- name: kynapse_avoidance_configuration
+  source: src/kynapse/avoidance_configuration.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  externs:
+    GetKey__CQ213KaimAvoidance8Property: '0x2e3920'
+    GetText__CQ213KaimAvoidance8Property: '0x2e3918'
+    _13KaimAvoidance$trackingPeriod: '0x3cd89c'
+    _13KaimAvoidance$world: '0x3c9ed4'
+    _stricmp: '0x360838'
+  functions:
+  - addr: '0x30b4a8'
+    symbol: Configure__Q213KaimAvoidance9AvoidancePCQ213KaimAvoidance8Property
+    size: 680
     status: source
