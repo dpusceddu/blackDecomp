@@ -2,7 +2,7 @@
 Kaim::CFindNearestData::~CFindNearestData(){if(order)D_003C87E0(order);if(rank)D_003C87E0(rank);if(aux)D_003C87E0(aux);}
 #if 0
 
-// Unmatched: final auxiliary-pointer store scheduling.
+// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
 #include "campaign/graph/nearest.hpp"
 extern const char D_00407268[];
 extern const int D_00407284;
