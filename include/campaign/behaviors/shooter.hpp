@@ -15,6 +15,7 @@ extern "C" int __cdecl _stricmp(const char*, const char*);
 
 extern "C" long func_0035E730(const char*);
 extern "C" float func_00291C68(long);
+#include "ps2/kynapse/list.hpp"
 namespace Kaim {
 
 struct Vec3 {
@@ -43,27 +44,6 @@ extern Vec3 gDefaultAim;
 extern float gUnit;
 static const float kDefaultFloat=0;
 extern float gNow;
-
-struct PolyRoot { virtual ~PolyRoot() {} };
-template <class T> struct ListNode : PolyRoot {
-    virtual ~ListNode() {}
-    T value;
-    ListNode* previous;
-    ListNode* next;
-};
-template <class T> struct List : PolyRoot {
-    virtual ~List() {}
-    ListNode<T>* storage;
-    ListNode<T>* head;
-};
-
-struct Actor;
-struct ActorIterator : PolyRoot {
-    ListNode<Actor*>* node;
-    ActorIterator(ListNode<Actor*>* n) : node(n) {}
-    ~ActorIterator() {}
-    ActorIterator& operator++() { node=node->next;return *this; }
-};
 
 struct ActionBank {
     virtual void Slot0();

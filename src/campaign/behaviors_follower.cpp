@@ -1,3 +1,4 @@
+#include "ps2/kynapse/property.hpp"
 #include "campaign/behaviors/follower.hpp"
 
 extern "C" int func_00360838(const char*, const char*);
@@ -5,14 +6,7 @@ extern "C" long func_0035E730(const char*);
 extern "C" float func_00291C68(long);
 
 namespace BehaviorCampaign {
-inline bool BaseConfigure(ChildBuffers* entry) {
-    if (entry) {
-        if (entry->GetSecond()) {
-            if (*entry->GetSecond() == '_') return true;
-        }
-    }
-    return false;
-}
+
 
 bool Follower::Configure(ChildBuffers* entry) {
     if (!entry) return false;
@@ -27,7 +21,7 @@ bool Follower::Configure(ChildBuffers* entry) {
         const char* value=entry->GetValue();
         if (value) {followed=((Registry*)gEngine)->FindByName(value);return true;}
     }
-    return BaseConfigure(entry);
+    return BlackPS2::Kynapse::IsPrivateProperty(entry);
 }
 
 bool Follower::IsReady() {

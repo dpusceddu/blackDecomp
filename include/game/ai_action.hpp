@@ -16,6 +16,7 @@
 #define BLACK_VIRTUAL2(ret, name, slot, t0, a0, t1, a1) virtual ret name(t0 a0, t1 a1)
 #define BLACK_GLOBAL_POINTER(T, name) extern T* name
 #define BLACK_GLOBAL_OBJECT(T, name) extern const T name
+#include "ps2/vector_storage.hpp"
 namespace BlackGame {
 typedef unsigned char Byte;
 struct Brain;
@@ -26,26 +27,8 @@ struct NavigationAgent;
 struct Action;
 struct ActionStack;
 
-struct Vector4 { float x, y, z, w; };
 
-// Vector values. The Xbox passes the address of an __m128 (copies are movaps) and reads single
-// components through the float view of the same storage; the PS2 passes one 128-bit register
-// (SN's 128-bit long long) that is spilled before any component access. A host build only needs
-// the declarations to be well formed.
-#define BLACK_ALIGNED16_BEFORE
-#define BLACK_ALIGNED16 __attribute__((aligned(16)))
-struct Position4 { float x, y, z, w; } BLACK_ALIGNED16;
-typedef long long PositionArg;
-typedef long long PositionResult;
-inline void Store(Position4& to, PositionArg value) { *(PositionArg*)&to = value; }
-inline PositionArg Load(const Position4& from) { return *(const PositionArg*)&from; }
-inline PositionArg Load(const Vector4& from) { return *(const PositionArg*)&from; }
-inline PositionArg ToArg(PositionResult value) { return value; }
-inline Position4 Spill(PositionArg value) { Position4 p; Store(p, value); return p; }
-#define PX(v) ((v).x)
-#define PY(v) ((v).y)
-#define PZ(v) ((v).z)
-#define PW(v) ((v).w)
+
 #define BLACK_STDCALL_BOOL bool
 struct SpeedValue { unsigned int unknown00; float speed; };
 struct ActorMovement { Byte unknown00[0x60]; BLACK_REF(SpeedValue) value; };

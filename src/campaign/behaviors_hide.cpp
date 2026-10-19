@@ -1,3 +1,4 @@
+#include "ps2/kynapse/property.hpp"
 #include "campaign/behaviors/hide.hpp"
 
 extern const char D_00404350[], D_00404358[], D_00404368[], D_00404378[];
@@ -11,14 +12,7 @@ const char D_00404388[] __attribute__((aligned(8))) = "MaxDeltaHeight";
 const char D_00404398[] __attribute__((aligned(8))) = "MaxDangerousEntities";
 
 namespace HideRecovery {
-inline bool BaseConfigure(ChildBuffers* entry) {
-    if (entry) {
-        if (entry->GetSecond()) {
-            if (*entry->GetSecond() == '_') return true;
-        }
-    }
-    return false;
-}
+
 
     bool HideAgent::Configure(ChildBuffers* entry)
    {
@@ -66,7 +60,7 @@ inline bool BaseConfigure(ChildBuffers* entry) {
                 return true;
             }
         }
-        return BaseConfigure(entry);
+        return BlackPS2::Kynapse::IsPrivateProperty(entry);
     }
 
 
