@@ -17354,8 +17354,8 @@ tus:
   confidence: exact
   evidence: [eh, join-soft, shared-items]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 5 of 11 functions
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, --assembler=sn-min6]
+  flags_basis: matched 9 of 11 functions
   data:
     .rodata: ['0x4061c0', '0x4061d8']
     .data: ['0x3e8950', '0x3e8d20']
@@ -28399,8 +28399,8 @@ tus:
   confidence: exact
   evidence: [eh, proposed-cut]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, --assembler=sn-min6]
+  flags_basis: matched 1 of 1 functions
 - name: linkonce_38c3e0
   kind: linkonce
   library: linkonce
