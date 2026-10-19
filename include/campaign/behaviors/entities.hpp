@@ -100,7 +100,7 @@ struct Context {
     Entity* actor;
 };
 
-struct ChildBuffers;
+struct ChildBuffers {const char* GetSecond() const;const char* GetValue() const;};
 struct NameTable8 {
     int FindName(const char* name);
 };
@@ -198,6 +198,7 @@ struct Perception : PerceptionBase {
     bool pendingGroup;
     bool pendingLine;
 
+    bool Configure(ChildBuffers* entry);
     bool ConfigureAll(ChildBuffers* config);
     bool Init(ChildBuffers* config);
     void Reset();

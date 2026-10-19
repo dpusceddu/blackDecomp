@@ -46686,11 +46686,6 @@ units:
     symbol: func_0030F940
     status: asm
     reason: campaign
-  - addr: '0x30fe98'
-    size: 248
-    symbol: func_0030FE98
-    status: asm
-    reason: campaign
   externs:
     Entity_RemoveC__FP5WorldPFP6EntityP10Perception_vP10Perception: '0x2e1098'
     OnSubjectRemoved__FP6EntityP10Perception: '0x310190'
@@ -46703,3 +46698,23 @@ units:
     gPairLineExpiry: '0x3ce5a8'
     gPerceptionCount: '0x3ce5ac'
     gWorld: '0x3c9ed4'
+- name: campaign_behaviors_centitymanager_config
+  source: src/campaign/behaviors_centitymanager_config.cpp
+  owner: cpp-campaign-w2-behaviors
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x30fe98'
+    size: 248
+    symbol: Configure__10PerceptionP12ChildBuffers
+    status: source
+    reason: campaign
+  externs:
+    GetSecond__C12ChildBuffers: '0x2e3920'
+    GetValue__C12ChildBuffers: '0x2e3918'
+    _stricmp: '0x360838'
