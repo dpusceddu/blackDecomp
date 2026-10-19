@@ -149,6 +149,63 @@
           "type": "void *"
         }
       ]
+    },
+    "0x145240": {
+      "return": "void",
+      "params": [
+        "float"
+      ],
+      "fields": [
+        {
+          "offset": 424,
+          "size": 4,
+          "type": "void *"
+        },
+        {
+          "offset": 501,
+          "size": 1,
+          "type": "unsigned char"
+        }
+      ]
+    },
+    "0x149608": {
+      "return": "int",
+      "params": [
+        "void *"
+      ]
+    },
+    "0x146a28": {
+      "return": "void",
+      "params": [
+        "int"
+      ]
+    },
+    "0x26be78": {
+      "return": "bool",
+      "params": [
+        "unsigned int",
+        "unsigned int"
+      ],
+      "fields": [
+        {
+          "offset": 232,
+          "size": 4,
+          "type": "unsigned int"
+        },
+        {
+          "offset": 236,
+          "size": 4,
+          "type": "unsigned int"
+        }
+      ]
+    },
+    "0x2134f8": {
+      "return": "int",
+      "params": []
+    },
+    "0x213758": {
+      "return": "int",
+      "params": []
     }
   },
   "virtual_views": {

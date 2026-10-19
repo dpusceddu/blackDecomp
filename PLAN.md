@@ -489,6 +489,17 @@ The following campaign uses four isolated queues, including the coordinator's wo
 gains count newly sourced original spans, not C-to-C++ conversions; large-function counts use code
 sizes over 300 and 1,024 bytes. Stop after two consecutive waves below 27,155 text bytes (1%).
 
+| C++ wave | New functions / text bytes | Complete TUs | >300 B matched / attempted | >1 KB matched / attempted | Agent-hours / bytes per hour | Top blockers |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 1 | 12 / 4,080 (0.150%) | 0 | 8 / 47 | 0 / 16 | 1.49 / 2,731 | Inline/lifetime shape; VU0 aggregate ABI; data ownership |
+
+Four isolated class queues ran without worker contention. Correct inline boolean helpers, aggregate
+argument types and loop-local declarations unlocked the large matches. Three existing C bodies
+(1,008 code bytes) also became C++ methods; an existing C++ destructor gained its RTTI-backed identity.
+Verified actor signatures/offsets and controller offsets are now inputs to the shared skeleton generator.
+Every checkpoint and all five retail images remain identical. Wave 1 is below the stopping threshold;
+a fresh second wave tests the gains from spreading these headers and source conventions.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.

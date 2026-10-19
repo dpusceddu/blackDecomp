@@ -78,8 +78,8 @@ struct UnknownVtable_003DC838 {
     inline int & Field_01A0() { return *(int *)((unsigned char *)this + 0x1A0); }
     // 0x1A4: UNVERIFIED type; PS2 access offset.
     inline int & Field_01A4() { return *(int *)((unsigned char *)this + 0x1A4); }
-    // 0x1A8: UNVERIFIED type; PS2 access offset.
-    inline int & Field_01A8() { return *(int *)((unsigned char *)this + 0x1A8); }
+    // 0x1A8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_01A8() { return *(void * *)((unsigned char *)this + 0x1A8); }
     // 0x1AC: UNVERIFIED type; PS2 access offset.
     inline int & Field_01AC() { return *(int *)((unsigned char *)this + 0x1AC); }
     // 0x1B0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
@@ -122,7 +122,7 @@ struct UnknownVtable_003DC838 {
     inline int & Field_01F0() { return *(int *)((unsigned char *)this + 0x1F0); }
     // 0x1F4: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_01F4() { return *(unsigned char *)((unsigned char *)this + 0x1F4); }
-    // 0x1F5: UNVERIFIED type; PS2 access offset.
+    // 0x1F5: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_01F5() { return *(unsigned char *)((unsigned char *)this + 0x1F5); }
     // 0x1F6: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_01F6() { return *(unsigned char *)((unsigned char *)this + 0x1F6); }
@@ -136,8 +136,8 @@ struct UnknownVtable_003DC838 {
     int Function_001448C8();
     // 0x00144E00: UNVERIFIED signature (src/auto/game/144e00.c).
     int Function_00144E00();
-    // 0x00145240: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned char Function_00145240(float argument0);
+    // 0x00145240: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    void Function_00145240(float argument0);
     // 0x00145558: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00145558(unsigned int argument0);
     // 0x00145A50: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -150,8 +150,8 @@ struct UnknownVtable_003DC838 {
     unsigned int Function_00146000(unsigned int argument0, S128 argument1, unsigned int argument2, unsigned int argument3, float argument4);
     // 0x001463D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001463D0(unsigned int argument0, unsigned int argument1, unsigned int argument2, float argument3, float argument4);
-    // 0x00146A28: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00146A28(unsigned int argument0);
+    // 0x00146A28: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    void Function_00146A28(int argument0);
     // 0x00146AF0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00146AF0(unsigned int argument0);
     // 0x00146CE0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -166,7 +166,7 @@ struct UnknownVtable_003DC838 {
     int Function_00148430();
     // 0x00149158: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     unsigned short * Function_00149158(unsigned char argument0);
-    // 0x00149608: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x00149608: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     int Function_00149608(void * argument0);
     // 0x00149798: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00149798();
@@ -186,12 +186,12 @@ struct UnknownVtable_003DC838 {
     // Vtable 0x003DC838; vptr field offset unknown; referenced zero RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
     struct VirtualInterface0 {
-        // slot 0, table+0x8, this delta 0, function 0x00145240; UNVERIFIED signature.
-        virtual unsigned char Slot000(float argument0);
+        // slot 0, table+0x8, this delta 0, function 0x00145240; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual void Slot000(float argument0);
         // slot 1, table+0x10, this delta 0, function 0x00165B00; UNVERIFIED signature.
         virtual unsigned int Slot001(unsigned int argument0);
-        // slot 2, table+0x18, this delta 0, function 0x00146A28; UNVERIFIED signature.
-        virtual unsigned int Slot002(unsigned int argument0);
+        // slot 2, table+0x18, this delta 0, function 0x00146A28; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual void Slot002(int argument0);
         // slot 3, table+0x20, this delta 0, function 0x00144E00; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00145A50; UNVERIFIED signature.
@@ -210,7 +210,7 @@ struct UnknownVtable_003DC838 {
         virtual unsigned int Slot010(unsigned int argument0, unsigned int argument1, unsigned int argument2, float argument3, float argument4);
         // slot 11, table+0x60, this delta 0, function 0x00146000; UNVERIFIED signature.
         virtual unsigned int Slot011(unsigned int argument0, S128 argument1, unsigned int argument2, unsigned int argument3, float argument4);
-        // slot 12, table+0x68, this delta 0, function 0x00149608; UNVERIFIED signature.
+        // slot 12, table+0x68, this delta 0, function 0x00149608; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual int Slot012(void * argument0);
         // slot 13, table+0x70, this delta 0, function 0x00383770; UNVERIFIED signature.
         virtual unsigned int Slot013();
