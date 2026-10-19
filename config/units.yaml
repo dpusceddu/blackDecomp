@@ -46510,3 +46510,29 @@ units:
     symbol: Open__Q216CampaignGraphics10ControllerUiUi
     size: 36
     status: source
+- name: campaign_actor_route_update
+  source: src/campaign/actor_route_update.cpp
+  origin: 'C++ campaign: RouteMode vtable0x3dd380; authored parent source and PS2 helper context'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - --assembler=sn-min6
+  externs:
+    FamilySpeed__9BlackGamePCQ29BlackGame9FamilyRef: '0x18da40'
+    IsMovementObstructed__9BlackGamePQ29BlackGame10Controllerxb: '0x182ef0'
+    JoinCompletedRoute__9BlackGamePQ29BlackGame9RouteModePQ29BlackGame12RouteRequest: '0x1930f8'
+    Pump__Q29BlackGame12RouteRequest: '0x179c88'
+    ReleaseMovementRoute__9BlackGamePQ29BlackGame9RouteMode: '0x191f28'
+    StepPhase__Q29BlackGame9RouteMode: '0x192a00'
+    UpdateStallRecovery__Q29BlackGame16MovementModeBase: '0x1915d8'
+  functions:
+  - addr: '0x191d40'
+    symbol: Update__Q29BlackGame9RouteMode
+    size: 488
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
