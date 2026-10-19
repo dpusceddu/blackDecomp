@@ -12,7 +12,7 @@ struct UnknownVtable_003DCC60 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x78: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0078() { return *(unsigned char *)((unsigned char *)this + 0x78); }
-    // 0x0013EE20: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE20: UNVERIFIED signature (include/campaign/actor/state.hpp).
     unsigned int Function_0013EE20();
     // 0x0013EE38: UNVERIFIED signature (src/tu/13ee20.c).
     int Function_0013EE38();

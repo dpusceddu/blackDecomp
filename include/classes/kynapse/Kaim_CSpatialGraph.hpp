@@ -27,7 +27,7 @@ struct Kaim_CSpatialGraph {
     int Function_002F7F48(unsigned int argument0);
     // 0x002F8238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F8238(unsigned int argument0, unsigned int argument1);
-    // 0x002F8C38: UNVERIFIED signature (src/auto/kynapse/2f8c38.c).
+    // 0x002F8C38: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_002F8C38();
     // 0x002FB4D8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002FB4D8();

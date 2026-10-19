@@ -6,15 +6,12 @@
 typedef struct Recovered_PS2KaimChildBuffer {
     u8 opaque_0[12];
     s32 field_C; /* PS2 +0xC */
-    s32 field_10; /* PS2 +0x10 */
-    s32 field_14; /* PS2 +0x14 */
+    u8 opaque_10[8];
     s32 field_18; /* PS2 +0x18 */
     s32 field_1C; /* PS2 +0x1C */
     s32 field_20; /* PS2 +0x20 */
 } Recovered_PS2KaimChildBuffer;
 typedef char assert_Recovered_PS2KaimChildBuffer_C[(((int)&((Recovered_PS2KaimChildBuffer *)0)->field_C) == 12) ? 1 : -1];
-typedef char assert_Recovered_PS2KaimChildBuffer_10[(((int)&((Recovered_PS2KaimChildBuffer *)0)->field_10) == 16) ? 1 : -1];
-typedef char assert_Recovered_PS2KaimChildBuffer_14[(((int)&((Recovered_PS2KaimChildBuffer *)0)->field_14) == 20) ? 1 : -1];
 typedef char assert_Recovered_PS2KaimChildBuffer_18[(((int)&((Recovered_PS2KaimChildBuffer *)0)->field_18) == 24) ? 1 : -1];
 typedef char assert_Recovered_PS2KaimChildBuffer_1C[(((int)&((Recovered_PS2KaimChildBuffer *)0)->field_1C) == 28) ? 1 : -1];
 typedef char assert_Recovered_PS2KaimChildBuffer_20[(((int)&((Recovered_PS2KaimChildBuffer *)0)->field_20) == 32) ? 1 : -1];

@@ -7,7 +7,8 @@ typedef struct Recovered_Perception {
     u8 opaque_0[4];
     void * field_4; /* PS2 +0x4 */
     f32 field_8; /* PS2 +0x8 */
-    u8 opaque_C[12];
+    f32 field_C; /* PS2 +0xC */
+    u8 opaque_10[8];
     s32 field_18; /* PS2 +0x18 */
     s32 field_1C; /* PS2 +0x1C */
     s32 field_20; /* PS2 +0x20 */
@@ -28,6 +29,7 @@ typedef struct Recovered_Perception {
 } Recovered_Perception;
 typedef char assert_Recovered_Perception_4[(((int)&((Recovered_Perception *)0)->field_4) == 4) ? 1 : -1];
 typedef char assert_Recovered_Perception_8[(((int)&((Recovered_Perception *)0)->field_8) == 8) ? 1 : -1];
+typedef char assert_Recovered_Perception_C[(((int)&((Recovered_Perception *)0)->field_C) == 12) ? 1 : -1];
 typedef char assert_Recovered_Perception_18[(((int)&((Recovered_Perception *)0)->field_18) == 24) ? 1 : -1];
 typedef char assert_Recovered_Perception_1C[(((int)&((Recovered_Perception *)0)->field_1C) == 28) ? 1 : -1];
 typedef char assert_Recovered_Perception_20[(((int)&((Recovered_Perception *)0)->field_20) == 32) ? 1 : -1];

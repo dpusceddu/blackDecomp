@@ -28,8 +28,8 @@ struct Kaim_CFleeAgent {
     inline int & Field_0060() { return *(int *)((unsigned char *)this + 0x60); }
     // 0x6C: UNVERIFIED type; PS2 access offset.
     inline int & Field_006C() { return *(int *)((unsigned char *)this + 0x6C); }
-    // 0x002D16B8: UNVERIFIED signature (src/kynapse/flee_agent_2d1610.cpp).
-    int Function_002D16B8(void * argument0);
+    // 0x002D16B8: UNVERIFIED signature (src/campaign/behaviors_flee.cpp).
+    unsigned char Function_002D16B8(void * argument0);
     // 0x002D1918: UNVERIFIED signature (src/kynapse/flee_agent_2d1610.cpp).
     int Function_002D1918(void * argument0);
     // 0x002D1D48: UNVERIFIED signature (src/kynapse/flee_agent_2d1610.cpp).
@@ -57,7 +57,7 @@ struct Kaim_CFleeAgent {
         // slot 1, table+0x10, this delta 0, function 0x002D1918; UNVERIFIED signature.
         virtual int Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002D16B8; UNVERIFIED signature.
-        virtual int Slot002(void * argument0);
+        virtual unsigned char Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0038BB28; UNVERIFIED signature.
         virtual void Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00389290; UNVERIFIED signature.

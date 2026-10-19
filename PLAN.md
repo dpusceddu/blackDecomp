@@ -542,6 +542,10 @@ and library includes remain compatible. A 32-bit integer VU readback followed by
 direction-caller differences; its older float readback recipe remains for other exact consumers.
 Two matrix callers add 264 text bytes and two functions: 5,109 / 293,072 before the campaign.
 Matrix composition, inversion, axis-angle and unused container fields remain unverified.
+Context recovery now resolves typedef/using chains within each TU's dependency scopes and tolerates
+address-only assembly claims. The two new callers export `void(s128)` and `s128(pointer)`; an unrelated
+`Value` alias is not assigned a global width. Regenerating contexts and class views preserves the
+full image and every existing source address.
 
 ## Agent rules (`AGENTS.md`)
 

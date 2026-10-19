@@ -20,7 +20,7 @@ struct UnknownVtable_003DFFE0 {
     int Function_002F7F48(unsigned int argument0);
     // 0x002F8238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F8238(unsigned int argument0, unsigned int argument1);
-    // 0x002F8C38: UNVERIFIED signature (src/auto/kynapse/2f8c38.c).
+    // 0x002F8C38: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_002F8C38();
     // 0x00383D58: UNVERIFIED signature (src/auto/unclassified/383d58.c).
     int Function_00383D58(int argument0);

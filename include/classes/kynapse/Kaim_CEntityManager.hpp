@@ -20,10 +20,6 @@ struct Kaim_CEntityManager {
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0004() { return *(unsigned int *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_000C() { return *(float *)((unsigned char *)this + 0xC); }
     // 0x18: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0018() { return *(unsigned int *)((unsigned char *)this + 0x18); }
     // 0x1C: UNVERIFIED type; PS2 access offset.
@@ -60,8 +56,8 @@ struct Kaim_CEntityManager {
     unsigned char Function_0030ECA8(void * argument0);
     // 0x0030F000: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0030F000();
-    // 0x0030FE98: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0030FE98(void * argument0);
+    // 0x0030FE98: UNVERIFIED signature (src/campaign/behaviors_centitymanager_config.cpp).
+    unsigned char Function_0030FE98(void * argument0);
     // 0x00394D68: UNVERIFIED signature (src/kynapse/class_info_394d68.cpp).
     void * Function_00394D68();
 
@@ -73,7 +69,7 @@ struct Kaim_CEntityManager {
         // slot 1, table+0x10, this delta 0, function 0x0030ECA8; UNVERIFIED signature.
         virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x0030FE98; UNVERIFIED signature.
-        virtual int Slot002(void * argument0);
+        virtual unsigned char Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0030F000; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00394D68; UNVERIFIED signature.

@@ -15,44 +15,16 @@ struct Kaim_CFollowerAgent {
     // Destructor identity: 0x002D3560.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
+    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0xC: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_000C() { return *(void * *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0014() { return *(float *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0024() { return *(float *)((unsigned char *)this + 0x24); }
-    // 0x28: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0028() { return *(float *)((unsigned char *)this + 0x28); }
+    inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
     // 0x2C: UNVERIFIED type; PS2 access offset.
     inline int & Field_002C() { return *(int *)((unsigned char *)this + 0x2C); }
-    // 0x34: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0034() { return *(float *)((unsigned char *)this + 0x34); }
-    // 0x38: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0038() { return *(unsigned char *)((unsigned char *)this + 0x38); }
-    // 0x3C: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_003C() { return *(void * *)((unsigned char *)this + 0x3C); }
-    // 0x40: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0040() { return *(float *)((unsigned char *)this + 0x40); }
-    // 0x44: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0044() { return *(float *)((unsigned char *)this + 0x44); }
-    // 0x002D30A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D30A0(void * argument0);
-    // 0x002D31F0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002D30A0: UNVERIFIED signature (src/campaign/behaviors_follower.cpp).
+    unsigned char Function_002D30A0(void * argument0);
+    // 0x002D31F0: UNVERIFIED signature (include/campaign/behaviors/follower.hpp).
     int Function_002D31F0(void * argument0);
-    // 0x002D3300: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002D3300: UNVERIFIED signature (include/campaign/behaviors/follower.hpp).
     unsigned int Function_002D3300();
     // 0x002D3560: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D3560();
@@ -60,11 +32,11 @@ struct Kaim_CFollowerAgent {
     int Function_002D35B8();
     // 0x002D35C8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D35C8();
-    // 0x002D35D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D35D8();
-    // 0x002D3610: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002D35D8: UNVERIFIED signature (src/campaign/behaviors_follower.cpp).
+    unsigned char Function_002D35D8();
+    // 0x002D3610: UNVERIFIED signature (include/campaign/behaviors/follower.hpp).
     int Function_002D3610();
-    // 0x002D36A8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002D36A8: UNVERIFIED signature (include/campaign/behaviors/follower.hpp).
     int Function_002D36A8(void * argument0);
     // 0x003894D0: UNVERIFIED signature (src/kynapse/class_info_3894d0.cpp).
     void * Function_003894D0();
@@ -79,13 +51,13 @@ struct Kaim_CFollowerAgent {
         // slot 1, table+0x10, this delta 0, function 0x002D31F0; UNVERIFIED signature.
         virtual int Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002D30A0; UNVERIFIED signature.
-        virtual int Slot002(void * argument0);
+        virtual unsigned char Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0038BB28; UNVERIFIED signature.
         virtual void Slot003();
         // slot 4, table+0x28, this delta 0, function 0x003894D0; UNVERIFIED signature.
         virtual void * Slot004();
         // slot 5, table+0x30, this delta 0, function 0x002D35D8; UNVERIFIED signature.
-        virtual int Slot005();
+        virtual unsigned char Slot005();
         // slot 6, table+0x38, this delta 0, function 0x002D3610; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D35B8; UNVERIFIED signature.

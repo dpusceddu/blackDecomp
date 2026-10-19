@@ -24,12 +24,12 @@ struct Kaim_CPointMapper {
     inline int & Field_0014() { return *(int *)((unsigned char *)this + 0x14); }
     // 0x18: UNVERIFIED type; PS2 access offset.
     inline int & Field_0018() { return *(int *)((unsigned char *)this + 0x18); }
-    // 0x002DAF40: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002DAF40: UNVERIFIED signature (src/kynapse/point_mapper_configure.cpp).
     int Function_002DAF40(void * argument0);
     // 0x002DB140: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002DB140(unsigned int argument0);
-    // 0x002DB848: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002DB848(unsigned int argument0, void * argument1, void * argument2);
+    // 0x002DB848: UNVERIFIED signature (src/kynapse/point_mapper_nearest.cpp).
+    unsigned int Function_002DB848(void * argument0, void * argument1, void * argument2);
     // 0x002DB9C8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002DB9C8(unsigned int argument0);
     // 0x002DC238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -71,7 +71,7 @@ struct Kaim_CPointMapper {
         // slot 8, table+0x48, this delta 0, function 0x002DB140; UNVERIFIED signature.
         virtual int Slot008(unsigned int argument0);
         // slot 9, table+0x50, this delta 0, function 0x002DB848; UNVERIFIED signature.
-        virtual int Slot009(unsigned int argument0, void * argument1, void * argument2);
+        virtual unsigned int Slot009(void * argument0, void * argument1, void * argument2);
         // slot 10, table+0x58, this delta 0, function 0x002DC238; UNVERIFIED signature.
         virtual int Slot010(unsigned int argument0);
         // slot 11, table+0x60, this delta 0, function 0x002DB9C8; UNVERIFIED signature.
