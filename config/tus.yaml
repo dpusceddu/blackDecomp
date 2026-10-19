@@ -16818,7 +16818,7 @@ tus:
   evidence: [eh, ctor-list, ctor-end, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas, -fbyte-bool]
-  flags_basis: matched 12 of 22 functions
+  flags_basis: matched 13 of 22 functions
   data:
     .rodata: ['0x404030', '0x404100']
     .data: ['0x3e2a20', '0x3e2ab8']
@@ -16860,7 +16860,7 @@ tus:
   evidence: [eh, ctor-list, ctor-end, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas, -fbyte-bool]
-  flags_basis: matched 11 of 22 functions
+  flags_basis: matched 12 of 22 functions
   data:
     .rodata: ['0x404350', '0x4044c8']
     .data: ['0x3e3428', '0x3e3688']

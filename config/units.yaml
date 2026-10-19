@@ -46458,4 +46458,23 @@ units:
     size: 20
     symbol: func_002D5398
     status: asm
-    reason: size
+    reason: shared
+  - addr: '0x2d3d38'
+    size: 468
+    symbol: func_002D3D38
+    status: source
+- name: campaign_behaviors_flee
+  source: src/campaign/behaviors_flee.cpp
+  origin: kynapse
+  owner: cpp-campaign-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d16b8'
+    size: 604
+    symbol: func_002D16B8
+    status: source
