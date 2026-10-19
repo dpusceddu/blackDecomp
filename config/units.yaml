@@ -46586,9 +46586,9 @@ units:
     reason: campaign
   - addr: '0x2d6e48'
     size: 348
-    symbol: func_002D6E48
+    symbol: IsClear__Q24Kaim12ShooterAgentPCQ24Kaim4Vec3
     status: asm
-    reason: campaign
+    reason: data
   - addr: '0x2d7008'
     size: 96
     symbol: func_002D7008
@@ -46596,11 +46596,12 @@ units:
     reason: campaign
   - addr: '0x2d7118'
     size: 204
-    symbol: func_002D7118
-    status: asm
+    symbol: Prepare__Q24Kaim12ShooterAgent
+    status: source
     reason: campaign
   externs:
     FindByName__Q24Kaim6EnginePCc: '0x2eb398'
+    GetRecord__Q24Kaim10PerceptionPQ24Kaim5Actor: '0x310120'
     GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
     GetValue__CQ24Kaim12ChildBuffers: '0x2e3918'
     _4Kaim$gEngine: '0x3c9ed4'
@@ -46659,8 +46660,8 @@ units:
   functions:
   - addr: '0x30eae0'
     size: 452
-    symbol: func_0030EAE0
-    status: asm
+    symbol: _$_10Perception
+    status: source
     reason: campaign
   - addr: '0x30f000'
     size: 348
@@ -46682,11 +46683,18 @@ units:
     symbol: func_0030F940
     status: asm
     reason: campaign
-  - addr: '0x30fe98'
-    size: 248
-    symbol: func_0030FE98
-    status: asm
-    reason: campaign
+  externs:
+    Entity_RemoveC__FP5WorldPFP6EntityP10Perception_vP10Perception: '0x2e1098'
+    OnSubjectRemoved__FP6EntityP10Perception: '0x310190'
+    _vt$10Perception: '0x3f13f8'
+    _vt$14PerceptionBase: '0x3e0040'
+    gKaimFree: '0x3c87e0'
+    gPairDistances: '0x3ce5a0'
+    gPairExpiry: '0x3ce5a4'
+    gPairFlags: '0x3ce59c'
+    gPairLineExpiry: '0x3ce5a8'
+    gPerceptionCount: '0x3ce5ac'
+    gWorld: '0x3c9ed4'
 - name: campaign_actor_route_target
   source: src/campaign/actor_route_target.cpp
   origin: 'C++ campaign: RouteMode vtable0x3dd380; authored source and PS2 layout'
@@ -46836,3 +46844,23 @@ units:
     symbol: Update__Q213CampaignActor10Controller
     size: 388
     status: source
+- name: campaign_behaviors_centitymanager_config
+  source: src/campaign/behaviors_centitymanager_config.cpp
+  owner: cpp-campaign-w2-behaviors
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x30fe98'
+    size: 248
+    symbol: Configure__10PerceptionP12ChildBuffers
+    status: source
+    reason: campaign
+  externs:
+    GetSecond__C12ChildBuffers: '0x2e3920'
+    GetValue__C12ChildBuffers: '0x2e3918'
+    _stricmp: '0x360838'
