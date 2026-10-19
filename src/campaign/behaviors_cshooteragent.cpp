@@ -48,8 +48,24 @@ bool ShooterAgent::Configure(ChildBuffers* entry)
     }
     return BaseConfigure(entry);
 }
+bool ShooterAgent::Prepare()
+{
+    if (!target)
+        return false;
+    targetDistance = perception->GetRecord(target)->distance;
+    if (targetDistance == kDefaultFloat)
+        return false;
+    if (gunRange <= kDefaultFloat)
+        return false;
+    aimOrigin = context->actor->position;
+    if (propertyB) {
+        Vec3 position(*(const Vec3*)&propertyB->x);
+        aimOrigin = position;
+    }
+    return true;
+}
+// Unmatched: IsClear code matches; its mask shares ownership with a following RTTI name.
 // Unmatched: Init retains different validation-result scheduling.
 // Unmatched: Update needs the controller and virtual-call context.
 // Unmatched: Aim needs the original scalar/vector temporary lifetimes.
-// Unmatched: IsClear needs the legacy list-iterator cleanup context.
 }

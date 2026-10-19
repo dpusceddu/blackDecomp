@@ -17,6 +17,8 @@ namespace Kaim {
 
 struct Vec3 {
     float x, y, z;
+    Vec3() {}
+    Vec3(const Vec3& v) : x(v.x),y(v.y),z(v.z) {}
     void Set(float a, float b, float c)
     {
         x = a;
@@ -50,6 +52,14 @@ template <class T> struct List : PolyRoot {
     virtual ~List() {}
     ListNode<T>* storage;
     ListNode<T>* head;
+};
+
+struct Actor;
+struct ActorIterator : PolyRoot {
+    ListNode<Actor*>* node;
+    ActorIterator(ListNode<Actor*>* n) : node(n) {}
+    ~ActorIterator() {}
+    ActorIterator& operator++() { node=node->next;return *this; }
 };
 
 struct ActionBank {
@@ -138,7 +148,7 @@ struct PerceptionRecord {
 struct Perception {
     PerceptionRecord* GetRecord(Actor* actor);
 };
-static const unsigned int gTargetFlag = 1;
+extern const unsigned int gTargetFlag;
 
 struct Engine {
     unsigned char unknown00[0x0c];

@@ -46589,9 +46589,9 @@ units:
     reason: campaign
   - addr: '0x2d6e48'
     size: 348
-    symbol: func_002D6E48
+    symbol: IsClear__Q24Kaim12ShooterAgentPCQ24Kaim4Vec3
     status: asm
-    reason: campaign
+    reason: data
   - addr: '0x2d7008'
     size: 96
     symbol: func_002D7008
@@ -46599,11 +46599,12 @@ units:
     reason: campaign
   - addr: '0x2d7118'
     size: 204
-    symbol: func_002D7118
-    status: asm
+    symbol: Prepare__Q24Kaim12ShooterAgent
+    status: source
     reason: campaign
   externs:
     FindByName__Q24Kaim6EnginePCc: '0x2eb398'
+    GetRecord__Q24Kaim10PerceptionPQ24Kaim5Actor: '0x310120'
     GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
     GetValue__CQ24Kaim12ChildBuffers: '0x2e3918'
     _4Kaim$gEngine: '0x3c9ed4'
