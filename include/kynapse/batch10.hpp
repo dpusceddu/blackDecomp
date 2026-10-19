@@ -96,10 +96,11 @@ struct Creatable {
 };
 
 struct TypeInfo {
-    unsigned char unknown00[4];
+    // PS2: index and factory are at +0 and +4 (verified by CreatableCache::Select).
     int id;
     Creatable* (*create)();
 };
+typedef char VerifiedTypeInfoSize[sizeof(TypeInfo) == 8 ? 1 : -1];
 
 struct CreatableCache {
     unsigned char unknown00[0x18];

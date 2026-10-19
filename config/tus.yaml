@@ -16874,7 +16874,7 @@ tus:
   evidence: [eh, ctor-list, ctor-end, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 11 of 19 functions
+  flags_basis: matched 13 of 19 functions
   data:
     .rodata: ['0x4044c8', '0x404540']
     .data: ['0x3e3688', '0x3e3888']
@@ -16981,7 +16981,7 @@ tus:
   evidence: [eh, ctor-list, ctor-end, calls]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 4 of 5 functions
+  flags_basis: matched 5 of 5 functions
   data:
     .rodata: ['0x404b60', '0x404b70']
     .bss: ['0x44fb00', '0x44fb08']
@@ -17199,7 +17199,7 @@ tus:
   evidence: [eh, ctor-list, ctor-end, calls]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 4 of 5 functions
+  flags_basis: matched 5 of 5 functions
   data:
     .rodata: ['0x405790', '0x4057a8']
     .bss: ['0x450c80', '0x450c88']
@@ -17742,7 +17742,7 @@ tus:
   evidence: [eh, ctor-list, ctor-end, join-hard, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas, -fbyte-bool]
-  flags_basis: matched 28 of 56 functions
+  flags_basis: matched 29 of 56 functions
   data:
     .rodata: ['0x407fc0', '0x4083a0']
     .data: ['0x3efe10', '0x3f0760']
@@ -29605,8 +29605,8 @@ tus:
   confidence: exact
   evidence: [eh, proposed-cut]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, -fbyte-bool]
+  flags_basis: matched 1 of 1 functions
 - name: linkonce_38f000
   kind: linkonce
   library: linkonce

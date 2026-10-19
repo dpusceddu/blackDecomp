@@ -45059,3 +45059,106 @@ units:
     symbol: func_00386F98
     size: 136
     status: source
+- name: kynapse_route_cache_context
+  source: src/kynapse/route_cache.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x304cb0'
+    symbol: Select__14CreatableCacheP8TypeInfo
+    size: 116
+    status: source
+- name: kynapse_hidden_name_context
+  source: src/kynapse/hidden_name_condition.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x38efb0'
+    symbol: Kaim_IsHiddenName__FPvPC11NamedObject
+    size: 80
+    status: source
+  externs:
+    GetName__C11NamedObject: '0x2e3920'
+- name: kynapse_path_agent_context
+  source: src/kynapse/path_agent.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d5498'
+    symbol: Init__Q24Kaim12PathWayAgentPQ24Kaim12ChildBuffers
+    size: 436
+    status: source
+  externs:
+    ConfigureAll__Q24Kaim8BehaviorPQ24Kaim12ChildBuffers: '0x2e0018'
+    FindRegistry__Q24Kaim7Engine2PQ24Kaim9ClassInfo: '0x2ec058'
+    FindTarget__Q24Kaim7ContextPQ24Kaim9ClassInfo: '0x2e1c58'
+    GetAuthoredProperty__Q24Kaim5ActorPCv: '0x2e4ce0'
+    GetItem__Q24Kaim10ActionBankPCv: '0x2dfe08'
+    Wrap__Q24Kaim12PathWayAgent: '0x2d6480'
+    _4Kaim$gEngine: '0x3c9ed4'
+    _4Kaim$gKeyCrouch: '0x44f590'
+    _4Kaim$gKeyForward: '0x44f9f0'
+    _4Kaim$gKeyJump: '0x44f6a8'
+    _4Kaim$gKeyLook: '0x44fb08'
+    _4Kaim$gKeySpeed: '0x4504e0'
+    _4Kaim$gKeyTurn: '0x44f478'
+    _4Kaim$gKeyYaw: '0x44f7c0'
+    _4Kaim$gPathClass: '0x450eb8'
+    _4Kaim$gTargetClass: '0x4512b0'
+- name: kynapse_parameter_float_assignment
+  source: src/kynapse/parameter_changed_int.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d8200'
+    symbol: __as__15ParamChangedIntRC13ParameterRoot
+    size: 124
+    status: source
+- name: kynapse_parameter_pair_assignment
+  source: src/kynapse/parameter_changed_pair.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d9de8'
+    symbol: __as__16ParamChangedPairRC13ParameterRoot
+    size: 132
+    status: source
+- name: kynapse_cursor_context
+  source: src/kynapse/cursor_wrap.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d6480'
+    symbol: Wrap__6Cursor
+    size: 84
+    status: source

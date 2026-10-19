@@ -49,8 +49,9 @@ PARAMETER_CLASS(ParamChangedMixed)
 
 PARAMETER_CLASS(ParamChangedInt)
     bool changed;
-    int a;
-    void SetA(int v);
+    // Provisional class name; the matching PS2 operator copies a float payload.
+    float a;
+    void SetA(float v) { a = v; changed = true; }
 
 };
 
@@ -79,11 +80,11 @@ PARAMETER_CLASS(ParamChangedByte)
 
 PARAMETER_CLASS(ParamChangedPair)
     bool changed;
-    int a;
-    int b;
-    void SetA(int v);
+    float a;
+    float b;
+    void SetA(float v) { a = v; changed = true; }
 
-    void SetB(int v);
+    void SetB(float v) { b = v; changed = true; }
 
 };
 

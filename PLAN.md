@@ -349,6 +349,44 @@ pass. Prioritize correct address/ABI/control-flow recovery, C++ cleanup and cons
 before further campaigns. The evidence demonstrates several source-generation causes; it does not
 establish one explanation for all 36 earlier large-function failures.
 
+### Kynapse context follow-up
+
+Revalidated the 635 Xbox source proofs and reproduced all 68 emitted calibration bodies. Selected
+all 50 confirmed PS2 entries above 300 B plus 20 smaller controls. Two 400-byte entries actually pair
+five-argument PS2 base constructors with three-argument Xbox wrappers: exclude them. Only one valid
+entry exceeds 1,000 B. The old audit already used whole Xbox modules. Exact counts, including existing
+source controls, are:
+
+| PS2 code size | Valid cases | (a) Old audit | (b) TU context | (c) PS2 declarations/helpers | (d) Best flags |
+| --- | --- | --- | --- | --- | --- |
+| ≤300 B | 20 | 0 | 0 | 4 | 4 |
+| 301–1,000 B | 47 | 0 | 0 | 2 | 2 |
+| >1,000 B | 1 | 0 | 0 | 0 | 0 |
+
+TU tests included available definitions; incompatible recovered headers required separate declaration
+views, so the original shared header environment remains unproven. The parameter TU included 24/40
+functions and all 19 existing source entries; grouping did not change its constructor. Summed
+instruction diffs fell 3,092→3,083→2,478→2,307. Corrections matched a 436-byte initializer (13→0,
+leading polymorphic bases), two assignments (2/6→0, float payloads), a cache method (2→0, key layout),
+and a callback (2→0, unused first argument). Correct array element declarations reproduced the
+already-sourced 832-byte destructor. Helper visibility reduced another operator 19→4; the importer
+now preserves out-of-class inline definitions. Flags added no matches; retain SN 1.36 defaults and
+verified ABI flags. Xbox byte identity does not uniquely determine PS2 declarations or source forms.
+
+The 2,128-byte constructor stayed at 27 diffs in (a)–(d). A separate shared-index/accessor source
+variant reproduces every meaningful instruction; SN inserts two cleanup-loop NOPs where retail
+has one. Label-aware six-instruction-loop padding reproduces the complete 2,128-byte span exactly.
+This diagnostic is excluded from source counts: encoding branches directly bypasses assembler hazard
+checks. Large C++ instruction selection is reachable here; stock-toolchain byte identity above 1 KB
+remains 0/1. Recover the assembler padding policy before generalizing or estimating giant throughput.
+
+Integrated five selected matches plus the independently verified 84-byte cursor helper: +6 functions,
++972 code bytes / 992 text-span bytes, reaching 5,014 / 275,768 (42.14% / 10.16%). About 1.2 agent-hours
+including coordination/verification yielded roughly 0.8 kB per agent-hour with existing Xbox source;
+this is not a from-scratch reconstruction rate. The experiment used 2,339 compiler jobs and 15 assembler
+diagnostics. All five retail checks and 119 tool tests pass. Detailed fixtures remain in ignored build
+output. The study is complete; no further campaign is running.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.

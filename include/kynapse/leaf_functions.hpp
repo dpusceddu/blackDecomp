@@ -30,6 +30,7 @@ struct NamedObject {
 
 
 bool __stdcall Kaim_IsHiddenName(const NamedObject* object);
+bool Kaim_IsHiddenName(void* context, const NamedObject* object);
 
 
 struct ItemList {
