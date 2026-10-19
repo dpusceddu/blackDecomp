@@ -46690,3 +46690,19 @@ units:
     symbol: func_0030FE98
     status: asm
     reason: campaign
+- name: campaign_actor_route_target
+  source: src/campaign/actor_route_target.cpp
+  origin: 'C++ campaign: RouteMode vtable0x3dd380; authored source and PS2 layout'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  externs:
+    PointCount__CQ29BlackGame12RouteRequest: '0x179cd0'
+    RoutePointAt__9BlackGamePCQ29BlackGame12RouteRequesti: '0x179ce0'
+  functions:
+  - addr: '0x1922e8'
+    symbol: GetTarget__CQ29BlackGame9RouteMode
+    size: 148
+    status: source
