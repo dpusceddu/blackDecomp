@@ -33,7 +33,7 @@ struct SearchGraph {
     SearchNode *nodes;
     unsigned char unknown1c[0xc];
     unsigned int edgeCapacity;
-    unsigned char unknown2c[8];
+    unsigned int edgeSlots, edgeCount;
     SearchEdge *edges;
     unsigned char unknown38[0x14];
     float *edgeLengths;

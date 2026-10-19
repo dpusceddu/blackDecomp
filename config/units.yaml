@@ -47081,3 +47081,45 @@ units:
     _vt$Q24Kaim7CObject: '0x3e0040'
     _vt$Q34Kaim13CGraphManager9CGraphMap: '0x3eda70'
     terminate__Fv: '0x36f978'
+- name: context_graph_accessways
+  source: src/campaign/graph_accessways.cpp
+  origin: kynapse
+  owner: context-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2fcaa8'
+    symbol: func_002FCAA8
+    size: 168
+    status: source
+  - addr: '0x2fcb50'
+    symbol: func_002FCB50
+    size: 876
+    status: asm
+  - addr: '0x2fcec0'
+    symbol: func_002FCEC0
+    size: 968
+    status: asm
+  - addr: '0x2fd288'
+    symbol: func_002FD288
+    size: 532
+    status: asm
+  - addr: '0x2fd4a0'
+    symbol: func_002FD4A0
+    size: 732
+    status: asm
+  - addr: '0x2fd908'
+    symbol: func_002FD908
+    size: 80
+    status: source
+  - addr: '0x392e50'
+    symbol: func_00392E50
+    size: 940
+    status: asm
+  externs:
+    __throw: '0x292b40'
+    terminate__Fv: '0x36f978'
