@@ -46376,10 +46376,15 @@ units:
   flags:
   - -O2
   - -G0
+  - -ffunction-sections
   functions:
   - addr: '0x213758'
     symbol: Function_00213758__Q215BlackPS2Classes22UnknownVtable_003E0EB8
     size: 480
+    status: source
+  - addr: '0x2134f8'
+    symbol: Function_002134F8__Q215BlackPS2Classes22UnknownVtable_003E0EB8
+    size: 608
     status: source
   assembler_evidence:
     strength: weak
