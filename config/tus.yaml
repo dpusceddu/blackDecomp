@@ -1833,8 +1833,8 @@ tus:
   confidence: low
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]
+  flags_basis: matched 1 of 2 functions
 - name: tu_135940
   kind: isolated
   library: game
