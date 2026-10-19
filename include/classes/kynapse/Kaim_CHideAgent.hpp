@@ -20,8 +20,8 @@ struct Kaim_CHideAgent {
     inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
     // 0x002D3D38: UNVERIFIED signature (src/campaign/behaviors_hide.cpp).
     unsigned char Function_002D3D38(void * argument0);
-    // 0x002D3F10: UNVERIFIED signature (src/kynapse/hide_agent_2d3c90.cpp).
-    int Function_002D3F10(void * argument0);
+    // 0x002D3F10: UNVERIFIED signature (src/context/behaviors_hide_retry.cpp).
+    unsigned char Function_002D3F10(void * argument0);
     // 0x002D42C8: UNVERIFIED signature (src/kynapse/hide_agent_2d3c90.cpp).
     int Function_002D42C8();
     // 0x002D4B68: UNVERIFIED signature (src/kynapse/hide_agent_2d3c90.cpp).
@@ -47,7 +47,7 @@ struct Kaim_CHideAgent {
         // slot 0, table+0x8, this delta 0, function 0x002D50E8; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002D3F10; UNVERIFIED signature.
-        virtual int Slot001(void * argument0);
+        virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002D3D38; UNVERIFIED signature.
         virtual unsigned char Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x002D51C0; UNVERIFIED signature.

@@ -10,8 +10,6 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DD380 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x30: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0030() { return *(int *)((unsigned char *)this + 0x30); }
     // 0x34: UNVERIFIED type; PS2 access offset.
     inline int & Field_0034() { return *(int *)((unsigned char *)this + 0x34); }
     // 0x90: UNVERIFIED type; PS2 access offset.
@@ -40,8 +38,8 @@ struct UnknownVtable_003DD380 {
     unsigned char Function_00192DC0();
     // 0x00192E50: UNVERIFIED signature (src/game/ai_movement_modes_192dc0.cpp).
     void Function_00192E50();
-    // 0x00192FB0: UNVERIFIED signature (ghidra).
-    int Function_00192FB0(long argument0);
+    // 0x00192FB0: UNVERIFIED signature (src/campaign/actor_route_wave3.cpp).
+    unsigned char Function_00192FB0(S128 argument0);
 
     // Vtable 0x003DD380; vptr field offset unknown; referenced zero RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -55,7 +53,7 @@ struct UnknownVtable_003DD380 {
         // slot 3, table+0x20, this delta 0, function 0x00192140; UNVERIFIED signature.
         virtual void Slot003(S128 argument0);
         // slot 4, table+0x28, this delta 0, function 0x00192FB0; UNVERIFIED signature.
-        virtual int Slot004(long argument0);
+        virtual unsigned char Slot004(S128 argument0);
         // slot 5, table+0x30, this delta 0, function 0x001922E8; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual S128 Slot005();
         // slot 6, table+0x38, this delta 0, function 0x00192DC0; UNVERIFIED signature.

@@ -78,8 +78,8 @@ struct Kaim_CPathWayAgent {
     unsigned char Function_002D63C0();
     // 0x002D63D0: UNVERIFIED signature (src/kynapse/predicates_2d63c0.cpp).
     unsigned char Function_002D63D0();
-    // 0x002D63E0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D63E0();
+    // 0x002D63E0: UNVERIFIED signature (src/context/behaviors_path_controls.cpp).
+    unsigned char Function_002D63E0();
     // 0x002D6440: UNVERIFIED signature (src/tu/kynapse_tu_2d53f0.c).
     unsigned int Function_002D6440();
     // 0x002D6460: UNVERIFIED signature (src/kynapse/predicates_2d6460.cpp).
@@ -109,7 +109,7 @@ struct Kaim_CPathWayAgent {
         // slot 8, table+0x48, this delta 0, function 0x002D63D0; UNVERIFIED signature.
         virtual unsigned char Slot008();
         // slot 9, table+0x50, this delta 0, function 0x002D63E0; UNVERIFIED signature.
-        virtual int Slot009();
+        virtual unsigned char Slot009();
         // slot 10, table+0x58, this delta 0, function 0x002D59F0; UNVERIFIED signature.
         virtual int Slot010(unsigned int argument0);
     };

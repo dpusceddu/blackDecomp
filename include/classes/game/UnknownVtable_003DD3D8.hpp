@@ -16,20 +16,20 @@ struct UnknownVtable_003DD3D8 {
     int Function_001723E8();
     // 0x00172518: UNVERIFIED signature (src/auto/unclassified/172518.c).
     int Function_00172518();
-    // 0x002FF148: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002FF148();
+    // 0x002FF148: UNVERIFIED signature (src/campaign/graph_pathfinder.cpp).
+    void Function_002FF148();
     // 0x002FF250: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002FF250(void * argument0);
     // 0x002FF890: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002FF890(void * argument0);
     // 0x003003B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003003B0(void * argument0);
-    // 0x00301D60: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00301D60();
+    // 0x00301D60: UNVERIFIED signature (src/campaign/graph_pathfinder.cpp).
+    void Function_00301D60();
     // 0x00303388: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00303388();
-    // 0x00303630: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00303630(signed char * argument0);
+    // 0x00303630: UNVERIFIED signature (src/campaign/graph_pathfinder.cpp).
+    unsigned char Function_00303630(signed char * argument0);
     // 0x003037B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003037B8(unsigned int argument0);
     // 0x00304BE8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -73,7 +73,7 @@ struct UnknownVtable_003DD3D8 {
         // slot 2, table+0x18, this delta 0, function 0x002FF890; UNVERIFIED signature.
         virtual int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x002FF148; UNVERIFIED signature.
-        virtual int Slot003();
+        virtual void Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00383FB8; UNVERIFIED signature.
         virtual int * Slot004();
         // slot 5, table+0x30, this delta 0, function 0x00304EE8; UNVERIFIED signature.
@@ -91,7 +91,7 @@ struct UnknownVtable_003DD3D8 {
         // slot 11, table+0x60, this delta 0, function 0x00303388; UNVERIFIED signature.
         virtual unsigned int Slot011();
         // slot 12, table+0x68, this delta 0, function 0x00303630; UNVERIFIED signature.
-        virtual int Slot012(signed char * argument0);
+        virtual unsigned char Slot012(signed char * argument0);
         // slot 13, table+0x70, this delta 0, function 0x003037B8; UNVERIFIED signature.
         virtual int Slot013(unsigned int argument0);
         // slot 14, table+0x78, this delta 0, function 0x00304CB0; UNVERIFIED signature.
@@ -113,7 +113,7 @@ struct UnknownVtable_003DD3D8 {
         // slot 22, table+0xB8, this delta 0, function 0x003003B0; UNVERIFIED signature.
         virtual int Slot022(void * argument0);
         // slot 23, table+0xC0, this delta 0, function 0x00301D60; UNVERIFIED signature.
-        virtual unsigned int Slot023();
+        virtual void Slot023();
         // slot 24, table+0xC8, this delta 0, function 0x001723E8; UNVERIFIED signature.
         virtual int Slot024();
     };

@@ -15,85 +15,9 @@ struct Kaim_CGapDynamicAvoidance {
     // Destructor identity: 0x00306FD0.
     // Destructor identity: 0x00306FD0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0014() { return *(float *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0024() { return *(float *)((unsigned char *)this + 0x24); }
-    // 0x28: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0028() { return *(float *)((unsigned char *)this + 0x28); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_002C() { return *(unsigned char *)((unsigned char *)this + 0x2C); }
-    // 0x34: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0034() { return *(float *)((unsigned char *)this + 0x34); }
-    // 0x38: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0038() { return *(float *)((unsigned char *)this + 0x38); }
-    // 0x3C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_003C() { return *(float *)((unsigned char *)this + 0x3C); }
-    // 0x40: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0040() { return *(float *)((unsigned char *)this + 0x40); }
-    // 0x44: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0044() { return *(float *)((unsigned char *)this + 0x44); }
-    // 0x48: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0048() { return *(float *)((unsigned char *)this + 0x48); }
-    // 0x4C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_004C() { return *(float *)((unsigned char *)this + 0x4C); }
-    // 0x50: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0050() { return *(float *)((unsigned char *)this + 0x50); }
-    // 0x54: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0054() { return *(float *)((unsigned char *)this + 0x54); }
-    // 0x58: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0058() { return *(float *)((unsigned char *)this + 0x58); }
-    // 0x5C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_005C() { return *(float *)((unsigned char *)this + 0x5C); }
-    // 0x60: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0060() { return *(float *)((unsigned char *)this + 0x60); }
-    // 0x64: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0064() { return *(float *)((unsigned char *)this + 0x64); }
-    // 0x78: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0078() { return *(float *)((unsigned char *)this + 0x78); }
-    // 0x7C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_007C() { return *(float *)((unsigned char *)this + 0x7C); }
-    // 0x80: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0080() { return *(float *)((unsigned char *)this + 0x80); }
-    // 0x84: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0084() { return *(float *)((unsigned char *)this + 0x84); }
-    // 0x88: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0088() { return *(float *)((unsigned char *)this + 0x88); }
-    // 0x90: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0090() { return *(float *)((unsigned char *)this + 0x90); }
-    // 0x94: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0094() { return *(int *)((unsigned char *)this + 0x94); }
-    // 0xA0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_00A0() { return *(unsigned int *)((unsigned char *)this + 0xA0); }
-    // 0xAC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00AC() { return *(float *)((unsigned char *)this + 0xAC); }
-    // 0xB0: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00B0() { return *(float *)((unsigned char *)this + 0xB0); }
-    // 0xB4: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00B4() { return *(float *)((unsigned char *)this + 0xB4); }
-    // 0xBC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00BC() { return *(float *)((unsigned char *)this + 0xBC); }
-    // 0xC0: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00C0() { return *(float *)((unsigned char *)this + 0xC0); }
-    // 0xC4: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00C4() { return *(float *)((unsigned char *)this + 0xC4); }
-    // 0xC8: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00C8() { return *(float *)((unsigned char *)this + 0xC8); }
-    // 0xCC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00CC() { return *(float *)((unsigned char *)this + 0xCC); }
-    // 0xF8: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00F8() { return *(float *)((unsigned char *)this + 0xF8); }
     // 0x00306FD0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00306FD0();
-    // 0x00307970: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x00307970: UNVERIFIED signature (include/context/behaviors/gap.hpp).
     unsigned char Function_00307970(void * argument0, void * argument1);
     // 0x0030B4A8: UNVERIFIED signature (src/kynapse/avoidance_configuration.cpp).
     unsigned char Function_0030B4A8(void * argument0);

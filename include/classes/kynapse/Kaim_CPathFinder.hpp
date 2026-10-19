@@ -12,6 +12,7 @@ namespace BlackPS2Classes {
 // RTTI base: Kaim_IPathFinder; offset 0; public nonvirtual.
 struct Kaim_CPathFinder {
     typedef Hierarchy_Kaim_CPathFinder Hierarchy; // Semantic bases, not an object layout.
+    // Constructor identity: 0x002FECB8; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x002FEFB0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
@@ -28,20 +29,20 @@ struct Kaim_CPathFinder {
     inline void * & Field_01B0() { return *(void * *)((unsigned char *)this + 0x1B0); }
     // 0x002FEFB0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002FEFB0();
-    // 0x002FF148: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002FF148();
+    // 0x002FF148: UNVERIFIED signature (src/campaign/graph_pathfinder.cpp).
+    void Function_002FF148();
     // 0x002FF250: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002FF250(void * argument0);
     // 0x002FF890: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002FF890(void * argument0);
     // 0x003003B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003003B0(void * argument0);
-    // 0x00301D60: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00301D60();
+    // 0x00301D60: UNVERIFIED signature (src/campaign/graph_pathfinder.cpp).
+    void Function_00301D60();
     // 0x00303388: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00303388();
-    // 0x00303630: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00303630(signed char * argument0);
+    // 0x00303630: UNVERIFIED signature (src/campaign/graph_pathfinder.cpp).
+    unsigned char Function_00303630(signed char * argument0);
     // 0x003037B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003037B8(unsigned int argument0);
     // 0x00304BE8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -87,7 +88,7 @@ struct Kaim_CPathFinder {
         // slot 2, table+0x18, this delta 0, function 0x002FF890; UNVERIFIED signature.
         virtual int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x002FF148; UNVERIFIED signature.
-        virtual int Slot003();
+        virtual void Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00393928; UNVERIFIED signature.
         virtual void * Slot004();
         // slot 5, table+0x30, this delta 0, function 0x00304EE8; UNVERIFIED signature.
@@ -105,7 +106,7 @@ struct Kaim_CPathFinder {
         // slot 11, table+0x60, this delta 0, function 0x00303388; UNVERIFIED signature.
         virtual unsigned int Slot011();
         // slot 12, table+0x68, this delta 0, function 0x00303630; UNVERIFIED signature.
-        virtual int Slot012(signed char * argument0);
+        virtual unsigned char Slot012(signed char * argument0);
         // slot 13, table+0x70, this delta 0, function 0x003037B8; UNVERIFIED signature.
         virtual int Slot013(unsigned int argument0);
         // slot 14, table+0x78, this delta 0, function 0x00304CB0; UNVERIFIED signature.
@@ -127,7 +128,7 @@ struct Kaim_CPathFinder {
         // slot 22, table+0xB8, this delta 0, function 0x003003B0; UNVERIFIED signature.
         virtual int Slot022(void * argument0);
         // slot 23, table+0xC0, this delta 0, function 0x00301D60; UNVERIFIED signature.
-        virtual unsigned int Slot023();
+        virtual void Slot023();
         // slot 24, table+0xC8, this delta 0, function 0x00305428; UNVERIFIED signature.
         virtual void Slot024(int argument0);
     };

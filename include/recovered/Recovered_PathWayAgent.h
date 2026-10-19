@@ -10,12 +10,12 @@ typedef struct Recovered_PathWayAgent {
     void * field_C; /* PS2 +0xC */
     u32 field_10; /* PS2 +0x10 */
     u32 field_14; /* PS2 +0x14 */
-    u32 field_18; /* PS2 +0x18 */
-    u32 field_1C; /* PS2 +0x1C */
+    s32 field_18; /* PS2 +0x18 */
+    s32 field_1C; /* PS2 +0x1C */
     u32 field_20; /* PS2 +0x20 */
     u32 field_24; /* PS2 +0x24 */
-    u32 field_28; /* PS2 +0x28 */
-    u32 field_2C; /* PS2 +0x2C */
+    s32 field_28; /* PS2 +0x28 */
+    s32 field_2C; /* PS2 +0x2C */
     u32 field_30; /* PS2 +0x30 */
     u32 field_34; /* PS2 +0x34 */
     s32 field_38; /* PS2 +0x38 */

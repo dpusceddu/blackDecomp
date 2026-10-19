@@ -16,12 +16,8 @@ struct Kaim_IPathFinder {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
     // 0xC: UNVERIFIED type; PS2 access offset.
     inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
     // 0x14: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
     // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
