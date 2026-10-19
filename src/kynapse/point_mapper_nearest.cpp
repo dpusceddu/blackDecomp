@@ -1,19 +1,19 @@
 #include "kynapse/point_mapper.hpp"
 
 extern const float D_00405B60;
-extern "C" unsigned int func_002DB848(PointMapper *self, PointContainer *source, PointContainer *target, const Vec3 *point) {
+unsigned int PointMapper::FindTarget(PointContainer *source, PointContainer *target, const Vec3 *point) {
     unsigned int best = (unsigned int)-1;
     float bestDistance = D_00405B60;
     for (unsigned int i = 0; i < target->Count(); ++i) {
         const Vec3 *candidate = target->Get(i);
         float absolute = candidate->y-point->y;
         if (absolute<0.0f) absolute = -absolute;
-        if (!(absolute>self->maxDeltaUp)) {
+        if (!(absolute>this->maxDeltaUp)) {
             float value = (candidate->z - point->z) * (candidate->z - point->z) +
                           (candidate->x - point->x) * (candidate->x - point->x) +
                           (candidate->y - point->y) * (candidate->y - point->y);
             if (!(value > bestDistance) &&
-                (D_00451228.visible(point, candidate, self->entityWidth, 0, 2) & 255) &&
+                (D_00451228.visible(point, candidate, this->entityWidth, 0, 2) & 255) &&
                 value < bestDistance) {
                 bestDistance = value;
                 best = i;
