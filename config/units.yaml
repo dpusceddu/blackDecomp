@@ -47602,3 +47602,39 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: context_wave3_graphics_overlay
+  source: src/campaign/graphics_overlay_pending.cpp
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1f1c10'
+    size: 300
+    symbol: func_001F1C10
+    status: asm
+    reason: claim
+  - addr: '0x1f7c48'
+    size: 1264
+    symbol: func_001F7C48
+    status: asm
+    reason: claim
+  - addr: '0x1f8138'
+    size: 160
+    symbol: func_001F8138
+    status: asm
+    reason: claim
+- name: context_wave3_graphics_notifications
+  source: src/campaign/graphics_notifications_pending.cpp
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1fa658'
+    size: 1344
+    symbol: func_001FA658
+    status: asm
+    reason: claim
