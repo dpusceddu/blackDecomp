@@ -24737,7 +24737,7 @@ units:
 - name: point_mapper_factory
   source: src/kynapse/point_mapper_factory.cpp
   origin: kynapse
-  owner: wave1-kynapse
+  owner: cpp-campaign-graph
   flags:
   - -O2
   - -G0
@@ -24789,11 +24789,11 @@ units:
     symbol: func_002DC8A0
     size: 140
     status: source
-  owner: wave1-kynapse
+  owner: cpp-campaign-graph
 - name: point_mapper_configure
   source: src/kynapse/point_mapper_configure.cpp
   origin: kynapse
-  owner: wave1-kynapse
+  owner: cpp-campaign-graph
   flags:
   - -O2
   - -G0
@@ -24801,13 +24801,13 @@ units:
   - -fbyte-bool
   functions:
   - addr: '0x2daf40'
-    symbol: func_002DAF40
+    symbol: Configure__11PointMapperP12ChildBuffers
     size: 512
     status: source
 - name: point_mapper_nearest
   source: src/kynapse/point_mapper_nearest.cpp
   origin: kynapse
-  owner: wave1-kynapse
+  owner: cpp-campaign-graph
   flags:
   - -O2
   - -G0
@@ -24815,7 +24815,7 @@ units:
   - -fbyte-bool
   functions:
   - addr: '0x2db848'
-    symbol: func_002DB848
+    symbol: FindTarget__11PointMapperP14PointContainerT1PC4Vec3
     size: 380
     status: source
 - name: kynapse_factories_2dca40
@@ -46283,3 +46283,80 @@ units:
     symbol: Update__Q216BlackPS2Campaign12ActorEntriesf
     size: 448
     status: source
+- name: campaign_graph_cpointmapper
+  source: src/campaign/graph_cpointmapper.cpp
+  origin: kynapse
+  owner: cpp-campaign-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2db140'
+    symbol: func_002DB140
+    size: 1800
+    status: asm
+  - addr: '0x2db9c8'
+    symbol: func_002DB9C8
+    size: 788
+    status: asm
+  - addr: '0x2dc238'
+    symbol: func_002DC238
+    size: 1448
+    status: asm
+  - addr: '0x2dc930'
+    symbol: func_002DC930
+    size: 188
+    status: asm
+  - addr: '0x38e768'
+    symbol: Function_0038E768__Q215BlackPS2Classes17Kaim_CPointMapperPv
+    size: 80
+    status: source
+- name: campaign_graph_cpathcostdata
+  source: src/campaign/graph_cpathcostdata.cpp
+  origin: kynapse
+  owner: cpp-campaign-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2f3770'
+    symbol: func_002F3770
+    size: 472
+    status: asm
+  - addr: '0x2f3ab0'
+    symbol: func_002F3AB0
+    size: 1612
+    status: asm
+  - addr: '0x2f4100'
+    symbol: func_002F4100
+    size: 348
+    status: asm
+- name: campaign_graph_castardata
+  source: src/campaign/graph_castardata.cpp
+  origin: kynapse
+  owner: cpp-campaign-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2fda40'
+    symbol: func_002FDA40
+    size: 360
+    status: asm
+  - addr: '0x2fdf40'
+    symbol: func_002FDF40
+    size: 1072
+    status: asm
+  - addr: '0x2fe370'
+    symbol: func_002FE370
+    size: 508
+    status: asm
