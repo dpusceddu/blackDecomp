@@ -46399,8 +46399,7 @@ units:
   - addr: '0x2d30a0'
     size: 336
     symbol: func_002D30A0
-    status: asm
-    reason: campaign
+    status: source
   - addr: '0x2d31f0'
     size: 268
     symbol: func_002D31F0
@@ -46439,3 +46438,19 @@ units:
     symbol: Collision__Q216BlackPS2Campaign12ActorEntriesPv
     size: 396
     status: source
+- name: campaign_behaviors_hide
+  source: src/campaign/behaviors_hide.cpp
+  origin: kynapse
+  owner: cpp-campaign-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d5398'
+    size: 20
+    symbol: func_002D5398
+    status: asm
+    reason: size
