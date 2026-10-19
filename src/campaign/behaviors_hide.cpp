@@ -69,7 +69,6 @@ inline bool BaseConfigure(ChildBuffers* entry) {
         return BaseConfigure(entry);
     }
 
-// Unmatched: Reset has an exact body; its float shares an owned data run with unrelated RTTI.
 
 // Unmatched: Init retains allocator and validation-result scheduling differences.
 // Unmatched: Update needs the original controller and empty-base cleanup context.
