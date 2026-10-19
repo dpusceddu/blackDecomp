@@ -26,6 +26,12 @@ def save(units):
     out = []
     for u in units:
         d = {k: v for k, v in u.items() if k not in ('compiler',) or v != 'ee-gcc2.95.3-136'}
+        choices = [f.split('=', 1)[1] for f in u.get('flags', []) if f.startswith('--assembler=')]
+        if choices:
+            d['assembler_evidence'] = dict(strength='weak', basis='individually verified output',
+                                           historical_provenance='unresolved')
+        else:
+            d.pop('assembler_evidence', None)
         d['functions'] = [{k: (hex(v) if k == 'addr' else v) for k, v in f.items()} for f in u['functions']]
         if not d.get('externs'):
             d.pop('externs', None)

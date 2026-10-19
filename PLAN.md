@@ -459,6 +459,35 @@ functions (128 code bytes) now use generated C++ method declarations and remain 
 All existing source addresses are retained, all five retail images remain identical, and generated-header
 compilation, repeatability checks and 218 tests pass. The enabling tasks end here; no campaign starts.
 
+### Assembler provenance and C++ campaign
+
+Mapped all 1,416 retail short backward branches to TU/library ranges; 1,278 are SN-assigned. Among
+candidate-padded forms there are 613 six-word and 98 seven-word loops. The principal library counts are:
+
+| Library | Six words | Seven words |
+| --- | ---: | ---: |
+| Game | 409 | 9 |
+| Kynapse | 73 | 0 |
+| RenderWare Core | 0 | 77 |
+| RenderWare Audio | 0 | 7 |
+| Animation | 22 | 4 |
+| APT | 25 | 1 |
+| Physics | 28 | 0 |
+
+Three mapped TUs mix forms (`tu_1cff78`, `apt/tu_230710`, `tu_270138`). Their conflicting examples
+involve COP0 polling or inner control flow. Excluding hardware/inner-control cases leaves no mixed
+TU, but game and animation still mix library-level forms; authored NOPs and inferred TU boundaries
+prevent a historical assembler assignment. Eleven exact/high multi-function six-word cohorts remain
+leads. All four independently compiled seven-word controls lie in RenderWare Core/Audio. Retain
+per-unit selection: all 44 alternate-assembler units (48 source functions) now carry weak historical
+provenance, maintained by the units serializer. This does not weaken the full-image equality check.
+`tools/loop_provenance.py` reproduces the census, filtered cohorts and control joins. Source progress
+remains 5,066 functions / 281,632 text bytes.
+
+The following campaign uses four isolated queues, including the coordinator's worker queue. Wave
+gains count newly sourced original spans, not C-to-C++ conversions; large-function counts use code
+sizes over 300 and 1,024 bytes. Stop after two consecutive waves below 27,155 text bytes (1%).
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.

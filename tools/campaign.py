@@ -54,6 +54,7 @@ def compare(before, after, agent_minutes=0, attempted=None):
         raise ValueError('source regressions: ' + ', '.join(hex(a) for a in sorted(old - new)))
     functions = {f['addr']: f for f in before['functions']}
     large = {a for a, f in functions.items() if f['size'] > 300 and a not in old}
+    over_1kb = {a for a, f in functions.items() if f['size'] > 1024 and a not in old}
     attempts = None if attempted is None else {int(a, 0) if isinstance(a, str) else a for a in attempted}
     if attempts is not None and not attempts <= large:
         raise ValueError('attempted addresses must be previously unmatched functions over 300 bytes')
@@ -71,6 +72,9 @@ def compare(before, after, agent_minutes=0, attempted=None):
         data_completion='requires separate ownership verification', bands=bands,
         large_new_matches=len(large & new), large_attempted=None if attempts is None else len(attempts),
         large_attempt_matches=None if attempts is None else len(attempts & new),
+        over_1kb_new_matches=len(over_1kb & new),
+        over_1kb_attempted=None if attempts is None else len(attempts & over_1kb),
+        over_1kb_attempt_matches=None if attempts is None else len(attempts & over_1kb & new),
         bytes_per_agent_hour=None if agent_minutes <= 0 else gain * 60 / agent_minutes)
 
 

@@ -328,6 +328,12 @@ NOPs are candidate padding: their origin cannot be proved from bytes alone. Sony
 are reported separately; detailed instructions stay in ignored output. Omit `--classify` for the
 original whole-executable census. See PLAN for the measured limits.
 
+`python3 tools/loop_provenance.py` joins every site to TU and library ranges and reports raw and
+hardware/control-flow-qualified cohorts. The forms do not partition all libraries or TUs cleanly.
+Keep alternate assemblers as individually verified unit recipes. The units serializer marks them
+`assembler_evidence: {strength: weak, ...}`: historical toolchain provenance is unresolved; full-image
+byte identity remains mandatory. Consistent filtered cohorts are leads, not recovered build flags.
+
 **Regrouping** (`tools/regroup.py`). `merge` makes one unit of the adjacent source units of a TU (one `src/tu/<address>.c`);
 `merge --sections` makes one unit and one source file (`src/tu/<tu>.c`) of all the source functions of a TU, compiled with
 `-ffunction-sections`: SN 1.36 then writes `.text.<symbol>` per function without changing a code byte, `make_ld.py` renames each section

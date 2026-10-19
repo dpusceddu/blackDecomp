@@ -12,6 +12,8 @@ Format (see README.md):
         - {addr: 0x2e3100, symbol: FindChild__12ChildBuffersPCcT1, status: source}
         - {addr: 0x2e7ac0, symbol: __15ParameterTables, status: asm, reason: layout}
 Only `status: source` functions are provided by the unit's object; the others stay assembly.
+Alternate assembler recipes carry assembler_evidence: weak historical provenance,
+independently of the mandatory full-image byte-identity check. The serializer maintains it.
 """
 import os, re
 from pathlib import Path

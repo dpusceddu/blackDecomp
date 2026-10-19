@@ -24,6 +24,15 @@ class CampaignMetrics(unittest.TestCase):
         with self.assertRaises(ValueError):
             compare(before, dict(source_addresses=[]))
 
+    def test_over_one_kibibyte_attempts_are_reported_separately(self):
+        before = dict(source_addresses=[], source_bytes=0, text_bytes=100000, complete_code_tus=[],
+            functions=[dict(addr=a, size=n, span=n, band='>300') for a, n in ((1, 1024), (2, 1028), (3, 2048))])
+        after = dict(source_addresses=[1, 2], source_bytes=2052, complete_code_tus=[])
+        result = compare(before, after, attempted=[1, 2, 3])
+        self.assertEqual(result['over_1kb_new_matches'], 1)
+        self.assertEqual(result['over_1kb_attempted'], 2)
+        self.assertEqual(result['over_1kb_attempt_matches'], 1)
+
 
 if __name__ == '__main__':
     unittest.main()
