@@ -501,7 +501,8 @@ struct Vector3Value {
 Vector3Value Vector3_Normalize(const Vector3Value& v);
 Vector3Value* Direction_Orientation(Vector3Value* output, const Vector3Value* direction);
 float Degrees_WrapSigned(float degrees);
-double AcosRadians(double value);
+// PS2 acosf uses f12/f0 single precision; the legacy Xbox signature was wider.
+float AcosRadians(float value) __asm__("func_0029E0D8");
 struct PointerBank {
     ControlChannel* GetItem();
 };

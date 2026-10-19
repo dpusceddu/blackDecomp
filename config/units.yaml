@@ -47993,3 +47993,27 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: campaign_actor_orientation_wave3
+  source: src/campaign/actor_orientation_wave3.cpp
+  origin: C++ actor campaign:0x3dc9b8 class cluster; identity unverified
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x13db40'
+    status: asm
+  - addr: '0x13dba0'
+    status: source
+    symbol: Begin__Q213CampaignActor16OrientationStatePv
+    size: 92
+  - addr: '0x13dc00'
+    status: asm
+  - addr: '0x13df58'
+    status: asm
+  - addr: '0x13eb00'
+    status: asm
+  - addr: '0x13ec38'
+    status: asm
