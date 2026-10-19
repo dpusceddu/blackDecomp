@@ -46270,3 +46270,18 @@ units:
     symbol: Function_002E7008__Q215BlackPS2Classes20Kaim_CBasicAllocatori
     size: 32
     status: source
+- name: campaign_graphics_bindings
+  source: src/campaign/graphics_bindings.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  functions:
+  - addr: '0x213758'
+    symbol: Function_00213758__Q215BlackPS2Classes22UnknownVtable_003E0EB8
+    size: 480
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
