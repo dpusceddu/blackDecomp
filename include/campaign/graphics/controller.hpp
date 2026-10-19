@@ -1,11 +1,21 @@
 #ifndef CAMPAIGN_GRAPHICS_CONTROLLER_HPP
 #define CAMPAIGN_GRAPHICS_CONTROLLER_HPP
 #include "ps2/ee_types.h"
-// Partial PS2 controller view; complete class identity and allocation size remain unverified.
-namespace CampaignGraphics { struct ControllerBase {virtual void Release();}; struct Controller : ControllerBase {
+// Partial PS2 controller view. Accessed offsets and five virtual slots are verified.
+// The original class identity, base-class hierarchy and allocation size remain unverified.
+// The prefix/interface views reproduce the observed vptr at +8 under GCC 2.95.
+namespace CampaignGraphics {
+struct ControllerBase { EeS32 unknown00; EeS32 field_4; };
+struct ControllerInterface : ControllerBase {
+    virtual void Update();
+    virtual void UpdateMotors();
+    virtual void SetFeedback(EeU8);
+    virtual bool Open(unsigned, unsigned);
+    virtual bool Close();
+};
+struct Controller : ControllerInterface {
 
-    EeS32 field_4; /* PS2 +0x4 */
-    EeU8 opaque_8[4];
+
     EeU8 connected; /* PS2 +0xC */
     EeU8 initialized; /* PS2 +0xD */
     EeU8 previousStates[28];
@@ -54,12 +64,18 @@ namespace CampaignGraphics { struct ControllerBase {virtual void Release();}; st
     float maxStep3; /* PS2 +0xC4 */
     float maxStep2; /* PS2 +0xC8 */
     float pressureThreshold; /* PS2 +0xCC */
-    EeU8 opaque_D0[24];
+    EeU8 opaque_D0[16];
+    float axisLimit;
+    float deadZone;
     EeS32 backend; /* PS2 +0xE8 */
     EeS32 port; /* PS2 +0xEC */
 inline bool Connected() const {return connected!=0;}
-bool Open(unsigned int backendHandle, unsigned int portIndex);
-void Update();void UpdateMotors();};}
+virtual void Update();
+virtual void UpdateMotors();
+virtual void SetFeedback(EeU8 enabled);
+virtual bool Open(unsigned int backendHandle, unsigned int portIndex);
+virtual bool Close();
+unsigned char Button(unsigned index) const; bool Pressed(unsigned index) const; bool Released(unsigned index) const; float Pressure(unsigned index) const; int Rumble(unsigned enabled); float Smooth(float value,float step); int Reset();};}
 typedef char check_field_C[(((int)&((CampaignGraphics::Controller*)0)->connected)==12)?1:-1];
 typedef char check_opaque_E[(((int)&((CampaignGraphics::Controller*)0)->previousStates)==14)?1:-1];
 typedef char check_field_2A[(((int)&((CampaignGraphics::Controller*)0)->button0)==42)?1:-1];
