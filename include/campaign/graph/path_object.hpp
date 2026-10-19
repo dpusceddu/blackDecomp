@@ -29,6 +29,11 @@ struct PathTypeRegistry {
  unsigned char unknown00[4];PathTypeEntry **entries;unsigned int count;
  bool HasId(int) __asm__("func_002F3208");
 };
+// Callback prefix and slot 2 are verified by the matched forwarding method.
+struct PathCallback {
+ virtual void Slot0(); virtual void Slot1();
+ virtual unsigned int Filter(unsigned int,unsigned int,unsigned int);
+};
 struct CEntity : CObject {
  virtual ~CEntity();
  virtual bool Init(ChildBuffers *);
@@ -47,7 +52,7 @@ struct CPathObject : CEntity {
  };
  virtual ~CPathObject();
  virtual bool Init(ChildBuffers *);
- virtual void Slot5();virtual void Slot6();virtual void Slot7();virtual void Slot8();virtual void Slot9();
+ virtual unsigned int Slot5(unsigned int,unsigned int,PathCallback*,unsigned int);virtual void Slot6();virtual void Slot7();virtual void Slot8();virtual void Slot9();
  virtual void Notify(void *);
  virtual void Slot11();virtual void Slot12();virtual void Slot13();
  virtual bool Claim(int,PathPropertySlot *);

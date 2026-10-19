@@ -293,3 +293,29 @@ int Kaim::CFindNearestData::FindBound(int axis,unsigned char lower,float value) 
 }
 
 #endif
+
+int Kaim::CFindNearestData::GetRange(const Vec3 *point,int axis,int *lower,int *upper,float radius){
+ float value=Coordinate(point,axis);
+ *lower=FindBound(axis,1,value-radius);
+ if(*lower!=-1){
+  *upper=FindBound(axis,0,value+radius);
+  if(*upper!=-1)return *upper-*lower+1;
+ }
+ return 0;
+}
+
+void Kaim::CFindNearestData::CopyRank(const int *source)
+{
+    if (!rank && count > 0)
+        rank = new int[count * 3];
+    for (int i = 0; i < count * 3; ++i)
+        rank[i] = source[i];
+}
+
+void Kaim::CFindNearestData::CopyOrder(const int *source)
+{
+    if (!order && count > 0)
+        order = new int[count * 3];
+    for (int i = 0; i < count * 3; ++i)
+        order[i] = source[i];
+}
