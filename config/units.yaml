@@ -46442,11 +46442,6 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   functions:
-  - addr: '0x2d5398'
-    size: 20
-    symbol: func_002D5398
-    status: asm
-    reason: shared
   - addr: '0x2d3d38'
     size: 468
     symbol: func_002D3D38
@@ -46565,9 +46560,8 @@ units:
   functions:
   - addr: '0x2d65e8'
     size: 168
-    symbol: func_002D65E8
-    status: asm
-    reason: campaign
+    symbol: Create__Q24Kaim12ShooterAgentPQ24Kaim15BehaviorContext
+    status: source
   - addr: '0x2d6690'
     size: 464
     symbol: Configure__Q24Kaim12ShooterAgentPQ24Kaim12ChildBuffers
@@ -46587,11 +46581,6 @@ units:
     symbol: func_002D6CB0
     status: asm
     reason: campaign
-  - addr: '0x2d6e48'
-    size: 348
-    symbol: IsClear__Q24Kaim12ShooterAgentPCQ24Kaim4Vec3
-    status: asm
-    reason: data
   - addr: '0x2d7008'
     size: 96
     symbol: func_002D7008
@@ -46608,7 +46597,13 @@ units:
     GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
     GetValue__CQ24Kaim12ChildBuffers: '0x2e3918'
     _4Kaim$gEngine: '0x3c9ed4'
+    __Q24Kaim12ShooterAgentPQ24Kaim15BehaviorContext: '0x2d7008'
+    __throw: '0x292b40'
     _stricmp: '0x360838'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    gKaimFree: '0x3c87e0'
+    terminate__Fv: '0x36f978'
 - name: campaign_behaviors_cpathwayagent
   source: src/campaign/behaviors_cpathwayagent.cpp
   owner: cpp-campaign-w2-behaviors
@@ -46622,9 +46617,8 @@ units:
   functions:
   - addr: '0x2d53f0'
     size: 168
-    symbol: func_002D53F0
-    status: asm
-    reason: campaign
+    symbol: Create__Q24Kaim12PathWayAgentPQ24Kaim7Context
+    status: source
   - addr: '0x2d5650'
     size: 928
     symbol: func_002D5650
@@ -46647,9 +46641,15 @@ units:
     reason: campaign
   - addr: '0x2d6520'
     size: 92
-    symbol: func_002D6520
-    status: asm
-    reason: campaign
+    symbol: SetPathWay__Q24Kaim12PathWayAgentPQ24Kaim7PathWay
+    status: source
+  externs:
+    __Q24Kaim12PathWayAgentPQ24Kaim7Context: '0x2d6218'
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    gKaimFree: '0x3c87e0'
+    terminate__Fv: '0x36f978'
 - name: campaign_behaviors_centitymanager
   source: src/campaign/behaviors_centitymanager.cpp
   owner: cpp-campaign-w2-behaviors
@@ -46718,3 +46718,41 @@ units:
     GetSecond__C12ChildBuffers: '0x2e3920'
     GetValue__C12ChildBuffers: '0x2e3918'
     _stricmp: '0x360838'
+- name: campaign_behaviors_cshooteragent_clear
+  source: src/campaign/behaviors_cshooteragent_clear.cpp
+  origin: kynapse
+  owner: cpp-campaign-w2-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d6e48'
+    size: 348
+    symbol: IsClear__Q24Kaim12ShooterAgentPCQ24Kaim4Vec3
+    status: source
+  externs:
+    GetRecord__Q24Kaim10PerceptionPQ24Kaim5Actor: '0x310120'
+    InCone__4KaimPCQ24Kaim4Vec3N21ff: '0x2e4e28'
+    _4Kaim$gEngine: '0x3c9ed4'
+    __throw: '0x292b40'
+    _vt$Q24Kaim13ActorIterator: '0x3e0028'
+    _vt$Q24Kaim8PolyRoot: '0x3e0040'
+- name: campaign_behaviors_hide_reset
+  source: src/campaign/behaviors_hide_reset.cpp
+  origin: kynapse
+  owner: cpp-campaign-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d5398'
+    size: 20
+    symbol: func_002D5398
+    status: source
