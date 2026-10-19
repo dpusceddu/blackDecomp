@@ -46484,3 +46484,16 @@ units:
   externs:
     _vt$Q24Kaim13CPathCostData: '0x3ede90'
     _vt$Q24Kaim7CObject: '0x3e0040'
+- name: campaign_actor_reset
+  source: src/campaign/actor_reset.cpp
+  origin: 'C++ campaign: actor virtual table 0x3dc838; class identity unresolved'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x146a28'
+    symbol: ResetEntries__Q216BlackPS2Campaign12ActorEntriesi
+    size: 196
+    status: source
