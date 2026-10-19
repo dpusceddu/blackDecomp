@@ -47081,3 +47081,119 @@ units:
     _vt$Q24Kaim7CObject: '0x3e0040'
     _vt$Q34Kaim13CGraphManager9CGraphMap: '0x3eda70'
     terminate__Fv: '0x36f978'
+- name: context_behaviors_sound
+  source: src/context/behaviors_sound.cpp
+  origin: kynapse
+  owner: context-wave3-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -fno-byte-bool
+  - -fno-rtti
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x30d160'
+    size: 152
+    symbol: CreateSoundPool__4Kaimv
+    status: source
+  - addr: '0x30d228'
+    size: 328
+    symbol: Init__Q24Kaim9SoundPoolPQ24Kaim12ChildBuffers
+    status: source
+  - addr: '0x30d370'
+    size: 644
+    symbol: func_0030D370
+    status: asm
+    reason: registers
+  - addr: '0x30d5f8'
+    size: 372
+    symbol: func_0030D5F8
+    status: asm
+    reason: registers
+  - addr: '0x30d770'
+    size: 348
+    symbol: func_0030D770
+    status: source
+  - addr: '0x30d8d0'
+    size: 468
+    symbol: func_0030D8D0
+    status: source
+  - addr: '0x30daa8'
+    size: 380
+    symbol: func_0030DAA8
+    status: asm
+    reason: registers
+  - addr: '0x30dc28'
+    size: 444
+    symbol: func_0030DC28
+    status: asm
+    reason: registers
+  - addr: '0x30dde8'
+    size: 472
+    symbol: func_0030DDE8
+    status: asm
+    reason: registers
+  - addr: '0x30e020'
+    size: 224
+    symbol: _$_Q24Kaim9SoundPool
+    status: source
+  - addr: '0x30e180'
+    size: 248
+    symbol: func_0030E180
+    status: asm
+    reason: registers
+  - addr: '0x30e320'
+    size: 224
+    symbol: func_0030E320
+    status: asm
+    reason: registers
+  - addr: '0x30e400'
+    size: 184
+    symbol: Reset__Q24Kaim9SoundPool
+    status: source
+  - addr: '0x30e4b8'
+    size: 148
+    symbol: func_0030E4B8
+    status: source
+  - addr: '0x30e560'
+    size: 60
+    symbol: func_0030E560
+    status: source
+  - addr: '0x30e5a0'
+    size: 280
+    symbol: func_0030E5A0
+    status: asm
+    reason: registers
+  - addr: '0x30e798'
+    size: 316
+    symbol: func_0030E798
+    status: asm
+    reason: registers
+  - addr: '0x30e8d8'
+    size: 176
+    symbol: func_0030E8D8
+    status: asm
+    reason: registers
+  externs:
+    ConfigureAll__Q24Kaim9SoundPoolPQ24Kaim12ChildBuffers: '0x2e74e0'
+    GetAuthoredProperty__Q24Kaim8ListenerPCv: '0x2e4ce0'
+    Reset__Q24Kaim10SoundEvent: '0x30e9c8'
+    _4Kaim$gActiveSoundPool: '0x3cdfbc'
+    _4Kaim$gNow: '0x3c958c'
+    _4Kaim$gSoundKey2B4F00: '0x450080'
+    _4Kaim$gTeamKey: '0x4505f8'
+    __throw: '0x292b40'
+    _vt$Q24Kaim10ObjectRoot: '0x3e0040'
+    _vt$Q24Kaim10SoundEvent: '0x3f1268'
+    _vt$Q24Kaim9SoundPool: '0x3f1220'
+    func_0030D1F8: '0x30d1f8'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
