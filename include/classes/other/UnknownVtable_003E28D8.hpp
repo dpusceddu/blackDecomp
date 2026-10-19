@@ -36,8 +36,8 @@ struct UnknownVtable_003E28D8 {
     int Function_002F4620(unsigned int argument0, void * argument1);
     // 0x002F47B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F47B0(unsigned int argument0, void * argument1);
-    // 0x002F4B50: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    void * Function_002F4B50(void * argument0);
+    // 0x002F4B50: UNVERIFIED signature (src/kynapse/host_2850c0_2f4b50.cpp).
+    void Function_002F4B50(void * argument0);
     // 0x00383ED0: UNVERIFIED signature (src/auto/other/383e98.c).
     int Function_00383ED0();
     // 0x00388FE8: UNVERIFIED signature (src/auto/unclassified/388fe8.c).
@@ -56,8 +56,8 @@ struct UnknownVtable_003E28D8 {
     int Function_00391370();
     // 0x00391378: UNVERIFIED signature (src/auto/kynapse/391358.c).
     unsigned int Function_00391378();
-    // 0x00391380: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00391380();
+    // 0x00391380: UNVERIFIED signature (src/campaign/graph_cpathobject.cpp).
+    void Function_00391380(int argument0);
 
     // Vtable 0x003E28D8; vptr field offset unknown; referenced zero RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -83,7 +83,7 @@ struct UnknownVtable_003E28D8 {
         // slot 9, table+0x50, this delta 0, function 0x00391360; UNVERIFIED signature.
         virtual int Slot009();
         // slot 10, table+0x58, this delta 0, function 0x002F4B50; UNVERIFIED signature.
-        virtual void * Slot010(void * argument0);
+        virtual void Slot010(void * argument0);
         // slot 11, table+0x60, this delta 0, function 0x00391368; UNVERIFIED signature.
         virtual int Slot011();
         // slot 12, table+0x68, this delta 0, function 0x00391370; UNVERIFIED signature.
@@ -99,7 +99,7 @@ struct UnknownVtable_003E28D8 {
         // slot 17, table+0x90, this delta 0, function 0x00391378; UNVERIFIED signature.
         virtual unsigned int Slot017();
         // slot 18, table+0x98, this delta 0, function 0x00391380; UNVERIFIED signature.
-        virtual unsigned int Slot018();
+        virtual void Slot018(int argument0);
         // slot 19, table+0xA0, this delta 0, function 0x00389038; UNVERIFIED signature.
         virtual int Slot019();
         // slot 20, table+0xA8, this delta 0, function 0x00383ED0; UNVERIFIED signature.

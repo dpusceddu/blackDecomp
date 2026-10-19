@@ -4,7 +4,7 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Perception {
-    u8 opaque_0[4];
+    u32 field_0; /* PS2 +0x0 */
     void * field_4; /* PS2 +0x4 */
     f32 field_8; /* PS2 +0x8 */
     f32 field_C; /* PS2 +0xC */
@@ -15,7 +15,7 @@ typedef struct Recovered_Perception {
     s32 field_24; /* PS2 +0x24 */
     s32 field_28; /* PS2 +0x28 */
     s32 field_2C; /* PS2 +0x2C */
-    s32 field_30; /* PS2 +0x30 */
+    void * field_30; /* PS2 +0x30 */
     s32 field_34; /* PS2 +0x34 */
     void * field_38; /* PS2 +0x38 */
     void * field_3C; /* PS2 +0x3C */
@@ -27,6 +27,7 @@ typedef struct Recovered_Perception {
     s32 field_4C; /* PS2 +0x4C */
     u8 opaque_50[4];
 } Recovered_Perception;
+typedef char assert_Recovered_Perception_0[(((int)&((Recovered_Perception *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_Perception_4[(((int)&((Recovered_Perception *)0)->field_4) == 4) ? 1 : -1];
 typedef char assert_Recovered_Perception_8[(((int)&((Recovered_Perception *)0)->field_8) == 8) ? 1 : -1];
 typedef char assert_Recovered_Perception_C[(((int)&((Recovered_Perception *)0)->field_C) == 12) ? 1 : -1];

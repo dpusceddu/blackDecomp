@@ -18,9 +18,9 @@ struct Kaim_CGraphWrapper {
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x002F34B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F34B0(void * argument0);
-    // 0x002F3520: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002F34B0: UNVERIFIED signature (src/kynapse/index_queries_2f34b0.cpp).
+    unsigned char Function_002F34B0(void * argument0);
+    // 0x002F3520: UNVERIFIED signature (src/kynapse/misc5_2f3520.cpp).
     int Function_002F3520();
     // 0x002F3530: UNVERIFIED signature (src/auto/kynapse/2f3530.c).
     int Function_002F3530(int argument0);
@@ -35,7 +35,7 @@ struct Kaim_CGraphWrapper {
         // slot 0, table+0x8, this delta 0, function 0x00390D98; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002F34B0; UNVERIFIED signature.
-        virtual int Slot001(void * argument0);
+        virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002F3520; UNVERIFIED signature.
         virtual int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x002F3530; UNVERIFIED signature.

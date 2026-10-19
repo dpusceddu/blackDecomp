@@ -15,8 +15,6 @@ struct Kaim_CSpatialGraph {
     // Destructor identity: 0x002FB4D8.
     // Destructor identity: 0x002FB4D8.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x002F6880: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F6880(void * argument0, unsigned int argument1);
     // 0x002F6E08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -27,8 +25,8 @@ struct Kaim_CSpatialGraph {
     int Function_002F7F48(unsigned int argument0);
     // 0x002F8238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F8238(unsigned int argument0, unsigned int argument1);
-    // 0x002F8C38: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_002F8C38();
+    // 0x002F8C38: UNVERIFIED signature (src/campaign/graph_cspatialgraph_lifetime.cpp).
+    void Function_002F8C38();
     // 0x002FB4D8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002FB4D8();
 
@@ -48,7 +46,7 @@ struct Kaim_CSpatialGraph {
         // slot 5, table+0x30, this delta 0, function 0x002F8238; UNVERIFIED signature.
         virtual int Slot005(unsigned int argument0, unsigned int argument1);
         // slot 6, table+0x38, this delta 0, function 0x002F8C38; UNVERIFIED signature.
-        virtual unsigned int Slot006();
+        virtual void Slot006();
     };
 };
 

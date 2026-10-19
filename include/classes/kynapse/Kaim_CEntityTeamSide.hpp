@@ -22,7 +22,7 @@ struct Kaim_CEntityTeamSide {
     void * Function_002D9598(void * argument0);
     // 0x0038A858: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A858();
-    // 0x0038A890: UNVERIFIED signature (ghidra).
+    // 0x0038A890: UNVERIFIED signature (src/kynapse/parameter_classes_38a890.cpp).
     void * Function_0038A890();
 
     // Vtable 0x003E5320; vptr field offset unknown; RTTI header.

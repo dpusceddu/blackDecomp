@@ -22,8 +22,8 @@ struct Kaim_CZeroHeuristic {
     void Function_003906C0();
     // 0x00390748: UNVERIFIED signature (src/kynapse/class_info_390748.cpp).
     void * Function_00390748();
-    // 0x00390758: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00390758(unsigned int argument0, unsigned int argument1, unsigned int argument2, void * argument3);
+    // 0x00390758: UNVERIFIED signature (src/kynapse/tiny3_390758.cpp).
+    unsigned char Function_00390758(int argument0, int argument1, int argument2, int * argument3);
 
     // Vtable 0x003EC930; vptr field offset unknown; RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -31,7 +31,7 @@ struct Kaim_CZeroHeuristic {
         // slot 0, table+0x8, this delta 0, function 0x003906C0; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x00390758; UNVERIFIED signature.
-        virtual int Slot001(unsigned int argument0, unsigned int argument1, unsigned int argument2, void * argument3);
+        virtual unsigned char Slot001(int argument0, int argument1, int argument2, int * argument3);
         // slot 2, table+0x18, this delta 0, function 0x00383D50; UNVERIFIED signature.
         virtual unsigned int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00390748; UNVERIFIED signature.

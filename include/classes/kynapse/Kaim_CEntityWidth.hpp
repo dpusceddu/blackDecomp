@@ -22,7 +22,7 @@ struct Kaim_CEntityWidth {
     void * Function_002D9AE8(void * argument0);
     // 0x0038AB30: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038AB30();
-    // 0x0038AB68: UNVERIFIED signature (ghidra).
+    // 0x0038AB68: UNVERIFIED signature (src/kynapse/parameter_classes_38ab68.cpp).
     void * Function_0038AB68();
 
     // Vtable 0x003E5708; vptr field offset unknown; RTTI header.

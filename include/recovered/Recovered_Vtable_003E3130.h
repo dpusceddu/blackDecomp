@@ -5,12 +5,6 @@
 
 typedef struct Recovered_Vtable_003E3130 {
     u32 field_0; /* PS2 +0x0 */
-    u8 opaque_4[8];
-    s32 field_C; /* PS2 +0xC */
-    u8 opaque_10[28];
-    s32 field_2C; /* PS2 +0x2C */
 } Recovered_Vtable_003E3130;
 typedef char assert_Recovered_Vtable_003E3130_0[(((int)&((Recovered_Vtable_003E3130 *)0)->field_0) == 0) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3130_C[(((int)&((Recovered_Vtable_003E3130 *)0)->field_C) == 12) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3130_2C[(((int)&((Recovered_Vtable_003E3130 *)0)->field_2C) == 44) ? 1 : -1];
 #endif

@@ -26,7 +26,7 @@ struct Kaim_CEntityKneePosition {
     void * Function_002D90C0(void * argument0);
     // 0x0038A590: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A590();
-    // 0x0038A5C8: UNVERIFIED signature (ghidra).
+    // 0x0038A5C8: UNVERIFIED signature (src/kynapse/parameter_classes_38a5c8.cpp).
     void * Function_0038A5C8();
 
     // Vtable 0x003E4F60; vptr field offset unknown; RTTI header.

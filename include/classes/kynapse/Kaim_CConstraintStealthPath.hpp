@@ -16,80 +16,8 @@ struct Kaim_CConstraintStealthPath {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0004() { return *(float *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_000C() { return *(float *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0014() { return *(float *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0024() { return *(float *)((unsigned char *)this + 0x24); }
-    // 0x28: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0028() { return *(float *)((unsigned char *)this + 0x28); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_002C() { return *(float *)((unsigned char *)this + 0x2C); }
-    // 0x30: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0030() { return *(float *)((unsigned char *)this + 0x30); }
-    // 0x34: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0034() { return *(float *)((unsigned char *)this + 0x34); }
-    // 0x38: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0038() { return *(float *)((unsigned char *)this + 0x38); }
-    // 0x3C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_003C() { return *(float *)((unsigned char *)this + 0x3C); }
-    // 0x40: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0040() { return *(float *)((unsigned char *)this + 0x40); }
-    // 0x44: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0044() { return *(float *)((unsigned char *)this + 0x44); }
-    // 0x48: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0048() { return *(float *)((unsigned char *)this + 0x48); }
-    // 0x4C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_004C() { return *(float *)((unsigned char *)this + 0x4C); }
-    // 0x50: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0050() { return *(float *)((unsigned char *)this + 0x50); }
-    // 0x54: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0054() { return *(float *)((unsigned char *)this + 0x54); }
-    // 0x58: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0058() { return *(float *)((unsigned char *)this + 0x58); }
-    // 0x5C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_005C() { return *(float *)((unsigned char *)this + 0x5C); }
-    // 0x60: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0060() { return *(float *)((unsigned char *)this + 0x60); }
-    // 0xF4: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_00F4() { return *(void * *)((unsigned char *)this + 0xF4); }
-    // 0xF8: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_00F8() { return *(void * *)((unsigned char *)this + 0xF8); }
-    // 0xFC: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_00FC() { return *(void * *)((unsigned char *)this + 0xFC); }
-    // 0x100: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0100() { return *(void * *)((unsigned char *)this + 0x100); }
-    // 0x104: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0104() { return *(void * *)((unsigned char *)this + 0x104); }
-    // 0x108: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0108() { return *(void * *)((unsigned char *)this + 0x108); }
-    // 0x10C: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_010C() { return *(void * *)((unsigned char *)this + 0x10C); }
-    // 0x110: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0110() { return *(void * *)((unsigned char *)this + 0x110); }
-    // 0x144: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0144() { return *(int *)((unsigned char *)this + 0x144); }
-    // 0x148: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0148() { return *(int *)((unsigned char *)this + 0x148); }
-    // 0x14C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_014C() { return *(float *)((unsigned char *)this + 0x14C); }
-    // 0x150: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0150() { return *(float *)((unsigned char *)this + 0x150); }
-    // 0x002F0FF8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F0FF8(void * argument0, void * argument1, void * argument2);
+    // 0x002F0FF8: UNVERIFIED signature (src/context/behaviors_constraints.cpp).
+    unsigned char Function_002F0FF8(void * argument0, void * argument1, float * argument2);
     // 0x00383D48: UNVERIFIED signature (src/auto/kynapse/383d48.c).
     unsigned int Function_00383D48();
     // 0x00390270: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
@@ -105,7 +33,7 @@ struct Kaim_CConstraintStealthPath {
         // slot 1, table+0x10, this delta 0, function 0x003902F8; UNVERIFIED signature.
         virtual void * Slot001();
         // slot 2, table+0x18, this delta 0, function 0x002F0FF8; UNVERIFIED signature.
-        virtual int Slot002(void * argument0, void * argument1, void * argument2);
+        virtual unsigned char Slot002(void * argument0, void * argument1, float * argument2);
         // slot 3, table+0x20, this delta 0, function 0x00383D48; UNVERIFIED signature.
         virtual unsigned int Slot003();
     };

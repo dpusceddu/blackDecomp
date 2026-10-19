@@ -15,7 +15,7 @@ struct Kaim_CTeam {
     // Destructor identity: 0x002EC4B0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
+    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
@@ -28,8 +28,8 @@ struct Kaim_CTeam {
     int Function_002EC5B8(void * argument0);
     // 0x002EC6D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002EC6D8(void * argument0);
-    // 0x002EC9D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002EC9D0(void * argument0);
+    // 0x002EC9D0: UNVERIFIED signature (src/kynapse/configure_2ec9d0.cpp).
+    unsigned char Function_002EC9D0(void * argument0);
     // 0x0038EF98: UNVERIFIED signature (src/kynapse/class_info_38ef98.cpp).
     void * Function_0038EF98();
     // 0x0038EFA8: UNVERIFIED signature (src/kynapse/misc4_38efa8.cpp).
@@ -51,7 +51,7 @@ struct Kaim_CTeam {
         // slot 4, table+0x28, this delta 0, function 0x0038EFA8; UNVERIFIED signature.
         virtual void Slot004(unsigned char argument0);
         // slot 5, table+0x30, this delta 0, function 0x002EC9D0; UNVERIFIED signature.
-        virtual int Slot005(void * argument0);
+        virtual unsigned char Slot005(void * argument0);
         // slot 6, table+0x38, this delta 0, function 0x0038EFB0; UNVERIFIED signature.
         virtual unsigned char Slot006(void * argument0);
     };

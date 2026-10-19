@@ -22,8 +22,8 @@ struct UnknownVtable_003DC588 {
     int Function_00161778();
     // 0x00161808: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00161808();
-    // 0x00165B00: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00165B00(unsigned int argument0);
+    // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
+    void Function_00165B00(int argument0);
 
     // Vtable 0x003DC588; vptr field offset unknown; referenced zero RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -31,7 +31,7 @@ struct UnknownVtable_003DC588 {
         // slot 0, table+0x8, this delta 0, function 0x00161778; UNVERIFIED signature.
         virtual int Slot000();
         // slot 1, table+0x10, this delta 0, function 0x00165B00; UNVERIFIED signature.
-        virtual unsigned int Slot001(unsigned int argument0);
+        virtual void Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x00161808; UNVERIFIED signature.
         virtual int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00160ED8; UNVERIFIED signature.

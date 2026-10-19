@@ -12,23 +12,18 @@ namespace BlackPS2Classes {
 // RTTI base: Kaim_CWorldService; offset 0; public nonvirtual.
 struct Kaim_CGraphManager {
     typedef Hierarchy_Kaim_CGraphManager Hierarchy; // Semantic bases, not an object layout.
+    // Constructor identity: 0x002F24D0; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x002F2578.
     // Destructor identity: 0x002F2578.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0010() { return *(unsigned char *)((unsigned char *)this + 0x10); }
     // 0x002F2578: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002F2578();
     // 0x002F2660: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F2660(void * argument0);
-    // 0x002F2E88: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F2E88(void * argument0);
+    // 0x002F2E88: UNVERIFIED signature (src/campaign/graph_manager.cpp).
+    unsigned char Function_002F2E88(void * argument0);
     // 0x0038AED8: UNVERIFIED signature (src/kynapse/small_misc_38aed8.cpp).
     void Function_0038AED8();
     // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
@@ -42,7 +37,7 @@ struct Kaim_CGraphManager {
         // slot 0, table+0x8, this delta 0, function 0x002F2578; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002F2E88; UNVERIFIED signature.
-        virtual int Slot001(void * argument0);
+        virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002F2660; UNVERIFIED signature.
         virtual int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0038E7B8; UNVERIFIED signature.

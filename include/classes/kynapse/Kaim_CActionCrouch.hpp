@@ -24,7 +24,7 @@ struct Kaim_CActionCrouch {
     void * Function_002D7BC0(void * argument0);
     // 0x00389A58: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00389A58();
-    // 0x00389A90: UNVERIFIED signature (ghidra).
+    // 0x00389A90: UNVERIFIED signature (src/kynapse/parameter_classes_389a90.cpp).
     void * Function_00389A90();
 
     // Vtable 0x003E3F30; vptr field offset unknown; RTTI header.

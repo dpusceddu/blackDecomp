@@ -33,13 +33,13 @@ struct UnknownVtable_003DD808 {
     // 0x0018E578: UNVERIFIED signature (src/tu/18e578.c).
     unsigned int Function_0018E578();
     // 0x0018E7C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int * Function_0018E7C0(void * argument0);
+    int Function_0018E7C0(void * argument0);
     // 0x0018EA20: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018EA20();
     // 0x0018EBE0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018EBE0(unsigned int argument0);
     // 0x00190EA0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00190EA0();
+    unsigned char Function_00190EA0();
     // 0x00191010: UNVERIFIED signature (src/tu/tu_190ea0.c).
     unsigned int Function_00191010();
     // 0x00191110: UNVERIFIED signature (src/tu/tu_190ea0.c).
@@ -69,7 +69,7 @@ struct UnknownVtable_003DD808 {
         // slot 0, table+0x8, this delta 0, function 0x0018E2F0; UNVERIFIED signature.
         virtual int Slot000();
         // slot 1, table+0x10, this delta 0, function 0x00190EA0; UNVERIFIED signature.
-        virtual unsigned int Slot001();
+        virtual unsigned char Slot001();
         // slot 2, table+0x18, this delta 0, function 0x0018E448; UNVERIFIED signature.
         virtual int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x0018E450; UNVERIFIED signature.
@@ -95,7 +95,7 @@ struct UnknownVtable_003DD808 {
         // slot 13, table+0x70, this delta 0, function 0x00383EA8; UNVERIFIED signature.
         virtual int Slot013();
         // slot 14, table+0x78, this delta 0, function 0x0018E7C0; UNVERIFIED signature.
-        virtual int * Slot014(void * argument0);
+        virtual int Slot014(void * argument0);
         // slot 15, table+0x80, this delta 0, function 0x00383EB0; UNVERIFIED signature.
         virtual int Slot015();
         // slot 16, table+0x88, this delta 0, function 0x00383EB8; UNVERIFIED signature.

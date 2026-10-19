@@ -10,10 +10,10 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DCA78 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x20: UNVERIFIED type; PS2 access offset.
-    inline U128 & Field_0020() { return *(U128 *)((unsigned char *)this + 0x20); }
-    // 0x30: UNVERIFIED type; PS2 access offset.
-    inline U128 & Field_0030() { return *(U128 *)((unsigned char *)this + 0x30); }
+    // 0x0: UNVERIFIED type; PS2 access offset.
+    inline unsigned long & Field_0000() { return *(unsigned long *)((unsigned char *)this + 0x0); }
+    // 0x10: UNVERIFIED type; PS2 access offset.
+    inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
     // 0x70: UNVERIFIED type; PS2 access offset.
     inline S128 & Field_0070() { return *(S128 *)((unsigned char *)this + 0x70); }
     // 0x80: UNVERIFIED type; PS2 access offset.
@@ -141,7 +141,7 @@ struct UnknownVtable_003DCA78 {
     // 0x00133FA8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00133FA8(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, int * argument4, unsigned int argument5, float argument6);
     // 0x001347B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_001347B8(unsigned int argument0, U128 argument1, void * argument2, float argument3);
+    int Function_001347B8(S128 argument0, S128 argument1, unsigned int argument2, float argument3);
     // 0x00134970: UNVERIFIED signature (src/tu/tu_133fa8.c).
     int Function_00134970(int argument0, int argument1, int argument2, int argument3, int argument4);
     // 0x00134990: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -150,8 +150,8 @@ struct UnknownVtable_003DCA78 {
     int Function_00134C98(unsigned int argument0, U128 argument1, unsigned int argument2, unsigned int argument3, unsigned int argument4, float argument5, float argument6);
     // 0x00135878: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     void * Function_00135878(void * argument0);
-    // 0x00165B00: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00165B00(unsigned int argument0);
+    // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
+    void Function_00165B00(int argument0);
     // 0x00165B88: UNVERIFIED signature (src/tu/tu_1650b8_165af8.c).
     unsigned int Function_00165B88();
     // 0x00383768: UNVERIFIED signature (src/auto/other/383768.c).
@@ -169,7 +169,7 @@ struct UnknownVtable_003DCA78 {
         // slot 0, table+0x8, this delta 0, function 0x00125D10; UNVERIFIED signature.
         virtual int Slot000();
         // slot 1, table+0x10, this delta 0, function 0x00165B00; UNVERIFIED signature.
-        virtual unsigned int Slot001(unsigned int argument0);
+        virtual void Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x00165B88; UNVERIFIED signature.
         virtual unsigned int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00133ED8; UNVERIFIED signature.
@@ -185,7 +185,7 @@ struct UnknownVtable_003DCA78 {
         // slot 8, table+0x48, this delta 0, function 0x00133FA8; UNVERIFIED signature.
         virtual int Slot008(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, int * argument4, unsigned int argument5, float argument6);
         // slot 9, table+0x50, this delta 0, function 0x001347B8; UNVERIFIED signature.
-        virtual int Slot009(unsigned int argument0, U128 argument1, void * argument2, float argument3);
+        virtual int Slot009(S128 argument0, S128 argument1, unsigned int argument2, float argument3);
         // slot 10, table+0x58, this delta 0, function 0x00134970; UNVERIFIED signature.
         virtual int Slot010(int argument0, int argument1, int argument2, int argument3, int argument4);
         // slot 11, table+0x60, this delta 0, function 0x00134C98; UNVERIFIED signature.

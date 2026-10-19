@@ -24,16 +24,16 @@ struct UnknownVtable_003DD330 {
     inline float & Field_003C() { return *(float *)((unsigned char *)this + 0x3C); }
     // 0x80: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0080() { return *(void * *)((unsigned char *)this + 0x80); }
-    // 0x00191778: UNVERIFIED signature (ghidra).
-    int Function_00191778(unsigned int argument0);
-    // 0x00191788: UNVERIFIED signature (ghidra).
-    int Function_00191788();
-    // 0x00191790: UNVERIFIED signature (ghidra).
-    int Function_00191790();
-    // 0x00191798: UNVERIFIED signature (ghidra).
-    unsigned int Function_00191798();
-    // 0x00193488: UNVERIFIED signature (ghidra).
-    int Function_00193488();
+    // 0x00191778: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).
+    void Function_00191778(S128 argument0);
+    // 0x00191788: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).
+    unsigned char Function_00191788();
+    // 0x00191790: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).
+    void Function_00191790();
+    // 0x00191798: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).
+    S128 Function_00191798();
+    // 0x00193488: UNVERIFIED signature (src/game/ai_movement_modes_193488.cpp).
+    unsigned char Function_00193488();
     // 0x001934A8: UNVERIFIED signature (ghidra).
     int Function_001934A8();
     // 0x00193568: UNVERIFIED signature (ghidra).
@@ -45,21 +45,21 @@ struct UnknownVtable_003DD330 {
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
     struct VirtualInterface0 {
         // slot 0, table+0x8, this delta 0, function 0x00193488; UNVERIFIED signature.
-        virtual int Slot000();
+        virtual unsigned char Slot000();
         // slot 1, table+0x10, this delta 0, function 0x001934A8; UNVERIFIED signature.
         virtual int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00193568; UNVERIFIED signature.
         virtual unsigned int Slot002(unsigned int argument0);
         // slot 3, table+0x20, this delta 0, function 0x00191778; UNVERIFIED signature.
-        virtual int Slot003(unsigned int argument0);
+        virtual void Slot003(S128 argument0);
         // slot 4, table+0x28, this delta 0, function 0x001936C0; UNVERIFIED signature.
         virtual int Slot004(long argument0);
         // slot 5, table+0x30, this delta 0, function 0x00191798; UNVERIFIED signature.
-        virtual unsigned int Slot005();
+        virtual S128 Slot005();
         // slot 6, table+0x38, this delta 0, function 0x00191788; UNVERIFIED signature.
-        virtual int Slot006();
+        virtual unsigned char Slot006();
         // slot 7, table+0x40, this delta 0, function 0x00191790; UNVERIFIED signature.
-        virtual int Slot007();
+        virtual void Slot007();
     };
 };
 

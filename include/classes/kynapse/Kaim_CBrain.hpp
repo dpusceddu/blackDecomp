@@ -15,7 +15,7 @@ struct Kaim_CBrain {
     // Destructor identity: 0x002E16B8.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
+    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
@@ -30,12 +30,12 @@ struct Kaim_CBrain {
     unsigned int Function_002904E8();
     // 0x002E16B8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002E16B8();
-    // 0x002E1818: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002E1818(void * argument0);
-    // 0x002E1B08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002E1B08();
-    // 0x0038C390: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0038C390(void * argument0);
+    // 0x002E1818: UNVERIFIED signature (include/campaign/graph/brain.hpp).
+    unsigned char Function_002E1818(void * argument0);
+    // 0x002E1B08: UNVERIFIED signature (src/kynapse/lookups_2e1b08.cpp).
+    void Function_002E1B08();
+    // 0x0038C390: UNVERIFIED signature (include/campaign/graph/brain.hpp).
+    unsigned char Function_0038C390(void * argument0);
 
     // Vtable 0x003E8950; vptr field offset unknown; RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -45,11 +45,11 @@ struct Kaim_CBrain {
         // slot 1, table+0x10, this delta 0, function 0x002904E8; UNVERIFIED signature.
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x002E1818; UNVERIFIED signature.
-        virtual int Slot002(void * argument0);
+        virtual unsigned char Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0038C390; UNVERIFIED signature.
-        virtual int Slot003(void * argument0);
+        virtual unsigned char Slot003(void * argument0);
         // slot 4, table+0x28, this delta 0, function 0x002E1B08; UNVERIFIED signature.
-        virtual int Slot004();
+        virtual void Slot004();
         // slot 5, table+0x30, this delta 0, function 0x002904E8; UNVERIFIED signature.
         virtual unsigned int Slot005();
     };

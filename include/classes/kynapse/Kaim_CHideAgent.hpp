@@ -18,40 +18,6 @@ struct Kaim_CHideAgent {
     inline void * & Field_000C() { return *(void * *)((unsigned char *)this + 0xC); }
     // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0014() { return *(float *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0024() { return *(unsigned int *)((unsigned char *)this + 0x24); }
-    // 0x28: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0028() { return *(int *)((unsigned char *)this + 0x28); }
-    // 0x30: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0030() { return *(int *)((unsigned char *)this + 0x30); }
-    // 0x34: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0034() { return *(unsigned char *)((unsigned char *)this + 0x34); }
-    // 0x35: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0035() { return *(unsigned char *)((unsigned char *)this + 0x35); }
-    // 0x48: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0048() { return *(unsigned int *)((unsigned char *)this + 0x48); }
-    // 0x50: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0050() { return *(int *)((unsigned char *)this + 0x50); }
-    // 0x54: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0054() { return *(unsigned char *)((unsigned char *)this + 0x54); }
-    // 0x55: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0055() { return *(unsigned char *)((unsigned char *)this + 0x55); }
-    // 0x58: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0058() { return *(unsigned int *)((unsigned char *)this + 0x58); }
-    // 0x5C: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_005C() { return *(unsigned int *)((unsigned char *)this + 0x5C); }
-    // 0x60: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0060() { return *(float *)((unsigned char *)this + 0x60); }
-    // 0x64: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0064() { return *(float *)((unsigned char *)this + 0x64); }
-    // 0x68: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0068() { return *(unsigned char *)((unsigned char *)this + 0x68); }
     // 0x002D3D38: UNVERIFIED signature (src/campaign/behaviors_hide.cpp).
     unsigned char Function_002D3D38(void * argument0);
     // 0x002D3F10: UNVERIFIED signature (src/kynapse/hide_agent_2d3c90.cpp).
@@ -64,12 +30,12 @@ struct Kaim_CHideAgent {
     void Function_002D50E8();
     // 0x002D5178: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     int Function_002D5178();
-    // 0x002D5198: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D5198();
-    // 0x002D51C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D51C0();
-    // 0x002D5238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D5238();
+    // 0x002D5198: UNVERIFIED signature (src/kynapse/predicates_2d5198.cpp).
+    unsigned char Function_002D5198();
+    // 0x002D51C0: UNVERIFIED signature (src/kynapse/behavior_methods_2d51c0.cpp).
+    void Function_002D51C0();
+    // 0x002D5238: UNVERIFIED signature (src/kynapse/predicates_2d5238.cpp).
+    unsigned char Function_002D5238();
     // 0x002D5398: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_002D5398();
     // 0x003895C8: UNVERIFIED signature (src/kynapse/class_info_3895c8.cpp).
@@ -85,17 +51,17 @@ struct Kaim_CHideAgent {
         // slot 2, table+0x18, this delta 0, function 0x002D3D38; UNVERIFIED signature.
         virtual unsigned char Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x002D51C0; UNVERIFIED signature.
-        virtual int Slot003();
+        virtual void Slot003();
         // slot 4, table+0x28, this delta 0, function 0x003895C8; UNVERIFIED signature.
         virtual void * Slot004();
         // slot 5, table+0x30, this delta 0, function 0x002D5238; UNVERIFIED signature.
-        virtual int Slot005();
+        virtual unsigned char Slot005();
         // slot 6, table+0x38, this delta 0, function 0x002D42C8; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D5178; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual int Slot007();
         // slot 8, table+0x48, this delta 0, function 0x002D5198; UNVERIFIED signature.
-        virtual int Slot008();
+        virtual unsigned char Slot008();
         // slot 9, table+0x50, this delta 0, function 0x002D4B68; UNVERIFIED signature.
         virtual int Slot009(void * argument0, void * argument1, float * argument2, unsigned char * argument3, unsigned char * argument4);
         // slot 10, table+0x58, this delta 0, function 0x002D5398; code-compatible exact source signature; original semantic types UNVERIFIED.

@@ -19,13 +19,13 @@ struct UnknownVtable_003DFCE0 {
     // 0x00195D40: UNVERIFIED signature (src/auto/game/195d20.c).
     unsigned int Function_00195D40();
     // 0x00195D98: UNVERIFIED signature (src/auto/game/195d98.c).
-    int * Function_00195D98();
+    void * Function_00195D98();
     // 0x00195DF0: UNVERIFIED signature (src/auto/game/195df0.c).
     unsigned int Function_00195DF0();
     // 0x00195E10: UNVERIFIED signature (src/auto/game/195e10.c).
-    int * Function_00195E10(int argument0, int argument1);
+    void * Function_00195E10(int argument0, int argument1);
     // 0x00195E80: UNVERIFIED signature (src/auto/game/195e10.c).
-    int * Function_00195E80();
+    void * Function_00195E80();
     // 0x00383DC0: UNVERIFIED signature (src/auto/other/383db8.c).
     int Function_00383DC0();
     // 0x00383DD0: UNVERIFIED signature (src/auto/other/383db8.c).
@@ -47,15 +47,15 @@ struct UnknownVtable_003DFCE0 {
         // slot 2, table+0x18, this delta 0, function 0x00195D40; UNVERIFIED signature.
         virtual unsigned int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00195D98; UNVERIFIED signature.
-        virtual int * Slot003();
+        virtual void * Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00195DF0; UNVERIFIED signature.
         virtual unsigned int Slot004();
         // slot 5, table+0x30, this delta 0, function 0x00195E10; UNVERIFIED signature.
-        virtual int * Slot005(int argument0, int argument1);
+        virtual void * Slot005(int argument0, int argument1);
         // slot 6, table+0x38, this delta 0, function 0x00383DC0; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x00195E80; UNVERIFIED signature.
-        virtual int * Slot007();
+        virtual void * Slot007();
         // slot 8, table+0x48, this delta 0, function 0x00383DD0; UNVERIFIED signature.
         virtual unsigned int Slot008();
         // slot 9, table+0x50, this delta 0, function 0x00383DD8; UNVERIFIED signature.

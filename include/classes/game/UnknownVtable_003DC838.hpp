@@ -42,7 +42,7 @@ struct UnknownVtable_003DC838 {
     inline void * & Field_0118() { return *(void * *)((unsigned char *)this + 0x118); }
     // 0x11C: UNVERIFIED type; PS2 access offset.
     inline void * & Field_011C() { return *(void * *)((unsigned char *)this + 0x11C); }
-    // 0x124: UNVERIFIED type; PS2 access offset.
+    // 0x124: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_0124() { return *(unsigned int *)((unsigned char *)this + 0x124); }
     // 0x136: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0136() { return *(unsigned char *)((unsigned char *)this + 0x136); }
@@ -152,8 +152,8 @@ struct UnknownVtable_003DC838 {
     unsigned int Function_001463D0(unsigned int argument0, unsigned int argument1, unsigned int argument2, float argument3, float argument4);
     // 0x00146A28: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_00146A28(int argument0);
-    // 0x00146AF0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00146AF0(unsigned int argument0);
+    // 0x00146AF0: UNVERIFIED signature (src/campaign/actor_entries_wave3.cpp).
+    void Function_00146AF0(unsigned int argument0);
     // 0x00146CE0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00146CE0(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3);
     // 0x001471E0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -174,8 +174,8 @@ struct UnknownVtable_003DC838 {
     int Function_0014A560();
     // 0x0014BD18: UNVERIFIED signature (src/auto/game/14bd18.c).
     unsigned int Function_0014BD18();
-    // 0x00165B00: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00165B00(unsigned int argument0);
+    // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
+    void Function_00165B00(int argument0);
     // 0x00383770: UNVERIFIED signature (src/auto/other/383770.c).
     unsigned int Function_00383770();
     // 0x00383780: UNVERIFIED signature (src/auto/other/383770.c).
@@ -189,7 +189,7 @@ struct UnknownVtable_003DC838 {
         // slot 0, table+0x8, this delta 0, function 0x00145240; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual void Slot000(float argument0);
         // slot 1, table+0x10, this delta 0, function 0x00165B00; UNVERIFIED signature.
-        virtual unsigned int Slot001(unsigned int argument0);
+        virtual void Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x00146A28; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual void Slot002(int argument0);
         // slot 3, table+0x20, this delta 0, function 0x00144E00; UNVERIFIED signature.
@@ -233,7 +233,7 @@ struct UnknownVtable_003DC838 {
         // slot 22, table+0xB8, this delta 0, function 0x001476D0; UNVERIFIED signature.
         virtual int Slot022();
         // slot 23, table+0xC0, this delta 0, function 0x00146AF0; UNVERIFIED signature.
-        virtual int Slot023(unsigned int argument0);
+        virtual void Slot023(unsigned int argument0);
         // slot 24, table+0xC8, this delta 0, function 0x00383830; UNVERIFIED signature.
         virtual int Slot024();
         // slot 25, table+0xD0, this delta 0, function 0x0014A560; UNVERIFIED signature.

@@ -24,7 +24,7 @@ struct Kaim_CActionAcceleration {
     void * Function_002D7A38(void * argument0);
     // 0x003898A8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003898A8();
-    // 0x003898E0: UNVERIFIED signature (ghidra).
+    // 0x003898E0: UNVERIFIED signature (src/kynapse/parameter_classes_3898e0.cpp).
     void * Function_003898E0();
 
     // Vtable 0x003E3D10; vptr field offset unknown; RTTI header.

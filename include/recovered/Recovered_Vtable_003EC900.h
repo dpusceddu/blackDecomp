@@ -5,8 +5,6 @@
 
 typedef struct Recovered_Vtable_003EC900 {
     u32 field_0; /* PS2 +0x0 */
-    void * field_4; /* PS2 +0x4 */
 } Recovered_Vtable_003EC900;
 typedef char assert_Recovered_Vtable_003EC900_0[(((int)&((Recovered_Vtable_003EC900 *)0)->field_0) == 0) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003EC900_4[(((int)&((Recovered_Vtable_003EC900 *)0)->field_4) == 4) ? 1 : -1];
 #endif

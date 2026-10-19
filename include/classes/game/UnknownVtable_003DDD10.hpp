@@ -31,13 +31,13 @@ struct UnknownVtable_003DDD10 {
     // 0x0018E5B8: UNVERIFIED signature (src/tu/18e578.c).
     int Function_0018E5B8(int argument0);
     // 0x0018E7C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int * Function_0018E7C0(void * argument0);
+    int Function_0018E7C0(void * argument0);
     // 0x0018EA20: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018EA20();
     // 0x0018EBE0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018EBE0(unsigned int argument0);
     // 0x0018F0B8: UNVERIFIED signature (src/auto/game/18f0b8.c).
-    int * Function_0018F0B8(void * argument0);
+    signed char * Function_0018F0B8(void * argument0);
     // 0x0018F100: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018F100();
     // 0x0018F178: UNVERIFIED signature (src/auto/game/18f178.c).
@@ -69,7 +69,7 @@ struct UnknownVtable_003DDD10 {
         // slot 3, table+0x20, this delta 0, function 0x0018E450; UNVERIFIED signature.
         virtual unsigned int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x0018F0B8; UNVERIFIED signature.
-        virtual int * Slot004(void * argument0);
+        virtual signed char * Slot004(void * argument0);
         // slot 5, table+0x30, this delta 0, function 0x0018E488; UNVERIFIED signature.
         virtual unsigned int Slot005();
         // slot 6, table+0x38, this delta 0, function 0x0018E4C0; UNVERIFIED signature.
@@ -89,7 +89,7 @@ struct UnknownVtable_003DDD10 {
         // slot 13, table+0x70, this delta 0, function 0x00383EA8; UNVERIFIED signature.
         virtual int Slot013();
         // slot 14, table+0x78, this delta 0, function 0x0018E7C0; UNVERIFIED signature.
-        virtual int * Slot014(void * argument0);
+        virtual int Slot014(void * argument0);
         // slot 15, table+0x80, this delta 0, function 0x0018F180; UNVERIFIED signature.
         virtual int Slot015(unsigned int argument0);
         // slot 16, table+0x88, this delta 0, function 0x00383EB8; UNVERIFIED signature.

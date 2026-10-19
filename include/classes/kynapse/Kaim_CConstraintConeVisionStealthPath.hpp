@@ -16,30 +16,8 @@ struct Kaim_CConstraintConeVisionStealthPath {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_000C() { return *(void * *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0014() { return *(void * *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0018() { return *(void * *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_001C() { return *(void * *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0020() { return *(void * *)((unsigned char *)this + 0x20); }
-    // 0x54: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0054() { return *(int *)((unsigned char *)this + 0x54); }
-    // 0x58: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0058() { return *(float *)((unsigned char *)this + 0x58); }
-    // 0x5C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_005C() { return *(float *)((unsigned char *)this + 0x5C); }
-    // 0x002F13B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F13B0(void * argument0, void * argument1, void * argument2);
+    // 0x002F13B0: UNVERIFIED signature (src/context/behaviors_constraints.cpp).
+    unsigned char Function_002F13B0(void * argument0, void * argument1, float * argument2);
     // 0x00383D48: UNVERIFIED signature (src/auto/kynapse/383d48.c).
     unsigned int Function_00383D48();
     // 0x00390318: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
@@ -55,7 +33,7 @@ struct Kaim_CConstraintConeVisionStealthPath {
         // slot 1, table+0x10, this delta 0, function 0x003903A0; UNVERIFIED signature.
         virtual void * Slot001();
         // slot 2, table+0x18, this delta 0, function 0x002F13B0; UNVERIFIED signature.
-        virtual int Slot002(void * argument0, void * argument1, void * argument2);
+        virtual unsigned char Slot002(void * argument0, void * argument1, float * argument2);
         // slot 3, table+0x20, this delta 0, function 0x00383D48; UNVERIFIED signature.
         virtual unsigned int Slot003();
     };

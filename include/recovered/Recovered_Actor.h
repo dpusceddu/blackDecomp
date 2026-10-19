@@ -4,10 +4,27 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Actor {
-    u8 opaque_0[88];
+    u8 opaque_0[48];
+    f32 field_30; /* PS2 +0x30 */
+    f32 field_34; /* PS2 +0x34 */
+    f32 field_38; /* PS2 +0x38 */
+    u8 opaque_3C[12];
+    f32 field_48; /* PS2 +0x48 */
+    f32 field_4C; /* PS2 +0x4C */
+    f32 field_50; /* PS2 +0x50 */
+    u8 opaque_54[4];
     s32 field_58; /* PS2 +0x58 */
     s32 field_5C; /* PS2 +0x5C */
+    u8 opaque_60[712];
+    s32 field_328; /* PS2 +0x328 */
 } Recovered_Actor;
+typedef char assert_Recovered_Actor_30[(((int)&((Recovered_Actor *)0)->field_30) == 48) ? 1 : -1];
+typedef char assert_Recovered_Actor_34[(((int)&((Recovered_Actor *)0)->field_34) == 52) ? 1 : -1];
+typedef char assert_Recovered_Actor_38[(((int)&((Recovered_Actor *)0)->field_38) == 56) ? 1 : -1];
+typedef char assert_Recovered_Actor_48[(((int)&((Recovered_Actor *)0)->field_48) == 72) ? 1 : -1];
+typedef char assert_Recovered_Actor_4C[(((int)&((Recovered_Actor *)0)->field_4C) == 76) ? 1 : -1];
+typedef char assert_Recovered_Actor_50[(((int)&((Recovered_Actor *)0)->field_50) == 80) ? 1 : -1];
 typedef char assert_Recovered_Actor_58[(((int)&((Recovered_Actor *)0)->field_58) == 88) ? 1 : -1];
 typedef char assert_Recovered_Actor_5C[(((int)&((Recovered_Actor *)0)->field_5C) == 92) ? 1 : -1];
+typedef char assert_Recovered_Actor_328[(((int)&((Recovered_Actor *)0)->field_328) == 808) ? 1 : -1];
 #endif

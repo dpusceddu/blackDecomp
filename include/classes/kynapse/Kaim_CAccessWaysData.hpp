@@ -15,8 +15,6 @@ struct Kaim_CAccessWaysData {
     // Destructor identity: 0x002FD800.
     // Destructor identity: 0x002FD800.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
@@ -31,8 +29,8 @@ struct Kaim_CAccessWaysData {
     int Function_002FD4A0(unsigned int argument0);
     // 0x002FD800: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002FD800();
-    // 0x002FD8C8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002FD8C8(void * argument0);
+    // 0x002FD8C8: UNVERIFIED signature (src/kynapse/configure_2fd8c8.cpp).
+    unsigned char Function_002FD8C8(void * argument0);
     // 0x00392DA0: UNVERIFIED signature (src/kynapse/class_info_392da0.cpp).
     void * Function_00392DA0();
 
@@ -42,7 +40,7 @@ struct Kaim_CAccessWaysData {
         // slot 0, table+0x8, this delta 0, function 0x002FD800; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002FD8C8; UNVERIFIED signature.
-        virtual int Slot001(void * argument0);
+        virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x00392DA0; UNVERIFIED signature.
         virtual void * Slot002();
         // slot 3, table+0x20, this delta 0, function 0x002FD288; UNVERIFIED signature.

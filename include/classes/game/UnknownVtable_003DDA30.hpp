@@ -29,7 +29,7 @@ struct UnknownVtable_003DDA30 {
     // 0x0018E5B8: UNVERIFIED signature (src/tu/18e578.c).
     int Function_0018E5B8(int argument0);
     // 0x0018E7C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int * Function_0018E7C0(void * argument0);
+    int Function_0018E7C0(void * argument0);
     // 0x0018EA20: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018EA20();
     // 0x0018EBE0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -93,7 +93,7 @@ struct UnknownVtable_003DDA30 {
         // slot 13, table+0x70, this delta 0, function 0x00190840; UNVERIFIED signature.
         virtual void * Slot013();
         // slot 14, table+0x78, this delta 0, function 0x0018E7C0; UNVERIFIED signature.
-        virtual int * Slot014(void * argument0);
+        virtual int Slot014(void * argument0);
         // slot 15, table+0x80, this delta 0, function 0x00383EB0; UNVERIFIED signature.
         virtual int Slot015();
         // slot 16, table+0x88, this delta 0, function 0x00383EB8; UNVERIFIED signature.

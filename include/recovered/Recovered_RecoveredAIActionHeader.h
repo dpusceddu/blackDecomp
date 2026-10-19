@@ -5,7 +5,9 @@
 
 typedef struct Recovered_RecoveredAIActionHeader {
     void * field_0; /* PS2 +0x0 */
-    u8 opaque_4[8];
+    u8 opaque_4[4];
+    u32 field_8; /* PS2 +0x8 */
 } Recovered_RecoveredAIActionHeader;
 typedef char assert_Recovered_RecoveredAIActionHeader_0[(((int)&((Recovered_RecoveredAIActionHeader *)0)->field_0) == 0) ? 1 : -1];
+typedef char assert_Recovered_RecoveredAIActionHeader_8[(((int)&((Recovered_RecoveredAIActionHeader *)0)->field_8) == 8) ? 1 : -1];
 #endif

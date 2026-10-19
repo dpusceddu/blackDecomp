@@ -4,15 +4,36 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Controller {
-    u8 opaque_0[124];
+    u8 opaque_0[48];
+    s32 field_30; /* PS2 +0x30 */
+    u8 field_34; /* PS2 +0x34 */
+    u8 opaque_35[71];
     void * field_7C; /* PS2 +0x7C */
-    u8 opaque_80[32];
+    u8 opaque_80[16];
+    s32 field_90; /* PS2 +0x90 */
+    u8 opaque_94[12];
     u128 field_A0; /* PS2 +0xA0 */
     f32 field_B0; /* PS2 +0xB0 */
     f32 field_B4; /* PS2 +0xB4 */
+    u8 field_B8; /* PS2 +0xB8 */
+    u8 field_B9; /* PS2 +0xB9 */
+    u8 opaque_BA[2];
+    s32 field_BC; /* PS2 +0xBC */
+    u8 opaque_C0[1];
+    u8 field_C1; /* PS2 +0xC1 */
+    u8 opaque_C2[590];
+    void * field_310; /* PS2 +0x310 */
 } Recovered_Controller;
+typedef char assert_Recovered_Controller_30[(((int)&((Recovered_Controller *)0)->field_30) == 48) ? 1 : -1];
+typedef char assert_Recovered_Controller_34[(((int)&((Recovered_Controller *)0)->field_34) == 52) ? 1 : -1];
 typedef char assert_Recovered_Controller_7C[(((int)&((Recovered_Controller *)0)->field_7C) == 124) ? 1 : -1];
+typedef char assert_Recovered_Controller_90[(((int)&((Recovered_Controller *)0)->field_90) == 144) ? 1 : -1];
 typedef char assert_Recovered_Controller_A0[(((int)&((Recovered_Controller *)0)->field_A0) == 160) ? 1 : -1];
 typedef char assert_Recovered_Controller_B0[(((int)&((Recovered_Controller *)0)->field_B0) == 176) ? 1 : -1];
 typedef char assert_Recovered_Controller_B4[(((int)&((Recovered_Controller *)0)->field_B4) == 180) ? 1 : -1];
+typedef char assert_Recovered_Controller_B8[(((int)&((Recovered_Controller *)0)->field_B8) == 184) ? 1 : -1];
+typedef char assert_Recovered_Controller_B9[(((int)&((Recovered_Controller *)0)->field_B9) == 185) ? 1 : -1];
+typedef char assert_Recovered_Controller_BC[(((int)&((Recovered_Controller *)0)->field_BC) == 188) ? 1 : -1];
+typedef char assert_Recovered_Controller_C1[(((int)&((Recovered_Controller *)0)->field_C1) == 193) ? 1 : -1];
+typedef char assert_Recovered_Controller_310[(((int)&((Recovered_Controller *)0)->field_310) == 784) ? 1 : -1];
 #endif

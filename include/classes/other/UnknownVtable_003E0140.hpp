@@ -11,7 +11,7 @@ namespace BlackPS2Classes {
 struct UnknownVtable_003E0140 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
+    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.

@@ -25,14 +25,12 @@ struct Kaim_CShooterAgent {
     inline void * & Field_000C() { return *(void * *)((unsigned char *)this + 0xC); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
+    // 0x14: UNVERIFIED type; PS2 access offset.
+    inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
+    // 0x18: UNVERIFIED type; PS2 access offset.
+    inline unsigned int & Field_0018() { return *(unsigned int *)((unsigned char *)this + 0x18); }
     // 0x1C: UNVERIFIED type; PS2 access offset.
     inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0024() { return *(float *)((unsigned char *)this + 0x24); }
-    // 0x28: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0028() { return *(float *)((unsigned char *)this + 0x28); }
     // 0x2C: UNVERIFIED type; PS2 access offset.
     inline float & Field_002C() { return *(float *)((unsigned char *)this + 0x2C); }
     // 0x30: UNVERIFIED type; PS2 access offset.
@@ -58,9 +56,9 @@ struct Kaim_CShooterAgent {
     // 0x5C: UNVERIFIED type; PS2 access offset.
     inline void * & Field_005C() { return *(void * *)((unsigned char *)this + 0x5C); }
     // 0x60: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0060() { return *(int *)((unsigned char *)this + 0x60); }
+    inline unsigned int & Field_0060() { return *(unsigned int *)((unsigned char *)this + 0x60); }
     // 0x64: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0064() { return *(void * *)((unsigned char *)this + 0x64); }
+    inline unsigned int & Field_0064() { return *(unsigned int *)((unsigned char *)this + 0x64); }
     // 0x68: UNVERIFIED type; PS2 access offset.
     inline int & Field_0068() { return *(int *)((unsigned char *)this + 0x68); }
     // 0x70: UNVERIFIED type; PS2 access offset.
@@ -75,12 +73,12 @@ struct Kaim_CShooterAgent {
     bool Function_002D6E48(const void * argument0);
     // 0x002D7068: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D7068();
-    // 0x002D70C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D70C0();
-    // 0x002D70E0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D70E0();
-    // 0x002D7108: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D7108();
+    // 0x002D70C0: UNVERIFIED signature (src/kynapse/predicates_2d70c0.cpp).
+    unsigned char Function_002D70C0();
+    // 0x002D70E0: UNVERIFIED signature (src/kynapse/predicates_2d70c0.cpp).
+    unsigned char Function_002D70E0();
+    // 0x002D7108: UNVERIFIED signature (src/kynapse/predicates_2d70c0.cpp).
+    unsigned char Function_002D7108();
     // 0x002D7118: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_002D7118();
     // 0x00389770: UNVERIFIED signature (src/kynapse/class_info_389770.cpp).
@@ -106,11 +104,11 @@ struct Kaim_CShooterAgent {
         // slot 6, table+0x38, this delta 0, function 0x002D6A38; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D70C0; UNVERIFIED signature.
-        virtual int Slot007();
+        virtual unsigned char Slot007();
         // slot 8, table+0x48, this delta 0, function 0x002D70E0; UNVERIFIED signature.
-        virtual int Slot008();
+        virtual unsigned char Slot008();
         // slot 9, table+0x50, this delta 0, function 0x002D7108; UNVERIFIED signature.
-        virtual int Slot009();
+        virtual unsigned char Slot009();
         // slot 10, table+0x58, this delta 0, function 0x002D6E48; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual bool Slot010(const void * argument0);
     };

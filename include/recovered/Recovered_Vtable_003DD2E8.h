@@ -7,16 +7,13 @@ typedef struct Recovered_Vtable_003DD2E8 {
     u8 opaque_0[16];
     u128 field_10; /* PS2 +0x10 */
     u8 opaque_20[16];
-    s32 field_30; /* PS2 +0x30 */
+    u32 field_30; /* PS2 +0x30 */
     void * field_34; /* PS2 +0x34 */
     u8 opaque_38[4];
     f32 field_3C; /* PS2 +0x3C */
-    u8 opaque_40[16];
-    u8 field_50; /* PS2 +0x50 */
 } Recovered_Vtable_003DD2E8;
 typedef char assert_Recovered_Vtable_003DD2E8_10[(((int)&((Recovered_Vtable_003DD2E8 *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DD2E8_30[(((int)&((Recovered_Vtable_003DD2E8 *)0)->field_30) == 48) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DD2E8_34[(((int)&((Recovered_Vtable_003DD2E8 *)0)->field_34) == 52) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DD2E8_3C[(((int)&((Recovered_Vtable_003DD2E8 *)0)->field_3C) == 60) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DD2E8_50[(((int)&((Recovered_Vtable_003DD2E8 *)0)->field_50) == 80) ? 1 : -1];
 #endif

@@ -33,7 +33,7 @@ typedef struct Recovered_Vtable_003E0800 {
     u8 field_4D; /* PS2 +0x4D */
     u8 opaque_4E[2];
     void * field_50; /* PS2 +0x50 */
-    u8 opaque_54[4];
+    f32 field_54; /* PS2 +0x54 */
 } Recovered_Vtable_003E0800;
 typedef char assert_Recovered_Vtable_003E0800_0[(((int)&((Recovered_Vtable_003E0800 *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E0800_4[(((int)&((Recovered_Vtable_003E0800 *)0)->field_4) == 4) ? 1 : -1];
@@ -62,4 +62,5 @@ typedef char assert_Recovered_Vtable_003E0800_4B[(((int)&((Recovered_Vtable_003E
 typedef char assert_Recovered_Vtable_003E0800_4C[(((int)&((Recovered_Vtable_003E0800 *)0)->field_4C) == 76) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E0800_4D[(((int)&((Recovered_Vtable_003E0800 *)0)->field_4D) == 77) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E0800_50[(((int)&((Recovered_Vtable_003E0800 *)0)->field_50) == 80) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0800_54[(((int)&((Recovered_Vtable_003E0800 *)0)->field_54) == 84) ? 1 : -1];
 #endif

@@ -24,7 +24,7 @@ struct Kaim_CActionSpeed {
     void * Function_002D8200(void * argument0);
     // 0x00389DA8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00389DA8();
-    // 0x00389DE0: UNVERIFIED signature (ghidra).
+    // 0x00389DE0: UNVERIFIED signature (src/kynapse/parameter_classes_389de0.cpp).
     void * Function_00389DE0();
 
     // Vtable 0x003E4480; vptr field offset unknown; RTTI header.

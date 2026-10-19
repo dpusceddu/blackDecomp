@@ -16,8 +16,6 @@ struct Kaim_CPathCostData {
     // Destructor identity: 0x002F42B8.
     // Destructor identity: 0x002F42B8.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
@@ -32,8 +30,8 @@ struct Kaim_CPathCostData {
     int Function_002F3770(void * argument0);
     // 0x002F3AB0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F3AB0();
-    // 0x002F4100: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F4100(unsigned int argument0);
+    // 0x002F4100: UNVERIFIED signature (src/campaign/graph_cpathcostdata.cpp).
+    int Function_002F4100(void * argument0);
     // 0x002F42B8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002F42B8();
     // 0x00391120: UNVERIFIED signature (src/kynapse/class_info_391120.cpp).
@@ -51,7 +49,7 @@ struct Kaim_CPathCostData {
         // slot 3, table+0x20, this delta 0, function 0x002F3AB0; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x002F4100; UNVERIFIED signature.
-        virtual int Slot004(unsigned int argument0);
+        virtual int Slot004(void * argument0);
     };
 };
 

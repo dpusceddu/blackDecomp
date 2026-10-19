@@ -30,7 +30,7 @@ struct Kaim_CActionShoot {
     void * Function_002D8058(void * argument0);
     // 0x00389CB0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00389CB0();
-    // 0x00389CE8: UNVERIFIED signature (ghidra).
+    // 0x00389CE8: UNVERIFIED signature (src/kynapse/parameter_classes_389ce8.cpp).
     void * Function_00389CE8();
 
     // Vtable 0x003E42F0; vptr field offset unknown; RTTI header.

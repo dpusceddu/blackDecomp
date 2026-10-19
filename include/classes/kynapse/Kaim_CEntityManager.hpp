@@ -16,34 +16,8 @@ struct Kaim_CEntityManager {
     // Destructor identity: 0x0030EAE0.
     // Destructor identity: 0x0030EAE0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0004() { return *(unsigned int *)((unsigned char *)this + 0x4); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0018() { return *(unsigned int *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_001C() { return *(unsigned int *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0020() { return *(unsigned int *)((unsigned char *)this + 0x20); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0024() { return *(unsigned int *)((unsigned char *)this + 0x24); }
-    // 0x28: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0028() { return *(unsigned int *)((unsigned char *)this + 0x28); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_002C() { return *(unsigned int *)((unsigned char *)this + 0x2C); }
     // 0x30: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0030() { return *(void * *)((unsigned char *)this + 0x30); }
-    // 0x34: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0034() { return *(unsigned int *)((unsigned char *)this + 0x34); }
-    // 0x38: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0038() { return *(unsigned int *)((unsigned char *)this + 0x38); }
-    // 0x3C: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_003C() { return *(unsigned int *)((unsigned char *)this + 0x3C); }
-    // 0x40: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0040() { return *(unsigned int *)((unsigned char *)this + 0x40); }
-    // 0x44: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0044() { return *(unsigned int *)((unsigned char *)this + 0x44); }
+    inline int & Field_0030() { return *(int *)((unsigned char *)this + 0x30); }
     // 0x50: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0050() { return *(unsigned char *)((unsigned char *)this + 0x50); }
     // 0x51: UNVERIFIED type; PS2 access offset.

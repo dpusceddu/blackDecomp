@@ -22,7 +22,7 @@ struct Kaim_CEntityVisualAcuteness {
     void * Function_002D98D8(void * argument0);
     // 0x0038AA20: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038AA20();
-    // 0x0038AA58: UNVERIFIED signature (ghidra).
+    // 0x0038AA58: UNVERIFIED signature (src/kynapse/parameter_classes_38aa58.cpp).
     void * Function_0038AA58();
 
     // Vtable 0x003E55A0; vptr field offset unknown; RTTI header.

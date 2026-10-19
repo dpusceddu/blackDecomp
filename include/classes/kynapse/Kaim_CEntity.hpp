@@ -14,22 +14,6 @@ struct Kaim_CEntity {
     typedef Hierarchy_Kaim_CEntity Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002E45F8.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0008() { return *(unsigned int *)((unsigned char *)this + 0x8); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0010() { return *(unsigned int *)((unsigned char *)this + 0x10); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0018() { return *(void * *)((unsigned char *)this + 0x18); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_002C() { return *(void * *)((unsigned char *)this + 0x2C); }
-    // 0x58: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0058() { return *(int *)((unsigned char *)this + 0x58); }
-    // 0x5C: UNVERIFIED type; PS2 access offset.
-    inline int & Field_005C() { return *(int *)((unsigned char *)this + 0x5C); }
     // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
     unsigned int Function_002904E8();
     // 0x002E45F8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).

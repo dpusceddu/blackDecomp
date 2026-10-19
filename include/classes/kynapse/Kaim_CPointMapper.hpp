@@ -44,7 +44,7 @@ struct Kaim_CPointMapper {
     void Function_0038AED8();
     // 0x0038B140: UNVERIFIED signature (src/kynapse/class_info_38b140.cpp).
     void * Function_0038B140();
-    // 0x0038E768: UNVERIFIED signature (ghidra).
+    // 0x0038E768: UNVERIFIED signature (src/campaign/graph_cpointmapper.cpp).
     int Function_0038E768(void * argument0);
     // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
     void Function_0038E7B8();

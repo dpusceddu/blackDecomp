@@ -128,8 +128,8 @@ struct UnknownVtable_003DC750 {
     void * Function_00152988(int argument0);
     // 0x00152E38: UNVERIFIED signature (src/tu/tu_152bb0.c).
     void * Function_00152E38();
-    // 0x00165B00: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00165B00(unsigned int argument0);
+    // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
+    void Function_00165B00(int argument0);
     // 0x003837A0: UNVERIFIED signature (src/auto/other/3837a0.c).
     int Function_003837A0();
 
@@ -139,7 +139,7 @@ struct UnknownVtable_003DC750 {
         // slot 0, table+0x8, this delta 0, function 0x00150B00; UNVERIFIED signature.
         virtual unsigned int Slot000(float argument0);
         // slot 1, table+0x10, this delta 0, function 0x00165B00; UNVERIFIED signature.
-        virtual unsigned int Slot001(unsigned int argument0);
+        virtual void Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x00151E80; UNVERIFIED signature.
         virtual unsigned int Slot002(unsigned int argument0);
         // slot 3, table+0x20, this delta 0, function 0x00150738; UNVERIFIED signature.

@@ -26,7 +26,7 @@ struct Kaim_CEntityTorsoOrientation {
     void * Function_002D9710(void * argument0);
     // 0x0038A918: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A918();
-    // 0x0038A950: UNVERIFIED signature (ghidra).
+    // 0x0038A950: UNVERIFIED signature (src/kynapse/parameter_classes_38a950.cpp).
     void * Function_0038A950();
 
     // Vtable 0x003E5460; vptr field offset unknown; RTTI header.

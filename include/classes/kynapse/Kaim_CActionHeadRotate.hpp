@@ -26,7 +26,7 @@ struct Kaim_CActionHeadRotate {
     void * Function_002D9DE8(void * argument0);
     // 0x0038ACB8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038ACB8();
-    // 0x0038ACF0: UNVERIFIED signature (ghidra).
+    // 0x0038ACF0: UNVERIFIED signature (src/kynapse/parameter_classes_38acf0.cpp).
     void * Function_0038ACF0();
 
     // Vtable 0x003E5988; vptr field offset unknown; RTTI header.

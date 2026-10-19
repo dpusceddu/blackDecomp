@@ -17,15 +17,11 @@ struct UnknownVtable_003DC9B8 {
     // 0x7C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_007C() { return *(void * *)((unsigned char *)this + 0x7C); }
     // 0x90: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
-    inline int & Field_0090() { return *(int *)((unsigned char *)this + 0x90); }
+    inline unsigned int & Field_0090() { return *(unsigned int *)((unsigned char *)this + 0x90); }
     // 0xB8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_00B8() { return *(unsigned char *)((unsigned char *)this + 0xB8); }
     // 0xB9: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_00B9() { return *(unsigned char *)((unsigned char *)this + 0xB9); }
-    // 0xBC: UNVERIFIED type; PS2 access offset.
-    inline int & Field_00BC() { return *(int *)((unsigned char *)this + 0xBC); }
-    // 0xC1: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_00C1() { return *(unsigned char *)((unsigned char *)this + 0xC1); }
     // 0xC4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_00C4() { return *(unsigned int *)((unsigned char *)this + 0xC4); }
     // 0x0013DCA0: UNVERIFIED signature (src/tu/13dc38.c).

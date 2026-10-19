@@ -15,8 +15,6 @@ struct ComputeVisibilityTraversal {
     // Destructor identity: 0x00393288.
     // Destructor identity: 0x00393288.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x14: UNVERIFIED type; PS2 access offset.
     inline int & Field_0014() { return *(int *)((unsigned char *)this + 0x14); }
     // 0x18: UNVERIFIED type; PS2 access offset.

@@ -19,13 +19,13 @@ struct UnknownVtable_003DEE48 {
     // 0x00193978: UNVERIFIED signature (src/auto/game/193970.c).
     unsigned int Function_00193978();
     // 0x00195330: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int * Function_00195330();
+    int Function_00195330();
     // 0x00195438: UNVERIFIED signature (src/tu/195438.c).
-    int * Function_00195438();
+    signed char * Function_00195438();
     // 0x00195480: UNVERIFIED signature (src/tu/195438.c).
     unsigned int Function_00195480();
     // 0x001954A0: UNVERIFIED signature (src/tu/195438.c).
-    int * Function_001954A0();
+    int Function_001954A0();
     // 0x00383DB8: UNVERIFIED signature (src/auto/other/383db8.c).
     unsigned int Function_00383DB8();
     // 0x00383DC0: UNVERIFIED signature (src/auto/other/383db8.c).
@@ -47,9 +47,9 @@ struct UnknownVtable_003DEE48 {
         // slot 1, table+0x10, this delta 0, function 0x00193978; UNVERIFIED signature.
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00195330; UNVERIFIED signature.
-        virtual int * Slot002();
+        virtual int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00195438; UNVERIFIED signature.
-        virtual int * Slot003();
+        virtual signed char * Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00195480; UNVERIFIED signature.
         virtual unsigned int Slot004();
         // slot 5, table+0x30, this delta 0, function 0x00383DB8; UNVERIFIED signature.
@@ -57,7 +57,7 @@ struct UnknownVtable_003DEE48 {
         // slot 6, table+0x38, this delta 0, function 0x00383DC0; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x001954A0; UNVERIFIED signature.
-        virtual int * Slot007();
+        virtual int Slot007();
         // slot 8, table+0x48, this delta 0, function 0x00383DD0; UNVERIFIED signature.
         virtual unsigned int Slot008();
         // slot 9, table+0x50, this delta 0, function 0x00383DD8; UNVERIFIED signature.

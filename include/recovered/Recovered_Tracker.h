@@ -4,7 +4,7 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Tracker {
-    void * field_0; /* PS2 +0x0 */
+    u32 field_0; /* PS2 +0x0 */
     s32 field_4; /* PS2 +0x4 */
     u32 field_8; /* PS2 +0x8 */
     u32 field_C; /* PS2 +0xC */

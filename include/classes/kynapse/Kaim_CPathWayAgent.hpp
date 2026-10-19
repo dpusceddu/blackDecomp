@@ -54,12 +54,18 @@ struct Kaim_CPathWayAgent {
     inline unsigned char & Field_0042() { return *(unsigned char *)((unsigned char *)this + 0x42); }
     // 0x43: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0043() { return *(unsigned char *)((unsigned char *)this + 0x43); }
+    // 0x44: UNVERIFIED type; PS2 access offset.
+    inline float & Field_0044() { return *(float *)((unsigned char *)this + 0x44); }
     // 0x48: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0048() { return *(unsigned char *)((unsigned char *)this + 0x48); }
+    // 0x4C: UNVERIFIED type; PS2 access offset.
+    inline float & Field_004C() { return *(float *)((unsigned char *)this + 0x4C); }
     // 0x50: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0050() { return *(unsigned char *)((unsigned char *)this + 0x50); }
-    // 0x002D5498: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D5498(void * argument0);
+    // 0x54: UNVERIFIED type; PS2 access offset.
+    inline float & Field_0054() { return *(float *)((unsigned char *)this + 0x54); }
+    // 0x002D5498: UNVERIFIED signature (src/kynapse/path_agent.cpp).
+    unsigned char Function_002D5498(void * argument0);
     // 0x002D5650: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D5650();
     // 0x002D59F0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -68,16 +74,16 @@ struct Kaim_CPathWayAgent {
     void Function_002D6278();
     // 0x002D62D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D62D0(void * argument0);
-    // 0x002D63C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D63C0();
-    // 0x002D63D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D63D0();
+    // 0x002D63C0: UNVERIFIED signature (src/kynapse/predicates_2d63c0.cpp).
+    unsigned char Function_002D63C0();
+    // 0x002D63D0: UNVERIFIED signature (src/kynapse/predicates_2d63c0.cpp).
+    unsigned char Function_002D63D0();
     // 0x002D63E0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D63E0();
     // 0x002D6440: UNVERIFIED signature (src/tu/kynapse_tu_2d53f0.c).
     unsigned int Function_002D6440();
-    // 0x002D6460: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D6460();
+    // 0x002D6460: UNVERIFIED signature (src/kynapse/predicates_2d6460.cpp).
+    unsigned char Function_002D6460();
     // 0x00389668: UNVERIFIED signature (src/kynapse/class_info_389668.cpp).
     void * Function_00389668();
 
@@ -87,7 +93,7 @@ struct Kaim_CPathWayAgent {
         // slot 0, table+0x8, this delta 0, function 0x002D6278; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002D5498; UNVERIFIED signature.
-        virtual int Slot001(void * argument0);
+        virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002D62D0; UNVERIFIED signature.
         virtual int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x002D6440; UNVERIFIED signature.
@@ -95,13 +101,13 @@ struct Kaim_CPathWayAgent {
         // slot 4, table+0x28, this delta 0, function 0x00389668; UNVERIFIED signature.
         virtual void * Slot004();
         // slot 5, table+0x30, this delta 0, function 0x002D6460; UNVERIFIED signature.
-        virtual int Slot005();
+        virtual unsigned char Slot005();
         // slot 6, table+0x38, this delta 0, function 0x002D5650; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D63C0; UNVERIFIED signature.
-        virtual int Slot007();
+        virtual unsigned char Slot007();
         // slot 8, table+0x48, this delta 0, function 0x002D63D0; UNVERIFIED signature.
-        virtual int Slot008();
+        virtual unsigned char Slot008();
         // slot 9, table+0x50, this delta 0, function 0x002D63E0; UNVERIFIED signature.
         virtual int Slot009();
         // slot 10, table+0x58, this delta 0, function 0x002D59F0; UNVERIFIED signature.

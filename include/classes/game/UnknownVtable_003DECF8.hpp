@@ -21,11 +21,11 @@ struct UnknownVtable_003DECF8 {
     // 0x00197638: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00197638();
     // 0x00197678: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int * Function_00197678();
+    void * Function_00197678();
     // 0x001977F8: UNVERIFIED signature (src/auto/game/1977f8.c).
-    int * Function_001977F8();
+    unsigned int Function_001977F8();
     // 0x00197858: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int * Function_00197858(unsigned int argument0, unsigned int argument1);
+    void * Function_00197858(unsigned int argument0, unsigned int argument1);
     // 0x001979E0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001979E0(void * argument0);
     // 0x00383DD0: UNVERIFIED signature (src/auto/other/383db8.c).
@@ -49,13 +49,13 @@ struct UnknownVtable_003DECF8 {
         // slot 3, table+0x20, this delta 0, function 0x00197638; UNVERIFIED signature.
         virtual unsigned int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00197678; UNVERIFIED signature.
-        virtual int * Slot004();
+        virtual void * Slot004();
         // slot 5, table+0x30, this delta 0, function 0x00197858; UNVERIFIED signature.
-        virtual int * Slot005(unsigned int argument0, unsigned int argument1);
+        virtual void * Slot005(unsigned int argument0, unsigned int argument1);
         // slot 6, table+0x38, this delta 0, function 0x001979E0; UNVERIFIED signature.
         virtual int Slot006(void * argument0);
         // slot 7, table+0x40, this delta 0, function 0x001977F8; UNVERIFIED signature.
-        virtual int * Slot007();
+        virtual unsigned int Slot007();
         // slot 8, table+0x48, this delta 0, function 0x00383DD0; UNVERIFIED signature.
         virtual unsigned int Slot008();
         // slot 9, table+0x50, this delta 0, function 0x00383DD8; UNVERIFIED signature.

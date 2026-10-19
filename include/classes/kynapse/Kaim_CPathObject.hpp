@@ -15,10 +15,6 @@ struct Kaim_CPathObject {
     // Destructor identity: 0x002F4A90.
     // Destructor identity: 0x002F4A90.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x60: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0060() { return *(void * *)((unsigned char *)this + 0x60); }
     // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
     unsigned int Function_002904E8();
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
@@ -33,9 +29,9 @@ struct Kaim_CPathObject {
     int Function_002F47B0(unsigned int argument0, void * argument1);
     // 0x002F4A90: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002F4A90();
-    // 0x002F4B50: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    void * Function_002F4B50(void * argument0);
-    // 0x00391288: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002F4B50: UNVERIFIED signature (src/kynapse/host_2850c0_2f4b50.cpp).
+    void Function_002F4B50(void * argument0);
+    // 0x00391288: UNVERIFIED signature (src/campaign/graph_cpathobject.cpp).
     unsigned int Function_00391288(unsigned int argument0, unsigned int argument1, void * argument2, unsigned int argument3);
     // 0x003912B8: UNVERIFIED signature (src/auto/kynapse/3912b8.c).
     int Function_003912B8();
@@ -51,8 +47,8 @@ struct Kaim_CPathObject {
     int Function_00391370();
     // 0x00391378: UNVERIFIED signature (src/auto/kynapse/391358.c).
     unsigned int Function_00391378();
-    // 0x00391380: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00391380();
+    // 0x00391380: UNVERIFIED signature (src/campaign/graph_cpathobject.cpp).
+    void Function_00391380(int argument0);
 
     // Vtable 0x003EE090; vptr field offset unknown; RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -78,7 +74,7 @@ struct Kaim_CPathObject {
         // slot 9, table+0x50, this delta 0, function 0x00391360; UNVERIFIED signature.
         virtual int Slot009();
         // slot 10, table+0x58, this delta 0, function 0x002F4B50; UNVERIFIED signature.
-        virtual void * Slot010(void * argument0);
+        virtual void Slot010(void * argument0);
         // slot 11, table+0x60, this delta 0, function 0x00391368; UNVERIFIED signature.
         virtual int Slot011();
         // slot 12, table+0x68, this delta 0, function 0x00391370; UNVERIFIED signature.
@@ -94,7 +90,7 @@ struct Kaim_CPathObject {
         // slot 17, table+0x90, this delta 0, function 0x00391378; UNVERIFIED signature.
         virtual unsigned int Slot017();
         // slot 18, table+0x98, this delta 0, function 0x00391380; UNVERIFIED signature.
-        virtual unsigned int Slot018();
+        virtual void Slot018(int argument0);
     };
 };
 

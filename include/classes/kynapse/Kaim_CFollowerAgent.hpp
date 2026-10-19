@@ -16,10 +16,6 @@ struct Kaim_CFollowerAgent {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
-    inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
-    inline int & Field_002C() { return *(int *)((unsigned char *)this + 0x2C); }
     // 0x002D30A0: UNVERIFIED signature (src/campaign/behaviors_follower.cpp).
     unsigned char Function_002D30A0(void * argument0);
     // 0x002D31F0: UNVERIFIED signature (include/campaign/behaviors/follower.hpp).
@@ -28,10 +24,10 @@ struct Kaim_CFollowerAgent {
     unsigned int Function_002D3300();
     // 0x002D3560: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D3560();
-    // 0x002D35B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D35B8();
-    // 0x002D35C8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D35C8();
+    // 0x002D35B8: UNVERIFIED signature (src/kynapse/predicates_2d35b8.cpp).
+    unsigned char Function_002D35B8();
+    // 0x002D35C8: UNVERIFIED signature (src/kynapse/predicates_2d35b8.cpp).
+    unsigned char Function_002D35C8();
     // 0x002D35D8: UNVERIFIED signature (src/campaign/behaviors_follower.cpp).
     unsigned char Function_002D35D8();
     // 0x002D3610: UNVERIFIED signature (include/campaign/behaviors/follower.hpp).
@@ -61,9 +57,9 @@ struct Kaim_CFollowerAgent {
         // slot 6, table+0x38, this delta 0, function 0x002D3610; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D35B8; UNVERIFIED signature.
-        virtual int Slot007();
+        virtual unsigned char Slot007();
         // slot 8, table+0x48, this delta 0, function 0x002D35C8; UNVERIFIED signature.
-        virtual int Slot008();
+        virtual unsigned char Slot008();
         // slot 9, table+0x50, this delta 0, function 0x002D3300; UNVERIFIED signature.
         virtual unsigned int Slot009();
         // slot 10, table+0x58, this delta 0, function 0x002D36A8; UNVERIFIED signature.

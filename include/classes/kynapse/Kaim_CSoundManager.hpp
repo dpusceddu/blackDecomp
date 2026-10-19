@@ -13,11 +13,10 @@ namespace BlackPS2Classes {
 struct Kaim_CSoundManager {
     typedef Hierarchy_Kaim_CSoundManager Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x0030E020.
+    // Destructor identity: 0x0030E020.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
+    inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
     // 0xC: UNVERIFIED type; PS2 access offset.
@@ -38,19 +37,19 @@ struct Kaim_CSoundManager {
     inline int & Field_0048() { return *(int *)((unsigned char *)this + 0x48); }
     // 0x4C: UNVERIFIED type; PS2 access offset.
     inline float & Field_004C() { return *(float *)((unsigned char *)this + 0x4C); }
-    // 0x0030D228: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0030D228(void * argument0);
+    // 0x0030D228: UNVERIFIED signature (src/context/behaviors_sound.cpp).
+    unsigned char Function_0030D228(void * argument0);
     // 0x0030D370: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0030D370(void * argument0);
     // 0x0030E020: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0030E020();
-    // 0x0030E100: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0030E100();
+    // 0x0030E100: UNVERIFIED signature (src/kynapse/sound_pool_30e100.cpp).
+    unsigned char Function_0030E100();
     // 0x0030E128: UNVERIFIED signature (src/tu/kynapse_CSoundManager_30d160.c).
     int Function_0030E128();
     // 0x0030E180: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    void * Function_0030E180();
-    // 0x00394C10: UNVERIFIED signature (ghidra).
+    int * Function_0030E180();
+    // 0x00394C10: UNVERIFIED signature (src/kynapse/sound_pool_394c10.cpp).
     void * Function_00394C10();
 
     // Vtable 0x003F1220; vptr field offset unknown; RTTI header.
@@ -59,13 +58,13 @@ struct Kaim_CSoundManager {
         // slot 0, table+0x8, this delta 0, function 0x0030E020; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x0030D228; UNVERIFIED signature.
-        virtual int Slot001(void * argument0);
+        virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x0030D370; UNVERIFIED signature.
         virtual int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0030E100; UNVERIFIED signature.
-        virtual int Slot003();
+        virtual unsigned char Slot003();
         // slot 4, table+0x28, this delta 0, function 0x0030E180; UNVERIFIED signature.
-        virtual void * Slot004();
+        virtual int * Slot004();
         // slot 5, table+0x30, this delta 0, function 0x00394C10; UNVERIFIED signature.
         virtual void * Slot005();
         // slot 6, table+0x38, this delta 0, function 0x0030E128; UNVERIFIED signature.

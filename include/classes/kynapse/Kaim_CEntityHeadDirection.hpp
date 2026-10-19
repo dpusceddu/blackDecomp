@@ -26,7 +26,7 @@ struct Kaim_CEntityHeadDirection {
     void * Function_002D8C08(void * argument0);
     // 0x0038A2D0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A2D0();
-    // 0x0038A308: UNVERIFIED signature (ghidra).
+    // 0x0038A308: UNVERIFIED signature (src/kynapse/parameter_classes_38a308.cpp).
     void * Function_0038A308();
 
     // Vtable 0x003E4BA0; vptr field offset unknown; RTTI header.

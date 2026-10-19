@@ -17,9 +17,9 @@ typedef struct Recovered_ParameterTables {
     s32 field_28; /* PS2 +0x28 */
     s32 field_2C; /* PS2 +0x2C */
     s32 field_30; /* PS2 +0x30 */
-    s32 field_34; /* PS2 +0x34 */
-    s32 field_38; /* PS2 +0x38 */
-    u32 field_3C; /* PS2 +0x3C */
+    void * field_34; /* PS2 +0x34 */
+    void * field_38; /* PS2 +0x38 */
+    s32 field_3C; /* PS2 +0x3C */
     s32 field_40; /* PS2 +0x40 */
     s32 field_44; /* PS2 +0x44 */
     s32 field_48; /* PS2 +0x48 */

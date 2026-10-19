@@ -14,20 +14,12 @@ struct Kaim_CFleeAgent {
     typedef Hierarchy_Kaim_CFleeAgent Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002D2DB8.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0xC: UNVERIFIED type; PS2 access offset.
-    inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0014() { return *(int *)((unsigned char *)this + 0x14); }
     // 0x20: UNVERIFIED type; PS2 access offset.
     inline int & Field_0020() { return *(int *)((unsigned char *)this + 0x20); }
     // 0x2C: UNVERIFIED type; PS2 access offset.
     inline int & Field_002C() { return *(int *)((unsigned char *)this + 0x2C); }
-    // 0x60: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0060() { return *(int *)((unsigned char *)this + 0x60); }
-    // 0x6C: UNVERIFIED type; PS2 access offset.
-    inline int & Field_006C() { return *(int *)((unsigned char *)this + 0x6C); }
     // 0x002D16B8: UNVERIFIED signature (src/campaign/behaviors_flee.cpp).
     unsigned char Function_002D16B8(void * argument0);
     // 0x002D1918: UNVERIFIED signature (src/kynapse/flee_agent_2d1610.cpp).
@@ -36,10 +28,10 @@ struct Kaim_CFleeAgent {
     int Function_002D1D48();
     // 0x002D2DB8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D2DB8();
-    // 0x002D2E48: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D2E48();
-    // 0x002D2E68: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D2E68();
+    // 0x002D2E48: UNVERIFIED signature (src/kynapse/predicates_2d2e48.cpp).
+    unsigned char Function_002D2E48();
+    // 0x002D2E68: UNVERIFIED signature (src/kynapse/predicates_2d2e48.cpp).
+    unsigned char Function_002D2E68();
     // 0x002D2F48: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D2F48();
     // 0x002D2F80: UNVERIFIED signature (src/kynapse/flee_agent_2d1610.cpp).
@@ -67,9 +59,9 @@ struct Kaim_CFleeAgent {
         // slot 6, table+0x38, this delta 0, function 0x002D1D48; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D2E48; UNVERIFIED signature.
-        virtual int Slot007();
+        virtual unsigned char Slot007();
         // slot 8, table+0x48, this delta 0, function 0x002D2E68; UNVERIFIED signature.
-        virtual int Slot008();
+        virtual unsigned char Slot008();
         // slot 9, table+0x50, this delta 0, function 0x002D2F80; UNVERIFIED signature.
         virtual float Slot009(void * argument0, int argument1, float argument2, int argument3);
     };

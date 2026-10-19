@@ -34,8 +34,8 @@ struct Kaim_CGotoAgent {
     inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
     // 0x002D3A10: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D3A10();
-    // 0x002D3A68: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D3A68();
+    // 0x002D3A68: UNVERIFIED signature (src/kynapse/predicates_2d3a68.cpp).
+    unsigned char Function_002D3A68();
     // 0x002D3A78: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D3A78();
     // 0x002D3B00: UNVERIFIED signature (src/tu/kynapse_tu_2d38c8.c).
@@ -67,7 +67,7 @@ struct Kaim_CGotoAgent {
         // slot 6, table+0x38, this delta 0, function 0x002D3B08; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D3A68; UNVERIFIED signature.
-        virtual int Slot007();
+        virtual unsigned char Slot007();
     };
 };
 

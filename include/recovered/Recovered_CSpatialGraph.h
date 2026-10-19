@@ -4,9 +4,9 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_CSpatialGraph {
-    u8 opaque_0[4];
+    void * field_0; /* PS2 +0x0 */
     s32 field_4; /* PS2 +0x4 */
-    u8 opaque_8[4];
+    f32 field_8; /* PS2 +0x8 */
     s32 field_C; /* PS2 +0xC */
     s32 field_10; /* PS2 +0x10 */
     u32 field_14; /* PS2 +0x14 */
@@ -25,8 +25,40 @@ typedef struct Recovered_CSpatialGraph {
     s32 field_48; /* PS2 +0x48 */
     s32 field_4C; /* PS2 +0x4C */
     s32 field_50; /* PS2 +0x50 */
+    u32 field_54; /* PS2 +0x54 */
+    u32 field_58; /* PS2 +0x58 */
+    u32 field_5C; /* PS2 +0x5C */
+    u32 field_60; /* PS2 +0x60 */
+    u32 field_64; /* PS2 +0x64 */
+    u8 opaque_68[12];
+    u32 field_74; /* PS2 +0x74 */
+    u32 field_78; /* PS2 +0x78 */
+    u8 opaque_7C[12];
+    u32 field_88; /* PS2 +0x88 */
+    u32 field_8C; /* PS2 +0x8C */
+    u32 field_90; /* PS2 +0x90 */
+    u32 field_94; /* PS2 +0x94 */
+    u8 opaque_98[4];
+    u32 field_9C; /* PS2 +0x9C */
+    u32 field_A0; /* PS2 +0xA0 */
+    u8 opaque_A4[12];
+    u32 field_B0; /* PS2 +0xB0 */
+    u32 field_B4; /* PS2 +0xB4 */
+    u8 opaque_B8[12];
+    u32 field_C4; /* PS2 +0xC4 */
+    u32 field_C8; /* PS2 +0xC8 */
+    u8 opaque_CC[12];
+    u32 field_D8; /* PS2 +0xD8 */
+    u32 field_DC; /* PS2 +0xDC */
+    u8 opaque_E0[12];
+    u32 field_EC; /* PS2 +0xEC */
+    u32 field_F0; /* PS2 +0xF0 */
+    u8 opaque_F4[12];
+    u32 field_100; /* PS2 +0x100 */
 } Recovered_CSpatialGraph;
+typedef char assert_Recovered_CSpatialGraph_0[(((int)&((Recovered_CSpatialGraph *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_CSpatialGraph_4[(((int)&((Recovered_CSpatialGraph *)0)->field_4) == 4) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_8[(((int)&((Recovered_CSpatialGraph *)0)->field_8) == 8) ? 1 : -1];
 typedef char assert_Recovered_CSpatialGraph_C[(((int)&((Recovered_CSpatialGraph *)0)->field_C) == 12) ? 1 : -1];
 typedef char assert_Recovered_CSpatialGraph_10[(((int)&((Recovered_CSpatialGraph *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_CSpatialGraph_14[(((int)&((Recovered_CSpatialGraph *)0)->field_14) == 20) ? 1 : -1];
@@ -45,4 +77,26 @@ typedef char assert_Recovered_CSpatialGraph_44[(((int)&((Recovered_CSpatialGraph
 typedef char assert_Recovered_CSpatialGraph_48[(((int)&((Recovered_CSpatialGraph *)0)->field_48) == 72) ? 1 : -1];
 typedef char assert_Recovered_CSpatialGraph_4C[(((int)&((Recovered_CSpatialGraph *)0)->field_4C) == 76) ? 1 : -1];
 typedef char assert_Recovered_CSpatialGraph_50[(((int)&((Recovered_CSpatialGraph *)0)->field_50) == 80) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_54[(((int)&((Recovered_CSpatialGraph *)0)->field_54) == 84) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_58[(((int)&((Recovered_CSpatialGraph *)0)->field_58) == 88) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_5C[(((int)&((Recovered_CSpatialGraph *)0)->field_5C) == 92) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_60[(((int)&((Recovered_CSpatialGraph *)0)->field_60) == 96) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_64[(((int)&((Recovered_CSpatialGraph *)0)->field_64) == 100) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_74[(((int)&((Recovered_CSpatialGraph *)0)->field_74) == 116) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_78[(((int)&((Recovered_CSpatialGraph *)0)->field_78) == 120) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_88[(((int)&((Recovered_CSpatialGraph *)0)->field_88) == 136) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_8C[(((int)&((Recovered_CSpatialGraph *)0)->field_8C) == 140) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_90[(((int)&((Recovered_CSpatialGraph *)0)->field_90) == 144) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_94[(((int)&((Recovered_CSpatialGraph *)0)->field_94) == 148) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_9C[(((int)&((Recovered_CSpatialGraph *)0)->field_9C) == 156) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_A0[(((int)&((Recovered_CSpatialGraph *)0)->field_A0) == 160) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_B0[(((int)&((Recovered_CSpatialGraph *)0)->field_B0) == 176) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_B4[(((int)&((Recovered_CSpatialGraph *)0)->field_B4) == 180) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_C4[(((int)&((Recovered_CSpatialGraph *)0)->field_C4) == 196) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_C8[(((int)&((Recovered_CSpatialGraph *)0)->field_C8) == 200) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_D8[(((int)&((Recovered_CSpatialGraph *)0)->field_D8) == 216) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_DC[(((int)&((Recovered_CSpatialGraph *)0)->field_DC) == 220) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_EC[(((int)&((Recovered_CSpatialGraph *)0)->field_EC) == 236) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_F0[(((int)&((Recovered_CSpatialGraph *)0)->field_F0) == 240) ? 1 : -1];
+typedef char assert_Recovered_CSpatialGraph_100[(((int)&((Recovered_CSpatialGraph *)0)->field_100) == 256) ? 1 : -1];
 #endif

@@ -14,14 +14,14 @@ struct UnknownVtable_003DCF60 {
     int Function_001701B0(void * argument0);
     // 0x001701D0: UNVERIFIED signature (src/tu/170178.c).
     int Function_001701D0();
-    // 0x002E1B08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002E1B08();
+    // 0x002E1B08: UNVERIFIED signature (src/kynapse/lookups_2e1b08.cpp).
+    void Function_002E1B08();
     // 0x00384230: UNVERIFIED signature (src/auto/other/3841e0.c).
     int Function_00384230(int argument0);
     // 0x00384280: UNVERIFIED signature (src/auto/other/384280.c).
     int * Function_00384280();
-    // 0x0038C390: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0038C390(void * argument0);
+    // 0x0038C390: UNVERIFIED signature (include/campaign/graph/brain.hpp).
+    unsigned char Function_0038C390(void * argument0);
 
     // Vtable 0x003DCF60; vptr field offset unknown; referenced zero RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -33,9 +33,9 @@ struct UnknownVtable_003DCF60 {
         // slot 2, table+0x18, this delta 0, function 0x001701B0; UNVERIFIED signature.
         virtual int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0038C390; UNVERIFIED signature.
-        virtual int Slot003(void * argument0);
+        virtual unsigned char Slot003(void * argument0);
         // slot 4, table+0x28, this delta 0, function 0x002E1B08; UNVERIFIED signature.
-        virtual int Slot004();
+        virtual void Slot004();
         // slot 5, table+0x30, this delta 0, function 0x001701D0; UNVERIFIED signature.
         virtual int Slot005();
     };

@@ -16,22 +16,6 @@ struct UnknownVtable_003E2508 {
     inline unsigned char & Field_000C() { return *(unsigned char *)((unsigned char *)this + 0xC); }
     // 0xD: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_000D() { return *(unsigned char *)((unsigned char *)this + 0xD); }
-    // 0x2A: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_002A() { return *(unsigned char *)((unsigned char *)this + 0x2A); }
-    // 0x2B: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_002B() { return *(unsigned char *)((unsigned char *)this + 0x2B); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_002C() { return *(unsigned char *)((unsigned char *)this + 0x2C); }
-    // 0x2D: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_002D() { return *(unsigned char *)((unsigned char *)this + 0x2D); }
-    // 0x2E: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_002E() { return *(unsigned char *)((unsigned char *)this + 0x2E); }
-    // 0x2F: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_002F() { return *(unsigned char *)((unsigned char *)this + 0x2F); }
-    // 0x30: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0030() { return *(unsigned char *)((unsigned char *)this + 0x30); }
-    // 0x31: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0031() { return *(unsigned char *)((unsigned char *)this + 0x31); }
     // 0x46: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0046() { return *(unsigned char *)((unsigned char *)this + 0x46); }
     // 0x47: UNVERIFIED type; PS2 access offset.
@@ -42,48 +26,6 @@ struct UnknownVtable_003E2508 {
     inline unsigned char & Field_0049() { return *(unsigned char *)((unsigned char *)this + 0x49); }
     // 0x4A: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_004A() { return *(unsigned char *)((unsigned char *)this + 0x4A); }
-    // 0x4C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_004C() { return *(float *)((unsigned char *)this + 0x4C); }
-    // 0x50: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0050() { return *(float *)((unsigned char *)this + 0x50); }
-    // 0x54: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0054() { return *(float *)((unsigned char *)this + 0x54); }
-    // 0x58: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0058() { return *(float *)((unsigned char *)this + 0x58); }
-    // 0x5C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_005C() { return *(float *)((unsigned char *)this + 0x5C); }
-    // 0x60: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0060() { return *(float *)((unsigned char *)this + 0x60); }
-    // 0x64: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0064() { return *(float *)((unsigned char *)this + 0x64); }
-    // 0x68: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0068() { return *(float *)((unsigned char *)this + 0x68); }
-    // 0x6C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_006C() { return *(float *)((unsigned char *)this + 0x6C); }
-    // 0x70: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0070() { return *(float *)((unsigned char *)this + 0x70); }
-    // 0x84: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0084() { return *(float *)((unsigned char *)this + 0x84); }
-    // 0x88: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0088() { return *(float *)((unsigned char *)this + 0x88); }
-    // 0xAC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00AC() { return *(float *)((unsigned char *)this + 0xAC); }
-    // 0xB0: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00B0() { return *(float *)((unsigned char *)this + 0xB0); }
-    // 0xB4: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00B4() { return *(float *)((unsigned char *)this + 0xB4); }
-    // 0xB8: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00B8() { return *(float *)((unsigned char *)this + 0xB8); }
-    // 0xBC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00BC() { return *(float *)((unsigned char *)this + 0xBC); }
-    // 0xC0: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00C0() { return *(float *)((unsigned char *)this + 0xC0); }
-    // 0xC4: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00C4() { return *(float *)((unsigned char *)this + 0xC4); }
-    // 0xC8: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00C8() { return *(float *)((unsigned char *)this + 0xC8); }
-    // 0xCC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00CC() { return *(float *)((unsigned char *)this + 0xCC); }
     // 0xE8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_00E8() { return *(unsigned int *)((unsigned char *)this + 0xE8); }
     // 0xEC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
@@ -96,14 +38,14 @@ struct UnknownVtable_003E2508 {
     bool Function_0026BE78(unsigned int argument0, unsigned int argument1);
     // 0x0026BEA0: UNVERIFIED signature (src/auto/game/26bea0.c).
     int Function_0026BEA0();
-    // 0x0026C100: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0026C100();
+    // 0x0026C100: UNVERIFIED signature (src/campaign/graphics_controller_update.cpp).
+    void Function_0026C100();
 
     // Vtable 0x003E2508; vptr field offset unknown; referenced zero RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
     struct VirtualInterface0 {
         // slot 0, table+0x8, this delta 0, function 0x0026C100; UNVERIFIED signature.
-        virtual int Slot000();
+        virtual void Slot000();
         // slot 1, table+0x10, this delta 0, function 0x0026BD30; UNVERIFIED signature.
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x0026BE68; UNVERIFIED signature.

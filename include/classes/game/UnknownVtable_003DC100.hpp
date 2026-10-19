@@ -10,16 +10,14 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DC100 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
     // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_001C() { return *(unsigned char *)((unsigned char *)this + 0x1C); }
     // 0x00165380: UNVERIFIED signature (src/tu/tu_1650b8.c).
     int Function_00165380();
     // 0x001653A8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     int Function_001653A8();
-    // 0x00165B00: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00165B00(unsigned int argument0);
+    // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
+    void Function_00165B00(int argument0);
     // 0x00165B90: UNVERIFIED signature (src/tu/tu_1650b8_165af8.c).
     unsigned int Function_00165B90();
 
@@ -29,7 +27,7 @@ struct UnknownVtable_003DC100 {
         // slot 0, table+0x8, this delta 0, function 0x00165B90; UNVERIFIED signature.
         virtual unsigned int Slot000();
         // slot 1, table+0x10, this delta 0, function 0x00165B00; UNVERIFIED signature.
-        virtual unsigned int Slot001(unsigned int argument0);
+        virtual void Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x001653A8; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00165380; UNVERIFIED signature.

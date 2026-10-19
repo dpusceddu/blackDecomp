@@ -30,13 +30,13 @@ struct Kaim_IPathFinder {
     void Function_002E5088();
     // 0x002E5218: UNVERIFIED signature (src/tu/2e5178.c).
     int Function_002E5218(void * argument0);
-    // 0x002E74E0: UNVERIFIED signature (include/kynapse/tracker.hpp).
-    int Function_002E74E0(void * argument0);
+    // 0x002E74E0: UNVERIFIED signature (src/kynapse/configure_2e74e0.cpp).
+    unsigned char Function_002E74E0(void * argument0);
     // 0x0038D2D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0038D2D0(void * argument0);
     // 0x0038D330: UNVERIFIED signature (src/auto/unclassified/38d330.c).
     int Function_0038D330();
-    // 0x0038E768: UNVERIFIED signature (ghidra).
+    // 0x0038E768: UNVERIFIED signature (src/campaign/graph_cpointmapper.cpp).
     int Function_0038E768(void * argument0);
     // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
     void Function_0038E7B8();
@@ -47,7 +47,7 @@ struct Kaim_IPathFinder {
         // slot 0, table+0x8, this delta 0, function 0x002E5088; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002E74E0; UNVERIFIED signature.
-        virtual int Slot001(void * argument0);
+        virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x0038E768; UNVERIFIED signature.
         virtual int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0038E7B8; UNVERIFIED signature.

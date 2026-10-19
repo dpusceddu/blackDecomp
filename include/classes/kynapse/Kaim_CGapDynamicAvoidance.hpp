@@ -15,12 +15,8 @@ struct Kaim_CGapDynamicAvoidance {
     // Destructor identity: 0x00306FD0.
     // Destructor identity: 0x00306FD0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
     // 0x14: UNVERIFIED type; PS2 access offset.
     inline float & Field_0014() { return *(float *)((unsigned char *)this + 0x14); }
     // 0x18: UNVERIFIED type; PS2 access offset.
@@ -75,8 +71,6 @@ struct Kaim_CGapDynamicAvoidance {
     inline float & Field_0090() { return *(float *)((unsigned char *)this + 0x90); }
     // 0x94: UNVERIFIED type; PS2 access offset.
     inline int & Field_0094() { return *(int *)((unsigned char *)this + 0x94); }
-    // 0x98: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0098() { return *(unsigned int *)((unsigned char *)this + 0x98); }
     // 0xA0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_00A0() { return *(unsigned int *)((unsigned char *)this + 0xA0); }
     // 0xAC: UNVERIFIED type; PS2 access offset.
@@ -95,22 +89,14 @@ struct Kaim_CGapDynamicAvoidance {
     inline float & Field_00C8() { return *(float *)((unsigned char *)this + 0xC8); }
     // 0xCC: UNVERIFIED type; PS2 access offset.
     inline float & Field_00CC() { return *(float *)((unsigned char *)this + 0xCC); }
-    // 0xE8: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00E8() { return *(float *)((unsigned char *)this + 0xE8); }
-    // 0xEC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00EC() { return *(float *)((unsigned char *)this + 0xEC); }
-    // 0xF0: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00F0() { return *(float *)((unsigned char *)this + 0xF0); }
-    // 0xF4: UNVERIFIED type; PS2 access offset.
-    inline float & Field_00F4() { return *(float *)((unsigned char *)this + 0xF4); }
     // 0xF8: UNVERIFIED type; PS2 access offset.
     inline float & Field_00F8() { return *(float *)((unsigned char *)this + 0xF8); }
     // 0x00306FD0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00306FD0();
     // 0x00307970: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned char Function_00307970(void * argument0, void * argument1);
-    // 0x0030B4A8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0030B4A8(void * argument0);
+    // 0x0030B4A8: UNVERIFIED signature (src/kynapse/avoidance_configuration.cpp).
+    unsigned char Function_0030B4A8(void * argument0);
     // 0x0030B898: UNVERIFIED signature (src/tu/kynapse_tu_3067a0.c).
     int Function_0030B898();
     // 0x0030BA10: UNVERIFIED signature (src/kynapse/misc7_30ba10.cpp).
@@ -128,7 +114,7 @@ struct Kaim_CGapDynamicAvoidance {
         // slot 2, table+0x18, this delta 0, function 0x00307970; UNVERIFIED signature.
         virtual unsigned char Slot002(void * argument0, void * argument1);
         // slot 3, table+0x20, this delta 0, function 0x0030B4A8; UNVERIFIED signature.
-        virtual int Slot003(void * argument0);
+        virtual unsigned char Slot003(void * argument0);
         // slot 4, table+0x28, this delta 0, function 0x0030BA10; UNVERIFIED signature.
         virtual void Slot004();
         // slot 5, table+0x30, this delta 0, function 0x0030B898; UNVERIFIED signature.

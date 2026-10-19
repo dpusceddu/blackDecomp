@@ -4,31 +4,21 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Vtable_003DD388 {
-    u8 opaque_0[16];
-    s128 field_10; /* PS2 +0x10 */
-    u8 opaque_20[16];
+    u8 opaque_0[48];
     s32 field_30; /* PS2 +0x30 */
-    void * field_34; /* PS2 +0x34 */
-    u8 opaque_38[72];
-    void * field_80; /* PS2 +0x80 */
-    u8 opaque_84[12];
+    s32 field_34; /* PS2 +0x34 */
+    u8 opaque_38[88];
     void * field_90; /* PS2 +0x90 */
-    u8 field_94; /* PS2 +0x94 */
-    u8 field_95; /* PS2 +0x95 */
-    u8 opaque_96[2];
+    u8 opaque_94[4];
     u32 field_98; /* PS2 +0x98 */
     u8 opaque_9C[228];
-    void * field_180; /* PS2 +0x180 */
-    void * field_184; /* PS2 +0x184 */
+    u32 field_180; /* PS2 +0x180 */
+    u32 field_184; /* PS2 +0x184 */
     u32 field_188; /* PS2 +0x188 */
 } Recovered_Vtable_003DD388;
-typedef char assert_Recovered_Vtable_003DD388_10[(((int)&((Recovered_Vtable_003DD388 *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DD388_30[(((int)&((Recovered_Vtable_003DD388 *)0)->field_30) == 48) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DD388_34[(((int)&((Recovered_Vtable_003DD388 *)0)->field_34) == 52) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DD388_80[(((int)&((Recovered_Vtable_003DD388 *)0)->field_80) == 128) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DD388_90[(((int)&((Recovered_Vtable_003DD388 *)0)->field_90) == 144) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DD388_94[(((int)&((Recovered_Vtable_003DD388 *)0)->field_94) == 148) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DD388_95[(((int)&((Recovered_Vtable_003DD388 *)0)->field_95) == 149) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DD388_98[(((int)&((Recovered_Vtable_003DD388 *)0)->field_98) == 152) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DD388_180[(((int)&((Recovered_Vtable_003DD388 *)0)->field_180) == 384) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DD388_184[(((int)&((Recovered_Vtable_003DD388 *)0)->field_184) == 388) ? 1 : -1];

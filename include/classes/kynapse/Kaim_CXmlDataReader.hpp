@@ -15,8 +15,6 @@ struct Kaim_CXmlDataReader {
     // Constructor identity: 0x00373250; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x00373268.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x00372FC0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00372FC0(unsigned int argument0, void * argument1);
     // 0x00373148: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).

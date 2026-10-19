@@ -22,8 +22,8 @@ struct UnknownVtable_003DC130 {
     int Function_001652B8();
     // 0x001652E0: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_001652E0();
-    // 0x00165B00: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00165B00(unsigned int argument0);
+    // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
+    void Function_00165B00(int argument0);
 
     // Vtable 0x003DC130; vptr field offset unknown; referenced zero RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -31,7 +31,7 @@ struct UnknownVtable_003DC130 {
         // slot 0, table+0x8, this delta 0, function 0x00165268; UNVERIFIED signature.
         virtual float Slot000(float argument0);
         // slot 1, table+0x10, this delta 0, function 0x00165B00; UNVERIFIED signature.
-        virtual unsigned int Slot001(unsigned int argument0);
+        virtual void Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x001652E0; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual void Slot002();
         // slot 3, table+0x20, this delta 0, function 0x001652B8; UNVERIFIED signature.
