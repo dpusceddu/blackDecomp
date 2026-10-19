@@ -17646,7 +17646,7 @@ tus:
   evidence: [eh, ctor-list, ctor-end, join-hard, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 7 of 11 functions
+  flags_basis: matched 8 of 11 functions
   data:
     .rodata: ['0x4078e8', '0x407a10']
     .data: ['0x3ede90', '0x3ee090']
