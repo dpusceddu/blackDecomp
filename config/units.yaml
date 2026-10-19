@@ -46539,3 +46539,22 @@ units:
     size: 740
     symbol: Function_0020EAC8__Q215BlackPS2Classes22UnknownVtable_003E10B0
     status: source
+- name: campaign_graphics_overlay_drafts
+  source: src/campaign/graphics_overlay_drafts.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x1f4770'
+    status: asm
+    reason: types
+  - addr: '0x1fbb48'
+    status: asm
+    reason: schedule
+  - addr: '0x1f4cb0'
+    status: asm
+    reason: schedule
