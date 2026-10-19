@@ -8,6 +8,8 @@ inline void *operator new[](unsigned int size) { return Allocate(size); }
 
 // PS2 offset views checked against the graph/table access instructions. The
 // generated RTTI interfaces remain the owner of class identity and slot evidence.
+// Complete object sizes, opaque bytes, and unused virtual signatures remain
+// UNVERIFIED. Only the accessed prefixes and asserted member offsets are modeled.
 namespace Kaim {
 struct SearchGraph;
 struct SearchNode { unsigned int id; float x, y, z; SearchGraph *graph; };
@@ -49,8 +51,12 @@ struct SearchGraph {
 struct DefaultBase { virtual ~DefaultBase() {} };
 struct DefaultCostPolicy : DefaultBase { virtual ~DefaultCostPolicy() {} };
 struct DefaultHeuristic : DefaultBase { virtual ~DefaultHeuristic() {} };
-struct CGraphData : PolymorphicBase {
-    virtual ~CGraphData();
+struct CObject {
+    virtual ~CObject() {}
+    static void operator delete(void *p) { D_003C87E0(p); }
+};
+struct CGraphData : CObject {
+    virtual ~CGraphData() {}
     virtual int Init(ChildBuffers *);
     virtual void *GetClassInfo();
     virtual int Build();

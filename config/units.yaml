@@ -26522,14 +26522,11 @@ units:
   - -O2
   - -G0
   - -snas
+  - -ffunction-sections
   functions:
   - addr: '0x2f4260'
     symbol: func_002F4260
     size: 84
-    status: source
-  - addr: '0x2f42b8'
-    symbol: func_002F42B8
-    size: 116
     status: source
   - addr: '0x2f4330'
     symbol: func_002F4330
@@ -26543,6 +26540,7 @@ units:
     symbol: func_002F4370
     size: 32
     status: source
+  owner: cpp-campaign-graph
 - name: tuf_2f49f0
   source: src/tu/kynapse_tu_2f4390.c
   origin: auto
@@ -26817,23 +26815,6 @@ units:
     symbol: func_002FEBF0
     size: 32
     status: source
-- name: kynapse_owned_arrays_2feb08
-  source: src/kynapse/owned_arrays_2feb08.cpp
-  origin: kynapse
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  functions:
-  - addr: '0x2feb08'
-    symbol: _$_Q24Kaim10BlockTable
-    size: 196
-    status: source
-  externs:
-    _vt$Q24Kaim10BlockTable: '0x3ef7b0'
-    _vt$Q24Kaim10ObjectBase: '0x3e0040'
-    memoryRelease: '0x3c87e0'
 - name: kynapse_factories_2fec10
   source: src/kynapse/factories_2fec10.cpp
   origin: kynapse
@@ -46370,6 +46351,13 @@ units:
     symbol: func_002FE370
     size: 508
     status: asm
+  - addr: '0x2feb08'
+    symbol: _$_Q24Kaim10CAstarData
+    size: 196
+    status: source
+  externs:
+    _vt$Q24Kaim10CAstarData: '0x3ef7b0'
+    _vt$Q24Kaim7CObject: '0x3e0040'
 - name: campaign_graphics_bindings
   source: src/campaign/graphics_bindings.cpp
   origin: game
@@ -46478,3 +46466,21 @@ units:
     size: 604
     symbol: func_002D16B8
     status: source
+- name: campaign_graph_cpathcostdata_dtor
+  source: src/campaign/graph_cpathcostdata_dtor.cpp
+  origin: kynapse
+  owner: cpp-campaign-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2f42b8'
+    symbol: _$_Q24Kaim13CPathCostData
+    size: 116
+    status: source
+  externs:
+    _vt$Q24Kaim13CPathCostData: '0x3ede90'
+    _vt$Q24Kaim7CObject: '0x3e0040'

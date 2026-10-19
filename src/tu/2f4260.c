@@ -21,20 +21,6 @@ void func_002F4260(s32 arg0, s32 arg1) {
     }
 }
 
-void func_002F42B8(void *arg0, s32 arg1) {
-    void *temp_4;
-
-    M2C_FIELD(arg0, M2C_UNK ***, 0) = &D_003EDE90;
-    temp_4 = M2C_FIELD(arg0, void **, 8);
-    if (temp_4 != NULL) {
-        D_003C87E0(temp_4);
-    }
-    M2C_FIELD(arg0, M2C_UNK ***, 0) = &D_003E0040;
-    if (arg1 & 1) {
-        D_003C87E0(arg0);
-    }
-}
-
 s32 func_002F4330(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s8 *temp_2;
 
