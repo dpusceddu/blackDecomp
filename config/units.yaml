@@ -47018,3 +47018,21 @@ units:
   - addr: '0x20f268'
     status: asm
     reason: types
+- name: shared_vu0_point
+  source: src/ps2/vu0_matrix.cpp
+  origin: game shared VU0 matrix controls
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x17bdf0'
+    symbol: func_0017BDF0
+    size: 80
+    status: source
+  - addr: '0x1a71f8'
+    symbol: func_001A71F8
+    size: 184
+    status: source

@@ -46,18 +46,7 @@ struct SlotTable {
     unsigned char unknown08[0x10];
     unsigned int capacity;
 };
-struct SlotOwner {
-    unsigned char unknown00[0x10];
-    unsigned int slotCount;
-    SlotTable* table;
-    unsigned int indexCount;
-};
-extern SlotOwner* gSlotOwner;
-
-inline SlotOwner* GetSlotOwner()
-{
-    return gSlotOwner;
-}
+#include "ps2/kynapse/parameter_slots.hpp"
 
 struct SlotUser {
     unsigned char unknown00[0x14];

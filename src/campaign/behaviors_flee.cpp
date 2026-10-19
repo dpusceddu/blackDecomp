@@ -1,3 +1,4 @@
+#include "ps2/kynapse/property.hpp"
 #include "campaign/behaviors/flee.hpp"
 extern const char D_00404030[], D_00404048[], D_00404058[], D_00404068[];
 extern const char D_00404070[], D_00404080[], D_00404088[], D_00404098[];
@@ -11,14 +12,7 @@ const char D_00404088[] __attribute__((aligned(8))) = "MaxPointsToFlee";
 const char D_00404098[] __attribute__((aligned(8))) = "MaxEntitiesToFlee";
 
 namespace FleeRecovery {
-inline bool BaseConfigure(ChildBuffers* entry) {
-    if (entry) {
-        if (entry->GetSecond()) {
-            if (*entry->GetSecond() == '_') return true;
-        }
-    }
-    return false;
-}
+
     bool FleeAgent::Configure(ChildBuffers* entry)
    {
         if (!entry) return false;
@@ -79,7 +73,7 @@ inline bool BaseConfigure(ChildBuffers* entry) {
                     return true;
                 }
             }
-        return BaseConfigure(entry);
+        return BlackPS2::Kynapse::IsPrivateProperty(entry);
     }
 // Unmatched: Init needs the original allocation-cookie and validation lifetimes.
 // Unmatched: Update needs visibility-loop and controller cleanup reconstruction.

@@ -1,13 +1,7 @@
+#include "ps2/kynapse/property.hpp"
 #include "campaign/behaviors/shooter.hpp"
 namespace Kaim {
-inline bool BaseConfigure(ChildBuffers* entry) {
-    if (entry) {
-        if (entry->GetSecond()) {
-            if (*entry->GetSecond() == '_') return true;
-        }
-    }
-    return false;
-}
+
 bool ShooterAgent::Configure(ChildBuffers* entry)
 {
     if (!entry)
@@ -46,7 +40,7 @@ bool ShooterAgent::Configure(ChildBuffers* entry)
             return true;
         }
     }
-    return BaseConfigure(entry);
+    return BlackPS2::Kynapse::IsPrivateProperty(entry);
 }
 bool ShooterAgent::Prepare()
 {

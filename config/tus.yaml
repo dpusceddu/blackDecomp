@@ -6380,7 +6380,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 1 of 7 functions
+  flags_basis: matched 2 of 7 functions
   data:
     .bss: ['0x415810', '0x415870']
 - name: tu_17c908
@@ -9123,7 +9123,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 8 of 37 functions
+  flags_basis: matched 9 of 37 functions
   data:
     .rodata: ['0x3f67c0', '0x3f71a0']
     .data: ['0x3bcf30', '0x3bcfc0']
