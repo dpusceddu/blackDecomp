@@ -2,17 +2,17 @@
 struct FrontendValue;
 // Callback signatures and wrapper return semantics remain provisional ABI views.
 extern "C" {
-int func_0020DF68(void*,const char*,int (*)());
+int func_0020DF68(void*,const char*,int (*)(const char*));
 extern const char D_003FACD0[];
-int func_0020EF28();
+int func_0020EF28(const char*);
 extern const char D_003FACE0[];
-int func_0020F268();
+int func_0020F268(const char*);
 extern const char D_003FAD00[];
-int func_0020F490();
+int func_0020F490(const char*);
 extern const char D_003FAD10[];
-int func_0020F5A0();
+int func_0020F5A0(const char*);
 extern const char D_003FAD28[];
-int func_0020F5E8();
+int func_0020F5E8(const char*);
 extern int D_0040EB40;
 extern int D_0040EB38;
 extern int D_0040EAFC;

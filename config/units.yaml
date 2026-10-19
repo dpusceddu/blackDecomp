@@ -46558,3 +46558,31 @@ units:
   - addr: '0x1f4cb0'
     status: asm
     reason: schedule
+- name: campaign_graphics_level_callback
+  source: src/campaign/graphics_level_callback.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x20f5a0'
+    symbol: SetDifficulty__Q216CampaignGraphics14LevelCallbacksPCc
+    size: 68
+    status: source
+- name: campaign_graphics_level_callback_drafts
+  source: src/campaign/graphics_level_callback_drafts.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x20ef28'
+    status: asm
+    reason: types
+  - addr: '0x20f268'
+    status: asm
+    reason: types
