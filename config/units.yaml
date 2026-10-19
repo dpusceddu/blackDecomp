@@ -47538,3 +47538,16 @@ units:
     symbol: func_001F8138
     status: asm
     reason: claim
+- name: context_wave3_graphics_notifications
+  source: src/campaign/graphics_notifications_pending.cpp
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1fa658'
+    size: 1344
+    symbol: func_001FA658
+    status: asm
+    reason: claim
