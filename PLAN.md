@@ -479,13 +479,13 @@ involve COP0 polling or inner control flow. Excluding hardware/inner-control cas
 TU, but game and animation still mix library-level forms; authored NOPs and inferred TU boundaries
 prevent a historical assembler assignment. Eleven exact/high multi-function six-word cohorts remain
 leads. All four independently compiled seven-word controls lie in RenderWare Core/Audio. Retain
-per-unit selection. At the census baseline, 44 explicit-selector units (48 source functions) and 77 SN driver-GNU units
-(87 source functions) now carry weak historical
-provenance, maintained by the units serializer. This does not weaken the full-image equality check.
-`tools/loop_provenance.py` reproduces the census, filtered cohorts and control joins. Source progress
-remains 5,066 functions / 281,632 text bytes.
+per-unit selection. At the census baseline, 44 explicit-selector units (48 source functions) and
+77 SN driver-GNU units (87 source functions) were labeled with weak historical provenance by the
+units serializer. This does not weaken the full-image equality check.
+`tools/loop_provenance.py` reproduces the census, filtered cohorts and control joins. Progress before
+the campaign was 5,066 functions / 281,632 text bytes.
 
-The following campaign uses four isolated queues, including the coordinator's worker queue. Wave
+The campaign used four isolated queues, including the coordinator's worker queue. Wave
 gains count newly sourced original spans, not C-to-C++ conversions; large-function counts use code
 sizes over 300 and 1,024 bytes. Stop after two consecutive waves below 27,155 text bytes (1%).
 
