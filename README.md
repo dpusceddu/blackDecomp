@@ -141,6 +141,12 @@ their demotion, so a placement error cannot silently discard earlier matches.
 
 ## Automatic pipeline (tools/autodecomp.py)
 
+Shared PS2 inline helpers and target types live in [include/ps2/](include/ps2/README.md), owned by
+the shared context maintainer. `config/shared_context.json` records the field/operation scope of
+each exact consumer; `python3 tools/shared_context.py verify` checks actual header use, instruction
+matches and the full image. Reuse these headers and preserve their helper order, widths and VU
+spill recipes. Report shared changes to their owner; unverified layouts remain explicitly partial.
+
 Drafts C for assembly functions with no per-function judgment and keeps what rebuilds byte-identically. Setup, once:
 
 ```sh

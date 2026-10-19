@@ -534,6 +534,15 @@ wave, or after two consecutive throughput declines. The previous one-percent rul
 Shared helper recovery precedes the next wave; enabling work is measured separately from campaign
 throughput. Four active queues, including the coordinator, fit the session's concurrency limit.
 
+The dedicated shared-context owner added eight headers in `include/ps2/`, with 18 exact source
+consumers checked by `tools/shared_context.py verify` and scoped evidence in
+`config/shared_context.json`. They cover SN integer/vector ABI, VU0 vectors and point/direction
+transforms, Kynapse iterator/property/owner helpers and three RenderWare operations. Existing vector
+and library includes remain compatible. A 32-bit integer VU readback followed by `mtc1` removes seven
+direction-caller differences; its older float readback recipe remains for other exact consumers.
+Two matrix callers add 264 text bytes and two functions: 5,109 / 293,072 before the campaign.
+Matrix composition, inversion, axis-angle and unused container fields remain unverified.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.
