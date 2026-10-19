@@ -47515,3 +47515,50 @@ units:
     historical_provenance: unresolved
   origin: kynapse
   owner: context-graph
+- name: context_graph_brain
+  source: src/campaign/graph_brain.cpp
+  origin: kynapse
+  owner: context-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2e1548'
+    symbol: func_002E1548
+    size: 364
+    status: asm
+    reason: registers
+  - addr: '0x2e16b8'
+    symbol: func_002E16B8
+    size: 352
+    status: asm
+    reason: registers
+  - addr: '0x2e1818'
+    symbol: Configure__Q24Kaim6CBrainPQ24Kaim11GraphConfig
+    size: 752
+    status: source
+  - addr: '0x2e1bc0'
+    symbol: func_002E1BC0
+    size: 152
+    status: source
+  - addr: '0x2e1c58'
+    symbol: func_002E1C58
+    size: 184
+    status: source
+  - addr: '0x2e1d10'
+    symbol: func_002E1D10
+    size: 152
+    status: source
+  - addr: '0x38c390'
+    symbol: ConfigureChild__Q24Kaim6CBrainPQ24Kaim11GraphConfig
+    size: 80
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
