@@ -46810,3 +46810,16 @@ units:
     symbol: func_002F8238
     size: 2560
     status: asm
+- name: campaign_graphics_level_register
+  source: src/campaign/graphics_level_register.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x20eac8'
+    size: 740
+    symbol: Function_0020EAC8__Q215BlackPS2Classes22UnknownVtable_003E10B0
+    status: source
