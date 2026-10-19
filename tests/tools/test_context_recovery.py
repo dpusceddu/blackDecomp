@@ -285,6 +285,76 @@ class FieldPointerTests(unittest.TestCase):
 
 
 class VerificationTests(unittest.TestCase):
+    def test_address_only_asm_claim_is_not_source_evidence(self):
+        import tempfile
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'include').mkdir()
+            (root / 'src').mkdir()
+            (root / 'src/claimed.cpp').write_text('''
+extern int func_00100000(short);
+int func_00100010(float n) { return n; }
+''')
+            unit = dict(source='src/claimed.cpp', externs={}, functions=[
+                dict(addr=0x100000, status='asm'),
+                dict(addr=0x100010, symbol='func_00100010', status='source')])
+            with patch('units.load_units', return_value=[unit]), patch(
+                    'units.dependencies', return_value=[Path(unit['source'])]):
+                matched, _ = cr.source_seeds(root, matched_only=True)
+                all_seeds, _ = cr.source_seeds(root)
+            self.assertEqual(set(matched), {0x100010})
+            self.assertEqual(all_seeds[0x100000]['params'], [('s16', None)])
+            self.assertFalse(all_seeds[0x100000]['matched'])
+            self.assertEqual(all_seeds[0x100000]['symbol'], 'func_00100000')
+
+    def test_alias_context_is_per_translation_unit(self):
+        import tempfile
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'include').mkdir()
+            (root / 'src').mkdir()
+            (root / 'include/vector.hpp').write_text('''
+namespace BlackGame { typedef long long PositionArg; typedef PositionArg Vec; }
+namespace BlackPS2 { namespace VU0 { typedef BlackGame::Vec Value; } }
+''')
+            (root / 'src/wide.cpp').write_text('''
+#include "vector.hpp"
+using BlackPS2::VU0::Value;
+Value func_00100000(Value point) { return point; }
+''')
+            (root / 'src/narrow.cpp').write_text('''
+typedef unsigned short Value;
+Value func_00100010(Value count) { return count; }
+''')
+            (root / 'src/unknown.cpp').write_text('''
+Value func_00100020(Value count) { return count; }
+''')
+            units = [dict(source='src/' + name + '.cpp', externs={}, functions=[
+                dict(addr=addr, symbol='func_%08X' % addr, status='source')])
+                for name, addr in [('wide', 0x100000), ('narrow', 0x100010), ('unknown', 0x100020)]]
+            def dependencies(source):
+                return [Path(source)] + ([Path('include/vector.hpp')] if 'wide' in source else [])
+            with patch('units.load_units', return_value=units), patch('units.dependencies', side_effect=dependencies):
+                seeds, _ = cr.source_seeds(root, matched_only=True)
+            self.assertEqual((seeds[0x100000]['ret'], seeds[0x100000]['params']), ('s128', [('s128', None)]))
+            self.assertEqual((seeds[0x100010]['ret'], seeds[0x100010]['params']), ('u16', [('u16', None)]))
+            self.assertEqual((seeds[0x100020]['ret'], seeds[0x100020]['params']), ('unknown', [('unknown', None)]))
+
+    def test_exact_matrix_consumers_export_signed_128_bit_values(self):
+        from unittest.mock import patch
+        # These production consumers also validate the shared matrix helpers against retail.
+        unit = dict(source='src/ps2/vu0_matrix.cpp', externs={}, functions=[
+            dict(addr=addr, symbol='func_%08X' % addr, status='source')
+            for addr in (0x17bdf0, 0x1a71f8)])
+        with patch('units.load_units', return_value=[unit]):
+            seeds, _ = cr.source_seeds(matched_only=True)
+        self.assertEqual(seeds[0x17bdf0]['ret'], 'void')
+        self.assertEqual(seeds[0x17bdf0]['params'], [('s128', None)])
+        self.assertEqual(seeds[0x1a71f8]['ret'], 's128')
+        self.assertEqual(seeds[0x1a71f8]['params'], [('void *', 'BlackPS2::DirectionSource')])
+
     def test_unmatched_signature_does_not_hide_matched_layout_user(self):
         import tempfile
         from unittest.mock import patch
@@ -321,6 +391,68 @@ class VerificationTests(unittest.TestCase):
 
 
 class CppAbiTests(unittest.TestCase):
+    def test_namespace_and_class_aliases_resolve_without_global_name_guesses(self):
+        declarations = cr.parse_declarations('''
+namespace BlackGame {
+typedef long long PositionArg;
+typedef long long PositionResult;
+typedef PositionArg Vec;
+PositionResult Load(PositionArg);
+struct Reader { typedef unsigned short Value; Value Count(Value); };
+}
+namespace BlackPS2 { namespace VU0 {
+typedef BlackGame::Vec Value;
+Value Transform(Value point);
+} }
+namespace Other { typedef unsigned int Value; Value Read(Value count); }
+BlackGame::Vec Wide(BlackGame::PositionArg point);
+Value Unresolved(Value point);
+''')
+        methods = {d['short']: d for d in declarations}
+        for name in ('Load', 'Transform', 'Wide'):
+            self.assertEqual(methods[name]['ret'], 's128')
+            self.assertEqual(methods[name]['params'], [('s128', None)])
+        self.assertEqual(methods['Count']['ret'], 'u16')
+        self.assertEqual(methods['Count']['params'][-1], ('u16', None))
+        self.assertEqual(methods['Read']['ret'], 'u32')
+        self.assertEqual(methods['Unresolved']['ret'], 'unknown')
+        self.assertEqual(methods['Unresolved']['params'], [('unknown', None)])
+        self.assertEqual(cr.normalize_type('Value')[0], 'unknown')
+
+    def test_explicit_import_and_out_of_class_alias_lookup(self):
+        declarations = cr.parse_declarations('''
+namespace N { struct Reader { typedef long long Result; Result Read(Result); }; }
+N::Reader::Result N::Reader::Read(Result value) { return value; }
+using N::Reader::Result;
+Result Sink(Result value);
+''')
+        self.assertTrue(all(d['ret'] == 's128' for d in declarations))
+        self.assertTrue(all(d['params'][-1] == ('s128', None) for d in declarations))
+
+    def test_unsupported_or_conflicting_aliases_remain_unknown(self):
+        declarations = cr.parse_declarations('''
+typedef int EeS128 __attribute__((mode(TI)));
+typedef unsigned int EeU128 __attribute__((mode(__TI__)));
+typedef int Conflict;
+typedef long long Conflict;
+typedef CycleA CycleB;
+typedef CycleB CycleA;
+typedef char Storage[16];
+EeS128 Signed(EeU128 value);
+Conflict Uncertain(CycleA value, Storage storage);
+void Local() { typedef long long Hidden; }
+Hidden Outside(Hidden value);
+const char *example = "typedef long long Example;";
+Example Unproved(Example value);
+''')
+        methods = {d['short']: d for d in declarations}
+        self.assertEqual(methods['Signed']['ret'], 's128')
+        self.assertEqual(methods['Signed']['params'], [('u128', None)])
+        self.assertEqual(methods['Uncertain']['ret'], 'unknown')
+        self.assertEqual(methods['Uncertain']['params'], [('unknown', None), ('unknown', None)])
+        self.assertEqual(methods['Outside']['ret'], 'unknown')
+        self.assertEqual(methods['Unproved']['ret'], 'unknown')
+
     def test_class_scoped_alias_preserves_receiver_and_static_methods(self):
         declarations = cr.parse_declarations('''namespace Sample {
 struct View {
