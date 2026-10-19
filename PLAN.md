@@ -487,12 +487,13 @@ the campaign was 5,066 functions / 281,632 text bytes.
 
 The campaign used four isolated queues, including the coordinator's worker queue. Wave
 gains count newly sourced original spans, not C-to-C++ conversions; large-function counts use code
-sizes over 300 and 1,024 bytes. Stop after two consecutive waves below 27,155 text bytes (1%).
+sizes over 300 and 1,024 bytes. The first two waves used the former one-percent stopping criterion.
 
 | C++ wave | New functions / text bytes | Complete TUs | >300 B matched / attempted | >1 KB matched / attempted | Agent-hours / bytes per hour | Top blockers |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | 1 | 12 / 4,080 (0.150%) | 0 | 8 / 47 | 0 / 16 | 1.49 / 2,731 | Inline/lifetime shape; VU0 aggregate ABI; data ownership |
 | 2 | 29 / 7,096 (0.261%) | 0 | 10 / 46 | 0 / 10 | 1.74 / 4,083 | Iterator/serialization helpers; EE type/layout recovery; register/cleanup lifetimes |
+| 3 | 78 / 20,760 (0.765%) | 0 | 20 / 110 | 2 / 30 | 5.24 / 3,964 | Local/iterator lifetimes; VU0/aggregate contracts; cleanup and data ownership |
 
 Four isolated class queues ran per wave without worker contention. Source progress rose from 5,066
 functions / 281,632 text bytes to 5,107 / 292,808: +41 functions / 11,176 bytes. Gains exclude six
@@ -506,7 +507,7 @@ A general scalar/type-name boundary rule separates five misgrouped data objects;
 shared. Suppressing surplus RTTI from a provisional iterator view enabled another owned-constant match.
 Checked and unchecked movement graph declarations now coexist without a return-type conflict.
 
-Both waves gained below 1%, so the campaign stops. No function above 1,024 bytes matched in 26 attempts;
+The initial campaign stopped after those two waves under its former one-percent rule. No function above 1,024 bytes matched in 26 attempts;
 these throughput rates cannot support an extrapolation over the remaining large functions. Prioritize
 authored class sources with verified PS2 callees, iterator/serialization helpers and VU operations before
 another campaign. Every integration preserved existing source matches; all five retail images remain
@@ -534,7 +535,7 @@ wave, or after two consecutive throughput declines. The previous one-percent rul
 Shared helper recovery precedes the next wave; enabling work is measured separately from campaign
 throughput. Four active queues, including the coordinator, fit the session's concurrency limit.
 
-The dedicated shared-context owner added eight headers in `include/ps2/`, with 18 exact source
+The dedicated shared-context owner added eight headers in `include/ps2/`, now with 19 exact source
 consumers checked by `tools/shared_context.py verify` and scoped evidence in
 `config/shared_context.json`. They cover SN integer/vector ABI, VU0 vectors and point/direction
 transforms, Kynapse iterator/property/owner helpers and three RenderWare operations. Existing vector
@@ -546,6 +547,17 @@ Context recovery now resolves typedef/using chains within each TU's dependency s
 address-only assembly claims. The two new callers export `void(s128)` and `s128(pointer)`; an unrelated
 `Value` alias is not assigned a global width. Regenerating contexts and class views preserves the
 full image and every existing source address.
+
+Wave 3 raises source progress from 5,109 functions / 293,072 text bytes to 5,187 / 313,832.
+Its four queues ran for 64–97 inclusive minutes, with coordination and validation in the fourth.
+Throughput declined 2.9% from 4,083 to 3,964 bytes per agent-hour: the first decline, above the
+1,500-byte floor. The two new matches above 1 KB contain 1,684 and 1,048 code bytes; existing
+controls are excluded. One generated dispatcher is included among the large attempts.
+All-size automatic retries added one 132-byte function (136-byte span), with no large gain.
+Qualified-method signature export, retained source views, saved-draft re-scoring and merging
+exact named receivers into vtable views keep context usable as classes acquire names. The skeletons
+now retain 520 scoped PS2 field-access proofs; semantic types and complete layouts remain qualified.
+All five retail images are identical, 265 tooling tests pass, and all 19 shared controls remain exact.
 
 ## Agent rules (`AGENTS.md`)
 
