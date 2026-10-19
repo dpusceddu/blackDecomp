@@ -26,6 +26,34 @@ def main():
     if not args:
         raise SystemExit(__doc__)
     compiler, args = args[0], args[1:]
+    if any(a.startswith('--assembler=') for a in args):
+        # Use exactly the same isolated -S/assembler recipe as candidate and
+        # production builds. The normal standalone driver path stays unchanged.
+        import autodecomp
+        if '-c' not in args or '-o' not in args or args.index('-o') + 1 == len(args):
+            raise SystemExit('Alternate assemblers require -c SOURCE -o OUTPUT.o')
+        output_index = args.index('-o')
+        inputs = [a for i, a in enumerate(args) if i != output_index + 1
+                  and Path(a).suffix in ('.c', '.cpp', '.cc', '.cxx') and Path(a).is_file()]
+        if len(inputs) != 1:
+            raise SystemExit('Alternate assemblers require one C or C++ source')
+        source = inputs[0]
+        dest = Path(args[output_index + 1]).resolve()
+        if dest.suffix != '.o' or not any(dest.is_relative_to(ROOT / d) for d in ('build', '.local')):
+            raise SystemExit('Keep object outputs under build/ or .local/.')
+        flags = [a for i, a in enumerate(args) if a != source and a != '-c'
+                 and i not in (output_index, output_index + 1)]
+        if Path(source).suffix in ('.cpp', '.cc', '.cxx') and '-x' not in flags:
+            flags = ['-x', 'c++'] + flags
+        rc, message, obj = autodecomp.worker_compile([
+            ('standalone', Path(source).read_text(), ['--cc=' + compiler] + flags)
+        ], tag='standalone-assembler')['standalone']
+        if message:
+            print(message, file=sys.stderr)
+        if not rc:
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(obj)
+        return rc
     files, outputs, mapped = {}, {}, []
     i = 0
     while i < len(args):

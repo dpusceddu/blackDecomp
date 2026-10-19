@@ -443,8 +443,8 @@ tus:
   confidence: low
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G8, -snas]
-  flags_basis: default with small data (gp-relative access)
+  flags: [-O2, -G1, -snas]
+  flags_basis: matched 1 of 3 functions
 - name: tu_108ce0
   kind: isolated
   library: game
@@ -638,7 +638,7 @@ tus:
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 5 of 12 functions
+  flags_basis: matched 6 of 12 functions
   data:
     .rodata: ['0x3f3b00', '0x3f3b90']
 - name: tu_10f700
@@ -968,7 +968,7 @@ tus:
   evidence: [ctor-list, ctor-end, join-hard, join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 76 of 132 functions
+  flags_basis: matched 77 of 132 functions
   data:
     .rodata: ['0x3f3e80', '0x3f42e0']
     .data: ['0x3bc848', '0x3e2678']
@@ -3049,7 +3049,7 @@ tus:
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 7 of 12 functions
+  flags_basis: matched 8 of 12 functions
   data:
     .data: ['0x3dc160', '0x3dc200']
 - name: tu_153420

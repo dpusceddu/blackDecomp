@@ -387,6 +387,48 @@ this is not a from-scratch reconstruction rate. The experiment used 2,339 compil
 diagnostics. All five retail checks and 119 tool tests pass. Detailed fixtures remain in ignored build
 output. The study is complete; no further campaign is running.
 
+### Short-loop padding study
+
+SN assemblers 1.9.6 and 1.9.25 insert NOPs immediately before backward branches whose signed
+word displacement is −1…−5, extending it to −6: seven words including the delay slot. This also
+happens under `noreorder`, independently of target alignment. Compiler `-S` output contains no
+such padding. Of 285 emitted loops in the calibration/near-miss case builds and constructor,
+102 gain this padding; two others gain hazard NOPs. Two stale near-miss sources fail before
+assembly. Retail contains 6,412 backward branches, including 941 shorter branches in 613 functions;
+its policy is mixed. The constructor specifically needs six-word cleanup loops, with one NOP.
+
+No tested SN switch disables this workaround. SN 1.8.19 omits it; Sony GNU 2.9 pads straight-line
+short loops but exempts loops containing calls; GNU 2.10 rejects the problematic explicit
+`noreorder` cases. Mainline 2.40 leaves `noreorder` loops untouched with either `-mfix-r5900` or
+`-mno-fix-r5900`; the switch affects scheduling in `reorder` blocks. Other macro/hazard differences
+prevent a global substitution: SN 1.8.19 preserves 4,965/5,014 existing bodies, Sony GNU 2.9
+4,928, and mainline 2.40 2,747. Only the current default preserves all eight large controls;
+none of the 25 calibration near misses becomes exact. The 2,128-byte constructor improves
+100→19 diffs with SN 1.8.19, but remains inexact. No tested configuration reproduces its policy.
+
+Re-scored all 4,582 remaining saved drafts plus 57 already-sourced near-miss records, and retried
+all 6,885 remaining entries with the automatic pipeline, across all sizes. Forty-three near misses
+agree after diagnostic NOP removal with a short-loop delta; three become exact through the genuine
+`--assembler=sn-2.73a` configuration. A fourth, unrelated small-data match uses current SN with
+`-G1`. New integrated rates exclude orphan/fragment entries:
+
+| Code size | NOP-only short-loop near misses | New source / remaining real functions | Rate |
+| --- | --- | --- | --- |
+| <100 B | 33 | 3 / 1,333 | 0.23% |
+| 100–300 B | 10 | 1 / 2,607 | 0.04% |
+| 301–1,000 B | 0 | 0 / 1,829 | 0% |
+| >1,000 B | 0 | 0 / 442 | 0% |
+
+Keep SN GCC build 1.36 and its default assembler; use the older assembler only on verified units.
+Candidate and production builds now share explicit compiler-`-S`/assembler recipes and cache them
+by configuration; no assembly or instruction bytes are rewritten. Only the useful older-SN recipe
+is an automatic fallback; other tested recipes remain explicit experiments. A read-only loop census
+is available in `tools/loop_padding.py`. Progress rises 5,014→5,018 functions and
+275,768→276,072 text bytes (42.17% / 10.17%). All five retail images remain identical.
+Padding is a proved blocker, including for the known constructor; these tests supply no general
+production fix for large functions. Identify the original assembler revision or a genuine control
+for its six-word policy before another campaign. This study is complete.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.

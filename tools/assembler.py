@@ -1,0 +1,55 @@
+"""Explicit, unmodified compiler -S / catalog assembler configurations.
+
+The default remains the compiler driver's assembler. Alternate recipes never
+rewrite assembly or instruction bytes; selection is part of the unit's flags.
+"""
+import subprocess
+
+
+CHOICES = ('gas-2.40', 'gas-2.40-fix', 'sn-2.73a', 'sony-2.9')
+# Only this alternate added matches in the paired whole-inventory study.
+FALLBACKS = ('sn-2.73a',)
+
+
+def selection(args):
+    choices = [x.split('=', 1)[1] for x in args if x.startswith('--assembler=')]
+    if len(choices) > 1 or choices and choices[0] not in CHOICES:
+        raise ValueError('unknown or repeated --assembler configuration')
+    return (choices[0] if choices else None,
+            [x for x in args if not x.startswith('--assembler=')])
+
+
+def command(choice, args, source, output):
+    if choice not in CHOICES:
+        raise ValueError('unknown assembler configuration')
+    small = next((x for x in reversed(args) if x.startswith('-G')), '-G0')
+    common = [small, '-mabi=eabi', '-I', 'include']
+    if choice.startswith('gas-2.40'):
+        return ['/toolchains/binutils/root/usr/bin/mipsel-linux-gnu-as',
+                '-EL', '-march=r5900', '-O2',
+                '-mfix-r5900' if choice.endswith('-fix') else '-mno-fix-r5900',
+                *common, '-o', output, source]
+    if choice == 'sn-2.73a':
+        return ['wibo', '/toolchains/compilers/ee-gcc2.95.2-273a/lib/gcc-lib/ee/2.95.2/ps2eeas.exe',
+                '-O2', *common, '-o', output, source]
+    if choice == 'sony-2.9':
+        return ['/toolchains/compilers/ee-gcc2.9-991111-01/ee/bin/as',
+                '-EL', '-m5900', *common, '-o', output, source]
+    raise ValueError('unknown assembler configuration')
+
+
+def compile_with_assembler(prefix, args, source, output, env, timeout):
+    choice, flags = selection(args)
+    if choice is None:
+        return subprocess.run(prefix + flags + ['-c', source, '-o', output], env=env,
+                              capture_output=True, text=True, timeout=timeout)
+    assembly = output + '.s'
+    p = subprocess.run(prefix + flags + ['-S', source, '-o', assembly], env=env,
+                       capture_output=True, text=True, timeout=timeout)
+    if p.returncode:
+        return p
+    q = subprocess.run(command(choice, flags, assembly, output), env=env,
+                       capture_output=True, text=True, timeout=timeout)
+    q.stdout = p.stdout + q.stdout
+    q.stderr = p.stderr + q.stderr
+    return q

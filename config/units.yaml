@@ -45162,3 +45162,55 @@ units:
     symbol: Wrap__6Cursor
     size: 84
     status: source
+- name: auto_game_108a40
+  source: src/auto/game/108a40.c
+  origin: auto
+  flags:
+  - -O2
+  - -G1
+  - -snas
+  functions:
+  - addr: '0x108a40'
+    symbol: func_00108A40
+    size: 48
+    status: source
+- name: auto_unclassified_10f6d8
+  source: src/auto/unclassified/10f6d8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-2.73a
+  functions:
+  - addr: '0x10f6d8'
+    symbol: func_0010F6D8
+    size: 40
+    status: source
+- name: auto_game_121c38
+  source: src/auto/game/121c38.c
+  origin: auto
+  flags:
+  - -G0
+  - -snas
+  - -O2
+  - -fno-schedule-insns
+  - --assembler=sn-2.73a
+  functions:
+  - addr: '0x121c38'
+    symbol: func_00121C38
+    size: 176
+    status: source
+- name: auto_game_153190
+  source: src/auto/game/153190.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-2.73a
+  functions:
+  - addr: '0x153190'
+    symbol: func_00153190
+    size: 40
+    status: source

@@ -55,6 +55,8 @@ def main():
         else:
             deps = dependencies(o['src'])
             key = sha('cc', VERSION, o['compiler'], json.dumps(o['flags']), *[(ROOT / d).read_bytes() for d in deps])
+            if any(f.startswith('--assembler=') for f in o['flags']):
+                key = sha(key, (ROOT / 'tools/assembler.py').read_bytes())
             job = dict(src=o['src'], obj='obj/%s.o' % name, compiler=o['compiler'],
                        args=list(o['flags']) + ['-I', 'include'])
         keys[name] = key
@@ -79,6 +81,7 @@ def main():
     files['include/macro.inc'] = ROOT / 'include/macro.inc'
     files['link.ld'] = build / 'link.ld'
     files['tools/elfobj.py'] = ROOT / 'tools/elfobj.py'
+    files['tools/assembler.py'] = ROOT / 'tools/assembler.py'
     if not compile_only:
         plan['link'] = ['-m', 'elf32ltsmip', '-nostdlib', '-static', '-z', 'norelro', '-z', 'noseparate-code',
                         '--no-warn-rwx-segments', '-T', 'link.ld', '-Map', 'linked.map', '-o', 'linked.elf'] + \

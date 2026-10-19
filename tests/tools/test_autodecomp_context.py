@@ -14,7 +14,7 @@ class IntegrationTests(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            for name in ('include/macro.inc', 'tools/elfobj.py'):
+            for name in ('include/macro.inc', 'tools/elfobj.py', 'tools/assembler.py'):
                 path = root / name
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text('')
@@ -96,7 +96,9 @@ dlabel D_00400000
         self.assertIn(['-O2', '-G1'], small)
         self.assertIn(['-O2', '-G8', '-fbyte-bool'], small)
         with patch.object(auto, 'tu_flags', return_value=(auto.SONY, [], 'default')), patch.object(auto, 'force_cc', side_effect=lambda x: x):
-            self.assertEqual(auto.extra_sets({'addr': 0x100000, 'rel': {}}), auto.SONY_EXTRA)
+            candidates = auto.extra_sets({'addr': 0x100000, 'rel': {}})
+            self.assertEqual(candidates[:len(auto.SONY_EXTRA)], auto.SONY_EXTRA)
+            self.assertIn(['--cc=' + auto.SONY, '--assembler=sn-2.73a'], candidates)
 
     def test_permuter_expansion_removes_header_comments_and_preserves_literals(self):
         source = '#include "recovered/Recovered_Vtable_003DBDC8.h"\nint f(void) { return 1; /* note */ }\n'

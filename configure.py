@@ -63,7 +63,7 @@ build {b}/split.stamp: split | {b}/extract.stamp config/boundaries.{slug}.txt
 build {b}/extra_labels.txt {b}/symbols.ld: support | {b}/split.stamp tools/link_support.py
 build {b}/placement.json: objsplit | {b}/extra_labels.txt tools/split_objects.py tools/fixasm.py
 build {b}/link.ld {b}/objects.json: ldscript | {b}/placement.json {b}/symbols.ld tools/make_ld.py tools/units.py config/units.yaml config/{boot}.layout.json
-build {b}/linked.elf: link | {b}/link.ld {b}/objects.json include/macro.inc {tools('build_objects.py', 'build_job.py', 'sandbox.py', 'elfobj.py', 'units.py')}
+build {b}/linked.elf: link | {b}/link.ld {b}/objects.json include/macro.inc {tools('build_objects.py', 'build_job.py', 'sandbox.py', 'elfobj.py', 'assembler.py', 'units.py')}
 build {b}/{boot}.elf: pack | {b}/linked.elf tools/pack_elf.py
 build {b}/ok.stamp: check | {b}/{boot}.elf tools/check_elf.py config/checksums.sha256
 build progress: progress | {b}/linked.elf

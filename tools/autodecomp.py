@@ -827,6 +827,8 @@ def worker_compile(jobs, tag='auto'):
         deps = compile_dependencies(src)
         headers.update(deps)
         digest = hashlib.sha256((src + '\0' + ' '.join(flags) + '\0' + PRELUDE_HASH).encode())
+        if any(f.startswith('--assembler=') for f in flags):
+            digest.update((ROOT / 'tools/assembler.py').read_bytes())
         if split_cc(flags)[0].startswith('mwcps2-'):
             digest.update(b'\0catalog-mw-joined-include-v1')
         for path, data in sorted(deps.items()):
@@ -849,7 +851,7 @@ def worker_compile(jobs, tag='auto'):
     buf = io.BytesIO()
     plan = dict(compile=[], pack='newobjs.tgz')
     with tarfile.open(fileobj=buf, mode='w:gz', compresslevel=1) as tar:
-        for rel in ('include/macro.inc', 'tools/elfobj.py'):
+        for rel in ('include/macro.inc', 'tools/elfobj.py', 'tools/assembler.py'):
             tar.add(ROOT / rel, arcname=rel)
         for rel, data in sorted(headers.items()):
             item = tarfile.TarInfo(rel)
@@ -1140,14 +1142,17 @@ SONY_EXTRA = [['--cc=' + SONY] + f for f in (['-O1', '-G0'], ['-O3', '-G0'], ['-
 
 
 def extra_sets(fn):
+    from assembler import FALLBACKS
+    assembler_sets = [variants_for_sn(fn)[0] + ['--assembler=' + choice] for choice in FALLBACKS]
     tf = tu_flags(fn['addr'])
     if tf and tf[0] != COMPILER:
-        return force_cc(SONY_EXTRA)
+        return force_cc(SONY_EXTRA + assembler_sets)
     # The bundled GNU assembler and SN assembler differ on short-loop/hazard
     # padding. Both have full-image-verified campaign matches; try both rather
     # than treating an assembler NOP difference as an unfixable C mismatch.
     sets = EXTRA_FLAG_SETS + [['-O2', '-G0'], ['-O2', '-G0', '-fbyte-bool'], ['-Os', '-G0'],
                               ['-O2', '-G0', '-fno-schedule-insns']]
+    sets += assembler_sets
     if any(value[0] == 'gprel' for value in fn['rel'].values()):
         sets += [['-O2', flag] + extra for flag in ('-G1', '-G8')
                  for extra in ([], ['-fbyte-bool'])]
@@ -1246,11 +1251,14 @@ def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=T
         jobs = []
         for f in fns:
             b = best.get(f['name'])
-            if f['name'] in srcs and (b is None or not b[2]) and b is not None:
+            if f['name'] in srcs and (b is None or not b[2]):
                 for k, flags in enumerate(extra_sets(f)):
+                    if b is None and not any(x.startswith('--assembler=') for x in flags):
+                        continue
                     if flags not in variants_for(f):
-                        jobs.append(((f['name'], 100 + k), b[5], flags))
-                        srcof[(f['name'], 100 + k)] = b[5]
+                        candidate = b[5] if b else srcs[f['name']]
+                        jobs.append(((f['name'], 100 + k), candidate, flags))
+                        srcof[(f['name'], 100 + k)] = candidate
         res2 = {}
         for i in range(0, len(jobs), 400):
             res2.update(worker_compile(jobs[i:i + 400]))

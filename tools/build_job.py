@@ -44,6 +44,7 @@ def assemble(job):
 
 def compile_one(job):
     from elfobj import normalize_object
+    from assembler import compile_with_assembler
     root = '%s/%s' % (CC, job['compiler'])
     if job['compiler'].startswith('mwcps2-'):
         os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
@@ -60,9 +61,9 @@ def compile_one(job):
     if not os.path.isfile(root + '/bin/ee-gcc.exe'):          # native Linux compilers (Sony 2.9 / 2.96)
         os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
         env = dict(os.environ, TMPDIR='/work')
-        cmd = [root + '/bin/ee-gcc', '-B' + root + '/bin/ee-'] + job['args'] + ['-c', job['src'], '-o', job['obj']]
+        prefix = [root + '/bin/ee-gcc', '-B' + root + '/bin/ee-']
         try:
-            p = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=job.get('timeout', 300))
+            p = compile_with_assembler(prefix, job['args'], job['src'], job['obj'], env, job.get('timeout', 300))
         except subprocess.TimeoutExpired:
             return job['src'], 124, 'compiler timeout'
         if p.returncode == 0 and os.path.exists(job['obj']):
@@ -75,9 +76,9 @@ def compile_one(job):
                    if not v.startswith('.') and os.path.isdir(versions + '/' + v))
     env = dict(os.environ, TMPDIR='/work', WINEDEBUG='-all', WIBO_PATH=backend)
     os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
-    cmd = ['wibo', root + '/bin/ee-gcc.exe', '-B' + backend + '/'] + job['args'] + ['-c', job['src'], '-o', job['obj']]
+    prefix = ['wibo', root + '/bin/ee-gcc.exe', '-B' + backend + '/']
     try:
-        p = subprocess.run(cmd, env=env, capture_output=True, text=True, timeout=job.get('timeout', 300))
+        p = compile_with_assembler(prefix, job['args'], job['src'], job['obj'], env, job.get('timeout', 300))
     except subprocess.TimeoutExpired:       # a pathological candidate must not take the whole batch down
         return job['src'], 124, 'compiler timeout'
     if p.returncode == 0 and os.path.exists(job['obj']):
