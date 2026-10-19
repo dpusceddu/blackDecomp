@@ -46990,3 +46990,31 @@ units:
   externs:
     __Q24Kaim8BehaviorPQ24Kaim15BehaviorContext: '0x2dff10'
     _vt$Q24Kaim12ShooterAgent: '0x3e3888'
+- name: campaign_graphics_level_callback
+  source: src/campaign/graphics_level_callback.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x20f5a0'
+    symbol: SetDifficulty__Q216CampaignGraphics14LevelCallbacksPCc
+    size: 68
+    status: source
+- name: campaign_graphics_level_callback_drafts
+  source: src/campaign/graphics_level_callback_drafts.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x20ef28'
+    status: asm
+    reason: types
+  - addr: '0x20f268'
+    status: asm
+    reason: types
