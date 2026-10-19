@@ -36,14 +36,14 @@ struct UnknownVtable_003DD380 {
     int Function_00191C20(void * argument0);
     // 0x00191C80: UNVERIFIED signature (ghidra).
     int Function_00191C80();
-    // 0x00191D40: UNVERIFIED signature (ghidra).
-    unsigned int Function_00191D40();
+    // 0x00191D40: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    void Function_00191D40();
     // 0x001920D8: UNVERIFIED signature (ghidra).
     int Function_001920D8(long argument0);
     // 0x00192140: UNVERIFIED signature (ghidra).
     int Function_00192140(long argument0);
-    // 0x001922E8: UNVERIFIED signature (ghidra).
-    unsigned int Function_001922E8(long * argument0);
+    // 0x001922E8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    S128 Function_001922E8();
     // 0x00192DC0: UNVERIFIED signature (ghidra).
     int Function_00192DC0();
     // 0x00192E50: UNVERIFIED signature (ghidra).
@@ -56,16 +56,16 @@ struct UnknownVtable_003DD380 {
     struct VirtualInterface0 {
         // slot 0, table+0x8, this delta 0, function 0x00191C80; UNVERIFIED signature.
         virtual int Slot000();
-        // slot 1, table+0x10, this delta 0, function 0x00191D40; UNVERIFIED signature.
-        virtual unsigned int Slot001();
+        // slot 1, table+0x10, this delta 0, function 0x00191D40; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual void Slot001();
         // slot 2, table+0x18, this delta 0, function 0x001920D8; UNVERIFIED signature.
         virtual int Slot002(long argument0);
         // slot 3, table+0x20, this delta 0, function 0x00192140; UNVERIFIED signature.
         virtual int Slot003(long argument0);
         // slot 4, table+0x28, this delta 0, function 0x00192FB0; UNVERIFIED signature.
         virtual int Slot004(long argument0);
-        // slot 5, table+0x30, this delta 0, function 0x001922E8; UNVERIFIED signature.
-        virtual unsigned int Slot005(long * argument0);
+        // slot 5, table+0x30, this delta 0, function 0x001922E8; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual S128 Slot005();
         // slot 6, table+0x38, this delta 0, function 0x00192DC0; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x00192E50; UNVERIFIED signature.

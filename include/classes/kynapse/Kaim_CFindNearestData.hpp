@@ -14,6 +14,7 @@ struct Kaim_CFindNearestData {
     typedef Hierarchy_Kaim_CFindNearestData Hierarchy; // Semantic bases, not an object layout.
     // Constructor identity: 0x002F0A00; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x002F0A30.
+    // Destructor identity: 0x002F0A30.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }

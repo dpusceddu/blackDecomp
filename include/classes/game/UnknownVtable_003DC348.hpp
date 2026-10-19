@@ -40,8 +40,8 @@ struct UnknownVtable_003DC348 {
     unsigned int Function_00141008();
     // 0x00141168: UNVERIFIED signature (src/auto/game/141168.c).
     int Function_00141168();
-    // 0x001411A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    void * Function_001411A0(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, unsigned int argument4, float argument5, float argument6);
+    // 0x001411A0: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    void Function_001411A0(S128 argument0, S128 argument1, float argument2, unsigned char argument3, signed char argument4, float argument5, long argument6);
 
     // Vtable 0x003DC348; vptr field offset unknown; referenced zero RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -52,8 +52,8 @@ struct UnknownVtable_003DC348 {
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00141168; UNVERIFIED signature.
         virtual int Slot002();
-        // slot 3, table+0x20, this delta 0, function 0x001411A0; UNVERIFIED signature.
-        virtual void * Slot003(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, unsigned int argument4, float argument5, float argument6);
+        // slot 3, table+0x20, this delta 0, function 0x001411A0; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual void Slot003(S128 argument0, S128 argument1, float argument2, unsigned char argument3, signed char argument4, float argument5, long argument6);
         // slot 4, table+0x28, this delta 0, function 0x0013EE58; UNVERIFIED signature.
         virtual unsigned int Slot004();
         // slot 5, table+0x30, this delta 0, function 0x0013EE60; UNVERIFIED signature.

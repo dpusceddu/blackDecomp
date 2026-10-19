@@ -479,7 +479,7 @@ involve COP0 polling or inner control flow. Excluding hardware/inner-control cas
 TU, but game and animation still mix library-level forms; authored NOPs and inferred TU boundaries
 prevent a historical assembler assignment. Eleven exact/high multi-function six-word cohorts remain
 leads. All four independently compiled seven-word controls lie in RenderWare Core/Audio. Retain
-per-unit selection: 44 explicit-selector units (48 source functions) and 77 SN driver-GNU units
+per-unit selection. At the census baseline, 44 explicit-selector units (48 source functions) and 77 SN driver-GNU units
 (87 source functions) now carry weak historical
 provenance, maintained by the units serializer. This does not weaken the full-image equality check.
 `tools/loop_provenance.py` reproduces the census, filtered cohorts and control joins. Source progress
@@ -492,13 +492,25 @@ sizes over 300 and 1,024 bytes. Stop after two consecutive waves below 27,155 te
 | C++ wave | New functions / text bytes | Complete TUs | >300 B matched / attempted | >1 KB matched / attempted | Agent-hours / bytes per hour | Top blockers |
 | --- | ---: | ---: | ---: | ---: | ---: | --- |
 | 1 | 12 / 4,080 (0.150%) | 0 | 8 / 47 | 0 / 16 | 1.49 / 2,731 | Inline/lifetime shape; VU0 aggregate ABI; data ownership |
+| 2 | 29 / 7,096 (0.261%) | 0 | 10 / 46 | 0 / 10 | 1.74 / 4,083 | Iterator/serialization helpers; EE type/layout recovery; register/cleanup lifetimes |
 
-Four isolated class queues ran without worker contention. Correct inline boolean helpers, aggregate
-argument types and loop-local declarations unlocked the large matches. Three existing C bodies
-(1,008 code bytes) also became C++ methods; an existing C++ destructor gained its RTTI-backed identity.
-Verified actor signatures/offsets and controller offsets are now inputs to the shared skeleton generator.
-Every checkpoint and all five retail images remain identical. Wave 1 is below the stopping threshold;
-a fresh second wave tests the gains from spreading these headers and source conventions.
+Four isolated class queues ran per wave without worker contention. Source progress rose from 5,066
+functions / 281,632 text bytes to 5,107 / 292,808: +41 functions / 11,176 bytes. Gains exclude six
+existing C bodies (1,660 code bytes) converted to C++; another C++ destructor gained its RTTI identity.
+Timing includes each queue's setup through its final checkpoint, with coordination in the fourth queue.
+
+Correct inline bool helpers, callee returns, EE argument order, virtual offsets, native fields and
+loop-local declarations unlocked matches. Reference-returning field helpers can evaluate addresses
+early and extend register lifetimes. Verified signatures now feed the shared skeleton generator.
+A general scalar/type-name boundary rule separates five misgrouped data objects; unrelated RTTI stays
+shared. Suppressing surplus RTTI from a provisional iterator view enabled another owned-constant match.
+Checked and unchecked movement graph declarations now coexist without a return-type conflict.
+
+Both waves gained below 1%, so the campaign stops. No function above 1,024 bytes matched in 26 attempts;
+these throughput rates cannot support an extrapolation over the remaining large functions. Prioritize
+authored class sources with verified PS2 callees, iterator/serialization helpers and VU operations before
+another campaign. Every integration preserved existing source matches; all five retail images remain
+identical. No complete TU was claimed.
 
 ## Agent rules (`AGENTS.md`)
 

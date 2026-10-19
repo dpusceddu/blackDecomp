@@ -14,8 +14,8 @@ struct UnknownVtable_003DFFE0 {
     int Function_002F6880(void * argument0, unsigned int argument1);
     // 0x002F6E08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F6E08(unsigned int argument0);
-    // 0x002F7D80: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F7D80(signed char * argument0);
+    // 0x002F7D80: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    bool Function_002F7D80(const char * argument0);
     // 0x002F7F48: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F7F48(unsigned int argument0);
     // 0x002F8238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -34,8 +34,8 @@ struct UnknownVtable_003DFFE0 {
         virtual int Slot001(void * argument0, unsigned int argument1);
         // slot 2, table+0x18, this delta 0, function 0x002F6E08; UNVERIFIED signature.
         virtual int Slot002(unsigned int argument0);
-        // slot 3, table+0x20, this delta 0, function 0x002F7D80; UNVERIFIED signature.
-        virtual int Slot003(signed char * argument0);
+        // slot 3, table+0x20, this delta 0, function 0x002F7D80; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual bool Slot003(const char * argument0);
         // slot 4, table+0x28, this delta 0, function 0x002F7F48; UNVERIFIED signature.
         virtual int Slot004(unsigned int argument0);
         // slot 5, table+0x30, this delta 0, function 0x002F8238; UNVERIFIED signature.

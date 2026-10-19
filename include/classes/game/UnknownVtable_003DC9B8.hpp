@@ -32,8 +32,8 @@ struct UnknownVtable_003DC9B8 {
     int Function_0013DCA0();
     // 0x0013DD18: UNVERIFIED signature (src/auto/game/13dd18.c).
     int Function_0013DD18();
-    // 0x0013DD68: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_0013DD68();
+    // 0x0013DD68: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    void Function_0013DD68();
     // 0x0013EE50: UNVERIFIED signature (src/tu/13ee20.c).
     unsigned int Function_0013EE50();
     // 0x0013EE58: UNVERIFIED signature (src/tu/13ee20.c).
@@ -44,8 +44,8 @@ struct UnknownVtable_003DC9B8 {
     // Vtable 0x003DC9B8; vptr field offset unknown; referenced zero RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
     struct VirtualInterface0 {
-        // slot 0, table+0x8, this delta 0, function 0x0013DD68; UNVERIFIED signature.
-        virtual unsigned int Slot000();
+        // slot 0, table+0x8, this delta 0, function 0x0013DD68; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual void Slot000();
         // slot 1, table+0x10, this delta 0, function 0x0013DCA0; UNVERIFIED signature.
         virtual int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x0013DD18; UNVERIFIED signature.

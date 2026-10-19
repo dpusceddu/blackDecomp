@@ -12,6 +12,7 @@ namespace BlackPS2Classes {
 // RTTI base: Kaim_CAgent; offset 0; public nonvirtual.
 struct Kaim_CShooterAgent {
     typedef Hierarchy_Kaim_CShooterAgent Hierarchy; // Semantic bases, not an object layout.
+    // Constructor identity: 0x002D7008; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x002D7068.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
@@ -64,14 +65,14 @@ struct Kaim_CShooterAgent {
     inline int & Field_0068() { return *(int *)((unsigned char *)this + 0x68); }
     // 0x70: UNVERIFIED type; PS2 access offset.
     inline float & Field_0070() { return *(float *)((unsigned char *)this + 0x70); }
-    // 0x002D6690: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D6690(void * argument0);
+    // 0x002D6690: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    bool Function_002D6690(void * argument0);
     // 0x002D6860: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D6860(void * argument0);
     // 0x002D6A38: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D6A38();
-    // 0x002D6E48: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D6E48(void * argument0);
+    // 0x002D6E48: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    bool Function_002D6E48(const void * argument0);
     // 0x002D7068: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D7068();
     // 0x002D70C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -80,8 +81,8 @@ struct Kaim_CShooterAgent {
     int Function_002D70E0();
     // 0x002D7108: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D7108();
-    // 0x002D7118: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D7118();
+    // 0x002D7118: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    bool Function_002D7118();
     // 0x00389770: UNVERIFIED signature (src/kynapse/class_info_389770.cpp).
     void * Function_00389770();
     // 0x0038BB28: UNVERIFIED signature (src/kynapse/small_misc_38bb28.cpp).
@@ -94,14 +95,14 @@ struct Kaim_CShooterAgent {
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002D6860; UNVERIFIED signature.
         virtual int Slot001(void * argument0);
-        // slot 2, table+0x18, this delta 0, function 0x002D6690; UNVERIFIED signature.
-        virtual int Slot002(void * argument0);
+        // slot 2, table+0x18, this delta 0, function 0x002D6690; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual bool Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0038BB28; UNVERIFIED signature.
         virtual void Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00389770; UNVERIFIED signature.
         virtual void * Slot004();
-        // slot 5, table+0x30, this delta 0, function 0x002D7118; UNVERIFIED signature.
-        virtual int Slot005();
+        // slot 5, table+0x30, this delta 0, function 0x002D7118; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual bool Slot005();
         // slot 6, table+0x38, this delta 0, function 0x002D6A38; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D70C0; UNVERIFIED signature.
@@ -110,8 +111,8 @@ struct Kaim_CShooterAgent {
         virtual int Slot008();
         // slot 9, table+0x50, this delta 0, function 0x002D7108; UNVERIFIED signature.
         virtual int Slot009();
-        // slot 10, table+0x58, this delta 0, function 0x002D6E48; UNVERIFIED signature.
-        virtual int Slot010(void * argument0);
+        // slot 10, table+0x58, this delta 0, function 0x002D6E48; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual bool Slot010(const void * argument0);
     };
 };
 

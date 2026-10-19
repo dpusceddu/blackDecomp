@@ -16,9 +16,9 @@ struct UnknownVtable_003E10B0 {
     unsigned int Function_0020DF58();
     // 0x0020DF60: UNVERIFIED signature (src/auto/game/20df30.c).
     unsigned int Function_0020DF60();
-    // 0x0020EAC8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x0020EAC8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     int Function_0020EAC8();
-    // 0x0020EDB0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x0020EDB0: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     int Function_0020EDB0();
 
     // Vtable 0x003E10B0; vptr field offset unknown; referenced zero RTTI header.
@@ -26,11 +26,11 @@ struct UnknownVtable_003E10B0 {
     struct VirtualInterface0 {
         // slot 0, table+0x8, this delta 0, function 0x0020DF50; UNVERIFIED signature.
         virtual unsigned int Slot000();
-        // slot 1, table+0x10, this delta 0, function 0x0020EAC8; UNVERIFIED signature.
+        // slot 1, table+0x10, this delta 0, function 0x0020EAC8; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x0020DF58; UNVERIFIED signature.
         virtual unsigned int Slot002();
-        // slot 3, table+0x20, this delta 0, function 0x0020EDB0; UNVERIFIED signature.
+        // slot 3, table+0x20, this delta 0, function 0x0020EDB0; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x0020DF60; UNVERIFIED signature.
         virtual unsigned int Slot004();

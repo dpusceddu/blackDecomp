@@ -13,6 +13,7 @@ namespace BlackPS2Classes {
 struct Kaim_CSpatialGraph {
     typedef Hierarchy_Kaim_CSpatialGraph Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002FB4D8.
+    // Destructor identity: 0x002FB4D8.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
@@ -20,8 +21,8 @@ struct Kaim_CSpatialGraph {
     int Function_002F6880(void * argument0, unsigned int argument1);
     // 0x002F6E08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F6E08(unsigned int argument0);
-    // 0x002F7D80: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F7D80(signed char * argument0);
+    // 0x002F7D80: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    bool Function_002F7D80(const char * argument0);
     // 0x002F7F48: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F7F48(unsigned int argument0);
     // 0x002F8238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -40,8 +41,8 @@ struct Kaim_CSpatialGraph {
         virtual int Slot001(void * argument0, unsigned int argument1);
         // slot 2, table+0x18, this delta 0, function 0x002F6E08; UNVERIFIED signature.
         virtual int Slot002(unsigned int argument0);
-        // slot 3, table+0x20, this delta 0, function 0x002F7D80; UNVERIFIED signature.
-        virtual int Slot003(signed char * argument0);
+        // slot 3, table+0x20, this delta 0, function 0x002F7D80; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual bool Slot003(const char * argument0);
         // slot 4, table+0x28, this delta 0, function 0x002F7F48; UNVERIFIED signature.
         virtual int Slot004(unsigned int argument0);
         // slot 5, table+0x30, this delta 0, function 0x002F8238; UNVERIFIED signature.

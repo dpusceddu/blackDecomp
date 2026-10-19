@@ -206,6 +206,68 @@
     "0x213758": {
       "return": "int",
       "params": []
+    },
+    "0x191d40": {
+      "return": "void",
+      "params": []
+    },
+    "0x1922e8": {
+      "return": "S128",
+      "params": []
+    },
+    "0x13dd68": {
+      "return": "void",
+      "params": []
+    },
+    "0x1411a0": {
+      "return": "void",
+      "params": [
+        "S128",
+        "S128",
+        "float",
+        "unsigned char",
+        "signed char",
+        "float",
+        "long"
+      ]
+    },
+    "0x2d6690": {
+      "return": "bool",
+      "params": [
+        "void *"
+      ]
+    },
+    "0x2d7118": {
+      "return": "bool",
+      "params": []
+    },
+    "0x2d6e48": {
+      "return": "bool",
+      "params": [
+        "const void *"
+      ]
+    },
+    "0x2d5398": {
+      "return": "void",
+      "params": []
+    },
+    "0x2f44e8": {
+      "return": "void",
+      "params": []
+    },
+    "0x2f7d80": {
+      "return": "bool",
+      "params": [
+        "const char *"
+      ]
+    },
+    "0x20eac8": {
+      "return": "int",
+      "params": []
+    },
+    "0x20edb0": {
+      "return": "int",
+      "params": []
     }
   },
   "virtual_views": {

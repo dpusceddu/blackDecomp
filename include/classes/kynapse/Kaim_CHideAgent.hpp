@@ -70,8 +70,8 @@ struct Kaim_CHideAgent {
     int Function_002D51C0();
     // 0x002D5238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002D5238();
-    // 0x002D5398: UNVERIFIED signature (src/kynapse/hide_agent_2d3c90.cpp).
-    int Function_002D5398();
+    // 0x002D5398: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    void Function_002D5398();
     // 0x003895C8: UNVERIFIED signature (src/kynapse/class_info_3895c8.cpp).
     void * Function_003895C8();
 
@@ -98,8 +98,8 @@ struct Kaim_CHideAgent {
         virtual int Slot008();
         // slot 9, table+0x50, this delta 0, function 0x002D4B68; UNVERIFIED signature.
         virtual int Slot009(void * argument0, void * argument1, float * argument2, unsigned char * argument3, unsigned char * argument4);
-        // slot 10, table+0x58, this delta 0, function 0x002D5398; UNVERIFIED signature.
-        virtual int Slot010();
+        // slot 10, table+0x58, this delta 0, function 0x002D5398; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual void Slot010();
     };
 };
 

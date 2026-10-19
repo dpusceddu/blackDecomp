@@ -13,6 +13,7 @@ namespace BlackPS2Classes {
 struct Kaim_CPathObject {
     typedef Hierarchy_Kaim_CPathObject Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002F4A90.
+    // Destructor identity: 0x002F4A90.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
@@ -24,8 +25,8 @@ struct Kaim_CPathObject {
     void Function_002E4CA8();
     // 0x002F4390: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F4390(void * argument0);
-    // 0x002F44E8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    void * Function_002F44E8();
+    // 0x002F44E8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
+    void Function_002F44E8();
     // 0x002F4620: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F4620(unsigned int argument0, void * argument1);
     // 0x002F47B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -88,8 +89,8 @@ struct Kaim_CPathObject {
         virtual int Slot014(unsigned int argument0, void * argument1);
         // slot 15, table+0x80, this delta 0, function 0x002F47B0; UNVERIFIED signature.
         virtual int Slot015(unsigned int argument0, void * argument1);
-        // slot 16, table+0x88, this delta 0, function 0x002F44E8; UNVERIFIED signature.
-        virtual void * Slot016();
+        // slot 16, table+0x88, this delta 0, function 0x002F44E8; code-compatible exact source signature; original semantic types UNVERIFIED.
+        virtual void Slot016();
         // slot 17, table+0x90, this delta 0, function 0x00391378; UNVERIFIED signature.
         virtual unsigned int Slot017();
         // slot 18, table+0x98, this delta 0, function 0x00391380; UNVERIFIED signature.
