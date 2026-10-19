@@ -295,20 +295,29 @@ several objects.
 (`--cc=NAME` in a flag set selects another compiler; `register` turns it into the unit's `compiler`). `build_job.py` runs the native
 Sony compilers of the catalog. `autodecomp.py run --cc NAME` and `permute --cc NAME` are for experiments.
 
-**Short-loop padding.** SN assemblers 1.9.6/1.9.25 extend backward branch displacements −1…−5 to
-−6 by inserting NOPs immediately before the branch, including in `noreorder` blocks. That is seven
-words including the delay slot. GCC's `-S` output lacks these NOPs; retail has 941 shorter branches
-and uses several padding policies. Do not remove instruction bytes or replace the assembler globally.
-The automatic pipeline tries `--assembler=sn-2.73a` as a per-unit fallback: the selected compiler
-emits untouched assembly with `-S`, then SN 1.8.19 from that catalog package assembles it. Keep the
-compiler and its existing flags; for example, add this flag to a unit's `flags`, or pass it to
-`tools/compile.py`. Both candidate and production caches include the assembler recipe.
-Explicit experimental choices are `gas-2.40`, `gas-2.40-fix` and `sony-2.9`; the first two select
-`-mno-fix-r5900` and `-mfix-r5900`, respectively, with `-march=r5900 -mabi=eabi -O2` and the unit's
-`-G` value. Modern GAS leaves explicit `noreorder` short loops intact in both modes but changes
-other encodings and scheduling. None reproduces every retail loop or preserves every source match.
-`python3 tools/loop_padding.py --output build/loop-census.json` performs a read-only retail census.
-See PLAN's short-loop study for the measured limits.
+**Short-loop padding.** Retail has both six- and seven-word patterns, including identical loop
+bodies with different padding; a compiler's identity alone does not determine its assembler policy.
+Ghidra analysis located SN 1.9.25.758's unconditional short-loop routine: it extends negative branch
+word displacements −1…−5 to −6 (seven words including the delay slot). The separately installed
+`sn-min6` derivative changes two immediate bytes, extending −1…−4 to −5 instead. It reproduces the
+six-word family while retaining division, FPU and other hazard handling. No compiler assembly or game
+instruction bytes are edited. Existing recipes stay in place: uniform substitution regresses matches.
+
+The derivative is installed once in the toolchain catalog.
+`config/toolchain-assemblers.json` records original/output hashes, exact patch sites and upstream
+references; the installer retains the original, verifies full hashes/preimages and is idempotent.
+Worker compilation checks the derivative hash again before execution. Add `--assembler=sn-min6` to a
+unit's flags or pass it to `tools/compile.py`; the selected compiler emits untouched `-S` output.
+Candidate and production caches include the recipe. The automatic pipeline tries this verified
+fallback before the older `sn-2.73a` assembler; `gas-2.40`, `gas-2.40-fix` and `sony-2.9` remain
+explicit experiments. Every new match must pass the full image comparison.
+
+`python3 tools/loop_padding.py --classify --output build/loop-classification.json` classifies every
+SN-assigned short branch using the TU map and matched-source compiler overrides, including delay
+slots, branch-likely, loads/stores, mult/div, COP1/COP2, calls and loop lengths. Contiguous prebranch
+NOPs are candidate padding: their origin cannot be proved from bytes alone. Sony-assigned regions
+are reported separately; detailed instructions stay in ignored output. Omit `--classify` for the
+original whole-executable census. See PLAN for the measured limits.
 
 **Regrouping** (`tools/regroup.py`). `merge` makes one unit of the adjacent source units of a TU (one `src/tu/<address>.c`);
 `merge --sections` makes one unit and one source file (`src/tu/<tu>.c`) of all the source functions of a TU, compiled with

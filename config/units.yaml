@@ -42328,7 +42328,9 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
+  - --assembler=sn-min6
   externs:
+    CompareSets__FPCvT0: '0x2e9648'
     __throw: '0x292b40'
     _vt$10IndexTable: '0x3eb798'
     _vt$10ObjectBase: '0x3e0040'
@@ -42349,6 +42351,7 @@ units:
     gUpdateZero: '0x3c95a8'
     memoryRelease: '0x3c87e0'
     qsort: '0x35ec50'
+    terminate__Fv: '0x36f978'
   functions:
   - addr: '0x2e7670'
     symbol: __9BufferSet
@@ -42377,7 +42380,7 @@ units:
   - addr: '0x2e7ac0'
     symbol: __15ParameterTables
     size: 2128
-    status: asm
+    status: source
 - name: frontend_dialog_campaign
   source: src/game/frontend_dialog_campaign.cpp
   flags:
@@ -42536,10 +42539,6 @@ units:
     reason: claimed
   - addr: '0x1b7e60'
     symbol: func_001B7E60
-    status: asm
-    reason: claimed
-  - addr: '0x1b7f28'
-    symbol: func_001B7F28
     status: asm
     reason: claimed
   - addr: '0x1b7f50'
@@ -45213,4 +45212,534 @@ units:
   - addr: '0x153190'
     symbol: func_00153190
     size: 40
+    status: source
+- name: auto_game_1031a0
+  source: src/auto/game/1031a0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1031a0'
+    symbol: func_001031A0
+    size: 88
+    status: source
+- name: auto_game_10b1c8
+  source: src/auto/game/10b1c8.c
+  origin: auto
+  flags:
+  - -G0
+  - -snas
+  - -O2
+  - -fno-schedule-insns
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x10b1c8'
+    symbol: func_0010B1C8
+    size: 52
+    status: source
+- name: auto_game_10b200
+  source: src/auto/game/10b200.c
+  origin: auto
+  flags:
+  - -G0
+  - -snas
+  - -O2
+  - -fno-schedule-insns
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x10b200'
+    symbol: func_0010B200
+    size: 52
+    status: source
+- name: auto_game_10b238
+  source: src/auto/game/10b238.c
+  origin: auto
+  flags:
+  - -G0
+  - -snas
+  - -O2
+  - -fno-schedule-insns
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x10b238'
+    symbol: func_0010B238
+    size: 52
+    status: source
+- name: auto_game_10b270
+  source: src/auto/game/10b270.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x10b270'
+    symbol: func_0010B270
+    size: 56
+    status: source
+- name: auto_unclassified_10f188
+  source: src/auto/unclassified/10f188.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x10f188'
+    symbol: func_0010F188
+    size: 88
+    status: source
+- name: auto_unclassified_10f1e0
+  source: src/auto/unclassified/10f1e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x10f1e0'
+    symbol: func_0010F1E0
+    size: 92
+    status: source
+- name: auto_game_11c878
+  source: src/auto/game/11c878.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x11c878'
+    symbol: func_0011C878
+    size: 68
+    status: source
+- name: auto_game_122c80
+  source: src/auto/game/122c80.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x122c80'
+    symbol: func_00122C80
+    size: 72
+    status: source
+- name: auto_unclassified_12a0d8
+  source: src/auto/unclassified/12a0d8.c
+  origin: auto
+  flags:
+  - -G0
+  - -snas
+  - -O2
+  - -fno-schedule-insns
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x12a0d8'
+    symbol: func_0012A0D8
+    size: 128
+    status: source
+- name: auto_game_142e90
+  source: src/auto/game/142e90.c
+  origin: auto
+  flags:
+  - -G0
+  - -snas
+  - -O2
+  - -fno-schedule-insns
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x142e90'
+    symbol: func_00142E90
+    size: 72
+    status: source
+- name: auto_game_142ed8
+  source: src/auto/game/142ed8.c
+  origin: auto
+  flags:
+  - -Os
+  - -G0
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x142ed8'
+    symbol: func_00142ED8
+    size: 120
+    status: source
+- name: auto_game_149120
+  source: src/auto/game/149120.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x149120'
+    symbol: func_00149120
+    size: 56
+    status: source
+- name: auto_unclassified_172f60
+  source: src/auto/unclassified/172f60.c
+  origin: auto
+  flags:
+  - -Os
+  - -G0
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x172f60'
+    symbol: func_00172F60
+    size: 124
+    status: source
+- name: auto_unclassified_173450
+  source: src/auto/unclassified/173450.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x173450'
+    symbol: func_00173450
+    size: 56
+    status: source
+- name: auto_game_177148
+  source: src/auto/game/177148.c
+  origin: auto
+  flags:
+  - -G0
+  - -snas
+  - -O2
+  - -fno-schedule-insns
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x177148'
+    symbol: func_00177148
+    size: 92
+    status: source
+- name: auto_game_1771f0
+  source: src/auto/game/1771f0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1771f0'
+    symbol: func_001771F0
+    size: 72
+    status: source
+- name: auto_game_1777d0
+  source: src/auto/game/1777d0.c
+  origin: auto
+  flags:
+  - -O1
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1777d0'
+    symbol: func_001777D0
+    size: 48
+    status: source
+- name: auto_game_179c88
+  source: src/auto/game/179c88.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x179c88'
+    symbol: func_00179C88
+    size: 52
+    status: source
+- name: auto_game_17bbe8
+  source: src/auto/game/17bbe8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x17bbe8'
+    symbol: func_0017BBE8
+    size: 48
+    status: source
+- name: auto_game_181990
+  source: src/auto/game/181990.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x181990'
+    symbol: func_00181990
+    size: 92
+    status: source
+- name: auto_game_18c178
+  source: src/auto/game/18c178.c
+  origin: auto
+  flags:
+  - -G0
+  - -snas
+  - -O2
+  - -fno-schedule-insns
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x18c178'
+    symbol: func_0018C178
+    size: 100
+    status: source
+- name: auto_game_1a80f8
+  source: src/auto/game/1a80f8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1a80f8'
+    symbol: func_001A80F8
+    size: 112
+    status: source
+- name: auto_game_1ab3e0
+  source: src/auto/game/1ab3e0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1ab3e0'
+    symbol: func_001AB3E0
+    size: 72
+    status: source
+- name: auto_game_1af6d0
+  source: src/auto/game/1af6d0.c
+  origin: auto
+  flags:
+  - -G0
+  - -snas
+  - -O2
+  - -fno-schedule-insns
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1af6d0'
+    symbol: func_001AF6D0
+    size: 100
+    status: source
+- name: auto_game_1b7f28
+  source: src/auto/game/1b7f28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1b7f28'
+    symbol: func_001B7F28
+    size: 40
+    status: source
+- name: auto_game_1d8df8
+  source: src/auto/game/1d8df8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1d8df8'
+    symbol: func_001D8DF8
+    size: 60
+    status: source
+- name: auto_game_1f7b90
+  source: src/auto/game/1f7b90.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1f7b90'
+    symbol: func_001F7B90
+    size: 72
+    status: source
+- name: auto_game_205a00
+  source: src/auto/game/205a00.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-schedule-insns2
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x205a00'
+    symbol: func_00205A00
+    size: 156
+    status: source
+- name: auto_game_2094b0
+  source: src/auto/game/2094b0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2094b0'
+    symbol: func_002094B0
+    size: 40
+    status: source
+- name: auto_game_2763b0
+  source: src/auto/game/2763b0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2763b0'
+    symbol: func_002763B0
+    size: 84
+    status: source
+- name: auto_game_282628
+  source: src/auto/game/282628.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x282628'
+    symbol: func_00282628
+    size: 80
+    status: source
+- name: auto_game_285548
+  source: src/auto/game/285548.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x285548'
+    symbol: func_00285548
+    size: 96
+    status: source
+- name: auto_game_285ca0
+  source: src/auto/game/285ca0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x285ca0'
+    symbol: func_00285CA0
+    size: 40
+    status: source
+- name: auto_unclassified_28c4f8
+  source: src/auto/unclassified/28c4f8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x28c4f8'
+    symbol: func_0028C4F8
+    size: 40
+    status: source
+- name: auto_kynapse_2e7360
+  source: src/auto/kynapse/2e7360.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2e7360'
+    symbol: func_002E7360
+    size: 56
+    status: source
+- name: auto_kynapse_2f1678
+  source: src/auto/kynapse/2f1678.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2f1678'
+    symbol: func_002F1678
+    size: 104
+    status: source
+- name: auto_animation_347a28
+  source: src/auto/animation/347a28.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x347a28'
+    symbol: func_00347A28
+    size: 40
+    status: source
+- name: auto_animation_351a78
+  source: src/auto/animation/351a78.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x351a78'
+    symbol: func_00351A78
+    size: 88
+    status: source
+- name: auto_other_382e78
+  source: src/auto/other/382e78.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x382e78'
+    symbol: func_00382E78
+    size: 104
     status: source

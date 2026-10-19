@@ -1,0 +1,27 @@
+{
+ "comment": "Separate hash-checked assembler derivatives; original compiler packages are retained unchanged. No assembler binaries are committed.",
+ "assemblers": [
+  {
+   "id": "ps2eeas-1.9.25.758-min6",
+   "version": "1.9.25.758 + six-word short-loop rule",
+   "source_compiler": "ee-gcc2.95.3-136",
+   "source_filename": "Ps2EeAs.exe",
+   "original_sha256": "cb5adda955e64626564212ef7e0c1434708c4e1ef423344a92ec8033306ed3aa",
+   "sha256": "4a4bf6f8ae63ee10e4eda6db837a9df4b331b08a71c8f360bb9f0283e84a7813",
+   "root": "assemblers/ps2eeas-1.9.25.758-min6",
+   "executable": "Ps2EeAs.exe",
+   "rule": "Minimum short backward loop: six words including branch and delay slot; all other behavior is unchanged.",
+   "patches": [
+    {"file_offset": "0x4db6", "before": "6683fefa", "after": "6683fefb"},
+    {"file_offset": "0x4de9", "before": "8d7006", "after": "8d7005"}
+   ],
+   "patcher": "tools/patch_ps2eeas.py",
+   "references": [
+    "https://github.com/ethteck/splat/issues/525",
+    "https://github.com/OpenRAC/rac3-uya-decomp/blob/ac0eb2a87cc1706e1d15025f8a17838d17f9175c/docs/wiki/Setup.md",
+    "https://github.com/OpenRAC/rac3-uya-decomp/blob/ac0eb2a87cc1706e1d15025f8a17838d17f9175c/tools/asm_filter.py",
+    "https://github.com/lombyte-project/lombyte/blob/65ba28828557887c82cb97716dd1c9aad7da2cf2/scripts/patch-ps2eeas.py"
+   ]
+  }
+ ]
+}

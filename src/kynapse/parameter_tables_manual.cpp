@@ -161,8 +161,6 @@ bool ParameterTables::ConsumeList(int index, IndexUser* user)
 
 #endif
 
-#ifdef NONMATCHING
-// Unmatched: array-construction cleanup and short-loop NOP scheduling.
 ParameterTables::ParameterTables()
 {
     unsigned int i;
@@ -226,9 +224,7 @@ ParameterTables::ParameterTables()
         b10[i] = 0;
         b2c[i] = 0.1f;
     }
-    for (i = 0; i < gSlotOwner->slotCount; ++i)
+    for (i = 0; i < GetSlotOwner()->slotCount; ++i)
         order[i] = i;
     gCompare = CompareSets;
 }
-
-#endif

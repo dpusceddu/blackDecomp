@@ -54,6 +54,11 @@ struct SlotOwner {
 };
 extern SlotOwner* gSlotOwner;
 
+inline SlotOwner* GetSlotOwner()
+{
+    return gSlotOwner;
+}
+
 struct SlotUser {
     unsigned char unknown00[0x14];
     Slot* slot;
