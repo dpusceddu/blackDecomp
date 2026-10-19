@@ -46536,3 +46536,141 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: campaign_behaviors_cshooteragent
+  source: src/campaign/behaviors_cshooteragent.cpp
+  owner: cpp-campaign-w2-behaviors
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d65e8'
+    size: 168
+    symbol: func_002D65E8
+    status: asm
+    reason: campaign
+  - addr: '0x2d6690'
+    size: 464
+    symbol: Configure__Q24Kaim12ShooterAgentPQ24Kaim12ChildBuffers
+    status: source
+  - addr: '0x2d6860'
+    size: 468
+    symbol: func_002D6860
+    status: asm
+    reason: campaign
+  - addr: '0x2d6a38'
+    size: 628
+    symbol: func_002D6A38
+    status: asm
+    reason: campaign
+  - addr: '0x2d6cb0'
+    size: 408
+    symbol: func_002D6CB0
+    status: asm
+    reason: campaign
+  - addr: '0x2d6e48'
+    size: 348
+    symbol: func_002D6E48
+    status: asm
+    reason: campaign
+  - addr: '0x2d7008'
+    size: 96
+    symbol: func_002D7008
+    status: asm
+    reason: campaign
+  - addr: '0x2d7118'
+    size: 204
+    symbol: func_002D7118
+    status: asm
+    reason: campaign
+  externs:
+    FindByName__Q24Kaim6EnginePCc: '0x2eb398'
+    GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
+    GetValue__CQ24Kaim12ChildBuffers: '0x2e3918'
+    _4Kaim$gEngine: '0x3c9ed4'
+    _stricmp: '0x360838'
+- name: campaign_behaviors_cpathwayagent
+  source: src/campaign/behaviors_cpathwayagent.cpp
+  owner: cpp-campaign-w2-behaviors
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d53f0'
+    size: 168
+    symbol: func_002D53F0
+    status: asm
+    reason: campaign
+  - addr: '0x2d5650'
+    size: 928
+    symbol: func_002D5650
+    status: asm
+    reason: campaign
+  - addr: '0x2d59f0'
+    size: 1988
+    symbol: func_002D59F0
+    status: asm
+    reason: campaign
+  - addr: '0x2d62d0'
+    size: 240
+    symbol: func_002D62D0
+    status: asm
+    reason: campaign
+  - addr: '0x2d63e0'
+    size: 96
+    symbol: func_002D63E0
+    status: asm
+    reason: campaign
+  - addr: '0x2d6520'
+    size: 92
+    symbol: func_002D6520
+    status: asm
+    reason: campaign
+- name: campaign_behaviors_centitymanager
+  source: src/campaign/behaviors_centitymanager.cpp
+  owner: cpp-campaign-w2-behaviors
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x30eae0'
+    size: 452
+    symbol: func_0030EAE0
+    status: asm
+    reason: campaign
+  - addr: '0x30f000'
+    size: 348
+    symbol: func_0030F000
+    status: asm
+    reason: campaign
+  - addr: '0x30f160'
+    size: 1300
+    symbol: func_0030F160
+    status: asm
+    reason: campaign
+  - addr: '0x30f678'
+    size: 712
+    symbol: func_0030F678
+    status: asm
+    reason: campaign
+  - addr: '0x30f940'
+    size: 1060
+    symbol: func_0030F940
+    status: asm
+    reason: campaign
+  - addr: '0x30fe98'
+    size: 248
+    symbol: func_0030FE98
+    status: asm
+    reason: campaign
