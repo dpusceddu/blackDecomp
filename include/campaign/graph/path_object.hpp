@@ -4,6 +4,7 @@
 #include "classes/kynapse/Kaim_CPathObject.hpp"
 #include "classes/kynapse/Kaim_CPathObject_CLinkedEdge.hpp"
 namespace Kaim {
+struct CPointPair;
 struct PathClassInfo { unsigned char unknown00[0x108]; PathClassInfo *parent; };
 struct PathPropertyBag;
 struct PathPropertySlot { int index; PathPropertyBag *bag; };
@@ -54,7 +55,7 @@ struct CPathObject : CEntity {
  virtual bool Init(ChildBuffers *);
  virtual unsigned int Slot5(unsigned int,unsigned int,PathCallback*,unsigned int);virtual void Slot6();virtual void Slot7();virtual void Slot8();virtual void Slot9();
  virtual void Notify(void *);
- virtual void Slot11();virtual void Slot12();virtual void Slot13();
+ virtual unsigned int SegmentCount();virtual CPointPair *Segments();virtual void MirrorType(int);
  virtual bool Claim(int,PathPropertySlot *);
  virtual bool Release(int,PathPropertySlot *);
  virtual void Replay();

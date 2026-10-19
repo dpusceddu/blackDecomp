@@ -47298,3 +47298,65 @@ units:
   externs:
     __throw: '0x292b40'
     terminate__Fv: '0x36f978'
+- name: context_graph_path_manager
+  source: src/campaign/graph_path_manager.cpp
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2f4cf8'
+    symbol: _$_Q24Kaim18CPathObjectManager
+    status: source
+    size: 404
+  - addr: '0x2f4f80'
+    symbol: func_002F4F80
+    status: source
+    size: 556
+  - addr: '0x2f51b0'
+    symbol: func_002F51B0
+    status: asm
+    reason: registers
+    size: 404
+  - addr: '0x2f5348'
+    symbol: func_002F5348
+    status: source
+    size: 1048
+  - addr: '0x2f57c0'
+    symbol: Configure__Q24Kaim18CPathObjectManagerPQ24Kaim11GraphConfig
+    status: source
+    size: 168
+  - addr: '0x2f5868'
+    symbol: func_002F5868
+    status: source
+    size: 124
+  - addr: '0x2f58e8'
+    symbol: func_002F58E8
+    status: source
+    size: 124
+  - addr: '0x2f5968'
+    symbol: func_002F5968
+    status: source
+    size: 212
+  - addr: '0x2f5a40'
+    symbol: func_002F5A40
+    status: source
+    size: 156
+  - addr: '0x2f5ae0'
+    symbol: func_002F5AE0
+    status: source
+    size: 236
+  externs:
+    _vt$Q24Kaim10CPointPair: '0x3ee3d8'
+    _vt$Q24Kaim18CPathObjectManager: '0x3ee398'
+    _vt$Q24Kaim7CObject: '0x3e0040'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+  origin: kynapse
+  owner: context-graph
