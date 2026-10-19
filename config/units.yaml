@@ -47298,3 +47298,90 @@ units:
   externs:
     __throw: '0x292b40'
     terminate__Fv: '0x36f978'
+- name: context_behaviors_constraints
+  source: src/context/behaviors_constraints.cpp
+  origin: kynapse
+  owner: context-wave3-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2f0f80'
+    size: 120
+    status: source
+    symbol: func_002F0F80
+  - addr: '0x2f0ff8'
+    size: 708
+    status: source
+    symbol: func_002F0FF8
+  - addr: '0x2f13b0'
+    size: 556
+    status: source
+    symbol: func_002F13B0
+  - addr: '0x2f16e0'
+    size: 504
+    status: source
+    symbol: func_002F16E0
+  - addr: '0x2f18d8'
+    size: 636
+    status: source
+    symbol: func_002F18D8
+  - addr: '0x2f1b58'
+    size: 128
+    status: source
+    symbol: func_002F1B58
+  - addr: '0x2f1bd8'
+    size: 408
+    status: source
+    symbol: func_002F1BD8
+  - addr: '0x2f1eb0'
+    size: 496
+    status: asm
+    reason: registers
+    symbol: func_002F1EB0
+  - addr: '0x2f20a0'
+    size: 224
+    status: source
+    symbol: func_002F20A0
+  - addr: '0x2f2180'
+    size: 84
+    status: source
+    symbol: func_002F2180
+  - addr: '0x2f21d8'
+    size: 56
+    status: source
+    symbol: func_002F21D8
+  - addr: '0x2f2210'
+    size: 56
+    status: source
+    symbol: func_002F2210
+  - addr: '0x2f2248'
+    size: 84
+    status: source
+    symbol: func_002F2248
+  - addr: '0x2f22a0'
+    size: 56
+    status: source
+    symbol: func_002F22A0
+  - addr: '0x2f2318'
+    size: 100
+    status: source
+    symbol: func_002F2318
+  externs:
+    _4Kaim$gConstraintCallbacks: '0x451228'
+    _4Kaim$gConstraintEngine: '0x3c9ed4'
+    _vt$Q24Kaim16SphereConstraint: '0x3ec990'
+    _vt$Q24Kaim21PointToFleeConstraint: '0x3eca20'
+    func_00389140: '0x389140'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    sqrtf: '0x29eb90'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
