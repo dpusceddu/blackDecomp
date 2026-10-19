@@ -46586,3 +46586,11 @@ units:
     symbol: SetTarget__Q213CampaignActor16CameraControllerxxfl
     size: 116
     status: source
+  - addr: '0x140f88'
+    symbol: Clear__Q213CampaignActor16CameraController
+    size: 120
+    status: source
+  - addr: '0x1411a0'
+    symbol: Configure__Q213CampaignActor16CameraControllerxxfUcScfl
+    size: 168
+    status: source
