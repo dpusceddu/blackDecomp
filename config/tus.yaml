@@ -17766,7 +17766,7 @@ tus:
   evidence: [eh, ctor-list, ctor-end, calls]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 7 of 14 functions
+  flags_basis: matched 11 of 14 functions
   data:
     .rodata: ['0x4085b0', '0x408690']
     .data: ['0x3f0760', '0x3f07a0']
