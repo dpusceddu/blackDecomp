@@ -93,6 +93,43 @@ def parse_objects(path):
     return objs
 
 
+def split_scalar_type_tails(objects, literal_at):
+    """Separate a four-byte scalar from a following GCC type-name literal.
+
+    Splat sometimes interprets a scalar-plus-type-name run as floats or words.
+    Only a complete legacy encoded class name or a standard runtime exception
+    name at the second four-byte item establishes this boundary. References and
+    ownership are recomputed for both objects after splitting.
+    """
+    from class_skeletons import decode_name
+    out = []
+    for obj in objects:
+        items = [(i, ITEM.match(line.strip())) for i, line in enumerate(obj['lines'])]
+        items = [(i, int(m.group(1), 16)) for i, m in items if m]
+        if len(items) < 2 or items[0][1] != obj['addr'] or items[1][1] != obj['addr'] + 4:
+            out.append(obj)
+            continue
+        first, boundary = items[0][0], items[1][0]
+        if not re.search(r'\*/\s+\.(?:word|float)\s', obj['lines'][first]):
+            out.append(obj)
+            continue
+        name = literal_at(obj['addr'] + 4)
+        valid = name in ('bad_alloc', 'bad_cast', 'bad_typeid')
+        if name and (name.startswith('Q') or name[0].isdigit()):
+            _, decoded = decode_name(name)
+            valid = valid or decoded
+        if not valid:
+            out.append(obj)
+            continue
+        label = 'D_%08X' % (obj['addr'] + 4)
+        out.append(dict(name=obj['name'], addr=obj['addr'],
+                        lines=obj['lines'][:boundary] + ['enddlabel ' + obj['name']]))
+        tail = ['dlabel ' + label] + obj['lines'][boundary:]
+        tail[-1] = 'enddlabel ' + label
+        out.append(dict(name=label, addr=obj['addr'] + 4, lines=tail))
+    return out
+
+
 DIRECTIVE = re.compile(r'\*/\s+(\.\w+)')
 IMPLIED = {'.short': 1, '.half': 1, '.word': 2, '.float': 2, '.dword': 3, '.double': 3, '.quad': 3}   # log2; gas aligns these
 
@@ -173,6 +210,27 @@ def main():
     for sec in MIGRATED:
         p = asm / 'data' / ('%s.%s.s' % (sec[1:], sec[1:]))
         objs = parse_objects(p)
+        if sec == '.rodata':
+            from elfinfo import Elf
+            image = Elf((ROOT / 'orig' / slug / 'files' / boot).read_bytes())
+            rodata = image.section(sec)
+            data = image.content(rodata)
+
+            def literal_at(address):
+                offset = address - rodata['addr']
+                if not 0 <= offset < len(data):
+                    return None
+                window = data[offset:offset + 1024]
+                stop = window.find(b'\0')
+                if stop < 0:
+                    return None
+                raw = window[:stop]
+                try:
+                    return raw.decode('ascii') if raw else None
+                except UnicodeDecodeError:
+                    return None
+
+            objs = split_scalar_type_tails(objs, literal_at)
         units_by_sec[sec] = [u for o in objs for u in pieces(o)]
         all_objs[sec] = objs
     obj_starts = {sec: [o['addr'] for o in objs] for sec, objs in all_objs.items()}
