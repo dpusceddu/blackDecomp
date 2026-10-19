@@ -11,6 +11,8 @@ struct CFindNearestData : CGraphData {
     int count;
     int *order, *rank, *aux;
     void (*progress)(int);
+    void CopyRank(const int *);
+    void CopyOrder(const int *);
     int LoadFile(const void *);
     int Load(const void *) __asm__("func_002EF1A0");
     int EqualBoundary(int, int, unsigned char, float) __asm__("func_002F02E8");
@@ -18,6 +20,7 @@ struct CFindNearestData : CGraphData {
     inline SearchNode *OrderedNode(int axis, int index) { return graph->GetNode(order[axis * count + index]); }
     int CollectColumn(const Vec3 *, int **, float);
     int CollectBox(const Vec3 *, int **, float);
+    float Coordinate(const Vec3 *, int) __asm__("func_00390038");
     int GetRange(const Vec3 *, int, int *, int *, float) __asm__("func_002F0AD8");
     inline float DefaultRadius() const { return *(const float *)((const char *)graph + 8); }
 };

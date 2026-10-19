@@ -26661,18 +26661,6 @@ units:
     symbol: func_002F5BF0
     size: 32
     status: source
-- name: auto_kynapse_2fb4d8
-  source: src/auto/kynapse/2fb4d8.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x2fb4d8'
-    symbol: func_002FB4D8
-    size: 96
-    status: source
 - name: kynapse_owned_arrays_2fb558
   source: src/kynapse/owned_arrays_2fb558.cpp
   origin: kynapse
@@ -45066,19 +45054,6 @@ units:
     symbol: func_002F3530
     size: 64
     status: source
-- name: auto_kynapse_2f8c38
-  source: src/auto/kynapse/2f8c38.c
-  origin: auto
-  flags:
-  - -G0
-  - -snas
-  - -O2
-  - -fno-schedule-insns
-  functions:
-  - addr: '0x2f8c38'
-    symbol: func_002F8C38
-    size: 392
-    status: source
 - name: auto_kynapse_304e38
   source: src/auto/kynapse/304e38.c
   origin: auto
@@ -46730,7 +46705,20 @@ units:
     symbol: _$_Q24Kaim16CFindNearestData
     size: 164
     status: source
+  - addr: '0x2f0ad8'
+    symbol: func_002F0AD8
+    size: 188
+    status: source
+  - addr: '0x2f0b98'
+    symbol: CopyRank__Q24Kaim16CFindNearestDataPCi
+    size: 232
+    status: source
+  - addr: '0x2f0c80'
+    symbol: CopyOrder__Q24Kaim16CFindNearestDataPCi
+    size: 232
+    status: source
   externs:
+    FindBound__Q24Kaim16CFindNearestDataiUcf: '0x2f06c0'
     _vt$Q24Kaim16CFindNearestData: '0x3ec1c8'
     _vt$Q24Kaim7CObject: '0x3e0040'
 - name: campaign_graph_cpathobject
@@ -46765,17 +46753,17 @@ units:
     size: 188
     status: source
   - addr: '0x391288'
-    symbol: func_00391288
+    symbol: Slot5__Q24Kaim11CPathObjectUiUiPQ24Kaim12PathCallbackUi
     size: 48
-    status: asm
+    status: source
   - addr: '0x3912c0'
     symbol: func_003912C0
     size: 152
     status: asm
   - addr: '0x391380'
-    symbol: func_00391380
+    symbol: OnType__Q24Kaim11CPathObjecti
     size: 44
-    status: asm
+    status: source
   externs:
     _$_Q24Kaim7CEntity: '0x2e45f8'
     _vt$Q24Kaim11CPathObject: '0x3ee090'
@@ -46790,6 +46778,10 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   functions:
+  - addr: '0x2f66d0'
+    symbol: func_002F66D0
+    size: 432
+    status: asm
   - addr: '0x2f6880'
     symbol: func_002F6880
     size: 1412
@@ -46810,8 +46802,38 @@ units:
     symbol: func_002F8238
     size: 2560
     status: asm
+  - addr: '0x2fa4c8'
+    symbol: func_002FA4C8
+    size: 1124
+    status: asm
+  - addr: '0x2fa930'
+    symbol: func_002FA930
+    size: 2200
+    status: asm
   externs:
     _$_Q24Kaim14ArenaAllocator: '0x2e5d90'
     _$_Q24Kaim15PathFileService: '0x373268'
     __throw: '0x292b40'
     terminate__Fv: '0x36f978'
+- name: campaign_graph_cspatialgraph_lifetime
+  source: src/campaign/graph_cspatialgraph_lifetime.cpp
+  origin: kynapse
+  owner: cpp-campaign-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2f8c38'
+    symbol: Reset__Q24Kaim13CSpatialGraph
+    size: 392
+    status: source
+  - addr: '0x2fb4d8'
+    symbol: _$_Q24Kaim13CSpatialGraph
+    size: 96
+    status: source
+  externs:
+    _vt$Q24Kaim13CSpatialGraph: '0x3ee538'
+    _vt$Q24Kaim7CObject: '0x3e0040'

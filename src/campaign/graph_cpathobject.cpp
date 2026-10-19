@@ -131,3 +131,12 @@ bool CPathObject::Release(int id, PathPropertySlot* slot)
 }
 
 #endif
+
+unsigned int Kaim::CPathObject::Slot5(unsigned int a, unsigned int b, PathCallback *callback, unsigned int c)
+{
+    return callback->Filter(a, b, c);
+}
+void Kaim::CPathObject::OnType(int)
+{
+    Notify(0);
+}
