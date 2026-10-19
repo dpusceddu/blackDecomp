@@ -46013,9 +46013,9 @@ units:
     size: 1612
     status: asm
   - addr: '0x2f4100'
-    symbol: func_002F4100
+    symbol: Save__Q24Kaim13CPathCostDataPCv
     size: 348
-    status: asm
+    status: source
 - name: campaign_graph_castardata
   source: src/campaign/graph_castardata.cpp
   origin: kynapse
