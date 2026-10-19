@@ -47036,3 +47036,30 @@ units:
     symbol: func_001A71F8
     size: 184
     status: source
+- name: context_wave3_graphics_input
+  source: src/campaign/graphics_input_pending.cpp
+  origin: 'C++ shared-context campaign: input controller; partial PS2 layout'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26bd30'
+    symbol: UpdateMotors__Q216CampaignGraphics10Controller
+    status: asm
+    reason: claim
+    size: 308
+- name: context_graphics_controller_update
+  source: src/campaign/graphics_controller_update.cpp
+  origin: 'C++ shared-context campaign: input controller; PS2-verified accessed fields'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26c100'
+    symbol: Update__Q216CampaignGraphics10Controller
+    status: source
+    size: 1684
