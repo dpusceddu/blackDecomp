@@ -48044,3 +48044,33 @@ units:
   externs:
     RetargetLive__9BlackGamePQ29BlackGame9RouteModex: '0x193040'
     UpdateDestination__Q29BlackGame12RouteRequestx: '0x17a9c8'
+- name: campaign_actor_camera_wave3
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x141008'
+    status: asm
+    reason: claim
+  - addr: '0x1414a0'
+    status: asm
+    reason: claim
+  - addr: '0x140ea8'
+    status: asm
+    reason: claim
+  - addr: '0x141308'
+    status: asm
+    reason: claim
+  - addr: '0x140e48'
+    status: asm
+    reason: claim
+  - addr: '0x141460'
+    status: asm
+    reason: claim
+  source: src/campaign/actor_camera_wave3.cpp
+  origin: C++ actor camera cluster; remaining functions claimed before source reconstruction
