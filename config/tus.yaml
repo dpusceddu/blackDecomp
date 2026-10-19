@@ -17673,8 +17673,8 @@ tus:
   confidence: exact
   evidence: [eh, ctor-list, ctor-end, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas, -fbyte-bool]
-  flags_basis: matched 6 of 16 functions
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, --assembler=sn-min6]
+  flags_basis: matched 15 of 16 functions
   data:
     .rodata: ['0x407ad0', '0x407b00']
     .data: ['0x3cba40', '0x3ee500']
