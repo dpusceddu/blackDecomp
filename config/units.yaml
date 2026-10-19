@@ -26077,10 +26077,6 @@ units:
     symbol: func_002F09A8
     size: 84
     status: source
-  - addr: '0x2f0a30'
-    symbol: func_002F0A30
-    size: 164
-    status: source
   - addr: '0x2f0d68'
     symbol: func_002F0D68
     size: 32
@@ -26089,6 +26085,7 @@ units:
     symbol: func_002F0D88
     size: 32
     status: source
+  owner: cpp-campaign-graph
 - name: kynapse_buffers3_2f0a00
   source: src/kynapse/buffers3_2f0a00.cpp
   origin: kynapse
@@ -46706,3 +46703,110 @@ units:
     symbol: GetTarget__CQ29BlackGame9RouteMode
     size: 148
     status: source
+- name: campaign_graph_cfindnearestdata
+  source: src/campaign/graph_cfindnearestdata.cpp
+  origin: kynapse
+  owner: cpp-campaign-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2ef030'
+    symbol: func_002EF030
+    size: 368
+    status: asm
+  - addr: '0x2ef900'
+    symbol: func_002EF900
+    size: 848
+    status: asm
+  - addr: '0x2efc50'
+    symbol: func_002EFC50
+    size: 684
+    status: asm
+  - addr: '0x2f0a30'
+    symbol: _$_Q24Kaim16CFindNearestData
+    size: 164
+    status: source
+  externs:
+    _vt$Q24Kaim16CFindNearestData: '0x3ec1c8'
+    _vt$Q24Kaim7CObject: '0x3e0040'
+- name: campaign_graph_cpathobject
+  source: src/campaign/graph_cpathobject.cpp
+  origin: kynapse
+  owner: cpp-campaign-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2f4390'
+    symbol: func_002F4390
+    size: 340
+    status: asm
+  - addr: '0x2f44e8'
+    symbol: Replay__Q24Kaim11CPathObject
+    size: 312
+    status: source
+  - addr: '0x2f4620'
+    symbol: func_002F4620
+    size: 400
+    status: asm
+  - addr: '0x2f47b0'
+    symbol: func_002F47B0
+    size: 572
+    status: asm
+  - addr: '0x2f4a90'
+    symbol: _$_Q24Kaim11CPathObject
+    size: 188
+    status: source
+  - addr: '0x391288'
+    symbol: func_00391288
+    size: 48
+    status: asm
+  - addr: '0x3912c0'
+    symbol: func_003912C0
+    size: 152
+    status: asm
+  - addr: '0x391380'
+    symbol: func_00391380
+    size: 44
+    status: asm
+  externs:
+    _$_Q24Kaim7CEntity: '0x2e45f8'
+    _vt$Q24Kaim11CPathObject: '0x3ee090'
+- name: campaign_graph_cspatialgraph
+  source: src/campaign/graph_cspatialgraph.cpp
+  origin: kynapse
+  owner: cpp-campaign-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2f6880'
+    symbol: func_002F6880
+    size: 1412
+    status: asm
+  - addr: '0x2f6e08'
+    symbol: func_002F6E08
+    size: 3956
+    status: asm
+  - addr: '0x2f7d80'
+    symbol: func_002F7D80
+    size: 456
+    status: asm
+  - addr: '0x2f7f48'
+    symbol: func_002F7F48
+    size: 752
+    status: asm
+  - addr: '0x2f8238'
+    symbol: func_002F8238
+    size: 2560
+    status: asm
