@@ -23286,7 +23286,7 @@ units:
     size: 64
     symbol: func_002D2F00
     status: source
-  owner: wave1-kynapse
+  owner: cpp-campaign-behaviors
 - name: kynapse_predicates_2d2e48
   source: src/kynapse/predicates_2d2e48.cpp
   origin: kynapse
@@ -23304,7 +23304,7 @@ units:
     symbol: HasBoth__C9BothIds60
     size: 40
     status: source
-  owner: wave1-kynapse
+  owner: cpp-campaign-behaviors
 - name: tuf_2d34c0
   source: src/tu/kynapse_tu_2d2ff8.c
   origin: auto
@@ -23346,6 +23346,7 @@ units:
     symbol: func_002D38A8
     size: 32
     status: source
+  owner: cpp-campaign-behaviors
 - name: kynapse_predicates_2d35b8
   source: src/kynapse/predicates_2d35b8.cpp
   origin: kynapse
@@ -23363,6 +23364,7 @@ units:
     symbol: HasId__C7HasId2C
     size: 16
     status: source
+  owner: cpp-campaign-behaviors
 - name: tuf_2d3970
   source: src/tu/kynapse_tu_2d38c8.c
   origin: auto
@@ -23463,7 +23465,7 @@ units:
     symbol: func_002D5328
     size: 64
     status: source
-  owner: wave1-kynapse
+  owner: cpp-campaign-behaviors
 - name: kynapse_predicates_2d5198
   source: src/kynapse/predicates_2d5198.cpp
   origin: kynapse
@@ -23477,6 +23479,7 @@ units:
     symbol: HasBoth__C9BothIds28
     size: 40
     status: source
+  owner: cpp-campaign-behaviors
 - name: kynapse_behavior_methods_2d51c0
   source: src/kynapse/behavior_methods_2d51c0.cpp
   origin: kynapse
@@ -23492,6 +23495,7 @@ units:
     status: source
   externs:
     _4Kaim$gOrigin: '0x4514f8'
+  owner: cpp-campaign-behaviors
 - name: kynapse_predicates_2d5238
   source: src/kynapse/predicates_2d5238.cpp
   origin: kynapse
@@ -23505,6 +23509,7 @@ units:
     symbol: IsSet__C7IsSet50
     size: 12
     status: source
+  owner: cpp-campaign-behaviors
 - name: tuf_2d61b8
   source: src/tu/kynapse_tu_2d53f0.c
   origin: auto
@@ -36102,6 +36107,7 @@ units:
     status: source
   externs:
     gClassInfo2B3A38: '0x44ecd0'
+  owner: cpp-campaign-behaviors
 - name: auto_kynapse_3892a0
   source: src/auto/kynapse/3892a0.c
   origin: auto
@@ -36229,6 +36235,7 @@ units:
     status: source
   externs:
     gClassInfo2B3920: '0x44ede8'
+  owner: cpp-campaign-behaviors
 - name: auto_kynapse_3894e0
   source: src/auto/kynapse/3894e0.c
   origin: auto
@@ -36353,6 +36360,7 @@ units:
     status: source
   externs:
     gClassInfo2B36F0: '0x44f018'
+  owner: cpp-campaign-behaviors
 - name: auto_kynapse_3895d8
   source: src/auto/kynapse/3895d8.c
   origin: auto
@@ -38897,6 +38905,7 @@ units:
     symbol: Kaim_Nop__Fv
     size: 8
     status: source
+  owner: cpp-campaign-behaviors
 - name: auto_kynapse_38bb30
   source: src/auto/kynapse/38bb30.c
   origin: auto
@@ -45962,3 +45971,44 @@ units:
     symbol: Function_002E7008__Q215BlackPS2Classes20Kaim_CBasicAllocatori
     size: 32
     status: source
+  owner: cpp-campaign-behaviors
+- name: campaign_behaviors_follower
+  source: src/campaign/behaviors_follower.cpp
+  origin: kynapse
+  owner: cpp-campaign-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d30a0'
+    size: 336
+    symbol: func_002D30A0
+    status: asm
+    reason: campaign
+  - addr: '0x2d31f0'
+    size: 268
+    symbol: func_002D31F0
+    status: asm
+    reason: campaign
+  - addr: '0x2d3300'
+    size: 448
+    symbol: func_002D3300
+    status: asm
+    reason: campaign
+  - addr: '0x2d35d8'
+    size: 56
+    symbol: func_002D35D8
+    status: source
+  - addr: '0x2d3610'
+    size: 152
+    symbol: func_002D3610
+    status: asm
+    reason: campaign
+  - addr: '0x2d36a8'
+    size: 304
+    symbol: func_002D36A8
+    status: asm
+    reason: campaign
