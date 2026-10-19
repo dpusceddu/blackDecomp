@@ -46663,8 +46663,8 @@ units:
   functions:
   - addr: '0x30eae0'
     size: 452
-    symbol: func_0030EAE0
-    status: asm
+    symbol: _$_10Perception
+    status: source
     reason: campaign
   - addr: '0x30f000'
     size: 348
@@ -46691,3 +46691,15 @@ units:
     symbol: func_0030FE98
     status: asm
     reason: campaign
+  externs:
+    Entity_RemoveC__FP5WorldPFP6EntityP10Perception_vP10Perception: '0x2e1098'
+    OnSubjectRemoved__FP6EntityP10Perception: '0x310190'
+    _vt$10Perception: '0x3f13f8'
+    _vt$14PerceptionBase: '0x3e0040'
+    gKaimFree: '0x3c87e0'
+    gPairDistances: '0x3ce5a0'
+    gPairExpiry: '0x3ce5a4'
+    gPairFlags: '0x3ce59c'
+    gPairLineExpiry: '0x3ce5a8'
+    gPerceptionCount: '0x3ce5ac'
+    gWorld: '0x3c9ed4'
