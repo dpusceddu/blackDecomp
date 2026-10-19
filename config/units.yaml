@@ -46807,9 +46807,9 @@ units:
     size: 3956
     status: asm
   - addr: '0x2f7d80'
-    symbol: func_002F7D80
+    symbol: LoadFromPath__Q24Kaim13CSpatialGraphPCc
     size: 456
-    status: asm
+    status: source
   - addr: '0x2f7f48'
     symbol: func_002F7F48
     size: 752
@@ -46818,6 +46818,11 @@ units:
     symbol: func_002F8238
     size: 2560
     status: asm
+  externs:
+    _$_Q24Kaim14ArenaAllocator: '0x2e5d90'
+    _$_Q24Kaim15PathFileService: '0x373268'
+    __throw: '0x292b40'
+    terminate__Fv: '0x36f978'
 - name: campaign_graphics_level_register
   source: src/campaign/graphics_level_register.cpp
   origin: game
