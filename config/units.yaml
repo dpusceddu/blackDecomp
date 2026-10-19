@@ -47036,3 +47036,48 @@ units:
     symbol: func_001A71F8
     size: 184
     status: source
+- name: context_graph_manager
+  source: src/campaign/graph_manager.cpp
+  origin: kynapse
+  owner: context-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2f28f8'
+    symbol: func_002F28F8
+    size: 768
+    status: source
+  - addr: '0x2f2660'
+    symbol: func_002F2660
+    size: 660
+    status: asm
+  - addr: '0x2f2bf8'
+    symbol: func_002F2BF8
+    size: 560
+    status: asm
+  - addr: '0x2f2ff0'
+    symbol: func_002F2FF0
+    size: 244
+    status: source
+  - addr: '0x2f2e88'
+    symbol: Setup__Q24Kaim13CGraphManagerPQ24Kaim11GraphConfig
+    size: 204
+    status: source
+  - addr: '0x2f24d0'
+    symbol: __Q24Kaim13CGraphManager
+    size: 168
+    status: source
+  - addr: '0x2f3250'
+    symbol: __Q34Kaim13CGraphManager9CGraphMapPCcPQ24Kaim13CSpatialGraphUc
+    size: 108
+    status: source
+  externs:
+    __throw: '0x292b40'
+    _vt$Q24Kaim13CGraphManager: '0x3eda30'
+    _vt$Q24Kaim7CObject: '0x3e0040'
+    _vt$Q34Kaim13CGraphManager9CGraphMap: '0x3eda70'
+    terminate__Fv: '0x36f978'

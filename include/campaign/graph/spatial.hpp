@@ -13,6 +13,8 @@ struct CSpatialGraph;
 struct SpatialNode { int id; float x,y,z; CSpatialGraph *graph; };
 struct SpatialEdge { int index; CSpatialGraph *graph; inline SpatialNode *EndNode(); inline SpatialNode *StartNode(); };
 struct CSpatialGraph : CObject {
+ static void *operator new(unsigned int size){return Allocate(size);}
+ CSpatialGraph() __asm__("func_002F5C10");
  virtual ~CSpatialGraph();
  virtual bool LoadOld(FileService*,const void*);
  virtual bool Load(const void*);
@@ -20,12 +22,17 @@ struct CSpatialGraph : CObject {
  virtual bool SaveOld(const void*);
  virtual bool Write(const void*,unsigned int);
  virtual void Reset();
- unsigned int flags,field08,nodeCapacity,nodeSlots,nodeCount;
+ unsigned int flags;
+ union { unsigned int field08; float coverageDistance; };
+ unsigned int nodeCapacity,nodeSlots,nodeCount;
  SpatialNode *nodes; int *nodeTable1c,*firstEdgeFrom,*firstEdgeTo;
  union { unsigned int field28; unsigned int edgeCapacity; };
  unsigned int edgeSlots,edgeCount;
  SpatialEdge *edges; int *edgeEnd,*edgeStart,*edgeTable40,*edgeNext,*edgeTable48,*edgeTable4c,*edgeTable50;
  unsigned char unknown54[8]; SpatialEdge syntheticEdge; SpatialNode syntheticEnd,syntheticStart;
+ unsigned char unknown8c[12];
+ inline unsigned char HasFlag(unsigned int flag){if(flags&flag)return 1;return 0;}
+ inline unsigned int NodeCount(){return nodeCount;}
  void Compact() __asm__("func_002FA4C8");
  void SetFlags(unsigned int) __asm__("func_002FA930");
  SpatialEdge *FindEdge(unsigned int,unsigned int);
@@ -57,10 +64,12 @@ struct GraphWriter : GraphVisitor { void *file; int byteOrder; virtual bool Cons
 
 #define SPATIAL_OFFSET(member, offset) typedef char Spatial_##member##_offset[(unsigned int)&((Kaim::CSpatialGraph *)0)->member == offset ? 1 : -1]
 SPATIAL_OFFSET(flags,4);
+SPATIAL_OFFSET(coverageDistance,8);
 SPATIAL_OFFSET(nodes,0x18);
 SPATIAL_OFFSET(edges,0x34);
 SPATIAL_OFFSET(syntheticEdge,0x5c);
 SPATIAL_OFFSET(syntheticEnd,0x64);
 SPATIAL_OFFSET(syntheticStart,0x78);
+typedef char SpatialGraphAllocationSize[sizeof(Kaim::CSpatialGraph)==0x98?1:-1];
 #undef SPATIAL_OFFSET
 #endif
