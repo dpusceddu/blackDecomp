@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 9
+VERSION = 10
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -297,24 +297,45 @@ def parse_declarations(text, aliases=None):
                 d -= text[k] == '}'
                 k += 1
             body = text[begin:k - 1]
-        result.append(dict(name=name, short=short, cls=cls, ret=ret, retclass=retclass, params=ps,
+        qualified_name = '::'.join((*type_scope, short))
+        result.append(dict(name=name, qualified_name=qualified_name, short=short, cls=cls, ret=ret, retclass=retclass, params=ps,
                            address=address, body=body, abi_uncertainty=uncertainty, implicit_this=implicit_this, raw=left + ' ' + name + '(' + params + ')'))
     return result
 
 
 def demangle_method(symbol):
-    """The simple old-GCC method spelling; templates/overloads remain unresolved."""
-    m = re.match(r'^(.*?)__(\d+)([A-Za-z_]\w*)', symbol)
-    if not m:
-        return None
-    n = int(m.group(2))
-    cls = m.group(3)[:n]
-    method = m.group(1)
+    """Read old-GCC owner scopes, not argument encodings or template spellings."""
+    if symbol.startswith(('_$_', '_._')):
+        method, owner = '_', symbol[3:]
+    else:
+        match = re.match(r'^(.*?)__([CV]*(?:Q[1-9]|[1-9]).*)$', symbol)
+        if not match:
+            return None
+        method, owner = match.groups()
+    owner = owner.lstrip('CV')  # const/volatile member qualifiers precede the owner.
+    count = 1
+    if owner.startswith('Q'):
+        match = re.match(r'Q([1-9])', owner)
+        if not match:
+            return None
+        count, owner = int(match[1]), owner[match.end():]
+    scopes = []
+    for _ in range(count):
+        match = re.match(r'([1-9][0-9]*)', owner)
+        if not match:
+            return None
+        length = int(match[1])
+        part = owner[match.end():match.end() + length]
+        if len(part) != length or not re.fullmatch(r'[A-Za-z_]\w*', part):
+            return None
+        scopes.append(part)
+        owner = owner[match.end() + length:]
+    cls = scopes[-1]
     if not method:
         method = cls
     elif method == '_':
         method = '~' + cls
-    return cls + '::' + method
+    return '::'.join(scopes + [method])
 
 
 def source_seeds(root=ROOT, matched_only=False):
@@ -358,8 +379,21 @@ def source_seeds(root=ROOT, matched_only=False):
         for addr, symbol, matched in targets:
             if matched_only and not matched:
                 continue
-            names = {symbol, aliases.get(addr), demangle_method(symbol), symbol.split('__F')[0]}
-            candidates = [(p, d) for p, d in decls if d['name'] in names]
+            method_name = demangle_method(symbol)
+            names = {symbol, aliases.get(addr), method_name, symbol.split('__F')[0]}
+            candidates = [(p, d) for p, d in decls if d['name'] in names or d['qualified_name'] in names]
+            if method_name:
+                # The spelling above does not decode overload argument types. Do not
+                # let declaration order choose a signature for an overloaded name.
+                signatures = set()
+                for _, declaration in candidates:
+                    params = list(declaration['params'])
+                    if declaration['implicit_this']:
+                        params[0] = ('void *', method_name.rsplit('::', 1)[0])
+                    signatures.add((declaration['ret'], tuple(params)))
+                if len(signatures) > 1:
+                    evidence.append(dict(addr=addr, kind='source-overload-ambiguous', symbol=symbol))
+                    continue
             # A definition resolves parameter names that the declaration omits.
             candidates.sort(key=lambda x: (bool(x[1]['body']), x[0] == u['source']), reverse=True)
             if not candidates:

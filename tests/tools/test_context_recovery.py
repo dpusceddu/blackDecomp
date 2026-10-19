@@ -127,6 +127,20 @@ class SignatureTests(unittest.TestCase):
         self.assertEqual(len(ps), 3)
         self.assertEqual(cr.param_type(ps[0])[0], 'void *')
 
+    def test_old_gcc_qualified_method_names(self):
+        cases = {
+            'SetTarget__Q213CampaignActor16CameraControllerxxfl': 'CampaignActor::CameraController::SetTarget',
+            'Button__CQ216CampaignGraphics10ControllerUi': 'CampaignGraphics::Controller::Button',
+            '__Q24Kaim6CBrain': 'Kaim::CBrain::CBrain',
+            '_$_Q24Kaim18CPathObjectManager': 'Kaim::CPathObjectManager::~CPathObjectManager',
+            '___5Queue': 'Queue::~Queue',
+        }
+        for symbol, name in cases.items():
+            with self.subTest(symbol=symbol):
+                self.assertEqual(cr.demangle_method(symbol), name)
+        for symbol in ('Get__Q0', 'Get__Q24Kaim99Short', 'Get__t5Queue1Zi', 'plain_c'):
+            self.assertIsNone(cr.demangle_method(symbol))
+
     def test_target_widths_do_not_conflate_real64_with_ee128(self):
         self.assertEqual(cr.normalize_type('long')[0], 's64')
         self.assertEqual(cr.normalize_type('long long')[0], 's128')
@@ -285,6 +299,58 @@ class FieldPointerTests(unittest.TestCase):
 
 
 class VerificationTests(unittest.TestCase):
+    def test_namespaced_camera_method_exports_exact_128_bit_arguments(self):
+        from unittest.mock import patch
+        unit = dict(source='src/campaign/actor_camera.cpp', externs={}, functions=[dict(
+            addr=0x141248, symbol='SetTarget__Q213CampaignActor16CameraControllerxxfl', status='source')])
+        with patch('units.load_units', return_value=[unit]):
+            seeds, _ = cr.source_seeds(matched_only=True)
+        self.assertEqual(seeds[0x141248]['ret'], 'void')
+        self.assertTrue(seeds[0x141248]['this_usage'])
+        self.assertEqual([kind for kind, _ in seeds[0x141248]['params']],
+                         ['void *', 's128', 's128', 'f32', 's64'])
+
+    def test_qualified_owner_disambiguates_same_leaf_class_names(self):
+        import tempfile
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'include').mkdir()
+            (root / 'src').mkdir()
+            (root / 'src/classes.cpp').write_text('''
+namespace First { struct Queue { int Get(short); };
+int Queue::Get(short n) { return n; } }
+namespace Other { struct Queue { float Get(float); };
+float Queue::Get(float n) { return n; } }
+''')
+            unit = dict(source='src/classes.cpp', externs={}, functions=[dict(
+                addr=0x100000, symbol='Get__Q25First5QueueSs', status='source')])
+            with patch('units.load_units', return_value=[unit]), patch(
+                    'units.dependencies', return_value=[Path(unit['source'])]):
+                seeds, _ = cr.source_seeds(root, matched_only=True)
+            self.assertEqual(seeds[0x100000]['ret'], 's32')
+            self.assertEqual(seeds[0x100000]['params'][1], ('s16', None))
+
+    def test_undecoded_overload_arguments_do_not_select_a_signature(self):
+        import tempfile
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'include').mkdir()
+            (root / 'src').mkdir()
+            (root / 'src/overloads.cpp').write_text('''
+namespace First { struct Queue { int Get(short); float Get(float); };
+int Queue::Get(short n) { return n; }
+float Queue::Get(float n) { return n; } }
+''')
+            unit = dict(source='src/overloads.cpp', externs={}, functions=[dict(
+                addr=0x100000, symbol='Get__Q25First5QueueSs', status='source')])
+            with patch('units.load_units', return_value=[unit]), patch(
+                    'units.dependencies', return_value=[Path(unit['source'])]):
+                seeds, evidence = cr.source_seeds(root, matched_only=True)
+            self.assertNotIn(0x100000, seeds)
+            self.assertTrue(any(e['kind'] == 'source-overload-ambiguous' for e in evidence))
+
     def test_address_only_asm_claim_is_not_source_evidence(self):
         import tempfile
         from unittest.mock import patch
