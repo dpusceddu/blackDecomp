@@ -46493,11 +46493,6 @@ units:
     symbol: func_002D62D0
     status: asm
     reason: campaign
-  - addr: '0x2d63e0'
-    size: 96
-    symbol: func_002D63E0
-    status: asm
-    reason: campaign
   - addr: '0x2d6520'
     size: 92
     symbol: SetPathWay__Q24Kaim12PathWayAgentPQ24Kaim7PathWay
@@ -47956,3 +47951,45 @@ units:
     _vt$Q34Kaim11CPathFinder15CConstraintInfo: '0x3efee8'
     sqrtf: '0x29eb90'
     terminate__Fv: '0x36f978'
+- name: context_behaviors_hide_retry
+  source: src/context/behaviors_hide_retry.cpp
+  origin: kynapse
+  owner: context-wave3-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d3f10'
+    size: 568
+    status: source
+    symbol: func_002D3F10
+  externs:
+    func_002E1C58: '0x2e1c58'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+  trim:
+    .rodata: 76
+- name: context_behaviors_path_controls
+  source: src/context/behaviors_path_controls.cpp
+  origin: kynapse
+  owner: context-wave3-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2d63e0'
+    size: 96
+    status: source
+    symbol: Refresh__Q24Kaim12PathWayAgent
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
