@@ -46552,3 +46552,16 @@ units:
     symbol: GetTarget__CQ29BlackGame9RouteMode
     size: 148
     status: source
+- name: campaign_actor_state_update
+  source: src/campaign/actor_state_update.cpp
+  origin: 'C++ campaign: actor state controller vtable0x3dc9b8; PS2-verified accessed fields'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x13dd68'
+    symbol: Update__Q213CampaignActor10Controller
+    size: 388
+    status: source
