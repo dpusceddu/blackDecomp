@@ -19,7 +19,9 @@ struct ClassKey;
 extern ClassKey gRouteFollowerClass;     // PS2 0x4548b8
 RouteFollower* FindByClass(ClassRegistry* registry, ClassKey* key);
 ClassRegistry* RegistryOf(Brain* owner); // PS2 0x13d3f0
-RouteGraph* GraphAt(ActionManager* manager, int index);
+// Distinct name from the NodeGraph view in ai_route_stages_decls.hpp.
+RouteGraph* MovementGraphAt(ActionManager* manager, int index) __asm__("func_00179668");
+RouteGraph* CheckedMovementGraphAt(ActionManager* manager, int index) __asm__("func_0016DD68");
 void* ActorModel(Actor* actor);
 long ModelKind(void* model);
 
