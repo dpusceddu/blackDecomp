@@ -47298,3 +47298,53 @@ units:
   externs:
     __throw: '0x292b40'
     terminate__Fv: '0x36f978'
+- name: campaign_actor_entries_wave3
+  source: src/campaign/actor_entries_wave3.cpp
+  origin: 'C++ actor campaign: 0x3dc838 class cluster; identity unverified'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  - -fbyte-bool
+  functions:
+  - addr: '0x1448c8'
+    status: asm
+  - addr: '0x145558'
+    status: asm
+  - addr: '0x145a50'
+    status: asm
+  - addr: '0x145b98'
+    status: asm
+  - addr: '0x146000'
+    status: asm
+  - addr: '0x1463d0'
+    status: asm
+  - addr: '0x146af0'
+    status: source
+    symbol: Command__Q216BlackPS2Campaign12ActorEntriesUi
+    size: 260
+  - addr: '0x146ce0'
+    status: asm
+  - addr: '0x1471e0'
+    status: asm
+  - addr: '0x1475f0'
+    status: asm
+  - addr: '0x149798'
+    status: asm
+  trim:
+    .rodata: 20
+- name: campaign_actor_event_fanout
+  source: src/campaign/actor_event_fanout.cpp
+  origin: 'C++ actor campaign: shared event fanout; identity provisional'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x165b00'
+    symbol: Dispatch__Q216BlackPS2Campaign12ActorFanout3i
+    size: 132
+    status: source

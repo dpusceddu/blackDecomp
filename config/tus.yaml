@@ -2521,7 +2521,7 @@ tus:
   evidence: [join-soft, calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 17 of 56 functions
+  flags_basis: matched 18 of 56 functions
   data:
     .rodata: ['0x3f4b70', '0x3f4ba0']
     .sdata: ['0x40d9b1', '0x40d9b2']
@@ -4377,7 +4377,7 @@ tus:
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 13 of 29 functions
+  flags_basis: matched 14 of 29 functions
 - name: tu_165c40
   kind: isolated
   library: game
