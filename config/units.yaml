@@ -47348,3 +47348,33 @@ units:
     symbol: Dispatch__Q216BlackPS2Campaign12ActorFanout3i
     size: 132
     status: source
+- name: campaign_actor_motion_wave3
+  source: src/campaign/actor_motion_wave3.cpp
+  origin: C++ actor campaign:0x3dca78 class cluster; identity unverified
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x132610'
+    status: asm
+  - addr: '0x132d98'
+    status: asm
+  - addr: '0x1334e0'
+    status: asm
+  - addr: '0x133ba0'
+    status: asm
+  - addr: '0x133fa8'
+    status: asm
+  - addr: '0x1347b8'
+    status: asm
+  - addr: '0x134990'
+    status: asm
+  - addr: '0x134c98'
+    status: asm
+  - addr: '0x135878'
+    status: source
+    symbol: GetWorldMatrix__Q213CampaignActor11ActorMotion
+    size: 200

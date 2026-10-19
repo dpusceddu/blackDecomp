@@ -21,6 +21,20 @@ static inline Value TransformDirection(const Value *basis, Value point)
           "j basisz"(basis[2]), "j pointv"(point));
     return result;
 }
+// Vector-first expression form. Operand order is part of the SN inline contract:
+// the actor matrix-return consumer uses this form, while existing callers use
+// the basis-first form above.
+static inline Value TransformDirection(Value point, const Value *basis)
+{
+    Value result;
+    asm("vmulax.xyz ACC, basisx, pointvx\n\t"
+        "vmadday.xyz ACC, basisy, pointvy\n\t"
+        "vmaddz.xyz outputv, basisz, pointvz"
+        : "=j outputv"(result)
+        : "j pointv"(point), "j basisx"(basis[0]),
+          "j basisy"(basis[1]), "j basisz"(basis[2]));
+    return result;
+}
 static inline Value TransformPoint(const Value *basis, Value point)
 {
     Value result;

@@ -68,11 +68,13 @@
         "TransformPoint"
       ],
       "verified_scope": [
-        "three-basis direction and affine point xyz operations; W lane unspecified; complete matrix multiplication not verified"
+        "three-basis direction and affine point xyz operations; W lane unspecified; complete matrix multiplication not verified",
+        "basis-first and vector-first direction operand contracts, plus 64-byte matrix value return"
       ],
       "controls": [
         "0x17bdf0",
-        "0x1a71f8"
+        "0x1a71f8",
+        "0x135878"
       ]
     },
     {
@@ -346,6 +348,16 @@
       "uses": [
         "gSlotOwner",
         "slotCount"
+      ]
+    },
+    {
+      "address": "0x135878",
+      "source_function": "ActorMotion::GetWorldMatrix",
+      "headers": [
+        "include/ps2/matrix.hpp"
+      ],
+      "uses": [
+        "TransformDirection"
       ]
     }
   ],
