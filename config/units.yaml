@@ -47638,3 +47638,21 @@ units:
     symbol: func_001FA658
     status: asm
     reason: claim
+- name: context_wave3_graphics_frontend
+  source: src/campaign/graphics_frontend_pending.cpp
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x214cf8'
+    size: 812
+    symbol: func_00214CF8
+    status: asm
+    reason: claim
+  - addr: '0x215250'
+    size: 1116
+    symbol: func_00215250
+    status: asm
+    reason: claim
