@@ -192,6 +192,15 @@ callees individually so speculative signatures do not conflict with unrelated de
 settling to refresh verification marks. During parallel campaigns, `AUTODECOMP_FREEZE_CONTEXT=1` consumes the
 centrally exported context without rewriting shared headers; a missing context is an error.
 
+After `python3 tools/autodecomp.py context --refresh`, run `python3 tools/class_skeletons.py` to recover
+the legacy GCC RTTI graph and vtables and write
+`include/classes/` and an address/slot index in ignored build output. The generator is the sole owner
+of these headers: put verified corrections in its evidence configuration and regenerate. RTTI names,
+base links and virtual slots carry separate evidence from inferred signatures and field accesses.
+Opaque prefixes and accessor offsets do not establish a complete object size. Xbox layouts remain
+leads until PS2 code and an exact source match verify them. See `include/classes/README.md` for the
+generated API and verification limits.
+
 Type and instruction support, all of it mechanical and checked by exact matches:
 
 - **Types.** `python3 tools/ghidra_types.py` writes `include/types_ghidra.h` from the raw Ghidra pages in `.local/ghidra/`

@@ -1447,10 +1447,6 @@ units:
   - -G0
   - -snas
   functions:
-  - addr: '0x114160'
-    symbol: func_00114160
-    size: 8
-    status: source
   - addr: '0x114168'
     symbol: func_00114168
     size: 8
@@ -5699,18 +5695,6 @@ units:
     symbol: func_00163CC8
     size: 60
     status: source
-- name: auto_game_163da8
-  source: src/auto/game/163da8.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x163da8'
-    symbol: func_00163DA8
-    size: 16
-    status: source
 - name: auto_game_163dc0
   source: src/auto/game/163dc0.c
   origin: auto
@@ -5871,10 +5855,6 @@ units:
   - addr: '0x1652b8'
     symbol: func_001652B8
     size: 32
-    status: source
-  - addr: '0x1652e0'
-    symbol: func_001652E0
-    size: 12
     status: source
   - addr: '0x165380'
     symbol: func_00165380
@@ -23467,10 +23447,6 @@ units:
     symbol: func_002D50E8
     size: 140
     status: source
-  - addr: '0x2d5178'
-    symbol: func_002D5178
-    size: 28
-    status: source
   - addr: '0x2d5368'
     symbol: func_002D5368
     size: 44
@@ -25533,17 +25509,9 @@ units:
     symbol: func_002E6D90
     size: 72
     status: source
-  - addr: '0x2e6f90'
-    symbol: func_002E6F90
-    size: 32
-    status: source
   - addr: '0x2e6fb0'
     symbol: func_002E6FB0
     size: 88
-    status: source
-  - addr: '0x2e7008'
-    symbol: func_002E7008
-    size: 32
     status: source
   - addr: '0x2e7088'
     symbol: func_002E7088
@@ -45742,4 +45710,79 @@ units:
   - addr: '0x382e78'
     symbol: func_00382E78
     size: 104
+    status: source
+- name: class_skeleton_game
+  source: src/classes/game_methods.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x383920'
+    symbol: Function_00383920__Q215BlackPS2Classes22UnknownVtable_003DC5F8
+    size: 12
+    status: asm
+    reason: extra
+  - addr: '0x149158'
+    symbol: Function_00149158__Q215BlackPS2Classes22UnknownVtable_003DC838Uc
+    size: 28
+    status: source
+  - addr: '0x1ee278'
+    symbol: Function_001EE278__Q215BlackPS2Classes22UnknownVtable_003E07F8i
+    size: 32
+    status: source
+  - addr: '0x1cda00'
+    symbol: Function_001CDA00__Q215BlackPS2Classes22UnknownVtable_003E06C8Pv
+    size: 40
+    status: source
+  - addr: '0x1cdab0'
+    symbol: Function_001CDAB0__Q215BlackPS2Classes22UnknownVtable_003E0688Pv
+    size: 56
+    status: source
+  - addr: '0x384360'
+    symbol: Function_00384360__Q215BlackPS2Classes22UnknownVtable_003E0058i
+    size: 40
+    status: source
+  - addr: '0x1adf98'
+    symbol: Function_001ADF98__Q215BlackPS2Classes22UnknownVtable_003E0140i
+    size: 40
+    status: source
+  - addr: '0x1653a8'
+    symbol: Function_001653A8__Q215BlackPS2Classes22UnknownVtable_003DC100
+    size: 72
+    status: source
+  - addr: '0x114160'
+    symbol: Function_00114160__Q215BlackPS2Classes22UnknownVtable_003DB1F8
+    size: 8
+    status: source
+  - addr: '0x163da8'
+    symbol: Function_00163DA8__Q215BlackPS2Classes22UnknownVtable_003DB828
+    size: 16
+    status: source
+  - addr: '0x1652e0'
+    symbol: Function_001652E0__Q215BlackPS2Classes22UnknownVtable_003DC130
+    size: 12
+    status: source
+- name: class_skeleton_kynapse
+  source: src/classes/kynapse_methods.cpp
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d5178'
+    symbol: Function_002D5178__Q215BlackPS2Classes15Kaim_CHideAgent
+    size: 28
+    status: source
+  - addr: '0x2e6f90'
+    symbol: Function_002E6F90__Q215BlackPS2Classes20Kaim_CBasicAllocatori
+    size: 32
+    status: source
+  - addr: '0x2e7008'
+    symbol: Function_002E7008__Q215BlackPS2Classes20Kaim_CBasicAllocatori
+    size: 32
     status: source

@@ -26,10 +26,6 @@ extern "C" int func_002D50E8(HideAgent *self,int flags) {
     if (result)result=D_003C87E0(self);
     return result;
 }
-extern "C" int func_002D5178(HideAgent *self) {
-    if (self->provider)return self->perception!=0;
-    return 0;
-}
 extern "C" const Vec3 *func_002D5368(HideAgent *self) {
     if (self->found) {
         if (self->fresh)return &self->destination;

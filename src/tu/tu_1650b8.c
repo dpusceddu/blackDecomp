@@ -30,10 +30,6 @@ s32 func_001652B8(void) {
 
 /* Assembly between the functions: func_001652D8 (8 bytes) */
 
-void func_001652E0(void *arg0) {
-    M2C_FIELD(arg0, s8 *, 0x18) = 1;
-}
-
 /* Assembly between the functions: func_001652F0 (64 bytes), func_00165330 (80 bytes) */
 
 s32 func_00165380(void) {

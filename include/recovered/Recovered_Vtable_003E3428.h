@@ -4,7 +4,9 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Vtable_003E3428 {
-    u8 opaque_0[20];
+    u8 opaque_0[12];
+    s32 field_C; /* PS2 +0xC */
+    s32 field_10; /* PS2 +0x10 */
     f32 field_14; /* PS2 +0x14 */
     f32 field_18; /* PS2 +0x18 */
     f32 field_1C; /* PS2 +0x1C */
@@ -28,6 +30,8 @@ typedef struct Recovered_Vtable_003E3428 {
     f32 field_64; /* PS2 +0x64 */
     u8 field_68; /* PS2 +0x68 */
 } Recovered_Vtable_003E3428;
+typedef char assert_Recovered_Vtable_003E3428_C[(((int)&((Recovered_Vtable_003E3428 *)0)->field_C) == 12) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E3428_10[(((int)&((Recovered_Vtable_003E3428 *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E3428_14[(((int)&((Recovered_Vtable_003E3428 *)0)->field_14) == 20) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E3428_18[(((int)&((Recovered_Vtable_003E3428 *)0)->field_18) == 24) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E3428_1C[(((int)&((Recovered_Vtable_003E3428 *)0)->field_1C) == 28) ? 1 : -1];

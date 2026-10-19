@@ -40,10 +40,6 @@ s32 func_002E6D90(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s3
 
 /* Assembly between the functions: func_002E6DD8 (136 bytes), func_002E6E60 (176 bytes), func_002E6F10 (128 bytes) */
 
-void func_002E6F90(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, M2C_UNK (**)(s32), 0x10)(arg1);
-}
-
 void * func_002E6FB0(void *arg0, s32 arg1) {
     void *temp_3;
     void *var_2;
@@ -55,10 +51,6 @@ void * func_002E6FB0(void *arg0, s32 arg1) {
         var_2 = arg0;
     }
     return var_2;
-}
-
-void func_002E7008(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, M2C_UNK (**)(s32), 0x14)(arg1);
 }
 
 /* Assembly between the functions: func_002E7028 (96 bytes) */

@@ -427,6 +427,38 @@ All baseline source addresses survive; all five retail images remain identical. 
 29 build tests pass. Correct C++ plus the appropriate assembler can reach a function above 1 KB;
 the derivative is a production configuration, not evidence that all large drafts are otherwise correct.
 
+### RTTI class skeletons
+
+The repeatable decoder resolves all 189 class type-info records (166 Kaim classes), all 348 encoded
+Kaim name occurrences, 171 base links and 17 separate builtin records. No class initializer or base
+remains unresolved. The vtable catalog distinguishes 169 RTTI-backed tables, 376 code-referenced
+zero-header tables and seven unverified function-pointer runs; their 3,830 slots retain signed
+`this` adjustments and target addresses. Class names remain unknown for the zero-header tables.
+Fourteen source-exact constructors and 158 distinct deleting destructors have identified addresses;
+other vptr writers remain candidates rather than being called constructors.
+
+`tools/class_skeletons.py` solely owns `include/classes/`: 189 named interfaces and 383 unknown-owner
+views, with a separate semantic hierarchy. Evidence belongs in its configuration, not hand-edited
+generated headers. Field accessors preserve PS2 offsets; speculative signatures and fields are marked.
+There are 2,055 field views, with 67 specifically verified accesses; exact code does not establish
+original semantic types. These are partial ABI views, not complete object sizes. Three dispatch views reproduce
+the legacy eight-byte virtual entries, including a vptr after 16 bytes of base data.
+
+Eight near misses compile exactly after correcting PS2 offsets, argument widths, float fields,
+return types or virtual-call context (two to four differences each become zero). Seven integrate:
++308 code bytes / 312 text-span bytes. The eighth has an exact 12-byte body but an unexplained
+24-byte retail slot; tested sections are 12, 16 or 32 bytes, so it stays assembly. Six existing
+functions (128 code bytes) now use generated C++ method declarations and remain exact.
+
+| Checkpoint | Source functions | Source text-span bytes |
+| --- | --- | --- |
+| Before skeletons | 5,059 | 281,320 |
+| After skeletons | 5,066 | 281,632 |
+| Added | 7 | 312 |
+
+All existing source addresses are retained, all five retail images remain identical, and generated-header
+compilation, repeatability checks and 218 tests pass. The enabling tasks end here; no campaign starts.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.

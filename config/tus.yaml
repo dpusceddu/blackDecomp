@@ -2521,7 +2521,7 @@ tus:
   evidence: [join-soft, calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 13 of 56 functions
+  flags_basis: matched 14 of 56 functions
   data:
     .rodata: ['0x3f4b70', '0x3f4ba0']
     .sdata: ['0x40d9b1', '0x40d9b2']
@@ -4377,7 +4377,7 @@ tus:
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 12 of 29 functions
+  flags_basis: matched 13 of 29 functions
 - name: tu_165c40
   kind: isolated
   library: game
@@ -9215,7 +9215,7 @@ tus:
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 14 of 18 functions
+  flags_basis: matched 15 of 18 functions
 - name: tu_1ae130
   kind: object
   library: game
@@ -10173,7 +10173,7 @@ tus:
   evidence: [proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags_basis: matched 1 of 1 functions
 - name: tu_1cda28
   kind: isolated
   library: game
@@ -10203,7 +10203,7 @@ tus:
   evidence: [proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags_basis: matched 1 of 1 functions
 - name: tu_1cdae8
   kind: isolated
   library: game
@@ -11115,7 +11115,7 @@ tus:
   evidence: [join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 5 of 18 functions
+  flags_basis: matched 6 of 18 functions
   data:
     .rodata: ['0x3f8a88', '0x3f8b00']
     .data: ['0x3bda0c', '0x3bda1c']
@@ -24383,7 +24383,7 @@ tus:
   evidence: [proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags_basis: matched 1 of 1 functions
 - name: linkonce_384388
   kind: linkonce
   library: linkonce

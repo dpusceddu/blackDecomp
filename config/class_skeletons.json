@@ -1,0 +1,181 @@
+{
+  "owner": "tools/class_skeletons.py; generated include/classes headers have one owner",
+  "qualification": "PS2 instruction offsets and isolated exact source probes; matched status is recomputed from config/units.yaml. These are partial ABI views, never complete object sizes.",
+  "records": {},
+  "methods": {
+    "0x149158": {
+      "return": "unsigned short *",
+      "params": [
+        "unsigned char"
+      ],
+      "fields": [
+        {
+          "offset": 432,
+          "size": 4,
+          "type": "unsigned short *"
+        }
+      ]
+    },
+    "0x383920": {
+      "return": "void",
+      "params": [],
+      "fields": [
+        {
+          "offset": 196,
+          "size": 4,
+          "type": "int"
+        }
+      ]
+    },
+    "0x1ee278": {
+      "return": "void",
+      "params": [
+        "int"
+      ],
+      "fields": [
+        {
+          "offset": 84,
+          "size": 4,
+          "type": "float"
+        }
+      ]
+    },
+    "0x1cda00": {
+      "return": "void",
+      "params": [
+        "void *"
+      ]
+    },
+    "0x1cdab0": {
+      "return": "void",
+      "params": [
+        "void *"
+      ]
+    },
+    "0x384360": {
+      "return": "int",
+      "params": [
+        "int"
+      ]
+    },
+    "0x1adf98": {
+      "return": "int",
+      "params": [
+        "int"
+      ]
+    },
+    "0x1653a8": {
+      "return": "int",
+      "params": [],
+      "fields": [
+        {
+          "offset": 28,
+          "size": 1,
+          "type": "unsigned char"
+        }
+      ]
+    },
+    "0x114160": {
+      "return": "void",
+      "params": [],
+      "fields": [
+        {
+          "offset": 16,
+          "size": 4,
+          "type": "int"
+        }
+      ]
+    },
+    "0x163da8": {
+      "return": "void",
+      "params": [],
+      "fields": [
+        {
+          "offset": 128,
+          "size": 1,
+          "type": "unsigned char"
+        }
+      ]
+    },
+    "0x1652e0": {
+      "return": "void",
+      "params": [],
+      "fields": [
+        {
+          "offset": 24,
+          "size": 1,
+          "type": "unsigned char"
+        }
+      ]
+    },
+    "0x2e6f90": {
+      "return": "void",
+      "params": [
+        "int"
+      ],
+      "fields": [
+        {
+          "offset": 16,
+          "size": 4,
+          "type": "void (*)(int)"
+        }
+      ]
+    },
+    "0x2e7008": {
+      "return": "void",
+      "params": [
+        "int"
+      ],
+      "fields": [
+        {
+          "offset": 20,
+          "size": 4,
+          "type": "void (*)(int)"
+        }
+      ]
+    },
+    "0x2d5178": {
+      "return": "int",
+      "params": [],
+      "fields": [
+        {
+          "offset": 12,
+          "size": 4,
+          "type": "void *"
+        },
+        {
+          "offset": 16,
+          "size": 4,
+          "type": "void *"
+        }
+      ]
+    }
+  },
+  "virtual_views": {
+    "UnknownVtable_003E0058": {
+      "vptr_offset": 0,
+      "return": "int",
+      "params": [
+        "int"
+      ],
+      "slot_count": 8,
+      "evidence": "PS2 0x384360 exact source virtual-call probe"
+    },
+    "UnknownVtable_003E0140": {
+      "vptr_offset": 0,
+      "return": "int",
+      "params": [
+        "int"
+      ],
+      "slot_count": 6,
+      "evidence": "PS2 0x1adf98 exact source virtual-call probe"
+    },
+    "UnknownVtable_003DC100": {
+      "vptr_offset": 16,
+      "return": "void",
+      "params": [],
+      "slot_count": 3,
+      "evidence": "PS2 0x1653a8 exact source virtual-call probe; prefix before vptr"
+    }
+  }
+}

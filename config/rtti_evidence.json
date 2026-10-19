@@ -1,0 +1,163 @@
+{
+ "variant": "usa-retail",
+ "abi": "GCC 2.95 legacy RTTI with eight-byte virtual-table entries",
+ "owner": "class_skeletons.py",
+ "helpers": [
+  {
+   "name": "__rtti_class",
+   "address": 3604800,
+   "kind": "class",
+   "runtime_vtable": 4243176,
+   "parameters": [
+    "storage",
+    "encoded_name",
+    "base_list",
+    "base_count"
+   ],
+   "storage_fields": {
+    "0": "encoded_name",
+    "4": "runtime_vtable",
+    "8": "base_list",
+    "12": "base_count"
+   },
+   "evidence": "PS2 instructions at 0x370140-0x370160; no direct callers in retail"
+  },
+  {
+   "name": "__rtti_si",
+   "address": 3604840,
+   "kind": "si",
+   "runtime_vtable": 4243200,
+   "parameters": [
+    "storage",
+    "encoded_name",
+    "base_storage"
+   ],
+   "storage_fields": {
+    "0": "encoded_name",
+    "4": "runtime_vtable",
+    "8": "base_storage"
+   },
+   "evidence": "Read-only Ghidra decompilation and PS2 stores at 0x370168-0x370184"
+  },
+  {
+   "name": "__rtti_user",
+   "address": 3604872,
+   "kind": "user",
+   "runtime_vtable": 4243224,
+   "parameters": [
+    "storage",
+    "encoded_name"
+   ],
+   "storage_fields": {
+    "0": "encoded_name",
+    "4": "runtime_vtable"
+   },
+   "evidence": "Read-only Ghidra decompilation and PS2 stores at 0x370188-0x3701a0"
+  }
+ ],
+ "base_info": {
+  "size": 8,
+  "type_storage_offset": 0,
+  "flags_offset": 4,
+  "offset_bits": [
+   0,
+   28
+  ],
+  "virtual_bit": 29,
+  "access_bits": [
+   30,
+   31
+  ],
+  "access": {
+   "1": "public",
+   "2": "protected",
+   "3": "private"
+  }
+ },
+ "checks": [
+  {
+   "getter": 3719960,
+   "encoded_name": "Q24Kaim6CBrain",
+   "storage": 4829328,
+   "base_encoded_name": "Q24Kaim7CObject",
+   "base_storage": 4254656,
+   "evidence": "Read-only Ghidra 0x38c318; source-exact independent RTTI getter probe"
+  }
+ ],
+ "references": [
+  "https://github.com/gcc-mirror/gcc/blob/releases/gcc-2.95.3/gcc/cp/tinfo.h",
+  "https://github.com/gcc-mirror/gcc/blob/releases/gcc-2.95.3/gcc/cp/tinfo.cc",
+  "https://github.com/gcc-mirror/gcc/blob/releases/gcc-2.95.3/gcc/cp/tinfo2.cc",
+  "https://github.com/gcc-mirror/gcc/blob/releases/gcc-2.95.3/gcc/cp/class.c"
+ ],
+ "nonclass_helpers": [
+  {
+   "name": "__rtti_ptr",
+   "address": 3607776,
+   "kind": "pointer",
+   "runtime_vtable": 4243680,
+   "direct_calls": 0,
+   "evidence": "PS2 store sequence and full executable direct-call census"
+  },
+  {
+   "name": "__rtti_attr",
+   "address": 3607808,
+   "kind": "attribute",
+   "runtime_vtable": 4243664,
+   "direct_calls": 0,
+   "evidence": "PS2 store sequence and full executable direct-call census"
+  },
+  {
+   "name": "__rtti_func",
+   "address": 3607848,
+   "kind": "function",
+   "runtime_vtable": 4243632,
+   "direct_calls": 0,
+   "evidence": "PS2 store sequence and full executable direct-call census"
+  },
+  {
+   "name": "__rtti_ptmf",
+   "address": 3607880,
+   "kind": "member_function_pointer",
+   "runtime_vtable": 4243616,
+   "direct_calls": 0,
+   "evidence": "PS2 store sequence and full executable direct-call census"
+  },
+  {
+   "name": "__rtti_ptmd",
+   "address": 3607912,
+   "kind": "member_data_pointer",
+   "runtime_vtable": 4243600,
+   "direct_calls": 0,
+   "evidence": "PS2 store sequence and full executable direct-call census"
+  },
+  {
+   "name": "__rtti_array",
+   "address": 3607944,
+   "kind": "array",
+   "runtime_vtable": 4243584,
+   "direct_calls": 0,
+   "evidence": "PS2 store sequence and full executable direct-call census"
+  }
+ ],
+ "builtin_runtime_vtable": 4243648,
+ "vtable_entry": {
+  "size": 8,
+  "this_adjustment_offset": 0,
+  "this_adjustment_size": 2,
+  "reserved_index_offset": 2,
+  "reserved_index_size": 2,
+  "function_pointer_offset": 4,
+  "function_pointer_size": 4,
+  "evidence": "PS2 dispatch at 0x2e6f10 loads signed halfword at table+8 and function at table+12; GCC 2.95 non-thunk vtable ABI"
+ },
+ "special_members": [
+  {
+   "address": 3043088,
+   "kind": "destructor",
+   "encoded_name": "Q24Kaim15CBasicAllocator",
+   "vtable": 4103088,
+   "evidence": "Read-only Ghidra: restores CAllocator then CObject vptrs, releases member, and in-charge bit zero skips release(this)"
+  }
+ ]
+}
