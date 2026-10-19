@@ -46510,3 +46510,19 @@ units:
     symbol: Open__Q216CampaignGraphics10ControllerUiUi
     size: 36
     status: source
+- name: campaign_graphics_level_cleanup
+  source: src/campaign/graphics_level_cleanup.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G1
+  - -ffunction-sections
+  functions:
+  - addr: '0x20edb0'
+    symbol: Function_0020EDB0__Q215BlackPS2Classes22UnknownVtable_003E10B0
+    size: 372
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
