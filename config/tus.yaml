@@ -2423,7 +2423,7 @@ tus:
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 8 of 19 functions
+  flags_basis: matched 11 of 19 functions
   data:
     .sdata: ['0x40d9b0', '0x40d9b1']
 - name: tu_1415a8
