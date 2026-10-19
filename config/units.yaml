@@ -46565,3 +46565,24 @@ units:
     symbol: Update__Q213CampaignActor10Controller
     size: 388
     status: source
+- name: campaign_actor_camera
+  source: src/campaign/actor_camera.cpp
+  origin: 'C++ campaign: actor controller vtable0x3dc348; child vptr at0x4c verified by matched methods'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x140cf8'
+    symbol: Update__Q213CampaignActor16CameraController
+    size: 332
+    status: source
+  - addr: '0x141390'
+    symbol: Choose__Q213CampaignActor16CameraControlleri
+    size: 132
+    status: source
+  - addr: '0x141248'
+    symbol: SetTarget__Q213CampaignActor16CameraControllerxxfl
+    size: 116
+    status: source
