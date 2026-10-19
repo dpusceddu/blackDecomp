@@ -479,7 +479,8 @@ involve COP0 polling or inner control flow. Excluding hardware/inner-control cas
 TU, but game and animation still mix library-level forms; authored NOPs and inferred TU boundaries
 prevent a historical assembler assignment. Eleven exact/high multi-function six-word cohorts remain
 leads. All four independently compiled seven-word controls lie in RenderWare Core/Audio. Retain
-per-unit selection: all 44 alternate-assembler units (48 source functions) now carry weak historical
+per-unit selection: 44 explicit-selector units (48 source functions) and 77 SN driver-GNU units
+(87 source functions) now carry weak historical
 provenance, maintained by the units serializer. This does not weaken the full-image equality check.
 `tools/loop_provenance.py` reproduces the census, filtered cohorts and control joins. Source progress
 remains 5,066 functions / 281,632 text bytes.

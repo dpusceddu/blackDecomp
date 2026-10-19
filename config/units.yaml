@@ -957,6 +957,10 @@ units:
     symbol: func_00108818
     size: 116
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: game_frontend_string_request
   source: src/game/frontend_string_request.cpp
   origin: game
@@ -972,6 +976,10 @@ units:
     symbol: func_00108890
     size: 196
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: game_frontend_strings_loaded
   source: src/game/frontend_strings_loaded.cpp
   origin: game
@@ -985,6 +993,10 @@ units:
     symbol: func_00108958
     size: 80
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_108a20
   source: src/auto/game/108a20.c
   origin: auto
@@ -4450,6 +4462,10 @@ units:
     symbol: func_0014D958
     size: 64
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_14dc10
   source: src/auto/game/14dc10.c
   origin: auto
@@ -6318,6 +6334,10 @@ units:
     symbol: func_0016C250
     size: 84
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_16c380
   source: src/auto/game/16c380.c
   origin: auto
@@ -6329,6 +6349,10 @@ units:
     symbol: func_0016C380
     size: 52
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_16c700
   source: src/auto/game/16c700.c
   origin: auto
@@ -6963,6 +6987,10 @@ units:
     symbol: func_00174110
     size: 36
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_174138
   source: src/auto/game/174138.c
   origin: auto
@@ -14071,6 +14099,10 @@ units:
     symbol: func_001C67C0
     size: 100
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1c6aa0
   source: src/auto/game/1c6aa0.c
   origin: auto
@@ -14676,6 +14708,10 @@ units:
     symbol: func_001D3078
     size: 20
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1d4030
   source: src/auto/game/1d4030.c
   origin: auto
@@ -14736,6 +14772,10 @@ units:
     symbol: func_001D4618
     size: 24
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1d59c8
   source: src/auto/game/1d59c8.c
   origin: auto
@@ -15534,6 +15574,10 @@ units:
     symbol: func_001EA780
     size: 64
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: tuf_1ea7c0
   source: src/tu/tu_1ea780.c
   origin: auto
@@ -15582,6 +15626,10 @@ units:
     symbol: func_001EA898
     size: 68
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1ea8e0
   source: src/auto/game/1ea8e0.c
   origin: auto
@@ -18539,6 +18587,10 @@ units:
     symbol: func_002455C0
     size: 36
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: tuf_248640
   source: src/tu/apt_tu_246060.c
   origin: auto
@@ -19715,6 +19767,10 @@ units:
     symbol: func_002756A8
     size: 12
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_276258
   source: src/auto/game/276258.c
   origin: auto
@@ -20345,6 +20401,10 @@ units:
     symbol: func_002817C8
     size: 64
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: tuf_2818d0
   source: src/tu/tu_281388_2818d0.c
   origin: auto
@@ -20397,6 +20457,10 @@ units:
     symbol: func_002819E0
     size: 88
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_281f88
   source: src/auto/game/281f88.c
   origin: auto
@@ -20784,6 +20848,10 @@ units:
     symbol: func_002859A0
     size: 24
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_285aa8
   source: src/auto/game/285aa8.c
   origin: auto
@@ -22146,6 +22214,10 @@ units:
     symbol: func_002A5588
     size: 48
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: rwcore_2a55d8
   source: src/tu/renderware_core_tu_2a50f8_2a55d8.c
   origin: renderware_core
@@ -22157,6 +22229,10 @@ units:
     symbol: func_002A55D8
     size: 100
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: rwcore_2a5a90
   source: src/tu/renderware_core_tu_2a50f8_2a5a90.c
   origin: renderware_core
@@ -22168,6 +22244,10 @@ units:
     symbol: func_002A5A90
     size: 48
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_unclassified_2a6c00
   source: src/auto/unclassified/2a6c00.c
   origin: auto
@@ -22212,6 +22292,10 @@ units:
     symbol: func_002A76C0
     size: 32
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_unclassified_2a78d8
   source: src/auto/unclassified/2a78d8.c
   origin: auto
@@ -22580,6 +22664,10 @@ units:
     symbol: func_002A9E38
     size: 68
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_2a9e88
   source: src/auto/other/2a9e88.c
   origin: auto
@@ -22757,6 +22845,10 @@ units:
     symbol: func_002BFE68
     size: 88
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_2bff70
   source: src/auto/other/2bff70.c
   origin: auto
@@ -22768,6 +22860,10 @@ units:
     symbol: func_002BFF70
     size: 12
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_2c0038
   source: src/auto/other/2c0038.c
   origin: auto
@@ -22779,6 +22875,10 @@ units:
     symbol: func_002C0038
     size: 184
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_2c0330
   source: src/auto/other/2c0330.c
   origin: auto
@@ -22822,6 +22922,10 @@ units:
     symbol: func_002C6620
     size: 68
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_2cb240
   source: src/auto/other/2cb240.c
   origin: auto
@@ -22849,6 +22953,10 @@ units:
     symbol: func_002CB2A0
     size: 92
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: tuf_2ce0f8
   source: src/tu/renderware_core_tu_2ce0f8.c
   origin: auto
@@ -22897,6 +23005,10 @@ units:
     symbol: func_002CE950
     size: 48
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_2ce980
   source: src/auto/other/2ce980.c
   origin: auto
@@ -25160,6 +25272,10 @@ units:
     gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: kynapse_child_buffers_2e3100
   source: src/kynapse/child_buffers_2e3100.cpp
   origin: kynapse
@@ -25325,6 +25441,10 @@ units:
     symbol: func_002E3828
     size: 240
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_2e3918
   source: src/kynapse/child_buffers_2e3918.cpp
   origin: kynapse
@@ -27680,6 +27800,10 @@ units:
     symbol: func_00313048
     size: 56
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: rwa_allocator_selector
   source: src/rwa_ee/allocator_selector.c
   origin: rwa_ee
@@ -27692,6 +27816,10 @@ units:
     symbol: func_003131C0
     size: 52
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: tuf_313248
   source: src/tu/rwa_ee_tu_312bd0_313248.c
   origin: auto
@@ -28039,6 +28167,10 @@ units:
     symbol: func_00315598
     size: 64
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: rwa_sound_swap
   source: src/rwa_ee/sound_swap.c
   origin: rwa_ee
@@ -28063,6 +28195,10 @@ units:
     symbol: func_00316218
     size: 36
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: rwa_object_header_swap
   source: src/rwa_ee/object_header_swap.c
   origin: rwa_ee
@@ -28087,6 +28223,10 @@ units:
     symbol: func_00316598
     size: 36
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_316698
   source: src/auto/other/316698.c
   origin: auto
@@ -28119,6 +28259,10 @@ units:
     size: 60
     status: source
   claim: wave2-rw-audio
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_3174d0
   source: src/auto/other/3174d0.c
   origin: auto
@@ -28131,6 +28275,10 @@ units:
     size: 32
     status: source
   claim: wave2-rw-audio
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_3176d0
   source: src/auto/other/3176d0.c
   origin: auto
@@ -28160,6 +28308,10 @@ units:
     size: 44
     status: source
   claim: wave2-rw-audio
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_3178b8
   source: src/auto/other/3178b8.c
   origin: auto
@@ -28424,6 +28576,10 @@ units:
     symbol: func_0031B530
     size: 12
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_31b540
   source: src/auto/other/31b540.c
   origin: auto
@@ -29020,6 +29176,10 @@ units:
     symbol: func_00324E38
     size: 12
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_324f98
   source: src/auto/other/324f98.c
   origin: auto
@@ -42909,6 +43069,10 @@ units:
     symbol: func_001C1578
     size: 84
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: effect_1c1930
   source: src/game/effects/light_render.c
   origin: game
@@ -43114,6 +43278,10 @@ units:
     size: 48
     status: source
   claim: wave2-rw-audio
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: rwa_wave2_319ca8
   source: src/rwa_ee/tu_3168c8.c
   origin: rwa_ee
@@ -43127,6 +43295,10 @@ units:
     size: 64
     status: source
   claim: wave2-rw-audio
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: animation_playback_allocation
   source: src/animation/tu_34eae0/allocate_banks.cpp
   origin: animation
@@ -43694,6 +43866,10 @@ units:
     size: 136
     status: asm
     reason: claimed
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: wave2_rw_core_2ce160
   source: src/renderware_core/tu_2ce160.c
   origin: renderware_core
@@ -43741,6 +43917,10 @@ units:
     size: 4
     status: asm
     reason: claimed
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_kynapse_2f1358
   source: src/auto/kynapse/2f1358.c
   origin: auto
@@ -43809,6 +43989,10 @@ units:
     symbol: func_0010BBB0
     size: 52
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_110a88
   source: src/auto/game/110a88.c
   origin: auto
@@ -43871,6 +44055,10 @@ units:
     symbol: func_00121600
     size: 64
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_121648
   source: src/auto/game/121648.c
   origin: auto
@@ -43882,6 +44070,10 @@ units:
     symbol: func_00121648
     size: 64
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_121de8
   source: src/auto/game/121de8.c
   origin: auto
@@ -43918,6 +44110,10 @@ units:
     symbol: func_00125208
     size: 892
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_12eec8
   source: src/auto/game/12eec8.c
   origin: auto
@@ -43968,6 +44164,10 @@ units:
     symbol: func_00138F08
     size: 152
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_138fa0
   source: src/auto/game/138fa0.c
   origin: auto
@@ -43979,6 +44179,10 @@ units:
     symbol: func_00138FA0
     size: 188
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1394b8
   source: src/auto/game/1394b8.c
   origin: auto
@@ -43990,6 +44194,10 @@ units:
     symbol: func_001394B8
     size: 40
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_13dd18
   source: src/auto/game/13dd18.c
   origin: auto
@@ -44014,6 +44222,10 @@ units:
     symbol: func_00143FD8
     size: 92
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_unclassified_14ac60
   source: src/auto/unclassified/14ac60.c
   origin: auto
@@ -44077,6 +44289,10 @@ units:
     symbol: func_0016FA50
     size: 96
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_170030
   source: src/auto/game/170030.c
   origin: auto
@@ -44228,6 +44444,10 @@ units:
     symbol: func_00194A38
     size: 72
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1a0a30
   source: src/auto/game/1a0a30.c
   origin: auto
@@ -44251,6 +44471,10 @@ units:
     symbol: func_001A0DC8
     size: 68
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1adf58
   source: src/auto/game/1adf58.c
   origin: auto
@@ -44276,6 +44500,10 @@ units:
     symbol: func_001B1CB8
     size: 264
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1b1e00
   source: src/auto/game/1b1e00.c
   origin: auto
@@ -44287,6 +44515,10 @@ units:
     symbol: func_001B1E00
     size: 184
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1c6828
   source: src/auto/game/1c6828.c
   origin: auto
@@ -44298,6 +44530,10 @@ units:
     symbol: func_001C6828
     size: 52
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1dc5a8
   source: src/auto/game/1dc5a8.c
   origin: auto
@@ -44359,6 +44595,10 @@ units:
     symbol: func_001E7588
     size: 100
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1eab60
   source: src/auto/game/1eab60.c
   origin: auto
@@ -44395,6 +44635,10 @@ units:
     symbol: func_001EFE08
     size: 88
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_1f2db0
   source: src/auto/game/1f2db0.c
   origin: auto
@@ -44406,6 +44650,10 @@ units:
     symbol: func_001F2DB0
     size: 72
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_209760
   source: src/auto/game/209760.c
   origin: auto
@@ -44443,6 +44691,10 @@ units:
     symbol: func_0020E630
     size: 68
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_20e678
   source: src/auto/other/20e678.c
   origin: auto
@@ -44454,6 +44706,10 @@ units:
     symbol: func_0020E678
     size: 76
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_unclassified_20e6c8
   source: src/auto/unclassified/20e6c8.c
   origin: auto
@@ -44465,6 +44721,10 @@ units:
     symbol: func_0020E6C8
     size: 84
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_unclassified_20e768
   source: src/auto/unclassified/20e768.c
   origin: auto
@@ -44476,6 +44736,10 @@ units:
     symbol: func_0020E768
     size: 64
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_unclassified_20e7a8
   source: src/auto/unclassified/20e7a8.c
   origin: auto
@@ -44487,6 +44751,10 @@ units:
     symbol: func_0020E7A8
     size: 80
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_210160
   source: src/auto/game/210160.c
   origin: auto
@@ -44502,6 +44770,10 @@ units:
     symbol: func_002101B8
     size: 112
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_210c40
   source: src/auto/game/210c40.c
   origin: auto
@@ -44525,6 +44797,10 @@ units:
     symbol: func_00211C90
     size: 124
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_215058
   source: src/auto/game/215058.c
   origin: auto
@@ -44585,6 +44861,10 @@ units:
     symbol: func_00271BE8
     size: 104
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_278ec0
   source: src/auto/game/278ec0.c
   origin: auto
@@ -44609,6 +44889,10 @@ units:
     symbol: func_0027C128
     size: 108
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_27cf28
   source: src/auto/game/27cf28.c
   origin: auto
@@ -44672,6 +44956,10 @@ units:
     symbol: func_002831A0
     size: 96
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_game_285ad0
   source: src/auto/game/285ad0.c
   origin: auto
@@ -44774,6 +45062,10 @@ units:
     symbol: func_002DF9B8
     size: 172
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_kynapse_2f3530
   source: src/auto/kynapse/2f3530.c
   origin: auto
@@ -44837,6 +45129,10 @@ units:
     symbol: func_00314570
     size: 84
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_3156c8
   source: src/auto/other/3156c8.c
   origin: auto
@@ -44848,6 +45144,10 @@ units:
     symbol: func_003156C8
     size: 80
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_other_322da8
   source: src/auto/other/322da8.c
   origin: auto
@@ -44876,6 +45176,10 @@ units:
     symbol: func_003249E8
     size: 160
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: auto_unclassified_32a488
   source: src/auto/unclassified/32a488.c
   origin: auto
@@ -45030,6 +45334,10 @@ units:
     symbol: func_00386F98
     size: 136
     status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: kynapse_route_cache_context
   source: src/kynapse/route_cache.cpp
   origin: kynapse

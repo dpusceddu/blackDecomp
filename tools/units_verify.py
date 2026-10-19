@@ -27,7 +27,8 @@ def save(units):
     for u in units:
         d = {k: v for k, v in u.items() if k not in ('compiler',) or v != 'ee-gcc2.95.3-136'}
         choices = [f.split('=', 1)[1] for f in u.get('flags', []) if f.startswith('--assembler=')]
-        if choices:
+        sn_driver_gnu = u.get('compiler', 'ee-gcc2.95.3-136').startswith('ee-gcc2.95') and '-snas' not in u.get('flags', [])
+        if choices or sn_driver_gnu:
             d['assembler_evidence'] = dict(strength='weak', basis='individually verified output',
                                            historical_provenance='unresolved')
         else:

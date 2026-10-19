@@ -35,6 +35,10 @@ class AssemblerEvidence(unittest.TestCase):
         unit = self.save_unit(['-O2', '-snas'], {'strength': 'weak'})
         self.assertNotIn('assembler_evidence', unit)
 
+    def test_sn_driver_gnu_choice_also_has_weak_provenance(self):
+        unit = self.save_unit(['-O2', '-G0'])
+        self.assertEqual(unit['assembler_evidence']['strength'], 'weak')
+
 
 if __name__ == '__main__':
     unittest.main()
