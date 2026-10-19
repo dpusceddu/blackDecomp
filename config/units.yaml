@@ -46425,3 +46425,17 @@ units:
     symbol: func_002D36A8
     status: asm
     reason: campaign
+- name: campaign_actor_collision
+  source: src/campaign/actor_collision.cpp
+  origin: 'C++ campaign: actor virtual table 0x3dc838; class identity unresolved'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x149608'
+    symbol: Collision__Q216BlackPS2Campaign12ActorEntriesPv
+    size: 396
+    status: source

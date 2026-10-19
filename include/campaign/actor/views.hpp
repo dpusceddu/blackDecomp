@@ -14,6 +14,16 @@ struct ActorEntries : BlackPS2Classes::UnknownVtable_003DC838 {
     inline unsigned char Count() { return Field_01F5(); }
     void Update(float delta);
     int ResetEntries(int reason);
+    unsigned int Initialize();
+    int Collision(void *event);
+};
+struct ActorStateMachine : BlackPS2Classes::UnknownVtable_003DCC20 {
+    void Event(int event, int unused, unsigned int flags);
+    void Leave();
+    void SampleInput();
+};
+struct ActorState : BlackPS2Classes::UnknownVtable_003DC5F8 {
+    void UpdateState(float delta);
 };
 }
 #endif
