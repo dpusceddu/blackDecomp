@@ -512,6 +512,28 @@ authored class sources with verified PS2 callees, iterator/serialization helpers
 another campaign. Every integration preserved existing source matches; all five retail images remain
 identical. No complete TU was claimed.
 
+### Address study and shared-context continuation
+
+The address census covers all 1,278 SN-assigned short branches: 613 candidate-padded six-word,
+98 seven-word, one five-word and 566 unpadded forms. `tools/loop_positions.py` tests loop start,
+branch, delay and exclusive end positions modulo 8 through 4,096, boundary crossings and distances
+from function, TU and text starts. Accounting for each site's candidate padding, combined linked,
+function and TU residues still mix six/seven forms: eight cells at modulo 64, one at 256 and 512;
+the simple-loop subset retains five, one and one. Function-distance and TU-distance partitions
+also conflict. Larger combinations isolate sites; observed endpoint tuples encode the output
+length, so apparent separation there is not a recovered rule.
+
+Static tracing of SN's loop routine and NOP-emitting callers finds no alignment/cache-line gate.
+The branch expression uses `(target - (current + 4)) / 4`; same-section origins cancel. An unresolved
+expression can skip the test, while separate DIV/SYNC checks use instruction distances. No tested
+position rule explains the corpus, and no production patch is justified. Existing per-unit recipes
+and their weak historical-provenance labels remain. This enabling study adds no source matches.
+
+The resumed campaign uses the new stopping rule: stop below 1,500 text bytes per agent-hour in any
+wave, or after two consecutive throughput declines. The previous one-percent rule is superseded.
+Shared helper recovery precedes the next wave; enabling work is measured separately from campaign
+throughput. Four active queues, including the coordinator, fit the session's concurrency limit.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.

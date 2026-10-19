@@ -334,6 +334,13 @@ Keep alternate assemblers as individually verified unit recipes. The units seria
 `assembler_evidence: {strength: weak, ...}`: historical toolchain provenance is unresolved; full-image
 byte identity remains mandatory. Consistent filtered cohorts are leads, not recovered build flags.
 
+`python3 tools/loop_positions.py` tests linked, function-, TU- and text-relative positions,
+alignment residues and boundary crossings. Six/seven candidates still collide after accounting for
+candidate padding, including combined residues through 512 bytes. Exact linked offsets identify
+individual sites; observed endpoints encode the resulting length. Neither establishes an assembler
+rule. Static tracing finds a section-relative displacement check, without an alignment/cache-line
+gate. Keep the independently verified recipes; no position-based derivative is justified.
+
 **Regrouping** (`tools/regroup.py`). `merge` makes one unit of the adjacent source units of a TU (one `src/tu/<address>.c`);
 `merge --sections` makes one unit and one source file (`src/tu/<tu>.c`) of all the source functions of a TU, compiled with
 `-ffunction-sections`: SN 1.36 then writes `.text.<symbol>` per function without changing a code byte, `make_ld.py` renames each section
