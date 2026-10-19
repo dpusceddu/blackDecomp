@@ -46058,11 +46058,6 @@ units:
   - -snas
   - -ffunction-sections
   functions:
-  - addr: '0x383920'
-    symbol: Function_00383920__Q215BlackPS2Classes22UnknownVtable_003DC5F8
-    size: 12
-    status: asm
-    reason: extra
   - addr: '0x149158'
     symbol: Function_00149158__Q215BlackPS2Classes22UnknownVtable_003DC838Uc
     size: 28
@@ -47792,8 +47787,6 @@ units:
     status: asm
   - addr: '0x13c528'
     status: asm
-  - addr: '0x383920'
-    status: asm
 - name: context_graph_pathfinder
   source: src/campaign/graph_pathfinder.cpp
   origin: kynapse
@@ -48018,3 +48011,15 @@ units:
     status: asm
   - addr: '0x13ec38'
     status: asm
+- name: auto_game_181ff0
+  source: src/auto/game/181ff0.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x181ff0'
+    symbol: func_00181FF0
+    size: 132
+    status: source
