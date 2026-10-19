@@ -6,9 +6,9 @@ int BlackPS2Classes::Kaim_CPointMapper::Function_0038E768(void *config) {
 }
 
 #if 0
-#include "kynapse/point_mapper.hpp"
 
 // Unmatched: allocator lifetimes and saved-register allocation.
+#include "campaign/graph/tables.hpp"
 struct RegisteredClass { const char *name; PointContainer *(*create)(); };
 extern "C" RegisteredClass *func_0038B150(const char *);
 extern const char D_00405B48[], D_00405B58[];
@@ -21,16 +21,16 @@ int PointMapper::Build(ChildBuffers *config) {
     for (i = 0;i<config->count;++i)
         if (!func_00360838(func_002E3920(func_002E33E0(config, i)), D_00405B48))++this->count;
     if (!this->count) return 1;
-    this->names = (char **) Allocate(this->count*4);
-    this->pointCounts = (unsigned int *) Allocate(this->count*4);
-    this->cells = (unsigned int ***) Allocate(this->count*4);
+    this->names = new char *[this->count];
+    this->pointCounts = new unsigned int[this->count];
+    this->cells = new unsigned int **[this->count];
     for (i = 0;i<this->count;++i) {
         this->pointCounts[i] = 0;
         this->names[i] = 0;
-        this->cells[i] = (unsigned int **) Allocate(this->count*4);
+        this->cells[i] = new unsigned int *[this->count];
         for (j = 0;j<this->count;++j) this->cells[i][j] = 0;
     }
-    PointContainer **containers = (PointContainer **) Allocate(this->count*4);
+    PointContainer **containers = new PointContainer *[this->count];
     unsigned int made = 0;
     for (i = 0;i<config->count;++i) {
         ChildBuffers *child = func_002E33E0(config, i);
@@ -52,7 +52,7 @@ int PointMapper::Build(ChildBuffers *config) {
             return 0;
         }
         const char *name = child->first;
-        this->names[made] = (char *) Allocate(func_0035CCD8(name)+1);
+        this->names[made] = new char[func_0035CCD8(name)+1];
         func_0035CBC0(this->names[made], name);
         ++made;
     }
@@ -62,7 +62,7 @@ int PointMapper::Build(ChildBuffers *config) {
         for (j = 0;j<this->count;++j) {
             if (i == j) continue;
             PointContainer *to = containers[j];
-            this->cells[i][j] = (unsigned int *) Allocate(from->Count()*4);
+            this->cells[i][j] = new unsigned int[from->Count()];
             for (k = 0;k<from->Count();++k) this->cells[i][j][k] = this->FindTarget(from, to, from->Get(k));
         }
     }
@@ -71,6 +71,7 @@ int PointMapper::Build(ChildBuffers *config) {
     return 1;
 }
 // Unmatched: stream failure-branch layout and saved-register allocation.
+#include "kynapse/point_mapper.hpp"
 extern const char D_00405B68[], D_00405B98[];
 extern const unsigned int D_00405BB4;
 int PointMapper::Save(const void *path) {
@@ -105,6 +106,8 @@ int PointMapper::Save(const void *path) {
     return 0;
 }
 // Unmatched: stream-loader stack lifetimes and scheduling.
+#include "campaign/graph/tables.hpp"
+extern "C" int LoadSmall(PointMapper *, const void *, int) __asm__("func_002DBCE0");
 extern const char D_00405B98[];
 int PointMapper::Load(const void *resource) {
  unsigned int i,j,k;
@@ -120,14 +123,14 @@ int PointMapper::Load(const void *resource) {
     if (files->Read(resource, &version, 4) != 4) goto fail;
     header[length] = 0;
     if (func_00360838(D_00405B98, header)) goto fail;
-    if (version == 1) return func_002DBCE0(this, resource);
+    if (version == 1) return LoadSmall(this, resource, 1);
     if (version != 2) goto fail;
     if (files->Read(resource, &this->count, 4) != 4) goto fail;
     if (this->count) {
-        this->pointCounts = (unsigned int *) Allocate(this->count*4);
+        this->pointCounts = new unsigned int[this->count];
         for (i = 0;i<this->count;++i)
             if (files->Read(resource, &this->pointCounts[i], 4) != 4) goto fail;
-        this->names = (char **) Allocate(this->count*4);
+        this->names = new char *[this->count];
         for (i = 0;i<this->count;++i) {
             char text[0x400];
             unsigned int length = 0;
@@ -136,16 +139,16 @@ int PointMapper::Load(const void *resource) {
                 if (files->Read(resource, text+length, 1) != 1) goto fail;
             }
             while (text[length++] != 0);
-            this->names[i] = (char *) Allocate(length);
+            this->names[i] = new char[length];
             func_0035CBC0(this->names[i], text);
         }
-        this->cells = (unsigned int ***) Allocate(this->count*4);
+        this->cells = new unsigned int **[this->count];
         for (i = 0;i<this->count;++i) {
-            this->cells[i] = (unsigned int **) Allocate(this->count*4);
+            this->cells[i] = new unsigned int *[this->count];
             for (j = 0;j<this->count;++j) {
                 if (i == j) this->cells[i][j] = 0;
                 else {
-                    this->cells[i][j] = (unsigned int *) Allocate(this->pointCounts[i]*4);
+                    this->cells[i][j] = new unsigned int[this->pointCounts[i]];
                     for (k = 0;k<this->pointCounts[i];++k)
                         if (files->Read(resource, &this->cells[i][j][k], 4) != 4) goto fail;
                 }

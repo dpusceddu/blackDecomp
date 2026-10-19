@@ -128,7 +128,7 @@ int Kaim::CPathCostData::Build()
         if (lengths[i] < 0)
             table[i] = 0xff;
         else
-            table[i] = (unsigned char)(long)(lengths[i] * scale);
+            table[i] = (unsigned char)(lengths[i] * scale);
     }
     if (lengths)
         D_003C87E0(lengths);
