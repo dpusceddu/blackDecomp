@@ -14,6 +14,8 @@ struct ActorEntries : BlackPS2Classes::UnknownVtable_003DC838 {
     inline unsigned char Count() { return Field_01F5(); }
     void Update(float delta);
     void ResetEntries(int reason);
+    bool GetCommandState();
+    void Command(unsigned int message);
     unsigned int Initialize();
     int Collision(void *event);
 };
