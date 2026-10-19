@@ -14,8 +14,9 @@ struct Child : ChildData {
     virtual void V0();
     virtual void V1();
     virtual void Update();
-    virtual void V3();
-    virtual void V4();
+    virtual int V3();
+    virtual void V4(BlackGame::PositionArg, BlackGame::PositionArg, float,
+            unsigned char, signed char, float, long);
     virtual void Target(BlackGame::PositionArg, BlackGame::PositionArg, float, long);
     virtual bool Available();
     virtual void Activate();
@@ -35,6 +36,9 @@ public:
     int Choose(int);
     void SetTarget(BlackGame::PositionArg, BlackGame::PositionArg, float, long);
     int Enable();
+    int Clear();
+    void Configure(BlackGame::PositionArg, BlackGame::PositionArg, float,
+            unsigned char, signed char, float, long);
 };
 }
 #endif

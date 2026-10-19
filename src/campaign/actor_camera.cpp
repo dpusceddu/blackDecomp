@@ -5,6 +5,7 @@ namespace CampaignActor {
 extern "C" {
 extern void *D_0040F508;
 void func_0011D158(void *, CameraController *);
+void func_0013EE28(CameraController *);
 }
 
 void CameraController::Update()
@@ -53,5 +54,26 @@ void CameraController::SetTarget(BlackGame::PositionArg a, BlackGame::PositionAr
 {
     Child *child = GetChild();
     if (child) child->Target(a, b, time, kind);
+}
+
+int CameraController::Clear()
+{
+    Child **child = &ChildAt(0);
+    int count = 8;
+    do {
+        count--;
+        (*child++)->V3();
+    } while (count >= 0);
+    Current() = -1;
+    func_0013EE28(this);
+    return 1;
+}
+
+void CameraController::Configure(BlackGame::PositionArg a, BlackGame::PositionArg b,
+        float firstTime, unsigned char firstFlag, signed char secondFlag,
+        float secondTime, long data)
+{
+    Child *child = GetChild();
+    if (child) child->V4(a, b, firstTime, firstFlag, secondFlag, secondTime, data);
 }
 }
