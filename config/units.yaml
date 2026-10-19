@@ -47348,3 +47348,108 @@ units:
     symbol: Dispatch__Q216BlackPS2Campaign12ActorFanout3i
     size: 132
     status: source
+- name: context_wave3_graphics_input
+  source: src/campaign/graphics_input_pending.cpp
+  origin: 'C++ shared-context campaign: input controller; partial PS2 layout'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26bd30'
+    symbol: UpdateMotors__Q216CampaignGraphics10Controller
+    status: asm
+    reason: claim
+    size: 308
+  - addr: '0x26baf8'
+    size: 160
+    symbol: func_0026BAF8
+    status: asm
+    reason: claim
+  - addr: '0x26bb98'
+    size: 36
+    symbol: func_0026BB98
+    status: asm
+    reason: claim
+  - addr: '0x26bcf8'
+    size: 48
+    symbol: func_0026BCF8
+    status: asm
+    reason: claim
+  - addr: '0x26bf60'
+    size: 144
+    symbol: func_0026BF60
+    status: asm
+    reason: claim
+  - addr: '0x26c798'
+    size: 312
+    symbol: func_0026C798
+    status: asm
+    reason: claim
+  - addr: '0x26c8e0'
+    size: 224
+    symbol: func_0026C8E0
+    status: asm
+    reason: claim
+  - addr: '0x26ca98'
+    size: 156
+    symbol: func_0026CA98
+    status: asm
+    reason: claim
+  - addr: '0x26cb38'
+    size: 112
+    symbol: func_0026CB38
+    status: asm
+    reason: claim
+  - addr: '0x26cba8'
+    size: 376
+    symbol: func_0026CBA8
+    status: asm
+    reason: claim
+- name: context_graphics_controller_update
+  source: src/campaign/graphics_controller_update.cpp
+  origin: 'C++ shared-context campaign: input controller; PS2-verified accessed fields'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26c100'
+    symbol: Update__Q216CampaignGraphics10Controller
+    status: source
+    size: 1684
+- name: context_graphics_input_access
+  source: src/campaign/graphics_input_access.cpp
+  origin: C++ input layout and virtual-slot recovery
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26bc30'
+    size: 28
+    symbol: Button__CQ216CampaignGraphics10ControllerUi
+    status: source
+  - addr: '0x26bbc0'
+    size: 52
+    symbol: Pressed__CQ216CampaignGraphics10ControllerUi
+    status: source
+  - addr: '0x26bbf8'
+    size: 52
+    symbol: Released__CQ216CampaignGraphics10ControllerUi
+    status: source
+  - addr: '0x26c9c0'
+    size: 32
+    symbol: GetState__Q216CampaignGraphics10PadBackendUi
+    status: source
+  - addr: '0x26c9e0'
+    size: 32
+    symbol: GetHandle__Q216CampaignGraphics10PadBackendUi
+    status: source
+  - addr: '0x26ca20'
+    size: 120
+    symbol: SetFeedback__Q216CampaignGraphics10PadBackendi
+    status: source
