@@ -47197,3 +47197,62 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: context_behaviors_wander
+  source: src/context/behaviors_wander.cpp
+  origin: kynapse
+  owner: context-wave3-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d7260'
+    size: 168
+    status: source
+    symbol: func_002D7260
+  - addr: '0x2d7308'
+    size: 404
+    status: source
+    symbol: Update__Q24Kaim11WanderAgent
+  - addr: '0x2d7500'
+    size: 88
+    status: source
+    symbol: func_002D7500
+  - addr: '0x2d75b0'
+    size: 224
+    status: source
+    symbol: func_002D75B0
+  - addr: '0x2d7748'
+    size: 84
+    status: source
+    symbol: func_002D7748
+  - addr: '0x2d77a0'
+    size: 156
+    status: asm
+    reason: registers
+    symbol: func_002D77A0
+  - addr: '0x2d7840'
+    size: 236
+    status: source
+    symbol: func_002D7840
+  externs:
+    ClearActivation__Q24Kaim10ActionBank: '0x2dfbf8'
+    GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
+    GetValue__CQ24Kaim12ChildBuffers: '0x2e3918'
+    _4Kaim$gLookupClass: '0x450fd8'
+    _4Kaim$gTypeRegistryClass: '0x452158'
+    _4Kaim$gWanderEngine: '0x3c9ed4'
+    __Q24Kaim10ZeroedBase: '0x2e7360'
+    __Q24Kaim8BehaviorPQ24Kaim15BehaviorContext: '0x2dff10'
+    __throw: '0x292b40'
+    _stricmp: '0x360838'
+    _vt$Q24Kaim11FollowQuery: '0x3e2ab8'
+    _vt$Q24Kaim11WanderAgent: '0x3e3bb0'
+    _vt$Q24Kaim8PolyRoot: '0x3e0040'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    gKaimFree: '0x3c87e0'
+    terminate__Fv: '0x36f978'
