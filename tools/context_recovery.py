@@ -15,7 +15,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 8
+VERSION = 9
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -29,6 +29,9 @@ SCALARS = {'void': 'void', 'bool': 'u8', 'char': 's8', 'signed char': 's8', 'uns
            'dword': 'u32', 'undefined1': 'u8', 'undefined2': 'u16', 'undefined4': 'u32',
            'undefined8': 'u64', 'qword': 'u64', 'longlong': 's64', 'ulonglong': 'u64'}
 SCALARS.update({'M2C_UNK': 's32', 'M2C_UNK8': 's8', 'M2C_UNK16': 's16', 'M2C_UNK32': 's32', 'M2C_UNK64': 's64'})
+SCALARS.update({'signed short': 's16', 'signed short int': 's16', 'signed': 's32',
+                'signed int': 's32', 'signed long': 's64', 'signed long int': 's64',
+                'signed long long': 's128'})
 for _t in ('s8', 'u8', 's16', 'u16', 's32', 'u32', 's64', 'u64', 's128', 'u128', 'f32', 'f64'):
     SCALARS[_t] = _t
 WIDTH = {'s8': 1, 'u8': 1, 's16': 2, 'u16': 2, 's32': 4, 'u32': 4, 's64': 8, 'u64': 8,
@@ -53,31 +56,149 @@ def split_params(text):
     return [] if out == [''] or out == ['void'] else out
 
 
-def normalize_type(text, ghidra=False):
+def type_spelling(text):
     text = re.sub(r'\b(const|volatile|register|extern|static|inline|virtual|__inline__|__stdcall|__cdecl|__thiscall|__fastcall)\b', '', text)
-    text = ' '.join(text.split()).strip()
-    if text in POINTER_ALIASES:
+    return ' '.join(text.split()).strip()
+
+
+def strip_attributes(text):
+    """Remove balanced GNU attributes without dropping their ABI-relevant mode."""
+    attrs = []
+    while match := re.search(r'\b__attribute__\s*\(', text):
+        end, depth = match.end(), 1
+        while end < len(text) and depth:
+            depth += text[end] == '('
+            depth -= text[end] == ')'
+            end += 1
+        if depth:
+            break
+        attrs.append(text[match.start():end])
+        text = text[:match.start()] + text[end:]
+    return text, ' '.join(attrs)
+
+
+def lexical_type_scopes(text):
+    """Named type scopes and direct declaration depth; function-local aliases stay local."""
+    mask = re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'',
+                  lambda m: ''.join('\n' if c == '\n' else ' ' for c in m.group()), text)
+    stack, ends, depths = [], {}, []
+    for pos, char in enumerate(mask):
+        depths.append(len(stack))
+        if char == '{':
+            stack.append(pos)
+        elif char == '}' and stack:
+            ends[stack.pop()] = pos
+    scopes = []
+    pattern = r'\b(namespace|class|struct)\s+(\w+(?:::\w+)*)?\s*(?:final\s*)?(?::[^;{]+)?\{'
+    for match in re.finditer(pattern, mask):
+        if re.search(r'\benum\s*$', mask[max(0, match.start()-30):match.start()]):
+            continue
+        opening = match.end()-1
+        if opening in ends:
+            scopes.append((opening, ends[opening], tuple((match.group(2) or '').split('::')) if match.group(2) else ()))
+    # Linkage braces are transparent to lookup, unlike function/initializer braces.
+    for match in re.finditer(r'\bextern\s+"C"\s*\{', text):
+        opening = match.end()-1
+        if opening in ends:
+            scopes.append((opening, ends[opening], ()))
+    scopes.sort()
+    return scopes, depths
+
+
+def scope_at(scopes, pos):
+    return tuple(name for begin, end, names in scopes if begin < pos < end for name in names)
+
+
+class ScopedAliases:
+    """Conservative scalar typedef lookup within one TU's quoted-header context.
+
+    Names such as Value are never assigned a global width. Only a visible typedef/using
+    chain to a known target scalar proves it; conflicts and unsupported aliases stay unknown.
+    This is not a preprocessor or a complete C++ parser.
+    """
+    def __init__(self, texts=()):
+        self.aliases = collections.defaultdict(set)
+        for text in texts:
+            self.add_text(text)
+
+    def add_text(self, text):
+        text = COMMENT.sub('', text)
+        scopes, depths = lexical_type_scopes(text)
+        declarations = re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'',
+                              lambda m: ' ' * len(m.group()), text)
+        pattern = r'\b(typedef)\s+([^;{}]+);|\b(using)\s+([^;{}]+);'
+        for match in re.finditer(pattern, declarations):
+            containing = [s for s in scopes if s[0] < match.start() < s[1]]
+            if depths[match.start()] != len(containing):
+                continue
+            scope = scope_at(scopes, match.start())
+            raw = match.group(2) or match.group(4)
+            plain, attrs = strip_attributes(raw)
+            mode = re.search(r'\bmode\s*\(\s*(__)?([A-Z]+)(__)?\s*\)', attrs)
+            mode = mode.group(2) if mode else None
+            if match.group(1):
+                declaration = re.fullmatch(r'\s*(.*?)\s+([A-Za-z_]\w*)\s*', plain, re.S)
+                if not declaration:
+                    continue
+                target, name = declaration.groups()
+            else:
+                declaration = re.fullmatch(r'\s*([A-Za-z_]\w*)\s*=\s*(.*?)\s*', plain, re.S)
+                if declaration:
+                    name, target = declaration.groups()
+                elif re.fullmatch(r'\s*(?:::)?\w+(?:::\w+)+\s*', plain):
+                    target = plain.strip()
+                    name = target.rsplit('::', 1)[-1]
+                else:
+                    continue  # using namespace/template/function imports need richer lookup.
+            self.aliases[scope + (name,)].add((type_spelling(target), scope, mode))
+
+    def scalar(self, text, scope=(), seen=frozenset()):
+        text = type_spelling(text)
+        absolute = text.startswith('::')
+        parts = tuple(text.lstrip(':').split('::'))
+        prefixes = [()] if absolute else [scope[:n] for n in range(len(scope), -1, -1)]
+        for prefix in prefixes:
+            key = prefix + parts
+            if key not in self.aliases:
+                continue
+            if key in seen:
+                return 'unknown'
+            resolved = set()
+            for target, origin, mode in self.aliases[key]:
+                value = self.scalar(target, origin, seen | {key})
+                if mode:
+                    bits = {'QI': 8, 'HI': 16, 'SI': 32, 'DI': 64, 'TI': 128}.get(mode)
+                    value = value[0] + str(bits) if bits and re.fullmatch(r'[su]\d+', value) else 'unknown'
+                resolved.add(value)
+            return next(iter(resolved)) if len(resolved) == 1 else 'unknown'
+        return SCALARS.get(text, 'unknown')
+
+
+def normalize_type(text, ghidra=False, aliases=None, scope=()):
+    text = type_spelling(text)
+    scalar_type = lambda name: aliases.scalar(name, scope) if aliases else SCALARS.get(name, 'unknown')
+    if text in POINTER_ALIASES and scalar_type(text) == 'unknown':
         return 'void *', None
     if '(*' in text or '[' in text or '&' in text or '*' in text:
         base = re.sub(r'\b(struct|class)\s+', '', text).split('*')[0].split('&')[0].strip()
-        cls = base if re.fullmatch(r'[A-Za-z_]\w*', base) and base not in SCALARS and base != 'void' else None
-        scalar = SCALARS.get(base)
-        return (scalar + ' ' + '*' * max(1, text.count('*')) if scalar and scalar != 'void' else 'void *'), cls
+        scalar = scalar_type(base)
+        cls = base if re.fullmatch(r'[A-Za-z_]\w*(?:::\w+)*', base) and scalar == 'unknown' else None
+        return (scalar + ' ' + '*' * max(1, text.count('*')) if scalar not in ('unknown', 'void') else 'void *'), cls
     # Ghidra's data model is not SN's spelling: undefined8/longlong are eight bytes.
-    return SCALARS.get(text, 'unknown'), None
+    return scalar_type(text), None
 
 
-def param_type(text):
+def param_type(text, aliases=None, scope=()):
     text = text.split('=')[0].strip()
     if text == '...':
         return '...', None
     if re.search(r'\(\s*\*', text):
         return 'void *', None
     # A lone known type or Foo* is an unnamed parameter, not a name to strip.
-    if text in SCALARS or text in POINTER_ALIASES or text.endswith(('*', '&')):
-        return normalize_type(text)
+    if text in SCALARS or text in POINTER_ALIASES or text.endswith(('*', '&')) or (aliases and aliases.scalar(text, scope) != 'unknown'):
+        return normalize_type(text, aliases=aliases, scope=scope)
     text = re.sub(r'\b[A-Za-z_]\w*\s*(\[[^]]*\])?$', lambda m: '*' if m.group(1) else '', text)
-    return normalize_type(text)
+    return normalize_type(text, aliases=aliases, scope=scope)
 
 
 def lexical_class_scopes(text):
@@ -102,13 +223,15 @@ def lexical_class_scopes(text):
     return scopes, depths
 
 
-def parse_declarations(text):
+def parse_declarations(text, aliases=None):
     """Find C/C++ signatures and function bodies without requiring a modern C++ parser.
 
     Unsupported declarators are retained as unknown instead of guessed as int. GNU asm aliases
     and the *_FUNCTION(address) aliases used by PS2 headers are recognized before preprocessing.
     """
     text = COMMENT.sub('', text)
+    aliases = aliases or ScopedAliases([text])
+    type_scopes, _ = lexical_type_scopes(text)
     scopes, depths = lexical_class_scopes(text)
     pattern = re.compile(r'(?:^|[;{}\n])\s*([^;{}#\n]*?)(?<!\w)(~?[A-Za-z_]\w*(?:::[~A-Za-z_]\w*)*)\s*\(', re.M)
     result = []
@@ -146,8 +269,13 @@ def parse_declarations(text):
         ctor = cls and short.lstrip('~') == cls.split('::')[-1]
         if not left and not ctor:
             continue
-        ret, retclass = ('void *', cls) if ctor and not short.startswith('~') else (('void', None) if ctor else normalize_type(left))
-        ps = [param_type(p) for p in split_params(params)]
+        type_scope = scope_at(type_scopes, m.start(2))
+        if qualification:
+            parts = tuple(qualification.split('::'))
+            if type_scope[-len(parts):] != parts:
+                type_scope = parts if parts[:len(type_scope)] == type_scope else type_scope + parts
+        ret, retclass = ('void *', cls) if ctor and not short.startswith('~') else (('void', None) if ctor else normalize_type(left, aliases=aliases, scope=type_scope))
+        ps = [param_type(p, aliases=aliases, scope=type_scope) for p in split_params(params)]
         implicit_this = bool(cls and 'static' not in left.split() and (cls.split('::')[-1], short) not in STATIC_METHODS)
         if implicit_this:
             ps = [('void *', cls)] + ps
@@ -191,7 +319,7 @@ def demangle_method(symbol):
 
 def source_seeds(root=ROOT, matched_only=False):
     from units import load_units, dependencies
-    seeds, evidence, parsed, definitions = {}, [], {}, {}
+    seeds, evidence, parsed, texts = {}, [], {}, {}
     units = load_units(root / 'config/units.yaml', variant='usa-retail')
     for p in (root / 'include').rglob('*'):
         if p.suffix in ('.h', '.hpp') and 'recovered' not in p.parts:
@@ -208,18 +336,23 @@ def source_seeds(root=ROOT, matched_only=False):
             POINTER_ALIASES.update(re.findall(r'typedef\s+[^;]+?\(\s*\*\s*(\w+)\s*\)', text, re.S))
             POINTER_ALIASES.update(re.findall(r'typedef\s+[^;()]+?\*\s*(\w+)\s*;', text))
     for u in units:
-        for p in dependencies(u['source']):
-            if str(p) not in parsed:
-                parsed[str(p)] = parse_declarations((root / p).read_text())
-    for path, decls in parsed.items():
-        for d in decls:
-            if d['body']:
-                definitions.setdefault(d['name'], []).append((path, d))
-    for u in units:
         paths = [str(p) for p in dependencies(u['source'])]
-        decls = [(p, d) for p in paths for d in parsed[p]]
+        for path in paths:
+            if path not in texts:
+                texts[path] = (root / path).read_text()
+        scoped_aliases = ScopedAliases(texts[p] for p in paths)
+        context = frozenset((name, frozenset(values)) for name, values in scoped_aliases.aliases.items())
+        decls = []
+        for path in paths:
+            key = path, context
+            if key not in parsed:
+                parsed[key] = parse_declarations(texts[path], aliases=scoped_aliases)
+            decls.extend((path, d) for d in parsed[key])
         aliases = {d['address']: d['name'] for _, d in decls if d['address']}
-        targets = [(f['addr'], f['symbol'], f.get('status') == 'source') for f in u['functions']]
+        # An ASM claim may have only an address until its owner recovers a signature.
+        # Its numeric symbol can still resolve a declaration, without proving source status.
+        targets = [(f['addr'], f.get('symbol') or 'func_%08X' % f['addr'],
+                    f.get('status') == 'source') for f in u['functions']]
         targets += [(addr, sym, False) for sym, addr in u['externs'].items()]
         targets += [(d['address'], d['name'], False) for _, d in decls if d['address']]
         for addr, symbol, matched in targets:
