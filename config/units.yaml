@@ -45962,3 +45962,16 @@ units:
     symbol: Function_002E7008__Q215BlackPS2Classes20Kaim_CBasicAllocatori
     size: 32
     status: source
+- name: campaign_actor_entries
+  source: src/campaign/actor_entries.cpp
+  origin: 'C++ campaign: actor virtual table 0x3dc838; class identity unresolved'
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x145240'
+    symbol: Update__Q216BlackPS2Campaign12ActorEntriesf
+    size: 448
+    status: source
