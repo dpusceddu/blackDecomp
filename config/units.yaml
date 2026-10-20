@@ -50083,21 +50083,6 @@ units:
     size: 316
     status: asm
     reason: claimed
-- name: campaign_game_path_289ae0
-  source: src/campaign/graphics_game_path_289ae0.cpp
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x289ae0'
-    symbol: func_00289AE0
-    size: 304
-    status: asm
-    reason: claimed
 - name: campaign_actor_bbc8_wave6
   source: src/campaign/actor_bbc8_wave6.cpp
   origin: C++ actor vtable0x3DBBC8 command cluster
@@ -50989,3 +50974,33 @@ units:
   externs:
     Clear__Q29BlackGame11ActionTimer: '0x173690'
     UpdateDestinationDistances__Q29BlackGame16MovementModeBase: '0x191a28'
+- name: campaign_gamepath_289ae0
+  source: src/campaign/graphics_game_path_289ae0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x289ae0'
+    size: 304
+    symbol: UpdateUse__Q211GamePathPS210PathObjectPQ211GamePathPS29PathAgentPQ211GamePathPS29RouteNodeiPUc
+    status: asm
+    reason: unmatched vector/index context
+- name: campaign_gamepath_289c10
+  source: src/campaign/graphics_game_path_289c10.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x289c10'
+    size: 404
+    symbol: func_00289C10
+    status: asm
+    reason: unmatched vector/index context
