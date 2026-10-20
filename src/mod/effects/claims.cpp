@@ -16,3 +16,9 @@
 // Unmatched: 0x1b2710 record updates need the original visibility and matrix helpers.
 // Unmatched: 0x1b2910 record release differs in saved-register and pointer lifetimes.
 // Unmatched: 0x1b2988 record removal needs the original iterator branch shape.
+// Unmatched: 0x1b2e08 decal placement needs the original lighting and matrix helpers.
+// Unmatched: 0x1b3420 inverse actor transforms still differ in lane and temporary lifetimes.
+// Unmatched: 0x1b3590 inverse bone transforms still differ in lane and temporary lifetimes.
+// Unmatched: 0x1b3818 slot transfer differs in packed minimum and copy scheduling.
+// Unmatched: 0x1b3ae8 allocation still hoists its object column differently.
+// Unmatched: 0x1b3bd0 eviction needs the original vector transform and callback lifetimes.
