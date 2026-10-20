@@ -456,17 +456,23 @@ def write_context_arity(inv):
 def run_m2c(fns, options=(), ctx='ctx.c'):
     """Decompile `fns` in one m2c process. Returns {name: dict(c=..., sig=..., decls={}, error=...)}."""
     import m2c_input
-    paths, flags = [], {}
+    paths, flags, rejected = [], {}, {}
     prep_dir = AUTO / 'prep'
     prep_dir.mkdir(exist_ok=True)
     for f in fns:
-        text, flags[f['name']] = m2c_input.prepare((BUILD / 's/text' / (f['name'] + '.s')).read_text())
+        try:
+            text, flags[f['name']] = m2c_input.prepare((BUILD / 's/text' / (f['name'] + '.s')).read_text())
+        except ValueError as error:
+            rejected[f['name']] = dict(error='ee-instruction: ' + str(error), decls={})
+            continue
         (prep_dir / (f['name'] + '.s')).write_text(text)
         paths.append(str(prep_dir / (f['name'] + '.s')))
         if f['lit4']:
             lit = prep_dir / (f['name'] + '.lit4.s')
             lit.write_text(m2c_input.normalize_sections((BUILD / 's/text' / (f['name'] + '.lit4.s')).read_text()))
             paths.append(str(lit))
+    if not paths:
+        return rejected
     cmd = [sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--valid-syntax', '--context', str(AUTO / ctx), '--no-cache'] + list(options) + paths
     timeout = float(os.environ.get('AUTODECOMP_M2C_TIMEOUT', '180'))
     try:
@@ -487,6 +493,7 @@ def run_m2c(fns, options=(), ctx='ctx.c'):
     if r.returncode and not any(FUNC_START.match(line) for line in r.stdout.splitlines()) and not FAIL.search(r.stdout):
         raise SystemExit('m2c failed before analyzing the batch; stopping instead of hiding an input failure.\n' + (r.stdout + r.stderr)[-2500:])
     out = split_m2c(r.stdout + ('\n/* STDERR %s */' % r.stderr if r.returncode else ''), fns)
+    out.update(rejected)
     STATS['m2c_body_functions'] += sum('body' in row for row in out.values())
     STATS['m2c_function_failures'] += sum(bool(row.get('error')) for row in out.values())
     for name, fl in flags.items():
