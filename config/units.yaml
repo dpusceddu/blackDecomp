@@ -49079,22 +49079,6 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_actor_c920_wave5
-  source: src/campaign/actor_c920_wave5.cpp
-  origin: C++ actor vtable0x3DC920 spatial-provider cluster
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  - -mvu0-use-vf0-vf16
-  functions:
-  - addr: '0x127ac8'
-    status: asm
-    size: 552
-  - addr: '0x127cf0'
-    status: asm
-    size: 792
 - name: campaign_graphics_frontend_104210_wave5
   source: src/campaign/graphics_frontend_104210.cpp
   origin: game
@@ -51857,3 +51841,259 @@ units:
     size: 316
     status: source
     symbol: func_0034F080
+- name: mod_camera_w2_tu_1409c0
+  source: src/mod/camera/w2_1409c0.cpp
+  origin: game
+  owner: mod-camera
+  claim: mod-wave2-camera
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x1409c0'
+    size: 124
+    symbol: Select__Q29ModCamera12AimSelectionPCQ29ModCamera12AimCandidate
+    status: source
+  externs:
+    D_0040F4D0: '0x40f4d0'
+    func_00135550: '0x135550'
+- name: mod_camera_w2_tu_127118
+  source: src/mod/camera/w2_127118.cpp
+  origin: game
+  owner: mod-camera
+  claim: mod-wave2-camera
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x127118'
+    size: 1076
+    symbol: func_00127118
+    status: asm
+    reason: claimed
+  - addr: '0x127550'
+    size: 356
+    symbol: func_00127550
+    status: asm
+    reason: claimed
+  - addr: '0x127738'
+    size: 104
+    symbol: func_00127738
+    status: asm
+    reason: claimed
+  - addr: '0x1277a0'
+    size: 668
+    symbol: func_001277A0
+    status: asm
+    reason: claimed
+  - addr: '0x127ac8'
+    status: asm
+    size: 552
+  - addr: '0x127cf0'
+    status: asm
+    size: 792
+  - addr: '0x128008'
+    size: 280
+    symbol: func_00128008
+    status: asm
+    reason: claimed
+  - addr: '0x128120'
+    size: 400
+    symbol: func_00128120
+    status: asm
+    reason: claimed
+  - addr: '0x1282e0'
+    size: 416
+    symbol: func_001282E0
+    status: asm
+    reason: claimed
+  - addr: '0x128480'
+    size: 3088
+    symbol: func_00128480
+    status: asm
+    reason: claimed
+  - addr: '0x129090'
+    size: 120
+    symbol: func_00129090
+    status: asm
+    reason: claimed
+  - addr: '0x129108'
+    size: 88
+    symbol: func_00129108
+    status: asm
+    reason: claimed
+  - addr: '0x129160'
+    size: 92
+    symbol: func_00129160
+    status: asm
+    reason: claimed
+  - addr: '0x129240'
+    size: 288
+    symbol: func_00129240
+    status: asm
+    reason: claimed
+  - addr: '0x129360'
+    size: 1084
+    symbol: func_00129360
+    status: asm
+    reason: claimed
+  - addr: '0x1297a0'
+    size: 60
+    symbol: func_001297A0
+    status: asm
+    reason: claimed
+  - addr: '0x1297e0'
+    size: 1544
+    symbol: func_001297E0
+    status: asm
+    reason: claimed
+  - addr: '0x129de8'
+    size: 752
+    symbol: func_00129DE8
+    status: asm
+    reason: claimed
+  - addr: '0x12a158'
+    size: 132
+    symbol: func_0012A158
+    status: asm
+    reason: claimed
+  - addr: '0x12a1e0'
+    size: 156
+    symbol: func_0012A1E0
+    status: asm
+    reason: claimed
+  - addr: '0x12a280'
+    size: 140
+    symbol: func_0012A280
+    status: asm
+    reason: claimed
+  - addr: '0x12a310'
+    size: 260
+    symbol: func_0012A310
+    status: asm
+    reason: claimed
+  - addr: '0x12a418'
+    size: 104
+    symbol: func_0012A418
+    status: asm
+    reason: claimed
+  - addr: '0x12a4d8'
+    size: 284
+    symbol: func_0012A4D8
+    status: asm
+    reason: claimed
+  - addr: '0x12a5f8'
+    size: 452
+    symbol: func_0012A5F8
+    status: asm
+    reason: claimed
+  - addr: '0x12a7c0'
+    size: 340
+    symbol: func_0012A7C0
+    status: asm
+    reason: claimed
+  - addr: '0x12a918'
+    size: 480
+    symbol: func_0012A918
+    status: asm
+    reason: claimed
+  - addr: '0x12aaf8'
+    size: 44
+    symbol: func_0012AAF8
+    status: asm
+    reason: claimed
+  - addr: '0x12ab28'
+    size: 100
+    symbol: func_0012AB28
+    status: asm
+    reason: claimed
+  - addr: '0x12ab90'
+    size: 620
+    symbol: func_0012AB90
+    status: asm
+    reason: claimed
+  - addr: '0x12ae00'
+    size: 88
+    symbol: func_0012AE00
+    status: asm
+    reason: claimed
+  - addr: '0x12ae58'
+    size: 644
+    symbol: func_0012AE58
+    status: asm
+    reason: claimed
+  - addr: '0x12b0e0'
+    size: 456
+    symbol: func_0012B0E0
+    status: asm
+    reason: claimed
+  - addr: '0x12b2a8'
+    size: 128
+    symbol: func_0012B2A8
+    status: asm
+    reason: claimed
+  - addr: '0x12b328'
+    size: 288
+    symbol: func_0012B328
+    status: asm
+    reason: claimed
+  - addr: '0x12b448'
+    size: 724
+    symbol: func_0012B448
+    status: asm
+    reason: claimed
+  - addr: '0x12b720'
+    size: 556
+    symbol: func_0012B720
+    status: asm
+    reason: claimed
+  - addr: '0x12b950'
+    size: 524
+    symbol: func_0012B950
+    status: asm
+    reason: claimed
+  - addr: '0x12bb60'
+    size: 568
+    symbol: func_0012BB60
+    status: asm
+    reason: claimed
+  - addr: '0x12bd98'
+    size: 48
+    symbol: func_0012BD98
+    status: asm
+    reason: claimed
+  - addr: '0x12be18'
+    size: 104
+    symbol: func_0012BE18
+    status: asm
+    reason: claimed
+  - addr: '0x12be80'
+    size: 324
+    symbol: func_0012BE80
+    status: asm
+    reason: claimed
+  - addr: '0x12bfc8'
+    size: 284
+    symbol: func_0012BFC8
+    status: asm
+    reason: claimed
+  - addr: '0x12c118'
+    size: 780
+    symbol: func_0012C118
+    status: asm
+    reason: claimed
+  - addr: '0x12c428'
+    size: 552
+    symbol: func_0012C428
+    status: asm
+    reason: claimed

@@ -348,6 +348,21 @@
       "controls": [
         "0x382348"
       ]
+    },
+    {
+      "header": "include/mod/camera/aim.hpp",
+      "api": [
+        "ModCamera::AimSelection",
+        "AimActor",
+        "AimCandidate",
+        "PlayerAim"
+      ],
+      "verified_scope": [
+        "Exact callback verifies actor eligibility3A4, candidate actor18/projection10/perpendicular14, player selected9C/perpendicularA0/projectionA4. Strict less-than rejects unordered comparisons; loading the previous distance first preserves the original FPU order. World matrices, list and original identities remain instruction-only."
+      ],
+      "controls": [
+        "0x1409c0"
+      ]
     }
   ],
   "controls": [
@@ -1034,6 +1049,20 @@
         "second",
         "weight",
         "wrapped"
+      ]
+    },
+    {
+      "address": "0x1409c0",
+      "source_function": "Select",
+      "headers": [
+        "include/mod/camera/aim.hpp"
+      ],
+      "uses": [
+        "actor->eligibility",
+        "player->selected",
+        "float previous=player->perpendicularSquared",
+        "next<previous",
+        "player->projection"
       ]
     }
   ],
