@@ -51639,13 +51639,13 @@ units:
   - -G0
   - -snas
   - -fbyte-bool
+  - -mvu0-use-vf0-vf31
   - -ffunction-sections
   functions:
   - addr: '0x15d370'
     size: 100
     symbol: func_0015D370
-    status: asm
-    reason: claimed
+    status: source
   - addr: '0x15d3e0'
     size: 92
     symbol: func_0015D3E0
@@ -51664,18 +51664,24 @@ units:
   - addr: '0x15d758'
     size: 188
     symbol: func_0015D758
-    status: asm
-    reason: claimed
+    status: source
   - addr: '0x15d818'
     size: 52
     symbol: func_0015D818
-    status: asm
-    reason: claimed
+    status: source
   - addr: '0x15d870'
     size: 228
     symbol: func_0015D870
-    status: asm
-    reason: claimed
+    status: source
+  externs:
+    D_003BCEB8: '0x3bceb8'
+    D_0040F4D0: '0x40f4d0'
+    D_0040F4D4: '0x40f4d4'
+    func_0012AE58: '0x12ae58'
+    func_00159AE8: '0x159ae8'
+    func_0015D3E0: '0x15d3e0'
+    func_0015D620: '0x15d620'
+    func_0016E0C0: '0x16e0c0'
 - name: mod_effects_1b1038
   source: src/mod/effects/lifecycle_1b1038.cpp
   flags:
