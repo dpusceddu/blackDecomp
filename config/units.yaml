@@ -50099,3 +50099,29 @@ units:
     gSlotOwner: '0x3c9ed4'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
+- name: context_graph_meta_entries
+  source: src/campaign/graph_meta_entries.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave5-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  functions:
+  - addr: '0x38f000'
+    size: 400
+    status: source
+    symbol: __Q24Kaimt10CMetaClass2ZQ24Kaim5CTeamZPFUiPCc_PQ24Kaim5CTeamPCcPFUiPCc_PQ24Kaim5CTeamiUcUc
+  - addr: '0x390818'
+    size: 400
+    status: source
+    symbol: __Q24Kaimt10CMetaClass2ZQ24Kaim16UnknownMetaOwnerZPFUiPCc_PQ24Kaim16UnknownMetaOwnerPCcPFUiPCc_PQ24Kaim16UnknownMetaOwneriUcUc
+  externs:
+    _vt$Q24Kaimt10CMetaClass2ZQ24Kaim16UnknownMetaOwnerZPFUiPCc_PQ24Kaim16UnknownMetaOwner: '0x3e00b0'
+    _vt$Q24Kaimt10CMetaClass2ZQ24Kaim5CTeamZPFUiPCc_PQ24Kaim5CTeam: '0x3ebb48'
+    strcmp: '0x35ca74'
+    strcpy: '0x35cbc0'
