@@ -16,8 +16,8 @@ struct PadBackend {
     EeU8 singlePort;
     EeU8 reserved2a1[3];
     int lastMode;
-    void Initialize(bool single);
-    void Poll(); void SetFeedback(int); bool Attach(unsigned,Controller*); void Detach(unsigned,Controller*);
+    void Initialize(EeU8 single);
+    void Poll(); void SetFeedback(int); bool Attach(Controller*,unsigned); void Detach(Controller*,unsigned);
     void PollPort(int port);
     int GetState(unsigned int port);
     int GetHandle(unsigned int port);
