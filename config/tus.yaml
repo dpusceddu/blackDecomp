@@ -19991,8 +19991,8 @@ tus:
   confidence: exact
   evidence: [eh, ctor-list, ctor-end, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 5 of 19 functions
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]
+  flags_basis: matched 10 of 19 functions
   data:
     .data: ['0x3d20d0', '0x3d24c4']
     .bss: ['0x45f0c0', '0x46a510']
