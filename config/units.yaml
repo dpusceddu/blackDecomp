@@ -49568,3 +49568,23 @@ units:
     _vt$Q28KaimText6Script: '0x3e6888'
     gKaimAllocateHook: '0x3c87ec'
     gKaimAllocator: '0x3c87e8'
+- name: context_wave5_sight
+  source: src/context/behaviors_sight.cpp
+  origin: kynapse
+  owner: context-wave5-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d8578'
+    size: 304
+    status: source
+    symbol: InSightCone__9KaimSightPCQ29KaimSight4Vec3PQ29KaimSight5Actor
+  externs:
+    _9KaimSight$gKeyExtent: '0x44ff68'
+    _9KaimSight$gKeyPosition: '0x44fd38'
+    _9KaimSight$gKeyRadius: '0x450828'
+    func_002E4CE0: '0x2e4ce0'
