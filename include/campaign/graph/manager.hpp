@@ -7,11 +7,9 @@
 #include "ps2/kynapse/property.hpp"
 extern "C" char *func_0035D1A0(char*,const char*,unsigned int);
 extern "C" int func_0035E750(const char*);
-extern "C" long func_0035E730(const char*);
-extern "C" long func_00291F58(float);
-extern "C" long func_002914D0(long,long);
-extern "C" float func_00291C68(long);
-extern "C" int func_002ECB80(unsigned int);
+// The matched Configure consumer verifies the native software-double ABI.
+extern "C" double GraphAtof(const char*) __asm__("func_0035E730");
+extern "C" bool func_002ECB80(unsigned int);
 namespace Kaim {
 struct GraphConfig {
  unsigned char unknown00[12]; char *first; unsigned char unknown10[16]; unsigned int count;

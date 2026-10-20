@@ -75,6 +75,60 @@ CGraphManager::CGraphMap *CGraphManager::LoadGraph(const char *name, GraphConfig
 }
 }
 
+namespace Kaim {
+bool CGraphManager::Configure(GraphConfig *config)
+{
+    if (!config)
+        return false;
+    if (!_stricmp(config->GetSecond(), "Graph")) {
+        const char *name = config->first;
+        if (!name)
+            return false;
+        bool update = false;
+        const char *flag = config->FindThirdBySecond("UpdateWithPathObjects");
+        if (flag)
+            update = func_0035E750(flag) != 0;
+        GraphConfig *raw = config->FindBySecond("RawData");
+        if (!raw)
+            return false;
+        CGraphMap *record = LoadGraph(name, raw, update);
+        if (!record)
+            return false;
+        const char *coverage = config->FindThirdBySecond("CoverageDistance");
+        if (coverage) {
+            float distance = (float)(GraphAtof(coverage) * (double)D_003C9ED4->unit);
+            record->graph->coverageDistance = distance;
+        }
+        for (unsigned int i = 0; i < config->count; ++i) {
+            GraphConfig *child = config->GetChild(i);
+            if (!_stricmp(child->GetSecond(), "AdditionalData")) {
+                GraphConfig *type = child->FindBySecond("Class");
+                if (type) {
+                    AdditionalEntry *entry = func_00390CF8(type->GetValue());
+                    if (entry) {
+                        CGraphData *object = entry->create(record->graph);
+                        if (!object->Init((ChildBuffers*)child))
+                            delete object;
+                        else {
+                            record->additional[record->additionalCount] = object;
+                            ++record->additionalCount;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    if (!_stricmp(config->GetSecond(), "AstarMemory")) {
+        func_002ECB80(func_0035E750(config->GetValue()));
+        searchConfigured = true;
+    } else {
+        return BlackPS2::Kynapse::IsPrivateProperty(config);
+    }
+    return true;
+}
+}
+
 #if 0
 namespace Kaim {
 // Unmatched: lookup branch placement and allocation-loop scheduling.
@@ -85,20 +139,6 @@ bool CGraphManager::AddGraph(const char*name,CSpatialGraph *graph,unsigned char 
  items[count]=new CGraphMap(name,graph,update);++count;return true;}return false;
 }
 
-// Unmatched: configuration joins and scalar-local scheduling.
-bool CGraphManager::Configure(GraphConfig*config){
- if(!config)return false;
- if(!_stricmp(config->GetSecond(),"Graph")){
-  const char *name=config->first;if(!name)return false;
-  bool update=false;const char *flag=config->FindThirdBySecond("UpdateWithPathObjects");if(flag)update=func_0035E750(flag)!=0;
-  GraphConfig *raw=config->FindBySecond("RawData");if(!raw)return false;
-  CGraphMap *record=LoadGraph(name,raw,update);if(!record)return false;
-  const char *coverage=config->FindThirdBySecond("CoverageDistance");if(coverage)record->graph->coverageDistance=func_00291C68(func_002914D0(func_0035E730(coverage),func_00291F58(D_003C9ED4->unit)));
-  for(unsigned int i=0;i<config->count;++i){GraphConfig *child=config->GetChild(i);if(!_stricmp(child->GetSecond(),"AdditionalData")){GraphConfig *type=child->FindBySecond("Class");if(type){AdditionalEntry *entry=func_00390CF8(type->GetValue());if(entry){CGraphData *object=entry->create(record->graph);if(!object->Init((ChildBuffers*)child))delete object;else {record->additional[record->additionalCount]=object;++record->additionalCount;}}}}}
-  return true;
- }
- if(!_stricmp(config->GetSecond(),"AstarMemory")){func_002ECB80(func_0035E750(config->GetValue()));searchConfigured=true;return true;}
- return BlackPS2::Kynapse::IsPrivateProperty(config);
-}
+
 }
 #endif
