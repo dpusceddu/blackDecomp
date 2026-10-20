@@ -48410,3 +48410,60 @@ units:
   - _vt$Q216KaimPathRegistry10ObjectRoot
   - _vt$Q216KaimPathRegistry11PathManager
   - _vt$Q216KaimPathRegistry6Record
+- name: context_graph_team
+  source: src/campaign/graph_team.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave4-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - --assembler=sn-min6
+  - -ffunction-sections
+  functions:
+  - addr: '0x2ec1b8'
+    symbol: __Q24Kaim5CTeamUiPCc
+    size: 756
+    status: source
+  - addr: '0x2ec4b0'
+    symbol: func_002EC4B0
+    size: 260
+    status: asm
+    reason: context
+  - addr: '0x2ec5b8'
+    symbol: func_002EC5B8
+    size: 288
+    status: asm
+    reason: context
+  - addr: '0x2ec6d8'
+    symbol: Unregister__Q24Kaim5CTeamPQ24Kaim7CEntity
+    size: 252
+    status: source
+  - addr: '0x2ec7d8'
+    symbol: func_002EC7D8
+    size: 200
+    status: asm
+    reason: context
+  - addr: '0x2ecaa8'
+    symbol: GetIndex__Q24Kaim5CTeam
+    size: 68
+    status: source
+  externs:
+    D_003C87E0: '0x3c87e0'
+    D_003C87E8: '0x3c87e8'
+    D_003C87EC: '0x3c87ec'
+    __throw: '0x292b40'
+    _vt$Q24Kaim5CTeam: '0x3ebae8'
+    _vt$Q24Kaim7CObject: '0x3e0040'
+    _vt$Q24Kaimt8CVarList1ZPQ24Kaim7CEntity: '0x3e8ee8'
+    _vt$Q34Kaimt8CVarList1ZPQ24Kaim5CTeam9CIterator: '0x3e8430'
+    _vt$Q34Kaimt8CVarList1ZPQ24Kaim7CEntity5CCell: '0x3e8ed0'
+    _vt$Q34Kaimt8CVarList1ZPQ24Kaim7CEntity9CIterator: '0x3e0028'
+    terminate__Fv: '0x36f978'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved

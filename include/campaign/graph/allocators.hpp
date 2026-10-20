@@ -40,6 +40,7 @@ template<class T> struct CVarList : CObject {
         }
     }
     virtual ~CVarList() { if(capacity && storage) delete[] storage; }
+    CIterator At(unsigned int i) { if(i<capacity)return CIterator(storage+i);return CIterator(0); }
     void Append(const T &value) {
         CCell *entry=freeHead;
         if(entry) {
