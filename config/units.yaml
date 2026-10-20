@@ -48500,3 +48500,45 @@ units:
   - addr: '0x388dd8'
     size: 56
     status: asm
+- name: campaign_actor_dc750_wave4
+  source: src/campaign/actor_dc750_wave4.cpp
+  origin: C++ actor vtable0x3DC750 cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x14fee0'
+    status: asm
+  - addr: '0x1507e8'
+    status: asm
+  - addr: '0x150b00'
+    status: asm
+  - addr: '0x150d68'
+    status: asm
+  - addr: '0x150f98'
+    status: asm
+  - addr: '0x151288'
+    status: asm
+  - addr: '0x1513a8'
+    status: asm
+  - addr: '0x1515f8'
+    status: asm
+  - addr: '0x1517e0'
+    status: asm
+  - addr: '0x151e80'
+    status: asm
+  - addr: '0x152000'
+    status: asm
+  - addr: '0x1520e0'
+    status: source
+    size: 40
+    symbol: StateBounds__Q213CampaignActor9PropState
+  - addr: '0x152698'
+    status: asm
+  - addr: '0x152728'
+    status: source
+    size: 332
+    symbol: Contact__Q213CampaignActor9PropStatePCQ213CampaignActor11ContactData
