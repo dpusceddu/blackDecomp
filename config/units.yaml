@@ -46182,18 +46182,6 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   functions:
-  - addr: '0x2fda40'
-    symbol: func_002FDA40
-    size: 360
-    status: asm
-  - addr: '0x2fdf40'
-    symbol: func_002FDF40
-    size: 1072
-    status: asm
-  - addr: '0x2fe370'
-    symbol: func_002FE370
-    size: 508
-    status: asm
   - addr: '0x2feb08'
     symbol: _$_Q24Kaim10CAstarData
     size: 196
@@ -48811,3 +48799,54 @@ units:
     __throw: '0x292b40'
     _vt$Q212KaimPathData10ObjectRoot: '0x3e0040'
     _vt$Q212KaimPathData8ScriptWP: '0x3e6758'
+- name: context_graph_astar
+  source: src/campaign/graph_astar_context.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave4-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  functions:
+  - addr: '0x2fd998'
+    symbol: CreateAstarData__FPQ24Kaim11SearchGraph
+    size: 168
+    status: source
+  - addr: '0x2fda40'
+    symbol: func_002FDA40
+    size: 360
+    status: asm
+    reason: context
+  - addr: '0x2fdba8'
+    symbol: func_002FDBA8
+    size: 476
+    status: asm
+    reason: context
+  - addr: '0x2fdd88'
+    symbol: func_002FDD88
+    size: 440
+    status: asm
+    reason: context
+  - addr: '0x2fdf40'
+    symbol: func_002FDF40
+    size: 1072
+    status: asm
+    reason: context
+  - addr: '0x2fe370'
+    symbol: func_002FE370
+    size: 508
+    status: asm
+    reason: context
+  - addr: '0x2fe570'
+    symbol: func_002FE570
+    size: 1300
+    status: asm
+    reason: context
+  externs:
+    __throw: '0x292b40'
+    func_002FEAE0: '0x2feae0'
+    terminate__Fv: '0x36f978'
