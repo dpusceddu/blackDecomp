@@ -46433,26 +46433,6 @@ units:
     symbol: _$_10Perception
     status: source
     reason: campaign
-  - addr: '0x30f000'
-    size: 348
-    symbol: func_0030F000
-    status: asm
-    reason: campaign
-  - addr: '0x30f160'
-    size: 1300
-    symbol: func_0030F160
-    status: asm
-    reason: campaign
-  - addr: '0x30f678'
-    size: 712
-    symbol: func_0030F678
-    status: asm
-    reason: campaign
-  - addr: '0x30f940'
-    size: 1060
-    symbol: func_0030F940
-    status: asm
-    reason: campaign
   externs:
     Entity_RemoveC__FP5WorldPFP6EntityP10Perception_vP10Perception: '0x2e1098'
     OnSubjectRemoved__FP6EntityP10Perception: '0x310190'
@@ -50732,3 +50712,44 @@ units:
     reason: unmatched
   externs:
     D_0040F4D0: '0x40f4d0'
+- name: context_graph_entity_wave7
+  source: src/campaign/graph_entity_manager.cpp
+  owner: context-graph
+  claim: context-wave7-graph
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  functions:
+  - addr: '0x30f000'
+    size: 348
+    status: source
+    symbol: Reset__10Perception
+  - addr: '0x30f160'
+    size: 1300
+    status: asm
+    symbol: func_0030F160
+    reason: context
+  - addr: '0x30f678'
+    size: 712
+    status: asm
+    symbol: func_0030F678
+    reason: context
+  - addr: '0x30f940'
+    size: 1060
+    status: asm
+    symbol: func_0030F940
+    reason: context
+  externs:
+    _vt$16PerceptionRecord: '0x3f1430'
+    _vt$20PerceptionRecordBase: '0x3e0040'
+    gPairDistances: '0x3ce5a0'
+    gPairExpiry: '0x3ce5a4'
+    gPairFlags: '0x3ce59c'
+    gPairLineExpiry: '0x3ce5a8'
+    gWorld: '0x3c9ed4'
+    memset: '0x35c6ec'
