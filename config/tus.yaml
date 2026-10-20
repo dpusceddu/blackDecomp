@@ -3824,7 +3824,7 @@ tus:
   evidence: [proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags_basis: matched 1 of 1 functions
 - name: tu_162f08
   kind: isolated
   library: game

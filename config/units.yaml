@@ -50166,3 +50166,18 @@ units:
     status: source
   externs:
     D_0040F514: '0x40f514'
+- name: campaign_actor_bb58_wave6
+  source: src/campaign/actor_bb58_wave6.cpp
+  origin: C++ actor vtable0x3DBB58 command cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x162d98'
+    symbol: Execute__Q213CampaignActor13WeightCommand
+    size: 368
+    status: source
+  externs:
+    D_0040F514: '0x40f514'
