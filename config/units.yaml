@@ -52121,18 +52121,15 @@ units:
   - -snas
   - -fbyte-bool
   - -ffunction-sections
-  - -mvu0-use-vf0-vf31
   functions:
   - addr: '0x154fd8'
     size: 64
-    symbol: func_00154FD8
-    status: asm
-    reason: claimed
+    symbol: Initialize__Q210ModWeapons8Reserves
+    status: source
   - addr: '0x155018'
     size: 112
-    symbol: func_00155018
-    status: asm
-    reason: claimed
+    symbol: Reset__Q210ModWeapons8Reserves
+    status: source
 - name: mod_weapons_tu_1551c8
   source: src/campaign/mod_weapons_tu_1551c8.cpp
   origin: game
