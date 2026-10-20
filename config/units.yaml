@@ -52146,10 +52146,6 @@ units:
     symbol: func_001B7FC8
     status: asm
     reason: claimed
-  - addr: '0x1b8138'
-    symbol: func_001B8138
-    status: asm
-    reason: claimed
   - addr: '0x1b8180'
     symbol: func_001B8180
     status: asm
@@ -52158,20 +52154,12 @@ units:
     symbol: func_001B82E0
     status: asm
     reason: claimed
-  - addr: '0x1b86f8'
-    symbol: func_001B86F8
-    status: asm
-    reason: claimed
   - addr: '0x1b8798'
     symbol: func_001B8798
     status: asm
     reason: claimed
   - addr: '0x1b89c8'
     symbol: func_001B89C8
-    status: asm
-    reason: claimed
-  - addr: '0x1b90d0'
-    symbol: func_001B90D0
     status: asm
     reason: claimed
   - addr: '0x1b9198'
@@ -52325,4 +52313,54 @@ units:
   - addr: '0x1bd508'
     size: 252
     symbol: func_001BD508
+    status: source
+- name: mod_effects_1b8138
+  source: src/mod/effects/simulation_1b8138.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1b8138'
+    size: 72
+    symbol: func_001B8138
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: mod_effects_1b86f8
+  source: src/mod/effects/simulation_1b86f8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1b86f8'
+    size: 156
+    symbol: func_001B86F8
+    status: source
+- name: mod_effects_1b90d0
+  source: src/mod/effects/simulation_1b90d0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1b90d0'
+    size: 200
+    symbol: func_001B90D0
     status: source
