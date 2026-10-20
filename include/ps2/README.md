@@ -28,6 +28,12 @@ Integer/128-bit and floating arguments occupy independent EE banks; source param
 change scheduling. Preserve the verified per-unit flags and assembler choice. All code is GCC 2.95
 compatible; no C++11 language features are required.
 
+The exact 440-byte envelope registration caller at 0x1ED9C8 verifies the scoped argument order
+`(receiver, field, label, group, path, control, float, float, control)`. A floats-first declaration
+leaves 31 differing instructions despite identical EE banks. The final zero control can be declared
+as int, bool or byte without changing this caller, so its width remains unverified. The caller also
+owns seven DSP label strings; body equality alone did not establish full-build placement.
+
 A controlled SN GCC 2.95.3 build 1.36 probe with `-O2 -G0 -snas` shows that a member
 returning a 12-byte POD (three 32-bit words) receives the hidden output pointer in A0,
 `this` in A1 and an explicit Actor pointer in A2. A free function returning that POD with
