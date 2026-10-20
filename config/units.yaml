@@ -13623,23 +13623,6 @@ units:
     symbol: func_001BE938
     size: 8
     status: source
-- name: tuf_1be940
-  source: src/tu/tu_1be940.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x1be940'
-    symbol: func_001BE940
-    size: 32
-    status: source
-  - addr: '0x1beb28'
-    symbol: func_001BEB28
-    size: 32
-    status: source
 - name: tuf_1bec68
   source: src/tu/tu_1bec18.c
   origin: auto
@@ -42604,103 +42587,6 @@ units:
     ClearActivation__10ActionBank: '0x2dfbf8'
     FindNextMove__15AIRouteFollowerP10MoveRecordP12RouteRequest: '0x300a40'
     NavigationGraph_QueryNode__FPCfP5ActorfP15NavigationGraphUiUi: '0x2fbc20'
-- name: effect_emitters_1bec18
-  source: src/game/effects/emitter_unmatched.cpp
-  origin: game
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -x
-  - c++
-  - -ffunction-sections
-  - -mvu0-use-vf0-vf15
-  functions:
-  - addr: '0x1bec18'
-    symbol: func_001BEC18
-    status: asm
-    reason: claimed
-    size: 80
-  - addr: '0x1becd0'
-    symbol: func_001BECD0
-    status: asm
-    reason: claimed
-    size: 668
-  - addr: '0x1bef70'
-    symbol: func_001BEF70
-    status: asm
-    reason: claimed
-    size: 1964
-  - addr: '0x1bf740'
-    symbol: func_001BF740
-    status: asm
-    reason: claimed
-    size: 472
-  - addr: '0x1bf918'
-    symbol: func_001BF918
-    status: asm
-    reason: claimed
-    size: 1416
-  - addr: '0x1bfed0'
-    symbol: func_001BFED0
-    status: asm
-    reason: claimed
-    size: 272
-  - addr: '0x1bffe0'
-    symbol: func_001BFFE0
-    status: asm
-    reason: claimed
-    size: 508
-  - addr: '0x1c01e0'
-    symbol: func_001C01E0
-    status: asm
-    reason: claimed
-    size: 192
-  - addr: '0x1c02a0'
-    symbol: func_001C02A0
-    status: asm
-    reason: claimed
-    size: 632
-  - addr: '0x1c0518'
-    symbol: func_001C0518
-    status: asm
-    reason: claimed
-    size: 192
-  - addr: '0x1c0600'
-    symbol: func_001C0600
-    status: asm
-    reason: claimed
-    size: 292
-  - addr: '0x1c0910'
-    symbol: func_001C0910
-    status: asm
-    reason: claimed
-    size: 356
-  - addr: '0x1c0a78'
-    symbol: func_001C0A78
-    status: asm
-    reason: claimed
-    size: 2764
-  - addr: '0x1c15d0'
-    symbol: func_001C15D0
-    status: asm
-    reason: claimed
-    size: 368
-  - addr: '0x1c1740'
-    symbol: func_001C1740
-    status: asm
-    reason: claimed
-    size: 208
-  - addr: '0x1c1810'
-    symbol: func_001C1810
-    status: asm
-    reason: claimed
-    size: 284
-  - addr: '0x1c19b0'
-    symbol: func_001C19B0
-    status: asm
-    reason: claimed
-    size: 176
 - name: effect_1c1578
   source: src/game/effects/light_reset.c
   origin: game
@@ -52377,4 +52263,109 @@ units:
   - addr: '0x1b90d0'
     size: 200
     symbol: func_001B90D0
+    status: source
+- name: mod_effects_wave3_claims
+  source: src/mod/effects/claims_wave3.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1be960'
+    symbol: func_001BE960
+    status: asm
+    reason: claimed
+  - addr: '0x1bec18'
+    symbol: func_001BEC18
+    status: asm
+    reason: claimed
+  - addr: '0x1becd0'
+    symbol: func_001BECD0
+    status: asm
+    reason: claimed
+  - addr: '0x1bef70'
+    symbol: func_001BEF70
+    status: asm
+    reason: claimed
+  - addr: '0x1bf740'
+    symbol: func_001BF740
+    status: asm
+    reason: claimed
+  - addr: '0x1bf918'
+    symbol: func_001BF918
+    status: asm
+    reason: claimed
+  - addr: '0x1bfed0'
+    symbol: func_001BFED0
+    status: asm
+    reason: claimed
+  - addr: '0x1bffe0'
+    symbol: func_001BFFE0
+    status: asm
+    reason: claimed
+  - addr: '0x1c01e0'
+    symbol: func_001C01E0
+    status: asm
+    reason: claimed
+  - addr: '0x1c02a0'
+    symbol: func_001C02A0
+    status: asm
+    reason: claimed
+  - addr: '0x1c0518'
+    symbol: func_001C0518
+    status: asm
+    reason: claimed
+  - addr: '0x1c0600'
+    symbol: func_001C0600
+    status: asm
+    reason: claimed
+  - addr: '0x1c0910'
+    symbol: func_001C0910
+    status: asm
+    reason: claimed
+  - addr: '0x1c0a78'
+    symbol: func_001C0A78
+    status: asm
+    reason: claimed
+  - addr: '0x1c15d0'
+    symbol: func_001C15D0
+    status: asm
+    reason: claimed
+  - addr: '0x1c1740'
+    symbol: func_001C1740
+    status: asm
+    reason: claimed
+  - addr: '0x1c1810'
+    symbol: func_001C1810
+    status: asm
+    reason: claimed
+  - addr: '0x1c19b0'
+    symbol: func_001C19B0
+    status: asm
+    reason: claimed
+- name: mod_effects_damage
+  source: src/mod/effects/damage.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1be940'
+    size: 32
+    symbol: func_001BE940
+    status: source
+  - addr: '0x1beb28'
+    size: 32
+    symbol: func_001BEB28
+    status: source
+  - addr: '0x1beb50'
+    size: 76
+    symbol: func_001BEB50
     status: source

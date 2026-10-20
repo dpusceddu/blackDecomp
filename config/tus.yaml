@@ -9715,8 +9715,8 @@ tus:
   confidence: low
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 2 of 4 functions
+  flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf31]
+  flags_basis: matched 3 of 4 functions
 - name: tu_1beba0
   kind: isolated
   library: game
