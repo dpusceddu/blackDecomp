@@ -4,9 +4,7 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Pose {
-    u8 opaque_0[16];
-    u128 field_10; /* PS2 +0x10 */
-    u8 opaque_20[16];
+    u8 opaque_0[48];
     s128 field_30; /* PS2 +0x30 */
     u8 opaque_40[224];
     u128 field_120; /* PS2 +0x120 */
@@ -14,7 +12,6 @@ typedef struct Recovered_Pose {
     f32 field_134; /* PS2 +0x134 */
     f32 field_138; /* PS2 +0x138 */
 } Recovered_Pose;
-typedef char assert_Recovered_Pose_10[(((int)&((Recovered_Pose *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_Pose_30[(((int)&((Recovered_Pose *)0)->field_30) == 48) ? 1 : -1];
 typedef char assert_Recovered_Pose_120[(((int)&((Recovered_Pose *)0)->field_120) == 288) ? 1 : -1];
 typedef char assert_Recovered_Pose_130[(((int)&((Recovered_Pose *)0)->field_130) == 304) ? 1 : -1];

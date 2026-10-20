@@ -4,16 +4,14 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_BkModDelayedShotPS2 {
-    u128 field_0; /* PS2 +0x0 */
-    u128 field_10; /* PS2 +0x10 */
+    u8 opaque_0[32];
     u32 field_20; /* PS2 +0x20 */
-    u8 opaque_24[8];
+    u32 field_24; /* PS2 +0x24 */
+    u32 field_28; /* PS2 +0x28 */
     u8 field_2C; /* PS2 +0x2C */
-    u8 field_2D; /* PS2 +0x2D */
 } Recovered_BkModDelayedShotPS2;
-typedef char assert_Recovered_BkModDelayedShotPS2_0[(((int)&((Recovered_BkModDelayedShotPS2 *)0)->field_0) == 0) ? 1 : -1];
-typedef char assert_Recovered_BkModDelayedShotPS2_10[(((int)&((Recovered_BkModDelayedShotPS2 *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_BkModDelayedShotPS2_20[(((int)&((Recovered_BkModDelayedShotPS2 *)0)->field_20) == 32) ? 1 : -1];
+typedef char assert_Recovered_BkModDelayedShotPS2_24[(((int)&((Recovered_BkModDelayedShotPS2 *)0)->field_24) == 36) ? 1 : -1];
+typedef char assert_Recovered_BkModDelayedShotPS2_28[(((int)&((Recovered_BkModDelayedShotPS2 *)0)->field_28) == 40) ? 1 : -1];
 typedef char assert_Recovered_BkModDelayedShotPS2_2C[(((int)&((Recovered_BkModDelayedShotPS2 *)0)->field_2C) == 44) ? 1 : -1];
-typedef char assert_Recovered_BkModDelayedShotPS2_2D[(((int)&((Recovered_BkModDelayedShotPS2 *)0)->field_2D) == 45) ? 1 : -1];
 #endif
