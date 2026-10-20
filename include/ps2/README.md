@@ -61,3 +61,10 @@ These generic names do not identify an original class. Game vector values have
 128-bit argument/storage evidence; RenderWare's matrix kernels also preserve
 flag/payload lanes that generic game affine transforms leave unspecified. Similar
 arithmetic does not establish interchangeable types, load order or aliasing.
+
+`vu0_quaternion.hpp` reconstructs a different animation macro family: its
+Hamilton product uses VF1..4 at ten sites in six functions; the companion
+translation add uses VF9..11 and preserves destination W. The wrappers declare
+VF and memory clobbers and require ACC/MAC/status to be dead across calls.
+Two full source consumers verify this fixed-register recipe; it is not a claim
+that the generic `j`-allocated helpers choose those registers or identify an SDK.

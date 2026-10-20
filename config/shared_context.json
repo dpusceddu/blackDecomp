@@ -161,6 +161,21 @@
         "0x2e7ac0",
         "0x2e8920"
       ]
+    },
+    {
+      "header": "include/ps2/vu0_quaternion.hpp",
+      "api": [
+        "BlackPS2::AnimationMath::Multiply",
+        "BlackPS2::AnimationMath::Add"
+      ],
+      "verified_scope": [
+        "Animation Hamilton-product macro uses VF1..4 identically at ten sites in six independently recovered functions; companion translation uses VF9..11 and preserves destination W.",
+        "Two complete source consumers verify pointer allocation, loads/stores and arithmetic. SDK/class identity remains unverified; ACC/MAC/status must be dead across wrappers."
+      ],
+      "controls": [
+        "0x3440b8",
+        "0x347430"
+      ]
     }
   ],
   "controls": [
@@ -420,6 +435,28 @@
       ],
       "uses": [
         "Y(Load(contact->normal))"
+      ]
+    },
+    {
+      "address": "0x3440b8",
+      "source_function": "func_003440B8",
+      "headers": [
+        "include/ps2/vu0_quaternion.hpp"
+      ],
+      "uses": [
+        "AnimationMath::Multiply",
+        "AnimationMath::Add"
+      ]
+    },
+    {
+      "address": "0x347430",
+      "source_function": "func_00347430",
+      "headers": [
+        "include/ps2/vu0_quaternion.hpp"
+      ],
+      "uses": [
+        "AnimationMath::Multiply",
+        "AnimationMath::Add"
       ]
     }
   ],

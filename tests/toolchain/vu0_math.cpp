@@ -1,8 +1,11 @@
 #include "ps2/vu0_math.h"
+#include "ps2/vu0_quaternion.hpp"
 
 /* Isolated compiler controls. Their arithmetic windows are compared with retail;
    these are not substitutes for full-function/full-image verification. */
 extern "C" {
+void VuMath_Quaternion(void*out,const void*a,const void*b) { BlackPS2::AnimationMath::Multiply(out,a,b); }
+void VuMath_Translation(void*out,const void*a,const void*b) { BlackPS2::AnimationMath::Add(out,a,b); }
 BkVuVector VuMath_Add(BkVuVector a,BkVuVector b) { return BkVuAddXYZ(a,b); }
 BkVuVector VuMath_Sub(BkVuVector a,BkVuVector b) { return BkVuSubXYZ(a,b); }
 BkVuVector VuMath_Mul(BkVuVector a,BkVuVector b) { return BkVuMulXYZ(a,b); }
