@@ -48879,3 +48879,27 @@ units:
     func_001AE5E8: '0x1ae5e8'
     func_0026A840: '0x26a840'
     func_0026AA68: '0x26aa68'
+- name: campaign_actor_b920_wave4
+  source: src/campaign/actor_b920_wave4.cpp
+  origin: C++ actor vtable0x3DB920 crossing-volume cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x164268'
+    status: asm
+  - addr: '0x164548'
+    status: asm
+  - addr: '0x164860'
+    status: source
+    size: 84
+    symbol: Debug__Q213CampaignActor14CrossingVolume
+  externs:
+    D_0040F4C0: '0x40f4c0'
+    D_00414CE0: '0x414ce0'
+    func_001AE5E8: '0x1ae5e8'
+    func_0026A840: '0x26a840'
+    func_0026AA68: '0x26aa68'
