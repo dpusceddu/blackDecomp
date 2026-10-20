@@ -4316,7 +4316,7 @@ tus:
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 3 of 5 functions
+  flags_basis: matched 4 of 5 functions
 - name: tu_164e40
   kind: isolated
   library: game
