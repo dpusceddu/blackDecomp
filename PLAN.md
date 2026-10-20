@@ -494,6 +494,7 @@ sizes over 300 and 1,024 bytes. The first two waves used the former one-percent 
 | 1 | 12 / 4,080 (0.150%) | 0 | 8 / 47 | 0 / 16 | 1.49 / 2,731 | Inline/lifetime shape; VU0 aggregate ABI; data ownership |
 | 2 | 29 / 7,096 (0.261%) | 0 | 10 / 46 | 0 / 10 | 1.74 / 4,083 | Iterator/serialization helpers; EE type/layout recovery; register/cleanup lifetimes |
 | 3 | 78 / 20,760 (0.765%) | 0 | 20 / 110 | 2 / 30 | 5.24 / 3,964 | Local/iterator lifetimes; VU0/aggregate contracts; cleanup and data ownership |
+| 4 | 67 / 16,064 (0.592%) | 2 | 14 / 67 | 1 / 12 | 3.30 / 4,867 | Inline/iterator lifetimes; VU math contracts; cleanup/register allocation |
 
 Four isolated class queues ran per wave without worker contention. Source progress rose from 5,066
 functions / 281,632 text bytes to 5,107 / 292,808: +41 functions / 11,176 bytes. Gains exclude six
@@ -535,7 +536,7 @@ wave, or after two consecutive throughput declines. The previous one-percent rul
 Shared helper recovery precedes the next wave; enabling work is measured separately from campaign
 throughput. Four active queues, including the coordinator, fit the session's concurrency limit.
 
-The dedicated shared-context owner added eight headers in `include/ps2/`, now with 19 exact source
+The dedicated shared-context owner added eight headers in `include/ps2/`, now with 22 exact source
 consumers checked by `tools/shared_context.py verify` and scoped evidence in
 `config/shared_context.json`. They cover SN integer/vector ABI, VU0 vectors and point/direction
 transforms, Kynapse iterator/property/owner helpers and three RenderWare operations. Existing vector
@@ -558,6 +559,16 @@ Qualified-method signature export, retained source views, saved-draft re-scoring
 exact named receivers into vtable views keep context usable as classes acquire names. The skeletons
 now retain 520 scoped PS2 field-access proofs; semantic types and complete layouts remain qualified.
 All five retail images are identical, 265 tooling tests pass, and all 19 shared controls remain exact.
+
+Wave 4 reaches 5,254 source functions / 329,896 text bytes. PathObject and the XML reader are complete
+in source; their data ownership is separate. Inline hierarchy/owner-chain helpers, native cleanup
+bindings and integer call contracts produced the new matches, including one 1,112-byte function.
+The scorer now resolves proven HI16/LO16 addresses before comparing complete instruction words;
+this corrects false differences without changing objects. All 4,360 saved drafts and 6,645 remaining
+entries were retried, with no additional placeable match. Generated views retain 600 scoped field
+proofs; all 22 shared controls and 270 tests pass. All five retail checks passed this wave.
+Inclusive throughput rises 22.8%, resetting the decline streak; the campaign continues with fresh
+queues. The four-queue concurrency limit remains in effect.
 
 ## Agent rules (`AGENTS.md`)
 
