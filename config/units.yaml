@@ -49115,3 +49115,92 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: context_wave5_world
+  source: src/context/behaviors_world.cpp
+  origin: kynapse
+  owner: context-wave5-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2ea388'
+    size: 648
+    status: source
+    symbol: func_002EA388
+  - addr: '0x2ea610'
+    size: 648
+    status: source
+    symbol: func_002EA610
+  - addr: '0x2ea898'
+    size: 560
+    status: asm
+    reason: lifetime
+    symbol: func_002EA898
+  - addr: '0x2eaac8'
+    size: 232
+    status: source
+    symbol: func_002EAAC8
+  - addr: '0x2eabb0'
+    size: 424
+    status: asm
+    reason: lifetime
+    symbol: func_002EABB0
+  - addr: '0x2ead58'
+    size: 468
+    status: asm
+    reason: lifetime
+    symbol: func_002EAD58
+  - addr: '0x2eaf30'
+    size: 844
+    status: asm
+    reason: lifetime
+    symbol: func_002EAF30
+  - addr: '0x2eb398'
+    size: 180
+    status: source
+    symbol: func_002EB398
+  - addr: '0x2eb450'
+    size: 2620
+    status: asm
+    reason: lifetime
+    symbol: func_002EB450
+  - addr: '0x2ebe90'
+    size: 200
+    status: source
+    symbol: func_002EBE90
+  - addr: '0x2ebf58'
+    size: 200
+    status: source
+    symbol: func_002EBF58
+  - addr: '0x2ec058'
+    size: 184
+    status: source
+    symbol: func_002EC058
+  - addr: '0x2ec110'
+    size: 152
+    status: source
+    symbol: func_002EC110
+  externs:
+    _9KaimWorld$gFirstCapacity: '0x3c9edc'
+    _9KaimWorld$gFirstContexts: '0x3c9ee4'
+    _9KaimWorld$gFirstCount: '0x3c9ed8'
+    _9KaimWorld$gFirstFunctions: '0x3c9ee0'
+    _9KaimWorld$gSecondCapacity: '0x3c9eec'
+    _9KaimWorld$gSecondContexts: '0x3c9ef4'
+    _9KaimWorld$gSecondCount: '0x3c9ee8'
+    _9KaimWorld$gSecondFunctions: '0x3c9ef0'
+    __throw: '0x292b40'
+    _vt$Q29KaimWorld6Object: '0x3e0040'
+    _vt$Q29KaimWorldt12ListIterator1ZPQ29KaimWorld6Entity: '0x3e0028'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
