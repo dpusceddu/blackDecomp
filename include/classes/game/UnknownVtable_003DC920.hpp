@@ -32,7 +32,7 @@ struct UnknownVtable_003DC920 {
     unsigned int Function_00125E30();
     // 0x00125E38: UNVERIFIED signature (src/auto/game/125e20.c).
     unsigned int Function_00125E38();
-    // 0x00127A40: UNVERIFIED signature (src/tu/tu_127118.c).
+    // 0x00127A40: UNVERIFIED signature (src/mod/camera/w2_127118.cpp).
     int Function_00127A40();
     // 0x00127AB8: UNVERIFIED signature (src/tu/tu_127118.c).
     unsigned int Function_00127AB8();
@@ -42,8 +42,8 @@ struct UnknownVtable_003DC920 {
     unsigned int Function_00127AC8(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, unsigned int argument4, float argument5, float argument6);
     // 0x00127CF0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00127CF0(unsigned int argument0);
-    // 0x001282B8: UNVERIFIED signature (src/tu/tu_127118.c).
-    int Function_001282B8();
+    // 0x001282B8: UNVERIFIED signature (src/mod/camera/w2_127118.cpp).
+    void Function_001282B8();
     // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
     void Function_00165B00(int argument0);
     // 0x00165B88: UNVERIFIED signature (src/tu/tu_1650b8_165af8.c).
@@ -91,7 +91,7 @@ struct UnknownVtable_003DC920 {
         // slot 13, table+0x70, this delta 0, function 0x00383770; UNVERIFIED signature.
         virtual unsigned int Slot013();
         // slot 14, table+0x78, this delta 0, function 0x001282B8; UNVERIFIED signature.
-        virtual int Slot014();
+        virtual void Slot014();
         // slot 15, table+0x80, this delta 0, function 0x00383818; UNVERIFIED signature.
         virtual int Slot015();
         // slot 16, table+0x88, this delta 0, function 0x00383780; UNVERIFIED signature.

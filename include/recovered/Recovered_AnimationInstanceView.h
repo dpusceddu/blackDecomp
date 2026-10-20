@@ -27,7 +27,7 @@ typedef struct Recovered_AnimationInstanceView {
     u32 field_50; /* PS2 +0x50 */
     s32 field_54; /* PS2 +0x54 */
     s32 field_58; /* PS2 +0x58 */
-    u16 field_5C; /* PS2 +0x5C */
+    s16 field_5C; /* PS2 +0x5C */
     s16 field_5E; /* PS2 +0x5E */
     f32 field_60; /* PS2 +0x60 */
     u8 opaque_64[4];

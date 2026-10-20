@@ -26,8 +26,7 @@ typedef struct Recovered_Weapon {
     u8 opaque_D0[4];
     f32 field_D4; /* PS2 +0xD4 */
     s32 field_D8; /* PS2 +0xD8 */
-    f32 field_DC; /* PS2 +0xDC */
-    u8 opaque_E0[8];
+    u8 opaque_DC[12];
     s64 * field_E8; /* PS2 +0xE8 */
     void * field_EC; /* PS2 +0xEC */
     void * field_F0; /* PS2 +0xF0 */
@@ -35,7 +34,7 @@ typedef struct Recovered_Weapon {
     s32 field_F8; /* PS2 +0xF8 */
     s32 field_FC; /* PS2 +0xFC */
     u8 field_100; /* PS2 +0x100 */
-    u8 opaque_101[1];
+    u8 field_101; /* PS2 +0x101 */
     s8 field_102; /* PS2 +0x102 */
     u8 opaque_103[2];
     u8 field_105; /* PS2 +0x105 */
@@ -43,7 +42,8 @@ typedef struct Recovered_Weapon {
     u8 field_107; /* PS2 +0x107 */
     u8 field_108; /* PS2 +0x108 */
     u8 field_109; /* PS2 +0x109 */
-    u8 opaque_10A[2];
+    u8 field_10A; /* PS2 +0x10A */
+    u8 field_10B; /* PS2 +0x10B */
     u8 field_10C; /* PS2 +0x10C */
     u8 field_10D; /* PS2 +0x10D */
 } Recovered_Weapon;
@@ -64,7 +64,6 @@ typedef char assert_Recovered_Weapon_B0[(((int)&((Recovered_Weapon *)0)->field_B
 typedef char assert_Recovered_Weapon_C0[(((int)&((Recovered_Weapon *)0)->field_C0) == 192) ? 1 : -1];
 typedef char assert_Recovered_Weapon_D4[(((int)&((Recovered_Weapon *)0)->field_D4) == 212) ? 1 : -1];
 typedef char assert_Recovered_Weapon_D8[(((int)&((Recovered_Weapon *)0)->field_D8) == 216) ? 1 : -1];
-typedef char assert_Recovered_Weapon_DC[(((int)&((Recovered_Weapon *)0)->field_DC) == 220) ? 1 : -1];
 typedef char assert_Recovered_Weapon_E8[(((int)&((Recovered_Weapon *)0)->field_E8) == 232) ? 1 : -1];
 typedef char assert_Recovered_Weapon_EC[(((int)&((Recovered_Weapon *)0)->field_EC) == 236) ? 1 : -1];
 typedef char assert_Recovered_Weapon_F0[(((int)&((Recovered_Weapon *)0)->field_F0) == 240) ? 1 : -1];
@@ -72,12 +71,15 @@ typedef char assert_Recovered_Weapon_F4[(((int)&((Recovered_Weapon *)0)->field_F
 typedef char assert_Recovered_Weapon_F8[(((int)&((Recovered_Weapon *)0)->field_F8) == 248) ? 1 : -1];
 typedef char assert_Recovered_Weapon_FC[(((int)&((Recovered_Weapon *)0)->field_FC) == 252) ? 1 : -1];
 typedef char assert_Recovered_Weapon_100[(((int)&((Recovered_Weapon *)0)->field_100) == 256) ? 1 : -1];
+typedef char assert_Recovered_Weapon_101[(((int)&((Recovered_Weapon *)0)->field_101) == 257) ? 1 : -1];
 typedef char assert_Recovered_Weapon_102[(((int)&((Recovered_Weapon *)0)->field_102) == 258) ? 1 : -1];
 typedef char assert_Recovered_Weapon_105[(((int)&((Recovered_Weapon *)0)->field_105) == 261) ? 1 : -1];
 typedef char assert_Recovered_Weapon_106[(((int)&((Recovered_Weapon *)0)->field_106) == 262) ? 1 : -1];
 typedef char assert_Recovered_Weapon_107[(((int)&((Recovered_Weapon *)0)->field_107) == 263) ? 1 : -1];
 typedef char assert_Recovered_Weapon_108[(((int)&((Recovered_Weapon *)0)->field_108) == 264) ? 1 : -1];
 typedef char assert_Recovered_Weapon_109[(((int)&((Recovered_Weapon *)0)->field_109) == 265) ? 1 : -1];
+typedef char assert_Recovered_Weapon_10A[(((int)&((Recovered_Weapon *)0)->field_10A) == 266) ? 1 : -1];
+typedef char assert_Recovered_Weapon_10B[(((int)&((Recovered_Weapon *)0)->field_10B) == 267) ? 1 : -1];
 typedef char assert_Recovered_Weapon_10C[(((int)&((Recovered_Weapon *)0)->field_10C) == 268) ? 1 : -1];
 typedef char assert_Recovered_Weapon_10D[(((int)&((Recovered_Weapon *)0)->field_10D) == 269) ? 1 : -1];
 #endif
