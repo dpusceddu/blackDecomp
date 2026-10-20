@@ -46215,30 +46215,10 @@ units:
     size: 336
     symbol: func_002D30A0
     status: source
-  - addr: '0x2d31f0'
-    size: 268
-    symbol: func_002D31F0
-    status: asm
-    reason: campaign
-  - addr: '0x2d3300'
-    size: 448
-    symbol: func_002D3300
-    status: asm
-    reason: campaign
   - addr: '0x2d35d8'
     size: 56
     symbol: func_002D35D8
     status: source
-  - addr: '0x2d3610'
-    size: 152
-    symbol: func_002D3610
-    status: asm
-    reason: campaign
-  - addr: '0x2d36a8'
-    size: 304
-    symbol: func_002D36A8
-    status: asm
-    reason: campaign
 - name: campaign_actor_collision
   source: src/campaign/actor_collision.cpp
   origin: 'C++ campaign: actor virtual table 0x3dc838; class identity unresolved'
@@ -50455,3 +50435,36 @@ units:
   functions:
   - addr: '0x141008'
     status: asm
+- name: campaign_wave6_follower
+  source: src/campaign/behaviors_follower_wave6.cpp
+  origin: kynapse
+  owner: context-wave6-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d31f0'
+    size: 268
+    status: source
+    symbol: func_002D31F0
+  - addr: '0x2d3300'
+    size: 448
+    status: asm
+    reason: vector-helper-scheduling
+    symbol: func_002D3300
+  - addr: '0x2d3610'
+    size: 152
+    status: source
+    symbol: func_002D3610
+  - addr: '0x2d36a8'
+    size: 304
+    status: source
+    symbol: func_002D36A8
+  externs:
+    func_002E1C58: '0x2e1c58'
+    func_002E4CE0: '0x2e4ce0'
+    func_002E8AB8: '0x2e8ab8'
