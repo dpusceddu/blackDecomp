@@ -1,4 +1,5 @@
 #include "auto/prelude.h"
+#include "mod/animation/instance.h"
 
 void func_0034F328(void *arg0, s32 arg1) {
     s32 temp_2;
@@ -8,14 +9,14 @@ void func_0034F328(void *arg0, s32 arg1) {
     var_4 = arg0;
     if (var_4 != NULL) {
         do {
-            temp_2 = M2C_FIELD(var_4, s32 *, 0);
+            temp_2 = ((BkModAnimationInstancePS2*)var_4)->flags;
             if (arg1 != 0) {
                 var_2 = temp_2 | 0x1000;
             } else {
                 var_2 = temp_2 & ~0x1000;
             }
-            M2C_FIELD(var_4, s32 *, 0) = var_2;
-            var_4 = M2C_FIELD(var_4, void **, 0x9AC);
+            ((BkModAnimationInstancePS2*)var_4)->flags = var_2;
+            var_4 = ((BkModAnimationInstancePS2*)var_4)->next;
         } while (var_4 != NULL);
     }
 }

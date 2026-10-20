@@ -1,0 +1,584 @@
+{
+  "version": 1,
+  "owner": "shared mod context owner",
+  "layers": [
+    {
+      "header": "include/mod/camera/controller.hpp",
+      "api": [
+        "CampaignActor::CameraController",
+        "Child",
+        "ChildData"
+      ],
+      "verified_scope": [
+        "Partial controller owner7C,current4B4,children490 stride4 and native adjusted virtual calls. Child active48/vptr4C. Semantic identities/complete hierarchy remain unverified."
+      ],
+      "controls": [
+        "0x140cf8",
+        "0x141248",
+        "0x1411a0"
+      ]
+    },
+    {
+      "header": "include/mod/camera/axes.hpp",
+      "api": [
+        "ActorInventory7::InputAxes",
+        "InputBinding",
+        "AxisWorld"
+      ],
+      "verified_scope": [
+        "Native lateral90,forward94,input98; clear active120; sampled delta1C. Semantic identities and full extents unverified."
+      ],
+      "controls": [
+        "0x13f160",
+        "0x140008"
+      ]
+    },
+    {
+      "header": "include/mod/camera/pad.hpp",
+      "api": [
+        "CampaignGraphics::Controller",
+        "ControllerInterface"
+      ],
+      "verified_scope": [
+        "Existing exact-backed pad view, vptr8; only accessed fields and slots verified. Button raw/edge helpers preserve separate recipes."
+      ],
+      "controls": [
+        "0x26baf8"
+      ]
+    },
+    {
+      "header": "include/mod/camera/pad_backend.hpp",
+      "api": [
+        "CampaignGraphics::PadBackend"
+      ],
+      "verified_scope": [
+        "Backend state250/handles298 and controller/feedback access view. Full allocation and historical interface identity unverified."
+      ],
+      "controls": [
+        "0x26c9c0"
+      ]
+    },
+    {
+      "header": "include/mod/weapons/state.h",
+      "api": [
+        "BkModWeaponControllerPS2",
+        "BkModWeaponDefinitionPS2",
+        "BkModWeaponInstancePS2",
+        "BkModWeaponReloadingPS2",
+        "BkModWeaponClipPS2"
+      ],
+      "verified_scope": [
+        "Native reload control verifies phaseD8,definitionEC,ownerF0/kindC4,primaryF4/clip18,inventoryFC,definition60/64/C7,outOfAmmo10B and low-byte per-round count101.",
+        "State predicates return signed32, clip getter signed16; additional named fields remain PS2 instruction leads. Preserve per-consumer capacity widths."
+      ],
+      "controls": [
+        "0x156dc0",
+        "0x158078",
+        "0x1580e0"
+      ]
+    },
+    {
+      "header": "include/mod/weapons/shot.h",
+      "api": [
+        "BkModMovingShotPS2",
+        "BkModShotDeactivatePS2"
+      ],
+      "verified_scope": [
+        "Native active88 byte clear and endpoint40 full128-bit store. Other offsets/90 pool stride are instruction evidence only; query payload stays opaque. Forwarded child call signature is not inferred."
+      ],
+      "controls": [
+        "0x15d3d8",
+        "0x15d850"
+      ]
+    },
+    {
+      "header": "include/mod/animation/instance.h",
+      "api": [
+        "BkModAnimationInstancePS2",
+        "BkModAnimationPoseHeaderPS2",
+        "BkModAnimationHasNextPS2"
+      ],
+      "verified_scope": [
+        "Native graphC and 32-byte pose header at30 with quaternion and homogeneous translation; evaluationFlags998 and next9AC through source consumers.",
+        "Additional fields follow exact-backed legacy offset views but their semantic unification is not assumed. owner84 remains instruction-only. No complete allocation/hierarchy claim."
+      ],
+      "controls": [
+        "0x347d68",
+        "0x348018",
+        "0x348e78",
+        "0x34f328"
+      ]
+    },
+    {
+      "header": "include/mod/animation/runtime.h",
+      "api": [
+        "PlaybackState",
+        "PlaybackHistory",
+        "graph and instance helpers"
+      ],
+      "verified_scope": [
+        "Compatible entry point retains established allocation, history28 stride, bank98C/scratch988/weights994 and original declaration ordering. Legacy views remain distinct; prototype inclusion alone does not prove unused helpers."
+      ],
+      "controls": [
+        "0x34eb88"
+      ]
+    },
+    {
+      "header": "include/mod/effects/asset.h",
+      "api": [
+        "BkActorAssetPS2",
+        "BkActorAssetRecordPS2",
+        "BkActorTimerPS2"
+      ],
+      "verified_scope": [
+        "Record strideD0 and flags58/5A, asset records48, timer remaining0/index4 exact-backed. duration28/nextCC/repeatCE and freeIndexCount69 are qualified PS2 instruction leads."
+      ],
+      "controls": [
+        "0x1afba8",
+        "0x1afc30",
+        "0x1afcd8"
+      ]
+    },
+    {
+      "header": "include/mod/effects/slot.h",
+      "api": [
+        "BkEffectSlotPS2",
+        "BkEffectSlotCallbackPS2",
+        "BkEffectSlotTargetPS2"
+      ],
+      "verified_scope": [
+        "Slot stride10/start/count/object/mode/active and release-adjusted callback slot78. Target slotD8 and narrow return contracts retain original per-consumer recipes."
+      ],
+      "controls": [
+        "0x1b33b8",
+        "0x1b37c8",
+        "0x1b3cf8"
+      ]
+    },
+    {
+      "header": "include/mod/effects/render_state.h",
+      "api": [
+        "BkActorRenderPS2",
+        "BkRenderBufferPS2"
+      ],
+      "verified_scope": [
+        "Render buffers atD360, strideA0, three entries and borrowed resource. It is a supporting actor-render prefix, not an identified particle or decal class."
+      ],
+      "controls": [
+        "0x1ae860"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "address": "0x140cf8",
+      "source_function": "Update",
+      "headers": [
+        "include/mod/camera/controller.hpp"
+      ],
+      "uses": [
+        "GetChild",
+        "Owner",
+        "Current",
+        "active",
+        "Ready"
+      ]
+    },
+    {
+      "address": "0x141248",
+      "source_function": "SetTarget",
+      "headers": [
+        "include/mod/camera/controller.hpp"
+      ],
+      "uses": [
+        "Target"
+      ]
+    },
+    {
+      "address": "0x1411a0",
+      "source_function": "Configure",
+      "headers": [
+        "include/mod/camera/controller.hpp"
+      ],
+      "uses": [
+        "V4"
+      ]
+    },
+    {
+      "address": "0x13f160",
+      "source_function": "Update",
+      "headers": [
+        "include/mod/camera/axes.hpp"
+      ],
+      "uses": [
+        "lateral",
+        "forward",
+        "input",
+        "GetWorld"
+      ]
+    },
+    {
+      "address": "0x140008",
+      "source_function": "Clear",
+      "headers": [
+        "include/mod/camera/axes.hpp"
+      ],
+      "uses": [
+        "input",
+        "active"
+      ]
+    },
+    {
+      "address": "0x26baf8",
+      "source_function": "Reset",
+      "headers": [
+        "include/mod/camera/pad.hpp"
+      ],
+      "uses": [
+        "Connected",
+        "previousStates",
+        "button0",
+        "pressure0"
+      ]
+    },
+    {
+      "address": "0x26c9c0",
+      "source_function": "GetState",
+      "headers": [
+        "include/mod/camera/pad_backend.hpp"
+      ],
+      "uses": [
+        "state"
+      ]
+    },
+    {
+      "address": "0x156dc0",
+      "source_function": "func_00156DC0",
+      "headers": [
+        "include/mod/weapons/state.h"
+      ],
+      "uses": [
+        "weapon->owner->kind",
+        "weapon->definition->reserveIndex",
+        "weapon->phase",
+        "weapon->outOfAmmo"
+      ]
+    },
+    {
+      "address": "0x158078",
+      "source_function": "func_00158078",
+      "headers": [
+        "include/mod/weapons/state.h"
+      ],
+      "uses": [
+        "BkModWeaponReloadingPS2"
+      ]
+    },
+    {
+      "address": "0x1580e0",
+      "source_function": "func_001580E0",
+      "headers": [
+        "include/mod/weapons/state.h"
+      ],
+      "uses": [
+        "BkModWeaponClipPS2"
+      ]
+    },
+    {
+      "address": "0x15d3d8",
+      "source_function": "func_0015D3D8",
+      "headers": [
+        "include/mod/weapons/shot.h"
+      ],
+      "uses": [
+        "BkModShotDeactivatePS2"
+      ]
+    },
+    {
+      "address": "0x15d850",
+      "source_function": "func_0015D850",
+      "headers": [
+        "include/mod/weapons/shot.h"
+      ],
+      "uses": [
+        "endpoint",
+        "func_0015D620"
+      ]
+    },
+    {
+      "address": "0x347d68",
+      "source_function": "func_00347D68",
+      "headers": [
+        "include/mod/animation/instance.h"
+      ],
+      "uses": [
+        "root.translation",
+        "root.quaternion",
+        "graph"
+      ]
+    },
+    {
+      "address": "0x348018",
+      "source_function": "func_00348018",
+      "headers": [
+        "include/mod/animation/instance.h"
+      ],
+      "uses": [
+        "evaluationFlags",
+        "flags"
+      ]
+    },
+    {
+      "address": "0x348e78",
+      "source_function": "func_00348E78",
+      "headers": [
+        "include/mod/animation/instance.h"
+      ],
+      "uses": [
+        "BkModAnimationHasNextPS2"
+      ]
+    },
+    {
+      "address": "0x34f328",
+      "source_function": "func_0034F328",
+      "headers": [
+        "include/mod/animation/instance.h"
+      ],
+      "uses": [
+        "flags",
+        "next"
+      ]
+    },
+    {
+      "address": "0x34eb88",
+      "source_function": "func_0034EB88",
+      "headers": [
+        "include/mod/animation/runtime.h"
+      ],
+      "uses": [
+        "state->bank",
+        "state->scratch_bank",
+        "state->blend_weights",
+        "sizeof(PlaybackHistory)"
+      ]
+    },
+    {
+      "address": "0x1afba8",
+      "source_function": "func_001AFBA8",
+      "headers": [
+        "include/mod/effects/asset.h"
+      ],
+      "uses": [
+        "asset->records",
+        "flags5a"
+      ]
+    },
+    {
+      "address": "0x1afc30",
+      "source_function": "func_001AFC30",
+      "headers": [
+        "include/mod/effects/asset.h"
+      ],
+      "uses": [
+        "asset->records",
+        "flags58"
+      ]
+    },
+    {
+      "address": "0x1afcd8",
+      "source_function": "func_001AFCD8",
+      "headers": [
+        "include/mod/effects/asset.h"
+      ],
+      "uses": [
+        "remaining",
+        "index"
+      ]
+    },
+    {
+      "address": "0x1b33b8",
+      "source_function": "func_001B33B8",
+      "headers": [
+        "include/mod/effects/slot.h"
+      ],
+      "uses": [
+        "object->slot",
+        "slots+object->slot"
+      ]
+    },
+    {
+      "address": "0x1b37c8",
+      "source_function": "func_001B37C8",
+      "headers": [
+        "include/mod/effects/slot.h"
+      ],
+      "uses": [
+        "callbacks->release",
+        "adjustment",
+        "slot->mode"
+      ]
+    },
+    {
+      "address": "0x1b3cf8",
+      "source_function": "func_001B3CF8",
+      "headers": [
+        "include/mod/effects/slot.h"
+      ],
+      "uses": [
+        "slot->object",
+        "slot->active",
+        "slot->count"
+      ]
+    },
+    {
+      "address": "0x1ae860",
+      "source_function": "func_001AE860",
+      "headers": [
+        "include/mod/effects/render_state.h"
+      ],
+      "uses": [
+        "actor->buffers",
+        "actor->resource"
+      ]
+    }
+  ],
+  "subsystems": [
+    {
+      "area": "camera/player/input",
+      "headers": [
+        "mod/camera/controller.hpp",
+        "mod/camera/axes.hpp",
+        "mod/camera/pad.hpp",
+        "mod/camera/pad_backend.hpp"
+      ],
+      "tus": [
+        "tu_13db40",
+        "tu_26baf8",
+        "tu_140ca0"
+      ],
+      "counterpart_leads": [
+        {
+          "xbox": "0x1ec480",
+          "ps2": "0x13f618",
+          "confidence": "high"
+        },
+        {
+          "xbox": "0x1bd420",
+          "ps2": "0x1404a8",
+          "confidence": "low"
+        },
+        {
+          "xbox": "0x1cc4c0",
+          "ps2": "0x140068",
+          "confidence": "medium"
+        }
+      ],
+      "gaps": [
+        "matrix inverse/axis-angle helper recipes",
+        "player input giant source context",
+        "class identity and complete actor hierarchy"
+      ]
+    },
+    {
+      "area": "weapons/shots/fire/reload/impact",
+      "headers": [
+        "mod/weapons/state.h",
+        "mod/weapons/shot.h"
+      ],
+      "tus": [
+        "tu_1561f8",
+        "tu_158f08",
+        "tu_15d370"
+      ],
+      "counterpart_leads": [
+        {
+          "xbox": "0x1f0240",
+          "ps2": "0x156388",
+          "confidence": "medium"
+        },
+        {
+          "xbox": "0x1dbd80",
+          "ps2": "0x159198",
+          "confidence": "medium"
+        },
+        {
+          "xbox": "0x1bb370",
+          "ps2": "0x156dc0",
+          "confidence": "medium"
+        },
+        {
+          "xbox": "0x1bafa0",
+          "ps2": "0x15a830",
+          "confidence": "low"
+        }
+      ],
+      "gaps": [
+        "query/Hit64 payload exact consumers",
+        "full fire and emission source context",
+        "owner/weapon historical class identity"
+      ]
+    },
+    {
+      "area": "first-person arms/weapon animation",
+      "headers": [
+        "mod/animation/instance.h",
+        "mod/animation/runtime.h"
+      ],
+      "tus": [
+        "tu_347a50",
+        "tu_1a51c8",
+        "tu_34eae0"
+      ],
+      "ps2_call_chain": [
+        "0x1a54e0",
+        "0x348288",
+        "0x347e80",
+        "0x347e18",
+        "0x348070"
+      ],
+      "gaps": [
+        "owner84 has instruction evidence only",
+        "legacy field semantic overlap",
+        "original pose/matrix inline operators"
+      ]
+    },
+    {
+      "area": "particles/muzzle/decals",
+      "headers": [
+        "mod/effects/asset.h",
+        "mod/effects/slot.h",
+        "mod/effects/render_state.h",
+        "game/effects/emitter_list.h",
+        "game/effects/pool.h",
+        "game/effects/vector.h"
+      ],
+      "tus": [
+        "tu_1b0fd0",
+        "tu_1af930",
+        "tu_1b2e08"
+      ],
+      "counterpart_leads": [
+        {
+          "xbox": "0x16fe40",
+          "ps2": "0x1b1340",
+          "confidence": "high"
+        },
+        {
+          "xbox": "0x16a170",
+          "ps2": "0x1b2078",
+          "confidence": "low"
+        },
+        {
+          "xbox": "0x159d00",
+          "ps2": "0x1bd508",
+          "confidence": "low"
+        }
+      ],
+      "gaps": [
+        "semantic effect class identities",
+        "remaining asset relocation methods",
+        "particle/muzzle geometry context"
+      ]
+    }
+  ]
+}

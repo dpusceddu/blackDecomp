@@ -1,20 +1,21 @@
 #include "auto/prelude.h"
+#include "mod/weapons/state.h"
 
 extern s32 func_0015A938(void *arg0);
 
 s32 func_00158078(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xD8) == 4;
+    return BkModWeaponReloadingPS2(arg0);
 }
 
 s32 func_00158088(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xD8) == 1;
+    return ((BkModWeaponControllerPS2*)arg0)->phase == 1;
 }
 
 s32 func_00158098(void *arg0) {
     s32 temp_3;
     s32 var_4;
 
-    temp_3 = M2C_FIELD(arg0, s32 *, 0xD8);
+    temp_3 = ((BkModWeaponControllerPS2*)arg0)->phase;
     var_4 = 0;
     if ((temp_3 == 1) || (temp_3 == 8)) {
         var_4 = 1;
@@ -23,9 +24,9 @@ s32 func_00158098(void *arg0) {
 }
 
 void func_001580C0(void *arg0) {
-    func_0015A938(M2C_FIELD(arg0, void **, 0xF4));
+    func_0015A938(((BkModWeaponControllerPS2*)arg0)->primary);
 }
 
 s16 func_001580E0(void *arg0) {
-    return M2C_FIELD(M2C_FIELD(arg0, void **, 0xF4), s16 *, 0x18);
+    return BkModWeaponClipPS2(arg0);
 }

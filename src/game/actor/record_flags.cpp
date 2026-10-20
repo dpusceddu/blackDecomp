@@ -1,13 +1,6 @@
-// This prefix view preserves the record stride and the two observed flag words.
-struct BkFlagRecordPS2 {
-    char opaque[0x58];
-    unsigned short flags58, flags5a;
-    char trailing[0x74];
-};
-struct BkFlagAssetPS2 {
-    char opaque[0x48];
-    BkFlagRecordPS2 *records;
-};
+#include "mod/effects/asset.h"
+typedef BkActorAssetRecordPS2 BkFlagRecordPS2;
+typedef BkActorAssetPS2 BkFlagAssetPS2;
 extern "C" int func_001AFBF0(void *);
 
 extern "C" bool func_001AFBA8(BkFlagAssetPS2 *asset) {
