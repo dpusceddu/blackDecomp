@@ -8,11 +8,11 @@ bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
 {
     float nodeBuffer[0x320 * 5];
     unsigned int edgeBuffer[0x800 * 2];
-    if (files->Read(resource, &field08, 4) != 4) {
+    if (files->Read(resource, &coverageDistance, 4) != 4) {
         files->Close(resource);
         return false;
     }
-    CONVERT(field08);
+    CONVERT(coverageDistance);
     if (files->Read(resource, &nodeCount, 4) != 4) {
         files->Close(resource);
         return false;
@@ -52,7 +52,7 @@ bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
         files->Close(resource);
         return true;
     }
-    field28 = 0;
+    edgeCapacity = 0;
     edgeSlots = edgeCount;
     unsigned int edgeTotal = edgeCount;
     edges = new SpatialEdge[edgeTotal];
@@ -69,11 +69,11 @@ bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
             CONVERT(edgeBuffer[i]);
         remaining -= chunk;
         for (unsigned int i = 0; i < chunk; ++i) {
-            edges[field28].index = field28;
-            edges[field28].graph = (CSpatialGraph*)this;
-            edgeEnd[field28] = edgeBuffer[i * 2];
-            edgeStart[field28] = edgeBuffer[i * 2 + 1];
-            ++field28;
+            edges[edgeCapacity].index = edgeCapacity;
+            edges[edgeCapacity].graph = (CSpatialGraph*)this;
+            edgeEnd[edgeCapacity] = edgeBuffer[i * 2];
+            edgeStart[edgeCapacity] = edgeBuffer[i * 2 + 1];
+            ++edgeCapacity;
         }
     }
     SetFlags(flags);
@@ -114,7 +114,7 @@ bool CSpatialGraph::Load(const void* resource)
         return false;
     }
     if(files->Read(resource,&flags,4)!=4){files->Close(resource);return false;}CONVERT(flags);
-if(files->Read(resource,&field08,4)!=4){files->Close(resource);return false;}CONVERT(field08);
+if(files->Read(resource,&coverageDistance,4)!=4){files->Close(resource);return false;}CONVERT(coverageDistance);
 if(files->Read(resource,&nodeCapacity,4)!=4){files->Close(resource);return false;}CONVERT(nodeCapacity);
 if(files->Read(resource,&nodeSlots,4)!=4){files->Close(resource);return false;}CONVERT(nodeSlots);
 if(files->Read(resource,&nodeCount,4)!=4){files->Close(resource);return false;}CONVERT(nodeCount);
@@ -162,7 +162,7 @@ if(files->Read(resource,&nodeCount,4)!=4){files->Close(resource);return false;}C
         for (unsigned int i = 0; i < nodeSlots; ++i)
             CONVERT(firstEdgeTo[i]);
     }
-    if(files->Read(resource,&field28,4)!=4){files->Close(resource);return false;}CONVERT(field28);
+    if(files->Read(resource,&edgeCapacity,4)!=4){files->Close(resource);return false;}CONVERT(edgeCapacity);
     if(files->Read(resource,&edgeSlots,4)!=4){files->Close(resource);return false;}CONVERT(edgeSlots);
     if(files->Read(resource,&edgeCount,4)!=4){files->Close(resource);return false;}CONVERT(edgeCount);
 
@@ -215,7 +215,7 @@ bool CSpatialGraph::SaveOld(const void *path) {
         if(D_00451228.write(D_00407C28,1,strlen(D_00407C28),file)==strlen(D_00407C28)) {
             unsigned int version=1;
             if(D_00451228.write(&version,4,1,file)==1) {
-                unsigned int distance=field08;
+                unsigned int distance=*(const unsigned int*)&coverageDistance;
                 D_00451228.write(&distance,4,1,file);
                 unsigned int count=nodeCount;
                 D_00451228.write(&count,4,1,file);
@@ -262,7 +262,7 @@ bool CSpatialGraph::Write(const void* path, unsigned int saveFlags)
     }
     if(!SpatialWriteScalar(2,file)){D_00451228.close(file);return false;}
     if(!SpatialWriteScalar(saveFlags,file)){D_00451228.close(file);return false;}
-    if(!SpatialWriteScalar(field08,file)){D_00451228.close(file);return false;}
+    if(!SpatialWriteScalar(coverageDistance,file)){D_00451228.close(file);return false;}
     if(!SpatialWriteScalar(nodeCount,file)){D_00451228.close(file);return false;}
     if(!SpatialWriteScalar(nodeCount,file)){D_00451228.close(file);return false;}
     if(!SpatialWriteScalar(nodeCount,file)){D_00451228.close(file);return false;}

@@ -46550,22 +46550,10 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   functions:
-  - addr: '0x2f66d0'
-    symbol: func_002F66D0
-    size: 432
-    status: asm
   - addr: '0x2f7d80'
     symbol: LoadFromPath__Q24Kaim13CSpatialGraphPCc
     size: 456
     status: source
-  - addr: '0x2fa4c8'
-    symbol: func_002FA4C8
-    size: 1124
-    status: asm
-  - addr: '0x2fa930'
-    symbol: func_002FA930
-    size: 2200
-    status: asm
   externs:
     _$_Q24Kaim14ArenaAllocator: '0x2e5d90'
     _$_Q24Kaim15PathFileService: '0x373268'
@@ -50047,25 +50035,10 @@ units:
   - -fno-rtti
   - -ffunction-sections
   functions:
-  - addr: '0x2f6880'
-    size: 1412
-    status: asm
-    symbol: func_002F6880
-    reason: registers
-  - addr: '0x2f6e08'
-    size: 3956
-    status: asm
-    symbol: func_002F6E08
-    reason: registers
   - addr: '0x2f7f48'
     size: 752
     status: source
     symbol: SaveOld__Q24Kaim13CSpatialGraphPCv
-  - addr: '0x2f8238'
-    size: 2560
-    status: asm
-    symbol: func_002F8238
-    reason: registers
   externs:
     __throw: '0x292b40'
     _vt$Q24Kaim11GraphWriter: '0x3ee500'
@@ -50913,3 +50886,97 @@ units:
     _vt$Q222ConstraintRegistration13HeuristicMeta: '0x3eca80'
     _vt$Q222ConstraintRegistration14ConstraintMeta: '0x3e00c8'
     _vt$Q222ConstraintRegistration17HeuristicMetaBase: '0x3e00b0'
+- name: context_graph_spatial_wave7
+  source: src/campaign/graph_spatial_wave7.cpp
+  owner: context-graph
+  claim: context-wave7-graph
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-rtti
+  - -fbyte-bool
+  - -ffunction-sections
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2f5c10'
+    size: 228
+    status: source
+    symbol: func_002F5C10
+  - addr: '0x2f5cf8'
+    size: 296
+    status: source
+    symbol: __Q24Kaim13CSpatialGraphRCQ24Kaim13CSpatialGraph
+  - addr: '0x2f5e20'
+    size: 2220
+    status: asm
+    symbol: func_002F5E20
+    reason: claimed
+  - addr: '0x2f66d0'
+    symbol: func_002F66D0
+    size: 432
+    status: asm
+  - addr: '0x2f6880'
+    size: 1412
+    status: asm
+    symbol: func_002F6880
+    reason: registers
+  - addr: '0x2f6e08'
+    size: 3956
+    status: asm
+    symbol: func_002F6E08
+    reason: registers
+  - addr: '0x2f8238'
+    size: 2560
+    status: asm
+    symbol: func_002F8238
+    reason: registers
+  - addr: '0x2f8dc0'
+    size: 1400
+    status: asm
+    symbol: func_002F8DC0
+    reason: claimed
+  - addr: '0x2f9338'
+    size: 1128
+    status: source
+    symbol: RemoveNode__Q24Kaim13CSpatialGraphUi
+  - addr: '0x2f97a0'
+    size: 2192
+    status: asm
+    symbol: func_002F97A0
+    reason: claimed
+  - addr: '0x2fa030'
+    size: 1176
+    status: asm
+    symbol: func_002FA030
+    reason: claimed
+  - addr: '0x2fa4c8'
+    symbol: func_002FA4C8
+    size: 1124
+    status: asm
+  - addr: '0x2fa930'
+    symbol: func_002FA930
+    size: 2200
+    status: asm
+  - addr: '0x2fb538'
+    size: 32
+    status: source
+    symbol: FindEdge__Q24Kaim13CSpatialGraphRCQ24Kaim12SpatialIndexT1
+  - addr: '0x2fb650'
+    size: 132
+    status: source
+    symbol: FindPoint__CQ24Kaim12RouteBuffersPC4Vec3
+  externs:
+    FindEdge__Q24Kaim13CSpatialGraphUiUi: '0x2f66d0'
+    RemoveEdge__Q24Kaim13CSpatialGraphUi: '0x2fa030'
+    __as__Q24Kaim13CSpatialGraphRCQ24Kaim13CSpatialGraph: '0x2f5e20'
+    __throw: '0x292b40'
+    _vt$Q24Kaim13CSpatialGraph: '0x3ee538'
+    _vt$Q24Kaim7CObject: '0x3e0040'
+    func_00383D40: '0x383d40'
+    func_00391620: '0x391620'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved

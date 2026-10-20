@@ -28,11 +28,11 @@ bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
 {
     float nodeBuffer[0x320 * 5];
     unsigned int edgeBuffer[0x800 * 2];
-    if (files->Read(resource, &field08, 4) != 4) {
+    if (files->Read(resource, &coverageDistance, 4) != 4) {
         files->Close(resource);
         return false;
     }
-    CONVERT(field08);
+    CONVERT(coverageDistance);
     if (files->Read(resource, &nodeCount, 4) != 4) {
         files->Close(resource);
         return false;
@@ -79,7 +79,7 @@ bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
         files->Close(resource);
         return true;
     }
-    field28 = 0;
+    edgeCapacity = 0;
     edgeSlots = edgeCount;
     unsigned int edgeTotal = edgeCount;
     SpatialEdge* edgeBlock = (SpatialEdge*)Allocate(edgeTotal * sizeof(SpatialEdge));
@@ -103,11 +103,11 @@ bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
             CONVERT(edgeBuffer[i]);
         remaining -= chunk;
         for (unsigned int i = 0; i < chunk; ++i) {
-            edges[field28].index = field28;
-            edges[field28].graph = (CSpatialGraph*)this;
-            edgeEnd[field28] = edgeBuffer[i * 2];
-            edgeStart[field28] = edgeBuffer[i * 2 + 1];
-            ++field28;
+            edges[edgeCapacity].index = edgeCapacity;
+            edges[edgeCapacity].graph = (CSpatialGraph*)this;
+            edgeEnd[edgeCapacity] = edgeBuffer[i * 2];
+            edgeStart[edgeCapacity] = edgeBuffer[i * 2 + 1];
+            ++edgeCapacity;
         }
     }
     SetFlags(flags);
@@ -146,7 +146,7 @@ bool CSpatialGraph::Load(const void* resource)
         return false;
     }
     if(files->Read(resource,&flags,4)!=4){files->Close(resource);return false;}CONVERT(flags);
-if(files->Read(resource,&field08,4)!=4){files->Close(resource);return false;}CONVERT(field08);
+if(files->Read(resource,&coverageDistance,4)!=4){files->Close(resource);return false;}CONVERT(coverageDistance);
 if(files->Read(resource,&nodeCapacity,4)!=4){files->Close(resource);return false;}CONVERT(nodeCapacity);
 if(files->Read(resource,&nodeSlots,4)!=4){files->Close(resource);return false;}CONVERT(nodeSlots);
 if(files->Read(resource,&nodeCount,4)!=4){files->Close(resource);return false;}CONVERT(nodeCount);
@@ -206,12 +206,12 @@ if(files->Read(resource,&nodeCount,4)!=4){files->Close(resource);return false;}C
         for (unsigned int i = 0; i < nodeSlots; ++i)
             CONVERT(firstEdgeTo[i]);
     }
-    if (files->Read(resource, &field28, 4) != 4 || files->Read(resource, &edgeSlots, 4) != 4 ||
+    if (files->Read(resource, &edgeCapacity, 4) != 4 || files->Read(resource, &edgeSlots, 4) != 4 ||
         files->Read(resource, &edgeCount, 4) != 4) {
         files->Close(resource);
         return false;
     }
-    CONVERT(field28);
+    CONVERT(edgeCapacity);
     CONVERT(edgeSlots);
     CONVERT(edgeCount);
     unsigned int edgeBlockSlots = edgeSlots;
@@ -338,7 +338,7 @@ bool CSpatialGraph::Write(const void* path, unsigned int saveFlags)
     }
     WRITE_WORD(2)
     WRITE_WORD(saveFlags)
-    WRITE_WORD(field08)
+    WRITE_WORD(coverageDistance)
     WRITE_WORD(nodeCount)
     WRITE_WORD(nodeCount)
     WRITE_WORD(nodeCount)
@@ -443,13 +443,13 @@ SpatialEdge* CSpatialGraph::FindEdge(unsigned int endId, unsigned int startId)
                     ++seen;
                     SpatialNode* end;
                     if (edge == &owner->syntheticEdge)
-                        end = &owner->syntheticEnd;
+                        end = &owner->syntheticNodes[0];
                     else
                         end = &owner->nodes[owner->edgeEnd[edge->index]];
                     if ((unsigned int)end->id == endId) {
                         SpatialNode* start;
                         if (edge == &owner->syntheticEdge)
-                            start = &owner->syntheticStart;
+                            start = &owner->syntheticNodes[1];
                         else
                             start = &owner->nodes[owner->edgeStart[edge->index]];
                         if ((unsigned int)start->id == startId)
@@ -571,7 +571,7 @@ void CSpatialGraph::SetFlags(unsigned int newFlags)
         if (!edgeTable48) {
             edgeTable48 = (int*)Allocate(edgeSlots << 2);
             for (unsigned int i = 0; i < edgeSlots; ++i) {
-                if (i < field28 && edges[i].index != -1 && &edges[i]) {
+                if (i < edgeCapacity && edges[i].index != -1 && &edges[i]) {
                     SpatialEdge* edge = &edges[i];
                     SpatialNode* end = edge->EndNode();
                     SpatialNode* start = edge->StartNode();
@@ -598,7 +598,7 @@ void CSpatialGraph::SetFlags(unsigned int newFlags)
                 edgeNext[i] = -1;
             for (unsigned int k = 0; k < edgeSlots; ++k) {
                 unsigned int index = edgeSlots - k - 1;
-                if (index < field28 && edges[index].index != -1 && &edges[index]) {
+                if (index < edgeCapacity && edges[index].index != -1 && &edges[index]) {
                     SpatialEdge* edge = &edges[index];
                     SpatialNode* end = edge->EndNode();
                     int* head = &firstEdgeTo[end->id];
@@ -628,7 +628,7 @@ void CSpatialGraph::SetFlags(unsigned int newFlags)
                 edgeTable40[i] = -1;
             for (unsigned int k = 0; k < edgeSlots; ++k) {
                 unsigned int index = edgeSlots - k - 1;
-                if (index < field28 && edges[index].index != -1 && &edges[index]) {
+                if (index < edgeCapacity && edges[index].index != -1 && &edges[index]) {
                     SpatialEdge* edge = &edges[index];
                     SpatialNode* start = edge->StartNode();
                     int* head = &firstEdgeFrom[start->id];

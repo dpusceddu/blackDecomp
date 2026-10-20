@@ -55,7 +55,7 @@ void Kaim::CSpatialGraph::Reset()
     nodeCapacity = 0;
     edgeSlots = 0;
     edgeCount = 0;
-    field28 = 0;
+    edgeCapacity = 0;
 }
 Kaim::CSpatialGraph::~CSpatialGraph()
 {

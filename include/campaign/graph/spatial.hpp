@@ -20,11 +20,15 @@ struct SpatialIndex {
 };
 typedef char SpatialIndexSize[sizeof(SpatialIndex)==4?1:-1];
 struct CSpatialGraph;
-struct SpatialNode { SpatialIndex id; float x,y,z; CSpatialGraph *graph; SpatialNode():id(-1),graph(0){} ~SpatialNode(){} };
-struct SpatialEdge { SpatialIndex index; CSpatialGraph *graph; SpatialEdge():index(-1),graph(0){} ~SpatialEdge(){} inline SpatialNode *EndNode(); inline SpatialNode *StartNode(); };
+// Trivial node/edge destruction and the native two-node array are exact-backed
+// by both graph constructors. Heap-array lifetime wrappers remain UNVERIFIED.
+struct SpatialNode { SpatialIndex id; float x,y,z; CSpatialGraph *graph; SpatialNode():id(-1),graph(0){}  };
+struct SpatialEdge { SpatialIndex index; CSpatialGraph *graph; SpatialEdge():index(-1),graph(0){}  inline SpatialNode *EndNode(); inline SpatialNode *StartNode(); unsigned int GetIndex() __asm__("func_00383D40"); };
 struct CSpatialGraph : CObject {
  static void *operator new(unsigned int size){return Allocate(size);}
  CSpatialGraph() __asm__("func_002F5C10");
+ CSpatialGraph(const CSpatialGraph&);
+ CSpatialGraph &operator=(const CSpatialGraph&);
  virtual ~CSpatialGraph();
  virtual bool LoadOld(FileService*,const void*);
  virtual bool Load(const void*);
@@ -33,24 +37,30 @@ struct CSpatialGraph : CObject {
  virtual bool Write(const void*,unsigned int);
  virtual void Reset();
  unsigned int flags;
- union { unsigned int field08; float coverageDistance; };
+ float coverageDistance;
  unsigned int nodeCapacity,nodeSlots,nodeCount;
  SpatialNode *nodes; int *nodeTable1c,*firstEdgeFrom,*firstEdgeTo;
- union { unsigned int field28; unsigned int edgeCapacity; };
+ unsigned int edgeCapacity;
  unsigned int edgeSlots,edgeCount;
  SpatialEdge *edges; int *edgeEnd,*edgeStart,*edgeTable40,*edgeNext,*edgeTable48,*edgeTable4c,*edgeTable50;
- unsigned char unknown54[8]; SpatialEdge syntheticEdge; SpatialNode syntheticEnd,syntheticStart;
- unsigned char unknown8c[12];
+ void *costPolicy,*heuristic; SpatialEdge syntheticEdge; SpatialNode syntheticNodes[2];
+ float syntheticGeometricLength,syntheticLength;void *syntheticGuard;
  inline unsigned char HasFlag(unsigned int flag){if(flags&flag)return 1;return 0;}
  inline unsigned int NodeCount(){return nodeCount;}
  void Compact() __asm__("func_002FA4C8");
  void SetFlags(unsigned int) __asm__("func_002FA930");
  SpatialEdge *FindEdge(unsigned int,unsigned int);
+ SpatialEdge *FindEdge(const SpatialIndex&,const SpatialIndex&);
+ SpatialNode *AddNode(const Vec3*);
+ bool RemoveNode(unsigned int);
+ SpatialEdge *AddEdge(SpatialNode*,SpatialNode*);
+ bool RemoveEdge(unsigned int);
+ unsigned int EdgeCount() __asm__("func_00391620");
  inline SpatialNode *GetNode(unsigned int n) { if(n>=nodeCapacity)return 0; if(nodes[n].id==SpatialIndex((unsigned int)-1))return 0; return &nodes[n]; }
  inline SpatialEdge *GetEdge(unsigned int n) { if(n>=edgeCapacity)return 0; if(edges[n].index==SpatialIndex((unsigned int)-1))return 0; return &edges[n]; }
 };
-inline SpatialNode *SpatialEdge::EndNode(){CSpatialGraph *owner=graph;if(this==&owner->syntheticEdge)return &owner->syntheticEnd;return &owner->nodes[owner->edgeEnd[index]];}
-inline SpatialNode *SpatialEdge::StartNode(){CSpatialGraph *owner=graph;if(this==&owner->syntheticEdge)return &owner->syntheticStart;return &owner->nodes[owner->edgeStart[index]];}
+inline SpatialNode *SpatialEdge::EndNode(){CSpatialGraph *owner=graph;if(this==&owner->syntheticEdge)return &owner->syntheticNodes[0];return &owner->nodes[owner->edgeEnd[index]];}
+inline SpatialNode *SpatialEdge::StartNode(){CSpatialGraph *owner=graph;if(this==&owner->syntheticEdge)return &owner->syntheticNodes[1];return &owner->nodes[owner->edgeStart[index]];}
 struct ConfigBlock {
  unsigned char data[0x24];
  ConfigBlock() __asm__("func_002E3408");
@@ -78,8 +88,9 @@ SPATIAL_OFFSET(coverageDistance,8);
 SPATIAL_OFFSET(nodes,0x18);
 SPATIAL_OFFSET(edges,0x34);
 SPATIAL_OFFSET(syntheticEdge,0x5c);
-SPATIAL_OFFSET(syntheticEnd,0x64);
-SPATIAL_OFFSET(syntheticStart,0x78);
+SPATIAL_OFFSET(syntheticNodes,0x64);
+typedef char SpatialSyntheticSecondOffset[((unsigned int)&((Kaim::CSpatialGraph*)0)->syntheticNodes[1])==0x78?1:-1];
+
 typedef char SpatialGraphAllocationSize[sizeof(Kaim::CSpatialGraph)==0x98?1:-1];
 #undef SPATIAL_OFFSET
 #endif
