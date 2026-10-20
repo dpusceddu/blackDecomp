@@ -6,9 +6,10 @@
 typedef struct Recovered_SamplingPair {
     s32 field_0; /* PS2 +0x0 */
     s32 field_4; /* PS2 +0x4 */
-    f32 field_8; /* PS2 +0x8 */
+    u8 opaque_8[4];
+    u8 field_C; /* PS2 +0xC */
 } Recovered_SamplingPair;
 typedef char assert_Recovered_SamplingPair_0[(((int)&((Recovered_SamplingPair *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_SamplingPair_4[(((int)&((Recovered_SamplingPair *)0)->field_4) == 4) ? 1 : -1];
-typedef char assert_Recovered_SamplingPair_8[(((int)&((Recovered_SamplingPair *)0)->field_8) == 8) ? 1 : -1];
+typedef char assert_Recovered_SamplingPair_C[(((int)&((Recovered_SamplingPair *)0)->field_C) == 12) ? 1 : -1];
 #endif

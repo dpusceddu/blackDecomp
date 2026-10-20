@@ -44,6 +44,8 @@
 #include "recovered/Recovered_BkEffectSlotPS2.h"
 #include "recovered/Recovered_BkEmitterListPS2.h"
 #include "recovered/Recovered_BkFlagAssetPS2.h"
+#include "recovered/Recovered_BkModDelayedShotPS2.h"
+#include "recovered/Recovered_BkModInventoryPS2.h"
 #include "recovered/Recovered_BkModWeaponDefinitionPS2.h"
 #include "recovered/Recovered_BkModWeaponInstancePS2.h"
 #include "recovered/Recovered_BkModWeaponOwnerPS2.h"
