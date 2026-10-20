@@ -1,5 +1,6 @@
 #include "animation/graph.h"
 #include "animation/instance_state.h"
+#include "ps2/vu0_micro.hpp"
 
 /* Names describe the recovered PS2 behavior. */
 static inline unsigned char *AnimationSource_Offset(unsigned char *base, unsigned char *field) {
@@ -54,7 +55,7 @@ static inline void Matrix_Identity(AnimationMatrix *matrix) {
     __asm__ volatile("pand $8,$0,$0\n\tlui $8,0x3f80\n\tsq $8,0x0(%0)\n\tpextlw $8,$8,$0\n\tsq $8,0x10(%0)\n\tpextlw $9,$0,$8\n\tsq $9,0x20(%0)\n\tpextlw $9,$8,$0\n\tsq $9,0x30(%0)": :"r"(matrix):"$8","$9","memory");
 }
 static inline void Matrix_MultiplyParent(AnimationMatrix *matrix,const AnimationMatrix *parent) {
-    __asm__ volatile("lqc2 vf1,0x0(%0)\n\tlqc2 vf2,0x10(%0)\n\tlqc2 vf3,0x20(%0)\n\tlqc2 vf4,0x30(%0)\n\tlqc2 vf5,0x0(%1)\n\tlqc2 vf6,0x10(%1)\n\tlqc2 vf7,0x20(%1)\n\tlqc2 vf8,0x30(%1)\n\tvcallms 0\n\tvnop\n\tsqc2 vf9,0x0(%0)\n\tsqc2 vf10,0x10(%0)\n\tsqc2 vf11,0x20(%0)\n\tsqc2 vf12,0x30(%0)": :"r"(matrix),"r"(parent):"memory");
+    BlackPS2::AnimationMicro::Multiply4x4(matrix, matrix, parent);
 }
 static inline float Ee_Sqrt(float value) { float result; __asm__("sqrt.s %0,%1":"=f"(result):"f"(value));return result; }
 static inline float Ee_Abs(float value) { float result; __asm__("abs.s %0,%1":"=f"(result):"f"(value));return result; }
