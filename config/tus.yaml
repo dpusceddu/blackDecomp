@@ -7378,7 +7378,7 @@ tus:
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 28 of 59 functions
+  flags_basis: matched 33 of 59 functions
   data:
     .rodata: ['0x3f5700', '0x3f6638']
     .data: ['0x3bcf14', '0x3bcf1c']
@@ -7454,8 +7454,8 @@ tus:
   confidence: low
   evidence: [calls, proposed-cut]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas, -fno-schedule-insns2]
-  flags_basis: matched 1 of 3 functions
+  flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]
+  flags_basis: matched 2 of 3 functions
 - name: tu_190cb0
   kind: isolated
   library: game

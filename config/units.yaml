@@ -48609,3 +48609,78 @@ units:
   - _vt$Q218KaimScriptRegistry10ObjectRoot
   - _vt$Q218KaimScriptRegistry13ScriptManager
   - _vt$Q218KaimScriptRegistry6Record
+- name: campaign_graphics_movement_wave4
+  source: src/campaign/graphics_movement_pending.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x18e4c0'
+    size: 184
+    status: asm
+    symbol: Event__Q216CampaignGraphics12MovementCorePUi
+  - addr: '0x18e7c0'
+    size: 604
+    status: asm
+    symbol: Allowed__Q216CampaignGraphics12MovementCorel
+  - addr: '0x18ea20'
+    size: 344
+    status: asm
+    symbol: Direction__Q216CampaignGraphics12MovementCore
+  - addr: '0x18ebe0'
+    size: 188
+    status: asm
+    symbol: Nearest__Q216CampaignGraphics12MovementCorex
+  - addr: '0x18ef70'
+    size: 116
+    status: asm
+    symbol: Target__Q216CampaignGraphics12MovementCore
+  - addr: '0x18f100'
+    size: 116
+    status: asm
+    symbol: AlternateTarget__Q216CampaignGraphics12MovementCore
+  - addr: '0x18f2a0'
+    size: 64
+    status: asm
+    symbol: Score__Q216CampaignGraphics12ActionWeightPUc
+  - addr: '0x1948a0'
+    size: 344
+    status: asm
+- name: campaign_graphics_movement_exact
+  source: src/campaign/graphics_movement.cpp
+  origin: C++ movement access and virtual-slot view; verified fields only
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x18eca0'
+    size: 172
+    status: source
+    symbol: Update__Q216CampaignGraphics12MovementCore
+  - addr: '0x18f008'
+    size: 176
+    status: source
+    symbol: Choose__Q216CampaignGraphics12MovementCorei
+  - addr: '0x18f180'
+    size: 176
+    status: source
+    symbol: AlternateChoose__Q216CampaignGraphics12MovementCorei
+  - addr: '0x18f230'
+    size: 112
+    status: source
+    symbol: IsNear__Q216CampaignGraphics12MovementCorex
+  - addr: '0x18f378'
+    size: 100
+    status: source
+    symbol: Priority__Q216CampaignGraphics12MovementCore
+  - addr: '0x190a68'
+    size: 340
+    status: source
+    symbol: UpdateProximity__Q216CampaignGraphics12MovementCore
