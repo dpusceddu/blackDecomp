@@ -497,6 +497,7 @@ sizes over 300 and 1,024 bytes. The first two waves used the former one-percent 
 | 4 | 67 / 16,064 (0.592%) | 2 | 14 / 67 | 1 / 12 | 3.30 / 4,867 | Inline/iterator lifetimes; VU math contracts; cleanup/register allocation |
 | 5 | 59 / 15,512 (0.571%) | 2 | 14 / 58 | 2 / 12 | 3.07 / 5,048 | Iterator/temporary lifetimes; call contracts; VU0/register allocation |
 | 6 | 21 / 10,856 (0.400%) | 1 | 14 / 33 | 1 / 9 | 3.45 / 3,148 | Helper/lvalue lifetimes; call-clobber and vector context; serialization/cleanup |
+| 7 | 20 / 5,752 (0.212%) | 1 | 6 / 50 | 1 / 16 | 3.01 / 1,912 | Aggregate/helper lifetimes; call/index contracts; register and epilogue scheduling |
 
 Four isolated class queues ran per wave without worker contention. Source progress rose from 5,066
 functions / 281,632 text bytes to 5,107 / 292,808: +41 functions / 11,176 bytes. Gains exclude six
@@ -590,6 +591,19 @@ saved drafts and 6,565 remaining entries were retried with no placeable automati
 retail checks, 270 tests and 22 shared controls pass. Throughput falls 37.6%, the first decline,
 above the stopping floor. Further queues use full TU inventories: vtable slots omit nonvirtual
 functions, so completing a class queue alone does not establish TU completion.
+
+Wave 7 reaches 5,354 functions / 362,016 text bytes. The constraint TU is complete at 29/29.
+Native unsigned indices and loop-local declaration order match the algorithmic 1,128-byte node
+removal method. An ABI-equivalent parameter order removes 31 differences from a 440-byte envelope
+registration method; its seven DSP label strings must also come from source for placement.
+Full-inventory claims and post-settlement source-delta checks catch candidates omitted from the
+build. All 4,263 saved drafts and 6,545 remaining entries were retried with no placeable automatic
+gain. Generated views retain 713 scoped field proofs; all five retail checks, 270 tests and 22 shared
+controls pass. Inclusive throughput falls 39.3% to 1,912 bytes per agent-hour: the second consecutive
+decline, so the campaign stops. Future work should target shared helper families, ABI-equivalent
+declaration orders and measured large-function near misses before another broad campaign. A linear
+projection for the remaining 2.35 MB is about 1,230 inclusive agent-hours at this rate, optimistic
+because these queues already favored known layouts and counterparts.
 
 ## Agent rules (`AGENTS.md`)
 
