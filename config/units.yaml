@@ -13578,21 +13578,9 @@ units:
   - -snas
   - -ffunction-sections
   functions:
-  - addr: '0x1bec68'
-    symbol: func_001BEC68
-    size: 92
-    status: source
   - addr: '0x1becc8'
     symbol: func_001BECC8
     size: 8
-    status: source
-  - addr: '0x1bf720'
-    symbol: func_001BF720
-    size: 32
-    status: source
-  - addr: '0x1bfea0'
-    symbol: func_001BFEA0
-    size: 36
     status: source
   - addr: '0x1c05d8'
     symbol: func_001C05D8
@@ -52528,4 +52516,46 @@ units:
   - addr: '0x1beb50'
     size: 76
     symbol: func_001BEB50
+    status: source
+- name: mod_effects_1bec68
+  source: src/mod/effects/emitter_1bec68.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1bec68'
+    size: 92
+    symbol: func_001BEC68
+    status: source
+- name: mod_effects_1bf720
+  source: src/mod/effects/emitter_1bf720.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1bf720'
+    size: 32
+    symbol: func_001BF720
+    status: source
+- name: mod_effects_1bfea0
+  source: src/mod/effects/emitter_1bfea0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1bfea0'
+    size: 36
+    symbol: func_001BFEA0
     status: source
