@@ -48129,3 +48129,16 @@ units:
     status: source
     size: 100
     symbol: Reset__Q213CampaignActor15RenderableState
+- name: campaign_graphics_timed_matrix_wave4
+  source: src/campaign/graphics_timed_matrix.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x112808'
+    status: asm
+  - addr: '0x1129b8'
+    status: asm
