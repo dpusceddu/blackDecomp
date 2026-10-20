@@ -1,7 +1,8 @@
 #ifndef BLACK_CAMPAIGN_APT_VALUE_HPP
 #define BLACK_CAMPAIGN_APT_VALUE_HPP
-// PS2 APT value views. Historical C++ names and unused virtual signatures are
-// unverified. The first word is flags; the SN ABI puts this root's vptr at +4.
+// PS2 APT prefix views; historical class names and complete sizes are unverified.
+// Exact Dispose/Cleanup consumers verify the +4 vptr and slots 10, 11 and 14.
+// SetEnabled verifies its word at +0x1c. Other virtual signatures remain unverified.
 namespace AptPS2 {
 struct Value {
  int flags;
