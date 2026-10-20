@@ -50932,26 +50932,6 @@ units:
     status: asm
     reason: claimed
     size: 168
-  - addr: '0x1b0ff8'
-    symbol: func_001B0FF8
-    status: asm
-    reason: claimed
-    size: 64
-  - addr: '0x1b1038'
-    symbol: func_001B1038
-    status: asm
-    reason: claimed
-    size: 56
-  - addr: '0x1b1080'
-    symbol: func_001B1080
-    status: asm
-    reason: claimed
-    size: 116
-  - addr: '0x1b1168'
-    symbol: func_001B1168
-    status: asm
-    reason: claimed
-    size: 52
   - addr: '0x1b11a0'
     symbol: func_001B11A0
     status: asm
@@ -50962,11 +50942,6 @@ units:
     status: asm
     reason: claimed
     size: 472
-  - addr: '0x1b1518'
-    symbol: func_001B1518
-    status: asm
-    reason: claimed
-    size: 132
   - addr: '0x1b15a0'
     symbol: func_001B15A0
     status: asm
@@ -50977,11 +50952,6 @@ units:
     status: asm
     reason: claimed
     size: 92
-  - addr: '0x1b16a8'
-    symbol: func_001B16A8
-    status: asm
-    reason: claimed
-    size: 128
   - addr: '0x1b1728'
     symbol: func_001B1728
     status: asm
@@ -50997,16 +50967,6 @@ units:
     status: asm
     reason: claimed
     size: 608
-  - addr: '0x1b22d8'
-    symbol: func_001B22D8
-    status: asm
-    reason: claimed
-    size: 132
-  - addr: '0x1b2408'
-    symbol: func_001B2408
-    status: asm
-    reason: claimed
-    size: 48
   - addr: '0x1b2440'
     symbol: func_001B2440
     status: asm
@@ -51719,3 +51679,117 @@ units:
     symbol: func_0015D870
     status: asm
     reason: claimed
+- name: mod_effects_1b1038
+  source: src/mod/effects/lifecycle_1b1038.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1b1038'
+    size: 56
+    symbol: Initialize__Q210ModEffects5ChildPvPQ210ModEffects5EntryPCQ210ModEffects6Matrixf
+    status: source
+- name: mod_effects_1b1168
+  source: src/mod/effects/lifecycle_1b1168.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1b1168'
+    size: 52
+    symbol: Initialize__Q210ModEffects5EntryPCQ210ModEffects6MatrixPcUcf
+    status: source
+- name: mod_effects_1b1518
+  source: src/mod/effects/lifecycle_1b1518.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1b1518'
+    size: 132
+    symbol: Release__Q210ModEffects5Entry
+    status: source
+- name: mod_effects_1b16a8
+  source: src/mod/effects/lifecycle_1b16a8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1b16a8'
+    size: 128
+    symbol: Active__Q210ModEffects5Entry
+    status: source
+- name: mod_effects_1b2408
+  source: src/mod/effects/lifecycle_1b2408.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1b2408'
+    size: 48
+    symbol: Clear__Q210ModEffects9RecordSet
+    status: source
+- name: mod_effects_1b22d8
+  source: src/mod/effects/lifecycle_1b22d8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1b22d8'
+    size: 132
+    symbol: func_001B22D8
+    status: source
+- name: mod_effects_1b0ff8
+  source: src/mod/effects/lifecycle_1b0ff8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x1b0ff8'
+    size: 64
+    symbol: Clear__Q210ModEffects5Child
+    status: source
+- name: mod_effects_1b1080
+  source: src/mod/effects/lifecycle_1b1080.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x1b1080'
+    size: 116
+    symbol: Reset__Q210ModEffects5Child
+    status: source
