@@ -1,5 +1,48 @@
 #include "campaign/graph/nearest.hpp"
 Kaim::CFindNearestData::~CFindNearestData(){if(order)D_003C87E0(order);if(rank)D_003C87E0(rank);if(aux)D_003C87E0(aux);}
+extern Kaim::SearchGraph *D_003CA804;
+extern "C" int func_002EF6F0(const void *,const void *);
+extern "C" int func_002EF7A0(const void *,const void *);
+extern "C" int func_002EF850(const void *,const void *);
+extern "C" void func_0035EC50(void *,unsigned int,unsigned int,int (*)(const void *,const void *));
+
+int Kaim::CFindNearestData::Build()
+{
+    if (order)
+        D_003C87E0(order);
+    if (rank)
+        D_003C87E0(rank);
+    if (aux)
+        D_003C87E0(aux);
+    count = graph->liveNodes;
+    order = new int[count * 3];
+    rank = new int[count * 3];
+    aux = new int[count];
+    int i;
+    for (i = 0; i < count; ++i) {
+        order[i] = i;
+        order[i + count] = i;
+        order[i + count * 2] = i;
+    }
+    D_003CA804 = graph;
+    func_0035EC50(order, count, 4, func_002EF6F0);
+    func_0035EC50(order + count, count, 4, func_002EF7A0);
+    func_0035EC50(order + count * 2, count, 4, func_002EF850);
+    for (int axis = 0; axis < 3; ++axis) {
+        for (i = 0; i < count; ++i) {
+            int k;
+            for (k = 0; k < count; ++k) {
+                if (order[i + axis * count] == k) {
+                    rank[k + axis * count] = i;
+                    break;
+                }
+            }
+            if (progress)
+                progress(axis * 33 + ((i * count + k) * 33) / (count * count));
+        }
+    }
+    return true;
+}
 #if 0
 
 // Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
@@ -24,66 +67,7 @@ int Kaim::CFindNearestData::Init(ChildBuffers* config)
     return false;
 }
 
-// Unmatched: sort, loop and progress-callback register allocation.
-#include "campaign/graph/nearest.hpp"
-extern const char D_00407268[];
-extern const int D_00407284;
-extern Kaim::SearchGraph *D_003CA804;
-extern "C" int func_002EF6F0(const void *,const void *);
-extern "C" int func_002EF7A0(const void *,const void *);
-extern "C" int func_002EF850(const void *,const void *);
-extern "C" void func_0035EC50(void *,unsigned int,unsigned int,int (*)(const void *,const void *));
-int Kaim::CFindNearestData::Build()
-{
-    if (order)
-        D_003C87E0(order);
-    if (rank)
-        D_003C87E0(rank);
-    if (aux)
-        D_003C87E0(aux);
-    count = graph->liveNodes;
-    order = new int[count * 3];
-    rank = new int[count * 3];
-    aux = new int[count];
-    for (int i = 0; i < count; ++i) {
-        order[i] = i;
-        order[count + i] = i;
-        order[i + count * 2] = i;
-    }
-    D_003CA804 = graph;
-    func_0035EC50(order, count, 4, func_002EF6F0);
-    func_0035EC50(order + count, count, 4, func_002EF7A0);
-    func_0035EC50(order + count * 2, count, 4, func_002EF850);
-    int axis = 0;
-    int percent = 0;
-    for (;;) {
-        int j = 0;
-        if (count > 0) {
-            do {
-                int k = 0;
-                if (count > 0) {
-                    int base = count * axis;
-                    do {
-                        if (order[base + j] == k) {
-                            rank[base + k] = j;
-                            break;
-                        }
-                        ++k;
-                    } while (k < count);
-                }
-                if (progress)
-                    progress(((count * j + k) * 0x21) / (count * count) + percent);
-                ++j;
-            } while (j < count);
-        }
-        ++axis;
-        percent += 0x21;
-        if (percent > 0x62)
-            return true;
-    }
-}
 
-// Unmatched: stream cleanup branches and loop scheduling.
 #include "campaign/graph/nearest.hpp"
 extern const char D_00407268[];
 extern const int D_00407284;
@@ -92,15 +76,25 @@ extern "C" int func_002EF6F0(const void *,const void *);
 extern "C" int func_002EF7A0(const void *,const void *);
 extern "C" int func_002EF850(const void *,const void *);
 extern "C" void func_0035EC50(void *,unsigned int,unsigned int,int (*)(const void *,const void *));
+
+
+// Unmatched: stream cleanup block order and callback-base register lifetimes.
+#include "campaign/graph/nearest.hpp"
+extern const char D_00407268[];
+extern const int D_00407284;
+extern Kaim::SearchGraph *D_003CA804;
+extern "C" int func_002EF6F0(const void *,const void *);
+extern "C" int func_002EF7A0(const void *,const void *);
+extern "C" int func_002EF850(const void *,const void *);
+extern "C" void func_0035EC50(void *,unsigned int,unsigned int,int (*)(const void *,const void *));
+extern const char D_00407228[];
 int Kaim::CFindNearestData::Save(const void* path)
 {
-    if (!order)
-        return false;
+    if (order) {
     if (!rank)
         return false;
-    if (count < 1)
-        return false;
-    void* file = D_00451228.open(path, "wb");
+    if (count > 0) {
+    void* file = D_00451228.open(path, D_00407228);
     if (!file)return 0;
     {
         int version = D_00407284;
@@ -110,8 +104,7 @@ int Kaim::CFindNearestData::Save(const void* path)
                 buffer = new int[count * 3];
             for (int i = 0; i < count * 3; ++i)
                 buffer[i] = order[i];
-            int total = count * 3;
-            if (D_00451228.write(buffer, 4, count * 3, file) == total) {
+            if (D_00451228.write(buffer, 4, count * 3, file) == count * 3) {
                 for (int i = 0; i < count * 3; ++i)
                     buffer[i] = rank[i];
                 if (D_00451228.write(buffer, 4, count * 3, file) == count * 3) {
@@ -127,6 +120,7 @@ int Kaim::CFindNearestData::Save(const void* path)
             return false;
         }
     }
+    }}
     return false;
 }
 
