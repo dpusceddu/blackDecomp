@@ -595,6 +595,18 @@
       "controls": [
         "0x1beb50"
       ]
+    },
+    {
+      "header": "include/mod/math/scalar.h",
+      "api": [
+        "BkModSquareRootPS2"
+      ],
+      "verified_scope": [
+        "Shared C/C++ generic-FPR EE hardware square-root primitive. Native836B Restore remains exact through the C++ wrapper; m2c hardware lowering uses the same C primitive, keeping real sqrtf/errno idioms separate."
+      ],
+      "controls": [
+        "0x13c9d8"
+      ]
     }
   ],
   "controls": [
@@ -1656,7 +1668,8 @@
       "headers": [
         "include/mod/camera/vitals.h",
         "include/mod/camera/vitals.hpp",
-        "include/mod/math/scalar.hpp"
+        "include/mod/math/scalar.hpp",
+        "include/mod/math/scalar.h"
       ],
       "uses": [
         "Normalized",

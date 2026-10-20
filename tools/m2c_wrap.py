@@ -92,8 +92,10 @@ translate.format_assignment = byte_format_assignment
 # one f64 uses one GPR argument slot and returns in v0. A float still uses
 # its own f12..f19 bank. Keep f64 as a floating C type, not an integer typedef.
 from dataclasses import replace
-from m2c.arch_mips import MipseeArch
-from m2c.asm_instruction import Register
+from m2c.arch_mips import MipseeArch, GccSqrtPatternJal, GccSqrtPatternJalr
+from m2c.evaluate import fn_op
+from m2c.translate import as_f32
+from m2c.asm_instruction import Register, AsmInstruction
 from m2c.error import DecompFailure
 from m2c.translate import ErrorExpr
 from m2c.types import FunctionParam
@@ -173,6 +175,35 @@ def ee_function_return(expr):
 
 MipseeArch.function_abi = ee_function_abi
 MipseeArch.function_return = staticmethod(ee_function_return)
+
+
+# A bare EE square root has hardware semantics. Keep upstream's recognized
+# GCC errno-fallback idioms mapped to libc sqrtf, using a separate internal
+# opcode after pattern reduction; a real jal sqrtf is untouched as well.
+class EeLibcSqrtPattern:
+    def replace(self, match):
+        result = super().replace(match)
+        body = list(result.new_body)
+        body[0] = AsmInstruction('sqrt.libc.fictive', body[0].args)
+        return replace(result, new_body=body)
+
+
+class EeGccSqrtPatternJal(EeLibcSqrtPattern, GccSqrtPatternJal):
+    pass
+
+
+class EeGccSqrtPatternJalr(EeLibcSqrtPattern, GccSqrtPatternJalr):
+    pass
+
+
+MipseeArch.asm_patterns = [
+    EeGccSqrtPatternJal() if isinstance(pattern, GccSqrtPatternJal) else
+    EeGccSqrtPatternJalr() if isinstance(pattern, GccSqrtPatternJalr) else pattern
+    for pattern in MipseeArch.asm_patterns
+]
+MipseeArch.instrs_destination_first = dict(MipseeArch.instrs_destination_first)
+MipseeArch.instrs_destination_first['sqrt.libc.fictive'] = MipseeArch.instrs_destination_first['sqrt.s']
+MipseeArch.instrs_destination_first['sqrt.s'] = lambda a: fn_op('__ee_sqrt_s', [as_f32(a.reg(1))], Type.f32())
 
 
 if __name__ == '__main__':
