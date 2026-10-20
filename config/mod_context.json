@@ -69,12 +69,14 @@
       ],
       "verified_scope": [
         "Native reload control verifies phaseD8,definitionEC,ownerF0/kindC4,primaryF4/clip18,inventoryFC,definition60/64/C7,outOfAmmo10B and low-byte per-round count101.",
-        "State predicates return signed32, clip getter signed16; additional named fields remain PS2 instruction leads. Preserve per-consumer capacity widths."
+        "State predicates return signed32, clip getter signed16; additional named fields remain PS2 instruction leads. Preserve per-consumer capacity widths.",
+        "Native Definition15D248 proves the pointer access at definition+A0. Catalog count1 and original class identities remain unverified."
       ],
       "controls": [
         "0x156dc0",
         "0x158078",
-        "0x1580e0"
+        "0x1580e0",
+        "0x15d248"
       ]
     },
     {
@@ -579,6 +581,19 @@
       ],
       "controls": [
         "0x13c9d8"
+      ]
+    },
+    {
+      "header": "include/mod/effects/damage_window.h",
+      "api": [
+        "BkModEffectDamageWindowPS2",
+        "BkModEffectDamageWindowsPS2"
+      ],
+      "verified_scope": [
+        "Exact Clear1BEB50 iterates32 records stride14, zeroes32-bit words0/4/C/10 and writes float1e9 sentinel8. Effect/actor pointer identities and named interval/damage semantics remain instruction-only1BE960; zeroing does not establish them."
+      ],
+      "controls": [
+        "0x1beb50"
       ]
     }
   ],
@@ -1650,6 +1665,32 @@
         "SetNormalized",
         "ModMath::SquareRoot"
       ]
+    },
+    {
+      "address": "0x1beb50",
+      "source_function": "Clear",
+      "headers": [
+        "include/mod/effects/damage_window.h"
+      ],
+      "uses": [
+        "records",
+        "effect=0",
+        "actor=0",
+        "begin=1e9f",
+        "end=0",
+        "damage=0",
+        "i<32"
+      ]
+    },
+    {
+      "address": "0x15d248",
+      "source_function": "Definition",
+      "headers": [
+        "include/mod/weapons/state.h"
+      ],
+      "uses": [
+        "definition->secondary"
+      ]
     }
   ],
   "subsystems": [
@@ -1901,7 +1942,7 @@
         "1BE960/1BEB50:32 rows stride14, effect/actor pointers0/4,float begin8/endC/damage10; invokes player damage13C778."
       ],
       "gaps": [
-        "No exact typed consumer; effect+60 and actor bounds250/260/range28C remain instruction views."
+        "Clear1BEB50 now proves stride/zero/sentinel stores only; semantic effect/actor pointers, damage/interval meaning and actor bounds remain instruction evidence."
       ]
     },
     {
