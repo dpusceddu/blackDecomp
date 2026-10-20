@@ -49303,3 +49303,17 @@ units:
     status: asm
   - addr: '0x127cf0'
     status: asm
+- name: campaign_actor_c428_wave5
+  source: src/campaign/actor_c428_wave5.cpp
+  origin: C++ actor vtable0x3DC428 timed-effect cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x14ac98'
+    status: asm
+  - addr: '0x14baa0'
+    status: asm
