@@ -34,6 +34,30 @@ class UnitMerges(unittest.TestCase):
         theirs = [unit('a', 1, 'a.cpp')]
         self.assertEqual(merge(before, ours, theirs)[0]['source'], 'a.cpp')
 
+    def test_moved_assembly_claim_can_gain_an_inventory_size(self):
+        before = [dict(name='old', source='old.cpp', functions=[dict(addr=1, status='asm', reason='claim')])]
+        ours = copy.deepcopy(before)
+        ours[0]['functions'][0]['size'] = 352
+        moved = copy.deepcopy(before[0])
+        moved.update(name='new', source='new.cpp')
+        result = merge(before, ours, [moved])
+        self.assertEqual([u['name'] for u in result], ['new'])
+
+    def test_source_size_conflict_still_requires_review(self):
+        before = [unit('a', 1, 'a.cpp')]
+        before[0]['functions'][0]['size'] = 32
+        ours, theirs = copy.deepcopy(before), copy.deepcopy(before)
+        ours[0]['functions'][0]['size'] = 36
+        theirs[0]['source'] = 'other.cpp'
+        with self.assertRaises(ValueError):
+            merge(before, ours, theirs)
+
+    def test_assembly_only_size_change_preserves_existing_metadata(self):
+        before = [dict(name='a', source='a.cpp', functions=[dict(addr=1, status='asm')])]
+        ours = copy.deepcopy(before)
+        ours[0]['functions'][0]['size'] = 352
+        self.assertEqual(merge(before, ours, before)[0]['functions'][0]['size'], 352)
+
 
 if __name__ == '__main__':
     unittest.main()

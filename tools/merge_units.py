@@ -30,14 +30,31 @@ def records(units):
     return result
 
 
+def equivalent(left, right):
+    """Assembly claims may acquire inventory sizes without changing ownership.
+
+    Source sizes affect placement and must remain part of the comparison.
+    Keep the original records for output; normalize only the comparison views.
+    """
+    def view(unit):
+        if unit is None:
+            return None
+        result = copy.deepcopy(unit)
+        for function in result['functions']:
+            if function.get('status') == 'asm':
+                function.pop('size', None)
+        return result
+    return view(left) == view(right)
+
+
 def merge(base_units, our_units, their_units):
     base, ours, theirs = map(records, (base_units, our_units, their_units))
     result = copy.deepcopy(ours)
     for name in dict.fromkeys([*base, *theirs]):
         before, left, right = base.get(name), ours.get(name), theirs.get(name)
-        if right == before:
+        if equivalent(right, before):
             continue
-        if left != before and left != right:
+        if not equivalent(left, before) and not equivalent(left, right):
             raise ValueError('overlapping unit edit requires ownership review: ' + name)
         if right is None:
             result.pop(name, None)
