@@ -48410,3 +48410,70 @@ units:
   - _vt$Q216KaimPathRegistry10ObjectRoot
   - _vt$Q216KaimPathRegistry11PathManager
   - _vt$Q216KaimPathRegistry6Record
+- name: context_wave4_scriptmanager
+  source: src/context/behaviors_scriptmanager.cpp
+  origin: kynapse
+  owner: context-wave4-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2dcad8'
+    size: 168
+    status: asm
+    symbol: func_002DCAD8
+    reason: extern
+  - addr: '0x2dcb80'
+    size: 224
+    status: asm
+    symbol: _$_Q218KaimScriptRegistry13ScriptManager
+    reason: extern
+  - addr: '0x2dcc60'
+    size: 724
+    status: asm
+    symbol: func_002DCC60
+    reason: extern
+  - addr: '0x2dcf38'
+    size: 544
+    status: asm
+    reason: controlflow
+    symbol: func_002DCF38
+  - addr: '0x2dd1e8'
+    size: 192
+    status: asm
+    reason: controlflow
+    symbol: func_002DD1E8
+  - addr: '0x2dd2a8'
+    size: 148
+    status: asm
+    symbol: func_002DD2A8
+    reason: extern
+  - addr: '0x2dd340'
+    size: 232
+    status: asm
+    symbol: func_002DD340
+    reason: extern
+  - addr: '0x2dd428'
+    size: 92
+    status: asm
+    symbol: func_002DD428
+    reason: extern
+  - addr: '0x2dd488'
+    size: 128
+    status: asm
+    symbol: _$_Q218KaimScriptRegistry6Record
+    reason: extern
+  externs:
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+  unbound:
+  - _vt$Q218KaimScriptRegistry10ObjectRoot
+  - _vt$Q218KaimScriptRegistry13ScriptManager
+  - _vt$Q218KaimScriptRegistry6Record
