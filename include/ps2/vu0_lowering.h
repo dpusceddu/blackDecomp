@@ -21,6 +21,16 @@
 #define __ee_vu_normalize_keep BkVuLowerNormalizeXYZ
 #define __ee_vu_sqrt_keep BkVuLowerSqrtX
 
+/* Same integer-word -> FPR transport as the exact BlackPS2::ReadXWord recipe.
+   A numeric C conversion would change the value rather than its register bank. */
+static inline float __ee_vu_read_x(BkVuVector value)
+{
+    int word; float result;
+    __asm__("qmfc2.ni wordv, valuev" : "=r wordv"(word) : "j valuev"(value));
+    __asm__("mtc1 %1, %0" : "=f"(result) : "r"(word));
+    return result;
+}
+
 /* Semantic adapters for the opt-in m2c path. Partial results retain the old
    destination lanes explicitly. These are operations, not register replay. */
 #define BK_VU_LOWER_BINARY(name, instruction) \

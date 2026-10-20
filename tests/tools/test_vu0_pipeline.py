@@ -4,6 +4,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+import subprocess
 from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
@@ -33,6 +34,38 @@ class VuPipeline(unittest.TestCase):
         self.assertTrue(all(flags.count('-mvu0-use-vf0-vf31') == 1 for flags in sets))
         self.assertEqual(scalar, source)
         self.assertNotIn('-mvu0-use-vf0-vf31', source[0])
+
+    def test_native128_void_pointer_access_keeps_memory_width(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            context = root / 'ctx.c'
+            assembly = root / 'probe.s'
+            context.write_text('void probe(void *out, void *in);')
+            assembly.write_text('.text\nglabel probe\nlqc2 $vf1,0($a1)\nsqc2 $vf1,0($a0)\njr $ra\nnop\n')
+            environment = dict(os.environ, AUTODECOMP_VU0='1')
+            result = subprocess.run([sys.executable, str(Path(autodecomp.__file__).with_name('m2c_wrap.py')),
+                                     '-t', 'mipsee-gcc-c', '--valid-syntax', '--no-cache',
+                                     '--context', str(context), str(assembly)],
+                                    env=environment, capture_output=True, text=True, timeout=20)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('M2C_FIELD(out, s128 *, 0)', result.stdout)
+        self.assertNotIn('*out =', result.stdout)
+
+    def test_vector_low_word_to_float_is_a_bit_transfer(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            context, assembly = root / 'ctx.c', root / 'probe.s'
+            context.write_text('float probe(void *in);')
+            assembly.write_text('.text\nglabel probe\nlqc2 $vf1,0($a0)\nqmfc2.ni $v0,$vf1\n'
+                                'mtc1 $v0,$f0\njr $ra\nnop\n')
+            result = subprocess.run([sys.executable, str(Path(autodecomp.__file__).with_name('m2c_wrap.py')),
+                                     '-t', 'mipsee-gcc-c', '--valid-syntax', '--no-cache',
+                                     '--context', str(context), str(assembly)],
+                                    env=dict(os.environ, AUTODECOMP_VU0='1'),
+                                    capture_output=True, text=True, timeout=20)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('__ee_vu_read_x(', result.stdout)
+        self.assertNotIn('M2C_BITWISE', result.stdout)
 
 
 if __name__ == '__main__':

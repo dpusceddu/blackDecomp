@@ -147,6 +147,23 @@ each exact consumer; `python3 tools/shared_context.py verify` checks actual head
 matches and the full image. Reuse these headers and preserve their helper order, widths and VU
 spill recipes. Report shared changes to their owner; unverified layouts remain explicitly partial.
 
+VU math study tools: `tools/vu0_patterns.py` inventories recurring instruction/dataflow shapes;
+`tools/vu0_micro.py` decodes conservative contracts keyed by uploaded image and entry address.
+Their generated site lists belong under `build/`. Library labels inherited from the TU map are
+qualified evidence, and overlapping shape counts are not additive. `tools/verify_vu0_math.py`
+checks isolated arithmetic windows; `config/vu0_math.json` promotes an operation only with two
+complete exact source consumers. Full matrix/transpose and several normalization recipes remain
+unverified. Animation's recurring fixed-VF macros have a separate header from allocatable `j` helpers.
+
+For a targeted retry, select `users[].address` from the census with repeated `--addr` arguments and
+run `AUTODECOMP_VU0=1 python3 tools/autodecomp.py run --redo --tu all ...` (game region first).
+Use `AUTODECOMP_RESULTS=build/math-study/auto.json` to retain an independent experiment ledger.
+This opt-in path models native 128-bit transfers, preserves live partial lanes and lowers a closed
+subset to shared operations. Unknown upper lanes, flags, microcalls and open ACC/Q state still fail
+explicitly; it does not invent a general VU library. Every accepted result still requires settlement
+and an identical full link. Microcode stays binary; SN cannot express special-register clobbers, so
+the documented micro/macro wrappers require hidden ACC/Q/I/flag state to be dead at their boundary.
+
 Drafts C for assembly functions with no per-function judgment and keeps what rebuilds byte-identically. Setup, once:
 
 ```sh

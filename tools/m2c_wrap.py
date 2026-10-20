@@ -30,6 +30,10 @@ def sized_ptr(self, fmt):
 def format(self, fmt):
     if fmt.valid_syntax and self.offset == 0:
         var = late_unwrap(self.struct_var)
+        pointee = var.type.get_pointer_target()
+        if (__import__('os').environ.get('AUTODECOMP_VU0') and self.target_size == 16
+                and pointee is not None and pointee.is_void()):
+            return f"M2C_FIELD({var.format(fmt)}, {sized_ptr(self, fmt)}, 0)"
         has_nonzero = self.stack_info.has_nonzero_access(var) if self.stack_info is not None else False
         path = self.late_field_path()
         if (path is None or path == [0]) and not has_nonzero and not isinstance(var, AddressOf) \

@@ -65,6 +65,23 @@ def _lane_reads(op, args):
 def _prepare(text):
     lines = text.splitlines()
     parsed = [_parse(line) for line in lines]
+    # Upstream's scalar stack-variable coalescing cannot represent an overlaid
+    # vector and its individual float/word fields. It can print a numeric cast
+    # in place of a bit-preserving spill. Leave this as aggregate work.
+    stack_quad, stack_scalar = [], []
+    for row in parsed:
+        if not row or len(row[2]) != 2:
+            continue
+        memory = re.fullmatch(r'(-?(?:0x[0-9A-Fa-f]+|\d+))\(\$(?:sp|29)\)', row[2][1])
+        if not memory:
+            continue
+        offset = int(memory[1], 0)
+        if row[1] in {'lqc2', 'sqc2'}:
+            stack_quad.append(offset)
+        elif row[1] in {'lw', 'sw', 'lwc1', 'swc1'}:
+            stack_scalar.append(offset)
+    if any(q <= s < q + 16 for q in stack_quad for s in stack_scalar):
+        raise ValueError('VU0 lowering: mixed-width stack overlay needs aggregate modeling')
     reads = {}
     for row in parsed:
         if row:
@@ -178,11 +195,23 @@ def install():
     from m2c.asm_instruction import Register
     from m2c.evaluate import fn_op
     from m2c.translate import as_type
+    from m2c.translate import Cast
     from m2c.types import Type
     old_parse = MipseeArch.parse.__func__
     MipseeArch.all_regs = list(MipseeArch.all_regs) + [Register('vf' + str(n)) for n in range(32)]
     MipseeArch.temp_regs = list(MipseeArch.temp_regs) + [Register('vf' + str(n)) for n in range(32)]
     MipseeArch.instrs_destination_first = dict(MipseeArch.instrs_destination_first)
+    old_cast_format = Cast.format
+
+    def cast_format(self, fmt):
+        # QMFC2 -> MTC1 is a low-word bit transfer, never a numeric TI->float
+        # conversion. Keep the independently controlled integer/FPR recipe.
+        if (fmt.valid_syntax and self.reinterpret and self.type.is_float()
+                and self.type.get_size_bits() == 32 and not self.expr.type.is_float()
+                and self.expr.type.get_size_bits() == 128):
+            return '__ee_vu_read_x(%s)' % self.expr.format(fmt)
+        return old_cast_format(self, fmt)
+    Cast.format = cast_format
 
     def wide(expr):
         return as_type(expr, Type.reg128(), silent=False)
