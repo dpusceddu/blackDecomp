@@ -13589,42 +13589,6 @@ units:
     symbol: func_001B86D0
     size: 36
     status: source
-- name: auto_game_1bcc18
-  source: src/auto/game/1bcc18.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x1bcc18'
-    symbol: func_001BCC18
-    size: 20
-    status: source
-- name: auto_game_1bcdd8
-  source: src/auto/game/1bcdd8.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x1bcdd8'
-    symbol: func_001BCDD8
-    size: 20
-    status: source
-- name: auto_game_1bd610
-  source: src/auto/game/1bd610.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x1bd610'
-    symbol: func_001BD610
-    size: 12
-    status: source
 - name: auto_game_1bd620
   source: src/auto/game/1bd620.c
   origin: auto
@@ -42560,170 +42524,6 @@ units:
     gUserCount: '0x3cd894'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
-- name: effect_batches_1b7758
-  source: src/game/effects/unmatched.c
-  origin: game
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x1b7758'
-    symbol: func_001B7758
-    status: asm
-    reason: claimed
-    size: 380
-  - addr: '0x1b78d8'
-    symbol: func_001B78D8
-    status: asm
-    reason: claimed
-    size: 144
-  - addr: '0x1b7a70'
-    symbol: func_001B7A70
-    status: asm
-    reason: claimed
-    size: 272
-  - addr: '0x1b7b80'
-    symbol: func_001B7B80
-    status: asm
-    reason: claimed
-    size: 732
-  - addr: '0x1b7e60'
-    symbol: func_001B7E60
-    status: asm
-    reason: claimed
-    size: 168
-  - addr: '0x1b7f50'
-    symbol: func_001B7F50
-    status: asm
-    reason: claimed
-    size: 120
-  - addr: '0x1b7fc8'
-    symbol: func_001B7FC8
-    status: asm
-    reason: claimed
-    size: 368
-  - addr: '0x1b8138'
-    symbol: func_001B8138
-    status: asm
-    reason: claimed
-    size: 72
-  - addr: '0x1b8180'
-    symbol: func_001B8180
-    status: asm
-    reason: claimed
-    size: 300
-  - addr: '0x1b82e0'
-    symbol: func_001B82E0
-    status: asm
-    reason: claimed
-    size: 844
-  - addr: '0x1b86f8'
-    symbol: func_001B86F8
-    status: asm
-    reason: claimed
-    size: 156
-  - addr: '0x1b8798'
-    symbol: func_001B8798
-    status: asm
-    reason: claimed
-    size: 556
-  - addr: '0x1b89c8'
-    symbol: func_001B89C8
-    status: asm
-    reason: claimed
-    size: 1800
-  - addr: '0x1b90d0'
-    symbol: func_001B90D0
-    status: asm
-    reason: claimed
-    size: 200
-  - addr: '0x1b9198'
-    symbol: func_001B9198
-    status: asm
-    reason: claimed
-    size: 1308
-  - addr: '0x1b96b8'
-    symbol: func_001B96B8
-    status: asm
-    reason: claimed
-    size: 904
-  - addr: '0x1b9a40'
-    symbol: func_001B9A40
-    status: asm
-    reason: claimed
-    size: 280
-  - addr: '0x1b9b58'
-    symbol: func_001B9B58
-    status: asm
-    reason: claimed
-    size: 4148
-  - addr: '0x1bab90'
-    symbol: func_001BAB90
-    status: asm
-    reason: claimed
-    size: 512
-  - addr: '0x1bad90'
-    symbol: func_001BAD90
-    status: asm
-    reason: claimed
-    size: 512
-  - addr: '0x1baf90'
-    symbol: func_001BAF90
-    status: asm
-    reason: claimed
-    size: 508
-  - addr: '0x1bb190'
-    symbol: func_001BB190
-    status: asm
-    reason: claimed
-    size: 4756
-  - addr: '0x1bc428'
-    symbol: func_001BC428
-    status: asm
-    reason: claimed
-    size: 284
-  - addr: '0x1bc548'
-    symbol: func_001BC548
-    status: asm
-    reason: claimed
-    size: 820
-  - addr: '0x1bc880'
-    symbol: func_001BC880
-    status: asm
-    reason: claimed
-    size: 432
-  - addr: '0x1bca30'
-    symbol: func_001BCA30
-    status: asm
-    reason: claimed
-    size: 484
-  - addr: '0x1bcc30'
-    symbol: func_001BCC30
-    status: asm
-    reason: claimed
-    size: 420
-  - addr: '0x1bcdf8'
-    symbol: func_001BCDF8
-    status: asm
-    reason: claimed
-    size: 340
-  - addr: '0x1bcf50'
-    symbol: func_001BCF50
-    status: asm
-    reason: claimed
-    size: 1460
-  - addr: '0x1bd508'
-    symbol: func_001BD508
-    status: asm
-    reason: claimed
-    size: 252
-  - addr: '0x1bd638'
-    symbol: func_001BD638
-    status: asm
-    reason: claimed
-    size: 660
 - name: effect_1b7968
   source: src/game/effects/dispatch.c
   origin: game
@@ -52280,3 +52080,249 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: mod_effects_wave2_claims
+  source: src/mod/effects/claims_wave2.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1b64c0'
+    symbol: func_001B64C0
+    status: asm
+    reason: claimed
+  - addr: '0x1b6910'
+    symbol: func_001B6910
+    status: asm
+    reason: claimed
+  - addr: '0x1b69e0'
+    symbol: func_001B69E0
+    status: asm
+    reason: claimed
+  - addr: '0x1b6cf8'
+    symbol: func_001B6CF8
+    status: asm
+    reason: claimed
+  - addr: '0x1b6dc8'
+    symbol: func_001B6DC8
+    status: asm
+    reason: claimed
+  - addr: '0x1b7160'
+    symbol: func_001B7160
+    status: asm
+    reason: claimed
+  - addr: '0x1b72e0'
+    symbol: func_001B72E0
+    status: asm
+    reason: claimed
+  - addr: '0x1b7758'
+    symbol: func_001B7758
+    status: asm
+    reason: claimed
+  - addr: '0x1b78d8'
+    symbol: func_001B78D8
+    status: asm
+    reason: claimed
+  - addr: '0x1b7a70'
+    symbol: func_001B7A70
+    status: asm
+    reason: claimed
+  - addr: '0x1b7b80'
+    symbol: func_001B7B80
+    status: asm
+    reason: claimed
+  - addr: '0x1b7e60'
+    symbol: func_001B7E60
+    status: asm
+    reason: claimed
+  - addr: '0x1b7f50'
+    symbol: func_001B7F50
+    status: asm
+    reason: claimed
+  - addr: '0x1b7fc8'
+    symbol: func_001B7FC8
+    status: asm
+    reason: claimed
+  - addr: '0x1b8138'
+    symbol: func_001B8138
+    status: asm
+    reason: claimed
+  - addr: '0x1b8180'
+    symbol: func_001B8180
+    status: asm
+    reason: claimed
+  - addr: '0x1b82e0'
+    symbol: func_001B82E0
+    status: asm
+    reason: claimed
+  - addr: '0x1b86f8'
+    symbol: func_001B86F8
+    status: asm
+    reason: claimed
+  - addr: '0x1b8798'
+    symbol: func_001B8798
+    status: asm
+    reason: claimed
+  - addr: '0x1b89c8'
+    symbol: func_001B89C8
+    status: asm
+    reason: claimed
+  - addr: '0x1b90d0'
+    symbol: func_001B90D0
+    status: asm
+    reason: claimed
+  - addr: '0x1b9198'
+    symbol: func_001B9198
+    status: asm
+    reason: claimed
+  - addr: '0x1b96b8'
+    symbol: func_001B96B8
+    status: asm
+    reason: claimed
+  - addr: '0x1b9a40'
+    symbol: func_001B9A40
+    status: asm
+    reason: claimed
+  - addr: '0x1b9b58'
+    symbol: func_001B9B58
+    status: asm
+    reason: claimed
+  - addr: '0x1bab90'
+    symbol: func_001BAB90
+    status: asm
+    reason: claimed
+  - addr: '0x1bad90'
+    symbol: func_001BAD90
+    status: asm
+    reason: claimed
+  - addr: '0x1baf90'
+    symbol: func_001BAF90
+    status: asm
+    reason: claimed
+  - addr: '0x1bb190'
+    symbol: func_001BB190
+    status: asm
+    reason: claimed
+  - addr: '0x1bc428'
+    symbol: func_001BC428
+    status: asm
+    reason: claimed
+  - addr: '0x1bc548'
+    symbol: func_001BC548
+    status: asm
+    reason: claimed
+  - addr: '0x1bc880'
+    symbol: func_001BC880
+    status: asm
+    reason: claimed
+  - addr: '0x1bca30'
+    symbol: func_001BCA30
+    status: asm
+    reason: claimed
+  - addr: '0x1bcc30'
+    symbol: func_001BCC30
+    status: asm
+    reason: claimed
+  - addr: '0x1bcf50'
+    symbol: func_001BCF50
+    status: asm
+    reason: claimed
+  - addr: '0x1bd638'
+    symbol: func_001BD638
+    status: asm
+    reason: claimed
+  - addr: '0x1be330'
+    symbol: func_001BE330
+    status: asm
+    reason: claimed
+  - addr: '0x1be4c0'
+    symbol: func_001BE4C0
+    status: asm
+    reason: claimed
+  - addr: '0x1be7f0'
+    symbol: func_001BE7F0
+    status: asm
+    reason: claimed
+  - addr: '0x1be890'
+    symbol: func_001BE890
+    status: asm
+    reason: claimed
+- name: mod_muzzle_1bcc18
+  source: src/mod/effects/muzzle_1bcc18.cpp
+  origin: mod effects C++ accessed views; original identity qualified
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1bcc18'
+    size: 20
+    symbol: func_001BCC18
+    status: source
+- name: mod_muzzle_1bcdd8
+  source: src/mod/effects/muzzle_1bcdd8.cpp
+  origin: mod effects C++ accessed views; original identity qualified
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1bcdd8'
+    size: 20
+    symbol: func_001BCDD8
+    status: source
+- name: mod_muzzle_1bd610
+  source: src/mod/effects/muzzle_1bd610.cpp
+  origin: mod effects C++ accessed views; original identity qualified
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1bd610'
+    size: 12
+    symbol: func_001BD610
+    status: source
+- name: mod_muzzle_1bcdf8
+  source: src/mod/effects/muzzle_1bcdf8.cpp
+  origin: mod effects C++ accessed views; original identity qualified
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1bcdf8'
+    size: 340
+    symbol: func_001BCDF8
+    status: source
+- name: mod_muzzle_1bd508
+  source: src/mod/effects/muzzle_1bd508.cpp
+  origin: mod effects C++ accessed views; original identity qualified
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mno-check-zero-division
+  functions:
+  - addr: '0x1bd508'
+    size: 252
+    symbol: func_001BD508
+    status: source
