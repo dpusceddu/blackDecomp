@@ -48305,3 +48305,70 @@ units:
     size: 188
     status: source
     symbol: func_002DC930
+- name: context_wave4_pathmanager
+  source: src/context/behaviors_pathmanager.cpp
+  origin: kynapse
+  owner: context-wave4-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2da2a0'
+    size: 168
+    status: asm
+    symbol: func_002DA2A0
+    reason: extern
+  - addr: '0x2da348'
+    size: 224
+    status: asm
+    symbol: _$_Q216KaimPathRegistry11PathManager
+    reason: extern
+  - addr: '0x2da428'
+    size: 724
+    status: asm
+    symbol: func_002DA428
+    reason: extern
+  - addr: '0x2da700'
+    size: 544
+    status: asm
+    reason: controlflow
+    symbol: func_002DA700
+  - addr: '0x2da9b0'
+    size: 192
+    status: asm
+    reason: controlflow
+    symbol: func_002DA9B0
+  - addr: '0x2daa70'
+    size: 148
+    status: asm
+    symbol: func_002DAA70
+    reason: extern
+  - addr: '0x2dab08'
+    size: 232
+    status: asm
+    symbol: func_002DAB08
+    reason: extern
+  - addr: '0x2dabf0'
+    size: 92
+    status: asm
+    symbol: func_002DABF0
+    reason: extern
+  - addr: '0x2dac50'
+    size: 128
+    status: asm
+    symbol: _$_Q216KaimPathRegistry6Record
+    reason: extern
+  externs:
+    __throw: '0x292b40'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+  unbound:
+  - _vt$Q216KaimPathRegistry10ObjectRoot
+  - _vt$Q216KaimPathRegistry11PathManager
+  - _vt$Q216KaimPathRegistry6Record
