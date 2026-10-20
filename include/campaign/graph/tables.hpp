@@ -78,6 +78,7 @@ struct CPathCostData : CGraphData {
     virtual int Init(ChildBuffers *);
     virtual int Build();
     virtual int Save(const void *);
+    int LoadFile(const void *);
     unsigned char *table;
     int size;
     float scale;

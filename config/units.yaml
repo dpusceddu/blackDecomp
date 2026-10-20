@@ -46159,14 +46159,6 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   functions:
-  - addr: '0x2f3770'
-    symbol: func_002F3770
-    size: 472
-    status: asm
-  - addr: '0x2f3ab0'
-    symbol: func_002F3AB0
-    size: 1612
-    status: asm
   - addr: '0x2f4100'
     symbol: Save__Q24Kaim13CPathCostDataPCv
     size: 348
@@ -48850,3 +48842,31 @@ units:
     __throw: '0x292b40'
     func_002FEAE0: '0x2feae0'
     terminate__Fv: '0x36f978'
+- name: context_graph_pathcost
+  source: src/campaign/graph_pathcost_context.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave4-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  functions:
+  - addr: '0x2f3770'
+    size: 472
+    symbol: func_002F3770
+    status: asm
+    reason: context
+  - addr: '0x2f3948'
+    size: 360
+    symbol: func_002F3948
+    status: asm
+    reason: context
+  - addr: '0x2f3ab0'
+    size: 1612
+    symbol: func_002F3AB0
+    status: asm
+    reason: context
