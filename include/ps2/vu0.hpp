@@ -8,6 +8,7 @@
 // memory and VU0 (qmtc2, qmfc2, lqc2, sqc2). Operand names are substituted textually, so they must
 // not occur inside an opcode. The Xbox uses packed SSE intrinsics instead.
 #include "ps2/vector_storage.hpp"
+#include "ps2/vu0_math.h"
 
 namespace BlackGame {
 struct Point3 { float x, y, z; };
@@ -30,31 +31,23 @@ static inline Vec WidenVec(const Point3& p)
 // dst.xyz = a.xyz - b.xyz
 static inline Vec Sub3(Vec a, Vec b)
 {
-    Vec r;
-    asm("vsub.xyz dstv, srca, srcb" : "=j dstv" (r) : "j srca" (a), "j srcb" (b));
-    return r;
+    return BkVuSubXYZ(a, b);
 }
 // dst.xyz = a.xyz + b.xyz
 static inline Vec Add3(Vec a, Vec b)
 {
-    Vec r;
-    asm("vadd.xyz dstv, srca, srcb" : "=j dstv" (r) : "j srca" (a), "j srcb" (b));
-    return r;
+    return BkVuAddXYZ(a, b);
 }
 // dst.xyz = a.xyz * b.xyz
 static inline Vec Mul3(Vec a, Vec b)
 {
-    Vec r;
-    asm("vmul.xyz dstv, srca, srcb" : "=j dstv" (r) : "j srca" (a), "j srcb" (b));
-    return r;
+    return BkVuMulXYZ(a, b);
 }
 // Squared length of the xyz part (the x lane of the result vector holds the sum).
 static inline Vec SumSquares3(Vec v)
 {
-    Vec square = Mul3(v, v), one, sum;
-    asm("vaddw.x onev, vf0, vf0w" : "=j onev" (one));
-    asm("vadday.x ACC, sqv, sqvy\n\tvmaddz.x sumv, onev, sqvz" : "=j sumv" (sum) : "j sqv" (square), "j onev" (one));
-    return sum;
+    Vec square = Mul3(v, v), one = BkVuOneX();
+    return BkVuSumXYZ(square, one);
 }
 static inline float X(Vec v)
 {
@@ -78,9 +71,7 @@ static inline Vec ZeroVec() { int zero = 0; return (Vec)zero; }
 // Scales the xyz lanes of v by the x lane of `scale` (a float moved from a GPR into a VU0 register).
 static inline Vec Scale3(Vec v, Vec scale)
 {
-    Vec r;
-    asm("vmulx.xyz resv, srcv, scalv" : "=j resv" (r) : "j srcv" (v), "j scalv" (scale));
-    return r;
+    return BkVuScaleXYZ(v, scale);
 }
 // A float's bits moved from a GPR into a VU0 register (qmtc2); the integer keeps the compiler from
 // placing the constant in memory.
@@ -100,10 +91,7 @@ static inline int NearlyEqual3(Vec a, Vec b, float tolerance)
 static inline float LengthSquared3(Vec v) { return X(SumSquares3(v)); }
 static inline float Length3(Vec v)
 {
-    Vec sum = SumSquares3(v), root;
-    asm("vnop\n\tvnop\n\tvnop\n\tvsqrt Q, sumvx\n\tvaddw.x rootv, vf0, vf0w\n\tvwaitq\n\tvmulq.x rootv, rootv, Q"
-        : "=j rootv" (root) : "j sumv" (sum));
-    return X(root);
+    return X(BkVuSqrtX(SumSquares3(v)));
 }
 }
 
@@ -122,11 +110,7 @@ static inline float ReadXWord(Value value)
 }
 static inline float Length3Word(Value value)
 {
-    Value sum = BlackGame::SumSquares3(value), root;
-    asm("vnop\n\tvnop\n\tvnop\n\tvsqrt Q, sumvx\n\t"
-        "vaddw.x rootv, vf0, vf0w\n\tvwaitq\n\tvmulq.x rootv, rootv, Q"
-        : "=j rootv"(root) : "j sumv"(sum));
-    return ReadXWord(root);
+    return ReadXWord(BkVuSqrtX(BlackGame::SumSquares3(value)));
 }
 }
 }

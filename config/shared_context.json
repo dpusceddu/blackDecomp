@@ -64,6 +64,28 @@
       ]
     },
     {
+      "header": "include/ps2/vu0_math.h",
+      "api": [
+        "BkVuAddXYZ",
+        "BkVuSubXYZ",
+        "BkVuMulXYZ",
+        "BkVuOneX",
+        "BkVuSumXYZ",
+        "BkVuSqrtX"
+      ],
+      "verified_scope": [
+        "C-compatible j-constraint arithmetic blocks: XYZ add/sub/multiply, x=1, xyz reduction and synchronized sqrt of x; each has two full-function exact consumers",
+        "Only written lanes are defined. ACC and Q are private to a single asm block; MAC/status flags are not exported. Scale, cross and normalization helpers remain provisional."
+      ],
+      "controls": [
+        "0x17b5e8",
+        "0x135878",
+        "0x179ce0",
+        "0x179f18",
+        "0x1a71f8"
+      ]
+    },
+    {
       "header": "include/ps2/matrix.hpp",
       "api": [
         "Matrix4",
@@ -162,7 +184,8 @@
         "include/ps2/ee_types.h",
         "include/ps2/vector_storage.hpp",
         "include/ps2/vu0.hpp",
-        "include/ps2/matrix.hpp"
+        "include/ps2/matrix.hpp",
+        "include/ps2/vu0_math.h"
       ],
       "uses": [
         "WidenVec",
@@ -176,7 +199,8 @@
       "headers": [
         "include/ps2/ee_types.h",
         "include/ps2/vector_storage.hpp",
-        "include/ps2/vu0.hpp"
+        "include/ps2/vu0.hpp",
+        "include/ps2/vu0_math.h"
       ],
       "uses": [
         "Sub3",
@@ -190,7 +214,8 @@
       "headers": [
         "include/ps2/ee_types.h",
         "include/ps2/vector_storage.hpp",
-        "include/ps2/vu0.hpp"
+        "include/ps2/vu0.hpp",
+        "include/ps2/vu0_math.h"
       ],
       "uses": [
         "Load",
@@ -204,7 +229,8 @@
       "headers": [
         "include/ps2/ee_types.h",
         "include/ps2/vector_storage.hpp",
-        "include/ps2/vu0.hpp"
+        "include/ps2/vu0.hpp",
+        "include/ps2/vu0_math.h"
       ],
       "uses": [
         "Add3",
@@ -357,7 +383,8 @@
       "address": "0x135878",
       "source_function": "ActorMotion::GetWorldMatrix",
       "headers": [
-        "include/ps2/matrix.hpp"
+        "include/ps2/matrix.hpp",
+        "include/ps2/vu0_math.h"
       ],
       "uses": [
         "TransformDirection"
