@@ -49048,3 +49048,30 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: context_graph_path_storage
+  source: src/campaign/graph_path_storage.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave5-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  - --assembler=sn-min6
+  - -fno-exceptions
+  functions:
+  - addr: '0x2fb1c8'
+    size: 512
+    symbol: func_002FB1C8
+    status: source
+  - addr: '0x2fb3c8'
+    size: 272
+    symbol: func_002FB3C8
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
