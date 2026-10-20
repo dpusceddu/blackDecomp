@@ -1,10 +1,11 @@
 // Segment ray queries and the bounded hit buffer.
 #include "physics/segment_query.hpp"
+#include "ps2/matrix.hpp"
 
 
 #ifdef BLACK_NONMATCHING
 // Unmatched: resumable traversal, SN callback member pointers and VU0 frame lifetimes.
-static inline PhysicsMatrix Compose(const PhysicsMatrix& a,const PhysicsMatrix& b){PhysicsMatrix r;r.row[0]=PhysicsDirection(a,b.row[0]);r.row[1]=PhysicsDirection(a,b.row[1]);r.row[2]=PhysicsDirection(a,b.row[2]);r.row[3]=PhysicsPosition(a,b.row[3]);return r;}
+static inline PhysicsMatrix Compose(const PhysicsMatrix& a,const PhysicsMatrix& b){PhysicsMatrix r;r.row[0]=BlackPS2::VU0::TransformDirection(b.row,a.row[0]);r.row[1]=BlackPS2::VU0::TransformDirection(b.row,a.row[1]);r.row[2]=BlackPS2::VU0::TransformDirection(b.row,a.row[2]);r.row[3]=BlackPS2::VU0::TransformPoint(b.row,a.row[3]);return r;}
 inline unsigned int PhysicsSegmentQuery::QueueLeaf(const SegmentShapePS2* shapeToQueue, const PhysicsMatrix* frame,
                                             unsigned int identity, unsigned char tag)
 {
@@ -74,13 +75,7 @@ int PhysicsSegmentQuery::Execute()
                 if (!compoundCount) break;
                 --compoundCount;
                 PhysicsQueuedShape& source=static_cast<PhysicsQueuedShape*>(buffer)[compoundCount];
-                active.shape=source.shape;
-                active.frame=source.frame;
-                active.frameCopy=source.frameCopy;
-                active.transform[0]=source.transform[0];
-                active.transform[1]=source.transform[1];
-                active.identity=source.identity;
-                active.tag=source.tag;
+                active=source;
             }
             identityPrefix=active.identity;
             *reinterpret_cast<unsigned char*>(&identityBits)=active.tag;
@@ -125,6 +120,7 @@ int PhysicsSegmentQuery::Execute()
         }
     }
 }
+
 #endif
 
 
