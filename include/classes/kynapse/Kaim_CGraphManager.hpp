@@ -20,12 +20,12 @@ struct Kaim_CGraphManager {
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
     // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0010() { return *(unsigned char *)((unsigned char *)this + 0x10); }
     // 0x002F2578: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002F2578();
-    // 0x002F2660: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F2660(void * argument0);
+    // 0x002F2660: UNVERIFIED signature (src/campaign/graph_manager.cpp).
+    unsigned char Function_002F2660(void * argument0);
     // 0x002F2E88: UNVERIFIED signature (src/campaign/graph_manager.cpp).
     unsigned char Function_002F2E88(void * argument0);
     // 0x0038AED8: UNVERIFIED signature (src/kynapse/small_misc_38aed8.cpp).
@@ -43,7 +43,7 @@ struct Kaim_CGraphManager {
         // slot 1, table+0x10, this delta 0, function 0x002F2E88; UNVERIFIED signature.
         virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002F2660; UNVERIFIED signature.
-        virtual int Slot002(void * argument0);
+        virtual unsigned char Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0038E7B8; UNVERIFIED signature.
         virtual void Slot003();
         // slot 4, table+0x28, this delta 0, function 0x0038AED8; UNVERIFIED signature.

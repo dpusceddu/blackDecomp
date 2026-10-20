@@ -14,14 +14,14 @@ struct UnknownVtable_003DBB90 {
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
     // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_000C() { return *(unsigned char *)((unsigned char *)this + 0xC); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
+    // 0x24: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0024() { return *(void * *)((unsigned char *)this + 0x24); }
     // 0x00160ED0: UNVERIFIED signature (src/tu/tu_15d958_160ea0.c).
     unsigned int Function_00160ED0();
     // 0x00162F88: UNVERIFIED signature (src/auto/game/162f88.c).
     int Function_00162F88();
-    // 0x00162FB0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00162FB0();
+    // 0x00162FB0: UNVERIFIED signature (src/campaign/actor_bb90_wave6.cpp).
+    void Function_00162FB0();
     // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
     void Function_00165B00(int argument0);
     // 0x00165B90: UNVERIFIED signature (src/tu/tu_1650b8_165af8.c).
@@ -35,7 +35,7 @@ struct UnknownVtable_003DBB90 {
         // slot 1, table+0x10, this delta 0, function 0x00165B00; UNVERIFIED signature.
         virtual void Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x00162FB0; UNVERIFIED signature.
-        virtual unsigned int Slot002();
+        virtual void Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00162F88; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00160ED0; UNVERIFIED signature.

@@ -12,6 +12,8 @@ struct UnknownVtable_003E1A90 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0004() { return *(unsigned int *)((unsigned char *)this + 0x4); }
+    // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_001C() { return *(int *)((unsigned char *)this + 0x1C); }
     // 0x30: UNVERIFIED type; PS2 access offset.
     inline int & Field_0030() { return *(int *)((unsigned char *)this + 0x30); }
     // 0x34: UNVERIFIED type; PS2 access offset.
@@ -38,16 +40,16 @@ struct UnknownVtable_003E1A90 {
     int Function_00252310(int * argument0);
     // 0x00252328: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00252328(void * argument0);
-    // 0x00384E70: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00384E70();
+    // 0x00384E70: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
+    void Function_00384E70();
     // 0x00384F00: UNVERIFIED signature (src/auto/other/384f00.c).
     int Function_00384F00();
-    // 0x00384F08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00384F08();
+    // 0x00384F08: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
+    void Function_00384F08();
     // 0x00384F50: UNVERIFIED signature (src/auto/other/384f40.c).
     int Function_00384F50();
-    // 0x00385528: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00385528(unsigned int argument0);
+    // 0x00385528: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
+    void Function_00385528(int argument0);
     // 0x00385548: UNVERIFIED signature (src/auto/other/385548.c).
     int Function_00385548();
     // 0x003857A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -77,7 +79,7 @@ struct UnknownVtable_003E1A90 {
         // slot 1, table+0x10, this delta 0, function 0x0024F5D8; UNVERIFIED signature.
         virtual int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00384E70; UNVERIFIED signature.
-        virtual unsigned int Slot002();
+        virtual void Slot002();
         // slot 3, table+0x20, this delta 0, function 0x0024F760; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x0024F768; UNVERIFIED signature.
@@ -85,13 +87,13 @@ struct UnknownVtable_003E1A90 {
         // slot 5, table+0x30, this delta 0, function 0x00385548; UNVERIFIED signature.
         virtual int Slot005();
         // slot 6, table+0x38, this delta 0, function 0x00385528; UNVERIFIED signature.
-        virtual int Slot006(unsigned int argument0);
+        virtual void Slot006(int argument0);
         // slot 7, table+0x40, this delta 0, function 0x00250518; UNVERIFIED signature.
         virtual int Slot007(unsigned int argument0, void * argument1);
         // slot 8, table+0x48, this delta 0, function 0x00384F00; UNVERIFIED signature.
         virtual int Slot008();
         // slot 9, table+0x50, this delta 0, function 0x00384F08; UNVERIFIED signature.
-        virtual unsigned int Slot009();
+        virtual void Slot009();
         // slot 10, table+0x58, this delta 0, function 0x002521F0; UNVERIFIED signature.
         virtual unsigned int Slot010();
         // slot 11, table+0x60, this delta 0, function 0x00252280; UNVERIFIED signature.

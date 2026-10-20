@@ -16,65 +16,57 @@ struct Kaim_CShooterAgent {
     // Destructor identity: 0x002D7068.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
+    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_000C() { return *(void * *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0018() { return *(unsigned int *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
     // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
     // 0x24: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0024() { return *(float *)((unsigned char *)this + 0x24); }
     // 0x28: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0028() { return *(float *)((unsigned char *)this + 0x28); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
+    // 0x2C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_002C() { return *(float *)((unsigned char *)this + 0x2C); }
-    // 0x30: UNVERIFIED type; PS2 access offset.
+    // 0x30: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0030() { return *(float *)((unsigned char *)this + 0x30); }
-    // 0x34: UNVERIFIED type; PS2 access offset.
+    // 0x34: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0034() { return *(float *)((unsigned char *)this + 0x34); }
-    // 0x3C: UNVERIFIED type; PS2 access offset.
+    // 0x3C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_003C() { return *(unsigned char *)((unsigned char *)this + 0x3C); }
-    // 0x40: UNVERIFIED type; PS2 access offset.
+    // 0x40: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0040() { return *(float *)((unsigned char *)this + 0x40); }
-    // 0x44: UNVERIFIED type; PS2 access offset.
+    // 0x44: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0044() { return *(float *)((unsigned char *)this + 0x44); }
-    // 0x48: UNVERIFIED type; PS2 access offset.
+    // 0x48: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0048() { return *(float *)((unsigned char *)this + 0x48); }
-    // 0x4C: UNVERIFIED type; PS2 access offset.
+    // 0x4C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_004C() { return *(int *)((unsigned char *)this + 0x4C); }
-    // 0x50: UNVERIFIED type; PS2 access offset.
+    // 0x50: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0050() { return *(void * *)((unsigned char *)this + 0x50); }
-    // 0x54: UNVERIFIED type; PS2 access offset.
+    // 0x54: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0054() { return *(void * *)((unsigned char *)this + 0x54); }
-    // 0x58: UNVERIFIED type; PS2 access offset.
+    // 0x58: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0058() { return *(void * *)((unsigned char *)this + 0x58); }
-    // 0x5C: UNVERIFIED type; PS2 access offset.
+    // 0x5C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_005C() { return *(void * *)((unsigned char *)this + 0x5C); }
-    // 0x60: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0060() { return *(unsigned int *)((unsigned char *)this + 0x60); }
-    // 0x64: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0064() { return *(unsigned int *)((unsigned char *)this + 0x64); }
-    // 0x68: UNVERIFIED type; PS2 access offset.
+    // 0x60: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0060() { return *(int *)((unsigned char *)this + 0x60); }
+    // 0x64: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0064() { return *(void * *)((unsigned char *)this + 0x64); }
+    // 0x68: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0068() { return *(int *)((unsigned char *)this + 0x68); }
-    // 0x70: UNVERIFIED type; PS2 access offset.
+    // 0x70: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0070() { return *(float *)((unsigned char *)this + 0x70); }
     // 0x002D6690: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_002D6690(void * argument0);
-    // 0x002D6860: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D6860(void * argument0);
-    // 0x002D6A38: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D6A38();
+    // 0x002D6860: UNVERIFIED signature (src/campaign/behaviors_shooter_wave6.cpp).
+    unsigned char Function_002D6860(void * argument0);
+    // 0x002D6A38: UNVERIFIED signature (src/campaign/behaviors_shooter_wave6.cpp).
+    unsigned char Function_002D6A38();
     // 0x002D6E48: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_002D6E48(const void * argument0);
     // 0x002D7068: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
@@ -98,7 +90,7 @@ struct Kaim_CShooterAgent {
         // slot 0, table+0x8, this delta 0, function 0x002D7068; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002D6860; UNVERIFIED signature.
-        virtual int Slot001(void * argument0);
+        virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002D6690; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual bool Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x0038BB28; UNVERIFIED signature.
@@ -108,7 +100,7 @@ struct Kaim_CShooterAgent {
         // slot 5, table+0x30, this delta 0, function 0x002D7118; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual bool Slot005();
         // slot 6, table+0x38, this delta 0, function 0x002D6A38; UNVERIFIED signature.
-        virtual int Slot006();
+        virtual unsigned char Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D70C0; UNVERIFIED signature.
         virtual unsigned char Slot007();
         // slot 8, table+0x48, this delta 0, function 0x002D70E0; UNVERIFIED signature.

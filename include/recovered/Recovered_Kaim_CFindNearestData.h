@@ -10,6 +10,7 @@ typedef struct Recovered_Kaim_CFindNearestData {
     s32 field_C; /* PS2 +0xC */
     s32 field_10; /* PS2 +0x10 */
     s32 field_14; /* PS2 +0x14 */
+    s32 field_18; /* PS2 +0x18 */
 } Recovered_Kaim_CFindNearestData;
 typedef char assert_Recovered_Kaim_CFindNearestData_0[(((int)&((Recovered_Kaim_CFindNearestData *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_Kaim_CFindNearestData_4[(((int)&((Recovered_Kaim_CFindNearestData *)0)->field_4) == 4) ? 1 : -1];
@@ -17,4 +18,5 @@ typedef char assert_Recovered_Kaim_CFindNearestData_8[(((int)&((Recovered_Kaim_C
 typedef char assert_Recovered_Kaim_CFindNearestData_C[(((int)&((Recovered_Kaim_CFindNearestData *)0)->field_C) == 12) ? 1 : -1];
 typedef char assert_Recovered_Kaim_CFindNearestData_10[(((int)&((Recovered_Kaim_CFindNearestData *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_Kaim_CFindNearestData_14[(((int)&((Recovered_Kaim_CFindNearestData *)0)->field_14) == 20) ? 1 : -1];
+typedef char assert_Recovered_Kaim_CFindNearestData_18[(((int)&((Recovered_Kaim_CFindNearestData *)0)->field_18) == 24) ? 1 : -1];
 #endif

@@ -12,8 +12,8 @@ struct UnknownVtable_003E1760 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0004() { return *(unsigned int *)((unsigned char *)this + 0x4); }
-    // 0x00384E70: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00384E70();
+    // 0x00384E70: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
+    void Function_00384E70();
     // 0x00384ED8: UNVERIFIED signature (src/auto/other/384ed8.c).
     int Function_00384ED8();
     // 0x00384EE0: UNVERIFIED signature (src/auto/other/384ed8.c).
@@ -26,8 +26,8 @@ struct UnknownVtable_003E1760 {
     int Function_00384EF8();
     // 0x00384F00: UNVERIFIED signature (src/auto/other/384f00.c).
     int Function_00384F00();
-    // 0x00384F08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00384F08();
+    // 0x00384F08: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
+    void Function_00384F08();
     // 0x00384F40: UNVERIFIED signature (src/auto/other/384f40.c).
     unsigned int Function_00384F40();
     // 0x00384F48: UNVERIFIED signature (src/auto/other/384f40.c).
@@ -51,7 +51,7 @@ struct UnknownVtable_003E1760 {
         // slot 1, table+0x10, this delta 0, function 0x00386270; UNVERIFIED signature.
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00384E70; UNVERIFIED signature.
-        virtual unsigned int Slot002();
+        virtual void Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00384ED8; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00384EE0; UNVERIFIED signature.
@@ -65,7 +65,7 @@ struct UnknownVtable_003E1760 {
         // slot 8, table+0x48, this delta 0, function 0x00384F00; UNVERIFIED signature.
         virtual int Slot008();
         // slot 9, table+0x50, this delta 0, function 0x00384F08; UNVERIFIED signature.
-        virtual unsigned int Slot009();
+        virtual void Slot009();
         // slot 10, table+0x58, this delta 0, function 0x00384F40; UNVERIFIED signature.
         virtual unsigned int Slot010();
         // slot 11, table+0x60, this delta 0, function 0x00384F48; UNVERIFIED signature.

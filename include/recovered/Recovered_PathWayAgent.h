@@ -5,32 +5,30 @@
 
 typedef struct Recovered_PathWayAgent {
     void * field_0; /* PS2 +0x0 */
-    s32 field_4; /* PS2 +0x4 */
+    void * field_4; /* PS2 +0x4 */
     void * field_8; /* PS2 +0x8 */
     void * field_C; /* PS2 +0xC */
-    u32 field_10; /* PS2 +0x10 */
-    u32 field_14; /* PS2 +0x14 */
-    s32 field_18; /* PS2 +0x18 */
-    s32 field_1C; /* PS2 +0x1C */
-    u32 field_20; /* PS2 +0x20 */
-    u32 field_24; /* PS2 +0x24 */
-    s32 field_28; /* PS2 +0x28 */
-    s32 field_2C; /* PS2 +0x2C */
-    u32 field_30; /* PS2 +0x30 */
-    u32 field_34; /* PS2 +0x34 */
-    s32 field_38; /* PS2 +0x38 */
+    s32 field_10; /* PS2 +0x10 */
+    void * field_14; /* PS2 +0x14 */
+    void * field_18; /* PS2 +0x18 */
+    void * field_1C; /* PS2 +0x1C */
+    void * field_20; /* PS2 +0x20 */
+    void * field_24; /* PS2 +0x24 */
+    void * field_28; /* PS2 +0x28 */
+    void * field_2C; /* PS2 +0x2C */
+    void * field_30; /* PS2 +0x30 */
+    void * field_34; /* PS2 +0x34 */
+    void * field_38; /* PS2 +0x38 */
     s32 field_3C; /* PS2 +0x3C */
     u8 field_40; /* PS2 +0x40 */
     u8 field_41; /* PS2 +0x41 */
     u8 field_42; /* PS2 +0x42 */
     u8 field_43; /* PS2 +0x43 */
-    u32 field_44; /* PS2 +0x44 */
+    u8 opaque_44[4];
     u8 field_48; /* PS2 +0x48 */
-    u8 opaque_49[3];
-    u32 field_4C; /* PS2 +0x4C */
+    u8 opaque_49[7];
     u8 field_50; /* PS2 +0x50 */
-    u8 opaque_51[3];
-    u32 field_54; /* PS2 +0x54 */
+    u8 opaque_51[7];
 } Recovered_PathWayAgent;
 typedef char assert_Recovered_PathWayAgent_0[(((int)&((Recovered_PathWayAgent *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_PathWayAgent_4[(((int)&((Recovered_PathWayAgent *)0)->field_4) == 4) ? 1 : -1];
@@ -52,9 +50,6 @@ typedef char assert_Recovered_PathWayAgent_40[(((int)&((Recovered_PathWayAgent *
 typedef char assert_Recovered_PathWayAgent_41[(((int)&((Recovered_PathWayAgent *)0)->field_41) == 65) ? 1 : -1];
 typedef char assert_Recovered_PathWayAgent_42[(((int)&((Recovered_PathWayAgent *)0)->field_42) == 66) ? 1 : -1];
 typedef char assert_Recovered_PathWayAgent_43[(((int)&((Recovered_PathWayAgent *)0)->field_43) == 67) ? 1 : -1];
-typedef char assert_Recovered_PathWayAgent_44[(((int)&((Recovered_PathWayAgent *)0)->field_44) == 68) ? 1 : -1];
 typedef char assert_Recovered_PathWayAgent_48[(((int)&((Recovered_PathWayAgent *)0)->field_48) == 72) ? 1 : -1];
-typedef char assert_Recovered_PathWayAgent_4C[(((int)&((Recovered_PathWayAgent *)0)->field_4C) == 76) ? 1 : -1];
 typedef char assert_Recovered_PathWayAgent_50[(((int)&((Recovered_PathWayAgent *)0)->field_50) == 80) ? 1 : -1];
-typedef char assert_Recovered_PathWayAgent_54[(((int)&((Recovered_PathWayAgent *)0)->field_54) == 84) ? 1 : -1];
 #endif

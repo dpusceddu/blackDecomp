@@ -4,57 +4,7 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Vtable_003E3688 {
-    void * field_0; /* PS2 +0x0 */
-    void * field_4; /* PS2 +0x4 */
-    void * field_8; /* PS2 +0x8 */
-    void * field_C; /* PS2 +0xC */
-    s32 field_10; /* PS2 +0x10 */
-    void * field_14; /* PS2 +0x14 */
-    void * field_18; /* PS2 +0x18 */
-    void * field_1C; /* PS2 +0x1C */
-    void * field_20; /* PS2 +0x20 */
-    void * field_24; /* PS2 +0x24 */
-    void * field_28; /* PS2 +0x28 */
-    void * field_2C; /* PS2 +0x2C */
-    void * field_30; /* PS2 +0x30 */
-    void * field_34; /* PS2 +0x34 */
-    void * field_38; /* PS2 +0x38 */
-    s32 field_3C; /* PS2 +0x3C */
-    u8 field_40; /* PS2 +0x40 */
-    u8 field_41; /* PS2 +0x41 */
-    u8 field_42; /* PS2 +0x42 */
-    u8 field_43; /* PS2 +0x43 */
-    f32 field_44; /* PS2 +0x44 */
-    u8 field_48; /* PS2 +0x48 */
-    u8 opaque_49[3];
-    f32 field_4C; /* PS2 +0x4C */
-    u8 field_50; /* PS2 +0x50 */
-    u8 opaque_51[3];
-    f32 field_54; /* PS2 +0x54 */
+    u32 field_0; /* PS2 +0x0 */
 } Recovered_Vtable_003E3688;
 typedef char assert_Recovered_Vtable_003E3688_0[(((int)&((Recovered_Vtable_003E3688 *)0)->field_0) == 0) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_4[(((int)&((Recovered_Vtable_003E3688 *)0)->field_4) == 4) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_8[(((int)&((Recovered_Vtable_003E3688 *)0)->field_8) == 8) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_C[(((int)&((Recovered_Vtable_003E3688 *)0)->field_C) == 12) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_10[(((int)&((Recovered_Vtable_003E3688 *)0)->field_10) == 16) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_14[(((int)&((Recovered_Vtable_003E3688 *)0)->field_14) == 20) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_18[(((int)&((Recovered_Vtable_003E3688 *)0)->field_18) == 24) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_1C[(((int)&((Recovered_Vtable_003E3688 *)0)->field_1C) == 28) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_20[(((int)&((Recovered_Vtable_003E3688 *)0)->field_20) == 32) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_24[(((int)&((Recovered_Vtable_003E3688 *)0)->field_24) == 36) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_28[(((int)&((Recovered_Vtable_003E3688 *)0)->field_28) == 40) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_2C[(((int)&((Recovered_Vtable_003E3688 *)0)->field_2C) == 44) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_30[(((int)&((Recovered_Vtable_003E3688 *)0)->field_30) == 48) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_34[(((int)&((Recovered_Vtable_003E3688 *)0)->field_34) == 52) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_38[(((int)&((Recovered_Vtable_003E3688 *)0)->field_38) == 56) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_3C[(((int)&((Recovered_Vtable_003E3688 *)0)->field_3C) == 60) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_40[(((int)&((Recovered_Vtable_003E3688 *)0)->field_40) == 64) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_41[(((int)&((Recovered_Vtable_003E3688 *)0)->field_41) == 65) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_42[(((int)&((Recovered_Vtable_003E3688 *)0)->field_42) == 66) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_43[(((int)&((Recovered_Vtable_003E3688 *)0)->field_43) == 67) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_44[(((int)&((Recovered_Vtable_003E3688 *)0)->field_44) == 68) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_48[(((int)&((Recovered_Vtable_003E3688 *)0)->field_48) == 72) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_4C[(((int)&((Recovered_Vtable_003E3688 *)0)->field_4C) == 76) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_50[(((int)&((Recovered_Vtable_003E3688 *)0)->field_50) == 80) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E3688_54[(((int)&((Recovered_Vtable_003E3688 *)0)->field_54) == 84) ? 1 : -1];
 #endif

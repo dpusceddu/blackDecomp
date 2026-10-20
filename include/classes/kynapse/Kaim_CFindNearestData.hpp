@@ -16,7 +16,7 @@ struct Kaim_CFindNearestData {
     // Destructor identity: 0x002F0A30.
     // Destructor identity: 0x002F0A30.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x4: UNVERIFIED type; PS2 access offset.
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
@@ -25,12 +25,12 @@ struct Kaim_CFindNearestData {
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
     // 0x14: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0014() { return *(int *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
+    inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0018() { return *(int *)((unsigned char *)this + 0x18); }
     // 0x002EF030: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002EF030(void * argument0);
-    // 0x002EF900: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002EF900: UNVERIFIED signature (src/campaign/graph_cfindnearestdata.cpp).
     int Function_002EF900();
     // 0x002EFC50: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002EFC50(unsigned int argument0);

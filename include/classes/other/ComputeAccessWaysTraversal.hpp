@@ -20,8 +20,8 @@ struct ComputeAccessWaysTraversal {
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
-    // 0x003915C8: UNVERIFIED signature (src/auto/kynapse/3915c0.c).
-    unsigned int Function_003915C8();
+    // 0x003915C8: UNVERIFIED signature (include/campaign/graph/spatial.hpp).
+    unsigned int Function_003915C8(void * argument0);
     // 0x00391E18: UNVERIFIED signature (src/auto/kynapse/391e10.c).
     int Function_00391E18();
     // 0x00392DC0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
@@ -39,7 +39,7 @@ struct ComputeAccessWaysTraversal {
         // slot 1, table+0x10, this delta 0, function 0x00392E48; UNVERIFIED signature.
         virtual unsigned int Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x003915C8; UNVERIFIED signature.
-        virtual unsigned int Slot002();
+        virtual unsigned int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x00392E50; UNVERIFIED signature.
         virtual int Slot003(void * argument0);
         // slot 4, table+0x28, this delta 0, function 0x00391E18; UNVERIFIED signature.

@@ -16,10 +16,10 @@ struct Kaim_CGraphTraversal {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x003915C0: UNVERIFIED signature (src/auto/kynapse/3915c0.c).
-    unsigned int Function_003915C0();
-    // 0x003915C8: UNVERIFIED signature (src/auto/kynapse/3915c0.c).
-    unsigned int Function_003915C8();
+    // 0x003915C0: UNVERIFIED signature (include/campaign/graph/spatial.hpp).
+    unsigned int Function_003915C0(void * argument0);
+    // 0x003915C8: UNVERIFIED signature (include/campaign/graph/spatial.hpp).
+    unsigned int Function_003915C8(void * argument0);
     // 0x00391DD8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00391DD8();
     // 0x00391E10: UNVERIFIED signature (src/auto/kynapse/391e10.c).
@@ -33,9 +33,9 @@ struct Kaim_CGraphTraversal {
         // slot 0, table+0x8, this delta 0, function 0x00391DD8; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x003915C0; UNVERIFIED signature.
-        virtual unsigned int Slot001();
+        virtual unsigned int Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x003915C8; UNVERIFIED signature.
-        virtual unsigned int Slot002();
+        virtual unsigned int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x00391E10; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00391E18; UNVERIFIED signature.

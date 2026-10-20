@@ -20,10 +20,10 @@ struct SaveFastBinaryGraphTraversal {
     inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
-    // 0x003915C0: UNVERIFIED signature (src/auto/kynapse/3915c0.c).
-    unsigned int Function_003915C0();
-    // 0x003915C8: UNVERIFIED signature (src/auto/kynapse/3915c0.c).
-    unsigned int Function_003915C8();
+    // 0x003915C0: UNVERIFIED signature (include/campaign/graph/spatial.hpp).
+    unsigned int Function_003915C0(void * argument0);
+    // 0x003915C8: UNVERIFIED signature (include/campaign/graph/spatial.hpp).
+    unsigned int Function_003915C8(void * argument0);
     // 0x00391730: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00391730();
     // 0x003917B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -37,9 +37,9 @@ struct SaveFastBinaryGraphTraversal {
         // slot 0, table+0x8, this delta 0, function 0x00391730; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x003915C0; UNVERIFIED signature.
-        virtual unsigned int Slot001();
+        virtual unsigned int Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x003915C8; UNVERIFIED signature.
-        virtual unsigned int Slot002();
+        virtual unsigned int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x003917B8; UNVERIFIED signature.
         virtual int Slot003(void * argument0);
         // slot 4, table+0x28, this delta 0, function 0x00391BF8; UNVERIFIED signature.

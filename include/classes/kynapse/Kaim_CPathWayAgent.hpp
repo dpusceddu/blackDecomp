@@ -15,65 +15,59 @@ struct Kaim_CPathWayAgent {
     // Destructor identity: 0x002D6278.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
+    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_000C() { return *(void * *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
+    // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0014() { return *(void * *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0018() { return *(void * *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
+    // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_001C() { return *(void * *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0020() { return *(void * *)((unsigned char *)this + 0x20); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
+    // 0x24: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0024() { return *(void * *)((unsigned char *)this + 0x24); }
-    // 0x28: UNVERIFIED type; PS2 access offset.
+    // 0x28: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0028() { return *(void * *)((unsigned char *)this + 0x28); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
+    // 0x2C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_002C() { return *(void * *)((unsigned char *)this + 0x2C); }
-    // 0x30: UNVERIFIED type; PS2 access offset.
+    // 0x30: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0030() { return *(void * *)((unsigned char *)this + 0x30); }
-    // 0x34: UNVERIFIED type; PS2 access offset.
+    // 0x34: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0034() { return *(void * *)((unsigned char *)this + 0x34); }
-    // 0x38: UNVERIFIED type; PS2 access offset.
+    // 0x38: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0038() { return *(void * *)((unsigned char *)this + 0x38); }
-    // 0x3C: UNVERIFIED type; PS2 access offset.
+    // 0x3C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_003C() { return *(int *)((unsigned char *)this + 0x3C); }
-    // 0x40: UNVERIFIED type; PS2 access offset.
+    // 0x40: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0040() { return *(unsigned char *)((unsigned char *)this + 0x40); }
-    // 0x41: UNVERIFIED type; PS2 access offset.
+    // 0x41: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0041() { return *(unsigned char *)((unsigned char *)this + 0x41); }
-    // 0x42: UNVERIFIED type; PS2 access offset.
+    // 0x42: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0042() { return *(unsigned char *)((unsigned char *)this + 0x42); }
-    // 0x43: UNVERIFIED type; PS2 access offset.
+    // 0x43: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0043() { return *(unsigned char *)((unsigned char *)this + 0x43); }
-    // 0x44: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0044() { return *(float *)((unsigned char *)this + 0x44); }
-    // 0x48: UNVERIFIED type; PS2 access offset.
+    // 0x48: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0048() { return *(unsigned char *)((unsigned char *)this + 0x48); }
-    // 0x4C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_004C() { return *(float *)((unsigned char *)this + 0x4C); }
-    // 0x50: UNVERIFIED type; PS2 access offset.
+    // 0x50: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0050() { return *(unsigned char *)((unsigned char *)this + 0x50); }
-    // 0x54: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0054() { return *(float *)((unsigned char *)this + 0x54); }
     // 0x002D5498: UNVERIFIED signature (src/kynapse/path_agent.cpp).
     unsigned char Function_002D5498(void * argument0);
-    // 0x002D5650: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D5650();
-    // 0x002D59F0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D59F0(unsigned int argument0);
+    // 0x002D5650: UNVERIFIED signature (src/campaign/behaviors_pathway_wave6.cpp).
+    unsigned char Function_002D5650();
+    // 0x002D59F0: UNVERIFIED signature (src/campaign/behaviors_pathway_wave6.cpp).
+    unsigned char Function_002D59F0(unsigned int argument0);
     // 0x002D6278: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D6278();
-    // 0x002D62D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D62D0(void * argument0);
+    // 0x002D62D0: UNVERIFIED signature (src/campaign/behaviors_pathway_wave6.cpp).
+    unsigned char Function_002D62D0(void * argument0);
     // 0x002D63C0: UNVERIFIED signature (src/kynapse/predicates_2d63c0.cpp).
     unsigned char Function_002D63C0();
     // 0x002D63D0: UNVERIFIED signature (src/kynapse/predicates_2d63c0.cpp).
@@ -95,7 +89,7 @@ struct Kaim_CPathWayAgent {
         // slot 1, table+0x10, this delta 0, function 0x002D5498; UNVERIFIED signature.
         virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002D62D0; UNVERIFIED signature.
-        virtual int Slot002(void * argument0);
+        virtual unsigned char Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x002D6440; UNVERIFIED signature.
         virtual unsigned int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00389668; UNVERIFIED signature.
@@ -103,7 +97,7 @@ struct Kaim_CPathWayAgent {
         // slot 5, table+0x30, this delta 0, function 0x002D6460; UNVERIFIED signature.
         virtual unsigned char Slot005();
         // slot 6, table+0x38, this delta 0, function 0x002D5650; UNVERIFIED signature.
-        virtual int Slot006();
+        virtual unsigned char Slot006();
         // slot 7, table+0x40, this delta 0, function 0x002D63C0; UNVERIFIED signature.
         virtual unsigned char Slot007();
         // slot 8, table+0x48, this delta 0, function 0x002D63D0; UNVERIFIED signature.
@@ -111,7 +105,7 @@ struct Kaim_CPathWayAgent {
         // slot 9, table+0x50, this delta 0, function 0x002D63E0; UNVERIFIED signature.
         virtual unsigned char Slot009();
         // slot 10, table+0x58, this delta 0, function 0x002D59F0; UNVERIFIED signature.
-        virtual int Slot010(unsigned int argument0);
+        virtual unsigned char Slot010(unsigned int argument0);
     };
 };
 

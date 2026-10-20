@@ -15,7 +15,7 @@ struct Kaim_CAccessWaysData {
     // Destructor identity: 0x002FD800.
     // Destructor identity: 0x002FD800.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x4: UNVERIFIED type; PS2 access offset.
+    // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
     // 0x8: UNVERIFIED type; PS2 access offset.
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
@@ -23,7 +23,7 @@ struct Kaim_CAccessWaysData {
     inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline short & Field_0010() { return *(short *)((unsigned char *)this + 0x10); }
-    // 0x002FD288: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002FD288: UNVERIFIED signature (include/campaign/graph/accessways.hpp).
     int Function_002FD288();
     // 0x002FD4A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002FD4A0(unsigned int argument0);

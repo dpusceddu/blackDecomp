@@ -18,11 +18,11 @@ struct Kaim_CSpatialGraph {
     // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
     // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
-    inline unsigned int & Field_000C() { return *(unsigned int *)((unsigned char *)this + 0xC); }
+    inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
     // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_0010() { return *(unsigned int *)((unsigned char *)this + 0x10); }
     // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
-    inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
+    inline int & Field_0014() { return *(int *)((unsigned char *)this + 0x14); }
     // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0018() { return *(int *)((unsigned char *)this + 0x18); }
     // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
@@ -32,11 +32,11 @@ struct Kaim_CSpatialGraph {
     // 0x24: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0024() { return *(int *)((unsigned char *)this + 0x24); }
     // 0x28: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
-    inline unsigned int & Field_0028() { return *(unsigned int *)((unsigned char *)this + 0x28); }
+    inline int & Field_0028() { return *(int *)((unsigned char *)this + 0x28); }
     // 0x2C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_002C() { return *(unsigned int *)((unsigned char *)this + 0x2C); }
     // 0x30: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
-    inline unsigned int & Field_0030() { return *(unsigned int *)((unsigned char *)this + 0x30); }
+    inline int & Field_0030() { return *(int *)((unsigned char *)this + 0x30); }
     // 0x34: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0034() { return *(int *)((unsigned char *)this + 0x34); }
     // 0x38: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
@@ -59,8 +59,8 @@ struct Kaim_CSpatialGraph {
     int Function_002F6E08(unsigned int argument0);
     // 0x002F7D80: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_002F7D80(const char * argument0);
-    // 0x002F7F48: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F7F48(unsigned int argument0);
+    // 0x002F7F48: UNVERIFIED signature (src/campaign/graph_spatial_wave6.cpp).
+    unsigned char Function_002F7F48(void * argument0);
     // 0x002F8238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F8238(unsigned int argument0, unsigned int argument1);
     // 0x002F8C38: UNVERIFIED signature (src/campaign/graph_cspatialgraph_lifetime.cpp).
@@ -80,7 +80,7 @@ struct Kaim_CSpatialGraph {
         // slot 3, table+0x20, this delta 0, function 0x002F7D80; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual bool Slot003(const char * argument0);
         // slot 4, table+0x28, this delta 0, function 0x002F7F48; UNVERIFIED signature.
-        virtual int Slot004(unsigned int argument0);
+        virtual unsigned char Slot004(void * argument0);
         // slot 5, table+0x30, this delta 0, function 0x002F8238; UNVERIFIED signature.
         virtual int Slot005(unsigned int argument0, unsigned int argument1);
         // slot 6, table+0x38, this delta 0, function 0x002F8C38; UNVERIFIED signature.

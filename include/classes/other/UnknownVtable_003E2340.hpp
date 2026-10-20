@@ -44,10 +44,10 @@ struct UnknownVtable_003E2340 {
     int Function_0023BD28();
     // 0x0024F578: UNVERIFIED signature (src/tu/apt_tu_24ce90.c).
     int Function_0024F578();
-    // 0x00384E70: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00384E70();
-    // 0x00384F08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00384F08();
+    // 0x00384E70: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
+    void Function_00384E70();
+    // 0x00384F08: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
+    void Function_00384F08();
     // 0x00384F50: UNVERIFIED signature (src/auto/other/384f40.c).
     int Function_00384F50();
     // 0x00384F68: UNVERIFIED signature (src/auto/other/384f68.c).
@@ -63,7 +63,7 @@ struct UnknownVtable_003E2340 {
         // slot 1, table+0x10, this delta 0, function 0x0023BD28; UNVERIFIED signature.
         virtual int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00384E70; UNVERIFIED signature.
-        virtual unsigned int Slot002();
+        virtual void Slot002();
         // slot 3, table+0x20, this delta 0, function 0x0023BCA0; UNVERIFIED signature.
         virtual void * Slot003();
         // slot 4, table+0x28, this delta 0, function 0x0023BCC0; UNVERIFIED signature.
@@ -77,7 +77,7 @@ struct UnknownVtable_003E2340 {
         // slot 8, table+0x48, this delta 0, function 0x0023BD00; UNVERIFIED signature.
         virtual int Slot008(void * argument0, unsigned short ** argument1, int * argument2);
         // slot 9, table+0x50, this delta 0, function 0x00384F08; UNVERIFIED signature.
-        virtual unsigned int Slot009();
+        virtual void Slot009();
         // slot 10, table+0x58, this delta 0, function 0x0023B468; UNVERIFIED signature.
         virtual int Slot010();
         // slot 11, table+0x60, this delta 0, function 0x0023B4B0; UNVERIFIED signature.
