@@ -5158,46 +5158,6 @@ units:
     symbol: func_0015BB90
     size: 72
     status: source
-- name: auto_unclassified_15d210
-  source: src/auto/unclassified/15d210.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x15d210'
-    symbol: func_0015D210
-    size: 24
-    status: source
-  - addr: '0x15d228'
-    symbol: func_0015D228
-    size: 28
-    status: source
-  owner: mod-context
-  claim: mod-wave3-preparation
-- name: auto_unclassified_15d288
-  source: src/auto/unclassified/15d288.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x15d288'
-    symbol: func_0015D288
-    size: 28
-    status: source
-  - addr: '0x15d2a8'
-    symbol: func_0015D2A8
-    size: 28
-    status: source
-  - addr: '0x15d2c8'
-    symbol: func_0015D2C8
-    size: 28
-    status: source
-  owner: mod-context
-  claim: mod-wave3-preparation
 - name: tuf_15d3d8
   source: src/tu/tu_15d370.c
   origin: auto; mod context owner
@@ -52377,4 +52337,162 @@ units:
   - addr: '0x1b90d0'
     size: 200
     symbol: func_001B90D0
+    status: source
+- name: mod_weapons_tu_15d060
+  source: src/campaign/mod_weapons_tu_15d060.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave3-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x15d060'
+    size: 312
+    symbol: func_0015D060
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_15d198
+  source: src/campaign/mod_weapons_tu_15d198.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave3-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x15d198'
+    size: 120
+    symbol: func_0015D198
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_15d248
+  source: src/campaign/mod_weapons_tu_15d248.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave3-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x15d248'
+    size: 64
+    symbol: func_0015D248
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_15d2e8
+  source: src/campaign/mod_weapons_tu_15d2e8.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave3-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x15d2e8'
+    size: 36
+    symbol: func_0015D2E8
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_15d310
+  source: src/campaign/mod_weapons_tu_15d310.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave3-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x15d310'
+    size: 92
+    symbol: func_0015D310
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_163328
+  source: src/campaign/mod_weapons_tu_163328.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave3-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x163328'
+    size: 364
+    symbol: func_00163328
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_155c28
+  source: src/campaign/mod_weapons_tu_155c28.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave3-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x155c28'
+    size: 412
+    symbol: func_00155C28
+    status: asm
+    reason: claimed
+- name: mod_weapons_catalog_methods
+  source: src/campaign/mod_weapons_catalog_methods.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave3-weapons-catalog-conversions
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x15d210'
+    symbol: Row__Q210ModWeapons20WeaponManagerMethodsi
+    size: 24
+    status: source
+  - addr: '0x15d228'
+    symbol: PrimaryDefinition__Q210ModWeapons20WeaponManagerMethodsi
+    size: 28
+    status: source
+  - addr: '0x15d288'
+    symbol: Word10__Q210ModWeapons20WeaponManagerMethodsi
+    size: 28
+    status: source
+  - addr: '0x15d2a8'
+    symbol: Word14__Q210ModWeapons20WeaponManagerMethodsi
+    size: 28
+    status: source
+  - addr: '0x15d2c8'
+    symbol: Word18__Q210ModWeapons20WeaponManagerMethodsi
+    size: 28
     status: source
