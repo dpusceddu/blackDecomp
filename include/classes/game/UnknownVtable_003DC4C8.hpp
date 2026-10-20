@@ -10,6 +10,8 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DC4C8 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned long & Field_0000() { return *(unsigned long *)((unsigned char *)this + 0x0); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
     // 0x70: UNVERIFIED type; PS2 access offset.
@@ -28,6 +30,10 @@ struct UnknownVtable_003DC4C8 {
     inline U128 & Field_00F0() { return *(U128 *)((unsigned char *)this + 0xF0); }
     // 0x100: UNVERIFIED type; PS2 access offset.
     inline U128 & Field_0100() { return *(U128 *)((unsigned char *)this + 0x100); }
+    // 0x114: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0114() { return *(void * *)((unsigned char *)this + 0x114); }
+    // 0x118: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0118() { return *(unsigned int *)((unsigned char *)this + 0x118); }
     // 0x11C: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_011C() { return *(unsigned char *)((unsigned char *)this + 0x11C); }
     // 0x11D: UNVERIFIED type; PS2 access offset.
@@ -39,9 +45,9 @@ struct UnknownVtable_003DC4C8 {
     // 0x130: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0130() { return *(unsigned int *)((unsigned char *)this + 0x130); }
     // 0x140: UNVERIFIED type; PS2 access offset.
-    inline S128 & Field_0140() { return *(S128 *)((unsigned char *)this + 0x140); }
+    inline U128 & Field_0140() { return *(U128 *)((unsigned char *)this + 0x140); }
     // 0x150: UNVERIFIED type; PS2 access offset.
-    inline S128 & Field_0150() { return *(S128 *)((unsigned char *)this + 0x150); }
+    inline U128 & Field_0150() { return *(U128 *)((unsigned char *)this + 0x150); }
     // 0x00125D10: UNVERIFIED signature (src/auto/game/125d10.c).
     int Function_00125D10();
     // 0x00125E20: UNVERIFIED signature (src/auto/game/125e20.c).
@@ -56,7 +62,7 @@ struct UnknownVtable_003DC4C8 {
     unsigned int Function_00126090();
     // 0x001261F8: UNVERIFIED signature (src/auto/game/1261f8.c).
     int Function_001261F8();
-    // 0x00169C10: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x00169C10: UNVERIFIED signature (src/campaign/actor_c4c8_wave4.cpp).
     int Function_00169C10(unsigned long argument0, void * argument1);
     // 0x00169D20: UNVERIFIED signature (src/auto/game/169d20.c).
     int Function_00169D20();
@@ -72,8 +78,8 @@ struct UnknownVtable_003DC4C8 {
     int Function_0016C728(unsigned long argument0, void * argument1);
     // 0x0016C9E8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0016C9E8(unsigned int argument0, unsigned int argument1);
-    // 0x0016CC88: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_0016CC88();
+    // 0x0016CC88: UNVERIFIED signature (src/campaign/actor_c4c8_wave4.cpp).
+    void Function_0016CC88();
     // 0x0016CCF0: UNVERIFIED signature (src/tu/tu_16a720_16c708.c).
     int Function_0016CCF0();
     // 0x0016CD18: UNVERIFIED signature (src/tu/tu_16a720_16c708.c).
@@ -131,7 +137,7 @@ struct UnknownVtable_003DC4C8 {
         // slot 19, table+0xA0, this delta 0, function 0x00169D20; UNVERIFIED signature.
         virtual int Slot019();
         // slot 20, table+0xA8, this delta 0, function 0x0016CC88; UNVERIFIED signature.
-        virtual unsigned int Slot020();
+        virtual void Slot020();
         // slot 21, table+0xB0, this delta 0, function 0x0016C728; UNVERIFIED signature.
         virtual int Slot021(unsigned long argument0, void * argument1);
     };

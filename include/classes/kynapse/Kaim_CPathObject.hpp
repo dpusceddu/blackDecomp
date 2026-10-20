@@ -25,18 +25,20 @@ struct Kaim_CPathObject {
     inline int & Field_0064() { return *(int *)((unsigned char *)this + 0x64); }
     // 0x68: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0068() { return *(int *)((unsigned char *)this + 0x68); }
+    // 0x6C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_006C() { return *(int *)((unsigned char *)this + 0x6C); }
     // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
     unsigned int Function_002904E8();
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
     void Function_002E4CA8();
-    // 0x002F4390: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F4390(void * argument0);
+    // 0x002F4390: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    unsigned char Function_002F4390(void * argument0);
     // 0x002F44E8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_002F44E8();
-    // 0x002F4620: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F4620(unsigned int argument0, void * argument1);
-    // 0x002F47B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002F47B0(unsigned int argument0, void * argument1);
+    // 0x002F4620: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    unsigned char Function_002F4620(int argument0, void * argument1);
+    // 0x002F47B0: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    unsigned char Function_002F47B0(int argument0, void * argument1);
     // 0x002F4A90: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002F4A90();
     // 0x002F4B50: UNVERIFIED signature (src/kynapse/host_2850c0_2f4b50.cpp).
@@ -66,7 +68,7 @@ struct Kaim_CPathObject {
         // slot 0, table+0x8, this delta 0, function 0x002F4A90; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002F4390; UNVERIFIED signature.
-        virtual int Slot001(void * argument0);
+        virtual unsigned char Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x002E4CA8; UNVERIFIED signature.
         virtual void Slot002();
         // slot 3, table+0x20, this delta 0, function 0x002904E8; UNVERIFIED signature.
@@ -92,9 +94,9 @@ struct Kaim_CPathObject {
         // slot 13, table+0x70, this delta 0, function 0x002904E8; UNVERIFIED signature.
         virtual unsigned int Slot013();
         // slot 14, table+0x78, this delta 0, function 0x002F4620; UNVERIFIED signature.
-        virtual int Slot014(unsigned int argument0, void * argument1);
+        virtual unsigned char Slot014(int argument0, void * argument1);
         // slot 15, table+0x80, this delta 0, function 0x002F47B0; UNVERIFIED signature.
-        virtual int Slot015(unsigned int argument0, void * argument1);
+        virtual unsigned char Slot015(int argument0, void * argument1);
         // slot 16, table+0x88, this delta 0, function 0x002F44E8; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual void Slot016();
         // slot 17, table+0x90, this delta 0, function 0x00391378; UNVERIFIED signature.

@@ -13,6 +13,7 @@ namespace BlackPS2Classes {
 struct Kaim_CPathWayManager_CPathWayMap {
     typedef Hierarchy_Kaim_CPathWayManager_CPathWayMap Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002DAC50.
+    // Destructor identity: 0x002DAC50.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x002DAC50: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002DAC50();

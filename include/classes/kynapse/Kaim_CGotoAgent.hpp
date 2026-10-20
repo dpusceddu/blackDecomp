@@ -15,32 +15,30 @@ struct Kaim_CGotoAgent {
     // Destructor identity: 0x002D3A10.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
+    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_000C() { return *(void * *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0010() { return *(unsigned char *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
+    // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
+    // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
     // 0x002D3A10: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D3A10();
     // 0x002D3A68: UNVERIFIED signature (src/kynapse/predicates_2d3a68.cpp).
     unsigned char Function_002D3A68();
-    // 0x002D3A78: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002D3A78();
+    // 0x002D3A78: UNVERIFIED signature (src/context/behaviors_goto.cpp).
+    int Function_002D3A78(void * argument0);
     // 0x002D3B00: UNVERIFIED signature (src/tu/kynapse_tu_2d38c8.c).
     int Function_002D3B00();
-    // 0x002D3B08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002D3B08: UNVERIFIED signature (include/context/behaviors/goto.hpp).
     int Function_002D3B08();
     // 0x00389550: UNVERIFIED signature (src/kynapse/class_info_389550.cpp).
     void * Function_00389550();
@@ -55,7 +53,7 @@ struct Kaim_CGotoAgent {
         // slot 0, table+0x8, this delta 0, function 0x002D3A10; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x002D3A78; UNVERIFIED signature.
-        virtual int Slot001();
+        virtual int Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x00389560; UNVERIFIED signature.
         virtual int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x0038BB28; UNVERIFIED signature.

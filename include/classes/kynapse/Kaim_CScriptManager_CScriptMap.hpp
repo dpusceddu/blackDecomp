@@ -13,6 +13,7 @@ namespace BlackPS2Classes {
 struct Kaim_CScriptManager_CScriptMap {
     typedef Hierarchy_Kaim_CScriptManager_CScriptMap Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002DD488.
+    // Destructor identity: 0x002DD488.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x002DD488: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002DD488();

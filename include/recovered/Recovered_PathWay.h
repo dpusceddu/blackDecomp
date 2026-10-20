@@ -4,12 +4,12 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_PathWay {
-    u32 field_0; /* PS2 +0x0 */
-    u32 field_4; /* PS2 +0x4 */
+    void * field_0; /* PS2 +0x0 */
+    void * field_4; /* PS2 +0x4 */
     s32 field_8; /* PS2 +0x8 */
     u8 field_C; /* PS2 +0xC */
     u8 opaque_D[259];
-    u32 field_110; /* PS2 +0x110 */
+    s32 field_110; /* PS2 +0x110 */
 } Recovered_PathWay;
 typedef char assert_Recovered_PathWay_0[(((int)&((Recovered_PathWay *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_PathWay_4[(((int)&((Recovered_PathWay *)0)->field_4) == 4) ? 1 : -1];

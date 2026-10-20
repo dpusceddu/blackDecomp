@@ -13,12 +13,9 @@ namespace BlackPS2Classes {
 struct Kaim_CPathWay {
     typedef Hierarchy_Kaim_CPathWay Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002DF2A0.
+    // Destructor identity: 0x002DF2A0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_000C() { return *(unsigned char *)((unsigned char *)this + 0xC); }
     // 0x002DF2A0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002DF2A0();

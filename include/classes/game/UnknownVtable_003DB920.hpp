@@ -10,6 +10,8 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DB920 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned long & Field_0000() { return *(unsigned long *)((unsigned char *)this + 0x0); }
     // 0x70: UNVERIFIED type; PS2 access offset.
     inline U128 & Field_0070() { return *(U128 *)((unsigned char *)this + 0x70); }
     // 0x80: UNVERIFIED type; PS2 access offset.
@@ -20,8 +22,16 @@ struct UnknownVtable_003DB920 {
     inline U128 & Field_00A0() { return *(U128 *)((unsigned char *)this + 0xA0); }
     // 0x110: UNVERIFIED type; PS2 access offset.
     inline float & Field_0110() { return *(float *)((unsigned char *)this + 0x110); }
+    // 0x114: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0114() { return *(void * *)((unsigned char *)this + 0x114); }
+    // 0x118: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0118() { return *(unsigned int *)((unsigned char *)this + 0x118); }
     // 0x11C: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_011C() { return *(unsigned char *)((unsigned char *)this + 0x11C); }
+    // 0x11D: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_011D() { return *(unsigned char *)((unsigned char *)this + 0x11D); }
+    // 0x124: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0124() { return *(unsigned int *)((unsigned char *)this + 0x124); }
     // 0x130: UNVERIFIED type; PS2 access offset.
     inline S128 & Field_0130() { return *(S128 *)((unsigned char *)this + 0x130); }
     // 0x140: UNVERIFIED type; PS2 access offset.
@@ -58,7 +68,7 @@ struct UnknownVtable_003DB920 {
     unsigned int Function_00164860();
     // 0x001648B8: UNVERIFIED signature (src/auto/game/1648b8.c).
     int Function_001648B8();
-    // 0x00169C10: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x00169C10: UNVERIFIED signature (src/campaign/actor_c4c8_wave4.cpp).
     int Function_00169C10(unsigned long argument0, void * argument1);
     // 0x00169D20: UNVERIFIED signature (src/auto/game/169d20.c).
     int Function_00169D20();

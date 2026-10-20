@@ -10,8 +10,20 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DBAA0 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned long & Field_0000() { return *(unsigned long *)((unsigned char *)this + 0x0); }
     // 0x10: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
+    // 0x114: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0114() { return *(void * *)((unsigned char *)this + 0x114); }
+    // 0x118: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0118() { return *(unsigned int *)((unsigned char *)this + 0x118); }
+    // 0x11C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_011C() { return *(unsigned char *)((unsigned char *)this + 0x11C); }
+    // 0x11D: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned char & Field_011D() { return *(unsigned char *)((unsigned char *)this + 0x11D); }
+    // 0x124: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline unsigned int & Field_0124() { return *(unsigned int *)((unsigned char *)this + 0x124); }
     // 0x131: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0131() { return *(unsigned char *)((unsigned char *)this + 0x131); }
     // 0x134: UNVERIFIED type; PS2 access offset.
@@ -36,7 +48,7 @@ struct UnknownVtable_003DBAA0 {
     void * Function_00164F50();
     // 0x001650B0: UNVERIFIED signature (src/auto/game/1650b0.c).
     int Function_001650B0();
-    // 0x00169C10: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x00169C10: UNVERIFIED signature (src/campaign/actor_c4c8_wave4.cpp).
     int Function_00169C10(unsigned long argument0, void * argument1);
     // 0x00169D20: UNVERIFIED signature (src/auto/game/169d20.c).
     int Function_00169D20();

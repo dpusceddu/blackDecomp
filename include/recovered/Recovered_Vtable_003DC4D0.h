@@ -25,8 +25,8 @@ typedef struct Recovered_Vtable_003DC4D0 {
     u8 opaque_128[8];
     u32 field_130; /* PS2 +0x130 */
     u8 opaque_134[12];
-    s128 field_140; /* PS2 +0x140 */
-    s128 field_150; /* PS2 +0x150 */
+    u128 field_140; /* PS2 +0x140 */
+    u128 field_150; /* PS2 +0x150 */
 } Recovered_Vtable_003DC4D0;
 typedef char assert_Recovered_Vtable_003DC4D0_10[(((int)&((Recovered_Vtable_003DC4D0 *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DC4D0_70[(((int)&((Recovered_Vtable_003DC4D0 *)0)->field_70) == 112) ? 1 : -1];

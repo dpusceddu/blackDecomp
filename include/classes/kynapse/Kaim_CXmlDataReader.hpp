@@ -15,16 +15,16 @@ struct Kaim_CXmlDataReader {
     // Constructor identity: 0x00373250; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x00373268.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x00372FC0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00372FC0(unsigned int argument0, void * argument1);
-    // 0x00373148: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00373148(void * argument0);
+    // 0x00372FC0: UNVERIFIED signature (src/context/behaviors_xml.cpp).
+    int Function_00372FC0(void * argument0, void * argument1);
+    // 0x00373148: UNVERIFIED signature (src/context/behaviors_xml.cpp).
+    unsigned int Function_00373148(void * argument0);
     // 0x00373268: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00373268();
     // 0x003732A0: UNVERIFIED signature (src/tu/tu_372fc0.c).
     int Function_003732A0(void * argument0);
-    // 0x00373300: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00373300(void * argument0, unsigned int argument1, unsigned int argument2);
+    // 0x00373300: UNVERIFIED signature (src/context/behaviors_xml.cpp).
+    unsigned int Function_00373300(void * argument0, void * argument1, unsigned int argument2);
     // 0x00373348: UNVERIFIED signature (src/tu/tu_372fc0.c).
     unsigned int Function_00373348(void * argument0);
     // 0x00388E80: UNVERIFIED signature (src/auto/unclassified/388e30.c).
@@ -36,15 +36,15 @@ struct Kaim_CXmlDataReader {
         // slot 0, table+0x8, this delta 0, function 0x00373268; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x00372FC0; UNVERIFIED signature.
-        virtual int Slot001(unsigned int argument0, void * argument1);
+        virtual int Slot001(void * argument0, void * argument1);
         // slot 2, table+0x18, this delta 0, function 0x003732A0; UNVERIFIED signature.
         virtual int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x00373300; UNVERIFIED signature.
-        virtual int Slot003(void * argument0, unsigned int argument1, unsigned int argument2);
+        virtual unsigned int Slot003(void * argument0, void * argument1, unsigned int argument2);
         // slot 4, table+0x28, this delta 0, function 0x00373348; UNVERIFIED signature.
         virtual unsigned int Slot004(void * argument0);
         // slot 5, table+0x30, this delta 0, function 0x00373148; UNVERIFIED signature.
-        virtual int Slot005(void * argument0);
+        virtual unsigned int Slot005(void * argument0);
         // slot 6, table+0x38, this delta 0, function 0x00388E80; UNVERIFIED signature.
         virtual int Slot006(int argument0);
     };

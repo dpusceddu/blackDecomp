@@ -14,8 +14,8 @@ typedef struct Recovered_Vtable_003DB9E8 {
     u8 opaque_B0[96];
     f32 field_110; /* PS2 +0x110 */
     u8 opaque_114[28];
-    s128 field_130; /* PS2 +0x130 */
-    s128 field_140; /* PS2 +0x140 */
+    u128 field_130; /* PS2 +0x130 */
+    u128 field_140; /* PS2 +0x140 */
     u128 field_150; /* PS2 +0x150 */
     u128 field_160; /* PS2 +0x160 */
     u128 field_170; /* PS2 +0x170 */

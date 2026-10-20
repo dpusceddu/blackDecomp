@@ -8,8 +8,12 @@ typedef struct Recovered_CPathObject {
     u8 opaque_4[92];
     void * field_60; /* PS2 +0x60 */
     s32 field_64; /* PS2 +0x64 */
+    u32 field_68; /* PS2 +0x68 */
+    s32 field_6C; /* PS2 +0x6C */
 } Recovered_CPathObject;
 typedef char assert_Recovered_CPathObject_0[(((int)&((Recovered_CPathObject *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_CPathObject_60[(((int)&((Recovered_CPathObject *)0)->field_60) == 96) ? 1 : -1];
 typedef char assert_Recovered_CPathObject_64[(((int)&((Recovered_CPathObject *)0)->field_64) == 100) ? 1 : -1];
+typedef char assert_Recovered_CPathObject_68[(((int)&((Recovered_CPathObject *)0)->field_68) == 104) ? 1 : -1];
+typedef char assert_Recovered_CPathObject_6C[(((int)&((Recovered_CPathObject *)0)->field_6C) == 108) ? 1 : -1];
 #endif
