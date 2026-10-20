@@ -51283,16 +51283,12 @@ units:
     reason: campaign
   - addr: '0x34edb8'
     size: 212
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_0034EDB8
   - addr: '0x34ee90'
     size: 496
-    status: asm
-    reason: campaign
-  - addr: '0x34f080'
-    size: 316
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_0034EE90
   - addr: '0x34f1c0'
     size: 268
     status: asm
@@ -51822,3 +51818,21 @@ units:
     size: 280
     status: source
     symbol: RemoveBone__Q210ModEffects4BankPQ210ModEffects5ActorUc
+- name: mod_arms_34eae0_evaluate
+  source: src/mod/arms_34eae0.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - -DMOD_ARMS_EVALUATE_ONLY
+  - -fno-schedule-insns
+  - -fno-expensive-optimizations
+  functions:
+  - addr: '0x34f080'
+    size: 316
+    status: source
+    symbol: func_0034F080
