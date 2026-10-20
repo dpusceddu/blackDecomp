@@ -46864,15 +46864,16 @@ units:
   - -snas
   - -fbyte-bool
   - -ffunction-sections
+  - -fno-rtti
   functions:
   - addr: '0x2f28f8'
     symbol: func_002F28F8
     size: 768
     status: source
   - addr: '0x2f2660'
-    symbol: func_002F2660
+    symbol: Configure__Q24Kaim13CGraphManagerPQ24Kaim11GraphConfig
     size: 660
-    status: asm
+    status: source
   - addr: '0x2f2bf8'
     symbol: func_002F2BF8
     size: 560
@@ -46898,7 +46899,11 @@ units:
     _vt$Q24Kaim13CGraphManager: '0x3eda30'
     _vt$Q24Kaim7CObject: '0x3e0040'
     _vt$Q34Kaim13CGraphManager9CGraphMap: '0x3eda70'
+    dpmul: '0x2914d0'
+    dptofp: '0x291c68'
+    fptodp: '0x291f58'
     terminate__Fv: '0x36f978'
+  claim: context-wave6-graph
 - name: context_behaviors_sound
   source: src/context/behaviors_sound.cpp
   origin: kynapse
