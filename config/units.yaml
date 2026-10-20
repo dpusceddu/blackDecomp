@@ -50125,3 +50125,18 @@ units:
     _vt$Q24Kaimt10CMetaClass2ZQ24Kaim5CTeamZPFUiPCc_PQ24Kaim5CTeam: '0x3ebb48'
     strcmp: '0x35ca74'
     strcpy: '0x35cbc0'
+- name: campaign_actor_bb90_wave6
+  source: src/campaign/actor_bb90_wave6.cpp
+  origin: C++ actor vtable0x3DBB90 command cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x162fb0'
+    symbol: Execute__Q213CampaignActor11ModeCommand
+    size: 308
+    status: source
+  externs:
+    D_0040F514: '0x40f514'
