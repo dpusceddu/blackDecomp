@@ -30267,7 +30267,7 @@ units:
     symbol: func_0033A488
     size: 1548
     status: asm
-    reason: claimed physics campaign
+    reason: claimed
   - addr: '0x33aa98'
     symbol: func_0033AA98
     size: 428
@@ -30276,12 +30276,12 @@ units:
     symbol: func_0033AC48
     size: 324
     status: asm
-    reason: claimed physics campaign
+    reason: claimed
   - addr: '0x33add0'
     symbol: func_0033ADD0
     size: 104
     status: asm
-    reason: claimed physics campaign
+    reason: claimed
   - addr: '0x33ae38'
     symbol: func_0033AE38
     size: 4
@@ -30291,6 +30291,7 @@ units:
     symbol: func_0033AE68
     size: 60
     status: source
+  claim: context-wave5-graphics
 - name: auto_physics_33b688
   source: src/auto/physics/33b688.c
   origin: auto
