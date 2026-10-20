@@ -48908,8 +48908,6 @@ units:
   functions:
   - addr: '0x169f38'
     status: asm
-  - addr: '0x16a250'
-    status: asm
   - addr: '0x16a720'
     status: source
     size: 84
@@ -48924,18 +48922,6 @@ units:
     func_001AE5E8: '0x1ae5e8'
     func_0026A840: '0x26a840'
     func_0026AA68: '0x26aa68'
-- name: campaign_actor_c010_wave5
-  source: src/campaign/actor_c010_wave5.cpp
-  origin: C++ actor vtable0x3DC010 region cluster
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  - -mvu0-use-vf0-vf16
-  functions:
-  - addr: '0x16a2f8'
-    status: asm
 - name: context_graph_path_storage
   source: src/campaign/graph_path_storage.cpp
   origin: kynapse
@@ -51030,3 +51016,29 @@ units:
     gKaimAllocateHook: '0x3c87ec'
     gKaimAllocator: '0x3c87e8'
     terminate__Fv: '0x36f978'
+- name: campaign_actor_16a250_wave7
+  source: src/campaign/actor_16a250_wave7.cpp
+  origin: C++ game region full TU inventory
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x16a250'
+    name: func_0016A250
+    size: 164
+    status: asm
+  - addr: '0x16a2f8'
+    name: func_0016A2F8
+    size: 456
+    status: asm
+  - addr: '0x16a4c0'
+    name: func_0016A4C0
+    size: 292
+    status: asm
+  - addr: '0x16a5e8'
+    name: func_0016A5E8
+    size: 308
+    status: asm
