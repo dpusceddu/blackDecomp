@@ -5003,7 +5003,7 @@ units:
     status: source
 - name: auto_game_156dc0
   source: src/auto/game/156dc0.c
-  origin: auto
+  origin: auto; mod context owner
   flags:
   - -O2
   - -G0
@@ -5055,7 +5055,7 @@ units:
     status: source
 - name: auto_game_158078
   source: src/auto/game/158078.c
-  origin: auto
+  origin: auto; mod context owner
   flags:
   - -O2
   - -G0
@@ -5253,7 +5253,7 @@ units:
     status: source
 - name: tuf_15d3d8
   source: src/tu/tu_15d370.c
-  origin: auto
+  origin: auto; mod context owner
   flags:
   - -O2
   - -G0
@@ -12910,7 +12910,7 @@ units:
     status: source
 - name: tuf_1ae3a8
   source: src/tu/tu_1ae2e8.c
-  origin: auto
+  origin: auto; mod context owner
   flags:
   - -O2
   - -G0
@@ -12948,7 +12948,7 @@ units:
   claim: wave1-game-actor
 - name: actor_reset_buffers
   source: src/game/actor/reset_buffers.c
-  origin: game
+  origin: game; mod context owner
   claim: wave1-game-actor
   flags:
   - -O2
@@ -12964,7 +12964,7 @@ units:
     status: source
 - name: actor_set_buffer
   source: src/game/actor/set_buffer.c
-  origin: game
+  origin: game; mod context owner
   claim: wave1-game-actor
   flags:
   - -O2
@@ -12979,7 +12979,7 @@ units:
     status: source
 - name: actor_get_buffer
   source: src/game/actor/get_buffer.c
-  origin: game
+  origin: game; mod context owner
   claim: wave1-game-actor
   flags:
   - -O2
@@ -13077,7 +13077,7 @@ units:
   claim: wave1-game-actor
 - name: actor_record_flags
   source: src/game/actor/record_flags.cpp
-  origin: game
+  origin: game; mod context owner
   claim: wave1-game-actor
   flags:
   - -O2
@@ -13098,7 +13098,7 @@ units:
     status: source
 - name: tuf_1afc78
   source: src/tu/tu_1af930.c
-  origin: auto
+  origin: auto; mod context owner
   flags:
   - -O2
   - -G0
@@ -30894,7 +30894,7 @@ units:
     status: source
 - name: tu_347d48
   source: src/tu/347d48.c
-  origin: auto
+  origin: auto; mod context owner
   flags:
   - -O2
   - -G0
@@ -30910,7 +30910,7 @@ units:
     status: source
 - name: auto_animation_348018
   source: src/auto/animation/348018.c
-  origin: auto
+  origin: auto; mod context owner
   flags:
   - -O2
   - -G0
@@ -31071,7 +31071,7 @@ units:
     status: source
 - name: auto_animation_348e78
   source: src/auto/animation/348e78.c
-  origin: auto
+  origin: auto; mod context owner
   flags:
   - -O2
   - -G0
@@ -31582,7 +31582,7 @@ units:
   claim: wave2-animation
 - name: auto_animation_34f328
   source: src/auto/animation/34f328.c
-  origin: auto
+  origin: auto; mod context owner
   flags:
   - -O1
   - -G0
@@ -43033,7 +43033,7 @@ units:
     historical_provenance: unresolved
 - name: effect_slots_1b2e08
   source: src/game/effects/slot_unmatched.cpp
-  origin: game
+  origin: game; mod context owner
   flags:
   - -O2
   - -G0
@@ -43073,7 +43073,7 @@ units:
     reason: claimed
 - name: effect_1b33b8
   source: src/game/effects/slot_lookup.c
-  origin: game
+  origin: game; mod context owner
   flags:
   - -O2
   - -G0
@@ -43085,7 +43085,7 @@ units:
     status: source
 - name: effect_1b37c8
   source: src/game/effects/slot_release.c
-  origin: game
+  origin: game; mod context owner
   flags:
   - -O2
   - -G0
@@ -43097,7 +43097,7 @@ units:
     status: source
 - name: effect_1b3a50
   source: src/game/effects/slot_actor.c
-  origin: game
+  origin: game; mod context owner
   flags:
   - -O2
   - -G0
@@ -43109,7 +43109,7 @@ units:
     status: source
 - name: effect_1b3a90
   source: src/game/effects/slot_bone.c
-  origin: game
+  origin: game; mod context owner
   flags:
   - -O2
   - -G0
@@ -43121,7 +43121,7 @@ units:
     status: source
 - name: effect_1b3cf8
   source: src/game/effects/slot_set.c
-  origin: game
+  origin: game; mod context owner
   flags:
   - -O2
   - -G0
@@ -43167,7 +43167,7 @@ units:
     historical_provenance: unresolved
 - name: animation_playback_allocation
   source: src/animation/tu_34eae0/allocate_banks.cpp
-  origin: animation
+  origin: animation; mod context owner
   flags:
   - -O2
   - -G0
@@ -46296,7 +46296,7 @@ units:
     status: source
 - name: campaign_graphics_controller
   source: src/campaign/graphics_controller.cpp
-  origin: game
+  origin: game; mod context owner
   flags:
   - -O2
   - -G0
@@ -46607,7 +46607,7 @@ units:
     _stricmp: '0x360838'
 - name: campaign_actor_camera
   source: src/campaign/actor_camera.cpp
-  origin: 'C++ campaign: actor controller vtable0x3dc348; child vptr at0x4c verified by matched methods'
+  origin: 'C++ campaign: actor controller vtable0x3dc348; child vptr at0x4c verified by matched methods; mod context owner'
   flags:
   - -O2
   - -G0
@@ -47101,7 +47101,7 @@ units:
     status: source
 - name: context_graphics_controller_update
   source: src/campaign/graphics_controller_update.cpp
-  origin: 'C++ shared-context campaign: input controller; PS2-verified accessed fields'
+  origin: 'C++ shared-context campaign: input controller; PS2-verified accessed fields; mod context owner'
   flags:
   - -O2
   - -G0
@@ -47114,7 +47114,7 @@ units:
     size: 1684
 - name: context_graphics_input_access
   source: src/campaign/graphics_input_access.cpp
-  origin: C++ input layout and virtual-slot recovery
+  origin: C++ input layout and virtual-slot recovery; mod context owner
   flags:
   - -O2
   - -G0
@@ -47863,7 +47863,7 @@ units:
     status: asm
     reason: claim
   source: src/campaign/actor_camera_wave3.cpp
-  origin: C++ actor camera cluster; remaining functions claimed before source reconstruction
+  origin: C++ actor camera cluster; remaining functions claimed before source reconstruction; mod context owner
 - name: campaign_actor_input_wave3
   source: src/campaign/actor_input_wave3.cpp
   origin: C++ actor input cluster; inferred fields and narrow inline input methods
@@ -50524,7 +50524,7 @@ units:
     reason: unmatched C++ scheduling or allocation
 - name: campaign_actor_13db40_wave7
   source: src/campaign/actor_13db40_wave7.cpp
-  origin: C++ actor TU13DB40 full inventory
+  origin: C++ actor TU13DB40 full inventory; mod context owner
   flags:
   - -O2
   - -G0
@@ -50688,6 +50688,7 @@ units:
     size: 160
     symbol: Reset__Q216CampaignGraphics10Controller
     status: source
+  origin: game; mod context owner
 - name: campaign_input_26bb98
   source: src/campaign/graphics_input_26bb98.cpp
   flags:
@@ -50702,6 +50703,7 @@ units:
     size: 36
     symbol: Pressure__CQ216CampaignGraphics10ControllerUi
     status: source
+  origin: game; mod context owner
 - name: campaign_input_26bcf8
   source: src/campaign/graphics_input_26bcf8.cpp
   flags:
@@ -50717,6 +50719,7 @@ units:
     symbol: Rumble__Q216CampaignGraphics10ControllerUi
     status: asm
     reason: unmatched native context
+  origin: game; mod context owner
 - name: campaign_input_26bd30
   source: src/campaign/graphics_input_26bd30.cpp
   flags:
@@ -50732,6 +50735,7 @@ units:
     symbol: UpdateMotors__Q216CampaignGraphics10Controller
     status: asm
     reason: unmatched native context
+  origin: game; mod context owner
 - name: campaign_input_26bf60
   source: src/campaign/graphics_input_26bf60.cpp
   flags:
@@ -50747,6 +50751,7 @@ units:
     symbol: Smooth__Q216CampaignGraphics10Controllerff
     status: asm
     reason: unmatched native context
+  origin: game; mod context owner
 - name: campaign_input_26c798
   source: src/campaign/graphics_input_26c798.cpp
   flags:
@@ -50762,6 +50767,7 @@ units:
     symbol: Initialize__Q216CampaignGraphics10PadBackendUc
     status: asm
     reason: unmatched native context
+  origin: game; mod context owner
 - name: campaign_input_26c8e0
   source: src/campaign/graphics_input_26c8e0.cpp
   flags:
@@ -50777,6 +50783,7 @@ units:
     symbol: Poll__Q216CampaignGraphics10PadBackend
     status: asm
     reason: unmatched native context
+  origin: game; mod context owner
 - name: campaign_input_26ca98
   source: src/campaign/graphics_input_26ca98.cpp
   flags:
@@ -50792,6 +50799,7 @@ units:
     symbol: Attach__Q216CampaignGraphics10PadBackendPQ216CampaignGraphics10ControllerUi
     status: asm
     reason: unmatched native context
+  origin: game; mod context owner
 - name: campaign_input_26cb38
   source: src/campaign/graphics_input_26cb38.cpp
   flags:
@@ -50807,6 +50815,7 @@ units:
     symbol: Detach__Q216CampaignGraphics10PadBackendPQ216CampaignGraphics10ControllerUi
     status: asm
     reason: unmatched native context
+  origin: game; mod context owner
 - name: campaign_input_26cba8
   source: src/campaign/graphics_input_26cba8.cpp
   flags:
@@ -50822,6 +50831,7 @@ units:
     symbol: PollPort__Q216CampaignGraphics10PadBackendi
     status: asm
     reason: unmatched native context
+  origin: game; mod context owner
 - name: context_graph_constraint_registration
   source: src/campaign/graph_constraint_registration.cpp
   owner: context-graph
