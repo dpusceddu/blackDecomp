@@ -51587,8 +51587,7 @@ units:
   - addr: '0x15a830'
     size: 160
     symbol: func_0015A830
-    status: asm
-    reason: claimed
+    status: source
   - addr: '0x15a990'
     size: 208
     symbol: func_0015A990
@@ -51622,13 +51621,14 @@ units:
   - addr: '0x15b8f8'
     size: 388
     symbol: func_0015B8F8
-    status: asm
-    reason: claimed
+    status: source
   - addr: '0x15ba80'
     size: 200
     symbol: func_0015BA80
-    status: asm
-    reason: claimed
+    status: source
+  externs:
+    func_00155140: '0x155140'
+    func_001551C8: '0x1551c8'
 - name: mod_weapons_tu_15d370
   source: src/campaign/mod_weapons_tu_15d370.cpp
   origin: game
