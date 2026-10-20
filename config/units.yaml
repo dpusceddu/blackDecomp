@@ -46368,16 +46368,6 @@ units:
     size: 464
     symbol: Configure__Q24Kaim12ShooterAgentPQ24Kaim12ChildBuffers
     status: source
-  - addr: '0x2d6860'
-    size: 468
-    symbol: func_002D6860
-    status: asm
-    reason: campaign
-  - addr: '0x2d6a38'
-    size: 628
-    symbol: func_002D6A38
-    status: asm
-    reason: campaign
   - addr: '0x2d6cb0'
     size: 408
     symbol: func_002D6CB0
@@ -50477,3 +50467,47 @@ units:
     func_002E1C58: '0x2e1c58'
     func_002E4CE0: '0x2e4ce0'
     func_002E8AB8: '0x2e8ab8'
+- name: campaign_wave6_shooter
+  source: src/campaign/behaviors_shooter_wave6.cpp
+  origin: kynapse
+  owner: context-wave6-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d6860'
+    size: 468
+    status: source
+    symbol: Init__Q24Kaim12ShooterAgentPQ24Kaim12ChildBuffers
+  - addr: '0x2d6a38'
+    size: 628
+    status: source
+    symbol: Update__Q24Kaim12ShooterAgent
+  externs:
+    Accumulate__Q24Kaim15ParameterTablesiPv: '0x2e9978'
+    ClearActivation__Q24Kaim10ActionBank: '0x2dfbf8'
+    ConfigureAll__Q24Kaim8BehaviorPQ24Kaim12ChildBuffers: '0x2e0018'
+    Consume__Q24Kaim15ParameterTablesiPv: '0x2e8ab8'
+    FindName__Q24Kaim9NameTablePCc: '0x2e93b8'
+    FindPerception__Q24Kaim15BehaviorContextPQ24Kaim9ClassInfo: '0x2e1c58'
+    FindTarget__Q24Kaim15BehaviorContextPQ24Kaim9ClassInfo: '0x2e1c58'
+    GetAuthoredProperty__Q24Kaim5ActorPCv: '0x2e4ce0'
+    GetItem__Q24Kaim10ActionBankPCv: '0x2dfe08'
+    GetNameTables__4Kaimv: '0x2e91c0'
+    GetRecord__Q24Kaim10PerceptionPQ24Kaim5Actor: '0x310120'
+    _4Kaim$gBankKeyA: '0x44f7c0'
+    _4Kaim$gBankKeyB: '0x44fb08'
+    _4Kaim$gBankKeyC: '0x44f8d8'
+    _4Kaim$gDefaultAim: '0x451508'
+    _4Kaim$gEngine: '0x3c9ed4'
+    _4Kaim$gKeyA: '0x4505f8'
+    _4Kaim$gKeyB: '0x44fe50'
+    _4Kaim$gNow: '0x3c958c'
+    _4Kaim$gOrigin: '0x4514f8'
+    _4Kaim$gPerceptionClass: '0x455e18'
+    _4Kaim$gTargetClass: '0x4512b0'
+    func_002D6CB0: '0x2d6cb0'
