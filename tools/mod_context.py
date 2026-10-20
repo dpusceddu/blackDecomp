@@ -15,11 +15,19 @@ def main():
     config = json.loads((ROOT / 'config/mod_context.json').read_text())
     if config.get('version') != 1:
         raise SystemExit('unsupported mod context version')
+    # Instruction-only views are useful context, but never become exact controls
+    # merely because a placed function includes their header transitively.
+    for view in config.get('instruction_views', []):
+        if view.get('source_verified') is not False or not view.get('evidence'):
+            raise SystemExit('instruction view needs explicit qualification and evidence')
+        if not (ROOT / view['header']).is_file():
+            raise SystemExit('missing instruction-view header: ' + view['header'])
     if args.command == 'list':
         for area in config['subsystems']:
             print(area['area'] + ': ' + ', '.join(area['headers']))
         return
     result = shared_context.verify(config)
+    result['instruction_only_view_families'] = len(config.get('instruction_views', []))
     output = ROOT / 'build/mod-context/verification.json'
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2) + '\n')

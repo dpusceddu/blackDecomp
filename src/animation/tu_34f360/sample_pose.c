@@ -1,4 +1,4 @@
-#include "animation/sampling_pipeline.h"
+#include "mod/animation/sampling.h"
 void *func_0034F9D0(SamplingPipeline *context, SamplingPoseHeader *header, s32 index, s32 flags) {
     u8 *pose = (u8 *)func_0034F950(context, index, flags);
     SamplingClip *clip;

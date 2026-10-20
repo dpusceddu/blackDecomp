@@ -1,4 +1,4 @@
-#include "campaign/weapons/instance.hpp"
+#include "mod/weapons/instance.hpp"
 
 namespace ModWeapons {
 extern "C" {

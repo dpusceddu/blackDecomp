@@ -1,6 +1,6 @@
 #ifdef NONMATCHING
 // Unmatched: callback argument lifetime adds a context move; full-body score 6.
-#include "animation/sampling_pipeline.h"
+#include "mod/animation/sampling.h"
 extern s32 func_0034FA60(SamplingPipeline *, SamplingPoseHeader *, SamplingPoseHeader *, s32, s32);
 extern s32 func_00344178(SamplingPoseHeader *, const SamplingPoseHeader *, const SamplingPoseHeader *, f32);
 static __inline__ f32 Sampling_Abs(f32 value) { f32 result; __asm__("abs.s %0,%1":"=f"(result):"f"(value)); return result; }

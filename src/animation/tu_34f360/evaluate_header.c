@@ -1,6 +1,6 @@
 #ifdef NONMATCHING
 // Unmatched: stack aggregate pointer and float-register allocation; full-body score 67.
-#include "animation/sampling_pipeline.h"
+#include "mod/animation/sampling.h"
 extern SamplingPair *func_0034FE70(SamplingPair *);
 extern SamplingPair *func_0034FE88(SamplingPair *, s32, f32, f32, f32);
 extern SamplingPair *func_0034FFA0(SamplingPair *, s32, f32, f32, f32);

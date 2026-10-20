@@ -81,14 +81,18 @@
       "header": "include/mod/weapons/shot.h",
       "api": [
         "BkModMovingShotPS2",
-        "BkModShotDeactivatePS2"
+        "BkModShotDeactivatePS2",
+        "BkModDelayedShotPS2"
       ],
       "verified_scope": [
-        "Native active88 byte clear and endpoint40 full128-bit store. Other offsets/90 pool stride are instruction evidence only; query payload stays opaque. Forwarded child call signature is not inferred."
+        "Native active88 byte clear and endpoint40 full128-bit store. Other offsets/90 pool stride are instruction evidence only; query payload stays opaque. Forwarded child call signature is not inferred.",
+        "Delayed-hit source1632E0/1632F8 verifies vector0/10,weapon20,timer24,distance28,active2C,signed flag2D; native size30 agrees manager tick stride. Original class/helper identities remain qualified."
       ],
       "controls": [
         "0x15d3d8",
-        "0x15d850"
+        "0x15d850",
+        "0x1632e0",
+        "0x1632f8"
       ]
     },
     {
@@ -166,6 +170,183 @@
       ],
       "controls": [
         "0x1ae860"
+      ]
+    },
+    {
+      "header": "include/mod/weapons/inventory.h",
+      "api": [
+        "BkModInventoryPS2",
+        "BkModInventorySlotPS2"
+      ],
+      "verified_scope": [
+        "Native source verifies reserve[7] halfword getter/setter, entries14 and signed count18. Ten-reserve extent and actor embedding280 follow PS2 reset/caller instructions; original class identity/complete size remain unverified."
+      ],
+      "controls": [
+        "0x155198",
+        "0x1551a0",
+        "0x155088"
+      ]
+    },
+    {
+      "header": "include/mod/weapons/controller.hpp",
+      "api": [
+        "ModWeapons::Weapon",
+        "Action",
+        "Frame"
+      ],
+      "verified_scope": [
+        "Native exact receiver/call views retain controller/owner/primary offsets and seven integer inputs plusAction forwarding. SetPose verifies scoped pose-pair and presentation accesses; unused methods remain instruction declarations."
+      ],
+      "controls": [
+        "0x156388",
+        "0x156f18"
+      ]
+    },
+    {
+      "header": "include/mod/weapons/instance.hpp",
+      "api": [
+        "ModWeapons::Instance",
+        "CollectedHit",
+        "HitCollector",
+        "Hit",
+        "WorldCollision"
+      ],
+      "verified_scope": [
+        "Reload verifies current native instance/controller prefix and per-consumer transfer widths. Collector32B records/16slots/count200 and adjusted dispatch are source-backed. Hit point0 is consumed by moving controls; other Hit and WorldCollision fields remain instruction views, not interchangeable query records."
+      ],
+      "controls": [
+        "0x15a830",
+        "0x15b8f8",
+        "0x15ba80"
+      ]
+    },
+    {
+      "header": "include/mod/weapons/moving.hpp",
+      "api": [
+        "ModWeapons::MovingShot",
+        "MovingPool"
+      ],
+      "verified_scope": [
+        "Native Spawn verifies16records at6E0/stride90 and active88. FreshHit/CachedHit verify point/vector copies,source70,distance74,signedflag80,active88/flags89,8A,8C and exact Impact forwarding recipe. Untouched fields remain instruction-only.",
+        "Manager tick15CBA0 is not a constructor; its36delayed20/stride30 loop is instruction-backed. Header exposes native delayed records without changing receiver identity."
+      ],
+      "controls": [
+        "0x15d370",
+        "0x15d758",
+        "0x15d818",
+        "0x15d870"
+      ]
+    },
+    {
+      "header": "include/mod/animation/sampling.h",
+      "api": [
+        "SamplingPipeline",
+        "SamplingPair",
+        "SamplingSpan",
+        "SamplingPoseHeader"
+      ],
+      "verified_scope": [
+        "Existing C type/linkage identities retained with explicit C linkage for C++ consumers. Exact samples verify pipeline owner/clip,signedroot10/legacybone_countC (extraction flags, not joint count),pose32 temporary extent; pair constructor verifies byte wrap flag+C. Pair16/span176 extents follow PS2 callers; pair trailing3bytes/spanpadding semantic payload remains unverified.",
+        "Clip scale60 remains unverified: ScaleRoot34FE10 reads owner60. Keep legacy names for existing source compatibility."
+      ],
+      "controls": [
+        "0x34f668",
+        "0x34f980",
+        "0x34f9d0",
+        "0x34fa60",
+        "0x34fe70"
+      ]
+    },
+    {
+      "header": "include/mod/arms/instance.hpp",
+      "api": [
+        "ArmsAnimation::Instance",
+        "Pose"
+      ],
+      "verified_scope": [
+        "Native exact graph activation, matrix-buffer selection, linked overlays and Pose constructor preserve their established field/call contracts. Pose is distinct from legacy sampling header even though both occupy32bytes."
+      ],
+      "controls": [
+        "0x347e18",
+        "0x347e80"
+      ]
+    },
+    {
+      "header": "include/mod/arms/owner.hpp",
+      "api": [
+        "ArmsAnimation::Owner",
+        "Selector",
+        "Matrix",
+        "ProfileScope"
+      ],
+      "verified_scope": [
+        "Tick600 and RequestAction1148 verify native receiver fields and adjusted selector dispatch. Empty64B Matrix constructor preserves11local objects; ProfileScope retains cleanup lifetime under that unit recipe. Original identities/full hierarchy and unused prototype semantics remain inferred."
+      ],
+      "controls": [
+        "0x1a54e0",
+        "0x1a6330"
+      ]
+    },
+    {
+      "header": "include/mod/arms/playback.hpp",
+      "api": [
+        "ArmsAnimation::Playback"
+      ],
+      "verified_scope": [
+        "Placed native Evaluate/Advance preserve root,history and evaluation state receiver recipes; broader semantic equivalence to old playback views is not assumed."
+      ],
+      "controls": [
+        "0x34f080",
+        "0x34ee90"
+      ]
+    },
+    {
+      "header": "include/mod/effects/runtime.hpp",
+      "api": [
+        "ModEffects::Child",
+        "Entry",
+        "RecordSet",
+        "IdentityXYZ"
+      ],
+      "verified_scope": [
+        "Native exact lifecycle proves Childmatrix0..3F/resource40/parent44/time48/started4C,Entrychildren8/stride70,matrix20/resource60/time64/flag68 and Pair8. IdentityXYZ source controls preserve unspecified W lanes.",
+        "Muzzle,AttachmentManager80,andTimedTransform8row views share this entry header but remain instruction-only; no exact lifecycle control proves their unused fields."
+      ],
+      "controls": [
+        "0x1b0ff8",
+        "0x1b1080",
+        "0x1b1038",
+        "0x1b1168",
+        "0x1b1518",
+        "0x1b16a8",
+        "0x1b2408"
+      ]
+    },
+    {
+      "header": "include/mod/effects/slot_views.hpp",
+      "api": [
+        "ModEffects::ActorInterface",
+        "Actor",
+        "Bank"
+      ],
+      "verified_scope": [
+        "RemoveBone280 proves native vptr10,indices1B0,boneCount1F6 and Release adjusted slot78/7C. Interface-base/data-subclass placement is an ABI view, not recovered original inheritance."
+      ],
+      "controls": [
+        "0x1b38f8"
+      ]
+    },
+    {
+      "header": "include/mod/effects/random.h",
+      "api": [
+        "BkModEffectRandomStatePS2",
+        "BkModEffectRandomSeedPS2"
+      ],
+      "verified_scope": [
+        "Existing source382348 verifies two32-bit words and complement/seed stores. Signed RNG step and float conversion remain instruction recipes without native matching consumers. All four muzzle high-half shifts are SRA16; SRL1 belongs to unsigned float conversion."
+      ],
+      "controls": [
+        "0x382348"
       ]
     }
   ],
@@ -440,6 +621,420 @@
         "actor->buffers",
         "actor->resource"
       ]
+    },
+    {
+      "address": "0x155198",
+      "source_function": "func_00155198",
+      "headers": [
+        "include/mod/weapons/inventory.h"
+      ],
+      "uses": [
+        "BkModInventorySlotPS2"
+      ]
+    },
+    {
+      "address": "0x1551a0",
+      "source_function": "func_001551A0",
+      "headers": [
+        "include/mod/weapons/inventory.h"
+      ],
+      "uses": [
+        "reserve[7]"
+      ]
+    },
+    {
+      "address": "0x155088",
+      "source_function": "func_00155088",
+      "headers": [
+        "include/mod/weapons/inventory.h"
+      ],
+      "uses": [
+        "count",
+        "entries"
+      ]
+    },
+    {
+      "address": "0x1632e0",
+      "source_function": "func_001632E0",
+      "headers": [
+        "include/mod/weapons/shot.h"
+      ],
+      "uses": [
+        "active",
+        "weapon",
+        "remaining",
+        "distance"
+      ]
+    },
+    {
+      "address": "0x1632f8",
+      "source_function": "func_001632F8",
+      "headers": [
+        "include/mod/weapons/shot.h"
+      ],
+      "uses": [
+        "direction",
+        "point",
+        "weapon",
+        "flags",
+        "remaining",
+        "distance"
+      ]
+    },
+    {
+      "address": "0x156388",
+      "source_function": "Update",
+      "headers": [
+        "include/mod/weapons/controller.hpp"
+      ],
+      "uses": [
+        "Advance",
+        "UpdateAim"
+      ]
+    },
+    {
+      "address": "0x156f18",
+      "source_function": "SetPose",
+      "headers": [
+        "include/mod/weapons/controller.hpp"
+      ],
+      "uses": [
+        "poseManager",
+        "primary"
+      ]
+    },
+    {
+      "address": "0x15a830",
+      "source_function": "Reload",
+      "headers": [
+        "include/mod/weapons/instance.hpp"
+      ],
+      "uses": [
+        "reserveIndex",
+        "clip",
+        "capacity",
+        "burstCount"
+      ]
+    },
+    {
+      "address": "0x15b8f8",
+      "source_function": "Add",
+      "headers": [
+        "include/mod/weapons/instance.hpp"
+      ],
+      "uses": [
+        "CollectedHit",
+        "records",
+        "component",
+        "count"
+      ]
+    },
+    {
+      "address": "0x15ba80",
+      "source_function": "Dispatch",
+      "headers": [
+        "include/mod/weapons/instance.hpp"
+      ],
+      "uses": [
+        "records",
+        "Receive",
+        "r->damage"
+      ]
+    },
+    {
+      "address": "0x15d370",
+      "source_function": "Spawn",
+      "headers": [
+        "include/mod/weapons/moving.hpp"
+      ],
+      "uses": [
+        "shots",
+        "active",
+        "Initialize"
+      ]
+    },
+    {
+      "address": "0x15d758",
+      "source_function": "FreshHit",
+      "headers": [
+        "include/mod/weapons/moving.hpp"
+      ],
+      "uses": [
+        "Impact",
+        "endpoint",
+        "flags80",
+        "flags89"
+      ]
+    },
+    {
+      "address": "0x15d818",
+      "source_function": "NotifyOwner",
+      "headers": [
+        "include/mod/weapons/moving.hpp"
+      ],
+      "uses": [
+        "endpoint",
+        "Source"
+      ]
+    },
+    {
+      "address": "0x15d870",
+      "source_function": "CachedHit",
+      "headers": [
+        "include/mod/weapons/moving.hpp"
+      ],
+      "uses": [
+        "Collision",
+        "flags8c",
+        "flags8a",
+        "origin",
+        "Recache"
+      ]
+    },
+    {
+      "address": "0x34f668",
+      "source_function": "func_0034F668",
+      "headers": [
+        "include/mod/animation/sampling.h"
+      ],
+      "uses": [
+        "SamplingPoseHeader temporary",
+        "func_00343FC8",
+        "func_0034F730",
+        "func_00344020"
+      ]
+    },
+    {
+      "address": "0x34f980",
+      "source_function": "func_0034F980",
+      "headers": [
+        "include/mod/animation/sampling.h"
+      ],
+      "uses": [
+        "context->clip",
+        "root_track",
+        "func_00347558"
+      ]
+    },
+    {
+      "address": "0x34f9d0",
+      "source_function": "func_0034F9D0",
+      "headers": [
+        "include/mod/animation/sampling.h"
+      ],
+      "uses": [
+        "root_track",
+        "bone_count",
+        "func_003438E0"
+      ]
+    },
+    {
+      "address": "0x34fa60",
+      "source_function": "func_0034FA60",
+      "headers": [
+        "include/mod/animation/sampling.h"
+      ],
+      "uses": [
+        "SamplingPoseHeader sample",
+        "func_00343FC8",
+        "bone_count"
+      ]
+    },
+    {
+      "address": "0x347e18",
+      "source_function": "Matrices",
+      "headers": [
+        "include/mod/arms/instance.hpp"
+      ],
+      "uses": [
+        "selectedMatrices",
+        "matrixBase",
+        "boneCount",
+        "BuildMatrices"
+      ]
+    },
+    {
+      "address": "0x347e80",
+      "source_function": "Evaluate",
+      "headers": [
+        "include/mod/arms/instance.hpp"
+      ],
+      "uses": [
+        "Pose rootPose",
+        "evaluationFlags",
+        "next",
+        "rootPose.translation"
+      ]
+    },
+    {
+      "address": "0x1a54e0",
+      "source_function": "Tick",
+      "headers": [
+        "include/mod/arms/owner.hpp"
+      ],
+      "uses": [
+        "ProfileScope profile",
+        "Matrix previous[11]",
+        "primary->Update",
+        "Capture(previous)"
+      ]
+    },
+    {
+      "address": "0x1a6330",
+      "source_function": "RequestAction",
+      "headers": [
+        "include/mod/arms/owner.hpp"
+      ],
+      "uses": [
+        "ProfileScope profile",
+        "selector->Slot9",
+        "selector->Slot10",
+        "selector->Slot18"
+      ]
+    },
+    {
+      "address": "0x34f080",
+      "source_function": "Evaluate",
+      "headers": [
+        "include/mod/arms/playback.hpp"
+      ],
+      "uses": [
+        "evaluation",
+        "RootMotion",
+        "RefreshSpan",
+        "state->At<int>(0x980)"
+      ]
+    },
+    {
+      "address": "0x34ee90",
+      "source_function": "Advance",
+      "headers": [
+        "include/mod/arms/playback.hpp"
+      ],
+      "uses": [
+        "history",
+        "Wrap",
+        "Scan"
+      ]
+    },
+    {
+      "address": "0x1b0ff8",
+      "source_function": "Clear",
+      "headers": [
+        "include/mod/effects/runtime.hpp"
+      ],
+      "uses": [
+        "IdentityXYZ",
+        "resource",
+        "parent"
+      ]
+    },
+    {
+      "address": "0x1b1080",
+      "source_function": "Reset",
+      "headers": [
+        "include/mod/effects/runtime.hpp"
+      ],
+      "uses": [
+        "IdentityXYZ",
+        "resource",
+        "parent"
+      ]
+    },
+    {
+      "address": "0x1b1038",
+      "source_function": "Initialize",
+      "headers": [
+        "include/mod/effects/runtime.hpp"
+      ],
+      "uses": [
+        "resource",
+        "parent",
+        "world",
+        "time",
+        "started"
+      ]
+    },
+    {
+      "address": "0x1b1168",
+      "source_function": "Initialize",
+      "headers": [
+        "include/mod/effects/runtime.hpp"
+      ],
+      "uses": [
+        "resource",
+        "started",
+        "world",
+        "flags"
+      ]
+    },
+    {
+      "address": "0x1b1518",
+      "source_function": "Release",
+      "headers": [
+        "include/mod/effects/runtime.hpp"
+      ],
+      "uses": [
+        "children",
+        "resource"
+      ]
+    },
+    {
+      "address": "0x1b16a8",
+      "source_function": "Active",
+      "headers": [
+        "include/mod/effects/runtime.hpp"
+      ],
+      "uses": [
+        "children",
+        "func_001B1138"
+      ]
+    },
+    {
+      "address": "0x1b2408",
+      "source_function": "Clear",
+      "headers": [
+        "include/mod/effects/runtime.hpp"
+      ],
+      "uses": [
+        "pairs"
+      ]
+    },
+    {
+      "address": "0x1b38f8",
+      "source_function": "RemoveBone",
+      "headers": [
+        "include/mod/effects/slot_views.hpp"
+      ],
+      "uses": [
+        "indices",
+        "boneCount",
+        "Release",
+        "At(index).mode"
+      ]
+    },
+    {
+      "address": "0x382348",
+      "source_function": "func_00382348",
+      "headers": [
+        "include/mod/effects/random.h"
+      ],
+      "uses": [
+        "BkModEffectRandomSeedPS2"
+      ]
+    },
+    {
+      "address": "0x34fe70",
+      "source_function": "func_0034FE70",
+      "headers": [
+        "include/mod/animation/sampling.h"
+      ],
+      "uses": [
+        "first",
+        "second",
+        "weight",
+        "wrapped"
+      ]
     }
   ],
   "subsystems": [
@@ -449,7 +1044,8 @@
         "mod/camera/controller.hpp",
         "mod/camera/axes.hpp",
         "mod/camera/pad.hpp",
-        "mod/camera/pad_backend.hpp"
+        "mod/camera/pad_backend.hpp",
+        "mod/camera/aim.hpp"
       ],
       "tus": [
         "tu_13db40",
@@ -477,13 +1073,21 @@
         "matrix inverse/axis-angle helper recipes",
         "player input giant source context",
         "class identity and complete actor hierarchy"
+      ],
+      "next_tus": [
+        "tu_1409c0",
+        "tu_127118"
       ]
     },
     {
       "area": "weapons/shots/fire/reload/impact",
       "headers": [
         "mod/weapons/state.h",
-        "mod/weapons/shot.h"
+        "mod/weapons/shot.h",
+        "mod/weapons/controller.hpp",
+        "mod/weapons/instance.hpp",
+        "mod/weapons/moving.hpp",
+        "mod/weapons/inventory.h"
       ],
       "tus": [
         "tu_1561f8",
@@ -516,13 +1120,23 @@
         "query/Hit64 payload exact consumers",
         "full fire and emission source context",
         "owner/weapon historical class identity"
+      ],
+      "next_tus": [
+        "tu_15bbd8",
+        "tu_154fd8",
+        "tu_1551c8",
+        "tu_155238"
       ]
     },
     {
       "area": "first-person arms/weapon animation",
       "headers": [
         "mod/animation/instance.h",
-        "mod/animation/runtime.h"
+        "mod/animation/runtime.h",
+        "mod/animation/sampling.h",
+        "mod/arms/instance.hpp",
+        "mod/arms/owner.hpp",
+        "mod/arms/playback.hpp"
       ],
       "tus": [
         "tu_347a50",
@@ -540,6 +1154,11 @@
         "owner84 has instruction evidence only",
         "legacy field semantic overlap",
         "original pose/matrix inline operators"
+      ],
+      "next_tus": [
+        "animation/tu_345500",
+        "animation/tu_34f360",
+        "animation/tu_3511d0"
       ]
     },
     {
@@ -550,7 +1169,11 @@
         "mod/effects/render_state.h",
         "game/effects/emitter_list.h",
         "game/effects/pool.h",
-        "game/effects/vector.h"
+        "game/effects/vector.h",
+        "mod/effects/runtime.hpp",
+        "mod/effects/slot_views.hpp",
+        "mod/effects/random.h",
+        "mod/effects/vu_math.h"
       ],
       "tus": [
         "tu_1b0fd0",
@@ -578,7 +1201,222 @@
         "semantic effect class identities",
         "remaining asset relocation methods",
         "particle/muzzle geometry context"
+      ],
+      "next_tus": [
+        "tu_1b7758",
+        "tu_1b64c0",
+        "tu_1be2f0"
       ]
+    }
+  ],
+  "instruction_views": [
+    {
+      "header": "include/mod/camera/aim.hpp",
+      "source_verified": false,
+      "api": [
+        "ModCamera::AimCandidate",
+        "PlayerAim",
+        "AimActorList"
+      ],
+      "evidence": [
+        "1409C0+12BB60 PS2 instruction accesses and paired Xbox callback/query call chains"
+      ],
+      "gaps": [
+        "No placed native consumer yet; mixed argument source order, original identities and NaN policy retained fromPS2."
+      ]
+    },
+    {
+      "header": "include/mod/effects/runtime.hpp",
+      "source_verified": false,
+      "api": [
+        "Muzzle",
+        "MuzzleResource",
+        "MuzzleConfig",
+        "AttachmentManager",
+        "TimedTransformSlot",
+        "TimedTransformBank"
+      ],
+      "evidence": [
+        "1BD508/1BCDF8/1BCF50 signedC8/C9 andC4\u2192config10\u2192fields20..50",
+        "1B64C0/1B6910:80Entrystride70 and2300/2440/2580 columns,3440indices/3448count",
+        "1BE330/1BE890:8rowsstrideB0,input10/output50,params90..9C/fadeA0/A8"
+      ],
+      "gaps": [
+        "Unverified original identities and allocations; no complete source consumer yet."
+      ]
+    },
+    {
+      "header": "include/mod/effects/vu_math.h",
+      "source_verified": false,
+      "api": [
+        "BkEffectVUSinCosPS2",
+        "VU random/rotation helpers"
+      ],
+      "evidence": [
+        "Retained existing PS2-shaped I/ACC polynomial and lane masks; no implementation duplication"
+      ],
+      "gaps": [
+        "No exact native consumer proves polynomial allocation or complete matrix/normalization combinations."
+      ]
+    }
+  ],
+  "next_queues": {
+    "camera": [
+      "tu_1409c0",
+      "tu_127118"
+    ],
+    "effects": [
+      "tu_1b7758",
+      "tu_1b64c0",
+      "tu_1be2f0"
+    ],
+    "arms": [
+      "animation/tu_345500",
+      "animation/tu_34f360",
+      "animation/tu_3511d0"
+    ],
+    "weapons": [
+      "tu_15bbd8",
+      "tu_154fd8",
+      "tu_1551c8",
+      "tu_155238"
+    ]
+  },
+  "manual_counterpart_traces": [
+    {
+      "xbox": "0x1bd3d0",
+      "ps2": "0x1409c0",
+      "confidence": "high semantic identity from paired player call chains; not byte-exact source proof",
+      "evidence": [
+        "Xbox Ghidra PlayerController_SelectAimConeCandidate1BD3D0 DATA xref1ECF46 fromPlayerController_Update1EC480.",
+        "XboxPlayerController_Update decomp421 passescallback1BD3D0 toAimCone_QueryCandidates1CDA60.",
+        "PS2Player13F618 PARAM xref13FCF0 passescallback1409C0 toquery12BB60 at13FD04.",
+        "Same candidate actor/projection/perpendicular-distance fields and closest eligible target policy; retain PS2 branch/NaN behavior."
+      ]
+    },
+    {
+      "xbox": "0x1b56f0",
+      "ps2": "0x1551c8",
+      "confidence": "high behavior identity",
+      "evidence": "u16wrap before clamp; Xboxreload1BAFA0 inlines same",
+      "xbox_exact_cpp": false
+    },
+    {
+      "xbox": "0x1b5820",
+      "ps2": "0x155018",
+      "confidence": "high behavior identity",
+      "evidence": "ten u16 defaults,ptr14,signedcount18 clear; actorembeddingdiffers",
+      "xbox_exact_cpp": false
+    },
+    {
+      "xbox": "0x1babd0",
+      "ps2": "0x154fd8",
+      "confidence": "inlined initializer only",
+      "evidence": "No standalone Xboxcounterpart; initializer block in full constructor",
+      "xbox_exact_cpp": false
+    },
+    {
+      "xbox": "0x1bac30",
+      "ps2": "0x15b8f8",
+      "confidence": "high behavior identity",
+      "evidence": "native hit-collector submit record/classification flow",
+      "xbox_exact_cpp": false
+    },
+    {
+      "xbox": "0x159d00",
+      "ps2": "0x1bd508",
+      "confidence": "high behavior identity",
+      "evidence": "signedphase guards,C0/C4/C8 fields,definition10\u21924C/50,RNGandpairedweapon/emission callers",
+      "xbox_exact_cpp": false
+    },
+    {
+      "xbox": "0x15e6f0",
+      "ps2": "0x1bcdf8",
+      "confidence": "high behavior identity",
+      "evidence": "signedphase guards,C0/C4/C8 fields,definition10\u21924C/50,RNGandpairedweapon/emission callers",
+      "xbox_exact_cpp": false
+    },
+    {
+      "xbox": "0x9bab0",
+      "ps2": "0x34f360",
+      "confidence": "medium",
+      "evidence": "manual structural/callee agreement; SourceSampleContext three scalars plus fivePose ctor calls",
+      "xbox_exact_cpp": true
+    },
+    {
+      "xbox": "0x9bb30",
+      "ps2": "0x34f420",
+      "confidence": "medium",
+      "evidence": "manual two-pointer constructor and unique caller agreement",
+      "xbox_exact_cpp": true
+    },
+    {
+      "xbox": "0x9beb0",
+      "ps2": "0x34f430",
+      "confidence": "medium",
+      "evidence": "manual whole-pose chain:3sample plans,5Pose context,bodypair+headerpair+root motion",
+      "xbox_exact_cpp": true
+    },
+    {
+      "xbox": "0x9c0c0",
+      "ps2": "0x34f730",
+      "confidence": "medium",
+      "evidence": "manual header-only counterpart,shared ordered sampling callees and output parameter",
+      "xbox_exact_cpp": true
+    }
+  ],
+  "unresolved_abi": [
+    {
+      "area": "animation matrix microcalls",
+      "source": "0x3511d0",
+      "quaternion": {
+        "call_site": "0x351624",
+        "sn_assembler_operand": "0x1a8",
+        "encoded_microinstruction_index": "0x35",
+        "input_vector_registers": [
+          "vf1"
+        ],
+        "output_vector_registers": [
+          "vf2",
+          "vf3",
+          "vf4"
+        ]
+      },
+      "affine": {
+        "call_sites": [
+          "0x351600",
+          "0x351900"
+        ],
+        "sn_assembler_operand": "0",
+        "input_vector_registers": [
+          "vf1",
+          "vf2",
+          "vf3",
+          "vf4",
+          "vf5",
+          "vf6",
+          "vf7",
+          "vf8"
+        ],
+        "output_vector_registers": [
+          "vf9",
+          "vf10",
+          "vf11",
+          "vf12"
+        ]
+      },
+      "compiler_probe": "SN1.36/snas isolated synthetic encoding probe; no game function matched",
+      "clobber_syntax": "plain vf register names and named register variables accepted; dollar-prefixed vf names rejected",
+      "status": "UNVERIFIED full microprogram clobbers, VI/Q/ACC/I state, synchronization and live-value constraints; no executable wrapper published"
+    },
+    {
+      "area": "animation allocation/overrides",
+      "source_evidence": [
+        "345BC8: auxiliary allocation (maxBones<<7)+0xC0; Xbox uses+0x140",
+        "Instance skeleton8 andmaxBones5E signed16;override58pointer/count5Csigned16",
+        "3478F0 override records stride12:posepointer0,boneS32+4,flagsU32+8; absent override clearsoutputPoseonly"
+      ],
+      "status": "Original identities and complete override helper behavior remain instruction-backed; no new native function attempted"
     }
   ]
 }

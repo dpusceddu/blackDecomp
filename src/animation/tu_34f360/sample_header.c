@@ -1,4 +1,4 @@
-#include "animation/sampling_pipeline.h"
+#include "mod/animation/sampling.h"
 extern s32 func_0034F980(SamplingPipeline *, SamplingPoseHeader *, s32, s32);
 s32 func_0034FA60(SamplingPipeline *context, SamplingPoseHeader *out, SamplingPoseHeader *root, s32 index, s32 flags) {
     SamplingPoseHeader sample;

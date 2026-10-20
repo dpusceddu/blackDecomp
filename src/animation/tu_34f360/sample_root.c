@@ -1,4 +1,4 @@
-#include "animation/sampling_pipeline.h"
+#include "mod/animation/sampling.h"
 s32 func_0034F980(SamplingPipeline *context, SamplingPoseHeader *header, s32 index, s32 flags) {
     SamplingClip *clip = context->clip;
     s32 root = clip->root_track;

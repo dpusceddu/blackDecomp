@@ -3,6 +3,7 @@
 #ifndef BLACK_CAMPAIGN_ACTOR_CAMERA_HPP
 #define BLACK_CAMPAIGN_ACTOR_CAMERA_HPP
 #include "game/ai_action.hpp"
+#include "mod/camera/aim.hpp"
 
 namespace CampaignActor {
 // The non-virtual base puts the GCC 2.95 vptr at the verified PS2 offset 0x4C.
