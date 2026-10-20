@@ -17247,8 +17247,8 @@ tus:
   confidence: exact
   evidence: [eh, ctor-list, ctor-end, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 5 of 14 functions
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]
+  flags_basis: matched 12 of 14 functions
   data:
     .rodata: ['0x4059f8', '0x405a18']
     .data: ['0x3e5de8', '0x3e5e40']
@@ -17275,8 +17275,8 @@ tus:
   confidence: exact
   evidence: [eh, ctor-list, ctor-end, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 5 of 14 functions
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]
+  flags_basis: matched 12 of 14 functions
   data:
     .rodata: ['0x405c40', '0x405c60']
     .data: ['0x3e6608', '0x3e6730']
@@ -17289,8 +17289,8 @@ tus:
   confidence: exact
   evidence: [eh, ctor-end, join-hard, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas, -fbyte-bool]
-  flags_basis: matched 1 of 18 functions
+  flags: [-O2, -G0, -snas, -fno-rtti, --assembler=sn-min6]
+  flags_basis: matched 11 of 18 functions
   data:
     .rodata: ['0x405d60', '0x405eb0']
     .data: ['0x3c71f4', '0x3e6888']

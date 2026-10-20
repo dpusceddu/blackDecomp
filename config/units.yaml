@@ -48357,19 +48357,16 @@ units:
   functions:
   - addr: '0x2da2a0'
     size: 168
-    status: asm
+    status: source
     symbol: func_002DA2A0
-    reason: extern
   - addr: '0x2da348'
     size: 224
-    status: asm
+    status: source
     symbol: _$_Q216KaimPathRegistry11PathManager
-    reason: extern
   - addr: '0x2da428'
     size: 724
-    status: asm
+    status: source
     symbol: func_002DA428
-    reason: extern
   - addr: '0x2da700'
     size: 544
     status: asm
@@ -48382,34 +48379,29 @@ units:
     symbol: func_002DA9B0
   - addr: '0x2daa70'
     size: 148
-    status: asm
+    status: source
     symbol: func_002DAA70
-    reason: extern
   - addr: '0x2dab08'
     size: 232
-    status: asm
+    status: source
     symbol: func_002DAB08
-    reason: extern
   - addr: '0x2dabf0'
     size: 92
-    status: asm
+    status: source
     symbol: func_002DABF0
-    reason: extern
   - addr: '0x2dac50'
     size: 128
-    status: asm
+    status: source
     symbol: _$_Q216KaimPathRegistry6Record
-    reason: extern
   externs:
     __throw: '0x292b40'
+    _vt$Q216KaimPathRegistry10ObjectRoot: '0x3e0040'
+    _vt$Q216KaimPathRegistry11PathManager: '0x3e5de8'
+    _vt$Q216KaimPathRegistry6Record: '0x3e5e28'
     gKaimAllocateHook: '0x3c87ec'
     gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
-  unbound:
-  - _vt$Q216KaimPathRegistry10ObjectRoot
-  - _vt$Q216KaimPathRegistry11PathManager
-  - _vt$Q216KaimPathRegistry6Record
 - name: context_graph_team
   source: src/campaign/graph_team.cpp
   origin: kynapse
@@ -48556,19 +48548,16 @@ units:
   functions:
   - addr: '0x2dcad8'
     size: 168
-    status: asm
+    status: source
     symbol: func_002DCAD8
-    reason: extern
   - addr: '0x2dcb80'
     size: 224
-    status: asm
+    status: source
     symbol: _$_Q218KaimScriptRegistry13ScriptManager
-    reason: extern
   - addr: '0x2dcc60'
     size: 724
-    status: asm
+    status: source
     symbol: func_002DCC60
-    reason: extern
   - addr: '0x2dcf38'
     size: 544
     status: asm
@@ -48581,34 +48570,29 @@ units:
     symbol: func_002DD1E8
   - addr: '0x2dd2a8'
     size: 148
-    status: asm
+    status: source
     symbol: func_002DD2A8
-    reason: extern
   - addr: '0x2dd340'
     size: 232
-    status: asm
+    status: source
     symbol: func_002DD340
-    reason: extern
   - addr: '0x2dd428'
     size: 92
-    status: asm
+    status: source
     symbol: func_002DD428
-    reason: extern
   - addr: '0x2dd488'
     size: 128
-    status: asm
+    status: source
     symbol: _$_Q218KaimScriptRegistry6Record
-    reason: extern
   externs:
     __throw: '0x292b40'
+    _vt$Q218KaimScriptRegistry10ObjectRoot: '0x3e0040'
+    _vt$Q218KaimScriptRegistry13ScriptManager: '0x3e6608'
+    _vt$Q218KaimScriptRegistry6Record: '0x3e6648'
     gKaimAllocateHook: '0x3c87ec'
     gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
-  unbound:
-  - _vt$Q218KaimScriptRegistry10ObjectRoot
-  - _vt$Q218KaimScriptRegistry13ScriptManager
-  - _vt$Q218KaimScriptRegistry6Record
 - name: campaign_graphics_movement_wave4
   source: src/campaign/graphics_movement_pending.cpp
   origin: game
@@ -48708,3 +48692,122 @@ units:
     symbol: RenderBox__Q213CampaignActor11RegionState
   trim:
     .rodata: 24
+- name: context_wave4_pathway
+  source: src/context/behaviors_pathway.cpp
+  origin: kynapse
+  owner: context-wave4-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -fno-rtti
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2dd548'
+    size: 556
+    status: source
+    symbol: func_002DD548
+  - addr: '0x2dd778'
+    size: 1712
+    status: asm
+    reason: lifetime
+    symbol: func_002DD778
+  - addr: '0x2dde28'
+    size: 1428
+    status: asm
+    reason: lifetime
+    symbol: func_002DDE28
+  - addr: '0x2de3c0'
+    size: 1336
+    status: asm
+    reason: lifetime
+    symbol: func_002DE3C0
+  - addr: '0x2de8f8'
+    size: 328
+    status: asm
+    reason: lifetime
+    symbol: func_002DE8F8
+  - addr: '0x2dea40'
+    size: 1112
+    status: source
+    symbol: func_002DEA40
+  - addr: '0x2dee98'
+    size: 452
+    status: asm
+    reason: lifetime
+    symbol: func_002DEE98
+  - addr: '0x2df060'
+    size: 312
+    status: source
+    symbol: func_002DF060
+  - addr: '0x2df230'
+    size: 112
+    status: source
+    symbol: func_002DF230
+  - addr: '0x2df2a0'
+    size: 224
+    status: source
+    symbol: _$_Q212KaimPathData7PathWay
+  - addr: '0x2df380'
+    size: 84
+    status: source
+    symbol: func_002DF380
+  - addr: '0x2df3d8'
+    size: 180
+    status: source
+    symbol: func_002DF3D8
+  - addr: '0x2df490'
+    size: 176
+    status: source
+    symbol: func_002DF490
+  - addr: '0x2df540'
+    size: 104
+    status: source
+    symbol: func_002DF540
+  - addr: '0x2df5a8'
+    size: 96
+    status: asm
+    reason: lifetime
+    symbol: func_002DF5A8
+  - addr: '0x2df608'
+    size: 72
+    status: asm
+    reason: lifetime
+    symbol: func_002DF608
+  externs:
+    _12KaimPathData$gEngine: '0x3c9ed4'
+    _12KaimPathData$gOrigin: '0x4514f8'
+    _12KaimPathData$hooks: '0x451228'
+    __throw: '0x292b40'
+    _vt$Q212KaimPathData10ObjectRoot: '0x3e0040'
+    _vt$Q212KaimPathData7PathWay: '0x3e6730'
+    _vt$Q212KaimPathData8ScriptWP: '0x3e6758'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: context_wave4_waypoint
+  source: src/context/behaviors_waypoint.cpp
+  origin: kynapse
+  owner: context-wave4-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2df198'
+    size: 148
+    status: source
+    symbol: func_002DF198
+  externs:
+    _12KaimPathData$gOrigin: '0x4514f8'
+    __throw: '0x292b40'
+    _vt$Q212KaimPathData10ObjectRoot: '0x3e0040'
+    _vt$Q212KaimPathData8ScriptWP: '0x3e6758'
