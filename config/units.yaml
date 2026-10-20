@@ -50207,6 +50207,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
+  - -fbyte-bool
   functions:
   - addr: '0x2899a0'
     symbol: func_002899A0
@@ -50239,3 +50240,90 @@ units:
   functions:
   - addr: '0x162ae8'
     status: asm
+- name: campaign_apt_value_24b618
+  source: src/campaign/graphics_apt_24b618.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x24b618'
+    symbol: func_0024B618
+    size: 1636
+    status: asm
+    reason: claimed
+- name: campaign_apt_value_24bc80
+  source: src/campaign/graphics_apt_24bc80.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x24bc80'
+    symbol: func_0024BC80
+    size: 1124
+    status: asm
+    reason: claimed
+- name: campaign_apt_value_24f5d8
+  source: src/campaign/graphics_apt_24f5d8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x24f5d8'
+    symbol: func_0024F5D8
+    size: 388
+    status: asm
+    reason: claimed
+- name: campaign_apt_value_384e70
+  source: src/campaign/graphics_apt_384e70.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x384e70'
+    symbol: Dispose__Q26AptPS25Value
+    size: 100
+    status: source
+- name: campaign_apt_value_384f08
+  source: src/campaign/graphics_apt_384f08.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x384f08'
+    symbol: Cleanup__Q26AptPS25Value
+    size: 52
+    status: source
+- name: campaign_apt_value_385528
+  source: src/campaign/graphics_apt_385528.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x385528'
+    symbol: SetEnabled__Q26AptPS25Valuei
+    size: 32
+    status: source
