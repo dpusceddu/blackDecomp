@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "owner": "shared PS2 math maintainer",
+  "header": "include/ps2/vu0_math.h",
+  "operations": [
+    {
+      "name": "add",
+      "api": "BkVuAddXYZ",
+      "fixture": "VuMath_Add",
+      "status": "verified",
+      "real_controls": [
+        "0x17b5e8",
+        "0x135878"
+      ]
+    },
+    {
+      "name": "sub",
+      "api": "BkVuSubXYZ",
+      "fixture": "VuMath_Sub",
+      "status": "verified",
+      "real_controls": [
+        "0x179ce0",
+        "0x179f18"
+      ]
+    },
+    {
+      "name": "multiply",
+      "api": "BkVuMulXYZ",
+      "fixture": "VuMath_Mul",
+      "status": "verified",
+      "real_controls": [
+        "0x179f18",
+        "0x1a71f8"
+      ]
+    },
+    {
+      "name": "one-x",
+      "api": "BkVuOneX",
+      "fixture": "VuMath_One",
+      "status": "verified",
+      "real_controls": [
+        "0x179f18",
+        "0x1a71f8"
+      ]
+    },
+    {
+      "name": "sum-xyz",
+      "api": "BkVuSumXYZ",
+      "fixture": "VuMath_Sum",
+      "status": "verified",
+      "real_controls": [
+        "0x179f18",
+        "0x1a71f8"
+      ]
+    },
+    {
+      "name": "sqrt-x",
+      "api": "BkVuSqrtX",
+      "fixture": "VuMath_Sqrt",
+      "status": "verified",
+      "real_controls": [
+        "0x179f18",
+        "0x1a71f8"
+      ]
+    },
+    {
+      "name": "scale-x",
+      "api": "BkVuScaleXYZ",
+      "fixture": "VuMath_Scale",
+      "status": "provisional",
+      "real_controls": []
+    },
+    {
+      "name": "cross",
+      "api": "BkVuCrossXYZ",
+      "fixture": "VuMath_Cross",
+      "status": "provisional",
+      "real_controls": []
+    },
+    {
+      "name": "normalize",
+      "api": "BkVuNormalizeXYZ",
+      "fixture": "VuMath_Normalize",
+      "status": "provisional",
+      "real_controls": []
+    },
+    {
+      "name": "normalize-preserve-w",
+      "api": "BkVuNormalizeXYZPreserveW",
+      "fixture": "VuMath_NormalizeW",
+      "status": "provisional",
+      "real_controls": []
+    }
+  ],
+  "unverified": [
+    "Provisional shape matches do not establish full-function allocation or caller semantics.",
+    "Full matrix multiplication, transpose and quaternion recipes remain under study."
+  ]
+}
