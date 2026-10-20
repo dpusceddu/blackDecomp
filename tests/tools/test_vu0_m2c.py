@@ -10,6 +10,12 @@ import vu0_m2c as v
 
 
 class LoweringTests(unittest.TestCase):
+    def test_splat_bare_architectural_registers(self):
+        self.assertIn('bkvu_cross', v.prepare(
+            ' vopmula.xyz ACC, $vf2, $vf3\n vopmsub.xyz $vf1, $vf3, $vf2\n', strict=True))
+        self.assertIn('bkvu_normalize', v.prepare(
+            ' vnop\n vnop\n vnop\n vrsqrt Q, $vf0w, $vf2x\n vwaitq\n vmulq.xyz $vf1, $vf3, Q\n', strict=True))
+
     def test_full_store_keeps_w_and_comments(self):
         text = '/* synthetic */ lqc2 $vf1, 0($a0)\n vadd.xyz $vf1, $vf2, $vf3\n sqc2 $vf1, 0($a0)\n'
         got = v.prepare(text)

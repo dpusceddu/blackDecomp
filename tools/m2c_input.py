@@ -58,6 +58,14 @@ def decode_raw_instructions(text):
             replacements[index] = (match.group(1) + decoded, None)
             continue
         instruction = rabbitizer.Instruction(word, pc, rabbitizer.InstrCategory.R5900)
+        if instruction.getOpcodeName() == 'vsqrt':
+            # Rabbitizer recognizes this EE instruction but prints a word with
+            # its decoded operands in the diagnostic comment.
+            diagnostic = instruction.disassemble().split('#')
+            decoded = diagnostic[1].strip() if len(diagnostic) > 1 else ''
+            if re.fullmatch(r'vsqrt\s+\$?Q,\s*\$vf\d+[xyzw]', decoded):
+                replacements[index] = (match.group(1) + decoded, None)
+                continue
         if not instruction.isValid():
             continue
         offset = branch_offset(word)
@@ -106,8 +114,10 @@ def prepare(text):
     import os
     import ee_prep
     text = decode_raw_instructions(normalize_sections(text))
-    native = bool(os.environ.get('AUTODECOMP_VU0')) and bool(re.search(
-        r'\*/\s+(?:v\w|lqc2|sqc2|qmtc2|qmfc2)', text))
+    native = False
+    if os.environ.get('AUTODECOMP_VU0'):
+        import vu0_m2c
+        native = vu0_m2c.has_vu(text)
     if native:
         import vu0_m2c
         text = vu0_m2c.prepare(text)

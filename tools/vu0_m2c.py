@@ -36,7 +36,10 @@ def _parse(line):
     m = LINE.fullmatch(line)
     if not m:
         return None
-    return m[1], m[2].lower(), tuple(a.strip() for a in (m[3] or '').split(',') if a.strip()), m[4]
+    operands = tuple(a.strip() for a in (m[3] or '').split(',') if a.strip())
+    # splat and Rabbitizer disagree on the dollar prefix of VU specials.
+    operands = tuple('$' + a if a in {'ACC', 'Q', 'I', 'R'} else a for a in operands)
+    return m[1], m[2].lower(), operands, m[4]
 
 
 def _base(value):

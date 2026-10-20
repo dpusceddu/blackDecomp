@@ -10,6 +10,13 @@ from m2c_input import normalize_sections, decode_raw_instructions
 
 
 class Sections(unittest.TestCase):
+    def test_escaped_vu_sqrt_has_native_operands(self):
+        text = '.section .text\n/* 0 00F00000 BD03074A */ .word 0x4A0703BD\n'
+        result = decode_raw_instructions(text)
+        self.assertIn('vsqrt', result)
+        self.assertIn('$vf7x', result)
+        self.assertNotIn('.word', result)
+
     def test_raw_short_branch_and_ee_odd_float_are_instructions(self):
         text = '''.section .text.00F00000, "ax"
     /* 0 00F00000 00000000 */ nop
