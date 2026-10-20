@@ -49048,3 +49048,63 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: campaign_graphics_frontend_104210_wave5
+  source: src/campaign/graphics_frontend_104210.cpp
+  origin: game
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -snas
+  - -ffunction-sections
+  - -G8
+  functions:
+  - addr: '0x104210'
+    status: asm
+    symbol: func_00104210
+    size: 1184
+- name: campaign_graphics_frontend_1046b0_wave5
+  source: src/campaign/graphics_frontend_1046b0.cpp
+  origin: game
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -snas
+  - -ffunction-sections
+  - -G8
+  functions:
+  - addr: '0x1046b0'
+    status: asm
+    symbol: func_001046B0
+    size: 1712
+- name: campaign_graphics_frontend_104d60_wave5
+  source: src/campaign/graphics_frontend_104d60.cpp
+  origin: game
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x104d60'
+    status: source
+    symbol: func_00104D60
+    size: 176
+- name: campaign_graphics_frontend_104e10_wave5
+  source: src/campaign/graphics_frontend_104e10.cpp
+  origin: game
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x104e10'
+    status: asm
+    symbol: func_00104E10
+    size: 584

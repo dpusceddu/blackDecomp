@@ -127,6 +127,7 @@ struct FrontendMenuState {
     int Enter() __asm__("func_00104210");
     void Update() __asm__("func_001046B0");
     int Exit() __asm__("func_00104E10");
+    int PrepareExit() __asm__("func_00104D60");
     void Destroy() __asm__("func_00105058");
     void Request(int screen, int force) __asm__("func_001040F8");
     int Load(const char* name, int kind, int force) __asm__("func_001040D8");
