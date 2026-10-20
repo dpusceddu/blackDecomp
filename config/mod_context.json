@@ -212,12 +212,14 @@
         "WorldCollision"
       ],
       "verified_scope": [
-        "Reload verifies current native instance/controller prefix and per-consumer transfer widths. Collector32B records/16slots/count200 and adjusted dispatch are source-backed. Hit point0 is consumed by moving controls; other Hit and WorldCollision fields remain instruction views, not interchangeable query records."
+        "Reload verifies current native instance/controller prefix and per-consumer transfer widths. Collector32B records/16slots/count200 and adjusted dispatch are source-backed. Hit point0 is consumed by moving controls; other Hit fields remain instruction views. WorldCollision point0/normal10/fraction50/material60 and material flags4 are now exact callback accesses, distinct from Hit; producer query ABI and complete extent remain unverified."
       ],
       "controls": [
         "0x15a830",
         "0x15b8f8",
-        "0x15ba80"
+        "0x15ba80",
+        "0x12aaf8",
+        "0x12b2a8"
       ]
     },
     {
@@ -1064,6 +1066,30 @@
         "next<previous",
         "player->projection"
       ]
+    },
+    {
+      "address": "0x12aaf8",
+      "source_function": "MarkSolid",
+      "headers": [
+        "include/mod/weapons/instance.hpp"
+      ],
+      "uses": [
+        "MaterialFlags",
+        "*found = 1"
+      ]
+    },
+    {
+      "address": "0x12b2a8",
+      "source_function": "SelectWorldHit",
+      "headers": [
+        "include/mod/weapons/instance.hpp"
+      ],
+      "uses": [
+        "MaterialFlags",
+        "out->point = hit->point",
+        "out->normal = hit->normal",
+        "out->fraction = hit->fraction"
+      ]
     }
   ],
   "subsystems": [
@@ -1146,7 +1172,7 @@
         }
       ],
       "gaps": [
-        "query/Hit64 payload exact consumers",
+        "world-query producer ABI and additional Hit64 payload fields",
         "full fire and emission source context",
         "owner/weapon historical class identity"
       ],

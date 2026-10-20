@@ -5,7 +5,10 @@ namespace ModWeapons {
 // Qualified instruction views; only consumers placed in source verify their accesses.
 struct Hit {Position4 point,normal;float fraction;BkModWeaponOwnerPS2*entity;unsigned mask;unsigned char component,pad2d[3];unsigned unknown30[4];};
 struct Matrix {Position4 x,y,z,p;};
-struct WorldCollision {Position4 point,normal;unsigned char unknown20[0x30];float fraction;unsigned char unknown54[0xc];void*material;};
+// Exact callback12B2A8 verifies these accessed fields; complete query extent and
+// original class identity remain unknown. This differs from the actor Hit view.
+struct WorldMaterial {unsigned unknown00,flags;};
+struct WorldCollision {Position4 point,normal;unsigned char unknown20[0x30];float fraction;unsigned char unknown54[0xc];void*material;inline unsigned MaterialFlags()const{return ((const WorldMaterial*)material)->flags;}};
 struct Instance: BkModWeaponInstancePS2 {
  int Initialize(Weapon*,BkModWeaponDefinitionPS2*,EeU64) __asm__("func_00158F50");
  void EmitRay() __asm__("func_00159198");
