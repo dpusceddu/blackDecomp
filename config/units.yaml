@@ -52557,10 +52557,6 @@ units:
     size: 428
     status: asm
     reason: campaign
-  - addr: '0x347430'
-    size: 196
-    status: asm
-    reason: campaign
   - addr: '0x3474f8'
     size: 96
     status: source
@@ -52695,3 +52691,23 @@ units:
     size: 128
     status: asm
     reason: math-layer-study
+- name: ps2_animation_math_shapes
+  source: src/ps2/animation_math.cpp
+  origin: animation
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x3440b8'
+    symbol: func_003440B8
+    status: source
+    size: 92
+  - addr: '0x347430'
+    symbol: func_00347430
+    status: source
+    size: 196

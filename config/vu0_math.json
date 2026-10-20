@@ -90,6 +90,30 @@
       "fixture": "VuMath_NormalizeW",
       "status": "provisional",
       "real_controls": []
+    },
+    {
+      "name": "animation-quaternion",
+      "header": "include/ps2/vu0_quaternion.hpp",
+      "api": "BlackPS2::AnimationMath::Multiply",
+      "fixture": "VuMath_Quaternion",
+      "status": "verified",
+      "real_controls": [
+        "0x3440b8",
+        "0x347430"
+      ],
+      "contract": "Recurring fixed-VF original-macro family; ACC/MAC/status must not be live across the operation."
+    },
+    {
+      "name": "animation-translation",
+      "header": "include/ps2/vu0_quaternion.hpp",
+      "api": "BlackPS2::AnimationMath::Add",
+      "fixture": "VuMath_Translation",
+      "status": "verified",
+      "real_controls": [
+        "0x3440b8",
+        "0x347430"
+      ],
+      "contract": "Recurring fixed-VF original-macro family; ACC/MAC/status must not be live across the operation."
     }
   ],
   "unverified": [
