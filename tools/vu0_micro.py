@@ -3,7 +3,7 @@
 
 This reads the input ELF; it never executes a toolchain or emits microcode.
 Reports belong under ignored build/. An entry is (uploaded image, byte offset),
-not just the VCALLMS operand: physics, animation and RenderWare upload different
+not just the VCALLMS operand: the geometry and animation groups upload different
 programs at micro address zero. ISA field decoding follows the VU instruction
 format; the PCSX2 disassembler/interpreter is a useful independent reference:
 https://github.com/PCSX2/pcsx2/blob/master/pcsx2/DebugTools/DisVUops.h
@@ -33,12 +33,12 @@ LANES = 'xyzw'
 # Loader instructions independently identify these upload packets. Source
 # addresses name existing input bytes, not a reconstruction of the programs.
 UPLOADS = (
-    dict(name='physics', packet=0x3ba100, loader=0x26cd3c,
+    dict(name='geometry_26c', packet=0x3ba100, loader=0x26cd3c,
          payloads=((0x3ba110, 0, 0x800), (0x3ba918, 0x800, 0x620)),
          callers=(0x26cd28, 0x26f0b0)),
     dict(name='animation', packet=0x3bb6e0, loader=0x3528e8,
          payloads=((0x3bb6e8, 0, 0x530),), callers=(0x344178, 0x3528e0)),
-    dict(name='renderware', packet=0x3bbc20, loader=0x37c544,
+    dict(name='geometry_37d', packet=0x3bbc20, loader=0x37c544,
          payloads=((0x3bbc30, 0, 0x700),), callers=(0x37d2a0, 0x37e678)),
 )
 
@@ -230,8 +230,12 @@ def pair(lo, hi):
         add(reads, register, lanes)
     for register, lanes in lw.items():
         add(writes, register, lanes)
+    flags = {c for c, bit in zip('IEMDT', (31, 30, 29, 28, 27)) if hi & (1 << bit)}
+    # M changes micro/macro cooperation; D/T may trigger exceptions. Keep them
+    # visible and disqualify such programs from these simple leaf recipes.
+    special = {'micro-control-'+c for c in flags & set('MDT')}
     return dict(upper=text, lower=name, reads=reads, writes=writes,
-                hazards=sorted(uh | lh), branch=branch, end=bool(hi & 0x40000000),
+                hazards=sorted(uh | lh | special), branch=branch, end=bool(hi & 0x40000000),
                 flags=''.join(c for c, bit in zip('IEMDT', (31, 30, 29, 28, 27)) if hi & (1 << bit)))
 
 
@@ -281,6 +285,7 @@ def contract(code, entry):
             queue.append((pc+8, None, False, defined))
     invalid = hazards & {'unknown-upper', 'unknown-upper-operand', 'unknown-lower',
                          'indirect-branch', 'out-of-image-control-flow', 'control-in-delay-pair'}
+    invalid |= {h for h in hazards if h.startswith('micro-control-')}
     def display(registers):
         return {r: ''.join(c for i, c in enumerate(LANES) if m & (1 << i))
                 if r.startswith('vf') or r == 'ACC' else True
@@ -288,6 +293,7 @@ def contract(code, entry):
     return dict(entry=entry, valid=bool(exits) and not invalid,
                 read_before_definition=display(external), may_write=display(written),
                 hazards=sorted(hazards), pairs=len(visited), exits=sorted(exits),
+                dataflow='conservative lane dataflow; not a timing or exit-liveness proof',
                 flag_contract='arithmetic flag effects are pipelined; sticky input retained',
                 q_completion='inspect Q producer and interlocks on every exit path',
                 offsets=sorted(visited))
@@ -322,6 +328,7 @@ def analyze(elf_path, placement_path):
                 code[destination+off] = pair(lo, hi)
         entries = sorted({c['entry'] for c in calls if c['upload'] == upload['name'] and not c['dynamic']})
         programs[upload['name']] = dict(packet=upload['packet'], loader=upload['loader'],
+            library='animation' if upload['name']=='animation' else 'unverified geometry group',
             entry_contracts={hex(e): contract(code, e) for e in entries})
     return dict(schema=1, immediate_unit='byte offset; encoded index multiplied by eight',
                 calls=calls, programs=programs, unmapped=unmapped,
