@@ -50125,3 +50125,29 @@ units:
     _vt$Q24Kaimt10CMetaClass2ZQ24Kaim5CTeamZPFUiPCc_PQ24Kaim5CTeam: '0x3ebb48'
     strcmp: '0x35ca74'
     strcpy: '0x35cbc0'
+- name: campaign_wave6_hide
+  source: src/campaign/behaviors_hide_wave6.cpp
+  origin: kynapse
+  owner: context-wave6-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2d42c8'
+    size: 600
+    status: source
+    symbol: func_002D42C8
+  - addr: '0x2d4b68'
+    size: 1180
+    status: asm
+    reason: controller-lifetimes
+    symbol: func_002D4B68
+  externs:
+    __throw: '0x292b40'
+    _vt$Q211HideQueries4Root: '0x3e0040'
+    _vt$Q211HideQueries5Query: '0x3e2ab8'
+    func_002E7360: '0x2e7360'
+    func_002E8AB8: '0x2e8ab8'
