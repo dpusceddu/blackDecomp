@@ -43193,81 +43193,6 @@ units:
     symbol: func_0034ECD8
     size: 168
     status: source
-- name: animation_playback_reset
-  source: src/animation/tu_34eae0/reset.c
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: wave2-animation
-  functions:
-  - addr: '0x34eae0'
-    symbol: func_0034EAE0
-    size: 168
-    status: asm
-    reason: schedule
-- name: animation_playback_advance
-  source: src/animation/tu_34eae0/advance.c
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: wave2-animation
-  functions:
-  - addr: '0x34ee90'
-    symbol: func_0034EE90
-    size: 496
-    status: asm
-    reason: schedule
-- name: animation_playback_evaluate
-  source: src/animation/tu_34eae0/evaluate.c
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: wave2-animation
-  functions:
-  - addr: '0x34f080'
-    symbol: func_0034F080
-    size: 316
-    status: asm
-    reason: schedule
-- name: animation_playback_apply_span
-  source: src/animation/tu_34eae0/apply_span.c
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: wave2-animation
-  functions:
-  - addr: '0x34edb8'
-    symbol: func_0034EDB8
-    size: 212
-    status: asm
-    reason: schedule
-- name: animation_playback_evaluate_header
-  source: src/animation/tu_34eae0/evaluate_header.c
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: wave2-animation
-  functions:
-  - addr: '0x34f1c0'
-    symbol: func_0034F1C0
-    size: 268
-    status: asm
-    reason: schedule
 - name: rwa_wave2_311048
   source: src/rwa_ee/tu_310978.c
   origin: rwa_ee
@@ -51118,3 +51043,219 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: mod_arms_347a50
+  source: src/mod/arms_347a50.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x347a90'
+    size: 172
+    status: source
+    symbol: func_00347A90
+  - addr: '0x347b40'
+    size: 76
+    status: source
+    symbol: func_00347B40
+  - addr: '0x347c70'
+    size: 44
+    status: source
+    symbol: func_00347C70
+  - addr: '0x347e18'
+    size: 104
+    status: source
+    symbol: func_00347E18
+  - addr: '0x347e80'
+    size: 408
+    status: source
+    symbol: func_00347E80
+  - addr: '0x348070'
+    size: 532
+    status: asm
+    reason: campaign
+  - addr: '0x348288'
+    size: 240
+    status: source
+    symbol: func_00348288
+  - addr: '0x3484d0'
+    size: 32
+    status: asm
+    reason: campaign
+  - addr: '0x3484f0'
+    size: 112
+    status: asm
+    reason: campaign
+  externs:
+    func_00343C28: '0x343c28'
+    func_00343FC8: '0x343fc8'
+    func_003461E0: '0x3461e0'
+    func_00346510: '0x346510'
+    func_00346668: '0x346668'
+    func_00347600: '0x347600'
+    func_00347C08: '0x347c08'
+    func_00348070: '0x348070'
+    func_003489A8: '0x3489a8'
+    func_00348D00: '0x348d00'
+    func_0034F080: '0x34f080'
+    func_00350570: '0x350570'
+    func_00350890: '0x350890'
+    func_003511D0: '0x3511d0'
+- name: mod_arms_1a51c8
+  source: src/mod/arms_1a51c8.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x1a51c8'
+    size: 788
+    status: asm
+    reason: campaign
+  - addr: '0x1a54e0'
+    size: 600
+    status: asm
+    reason: campaign
+  - addr: '0x1a5738'
+    size: 672
+    status: asm
+    reason: campaign
+  - addr: '0x1a59d8'
+    size: 312
+    status: asm
+    reason: campaign
+  - addr: '0x1a5b10'
+    size: 984
+    status: asm
+    reason: campaign
+  - addr: '0x1a5f38'
+    size: 664
+    status: asm
+    reason: campaign
+  - addr: '0x1a61d0'
+    size: 348
+    status: asm
+    reason: campaign
+  - addr: '0x1a6330'
+    size: 1148
+    status: asm
+    reason: campaign
+  - addr: '0x1a67b8'
+    size: 136
+    status: asm
+    reason: campaign
+  - addr: '0x1a6840'
+    size: 112
+    status: asm
+    reason: campaign
+  - addr: '0x1a68b0'
+    size: 48
+    status: asm
+    reason: campaign
+  - addr: '0x1a6930'
+    size: 88
+    status: asm
+    reason: campaign
+  - addr: '0x1a6988'
+    size: 156
+    status: asm
+    reason: campaign
+  - addr: '0x1a6a28'
+    size: 136
+    status: asm
+    reason: campaign
+  - addr: '0x1a6ab0'
+    size: 300
+    status: asm
+    reason: campaign
+  - addr: '0x1a6be0'
+    size: 628
+    status: asm
+    reason: campaign
+  - addr: '0x1a6f68'
+    size: 540
+    status: asm
+    reason: campaign
+  - addr: '0x1a72b0'
+    size: 316
+    status: asm
+    reason: campaign
+  - addr: '0x1a73f0'
+    size: 96
+    status: asm
+    reason: campaign
+  - addr: '0x1a74e0'
+    size: 28
+    status: asm
+    reason: campaign
+  - addr: '0x1a7500'
+    size: 40
+    status: asm
+    reason: campaign
+  - addr: '0x1a7528'
+    size: 312
+    status: asm
+    reason: campaign
+  - addr: '0x1a7660'
+    size: 124
+    status: asm
+    reason: campaign
+  - addr: '0x1a76e0'
+    size: 232
+    status: asm
+    reason: campaign
+  - addr: '0x1a77c8'
+    size: 1408
+    status: asm
+    reason: campaign
+  - addr: '0x1a7d48'
+    size: 168
+    status: asm
+    reason: campaign
+  - addr: '0x1a7df0'
+    size: 104
+    status: asm
+    reason: campaign
+  - addr: '0x1a7e58'
+    size: 300
+    status: asm
+    reason: campaign
+- name: mod_arms_34eae0
+  source: src/mod/arms_34eae0.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x34eae0'
+    size: 168
+    status: asm
+    reason: campaign
+  - addr: '0x34edb8'
+    size: 212
+    status: asm
+    reason: campaign
+  - addr: '0x34ee90'
+    size: 496
+    status: asm
+    reason: campaign
+  - addr: '0x34f080'
+    size: 316
+    status: asm
+    reason: campaign
+  - addr: '0x34f1c0'
+    size: 268
+    status: asm
+    reason: campaign
