@@ -47834,36 +47834,6 @@ units:
   externs:
     RetargetLive__9BlackGamePQ29BlackGame9RouteModex: '0x193040'
     UpdateDestination__Q29BlackGame12RouteRequestx: '0x17a9c8'
-- name: campaign_actor_camera_wave3
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  - -mvu0-use-vf0-vf31
-  functions:
-  - addr: '0x141008'
-    status: asm
-    reason: claim
-  - addr: '0x1414a0'
-    status: asm
-    reason: claim
-  - addr: '0x140ea8'
-    status: asm
-    reason: claim
-  - addr: '0x141308'
-    status: asm
-    reason: claim
-  - addr: '0x140e48'
-    status: asm
-    reason: claim
-  - addr: '0x141460'
-    status: asm
-    reason: claim
-  source: src/campaign/actor_camera_wave3.cpp
-  origin: C++ actor camera cluster; remaining functions claimed before source reconstruction; mod context owner
 - name: campaign_actor_input_wave3
   source: src/campaign/actor_input_wave3.cpp
   origin: C++ actor input cluster; inferred fields and narrow inline input methods
@@ -50251,18 +50221,6 @@ units:
     size: 212
     status: asm
     reason: claimed
-- name: campaign_actor_camera_wave6
-  source: src/campaign/actor_camera_wave6.cpp
-  origin: C++ actor vtable0x3DC348 camera cluster
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  - -mvu0-use-vf0-vf16
-  functions:
-  - addr: '0x141008'
-    status: asm
 - name: campaign_wave6_follower
   source: src/campaign/behaviors_follower_wave6.cpp
   origin: kynapse
@@ -50532,59 +50490,14 @@ units:
   - -ffunction-sections
   - -mvu0-use-vf0-vf16
   functions:
-  - addr: '0x13db40'
-    status: asm
-    reason: unmatched
-  - addr: '0x13dc00'
-    status: asm
-    reason: unmatched
-  - addr: '0x13df58'
-    status: asm
-    reason: unmatched
-  - addr: '0x13eb00'
-    status: asm
-    reason: unmatched
-  - addr: '0x13ec38'
-    status: asm
-    reason: unmatched
-  - addr: '0x13ed98'
-    status: asm
-    reason: unmatched
-  - addr: '0x13ef28'
-    status: asm
-    reason: unmatched
-  - addr: '0x13f0d8'
-    status: asm
-    reason: unmatched
   - addr: '0x13f160'
     status: source
     symbol: Update__Q215ActorInventory79InputAxes
     size: 300
-  - addr: '0x13f328'
-    status: asm
-    reason: unmatched
-  - addr: '0x13f3e0'
-    status: asm
-    reason: unmatched
-  - addr: '0x13f618'
-    status: asm
-    reason: unmatched
   - addr: '0x140008'
     status: source
     symbol: Clear__Q215ActorInventory712InputBinding
     size: 60
-  - addr: '0x140068'
-    status: asm
-    reason: unmatched
-  - addr: '0x140468'
-    status: asm
-    reason: unmatched
-  - addr: '0x1404a8'
-    status: asm
-    reason: unmatched
-  - addr: '0x1407c8'
-    status: asm
-    reason: unmatched
   externs:
     D_0040F4D0: '0x40f4d0'
 - name: context_graph_entity_wave7
@@ -50703,134 +50616,6 @@ units:
     size: 36
     symbol: Pressure__CQ216CampaignGraphics10ControllerUi
     status: source
-  origin: game; mod context owner
-- name: campaign_input_26bcf8
-  source: src/campaign/graphics_input_26bcf8.cpp
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x26bcf8'
-    size: 48
-    symbol: Rumble__Q216CampaignGraphics10ControllerUi
-    status: asm
-    reason: unmatched native context
-  origin: game; mod context owner
-- name: campaign_input_26bd30
-  source: src/campaign/graphics_input_26bd30.cpp
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x26bd30'
-    size: 308
-    symbol: UpdateMotors__Q216CampaignGraphics10Controller
-    status: asm
-    reason: unmatched native context
-  origin: game; mod context owner
-- name: campaign_input_26bf60
-  source: src/campaign/graphics_input_26bf60.cpp
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x26bf60'
-    size: 144
-    symbol: Smooth__Q216CampaignGraphics10Controllerff
-    status: asm
-    reason: unmatched native context
-  origin: game; mod context owner
-- name: campaign_input_26c798
-  source: src/campaign/graphics_input_26c798.cpp
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x26c798'
-    size: 312
-    symbol: Initialize__Q216CampaignGraphics10PadBackendUc
-    status: asm
-    reason: unmatched native context
-  origin: game; mod context owner
-- name: campaign_input_26c8e0
-  source: src/campaign/graphics_input_26c8e0.cpp
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x26c8e0'
-    size: 224
-    symbol: Poll__Q216CampaignGraphics10PadBackend
-    status: asm
-    reason: unmatched native context
-  origin: game; mod context owner
-- name: campaign_input_26ca98
-  source: src/campaign/graphics_input_26ca98.cpp
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x26ca98'
-    size: 156
-    symbol: Attach__Q216CampaignGraphics10PadBackendPQ216CampaignGraphics10ControllerUi
-    status: asm
-    reason: unmatched native context
-  origin: game; mod context owner
-- name: campaign_input_26cb38
-  source: src/campaign/graphics_input_26cb38.cpp
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x26cb38'
-    size: 112
-    symbol: Detach__Q216CampaignGraphics10PadBackendPQ216CampaignGraphics10ControllerUi
-    status: asm
-    reason: unmatched native context
-  origin: game; mod context owner
-- name: campaign_input_26cba8
-  source: src/campaign/graphics_input_26cba8.cpp
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x26cba8'
-    size: 376
-    symbol: PollPort__Q216CampaignGraphics10PadBackendi
-    status: asm
-    reason: unmatched native context
   origin: game; mod context owner
 - name: context_graph_constraint_registration
   source: src/campaign/graph_constraint_registration.cpp
@@ -51118,3 +50903,149 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: mod_camera_13db40
+  source: src/mod/camera/tu_13db40.cpp
+  origin: mod camera full TU inventory
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x13db40'
+    name: func_0013DB40
+    size: 96
+    status: asm
+  - addr: '0x13dc00'
+    name: func_0013DC00
+    size: 52
+    status: asm
+  - addr: '0x13df58'
+    name: func_0013DF58
+    size: 2980
+    status: asm
+  - addr: '0x13eb00'
+    name: func_0013EB00
+    size: 268
+    status: asm
+  - addr: '0x13ec38'
+    name: func_0013EC38
+    size: 348
+    status: asm
+  - addr: '0x13ed98'
+    name: func_0013ED98
+    size: 132
+    status: asm
+  - addr: '0x13ef28'
+    name: func_0013EF28
+    size: 380
+    status: asm
+  - addr: '0x13f0d8'
+    name: func_0013F0D8
+    size: 132
+    status: asm
+  - addr: '0x13f328'
+    name: func_0013F328
+    size: 180
+    status: asm
+  - addr: '0x13f3e0'
+    name: func_0013F3E0
+    size: 568
+    status: asm
+  - addr: '0x13f618'
+    name: func_0013F618
+    size: 2436
+    status: asm
+  - addr: '0x140068'
+    name: func_00140068
+    size: 1020
+    status: asm
+  - addr: '0x140468'
+    name: func_00140468
+    size: 60
+    status: asm
+  - addr: '0x1404a8'
+    name: func_001404A8
+    size: 800
+    status: asm
+  - addr: '0x1407c8'
+    name: func_001407C8
+    size: 504
+    status: asm
+- name: mod_camera_26baf8
+  source: src/mod/camera/tu_26baf8.cpp
+  origin: mod camera full TU inventory
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x26bcf8'
+    name: func_0026BCF8
+    size: 48
+    status: asm
+  - addr: '0x26bd30'
+    name: func_0026BD30
+    size: 308
+    status: asm
+  - addr: '0x26bf60'
+    name: func_0026BF60
+    size: 144
+    status: asm
+  - addr: '0x26c798'
+    name: func_0026C798
+    size: 312
+    status: asm
+  - addr: '0x26c8e0'
+    name: func_0026C8E0
+    size: 224
+    status: asm
+  - addr: '0x26ca98'
+    name: func_0026CA98
+    size: 156
+    status: asm
+  - addr: '0x26cb38'
+    name: func_0026CB38
+    size: 112
+    status: asm
+  - addr: '0x26cba8'
+    name: func_0026CBA8
+    size: 376
+    status: asm
+- name: mod_camera_140ca0
+  source: src/mod/camera/tu_140ca0.cpp
+  origin: mod camera full TU inventory
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x140e48'
+    name: func_00140E48
+    size: 96
+    status: asm
+  - addr: '0x140ea8'
+    name: func_00140EA8
+    size: 224
+    status: asm
+  - addr: '0x141008'
+    name: func_00141008
+    size: 352
+    status: asm
+  - addr: '0x141308'
+    name: func_00141308
+    size: 136
+    status: asm
+  - addr: '0x141460'
+    name: func_00141460
+    size: 44
+    status: asm
+  - addr: '0x1414a0'
+    name: func_001414A0
+    size: 264
+    status: asm
