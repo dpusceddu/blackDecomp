@@ -52413,15 +52413,18 @@ units:
   - -O2
   - -G0
   - -snas
+  - --assembler=sn-min6
   - -fbyte-bool
   - -ffunction-sections
-  - -mvu0-use-vf0-vf31
   functions:
   - addr: '0x15d198'
     size: 120
-    symbol: func_0015D198
-    status: asm
-    reason: claimed
+    symbol: ReleaseInstance__Q210ModWeapons20WeaponManagerMethodsPQ210ModWeapons8Instance
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: mod_weapons_tu_15d248
   source: src/campaign/mod_weapons_tu_15d248.cpp
   origin: game
