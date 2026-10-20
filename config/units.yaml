@@ -30731,19 +30731,6 @@ units:
     symbol: func_00345F98
     size: 32
     status: source
-- name: auto_animation_345e30
-  source: src/auto/animation/345e30.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x345e30'
-    symbol: func_00345E30
-    size: 44
-    status: source
-  owner: wave1-animation
 - name: auto_animation_345e90
   source: src/auto/animation/345e90.c
   origin: auto
@@ -43276,66 +43263,6 @@ units:
     symbol: func_0034F668
     size: 200
     status: source
-- name: animation_sampling_blend_header
-  source: src/animation/tu_34f360/blend_header.c
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: shared-mod-context
-  functions:
-  - addr: '0x34fc80'
-    symbol: func_0034FC80
-    size: 400
-    status: asm
-    reason: schedule
-- name: animation_sampling_blend_pose
-  source: src/animation/tu_34f360/blend_pose.c
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: shared-mod-context
-  functions:
-  - addr: '0x34fb58'
-    symbol: func_0034FB58
-    size: 296
-    status: asm
-    reason: schedule
-- name: animation_sampling_evaluate_header
-  source: src/animation/tu_34f360/evaluate_header.c
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: shared-mod-context
-  functions:
-  - addr: '0x34f730'
-    symbol: func_0034F730
-    size: 544
-    status: asm
-    reason: schedule
-- name: animation_sampling_evaluate_pose
-  source: src/animation/tu_34f360/evaluate_pose.c
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: shared-mod-context
-  functions:
-  - addr: '0x34f430'
-    symbol: func_0034F430
-    size: 568
-    status: asm
-    reason: schedule
 - name: wave2_rw_core_2af800
   source: src/renderware_core/tu_2af800.c
   origin: renderware_core
@@ -51857,3 +51784,88 @@ units:
     size: 316
     status: source
     symbol: func_0034F080
+- name: mod_arms_w2_345500
+  source: src/mod/arms_345500_w2.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x345510'
+    size: 1464
+    status: asm
+    reason: campaign
+  - addr: '0x345ac8'
+    size: 256
+    status: source
+    symbol: func_00345AC8
+  - addr: '0x345dc0'
+    size: 108
+    status: asm
+    reason: campaign
+  - addr: '0x345fd8'
+    size: 268
+    status: source
+    symbol: func_00345FD8
+  - addr: '0x3460e8'
+    size: 232
+    status: source
+    symbol: func_003460E8
+  - addr: '0x345e30'
+    symbol: func_00345E30
+    size: 44
+    status: source
+- name: mod_arms_w2_34f360
+  source: src/mod/arms_34f360_w2.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x34f430'
+    size: 568
+    status: asm
+    reason: campaign
+  - addr: '0x34f730'
+    size: 544
+    status: asm
+    reason: campaign
+  - addr: '0x34fb58'
+    size: 296
+    status: asm
+    reason: campaign
+  - addr: '0x34fc80'
+    size: 400
+    status: asm
+    reason: campaign
+- name: mod_arms_w2_3511d0
+  source: src/mod/arms_3511d0_w2.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x3511d0'
+    size: 1944
+    status: asm
+    reason: campaign
+  - addr: '0x351968'
+    size: 52
+    status: asm
+    reason: campaign
+  - addr: '0x3519a0'
+    size: 100
+    status: asm
+    reason: campaign
