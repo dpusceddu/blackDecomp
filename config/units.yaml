@@ -31556,14 +31556,6 @@ units:
   - -snas
   - -ffunction-sections
   functions:
-  - addr: '0x34f360'
-    symbol: func_0034F360
-    size: 192
-    status: source
-  - addr: '0x34f420'
-    symbol: func_0034F420
-    size: 16
-    status: source
   - addr: '0x34f950'
     symbol: func_0034F950
     size: 44
@@ -52035,12 +52027,12 @@ units:
   functions:
   - addr: '0x34f430'
     size: 568
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_0034F430
   - addr: '0x34f730'
     size: 544
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_0034F730
   - addr: '0x34fb58'
     size: 296
     status: asm
@@ -52049,6 +52041,14 @@ units:
     size: 400
     status: asm
     reason: campaign
+  - addr: '0x34f360'
+    symbol: func_0034F360
+    size: 192
+    status: source
+  - addr: '0x34f420'
+    symbol: func_0034F420
+    size: 16
+    status: source
 - name: mod_arms_w2_3511d0
   source: src/mod/arms_3511d0_w2.cpp
   language: c++
