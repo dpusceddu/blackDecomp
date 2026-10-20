@@ -4,7 +4,7 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Position4 {
-    u128 field_0; /* PS2 +0x0 */
+    s128 field_0; /* PS2 +0x0 */
 } Recovered_Position4;
 typedef char assert_Recovered_Position4_0[(((int)&((Recovered_Position4 *)0)->field_0) == 0) ? 1 : -1];
 #endif

@@ -4,7 +4,9 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Actor {
-    u8 opaque_0[48];
+    u8 opaque_0[16];
+    void * field_10; /* PS2 +0x10 */
+    u8 opaque_14[28];
     f32 field_30; /* PS2 +0x30 */
     f32 field_34; /* PS2 +0x34 */
     f32 field_38; /* PS2 +0x38 */
@@ -15,15 +17,33 @@ typedef struct Recovered_Actor {
     u8 opaque_54[4];
     s32 field_58; /* PS2 +0x58 */
     s32 field_5C; /* PS2 +0x5C */
-    u8 opaque_60[580];
+    u128 field_60; /* PS2 +0x60 */
+    u8 opaque_70[80];
+    f32 field_C0; /* PS2 +0xC0 */
+    u8 opaque_C4[236];
+    s32 field_1B0; /* PS2 +0x1B0 */
+    u8 opaque_1B4[66];
+    u8 field_1F6; /* PS2 +0x1F6 */
+    u8 opaque_1F7[173];
     void * field_2A4; /* PS2 +0x2A4 */
-    u8 opaque_2A8[128];
+    u8 opaque_2A8[104];
+    f32 field_310; /* PS2 +0x310 */
+    f32 field_314; /* PS2 +0x314 */
+    u8 opaque_318[16];
     s32 field_328; /* PS2 +0x328 */
-    u8 opaque_32C[120];
+    u8 opaque_32C[4];
+    u32 field_330; /* PS2 +0x330 */
+    u8 opaque_334[112];
     s32 field_3A4; /* PS2 +0x3A4 */
-    u8 opaque_3A8[1291];
+    u8 opaque_3A8[12];
+    u8 field_3B4; /* PS2 +0x3B4 */
+    u8 field_3B5; /* PS2 +0x3B5 */
+    u8 opaque_3B6[1];
+    u8 field_3B7; /* PS2 +0x3B7 */
+    u8 opaque_3B8[1275];
     u8 field_8B3; /* PS2 +0x8B3 */
 } Recovered_Actor;
+typedef char assert_Recovered_Actor_10[(((int)&((Recovered_Actor *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_Actor_30[(((int)&((Recovered_Actor *)0)->field_30) == 48) ? 1 : -1];
 typedef char assert_Recovered_Actor_34[(((int)&((Recovered_Actor *)0)->field_34) == 52) ? 1 : -1];
 typedef char assert_Recovered_Actor_38[(((int)&((Recovered_Actor *)0)->field_38) == 56) ? 1 : -1];
@@ -32,8 +52,18 @@ typedef char assert_Recovered_Actor_4C[(((int)&((Recovered_Actor *)0)->field_4C)
 typedef char assert_Recovered_Actor_50[(((int)&((Recovered_Actor *)0)->field_50) == 80) ? 1 : -1];
 typedef char assert_Recovered_Actor_58[(((int)&((Recovered_Actor *)0)->field_58) == 88) ? 1 : -1];
 typedef char assert_Recovered_Actor_5C[(((int)&((Recovered_Actor *)0)->field_5C) == 92) ? 1 : -1];
+typedef char assert_Recovered_Actor_60[(((int)&((Recovered_Actor *)0)->field_60) == 96) ? 1 : -1];
+typedef char assert_Recovered_Actor_C0[(((int)&((Recovered_Actor *)0)->field_C0) == 192) ? 1 : -1];
+typedef char assert_Recovered_Actor_1B0[(((int)&((Recovered_Actor *)0)->field_1B0) == 432) ? 1 : -1];
+typedef char assert_Recovered_Actor_1F6[(((int)&((Recovered_Actor *)0)->field_1F6) == 502) ? 1 : -1];
 typedef char assert_Recovered_Actor_2A4[(((int)&((Recovered_Actor *)0)->field_2A4) == 676) ? 1 : -1];
+typedef char assert_Recovered_Actor_310[(((int)&((Recovered_Actor *)0)->field_310) == 784) ? 1 : -1];
+typedef char assert_Recovered_Actor_314[(((int)&((Recovered_Actor *)0)->field_314) == 788) ? 1 : -1];
 typedef char assert_Recovered_Actor_328[(((int)&((Recovered_Actor *)0)->field_328) == 808) ? 1 : -1];
+typedef char assert_Recovered_Actor_330[(((int)&((Recovered_Actor *)0)->field_330) == 816) ? 1 : -1];
 typedef char assert_Recovered_Actor_3A4[(((int)&((Recovered_Actor *)0)->field_3A4) == 932) ? 1 : -1];
+typedef char assert_Recovered_Actor_3B4[(((int)&((Recovered_Actor *)0)->field_3B4) == 948) ? 1 : -1];
+typedef char assert_Recovered_Actor_3B5[(((int)&((Recovered_Actor *)0)->field_3B5) == 949) ? 1 : -1];
+typedef char assert_Recovered_Actor_3B7[(((int)&((Recovered_Actor *)0)->field_3B7) == 951) ? 1 : -1];
 typedef char assert_Recovered_Actor_8B3[(((int)&((Recovered_Actor *)0)->field_8B3) == 2227) ? 1 : -1];
 #endif

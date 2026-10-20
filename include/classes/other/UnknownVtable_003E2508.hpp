@@ -10,9 +10,11 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003E2508 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    // 0x4: UNVERIFIED type; PS2 access offset.
+    inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
+    // 0xC: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_000C() { return *(unsigned char *)((unsigned char *)this + 0xC); }
-    // 0xD: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    // 0xD: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_000D() { return *(unsigned char *)((unsigned char *)this + 0xD); }
     // 0x2A: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_002A() { return *(unsigned char *)((unsigned char *)this + 0x2A); }
@@ -30,6 +32,14 @@ struct UnknownVtable_003E2508 {
     inline unsigned char & Field_0030() { return *(unsigned char *)((unsigned char *)this + 0x30); }
     // 0x31: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0031() { return *(unsigned char *)((unsigned char *)this + 0x31); }
+    // 0x46: UNVERIFIED type; PS2 access offset.
+    inline unsigned char & Field_0046() { return *(unsigned char *)((unsigned char *)this + 0x46); }
+    // 0x47: UNVERIFIED type; PS2 access offset.
+    inline unsigned char & Field_0047() { return *(unsigned char *)((unsigned char *)this + 0x47); }
+    // 0x48: UNVERIFIED type; PS2 access offset.
+    inline unsigned char & Field_0048() { return *(unsigned char *)((unsigned char *)this + 0x48); }
+    // 0x49: UNVERIFIED type; PS2 access offset.
+    inline unsigned char & Field_0049() { return *(unsigned char *)((unsigned char *)this + 0x49); }
     // 0x4A: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_004A() { return *(unsigned char *)((unsigned char *)this + 0x4A); }
     // 0x4C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
@@ -78,7 +88,7 @@ struct UnknownVtable_003E2508 {
     inline unsigned int & Field_00E8() { return *(unsigned int *)((unsigned char *)this + 0xE8); }
     // 0xEC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_00EC() { return *(unsigned int *)((unsigned char *)this + 0xEC); }
-    // 0x0026BD30: UNVERIFIED signature (src/campaign/graphics_input_26bd30.cpp).
+    // 0x0026BD30: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0026BD30();
     // 0x0026BE68: UNVERIFIED signature (src/auto/game/26be68.c).
     unsigned int Function_0026BE68(int argument0);

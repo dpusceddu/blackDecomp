@@ -21,7 +21,7 @@ struct UnknownVtable_003DF9D0 {
     // 0x00193978: UNVERIFIED signature (src/auto/game/193970.c).
     unsigned int Function_00193978();
     // 0x00195710: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    void * Function_00195710();
+    signed char * Function_00195710();
     // 0x00195860: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_00195860();
     // 0x001958E0: UNVERIFIED signature (src/tu/1958e0.c).
@@ -49,7 +49,7 @@ struct UnknownVtable_003DF9D0 {
         // slot 1, table+0x10, this delta 0, function 0x00193978; UNVERIFIED signature.
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00195710; UNVERIFIED signature.
-        virtual void * Slot002();
+        virtual signed char * Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00195860; UNVERIFIED signature.
         virtual signed char * Slot003();
         // slot 4, table+0x28, this delta 0, function 0x001958E0; UNVERIFIED signature.

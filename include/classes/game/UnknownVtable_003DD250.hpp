@@ -33,7 +33,7 @@ struct UnknownVtable_003DD250 {
     // 0x70: UNVERIFIED type; PS2 access offset.
     inline S128 & Field_0070() { return *(S128 *)((unsigned char *)this + 0x70); }
     // 0x0018C938: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int * Function_0018C938();
+    unsigned int Function_0018C938();
     // 0x0018CE18: UNVERIFIED signature (src/auto/game/18ce18.c).
     unsigned int Function_0018CE18();
     // 0x0018CE68: UNVERIFIED signature (src/auto/game/18ce68.c).
@@ -53,7 +53,7 @@ struct UnknownVtable_003DD250 {
         // slot 0, table+0x8, this delta 0, function 0x00383FE8; UNVERIFIED signature.
         virtual int Slot000();
         // slot 1, table+0x10, this delta 0, function 0x0018C938; UNVERIFIED signature.
-        virtual int * Slot001();
+        virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00383FF0; UNVERIFIED signature.
         virtual int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00383FF8; UNVERIFIED signature.

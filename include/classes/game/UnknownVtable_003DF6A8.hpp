@@ -19,7 +19,7 @@ struct UnknownVtable_003DF6A8 {
     // 0x00197BA8: UNVERIFIED signature (src/auto/game/197ba8.c).
     unsigned int Function_00197BA8();
     // 0x00197BB0: UNVERIFIED signature (src/auto/game/197bb0.c).
-    void * Function_00197BB0();
+    signed char * Function_00197BB0();
     // 0x00197C20: UNVERIFIED signature (src/auto/game/197c20.c).
     unsigned int Function_00197C20();
     // 0x00197C40: UNVERIFIED signature (src/auto/game/197c40.c).
@@ -47,7 +47,7 @@ struct UnknownVtable_003DF6A8 {
         // slot 2, table+0x18, this delta 0, function 0x00197BA8; UNVERIFIED signature.
         virtual unsigned int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00197BB0; UNVERIFIED signature.
-        virtual void * Slot003();
+        virtual signed char * Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00197C20; UNVERIFIED signature.
         virtual unsigned int Slot004();
         // slot 5, table+0x30, this delta 0, function 0x00383DB8; UNVERIFIED signature.

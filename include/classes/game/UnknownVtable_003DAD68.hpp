@@ -21,7 +21,7 @@ struct UnknownVtable_003DAD68 {
     // 0x0011EDB8: UNVERIFIED signature (src/tu/11ed98.c).
     int Function_0011EDB8();
     // 0x0011EDD8: UNVERIFIED signature (src/tu/11ed98.c).
-    int * Function_0011EDD8();
+    unsigned int Function_0011EDD8();
     // 0x0011EDF8: UNVERIFIED signature (src/tu/11ed98.c).
     int Function_0011EDF8();
     // 0x0011EE00: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -39,7 +39,7 @@ struct UnknownVtable_003DAD68 {
         // slot 1, table+0x10, this delta 0, function 0x0011D440; UNVERIFIED signature.
         virtual int Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x0011EDD8; UNVERIFIED signature.
-        virtual int * Slot002();
+        virtual unsigned int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00382BE0; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x0011DE30; UNVERIFIED signature.
