@@ -47114,6 +47114,8 @@ units:
     status: source
     symbol: GetWorldMatrix__Q213CampaignActor11ActorMotion
     size: 200
+  owner: mod-camera
+  claim: mod-wave3-tu1357b8
 - name: context_behaviors_gap
   source: src/context/behaviors_gap.cpp
   origin: kynapse
@@ -52378,3 +52380,49 @@ units:
     size: 200
     symbol: func_001B90D0
     status: source
+- name: mod_camera_wave3_pose
+  source: src/mod/camera/pose_wave3.cpp
+  origin: Mod camera/player campaign; original class identity qualified
+  owner: mod-camera
+  claim: mod-wave3-full-inventory
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x1357b8'
+    size: 192
+    status: source
+    symbol: func_001357B8
+- name: mod_camera_wave3_damage
+  source: src/mod/camera/damage_wave3.cpp
+  origin: Mod camera/player campaign; original class identity qualified
+  owner: mod-camera
+  claim: mod-wave3-full-inventory
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x13c778'
+    size: 236
+    status: asm
+- name: mod_camera_wave3_restore
+  source: src/mod/camera/restore_wave3.cpp
+  origin: Mod camera/player campaign; original class identity qualified
+  owner: mod-camera
+  claim: mod-wave3-full-inventory
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x13c9d8'
+    size: 836
+    status: asm

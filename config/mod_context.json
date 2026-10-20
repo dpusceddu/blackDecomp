@@ -538,6 +538,20 @@
         "0x3487e0",
         "0x3487e8"
       ]
+    },
+    {
+      "header": "include/mod/camera/local_pose.hpp",
+      "api": [
+        "ModCamera::LowerY",
+        "LocalPoseAnimation",
+        "LocalPoseDefinition"
+      ],
+      "verified_scope": [
+        "Native192B local-pose return uses animation330->definition50->rootIndex34, actor matrixD0/E0/F0/100 and modeC4; scalar Y subtraction preserves X/Z/W. Original animation identity/complete layouts remain unknown."
+      ],
+      "controls": [
+        "0x1357b8"
+      ]
     }
   ],
   "controls": [
@@ -1576,6 +1590,22 @@
       "uses": [
         "frameCount"
       ]
+    },
+    {
+      "address": "0x1357b8",
+      "source_function": "GetLocalMatrix",
+      "headers": [
+        "include/mod/camera/local_pose.hpp"
+      ],
+      "uses": [
+        "definition->rootIndex",
+        "Field_0330",
+        "Field_00D0",
+        "Field_00E0",
+        "Field_00F0",
+        "Field_0100",
+        "LowerY"
+      ]
     }
   ],
   "subsystems": [
@@ -1588,7 +1618,8 @@
         "mod/camera/pad_backend.hpp",
         "mod/camera/aim.hpp",
         "mod/camera/motion.hpp",
-        "mod/camera/vitals.h"
+        "mod/camera/vitals.h",
+        "mod/camera/local_pose.hpp"
       ],
       "tus": [
         "tu_13db40",
