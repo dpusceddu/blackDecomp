@@ -122,7 +122,7 @@ def prep(text):
 
 # Instructions m2c has no model for that are plain statements or expressions in the source: shown to m2c as calls of
 # placeholder functions, which include/auto/prelude.h defines as inline assembly (SN accepts the instructions as text).
-PLACEHOLDERS = ['void __ee_ei(void);', 'void __ee_di(void);', 'f32 __ee_max_s(f32, f32);', 'f32 __ee_min_s(f32, f32);'] + \
+PLACEHOLDERS = ['void __ee_ei(void);', 'void __ee_di(void);', 'f32 __ee_max_s(f32, f32);', 'f32 __ee_min_s(f32, f32);', 'f32 __ee_sqrt_s(f32);'] + \
     ['s32 __ee_mfc0_%d(void);' % n for n in range(32)] + ['void __ee_mtc0_%d(s32);' % n for n in range(32)]
 
 

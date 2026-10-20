@@ -11,6 +11,15 @@ import re
 SECTION = re.compile(r'^(\s*\.section\s+)(\.(?:rodata|rdata|late_rodata|lit4|sdata2|data|sdata|bss|sbss))(?:\.[0-9A-Fa-f]{8})?(?=\s|,|$)', re.M)
 READONLY = {'.rodata', '.rdata', '.late_rodata', '.lit4', '.sdata2'}
 RAW = re.compile(r'^(\s*/\*\s+[0-9A-Fa-f]+\s+([0-9A-Fa-f]{8})\s+[0-9A-Fa-f]{8}\s+\*/\s*)\.word\s+(0x[0-9A-Fa-f]+)\b.*$')
+COP1 = re.compile(r'^(\s*/\*\s+[0-9A-Fa-f]+\s+[0-9A-Fa-f]{8}\s+[0-9A-Fa-f]{8}\s+\*/\s*)c1\s+(0x[0-9A-Fa-f]+|\d+)\b.*$')
+
+
+def ee_sqrt(word):
+    # R5900 SQRT.S uses FT as the source; FS is reserved zero. Generic MIPS
+    # SQRT.S instead uses FS, so a generic disassembler is not sufficient.
+    if word >> 21 == 0x230 and word & 0x3F == 4 and (word >> 11 & 31) == 0:
+        return 'sqrt.s $f%d, $f%d' % (word >> 6 & 31, word >> 16 & 31)
+    return None
 
 
 def decode_raw_instructions(text):
@@ -33,10 +42,21 @@ def decode_raw_instructions(text):
         address = re.search(r'/\*\s+[0-9A-Fa-f]+\s+([0-9A-Fa-f]{8})\s+[0-9A-Fa-f]{8}\s+\*/', line)
         if address:
             addresses[int(address.group(1), 16)] = index
+        cop1 = COP1.match(line)
+        if cop1:
+            immediate = int(cop1.group(2), 0)
+            decoded = ee_sqrt(0x46000000 | immediate) if 0 <= immediate < 1 << 25 else None
+            if decoded:
+                replacements[index] = (cop1.group(1) + decoded, None)
+            continue
         match = RAW.match(line)
         if not match:
             continue
         word, pc = int(match.group(3), 16), int(match.group(2), 16)
+        decoded = ee_sqrt(word)
+        if decoded:
+            replacements[index] = (match.group(1) + decoded, None)
+            continue
         instruction = rabbitizer.Instruction(word, pc, rabbitizer.InstrCategory.R5900)
         if not instruction.isValid():
             continue
