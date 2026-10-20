@@ -48914,3 +48914,47 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: context_wave4_goto
+  source: src/context/behaviors_goto.cpp
+  origin: kynapse
+  owner: context-wave4-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d38c8'
+    size: 168
+    status: source
+    symbol: func_002D38C8
+  - addr: '0x2d3a78'
+    size: 136
+    status: source
+    symbol: func_002D3A78
+  - addr: '0x2d3b08'
+    size: 160
+    status: asm
+    reason: registers
+    symbol: func_002D3B08
+  - addr: '0x2d3ba8'
+    size: 44
+    status: source
+    symbol: func_002D3BA8
+  - addr: '0x2d3bd8'
+    size: 120
+    status: asm
+    reason: registers
+    symbol: func_002D3BD8
+  externs:
+    _8KaimGoto$origin: '0x4514f8'
+    _8KaimGoto$targetClass: '0x4512b0'
+    __throw: '0x292b40'
+    func_002D39D0: '0x2d39d0'
+    func_002E1C58: '0x2e1c58'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
