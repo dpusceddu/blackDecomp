@@ -4963,18 +4963,6 @@ units:
     symbol: func_001551A8
     size: 32
     status: source
-- name: auto_game_155208
-  source: src/auto/game/155208.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x155208'
-    symbol: func_00155208
-    size: 40
-    status: source
 - name: auto_game_156278
   source: src/auto/game/156278.c
   origin: auto
@@ -51941,13 +51929,15 @@ units:
   - -snas
   - -fbyte-bool
   - -ffunction-sections
-  - -mvu0-use-vf0-vf31
   functions:
   - addr: '0x1551c8'
     size: 64
-    symbol: func_001551C8
-    status: asm
-    reason: claimed
+    symbol: Return__Q210ModWeapons8ReservesiUs
+    status: source
+  - addr: '0x155208'
+    symbol: AtMaximum__Q210ModWeapons8Reservesi
+    size: 40
+    status: source
 - name: mod_weapons_tu_155238
   source: src/campaign/mod_weapons_tu_155238.cpp
   origin: game
