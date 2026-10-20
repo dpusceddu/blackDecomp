@@ -1872,6 +1872,21 @@
       "gaps": [
         "Slot tail, clobbers, VI/Q/ACC ownership and synchronization are unresolved; no guessed intrinsic wrapper."
       ]
+    },
+    {
+      "header": "include/mod/camera/vitals.hpp",
+      "source_verified": false,
+      "api": [
+        "ModCamera::PlayerVitals",
+        "DamageSink",
+        "DamagePoint2"
+      ],
+      "evidence": [
+        "13C778 original receiver/state/health accesses and adjusted virtual callback at84->28/2C; field storage inherited from exact13CD20 prefix"
+      ],
+      "gaps": [
+        "Native damage candidate15diff; vector spill/accessors and source parameter scheduling unresolved. Original classes and callback semantic signatures unverified."
+      ]
     }
   ],
   "next_queues": {
