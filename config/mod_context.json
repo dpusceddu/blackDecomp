@@ -451,12 +451,10 @@
         "BkModEffectChildrenPS2"
       ],
       "verified_scope": [
-        "44 records stride130; active124;8 child pointersB0 and zero word110. Existing exact Entry methods plus the1BECD0 call chain identify an embedded Entry atB0 with resource pointer110; zeroing alone does not establish semantic type. pendingA8 is source-controlled. Matrix/motion/lifetime portions and original identities remain unverified."
+        "44 records stride130; active124;8 child pointersB0 and zero word110. Exact Entry methods plus the1BECD0 call chain identify an embedded Entry atB0 with resource pointer110; zeroing alone does not establish semantic type. Matrix/motion/full128 localOffsetA0 and original identities remain instruction-only. TheA8 emitter clears are different receivers and do not prove a flight field."
       ],
       "controls": [
-        "0x1bec68",
-        "0x1bf720",
-        "0x1bfea0"
+        "0x1bec68"
       ]
     },
     {
@@ -467,11 +465,14 @@
         "BkEffectEmittersPS2"
       ],
       "verified_scope": [
-        "Exact light reset proves256 records stride60, activeCount6008 and definitions6004; render proves definitionCount600C and definition stride90. Emitter declarations retained from existing partial views; no new complete identity proof."
+        "Exact light reset proves256 records stride60, activeCount6008 and definitions6004; render proves definitionCount600C and definition stride90. Emitter declarations retained from existing partial views; no new complete identity proof.",
+        "1BF720/1BFEA0 clear ownerA8 on emitter records; original1BFED0 call sites establish1024records/strideB0. These are not44flight records/stride130, despite sharing anA8offset."
       ],
       "controls": [
         "0x1c1578",
-        "0x1c1930"
+        "0x1c1930",
+        "0x1bf720",
+        "0x1bfea0"
       ]
     },
     {
@@ -1445,20 +1446,20 @@
       "address": "0x1bf720",
       "source_function": "func_001BF720",
       "headers": [
-        "include/mod/effects/attachments.h"
+        "include/mod/effects/emitter.h"
       ],
       "uses": [
-        "pending"
+        "owner"
       ]
     },
     {
       "address": "0x1bfea0",
       "source_function": "func_001BFEA0",
       "headers": [
-        "include/mod/effects/attachments.h"
+        "include/mod/effects/emitter.h"
       ],
       "uses": [
-        "pending"
+        "owner"
       ]
     },
     {
