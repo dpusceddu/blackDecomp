@@ -50921,11 +50921,6 @@ units:
     size: 196
     symbol: Update__Q210ModWeapons6WeaponiiiiiiiPQ210ModWeapons6Action
     status: source
-  - addr: '0x156450'
-    size: 128
-    symbol: func_00156450
-    status: asm
-    reason: claimed
   - addr: '0x1564d0'
     size: 1356
     symbol: func_001564D0
@@ -52655,4 +52650,17 @@ units:
   - addr: '0x1bfea0'
     size: 36
     symbol: func_001BFEA0
+    status: source
+- name: auto_game_156450
+  source: src/auto/game/156450.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-schedule-insns
+  functions:
+  - addr: '0x156450'
+    symbol: func_00156450
+    size: 128
     status: source

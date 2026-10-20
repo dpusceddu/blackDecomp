@@ -3332,7 +3332,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 17 of 30 functions
+  flags_basis: matched 18 of 30 functions
   data:
     .rodata: ['0x3f4c40', '0x3f4d70']
     .sbss: ['0x40eaf8', '0x40eafc']
