@@ -47111,65 +47111,6 @@ units:
     symbol: Dispatch__Q216BlackPS2Campaign12ActorFanout3i
     size: 132
     status: source
-- name: context_wave3_graphics_input
-  source: src/campaign/graphics_input_pending.cpp
-  origin: 'C++ shared-context campaign: input controller; partial PS2 layout'
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x26bd30'
-    symbol: UpdateMotors__Q216CampaignGraphics10Controller
-    status: asm
-    reason: claim
-    size: 308
-  - addr: '0x26baf8'
-    size: 160
-    symbol: func_0026BAF8
-    status: asm
-    reason: claim
-  - addr: '0x26bb98'
-    size: 36
-    symbol: func_0026BB98
-    status: asm
-    reason: claim
-  - addr: '0x26bcf8'
-    size: 48
-    symbol: func_0026BCF8
-    status: asm
-    reason: claim
-  - addr: '0x26bf60'
-    size: 144
-    symbol: func_0026BF60
-    status: asm
-    reason: claim
-  - addr: '0x26c798'
-    size: 312
-    symbol: func_0026C798
-    status: asm
-    reason: claim
-  - addr: '0x26c8e0'
-    size: 224
-    symbol: func_0026C8E0
-    status: asm
-    reason: claim
-  - addr: '0x26ca98'
-    size: 156
-    symbol: func_0026CA98
-    status: asm
-    reason: claim
-  - addr: '0x26cb38'
-    size: 112
-    symbol: func_0026CB38
-    status: asm
-    reason: claim
-  - addr: '0x26cba8'
-    size: 376
-    symbol: func_0026CBA8
-    status: asm
-    reason: claim
 - name: context_graphics_controller_update
   source: src/campaign/graphics_controller_update.cpp
   origin: 'C++ shared-context campaign: input controller; PS2-verified accessed fields'
@@ -50799,3 +50740,151 @@ units:
     func_002E4CE0: '0x2e4ce0'
     func_002FB9D0: '0x2fb9d0'
     func_002FBC20: '0x2fbc20'
+- name: campaign_input_26baf8
+  source: src/campaign/graphics_input_26baf8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26baf8'
+    size: 160
+    symbol: Reset__Q216CampaignGraphics10Controller
+    status: source
+- name: campaign_input_26bb98
+  source: src/campaign/graphics_input_26bb98.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26bb98'
+    size: 36
+    symbol: Pressure__CQ216CampaignGraphics10ControllerUi
+    status: source
+- name: campaign_input_26bcf8
+  source: src/campaign/graphics_input_26bcf8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26bcf8'
+    size: 48
+    symbol: Rumble__Q216CampaignGraphics10ControllerUi
+    status: asm
+    reason: unmatched native context
+- name: campaign_input_26bd30
+  source: src/campaign/graphics_input_26bd30.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26bd30'
+    size: 308
+    symbol: UpdateMotors__Q216CampaignGraphics10Controller
+    status: asm
+    reason: unmatched native context
+- name: campaign_input_26bf60
+  source: src/campaign/graphics_input_26bf60.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26bf60'
+    size: 144
+    symbol: Smooth__Q216CampaignGraphics10Controllerff
+    status: asm
+    reason: unmatched native context
+- name: campaign_input_26c798
+  source: src/campaign/graphics_input_26c798.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26c798'
+    size: 312
+    symbol: Initialize__Q216CampaignGraphics10PadBackendUc
+    status: asm
+    reason: unmatched native context
+- name: campaign_input_26c8e0
+  source: src/campaign/graphics_input_26c8e0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26c8e0'
+    size: 224
+    symbol: Poll__Q216CampaignGraphics10PadBackend
+    status: asm
+    reason: unmatched native context
+- name: campaign_input_26ca98
+  source: src/campaign/graphics_input_26ca98.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26ca98'
+    size: 156
+    symbol: Attach__Q216CampaignGraphics10PadBackendPQ216CampaignGraphics10ControllerUi
+    status: asm
+    reason: unmatched native context
+- name: campaign_input_26cb38
+  source: src/campaign/graphics_input_26cb38.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26cb38'
+    size: 112
+    symbol: Detach__Q216CampaignGraphics10PadBackendPQ216CampaignGraphics10ControllerUi
+    status: asm
+    reason: unmatched native context
+- name: campaign_input_26cba8
+  source: src/campaign/graphics_input_26cba8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x26cba8'
+    size: 376
+    symbol: PollPort__Q216CampaignGraphics10PadBackendi
+    status: asm
+    reason: unmatched native context
