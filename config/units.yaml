@@ -48093,3 +48093,142 @@ units:
     status: source
     symbol: Leave__Q216BlackPS2Campaign17ActorStateMachine
     size: 104
+- name: context_graph_allocators
+  source: src/campaign/graph_allocators.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave4-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  functions:
+  - addr: '0x2e5358'
+    size: 580
+    status: source
+    symbol: __Q24Kaim14CBaseAllocatorUi
+  - addr: '0x2e55a0'
+    size: 192
+    status: source
+    symbol: Find__Q24Kaim14CBaseAllocatorPv
+  - addr: '0x2e5660'
+    size: 264
+    status: asm
+    symbol: func_002E5660
+    reason: context
+  - addr: '0x2e5768'
+    size: 224
+    status: source
+    symbol: Remove__Q24Kaim14CBaseAllocatorPQ24Kaim14CBaseAllocator
+  - addr: '0x2e58a0'
+    size: 580
+    status: source
+    symbol: Reset__Q24Kaim15CBasicAllocatorUiPvUi
+  - addr: '0x2e5ae8'
+    size: 336
+    status: asm
+    symbol: func_002E5AE8
+    reason: context
+  - addr: '0x2e5c38'
+    size: 344
+    status: asm
+    symbol: func_002E5C38
+    reason: context
+  - addr: '0x2e5e58'
+    size: 352
+    status: asm
+    symbol: func_002E5E58
+    reason: context
+  - addr: '0x2e5fb8'
+    size: 1928
+    status: asm
+    symbol: func_002E5FB8
+    reason: context
+  - addr: '0x2e6740'
+    size: 680
+    status: asm
+    symbol: func_002E6740
+    reason: context
+  - addr: '0x2e69e8'
+    size: 372
+    status: asm
+    symbol: func_002E69E8
+    reason: context
+  - addr: '0x2e6b60'
+    size: 400
+    status: asm
+    symbol: func_002E6B60
+    reason: context
+  - addr: '0x2e6dd8'
+    size: 136
+    status: source
+    symbol: AllocateBlock__Q24Kaim10CAllocatorUiPPv
+  - addr: '0x2e6e60'
+    size: 176
+    status: source
+    symbol: FindAny__Q24Kaim10CAllocatorUiPQ24Kaim14CBaseAllocator
+  - addr: '0x2e7028'
+    size: 96
+    status: asm
+    symbol: func_002E7028
+    reason: context
+  - addr: '0x2e7090'
+    size: 96
+    status: asm
+    symbol: func_002E7090
+    reason: context
+  - addr: '0x2e7158'
+    size: 132
+    status: source
+    symbol: AllocateBlock__Q24Kaim14CFreeListBlockUiPPv
+  - addr: '0x2e7220'
+    size: 172
+    status: asm
+    symbol: func_002E7220
+    reason: context
+  externs:
+    D_003C87E0: '0x3c87e0'
+    D_003C87E8: '0x3c87e8'
+    D_003C87EC: '0x3c87ec'
+    GetBlock__Q24Kaim19CPoolBasedAllocatorUi: '0x2e5e58'
+    __throw: '0x292b40'
+    _vt$Q24Kaim14CBaseAllocator: '0x3e9c60'
+    _vt$Q24Kaim7CObject: '0x3e0040'
+    _vt$Q24Kaimt8CVarList1ZPQ24Kaim14CBaseAllocator: '0x3e9a80'
+    _vt$Q34Kaimt8CVarList1ZPQ24Kaim14CBaseAllocator5CCell: '0x3e9a68'
+    _vt$Q34Kaimt8CVarList1ZPQ24Kaim14CBaseAllocator9CIterator: '0x3e9a50'
+    terminate__Fv: '0x36f978'
+- name: context_graph_allocator_cleanup
+  source: src/campaign/graph_allocator_cleanup.cpp
+  origin: kynapse
+  owner: context-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -finline-functions
+  - -finline-limit-100
+  - -ffunction-sections
+  functions:
+  - addr: '0x2e5d90'
+    size: 200
+    status: source
+    symbol: _$_Q24Kaim19CPoolBasedAllocator
+  - addr: '0x2e6d10'
+    size: 124
+    status: source
+    symbol: _$_Q24Kaim14CBaseAllocator
+  - addr: '0x2e6f10'
+    size: 124
+    status: source
+    symbol: _$_Q24Kaim10CAllocator
+  externs:
+    D_003C87E0: '0x3c87e0'
+    _vt$Q24Kaim14CBaseAllocator: '0x3e9c60'
+    _vt$Q24Kaim19CPoolBasedAllocator: '0x3e9b58'
+    _vt$Q24Kaim7CObject: '0x3e0040'
