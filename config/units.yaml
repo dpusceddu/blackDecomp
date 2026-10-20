@@ -51118,3 +51118,231 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: mod_weapons_tu_1561f8
+  source: src/campaign/mod_weapons_tu_1561f8.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave1-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x156388'
+    size: 196
+    symbol: Update__Q210ModWeapons6WeaponiiiiiiiPQ210ModWeapons6Action
+    status: source
+  - addr: '0x156450'
+    size: 128
+    symbol: func_00156450
+    status: asm
+    reason: claimed
+  - addr: '0x1564d0'
+    size: 1356
+    symbol: func_001564D0
+    status: asm
+    reason: claimed
+  - addr: '0x156a20'
+    size: 104
+    symbol: func_00156A20
+    status: asm
+    reason: claimed
+  - addr: '0x156a88'
+    size: 532
+    symbol: func_00156A88
+    status: asm
+    reason: claimed
+  - addr: '0x156ca0'
+    size: 192
+    symbol: func_00156CA0
+    status: asm
+    reason: claimed
+  - addr: '0x156f18'
+    size: 180
+    symbol: SetPose__Q210ModWeapons6Weaponi
+    status: source
+  - addr: '0x156fd0'
+    size: 3648
+    symbol: func_00156FD0
+    status: asm
+    reason: claimed
+  - addr: '0x157e10'
+    size: 144
+    symbol: func_00157E10
+    status: asm
+    reason: claimed
+  - addr: '0x157ea0'
+    size: 468
+    symbol: func_00157EA0
+    status: asm
+    reason: claimed
+  - addr: '0x1580f0'
+    size: 744
+    symbol: func_001580F0
+    status: asm
+    reason: claimed
+  - addr: '0x1583d8'
+    size: 652
+    symbol: func_001583D8
+    status: asm
+    reason: claimed
+  - addr: '0x158668'
+    size: 648
+    symbol: func_00158668
+    status: asm
+    reason: claimed
+  - addr: '0x1588f0'
+    size: 420
+    symbol: func_001588F0
+    status: asm
+    reason: claimed
+  - addr: '0x158ae0'
+    size: 924
+    symbol: func_00158AE0
+    status: asm
+    reason: claimed
+  externs:
+    D_0040F4D0: '0x40f4d0'
+    D_0040F510: '0x40f510'
+    D_0040F540: '0x40f540'
+    func_00156FD0: '0x156fd0'
+    func_00157EA0: '0x157ea0'
+    func_00159120: '0x159120'
+    func_0015A948: '0x15a948'
+    func_001D6E78: '0x1d6e78'
+- name: mod_weapons_tu_158f08
+  source: src/campaign/mod_weapons_tu_158f08.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave1-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x158f50'
+    size: 464
+    symbol: func_00158F50
+    status: asm
+    reason: claimed
+  - addr: '0x159198'
+    size: 1952
+    symbol: func_00159198
+    status: asm
+    reason: claimed
+  - addr: '0x159938'
+    size: 428
+    symbol: func_00159938
+    status: asm
+    reason: claimed
+  - addr: '0x159ae8'
+    size: 1456
+    symbol: func_00159AE8
+    status: asm
+    reason: claimed
+  - addr: '0x15a098'
+    size: 868
+    symbol: func_0015A098
+    status: asm
+    reason: claimed
+  - addr: '0x15a400'
+    size: 1068
+    symbol: func_0015A400
+    status: asm
+    reason: claimed
+  - addr: '0x15a830'
+    size: 160
+    symbol: func_0015A830
+    status: asm
+    reason: claimed
+  - addr: '0x15a990'
+    size: 208
+    symbol: func_0015A990
+    status: asm
+    reason: claimed
+  - addr: '0x15aa60'
+    size: 836
+    symbol: func_0015AA60
+    status: asm
+    reason: claimed
+  - addr: '0x15ada8'
+    size: 636
+    symbol: func_0015ADA8
+    status: asm
+    reason: claimed
+  - addr: '0x15b028'
+    size: 236
+    symbol: func_0015B028
+    status: asm
+    reason: claimed
+  - addr: '0x15b118'
+    size: 580
+    symbol: func_0015B118
+    status: asm
+    reason: claimed
+  - addr: '0x15b360'
+    size: 1424
+    symbol: func_0015B360
+    status: asm
+    reason: claimed
+  - addr: '0x15b8f8'
+    size: 388
+    symbol: func_0015B8F8
+    status: asm
+    reason: claimed
+  - addr: '0x15ba80'
+    size: 200
+    symbol: func_0015BA80
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_15d370
+  source: src/campaign/mod_weapons_tu_15d370.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave1-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x15d370'
+    size: 100
+    symbol: func_0015D370
+    status: asm
+    reason: claimed
+  - addr: '0x15d3e0'
+    size: 92
+    symbol: func_0015D3E0
+    status: asm
+    reason: claimed
+  - addr: '0x15d440'
+    size: 476
+    symbol: func_0015D440
+    status: asm
+    reason: claimed
+  - addr: '0x15d620'
+    size: 300
+    symbol: func_0015D620
+    status: asm
+    reason: claimed
+  - addr: '0x15d758'
+    size: 188
+    symbol: func_0015D758
+    status: asm
+    reason: claimed
+  - addr: '0x15d818'
+    size: 52
+    symbol: func_0015D818
+    status: asm
+    reason: claimed
+  - addr: '0x15d870'
+    size: 228
+    symbol: func_0015D870
+    status: asm
+    reason: claimed
