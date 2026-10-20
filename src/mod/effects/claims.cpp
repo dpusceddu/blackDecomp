@@ -4,3 +4,15 @@
 // Unmatched: 0x1afc80 timer start needs the original inline setter evaluation order.
 // Unmatched: 0x1afd18 timer advance differs in index register and address-operand order.
 // Unmatched: 0x1afee0 binding construction needs the original argument lifetimes.
+// Unmatched: 0x1b11a0 affine matrix operators retain different temporary lifetimes.
+// Unmatched: 0x1b1340 emitter scheduling needs the original matrix and child-call context.
+// Unmatched: 0x1b15a0 selector address operands remain in a different register order.
+// Unmatched: 0x1b1648 tagged-child traversal needs the original inline handle helper.
+// Unmatched: 0x1b1728 impact basis normalization has different vector temporaries.
+// Unmatched: 0x1b1848 nearest-sphere traversal differs in vector and iterator lifetimes.
+// Unmatched: 0x1b2078 material impact still differs in callback and scalar scheduling.
+// Unmatched: 0x1b2440 record installation needs the original lookup and initialization helpers.
+// Unmatched: 0x1b2630 nearest-record retirement differs in narrow-index/vector lifetimes.
+// Unmatched: 0x1b2710 record updates need the original visibility and matrix helpers.
+// Unmatched: 0x1b2910 record release differs in saved-register and pointer lifetimes.
+// Unmatched: 0x1b2988 record removal needs the original iterator branch shape.
