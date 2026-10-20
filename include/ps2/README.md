@@ -27,3 +27,10 @@ integer and `mtc1`; existing `BlackGame::X`/`Length3` retain their distinct exac
 Integer/128-bit and floating arguments occupy independent EE banks; source parameter order can still
 change scheduling. Preserve the verified per-unit flags and assembler choice. All code is GCC 2.95
 compatible; no C++11 language features are required.
+
+A controlled SN GCC 2.95.3 build 1.36 probe with `-O2 -G0 -snas` shows that a member
+returning a 12-byte POD (three 32-bit words) receives the hidden output pointer in A0,
+`this` in A1 and an explicit Actor pointer in A2. A free function returning that POD with
+explicit receiver and Actor pointers uses the same order. An explicit output-parameter
+method instead keeps `this` in A0, output in A1 and Actor in A2. These recipes are distinct;
+this control does not establish an ABI for non-POD classes or other compiler versions.
