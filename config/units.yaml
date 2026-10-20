@@ -47897,20 +47897,10 @@ units:
   - -ffunction-sections
   - -mvu0-use-vf0-vf16
   functions:
-  - addr: '0x13db40'
-    status: asm
   - addr: '0x13dba0'
     status: source
     symbol: Begin__Q213CampaignActor16OrientationStatePv
     size: 92
-  - addr: '0x13dc00'
-    status: asm
-  - addr: '0x13df58'
-    status: asm
-  - addr: '0x13eb00'
-    status: asm
-  - addr: '0x13ec38'
-    status: asm
 - name: auto_game_181ff0
   source: src/auto/game/181ff0.c
   origin: auto
@@ -47983,8 +47973,6 @@ units:
   - -snas
   - -ffunction-sections
   functions:
-  - addr: '0x13f618'
-    status: asm
   - addr: '0x13ffa0'
     status: source
     symbol: Event__Q216BlackPS2Campaign17ActorStateMachineiiUi
@@ -50531,3 +50519,68 @@ units:
     func_0035E750: '0x35e750'
     sscanf: '0x35d7b0'
     strcmp: '0x35ca74'
+- name: campaign_actor_13db40_wave7
+  source: src/campaign/actor_13db40_wave7.cpp
+  origin: C++ actor TU13DB40 full inventory
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x13db40'
+    status: asm
+    reason: unmatched
+  - addr: '0x13dc00'
+    status: asm
+    reason: unmatched
+  - addr: '0x13df58'
+    status: asm
+    reason: unmatched
+  - addr: '0x13eb00'
+    status: asm
+    reason: unmatched
+  - addr: '0x13ec38'
+    status: asm
+    reason: unmatched
+  - addr: '0x13ed98'
+    status: asm
+    reason: unmatched
+  - addr: '0x13ef28'
+    status: asm
+    reason: unmatched
+  - addr: '0x13f0d8'
+    status: asm
+    reason: unmatched
+  - addr: '0x13f160'
+    status: source
+    symbol: Update__Q215ActorInventory79InputAxes
+    size: 300
+  - addr: '0x13f328'
+    status: asm
+    reason: unmatched
+  - addr: '0x13f3e0'
+    status: asm
+    reason: unmatched
+  - addr: '0x13f618'
+    status: asm
+    reason: unmatched
+  - addr: '0x140008'
+    status: source
+    symbol: Clear__Q215ActorInventory712InputBinding
+    size: 60
+  - addr: '0x140068'
+    status: asm
+    reason: unmatched
+  - addr: '0x140468'
+    status: asm
+    reason: unmatched
+  - addr: '0x1404a8'
+    status: asm
+    reason: unmatched
+  - addr: '0x1407c8'
+    status: asm
+    reason: unmatched
+  externs:
+    D_0040F4D0: '0x40f4d0'
