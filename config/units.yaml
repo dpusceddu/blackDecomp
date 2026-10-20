@@ -47260,11 +47260,6 @@ units:
     size: 408
     status: source
     symbol: func_002F1BD8
-  - addr: '0x2f1eb0'
-    size: 496
-    status: asm
-    reason: registers
-    symbol: func_002F1EB0
   - addr: '0x2f20a0'
     size: 224
     status: source
@@ -50888,3 +50883,33 @@ units:
     symbol: PollPort__Q216CampaignGraphics10PadBackendi
     status: asm
     reason: unmatched native context
+- name: context_graph_constraint_registration
+  source: src/campaign/graph_constraint_registration.cpp
+  owner: context-graph
+  claim: context-wave7-graph
+  origin: kynapse
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fno-rtti
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2f1eb0'
+    size: 496
+    status: source
+    symbol: Register__22ConstraintRegistrationii
+  externs:
+    _22ConstraintRegistration$ConeClass: '0x451ac0'
+    _22ConstraintRegistration$ConstraintClass: '0x451778'
+    _22ConstraintRegistration$EuclidianClass: '0x451e08'
+    _22ConstraintRegistration$FleeClass: '0x451bd8'
+    _22ConstraintRegistration$PathCostClass: '0x452038'
+    _22ConstraintRegistration$ShortestClass: '0x451890'
+    _22ConstraintRegistration$SphereClass: '0x451cf0'
+    _22ConstraintRegistration$StealthClass: '0x4519a8'
+    _22ConstraintRegistration$ZeroClass: '0x451f20'
+    _vt$Q222ConstraintRegistration13HeuristicMeta: '0x3eca80'
+    _vt$Q222ConstraintRegistration14ConstraintMeta: '0x3e00c8'
+    _vt$Q222ConstraintRegistration17HeuristicMetaBase: '0x3e00b0'
