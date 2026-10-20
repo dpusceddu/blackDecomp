@@ -17341,8 +17341,8 @@ tus:
   confidence: exact
   evidence: [eh, join-hard, join-soft, shared-items]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 17 of 32 functions
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, --assembler=sn-min6]
+  flags_basis: matched 28 of 32 functions
   data:
     .rodata: ['0x406080', '0x406100']
     .data: ['0x3c7a24', '0x3e8950']

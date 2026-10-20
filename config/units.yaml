@@ -49429,3 +49429,105 @@ units:
     size: 300
     symbol: DrawPath__FP9QueryPath
     status: source
+- name: context_wave5_factory
+  source: src/context/behaviors_factory.cpp
+  origin: kynapse
+  owner: context-wave5-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2e0140'
+    size: 432
+    status: source
+    symbol: CreateEngine__11KaimFactoryPQ211KaimFactory10InitConfigPQ211KaimFactory10ObjectRoot
+  - addr: '0x2e02f0'
+    size: 284
+    status: source
+    symbol: GetTeamDefinition__11KaimFactoryPQ211KaimFactory6EnginePCc
+  - addr: '0x2e0410'
+    size: 832
+    status: asm
+    reason: lifetime
+    symbol: func_002E0410
+  - addr: '0x2e0750'
+    size: 1004
+    status: asm
+    reason: lifetime
+    symbol: func_002E0750
+  - addr: '0x2e0b40'
+    size: 236
+    status: source
+    symbol: MakeEntityDefinition__11KaimFactoryPCc
+  - addr: '0x2e0c30'
+    size: 236
+    status: source
+    symbol: MakeTeamDefinition__11KaimFactoryPCc
+  - addr: '0x2e0d20'
+    size: 476
+    status: asm
+    reason: lifetime
+    symbol: func_002E0D20
+  - addr: '0x2e0f00'
+    size: 312
+    status: source
+    symbol: DestroyTeam__11KaimFactoryPQ211KaimFactory4Team
+  - addr: '0x2e1118'
+    size: 132
+    status: source
+    symbol: UpdateAll__11KaimFactoryf
+  - addr: '0x2e12b0'
+    size: 204
+    status: source
+    symbol: DestroyEntity__11KaimFactoryPQ211KaimFactory6Entity
+  - addr: '0x2e1380'
+    size: 52
+    status: source
+    symbol: DeleteEntity__11KaimFactoryPQ211KaimFactory6Entity
+  - addr: '0x2e1438'
+    size: 52
+    status: source
+    symbol: DeleteTeam__11KaimFactoryPQ211KaimFactory4Team
+  - addr: '0x2e1470'
+    size: 64
+    status: asm
+    reason: lifetime
+    symbol: func_002E1470
+  - addr: '0x2e14b0'
+    size: 40
+    status: source
+    symbol: Method3__11KaimFactoryPQ211KaimFactory6EntityPv
+  - addr: '0x2e14d8'
+    size: 44
+    status: source
+    symbol: Method4__11KaimFactoryPQ211KaimFactory6EntityUc
+  externs:
+    _11KaimFactory$classKey: '0x4060e8'
+    _11KaimFactory$gCheckTable: '0x3c7a28'
+    _11KaimFactory$gEngine: '0x3c9ed4'
+    _11KaimFactory$gEngineSlots: '0x45129c'
+    _11KaimFactory$gEnginesUsed: '0x3c87d4'
+    _11KaimFactory$gObjectList: '0x3c87d8'
+    _11KaimFactory$gSettings: '0x451228'
+    __throw: '0x292b40'
+    _vt$Q211KaimFactory10ObjectRoot: '0x3e0040'
+    _vt$Q211KaimFactory14TeamDefinition: '0x3e8448'
+    _vt$Q211KaimFactory16EntityDefinition: '0x3e8460'
+    _vt$Q211KaimFactoryt8Iterator1ZPQ211KaimFactory6Entity: '0x3e0028'
+    func_002E4B98: '0x2e4b98'
+    func_002EA898: '0x2ea898'
+    func_002EAD58: '0x2ead58'
+    func_002EB450: '0x2eb450'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
