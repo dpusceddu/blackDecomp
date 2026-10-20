@@ -50125,3 +50125,33 @@ units:
     _vt$Q24Kaimt10CMetaClass2ZQ24Kaim5CTeamZPFUiPCc_PQ24Kaim5CTeam: '0x3ebb48'
     strcmp: '0x35ca74'
     strcpy: '0x35cbc0'
+- name: campaign_game_path_2899a0
+  source: src/campaign/graphics_game_path_2899a0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x2899a0'
+    symbol: func_002899A0
+    size: 316
+    status: asm
+    reason: claimed
+- name: campaign_game_path_289ae0
+  source: src/campaign/graphics_game_path_289ae0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x289ae0'
+    symbol: func_00289AE0
+    size: 304
+    status: asm
+    reason: claimed
