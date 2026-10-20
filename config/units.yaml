@@ -52440,9 +52440,8 @@ units:
   functions:
   - addr: '0x15d248'
     size: 64
-    symbol: func_0015D248
-    status: asm
-    reason: claimed
+    symbol: Definition__Q210ModWeapons20WeaponManagerMethodsSci
+    status: source
 - name: mod_weapons_tu_15d2e8
   source: src/campaign/mod_weapons_tu_15d2e8.cpp
   origin: game
