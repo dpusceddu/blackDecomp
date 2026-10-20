@@ -17007,7 +17007,7 @@ tus:
   evidence: [eh, ctor-end]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas, -fbyte-bool]
-  flags_basis: matched 1 of 2 functions
+  flags_basis: matched 2 of 2 functions
 - name: kynapse/tu_2d86a8
   kind: object
   library: kynapse
