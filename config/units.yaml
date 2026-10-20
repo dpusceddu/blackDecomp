@@ -5180,43 +5180,6 @@ units:
     symbol: func_0015BB90
     size: 72
     status: source
-- name: auto_game_15be08
-  source: src/auto/game/15be08.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x15be08'
-    symbol: func_0015BE08
-    size: 104
-    status: source
-- name: tuf_15bf38
-  source: src/tu/tu_15bbd8.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x15bf38'
-    symbol: func_0015BF38
-    size: 24
-    status: source
-  - addr: '0x15c378'
-    symbol: func_0015C378
-    size: 80
-    status: source
-  - addr: '0x15c920'
-    symbol: func_0015C920
-    size: 80
-    status: source
-  - addr: '0x15cec8'
-    symbol: func_0015CEC8
-    size: 40
-    status: source
 - name: auto_unclassified_15d210
   source: src/auto/unclassified/15d210.c
   origin: auto
@@ -52109,3 +52072,214 @@ units:
     size: 100
     status: asm
     reason: campaign
+- name: mod_weapons_tu_15bbd8
+  source: src/campaign/mod_weapons_tu_15bbd8.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave2-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x15bbd8'
+    size: 556
+    symbol: func_0015BBD8
+    status: asm
+    reason: claimed
+  - addr: '0x15c1a8'
+    size: 460
+    symbol: func_0015C1A8
+    status: asm
+    reason: claimed
+  - addr: '0x15c3c8'
+    size: 1368
+    symbol: func_0015C3C8
+    status: asm
+    reason: claimed
+  - addr: '0x15cc40'
+    size: 644
+    symbol: func_0015CC40
+    status: asm
+    reason: claimed
+  - addr: '0x15cef0'
+    size: 240
+    symbol: func_0015CEF0
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_154fd8
+  source: src/campaign/mod_weapons_tu_154fd8.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave2-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x154fd8'
+    size: 64
+    symbol: func_00154FD8
+    status: asm
+    reason: claimed
+  - addr: '0x155018'
+    size: 112
+    symbol: func_00155018
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_1551c8
+  source: src/campaign/mod_weapons_tu_1551c8.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave2-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1551c8'
+    size: 64
+    symbol: func_001551C8
+    status: asm
+    reason: claimed
+- name: mod_weapons_tu_155238
+  source: src/campaign/mod_weapons_tu_155238.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave2-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x155238'
+    size: 424
+    symbol: func_00155238
+    status: asm
+    reason: claimed
+  - addr: '0x1553e0'
+    size: 760
+    symbol: func_001553E0
+    status: asm
+    reason: claimed
+  - addr: '0x1556d8'
+    size: 340
+    symbol: func_001556D8
+    status: asm
+    reason: claimed
+  - addr: '0x155830'
+    size: 728
+    symbol: func_00155830
+    status: asm
+    reason: claimed
+- name: mod_weapons_inventory_inventory
+  source: src/campaign/mod_weapons_inventory_inventory.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave2-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  - -ffunction-sections
+  externs:
+    Release__Q210ModWeapons16InventoryManagerPQ210ModWeapons6Weapon: '0x15cfe0'
+    SetPose__Q210ModWeapons6Weaponi: '0x156f18'
+    func_00107D20: '0x107d20'
+    func_00156E70: '0x156e70'
+    func_00156E80: '0x156e80'
+    func_0015A948: '0x15a948'
+  functions:
+  - addr: '0x15bf38'
+    size: 24
+    symbol: Current__Q210ModWeapons9Inventory
+    status: source
+  - addr: '0x15be08'
+    size: 104
+    symbol: Switch__Q210ModWeapons9Inventory
+    status: source
+  - addr: '0x15c378'
+    size: 80
+    symbol: Remaining__Q210ModWeapons9Inventory
+    status: source
+  - addr: '0x15c920'
+    size: 80
+    symbol: Eligible__Q210ModWeapons9InventorySc
+    status: source
+  - addr: '0x15cec8'
+    size: 40
+    symbol: ClearCatalog__Q210ModWeapons16InventoryManager
+    status: source
+  - addr: '0x15be70'
+    size: 200
+    symbol: Select__Q210ModWeapons9Inventory
+    status: source
+  - addr: '0x15bf50'
+    size: 312
+    symbol: Force__Q210ModWeapons9InventoryPQ210ModWeapons6Weapon
+    status: source
+  - addr: '0x15c088'
+    size: 120
+    symbol: Allocate__Q210ModWeapons9InventorySc
+    status: source
+  - addr: '0x15c100'
+    size: 168
+    symbol: Clear__Q210ModWeapons9Inventory
+    status: source
+- name: mod_weapons_inventory_manager
+  source: src/campaign/mod_weapons_inventory_manager.cpp
+  origin: game
+  owner: mod-weapons
+  claim: mod-wave2-weapons
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -mvu0-use-vf0-vf31
+  - -ffunction-sections
+  - --assembler=sn-min6
+  externs:
+    func_00107B78: '0x107b78'
+    func_00107D20: '0x107d20'
+    func_001561F8: '0x1561f8'
+    func_00156450: '0x156450'
+    func_00158F08: '0x158f08'
+    func_0015D3D8: '0x15d3d8'
+    func_0015D440: '0x15d440'
+    func_001632E0: '0x1632e0'
+  functions:
+  - addr: '0x15c970'
+    size: 316
+    symbol: Allocate__Q210ModWeapons16InventoryManager
+    status: source
+  - addr: '0x15cab0'
+    size: 240
+    symbol: Reset__Q210ModWeapons16InventoryManager
+    status: source
+  - addr: '0x15cba0'
+    size: 160
+    symbol: Tick__Q210ModWeapons16InventoryManager
+    status: source
+  - addr: '0x15cfe0'
+    size: 124
+    symbol: Release__Q210ModWeapons16InventoryManagerPQ210ModWeapons6Weapon
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
