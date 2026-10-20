@@ -3429,8 +3429,8 @@ tus:
   confidence: low
   evidence: [proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, --assembler=sn-min6, -fbyte-bool]
+  flags_basis: matched 1 of 1 functions
 - name: tu_15d210
   kind: isolated
   library: game
