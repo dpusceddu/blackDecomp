@@ -4,7 +4,13 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_PadBackend {
-    u8 opaque_0[576];
+    u8 opaque_0[552];
+    u32 field_228; /* PS2 +0x228 */
+    u32 field_22C; /* PS2 +0x22C */
+    u32 field_230; /* PS2 +0x230 */
+    u32 field_234; /* PS2 +0x234 */
+    u32 field_238; /* PS2 +0x238 */
+    u32 field_23C; /* PS2 +0x23C */
     void * field_240; /* PS2 +0x240 */
     void * field_244; /* PS2 +0x244 */
     void * field_248; /* PS2 +0x248 */
@@ -13,7 +19,23 @@ typedef struct Recovered_PadBackend {
     void * field_254; /* PS2 +0x254 */
     void * field_258; /* PS2 +0x258 */
     void * field_25C; /* PS2 +0x25C */
+    u32 field_260; /* PS2 +0x260 */
+    u32 field_264; /* PS2 +0x264 */
+    u32 field_268; /* PS2 +0x268 */
+    u32 field_26C; /* PS2 +0x26C */
+    u8 opaque_270[40];
+    u32 field_298; /* PS2 +0x298 */
+    u32 field_29C; /* PS2 +0x29C */
+    u8 field_2A0; /* PS2 +0x2A0 */
+    u8 opaque_2A1[3];
+    s32 field_2A4; /* PS2 +0x2A4 */
 } Recovered_PadBackend;
+typedef char assert_Recovered_PadBackend_228[(((int)&((Recovered_PadBackend *)0)->field_228) == 552) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_22C[(((int)&((Recovered_PadBackend *)0)->field_22C) == 556) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_230[(((int)&((Recovered_PadBackend *)0)->field_230) == 560) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_234[(((int)&((Recovered_PadBackend *)0)->field_234) == 564) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_238[(((int)&((Recovered_PadBackend *)0)->field_238) == 568) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_23C[(((int)&((Recovered_PadBackend *)0)->field_23C) == 572) ? 1 : -1];
 typedef char assert_Recovered_PadBackend_240[(((int)&((Recovered_PadBackend *)0)->field_240) == 576) ? 1 : -1];
 typedef char assert_Recovered_PadBackend_244[(((int)&((Recovered_PadBackend *)0)->field_244) == 580) ? 1 : -1];
 typedef char assert_Recovered_PadBackend_248[(((int)&((Recovered_PadBackend *)0)->field_248) == 584) ? 1 : -1];
@@ -21,4 +43,12 @@ typedef char assert_Recovered_PadBackend_250[(((int)&((Recovered_PadBackend *)0)
 typedef char assert_Recovered_PadBackend_254[(((int)&((Recovered_PadBackend *)0)->field_254) == 596) ? 1 : -1];
 typedef char assert_Recovered_PadBackend_258[(((int)&((Recovered_PadBackend *)0)->field_258) == 600) ? 1 : -1];
 typedef char assert_Recovered_PadBackend_25C[(((int)&((Recovered_PadBackend *)0)->field_25C) == 604) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_260[(((int)&((Recovered_PadBackend *)0)->field_260) == 608) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_264[(((int)&((Recovered_PadBackend *)0)->field_264) == 612) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_268[(((int)&((Recovered_PadBackend *)0)->field_268) == 616) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_26C[(((int)&((Recovered_PadBackend *)0)->field_26C) == 620) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_298[(((int)&((Recovered_PadBackend *)0)->field_298) == 664) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_29C[(((int)&((Recovered_PadBackend *)0)->field_29C) == 668) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_2A0[(((int)&((Recovered_PadBackend *)0)->field_2A0) == 672) ? 1 : -1];
+typedef char assert_Recovered_PadBackend_2A4[(((int)&((Recovered_PadBackend *)0)->field_2A4) == 676) ? 1 : -1];
 #endif

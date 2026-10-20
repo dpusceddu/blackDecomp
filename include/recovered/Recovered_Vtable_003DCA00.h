@@ -9,11 +9,13 @@ typedef struct Recovered_Vtable_003DCA00 {
     f32 field_C; /* PS2 +0xC */
     u8 opaque_10[108];
     void * field_7C; /* PS2 +0x7C */
-    u8 opaque_80[24];
-    s32 field_98; /* PS2 +0x98 */
+    u8 opaque_80[16];
+    u32 field_90; /* PS2 +0x90 */
+    u32 field_94; /* PS2 +0x94 */
 } Recovered_Vtable_003DCA00;
 typedef char assert_Recovered_Vtable_003DCA00_8[(((int)&((Recovered_Vtable_003DCA00 *)0)->field_8) == 8) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DCA00_C[(((int)&((Recovered_Vtable_003DCA00 *)0)->field_C) == 12) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DCA00_7C[(((int)&((Recovered_Vtable_003DCA00 *)0)->field_7C) == 124) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DCA00_98[(((int)&((Recovered_Vtable_003DCA00 *)0)->field_98) == 152) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003DCA00_90[(((int)&((Recovered_Vtable_003DCA00 *)0)->field_90) == 144) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003DCA00_94[(((int)&((Recovered_Vtable_003DCA00 *)0)->field_94) == 148) ? 1 : -1];
 #endif

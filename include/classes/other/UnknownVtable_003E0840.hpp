@@ -12,8 +12,6 @@ struct UnknownVtable_003E0840 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0004() { return *(float *)((unsigned char *)this + 0x4); }
     // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_0018() { return *(unsigned int *)((unsigned char *)this + 0x18); }
     // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
@@ -60,7 +58,7 @@ struct UnknownVtable_003E0840 {
     int Function_001EDC80();
     // 0x001EDD80: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EDD80();
-    // 0x001EE0B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EE0B0: UNVERIFIED signature (include/campaign/graphics/sound_envelopes.hpp).
     int Function_001EE0B0();
     // 0x001EE150: UNVERIFIED signature (src/tu/tu_1ed9c8.c).
     unsigned int Function_001EE150();

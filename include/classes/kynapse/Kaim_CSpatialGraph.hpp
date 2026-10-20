@@ -12,6 +12,7 @@ namespace BlackPS2Classes {
 // RTTI base: Kaim_CObject; offset 0; public nonvirtual.
 struct Kaim_CSpatialGraph {
     typedef Hierarchy_Kaim_CSpatialGraph Hierarchy; // Semantic bases, not an object layout.
+    // Constructor identity: 0x002F5CF8; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x002FB4D8.
     // Destructor identity: 0x002FB4D8.
     // Field references address the original object; sizeof(this view) is not the allocation size.

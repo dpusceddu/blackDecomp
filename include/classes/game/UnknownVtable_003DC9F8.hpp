@@ -16,14 +16,18 @@ struct UnknownVtable_003DC9F8 {
     inline float & Field_000C() { return *(float *)((unsigned char *)this + 0xC); }
     // 0x7C: UNVERIFIED type; PS2 access offset.
     inline void * & Field_007C() { return *(void * *)((unsigned char *)this + 0x7C); }
-    // 0x98: UNVERIFIED type; PS2 access offset.
+    // 0x90: UNVERIFIED type; PS2 access offset.
+    inline unsigned int & Field_0090() { return *(unsigned int *)((unsigned char *)this + 0x90); }
+    // 0x94: UNVERIFIED type; PS2 access offset.
+    inline unsigned int & Field_0094() { return *(unsigned int *)((unsigned char *)this + 0x94); }
+    // 0x98: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0098() { return *(int *)((unsigned char *)this + 0x98); }
     // 0x0013EE50: UNVERIFIED signature (src/tu/13ee20.c).
     unsigned int Function_0013EE50();
     // 0x0013EE60: UNVERIFIED signature (src/tu/13ee20.c).
     unsigned int Function_0013EE60();
-    // 0x0013F160: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_0013F160();
+    // 0x0013F160: UNVERIFIED signature (src/campaign/actor_13db40_wave7.cpp).
+    void Function_0013F160();
     // 0x0013F290: UNVERIFIED signature (src/tu/13f290.c).
     unsigned int Function_0013F290();
     // 0x0013F2E8: UNVERIFIED signature (src/tu/13f290.c).
@@ -35,7 +39,7 @@ struct UnknownVtable_003DC9F8 {
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
     struct VirtualInterface0 {
         // slot 0, table+0x8, this delta 0, function 0x0013F160; UNVERIFIED signature.
-        virtual unsigned int Slot000();
+        virtual void Slot000();
         // slot 1, table+0x10, this delta 0, function 0x0013F2E8; UNVERIFIED signature.
         virtual int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x0013F308; UNVERIFIED signature.

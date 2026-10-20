@@ -14,7 +14,9 @@ typedef struct Recovered_MovementModeBase {
     u8 field_38; /* PS2 +0x38 */
     u8 opaque_39[3];
     f32 field_3C; /* PS2 +0x3C */
-    u8 opaque_40[16];
+    u8 opaque_40[8];
+    f32 field_48; /* PS2 +0x48 */
+    f32 field_4C; /* PS2 +0x4C */
     u8 field_50; /* PS2 +0x50 */
     u8 opaque_51[15];
     s128 field_60; /* PS2 +0x60 */
@@ -28,6 +30,8 @@ typedef char assert_Recovered_MovementModeBase_30[(((int)&((Recovered_MovementMo
 typedef char assert_Recovered_MovementModeBase_34[(((int)&((Recovered_MovementModeBase *)0)->field_34) == 52) ? 1 : -1];
 typedef char assert_Recovered_MovementModeBase_38[(((int)&((Recovered_MovementModeBase *)0)->field_38) == 56) ? 1 : -1];
 typedef char assert_Recovered_MovementModeBase_3C[(((int)&((Recovered_MovementModeBase *)0)->field_3C) == 60) ? 1 : -1];
+typedef char assert_Recovered_MovementModeBase_48[(((int)&((Recovered_MovementModeBase *)0)->field_48) == 72) ? 1 : -1];
+typedef char assert_Recovered_MovementModeBase_4C[(((int)&((Recovered_MovementModeBase *)0)->field_4C) == 76) ? 1 : -1];
 typedef char assert_Recovered_MovementModeBase_50[(((int)&((Recovered_MovementModeBase *)0)->field_50) == 80) ? 1 : -1];
 typedef char assert_Recovered_MovementModeBase_60[(((int)&((Recovered_MovementModeBase *)0)->field_60) == 96) ? 1 : -1];
 typedef char assert_Recovered_MovementModeBase_70[(((int)&((Recovered_MovementModeBase *)0)->field_70) == 112) ? 1 : -1];

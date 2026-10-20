@@ -4,12 +4,8 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Vtable_003E0890 {
-    s32 field_0; /* PS2 +0x0 */
-    f32 field_4; /* PS2 +0x4 */
-    f32 field_8; /* PS2 +0x8 */
-    f32 field_C; /* PS2 +0xC */
-    f32 field_10; /* PS2 +0x10 */
-    f32 field_14; /* PS2 +0x14 */
+    u32 field_0; /* PS2 +0x0 */
+    u8 opaque_4[20];
     u32 field_18; /* PS2 +0x18 */
     u32 field_1C; /* PS2 +0x1C */
     f32 field_20; /* PS2 +0x20 */
@@ -31,15 +27,8 @@ typedef struct Recovered_Vtable_003E0890 {
     u8 field_4B; /* PS2 +0x4B */
     u8 field_4C; /* PS2 +0x4C */
     u8 field_4D; /* PS2 +0x4D */
-    u8 opaque_4E[2];
-    void * field_50; /* PS2 +0x50 */
 } Recovered_Vtable_003E0890;
 typedef char assert_Recovered_Vtable_003E0890_0[(((int)&((Recovered_Vtable_003E0890 *)0)->field_0) == 0) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E0890_4[(((int)&((Recovered_Vtable_003E0890 *)0)->field_4) == 4) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E0890_8[(((int)&((Recovered_Vtable_003E0890 *)0)->field_8) == 8) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E0890_C[(((int)&((Recovered_Vtable_003E0890 *)0)->field_C) == 12) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E0890_10[(((int)&((Recovered_Vtable_003E0890 *)0)->field_10) == 16) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E0890_14[(((int)&((Recovered_Vtable_003E0890 *)0)->field_14) == 20) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E0890_18[(((int)&((Recovered_Vtable_003E0890 *)0)->field_18) == 24) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E0890_1C[(((int)&((Recovered_Vtable_003E0890 *)0)->field_1C) == 28) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E0890_20[(((int)&((Recovered_Vtable_003E0890 *)0)->field_20) == 32) ? 1 : -1];
@@ -60,5 +49,4 @@ typedef char assert_Recovered_Vtable_003E0890_4A[(((int)&((Recovered_Vtable_003E
 typedef char assert_Recovered_Vtable_003E0890_4B[(((int)&((Recovered_Vtable_003E0890 *)0)->field_4B) == 75) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E0890_4C[(((int)&((Recovered_Vtable_003E0890 *)0)->field_4C) == 76) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E0890_4D[(((int)&((Recovered_Vtable_003E0890 *)0)->field_4D) == 77) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E0890_50[(((int)&((Recovered_Vtable_003E0890 *)0)->field_50) == 80) ? 1 : -1];
 #endif

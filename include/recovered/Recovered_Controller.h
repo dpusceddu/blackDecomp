@@ -4,10 +4,29 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Controller {
-    u8 opaque_0[48];
+    u8 opaque_0[4];
+    s32 field_4; /* PS2 +0x4 */
+    void * field_8; /* PS2 +0x8 */
+    u8 field_C; /* PS2 +0xC */
+    u8 opaque_D[35];
     s32 field_30; /* PS2 +0x30 */
     u8 field_34; /* PS2 +0x34 */
-    u8 opaque_35[71];
+    u8 opaque_35[17];
+    u8 field_46; /* PS2 +0x46 */
+    u8 field_47; /* PS2 +0x47 */
+    u8 field_48; /* PS2 +0x48 */
+    u8 field_49; /* PS2 +0x49 */
+    u8 field_4A; /* PS2 +0x4A */
+    u8 opaque_4B[1];
+    u32 field_4C; /* PS2 +0x4C */
+    u32 field_50; /* PS2 +0x50 */
+    u32 field_54; /* PS2 +0x54 */
+    u32 field_58; /* PS2 +0x58 */
+    u32 field_5C; /* PS2 +0x5C */
+    u32 field_60; /* PS2 +0x60 */
+    u32 field_64; /* PS2 +0x64 */
+    u32 field_68; /* PS2 +0x68 */
+    u8 opaque_6C[16];
     void * field_7C; /* PS2 +0x7C */
     u8 opaque_80[16];
     s32 field_90; /* PS2 +0x90 */
@@ -21,11 +40,30 @@ typedef struct Recovered_Controller {
     s32 field_BC; /* PS2 +0xBC */
     u8 opaque_C0[1];
     u8 field_C1; /* PS2 +0xC1 */
-    u8 opaque_C2[590];
+    u8 opaque_C2[30];
+    f32 field_E0; /* PS2 +0xE0 */
+    f32 field_E4; /* PS2 +0xE4 */
+    u8 opaque_E8[552];
     void * field_310; /* PS2 +0x310 */
 } Recovered_Controller;
+typedef char assert_Recovered_Controller_4[(((int)&((Recovered_Controller *)0)->field_4) == 4) ? 1 : -1];
+typedef char assert_Recovered_Controller_8[(((int)&((Recovered_Controller *)0)->field_8) == 8) ? 1 : -1];
+typedef char assert_Recovered_Controller_C[(((int)&((Recovered_Controller *)0)->field_C) == 12) ? 1 : -1];
 typedef char assert_Recovered_Controller_30[(((int)&((Recovered_Controller *)0)->field_30) == 48) ? 1 : -1];
 typedef char assert_Recovered_Controller_34[(((int)&((Recovered_Controller *)0)->field_34) == 52) ? 1 : -1];
+typedef char assert_Recovered_Controller_46[(((int)&((Recovered_Controller *)0)->field_46) == 70) ? 1 : -1];
+typedef char assert_Recovered_Controller_47[(((int)&((Recovered_Controller *)0)->field_47) == 71) ? 1 : -1];
+typedef char assert_Recovered_Controller_48[(((int)&((Recovered_Controller *)0)->field_48) == 72) ? 1 : -1];
+typedef char assert_Recovered_Controller_49[(((int)&((Recovered_Controller *)0)->field_49) == 73) ? 1 : -1];
+typedef char assert_Recovered_Controller_4A[(((int)&((Recovered_Controller *)0)->field_4A) == 74) ? 1 : -1];
+typedef char assert_Recovered_Controller_4C[(((int)&((Recovered_Controller *)0)->field_4C) == 76) ? 1 : -1];
+typedef char assert_Recovered_Controller_50[(((int)&((Recovered_Controller *)0)->field_50) == 80) ? 1 : -1];
+typedef char assert_Recovered_Controller_54[(((int)&((Recovered_Controller *)0)->field_54) == 84) ? 1 : -1];
+typedef char assert_Recovered_Controller_58[(((int)&((Recovered_Controller *)0)->field_58) == 88) ? 1 : -1];
+typedef char assert_Recovered_Controller_5C[(((int)&((Recovered_Controller *)0)->field_5C) == 92) ? 1 : -1];
+typedef char assert_Recovered_Controller_60[(((int)&((Recovered_Controller *)0)->field_60) == 96) ? 1 : -1];
+typedef char assert_Recovered_Controller_64[(((int)&((Recovered_Controller *)0)->field_64) == 100) ? 1 : -1];
+typedef char assert_Recovered_Controller_68[(((int)&((Recovered_Controller *)0)->field_68) == 104) ? 1 : -1];
 typedef char assert_Recovered_Controller_7C[(((int)&((Recovered_Controller *)0)->field_7C) == 124) ? 1 : -1];
 typedef char assert_Recovered_Controller_90[(((int)&((Recovered_Controller *)0)->field_90) == 144) ? 1 : -1];
 typedef char assert_Recovered_Controller_A0[(((int)&((Recovered_Controller *)0)->field_A0) == 160) ? 1 : -1];
@@ -35,5 +73,7 @@ typedef char assert_Recovered_Controller_B8[(((int)&((Recovered_Controller *)0)-
 typedef char assert_Recovered_Controller_B9[(((int)&((Recovered_Controller *)0)->field_B9) == 185) ? 1 : -1];
 typedef char assert_Recovered_Controller_BC[(((int)&((Recovered_Controller *)0)->field_BC) == 188) ? 1 : -1];
 typedef char assert_Recovered_Controller_C1[(((int)&((Recovered_Controller *)0)->field_C1) == 193) ? 1 : -1];
+typedef char assert_Recovered_Controller_E0[(((int)&((Recovered_Controller *)0)->field_E0) == 224) ? 1 : -1];
+typedef char assert_Recovered_Controller_E4[(((int)&((Recovered_Controller *)0)->field_E4) == 228) ? 1 : -1];
 typedef char assert_Recovered_Controller_310[(((int)&((Recovered_Controller *)0)->field_310) == 784) ? 1 : -1];
 #endif

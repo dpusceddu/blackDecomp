@@ -6,9 +6,6 @@
 typedef struct Recovered_QueryGraph {
     u8 opaque_0[4];
     s32 field_4; /* PS2 +0x4 */
-    u8 opaque_8[40];
-    s32 field_30; /* PS2 +0x30 */
 } Recovered_QueryGraph;
 typedef char assert_Recovered_QueryGraph_4[(((int)&((Recovered_QueryGraph *)0)->field_4) == 4) ? 1 : -1];
-typedef char assert_Recovered_QueryGraph_30[(((int)&((Recovered_QueryGraph *)0)->field_30) == 48) ? 1 : -1];
 #endif

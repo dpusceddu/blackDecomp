@@ -4,7 +4,9 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_CampaignGraphics_Controller {
-    u8 opaque_0[12];
+    u8 opaque_0[4];
+    s32 field_4; /* PS2 +0x4 */
+    u8 opaque_8[4];
     u8 field_C; /* PS2 +0xC */
     u8 field_D; /* PS2 +0xD */
     u8 opaque_E[28];
@@ -16,7 +18,13 @@ typedef struct Recovered_CampaignGraphics_Controller {
     u8 field_2F; /* PS2 +0x2F */
     u8 field_30; /* PS2 +0x30 */
     u8 field_31; /* PS2 +0x31 */
-    u8 opaque_32[26];
+    u8 opaque_32[20];
+    u8 field_46; /* PS2 +0x46 */
+    u8 field_47; /* PS2 +0x47 */
+    u8 field_48; /* PS2 +0x48 */
+    u8 field_49; /* PS2 +0x49 */
+    u8 field_4A; /* PS2 +0x4A */
+    u8 opaque_4B[1];
     f32 field_4C; /* PS2 +0x4C */
     f32 field_50; /* PS2 +0x50 */
     f32 field_54; /* PS2 +0x54 */
@@ -44,6 +52,7 @@ typedef struct Recovered_CampaignGraphics_Controller {
     s32 field_E8; /* PS2 +0xE8 */
     s32 field_EC; /* PS2 +0xEC */
 } Recovered_CampaignGraphics_Controller;
+typedef char assert_Recovered_CampaignGraphics_Controller_4[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_4) == 4) ? 1 : -1];
 typedef char assert_Recovered_CampaignGraphics_Controller_C[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_C) == 12) ? 1 : -1];
 typedef char assert_Recovered_CampaignGraphics_Controller_D[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_D) == 13) ? 1 : -1];
 typedef char assert_Recovered_CampaignGraphics_Controller_2A[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_2A) == 42) ? 1 : -1];
@@ -54,6 +63,11 @@ typedef char assert_Recovered_CampaignGraphics_Controller_2E[(((int)&((Recovered
 typedef char assert_Recovered_CampaignGraphics_Controller_2F[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_2F) == 47) ? 1 : -1];
 typedef char assert_Recovered_CampaignGraphics_Controller_30[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_30) == 48) ? 1 : -1];
 typedef char assert_Recovered_CampaignGraphics_Controller_31[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_31) == 49) ? 1 : -1];
+typedef char assert_Recovered_CampaignGraphics_Controller_46[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_46) == 70) ? 1 : -1];
+typedef char assert_Recovered_CampaignGraphics_Controller_47[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_47) == 71) ? 1 : -1];
+typedef char assert_Recovered_CampaignGraphics_Controller_48[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_48) == 72) ? 1 : -1];
+typedef char assert_Recovered_CampaignGraphics_Controller_49[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_49) == 73) ? 1 : -1];
+typedef char assert_Recovered_CampaignGraphics_Controller_4A[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_4A) == 74) ? 1 : -1];
 typedef char assert_Recovered_CampaignGraphics_Controller_4C[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_4C) == 76) ? 1 : -1];
 typedef char assert_Recovered_CampaignGraphics_Controller_50[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_50) == 80) ? 1 : -1];
 typedef char assert_Recovered_CampaignGraphics_Controller_54[(((int)&((Recovered_CampaignGraphics_Controller *)0)->field_54) == 84) ? 1 : -1];

@@ -11,17 +11,7 @@ namespace BlackPS2Classes {
 struct UnknownVtable_003E0888 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0000() { return *(int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0004() { return *(float *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
-    inline float & Field_000C() { return *(float *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0014() { return *(float *)((unsigned char *)this + 0x14); }
+    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x18: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0018() { return *(unsigned int *)((unsigned char *)this + 0x18); }
     // 0x1C: UNVERIFIED type; PS2 access offset.
@@ -62,17 +52,15 @@ struct UnknownVtable_003E0888 {
     inline unsigned char & Field_004C() { return *(unsigned char *)((unsigned char *)this + 0x4C); }
     // 0x4D: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_004D() { return *(unsigned char *)((unsigned char *)this + 0x4D); }
-    // 0x50: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0050() { return *(void * *)((unsigned char *)this + 0x50); }
     // 0x001ED830: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001ED830();
     // 0x001EDC80: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EDC80();
     // 0x001EDD80: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EDD80();
-    // 0x001EDDE0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EDDE0: UNVERIFIED signature (include/campaign/graphics/sound_envelopes.hpp).
     int Function_001EDDE0(unsigned int argument0, float argument1);
-    // 0x001EDE98: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EDE98: UNVERIFIED signature (include/campaign/graphics/sound_envelopes.hpp).
     int Function_001EDE98();
     // 0x001EE270: UNVERIFIED signature (src/tu/tu_1ed9c8.c).
     unsigned int Function_001EE270();

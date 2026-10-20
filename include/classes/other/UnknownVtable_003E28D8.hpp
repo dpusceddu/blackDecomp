@@ -36,8 +36,8 @@ struct UnknownVtable_003E28D8 {
     int Function_00289998();
     // 0x002899A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002899A0(void * argument0, void * argument1, void * argument2, unsigned int argument3);
-    // 0x00289AE0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00289AE0(void * argument0, void * argument1, unsigned int argument2, void * argument3);
+    // 0x00289AE0: UNVERIFIED signature (include/campaign/graphics/game_path.hpp).
+    int Function_00289AE0(void * argument0, void * argument1, int argument2, unsigned char * argument3);
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
     void Function_002E4CA8();
     // 0x002F4390: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
@@ -89,7 +89,7 @@ struct UnknownVtable_003E28D8 {
         // slot 6, table+0x38, this delta 0, function 0x003912B8; UNVERIFIED signature.
         virtual int Slot006();
         // slot 7, table+0x40, this delta 0, function 0x00289AE0; UNVERIFIED signature.
-        virtual int Slot007(void * argument0, void * argument1, unsigned int argument2, void * argument3);
+        virtual int Slot007(void * argument0, void * argument1, int argument2, unsigned char * argument3);
         // slot 8, table+0x48, this delta 0, function 0x00289998; UNVERIFIED signature.
         virtual int Slot008();
         // slot 9, table+0x50, this delta 0, function 0x00391360; UNVERIFIED signature.
