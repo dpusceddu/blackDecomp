@@ -42625,126 +42625,157 @@ units:
     symbol: func_001B7758
     status: asm
     reason: claimed
+    size: 380
   - addr: '0x1b78d8'
     symbol: func_001B78D8
     status: asm
     reason: claimed
+    size: 144
   - addr: '0x1b7a70'
     symbol: func_001B7A70
     status: asm
     reason: claimed
+    size: 272
   - addr: '0x1b7b80'
     symbol: func_001B7B80
     status: asm
     reason: claimed
+    size: 732
   - addr: '0x1b7e60'
     symbol: func_001B7E60
     status: asm
     reason: claimed
+    size: 168
   - addr: '0x1b7f50'
     symbol: func_001B7F50
     status: asm
     reason: claimed
+    size: 120
   - addr: '0x1b7fc8'
     symbol: func_001B7FC8
     status: asm
     reason: claimed
+    size: 368
   - addr: '0x1b8138'
     symbol: func_001B8138
     status: asm
     reason: claimed
+    size: 72
   - addr: '0x1b8180'
     symbol: func_001B8180
     status: asm
     reason: claimed
+    size: 300
   - addr: '0x1b82e0'
     symbol: func_001B82E0
     status: asm
     reason: claimed
+    size: 844
   - addr: '0x1b86f8'
     symbol: func_001B86F8
     status: asm
     reason: claimed
+    size: 156
   - addr: '0x1b8798'
     symbol: func_001B8798
     status: asm
     reason: claimed
+    size: 556
   - addr: '0x1b89c8'
     symbol: func_001B89C8
     status: asm
     reason: claimed
+    size: 1800
   - addr: '0x1b90d0'
     symbol: func_001B90D0
     status: asm
     reason: claimed
+    size: 200
   - addr: '0x1b9198'
     symbol: func_001B9198
     status: asm
     reason: claimed
+    size: 1308
   - addr: '0x1b96b8'
     symbol: func_001B96B8
     status: asm
     reason: claimed
+    size: 904
   - addr: '0x1b9a40'
     symbol: func_001B9A40
     status: asm
     reason: claimed
+    size: 280
   - addr: '0x1b9b58'
     symbol: func_001B9B58
     status: asm
     reason: claimed
+    size: 4148
   - addr: '0x1bab90'
     symbol: func_001BAB90
     status: asm
     reason: claimed
+    size: 512
   - addr: '0x1bad90'
     symbol: func_001BAD90
     status: asm
     reason: claimed
+    size: 512
   - addr: '0x1baf90'
     symbol: func_001BAF90
     status: asm
     reason: claimed
+    size: 508
   - addr: '0x1bb190'
     symbol: func_001BB190
     status: asm
     reason: claimed
+    size: 4756
   - addr: '0x1bc428'
     symbol: func_001BC428
     status: asm
     reason: claimed
+    size: 284
   - addr: '0x1bc548'
     symbol: func_001BC548
     status: asm
     reason: claimed
+    size: 820
   - addr: '0x1bc880'
     symbol: func_001BC880
     status: asm
     reason: claimed
+    size: 432
   - addr: '0x1bca30'
     symbol: func_001BCA30
     status: asm
     reason: claimed
+    size: 484
   - addr: '0x1bcc30'
     symbol: func_001BCC30
     status: asm
     reason: claimed
+    size: 420
   - addr: '0x1bcdf8'
     symbol: func_001BCDF8
     status: asm
     reason: claimed
+    size: 340
   - addr: '0x1bcf50'
     symbol: func_001BCF50
     status: asm
     reason: claimed
+    size: 1460
   - addr: '0x1bd508'
     symbol: func_001BD508
     status: asm
     reason: claimed
+    size: 252
   - addr: '0x1bd638'
     symbol: func_001BD638
     status: asm
     reason: claimed
+    size: 660
 - name: effect_1b7968
   source: src/game/effects/dispatch.c
   origin: game
@@ -42853,70 +42884,87 @@ units:
     symbol: func_001BEC18
     status: asm
     reason: claimed
+    size: 80
   - addr: '0x1becd0'
     symbol: func_001BECD0
     status: asm
     reason: claimed
+    size: 668
   - addr: '0x1bef70'
     symbol: func_001BEF70
     status: asm
     reason: claimed
+    size: 1964
   - addr: '0x1bf740'
     symbol: func_001BF740
     status: asm
     reason: claimed
+    size: 472
   - addr: '0x1bf918'
     symbol: func_001BF918
     status: asm
     reason: claimed
+    size: 1416
   - addr: '0x1bfed0'
     symbol: func_001BFED0
     status: asm
     reason: claimed
+    size: 272
   - addr: '0x1bffe0'
     symbol: func_001BFFE0
     status: asm
     reason: claimed
+    size: 508
   - addr: '0x1c01e0'
     symbol: func_001C01E0
     status: asm
     reason: claimed
+    size: 192
   - addr: '0x1c02a0'
     symbol: func_001C02A0
     status: asm
     reason: claimed
+    size: 632
   - addr: '0x1c0518'
     symbol: func_001C0518
     status: asm
     reason: claimed
+    size: 192
   - addr: '0x1c0600'
     symbol: func_001C0600
     status: asm
     reason: claimed
+    size: 292
   - addr: '0x1c0910'
     symbol: func_001C0910
     status: asm
     reason: claimed
+    size: 356
   - addr: '0x1c0a78'
     symbol: func_001C0A78
     status: asm
     reason: claimed
+    size: 2764
   - addr: '0x1c15d0'
     symbol: func_001C15D0
     status: asm
     reason: claimed
+    size: 368
   - addr: '0x1c1740'
     symbol: func_001C1740
     status: asm
     reason: claimed
+    size: 208
   - addr: '0x1c1810'
     symbol: func_001C1810
     status: asm
     reason: claimed
+    size: 284
   - addr: '0x1c19b0'
     symbol: func_001C19B0
     status: asm
     reason: claimed
+    size: 176
 - name: effect_1c1578
   source: src/game/effects/light_reset.c
   origin: game
@@ -43031,46 +43079,6 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: effect_slots_1b2e08
-  source: src/game/effects/slot_unmatched.cpp
-  origin: game; mod context owner
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -x
-  - c++
-  - -ffunction-sections
-  - -mvu0-use-vf0-vf31
-  functions:
-  - addr: '0x1b2e08'
-    symbol: func_001B2E08
-    status: asm
-    reason: claimed
-  - addr: '0x1b3420'
-    symbol: func_001B3420
-    status: asm
-    reason: claimed
-  - addr: '0x1b3590'
-    symbol: func_001B3590
-    status: asm
-    reason: claimed
-  - addr: '0x1b3818'
-    symbol: func_001B3818
-    status: asm
-    reason: claimed
-  - addr: '0x1b38f8'
-    symbol: func_001B38F8
-    status: asm
-    reason: claimed
-  - addr: '0x1b3ae8'
-    symbol: func_001B3AE8
-    status: asm
-    reason: claimed
-  - addr: '0x1b3bd0'
-    symbol: func_001B3BD0
-    status: asm
-    reason: claimed
 - name: effect_1b33b8
   source: src/game/effects/slot_lookup.c
   origin: game; mod context owner
@@ -46647,12 +46655,15 @@ units:
   - addr: '0x1f4770'
     status: asm
     reason: types
+    size: 1344
   - addr: '0x1fbb48'
     status: asm
     reason: schedule
+    size: 580
   - addr: '0x1f4cb0'
     status: asm
     reason: schedule
+    size: 124
 - name: campaign_behaviors_cshooteragent_clear
   source: src/campaign/behaviors_cshooteragent_clear.cpp
   origin: kynapse
@@ -46756,9 +46767,11 @@ units:
   - addr: '0x20ef28'
     status: asm
     reason: types
+    size: 828
   - addr: '0x20f268'
     status: asm
     reason: types
+    size: 552
 - name: shared_vu0_point
   source: src/ps2/vu0_matrix.cpp
   origin: game shared VU0 matrix controls
@@ -47062,28 +47075,38 @@ units:
   functions:
   - addr: '0x1448c8'
     status: asm
+    size: 1332
   - addr: '0x145558'
     status: asm
+    size: 1268
   - addr: '0x145a50'
     status: asm
+    size: 328
   - addr: '0x145b98'
     status: asm
+    size: 1044
   - addr: '0x146000'
     status: asm
+    size: 972
   - addr: '0x1463d0'
     status: asm
+    size: 420
   - addr: '0x146af0'
     status: source
     symbol: Command__Q216BlackPS2Campaign12ActorEntriesUi
     size: 260
   - addr: '0x146ce0'
     status: asm
+    size: 1120
   - addr: '0x1471e0'
     status: asm
+    size: 1040
   - addr: '0x1475f0'
     status: asm
+    size: 224
   - addr: '0x149798'
     status: asm
+    size: 144
   trim:
     .rodata: 20
 - name: campaign_actor_event_fanout
@@ -47464,20 +47487,28 @@ units:
   functions:
   - addr: '0x132610'
     status: asm
+    size: 480
   - addr: '0x132d98'
     status: asm
+    size: 1748
   - addr: '0x1334e0'
     status: asm
+    size: 1724
   - addr: '0x133ba0'
     status: asm
+    size: 704
   - addr: '0x133fa8'
     status: asm
+    size: 2064
   - addr: '0x1347b8'
     status: asm
+    size: 436
   - addr: '0x134990'
     status: asm
+    size: 548
   - addr: '0x134c98'
     status: asm
+    size: 832
   - addr: '0x135878'
     status: source
     symbol: GetWorldMatrix__Q213CampaignActor11ActorMotion
@@ -47577,20 +47608,28 @@ units:
   functions:
   - addr: '0x13a300'
     status: asm
+    size: 832
   - addr: '0x13a6e8'
     status: asm
+    size: 3512
   - addr: '0x13b4c0'
     status: asm
+    size: 360
   - addr: '0x13b628'
     status: asm
+    size: 884
   - addr: '0x13bb78'
     status: asm
+    size: 640
   - addr: '0x13bdf8'
     status: asm
+    size: 948
   - addr: '0x13c3e8'
     status: asm
+    size: 316
   - addr: '0x13c528'
     status: asm
+    size: 592
 - name: context_graph_pathfinder
   source: src/campaign/graph_pathfinder.cpp
   origin: kynapse
@@ -47847,21 +47886,27 @@ units:
   - addr: '0x141008'
     status: asm
     reason: claim
+    size: 352
   - addr: '0x1414a0'
     status: asm
     reason: claim
+    size: 264
   - addr: '0x140ea8'
     status: asm
     reason: claim
+    size: 224
   - addr: '0x141308'
     status: asm
     reason: claim
+    size: 136
   - addr: '0x140e48'
     status: asm
     reason: claim
+    size: 96
   - addr: '0x141460'
     status: asm
     reason: claim
+    size: 44
   source: src/campaign/actor_camera_wave3.cpp
   origin: C++ actor camera cluster; remaining functions claimed before source reconstruction; mod context owner
 - name: campaign_actor_input_wave3
@@ -47893,12 +47938,14 @@ units:
   functions:
   - addr: '0x14bd58'
     status: asm
+    size: 196
   - addr: '0x14f380'
     status: source
     size: 272
     symbol: Update__Q213CampaignActor15RenderableStatef
   - addr: '0x14f498'
     status: asm
+    size: 460
   - addr: '0x14f668'
     status: source
     size: 132
@@ -47928,8 +47975,10 @@ units:
   functions:
   - addr: '0x112808'
     status: asm
+    size: 428
   - addr: '0x1129b8'
     status: asm
+    size: 5676
 - name: context_graph_allocators
   source: src/campaign/graph_allocators.cpp
   origin: kynapse
@@ -48308,32 +48357,44 @@ units:
   functions:
   - addr: '0x14fee0'
     status: asm
+    size: 392
   - addr: '0x1507e8'
     status: asm
+    size: 788
   - addr: '0x150b00'
     status: asm
+    size: 616
   - addr: '0x150d68'
     status: asm
+    size: 560
   - addr: '0x150f98'
     status: asm
+    size: 752
   - addr: '0x151288'
     status: asm
+    size: 280
   - addr: '0x1513a8'
     status: asm
+    size: 592
   - addr: '0x1515f8'
     status: asm
+    size: 432
   - addr: '0x1517e0'
     status: asm
+    size: 488
   - addr: '0x151e80'
     status: asm
+    size: 384
   - addr: '0x152000'
     status: asm
+    size: 220
   - addr: '0x1520e0'
     status: source
     size: 40
     symbol: StateBounds__Q213CampaignActor9PropState
   - addr: '0x152698'
     status: asm
+    size: 144
   - addr: '0x152728'
     status: source
     size: 332
@@ -48488,8 +48549,10 @@ units:
     symbol: Initialize__Q213CampaignActor11RegionStateUlPQ213CampaignActor12RegionConfig
   - addr: '0x16c728'
     status: asm
+    size: 704
   - addr: '0x16c9e8'
     status: asm
+    size: 356
   - addr: '0x16cc88'
     status: source
     size: 104
@@ -48676,8 +48739,10 @@ units:
   functions:
   - addr: '0x165430'
     status: asm
+    size: 704
   - addr: '0x1656f0'
     status: asm
+    size: 656
   - addr: '0x165980'
     status: source
     size: 96
@@ -48770,8 +48835,10 @@ units:
   functions:
   - addr: '0x164268'
     status: asm
+    size: 736
   - addr: '0x164548'
     status: asm
+    size: 788
   - addr: '0x164860'
     status: source
     size: 84
@@ -48794,8 +48861,10 @@ units:
   functions:
   - addr: '0x164900'
     status: asm
+    size: 700
   - addr: '0x164bc0'
     status: asm
+    size: 368
   - addr: '0x164d70'
     status: source
     size: 84
@@ -48896,14 +48965,17 @@ units:
   functions:
   - addr: '0x169f38'
     status: asm
+    size: 788
   - addr: '0x16a720'
     status: source
     size: 84
     symbol: Debug__Q213CampaignActor10RoomRegion
   - addr: '0x16a7c0'
     status: asm
+    size: 696
   - addr: '0x16aa78'
     status: asm
+    size: 156
   externs:
     D_0040F4C0: '0x40f4c0'
     D_00414D10: '0x414d10'
@@ -49042,6 +49114,7 @@ units:
     symbol: Update__Q213CampaignActor15SphericalRegionxl
   - addr: '0x164f50'
     status: asm
+    size: 348
 - name: context_wave5_entity
   source: src/context/behaviors_entity.cpp
   origin: kynapse
@@ -49123,8 +49196,10 @@ units:
   functions:
   - addr: '0x127ac8'
     status: asm
+    size: 552
   - addr: '0x127cf0'
     status: asm
+    size: 792
 - name: campaign_graphics_frontend_104210_wave5
   source: src/campaign/graphics_frontend_104210.cpp
   origin: game
@@ -49197,8 +49272,10 @@ units:
   functions:
   - addr: '0x14ac98'
     status: asm
+    size: 340
   - addr: '0x14baa0'
     status: asm
+    size: 504
 - name: context_graph_nearest_nodes
   source: src/campaign/graph_nearest_nodes.cpp
   origin: kynapse
@@ -49426,6 +49503,7 @@ units:
     symbol: Update__Q213CampaignActor12ExpiryEffectf
   - addr: '0x14fbe8'
     status: asm
+    size: 436
   externs:
     D_0040F4D0: '0x40f4d0'
     D_0040F510: '0x40f510'
@@ -50053,6 +50131,7 @@ units:
   functions:
   - addr: '0x162ae8'
     status: asm
+    size: 516
 - name: campaign_apt_value_24b618
   source: src/campaign/graphics_apt_24b618.cpp
   flags:
@@ -50191,6 +50270,7 @@ units:
   functions:
   - addr: '0x161f58'
     status: asm
+    size: 516
 - name: campaign_apt_builtin_245840
   source: src/campaign/graphics_apt_245840.cpp
   flags:
@@ -50263,6 +50343,7 @@ units:
   functions:
   - addr: '0x141008'
     status: asm
+    size: 352
 - name: campaign_wave6_follower
   source: src/campaign/behaviors_follower_wave6.cpp
   origin: kynapse
@@ -50535,27 +50616,35 @@ units:
   - addr: '0x13db40'
     status: asm
     reason: unmatched
+    size: 96
   - addr: '0x13dc00'
     status: asm
     reason: unmatched
+    size: 52
   - addr: '0x13df58'
     status: asm
     reason: unmatched
+    size: 2980
   - addr: '0x13eb00'
     status: asm
     reason: unmatched
+    size: 268
   - addr: '0x13ec38'
     status: asm
     reason: unmatched
+    size: 348
   - addr: '0x13ed98'
     status: asm
     reason: unmatched
+    size: 132
   - addr: '0x13ef28'
     status: asm
     reason: unmatched
+    size: 380
   - addr: '0x13f0d8'
     status: asm
     reason: unmatched
+    size: 132
   - addr: '0x13f160'
     status: source
     symbol: Update__Q215ActorInventory79InputAxes
@@ -50563,12 +50652,15 @@ units:
   - addr: '0x13f328'
     status: asm
     reason: unmatched
+    size: 180
   - addr: '0x13f3e0'
     status: asm
     reason: unmatched
+    size: 568
   - addr: '0x13f618'
     status: asm
     reason: unmatched
+    size: 2436
   - addr: '0x140008'
     status: source
     symbol: Clear__Q215ActorInventory712InputBinding
@@ -50576,15 +50668,19 @@ units:
   - addr: '0x140068'
     status: asm
     reason: unmatched
+    size: 1020
   - addr: '0x140468'
     status: asm
     reason: unmatched
+    size: 60
   - addr: '0x1404a8'
     status: asm
     reason: unmatched
+    size: 800
   - addr: '0x1407c8'
     status: asm
     reason: unmatched
+    size: 504
   externs:
     D_0040F4D0: '0x40f4d0'
 - name: context_graph_entity_wave7
@@ -51114,6 +51210,233 @@ units:
     _vt$Q24Kaim7CObject: '0x3e0040'
     func_00383D40: '0x383d40'
     func_00391620: '0x391620'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: mod_effects_claims
+  source: src/mod/effects/claims.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1af930'
+    symbol: func_001AF930
+    status: asm
+    reason: claimed
+    size: 632
+  - addr: '0x1afc80'
+    symbol: func_001AFC80
+    status: asm
+    reason: claimed
+    size: 72
+  - addr: '0x1afd18'
+    symbol: func_001AFD18
+    status: asm
+    reason: claimed
+    size: 100
+  - addr: '0x1afee0'
+    symbol: func_001AFEE0
+    status: asm
+    reason: claimed
+    size: 168
+  - addr: '0x1b0ff8'
+    symbol: func_001B0FF8
+    status: asm
+    reason: claimed
+    size: 64
+  - addr: '0x1b1038'
+    symbol: func_001B1038
+    status: asm
+    reason: claimed
+    size: 56
+  - addr: '0x1b1080'
+    symbol: func_001B1080
+    status: asm
+    reason: claimed
+    size: 116
+  - addr: '0x1b1168'
+    symbol: func_001B1168
+    status: asm
+    reason: claimed
+    size: 52
+  - addr: '0x1b11a0'
+    symbol: func_001B11A0
+    status: asm
+    reason: claimed
+    size: 372
+  - addr: '0x1b1340'
+    symbol: func_001B1340
+    status: asm
+    reason: claimed
+    size: 472
+  - addr: '0x1b1518'
+    symbol: func_001B1518
+    status: asm
+    reason: claimed
+    size: 132
+  - addr: '0x1b15a0'
+    symbol: func_001B15A0
+    status: asm
+    reason: claimed
+    size: 168
+  - addr: '0x1b1648'
+    symbol: func_001B1648
+    status: asm
+    reason: claimed
+    size: 92
+  - addr: '0x1b16a8'
+    symbol: func_001B16A8
+    status: asm
+    reason: claimed
+    size: 128
+  - addr: '0x1b1728'
+    symbol: func_001B1728
+    status: asm
+    reason: claimed
+    size: 284
+  - addr: '0x1b1848'
+    symbol: func_001B1848
+    status: asm
+    reason: claimed
+    size: 412
+  - addr: '0x1b2078'
+    symbol: func_001B2078
+    status: asm
+    reason: claimed
+    size: 608
+  - addr: '0x1b22d8'
+    symbol: func_001B22D8
+    status: asm
+    reason: claimed
+    size: 132
+  - addr: '0x1b2408'
+    symbol: func_001B2408
+    status: asm
+    reason: claimed
+    size: 48
+  - addr: '0x1b2440'
+    symbol: func_001B2440
+    status: asm
+    reason: claimed
+    size: 492
+  - addr: '0x1b2630'
+    symbol: func_001B2630
+    status: asm
+    reason: claimed
+    size: 220
+  - addr: '0x1b2710'
+    symbol: func_001B2710
+    status: asm
+    reason: claimed
+    size: 508
+  - addr: '0x1b2910'
+    symbol: func_001B2910
+    status: asm
+    reason: claimed
+    size: 116
+  - addr: '0x1b2988'
+    symbol: func_001B2988
+    status: asm
+    reason: claimed
+    size: 92
+  - addr: '0x1b2e08'
+    symbol: func_001B2E08
+    status: asm
+    reason: claimed
+    size: 1452
+  - addr: '0x1b3420'
+    symbol: func_001B3420
+    status: asm
+    reason: claimed
+    size: 364
+  - addr: '0x1b3590'
+    symbol: func_001B3590
+    status: asm
+    reason: claimed
+    size: 496
+  - addr: '0x1b3818'
+    symbol: func_001B3818
+    status: asm
+    reason: claimed
+    size: 220
+  - addr: '0x1b38f8'
+    symbol: func_001B38F8
+    status: asm
+    reason: claimed
+    size: 280
+  - addr: '0x1b3ae8'
+    symbol: func_001B3AE8
+    status: asm
+    reason: claimed
+    size: 232
+  - addr: '0x1b3bd0'
+    symbol: func_001B3BD0
+    status: asm
+    reason: claimed
+    size: 260
+- name: mod_effects_1afbf0
+  source: src/mod/effects/asset_1afbf0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1afbf0'
+    symbol: FindFree__Q210ModEffects5Asset
+    status: source
+    size: 64
+- name: mod_effects_1afd80
+  source: src/mod/effects/asset_1afd80.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1afd80'
+    symbol: Resolve__Q210ModEffects5TimerP15BkActorAssetPS2
+    status: source
+    size: 40
+- name: mod_effects_1afe38
+  source: src/mod/effects/asset_1afe38.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mno-check-zero-division
+  functions:
+  - addr: '0x1afe38'
+    symbol: Resize__Q210ModEffects7Regions
+    status: source
+    size: 164
+- name: mod_effects_1afde0
+  source: src/mod/effects/asset_1afde0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1afde0'
+    symbol: Initialize__Q210ModEffects7Regions
+    status: source
+    size: 88
   assembler_evidence:
     strength: weak
     basis: individually verified output
