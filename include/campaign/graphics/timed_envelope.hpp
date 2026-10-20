@@ -10,7 +10,7 @@ struct EnvelopeFields {
     unsigned kind, mode;
     float high, low, multiplier, unknown2c, gain;
     float attack, hold, release;
-    unsigned unknown40;
+    float blend;
     unsigned char channels[6], unknown4a, unknown4b, enabled, initialized;
     unsigned char padding4e[2];
 };
