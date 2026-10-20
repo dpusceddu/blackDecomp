@@ -46619,26 +46619,10 @@ units:
     symbol: func_002F66D0
     size: 432
     status: asm
-  - addr: '0x2f6880'
-    symbol: func_002F6880
-    size: 1412
-    status: asm
-  - addr: '0x2f6e08'
-    symbol: func_002F6E08
-    size: 3956
-    status: asm
   - addr: '0x2f7d80'
     symbol: LoadFromPath__Q24Kaim13CSpatialGraphPCc
     size: 456
     status: source
-  - addr: '0x2f7f48'
-    symbol: func_002F7F48
-    size: 752
-    status: asm
-  - addr: '0x2f8238'
-    symbol: func_002F8238
-    size: 2560
-    status: asm
   - addr: '0x2fa4c8'
     symbol: func_002FA4C8
     size: 1124
@@ -50125,3 +50109,36 @@ units:
     _vt$Q24Kaimt10CMetaClass2ZQ24Kaim5CTeamZPFUiPCc_PQ24Kaim5CTeam: '0x3ebb48'
     strcmp: '0x35ca74'
     strcpy: '0x35cbc0'
+- name: context_graph_spatial_wave6
+  source: src/campaign/graph_spatial_wave6.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave6-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  functions:
+  - addr: '0x2f6880'
+    size: 1412
+    status: asm
+    symbol: func_002F6880
+    reason: registers
+  - addr: '0x2f6e08'
+    size: 3956
+    status: asm
+    symbol: func_002F6E08
+    reason: registers
+  - addr: '0x2f7f48'
+    size: 752
+    status: asm
+    symbol: func_002F7F48
+    reason: registers
+  - addr: '0x2f8238'
+    size: 2560
+    status: asm
+    symbol: func_002F8238
+    reason: registers
