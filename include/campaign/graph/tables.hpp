@@ -31,6 +31,7 @@ struct RouteBuffers : CObject {
     RouteBuffers() __asm__("func_002FB558");
     ~RouteBuffers();
     void Reserve(int) __asm__("func_002FB1C8");
+    unsigned int ClosestWeightedWaypoint(const Vec3 *) const __asm__("func_002FB3C8");
     inline void Clear() { count = 0; length = 0.0f; }
 };
 struct SearchGraph {
