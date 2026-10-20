@@ -8,10 +8,8 @@ typedef struct Recovered_Vtable_003E9B58 {
     u8 opaque_4[12];
     s32 field_10; /* PS2 +0x10 */
     s32 field_14; /* PS2 +0x14 */
-    s32 field_18; /* PS2 +0x18 */
 } Recovered_Vtable_003E9B58;
 typedef char assert_Recovered_Vtable_003E9B58_0[(((int)&((Recovered_Vtable_003E9B58 *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E9B58_10[(((int)&((Recovered_Vtable_003E9B58 *)0)->field_10) == 16) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003E9B58_14[(((int)&((Recovered_Vtable_003E9B58 *)0)->field_14) == 20) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003E9B58_18[(((int)&((Recovered_Vtable_003E9B58 *)0)->field_18) == 24) ? 1 : -1];
 #endif

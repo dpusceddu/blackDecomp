@@ -12,6 +12,7 @@ namespace BlackPS2Classes {
 // RTTI base: Kaim_CObject; offset 0; public nonvirtual.
 struct Kaim_CTeam {
     typedef Hierarchy_Kaim_CTeam Hierarchy; // Semantic bases, not an object layout.
+    // Constructor identity: 0x002EC1B8; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x002EC4B0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
@@ -28,8 +29,8 @@ struct Kaim_CTeam {
     void Function_002EC4B0();
     // 0x002EC5B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002EC5B8(void * argument0);
-    // 0x002EC6D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002EC6D8(void * argument0);
+    // 0x002EC6D8: UNVERIFIED signature (src/campaign/graph_team.cpp).
+    void Function_002EC6D8(void * argument0);
     // 0x002EC9D0: UNVERIFIED signature (src/kynapse/configure_2ec9d0.cpp).
     unsigned char Function_002EC9D0(void * argument0);
     // 0x0038EF98: UNVERIFIED signature (src/kynapse/class_info_38ef98.cpp).
@@ -49,7 +50,7 @@ struct Kaim_CTeam {
         // slot 2, table+0x18, this delta 0, function 0x002EC5B8; UNVERIFIED signature.
         virtual int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x002EC6D8; UNVERIFIED signature.
-        virtual int Slot003(void * argument0);
+        virtual void Slot003(void * argument0);
         // slot 4, table+0x28, this delta 0, function 0x0038EFA8; UNVERIFIED signature.
         virtual void Slot004(unsigned char argument0);
         // slot 5, table+0x30, this delta 0, function 0x002EC9D0; UNVERIFIED signature.

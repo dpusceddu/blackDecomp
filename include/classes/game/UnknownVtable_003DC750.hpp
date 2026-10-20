@@ -120,14 +120,14 @@ struct UnknownVtable_003DC750 {
     unsigned int Function_00151E80(unsigned int argument0);
     // 0x00152000: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00152000(unsigned int argument0);
-    // 0x001520E0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_001520E0();
+    // 0x001520E0: UNVERIFIED signature (src/campaign/actor_dc750_wave4.cpp).
+    void * Function_001520E0();
     // 0x00152680: UNVERIFIED signature (src/tu/152680.c).
     int Function_00152680();
     // 0x00152698: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00152698();
-    // 0x00152728: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00152728(void * argument0);
+    // 0x00152728: UNVERIFIED signature (src/campaign/actor_dc750_wave4.cpp).
+    unsigned char Function_00152728(void * argument0);
     // 0x00152988: UNVERIFIED signature (src/auto/game/152988.c).
     void * Function_00152988(int argument0);
     // 0x00152E38: UNVERIFIED signature (src/tu/tu_152bb0.c).
@@ -165,7 +165,7 @@ struct UnknownVtable_003DC750 {
         // slot 11, table+0x60, this delta 0, function 0x001517E0; UNVERIFIED signature.
         virtual unsigned int Slot011(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, float argument4);
         // slot 12, table+0x68, this delta 0, function 0x00152728; UNVERIFIED signature.
-        virtual int Slot012(void * argument0);
+        virtual unsigned char Slot012(void * argument0);
         // slot 13, table+0x70, this delta 0, function 0x00152988; UNVERIFIED signature.
         virtual void * Slot013(int argument0);
         // slot 14, table+0x78, this delta 0, function 0x00152680; UNVERIFIED signature.
@@ -193,7 +193,7 @@ struct UnknownVtable_003DC750 {
         // slot 25, table+0xD0, this delta 0, function 0x00152698; UNVERIFIED signature.
         virtual int Slot025();
         // slot 26, table+0xD8, this delta 0, function 0x001520E0; UNVERIFIED signature.
-        virtual int Slot026();
+        virtual void * Slot026();
     };
 };
 

@@ -66,9 +66,9 @@ struct UnknownVtable_003E0888 {
     inline void * & Field_0050() { return *(void * *)((unsigned char *)this + 0x50); }
     // 0x001ED830: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001ED830();
-    // 0x001EDC80: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EDC80: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EDC80();
-    // 0x001EDD80: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EDD80: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EDD80();
     // 0x001EDDE0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001EDDE0(unsigned int argument0, float argument1);

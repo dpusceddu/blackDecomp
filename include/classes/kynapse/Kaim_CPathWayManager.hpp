@@ -14,17 +14,11 @@ struct Kaim_CPathWayManager {
     typedef Hierarchy_Kaim_CPathWayManager Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x002DA348.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0004() { return *(int *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
     // 0x002DA348: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002DA348();
     // 0x002DA980: UNVERIFIED signature (src/tu/kynapse_tu_2da208.c).
     int Function_002DA980(void * argument0);
-    // 0x002DA9B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002DA9B0: UNVERIFIED signature (include/context/behaviors/pathmanager.hpp).
     int Function_002DA9B0(void * argument0);
     // 0x0038AED8: UNVERIFIED signature (src/kynapse/small_misc_38aed8.cpp).
     void Function_0038AED8();

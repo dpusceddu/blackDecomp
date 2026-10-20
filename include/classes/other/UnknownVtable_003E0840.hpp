@@ -56,9 +56,9 @@ struct UnknownVtable_003E0840 {
     inline unsigned char & Field_004D() { return *(unsigned char *)((unsigned char *)this + 0x4D); }
     // 0x001ED968: UNVERIFIED signature (src/auto/game/1ed968.c).
     float Function_001ED968();
-    // 0x001EDC80: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EDC80: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EDC80();
-    // 0x001EDD80: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EDD80: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EDD80();
     // 0x001EE0B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001EE0B0();

@@ -4,14 +4,11 @@
 #include "auto/prelude.h"
 
 typedef struct Recovered_Vtable_003DDDD0 {
-    void * field_0; /* PS2 +0x0 */
-    void * field_4; /* PS2 +0x4 */
-    u8 opaque_8[12];
-    u8 field_14; /* PS2 +0x14 */
+    u8 opaque_0[4];
+    s32 field_4; /* PS2 +0x4 */
+    u8 opaque_8[13];
     u8 field_15; /* PS2 +0x15 */
 } Recovered_Vtable_003DDDD0;
-typedef char assert_Recovered_Vtable_003DDDD0_0[(((int)&((Recovered_Vtable_003DDDD0 *)0)->field_0) == 0) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DDDD0_4[(((int)&((Recovered_Vtable_003DDDD0 *)0)->field_4) == 4) ? 1 : -1];
-typedef char assert_Recovered_Vtable_003DDDD0_14[(((int)&((Recovered_Vtable_003DDDD0 *)0)->field_14) == 20) ? 1 : -1];
 typedef char assert_Recovered_Vtable_003DDDD0_15[(((int)&((Recovered_Vtable_003DDDD0 *)0)->field_15) == 21) ? 1 : -1];
 #endif

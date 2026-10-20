@@ -17,24 +17,26 @@ struct Kaim_CBasicAllocator {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_000C() { return *(void * *)((unsigned char *)this + 0xC); }
     typedef void (*FieldType_0010)(int);
     // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline FieldType_0010 & Field_0010() { return *(FieldType_0010 *)((unsigned char *)this + 0x10); }
     typedef void (*FieldType_0014)(int);
     // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline FieldType_0014 & Field_0014() { return *(FieldType_0014 *)((unsigned char *)this + 0x14); }
-    // 0x002E55A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002E55A0(unsigned int argument0);
+    // 0x002E55A0: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    void * Function_002E55A0(void * argument0);
     // 0x002E5660: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002E5660(unsigned int argument0);
-    // 0x002E5768: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002E5768(unsigned int argument0);
-    // 0x002E6DD8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x002E5768: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    unsigned char Function_002E5768(void * argument0);
+    // 0x002E6DD8: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
     void * Function_002E6DD8(unsigned int argument0, void * argument1);
-    // 0x002E6E60: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002E6E60(unsigned int argument0, void * argument1);
+    // 0x002E6E60: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    void * Function_002E6E60(unsigned int argument0, void * argument1);
     // 0x002E6F10: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002E6F10();
     // 0x002E6F90: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
@@ -52,15 +54,15 @@ struct Kaim_CBasicAllocator {
         // slot 1, table+0x10, this delta 0, function 0x002E6FB0; UNVERIFIED signature.
         virtual void * Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x002E55A0; UNVERIFIED signature.
-        virtual int Slot002(unsigned int argument0);
+        virtual void * Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x002E5660; UNVERIFIED signature.
         virtual int Slot003(unsigned int argument0);
         // slot 4, table+0x28, this delta 0, function 0x002E5768; UNVERIFIED signature.
-        virtual int Slot004(unsigned int argument0);
+        virtual unsigned char Slot004(void * argument0);
         // slot 5, table+0x30, this delta 0, function 0x002E6DD8; UNVERIFIED signature.
         virtual void * Slot005(unsigned int argument0, void * argument1);
         // slot 6, table+0x38, this delta 0, function 0x002E6E60; UNVERIFIED signature.
-        virtual int Slot006(unsigned int argument0, void * argument1);
+        virtual void * Slot006(unsigned int argument0, void * argument1);
         // slot 7, table+0x40, this delta 0, function 0x002E6F90; code-compatible exact source signature; original semantic types UNVERIFIED.
         virtual void Slot007(int argument0);
         // slot 8, table+0x48, this delta 0, function 0x002E7008; code-compatible exact source signature; original semantic types UNVERIFIED.

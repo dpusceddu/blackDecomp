@@ -10,73 +10,39 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003E07F8 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0: UNVERIFIED type; PS2 access offset.
+    // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0000() { return *(int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0004() { return *(float *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
-    // 0xC: UNVERIFIED type; PS2 access offset.
+    // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_000C() { return *(float *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0014() { return *(float *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0018() { return *(unsigned int *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_001C() { return *(unsigned int *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
+    // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline int & Field_0018() { return *(int *)((unsigned char *)this + 0x18); }
+    // 0x20: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
+    // 0x24: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0024() { return *(float *)((unsigned char *)this + 0x24); }
-    // 0x28: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0028() { return *(float *)((unsigned char *)this + 0x28); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_002C() { return *(float *)((unsigned char *)this + 0x2C); }
-    // 0x30: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0030() { return *(float *)((unsigned char *)this + 0x30); }
-    // 0x34: UNVERIFIED type; PS2 access offset.
+    // 0x34: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0034() { return *(float *)((unsigned char *)this + 0x34); }
-    // 0x38: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0038() { return *(float *)((unsigned char *)this + 0x38); }
-    // 0x3C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_003C() { return *(float *)((unsigned char *)this + 0x3C); }
-    // 0x44: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0044() { return *(unsigned char *)((unsigned char *)this + 0x44); }
-    // 0x45: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0045() { return *(unsigned char *)((unsigned char *)this + 0x45); }
-    // 0x46: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0046() { return *(unsigned char *)((unsigned char *)this + 0x46); }
-    // 0x47: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0047() { return *(unsigned char *)((unsigned char *)this + 0x47); }
-    // 0x48: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0048() { return *(unsigned char *)((unsigned char *)this + 0x48); }
-    // 0x49: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_0049() { return *(unsigned char *)((unsigned char *)this + 0x49); }
-    // 0x4A: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_004A() { return *(unsigned char *)((unsigned char *)this + 0x4A); }
-    // 0x4B: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_004B() { return *(unsigned char *)((unsigned char *)this + 0x4B); }
-    // 0x4C: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_004C() { return *(unsigned char *)((unsigned char *)this + 0x4C); }
-    // 0x4D: UNVERIFIED type; PS2 access offset.
+    // 0x4D: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_004D() { return *(unsigned char *)((unsigned char *)this + 0x4D); }
-    // 0x50: UNVERIFIED type; PS2 access offset.
+    // 0x50: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0050() { return *(void * *)((unsigned char *)this + 0x50); }
     // 0x54: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0054() { return *(float *)((unsigned char *)this + 0x54); }
-    // 0x001ED8D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001ED8D0: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001ED8D0();
-    // 0x001EDC80: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EDC80: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EDC80();
-    // 0x001EDD80: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EDD80: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EDD80();
-    // 0x001EE158: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_001EE158(unsigned int argument0, float argument1);
+    // 0x001EE158: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
+    int Function_001EE158(float argument0, unsigned int argument1);
     // 0x001EE278: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_001EE278(int argument0);
-    // 0x001EE298: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x001EE298: UNVERIFIED signature (include/campaign/graphics/timed_envelope.hpp).
     int Function_001EE298();
     // 0x00384660: UNVERIFIED signature (src/auto/other/384660.c).
     unsigned int Function_00384660(float argument0);
@@ -87,7 +53,7 @@ struct UnknownVtable_003E07F8 {
         // slot 0, table+0x8, this delta 0, function 0x001ED8D0; UNVERIFIED signature.
         virtual int Slot000();
         // slot 1, table+0x10, this delta 0, function 0x001EE158; UNVERIFIED signature.
-        virtual int Slot001(unsigned int argument0, float argument1);
+        virtual int Slot001(float argument0, unsigned int argument1);
         // slot 2, table+0x18, this delta 0, function 0x001EE298; UNVERIFIED signature.
         virtual int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x001EDC80; UNVERIFIED signature.

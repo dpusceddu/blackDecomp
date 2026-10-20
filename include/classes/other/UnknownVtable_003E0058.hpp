@@ -12,12 +12,14 @@ struct UnknownVtable_003E0058 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
-    // 0x002E55A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002E55A0(unsigned int argument0);
+    // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
+    // 0x002E55A0: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    void * Function_002E55A0(void * argument0);
     // 0x002E5660: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002E5660(unsigned int argument0);
-    // 0x002E5768: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_002E5768(unsigned int argument0);
+    // 0x002E5768: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    unsigned char Function_002E5768(void * argument0);
     // 0x003842C8: UNVERIFIED signature (src/auto/other/3842a0.c).
     int Function_003842C8(int argument0);
     // 0x00384318: UNVERIFIED signature (src/auto/other/384318.c).
@@ -39,11 +41,11 @@ struct UnknownVtable_003E0058 {
         // slot 1, table+0x10, this delta 0, function 0x003843B8; UNVERIFIED signature.
         virtual int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x002E55A0; UNVERIFIED signature.
-        virtual int Slot002(unsigned int argument0);
+        virtual void * Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x002E5660; UNVERIFIED signature.
         virtual int Slot003(unsigned int argument0);
         // slot 4, table+0x28, this delta 0, function 0x002E5768; UNVERIFIED signature.
-        virtual int Slot004(unsigned int argument0);
+        virtual unsigned char Slot004(void * argument0);
         // slot 5, table+0x30, this delta 0, function 0x00384318; UNVERIFIED signature.
         virtual void * Slot005(int argument0, void * argument1);
         // slot 6, table+0x38, this delta 0, function 0x00384360; code-compatible exact source signature; original semantic types UNVERIFIED.

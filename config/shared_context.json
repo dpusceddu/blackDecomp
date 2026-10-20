@@ -57,7 +57,10 @@
         "0x179f18",
         "0x17b5e8",
         "0x149608",
-        "0x140cf8"
+        "0x140cf8",
+        "0x18f230",
+        "0x14f380",
+        "0x152728"
       ]
     },
     {
@@ -358,6 +361,38 @@
       ],
       "uses": [
         "TransformDirection"
+      ]
+    },
+    {
+      "address": "0x18f230",
+      "source_function": "MovementCore::IsNear",
+      "headers": [
+        "include/ps2/vu0.hpp"
+      ],
+      "uses": [
+        "DistanceSquared",
+        "func_00180A00"
+      ]
+    },
+    {
+      "address": "0x14f380",
+      "source_function": "RenderableState::Update",
+      "headers": [
+        "include/ps2/vu0.hpp"
+      ],
+      "uses": [
+        "ReadXWord",
+        "SumSquares3"
+      ]
+    },
+    {
+      "address": "0x152728",
+      "source_function": "PropState::Contact",
+      "headers": [
+        "include/ps2/vu0.hpp"
+      ],
+      "uses": [
+        "Y(Load(contact->normal))"
       ]
     }
   ],

@@ -14,12 +14,12 @@ struct UnknownVtable_003DCB38 {
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
     // 0xC: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_000C() { return *(unsigned char *)((unsigned char *)this + 0xC); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
     // 0xA0: UNVERIFIED type; PS2 access offset.
     inline S128 & Field_00A0() { return *(S128 *)((unsigned char *)this + 0xA0); }
     // 0xB4: UNVERIFIED type; PS2 access offset.
-    inline int & Field_00B4() { return *(int *)((unsigned char *)this + 0xB4); }
+    inline unsigned int & Field_00B4() { return *(unsigned int *)((unsigned char *)this + 0xB4); }
     // 0xC0: UNVERIFIED type; PS2 access offset.
     inline float & Field_00C0() { return *(float *)((unsigned char *)this + 0xC0); }
     // 0xC4: UNVERIFIED type; PS2 access offset.
@@ -28,9 +28,9 @@ struct UnknownVtable_003DCB38 {
     inline unsigned char & Field_00C8() { return *(unsigned char *)((unsigned char *)this + 0xC8); }
     // 0x101: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0101() { return *(unsigned char *)((unsigned char *)this + 0x101); }
-    // 0x110: UNVERIFIED type; PS2 access offset.
+    // 0x110: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_0110() { return *(unsigned int *)((unsigned char *)this + 0x110); }
-    // 0x114: UNVERIFIED type; PS2 access offset.
+    // 0x114: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_0114() { return *(unsigned int *)((unsigned char *)this + 0x114); }
     // 0x118: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0118() { return *(void * *)((unsigned char *)this + 0x118); }
@@ -46,28 +46,28 @@ struct UnknownVtable_003DCB38 {
     inline unsigned char & Field_0138() { return *(unsigned char *)((unsigned char *)this + 0x138); }
     // 0x139: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0139() { return *(unsigned char *)((unsigned char *)this + 0x139); }
-    // 0x13A: UNVERIFIED type; PS2 access offset.
+    // 0x13A: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_013A() { return *(unsigned char *)((unsigned char *)this + 0x13A); }
-    // 0x13C: UNVERIFIED type; PS2 access offset.
+    // 0x13C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_013C() { return *(unsigned char *)((unsigned char *)this + 0x13C); }
     // 0x13E: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_013E() { return *(unsigned char *)((unsigned char *)this + 0x13E); }
     // 0x13F: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_013F() { return *(unsigned char *)((unsigned char *)this + 0x13F); }
-    // 0x140: UNVERIFIED type; PS2 access offset.
+    // 0x140: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_0140() { return *(unsigned int *)((unsigned char *)this + 0x140); }
-    // 0x150: UNVERIFIED type; PS2 access offset.
+    // 0x150: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned short & Field_0150() { return *(unsigned short *)((unsigned char *)this + 0x150); }
     // 0x152: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0152() { return *(unsigned char *)((unsigned char *)this + 0x152); }
-    // 0x153: UNVERIFIED type; PS2 access offset.
+    // 0x153: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0153() { return *(unsigned char *)((unsigned char *)this + 0x153); }
-    // 0x154: UNVERIFIED type; PS2 access offset.
+    // 0x154: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_0154() { return *(unsigned char *)((unsigned char *)this + 0x154); }
     // 0x155: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0155() { return *(unsigned char *)((unsigned char *)this + 0x155); }
     // 0x158: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0158() { return *(void * *)((unsigned char *)this + 0x158); }
+    inline unsigned int & Field_0158() { return *(unsigned int *)((unsigned char *)this + 0x158); }
     // 0x00125E20: UNVERIFIED signature (src/auto/game/125e20.c).
     unsigned int Function_00125E20();
     // 0x00125E30: UNVERIFIED signature (src/auto/game/125e20.c).
@@ -90,18 +90,18 @@ struct UnknownVtable_003DCB38 {
     int Function_0014C160(int argument0, int argument1, int argument2, int argument3);
     // 0x0014C3D0: UNVERIFIED signature (src/auto/game/14c330.c).
     int Function_0014C3D0();
-    // 0x0014EDE0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0014EDE0();
+    // 0x0014EDE0: UNVERIFIED signature (src/campaign/actor_cb38_reset_wave4.cpp).
+    void Function_0014EDE0();
     // 0x0014F348: UNVERIFIED signature (src/auto/game/14f348.c).
     int Function_0014F348();
-    // 0x0014F380: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned char Function_0014F380();
+    // 0x0014F380: UNVERIFIED signature (src/campaign/actor_cb38_wave4.cpp).
+    void Function_0014F380(float argument0);
     // 0x0014F490: UNVERIFIED signature (src/tu/tu_14f380.c).
     int Function_0014F490();
     // 0x0014F498: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0014F498(unsigned int argument0);
-    // 0x0014F668: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_0014F668();
+    // 0x0014F668: UNVERIFIED signature (src/campaign/actor_cb38_wave4.cpp).
+    void Function_0014F668();
     // 0x0014F6F0: UNVERIFIED signature (src/tu/tu_14f380.c).
     int Function_0014F6F0(int argument0);
     // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
@@ -127,11 +127,11 @@ struct UnknownVtable_003DCB38 {
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
     struct VirtualInterface0 {
         // slot 0, table+0x8, this delta 0, function 0x0014F380; UNVERIFIED signature.
-        virtual unsigned char Slot000();
+        virtual void Slot000(float argument0);
         // slot 1, table+0x10, this delta 0, function 0x00165B00; UNVERIFIED signature.
         virtual void Slot001(int argument0);
         // slot 2, table+0x18, this delta 0, function 0x0014F668; UNVERIFIED signature.
-        virtual int Slot002();
+        virtual void Slot002();
         // slot 3, table+0x20, this delta 0, function 0x0014F348; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00125E20; UNVERIFIED signature.
@@ -161,7 +161,7 @@ struct UnknownVtable_003DCB38 {
         // slot 16, table+0x88, this delta 0, function 0x00383780; UNVERIFIED signature.
         virtual float Slot016();
         // slot 17, table+0x90, this delta 0, function 0x0014EDE0; UNVERIFIED signature.
-        virtual int Slot017();
+        virtual void Slot017();
         // slot 18, table+0x98, this delta 0, function 0x0014BD58; UNVERIFIED signature.
         virtual int Slot018(void * argument0, void * argument1);
         // slot 19, table+0xA0, this delta 0, function 0x003837C0; UNVERIFIED signature.
