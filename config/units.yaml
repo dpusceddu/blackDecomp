@@ -48879,3 +48879,38 @@ units:
     func_001AE5E8: '0x1ae5e8'
     func_0026A840: '0x26a840'
     func_0026AA68: '0x26aa68'
+- name: context_wave4_xml
+  source: src/context/behaviors_xml.cpp
+  origin: kynapse
+  owner: context-wave4-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -fno-rtti
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x372fc0'
+    size: 388
+    status: source
+    symbol: func_00372FC0
+  - addr: '0x373148'
+    size: 260
+    status: source
+    symbol: func_00373148
+  - addr: '0x373300'
+    size: 68
+    status: source
+    symbol: func_00373300
+  externs:
+    _13KaimXmlReader$hooks: '0x451228'
+    __throw: '0x292b40'
+    func_002E3918: '0x2e3918'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved

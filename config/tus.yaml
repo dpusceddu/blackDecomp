@@ -22537,8 +22537,8 @@ tus:
   confidence: exact
   evidence: [eh, style, join-hard, join-soft, shared-items]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 4 of 7 functions
+  flags: [-O2, -G0, -snas, -fno-rtti, --assembler=sn-min6]
+  flags_basis: matched 7 of 7 functions
   data:
     .rodata: ['0x40c418', '0x40c420']
     .data: ['0x3f2048', '0x3f215c']
