@@ -48684,3 +48684,27 @@ units:
     size: 340
     status: source
     symbol: UpdateProximity__Q216CampaignGraphics12MovementCore
+- name: campaign_actor_c4c8_wave4
+  source: src/campaign/actor_c4c8_wave4.cpp
+  origin: C++ actor vtable0x3DC4C8 volume cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x169c10'
+    status: source
+    size: 272
+    symbol: Initialize__Q213CampaignActor11RegionStateUlPQ213CampaignActor12RegionConfig
+  - addr: '0x16c728'
+    status: asm
+  - addr: '0x16c9e8'
+    status: asm
+  - addr: '0x16cc88'
+    status: source
+    size: 104
+    symbol: RenderBox__Q213CampaignActor11RegionState
+  trim:
+    .rodata: 24

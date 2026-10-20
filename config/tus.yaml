@@ -4920,8 +4920,8 @@ tus:
   confidence: low
   evidence: [proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]
+  flags_basis: matched 1 of 1 functions
   data:
     .rodata: ['0x3f5040', '0x3f5080']
 - name: tu_169d20
@@ -5045,7 +5045,7 @@ tus:
   evidence: [ctor-list, ctor-end, join-soft, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 26 of 59 functions
+  flags_basis: matched 27 of 59 functions
   data:
     .data: ['0x3bcec8', '0x3bcef0']
     .sdata: ['0x40d9b3', '0x40d9c4']
