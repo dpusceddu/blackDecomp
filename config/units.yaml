@@ -49588,3 +49588,29 @@ units:
     _9KaimSight$gKeyPosition: '0x44fd38'
     _9KaimSight$gKeyRadius: '0x450828'
     func_002E4CE0: '0x2e4ce0'
+- name: campaign_actor_c388_wave5
+  source: src/campaign/actor_c388_wave5.cpp
+  origin: C++ actor vtable0x3DC388 expiry-effect cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x14fa80'
+    status: source
+    size: 356
+    symbol: Update__Q213CampaignActor12ExpiryEffectf
+  - addr: '0x14fbe8'
+    status: asm
+  externs:
+    D_0040F4D0: '0x40f4d0'
+    D_0040F510: '0x40f510'
+    D_0040F520: '0x40f520'
+    D_004146D0: '0x4146d0'
+    D_004146D4: '0x4146d4'
+    func_0014BA80: '0x14ba80'
+    func_0014FBE8: '0x14fbe8'
+    func_00155C28: '0x155c28'
+    func_001EA580: '0x1ea580'
