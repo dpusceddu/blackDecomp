@@ -49076,3 +49076,15 @@ units:
     func_001AE5E8: '0x1ae5e8'
     func_0026A840: '0x26a840'
     func_0026AA68: '0x26aa68'
+- name: campaign_actor_c010_wave5
+  source: src/campaign/actor_c010_wave5.cpp
+  origin: C++ actor vtable0x3DC010 region cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x16a2f8'
+    status: asm
