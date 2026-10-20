@@ -46406,21 +46406,6 @@ units:
     size: 168
     symbol: Create__Q24Kaim12PathWayAgentPQ24Kaim7Context
     status: source
-  - addr: '0x2d5650'
-    size: 928
-    symbol: func_002D5650
-    status: asm
-    reason: campaign
-  - addr: '0x2d59f0'
-    size: 1988
-    symbol: func_002D59F0
-    status: asm
-    reason: campaign
-  - addr: '0x2d62d0'
-    size: 240
-    symbol: func_002D62D0
-    status: asm
-    reason: campaign
   - addr: '0x2d6520'
     size: 92
     symbol: SetPathWay__Q24Kaim12PathWayAgentPQ24Kaim7PathWay
@@ -50511,3 +50496,38 @@ units:
     _4Kaim$gPerceptionClass: '0x455e18'
     _4Kaim$gTargetClass: '0x4512b0'
     func_002D6CB0: '0x2d6cb0'
+- name: campaign_wave6_pathway
+  source: src/campaign/behaviors_pathway_wave6.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d5650'
+    status: source
+    symbol: Update__Q24Kaim12PathWayAgent
+    size: 928
+  - addr: '0x2d59f0'
+    status: source
+    symbol: ExecuteAction__Q24Kaim12PathWayAgentUi
+    size: 1988
+  - addr: '0x2d62d0'
+    status: source
+    symbol: Configure__Q24Kaim12PathWayAgentPQ24Kaim12ChildBuffers
+    size: 240
+  externs:
+    ClearActivation__Q24Kaim10ActionBank: '0x2dfbf8'
+    Find__Q24Kaim15PathWayRegistryPCc: '0x2daa70'
+    GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
+    GetValue__CQ24Kaim12ChildBuffers: '0x2e3918'
+    _4Kaim$gEngine: '0x3c9ed4'
+    _4Kaim$gNow: '0x3c958c'
+    _stricmp: '0x360838'
+    func_0035E730: '0x35e730'
+    func_0035E750: '0x35e750'
+    sscanf: '0x35d7b0'
+    strcmp: '0x35ca74'
