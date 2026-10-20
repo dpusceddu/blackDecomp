@@ -2,8 +2,8 @@
 #define BLACK_MOD_PLAYER_VITALS_H
 #include "ps2/ee_types.h"
 /* Partial player access prefix; original class identity/allocation are unknown.
-   Source13CD20 verifies signed8 medkitCount8A1. Health2F8, presentation32C,
-   state38C and invulnerable8B2 are PS2 instructions from13C778/13C9D8 only. */
+   Source13C9D8/13CD20 verify health2F8 and signed8 medkitCount8A1.
+   Presentation32C,state38C and invulnerable8B2 remain instruction-only13C778. */
 typedef struct BkModPlayerVitalsPS2 {
     EeU8 unknown00[0x2f8]; float health;
     EeU8 unknown2fc[0x30]; void *presentation;
