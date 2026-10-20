@@ -953,6 +953,55 @@ class Target:
                     and token == (self.fn['words'][index], None))
 
 
+class CompiledTokens(list):
+    """Score tokens with optional, strictly resolved HI16/LO16 instruction words."""
+    def __init__(self):
+        super().__init__()
+        self.resolved_words = {}
+
+
+def resolved_address_words(code, relocations, bindings):
+    """Resolve known address operands for comparison only, following MIPS REL pairing.
+
+    A retail LUI can serve several addresses without its own inferred relocation.
+    Its complete encoded word is still a valid comparison when the object's
+    symbol address and HI16/LO16 addend are both known. No object bytes change.
+    Unknown symbols, unsupported relocations and unpaired HI16s stay unresolved.
+    """
+    pending, resolved = {}, {}
+    for offset, (kind, symbol) in relocations.items():
+        if kind not in (HI, LO):
+            continue
+        name = symbol.get('name', '')
+        address_name = ADDRNAME.match(name) if name else None
+        address = int(address_name.group(1), 16) if address_name else bindings.get(name)
+        if not isinstance(address, int):
+            continue
+        word = struct.unpack_from('<I', code, offset)[0]
+        # Symbols are the same table objects at both relocation sites. Do not
+        # pair distinct aliases just because they happen to resolve equally.
+        key = id(symbol)
+        if kind == HI:
+            pending.setdefault(key, []).append((offset, word))
+        else:
+            low = s16(word)
+            resolved[offset] = (word & 0xFFFF0000) | ((address + low) & 0xFFFF)
+            for high_offset, high_word in pending.pop(key, []):
+                addend = ((high_word & 0xFFFF) << 16) + low
+                encoded = ((address + addend + 0x8000) >> 16) & 0xFFFF
+                resolved[high_offset] = (high_word & 0xFFFF0000) | encoded
+    return resolved
+
+
+def resolved_address_match(target, index, tokens):
+    """Accept exact encoded instructions only; never forgive an unknown target."""
+    word = getattr(tokens, 'resolved_words', {}).get(index)
+    relocation = target.fn['rel'].get(str(index))
+    return (word is not None and (not relocation or
+            relocation[0] in ('hi', 'lo') and isinstance(relocation[1], int))
+            and word == target.fn['words'][index])
+
+
 def compiled_tokens(obj_bytes, symbol, consts=None, bindings=None):
     """Tokens of `symbol`'s code in a compiled object, or (None, reason)."""
     e = Elf(obj_bytes)
@@ -973,7 +1022,10 @@ def compiled_tokens(obj_bytes, symbol, consts=None, bindings=None):
             for o in range(0, len(c), 8):
                 off, info = struct.unpack_from('<II', c, o)
                 rels[off] = (info & 255, syms[info >> 8])
-    toks = []
+    toks = CompiledTokens()
+    resolved = resolved_address_words(code, rels, bindings)
+    toks.resolved_words = {(offset - start) // 4: word for offset, word in resolved.items()
+                           if start <= offset < start + size}
     for off in range(start, start + size, 4):
         w = struct.unpack_from('<I', code, off)[0]
         r = rels.get(off)
@@ -1037,7 +1089,8 @@ def score(target, toks, orig_const):
 
     want = target.tokens
     if len(want) == len(toks):
-        d = sum(0 if same(a, b) or target.literal_match(i, b) else 1
+        d = sum(0 if same(a, b) or target.literal_match(i, b)
+                or resolved_address_match(target, i, toks) else 1
                 for i, (a, b) in enumerate(zip(want, toks)))
         if d == 0:
             return True, 0, ''

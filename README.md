@@ -184,6 +184,11 @@ compiled together in one worker call; (6) identical bodies (`family`): an exact 
 family by renaming symbols; (7) functions m2c cannot read but that are a few special instructions (`li $v1, N; syscall`,
 `ei`, `di`, `sync`) come from one inline-asm template.
 
+Known HI16/LO16 address pairs also compare their complete encoded instructions, including signed-low
+carry and REL addends. This handles a retail LUI shared by several addresses when only the compiled
+object has a symbolic relocation. Unknown symbols and unpaired highs stay unresolved; no output bytes
+are rewritten, and full-image equality remains the placement check.
+
 `python3 tools/autodecomp.py context --refresh` exports both contexts and analyzes every function, matched C/C++ signatures, read-only Ghidra
 snapshots and counterpart source leads. Normal `run` refreshes stale context automatically; `--refresh-context` forces
 it. `build/auto/context.json` keeps evidence, unresolved arities and conflicts. Integer and floating argument banks are
