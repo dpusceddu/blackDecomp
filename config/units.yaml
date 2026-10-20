@@ -51161,13 +51161,10 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   - -fno-rtti
+  - -fno-exceptions
   functions:
   - addr: '0x1a51c8'
     size: 788
-    status: asm
-    reason: campaign
-  - addr: '0x1a54e0'
-    size: 600
     status: asm
     reason: campaign
   - addr: '0x1a5738'
@@ -51192,8 +51189,8 @@ units:
     reason: campaign
   - addr: '0x1a6330'
     size: 1148
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_001A6330
   - addr: '0x1a67b8'
     size: 136
     status: asm
@@ -51204,20 +51201,20 @@ units:
     reason: campaign
   - addr: '0x1a68b0'
     size: 48
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_001A68B0
   - addr: '0x1a6930'
     size: 88
     status: asm
     reason: campaign
   - addr: '0x1a6988'
     size: 156
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_001A6988
   - addr: '0x1a6a28'
     size: 136
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_001A6A28
   - addr: '0x1a6ab0'
     size: 300
     status: asm
@@ -51236,16 +51233,16 @@ units:
     reason: campaign
   - addr: '0x1a73f0'
     size: 96
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_001A73F0
   - addr: '0x1a74e0'
     size: 28
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_001A74E0
   - addr: '0x1a7500'
     size: 40
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_001A7500
   - addr: '0x1a7528'
     size: 312
     status: asm
@@ -51264,12 +51261,12 @@ units:
     reason: campaign
   - addr: '0x1a7d48'
     size: 168
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_001A7D48
   - addr: '0x1a7df0'
     size: 104
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_001A7DF0
   - addr: '0x1a7e58'
     size: 300
     status: asm
@@ -51793,3 +51790,25 @@ units:
     size: 116
     symbol: Reset__Q210ModEffects5Child
     status: source
+- name: mod_arms_1a51c8_tick
+  source: src/mod/arms_1a51c8.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - -fno-exceptions
+  - -DMOD_ARMS_TICK_ONLY
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x1a54e0'
+    size: 600
+    status: source
+    symbol: func_001A54E0
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
