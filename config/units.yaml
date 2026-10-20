@@ -49204,3 +49204,19 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: campaign_actor_baa0_wave5
+  source: src/campaign/actor_baa0_wave5.cpp
+  origin: C++ actor vtable0x3DBAA0 spherical-region cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x164e70'
+    status: source
+    size: 224
+    symbol: Update__Q213CampaignActor15SphericalRegionxl
+  - addr: '0x164f50'
+    status: asm
