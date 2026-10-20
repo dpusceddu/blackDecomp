@@ -20027,7 +20027,7 @@ tus:
   evidence: [eh, calls]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 17 of 26 functions
+  flags_basis: matched 23 of 26 functions
   data:
     .rodata: ['0x40a660', '0x40a6d0']
     .data: ['0x3d2520', '0x3d2b00']
