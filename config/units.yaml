@@ -49289,3 +49289,17 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: campaign_actor_c920_wave5
+  source: src/campaign/actor_c920_wave5.cpp
+  origin: C++ actor vtable0x3DC920 spatial-provider cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x127ac8'
+    status: asm
+  - addr: '0x127cf0'
+    status: asm
