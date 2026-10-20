@@ -607,26 +607,31 @@ because these queues already favored known layouts and counterparts.
 
 ### Mod-focused C++ campaign
 
-Queues now follow camera/input, weapons/shots, first-person animation and visual effects.
-The dedicated shared-context pass added 11 canonical headers with 24 exact consumers; its
-12.09 agent-minutes are separate enabling work. Every queue uses the complete TU inventory,
-including large functions. Throughput includes coordination, integration and final verification;
-a fresh campaign baseline resets the previous campaign’s decline streak.
+Queues follow camera/input, weapons/shots, first-person animation and visual effects.
+Dedicated shared preparation preceded new subsystems: 12.09 and 21.66 agent-minutes for
+the first two passes, separate from campaign timing. Verified mod context grew from
+11 layers / 24 consumers to 23 / 61 through Wave 2; instruction-only layouts stay qualified.
+Every queue uses the full real-function inventory, including large functions. Throughput
+includes coordination, integration and final verification; the mod campaign has its own baseline.
 
 | Wave | New functions / text bytes | Complete TUs | >300 B matched / attempted | >1 KB matched / attempted | Bytes / agent-hour | Trend |
-| --- | --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 41 / 7,728 | 0 | 6/60 | 1/11 | 2,536 | baseline |
+| 2 | 31 / 5,864 | 2 | 5/66 | 0/13 | 2,074 | -18.2% |
 
-Progress: 5,354 / 362,016 → 5,395 functions / 369,744 text bytes
-(13.62% of .text). Complete mod-relevant classes: none established yet.
-Native C++ matrix-array lifetime, mixed-bank call signatures and store order unlock exact
-matches, including a 1,148-byte animation action dispatcher and its owned switch table.
-The main blockers remain VU matrix/operator context, register and branch lifetimes, and
-incomplete shared call contracts. ABI-equivalent declarations do not prove original semantics.
-The unit merger now ignores size-only ASM claim metadata while preserving SOURCE conflicts.
-All 4,232 saved drafts and 6,504 remaining entries were retried after Wave 1; no automatic gain.
+Progress: 5,354 functions / 362,016 text bytes → 5,426 / 375,608
+(13.83% of .text). Complete mod-relevant classes: none established yet.
+Native matrix-array lifetime, mixed-bank call signatures and store order unlock exact methods;
+a state-member RNG expression fixes muzzle allocation where the equivalent C helper does not.
+The main blockers remain VU operator/temporary context, register and branch lifetimes, and
+incomplete mixed-width call contracts. ABI-equivalent declarations do not prove original semantics.
+Scoped assembler alternatives retain weak historical provenance. The unit merger ignores
+size-only ASM claim metadata while preserving SOURCE conflicts.
+Automatic all-size retries after each context refresh added no placeable functions through Wave 2.
 All five retail images remain identical; 273 tooling tests and all shared controls pass.
 The stopping rule permits the next prepared queues.
+Completed `tu_154fd8`: Xbox `0x1babd0`, `0x1b5820` (initializer partly inlined; semantic mapping, original class unproved; shared data remains assembly).
+Completed `tu_1551c8`: Xbox `0x1b56f0`, `0x1ead00`, `0x1bafa0` (return helper and inlined clamp/predicate; semantic mapping, original class unproved; shared data remains assembly).
 
 ## Agent rules (`AGENTS.md`)
 
