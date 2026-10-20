@@ -28,7 +28,7 @@ loop_2:
             goto loop_2;
         }
         var_3 = (var_3 + 1) & 0xFFFF;
-        temp_5->count = 0;
+        temp_5->resource = 0;
     } while (var_3 < 0x2CU);
     return 1;
 }

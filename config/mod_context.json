@@ -450,7 +450,7 @@
         "BkModEffectChildrenPS2"
       ],
       "verified_scope": [
-        "44 records stride130; active124;8 child pointersB0 and signed count110; pendingA8. Matrix/motion/lifetime portions remain instruction-only. Original identities unverified."
+        "44 records stride130; active124;8 child pointersB0 and zero word110. Existing exact Entry methods plus the1BECD0 call chain identify an embedded Entry atB0 with resource pointer110; zeroing alone does not establish semantic type. pendingA8 is source-controlled. Matrix/motion/lifetime portions and original identities remain unverified."
       ],
       "controls": [
         "0x1bec68",
@@ -1411,7 +1411,7 @@
         "active",
         "children",
         "items",
-        "count"
+        "resource"
       ]
     },
     {
