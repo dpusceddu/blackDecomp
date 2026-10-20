@@ -50799,3 +50799,29 @@ units:
     func_002E4CE0: '0x2e4ce0'
     func_002FB9D0: '0x2fb9d0'
     func_002FBC20: '0x2fbc20'
+- name: campaign_wave7_follower
+  source: src/campaign/behaviors_follower_wave7.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d2ff8'
+    size: 168
+    status: source
+    symbol: func_002D2FF8
+  - addr: '0x2d3300'
+    size: 448
+    status: asm
+    reason: campaign
+  externs:
+    D_003C87E0: '0x3c87e0'
+    __throw: '0x292b40'
+    func_002D3520: '0x2d3520'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    terminate__Fv: '0x36f978'
