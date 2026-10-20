@@ -50239,3 +50239,14 @@ units:
   functions:
   - addr: '0x162ae8'
     status: asm
+- name: campaign_actor_bf10_wave6
+  source: src/campaign/actor_bf10_wave6.cpp
+  origin: C++ actor vtable0x3DBF10 command cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x161f58'
+    status: asm
