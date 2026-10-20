@@ -605,6 +605,29 @@ declaration orders and measured large-function near misses before another broad 
 projection for the remaining 2.35 MB is about 1,230 inclusive agent-hours at this rate, optimistic
 because these queues already favored known layouts and counterparts.
 
+### Mod-focused C++ campaign
+
+Queues now follow camera/input, weapons/shots, first-person animation and visual effects.
+The dedicated shared-context pass added 11 canonical headers with 24 exact consumers; its
+12.09 agent-minutes are separate enabling work. Every queue uses the complete TU inventory,
+including large functions. Throughput includes coordination, integration and final verification;
+a fresh campaign baseline resets the previous campaign’s decline streak.
+
+| Wave | New functions / text bytes | Complete TUs | >300 B matched / attempted | >1 KB matched / attempted | Bytes / agent-hour | Trend |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 41 / 7,728 | 0 | 6/60 | 1/11 | 2,536 | baseline |
+
+Progress: 5,354 / 362,016 → 5,395 functions / 369,744 text bytes
+(13.62% of .text). Complete mod-relevant classes: none established yet.
+Native C++ matrix-array lifetime, mixed-bank call signatures and store order unlock exact
+matches, including a 1,148-byte animation action dispatcher and its owned switch table.
+The main blockers remain VU matrix/operator context, register and branch lifetimes, and
+incomplete shared call contracts. ABI-equivalent declarations do not prove original semantics.
+The unit merger now ignores size-only ASM claim metadata while preserving SOURCE conflicts.
+All 4,232 saved drafts and 6,504 remaining entries were retried after Wave 1; no automatic gain.
+All five retail images remain identical; 273 tooling tests and all shared controls pass.
+The stopping rule permits the next prepared queues.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.
