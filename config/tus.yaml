@@ -3439,7 +3439,7 @@ tus:
   confidence: low
   evidence: [proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
+  flags: [-O2, -G0, -snas, -fbyte-bool]
   flags_basis: matched 1 of 1 functions
 - name: tu_15d228
   kind: isolated
@@ -3449,7 +3449,7 @@ tus:
   confidence: low
   evidence: [proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
+  flags: [-O2, -G0, -snas, -fbyte-bool]
   flags_basis: matched 1 of 1 functions
 - name: tu_15d248
   kind: isolated
@@ -3469,7 +3469,7 @@ tus:
   confidence: low
   evidence: [proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
+  flags: [-O2, -G0, -snas, -fbyte-bool]
   flags_basis: matched 1 of 1 functions
 - name: tu_15d2a8
   kind: isolated
@@ -3479,7 +3479,7 @@ tus:
   confidence: low
   evidence: [proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
+  flags: [-O2, -G0, -snas, -fbyte-bool]
   flags_basis: matched 1 of 1 functions
 - name: tu_15d2c8
   kind: isolated
@@ -3489,7 +3489,7 @@ tus:
   confidence: low
   evidence: [proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
+  flags: [-O2, -G0, -snas, -fbyte-bool]
   flags_basis: matched 1 of 1 functions
 - name: tu_15d2e8
   kind: isolated
