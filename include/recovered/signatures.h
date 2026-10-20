@@ -9650,7 +9650,7 @@ extern Recovered_SampleHeader * func_00344020(f32 *, f32 *);
 extern void * func_00344050(void *, f32 *);
 extern Recovered_Pose * func_003440B8(f32 *, f32 *, f32 *);
 extern Recovered_Pose * func_00344118(f32 *, f32 *, f32 *);
-extern Recovered_SampleHeader * func_00344178(f32 *, f32 *, f32 *, f32);
+extern void * func_00344178(Recovered_BkModAnimationPoseHeaderPS2 *, Recovered_BkModAnimationPoseHeaderPS2 *, Recovered_BkModAnimationPoseHeaderPS2 *, f32);
 extern u8 * func_003441D0(u8 *, Recovered_TrackVector *);
 extern u8 * func_00344240(u8 *);
 extern s32 func_003443E0(u8 **, Recovered_TrackVector *, f32);

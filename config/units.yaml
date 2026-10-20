@@ -30536,7 +30536,7 @@ units:
 - name: animation_instance_345500
   source: src/tu/animation_instance_345500.cpp
   origin: animation
-  owner: wave1-animation
+  owner: math-micro
   flags:
   - -O2
   - -G0
@@ -30559,6 +30559,7 @@ units:
     symbol: func_00345F98
     size: 32
     status: source
+  claim: math-layer-study
 - name: auto_animation_345e90
   source: src/auto/animation/345e90.c
   origin: auto
@@ -51685,6 +51686,8 @@ units:
     size: 100
     status: source
     symbol: func_003519A0
+  owner: math-micro
+  claim: math-layer-study
 - name: mod_weapons_tu_15bbd8
   source: src/campaign/mod_weapons_tu_15bbd8.cpp
   origin: game
@@ -52664,3 +52667,31 @@ units:
     symbol: func_00156450
     size: 128
     status: source
+- name: math_micro_controls
+  source: src/ps2/vu0_micro_controls.cpp
+  origin: game
+  owner: math-micro
+  claim: math-layer-study
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x344178'
+    size: 88
+    status: source
+    symbol: func_00344178
+  - addr: '0x348c08'
+    size: 248
+    status: asm
+    reason: math-layer-study
+  - addr: '0x3527e8'
+    size: 96
+    status: asm
+    reason: math-layer-study
+  - addr: '0x352848'
+    size: 128
+    status: asm
+    reason: math-layer-study

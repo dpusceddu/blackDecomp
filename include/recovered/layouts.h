@@ -44,6 +44,7 @@
 #include "recovered/Recovered_BkEffectSlotPS2.h"
 #include "recovered/Recovered_BkEmitterListPS2.h"
 #include "recovered/Recovered_BkFlagAssetPS2.h"
+#include "recovered/Recovered_BkModAnimationPoseHeaderPS2.h"
 #include "recovered/Recovered_BkModDelayedShotPS2.h"
 #include "recovered/Recovered_BkModInventoryPS2.h"
 #include "recovered/Recovered_BkModSourceClipPS2.h"
