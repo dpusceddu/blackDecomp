@@ -7,7 +7,9 @@
 typedef struct BkModWeaponDefinitionPS2 {
     EeU8 unknown00[0x60];
     EeS32 capacity, reserveIndex;
-    EeU8 unknown68[0x5c];
+    EeU8 unknown68[0x38];
+    struct BkModWeaponDefinitionPS2 *secondary; /* A0:15D060/15D248 instruction evidence only. */
+    EeU8 unknowna4[0x20];
     EeU8 flagC4, unknownC5[2], perRound;
 } BkModWeaponDefinitionPS2;
 typedef struct BkModWeaponOwnerPS2 {

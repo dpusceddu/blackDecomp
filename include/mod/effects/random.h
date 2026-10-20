@@ -8,8 +8,9 @@ static inline void BkModEffectRandomSeedPS2(BkModEffectRandomStatePS2 *random, E
     random->accumulator=seed;
     random->state=~seed;
 }
-/* Muzzle instruction recipe only (1BD508/1BCDF8): no source control yet proves
-   the return/allocation context of this inline step or its float conversion. */
+/* Arithmetic instruction recipe. The native state-member form in random.hpp
+   is exact at1BD508/1BCDF8; this local-return C form has a different unverified
+   return/allocation shape and is retained independently. */
 static inline EeU32 BkModEffectRandomSignedStepPS2(BkModEffectRandomStatePS2 *random)
 {
     EeU32 value=(random->state<<16)+((EeS32)random->state>>16)+random->accumulator;

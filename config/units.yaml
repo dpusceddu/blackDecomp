@@ -3560,6 +3560,8 @@ units:
     symbol: func_0013CD20
     size: 228
     status: source
+  owner: mod-context
+  claim: mod-wave3-preparation
 - name: tuf_13d228
   source: src/tu/tu_13d1d0.c
   origin: auto
@@ -5172,6 +5174,8 @@ units:
     symbol: func_0015D228
     size: 28
     status: source
+  owner: mod-context
+  claim: mod-wave3-preparation
 - name: auto_unclassified_15d288
   source: src/auto/unclassified/15d288.c
   origin: auto
@@ -5192,6 +5196,8 @@ units:
     symbol: func_0015D2C8
     size: 28
     status: source
+  owner: mod-context
+  claim: mod-wave3-preparation
 - name: tuf_15d3d8
   source: src/tu/tu_15d370.c
   origin: auto; mod context owner
@@ -13667,6 +13673,8 @@ units:
     symbol: func_001C05F8
     size: 8
     status: source
+  owner: mod-context
+  claim: mod-wave3-preparation
 - name: auto_game_1c0730
   source: src/auto/game/1c0730.c
   origin: auto
@@ -30702,6 +30710,8 @@ units:
     symbol: func_003477D0
     size: 32
     status: source
+  owner: mod-context
+  claim: mod-wave3-preparation
 - name: auto_animation_3477f0
   source: src/auto/animation/3477f0.c
   origin: auto
@@ -30907,6 +30917,8 @@ units:
     symbol: func_003487E8
     size: 8
     status: source
+  owner: mod-context
+  claim: mod-wave3-preparation
 - name: auto_animation_3489a0
   source: src/auto/animation/3489a0.c
   origin: auto
