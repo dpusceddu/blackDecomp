@@ -30690,25 +30690,9 @@ units:
   - -snas
   - -ffunction-sections
   functions:
-  - addr: '0x3461d0'
-    symbol: func_003461D0
-    size: 12
-    status: source
-  - addr: '0x3461e0'
-    symbol: func_003461E0
-    size: 12
-    status: source
-  - addr: '0x346f38'
-    symbol: func_00346F38
-    size: 12
-    status: source
   - addr: '0x346f48'
     symbol: func_00346F48
     size: 16
-    status: source
-  - addr: '0x3477d0'
-    symbol: func_003477D0
-    size: 32
     status: source
   owner: mod-context
   claim: mod-wave3-preparation
@@ -52378,3 +52362,117 @@ units:
     size: 200
     symbol: func_001B90D0
     status: source
+- name: mod_arms_w3_pose_ops
+  source: src/mod/arms_pose_ops_w3.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x3461d0'
+    symbol: func_003461D0
+    size: 12
+    status: source
+  - addr: '0x3461e0'
+    symbol: func_003461E0
+    size: 12
+    status: source
+  - addr: '0x3461f0'
+    size: 64
+    status: source
+    symbol: func_003461F0
+  - addr: '0x346230'
+    size: 732
+    status: asm
+    reason: campaign
+  - addr: '0x346510'
+    size: 344
+    status: asm
+    reason: campaign
+  - addr: '0x346668'
+    size: 728
+    status: asm
+    reason: campaign
+  - addr: '0x346940'
+    size: 876
+    status: asm
+    reason: campaign
+  - addr: '0x346cb0'
+    size: 644
+    status: asm
+    reason: campaign
+  - addr: '0x346f38'
+    symbol: func_00346F38
+    size: 12
+    status: source
+  - addr: '0x346f58'
+    size: 732
+    status: asm
+    reason: campaign
+  - addr: '0x347238'
+    size: 68
+    status: source
+    symbol: func_00347238
+  - addr: '0x347280'
+    size: 428
+    status: asm
+    reason: campaign
+  - addr: '0x347430'
+    size: 196
+    status: asm
+    reason: campaign
+  - addr: '0x3474f8'
+    size: 96
+    status: source
+    symbol: func_003474F8
+  - addr: '0x347558'
+    size: 164
+    status: source
+    symbol: func_00347558
+  - addr: '0x347600'
+    size: 308
+    status: asm
+    reason: campaign
+  - addr: '0x3477d0'
+    symbol: func_003477D0
+    size: 32
+    status: source
+- name: mod_arms_w3_token
+  source: src/mod/arms_token_w3.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2723b0'
+    size: 216
+    status: asm
+    reason: campaign
+- name: mod_arms_w3_pose_static
+  source: src/mod/arms_pose_static_w3.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x347738'
+    size: 148
+    status: source
+    symbol: func_00347738
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
