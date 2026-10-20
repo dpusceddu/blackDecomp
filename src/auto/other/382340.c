@@ -1,10 +1,10 @@
 #include "auto/prelude.h"
+#include "mod/effects/random.h"
 
 void func_00382340(void) {
 
 }
 
 void func_00382348(void *arg0, s32 arg1) {
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
-    M2C_FIELD(arg0, s32 *, 0) = (s32) ~arg1;
+    BkModEffectRandomSeedPS2((BkModEffectRandomStatePS2*)arg0,(EeU32)arg1);
 }

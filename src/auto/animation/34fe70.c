@@ -1,9 +1,8 @@
-#include "auto/prelude.h"
-
-void * func_0034FE70(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0;
-    M2C_FIELD(arg0, s32 *, 4) = 0;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
-    M2C_FIELD(arg0, s8 *, 0xC) = 0;
-    return arg0;
+#include "mod/animation/sampling.h"
+SamplingPair *func_0034FE70(SamplingPair *pair) {
+    pair->first=0;
+    pair->second=0;
+    pair->weight=0;
+    pair->wrapped=0;
+    return pair;
 }

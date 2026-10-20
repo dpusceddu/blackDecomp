@@ -1,6 +1,7 @@
 #ifndef BLACK_MOD_ANIMATION_RUNTIME_H
 #define BLACK_MOD_ANIMATION_RUNTIME_H
 #include "mod/animation/instance.h"
+#include "mod/animation/sampling.h"
 #ifdef __cplusplus
 #include "animation/instance_state.h"
 #endif

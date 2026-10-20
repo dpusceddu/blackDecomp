@@ -1,4 +1,4 @@
-#include "animation/sampling_pipeline.h"
+#include "mod/animation/sampling.h"
 extern SamplingPoseHeader *func_0034F730(SamplingPipeline *, SamplingPoseHeader *, f32, f32, f32, s32, f32, s32);
 SamplingPoseHeader *func_0034F668(SamplingPipeline *context, f32 current, f32 previous, f32 rate, s32 count, f32 weight, s32 flags) {
     SamplingPoseHeader temporary;

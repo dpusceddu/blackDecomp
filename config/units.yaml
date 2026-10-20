@@ -4897,6 +4897,7 @@ units:
     symbol: func_00155088
     size: 56
     status: source
+  claim: shared-mod-context
 - name: auto_game_155118
   source: src/auto/game/155118.c
   origin: auto
@@ -4949,6 +4950,7 @@ units:
     symbol: func_001551A0
     size: 8
     status: source
+  claim: shared-mod-context
 - name: auto_game_1551a8
   source: src/auto/game/1551a8.c
   origin: auto
@@ -5615,6 +5617,7 @@ units:
     symbol: func_001632E0
     size: 20
     status: source
+  claim: shared-mod-context
 - name: auto_game_1632f8
   source: src/auto/game/1632f8.c
   origin: auto
@@ -5627,6 +5630,7 @@ units:
     symbol: func_001632F8
     size: 48
     status: source
+  claim: shared-mod-context
 - name: auto_game_163498
   source: src/auto/game/163498.c
   origin: auto
@@ -31635,6 +31639,7 @@ units:
     symbol: func_0034FE70
     size: 24
     status: source
+  claim: shared-mod-context
 - name: animation_parameter_bank_350060
   source: src/tu/animation_parameter_bank_350060.cpp
   origin: animation
@@ -34373,6 +34378,7 @@ units:
     symbol: func_00382348
     size: 16
     status: source
+  claim: shared-mod-context
 - name: auto_other_382460
   source: src/auto/other/382460.c
   origin: auto
@@ -43222,7 +43228,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: shared-mod-context
   functions:
   - addr: '0x34f980'
     symbol: func_0034F980
@@ -43236,7 +43242,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: shared-mod-context
   functions:
   - addr: '0x34f9d0'
     symbol: func_0034F9D0
@@ -43250,7 +43256,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: shared-mod-context
   functions:
   - addr: '0x34fa60'
     symbol: func_0034FA60
@@ -43264,7 +43270,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: shared-mod-context
   functions:
   - addr: '0x34f668'
     symbol: func_0034F668
@@ -43278,7 +43284,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: shared-mod-context
   functions:
   - addr: '0x34fc80'
     symbol: func_0034FC80
@@ -43293,7 +43299,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: shared-mod-context
   functions:
   - addr: '0x34fb58'
     symbol: func_0034FB58
@@ -43308,7 +43314,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: shared-mod-context
   functions:
   - addr: '0x34f730'
     symbol: func_0034F730
@@ -43323,7 +43329,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: shared-mod-context
   functions:
   - addr: '0x34f430'
     symbol: func_0034F430
@@ -51443,7 +51449,7 @@ units:
   source: src/campaign/mod_weapons_tu_1561f8.cpp
   origin: game
   owner: mod-weapons
-  claim: mod-wave1-weapons
+  claim: shared-mod-context
   flags:
   - -O2
   - -G0
@@ -51537,7 +51543,7 @@ units:
   source: src/campaign/mod_weapons_tu_158f08.cpp
   origin: game
   owner: mod-weapons
-  claim: mod-wave1-weapons
+  claim: shared-mod-context
   flags:
   - -O2
   - -G0
@@ -51624,7 +51630,7 @@ units:
   source: src/campaign/mod_weapons_tu_15d370.cpp
   origin: game
   owner: mod-weapons
-  claim: mod-wave1-weapons
+  claim: shared-mod-context
   flags:
   - -O2
   - -G0
@@ -51687,6 +51693,7 @@ units:
     size: 56
     symbol: Initialize__Q210ModEffects5ChildPvPQ210ModEffects5EntryPCQ210ModEffects6Matrixf
     status: source
+  claim: shared-mod-context
 - name: mod_effects_1b1168
   source: src/mod/effects/lifecycle_1b1168.cpp
   flags:
@@ -51701,6 +51708,7 @@ units:
     size: 52
     symbol: Initialize__Q210ModEffects5EntryPCQ210ModEffects6MatrixPcUcf
     status: source
+  claim: shared-mod-context
 - name: mod_effects_1b1518
   source: src/mod/effects/lifecycle_1b1518.cpp
   flags:
@@ -51715,6 +51723,7 @@ units:
     size: 132
     symbol: Release__Q210ModEffects5Entry
     status: source
+  claim: shared-mod-context
 - name: mod_effects_1b16a8
   source: src/mod/effects/lifecycle_1b16a8.cpp
   flags:
@@ -51729,6 +51738,7 @@ units:
     size: 128
     symbol: Active__Q210ModEffects5Entry
     status: source
+  claim: shared-mod-context
 - name: mod_effects_1b2408
   source: src/mod/effects/lifecycle_1b2408.cpp
   flags:
@@ -51743,6 +51753,7 @@ units:
     size: 48
     symbol: Clear__Q210ModEffects9RecordSet
     status: source
+  claim: shared-mod-context
 - name: mod_effects_1b22d8
   source: src/mod/effects/lifecycle_1b22d8.cpp
   flags:
@@ -51757,6 +51768,7 @@ units:
     size: 132
     symbol: func_001B22D8
     status: source
+  claim: shared-mod-context
 - name: mod_effects_1b0ff8
   source: src/mod/effects/lifecycle_1b0ff8.cpp
   flags:
@@ -51772,6 +51784,7 @@ units:
     size: 64
     symbol: Clear__Q210ModEffects5Child
     status: source
+  claim: shared-mod-context
 - name: mod_effects_1b1080
   source: src/mod/effects/lifecycle_1b1080.cpp
   flags:
@@ -51787,6 +51800,7 @@ units:
     size: 116
     symbol: Reset__Q210ModEffects5Child
     status: source
+  claim: shared-mod-context
 - name: mod_arms_1a51c8_tick
   source: src/mod/arms_1a51c8.cpp
   language: c++
@@ -51824,6 +51838,7 @@ units:
     size: 280
     status: source
     symbol: RemoveBone__Q210ModEffects4BankPQ210ModEffects5ActorUc
+  claim: shared-mod-context
 - name: mod_arms_34eae0_evaluate
   source: src/mod/arms_34eae0.cpp
   language: c++

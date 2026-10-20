@@ -1,4 +1,4 @@
-#include "game/effects/mod_slot_views.hpp"
+#include "mod/effects/slot_views.hpp"
 extern "C" void func_001B3D18(void *);
 void ModEffects::Bank::RemoveBone(Actor *actor,unsigned char bone){
  unsigned short index=actor->indices[bone];unsigned count=actor->boneCount;

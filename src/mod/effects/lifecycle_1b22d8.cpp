@@ -1,4 +1,4 @@
-#include "game/effects/mod_lifecycle_views.hpp"
+#include "mod/effects/runtime.hpp"
 extern "C" {long func_001C01E0(void *,void *,int,void *,float);long func_001C1740(void *,void *,int,void *,float);}
 struct EffectDispatch{char opaque[0x873f0];void *definition;};
 extern "C" long func_001B22D8(EffectDispatch *system,void *data,unsigned short index,void *world,float now){
