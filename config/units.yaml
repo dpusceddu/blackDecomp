@@ -49204,3 +49204,55 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: context_graph_nearest_nodes
+  source: src/campaign/graph_nearest_nodes.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave5-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  functions:
+  - addr: '0x2fb6d8'
+    size: 372
+    symbol: func_002FB6D8
+    status: asm
+    reason: registers
+  - addr: '0x2fb850'
+    size: 380
+    symbol: func_002FB850
+    status: asm
+    reason: registers
+  - addr: '0x2fb9d0'
+    size: 592
+    symbol: func_002FB9D0
+    status: asm
+    reason: registers
+  - addr: '0x2fbc20'
+    size: 1596
+    symbol: func_002FBC20
+    status: asm
+    reason: inline
+  - addr: '0x2fc260'
+    size: 360
+    symbol: func_002FC260
+    status: asm
+    reason: registers
+  - addr: '0x2fc3c8'
+    size: 668
+    symbol: func_002FC3C8
+    status: asm
+    reason: registers
+  - addr: '0x2fc668'
+    size: 644
+    symbol: func_002FC668
+    status: asm
+    reason: registers
+  - addr: '0x2fc8f0'
+    size: 300
+    symbol: DrawPath__FP9QueryPath
+    status: source
