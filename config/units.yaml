@@ -47923,14 +47923,10 @@ units:
   - -ffunction-sections
   - -mvu0-use-vf0-vf31
   functions:
-  - addr: '0x191c80'
-    status: asm
   - addr: '0x192fb0'
     status: source
     size: 144
     symbol: UpdateTarget__Q29BlackGame9RouteModex
-  - addr: '0x1930f8'
-    status: asm
   externs:
     RetargetLive__9BlackGamePQ29BlackGame9RouteModex: '0x193040'
     UpdateDestination__Q29BlackGame12RouteRequestx: '0x17a9c8'
@@ -50732,3 +50728,83 @@ units:
     reason: unmatched
   externs:
     D_0040F4D0: '0x40f4d0'
+- name: campaign_actor_191568_wave7
+  source: src/campaign/actor_191568_wave7.cpp
+  origin: C++ actor RouteMode TU191568 full inventory
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  - -fbyte-bool
+  functions:
+  - addr: '0x1916e8'
+    status: source
+    symbol: SetDestination__Q29BlackGame16MovementModeBasex
+    size: 140
+    name: func_001916E8
+  - addr: '0x1917a0'
+    status: asm
+    size: 644
+    name: func_001917A0
+  - addr: '0x191a28'
+    status: asm
+    size: 116
+    name: func_00191A28
+  - addr: '0x191aa0'
+    status: asm
+    size: 88
+    name: func_00191AA0
+  - addr: '0x191af8'
+    status: source
+    symbol: ProjectOntoSegment__9BlackGamePCQ29BlackGame16MovementModeBasexx
+    size: 68
+    name: func_00191AF8
+  - addr: '0x191c80'
+    status: asm
+    size: 188
+    name: func_00191C80
+  - addr: '0x1921d8'
+    status: asm
+    size: 268
+    name: func_001921D8
+  - addr: '0x192380'
+    status: asm
+    size: 240
+    name: func_00192380
+  - addr: '0x192470'
+    status: asm
+    size: 240
+    name: func_00192470
+  - addr: '0x192698'
+    status: asm
+    size: 868
+    name: func_00192698
+  - addr: '0x192a78'
+    status: asm
+    size: 716
+    name: func_00192A78
+  - addr: '0x192d48'
+    status: asm
+    size: 116
+    name: func_00192D48
+  - addr: '0x192eb0'
+    status: asm
+    size: 252
+    name: func_00192EB0
+  - addr: '0x1930f8'
+    status: asm
+    size: 760
+    name: func_001930F8
+  - addr: '0x1934a8'
+    status: asm
+    size: 192
+    name: func_001934A8
+  - addr: '0x193568'
+    status: asm
+    size: 160
+    name: func_00193568
+  externs:
+    Clear__Q29BlackGame11ActionTimer: '0x173690'
+    UpdateDestinationDistances__Q29BlackGame16MovementModeBase: '0x191a28'
