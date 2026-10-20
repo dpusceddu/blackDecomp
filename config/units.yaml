@@ -49614,3 +49614,314 @@ units:
     func_0014FBE8: '0x14fbe8'
     func_00155C28: '0x155c28'
     func_001EA580: '0x1ea580'
+- name: campaign_selectors_1a83a0
+  source: src/campaign/graphics_selector_1a83a0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1a83a0'
+    symbol: func_001A83A0
+    size: 632
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1a8618
+  source: src/campaign/graphics_selector_1a8618.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1a8618'
+    symbol: func_001A8618
+    size: 200
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1a86e0
+  source: src/campaign/graphics_selector_1a86e0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1a86e0'
+    symbol: func_001A86E0
+    size: 828
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1a8d50
+  source: src/campaign/graphics_selector_1a8d50.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1a8d50'
+    symbol: func_001A8D50
+    size: 224
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1a8f78
+  source: src/campaign/graphics_selector_1a8f78.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1a8f78'
+    symbol: func_001A8F78
+    size: 1472
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1a9538
+  source: src/campaign/graphics_selector_1a9538.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1a9538'
+    symbol: func_001A9538
+    size: 976
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1a9908
+  source: src/campaign/graphics_selector_1a9908.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1a9908'
+    symbol: func_001A9908
+    size: 1432
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1a9ed0
+  source: src/campaign/graphics_selector_1a9ed0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1a9ed0'
+    symbol: func_001A9ED0
+    size: 940
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1aa9d8
+  source: src/campaign/graphics_selector_1aa9d8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1aa9d8'
+    symbol: func_001AA9D8
+    size: 800
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1aacf8
+  source: src/campaign/graphics_selector_1aacf8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1aacf8'
+    symbol: func_001AACF8
+    size: 148
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1ad378
+  source: src/campaign/graphics_selector_1ad378.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1ad378'
+    symbol: Stand__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
+    size: 212
+    status: source
+- name: campaign_selectors_1ad450
+  source: src/campaign/graphics_selector_1ad450.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1ad450'
+    symbol: State__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actoril
+    size: 192
+    status: source
+- name: campaign_selectors_1ad510
+  source: src/campaign/graphics_selector_1ad510.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1ad510'
+    symbol: Transition__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
+    size: 256
+    status: source
+- name: campaign_selectors_1ad610
+  source: src/campaign/graphics_selector_1ad610.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1ad610'
+    symbol: func_001AD610
+    size: 216
+    status: asm
+    reason: claimed
+- name: campaign_selectors_1ad6e8
+  source: src/campaign/graphics_selector_1ad6e8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1ad6e8'
+    symbol: Special__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
+    size: 252
+    status: source
+- name: campaign_selectors_1ad7e8
+  source: src/campaign/graphics_selector_1ad7e8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1ad7e8'
+    symbol: Primary__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
+    size: 152
+    status: source
+- name: campaign_selectors_1ad880
+  source: src/campaign/graphics_selector_1ad880.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1ad880'
+    symbol: Secondary__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
+    size: 152
+    status: source
+- name: campaign_selectors_1ad918
+  source: src/campaign/graphics_selector_1ad918.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1ad918'
+    symbol: Tertiary__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
+    size: 152
+    status: source
+- name: campaign_selectors_1adaa0
+  source: src/campaign/graphics_selector_1adaa0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1adaa0'
+    symbol: Utility__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actorl
+    size: 84
+    status: source
+- name: campaign_selectors_1adb28
+  source: src/campaign/graphics_selector_1adb28.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1adb28'
+    symbol: Final__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
+    size: 152
+    status: source
