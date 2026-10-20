@@ -49048,3 +49048,31 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: campaign_actor_bf48_wave5
+  source: src/campaign/actor_bf48_wave5.cpp
+  origin: C++ actor vtable0x3DBF48 region cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x169f38'
+    status: asm
+  - addr: '0x16a250'
+    status: asm
+  - addr: '0x16a720'
+    status: source
+    size: 84
+    symbol: Debug__Q213CampaignActor10RoomRegion
+  - addr: '0x16a7c0'
+    status: asm
+  - addr: '0x16aa78'
+    status: asm
+  externs:
+    D_0040F4C0: '0x40f4c0'
+    D_00414D10: '0x414d10'
+    func_001AE5E8: '0x1ae5e8'
+    func_0026A840: '0x26a840'
+    func_0026AA68: '0x26aa68'
