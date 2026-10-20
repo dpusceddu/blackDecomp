@@ -50151,3 +50151,18 @@ units:
     _vt$Q211HideQueries5Query: '0x3e2ab8'
     func_002E7360: '0x2e7360'
     func_002E8AB8: '0x2e8ab8'
+- name: campaign_actor_bb90_wave6
+  source: src/campaign/actor_bb90_wave6.cpp
+  origin: C++ actor vtable0x3DBB90 command cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x162fb0'
+    symbol: Execute__Q213CampaignActor11ModeCommand
+    size: 308
+    status: source
+  externs:
+    D_0040F514: '0x40f514'
