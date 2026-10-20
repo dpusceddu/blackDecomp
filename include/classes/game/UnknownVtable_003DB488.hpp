@@ -33,7 +33,7 @@ struct UnknownVtable_003DB488 {
     // 0x001069F8: UNVERIFIED signature (include/game/frontend_resources.hpp).
     unsigned int Function_001069F8();
     // 0x00106D70: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_00106D70();
+    int Function_00106D70();
     // 0x00106DF0: UNVERIFIED signature (src/game/frontend_sequential_exit.cpp).
     int Function_00106DF0();
     // 0x00106ED8: UNVERIFIED signature (src/tu/106ed8.c).
@@ -53,7 +53,7 @@ struct UnknownVtable_003DB488 {
         // slot 1, table+0x10, this delta 0, function 0x001069F8; UNVERIFIED signature.
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00106D70; UNVERIFIED signature.
-        virtual unsigned int Slot002();
+        virtual int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00106DF0; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00106ED8; UNVERIFIED signature.

@@ -24,22 +24,22 @@ struct UnknownVtable_003E0180 {
     void Function_001AA490(void * argument0, void * argument1, int argument2, int argument3);
     // 0x001AA9D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001AA9D8(signed char * argument0, signed char * argument1, unsigned int argument2, float argument3);
-    // 0x001AD378: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    signed char * Function_001AD378(signed char * argument0, signed char * argument1);
-    // 0x001AD450: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    signed char * Function_001AD450(signed char * argument0, signed char * argument1, unsigned int argument2, unsigned int argument3);
-    // 0x001AD510: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    signed char * Function_001AD510(signed char * argument0, signed char * argument1);
+    // 0x001AD378: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
+    void Function_001AD378(signed char * argument0, void * argument1);
+    // 0x001AD450: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
+    void Function_001AD450(signed char * argument0, void * argument1, int argument2, long argument3);
+    // 0x001AD510: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
+    void Function_001AD510(signed char * argument0, void * argument1);
     // 0x001AD610: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001AD610(signed char * argument0, signed char * argument1, unsigned int argument2, unsigned int argument3);
-    // 0x001AD6E8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    signed char * Function_001AD6E8(signed char * argument0, signed char * argument1);
-    // 0x001AD7E8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    signed char * Function_001AD7E8(signed char * argument0, signed char * argument1);
-    // 0x001AD880: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    signed char * Function_001AD880(signed char * argument0, signed char * argument1);
-    // 0x001AD918: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    signed char * Function_001AD918(signed char * argument0, signed char * argument1);
+    // 0x001AD6E8: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
+    void Function_001AD6E8(signed char * argument0, void * argument1);
+    // 0x001AD7E8: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
+    void Function_001AD7E8(signed char * argument0, void * argument1);
+    // 0x001AD880: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
+    void Function_001AD880(signed char * argument0, void * argument1);
+    // 0x001AD918: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
+    void Function_001AD918(signed char * argument0, void * argument1);
     // 0x001AD9B0: UNVERIFIED signature (src/auto/game/1ad9b0.c).
     signed char * Function_001AD9B0(signed char * argument0, signed char * argument1);
     // 0x001AD9E0: UNVERIFIED signature (src/auto/game/1ad9b0.c).
@@ -50,12 +50,12 @@ struct UnknownVtable_003E0180 {
     signed char * Function_001ADA40(signed char * argument0, signed char * argument1);
     // 0x001ADA70: UNVERIFIED signature (src/auto/game/1ad9b0.c).
     signed char * Function_001ADA70(signed char * argument0, signed char * argument1);
-    // 0x001ADAA0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    signed char * Function_001ADAA0(signed char * argument0, signed char * argument1, unsigned int argument2);
+    // 0x001ADAA0: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
+    void Function_001ADAA0(signed char * argument0, void * argument1, long argument2);
     // 0x001ADAF8: UNVERIFIED signature (src/auto/game/1adaf8.c).
     signed char * Function_001ADAF8(signed char * argument0, signed char * argument1);
-    // 0x001ADB28: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    signed char * Function_001ADB28(signed char * argument0, signed char * argument1);
+    // 0x001ADB28: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
+    void Function_001ADB28(signed char * argument0, void * argument1);
     // 0x00384410: UNVERIFIED signature (src/auto/other/3843b0.c).
     unsigned int Function_00384410();
 
@@ -63,13 +63,13 @@ struct UnknownVtable_003E0180 {
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
     struct VirtualInterface0 {
         // slot 0, table+0x8, this delta 0, function 0x001AD378; UNVERIFIED signature.
-        virtual signed char * Slot000(signed char * argument0, signed char * argument1);
+        virtual void Slot000(signed char * argument0, void * argument1);
         // slot 1, table+0x10, this delta 0, function 0x001AD510; UNVERIFIED signature.
-        virtual signed char * Slot001(signed char * argument0, signed char * argument1);
+        virtual void Slot001(signed char * argument0, void * argument1);
         // slot 2, table+0x18, this delta 0, function 0x00384410; UNVERIFIED signature.
         virtual unsigned int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x001AD450; UNVERIFIED signature.
-        virtual signed char * Slot003(signed char * argument0, signed char * argument1, unsigned int argument2, unsigned int argument3);
+        virtual void Slot003(signed char * argument0, void * argument1, int argument2, long argument3);
         // slot 4, table+0x28, this delta 0, function 0x001AD610; UNVERIFIED signature.
         virtual signed char * Slot004(signed char * argument0, signed char * argument1, unsigned int argument2, unsigned int argument3);
         // slot 5, table+0x30, this delta 0, function 0x001A9ED0; UNVERIFIED signature.
@@ -85,13 +85,13 @@ struct UnknownVtable_003E0180 {
         // slot 10, table+0x58, this delta 0, function 0x001A9908; UNVERIFIED signature.
         virtual signed char * Slot010(signed char * argument0, signed char * argument1, unsigned int argument2, float argument3);
         // slot 11, table+0x60, this delta 0, function 0x001AD6E8; UNVERIFIED signature.
-        virtual signed char * Slot011(signed char * argument0, signed char * argument1);
+        virtual void Slot011(signed char * argument0, void * argument1);
         // slot 12, table+0x68, this delta 0, function 0x001AD7E8; UNVERIFIED signature.
-        virtual signed char * Slot012(signed char * argument0, signed char * argument1);
+        virtual void Slot012(signed char * argument0, void * argument1);
         // slot 13, table+0x70, this delta 0, function 0x001AD880; UNVERIFIED signature.
-        virtual signed char * Slot013(signed char * argument0, signed char * argument1);
+        virtual void Slot013(signed char * argument0, void * argument1);
         // slot 14, table+0x78, this delta 0, function 0x001AD918; UNVERIFIED signature.
-        virtual signed char * Slot014(signed char * argument0, signed char * argument1);
+        virtual void Slot014(signed char * argument0, void * argument1);
         // slot 15, table+0x80, this delta 0, function 0x001AD9E0; UNVERIFIED signature.
         virtual signed char * Slot015(signed char * argument0, signed char * argument1);
         // slot 16, table+0x88, this delta 0, function 0x001ADA10; UNVERIFIED signature.
@@ -103,11 +103,11 @@ struct UnknownVtable_003E0180 {
         // slot 19, table+0xA0, this delta 0, function 0x001A8D50; UNVERIFIED signature.
         virtual int Slot019(signed char * argument0, signed char * argument1, unsigned int argument2);
         // slot 20, table+0xA8, this delta 0, function 0x001ADAA0; UNVERIFIED signature.
-        virtual signed char * Slot020(signed char * argument0, signed char * argument1, unsigned int argument2);
+        virtual void Slot020(signed char * argument0, void * argument1, long argument2);
         // slot 21, table+0xB0, this delta 0, function 0x001ADAF8; UNVERIFIED signature.
         virtual signed char * Slot021(signed char * argument0, signed char * argument1);
         // slot 22, table+0xB8, this delta 0, function 0x001ADB28; UNVERIFIED signature.
-        virtual signed char * Slot022(signed char * argument0, signed char * argument1);
+        virtual void Slot022(signed char * argument0, void * argument1);
         // slot 23, table+0xC0, this delta 0, function 0x001ADA70; UNVERIFIED signature.
         virtual signed char * Slot023(signed char * argument0, signed char * argument1);
     };

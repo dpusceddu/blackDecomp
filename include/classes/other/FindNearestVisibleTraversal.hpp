@@ -16,34 +16,16 @@ struct FindNearestVisibleTraversal {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline long & Field_0008() { return *(long *)((unsigned char *)this + 0x8); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
-    // 0x24: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0024() { return *(float *)((unsigned char *)this + 0x24); }
-    // 0x28: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0028() { return *(int *)((unsigned char *)this + 0x28); }
-    // 0x2C: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_002C() { return *(unsigned char *)((unsigned char *)this + 0x2C); }
-    // 0x2D: UNVERIFIED type; PS2 access offset.
-    inline unsigned char & Field_002D() { return *(unsigned char *)((unsigned char *)this + 0x2D); }
     // 0x003915C8: UNVERIFIED signature (src/auto/kynapse/3915c0.c).
     unsigned int Function_003915C8();
     // 0x00391E18: UNVERIFIED signature (src/auto/kynapse/391e10.c).
     int Function_00391E18();
     // 0x003921B8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003921B8();
-    // 0x00392298: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x00392298: UNVERIFIED signature (include/campaign/graph/node_queries.hpp).
     int Function_00392298(void * argument0);
-    // 0x00392550: UNVERIFIED signature (src/auto/kynapse/392550.c).
-    long Function_00392550();
+    // 0x00392550: UNVERIFIED signature (include/campaign/graph/node_queries.hpp).
+    long Function_00392550(void * argument0);
 
     // Vtable 0x003EED00; vptr field offset unknown; RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -51,7 +33,7 @@ struct FindNearestVisibleTraversal {
         // slot 0, table+0x8, this delta 0, function 0x003921B8; UNVERIFIED signature.
         virtual ~VirtualInterface0();
         // slot 1, table+0x10, this delta 0, function 0x00392550; UNVERIFIED signature.
-        virtual long Slot001();
+        virtual long Slot001(void * argument0);
         // slot 2, table+0x18, this delta 0, function 0x003915C8; UNVERIFIED signature.
         virtual unsigned int Slot002();
         // slot 3, table+0x20, this delta 0, function 0x00392298; UNVERIFIED signature.

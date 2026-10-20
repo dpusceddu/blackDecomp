@@ -5,16 +5,6 @@
 
 typedef struct Recovered_AnimationChannelState {
     s32 field_0; /* PS2 +0x0 */
-    u8 opaque_4[2456];
-    s32 field_99C; /* PS2 +0x99C */
-    f32 field_9A0; /* PS2 +0x9A0 */
-    f32 field_9A4; /* PS2 +0x9A4 */
-    u8 opaque_9A8[4];
-    void * field_9AC; /* PS2 +0x9AC */
 } Recovered_AnimationChannelState;
 typedef char assert_Recovered_AnimationChannelState_0[(((int)&((Recovered_AnimationChannelState *)0)->field_0) == 0) ? 1 : -1];
-typedef char assert_Recovered_AnimationChannelState_99C[(((int)&((Recovered_AnimationChannelState *)0)->field_99C) == 2460) ? 1 : -1];
-typedef char assert_Recovered_AnimationChannelState_9A0[(((int)&((Recovered_AnimationChannelState *)0)->field_9A0) == 2464) ? 1 : -1];
-typedef char assert_Recovered_AnimationChannelState_9A4[(((int)&((Recovered_AnimationChannelState *)0)->field_9A4) == 2468) ? 1 : -1];
-typedef char assert_Recovered_AnimationChannelState_9AC[(((int)&((Recovered_AnimationChannelState *)0)->field_9AC) == 2476) ? 1 : -1];
 #endif

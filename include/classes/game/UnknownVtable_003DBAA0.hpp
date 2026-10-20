@@ -12,7 +12,7 @@ struct UnknownVtable_003DBAA0 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned long & Field_0000() { return *(unsigned long *)((unsigned char *)this + 0x0); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
+    // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
     // 0x114: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0114() { return *(void * *)((unsigned char *)this + 0x114); }
@@ -42,8 +42,8 @@ struct UnknownVtable_003DBAA0 {
     unsigned int Function_00126090();
     // 0x001261F8: UNVERIFIED signature (src/auto/game/1261f8.c).
     int Function_001261F8();
-    // 0x00164E70: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    int Function_00164E70(unsigned int argument0, unsigned int argument1);
+    // 0x00164E70: UNVERIFIED signature (src/campaign/actor_baa0_wave5.cpp).
+    long Function_00164E70(unsigned int argument0, long argument1);
     // 0x00164F50: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     void * Function_00164F50();
     // 0x001650B0: UNVERIFIED signature (src/auto/game/1650b0.c).
@@ -111,7 +111,7 @@ struct UnknownVtable_003DBAA0 {
         // slot 17, table+0x90, this delta 0, function 0x00169C10; UNVERIFIED signature.
         virtual int Slot017(unsigned long argument0, void * argument1);
         // slot 18, table+0x98, this delta 0, function 0x00164E70; UNVERIFIED signature.
-        virtual int Slot018(unsigned int argument0, unsigned int argument1);
+        virtual long Slot018(unsigned int argument0, long argument1);
         // slot 19, table+0xA0, this delta 0, function 0x00169D20; UNVERIFIED signature.
         virtual int Slot019();
         // slot 20, table+0xA8, this delta 0, function 0x00169EB0; UNVERIFIED signature.

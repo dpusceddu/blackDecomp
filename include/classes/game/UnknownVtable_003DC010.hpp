@@ -26,6 +26,10 @@ struct UnknownVtable_003DC010 {
     inline int & Field_0120() { return *(int *)((unsigned char *)this + 0x120); }
     // 0x124: UNVERIFIED type; PS2 access offset.
     inline int & Field_0124() { return *(int *)((unsigned char *)this + 0x124); }
+    // 0x130: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline S128 & Field_0130() { return *(S128 *)((unsigned char *)this + 0x130); }
+    // 0x140: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
+    inline S128 & Field_0140() { return *(S128 *)((unsigned char *)this + 0x140); }
     // 0x00125D10: UNVERIFIED signature (src/auto/game/125d10.c).
     int Function_00125D10();
     // 0x00125E20: UNVERIFIED signature (src/auto/game/125e20.c).
@@ -58,8 +62,8 @@ struct UnknownVtable_003DC010 {
     int Function_0016A250(unsigned int argument0, unsigned int argument1);
     // 0x0016A2F8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0016A2F8(unsigned int argument0, unsigned int argument1);
-    // 0x0016A720: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_0016A720();
+    // 0x0016A720: UNVERIFIED signature (src/campaign/actor_bf48_wave5.cpp).
+    void Function_0016A720();
     // 0x0016A778: UNVERIFIED signature (src/tu/tu_16a720.c).
     int Function_0016A778();
     // 0x00383768: UNVERIFIED signature (src/auto/other/383768.c).
@@ -115,7 +119,7 @@ struct UnknownVtable_003DC010 {
         // slot 19, table+0xA0, this delta 0, function 0x0016A250; UNVERIFIED signature.
         virtual int Slot019(unsigned int argument0, unsigned int argument1);
         // slot 20, table+0xA8, this delta 0, function 0x0016A720; UNVERIFIED signature.
-        virtual unsigned int Slot020();
+        virtual void Slot020();
         // slot 21, table+0xB0, this delta 0, function 0x00169F38; UNVERIFIED signature.
         virtual int Slot021(unsigned long argument0, void * argument1);
     };

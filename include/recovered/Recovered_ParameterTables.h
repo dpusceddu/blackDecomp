@@ -23,7 +23,7 @@ typedef struct Recovered_ParameterTables {
     s32 field_40; /* PS2 +0x40 */
     s32 field_44; /* PS2 +0x44 */
     s32 field_48; /* PS2 +0x48 */
-    u32 field_4C; /* PS2 +0x4C */
+    s32 field_4C; /* PS2 +0x4C */
     u8 field_50; /* PS2 +0x50 */
 } Recovered_ParameterTables;
 typedef char assert_Recovered_ParameterTables_0[(((int)&((Recovered_ParameterTables *)0)->field_0) == 0) ? 1 : -1];

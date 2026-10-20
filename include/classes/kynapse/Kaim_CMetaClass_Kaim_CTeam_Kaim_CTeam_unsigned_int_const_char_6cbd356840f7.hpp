@@ -11,6 +11,7 @@ namespace BlackPS2Classes {
 // RTTI getters: 0x0038F190.
 struct Kaim_CMetaClass_Kaim_CTeam_Kaim_CTeam_unsigned_int_const_char_6cbd356840f7 {
     typedef Hierarchy_Kaim_CMetaClass_Kaim_CTeam_Kaim_CTeam_unsigned_int_const_char_6cbd356840f7 Hierarchy; // Semantic bases, not an object layout.
+    // Constructor identity: 0x0038F000; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x0038F278.
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0038F278: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).

@@ -5,10 +5,10 @@
 
 typedef struct Recovered_RouteBuffers {
     u8 opaque_0[8];
-    u32 field_8; /* PS2 +0x8 */
+    s32 field_8; /* PS2 +0x8 */
     u32 field_C; /* PS2 +0xC */
     u32 field_10; /* PS2 +0x10 */
-    s32 field_14; /* PS2 +0x14 */
+    void * field_14; /* PS2 +0x14 */
     s32 field_18; /* PS2 +0x18 */
     u32 field_1C; /* PS2 +0x1C */
 } Recovered_RouteBuffers;

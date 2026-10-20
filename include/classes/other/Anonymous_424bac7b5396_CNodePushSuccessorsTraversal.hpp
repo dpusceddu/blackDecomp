@@ -16,23 +16,15 @@ struct Anonymous_424bac7b5396_CNodePushSuccessorsTraversal {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x4: UNVERIFIED type; PS2 access offset.
-    inline int * & Field_0004() { return *(int * *)((unsigned char *)this + 0x4); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline int & Field_0014() { return *(int *)((unsigned char *)this + 0x14); }
     // 0x00389168: UNVERIFIED signature (src/auto/unclassified/389100.c).
     unsigned int Function_00389168();
     // 0x00389170: UNVERIFIED signature (src/auto/unclassified/389100.c).
     int Function_00389170();
-    // 0x0038F2A8: UNVERIFIED signature (src/auto/kynapse/38f2a8.c).
-    unsigned int Function_0038F2A8();
+    // 0x0038F2A8: UNVERIFIED signature (include/campaign/graph/search_workspace.hpp).
+    unsigned int Function_0038F2A8(void * argument0);
     // 0x0038F5E0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038F5E0();
-    // 0x0038F668: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x0038F668: UNVERIFIED signature (include/campaign/graph/search_workspace.hpp).
     int Function_0038F668(void * argument0);
 
     // Vtable 0x003EBDF8; vptr field offset unknown; RTTI header.
@@ -43,7 +35,7 @@ struct Anonymous_424bac7b5396_CNodePushSuccessorsTraversal {
         // slot 1, table+0x10, this delta 0, function 0x00389168; UNVERIFIED signature.
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x0038F2A8; UNVERIFIED signature.
-        virtual unsigned int Slot002();
+        virtual unsigned int Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x00389170; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x0038F668; UNVERIFIED signature.

@@ -16,28 +16,16 @@ struct FindNearestEdgeTraversal {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x8: UNVERIFIED type; PS2 access offset.
-    inline long & Field_0008() { return *(long *)((unsigned char *)this + 0x8); }
-    // 0x10: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0010() { return *(float *)((unsigned char *)this + 0x10); }
-    // 0x14: UNVERIFIED type; PS2 access offset.
-    inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
-    // 0x18: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
-    // 0x1C: UNVERIFIED type; PS2 access offset.
-    inline float & Field_001C() { return *(float *)((unsigned char *)this + 0x1C); }
-    // 0x20: UNVERIFIED type; PS2 access offset.
-    inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
     // 0x003915C0: UNVERIFIED signature (src/auto/kynapse/3915c0.c).
     unsigned int Function_003915C0();
     // 0x00391E10: UNVERIFIED signature (src/auto/kynapse/391e10.c).
     int Function_00391E10();
     // 0x00392A68: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00392A68();
-    // 0x00392B48: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
+    // 0x00392B48: UNVERIFIED signature (include/campaign/graph/node_queries.hpp).
     int Function_00392B48(void * argument0);
-    // 0x00392D38: UNVERIFIED signature (src/auto/kynapse/392d38.c).
-    long Function_00392D38();
+    // 0x00392D38: UNVERIFIED signature (include/campaign/graph/node_queries.hpp).
+    long Function_00392D38(void * argument0);
 
     // Vtable 0x003EEC90; vptr field offset unknown; RTTI header.
     // Separate interface preserves slot order without claiming this object's C++ inheritance layout.
@@ -47,7 +35,7 @@ struct FindNearestEdgeTraversal {
         // slot 1, table+0x10, this delta 0, function 0x003915C0; UNVERIFIED signature.
         virtual unsigned int Slot001();
         // slot 2, table+0x18, this delta 0, function 0x00392D38; UNVERIFIED signature.
-        virtual long Slot002();
+        virtual long Slot002(void * argument0);
         // slot 3, table+0x20, this delta 0, function 0x00391E10; UNVERIFIED signature.
         virtual int Slot003();
         // slot 4, table+0x28, this delta 0, function 0x00392B48; UNVERIFIED signature.

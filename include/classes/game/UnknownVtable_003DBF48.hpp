@@ -72,8 +72,8 @@ struct UnknownVtable_003DBF48 {
     int Function_00169F38(unsigned long argument0, void * argument1);
     // 0x0016A250: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0016A250(unsigned int argument0, unsigned int argument1);
-    // 0x0016A720: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
-    unsigned int Function_0016A720();
+    // 0x0016A720: UNVERIFIED signature (src/campaign/actor_bf48_wave5.cpp).
+    void Function_0016A720();
     // 0x0016A7C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0016A7C0(unsigned long argument0, void * argument1);
     // 0x0016AA78: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
@@ -135,7 +135,7 @@ struct UnknownVtable_003DBF48 {
         // slot 19, table+0xA0, this delta 0, function 0x0016A250; UNVERIFIED signature.
         virtual int Slot019(unsigned int argument0, unsigned int argument1);
         // slot 20, table+0xA8, this delta 0, function 0x0016A720; UNVERIFIED signature.
-        virtual unsigned int Slot020();
+        virtual void Slot020();
         // slot 21, table+0xB0, this delta 0, function 0x00169F38; UNVERIFIED signature.
         virtual int Slot021(unsigned long argument0, void * argument1);
         // slot 22, table+0xB8, this delta 0, function 0x0016A7C0; UNVERIFIED signature.
