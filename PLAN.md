@@ -496,6 +496,7 @@ sizes over 300 and 1,024 bytes. The first two waves used the former one-percent 
 | 3 | 78 / 20,760 (0.765%) | 0 | 20 / 110 | 2 / 30 | 5.24 / 3,964 | Local/iterator lifetimes; VU0/aggregate contracts; cleanup and data ownership |
 | 4 | 67 / 16,064 (0.592%) | 2 | 14 / 67 | 1 / 12 | 3.30 / 4,867 | Inline/iterator lifetimes; VU math contracts; cleanup/register allocation |
 | 5 | 59 / 15,512 (0.571%) | 2 | 14 / 58 | 2 / 12 | 3.07 / 5,048 | Iterator/temporary lifetimes; call contracts; VU0/register allocation |
+| 6 | 21 / 10,856 (0.400%) | 1 | 14 / 33 | 1 / 9 | 3.45 / 3,148 | Helper/lvalue lifetimes; call-clobber and vector context; serialization/cleanup |
 
 Four isolated class queues ran per wave without worker contention. Source progress rose from 5,066
 functions / 281,632 text bytes to 5,107 / 292,808: +41 functions / 11,176 bytes. Gains exclude six
@@ -579,6 +580,16 @@ The shared ABI notes distinguish a 12-byte POD hidden return before `this` from 
 parameter. Generated views retain 606 scoped field proofs. All 4,302 saved drafts and 6,586 remaining
 entries were retried with no placeable automatic gain. All five retail checks, 270 tests and 22 shared
 controls pass. Inclusive throughput rises 3.7%; the decline streak stays zero.
+
+Wave 6 reaches 5,334 functions / 356,264 text bytes. PathWay is complete at 19/19 functions;
+its 1,988-byte action method needs member-vector normalization in place, native subtraction and
+a shared return tail. Typed node/edge index getters unlock graph traversal and serialization.
+Generated views retain 705 scoped field proofs. A discarded-return declaration can reproduce
+call clobbers without proving a semantic return; conflicting hints remain qualified. All 4,281
+saved drafts and 6,565 remaining entries were retried with no placeable automatic gain. All five
+retail checks, 270 tests and 22 shared controls pass. Throughput falls 37.6%, the first decline,
+above the stopping floor. Further queues use full TU inventories: vtable slots omit nonvirtual
+functions, so completing a class queue alone does not establish TU completion.
 
 ## Agent rules (`AGENTS.md`)
 
