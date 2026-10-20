@@ -48142,3 +48142,41 @@ units:
     status: asm
   - addr: '0x1129b8'
     status: asm
+- name: campaign_graphics_envelope_wave4
+  source: src/campaign/graphics_envelope_pending.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1ed8d0'
+    status: asm
+    symbol: Reset__Q216CampaignGraphics13TimedEnvelope
+    size: 152
+  - addr: '0x1edd80'
+    status: asm
+    symbol: Release__Q216CampaignGraphics13TimedEnvelope
+    size: 56
+  - addr: '0x1ee298'
+    status: asm
+    symbol: Update__Q216CampaignGraphics13TimedEnvelope
+    size: 676
+- name: campaign_graphics_envelope_exact
+  source: src/campaign/graphics_envelope.cpp
+  origin: C++ tinnitus sound envelope; PS2 accessed fields
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1edc80'
+    status: source
+    symbol: Unregister__Q216CampaignGraphics13TimedEnvelope
+    size: 256
+  - addr: '0x1ee158'
+    status: source
+    symbol: Begin__Q216CampaignGraphics13TimedEnvelopefUi
+    size: 276
