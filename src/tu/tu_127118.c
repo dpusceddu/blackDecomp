@@ -25,16 +25,7 @@ s32 func_001276B8(void *arg0, s32 arg1) {
 
 /* Assembly between the functions: func_00127738 (104 bytes), func_001277A0 (672 bytes) */
 
-s32 func_00127A40(void *arg0) {
-    if (M2C_FIELD(arg0, u16 *, 0xD8) != 0xFFFF) {
-        func_001B37C8(D_0040F4D8 + 0x33C40, M2C_FIELD(arg0, u16 *, 0xD8));
-    }
-    if (M2C_FIELD(arg0, s32 *, 0xD4) != 0) {
-        func_001B61C0(D_0040F4D8 + 0x512E0, arg0);
-        M2C_FIELD(arg0, s32 *, 0xD4) = 0;
-    }
-    return 1;
-}
+
 
 void func_00127AB8(void) {
 
@@ -46,18 +37,9 @@ void func_00127AC0(void) {
 
 /* Assembly between the functions: func_00127AC8 (552 bytes), func_00127CF0 (792 bytes), func_00128008 (280 bytes), func_00128120 (400 bytes) */
 
-s32 func_001282B0(void *arg0) {
-    return M2C_FIELD(arg0, s32 *, 0xD0);
-}
 
-void func_001282B8(void *arg0)
-{
-  s8 *new_var;
-  int new_var2;
-  new_var = (s8 *) arg0;
-  new_var2 = 0xFFFF;
-  *((s16 *) (new_var + 0xD8)) = new_var2;
-}
+
+
 
 /* Assembly between the functions: func_001282C8 (8 bytes) */
 

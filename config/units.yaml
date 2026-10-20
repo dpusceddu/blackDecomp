@@ -2826,10 +2826,6 @@ units:
     symbol: func_001276B8
     size: 128
     status: source
-  - addr: '0x127a40'
-    symbol: func_00127A40
-    size: 116
-    status: source
   - addr: '0x127ab8'
     symbol: func_00127AB8
     size: 8
@@ -2837,14 +2833,6 @@ units:
   - addr: '0x127ac0'
     symbol: func_00127AC0
     size: 8
-    status: source
-  - addr: '0x1282b0'
-    symbol: func_001282B0
-    size: 8
-    status: source
-  - addr: '0x1282b8'
-    symbol: func_001282B8
-    size: 12
     status: source
   - addr: '0x1282d0'
     symbol: func_001282D0
@@ -51558,14 +51546,17 @@ units:
     reason: claimed
   - addr: '0x127738'
     size: 104
-    symbol: func_00127738
-    status: asm
-    reason: claimed
+    symbol: Initialize__Q28ModWorld11ObjectActorPQ28ModWorld10Definitioni
+    status: source
   - addr: '0x1277a0'
     size: 668
     symbol: func_001277A0
     status: asm
     reason: claimed
+  - addr: '0x127a40'
+    symbol: Cleanup__Q28ModWorld11ObjectActor
+    size: 116
+    status: source
   - addr: '0x127ac8'
     status: asm
     size: 552
@@ -51582,6 +51573,14 @@ units:
     symbol: func_00128120
     status: asm
     reason: claimed
+  - addr: '0x1282b0'
+    symbol: GetDefinition__Q28ModWorld11ObjectActor
+    size: 8
+    status: source
+  - addr: '0x1282b8'
+    symbol: ResetSlot__Q28ModWorld11ObjectActor
+    size: 12
+    status: source
   - addr: '0x1282e0'
     size: 416
     symbol: func_001282E0
@@ -51599,9 +51598,8 @@ units:
     reason: claimed
   - addr: '0x129108'
     size: 88
-    symbol: func_00129108
-    status: asm
-    reason: claimed
+    symbol: Activate__Q28ModWorld5WorldPQ28ModWorld11ObjectActorii
+    status: source
   - addr: '0x129160'
     size: 92
     symbol: func_00129160
@@ -51649,14 +51647,12 @@ units:
     reason: claimed
   - addr: '0x12a310'
     size: 260
-    symbol: func_0012A310
-    status: asm
-    reason: claimed
+    symbol: SceneLoaded__Q28ModWorld5WorldPv
+    status: source
   - addr: '0x12a418'
     size: 104
-    symbol: func_0012A418
-    status: asm
-    reason: claimed
+    symbol: SectionLoaded__Q28ModWorld5WorldPv
+    status: source
   - addr: '0x12a4d8'
     size: 284
     symbol: func_0012A4D8
@@ -51679,9 +51675,8 @@ units:
     reason: claimed
   - addr: '0x12aaf8'
     size: 44
-    symbol: func_0012AAF8
-    status: asm
-    reason: claimed
+    symbol: MarkSolid__Q28ModWorld5WorldPQ210ModWeapons14WorldCollisionPUc
+    status: source
   - addr: '0x12ab28'
     size: 100
     symbol: func_0012AB28
@@ -51709,9 +51704,8 @@ units:
     reason: claimed
   - addr: '0x12b2a8'
     size: 128
-    symbol: func_0012B2A8
-    status: asm
-    reason: claimed
+    symbol: SelectWorldHit__Q28ModWorld5WorldPQ210ModWeapons14WorldCollisionPQ28ModWorld10ClosestHit
+    status: source
   - addr: '0x12b328'
     size: 288
     symbol: func_0012B328
@@ -51739,9 +51733,8 @@ units:
     reason: claimed
   - addr: '0x12bd98'
     size: 48
-    symbol: func_0012BD98
-    status: asm
-    reason: claimed
+    symbol: FindRegion__Q28ModWorld5Worldi
+    status: source
   - addr: '0x12be18'
     size: 104
     symbol: func_0012BE18
@@ -51767,6 +51760,25 @@ units:
     symbol: func_0012C428
     status: asm
     reason: claimed
+  externs:
+    D_0040F4C4: '0x40f4c4'
+    D_0040F4CC: '0x40f4cc'
+    D_0040F4D0: '0x40f4d0'
+    D_0040F4D8: '0x40f4d8'
+    func_00108540: '0x108540'
+    func_001092F8: '0x1092f8'
+    func_00125C60: '0x125c60'
+    func_0012A158: '0x12a158'
+    func_00160648: '0x160648'
+    func_0016BE10: '0x16be10'
+    func_001AF930: '0x1af930'
+    func_001B37C8: '0x1b37c8'
+    func_001B61C0: '0x1b61c0'
+    func_0025C558: '0x25c558'
+    func_00272AA8: '0x272aa8'
+    func_002881A8: '0x2881a8'
+    func_00288488: '0x288488'
+    func_003822F8: '0x3822f8'
 - name: mod_arms_w2_345500
   source: src/mod/arms_345500_w2.cpp
   language: c++

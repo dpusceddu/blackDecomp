@@ -1320,8 +1320,8 @@ tus:
   confidence: medium
   evidence: [join-soft, calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 15 of 60 functions
+  flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf16]
+  flags_basis: matched 22 of 60 functions
   data:
     .rodata: ['0x3f42e0', '0x3f4504']
     .data: ['0x3bcb14', '0x3bcb18']
