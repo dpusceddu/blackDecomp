@@ -12,6 +12,8 @@
 // The memory clobber describes memory only; it does not protect VU specials.
 // Register contracts are independently decoded from the resident microcode by
 // tools/vu0_micro.py; its flag-pipeline report is conservative, not a simulator.
+// Each recipe has an isolated encoding control and one whole-function exact
+// consumer. None yet meets the study's two-real-consumer verification threshold.
 
 namespace BlackPS2 {
 namespace AnimationMicro {

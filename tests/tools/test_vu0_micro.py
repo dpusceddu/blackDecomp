@@ -85,6 +85,22 @@ class MicroContracts(unittest.TestCase):
     def test_unbounded_control_flow_invalidates_contract(self):
         self.assertFalse(micro.contract({0: instruction()}, 0)['valid'])
 
+    def test_micro_macro_cooperation_requires_additional_analysis(self):
+        code = {0: micro.pair(0x8000033c, 0x600002ff),
+                8: micro.pair(0x8000033c, 0x000002ff)}
+        result = micro.contract(code, 0)
+        self.assertFalse(result['valid'])
+        self.assertIn('micro-control-M', result['hazards'])
+
+    def test_micro_clip_has_three_vector_lanes_and_history(self):
+        word = 0xe << 21 | 11 << 16 | 7 << 11 | 0x1ff
+        _, reads, writes, hazards = micro.upper(word)
+        self.assertEqual(reads['vf7'], 7)
+        self.assertEqual(reads['vf11'], 8)
+        self.assertIn('clip-history', reads)
+        self.assertIn('clip-history', writes)
+        self.assertFalse(hazards)
+
 
 if __name__ == '__main__':
     unittest.main()
