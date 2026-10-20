@@ -50430,7 +50430,7 @@ units:
     size: 440
     symbol: Register__Q216CampaignGraphics13SoundEnvelopePCci
     status: asm
-    reason: unmatched C++ scheduling or allocation
+    reason: size
 - name: campaign_sound_1edb80
   source: src/campaign/graphics_sound_1edb80.cpp
   flags:

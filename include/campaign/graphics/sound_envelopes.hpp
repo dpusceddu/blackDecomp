@@ -34,6 +34,10 @@ void func_001EC9F0(void *, unsigned, int);
 void func_001E4260(void *, unsigned, int);
 void func_001E6208(void *, unsigned, int);
 void func_0027B950(float,float,void *,void *,const char *,const char *,const char *,int,int);
+// This source parameter order is verified by the envelope registration caller.
+// The zero-valued control widths and original API spelling remain unverified.
+void RegisterEnvelopeParameter(void *,void *,const char *,const char *,const char *,int,float,float,int)
+    __asm__("func_0027B950");
 void func_001ED9C8(void *,const char *,int);
 int func_001EDB80(void *);
 // Scoped caller view: Begin preserves its FP/selector arguments; the matched
