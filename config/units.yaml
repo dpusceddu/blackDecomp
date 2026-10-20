@@ -48708,3 +48708,32 @@ units:
     symbol: RenderBox__Q213CampaignActor11RegionState
   trim:
     .rodata: 24
+- name: campaign_actor_b9e0_wave4
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x165430'
+    status: asm
+  - addr: '0x1656f0'
+    status: asm
+  - addr: '0x165980'
+    status: source
+    size: 96
+    symbol: SignalOnce__Q213CampaignActor10OnceVolumel
+  - addr: '0x1659e0'
+    status: source
+    size: 84
+    symbol: Debug__Q213CampaignActor10OnceVolume
+  source: src/campaign/actor_b9e0_wave4.cpp
+  origin: C++ actor vtable0x3DB9E0 volume cluster
+  externs:
+    D_0040F4C0: '0x40f4c0'
+    D_00414D00: '0x414d00'
+    func_00165AA8: '0x165aa8'
+    func_001AE5E8: '0x1ae5e8'
+    func_0026A840: '0x26a840'
+    func_0026AA68: '0x26aa68'
