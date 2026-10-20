@@ -34,3 +34,10 @@ returning a 12-byte POD (three 32-bit words) receives the hidden output pointer 
 explicit receiver and Actor pointers uses the same order. An explicit output-parameter
 method instead keeps `this` in A0, output in A1 and Actor in A2. These recipes are distinct;
 this control does not establish an ABI for non-POD classes or other compiler versions.
+
+The exact SN 1.36 `-O2 -G0 -snas` consumer `CGraphManager::Configure` at 0x2F2660
+also verifies a native `double` return from `atof` (0x35E730), float-to-double `fptodp`
+(0x291F58), double multiply `dpmul` (0x2914D0), and double-to-float `dptofp` (0x291C68).
+Its coverage-distance expression retains an explicit `float` local before use; the unit binds
+these software helpers to their original addresses. This is a scoped native-double recipe,
+not verification of every floating operation or another compiler's ABI.
