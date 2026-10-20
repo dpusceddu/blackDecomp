@@ -43014,14 +43014,17 @@ units:
     status: source
     size: 56
 - name: animation_channel_unmatched
-  source: src/animation/tu_348d00/unmatched.c
+  source: src/animation/tu_348d00/channel_methods.cpp
   origin: animation
   flags:
+  - -x
+  - c++
   - -O2
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  - --assembler=sn-min6
+  claim: context-wave5-graphics
   functions:
   - addr: '0x348d00'
     symbol: func_00348D00
@@ -43029,10 +43032,13 @@ units:
     reason: schedule
     size: 300
   - addr: '0x348e30'
-    symbol: func_00348E30
-    status: asm
-    reason: schedule
+    symbol: Lookup__20AnimationChannelViewP21AnimationChannelStatei
+    status: source
     size: 72
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: effect_slots_1b2e08
   source: src/game/effects/slot_unmatched.cpp
   origin: game
