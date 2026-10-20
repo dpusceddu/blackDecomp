@@ -50443,3 +50443,15 @@ units:
     size: 212
     status: asm
     reason: claimed
+- name: campaign_actor_camera_wave6
+  source: src/campaign/actor_camera_wave6.cpp
+  origin: C++ actor vtable0x3DC348 camera cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x141008'
+    status: asm
