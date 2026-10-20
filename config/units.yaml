@@ -52685,8 +52685,8 @@ units:
     symbol: func_00344178
   - addr: '0x348c08'
     size: 248
-    status: asm
-    reason: math-layer-study
+    status: source
+    symbol: func_00348C08
   - addr: '0x3527e8'
     size: 96
     status: asm
