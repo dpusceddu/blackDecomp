@@ -9,6 +9,9 @@ class VolumeBounds:public RegionInterface {
 public:
  char toBounds[0x11C];Position4 upper,lower;Matrix4 world;
 };
+class CrossingVolume:public VolumeBounds {
+public:void Debug();
+};
 class OnceVolume:public VolumeBounds {
 public:
  char toFired[5];unsigned char fired,result;
