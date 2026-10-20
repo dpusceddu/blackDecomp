@@ -50398,3 +50398,48 @@ units:
     size: 2076
     status: asm
     reason: claimed
+- name: campaign_apt_pair_2470d0
+  source: src/campaign/graphics_apt_2470d0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x2470d0'
+    symbol: func_002470D0
+    size: 696
+    status: asm
+    reason: claimed
+- name: campaign_apt_pair_247388
+  source: src/campaign/graphics_apt_247388.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x247388'
+    symbol: func_00247388
+    size: 256
+    status: asm
+    reason: claimed
+- name: campaign_apt_pair_247488
+  source: src/campaign/graphics_apt_247488.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x247488'
+    symbol: func_00247488
+    size: 212
+    status: asm
+    reason: claimed
