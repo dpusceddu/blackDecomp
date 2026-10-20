@@ -50531,3 +50531,49 @@ units:
     func_0035E750: '0x35e750'
     sscanf: '0x35d7b0'
     strcmp: '0x35ca74'
+- name: campaign_wave7_hide
+  source: src/campaign/behaviors_hide_wave7.cpp
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d4148'
+    size: 380
+    status: asm
+    reason: campaign
+  - addr: '0x2d4520'
+    size: 508
+    status: source
+    symbol: func_002D4520
+  - addr: '0x2d4720'
+    size: 644
+    status: source
+    symbol: func_002D4720
+  - addr: '0x2d49a8'
+    size: 448
+    status: asm
+    reason: campaign
+  - addr: '0x2d4b68'
+    size: 1180
+    status: asm
+    reason: campaign
+  - addr: '0x2d5068'
+    size: 128
+    status: source
+    symbol: func_002D5068
+  - addr: '0x2d5248'
+    size: 224
+    status: asm
+    reason: campaign
+  externs:
+    _vt$Q210HideSearch9HideAgent: '0x3e3428'
+    func_002D5248: '0x2d5248'
+    func_002E27D0: '0x2e27d0'
+    func_002E4CE0: '0x2e4ce0'
+    func_002FB9D0: '0x2fb9d0'
+    func_002FBC20: '0x2fbc20'
