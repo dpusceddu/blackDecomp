@@ -49531,3 +49531,40 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: context_wave5_text
+  source: src/context/behaviors_text.cpp
+  origin: kynapse
+  owner: context-wave5-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2df658'
+    size: 336
+    status: source
+    symbol: func_002DF658
+  - addr: '0x2df7a8'
+    size: 288
+    status: source
+    symbol: func_002DF7A8
+  - addr: '0x2df960'
+    size: 84
+    status: source
+    symbol: func_002DF960
+  - addr: '0x2dfa68'
+    size: 152
+    status: source
+    symbol: func_002DFA68
+  externs:
+    _8KaimText$gEngine: '0x3c9ed4'
+    _8KaimText$hooks: '0x451228'
+    __as__Q28KaimText6ScriptRCQ28KaimText6Script: '0x2df9b8'
+    __throw: '0x292b40'
+    _vt$Q28KaimText10ObjectRoot: '0x3e0040'
+    _vt$Q28KaimText6Script: '0x3e6888'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
