@@ -232,6 +232,9 @@ Type and instruction support, all of it mechanical and checked by exact matches:
   64-bit access. Callee results and arguments of 128-bit type are found from the callee's code (`wide_info`) and enter the
   context as `s64`. `max.s`/`min.s` and MMI/VU0 instructions m2c cannot read are reported by instruction (`next.py ee`).
   The vector layer (`include/game/ai_vector.hpp`, compile with `-mvu0-use-vf0-vf31`) is the form SN accepts for them.
+  `m2c_input.py` decodes EE `sqrt.s` (FT input, FS zero), including generic `c1` text.
+  Direct roots use `mod/math/scalar.h` (C++ `ModMath::SquareRoot`); recognized libc
+  `sqrtf` calls and errno-handling sequences retain their library semantics.
 - **Tail calls and indexed globals.** m2c drops the delay-slot instruction of a `j func` tail call (an argument set there is lost):
   `ee_prep.py` puts it before the jump. m2c writes `&D_x + n` for byte arithmetic on a global of unknown type, which C scales by the
   size of `D_x`: `byte_addresses` makes such addresses integers and types the dereferences (`*(s32 *)(...)`). Together +22 functions.

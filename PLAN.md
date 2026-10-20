@@ -608,30 +608,41 @@ because these queues already favored known layouts and counterparts.
 ### Mod-focused C++ campaign
 
 Queues follow camera/input, weapons/shots, first-person animation and visual effects.
-Dedicated shared preparation preceded new subsystems: 12.09 and 21.66 agent-minutes for
-the first two passes, separate from campaign timing. Verified mod context grew from
-11 layers / 24 consumers to 23 / 61 through Wave 2; instruction-only layouts stay qualified.
-Every queue uses the full real-function inventory, including large functions. Throughput
-includes coordination, integration and final verification; the mod campaign has its own baseline.
+Dedicated shared preparation preceded new subsystems: 12.09, 21.66 and
+62.94 agent-minutes for three passes, separate from campaign timing (one 5-minute
+assistance entry is estimated). Shared layouts remain qualified by their exact consumers.
+Verified mod context grew from 11 layers / 24 exact consumers to 39 / 93.
+Every queue includes the full real-function inventory and every remaining large function.
+Throughput includes coordination, integration and final verification; this campaign has its own baseline.
 
 | Wave | New functions / text bytes | Complete TUs | >300 B matched / attempted | >1 KB matched / attempted | Bytes / agent-hour | Trend |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 41 / 7,728 | 0 | 6/60 | 1/11 | 2,536 | baseline |
 | 2 | 31 / 5,864 | 2 | 5/66 | 0/13 | 2,074 | -18.2% |
+| 3 | 12 / 2,072 | 2 | 1/22 | 0/3 | 566 | -72.7% |
 
-Progress: 5,354 functions / 362,016 text bytes → 5,426 / 375,608
-(13.83% of .text). Complete mod-relevant classes: none established yet.
-Native matrix-array lifetime, mixed-bank call signatures and store order unlock exact methods;
-a state-member RNG expression fixes muzzle allocation where the equivalent C helper does not.
-The main blockers remain VU operator/temporary context, register and branch lifetimes, and
-incomplete mixed-width call contracts. ABI-equivalent declarations do not prove original semantics.
-Scoped assembler alternatives retain weak historical provenance. The unit merger ignores
-size-only ASM claim metadata while preserving SOURCE conflicts.
-Automatic all-size retries after each context refresh added no placeable functions through Wave 2.
-All five retail images remain identical; 273 tooling tests and all shared controls pass.
-The stopping rule permits the next prepared queues.
-Completed `tu_154fd8`: Xbox `0x1babd0`, `0x1b5820` (initializer partly inlined; semantic mapping, original class unproved; shared data remains assembly).
-Completed `tu_1551c8`: Xbox `0x1b56f0`, `0x1ead00`, `0x1bafa0` (return helper and inlined clamp/predicate; semantic mapping, original class unproved; shared data remains assembly).
+Progress: 5,354 functions / 362,016 text bytes → 5,438 / 377,680
+(13.91% of .text). Complete original mod-relevant classes: none established.
+Native matrix-array lifetime, mixed-bank call signatures and store order unlock exact methods.
+A state-member RNG expression fixes muzzle allocation; a genuine scalar sqrt.s helper
+removes the libc errno path in the 836-byte health restoration function. The EE m2c adapter
+now decodes direct square-root primitives while retaining genuine libc/errno patterns.
+Typed weapon context also moves a 128-byte cleanup from two differing instructions to exact.
+The top blockers are VU operator/temporary context, register and branch lifetimes, and
+incomplete mixed-width call contracts. Equal offsets or zero stores alone do not prove
+field semantics or class identity. Scoped assembler alternatives retain weak provenance.
+The unit merger ignores size-only ASM claims while preserving SOURCE conflicts.
+All-size automatic retries after each context refresh added one placeable function across these waves.
+All five retail images remain identical; 280 tooling tests and all shared controls pass.
+The campaign stops: throughput fell below 1,500 bytes per agent-hour; throughput declined for two consecutive waves.
+
+- Completed `tu_154fd8`: Xbox `0x1babd0`, `0x1b5820` (initializer partly inlined; semantic mapping; shared data remains assembly; original class unproved).
+- Completed `tu_1551c8`: Xbox `0x1b56f0`, `0x1ead00`, `0x1bafa0` (return helper and inlined clamp; semantic mapping; shared data remains assembly; original class unproved).
+- Completed `tu_1357b8`: Xbox `0x1c6090`, `0x1ccfd0` (local/world pose; behavioral correspondence; low-confidence TU boundary; original class unproved).
+- Completed `tu_13c9d8`: Xbox `0x1ea760`, `0x1ea6e0` (health restoration/add-kit; behavioral correspondence; medium-confidence TU boundary; original class unproved).
+- Isolated `tu_15d198`: Xbox unconfirmed (not counted as a recovered object TU; counterpart unresolved).
+- Isolated `tu_15d248`: Xbox unconfirmed (not counted as a recovered object TU; counterpart unresolved; proposed 0x12670 rejected).
+- Isolated `tu_15d310`: Xbox `0x1baa70` (not counted as a recovered object TU; semantic association only).
 
 ## Agent rules (`AGENTS.md`)
 
