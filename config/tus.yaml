@@ -17493,7 +17493,7 @@ tus:
   evidence: [eh, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 20 of 40 functions
+  flags_basis: matched 30 of 40 functions
   data:
     .rodata: ['0x406d18', '0x406d50']
     .data: ['0x3c9588', '0x3eba18']

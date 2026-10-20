@@ -42473,14 +42473,6 @@ units:
     symbol: _$_15ParameterTables
     size: 832
     status: source
-  - addr: '0x2e8ab8'
-    symbol: Consume__15ParameterTablesiP8SlotUser
-    size: 404
-    status: asm
-  - addr: '0x2e8c50'
-    symbol: ConsumeList__15ParameterTablesiP9IndexUser
-    size: 844
-    status: asm
   - addr: '0x2e7ac0'
     symbol: __15ParameterTables
     size: 2128
@@ -49990,3 +49982,120 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: context_graph_parameter_tables
+  source: src/campaign/graph_parameter_tables.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave5-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  functions:
+  - addr: '0x2e8650'
+    size: 236
+    status: asm
+    symbol: func_002E8650
+    reason: registers
+  - addr: '0x2e8740'
+    size: 236
+    status: asm
+    symbol: func_002E8740
+    reason: registers
+  - addr: '0x2e8830'
+    size: 236
+    status: asm
+    symbol: func_002E8830
+    reason: registers
+  - addr: '0x2e8ab8'
+    size: 404
+    status: asm
+    symbol: func_002E8AB8
+    reason: registers
+  - addr: '0x2e8c50'
+    size: 844
+    status: asm
+    symbol: func_002E8C50
+    reason: registers
+  - addr: '0x2e8fa0'
+    size: 280
+    status: asm
+    symbol: func_002E8FA0
+    reason: registers
+  - addr: '0x2e90b8'
+    size: 264
+    status: asm
+    symbol: func_002E90B8
+    reason: registers
+  - addr: '0x2e91c0'
+    size: 188
+    status: source
+    symbol: GetNameTables__Fv
+  - addr: '0x2e93b8'
+    size: 128
+    status: source
+    symbol: FindAperiodicName__C17ParameterCampaignPCc
+  - addr: '0x2e9438'
+    size: 128
+    status: source
+    symbol: FindPeriodicName__C17ParameterCampaignPCc
+  - addr: '0x2e94b8'
+    size: 128
+    status: source
+    symbol: FindEstimatedName__C17ParameterCampaignPCc
+  - addr: '0x2e9648'
+    size: 172
+    status: source
+    symbol: CompareSets__FPCvT0
+  - addr: '0x2e96f8'
+    size: 180
+    status: asm
+    symbol: func_002E96F8
+    reason: registers
+  - addr: '0x2e97b0'
+    size: 180
+    status: asm
+    symbol: func_002E97B0
+    reason: registers
+  - addr: '0x2e9868'
+    size: 132
+    status: source
+    symbol: Store__15ParameterTablesiP8SlotUser
+  - addr: '0x2e9978'
+    size: 220
+    status: source
+    symbol: Accumulate__15ParameterTablesiP8SlotUser
+  - addr: '0x2e9a58'
+    size: 216
+    status: source
+    symbol: AccumulateIndex__17ParameterCampaigniP9IndexUser
+  - addr: '0x2e9b30'
+    size: 152
+    status: source
+    symbol: AccumulateGlobal__17ParameterCampaigni
+  - addr: '0x2e9bc8'
+    size: 232
+    status: asm
+    symbol: func_002E9BC8
+    reason: registers
+  - addr: '0x2e9e20'
+    size: 104
+    status: source
+    symbol: MarkFired__17ParameterCampaign
+  externs:
+    GetIndex__C8SlotUser: '0x2e4c60'
+    GetIndex__C9IndexUser: '0x2ecaa8'
+    __15ParameterTables: '0x2e7ac0'
+    __throw: '0x292b40'
+    _stricmp: '0x360838'
+    gFloatHook: '0x451230'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    gSavedFloat: '0x3c958c'
+    gSelected: '0x3c9594'
+    gSlotOwner: '0x3c9ed4'
+    memoryRelease: '0x3c87e0'
+    terminate__Fv: '0x36f978'
