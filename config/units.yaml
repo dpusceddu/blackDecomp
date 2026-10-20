@@ -50531,3 +50531,151 @@ units:
     func_0035E750: '0x35e750'
     sscanf: '0x35d7b0'
     strcmp: '0x35ca74'
+- name: campaign_sound_1ed9c8
+  source: src/campaign/graphics_sound_1ed9c8.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1ed9c8'
+    size: 440
+    symbol: Register__Q216CampaignGraphics13SoundEnvelopePCci
+    status: asm
+    reason: unmatched C++ scheduling or allocation
+- name: campaign_sound_1edb80
+  source: src/campaign/graphics_sound_1edb80.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1edb80'
+    size: 256
+    symbol: ActivateChannels__Q216CampaignGraphics13SoundEnvelope
+    status: source
+- name: campaign_sound_1edd80
+  source: src/campaign/graphics_sound_1edd80.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1edd80'
+    size: 56
+    symbol: Release__Q216CampaignGraphics13SoundEnvelope
+    status: asm
+    reason: unmatched C++ scheduling or allocation
+- name: campaign_sound_1edde0
+  source: src/campaign/graphics_sound_1edde0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1edde0'
+    size: 180
+    symbol: Begin__Q216CampaignGraphics19DestructionEnvelopefUi
+    status: asm
+    reason: unmatched C++ scheduling or allocation
+- name: campaign_sound_1ede98
+  source: src/campaign/graphics_sound_1ede98.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1ede98'
+    size: 536
+    symbol: Update__Q216CampaignGraphics19DestructionEnvelope
+    status: asm
+    reason: unmatched C++ scheduling or allocation
+- name: campaign_sound_1ee0b0
+  source: src/campaign/graphics_sound_1ee0b0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1ee0b0'
+    size: 156
+    symbol: Unregister__Q216CampaignGraphics19DestructionEnvelope
+    status: asm
+    reason: unmatched C++ scheduling or allocation
+- name: campaign_sound_1ee298
+  source: src/campaign/graphics_sound_1ee298.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1ee298'
+    size: 676
+    symbol: Update__Q216CampaignGraphics13TimedEnvelope
+    status: asm
+    reason: unmatched C++ scheduling or allocation
+- name: campaign_sound_1ee540
+  source: src/campaign/graphics_sound_1ee540.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1ee540'
+    size: 160
+    symbol: Reset__Q216CampaignGraphics17LowHealthEnvelope
+    status: asm
+    reason: unmatched C++ scheduling or allocation
+- name: campaign_sound_1ee5e0
+  source: src/campaign/graphics_sound_1ee5e0.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1ee5e0'
+    size: 140
+    symbol: Begin__Q216CampaignGraphics17LowHealthEnvelopefUi
+    status: source
+- name: campaign_sound_1ee678
+  source: src/campaign/graphics_sound_1ee678.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1ee678'
+    size: 468
+    symbol: Update__Q216CampaignGraphics17LowHealthEnvelope
+    status: asm
+    reason: unmatched C++ scheduling or allocation
