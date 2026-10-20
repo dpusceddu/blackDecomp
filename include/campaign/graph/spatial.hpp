@@ -1,5 +1,6 @@
 // PS2 class view: RTTI and vtable identity are known. Accessed graph offsets
-// agree with the executable; complete size, opaque fields and unused signatures
+// agree with the executable; native array initialization is checked against the loaders,
+// but their source shape remains UNVERIFIED. Complete size, opaque fields and unused signatures
 // remain UNVERIFIED. This campaign area is owned by the graph worker.
 #ifndef BLACK_CAMPAIGN_GRAPH_SPATIAL_HPP
 #define BLACK_CAMPAIGN_GRAPH_SPATIAL_HPP
@@ -10,8 +11,8 @@ extern "C" unsigned int strlen(const char*) __asm__("func_0035CCD8");
 extern char D_00407C28[], D_00407BC8[], D_00407BC0[];
 namespace Kaim {
 struct CSpatialGraph;
-struct SpatialNode { int id; float x,y,z; CSpatialGraph *graph; };
-struct SpatialEdge { int index; CSpatialGraph *graph; inline SpatialNode *EndNode(); inline SpatialNode *StartNode(); };
+struct SpatialNode { int id; float x,y,z; CSpatialGraph *graph; SpatialNode():id(-1),graph(0){} ~SpatialNode(){} };
+struct SpatialEdge { int index; CSpatialGraph *graph; SpatialEdge():index(-1),graph(0){} ~SpatialEdge(){} inline SpatialNode *EndNode(); inline SpatialNode *StartNode(); };
 struct CSpatialGraph : CObject {
  static void *operator new(unsigned int size){return Allocate(size);}
  CSpatialGraph() __asm__("func_002F5C10");
@@ -53,12 +54,12 @@ struct ArenaAllocator : Allocator { unsigned char data[0x1c]; ArenaAllocator(voi
 struct PathFileService : FileService { PathFileService() __asm__("func_00373250"); ~PathFileService(); };
 inline void Word_Convert(unsigned int*out,const unsigned int*in,int){*out=*in;}
 struct GraphVisitor : CObject {
- virtual ~GraphVisitor(){} virtual void Begin(CSpatialGraph*){} virtual void BeginEdges(CSpatialGraph*){}
+ virtual ~GraphVisitor(){} virtual void Begin(CSpatialGraph*) __asm__("func_003915C0"); virtual void BeginEdges(CSpatialGraph*) __asm__("func_003915C8");
  virtual bool Consider(SpatialNode*){return true;} virtual bool Accept(SpatialEdge*){return true;}
  inline bool VisitNodes(CSpatialGraph *graph){Begin(graph);unsigned int seen=0,slot=0;while(seen<graph->nodeCount){SpatialNode *node=graph->GetNode(slot);if(node){++seen;if(!Consider(node))return false;}++slot;}return true;}
  inline bool VisitAll(CSpatialGraph *graph){BeginEdges(graph);unsigned int seen=0,slot=0;while(seen<graph->edgeCount){SpatialEdge *edge=graph->GetEdge(slot);if(edge){++seen;if(!Accept(edge))return false;}++slot;}return true;}
 };
-struct GraphWriter : GraphVisitor { void *file; int byteOrder; virtual bool Consider(SpatialNode*);virtual bool Accept(SpatialEdge*); };
+struct GraphWriter : GraphVisitor { virtual ~GraphWriter(){} void *file; int byteOrder; virtual bool Consider(SpatialNode*);virtual bool Accept(SpatialEdge*); };
 }
 
 
