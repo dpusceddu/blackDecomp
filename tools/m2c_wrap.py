@@ -3,6 +3,7 @@
 a pointer (an integer holding an address, say `lw $v0, 0($a0)` with $a0 an untyped argument) is written as
 `M2C_FIELD(expr, T *, 0)` instead of `*expr`, which is not valid C. Local adapters keep software doubles in GPRs and escaped stack locals out of call arguments; they do not modify the installed package.
 Usage: m2c_wrap.py <m2c arguments>"""
+import os
 import sys
 from m2c import translate
 from m2c.translate import StructAccess, AddressOf, BinaryOp, late_unwrap
@@ -31,7 +32,7 @@ def format(self, fmt):
     if fmt.valid_syntax and self.offset == 0:
         var = late_unwrap(self.struct_var)
         pointee = var.type.get_pointer_target()
-        if (__import__('os').environ.get('AUTODECOMP_VU0') and self.target_size == 16
+        if (os.environ.get('AUTODECOMP_VU0') and self.target_size == 16
                 and pointee is not None and pointee.is_void()):
             return f"M2C_FIELD({var.format(fmt)}, {sized_ptr(self, fmt)}, 0)"
         has_nonzero = self.stack_info.has_nonzero_access(var) if self.stack_info is not None else False
@@ -209,7 +210,6 @@ MipseeArch.instrs_destination_first = dict(MipseeArch.instrs_destination_first)
 MipseeArch.instrs_destination_first['sqrt.libc.fictive'] = MipseeArch.instrs_destination_first['sqrt.s']
 MipseeArch.instrs_destination_first['sqrt.s'] = lambda a: fn_op('__ee_sqrt_s', [as_f32(a.reg(1))], Type.f32())
 
-import os
 if os.environ.get('AUTODECOMP_VU0'):
     import vu0_m2c
     vu0_m2c.install()

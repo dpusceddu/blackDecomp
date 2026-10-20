@@ -472,6 +472,7 @@ def run_m2c(fns, options=(), ctx='ctx.c'):
             lit.write_text(m2c_input.normalize_sections((BUILD / 's/text' / (f['name'] + '.lit4.s')).read_text()))
             paths.append(str(lit))
     if not paths:
+        STATS['m2c_function_failures'] += len(rejected)
         return rejected
     cmd = [sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--valid-syntax', '--context', str(AUTO / ctx), '--no-cache'] + list(options) + paths
     timeout = float(os.environ.get('AUTODECOMP_M2C_TIMEOUT', '180'))

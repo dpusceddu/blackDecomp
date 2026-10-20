@@ -10,6 +10,10 @@ import vu0_m2c as v
 
 
 class LoweringTests(unittest.TestCase):
+    def test_vu_detection_uses_instructions_not_literals(self):
+        self.assertFalse(v.has_vu('.asciz "vector math"\n# void helper\nlw $v0, 0($a0)\n'))
+        self.assertTrue(v.has_vu('/* synthetic */ lqc2 $vf1, 0($a0)\n'))
+
     def test_splat_bare_architectural_registers(self):
         self.assertIn('bkvu_cross', v.prepare(
             ' vopmula.xyz ACC, $vf2, $vf3\n vopmsub.xyz $vf1, $vf3, $vf2\n', strict=True))

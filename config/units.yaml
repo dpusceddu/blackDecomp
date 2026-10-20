@@ -52711,3 +52711,29 @@ units:
     symbol: func_00347430
     status: source
     size: 196
+- name: auto_game_19d6b8
+  source: src/auto/game/19d6b8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x19d6b8'
+    symbol: func_0019D6B8
+    size: 112
+    status: source
+- name: auto_game_1e09a8
+  source: src/auto/game/1e09a8.c
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x1e09a8'
+    symbol: func_001E09A8
+    size: 136
+    status: source

@@ -644,6 +644,55 @@ The campaign stops: throughput fell below 1,500 bytes per agent-hour; throughput
 - Isolated `tu_15d248`: Xbox unconfirmed (not counted as a recovered object TU; counterpart unresolved; proposed 0x12670 rejected).
 - Isolated `tu_15d310`: Xbox `0x1baa70` (not counted as a recovered object TU; semantic association only).
 
+### Vector/matrix inline study
+
+The repeatable VU census finds 845 SN-assigned users, including 694 in the mapped game
+region (TU library labels differ and remain qualified). Its 24,612 recurring windows
+overlap and are not additive. Strict semantic families include affine transforms
+216 occurrences/120 functions, cross 253/100, dot 75/62, normalization 54/41 and
+quaternion product 10/6. Similar arithmetic does not establish SDK identity:
+RenderWare flag lanes, game vector storage and animation's preserved W need distinct recipes.
+
+Eight inline recipes have two complete exact source consumers each;
+12 isolated shapes pass register-renamed dataflow checks, separate from full physical
+allocation checks. Animation Hamilton products use identical fixed VF roles at ten
+sites in six functions: the recurring macro makes two callers exact where freely
+allocated `j` operands leave about 20 differences. Generic arithmetic retains `j` constraints.
+Microcalls comprise 61 sites/21 functions across three uploaded images; entry numbers
+alone do not identify an operation. Five animation wrappers have one exact consumer each,
+and one has none, so none meets the two-consumer promotion rule. SN cannot represent
+special-register clobbers; these wrappers require the documented hidden state to be dead.
+
+| Verified inline-recipe users | Functions | Source before → after |
+| --- | --- | --- |
+| All SN-assigned | 540 | 15 → 19 |
+| Mapped game region | 454 | 15 → 17 |
+| Above 300 B | 378 | 1 → 1 |
+| Above 1 KB | 111 | 0 → 0 |
+
+Four animation matches add 632 text bytes; two automatic game matches add 248.
+Overall progress: 5,438 functions/377,680 text bytes → 5,444/378,560 (13.94%).
+Across the entire VU census, source users rise 19→25, game 17→19; no new large match.
+The final pipeline retries all 822 remaining users, game first: two exact, four near,
+13 other scored drafts, 26 compile failures and 773 m2c failures, plus four orphan pieces.
+Above 300 B it adds 0/562; above 1 KB, 0/154. No saved scored VU drafts existed before this study.
+The older VU-bearing calibration and three available compiled hand drafts also remain inexact;
+97 other ASM claims have no compiled definition and are not counted as source attempts.
+
+The opt-in lowering fixes native 128-bit transport, partial lanes, unknown-pointer
+access widths and integer-word/FPR bit transfers. Only 89 functions fit its safe subset.
+The leading exclusions are unproved upper-lane/argument flow (398 functions), mixed
+vector/scalar stack overlays (188), then uncovered operation/hidden-state contracts.
+Manual near misses also retain scalar lifetimes and store-order differences after
+their arithmetic matches. Full matrix/transpose and general normalization recipes
+remain unverified. Detailed probes and generated site lists stay in ignored build output.
+
+Inclusive study time is roughly 2.2 agent-hours (one component partly estimated),
+about 110 new game bytes/agent-hour, far below the 1,698-byte threefold benchmark.
+The math layer yields useful exact controls but does not establish viable large-game
+reconstruction throughput. Stop here; no campaign resumes. All five retail images,
+325 tooling tests and 26 shared exact consumers pass; prior source addresses are preserved.
+
 ## Agent rules (`AGENTS.md`)
 
 - Build with `ninja`, check progress with `tools/progress.py`, pick work with `tools/next.py`.

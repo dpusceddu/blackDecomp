@@ -8685,8 +8685,8 @@ tus:
   confidence: low
   evidence: [proposed-cut]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]
+  flags_basis: matched 1 of 1 functions
 - name: tu_19d728
   kind: isolated
   library: game
@@ -10753,7 +10753,7 @@ tus:
   evidence: [join-hard, join-soft, calls, shared-items, proposed-cut]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas]
-  flags_basis: matched 10 of 53 functions
+  flags_basis: matched 11 of 53 functions
   data:
     .rodata: ['0x3f7c48', '0x3f91d8']
     .data: ['0x3bd2ec', '0x3bd3a8']

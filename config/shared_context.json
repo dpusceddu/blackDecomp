@@ -176,6 +176,24 @@
         "0x3440b8",
         "0x347430"
       ]
+    },
+    {
+      "header": "include/ps2/vu0_lowering.h",
+      "api": [
+        "__ee_vu_sub_keep",
+        "__ee_vu_mul_keep",
+        "__ee_vu_sum_keep",
+        "__ee_vu_one",
+        "__ee_vu_read_x"
+      ],
+      "verified_scope": [
+        "Two complete game source consumers verify native128 transport, preserved non-XYZ/X lanes, integer-word/FPR bit transfer, physical allocation and branch context.",
+        "Other preservation adapters and unsupported mixed-width stack overlays are not promoted by these controls."
+      ],
+      "controls": [
+        "0x19d6b8",
+        "0x1e09a8"
+      ]
     }
   ],
   "controls": [
@@ -457,6 +475,34 @@
       "uses": [
         "AnimationMath::Multiply",
         "AnimationMath::Add"
+      ]
+    },
+    {
+      "address": "0x19d6b8",
+      "source_function": "func_0019D6B8",
+      "headers": [
+        "include/ps2/vu0_lowering.h"
+      ],
+      "uses": [
+        "__ee_vu_sub_keep",
+        "__ee_vu_mul_keep",
+        "__ee_vu_sum_keep",
+        "__ee_vu_one",
+        "__ee_vu_read_x"
+      ]
+    },
+    {
+      "address": "0x1e09a8",
+      "source_function": "func_001E09A8",
+      "headers": [
+        "include/ps2/vu0_lowering.h"
+      ],
+      "uses": [
+        "__ee_vu_sub_keep",
+        "__ee_vu_mul_keep",
+        "__ee_vu_sum_keep",
+        "__ee_vu_one",
+        "__ee_vu_read_x"
       ]
     }
   ],

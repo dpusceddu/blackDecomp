@@ -120,5 +120,5 @@ def prepare(text):
         native = vu0_m2c.has_vu(text)
     if native:
         import vu0_m2c
-        text = vu0_m2c.prepare(text)
+        text = vu0_m2c.prepare(text, strict=True)
     return ee_prep.prep(text, native128=native)

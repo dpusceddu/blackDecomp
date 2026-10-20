@@ -29,7 +29,9 @@ def _vf(value):
 
 
 def has_vu(text):
-    return bool(re.search(r'\b(?:v[a-z0-9]+(?:\.[xyzw]+)?|[ls]qc2|q[mf]tc2(?:\.ni|\.i)?)\s', text))
+    return any(row and (row[1].startswith('v') or row[1].split('.')[0]
+                       in {'lqc2', 'sqc2', 'qmtc2', 'qmfc2', 'cfc2', 'ctc2', 'mfc2', 'mtc2'})
+               for row in map(_parse, text.splitlines()))
 
 
 def _parse(line):
