@@ -51955,22 +51955,22 @@ units:
     size: 424
     symbol: func_00155238
     status: asm
-    reason: claimed
+    reason: context
   - addr: '0x1553e0'
     size: 760
     symbol: func_001553E0
     status: asm
-    reason: claimed
+    reason: context
   - addr: '0x1556d8'
     size: 340
     symbol: func_001556D8
     status: asm
-    reason: claimed
+    reason: context
   - addr: '0x155830'
     size: 728
     symbol: func_00155830
     status: asm
-    reason: claimed
+    reason: context
 - name: mod_weapons_inventory_inventory
   source: src/campaign/mod_weapons_inventory_inventory.cpp
   origin: game
