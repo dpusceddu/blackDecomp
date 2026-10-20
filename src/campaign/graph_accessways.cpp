@@ -16,9 +16,6 @@ int CAccessWaysData::Get(int node, short **out)
     return counts[node];
 }
 
-#if 0
-
-// Unmatched: iterator sentinel and lifetime allocation differ.
 int CAccessWaysData::Build()
 {
     int total = graph->liveNodes;
@@ -27,19 +24,25 @@ int CAccessWaysData::Build()
     if (graph->edgeCount == 0)
         return false;
     nodeCount = (short)total;
-    counts = (short*)Allocate(nodeCount << 1);
+    counts = new short[nodeCount];
     memset(counts, 0, nodeCount << 1);
-    lists = (short**)Allocate(nodeCount << 2);
+    lists = new short*[nodeCount];
     memset(lists, 0, nodeCount << 2);
-    ComputeAccessWaysTraversal visitor(this);
+    ComputeAccessWaysTraversal visitor;
+    visitor.owner = this;
     visitor.VisitNodes((CSpatialGraph*)graph);
     return true;
 }
 
-// Unmatched: buffer-copy loop locals and scalar scheduling differ.
+#if 0
+
+
+
+// Unmatched: serializer cleanup branches and callback-base/local register lifetimes.
+extern char D_00407D50[];
 int CAccessWaysData::Save(const void* path)
 {
-    void* file = AccessFile.open(path, "wb");
+    void* file = AccessFile.open(path, D_00407D50);
     if (file) {
         int version = D_00407DD0;
         int i;
@@ -49,8 +52,8 @@ int CAccessWaysData::Save(const void* path)
                 short* buffer = (short*)Allocate(nodeCount << 1);
                 for (i = 0; i < nodeCount; ++i)
                     buffer[i] = counts[i];
-                int total = nodeCount;
-                if (AccessFile.write(buffer, 2, nodeCount, file) != total) {
+                int total = AccessFile.write(buffer, 2, nodeCount, file);
+                if (total != nodeCount) {
                     D_003C87E0(buffer);
                     AccessFile.close(file);
                     return false;
@@ -59,8 +62,7 @@ int CAccessWaysData::Save(const void* path)
                 if (total > 0) do {
                     for (i = 0; i < counts[node]; ++i)
                         buffer[i] = lists[node][i];
-                    short* sizes = counts;
-                    if (AccessFile.write(buffer, 2, sizes[node], file) != sizes[node]) {
+                    if (AccessFile.write(buffer, 2, counts[node], file) != counts[node]) {
                         D_003C87E0(buffer);
                         AccessFile.close(file);
                         return false;

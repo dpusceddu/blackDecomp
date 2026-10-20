@@ -47089,6 +47089,7 @@ units:
   - -snas
   - -fbyte-bool
   - -ffunction-sections
+  - -fno-rtti
   functions:
   - addr: '0x2fcaa8'
     symbol: func_002FCAA8
@@ -47103,9 +47104,9 @@ units:
     size: 968
     status: asm
   - addr: '0x2fd288'
-    symbol: func_002FD288
+    symbol: Build__Q24Kaim15CAccessWaysData
     size: 532
-    status: asm
+    status: source
   - addr: '0x2fd4a0'
     symbol: func_002FD4A0
     size: 732
@@ -47120,7 +47121,11 @@ units:
     status: asm
   externs:
     __throw: '0x292b40'
+    _vt$26ComputeAccessWaysTraversal: '0x3ef330'
+    _vt$Q24Kaim7CObject: '0x3e0040'
+    memset: '0x35c6ec'
     terminate__Fv: '0x36f978'
+  claim: context-wave6-graph
 - name: campaign_actor_entries_wave3
   source: src/campaign/actor_entries_wave3.cpp
   origin: 'C++ actor campaign: 0x3dc838 class cluster; identity unverified'
@@ -50195,14 +50200,18 @@ units:
     reason: registers
   - addr: '0x2f7f48'
     size: 752
-    status: asm
-    symbol: func_002F7F48
-    reason: registers
+    status: source
+    symbol: SaveOld__Q24Kaim13CSpatialGraphPCv
   - addr: '0x2f8238'
     size: 2560
     status: asm
     symbol: func_002F8238
     reason: registers
+  externs:
+    __throw: '0x292b40'
+    _vt$Q24Kaim11GraphWriter: '0x3ee500'
+    _vt$Q24Kaim7CObject: '0x3e0040'
+    strlen: '0x35ccd8'
 - name: campaign_game_path_2899a0
   source: src/campaign/graphics_game_path_2899a0.cpp
   flags:

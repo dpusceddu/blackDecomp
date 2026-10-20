@@ -10,9 +10,18 @@ extern "C" float sqrtf(float);
 extern "C" unsigned int strlen(const char*) __asm__("func_0035CCD8");
 extern char D_00407C28[], D_00407BC8[], D_00407BC0[];
 namespace Kaim {
+// Inferred node-index value view: the 4-byte storage and sentinel comparison
+// are verified by CAccessWaysData::Build and CSpatialGraph::SaveOld. The original C++ type name is unknown.
+struct SpatialIndex {
+ unsigned int value;SpatialIndex(unsigned int n):value(n){}
+ operator unsigned int()const{return value;}
+ bool operator==(const SpatialIndex &rhs)const{return value==rhs.value;}
+ bool operator!=(unsigned int rhs)const{return value!=rhs;}
+};
+typedef char SpatialIndexSize[sizeof(SpatialIndex)==4?1:-1];
 struct CSpatialGraph;
-struct SpatialNode { int id; float x,y,z; CSpatialGraph *graph; SpatialNode():id(-1),graph(0){} ~SpatialNode(){} };
-struct SpatialEdge { int index; CSpatialGraph *graph; SpatialEdge():index(-1),graph(0){} ~SpatialEdge(){} inline SpatialNode *EndNode(); inline SpatialNode *StartNode(); };
+struct SpatialNode { SpatialIndex id; float x,y,z; CSpatialGraph *graph; SpatialNode():id(-1),graph(0){} ~SpatialNode(){} };
+struct SpatialEdge { SpatialIndex index; CSpatialGraph *graph; SpatialEdge():index(-1),graph(0){} ~SpatialEdge(){} inline SpatialNode *EndNode(); inline SpatialNode *StartNode(); };
 struct CSpatialGraph : CObject {
  static void *operator new(unsigned int size){return Allocate(size);}
  CSpatialGraph() __asm__("func_002F5C10");
@@ -37,8 +46,8 @@ struct CSpatialGraph : CObject {
  void Compact() __asm__("func_002FA4C8");
  void SetFlags(unsigned int) __asm__("func_002FA930");
  SpatialEdge *FindEdge(unsigned int,unsigned int);
- inline SpatialNode *GetNode(unsigned int n) { if(n>=nodeCapacity)return 0; SpatialNode *p=nodes+n;return p->id==-1?0:p; }
- inline SpatialEdge *GetEdge(unsigned int n) { if(n>=edgeCapacity)return 0; SpatialEdge *p=edges+n;return p->index==-1?0:p; }
+ inline SpatialNode *GetNode(unsigned int n) { if(n>=nodeCapacity)return 0; if(nodes[n].id==SpatialIndex((unsigned int)-1))return 0; return &nodes[n]; }
+ inline SpatialEdge *GetEdge(unsigned int n) { if(n>=edgeCapacity)return 0; if(edges[n].index==SpatialIndex((unsigned int)-1))return 0; return &edges[n]; }
 };
 inline SpatialNode *SpatialEdge::EndNode(){CSpatialGraph *owner=graph;if(this==&owner->syntheticEdge)return &owner->syntheticEnd;return &owner->nodes[owner->edgeEnd[index]];}
 inline SpatialNode *SpatialEdge::StartNode(){CSpatialGraph *owner=graph;if(this==&owner->syntheticEdge)return &owner->syntheticStart;return &owner->nodes[owner->edgeStart[index]];}
