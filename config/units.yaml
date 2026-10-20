@@ -50383,3 +50383,18 @@ units:
   functions:
   - addr: '0x161f58'
     status: asm
+- name: campaign_apt_builtin_245840
+  source: src/campaign/graphics_apt_245840.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x245840'
+    symbol: func_00245840
+    size: 2076
+    status: asm
+    reason: claimed
