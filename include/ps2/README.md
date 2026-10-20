@@ -47,3 +47,17 @@ also verifies a native `double` return from `atof` (0x35E730), float-to-double `
 Its coverage-distance expression retains an explicit `float` local before use; the unit binds
 these software helpers to their original addresses. This is a scoped native-double recipe,
 not verification of every floating operation or another compiler's ABI.
+
+`vu0_math.h` exposes the C-compatible arithmetic blocks used by `vu0.hpp`.
+`config/vu0_math.json` separates operations with two exact source consumers from
+provisional scale/cross/normalization recipes. Run `tools/verify_vu0_math.py` for
+isolated, register-renamed VF dataflow equality against retail, followed by
+`tools/shared_context.py verify` for full physical allocation and image checks.
+Isolation does not prove surrounding scheduling. XYZ writes do not define W;
+normalize-with-copy and normalize-without-copy are distinct recipes. ACC and Q
+are consumed inside one assembly block; MAC/status flags are not exported.
+
+These generic names do not identify an original class. Game vector values have
+128-bit argument/storage evidence; RenderWare's matrix kernels also preserve
+flag/payload lanes that generic game affine transforms leave unspecified. Similar
+arithmetic does not establish interchangeable types, load order or aliasing.
