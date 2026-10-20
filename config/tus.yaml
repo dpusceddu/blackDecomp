@@ -3520,8 +3520,8 @@ tus:
   confidence: low
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 2 of 9 functions
+  flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31]
+  flags_basis: matched 6 of 9 functions
   data:
     .data: ['0x3bceb8', '0x3bcebc']
 - name: tu_15d958
