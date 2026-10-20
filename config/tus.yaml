@@ -17688,7 +17688,7 @@ tus:
   evidence: [eh, ctor-end, join-hard, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
   flags: [-O2, -G0, -snas, -fbyte-bool]
-  flags_basis: matched 7 of 23 functions
+  flags_basis: matched 8 of 23 functions
   data:
     .rodata: ['0x407bc0', '0x407c40']
     .data: ['0x3ee500', '0x3eec90']
@@ -17713,8 +17713,8 @@ tus:
   confidence: exact
   evidence: [eh, ctor-list, ctor-end, join-hard, join-soft, calls, shared-items]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas, -fbyte-bool]
-  flags_basis: matched 8 of 12 functions
+  flags: [-O2, -G0, -snas]
+  flags_basis: matched 9 of 12 functions
   data:
     .rodata: ['0x407d38', '0x407dd8']
     .data: ['0x3ef330', '0x3ef3a0']

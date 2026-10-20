@@ -208,8 +208,6 @@ if(files->Read(resource,&nodeCount,4)!=4){files->Close(resource);return false;}C
 }
 #endif
 
-// Unmatched: index helper and pointer address register allocation.
-#if 0
 bool CSpatialGraph::SaveOld(const void *path) {
     void *file=D_00451228.open(path,D_00407BC8);
     if(file) {
@@ -232,7 +230,6 @@ bool CSpatialGraph::SaveOld(const void *path) {
     }
     return false;
 }
-#endif
 
 template<class T> inline bool SpatialWriteScalar(const T &value,void *file){unsigned int converted=*(const unsigned int*)&value;return D_00451228.write(&converted,4,1,file)==1;}
 // Unmatched: scalar serialization temporary lifetimes and register allocation.

@@ -28,7 +28,7 @@ struct CAccessWaysData : CGraphData {
 }
 struct ComputeAccessWaysTraversal : Kaim::GraphVisitor {
  Kaim::CSpatialGraph *graph;Kaim::CAccessWaysData *owner;
- ComputeAccessWaysTraversal(Kaim::CAccessWaysData *w):owner(w){}
+ ComputeAccessWaysTraversal(){}
  virtual void Begin(Kaim::CSpatialGraph*g){graph=g;}
  virtual bool Consider(Kaim::SpatialNode*);
 };
