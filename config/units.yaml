@@ -48093,3 +48093,39 @@ units:
     status: source
     symbol: Leave__Q216BlackPS2Campaign17ActorStateMachine
     size: 104
+- name: campaign_actor_cb38_wave4
+  source: src/campaign/actor_cb38_wave4.cpp
+  origin: C++ actor vtable0x3DCB38 cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x14bd58'
+    status: asm
+  - addr: '0x14f380'
+    status: source
+    size: 272
+    symbol: Update__Q213CampaignActor15RenderableStatef
+  - addr: '0x14f498'
+    status: asm
+  - addr: '0x14f668'
+    status: source
+    size: 132
+    symbol: Release__Q213CampaignActor15RenderableState
+- name: campaign_actor_cb38_reset_wave4
+  source: src/campaign/actor_cb38_reset_wave4.cpp
+  origin: C++ actor vtable0x3DCB38 reset; independently verified no initial scheduling
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -fno-schedule-insns
+  functions:
+  - addr: '0x14ede0'
+    status: source
+    size: 100
+    symbol: Reset__Q213CampaignActor15RenderableState

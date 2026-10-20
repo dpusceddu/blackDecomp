@@ -2809,8 +2809,8 @@ tus:
   confidence: low
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, -fno-schedule-insns]
+  flags_basis: matched 1 of 2 functions
 - name: tu_14eef0
   kind: object
   library: game
@@ -2843,8 +2843,8 @@ tus:
   confidence: low
   evidence: [calls, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 2 of 6 functions
+  flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]
+  flags_basis: matched 4 of 6 functions
 - name: tu_14f7f8
   kind: isolated
   library: game
