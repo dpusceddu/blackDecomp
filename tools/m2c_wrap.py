@@ -12,8 +12,8 @@ from m2c.main import main
 _format = StructAccess.format
 
 
-SIZES = {'s8': 1, 'u8': 1, 's16': 2, 'u16': 2, 's32': 4, 'u32': 4, 'f32': 4, 's64': 8, 'u64': 8, 'f64': 8}
-UNSIGNED = {1: 'u8', 2: 'u16', 4: 'u32', 8: 'u64'}
+SIZES = {'s8': 1, 'u8': 1, 's16': 2, 'u16': 2, 's32': 4, 'u32': 4, 'f32': 4, 's64': 8, 'u64': 8, 'f64': 8, 's128': 16, 'u128': 16}
+UNSIGNED = {1: 'u8', 2: 'u16', 4: 'u32', 8: 'u64', 16: 'u128'}
 
 
 def sized_ptr(self, fmt):
@@ -204,6 +204,11 @@ MipseeArch.asm_patterns = [
 MipseeArch.instrs_destination_first = dict(MipseeArch.instrs_destination_first)
 MipseeArch.instrs_destination_first['sqrt.libc.fictive'] = MipseeArch.instrs_destination_first['sqrt.s']
 MipseeArch.instrs_destination_first['sqrt.s'] = lambda a: fn_op('__ee_sqrt_s', [as_f32(a.reg(1))], Type.f32())
+
+import os
+if os.environ.get('AUTODECOMP_VU0'):
+    import vu0_m2c
+    vu0_m2c.install()
 
 
 if __name__ == '__main__':

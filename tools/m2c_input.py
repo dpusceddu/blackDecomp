@@ -103,5 +103,12 @@ def normalize_sections(text):
 
 
 def prepare(text):
+    import os
     import ee_prep
-    return ee_prep.prep(decode_raw_instructions(normalize_sections(text)))
+    text = decode_raw_instructions(normalize_sections(text))
+    native = bool(os.environ.get('AUTODECOMP_VU0')) and bool(re.search(
+        r'\*/\s+(?:v\w|lqc2|sqc2|qmtc2|qmfc2)', text))
+    if native:
+        import vu0_m2c
+        text = vu0_m2c.prepare(text)
+    return ee_prep.prep(text, native128=native)

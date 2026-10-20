@@ -674,6 +674,8 @@ def clean_function(name, r, sigs, strings=None, stack=None):
             body = re.sub(r'&?\b%s\b' % sym, lambda m: '"%s"' % lit, body)
     sig = '%s %s(%s)' % (ret, name, params)
     lines = ['#include "auto/prelude.h"', '#define TYPES_GHIDRA_NO_PROTOTYPES', '#include "types_ghidra.h"', '#undef TYPES_GHIDRA_NO_PROTOTYPES', '']
+    if '__ee_vu_' in body:
+        lines.insert(1, '#include "ps2/vu0_lowering.h"')
     seen = set()
     known = header_declarations()
     for ident in IDENT.findall(sig + ' ' + body):
@@ -1170,7 +1172,17 @@ def force_cc(flag_sets):
 
 
 def variants_for(fn):
-    return force_cc(variants_for_sn(fn))
+    return vu0_flags(fn, force_cc(variants_for_sn(fn)))
+
+
+def vu0_flags(fn, sets):
+    """Record the VU register option in recipes as well as worker invocations."""
+    if not os.environ.get('AUTODECOMP_VU0') or not any(
+            mnemonic.startswith(('v', 'lqc2', 'sqc2', 'qmtc2', 'qmfc2'))
+            for mnemonic in fn['mnem']):
+        return sets
+    return [flags if '-mvu0-use-vf0-vf31' in flags else
+            flags + ['-mvu0-use-vf0-vf31'] for flags in sets]
 
 
 def variants_for_sn(fn):
@@ -1203,7 +1215,7 @@ def extra_sets(fn):
     assembler_sets = [assembler_base + ['--assembler=' + choice] for choice in FALLBACKS]
     tf = tu_flags(fn['addr'])
     if tf and tf[0] != COMPILER:
-        return force_cc(SONY_EXTRA + assembler_sets)
+        return vu0_flags(fn, force_cc(SONY_EXTRA + assembler_sets))
     # The bundled GNU assembler and SN assembler differ on short-loop/hazard
     # padding. Both have full-image-verified campaign matches; try both rather
     # than treating an assembler NOP difference as an unfixable C mismatch.
@@ -1213,7 +1225,7 @@ def extra_sets(fn):
     if any(value[0] == 'gprel' for value in fn['rel'].values()):
         sets += [['-O2', flag] + extra for flag in ('-G1', '-G8')
                  for extra in ([], ['-fbyte-bool'])]
-    return force_cc(sets)
+    return vu0_flags(fn, force_cc(sets))
 
 
 def draft(fns, orig, batch, options=(), tag='default', ctx='ctx.c', flag_extra=True):

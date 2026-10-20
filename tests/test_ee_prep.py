@@ -34,6 +34,18 @@ class FrameWidths(unittest.TestCase):
         _, flags = prep(assembly('por $2, $10, $0'))
         self.assertEqual(flags['qargs'], [6])
 
+    def test_native128_keeps_data_widths_and_separates_frame_saves(self):
+        text, flags = prep(assembly('sq $16, 16($29)', 'lq $2, 0($4)',
+                                   'ld $3, 16($4)', 'lq $16, 16($29)',
+                                   'por $2, $5, $0'), native128=True)
+        self.assertIn('lq $2, 0($4)', text)
+        self.assertIn('ld $3, 16($4)', text)
+        self.assertIn('sd $16, 16($29)', text)
+        self.assertIn('ld $16, 16($29)', text)
+        self.assertIn('por $2, $5, $0', text)
+        self.assertFalse(flags['q'])
+        self.assertTrue(flags['real64'])
+
 
 if __name__ == '__main__':
     unittest.main()

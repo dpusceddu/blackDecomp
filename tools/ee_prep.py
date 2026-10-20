@@ -43,7 +43,7 @@ def frame_transfers(parsed):
     return {saves[key] for key in paired} | {i for i, key in restores if key in paired}
 
 
-def prep(text):
+def prep(text, *, native128=False):
     """(new assembly text, {'q': 128-bit ops seen, 'u': unaligned pairs seen, 'real64': ld/sd away from $sp})."""
     lines = text.split('\n')
     out = list(lines)
@@ -85,10 +85,16 @@ def prep(text):
             out[i] = '\n'.join(placeholder(pre, op, sp, args))
             flags['ph'] = True
         elif op in ('lq', 'sq'):
+            # The opt-in VU adapter uses m2c's native 16-byte memory model.
+            # Frame saves still carry ABI state rather than source values.
+            if native128 and i not in frame_q:
+                continue
             if i not in frame_q:
                 flags['q'] = True
             out[i] = '%s%s%s%s' % (pre, 'ld' if op == 'lq' else 'sd', sp, args)
         elif op == 'por':
+            if native128:
+                continue
             a = [x.strip() for x in args.split(',')]
             if len(a) == 3 and a[2] in ('$0', '$zero'):
                 out[i] = '%sdaddu%s%s, %s, $0' % (pre, sp, a[0], a[1])
