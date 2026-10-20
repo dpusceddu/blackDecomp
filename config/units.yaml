@@ -51012,11 +51012,6 @@ units:
     status: asm
     reason: claimed
     size: 220
-  - addr: '0x1b38f8'
-    symbol: func_001B38F8
-    status: asm
-    reason: claimed
-    size: 280
   - addr: '0x1b3ae8'
     symbol: func_001B3AE8
     status: asm
@@ -51812,3 +51807,18 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+- name: mod_effects_1b38f8
+  source: src/mod/effects/slot_remove_bone.cpp
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf16
+  functions:
+  - addr: '0x1b38f8'
+    size: 280
+    status: source
+    symbol: RemoveBone__Q210ModEffects4BankPQ210ModEffects5ActorUc
