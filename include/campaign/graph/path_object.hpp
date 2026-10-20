@@ -5,7 +5,7 @@
 #include "classes/kynapse/Kaim_CPathObject_CLinkedEdge.hpp"
 namespace Kaim {
 struct CPointPair;
-struct PathClassInfo { unsigned char unknown00[0x108]; PathClassInfo *parent; };
+struct PathClassInfo { unsigned char unknown00[0x108]; PathClassInfo *parent; inline bool IsDerivedFrom(PathClassInfo *wanted); };
 struct PathPropertyBag;
 struct PathPropertySlot { int index; PathPropertyBag *bag; };
 struct PathPropertyBag {
@@ -16,8 +16,8 @@ struct PathPropertyBag {
 inline void *GetPathSlot(PathPropertySlot *slot) {
  PathPropertyBag *bag=slot->bag;
  if(slot==&bag->primary)return bag->primaryValue;
- if(bag->values)return bag->values[slot->index];
- return 0;
+ if(!bag->values)return 0;
+ return bag->values[slot->index];
 }
 inline bool HasPathSlot(PathPropertySlot *slot) { return GetPathSlot(slot)!=0; }
 inline void SetPathSlot(PathPropertySlot *slot,void *value) {
