@@ -29615,8 +29615,8 @@ tus:
   confidence: exact
   evidence: [eh, proposed-cut]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]
+  flags_basis: matched 1 of 1 functions
 - name: linkonce_38f190
   kind: linkonce
   library: linkonce
@@ -30343,8 +30343,8 @@ tus:
   confidence: exact
   evidence: [eh, proposed-cut]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]
+  flags_basis: matched 1 of 1 functions
 - name: linkonce_3909a8
   kind: linkonce
   library: linkonce
