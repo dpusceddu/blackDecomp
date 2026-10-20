@@ -1,7 +1,8 @@
 #include "campaign/graphics/controller.hpp"
-// Unmatched: 9 instruction differences after native layout, argument-bank and helper probes.
+// Unmatched: 5 instruction differences remain in branch layout and return merging.
 using namespace CampaignGraphics;
 int Controller::Rumble(unsigned enabled) {
-    if(Connected()){if(enabled){field_49=1;return 1;}field_49=0;return 0;}
-    return 0;
+    if(!Connected())return 0;
+    if(!enabled){field_49=0;return 0;}
+    field_49=1;return 1;
 }
