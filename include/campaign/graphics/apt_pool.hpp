@@ -4,11 +4,12 @@
 #include "campaign/graphics/apt_value.hpp"
 namespace AptPS2 {
 struct PropertySpec { int unknown; int code; };
-struct Token { unsigned short refs,length;int unknown;char text[1]; };
+struct Token { unsigned short refs,hash,length,pad;char text[1]; };
+extern "C" void func_00387328(void*,int);
 struct StringHandle {
  Token* token;
  StringHandle(const char*) __asm__("func_003872E0");
- ~StringHandle() __asm__("func_00387328");
+ ~StringHandle() {func_00387328(this,2);}
 };
 struct PooledValue {
  int flags; void* table;
@@ -30,7 +31,7 @@ extern "C" {
  extern PooledValue *D_003BFAE4,*D_003BFAE8,*D_003BFAEC,*D_003BFB10,*D_0043DF40;
  extern void* D_0043DEE0;
  extern char D_003E2120,D_003E2098,D_003E2230,D_0043DC18;
- extern unsigned short D_003BFAF8;
+ extern Token D_003BFAF8;
 }
 inline PooledValue* Integer(int value) {
  PooledValue* result=D_003BFAEC;

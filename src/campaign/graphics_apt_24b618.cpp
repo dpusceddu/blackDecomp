@@ -3,7 +3,7 @@ using namespace AptPS2;
 // Unmatched: native pooled-value helpers, string cleanup and switch allocation.
 Value* PropertyValue::Read(int present,void* nameHandle) {
  PropertySpec* spec=0;
- if(present) {Token* token=*(Token**)nameHandle;spec=func_0024B4A8(token->text,token->length);}
+ if(present) {Token* token=*(Token**)nameHandle;spec=func_0024B4A8(token->text,token->hash);}
  if(!spec)return 0;
  switch(spec->code) {
  case 1: {
