@@ -46582,22 +46582,10 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   functions:
-  - addr: '0x2f4390'
-    symbol: func_002F4390
-    size: 340
-    status: asm
   - addr: '0x2f44e8'
     symbol: Replay__Q24Kaim11CPathObject
     size: 312
     status: source
-  - addr: '0x2f4620'
-    symbol: func_002F4620
-    size: 400
-    status: asm
-  - addr: '0x2f47b0'
-    symbol: func_002F47B0
-    size: 572
-    status: asm
   - addr: '0x2f4a90'
     symbol: _$_Q24Kaim11CPathObject
     size: 188
@@ -48934,3 +48922,37 @@ units:
     symbol: func_002F3AB0
     status: asm
     reason: context
+- name: context_graph_pathobject
+  source: src/campaign/graph_pathobject_context.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave4-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2f4390'
+    size: 340
+    symbol: Init__Q24Kaim11CPathObjectP12ChildBuffers
+    status: source
+  - addr: '0x2f4620'
+    size: 400
+    symbol: Claim__Q24Kaim11CPathObjectiPQ24Kaim16PathPropertySlot
+    status: source
+  - addr: '0x2f47b0'
+    size: 572
+    symbol: Release__Q24Kaim11CPathObjectiPQ24Kaim16PathPropertySlot
+    status: source
+  externs:
+    D_003C87E8: '0x3c87e8'
+    D_003C87EC: '0x3c87ec'
+    _vt$Q34Kaim11CPathObject11CLinkedEdge: '0x3ee138'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
