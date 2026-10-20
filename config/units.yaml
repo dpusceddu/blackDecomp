@@ -52337,9 +52337,8 @@ units:
   functions:
   - addr: '0x15d310'
     size: 92
-    symbol: func_0015D310
-    status: asm
-    reason: claimed
+    symbol: QueueDelayed__Q210ModWeapons20WeaponManagerMethodsffPQ210ModWeapons8InstanceixxSc
+    status: source
 - name: mod_weapons_tu_163328
   source: src/campaign/mod_weapons_tu_163328.cpp
   origin: game
