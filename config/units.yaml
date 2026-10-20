@@ -49429,3 +49429,61 @@ units:
     size: 300
     symbol: DrawPath__FP9QueryPath
     status: source
+- name: context_graph_search_workspace
+  source: src/campaign/graph_search_workspace.cpp
+  origin: kynapse
+  owner: context-graph
+  claim: context-wave5-graph
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  - -fbyte-bool
+  - -fno-rtti
+  - -ffunction-sections
+  functions:
+  - addr: '0x2ecb80'
+    size: 1640
+    status: source
+    symbol: InitSearch__10KaimSearchUi
+  - addr: '0x2ed1e8'
+    size: 448
+    status: source
+    symbol: FreeSearch__10KaimSearchv
+  - addr: '0x2ed3a8'
+    size: 392
+    status: asm
+    symbol: func_002ED3A8
+    reason: lifetime
+  - addr: '0x2ed530'
+    size: 2884
+    status: asm
+    symbol: func_002ED530
+    reason: lifetime
+  - addr: '0x2ee078'
+    size: 1548
+    status: asm
+    symbol: func_002EE078
+    reason: lifetime
+  - addr: '0x2ee688'
+    size: 924
+    status: asm
+    symbol: func_002EE688
+    reason: lifetime
+  - addr: '0x2eea28'
+    size: 1360
+    status: asm
+    symbol: func_002EEA28
+    reason: lifetime
+  externs:
+    __throw: '0x292b40'
+    _vt$Q210KaimSearch10NodeCursor: '0x3ebe30'
+    _vt$Q210KaimSearch10SearchCell: '0x3ebe48'
+    _vt$Q210KaimSearch10SearchList: '0x3ebe60'
+    _vt$Q210KaimSearch6Object: '0x3e0040'
+    terminate__Fv: '0x36f978'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
