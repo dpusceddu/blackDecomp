@@ -386,10 +386,11 @@
         "BkModPlayerVitalsPS2"
       ],
       "verified_scope": [
-        "Signed medkitCount8A1 verified by exact13CD20; health2F8,state38C,presentation32C,invulnerable8B2 remain instruction-only13C778/13C9D8."
+        "Exact native Restore13C9D8 and AddMedkit13CD20 prove float health2F8 and signed medkitCount8A1. Presentation32C,state38C,invulnerable8B2 remain instruction-only13C778. Original class identity/extent unverified."
       ],
       "controls": [
-        "0x13cd20"
+        "0x13cd20",
+        "0x13c9d8"
       ]
     },
     {
@@ -551,6 +552,32 @@
       ],
       "controls": [
         "0x1357b8"
+      ]
+    },
+    {
+      "header": "include/mod/math/scalar.hpp",
+      "api": [
+        "ModMath::SquareRoot"
+      ],
+      "verified_scope": [
+        "Generic-FPR EE sqrt.s used twice in836B Restore13C9D8 with unchanged retail NaN/negative instruction semantics. No hard-coded registers or NOPs. Standard sqrtf adds errno fallback in this SN recipe; no global unsafe math flags used."
+      ],
+      "controls": [
+        "0x13c9d8"
+      ]
+    },
+    {
+      "header": "include/mod/camera/vitals.hpp",
+      "api": [
+        "ModCamera::PlayerVitals",
+        "Restore",
+        "AddMedkit"
+      ],
+      "verified_scope": [
+        "Native836B restoration and228B medkit-add use the canonical storage prefix. Byte-bool helper Full and difficulty case grouping preserve exact control flow. DamageSink virtual contract and historical PlayerVitals identity remain instruction-only."
+      ],
+      "controls": [
+        "0x13c9d8"
       ]
     }
   ],
@@ -1293,7 +1320,7 @@
     },
     {
       "address": "0x13cd20",
-      "source_function": "func_0013CD20",
+      "source_function": "AddMedkit",
       "headers": [
         "include/mod/camera/vitals.h"
       ],
@@ -1303,7 +1330,7 @@
     },
     {
       "address": "0x15d210",
-      "source_function": "func_0015D210",
+      "source_function": "Row",
       "headers": [
         "include/mod/weapons/catalog.h"
       ],
@@ -1313,7 +1340,7 @@
     },
     {
       "address": "0x15d228",
-      "source_function": "func_0015D228",
+      "source_function": "PrimaryDefinition",
       "headers": [
         "include/mod/weapons/catalog.h"
       ],
@@ -1324,7 +1351,7 @@
     },
     {
       "address": "0x15d288",
-      "source_function": "func_0015D288",
+      "source_function": "Word10",
       "headers": [
         "include/mod/weapons/catalog.h"
       ],
@@ -1334,7 +1361,7 @@
     },
     {
       "address": "0x15d2a8",
-      "source_function": "func_0015D2A8",
+      "source_function": "Word14",
       "headers": [
         "include/mod/weapons/catalog.h"
       ],
@@ -1344,7 +1371,7 @@
     },
     {
       "address": "0x15d2c8",
-      "source_function": "func_0015D2C8",
+      "source_function": "Word18",
       "headers": [
         "include/mod/weapons/catalog.h"
       ],
@@ -1606,6 +1633,22 @@
         "Field_0100",
         "LowerY"
       ]
+    },
+    {
+      "address": "0x13c9d8",
+      "source_function": "Restore",
+      "headers": [
+        "include/mod/camera/vitals.h",
+        "include/mod/camera/vitals.hpp",
+        "include/mod/math/scalar.hpp"
+      ],
+      "uses": [
+        "Normalized",
+        "Full",
+        "medkitCount",
+        "SetNormalized",
+        "ModMath::SquareRoot"
+      ]
     }
   ],
   "subsystems": [
@@ -1619,7 +1662,9 @@
         "mod/camera/aim.hpp",
         "mod/camera/motion.hpp",
         "mod/camera/vitals.h",
-        "mod/camera/local_pose.hpp"
+        "mod/camera/local_pose.hpp",
+        "mod/camera/vitals.hpp",
+        "mod/math/scalar.hpp"
       ],
       "tus": [
         "tu_13db40",
@@ -1885,7 +1930,7 @@
         "13C778 original receiver/state/health accesses and adjusted virtual callback at84->28/2C; field storage inherited from exact13CD20 prefix"
       ],
       "gaps": [
-        "Native damage candidate15diff; vector spill/accessors and source parameter scheduling unresolved. Original classes and callback semantic signatures unverified."
+        "Restore/AddMedkit are exact consumers; native Damage remains15diff from vector spills/accessors. DamageSink class identity and semantic virtual signatures remain unverified."
       ]
     }
   ],

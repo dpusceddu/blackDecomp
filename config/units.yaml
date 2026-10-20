@@ -3548,20 +3548,6 @@ units:
     symbol: func_0013C9B0
     size: 36
     status: source
-- name: auto_game_13cd20
-  source: src/auto/game/13cd20.c
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x13cd20'
-    symbol: func_0013CD20
-    size: 228
-    status: source
-  owner: mod-context
-  claim: mod-wave3-preparation
 - name: tuf_13d228
   source: src/tu/tu_13d1d0.c
   origin: auto
@@ -52268,10 +52254,16 @@ units:
   - -snas
   - -ffunction-sections
   - -mvu0-use-vf0-vf16
+  - -fbyte-bool
   functions:
   - addr: '0x13c9d8'
     size: 836
-    status: asm
+    status: source
+    symbol: func_0013C9D8
+  - addr: '0x13cd20'
+    size: 228
+    status: source
+    symbol: func_0013CD20
 - name: mod_weapons_tu_15d060
   source: src/campaign/mod_weapons_tu_15d060.cpp
   origin: game

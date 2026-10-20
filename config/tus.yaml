@@ -2191,8 +2191,8 @@ tus:
   confidence: medium
   evidence: [join-hard, calls, shared-items, proposed-cut, subdivided]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: matched 1 of 2 functions
+  flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16, -fbyte-bool]
+  flags_basis: matched 2 of 2 functions
   data:
     .rodata: ['0x3f49c8', '0x3f49f0']
 - name: tu_13ce08

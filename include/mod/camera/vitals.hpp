@@ -15,6 +15,7 @@ struct DamagePoint2 {float x,z;};
 class PlayerVitals:public BkModPlayerVitalsPS2 {
 public:
  void Damage(BlackGame::Vec,float) __asm__("func_0013C778");
+ int AddMedkit() __asm__("func_0013CD20");
  void Restore(int) __asm__("func_0013C9D8");
 };
 }
