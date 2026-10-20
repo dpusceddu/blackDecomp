@@ -1,0 +1,18 @@
+// Partial PS2 volume view; class identity, allocation and complete hierarchy remain unverified.
+// Exact debug drawing verifies receiver130/140/150 and three128-bit geometry/color arguments.
+// Exact OnceVolume::SignalOnce verifies flags195/196 and inherited virtual slot1 at vptr10.
+#ifndef BLACK_CAMPAIGN_ACTOR_VOLUME_STATE_HPP
+#define BLACK_CAMPAIGN_ACTOR_VOLUME_STATE_HPP
+#include "campaign/actor/region_state.hpp"
+namespace CampaignActor {
+class VolumeBounds:public RegionInterface {
+public:
+ char toBounds[0x11C];Position4 upper,lower;Matrix4 world;
+};
+class OnceVolume:public VolumeBounds {
+public:
+ char toFired[5];unsigned char fired,result;
+ void SignalOnce(long);void Debug();
+};
+}
+#endif
