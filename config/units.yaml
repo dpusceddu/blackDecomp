@@ -49220,3 +49220,72 @@ units:
     symbol: Update__Q213CampaignActor15SphericalRegionxl
   - addr: '0x164f50'
     status: asm
+- name: context_wave5_entity
+  source: src/context/behaviors_entity.cpp
+  origin: kynapse
+  owner: context-wave5-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x2e41d8'
+    size: 1052
+    status: source
+    symbol: func_002E41D8
+  - addr: '0x2e45f8'
+    size: 416
+    status: source
+    symbol: _$_Q210KaimEntity6Entity
+  - addr: '0x2e4798'
+    size: 200
+    status: asm
+    reason: lifetime
+    symbol: func_002E4798
+  - addr: '0x2e4860'
+    size: 824
+    status: asm
+    reason: lifetime
+    symbol: func_002E4860
+  - addr: '0x2e4b98'
+    size: 200
+    status: source
+    symbol: func_002E4B98
+  - addr: '0x2e4c60'
+    size: 68
+    status: source
+    symbol: func_002E4C60
+  - addr: '0x2e4ce0'
+    size: 52
+    status: asm
+    reason: lifetime
+    symbol: func_002E4CE0
+  - addr: '0x2e4d18'
+    size: 108
+    status: asm
+    reason: lifetime
+    symbol: func_002E4D18
+  externs:
+    _10KaimEntity$gWorld: '0x3c9ed4'
+    __throw: '0x292b40'
+    _vt$Q210KaimEntity10ObjectRoot: '0x3e0040'
+    _vt$Q210KaimEntity6Entity: '0x3e90c0'
+    _vt$Q210KaimEntityt4List1ZPQ210KaimEntity7Handler: '0x3e90a8'
+    _vt$Q210KaimEntityt4Node1ZPQ210KaimEntity7Handler: '0x3e9090'
+    _vt$Q210KaimEntityt8Iterator1ZPQ210KaimEntity6Entity: '0x3e0028'
+    _vt$Q210KaimEntityt8Iterator1ZPQ210KaimEntity7Handler: '0x3e8430'
+    func_0038CC20: '0x38cc20'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    memoryRelease: '0x3c87e0'
+    strcpy: '0x35cbc0'
+    strlen: '0x35ccd8'
+    terminate__Fv: '0x36f978'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
