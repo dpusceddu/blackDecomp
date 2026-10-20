@@ -50166,3 +50166,43 @@ units:
     status: source
   externs:
     D_0040F514: '0x40f514'
+- name: campaign_wave6_flee
+  source: src/campaign/behaviors_flee_wave6.cpp
+  origin: kynapse
+  owner: context-wave6-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - --assembler=sn-min6
+  - -fno-rtti
+  functions:
+  - addr: '0x2d1918'
+    size: 688
+    status: source
+    symbol: func_002D1918
+  - addr: '0x2d1d48'
+    size: 848
+    status: source
+    symbol: func_002D1D48
+  - addr: '0x2d2f48'
+    size: 52
+    status: source
+    symbol: func_002D2F48
+  externs:
+    _11FleeQueries$hooks: '0x451228'
+    __throw: '0x292b40'
+    _vt$Q211FleeQueries4Root: '0x3e0040'
+    _vt$Q211FleeQueries5Query: '0x3e2ab8'
+    func_002E1C58: '0x2e1c58'
+    func_002E7360: '0x2e7360'
+    func_002E8AB8: '0x2e8ab8'
+    func_002E96F8: '0x2e96f8'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
