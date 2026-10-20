@@ -1457,7 +1457,7 @@
     },
     {
       "address": "0x1bec68",
-      "source_function": "func_001BEC68",
+      "source_function": "ModEffects::Flights::Clear",
       "headers": [
         "include/mod/effects/attachments.h"
       ],
@@ -1471,7 +1471,7 @@
     },
     {
       "address": "0x1bf720",
-      "source_function": "func_001BF720",
+      "source_function": "ModEffects::EmitterRecord::Clear",
       "headers": [
         "include/mod/effects/emitter.h"
       ],
@@ -1481,7 +1481,7 @@
     },
     {
       "address": "0x1bfea0",
-      "source_function": "func_001BFEA0",
+      "source_function": "ModEffects::EmitterRecord::Reset",
       "headers": [
         "include/mod/effects/emitter.h"
       ],
@@ -1588,7 +1588,7 @@
     },
     {
       "address": "0x3461d0",
-      "source_function": "func_003461D0",
+      "source_function": "Cache::Enable",
       "headers": [
         "include/mod/animation/pose_cache.h"
       ],
@@ -1598,7 +1598,7 @@
     },
     {
       "address": "0x3461e0",
-      "source_function": "func_003461E0",
+      "source_function": "Cache::Clear",
       "headers": [
         "include/mod/animation/pose_cache.h"
       ],
@@ -1608,7 +1608,7 @@
     },
     {
       "address": "0x346f38",
-      "source_function": "func_00346F38",
+      "source_function": "Cache::ForceBone",
       "headers": [
         "include/mod/animation/pose_cache.h"
       ],
