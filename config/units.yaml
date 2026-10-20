@@ -46144,22 +46144,6 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   functions:
-  - addr: '0x2db140'
-    symbol: func_002DB140
-    size: 1800
-    status: asm
-  - addr: '0x2db9c8'
-    symbol: func_002DB9C8
-    size: 788
-    status: asm
-  - addr: '0x2dc238'
-    symbol: func_002DC238
-    size: 1448
-    status: asm
-  - addr: '0x2dc930'
-    symbol: func_002DC930
-    size: 188
-    status: asm
   - addr: '0x38e768'
     symbol: Function_0038E768__Q215BlackPS2Classes17Kaim_CPointMapperPv
     size: 80
@@ -48093,3 +48077,43 @@ units:
     status: source
     symbol: Leave__Q216BlackPS2Campaign17ActorStateMachine
     size: 104
+- name: context_wave4_pointmapper
+  source: src/context/behaviors_pointmapper.cpp
+  origin: kynapse
+  owner: context-wave4-behaviors
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  functions:
+  - addr: '0x2dadd0'
+    size: 368
+    status: asm
+    reason: registers
+    symbol: func_002DADD0
+  - addr: '0x2db140'
+    size: 1800
+    status: asm
+    reason: registers
+    symbol: func_002DB140
+  - addr: '0x2db9c8'
+    size: 788
+    status: asm
+    reason: registers
+    symbol: func_002DB9C8
+  - addr: '0x2dbce0'
+    size: 1364
+    status: asm
+    reason: registers
+    symbol: func_002DBCE0
+  - addr: '0x2dc238'
+    size: 1448
+    status: asm
+    reason: registers
+    symbol: func_002DC238
+  - addr: '0x2dc930'
+    size: 188
+    status: source
+    symbol: func_002DC930
