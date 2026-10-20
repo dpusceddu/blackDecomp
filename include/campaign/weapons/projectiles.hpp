@@ -10,7 +10,7 @@ struct Projectile {
     EeU8 unknownB0[0x14]; int kind;
     EeU8 unknownC8[0x14]; void *resource;
     EeU8 unknownE0[0x10]; Vec velocity, angularVelocity;
-    int state110; EeU8 ballistic, thrown, flag116, special, ownerFlag, unknown119[7];
+    float remaining110; EeU8 ballistic, thrown, flag116, special, ownerFlag, unknown119[7];
     inline void Activate(float delta) {
         typedef void (*Update)(float,void*);
         Field<Update>(vtable,0xc)(delta,(char*)this+Field<short>(vtable,8));
@@ -24,6 +24,7 @@ struct ProjectilePool {
     void Initialize();
     void Throw(const Matrix*,Vec,int,int);
     void Retire(Projectile*);
+    void RetireOther(Projectile*,int,int);
     void Fire(const Matrix*,Vec,unsigned);
 };
 typedef char ProjectileSize120[sizeof(Projectile)==0x120?1:-1];
