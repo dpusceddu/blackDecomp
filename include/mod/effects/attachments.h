@@ -3,15 +3,14 @@
 #include "ps2/ee_types.h"
 /* Source1BEC68 verifies44records/0x130 stride, active124, childrenB0[8],
    zero word110. Entry Release1B1518 and the1BECD0 call chain identify
-   resource110 through the embedded entry atB0. Source1BF720/1BFEA0 verifies
-   pendingA8. Matrix/motion fields
+   resource110 through the embedded entry atB0. Matrix/motion/offset fields
    follow PS2 instructions1BECD0 only; original class identities remain unknown. */
 typedef struct BkModEffectChildrenPS2 {
     void *items[8]; EeU8 unknown20[0x40]; void *resource;
 } BkModEffectChildrenPS2;
 typedef struct BkModAttachedEffectPS2 {
     EeS128 world[4], local[4], origin, velocity;
-    EeU8 unknowna0[8]; EeS32 pending; EeU8 unknownac[4];
+    EeS128 localOffset;
     BkModEffectChildrenPS2 children;
     EeU8 unknown114[0xc]; float lifetime; EeU8 active,compose,unknown126[0xa];
 } BkModAttachedEffectPS2;

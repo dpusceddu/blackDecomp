@@ -2,6 +2,7 @@
    in the image and are placed by address. */
 #include "auto/prelude.h"
 #include "mod/effects/attachments.h"
+#include "mod/effects/emitter.h"
 
 extern s32 func_001B0FF8();
 extern s32 func_001B1080();
@@ -39,15 +40,15 @@ s32 func_001BECC8(void) {
 
 /* Assembly between the functions: func_001BECD0 (668 code bytes; 672-byte span), func_001BEF70 (1964 code bytes; 1968-byte span) */
 
-s32 func_001BF720(BkModAttachedEffectPS2 *arg0) {
-    arg0->pending = 0;
+s32 func_001BF720(BkEffectEmitterRecordPS2 *arg0) {
+    arg0->owner = 0;
     return func_001B0FF8(arg0);
 }
 
 /* Assembly between the functions: func_001BF740 (472 bytes), func_001BF918 (1416 bytes) */
 
-s32 func_001BFEA0(BkModAttachedEffectPS2 *arg0) {
-    arg0->pending = 0;
+s32 func_001BFEA0(BkEffectEmitterRecordPS2 *arg0) {
+    arg0->owner = 0;
     func_001B1080(arg0);
     return 1;
 }
