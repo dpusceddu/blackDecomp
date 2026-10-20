@@ -2360,8 +2360,8 @@ tus:
   confidence: low
   evidence: [proposed-cut]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf16]
+  flags_basis: matched 1 of 1 functions
 - name: tu_140a40
   kind: isolated
   library: game
