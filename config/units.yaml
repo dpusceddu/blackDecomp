@@ -50181,3 +50181,14 @@ units:
     status: source
   externs:
     D_0040F514: '0x40f514'
+- name: campaign_actor_bbc8_wave6
+  source: src/campaign/actor_bbc8_wave6.cpp
+  origin: C++ actor vtable0x3DBBC8 command cluster
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x162ae8'
+    status: asm
