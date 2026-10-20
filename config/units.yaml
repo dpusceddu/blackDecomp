@@ -48093,3 +48093,16 @@ units:
     status: source
     symbol: Leave__Q216BlackPS2Campaign17ActorStateMachine
     size: 104
+- name: campaign_graphics_timed_matrix_wave4
+  source: src/campaign/graphics_timed_matrix.cpp
+  origin: game
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x112808'
+    status: asm
+  - addr: '0x1129b8'
+    status: asm
