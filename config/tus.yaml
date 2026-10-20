@@ -20220,8 +20220,8 @@ tus:
   confidence: exact
   evidence: [eh]
   compiler: ee-gcc2.95.3-136
-  flags: [-O2, -G0, -snas]
-  flags_basis: default
+  flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]
+  flags_basis: matched 2 of 3 functions
 - name: animation/tu_351a08
   kind: object
   library: animation

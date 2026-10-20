@@ -51854,12 +51854,12 @@ units:
     reason: campaign
   - addr: '0x351968'
     size: 52
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_00351968
   - addr: '0x3519a0'
     size: 100
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_003519A0
 - name: mod_weapons_tu_15bbd8
   source: src/campaign/mod_weapons_tu_15bbd8.cpp
   origin: game
