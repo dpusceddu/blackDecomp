@@ -129,8 +129,11 @@ def main():
     spans = [(fs[i + 1]['addr'] if i + 1 < len(fs) else text['addr'] + text['orig_size']) - fs[i]['addr']
              for i in range(len(fs))]
     source = {}
+    equivalent = set()
     for u in load_units(variant=slug):
         for f in u['functions']:
+            if f.get('evidence',{}).get('tier') == 'equivalent':
+                equivalent.add(f['addr'])
             if f.get('status') == 'source':
                 source[f['addr']] = u.get('origin', u['name'].split('_')[0])
     region, mapped = regions([f['addr'] for f in fs])
@@ -150,7 +153,12 @@ def main():
         add('region: ' + reg, span, src)
         if src:
             add('origin: ' + source[f['addr']], span, True)
-    out = dict(text_bytes=text['orig_size'], regions_from_map=mapped, rows=rows)
+    tiers = {key:dict(functions=0,bytes=0) for key in ('exact','equivalent','draft')}
+    for f,span in zip(fs,spans):
+        tier = 'exact' if f['addr'] in source else 'equivalent' if f['addr'] in equivalent else 'draft'
+        tiers[tier]['functions'] += 1
+        tiers[tier]['bytes'] += span
+    out = dict(text_bytes=text['orig_size'], regions_from_map=mapped, rows=rows, evidence_tiers=tiers)
     (build / 'progress.json').write_text(json.dumps(out, indent=1))
     print('%-22s %7s %7s %6s   %9s %9s %6s' % ('', 'funcs', 'source', '%', 'bytes', 'source', '%'))
     for key in sorted(rows, key=lambda k: (k != 'ALL', k.startswith('origin'), k)):
@@ -161,6 +169,9 @@ def main():
         print('%-22s %7d %7d %5.2f%%   %9d %9d %5.2f%%' % (
             key, r['functions'], r['source_functions'], 100.0 * r['source_functions'] / r['functions'],
             r['bytes'], r['source_bytes'], 100.0 * r['source_bytes'] / max(r['bytes'], 1)))
+    print('\nRecorded evidence (matching source stays exact; equivalent means tested states):')
+    for tier,r in tiers.items():
+        print('  %-12s %7d functions %9d bytes' % (tier,r['functions'],r['bytes']))
     tur = tu_report(slug, fs, spans, source, top)
     if tur:
         out['by_tu'] = tur['rows']

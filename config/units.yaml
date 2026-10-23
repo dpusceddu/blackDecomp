@@ -48586,6 +48586,14 @@ units:
     status: asm
     symbol: func_001046B0
     size: 1712
+    nonmatching:
+      source: src/campaign/graphics_frontend_1046b0.cpp
+      symbol: func_001046B0
+      returns: void
+    evidence:
+      tier: draft
+  owner: phase3-pilot
+  claim: equivalence-pilot
 - name: campaign_graphics_frontend_104d60_wave5
   source: src/campaign/graphics_frontend_104d60.cpp
   origin: game
@@ -48982,6 +48990,14 @@ units:
     size: 1432
     status: asm
     reason: claimed
+    nonmatching:
+      source: src/campaign/graphics_selector_1a9908.cpp
+      symbol: Turn__Q218AnimationSelectPS28SelectorPcPQ218AnimationSelectPS25Actorlf
+      returns: void
+    evidence:
+      tier: draft
+  owner: phase3-pilot
+  claim: equivalence-pilot
 - name: campaign_selectors_1a9ed0
   source: src/campaign/graphics_selector_1a9ed0.cpp
   flags:
@@ -51337,8 +51353,8 @@ units:
 - name: mod_camera_w2_tu_127118
   source: src/mod/camera/w2_127118.cpp
   origin: game
-  owner: mod-camera
-  claim: mod-wave2-camera
+  owner: phase3-pilot
+  claim: equivalence-pilot
   flags:
   - -x
   - c++
@@ -51506,6 +51522,40 @@ units:
     symbol: func_0012AE00
     status: asm
     reason: claimed
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_0012AE00
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 200
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 8
+        covered_basic_blocks: 8
+        block_fraction: 1.0
+        instructions: 22
+        covered_instructions: 22
+        instruction_fraction: 1.0
+        branch_outcomes: 6
+        covered_branch_outcomes: 5
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 60e1da60deb2fe298c0fd38c7693f15dc44be1619529d6368b09f2d024319293
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
   - addr: '0x12ae58'
     size: 644
     symbol: func_0012AE58
@@ -52737,3 +52787,520 @@ units:
     symbol: func_001E09A8
     size: 136
     status: source
+- name: equivalence_pilot
+  source: src/equivalent/pilot_scalar.cpp
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x1c1a98'
+    symbol: func_001C1A98
+    size: 224
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_001C1A98
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 47
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 6
+        covered_basic_blocks: 6
+        block_fraction: 1.0
+        instructions: 55
+        covered_instructions: 55
+        instruction_fraction: 1.0
+        branch_outcomes: 0
+        covered_branch_outcomes: 0
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 44740cbe8267c9179d376d7ff4ad95e817048e32d13341df9c68f68dc6fba67e
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x1c2a98'
+    symbol: func_001C2A98
+    size: 24
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_001C2A98
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 68
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 1
+        covered_basic_blocks: 1
+        block_fraction: 1.0
+        instructions: 5
+        covered_instructions: 5
+        instruction_fraction: 1.0
+        branch_outcomes: 0
+        covered_branch_outcomes: 0
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: e2fe0e9d9f5e3119402160e0ab845fbcc7bc49486982931596ed1afa06aea01c
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x1dd748'
+    symbol: func_001DD748
+    size: 112
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_001DD748
+      returns: f32
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 22
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 3
+        covered_basic_blocks: 3
+        block_fraction: 1.0
+        instructions: 27
+        covered_instructions: 27
+        instruction_fraction: 1.0
+        branch_outcomes: 0
+        covered_branch_outcomes: 0
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 3d87af3473bd8adbe3be8296594f08203660f26952157050aa3af41f0947128a
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x1f1608'
+    symbol: func_001F1608
+    size: 88
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_001F1608
+      returns: void
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 148
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 5
+        covered_basic_blocks: 5
+        block_fraction: 1.0
+        instructions: 21
+        covered_instructions: 21
+        instruction_fraction: 1.0
+        branch_outcomes: 4
+        covered_branch_outcomes: 3
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 2937ad3d18d42cbfcff0c6a4e8cf9cfabd259825dad55d1ce61dce5ba9464467
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x176f38'
+    symbol: func_00176F38
+    size: 40
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_00176F38
+      returns: void
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 148
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 3
+        covered_basic_blocks: 3
+        block_fraction: 1.0
+        instructions: 10
+        covered_instructions: 10
+        instruction_fraction: 1.0
+        branch_outcomes: 2
+        covered_branch_outcomes: 1
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 0654a92c5e6064003f3e5d81bcc8bb1e589338a2013254a8bf916f72317be406
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x178f28'
+    symbol: func_00178F28
+    size: 40
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_00178F28
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 87
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 3
+        covered_basic_blocks: 3
+        block_fraction: 1.0
+        instructions: 10
+        covered_instructions: 10
+        instruction_fraction: 1.0
+        branch_outcomes: 2
+        covered_branch_outcomes: 1
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 085211b51a403efb43a4048f7f48ccfc163e52f3049189662ca3abe1db15671b
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x179668'
+    symbol: func_00179668
+    size: 24
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_00179668
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 143
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 1
+        covered_basic_blocks: 1
+        block_fraction: 1.0
+        instructions: 5
+        covered_instructions: 5
+        instruction_fraction: 1.0
+        branch_outcomes: 0
+        covered_branch_outcomes: 0
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 8815dcf18c4d1c01464eccaf1486fa59806386af7f46b6b788f1b3143d8c1ca0
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x179680'
+    symbol: func_00179680
+    size: 24
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_00179680
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 104
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 1
+        covered_basic_blocks: 1
+        block_fraction: 1.0
+        instructions: 5
+        covered_instructions: 5
+        instruction_fraction: 1.0
+        branch_outcomes: 0
+        covered_branch_outcomes: 0
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 78d177b954a4e1e87ced0654b5419726030ff61b3c19f85bca7e7356125ea865
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x17ea70'
+    symbol: func_0017EA70
+    size: 96
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_0017EA70
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 127
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 5
+        covered_basic_blocks: 5
+        block_fraction: 1.0
+        instructions: 24
+        covered_instructions: 24
+        instruction_fraction: 1.0
+        branch_outcomes: 2
+        covered_branch_outcomes: 2
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: d0978cd29b7567a97291c6e4f6d1f73fddf7d20c51eba2ee12897382a5ea7765
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x1a27a8'
+    symbol: func_001A27A8
+    size: 88
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_001A27A8
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 89
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 5
+        covered_basic_blocks: 5
+        block_fraction: 1.0
+        instructions: 22
+        covered_instructions: 22
+        instruction_fraction: 1.0
+        branch_outcomes: 2
+        covered_branch_outcomes: 2
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 06bc460029048a4db6f8f3a255f615a2a61eaade068ebaa944c0c5fc5ce4ac7b
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x1c2a68'
+    symbol: func_001C2A68
+    size: 48
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_001C2A68
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 68
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 1
+        covered_basic_blocks: 1
+        block_fraction: 1.0
+        instructions: 12
+        covered_instructions: 12
+        instruction_fraction: 1.0
+        branch_outcomes: 0
+        covered_branch_outcomes: 0
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 06950556ca70973beca14952cc14da535ab27853274f51e9195fc635c69e59b0
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x2722d0'
+    symbol: func_002722D0
+    size: 48
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_002722D0
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 49
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 4
+        covered_basic_blocks: 4
+        block_fraction: 1.0
+        instructions: 12
+        covered_instructions: 12
+        instruction_fraction: 1.0
+        branch_outcomes: 4
+        covered_branch_outcomes: 3
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 7e156b37f283f3d0e239864dce3565fe543d534a071d5ff5fc75a4f7cbc52623
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  - addr: '0x274fd8'
+    symbol: func_00274FD8
+    size: 40
+    status: asm
+    reason: differential-draft
+    nonmatching:
+      source: src/equivalent/pilot_scalar.cpp
+      symbol: func_00274FD8
+      returns: i64
+    evidence:
+      tier: equivalent
+      meaning: agreement on tested states; not a proof
+      recorded_states: 54
+      fuzzed_states: 0
+      coverage:
+        basic_blocks: 3
+        covered_basic_blocks: 3
+        block_fraction: 1.0
+        instructions: 9
+        covered_instructions: 9
+        instruction_fraction: 1.0
+        branch_outcomes: 2
+        covered_branch_outcomes: 1
+        unresolved_indirect_jumps: []
+      coverage_threshold: 0.9
+      source_sha256: a508ec00a3efca3e562aed31af834ab1a99fad7d780cef41f244c5bc719b93ae
+      candidate_sha256: 82b32cd81e737ad5fb7aaa67798698f7701d8c9377e8364aa31f7be3094e0b1c
+      harness_sha256: 37d8b46a4d07cbe53588339bfbe7670168438f173b6e643b2a8a2b8de72b27c6
+      reference_sha256: 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
+      compiler: ee-gcc2.95.3-136
+      flags:
+      - -O2
+      - -G0
+      - -snas
+      - -ffunction-sections
+      - -fno-exceptions
+      - -fno-rtti
+      input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
+      report: build/eeharness/pilot/pilot.json
+  owner: phase3-pilot
+  claim: equivalence-pilot
