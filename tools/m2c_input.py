@@ -5,6 +5,10 @@ our migrated .rodata therefore hide switch tables and literals from its parser.
 Raw short branches and legal odd-FPR operations also need instruction syntax.
 These changes affect only decompiler input, never the real build's assembly.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import re
 
 

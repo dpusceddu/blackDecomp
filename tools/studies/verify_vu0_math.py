@@ -5,6 +5,9 @@ This checks complete VF alias relationships inside each arithmetic window, not
 physical allocation around its caller. The shared-context verifier separately
 scores real source consumers and checks full-image equality. Inputs remain local.
 """
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
 import argparse
 import json
 import re
@@ -14,7 +17,7 @@ from pathlib import Path
 import autodecomp
 from elfinfo import Elf
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 VF = re.compile(r'\$vf(\d+)')
 
 

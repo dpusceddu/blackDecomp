@@ -9,6 +9,9 @@ removing lines the assembler rejects, and compares the resulting .text words wit
 Usage: asmcheck.py gen [--windows N --window-size N --per-mnemonic N --seed N]
        asmcheck.py run
 """
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
 import argparse, collections, json, random, struct, subprocess, sys
 from pathlib import Path
 
@@ -20,7 +23,7 @@ rabbitizer.config.regNames_vr4300Cop0NamedRegisters = False
 rabbitizer.config.regNames_userFpcCsr = False
 from elfinfo import Elf
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 WORK = ROOT / '.local/asmcheck'
 ASSEMBLERS = {
     'gas-2.10-ee-001003-1': '/toolchains/compilers/ee-gcc2.96/ee/bin/as',

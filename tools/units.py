@@ -15,6 +15,10 @@ Only `status: source` functions are provided by the unit's object; the others st
 Alternate assembler recipes carry assembler_evidence: weak historical provenance,
 independently of the mandatory full-image byte-identity check. The serializer maintains it.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import os, re
 from pathlib import Path
 

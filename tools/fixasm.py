@@ -10,6 +10,10 @@ comment, which is what the checks use):
 `.set nomacro` is part of every function file's header, so any macro expansion is an error instead of silently
 changing the layout.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import re
 from pathlib import Path
 

@@ -8,10 +8,13 @@ result with the reference image in orig/ using a symbol-derived address map. All
 address in their name, so the old->new address map is exact at every label. Reports, for code and data separately,
 how many address-bearing words were relocated, how many stayed stale and how many are inconsistent.
 """
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
 import argparse, json, re, shutil, struct, subprocess, sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools'))
 from elfinfo import Elf
 

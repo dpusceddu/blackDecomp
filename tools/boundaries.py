@@ -27,6 +27,10 @@ Everything else that was suspected is not a boundary error and is not listed her
 extents where Ghidra ends earlier than splat (Ghidra leaves out the delay slot, or stops at an indirect `jr` that is a
 computed jump inside the function), and "falls through" over-splits (the words after the function are its jump table).
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import json, struct, sys
 from pathlib import Path
 

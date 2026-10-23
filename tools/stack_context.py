@@ -1,4 +1,8 @@
 """Conservative stack-frame facts for automatic drafts; no target tools run here."""
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 
 
 def _control(word):

@@ -1,10 +1,17 @@
-# Runs inside the build backend (sent by tools/build_objects.py through tools/sandbox.py).
-# Reads plan.json:
-#   assemble: [[src, obj], ...]     EE GNU assembler 2.10 (objects keep whatever the assembler writes)
-#   compile:  [{src, obj, compiler, args}, ...]   SN GCC under wibo; the object's symbol table is normalised for ld
-#   link:     [ld arguments]        mainline GNU ld, run once if present
-#   pack:     name of a tgz that receives every object assembled or compiled in this job
-# The inputs were unpacked from inputs.tgz (sources, cached objects under obj/, include/, the linker script).
+"""Worker-side job runner: assemble, compile, link and pack inside the isolated container (sent by build_objects.py).
+
+Runs inside the build backend (sent by tools/build_objects.py through tools/sandbox.py).
+Reads plan.json:
+  assemble: [[src, obj], ...]     EE GNU assembler 2.10 (objects keep whatever the assembler writes)
+  compile:  [{src, obj, compiler, args}, ...]   SN GCC under wibo; the object's symbol table is normalised for ld
+  link:     [ld arguments]        mainline GNU ld, run once if present
+  pack:     name of a tgz that receives every object assembled or compiled in this job
+The inputs were unpacked from inputs.tgz (sources, cached objects under obj/, include/, the linker script).
+"""
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import json, os, struct, subprocess, sys, tarfile
 from concurrent.futures import ThreadPoolExecutor
 

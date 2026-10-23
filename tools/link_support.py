@@ -10,6 +10,10 @@ undefined_syms_auto.txt / undefined_funcs_auto.txt and the generated assembly, a
                                  `NAME = <section>_end` at a section end, `NAME = VALUE` for plain constants.
 Usage: link_support.py VARIANT_SLUG [WORK]    (WORK names the asm/ and build/ directories, default the slug)
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import json, re, sys
 from pathlib import Path
 

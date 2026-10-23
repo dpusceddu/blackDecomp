@@ -17,6 +17,10 @@ alignments: objects are cut at an inner `.align` that the start does not guarant
 where the alignment of the run's start would be violated.
 Usage: split_objects.py VARIANT_SLUG [WORK]
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import bisect, json, re, sys
 from pathlib import Path
 

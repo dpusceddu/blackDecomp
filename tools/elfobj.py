@@ -6,6 +6,10 @@ section symbols. Mainline ld rejects both ("local symbol at index N >= sh_info")
 reordered, locals first, the symbol indices of every relocation entry are renumbered, and sh_info is set. No code,
 data or relocation type/offset changes; symbol names, values and bindings are unchanged.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import struct
 
 

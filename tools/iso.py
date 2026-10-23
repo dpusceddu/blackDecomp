@@ -1,4 +1,8 @@
 """Minimal ISO 9660 reader for plain ISO (2048) and raw CD images (MODE1/MODE2, 2352)."""
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import struct
 
 

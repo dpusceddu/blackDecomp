@@ -6,6 +6,10 @@
 Arguments are Git revisions. Overlapping edits fail before writing; source/header
 conflicts must be resolved before settling. Regenerate tus.yaml with tus.py all.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import copy
 import subprocess
 import sys

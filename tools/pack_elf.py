@@ -13,6 +13,10 @@ rule (offset - 0x1000 == address - base inside the segment, other sections packe
 
 Usage: pack_elf.py LINKED.elf LAYOUT.json BLOB_DIR OUT.elf
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import json, struct, sys
 from pathlib import Path
 

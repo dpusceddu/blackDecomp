@@ -10,6 +10,10 @@ defined as aliases of the compiled symbols, so assembly callers link against the
 Writes build/<slug>/link.ld and build/<slug>/objects.json (name, kind, source, sections).
 Usage: make_ld.py VARIANT_SLUG [WORK]
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import bisect, json, sys
 from pathlib import Path
 

@@ -7,6 +7,10 @@ splat data file, or compiled unit) is cached by the hash of its inputs in build/
 sources are assembled or compiled. One worker call receives the changed sources plus the cached objects, builds
 the missing ones, links everything with mainline GNU ld, and returns linked.elf, link.map and the new objects.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import hashlib, io, json, subprocess, sys, tarfile, time
 from pathlib import Path
 

@@ -7,6 +7,9 @@ The grid is factorial for optimization, scheduling, aliasing, GP and bool width;
 inline limits, frame pointers and EE switches are additional controlled contrasts.
 No candidate is registered or linked by this tool.
 """
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
 import argparse
 import hashlib
 import itertools

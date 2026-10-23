@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Print the sections, symbols and relocations of a relocatable ELF object (reads the file only).
 Usage: objdump.py OBJECT [-r]"""
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import struct, sys
 from pathlib import Path
 

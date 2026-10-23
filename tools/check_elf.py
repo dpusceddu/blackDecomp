@@ -3,6 +3,10 @@
 Usage: check_elf.py VARIANT_SLUG BUILT.elf [--stamp FILE]
 Prints OK if the SHA-256 is equal. Otherwise prints a mismatch report: size, e_flags, entry and the sections whose
 header or content differ, compared with the target image in orig/ (private) when it is present."""
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import hashlib, subprocess, sys
 from pathlib import Path
 

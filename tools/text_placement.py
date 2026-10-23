@@ -1,4 +1,8 @@
 """Recognize natural linker alignment after source sections, without inventing bytes."""
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import json
 from pathlib import Path
 from elfinfo import Elf

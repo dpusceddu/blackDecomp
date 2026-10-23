@@ -12,6 +12,10 @@ Usage: progress.py [SLUG]       writes build/<slug>/progress.json and prints a t
 When config/tus.yaml exists (tools/tus.py) the report adds the progress by TU: complete TUs (every function from source),
 partially done ones and bytes per TU, by confidence of the TU boundaries.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import json, sys
 from pathlib import Path
 

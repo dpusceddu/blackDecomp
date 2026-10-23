@@ -9,6 +9,10 @@
                             units that own the differing bytes
 Reasons: compile, name, size, extra, extern, section, link, bytes. Writes config/units.yaml (a machine-maintained file).
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import json, re, struct, sys
 from pathlib import Path
 

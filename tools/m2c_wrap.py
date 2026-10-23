@@ -3,6 +3,10 @@
 a pointer (an integer holding an address, say `lw $v0, 0($a0)` with $a0 an untyped argument) is written as
 `M2C_FIELD(expr, T *, 0)` instead of `*expr`, which is not valid C. Local adapters keep software doubles in GPRs and escaped stack locals out of call arguments; they do not modify the installed package.
 Usage: m2c_wrap.py <m2c arguments>"""
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import os
 import sys
 from m2c import translate

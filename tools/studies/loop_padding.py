@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Read-only short-loop diagnostics. This tool never changes assembly or objects."""
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
 import argparse
 import bisect
 import collections
@@ -10,7 +13,7 @@ import struct
 import subprocess
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def branch_offset(word):

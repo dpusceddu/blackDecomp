@@ -7,6 +7,10 @@ over-approximation intentionally rejects some valid instruction allocations.
 Microcalls, control/flag traffic and unclosed ACC/Q instructions are rejected.
 No installed package, assembly output or target bytes are modified.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import re
 
 LINE = re.compile(r'^(\s*(?:/\*.*?\*/\s*)?)([A-Za-z][\w.]*)(?:\s+(.*?))?(\s*(?:#.*)?)$')

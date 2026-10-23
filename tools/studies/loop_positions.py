@@ -9,6 +9,9 @@ separate six/seven forms is outcome leakage. Also test the hypothetical input
 geometry before the candidate trailing NOPs, without deleting or rewriting any
 instruction. Candidate NOP origin and original input-section starts are unknown.
 """
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
 import argparse
 import collections
 import hashlib
@@ -20,7 +23,7 @@ import loop_padding
 import loop_provenance as provenance
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 MODULI = (8, 16, 32, 64, 128, 256, 512, 1024, 4096)
 POINTS = ('start', 'branch', 'delay', 'end')
 ORIGINS = ('linked', 'function', 'tu', 'text')

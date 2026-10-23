@@ -7,6 +7,10 @@ Inputs are sent to the build backend; only standalone sources are
 supported. Outputs must go under build/ or .local/.
 Objects get one header fix (tools/elfobj.py: symbol order and sh_info) so that mainline GNU ld accepts SN-assembled output.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import base64, json, shlex, subprocess, sys, uuid
 from pathlib import Path
 

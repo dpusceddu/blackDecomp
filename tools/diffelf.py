@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Compare two ELF files section by section (a debugging aid for the identical rebuild).
 Usage: diffelf.py REFERENCE.elf BUILT.elf [--words N]   shows differing sections, first differing words."""
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import struct, sys
 from pathlib import Path
 

@@ -3,6 +3,10 @@
 The default remains the compiler driver's assembler. Alternate recipes never
 rewrite assembly or instruction bytes; selection is part of the unit's flags.
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import hashlib
 from pathlib import Path
 import subprocess

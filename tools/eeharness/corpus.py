@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """Read the private, versioned harness entry stream and make typed fuzz inputs."""
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import collections
 import json
 from pathlib import Path

@@ -9,6 +9,10 @@ m2c is shown `ld` / `sd` / `daddu` instead and its 64-bit types are turned into 
 afterwards, but only when the function has no real 64-bit access of its own (`ld` / `sd` off $sp are the frame saves).
 Other multimedia and VU0 instructions are left alone (the function then fails in m2c and is reported by instruction).
 """
+import sys as _sys
+if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
+    print(__doc__.strip())
+    raise SystemExit(0)
 import re
 
 LINE = re.compile(r'^(\s*/\*.*?\*/\s+)(\w[\w.]*)(\s+)(.*?)\s*$')

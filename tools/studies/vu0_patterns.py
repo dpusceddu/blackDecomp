@@ -8,6 +8,9 @@ Projection is a search aid, not proof that the omitted CPU instructions commute.
 Semantic recognizers require instruction order and register/lane dataflow. They
 deliberately leave quaternion/library identity and microprogram contracts open.
 """
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
 import argparse
 import bisect
 import collections
@@ -19,7 +22,7 @@ import re
 import time
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 REGISTER = re.compile(r'\$(vf\d+|vi\d+|f\d+|[A-Za-z][A-Za-z0-9]*)([xyzw]?)\b')
 VECTOR = re.compile(r'^\$vf(\d+)([xyzw]?)$')
 LANES = 'xyzw'
