@@ -2,7 +2,7 @@
 """Read-only address-position study of retail SN-assigned short loops.
 
 Run with the repository Python environment. Detailed output must stay ignored:
-  tools/loop_positions.py --output build/loop-positions/report.json
+  tools/studies/loop_positions.py --output build/loop-positions/report.json
 
 Observed endpoints contain the emitted length, so their apparent ability to
 separate six/seven forms is outcome leakage. Also test the hypothetical input

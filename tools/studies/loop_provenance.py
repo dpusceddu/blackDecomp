@@ -192,7 +192,7 @@ def markdown(result):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', default='build/loop-provenance/report.json')
-    parser.add_argument('--census', help='reuse an ignored tools/loop_padding.py --classify result')
+    parser.add_argument('--census', help='reuse an ignored tools/studies/loop_padding.py --classify result')
     parser.add_argument('--control-audit', default='build/assembler-rule/control-audit/results.json')
     args = parser.parse_args()
     ignored = subprocess.run(['git', '-C', str(ROOT), 'check-ignore', '--quiet', args.output], capture_output=True)

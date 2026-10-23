@@ -8,6 +8,7 @@ the overall number is exact.
 A function counts as source when config/units.yaml lists it with `status: source` (units_verify.py/settle_units.py keep
 that list identical to the target); bytes are the original span of the function up to the next function.
 Usage: progress.py [SLUG]       writes build/<slug>/progress.json and prints a table
+       progress.py --libraries   also print the totals per library directory of src/
        progress.py --tus [N]     also list the N (default 15) partially done translation units with most bytes still in assembly
 When config/tus.yaml exists (tools/tus.py) the report adds the progress by TU: complete TUs (every function from source),
 partially done ones and bytes per TU, by confidence of the TU boundaries.
@@ -199,6 +200,21 @@ def main():
     print('\nRecorded evidence (matching source stays exact; equivalent means tested states):')
     for tier,r in tiers.items():
         print('  %-12s %7d functions %9d bytes' % (tier,r['functions'],r['bytes']))
+    if '--libraries' in sys.argv and slug == 'usa-retail':
+        import layout
+        libs = {}
+        for f, span in zip(fs, spans):
+            r = libs.setdefault(layout.library_of(f['addr']), dict(functions=0, source_functions=0, bytes=0, source_bytes=0))
+            r['functions'] += 1
+            r['bytes'] += span
+            if f['addr'] in source:
+                r['source_functions'] += 1
+                r['source_bytes'] += span
+        out['by_library'] = libs
+        print('\nby library directory (src/<library>, tools/layout.py)')
+        for lib, r in sorted(libs.items()):
+            print('%-12s %7d %7d %5.1f%%   %9d %9d %5.1f%%' % (lib, r['functions'], r['source_functions'],
+                  100.0 * r['source_functions'] / r['functions'], r['bytes'], r['source_bytes'], 100.0 * r['source_bytes'] / max(r['bytes'], 1)))
     tur = tu_report(slug, fs, spans, source, top)
     if tur:
         out['by_tu'] = tur['rows']

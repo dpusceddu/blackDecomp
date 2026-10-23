@@ -1,7 +1,7 @@
 # Phase 0 findings: inputs and environment
 
 Produced by `tools/discs.py`, `tools/inputs.py`, `tools/symbols.py`, `tools/compile.py` and
-`tools/asmcheck.py`. Hashes and ELF metadata are in `config/variants.json`; raw dumps stay in `.local/`.
+`tools/studies/asmcheck.py`. Hashes and ELF metadata are in `config/variants.json`; raw dumps stay in `.local/`.
 
 ## Variants
 
@@ -149,7 +149,7 @@ in the container, and `tools/sandbox.py` runs scripts there:
 | GNU as 2.9-ee-991111 | `ee-gcc2.9-991111-01` package, Linux i386 | yes |
 | GNU as 2.9-ee-991111b | the SN 1.36 package (`as.exe`, the driver default), via `wibo` | yes |
 
-`tools/asmcheck.py` samples the USA retail `.text`, disassembles it with rabbitizer's R5900 support and
+`tools/studies/asmcheck.py` samples the USA retail `.text`, disassembles it with rabbitizer's R5900 support and
 reassembles it. The sample has two parts: every distinct mnemonic rabbitizer recognises (256, 2,684 words;
 240 are branches compared with the offset field masked and a label target) and 40 random contiguous
 windows of 1,500 words (60,000 words) with in-window branch targets as labels.
