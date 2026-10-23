@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Report how much of .text is provided by source (config/units.yaml, status source), overall and by region.
 
-Regions come from config/regions.txt (PS2 address -> game, kynapse, animation, physics or other), derived from the
-companion project's Xbox-to-PS2 counterpart map (`progress.py --refresh` rewrites it). An unmapped function takes the
+Regions come from config/regions.txt (PS2 address -> game, kynapse, animation, physics or other), derived from an
+Xbox-to-PS2 counterpart map (`progress.py --refresh MAP.json` rewrites it; the committed file is enough to build and report). An unmapped function takes the
 region of its neighbours when both sides agree, otherwise it is `unclassified`. Regions are therefore approximate;
 the overall number is exact.
 A function counts as source when config/units.yaml lists it with `status: source` (units_verify.py/settle_units.py keep
@@ -16,7 +16,7 @@ import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import json, sys
+import json, struct, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -24,12 +24,11 @@ from units import load_units
 
 ROOT = Path(__file__).resolve().parents[1]
 REGIONS = ROOT / 'config/regions.txt'
-PARENT_MAP = ROOT.parent / 'the counterpart map'
 
 
-def refresh_regions():
-    """Rewrite config/regions.txt (address, region) from the companion project's Xbox-to-PS2 counterpart map."""
-    pairs = json.loads(PARENT_MAP.read_text())['pairs']
+def refresh_regions(parent_map):
+    """Rewrite config/regions.txt (address, region) from an Xbox-to-PS2 counterpart map (json with `pairs`), optional input."""
+    pairs = json.loads(Path(parent_map).read_text())['pairs']
     rows = sorted({(int(p['ps2'], 16), p['region']) for p in pairs})
     REGIONS.write_text('# PS2 function address -> region (game, kynapse, animation, physics, other), from the\n'
                        '# companion project counterpart map (discovery leads, not byte-compared); tools/progress.py --refresh\n' +
@@ -59,6 +58,30 @@ def regions(addrs):
     return out, bool(reg)
 
 
+def orphan_pieces(slug, fs):
+    """Addresses of the functions that are orphan pieces: `<one non-branch instruction>; nop` repeated (see tools/boundaries.py)."""
+    from elfinfo import Elf
+    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    elf = Elf((ROOT / 'orig' / slug / 'files' / boot).read_bytes())
+    sec = elf.section('.text')
+    data = elf.content(sec)
+
+    def control(x):
+        op = x >> 26
+        return (op in (1, 2, 3, 4, 5, 6, 7, 0x14, 0x15, 0x16, 0x17) or (op == 0 and (x & 0x3F) in (8, 9, 12, 13))
+                or (op in (0x10, 0x11, 0x12) and (x >> 21) & 0x1F == 8))
+
+    out = set()
+    for f in fs:
+        lo = f['addr'] - sec['addr']
+        words = list(struct.unpack('<%dI' % ((f['end'] - f['addr']) // 4), data[lo:lo + f['end'] - f['addr']]))
+        while words and words[-1] == 0:                 # alignment padding after the last piece
+            words = words[:-1]
+        if words and all((w == 0) if i % 2 else (w != 0 and not control(w)) for i, w in enumerate(words)):
+            out.add(f['addr'])
+    return out
+
+
 def tu_report(slug, fs, spans, source, top):
     """Progress by translation unit (config/tus.yaml): rows by confidence and the TUs closest to completion."""
     path = ROOT / 'config/tus.yaml'
@@ -69,10 +92,7 @@ def tu_report(slug, fs, spans, source, top):
     starts = [int(t['text'][0], 16) for t in tus]
     rows = [dict(name=t['name'], kind=t['kind'], conf=t['confidence'], lib=t['library'], lo=starts[k], functions=0,
                  source_functions=0, bytes=0, source_bytes=0) for k, t in enumerate(tus)]
-    orphan = set()                 # unreferenced `<instruction>; nop` runs stay assembly and do not count against a TU
-    auto = ROOT / 'build/auto.json'
-    if auto.exists():
-        orphan = {int(k, 16) for k, v in json.loads(auto.read_text()).items() if v.get('status') == 'orphan'}
+    orphan = orphan_pieces(slug, fs)   # unreferenced `<instruction>; nop` runs stay assembly and do not count against a TU
     for f, span in zip(fs, spans):
         k = bisect.bisect_right(starts, f['addr']) - 1
         r = rows[k]
@@ -119,7 +139,10 @@ def tu_report(slug, fs, spans, source, top):
 
 def main():
     if '--refresh' in sys.argv:
-        return refresh_regions()
+        k = sys.argv.index('--refresh')
+        if k + 1 >= len(sys.argv):
+            raise SystemExit('--refresh needs the path of the counterpart map json')
+        return refresh_regions(sys.argv[k + 1])
     top = 0
     if '--tus' in sys.argv:
         k = sys.argv.index('--tus')

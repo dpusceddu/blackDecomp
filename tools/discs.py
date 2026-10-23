@@ -102,7 +102,7 @@ def process(zip_path, slug, tmp, min_free):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--images', type=Path, default=ROOT.parent / 'ps2images')
+    ap.add_argument('--images', type=Path, required=True, help='directory with the disc image zips (private; not part of the repository)')
     ap.add_argument('--only', nargs='*')
     ap.add_argument('--min-free-gb', type=int, default=12)
     a = ap.parse_args()
