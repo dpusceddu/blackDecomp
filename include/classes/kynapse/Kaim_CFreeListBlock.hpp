@@ -28,19 +28,19 @@ struct Kaim_CFreeListBlock {
     inline int & Field_0024() { return *(int *)((unsigned char *)this + 0x24); }
     // 0x28: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0028() { return *(unsigned int *)((unsigned char *)this + 0x28); }
-    // 0x002E55A0: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E55A0: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E55A0(void * argument0);
     // 0x002E5660: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002E5660(unsigned int argument0);
-    // 0x002E5768: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E5768: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     unsigned char Function_002E5768(void * argument0);
-    // 0x002E6E60: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E6E60: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E6E60(unsigned int argument0, void * argument1);
-    // 0x002E7088: UNVERIFIED signature (src/tu/kynapse_tu_2e5358.c).
+    // 0x002E7088: UNVERIFIED signature (src/kynapse/tu_2e5358_2e5848.c).
     unsigned int Function_002E7088();
-    // 0x002E7158: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E7158: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E7158(unsigned int argument0, void * argument1);
-    // 0x002E71E0: UNVERIFIED signature (src/tu/kynapse_tu_2e5358.c).
+    // 0x002E71E0: UNVERIFIED signature (src/kynapse/tu_2e5358_2e5848.c).
     int Function_002E71E0();
     // 0x002E7220: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002E7220(unsigned int argument0);

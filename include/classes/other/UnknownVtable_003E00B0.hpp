@@ -11,7 +11,7 @@ namespace BlackPS2Classes {
 struct UnknownVtable_003E00B0 {
     // Constructor identity: 0x00390818; source-exact C++ special-member symbol and bound class vtable.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x00383BE0: UNVERIFIED signature (src/auto/unclassified/383b50.c).
+    // 0x00383BE0: UNVERIFIED signature (src/linkonce/linkonce_383b50.c).
     int * Function_00383BE0(int argument0);
 
     // Vtable 0x003E00B0; vptr field offset unknown; referenced zero RTTI header.

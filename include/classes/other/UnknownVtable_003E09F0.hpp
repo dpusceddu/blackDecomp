@@ -26,7 +26,7 @@ struct UnknownVtable_003E09F0 {
     inline unsigned char & Field_0248() { return *(unsigned char *)((unsigned char *)this + 0x248); }
     // 0x001F1C10: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001F1C10(int argument0, int argument1, int argument2, int argument3, int argument4, int argument5);
-    // 0x001F43F0: UNVERIFIED signature (src/auto/game/1f43f0.c).
+    // 0x001F43F0: UNVERIFIED signature (src/game/tu_1f42c8_1f43f0.c).
     float Function_001F43F0(float argument0);
     // 0x001F4458: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001F4458();

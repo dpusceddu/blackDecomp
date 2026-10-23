@@ -17,7 +17,7 @@ struct Kaim_CPathWayManager {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x002DA348: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002DA348();
-    // 0x002DA980: UNVERIFIED signature (src/tu/kynapse_tu_2da208.c).
+    // 0x002DA980: UNVERIFIED signature (src/kynapse/tu_2da208_2da920.c).
     int Function_002DA980(void * argument0);
     // 0x002DA9B0: UNVERIFIED signature (include/context/behaviors/pathmanager.hpp).
     int Function_002DA9B0(void * argument0);

@@ -63,9 +63,9 @@ struct Kaim_CShooterAgent {
     inline float & Field_0070() { return *(float *)((unsigned char *)this + 0x70); }
     // 0x002D6690: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_002D6690(void * argument0);
-    // 0x002D6860: UNVERIFIED signature (src/campaign/behaviors_shooter_wave6.cpp).
+    // 0x002D6860: UNVERIFIED signature (src/kynapse/behaviors_shooter.cpp).
     unsigned char Function_002D6860(void * argument0);
-    // 0x002D6A38: UNVERIFIED signature (src/campaign/behaviors_shooter_wave6.cpp).
+    // 0x002D6A38: UNVERIFIED signature (src/kynapse/behaviors_shooter.cpp).
     unsigned char Function_002D6A38();
     // 0x002D6E48: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_002D6E48(const void * argument0);

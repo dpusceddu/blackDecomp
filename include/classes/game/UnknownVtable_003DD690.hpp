@@ -14,25 +14,25 @@ struct UnknownVtable_003DD690 {
     inline U128 & Field_0040() { return *(U128 *)((unsigned char *)this + 0x40); }
     // 0x50: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0050() { return *(unsigned int *)((unsigned char *)this + 0x50); }
-    // 0x001A2580: UNVERIFIED signature (src/auto/game/1a2580.c).
+    // 0x001A2580: UNVERIFIED signature (src/game/tu_1a24b8_1a2580.c).
     int Function_001A2580();
-    // 0x001A2588: UNVERIFIED signature (src/auto/game/1a2580.c).
+    // 0x001A2588: UNVERIFIED signature (src/game/tu_1a24b8_1a2580.c).
     unsigned int Function_001A2588();
     // 0x001A2590: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001A2590();
-    // 0x001A2610: UNVERIFIED signature (src/auto/game/1a2610.c).
+    // 0x001A2610: UNVERIFIED signature (src/game/tu_1a24b8_1a2610.c).
     unsigned int Function_001A2610();
-    // 0x001A2650: UNVERIFIED signature (src/tu/1a2620.c).
+    // 0x001A2650: UNVERIFIED signature (src/game/tu_1a24b8_1a2620.c).
     signed char * Function_001A2650(int argument0);
-    // 0x001A2698: UNVERIFIED signature (src/tu/1a2620.c).
+    // 0x001A2698: UNVERIFIED signature (src/game/tu_1a24b8_1a2620.c).
     int Function_001A2698(int argument0);
-    // 0x001A2C68: UNVERIFIED signature (src/tu/1a2c68.c).
+    // 0x001A2C68: UNVERIFIED signature (src/game/tu_1a24b8_1a2c68.c).
     int Function_001A2C68();
-    // 0x001A3478: UNVERIFIED signature (src/auto/game/1a3470.c).
+    // 0x001A3478: UNVERIFIED signature (src/game/tu_1a24b8_1a3470.c).
     int Function_001A3478();
     // 0x001A3498: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A3498(unsigned int argument0);
-    // 0x00383D38: UNVERIFIED signature (src/auto/unclassified/383d38.c).
+    // 0x00383D38: UNVERIFIED signature (src/linkonce/linkonce_383d38.c).
     unsigned int Function_00383D38();
 
     // Vtable 0x003DD690; vptr field offset unknown; referenced zero RTTI header.

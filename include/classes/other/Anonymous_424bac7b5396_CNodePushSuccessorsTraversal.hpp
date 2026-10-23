@@ -16,9 +16,9 @@ struct Anonymous_424bac7b5396_CNodePushSuccessorsTraversal {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x00389168: UNVERIFIED signature (src/auto/unclassified/389100.c).
+    // 0x00389168: UNVERIFIED signature (src/linkonce/linkonce_389100.c).
     unsigned int Function_00389168();
-    // 0x00389170: UNVERIFIED signature (src/auto/unclassified/389100.c).
+    // 0x00389170: UNVERIFIED signature (src/linkonce/linkonce_389100.c).
     int Function_00389170();
     // 0x0038F2A8: UNVERIFIED signature (include/campaign/graph/search_workspace.hpp).
     unsigned int Function_0038F2A8(void * argument0);

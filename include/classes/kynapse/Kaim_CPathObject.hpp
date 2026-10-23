@@ -27,39 +27,39 @@ struct Kaim_CPathObject {
     inline int & Field_0068() { return *(int *)((unsigned char *)this + 0x68); }
     // 0x6C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_006C() { return *(int *)((unsigned char *)this + 0x6C); }
-    // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
+    // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
     void Function_002E4CA8();
-    // 0x002F4390: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    // 0x002F4390: UNVERIFIED signature (src/kynapse/graph_pathobject_context.cpp).
     unsigned char Function_002F4390(void * argument0);
     // 0x002F44E8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_002F44E8();
-    // 0x002F4620: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    // 0x002F4620: UNVERIFIED signature (src/kynapse/graph_pathobject_context.cpp).
     unsigned char Function_002F4620(int argument0, void * argument1);
-    // 0x002F47B0: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    // 0x002F47B0: UNVERIFIED signature (src/kynapse/graph_pathobject_context.cpp).
     unsigned char Function_002F47B0(int argument0, void * argument1);
     // 0x002F4A90: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002F4A90();
     // 0x002F4B50: UNVERIFIED signature (src/kynapse/host_2850c0_2f4b50.cpp).
     void Function_002F4B50(void * argument0);
-    // 0x00391288: UNVERIFIED signature (src/campaign/graph_cpathobject.cpp).
+    // 0x00391288: UNVERIFIED signature (src/kynapse/graph_cpathobject.cpp).
     unsigned int Function_00391288(unsigned int argument0, unsigned int argument1, void * argument2, unsigned int argument3);
-    // 0x003912B8: UNVERIFIED signature (src/auto/kynapse/3912b8.c).
+    // 0x003912B8: UNVERIFIED signature (src/kynapse/linkonce_3912b8.c).
     int Function_003912B8();
     // 0x003912C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003912C0(void * argument0, void * argument1, unsigned int argument2, void * argument3, void * argument4);
-    // 0x00391358: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391358: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391358();
-    // 0x00391360: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391360: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391360();
-    // 0x00391368: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391368: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391368();
-    // 0x00391370: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391370: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391370();
-    // 0x00391378: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391378: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     unsigned int Function_00391378();
-    // 0x00391380: UNVERIFIED signature (src/campaign/graph_cpathobject.cpp).
+    // 0x00391380: UNVERIFIED signature (src/kynapse/graph_cpathobject.cpp).
     void Function_00391380(int argument0);
 
     // Vtable 0x003EE090; vptr field offset unknown; RTTI header.

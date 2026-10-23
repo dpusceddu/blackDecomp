@@ -36,13 +36,13 @@ struct Kaim_CPointMapper {
     void Function_002DC840();
     // 0x002DC8A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002DC8A0(signed char * argument0, void * argument1);
-    // 0x002DC930: UNVERIFIED signature (src/context/behaviors_pointmapper.cpp).
+    // 0x002DC930: UNVERIFIED signature (src/kynapse/behaviors_pointmapper.cpp).
     int Function_002DC930(void * argument0, unsigned int argument1, unsigned int * argument2);
     // 0x0038AED8: UNVERIFIED signature (src/kynapse/small_misc_38aed8.cpp).
     void Function_0038AED8();
     // 0x0038B140: UNVERIFIED signature (src/kynapse/class_info_38b140.cpp).
     void * Function_0038B140();
-    // 0x0038E768: UNVERIFIED signature (src/campaign/graph_cpointmapper.cpp).
+    // 0x0038E768: UNVERIFIED signature (src/linkonce/graph_cpointmapper.cpp).
     int Function_0038E768(void * argument0);
     // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
     void Function_0038E7B8();

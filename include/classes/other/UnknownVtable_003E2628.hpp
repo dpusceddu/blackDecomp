@@ -30,7 +30,7 @@ struct UnknownVtable_003E2628 {
     inline int & Field_0038() { return *(int *)((unsigned char *)this + 0x38); }
     // 0x3C: UNVERIFIED type; PS2 access offset.
     inline int & Field_003C() { return *(int *)((unsigned char *)this + 0x3C); }
-    // 0x00268EA0: UNVERIFIED signature (src/tu/tu_268c68.c).
+    // 0x00268EA0: UNVERIFIED signature (src/game/tu_268c68_268e90.c).
     unsigned int Function_00268EA0();
     // 0x00268ED0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00268ED0(unsigned int argument0, signed char * argument1, unsigned int argument2);
@@ -38,7 +38,7 @@ struct UnknownVtable_003E2628 {
     void * Function_00269020();
     // 0x00269188: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00269188(unsigned int argument0, long argument1);
-    // 0x002694D8: UNVERIFIED signature (src/tu/tu_268c68.c).
+    // 0x002694D8: UNVERIFIED signature (src/game/tu_268c68_268e90.c).
     int Function_002694D8();
     // 0x002694E8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     long Function_002694E8(unsigned int argument0, unsigned int argument1);

@@ -4,7 +4,7 @@
   autodecomp.py run [--max-size N] [--min-size N] [--region R] [--addr A ...] [--limit N] [--no-permute]
                     [--permute-seconds S] [--batch N]
         draft every selected assembly function and record the outcome in build/auto.json
-  autodecomp.py register [--group N]     turn exact matches into source units (config/units.yaml) and src/auto/
+  autodecomp.py register [--group N]     turn exact matches into source units (config/units.yaml) and src/<library>/
   autodecomp.py report                   outcome table for build/auto.json
   autodecomp.py show ADDR                print the best draft of a function and its diff
 
@@ -1788,9 +1788,10 @@ def retire_asm_entries(units, addresses):
 
 
 def cmd_register(a):
-    """Write src/auto/<region>/*.c and add units to config/units.yaml for every exact draft that is not registered yet."""
+    """Write src/<library>/<tu>.c (tools/layout.py) and add units to config/units.yaml for every exact draft that is not registered yet."""
     sys.path.insert(0, str(ROOT / 'tools'))
     from units import load_units
+    import layout
     import units_verify
     res = load_results()
     inv = {f['addr']: f for f in load_inventory()}
@@ -1837,16 +1838,16 @@ def cmd_register(a):
         base = '%06x' % first
         suffix = ''
         attempt = 0
-        while (ROOT / ('src/auto/%s/%s%s.c' % (region, base, suffix))).exists() or ('auto_%s_%s%s' % (region, base, suffix)) in used_names:
+        while (ROOT / layout.source_path(first, suffix + '.c')).exists() or ('auto_%s_%s%s' % (region, base, suffix)) in used_names:
             attempt += 1
             suffix = '_retry%d' % attempt
-        rel = 'src/auto/%s/%s%s.c' % (region, base, suffix)
+        rel = layout.source_path(first, suffix + '.c')
         unit_name = 'auto_%s_%s%s' % (region, base, suffix)
         used_names.add(unit_name)
         (ROOT / rel).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / rel).write_text(text)
         cc, fl = split_cc(g[0][1]['flags'])
-        out.append(dict(name=unit_name, source=rel, origin='auto', compiler=cc,
+        out.append(dict(name=unit_name, source=rel, library=Path(rel).parts[1], provenance='auto', tier='exact', origin='auto', compiler=cc,
                         flags=fl, externs={},
                         functions=[dict(addr=addr, symbol=rec['name'], size=rec['size'], status='source') for addr, rec in g]))
         for addr, rec in g:

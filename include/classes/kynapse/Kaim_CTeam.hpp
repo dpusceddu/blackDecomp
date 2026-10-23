@@ -29,7 +29,7 @@ struct Kaim_CTeam {
     void Function_002EC4B0();
     // 0x002EC5B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002EC5B8(void * argument0);
-    // 0x002EC6D8: UNVERIFIED signature (src/campaign/graph_team.cpp).
+    // 0x002EC6D8: UNVERIFIED signature (src/kynapse/graph_team.cpp).
     void Function_002EC6D8(void * argument0);
     // 0x002EC9D0: UNVERIFIED signature (src/kynapse/configure_2ec9d0.cpp).
     unsigned char Function_002EC9D0(void * argument0);

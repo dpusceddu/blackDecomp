@@ -48,7 +48,7 @@ struct UnknownVtable_003DD380 {
     unsigned char Function_00192DC0();
     // 0x00192E50: UNVERIFIED signature (src/game/ai_movement_modes_192dc0.cpp).
     void Function_00192E50();
-    // 0x00192FB0: UNVERIFIED signature (src/campaign/actor_route_wave3.cpp).
+    // 0x00192FB0: UNVERIFIED signature (src/game/actor_route.cpp).
     unsigned char Function_00192FB0(S128 argument0);
 
     // Vtable 0x003DD380; vptr field offset unknown; referenced zero RTTI header.

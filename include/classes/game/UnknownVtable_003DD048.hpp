@@ -10,13 +10,13 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DD048 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x001706B8: UNVERIFIED signature (src/auto/unclassified/170670.c).
+    // 0x001706B8: UNVERIFIED signature (src/game/tu_16eb80_170670.c).
     unsigned int Function_001706B8();
-    // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
+    // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
     // 0x002DFD08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     void * Function_002DFD08(void * argument0);
-    // 0x003840D0: UNVERIFIED signature (src/auto/other/3840d0.c).
+    // 0x003840D0: UNVERIFIED signature (src/linkonce/linkonce_3840d0.c).
     int Function_003840D0(int argument0);
 
     // Vtable 0x003DD048; vptr field offset unknown; referenced zero RTTI header.

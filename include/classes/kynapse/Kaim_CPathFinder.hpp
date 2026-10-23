@@ -111,7 +111,7 @@ struct Kaim_CPathFinder {
     inline unsigned char & Field_01B5() { return *(unsigned char *)((unsigned char *)this + 0x1B5); }
     // 0x002FEFB0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002FEFB0();
-    // 0x002FF148: UNVERIFIED signature (src/campaign/graph_pathfinder.cpp).
+    // 0x002FF148: UNVERIFIED signature (src/kynapse/graph_pathfinder.cpp).
     void Function_002FF148();
     // 0x002FF250: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002FF250(void * argument0);
@@ -119,11 +119,11 @@ struct Kaim_CPathFinder {
     int Function_002FF890(void * argument0);
     // 0x003003B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003003B0(void * argument0);
-    // 0x00301D60: UNVERIFIED signature (src/campaign/graph_pathfinder.cpp).
+    // 0x00301D60: UNVERIFIED signature (src/kynapse/graph_pathfinder.cpp).
     void Function_00301D60();
     // 0x00303388: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00303388();
-    // 0x00303630: UNVERIFIED signature (src/campaign/graph_pathfinder.cpp).
+    // 0x00303630: UNVERIFIED signature (src/kynapse/graph_pathfinder.cpp).
     unsigned char Function_00303630(signed char * argument0);
     // 0x003037B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003037B8(unsigned int argument0);
@@ -143,7 +143,7 @@ struct Kaim_CPathFinder {
     unsigned char Function_00304DB8();
     // 0x00304DE8: UNVERIFIED signature (src/kynapse/ai_route_follower_304de8.cpp).
     unsigned char Function_00304DE8(void * argument0);
-    // 0x00304E38: UNVERIFIED signature (src/auto/kynapse/304e38.c).
+    // 0x00304E38: UNVERIFIED signature (src/kynapse/tu_2fec10_304e38.c).
     int Function_00304E38(int argument0, void * argument1, void * argument2);
     // 0x00304EE8: UNVERIFIED signature (src/kynapse/ai_route_follower_304ee8.cpp).
     unsigned char Function_00304EE8(float * argument0);
@@ -151,11 +151,11 @@ struct Kaim_CPathFinder {
     unsigned char Function_003053C8();
     // 0x00305428: UNVERIFIED signature (src/kynapse/misc6_3053f0.cpp).
     void Function_00305428(int argument0);
-    // 0x0038D330: UNVERIFIED signature (src/auto/unclassified/38d330.c).
+    // 0x0038D330: UNVERIFIED signature (src/linkonce/linkonce_38d330.c).
     int Function_0038D330();
     // 0x00393928: UNVERIFIED signature (src/kynapse/class_info_393928.cpp).
     void * Function_00393928();
-    // 0x00393938: UNVERIFIED signature (src/auto/other/393938.c).
+    // 0x00393938: UNVERIFIED signature (src/linkonce/linkonce_393938.c).
     int Function_00393938();
     // 0x00393940: UNVERIFIED signature (src/kynapse/misc6_393940.cpp).
     void Function_00393940();

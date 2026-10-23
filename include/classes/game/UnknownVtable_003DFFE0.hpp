@@ -54,13 +54,13 @@ struct UnknownVtable_003DFFE0 {
     int Function_002F6E08(unsigned int argument0);
     // 0x002F7D80: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_002F7D80(const char * argument0);
-    // 0x002F7F48: UNVERIFIED signature (src/campaign/graph_spatial_wave6.cpp).
+    // 0x002F7F48: UNVERIFIED signature (src/kynapse/graph_spatial.cpp).
     unsigned char Function_002F7F48(void * argument0);
     // 0x002F8238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F8238(unsigned int argument0, unsigned int argument1);
-    // 0x002F8C38: UNVERIFIED signature (src/campaign/graph_cspatialgraph_lifetime.cpp).
+    // 0x002F8C38: UNVERIFIED signature (src/kynapse/graph_cspatialgraph_lifetime.cpp).
     void Function_002F8C38();
-    // 0x00383D58: UNVERIFIED signature (src/auto/unclassified/383d58.c).
+    // 0x00383D58: UNVERIFIED signature (src/linkonce/linkonce_383d58.c).
     int Function_00383D58(int argument0);
 
     // Vtable 0x003DFFE0; vptr field offset unknown; referenced zero RTTI header.

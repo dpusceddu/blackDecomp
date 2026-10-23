@@ -60,21 +60,21 @@ struct Kaim_CPathWayAgent {
     inline unsigned char & Field_0050() { return *(unsigned char *)((unsigned char *)this + 0x50); }
     // 0x002D5498: UNVERIFIED signature (src/kynapse/path_agent.cpp).
     unsigned char Function_002D5498(void * argument0);
-    // 0x002D5650: UNVERIFIED signature (src/campaign/behaviors_pathway_wave6.cpp).
+    // 0x002D5650: UNVERIFIED signature (src/kynapse/behaviors_pathway.cpp).
     unsigned char Function_002D5650();
-    // 0x002D59F0: UNVERIFIED signature (src/campaign/behaviors_pathway_wave6.cpp).
+    // 0x002D59F0: UNVERIFIED signature (src/kynapse/behaviors_pathway.cpp).
     unsigned char Function_002D59F0(unsigned int argument0);
     // 0x002D6278: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D6278();
-    // 0x002D62D0: UNVERIFIED signature (src/campaign/behaviors_pathway_wave6.cpp).
+    // 0x002D62D0: UNVERIFIED signature (src/kynapse/behaviors_pathway.cpp).
     unsigned char Function_002D62D0(void * argument0);
     // 0x002D63C0: UNVERIFIED signature (src/kynapse/predicates_2d63c0.cpp).
     unsigned char Function_002D63C0();
     // 0x002D63D0: UNVERIFIED signature (src/kynapse/predicates_2d63c0.cpp).
     unsigned char Function_002D63D0();
-    // 0x002D63E0: UNVERIFIED signature (src/context/behaviors_path_controls.cpp).
+    // 0x002D63E0: UNVERIFIED signature (src/kynapse/behaviors_path_controls.cpp).
     unsigned char Function_002D63E0();
-    // 0x002D6440: UNVERIFIED signature (src/tu/kynapse_tu_2d53f0.c).
+    // 0x002D6440: UNVERIFIED signature (src/kynapse/tu_2d53f0_2d61b8.c).
     unsigned int Function_002D6440();
     // 0x002D6460: UNVERIFIED signature (src/kynapse/predicates_2d6460.cpp).
     unsigned char Function_002D6460();

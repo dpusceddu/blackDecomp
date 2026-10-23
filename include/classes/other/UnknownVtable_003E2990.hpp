@@ -10,7 +10,7 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003E2990 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x00388EF8: UNVERIFIED signature (src/auto/unclassified/388ef8.c).
+    // 0x00388EF8: UNVERIFIED signature (src/linkonce/linkonce_388ef8.c).
     int Function_00388EF8(int argument0);
 
     // Vtable 0x003E2990; vptr field offset unknown; referenced zero RTTI header.

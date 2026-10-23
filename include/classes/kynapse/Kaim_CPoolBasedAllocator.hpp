@@ -25,23 +25,23 @@ struct Kaim_CPoolBasedAllocator {
     inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
     // 0x14: UNVERIFIED type; PS2 access offset.
     inline int & Field_0014() { return *(int *)((unsigned char *)this + 0x14); }
-    // 0x002E55A0: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E55A0: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E55A0(void * argument0);
     // 0x002E5660: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002E5660(unsigned int argument0);
-    // 0x002E5768: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E5768: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     unsigned char Function_002E5768(void * argument0);
     // 0x002E5D90: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002E5D90();
-    // 0x002E5E58: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E5E58: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E5E58(unsigned int argument0);
-    // 0x002E6DD8: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E6DD8: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E6DD8(unsigned int argument0, void * argument1);
-    // 0x002E6E60: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E6E60: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E6E60(unsigned int argument0, void * argument1);
     // 0x002E7028: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002E7028(unsigned int argument0);
-    // 0x002E7088: UNVERIFIED signature (src/tu/kynapse_tu_2e5358.c).
+    // 0x002E7088: UNVERIFIED signature (src/kynapse/tu_2e5358_2e5848.c).
     unsigned int Function_002E7088();
 
     // Vtable 0x003E9B58; vptr field offset unknown; RTTI header.

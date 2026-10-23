@@ -18,25 +18,25 @@ struct UnknownVtable_003DD570 {
     inline unsigned int & Field_0050() { return *(unsigned int *)((unsigned char *)this + 0x50); }
     // 0x74: UNVERIFIED type; PS2 access offset.
     inline float & Field_0074() { return *(float *)((unsigned char *)this + 0x74); }
-    // 0x001A2580: UNVERIFIED signature (src/auto/game/1a2580.c).
+    // 0x001A2580: UNVERIFIED signature (src/game/tu_1a24b8_1a2580.c).
     int Function_001A2580();
-    // 0x001A2588: UNVERIFIED signature (src/auto/game/1a2580.c).
+    // 0x001A2588: UNVERIFIED signature (src/game/tu_1a24b8_1a2580.c).
     unsigned int Function_001A2588();
     // 0x001A2590: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001A2590();
-    // 0x001A2610: UNVERIFIED signature (src/auto/game/1a2610.c).
+    // 0x001A2610: UNVERIFIED signature (src/game/tu_1a24b8_1a2610.c).
     unsigned int Function_001A2610();
-    // 0x001A2698: UNVERIFIED signature (src/tu/1a2620.c).
+    // 0x001A2698: UNVERIFIED signature (src/game/tu_1a24b8_1a2620.c).
     int Function_001A2698(int argument0);
-    // 0x001A2C68: UNVERIFIED signature (src/tu/1a2c68.c).
+    // 0x001A2C68: UNVERIFIED signature (src/game/tu_1a24b8_1a2c68.c).
     int Function_001A2C68();
-    // 0x001A40E0: UNVERIFIED signature (src/tu/tu_1a24b8_1a3a08.c).
+    // 0x001A40E0: UNVERIFIED signature (src/game/tu_1a24b8_1a3a08.c).
     int Function_001A40E0();
     // 0x001A4130: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A4130(unsigned int argument0);
     // 0x001A4428: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A4428(unsigned int argument0);
-    // 0x00383D38: UNVERIFIED signature (src/auto/unclassified/383d38.c).
+    // 0x00383D38: UNVERIFIED signature (src/linkonce/linkonce_383d38.c).
     unsigned int Function_00383D38();
 
     // Vtable 0x003DD570; vptr field offset unknown; referenced zero RTTI header.

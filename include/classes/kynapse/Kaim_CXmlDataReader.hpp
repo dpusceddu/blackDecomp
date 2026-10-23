@@ -15,19 +15,19 @@ struct Kaim_CXmlDataReader {
     // Constructor identity: 0x00373250; source-exact C++ special-member symbol and bound class vtable.
     // Destructor identity: 0x00373268.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x00372FC0: UNVERIFIED signature (src/context/behaviors_xml.cpp).
+    // 0x00372FC0: UNVERIFIED signature (src/game/behaviors_xml.cpp).
     int Function_00372FC0(void * argument0, void * argument1);
-    // 0x00373148: UNVERIFIED signature (src/context/behaviors_xml.cpp).
+    // 0x00373148: UNVERIFIED signature (src/game/behaviors_xml.cpp).
     unsigned int Function_00373148(void * argument0);
     // 0x00373268: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00373268();
-    // 0x003732A0: UNVERIFIED signature (src/tu/tu_372fc0.c).
+    // 0x003732A0: UNVERIFIED signature (src/game/tu_372fc0_373268.c).
     int Function_003732A0(void * argument0);
-    // 0x00373300: UNVERIFIED signature (src/context/behaviors_xml.cpp).
+    // 0x00373300: UNVERIFIED signature (src/game/behaviors_xml.cpp).
     unsigned int Function_00373300(void * argument0, void * argument1, unsigned int argument2);
-    // 0x00373348: UNVERIFIED signature (src/tu/tu_372fc0.c).
+    // 0x00373348: UNVERIFIED signature (src/game/tu_372fc0_373268.c).
     unsigned int Function_00373348(void * argument0);
-    // 0x00388E80: UNVERIFIED signature (src/auto/unclassified/388e30.c).
+    // 0x00388E80: UNVERIFIED signature (src/linkonce/linkonce_388e30.c).
     int Function_00388E80(int argument0);
 
     // Vtable 0x003F2048; vptr field offset unknown; RTTI header.

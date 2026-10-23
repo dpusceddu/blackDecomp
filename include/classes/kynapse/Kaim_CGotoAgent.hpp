@@ -34,15 +34,15 @@ struct Kaim_CGotoAgent {
     void Function_002D3A10();
     // 0x002D3A68: UNVERIFIED signature (src/kynapse/predicates_2d3a68.cpp).
     unsigned char Function_002D3A68();
-    // 0x002D3A78: UNVERIFIED signature (src/context/behaviors_goto.cpp).
+    // 0x002D3A78: UNVERIFIED signature (src/kynapse/behaviors_goto.cpp).
     int Function_002D3A78(void * argument0);
-    // 0x002D3B00: UNVERIFIED signature (src/tu/kynapse_tu_2d38c8.c).
+    // 0x002D3B00: UNVERIFIED signature (src/kynapse/tu_2d38c8_2d3970.c).
     int Function_002D3B00();
     // 0x002D3B08: UNVERIFIED signature (include/context/behaviors/goto.hpp).
     int Function_002D3B08();
     // 0x00389550: UNVERIFIED signature (src/kynapse/class_info_389550.cpp).
     void * Function_00389550();
-    // 0x00389560: UNVERIFIED signature (src/auto/other/389560.c).
+    // 0x00389560: UNVERIFIED signature (src/linkonce/linkonce_389560.c).
     int Function_00389560();
     // 0x0038BB28: UNVERIFIED signature (src/kynapse/small_misc_38bb28.cpp).
     void Function_0038BB28();

@@ -35,7 +35,7 @@ struct Kaim_CGapDynamicAvoidance {
     unsigned char Function_00307970(void * argument0, void * argument1);
     // 0x0030B4A8: UNVERIFIED signature (src/kynapse/avoidance_configuration.cpp).
     unsigned char Function_0030B4A8(void * argument0);
-    // 0x0030B898: UNVERIFIED signature (src/tu/kynapse_tu_3067a0.c).
+    // 0x0030B898: UNVERIFIED signature (src/kynapse/tu_3067a0_30b7a8.c).
     int Function_0030B898();
     // 0x0030BA10: UNVERIFIED signature (src/kynapse/misc7_30ba10.cpp).
     void Function_0030BA10();

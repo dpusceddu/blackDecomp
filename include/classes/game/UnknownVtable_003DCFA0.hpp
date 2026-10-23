@@ -18,15 +18,15 @@ struct UnknownVtable_003DCFA0 {
     inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
     // 0x10: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
-    // 0x00171A40: UNVERIFIED signature (src/auto/unclassified/171a08.c).
+    // 0x00171A40: UNVERIFIED signature (src/game/tu_16eb80_171a08.c).
     int Function_00171A40(void * argument0);
-    // 0x00171A60: UNVERIFIED signature (src/auto/unclassified/171a08.c).
+    // 0x00171A60: UNVERIFIED signature (src/game/tu_16eb80_171a08.c).
     int Function_00171A60();
-    // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
+    // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
     // 0x002E1B08: UNVERIFIED signature (src/kynapse/lookups_2e1b08.cpp).
     void Function_002E1B08();
-    // 0x003841E0: UNVERIFIED signature (src/auto/other/3841e0.c).
+    // 0x003841E0: UNVERIFIED signature (src/linkonce/linkonce_3841e0.c).
     int Function_003841E0(int argument0);
     // 0x0038C390: UNVERIFIED signature (include/campaign/graph/brain.hpp).
     unsigned char Function_0038C390(void * argument0);

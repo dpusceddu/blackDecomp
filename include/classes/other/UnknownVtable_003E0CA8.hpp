@@ -12,7 +12,7 @@ struct UnknownVtable_003E0CA8 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x00207110: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00207110(void * argument0, void * argument1);
-    // 0x002071C0: UNVERIFIED signature (src/tu/tu_204a50_206f08.c).
+    // 0x002071C0: UNVERIFIED signature (src/game/tu_204a50_206f08.c).
     unsigned int Function_002071C0();
 
     // Vtable 0x003E0CA8; vptr field offset unknown; referenced zero RTTI header.

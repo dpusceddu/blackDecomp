@@ -36,17 +36,17 @@ struct Kaim_CRepulsorDynamicAvoidance {
     inline float & Field_00E0() { return *(float *)((unsigned char *)this + 0xE0); }
     // 0xE4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_00E4() { return *(float *)((unsigned char *)this + 0xE4); }
-    // 0x003057E8: UNVERIFIED signature (src/context/behaviors_repulsor.cpp).
+    // 0x003057E8: UNVERIFIED signature (src/kynapse/behaviors_repulsor.cpp).
     unsigned char Function_003057E8(void * argument0);
     // 0x00306400: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00306400();
-    // 0x00306438: UNVERIFIED signature (src/tu/kynapse_tu_305538.c).
+    // 0x00306438: UNVERIFIED signature (src/kynapse/tu_305538_3063a8.c).
     unsigned int Function_00306438();
-    // 0x00306440: UNVERIFIED signature (src/tu/kynapse_tu_305538.c).
+    // 0x00306440: UNVERIFIED signature (src/kynapse/tu_305538_3063a8.c).
     unsigned int Function_00306440();
-    // 0x00306448: UNVERIFIED signature (src/context/behaviors_repulsor.cpp).
+    // 0x00306448: UNVERIFIED signature (src/kynapse/behaviors_repulsor.cpp).
     void Function_00306448(void * argument0, void * argument1);
-    // 0x00393F28: UNVERIFIED signature (src/auto/kynapse/393ed8.c).
+    // 0x00393F28: UNVERIFIED signature (src/kynapse/linkonce_393ed8.c).
     int * Function_00393F28();
 
     // Vtable 0x003F0760; vptr field offset unknown; RTTI header.

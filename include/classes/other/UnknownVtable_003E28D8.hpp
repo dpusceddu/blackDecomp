@@ -28,11 +28,11 @@ struct UnknownVtable_003E28D8 {
     inline void * & Field_0078() { return *(void * *)((unsigned char *)this + 0x78); }
     // 0x7C: UNVERIFIED type; PS2 access offset.
     inline void * & Field_007C() { return *(void * *)((unsigned char *)this + 0x7C); }
-    // 0x00289988: UNVERIFIED signature (src/auto/game/289948.c).
+    // 0x00289988: UNVERIFIED signature (src/game/tu_288bc8_289948.c).
     int Function_00289988();
-    // 0x00289990: UNVERIFIED signature (src/auto/game/289948.c).
+    // 0x00289990: UNVERIFIED signature (src/game/tu_288bc8_289948.c).
     int Function_00289990();
-    // 0x00289998: UNVERIFIED signature (src/auto/game/289948.c).
+    // 0x00289998: UNVERIFIED signature (src/game/tu_288bc8_289948.c).
     int Function_00289998();
     // 0x002899A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002899A0(void * argument0, void * argument1, void * argument2, unsigned int argument3);
@@ -40,35 +40,35 @@ struct UnknownVtable_003E28D8 {
     int Function_00289AE0(void * argument0, void * argument1, int argument2, unsigned char * argument3);
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
     void Function_002E4CA8();
-    // 0x002F4390: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    // 0x002F4390: UNVERIFIED signature (src/kynapse/graph_pathobject_context.cpp).
     unsigned char Function_002F4390(void * argument0);
     // 0x002F44E8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_002F44E8();
-    // 0x002F4620: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    // 0x002F4620: UNVERIFIED signature (src/kynapse/graph_pathobject_context.cpp).
     unsigned char Function_002F4620(int argument0, void * argument1);
-    // 0x002F47B0: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    // 0x002F47B0: UNVERIFIED signature (src/kynapse/graph_pathobject_context.cpp).
     unsigned char Function_002F47B0(int argument0, void * argument1);
     // 0x002F4B50: UNVERIFIED signature (src/kynapse/host_2850c0_2f4b50.cpp).
     void Function_002F4B50(void * argument0);
-    // 0x00383ED0: UNVERIFIED signature (src/auto/other/383e98.c).
+    // 0x00383ED0: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
     int Function_00383ED0();
-    // 0x00388FE8: UNVERIFIED signature (src/auto/unclassified/388fe8.c).
+    // 0x00388FE8: UNVERIFIED signature (src/linkonce/linkonce_388fe8.c).
     int Function_00388FE8(int argument0);
-    // 0x00389038: UNVERIFIED signature (src/auto/unclassified/389038.c).
+    // 0x00389038: UNVERIFIED signature (src/linkonce/linkonce_389038.c).
     int Function_00389038();
-    // 0x00389040: UNVERIFIED signature (src/auto/unclassified/389038.c).
+    // 0x00389040: UNVERIFIED signature (src/linkonce/linkonce_389038.c).
     int * Function_00389040();
-    // 0x003912B8: UNVERIFIED signature (src/auto/kynapse/3912b8.c).
+    // 0x003912B8: UNVERIFIED signature (src/kynapse/linkonce_3912b8.c).
     int Function_003912B8();
-    // 0x00391360: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391360: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391360();
-    // 0x00391368: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391368: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391368();
-    // 0x00391370: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391370: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391370();
-    // 0x00391378: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391378: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     unsigned int Function_00391378();
-    // 0x00391380: UNVERIFIED signature (src/campaign/graph_cpathobject.cpp).
+    // 0x00391380: UNVERIFIED signature (src/kynapse/graph_cpathobject.cpp).
     void Function_00391380(int argument0);
 
     // Vtable 0x003E28D8; vptr field offset unknown; referenced zero RTTI header.

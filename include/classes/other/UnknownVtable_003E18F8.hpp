@@ -18,31 +18,31 @@ struct UnknownVtable_003E18F8 {
     int Function_0024B618(unsigned int argument0, void * argument1);
     // 0x0024BC80: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0024BC80(unsigned int argument0, void * argument1, unsigned int argument2);
-    // 0x0024F578: UNVERIFIED signature (src/tu/apt_tu_24ce90.c).
+    // 0x0024F578: UNVERIFIED signature (src/apt/tu_24ce90_24f578.c).
     int Function_0024F578();
     // 0x0024F5D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0024F5D8();
-    // 0x0024F760: UNVERIFIED signature (src/tu/apt_tu_24ce90.c).
+    // 0x0024F760: UNVERIFIED signature (src/apt/tu_24ce90_24f578.c).
     int Function_0024F760();
-    // 0x0024F768: UNVERIFIED signature (src/tu/apt_tu_24ce90.c).
+    // 0x0024F768: UNVERIFIED signature (src/apt/tu_24ce90_24f578.c).
     int Function_0024F768();
-    // 0x00250550: UNVERIFIED signature (src/tu/apt_tu_24ce90_24fe68.c).
+    // 0x00250550: UNVERIFIED signature (src/apt/tu_24ce90_24fe68.c).
     int Function_00250550();
-    // 0x00250570: UNVERIFIED signature (src/tu/apt_tu_24ce90_24fe68.c).
+    // 0x00250570: UNVERIFIED signature (src/apt/tu_24ce90_24fe68.c).
     int * Function_00250570(int argument0);
     // 0x00384E70: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00384E70();
     // 0x00384F08: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F40: UNVERIFIED signature (src/auto/other/384f40.c).
+    // 0x00384F40: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
     unsigned int Function_00384F40();
-    // 0x00384F50: UNVERIFIED signature (src/auto/other/384f40.c).
+    // 0x00384F50: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
     int Function_00384F50();
     // 0x00385528: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00385528(int argument0);
-    // 0x00385548: UNVERIFIED signature (src/auto/other/385548.c).
+    // 0x00385548: UNVERIFIED signature (src/linkonce/linkonce_385548.c).
     int Function_00385548();
-    // 0x00386100: UNVERIFIED signature (src/auto/other/386100.c).
+    // 0x00386100: UNVERIFIED signature (src/linkonce/linkonce_385660_386100.c).
     int * Function_00386100(int argument0);
 
     // Vtable 0x003E18F8; vptr field offset unknown; referenced zero RTTI header.

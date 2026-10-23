@@ -30,7 +30,7 @@ struct Kaim_CFindNearestData {
     inline int & Field_0018() { return *(int *)((unsigned char *)this + 0x18); }
     // 0x002EF030: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002EF030(void * argument0);
-    // 0x002EF900: UNVERIFIED signature (src/campaign/graph_cfindnearestdata.cpp).
+    // 0x002EF900: UNVERIFIED signature (src/kynapse/graph_cfindnearestdata.cpp).
     int Function_002EF900();
     // 0x002EFC50: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002EFC50(unsigned int argument0);

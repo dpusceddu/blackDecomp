@@ -17,13 +17,13 @@ struct Kaim_CEntity {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0018() { return *(void * *)((unsigned char *)this + 0x18); }
-    // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
+    // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
     // 0x002E45F8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002E45F8();
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
     void Function_002E4CA8();
-    // 0x0038CBA0: UNVERIFIED signature (src/auto/kynapse/38cba0.c).
+    // 0x0038CBA0: UNVERIFIED signature (src/kynapse/linkonce_38cba0.c).
     int Function_0038CBA0();
 
     // Vtable 0x003E90C0; vptr field offset unknown; RTTI header.

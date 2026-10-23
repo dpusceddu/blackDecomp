@@ -18,7 +18,7 @@ struct Kaim_CPathCostHeuristic {
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_0004() { return *(unsigned int *)((unsigned char *)this + 0x4); }
-    // 0x002F2318: UNVERIFIED signature (src/context/behaviors_constraints.cpp).
+    // 0x002F2318: UNVERIFIED signature (src/kynapse/behaviors_constraints.cpp).
     unsigned char Function_002F2318(void * argument0, int * argument1, int * argument2, float * argument3);
     // 0x002F2380: UNVERIFIED signature (src/kynapse/batch10_2f2380.cpp).
     void Function_002F2380(int argument0);

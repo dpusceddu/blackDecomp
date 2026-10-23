@@ -1,7 +1,7 @@
 #ifndef BLACK_PS2_RENDERWARE_INLINE_H
 #define BLACK_PS2_RENDERWARE_INLINE_H
-#include "renderware_core/math.h"
-#include "renderware_core/image.h"
+#include "rw_core/math.h"
+#include "rw_core/image.h"
 
 /* Exact-backed accessed fields only; these helpers do not verify entire SDK classes. */
 static inline RwMatrixPS2 *RwInvalidateMatrixFlagsPS2(RwMatrixPS2 *matrix)

@@ -18,9 +18,9 @@ struct UnknownVtable_003DE668 {
     inline int & Field_0038() { return *(int *)((unsigned char *)this + 0x38); }
     // 0x3C: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_003C() { return *(unsigned char *)((unsigned char *)this + 0x3C); }
-    // 0x00193970: UNVERIFIED signature (src/auto/game/193970.c).
+    // 0x00193970: UNVERIFIED signature (src/game/tu_193970.c).
     unsigned int Function_00193970(int argument0);
-    // 0x00199950: UNVERIFIED signature (src/auto/game/1998f8.c).
+    // 0x00199950: UNVERIFIED signature (src/game/tu_199850_1998f8.c).
     unsigned int Function_00199950();
     // 0x00199988: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00199988();
@@ -30,17 +30,17 @@ struct UnknownVtable_003DE668 {
     int Function_00199D20();
     // 0x00199D90: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_00199D90(unsigned int argument0, unsigned int argument1);
-    // 0x00199F08: UNVERIFIED signature (src/tu/tu_199988.c).
+    // 0x00199F08: UNVERIFIED signature (src/game/tu_199988_199f08.c).
     int Function_00199F08();
-    // 0x00199F48: UNVERIFIED signature (src/tu/tu_199988.c).
+    // 0x00199F48: UNVERIFIED signature (src/game/tu_199988_199f08.c).
     int Function_00199F48();
     // 0x0019A350: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0019A350(void * argument0);
-    // 0x00383DC8: UNVERIFIED signature (src/auto/other/383db8.c).
+    // 0x00383DC8: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
     unsigned int Function_00383DC8();
-    // 0x00383DD8: UNVERIFIED signature (src/auto/other/383db8.c).
+    // 0x00383DD8: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
     unsigned int Function_00383DD8();
-    // 0x00383DE8: UNVERIFIED signature (src/auto/other/383db8.c).
+    // 0x00383DE8: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
     unsigned int Function_00383DE8();
 
     // Vtable 0x003DE668; vptr field offset unknown; referenced zero RTTI header.

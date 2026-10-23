@@ -39,7 +39,7 @@ struct Kaim_CSoundManager {
     inline int & Field_0048() { return *(int *)((unsigned char *)this + 0x48); }
     // 0x4C: UNVERIFIED type; PS2 access offset.
     inline float & Field_004C() { return *(float *)((unsigned char *)this + 0x4C); }
-    // 0x0030D228: UNVERIFIED signature (src/context/behaviors_sound.cpp).
+    // 0x0030D228: UNVERIFIED signature (src/kynapse/behaviors_sound.cpp).
     unsigned char Function_0030D228(void * argument0);
     // 0x0030D370: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0030D370(void * argument0);
@@ -47,7 +47,7 @@ struct Kaim_CSoundManager {
     void Function_0030E020();
     // 0x0030E100: UNVERIFIED signature (src/kynapse/sound_pool_30e100.cpp).
     unsigned char Function_0030E100();
-    // 0x0030E128: UNVERIFIED signature (src/tu/kynapse_CSoundManager_30d160.c).
+    // 0x0030E128: UNVERIFIED signature (src/kynapse/CSoundManager_30d160_30d1f8.c).
     int Function_0030E128();
     // 0x0030E180: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int * Function_0030E180();

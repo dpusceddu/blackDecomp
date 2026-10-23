@@ -12,9 +12,9 @@ struct UnknownVtable_003DB460 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x00121AF8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00121AF8();
-    // 0x00121B40: UNVERIFIED signature (src/tu/121b40.c).
+    // 0x00121B40: UNVERIFIED signature (src/game/tu_120068_121b40.c).
     int Function_00121B40();
-    // 0x00121BD0: UNVERIFIED signature (src/tu/121b40.c).
+    // 0x00121BD0: UNVERIFIED signature (src/game/tu_120068_121b40.c).
     int Function_00121BD0();
 
     // Vtable 0x003DB460; vptr field offset unknown; referenced zero RTTI header.

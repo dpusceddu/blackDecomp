@@ -22,7 +22,7 @@ struct Kaim_CGraphWrapper {
     unsigned char Function_002F34B0(void * argument0);
     // 0x002F3520: UNVERIFIED signature (src/kynapse/misc5_2f3520.cpp).
     int Function_002F3520();
-    // 0x002F3530: UNVERIFIED signature (src/auto/kynapse/2f3530.c).
+    // 0x002F3530: UNVERIFIED signature (src/kynapse/tu_2f33e8_2f3530.c).
     int Function_002F3530(int argument0);
     // 0x00390D98: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00390D98();

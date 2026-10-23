@@ -67,24 +67,24 @@ def main():
                  source=str(source.relative_to(ROOT)),returns=abi,abi_reviewed=False,readable_reviewed=False,
                  flags=FLAGS+['-fpermissive'],origin='existing generated draft; diagnostic only')
         if address in READABLE:
-            row.update(source='src/equivalent/pilot_scalar.cpp',name=READABLE[address],
+            row.update(source='src/game/pilot_scalar.cpp',name=READABLE[address],
                        abi_reviewed=True,readable_reviewed=True,flags=FLAGS,
                        origin='readable access view reviewed against original instructions',
                        returns='f32' if address==0x1dd748 else 'void' if address in (0x1f1608,0x176f38) else 'i64')
         if address==0x1a9908:
-            row.update(source='src/campaign/graphics_selector_1a9908.cpp',
+            row.update(source='src/game/graphics_selector_1a9908.cpp',
                        symbol='Turn__Q218AnimationSelectPS28SelectorPcPQ218AnimationSelectPS25Actorlf',
                        returns='void',abi_reviewed=True,readable_reviewed=True,
                        flags=['-O2','-G0','-snas','-ffunction-sections','-mvu0-use-vf0-vf31','-fno-rtti','-fno-exceptions'])
         rows.append(row)
-    notification=(ROOT/'src/campaign/graphics_overlay_drafts.cpp').read_text().split('#if 0',1)[1].split('#endif',1)[0]
+    notification=(ROOT/'src/game/graphics_overlay_drafts.cpp').read_text().split('#if 0',1)[1].split('#endif',1)[0]
     notification=notification.replace('void Update(float);','void Update(float) __asm__("func_001F4770");')
     source=out/'drafts/notification.cpp';source.write_text(notification)
     vector_flags=next(row['flags'] for row in rows if row['address']==0x1a9908)
     rows.append(dict(address=0x1f4770,size=inventory[0x1f4770]['size'],symbol='func_001F4770',source=str(source.relative_to(ROOT)),
                      returns='void',abi_reviewed=True,readable_reviewed=False,flags=vector_flags))
     rows.append(dict(address=0x1046b0,size=inventory[0x1046b0]['size'],symbol='func_001046B0',
-                     source='src/campaign/graphics_frontend_1046b0.cpp',returns='void',abi_reviewed=True,readable_reviewed=True,
+                     source='src/game/graphics_frontend_1046b0.cpp',returns='void',abi_reviewed=True,readable_reviewed=True,
                      flags=['-O2','-G0','-snas','-ffunction-sections','-fbyte-bool','-fno-rtti','-fno-exceptions']))
     (out/'plan.json').write_text(json.dumps(rows,indent=2)+'\n')
     print('Staged 50 candidates, including ten game functions above 1 KB. Raw drafts cannot be promoted.')

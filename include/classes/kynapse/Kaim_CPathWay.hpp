@@ -21,7 +21,7 @@ struct Kaim_CPathWay {
     void Function_002DF2A0();
     // 0x002DF650: UNVERIFIED signature (src/kynapse/label_2df650.cpp).
     void Function_002DF650(signed char argument0);
-    // 0x0038B3F0: UNVERIFIED signature (src/auto/kynapse/38b3f0.c).
+    // 0x0038B3F0: UNVERIFIED signature (src/kynapse/linkonce_38b3f0.c).
     unsigned int Function_0038B3F0();
 
     // Vtable 0x003E6730; vptr field offset unknown; RTTI header.

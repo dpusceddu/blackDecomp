@@ -20,19 +20,19 @@ struct Kaim_IPathFinder {
     inline int & Field_000C() { return *(int *)((unsigned char *)this + 0xC); }
     // 0x14: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
-    // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
+    // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
     // 0x002E5088: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002E5088();
-    // 0x002E5218: UNVERIFIED signature (src/tu/2e5178.c).
+    // 0x002E5218: UNVERIFIED signature (src/kynapse/tu_2e4f58_2e5178.c).
     int Function_002E5218(void * argument0);
     // 0x002E74E0: UNVERIFIED signature (src/kynapse/configure_2e74e0.cpp).
     unsigned char Function_002E74E0(void * argument0);
     // 0x0038D2D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0038D2D0(void * argument0);
-    // 0x0038D330: UNVERIFIED signature (src/auto/unclassified/38d330.c).
+    // 0x0038D330: UNVERIFIED signature (src/linkonce/linkonce_38d330.c).
     int Function_0038D330();
-    // 0x0038E768: UNVERIFIED signature (src/campaign/graph_cpointmapper.cpp).
+    // 0x0038E768: UNVERIFIED signature (src/linkonce/graph_cpointmapper.cpp).
     int Function_0038E768(void * argument0);
     // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
     void Function_0038E7B8();

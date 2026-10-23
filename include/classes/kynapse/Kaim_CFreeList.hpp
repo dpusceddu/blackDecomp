@@ -40,11 +40,11 @@ struct Kaim_CFreeList {
     inline int & Field_0054() { return *(int *)((unsigned char *)this + 0x54); }
     // 0x64: UNVERIFIED type; PS2 access offset.
     inline int & Field_0064() { return *(int *)((unsigned char *)this + 0x64); }
-    // 0x002E55A0: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E55A0: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E55A0(void * argument0);
     // 0x002E5660: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002E5660(unsigned int argument0);
-    // 0x002E5768: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E5768: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     unsigned char Function_002E5768(void * argument0);
     // 0x002E6740: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002E6740();

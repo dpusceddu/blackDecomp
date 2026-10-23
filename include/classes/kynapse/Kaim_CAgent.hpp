@@ -18,7 +18,7 @@ struct Kaim_CAgent {
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x4: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0004() { return *(void * *)((unsigned char *)this + 0x4); }
-    // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
+    // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
     // 0x002DFF98: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002DFF98();

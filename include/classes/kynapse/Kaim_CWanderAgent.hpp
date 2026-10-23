@@ -38,17 +38,17 @@ struct Kaim_CWanderAgent {
     inline unsigned int & Field_0028() { return *(unsigned int *)((unsigned char *)this + 0x28); }
     // 0x2C: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_002C() { return *(unsigned char *)((unsigned char *)this + 0x2C); }
-    // 0x002D7308: UNVERIFIED signature (src/context/behaviors_wander.cpp).
+    // 0x002D7308: UNVERIFIED signature (src/kynapse/behaviors_wander.cpp).
     unsigned char Function_002D7308();
     // 0x002D7558: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D7558();
-    // 0x002D75B0: UNVERIFIED signature (src/context/behaviors_wander.cpp).
+    // 0x002D75B0: UNVERIFIED signature (src/kynapse/behaviors_wander.cpp).
     unsigned char Function_002D75B0(void * argument0);
     // 0x002D7690: UNVERIFIED signature (src/kynapse/predicates_2d7690.cpp).
     unsigned char Function_002D7690();
-    // 0x002D76A0: UNVERIFIED signature (src/tu/kynapse_tu_2d7260.c).
+    // 0x002D76A0: UNVERIFIED signature (src/kynapse/tu_2d7260_2d74a0.c).
     int Function_002D76A0(void * argument0);
-    // 0x002D7748: UNVERIFIED signature (src/context/behaviors_wander.cpp).
+    // 0x002D7748: UNVERIFIED signature (src/kynapse/behaviors_wander.cpp).
     unsigned char Function_002D7748();
     // 0x002D77A0: UNVERIFIED signature (include/context/behaviors/wander.hpp).
     int Function_002D77A0();

@@ -50,49 +50,49 @@ struct UnknownVtable_003DB860 {
     inline unsigned char & Field_0194() { return *(unsigned char *)((unsigned char *)this + 0x194); }
     // 0x195: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0195() { return *(unsigned char *)((unsigned char *)this + 0x195); }
-    // 0x00125D10: UNVERIFIED signature (src/auto/game/125d10.c).
+    // 0x00125D10: UNVERIFIED signature (src/game/tu_125d10.c).
     int Function_00125D10();
-    // 0x00125E20: UNVERIFIED signature (src/auto/game/125e20.c).
+    // 0x00125E20: UNVERIFIED signature (src/game/tu_125e20.c).
     unsigned int Function_00125E20();
-    // 0x00125E28: UNVERIFIED signature (src/auto/game/125e20.c).
+    // 0x00125E28: UNVERIFIED signature (src/game/tu_125e20.c).
     unsigned int Function_00125E28();
-    // 0x00125E30: UNVERIFIED signature (src/auto/game/125e20.c).
+    // 0x00125E30: UNVERIFIED signature (src/game/tu_125e20.c).
     unsigned int Function_00125E30();
-    // 0x00125E38: UNVERIFIED signature (src/auto/game/125e20.c).
+    // 0x00125E38: UNVERIFIED signature (src/game/tu_125e20.c).
     unsigned int Function_00125E38();
-    // 0x00126090: UNVERIFIED signature (src/auto/game/126090.c).
+    // 0x00126090: UNVERIFIED signature (src/game/tu_126090.c).
     unsigned int Function_00126090();
-    // 0x001261F8: UNVERIFIED signature (src/auto/game/1261f8.c).
+    // 0x001261F8: UNVERIFIED signature (src/game/tu_1261f8.c).
     int Function_001261F8();
     // 0x00164900: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00164900(unsigned long argument0, void * argument1);
     // 0x00164BC0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00164BC0(unsigned int argument0);
-    // 0x00164D30: UNVERIFIED signature (src/auto/game/164d30.c).
+    // 0x00164D30: UNVERIFIED signature (src/game/tu_164bc0_164d30.c).
     unsigned int Function_00164D30();
     // 0x00164D70: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00164D70();
-    // 0x00164DC8: UNVERIFIED signature (src/auto/game/164dc8.c).
+    // 0x00164DC8: UNVERIFIED signature (src/game/tu_164bc0_164dc8.c).
     int Function_00164DC8();
-    // 0x00169C10: UNVERIFIED signature (src/campaign/actor_c4c8_wave4.cpp).
+    // 0x00169C10: UNVERIFIED signature (src/game/actor_c4c8.cpp).
     int Function_00169C10(unsigned long argument0, void * argument1);
-    // 0x00169D20: UNVERIFIED signature (src/auto/game/169d20.c).
+    // 0x00169D20: UNVERIFIED signature (src/game/tu_169d20.c).
     int Function_00169D20();
-    // 0x00169D48: UNVERIFIED signature (src/auto/game/169d20.c).
+    // 0x00169D48: UNVERIFIED signature (src/game/tu_169d20.c).
     int Function_00169D48();
-    // 0x00169EE0: UNVERIFIED signature (src/auto/game/169ee0.c).
+    // 0x00169EE0: UNVERIFIED signature (src/game/tu_169ee0.c).
     unsigned int Function_00169EE0();
-    // 0x00169EE8: UNVERIFIED signature (src/auto/game/169ee8.c).
+    // 0x00169EE8: UNVERIFIED signature (src/game/tu_169ee8.c).
     unsigned int Function_00169EE8();
-    // 0x00169EF0: UNVERIFIED signature (src/auto/game/169ee8.c).
+    // 0x00169EF0: UNVERIFIED signature (src/game/tu_169ee8.c).
     unsigned int Function_00169EF0();
-    // 0x00383768: UNVERIFIED signature (src/auto/other/383768.c).
+    // 0x00383768: UNVERIFIED signature (src/game/tu_383768.c).
     int Function_00383768();
-    // 0x00383770: UNVERIFIED signature (src/auto/other/383770.c).
+    // 0x00383770: UNVERIFIED signature (src/game/tu_383770.c).
     unsigned int Function_00383770();
-    // 0x00383778: UNVERIFIED signature (src/auto/other/383770.c).
+    // 0x00383778: UNVERIFIED signature (src/game/tu_383770.c).
     unsigned int Function_00383778();
-    // 0x00383780: UNVERIFIED signature (src/auto/other/383770.c).
+    // 0x00383780: UNVERIFIED signature (src/game/tu_383770.c).
     float Function_00383780();
 
     // Vtable 0x003DB860; vptr field offset unknown; referenced zero RTTI header.

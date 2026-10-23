@@ -14,31 +14,31 @@ struct UnknownVtable_003E16D8 {
     inline unsigned int & Field_0004() { return *(unsigned int *)((unsigned char *)this + 0x4); }
     // 0x00384E70: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00384E70();
-    // 0x00384ED8: UNVERIFIED signature (src/auto/other/384ed8.c).
+    // 0x00384ED8: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
     int Function_00384ED8();
-    // 0x00384EE0: UNVERIFIED signature (src/auto/other/384ed8.c).
+    // 0x00384EE0: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
     int Function_00384EE0();
-    // 0x00384EE8: UNVERIFIED signature (src/auto/other/384ed8.c).
+    // 0x00384EE8: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
     int Function_00384EE8();
-    // 0x00384EF0: UNVERIFIED signature (src/auto/unclassified/384ef0.c).
+    // 0x00384EF0: UNVERIFIED signature (src/linkonce/linkonce_384ef0.c).
     unsigned int Function_00384EF0();
-    // 0x00384EF8: UNVERIFIED signature (src/auto/physics/384ef8.c).
+    // 0x00384EF8: UNVERIFIED signature (src/linkonce/linkonce_384ef8.c).
     int Function_00384EF8();
     // 0x00384F08: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F40: UNVERIFIED signature (src/auto/other/384f40.c).
+    // 0x00384F40: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
     unsigned int Function_00384F40();
-    // 0x00384F48: UNVERIFIED signature (src/auto/other/384f40.c).
+    // 0x00384F48: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
     unsigned int Function_00384F48();
-    // 0x00384F58: UNVERIFIED signature (src/auto/other/384f40.c).
+    // 0x00384F58: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
     int Function_00384F58();
-    // 0x00384F60: UNVERIFIED signature (src/auto/other/384f40.c).
+    // 0x00384F60: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
     unsigned int Function_00384F60();
     // 0x003862D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003862D8(unsigned int argument0, int * argument1, int * argument2);
-    // 0x00386358: UNVERIFIED signature (src/auto/other/386358.c).
+    // 0x00386358: UNVERIFIED signature (src/linkonce/linkonce_385660_386358.c).
     unsigned int Function_00386358();
-    // 0x00386360: UNVERIFIED signature (src/auto/other/386358.c).
+    // 0x00386360: UNVERIFIED signature (src/linkonce/linkonce_385660_386358.c).
     unsigned int Function_00386360();
     // 0x00386368: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int * Function_00386368(unsigned int argument0);

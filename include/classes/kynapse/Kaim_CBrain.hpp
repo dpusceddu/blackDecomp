@@ -26,7 +26,7 @@ struct Kaim_CBrain {
     inline int & Field_0010() { return *(int *)((unsigned char *)this + 0x10); }
     // 0x18: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0018() { return *(void * *)((unsigned char *)this + 0x18); }
-    // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
+    // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
     // 0x002E16B8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002E16B8();

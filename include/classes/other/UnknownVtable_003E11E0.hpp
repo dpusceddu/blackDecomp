@@ -34,9 +34,9 @@ struct UnknownVtable_003E11E0 {
     inline int & Field_0074() { return *(int *)((unsigned char *)this + 0x74); }
     // 0x00234468: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int * Function_00234468(unsigned int argument0);
-    // 0x003865C0: UNVERIFIED signature (src/tu/3865c0.c).
+    // 0x003865C0: UNVERIFIED signature (src/linkonce/linkonce_385660_3865c0.c).
     unsigned int Function_003865C0();
-    // 0x00386628: UNVERIFIED signature (src/tu/3865c0.c).
+    // 0x00386628: UNVERIFIED signature (src/linkonce/linkonce_385660_3865c0.c).
     int Function_00386628();
 
     // Vtable 0x003E11E0; vptr field offset unknown; referenced zero RTTI header.

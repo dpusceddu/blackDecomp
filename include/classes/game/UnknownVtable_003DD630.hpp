@@ -22,25 +22,25 @@ struct UnknownVtable_003DD630 {
     inline unsigned char & Field_0081() { return *(unsigned char *)((unsigned char *)this + 0x81); }
     // 0x82: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0082() { return *(unsigned char *)((unsigned char *)this + 0x82); }
-    // 0x001A2580: UNVERIFIED signature (src/auto/game/1a2580.c).
+    // 0x001A2580: UNVERIFIED signature (src/game/tu_1a24b8_1a2580.c).
     int Function_001A2580();
-    // 0x001A2588: UNVERIFIED signature (src/auto/game/1a2580.c).
+    // 0x001A2588: UNVERIFIED signature (src/game/tu_1a24b8_1a2580.c).
     unsigned int Function_001A2588();
-    // 0x001A2698: UNVERIFIED signature (src/tu/1a2620.c).
+    // 0x001A2698: UNVERIFIED signature (src/game/tu_1a24b8_1a2620.c).
     int Function_001A2698(int argument0);
-    // 0x001A35A8: UNVERIFIED signature (src/auto/game/1a35a8.c).
+    // 0x001A35A8: UNVERIFIED signature (src/game/tu_1a24b8_1a35a8.c).
     int Function_001A35A8();
     // 0x001A35E0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001A35E0(unsigned int argument0);
     // 0x001A36D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001A36D8(unsigned int argument0);
-    // 0x001A3998: UNVERIFIED signature (src/auto/game/1a3998.c).
+    // 0x001A3998: UNVERIFIED signature (src/game/tu_1a24b8_1a3998.c).
     int Function_001A3998();
-    // 0x001A39A0: UNVERIFIED signature (src/auto/game/1a3998.c).
+    // 0x001A39A0: UNVERIFIED signature (src/game/tu_1a24b8_1a3998.c).
     unsigned int Function_001A39A0();
-    // 0x001A39D8: UNVERIFIED signature (src/auto/game/1a39d8.c).
+    // 0x001A39D8: UNVERIFIED signature (src/game/tu_1a24b8_1a39d8.c).
     unsigned char Function_001A39D8();
-    // 0x00383D38: UNVERIFIED signature (src/auto/unclassified/383d38.c).
+    // 0x00383D38: UNVERIFIED signature (src/linkonce/linkonce_383d38.c).
     unsigned int Function_00383D38();
 
     // Vtable 0x003DD630; vptr field offset unknown; referenced zero RTTI header.

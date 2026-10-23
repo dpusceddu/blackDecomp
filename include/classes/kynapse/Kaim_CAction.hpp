@@ -15,7 +15,7 @@ struct Kaim_CAction {
     // Destructor identity: 0x002DFC38.
     // Destructor identity: 0x002DFC38.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
+    // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
     // 0x002DFC38: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002DFC38();

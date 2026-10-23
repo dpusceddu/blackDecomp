@@ -40,9 +40,9 @@ struct Kaim_CEntityManager {
     void Function_0030EAE0();
     // 0x0030ECA8: UNVERIFIED signature (src/kynapse/perception_30eca8.cpp).
     unsigned char Function_0030ECA8(void * argument0);
-    // 0x0030F000: UNVERIFIED signature (src/campaign/graph_entity_manager.cpp).
+    // 0x0030F000: UNVERIFIED signature (src/kynapse/graph_entity_manager.cpp).
     void Function_0030F000();
-    // 0x0030FE98: UNVERIFIED signature (src/campaign/behaviors_centitymanager_config.cpp).
+    // 0x0030FE98: UNVERIFIED signature (src/kynapse/behaviors_centitymanager_config.cpp).
     unsigned char Function_0030FE98(void * argument0);
     // 0x00394D68: UNVERIFIED signature (src/kynapse/class_info_394d68.cpp).
     void * Function_00394D68();

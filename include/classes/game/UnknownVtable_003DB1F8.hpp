@@ -26,9 +26,9 @@ struct UnknownVtable_003DB1F8 {
     int Function_001129B8(void * argument0, float argument1);
     // 0x00114160: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_00114160();
-    // 0x00114168: UNVERIFIED signature (src/auto/game/114160.c).
+    // 0x00114168: UNVERIFIED signature (src/game/tu_10f700_114168.c).
     unsigned int Function_00114168();
-    // 0x003824E0: UNVERIFIED signature (src/auto/other/3824e0.c).
+    // 0x003824E0: UNVERIFIED signature (src/game/tu_3824e0.c).
     unsigned int Function_003824E0();
 
     // Vtable 0x003DB1F8; vptr field offset unknown; referenced zero RTTI header.

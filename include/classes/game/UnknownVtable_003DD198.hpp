@@ -24,47 +24,47 @@ struct UnknownVtable_003DD198 {
     inline int & Field_006C() { return *(int *)((unsigned char *)this + 0x6C); }
     // 0x7C: UNVERIFIED type; PS2 access offset.
     inline int & Field_007C() { return *(int *)((unsigned char *)this + 0x7C); }
-    // 0x00171158: UNVERIFIED signature (src/auto/unclassified/171110.c).
+    // 0x00171158: UNVERIFIED signature (src/game/tu_16eb80_171110.c).
     int Function_00171158();
-    // 0x00171160: UNVERIFIED signature (src/auto/unclassified/171110.c).
+    // 0x00171160: UNVERIFIED signature (src/game/tu_16eb80_171110.c).
     int Function_00171160();
     // 0x00171168: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00171168(unsigned int argument0, void * argument1, void * argument2, void * argument3);
-    // 0x00171758: UNVERIFIED signature (src/auto/unclassified/171758.c).
+    // 0x00171758: UNVERIFIED signature (src/game/tu_16eb80_171758.c).
     int Function_00171758();
-    // 0x00171788: UNVERIFIED signature (src/auto/unclassified/171758.c).
+    // 0x00171788: UNVERIFIED signature (src/game/tu_16eb80_171758.c).
     unsigned int Function_00171788(int argument0, void * argument1);
-    // 0x001717E8: UNVERIFIED signature (src/auto/unclassified/171758.c).
+    // 0x001717E8: UNVERIFIED signature (src/game/tu_16eb80_171758.c).
     unsigned int Function_001717E8(int argument0, void * argument1);
     // 0x00171848: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00171848();
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
     void Function_002E4CA8();
-    // 0x002F4390: UNVERIFIED signature (src/campaign/graph_pathobject_context.cpp).
+    // 0x002F4390: UNVERIFIED signature (src/kynapse/graph_pathobject_context.cpp).
     unsigned char Function_002F4390(void * argument0);
     // 0x002F4B50: UNVERIFIED signature (src/kynapse/host_2850c0_2f4b50.cpp).
     void Function_002F4B50(void * argument0);
-    // 0x00383ED0: UNVERIFIED signature (src/auto/other/383e98.c).
+    // 0x00383ED0: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
     int Function_00383ED0();
-    // 0x00384000: UNVERIFIED signature (src/auto/other/384000.c).
+    // 0x00384000: UNVERIFIED signature (src/linkonce/linkonce_384000.c).
     int Function_00384000(int argument0);
-    // 0x00384050: UNVERIFIED signature (src/auto/other/384050.c).
+    // 0x00384050: UNVERIFIED signature (src/linkonce/linkonce_384050.c).
     int * Function_00384050();
-    // 0x00384060: UNVERIFIED signature (src/auto/other/384050.c).
+    // 0x00384060: UNVERIFIED signature (src/linkonce/linkonce_384050.c).
     int Function_00384060();
     // 0x003912C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003912C0(void * argument0, void * argument1, unsigned int argument2, void * argument3, void * argument4);
-    // 0x00391358: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391358: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391358();
-    // 0x00391360: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391360: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391360();
-    // 0x00391368: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391368: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391368();
-    // 0x00391370: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391370: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     int Function_00391370();
-    // 0x00391378: UNVERIFIED signature (src/auto/kynapse/391358.c).
+    // 0x00391378: UNVERIFIED signature (src/kynapse/linkonce_391358.c).
     unsigned int Function_00391378();
-    // 0x00391380: UNVERIFIED signature (src/campaign/graph_cpathobject.cpp).
+    // 0x00391380: UNVERIFIED signature (src/kynapse/graph_cpathobject.cpp).
     void Function_00391380(int argument0);
 
     // Vtable 0x003DD198; vptr field offset unknown; referenced zero RTTI header.

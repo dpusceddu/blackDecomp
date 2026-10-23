@@ -14,13 +14,13 @@ struct UnknownVtable_003DADC0 {
     inline int & Field_0000() { return *(int *)((unsigned char *)this + 0x0); }
     // 0x48: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0048() { return *(unsigned char *)((unsigned char *)this + 0x48); }
-    // 0x0011D440: UNVERIFIED signature (src/tu/11d430.c).
+    // 0x0011D440: UNVERIFIED signature (src/game/tu_11d358_11d430.c).
     int Function_0011D440(int argument0);
-    // 0x0011DE30: UNVERIFIED signature (src/auto/game/11de30.c).
+    // 0x0011DE30: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
     unsigned int Function_0011DE30();
-    // 0x0011DE38: UNVERIFIED signature (src/auto/game/11de30.c).
+    // 0x0011DE38: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
     unsigned int Function_0011DE38();
-    // 0x0011EA48: UNVERIFIED signature (src/tu/11ea40.c).
+    // 0x0011EA48: UNVERIFIED signature (src/game/tu_11d358_11ea40.c).
     int Function_0011EA48();
     // 0x0011EA68: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     long Function_0011EA68();
@@ -28,9 +28,9 @@ struct UnknownVtable_003DADC0 {
     int Function_0011EB08();
     // 0x0011EB88: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0011EB88();
-    // 0x0011EBF0: UNVERIFIED signature (src/tu/11ebf0.c).
+    // 0x0011EBF0: UNVERIFIED signature (src/game/tu_11d358_11ebf0.c).
     unsigned int Function_0011EBF0();
-    // 0x00382BE0: UNVERIFIED signature (src/tu/tu_382500.c).
+    // 0x00382BE0: UNVERIFIED signature (src/game/tu_382500_382bd8.c).
     int Function_00382BE0();
 
     // Vtable 0x003DADC0; vptr field offset unknown; referenced zero RTTI header.

@@ -22,11 +22,11 @@ struct UnknownVtable_003DB3B8 {
     inline unsigned int & Field_00A0() { return *(unsigned int *)((unsigned char *)this + 0xA0); }
     // 0x001004B0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001004B0();
-    // 0x001005C0: UNVERIFIED signature (src/tu/tu_100518.c).
+    // 0x001005C0: UNVERIFIED signature (src/game/tu_100518_1005a0.c).
     unsigned int Function_001005C0();
     // 0x00100628: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00100628();
-    // 0x00101040: UNVERIFIED signature (src/tu/tu_100518.c).
+    // 0x00101040: UNVERIFIED signature (src/game/tu_100518_1005a0.c).
     unsigned int Function_00101040();
 
     // Vtable 0x003DB3B8; vptr field offset unknown; referenced zero RTTI header.

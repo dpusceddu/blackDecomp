@@ -90,13 +90,13 @@ struct UnknownVtable_003E2508 {
     inline unsigned int & Field_00EC() { return *(unsigned int *)((unsigned char *)this + 0xEC); }
     // 0x0026BD30: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0026BD30();
-    // 0x0026BE68: UNVERIFIED signature (src/auto/game/26be68.c).
+    // 0x0026BE68: UNVERIFIED signature (src/game/tu_26baf8_26be68.c).
     unsigned int Function_0026BE68(int argument0);
     // 0x0026BE78: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_0026BE78(unsigned int argument0, unsigned int argument1);
-    // 0x0026BEA0: UNVERIFIED signature (src/auto/game/26bea0.c).
+    // 0x0026BEA0: UNVERIFIED signature (src/game/tu_26baf8_26bea0.c).
     int Function_0026BEA0();
-    // 0x0026C100: UNVERIFIED signature (src/campaign/graphics_controller_update.cpp).
+    // 0x0026C100: UNVERIFIED signature (src/game/graphics_controller_update.cpp).
     void Function_0026C100();
 
     // Vtable 0x003E2508; vptr field offset unknown; referenced zero RTTI header.

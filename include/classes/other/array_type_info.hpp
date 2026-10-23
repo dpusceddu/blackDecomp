@@ -13,7 +13,7 @@ namespace BlackPS2Classes {
 struct array_type_info {
     typedef Hierarchy_array_type_info Hierarchy; // Semantic bases, not an object layout.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x00371260: UNVERIFIED signature (src/auto/unclassified/371260.c).
+    // 0x00371260: UNVERIFIED signature (src/libc/tu_3707a0_371260.c).
     int * Function_00371260();
 
     // Vtable 0x0040C080; vptr field offset unknown; RTTI header.

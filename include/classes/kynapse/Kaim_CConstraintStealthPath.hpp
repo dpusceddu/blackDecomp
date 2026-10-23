@@ -88,9 +88,9 @@ struct Kaim_CConstraintStealthPath {
     inline float & Field_014C() { return *(float *)((unsigned char *)this + 0x14C); }
     // 0x150: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0150() { return *(float *)((unsigned char *)this + 0x150); }
-    // 0x002F0FF8: UNVERIFIED signature (src/context/behaviors_constraints.cpp).
+    // 0x002F0FF8: UNVERIFIED signature (src/kynapse/behaviors_constraints.cpp).
     unsigned char Function_002F0FF8(void * argument0, void * argument1, float * argument2);
-    // 0x00383D48: UNVERIFIED signature (src/auto/kynapse/383d48.c).
+    // 0x00383D48: UNVERIFIED signature (src/kynapse/linkonce_383d48.c).
     unsigned int Function_00383D48();
     // 0x00390270: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00390270();

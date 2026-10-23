@@ -62,9 +62,9 @@ struct UnknownVtable_003E0888 {
     int Function_001EDDE0(unsigned int argument0, float argument1);
     // 0x001EDE98: UNVERIFIED signature (include/campaign/graphics/sound_envelopes.hpp).
     int Function_001EDE98();
-    // 0x001EE270: UNVERIFIED signature (src/tu/tu_1ed9c8.c).
+    // 0x001EE270: UNVERIFIED signature (src/game/tu_1ed9c8_1eddb8.c).
     unsigned int Function_001EE270();
-    // 0x00384660: UNVERIFIED signature (src/auto/other/384660.c).
+    // 0x00384660: UNVERIFIED signature (src/linkonce/linkonce_384660.c).
     unsigned int Function_00384660(float argument0);
 
     // Vtable 0x003E0888; vptr field offset unknown; referenced zero RTTI header.

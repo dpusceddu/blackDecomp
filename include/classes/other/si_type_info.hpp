@@ -15,7 +15,7 @@ struct si_type_info {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x003701D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_003701D8(void * argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, unsigned int argument4);
-    // 0x00370548: UNVERIFIED signature (src/tu/370548.c).
+    // 0x00370548: UNVERIFIED signature (src/libc/tu_3700d0_370548.c).
     int * Function_00370548();
 
     // Vtable 0x0040BF00; vptr field offset unknown; RTTI header.

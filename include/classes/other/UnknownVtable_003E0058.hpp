@@ -14,23 +14,23 @@ struct UnknownVtable_003E0058 {
     inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
     // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
-    // 0x002E55A0: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E55A0: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E55A0(void * argument0);
     // 0x002E5660: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002E5660(unsigned int argument0);
-    // 0x002E5768: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E5768: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     unsigned char Function_002E5768(void * argument0);
-    // 0x003842C8: UNVERIFIED signature (src/auto/other/3842a0.c).
+    // 0x003842C8: UNVERIFIED signature (src/linkonce/linkonce_3842a0.c).
     int Function_003842C8(int argument0);
-    // 0x00384318: UNVERIFIED signature (src/auto/other/384318.c).
+    // 0x00384318: UNVERIFIED signature (src/linkonce/linkonce_384318.c).
     void * Function_00384318(int argument0, void * argument1);
     // 0x00384360: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     int Function_00384360(int argument0);
-    // 0x00384388: UNVERIFIED signature (src/auto/other/384388.c).
+    // 0x00384388: UNVERIFIED signature (src/linkonce/linkonce_384388.c).
     unsigned int Function_00384388(int argument0);
-    // 0x003843B0: UNVERIFIED signature (src/auto/other/3843b0.c).
+    // 0x003843B0: UNVERIFIED signature (src/linkonce/linkonce_3843b0.c).
     unsigned int Function_003843B0();
-    // 0x003843B8: UNVERIFIED signature (src/auto/other/3843b0.c).
+    // 0x003843B8: UNVERIFIED signature (src/linkonce/linkonce_3843b0.c).
     int Function_003843B8();
 
     // Vtable 0x003E0058; vptr field offset 0x0; referenced zero RTTI header.

@@ -10,11 +10,11 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003D34B8 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0034E7C0: UNVERIFIED signature (src/tu/animation_graph_34b498.c).
+    // 0x0034E7C0: UNVERIFIED signature (src/animation/tu_34b498.c).
     void Function_0034E7C0(void * argument0, void * argument1);
     // 0x0034E828: UNVERIFIED signature (include/animation/graph.h).
     void * Function_0034E828(void * argument0, void * argument1);
-    // 0x0034E908: UNVERIFIED signature (src/tu/animation_graph_34b498.c).
+    // 0x0034E908: UNVERIFIED signature (src/animation/tu_34b498.c).
     void Function_0034E908(void * argument0, void * argument1);
 
     // Vtable 0x003D34B8; vptr field offset unknown; unverified zero-adjustment function run.

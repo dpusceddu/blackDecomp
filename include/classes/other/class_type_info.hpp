@@ -15,7 +15,7 @@ struct class_type_info {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x00370270: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00370270(void * argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, unsigned int argument4);
-    // 0x003704B8: UNVERIFIED signature (src/tu/3704b8.c).
+    // 0x003704B8: UNVERIFIED signature (src/libc/tu_3700d0_3704b8.c).
     int * Function_003704B8();
 
     // Vtable 0x0040BEE8; vptr field offset unknown; RTTI header.

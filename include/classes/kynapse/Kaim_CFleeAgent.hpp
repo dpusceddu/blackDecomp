@@ -78,11 +78,11 @@ struct Kaim_CFleeAgent {
     inline unsigned char & Field_0078() { return *(unsigned char *)((unsigned char *)this + 0x78); }
     // 0x84: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0084() { return *(float *)((unsigned char *)this + 0x84); }
-    // 0x002D16B8: UNVERIFIED signature (src/campaign/behaviors_flee.cpp).
+    // 0x002D16B8: UNVERIFIED signature (src/kynapse/behaviors_flee.cpp).
     unsigned char Function_002D16B8(void * argument0);
     // 0x002D1918: UNVERIFIED signature (include/kynapse/flee_agent.hpp).
     unsigned char Function_002D1918(void * argument0);
-    // 0x002D1D48: UNVERIFIED signature (src/campaign/behaviors_flee_wave6.cpp).
+    // 0x002D1D48: UNVERIFIED signature (src/kynapse/behaviors_flee_2d1918.cpp).
     unsigned char Function_002D1D48();
     // 0x002D2DB8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D2DB8();
@@ -90,7 +90,7 @@ struct Kaim_CFleeAgent {
     unsigned char Function_002D2E48();
     // 0x002D2E68: UNVERIFIED signature (src/kynapse/predicates_2d2e48.cpp).
     unsigned char Function_002D2E68();
-    // 0x002D2F48: UNVERIFIED signature (src/campaign/behaviors_flee_wave6.cpp).
+    // 0x002D2F48: UNVERIFIED signature (src/kynapse/behaviors_flee_2d1918.cpp).
     int Function_002D2F48();
     // 0x002D2F80: UNVERIFIED signature (src/kynapse/flee_agent_2d1610.cpp).
     float Function_002D2F80(void * argument0, int argument1, float argument2, int argument3);

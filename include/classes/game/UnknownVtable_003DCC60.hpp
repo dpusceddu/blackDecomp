@@ -14,15 +14,15 @@ struct UnknownVtable_003DCC60 {
     inline unsigned char & Field_0078() { return *(unsigned char *)((unsigned char *)this + 0x78); }
     // 0x0013EE20: UNVERIFIED signature (include/campaign/actor/state.hpp).
     unsigned int Function_0013EE20();
-    // 0x0013EE38: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE38: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     int Function_0013EE38();
-    // 0x0013EE48: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE48: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE48();
-    // 0x0013EE50: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE50: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE50();
-    // 0x0013EE58: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE58: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE58();
-    // 0x0013EE60: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE60: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE60();
 
     // Vtable 0x003DCC60; vptr field offset unknown; referenced zero RTTI header.

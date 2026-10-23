@@ -14,11 +14,11 @@ struct UnknownVtable_003E1208 {
     inline unsigned int & Field_0014() { return *(unsigned int *)((unsigned char *)this + 0x14); }
     // 0x34: UNVERIFIED type; PS2 access offset.
     inline int & Field_0034() { return *(int *)((unsigned char *)this + 0x34); }
-    // 0x00231288: UNVERIFIED signature (src/tu/apt_tu_230710.c).
+    // 0x00231288: UNVERIFIED signature (src/apt/tu_230710_231288.c).
     int * Function_00231288(int argument0);
-    // 0x00231338: UNVERIFIED signature (src/tu/apt_tu_230710.c).
+    // 0x00231338: UNVERIFIED signature (src/apt/tu_230710_231288.c).
     int * Function_00231338();
-    // 0x00386628: UNVERIFIED signature (src/tu/3865c0.c).
+    // 0x00386628: UNVERIFIED signature (src/linkonce/linkonce_385660_3865c0.c).
     int Function_00386628();
 
     // Vtable 0x003E1208; vptr field offset unknown; referenced zero RTTI header.

@@ -16,9 +16,9 @@ struct Kaim_CConstraintShortestPath {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x002F20A0: UNVERIFIED signature (src/context/behaviors_constraints.cpp).
+    // 0x002F20A0: UNVERIFIED signature (src/kynapse/behaviors_constraints.cpp).
     unsigned char Function_002F20A0(void * argument0, void * argument1, float * argument2);
-    // 0x00383D48: UNVERIFIED signature (src/auto/kynapse/383d48.c).
+    // 0x00383D48: UNVERIFIED signature (src/kynapse/linkonce_383d48.c).
     unsigned int Function_00383D48();
     // 0x003901C0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003901C0();

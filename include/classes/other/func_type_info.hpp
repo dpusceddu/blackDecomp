@@ -13,7 +13,7 @@ namespace BlackPS2Classes {
 struct func_type_info {
     typedef Hierarchy_func_type_info Hierarchy; // Semantic bases, not an object layout.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x003713B0: UNVERIFIED signature (src/auto/unclassified/3713b0.c).
+    // 0x003713B0: UNVERIFIED signature (src/libc/tu_3707a0_3713b0.c).
     int * Function_003713B0();
 
     // Vtable 0x0040C0B0; vptr field offset unknown; RTTI header.

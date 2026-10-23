@@ -20,29 +20,29 @@ struct UnknownVtable_003DF8F0 {
     inline S128 & Field_0030() { return *(S128 *)((unsigned char *)this + 0x30); }
     // 0x40: UNVERIFIED type; PS2 access offset.
     inline int & Field_0040() { return *(int *)((unsigned char *)this + 0x40); }
-    // 0x00193970: UNVERIFIED signature (src/auto/game/193970.c).
+    // 0x00193970: UNVERIFIED signature (src/game/tu_193970.c).
     unsigned int Function_00193970(int argument0);
-    // 0x00193978: UNVERIFIED signature (src/auto/game/193970.c).
+    // 0x00193978: UNVERIFIED signature (src/game/tu_193970.c).
     unsigned int Function_00193978();
-    // 0x001A13B8: UNVERIFIED signature (src/auto/game/1a13b8.c).
+    // 0x001A13B8: UNVERIFIED signature (src/game/tu_1a13b8.c).
     unsigned int Function_001A13B8();
     // 0x001A13F8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A13F8(void * argument0);
-    // 0x001A1620: UNVERIFIED signature (src/auto/game/1a1620.c).
+    // 0x001A1620: UNVERIFIED signature (src/game/tu_1a1620.c).
     unsigned int Function_001A1620();
     // 0x001A1640: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A1640();
-    // 0x001A1708: UNVERIFIED signature (src/auto/game/1a1708.c).
+    // 0x001A1708: UNVERIFIED signature (src/game/tu_1a1708.c).
     int Function_001A1708(int argument0);
-    // 0x00383DB8: UNVERIFIED signature (src/auto/other/383db8.c).
+    // 0x00383DB8: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
     unsigned int Function_00383DB8();
-    // 0x00383DC0: UNVERIFIED signature (src/auto/other/383db8.c).
+    // 0x00383DC0: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
     int Function_00383DC0();
-    // 0x00383DD0: UNVERIFIED signature (src/auto/other/383db8.c).
+    // 0x00383DD0: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
     unsigned int Function_00383DD0();
-    // 0x00383DD8: UNVERIFIED signature (src/auto/other/383db8.c).
+    // 0x00383DD8: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
     unsigned int Function_00383DD8();
-    // 0x00383DE0: UNVERIFIED signature (src/auto/other/383db8.c).
+    // 0x00383DE0: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
     unsigned int Function_00383DE0();
 
     // Vtable 0x003DF8F0; vptr field offset unknown; referenced zero RTTI header.

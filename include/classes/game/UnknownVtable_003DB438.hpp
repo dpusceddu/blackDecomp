@@ -14,9 +14,9 @@ struct UnknownVtable_003DB438 {
     inline float & Field_0008() { return *(float *)((unsigned char *)this + 0x8); }
     // 0x00121688: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00121688();
-    // 0x001217C8: UNVERIFIED signature (src/auto/game/1217c8.c).
+    // 0x001217C8: UNVERIFIED signature (src/game/tu_120068_1217c8.c).
     unsigned int Function_001217C8();
-    // 0x001217D0: UNVERIFIED signature (src/auto/game/1217c8.c).
+    // 0x001217D0: UNVERIFIED signature (src/game/tu_120068_1217c8.c).
     int Function_001217D0();
 
     // Vtable 0x003DB438; vptr field offset unknown; referenced zero RTTI header.

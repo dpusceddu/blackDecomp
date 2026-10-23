@@ -24,25 +24,25 @@ struct UnknownVtable_003DAFD0 {
     inline unsigned char & Field_005A() { return *(unsigned char *)((unsigned char *)this + 0x5A); }
     // 0x5B: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_005B() { return *(unsigned char *)((unsigned char *)this + 0x5B); }
-    // 0x0011D440: UNVERIFIED signature (src/tu/11d430.c).
+    // 0x0011D440: UNVERIFIED signature (src/game/tu_11d358_11d430.c).
     int Function_0011D440(int argument0);
-    // 0x0011DE30: UNVERIFIED signature (src/auto/game/11de30.c).
+    // 0x0011DE30: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
     unsigned int Function_0011DE30();
-    // 0x0011DE38: UNVERIFIED signature (src/auto/game/11de30.c).
+    // 0x0011DE38: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
     unsigned int Function_0011DE38();
-    // 0x0011EEE8: UNVERIFIED signature (src/tu/11eec8.c).
+    // 0x0011EEE8: UNVERIFIED signature (src/game/tu_11d358_11eec8.c).
     int Function_0011EEE8();
     // 0x0011EF08: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0011EF08();
-    // 0x0011F068: UNVERIFIED signature (src/tu/11f000.c).
+    // 0x0011F068: UNVERIFIED signature (src/game/tu_11d358_11f000.c).
     int Function_0011F068();
     // 0x0011F070: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0011F070();
-    // 0x0011F350: UNVERIFIED signature (src/auto/game/11f350.c).
+    // 0x0011F350: UNVERIFIED signature (src/game/tu_11d358_11f350.c).
     unsigned int Function_0011F350();
     // 0x0011F7E0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0011F7E0(unsigned int argument0, S128 argument1, unsigned int argument2, unsigned int argument3, void * argument4);
-    // 0x00382BE0: UNVERIFIED signature (src/tu/tu_382500.c).
+    // 0x00382BE0: UNVERIFIED signature (src/game/tu_382500_382bd8.c).
     int Function_00382BE0();
 
     // Vtable 0x003DAFD0; vptr field offset unknown; referenced zero RTTI header.

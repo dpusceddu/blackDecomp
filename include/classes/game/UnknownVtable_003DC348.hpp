@@ -30,15 +30,15 @@ struct UnknownVtable_003DC348 {
     inline unsigned char & Field_04E4() { return *(unsigned char *)((unsigned char *)this + 0x4E4); }
     // 0x4E5: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_04E5() { return *(unsigned char *)((unsigned char *)this + 0x4E5); }
-    // 0x0013EE58: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE58: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE58();
-    // 0x0013EE60: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE60: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE60();
-    // 0x00140CA0: UNVERIFIED signature (src/auto/game/140ca0.c).
+    // 0x00140CA0: UNVERIFIED signature (src/game/tu_140ca0.c).
     int Function_00140CA0();
     // 0x00141008: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00141008();
-    // 0x00141168: UNVERIFIED signature (src/auto/game/141168.c).
+    // 0x00141168: UNVERIFIED signature (src/game/tu_140ca0_141168.c).
     int Function_00141168();
     // 0x001411A0: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_001411A0(S128 argument0, S128 argument1, float argument2, unsigned char argument3, signed char argument4, float argument5, long argument6);

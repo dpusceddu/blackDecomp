@@ -34,17 +34,17 @@ struct UnknownVtable_003DD250 {
     inline S128 & Field_0070() { return *(S128 *)((unsigned char *)this + 0x70); }
     // 0x0018C938: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018C938();
-    // 0x0018CE18: UNVERIFIED signature (src/auto/game/18ce18.c).
+    // 0x0018CE18: UNVERIFIED signature (src/game/tu_18ce18.c).
     unsigned int Function_0018CE18();
-    // 0x0018CE68: UNVERIFIED signature (src/auto/game/18ce68.c).
+    // 0x0018CE68: UNVERIFIED signature (src/game/tu_18ce68.c).
     int Function_0018CE68();
     // 0x0018CE78: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0018CE78(unsigned int argument0);
-    // 0x00383FE8: UNVERIFIED signature (src/auto/other/383fd8.c).
+    // 0x00383FE8: UNVERIFIED signature (src/linkonce/linkonce_383fd8.c).
     int Function_00383FE8();
-    // 0x00383FF0: UNVERIFIED signature (src/auto/other/383fd8.c).
+    // 0x00383FF0: UNVERIFIED signature (src/linkonce/linkonce_383fd8.c).
     int Function_00383FF0();
-    // 0x00383FF8: UNVERIFIED signature (src/auto/other/383fd8.c).
+    // 0x00383FF8: UNVERIFIED signature (src/linkonce/linkonce_383fd8.c).
     unsigned int Function_00383FF8();
 
     // Vtable 0x003DD250; vptr field offset unknown; referenced zero RTTI header.

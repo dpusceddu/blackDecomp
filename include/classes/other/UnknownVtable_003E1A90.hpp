@@ -20,53 +20,53 @@ struct UnknownVtable_003E1A90 {
     inline int & Field_0034() { return *(int *)((unsigned char *)this + 0x34); }
     // 0x38: UNVERIFIED type; PS2 access offset.
     inline int & Field_0038() { return *(int *)((unsigned char *)this + 0x38); }
-    // 0x0024F578: UNVERIFIED signature (src/tu/apt_tu_24ce90.c).
+    // 0x0024F578: UNVERIFIED signature (src/apt/tu_24ce90_24f578.c).
     int Function_0024F578();
     // 0x0024F5D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0024F5D8();
-    // 0x0024F760: UNVERIFIED signature (src/tu/apt_tu_24ce90.c).
+    // 0x0024F760: UNVERIFIED signature (src/apt/tu_24ce90_24f578.c).
     int Function_0024F760();
-    // 0x0024F768: UNVERIFIED signature (src/tu/apt_tu_24ce90.c).
+    // 0x0024F768: UNVERIFIED signature (src/apt/tu_24ce90_24f578.c).
     int Function_0024F768();
     // 0x00250518: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00250518(unsigned int argument0, void * argument1);
-    // 0x002521F0: UNVERIFIED signature (src/auto/game/2521f0.c).
+    // 0x002521F0: UNVERIFIED signature (src/apt/tu_251938_2521f0.c).
     unsigned int Function_002521F0();
     // 0x002521F8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002521F8();
     // 0x00252280: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int * Function_00252280();
-    // 0x00252310: UNVERIFIED signature (src/auto/game/252310.c).
+    // 0x00252310: UNVERIFIED signature (src/apt/tu_251938_252310.c).
     int Function_00252310(int * argument0);
     // 0x00252328: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00252328(void * argument0);
     // 0x00384E70: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00384E70();
-    // 0x00384F00: UNVERIFIED signature (src/auto/other/384f00.c).
+    // 0x00384F00: UNVERIFIED signature (src/linkonce/linkonce_384f00.c).
     int Function_00384F00();
     // 0x00384F08: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F50: UNVERIFIED signature (src/auto/other/384f40.c).
+    // 0x00384F50: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
     int Function_00384F50();
     // 0x00385528: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00385528(int argument0);
-    // 0x00385548: UNVERIFIED signature (src/auto/other/385548.c).
+    // 0x00385548: UNVERIFIED signature (src/linkonce/linkonce_385548.c).
     int Function_00385548();
     // 0x003857A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003857A0();
-    // 0x00385E00: UNVERIFIED signature (src/auto/other/385db0.c).
+    // 0x00385E00: UNVERIFIED signature (src/linkonce/linkonce_385660_385db0.c).
     int Function_00385E00();
-    // 0x00385E08: UNVERIFIED signature (src/auto/other/385db0.c).
+    // 0x00385E08: UNVERIFIED signature (src/linkonce/linkonce_385660_385db0.c).
     int Function_00385E08();
-    // 0x00385E10: UNVERIFIED signature (src/auto/other/385db0.c).
+    // 0x00385E10: UNVERIFIED signature (src/linkonce/linkonce_385660_385db0.c).
     int Function_00385E10();
-    // 0x00385E18: UNVERIFIED signature (src/auto/other/385db0.c).
+    // 0x00385E18: UNVERIFIED signature (src/linkonce/linkonce_385660_385db0.c).
     int Function_00385E18();
     // 0x00385E20: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00385E20();
-    // 0x00385E68: UNVERIFIED signature (src/auto/other/385e68.c).
+    // 0x00385E68: UNVERIFIED signature (src/linkonce/linkonce_385660_385e68.c).
     unsigned int Function_00385E68();
-    // 0x00385E70: UNVERIFIED signature (src/auto/other/385e68.c).
+    // 0x00385E70: UNVERIFIED signature (src/linkonce/linkonce_385660_385e68.c).
     int Function_00385E70();
     // 0x00385E78: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int * Function_00385E78(unsigned int argument0);

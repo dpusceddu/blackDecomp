@@ -24,25 +24,25 @@ struct UnknownVtable_003DD5D0 {
     inline float & Field_0070() { return *(float *)((unsigned char *)this + 0x70); }
     // 0x88: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0088() { return *(unsigned char *)((unsigned char *)this + 0x88); }
-    // 0x001A2580: UNVERIFIED signature (src/auto/game/1a2580.c).
+    // 0x001A2580: UNVERIFIED signature (src/game/tu_1a24b8_1a2580.c).
     int Function_001A2580();
-    // 0x001A2588: UNVERIFIED signature (src/auto/game/1a2580.c).
+    // 0x001A2588: UNVERIFIED signature (src/game/tu_1a24b8_1a2580.c).
     unsigned int Function_001A2588();
     // 0x001A2590: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001A2590();
-    // 0x001A2610: UNVERIFIED signature (src/auto/game/1a2610.c).
+    // 0x001A2610: UNVERIFIED signature (src/game/tu_1a24b8_1a2610.c).
     unsigned int Function_001A2610();
-    // 0x001A2698: UNVERIFIED signature (src/tu/1a2620.c).
+    // 0x001A2698: UNVERIFIED signature (src/game/tu_1a24b8_1a2620.c).
     int Function_001A2698(int argument0);
-    // 0x001A3A08: UNVERIFIED signature (src/tu/tu_1a24b8_1a3a08.c).
+    // 0x001A3A08: UNVERIFIED signature (src/game/tu_1a24b8_1a3a08.c).
     int Function_001A3A08();
     // 0x001A3A50: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A3A50(unsigned int argument0);
     // 0x001A3F68: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A3F68(unsigned int argument0);
-    // 0x001A40D8: UNVERIFIED signature (src/tu/tu_1a24b8_1a3a08.c).
+    // 0x001A40D8: UNVERIFIED signature (src/game/tu_1a24b8_1a3a08.c).
     int Function_001A40D8();
-    // 0x00383D38: UNVERIFIED signature (src/auto/unclassified/383d38.c).
+    // 0x00383D38: UNVERIFIED signature (src/linkonce/linkonce_383d38.c).
     unsigned int Function_00383D38();
 
     // Vtable 0x003DD5D0; vptr field offset unknown; referenced zero RTTI header.

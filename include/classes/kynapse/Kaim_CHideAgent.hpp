@@ -76,11 +76,11 @@ struct Kaim_CHideAgent {
     inline int & Field_0070() { return *(int *)((unsigned char *)this + 0x70); }
     // 0x78: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0078() { return *(float *)((unsigned char *)this + 0x78); }
-    // 0x002D3D38: UNVERIFIED signature (src/campaign/behaviors_hide.cpp).
+    // 0x002D3D38: UNVERIFIED signature (src/kynapse/behaviors_hide.cpp).
     unsigned char Function_002D3D38(void * argument0);
-    // 0x002D3F10: UNVERIFIED signature (src/context/behaviors_hide_retry.cpp).
+    // 0x002D3F10: UNVERIFIED signature (src/kynapse/behaviors_hide_retry.cpp).
     unsigned char Function_002D3F10(void * argument0);
-    // 0x002D42C8: UNVERIFIED signature (src/campaign/behaviors_hide_wave6.cpp).
+    // 0x002D42C8: UNVERIFIED signature (src/kynapse/behaviors_hide_2d42c8.cpp).
     unsigned char Function_002D42C8();
     // 0x002D4B68: UNVERIFIED signature (src/kynapse/hide_agent_2d3c90.cpp).
     int Function_002D4B68(void * argument0, void * argument1, float * argument2, unsigned char * argument3, unsigned char * argument4);

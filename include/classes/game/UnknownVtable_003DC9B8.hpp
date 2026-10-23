@@ -28,17 +28,17 @@ struct UnknownVtable_003DC9B8 {
     inline unsigned char & Field_00C1() { return *(unsigned char *)((unsigned char *)this + 0xC1); }
     // 0xC4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_00C4() { return *(unsigned int *)((unsigned char *)this + 0xC4); }
-    // 0x0013DCA0: UNVERIFIED signature (src/tu/13dc38.c).
+    // 0x0013DCA0: UNVERIFIED signature (src/game/tu_13db40_13dc38.c).
     int Function_0013DCA0();
-    // 0x0013DD18: UNVERIFIED signature (src/auto/game/13dd18.c).
+    // 0x0013DD18: UNVERIFIED signature (src/game/tu_13db40_13dd18.c).
     int Function_0013DD18();
     // 0x0013DD68: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_0013DD68();
-    // 0x0013EE50: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE50: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE50();
-    // 0x0013EE58: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE58: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE58();
-    // 0x0013EE60: UNVERIFIED signature (src/tu/13ee20.c).
+    // 0x0013EE60: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE60();
 
     // Vtable 0x003DC9B8; vptr field offset unknown; referenced zero RTTI header.

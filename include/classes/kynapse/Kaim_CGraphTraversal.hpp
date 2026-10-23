@@ -22,9 +22,9 @@ struct Kaim_CGraphTraversal {
     unsigned int Function_003915C8(void * argument0);
     // 0x00391DD8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00391DD8();
-    // 0x00391E10: UNVERIFIED signature (src/auto/kynapse/391e10.c).
+    // 0x00391E10: UNVERIFIED signature (src/kynapse/linkonce_391e10.c).
     int Function_00391E10();
-    // 0x00391E18: UNVERIFIED signature (src/auto/kynapse/391e10.c).
+    // 0x00391E18: UNVERIFIED signature (src/kynapse/linkonce_391e10.c).
     int Function_00391E18();
 
     // Vtable 0x003EED70; vptr field offset unknown; RTTI header.

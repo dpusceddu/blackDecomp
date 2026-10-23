@@ -13,7 +13,7 @@ source file still shows the TU in address order. The constants of the unit keep 
 The automatic pipeline registers adjacent exact drafts in groups of at most 24 without knowing the translation units. A
 group is a run of adjacent functions that a unit replaces as a whole, so any run of adjacent functions with the same
 compiler and flags inside one TU can be one unit: its source is the concatenation of the sources (declarations once, then the
-bodies in address order) and it is written to src/tu/<first address>.c. The merge only has to leave the linked image identical:
+bodies in address order) and it is written to src/<library>/<tu>.c (tools/layout.py). The merge only has to leave the linked image identical:
 `settle_units.py` compiles and links, and a merged unit that fails (a constant pool the original did not have, a declaration
 that no longer agrees with a definition in the same file, ...) is replaced by the units it came from.
 
@@ -29,6 +29,7 @@ import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from units import load_units, ROOT
+import layout
 import units_verify
 
 SLUG = 'usa-retail'
@@ -129,11 +130,10 @@ def merged_unit(name, group, sections=False, taken=None):
     pre_all = [l for l in pre_all if not (l.startswith('extern') and re.search(r'\b(%s)\s*\(' % '|'.join(map(re.escape, defined)), l))]
     text = '\n'.join(inc_all) + '\n\n' + ('\n'.join(pre_all) + '\n\n' if pre_all else '') + '\n\n'.join(n + b for n, b in zip(notes, bodies)) + '\n'
     first = group[0]['functions'][0]['addr']
-    rel = 'src/tu/%06x.c' % first
+    rel = layout.source_path(first)
     flags = base_flags(group[0])
     if sections:
         base = name.replace('/', '_')
-        rel = 'src/tu/%s.c' % (base if base not in taken else '%s_%06x' % (base, first))
         taken.add(base)
         flags.append('-ffunction-sections')
         text = '/* Translation unit %s of the TU map: its source functions in address order; assembly functions between them stay\n   in the image and are placed by address. */\n' % name + text
@@ -143,7 +143,7 @@ def merged_unit(name, group, sections=False, taken=None):
         k += 1
         rel = '%s_%d.c' % (stem, k)
     funcs = [dict(f) for u in group for f in u['functions']]
-    return dict(name=('tuf_' if sections else 'tu_') + '%06x' % first, source=rel, origin='auto', compiler=group[0]['compiler'],
+    return dict(name=('tuf_' if sections else 'tu_') + '%06x' % first, source=rel, library=Path(rel).parts[1], provenance='auto', tier='exact', origin='auto', compiler=group[0]['compiler'],
                 flags=flags, externs=externs, functions=funcs), text
 
 

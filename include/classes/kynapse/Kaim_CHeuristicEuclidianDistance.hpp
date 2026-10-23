@@ -16,7 +16,7 @@ struct Kaim_CHeuristicEuclidianDistance {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x00383D50: UNVERIFIED signature (src/auto/unclassified/383d50.c).
+    // 0x00383D50: UNVERIFIED signature (src/linkonce/linkonce_383d50.c).
     unsigned int Function_00383D50();
     // 0x003905A8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003905A8();

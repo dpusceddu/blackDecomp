@@ -60,11 +60,11 @@ struct Kaim_CSpatialGraph {
     int Function_002F6E08(unsigned int argument0);
     // 0x002F7D80: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     bool Function_002F7D80(const char * argument0);
-    // 0x002F7F48: UNVERIFIED signature (src/campaign/graph_spatial_wave6.cpp).
+    // 0x002F7F48: UNVERIFIED signature (src/kynapse/graph_spatial.cpp).
     unsigned char Function_002F7F48(void * argument0);
     // 0x002F8238: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F8238(unsigned int argument0, unsigned int argument1);
-    // 0x002F8C38: UNVERIFIED signature (src/campaign/graph_cspatialgraph_lifetime.cpp).
+    // 0x002F8C38: UNVERIFIED signature (src/kynapse/graph_cspatialgraph_lifetime.cpp).
     void Function_002F8C38();
     // 0x002FB4D8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002FB4D8();

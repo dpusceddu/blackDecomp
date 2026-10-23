@@ -18,9 +18,9 @@ struct UnknownVtable_003E0180 {
     signed char * Function_001A9908(signed char * argument0, signed char * argument1, unsigned int argument2, float argument3);
     // 0x001A9ED0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A9ED0(signed char * argument0, signed char * argument1);
-    // 0x001AA280: UNVERIFIED signature (src/game/actor/firing_animation.c).
+    // 0x001AA280: UNVERIFIED signature (src/game/firing_animation.c).
     void Function_001AA280(void * argument0, void * argument1, int argument2, int argument3);
-    // 0x001AA490: UNVERIFIED signature (src/game/actor/firing_animation.c).
+    // 0x001AA490: UNVERIFIED signature (src/game/firing_animation.c).
     void Function_001AA490(void * argument0, void * argument1, int argument2, int argument3);
     // 0x001AA9D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001AA9D8(signed char * argument0, signed char * argument1, unsigned int argument2, float argument3);
@@ -40,23 +40,23 @@ struct UnknownVtable_003E0180 {
     void Function_001AD880(signed char * argument0, void * argument1);
     // 0x001AD918: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
     void Function_001AD918(signed char * argument0, void * argument1);
-    // 0x001AD9B0: UNVERIFIED signature (src/auto/game/1ad9b0.c).
+    // 0x001AD9B0: UNVERIFIED signature (src/game/tu_1a83a0_1ad9b0.c).
     signed char * Function_001AD9B0(signed char * argument0, signed char * argument1);
-    // 0x001AD9E0: UNVERIFIED signature (src/auto/game/1ad9b0.c).
+    // 0x001AD9E0: UNVERIFIED signature (src/game/tu_1a83a0_1ad9b0.c).
     signed char * Function_001AD9E0(signed char * argument0, signed char * argument1);
-    // 0x001ADA10: UNVERIFIED signature (src/auto/game/1ad9b0.c).
+    // 0x001ADA10: UNVERIFIED signature (src/game/tu_1a83a0_1ad9b0.c).
     signed char * Function_001ADA10(signed char * argument0, signed char * argument1);
-    // 0x001ADA40: UNVERIFIED signature (src/auto/game/1ad9b0.c).
+    // 0x001ADA40: UNVERIFIED signature (src/game/tu_1a83a0_1ad9b0.c).
     signed char * Function_001ADA40(signed char * argument0, signed char * argument1);
-    // 0x001ADA70: UNVERIFIED signature (src/auto/game/1ad9b0.c).
+    // 0x001ADA70: UNVERIFIED signature (src/game/tu_1a83a0_1ad9b0.c).
     signed char * Function_001ADA70(signed char * argument0, signed char * argument1);
     // 0x001ADAA0: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
     void Function_001ADAA0(signed char * argument0, void * argument1, long argument2);
-    // 0x001ADAF8: UNVERIFIED signature (src/auto/game/1adaf8.c).
+    // 0x001ADAF8: UNVERIFIED signature (src/game/tu_1a83a0_1adaf8.c).
     signed char * Function_001ADAF8(signed char * argument0, signed char * argument1);
     // 0x001ADB28: UNVERIFIED signature (include/campaign/graphics/animation_selector.hpp).
     void Function_001ADB28(signed char * argument0, void * argument1);
-    // 0x00384410: UNVERIFIED signature (src/auto/other/3843b0.c).
+    // 0x00384410: UNVERIFIED signature (src/linkonce/linkonce_3843b0.c).
     unsigned int Function_00384410();
 
     // Vtable 0x003E0180; vptr field offset unknown; referenced zero RTTI header.

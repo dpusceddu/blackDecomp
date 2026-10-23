@@ -12,13 +12,13 @@ struct UnknownVtable_003E2838 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x102E: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_102E() { return *(unsigned char *)((unsigned char *)this + 0x102E); }
-    // 0x0027FE68: UNVERIFIED signature (src/tu/tu_27fcf8.c).
+    // 0x0027FE68: UNVERIFIED signature (src/game/tu_27fcf8_27fe68.c).
     int Function_0027FE68();
     // 0x00282828: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00282828(signed char * argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, unsigned int argument4, unsigned int argument5);
-    // 0x00282880: UNVERIFIED signature (src/auto/game/282880.c).
+    // 0x00282880: UNVERIFIED signature (src/game/tu_281388_282880.c).
     unsigned int Function_00282880();
-    // 0x00282888: UNVERIFIED signature (src/auto/game/282880.c).
+    // 0x00282888: UNVERIFIED signature (src/game/tu_281388_282880.c).
     int Function_00282888();
 
     // Vtable 0x003E2838; vptr field offset unknown; referenced zero RTTI header.

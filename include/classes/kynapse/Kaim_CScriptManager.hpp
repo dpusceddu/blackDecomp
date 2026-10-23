@@ -17,7 +17,7 @@ struct Kaim_CScriptManager {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x002DCB80: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002DCB80();
-    // 0x002DD1B8: UNVERIFIED signature (src/tu/kynapse_tu_2dca40.c).
+    // 0x002DD1B8: UNVERIFIED signature (src/kynapse/tu_2dca40_2dd158.c).
     int Function_002DD1B8(void * argument0);
     // 0x002DD1E8: UNVERIFIED signature (include/context/behaviors/scriptmanager.hpp).
     int Function_002DD1E8(void * argument0);

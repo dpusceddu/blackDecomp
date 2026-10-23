@@ -27,21 +27,21 @@ struct Kaim_CBasicAllocator {
     typedef void (*FieldType_0014)(int);
     // 0x14: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline FieldType_0014 & Field_0014() { return *(FieldType_0014 *)((unsigned char *)this + 0x14); }
-    // 0x002E55A0: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E55A0: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E55A0(void * argument0);
     // 0x002E5660: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002E5660(unsigned int argument0);
-    // 0x002E5768: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E5768: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     unsigned char Function_002E5768(void * argument0);
-    // 0x002E6DD8: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E6DD8: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E6DD8(unsigned int argument0, void * argument1);
-    // 0x002E6E60: UNVERIFIED signature (src/campaign/graph_allocators.cpp).
+    // 0x002E6E60: UNVERIFIED signature (src/kynapse/graph_allocators.cpp).
     void * Function_002E6E60(unsigned int argument0, void * argument1);
     // 0x002E6F10: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002E6F10();
     // 0x002E6F90: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_002E6F90(int argument0);
-    // 0x002E6FB0: UNVERIFIED signature (src/tu/kynapse_tu_2e5358.c).
+    // 0x002E6FB0: UNVERIFIED signature (src/kynapse/tu_2e5358_2e5848.c).
     void * Function_002E6FB0(int argument0);
     // 0x002E7008: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_002E7008(int argument0);

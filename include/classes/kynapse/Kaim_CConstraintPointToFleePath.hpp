@@ -36,9 +36,9 @@ struct Kaim_CConstraintPointToFleePath {
     inline int & Field_0144() { return *(int *)((unsigned char *)this + 0x144); }
     // 0x148: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0148() { return *(int *)((unsigned char *)this + 0x148); }
-    // 0x002F18D8: UNVERIFIED signature (src/context/behaviors_constraints.cpp).
+    // 0x002F18D8: UNVERIFIED signature (src/kynapse/behaviors_constraints.cpp).
     unsigned char Function_002F18D8(void * argument0, void * argument1, float * argument2);
-    // 0x00383D48: UNVERIFIED signature (src/auto/kynapse/383d48.c).
+    // 0x00383D48: UNVERIFIED signature (src/kynapse/linkonce_383d48.c).
     unsigned int Function_00383D48();
     // 0x003903B8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003903B8();

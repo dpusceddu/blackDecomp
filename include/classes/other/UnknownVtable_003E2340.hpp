@@ -32,27 +32,27 @@ struct UnknownVtable_003E2340 {
     int Function_0023B4B0();
     // 0x0023BB28: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0023BB28();
-    // 0x0023BCA0: UNVERIFIED signature (src/auto/game/23bca0.c).
+    // 0x0023BCA0: UNVERIFIED signature (src/apt/tu_236ac0_23bca0.c).
     void * Function_0023BCA0();
-    // 0x0023BCC0: UNVERIFIED signature (src/auto/game/23bca0.c).
+    // 0x0023BCC0: UNVERIFIED signature (src/apt/tu_236ac0_23bca0.c).
     int Function_0023BCC0();
-    // 0x0023BCE0: UNVERIFIED signature (src/auto/game/23bca0.c).
+    // 0x0023BCE0: UNVERIFIED signature (src/apt/tu_236ac0_23bca0.c).
     int Function_0023BCE0(void * argument0, void * argument1);
-    // 0x0023BD00: UNVERIFIED signature (src/auto/game/23bca0.c).
+    // 0x0023BD00: UNVERIFIED signature (src/apt/tu_236ac0_23bca0.c).
     int Function_0023BD00(void * argument0, unsigned short ** argument1, int * argument2);
     // 0x0023BD28: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0023BD28();
-    // 0x0024F578: UNVERIFIED signature (src/tu/apt_tu_24ce90.c).
+    // 0x0024F578: UNVERIFIED signature (src/apt/tu_24ce90_24f578.c).
     int Function_0024F578();
     // 0x00384E70: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00384E70();
     // 0x00384F08: UNVERIFIED signature (include/campaign/graphics/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F50: UNVERIFIED signature (src/auto/other/384f40.c).
+    // 0x00384F50: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
     int Function_00384F50();
-    // 0x00384F68: UNVERIFIED signature (src/auto/other/384f68.c).
+    // 0x00384F68: UNVERIFIED signature (src/linkonce/linkonce_384f68.c).
     int Function_00384F68(int argument0);
-    // 0x00384F90: UNVERIFIED signature (src/auto/other/384f90.c).
+    // 0x00384F90: UNVERIFIED signature (src/linkonce/linkonce_384f90.c).
     int Function_00384F90();
 
     // Vtable 0x003E2340; vptr field offset unknown; referenced zero RTTI header.

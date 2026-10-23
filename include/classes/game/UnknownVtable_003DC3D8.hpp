@@ -10,23 +10,23 @@ namespace BlackPS2Classes {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003DC3D8 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x00126090: UNVERIFIED signature (src/auto/game/126090.c).
+    // 0x00126090: UNVERIFIED signature (src/game/tu_126090.c).
     unsigned int Function_00126090();
-    // 0x001261F8: UNVERIFIED signature (src/auto/game/1261f8.c).
+    // 0x001261F8: UNVERIFIED signature (src/game/tu_1261f8.c).
     int Function_001261F8();
-    // 0x0014FDA0: UNVERIFIED signature (src/auto/game/14fda0.c).
+    // 0x0014FDA0: UNVERIFIED signature (src/game/tu_14fda0.c).
     int Function_0014FDA0();
-    // 0x00383768: UNVERIFIED signature (src/auto/other/383768.c).
+    // 0x00383768: UNVERIFIED signature (src/game/tu_383768.c).
     int Function_00383768();
-    // 0x00383770: UNVERIFIED signature (src/auto/other/383770.c).
+    // 0x00383770: UNVERIFIED signature (src/game/tu_383770.c).
     unsigned int Function_00383770();
-    // 0x00383778: UNVERIFIED signature (src/auto/other/383770.c).
+    // 0x00383778: UNVERIFIED signature (src/game/tu_383770.c).
     unsigned int Function_00383778();
-    // 0x00383780: UNVERIFIED signature (src/auto/other/383770.c).
+    // 0x00383780: UNVERIFIED signature (src/game/tu_383770.c).
     float Function_00383780();
-    // 0x00383948: UNVERIFIED signature (src/auto/other/383948.c).
+    // 0x00383948: UNVERIFIED signature (src/game/tu_383948.c).
     unsigned int Function_00383948();
-    // 0x00383950: UNVERIFIED signature (src/auto/other/383948.c).
+    // 0x00383950: UNVERIFIED signature (src/game/tu_383948.c).
     unsigned int Function_00383950();
 
     // Vtable 0x003DC3D8; vptr field offset unknown; unverified zero-adjustment function run.

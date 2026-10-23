@@ -68,59 +68,59 @@ struct UnknownVtable_003DCB38 {
     inline unsigned char & Field_0155() { return *(unsigned char *)((unsigned char *)this + 0x155); }
     // 0x158: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0158() { return *(unsigned int *)((unsigned char *)this + 0x158); }
-    // 0x00125E20: UNVERIFIED signature (src/auto/game/125e20.c).
+    // 0x00125E20: UNVERIFIED signature (src/game/tu_125e20.c).
     unsigned int Function_00125E20();
-    // 0x00125E30: UNVERIFIED signature (src/auto/game/125e20.c).
+    // 0x00125E30: UNVERIFIED signature (src/game/tu_125e20.c).
     unsigned int Function_00125E30();
-    // 0x00125E38: UNVERIFIED signature (src/auto/game/125e20.c).
+    // 0x00125E38: UNVERIFIED signature (src/game/tu_125e20.c).
     unsigned int Function_00125E38();
-    // 0x00126090: UNVERIFIED signature (src/auto/game/126090.c).
+    // 0x00126090: UNVERIFIED signature (src/game/tu_126090.c).
     unsigned int Function_00126090();
-    // 0x001261F8: UNVERIFIED signature (src/auto/game/1261f8.c).
+    // 0x001261F8: UNVERIFIED signature (src/game/tu_1261f8.c).
     int Function_001261F8();
     // 0x0014BD58: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0014BD58(void * argument0, void * argument1);
-    // 0x0014C100: UNVERIFIED signature (src/tu/14c100.c).
+    // 0x0014C100: UNVERIFIED signature (src/game/tu_14be20_14c100.c).
     int Function_0014C100(unsigned int argument0, unsigned int argument1, int argument2, int argument3, void * argument4, int argument5);
-    // 0x0014C120: UNVERIFIED signature (src/tu/14c100.c).
+    // 0x0014C120: UNVERIFIED signature (src/game/tu_14be20_14c100.c).
     int Function_0014C120(int argument0, int argument1, int argument2, int argument3, int argument4);
-    // 0x0014C140: UNVERIFIED signature (src/tu/14c100.c).
+    // 0x0014C140: UNVERIFIED signature (src/game/tu_14be20_14c100.c).
     int Function_0014C140(int argument0, int argument1, void * argument2);
-    // 0x0014C160: UNVERIFIED signature (src/auto/game/14c160.c).
+    // 0x0014C160: UNVERIFIED signature (src/game/tu_14be20_14c160.c).
     int Function_0014C160(int argument0, int argument1, int argument2, int argument3);
-    // 0x0014C3D0: UNVERIFIED signature (src/auto/game/14c330.c).
+    // 0x0014C3D0: UNVERIFIED signature (src/game/tu_14be20_14c330.c).
     int Function_0014C3D0();
-    // 0x0014EDE0: UNVERIFIED signature (src/campaign/actor_cb38_reset_wave4.cpp).
+    // 0x0014EDE0: UNVERIFIED signature (src/game/actor_cb38_reset.cpp).
     void Function_0014EDE0();
-    // 0x0014F348: UNVERIFIED signature (src/auto/game/14f348.c).
+    // 0x0014F348: UNVERIFIED signature (src/game/tu_14f348.c).
     int Function_0014F348();
-    // 0x0014F380: UNVERIFIED signature (src/campaign/actor_cb38_wave4.cpp).
+    // 0x0014F380: UNVERIFIED signature (src/game/actor_cb38.cpp).
     void Function_0014F380(float argument0);
-    // 0x0014F490: UNVERIFIED signature (src/tu/tu_14f380.c).
+    // 0x0014F490: UNVERIFIED signature (src/game/tu_14f380_14f490.c).
     int Function_0014F490();
     // 0x0014F498: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0014F498(unsigned int argument0);
-    // 0x0014F668: UNVERIFIED signature (src/campaign/actor_cb38_wave4.cpp).
+    // 0x0014F668: UNVERIFIED signature (src/game/actor_cb38.cpp).
     void Function_0014F668();
-    // 0x0014F6F0: UNVERIFIED signature (src/tu/tu_14f380.c).
+    // 0x0014F6F0: UNVERIFIED signature (src/game/tu_14f380_14f490.c).
     int Function_0014F6F0(int argument0);
-    // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
+    // 0x00165B00: UNVERIFIED signature (src/game/actor_event_fanout.cpp).
     void Function_00165B00(int argument0);
-    // 0x00383768: UNVERIFIED signature (src/auto/other/383768.c).
+    // 0x00383768: UNVERIFIED signature (src/game/tu_383768.c).
     int Function_00383768();
-    // 0x00383780: UNVERIFIED signature (src/auto/other/383770.c).
+    // 0x00383780: UNVERIFIED signature (src/game/tu_383770.c).
     float Function_00383780();
-    // 0x00383790: UNVERIFIED signature (src/auto/other/383770.c).
+    // 0x00383790: UNVERIFIED signature (src/game/tu_383770.c).
     unsigned int Function_00383790();
-    // 0x003837A0: UNVERIFIED signature (src/auto/other/3837a0.c).
+    // 0x003837A0: UNVERIFIED signature (src/game/tu_3837a0.c).
     int Function_003837A0();
-    // 0x003837C0: UNVERIFIED signature (src/auto/other/3837c0.c).
+    // 0x003837C0: UNVERIFIED signature (src/game/tu_3837c0.c).
     int Function_003837C0();
-    // 0x003837C8: UNVERIFIED signature (src/auto/other/3837c8.c).
+    // 0x003837C8: UNVERIFIED signature (src/game/tu_3837c8.c).
     int Function_003837C8();
-    // 0x003837D0: UNVERIFIED signature (src/auto/other/3837c8.c).
+    // 0x003837D0: UNVERIFIED signature (src/game/tu_3837c8.c).
     int Function_003837D0();
-    // 0x003837D8: UNVERIFIED signature (src/auto/other/3837c8.c).
+    // 0x003837D8: UNVERIFIED signature (src/game/tu_3837c8.c).
     int Function_003837D8();
 
     // Vtable 0x003DCB38; vptr field offset unknown; referenced zero RTTI header.

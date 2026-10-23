@@ -15,7 +15,7 @@ struct user_type_info {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x003701A8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003701A8(void * argument0, unsigned int argument1, unsigned int argument2);
-    // 0x003705D0: UNVERIFIED signature (src/tu/3705d0.c).
+    // 0x003705D0: UNVERIFIED signature (src/libc/tu_3700d0_3705d0.c).
     int * Function_003705D0();
 
     // Vtable 0x0040BF18; vptr field offset unknown; RTTI header.

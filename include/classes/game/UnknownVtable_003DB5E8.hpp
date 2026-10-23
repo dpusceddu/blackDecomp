@@ -26,17 +26,17 @@ struct UnknownVtable_003DB5E8 {
     int Function_00104210();
     // 0x001046B0: UNVERIFIED signature (include/game/frontend_resources.hpp).
     unsigned int Function_001046B0();
-    // 0x00104D60: UNVERIFIED signature (src/campaign/graphics_frontend_104d60.cpp).
+    // 0x00104D60: UNVERIFIED signature (src/game/graphics_frontend_104d60.cpp).
     int Function_00104D60();
     // 0x00104E10: UNVERIFIED signature (include/game/frontend_resources.hpp).
     int Function_00104E10();
     // 0x00105058: UNVERIFIED signature (src/game/frontend_menu_destroy.cpp).
     void Function_00105058();
-    // 0x00382330: UNVERIFIED signature (src/auto/unclassified/382330.c).
+    // 0x00382330: UNVERIFIED signature (src/game/tu_382330.c).
     unsigned int Function_00382330();
-    // 0x00382338: UNVERIFIED signature (src/auto/unclassified/382338.c).
+    // 0x00382338: UNVERIFIED signature (src/game/tu_382338.c).
     unsigned int Function_00382338();
-    // 0x00382340: UNVERIFIED signature (src/auto/other/382340.c).
+    // 0x00382340: UNVERIFIED signature (src/game/tu_382340.c).
     unsigned int Function_00382340();
 
     // Vtable 0x003DB5E8; vptr field offset unknown; referenced zero RTTI header.

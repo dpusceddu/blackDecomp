@@ -36,11 +36,11 @@ struct UnknownVtable_003DD078 {
     int Function_00171B80();
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
     void Function_002E4CA8();
-    // 0x00384070: UNVERIFIED signature (src/auto/other/384070.c).
+    // 0x00384070: UNVERIFIED signature (src/linkonce/linkonce_384070.c).
     int Function_00384070(int argument0);
-    // 0x003840C0: UNVERIFIED signature (src/auto/other/3840c0.c).
+    // 0x003840C0: UNVERIFIED signature (src/linkonce/linkonce_3840c0.c).
     int * Function_003840C0();
-    // 0x0038CBA0: UNVERIFIED signature (src/auto/kynapse/38cba0.c).
+    // 0x0038CBA0: UNVERIFIED signature (src/kynapse/linkonce_38cba0.c).
     int Function_0038CBA0();
 
     // Vtable 0x003DD078; vptr field offset unknown; referenced zero RTTI header.

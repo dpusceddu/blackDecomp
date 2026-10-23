@@ -20,9 +20,9 @@ struct UnknownVtable_003DB070 {
     inline void * & Field_0020() { return *(void * *)((unsigned char *)this + 0x20); }
     // 0x00115D38: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00115D38();
-    // 0x00115D60: UNVERIFIED signature (src/auto/game/115d60.c).
+    // 0x00115D60: UNVERIFIED signature (src/game/tu_115d60.c).
     unsigned int Function_00115D60();
-    // 0x00115D68: UNVERIFIED signature (src/auto/game/115d60.c).
+    // 0x00115D68: UNVERIFIED signature (src/game/tu_115d60.c).
     int Function_00115D68();
     // 0x00115DA8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00115DA8();

@@ -30,7 +30,7 @@ struct Kaim_CPathCostData {
     int Function_002F3770(void * argument0);
     // 0x002F3AB0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002F3AB0();
-    // 0x002F4100: UNVERIFIED signature (src/campaign/graph_cpathcostdata.cpp).
+    // 0x002F4100: UNVERIFIED signature (src/kynapse/graph_cpathcostdata.cpp).
     int Function_002F4100(void * argument0);
     // 0x002F42B8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002F42B8();

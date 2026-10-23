@@ -22,11 +22,11 @@ struct ComputeAccessWaysTraversal {
     inline void * & Field_0008() { return *(void * *)((unsigned char *)this + 0x8); }
     // 0x003915C8: UNVERIFIED signature (include/campaign/graph/spatial.hpp).
     unsigned int Function_003915C8(void * argument0);
-    // 0x00391E18: UNVERIFIED signature (src/auto/kynapse/391e10.c).
+    // 0x00391E18: UNVERIFIED signature (src/kynapse/linkonce_391e10.c).
     int Function_00391E18();
     // 0x00392DC0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00392DC0();
-    // 0x00392E48: UNVERIFIED signature (src/auto/kynapse/392df8.c).
+    // 0x00392E48: UNVERIFIED signature (src/kynapse/linkonce_392df8.c).
     unsigned int Function_00392E48(int argument0);
     // 0x00392E50: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00392E50(void * argument0);

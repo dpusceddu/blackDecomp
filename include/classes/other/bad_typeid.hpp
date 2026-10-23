@@ -14,7 +14,7 @@ struct bad_typeid {
     typedef Hierarchy_bad_typeid Hierarchy; // Semantic bases, not an object layout.
     // Destructor identity: 0x003705F0.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0036FF88: UNVERIFIED signature (src/tu/libstdcxx_typeinfo_tu_36f978.c).
+    // 0x0036FF88: UNVERIFIED signature (src/libc/tu_36f978_36f9b0.c).
     int Function_0036FF88();
     // 0x003705F0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003705F0();

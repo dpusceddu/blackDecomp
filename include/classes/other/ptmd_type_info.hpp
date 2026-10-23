@@ -13,7 +13,7 @@ namespace BlackPS2Classes {
 struct ptmd_type_info {
     typedef Hierarchy_ptmd_type_info Hierarchy; // Semantic bases, not an object layout.
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x003712D0: UNVERIFIED signature (src/auto/unclassified/3712d0.c).
+    // 0x003712D0: UNVERIFIED signature (src/libc/tu_3707a0_3712d0.c).
     int * Function_003712D0();
 
     // Vtable 0x0040C090; vptr field offset unknown; RTTI header.

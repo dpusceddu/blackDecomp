@@ -22,21 +22,21 @@ struct UnknownVtable_003DB708 {
     inline unsigned char & Field_001C() { return *(unsigned char *)((unsigned char *)this + 0x1C); }
     // 0x20: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0020() { return *(void * *)((unsigned char *)this + 0x20); }
-    // 0x00160ED0: UNVERIFIED signature (src/tu/tu_15d958_160ea0.c).
+    // 0x00160ED0: UNVERIFIED signature (src/game/tu_15d958_160ea0.c).
     unsigned int Function_00160ED0();
-    // 0x00163498: UNVERIFIED signature (src/auto/game/163498.c).
+    // 0x00163498: UNVERIFIED signature (src/game/tu_163498.c).
     int * Function_00163498(int argument0);
     // 0x001634D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001634D8(unsigned long argument0, unsigned int argument1);
-    // 0x00163530: UNVERIFIED signature (src/auto/game/163530.c).
+    // 0x00163530: UNVERIFIED signature (src/game/tu_163530.c).
     int Function_00163530();
-    // 0x00163550: UNVERIFIED signature (src/auto/game/163550.c).
+    // 0x00163550: UNVERIFIED signature (src/game/tu_163550.c).
     unsigned int Function_00163550();
-    // 0x00163580: UNVERIFIED signature (src/auto/game/163580.c).
+    // 0x00163580: UNVERIFIED signature (src/game/tu_163580.c).
     unsigned int Function_00163580();
-    // 0x00165B00: UNVERIFIED signature (src/campaign/actor_event_fanout.cpp).
+    // 0x00165B00: UNVERIFIED signature (src/game/actor_event_fanout.cpp).
     void Function_00165B00(int argument0);
-    // 0x00165B90: UNVERIFIED signature (src/tu/tu_1650b8_165af8.c).
+    // 0x00165B90: UNVERIFIED signature (src/game/tu_1650b8_165af8.c).
     unsigned int Function_00165B90();
 
     // Vtable 0x003DB708; vptr field offset unknown; referenced zero RTTI header.

@@ -12,9 +12,9 @@ struct UnknownVtable_003DCCA0 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x002904E8: UNVERIFIED signature (src/tu/sony_unidentified_tu_2902f8.c).
+    // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
-    // 0x00383B20: UNVERIFIED signature (src/auto/unclassified/383b20.c).
+    // 0x00383B20: UNVERIFIED signature (src/game/tu_383b20.c).
     int * Function_00383B20(int argument0);
 
     // Vtable 0x003DCCA0; vptr field offset unknown; referenced zero RTTI header.
