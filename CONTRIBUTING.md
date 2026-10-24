@@ -21,13 +21,20 @@ be committed.
 Each translation unit (TU) is one file, `src/<library>/tu_<address>.c|cpp`, that lists every function of the TU in address
 order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines.
 
+0. Setup for the loop: `ninja` once, then `ninja objdiff`, and open the repository root in the
+   [objdiff](https://github.com/encounter/objdiff) GUI. Pick the unit and the function; every time you save the TU file objdiff
+   rebuilds the unit's object (`tools/objdiff.py --build`, through the build backend) and shows the diff. `ninja` remains the
+   byte-exact check of the whole image.
 1. Read the [matching handbook](docs/matching-handbook.md) before each TU: measured recipes for the usual obstructions and
    the order in which to try things. Types, callee signatures and object lifetimes explain most mismatches. The assembly of a
    function is `asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s` after the first `ninja`.
 2. Replace the function's `INCLUDE_ASM` line with your C or C++ and run `ninja`. It ends with `OK`, or with
-   `MISMATCH src/game/tu_100258.c: func_00100258: differs from the original` (compile errors name the file too). Drafts come
-   from `python3 tools/autodecomp.py run ...` ([docs/pipeline.md](docs/pipeline.md)), or write the source by hand and try one
-   function with `python3 tools/trysrc.py ADDR file.c`; `autodecomp.py register` then `settle` put exact drafts into their TU files.
+   `MISMATCH src/game/tu_100258.c: func_00100258: differs from the original` (compile errors name the file too). A first
+   draft: `python3 tools/decompile.py func_00100258` prints an m2c draft (with the project's context) and the file and line
+   it belongs to; `--write` replaces the `INCLUDE_ASM` line in place, and you then edit and rebuild. For many functions at
+   once, `python3 tools/autodecomp.py run ...` ([docs/pipeline.md](docs/pipeline.md)); to try one hand-written function without
+   editing the TU, `python3 tools/trysrc.py ADDR file.c`. When a few instructions differ, run
+   [decomp-permuter](docs/pipeline.md#using-decomp-permuter-directly) on the function directly.
 3. If it does not match yet, keep the readable version under `#ifdef NON_MATCHING` with the marker as the `#else` branch, and a
    one-line `// Unmatched:` comment saying what differs. `python3 configure.py --non-matching` followed by `ninja` builds all
    drafts into a separate, non-matching executable (`python3 configure.py` goes back):
@@ -65,6 +72,13 @@ Evidence tiers matter: never describe a function as more than its tier (`exact`,
   credentials. Local settings go in `.local/` (ignored).
 - Small logical commits with a clear message (what and why). One TU or one tool change per commit is ideal.
 - Keep documentation short and current; update the relevant file in `docs/` when behavior changes.
+
+## Checking and inspecting a build
+
+`ninja` ends with `tools/check_elf.py`, which compares the rebuilt executable with the expected hashes and names the
+functions that differ. `tools/diffelf.py REF BUILT` diffs two executables section by section and `tools/objdump.py` prints
+the sections, symbols and relocations of an object file; they are conveniences, not requirements. The ordinary binutils work
+on the same files: `mipsel-linux-gnu-objdump -d` and `mipsel-linux-gnu-readelf` (package `binutils-mipsel-linux-gnu`).
 
 ## Cleanup work
 

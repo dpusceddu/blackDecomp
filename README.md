@@ -112,12 +112,22 @@ The numbers are produced locally with `ninja badges` from `ninja progress`, whic
 image; anyone with the game can reproduce them with `ninja` and `ninja progress`. The objdiff report counts slightly
 differently ([docs/progress-reports.md](docs/progress-reports.md)).
 
-## Diffing with objdiff
+## Working on a function: objdiff
 
-`ninja objdiff` writes `objdiff.json` and, for every source unit, an object with the original code and an object compiled
-from source. Open the repository root in [objdiff](https://github.com/encounter/objdiff) to compare function by function.
-`ninja report` writes the progress report to `build/SLUS_213.76/report.json` (needs `python3 tools/toolchain.py install
---objdiff` once). Details: [docs/progress-reports.md](docs/progress-reports.md).
+The everyday loop is the one of other decompilation projects, in the [objdiff](https://github.com/encounter/objdiff) GUI:
+
+1. `ninja` once (it must print `OK`), then `ninja objdiff`: this writes `objdiff.json` and, for every source unit, an object
+   with the original code and an object compiled from source.
+2. Open the repository root in objdiff, pick the translation unit and the function.
+3. Edit the unit's file in `src/` (replace the function's `INCLUDE_ASM` line with C or C++). objdiff rebuilds the unit through
+   the build backend and shows the instruction diff; edit until it is clean.
+4. Run `ninja` for the byte-exact check of the whole image.
+
+To get a first draft of a function that is still assembly, run `python3 tools/decompile.py func_XXXXXXXX` (m2c draft with the
+project's context, plus the file and line to put it; `--write` does it for you). For the last differing instructions use
+[decomp-permuter](docs/pipeline.md#using-decomp-permuter-directly) directly. `ninja report` writes the progress report to
+`build/SLUS_213.76/report.json` (needs `python3 tools/toolchain.py install --objdiff` once). Details:
+[docs/progress-reports.md](docs/progress-reports.md).
 
 ## Modding notes
 
@@ -154,8 +164,9 @@ back into the identical image. A translation unit file lists all functions of it
 compiler reproduces the original instructions and the full image stays identical, the function is *exact*. Details:
 [docs/build.md](docs/build.md), [docs/units.md](docs/units.md), [docs/matching-handbook.md](docs/matching-handbook.md), [docs/tools.md](docs/tools.md) (index of the tools).
 
-**How do I work on a function?** Open its TU file (`python3 tools/next.py tus` lists candidates), replace the function's
-`INCLUDE_ASM(...)` line with C or C++, run `ninja`: it prints `OK`, or the file and function that differ. A draft that does not
+**How do I work on a function?** Pick a TU (`python3 tools/next.py tus` lists candidates), get a draft with `python3
+tools/decompile.py func_XXXXXXXX` if you like, replace the function's `INCLUDE_ASM(...)` line with C or C++, and compare in
+objdiff (see above); `ninja` prints `OK`, or the file and function that differ. A draft that does not
 match yet goes in `#ifdef NON_MATCHING` ... `#else` INCLUDE_ASM `#endif`; `python3 configure.py --non-matching` builds the drafts into
 a separate executable. Steps and an example: [CONTRIBUTING.md](CONTRIBUTING.md).
 
