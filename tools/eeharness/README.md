@@ -159,7 +159,7 @@ dispatcher iterations each; other device waits remain. Of 1,745 typed mutations,
 .venv/bin/python tools/eeharness/savestate_tests.py
 .venv/bin/python tools/eeharness/corpus_tests.py
 .venv/bin/python tools/eeharness/savestate.py --output build/eeharness/savestate-inputs.json
-# Requires a validated existing release harness; see compiler isolation above.
+# Requires a built release harness (see above).
 .venv/bin/python tools/eeharness/phase2.py --harness build/eeharness/release/eeharness --frames 40 --budget 16000000
 # Reanalyze unchanged corpora without repeating their interpreter execution:
 .venv/bin/python tools/eeharness/phase2.py --reuse-captures

@@ -1,5 +1,5 @@
 #include "kynapse/behaviors/pathway.hpp"
-// Unmatched: class campaign is recovering the remaining C++ member context.
+// Unmatched: the remaining C++ member context is still being recovered.
 
 #include "kynapse/behaviors/pathway.hpp"
 namespace Kaim {

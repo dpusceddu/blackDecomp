@@ -1,7 +1,7 @@
 # Shared PS2 inline context
 
 The shared context maintainer owns this directory and `config/shared_context.json`.
-`tools/shared_context.py verify` runs the isolated build, preserves the HEAD source-address set,
+`tools/shared_context.py verify` runs the build, preserves the HEAD source-address set,
 and checks the manifest's real consumers against retail instructions and relocation targets.
 The complete image must also remain identical. Verification details stay in ignored build output.
 

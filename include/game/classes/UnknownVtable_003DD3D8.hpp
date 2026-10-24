@@ -132,7 +132,7 @@ struct UnknownVtable_003DD3D8 {
     unsigned char Function_00304D98();
     // 0x00304DA8: UNVERIFIED signature (src/kynapse/predicates_304d98.cpp).
     unsigned char Function_00304DA8();
-    // 0x00304DB8: UNVERIFIED signature (src/kynapse/route_campaign.cpp).
+    // 0x00304DB8: UNVERIFIED signature (src/kynapse/route_manual.cpp).
     unsigned char Function_00304DB8();
     // 0x00304DE8: UNVERIFIED signature (src/kynapse/ai_route_follower_304de8.cpp).
     unsigned char Function_00304DE8(void * argument0);

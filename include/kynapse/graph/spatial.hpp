@@ -1,7 +1,7 @@
 // PS2 class view: RTTI and vtable identity are known. Accessed graph offsets
 // agree with the executable; native array initialization is checked against the loaders,
 // but their source shape remains UNVERIFIED. Complete size, opaque fields and unused signatures
-// remain UNVERIFIED. This campaign area is owned by the graph worker.
+// remain UNVERIFIED. This area is owned by the graph code.
 #ifndef BLACK_CAMPAIGN_GRAPH_SPATIAL_HPP
 #define BLACK_CAMPAIGN_GRAPH_SPATIAL_HPP
 #include "kynapse/graph/tables.hpp"

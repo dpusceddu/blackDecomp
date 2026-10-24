@@ -96,7 +96,7 @@ Dumps and generated assembly stay under `build/`.
 
 A scalar divide with otherwise identical instructions can expose a compiler-default workaround. Reproduce
 `.venv/bin/python tools/studies/divide_compiler_control.py`: the unchanged `0x3484D0` field expression is **2**
-instructions short under SN 1.36 and **exact** under catalog Sony `ee-gcc2.9-991111-01`. This leaf uses no wide ABI;
+instructions short under SN 1.36 and **exact** under Sony `ee-gcc2.9-991111-01`. This leaf uses no wide ABI;
 its two field offsets are asserted. Sony `ee-gcc2.96` also matches: disabling its accepted
 `-mhandle-ee-div-pipeline-bug` option removes exactly those two instructions, establishing the workaround effect.
 SN 114/136 and 273a reject that option; accepted CPU and division switches leave the two-slot deficit. The related 300-byte fade body regresses **4→12** differences under Sony,
