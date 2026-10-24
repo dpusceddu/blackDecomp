@@ -29,15 +29,16 @@ be committed.
    [docs/units.md](docs/units.md).
 4. Leave a one-line `// Unmatched:` comment on every function that stays inexact, saying what differs. Do not keep
    per-function journals in `src/`; measured results belong in the handbook.
-5. Run `ninja`, `ninja progress` and the tests (below).
+5. Run `ninja`, `ninja progress` and the tests (below). If the change moves progress, run `ninja badges` and commit
+   `progress/` (and the table it refreshes in `README.md`) with it.
 
 Evidence tiers matter: never describe a function as more than its tier (`exact`, `equivalent`, `draft`).
 
 ## Commit rules
 
-- **The build stays identical.** Every commit leaves `ninja` printing `OK` for USA retail (`SLUS_213.76`), and the other four
-  versions must still rebuild identically if you touched shared code or data (`python3 configure.py --version SLES_538.86`,
-  and so on). `ninja progress` must not regress: never demote a previously exact function to claim a gain.
+- **The build stays identical.** Every commit leaves `ninja` printing `OK` for USA retail (`SLUS_213.76`), the only version
+  routine work builds and checks. The other four versions are rebuilt from assembly; run `python3 tools/check_versions.py`
+  (all five, `OK` or `MISMATCH` each) before a release and after changing shared build tools, linker or splitting code. `ninja progress` must not regress: never demote a previously exact function to claim a gain.
 - **Never commit game data**: no executables, disc contents, extracted files, generated assembly (`asm/`, `build/`, `data/`),
   savestates, compiler archives or build output. They live in ignored directories. Generated headers and data are committed
   only when a tool in `tools/` owns and can regenerate them.

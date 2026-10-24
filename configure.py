@@ -68,6 +68,10 @@ rule report
   command = $py tools/objdiff.py {slug} --report
   description = generate the objdiff progress report ({b}/report.json)
   pool = console
+rule badges
+  command = $py tools/badges.py {slug}
+  description = write the progress badges and table (progress/, README.md)
+  pool = console
 rule check
   command = $py tools/check_elf.py {slug} {b}/{boot}.elf --stamp $out
   description = compare with the target
@@ -83,6 +87,7 @@ build {b}/{boot}.elf: pack | {b}/linked.elf tools/pack_elf.py
 build {b}/ok.stamp: check | {b}/{boot}.elf tools/check_elf.py config/{slug}/checksums.sha256
 build progress: progress | {b}/linked.elf
 build objdiff: objdiff | {b}/linked.elf {tools('objdiff.py', 'objdiff_job.py')}
+build badges: badges | {b}/linked.elf {tools('badges.py', 'progress.py')} config/units.yaml
 build report: report | {b}/linked.elf {tools('objdiff.py', 'objdiff_job.py')}
 build all: phony {b}/ok.stamp
 default all

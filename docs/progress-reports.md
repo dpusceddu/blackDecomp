@@ -34,18 +34,11 @@ authority for exactness.
 To look at a function, open the repository root as an objdiff project (objdiff GUI: Project, Open). Build objects are not
 rebuilt by objdiff; re-run `ninja objdiff` after a change.
 
-## Publishing a report
+## Publishing
 
-A maintainer uploads reports; CI does not, because generating one needs a finished build and therefore the game executable,
-and uploading needs a secret. The repository workflows contain neither.
+The README badges and table are written by `ninja badges` (`tools/badges.py`) from `ninja progress`, not from this report:
+that metric is exact, covers the whole image and needs no extra download. The files are committed under `progress/` and
+served by shields.io from the repository. The objdiff report (`build/SLUS_213.76/report.json`) stays available for any
+tool that reads it; CI does not generate one, because that needs the game executable.
 
-decomp.dev was the usual home for such reports (`https://decomp.dev/dpusceddu/blackDecomp` would be this project's page). Its
-front page announces that the site is being sunset: existing projects continue to be served, but adding new projects is
-disabled. If the project is not already registered there, reports cannot be uploaded today. The report format
-(`build/SLUS_213.76/report.json`, objdiff's own) is not tied to the site: any tool that reads objdiff reports, or a plain
-badge built from `measures.matched_code_percent`, can use it. For a site that accepts uploads, the steps are the same:
-
-1. build with your own executable (`ninja`, then `ninja report`);
-2. take `build/SLUS_213.76/report.json` and, for a site that wants versions, `objdiff.json` next to it;
-3. upload it with the site's documented command or action, using a token that stays in your own environment (never in the
-   repository or in a public workflow).
+decomp.dev no longer accepts new projects (it is being sunset), so this project is not registered there.

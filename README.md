@@ -2,10 +2,8 @@
 
 [![CI](https://github.com/dpusceddu/blackDecomp/actions/workflows/ci.yml/badge.svg)](https://github.com/dpusceddu/blackDecomp/actions/workflows/ci.yml)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
-<!-- decomp.dev no longer accepts new projects (see docs/progress-reports.md). If the project is ever registered, uncomment:
-[![Code](https://decomp.dev/dpusceddu/blackDecomp.svg?mode=shield&measure=code&label=code)](https://decomp.dev/dpusceddu/blackDecomp)
-[![Functions](https://decomp.dev/dpusceddu/blackDecomp.svg?mode=shield&measure=functions&label=functions)](https://decomp.dev/dpusceddu/blackDecomp)
--->
+[![Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/code.json)](progress/summary.md)
+[![Functions](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/functions.json)](progress/summary.md)
 
 A work-in-progress matching decompilation of the PS2 version of *Black* (Criterion Games, 2006). The goal is readable C/C++
 source that compiles, with the original compilers, to the exact bytes of the retail executable. `ninja` rebuilds the executable
@@ -24,8 +22,10 @@ Each version is identified by the game ID of its boot executable (`SYSTEM.CNF`, 
 | `SLKA_253.72` | Korea | `fb59440b00444ff64be1436fd757452c3eead9e560532fad74e4d05e913a6b94` | yes, from assembly | none yet |
 | `SLPM_663.54` | Japan | `bf70d92152237eae6908e973d44dde8ce49d9e7e32b34e9b7ad41f79ad569f43` | yes, from assembly | none yet |
 
-"Rebuild matches" means `ninja` reproduces the executable byte for byte. Source units are written for the USA version; the
-other versions share most of that code and are rebuilt from their own disassembly.
+"Rebuild matches" means `ninja` reproduces the executable byte for byte. `SLUS_213.76` is the only version with recovered
+source and the only one that routine work builds, measures and checks. The other four are rebuilt from their own assembly
+and are checked before releases (`python3 tools/check_versions.py` configures and builds all five and prints `OK` or
+`MISMATCH` for each); their configurations stay committed. Source units are written for the USA version.
 
 ## Legal note
 
@@ -59,7 +59,8 @@ A build from scratch takes a few minutes; a rebuild after changing one file take
 OK  SLUS_213.76  SLUS_213.76  sha256 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
 ```
 
-or with a section-by-section mismatch report. Other versions: `python3 configure.py --version SLES_538.86` (and so on).
+or with a section-by-section mismatch report. Another version: `python3 configure.py --version SLES_538.86` (and so on); to
+check all five, run `python3 tools/check_versions.py`.
 
 **Windows**: use WSL 2 with Ubuntu and follow the Linux steps inside it (keep the checkout in the Linux file system).
 
@@ -83,7 +84,32 @@ On Apple silicon this relies on the emulation of x86-64 Linux containers and has
 ```sh
 ninja progress                              # share of .text and of functions provided by source, per region and TU
 python3 tools/progress.py --libraries       # ... per library directory of src/
+ninja badges                                # refresh progress/ (badge files, summary.md) and the table below
 ```
+
+Functions and bytes of `.text` rebuilt from recovered source (USA, `SLUS_213.76`):
+
+<!-- progress:begin (tools/badges.py) -->
+
+| Library | Functions from source | Share | Bytes from source | Share |
+| --- | ---: | ---: | ---: | ---: |
+| game | 2,908 / 6,650 | 43.7 % | 176,864 / 1,460,176 | 12.1 % |
+| kynapse | 687 / 905 | 75.9 % | 107,512 / 257,240 | 41.8 % |
+| rw_core | 85 / 449 | 18.9 % | 4,744 / 181,416 | 2.6 % |
+| rw_audio | 309 / 754 | 41.0 % | 23,368 / 109,560 | 21.3 % |
+| animation | 195 / 350 | 55.7 % | 26,128 / 69,680 | 37.5 % |
+| physics | 93 / 206 | 45.1 % | 11,864 / 78,240 | 15.2 % |
+| apt | 129 / 633 | 20.4 % | 7,520 / 267,744 | 2.8 % |
+| sony | 274 / 756 | 36.2 % | 9,000 / 142,096 | 6.3 % |
+| libc | 75 / 213 | 35.2 % | 4,088 / 70,472 | 5.8 % |
+| linkonce | 808 / 983 | 82.2 % | 39,296 / 78,840 | 49.8 % |
+| **Total** | **5,563 / 11,899** | **46.8 %** | **410,384 / 2,715,464** | **15.1 %** |
+
+<!-- progress:end -->
+
+The numbers are produced locally with `ninja badges` from `ninja progress`, which measures the finished, byte-identical
+image; anyone with the game can reproduce them with `ninja` and `ninja progress`. The objdiff report counts slightly
+differently ([docs/progress-reports.md](docs/progress-reports.md)).
 
 ## Diffing with objdiff
 
@@ -112,6 +138,7 @@ orig/<GAME_ID>/       your executable goes here (ignored by Git)
 src/<library>/        recovered source: game, kynapse, animation, physics, rw_core, rw_audio, apt, sony, libc, linkonce
 include/<library>/    headers per library, include/ps2/ for helpers shared by all
 tools/                build, analysis and pipeline tools; tools/studies/ keeps finished experiments
+progress/             badge files and the per-library table written by `ninja badges` (committed)
 docs/                 build, units, pipeline, TU map, matching handbook, status, history
 tests/                tests that need no game files
 asm/ build/ data/     generated, ignored
