@@ -20,6 +20,11 @@ def main():
     if slug not in json.loads((ROOT / 'config/variants.json').read_text()) or not (ROOT / 'config' / slug).is_dir():
         raise SystemExit('unknown version %s; see config/<GAME_ID>/' % slug)
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    sys.path.insert(0, str(ROOT / 'tools'))
+    import backend, toolchain
+    if backend.name() == 'local':        # a missing toolchain is reported here, not in the middle of the build
+        for line in toolchain.problems():
+            print('note: %s (python3 tools/toolchain.py install)' % line, file=sys.stderr)
     py = ROOT / '.venv/bin/python'
     py = str(py.relative_to(ROOT)) if py.exists() else sys.executable
     tools = lambda *n: ' '.join('tools/%s' % x for x in n)

@@ -23,7 +23,7 @@ ctor list      The linker's __CTOR_LIST__ in .data (a count word, that many poin
                `_GLOBAL__I_*` stub, which is a function start whether or not anything calls it. In USA retail one of the 116 entries,
                0x339c28, lies behind five orphan pieces that splat fused with it; the entry is added as a function start.
 
-Everything else that was suspected is not a boundary error and is not listed here (see README, "Function boundaries"):
+Everything else that was suspected is not a boundary error and is not listed here (see docs/build.md, "Function boundaries"):
 extents where Ghidra ends earlier than splat (Ghidra leaves out the delay slot, or stops at an indirect `jr` that is a
 computed jump inside the function), and "falls through" over-splits (the words after the function are its jump table).
 """
