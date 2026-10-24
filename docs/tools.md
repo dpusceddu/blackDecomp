@@ -66,6 +66,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/build/build_telemetry.py` | Append small worker-call records under ignored build directories. |
 | `tools/build/tus.py` | Translation-unit (TU) boundary evidence and the TU map of the boot executable. |
 | `tools/build/linkonce_owners.py` | Decide which library owns each link-once copy (compiler-emitted inline and template code) and write the owner list. |
+| `tools/build/boundaries.py` | Function boundaries splat cannot see: write build/<GAME_ID>/boundaries.txt (splat's symbol_addrs format), derived from the image. |
 
 ## Automatic pipeline (`tools/pipeline/`)
 
@@ -89,7 +90,6 @@ committed data. Tools import each other by bare module name; every tool puts `to
 
 | Tool | Purpose |
 | --- | --- |
-| `tools/maint/boundaries.py` | Function boundaries splat cannot see: write config/<GAME_ID>/boundaries.txt (splat's symbol_addrs format). |
 | `tools/maint/class_skeletons.py` | Generate conservative GCC 2.95 PS2 class interfaces from RTTI and vtables. |
 | `tools/maint/rtti_evidence.py` | Recover legacy GCC RTTI initialization evidence without executing target code. |
 | `tools/maint/shared_context.py` | Verify the shared PS2 inline context against its real source consumers. |

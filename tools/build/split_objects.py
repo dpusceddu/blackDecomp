@@ -2,7 +2,7 @@
 """Cut splat's output into one assembly file (and later one object) per function, migrating constants with them.
 
 Reads  asm/<GAME_ID>/text.s and asm/<GAME_ID>/data/*.s (splat), build/<GAME_ID>/extra_labels.txt (link_support.py),
-       config/<GAME_ID>/layout.json.
+       build/<GAME_ID>/layout.json.
 Writes asm/<GAME_ID>/nonmatchings/<function>.s   one function: its `.extern` block, code, and the constants only it uses
        (the files INCLUDE_ASM markers in src/ name; `.lit4` constants go to <function>.lit4.s)
        build/<GAME_ID>/s/<section>/<section>.<address>.s   the shared remainder of .rodata, .lit4 and .gcc_except_table
@@ -274,7 +274,7 @@ def main():
     slug = args[0]
     work = args[1] if len(args) > 1 else slug           # the asm/ and build/ directory names
     boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
-    layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
+    layout = json.loads((ROOT / 'build' / boot / 'layout.json').read_text())
     build = ROOT / 'build' / work
     src = build / 's'
     asm = ROOT / 'asm' / work

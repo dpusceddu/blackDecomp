@@ -16,7 +16,7 @@ are earlier builds and only give naming and ordering hints. The USA retail execu
 `ninja` rebuilds the boot ELF byte for byte for all five retail images. Facts that shaped the design:
 
 - GNU `ld` cannot write the retail container, so `tools/build/pack_elf.py` re-packs the linked sections from
-  `config/<GAME_ID>/layout.json`; DVP overlays and `.vutext`/`.vudata` are extracted payloads.
+  `build/<GAME_ID>/layout.json`; DVP overlays and `.vutext`/`.vudata` are extracted payloads.
 - One ld statement per object is quadratic (did not finish in 15 minutes for 12,000 objects): input sections are named
   `<section>.<address>` and placed by `SORT_BY_NAME`.
 - 200 NOPs inserted into one function relink with every symbolic reference moved (the image is shiftable); the
@@ -29,7 +29,7 @@ are earlier builds and only give naming and ordering hints. The USA retail execu
 - Constants travel with their function (74 % of `.rodata`, 88 % of `.lit4` migrate); `.gcc_except_table` belongs to whole
   object files and mostly stays shared.
 - Function boundaries: 1,169 orphan `<instruction>; nop` pieces sit between functions and are not code of either
-  neighbour; `tools/maint/boundaries.py` splits them off (123 functions that splat had fused with a piece now match
+  neighbour; `tools/build/boundaries.py` splits them off (123 functions that splat had fused with a piece now match
   individually) and adds the `__CTOR_LIST__` entries as starts.
 - An earlier analysis of the executable listed 9,946 functions (268 with a recovered name); splat finds 1,832 more starts. The
   names are now `alias` lines in `config/SLUS_213.76/symbols.txt` and the signatures live in `include/ps2/prototypes.h`.

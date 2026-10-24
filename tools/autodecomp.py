@@ -1926,7 +1926,7 @@ def verify_build():
     if link.returncode:
         run('tools/build/units_verify.py', 'link')
         return json.loads((BUILD / 'unit_problems.json').read_text()) or [[None, None, 'link']]
-    run('tools/build/pack_elf.py', BUILD / 'linked.elf', ROOT / 'config' / SLUG / 'layout.json', ROOT / 'data' / SLUG / 'elf',
+    run('tools/build/pack_elf.py', BUILD / 'linked.elf', ROOT / 'build' / SLUG / 'layout.json', ROOT / 'data' / SLUG / 'elf',
         BUILD / (json.loads((ROOT / 'config/versions.json').read_text())[SLUG]['boot'] + '.elf'))
     run('tools/build/units_verify.py', 'compare')
     return json.loads((BUILD / 'unit_problems.json').read_text())

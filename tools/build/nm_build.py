@@ -64,7 +64,7 @@ def main():
     else:
         raise SystemExit('nm_build: no stable set of translation units after 8 attempts')
     elf = out / (boot + '.nonmatching.elf')
-    p = run('tools/build/pack_elf.py', out / 'linked.elf', ROOT / 'config' / slug / 'layout.json', ROOT / 'data' / slug / 'elf', elf)
+    p = run('tools/build/pack_elf.py', out / 'linked.elf', ROOT / 'build' / slug / 'layout.json', ROOT / 'data' / slug / 'elf', elf)
     units = json.loads((out / 'units-nm.json').read_text())['units']
     kept = set(json.loads(fallback.read_text())) if fallback.exists() else set()
     asm = {f['addr'] for u in json.loads((ROOT / 'build' / slug / 'units.json').read_text())['units'] for f in u['functions'] if f['status'] == 'source'}

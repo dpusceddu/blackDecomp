@@ -36,6 +36,7 @@ def main():
     have = [n for n in ('splits.yaml', 'symbols.txt', 'equivalent.yaml') if (ROOT / 'config' / slug / n).exists()]
     inputs = ' '.join('config/%s/%s' % (slug, n) for n in have)
     sym = 'config/%s/symbols.txt' % slug if 'symbols.txt' in have else ''
+    explicit = 'config/%s/explicit_boundaries.txt' % slug if (ROOT / 'config' / slug / 'explicit_boundaries.txt').exists() else ''
     usa = slug == 'SLUS_213.76'       # the libraries, link-once owners and TU map exist for the version with recovered source
     derived = '%s/inline_owners.txt %s/tus.yaml' % (b, b) if usa else ''
     derived_rules = f"""build {b}/inline_owners.txt: owners | {b}/split.stamp config/{slug}/libraries.txt {tools('linkonce_owners.py', 'layout.py')}
@@ -50,8 +51,11 @@ py = {py}
 rule extract
   command = $py tools/build/splat_config.py {slug} && $py tools/build/elf_layout.py {slug} && touch $out
   description = extract section layout and blobs from the target image
+rule boundaries
+  command = $py tools/build/boundaries.py {slug}
+  description = function starts splat cannot see (build/{slug}/boundaries.txt)
 rule split
-  command = rm -rf asm/{slug} && $py -m splat split config/{slug}/splat.yaml > {b}/splat.log 2>&1 && touch $out
+  command = rm -rf asm/{slug} && $py -m splat split {b}/splat.yaml > {b}/splat.log 2>&1 && touch $out
   description = splat split (disassemble and split)
 rule support
   command = $py tools/build/link_support.py {slug}
@@ -89,7 +93,7 @@ rule link
   depfile = {b}/link.d
   pool = console
 rule pack
-  command = $py tools/build/pack_elf.py {b}/linked.elf config/{slug}/layout.json data/{slug}/elf {b}/{boot}.elf
+  command = $py tools/build/pack_elf.py {b}/linked.elf {b}/layout.json data/{slug}/elf {b}/{boot}.elf
   description = pack the ELF container
 rule progress
   command = $py tools/progress.py {slug}
@@ -119,15 +123,16 @@ rule check
   description = compare with the target
   pool = console
 
-build {b}/extract.stamp config/{slug}/splat.yaml config/{slug}/layout.json: extract orig/{slug}/{boot} | {tools('splat_config.py', 'elf_layout.py', 'elfinfo.py')}
-build {b}/split.stamp: split | {b}/extract.stamp config/{slug}/boundaries.txt
+build {b}/extract.stamp {b}/splat.yaml {b}/layout.json: extract orig/{slug}/{boot} | {tools('splat_config.py', 'elf_layout.py', 'elfinfo.py')}
+build {b}/boundaries.txt: boundaries | orig/{slug}/{boot} {tools('boundaries.py', 'elfinfo.py')} {explicit}
+build {b}/split.stamp: split | {b}/extract.stamp {b}/boundaries.txt
 build {b}/extra_labels.txt {b}/symbols.ld: support | {b}/split.stamp tools/build/link_support.py
 build {b}/functions.json: functions | {b}/extra_labels.txt tools/build/split_objects.py
 build {b}/units.json: units | {b}/functions.json {inputs} {tools('units.py', 'splits.py', 'include_asm.py')}
 build {b}/placement.json: objsplit | {b}/units.json {b}/extra_labels.txt tools/build/split_objects.py tools/build/fixasm.py tools/build/source_data.py
 build {b}/compiled.stamp: compile | {b}/placement.json {b}/units.json {b}/symbols.ld include/include_asm.h {tools('make_ld.py', 'build_objects.py', 'build_job.py', 'sandbox.py', 'assembler.py', 'source_data.py')}
 build {b}/unit_facts.json: verify | {b}/compiled.stamp tools/build/units_verify.py {sym}
-build {b}/link.ld {b}/objects.json: ldscript | {b}/unit_facts.json {b}/placement.json {b}/symbols.ld tools/build/make_ld.py tools/build/source_data.py config/{slug}/layout.json
+build {b}/link.ld {b}/objects.json: ldscript | {b}/unit_facts.json {b}/placement.json {b}/symbols.ld tools/build/make_ld.py tools/build/source_data.py {b}/layout.json
 build {b}/linked.elf: link | {b}/link.ld {b}/objects.json include/macro.inc {tools('build_objects.py', 'build_job.py', 'sandbox.py', 'elfobj.py', 'assembler.py')}
 build {b}/{boot}.elf: pack | {b}/linked.elf tools/build/pack_elf.py
 build {b}/ok.stamp: check | {b}/{boot}.elf tools/check_elf.py config/{slug}/checksums.sha256

@@ -62,8 +62,8 @@ stop on that message instead of treating it as a compile error.
 
 Stages (one `ninja` rule each; everything generated is under the ignored `asm/`, `data/`, `build/`):
 
-1. extract: `tools/build/splat_config.py` writes `config/<GAME_ID>/splat.yaml` (splat segments from the ELF section table) and the
-   headerless image splat reads; `tools/build/elf_layout.py` writes `config/<GAME_ID>/layout.json` (ELF header, program
+1. extract: `tools/build/splat_config.py` writes `build/<GAME_ID>/splat.yaml` (splat segments from the ELF section table) and the
+   headerless image splat reads; `tools/build/elf_layout.py` writes `build/<GAME_ID>/layout.json` (ELF header, program
    header and one record per section) and extracts the opaque non-loaded payloads (DVP overlays) to `data/`.
 2. split: `splat split` (spimdisasm, rabbitizer) writes `asm/<GAME_ID>/text.s` (all functions, one file) and one data
    file per section; `.vutext` and `.vudata` stay binary blobs.
@@ -142,7 +142,7 @@ nothing changed `ninja` does nothing.
 
 ld cannot write the retail container: section-header order, the non-loaded `.reginfo`, `.DVP.*` and `.debug_str`
 sections, and `e_flags` 0x20924001. `pack_elf.py` therefore takes the linked section contents and addresses from ld and
-writes the headers from `config/<GAME_ID>/layout.json`, regenerating `.shstrtab` and `.reginfo` (with the linked `_gp`)
+writes the headers from `build/<GAME_ID>/layout.json`, regenerating `.shstrtab` and `.reginfo` (with the linked `_gp`)
 and rebasing the `.DVP.ovlytab` addresses that point into `.vutext`. The overlays and `.vutext`/`.vudata` are extracted
 payloads, not rebuilt. Code and data come only from the reassembled sources and the compiled source files.
 
@@ -163,8 +163,8 @@ the translation-unit map rather than something one function can carry.
 
 ## Function boundaries
 
-Splat finds the function starts; `tools/maint/boundaries.py` adds the ones it cannot see (`config/<GAME_ID>/boundaries.txt`, splat's
-`symbol_addrs` format, written by `python3 tools/maint/boundaries.py GAME_ID`, which keeps the hand-listed `// explicit:` entries, and read by the `split` stage). Evidence from the
+Splat finds the function starts; `tools/build/boundaries.py` adds the ones it cannot see (`build/<GAME_ID>/boundaries.txt`, splat's
+`symbol_addrs` format, written by `ninja` before the `split` stage from the image and the hand-listed `// explicit:` entries). Evidence from the
 instructions of the image (all five retail versions behave alike):
 
 - **Orphan pieces.** 8-byte pieces `<one non-branch instruction>; nop` (mostly `addiu $sp, $sp, N; nop`) sit between functions,
@@ -175,8 +175,8 @@ instructions of the image (all five retail versions behave alike):
   The runs stay assembly (`orphan` in `build/auto.json`).
 - **Explicit starts.** A real function can open with the same shape (`mtc1 $zero, $f1; nop`, an FPU hazard nop, or an `addiu`
   or `daddu` that the code behind it consumes), so the last piece of a run is code. Such starts are listed by hand in
-  `config/<GAME_ID>/boundaries.txt`, each behind a `// explicit: <reason>` line; `boundaries.py` ends the run there and keeps the
-  entry when it rewrites the file. USA retail has four: 0x1B0BD0, 0x280500, 0x316840 and 0x384E28. Without them the scan
+  `config/<GAME_ID>/explicit_boundaries.txt`, each behind a `// explicit: <reason>` line; `boundaries.py` ends the run there and
+  adds the entry to the file it generates. USA retail has four: 0x1B0BD0, 0x280500, 0x316840 and 0x384E28. Without them the scan
   would start those functions one piece late.
 - **Constructor list.** `__CTOR_LIST__` in `.data` (count word, that many pointers, zero) names every `_GLOBAL__I_*` stub. One of the
   116 entries in USA retail, 0x339c28, sat behind five orphan pieces that splat fused with it: `boundaries.py` adds the entries of the

@@ -2,7 +2,7 @@
 """Describe the container of a retail boot ELF (headers and non-loaded sections) for tools/build/pack_elf.py.
 
 Usage: elf_layout.py GAME_ID
-Writes config/<GAME_ID>/layout.json (committed: ELF header fields, program header, and one record per section
+Writes build/<GAME_ID>/layout.json (generated: ELF header fields, program header, and one record per section
 with name, type, flags, address, alignment, entry size, link and info; no game bytes) and extracts the opaque
 payload of the non-loaded sections (the DVP overlay images and their string table, .DVP.ovlytab) into
 data/<GAME_ID>/elf/NNN.bin (ignored), the same way splat extracts .vutext. `.reginfo` is stored as its fields,
@@ -65,7 +65,8 @@ def main():
     small = next(r for r in layout['sections'] if r['name'] in ('.lit4', '.lit8', '.sdata', '.sbss'))
     layout['gp'] = dict(section=small['name'], offset=gp - small['addr'])
     layout['entry_symbol'] = 'func_%08X' % e.entry
-    p = ROOT / 'config' / boot / 'layout.json'
+    p = ROOT / 'build' / boot / 'layout.json'
+    p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(layout, indent=1) + '\n')
     print('wrote', p.relative_to(ROOT), '%d sections' % len(layout['sections']), '; blobs in data/%s/elf' % slug)
 

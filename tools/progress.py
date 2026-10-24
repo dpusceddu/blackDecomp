@@ -207,7 +207,7 @@ def main():
     slug = next((a for a in sys.argv[1:] if not a.startswith('-') and not a.isdigit()), 'SLUS_213.76')
     build = ROOT / 'build' / slug
     fs = json.loads((build / 'placement.json').read_text())['functions']
-    layout = json.loads((ROOT / 'config' / slug / 'layout.json').read_text())
+    layout = json.loads((ROOT / 'build' / slug / 'layout.json').read_text())
     text = next(s for s in layout['sections'] if s['name'] == '.text')
     spans = [(fs[i + 1]['addr'] if i + 1 < len(fs) else text['addr'] + text['orig_size']) - fs[i]['addr']
              for i in range(len(fs))]

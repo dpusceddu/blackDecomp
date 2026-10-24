@@ -55,7 +55,7 @@ def build(slug, work):
     run('tools/build/split_objects.py', slug, work)
     run('tools/build/make_ld.py', slug, work)
     run('tools/build/build_objects.py', work)
-    run('tools/build/pack_elf.py', b / 'linked.elf', 'config/%s.layout.json' % boot, 'data/%s/elf' % slug,
+    run('tools/build/pack_elf.py', b / 'linked.elf', 'build/%s/layout.json' % slug, 'data/%s/elf' % slug,
         b / (boot + '.elf'))
     return b / (boot + '.elf'), b / 'linked.elf'
 

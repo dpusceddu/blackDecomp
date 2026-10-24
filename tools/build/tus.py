@@ -60,7 +60,7 @@ class Image:
         build = ROOT / 'build' / slug
         boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
         self.elf = Elf((ROOT / 'orig' / slug / boot).read_bytes())
-        layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
+        layout = json.loads((ROOT / 'build' / boot / 'layout.json').read_text())
         self.sections = [(s['name'], s['addr'], s['orig_size']) for s in layout['sections']
                          if s['source'] == 'linked' and s['name'] not in ('.vutext', '.vubss')]
         text = self.elf.section('.text')

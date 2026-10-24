@@ -2,7 +2,7 @@
 """Generate the splat64 configuration for a retail boot executable from its ELF section table.
 
 Usage: splat_config.py GAME_ID [--elf PATH]      (default ELF: orig/GAME_ID/GAME_ID)
-Writes config/<GAME_ID>/splat.yaml (committed: addresses, offsets and options only) and the headerless "rom"
+Writes build/<GAME_ID>/splat.yaml (generated: addresses, offsets and options only) and the headerless "rom"
 splat reads, build/<GAME_ID>/rom.bin (ignored; the loaded segment bytes taken from the ELF file). Each ELF
 section becomes one subsegment: .text as assembly, .data/.rodata/.lit4/.sdata/.gcc_except_table as data,
 .sbss/.bss as no-load, .vutext/.vudata as binary blobs. Non-loaded sections (.reginfo, the DVP overlays,
@@ -62,7 +62,7 @@ def main():
            '  ld_wildcard_sections: False', '  ld_bss_contains_common: False',
            '  create_asm_dependencies: False', '  find_file_boundaries: False',
            '  o_as_suffix: True', '  use_gp_rel_macro: False', '  use_gp_rel_macro_nonmatching: False',
-           '  symbol_addrs_path: config/%s/boundaries.txt' % boot,
+           '  symbol_addrs_path: build/%s/boundaries.txt' % boot,
            '  undefined_funcs_auto_path: build/%s/undefined_funcs_auto.txt' % a.slug,
            '  undefined_syms_auto_path: build/%s/undefined_syms_auto.txt' % a.slug,
            '  string_encoding: ASCII', '  data_string_encoding: ASCII',
@@ -88,7 +88,7 @@ def main():
             else:
                 out.append('      - [0x%06X, pad, %s_gap] # alignment gap, not linked' % (end - first['addr'], nm))
     out.append('  - [0x%X]' % len(rom))
-    cfg = ROOT / 'config' / boot / 'splat.yaml'
+    cfg = ROOT / 'build' / boot / 'splat.yaml'
     cfg.write_text('\n'.join(out) + '\n')
     print('wrote', cfg.relative_to(ROOT), 'and build/%s/rom.bin' % a.slug, '(%d bytes)' % len(rom))
 

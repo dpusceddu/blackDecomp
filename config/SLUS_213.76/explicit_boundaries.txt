@@ -1,0 +1,11 @@
+// Function starts that look like orphan pieces but are code, kept by hand (docs/build.md, "Function boundaries"). Each entry sits
+// behind a `// explicit: <reason>` line; tools/build/boundaries.py reads them as known function starts and adds them to the
+// build/SLUS_213.76/boundaries.txt it derives from the image.
+// explicit: opens with `mtc1 $zero, $f1; nop` (an FPU hazard nop) at the end of an orphan run; the max.s below reads $f1, so it is code, not an orphan piece
+func_001B0BD0 = 0x001B0BD0; // type:func
+// explicit: opens with `daddu $v1, $zero, $zero; nop` at the end of an orphan run; the loop below counts in $v1, so it is code, not an orphan piece
+func_00280500 = 0x00280500; // type:func
+// explicit: opens with `addiu $t0, $zero, -0x21; nop` at the end of an orphan run; the `and` below uses $t0 as its mask, so it is code, not an orphan piece
+func_00316840 = 0x00316840; // type:func
+// explicit: opens with `mtc1 $a0, $f0; nop` (an FPU hazard nop) at the end of an orphan run; the cvt.s.w below converts $f0, so it is code, not an orphan piece
+func_00384E28 = 0x00384E28; // type:func

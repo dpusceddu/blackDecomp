@@ -1,4 +1,4 @@
-"""Function boundaries come from the image and the committed boundaries.txt alone (splat's function list, no outside data)."""
+"""Function boundaries come from the image and the hand-written explicit_boundaries.txt alone (splat's function list, no outside data)."""
 import struct
 import sys
 import tempfile
@@ -79,7 +79,7 @@ class BoundariesFile(unittest.TestCase):
 
 @unittest.skipUnless((ROOT / 'orig/SLUS_213.76/SLUS_213.76').exists(), 'needs your own SLUS_213.76 executable')
 class DerivedFromTheImage(unittest.TestCase):
-    def test_committed_file_is_what_the_scan_derives_from_the_image(self):
+    def test_generated_file_holds_the_scan_and_the_explicit_starts(self):
         import json
         from elfinfo import Elf
         boot = json.loads((ROOT / 'config/versions.json').read_text())['SLUS_213.76']['boot']
@@ -87,8 +87,9 @@ class DerivedFromTheImage(unittest.TestCase):
         explicit = B.explicit_starts('SLUS_213.76')
         splits, _ = B.orphan_splits(elf, frozenset(explicit))
         derived = sorted(set(splits) | set(B.ctor_list_starts(elf)) | set(explicit))
-        committed = B.parse_boundaries((ROOT / 'config/SLUS_213.76/boundaries.txt').read_text())[1]
-        self.assertEqual(derived, committed)
+        written = B.parse_boundaries(B.format_boundaries(derived, explicit))
+        self.assertEqual(derived, written[1])
+        self.assertEqual(explicit, written[0])
 
 
 if __name__ == '__main__':
