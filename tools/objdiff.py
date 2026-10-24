@@ -159,7 +159,7 @@ def build_objects(slug, work, payload):
         sys.stderr.write(r.stderr[-3000:])
         raise SystemExit('objdiff objects could not be built')
     with tarfile.open(work / 'out.tgz') as tar:
-        tar.extractall(work)
+        tar.extractall(work, **({'filter': 'data'} if hasattr(tarfile, 'data_filter') else {}))
 
 
 def write_project(slug, plan):

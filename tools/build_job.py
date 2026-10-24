@@ -23,7 +23,7 @@ BINUTILS = os.environ.get('BLACK_BINUTILS_PREFIX', 'mipsel-linux-gnu-')
 VERBOSE = bool(os.environ.get('BLACK_VERBOSE'))   # compiler warnings are printed only on failure unless set
 CC = TOOLCHAINS + '/compilers'
 AS = CC + '/ee-gcc2.96/ee/bin/as'
-tarfile.open('inputs.tgz').extractall('.')
+tarfile.open('inputs.tgz').extractall('.', **({'filter': 'data'} if hasattr(tarfile, 'data_filter') else {}))
 plan = json.load(open('plan.json'))
 sys.path.insert(0, 'tools')
 

@@ -73,10 +73,10 @@ docker run --rm -it --platform linux/amd64 -v "$PWD":/workspace black-decomp
 
 On Apple silicon this relies on the emulation of x86-64 Linux containers and has not been tested.
 
-**Binutils.** `ld` and `objcopy` for MIPS come from the distribution package `binutils-mipsel-linux-gnu` (version 2.40 is the
-tested one). Without such a package, `python3 tools/toolchain.py install --binutils prebuilt` downloads the
-[decompals binutils-mips-ps2-decompals](https://github.com/decompals/binutils-mips-ps2-decompals) release; `configure.py`
-and the build find either one.
+**Binutils.** `ld` and `objcopy` for little-endian MIPS come from the distribution package `binutils-mipsel-linux-gnu`
+(Debian, Ubuntu; version 2.40 is the tested one). On a distribution without it, use Docker, or build GNU binutils 2.40 with
+`--target=mipsel-linux-gnu` and put the tools on `PATH` (or set `BLACK_BINUTILS_PREFIX`). The decompals
+`binutils-mips-ps2-decompals` prebuilt cannot link this executable: its `ld` has no little-endian MIPS emulation.
 
 ## Progress
 

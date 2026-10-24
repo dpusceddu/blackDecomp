@@ -18,7 +18,7 @@ from concurrent.futures import ThreadPoolExecutor
 TOOLCHAINS = os.environ.get('BLACK_TOOLCHAINS', '/toolchains')
 BINUTILS = os.environ.get('BLACK_BINUTILS_PREFIX', 'mipsel-linux-gnu-')
 AS = TOOLCHAINS + '/compilers/ee-gcc2.96/ee/bin/as'
-tarfile.open('inputs.tgz').extractall('.')
+tarfile.open('inputs.tgz').extractall('.', **({'filter': 'data'} if hasattr(tarfile, 'data_filter') else {}))
 plan = json.load(open('plan.json'))
 os.makedirs('target', exist_ok=True)
 os.makedirs('base', exist_ok=True)

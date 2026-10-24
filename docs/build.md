@@ -27,8 +27,10 @@ ninja objdiff && ninja report                  # objdiff project and progress re
   `tools/patch_ps2eeas.py` and checked against the pinned hashes in `config/toolchain-assemblers.json`;
 - [wibo](https://github.com/decompals/wibo) 1.2.0 (`config/toolchain-local.json`), which runs the Windows programs on Linux.
 
-The linker and `objcopy` come from `binutils-mipsel-linux-gnu` (Debian package, 2.40 tested) or from the decompals prebuilt
-release (`install --binutils prebuilt`); the build looks for `mipsel-linux-gnu-ld`, then `mips-ps2-decompals-ld`.
+The linker and `objcopy` come from `binutils-mipsel-linux-gnu` (Debian/Ubuntu package, 2.40 tested); the build looks for
+`mipsel-linux-gnu-ld` on `PATH` (or the prefix in `$BLACK_BINUTILS_PREFIX`). The decompals `binutils-mips-ps2-decompals` release
+was tried and does not work: its `ld` only supports the big-endian MIPS emulation, while the executable links little-endian
+(`-m elf32ltsmip`).
 `python3 tools/toolchain.py check` reports what is missing. The Sony tools are 32-bit Linux programs, hence `libc6-i386`
 on Debian. The `Dockerfile` builds an image with all of this.
 
@@ -121,7 +123,7 @@ overall and by region, then by translation unit (complete, partial and untouched
 
 Other tools: `tools/tus.py` (TU boundaries and map), `tools/regroup.py` (one source file per TU), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/studies/shift_test.py` (shiftability test),
 `tests/link/check.py` (SN object + GNU object linked by the toolchain's `ld`). In a sandbox script, the binutils tools
-(`mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}` or the decompals equivalents, see `$BLACK_BINUTILS_PREFIX`) are on PATH.
+(`mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}`, or the prefix in `$BLACK_BINUTILS_PREFIX`) are on PATH.
 
 ## Shiftability
 

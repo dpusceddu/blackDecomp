@@ -2,7 +2,7 @@
 """Local build toolchain: download, verify and unpack the pinned compilers, assemblers and wibo.
 
 Usage:
-  toolchain.py install [--root DIR] [--binutils prebuilt] [--objdiff]
+  toolchain.py install [--root DIR] [--objdiff]
                                                             download everything the build needs (idempotent)
   toolchain.py check   [--root DIR]                         report what is present and what is missing
   toolchain.py env     [--root DIR]                         print the environment the build jobs use
@@ -17,7 +17,9 @@ programs) is pinned in config/toolchain-local.json. Everything is verified by SH
   bin/wibo             runs the Windows compilers on Linux x86-64
 
 The linker and binutils (mipsel-linux-gnu-ld, -objcopy) come from the distribution package binutils-mipsel-linux-gnu
-(version 2.40 tested) or, with `install --binutils prebuilt`, from the decompals binutils-mips-ps2-decompals release.
+(version 2.40 tested), or from any GNU binutils built for a little-endian MIPS target whose tools start with
+$BLACK_BINUTILS_PREFIX. The decompals binutils-mips-ps2-decompals prebuilt is not usable: its ld only knows the big-endian
+MIPS emulation (`elf32ebmip`), but the executable is linked little-endian (`elf32ltsmip`).
 Nothing downloaded here is ever committed. The Sony compilers and the EE assembler are 32-bit Linux programs and the SN
 compiler is a Windows program, so the build needs Linux x86-64 (natively, in WSL or in the Dockerfile of this repository).
 """
@@ -87,7 +89,7 @@ def safe_extract(archive, destination):
                     raise SystemExit('unsafe link in %s: %s' % (archive, member.name))
             elif not (member.isfile() or member.isdir()):
                 raise SystemExit('unsupported member in %s: %s' % (archive, member.name))
-        tar.extractall(destination)
+        tar.extractall(destination, **({'filter': 'data'} if hasattr(tarfile, 'data_filter') else {}))
 
 
 def compiler_table():
@@ -143,21 +145,6 @@ def install_wibo(base):
     return changed
 
 
-def install_binutils(base):
-    entry = settings()['binutils_prebuilt']
-    archive = base / 'downloads' / Path(entry['url']).name
-    download(entry['url'], entry['sha256'], archive)
-    destination = base / 'binutils'
-    marker = destination / '.verified'
-    if marker.is_file() and marker.read_text().strip() == entry['sha256']:
-        return False
-    shutil.rmtree(destination, ignore_errors=True)
-    (destination / 'bin').mkdir(parents=True)
-    safe_extract(archive, destination / 'bin')
-    marker.write_text(entry['sha256'] + '\n')
-    return True
-
-
 def objdiff_asset():
     system = {'Linux': 'linux', 'Darwin': 'macos'}.get(platform.system())
     machine = {'x86_64': 'x86_64', 'AMD64': 'x86_64', 'arm64': 'arm64', 'aarch64': 'aarch64'}.get(platform.machine())
@@ -179,7 +166,8 @@ def install_objdiff(base):
 def find_binutils(base=None):
     """Return (directory or None, prefix) of the first usable linker: the cache, then the PATH."""
     base = base or root()
-    for prefix in settings()['binutils_prefixes']:
+    chosen = os.environ.get('BLACK_BINUTILS_PREFIX')
+    for prefix in ([chosen] if chosen else settings()['binutils_prefixes']):
         for directory in [str(base / 'binutils' / 'bin')] + os.environ.get('PATH', '').split(os.pathsep):
             if directory and shutil.which(prefix + 'ld', path=directory) and shutil.which(prefix + 'objcopy', path=directory):
                 return Path(directory), prefix
@@ -202,7 +190,7 @@ def problems(base=None):
     if not (base / 'bin' / 'wibo').is_file():
         missing.append('wibo is not installed')
     if find_binutils(base)[0] is None:
-        missing.append('no MIPS linker found (install binutils-mipsel-linux-gnu or run: toolchain.py install --binutils prebuilt)')
+        missing.append('no MIPS linker found (install the distribution package binutils-mipsel-linux-gnu)')
     return missing
 
 
@@ -227,7 +215,6 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('command', choices=['install', 'check', 'env'])
     ap.add_argument('--root', help='toolchain directory (default build/toolchain or $BLACK_TOOLCHAIN_DIR)')
-    ap.add_argument('--binutils', choices=['prebuilt'], help='also install the decompals prebuilt binutils')
     ap.add_argument('--objdiff', action='store_true', help='also install the pinned objdiff-cli (for `ninja report`)')
     ap.add_argument('--only-objdiff', action='store_true', help='install nothing but objdiff-cli (no compilers)')
     a = ap.parse_args()
@@ -248,9 +235,6 @@ def main():
         for ident in settings()['assemblers']:
             print('%-28s %s' % (ident, 'written' if install_assembler(base, ident) else 'present'), flush=True)
         print('%-28s %s' % ('wibo ' + settings()['wibo']['version'], 'installed' if install_wibo(base) else 'present'), flush=True)
-        if a.binutils:
-            print('%-28s %s' % ('binutils ' + settings()['binutils_prebuilt']['version'],
-                                'installed' if install_binutils(base) else 'present'), flush=True)
         if a.objdiff:
             print('%-28s %s' % ('objdiff-cli ' + settings()['objdiff']['version'],
                                 'installed' if install_objdiff(base) else 'present'), flush=True)

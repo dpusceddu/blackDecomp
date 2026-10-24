@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKER = r'''
 import json, os, pathlib, subprocess, sys, tarfile
 with tarfile.open('inputs.tgz') as archive:
-    archive.extractall('.')
+    archive.extractall('.', **({'filter': 'data'} if hasattr(tarfile, 'data_filter') else {}))
 request = json.load(open('request.json'))
 sys.path.insert(0, 'tools')
 from assembler import compile_with_assembler

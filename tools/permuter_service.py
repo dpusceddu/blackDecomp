@@ -181,7 +181,7 @@ BOOTSTRAP = '''import json,os,runpy,tarfile,traceback
 os.chdir('/work/job')
 try:
     with tarfile.open('inputs.tgz') as archive:
-        archive.extractall('.')
+        archive.extractall('.', **({'filter': 'data'} if hasattr(tarfile, 'data_filter') else {}))
     runpy.run_path('tools/permuter_worker.py',run_name='__main__')
 except BaseException:
     os.makedirs('output',exist_ok=True)
