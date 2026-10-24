@@ -1,11 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "kynapse/layouts/Recovered_AIRouteFollower.h"
 #include "kynapse/layouts/Recovered_RouteRequest.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern void * func_00300278(Recovered_AIRouteFollower *, Recovered_RouteRequest *);
 
 s32 func_00304E38(void *arg0, s32 arg1, void *arg2, void *arg3) {

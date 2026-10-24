@@ -4,9 +4,7 @@
 // Unmatched: global address reuse and save-image loop scheduling.
 #include "ps2/prelude.h"
 #include "game/frontend/save_dialog.hpp"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern "C" s32 func_0035D728(void *, char *, ...);
 extern "C" char* D_003BC5F8;

@@ -1,10 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "rw_core/layouts/Recovered_RwErrorRecordPS2.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 (*D_0044944C)();
 extern s32 func_002A5548(s32, ...);
 extern Recovered_RwErrorRecordPS2 * func_002A55D8(Recovered_RwErrorRecordPS2 *);

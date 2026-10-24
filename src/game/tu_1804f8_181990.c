@@ -1,9 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern void func_001818A8(RecoveredAIActionStack *); /* AIActionStack_Pop */
 extern void func_00181660(RecoveredAIActionStack *, u32, s32); /* AIActionStack_PushAndEnter */
 

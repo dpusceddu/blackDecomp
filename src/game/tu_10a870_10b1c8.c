@@ -1,10 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_FrontendSaveDialog.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 s32 func_0010B1C8(Recovered_FrontendSaveDialog *arg0) {
     s32 var_3;
@@ -24,10 +22,8 @@ s32 func_0010B1C8(Recovered_FrontendSaveDialog *arg0) {
     return 2;
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_FrontendSaveDialog.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 s32 func_0010B200(Recovered_FrontendSaveDialog *arg0) {
     s32 var_3;
@@ -47,10 +43,8 @@ s32 func_0010B200(Recovered_FrontendSaveDialog *arg0) {
     return 8;
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_FrontendSaveDialog.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 s32 func_0010B238(Recovered_FrontendSaveDialog *arg0) {
     s32 var_3;

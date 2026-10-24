@@ -1,9 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_00285CA0(void *, s32);
 extern s32 func_00286278(void *, void *);
 extern s32 func_002860D0(void *, f32);

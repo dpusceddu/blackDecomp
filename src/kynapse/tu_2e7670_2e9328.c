@@ -39,10 +39,8 @@ void func_002E9538(void *arg0, f32 fparg0) {
     M2C_FIELD(arg0, f32 *, 0x1C) = fparg0;
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "kynapse/layouts/Recovered_ParameterTables.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 void func_002E9540(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {
     if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_8)) {

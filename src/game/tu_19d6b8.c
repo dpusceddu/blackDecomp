@@ -4,9 +4,7 @@
 #include "game/layouts/Recovered_Action.h"
 #include "game/layouts/Recovered_Vtable_003DE8A0.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern void * D_0040F4D0;
 extern void func_00193990(Recovered_Action *, u8);
 

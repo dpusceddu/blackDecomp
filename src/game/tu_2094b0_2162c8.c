@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
-#include "types_ghidra.h"
+#include "ps2/prototypes.h"
 
 extern s32 func_0020DF90();
 extern M2C_UNK D_003FBF20;
@@ -32,9 +32,7 @@ extern s32 func_001087C8();
 extern s32 D_0040F4C4;
 extern M2C_UNK D_003FC250;
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_0020DF68(void *, s32, s32);
 extern M2C_UNK D_003FBF20;
 extern s32 func_00216438();
@@ -138,9 +136,7 @@ void func_00217408(void) {
     func_0020DEC8(&D_00492638, func_001087C8(D_0040F4C4, &D_003FC250), *(s32 *)(sp + 0), temp_20);
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_0020DD48(void *);
 extern s32 D_00492588;
 extern s32 D_00492598;

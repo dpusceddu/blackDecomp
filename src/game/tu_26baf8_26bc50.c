@@ -13,9 +13,7 @@ s32 func_0026BC80(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xEC);
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 s32 func_0026BC88(void *arg0, f32 fparg0) {
     s32 var_3;

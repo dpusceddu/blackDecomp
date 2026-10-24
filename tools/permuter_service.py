@@ -147,7 +147,7 @@ def package(manifest):
     files = {}
     for name in ('autodecomp.py', 'elfinfo.py', 'elfobj.py', 'constant_relocs.py', 'build_telemetry.py', 'assembler.py'):
         files['tools/' + name] = (ROOT / 'tools' / name).read_bytes()
-    for name in ('ps2/prelude.h', 'types_ghidra.h'):
+    for name in ('ps2/prelude.h', 'ps2/recovered_types.h', 'ps2/prototypes.h'):
         path = ROOT / 'include' / name
         if path.exists():
             files['include/' + name] = path.read_bytes()

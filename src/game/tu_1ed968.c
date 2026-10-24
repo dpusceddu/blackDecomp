@@ -1,10 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_Vtable_003E0848.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 f32 func_001ED968(Recovered_Vtable_003E0848 *arg0) {
     arg0->field_0 = 0;

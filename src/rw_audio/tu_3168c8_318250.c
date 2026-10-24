@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
-#include "types_ghidra.h"
+#include "ps2/prototypes.h"
 
 extern s32 func_00312C70();
 extern s32 func_00317C20(M2C_UNK *, s32 *);
@@ -141,9 +141,7 @@ void func_00319480(void) {
     func_00318D28();
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_00319828(void *, s32, s32, s32, void *);
 
 s32 func_003194A0(void *arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4) {
@@ -156,9 +154,7 @@ s32 func_003194A0(void *arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003194D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00319578);
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_00319828(void *, s32, s32, s32, void *);
 extern s32 func_00319628(s32, s32, s32, s32, void *);
 

@@ -2,9 +2,7 @@
 
 #include "ps2/prelude.h"
 #include "rw_core/stream.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 s32 func_002A50F8(RwChunkHeaderPS2 *header) {
     s32 temp_2;

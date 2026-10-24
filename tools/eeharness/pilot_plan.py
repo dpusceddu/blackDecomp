@@ -26,7 +26,7 @@ FLAGS=['-O2','-G0','-snas','-ffunction-sections','-fno-exceptions','-fno-rtti']
 
 
 def cpp_draft(address,text):
-    text=text.replace('#undef TYPES_GHIDRA_NO_PROTOTYPES','#undef TYPES_GHIDRA_NO_PROTOTYPES\nextern "C" {',1)+'\n}\n'
+    text=text.replace('#include "ps2/recovered_types.h"\n','#include "ps2/recovered_types.h"\nextern "C" {\n',1)+'\n}\n'
     if address==0x16e250:text=text.replace('s32 *arg2','s64 *arg2')
     if address==0x16a250:text=text.replace('func_0016A4C0(arg0,','func_0016A4C0((s64*)arg0,')
     if address in (0x21c268,0x21e420,0x21ea58,0x22a440):

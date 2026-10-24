@@ -3,10 +3,8 @@
 #ifdef NONMATCHING_RWA_3168C8
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/emitter.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "rw_audio/layouts/Recovered_RwaFormat.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 * D_0040E1B0;
 extern RwaEmitter *D_0040E788;
@@ -121,9 +119,7 @@ s32 func_003168C8(void) {
 #ifdef NONMATCHING_RWA_316C38
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "ps2/prelude.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern void * func_00311DB8(s8 *);
 extern s8 D_00409610;
@@ -223,9 +219,7 @@ block_15:
 #ifdef NONMATCHING_RWA_316E90
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/emitter.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 func_00310768(void *, s32, s32, void *);
 extern s32 func_003105E8(void *, s32, s32, s32);
@@ -285,9 +279,7 @@ void func_00316E90(RwaEmitter *input) {
 #ifdef NONMATCHING_RWA_317030
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/emitter.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 func_003178F0(void *, void *, void *, void *, s32, s32);
 extern void * D_0040E1B4;
@@ -398,9 +390,7 @@ block_36:
 #ifdef NONMATCHING_RWA_317340
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/emitter.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern void func_00317030(void *);
 extern s32 func_00310768(void *, s32, s32, void *);
@@ -494,9 +484,7 @@ void func_003176E0(RwaVec3 *value,const RwaListener *listener) {
 #ifdef NONMATCHING_RWA_3178F0
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "ps2/prelude.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern u32 D_0040E1D0;
 extern void * func_003176E0(void *, void *);
@@ -555,9 +543,7 @@ s32 func_003178F0(void *input, void *operation, void *length, void *event, s32 c
 #ifdef NONMATCHING_RWA_317A78
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "ps2/prelude.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 * func_00312C48(s32, s32);
 extern s32 * func_0035C6EC(s32 *, s32, s32);
@@ -700,9 +686,7 @@ void func_00317C20(RwaPool *pool,void *allocation) {
 #ifdef NONMATCHING_RWA_317E40
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "ps2/prelude.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 * D_0040E1E4;
 extern s32 func_00317A78(void *, s32);
@@ -794,9 +778,7 @@ block_12:
 #ifdef NONMATCHING_RWA_318D28
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/request.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 D_0040E214;
 extern void func_003678A0(); /* WaitSema */
@@ -861,9 +843,7 @@ void func_00318D28(void *input) {
 #ifdef NONMATCHING_RWA_318E80
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/request.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 D_0040E214;
 extern void func_003678A0(); /* WaitSema */
@@ -1032,9 +1012,7 @@ block_48:
 #ifdef NONMATCHING_RWA_3196D8
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/request.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern void * func_00319828(void *, s32, s32, s32, void *);
 extern void * func_00319628(s32, s32, s32, s32, void *);
@@ -1093,9 +1071,7 @@ block_11:
 #ifdef NONMATCHING_RWA_319B00
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/request.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 * func_0031DE30(s32 *, s32, s32);
 extern s32 D_004096D0;

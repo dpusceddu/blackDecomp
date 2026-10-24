@@ -15,7 +15,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00100258);
 int other(void) { return 1; }
 '''
 DRAFT = '''#include "ps2/prelude.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 D_00400000;
 
 s32 func_00100258(void) {

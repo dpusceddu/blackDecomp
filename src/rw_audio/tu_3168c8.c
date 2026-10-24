@@ -1,7 +1,7 @@
 #include "rw_audio/emitter.h"
 typedef struct AudioListHead{void *next,*previous;}AudioListHead;
 
-#include "types_ghidra.h"
+#include "ps2/prototypes.h"
 #if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 /* Active/idle emitter heads, channel table and listener-list head. */
 void *D_0040E780 __attribute__((section(".sbss")));

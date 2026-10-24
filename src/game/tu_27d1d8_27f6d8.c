@@ -1,9 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 s32 func_0027F6D8(void *arg0) {
     void *temp_2;
@@ -16,9 +14,7 @@ s32 func_0027F6D8(void *arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027F6F8);
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 s32 func_0027F708(void *arg0) {
     void *temp_2;

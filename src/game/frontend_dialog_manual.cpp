@@ -46,9 +46,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B630);
 // Unmatched: state fallthrough scheduling and register allocation.
 #include "ps2/prelude.h"
 #include "game/frontend/save_dialog.hpp"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern "C" s32 func_0026F440(s32 *);
 extern "C" s32 func_0010BC00(void*);

@@ -3,9 +3,7 @@
 
 extern s32 func_001E36A0();
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_001E36A0(void *);
 extern s32 func_001E3500(void *);
 extern s32 func_00280B10(void *);
@@ -82,9 +80,7 @@ s32 func_001E3FA0(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E3FF8);
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_00280C90(void *, s32);
 extern f32 func_001ED820(void *);
 extern void * D_0040F510;

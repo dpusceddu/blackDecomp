@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
-#include "types_ghidra.h"
+#include "ps2/prototypes.h"
 
 extern s32 func_00192470(s32);
 extern s32 func_00192EB0(void *);
@@ -20,9 +20,7 @@ s32 func_001829E8(void *arg0) {
     return var_4;
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_00170670(void *, f32);
 
 s32 func_00182A10(void *arg0, f32 fparg0) {

@@ -1,10 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "animation/layouts/Recovered_AnimationParameterBank.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern void func_00350098(Recovered_AnimationParameterBank *);
 
 void func_00350140(s32 *arg0) {

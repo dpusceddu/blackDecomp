@@ -91,9 +91,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109CC0);
 // Unmatched: timer address construction, unsigned conversion and state scheduling.
 #include "ps2/prelude.h"
 #include "game/frontend/movie_stream.hpp"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern "C" u8 func_00272308(void *);
 extern "C" void func_001094C0(void *,const char*,s32,s32);

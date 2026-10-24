@@ -4,9 +4,7 @@
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031AEE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031B030);
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 D_0040E1FC;
 extern void * D_0040E200;
 

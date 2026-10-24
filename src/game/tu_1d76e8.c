@@ -10,9 +10,7 @@ s32 func_001D7B98(void) {
     return func_00324F98() != 0;
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern void * func_0027FCF8(void *, void *, s32);
 
 void * func_001D7BB8(void *arg0, s32 arg1) {

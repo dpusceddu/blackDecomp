@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
-#include "types_ghidra.h"
+#include "ps2/prototypes.h"
 
 u8 * func_00292F08(u8 *arg0, s32 *arg1) {
     s32 var_6;

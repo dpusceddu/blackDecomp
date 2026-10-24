@@ -1,10 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_BkActorRenderPS2.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_001C6FA0(void *, s32);
 extern s32 func_001C5F48(s32);
 extern Recovered_BkActorRenderPS2 * D_0040F4C0;

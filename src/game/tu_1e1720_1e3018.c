@@ -2,9 +2,7 @@
 
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 D_003BD3F8;
 extern s32 D_003BD3FC;
 extern s32 D_003BD400;

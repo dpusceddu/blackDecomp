@@ -3,10 +3,8 @@
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010EBD0);
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_FrontendProfilePool.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_00122AF0();
 
 s32 func_0010F188(Recovered_FrontendProfilePool *arg0) {
@@ -26,10 +24,8 @@ s32 func_0010F188(Recovered_FrontendProfilePool *arg0) {
     return (s32) temp_2;
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_FrontendProfilePool.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_00122B10(void *);
 
 s32 func_0010F1E0(Recovered_FrontendProfilePool *arg0) {

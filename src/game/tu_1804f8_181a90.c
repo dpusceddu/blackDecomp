@@ -35,9 +35,7 @@ void func_00181AD0(void *arg0, s32 arg1) {
     }
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_0018C0C0(s32 *, void *, s32);
 
 s32 func_00181B08(void *arg0, s32 *arg1) {

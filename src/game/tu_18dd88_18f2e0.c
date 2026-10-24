@@ -1,11 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_Vtable_003DDC60.h"
 #include "game/layouts/Recovered_Vtable_003DDE88.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_001830A0(void *);
 extern void * func_0018E458(Recovered_Vtable_003DDE88 *, void *);
 extern s32 func_001830C0(s32 *, s32);

@@ -1,11 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_Notifiable.h"
 #include "game/layouts/Recovered_SlotUser.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern void * func_0016EAD0(void *);
 extern void * func_0016FB18(s32, s32);
 extern s32 func_00171CA8(void *, void *);

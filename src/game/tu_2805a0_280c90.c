@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
-#include "types_ghidra.h"
+#include "ps2/prototypes.h"
 
 s32 func_00280C90(s32 arg0, s32 arg1) {
     s32 var_2;

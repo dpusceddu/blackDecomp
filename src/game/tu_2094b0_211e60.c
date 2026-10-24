@@ -68,9 +68,7 @@ s32 func_00212008(s32 arg0) {
     return 1;
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 * D_0040F0E0;
 extern s32 D_003BE83C;
 extern s32 D_003BE840;

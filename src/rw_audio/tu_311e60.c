@@ -141,9 +141,7 @@ s32 func_003123B8(void){
 #ifdef NONMATCHING_RWA_312510
 // Unmatched: typed property/value ownership and allocation hypothesis differs in scheduling and register allocation.
 #include "rw_audio/property.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 * func_00312AD0(void *, s8 *);
 extern M2C_UNK D_00455FD0;

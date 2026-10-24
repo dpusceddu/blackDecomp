@@ -13,6 +13,9 @@ The complete image must also remain identical. Verification details stay in igno
 - `matrix.hpp`: basis-vector direction and affine point transforms. Only xyz is defined; the W
   lane may be flags or unrelated payload. Matrix multiplication/inversion and axis-angle helpers
   are still unverified. A mathematical composition is not an established original inline recipe.
+- `recovered_types.h` and `prototypes.h`: hand-maintained, UNVERIFIED recovered structures and the signatures (under the image's
+  `func_XXXXXXXX` names) that use them; the m2c context and the automatic drafts read both. `recovered_types.h` is all a
+  translation unit needs for the types; include `prototypes.h` to also get the declarations.
 - `renderware_inline.h`: exact-backed flag invalidation, tolerance copy and pixel release.
   `kynapse/` supplies the underscore-key fallback, list/iterator prefixes and parameter owner getter.
   Their verification scopes are field-specific; unknown SDK/container fields remain unknown.

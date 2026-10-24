@@ -13,9 +13,7 @@ void func_00272C18(s32 arg0, s32 arg1, f32 fparg0)
   *((f32 *) (((s8 *) (arg0 + new_var)) + (0x24 & 0xFFFFFFFFu))) = fparg0;
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_002732E0(void *, void *);
 
 s32 func_00272C28(void *arg0, void *arg1, s128 arg2, s32 *arg3) {

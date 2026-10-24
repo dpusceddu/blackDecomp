@@ -16,9 +16,7 @@ s32 func_00205170(void *arg0) {
     return 1;
 }
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_00205D40(void *);
 extern s32 func_002058F0(void *);
 extern s32 func_00205B68(void *);

@@ -1,9 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern u8 func_0017A0A8(RecoveredRouteRequest *); /* AIMovement_AdvanceRouteRequest */
 
 void func_00179C88(void *arg0) {

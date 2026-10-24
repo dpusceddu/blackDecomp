@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
-#include "types_ghidra.h"
+#include "ps2/prototypes.h"
 
 void * func_003284E0(void *arg0, s32 arg1, s32 *arg2) {
     void *temp_3;

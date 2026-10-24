@@ -148,11 +148,12 @@ def ctype(t):
     return CTYPES.get(t)
 
 
-HEADER = ROOT / 'include/types_ghidra.h'
+HEADER = ROOT / 'include/ps2/prototypes.h'              # recovered signatures (weak declarations, by func_XXXXXXXX name)
+TYPES_HEADER = ROOT / 'include/ps2/recovered_types.h'    # the structures those signatures use
 
 
 def header_functions():
-    """Names of the functions include/types_ghidra.h declares (from the Ghidra signatures)."""
+    """Names of the functions include/ps2/prototypes.h declares."""
     if not HEADER.exists():
         return set()
     return set(re.findall(r'^extern [^(]*?\b(func_[0-9A-F]{8})\(', HEADER.read_text(), re.M))
@@ -327,7 +328,7 @@ def selected_prototype(row, header=None, m2c=False, scalar=None):
 
 
 def write_context(refresh=False):
-    """Whole-callgraph signatures, PS2 aggregate views and Ghidra layouts for m2c."""
+    """Whole-callgraph signatures, PS2 aggregate views and the recovered types for m2c."""
     context = recovered_context(refresh)
     if os.environ.get('AUTODECOMP_FREEZE_CONTEXT') == '1':
         return len(context['signatures'])
@@ -335,8 +336,10 @@ def write_context(refresh=False):
            'typedef int s32; typedef unsigned int u32; typedef long s64; typedef unsigned long u64;',
            'typedef float f32; typedef double f64;']
     declared = header_declarations()
-    if HEADER.exists():
-        for line in HEADER.read_text().split('\n'):
+    for header in (TYPES_HEADER, HEADER):
+        if not header.exists():
+            continue
+        for line in header.read_text().split('\n'):
             if line.startswith('#') or line.startswith('typedef char assert_') or line.startswith('/*') or line.startswith(' *'):
                 continue
             match = re.search(r'\bfunc_([0-9A-F]{8})\(', line) if line.startswith('extern ') else None
@@ -683,7 +686,7 @@ def clean_function(name, r, sigs, strings=None, stack=None):
         if re.search(r'\b%s\b' % sym, body):
             body = re.sub(r'&?\b%s\b' % sym, lambda m: '"%s"' % lit, body)
     sig = '%s %s(%s)' % (ret, name, params)
-    lines = ['#include "ps2/prelude.h"', '#define TYPES_GHIDRA_NO_PROTOTYPES', '#include "types_ghidra.h"', '#undef TYPES_GHIDRA_NO_PROTOTYPES', '']
+    lines = ['#include "ps2/prelude.h"', '#include "ps2/recovered_types.h"', '']
     if '__ee_vu_' in body:
         lines.insert(1, '#include "ps2/vu0_lowering.h"')
     seen = set()
@@ -921,7 +924,7 @@ def worker_compile(jobs, tag='auto'):
 
 
 STATS = collections.Counter()
-PRELUDE_HASH = hashlib.sha256((ROOT / 'include/ps2/prelude.h').read_bytes() + ((ROOT / 'include/types_ghidra.h').read_bytes() if (ROOT / 'include/types_ghidra.h').exists() else b'')).hexdigest()
+PRELUDE_HASH = hashlib.sha256(b''.join(p.read_bytes() for p in (ROOT / 'include/ps2/prelude.h', TYPES_HEADER, HEADER) if p.exists())).hexdigest()
 
 
 # ---------------------------------------------------------------------------------------------------------- scoring
@@ -1418,16 +1421,15 @@ def expand_macros(src):
     prelude = (ROOT / 'include/ps2/prelude.h').read_text()
     types = '\n'.join(l for l in prelude.split('\n') if l.startswith('typedef'))
     body = src.replace('#include "ps2/prelude.h"\n', '')
-    body = body.replace('#define TYPES_GHIDRA_NO_PROTOTYPES\n', '').replace('#undef TYPES_GHIDRA_NO_PROTOTYPES\n', '')
     for view in re.findall(r'^#include "(\w+/layouts/Recovered_\w+\.h)"$', body, re.M):
         header = (ROOT / 'include' / view).read_text()
         layout = '\n'.join(line for line in header.splitlines() if not line.startswith('#') and not line.startswith('typedef char assert_'))
         body = body.replace('#include "%s"' % view, layout)
-    if '#include "types_ghidra.h"' in body:
-        names = re.findall(r'^typedef struct (\w+)', (ROOT / 'include/types_ghidra.h').read_text(), re.M)
+    if '#include "ps2/recovered_types.h"' in body or '#include "ps2/prototypes.h"' in body:
+        names = re.findall(r'^typedef struct (\w+)', TYPES_HEADER.read_text(), re.M)
         if any(re.search(r'\b%s\b' % n, body) for n in names):
-            raise ValueError('uses a Ghidra structure: the permuter\'s parser does not read the header')
-        body = body.replace('#include "types_ghidra.h"\n', '')
+            raise ValueError('uses a recovered structure: the permuter\'s parser does not read the header')
+        body = body.replace('#include "ps2/recovered_types.h"\n', '').replace('#include "ps2/prototypes.h"\n', '')
 
     body = strip_c_comments(types + '\n' + body)
 
@@ -1544,7 +1546,7 @@ def committed_form(text):
     body = '\n'.join(l for l in lines[i:] if not l.startswith('#pragma _permuter'))
     body = re.sub(r'\*\(\((\w+ \*)\) \(\(\(s8 \*\) (\w+)\) \+ (0x[0-9A-Fa-f]+|\d+)\)\)', r'M2C_FIELD(\2, \1, \3)', body)
     body = body.replace('((void *) 0)', 'NULL')
-    return '#include "ps2/prelude.h"\n#include "types_ghidra.h"\n\n' + body.strip() + '\n'
+    return '#include "ps2/prelude.h"\n#include "ps2/prototypes.h"\n\n' + body.strip() + '\n'
 
 
 def permute_many(climbs, rounds, per_round, label=''):

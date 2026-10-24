@@ -1,5 +1,5 @@
 #include "ps2/prelude.h"
-#include "types_ghidra.h"
+#include "ps2/prototypes.h"
 
 /* The action header's brain field is verified. Only the event's leading
    discriminator is used; its full object layout remains unverified. */

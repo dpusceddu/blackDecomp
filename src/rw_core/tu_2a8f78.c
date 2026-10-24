@@ -18,9 +18,7 @@ extern M2C_UNK D_003C3210;
 // Unmatched: compiler control flow, aggregate lifetime and scheduling still differ.
 #include "ps2/prelude.h"
 #include "rw_core/camera.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern M2C_UNK D_00449438;
 extern u32 D_0040E5C8;
@@ -77,9 +75,7 @@ RwCameraPS2 *func_002A8F78(void) {
 #ifdef NONMATCHING_2A9640
 // Unmatched: compiler control flow, aggregate lifetime and scheduling still differ.
 #include "ps2/prelude.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern s32 func_002A9DF0(s32, s32, s32, s32);
 extern s32 func_002A5588(s32, u32);
@@ -156,9 +152,7 @@ s32 func_002A9B70(void *parameters) {
 #ifdef NONMATCHING_2A9CB8
 // Unmatched: compiler control flow, aggregate lifetime and scheduling still differ.
 #include "ps2/prelude.h"
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 
 extern M2C_UNK D_00449438;
 extern s32 func_002AA040(s32, s32);
@@ -553,9 +547,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A91D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A9240);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A9310);
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_002CFAC0(void *, u32, u32, u32, u32, s32);
 extern s32 D_003C31F8;
 

@@ -1,9 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 * func_0017E770(f32 *);
 extern s32 func_001580C0(void *);
 extern void func_00193A28(RecoveredAIActionHeader *, u32, s32); /* AIAction_RequestSuccessor */

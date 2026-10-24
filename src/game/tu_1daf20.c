@@ -7,9 +7,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DAF20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DAFD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DB088);
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_001DD3E0(void *);
 
 s32 func_001DB140(void *arg0) {
@@ -76,10 +74,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DC2C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DC448);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DC498);
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_Vtable_003E26B8.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_002810A0(Recovered_Vtable_003E26B8 *);
 
 s32 func_001DC5A8(void *arg0) {

@@ -1,6 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
-#include "types_ghidra.h"
+#include "ps2/prototypes.h"
 
 s32 func_003283D8(s32 arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, f32 *, 0xB8) = (f32) M2C_FIELD(arg2, f32 *, 0);

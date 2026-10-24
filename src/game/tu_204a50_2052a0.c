@@ -2,9 +2,7 @@
 
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern s32 func_002060D8(s32);
 extern s32 func_002059A0(void *);
 extern s32 func_00205C10(void *);

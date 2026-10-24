@@ -5,9 +5,7 @@ extern s32 D_004549C4;
 extern s32 func_003071A8();
 extern f32 D_003CD89C;
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern void * func_0030D0E0(void *, s8 *, s32);
 extern M2C_UNK D_00455BE8;
 extern void * func_003067A0(void *);

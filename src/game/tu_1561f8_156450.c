@@ -1,11 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#define TYPES_GHIDRA_NO_PROTOTYPES
 #include "game/layouts/Recovered_Instance.h"
 #include "game/layouts/Recovered_WeaponManagerMethods.h"
-#include "types_ghidra.h"
-#undef TYPES_GHIDRA_NO_PROTOTYPES
+#include "ps2/recovered_types.h"
 extern void func_0015D198(Recovered_WeaponManagerMethods *, Recovered_Instance *);
 extern void ** D_0040F4E0;
 extern void * func_0020BC00(void *, s32);
