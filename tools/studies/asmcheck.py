@@ -3,7 +3,7 @@
 
 `gen` samples the USA retail .text (every distinct mnemonic plus random contiguous windows), disassembles with
 rabbitizer's R5900 support and writes sample.s plus sample.json (original words and texts) under .local/asmcheck/.
-`run` assembles it inside the build toolchain (tools/sandbox.py) with each available assembler, retries after
+`run` assembles it inside the build toolchain (tools/build/sandbox.py) with each available assembler, retries after
 removing lines the assembler rejects, and compares the resulting .text words with the originals.
 
 Usage: asmcheck.py gen [--windows N --window-size N --per-mnemonic N --seed N]
@@ -11,7 +11,7 @@ Usage: asmcheck.py gen [--windows N --window-size N --per-mnemonic N --seed N]
 """
 import sys as _sys
 from pathlib import Path as _Path
-_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
+_sys.path[:0] = [str(_Path(__file__).resolve().parents[1] / _d) for _d in ('', 'build', 'pipeline', 'maint')]  # the core tools
 import argparse, collections, json, random, struct, subprocess, sys
 from pathlib import Path
 
@@ -157,7 +157,7 @@ def run(a):
     (WORK / 'nwin.txt').write_text(str(len(wins)))
     tags = [n.split('(')[0] for n in ASSEMBLERS]
     outs = ['result.json'] + [t + '.o' for t in tags] + ['%s.win%d.o' % (t, w) for t in tags for w in range(len(wins))]
-    cmd = [sys.executable, str(ROOT / 'tools/sandbox.py'), str(WORK / 'run.py'), '--timeout', '900',
+    cmd = [sys.executable, str(ROOT / 'tools/build/sandbox.py'), str(WORK / 'run.py'), '--timeout', '900',
            '--file', 'sample.s=' + str(WORK / 'sample.s'), '--file', 'asms.json=' + str(WORK / 'asms.json'),
            '--file', 'nwin.txt=' + str(WORK / 'nwin.txt')]
     cmd += sum((['--file', 'win%d.s=%s' % (w, WORK / ('win%d.s' % w))] for w in range(len(wins))), [])

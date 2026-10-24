@@ -4,7 +4,7 @@ import sys
 import json
 import tempfile
 import unittest
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 from class_skeletons import (decode_name, identifier, cpp_type, field_type, table_inventory,
                              vptr_stores, signature, render_header, rendered_files, generate, load_context, table_fields)
 

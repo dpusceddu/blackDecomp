@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'tools'))
+sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 from m2c_input import normalize_sections, decode_raw_instructions
 
 
@@ -50,7 +50,7 @@ glabel probe_convert
             context = Path(directory) / 'ctx.c'
             path.write_text(decode_raw_instructions(text))
             context.write_text('int probe_convert(float value);')
-            result = subprocess.run([sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--context', str(context), '--no-cache', str(path)], capture_output=True, text=True)
+            result = subprocess.run([sys.executable, str(ROOT / 'tools/pipeline/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--context', str(context), '--no-cache', str(path)], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertNotIn('second half of f64', result.stdout)
         self.assertNotIn('Decompilation failure', result.stdout)
@@ -74,7 +74,7 @@ glabel probe_loop
             context = Path(directory) / 'ctx.c'
             path.write_text(decode_raw_instructions(text))
             context.write_text('int probe_loop(int count);')
-            result = subprocess.run([sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--context', str(context), '--no-cache', str(path)], capture_output=True, text=True)
+            result = subprocess.run([sys.executable, str(ROOT / 'tools/pipeline/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--context', str(context), '--no-cache', str(path)], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertNotIn('Decompilation failure', result.stdout)
         self.assertIn('while', result.stdout)
@@ -120,7 +120,7 @@ glabel jtbl_probe
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'probe.s'
             path.write_text(normalize_sections(asm))
-            result = subprocess.run([sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', str(path)], capture_output=True, text=True)
+            result = subprocess.run([sys.executable, str(ROOT / 'tools/pipeline/m2c_wrap.py'), '-t', 'mipsee-gcc-c', str(path)], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn('switch', result.stdout)
         self.assertIn('case 2:', result.stdout)

@@ -12,7 +12,7 @@ import types
 import time
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import autodecomp
 import permuter_service
 import permuter_worker

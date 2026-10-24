@@ -1,7 +1,7 @@
 # Owner of every link-once copy (compiler-emitted inline and template code, docs/build.md), per range [start, end).
 # Written by tools/studies/linkonce_owners.py; review and refine by hand. Evidence, weakest in the range:
 #   callers, between, via-inline, callees, vtable, shared (see the tool for what each means).
-# tools/layout.py reads this file: src/<owner>/inline/ holds the source files, progress counts the code for <owner>.
+# tools/build/layout.py reads this file: src/<owner>/inline/ holds the source files, progress counts the code for <owner>.
 0x383b50 0x383c70 game shared
 0x383c70 0x383ca0 kynapse callers
 0x383ca0 0x383d38 game shared

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Report how much of .text is provided by source (tools/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by region.
+"""Report how much of .text is provided by source (tools/build/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by region.
 
 Regions come from config/SLUS_213.76/function_regions.txt (PS2 address -> game, kynapse, animation, physics or other), derived from an
 Xbox-to-PS2 counterpart map (`progress.py --refresh MAP.json` rewrites it; the committed file is enough to build and report). An unmapped function takes the
@@ -15,7 +15,7 @@ Usage: progress.py [SLUG]       writes build/<GAME_ID>/progress.json and prints 
        progress.py --check      fail when no objdiff report exists to compare with (the check always runs when a current one does)
        progress.py --libraries   also print the totals per library directory of src/
        progress.py --tus [N]     also list the N (default 15) partially done translation units with most bytes still in assembly
-When config/tus.yaml exists (tools/tus.py) the report adds the progress by TU: complete TUs (every function from source),
+When config/tus.yaml exists (tools/maint/tus.py) the report adds the progress by TU: complete TUs (every function from source),
 partially done ones and bytes per TU, by confidence of the TU boundaries.
 """
 import sys as _sys
@@ -25,7 +25,7 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import json, struct, sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from units import load_units
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,7 +65,7 @@ def regions(addrs):
 
 
 def orphan_pieces(slug, fs):
-    """Addresses of the functions that are orphan pieces: `<one non-branch instruction>; nop` repeated (see tools/boundaries.py)."""
+    """Addresses of the functions that are orphan pieces: `<one non-branch instruction>; nop` repeated (see tools/maint/boundaries.py)."""
     from elfinfo import Elf
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
     elf = Elf((ROOT / 'orig' / slug / boot).read_bytes())
@@ -313,7 +313,7 @@ def main():
                 r['source_functions'] += 1
                 r['source_bytes'] += span
         out['by_library'] = libs
-        print('\nby library directory (src/<library>, tools/layout.py)')
+        print('\nby library directory (src/<library>, tools/build/layout.py)')
         for lib, r in sorted(libs.items()):
             print('%-12s %7d %7d %5.1f%%   %9d %9d %5.1f%%' % (lib, r['functions'], r['source_functions'],
                   100.0 * r['source_functions'] / r['functions'], r['bytes'], r['source_bytes'], 100.0 * r['source_bytes'] / max(r['bytes'], 1)))

@@ -36,7 +36,7 @@ def main():
     if ref.exists():
         subprocess.run([sys.executable, str(ROOT / 'tools/diffelf.py'), str(ref), str(built)])
         if (built.parent / 'linked.elf').exists() and slug == 'SLUS_213.76':   # name the functions and files that differ
-            subprocess.run([sys.executable, str(ROOT / 'tools/units_verify.py'), 'compare'])
+            subprocess.run([sys.executable, str(ROOT / 'tools/build/units_verify.py'), 'compare'])
     return 1
 
 

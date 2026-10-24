@@ -1,4 +1,4 @@
-// Function starts splat cannot see, in splat symbol_addrs format. tools/boundaries.py writes this file from the image;
+// Function starts splat cannot see, in splat symbol_addrs format. tools/maint/boundaries.py writes this file from the image;
 // an entry behind a `// explicit: <reason>` line is kept by hand and is also read back as a known function start.
 func_00100338 = 0x00100338; // type:func
 func_00100470 = 0x00100470; // type:func

@@ -15,7 +15,7 @@ are earlier builds and only give naming and ordering hints. The USA retail execu
 
 `ninja` rebuilds the boot ELF byte for byte for all five retail images. Facts that shaped the design:
 
-- GNU `ld` cannot write the retail container, so `tools/pack_elf.py` re-packs the linked sections from
+- GNU `ld` cannot write the retail container, so `tools/build/pack_elf.py` re-packs the linked sections from
   `config/<GAME_ID>/layout.json`; DVP overlays and `.vutext`/`.vudata` are extracted payloads.
 - One ld statement per object is quadratic (did not finish in 15 minutes for 12,000 objects): input sections are named
   `<section>.<address>` and placed by `SORT_BY_NAME`.
@@ -29,7 +29,7 @@ are earlier builds and only give naming and ordering hints. The USA retail execu
 - Constants travel with their function (74 % of `.rodata`, 88 % of `.lit4` migrate); `.gcc_except_table` belongs to whole
   object files and mostly stays shared.
 - Function boundaries: 1,169 orphan `<instruction>; nop` pieces sit between functions and are not code of either
-  neighbour; `tools/boundaries.py` splits them off (123 functions that splat had fused with a piece now match
+  neighbour; `tools/maint/boundaries.py` splits them off (123 functions that splat had fused with a piece now match
   individually) and adds the `__CTOR_LIST__` entries as starts.
 - An earlier analysis of the executable listed 9,946 functions (268 with a recovered name); splat finds 1,832 more starts. The
   names are now `alias` lines in `config/SLUS_213.76/symbols.txt` and the signatures live in `include/ps2/prototypes.h`.
@@ -39,7 +39,7 @@ are earlier builds and only give naming and ordering hints. The USA retail execu
 
 ## Phase 3: translation units
 
-`tools/tus.py` combines unwind-frame groups (822 CIE groups, exact object boundaries), the constructor list (116 entries,
+`tools/maint/tus.py` combines unwind-frame groups (822 CIE groups, exact object boundaries), the constructor list (116 entries,
 certain TU ends), library strings and code style, data-order joins and call edges. Result: 599 object TUs of two or more
 functions (120 exact), 1,586 isolated functions and 852 link-once sections, with library ranges, compiler and flags.
 Orphan pieces, alignment and cross-build shifts do not mark boundaries. The Sony libraries (`sd` register saves, blocks
@@ -77,7 +77,7 @@ Work proceeded in rounds, each on a set of TUs with one owner per TU:
   six-word family. A uniform substitution regresses 46 of 5,018 controls, so it is selected per unit only
   (`--assembler=sn-min6`, `assembler_evidence: weak` in `units.yaml`). +41 functions / 5,248 B.
 - **RTTI class skeletons**: 189 class type-info records (166 Kaim classes), 171 base links, 3,830 vtable slots;
-  `tools/class_skeletons.py` generates `include/game/classes/` and `include/kynapse/classes/` (189 named interfaces, 383
+  `tools/maint/class_skeletons.py` generates `include/game/classes/` and `include/kynapse/classes/` (189 named interfaces, 383
   unknown-owner views, 2,055 field views of which about 700 have scoped PS2 access proofs). +7 functions.
 - **C++ class recovery** (seven rounds over four queues, then shared-context preparation): 5,066 -> 5,354 functions, 281.6 kB
   -> 362.0 kB. Shared PS2 helpers (`include/ps2/`, 26 exact consumers) cover the SN integer/vector ABI, VU0 transforms,
@@ -106,7 +106,7 @@ with the original on recorded states, with measured coverage, without claiming a
    exact-source controls (1,408 executions) and mutation detection. Not cycle accurate.
 2. **Real input states** (not passed): eight PCSX2 states gave 238,062 entry states reaching 1,841 game functions;
    1,429 of 6,512 have at least 20 states (3,257 needed). Typed fuzzing: 1,745 mutations, none faulted.
-3. **Equivalence driver and pilot** (`tools/equiv.py`): 50 candidates (ten above 1 KB) on 6,132 recorded states; 14 readable
+3. **Equivalence driver and pilot** (`tools/pipeline/equiv.py`): 50 candidates (ten above 1 KB) on 6,132 recorded states; 14 readable
    C++ functions (984 B) reached `equivalent` with full basic-block coverage; the other 36 stay drafts, including all ten
    large ones (low coverage, call-argument differences, device waits). A compiled positive control passed twenty inputs and
    a mutation failed all twenty. The pilot target (50 functions, whole-program frame agreement) is not met and no

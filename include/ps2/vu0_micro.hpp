@@ -11,7 +11,7 @@
 // with no compiler-unrepresented ACC/Q/I/flag state live across the operation.
 // The memory clobber describes memory only; it does not protect VU specials.
 // Register contracts are independently decoded from the resident microcode by
-// tools/vu0_micro.py; its flag-pipeline report is conservative, not a simulator.
+// tools/pipeline/vu0_micro.py; its flag-pipeline report is conservative, not a simulator.
 // Every recipe has an isolated encoding control. Whole-function exact consumers
 // now include Slerp and XYZW interpolation in pose Overlay (0x347600).
 // Check the study's two-real-consumer threshold separately for each recipe.

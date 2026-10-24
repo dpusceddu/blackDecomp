@@ -5,7 +5,7 @@
                                     config/SLUS_213.76/splits.yaml     one entry per source file/range, flags, assembler variant
                                     config/SLUS_213.76/symbols.txt     mangled definition names and extern bindings
                                     config/SLUS_213.76/equivalent.yaml functions of the equivalent evidence tier
-  migrate_split_list.py check     derive the units back with tools/units.py and compare them with config/units.yaml
+  migrate_split_list.py check     derive the units back with tools/build/units.py and compare them with config/units.yaml
 
 The function statuses are not written: they come from the INCLUDE_ASM markers of the source files. Extern bindings come from the
 units' `externs` and from the optional legacy `.local/import/*_bindings.json`; a name bound to two addresses stays in the split
@@ -21,7 +21,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'tools'))
+sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import splits as S
 
 SLUG = 'SLUS_213.76'

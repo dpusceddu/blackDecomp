@@ -1,10 +1,10 @@
 # Translation units and toolchain facts
 
-Evidence for TU boundaries and libraries (`tools/tus.py`), per-TU compilers and flags, the assembler short-loop padding study, one file per TU.
+Evidence for TU boundaries and libraries (`tools/maint/tus.py`), per-TU compilers and flags, the assembler short-loop padding study, one file per TU.
 
 ## Translation units
 
-The executable has no symbols, so the object files are recovered from what the linker and compiler left behind. `python3 tools/tus.py
+The executable has no symbols, so the object files are recovered from what the linker and compiler left behind. `python3 tools/maint/tus.py
 all` collects the signals (`evidence`), writes `config/tus.yaml` (`map`; hand corrections in `config/tus_overrides.yaml`) and measures how
 the signals agree (`validate`). Each TU in the map has a text range, data ranges (items only its functions use), compiler and flags (those of
 its matched functions, else a guess from the code style), a confidence and its evidence. Confidence: `exact` = unwind frames (the TU is
@@ -84,7 +84,7 @@ instruction bytes are edited. Existing recipes stay in place: uniform substituti
 
 `python3 tools/toolchain.py install` writes the derivative next to the downloaded original.
 `config/toolchain-assemblers.json` records original/output hashes, exact patch sites and upstream
-references; `tools/patch_ps2eeas.py` retains the original, verifies full hashes/preimages and is idempotent.
+references; `tools/build/patch_ps2eeas.py` retains the original, verifies full hashes/preimages and is idempotent.
 Compilation checks the derivative hash again before execution. Add `--assembler=sn-min6` to a
 unit's flags or pass it to `tools/compile.py`; the selected compiler emits untouched `-S` output.
 Candidate and production caches include the recipe. The automatic pipeline tries this verified

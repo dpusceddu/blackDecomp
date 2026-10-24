@@ -8,7 +8,7 @@ import tempfile
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
-WRAPPER = Path(os.environ.get('BLACK_M2C_WRAPPER', ROOT / 'tools/m2c_wrap.py'))
+WRAPPER = Path(os.environ.get('BLACK_M2C_WRAPPER', ROOT / 'tools/pipeline/m2c_wrap.py'))
 spec = importlib.util.spec_from_file_location('black_m2c_double_abi', WRAPPER)
 wrapper = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(wrapper)

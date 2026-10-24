@@ -118,7 +118,7 @@ Tests need no game files; those that would need private inputs skip. CI runs bot
   reformat existing files: matching depends on exact source shape, and unrelated whitespace changes make review harder.
 - Source layout: `src/<library>/<name>.c|cpp` (`src/game/<subsystem>/` for the game library), one file per TU with every function of the TU (INCLUDE_ASM lines, drafts in
   `#ifdef NON_MATCHING` blocks). Headers follow the libraries (`include/<library>/`, shared helpers in `include/ps2/`).
-  `tools/layout.py` has the naming rules.
+  `tools/build/layout.py` has the naming rules.
 - Name functions and types after what the code does only where the evidence supports it; unknown functions stay
   `func_XXXXXXXX`. Mark field offsets that are only accessed, not understood, as such (`UNVERIFIED`).
 - Python tools: stdlib first, a purpose docstring and `--help` for every tool, no machine-specific paths.

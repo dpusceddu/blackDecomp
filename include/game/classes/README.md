@@ -1,8 +1,8 @@
 # Generated PS2 class interfaces
 
-`tools/class_skeletons.py` is the single owner of this directory. Change verified
+`tools/maint/class_skeletons.py` is the single owner of this directory. Change verified
 ABI evidence in `config/SLUS_213.76/class_method_abi.json` or `config/SLUS_213.76/rtti_abi.json`, then
-regenerate; do not edit generated headers. Run `tools/class_skeletons.py --check`
+regenerate; do not edit generated headers. Run `tools/maint/class_skeletons.py --check`
 to check the complete generated tree. The detailed catalog stays in ignored
 `build/classes/catalog.json`.
 
@@ -10,8 +10,8 @@ The recovered context cache is required. Refresh it before generating and checki
 
 ```sh
 .venv/bin/python tools/autodecomp.py context --refresh
-.venv/bin/python tools/class_skeletons.py
-.venv/bin/python tools/class_skeletons.py --check
+.venv/bin/python tools/maint/class_skeletons.py
+.venv/bin/python tools/maint/class_skeletons.py --check
 ```
 
 RTTI names and semantic base hierarchies are decoded from retail. `Hierarchy_*`

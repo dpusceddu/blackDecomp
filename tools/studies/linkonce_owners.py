@@ -9,7 +9,7 @@ copies on both sides have one owner and no caller disagrees), `via-inline` (ever
 `callees` (the only specific callees are in one library), `vtable` (the other copies in the same vtable have one owner) and `shared` (callers in several libraries and nothing narrower:
 the library that comes first in link order). The result is config/SLUS_213.76/inline_owners.txt, one line per run of translation units
 of the block with one owner and evidence: `0xSTART 0xEND library evidence`, the evidence being the weakest one among the unit's functions. A unit whose
-functions disagree is an error. tools/layout.py reads the list, so progress, new source files and src/<library>/inline/ follow it.
+functions disagree is an error. tools/build/layout.py reads the list, so progress, new source files and src/<library>/inline/ follow it.
 
 Needs the split assembly (asm/SLUS_213.76/, written by `ninja`); the committed list is enough for everything else.
 Usage: linkonce_owners.py [--write]     without --write only print the summary
@@ -23,7 +23,7 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import bisect, collections, re, sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path[:0] = [str(Path(__file__).resolve().parents[1] / _d) for _d in ('', 'build', 'pipeline', 'maint')]
 import layout
 
 ROOT = layout.ROOT
@@ -166,7 +166,7 @@ def main():
         text = ('# Owner of every link-once copy (compiler-emitted inline and template code, docs/build.md), per range [start, end).\n'
                 '# Written by tools/studies/linkonce_owners.py; review and refine by hand. Evidence, weakest in the range:\n'
                 '#   callers, between, via-inline, callees, vtable, shared (see the tool for what each means).\n'
-                '# tools/layout.py reads this file: src/<owner>/inline/ holds the source files, progress counts the code for <owner>.\n')
+                '# tools/build/layout.py reads this file: src/<owner>/inline/ holds the source files, progress counts the code for <owner>.\n')
         text += ''.join('0x%06x 0x%06x %s %s\n' % tuple(r) for r in rows)
         OUT.write_text(text)
         print('wrote', OUT.relative_to(ROOT), len(rows), 'lines')

@@ -6,12 +6,12 @@ The m2c-based draft pipeline (`tools/autodecomp.py`), its context recovery and t
 
 Shared PS2 inline helpers and target types live in [include/ps2/](../include/ps2/README.md), owned by
 the shared context maintainer. `config/SLUS_213.76/ps2_header_evidence.json` records the field/operation scope of
-each exact consumer; `python3 tools/shared_context.py verify` checks actual header use, instruction
+each exact consumer; `python3 tools/maint/shared_context.py verify` checks actual header use, instruction
 matches and the full image. Reuse these headers and preserve their helper order, widths and VU
 spill recipes. Report shared changes to their owner; unverified layouts remain explicitly partial.
 
 VU math study tools: `tools/studies/vu0_patterns.py` inventories recurring instruction/dataflow shapes;
-`tools/vu0_micro.py` decodes conservative contracts keyed by uploaded image and entry address.
+`tools/pipeline/vu0_micro.py` decodes conservative contracts keyed by uploaded image and entry address.
 Their generated site lists belong under `build/`. Library labels inherited from the TU map are
 qualified evidence, and overlapping shape counts are not additive. `tools/studies/verify_vu0_math.py`
 checks isolated arithmetic windows; `config/vu0_math.json` promotes an operation only with two
@@ -75,16 +75,16 @@ says whether the result is exact. `import.py` may warn about a syntax error from
 
 ### Long searches (optional)
 
-`tools/permuter_service.py` is a batch helper for long searches. It needs a backend plugin that provides `service()`
-(`tools/backend.py`), which keeps a job alive between calls; with the local backend only the direct use above applies.
+`tools/pipeline/permuter_service.py` is a batch helper for long searches. It needs a backend plugin that provides `service()`
+(`tools/build/backend.py`), which keeps a job alive between calls; with the local backend only the direct use above applies.
 Use it rather than the short legacy `permute` command:
 
 ```sh
-.venv/bin/python tools/permuter_service.py start --hours-per-function 2 --total-hours 10
-.venv/bin/python tools/permuter_service.py status
-.venv/bin/python tools/permuter_service.py fetch
-.venv/bin/python tools/permuter_service.py enqueue 0xADDRESS build/candidate.c --flags -O2 -G0 -snas
-.venv/bin/python tools/permuter_service.py stop
+.venv/bin/python tools/pipeline/permuter_service.py start --hours-per-function 2 --total-hours 10
+.venv/bin/python tools/pipeline/permuter_service.py status
+.venv/bin/python tools/pipeline/permuter_service.py fetch
+.venv/bin/python tools/pipeline/permuter_service.py enqueue 0xADDRESS build/candidate.c --flags -O2 -G0 -snas
+.venv/bin/python tools/pipeline/permuter_service.py stop
 ```
 
 For verified named imports, pass repeatable `--binding SYMBOL=ADDRESS` before `--flags`.
@@ -199,9 +199,9 @@ speculative signatures do not conflict with unrelated definitions. When several 
 
 No tool rewrites a committed header: `decompile.py`, `autodecomp.py` and the build only write under `build/auto/` (the m2c
 context: `context.json`, `ctx*.c`, `recovered_layouts.c`) from the committed headers, sources and configuration, which is all a
-fresh checkout has. `tools/class_skeletons.py` (`include/*/classes/`) is the one maintainer command that writes headers.
+fresh checkout has. `tools/maint/class_skeletons.py` (`include/*/classes/`) is the one maintainer command that writes headers.
 
-After `python3 tools/autodecomp.py context --refresh`, run `python3 tools/class_skeletons.py` to recover
+After `python3 tools/autodecomp.py context --refresh`, run `python3 tools/maint/class_skeletons.py` to recover
 the legacy GCC RTTI graph and vtables and write
 `include/game/classes/`, `include/kynapse/classes/` and an address/slot index in ignored build output. The generator is the sole owner
 of these headers: put verified corrections in its evidence configuration and regenerate. RTTI names,
@@ -218,11 +218,11 @@ Type and instruction support, all of it mechanical and checked by exact matches:
   each structure is marked `UNVERIFIED` until a matched function actually accesses its members, and a prototype is only a weak
   declaration that a proved ABI correction (`selected_prototype`) or a matched definition overrides. `ctx.c` combines them with the
   recovered signatures and partial views; every draft includes `ps2/recovered_types.h`. Files that call a prototyped function include
-  `ps2/prototypes.h`, which includes the types. `tools/m2c_wrap.py` is m2c with one change: a dereference of an untyped expression
+  `ps2/prototypes.h`, which includes the types. `tools/pipeline/m2c_wrap.py` is m2c with one change: a dereference of an untyped expression
   becomes `M2C_FIELD(expr, T *, 0)` (valid C) instead of `*expr`.
 - **Stack objects.** m2c's frame objects (`sp`, `&spN`, `spN`) become one `u8 sp[N] __attribute__((aligned(16)))` buffer whose
   size is searched against the frame size; reads of an argument register the function never sets become `argN`.
-- **EE instructions** (`tools/ee_prep.py`). SN GCC 2.95 for the EE has `long` = 64 bits and `long long` = 128 bits. `lq`/`sq`/
+- **EE instructions** (`tools/pipeline/ee_prep.py`). SN GCC 2.95 for the EE has `long` = 64 bits and `long long` = 128 bits. `lq`/`sq`/
   `por rd, rs, $0` are `long long` loads, stores and moves; `ldl`+`ldr` / `sdl`+`sdr` pairs are 8-byte accesses at byte
   alignment (`struct { char c[8]; }` copies, packed members). The assembly shown to m2c has `ld`/`sd`/`daddu` instead, and
   its 64-bit types are turned into the 128-bit type (or `M2C_UNALIGNED64`) afterwards, but only when the function has no real
@@ -243,7 +243,7 @@ Type and instruction support, all of it mechanical and checked by exact matches:
   `tools/trysrc.py ADDR file.c`.
 
 An exact draft is only a candidate: `register` replaces the function's INCLUDE_ASM line in its TU file by the draft
-(`tools/tu_files.py`; declarations go after the includes; a function compiled with other flags than its file, or whose group
+(`tools/pipeline/tu_files.py`; declarations go after the includes; a function compiled with other flags than its file, or whose group
 failed, gets a small file of its own and a line in `config/SLUS_213.76/splits.yaml`, and its mangled name a line in
 `symbols.txt`). `settle` compiles and links, puts the marker back for whatever does not place identically, and retries a
 failed file's new functions one per file. Results and reasons (`verify-failed`: `size` = the function owns rodata that the source does not define, `extra`,

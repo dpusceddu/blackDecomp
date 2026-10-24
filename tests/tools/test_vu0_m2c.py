@@ -5,7 +5,7 @@ import subprocess
 import tempfile
 import unittest
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import vu0_m2c as v
 
 

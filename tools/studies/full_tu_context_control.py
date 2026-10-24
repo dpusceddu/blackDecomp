@@ -13,7 +13,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'tools'))
+sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import autodecomp as A
 
 WORKER = r'''
@@ -76,9 +76,9 @@ def main():
         (output / (key + '.o')).write_bytes(obj)
     script = output / 'worker.py'
     script.write_text(WORKER)
-    command = [sys.executable, str(ROOT / 'tools/sandbox.py'), str(script),
-               '--file', 'elfobj.py=' + str(ROOT / 'tools/elfobj.py'),
-               '--file', 'elfinfo.py=' + str(ROOT / 'tools/elfinfo.py'),
+    command = [sys.executable, str(ROOT / 'tools/build/sandbox.py'), str(script),
+               '--file', 'elfobj.py=' + str(ROOT / 'tools/build/elfobj.py'),
+               '--file', 'elfinfo.py=' + str(ROOT / 'tools/build/elfinfo.py'),
                '--out', 'results.json=' + str(output / 'results.json')]
     for key in sources:
         command += ['--file', key + '.o=' + str(output / (key + '.o'))]

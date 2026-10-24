@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
-WRAPPER = ROOT / 'tools/m2c_wrap.py'
+WRAPPER = ROOT / 'tools/pipeline/m2c_wrap.py'
 spec = importlib.util.spec_from_file_location('black_m2c_stack_escape', WRAPPER)
 wrapper = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(wrapper)

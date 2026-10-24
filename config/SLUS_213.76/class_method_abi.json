@@ -1,5 +1,5 @@
 {
-  "owner": "tools/class_skeletons.py; generated include/classes headers have one owner",
+  "owner": "tools/maint/class_skeletons.py; generated include/classes headers have one owner",
   "qualification": "PS2 instruction offsets and isolated exact source probes; matched status is recomputed from the split list and INCLUDE_ASM markers (config/SLUS_213.76/splits.yaml). These are partial ABI views, never complete object sizes.",
   "records": {},
   "methods": {

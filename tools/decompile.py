@@ -21,7 +21,7 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import argparse, re, sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 import include_asm
 import splits as S
 

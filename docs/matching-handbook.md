@@ -10,7 +10,7 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All compiler ex
    every real function and its rodata/data/sdata/bss/exception tables from `config/tus.yaml`; uncertain boundaries stay
    qualified. A code-complete TU is not data-complete until ownership is audited.
 2. Recover behavior, callee arity/return widths, field offsets, hidden results and cleanup edges first. Xbox source gives
-   algorithms and names, not PS2 layout proof. Use `tools/equiv.py` and recorded EE states when available; absent states
+   algorithms and names, not PS2 layout proof. Use `tools/pipeline/equiv.py` and recorded EE states when available; absent states
    mean untested behavior, never an invented equivalent-tier result. Matching work can continue without states.
 3. Compare the first divergent instructions with `tools/trysrc.py`, using the actual bindings for named C++ symbols.
    Classify the obstruction below. Change one source feature, retain the best candidate, and compare the complete diff.
@@ -71,7 +71,7 @@ original unit flags, recorded by the tool. Restoring the original source restore
 | gp-relative data | Match `-G` and the declaration's known size. A small sized extern and an unsized array can lower differently under the same flags. Resolve the actual GPREL relocation target and addend; never forgive it just because the instruction matches. | `0x10BBF8`: sized extern under `-G8 -snas` exact; either `-G0` or unsized extern adds **2** differences. Assembly inputs require the existing `.extern symbol, 1` convention. A locally defined small-data section uses unnamed section relocations and object GP0; pass its verified base via `compiled_tokens(section_bindings=...)`, then verify the full link. |
 
 For VU verification run `.venv/bin/python tools/studies/verify_vu0_math.py` followed by
-`.venv/bin/python tools/shared_context.py verify`. Register-renamed arithmetic windows alone do not verify physical
+`.venv/bin/python tools/maint/shared_context.py verify`. Register-renamed arithmetic windows alone do not verify physical
 allocation, surrounding scheduling or a new W/flag-state contract. Scale, cross and normalization recipes still marked
 provisional in `config/vu0_math.json` remain provisional.
 
@@ -91,7 +91,7 @@ For a hard allocation/scheduling problem, SN accepts `-da -fdump-unnumbered`. An
 RTL, GCSE/loop/combine, first scheduling, local/global allocation, second scheduling and delay-slot dumps; adding these
 flags preserved every text section of three exact controls. Compare the earliest divergent pass of two source variants:
 fix lowering/combine before blaming allocation, then inspect scheduling. Use
-`.venv/bin/python tools/compiler_dumps.py SOURCE --flags '-O2 -G0 -snas'` to retrieve them through `sandbox.py`.
+`.venv/bin/python tools/pipeline/compiler_dumps.py SOURCE --flags '-O2 -G0 -snas'` to retrieve them through `sandbox.py`.
 Dumps and generated assembly stay under `build/`.
 
 A scalar divide with otherwise identical instructions can expose a compiler-default workaround. Reproduce

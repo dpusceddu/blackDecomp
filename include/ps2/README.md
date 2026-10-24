@@ -1,7 +1,7 @@
 # Shared PS2 inline context
 
 The shared context maintainer owns this directory and `config/SLUS_213.76/ps2_header_evidence.json`.
-`tools/shared_context.py verify` runs the build, preserves the HEAD source-address set,
+`tools/maint/shared_context.py verify` runs the build, preserves the HEAD source-address set,
 and checks the manifest's real consumers against retail instructions and relocation targets.
 The complete image must also remain identical. Verification details stay in ignored build output.
 
@@ -55,7 +55,7 @@ not verification of every floating operation or another compiler's ABI.
 `config/vu0_math.json` separates operations with two exact source consumers from
 provisional scale/cross/normalization recipes. Run `tools/studies/verify_vu0_math.py` for
 isolated, register-renamed VF dataflow equality against retail, followed by
-`tools/shared_context.py verify` for full physical allocation and image checks.
+`tools/maint/shared_context.py verify` for full physical allocation and image checks.
 Isolation does not prove surrounding scheduling. XYZ writes do not define W;
 normalize-with-copy and normalize-without-copy are distinct recipes. ACC and Q
 are consumed inside one assembly block; MAC/status flags are not exported.

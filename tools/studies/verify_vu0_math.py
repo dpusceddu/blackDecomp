@@ -7,7 +7,7 @@ scores real source consumers and checks full-image equality. Inputs remain local
 """
 import sys as _sys
 from pathlib import Path as _Path
-_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
+_sys.path[:0] = [str(_Path(__file__).resolve().parents[1] / _d) for _d in ('', 'build', 'pipeline', 'maint')]  # the core tools
 import argparse
 import json
 import re

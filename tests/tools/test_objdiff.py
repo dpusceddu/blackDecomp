@@ -3,7 +3,7 @@ import json, struct, sys, tempfile, unittest
 from pathlib import Path
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import elfobj
 import objdiff
 import splits as S
@@ -39,7 +39,7 @@ class ProjectFile(unittest.TestCase):
 
 
 def asm(addr, body_words, padding=1, tail_labels=()):
-    """Split assembly of one function in the format of tools/split_objects.py: code, `endlabel`, then padding nops."""
+    """Split assembly of one function in the format of tools/build/split_objects.py: code, `endlabel`, then padding nops."""
     lines = ['.section .text.%08X, "ax"' % addr, 'glabel func_%08X' % addr]
     for i in range(body_words):
         lines.append('    /* %X %08X 00000000 */  nop' % (addr - 0x100000 + 4 * i, addr + 4 * i))

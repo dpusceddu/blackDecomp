@@ -8,7 +8,7 @@ Usage:
   toolchain.py env     [--root DIR]                         print the environment the build jobs use
 
 The compilers are the decomp.me archives pinned in config/toolchain-compilers.json; the patched short-loop assembler is
-reproduced from the original Ps2EeAs.exe with tools/patch_ps2eeas.py; wibo (a small loader for Windows command-line
+reproduced from the original Ps2EeAs.exe with tools/build/patch_ps2eeas.py; wibo (a small loader for Windows command-line
 programs) is pinned in config/toolchain-local.json. Everything is verified by SHA-256 and unpacked into an ignored cache
 (`build/toolchain/` by default, or $BLACK_TOOLCHAIN_DIR):
 
@@ -30,7 +30,7 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import argparse, hashlib, json, os, platform, shutil, stat, sys, tarfile, tempfile, urllib.request
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 import patch_ps2eeas
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -203,7 +203,7 @@ def require(base=None):
 
 
 def job_environment(base=None):
-    """Variables the build jobs read (see tools/sandbox.py and tools/build_job.py)."""
+    """Variables the build jobs read (see tools/build/sandbox.py and tools/build/build_job.py)."""
     base = base or root()
     binutils, prefix = find_binutils(base)
     path = [str(base / 'bin')] + ([str(binutils)] if binutils else [])

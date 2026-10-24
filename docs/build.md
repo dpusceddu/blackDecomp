@@ -25,7 +25,7 @@ ninja objdiff && ninja report                  # objdiff project and progress re
   assembler assembles all split assembly; one scoped unit uses its compiler) and `ee-gcc2.95.2-273a` (an alternative
   assembler for three units);
 - the patched short-loop assembler `ps2eeas-1.9.25.758-min6`, reproduced from the downloaded original `Ps2EeAs.exe` with
-  `tools/patch_ps2eeas.py` and checked against the pinned hashes in `config/toolchain-assemblers.json`;
+  `tools/build/patch_ps2eeas.py` and checked against the pinned hashes in `config/toolchain-assemblers.json`;
 - [wibo](https://github.com/decompals/wibo) 1.2.0 (`config/toolchain-local.json`), which runs the Windows programs on Linux.
 
 The linker and `objcopy` come from `binutils-mipsel-linux-gnu` (Debian/Ubuntu package, 2.40 tested); the build looks for
@@ -36,11 +36,11 @@ was tried and does not work: its `ld` only supports the big-endian MIPS emulatio
 on Debian. The `Dockerfile` builds an image with all of this.
 
 Two quirks the tools handle: SN's `Ps2EeAs.exe` crashes when it has to print a warning and its own path is longer than about
-80 characters (Windows form), so the Windows tools run from a short copy under `/tmp` (`tools/assembler.py`, `short_path`);
+80 characters (Windows form), so the Windows tools run from a short copy under `/tmp` (`tools/build/assembler.py`, `short_path`);
 and compiler warnings are printed only for failed jobs (set `BLACK_VERBOSE=1` for all).
 
-Every tool that needs a compiler, assembler or linker sends its work through `tools/backend.py` (batches of jobs via
-`tools/sandbox.py`), so there is one place that decides where the toolchain runs; the default is the local one above.
+Every tool that needs a compiler, assembler or linker sends its work through `tools/build/backend.py` (batches of jobs via
+`tools/build/sandbox.py`), so there is one place that decides where the toolchain runs; the default is the local one above.
 
 ### Running the toolchain elsewhere (optional)
 
@@ -55,40 +55,40 @@ The toolchain only runs on Linux x86-64. A contributor who prefers to run it els
 jobs (`files`, a `script` to run, the `out` names to return and a `timeout`) and returns `{rc, out, err, artifacts}`, the
 same contract as the local backend; `backend.WRAPPER` is the program that runs such a batch and can be reused. It may also
 define `compile_standalone(request, config)` (single compiles for `tools/compile.py`) and `service(...)` (long-running
-detached jobs for `tools/permuter_service.py`). The full interface is in the docstring of `tools/backend.py`. One call
+detached jobs for `tools/pipeline/permuter_service.py`). The full interface is in the docstring of `tools/build/backend.py`. One call
 carries a whole batch (a full build is a few calls), so a plugin may be slow per call. `BLACK_BACKEND=local` ignores the
 plugin for one command. A plugin reports its own failures by raising `SystemExit('Build backend failed; ...')`; the tools
 stop on that message instead of treating it as a compile error.
 
 Stages (one `ninja` rule each; everything generated is under the ignored `asm/`, `data/`, `build/`):
 
-1. extract: `tools/splat_config.py` writes `config/<GAME_ID>/splat.yaml` (splat segments from the ELF section table) and the
-   headerless image splat reads; `tools/elf_layout.py` writes `config/<GAME_ID>/layout.json` (ELF header, program
+1. extract: `tools/build/splat_config.py` writes `config/<GAME_ID>/splat.yaml` (splat segments from the ELF section table) and the
+   headerless image splat reads; `tools/build/elf_layout.py` writes `config/<GAME_ID>/layout.json` (ELF header, program
    header and one record per section) and extracts the opaque non-loaded payloads (DVP overlays) to `data/`.
 2. split: `splat split` (spimdisasm, rabbitizer) writes `asm/<GAME_ID>/text.s` (all functions, one file) and one data
    file per section; `.vutext` and `.vudata` stay binary blobs.
-3. `tools/link_support.py` defines the symbols splat cannot (labels inside code, offsets into data objects, section
+3. `tools/build/link_support.py` defines the symbols splat cannot (labels inside code, offsets into data objects, section
    ends and plain constants).
-4. `tools/split_objects.py --functions` writes `functions.json` (the function starts); `tools/units.py` derives the units
+4. `tools/build/split_objects.py --functions` writes `functions.json` (the function starts); `tools/build/units.py` derives the units
    from `splits.yaml`, the INCLUDE_ASM markers of the source files and `symbols.txt` ([units.md](units.md)).
-5. `tools/split_objects.py` cuts `.text` into **one assembly file per function** (`asm/<GAME_ID>/nonmatchings/func_XXXXXXXX.s`,
+5. `tools/build/split_objects.py` cuts `.text` into **one assembly file per function** (`asm/<GAME_ID>/nonmatchings/func_XXXXXXXX.s`,
    with the function's own `.extern` block) and migrates the constants that only one function uses into that
    function's file (see "Constants" below). `.rodata`, `.lit4` and `.gcc_except_table` keep their remaining shared objects
    as runs; the other data sections stay one object each. It also writes `placement.json` (every object and the original
    order of every section) and `labels.json`.
-6. compile: `tools/build_objects.py --compile-only` compiles the source files (SN compiler, one backend job; compile errors
-   are printed with the file name); then `tools/units_verify.py prepare` checks that each compiled function can take the
+6. compile: `tools/build/build_objects.py --compile-only` compiles the source files (SN compiler, one backend job; compile errors
+   are printed with the file name); then `tools/build/units_verify.py prepare` checks that each compiled function can take the
    original's place and records the extern bindings (`unit_facts.json`).
-7. `tools/make_ld.py` writes the linker script. Every function and constant run is an input section named
+7. `tools/build/make_ld.py` writes the linker script. Every function and constant run is an input section named
    `<section>.<its original address>`, and the script places them with `*(SORT_BY_NAME(<section>.*))`, which restores the
    original order (one ld statement per object would take hours for 12,000 objects). A function that a TU file compiles
    replaces its assembly object by taking over the slot (its `.text.<symbol>` section is renamed to the slot's key).
-8. `tools/build_objects.py` assembles what changed, takes the cached compiled objects and links everything with mainline
+8. `tools/build/build_objects.py` assembles what changed, takes the cached compiled objects and links everything with mainline
    GNU `ld`. Objects are cached by the hash of their inputs in `build/<GAME_ID>/cache/`, so an incremental build
    re-assembles or recompiles only what changed.
-9. `tools/pack_elf.py` re-packs ld's loaded sections into the retail container (see below);
+9. `tools/build/pack_elf.py` re-packs ld's loaded sections into the retail container (see below);
    `tools/check_elf.py` compares the result with `config/<GAME_ID>/checksums.sha256` and, on a mismatch, names the
-   functions and source files that differ (`tools/units_verify.py compare`).
+   functions and source files that differ (`tools/build/units_verify.py compare`).
 
 ## Link-once copies
 
@@ -117,7 +117,7 @@ that is still assembly. Two ways to implement it were considered:
    function with the EE GNU assembler 2.10 as a separate object. Making all of that byte-identical through the compiler
    would put the existing matches at risk for no gain in workflow.
 2. *A declarative marker* (chosen). `INCLUDE_ASM` expands to a harmless declaration (`include/include_asm.h`). The build reads
-   the markers from the source (`tools/include_asm.py`), links each marked function from its per-function assembly object
+   the markers from the source (`tools/build/include_asm.py`), links each marked function from its per-function assembly object
    at its original position, as before, and takes every other function of the file's range from the compiled object.
    Assembly is therefore always assembled by the EE GNU assembler that rebuilds the unmodified image, and a compiled function
    cannot disturb its neighbours (`-ffunction-sections` gives it a section of its own, placed in its original slot).
@@ -130,7 +130,7 @@ flags.
 
 A draft that does not match yet lives in its TU file as `#ifdef NON_MATCHING` <draft> `#else` INCLUDE_ASM `#endif`.
 `python3 configure.py --non-matching` followed by `ninja` builds the drafts into `build/<GAME_ID>-nm/<boot>.nonmatching.elf`
-(`tools/nm_build.py`): the markers inside `#else` branches stop applying, the drafts replace the assembly, and the shiftable
+(`tools/build/nm_build.py`): the markers inside `#else` branches stop applying, the drafts replace the assembly, and the shiftable
 link moves everything else. It is not compared with the original and is not expected to boot. A file whose drafts do not
 compile or link (their declarations are incomplete) keeps its matching version; the list is in
 `build/<GAME_ID>-nm/nm_fallback.json`. `python3 configure.py` returns to the matching build.
@@ -162,8 +162,8 @@ the translation-unit map rather than something one function can carry.
 
 ## Function boundaries
 
-Splat finds the function starts; `tools/boundaries.py` adds the ones it cannot see (`config/<GAME_ID>/boundaries.txt`, splat's
-`symbol_addrs` format, written by `python3 tools/boundaries.py GAME_ID`, which keeps the hand-listed `// explicit:` entries, and read by the `split` stage). Evidence from the
+Splat finds the function starts; `tools/maint/boundaries.py` adds the ones it cannot see (`config/<GAME_ID>/boundaries.txt`, splat's
+`symbol_addrs` format, written by `python3 tools/maint/boundaries.py GAME_ID`, which keeps the hand-listed `// explicit:` entries, and read by the `split` stage). Evidence from the
 instructions of the image (all five retail versions behave alike):
 
 - **Orphan pieces.** 8-byte pieces `<one non-branch instruction>; nop` (mostly `addiu $sp, $sp, N; nop`) sit between functions,
@@ -197,7 +197,7 @@ mangled name of a function it compiles), in splat's `symbol_addrs` form. There a
   assembly references keep working.
 - **Aliases** (`GameObjectManager_FindByName = 0x129160; // type:func alias`, `REG_GS_CSR = 0x12001000; // type:data alias`):
   readable working names, 268 for functions and 174 for data (hardware registers and the gp value). An alias never defines or binds a symbol and is not
-  an original symbol; `tools/splits.py` keeps aliases apart from the bound names, so adding or changing one cannot change the
+  an original symbol; `tools/build/splits.py` keeps aliases apart from the bound names, so adding or changing one cannot change the
   build. Tools use them to label functions (`tus.py`, `next.py`) and to bind hardware-register names (`equiv.py`). To give a
   function a real name, rename its definition in the source and add a bound-name line as above, not an alias.
 
@@ -209,7 +209,7 @@ the alias in a comment) and the structures they use in `include/ps2/recovered_ty
 overall and by region, then by translation unit (complete, partial and untouched TUs by confidence and by library), and writes
 `build/<GAME_ID>/progress.json`. `python3 tools/next.py tus` lists candidate TUs.
 
-Other tools: `tools/tus.py` (TU boundaries and map), `tools/layout.py` (naming of TU files), `tools/include_asm.py` (markers), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/studies/shift_test.py` (shiftability test),
+Other tools: `tools/maint/tus.py` (TU boundaries and map), `tools/build/layout.py` (naming of TU files), `tools/build/include_asm.py` (markers), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/studies/shift_test.py` (shiftability test),
 `tests/link/check.py` (SN object + GNU object linked by the toolchain's `ld`). In a sandbox script, the binutils tools
 (`mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}`, or the prefix in `$BLACK_BINUTILS_PREFIX`) are on PATH.
 

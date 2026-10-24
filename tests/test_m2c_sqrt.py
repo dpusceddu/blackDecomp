@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / 'tools'))
+sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 from m2c_input import decode_raw_instructions, prepare
 
 
@@ -40,7 +40,7 @@ class EeSquareRoot(unittest.TestCase):
             assembly.write_text(source)
             context.write_text('float probe_sqrt(float); float sqrtf(float); float __ee_sqrt_s(float);')
             result = subprocess.run([
-                sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', target,
+                sys.executable, str(ROOT / 'tools/pipeline/m2c_wrap.py'), '-t', target,
                 '--valid-syntax', '--context', str(context), '--no-cache', str(assembly)
             ], capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)

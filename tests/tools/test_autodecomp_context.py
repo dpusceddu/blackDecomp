@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import autodecomp as auto
 
 
@@ -36,7 +36,7 @@ class IntegrationTests(unittest.TestCase):
         import tempfile
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            for name in ('include/macro.inc', 'tools/elfobj.py', 'tools/assembler.py'):
+            for name in ('include/macro.inc', 'tools/build/elfobj.py', 'tools/build/assembler.py'):
                 path = root / name
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text('')

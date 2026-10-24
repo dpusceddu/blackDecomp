@@ -8,7 +8,7 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import struct, sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
 
 RELOC = {2: 'R_MIPS_32', 4: 'R_MIPS_26', 5: 'R_MIPS_HI16', 6: 'R_MIPS_LO16', 7: 'R_MIPS_GPREL16', 10: 'R_MIPS_PC16'}

@@ -27,11 +27,11 @@ typedef s64 M2C_UNK64;
 #define M2C_FIELD(expr, type_ptr, offset) (*(type_ptr)((s8 *)(expr) + (offset)))
 #define M2C_BITWISE(type, expr) ((type)(expr))
 
-/* Eight bytes at any byte alignment (SN emits ldl/ldr, sdl/sdr for this; see tools/ee_prep.py). */
+/* Eight bytes at any byte alignment (SN emits ldl/ldr, sdl/sdr for this; see tools/pipeline/ee_prep.py). */
 typedef struct { s64 v; } __attribute__((packed)) M2C_U64;
 #define M2C_UNALIGNED64(expr, offset) (((M2C_U64 *)((s8 *)(expr) + (offset)))->v)
 
-/* EE instructions m2c cannot read are shown to it as calls of these (tools/ee_prep.py); in the source they are inline assembly. */
+/* EE instructions m2c cannot read are shown to it as calls of these (tools/pipeline/ee_prep.py); in the source they are inline assembly. */
 static inline void __ee_ei(void) { __asm__ volatile("ei"); }
 static inline void __ee_di(void) { __asm__ volatile("di"); }
 static inline f32 __ee_max_s(f32 a, f32 b) { f32 r; __asm__("max.s %0, %1, %2" : "=f" (r) : "f" (a), "f" (b)); return r; }

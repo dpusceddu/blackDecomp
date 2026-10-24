@@ -60,7 +60,7 @@ Agreement check: when `build/SLUS_213.76/report.json` exists and is not older th
 counts as 100 % matched, and also the report's `total_code`, `matched_code`, `total_functions` and `matched_functions` with
 its own. Any difference stops with `AGREEMENT FAILED` and the functions on one side only; `progress.py --check` also fails
 when there is no current report. A stale report is skipped with a note, so run `ninja report` after `ninja`.
-Libraries in the table are by address (`tools/layout.py`; a link-once copy counts for its owner library, see [build.md](build.md#link-once-copies)); the report's categories attribute a matched function to the
+Libraries in the table are by address (`tools/build/layout.py`; a link-once copy counts for its owner library, see [build.md](build.md#link-once-copies)); the report's categories attribute a matched function to the
 library of its source file, so its per-category figures differ for functions compiled in another library's file (templates
 placed in `src/<library>/inline/`), while the totals agree.
 
@@ -72,7 +72,7 @@ Other differences in what is measured:
   build's `OK` stays the authority for exactness.
 
 When the numbers move apart again after a change to `tools/objdiff.py`, compare the per-function match percentages in
-`report.json` with the functions `ninja progress` counts (`tools/units.py`, status `source`); a function that is exact in the
+`report.json` with the functions `ninja progress` counts (`tools/build/units.py`, status `source`); a function that is exact in the
 image but below 100 % in the report points at a normalization rule that is missing. `tests/tools/test_objdiff.py` covers
 the unit and function mapping with a small split list.
 

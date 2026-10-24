@@ -27,7 +27,7 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import hashlib, io, json, re, subprocess, sys, tarfile
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
 from units import load_units
 
@@ -238,7 +238,7 @@ def run_job(slug, plan):
         if u['base_in']:
             h.update((build / u['base_in']).read_bytes() + json.dumps([u['redefine'], u.get('sections'), u.get('constants'), u.get('symbols')],
                                                                              sort_keys=True).encode())
-        h.update((ROOT / 'tools/objdiff_job.py').read_bytes() + (ROOT / 'tools/elfobj.py').read_bytes())
+        h.update((ROOT / 'tools/build/objdiff_job.py').read_bytes() + (ROOT / 'tools/build/elfobj.py').read_bytes())
         keys[u['name']] = h.hexdigest()
         outputs = [work / 'target' / (u['name'] + '.o')] + ([work / 'base' / (u['name'] + '.o')] if u['base_in'] else [])
         if old_keys.get(u['name']) != keys[u['name']] or not all(p.exists() for p in outputs):
@@ -253,7 +253,7 @@ def run_job(slug, plan):
         buf = io.BytesIO()
         with tarfile.open(fileobj=buf, mode='w:gz', compresslevel=1) as tar:
             tar.add(ROOT / 'include/macro.inc', arcname='include/macro.inc')
-            tar.add(ROOT / 'tools/elfobj.py', arcname='tools/elfobj.py')
+            tar.add(ROOT / 'tools/build/elfobj.py', arcname='tools/elfobj.py')
             for unit in todo:
                 if unit['base_in']:
                     tar.add(build / unit['base_in'], arcname=rel(unit['base_in']))
@@ -272,7 +272,7 @@ def run_job(slug, plan):
 def build_objects(slug, work, payload):
     (work / 'inputs.tgz').write_bytes(payload)
     (work / 'out.tgz').unlink(missing_ok=True)
-    r = subprocess.run([sys.executable, str(ROOT / 'tools/sandbox.py'), str(ROOT / 'tools/objdiff_job.py'), '--timeout', '1800',
+    r = subprocess.run([sys.executable, str(ROOT / 'tools/build/sandbox.py'), str(ROOT / 'tools/build/objdiff_job.py'), '--timeout', '1800',
                         '--file', 'inputs.tgz=' + str(work / 'inputs.tgz'), '--file', 'plan.json=' + str(work / 'plan.json'),
                         '--out', 'out.tgz=' + str(work / 'out.tgz')], capture_output=True, text=True)
     sys.stdout.write(r.stdout[-3000:])

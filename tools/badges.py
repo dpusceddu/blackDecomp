@@ -6,7 +6,7 @@ total function bytes, from the function extents tools/objdiff.py uses (no paddin
 the build, not objdiff-cli, and the overall ones equal `ninja report`. A function is matched when a split compiles it (no
 INCLUDE_ASM marker in its TU file), which the build's `OK` guarantees byte-identical. When a current objdiff report exists,
 progress.py fails if its matched functions or totals differ (docs/progress-reports.md), so `ninja badges` cannot publish
-numbers that disagree with it. Libraries are by address (tools/layout.py); the image measure stays in `ninja progress`.
+numbers that disagree with it. Libraries are by address (tools/build/layout.py); the image measure stays in `ninja progress`.
 
 Usage: badges.py [SLUG]       runs progress.py (default SLUS_213.76 only), then writes
          progress/code.json, progress/functions.json   shields.io endpoint files (share of code bytes / of functions)

@@ -10,12 +10,12 @@ how many address-bearing words were relocated, how many stayed stale and how man
 """
 import sys as _sys
 from pathlib import Path as _Path
-_sys.path.insert(0, str(_Path(__file__).resolve().parents[1]))  # the core tools
+_sys.path[:0] = [str(_Path(__file__).resolve().parents[1] / _d) for _d in ('', 'build', 'pipeline', 'maint')]  # the core tools
 import argparse, json, re, shutil, struct, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'tools'))
+sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
 
 PY = sys.executable
@@ -51,11 +51,11 @@ def prepare(slug, work, func, nops):
 def build(slug, work):
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
     b = ROOT / 'build' / work
-    run('tools/link_support.py', slug, work)
-    run('tools/split_objects.py', slug, work)
-    run('tools/make_ld.py', slug, work)
-    run('tools/build_objects.py', work)
-    run('tools/pack_elf.py', b / 'linked.elf', 'config/%s.layout.json' % boot, 'data/%s/elf' % slug,
+    run('tools/build/link_support.py', slug, work)
+    run('tools/build/split_objects.py', slug, work)
+    run('tools/build/make_ld.py', slug, work)
+    run('tools/build/build_objects.py', work)
+    run('tools/build/pack_elf.py', b / 'linked.elf', 'config/%s.layout.json' % boot, 'data/%s/elf' % slug,
         b / (boot + '.elf'))
     return b / (boot + '.elf'), b / 'linked.elf'
 

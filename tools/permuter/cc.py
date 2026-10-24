@@ -2,7 +2,7 @@
 """Compile script for decomp-permuter: run the pinned SN compiler on one self-contained source file.
 
 Usage: cc.py [compiler flags] SOURCE.c -o OUTPUT.o        (permuter_settings.toml makes import.py call it this way)
-The compiler runs through tools/backend.py: wibo and the pinned toolchain of `python3 tools/toolchain.py install` by
+The compiler runs through tools/build/backend.py: wibo and the pinned toolchain of `python3 tools/toolchain.py install` by
 default. Flags are passed to the compiler as given (the TU's flags are in config/SLUS_213.76/splits.yaml; -I and -D flags
 only matter to the permuter's import step, which expands the includes). Set CC to use another pinned compiler.
 """
@@ -13,7 +13,7 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import base64, os, sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path[:0] = [str(Path(__file__).resolve().parents[1] / _d) for _d in ('', 'build', 'pipeline', 'maint')]
 import backend
 from elfobj import normalize_object
 

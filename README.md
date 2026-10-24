@@ -152,7 +152,8 @@ src/<library>/        (src/game/ has subsystem directories) one file per transla
                       #ifdef NON_MATCHING blocks (game, kynapse, animation, physics, rw_core, rw_audio, apt, sony, libc);
                       compiler-emitted inline and template copies are in src/<library>/inline/ (docs/build.md#link-once-copies)
 include/<library>/    headers per library, include/ps2/ for helpers shared by all
-tools/                build, analysis and pipeline tools; tools/studies/ keeps finished experiments
+tools/                the everyday tools (decompile, objdiff, progress, toolchain, ...); tools/build/ (internals `ninja` runs),
+                      tools/pipeline/ (automatic pipeline), tools/maint/ (maintainer and analysis), tools/studies/ (finished experiments)
 progress/             badge files and the per-library table written by `ninja badges` (committed)
 docs/                 build, translation unit files and split list, pipeline, TU map, matching handbook, status, history
 tests/                tests that need no game files

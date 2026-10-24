@@ -8,7 +8,7 @@ prints the best score and the instruction diff (same format as `autodecomp.py sh
 import argparse, difflib, sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 import autodecomp as A
 
 

@@ -3,7 +3,7 @@
 
 Usage: as.py INPUT.s -o OUTPUT.o        (run from the repository root; permuter_settings.toml makes import.py call it)
 The split assembly of a function (asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s) includes include/macro.inc; the job runs
-through tools/backend.py like every other toolchain job.
+through tools/build/backend.py like every other toolchain job.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -13,7 +13,7 @@ import base64, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'tools'))
+sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import backend
 
 JOB = '''

@@ -10,7 +10,7 @@ import types
 import unittest
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools' / 'studies'))
 import autodecomp as auto
 from large_study import flag_grid, invariant_flags
@@ -85,7 +85,7 @@ class StudyDesign(unittest.TestCase):
 class CatalogLaunch(unittest.TestCase):
     def test_legacy_windows_compiler_selects_catalog_backend_instead_of_assuming_295(self):
         # build_job executes a full plan at module scope; load only its pure launch function.
-        path = Path(__file__).resolve().parents[2] / 'tools/build_job.py'
+        path = Path(__file__).resolve().parents[2] / 'tools/build/build_job.py'
         function = next(node for node in ast.parse(path.read_text()).body
                         if isinstance(node, ast.FunctionDef) and node.name == 'compile_one')
         with tempfile.TemporaryDirectory() as directory:

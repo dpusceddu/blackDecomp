@@ -7,7 +7,7 @@ import unittest
 import subprocess
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import autodecomp
 
 
@@ -43,7 +43,7 @@ class VuPipeline(unittest.TestCase):
             context.write_text('void probe(void *out, void *in);')
             assembly.write_text('.text\nglabel probe\nlqc2 $vf1,0($a1)\nsqc2 $vf1,0($a0)\njr $ra\nnop\n')
             environment = dict(os.environ, AUTODECOMP_VU0='1')
-            result = subprocess.run([sys.executable, str(Path(autodecomp.__file__).with_name('m2c_wrap.py')),
+            result = subprocess.run([sys.executable, str(Path(autodecomp.__file__).parent / 'pipeline' / 'm2c_wrap.py'),
                                      '-t', 'mipsee-gcc-c', '--valid-syntax', '--no-cache',
                                      '--context', str(context), str(assembly)],
                                     env=environment, capture_output=True, text=True, timeout=20)
@@ -58,7 +58,7 @@ class VuPipeline(unittest.TestCase):
             context.write_text('float probe(void *in);')
             assembly.write_text('.text\nglabel probe\nlqc2 $vf1,0($a0)\nqmfc2.ni $v0,$vf1\n'
                                 'mtc1 $v0,$f0\njr $ra\nnop\n')
-            result = subprocess.run([sys.executable, str(Path(autodecomp.__file__).with_name('m2c_wrap.py')),
+            result = subprocess.run([sys.executable, str(Path(autodecomp.__file__).parent / 'pipeline' / 'm2c_wrap.py'),
                                      '-t', 'mipsee-gcc-c', '--valid-syntax', '--no-cache',
                                      '--context', str(context), str(assembly)],
                                     env=dict(os.environ, AUTODECOMP_VU0='1'),

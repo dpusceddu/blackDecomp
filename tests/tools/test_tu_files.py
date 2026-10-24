@@ -1,9 +1,9 @@
-"""Registering a match edits the TU file and the split list as text (tools/tu_files.py)."""
+"""Registering a match edits the TU file and the split list as text (tools/pipeline/tu_files.py)."""
 import sys
 import unittest
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import tu_files as T
 import splits as S
 

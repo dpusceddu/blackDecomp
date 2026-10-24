@@ -4,11 +4,11 @@
   autodecomp.py run [--max-size N] [--min-size N] [--region R] [--addr A ...] [--limit N] [--no-permute]
                     [--permute-seconds S] [--batch N]
         draft every selected assembly function and record the outcome in build/auto.json
-  autodecomp.py register [--group N]     put exact matches into their TU files (replacing the INCLUDE_ASM line; tools/tu_files.py)
+  autodecomp.py register [--group N]     put exact matches into their TU files (replacing the INCLUDE_ASM line; tools/pipeline/tu_files.py)
   autodecomp.py report                   outcome table for build/auto.json
   autodecomp.py show ADDR                print the best draft of a function and its diff
 
-Sizes are the function's code size in bytes. Compilation happens only with the build toolchain (tools/sandbox.py, one call
+Sizes are the function's code size in bytes. Compilation happens only with the build toolchain (tools/build/sandbox.py, one call
 per batch of candidates); m2c and scoring run on the host because they only read and write text. Scoring compares the
 compiled .text with the original instruction words, masking relocated fields, and compares each relocation's target
 (symbol address plus addend) with the symbolic operand of the original assembly. The final authority is the identical
@@ -17,7 +17,7 @@ link (`ninja` ends with OK); `settle` puts back the INCLUDE_ASM line of what doe
 import argparse, base64, collections, difflib, hashlib, io, json, os, re, struct, subprocess, sys, tarfile, time
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
 from build_telemetry import record as record_build
 from layout import view_include
@@ -25,7 +25,7 @@ from layout import view_include
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = 'SLUS_213.76'
 BUILD = ROOT / 'build' / SLUG
-FUNCTION_ASM = ROOT / 'asm' / SLUG / 'nonmatchings'      # one assembly file per function (tools/split_objects.py)
+FUNCTION_ASM = ROOT / 'asm' / SLUG / 'nonmatchings'      # one assembly file per function (tools/build/split_objects.py)
 AUTO = ROOT / 'build' / 'auto'
 RESULTS = Path(os.environ.get('AUTODECOMP_RESULTS', ROOT / 'build' / 'auto.json'))
 M2C = ROOT / '.venv/bin/m2c'
@@ -114,7 +114,7 @@ def load_inventory():
         d = json.loads(cache.read_text())
         if d['stamp'] == stamp and d.get('version') == 5:
             return d['functions']
-    sys.path.insert(0, str(ROOT / 'tools'))
+    sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
     from progress import regions
     placement = json.loads((BUILD / 'placement.json').read_text())['functions']
     reg, _ = regions([f['addr'] for f in placement])
@@ -216,7 +216,7 @@ def wide_info(f):
 
 def wide_prototypes(inv, known):
     """Context prototypes of functions that return or take `long long` values (128 bits in SN GCC), as s64 for m2c;
-    tools/ee_prep.py turns s64 into the 128-bit type afterwards."""
+    tools/pipeline/ee_prep.py turns s64 into the 128-bit type afterwards."""
     arity = compute_arities(inv)
     out = []
     info = {f['addr']: wide_info(f) for f in inv}
@@ -479,7 +479,7 @@ def run_m2c(fns, options=(), ctx='ctx.c'):
     if not paths:
         STATS['m2c_function_failures'] += len(rejected)
         return rejected
-    cmd = [sys.executable, str(ROOT / 'tools/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--valid-syntax', '--context', str(AUTO / ctx), '--no-cache'] + list(options) + paths
+    cmd = [sys.executable, str(ROOT / 'tools/pipeline/m2c_wrap.py'), '-t', 'mipsee-gcc-c', '--valid-syntax', '--context', str(AUTO / ctx), '--no-cache'] + list(options) + paths
     timeout = float(os.environ.get('AUTODECOMP_M2C_TIMEOUT', '180'))
     try:
         r = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT, timeout=timeout)
@@ -784,7 +784,7 @@ def decl_function(ident, d):
 
 # ---------------------------------------------------------------------------------------------------------- worker
 def is_orphan(words):
-    """Pieces of the form `<one non-branch instruction>; nop` (see tools/boundaries.py): not code of any function."""
+    """Pieces of the form `<one non-branch instruction>; nop` (see tools/maint/boundaries.py): not code of any function."""
     if not words:
         return False
     for i, w in enumerate(words):
@@ -843,7 +843,7 @@ def worker_compile(jobs, tag='auto'):
         headers.update(deps)
         digest = hashlib.sha256((src + '\0' + ' '.join(flags) + '\0' + PRELUDE_HASH).encode())
         if any(f.startswith('--assembler=') for f in flags):
-            digest.update((ROOT / 'tools/assembler.py').read_bytes())
+            digest.update((ROOT / 'tools/build/assembler.py').read_bytes())
         if split_cc(flags)[0].startswith('mwcps2-'):
             digest.update(b'\0catalog-mw-joined-include-v1')
         for path, data in sorted(deps.items()):
@@ -866,8 +866,9 @@ def worker_compile(jobs, tag='auto'):
     buf = io.BytesIO()
     plan = dict(compile=[], pack='newobjs.tgz')
     with tarfile.open(fileobj=buf, mode='w:gz', compresslevel=1) as tar:
-        for rel in ('include/macro.inc', 'tools/elfobj.py', 'tools/assembler.py'):
-            tar.add(ROOT / rel, arcname=rel)
+        for rel, arc in (('include/macro.inc', 'include/macro.inc'), ('tools/build/elfobj.py', 'tools/elfobj.py'),
+                         ('tools/build/assembler.py', 'tools/assembler.py')):    # the job finds the helpers in its own tools/
+            tar.add(ROOT / rel, arcname=arc)
         for rel, data in sorted(headers.items()):
             item = tarfile.TarInfo(rel)
             item.size = len(data)
@@ -887,7 +888,7 @@ def worker_compile(jobs, tag='auto'):
     for n in ('newobjs.tgz', 'results.json'):
         (d / n).unlink(missing_ok=True)
     call_id = record_build(AUTO, 'candidate', 'submitted', requested=len(jobs), cached=len(out), compile_jobs=len(todo), tag=tag)
-    r = subprocess.run([sys.executable, str(ROOT / 'tools/sandbox.py'), str(ROOT / 'tools/build_job.py'), '--timeout', '1800',
+    r = subprocess.run([sys.executable, str(ROOT / 'tools/build/sandbox.py'), str(ROOT / 'tools/build/build_job.py'), '--timeout', '1800',
                         '--file', 'inputs.tgz=' + str(d / 'inputs.tgz'), '--file', 'plan.json=' + str(d / 'plan.json'),
                         '--out', 'newobjs.tgz=' + str(d / 'newobjs.tgz'), '--out', 'results.json=' + str(d / 'results.json')],
                        capture_output=True, text=True)
@@ -1192,7 +1193,7 @@ _TUMAP = None
 
 def tu_flags(addr):
     """(compiler, flags, basis) the TU map (config/tus.yaml) gives the TU of this function, or None. Used when the environment
-    variable AUTODECOMP_TU is set; see tools/tus.py."""
+    variable AUTODECOMP_TU is set; see tools/maint/tus.py."""
     global _TUMAP
     if not os.environ.get('AUTODECOMP_TU'):
         return None
@@ -1825,9 +1826,9 @@ def decl_name(line):
 
 def cmd_register(a):
     """Put every exact draft that is not registered yet into its translation unit file, replacing the function's INCLUDE_ASM
-    line (tools/tu_files.py); a function whose compiler flags differ from its file's, or that failed in a group, gets a small
+    line (tools/pipeline/tu_files.py); a function whose compiler flags differ from its file's, or that failed in a group, gets a small
     file of its own with an entry in config/SLUS_213.76/splits.yaml."""
-    sys.path.insert(0, str(ROOT / 'tools'))
+    sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
     from units import load_units
     import tu_files
     res = load_results()
@@ -1859,7 +1860,7 @@ def cmd_settle(a):
     """Compile and link what `register` wrote (the build backend), put the INCLUDE_ASM line back for every function that does not
     place identically (a file that fails to compile takes its new functions back out, to be retried one per file), and end
     with a build that says OK."""
-    sys.path.insert(0, str(ROOT / 'tools'))
+    sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
     import tu_files
     for rnd in range(3):
         res = load_results()
@@ -1910,24 +1911,24 @@ def verify_build():
         if any(m in r.stdout + r.stderr for m in ('Build backend failed', 'Connection refused')):
             raise SystemExit(r.stdout + r.stderr)
         return r
-    run('tools/units.py', SLUG)
-    run('tools/split_objects.py', SLUG)
-    run('tools/make_ld.py', SLUG)
-    c = run('tools/build_objects.py', SLUG, '--compile-only')
+    run('tools/build/units.py', SLUG)
+    run('tools/build/split_objects.py', SLUG)
+    run('tools/build/make_ld.py', SLUG)
+    c = run('tools/build/build_objects.py', SLUG, '--compile-only')
     if c.returncode and not (BUILD / 'results.json').exists():
         raise SystemExit(c.stdout + c.stderr)
-    run('tools/units_verify.py', 'prepare')
+    run('tools/build/units_verify.py', 'prepare')
     problems = json.loads((BUILD / 'unit_problems.json').read_text())
     if problems:
         return problems
-    run('tools/make_ld.py', SLUG)
-    link = run('tools/build_objects.py', SLUG)
+    run('tools/build/make_ld.py', SLUG)
+    link = run('tools/build/build_objects.py', SLUG)
     if link.returncode:
-        run('tools/units_verify.py', 'link')
+        run('tools/build/units_verify.py', 'link')
         return json.loads((BUILD / 'unit_problems.json').read_text()) or [[None, None, 'link']]
-    run('tools/pack_elf.py', BUILD / 'linked.elf', ROOT / 'config' / SLUG / 'layout.json', ROOT / 'data' / SLUG / 'elf',
+    run('tools/build/pack_elf.py', BUILD / 'linked.elf', ROOT / 'config' / SLUG / 'layout.json', ROOT / 'data' / SLUG / 'elf',
         BUILD / (json.loads((ROOT / 'config/variants.json').read_text())[SLUG]['boot'] + '.elf'))
-    run('tools/units_verify.py', 'compare')
+    run('tools/build/units_verify.py', 'compare')
     return json.loads((BUILD / 'unit_problems.json').read_text())
 
 
@@ -2159,7 +2160,7 @@ def cmd_run(a):
         sel = [f for f in sel if f['addr'] in want]
     if a.cc:
         os.environ['AUTODECOMP_CC'] = a.cc
-    if a.tu:                                                # the TU map's compiler and flags go first (tools/tus.py)
+    if a.tu:                                                # the TU map's compiler and flags go first (tools/maint/tus.py)
         os.environ['AUTODECOMP_TU'] = '1'
         if a.tu != 'all':
             sel = [f for f in sel if (tu_flags(f['addr']) or (COMPILER,))[0] == a.tu]

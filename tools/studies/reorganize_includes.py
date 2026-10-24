@@ -5,8 +5,8 @@ Usage: reorganize_includes.py [--apply]       (default: dry run that prints the 
 
 Before: include/{auto,campaign,context,mod,recovered,classes}/ next to the library directories.
 After:  include/<library>/ for game, kynapse, animation, physics, rw_core, rw_audio, apt, ps2 (shared EE/VU0 helpers)
-        include/game/classes, include/kynapse/classes   generated class interfaces (tools/class_skeletons.py)
-        include/<library>/layouts/                      generated access views (tools/context_recovery.py); the library
+        include/game/classes, include/kynapse/classes   generated class interfaces (tools/maint/class_skeletons.py)
+        include/<library>/layouts/                      generated access views (tools/pipeline/context_recovery.py); the library
                                                         of every view is recorded in config/layout_libraries.json
 A header that only forwards to another header is removed and its includers point at the real one. Every quoted include
 is resolved the way the compiler does (the includer's directory, then include/) and rewritten to the new location.
@@ -21,7 +21,7 @@ import collections, json, posixpath, re, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'tools'))
+sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 INCLUDE = re.compile(r'^(\s*#\s*include\s+")([^"]+)(")', re.M)
 
 DIR_RULES = [

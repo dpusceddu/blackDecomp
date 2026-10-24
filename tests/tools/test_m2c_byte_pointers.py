@@ -15,7 +15,7 @@ class BytePointers(unittest.TestCase):
             assembly = Path(directory) / 'probe.s'
             context.write_text(declaration + '\n')
             assembly.write_text('.section .text\nglabel probe\n' + body + '\n')
-            result = subprocess.run([sys.executable, str(ROOT / 'tools/m2c_wrap.py'),
+            result = subprocess.run([sys.executable, str(ROOT / 'tools/pipeline/m2c_wrap.py'),
                                      '-t', 'mipsee-gcc-c', '--valid-syntax', '--no-cache',
                                      '--context', str(context), str(assembly)],
                                     capture_output=True, text=True, timeout=20)

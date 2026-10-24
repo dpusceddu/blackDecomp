@@ -2,8 +2,8 @@
 """Regenerate docs/tools.md, the index of the tools, from the docstring of every tool.
 
 Usage: tools_index.py [--check]       --check only reports whether docs/tools.md is current (exit status 1 if not)
-The sections and the order of the tools are listed here; a tool in tools/ that no section lists is reported and must be added
-below. The purpose of each tool is the first sentence of its module docstring.
+The sections and the order of the tools are listed here (everyday tools first); a tool that no section lists is reported and must
+be added below. The purpose of each tool is the first sentence of its module docstring.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -16,23 +16,26 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'docs' / 'tools.md'
 
 SECTIONS = [
-    ('Build', [
-        'backend.py', 'toolchain.py', 'sandbox.py', 'compile.py', 'build_objects.py', 'build_job.py', 'split_objects.py',
-        'splat_config.py', 'make_ld.py', 'link_support.py', 'pack_elf.py', 'elf_layout.py', 'elfobj.py', 'check_elf.py',
-        'diffelf.py', 'check_versions.py', 'include_asm.py', 'splits.py', 'tu_files.py', 'units.py', 'units_verify.py',
-        'nm_build.py', 'text_placement.py', 'constant_relocs.py', 'source_data.py', 'assembler.py', 'patch_ps2eeas.py',
-        'boundaries.py', 'fixasm.py']),
-    ('Working on a function', [
-        'decompile.py', 'objdiff.py', 'objdiff_job.py', 'trysrc.py', 'permuter/prepare.py', 'permuter/cc.py', 'permuter/as.py',
-        'next.py']),
-    ('Progress and reports', ['progress.py', 'badges.py', 'build_telemetry.py', 'tools_index.py']),
-    ('Matching pipeline', [
-        'autodecomp.py', 'm2c_input.py', 'm2c_wrap.py', 'ee_prep.py', 'vu0_m2c.py', 'vu0_micro.py', 'stack_context.py',
-        'shared_context.py', 'mod_context.py', 'context_recovery.py', 'permuter_service.py', 'permuter_worker.py',
-        'permuter_lanes.py', 'compiler_dumps.py', 'equiv.py']),
-    ('Analysis and metadata', [
-        'tus.py', 'layout.py', 'class_skeletons.py', 'rtti_evidence.py', 'symbols.py',
-        'discs.py', 'iso.py', 'inputs.py', 'elfinfo.py', 'objdump.py']),
+    ('Everyday tools: working on a function', [
+        'decompile.py', 'objdiff.py', 'trysrc.py', 'next.py', 'autodecomp.py', 'permuter/prepare.py', 'permuter/cc.py',
+        'permuter/as.py']),
+    ('Everyday tools: build, check and progress', [
+        'toolchain.py', 'compile.py', 'check_versions.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',
+        'badges.py', 'tools_index.py']),
+    ('Build internals (`tools/build/`)', [
+        'build/backend.py', 'build/sandbox.py', 'build/build_objects.py', 'build/build_job.py', 'build/split_objects.py',
+        'build/splat_config.py', 'build/make_ld.py', 'build/link_support.py', 'build/pack_elf.py', 'build/elf_layout.py',
+        'build/elfinfo.py', 'build/elfobj.py', 'build/include_asm.py', 'build/splits.py', 'build/units.py',
+        'build/units_verify.py', 'build/layout.py', 'build/nm_build.py', 'build/text_placement.py', 'build/constant_relocs.py',
+        'build/source_data.py', 'build/assembler.py', 'build/patch_ps2eeas.py', 'build/fixasm.py', 'build/objdiff_job.py',
+        'build/build_telemetry.py']),
+    ('Automatic pipeline (`tools/pipeline/`)', [
+        'pipeline/tu_files.py', 'pipeline/m2c_input.py', 'pipeline/m2c_wrap.py', 'pipeline/ee_prep.py', 'pipeline/vu0_m2c.py',
+        'pipeline/vu0_micro.py', 'pipeline/stack_context.py', 'pipeline/context_recovery.py', 'pipeline/permuter_service.py',
+        'pipeline/permuter_worker.py', 'pipeline/permuter_lanes.py', 'pipeline/compiler_dumps.py', 'pipeline/equiv.py']),
+    ('Maintainer and analysis tools (`tools/maint/`)', [
+        'maint/tus.py', 'maint/boundaries.py', 'maint/class_skeletons.py', 'maint/rtti_evidence.py', 'maint/shared_context.py',
+        'maint/mod_context.py', 'maint/symbols.py', 'maint/discs.py', 'maint/iso.py', 'maint/inputs.py']),
 ]
 NOTES = {
     'check_elf.py': 'Build check, run by `ninja`.',
@@ -43,6 +46,10 @@ INTRO = '''# Tools
 
 Every tool answers `--help`. One-line purposes are taken from each tool's docstring; this file is written by
 `python3 tools/tools_index.py`.
+
+A contributor needs the first two sections, which are the files directly in `tools/` (and `tools/permuter/`). `ninja` runs the
+build internals itself, the automatic pipeline is reached through `tools/autodecomp.py`, and the maintainer tools regenerate
+committed data. Tools import each other by bare module name; every tool puts `tools/` and its subdirectories on `sys.path`.
 '''
 FOOTER = '''
 ## Equivalence harness (`tools/eeharness/`)
@@ -74,7 +81,8 @@ def row(rel, path):
 def render():
     listed = {rel for _, tools in SECTIONS for rel in tools}
     missing = sorted(p.name for p in (ROOT / 'tools').glob('*.py') if p.name not in listed)
-    missing += sorted('permuter/' + p.name for p in (ROOT / 'tools/permuter').glob('*.py') if 'permuter/' + p.name not in listed)
+    for sub in ('permuter', 'build', 'pipeline', 'maint'):
+        missing += sorted('%s/%s' % (sub, p.name) for p in (ROOT / 'tools' / sub).glob('*.py') if '%s/%s' % (sub, p.name) not in listed)
     if missing:
         raise SystemExit('tools not listed in tools/tools_index.py: ' + ', '.join(missing))
     out = [INTRO]

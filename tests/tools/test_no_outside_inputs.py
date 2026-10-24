@@ -41,7 +41,7 @@ class NoOutsideInputs(unittest.TestCase):
 
     def test_the_symbol_readers_use_the_per_version_file(self):
         import sys
-        sys.path.insert(0, str(ROOT / 'tools'))
+        sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
         import splits
         symbols = splits.load_symbols('SLUS_213.76')
         self.assertTrue(symbols.function_aliases())

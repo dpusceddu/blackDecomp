@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Best next work, from the automatic pipeline's results (build/auto.json) and the source units (tools/units.py).
+"""Best next work, from the automatic pipeline's results (build/auto.json) and the source units (tools/build/units.py).
 
   next.py [near|types|families|data|ee|all] [--top N] [--max-size N]
 
@@ -14,7 +14,7 @@ Functions already provided by source units are left out everywhere.
 import argparse, collections, json, re, struct, sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from units import load_units, ROOT
 
 RESULTS = ROOT / 'build' / 'auto.json'
@@ -85,7 +85,7 @@ def types(res, top, max_size):
 
 
 def families(res, top, max_size):
-    sys.path.insert(0, str(ROOT / 'tools'))
+    sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
     import autodecomp
     inv = autodecomp.load_inventory()
     done = {f['addr'] for u in load_units(variant='SLUS_213.76') for f in u['functions'] if f.get('status') == 'source'}
@@ -134,7 +134,7 @@ def candidates(top, args=None):
     path = ROOT / 'config/tus.yaml'
     if not path.exists():
         return
-    sys.path.insert(0, str(ROOT / 'tools'))
+    sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
     import autodecomp
     tus = [t for t in yaml.safe_load(path.read_text())['tus'] if t['kind'] == 'object']
     inv = autodecomp.load_inventory()

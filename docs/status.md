@@ -25,7 +25,7 @@ leads, never proof of PS2 layouts.
 1. **Full build from day one.** The executable is split into assembly and data that reassemble to the identical image;
    source replaces assembly inside that build, so linking, relocations and data are always real ([build.md](build.md)).
 2. **Original TUs.** Boundaries come from unwind frames, the constructor list, library strings, code style and data joins
-   (`tools/tus.py`, `config/tus.yaml`, [tus.md](tus.md)). Match whole files where the evidence is exact.
+   (`tools/maint/tus.py`, `config/tus.yaml`, [tus.md](tus.md)). Match whole files where the evidence is exact.
 3. **One check for exactness**: `ninja` ends with `OK`. No per-function proof journals.
 4. **Automate the routine path**: m2c draft, compile flag variants, relocation-aware scoring, permuter, family cloning
    ([pipeline.md](pipeline.md)). People spend their time on types, classes and the functions the pipeline cannot do.
@@ -40,9 +40,9 @@ leads, never proof of PS2 layouts.
 | Compilers | `ee-gcc2.95.3-136` (SN build 1.36) with `-O2 -G0 -snas` for game, Kynapse, animation, physics, RenderWare Core/Audio, apt, libc stdio; `ee-gcc2.9-991111-01 -O2 -G0` (SN driver, GNU assembler) for the Sony libraries (`sd` saves: libipu/libmpeg, libdbc, libdma, libm, libcdvd, libmc2, libkernl, libstdc++ type info, libgs) |
 | Scoped scalar exception | three audio getters use Sony `ee-gcc2.96` with `-mno-handle-ee-div-pipeline-bug`; measured divide controls scope this choice without identifying the original whole-TU compiler |
 | Per-TU flag variants | `-O1` (about 130 functions), `-G8` where gp-relative small data is used, `-fno-schedule-insns`, `-fbyte-bool`, `-fno-rtti`, `-x c++`, `-ffunction-sections` (merged TUs), `-mvu0-use-vf0-vf31` / `-vf16` (VU0 inline helpers) |
-| Assemblers | untouched compiler assembler (`-snas`) by default; `--assembler=sn-min6` (hash-guarded derivative of Ps2EeAs 1.9.25.758 that pads short loops to six words, reproduced by `tools/patch_ps2eeas.py`) on verified units only; `gas-2.40`, `gas-2.40-fix`, `sony-2.9`, `sn-2.73a` are explicit experiments. The 65 splits that select `assembler: sn-min6` in `config/SLUS_213.76/splits.yaml` use it because it reproduces their bytes, not because a recovered rule says the original used it: treat that choice as weak evidence (open problem 4) |
+| Assemblers | untouched compiler assembler (`-snas`) by default; `--assembler=sn-min6` (hash-guarded derivative of Ps2EeAs 1.9.25.758 that pads short loops to six words, reproduced by `tools/build/patch_ps2eeas.py`) on verified units only; `gas-2.40`, `gas-2.40-fix`, `sony-2.9`, `sn-2.73a` are explicit experiments. The 65 splits that select `assembler: sn-min6` in `config/SLUS_213.76/splits.yaml` use it because it reproduces their bytes, not because a recovered rule says the original used it: treat that choice as weak evidence (open problem 4) |
 | Assembly files | EE GNU assembler 2.10 (from the `ee-gcc2.96` archive); short backward branches stay `.word`; gp-relative symbols need `.extern sym, 1` |
-| Linker | mainline GNU `ld` 2.40 (`binutils-mipsel-linux-gnu`), generated script with `SORT_BY_NAME` input sections; `tools/pack_elf.py` writes the retail container (`e_flags 0x20924001`) |
+| Linker | mainline GNU `ld` 2.40 (`binutils-mipsel-linux-gnu`), generated script with `SORT_BY_NAME` input sections; `tools/build/pack_elf.py` writes the retail container (`e_flags 0x20924001`) |
 | Everything else | splat/spimdisasm/rabbitizer split, Ninja, m2c (`-t mipsee-gcc-c`), decomp-permuter; names, prototypes and types are committed, hand-maintained files (`config/SLUS_213.76/symbols.txt`, `include/ps2/`) |
 | Running the tools | the compilers are decomp.me archives pinned by SHA-256 (`config/toolchain-*.json`); the Windows programs run under wibo, the Sony tools are 32-bit Linux programs (`tools/toolchain.py`, [build.md](build.md)) |
 
@@ -53,12 +53,12 @@ the further files of a TU that cannot be one: other flags, language or constants
 class or module. The file lists every function of the TU, the unrecovered ones as INCLUDE_ASM lines; drafts are
 `#ifdef NON_MATCHING` blocks in it. TUs without recovered code have no file. Libraries: `game`, `apt` (EA Apt/Flash UI), `kynapse`,
 `animation`, `physics`, `rw_core`, `rw_audio`, `sony`, `libc`. Compiler-emitted inline and template copies (link-once code) live in `src/<owner>/inline/` of the library that owns them (`config/SLUS_213.76/inline_owners.txt`). `config/SLUS_213.76/splits.yaml`
-lists the files with their address ranges and flags; `tools/layout.py` owns the naming rules.
+lists the files with their address ranges and flags; `tools/build/layout.py` owns the naming rules.
 
 Headers follow the libraries: `include/<library>/` for `game`, `kynapse`, `animation`, `physics`, `rw_core`, `rw_audio`
 and `apt`, and `include/ps2/` for helpers shared by all of them (EE types, VU0 operations, the draft prelude). Generated
 headers sit beside the hand-written ones: `include/game/classes/` and `include/kynapse/classes/` (class interfaces from
-`tools/class_skeletons.py`) and `include/<library>/partial/` (partial views from `tools/context_recovery.py`).
+`tools/maint/class_skeletons.py`) and `include/<library>/partial/` (partial views from `tools/pipeline/context_recovery.py`).
 
 ## Current state (USA retail, `ninja progress`)
 

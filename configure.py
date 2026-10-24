@@ -23,14 +23,15 @@ def main():
     if slug not in json.loads((ROOT / 'config/variants.json').read_text()) or not (ROOT / 'config' / slug).is_dir():
         raise SystemExit('unknown version %s; see config/<GAME_ID>/' % slug)
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
-    sys.path.insert(0, str(ROOT / 'tools'))
+    sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build')]
     import backend, toolchain
     if backend.name() == 'local':        # a missing toolchain is reported here, not in the middle of the build
         for line in toolchain.problems():
             print('note: %s (python3 tools/toolchain.py install)' % line, file=sys.stderr)
     py = ROOT / '.venv/bin/python'
     py = str(py.relative_to(ROOT)) if py.exists() else sys.executable
-    tools = lambda *n: ' '.join('tools/%s' % x for x in n)
+    def tools(*names):       # paths of tools/ files by name, wherever they live (tools/, tools/build/, ...)
+        return ' '.join(str(next(p for p in ((ROOT / 'tools' / d / n) for d in ('', 'build', 'pipeline', 'maint')) if p.exists()).relative_to(ROOT)) for n in names)
     b = 'build/%s' % slug
     have = [n for n in ('splits.yaml', 'symbols.txt', 'equivalent.yaml') if (ROOT / 'config' / slug / n).exists()]
     inputs = ' '.join('config/%s/%s' % (slug, n) for n in have)
@@ -40,48 +41,48 @@ ninja_required_version = 1.10
 py = {py}
 
 rule extract
-  command = $py tools/splat_config.py {slug} && $py tools/elf_layout.py {slug} && touch $out
+  command = $py tools/build/splat_config.py {slug} && $py tools/build/elf_layout.py {slug} && touch $out
   description = extract section layout and blobs from the target image
 rule split
   command = rm -rf asm/{slug} && $py -m splat split config/{slug}/splat.yaml > {b}/splat.log 2>&1 && touch $out
   description = splat split (disassemble and split)
 rule support
-  command = $py tools/link_support.py {slug}
+  command = $py tools/build/link_support.py {slug}
   description = define symbols splat cannot (labels inside code, offsets into data)
 rule functions
-  command = $py tools/split_objects.py {slug} --functions
+  command = $py tools/build/split_objects.py {slug} --functions
   description = function table of the image
 rule units
-  command = $py tools/units.py {slug}
+  command = $py tools/build/units.py {slug}
   depfile = {b}/units.d
   description = derive the source units (split list, INCLUDE_ASM markers, symbols)
 rule objsplit
-  command = $py tools/split_objects.py {slug}
+  command = $py tools/build/split_objects.py {slug}
   description = one assembly file per function (asm/{slug}/nonmatchings); constants migrate to their only user
 rule compile
-  command = $py tools/make_ld.py {slug} && $py tools/build_objects.py {slug} --compile-only && touch $out
+  command = $py tools/build/make_ld.py {slug} && $py tools/build/build_objects.py {slug} --compile-only && touch $out
   depfile = {b}/compile.d
   description = compile the source files
   pool = console
 rule verify
-  command = $py tools/units_verify.py prepare
+  command = $py tools/build/units_verify.py prepare
   description = check that the compiled functions can take the place of the assembly
   restat = 1
   pool = console
 rule ldscript
-  command = $py tools/make_ld.py {slug}
+  command = $py tools/build/make_ld.py {slug}
   description = write the linker script (original order, source units replace functions)
 rule nonmatching
-  command = $py tools/nm_build.py {slug}
+  command = $py tools/build/nm_build.py {slug}
   description = build the NON_MATCHING drafts into build/{slug}-nm
   pool = console
 rule link
-  command = $py tools/build_objects.py {slug}
+  command = $py tools/build/build_objects.py {slug}
   description = assemble and compile what changed, then link, with the build toolchain
   depfile = {b}/link.d
   pool = console
 rule pack
-  command = $py tools/pack_elf.py {b}/linked.elf config/{slug}/layout.json data/{slug}/elf {b}/{boot}.elf
+  command = $py tools/build/pack_elf.py {b}/linked.elf config/{slug}/layout.json data/{slug}/elf {b}/{boot}.elf
   description = pack the ELF container
 rule progress
   command = $py tools/progress.py {slug}
@@ -106,15 +107,15 @@ rule check
 
 build {b}/extract.stamp config/{slug}/splat.yaml config/{slug}/layout.json: extract orig/{slug}/{boot} | {tools('splat_config.py', 'elf_layout.py', 'elfinfo.py')}
 build {b}/split.stamp: split | {b}/extract.stamp config/{slug}/boundaries.txt
-build {b}/extra_labels.txt {b}/symbols.ld: support | {b}/split.stamp tools/link_support.py
-build {b}/functions.json: functions | {b}/extra_labels.txt tools/split_objects.py
+build {b}/extra_labels.txt {b}/symbols.ld: support | {b}/split.stamp tools/build/link_support.py
+build {b}/functions.json: functions | {b}/extra_labels.txt tools/build/split_objects.py
 build {b}/units.json: units | {b}/functions.json {inputs} {tools('units.py', 'splits.py', 'include_asm.py')}
-build {b}/placement.json: objsplit | {b}/units.json {b}/extra_labels.txt tools/split_objects.py tools/fixasm.py tools/source_data.py
+build {b}/placement.json: objsplit | {b}/units.json {b}/extra_labels.txt tools/build/split_objects.py tools/build/fixasm.py tools/build/source_data.py
 build {b}/compiled.stamp: compile | {b}/placement.json {b}/units.json {b}/symbols.ld include/include_asm.h {tools('make_ld.py', 'build_objects.py', 'build_job.py', 'sandbox.py', 'assembler.py', 'source_data.py')}
-build {b}/unit_facts.json: verify | {b}/compiled.stamp tools/units_verify.py {sym}
-build {b}/link.ld {b}/objects.json: ldscript | {b}/unit_facts.json {b}/placement.json {b}/symbols.ld tools/make_ld.py tools/source_data.py config/{slug}/layout.json
+build {b}/unit_facts.json: verify | {b}/compiled.stamp tools/build/units_verify.py {sym}
+build {b}/link.ld {b}/objects.json: ldscript | {b}/unit_facts.json {b}/placement.json {b}/symbols.ld tools/build/make_ld.py tools/build/source_data.py config/{slug}/layout.json
 build {b}/linked.elf: link | {b}/link.ld {b}/objects.json include/macro.inc {tools('build_objects.py', 'build_job.py', 'sandbox.py', 'elfobj.py', 'assembler.py')}
-build {b}/{boot}.elf: pack | {b}/linked.elf tools/pack_elf.py
+build {b}/{boot}.elf: pack | {b}/linked.elf tools/build/pack_elf.py
 build {b}/ok.stamp: check | {b}/{boot}.elf tools/check_elf.py config/{slug}/checksums.sha256
 build run_progress: progress | {b}/linked.elf
 build progress: phony run_progress

@@ -1,7 +1,7 @@
 # Translation unit files and the split list
 
 How source replaces assembly in the build. The inputs are `src/`, `config/SLUS_213.76/splits.yaml`, `symbols.txt` and
-`equivalent.yaml`; nothing is generated into Git (`tools/units.py` derives the *units* into `build/`).
+`equivalent.yaml`; nothing is generated into Git (`tools/build/units.py` derives the *units* into `build/`).
 
 ## One file per translation unit
 
@@ -63,10 +63,10 @@ A line ending in `alias` (`// type:func alias`) is only a readable name and neve
 
 ## What the build does with it
 
-`tools/units.py` reads the splits, scans each file's markers (`tools/include_asm.py`, which understands `#ifdef NON_MATCHING`
-and `-D` flags) and writes `build/<GAME_ID>/units.json`. `tools/make_ld.py` places each compiled function (its own
+`tools/build/units.py` reads the splits, scans each file's markers (`tools/build/include_asm.py`, which understands `#ifdef NON_MATCHING`
+and `-D` flags) and writes `build/<GAME_ID>/units.json`. `tools/build/make_ld.py` places each compiled function (its own
 `.text.<symbol>` section) at the slot of the original function and the file's constants at the first slot they replace;
-`tools/units_verify.py prepare` checks every object (names, extra code, constants, unbound symbols) and writes
+`tools/build/units_verify.py prepare` checks every object (names, extra code, constants, unbound symbols) and writes
 `unit_facts.json`; `link` and `compare` name the files and functions that do not link or differ. Reasons: `compile`, `name`,
 `extra` (the object has code the original does not: a definition next to an INCLUDE_ASM line), `size`, `section`, `shared`,
 `layout` (constants of the assembly functions in between interleave with the file's own), `extern`, `labels`, `link`, `bytes`.

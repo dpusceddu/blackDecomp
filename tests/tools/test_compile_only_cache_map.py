@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
+sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import build_objects as build
 
 
@@ -18,7 +18,7 @@ class CompileOnlyCacheTests(unittest.TestCase):
             root = Path(directory)
             target = root / 'build/test'
             (target / 'cache').mkdir(parents=True)
-            for name in ('include/macro.inc', 'tools/elfobj.py', 'tools/assembler.py', 'build/test/link.ld'):
+            for name in ('include/macro.inc', 'tools/build/elfobj.py', 'tools/build/assembler.py', 'build/test/link.ld'):
                 path = root / name
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text('')

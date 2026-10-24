@@ -1,6 +1,6 @@
 # Inputs and versions
 
-Produced by `tools/discs.py`, `tools/inputs.py`, `tools/symbols.py` and `tools/studies/asmcheck.py`. Hashes and ELF metadata
+Produced by `tools/maint/discs.py`, `tools/maint/inputs.py`, `tools/maint/symbols.py` and `tools/studies/asmcheck.py`. Hashes and ELF metadata
 are in `config/variants.json`; raw dumps stay in `.local/`. The build itself only needs the boot executables in
 `orig/<GAME_ID>/`; the disc survey tools are for maintainers who have the disc images.
 
@@ -21,7 +21,7 @@ Europe disc labelled beta; those are not build targets.
 | `SLKA_253.72` | Korea retail | DVD 3.92 GB | 585 | 3,371,996 | 2,715,560 | NTSC |
 
 The beta and demo images are raw CD images (MODE2/2352 bin plus cue); the rest are 2048-byte DVD ISOs.
-`tools/iso.py` reads both. Zip and image hashes are in `config/variants.json`.
+`tools/maint/iso.py` reads both. Zip and image hashes are in `config/variants.json`.
 
 Every boot executable is a statically linked 32-bit little-endian MIPS ELF with `e_flags 0x20924001` and
 a single PT_LOAD segment. All have the same section skeleton as USA retail (`.text`, `.vutext`, `.reginfo`,
@@ -115,7 +115,7 @@ framework is RenderWare Studio's. It does not describe the EE toolchain.
 
 ## Symbols
 
-No EE executable has symbols or debug data, so nothing transfers to USA retail. `tools/symbols.py` dumps
+No EE executable has symbols or debug data, so nothing transfers to USA retail. `tools/maint/symbols.py` dumps
 anything it finds. It found one symbol-bearing file on all nine discs, `RWSCOMMS.IRX` in the beta (10
 functions, 17 objects, 3 source files, DWARF 1 types and a line table). A search of its function heads in
 the retail `.text` found none: it is IOP code. The share of retail functions that would receive a name or a
@@ -136,7 +136,7 @@ words, with three points that shaped the build:
    `0x24`, and 120 `vsqrt` words `0x4a......`) and 4 `0x00ff00ff` words in `.text`. They survive byte-exactly as data but are
    unreadable.
 3. **`e_flags`.** GNU-assembled objects get `0x20920001`; SN objects and the retail ELF have `0x20924001`, so the packer
-   (`tools/pack_elf.py`) writes the final flags explicitly.
+   (`tools/build/pack_elf.py`) writes the final flags explicitly.
 
 SN GCC 2.95.3 build 1.36 under `-O2 -G0 -snas` produces ELF32 relocatable MIPS objects with `e_flags 0x20924001`, like the retail
 executable: no `.mdebug` (the SN assembler does not emit one), uninitialised globals as common symbols, `HI16/LO16` pairs and no

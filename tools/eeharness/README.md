@@ -35,8 +35,8 @@ claims the tracked candidates, then compiles and replays them through the build 
 
 ```sh
 .venv/bin/python tools/eeharness/pilot_plan.py
-.venv/bin/python tools/equiv.py build/eeharness/pilot/plan.json --claim-only
-.venv/bin/python tools/equiv.py build/eeharness/pilot/plan.json --record-evidence
+.venv/bin/python tools/pipeline/equiv.py build/eeharness/pilot/plan.json --claim-only
+.venv/bin/python tools/pipeline/equiv.py build/eeharness/pilot/plan.json --record-evidence
 .venv/bin/python tools/eeharness/equiv_tests.py
 .venv/bin/python tools/eeharness/pilot_controls.py
 ```

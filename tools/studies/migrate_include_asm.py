@@ -7,7 +7,7 @@
                                          identically; `write --demoted FILE` rewrites those parts conservatively
 
 The old layout has one source file per unit (about 2,900 files); every file holds only recovered functions and the other
-functions of the translation unit are implicit. The new layout (tools/include_asm.py, include/include_asm.h) has one file per
+functions of the translation unit are implicit. The new layout (tools/build/include_asm.py, include/include_asm.h) has one file per
 translation unit of config/tus.yaml that lists every function of its address range in address order: recovered functions
 as C/C++, the others as `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_XXXXXXXX);` lines, and drafts that do not match
 yet (src/*/nonmatching/ and the sources of all-assembly units) as `#ifdef NON_MATCHING` blocks whose `#else` branch is the marker.
@@ -30,7 +30,7 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'tools'))
+sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import layout
 import include_asm
 
@@ -794,26 +794,26 @@ def settle(expected):
     import settle_units as T
     import units_verify
     from units import load_units
-    print(T.run('tools/split_objects.py', SLUG).stdout.strip().split('\n')[-1])
-    print(T.run('tools/make_ld.py', SLUG).stdout.strip())
+    print(T.run('tools/build/split_objects.py', SLUG).stdout.strip().split('\n')[-1])
+    print(T.run('tools/build/make_ld.py', SLUG).stdout.strip())
     results = BUILD / 'results.json'
     results.unlink(missing_ok=True)
-    compiled = T.run('tools/build_objects.py', SLUG, '--compile-only', check=False)
+    compiled = T.run('tools/build/build_objects.py', SLUG, '--compile-only', check=False)
     if compiled.returncode and not results.exists():
         raise SystemExit(compiled.stdout + compiled.stderr)
     print(compiled.stdout.strip().split('\n')[-1])
-    print(T.run('tools/units_verify.py', 'prepare').stdout.strip())
+    print(T.run('tools/build/units_verify.py', 'prepare').stdout.strip())
     for rnd in range(12):
         rc, out = T.ninja()
         if T.infrastructure_failure(out):
             raise SystemExit(out)
         if 'build:' in out and 'rc=0' not in out:
-            print('link failed:', T.run('tools/units_verify.py', 'link').stdout.strip().split('\n')[0])
+            print('link failed:', T.run('tools/build/units_verify.py', 'link').stdout.strip().split('\n')[0])
             continue
         if rc == 0:
             print(out.strip().split('\n')[-1])
             break
-        print(T.run('tools/units_verify.py', 'compare', '--fix').stdout.strip().split('\n')[-1])
+        print(T.run('tools/build/units_verify.py', 'compare', '--fix').stdout.strip().split('\n')[-1])
     failed = {}
     for u in load_units(variant=SLUG):
         want = expected.get(u['name'])
