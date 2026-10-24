@@ -66,11 +66,9 @@ def main():
             job = dict(src=o['src'], obj='obj/%s.o' % name, compiler=o['compiler'],
                        args=list(o['flags']) + ['-I', 'include'])
         keys[name] = key
-        if compile_only and o['kind'] == 'asm':
-            # prepare validates natural tail padding against the next real input
-            # section. Keep its current cached-object mapping, without assembling
-            # or packaging assembly in this source-only compilation pass.
-            continue
+        # compile_only: `prepare` validates natural tail padding against the next real input section, which needs
+        # the assembled objects too. They are cached by the first pass (a clean build assembles them here, once);
+        # the link only packs and renames them.
         if o.get('rename') and not compile_only:
             plan['rename'].append(dict(obj='obj/%s.o' % name, sections=o['rename'], redefine=o.get('redefine', {}), trim=o.get('trim', {})))
         cached = cache / (key + '.o')

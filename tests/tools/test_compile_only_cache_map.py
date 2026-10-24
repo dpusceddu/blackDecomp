@@ -1,4 +1,4 @@
-"""A source-only pass must retain the next assembly input's alignment evidence."""
+"""A source-only pass must have the next assembly input's alignment evidence: cached, or assembled in the pass."""
 import json
 from pathlib import Path
 import subprocess
@@ -13,7 +13,7 @@ import build_objects as build
 
 
 class CompileOnlyCacheTests(unittest.TestCase):
-    def test_assembly_mapping_is_current_but_not_dispatched_or_packaged(self):
+    def test_assembly_mapping_is_current_and_missing_objects_are_assembled_without_linking(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             target = root / 'build/test'
@@ -44,10 +44,11 @@ class CompileOnlyCacheTests(unittest.TestCase):
             self.assertNotEqual(mapping['original'], first_mapping['original'])
             self.assertEqual(mapping['unit'], first_mapping['unit'])
             plan = json.loads((target / 'plan.json').read_text())
-            self.assertEqual(plan['assemble'], [])
+            self.assertEqual(plan['assemble'], [['original.s', 'obj/original.o']])
+            self.assertEqual(plan['rename'], [])
             self.assertNotIn('link', plan)
             with tarfile.open(target / 'inputs.tgz') as packet:
-                self.assertNotIn('original.s', packet.getnames())
+                self.assertIn('original.s', packet.getnames())
                 self.assertNotIn('obj/original.o', packet.getnames())
 
 
