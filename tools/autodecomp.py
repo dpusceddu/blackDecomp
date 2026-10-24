@@ -253,7 +253,7 @@ def recovered_context(refresh=False):
         else:
             import context_recovery
             RECOVERED = context_recovery.recover(refresh=refresh)
-            context_recovery.write_outputs(RECOVERED)
+            context_recovery.write_build_context(RECOVERED)   # ignored build/auto/ only; never the committed headers
     return RECOVERED
 
 

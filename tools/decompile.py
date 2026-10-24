@@ -9,8 +9,11 @@ added after the file's #include lines); then run `ninja` and compare in objdiff 
 A function that already has a draft in an `#ifdef NON_MATCHING` block is replaced as a whole. --raw prints m2c's own output
 without the cleaning, which is also what you get when the cleaning gives up (the reason is printed).
 Needs one finished `ninja` (the per-function assembly under asm/) and `pip install -r requirements.txt` (m2c). The first
-run recovers the context (about a minute, and it writes the generated layout headers under include/); later runs reuse
-build/auto/ctx.c. `python3 tools/autodecomp.py context --refresh` renews it after shared headers change.
+run recovers the context from the committed headers and configuration (about a minute; it works on a fresh checkout, private
+Ghidra snapshots under .local/ only add leads) and writes it to the ignored build/auto/; later runs reuse build/auto/ctx.c.
+`python3 tools/autodecomp.py context --refresh` renews it after shared headers change. The only tracked file this tool ever
+changes is the translation unit file named by --write; the committed headers under include/ are never regenerated here
+(that is the maintainer-only `python3 tools/context_recovery.py --write-headers`).
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -55,7 +58,7 @@ def draft(addr, ctx):
     import os
     auto = ROOT / 'build' / 'auto'
     if all((auto / n).is_file() for n in ('context.json', 'ctx.c', 'recovered_layouts.c')):
-        # reuse the recovered context of the last run: regenerating it rewrites the layout headers under include/
+        # reuse the recovered context of the last run instead of recovering it again (a minute)
         os.environ.setdefault('AUTODECOMP_FREEZE_CONTEXT', '1')
     import autodecomp as A
     inventory = A.load_inventory()

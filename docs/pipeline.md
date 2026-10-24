@@ -193,7 +193,15 @@ its UNVERIFIED mark changes only after a matched source function actually access
 `include/game/layouts/signatures.h` is a complete compile context for experiments; normal drafts declare referenced
 callees individually so speculative signatures do not conflict with unrelated definitions. Re-run recovery after
 settling to refresh verification marks. When several runs share a checkout, `AUTODECOMP_FREEZE_CONTEXT=1` consumes the
-already exported context without rewriting shared headers; a missing context is an error.
+already exported context; a missing context is an error.
+
+The committed headers are never rewritten by a contributor tool: `decompile.py`, `autodecomp.py` and the build only write
+under `build/auto/` (the m2c context: `context.json`, `ctx*.c`, `recovered_layouts.c`) from the committed headers,
+sources and configuration, which is all a fresh checkout has. Regenerating the committed access views and
+`signatures.h` is a separate, **maintainer-only** command, `python3 tools/context_recovery.py --write-headers`, which also
+reads the private Ghidra snapshots under `.local/ghidra/` when they exist; review its diff before committing, because
+different private data produces different headers. `tools/ghidra_types.py` (`include/types_ghidra.h`) and
+`tools/class_skeletons.py` (`include/*/classes/`) are maintainer commands of the same kind.
 
 After `python3 tools/autodecomp.py context --refresh`, run `python3 tools/class_skeletons.py` to recover
 the legacy GCC RTTI graph and vtables and write
