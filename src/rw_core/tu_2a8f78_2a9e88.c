@@ -1,7 +1,12 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "rw_core/partial/Recovered_RwErrorRecordPS2.h"
+/* Recovered_RwErrorRecordPS2: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_RwErrorRecordPS2 {
+    s32 unk_0;
+    s32 unk_4;
+} Recovered_RwErrorRecordPS2;
+
 #include "ps2/recovered_types.h"
 extern s32 (*D_0044944C)();
 extern s32 func_002A5548(s32, ...);

@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-"""Generate conservative GCC 2.95 PS2 class interfaces from RTTI and vtables.
+"""Generate conservative GCC 2.95 PS2 class skeletons from RTTI and vtables into build/classes/include/ (ignored).
 
-Single owner of include/game/classes/ and include/kynapse/classes/: this generator. ABI evidence lives in
-config/SLUS_213.76/class_method_abi.json and config/SLUS_213.76/rtti_abi.json; edit evidence, regenerate.
+A skeleton is a starting point, not a source file: the class views the sources include (include/game/classes/ and
+include/kynapse/classes/) are hand-edited headers that began as copies of such skeletons. When a source needs another class,
+generate the set, copy the skeleton and adapt it. ABI evidence lives in config/SLUS_213.76/class_method_abi.json and
+config/SLUS_213.76/rtti_abi.json (edited by hand); the generator also needs the recovered context
+(`tools/autodecomp.py context --refresh`).
 Object views deliberately make no complete-size or unverified inheritance-layout
 claim. RTTI hierarchy and virtual slot order are retained separately from those
 partial ABI views. No compiler or target tool executes on the host.
@@ -577,21 +580,12 @@ def generate(model, directory):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', default='build/classes/catalog.json', help='ignored detailed integration catalog')
-    parser.add_argument('--check', action='store_true', help='verify generated headers are current without changing them')
     args = parser.parse_args()
     output = ROOT / args.output
     if not output.resolve().is_relative_to((ROOT / 'build').resolve()):
         parser.error('detailed catalog must stay in ignored build/')
     model = collect_model()
-    directory = ROOT / 'include'
-    if args.check:
-        expected = rendered_files(model)
-        stale = [p for p, text in expected.items() if not (directory / p).exists() or (directory / p).read_text() != text]
-        stale += [p for p in owned_headers(directory) if p.relative_to(directory) not in expected]
-        if stale:
-            raise SystemExit('Generated class headers are stale; run tools/maint/class_skeletons.py')
-    else:
-        generate(model, directory)
+    generate(model, ROOT / 'build/classes/include')
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(model, indent=2) + '\n')
     print(json.dumps(model['summary'], indent=2))

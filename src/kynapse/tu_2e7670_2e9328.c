@@ -39,36 +39,60 @@ void func_002E9538(void *arg0, f32 fparg0) {
     M2C_FIELD(arg0, f32 *, 0x1C) = fparg0;
 }
 
-#include "kynapse/partial/Recovered_ParameterTables.h"
+/* Recovered_ParameterTables: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_ParameterTables {
+    u32 unk_0;
+    s32 unk_4;
+    s32 unk_8;
+    s32 unk_C;
+    s32 unk_10;
+    s32 unk_14;
+    s32 unk_18;
+    f32 unk_1C;
+    s32 unk_20;
+    s32 unk_24;
+    s32 unk_28;
+    s32 unk_2C;
+    s32 unk_30;
+    void * unk_34;
+    void * unk_38;
+    s32 unk_3C;
+    s32 unk_40;
+    s32 unk_44;
+    s32 unk_48;
+    s32 unk_4C;
+    u8 unk_50;
+} Recovered_ParameterTables;
+
 #include "ps2/recovered_types.h"
 
 void func_002E9540(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {
-    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_8)) {
-        M2C_FIELD(((arg1 * 4) + arg0->field_28), f32 *, 0) = fparg0;
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->unk_8)) {
+        M2C_FIELD(((arg1 * 4) + arg0->unk_28), f32 *, 0) = fparg0;
     }
 }
 
 void func_002E9570(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {
-    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_8)) {
-        M2C_FIELD(((arg1 * 4) + arg0->field_20), f32 *, 0) = fparg0;
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->unk_8)) {
+        M2C_FIELD(((arg1 * 4) + arg0->unk_20), f32 *, 0) = fparg0;
     }
 }
 
 void func_002E95A0(Recovered_ParameterTables *arg0, s32 arg1, s32 arg2) {
-    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_8)) {
-        M2C_FIELD(((arg1 * 4) + arg0->field_24), s32 *, 0) = arg2;
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->unk_8)) {
+        M2C_FIELD(((arg1 * 4) + arg0->unk_24), s32 *, 0) = arg2;
     }
 }
 
 void func_002E95D0(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {
-    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_4)) {
-        M2C_FIELD(((arg1 * 4) + arg0->field_2C), f32 *, 0) = fparg0;
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->unk_4)) {
+        M2C_FIELD(((arg1 * 4) + arg0->unk_2C), f32 *, 0) = fparg0;
     }
 }
 
 void func_002E9600(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {
-    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_C)) {
-        M2C_FIELD(((arg1 * 4) + arg0->field_30), f32 *, 0) = fparg0;
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->unk_C)) {
+        M2C_FIELD(((arg1 * 4) + arg0->unk_30), f32 *, 0) = fparg0;
     }
 }
 

@@ -56,9 +56,9 @@ class or module. The file lists every function of the TU, the unrecovered ones a
 lists the files with their address ranges and flags; `tools/build/layout.py` owns the naming rules.
 
 Headers follow the libraries: `include/<library>/` for `game`, `kynapse`, `animation`, `physics`, `rw_core`, `rw_audio`
-and `apt`, and `include/ps2/` for helpers shared by all of them (EE types, VU0 operations, the draft prelude). Generated
-headers sit beside the hand-written ones: `include/game/classes/` and `include/kynapse/classes/` (class interfaces from
-`tools/maint/class_skeletons.py`) and `include/<library>/partial/` (partial views from `tools/pipeline/context_recovery.py`).
+and `apt`, and `include/ps2/` for helpers shared by all of them (EE types, VU0 operations, the draft prelude). Class
+views (`include/game/classes/`, `include/kynapse/classes/`) sit beside the hand-written headers; recovered layouts that several files share
+are plainly named headers there, the others are defined in the one source file that uses them.
 
 ## Current state (USA retail, `ninja progress`)
 

@@ -8,7 +8,10 @@ Short, neutral rules for coding assistants and the people directing them. They a
 - Use the build tools in `tools/`; they run the pinned compilers through `tools/toolchain.py` (local) or an optional
   backend plugin named in the ignored `.local/config.json` (`docs/build.md`). Never start compilers or other toolchain
   programs directly. If the backend reports a failure ("Build backend failed"), stop and report it; do not work around it.
-- Never commit game bytes, extracted files, generated assembly or data, savestates, compilers or build output. `orig/`,
+- Commit only real work: source, drafts, headers, hand-edited configuration, docs and tests. Whatever the executable plus the committed
+  sources and configuration determine (TU map, splat configuration, ELF layout, function boundaries, link-once owners, class skeletons,
+  decompiler context) is generated into `build/` by `ninja` or a tool and never committed. Never commit game bytes, extracted files,
+  generated assembly or data, savestates, compilers or build output. `orig/`,
   `asm/`, `data/`, `build/`, `.local/` and `.venv/` are ignored; keep it that way.
 - Keep committed text free of machine-specific details: host names, user names, absolute paths, network addresses and
   credentials belong only in `.local/`.
@@ -19,9 +22,9 @@ Short, neutral rules for coding assistants and the people directing them. They a
 - Build with `ninja`; every commit leaves it printing `OK` for USA retail (`SLUS_213.76`, the only version checked routinely).
   Run `python3 tools/check_versions.py` (all five versions) before releases or after changing shared build tools. Work by replacing a function's `INCLUDE_ASM` line in its TU file; the
   build inputs are `config/SLUS_213.76/splits.yaml`, `symbols.txt` and `equivalent.yaml` (edited by hand and by `autodecomp.py register`). Report progress with `ninja progress`; when it changes, run `ninja badges` and commit `progress/`.
-- Names, prototypes, types and partial views are hand-maintained source: `config/SLUS_213.76/symbols.txt` (`// type:func alias`
-  lines are readable names that never change linking), `include/ps2/prototypes.h`, `include/ps2/recovered_types.h` and
-  `include/<library>/partial/`. Mark what no matched function confirms `UNVERIFIED`. Nothing here needs analysis data from outside
+- Names, prototypes, types and layouts are hand-maintained source: `config/SLUS_213.76/symbols.txt` (`// type:func alias`
+  lines are readable names that never change linking), `include/ps2/prototypes.h`, `include/ps2/recovered_types.h` and the
+  headers under `include/<library>/` (recovered layouts are `Recovered_*` structs with `unk_XX` fields). Mark what no matched function confirms `UNVERIFIED`. Nothing here needs analysis data from outside
   the repository; an analysis tool such as Ghidra is optional and personal, and its output enters only as edits to these files.
 - Evidence tiers: `exact` (byte-identical in the full image), `equivalent` (agrees on recorded states, recorded in
   `equivalent.yaml`; never replaces assembly), `draft`. Do not claim more than the evidence shows.

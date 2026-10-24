@@ -1,7 +1,12 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "animation/partial/Recovered_AnimationParameterBank.h"
+/* Recovered_AnimationParameterBank: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_AnimationParameterBank {
+    u8 unk_0[280];
+    s32 unk_118;
+} Recovered_AnimationParameterBank;
+
 #include "ps2/recovered_types.h"
 extern void func_00350098(Recovered_AnimationParameterBank *);
 

@@ -426,20 +426,20 @@ Value func_00100020(Value count) { return count; }
         from unittest.mock import patch
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            for name in ('src/auto', 'include/game/partial'):
+            for name in ('src/auto', 'include/game'):
                 (root / name).mkdir(parents=True)
             (root / 'src/owner.cpp').write_text('')
             (root / 'include/owner.h').write_text(
                 'struct OriginalOwner { int Read() __asm__("func_00100000"); };')
-            (root / 'include/game/partial/Recovered_Node.h').write_text('')
+            (root / 'include/game/node.h').write_text('typedef struct Recovered_Node { int unk_4; } Recovered_Node;')
             (root / 'src/auto/a.c').write_text(
-                'int func_00100000(Recovered_Node *p) { return p->field_4; }')
+                'int func_00100000(Recovered_Node *p) { return p->unk_4; }')
             units = [dict(source='src/owner.cpp', functions=[], externs={}),
                      dict(source='src/auto/a.c', origin='auto', externs={},
                           functions=[dict(addr=0x100000, symbol='func_00100000', status='source')])]
             def dependencies(source):
                 header = ('include/owner.h' if source == 'src/owner.cpp'
-                          else 'include/game/partial/Recovered_Node.h')
+                          else 'include/game/node.h')
                 return [Path(source), Path(header)]
             with patch('units.load_units', return_value=units), patch('units.dependencies', side_effect=dependencies):
                 seeds, _ = cr.source_seeds(root)
@@ -448,12 +448,17 @@ Value func_00100020(Value count) { return count; }
                                  {'Recovered_Node': [0x100000]})
 
     def test_layout_verification_counts_only_matched_member_users(self):
+        import tempfile
         from unittest.mock import patch
-        seeds = {1: dict(matched=True, source='src/a.c', raw='void a(Recovered_Node *n)', body='n->field_4 = 1;'),
+        seeds = {1: dict(matched=True, source='src/a.c', raw='void a(Recovered_Node *n)', body='n->unk_4 = 1;'),
                  2: dict(matched=True, source='src/a.c', raw='void b(Recovered_Node *n)', body='sink(n);'),
-                 3: dict(matched=False, source='src/a.c', raw='void c(Recovered_Node *n)', body='n->field_4 = 1;')}
-        with patch.object(cr, 'source_seeds', return_value=(seeds, [])), patch('units.dependencies', return_value=[Path('include/game/partial/Recovered_Node.h')]):
-            self.assertEqual(cr.verified_layout_users(['Recovered_Node']), {'Recovered_Node': [1]})
+                 3: dict(matched=False, source='src/a.c', raw='void c(Recovered_Node *n)', body='n->unk_4 = 1;')}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'src').mkdir()
+            (root / 'src/a.c').write_text('typedef struct Recovered_Node { int unk_4; } Recovered_Node;')
+            with patch.object(cr, 'source_seeds', return_value=(seeds, [])), patch('units.dependencies', return_value=[Path('src/a.c')]):
+                self.assertEqual(cr.verified_layout_users(['Recovered_Node'], root), {'Recovered_Node': [1]})
 
 
 class CppAbiTests(unittest.TestCase):

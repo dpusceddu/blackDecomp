@@ -1,8 +1,21 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/partial/Recovered_Notifiable.h"
-#include "game/partial/Recovered_SlotUser.h"
+/* Recovered_Notifiable: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_Notifiable {
+    u8 unk_0[16];
+    s32 unk_10;
+    void * unk_14;
+} Recovered_Notifiable;
+
+/* Recovered_SlotUser: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_SlotUser {
+    u8 unk_0[20];
+    s32 unk_14;
+    u8 unk_18[16];
+    u32 unk_28;
+} Recovered_SlotUser;
+
 #include "ps2/recovered_types.h"
 extern void * func_0016EAD0(void *);
 extern void * func_0016FB18(s32, s32);

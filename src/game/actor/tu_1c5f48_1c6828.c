@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/partial/Recovered_BkActorRenderPS2.h"
+#include "game/bk_actor_render.h"
 #include "ps2/recovered_types.h"
 extern s32 func_001C6FA0(void *, s32);
 extern s32 func_001C5F48(s32);

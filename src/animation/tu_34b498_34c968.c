@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "animation/partial/Recovered_AnimationGraphNode.h"
-#include "animation/partial/Recovered_AnimationParameters.h"
+#include "animation/animation_graph_node.h"
+#include "animation/animation_parameters.h"
 #include "ps2/recovered_types.h"
 extern f32 * func_0034BC30(s32 *, Recovered_AnimationGraphNode *, Recovered_AnimationParameters *, u32, void *, s32, f32, f32, f32, f32, f32);
 extern s32 func_0034C8C8(void *, Recovered_AnimationGraphNode *, Recovered_AnimationParameters *);

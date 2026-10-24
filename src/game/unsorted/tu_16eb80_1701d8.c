@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/partial/Recovered_Object56980.h"
+#include "game/object_56980.h"
 #include "ps2/recovered_types.h"
 extern void ** D_003C87E8;
 extern s32 (*D_003C87EC)();

@@ -1,7 +1,12 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "kynapse/partial/Recovered_Vtable_003EDC38.h"
+/* Recovered_Vtable_003EDC38: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_Vtable_003EDC38 {
+    u32 unk_0;
+    void * unk_4;
+} Recovered_Vtable_003EDC38;
+
 #include "ps2/recovered_types.h"
 
 s32 func_002F3530(Recovered_Vtable_003EDC38 *arg0, s32 arg1) {
@@ -9,7 +14,7 @@ s32 func_002F3530(Recovered_Vtable_003EDC38 *arg0, s32 arg1) {
     s32 *var_2;
     void *temp_4;
 
-    temp_4 = arg0->field_4;
+    temp_4 = arg0->unk_4;
     if ((u32) arg1 >= (u32) M2C_FIELD(temp_4, u32 *, 0xC)) {
         var_2 = NULL;
     } else {

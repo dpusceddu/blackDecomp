@@ -3,9 +3,15 @@
 extern unsigned char poseCacheStorage[] __asm__("D_0045F0C0") __attribute__((aligned(16)));
 #include "ps2/ee_fpu.h"
 #include "ps2/prelude.h"
-#include "animation/partial/Recovered_AnimationGraphNode.h"
-#include "animation/partial/Recovered_AnimationParameters.h"
-#include "animation/partial/Recovered_OverlayBinding.h"
+#include "animation/animation_graph_node.h"
+#include "animation/animation_parameters.h"
+/* Recovered_OverlayBinding: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_OverlayBinding {
+    f32 unk_0;
+    f32 unk_4;
+    f32 unk_8;
+} Recovered_OverlayBinding;
+
 #include "ps2/recovered_types.h"
 #include "ps2/vu0_micro.hpp"
 #include "ps2/vu0_quaternion.hpp"
@@ -527,7 +533,7 @@ __attribute__((section(".text.func_00347280"))) f32 * func_00347280(s32 *arg0, R
     f32 var_f20;
     s32 temp_20;
 
-    temp_f24 = *func_003500E0(arg2, (s32) arg1->field_2);
+    temp_f24 = *func_003500E0(arg2, (s32) arg1->unk_2);
     temp_f23 = BkEeDividePipelineGuarded(fparg0,fparg2);
     if (fparg0 == fparg1) {
         var_f20 = func_0029DB30(temp_f23);

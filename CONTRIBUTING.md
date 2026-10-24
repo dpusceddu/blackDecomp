@@ -68,10 +68,12 @@ Evidence tiers matter: never describe a function as more than its tier (`exact`,
   routine work builds and checks. The other four versions are rebuilt from assembly; run `python3 tools/check_versions.py`
   (all five, `OK` or `MISMATCH` each) before a release and after changing shared build tools, linker or splitting code. `ninja progress` must not regress: never demote a previously exact function to claim a gain.
 - **Never commit game data**: no executables, disc contents, extracted files, generated assembly (`asm/`, `build/`, `data/`),
-  savestates, compiler archives or build output. They live in ignored directories. Generated headers and data are committed
-  only when a tool in `tools/` owns and can regenerate them.
-- **Names, prototypes, types and partial views are ordinary source.** `config/SLUS_213.76/symbols.txt`, `include/ps2/prototypes.h`,
-  `include/ps2/recovered_types.h` and `include/<library>/partial/` (read its `README.md`: a partial view is not a class definition) are edited by hand and reviewed like code; mark what is not
+  savestates, compiler archives or build output. They live in ignored directories. Only real work is committed: what the executable plus the
+  committed sources and configuration determine is generated into `build/` and not committed (`config/README.md`).
+- **Names, prototypes, types and layouts are ordinary source.** `config/SLUS_213.76/symbols.txt`, `include/ps2/prototypes.h`,
+  `include/ps2/recovered_types.h` and the headers under `include/<library>/` are edited by hand and reviewed like code. A recovered layout is a
+  `Recovered_<Name>` struct with `unk_XX` fields (named after the PS2 offset) for the accessed prefix of an object: define it in the one
+  source file that uses it, or in a plainly named header when several files do, and fold it into the class header once the class is known; mark what is not
   confirmed by a matched function `UNVERIFIED`. No tool or test needs data from outside the repository. If you analyse the
   executable with Ghidra, IDA or another disassembler, that is your own tool: put what you learn into these files.
 - **Keep committed text free of machine-specific details**: host names, user names, absolute paths, network addresses and

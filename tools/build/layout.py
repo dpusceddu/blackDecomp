@@ -135,22 +135,6 @@ def source_dir(addr, name=None):
     return 'src/' + library
 
 
-_VIEW_LIBRARIES = None
-
-
-def layout_library(name):
-    """Library whose include/<library>/partial/ directory holds the partial view `name` (default: game)."""
-    global _VIEW_LIBRARIES
-    if _VIEW_LIBRARIES is None:
-        _VIEW_LIBRARIES = {p.stem: p.parent.parent.name for p in (ROOT / 'include').glob('*/partial/Recovered_*.h')}
-    return _VIEW_LIBRARIES.get(name, 'game')
-
-
-def view_include(name):
-    """Quoted include of a partial view, e.g. 'game/partial/Recovered_Action.h'."""
-    return '%s/partial/%s.h' % (layout_library(name), name)
-
-
 def tu_stem(tu):
     """File stem of a TU: its name without the library prefix of the map ('apt/tu_218370' -> 'tu_218370')."""
     return tu['name'].split('/')[-1].replace('/', '_')

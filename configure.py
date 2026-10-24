@@ -41,6 +41,8 @@ def main():
     derived = '%s/inline_owners.txt %s/tus.yaml' % (b, b) if usa else ''
     derived_rules = f"""build {b}/inline_owners.txt: owners | {b}/split.stamp config/{slug}/libraries.txt {tools('linkonce_owners.py', 'layout.py')}
 build {b}/tus.yaml: tus | {b}/units.json {b}/placement.json config/tus_overrides.yaml config/{slug}/libraries.txt {tools('tus.py')}
+build run_classes: classes | {b}/units.json
+build classes: phony run_classes
 build owners: phony {b}/inline_owners.txt
 build tus: phony {b}/tus.yaml
 """ if usa else ''
@@ -110,6 +112,10 @@ rule report
 rule badges
   command = $py tools/badges.py {slug}
   description = write the progress badges and table (progress/, README.md)
+  pool = console
+rule classes
+  command = $py tools/autodecomp.py context --refresh && $py tools/maint/class_skeletons.py
+  description = class skeletons from RTTI and the vtables (build/classes/include)
   pool = console
 rule owners
   command = $py tools/build/linkonce_owners.py --write

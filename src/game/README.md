@@ -5,7 +5,7 @@ The game library, grouped by subsystem. A file is one translation unit (or a pie
 
 | Directory | What belongs here | Evidence the grouping uses |
 | --- | --- | --- |
-| `ai/` | AI actions, action stacks, covers, and what is not specifically movement or navigation | `AIAction*`, `ActionStack`, `Recovered_Action*`, the AI address cluster 0x172000-0x19d000 |
+| `ai/` | AI actions, action stacks, covers, and what is not specifically movement or navigation | `AIAction*`, `ActionStack`, `Recovered_Action`, the AI address cluster 0x172000-0x19d000 |
 | `ai/movement/` | Movement modes (direct, formation, route-following), movement core | `AIMovement*`, `*MovementMode`, `MovementCore` |
 | `ai/navigation/` | Routes, route requests and queues, node search, path agents | `AIRoute*`, `RouteRequest`, `RouteMode`, `AINavigation*`, `game_path` |
 | `weapons/` | Weapon manager, inventory, reserves, shots | `ModWeapons::*`, `include/game/weapons`, exact consumers of the native weapon views |

@@ -1,8 +1,53 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/partial/Recovered_MovementModeBase.h"
-#include "game/partial/Recovered_RouteMode.h"
+/* Recovered_MovementModeBase: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_MovementModeBase {
+    u8 unk_0[8];
+    u8 unk_8;
+    u8 unk_9[7];
+    s128 unk_10;
+    u128 unk_20;
+    s32 unk_30;
+    void * unk_34;
+    u8 unk_38;
+    u8 unk_39[3];
+    f32 unk_3C;
+    u8 unk_40[8];
+    f32 unk_48;
+    f32 unk_4C;
+    u8 unk_50;
+    u8 unk_51[15];
+    s128 unk_60;
+    s128 unk_70;
+    void * unk_80;
+} Recovered_MovementModeBase;
+
+/* Recovered_RouteMode: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_RouteMode {
+    f32 unk_0;
+    f32 unk_4;
+    u8 unk_8[8];
+    s128 unk_10;
+    u8 unk_20[16];
+    s32 unk_30;
+    void * unk_34;
+    u8 unk_38[4];
+    f32 unk_3C;
+    u8 unk_40[48];
+    u128 unk_70;
+    void * unk_80;
+    u8 unk_84[12];
+    void * unk_90;
+    u8 unk_94;
+    u8 unk_95;
+    u8 unk_96[2];
+    u32 unk_98;
+    u8 unk_9C[228];
+    void * unk_180;
+    void * unk_184;
+} Recovered_RouteMode;
+
 #include "ps2/recovered_types.h"
 extern void func_00191C20(Recovered_RouteMode *, void *);
 extern void func_00191568(Recovered_MovementModeBase *, void *);

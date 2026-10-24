@@ -74,7 +74,15 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DC2C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DC448);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DC498);
 
-#include "game/partial/Recovered_Vtable_003E26B8.h"
+/* Recovered_Vtable_003E26B8: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_Vtable_003E26B8 {
+    u8 unk_0[4];
+    u8 unk_4;
+    u8 unk_5[3];
+    void * unk_8;
+    s32 unk_C;
+} Recovered_Vtable_003E26B8;
+
 #include "ps2/recovered_types.h"
 extern s32 func_002810A0(Recovered_Vtable_003E26B8 *);
 

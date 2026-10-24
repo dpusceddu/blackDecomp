@@ -20,7 +20,6 @@ from pathlib import Path
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
 from build_telemetry import record as record_build
-from layout import view_include
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = 'SLUS_213.76'
@@ -248,7 +247,7 @@ def recovered_context(refresh=False):
             if refresh:
                 raise SystemExit('Frozen context cannot be refreshed; refresh it once, before parallel runs.')
             cache = AUTO / 'context.json'
-            if not cache.exists() or not (ROOT / 'include/game/partial/all.h').exists() or not (AUTO / 'ctx.c').exists():
+            if not cache.exists() or not (AUTO / 'ctx.c').exists():
                 raise SystemExit('Frozen recovery context is missing; create it first with `autodecomp.py context --refresh`.')
             RECOVERED = json.loads(cache.read_text())
         else:
@@ -718,9 +717,32 @@ def clean_function(name, r, sigs, strings=None, stack=None):
     if changed and not os.environ.get('AUTODECOMP_NO_BYTEADDR'):
         body = body2
     views = sorted(set(re.findall(r'\bRecovered_\w+\b', '\n'.join(lines) + sig + body)))
-    lines[2:2] = ['#include "%s"' % view_include(view) for view in views]
+    lines[2:2] = view_definitions(views)
     src = '\n'.join(lines) + '\n\n' + sig + ' {\n' + body + '\n}\n'
     return src, sig
+
+
+def committed_views():
+    """{type name: quoted include} of the recovered layouts (`typedef struct Recovered_X {`) the committed headers define."""
+    out = {}
+    for p in sorted((ROOT / 'include').rglob('*')):
+        if p.suffix in ('.h', '.hpp'):
+            for name in re.findall(r'^typedef struct (Recovered_\w+) \{', p.read_text(), re.M):
+                out[name] = p.relative_to(ROOT / 'include').as_posix()
+    return out
+
+
+def view_definitions(views):
+    """Lines that give a draft the recovered layouts (`Recovered_X`) it names: the include of the committed header that
+    defines one, otherwise the struct the executable's analysis recovered (build/auto/context.json) written out in the file."""
+    import context_recovery
+    committed, lines, local = committed_views(), [], []
+    for view in views:
+        if view in committed:
+            lines.append('#include "%s"' % committed[view])
+        elif view in recovered_context()['layouts']:
+            local += context_recovery.generated_layout_text(view, recovered_context()['layouts'][view]) + ['']
+    return lines + ([''] + local if local else [])
 
 
 ADDR_OF = re.compile(r'&(D_[0-9A-F]{8})\b')
@@ -1422,10 +1444,11 @@ def expand_macros(src):
     prelude = (ROOT / 'include/ps2/prelude.h').read_text()
     types = '\n'.join(l for l in prelude.split('\n') if l.startswith('typedef'))
     body = src.replace('#include "ps2/prelude.h"\n', '')
-    for view in re.findall(r'^#include "(\w+/partial/Recovered_\w+\.h)"$', body, re.M):
-        header = (ROOT / 'include' / view).read_text()
-        layout = '\n'.join(line for line in header.splitlines() if not line.startswith('#') and not line.startswith('typedef char assert_'))
-        body = body.replace('#include "%s"' % view, layout)
+    for name, include in committed_views().items():       # the permuter's parser reads no headers: put the layouts in
+        line = '#include "%s"\n' % include
+        if line in body:
+            header = (ROOT / 'include' / include).read_text()
+            body = body.replace(line, '\n'.join(l for l in header.splitlines() if not l.startswith('#')) + '\n')
     if '#include "ps2/recovered_types.h"' in body or '#include "ps2/prototypes.h"' in body:
         names = re.findall(r'^typedef struct (\w+)', TYPES_HEADER.read_text(), re.M)
         if any(re.search(r'\b%s\b' % n, body) for n in names):

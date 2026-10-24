@@ -77,7 +77,7 @@ Work proceeded in rounds, each on a set of TUs with one owner per TU:
   six-word family. A uniform substitution regresses 46 of 5,018 controls, so it is selected per unit only
   (`--assembler=sn-min6`, `assembler_evidence: weak` in `units.yaml`). +41 functions / 5,248 B.
 - **RTTI class skeletons**: 189 class type-info records (166 Kaim classes), 171 base links, 3,830 vtable slots;
-  `tools/maint/class_skeletons.py` generates `include/game/classes/` and `include/kynapse/classes/` (189 named interfaces, 383
+  `tools/maint/class_skeletons.py` generated `include/game/classes/` and `include/kynapse/classes/` (since then only the views the sources use are kept there; 189 named interfaces, 383
   unknown-owner views, 2,055 field views of which about 700 have scoped PS2 access proofs). +7 functions.
 - **C++ class recovery** (seven rounds over four queues, then shared-context preparation): 5,066 -> 5,354 functions, 281.6 kB
   -> 362.0 kB. Shared PS2 helpers (`include/ps2/`, 26 exact consumers) cover the SN integer/vector ABI, VU0 transforms,

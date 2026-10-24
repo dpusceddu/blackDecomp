@@ -1,4 +1,4 @@
-// Generated semantic RTTI hierarchy. Never use these empty types as PS2 object layouts.
+// Semantic RTTI hierarchy of the classes (edited by hand). Never use these empty types as PS2 object layouts.
 #ifndef BLACK_CLASSES_HIERARCHY_HPP
 #define BLACK_CLASSES_HIERARCHY_HPP
 namespace BlackPS2Classes {

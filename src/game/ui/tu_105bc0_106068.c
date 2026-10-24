@@ -1,13 +1,22 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/partial/Recovered_FrontendLoadState.h"
+/* Recovered_FrontendLoadState: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_FrontendLoadState {
+    u32 unk_0;
+    u32 unk_4;
+    u8 unk_8[16];
+    u64 unk_18;
+    u8 unk_20[16];
+    u32 unk_30;
+} Recovered_FrontendLoadState;
+
 #include "ps2/recovered_types.h"
 
 s32 func_00106068(Recovered_FrontendLoadState *arg0) {
     M2C_FIELD(arg0, s64 *, 0x18) = 0;
-    arg0->field_0 = 1;
-    arg0->field_4 = 0;
+    arg0->unk_0 = 1;
+    arg0->unk_4 = 0;
     M2C_FIELD(arg0, s32 *, 0x30) = 0;
     return 1;
 }

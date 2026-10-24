@@ -1,29 +1,13 @@
-# Generated PS2 class interfaces
+# Class views (include/game/classes/, include/kynapse/classes/)
 
-`tools/maint/class_skeletons.py` is the single owner of this directory. Change verified
-ABI evidence in `config/SLUS_213.76/class_method_abi.json` or `config/SLUS_213.76/rtti_abi.json`, then
-regenerate; do not edit generated headers. Run `tools/maint/class_skeletons.py --check`
-to check the complete generated tree. The detailed catalog stays in ignored
-`build/classes/catalog.json`.
+Hand-edited headers: the class views the sources include. Each began as a skeleton that `tools/maint/class_skeletons.py`
+produces from RTTI and the vtables; the skeletons are no longer committed. Run `ninja classes` to write the complete set into the
+ignored `build/classes/include/` (it needs the recovered context, `tools/autodecomp.py context --refresh`, which `ninja classes`
+runs), and copy a skeleton here when a source needs it. ABI evidence for the generator is in
+`config/SLUS_213.76/class_method_abi.json` and `config/SLUS_213.76/rtti_abi.json`.
 
-The recovered context cache is required. Refresh it before generating and checking:
-
-```sh
-.venv/bin/python tools/autodecomp.py context --refresh
-.venv/bin/python tools/maint/class_skeletons.py
-.venv/bin/python tools/maint/class_skeletons.py --check
-```
-
-RTTI names and semantic base hierarchies are decoded from retail. `Hierarchy_*`
-types preserve those relationships, without representing PS2 object storage.
-Unknown vtable owners and callback-like runs remain explicitly unverified.
-
-Class views expose PS2 field offsets through inline references. They do not claim
-complete allocation sizes or C++ inheritance layouts. `VirtualInterface*` lists
-slots in their actual order; unknown signatures are marked. The separate `ABI_*`
-dispatch views exist only where an exact source probe verified the vptr position
-and call signature. Ordinary inferred virtual interfaces must not be used as
-verified layouts. A matched function verifies only the specific field accesses
-it actually uses, not every field grouped with its vtable.
-Exact code proves access and ABI compatibility, not the original semantic argument,
-return or field types.
+- `hierarchy.hpp` holds the RTTI base relations as empty `Hierarchy_*` types. They say who derives from whom, not how an object is laid out.
+- Class views expose PS2 field offsets through inline references. They do not claim complete allocation sizes or C++ inheritance
+  layouts, and unknown signatures are marked `UNVERIFIED`. `VirtualInterface*` lists vtable slots in their actual order.
+- A matched function verifies only the field accesses it actually uses, not every field of the view. Exact code proves access and
+  ABI compatibility, not the original semantic argument, return or field types.

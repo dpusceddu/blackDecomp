@@ -3,8 +3,9 @@
 
 The ignored build/auto/context.json keeps conflicting evidence and unproved leads. The recovery only writes ignored files
 under build/auto/ (the m2c context); the committed headers under include/ are hand-maintained source and are never touched.
-The partial views in include/<library>/partial/ are PS2 partial views, not claims about allocation size or C++ inheritance.
-Only a source function which actually accesses a view can verify that view.
+A recovered layout (`Recovered_X`, fields `unk_XX`) is the accessed prefix of a PS2 object, not a claim about allocation size or C++
+inheritance; committed sources define theirs next to the code that uses it. Only a source function which actually accesses a layout
+can verify it.
 """
 import argparse
 import collections
@@ -19,7 +20,6 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
-import layout as source_layout
 VERSION = 10
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
@@ -348,7 +348,7 @@ def source_seeds(root=ROOT, matched_only=False):
     seeds, evidence, parsed, texts = {}, [], {}, {}
     units = load_units(variant='SLUS_213.76')
     for p in (root / 'include').rglob('*'):
-        if p.suffix in ('.h', '.hpp') and 'partial' not in p.parts:
+        if p.suffix in ('.h', '.hpp'):
             text = COMMENT.sub('', p.read_text())
             CLASS_NAMES.update(re.findall(r'\b(?:class|struct)\s+(\w+)', text))
             NAMESPACE_NAMES.update(re.findall(r'\bnamespace\s+(\w+)', text))
@@ -1102,20 +1102,20 @@ def generated_layout_text(name, layout, m2c=False):
     for field in layout['fields']:
         off, size = field['offset'], field['size']
         if off > cursor:
-            out.append('    u8 opaque_%X[%d];' % (cursor, off - cursor))
-        out.append('    %s field_%X; /* PS2 +0x%X */' % (context_type(field['type'], m2c), off, off))
+            out.append('    u8 unk_%X[%d];' % (cursor, off - cursor))
+        out.append('    %s unk_%X;' % (context_type(field['type'], m2c), off))
         if m2c and size == 16:
             out.append('    u8 wide_tail_%X[8];' % off)
         cursor = off + size
     # Size is only the accessed prefix, not an allocation-size or inheritance claim.
     if layout['extent'] > cursor:
-        out.append('    u8 opaque_%X[%d];' % (cursor, layout['extent'] - cursor))
+        out.append('    u8 unk_%X[%d];' % (cursor, layout['extent'] - cursor))
     out.append('} %s;' % name)
     return out
 
 
 def verified_layout_users(names, root=ROOT):
-    """Require a member access in a matched body and that exact view's dependency.
+    """Require a member access in a matched body and that the source (or a header it includes) defines that layout.
 
     Count per function, not every function in a TU that mentions a type. Includes,
     opaque-pointer calls and a type-name mention alone prove no field layout.
@@ -1136,11 +1136,11 @@ def verified_layout_users(names, root=ROOT):
         text = seed['raw'] + ' ' + seed['body']
         mentioned = set(re.findall(r'\bRecovered_\w+\b', text)) & set(names)
         for name in mentioned:
-            if 'include/' + source_layout.view_include(name) not in paths[source]:
+            if not any(re.search(r'typedef struct ' + re.escape(name) + r' \{', (root / p).read_text()) for p in paths[source]):
                 continue
             variables = re.findall(r'\b' + re.escape(name) + r'\s*\*\s*(\w+)', text)
-            direct = any(re.search(r'\b' + re.escape(v) + r'\s*->\s*field_[0-9A-F]+', seed['body']) for v in variables)
-            cast = re.search(r'\(\s*\(\s*' + re.escape(name) + r'\s*\*\s*\)[^;]+?\)\s*->\s*field_', seed['body'])
+            direct = any(re.search(r'\b' + re.escape(v) + r'\s*->\s*unk_[0-9A-F]+', seed['body']) for v in variables)
+            cast = re.search(r'\(\s*\(\s*' + re.escape(name) + r'\s*\*\s*\)[^;]+?\)\s*->\s*unk_', seed['body'])
             if direct or cast:
                 result[name].add(address)
     return {name: sorted(users) for name, users in result.items()}
@@ -1164,7 +1164,7 @@ def fingerprint(root=ROOT):
     paths += sorted((other / 'src').rglob('*.json'))
     paths += sorted((other / 'src').rglob('*.cpp'))
     for p in paths:
-        if p.is_file() and '/partial/' not in p.as_posix():
+        if p.is_file():
             h.update(p.read_bytes())
     return h.hexdigest()
 
@@ -1230,7 +1230,7 @@ def recover(inv=None, root=ROOT, refresh=False, cache=None):
             a = int(pair['ps2'], 16)
             leads.setdefault(str(a), []).append(dict(xbox=pair['xbox'], confidence=pair['confidence'], region=pair['region'],
                                                    source_leads=module_sources.get(pair['xbox'].lower(), [])))
-    has_views = any('/partial/Recovered_' in p.read_text() for p in (root / 'src').rglob('*') if p.suffix in ('.c', '.cpp', '.h', '.hpp'))
+    has_views = any('typedef struct Recovered_' in p.read_text() for p in (root / 'src').rglob('*') if p.suffix in ('.c', '.cpp', '.h', '.hpp'))
     if has_views:
         verified = verified_layout_users(layouts, root)
         for name, layout in layouts.items():

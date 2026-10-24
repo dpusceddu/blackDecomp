@@ -186,29 +186,28 @@ it. `build/auto/context.json` keeps evidence, unresolved arities and conflicts. 
 independent on the EE. Caller counts and register-use constraints are lower bounds; the original order of mixed
 parameters is unknown without a signature. Xbox types remain leads and never establish PS2 field offsets.
 
-`include/<library>/partial/` holds the shared PS2 partial views, with field-offset assertions. They are hand-maintained source: add or
-correct a view by editing its header (and `include/game/partial/all.h`, which lists them). Normal drafts include only the
-views they use, and backend jobs package their quoted-header dependencies. Overlapping, unaligned or conflicting fields stay opaque.
-A view's extent is an accessed prefix, not an allocation-size assertion; its first line says UNVERIFIED until a matched source
-function actually accesses members through that view, and then names the function (`VERIFIED access view by 0x...`).
-`python3 tools/autodecomp.py context --refresh` writes what the recovery infers from the code to the ignored `build/auto/`
-(`context.json` lists each layout's `verified_by` functions, `recovered_layouts.c` is the m2c copy of the layouts), which is a
-starting point for editing a view, never a replacement for it. Normal drafts declare referenced callees individually so
+A recovered layout is a struct `Recovered_<Name>` whose fields are named after their PS2 offsets (`unk_30`, with `unk_4[45]` for a gap)
+and cover the accessed prefix only, not the allocation size. A committed layout is ordinary source: it is defined in the one
+source file that uses it, or, when several files share it, in a plainly named header under `include/<library>/` (the sources include
+it by that name); once its owner class is known, fold it into the class header. There is no directory of generated views.
+`python3 tools/autodecomp.py context --refresh` writes what the recovery infers from the executable and the committed sources to the
+ignored `build/auto/` (`context.json` lists each layout's `verified_by` functions, `ctx.c` is the m2c context: the committed
+`ps2/recovered_types.h` and `ps2/prototypes.h`, the recovered layouts and the recovered signatures). A draft that names a
+`Recovered_<Name>` includes the committed header that defines it, or carries the recovered struct written out above the
+function; it is a starting point for the layout you commit, never a replacement for it. Normal drafts declare referenced callees individually so
 speculative signatures do not conflict with unrelated definitions. When several runs share a checkout,
 `AUTODECOMP_FREEZE_CONTEXT=1` consumes the already exported context; a missing context is an error.
 
 No tool rewrites a committed header: `decompile.py`, `autodecomp.py` and the build only write under `build/auto/` (the m2c
 context: `context.json`, `ctx*.c`, `recovered_layouts.c`) from the committed headers, sources and configuration, which is all a
-fresh checkout has. `tools/maint/class_skeletons.py` (`include/*/classes/`) is the one maintainer command that writes headers.
-
-After `python3 tools/autodecomp.py context --refresh`, run `python3 tools/maint/class_skeletons.py` to recover
-the legacy GCC RTTI graph and vtables and write
-`include/game/classes/`, `include/kynapse/classes/` and an address/slot index in ignored build output. The generator is the sole owner
-of these headers: put verified corrections in its evidence configuration and regenerate. RTTI names,
+fresh checkout has. `ninja classes` (`tools/maint/class_skeletons.py`, after `context --refresh`) recovers the legacy GCC RTTI graph
+and vtables and writes class skeletons and an address/slot index into the ignored `build/classes/`; the class views the sources
+include (`include/game/classes/`, `include/kynapse/classes/`) are hand-edited headers that began as such skeletons. Verified ABI
+evidence for the generator is in `config/SLUS_213.76/class_method_abi.json`. RTTI names,
 base links and virtual slots carry separate evidence from inferred signatures and field accesses.
 Opaque prefixes and accessor offsets do not establish a complete object size. Xbox layouts remain
 leads until PS2 code and an exact source match verify them. See `include/game/classes/README.md` for the
-generated API and verification limits.
+API and verification limits.
 
 Type and instruction support, all of it mechanical and checked by exact matches:
 
@@ -217,7 +216,7 @@ Type and instruction support, all of it mechanical and checked by exact matches:
   under the image's `func_XXXXXXXX` names (the readable alias of each in a comment). Both are hand-maintained and recovered guesses:
   each structure is marked `UNVERIFIED` until a matched function actually accesses its members, and a prototype is only a weak
   declaration that a proved ABI correction (`selected_prototype`) or a matched definition overrides. `ctx.c` combines them with the
-  recovered signatures and partial views; every draft includes `ps2/recovered_types.h`. Files that call a prototyped function include
+  recovered signatures and layouts; every draft includes `ps2/recovered_types.h`. Files that call a prototyped function include
   `ps2/prototypes.h`, which includes the types. `tools/pipeline/m2c_wrap.py` is m2c with one change: a dereference of an untyped expression
   becomes `M2C_FIELD(expr, T *, 0)` (valid C) instead of `*expr`.
 - **Stack objects.** m2c's frame objects (`sp`, `&spN`, `spN`) become one `u8 sp[N] __attribute__((aligned(16)))` buffer whose

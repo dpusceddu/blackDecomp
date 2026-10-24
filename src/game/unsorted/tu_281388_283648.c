@@ -195,14 +195,28 @@ void func_00284A98(void *arg0, f32 fparg0) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00284AE8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00284B28);
 
-#include "game/partial/Recovered_Vtable_003E26E8.h"
+/* Recovered_Vtable_003E26E8: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_Vtable_003E26E8 {
+    u8 unk_0[4];
+    u32 unk_4;
+    u8 unk_8[4];
+    s32 unk_C;
+    u8 unk_10[20];
+    f32 unk_24;
+    u8 unk_28[4];
+    u8 unk_2C;
+    u8 unk_2D;
+    u8 unk_2E[6];
+    void * unk_34;
+} Recovered_Vtable_003E26E8;
+
 #include "ps2/recovered_types.h"
 
 s32 func_00284BB0(Recovered_Vtable_003E26E8 *arg0, f32 fparg0) {
     s32 temp_f0;
 
     temp_f0 = (s32) (fparg0 * 255.0f);
-    M2C_FIELD(arg0->field_34, s8 *, 0x84) = (s8) temp_f0;
+    M2C_FIELD(arg0->unk_34, s8 *, 0x84) = (s8) temp_f0;
     return temp_f0;
 }
 
@@ -210,7 +224,7 @@ s32 func_00284BD0(Recovered_Vtable_003E26E8 *arg0, f32 fparg0) {
     s32 temp_f0;
 
     temp_f0 = (s32) (fparg0 * 255.0f);
-    M2C_FIELD(arg0->field_34, s8 *, 0x87) = (s8) temp_f0;
+    M2C_FIELD(arg0->unk_34, s8 *, 0x87) = (s8) temp_f0;
     return temp_f0;
 }
 

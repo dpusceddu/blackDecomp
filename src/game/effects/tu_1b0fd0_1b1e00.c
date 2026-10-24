@@ -1,7 +1,14 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/partial/Recovered_BkEffectLightsPS2.h"
+/* Recovered_BkEffectLightsPS2: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
+typedef struct Recovered_BkEffectLightsPS2 {
+    u8 unk_0[24580];
+    s32 unk_6004;
+    u32 unk_6008;
+    u16 unk_600C;
+} Recovered_BkEffectLightsPS2;
+
 #include "ps2/recovered_types.h"
 extern s32 func_001B86F8(s32);
 extern void func_001C1930(Recovered_BkEffectLightsPS2 *);

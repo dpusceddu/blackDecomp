@@ -1,6 +1,6 @@
 """Tools must not rewrite tracked files: the m2c context is built in build/auto/ only.
 
-The access views under include/ are hand-maintained source. No tool of this repository writes them: context_recovery.py has no
+The headers under include/ are hand-maintained source. No tool of this repository writes them: context_recovery.py has no
 header writer and no flag for one, and decompile.py and autodecomp.py only write under build/auto/."""
 import contextlib, hashlib, io, json, os, subprocess, sys, tempfile, unittest
 from pathlib import Path
@@ -30,9 +30,9 @@ class BuildContext(unittest.TestCase):
         """In a throwaway repository: after the context is built, git sees nothing but the ignored build/ directory."""
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            headers = root / 'include/game/partial'
+            headers = root / 'include/game'
             headers.mkdir(parents=True)
-            (headers / 'Recovered_Thing.h').write_text('/* committed */\n')
+            (headers / 'thing.h').write_text('/* committed */\n')
             (headers / 'layouts.h').write_text('/* committed */\n')
             (root / '.gitignore').write_text('build/\n')
             git = lambda *a: subprocess.run(['git', '-c', 'user.name=t', '-c', 'user.email=t@t', *a], cwd=root,
