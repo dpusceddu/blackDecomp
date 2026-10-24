@@ -203,7 +203,7 @@ def candidates(top, args=None):
     if args and getattr(args, 'json', False):
         print(json.dumps([dict(r, score=score) for score, r in out[:top]], indent=2))
         return out[:top]
-    print('Phase 5 candidates: ' + ('wide queue, including large and vector functions' if wide else
+    print('Candidates: ' + ('wide queue, including large and vector functions' if wide else
           'translation units to finish by hand (most already in source, moderate rest, few EE vector functions)'))
     print('  %-34s %-9s %-6s %9s %12s %9s %5s' % ('TU', 'library', 'bounds', 'functions', 'in source', 'left (B)', 'vec'))
     for score, r in out[:top]:
