@@ -119,7 +119,7 @@ def add_function(addr, code, decls, compiler, flags, symbol=None, single=False, 
         split_file.write_text(insert_split_line(split_file.read_text(), '  ' + S.format_split(entry), addr))
         record.update(path=path, created=entry)
     if symbol and symbol != 'func_%08X' % addr:
-        rows = [(n, a, k.split()[0] if k else 'func') for n, a, k in S.parse_symbols((S.config_dir(slug) / 'symbols.txt').read_text())]
+        rows = [(n, a, k or 'func') for n, a, k in S.parse_symbols((S.config_dir(slug) / 'symbols.txt').read_text())]
         rows.append((symbol, addr, 'func'))
         (S.config_dir(slug) / 'symbols.txt').write_text(S.format_symbols(rows))
     return record
@@ -139,7 +139,7 @@ def revert_function(record, slug=S.DEFAULT_SLUG):
             path.write_text(text.replace(code, marker(record['addr']), 1))
     if record.get('symbol') and record['symbol'] != 'func_%08X' % record['addr']:
         sym = S.config_dir(slug) / 'symbols.txt'
-        rows = [(n, a, k.split()[0] if k else 'func') for n, a, k in S.parse_symbols(sym.read_text())
+        rows = [(n, a, k or 'func') for n, a, k in S.parse_symbols(sym.read_text())
                 if not (n == record['symbol'] and a == record['addr'])]
         sym.write_text(S.format_symbols(rows))
 

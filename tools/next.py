@@ -139,11 +139,8 @@ def candidates(top, args=None):
     tus = [t for t in yaml.safe_load(path.read_text())['tus'] if t['kind'] == 'object']
     inv = autodecomp.load_inventory()
     done = {f['addr'] for u in load_units(variant='SLUS_213.76') for f in u['functions'] if f.get('status') == 'source'}
-    alias = {}
-    for line in (ROOT / 'config/symbols.txt').read_text().split('\n'):
-        f = line.split('\t')
-        if len(f) > 4 and f[2] == 'func' and f[4] not in ('-', ''):
-            alias[int(f[0], 16)] = f[4]
+    import splits
+    alias = splits.load_symbols('SLUS_213.76').function_aliases()
     starts = [int(t['text'][0], 16) for t in tus]
     rows = [dict(t=t, n=0, src=0, bytes=0, left=0, vec=0, left_n=0, named=0, orphans=0,
                  large_left=0, large_bytes=0) for t in tus]

@@ -99,13 +99,10 @@ class Image:
     def hexf(self, i):
         return '0x%06x' % self.F[i]
 
-    # --- symbols (recovered names from Ghidra) ---
+    # --- symbols (readable function names: the aliases of config/<GAME_ID>/symbols.txt) ---
     def load_symbols(self):
-        self.alias = {}
-        for line in (ROOT / 'config/symbols.txt').read_text().split('\n'):
-            f = line.split('\t')
-            if len(f) > 4 and f[2] == 'func' and f[4] not in ('-', ''):
-                self.alias[int(f[0], 16)] = f[4]
+        import splits
+        self.alias = splits.load_symbols(self.slug).function_aliases()
 
     # --- orphan pieces ---
     def find_orphans(self):

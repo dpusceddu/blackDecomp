@@ -93,17 +93,13 @@ def flatten(path, active=()):
 
 
 def bindings():
-    result = {}
-    for line in (ROOT/'config/symbols.txt').read_text().splitlines():
-        parts = line.split('\t')
-        if len(parts)>=4 and parts[0].startswith('0x'):
-            result[parts[3]] = int(parts[0],16)
+    import splits as S
+    result = {'D_%08X'%addr:addr for addr in S.load_symbols().data_aliases()}      # hardware registers and the like
     placement = json.loads((ROOT/'build/SLUS_213.76/placement.json').read_text())
     result.update({f['name']:f['addr'] for f in placement['functions']})
     for unit in load_units():
         result.update(unit['externs'])
         result.update({f['symbol']:f['addr'] for f in unit['functions'] if f.get('symbol')})
-    import splits as S
     result.update({name:addrs[0] for name,addrs in S.load_symbols().by_name.items() if len(set(addrs))==1})
     return result
 

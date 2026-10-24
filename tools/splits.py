@@ -12,7 +12,9 @@
                    `defaults:` at the top holds compiler, flags and sections for entries that omit them.
   symbols.txt      names and addresses, one per line in splat's symbol_addrs form:  name = 0xADDRESS; // type:func
                    A compiled function may be defined under the name given for its address (a mangled C++ name); names
-                   the source uses without defining are bound to their original address.
+                   the source uses without defining are bound to their original address. A line marked `alias`
+                   (`GameObjectManager_FindByName = 0x129160; // type:func alias`) is a readable name for documentation and
+                   tools: it never defines or binds a symbol and cannot change the build.
   equivalent.yaml  functions of the `equivalent` evidence tier with their evidence summary.
 
 Which functions of a range are compiled is not listed here: every function of the range whose INCLUDE_ASM marker is
@@ -124,16 +126,41 @@ def unit_names(splits):
 # ------------------------------------------------------------------------------------------------------- symbols.txt
 
 class Symbols:
-    """Names bound to original addresses (config/<slug>/symbols.txt)."""
+    """Names bound to original addresses (config/<slug>/symbols.txt).
+
+    Rows marked `alias` are readable names only: they are kept apart (`aliases`) and never take part in linking, in
+    `by_name` or in `by_addr`, so adding one cannot change what is built."""
 
     def __init__(self, rows=()):
-        self.rows = [(name, addr, attrs) for name, addr, attrs in rows]
+        self.rows = []
+        self.aliases = []                    # (name, address, 'func' or 'data'), in file order
         self.by_name = {}
         self.by_addr = {}
-        for name, addr, attrs in self.rows:
+        for name, addr, attrs in rows:
+            tokens = attrs.split()
+            if 'alias' in tokens:
+                self.aliases.append((name, addr, 'data' if 'data' in tokens else 'func'))
+                continue
+            self.rows.append((name, addr, attrs))
             self.by_name.setdefault(name, []).append(addr)
-            if 'func' in attrs.split():
+            if 'func' in tokens:
                 self.by_addr.setdefault(addr, []).append(name)
+
+    def function_aliases(self):
+        """{address: readable name} of the function aliases (the first one where an address has several)."""
+        out = {}
+        for name, addr, kind in self.aliases:
+            if kind == 'func':
+                out.setdefault(addr, name)
+        return out
+
+    def data_aliases(self):
+        """{address: readable name} of the data aliases (hardware registers and the like)."""
+        out = {}
+        for name, addr, kind in self.aliases:
+            if kind == 'data':
+                out.setdefault(addr, name)
+        return out
 
     def address(self, name, override=None):
         """The address of `name`, or None; a name bound to several addresses needs `override` (a split's externs)."""
@@ -168,13 +195,20 @@ def load_symbols(slug=DEFAULT_SLUG, path=None):
     return Symbols(parse_symbols(path.read_text()) if path.exists() else [])
 
 
+SYMBOLS_HEADER = [
+    '# Names bound to original addresses (SLUS_213.76), splat symbol_addrs form. Edit by hand; see docs/build.md.',
+    '#   name = 0xADDRESS; // type:func|data',
+    '# A compiled function is defined under the name listed for its address (a mangled C++ name) or as func_XXXXXXXX;',
+    '# a name the source uses without defining is bound to its address.',
+    '# A line ending in `alias` (`// type:func alias`) is a readable name for documentation and tools. It never defines or',
+    '# binds a symbol, so it cannot change linking; the function stays func_XXXXXXXX or its mangled name.']
+
+
 def format_symbols(rows):
-    """symbols.txt text for (name, address, kind) rows, sorted by address then name."""
-    out = ['# Names bound to original addresses (SLUS_213.76), splat symbol_addrs form. Edit by hand; see docs/build.md.',
-           '#   name = 0xADDRESS; // type:func|data',
-           '# A compiled function is defined under the name listed for its address (a mangled C++ name) or as func_XXXXXXXX;',
-           '# a name the source uses without defining is bound to its address.']
-    for name, addr, kind in sorted(set(rows), key=lambda r: (r[1], r[0])):
+    """symbols.txt text for (name, address, kind) rows, sorted by address, then bound names before aliases, then name.
+    `kind` is the attribute text after `type:` (`func`, `data`, `func alias`, `data alias`)."""
+    out = list(SYMBOLS_HEADER)
+    for name, addr, kind in sorted(set(rows), key=lambda r: (r[1], 'alias' in r[2].split(), r[0])):
         out.append('%s = 0x%06X; // type:%s' % (name, addr, kind))
     return '\n'.join(out) + '\n'
 

@@ -59,6 +59,36 @@ class Splits(unittest.TestCase):
         text = S.format_symbols([('b', 2, 'func'), ('a', 1, 'data')])
         self.assertEqual([r[:2] for r in S.parse_symbols(text)], [('a', 1), ('b', 2)])
 
+    def test_aliases_are_readable_names_that_never_bind_or_define(self):
+        text = SYMBOLS + ('GameClock_Tick = 0x100010; // type:func alias\n'
+                          'REG_GS_CSR = 0x12001000; // type:data alias\n'
+                          'Tick__4Game_other = 0x100010; // type:func\n')
+        sym = S.Symbols(S.parse_symbols(text))
+        self.assertEqual(sym.function_names(0x100010), ['Tick__4Game', 'Tick__4Game_other'])    # the alias is not a definition
+        self.assertIsNone(sym.address('GameClock_Tick'))
+        self.assertIsNone(sym.address('REG_GS_CSR'))
+        self.assertEqual(sym.function_aliases(), {0x100010: 'GameClock_Tick'})
+        self.assertEqual(sym.data_aliases(), {0x12001000: 'REG_GS_CSR'})
+        self.assertEqual([n for n, _, _ in sym.rows], ['Tick__4Game', 'gClock', 'Tick__4Game_other'])
+
+    def test_alias_lines_survive_a_rewrite(self):
+        rows = [(n, a, k or 'func') for n, a, k in S.parse_symbols(SYMBOLS + 'Readable = 0x100010; // type:func alias\n')]
+        again = S.parse_symbols(S.format_symbols(rows))
+        self.assertEqual(sorted(again), sorted(S.parse_symbols(SYMBOLS + 'Readable = 0x100010; // type:func alias\n')))
+        text = S.format_symbols([('A_alias', 0x100010, 'func alias'), ('Tick__4Game', 0x100010, 'func')])
+        lines = [l for l in text.split('\n') if l and not l.startswith('#')]
+        self.assertEqual(lines, ['Tick__4Game = 0x100010; // type:func', 'A_alias = 0x100010; // type:func alias'])
+
+    def test_committed_symbols_parse_and_keep_aliases_apart(self):
+        sym = S.load_symbols('SLUS_213.76')
+        self.assertGreater(len(sym.function_aliases()), 200)
+        self.assertIn('REG_GS_CSR', sym.data_aliases().values())
+        self.assertEqual(sym.function_aliases()[0x129160], 'GameObjectManager_FindByName')
+        for name, _, _ in sym.aliases:
+            self.assertNotIn(name, sym.by_name, name)             # an alias never doubles as a bound or defined name
+        for addr in sym.function_aliases():
+            self.assertNotIn(sym.function_aliases()[addr], sym.by_addr.get(addr, []))
+
     def test_format_split_round_trips(self):
         entry = {'src': 'src/a.c', 'range': [0x100, 0x200], 'flags': ['-O1', '-G0'], 'sections': False}
         line = S.format_split(entry)
@@ -72,6 +102,12 @@ class Derive(unittest.TestCase):
     def units(self, text, **kw):
         splits = [S.Split({'src': 'src/game/a.c', 'range': [0x100000, 0x100060]}, {})]
         return U.derive_units(splits, TABLE, S.Symbols(S.parse_symbols(SYMBOLS)), read=lambda p: text, **kw)
+
+    def test_an_alias_does_not_rename_the_defined_symbol(self):
+        splits = [S.Split({'src': 'src/game/a.c', 'range': [0x100000, 0x100060]}, {})]
+        sym = S.Symbols(S.parse_symbols('Readable = 0x100010; // type:func alias\n' + SYMBOLS))
+        units = U.derive_units(splits, TABLE, sym, read=lambda p: '')
+        self.assertEqual({f['addr']: f['symbol'] for f in units[0]['functions']}[0x100010], 'Tick__4Game')
 
     def test_unmarked_functions_are_source(self):
         text = ('INCLUDE_ASM("asm/x", func_00100000);\nINCLUDE_ASM("asm/x", func_00100008);\n'
