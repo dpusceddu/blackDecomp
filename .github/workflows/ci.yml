@@ -25,7 +25,7 @@ jobs:
         run: python -m compileall -q configure.py tools tests
       - name: Every tool answers --help
         run: |
-          for tool in tools/*.py; do
+          for tool in tools/*.py tools/permuter/*.py; do
             python "$tool" --help > /dev/null || { echo "FAILED: $tool --help"; exit 1; }
           done
       - name: Configuration files parse
