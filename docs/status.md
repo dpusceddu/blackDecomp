@@ -83,10 +83,10 @@ include many one- or two-function TUs (116,600 B in code-complete TUs). Of 2,671
 The calibration of the automatic pipeline remains poor above 300 B; the large hand-shaped gains do not establish a new
 automatic matching rate. Code completion alone does not establish owned-data completion.
 
-The objdiff report (`ninja report`, [progress-reports.md](progress-reports.md)) measures the same recovery per function
-with a different yardstick: it compares instructions and relocations of each unit against the original code and leaves out
-the 672 orphan `<instruction>; nop` pieces and the alignment padding behind functions, so its percentages differ slightly from
-`ninja progress` while it counts the same functions as matched.
+The table above is the image measure of `ninja progress` (`.text` spans including alignment padding and the 672 orphan
+`<instruction>; nop` pieces). The headline code figure uses objdiff's definition, matched function bytes / total function
+bytes without padding and orphans: 14.95 % (401,428 / 2,685,060 bytes), equal to `ninja report`; see
+[progress-reports.md](progress-reports.md).
 
 ## Key lessons
 

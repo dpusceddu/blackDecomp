@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Write the self-hosted progress badges and the per-library table (progress/) from the exact progress data.
 
-Metric source: `tools/progress.py --libraries`, not the objdiff report. `ninja progress` measures the finished image: a
-function counts when a split compiles it (no INCLUDE_ASM marker in its TU file), which the build's `OK` guarantees byte-identical,
-and bytes are the original spans up to the next function. It needs only the build (no objdiff-cli download), covers
-every library directory of src/, and is the number the README and docs/status.md quote. The objdiff report
-(`ninja report`) counts per object and differs slightly (docs/progress-reports.md); it is not used here.
+Metric source: `tools/progress.py --libraries`, which computes objdiff's definition of code, matched function bytes /
+total function bytes, from the function extents tools/objdiff.py uses (no padding, no orphan pieces). The figures need only
+the build, not objdiff-cli, and the overall ones equal `ninja report`. A function is matched when a split compiles it (no
+INCLUDE_ASM marker in its TU file), which the build's `OK` guarantees byte-identical. When a current objdiff report exists,
+progress.py fails if its matched functions or totals differ (docs/progress-reports.md), so `ninja badges` cannot publish
+numbers that disagree with it. Libraries are by address (tools/layout.py); the image measure stays in `ninja progress`.
 
 Usage: badges.py [SLUG]       runs progress.py (default SLUS_213.76 only), then writes
-         progress/code.json, progress/functions.json   shields.io endpoint files (share of .text bytes / of functions)
+         progress/code.json, progress/functions.json   shields.io endpoint files (share of code bytes / of functions)
          progress/libraries/<library>.json             the same for one library
          progress/summary.md                           per-library table
        and refreshes the table between the progress markers of README.md.
@@ -42,9 +43,9 @@ def badge(label, percent):
 
 
 def table(libs):
-    """Markdown table with one row per library and a total, from {library: {functions, source_functions, bytes, source_bytes}}."""
-    rows = ['| Library | Functions from source | Share | Bytes from source | Share |', '| --- | ---: | ---: | ---: | ---: |']
-    total = dict(functions=0, source_functions=0, bytes=0, source_bytes=0)
+    """Markdown table with one row per library and a total, from {library: {functions, matched_functions, bytes, matched_bytes}}."""
+    rows = ['| Library | Functions matched | Share | Code matched (bytes) | Share |', '| --- | ---: | ---: | ---: | ---: |']
+    total = dict(functions=0, matched_functions=0, bytes=0, matched_bytes=0)
     for name in LIBRARIES + sorted(set(libs) - set(LIBRARIES)):
         r = libs.get(name)
         if not r:
@@ -52,12 +53,12 @@ def table(libs):
         for k in total:
             total[k] += r[k]
         rows.append('| %s | %s / %s | %.1f %% | %s / %s | %.1f %% |' % (
-            name, format(r['source_functions'], ','), format(r['functions'], ','), pct(r['source_functions'], r['functions']),
-            format(r['source_bytes'], ','), format(r['bytes'], ','), pct(r['source_bytes'], r['bytes'])))
+            name, format(r['matched_functions'], ','), format(r['functions'], ','), pct(r['matched_functions'], r['functions']),
+            format(r['matched_bytes'], ','), format(r['bytes'], ','), pct(r['matched_bytes'], r['bytes'])))
     r = total
     rows.append('| **Total** | **%s / %s** | **%.1f %%** | **%s / %s** | **%.1f %%** |' % (
-        format(r['source_functions'], ','), format(r['functions'], ','), pct(r['source_functions'], r['functions']),
-        format(r['source_bytes'], ','), format(r['bytes'], ','), pct(r['source_bytes'], r['bytes'])))
+        format(r['matched_functions'], ','), format(r['functions'], ','), pct(r['matched_functions'], r['functions']),
+        format(r['matched_bytes'], ','), format(r['bytes'], ','), pct(r['matched_bytes'], r['bytes'])))
     return '\n'.join(rows), total
 
 
@@ -79,7 +80,7 @@ def main():
         raise SystemExit('badges are produced for SLUS_213.76 only')
     subprocess.run([sys.executable, str(ROOT / 'tools/progress.py'), slug, '--libraries'], check=True, stdout=subprocess.DEVNULL)
     data = json.loads((ROOT / 'build' / slug / 'progress.json').read_text())
-    libs = data['by_library']
+    libs = data['code_by_library']
     md, total = table(libs)
     out = ROOT / 'progress'
     (out / 'libraries').mkdir(parents=True, exist_ok=True)
@@ -87,14 +88,16 @@ def main():
     def dump(path, obj):
         write_if_changed(path, json.dumps(obj, indent=2) + '\n')
 
-    dump(out / 'code.json', badge('code', pct(total['source_bytes'], total['bytes'])))
-    dump(out / 'functions.json', badge('functions', pct(total['source_functions'], total['functions'])))
+    dump(out / 'code.json', badge('code', pct(total['matched_bytes'], total['bytes'])))
+    dump(out / 'functions.json', badge('functions', pct(total['matched_functions'], total['functions'])))
     for name, r in libs.items():
-        dump(out / 'libraries' / ('%s.json' % name), badge(name, pct(r['source_bytes'], r['bytes'])))
+        dump(out / 'libraries' / ('%s.json' % name), badge(name, pct(r['matched_bytes'], r['bytes'])))
     write_if_changed(out / 'summary.md',
-                     '# Progress (SLUS_213.76)\n\nFunctions and bytes of `.text` provided by recovered source that rebuilds the '
-                     'executable byte for byte, per library directory of `src/`. Produced by `ninja badges` '
-                     '(`tools/badges.py`, from `tools/progress.py`); do not edit.\n\n' + md + '\n')
+                     '# Progress (SLUS_213.76)\n\nFunctions and code bytes matched by recovered source, per library (by address; `src/<library>`), '
+                     'with objdiff\'s definition: matched function bytes / total function bytes, without alignment padding and orphan '
+                     'pieces ([docs/progress-reports.md](../docs/progress-reports.md)). Matched functions rebuild the '
+                     'executable byte for byte. Produced by `ninja badges` (`tools/badges.py`, from `tools/progress.py`); do not edit.\n\n'
+                     + md + '\n')
     readme = ROOT / 'README.md'
     new = replace_between(readme.read_text(), md)
     if new is None:
@@ -102,8 +105,8 @@ def main():
     else:
         write_if_changed(readme, new)
     print('code %.1f %%  functions %.1f %%  (%d/%d functions, %d/%d bytes)' % (
-        pct(total['source_bytes'], total['bytes']), pct(total['source_functions'], total['functions']),
-        total['source_functions'], total['functions'], total['source_bytes'], total['bytes']))
+        pct(total['matched_bytes'], total['bytes']), pct(total['matched_functions'], total['functions']),
+        total['matched_functions'], total['functions'], total['matched_bytes'], total['bytes']))
 
 
 if __name__ == '__main__':

@@ -17,7 +17,7 @@ Each version is identified by the game ID of its boot executable (`SYSTEM.CNF`, 
 
 | Game ID | Region | SHA-256 of the executable | Rebuild matches | Recovered source |
 | --- | --- | --- | --- | --- |
-| `SLUS_213.76` | USA | `141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c` | yes | 5,563 functions (15.1 % of `.text`) |
+| `SLUS_213.76` | USA | `141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c` | yes | 5,563 functions (15.0 % of the code) |
 | `SLES_538.86` | Europe | `bbed3444a22d28b7fdc641e15a1759b6ece1c9cbc5a13331586025ff8fc2b948` | yes, from assembly | none yet |
 | `SLES_540.30` | Europe, Australia | `7e6f25966389656a9bdc534c2514a3a56f205054ee66b43c27a18b111add309f` | yes, from assembly | none yet |
 | `SLKA_253.72` | Korea | `fb59440b00444ff64be1436fd757452c3eead9e560532fad74e4d05e913a6b94` | yes, from assembly | none yet |
@@ -83,34 +83,36 @@ On Apple silicon this relies on the emulation of x86-64 Linux containers and has
 ## Progress
 
 ```sh
-ninja progress                              # share of .text and of functions provided by source, per region and TU
+ninja progress                              # code (objdiff definition) and functions matched, image measure, per region and TU
 python3 tools/progress.py --libraries       # ... per library directory of src/
 ninja badges                                # refresh progress/ (badge files, summary.md) and the table below
 ```
 
-Functions and bytes of `.text` rebuilt from recovered source (USA, `SLUS_213.76`):
+Functions and code bytes matched by recovered source (USA, `SLUS_213.76`), per library:
 
 <!-- progress:begin (tools/badges.py) -->
 
-| Library | Functions from source | Share | Bytes from source | Share |
+| Library | Functions matched | Share | Code matched (bytes) | Share |
 | --- | ---: | ---: | ---: | ---: |
-| game | 2,908 / 6,650 | 43.7 % | 176,864 / 1,460,176 | 12.1 % |
-| kynapse | 687 / 905 | 75.9 % | 107,512 / 257,240 | 41.8 % |
-| rw_core | 85 / 449 | 18.9 % | 4,744 / 181,416 | 2.6 % |
-| rw_audio | 309 / 754 | 41.0 % | 23,368 / 109,560 | 21.3 % |
-| animation | 195 / 350 | 55.7 % | 26,128 / 69,680 | 37.5 % |
-| physics | 93 / 206 | 45.1 % | 11,864 / 78,240 | 15.2 % |
-| apt | 129 / 633 | 20.4 % | 7,520 / 267,744 | 2.8 % |
-| sony | 274 / 756 | 36.2 % | 9,000 / 142,096 | 6.3 % |
-| libc | 75 / 213 | 35.2 % | 4,088 / 70,472 | 5.8 % |
-| linkonce | 808 / 983 | 82.2 % | 39,296 / 78,840 | 49.8 % |
-| **Total** | **5,563 / 11,899** | **46.8 %** | **410,384 / 2,715,464** | **15.1 %** |
+| game | 2,908 / 6,296 | 46.2 % | 172,028 / 1,444,260 | 11.9 % |
+| kynapse | 687 / 904 | 76.0 % | 106,316 / 255,620 | 41.6 % |
+| rw_core | 85 / 381 | 22.3 % | 4,584 / 179,516 | 2.6 % |
+| rw_audio | 309 / 674 | 45.8 % | 22,752 / 106,632 | 21.3 % |
+| animation | 195 / 342 | 57.0 % | 25,704 / 68,784 | 37.4 % |
+| physics | 93 / 183 | 50.8 % | 11,756 / 77,624 | 15.1 % |
+| apt | 129 / 581 | 22.2 % | 7,236 / 265,936 | 2.7 % |
+| sony | 274 / 703 | 39.0 % | 8,784 / 140,092 | 6.3 % |
+| libc | 75 / 209 | 35.9 % | 3,944 / 69,952 | 5.6 % |
+| linkonce | 808 / 954 | 84.7 % | 38,324 / 76,644 | 50.0 % |
+| **Total** | **5,563 / 11,227** | **49.6 %** | **401,428 / 2,685,060** | **15.0 %** |
 
 <!-- progress:end -->
 
-The numbers are produced locally with `ninja badges` from `ninja progress`, which measures the finished, byte-identical
-image; anyone with the game can reproduce them with `ninja` and `ninja progress`. The objdiff report matches the same
-functions but measures bytes differently ([docs/progress-reports.md](docs/progress-reports.md)).
+"Code" is objdiff's definition, the one decomp.dev uses: matched function bytes / total function bytes, with function sizes
+as objdiff measures them (alignment padding and orphan pieces excluded). The totals equal `ninja report`; `ninja badges`
+computes them from the build and fails if the exact functions differ from the ones in a current objdiff report. `ninja
+progress` also prints the image measure (bytes of the final image, padding and orphans included), 15.1 % today. Details:
+[docs/progress-reports.md](docs/progress-reports.md).
 
 ## Working on a function: objdiff
 

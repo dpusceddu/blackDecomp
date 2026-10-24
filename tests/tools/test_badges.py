@@ -16,10 +16,10 @@ class Badges(unittest.TestCase):
         self.assertEqual(badges.badge('code', 15.113), dict(schemaVersion=1, label='code', message='15.1%', color='yellow'))
 
     def test_table_total(self):
-        libs = {'game': dict(functions=10, source_functions=5, bytes=1000, source_bytes=250),
-                'libc': dict(functions=2, source_functions=0, bytes=100, source_bytes=0)}
+        libs = {'game': dict(functions=10, matched_functions=5, bytes=1000, matched_bytes=250),
+                'libc': dict(functions=2, matched_functions=0, bytes=100, matched_bytes=0)}
         text, total = badges.table(libs)
-        self.assertEqual(total, dict(functions=12, source_functions=5, bytes=1100, source_bytes=250))
+        self.assertEqual(total, dict(functions=12, matched_functions=5, bytes=1100, matched_bytes=250))
         self.assertIn('| game | 5 / 10 | 50.0 % | 250 / 1,000 | 25.0 % |', text)
         self.assertIn('| **Total** | **5 / 12** | **41.7 %** | **250 / 1,100** | **22.7 %** |', text)
 

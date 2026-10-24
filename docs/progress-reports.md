@@ -1,7 +1,11 @@
 # Progress reports (objdiff)
 
-`ninja progress` reports how much of `.text` is provided by source, measured on the finished image. The objdiff report
-measures the same recovery per function, in the format the matching-decompilation tooling understands.
+The headline "code" percentage is objdiff's definition, the one decomp.dev shows: bytes of matched functions / bytes of all
+functions, with function sizes as objdiff measures them (up to the `endlabel`, no alignment padding, orphan pieces left
+out). `ninja progress` computes it from the same extents as `tools/objdiff.py`, so `ninja badges` needs no objdiff-cli, and
+its overall figure equals `ninja report`'s `matched_code / total_code` exactly. `ninja progress` also prints a secondary
+measure, the image measure: bytes of the finished image, with alignment padding and orphan pieces included. It is the
+ground-truth view of the rebuilt `.text`, not the headline.
 
 ## What is generated
 
@@ -46,13 +50,22 @@ as partly or not matching without it:
   the target.
 
 `ninja report` runs `objdiff-cli report generate` and prints the totals. At the time of writing: 11,227 functions, of which
-5,563 match (49.55 %), and 14.95 % of the code (401,428 of 2,685,060 bytes) matches. `ninja progress` counts the same 5,563
-functions as exact; the sets are identical, so the objdiff report no longer undercounts. The only differences left are in
-what is measured, not in which functions count:
+5,563 match (49.55 %), and 14.95 % of the code (401,428 of 2,685,060 bytes) matches; this is the headline. The image
+measure counts the same 5,563 functions over all 11,899 functions and 2,715,464 bytes (15.11 %); it additionally holds the
+672 orphan `<instruction>; nop` pieces (9,488 bytes) and the alignment padding behind functions (20,916 bytes in total,
+8,956 of them behind recovered functions).
 
-- `ninja progress` covers all 11,899 functions and 2,715,464 bytes (15.11 %); the report leaves out the 672 orphan
-  `<instruction>; nop` pieces (9,488 bytes) and measures a function without its alignment padding (20,916 bytes in total,
-  8,956 of them behind recovered functions), hence 14.95 % against 15.11 % for the same functions.
+Agreement check: when `build/SLUS_213.76/report.json` exists and is not older than the build, `ninja progress` (and so
+`ninja badges`) compares the set of exact functions (the image check: a split compiles them) with the functions objdiff
+counts as 100 % matched, and also the report's `total_code`, `matched_code`, `total_functions` and `matched_functions` with
+its own. Any difference stops with `AGREEMENT FAILED` and the functions on one side only; `progress.py --check` also fails
+when there is no current report. A stale report is skipped with a note, so run `ninja report` after `ninja`.
+Libraries in the table are by address (`tools/layout.py`); the report's categories attribute a matched function to the
+library of its source file, so its per-category figures differ for functions compiled in another library's file (templates
+placed in `linkonce`), while the totals agree.
+
+Other differences in what is measured:
+
 - objdiff compares instructions and relocations, the image comparison compares bytes and placement, so a function could
   match here and still not be byte-exact in the image (data placement), and the other way round for constants that the
   compiler names differently. For this build the first case does not occur: every function that is exact is matched. The
@@ -71,8 +84,8 @@ backend for the changed sources (seconds), then rebuilds that unit's two objects
 
 ## Publishing
 
-The README badges and table are written by `ninja badges` (`tools/badges.py`) from `ninja progress`, not from this report:
-that metric is exact, covers the whole image and needs no extra download. The files are committed under `progress/` and
+The README badges and table are written by `ninja badges` (`tools/badges.py`) from the code measure of `ninja progress`,
+which equals this report and needs no extra download. The files are committed under `progress/` and
 served by shields.io from the repository. The objdiff report (`build/SLUS_213.76/report.json`) stays available for any
 tool that reads it; CI does not generate one, because that needs the game executable.
 

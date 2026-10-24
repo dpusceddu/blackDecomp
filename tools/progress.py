@@ -5,8 +5,14 @@ Regions come from config/regions.txt (PS2 address -> game, kynapse, animation, p
 Xbox-to-PS2 counterpart map (`progress.py --refresh MAP.json` rewrites it; the committed file is enough to build and report). An unmapped function takes the
 region of its neighbours when both sides agree, otherwise it is `unclassified`. Regions are therefore approximate;
 the overall number is exact.
-A function counts as source when its split compiles it (no INCLUDE_ASM marker), which the build's OK keeps identical to the target; bytes are the original span of the function up to the next function.
+A function counts as source when its split compiles it (no INCLUDE_ASM marker), which the build's OK keeps identical to the target.
+Headline ("code"): objdiff's definition, matched function bytes / total function bytes, with the function extents objdiff
+uses (tools/objdiff.py code_size: up to the function's endlabel, no alignment padding, orphan pieces left out). It equals
+`ninja report`'s matched_code / total_code. Secondary ("image"): bytes of the finished image, spans up to the next
+function including padding and orphans. When build/<GAME_ID>/report.json is current, the exact functions are checked
+against the functions objdiff counts as matched and the run fails if they differ (see docs/progress-reports.md).
 Usage: progress.py [SLUG]       writes build/<GAME_ID>/progress.json and prints a table
+       progress.py --check      fail when no objdiff report exists to compare with (the check always runs when a current one does)
        progress.py --libraries   also print the totals per library directory of src/
        progress.py --tus [N]     also list the N (default 15) partially done translation units with most bytes still in assembly
 When config/tus.yaml exists (tools/tus.py) the report adds the progress by TU: complete TUs (every function from source),
@@ -80,6 +86,88 @@ def orphan_pieces(slug, fs):
         if words and all((w == 0) if i % 2 else (w != 0 and not control(w)) for i, w in enumerate(words)):
             out.add(f['addr'])
     return out
+
+
+def code_extents(slug, fs, units):
+    """{address: code bytes} of every function objdiff reports: the extent up to the endlabel of its split assembly
+    (tools/objdiff.py code_size), orphan pieces left out. A recovered function takes its size from its unit as there."""
+    import objdiff
+    orphans = orphan_pieces(slug, fs)
+    unit_size = {f['addr']: f.get('size') for u in units for f in u['functions'] if f.get('status') == 'source'}
+    sizes = {}
+    for f in fs:
+        if f['addr'] in orphans:
+            continue
+        span = unit_size.get(f['addr']) or f['end'] - f['addr']
+        asm = ROOT / 'asm' / slug / 'nonmatchings' / ('func_%08X.s' % f['addr'])
+        sizes[f['addr']] = objdiff.code_size(asm.read_text(), f['addr'], span) if asm.is_file() else span
+    return sizes
+
+
+def code_totals(sizes, matched, library):
+    """objdiff's code measure: ({functions, matched_functions, bytes, matched_bytes}, {library: the same}) from
+    {address: bytes}, the set of matched addresses and a function address -> library name."""
+    def row():
+        return dict(functions=0, matched_functions=0, bytes=0, matched_bytes=0)
+    total, libs = row(), {}
+    for addr, size in sizes.items():
+        for r in (total, libs.setdefault(library(addr), row())):
+            r['functions'] += 1
+            r['bytes'] += size
+            if addr in matched:
+                r['matched_functions'] += 1
+                r['matched_bytes'] += size
+    return total, libs
+
+
+def report_matches(report):
+    """({addresses of the functions objdiff counts as matched}, {address: size}) from a report.json; functions are `func_XXXXXXXX`."""
+    matched, sizes = set(), {}
+    for unit in report['units']:
+        for f in unit.get('functions', []):
+            addr = int(f['name'][len('func_'):], 16)
+            sizes[addr] = int(f['size'])
+            if f.get('fuzzy_match_percent', 0) >= 100.0:
+                matched.add(addr)
+    return matched, sizes
+
+
+def agreement_problems(exact, total, report):
+    """What differs between the image check (the exact functions and the code measure computed here) and an objdiff
+    report: the functions on one side only, and any difference in the headline figures. An empty list means they agree."""
+    matched, sizes = report_matches(report)
+    problems = []
+    for what, missing in (('exact in the image but not matched by objdiff', exact - matched),
+                          ('matched by objdiff but not exact in the image', matched - exact)):
+        if missing:
+            problems.append('%d functions %s: %s' % (len(missing), what, ', '.join('func_%08X' % a for a in sorted(missing)[:10])
+                                                     + (' ...' if len(missing) > 10 else '')))
+    m = report['measures']
+    for key, mine in (('total_code', total['bytes']), ('matched_code', total['matched_bytes']),
+                      ('total_functions', total['functions']), ('matched_functions', total['matched_functions'])):
+        if int(m[key]) != mine:
+            problems.append('%s: report %s, computed %d' % (key, m[key], mine))
+    return problems
+
+
+def check_report(slug, build, exact, total, required):
+    """Compare with build/<GAME_ID>/report.json when it is current (not older than the linked image); fail loudly on a difference."""
+    path = build / 'report.json'
+    image = build / 'linked.elf'
+    if not path.is_file():
+        if required:
+            raise SystemExit('no objdiff report (%s); run `ninja report` first' % path.relative_to(ROOT))
+        return
+    if image.is_file() and path.stat().st_mtime < image.stat().st_mtime:
+        if required:
+            raise SystemExit('the objdiff report is older than the build; run `ninja report` again')
+        print('\nnote: build/%s/report.json is older than the build; agreement check skipped' % slug)
+        return
+    problems = agreement_problems(exact, total, json.loads(path.read_text()))
+    if problems:
+        raise SystemExit('AGREEMENT FAILED: ninja progress and the objdiff report disagree:\n  ' + '\n  '.join(problems))
+    print('\nagreement: the %d exact functions are the functions objdiff matches; code %d / %d bytes as in the report'
+          % (len(exact), total['matched_bytes'], total['bytes']))
 
 
 def tu_report(slug, fs, spans, source, top):
@@ -156,7 +244,8 @@ def main():
              for i in range(len(fs))]
     source = {}
     equivalent = set()
-    for u in load_units(variant=slug):
+    units = load_units(variant=slug)
+    for u in units:
         for f in u['functions']:
             if f.get('evidence',{}).get('tier') == 'equivalent':
                 equivalent.add(f['addr'])
@@ -184,8 +273,19 @@ def main():
         tier = 'exact' if f['addr'] in source else 'equivalent' if f['addr'] in equivalent else 'draft'
         tiers[tier]['functions'] += 1
         tiers[tier]['bytes'] += span
+    import layout
+    code, code_libs = code_totals(code_extents(slug, fs, units), set(source), layout.library_of) \
+        if slug == 'SLUS_213.76' else (None, None)
     out = dict(text_bytes=text['orig_size'], regions_from_map=mapped, rows=rows, evidence_tiers=tiers)
+    if code:
+        out['code'], out['code_by_library'] = code, code_libs
     (build / 'progress.json').write_text(json.dumps(out, indent=1))
+    if code:
+        print('code (objdiff definition: matched function bytes / total function bytes)')
+        print('  functions %d / %d (%.2f%%)   code bytes %d / %d (%.2f%%)\n' % (
+            code['matched_functions'], code['functions'], 100.0 * code['matched_functions'] / code['functions'],
+            code['matched_bytes'], code['bytes'], 100.0 * code['matched_bytes'] / code['bytes']))
+        print('image measure (secondary: bytes of the final image, alignment padding and orphan pieces included)')
     print('%-22s %7s %7s %6s   %9s %9s %6s' % ('', 'funcs', 'source', '%', 'bytes', 'source', '%'))
     for key in sorted(rows, key=lambda k: (k != 'ALL', k.startswith('origin'), k)):
         r = rows[key]
@@ -213,6 +313,8 @@ def main():
         for lib, r in sorted(libs.items()):
             print('%-12s %7d %7d %5.1f%%   %9d %9d %5.1f%%' % (lib, r['functions'], r['source_functions'],
                   100.0 * r['source_functions'] / r['functions'], r['bytes'], r['source_bytes'], 100.0 * r['source_bytes'] / max(r['bytes'], 1)))
+    if code:
+        check_report(slug, build, set(source), code, '--check' in sys.argv)
     tur = tu_report(slug, fs, spans, source, top)
     if tur:
         out['by_tu'] = tur['rows']
