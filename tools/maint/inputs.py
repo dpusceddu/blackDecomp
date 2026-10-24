@@ -20,7 +20,7 @@ REGIONS = {'SLUS_213.76': 'USA', 'SLES_538.86': 'Europe', 'SLES_540.30': 'Europe
            'SLED_539.37': 'Europe (demo)'}
 DEBUG_PATTERNS = ('.symtab', '.strtab', '.mdebug', '.debug_', '.stab', '.comment', '.gcc_except_table',
                   '.pdr', '.line', '.gnu', '.note', '.eh_frame', '.sdata', '.lit')
-# Version 1 CIE emitted by SN EE (see tools/maint/tus.py): marks per-object unwind groups.
+# Version 1 CIE emitted by SN EE (see tools/build/tus.py): marks per-object unwind groups.
 CIE = bytes.fromhex('100000000000000001000178400c1d0009401f00')
 
 STR_RE = re.compile(rb'[\x20-\x7e\t]{5,}')

@@ -36,7 +36,7 @@ def regions(addrs):
 
 
 def orphan_pieces(slug, fs):
-    """Addresses of the functions that are orphan pieces: `<one non-branch instruction>; nop` repeated (see tools/maint/boundaries.py)."""
+    """Addresses of the functions that are orphan pieces: `<one non-branch instruction>; nop` repeated (see tools/build/boundaries.py)."""
     from elfinfo import Elf
     boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
     elf = Elf((ROOT / 'orig' / slug / boot).read_bytes())

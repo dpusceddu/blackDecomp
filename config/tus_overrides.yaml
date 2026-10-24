@@ -1,4 +1,4 @@
-# Hand corrections for tools/maint/tus.py (small on purpose; the map is regenerated from the evidence).
+# Hand corrections for tools/build/tus.py (small on purpose; the map is regenerated from the evidence).
 # cuts:      addresses where a TU certainly starts
 # joins:     [first, last] function address ranges that certainly belong to one TU
 # names:     TU start address -> name

@@ -806,7 +806,7 @@ def decl_function(ident, d):
 
 # ---------------------------------------------------------------------------------------------------------- worker
 def is_orphan(words):
-    """Pieces of the form `<one non-branch instruction>; nop` (see tools/maint/boundaries.py): not code of any function."""
+    """Pieces of the form `<one non-branch instruction>; nop` (see tools/build/boundaries.py): not code of any function."""
     if not words:
         return False
     for i, w in enumerate(words):
@@ -1215,7 +1215,7 @@ _TUMAP = None
 
 def tu_flags(addr):
     """(compiler, flags, basis) the TU map (build/SLUS_213.76/tus.yaml) gives the TU of this function, or None. Used when the environment
-    variable AUTODECOMP_TU is set; see tools/maint/tus.py."""
+    variable AUTODECOMP_TU is set; see tools/build/tus.py."""
     global _TUMAP
     if not os.environ.get('AUTODECOMP_TU'):
         return None
@@ -2183,7 +2183,7 @@ def cmd_run(a):
         sel = [f for f in sel if f['addr'] in want]
     if a.cc:
         os.environ['AUTODECOMP_CC'] = a.cc
-    if a.tu:                                                # the TU map's compiler and flags go first (tools/maint/tus.py)
+    if a.tu:                                                # the TU map's compiler and flags go first (tools/build/tus.py)
         os.environ['AUTODECOMP_TU'] = '1'
         if a.tu != 'all':
             sel = [f for f in sel if (tu_flags(f['addr']) or (COMPILER,))[0] == a.tu]

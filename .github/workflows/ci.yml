@@ -28,6 +28,8 @@ jobs:
           for tool in tools/*.py tools/permuter/*.py tools/build/*.py tools/pipeline/*.py tools/maint/*.py; do
             python "$tool" --help > /dev/null || { echo "FAILED: $tool --help"; exit 1; }
           done
+      - name: The tools index is current
+        run: python tools/tools_index.py --check
       - name: Configuration files parse
         run: |
           python - <<'PY'
