@@ -56,7 +56,7 @@ struct UnknownVtable_003E0180 {
     signed char * Function_001ADAF8(signed char * argument0, signed char * argument1);
     // 0x001ADB28: UNVERIFIED signature (include/game/graphics/animation_selector.hpp).
     void Function_001ADB28(signed char * argument0, void * argument1);
-    // 0x00384410: UNVERIFIED signature (src/linkonce/linkonce_3843b0.c).
+    // 0x00384410: UNVERIFIED signature (src/game/inline/linkonce_3843b0.c).
     unsigned int Function_00384410();
 
     // Vtable 0x003E0180; vptr field offset unknown; referenced zero RTTI header.

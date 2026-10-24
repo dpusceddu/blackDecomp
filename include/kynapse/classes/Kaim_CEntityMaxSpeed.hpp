@@ -22,7 +22,7 @@ struct Kaim_CEntityMaxSpeed {
     void * Function_002D9418(void * argument0);
     // 0x0038A790: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A790();
-    // 0x0038A7C8: UNVERIFIED signature (src/kynapse/parameter_classes_38a7c8.cpp).
+    // 0x0038A7C8: UNVERIFIED signature (src/kynapse/inline/parameter_classes_38a7c8.cpp).
     void * Function_0038A7C8();
 
     // Vtable 0x003E51E0; vptr field offset unknown; RTTI header.

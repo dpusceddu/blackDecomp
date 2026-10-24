@@ -27,7 +27,7 @@ struct Kaim_CXmlDataReader {
     unsigned int Function_00373300(void * argument0, void * argument1, unsigned int argument2);
     // 0x00373348: UNVERIFIED signature (src/game/tu_372fc0_373268.c).
     unsigned int Function_00373348(void * argument0);
-    // 0x00388E80: UNVERIFIED signature (src/linkonce/linkonce_388e30.c).
+    // 0x00388E80: UNVERIFIED signature (src/game/inline/linkonce_388e30.c).
     int Function_00388E80(int argument0);
 
     // Vtable 0x003F2048; vptr field offset unknown; RTTI header.

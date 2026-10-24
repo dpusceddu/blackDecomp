@@ -44,13 +44,13 @@ struct UnknownVtable_003DD198 {
     unsigned char Function_002F4390(void * argument0);
     // 0x002F4B50: UNVERIFIED signature (src/kynapse/host_2850c0_2f4b50.cpp).
     void Function_002F4B50(void * argument0);
-    // 0x00383ED0: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383ED0: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     int Function_00383ED0();
-    // 0x00384000: UNVERIFIED signature (src/linkonce/linkonce_384000.c).
+    // 0x00384000: UNVERIFIED signature (src/game/inline/linkonce_384000.c).
     int Function_00384000(int argument0);
-    // 0x00384050: UNVERIFIED signature (src/linkonce/linkonce_384050.c).
+    // 0x00384050: UNVERIFIED signature (src/game/inline/linkonce_384050.c).
     int * Function_00384050();
-    // 0x00384060: UNVERIFIED signature (src/linkonce/linkonce_384050.c).
+    // 0x00384060: UNVERIFIED signature (src/game/inline/linkonce_384050.c).
     int Function_00384060();
     // 0x003912C0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003912C0(void * argument0, void * argument1, unsigned int argument2, void * argument3, void * argument4);

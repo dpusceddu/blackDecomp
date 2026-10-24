@@ -16,9 +16,9 @@ struct UnknownVtable_003DD4B0 {
     int Function_001722A0(unsigned int argument0, void * argument1, void * argument2);
     // 0x00383D48: UNVERIFIED signature (src/kynapse/linkonce_383d48.c).
     unsigned int Function_00383D48();
-    // 0x00383F20: UNVERIFIED signature (src/linkonce/linkonce_383f20.c).
+    // 0x00383F20: UNVERIFIED signature (src/game/inline/linkonce_383f20.c).
     int Function_00383F20(int argument0);
-    // 0x00383F58: UNVERIFIED signature (src/linkonce/linkonce_383f58.c).
+    // 0x00383F58: UNVERIFIED signature (src/game/inline/linkonce_383f58.c).
     int * Function_00383F58();
 
     // Vtable 0x003DD4B0; vptr field offset unknown; referenced zero RTTI header.

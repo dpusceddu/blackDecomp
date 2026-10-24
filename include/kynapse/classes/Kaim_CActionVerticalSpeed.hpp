@@ -24,7 +24,7 @@ struct Kaim_CActionVerticalSpeed {
     void * Function_002DA108(void * argument0);
     // 0x0038AE78: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038AE78();
-    // 0x0038AEB0: UNVERIFIED signature (src/kynapse/parameter_classes_38aeb0.cpp).
+    // 0x0038AEB0: UNVERIFIED signature (src/kynapse/inline/parameter_classes_38aeb0.cpp).
     void * Function_0038AEB0();
 
     // Vtable 0x003E5CA8; vptr field offset unknown; RTTI header.

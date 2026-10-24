@@ -22,7 +22,7 @@ struct UnknownVtable_003E1258 {
     int * Function_00233C60(int argument0);
     // 0x00233CF8: UNVERIFIED signature (src/apt/tu_232f90_233150.c).
     int * Function_00233CF8();
-    // 0x00386628: UNVERIFIED signature (src/linkonce/linkonce_385660_3865c0.c).
+    // 0x00386628: UNVERIFIED signature (src/apt/inline/linkonce_385660_3865c0.c).
     int Function_00386628();
 
     // Vtable 0x003E1258; vptr field offset unknown; referenced zero RTTI header.

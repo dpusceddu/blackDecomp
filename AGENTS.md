@@ -14,7 +14,7 @@ Short, neutral rules for coding assistants and the people directing them. They a
   credentials belong only in `.local/`.
 - Check free disk space before unpacking disc images and process one image at a time.
 - Source layout: `src/<library>/<name>.c|cpp` (libraries: game, apt, kynapse, animation, physics, rw_core, rw_audio, sony,
-  libc, linkonce), one file per TU listing every function (recovered code, `INCLUDE_ASM` lines, drafts in `#ifdef NON_MATCHING` blocks). Headers follow the
+  libc; link-once copies in `src/<library>/inline/`), one file per TU listing every function (recovered code, `INCLUDE_ASM` lines, drafts in `#ifdef NON_MATCHING` blocks). Headers follow the
   libraries in `include/<library>/` (shared helpers in `include/ps2/`). `tools/layout.py` has the naming rules.
 - Build with `ninja`; every commit leaves it printing `OK` for USA retail (`SLUS_213.76`, the only version checked routinely).
   Run `python3 tools/check_versions.py` (all five versions) before releases or after changing shared build tools. Work by replacing a function's `INCLUDE_ASM` line in its TU file; the

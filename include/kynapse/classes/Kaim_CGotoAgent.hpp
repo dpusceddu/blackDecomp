@@ -40,11 +40,11 @@ struct Kaim_CGotoAgent {
     int Function_002D3B00();
     // 0x002D3B08: UNVERIFIED signature (include/kynapse/agents/goto.hpp).
     int Function_002D3B08();
-    // 0x00389550: UNVERIFIED signature (src/kynapse/class_info_389550.cpp).
+    // 0x00389550: UNVERIFIED signature (src/kynapse/inline/class_info_389550.cpp).
     void * Function_00389550();
-    // 0x00389560: UNVERIFIED signature (src/linkonce/linkonce_389560.c).
+    // 0x00389560: UNVERIFIED signature (src/kynapse/inline/linkonce_389560.c).
     int Function_00389560();
-    // 0x0038BB28: UNVERIFIED signature (src/kynapse/small_misc_38bb28.cpp).
+    // 0x0038BB28: UNVERIFIED signature (src/kynapse/inline/small_misc_38bb28.cpp).
     void Function_0038BB28();
 
     // Vtable 0x003E32D0; vptr field offset unknown; RTTI header.

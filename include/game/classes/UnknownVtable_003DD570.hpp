@@ -36,7 +36,7 @@ struct UnknownVtable_003DD570 {
     signed char * Function_001A4130(unsigned int argument0);
     // 0x001A4428: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A4428(unsigned int argument0);
-    // 0x00383D38: UNVERIFIED signature (src/linkonce/linkonce_383d38.c).
+    // 0x00383D38: UNVERIFIED signature (src/game/inline/linkonce_383d38.c).
     unsigned int Function_00383D38();
 
     // Vtable 0x003DD570; vptr field offset unknown; referenced zero RTTI header.

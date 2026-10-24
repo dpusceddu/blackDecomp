@@ -38,7 +38,7 @@ struct FindNearestVertexTraversal {
     void Function_00391E20();
     // 0x00391F00: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00391F00(void * argument0);
-    // 0x003921A0: UNVERIFIED signature (src/kynapse/nearest_node_3921a0.cpp).
+    // 0x003921A0: UNVERIFIED signature (src/kynapse/inline/nearest_node_3921a0.cpp).
     void Function_003921A0(void * argument0);
 
     // Vtable 0x003EED38; vptr field offset unknown; RTTI header.

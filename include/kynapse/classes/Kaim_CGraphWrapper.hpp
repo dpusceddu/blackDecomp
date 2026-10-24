@@ -26,7 +26,7 @@ struct Kaim_CGraphWrapper {
     int Function_002F3530(int argument0);
     // 0x00390D98: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00390D98();
-    // 0x00390E20: UNVERIFIED signature (src/kynapse/class_info_390e20.cpp).
+    // 0x00390E20: UNVERIFIED signature (src/kynapse/inline/class_info_390e20.cpp).
     void * Function_00390E20();
 
     // Vtable 0x003EDC38; vptr field offset unknown; RTTI header.

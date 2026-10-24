@@ -44,7 +44,7 @@ struct UnknownVtable_003E07F8 {
     void Function_001EE278(int argument0);
     // 0x001EE298: UNVERIFIED signature (include/game/graphics/timed_envelope.hpp).
     int Function_001EE298();
-    // 0x00384660: UNVERIFIED signature (src/linkonce/linkonce_384660.c).
+    // 0x00384660: UNVERIFIED signature (src/game/inline/linkonce_384660.c).
     unsigned int Function_00384660(float argument0);
 
     // Vtable 0x003E07F8; vptr field offset unknown; referenced zero RTTI header.

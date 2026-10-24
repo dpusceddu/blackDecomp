@@ -26,7 +26,7 @@ struct Kaim_CAgent {
     int Function_002E0018(void * argument0, int argument1);
     // 0x0038BAD8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0038BAD8(void * argument0);
-    // 0x0038BB28: UNVERIFIED signature (src/kynapse/small_misc_38bb28.cpp).
+    // 0x0038BB28: UNVERIFIED signature (src/kynapse/inline/small_misc_38bb28.cpp).
     void Function_0038BB28();
 
     // Vtable 0x003E7558; vptr field offset unknown; RTTI header.

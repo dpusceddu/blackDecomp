@@ -60,9 +60,9 @@ Agreement check: when `build/SLUS_213.76/report.json` exists and is not older th
 counts as 100 % matched, and also the report's `total_code`, `matched_code`, `total_functions` and `matched_functions` with
 its own. Any difference stops with `AGREEMENT FAILED` and the functions on one side only; `progress.py --check` also fails
 when there is no current report. A stale report is skipped with a note, so run `ninja report` after `ninja`.
-Libraries in the table are by address (`tools/layout.py`); the report's categories attribute a matched function to the
+Libraries in the table are by address (`tools/layout.py`; a link-once copy counts for its owner library, see [build.md](build.md#link-once-copies)); the report's categories attribute a matched function to the
 library of its source file, so its per-category figures differ for functions compiled in another library's file (templates
-placed in `linkonce`), while the totals agree.
+placed in `src/<library>/inline/`), while the totals agree.
 
 Other differences in what is measured:
 

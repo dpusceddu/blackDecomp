@@ -142,13 +142,13 @@ struct UnknownVtable_003DD3D8 {
     unsigned char Function_00304EE8(float * argument0);
     // 0x003053C8: UNVERIFIED signature (src/kynapse/predicates_3053c8.cpp).
     unsigned char Function_003053C8();
-    // 0x00383F68: UNVERIFIED signature (src/linkonce/linkonce_383f68.c).
+    // 0x00383F68: UNVERIFIED signature (src/game/inline/linkonce_383f68.c).
     int Function_00383F68(int argument0);
-    // 0x00383FB8: UNVERIFIED signature (src/linkonce/linkonce_383fb8.c).
+    // 0x00383FB8: UNVERIFIED signature (src/game/inline/linkonce_383fb8.c).
     int * Function_00383FB8();
-    // 0x0038D330: UNVERIFIED signature (src/linkonce/linkonce_38d330.c).
+    // 0x0038D330: UNVERIFIED signature (src/kynapse/inline/linkonce_38d330.c).
     int Function_0038D330();
-    // 0x00393938: UNVERIFIED signature (src/linkonce/linkonce_393938.c).
+    // 0x00393938: UNVERIFIED signature (src/kynapse/inline/linkonce_393938.c).
     int Function_00393938();
 
     // Vtable 0x003DD3D8; vptr field offset unknown; referenced zero RTTI header.

@@ -96,7 +96,7 @@ struct Kaim_CHideAgent {
     unsigned char Function_002D5238();
     // 0x002D5398: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_002D5398();
-    // 0x003895C8: UNVERIFIED signature (src/kynapse/class_info_3895c8.cpp).
+    // 0x003895C8: UNVERIFIED signature (src/kynapse/inline/class_info_3895c8.cpp).
     void * Function_003895C8();
 
     // Vtable 0x003E3428; vptr field offset unknown; RTTI header.

@@ -23,11 +23,11 @@ struct ComputeVisibilityTraversal {
     inline short & Field_001C() { return *(short *)((unsigned char *)this + 0x1C); }
     // 0x00393288: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00393288();
-    // 0x00393320: UNVERIFIED signature (src/kynapse/grid_393320.cpp).
+    // 0x00393320: UNVERIFIED signature (src/kynapse/inline/grid_393320.cpp).
     void Function_00393320(void * argument0);
-    // 0x00393398: UNVERIFIED signature (src/kynapse/grid_393320.cpp).
+    // 0x00393398: UNVERIFIED signature (src/kynapse/inline/grid_393320.cpp).
     unsigned char Function_00393398(void * argument0);
-    // 0x003933F0: UNVERIFIED signature (src/kynapse/grid_393320.cpp).
+    // 0x003933F0: UNVERIFIED signature (src/kynapse/inline/grid_393320.cpp).
     void Function_003933F0(void * argument0);
     // 0x00393470: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00393470(void * argument0);

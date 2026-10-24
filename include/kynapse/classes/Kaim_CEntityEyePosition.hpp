@@ -26,7 +26,7 @@ struct Kaim_CEntityEyePosition {
     void * Function_002D88E8(void * argument0);
     // 0x0038A0E0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A0E0();
-    // 0x0038A118: UNVERIFIED signature (src/kynapse/parameter_classes_38a118.cpp).
+    // 0x0038A118: UNVERIFIED signature (src/kynapse/inline/parameter_classes_38a118.cpp).
     void * Function_0038A118();
 
     // Vtable 0x003E4920; vptr field offset unknown; RTTI header.

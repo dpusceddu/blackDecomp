@@ -24,7 +24,7 @@ struct Kaim_CActionActivate {
     void * Function_002D9C60(void * argument0);
     // 0x0038ABF0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038ABF0();
-    // 0x0038AC28: UNVERIFIED signature (src/kynapse/parameter_classes_38ac28.cpp).
+    // 0x0038AC28: UNVERIFIED signature (src/kynapse/inline/parameter_classes_38ac28.cpp).
     void * Function_0038AC28();
 
     // Vtable 0x003E5848; vptr field offset unknown; RTTI header.

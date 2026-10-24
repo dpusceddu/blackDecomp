@@ -30,11 +30,11 @@ struct Kaim_IPathFinder {
     unsigned char Function_002E74E0(void * argument0);
     // 0x0038D2D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0038D2D0(void * argument0);
-    // 0x0038D330: UNVERIFIED signature (src/linkonce/linkonce_38d330.c).
+    // 0x0038D330: UNVERIFIED signature (src/kynapse/inline/linkonce_38d330.c).
     int Function_0038D330();
-    // 0x0038E768: UNVERIFIED signature (src/linkonce/graph_cpointmapper.cpp).
+    // 0x0038E768: UNVERIFIED signature (src/kynapse/inline/graph_cpointmapper.cpp).
     int Function_0038E768(void * argument0);
-    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
+    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/inline/small_misc_38e7b8.cpp).
     void Function_0038E7B8();
 
     // Vtable 0x003E9608; vptr field offset unknown; RTTI header.

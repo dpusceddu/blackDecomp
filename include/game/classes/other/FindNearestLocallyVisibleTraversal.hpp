@@ -52,7 +52,7 @@ struct FindNearestLocallyVisibleTraversal {
     void Function_00392568();
     // 0x00392648: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00392648(void * argument0);
-    // 0x00392A50: UNVERIFIED signature (src/kynapse/nearest_node_392a50.cpp).
+    // 0x00392A50: UNVERIFIED signature (src/kynapse/inline/nearest_node_392a50.cpp).
     void Function_00392A50(void * argument0);
 
     // Vtable 0x003EECC8; vptr field offset unknown; RTTI header.

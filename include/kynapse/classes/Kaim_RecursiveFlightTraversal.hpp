@@ -18,9 +18,9 @@ struct Kaim_RecursiveFlightTraversal {
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x002D2A60: UNVERIFIED signature (src/kynapse/flee_agent_2d1610.cpp).
     int Function_002D2A60(void * argument0);
-    // 0x00389168: UNVERIFIED signature (src/linkonce/linkonce_389100.c).
+    // 0x00389168: UNVERIFIED signature (src/kynapse/inline/linkonce_389100.c).
     unsigned int Function_00389168();
-    // 0x00389170: UNVERIFIED signature (src/linkonce/linkonce_389100.c).
+    // 0x00389170: UNVERIFIED signature (src/kynapse/inline/linkonce_389100.c).
     int Function_00389170();
     // 0x003892E0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003892E0();

@@ -90,6 +90,22 @@ Stages (one `ninja` rule each; everything generated is under the ignored `asm/`,
    `tools/check_elf.py` compares the result with `config/<GAME_ID>/checksums.sha256` and, on a mismatch, names the
    functions and source files that differ (`tools/units_verify.py compare`).
 
+## Link-once copies
+
+GCC emits inline functions, template instantiations, vtables and type information that several object files need as
+*link-once* sections (`.gnu.linkonce.*`): every object that uses one carries its own copy, and the linker keeps the first
+and drops the others. In the retail image the kept copies of the code form a block behind the regular code (USA:
+0x383b50 to 0x396f48, 954 functions), in link order, so a copy sits next to the others of the object file that came first
+and uses it. That is why a destructor of a Kynapse class or an Apt `Value::Dispose` is not next to the rest of its class.
+
+The sources keep the same split. A copy is a function of the library that uses it, not a library of its own:
+`src/<library>/inline/linkonce_<address>.c|cpp` (and descriptive names for recovered ones) hold the copies of that library, and
+progress counts them there. `config/SLUS_213.76/inline_owners.txt` lists the owner of every range with the strength of the
+evidence (`tools/studies/linkonce_owners.py` produced it from the callers, vtable slots and neighbours in the split assembly;
+refine it by hand when you learn better). Where the right C++ is an inline member function in the class header, a copy that
+matches belongs there eventually; for now each copy stays a separate unit because its address, flags and the surrounding
+link-once order are part of what the build reproduces.
+
 ## INCLUDE_ASM
 
 Every source file lists all functions of its range; `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_XXXXXXXX);` marks one

@@ -42,7 +42,7 @@ struct Kaim_CConstraintPointToFleePath {
     unsigned int Function_00383D48();
     // 0x003903B8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003903B8();
-    // 0x00390440: UNVERIFIED signature (src/kynapse/class_info_390440.cpp).
+    // 0x00390440: UNVERIFIED signature (src/kynapse/inline/class_info_390440.cpp).
     void * Function_00390440();
 
     // Vtable 0x003EC9C0; vptr field offset unknown; RTTI header.

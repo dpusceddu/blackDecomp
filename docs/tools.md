@@ -109,11 +109,13 @@ Experiments and one-time migrations whose results are recorded in [history.md](h
 | `tools/studies/full_tu_context_control.py` | Verify that real unfinished TU context cannot leak through sorted text inputs. |
 | `tools/studies/handbook_controls.py` | Verify handbook recipes with isolated SN 1.36 retail controls and perturbations. |
 | `tools/studies/large_study.py` | Reproduce a fixed private calibration set against the isolated compiler catalog. |
+| `tools/studies/linkonce_owners.py` | Decide which library owns each link-once copy (compiler-emitted inline and template code) and write the owner list. |
 | `tools/studies/loop_padding.py` | Read-only short-loop diagnostics. |
 | `tools/studies/loop_positions.py` | Read-only address-position study of retail SN-assigned short loops. |
 | `tools/studies/loop_provenance.py` | Audit retail short-loop forms against the recovered TU and library map. |
 | `tools/studies/migrate_include_asm.py` | One-time migration to one source file per translation unit with INCLUDE_ASM markers (stage 1 of docs/build.md history). |
 | `tools/studies/migrate_split_list.py` | One-time migration, stage 2: config/units.yaml -> split list, symbol table and equivalent-tier file. |
+| `tools/studies/relocate_sources.py` | Move source files and keep every reference to them consistent: the build inputs, documentation and generated comments. |
 | `tools/studies/reorganize_includes.py` | One-time move of include/ from origin-based directories to one directory per library, updating every #include. |
 | `tools/studies/shift_test.py` | Shiftability test: insert NOPs into one function of a scratch copy, rebuild and check that references moved. |
 | `tools/studies/verify_vu0_math.py` | Worker-compile isolated VU shapes and compare register-renamed retail windows. |

@@ -24,7 +24,7 @@ struct Kaim_CActionJump {
     void * Function_002D7D48(void * argument0);
     // 0x00389B20: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00389B20();
-    // 0x00389B58: UNVERIFIED signature (src/kynapse/parameter_classes_389b58.cpp).
+    // 0x00389B58: UNVERIFIED signature (src/kynapse/inline/parameter_classes_389b58.cpp).
     void * Function_00389B58();
 
     // Vtable 0x003E4070; vptr field offset unknown; RTTI header.

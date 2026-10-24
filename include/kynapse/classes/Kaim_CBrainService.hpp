@@ -20,9 +20,9 @@ struct Kaim_CBrainService {
     unsigned int Function_002904E8();
     // 0x002E74E0: UNVERIFIED signature (src/kynapse/configure_2e74e0.cpp).
     unsigned char Function_002E74E0(void * argument0);
-    // 0x0038E768: UNVERIFIED signature (src/linkonce/graph_cpointmapper.cpp).
+    // 0x0038E768: UNVERIFIED signature (src/kynapse/inline/graph_cpointmapper.cpp).
     int Function_0038E768(void * argument0);
-    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
+    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/inline/small_misc_38e7b8.cpp).
     void Function_0038E7B8();
     // 0x0038E7C0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038E7C0();

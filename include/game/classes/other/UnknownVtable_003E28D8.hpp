@@ -50,13 +50,13 @@ struct UnknownVtable_003E28D8 {
     unsigned char Function_002F47B0(int argument0, void * argument1);
     // 0x002F4B50: UNVERIFIED signature (src/kynapse/host_2850c0_2f4b50.cpp).
     void Function_002F4B50(void * argument0);
-    // 0x00383ED0: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383ED0: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     int Function_00383ED0();
-    // 0x00388FE8: UNVERIFIED signature (src/linkonce/linkonce_388fe8.c).
+    // 0x00388FE8: UNVERIFIED signature (src/game/inline/linkonce_388fe8.c).
     int Function_00388FE8(int argument0);
-    // 0x00389038: UNVERIFIED signature (src/linkonce/linkonce_389038.c).
+    // 0x00389038: UNVERIFIED signature (src/game/inline/linkonce_389038.c).
     int Function_00389038();
-    // 0x00389040: UNVERIFIED signature (src/linkonce/linkonce_389038.c).
+    // 0x00389040: UNVERIFIED signature (src/game/inline/linkonce_389038.c).
     int * Function_00389040();
     // 0x003912B8: UNVERIFIED signature (src/kynapse/linkonce_3912b8.c).
     int Function_003912B8();

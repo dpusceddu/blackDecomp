@@ -17,10 +17,11 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 
 # TU-map library -> directory under src/. The Sony libraries of the sd-style block share one directory; the C library and
-# its helpers another. `linkonce` is the link-once area behind the regular code: it holds instantiated inline code.
+# its helpers another. The TU-map library `linkonce` (the link-once block behind the regular code, which holds instantiated
+# inline code) has no directory of its own: config/SLUS_213.76/inline_owners.txt names the library that owns each range.
 LIBRARY_DIR = {
     'game': 'game', 'apt': 'apt', 'kynapse': 'kynapse', 'animation': 'animation', 'physics': 'physics',
-    'renderware_core': 'rw_core', 'rwa_ee': 'rw_audio', 'linkonce': 'linkonce',
+    'renderware_core': 'rw_core', 'rwa_ee': 'rw_audio',
     'vibuf': 'sony', 'sony_unidentified': 'sony', 'libipu_libmpeg': 'sony', 'libdbc': 'sony', 'libdma_libpad2': 'sony',
     'libcdvd': 'sony', 'libmc2': 'sony', 'libkernl': 'sony', 'libgs': 'sony',
     'libm': 'libc', 'libc_stdio': 'libc', 'libstdcxx_typeinfo': 'libc',
@@ -29,6 +30,7 @@ LIBRARIES = sorted(set(LIBRARY_DIR.values()))
 TU_STEM = re.compile(r'^(?:tu_[0-9a-f]{6}|crt0)(?:_[0-9a-f]{6})?$')
 _MAP = None
 _VIEW_LIBRARIES = None
+_INLINE_OWNERS = None
 
 
 def _num(v):
@@ -63,9 +65,44 @@ def view_include(name):
     return '%s/partial/%s.h' % (layout_library(name), name)
 
 
-def library_of(addr):
-    """Directory name of the library that holds the code at `addr`."""
+def inline_owners():
+    """(starts, rows) of config/SLUS_213.76/inline_owners.txt: owner library of every link-once range (start, end, library)."""
+    global _INLINE_OWNERS
+    if _INLINE_OWNERS is None:
+        rows = []
+        for line in (ROOT / 'config/SLUS_213.76/inline_owners.txt').read_text().splitlines():
+            if line.strip() and not line.startswith('#'):
+                start, end, library = line.split()[:3]
+                rows.append((int(start, 0), int(end, 0), library))
+        rows.sort()
+        _INLINE_OWNERS = ([r[0] for r in rows], rows)
+    return _INLINE_OWNERS
+
+
+def is_inline(addr):
+    """True for code in the link-once block (compiler-emitted inline and template copies)."""
+    return tu_of(addr)['library'] == 'linkonce'
+
+
+def library_of_tu(addr):
+    """Library directory by the TU map alone (not for the link-once block, whose owners come from inline_owners)."""
     return LIBRARY_DIR[tu_of(addr)['library']]
+
+
+def library_of(addr):
+    """Directory name of the library that holds the code at `addr`; a link-once copy belongs to its owner library."""
+    if is_inline(addr):
+        starts, rows = inline_owners()
+        row = rows[bisect.bisect_right(starts, addr) - 1]
+        if not row[0] <= addr < row[1]:
+            raise KeyError('0x%x is in the link-once block but in no range of config/SLUS_213.76/inline_owners.txt' % addr)
+        return row[2]
+    return library_of_tu(addr)
+
+
+def source_dir(addr):
+    """Directory under src/ for a new source unit at `addr`: src/<library>, or src/<owner>/inline for a link-once copy."""
+    return 'src/%s/inline' % library_of(addr) if is_inline(addr) else 'src/%s' % library_of(addr)
 
 
 def tu_stem(tu):
@@ -82,4 +119,4 @@ def stem_for(addr):
 
 def source_path(addr, suffix='.c'):
     """Repo-relative path for a source unit that starts at `addr` and has no better name."""
-    return 'src/%s/%s%s' % (library_of(addr), stem_for(addr), suffix)
+    return '%s/%s%s' % (source_dir(addr), stem_for(addr), suffix)

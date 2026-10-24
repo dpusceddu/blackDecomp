@@ -16,13 +16,13 @@ struct Kaim_CZeroHeuristic {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
-    // 0x00383D50: UNVERIFIED signature (src/linkonce/linkonce_383d50.c).
+    // 0x00383D50: UNVERIFIED signature (src/game/inline/linkonce_383d50.c).
     unsigned int Function_00383D50();
     // 0x003906C0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003906C0();
-    // 0x00390748: UNVERIFIED signature (src/kynapse/class_info_390748.cpp).
+    // 0x00390748: UNVERIFIED signature (src/kynapse/inline/class_info_390748.cpp).
     void * Function_00390748();
-    // 0x00390758: UNVERIFIED signature (src/kynapse/tiny3_390758.cpp).
+    // 0x00390758: UNVERIFIED signature (src/kynapse/inline/tiny3_390758.cpp).
     unsigned char Function_00390758(int argument0, int argument1, int argument2, int * argument3);
 
     // Vtable 0x003EC930; vptr field offset unknown; RTTI header.

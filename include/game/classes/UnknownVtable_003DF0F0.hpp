@@ -24,19 +24,19 @@ struct UnknownVtable_003DF0F0 {
     signed char * Function_00199628();
     // 0x00199690: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00199690();
-    // 0x00383DB8: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
+    // 0x00383DB8: UNVERIFIED signature (src/game/inline/linkonce_383db8.c).
     unsigned int Function_00383DB8();
-    // 0x00383DC0: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
+    // 0x00383DC0: UNVERIFIED signature (src/game/inline/linkonce_383db8.c).
     int Function_00383DC0();
-    // 0x00383DC8: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
+    // 0x00383DC8: UNVERIFIED signature (src/game/inline/linkonce_383db8.c).
     unsigned int Function_00383DC8();
-    // 0x00383DD0: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
+    // 0x00383DD0: UNVERIFIED signature (src/game/inline/linkonce_383db8.c).
     unsigned int Function_00383DD0();
-    // 0x00383DD8: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
+    // 0x00383DD8: UNVERIFIED signature (src/game/inline/linkonce_383db8.c).
     unsigned int Function_00383DD8();
-    // 0x00383DE0: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
+    // 0x00383DE0: UNVERIFIED signature (src/game/inline/linkonce_383db8.c).
     unsigned int Function_00383DE0();
-    // 0x00383DE8: UNVERIFIED signature (src/linkonce/linkonce_383db8.c).
+    // 0x00383DE8: UNVERIFIED signature (src/game/inline/linkonce_383db8.c).
     unsigned int Function_00383DE8();
 
     // Vtable 0x003DF0F0; vptr field offset unknown; referenced zero RTTI header.

@@ -22,7 +22,7 @@ struct Kaim_CGraphPoint {
     inline int & Field_0034() { return *(int *)((unsigned char *)this + 0x34); }
     // 0x00389178: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00389178();
-    // 0x00389200: UNVERIFIED signature (src/kynapse/misc4_389200.cpp).
+    // 0x00389200: UNVERIFIED signature (src/kynapse/inline/misc4_389200.cpp).
     void * Function_00389200();
     // 0x00389208: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00389208(void * argument0, void * argument1);

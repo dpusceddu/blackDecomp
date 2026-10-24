@@ -151,13 +151,13 @@ struct Kaim_CPathFinder {
     unsigned char Function_003053C8();
     // 0x00305428: UNVERIFIED signature (src/kynapse/misc6_3053f0.cpp).
     void Function_00305428(int argument0);
-    // 0x0038D330: UNVERIFIED signature (src/linkonce/linkonce_38d330.c).
+    // 0x0038D330: UNVERIFIED signature (src/kynapse/inline/linkonce_38d330.c).
     int Function_0038D330();
-    // 0x00393928: UNVERIFIED signature (src/kynapse/class_info_393928.cpp).
+    // 0x00393928: UNVERIFIED signature (src/kynapse/inline/class_info_393928.cpp).
     void * Function_00393928();
-    // 0x00393938: UNVERIFIED signature (src/linkonce/linkonce_393938.c).
+    // 0x00393938: UNVERIFIED signature (src/kynapse/inline/linkonce_393938.c).
     int Function_00393938();
-    // 0x00393940: UNVERIFIED signature (src/kynapse/misc6_393940.cpp).
+    // 0x00393940: UNVERIFIED signature (src/kynapse/inline/misc6_393940.cpp).
     void Function_00393940();
 
     // Vtable 0x003EFE10; vptr field offset unknown; RTTI header.

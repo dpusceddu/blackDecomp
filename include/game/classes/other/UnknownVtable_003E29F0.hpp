@@ -16,11 +16,11 @@ struct UnknownVtable_003E29F0 {
     inline unsigned char & Field_0004() { return *(unsigned char *)((unsigned char *)this + 0x4); }
     // 0x00289DD0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00289DD0(void * argument0, void * argument1, void * argument2, void * argument3);
-    // 0x00383D50: UNVERIFIED signature (src/linkonce/linkonce_383d50.c).
+    // 0x00383D50: UNVERIFIED signature (src/game/inline/linkonce_383d50.c).
     unsigned int Function_00383D50();
-    // 0x00388E88: UNVERIFIED signature (src/linkonce/linkonce_388e88.c).
+    // 0x00388E88: UNVERIFIED signature (src/game/inline/linkonce_388e88.c).
     int Function_00388E88(int argument0);
-    // 0x00388EC0: UNVERIFIED signature (src/linkonce/linkonce_388ec0.c).
+    // 0x00388EC0: UNVERIFIED signature (src/game/inline/linkonce_388ec0.c).
     int * Function_00388EC0();
 
     // Vtable 0x003E29F0; vptr field offset unknown; referenced zero RTTI header.

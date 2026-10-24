@@ -22,7 +22,7 @@ struct Kaim_CEntityLength {
     void * Function_002D9280(void * argument0);
     // 0x0038A6B0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A6B0();
-    // 0x0038A6E8: UNVERIFIED signature (src/kynapse/parameter_classes_38a6e8.cpp).
+    // 0x0038A6E8: UNVERIFIED signature (src/kynapse/inline/parameter_classes_38a6e8.cpp).
     void * Function_0038A6E8();
 
     // Vtable 0x003E50A0; vptr field offset unknown; RTTI header.

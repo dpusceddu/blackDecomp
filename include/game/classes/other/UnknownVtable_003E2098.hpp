@@ -22,27 +22,27 @@ struct UnknownVtable_003E2098 {
     int Function_002529E0();
     // 0x002529F8: UNVERIFIED signature (src/apt/tu_251938_2529e0.c).
     int Function_002529F8();
-    // 0x00384ED8: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
+    // 0x00384ED8: UNVERIFIED signature (src/apt/inline/linkonce_384ed8.c).
     int Function_00384ED8();
-    // 0x00384EE0: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
+    // 0x00384EE0: UNVERIFIED signature (src/apt/inline/linkonce_384ed8.c).
     int Function_00384EE0();
-    // 0x00384EE8: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
+    // 0x00384EE8: UNVERIFIED signature (src/apt/inline/linkonce_384ed8.c).
     int Function_00384EE8();
-    // 0x00384EF0: UNVERIFIED signature (src/linkonce/linkonce_384ef0.c).
+    // 0x00384EF0: UNVERIFIED signature (src/apt/inline/linkonce_384ef0.c).
     unsigned int Function_00384EF0();
-    // 0x00384EF8: UNVERIFIED signature (src/linkonce/linkonce_384ef8.c).
+    // 0x00384EF8: UNVERIFIED signature (src/apt/inline/linkonce_384ef8.c).
     int Function_00384EF8();
-    // 0x00384F00: UNVERIFIED signature (src/linkonce/linkonce_384f00.c).
+    // 0x00384F00: UNVERIFIED signature (src/apt/inline/linkonce_384f00.c).
     int Function_00384F00();
-    // 0x00384F40: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F40: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     unsigned int Function_00384F40();
-    // 0x00384F48: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F48: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     unsigned int Function_00384F48();
-    // 0x00384F58: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F58: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     int Function_00384F58();
-    // 0x00384F60: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F60: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     unsigned int Function_00384F60();
-    // 0x00385240: UNVERIFIED signature (src/linkonce/linkonce_385240.c).
+    // 0x00385240: UNVERIFIED signature (src/apt/inline/linkonce_385240.c).
     int * Function_00385240(int argument0);
 
     // Vtable 0x003E2098; vptr field offset unknown; referenced zero RTTI header.

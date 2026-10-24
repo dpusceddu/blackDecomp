@@ -46,31 +46,31 @@ struct UnknownVtable_003E1B68 {
     int Function_00252680(void * argument0);
     // 0x00384E70: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384E70();
-    // 0x00384F00: UNVERIFIED signature (src/linkonce/linkonce_384f00.c).
+    // 0x00384F00: UNVERIFIED signature (src/apt/inline/linkonce_384f00.c).
     int Function_00384F00();
     // 0x00384F08: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F50: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F50: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     int Function_00384F50();
     // 0x00385528: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00385528(int argument0);
-    // 0x00385548: UNVERIFIED signature (src/linkonce/linkonce_385548.c).
+    // 0x00385548: UNVERIFIED signature (src/apt/inline/linkonce_385548.c).
     int Function_00385548();
     // 0x003857A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003857A0();
-    // 0x00385B60: UNVERIFIED signature (src/linkonce/linkonce_385660_385b10.c).
+    // 0x00385B60: UNVERIFIED signature (src/apt/inline/linkonce_385660_385b10.c).
     int Function_00385B60();
-    // 0x00385B70: UNVERIFIED signature (src/linkonce/linkonce_385660_385b10.c).
+    // 0x00385B70: UNVERIFIED signature (src/apt/inline/linkonce_385660_385b10.c).
     int Function_00385B70();
-    // 0x00385B80: UNVERIFIED signature (src/linkonce/linkonce_385660_385b10.c).
+    // 0x00385B80: UNVERIFIED signature (src/apt/inline/linkonce_385660_385b10.c).
     int Function_00385B80();
-    // 0x00385B90: UNVERIFIED signature (src/linkonce/linkonce_385660_385b10.c).
+    // 0x00385B90: UNVERIFIED signature (src/apt/inline/linkonce_385660_385b10.c).
     int Function_00385B90();
     // 0x00385BA0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00385BA0();
     // 0x00385BF0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int * Function_00385BF0(int * argument0, unsigned int argument1);
-    // 0x00385DB0: UNVERIFIED signature (src/linkonce/linkonce_385660_385db0.c).
+    // 0x00385DB0: UNVERIFIED signature (src/apt/inline/linkonce_385660_385db0.c).
     int * Function_00385DB0(void * argument0);
 
     // Vtable 0x003E1B68; vptr field offset unknown; referenced zero RTTI header.

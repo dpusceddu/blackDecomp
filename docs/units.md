@@ -26,7 +26,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B78D8);
 The marker names the function's assembly (`asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s`, written by the build). Every
 function of the file's address range that has no marker must be defined by the file; the build checks that the compiled
 function takes the original's place and that the whole image stays identical. A TU without recovered code needs no file.
-Hand-written files keep descriptive names (`kynapse/behaviors_pathway.cpp`).
+Hand-written files keep descriptive names (`kynapse/behaviors_pathway.cpp`). Link-once copies (compiler-emitted inline and template
+code) live in `src/<library>/inline/` ([build.md](build.md#link-once-copies)).
 
 ## The split list
 

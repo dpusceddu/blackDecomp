@@ -94,7 +94,7 @@ struct Kaim_CConstraintStealthPath {
     unsigned int Function_00383D48();
     // 0x00390270: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00390270();
-    // 0x003902F8: UNVERIFIED signature (src/kynapse/class_info_3902f8.cpp).
+    // 0x003902F8: UNVERIFIED signature (src/kynapse/inline/class_info_3902f8.cpp).
     void * Function_003902F8();
 
     // Vtable 0x003ECA20; vptr field offset unknown; RTTI header.

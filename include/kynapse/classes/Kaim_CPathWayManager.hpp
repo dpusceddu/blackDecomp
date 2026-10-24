@@ -21,11 +21,11 @@ struct Kaim_CPathWayManager {
     int Function_002DA980(void * argument0);
     // 0x002DA9B0: UNVERIFIED signature (include/kynapse/agents/pathmanager.hpp).
     int Function_002DA9B0(void * argument0);
-    // 0x0038AED8: UNVERIFIED signature (src/kynapse/small_misc_38aed8.cpp).
+    // 0x0038AED8: UNVERIFIED signature (src/kynapse/inline/small_misc_38aed8.cpp).
     void Function_0038AED8();
-    // 0x0038AFA8: UNVERIFIED signature (src/kynapse/class_info_38afa8.cpp).
+    // 0x0038AFA8: UNVERIFIED signature (src/kynapse/inline/class_info_38afa8.cpp).
     void * Function_0038AFA8();
-    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
+    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/inline/small_misc_38e7b8.cpp).
     void Function_0038E7B8();
 
     // Vtable 0x003E5DE8; vptr field offset unknown; RTTI header.

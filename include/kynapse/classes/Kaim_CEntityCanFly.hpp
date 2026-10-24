@@ -22,7 +22,7 @@ struct Kaim_CEntityCanFly {
     void * Function_002D8770(void * argument0);
     // 0x00389F38: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00389F38();
-    // 0x00389F70: UNVERIFIED signature (src/kynapse/parameter_classes_389f70.cpp).
+    // 0x00389F70: UNVERIFIED signature (src/kynapse/inline/parameter_classes_389f70.cpp).
     void * Function_00389F70();
 
     // Vtable 0x003E4700; vptr field offset unknown; RTTI header.

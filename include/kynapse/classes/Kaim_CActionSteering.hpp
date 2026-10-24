@@ -24,7 +24,7 @@ struct Kaim_CActionSteering {
     void * Function_002D8388(void * argument0);
     // 0x00389E70: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00389E70();
-    // 0x00389EA8: UNVERIFIED signature (src/kynapse/parameter_classes_389ea8.cpp).
+    // 0x00389EA8: UNVERIFIED signature (src/kynapse/inline/parameter_classes_389ea8.cpp).
     void * Function_00389EA8();
 
     // Vtable 0x003E45C0; vptr field offset unknown; RTTI header.

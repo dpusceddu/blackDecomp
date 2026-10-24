@@ -52,7 +52,7 @@ leads, never proof of PS2 layouts.
 the further files of a TU that cannot be one: other flags, language or constants) or a descriptive name inherited from the
 class or module. The file lists every function of the TU, the unrecovered ones as INCLUDE_ASM lines; drafts are
 `#ifdef NON_MATCHING` blocks in it. TUs without recovered code have no file. Libraries: `game`, `apt` (EA Apt/Flash UI), `kynapse`,
-`animation`, `physics`, `rw_core`, `rw_audio`, `sony`, `libc`, `linkonce` (link-once area). `config/SLUS_213.76/splits.yaml`
+`animation`, `physics`, `rw_core`, `rw_audio`, `sony`, `libc`. Compiler-emitted inline and template copies (link-once code) live in `src/<owner>/inline/` of the library that owns them (`config/SLUS_213.76/inline_owners.txt`). `config/SLUS_213.76/splits.yaml`
 lists the files with their address ranges and flags; `tools/layout.py` owns the naming rules.
 
 Headers follow the libraries: `include/<library>/` for `game`, `kynapse`, `animation`, `physics`, `rw_core`, `rw_audio`
@@ -66,16 +66,15 @@ Everything below rebuilds byte-identical. Routine work checks USA only; the last
 
 | Library (`src/`) | Functions | From source | Bytes (`.text` spans) | From source | Complete TUs |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| game | 6,650 | 2,908 (43.7 %) | 1,460,176 | 176,864 (12.1 %) | 631 / 1,435 |
-| kynapse | 905 | 687 (75.9 %) | 257,240 | 107,512 (41.8 %) | 24 / 82 |
-| animation | 350 | 195 (55.7 %) | 69,680 | 26,128 (37.5 %) | 12 / 39 |
+| game | 6,800 | 3,016 (44.4 %) | 1,470,016 | 179,840 (12.2 %) | 738 / 1,566 |
+| kynapse | 1,558 | 1,277 (82.0 %) | 305,704 | 137,552 (45.0 %) | 614 / 735 |
+| animation | 385 | 211 (54.8 %) | 77,904 | 27,528 (35.3 %) | 28 / 74 |
 | rw_audio | 754 | 309 (41.0 %) | 109,560 | 23,368 (21.3 %) | 36 / 112 |
-| apt | 633 | 129 (20.4 %) | 267,744 | 7,520 (2.8 %) | 30 / 177 |
+| apt | 777 | 223 (28.7 %) | 280,000 | 12,400 (4.4 %) | 57 / 209 |
 | sony | 756 | 274 (36.2 %) | 142,096 | 9,000 (6.3 %) | 147 / 221 |
 | rw_core | 449 | 85 (18.9 %) | 181,416 | 4,744 (2.6 %) | 7 / 44 |
 | libc | 213 | 75 (35.2 %) | 70,472 | 4,088 (5.8 %) | 3 / 22 |
-| physics | 206 | 93 (45.1 %) | 78,240 | 11,864 (15.2 %) | 6 / 52 |
-| linkonce | 983 | 808 (82.2 %) | 78,840 | 39,296 (49.8 %) | 740 / 852 |
+| physics | 207 | 93 (44.9 %) | 78,296 | 11,864 (15.2 %) | 6 / 53 |
 | **Total** | **11,899** | **5,563 (46.75 %)** | **2,715,464** | **410,384 (15.11 %)** | **1,636 / 3,036** |
 
 Evidence tiers: `exact` 5,563 functions / 410,384 B, `equivalent` 14 / 984 B, `draft` 6,322 / 2,304,096 B. Complete TUs

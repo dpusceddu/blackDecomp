@@ -78,7 +78,7 @@ struct Kaim_CPathWayAgent {
     unsigned int Function_002D6440();
     // 0x002D6460: UNVERIFIED signature (src/kynapse/predicates_2d6460.cpp).
     unsigned char Function_002D6460();
-    // 0x00389668: UNVERIFIED signature (src/kynapse/class_info_389668.cpp).
+    // 0x00389668: UNVERIFIED signature (src/kynapse/inline/class_info_389668.cpp).
     void * Function_00389668();
 
     // Vtable 0x003E3688; vptr field offset unknown; RTTI header.

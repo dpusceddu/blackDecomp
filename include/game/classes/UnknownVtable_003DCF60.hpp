@@ -24,9 +24,9 @@ struct UnknownVtable_003DCF60 {
     int Function_001701D0();
     // 0x002E1B08: UNVERIFIED signature (src/kynapse/lookups_2e1b08.cpp).
     void Function_002E1B08();
-    // 0x00384230: UNVERIFIED signature (src/linkonce/linkonce_3841e0.c).
+    // 0x00384230: UNVERIFIED signature (src/game/inline/linkonce_3841e0.c).
     int Function_00384230(int argument0);
-    // 0x00384280: UNVERIFIED signature (src/linkonce/linkonce_384280.c).
+    // 0x00384280: UNVERIFIED signature (src/game/inline/linkonce_384280.c).
     int * Function_00384280();
     // 0x0038C390: UNVERIFIED signature (include/kynapse/graph/brain.hpp).
     unsigned char Function_0038C390(void * argument0);

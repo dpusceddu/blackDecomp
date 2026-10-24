@@ -39,7 +39,7 @@ struct Kaim_CGapDynamicAvoidance {
     int Function_0030B898();
     // 0x0030BA10: UNVERIFIED signature (src/kynapse/misc7_30ba10.cpp).
     void Function_0030BA10();
-    // 0x00394220: UNVERIFIED signature (src/kynapse/class_info_394220.cpp).
+    // 0x00394220: UNVERIFIED signature (src/kynapse/inline/class_info_394220.cpp).
     void * Function_00394220();
 
     // Vtable 0x003F0960; vptr field offset unknown; RTTI header.

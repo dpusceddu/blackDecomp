@@ -44,19 +44,19 @@ struct UnknownVtable_003DDE80 {
     unsigned int Function_0018EA20();
     // 0x0018EBE0: UNVERIFIED signature (include/game/graphics/movement_core.hpp).
     unsigned int Function_0018EBE0(S128 argument0);
-    // 0x00383E68: UNVERIFIED signature (src/linkonce/linkonce_383e68.c).
+    // 0x00383E68: UNVERIFIED signature (src/game/inline/linkonce_383e68.c).
     unsigned int Function_00383E68(S128 * argument0);
-    // 0x00383E98: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383E98: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     int Function_00383E98();
-    // 0x00383EA0: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383EA0: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     int Function_00383EA0();
-    // 0x00383EA8: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383EA8: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     int Function_00383EA8();
-    // 0x00383EB0: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383EB0: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     int Function_00383EB0();
-    // 0x00383EB8: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383EB8: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     unsigned int Function_00383EB8();
-    // 0x00383EC0: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383EC0: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     float Function_00383EC0();
 
     // Vtable 0x003DDE80; vptr field offset unknown; referenced zero RTTI header.

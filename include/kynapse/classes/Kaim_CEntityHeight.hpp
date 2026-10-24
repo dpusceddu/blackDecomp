@@ -22,7 +22,7 @@ struct Kaim_CEntityHeight {
     void * Function_002D8F50(void * argument0);
     // 0x0038A4D0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A4D0();
-    // 0x0038A508: UNVERIFIED signature (src/kynapse/parameter_classes_38a508.cpp).
+    // 0x0038A508: UNVERIFIED signature (src/kynapse/inline/parameter_classes_38a508.cpp).
     void * Function_0038A508();
 
     // Vtable 0x003E4E20; vptr field offset unknown; RTTI header.

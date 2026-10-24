@@ -52,9 +52,9 @@ struct Kaim_CWanderAgent {
     unsigned char Function_002D7748();
     // 0x002D77A0: UNVERIFIED signature (include/kynapse/agents/wander.hpp).
     int Function_002D77A0();
-    // 0x00389818: UNVERIFIED signature (src/kynapse/class_info_389818.cpp).
+    // 0x00389818: UNVERIFIED signature (src/kynapse/inline/class_info_389818.cpp).
     void * Function_00389818();
-    // 0x0038BB28: UNVERIFIED signature (src/kynapse/small_misc_38bb28.cpp).
+    // 0x0038BB28: UNVERIFIED signature (src/kynapse/inline/small_misc_38bb28.cpp).
     void Function_0038BB28();
 
     // Vtable 0x003E3BB0; vptr field offset unknown; RTTI header.

@@ -60,7 +60,7 @@ struct UnknownVtable_003DFFE0 {
     int Function_002F8238(unsigned int argument0, unsigned int argument1);
     // 0x002F8C38: UNVERIFIED signature (src/kynapse/graph_cspatialgraph_lifetime.cpp).
     void Function_002F8C38();
-    // 0x00383D58: UNVERIFIED signature (src/linkonce/linkonce_383d58.c).
+    // 0x00383D58: UNVERIFIED signature (src/game/inline/linkonce_383d58.c).
     int Function_00383D58(int argument0);
 
     // Vtable 0x003DFFE0; vptr field offset unknown; referenced zero RTTI header.

@@ -24,19 +24,19 @@ struct UnknownVtable_003E2450 {
     int Function_0024F768();
     // 0x00384E70: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384E70();
-    // 0x00384EE8: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
+    // 0x00384EE8: UNVERIFIED signature (src/apt/inline/linkonce_384ed8.c).
     int Function_00384EE8();
-    // 0x00384EF0: UNVERIFIED signature (src/linkonce/linkonce_384ef0.c).
+    // 0x00384EF0: UNVERIFIED signature (src/apt/inline/linkonce_384ef0.c).
     unsigned int Function_00384EF0();
-    // 0x00384EF8: UNVERIFIED signature (src/linkonce/linkonce_384ef8.c).
+    // 0x00384EF8: UNVERIFIED signature (src/apt/inline/linkonce_384ef8.c).
     int Function_00384EF8();
-    // 0x00384F00: UNVERIFIED signature (src/linkonce/linkonce_384f00.c).
+    // 0x00384F00: UNVERIFIED signature (src/apt/inline/linkonce_384f00.c).
     int Function_00384F00();
     // 0x00384F08: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F40: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F40: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     unsigned int Function_00384F40();
-    // 0x00384F50: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F50: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     int Function_00384F50();
     // 0x00387CC0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int * Function_00387CC0();

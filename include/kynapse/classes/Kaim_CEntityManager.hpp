@@ -44,7 +44,7 @@ struct Kaim_CEntityManager {
     void Function_0030F000();
     // 0x0030FE98: UNVERIFIED signature (src/kynapse/behaviors_centitymanager_config.cpp).
     unsigned char Function_0030FE98(void * argument0);
-    // 0x00394D68: UNVERIFIED signature (src/kynapse/class_info_394d68.cpp).
+    // 0x00394D68: UNVERIFIED signature (src/kynapse/inline/class_info_394d68.cpp).
     void * Function_00394D68();
 
     // Vtable 0x003F13F8; vptr field offset unknown; RTTI header.

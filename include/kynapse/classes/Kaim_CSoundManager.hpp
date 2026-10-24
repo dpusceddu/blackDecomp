@@ -51,7 +51,7 @@ struct Kaim_CSoundManager {
     int Function_0030E128();
     // 0x0030E180: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int * Function_0030E180();
-    // 0x00394C10: UNVERIFIED signature (src/kynapse/sound_pool_394c10.cpp).
+    // 0x00394C10: UNVERIFIED signature (src/kynapse/inline/sound_pool_394c10.cpp).
     void * Function_00394C10();
 
     // Vtable 0x003F1220; vptr field offset unknown; RTTI header.

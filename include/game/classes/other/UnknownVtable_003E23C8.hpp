@@ -20,25 +20,25 @@ struct UnknownVtable_003E23C8 {
     unsigned int Function_002904E8();
     // 0x00384E70: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384E70();
-    // 0x00384ED8: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
+    // 0x00384ED8: UNVERIFIED signature (src/apt/inline/linkonce_384ed8.c).
     int Function_00384ED8();
-    // 0x00384EE0: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
+    // 0x00384EE0: UNVERIFIED signature (src/apt/inline/linkonce_384ed8.c).
     int Function_00384EE0();
-    // 0x00384EE8: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
+    // 0x00384EE8: UNVERIFIED signature (src/apt/inline/linkonce_384ed8.c).
     int Function_00384EE8();
-    // 0x00384EF0: UNVERIFIED signature (src/linkonce/linkonce_384ef0.c).
+    // 0x00384EF0: UNVERIFIED signature (src/apt/inline/linkonce_384ef0.c).
     unsigned int Function_00384EF0();
-    // 0x00384EF8: UNVERIFIED signature (src/linkonce/linkonce_384ef8.c).
+    // 0x00384EF8: UNVERIFIED signature (src/apt/inline/linkonce_384ef8.c).
     int Function_00384EF8();
-    // 0x00384F00: UNVERIFIED signature (src/linkonce/linkonce_384f00.c).
+    // 0x00384F00: UNVERIFIED signature (src/apt/inline/linkonce_384f00.c).
     int Function_00384F00();
     // 0x00384F08: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F40: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F40: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     unsigned int Function_00384F40();
-    // 0x00384F48: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F48: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     unsigned int Function_00384F48();
-    // 0x00387020: UNVERIFIED signature (src/linkonce/linkonce_385660_387020.c).
+    // 0x00387020: UNVERIFIED signature (src/apt/inline/linkonce_385660_387020.c).
     int * Function_00387020(int argument0);
 
     // Vtable 0x003E23C8; vptr field offset unknown; referenced zero RTTI header.

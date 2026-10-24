@@ -38,7 +38,7 @@ struct UnknownVtable_003E07B0 {
     int Function_001EE678();
     // 0x001EE850: UNVERIFIED signature (src/game/tu_1ed9c8_1eddb8.c).
     int Function_001EE850();
-    // 0x00384660: UNVERIFIED signature (src/linkonce/linkonce_384660.c).
+    // 0x00384660: UNVERIFIED signature (src/game/inline/linkonce_384660.c).
     unsigned int Function_00384660(float argument0);
 
     // Vtable 0x003E07B0; vptr field offset unknown; referenced zero RTTI header.

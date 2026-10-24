@@ -12,7 +12,7 @@ struct UnknownVtable_003E0C10 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x00207218: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00207218(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3);
-    // 0x00384D48: UNVERIFIED signature (src/linkonce/linkonce_384d40.c).
+    // 0x00384D48: UNVERIFIED signature (src/game/inline/linkonce_384d40.c).
     unsigned int Function_00384D48();
 
     // Vtable 0x003E0C10; vptr field offset unknown; referenced zero RTTI header.

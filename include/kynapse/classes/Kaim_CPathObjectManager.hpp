@@ -27,11 +27,11 @@ struct Kaim_CPathObjectManager {
     unsigned char Function_002F4E90(void * argument0);
     // 0x002F57C0: UNVERIFIED signature (include/kynapse/graph/path_manager.hpp).
     unsigned char Function_002F57C0(void * argument0);
-    // 0x0038AED8: UNVERIFIED signature (src/kynapse/small_misc_38aed8.cpp).
+    // 0x0038AED8: UNVERIFIED signature (src/kynapse/inline/small_misc_38aed8.cpp).
     void Function_0038AED8();
-    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
+    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/inline/small_misc_38e7b8.cpp).
     void Function_0038E7B8();
-    // 0x003914B0: UNVERIFIED signature (src/kynapse/class_info_3914b0.cpp).
+    // 0x003914B0: UNVERIFIED signature (src/kynapse/inline/class_info_3914b0.cpp).
     void * Function_003914B0();
 
     // Vtable 0x003EE398; vptr field offset unknown; RTTI header.

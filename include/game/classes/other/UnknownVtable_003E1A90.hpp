@@ -42,31 +42,31 @@ struct UnknownVtable_003E1A90 {
     int Function_00252328(void * argument0);
     // 0x00384E70: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384E70();
-    // 0x00384F00: UNVERIFIED signature (src/linkonce/linkonce_384f00.c).
+    // 0x00384F00: UNVERIFIED signature (src/apt/inline/linkonce_384f00.c).
     int Function_00384F00();
     // 0x00384F08: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F50: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F50: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     int Function_00384F50();
     // 0x00385528: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00385528(int argument0);
-    // 0x00385548: UNVERIFIED signature (src/linkonce/linkonce_385548.c).
+    // 0x00385548: UNVERIFIED signature (src/apt/inline/linkonce_385548.c).
     int Function_00385548();
     // 0x003857A0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003857A0();
-    // 0x00385E00: UNVERIFIED signature (src/linkonce/linkonce_385660_385db0.c).
+    // 0x00385E00: UNVERIFIED signature (src/apt/inline/linkonce_385660_385db0.c).
     int Function_00385E00();
-    // 0x00385E08: UNVERIFIED signature (src/linkonce/linkonce_385660_385db0.c).
+    // 0x00385E08: UNVERIFIED signature (src/apt/inline/linkonce_385660_385db0.c).
     int Function_00385E08();
-    // 0x00385E10: UNVERIFIED signature (src/linkonce/linkonce_385660_385db0.c).
+    // 0x00385E10: UNVERIFIED signature (src/apt/inline/linkonce_385660_385db0.c).
     int Function_00385E10();
-    // 0x00385E18: UNVERIFIED signature (src/linkonce/linkonce_385660_385db0.c).
+    // 0x00385E18: UNVERIFIED signature (src/apt/inline/linkonce_385660_385db0.c).
     int Function_00385E18();
     // 0x00385E20: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00385E20();
-    // 0x00385E68: UNVERIFIED signature (src/linkonce/linkonce_385660_385e68.c).
+    // 0x00385E68: UNVERIFIED signature (src/apt/inline/linkonce_385660_385e68.c).
     unsigned int Function_00385E68();
-    // 0x00385E70: UNVERIFIED signature (src/linkonce/linkonce_385660_385e68.c).
+    // 0x00385E70: UNVERIFIED signature (src/apt/inline/linkonce_385660_385e68.c).
     int Function_00385E70();
     // 0x00385E78: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int * Function_00385E78(unsigned int argument0);

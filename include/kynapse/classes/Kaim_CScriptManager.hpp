@@ -21,11 +21,11 @@ struct Kaim_CScriptManager {
     int Function_002DD1B8(void * argument0);
     // 0x002DD1E8: UNVERIFIED signature (include/kynapse/agents/scriptmanager.hpp).
     int Function_002DD1E8(void * argument0);
-    // 0x0038AED8: UNVERIFIED signature (src/kynapse/small_misc_38aed8.cpp).
+    // 0x0038AED8: UNVERIFIED signature (src/kynapse/inline/small_misc_38aed8.cpp).
     void Function_0038AED8();
-    // 0x0038B2B8: UNVERIFIED signature (src/kynapse/class_info_38b2b8.cpp).
+    // 0x0038B2B8: UNVERIFIED signature (src/kynapse/inline/class_info_38b2b8.cpp).
     void * Function_0038B2B8();
-    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/small_misc_38e7b8.cpp).
+    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/inline/small_misc_38e7b8.cpp).
     void Function_0038E7B8();
 
     // Vtable 0x003E6608; vptr field offset unknown; RTTI header.

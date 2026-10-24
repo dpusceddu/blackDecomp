@@ -36,7 +36,7 @@ struct Kaim_CFindNearestData {
     int Function_002EFC50(unsigned int argument0);
     // 0x002F0A30: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002F0A30();
-    // 0x0038FFC0: UNVERIFIED signature (src/kynapse/class_info_38ffc0.cpp).
+    // 0x0038FFC0: UNVERIFIED signature (src/kynapse/inline/class_info_38ffc0.cpp).
     void * Function_0038FFC0();
 
     // Vtable 0x003EC1C8; vptr field offset unknown; RTTI header.

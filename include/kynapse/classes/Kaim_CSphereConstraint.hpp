@@ -30,7 +30,7 @@ struct Kaim_CSphereConstraint {
     unsigned int Function_00383D48();
     // 0x00390460: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00390460();
-    // 0x00390548: UNVERIFIED signature (src/kynapse/class_info_390548.cpp).
+    // 0x00390548: UNVERIFIED signature (src/kynapse/inline/class_info_390548.cpp).
     void * Function_00390548();
 
     // Vtable 0x003EC990; vptr field offset unknown; RTTI header.

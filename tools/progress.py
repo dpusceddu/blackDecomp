@@ -193,8 +193,12 @@ def tu_report(slug, fs, spans, source, top):
             r['source_functions'] += 1
             r['source_bytes'] += span
     kinds = {}
+    import layout
     for r in rows:
-        for key in ('ALL', 'conf: ' + r['conf'], 'kind: ' + r['kind'], 'lib: ' + (r['lib'] or '?')):
+        lib = r['lib'] or '?'
+        if lib == 'linkonce':          # a link-once copy is counted with the library that owns it (config/SLUS_213.76/inline_owners.txt)
+            lib = 'inline>' + layout.library_of(r['lo'])
+        for key in ('ALL', 'conf: ' + r['conf'], 'kind: ' + r['kind'], 'lib: ' + lib):
             k = kinds.setdefault(key, dict(tus=0, complete=0, partial=0, untouched=0, complete_bytes=0, source_bytes=0, bytes=0))
             k['tus'] += 1
             k['bytes'] += r['bytes']

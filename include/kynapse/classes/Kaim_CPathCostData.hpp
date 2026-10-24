@@ -34,7 +34,7 @@ struct Kaim_CPathCostData {
     int Function_002F4100(void * argument0);
     // 0x002F42B8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002F42B8();
-    // 0x00391120: UNVERIFIED signature (src/kynapse/class_info_391120.cpp).
+    // 0x00391120: UNVERIFIED signature (src/kynapse/inline/class_info_391120.cpp).
     void * Function_00391120();
 
     // Vtable 0x003EDE90; vptr field offset unknown; RTTI header.

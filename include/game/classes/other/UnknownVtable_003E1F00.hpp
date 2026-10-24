@@ -28,21 +28,21 @@ struct UnknownVtable_003E1F00 {
     int Function_002504D0();
     // 0x00384E70: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384E70();
-    // 0x00384EE8: UNVERIFIED signature (src/linkonce/linkonce_384ed8.c).
+    // 0x00384EE8: UNVERIFIED signature (src/apt/inline/linkonce_384ed8.c).
     int Function_00384EE8();
-    // 0x00384EF0: UNVERIFIED signature (src/linkonce/linkonce_384ef0.c).
+    // 0x00384EF0: UNVERIFIED signature (src/apt/inline/linkonce_384ef0.c).
     unsigned int Function_00384EF0();
     // 0x00384F08: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F40: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F40: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     unsigned int Function_00384F40();
-    // 0x00384F50: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F50: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     int Function_00384F50();
     // 0x003853B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_003853B8(unsigned int argument0, int * argument1);
     // 0x003853F8: UNVERIFIED signature (src/linkonce/linkonce_3853b8_3853f8.c).
     int Function_003853F8(int argument0, int * argument1, void * argument2);
-    // 0x003854B0: UNVERIFIED signature (src/linkonce/linkonce_3854b0.c).
+    // 0x003854B0: UNVERIFIED signature (src/apt/inline/linkonce_3854b0.c).
     int * Function_003854B0(int argument0);
 
     // Vtable 0x003E1F00; vptr field offset unknown; referenced zero RTTI header.

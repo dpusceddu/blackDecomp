@@ -48,11 +48,11 @@ struct UnknownVtable_003E2340 {
     void Function_00384E70();
     // 0x00384F08: UNVERIFIED signature (include/apt/apt_value.hpp).
     void Function_00384F08();
-    // 0x00384F50: UNVERIFIED signature (src/linkonce/linkonce_384f40.c).
+    // 0x00384F50: UNVERIFIED signature (src/apt/inline/linkonce_384f40.c).
     int Function_00384F50();
-    // 0x00384F68: UNVERIFIED signature (src/linkonce/linkonce_384f68.c).
+    // 0x00384F68: UNVERIFIED signature (src/apt/inline/linkonce_384f68.c).
     int Function_00384F68(int argument0);
-    // 0x00384F90: UNVERIFIED signature (src/linkonce/linkonce_384f90.c).
+    // 0x00384F90: UNVERIFIED signature (src/apt/inline/linkonce_384f90.c).
     int Function_00384F90();
 
     // Vtable 0x003E2340; vptr field offset unknown; referenced zero RTTI header.

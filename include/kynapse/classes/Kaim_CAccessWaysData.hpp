@@ -31,7 +31,7 @@ struct Kaim_CAccessWaysData {
     void Function_002FD800();
     // 0x002FD8C8: UNVERIFIED signature (src/kynapse/configure_2fd8c8.cpp).
     unsigned char Function_002FD8C8(void * argument0);
-    // 0x00392DA0: UNVERIFIED signature (src/kynapse/class_info_392da0.cpp).
+    // 0x00392DA0: UNVERIFIED signature (src/kynapse/inline/class_info_392da0.cpp).
     void * Function_00392DA0();
 
     // Vtable 0x003EF368; vptr field offset unknown; RTTI header.

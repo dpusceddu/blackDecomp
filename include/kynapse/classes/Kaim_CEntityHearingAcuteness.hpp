@@ -22,7 +22,7 @@ struct Kaim_CEntityHearingAcuteness {
     void * Function_002D8D98(void * argument0);
     // 0x0038A3C8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A3C8();
-    // 0x0038A400: UNVERIFIED signature (src/kynapse/parameter_classes_38a400.cpp).
+    // 0x0038A400: UNVERIFIED signature (src/kynapse/inline/parameter_classes_38a400.cpp).
     void * Function_0038A400();
 
     // Vtable 0x003E4CE0; vptr field offset unknown; RTTI header.

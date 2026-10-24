@@ -2124,555 +2124,555 @@ splits:
   - {src: src/game/tu_383948.c, range: [0x383948, 0x383978]}
   - {src: src/game/tu_383b00.c, range: [0x383b00, 0x383b20]}
   - {src: src/game/tu_383b20.c, range: [0x383b20, 0x383b50]}
-  - {src: src/linkonce/linkonce_383b50.c, range: [0x383b50, 0x383c70]}
-  - {src: src/linkonce/linkonce_383c70.c, range: [0x383c70, 0x383ca0]}
-  - {src: src/linkonce/linkonce_383ca0.c, range: [0x383ca0, 0x383d00], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
-  - {src: src/linkonce/linkonce_383d00.c, range: [0x383d00, 0x383d38]}
-  - {src: src/linkonce/linkonce_383d38.c, range: [0x383d38, 0x383d48]}
-  - {src: src/linkonce/linkonce_383d48.c, range: [0x383d48, 0x383d50]}
-  - {src: src/linkonce/linkonce_383d50.c, range: [0x383d50, 0x383d58]}
-  - {src: src/linkonce/linkonce_383d58.c, range: [0x383d58, 0x383da8]}
-  - {src: src/linkonce/linkonce_383da8.c, range: [0x383da8, 0x383db8]}
-  - {src: src/linkonce/linkonce_383db8.c, range: [0x383db8, 0x383e68]}
-  - {src: src/linkonce/linkonce_383e68.c, range: [0x383e68, 0x383e98]}
-  - {src: src/linkonce/linkonce_383e98.c, range: [0x383e98, 0x383ed8]}
-  - {src: src/linkonce/linkonce_383ed8.c, range: [0x383ed8, 0x383f10]}
-  - {src: src/linkonce/linkonce_383f10.c, range: [0x383f10, 0x383f20]}
-  - {src: src/linkonce/linkonce_383f20.c, range: [0x383f20, 0x383f58]}
-  - {src: src/linkonce/linkonce_383f58.c, range: [0x383f58, 0x383f68]}
-  - {src: src/linkonce/linkonce_383f68.c, range: [0x383f68, 0x383fb8]}
-  - {src: src/linkonce/linkonce_383fb8.c, range: [0x383fb8, 0x383fd0]}
-  - {src: src/linkonce/linkonce_383fd0.c, range: [0x383fd0, 0x383fd8]}
-  - {src: src/linkonce/linkonce_383fd8.c, range: [0x383fd8, 0x384000]}
-  - {src: src/linkonce/linkonce_384000.c, range: [0x384000, 0x384050]}
-  - {src: src/linkonce/linkonce_384050.c, range: [0x384050, 0x384070]}
-  - {src: src/linkonce/linkonce_384070.c, range: [0x384070, 0x3840c0]}
-  - {src: src/linkonce/linkonce_3840c0.c, range: [0x3840c0, 0x3840d0]}
-  - {src: src/linkonce/linkonce_3840d0.c, range: [0x3840d0, 0x384170]}
-  - {src: src/linkonce/linkonce_384170.c, range: [0x384170, 0x384180]}
-  - {src: src/linkonce/linkonce_384180.c, range: [0x384180, 0x3841d0]}
-  - {src: src/linkonce/linkonce_3841d0.c, range: [0x3841d0, 0x3841e0]}
-  - {src: src/linkonce/linkonce_3841e0.c, range: [0x3841e0, 0x384280]}
-  - {src: src/linkonce/linkonce_384280.c, range: [0x384280, 0x3842a0]}
-  - {src: src/linkonce/linkonce_3842a0.c, range: [0x3842a0, 0x384318]}
-  - {src: src/linkonce/linkonce_384318.c, range: [0x384318, 0x384360]}
-  - {src: src/linkonce/linkonce_384388.c, range: [0x384388, 0x3843b0]}
-  - {src: src/linkonce/linkonce_3843b0.c, range: [0x3843b0, 0x384418]}
-  - {src: src/linkonce/linkonce_384418.c, range: [0x384418, 0x384448]}
-  - {src: src/linkonce/linkonce_384630.c, range: [0x384630, 0x384660]}
-  - {src: src/linkonce/linkonce_384660.c, range: [0x384660, 0x384668]}
-  - {src: src/linkonce/linkonce_384700.c, range: [0x384700, 0x384708]}
-  - {src: src/linkonce/linkonce_384738.c, range: [0x384738, 0x384740]}
-  - {src: src/linkonce/linkonce_384cf0.c, range: [0x384cf0, 0x384d40]}
-  - {src: src/linkonce/linkonce_384d40.c, range: [0x384d40, 0x384d78]}
-  - {src: src/linkonce/linkonce_384d78.c, range: [0x384d78, 0x384d90]}
-  - {src: src/linkonce/linkonce_384d90.c, range: [0x384d90, 0x384da8]}
-  - {src: src/linkonce/linkonce_384da8.c, range: [0x384da8, 0x384e28]}
-  - {src: src/linkonce/graphics_apt_384e70.cpp, range: [0x384e70, 0x384ed8], flags: [-x, c++, -O2, -G0, -snas]}
-  - {src: src/linkonce/linkonce_384ed8.c, range: [0x384ed8, 0x384ef0]}
-  - {src: src/linkonce/linkonce_384ef0.c, range: [0x384ef0, 0x384ef8]}
-  - {src: src/linkonce/linkonce_384ef8.c, range: [0x384ef8, 0x384f00]}
-  - {src: src/linkonce/linkonce_384f00.c, range: [0x384f00, 0x384f08]}
-  - {src: src/linkonce/graphics_apt_384f08.cpp, range: [0x384f08, 0x384f40], flags: [-x, c++, -O2, -G0, -snas]}
-  - {src: src/linkonce/linkonce_384f40.c, range: [0x384f40, 0x384f68]}
-  - {src: src/linkonce/linkonce_384f68.c, range: [0x384f68, 0x384f90]}
-  - {src: src/linkonce/linkonce_384f90.c, range: [0x384f90, 0x385000]}
-  - {src: src/linkonce/linkonce_3850b0.c, range: [0x3850b0, 0x385148]}
-  - {src: src/linkonce/linkonce_3851a8.c, range: [0x3851a8, 0x385240]}
-  - {src: src/linkonce/linkonce_385240.c, range: [0x385240, 0x3852d8]}
-  - {src: src/linkonce/linkonce_385338.c, range: [0x385338, 0x3853b8]}
-  - {src: src/linkonce/linkonce_3853b8.c, range: [0x3853b8, 0x3854b0]}
-  - {src: src/linkonce/linkonce_3854b0.c, range: [0x3854b0, 0x385528]}
-  - {src: src/linkonce/graphics_apt_385528.cpp, range: [0x385528, 0x385548], flags: [-x, c++, -O2, -G0, -snas]}
-  - {src: src/linkonce/linkonce_385548.c, range: [0x385548, 0x385568]}
-  - {src: src/linkonce/linkonce_385568.c, range: [0x385568, 0x3855d8]}
-  - {src: src/linkonce/linkonce_3855d8.c, range: [0x3855d8, 0x385660]}
-  - {src: src/linkonce/linkonce_385660.c, range: [0x385660, 0x385b10], sections: false}
-  - {src: src/linkonce/linkonce_385660_385b10.c, range: [0x385b10, 0x385db0], sections: false}
-  - {src: src/linkonce/linkonce_385660_385db0.c, range: [0x385db0, 0x385e68], sections: false}
-  - {src: src/linkonce/linkonce_385660_385e68.c, range: [0x385e68, 0x386030], sections: false}
-  - {src: src/linkonce/linkonce_385660_386030.c, range: [0x386030, 0x386100], sections: false}
-  - {src: src/linkonce/linkonce_385660_386100.c, range: [0x386100, 0x386188], sections: false}
-  - {src: src/linkonce/linkonce_385660_386188.c, range: [0x386188, 0x3861f8], sections: false}
-  - {src: src/linkonce/linkonce_385660_3861f8.c, range: [0x3861f8, 0x386268], sections: false}
-  - {src: src/linkonce/linkonce_385660_386268.c, range: [0x386268, 0x386358], sections: false}
-  - {src: src/linkonce/linkonce_385660_386358.c, range: [0x386358, 0x3863c8], sections: false}
-  - {src: src/linkonce/linkonce_385660_3863c8.c, range: [0x3863c8, 0x3865c0], sections: false}
-  - {src: src/linkonce/linkonce_385660_3865c0.c, range: [0x3865c0, 0x386838], sections: false}
-  - {src: src/linkonce/linkonce_385660_386838.c, range: [0x386838, 0x3868f8], sections: false}
-  - {src: src/linkonce/linkonce_385660_3868f8.c, range: [0x3868f8, 0x386ec8], sections: false}
-  - {src: src/linkonce/linkonce_385660_386ec8.c, range: [0x386ec8, 0x387020], flags: [-Os, -G0], note: flags or language differ}
-  - {src: src/linkonce/linkonce_385660_387020.c, range: [0x387020, 0x387e08]}
-  - {src: src/linkonce/linkonce_387e08.c, range: [0x387e08, 0x387e50]}
-  - {src: src/linkonce/linkonce_387e50.c, range: [0x387e50, 0x388d10]}
-  - {src: src/linkonce/linkonce_388e18.c, range: [0x388e18, 0x388e30]}
-  - {src: src/linkonce/linkonce_388e30.c, range: [0x388e30, 0x388e88]}
-  - {src: src/linkonce/linkonce_388e88.c, range: [0x388e88, 0x388ec0]}
-  - {src: src/linkonce/linkonce_388ec0.c, range: [0x388ec0, 0x388ed0]}
-  - {src: src/linkonce/linkonce_388ef8.c, range: [0x388ef8, 0x388f48]}
-  - {src: src/linkonce/linkonce_388fe8.c, range: [0x388fe8, 0x389038]}
-  - {src: src/linkonce/linkonce_389038.c, range: [0x389038, 0x389060]}
-  - {src: src/linkonce/linkonce_389100.c, range: [0x389100, 0x389178]}
-  - {src: src/linkonce/linkonce_389178.c, range: [0x389178, 0x3891b0]}
-  - {src: src/linkonce/linkonce_3891b0.c, range: [0x3891b0, 0x389200]}
-  - {src: src/kynapse/misc4_389200.cpp, range: [0x389200, 0x389208], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389240.c, range: [0x389240, 0x389290]}
-  - {src: src/kynapse/class_info_389290.cpp, range: [0x389290, 0x3892a0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/linkonce/linkonce_3892a0.c, range: [0x3892a0, 0x3892e0]}
-  - {src: src/linkonce/linkonce_3892e0.c, range: [0x3892e0, 0x389318]}
-  - {src: src/linkonce/linkonce_389318.c, range: [0x389318, 0x389400]}
-  - {src: src/linkonce/linkonce_389400.c, range: [0x389400, 0x389450]}
-  - {src: src/linkonce/linkonce_389450.c, range: [0x389450, 0x389480]}
-  - {src: src/linkonce/linkonce_389480.c, range: [0x389480, 0x3894d0]}
-  - {src: src/kynapse/class_info_3894d0.cpp, range: [0x3894d0, 0x3894e0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/linkonce/linkonce_3894e0.c, range: [0x3894e0, 0x3894e8]}
-  - {src: src/linkonce/linkonce_3894e8.c, range: [0x3894e8, 0x3894f0]}
-  - {src: src/linkonce/linkonce_3894f0.c, range: [0x3894f0, 0x3894f8]}
-  - {src: src/linkonce/linkonce_3894f8.c, range: [0x3894f8, 0x389500]}
-  - {src: src/linkonce/linkonce_389500.c, range: [0x389500, 0x389550]}
-  - {src: src/kynapse/class_info_389550.cpp, range: [0x389550, 0x389560], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389560.c, range: [0x389560, 0x389568]}
-  - {src: src/linkonce/linkonce_389568.c, range: [0x389568, 0x3895c8]}
-  - {src: src/kynapse/class_info_3895c8.cpp, range: [0x3895c8, 0x3895d8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/linkonce/linkonce_3895d8.c, range: [0x3895d8, 0x3895e0]}
-  - {src: src/linkonce/linkonce_3895e0.c, range: [0x3895e0, 0x3895e8]}
-  - {src: src/linkonce/linkonce_3895e8.c, range: [0x3895e8, 0x3895f0]}
-  - {src: src/linkonce/linkonce_3895f0.c, range: [0x3895f0, 0x3895f8]}
-  - {src: src/linkonce/linkonce_3895f8.c, range: [0x3895f8, 0x389600]}
-  - {src: src/linkonce/linkonce_389600.c, range: [0x389600, 0x389608]}
-  - {src: src/linkonce/linkonce_389608.c, range: [0x389608, 0x389610]}
-  - {src: src/linkonce/linkonce_389610.c, range: [0x389610, 0x389618]}
-  - {src: src/linkonce/linkonce_389618.c, range: [0x389618, 0x389668]}
-  - {src: src/kynapse/class_info_389668.cpp, range: [0x389668, 0x389678], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389678.c, range: [0x389678, 0x3896a8]}
-  - {src: src/linkonce/linkonce_3896a8.c, range: [0x3896a8, 0x389720]}
-  - {src: src/linkonce/linkonce_389720.c, range: [0x389720, 0x389770]}
-  - {src: src/kynapse/class_info_389770.cpp, range: [0x389770, 0x389780], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389780.c, range: [0x389780, 0x389788]}
-  - {src: src/linkonce/linkonce_389788.c, range: [0x389788, 0x389790]}
-  - {src: src/linkonce/linkonce_389790.c, range: [0x389790, 0x389798]}
-  - {src: src/linkonce/linkonce_389798.c, range: [0x389798, 0x3897a0]}
-  - {src: src/linkonce/linkonce_3897a0.c, range: [0x3897a0, 0x3897a8]}
-  - {src: src/linkonce/linkonce_3897a8.c, range: [0x3897a8, 0x3897b0]}
-  - {src: src/linkonce/linkonce_3897b0.c, range: [0x3897b0, 0x3897b8]}
-  - {src: src/linkonce/linkonce_3897b8.c, range: [0x3897b8, 0x3897c0]}
-  - {src: src/linkonce/linkonce_3897c0.c, range: [0x3897c0, 0x3897c8]}
-  - {src: src/linkonce/linkonce_3897c8.c, range: [0x3897c8, 0x389818]}
-  - {src: src/kynapse/class_info_389818.cpp, range: [0x389818, 0x389828], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389828.c, range: [0x389828, 0x3898a8]}
-  - {src: src/linkonce/linkonce_3898a8.c, range: [0x3898a8, 0x3898e0]}
-  - {src: src/kynapse/parameter_classes_3898e0.cpp, range: [0x3898e0, 0x3898f0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_3898f0.c, range: [0x3898f0, 0x389908]}
-  - {src: src/linkonce/linkonce_389908.c, range: [0x389908, 0x389980]}
-  - {src: src/linkonce/linkonce_389980.c, range: [0x389980, 0x3899c0]}
-  - {src: src/linkonce/linkonce_3899c0.c, range: [0x3899c0, 0x3899f0]}
-  - {src: src/linkonce/linkonce_3899f0.c, range: [0x3899f0, 0x389a40]}
-  - {src: src/linkonce/linkonce_389a40.c, range: [0x389a40, 0x389a58]}
-  - {src: src/linkonce/linkonce_389a58.c, range: [0x389a58, 0x389a90]}
-  - {src: src/kynapse/parameter_classes_389a90.cpp, range: [0x389a90, 0x389aa0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389aa0.c, range: [0x389aa0, 0x389ab0]}
-  - {src: src/linkonce/linkonce_389ab0.c, range: [0x389ab0, 0x389ab8]}
-  - {src: src/linkonce/linkonce_389ab8.c, range: [0x389ab8, 0x389b08]}
-  - {src: src/linkonce/linkonce_389b08.c, range: [0x389b08, 0x389b20]}
-  - {src: src/linkonce/linkonce_389b20.c, range: [0x389b20, 0x389b58]}
-  - {src: src/kynapse/parameter_classes_389b58.cpp, range: [0x389b58, 0x389b68], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389b68.c, range: [0x389b68, 0x389b78]}
-  - {src: src/linkonce/linkonce_389b78.c, range: [0x389b78, 0x389b80]}
-  - {src: src/linkonce/linkonce_389b80.c, range: [0x389b80, 0x389bd0]}
-  - {src: src/linkonce/linkonce_389bd0.c, range: [0x389bd0, 0x389be8]}
-  - {src: src/linkonce/linkonce_389be8.c, range: [0x389be8, 0x389c20]}
-  - {src: src/kynapse/parameter_classes_389c20.cpp, range: [0x389c20, 0x389c30], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389c30.c, range: [0x389c30, 0x389c40]}
-  - {src: src/linkonce/linkonce_389c40.c, range: [0x389c40, 0x389c48]}
-  - {src: src/linkonce/linkonce_389c48.c, range: [0x389c48, 0x389c98]}
-  - {src: src/linkonce/linkonce_389c98.c, range: [0x389c98, 0x389cb0]}
-  - {src: src/linkonce/linkonce_389cb0.c, range: [0x389cb0, 0x389ce8]}
-  - {src: src/kynapse/parameter_classes_389ce8.cpp, range: [0x389ce8, 0x389cf8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389cf8.c, range: [0x389cf8, 0x389d20]}
-  - {src: src/linkonce/linkonce_389d20.c, range: [0x389d20, 0x389d30]}
-  - {src: src/linkonce/linkonce_389d30.c, range: [0x389d30, 0x389d38]}
-  - {src: src/linkonce/linkonce_389d38.c, range: [0x389d38, 0x389d40]}
-  - {src: src/linkonce/linkonce_389d40.c, range: [0x389d40, 0x389d90]}
-  - {src: src/linkonce/linkonce_389d90.c, range: [0x389d90, 0x389da8]}
-  - {src: src/linkonce/linkonce_389da8.c, range: [0x389da8, 0x389de0]}
-  - {src: src/kynapse/parameter_classes_389de0.cpp, range: [0x389de0, 0x389df0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389df0.c, range: [0x389df0, 0x389e00]}
-  - {src: src/linkonce/linkonce_389e00.c, range: [0x389e00, 0x389e08]}
-  - {src: src/linkonce/linkonce_389e08.c, range: [0x389e08, 0x389e58]}
-  - {src: src/linkonce/linkonce_389e58.c, range: [0x389e58, 0x389e70]}
-  - {src: src/linkonce/linkonce_389e70.c, range: [0x389e70, 0x389ea8]}
-  - {src: src/kynapse/parameter_classes_389ea8.cpp, range: [0x389ea8, 0x389eb8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389eb8.c, range: [0x389eb8, 0x389f38]}
-  - {src: src/linkonce/linkonce_389f38.c, range: [0x389f38, 0x389f70]}
-  - {src: src/kynapse/parameter_classes_389f70.cpp, range: [0x389f70, 0x389f80], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_389f80.c, range: [0x389f80, 0x389f90]}
-  - {src: src/linkonce/linkonce_389f90.c, range: [0x389f90, 0x38a008]}
-  - {src: src/linkonce/linkonce_38a008.c, range: [0x38a008, 0x38a048]}
-  - {src: src/linkonce/linkonce_38a048.c, range: [0x38a048, 0x38a078]}
-  - {src: src/linkonce/linkonce_38a078.c, range: [0x38a078, 0x38a0c8]}
-  - {src: src/linkonce/linkonce_38a0c8.c, range: [0x38a0c8, 0x38a0e0]}
-  - {src: src/linkonce/linkonce_38a0e0.c, range: [0x38a0e0, 0x38a118]}
-  - {src: src/kynapse/parameter_classes_38a118.cpp, range: [0x38a118, 0x38a128], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a128.c, range: [0x38a128, 0x38a148]}
-  - {src: src/linkonce/linkonce_38a148.c, range: [0x38a148, 0x38a170]}
-  - {src: src/linkonce/linkonce_38a170.c, range: [0x38a170, 0x38a1c0]}
-  - {src: src/linkonce/linkonce_38a1c0.c, range: [0x38a1c0, 0x38a1d8]}
-  - {src: src/linkonce/linkonce_38a1d8.c, range: [0x38a1d8, 0x38a210]}
-  - {src: src/kynapse/parameter_classes_38a210.cpp, range: [0x38a210, 0x38a220], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a220.c, range: [0x38a220, 0x38a240]}
-  - {src: src/linkonce/linkonce_38a240.c, range: [0x38a240, 0x38a268]}
-  - {src: src/linkonce/linkonce_38a268.c, range: [0x38a268, 0x38a2b8]}
-  - {src: src/linkonce/linkonce_38a2b8.c, range: [0x38a2b8, 0x38a2d0]}
-  - {src: src/linkonce/linkonce_38a2d0.c, range: [0x38a2d0, 0x38a308]}
-  - {src: src/kynapse/parameter_classes_38a308.cpp, range: [0x38a308, 0x38a318], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a318.c, range: [0x38a318, 0x38a338]}
-  - {src: src/linkonce/linkonce_38a338.c, range: [0x38a338, 0x38a360]}
-  - {src: src/linkonce/linkonce_38a360.c, range: [0x38a360, 0x38a3b0]}
-  - {src: src/linkonce/linkonce_38a3b0.c, range: [0x38a3b0, 0x38a3c8]}
-  - {src: src/linkonce/linkonce_38a3c8.c, range: [0x38a3c8, 0x38a400]}
-  - {src: src/kynapse/parameter_classes_38a400.cpp, range: [0x38a400, 0x38a410], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a410.c, range: [0x38a410, 0x38a438]}
-  - {src: src/linkonce/linkonce_38a438.c, range: [0x38a438, 0x38a440]}
-  - {src: src/linkonce/linkonce_38a440.c, range: [0x38a440, 0x38a490]}
-  - {src: src/linkonce/linkonce_38a4d0.c, range: [0x38a4d0, 0x38a508]}
-  - {src: src/kynapse/parameter_classes_38a508.cpp, range: [0x38a508, 0x38a518], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a518.c, range: [0x38a518, 0x38a520]}
-  - {src: src/linkonce/linkonce_38a520.c, range: [0x38a520, 0x38a528]}
-  - {src: src/linkonce/linkonce_38a528.c, range: [0x38a528, 0x38a578]}
-  - {src: src/linkonce/linkonce_38a578.c, range: [0x38a578, 0x38a590]}
-  - {src: src/linkonce/linkonce_38a590.c, range: [0x38a590, 0x38a5c8]}
-  - {src: src/kynapse/parameter_classes_38a5c8.cpp, range: [0x38a5c8, 0x38a5d8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a5d8.c, range: [0x38a5d8, 0x38a5f8]}
-  - {src: src/linkonce/linkonce_38a5f8.c, range: [0x38a5f8, 0x38a620]}
-  - {src: src/linkonce/linkonce_38a620.c, range: [0x38a620, 0x38a670]}
-  - {src: src/linkonce/linkonce_38a6b0.c, range: [0x38a6b0, 0x38a6e8]}
-  - {src: src/kynapse/parameter_classes_38a6e8.cpp, range: [0x38a6e8, 0x38a6f8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a6f8.c, range: [0x38a6f8, 0x38a700]}
-  - {src: src/linkonce/linkonce_38a700.c, range: [0x38a700, 0x38a708]}
-  - {src: src/linkonce/linkonce_38a708.c, range: [0x38a708, 0x38a758]}
-  - {src: src/linkonce/linkonce_38a790.c, range: [0x38a790, 0x38a7c8]}
-  - {src: src/kynapse/parameter_classes_38a7c8.cpp, range: [0x38a7c8, 0x38a7d8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a7d8.c, range: [0x38a7d8, 0x38a7e0]}
-  - {src: src/linkonce/linkonce_38a7e0.c, range: [0x38a7e0, 0x38a7e8]}
-  - {src: src/linkonce/linkonce_38a7e8.c, range: [0x38a7e8, 0x38a838]}
-  - {src: src/linkonce/linkonce_38a858.c, range: [0x38a858, 0x38a890]}
-  - {src: src/kynapse/parameter_classes_38a890.cpp, range: [0x38a890, 0x38a8a0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a8a0.c, range: [0x38a8a0, 0x38a8a8]}
-  - {src: src/linkonce/linkonce_38a8a8.c, range: [0x38a8a8, 0x38a8b0]}
-  - {src: src/linkonce/linkonce_38a8b0.c, range: [0x38a8b0, 0x38a900]}
-  - {src: src/linkonce/linkonce_38a900.c, range: [0x38a900, 0x38a918]}
-  - {src: src/linkonce/linkonce_38a918.c, range: [0x38a918, 0x38a950]}
-  - {src: src/kynapse/parameter_classes_38a950.cpp, range: [0x38a950, 0x38a960], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38a960.c, range: [0x38a960, 0x38a980]}
-  - {src: src/linkonce/linkonce_38a980.c, range: [0x38a980, 0x38a988]}
-  - {src: src/linkonce/linkonce_38a988.c, range: [0x38a988, 0x38a9d8]}
-  - {src: src/linkonce/linkonce_38aa20.c, range: [0x38aa20, 0x38aa58]}
-  - {src: src/kynapse/parameter_classes_38aa58.cpp, range: [0x38aa58, 0x38aa68], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38aa68.c, range: [0x38aa68, 0x38aa90]}
-  - {src: src/linkonce/linkonce_38aa90.c, range: [0x38aa90, 0x38aa98]}
-  - {src: src/linkonce/linkonce_38aa98.c, range: [0x38aa98, 0x38aaa0]}
-  - {src: src/linkonce/linkonce_38aaa0.c, range: [0x38aaa0, 0x38aaf0]}
-  - {src: src/linkonce/linkonce_38ab30.c, range: [0x38ab30, 0x38ab68]}
-  - {src: src/kynapse/parameter_classes_38ab68.cpp, range: [0x38ab68, 0x38ab78], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38ab78.c, range: [0x38ab78, 0x38ab80]}
-  - {src: src/linkonce/linkonce_38ab80.c, range: [0x38ab80, 0x38ab88]}
-  - {src: src/linkonce/linkonce_38ab88.c, range: [0x38ab88, 0x38abd8]}
-  - {src: src/linkonce/linkonce_38abd8.c, range: [0x38abd8, 0x38abf0]}
-  - {src: src/linkonce/linkonce_38abf0.c, range: [0x38abf0, 0x38ac28]}
-  - {src: src/kynapse/parameter_classes_38ac28.cpp, range: [0x38ac28, 0x38ac38], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38ac38.c, range: [0x38ac38, 0x38ac48]}
-  - {src: src/linkonce/linkonce_38ac48.c, range: [0x38ac48, 0x38ac50]}
-  - {src: src/linkonce/linkonce_38ac50.c, range: [0x38ac50, 0x38aca0]}
-  - {src: src/linkonce/linkonce_38aca0.c, range: [0x38aca0, 0x38acb8]}
-  - {src: src/linkonce/linkonce_38acb8.c, range: [0x38acb8, 0x38acf0]}
-  - {src: src/kynapse/parameter_classes_38acf0.cpp, range: [0x38acf0, 0x38ad00], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38ad00.c, range: [0x38ad00, 0x38ad10]}
-  - {src: src/linkonce/linkonce_38ad10.c, range: [0x38ad10, 0x38ad20]}
-  - {src: src/linkonce/linkonce_38ad20.c, range: [0x38ad20, 0x38ad28]}
-  - {src: src/linkonce/linkonce_38ad28.c, range: [0x38ad28, 0x38ad30]}
-  - {src: src/linkonce/linkonce_38ad30.c, range: [0x38ad30, 0x38ad80]}
-  - {src: src/linkonce/linkonce_38ad80.c, range: [0x38ad80, 0x38ad98]}
-  - {src: src/linkonce/linkonce_38ad98.c, range: [0x38ad98, 0x38add0]}
-  - {src: src/kynapse/parameter_classes_38add0.cpp, range: [0x38add0, 0x38ade0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38ade0.c, range: [0x38ade0, 0x38adf0]}
-  - {src: src/linkonce/linkonce_38adf0.c, range: [0x38adf0, 0x38ae00]}
-  - {src: src/linkonce/linkonce_38ae00.c, range: [0x38ae00, 0x38ae08]}
-  - {src: src/linkonce/linkonce_38ae08.c, range: [0x38ae08, 0x38ae10]}
-  - {src: src/linkonce/linkonce_38ae10.c, range: [0x38ae10, 0x38ae60]}
-  - {src: src/linkonce/linkonce_38ae60.c, range: [0x38ae60, 0x38ae78]}
-  - {src: src/linkonce/linkonce_38ae78.c, range: [0x38ae78, 0x38aeb0]}
-  - {src: src/kynapse/parameter_classes_38aeb0.cpp, range: [0x38aeb0, 0x38aec0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38aec0.c, range: [0x38aec0, 0x38aed8]}
-  - {src: src/kynapse/small_misc_38aed8.cpp, range: [0x38aed8, 0x38aee0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38aee0.c, range: [0x38aee0, 0x38af58]}
-  - {src: src/linkonce/linkonce_38af58.c, range: [0x38af58, 0x38afa8]}
-  - {src: src/kynapse/class_info_38afa8.cpp, range: [0x38afa8, 0x38afb8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38afb8.c, range: [0x38afb8, 0x38b008]}
-  - {src: src/linkonce/linkonce_38b008.c, range: [0x38b008, 0x38b048]}
-  - {src: src/linkonce/linkonce_38b048.c, range: [0x38b048, 0x38b078]}
-  - {src: src/linkonce/linkonce_38b078.c, range: [0x38b078, 0x38b098]}
-  - {src: src/linkonce/linkonce_38b098.c, range: [0x38b098, 0x38b0f0]}
-  - {src: src/linkonce/linkonce_38b0f0.c, range: [0x38b0f0, 0x38b140]}
-  - {src: src/kynapse/class_info_38b140.cpp, range: [0x38b140, 0x38b150], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38b1f0.c, range: [0x38b1f0, 0x38b268]}
-  - {src: src/linkonce/linkonce_38b268.c, range: [0x38b268, 0x38b2b8]}
-  - {src: src/kynapse/class_info_38b2b8.cpp, range: [0x38b2b8, 0x38b2c8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38b2c8.c, range: [0x38b2c8, 0x38b340]}
-  - {src: src/linkonce/linkonce_38b340.c, range: [0x38b340, 0x38b378]}
-  - {src: src/linkonce/linkonce_38b378.c, range: [0x38b378, 0x38b3f0]}
-  - {src: src/linkonce/linkonce_38b3f0.c, range: [0x38b3f0, 0x38b3f8]}
-  - {src: src/linkonce/linkonce_38b3f8.c, range: [0x38b3f8, 0x38b448]}
-  - {src: src/linkonce/linkonce_38b448.c, range: [0x38b448, 0x38b468]}
-  - {src: src/linkonce/linkonce_38b468.c, range: [0x38b468, 0x38b4c0]}
-  - {src: src/linkonce/linkonce_38b4c0.c, range: [0x38b4c0, 0x38b538]}
-  - {src: src/linkonce/linkonce_38b538.c, range: [0x38b538, 0x38b590]}
-  - {src: src/linkonce/linkonce_38b590.c, range: [0x38b590, 0x38b6b0]}
-  - {src: src/linkonce/linkonce_38b9d0.c, range: [0x38b9d0, 0x38ba10]}
-  - {src: src/linkonce/linkonce_38ba10.c, range: [0x38ba10, 0x38ba30]}
-  - {src: src/linkonce/linkonce_38ba30.c, range: [0x38ba30, 0x38ba88]}
-  - {src: src/linkonce/linkonce_38ba88.c, range: [0x38ba88, 0x38bad8]}
-  - {src: src/kynapse/small_misc_38bb28.cpp, range: [0x38bb28, 0x38bb30], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/linkonce/linkonce_38bb30.c, range: [0x38bb30, 0x38bb60]}
-  - {src: src/linkonce/linkonce_38bb60.c, range: [0x38bb60, 0x38bbb0]}
-  - {src: src/linkonce/linkonce_38bd40.c, range: [0x38bd40, 0x38bea8]}
-  - {src: src/linkonce/linkonce_38bea8.c, range: [0x38bea8, 0x38bfe8]}
-  - {src: src/linkonce/linkonce_38bfe8.c, range: [0x38bfe8, 0x38c020]}
-  - {src: src/linkonce/linkonce_38c020.c, range: [0x38c020, 0x38c098]}
-  - {src: src/linkonce/linkonce_38c318.c, range: [0x38c318, 0x38c390]}
-  - {src: src/linkonce/linkonce_38c3e0.c, range: [0x38c3e0, 0x38c438]}
-  - {src: src/linkonce/linkonce_38c578.c, range: [0x38c578, 0x38c618]}
-  - {src: src/linkonce/linkonce_38c7a8.c, range: [0x38c7a8, 0x38c7e8]}
-  - {src: src/linkonce/linkonce_38c7e8.c, range: [0x38c7e8, 0x38c820]}
-  - {src: src/linkonce/linkonce_38c820.c, range: [0x38c820, 0x38c898]}
-  - {src: src/linkonce/linkonce_38c898.c, range: [0x38c898, 0x38c910]}
-  - {src: src/linkonce/linkonce_38c910.c, range: [0x38c910, 0x38c928]}
-  - {src: src/linkonce/linkonce_38c928.c, range: [0x38c928, 0x38c9a0]}
-  - {src: src/linkonce/linkonce_38c9a0.c, range: [0x38c9a0, 0x38c9d8]}
-  - {src: src/linkonce/linkonce_38c9d8.c, range: [0x38c9d8, 0x38ca50]}
-  - {src: src/linkonce/linkonce_38cb28.c, range: [0x38cb28, 0x38cba0]}
-  - {src: src/linkonce/linkonce_38cba0.c, range: [0x38cba0, 0x38cba8]}
-  - {src: src/linkonce/linkonce_38cba8.c, range: [0x38cba8, 0x38cc20]}
-  - {src: src/linkonce/linkonce_38cc20.c, range: [0x38cc20, 0x38cc78]}
-  - {src: src/linkonce/linkonce_38cc78.c, range: [0x38cc78, 0x38ccb0]}
-  - {src: src/linkonce/linkonce_38ccb0.c, range: [0x38ccb0, 0x38cd28]}
-  - {src: src/linkonce/linkonce_38ce00.c, range: [0x38ce00, 0x38cf20]}
-  - {src: src/kynapse/linkonce_38d240.c, range: [0x38d240, 0x38d280]}
-  - {src: src/linkonce/linkonce_38d280.c, range: [0x38d280, 0x38d2d0]}
-  - {src: src/linkonce/linkonce_38d330.c, range: [0x38d330, 0x38d338]}
-  - {src: src/linkonce/linkonce_38d338.c, range: [0x38d338, 0x38d4a0]}
-  - {src: src/linkonce/linkonce_38d4a0.c, range: [0x38d4a0, 0x38d4c0]}
-  - {src: src/linkonce/linkonce_38d650.c, range: [0x38d650, 0x38d690]}
-  - {src: src/linkonce/linkonce_38d690.c, range: [0x38d690, 0x38d8a8]}
-  - {src: src/linkonce/linkonce_38d928.c, range: [0x38d928, 0x38d9d0]}
-  - {src: src/linkonce/linkonce_38d9d0.c, range: [0x38d9d0, 0x38d9e0]}
-  - {src: src/linkonce/linkonce_38d9e0.c, range: [0x38d9e0, 0x38db00]}
-  - {src: src/linkonce/linkonce_38db00.c, range: [0x38db00, 0x38db38]}
-  - {src: src/linkonce/linkonce_38db38.c, range: [0x38db38, 0x38dbb0]}
-  - {src: src/linkonce/linkonce_38dbb0.c, range: [0x38dbb0, 0x38dc58]}
-  - {src: src/linkonce/linkonce_38dc58.c, range: [0x38dc58, 0x38dcd0]}
-  - {src: src/linkonce/linkonce_38dcd0.c, range: [0x38dcd0, 0x38dd08]}
-  - {src: src/linkonce/linkonce_38dd08.c, range: [0x38dd08, 0x38dd80]}
-  - {src: src/linkonce/linkonce_38de58.c, range: [0x38de58, 0x38de90]}
-  - {src: src/linkonce/linkonce_38de90.c, range: [0x38de90, 0x38df08]}
-  - {src: src/linkonce/linkonce_38df08.c, range: [0x38df08, 0x38df40]}
-  - {src: src/linkonce/linkonce_38df40.c, range: [0x38df40, 0x38dfb8]}
-  - {src: src/linkonce/linkonce_38e090.c, range: [0x38e090, 0x38e108]}
-  - {src: src/linkonce/linkonce_38e298.c, range: [0x38e298, 0x38e2d0]}
-  - {src: src/linkonce/linkonce_38e2d0.c, range: [0x38e2d0, 0x38e3c0]}
-  - {src: src/linkonce/linkonce_38e3c0.c, range: [0x38e3c0, 0x38e438]}
-  - {src: src/linkonce/linkonce_38e5c8.c, range: [0x38e5c8, 0x38e5f8]}
-  - {src: src/linkonce/linkonce_38e5f8.c, range: [0x38e5f8, 0x38e638]}
-  - {src: src/linkonce/linkonce_38e638.c, range: [0x38e638, 0x38e668]}
-  - {src: src/linkonce/linkonce_38e668.c, range: [0x38e668, 0x38e688]}
-  - {src: src/linkonce/linkonce_38e688.c, range: [0x38e688, 0x38e6e0]}
-  - {src: src/linkonce/linkonce_38e6e0.c, range: [0x38e6e0, 0x38e730]}
-  - {src: src/linkonce/linkonce_38e730.c, range: [0x38e730, 0x38e768]}
-  - {src: src/linkonce/graph_cpointmapper.cpp, range: [0x38e768, 0x38e7b8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
-  - {src: src/kynapse/small_misc_38e7b8.cpp, range: [0x38e7b8, 0x38e7c0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38e7c0.c, range: [0x38e7c0, 0x38e810]}
-  - {src: src/linkonce/linkonce_38e810.c, range: [0x38e810, 0x38e840]}
-  - {src: src/linkonce/linkonce_38e840.c, range: [0x38e840, 0x38e890]}
-  - {src: src/linkonce/linkonce_38e890.c, range: [0x38e890, 0x38e8c0]}
-  - {src: src/linkonce/linkonce_38e8c0.c, range: [0x38e8c0, 0x38e910]}
-  - {src: src/linkonce/linkonce_38ec30.c, range: [0x38ec30, 0x38eca8]}
-  - {src: src/linkonce/linkonce_38eca8.c, range: [0x38eca8, 0x38ed20]}
-  - {src: src/linkonce/linkonce_38ed20.c, range: [0x38ed20, 0x38ed98]}
-  - {src: src/linkonce/linkonce_38ed98.c, range: [0x38ed98, 0x38ee08]}
-  - {src: src/linkonce/linkonce_38ee08.c, range: [0x38ee08, 0x38ee80]}
-  - {src: src/linkonce/linkonce_38ef20.c, range: [0x38ef20, 0x38ef98]}
-  - {src: src/kynapse/class_info_38ef98.cpp, range: [0x38ef98, 0x38efa8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/misc4_38efa8.cpp, range: [0x38efa8, 0x38efb0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/hidden_name_condition.cpp, range: [0x38efb0, 0x38f000], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/graph_meta_entries.cpp, range: [0x38f000, 0x3909a8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
-  - {src: src/linkonce/linkonce_38f190.c, range: [0x38f190, 0x38f1d0]}
-  - {src: src/linkonce/linkonce_38f1d0.c, range: [0x38f1d0, 0x38f200]}
-  - {src: src/linkonce/linkonce_38f200.c, range: [0x38f200, 0x38f278]}
-  - {src: src/linkonce/linkonce_38f278.c, range: [0x38f278, 0x38f2a8]}
-  - {src: src/linkonce/linkonce_38f2a8.c, range: [0x38f2a8, 0x38f2b0]}
-  - {src: src/linkonce/linkonce_38f330.c, range: [0x38f330, 0x38f3a8]}
-  - {src: src/linkonce/linkonce_38f3a8.c, range: [0x38f3a8, 0x38f3e0]}
-  - {src: src/linkonce/linkonce_38f3e0.c, range: [0x38f3e0, 0x38f458]}
-  - {src: src/linkonce/linkonce_38f458.c, range: [0x38f458, 0x38f490]}
-  - {src: src/linkonce/linkonce_38f490.c, range: [0x38f490, 0x38f508]}
-  - {src: src/linkonce/linkonce_38f5e0.c, range: [0x38f5e0, 0x38f618]}
-  - {src: src/linkonce/linkonce_38f618.c, range: [0x38f618, 0x38f668]}
-  - {src: src/linkonce/linkonce_38ff70.c, range: [0x38ff70, 0x38ffc0]}
-  - {src: src/kynapse/class_info_38ffc0.cpp, range: [0x38ffc0, 0x38ffd0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_38ffd0.c, range: [0x38ffd0, 0x38fff8]}
-  - {src: src/linkonce/linkonce_38fff8.c, range: [0x38fff8, 0x390038]}
-  - {src: src/kynapse/leaves2_390038.cpp, range: [0x390038, 0x390060], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_390060.c, range: [0x390060, 0x3900d8]}
-  - {src: src/linkonce/linkonce_3900d8.c, range: [0x3900d8, 0x390118]}
-  - {src: src/linkonce/linkonce_390118.c, range: [0x390118, 0x390148]}
-  - {src: src/linkonce/linkonce_390148.c, range: [0x390148, 0x3901c0]}
-  - {src: src/linkonce/linkonce_3901c0.c, range: [0x3901c0, 0x3901f8]}
-  - {src: src/linkonce/linkonce_3901f8.c, range: [0x3901f8, 0x390260]}
-  - {src: src/kynapse/class_info_390260.cpp, range: [0x390260, 0x390270], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_390270.c, range: [0x390270, 0x3902a8]}
-  - {src: src/linkonce/linkonce_3902a8.c, range: [0x3902a8, 0x3902f8]}
-  - {src: src/kynapse/class_info_3902f8.cpp, range: [0x3902f8, 0x390308], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_390308.c, range: [0x390308, 0x390318]}
-  - {src: src/linkonce/linkonce_390318.c, range: [0x390318, 0x390350]}
-  - {src: src/linkonce/linkonce_390350.c, range: [0x390350, 0x3903a0]}
-  - {src: src/kynapse/class_info_3903a0.cpp, range: [0x3903a0, 0x3903b0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_3903b0.c, range: [0x3903b0, 0x3903b8]}
-  - {src: src/linkonce/linkonce_3903b8.c, range: [0x3903b8, 0x3903f0]}
-  - {src: src/linkonce/linkonce_3903f0.c, range: [0x3903f0, 0x390440]}
-  - {src: src/kynapse/class_info_390440.cpp, range: [0x390440, 0x390450], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_390450.c, range: [0x390450, 0x390460]}
-  - {src: src/linkonce/linkonce_390460.c, range: [0x390460, 0x390498]}
-  - {src: src/linkonce/linkonce_390498.c, range: [0x390498, 0x390548]}
-  - {src: src/kynapse/class_info_390548.cpp, range: [0x390548, 0x390558], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_390558.c, range: [0x390558, 0x3905a8]}
-  - {src: src/linkonce/linkonce_3905a8.c, range: [0x3905a8, 0x3905e0]}
-  - {src: src/linkonce/linkonce_3905e0.c, range: [0x3905e0, 0x390630]}
-  - {src: src/kynapse/class_info_390630.cpp, range: [0x390630, 0x390640], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_3906c0.c, range: [0x3906c0, 0x3906f8]}
-  - {src: src/linkonce/linkonce_3906f8.c, range: [0x3906f8, 0x390748]}
-  - {src: src/kynapse/class_info_390748.cpp, range: [0x390748, 0x390758], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tiny3_390758.cpp, range: [0x390758, 0x390768], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_390768.c, range: [0x390768, 0x3907a0]}
-  - {src: src/linkonce/linkonce_3907a0.c, range: [0x3907a0, 0x390808]}
-  - {src: src/kynapse/class_info_390808.cpp, range: [0x390808, 0x390818], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_3909a8.c, range: [0x3909a8, 0x390a68]}
-  - {src: src/linkonce/linkonce_390a68.c, range: [0x390a68, 0x390ae0]}
-  - {src: src/linkonce/linkonce_390ae0.c, range: [0x390ae0, 0x390b58]}
-  - {src: src/linkonce/linkonce_390b58.c, range: [0x390b58, 0x390ba8]}
-  - {src: src/linkonce/linkonce_390ba8.c, range: [0x390ba8, 0x390bc8]}
-  - {src: src/linkonce/linkonce_390bc8.c, range: [0x390bc8, 0x390c20]}
-  - {src: src/linkonce/linkonce_390c20.c, range: [0x390c20, 0x390c98]}
-  - {src: src/linkonce/linkonce_390c98.c, range: [0x390c98, 0x390ce8]}
-  - {src: src/kynapse/class_info_390ce8.cpp, range: [0x390ce8, 0x390cf8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_390d98.c, range: [0x390d98, 0x390dd0]}
-  - {src: src/linkonce/linkonce_390dd0.c, range: [0x390dd0, 0x390e20]}
-  - {src: src/kynapse/class_info_390e20.cpp, range: [0x390e20, 0x390e30], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_390e30.c, range: [0x390e30, 0x390e48]}
-  - {src: src/linkonce/linkonce_390e48.c, range: [0x390e48, 0x390ec0]}
-  - {src: src/linkonce/linkonce_390ec0.c, range: [0x390ec0, 0x390ef0]}
-  - {src: src/linkonce/linkonce_390ef0.c, range: [0x390ef0, 0x390f40]}
-  - {src: src/linkonce/linkonce_3910d0.c, range: [0x3910d0, 0x391120]}
-  - {src: src/kynapse/class_info_391120.cpp, range: [0x391120, 0x391130], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_391180.c, range: [0x391180, 0x3911b0]}
-  - {src: src/linkonce/linkonce_3911b0.c, range: [0x3911b0, 0x3911e8]}
-  - {src: src/linkonce/linkonce_3911e8.c, range: [0x3911e8, 0x391238]}
-  - {src: src/linkonce/linkonce_391238.c, range: [0x391238, 0x391288]}
-  - {src: src/linkonce/linkonce_3912b8.c, range: [0x3912b8, 0x3912c0]}
-  - {src: src/linkonce/linkonce_391358.c, range: [0x391358, 0x391380]}
-  - {src: src/linkonce/linkonce_3913b0.c, range: [0x3913b0, 0x3913e8]}
-  - {src: src/linkonce/linkonce_3913e8.c, range: [0x3913e8, 0x391460]}
-  - {src: src/linkonce/linkonce_391460.c, range: [0x391460, 0x3914b0]}
-  - {src: src/kynapse/class_info_3914b0.cpp, range: [0x3914b0, 0x3914c0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_3914c0.c, range: [0x3914c0, 0x391538]}
-  - {src: src/linkonce/linkonce_391538.c, range: [0x391538, 0x391548], flags: [-O1, -G0, -snas]}
-  - {src: src/linkonce/linkonce_391548.c, range: [0x391548, 0x3915c0]}
-  - {src: src/linkonce/linkonce_3915c0.c, range: [0x3915c0, 0x391628]}
-  - {src: src/linkonce/linkonce_391628.c, range: [0x391628, 0x391658]}
-  - {src: src/linkonce/linkonce_391658.c, range: [0x391658, 0x3916f0]}
-  - {src: src/linkonce/linkonce_3916f0.c, range: [0x3916f0, 0x391730]}
-  - {src: src/linkonce/linkonce_391730.c, range: [0x391730, 0x391768]}
-  - {src: src/linkonce/linkonce_391768.c, range: [0x391768, 0x3917b8]}
-  - {src: src/linkonce/linkonce_391d88.c, range: [0x391d88, 0x391dd8]}
-  - {src: src/linkonce/linkonce_391dd8.c, range: [0x391dd8, 0x391e10]}
-  - {src: src/linkonce/linkonce_391e10.c, range: [0x391e10, 0x391e20]}
-  - {src: src/linkonce/linkonce_391e20.c, range: [0x391e20, 0x391e58]}
-  - {src: src/linkonce/linkonce_391e58.c, range: [0x391e58, 0x391f00]}
-  - {src: src/kynapse/nearest_node_3921a0.cpp, range: [0x3921a0, 0x3921b8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_3921b8.c, range: [0x3921b8, 0x3921f0]}
-  - {src: src/linkonce/linkonce_3921f0.c, range: [0x3921f0, 0x392298]}
-  - {src: src/linkonce/linkonce_392550.c, range: [0x392550, 0x392568]}
-  - {src: src/linkonce/linkonce_392568.c, range: [0x392568, 0x3925a0]}
-  - {src: src/linkonce/linkonce_3925a0.c, range: [0x3925a0, 0x392648]}
-  - {src: src/kynapse/nearest_node_392a50.cpp, range: [0x392a50, 0x392a68], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_392a68.c, range: [0x392a68, 0x392aa0]}
-  - {src: src/linkonce/linkonce_392aa0.c, range: [0x392aa0, 0x392b48]}
-  - {src: src/linkonce/linkonce_392d38.c, range: [0x392d38, 0x392d50]}
-  - {src: src/linkonce/linkonce_392d50.c, range: [0x392d50, 0x392da0]}
-  - {src: src/kynapse/class_info_392da0.cpp, range: [0x392da0, 0x392db0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_392db0.c, range: [0x392db0, 0x392dc0]}
-  - {src: src/linkonce/linkonce_392dc0.c, range: [0x392dc0, 0x392df8]}
-  - {src: src/linkonce/linkonce_392df8.c, range: [0x392df8, 0x392e50]}
-  - {src: src/linkonce/linkonce_393200.c, range: [0x393200, 0x393288]}
-  - {src: src/kynapse/owned_arrays_393288.cpp, range: [0x393288, 0x393320], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/grid_393320.cpp, range: [0x393320, 0x393470], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_393548.c, range: [0x393548, 0x393598]}
-  - {src: src/kynapse/class_info_393598.cpp, range: [0x393598, 0x3935a8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_3935a8.c, range: [0x3935a8, 0x393810]}
-  - {src: src/linkonce/linkonce_393810.c, range: [0x393810, 0x393828], flags: [-O1, -G0, -snas]}
-  - {src: src/linkonce/linkonce_393828.c, range: [0x393828, 0x393860]}
-  - {src: src/linkonce/linkonce_393860.c, range: [0x393860, 0x3938d8]}
-  - {src: src/linkonce/linkonce_3938d8.c, range: [0x3938d8, 0x393928]}
-  - {src: src/kynapse/class_info_393928.cpp, range: [0x393928, 0x393938], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_393938.c, range: [0x393938, 0x393940]}
-  - {src: src/kynapse/misc6_393940.cpp, range: [0x393940, 0x393950], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_393950.c, range: [0x393950, 0x393978]}
-  - {src: src/linkonce/linkonce_393cb8.c, range: [0x393cb8, 0x393d08]}
-  - {src: src/linkonce/linkonce_393d08.c, range: [0x393d08, 0x393d58]}
-  - {src: src/linkonce/linkonce_393d58.c, range: [0x393d58, 0x393da8]}
-  - {src: src/linkonce/linkonce_393da8.c, range: [0x393da8, 0x393df8]}
-  - {src: src/linkonce/linkonce_393df8.c, range: [0x393df8, 0x393ed8]}
-  - {src: src/linkonce/linkonce_393ed8.c, range: [0x393ed8, 0x393f78]}
-  - {src: src/kynapse/linkonce_393f78.c, range: [0x393f78, 0x393fc8]}
-  - {src: src/linkonce/linkonce_393fc8.c, range: [0x393fc8, 0x393ff8]}
-  - {src: src/linkonce/linkonce_393ff8.c, range: [0x393ff8, 0x394070]}
-  - {src: src/linkonce/linkonce_394070.c, range: [0x394070, 0x3940e0]}
-  - {src: src/linkonce/linkonce_3940e0.c, range: [0x3940e0, 0x3941d0]}
-  - {src: src/linkonce/linkonce_3941d0.c, range: [0x3941d0, 0x394220]}
-  - {src: src/kynapse/class_info_394220.cpp, range: [0x394220, 0x394230], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_394230.c, range: [0x394230, 0x394268]}
-  - {src: src/linkonce/linkonce_394268.c, range: [0x394268, 0x394270]}
-  - {src: src/linkonce/linkonce_394270.c, range: [0x394270, 0x3942b8], flags: [-O1, -G0, -snas]}
-  - {src: src/linkonce/linkonce_3942b8.c, range: [0x3942b8, 0x394330]}
-  - {src: src/linkonce/linkonce_394370.c, range: [0x394370, 0x3943e8]}
-  - {src: src/linkonce/linkonce_3944c0.c, range: [0x3944c0, 0x3944f8]}
-  - {src: src/linkonce/linkonce_3944f8.c, range: [0x3944f8, 0x394570]}
-  - {src: src/linkonce/linkonce_394570.c, range: [0x394570, 0x3945a8]}
-  - {src: src/kynapse/linkonce_3945a8.c, range: [0x3945a8, 0x394620]}
-  - {src: src/linkonce/linkonce_394620.c, range: [0x394620, 0x394698]}
-  - {src: src/linkonce/linkonce_394698.c, range: [0x394698, 0x394710]}
-  - {src: src/linkonce/linkonce_394750.c, range: [0x394750, 0x3947c8]}
-  - {src: src/linkonce/linkonce_394920.c, range: [0x394920, 0x394950]}
-  - {src: src/linkonce/linkonce_394950.c, range: [0x394950, 0x3949a0]}
-  - {src: src/linkonce/linkonce_394b30.c, range: [0x394b30, 0x394b80]}
-  - {src: src/linkonce/linkonce_394bc0.c, range: [0x394bc0, 0x394c10]}
-  - {src: src/kynapse/sound_pool_394c10.cpp, range: [0x394c10, 0x394c20], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_394c60.c, range: [0x394c60, 0x394c68]}
-  - {src: src/linkonce/linkonce_394c68.c, range: [0x394c68, 0x394ce0]}
-  - {src: src/linkonce/linkonce_394ce0.c, range: [0x394ce0, 0x394d18]}
-  - {src: src/linkonce/linkonce_394d18.c, range: [0x394d18, 0x394d68]}
-  - {src: src/kynapse/class_info_394d68.cpp, range: [0x394d68, 0x394d78], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/linkonce/linkonce_394d78.c, range: [0x394d78, 0x394dd0]}
-  - {src: src/linkonce/linkonce_394dd0.c, range: [0x394dd0, 0x394e20]}
-  - {src: src/linkonce/linkonce_394e58.c, range: [0x394e58, 0x394e90]}
-  - {src: src/linkonce/linkonce_3950f8.c, range: [0x3950f8, 0x395130]}
-  - {src: src/linkonce/linkonce_3953f0.c, range: [0x3953f0, 0x395428]}
-  - {src: src/linkonce/linkonce_3956e8.c, range: [0x3956e8, 0x395720]}
-  - {src: src/linkonce/linkonce_395890.c, range: [0x395890, 0x395958]}
-  - {src: src/linkonce/linkonce_395958.c, range: [0x395958, 0x3959e8]}
-  - {src: src/linkonce/linkonce_395c18.c, range: [0x395c18, 0x395c48]}
-  - {src: src/linkonce/linkonce_395d10.c, range: [0x395d10, 0x395dd8]}
-  - {src: src/linkonce/linkonce_395dd8.c, range: [0x395dd8, 0x395e68]}
-  - {src: src/linkonce/linkonce_396098.c, range: [0x396098, 0x3960c8]}
-  - {src: src/linkonce/linkonce_396190.c, range: [0x396190, 0x396258]}
-  - {src: src/linkonce/linkonce_396258.c, range: [0x396258, 0x3962e8]}
-  - {src: src/linkonce/linkonce_396518.c, range: [0x396518, 0x396548]}
-  - {src: src/linkonce/linkonce_396e78.c, range: [0x396e78, 0x396ec8]}
+  - {src: src/game/inline/linkonce_383b50.c, range: [0x383b50, 0x383c70]}
+  - {src: src/kynapse/inline/linkonce_383c70.c, range: [0x383c70, 0x383ca0]}
+  - {src: src/game/inline/linkonce_383ca0.c, range: [0x383ca0, 0x383d00], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
+  - {src: src/game/inline/linkonce_383d00.c, range: [0x383d00, 0x383d38]}
+  - {src: src/game/inline/linkonce_383d38.c, range: [0x383d38, 0x383d48]}
+  - {src: src/game/inline/linkonce_383d48.c, range: [0x383d48, 0x383d50]}
+  - {src: src/game/inline/linkonce_383d50.c, range: [0x383d50, 0x383d58]}
+  - {src: src/game/inline/linkonce_383d58.c, range: [0x383d58, 0x383da8]}
+  - {src: src/game/inline/linkonce_383da8.c, range: [0x383da8, 0x383db8]}
+  - {src: src/game/inline/linkonce_383db8.c, range: [0x383db8, 0x383e68]}
+  - {src: src/game/inline/linkonce_383e68.c, range: [0x383e68, 0x383e98]}
+  - {src: src/game/inline/linkonce_383e98.c, range: [0x383e98, 0x383ed8]}
+  - {src: src/game/inline/linkonce_383ed8.c, range: [0x383ed8, 0x383f10]}
+  - {src: src/game/inline/linkonce_383f10.c, range: [0x383f10, 0x383f20]}
+  - {src: src/game/inline/linkonce_383f20.c, range: [0x383f20, 0x383f58]}
+  - {src: src/game/inline/linkonce_383f58.c, range: [0x383f58, 0x383f68]}
+  - {src: src/game/inline/linkonce_383f68.c, range: [0x383f68, 0x383fb8]}
+  - {src: src/game/inline/linkonce_383fb8.c, range: [0x383fb8, 0x383fd0]}
+  - {src: src/game/inline/linkonce_383fd0.c, range: [0x383fd0, 0x383fd8]}
+  - {src: src/game/inline/linkonce_383fd8.c, range: [0x383fd8, 0x384000]}
+  - {src: src/game/inline/linkonce_384000.c, range: [0x384000, 0x384050]}
+  - {src: src/game/inline/linkonce_384050.c, range: [0x384050, 0x384070]}
+  - {src: src/game/inline/linkonce_384070.c, range: [0x384070, 0x3840c0]}
+  - {src: src/game/inline/linkonce_3840c0.c, range: [0x3840c0, 0x3840d0]}
+  - {src: src/game/inline/linkonce_3840d0.c, range: [0x3840d0, 0x384170]}
+  - {src: src/game/inline/linkonce_384170.c, range: [0x384170, 0x384180]}
+  - {src: src/game/inline/linkonce_384180.c, range: [0x384180, 0x3841d0]}
+  - {src: src/game/inline/linkonce_3841d0.c, range: [0x3841d0, 0x3841e0]}
+  - {src: src/game/inline/linkonce_3841e0.c, range: [0x3841e0, 0x384280]}
+  - {src: src/game/inline/linkonce_384280.c, range: [0x384280, 0x3842a0]}
+  - {src: src/game/inline/linkonce_3842a0.c, range: [0x3842a0, 0x384318]}
+  - {src: src/game/inline/linkonce_384318.c, range: [0x384318, 0x384360]}
+  - {src: src/game/inline/linkonce_384388.c, range: [0x384388, 0x3843b0]}
+  - {src: src/game/inline/linkonce_3843b0.c, range: [0x3843b0, 0x384418]}
+  - {src: src/game/inline/linkonce_384418.c, range: [0x384418, 0x384448]}
+  - {src: src/game/inline/linkonce_384630.c, range: [0x384630, 0x384660]}
+  - {src: src/game/inline/linkonce_384660.c, range: [0x384660, 0x384668]}
+  - {src: src/game/inline/linkonce_384700.c, range: [0x384700, 0x384708]}
+  - {src: src/game/inline/linkonce_384738.c, range: [0x384738, 0x384740]}
+  - {src: src/game/inline/linkonce_384cf0.c, range: [0x384cf0, 0x384d40]}
+  - {src: src/game/inline/linkonce_384d40.c, range: [0x384d40, 0x384d78]}
+  - {src: src/game/inline/linkonce_384d78.c, range: [0x384d78, 0x384d90]}
+  - {src: src/game/inline/linkonce_384d90.c, range: [0x384d90, 0x384da8]}
+  - {src: src/game/inline/linkonce_384da8.c, range: [0x384da8, 0x384e28]}
+  - {src: src/apt/inline/graphics_apt_384e70.cpp, range: [0x384e70, 0x384ed8], flags: [-x, c++, -O2, -G0, -snas]}
+  - {src: src/apt/inline/linkonce_384ed8.c, range: [0x384ed8, 0x384ef0]}
+  - {src: src/apt/inline/linkonce_384ef0.c, range: [0x384ef0, 0x384ef8]}
+  - {src: src/apt/inline/linkonce_384ef8.c, range: [0x384ef8, 0x384f00]}
+  - {src: src/apt/inline/linkonce_384f00.c, range: [0x384f00, 0x384f08]}
+  - {src: src/apt/inline/graphics_apt_384f08.cpp, range: [0x384f08, 0x384f40], flags: [-x, c++, -O2, -G0, -snas]}
+  - {src: src/apt/inline/linkonce_384f40.c, range: [0x384f40, 0x384f68]}
+  - {src: src/apt/inline/linkonce_384f68.c, range: [0x384f68, 0x384f90]}
+  - {src: src/apt/inline/linkonce_384f90.c, range: [0x384f90, 0x385000]}
+  - {src: src/apt/inline/linkonce_3850b0.c, range: [0x3850b0, 0x385148]}
+  - {src: src/apt/inline/linkonce_3851a8.c, range: [0x3851a8, 0x385240]}
+  - {src: src/apt/inline/linkonce_385240.c, range: [0x385240, 0x3852d8]}
+  - {src: src/apt/inline/linkonce_385338.c, range: [0x385338, 0x3853b8]}
+  - {src: src/apt/inline/linkonce_3853b8.c, range: [0x3853b8, 0x3854b0]}
+  - {src: src/apt/inline/linkonce_3854b0.c, range: [0x3854b0, 0x385528]}
+  - {src: src/apt/inline/graphics_apt_385528.cpp, range: [0x385528, 0x385548], flags: [-x, c++, -O2, -G0, -snas]}
+  - {src: src/apt/inline/linkonce_385548.c, range: [0x385548, 0x385568]}
+  - {src: src/apt/inline/linkonce_385568.c, range: [0x385568, 0x3855d8]}
+  - {src: src/apt/inline/linkonce_3855d8.c, range: [0x3855d8, 0x385660]}
+  - {src: src/apt/inline/linkonce_385660.c, range: [0x385660, 0x385b10], sections: false}
+  - {src: src/apt/inline/linkonce_385660_385b10.c, range: [0x385b10, 0x385db0], sections: false}
+  - {src: src/apt/inline/linkonce_385660_385db0.c, range: [0x385db0, 0x385e68], sections: false}
+  - {src: src/apt/inline/linkonce_385660_385e68.c, range: [0x385e68, 0x386030], sections: false}
+  - {src: src/apt/inline/linkonce_385660_386030.c, range: [0x386030, 0x386100], sections: false}
+  - {src: src/apt/inline/linkonce_385660_386100.c, range: [0x386100, 0x386188], sections: false}
+  - {src: src/apt/inline/linkonce_385660_386188.c, range: [0x386188, 0x3861f8], sections: false}
+  - {src: src/apt/inline/linkonce_385660_3861f8.c, range: [0x3861f8, 0x386268], sections: false}
+  - {src: src/apt/inline/linkonce_385660_386268.c, range: [0x386268, 0x386358], sections: false}
+  - {src: src/apt/inline/linkonce_385660_386358.c, range: [0x386358, 0x3863c8], sections: false}
+  - {src: src/apt/inline/linkonce_385660_3863c8.c, range: [0x3863c8, 0x3865c0], sections: false}
+  - {src: src/apt/inline/linkonce_385660_3865c0.c, range: [0x3865c0, 0x386838], sections: false}
+  - {src: src/apt/inline/linkonce_385660_386838.c, range: [0x386838, 0x3868f8], sections: false}
+  - {src: src/apt/inline/linkonce_385660_3868f8.c, range: [0x3868f8, 0x386ec8], sections: false}
+  - {src: src/apt/inline/linkonce_385660_386ec8.c, range: [0x386ec8, 0x387020], flags: [-Os, -G0], note: flags or language differ}
+  - {src: src/apt/inline/linkonce_385660_387020.c, range: [0x387020, 0x387e08]}
+  - {src: src/apt/inline/linkonce_387e08.c, range: [0x387e08, 0x387e50]}
+  - {src: src/game/inline/linkonce_387e50.c, range: [0x387e50, 0x388d10]}
+  - {src: src/game/inline/linkonce_388e18.c, range: [0x388e18, 0x388e30]}
+  - {src: src/game/inline/linkonce_388e30.c, range: [0x388e30, 0x388e88]}
+  - {src: src/game/inline/linkonce_388e88.c, range: [0x388e88, 0x388ec0]}
+  - {src: src/game/inline/linkonce_388ec0.c, range: [0x388ec0, 0x388ed0]}
+  - {src: src/game/inline/linkonce_388ef8.c, range: [0x388ef8, 0x388f48]}
+  - {src: src/game/inline/linkonce_388fe8.c, range: [0x388fe8, 0x389038]}
+  - {src: src/game/inline/linkonce_389038.c, range: [0x389038, 0x389060]}
+  - {src: src/kynapse/inline/linkonce_389100.c, range: [0x389100, 0x389178]}
+  - {src: src/kynapse/inline/linkonce_389178.c, range: [0x389178, 0x3891b0]}
+  - {src: src/kynapse/inline/linkonce_3891b0.c, range: [0x3891b0, 0x389200]}
+  - {src: src/kynapse/inline/misc4_389200.cpp, range: [0x389200, 0x389208], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389240.c, range: [0x389240, 0x389290]}
+  - {src: src/kynapse/inline/class_info_389290.cpp, range: [0x389290, 0x3892a0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/inline/linkonce_3892a0.c, range: [0x3892a0, 0x3892e0]}
+  - {src: src/kynapse/inline/linkonce_3892e0.c, range: [0x3892e0, 0x389318]}
+  - {src: src/kynapse/inline/linkonce_389318.c, range: [0x389318, 0x389400]}
+  - {src: src/kynapse/inline/linkonce_389400.c, range: [0x389400, 0x389450]}
+  - {src: src/kynapse/inline/linkonce_389450.c, range: [0x389450, 0x389480]}
+  - {src: src/kynapse/inline/linkonce_389480.c, range: [0x389480, 0x3894d0]}
+  - {src: src/kynapse/inline/class_info_3894d0.cpp, range: [0x3894d0, 0x3894e0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/inline/linkonce_3894e0.c, range: [0x3894e0, 0x3894e8]}
+  - {src: src/kynapse/inline/linkonce_3894e8.c, range: [0x3894e8, 0x3894f0]}
+  - {src: src/kynapse/inline/linkonce_3894f0.c, range: [0x3894f0, 0x3894f8]}
+  - {src: src/kynapse/inline/linkonce_3894f8.c, range: [0x3894f8, 0x389500]}
+  - {src: src/kynapse/inline/linkonce_389500.c, range: [0x389500, 0x389550]}
+  - {src: src/kynapse/inline/class_info_389550.cpp, range: [0x389550, 0x389560], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389560.c, range: [0x389560, 0x389568]}
+  - {src: src/kynapse/inline/linkonce_389568.c, range: [0x389568, 0x3895c8]}
+  - {src: src/kynapse/inline/class_info_3895c8.cpp, range: [0x3895c8, 0x3895d8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/inline/linkonce_3895d8.c, range: [0x3895d8, 0x3895e0]}
+  - {src: src/kynapse/inline/linkonce_3895e0.c, range: [0x3895e0, 0x3895e8]}
+  - {src: src/kynapse/inline/linkonce_3895e8.c, range: [0x3895e8, 0x3895f0]}
+  - {src: src/kynapse/inline/linkonce_3895f0.c, range: [0x3895f0, 0x3895f8]}
+  - {src: src/kynapse/inline/linkonce_3895f8.c, range: [0x3895f8, 0x389600]}
+  - {src: src/kynapse/inline/linkonce_389600.c, range: [0x389600, 0x389608]}
+  - {src: src/kynapse/inline/linkonce_389608.c, range: [0x389608, 0x389610]}
+  - {src: src/kynapse/inline/linkonce_389610.c, range: [0x389610, 0x389618]}
+  - {src: src/kynapse/inline/linkonce_389618.c, range: [0x389618, 0x389668]}
+  - {src: src/kynapse/inline/class_info_389668.cpp, range: [0x389668, 0x389678], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389678.c, range: [0x389678, 0x3896a8]}
+  - {src: src/kynapse/inline/linkonce_3896a8.c, range: [0x3896a8, 0x389720]}
+  - {src: src/kynapse/inline/linkonce_389720.c, range: [0x389720, 0x389770]}
+  - {src: src/kynapse/inline/class_info_389770.cpp, range: [0x389770, 0x389780], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389780.c, range: [0x389780, 0x389788]}
+  - {src: src/kynapse/inline/linkonce_389788.c, range: [0x389788, 0x389790]}
+  - {src: src/kynapse/inline/linkonce_389790.c, range: [0x389790, 0x389798]}
+  - {src: src/kynapse/inline/linkonce_389798.c, range: [0x389798, 0x3897a0]}
+  - {src: src/kynapse/inline/linkonce_3897a0.c, range: [0x3897a0, 0x3897a8]}
+  - {src: src/kynapse/inline/linkonce_3897a8.c, range: [0x3897a8, 0x3897b0]}
+  - {src: src/kynapse/inline/linkonce_3897b0.c, range: [0x3897b0, 0x3897b8]}
+  - {src: src/kynapse/inline/linkonce_3897b8.c, range: [0x3897b8, 0x3897c0]}
+  - {src: src/kynapse/inline/linkonce_3897c0.c, range: [0x3897c0, 0x3897c8]}
+  - {src: src/kynapse/inline/linkonce_3897c8.c, range: [0x3897c8, 0x389818]}
+  - {src: src/kynapse/inline/class_info_389818.cpp, range: [0x389818, 0x389828], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389828.c, range: [0x389828, 0x3898a8]}
+  - {src: src/kynapse/inline/linkonce_3898a8.c, range: [0x3898a8, 0x3898e0]}
+  - {src: src/kynapse/inline/parameter_classes_3898e0.cpp, range: [0x3898e0, 0x3898f0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_3898f0.c, range: [0x3898f0, 0x389908]}
+  - {src: src/kynapse/inline/linkonce_389908.c, range: [0x389908, 0x389980]}
+  - {src: src/kynapse/inline/linkonce_389980.c, range: [0x389980, 0x3899c0]}
+  - {src: src/kynapse/inline/linkonce_3899c0.c, range: [0x3899c0, 0x3899f0]}
+  - {src: src/kynapse/inline/linkonce_3899f0.c, range: [0x3899f0, 0x389a40]}
+  - {src: src/kynapse/inline/linkonce_389a40.c, range: [0x389a40, 0x389a58]}
+  - {src: src/kynapse/inline/linkonce_389a58.c, range: [0x389a58, 0x389a90]}
+  - {src: src/kynapse/inline/parameter_classes_389a90.cpp, range: [0x389a90, 0x389aa0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389aa0.c, range: [0x389aa0, 0x389ab0]}
+  - {src: src/kynapse/inline/linkonce_389ab0.c, range: [0x389ab0, 0x389ab8]}
+  - {src: src/kynapse/inline/linkonce_389ab8.c, range: [0x389ab8, 0x389b08]}
+  - {src: src/kynapse/inline/linkonce_389b08.c, range: [0x389b08, 0x389b20]}
+  - {src: src/kynapse/inline/linkonce_389b20.c, range: [0x389b20, 0x389b58]}
+  - {src: src/kynapse/inline/parameter_classes_389b58.cpp, range: [0x389b58, 0x389b68], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389b68.c, range: [0x389b68, 0x389b78]}
+  - {src: src/kynapse/inline/linkonce_389b78.c, range: [0x389b78, 0x389b80]}
+  - {src: src/kynapse/inline/linkonce_389b80.c, range: [0x389b80, 0x389bd0]}
+  - {src: src/kynapse/inline/linkonce_389bd0.c, range: [0x389bd0, 0x389be8]}
+  - {src: src/kynapse/inline/linkonce_389be8.c, range: [0x389be8, 0x389c20]}
+  - {src: src/kynapse/inline/parameter_classes_389c20.cpp, range: [0x389c20, 0x389c30], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389c30.c, range: [0x389c30, 0x389c40]}
+  - {src: src/kynapse/inline/linkonce_389c40.c, range: [0x389c40, 0x389c48]}
+  - {src: src/kynapse/inline/linkonce_389c48.c, range: [0x389c48, 0x389c98]}
+  - {src: src/kynapse/inline/linkonce_389c98.c, range: [0x389c98, 0x389cb0]}
+  - {src: src/kynapse/inline/linkonce_389cb0.c, range: [0x389cb0, 0x389ce8]}
+  - {src: src/kynapse/inline/parameter_classes_389ce8.cpp, range: [0x389ce8, 0x389cf8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389cf8.c, range: [0x389cf8, 0x389d20]}
+  - {src: src/kynapse/inline/linkonce_389d20.c, range: [0x389d20, 0x389d30]}
+  - {src: src/kynapse/inline/linkonce_389d30.c, range: [0x389d30, 0x389d38]}
+  - {src: src/kynapse/inline/linkonce_389d38.c, range: [0x389d38, 0x389d40]}
+  - {src: src/kynapse/inline/linkonce_389d40.c, range: [0x389d40, 0x389d90]}
+  - {src: src/kynapse/inline/linkonce_389d90.c, range: [0x389d90, 0x389da8]}
+  - {src: src/kynapse/inline/linkonce_389da8.c, range: [0x389da8, 0x389de0]}
+  - {src: src/kynapse/inline/parameter_classes_389de0.cpp, range: [0x389de0, 0x389df0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389df0.c, range: [0x389df0, 0x389e00]}
+  - {src: src/kynapse/inline/linkonce_389e00.c, range: [0x389e00, 0x389e08]}
+  - {src: src/kynapse/inline/linkonce_389e08.c, range: [0x389e08, 0x389e58]}
+  - {src: src/kynapse/inline/linkonce_389e58.c, range: [0x389e58, 0x389e70]}
+  - {src: src/kynapse/inline/linkonce_389e70.c, range: [0x389e70, 0x389ea8]}
+  - {src: src/kynapse/inline/parameter_classes_389ea8.cpp, range: [0x389ea8, 0x389eb8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389eb8.c, range: [0x389eb8, 0x389f38]}
+  - {src: src/kynapse/inline/linkonce_389f38.c, range: [0x389f38, 0x389f70]}
+  - {src: src/kynapse/inline/parameter_classes_389f70.cpp, range: [0x389f70, 0x389f80], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_389f80.c, range: [0x389f80, 0x389f90]}
+  - {src: src/kynapse/inline/linkonce_389f90.c, range: [0x389f90, 0x38a008]}
+  - {src: src/kynapse/inline/linkonce_38a008.c, range: [0x38a008, 0x38a048]}
+  - {src: src/kynapse/inline/linkonce_38a048.c, range: [0x38a048, 0x38a078]}
+  - {src: src/kynapse/inline/linkonce_38a078.c, range: [0x38a078, 0x38a0c8]}
+  - {src: src/kynapse/inline/linkonce_38a0c8.c, range: [0x38a0c8, 0x38a0e0]}
+  - {src: src/kynapse/inline/linkonce_38a0e0.c, range: [0x38a0e0, 0x38a118]}
+  - {src: src/kynapse/inline/parameter_classes_38a118.cpp, range: [0x38a118, 0x38a128], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a128.c, range: [0x38a128, 0x38a148]}
+  - {src: src/kynapse/inline/linkonce_38a148.c, range: [0x38a148, 0x38a170]}
+  - {src: src/kynapse/inline/linkonce_38a170.c, range: [0x38a170, 0x38a1c0]}
+  - {src: src/kynapse/inline/linkonce_38a1c0.c, range: [0x38a1c0, 0x38a1d8]}
+  - {src: src/kynapse/inline/linkonce_38a1d8.c, range: [0x38a1d8, 0x38a210]}
+  - {src: src/kynapse/inline/parameter_classes_38a210.cpp, range: [0x38a210, 0x38a220], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a220.c, range: [0x38a220, 0x38a240]}
+  - {src: src/kynapse/inline/linkonce_38a240.c, range: [0x38a240, 0x38a268]}
+  - {src: src/kynapse/inline/linkonce_38a268.c, range: [0x38a268, 0x38a2b8]}
+  - {src: src/kynapse/inline/linkonce_38a2b8.c, range: [0x38a2b8, 0x38a2d0]}
+  - {src: src/kynapse/inline/linkonce_38a2d0.c, range: [0x38a2d0, 0x38a308]}
+  - {src: src/kynapse/inline/parameter_classes_38a308.cpp, range: [0x38a308, 0x38a318], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a318.c, range: [0x38a318, 0x38a338]}
+  - {src: src/kynapse/inline/linkonce_38a338.c, range: [0x38a338, 0x38a360]}
+  - {src: src/kynapse/inline/linkonce_38a360.c, range: [0x38a360, 0x38a3b0]}
+  - {src: src/kynapse/inline/linkonce_38a3b0.c, range: [0x38a3b0, 0x38a3c8]}
+  - {src: src/kynapse/inline/linkonce_38a3c8.c, range: [0x38a3c8, 0x38a400]}
+  - {src: src/kynapse/inline/parameter_classes_38a400.cpp, range: [0x38a400, 0x38a410], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a410.c, range: [0x38a410, 0x38a438]}
+  - {src: src/kynapse/inline/linkonce_38a438.c, range: [0x38a438, 0x38a440]}
+  - {src: src/kynapse/inline/linkonce_38a440.c, range: [0x38a440, 0x38a490]}
+  - {src: src/kynapse/inline/linkonce_38a4d0.c, range: [0x38a4d0, 0x38a508]}
+  - {src: src/kynapse/inline/parameter_classes_38a508.cpp, range: [0x38a508, 0x38a518], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a518.c, range: [0x38a518, 0x38a520]}
+  - {src: src/kynapse/inline/linkonce_38a520.c, range: [0x38a520, 0x38a528]}
+  - {src: src/kynapse/inline/linkonce_38a528.c, range: [0x38a528, 0x38a578]}
+  - {src: src/kynapse/inline/linkonce_38a578.c, range: [0x38a578, 0x38a590]}
+  - {src: src/kynapse/inline/linkonce_38a590.c, range: [0x38a590, 0x38a5c8]}
+  - {src: src/kynapse/inline/parameter_classes_38a5c8.cpp, range: [0x38a5c8, 0x38a5d8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a5d8.c, range: [0x38a5d8, 0x38a5f8]}
+  - {src: src/kynapse/inline/linkonce_38a5f8.c, range: [0x38a5f8, 0x38a620]}
+  - {src: src/kynapse/inline/linkonce_38a620.c, range: [0x38a620, 0x38a670]}
+  - {src: src/kynapse/inline/linkonce_38a6b0.c, range: [0x38a6b0, 0x38a6e8]}
+  - {src: src/kynapse/inline/parameter_classes_38a6e8.cpp, range: [0x38a6e8, 0x38a6f8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a6f8.c, range: [0x38a6f8, 0x38a700]}
+  - {src: src/kynapse/inline/linkonce_38a700.c, range: [0x38a700, 0x38a708]}
+  - {src: src/kynapse/inline/linkonce_38a708.c, range: [0x38a708, 0x38a758]}
+  - {src: src/kynapse/inline/linkonce_38a790.c, range: [0x38a790, 0x38a7c8]}
+  - {src: src/kynapse/inline/parameter_classes_38a7c8.cpp, range: [0x38a7c8, 0x38a7d8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a7d8.c, range: [0x38a7d8, 0x38a7e0]}
+  - {src: src/kynapse/inline/linkonce_38a7e0.c, range: [0x38a7e0, 0x38a7e8]}
+  - {src: src/kynapse/inline/linkonce_38a7e8.c, range: [0x38a7e8, 0x38a838]}
+  - {src: src/kynapse/inline/linkonce_38a858.c, range: [0x38a858, 0x38a890]}
+  - {src: src/kynapse/inline/parameter_classes_38a890.cpp, range: [0x38a890, 0x38a8a0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a8a0.c, range: [0x38a8a0, 0x38a8a8]}
+  - {src: src/kynapse/inline/linkonce_38a8a8.c, range: [0x38a8a8, 0x38a8b0]}
+  - {src: src/kynapse/inline/linkonce_38a8b0.c, range: [0x38a8b0, 0x38a900]}
+  - {src: src/kynapse/inline/linkonce_38a900.c, range: [0x38a900, 0x38a918]}
+  - {src: src/kynapse/inline/linkonce_38a918.c, range: [0x38a918, 0x38a950]}
+  - {src: src/kynapse/inline/parameter_classes_38a950.cpp, range: [0x38a950, 0x38a960], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38a960.c, range: [0x38a960, 0x38a980]}
+  - {src: src/kynapse/inline/linkonce_38a980.c, range: [0x38a980, 0x38a988]}
+  - {src: src/kynapse/inline/linkonce_38a988.c, range: [0x38a988, 0x38a9d8]}
+  - {src: src/kynapse/inline/linkonce_38aa20.c, range: [0x38aa20, 0x38aa58]}
+  - {src: src/kynapse/inline/parameter_classes_38aa58.cpp, range: [0x38aa58, 0x38aa68], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38aa68.c, range: [0x38aa68, 0x38aa90]}
+  - {src: src/kynapse/inline/linkonce_38aa90.c, range: [0x38aa90, 0x38aa98]}
+  - {src: src/kynapse/inline/linkonce_38aa98.c, range: [0x38aa98, 0x38aaa0]}
+  - {src: src/kynapse/inline/linkonce_38aaa0.c, range: [0x38aaa0, 0x38aaf0]}
+  - {src: src/kynapse/inline/linkonce_38ab30.c, range: [0x38ab30, 0x38ab68]}
+  - {src: src/kynapse/inline/parameter_classes_38ab68.cpp, range: [0x38ab68, 0x38ab78], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38ab78.c, range: [0x38ab78, 0x38ab80]}
+  - {src: src/kynapse/inline/linkonce_38ab80.c, range: [0x38ab80, 0x38ab88]}
+  - {src: src/kynapse/inline/linkonce_38ab88.c, range: [0x38ab88, 0x38abd8]}
+  - {src: src/kynapse/inline/linkonce_38abd8.c, range: [0x38abd8, 0x38abf0]}
+  - {src: src/kynapse/inline/linkonce_38abf0.c, range: [0x38abf0, 0x38ac28]}
+  - {src: src/kynapse/inline/parameter_classes_38ac28.cpp, range: [0x38ac28, 0x38ac38], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38ac38.c, range: [0x38ac38, 0x38ac48]}
+  - {src: src/kynapse/inline/linkonce_38ac48.c, range: [0x38ac48, 0x38ac50]}
+  - {src: src/kynapse/inline/linkonce_38ac50.c, range: [0x38ac50, 0x38aca0]}
+  - {src: src/kynapse/inline/linkonce_38aca0.c, range: [0x38aca0, 0x38acb8]}
+  - {src: src/kynapse/inline/linkonce_38acb8.c, range: [0x38acb8, 0x38acf0]}
+  - {src: src/kynapse/inline/parameter_classes_38acf0.cpp, range: [0x38acf0, 0x38ad00], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38ad00.c, range: [0x38ad00, 0x38ad10]}
+  - {src: src/kynapse/inline/linkonce_38ad10.c, range: [0x38ad10, 0x38ad20]}
+  - {src: src/kynapse/inline/linkonce_38ad20.c, range: [0x38ad20, 0x38ad28]}
+  - {src: src/kynapse/inline/linkonce_38ad28.c, range: [0x38ad28, 0x38ad30]}
+  - {src: src/kynapse/inline/linkonce_38ad30.c, range: [0x38ad30, 0x38ad80]}
+  - {src: src/kynapse/inline/linkonce_38ad80.c, range: [0x38ad80, 0x38ad98]}
+  - {src: src/kynapse/inline/linkonce_38ad98.c, range: [0x38ad98, 0x38add0]}
+  - {src: src/kynapse/inline/parameter_classes_38add0.cpp, range: [0x38add0, 0x38ade0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38ade0.c, range: [0x38ade0, 0x38adf0]}
+  - {src: src/kynapse/inline/linkonce_38adf0.c, range: [0x38adf0, 0x38ae00]}
+  - {src: src/kynapse/inline/linkonce_38ae00.c, range: [0x38ae00, 0x38ae08]}
+  - {src: src/kynapse/inline/linkonce_38ae08.c, range: [0x38ae08, 0x38ae10]}
+  - {src: src/kynapse/inline/linkonce_38ae10.c, range: [0x38ae10, 0x38ae60]}
+  - {src: src/kynapse/inline/linkonce_38ae60.c, range: [0x38ae60, 0x38ae78]}
+  - {src: src/kynapse/inline/linkonce_38ae78.c, range: [0x38ae78, 0x38aeb0]}
+  - {src: src/kynapse/inline/parameter_classes_38aeb0.cpp, range: [0x38aeb0, 0x38aec0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38aec0.c, range: [0x38aec0, 0x38aed8]}
+  - {src: src/kynapse/inline/small_misc_38aed8.cpp, range: [0x38aed8, 0x38aee0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38aee0.c, range: [0x38aee0, 0x38af58]}
+  - {src: src/kynapse/inline/linkonce_38af58.c, range: [0x38af58, 0x38afa8]}
+  - {src: src/kynapse/inline/class_info_38afa8.cpp, range: [0x38afa8, 0x38afb8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38afb8.c, range: [0x38afb8, 0x38b008]}
+  - {src: src/kynapse/inline/linkonce_38b008.c, range: [0x38b008, 0x38b048]}
+  - {src: src/kynapse/inline/linkonce_38b048.c, range: [0x38b048, 0x38b078]}
+  - {src: src/kynapse/inline/linkonce_38b078.c, range: [0x38b078, 0x38b098]}
+  - {src: src/kynapse/inline/linkonce_38b098.c, range: [0x38b098, 0x38b0f0]}
+  - {src: src/kynapse/inline/linkonce_38b0f0.c, range: [0x38b0f0, 0x38b140]}
+  - {src: src/kynapse/inline/class_info_38b140.cpp, range: [0x38b140, 0x38b150], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38b1f0.c, range: [0x38b1f0, 0x38b268]}
+  - {src: src/kynapse/inline/linkonce_38b268.c, range: [0x38b268, 0x38b2b8]}
+  - {src: src/kynapse/inline/class_info_38b2b8.cpp, range: [0x38b2b8, 0x38b2c8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38b2c8.c, range: [0x38b2c8, 0x38b340]}
+  - {src: src/kynapse/inline/linkonce_38b340.c, range: [0x38b340, 0x38b378]}
+  - {src: src/kynapse/inline/linkonce_38b378.c, range: [0x38b378, 0x38b3f0]}
+  - {src: src/kynapse/inline/linkonce_38b3f0.c, range: [0x38b3f0, 0x38b3f8]}
+  - {src: src/kynapse/inline/linkonce_38b3f8.c, range: [0x38b3f8, 0x38b448]}
+  - {src: src/kynapse/inline/linkonce_38b448.c, range: [0x38b448, 0x38b468]}
+  - {src: src/kynapse/inline/linkonce_38b468.c, range: [0x38b468, 0x38b4c0]}
+  - {src: src/kynapse/inline/linkonce_38b4c0.c, range: [0x38b4c0, 0x38b538]}
+  - {src: src/kynapse/inline/linkonce_38b538.c, range: [0x38b538, 0x38b590]}
+  - {src: src/kynapse/inline/linkonce_38b590.c, range: [0x38b590, 0x38b6b0]}
+  - {src: src/kynapse/inline/linkonce_38b9d0.c, range: [0x38b9d0, 0x38ba10]}
+  - {src: src/kynapse/inline/linkonce_38ba10.c, range: [0x38ba10, 0x38ba30]}
+  - {src: src/kynapse/inline/linkonce_38ba30.c, range: [0x38ba30, 0x38ba88]}
+  - {src: src/kynapse/inline/linkonce_38ba88.c, range: [0x38ba88, 0x38bad8]}
+  - {src: src/kynapse/inline/small_misc_38bb28.cpp, range: [0x38bb28, 0x38bb30], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/inline/linkonce_38bb30.c, range: [0x38bb30, 0x38bb60]}
+  - {src: src/kynapse/inline/linkonce_38bb60.c, range: [0x38bb60, 0x38bbb0]}
+  - {src: src/kynapse/inline/linkonce_38bd40.c, range: [0x38bd40, 0x38bea8]}
+  - {src: src/kynapse/inline/linkonce_38bea8.c, range: [0x38bea8, 0x38bfe8]}
+  - {src: src/kynapse/inline/linkonce_38bfe8.c, range: [0x38bfe8, 0x38c020]}
+  - {src: src/kynapse/inline/linkonce_38c020.c, range: [0x38c020, 0x38c098]}
+  - {src: src/kynapse/inline/linkonce_38c318.c, range: [0x38c318, 0x38c390]}
+  - {src: src/kynapse/inline/linkonce_38c3e0.c, range: [0x38c3e0, 0x38c438]}
+  - {src: src/kynapse/inline/linkonce_38c578.c, range: [0x38c578, 0x38c618]}
+  - {src: src/kynapse/inline/linkonce_38c7a8.c, range: [0x38c7a8, 0x38c7e8]}
+  - {src: src/kynapse/inline/linkonce_38c7e8.c, range: [0x38c7e8, 0x38c820]}
+  - {src: src/kynapse/inline/linkonce_38c820.c, range: [0x38c820, 0x38c898]}
+  - {src: src/kynapse/inline/linkonce_38c898.c, range: [0x38c898, 0x38c910]}
+  - {src: src/kynapse/inline/linkonce_38c910.c, range: [0x38c910, 0x38c928]}
+  - {src: src/kynapse/inline/linkonce_38c928.c, range: [0x38c928, 0x38c9a0]}
+  - {src: src/kynapse/inline/linkonce_38c9a0.c, range: [0x38c9a0, 0x38c9d8]}
+  - {src: src/kynapse/inline/linkonce_38c9d8.c, range: [0x38c9d8, 0x38ca50]}
+  - {src: src/kynapse/inline/linkonce_38cb28.c, range: [0x38cb28, 0x38cba0]}
+  - {src: src/kynapse/inline/linkonce_38cba0.c, range: [0x38cba0, 0x38cba8]}
+  - {src: src/kynapse/inline/linkonce_38cba8.c, range: [0x38cba8, 0x38cc20]}
+  - {src: src/kynapse/inline/linkonce_38cc20.c, range: [0x38cc20, 0x38cc78]}
+  - {src: src/kynapse/inline/linkonce_38cc78.c, range: [0x38cc78, 0x38ccb0]}
+  - {src: src/kynapse/inline/linkonce_38ccb0.c, range: [0x38ccb0, 0x38cd28]}
+  - {src: src/kynapse/inline/linkonce_38ce00.c, range: [0x38ce00, 0x38cf20]}
+  - {src: src/kynapse/inline/linkonce_38d240.c, range: [0x38d240, 0x38d280]}
+  - {src: src/kynapse/inline/linkonce_38d280.c, range: [0x38d280, 0x38d2d0]}
+  - {src: src/kynapse/inline/linkonce_38d330.c, range: [0x38d330, 0x38d338]}
+  - {src: src/kynapse/inline/linkonce_38d338.c, range: [0x38d338, 0x38d4a0]}
+  - {src: src/kynapse/inline/linkonce_38d4a0.c, range: [0x38d4a0, 0x38d4c0]}
+  - {src: src/kynapse/inline/linkonce_38d650.c, range: [0x38d650, 0x38d690]}
+  - {src: src/kynapse/inline/linkonce_38d690.c, range: [0x38d690, 0x38d8a8]}
+  - {src: src/kynapse/inline/linkonce_38d928.c, range: [0x38d928, 0x38d9d0]}
+  - {src: src/kynapse/inline/linkonce_38d9d0.c, range: [0x38d9d0, 0x38d9e0]}
+  - {src: src/kynapse/inline/linkonce_38d9e0.c, range: [0x38d9e0, 0x38db00]}
+  - {src: src/kynapse/inline/linkonce_38db00.c, range: [0x38db00, 0x38db38]}
+  - {src: src/kynapse/inline/linkonce_38db38.c, range: [0x38db38, 0x38dbb0]}
+  - {src: src/kynapse/inline/linkonce_38dbb0.c, range: [0x38dbb0, 0x38dc58]}
+  - {src: src/kynapse/inline/linkonce_38dc58.c, range: [0x38dc58, 0x38dcd0]}
+  - {src: src/kynapse/inline/linkonce_38dcd0.c, range: [0x38dcd0, 0x38dd08]}
+  - {src: src/kynapse/inline/linkonce_38dd08.c, range: [0x38dd08, 0x38dd80]}
+  - {src: src/kynapse/inline/linkonce_38de58.c, range: [0x38de58, 0x38de90]}
+  - {src: src/kynapse/inline/linkonce_38de90.c, range: [0x38de90, 0x38df08]}
+  - {src: src/kynapse/inline/linkonce_38df08.c, range: [0x38df08, 0x38df40]}
+  - {src: src/kynapse/inline/linkonce_38df40.c, range: [0x38df40, 0x38dfb8]}
+  - {src: src/kynapse/inline/linkonce_38e090.c, range: [0x38e090, 0x38e108]}
+  - {src: src/kynapse/inline/linkonce_38e298.c, range: [0x38e298, 0x38e2d0]}
+  - {src: src/kynapse/inline/linkonce_38e2d0.c, range: [0x38e2d0, 0x38e3c0]}
+  - {src: src/kynapse/inline/linkonce_38e3c0.c, range: [0x38e3c0, 0x38e438]}
+  - {src: src/kynapse/inline/linkonce_38e5c8.c, range: [0x38e5c8, 0x38e5f8]}
+  - {src: src/kynapse/inline/linkonce_38e5f8.c, range: [0x38e5f8, 0x38e638]}
+  - {src: src/kynapse/inline/linkonce_38e638.c, range: [0x38e638, 0x38e668]}
+  - {src: src/kynapse/inline/linkonce_38e668.c, range: [0x38e668, 0x38e688]}
+  - {src: src/kynapse/inline/linkonce_38e688.c, range: [0x38e688, 0x38e6e0]}
+  - {src: src/kynapse/inline/linkonce_38e6e0.c, range: [0x38e6e0, 0x38e730]}
+  - {src: src/kynapse/inline/linkonce_38e730.c, range: [0x38e730, 0x38e768]}
+  - {src: src/kynapse/inline/graph_cpointmapper.cpp, range: [0x38e768, 0x38e7b8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
+  - {src: src/kynapse/inline/small_misc_38e7b8.cpp, range: [0x38e7b8, 0x38e7c0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38e7c0.c, range: [0x38e7c0, 0x38e810]}
+  - {src: src/kynapse/inline/linkonce_38e810.c, range: [0x38e810, 0x38e840]}
+  - {src: src/kynapse/inline/linkonce_38e840.c, range: [0x38e840, 0x38e890]}
+  - {src: src/kynapse/inline/linkonce_38e890.c, range: [0x38e890, 0x38e8c0]}
+  - {src: src/kynapse/inline/linkonce_38e8c0.c, range: [0x38e8c0, 0x38e910]}
+  - {src: src/kynapse/inline/linkonce_38ec30.c, range: [0x38ec30, 0x38eca8]}
+  - {src: src/kynapse/inline/linkonce_38eca8.c, range: [0x38eca8, 0x38ed20]}
+  - {src: src/kynapse/inline/linkonce_38ed20.c, range: [0x38ed20, 0x38ed98]}
+  - {src: src/kynapse/inline/linkonce_38ed98.c, range: [0x38ed98, 0x38ee08]}
+  - {src: src/kynapse/inline/linkonce_38ee08.c, range: [0x38ee08, 0x38ee80]}
+  - {src: src/kynapse/inline/linkonce_38ef20.c, range: [0x38ef20, 0x38ef98]}
+  - {src: src/kynapse/inline/class_info_38ef98.cpp, range: [0x38ef98, 0x38efa8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/misc4_38efa8.cpp, range: [0x38efa8, 0x38efb0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/hidden_name_condition.cpp, range: [0x38efb0, 0x38f000], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/graph_meta_entries.cpp, range: [0x38f000, 0x3909a8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/inline/linkonce_38f190.c, range: [0x38f190, 0x38f1d0]}
+  - {src: src/kynapse/inline/linkonce_38f1d0.c, range: [0x38f1d0, 0x38f200]}
+  - {src: src/kynapse/inline/linkonce_38f200.c, range: [0x38f200, 0x38f278]}
+  - {src: src/kynapse/inline/linkonce_38f278.c, range: [0x38f278, 0x38f2a8]}
+  - {src: src/kynapse/inline/linkonce_38f2a8.c, range: [0x38f2a8, 0x38f2b0]}
+  - {src: src/kynapse/inline/linkonce_38f330.c, range: [0x38f330, 0x38f3a8]}
+  - {src: src/kynapse/inline/linkonce_38f3a8.c, range: [0x38f3a8, 0x38f3e0]}
+  - {src: src/kynapse/inline/linkonce_38f3e0.c, range: [0x38f3e0, 0x38f458]}
+  - {src: src/kynapse/inline/linkonce_38f458.c, range: [0x38f458, 0x38f490]}
+  - {src: src/kynapse/inline/linkonce_38f490.c, range: [0x38f490, 0x38f508]}
+  - {src: src/kynapse/inline/linkonce_38f5e0.c, range: [0x38f5e0, 0x38f618]}
+  - {src: src/kynapse/inline/linkonce_38f618.c, range: [0x38f618, 0x38f668]}
+  - {src: src/kynapse/inline/linkonce_38ff70.c, range: [0x38ff70, 0x38ffc0]}
+  - {src: src/kynapse/inline/class_info_38ffc0.cpp, range: [0x38ffc0, 0x38ffd0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_38ffd0.c, range: [0x38ffd0, 0x38fff8]}
+  - {src: src/kynapse/inline/linkonce_38fff8.c, range: [0x38fff8, 0x390038]}
+  - {src: src/kynapse/inline/leaves2_390038.cpp, range: [0x390038, 0x390060], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_390060.c, range: [0x390060, 0x3900d8]}
+  - {src: src/kynapse/inline/linkonce_3900d8.c, range: [0x3900d8, 0x390118]}
+  - {src: src/kynapse/inline/linkonce_390118.c, range: [0x390118, 0x390148]}
+  - {src: src/kynapse/inline/linkonce_390148.c, range: [0x390148, 0x3901c0]}
+  - {src: src/kynapse/inline/linkonce_3901c0.c, range: [0x3901c0, 0x3901f8]}
+  - {src: src/kynapse/inline/linkonce_3901f8.c, range: [0x3901f8, 0x390260]}
+  - {src: src/kynapse/inline/class_info_390260.cpp, range: [0x390260, 0x390270], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_390270.c, range: [0x390270, 0x3902a8]}
+  - {src: src/kynapse/inline/linkonce_3902a8.c, range: [0x3902a8, 0x3902f8]}
+  - {src: src/kynapse/inline/class_info_3902f8.cpp, range: [0x3902f8, 0x390308], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_390308.c, range: [0x390308, 0x390318]}
+  - {src: src/kynapse/inline/linkonce_390318.c, range: [0x390318, 0x390350]}
+  - {src: src/kynapse/inline/linkonce_390350.c, range: [0x390350, 0x3903a0]}
+  - {src: src/kynapse/inline/class_info_3903a0.cpp, range: [0x3903a0, 0x3903b0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_3903b0.c, range: [0x3903b0, 0x3903b8]}
+  - {src: src/kynapse/inline/linkonce_3903b8.c, range: [0x3903b8, 0x3903f0]}
+  - {src: src/kynapse/inline/linkonce_3903f0.c, range: [0x3903f0, 0x390440]}
+  - {src: src/kynapse/inline/class_info_390440.cpp, range: [0x390440, 0x390450], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_390450.c, range: [0x390450, 0x390460]}
+  - {src: src/kynapse/inline/linkonce_390460.c, range: [0x390460, 0x390498]}
+  - {src: src/kynapse/inline/linkonce_390498.c, range: [0x390498, 0x390548]}
+  - {src: src/kynapse/inline/class_info_390548.cpp, range: [0x390548, 0x390558], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_390558.c, range: [0x390558, 0x3905a8]}
+  - {src: src/kynapse/inline/linkonce_3905a8.c, range: [0x3905a8, 0x3905e0]}
+  - {src: src/kynapse/inline/linkonce_3905e0.c, range: [0x3905e0, 0x390630]}
+  - {src: src/kynapse/inline/class_info_390630.cpp, range: [0x390630, 0x390640], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_3906c0.c, range: [0x3906c0, 0x3906f8]}
+  - {src: src/kynapse/inline/linkonce_3906f8.c, range: [0x3906f8, 0x390748]}
+  - {src: src/kynapse/inline/class_info_390748.cpp, range: [0x390748, 0x390758], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/tiny3_390758.cpp, range: [0x390758, 0x390768], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_390768.c, range: [0x390768, 0x3907a0]}
+  - {src: src/kynapse/inline/linkonce_3907a0.c, range: [0x3907a0, 0x390808]}
+  - {src: src/kynapse/inline/class_info_390808.cpp, range: [0x390808, 0x390818], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_3909a8.c, range: [0x3909a8, 0x390a68]}
+  - {src: src/kynapse/inline/linkonce_390a68.c, range: [0x390a68, 0x390ae0]}
+  - {src: src/kynapse/inline/linkonce_390ae0.c, range: [0x390ae0, 0x390b58]}
+  - {src: src/kynapse/inline/linkonce_390b58.c, range: [0x390b58, 0x390ba8]}
+  - {src: src/kynapse/inline/linkonce_390ba8.c, range: [0x390ba8, 0x390bc8]}
+  - {src: src/kynapse/inline/linkonce_390bc8.c, range: [0x390bc8, 0x390c20]}
+  - {src: src/kynapse/inline/linkonce_390c20.c, range: [0x390c20, 0x390c98]}
+  - {src: src/kynapse/inline/linkonce_390c98.c, range: [0x390c98, 0x390ce8]}
+  - {src: src/kynapse/inline/class_info_390ce8.cpp, range: [0x390ce8, 0x390cf8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_390d98.c, range: [0x390d98, 0x390dd0]}
+  - {src: src/kynapse/inline/linkonce_390dd0.c, range: [0x390dd0, 0x390e20]}
+  - {src: src/kynapse/inline/class_info_390e20.cpp, range: [0x390e20, 0x390e30], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_390e30.c, range: [0x390e30, 0x390e48]}
+  - {src: src/kynapse/inline/linkonce_390e48.c, range: [0x390e48, 0x390ec0]}
+  - {src: src/kynapse/inline/linkonce_390ec0.c, range: [0x390ec0, 0x390ef0]}
+  - {src: src/kynapse/inline/linkonce_390ef0.c, range: [0x390ef0, 0x390f40]}
+  - {src: src/kynapse/inline/linkonce_3910d0.c, range: [0x3910d0, 0x391120]}
+  - {src: src/kynapse/inline/class_info_391120.cpp, range: [0x391120, 0x391130], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_391180.c, range: [0x391180, 0x3911b0]}
+  - {src: src/kynapse/inline/linkonce_3911b0.c, range: [0x3911b0, 0x3911e8]}
+  - {src: src/kynapse/inline/linkonce_3911e8.c, range: [0x3911e8, 0x391238]}
+  - {src: src/kynapse/inline/linkonce_391238.c, range: [0x391238, 0x391288]}
+  - {src: src/kynapse/inline/linkonce_3912b8.c, range: [0x3912b8, 0x3912c0]}
+  - {src: src/kynapse/inline/linkonce_391358.c, range: [0x391358, 0x391380]}
+  - {src: src/kynapse/inline/linkonce_3913b0.c, range: [0x3913b0, 0x3913e8]}
+  - {src: src/kynapse/inline/linkonce_3913e8.c, range: [0x3913e8, 0x391460]}
+  - {src: src/kynapse/inline/linkonce_391460.c, range: [0x391460, 0x3914b0]}
+  - {src: src/kynapse/inline/class_info_3914b0.cpp, range: [0x3914b0, 0x3914c0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_3914c0.c, range: [0x3914c0, 0x391538]}
+  - {src: src/kynapse/inline/linkonce_391538.c, range: [0x391538, 0x391548], flags: [-O1, -G0, -snas]}
+  - {src: src/kynapse/inline/linkonce_391548.c, range: [0x391548, 0x3915c0]}
+  - {src: src/kynapse/inline/linkonce_3915c0.c, range: [0x3915c0, 0x391628]}
+  - {src: src/kynapse/inline/linkonce_391628.c, range: [0x391628, 0x391658]}
+  - {src: src/kynapse/inline/linkonce_391658.c, range: [0x391658, 0x3916f0]}
+  - {src: src/kynapse/inline/linkonce_3916f0.c, range: [0x3916f0, 0x391730]}
+  - {src: src/kynapse/inline/linkonce_391730.c, range: [0x391730, 0x391768]}
+  - {src: src/kynapse/inline/linkonce_391768.c, range: [0x391768, 0x3917b8]}
+  - {src: src/kynapse/inline/linkonce_391d88.c, range: [0x391d88, 0x391dd8]}
+  - {src: src/kynapse/inline/linkonce_391dd8.c, range: [0x391dd8, 0x391e10]}
+  - {src: src/kynapse/inline/linkonce_391e10.c, range: [0x391e10, 0x391e20]}
+  - {src: src/kynapse/inline/linkonce_391e20.c, range: [0x391e20, 0x391e58]}
+  - {src: src/kynapse/inline/linkonce_391e58.c, range: [0x391e58, 0x391f00]}
+  - {src: src/kynapse/inline/nearest_node_3921a0.cpp, range: [0x3921a0, 0x3921b8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_3921b8.c, range: [0x3921b8, 0x3921f0]}
+  - {src: src/kynapse/inline/linkonce_3921f0.c, range: [0x3921f0, 0x392298]}
+  - {src: src/kynapse/inline/linkonce_392550.c, range: [0x392550, 0x392568]}
+  - {src: src/kynapse/inline/linkonce_392568.c, range: [0x392568, 0x3925a0]}
+  - {src: src/kynapse/inline/linkonce_3925a0.c, range: [0x3925a0, 0x392648]}
+  - {src: src/kynapse/inline/nearest_node_392a50.cpp, range: [0x392a50, 0x392a68], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_392a68.c, range: [0x392a68, 0x392aa0]}
+  - {src: src/kynapse/inline/linkonce_392aa0.c, range: [0x392aa0, 0x392b48]}
+  - {src: src/kynapse/inline/linkonce_392d38.c, range: [0x392d38, 0x392d50]}
+  - {src: src/kynapse/inline/linkonce_392d50.c, range: [0x392d50, 0x392da0]}
+  - {src: src/kynapse/inline/class_info_392da0.cpp, range: [0x392da0, 0x392db0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_392db0.c, range: [0x392db0, 0x392dc0]}
+  - {src: src/kynapse/inline/linkonce_392dc0.c, range: [0x392dc0, 0x392df8]}
+  - {src: src/kynapse/inline/linkonce_392df8.c, range: [0x392df8, 0x392e50]}
+  - {src: src/kynapse/inline/linkonce_393200.c, range: [0x393200, 0x393288]}
+  - {src: src/kynapse/inline/owned_arrays_393288.cpp, range: [0x393288, 0x393320], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/grid_393320.cpp, range: [0x393320, 0x393470], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_393548.c, range: [0x393548, 0x393598]}
+  - {src: src/kynapse/inline/class_info_393598.cpp, range: [0x393598, 0x3935a8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_3935a8.c, range: [0x3935a8, 0x393810]}
+  - {src: src/kynapse/inline/linkonce_393810.c, range: [0x393810, 0x393828], flags: [-O1, -G0, -snas]}
+  - {src: src/kynapse/inline/linkonce_393828.c, range: [0x393828, 0x393860]}
+  - {src: src/kynapse/inline/linkonce_393860.c, range: [0x393860, 0x3938d8]}
+  - {src: src/kynapse/inline/linkonce_3938d8.c, range: [0x3938d8, 0x393928]}
+  - {src: src/kynapse/inline/class_info_393928.cpp, range: [0x393928, 0x393938], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_393938.c, range: [0x393938, 0x393940]}
+  - {src: src/kynapse/inline/misc6_393940.cpp, range: [0x393940, 0x393950], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_393950.c, range: [0x393950, 0x393978]}
+  - {src: src/kynapse/inline/linkonce_393cb8.c, range: [0x393cb8, 0x393d08]}
+  - {src: src/kynapse/inline/linkonce_393d08.c, range: [0x393d08, 0x393d58]}
+  - {src: src/kynapse/inline/linkonce_393d58.c, range: [0x393d58, 0x393da8]}
+  - {src: src/kynapse/inline/linkonce_393da8.c, range: [0x393da8, 0x393df8]}
+  - {src: src/kynapse/inline/linkonce_393df8.c, range: [0x393df8, 0x393ed8]}
+  - {src: src/kynapse/inline/linkonce_393ed8.c, range: [0x393ed8, 0x393f78]}
+  - {src: src/kynapse/inline/linkonce_393f78.c, range: [0x393f78, 0x393fc8]}
+  - {src: src/kynapse/inline/linkonce_393fc8.c, range: [0x393fc8, 0x393ff8]}
+  - {src: src/kynapse/inline/linkonce_393ff8.c, range: [0x393ff8, 0x394070]}
+  - {src: src/kynapse/inline/linkonce_394070.c, range: [0x394070, 0x3940e0]}
+  - {src: src/kynapse/inline/linkonce_3940e0.c, range: [0x3940e0, 0x3941d0]}
+  - {src: src/kynapse/inline/linkonce_3941d0.c, range: [0x3941d0, 0x394220]}
+  - {src: src/kynapse/inline/class_info_394220.cpp, range: [0x394220, 0x394230], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_394230.c, range: [0x394230, 0x394268]}
+  - {src: src/kynapse/inline/linkonce_394268.c, range: [0x394268, 0x394270]}
+  - {src: src/kynapse/inline/linkonce_394270.c, range: [0x394270, 0x3942b8], flags: [-O1, -G0, -snas]}
+  - {src: src/kynapse/inline/linkonce_3942b8.c, range: [0x3942b8, 0x394330]}
+  - {src: src/kynapse/inline/linkonce_394370.c, range: [0x394370, 0x3943e8]}
+  - {src: src/kynapse/inline/linkonce_3944c0.c, range: [0x3944c0, 0x3944f8]}
+  - {src: src/kynapse/inline/linkonce_3944f8.c, range: [0x3944f8, 0x394570]}
+  - {src: src/kynapse/inline/linkonce_394570.c, range: [0x394570, 0x3945a8]}
+  - {src: src/kynapse/inline/linkonce_3945a8.c, range: [0x3945a8, 0x394620]}
+  - {src: src/kynapse/inline/linkonce_394620.c, range: [0x394620, 0x394698]}
+  - {src: src/kynapse/inline/linkonce_394698.c, range: [0x394698, 0x394710]}
+  - {src: src/kynapse/inline/linkonce_394750.c, range: [0x394750, 0x3947c8]}
+  - {src: src/kynapse/inline/linkonce_394920.c, range: [0x394920, 0x394950]}
+  - {src: src/kynapse/inline/linkonce_394950.c, range: [0x394950, 0x3949a0]}
+  - {src: src/kynapse/inline/linkonce_394b30.c, range: [0x394b30, 0x394b80]}
+  - {src: src/kynapse/inline/linkonce_394bc0.c, range: [0x394bc0, 0x394c10]}
+  - {src: src/kynapse/inline/sound_pool_394c10.cpp, range: [0x394c10, 0x394c20], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_394c60.c, range: [0x394c60, 0x394c68]}
+  - {src: src/kynapse/inline/linkonce_394c68.c, range: [0x394c68, 0x394ce0]}
+  - {src: src/kynapse/inline/linkonce_394ce0.c, range: [0x394ce0, 0x394d18]}
+  - {src: src/kynapse/inline/linkonce_394d18.c, range: [0x394d18, 0x394d68]}
+  - {src: src/kynapse/inline/class_info_394d68.cpp, range: [0x394d68, 0x394d78], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/inline/linkonce_394d78.c, range: [0x394d78, 0x394dd0]}
+  - {src: src/kynapse/inline/linkonce_394dd0.c, range: [0x394dd0, 0x394e20]}
+  - {src: src/animation/inline/linkonce_394e58.c, range: [0x394e58, 0x394e90]}
+  - {src: src/animation/inline/linkonce_3950f8.c, range: [0x3950f8, 0x395130]}
+  - {src: src/animation/inline/linkonce_3953f0.c, range: [0x3953f0, 0x395428]}
+  - {src: src/animation/inline/linkonce_3956e8.c, range: [0x3956e8, 0x395720]}
+  - {src: src/animation/inline/linkonce_395890.c, range: [0x395890, 0x395958]}
+  - {src: src/animation/inline/linkonce_395958.c, range: [0x395958, 0x3959e8]}
+  - {src: src/animation/inline/linkonce_395c18.c, range: [0x395c18, 0x395c48]}
+  - {src: src/animation/inline/linkonce_395d10.c, range: [0x395d10, 0x395dd8]}
+  - {src: src/animation/inline/linkonce_395dd8.c, range: [0x395dd8, 0x395e68]}
+  - {src: src/animation/inline/linkonce_396098.c, range: [0x396098, 0x3960c8]}
+  - {src: src/animation/inline/linkonce_396190.c, range: [0x396190, 0x396258]}
+  - {src: src/animation/inline/linkonce_396258.c, range: [0x396258, 0x3962e8]}
+  - {src: src/animation/inline/linkonce_396518.c, range: [0x396518, 0x396548]}
+  - {src: src/game/inline/linkonce_396e78.c, range: [0x396e78, 0x396ec8]}

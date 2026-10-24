@@ -26,7 +26,7 @@ struct Kaim_CEntityGunPosition {
     void * Function_002D8A78(void * argument0);
     // 0x0038A1D8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_0038A1D8();
-    // 0x0038A210: UNVERIFIED signature (src/kynapse/parameter_classes_38a210.cpp).
+    // 0x0038A210: UNVERIFIED signature (src/kynapse/inline/parameter_classes_38a210.cpp).
     void * Function_0038A210();
 
     // Vtable 0x003E4A60; vptr field offset unknown; RTTI header.

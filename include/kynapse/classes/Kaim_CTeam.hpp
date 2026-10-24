@@ -33,11 +33,11 @@ struct Kaim_CTeam {
     void Function_002EC6D8(void * argument0);
     // 0x002EC9D0: UNVERIFIED signature (src/kynapse/configure_2ec9d0.cpp).
     unsigned char Function_002EC9D0(void * argument0);
-    // 0x0038EF98: UNVERIFIED signature (src/kynapse/class_info_38ef98.cpp).
+    // 0x0038EF98: UNVERIFIED signature (src/kynapse/inline/class_info_38ef98.cpp).
     void * Function_0038EF98();
-    // 0x0038EFA8: UNVERIFIED signature (src/kynapse/misc4_38efa8.cpp).
+    // 0x0038EFA8: UNVERIFIED signature (src/kynapse/inline/misc4_38efa8.cpp).
     void Function_0038EFA8(unsigned char argument0);
-    // 0x0038EFB0: UNVERIFIED signature (src/kynapse/hidden_name_condition.cpp).
+    // 0x0038EFB0: UNVERIFIED signature (src/kynapse/inline/hidden_name_condition.cpp).
     unsigned char Function_0038EFB0(void * argument0);
 
     // Vtable 0x003EBAE8; vptr field offset unknown; RTTI header.

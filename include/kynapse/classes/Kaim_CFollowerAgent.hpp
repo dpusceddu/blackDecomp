@@ -60,9 +60,9 @@ struct Kaim_CFollowerAgent {
     unsigned char Function_002D3610();
     // 0x002D36A8: UNVERIFIED signature (src/kynapse/behaviors_follower_2d31f0.cpp).
     void Function_002D36A8(void * argument0);
-    // 0x003894D0: UNVERIFIED signature (src/kynapse/class_info_3894d0.cpp).
+    // 0x003894D0: UNVERIFIED signature (src/kynapse/inline/class_info_3894d0.cpp).
     void * Function_003894D0();
-    // 0x0038BB28: UNVERIFIED signature (src/kynapse/small_misc_38bb28.cpp).
+    // 0x0038BB28: UNVERIFIED signature (src/kynapse/inline/small_misc_38bb28.cpp).
     void Function_0038BB28();
 
     // Vtable 0x003E3130; vptr field offset unknown; RTTI header.

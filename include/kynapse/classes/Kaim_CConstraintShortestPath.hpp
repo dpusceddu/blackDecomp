@@ -22,7 +22,7 @@ struct Kaim_CConstraintShortestPath {
     unsigned int Function_00383D48();
     // 0x003901C0: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003901C0();
-    // 0x00390260: UNVERIFIED signature (src/kynapse/class_info_390260.cpp).
+    // 0x00390260: UNVERIFIED signature (src/kynapse/inline/class_info_390260.cpp).
     void * Function_00390260();
 
     // Vtable 0x003ECA50; vptr field offset unknown; RTTI header.

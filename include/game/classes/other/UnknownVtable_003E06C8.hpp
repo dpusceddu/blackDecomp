@@ -20,7 +20,7 @@ struct UnknownVtable_003E06C8 {
     void * Function_001CDA28(void * argument0, unsigned int argument1);
     // 0x001CDAA8: UNVERIFIED signature (src/game/tu_1cdaa8.c).
     unsigned int Function_001CDAA8();
-    // 0x00384630: UNVERIFIED signature (src/linkonce/linkonce_384630.c).
+    // 0x00384630: UNVERIFIED signature (src/game/inline/linkonce_384630.c).
     unsigned int Function_00384630();
 
     // Vtable 0x003E06C8; vptr field offset unknown; referenced zero RTTI header.

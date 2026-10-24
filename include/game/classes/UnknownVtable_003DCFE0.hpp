@@ -38,9 +38,9 @@ struct UnknownVtable_003DCFE0 {
     int Function_00170320();
     // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
     void Function_002E4CA8();
-    // 0x00384180: UNVERIFIED signature (src/linkonce/linkonce_384180.c).
+    // 0x00384180: UNVERIFIED signature (src/game/inline/linkonce_384180.c).
     int Function_00384180(int argument0);
-    // 0x003841D0: UNVERIFIED signature (src/linkonce/linkonce_3841d0.c).
+    // 0x003841D0: UNVERIFIED signature (src/game/inline/linkonce_3841d0.c).
     int * Function_003841D0();
     // 0x0038CBA0: UNVERIFIED signature (src/kynapse/linkonce_38cba0.c).
     int Function_0038CBA0();

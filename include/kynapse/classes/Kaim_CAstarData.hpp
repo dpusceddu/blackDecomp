@@ -31,7 +31,7 @@ struct Kaim_CAstarData {
     int Function_002FE370(unsigned int argument0);
     // 0x002FEB08: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002FEB08();
-    // 0x00393598: UNVERIFIED signature (src/kynapse/class_info_393598.cpp).
+    // 0x00393598: UNVERIFIED signature (src/kynapse/inline/class_info_393598.cpp).
     void * Function_00393598();
 
     // Vtable 0x003EF7B0; vptr field offset unknown; RTTI header.

@@ -24,7 +24,7 @@ import json, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-LIBRARIES = ['game', 'kynapse', 'rw_core', 'rw_audio', 'animation', 'physics', 'apt', 'sony', 'libc', 'linkonce']
+LIBRARIES = ['game', 'kynapse', 'rw_core', 'rw_audio', 'animation', 'physics', 'apt', 'sony', 'libc']
 BEGIN, END = '<!-- progress:begin (tools/badges.py) -->', '<!-- progress:end -->'
 COLORS = [(5, 'red'), (15, 'orange'), (30, 'yellow'), (50, 'yellowgreen'), (75, 'green')]
 

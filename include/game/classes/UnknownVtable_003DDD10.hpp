@@ -48,13 +48,13 @@ struct UnknownVtable_003DDD10 {
     unsigned char Function_0018F230(S128 argument0);
     // 0x0018F2A0: UNVERIFIED signature (include/game/graphics/movement_core.hpp).
     int Function_0018F2A0(unsigned char * argument0);
-    // 0x00383E68: UNVERIFIED signature (src/linkonce/linkonce_383e68.c).
+    // 0x00383E68: UNVERIFIED signature (src/game/inline/linkonce_383e68.c).
     unsigned int Function_00383E68(S128 * argument0);
-    // 0x00383E98: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383E98: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     int Function_00383E98();
-    // 0x00383EA8: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383EA8: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     int Function_00383EA8();
-    // 0x00383EB8: UNVERIFIED signature (src/linkonce/linkonce_383e98.c).
+    // 0x00383EB8: UNVERIFIED signature (src/game/inline/linkonce_383e98.c).
     unsigned int Function_00383EB8();
 
     // Vtable 0x003DDD10; vptr field offset unknown; referenced zero RTTI header.
