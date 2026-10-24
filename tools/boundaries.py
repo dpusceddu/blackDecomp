@@ -15,23 +15,23 @@ orphan pairs   After the end of a function (`jr $ra` and its delay slot, plus an
                `%lo(func_00103928 + 0x8)`). Splat sees no boundary there when the real function start is unreferenced and
                fuses the run with the function. This tool puts a function start behind every run that begins at a
                function end and is itself unreferenced; the run stays a function of its own (assembly only). A real
-               function may begin with such a pair too (`mtc1 $0, $f1; nop`): on USA retail the Ghidra function starts
-               of config/symbols.txt end a run early where they fall inside it. Independent check: Ghidra starts a
-               function exactly behind the run in 531 of the 535 runs it has an opinion on.
+               function may begin with such a pair too (`mtc1 $0, $f1; nop`) and then looks like the last orphan of a run.
+               Such starts are listed by hand in config/<GAME_ID>/boundaries.txt, each behind a `// explicit: <reason>` line
+               (four on USA retail); the scan treats them as known function starts, ends the run there, and keeps them
+               when it rewrites the file.
 
 ctor list      The linker's __CTOR_LIST__ in .data (a count word, that many pointers into .text, a zero) holds the address of every
                `_GLOBAL__I_*` stub, which is a function start whether or not anything calls it. In USA retail one of the 116 entries,
                0x339c28, lies behind five orphan pieces that splat fused with it; the entry is added as a function start.
 
 Everything else that was suspected is not a boundary error and is not listed here (see docs/build.md, "Function boundaries"):
-extents where Ghidra ends earlier than splat (Ghidra leaves out the delay slot, or stops at an indirect `jr` that is a
-computed jump inside the function), and "falls through" over-splits (the words after the function are its jump table).
+"falls through" over-splits (the words after the function are its jump table) and functions that end in a computed jump.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import json, struct, sys
+import json, re, struct, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -91,18 +91,48 @@ def branch_spans(base, words):
     return out
 
 
-def ghidra_starts(slug):
-    """Function starts of the Ghidra export (config/symbols.txt); only meaningful for USA retail, which Ghidra analysed."""
-    out = set()
-    if slug == 'SLUS_213.76':
-        for line in (ROOT / 'config/symbols.txt').read_text().split('\n'):
-            f = line.split('\t')
-            if len(f) > 3 and f[2] == 'func':
-                out.add(int(f[0], 16))
-    return out
+ENTRY = re.compile(r'^\s*\w+\s*=\s*(0[xX][0-9a-fA-F]+)\s*;')
+EXPLICIT = '// explicit:'
+HEADER = ['// Function starts splat cannot see, in splat symbol_addrs format. tools/boundaries.py writes this file from the image;',
+          '// an entry behind a `// explicit: <reason>` line is kept by hand and is also read back as a known function start.']
 
 
-def orphan_splits(elf, ghidra=frozenset()):
+def parse_boundaries(text):
+    """({address: reason} of the explicit entries, [every address]) of a boundaries.txt. A `// explicit:` line applies to the
+    entry that follows it."""
+    explicit, starts, reason = {}, [], None
+    for line in text.split('\n'):
+        s = line.strip()
+        if s.startswith(EXPLICIT):
+            reason = s[len(EXPLICIT):].strip()
+            continue
+        m = ENTRY.match(s)
+        if m:
+            starts.append(int(m.group(1), 16))
+            if reason:
+                explicit[starts[-1]] = reason
+        if m or not s.startswith('//'):
+            reason = None
+    return explicit, starts
+
+
+def explicit_starts(slug):
+    """{address: reason} of the hand-listed function starts in config/<GAME_ID>/boundaries.txt."""
+    path = ROOT / 'config' / slug / 'boundaries.txt'
+    return parse_boundaries(path.read_text())[0] if path.exists() else {}
+
+
+def format_boundaries(starts, explicit):
+    out = list(HEADER)
+    for a in sorted(set(starts) | set(explicit)):
+        if a in explicit:
+            out.append('%s %s' % (EXPLICIT, explicit[a]))
+        out.append('func_%08X = 0x%08X; // type:func' % (a, a))
+    return '\n'.join(out) + '\n'
+
+
+def orphan_splits(elf, known=frozenset()):
+    """(function starts behind the orphan runs, number of orphan pieces); `known` are function starts that end a run."""
     t = elf.section('.text')
     data = elf.content(t)
     words = struct.unpack('<%dI' % (len(data) // 4), data)
@@ -127,15 +157,15 @@ def orphan_splits(elf, ghidra=frozenset()):
     while a < end - 8:
         # a function end: jr $ra with its delay slot just before a, optionally followed by one padding nop
         prev_end = w(a - 8) == JR_RA or (w(a - 4) == 0 and w(a - 12) == JR_RA and w(a - 8) != JR_RA)
-        if not (a % 8 == 0 and prev_end and a not in refs and a not in ghidra and not crossed(a)):
+        if not (a % 8 == 0 and prev_end and a not in refs and a not in known and not crossed(a)):
             a += 4
             continue
         r = a
         while r + 8 <= end and w(r + 4) == 0 and w(r) != 0 and not control(w(r)):
             r += 8
-        # a real function can itself begin with `<instruction>; nop` (an FPU hazard nop, say): when Ghidra starts one
-        # inside the run, the orphans end there
-        inner = [x for x in range(a + 8, r, 8) if x in ghidra]
+        # a real function can itself begin with `<instruction>; nop` (an FPU hazard nop, say): when a known start
+        # (an explicit entry of boundaries.txt) lies inside the run, the orphans end there
+        inner = [x for x in range(a + 8, r, 8) if x in known]
         if inner:
             r = inner[0]
         if r > a:
@@ -169,17 +199,16 @@ def main():
     slug = args[0]
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
     elf = Elf((ROOT / 'orig' / slug / boot).read_bytes())
-    splits, orphans = orphan_splits(elf, ghidra_starts(slug))
-    print('%s: %d orphan pieces, %d function starts added behind them' % (slug, orphans, len(splits)))
+    explicit = explicit_starts(slug)
+    splits, orphans = orphan_splits(elf, frozenset(explicit))
+    print('%s: %d orphan pieces, %d function starts added behind them (%d explicit)' % (slug, orphans, len(splits), len(explicit)))
     ctors = ctor_list_starts(elf)
     extra = sorted(set(ctors) - set(splits))
     print('%s: %d entries in __CTOR_LIST__' % (slug, len(ctors)))
-    splits = sorted(set(splits) | set(ctors))
+    splits = sorted(set(splits) | set(ctors) | set(explicit))
     if '--check' in sys.argv:
         return
-    lines = ['// Generated by tools/boundaries.py (see its docstring); splat symbol_addrs format.']
-    lines += ['func_%08X = 0x%08X; // type:func' % (a, a) for a in splits]
-    (ROOT / 'config' / slug / 'boundaries.txt').write_text('\n'.join(lines) + '\n')
+    (ROOT / 'config' / slug / 'boundaries.txt').write_text(format_boundaries(splits, explicit))
 
 
 if __name__ == '__main__':
