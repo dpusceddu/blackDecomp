@@ -36,10 +36,11 @@ def check(version):
     if c.returncode:
         return 'ERROR', c.stdout
     b = run(['ninja'])
-    lines = b.stdout.splitlines()
-    if b.returncode == 0 and any(l.startswith('OK  ') for l in lines):
-        return 'OK', b.stdout
-    if any(l.startswith('MISMATCH') for l in lines):
+    if b.returncode == 0:      # an up-to-date build prints nothing, so the image is compared again (cheap)
+        boot = json.loads((ROOT / 'config/variants.json').read_text())[version]['boot']
+        k = run([sys.executable, 'tools/check_elf.py', version, 'build/%s/%s.elf' % (version, boot)])
+        return ('OK' if k.returncode == 0 else 'MISMATCH'), k.stdout
+    if any(l.startswith('MISMATCH') for l in b.stdout.splitlines()):
         return 'MISMATCH', b.stdout
     return 'ERROR', b.stdout
 
