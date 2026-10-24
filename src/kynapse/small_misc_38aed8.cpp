@@ -1,4 +1,4 @@
-// Ported from the companion project (an unpublished companion project).
+// Ported from an unpublished companion project.
 #include "kynapse/small_misc.hpp"
 
 // /SLUS_213.76 0x38aed8

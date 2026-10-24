@@ -1,5 +1,5 @@
-// Declarations of the Kynapse source module "behavior_factories" (ported from the companion project:
-// an unpublished companion project). Function definitions are in the units that provide them.
+// Declarations of the Kynapse source module "behavior_factories" (ported from an unpublished companion project).
+// Function definitions are in the units that provide them.
 #ifndef BLACK_KYNAPSE_MODULE_BEHAVIOR_FACTORIES_HPP
 #define BLACK_KYNAPSE_MODULE_BEHAVIOR_FACTORIES_HPP
 #include "kynapse/compat.hpp"
@@ -64,7 +64,7 @@ struct Behavior28428C : Behavior {
 Behavior* CreateBehavior28428C(Context* context);
 
 
-// GENERATED BEHAVIOURS (matching/gen/kynapse_genbehaviors.py)
+// GENERATED BEHAVIOURS (from an unpublished companion project)
 struct Behavior2844F4 : Behavior {
     unsigned char unknown04[8];
     int field0c;

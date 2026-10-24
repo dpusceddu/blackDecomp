@@ -223,7 +223,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -240,7 +240,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G1
@@ -273,7 +273,7 @@ units:
     symbol: func_00103C28
     size: 212
     status: source
-  claim: wave1-game-frontend
+  claim: game-frontend
 - name: game_frontend_menu_level_selection
   source: src/game/frontend_menu_level_selection.cpp
   library: game
@@ -281,7 +281,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G1
@@ -298,7 +298,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O1
   - -G0
@@ -315,7 +315,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G1
@@ -332,7 +332,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -349,7 +349,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -382,7 +382,7 @@ units:
     symbol: func_001040C0
     size: 24
     status: source
-  claim: wave1-game-frontend
+  claim: game-frontend
 - name: game_frontend_menu_load
   source: src/game/frontend_menu_load.cpp
   library: game
@@ -390,7 +390,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -407,7 +407,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -432,7 +432,7 @@ units:
     symbol: func_00104108
     size: 160
     status: source
-  claim: wave1-game-frontend
+  claim: game-frontend
 - name: game_frontend_menu_initialize
   source: src/game/frontend_menu_initialize.cpp
   library: game
@@ -440,7 +440,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -457,7 +457,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -474,7 +474,7 @@ units:
   tier: exact
   origin: game
   tu: tu_103930
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -503,7 +503,7 @@ units:
     symbol: func_00105258
     size: 12
     status: source
-  claim: wave1-game-frontend
+  claim: game-frontend
 - name: auto_game_105268
   source: src/game/tu_103930_105268.c
   library: game
@@ -519,7 +519,7 @@ units:
     symbol: func_00105268
     size: 56
     status: source
-  claim: wave1-game-frontend
+  claim: game-frontend
 - name: auto_game_105308
   source: src/game/tu_1052a0_105308.c
   library: game
@@ -590,7 +590,7 @@ units:
     size: 8
     status: source
   tu: tu_105bc0
-  claim: phase5-game
+  claim: game
 - name: auto_game_106008
   source: src/game/tu_105bc0_106008.c
   library: game
@@ -633,7 +633,7 @@ units:
   tier: draft
   origin: game
   tu: tu_105bc0
-  claim: phase5-game
+  claim: game
   flags:
   - -O2
   - -G0
@@ -652,7 +652,7 @@ units:
   tier: exact
   origin: game
   tu: tu_105bc0
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -719,7 +719,7 @@ units:
   tier: exact
   origin: game
   tu: tu_105bc0
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -873,7 +873,7 @@ units:
   tier: exact
   origin: game
   tu: tu_105bc0
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G0
@@ -1013,7 +1013,7 @@ units:
   tier: exact
   origin: game
   tu: tu_105bc0
-  claim: phase5-game
+  claim: game
   flags:
   - -O2
   - -G0
@@ -1039,7 +1039,7 @@ units:
   tier: exact
   origin: game
   tu: tu_105bc0
-  claim: phase5-game
+  claim: game
   flags:
   - -O1
   - -G0
@@ -1109,7 +1109,7 @@ units:
   tier: exact
   origin: game
   tu: tu_105bc0
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G1
@@ -1130,7 +1130,7 @@ units:
   tier: exact
   origin: game
   tu: tu_105bc0
-  claim: wave1-game-frontend
+  claim: game-frontend
   flags:
   - -O2
   - -G1
@@ -1152,7 +1152,7 @@ units:
   tier: exact
   origin: game
   tu: tu_105bc0
-  claim: phase5-game
+  claim: game
   flags:
   - -O2
   - -G1
@@ -1455,7 +1455,7 @@ units:
 - name: auto_game_10bbf8
   source: src/game/frontend_debug_toggle.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -1467,12 +1467,12 @@ units:
     symbol: func_0010BBF8
     size: 8
     status: source
-  claim: wave1-game-frontend
+  claim: game-frontend
   tu: tu_10bbf8
 - name: tuf_10bc00
   source: src/game/frontend_save_state.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -1501,12 +1501,12 @@ units:
     symbol: func_0010EBC0
     size: 16
     status: source
-  claim: wave1-game-frontend
+  claim: game-frontend
   tu: tu_10bbf8
 - name: auto_unclassified_10c2f8
   source: src/game/frontend_save_dispatch.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -1520,7 +1520,7 @@ units:
     status: source
   trim:
     .rodata: 40
-  claim: wave1-game-frontend
+  claim: game-frontend
   tu: tu_10bbf8
 - name: tuf_10f258
   source: src/game/tu_10ebd0_10f258.c
@@ -5893,7 +5893,7 @@ units:
   library: game
   provenance: auto
   tier: exact
-  origin: auto; mod context owner
+  origin: auto
   flags:
   - -O2
   - -G0
@@ -5957,7 +5957,7 @@ units:
   library: game
   provenance: auto
   tier: exact
-  origin: auto; mod context owner
+  origin: auto
   flags:
   - -O2
   - -G0
@@ -6103,7 +6103,7 @@ units:
   library: game
   provenance: auto
   tier: exact
-  origin: auto; mod context owner
+  origin: auto
   flags:
   - -O2
   - -G0
@@ -13255,8 +13255,8 @@ units:
     symbol: func_00199850
     size: 52
     status: source
-  owner: final-depth-action-event
-  claim: final-depth-action-event
+  owner: action-event
+  claim: action-event
 - name: auto_game_199888
   source: src/game/tu_199850.c
   library: game
@@ -13273,8 +13273,8 @@ units:
     symbol: func_00199888
     size: 56
     status: source
-  owner: final-depth-action-event
-  claim: final-depth-action-event
+  owner: action-event
+  claim: action-event
   data_ranges:
   - section: .data
     input: .data.action_dispatch
@@ -13295,8 +13295,8 @@ units:
     symbol: func_001998F8
     size: 84
     status: source
-  owner: final-depth-action-event
-  claim: final-depth-action-event
+  owner: action-event
+  claim: action-event
 - name: tuf_199f08
   source: src/game/tu_199988_199f08.c
   library: game
@@ -14411,7 +14411,7 @@ units:
     symbol: func_001A8E30
     size: 220
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1a8f10
   source: src/game/tu_1a83a0_1a8f10.c
   library: game
@@ -14427,14 +14427,14 @@ units:
     symbol: func_001A8F10
     size: 104
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: actor_firing_animation
   source: src/game/firing_animation.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  claim: wave1-game-actor
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -14496,7 +14496,7 @@ units:
     symbol: func_001AA9D0
     size: 8
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1aad90
   source: src/game/tu_1a83a0_1aad90.c
   library: game
@@ -14524,7 +14524,7 @@ units:
     symbol: func_001AAEB0
     size: 96
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ab338
   source: src/game/tu_1a83a0_1ab338.c
   library: game
@@ -14540,7 +14540,7 @@ units:
     symbol: func_001AB338
     size: 132
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ab3c0
   source: src/game/tu_1a83a0_1ab3c0.c
   library: game
@@ -14556,14 +14556,14 @@ units:
     symbol: func_001AB3C0
     size: 32
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: actor_debug_draw
   source: src/game/debug_draw.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  claim: wave1-game-actor
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -14601,14 +14601,14 @@ units:
     symbol: func_001AB768
     size: 8
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: actor_animation_variables
   source: src/game/animation_variables.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  claim: wave1-game-actor
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -14654,7 +14654,7 @@ units:
     symbol: func_001ABE18
     size: 28
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1abeb8
   source: src/game/tu_1a83a0_1abeb8.c
   library: game
@@ -14670,7 +14670,7 @@ units:
     symbol: func_001ABEB8
     size: 40
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1abfa8
   source: src/game/tu_1a83a0_1abfa8.c
   library: game
@@ -14690,7 +14690,7 @@ units:
     symbol: func_001ABFD8
     size: 68
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ac020
   source: src/game/tu_1a83a0_1ac020.c
   library: game
@@ -14706,7 +14706,7 @@ units:
     symbol: func_001AC020
     size: 28
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ac040
   source: src/game/tu_1a83a0_1ac040.c
   library: game
@@ -14722,7 +14722,7 @@ units:
     symbol: func_001AC040
     size: 8
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: tu_1ac050
   source: src/game/tu_1a83a0_1ac050.c
   library: game
@@ -14750,7 +14750,7 @@ units:
     symbol: func_001AC0D0
     size: 16
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ac268
   source: src/game/tu_1a83a0_1ac268.c
   library: game
@@ -14766,14 +14766,14 @@ units:
     symbol: func_001AC268
     size: 16
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: actor_player_move_rate
   source: src/game/player_move_rate.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  claim: wave1-game-actor
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -14790,10 +14790,10 @@ units:
 - name: actor_player_move_multiplier
   source: src/game/player_move_multiplier.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  claim: wave1-game-actor
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -14823,7 +14823,7 @@ units:
     symbol: func_001AC398
     size: 92
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ac3f8
   source: src/game/tu_1a83a0_1ac3f8.c
   library: game
@@ -14839,14 +14839,14 @@ units:
     symbol: func_001AC3F8
     size: 72
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: actor_aim_bearing
   source: src/game/aim_bearing.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  claim: wave1-game-actor
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -14863,10 +14863,10 @@ units:
 - name: actor_torso_pitch
   source: src/game/torso_pitch.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  claim: wave1-game-actor
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -14896,7 +14896,7 @@ units:
     symbol: func_001AC940
     size: 28
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ad030
   source: src/game/tu_1a83a0_1ad030.c
   library: game
@@ -14916,7 +14916,7 @@ units:
     symbol: func_001AD050
     size: 28
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ad070
   source: src/game/tu_1a83a0_1ad070.c
   library: game
@@ -14932,7 +14932,7 @@ units:
     symbol: func_001AD070
     size: 40
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ad368
   source: src/game/tu_1a83a0_1ad368.c
   library: game
@@ -14948,7 +14948,7 @@ units:
     symbol: func_001AD368
     size: 12
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1ad9b0
   source: src/game/tu_1a83a0_1ad9b0.c
   library: game
@@ -14980,7 +14980,7 @@ units:
     symbol: func_001ADA70
     size: 48
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1adaf8
   source: src/game/tu_1a83a0_1adaf8.c
   library: game
@@ -14996,7 +14996,7 @@ units:
     symbol: func_001ADAF8
     size: 48
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1adbf0
   source: src/game/tu_1a83a0_1adbf0.c
   library: game
@@ -15012,7 +15012,7 @@ units:
     symbol: func_001ADBF0
     size: 28
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1add58
   source: src/game/tu_1add58.c
   library: game
@@ -15166,7 +15166,7 @@ units:
   library: game
   provenance: auto
   tier: exact
-  origin: auto; mod context owner
+  origin: auto
   flags:
   - -O2
   - -G0
@@ -15201,14 +15201,14 @@ units:
     symbol: func_001AE9F8
     size: 28
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: actor_reset_buffers
   source: src/game/reset_buffers.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
-  claim: wave1-game-actor
+  origin: game
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -15224,10 +15224,10 @@ units:
 - name: actor_set_buffer
   source: src/game/set_buffer.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
-  claim: wave1-game-actor
+  origin: game
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -15242,10 +15242,10 @@ units:
 - name: actor_get_buffer
   source: src/game/get_buffer.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
-  claim: wave1-game-actor
+  origin: game
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -15273,14 +15273,14 @@ units:
     symbol: func_001AEB18
     size: 52
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: actor_opacity
   source: src/game/opacity.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  claim: wave1-game-actor
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -15305,7 +15305,7 @@ units:
     symbol: func_001AF180
     size: 28
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: tuf_1af1a0
   source: src/game/tu_1ae2e8_1af1a0.c
   library: game
@@ -15338,7 +15338,7 @@ units:
     symbol: func_001AF768
     size: 44
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: auto_game_1af580
   source: src/game/tu_1ae2e8_1af580.c
   library: game
@@ -15354,14 +15354,14 @@ units:
     symbol: func_001AF580
     size: 332
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: actor_record_flags
   source: src/game/record_flags.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
-  claim: wave1-game-actor
+  origin: game
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -15384,7 +15384,7 @@ units:
   library: game
   provenance: auto
   tier: exact
-  origin: auto; mod context owner
+  origin: auto
   flags:
   - -O2
   - -G0
@@ -15423,14 +15423,14 @@ units:
     symbol: func_001AFF88
     size: 16
     status: source
-  claim: wave1-game-actor
+  claim: game-actor
 - name: actor_render_dispatch
   source: src/game/render_dispatch.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  claim: wave1-game-actor
+  claim: game-actor
   flags:
   - -O2
   - -G0
@@ -16107,8 +16107,8 @@ units:
     symbol: func_001C05F8
     size: 8
     status: source
-  owner: mod-context
-  claim: mod-wave3-preparation
+  owner: context
+  claim: preparation
 - name: auto_game_1c0730
   source: src/game/tu_1bec18_1c0730.c
   library: game
@@ -25885,7 +25885,7 @@ units:
 - name: rwcore_2a50f8
   source: src/rw_core/tu_2a50f8.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -25927,141 +25927,141 @@ units:
     symbol: func_002A5140
     size: 528
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a53d0'
     symbol: func_002A53D0
     size: 80
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a5420'
     symbol: func_002A5420
     size: 292
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a55b8'
     symbol: func_002A55B8
     size: 20
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a5640'
     symbol: func_002A5640
     size: 508
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a5850'
     symbol: func_002A5850
     size: 552
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a5ac8'
     symbol: func_002A5AC8
     size: 128
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a5b98'
     symbol: func_002A5B98
     size: 44
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a5bc8'
     symbol: func_002A5BC8
     size: 180
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a5c80'
     symbol: func_002A5C80
     size: 104
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a5ce8'
     symbol: func_002A5CE8
     size: 804
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a6010'
     symbol: func_002A6010
     size: 812
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a6340'
     symbol: func_002A6340
     size: 672
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a65f0'
     symbol: func_002A65F0
     size: 208
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a66c8'
     symbol: func_002A66C8
     size: 404
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a6868'
     symbol: func_002A6868
     size: 588
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a6ab8'
     symbol: func_002A6AB8
     size: 76
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a6b08'
     symbol: func_002A6B08
     size: 244
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a6c08'
     symbol: func_002A6C08
     size: 188
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a6cc8'
     symbol: func_002A6CC8
     size: 808
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a7050'
     symbol: func_002A7050
     size: 396
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a71e0'
     symbol: func_002A71E0
     size: 504
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a73d8'
     symbol: func_002A73D8
     size: 308
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a7520'
     symbol: func_002A7520
     size: 120
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a7598'
     symbol: func_002A7598
     size: 84
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a75f0'
     symbol: func_002A75F0
     size: 196
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
   - addr: '0x2a76e0'
     symbol: func_002A76E0
     size: 172
     status: asm
-    reason: 'claimed: RW stream/freelist/matrix campaign'
+    reason: 'claimed: RW stream/freelist/matrix'
 - name: rwcore_2a5350
   source: src/rw_core/tu_2a50f8_2a5350.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -26076,7 +26076,7 @@ units:
 - name: rwcore_2a5548
   source: src/rw_core/tu_2a50f8_2a5548.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -26091,7 +26091,7 @@ units:
 - name: rwcore_2a5588
   source: src/rw_core/tu_2a50f8_2a5588.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -26109,7 +26109,7 @@ units:
 - name: rwcore_2a55d8
   source: src/rw_core/tu_2a50f8_2a55d8.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -26127,7 +26127,7 @@ units:
 - name: rwcore_2a5a90
   source: src/rw_core/tu_2a50f8_2a5a90.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -26183,7 +26183,7 @@ units:
 - name: rwcore_2a76c0
   source: src/rw_core/tu_2a50f8_2a76c0.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -26254,302 +26254,302 @@ units:
     symbol: func_002A8F78
     size: 332
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9178'
     symbol: func_002A9178
     size: 92
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a91d8'
     symbol: func_002A91D8
     size: 100
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9240'
     symbol: func_002A9240
     size: 204
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9310'
     symbol: func_002A9310
     size: 204
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9430'
     symbol: func_002A9430
     size: 104
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9498'
     symbol: func_002A9498
     size: 124
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9588'
     symbol: func_002A9588
     size: 88
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a95e0'
     symbol: func_002A95E0
     size: 96
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9640'
     symbol: func_002A9640
     size: 492
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9838'
     symbol: func_002A9838
     size: 112
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a98a8'
     symbol: func_002A98A8
     size: 104
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9910'
     symbol: func_002A9910
     size: 196
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a99d8'
     symbol: func_002A99D8
     size: 268
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9ae8'
     symbol: func_002A9AE8
     size: 136
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9b70'
     symbol: func_002A9B70
     size: 316
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9cb8'
     symbol: func_002A9CB8
     size: 312
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2a9f08'
     symbol: func_002A9F08
     size: 260
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa080'
     symbol: func_002AA080
     size: 228
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa188'
     symbol: func_002AA188
     size: 240
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa2e8'
     symbol: func_002AA2E8
     size: 88
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa340'
     symbol: func_002AA340
     size: 184
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa420'
     symbol: func_002AA420
     size: 104
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa488'
     symbol: func_002AA488
     size: 136
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa510'
     symbol: func_002AA510
     size: 88
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa570'
     symbol: func_002AA570
     size: 416
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa710'
     symbol: func_002AA710
     size: 304
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aa840'
     symbol: func_002AA840
     size: 548
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aaa68'
     symbol: func_002AAA68
     size: 1248
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2aaf48'
     symbol: func_002AAF48
     size: 772
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ab250'
     symbol: func_002AB250
     size: 292
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ab378'
     symbol: func_002AB378
     size: 444
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ab538'
     symbol: func_002AB538
     size: 936
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ab8e0'
     symbol: func_002AB8E0
     size: 516
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2abaf8'
     symbol: func_002ABAF8
     size: 160
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2abb98'
     symbol: func_002ABB98
     size: 108
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2abc08'
     symbol: func_002ABC08
     size: 272
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2abd68'
     symbol: func_002ABD68
     size: 280
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2abe90'
     symbol: func_002ABE90
     size: 496
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac0d0'
     symbol: func_002AC0D0
     size: 88
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac128'
     symbol: func_002AC128
     size: 220
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac210'
     symbol: func_002AC210
     size: 100
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac278'
     symbol: func_002AC278
     size: 100
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac2e0'
     symbol: func_002AC2E0
     size: 164
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac388'
     symbol: func_002AC388
     size: 216
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac468'
     symbol: func_002AC468
     size: 252
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac568'
     symbol: func_002AC568
     size: 112
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac5d8'
     symbol: func_002AC5D8
     size: 80
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac628'
     symbol: func_002AC628
     size: 156
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac750'
     symbol: func_002AC750
     size: 64
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac7d0'
     symbol: func_002AC7D0
     size: 56
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac8a0'
     symbol: func_002AC8A0
     size: 104
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ac908'
     symbol: func_002AC908
     size: 732
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2acbe8'
     symbol: func_002ACBE8
     size: 636
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ace68'
     symbol: func_002ACE68
     size: 840
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ad1b0'
     symbol: func_002AD1B0
     size: 276
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ad2c8'
     symbol: func_002AD2C8
     size: 480
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ad4a8'
     symbol: func_002AD4A8
     size: 100
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ad510'
     symbol: func_002AD510
     size: 196
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
   - addr: '0x2ad5d8'
     symbol: func_002AD5D8
     size: 136
     status: asm
-    reason: 'claimed: RW camera/image/frame campaign'
+    reason: 'claimed: RW camera/image/frame'
 - name: auto_other_2a93e0
   source: src/rw_core/tu_2a8f78_2a93e0.c
   library: rw_core
@@ -26568,7 +26568,7 @@ units:
 - name: rwcore_2a9e38
   source: src/rw_core/tu_2a8f78_2a9e38.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -26648,7 +26648,7 @@ units:
 - name: rwcore_2aa040
   source: src/rw_core/tu_2a8f78_2aa040.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -26663,7 +26663,7 @@ units:
 - name: rwcore_2abd18
   source: src/rw_core/tu_2a8f78_2abd18.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -26975,7 +26975,7 @@ units:
 - name: rwcore_open_2ce950
   source: src/rw_core/tu_2ce950.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -27081,147 +27081,147 @@ units:
     symbol: func_002CE9B8
     size: 180
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cea78'
     symbol: func_002CEA78
     size: 92
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2ceae0'
     symbol: func_002CEAE0
     size: 208
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cebe0'
     symbol: func_002CEBE0
     size: 600
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cee38'
     symbol: func_002CEE38
     size: 780
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf150'
     symbol: func_002CF150
     size: 404
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf2e8'
     symbol: func_002CF2E8
     size: 156
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf388'
     symbol: func_002CF388
     size: 172
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf440'
     symbol: func_002CF440
     size: 360
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf5e0'
     symbol: func_002CF5E0
     size: 20
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf5f8'
     symbol: func_002CF5F8
     size: 20
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf610'
     symbol: func_002CF610
     size: 312
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf750'
     symbol: func_002CF750
     size: 292
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf888'
     symbol: func_002CF888
     size: 136
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf910'
     symbol: func_002CF910
     size: 128
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cf990'
     symbol: func_002CF990
     size: 304
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cfac0'
     symbol: func_002CFAC0
     size: 728
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cfd98'
     symbol: func_002CFD98
     size: 76
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cfdf8'
     symbol: func_002CFDF8
     size: 152
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cfef0'
     symbol: func_002CFEF0
     size: 76
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cff58'
     symbol: func_002CFF58
     size: 84
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2cffc0'
     symbol: func_002CFFC0
     size: 184
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d0078'
     symbol: func_002D0078
     size: 120
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d00f0'
     symbol: func_002D00F0
     size: 84
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d0178'
     symbol: func_002D0178
     size: 260
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d0280'
     symbol: func_002D0280
     size: 1016
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d0680'
     symbol: func_002D0680
     size: 56
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d06b8'
     symbol: func_002D06B8
     size: 160
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d0758'
     symbol: func_002D0758
     size: 112
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d0858'
     symbol: func_002D0858
     size: 52
@@ -27230,37 +27230,37 @@ units:
     symbol: func_002D0910
     size: 240
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d0a78'
     symbol: func_002D0A78
     size: 796
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d0da0'
     symbol: func_002D0DA0
     size: 568
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d0fd8'
     symbol: func_002D0FD8
     size: 496
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d11d0'
     symbol: func_002D11D0
     size: 100
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d1240'
     symbol: func_002D1240
     size: 752
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
   - addr: '0x2d1530'
     symbol: func_002D1530
     size: 60
     status: asm
-    reason: 'claimed: RW core stream/plugin/string campaign'
+    reason: 'claimed: RW core stream/plugin/string'
 - name: auto_other_2cead8
   source: src/rw_core/tu_2ce950_2cead8.c
   library: rw_core
@@ -27353,11 +27353,11 @@ units:
     gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
-  owner: wave1-kynapse
+  owner: kynapse
 - name: tuf_2d2ce8
   source: src/kynapse/flee_agent_2d1610.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
   flags:
@@ -27403,7 +27403,7 @@ units:
     size: 64
     symbol: func_002D2F00
     status: source
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: kynapse_predicates_2d2e48
   source: src/kynapse/predicates_2d2e48.cpp
   library: kynapse
@@ -27424,7 +27424,7 @@ units:
     symbol: HasBoth__C9BothIds60
     size: 40
     status: source
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: tuf_2d3970
   source: src/kynapse/tu_2d38c8_2d3970.c
   library: kynapse
@@ -27503,7 +27503,7 @@ units:
 - name: tuf_2d5008
   source: src/kynapse/hide_agent_2d3c90.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
   flags:
@@ -27537,7 +27537,7 @@ units:
     symbol: func_002D5328
     size: 64
     status: source
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: kynapse_predicates_2d5198
   source: src/kynapse/predicates_2d5198.cpp
   library: kynapse
@@ -27554,7 +27554,7 @@ units:
     symbol: HasBoth__C9BothIds28
     size: 40
     status: source
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: kynapse_behavior_methods_2d51c0
   source: src/kynapse/behavior_methods_2d51c0.cpp
   library: kynapse
@@ -27573,7 +27573,7 @@ units:
     status: source
   externs:
     _4Kaim$gOrigin: '0x4514f8'
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: kynapse_predicates_2d5238
   source: src/kynapse/predicates_2d5238.cpp
   library: kynapse
@@ -27590,7 +27590,7 @@ units:
     symbol: IsSet__C7IsSet50
     size: 12
     status: source
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: tuf_2d61b8
   source: src/kynapse/tu_2d53f0_2d61b8.c
   library: kynapse
@@ -28831,10 +28831,10 @@ units:
 - name: point_mapper_factory
   source: src/kynapse/point_mapper_factory.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -28851,7 +28851,7 @@ units:
 - name: tuf_2dada8
   source: src/kynapse/point_mapper_core.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
   flags:
@@ -28889,14 +28889,14 @@ units:
     symbol: func_002DC8A0
     size: 140
     status: source
-  owner: cpp-campaign-graph
+  owner: graph
 - name: point_mapper_configure
   source: src/kynapse/point_mapper_configure.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -28910,10 +28910,10 @@ units:
 - name: point_mapper_nearest
   source: src/kynapse/point_mapper_nearest.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -29336,7 +29336,7 @@ units:
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: wave1-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -29361,7 +29361,7 @@ units:
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: wave1-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -29385,7 +29385,7 @@ units:
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: wave1-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -29409,7 +29409,7 @@ units:
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: wave1-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -29431,7 +29431,7 @@ units:
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: wave1-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -29476,14 +29476,14 @@ units:
     status: source
   externs:
     _stricmp: '0x360838'
-  owner: wave1-kynapse
+  owner: kynapse
 - name: kynapse_child_buffers_2e3288
   source: src/kynapse/child_buffers_2e3288.cpp
   library: kynapse
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: wave1-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -29518,7 +29518,7 @@ units:
     status: source
   externs:
     _stricmp: '0x360838'
-  owner: wave1-kynapse
+  owner: kynapse
 - name: kynapse_owned_arrays_2e3408
   source: src/kynapse/owned_arrays_2e3408.cpp
   library: kynapse
@@ -29537,14 +29537,14 @@ units:
     status: source
   externs:
     _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
-  owner: wave1-kynapse
+  owner: kynapse
 - name: kynapse_child_buffers_2e3440
   source: src/kynapse/child_buffers_2e3440.cpp
   library: kynapse
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: wave1-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -29581,7 +29581,7 @@ units:
     _vt$Q24Kaim10ObjectBase: '0x3e0040'
     _vt$Q24Kaim12ChildBuffers: '0x3e8dd0'
     memoryRelease: '0x3c87e0'
-  owner: wave1-kynapse
+  owner: kynapse
 - name: kynapse_child_buffers_2e3578
   source: src/kynapse/child_buffers_2e3578.cpp
   library: kynapse
@@ -29612,7 +29612,7 @@ units:
     memoryRelease: '0x3c87e0'
     strcpy: '0x35cbc0'
     strlen: '0x35ccd8'
-  owner: wave1-kynapse
+  owner: kynapse
 - name: kynapse_owned_arrays_2e37a0
   source: src/kynapse/owned_arrays_2e37a0.cpp
   library: kynapse
@@ -29629,14 +29629,14 @@ units:
     symbol: DeleteChildren__Q24Kaim12ChildBuffers
     size: 132
     status: source
-  owner: wave1-kynapse
+  owner: kynapse
 - name: kynapse_child_buffers_2e3828
   source: src/kynapse/child_buffers_2e3828.cpp
   library: kynapse
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: wave1-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -29653,7 +29653,7 @@ units:
 - name: auto_other_2e3918
   source: src/kynapse/child_buffers_2e3918.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
   flags:
@@ -29666,7 +29666,7 @@ units:
     symbol: func_002E3918
     size: 8
     status: source
-  owner: wave1-kynapse
+  owner: kynapse
 - name: kynapse_child_buffers_2e3920
   source: src/kynapse/child_buffers_2e3920.cpp
   library: kynapse
@@ -29683,7 +29683,7 @@ units:
     symbol: GetSecond__CQ24Kaim12ChildBuffers
     size: 8
     status: source
-  owner: wave1-kynapse
+  owner: kynapse
 - name: kynapse_settings_2e3fc8
   source: src/kynapse/settings_2e3fc8.cpp
   library: kynapse
@@ -30304,7 +30304,7 @@ units:
     symbol: func_002F0D88
     size: 32
     status: source
-  owner: cpp-campaign-graph
+  owner: graph
 - name: kynapse_buffers3_2f0a00
   source: src/kynapse/buffers3_2f0a00.cpp
   library: kynapse
@@ -30825,7 +30825,7 @@ units:
     symbol: func_002F4370
     size: 32
     status: source
-  owner: cpp-campaign-graph
+  owner: graph
 - name: tuf_2f49f0
   source: src/kynapse/tu_2f4390_2f49f0.c
   library: kynapse
@@ -31381,8 +31381,8 @@ units:
     gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
-  owner: final-deep-kynapse-steering
-  claim: final-deep-kynapse-steering
+  owner: kynapse-steering
+  claim: kynapse-steering
 - name: tuf_3063a8
   source: src/kynapse/behaviors_repulsor.cpp
   library: kynapse
@@ -31422,8 +31422,8 @@ units:
     symbol: func_00306780
     size: 32
     status: source
-  owner: final-deep-kynapse-steering
-  claim: final-deep-kynapse-steering
+  owner: kynapse-steering
+  claim: kynapse-steering
 - name: auto_other_30b750
   source: src/kynapse/tu_3067a0_30b750.c
   library: kynapse
@@ -31675,7 +31675,7 @@ units:
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: phase5-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -31764,14 +31764,14 @@ units:
     symbol: ClearRequests__10Perception
     size: 12
     status: source
-  owner: phase5-kynapse
+  owner: kynapse
 - name: kynapse_perception_queries
   source: src/kynapse/perception_queries.cpp
   library: kynapse
   provenance: imported
   tier: exact
   origin: kynapse
-  owner: phase5-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -31812,7 +31812,7 @@ units:
   provenance: auto
   tier: exact
   origin: auto
-  owner: phase5-kynapse
+  owner: kynapse
   flags:
   - -O2
   - -G0
@@ -31880,7 +31880,7 @@ units:
     symbol: func_00311248
     size: 48
     status: source
-  claim: wave2-rw-audio
+  claim: rw-audio
 - name: auto_other_3112e0
   source: src/rw_audio/tu_310978_3112e0.c
   library: rw_audio
@@ -31896,7 +31896,7 @@ units:
     symbol: func_003112E0
     size: 32
     status: source
-  claim: wave2-rw-audio
+  claim: rw-audio
 - name: auto_other_311430
   source: src/rw_audio/tu_310978_311430.c
   library: rw_audio
@@ -31912,7 +31912,7 @@ units:
     symbol: func_00311430
     size: 8
     status: source
-  claim: wave2-rw-audio
+  claim: rw-audio
 - name: tuf_311498
   source: src/rw_audio/tu_310978_311498.c
   library: rw_audio
@@ -31933,7 +31933,7 @@ units:
     symbol: func_00311558
     size: 12
     status: source
-  claim: wave2-rw-audio
+  claim: rw-audio
 - name: tu_311b50
   source: src/rw_audio/tu_3119b0_311b50.c
   library: rw_audio
@@ -31976,7 +31976,7 @@ units:
     symbol: func_00312900
     size: 52
     status: source
-  claim: wave2-rw-audio
+  claim: rw-audio
 - name: auto_other_312a10
   source: src/rw_audio/tu_311e60_312a10.c
   library: rw_audio
@@ -31996,7 +31996,7 @@ units:
     symbol: func_00312A28
     size: 20
     status: source
-  claim: wave2-rw-audio
+  claim: rw-audio
 - name: auto_other_312bc8
   source: src/rw_audio/tu_312bc8.c
   library: rw_audio
@@ -32012,10 +32012,10 @@ units:
     symbol: func_00312BC8
     size: 8
     status: source
-- name: rwa_campaign_312bd0
+- name: rwa_manual_312bd0
   source: src/rw_audio/tu_312bd0.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: rwa_ee
   flags:
@@ -32247,7 +32247,7 @@ units:
 - name: rwa_allocator_selector
   source: src/rw_audio/allocator_selector.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32330,7 +32330,7 @@ units:
 - name: rwa_disk_header_swap
   source: src/rw_audio/disk_header_swap.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32345,7 +32345,7 @@ units:
 - name: rwa_bank_create_data
   source: src/rw_audio/bank_create_data.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32360,7 +32360,7 @@ units:
 - name: rwa_bank_enable
   source: src/rw_audio/bank_enable.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32375,7 +32375,7 @@ units:
 - name: rwa_bank_disable
   source: src/rw_audio/bank_disable.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32417,10 +32417,10 @@ units:
     symbol: func_003145D0
     size: 92
     status: source
-- name: rwa_campaign_314630
+- name: rwa_manual_314630
   source: src/rw_audio/tu_314630.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: rwa_ee
   flags:
@@ -32532,7 +32532,7 @@ units:
 - name: rwa_format_block_size
   source: src/rw_audio/format_block_size.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32640,7 +32640,7 @@ units:
 - name: rwa_driver_reset
   source: src/rw_audio/driver_reset.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32659,7 +32659,7 @@ units:
 - name: rwa_sound_swap
   source: src/rw_audio/sound_swap.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32674,7 +32674,7 @@ units:
 - name: rwa_sound_pool_reset
   source: src/rw_audio/sound_pool_reset.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32693,7 +32693,7 @@ units:
 - name: rwa_object_header_swap
   source: src/rw_audio/object_header_swap.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32708,7 +32708,7 @@ units:
 - name: rwa_format_pool_reset
   source: src/rw_audio/format_pool_reset.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -32761,12 +32761,12 @@ units:
     symbol: func_00317300
     size: 60
     status: source
-  claim: final-deep-audio
+  claim: audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-  owner: final-deep-audio
+  owner: audio
 - name: auto_other_3174d0
   source: src/rw_audio/tu_3168c8_3174d0.c
   library: rw_audio
@@ -32781,12 +32781,12 @@ units:
     symbol: func_003174D0
     size: 32
     status: source
-  claim: final-deep-audio
+  claim: audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-  owner: final-deep-audio
+  owner: audio
 - name: auto_other_3176d0
   source: src/rw_audio/tu_3168c8_3176d0.c
   library: rw_audio
@@ -32802,8 +32802,8 @@ units:
     symbol: func_003176D0
     size: 16
     status: source
-  claim: final-deep-audio
-  owner: final-deep-audio
+  claim: audio
+  owner: audio
 - name: auto_other_317868
   source: src/rw_audio/tu_3168c8_317868.c
   library: rw_audio
@@ -32822,12 +32822,12 @@ units:
     symbol: func_00317888
     size: 44
     status: source
-  claim: final-deep-audio
+  claim: audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-  owner: final-deep-audio
+  owner: audio
 - name: auto_other_3178b8
   source: src/rw_audio/tu_3168c8_3178b8.c
   library: rw_audio
@@ -32843,8 +32843,8 @@ units:
     symbol: func_003178B8
     size: 8
     status: source
-  claim: final-deep-audio
-  owner: final-deep-audio
+  claim: audio
+  owner: audio
 - name: tuf_318250
   source: src/rw_audio/tu_3168c8_318250.c
   library: rw_audio
@@ -32937,8 +32937,8 @@ units:
     symbol: func_0031A400
     size: 16
     status: source
-  claim: final-deep-audio
-  owner: final-deep-audio
+  claim: audio
+  owner: audio
 - name: auto_other_3194a0
   source: src/rw_audio/tu_3168c8_3194a0.c
   library: rw_audio
@@ -32954,8 +32954,8 @@ units:
     symbol: func_003194A0
     size: 52
     status: source
-  claim: final-deep-audio
-  owner: final-deep-audio
+  claim: audio
+  owner: audio
 - name: auto_other_3195d0
   source: src/rw_audio/tu_3168c8_3195d0.c
   library: rw_audio
@@ -32971,8 +32971,8 @@ units:
     symbol: func_003195D0
     size: 60
     status: source
-  claim: final-deep-audio
-  owner: final-deep-audio
+  claim: audio
+  owner: audio
 - name: auto_other_31a4e8
   source: src/rw_audio/tu_31a4e8.c
   library: rw_audio
@@ -33201,10 +33201,10 @@ units:
     symbol: func_0031BAF8
     size: 16
     status: source
-- name: rwa_campaign_31bd20
+- name: rwa_manual_31bd20
   source: src/rw_audio/tu_31bd20.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: rwa_ee
   flags:
@@ -33332,7 +33332,7 @@ units:
 - name: rwa_voice_construct_callback
   source: src/rw_audio/voice_construct_callback.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -33347,7 +33347,7 @@ units:
 - name: rwa_playback_queued
   source: src/rw_audio/playback_queued.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -34587,7 +34587,7 @@ units:
 - name: tuf_32e0e0
   source: src/physics/tu_32bc70.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
   flags:
@@ -34611,17 +34611,17 @@ units:
     symbol: func_0032BDC0
     size: 788
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32c0d8'
     symbol: func_0032C0D8
     size: 1224
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32c5a0'
     symbol: func_0032C5A0
     size: 664
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32c838'
     symbol: func_0032C838
     size: 560
@@ -34662,7 +34662,7 @@ units:
     symbol: func_0032D990
     size: 856
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32dce8'
     symbol: func_0032DCE8
     size: 532
@@ -34675,7 +34675,7 @@ units:
     symbol: func_0032E048
     size: 148
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32e0e0'
     symbol: func_0032E0E0
     size: 60
@@ -34712,8 +34712,8 @@ units:
     symbol: func_0032E3B0
     size: 32
     status: source
-  owner: final-deep-physics-scene
-  claim: final-deep-physics-scene
+  owner: physics-scene
+  claim: physics-scene
   data_ranges:
   - input: .sbss
     start: '0x40e848'
@@ -34736,7 +34736,7 @@ units:
 - name: tuf_32e5d8
   source: src/physics/tu_32e3d0_32e5d8.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
   flags:
@@ -34763,21 +34763,21 @@ units:
     symbol: func_0032E3D0
     size: 188
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32e490'
     symbol: func_0032E490
     size: 324
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32e618'
     symbol: func_0032E618
     size: 184
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
 - name: tuf_32faf0
   source: src/physics/tu_32e810.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
   flags:
@@ -34790,22 +34790,22 @@ units:
     symbol: func_0032E810
     size: 1388
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32ed80'
     symbol: func_0032ED80
     size: 1048
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32f1a0'
     symbol: func_0032F1A0
     size: 1924
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32f928'
     symbol: func_0032F928
     size: 324
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32fa70'
     symbol: func_0032FA70
     size: 124
@@ -34891,7 +34891,7 @@ units:
 - name: auto_physics_334390
   source: src/physics/tu_334120.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
   flags:
@@ -34910,12 +34910,12 @@ units:
     symbol: func_00334268
     size: 100
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x3342d0'
     symbol: func_003342D0
     size: 104
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x334340'
     symbol: func_00334340
     size: 80
@@ -34928,8 +34928,8 @@ units:
     symbol: func_003343B0
     size: 32
     status: source
-  owner: final-deep-physics
-  claim: final-deep-physics
+  owner: physics
+  claim: physics
   data_ranges:
   - section: .sbss
     input: .sbss
@@ -35064,7 +35064,7 @@ units:
 - name: tuf_33ad90
   source: src/physics/tu_33a488_33ad90.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
   flags:
@@ -35114,12 +35114,12 @@ units:
     symbol: func_0033AE38
     size: 4
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x33ae68'
     symbol: func_0033AE68
     size: 60
     status: source
-  claim: context-wave5-graphics
+  claim: graphics
 - name: auto_physics_33b688
   source: src/physics/tu_33afb0_33b688.c
   library: physics
@@ -35146,7 +35146,7 @@ units:
 - name: auto_physics_33b890
   source: src/physics/tu_33b708.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
   flags:
@@ -35173,8 +35173,8 @@ units:
     symbol: func_0033B858
     size: 56
     status: source
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   data_ranges:
   - section: .sbss
     input: .sbss
@@ -35255,10 +35255,10 @@ units:
 - name: animation_collection_342a60
   source: src/animation/tu_342a60.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: animation
-  owner: wave1-animation
+  owner: animation
   flags:
   - -O2
   - -G0
@@ -35424,8 +35424,8 @@ units:
     symbol: func_003487E8
     size: 8
     status: source
-  owner: mod-context
-  claim: mod-wave3-preparation
+  owner: context
+  claim: preparation
 - name: auto_animation_3489a0
   source: src/animation/tu_3489a0.c
   library: animation
@@ -35558,10 +35558,10 @@ units:
 - name: animation_graph_34b498
   source: src/animation/tu_34b498.c
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: animation
-  owner: wave1-animation
+  owner: animation
   flags:
   - -O2
   - -G0
@@ -35830,7 +35830,7 @@ units:
 - name: tuf_34b5a8
   source: src/animation/tu_34b498_34b5a8.c
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: animation
   flags:
@@ -35847,7 +35847,7 @@ units:
     symbol: func_0034D920
     size: 64
     status: source
-  owner: phase5-animation
+  owner: animation
 - name: auto_animation_34c968
   source: src/animation/tu_34b498_34c968.c
   library: animation
@@ -35866,10 +35866,10 @@ units:
 - name: animation_graph_runtime_34b498
   source: src/animation/tu_34b498_34e5c0.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: animation
-  owner: wave1-animation
+  owner: animation
   flags:
   - -O2
   - -G0
@@ -35912,14 +35912,14 @@ units:
     symbol: func_0034F2E0
     size: 68
     status: source
-  claim: final-depth-animation
-  owner: final-depth-animation
+  claim: animation
+  owner: animation
 - name: auto_animation_34f328
   source: src/animation/tu_34eae0_34f328.c
   library: animation
   provenance: auto
   tier: exact
-  origin: auto; mod context owner
+  origin: auto
   flags:
   - -O1
   - -G0
@@ -35929,8 +35929,8 @@ units:
     symbol: func_0034F328
     size: 52
     status: source
-  claim: final-depth-animation
-  owner: final-depth-animation
+  claim: animation
+  owner: animation
 - name: auto_animation_34fe70
   source: src/animation/tu_34fe70.c
   library: animation
@@ -35949,7 +35949,7 @@ units:
 - name: animation_parameter_bank_350060
   source: src/animation/tu_350060.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: animation
   flags:
@@ -35983,8 +35983,8 @@ units:
     symbol: func_003500E0
     size: 76
     status: source
-  owner: final-depth-animation
-  claim: final-depth-animation
+  owner: animation
+  claim: animation
   assembler_evidence:
     strength: weak
     basis: individually verified output
@@ -41281,7 +41281,7 @@ units:
     status: source
   externs:
     gClassInfo2B3A38: '0x44ecd0'
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: auto_kynapse_3892a0
   source: src/kynapse/linkonce_3892a0.c
   library: kynapse
@@ -41430,7 +41430,7 @@ units:
     status: source
   externs:
     gClassInfo2B3920: '0x44ede8'
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: auto_kynapse_3894e0
   source: src/kynapse/linkonce_3894e0.c
   library: kynapse
@@ -41582,7 +41582,7 @@ units:
     status: source
   externs:
     gClassInfo2B36F0: '0x44f018'
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: auto_kynapse_3895d8
   source: src/kynapse/linkonce_3895d8.c
   library: kynapse
@@ -44721,7 +44721,7 @@ units:
     symbol: Kaim_Nop__Fv
     size: 8
     status: source
-  owner: cpp-campaign-behaviors
+  owner: behaviors
 - name: auto_kynapse_38bb30
   source: src/kynapse/linkonce_38bb30.c
   library: kynapse
@@ -48896,10 +48896,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: frontend_dialog_campaign
-  source: src/game/frontend_dialog_campaign.cpp
+- name: frontend_dialog_manual
+  source: src/game/frontend_dialog_manual.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -O2
@@ -48915,10 +48915,10 @@ units:
     symbol: func_0010B5B0
     size: 88
     status: source
-- name: frontend_movie_campaign
-  source: src/game/frontend_movie_campaign.cpp
+- name: frontend_movie_manual
+  source: src/game/frontend_movie_manual.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -O2
@@ -49039,7 +49039,7 @@ units:
 - name: effect_1b7968
   source: src/game/dispatch.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -49054,7 +49054,7 @@ units:
 - name: effect_1b8640
   source: src/game/remove_records.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -49069,7 +49069,7 @@ units:
 - name: effect_1b7a00
   source: src/game/find_effect.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -49081,10 +49081,10 @@ units:
     symbol: func_001B7A00
     size: 112
     status: source
-- name: frontend_profile_campaign
+- name: frontend_profile_manual
   source: src/game/frontend_profile_remember.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -O1
@@ -49096,8 +49096,8 @@ units:
     symbol: func_0010F620
     size: 36
     status: source
-- name: kynapse_route_campaign
-  source: src/kynapse/route_campaign.cpp
+- name: kynapse_route_manual
+  source: src/kynapse/route_manual.cpp
   library: kynapse
   provenance: imported
   tier: exact
@@ -49146,7 +49146,7 @@ units:
 - name: effect_1c1578
   source: src/game/light_reset.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -49165,7 +49165,7 @@ units:
 - name: effect_1c1930
   source: src/game/light_render.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -49180,7 +49180,7 @@ units:
 - name: effect_1c0760
   source: src/game/recycle_emitters.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -49197,9 +49197,9 @@ units:
 - name: effect_1b33b8
   source: src/game/slot_lookup.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
+  origin: game
   flags:
   - -O2
   - -G0
@@ -49212,9 +49212,9 @@ units:
 - name: effect_1b37c8
   source: src/game/slot_release.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
+  origin: game
   flags:
   - -O2
   - -G0
@@ -49227,9 +49227,9 @@ units:
 - name: effect_1b3a50
   source: src/game/slot_actor.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
+  origin: game
   flags:
   - -O2
   - -G0
@@ -49242,9 +49242,9 @@ units:
 - name: effect_1b3a90
   source: src/game/slot_bone.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
+  origin: game
   flags:
   - -O2
   - -G0
@@ -49257,9 +49257,9 @@ units:
 - name: effect_1b3cf8
   source: src/game/slot_set.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
+  origin: game
   flags:
   - -O2
   - -G0
@@ -49269,10 +49269,10 @@ units:
     symbol: func_001B3CF8
     size: 32
     status: source
-- name: rwa_wave2_317838
+- name: rwa_317838
   source: src/rw_audio/tu_3168c8_317838.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -49284,16 +49284,16 @@ units:
     symbol: func_00317838
     size: 48
     status: source
-  claim: final-deep-audio
+  claim: audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-  owner: final-deep-audio
-- name: rwa_wave2_319ca8
+  owner: audio
+- name: rwa_319ca8
   source: src/rw_audio/tu_3168c8_317838.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
@@ -49305,34 +49305,16 @@ units:
     symbol: func_00319CA8
     size: 64
     status: source
-  claim: final-deep-audio
+  claim: audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-  owner: final-deep-audio
+  owner: audio
 - name: animation_playback_allocation
   source: src/animation/tu_34eae0_allocate_banks.cpp
   library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation; mod context owner
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: final-depth-animation
-  functions:
-  - addr: '0x34eb88'
-    symbol: func_0034EB88
-    size: 332
-    status: source
-  owner: final-depth-animation
-- name: animation_playback_release
-  source: src/animation/tu_34eae0_release_banks.c
-  library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: animation
   flags:
@@ -49340,33 +49322,51 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: final-depth-animation
+  claim: animation
+  functions:
+  - addr: '0x34eb88'
+    symbol: func_0034EB88
+    size: 332
+    status: source
+  owner: animation
+- name: animation_playback_release
+  source: src/animation/tu_34eae0_release_banks.c
+  library: animation
+  provenance: manual
+  tier: exact
+  origin: animation
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  claim: animation
   functions:
   - addr: '0x34ecd8'
     symbol: func_0034ECD8
     size: 168
     status: source
-  owner: final-depth-animation
-- name: rwa_wave2_311048
+  owner: animation
+- name: rwa_311048
   source: src/rw_audio/tu_310978_311048.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rwa_ee
   flags:
   - -O2
   - -G0
   - -snas
-  claim: wave2-rw-audio
+  claim: rw-audio
   functions:
   - addr: '0x311048'
     symbol: func_00311048
     size: 100
     status: source
-- name: wave2_rw_core_2af800
+- name: rw_core_2af800
   source: src/rw_core/tu_2af800.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
@@ -49374,7 +49374,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-rw-core
+  claim: rw-core
   functions:
   - addr: '0x2af800'
     symbol: func_002AF800
@@ -49467,7 +49467,7 @@ units:
 - name: animation_tracks_sample_bone
   source: src/animation/tu_3441d0_sample_bone.c
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: animation
   flags:
@@ -49475,7 +49475,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: animation
   functions:
   - addr: '0x345480'
     symbol: func_00345480
@@ -49484,7 +49484,7 @@ units:
 - name: animation_tracks_unpack_float24
   source: src/animation/tu_3441d0_unpack_float24.c
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: animation
   flags:
@@ -49492,7 +49492,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: animation
   functions:
   - addr: '0x3441d0'
     symbol: func_003441D0
@@ -49502,7 +49502,7 @@ units:
 - name: animation_tracks_skip_track
   source: src/animation/tu_3441d0_skip_track.c
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: animation
   flags:
@@ -49510,7 +49510,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: animation
   functions:
   - addr: '0x344240'
     symbol: func_00344240
@@ -49520,7 +49520,7 @@ units:
 - name: animation_tracks_sample_masked_pose
   source: src/animation/tu_3441d0_sample_masked_pose.c
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: animation
   flags:
@@ -49528,7 +49528,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: animation
   functions:
   - addr: '0x3452b0'
     symbol: func_003452B0
@@ -49538,7 +49538,7 @@ units:
 - name: animation_tracks_evaluate_track
   source: src/animation/tu_3441d0_evaluate_track.c
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: animation
   flags:
@@ -49547,7 +49547,7 @@ units:
   - -snas
   - -ffunction-sections
   - -mvu0-use-vf0-vf31
-  claim: wave2-animation
+  claim: animation
   functions:
   - addr: '0x3443e0'
     symbol: func_003443E0
@@ -49557,7 +49557,7 @@ units:
 - name: physics_mass_32fbc0
   source: src/physics/tu_32fbc0.c
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: physics
   flags:
@@ -49571,33 +49571,33 @@ units:
     symbol: func_0032FBC0
     size: 224
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x32fca0'
     symbol: func_0032FCA0
     size: 4184
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x330cf8'
     symbol: func_00330CF8
     size: 780
     status: asm
-    reason: claimed physics campaign
+    reason: 'claimed: physics'
   - addr: '0x331008'
     symbol: func_00331008
     size: 3432
     status: asm
-    reason: claimed physics campaign
-- name: wave2_rw_core_2ad668
+    reason: 'claimed: physics'
+- name: rw_core_2ad668
   source: src/rw_core/tu_2ad668.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
   - -O2
   - -G8
   - -ffunction-sections
-  claim: wave2-rw-core
+  claim: rw-core
   functions:
   - addr: '0x2ad668'
     symbol: func_002AD668
@@ -49726,17 +49726,17 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: wave2_rw_core_2ce160
+- name: rw_core_2ce160
   source: src/rw_core/tu_2ce160.c
   library: rw_core
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: renderware_core
   flags:
   - -O2
   - -G8
   - -ffunction-sections
-  claim: wave2-rw-core
+  claim: rw-core
   functions:
   - addr: '0x2ce160'
     symbol: func_002CE160
@@ -52451,7 +52451,7 @@ units:
 - name: class_skeleton_game
   source: src/game/game_methods.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -52503,7 +52503,7 @@ units:
 - name: class_skeleton_kynapse
   source: src/kynapse/kynapse_methods.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
   flags:
@@ -52524,13 +52524,13 @@ units:
     symbol: Function_002E7008__Q215BlackPS2Classes20Kaim_CBasicAllocatori
     size: 32
     status: source
-  owner: cpp-campaign-behaviors
-- name: campaign_actor_entries
+  owner: behaviors
+- name: manual_actor_entries
   source: src/game/actor_entries.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ campaign: actor virtual table 0x3dc838; class identity unresolved'
+  origin: 'C++ actor virtual table 0x3dc838; class identity unresolved'
   flags:
   - -O2
   - -G0
@@ -52541,13 +52541,13 @@ units:
     symbol: Update__Q216BlackPS2Campaign12ActorEntriesf
     size: 448
     status: source
-- name: campaign_graph_cpointmapper
+- name: manual_graph_cpointmapper
   source: src/linkonce/graph_cpointmapper.cpp
   library: linkonce
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -52559,13 +52559,13 @@ units:
     symbol: Function_0038E768__Q215BlackPS2Classes17Kaim_CPointMapperPv
     size: 80
     status: source
-- name: campaign_graph_cpathcostdata
+- name: manual_graph_cpathcostdata
   source: src/kynapse/graph_cpathcostdata.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -52577,13 +52577,13 @@ units:
     symbol: Save__Q24Kaim13CPathCostDataPCv
     size: 348
     status: source
-- name: campaign_graph_castardata
+- name: manual_graph_castardata
   source: src/kynapse/graph_castardata.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -52598,10 +52598,10 @@ units:
   externs:
     _vt$Q24Kaim10CAstarData: '0x3ef7b0'
     _vt$Q24Kaim7CObject: '0x3e0040'
-- name: campaign_graphics_bindings
+- name: manual_graphics_bindings
   source: src/game/graphics_bindings.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -52621,12 +52621,12 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_actor_collision
+- name: manual_actor_collision
   source: src/game/actor_collision.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ campaign: actor virtual table 0x3dc838; class identity unresolved'
+  origin: 'C++ actor virtual table 0x3dc838; class identity unresolved'
   flags:
   - -O2
   - -G0
@@ -52638,13 +52638,13 @@ units:
     symbol: Collision__Q216BlackPS2Campaign12ActorEntriesPv
     size: 396
     status: source
-- name: campaign_behaviors_hide
+- name: manual_behaviors_hide
   source: src/kynapse/behaviors_hide.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -52656,13 +52656,13 @@ units:
     size: 468
     symbol: func_002D3D38
     status: source
-- name: campaign_behaviors_flee
+- name: manual_behaviors_flee
   source: src/kynapse/behaviors_flee.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -52674,13 +52674,13 @@ units:
     size: 604
     symbol: func_002D16B8
     status: source
-- name: campaign_graph_cpathcostdata_dtor
+- name: manual_graph_cpathcostdata_dtor
   source: src/kynapse/graph_cpathcostdata_dtor.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -52695,12 +52695,12 @@ units:
   externs:
     _vt$Q24Kaim13CPathCostData: '0x3ede90'
     _vt$Q24Kaim7CObject: '0x3e0040'
-- name: campaign_actor_reset
+- name: manual_actor_reset
   source: src/game/actor_reset.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ campaign: actor virtual table 0x3dc838; class identity unresolved'
+  origin: 'C++ actor virtual table 0x3dc838; class identity unresolved'
   flags:
   - -O2
   - -G0
@@ -52711,12 +52711,12 @@ units:
     symbol: ResetEntries__Q216BlackPS2Campaign12ActorEntriesi
     size: 196
     status: source
-- name: campaign_graphics_controller
+- name: manual_graphics_controller
   source: src/game/graphics_controller.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
+  origin: game
   flags:
   - -O2
   - -G0
@@ -52727,12 +52727,12 @@ units:
     symbol: Open__Q216CampaignGraphics10ControllerUiUi
     size: 36
     status: source
-- name: campaign_actor_route_update
+- name: manual_actor_route_update
   source: src/game/actor_route_update.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ campaign: RouteMode vtable0x3dd380; authored parent source and PS2 helper context'
+  origin: 'C++ RouteMode vtable0x3dd380; authored source and PS2 helper context'
   flags:
   - -O2
   - -G0
@@ -52756,10 +52756,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_graphics_level_cleanup
+- name: manual_graphics_level_cleanup
   source: src/game/graphics_level_cleanup.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -52775,13 +52775,13 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_behaviors_cshooteragent
+- name: manual_behaviors_cshooteragent
   source: src/kynapse/behaviors_cshooteragent.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-w2-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -52801,12 +52801,12 @@ units:
     size: 408
     symbol: func_002D6CB0
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x2d7118'
     size: 204
     symbol: Prepare__Q24Kaim12ShooterAgent
     status: source
-    reason: campaign
+    reason: manual
   externs:
     FindByName__Q24Kaim6EnginePCc: '0x2eb398'
     GetRecord__Q24Kaim10PerceptionPQ24Kaim5Actor: '0x310120'
@@ -52820,13 +52820,13 @@ units:
     gKaimAllocator: '0x3c87e8'
     gKaimFree: '0x3c87e0'
     terminate__Fv: '0x36f978'
-- name: campaign_behaviors_cpathwayagent
+- name: manual_behaviors_cpathwayagent
   source: src/kynapse/behaviors_cpathwayagent.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-w2-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -52849,13 +52849,13 @@ units:
     gKaimAllocator: '0x3c87e8'
     gKaimFree: '0x3c87e0'
     terminate__Fv: '0x36f978'
-- name: campaign_behaviors_centitymanager
+- name: manual_behaviors_centitymanager
   source: src/kynapse/behaviors_centitymanager.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-w2-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -52867,7 +52867,7 @@ units:
     size: 452
     symbol: _$_10Perception
     status: source
-    reason: campaign
+    reason: manual
   externs:
     Entity_RemoveC__FP5WorldPFP6EntityP10Perception_vP10Perception: '0x2e1098'
     OnSubjectRemoved__FP6EntityP10Perception: '0x310190'
@@ -52880,12 +52880,12 @@ units:
     gPairLineExpiry: '0x3ce5a8'
     gPerceptionCount: '0x3ce5ac'
     gWorld: '0x3c9ed4'
-- name: campaign_actor_route_target
+- name: manual_actor_route_target
   source: src/game/actor_route_target.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ campaign: RouteMode vtable0x3dd380; authored source and PS2 layout'
+  origin: 'C++ RouteMode vtable0x3dd380; authored source and PS2 layout'
   flags:
   - -O2
   - -G0
@@ -52899,13 +52899,13 @@ units:
     symbol: GetTarget__CQ29BlackGame9RouteMode
     size: 148
     status: source
-- name: campaign_graph_cfindnearestdata
+- name: manual_graph_cfindnearestdata
   source: src/kynapse/graph_cfindnearestdata.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -52945,14 +52945,14 @@ units:
     FindBound__Q24Kaim16CFindNearestDataiUcf: '0x2f06c0'
     _vt$Q24Kaim16CFindNearestData: '0x3ec1c8'
     _vt$Q24Kaim7CObject: '0x3e0040'
-  claim: context-wave6-graph
-- name: campaign_graph_cpathobject
+  claim: graph
+- name: manual_graph_cpathobject
   source: src/kynapse/graph_cpathobject.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -52983,13 +52983,13 @@ units:
   externs:
     _$_Q24Kaim7CEntity: '0x2e45f8'
     _vt$Q24Kaim11CPathObject: '0x3ee090'
-- name: campaign_graph_cspatialgraph
+- name: manual_graph_cspatialgraph
   source: src/kynapse/graph_cspatialgraph.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -53006,10 +53006,10 @@ units:
     _$_Q24Kaim15PathFileService: '0x373268'
     __throw: '0x292b40'
     terminate__Fv: '0x36f978'
-- name: campaign_graphics_level_register
+- name: manual_graphics_level_register
   source: src/game/graphics_level_register.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -53022,12 +53022,12 @@ units:
     size: 740
     symbol: Function_0020EAC8__Q215BlackPS2Classes22UnknownVtable_003E10B0
     status: source
-- name: campaign_actor_state_update
+- name: manual_actor_state_update
   source: src/game/actor_state_update.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ campaign: actor state controller vtable0x3dc9b8; PS2-verified accessed fields'
+  origin: 'C++ actor state controller vtable0x3dc9b8; PS2-verified accessed fields'
   flags:
   - -O2
   - -G0
@@ -53038,13 +53038,13 @@ units:
     symbol: Update__Q213CampaignActor10Controller
     size: 388
     status: source
-- name: campaign_behaviors_centitymanager_config
+- name: manual_behaviors_centitymanager_config
   source: src/kynapse/behaviors_centitymanager_config.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-w2-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -53056,17 +53056,17 @@ units:
     size: 248
     symbol: Configure__10PerceptionP12ChildBuffers
     status: source
-    reason: campaign
+    reason: manual
   externs:
     GetSecond__C12ChildBuffers: '0x2e3920'
     GetValue__C12ChildBuffers: '0x2e3918'
     _stricmp: '0x360838'
-- name: campaign_actor_camera
+- name: manual_actor_camera
   source: src/game/actor_camera.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ campaign: actor controller vtable0x3dc348; child vptr at0x4c verified by matched methods; mod context owner'
+  origin: 'C++ actor controller vtable0x3dc348; child vptr at0x4c verified by matched methods'
   flags:
   - -O2
   - -G0
@@ -53093,10 +53093,10 @@ units:
     symbol: Configure__Q213CampaignActor16CameraControllerxxfUcScfl
     size: 168
     status: source
-- name: campaign_graphics_overlay_drafts
+- name: manual_graphics_overlay_drafts
   source: src/game/graphics_overlay_drafts.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
   flags:
@@ -53118,13 +53118,13 @@ units:
     status: asm
     reason: schedule
     size: 124
-- name: campaign_behaviors_cshooteragent_clear
+- name: manual_behaviors_cshooteragent_clear
   source: src/kynapse/behaviors_cshooteragent_clear.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-w2-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -53144,13 +53144,13 @@ units:
     __throw: '0x292b40'
     _vt$Q24Kaim13ActorIterator: '0x3e0028'
     _vt$Q24Kaim8PolyRoot: '0x3e0040'
-- name: campaign_behaviors_hide_reset
+- name: manual_behaviors_hide_reset
   source: src/kynapse/behaviors_hide_reset.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -53162,13 +53162,13 @@ units:
     size: 20
     symbol: func_002D5398
     status: source
-- name: campaign_graph_cspatialgraph_lifetime
+- name: manual_graph_cspatialgraph_lifetime
   source: src/kynapse/graph_cspatialgraph_lifetime.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -53187,13 +53187,13 @@ units:
   externs:
     _vt$Q24Kaim13CSpatialGraph: '0x3ee538'
     _vt$Q24Kaim7CObject: '0x3e0040'
-- name: campaign_behaviors_cshooteragent_constructor
+- name: manual_behaviors_cshooteragent_constructor
   source: src/kynapse/behaviors_cshooteragent_constructor.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: cpp-campaign-w2-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -53208,10 +53208,10 @@ units:
   externs:
     __Q24Kaim8BehaviorPQ24Kaim15BehaviorContext: '0x2dff10'
     _vt$Q24Kaim12ShooterAgent: '0x3e3888'
-- name: campaign_graphics_level_callback
+- name: manual_graphics_level_callback
   source: src/game/graphics_level_callback.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -53224,10 +53224,10 @@ units:
     symbol: SetDifficulty__Q216CampaignGraphics14LevelCallbacksPCc
     size: 68
     status: source
-- name: campaign_graphics_level_callback_drafts
+- name: manual_graphics_level_callback_drafts
   source: src/game/graphics_level_callback_drafts.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
   flags:
@@ -53247,7 +53247,7 @@ units:
 - name: shared_vu0_point
   source: src/game/vu0_matrix.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game shared VU0 matrix controls
   flags:
@@ -53268,10 +53268,10 @@ units:
 - name: context_graph_manager
   source: src/kynapse/graph_manager.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -53317,14 +53317,14 @@ units:
     dptofp: '0x291c68'
     fptodp: '0x291f58'
     terminate__Fv: '0x36f978'
-  claim: context-wave6-graph
+  claim: graph
 - name: context_behaviors_sound
   source: src/kynapse/behaviors_sound.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave3-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -53440,10 +53440,10 @@ units:
 - name: context_graph_accessways
   source: src/kynapse/graph_accessways.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -53486,13 +53486,13 @@ units:
     _vt$Q24Kaim7CObject: '0x3e0040'
     memset: '0x35c6ec'
     terminate__Fv: '0x36f978'
-  claim: context-wave6-graph
-- name: campaign_actor_entries_wave3
+  claim: graph
+- name: manual_actor_entries_b
   source: src/game/actor_entries_1448c8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ actor campaign: 0x3dc838 class cluster; identity unverified'
+  origin: 'C++ actor: 0x3dc838 class cluster; identity unverified'
   flags:
   - -O2
   - -G0
@@ -53537,12 +53537,12 @@ units:
     size: 144
   trim:
     .rodata: 20
-- name: campaign_actor_event_fanout
+- name: manual_actor_event_fanout
   source: src/game/actor_event_fanout.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ actor campaign: shared event fanout; identity provisional'
+  origin: 'C++ actor: shared event fanout; identity provisional'
   flags:
   - -O2
   - -G0
@@ -53556,9 +53556,9 @@ units:
 - name: context_graphics_controller_update
   source: src/game/graphics_controller_update.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: 'C++ shared-context campaign: input controller; PS2-verified accessed fields; mod context owner'
+  origin: 'C++ shared context: input controller; PS2-verified accessed fields'
   flags:
   - -O2
   - -G0
@@ -53572,9 +53572,9 @@ units:
 - name: context_graphics_input_access
   source: src/game/graphics_input_access.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: C++ input layout and virtual-slot recovery; mod context owner
+  origin: C++ input layout and virtual-slot recovery
   flags:
   - -O2
   - -G0
@@ -53608,7 +53608,7 @@ units:
 - name: context_graph_path_manager
   source: src/kynapse/graph_path_manager.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
   flags:
@@ -53669,14 +53669,14 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-  owner: context-graph
+  owner: graph
 - name: context_behaviors_constraints
   source: src/kynapse/behaviors_constraints.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave3-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -53755,10 +53755,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: context_wave3_graphics_overlay
+- name: context_graphics_overlay
   source: src/game/graphics_overlay_pending.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -O2
@@ -53781,10 +53781,10 @@ units:
     symbol: func_001F8138
     status: asm
     reason: claim
-- name: context_wave3_graphics_notifications
+- name: context_graphics_notifications
   source: src/game/graphics_notifications_pending.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -O2
@@ -53800,10 +53800,10 @@ units:
 - name: context_graph_brain
   source: src/kynapse/graph_brain.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -53847,10 +53847,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: context_wave3_graphics_frontend
+- name: context_graphics_frontend
   source: src/game/graphics_frontend_pending.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -O2
@@ -53871,10 +53871,10 @@ units:
 - name: context_behaviors_repulsor
   source: src/kynapse/behaviors_repulsor.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: final-deep-kynapse-steering
+  owner: kynapse-steering
   flags:
   - -O2
   - -G0
@@ -53935,7 +53935,7 @@ units:
     func_00305FD8: '0x305fd8'
     memset: '0x35c6ec'
     sqrtf: '0x29eb90'
-  claim: final-deep-kynapse-steering
+  claim: kynapse-steering
   data_ranges:
   - section: .data
     input: .data.steering_vtable
@@ -53949,12 +53949,12 @@ units:
   unlinked_context_helpers:
   - _$_Q24Kaim13ActorIterator
   - _$_Q24Kaim8PolyRoot
-- name: campaign_actor_motion_wave3
+- name: manual_actor_motion
   source: src/game/actor_motion.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: C++ actor campaign:0x3dca78 class cluster; identity unverified
+  origin: C++ actor:0x3dca78 class cluster; identity unverified
   flags:
   - -O2
   - -G0
@@ -53990,15 +53990,15 @@ units:
     status: source
     symbol: GetWorldMatrix__Q213CampaignActor11ActorMotion
     size: 200
-  owner: mod-camera
-  claim: mod-wave3-tu1357b8
+  owner: camera
+  claim: tu1357b8
 - name: context_behaviors_gap
   source: src/kynapse/behaviors_gap.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave3-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -54078,12 +54078,12 @@ units:
   externs:
     _13KaimAvoidance$avoidanceTime: '0x3cd898'
     _13KaimAvoidance$world: '0x3c9ed4'
-- name: campaign_actor_player_wave3
+- name: manual_actor_player
   source: src/game/actor_player.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
-  origin: C++ actor campaign:0x3dc5f8 class cluster; identity unverified
+  origin: C++ actor:0x3dc5f8 class cluster; identity unverified
   flags:
   - -O2
   - -G0
@@ -54118,10 +54118,10 @@ units:
 - name: context_graph_pathfinder
   source: src/kynapse/graph_pathfinder.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -54279,10 +54279,10 @@ units:
 - name: context_behaviors_hide_retry
   source: src/kynapse/behaviors_hide_retry.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave3-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -54304,10 +54304,10 @@ units:
 - name: context_behaviors_path_controls
   source: src/kynapse/behaviors_path_controls.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave3-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -54324,12 +54324,12 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_actor_orientation_wave3
+- name: manual_actor_orientation
   source: src/game/actor_orientation.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: C++ actor campaign:0x3dc9b8 class cluster; identity unverified
+  origin: C++ actor:0x3dc9b8 class cluster; identity unverified
   flags:
   - -O2
   - -G0
@@ -54356,10 +54356,10 @@ units:
     symbol: func_00181FF0
     size: 132
     status: source
-- name: campaign_actor_route_wave3
+- name: manual_actor_route
   source: src/game/actor_route.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ RouteMode class cluster
   flags:
@@ -54376,10 +54376,10 @@ units:
   externs:
     RetargetLive__9BlackGamePQ29BlackGame9RouteModex: '0x193040'
     UpdateDestination__Q29BlackGame12RouteRequestx: '0x17a9c8'
-- name: campaign_actor_input_wave3
+- name: manual_actor_input
   source: src/game/actor_input.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor input cluster; inferred fields and narrow inline input methods
   flags:
@@ -54396,10 +54396,10 @@ units:
     status: source
     symbol: Leave__Q216BlackPS2Campaign17ActorStateMachine
     size: 104
-- name: campaign_actor_cb38_wave4
+- name: manual_actor_cb38
   source: src/game/actor_cb38.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DCB38 cluster
   flags:
@@ -54423,10 +54423,10 @@ units:
     status: source
     size: 132
     symbol: Release__Q213CampaignActor15RenderableState
-- name: campaign_actor_cb38_reset_wave4
+- name: manual_actor_cb38_reset
   source: src/game/actor_cb38_reset.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DCB38 reset; independently verified no initial scheduling
   flags:
@@ -54440,10 +54440,10 @@ units:
     status: source
     size: 100
     symbol: Reset__Q213CampaignActor15RenderableState
-- name: campaign_graphics_timed_matrix_wave4
+- name: manual_graphics_timed_matrix
   source: src/game/graphics_timed_matrix.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
   flags:
@@ -54461,11 +54461,11 @@ units:
 - name: context_graph_allocators
   source: src/kynapse/graph_allocators.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave4-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -54572,10 +54572,10 @@ units:
 - name: context_graph_allocator_cleanup
   source: src/kynapse/graph_allocator_cleanup.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
+  owner: graph
   flags:
   - -O2
   - -G0
@@ -54603,13 +54603,13 @@ units:
     _vt$Q24Kaim14CBaseAllocator: '0x3e9c60'
     _vt$Q24Kaim19CPoolBasedAllocator: '0x3e9b58'
     _vt$Q24Kaim7CObject: '0x3e0040'
-- name: context_wave4_pointmapper
+- name: context_pointmapper
   source: src/kynapse/behaviors_pointmapper.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave4-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -54646,10 +54646,10 @@ units:
     size: 188
     status: source
     symbol: func_002DC930
-- name: campaign_graphics_envelope_wave4
+- name: manual_graphics_envelope
   source: src/game/graphics_envelope_pending.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
   flags:
@@ -54670,10 +54670,10 @@ units:
     status: asm
     symbol: Update__Q216CampaignGraphics13TimedEnvelope
     size: 676
-- name: campaign_graphics_envelope_exact
+- name: manual_graphics_envelope_exact
   source: src/game/graphics_envelope.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ tinnitus sound envelope; PS2 accessed fields
   flags:
@@ -54690,13 +54690,13 @@ units:
     status: source
     symbol: Begin__Q216CampaignGraphics13TimedEnvelopefUi
     size: 276
-- name: context_wave4_pathmanager
+- name: context_pathmanager
   source: src/kynapse/behaviors_pathmanager.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave4-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -54755,11 +54755,11 @@ units:
 - name: context_graph_team
   source: src/kynapse/graph_team.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave4-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -54812,10 +54812,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_graphics_provider_wave4
+- name: manual_graphics_provider
   source: src/game/graphics_audio_provider.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
   flags:
@@ -54848,10 +54848,10 @@ units:
   - addr: '0x388dd8'
     size: 56
     status: asm
-- name: campaign_actor_dc750_wave4
+- name: manual_actor_dc750
   source: src/game/actor_dc750.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DC750 cluster
   flags:
@@ -54905,13 +54905,13 @@ units:
     status: source
     size: 332
     symbol: Contact__Q213CampaignActor9PropStatePCQ213CampaignActor11ContactData
-- name: context_wave4_scriptmanager
+- name: context_scriptmanager
   source: src/kynapse/behaviors_scriptmanager.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave4-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -54967,10 +54967,10 @@ units:
     gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
-- name: campaign_graphics_movement_wave4
+- name: manual_graphics_movement
   source: src/game/graphics_movement_pending.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
   flags:
@@ -55011,10 +55011,10 @@ units:
   - addr: '0x1948a0'
     size: 344
     status: asm
-- name: campaign_graphics_movement_exact
+- name: manual_graphics_movement_exact
   source: src/game/graphics_movement.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ movement access and virtual-slot view; verified fields only
   flags:
@@ -55048,10 +55048,10 @@ units:
     size: 340
     status: source
     symbol: UpdateProximity__Q216CampaignGraphics12MovementCore
-- name: campaign_actor_c4c8_wave4
+- name: manual_actor_c4c8
   source: src/game/actor_c4c8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DC4C8 volume cluster
   flags:
@@ -55077,13 +55077,13 @@ units:
     symbol: RenderBox__Q213CampaignActor11RegionState
   trim:
     .rodata: 24
-- name: context_wave4_pathway
+- name: context_pathway
   source: src/kynapse/behaviors_pathway_2dd548.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave4-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -55179,13 +55179,13 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: context_wave4_waypoint
+- name: context_waypoint
   source: src/kynapse/behaviors_waypoint.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave4-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -55205,11 +55205,11 @@ units:
 - name: context_graph_astar
   source: src/kynapse/graph_astar_context.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave4-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -55256,10 +55256,10 @@ units:
     __throw: '0x292b40'
     func_002FEAE0: '0x2feae0'
     terminate__Fv: '0x36f978'
-- name: campaign_actor_b9e0_wave4
+- name: manual_actor_b9e0
   source: src/game/actor_b9e0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DB9E0 volume cluster
   flags:
@@ -55290,13 +55290,13 @@ units:
     func_001AE5E8: '0x1ae5e8'
     func_0026A840: '0x26a840'
     func_0026AA68: '0x26aa68'
-- name: context_wave4_xml
+- name: context_xml
   source: src/game/behaviors_xml.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave4-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -55331,11 +55331,11 @@ units:
 - name: context_graph_pathcost
   source: src/kynapse/graph_pathcost_context.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: kynapse
-  owner: context-graph
-  claim: context-wave4-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -55359,10 +55359,10 @@ units:
     symbol: func_002F3AB0
     status: asm
     reason: context
-- name: campaign_actor_b920_wave4
+- name: manual_actor_b920
   source: src/game/actor_b920.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DB920 crossing-volume cluster
   flags:
@@ -55388,10 +55388,10 @@ units:
     func_001AE5E8: '0x1ae5e8'
     func_0026A840: '0x26a840'
     func_0026AA68: '0x26aa68'
-- name: campaign_actor_b860_wave4
+- name: manual_actor_b860
   source: src/game/actor_b860.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DB860 simple-volume cluster
   flags:
@@ -55417,13 +55417,13 @@ units:
     func_001AE5E8: '0x1ae5e8'
     func_0026A840: '0x26a840'
     func_0026AA68: '0x26aa68'
-- name: context_wave4_goto
+- name: context_goto
   source: src/kynapse/behaviors_goto.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave4-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -55467,11 +55467,11 @@ units:
 - name: context_graph_pathobject
   source: src/kynapse/graph_pathobject_context.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave4-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -55501,10 +55501,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_actor_bf48_wave5
+- name: manual_actor_bf48
   source: src/game/actor_bf48.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DBF48 region cluster
   flags:
@@ -55536,11 +55536,11 @@ units:
 - name: context_graph_path_storage
   source: src/kynapse/graph_path_storage.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave5-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -55563,13 +55563,13 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: context_wave5_world
+- name: context_world
   source: src/kynapse/behaviors_world.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave5-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -55655,10 +55655,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_actor_baa0_wave5
+- name: manual_actor_baa0
   source: src/game/actor_baa0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DBAA0 spherical-region cluster
   flags:
@@ -55675,13 +55675,13 @@ units:
   - addr: '0x164f50'
     status: asm
     size: 348
-- name: context_wave5_entity
+- name: context_entity
   source: src/kynapse/behaviors_entity.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave5-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -55747,10 +55747,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_graphics_frontend_104210_wave5
+- name: manual_graphics_frontend_104210
   source: src/game/graphics_frontend_104210.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
   flags:
@@ -55765,10 +55765,10 @@ units:
     status: asm
     symbol: func_00104210
     size: 1184
-- name: campaign_graphics_frontend_1046b0_wave5
+- name: manual_graphics_frontend_1046b0
   source: src/game/graphics_frontend_1046b0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
   flags:
@@ -55789,12 +55789,12 @@ units:
       returns: void
     evidence:
       tier: draft
-  owner: phase3-pilot
+  owner: pilot
   claim: equivalence-pilot
-- name: campaign_graphics_frontend_104d60_wave5
+- name: manual_graphics_frontend_104d60
   source: src/game/graphics_frontend_104d60.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   flags:
@@ -55809,10 +55809,10 @@ units:
     status: source
     symbol: func_00104D60
     size: 176
-- name: campaign_graphics_frontend_104e10_wave5
+- name: manual_graphics_frontend_104e10
   source: src/game/graphics_frontend_104e10.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
   flags:
@@ -55827,10 +55827,10 @@ units:
     status: asm
     symbol: func_00104E10
     size: 584
-- name: campaign_actor_c428_wave5
+- name: manual_actor_c428
   source: src/game/actor_c428.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: C++ actor vtable0x3DC428 timed-effect cluster
   flags:
@@ -55849,11 +55849,11 @@ units:
 - name: context_graph_nearest_nodes
   source: src/kynapse/graph_nearest_nodes.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave5-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -55901,13 +55901,13 @@ units:
     size: 300
     symbol: DrawPath__FP9QueryPath
     status: source
-- name: context_wave5_factory
+- name: context_factory
   source: src/kynapse/behaviors_factory.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave5-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -56006,13 +56006,13 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: context_wave5_text
+- name: context_text
   source: src/kynapse/behaviors_text.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave5-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -56046,13 +56046,13 @@ units:
     _vt$Q28KaimText6Script: '0x3e6888'
     gKaimAllocateHook: '0x3c87ec'
     gKaimAllocator: '0x3c87e8'
-- name: context_wave5_sight
+- name: context_sight
   source: src/kynapse/behaviors_sight.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave5-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -56069,10 +56069,10 @@ units:
     _9KaimSight$gKeyPosition: '0x44fd38'
     _9KaimSight$gKeyRadius: '0x450828'
     func_002E4CE0: '0x2e4ce0'
-- name: campaign_actor_c388_wave5
+- name: manual_actor_c388
   source: src/game/actor_c388.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DC388 expiry-effect cluster
   flags:
@@ -56099,10 +56099,10 @@ units:
     func_0014FBE8: '0x14fbe8'
     func_00155C28: '0x155c28'
     func_001EA580: '0x1ea580'
-- name: campaign_selectors_1a83a0
+- name: manual_selectors_1a83a0
   source: src/game/graphics_selector_1a83a0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56118,10 +56118,10 @@ units:
     size: 632
     status: asm
     reason: claimed
-- name: campaign_selectors_1a8618
+- name: manual_selectors_1a8618
   source: src/game/graphics_selector_1a8618.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56137,10 +56137,10 @@ units:
     size: 200
     status: asm
     reason: claimed
-- name: campaign_selectors_1a86e0
+- name: manual_selectors_1a86e0
   source: src/game/graphics_selector_1a86e0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56156,10 +56156,10 @@ units:
     size: 828
     status: asm
     reason: claimed
-- name: campaign_selectors_1a8d50
+- name: manual_selectors_1a8d50
   source: src/game/graphics_selector_1a8d50.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56175,10 +56175,10 @@ units:
     size: 224
     status: asm
     reason: claimed
-- name: campaign_selectors_1a8f78
+- name: manual_selectors_1a8f78
   source: src/game/graphics_selector_1a8f78.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56194,10 +56194,10 @@ units:
     size: 1472
     status: asm
     reason: claimed
-- name: campaign_selectors_1a9538
+- name: manual_selectors_1a9538
   source: src/game/graphics_selector_1a9538.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56213,10 +56213,10 @@ units:
     size: 976
     status: asm
     reason: claimed
-- name: campaign_selectors_1a9908
+- name: manual_selectors_1a9908
   source: src/game/graphics_selector_1a9908.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56238,12 +56238,12 @@ units:
       returns: void
     evidence:
       tier: draft
-  owner: phase3-pilot
+  owner: pilot
   claim: equivalence-pilot
-- name: campaign_selectors_1a9ed0
+- name: manual_selectors_1a9ed0
   source: src/game/graphics_selector_1a9ed0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56259,10 +56259,10 @@ units:
     size: 940
     status: asm
     reason: claimed
-- name: campaign_selectors_1aa9d8
+- name: manual_selectors_1aa9d8
   source: src/game/graphics_selector_1aa9d8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56278,10 +56278,10 @@ units:
     size: 800
     status: asm
     reason: claimed
-- name: campaign_selectors_1aacf8
+- name: manual_selectors_1aacf8
   source: src/game/graphics_selector_1aacf8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56297,10 +56297,10 @@ units:
     size: 148
     status: asm
     reason: claimed
-- name: campaign_selectors_1ad378
+- name: manual_selectors_1ad378
   source: src/game/graphics_selector_1ad378.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56315,10 +56315,10 @@ units:
     symbol: Stand__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
     size: 212
     status: source
-- name: campaign_selectors_1ad450
+- name: manual_selectors_1ad450
   source: src/game/graphics_selector_1ad450.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56333,10 +56333,10 @@ units:
     symbol: State__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actoril
     size: 192
     status: source
-- name: campaign_selectors_1ad510
+- name: manual_selectors_1ad510
   source: src/game/graphics_selector_1ad510.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56351,10 +56351,10 @@ units:
     symbol: Transition__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
     size: 256
     status: source
-- name: campaign_selectors_1ad610
+- name: manual_selectors_1ad610
   source: src/game/graphics_selector_1ad610.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56370,10 +56370,10 @@ units:
     size: 216
     status: asm
     reason: claimed
-- name: campaign_selectors_1ad6e8
+- name: manual_selectors_1ad6e8
   source: src/game/graphics_selector_1ad6e8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56388,10 +56388,10 @@ units:
     symbol: Special__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
     size: 252
     status: source
-- name: campaign_selectors_1ad7e8
+- name: manual_selectors_1ad7e8
   source: src/game/graphics_selector_1ad7e8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56406,10 +56406,10 @@ units:
     symbol: Primary__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
     size: 152
     status: source
-- name: campaign_selectors_1ad880
+- name: manual_selectors_1ad880
   source: src/game/graphics_selector_1ad880.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56424,10 +56424,10 @@ units:
     symbol: Secondary__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
     size: 152
     status: source
-- name: campaign_selectors_1ad918
+- name: manual_selectors_1ad918
   source: src/game/graphics_selector_1ad918.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56442,10 +56442,10 @@ units:
     symbol: Tertiary__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actor
     size: 152
     status: source
-- name: campaign_selectors_1adaa0
+- name: manual_selectors_1adaa0
   source: src/game/graphics_selector_1adaa0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56460,10 +56460,10 @@ units:
     symbol: Utility__Q218AnimationSelectPS216PrefixedSelectorPcPQ218AnimationSelectPS25Actorl
     size: 84
     status: source
-- name: campaign_selectors_1adb28
+- name: manual_selectors_1adb28
   source: src/game/graphics_selector_1adb28.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56481,11 +56481,11 @@ units:
 - name: context_graph_search_workspace
   source: src/kynapse/graph_search_workspace.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave5-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -56542,11 +56542,11 @@ units:
 - name: context_graph_parameter_tables
   source: src/kynapse/graph_parameter_tables.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave5-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -56662,11 +56662,11 @@ units:
 - name: context_graph_meta_entries
   source: src/linkonce/graph_meta_entries.cpp
   library: linkonce
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave5-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -56688,13 +56688,13 @@ units:
     _vt$Q24Kaimt10CMetaClass2ZQ24Kaim5CTeamZPFUiPCc_PQ24Kaim5CTeam: '0x3ebb48'
     strcmp: '0x35ca74'
     strcpy: '0x35cbc0'
-- name: campaign_wave6_hide
+- name: manual_hide
   source: src/kynapse/behaviors_hide_2d42c8.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave6-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -56717,10 +56717,10 @@ units:
     _vt$Q211HideQueries5Query: '0x3e2ab8'
     func_002E7360: '0x2e7360'
     func_002E8AB8: '0x2e8ab8'
-- name: campaign_actor_bb90_wave6
+- name: manual_actor_bb90
   source: src/game/actor_bb90.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DBB90 command cluster
   flags:
@@ -56735,10 +56735,10 @@ units:
     status: source
   externs:
     D_0040F514: '0x40f514'
-- name: campaign_actor_bb58_wave6
+- name: manual_actor_bb58
   source: src/game/actor_bb58.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor vtable0x3DBB58 command cluster
   flags:
@@ -56753,14 +56753,14 @@ units:
     status: source
   externs:
     D_0040F514: '0x40f514'
-- name: context_graph_spatial_wave6
+- name: context_graph_spatial
   source: src/kynapse/graph_spatial.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave6-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -56778,10 +56778,10 @@ units:
     _vt$Q24Kaim11GraphWriter: '0x3ee500'
     _vt$Q24Kaim7CObject: '0x3e0040'
     strlen: '0x35ccd8'
-- name: campaign_game_path_2899a0
+- name: manual_game_path_2899a0
   source: src/game/graphics_game_path_2899a0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56797,10 +56797,10 @@ units:
     size: 316
     status: asm
     reason: claimed
-- name: campaign_actor_bbc8_wave6
+- name: manual_actor_bbc8
   source: src/game/actor_bbc8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: C++ actor vtable0x3DBBC8 command cluster
   flags:
@@ -56812,10 +56812,10 @@ units:
   - addr: '0x162ae8'
     status: asm
     size: 516
-- name: campaign_apt_value_24b618
+- name: manual_apt_value_24b618
   source: src/apt/graphics_apt_24b618.cpp
   library: apt
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56830,10 +56830,10 @@ units:
     size: 1636
     status: asm
     reason: claimed
-- name: campaign_apt_value_24bc80
+- name: manual_apt_value_24bc80
   source: src/apt/graphics_apt_24bc80.cpp
   library: apt
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56848,10 +56848,10 @@ units:
     size: 1124
     status: asm
     reason: claimed
-- name: campaign_apt_value_24f5d8
+- name: manual_apt_value_24f5d8
   source: src/apt/graphics_apt_24f5d8.cpp
   library: apt
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56866,10 +56866,10 @@ units:
     size: 388
     status: asm
     reason: claimed
-- name: campaign_apt_value_384e70
+- name: manual_apt_value_384e70
   source: src/linkonce/graphics_apt_384e70.cpp
   library: linkonce
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56883,10 +56883,10 @@ units:
     symbol: Dispose__Q26AptPS25Value
     size: 100
     status: source
-- name: campaign_apt_value_384f08
+- name: manual_apt_value_384f08
   source: src/linkonce/graphics_apt_384f08.cpp
   library: linkonce
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56900,10 +56900,10 @@ units:
     symbol: Cleanup__Q26AptPS25Value
     size: 52
     status: source
-- name: campaign_apt_value_385528
+- name: manual_apt_value_385528
   source: src/linkonce/graphics_apt_385528.cpp
   library: linkonce
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -56917,13 +56917,13 @@ units:
     symbol: SetEnabled__Q26AptPS25Valuei
     size: 32
     status: source
-- name: campaign_wave6_flee
+- name: manual_flee
   source: src/kynapse/behaviors_flee_2d1918.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave6-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -56960,10 +56960,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_actor_bf10_wave6
+- name: manual_actor_bf10
   source: src/game/actor_bf10.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: C++ actor vtable0x3DBF10 command cluster
   flags:
@@ -56975,10 +56975,10 @@ units:
   - addr: '0x161f58'
     status: asm
     size: 516
-- name: campaign_apt_builtin_245840
+- name: manual_apt_builtin_245840
   source: src/apt/graphics_apt_245840.cpp
   library: apt
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -56993,10 +56993,10 @@ units:
     size: 2076
     status: asm
     reason: claimed
-- name: campaign_apt_pair_2470d0
+- name: manual_apt_pair_2470d0
   source: src/apt/graphics_apt_2470d0.cpp
   library: apt
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57011,10 +57011,10 @@ units:
     size: 696
     status: asm
     reason: claimed
-- name: campaign_apt_pair_247388
+- name: manual_apt_pair_247388
   source: src/apt/graphics_apt_247388.cpp
   library: apt
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57029,10 +57029,10 @@ units:
     size: 256
     status: asm
     reason: claimed
-- name: campaign_apt_pair_247488
+- name: manual_apt_pair_247488
   source: src/apt/graphics_apt_247488.cpp
   library: apt
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57047,13 +57047,13 @@ units:
     size: 212
     status: asm
     reason: claimed
-- name: campaign_wave6_shooter
+- name: manual_shooter
   source: src/kynapse/behaviors_shooter.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-wave6-behaviors
+  owner: behaviors
   flags:
   - -O2
   - -G0
@@ -57094,10 +57094,10 @@ units:
     _4Kaim$gPerceptionClass: '0x455e18'
     _4Kaim$gTargetClass: '0x4512b0'
     func_002D6CB0: '0x2d6cb0'
-- name: campaign_wave6_pathway
+- name: manual_pathway
   source: src/kynapse/behaviors_pathway.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -57132,10 +57132,10 @@ units:
     func_0035E750: '0x35e750'
     sscanf: '0x35d7b0'
     strcmp: '0x35ca74'
-- name: campaign_sound_1ed9c8
+- name: manual_sound_1ed9c8
   source: src/game/graphics_sound_1ed9c8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -57149,10 +57149,10 @@ units:
     size: 440
     symbol: Register__Q216CampaignGraphics13SoundEnvelopePCci
     status: source
-- name: campaign_sound_1edb80
+- name: manual_sound_1edb80
   source: src/game/graphics_sound_1edb80.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -57166,10 +57166,10 @@ units:
     size: 256
     symbol: ActivateChannels__Q216CampaignGraphics13SoundEnvelope
     status: source
-- name: campaign_sound_1edd80
+- name: manual_sound_1edd80
   source: src/game/graphics_sound_1edd80.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57184,10 +57184,10 @@ units:
     symbol: Release__Q216CampaignGraphics13SoundEnvelope
     status: asm
     reason: unmatched C++ scheduling or allocation
-- name: campaign_sound_1edde0
+- name: manual_sound_1edde0
   source: src/game/graphics_sound_1edde0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57202,10 +57202,10 @@ units:
     symbol: Begin__Q216CampaignGraphics19DestructionEnvelopefUi
     status: asm
     reason: unmatched C++ scheduling or allocation
-- name: campaign_sound_1ede98
+- name: manual_sound_1ede98
   source: src/game/graphics_sound_1ede98.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57220,10 +57220,10 @@ units:
     symbol: Update__Q216CampaignGraphics19DestructionEnvelope
     status: asm
     reason: unmatched C++ scheduling or allocation
-- name: campaign_sound_1ee0b0
+- name: manual_sound_1ee0b0
   source: src/game/graphics_sound_1ee0b0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57238,10 +57238,10 @@ units:
     symbol: Unregister__Q216CampaignGraphics19DestructionEnvelope
     status: asm
     reason: unmatched C++ scheduling or allocation
-- name: campaign_sound_1ee298
+- name: manual_sound_1ee298
   source: src/game/graphics_sound_1ee298.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57256,10 +57256,10 @@ units:
     symbol: Update__Q216CampaignGraphics13TimedEnvelope
     status: asm
     reason: unmatched C++ scheduling or allocation
-- name: campaign_sound_1ee540
+- name: manual_sound_1ee540
   source: src/game/graphics_sound_1ee540.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57274,10 +57274,10 @@ units:
     symbol: Reset__Q216CampaignGraphics17LowHealthEnvelope
     status: asm
     reason: unmatched C++ scheduling or allocation
-- name: campaign_sound_1ee5e0
+- name: manual_sound_1ee5e0
   source: src/game/graphics_sound_1ee5e0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -57291,10 +57291,10 @@ units:
     size: 140
     symbol: Begin__Q216CampaignGraphics17LowHealthEnvelopefUi
     status: source
-- name: campaign_sound_1ee678
+- name: manual_sound_1ee678
   source: src/game/graphics_sound_1ee678.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57309,12 +57309,12 @@ units:
     symbol: Update__Q216CampaignGraphics17LowHealthEnvelope
     status: asm
     reason: unmatched C++ scheduling or allocation
-- name: campaign_actor_13db40_wave7
+- name: manual_actor_13db40
   source: src/game/actor_13db40.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: C++ actor TU13DB40 full inventory; mod context owner
+  origin: C++ actor TU13DB40 full inventory
   flags:
   - -O2
   - -G0
@@ -57332,14 +57332,14 @@ units:
     size: 60
   externs:
     D_0040F4D0: '0x40f4d0'
-- name: context_graph_entity_wave7
+- name: context_graph_entity
   source: src/kynapse/graph_entity_manager.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave7-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -57376,10 +57376,10 @@ units:
     gPairLineExpiry: '0x3ce5a8'
     gWorld: '0x3c9ed4'
     memset: '0x35c6ec'
-- name: campaign_wave7_hide
+- name: manual_hide_b
   source: src/kynapse/behaviors_hide_2d4148.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -57393,7 +57393,7 @@ units:
   - addr: '0x2d4148'
     size: 380
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x2d4520'
     size: 508
     status: source
@@ -57405,11 +57405,11 @@ units:
   - addr: '0x2d49a8'
     size: 448
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x2d4b68'
     size: 1180
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x2d5068'
     size: 128
     status: source
@@ -57417,7 +57417,7 @@ units:
   - addr: '0x2d5248'
     size: 224
     status: asm
-    reason: campaign
+    reason: manual
   externs:
     _vt$Q210HideSearch9HideAgent: '0x3e3428'
     func_002D5248: '0x2d5248'
@@ -57425,12 +57425,12 @@ units:
     func_002E4CE0: '0x2e4ce0'
     func_002FB9D0: '0x2fb9d0'
     func_002FBC20: '0x2fbc20'
-- name: campaign_input_26baf8
+- name: manual_input_26baf8
   source: src/game/graphics_input_26baf8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
+  origin: game
   flags:
   - -x
   - c++
@@ -57443,12 +57443,12 @@ units:
     size: 160
     symbol: Reset__Q216CampaignGraphics10Controller
     status: source
-- name: campaign_input_26bb98
+- name: manual_input_26bb98
   source: src/game/graphics_input_26bb98.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: game; mod context owner
+  origin: game
   flags:
   - -x
   - c++
@@ -57464,11 +57464,11 @@ units:
 - name: context_graph_constraint_registration
   source: src/kynapse/graph_constraint_registration.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave7-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -57494,10 +57494,10 @@ units:
     _vt$Q222ConstraintRegistration13HeuristicMeta: '0x3eca80'
     _vt$Q222ConstraintRegistration14ConstraintMeta: '0x3e00c8'
     _vt$Q222ConstraintRegistration17HeuristicMetaBase: '0x3e00b0'
-- name: campaign_actor_191568_wave7
+- name: manual_actor_191568
   source: src/game/actor_191568.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: C++ actor RouteMode TU191568 full inventory
   flags:
@@ -57577,10 +57577,10 @@ units:
   externs:
     Clear__Q29BlackGame11ActionTimer: '0x173690'
     UpdateDestinationDistances__Q29BlackGame16MovementModeBase: '0x191a28'
-- name: campaign_gamepath_289ae0
+- name: manual_gamepath_289ae0
   source: src/game/graphics_game_path_289ae0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57595,10 +57595,10 @@ units:
     symbol: UpdateUse__Q211GamePathPS210PathObjectPQ211GamePathPS29PathAgentPQ211GamePathPS29RouteNodeiPUc
     status: asm
     reason: unmatched vector/index context
-- name: campaign_gamepath_289c10
+- name: manual_gamepath_289c10
   source: src/game/graphics_game_path_289c10.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57613,10 +57613,10 @@ units:
     symbol: func_00289C10
     status: asm
     reason: unmatched vector/index context
-- name: campaign_actor_16a250_wave7
+- name: manual_actor_16a250
   source: src/game/actor_16a250.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: C++ game region full TU inventory
   flags:
@@ -57642,14 +57642,14 @@ units:
     name: func_0016A5E8
     size: 308
     status: asm
-- name: context_graph_spatial_wave7
+- name: context_graph_spatial_b
   source: src/kynapse/graph_spatial_2f5c10.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: context-graph
-  claim: context-wave7-graph
+  owner: graph
+  claim: graph
   flags:
   - -O2
   - -G0
@@ -57742,7 +57742,7 @@ units:
 - name: mod_effects_claims
   source: src/game/claims.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -57865,7 +57865,7 @@ units:
 - name: mod_effects_1afbf0
   source: src/game/asset_1afbf0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -57882,7 +57882,7 @@ units:
 - name: mod_effects_1afd80
   source: src/game/asset_1afd80.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -57899,7 +57899,7 @@ units:
 - name: mod_effects_1afe38
   source: src/game/asset_1afe38.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -57917,7 +57917,7 @@ units:
 - name: mod_effects_1afde0
   source: src/game/asset_1afde0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -57939,7 +57939,7 @@ units:
 - name: mod_arms_1a51c8
   source: src/game/arms_1a51c8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -57954,27 +57954,27 @@ units:
   - addr: '0x1a51c8'
     size: 788
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a5738'
     size: 672
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a59d8'
     size: 312
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a5b10'
     size: 984
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a5f38'
     size: 664
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a61d0'
     size: 348
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a6330'
     size: 1148
     status: source
@@ -57982,11 +57982,11 @@ units:
   - addr: '0x1a67b8'
     size: 136
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a6840'
     size: 112
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a68b0'
     size: 48
     status: source
@@ -57994,7 +57994,7 @@ units:
   - addr: '0x1a6930'
     size: 88
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a6988'
     size: 156
     status: source
@@ -58006,19 +58006,19 @@ units:
   - addr: '0x1a6ab0'
     size: 300
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a6be0'
     size: 628
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a6f68'
     size: 540
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a72b0'
     size: 316
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a73f0'
     size: 96
     status: source
@@ -58034,19 +58034,19 @@ units:
   - addr: '0x1a7528'
     size: 312
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a7660'
     size: 124
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a76e0'
     size: 232
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a77c8'
     size: 1408
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x1a7d48'
     size: 168
     status: source
@@ -58058,11 +58058,11 @@ units:
   - addr: '0x1a7e58'
     size: 300
     status: asm
-    reason: campaign
+    reason: manual
 - name: mod_arms_34eae0
   source: src/animation/arms_34eae0.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -58076,7 +58076,7 @@ units:
   - addr: '0x34eae0'
     size: 168
     status: asm
-    reason: campaign
+    reason: manual
   - addr: '0x34edb8'
     size: 212
     status: source
@@ -58088,13 +58088,13 @@ units:
   - addr: '0x34f1c0'
     size: 268
     status: asm
-    reason: campaign
-  owner: final-depth-animation
-  claim: final-depth-animation
+    reason: manual
+  owner: animation
+  claim: animation
 - name: mod_camera_13db40
   source: src/game/tu_13db40.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: mod camera full TU inventory
   flags:
@@ -58167,7 +58167,7 @@ units:
 - name: mod_camera_26baf8
   source: src/game/tu_26baf8_26bcf8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: mod camera full TU inventory
   flags:
@@ -58212,7 +58212,7 @@ units:
 - name: mod_camera_140ca0
   source: src/game/tu_140ca0_140e48.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: mod camera full TU inventory
   flags:
@@ -58249,10 +58249,10 @@ units:
 - name: mod_weapons_tu_1561f8
   source: src/game/mod_weapons_tu_1561f8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
+  owner: weapons
   claim: shared-mod-context
   flags:
   - -O2
@@ -58341,10 +58341,10 @@ units:
 - name: mod_weapons_tu_158f08
   source: src/game/mod_weapons_tu_158f08.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
+  owner: weapons
   claim: shared-mod-context
   flags:
   - -O2
@@ -58431,10 +58431,10 @@ units:
 - name: mod_weapons_tu_15d370
   source: src/game/mod_weapons_tu_15d370.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
+  owner: weapons
   claim: shared-mod-context
   flags:
   - -O2
@@ -58487,7 +58487,7 @@ units:
 - name: mod_effects_1b1038
   source: src/game/lifecycle_1b1038.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -58505,7 +58505,7 @@ units:
 - name: mod_effects_1b1168
   source: src/game/lifecycle_1b1168.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -58523,7 +58523,7 @@ units:
 - name: mod_effects_1b1518
   source: src/game/lifecycle_1b1518.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -58541,7 +58541,7 @@ units:
 - name: mod_effects_1b16a8
   source: src/game/lifecycle_1b16a8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -58559,7 +58559,7 @@ units:
 - name: mod_effects_1b2408
   source: src/game/lifecycle_1b2408.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -58577,7 +58577,7 @@ units:
 - name: mod_effects_1b22d8
   source: src/game/lifecycle_1b22d8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -58595,7 +58595,7 @@ units:
 - name: mod_effects_1b0ff8
   source: src/game/lifecycle_1b0ff8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -58614,7 +58614,7 @@ units:
 - name: mod_effects_1b1080
   source: src/game/lifecycle_1b1080.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -58633,7 +58633,7 @@ units:
 - name: mod_arms_1a51c8_tick
   source: src/game/arms_1a51c8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -58658,7 +58658,7 @@ units:
 - name: mod_effects_1b38f8
   source: src/game/slot_remove_bone.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -58677,7 +58677,7 @@ units:
 - name: mod_arms_34eae0_evaluate
   source: src/animation/arms_34eae0.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -58695,16 +58695,16 @@ units:
     size: 316
     status: source
     symbol: func_0034F080
-  owner: final-depth-animation
-  claim: final-depth-animation
+  owner: animation
+  claim: animation
 - name: mod_camera_w2_tu_1409c0
   source: src/game/tu_1409c0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-camera
-  claim: mod-wave2-camera
+  owner: camera
+  claim: camera
   flags:
   - -x
   - c++
@@ -58724,10 +58724,10 @@ units:
 - name: mod_camera_w2_tu_127118
   source: src/game/tu_127118.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: phase3-pilot
+  owner: pilot
   claim: equivalence-pilot
   flags:
   - -x
@@ -59020,7 +59020,7 @@ units:
 - name: mod_arms_w2_3511d0
   source: src/animation/arms_3511d0_w2.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -59043,8 +59043,8 @@ units:
     size: 100
     status: source
     symbol: func_003519A0
-  owner: final-depth-animation
-  claim: final-depth-animation
+  owner: animation
+  claim: animation
   data_ranges:
   - section: .data
     input: .data
@@ -59054,11 +59054,11 @@ units:
 - name: mod_weapons_tu_15bbd8
   source: src/game/mod_weapons_tu_15bbd8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
-  owner: mod-weapons
-  claim: mod-wave2-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59095,11 +59095,11 @@ units:
 - name: mod_weapons_tu_154fd8
   source: src/game/mod_weapons_tu_154fd8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
-  claim: mod-wave2-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59118,11 +59118,11 @@ units:
 - name: mod_weapons_tu_1551c8
   source: src/game/mod_weapons_tu_1551c8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
-  claim: mod-wave2-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59141,11 +59141,11 @@ units:
 - name: mod_weapons_tu_155238
   source: src/game/mod_weapons_tu_155238.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
-  owner: mod-weapons
-  claim: mod-wave2-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59177,11 +59177,11 @@ units:
 - name: mod_weapons_inventory_inventory
   source: src/game/mod_weapons_inventory_inventory.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
-  claim: mod-wave2-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59236,11 +59236,11 @@ units:
 - name: mod_weapons_inventory_manager
   source: src/game/mod_weapons_inventory_manager.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
-  claim: mod-wave2-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59279,10 +59279,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: mod_effects_wave2_claims
+- name: mod_effects_claims_b
   source: src/game/claims_1b64c0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -59443,7 +59443,7 @@ units:
 - name: mod_muzzle_1bcc18
   source: src/game/muzzle_1bcc18.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: mod effects C++ accessed views; original identity qualified
   flags:
@@ -59461,7 +59461,7 @@ units:
 - name: mod_muzzle_1bcdd8
   source: src/game/muzzle_1bcdd8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: mod effects C++ accessed views; original identity qualified
   flags:
@@ -59479,7 +59479,7 @@ units:
 - name: mod_muzzle_1bd610
   source: src/game/muzzle_1bd610.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: mod effects C++ accessed views; original identity qualified
   flags:
@@ -59497,7 +59497,7 @@ units:
 - name: mod_muzzle_1bcdf8
   source: src/game/muzzle_1bcdf8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: mod effects C++ accessed views; original identity qualified
   flags:
@@ -59515,7 +59515,7 @@ units:
 - name: mod_muzzle_1bd508
   source: src/game/muzzle_1bd508.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: mod effects C++ accessed views; original identity qualified
   flags:
@@ -59534,7 +59534,7 @@ units:
 - name: mod_effects_1b8138
   source: src/game/simulation_1b8138.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -59557,7 +59557,7 @@ units:
 - name: mod_effects_1b86f8
   source: src/game/simulation_1b86f8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -59575,7 +59575,7 @@ units:
 - name: mod_effects_1b90d0
   source: src/game/simulation_1b90d0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -59590,14 +59590,14 @@ units:
     size: 200
     symbol: func_001B90D0
     status: source
-- name: mod_camera_wave3_pose
+- name: mod_camera_pose
   source: src/game/pose.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: Mod camera/player campaign; original class identity qualified
-  owner: mod-camera
-  claim: mod-wave3-full-inventory
+  origin: Camera/player input; original class identity qualified
+  owner: camera
+  claim: full-inventory
   flags:
   - -O2
   - -G0
@@ -59609,14 +59609,14 @@ units:
     size: 192
     status: source
     symbol: func_001357B8
-- name: mod_camera_wave3_damage
+- name: mod_camera_damage
   source: src/game/damage.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
-  origin: Mod camera/player campaign; original class identity qualified
-  owner: mod-camera
-  claim: mod-wave3-full-inventory
+  origin: Camera/player input; original class identity qualified
+  owner: camera
+  claim: full-inventory
   flags:
   - -O2
   - -G0
@@ -59627,14 +59627,14 @@ units:
   - addr: '0x13c778'
     size: 236
     status: asm
-- name: mod_camera_wave3_restore
+- name: mod_camera_restore
   source: src/game/restore.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  origin: Mod camera/player campaign; original class identity qualified
-  owner: mod-camera
-  claim: mod-wave3-full-inventory
+  origin: Camera/player input; original class identity qualified
+  owner: camera
+  claim: full-inventory
   flags:
   - -O2
   - -G0
@@ -59654,11 +59654,11 @@ units:
 - name: mod_weapons_tu_15d060
   source: src/game/mod_weapons_tu_15d060.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
-  owner: mod-weapons
-  claim: mod-wave3-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59675,11 +59675,11 @@ units:
 - name: mod_weapons_tu_15d198
   source: src/game/mod_weapons_tu_15d198.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
-  claim: mod-wave3-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59699,11 +59699,11 @@ units:
 - name: mod_weapons_tu_15d248
   source: src/game/mod_weapons_tu_15d248.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
-  claim: mod-wave3-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59719,11 +59719,11 @@ units:
 - name: mod_weapons_tu_15d2e8
   source: src/game/mod_weapons_tu_15d2e8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
-  owner: mod-weapons
-  claim: mod-wave3-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59740,11 +59740,11 @@ units:
 - name: mod_weapons_tu_15d310
   source: src/game/mod_weapons_tu_15d310.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
-  claim: mod-wave3-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59760,11 +59760,11 @@ units:
 - name: mod_weapons_tu_163328
   source: src/game/mod_weapons_tu_163328.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
-  owner: mod-weapons
-  claim: mod-wave3-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59781,11 +59781,11 @@ units:
 - name: mod_weapons_tu_155c28
   source: src/game/mod_weapons_tu_155c28.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: game
-  owner: mod-weapons
-  claim: mod-wave3-weapons
+  owner: weapons
+  claim: weapons
   flags:
   - -O2
   - -G0
@@ -59802,11 +59802,11 @@ units:
 - name: mod_weapons_catalog_methods
   source: src/game/mod_weapons_catalog_methods.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: mod-weapons
-  claim: mod-wave3-weapons-catalog-conversions
+  owner: weapons
+  claim: weapons-catalog-conversions
   flags:
   - -O2
   - -G0
@@ -59834,10 +59834,10 @@ units:
     symbol: Word18__Q210ModWeapons20WeaponManagerMethodsi
     size: 28
     status: source
-- name: mod_effects_wave3_claims
+- name: mod_effects_claims_c
   source: src/game/claims_1be960.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   flags:
   - -x
@@ -59922,7 +59922,7 @@ units:
 - name: mod_effects_damage
   source: src/game/damage_1be940.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -59948,7 +59948,7 @@ units:
 - name: mod_arms_w3_pose_ops
   source: src/animation/tu_3461d0.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -60040,8 +60040,8 @@ units:
     symbol: func_003477D0
     size: 32
     status: source
-  owner: final-depth-animation
-  claim: final-depth-animation
+  owner: animation
+  claim: animation
   data_ranges:
   - section: .data
     input: .data.pose_cache
@@ -60064,7 +60064,7 @@ units:
 - name: mod_arms_w3_token
   source: src/game/arms_token_w3.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: draft
   language: c++
   flags:
@@ -60078,11 +60078,11 @@ units:
   - addr: '0x2723b0'
     size: 216
     status: asm
-    reason: campaign
+    reason: manual
 - name: mod_effects_1bec68
   source: src/game/emitter_1bec68.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -60099,7 +60099,7 @@ units:
 - name: mod_effects_1bf720
   source: src/game/emitter_1bf720.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -60116,7 +60116,7 @@ units:
 - name: mod_effects_1bfea0
   source: src/game/emitter_1bfea0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   flags:
   - -x
@@ -60149,7 +60149,7 @@ units:
 - name: math_micro_controls
   source: src/animation/vu0_micro_controls.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
   owner: math-micro
@@ -60180,7 +60180,7 @@ units:
 - name: ps2_animation_math_shapes
   source: src/animation/animation_math.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: animation
   flags:
@@ -60196,8 +60196,8 @@ units:
     symbol: func_003440B8
     status: source
     size: 92
-  owner: final-depth-animation
-  claim: final-depth-animation
+  owner: animation
+  claim: animation
 - name: auto_game_19d6b8
   source: src/game/tu_19d6b8.c
   library: game
@@ -60748,12 +60748,12 @@ units:
       - -fno-rtti
       input_manifest_sha256: dd2eaccdbf3128bc236a0df55a09340b6fa02a685ca04ca0b591ee936f43cea5
       report: build/eeharness/pilot/pilot.json
-  owner: phase3-pilot
+  owner: pilot
   claim: equivalence-pilot
-- name: campaign_final_2e73b0
+- name: manual_final_2e73b0
   source: src/kynapse/tu_2e72f0.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
   flags:
@@ -60763,8 +60763,8 @@ units:
   - -G0
   - -snas
   - --assembler=sn-min6
-  owner: final-deep-kynapse
-  claim: final-deep-kynapse
+  owner: kynapse
+  claim: kynapse
   functions:
   - addr: '0x2e72f0'
     symbol: func_002E72F0
@@ -60824,10 +60824,10 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_final_33ba90
+- name: manual_final_33ba90
   source: src/physics/tu_33ba90.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
   flags:
@@ -60836,8 +60836,8 @@ units:
   - -O2
   - -G8
   - -snas
-  owner: final-deep-physics
-  claim: final-deep-physics
+  owner: physics
+  claim: physics
   functions:
   - addr: '0x33ba90'
     symbol: func_0033BA90
@@ -60871,7 +60871,7 @@ units:
 - name: final_kynapse_2ea2f8
   source: src/kynapse/tu_2ea2f8.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
   flags:
@@ -60880,8 +60880,8 @@ units:
   - -O2
   - -G0
   - -snas
-  owner: final-deep-kynapse-b
-  claim: final-deep-kynapse-b
+  owner: kynapse-b
+  claim: kynapse-b
   functions:
   - addr: '0x2ea2f8'
     symbol: func_002EA2F8
@@ -60904,15 +60904,15 @@ units:
 - name: final_audio_3168c8
   source: src/rw_audio/tu_3168c8.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rw_audio
   flags:
   - -O2
   - -G8
   - -ffunction-sections
-  owner: final-deep-audio
-  claim: final-deep-audio
+  owner: audio
+  claim: audio
   functions:
   - addr: '0x3168c8'
     symbol: func_003168C8
@@ -61131,14 +61131,14 @@ units:
     input: .rodata
     start: '0x409400'
     end: '0x4096e0'
-- name: campaign_final_30e9c8
+- name: manual_final_30e9c8
   source: src/kynapse/tu_30e9c8.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: final-deep-kynapse
-  claim: final-deep-kynapse
+  owner: kynapse
+  claim: kynapse
   flags:
   - -x
   - c++
@@ -61169,14 +61169,14 @@ units:
     start: '0x3ce544'
     end: '0x3ce59c'
     kind: unwind
-- name: campaign_final_32b598
+- name: manual_final_32b598
   source: src/physics/tu_32b598.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61217,14 +61217,14 @@ units:
     input: .bss
     start: '0x45cbb0'
     end: '0x45cbf0'
-- name: campaign_final_332768
+- name: manual_final_332768
   source: src/game/tu_332768.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61257,14 +61257,14 @@ units:
     input: .bss
     start: '0x45cd30'
     end: '0x45cd70'
-- name: campaign_final_341b98
+- name: manual_final_341b98
   source: src/game/tu_341b98.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-game
-  claim: final-deep-game
+  owner: game
+  claim: game
   flags:
   - -x
   - c++
@@ -61293,14 +61293,14 @@ units:
     input: .bss
     start: '0x45eaa0'
     end: '0x45eae0'
-- name: campaign_final_341520
+- name: manual_final_341520
   source: src/game/tu_341520.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61337,14 +61337,14 @@ units:
     input: .bss
     start: '0x45e9a0'
     end: '0x45e9e0'
-- name: campaign_final_33aee8
+- name: manual_final_33aee8
   source: src/physics/tu_33aee8.cpp
   library: physics
   provenance: imported
   tier: exact
   origin: physics
-  owner: final-deep-physics
-  claim: final-deep-physics
+  owner: physics
+  claim: physics
   flags:
   - -x
   - c++
@@ -61356,14 +61356,14 @@ units:
     symbol: func_0033AEE8
     size: 196
     status: source
-- name: campaign_final_3325e0
+- name: manual_final_3325e0
   source: src/game/tu_3325e0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61392,14 +61392,14 @@ units:
     input: .bss
     start: '0x45ccf0'
     end: '0x45cd30'
-- name: campaign_final_37eec8
+- name: manual_final_37eec8
   source: src/game/tu_37eec8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61428,14 +61428,14 @@ units:
     input: .bss
     start: '0x48edf0'
     end: '0x48ee30'
-- name: campaign_final_37f7a0
+- name: manual_final_37f7a0
   source: src/game/tu_37f7a0.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61467,11 +61467,11 @@ units:
 - name: final_audio_317340
   source: src/rw_audio/tu_3168c8.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rw_audio
-  owner: final-deep-audio
-  claim: final-deep-audio
+  owner: audio
+  claim: audio
   flags:
   - -O2
   - -G8
@@ -61491,14 +61491,14 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_final_381758
+- name: manual_final_381758
   source: src/game/tu_381758.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61527,14 +61527,14 @@ units:
     input: .bss
     start: '0x48eeb0'
     end: '0x48eef0'
-- name: campaign_final_382130
+- name: manual_final_382130
   source: src/game/tu_382130.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61563,14 +61563,14 @@ units:
     input: .bss
     start: '0x48ef30'
     end: '0x48ef70'
-- name: campaign_final_3416b8
+- name: manual_final_3416b8
   source: src/game/tu_3416b8.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61604,14 +61604,14 @@ units:
     input: .bss
     start: '0x45e9e0'
     end: '0x45ea20'
-- name: campaign_final_341a00
+- name: manual_final_341a00
   source: src/game/tu_341a00.cpp
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: game
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61645,14 +61645,14 @@ units:
     input: .bss
     start: '0x45ea60'
     end: '0x45eaa0'
-- name: campaign_final_33d940
+- name: manual_final_33d940
   source: src/physics/tu_33d940.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61695,14 +61695,14 @@ units:
     input: .bss
     start: '0x45e8e0'
     end: '0x45e920'
-- name: campaign_final_33e9b8
+- name: manual_final_33e9b8
   source: src/physics/tu_33e9b8.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61748,7 +61748,7 @@ units:
 - name: mod_arms_347a50
   source: src/animation/arms_347a50.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -61876,8 +61876,8 @@ units:
     func_00350570: '0x350570'
     func_00350890: '0x350890'
     func_003511D0: '0x3511d0'
-  owner: final-depth-animation
-  claim: final-depth-animation
+  owner: animation
+  claim: animation
   data_ranges:
   - section: .data
     input: .data.animation_graph_mode
@@ -61890,14 +61890,14 @@ units:
     kind: unwind
   rodata_type_splits:
   - '0x40a668'
-- name: campaign_final_33f0e0
+- name: manual_final_33f0e0
   source: src/physics/tu_33f0e0.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: physics
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61952,14 +61952,14 @@ units:
     input: .bss
     start: '0x45e960'
     end: '0x45e9a0'
-- name: campaign_final_33f400
+- name: manual_final_33f400
   source: src/physics/tu_33f400.cpp
   library: physics
-  provenance: campaign
+  provenance: manual
   tier: draft
   origin: physics
-  owner: final-deep-physics-b
-  claim: final-deep-physics-b
+  owner: physics-b
+  claim: physics-b
   flags:
   - -x
   - c++
@@ -61973,11 +61973,11 @@ units:
     symbol: func_0033F400
     size: 1700
     status: asm
-    reason: Xbox behavioral skeleton pending PS2 layout and codegen reconstruction
+    reason: behavioral skeleton pending PS2 layout and codegen reconstruction
 - name: mod_arms_w2_345500
   source: src/animation/arms_345500_w2.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -62057,8 +62057,8 @@ units:
     size: 232
     status: source
     symbol: func_003460E8
-  owner: final-depth-animation
-  claim: final-depth-animation
+  owner: animation
+  claim: animation
   data_ranges:
   - section: .data
     input: .data.animation_null_name
@@ -62084,7 +62084,7 @@ units:
 - name: animation_channel_348d00
   source: src/animation/tu_348d00.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -62093,8 +62093,8 @@ units:
   - -snas
   - -ffunction-sections
   - --assembler=sn-min6
-  owner: final-depth-animation
-  claim: final-depth-animation
+  owner: animation
+  claim: animation
   functions:
   - addr: '0x348d00'
     symbol: func_00348D00
@@ -62177,11 +62177,11 @@ units:
 - name: kynapse_follower_2d2ff8
   source: src/kynapse/tu_2d2ff8.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: final-depth-follower-data
-  claim: final-depth-follower-data
+  owner: follower-data
+  claim: follower-data
   flags:
   - -O2
   - -G0
@@ -62279,11 +62279,11 @@ units:
 - name: kynapse_follower_callback
   source: src/kynapse/tu_2d2ff8.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: final-depth-follower-data
-  claim: final-depth-follower-data
+  owner: follower-data
+  claim: follower-data
   flags:
   - -O2
   - -G0
@@ -62301,11 +62301,11 @@ units:
 - name: kynapse_wander_2d7260
   source: src/kynapse/tu_2d7260.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: final-deep-kynapse-wander
-  claim: final-deep-kynapse-wander
+  owner: kynapse-wander
+  claim: kynapse-wander
   language: c++
   flags:
   - -O2
@@ -62405,7 +62405,7 @@ units:
 - name: mod_arms_w2_34f360
   source: src/animation/arms_34f360_w2.cpp
   library: animation
-  provenance: campaign
+  provenance: manual
   tier: exact
   language: c++
   flags:
@@ -62415,8 +62415,8 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   - -fno-rtti
-  owner: final-depth-animation
-  claim: final-depth-animation
+  owner: animation
+  claim: animation
   functions:
   - addr: '0x34f360'
     size: 192
@@ -62479,11 +62479,11 @@ units:
 - name: final_audio_vector_getters
   source: src/rw_audio/tu_3168c8.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rw_audio
-  owner: final-deep-audio
-  claim: final-deep-audio
+  owner: audio
+  claim: audio
   flags:
   - -O2
   - -G8
@@ -62514,11 +62514,11 @@ units:
 - name: final_audio_byte_setters
   source: src/rw_audio/tu_3168c8.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rw_audio
-  owner: final-deep-audio
-  claim: final-deep-audio
+  owner: audio
+  claim: audio
   flags:
   - -O2
   - -G8
@@ -62541,11 +62541,11 @@ units:
 - name: final_audio_cache_storage
   source: src/rw_audio/tu_3168c8.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rw_audio
-  owner: final-deep-audio
-  claim: final-deep-audio
+  owner: audio
+  claim: audio
   flags:
   - -O2
   - -G8
@@ -62568,10 +62568,10 @@ units:
 - name: context_repulsor_contact_outline
   source: src/kynapse/behaviors_repulsor.cpp
   library: kynapse
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: kynapse
-  owner: final-deep-kynapse-steering
+  owner: kynapse-steering
   flags:
   - -O2
   - -G0
@@ -62618,7 +62618,7 @@ units:
     reason: full TU context; linked by primary recipe
   externs:
     sqrtf: '0x29eb90'
-  claim: final-deep-kynapse-contact-outline
+  claim: kynapse-contact-outline
   full_tu_context: true
   unlinked_context_helpers:
   - _$_Q24Kaim13ActorIterator
@@ -62626,11 +62626,11 @@ units:
 - name: final_audio_scalar_getters_sony296
   source: src/rw_audio/tu_3168c8.c
   library: rw_audio
-  provenance: campaign
+  provenance: manual
   tier: exact
   origin: rw_audio
-  owner: final-deep-audio
-  claim: final-deep-audio-scalar-getters
+  owner: audio
+  claim: audio-scalar-getters
   flags:
   - -O2
   - -G8
@@ -62651,13 +62651,13 @@ units:
     size: 36
     status: source
   compiler: ee-gcc2.96
-- name: campaign_final_game_1998c0
+- name: manual_final_game_1998c0
   source: src/game/tu_199850.c
   library: game
-  provenance: campaign
+  provenance: manual
   tier: exact
-  owner: final-depth-action-event
-  claim: final-depth-action-event
+  owner: action-event
+  claim: action-event
   flags:
   - -O2
   - -G0
@@ -62683,5 +62683,5 @@ units:
     symbol: func_00199950
     size: 56
     status: source
-  owner: final-depth-action-event
-  claim: final-depth-action-event
+  owner: action-event
+  claim: action-event

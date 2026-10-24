@@ -1,4 +1,4 @@
-// Ported from the companion project (an unpublished companion project).
+// Ported from an unpublished companion project.
 #include "kynapse/batch9.hpp"
 
 // /SLUS_213.76 0x2f3208

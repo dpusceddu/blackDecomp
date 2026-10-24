@@ -168,22 +168,22 @@ def candidates(top, args=None):
                 r['large_left'] += 1
                 r['large_bytes'] += f['span']
     out = []
-    campaign = bool(args and getattr(args, 'campaign', False))
+    wide = bool(args and getattr(args, 'wide', False))
     libraries = set(getattr(args, 'library', None) or
                     ('game', 'kynapse', 'animation', 'physics', 'apt', 'rwa_ee', 'renderware_core'))
     for r in rows:
         t = r['t']
-        if t['library'] not in libraries or r['n'] < (2 if campaign else 4) or r['left_n'] < (1 if campaign else 2) \
-                or not 1 <= r['left'] <= (60000 if campaign else 20000) or r['left_n'] > (160 if campaign else 60):
+        if t['library'] not in libraries or r['n'] < (2 if wide else 4) or r['left_n'] < (1 if wide else 2) \
+                or not 1 <= r['left'] <= (60000 if wide else 20000) or r['left_n'] > (160 if wide else 60):
             continue
         share = r['src'] / r['n']
-        if not campaign and (share < 0.15 or r['left'] < 250 or r['vec'] > max(1, r['left_n'] // 6)):
+        if not wide and (share < 0.15 or r['left'] < 250 or r['vec'] > max(1, r['left_n'] // 6)):
             continue
         conf = {'exact': 1.0, 'high': 0.8, 'medium': 0.5, 'low': 0.2}[t['confidence']]
         known = (r['named'] / r['n']) + (0.3 if t['library'] in ('kynapse', 'animation', 'physics') else 0) \
             + (0.9 if 0x1a0000 <= int(t['text'][0], 16) < 0x1b8000 else 0)         # the AI action and movement code (CBkRwAI* strings)
         score = 2 * share + conf + known - 0.15 * r['vec'] + min(r['left'], 6000) / 4000.0 - r['left'] / 40000.0
-        if campaign:
+        if wide:
             score += min(r['large_bytes'], 12000) / 12000.0
         out.append((score, r))
     out.sort(key=lambda x: -x[0])
@@ -203,14 +203,14 @@ def candidates(top, args=None):
     if args and getattr(args, 'json', False):
         print(json.dumps([dict(r, score=score) for score, r in out[:top]], indent=2))
         return out[:top]
-    print('Phase 5 candidates: ' + ('campaign queues, including large and vector functions' if campaign else
+    print('Phase 5 candidates: ' + ('wide queue, including large and vector functions' if wide else
           'translation units to finish by hand (most already in source, moderate rest, few EE vector functions)'))
     print('  %-34s %-9s %-6s %9s %12s %9s %5s' % ('TU', 'library', 'bounds', 'functions', 'in source', 'left (B)', 'vec'))
     for score, r in out[:top]:
         t = r['t']
         print('  %-34s %-9s %-6s %9d %5d (%3d%%) %9d %5d   %s-%s' % (t['name'][:34], t['library'][:9], t['confidence'], r['n'], r['src'],
               100 * r['src'] // r['n'], r['left'], r['vec'], t['text'][0], t['text'][1]) +
-              ('  large: %d / %d B' % (r['large_left'], r['large_bytes']) if campaign else ''))
+              ('  large: %d / %d B' % (r['large_left'], r['large_bytes']) if wide else ''))
     print()
     return out[:top]
 
@@ -221,7 +221,7 @@ def main():
     ap.add_argument('--top', type=int, default=15)
     ap.add_argument('--max-size', type=int)
     ap.add_argument('--library', action='append', help='TU library filter (repeatable)')
-    ap.add_argument('--campaign', action='store_true', help='include untouched/vector TUs and rank remaining large functions')
+    ap.add_argument('--wide', action='store_true', help='include untouched/vector TUs and rank remaining large functions')
     ap.add_argument('--per-library', type=int, default=3, help='maximum candidates per library; 0 means unlimited')
     ap.add_argument('--json', action='store_true', help='machine-readable TU queue candidates')
     a = ap.parse_args()

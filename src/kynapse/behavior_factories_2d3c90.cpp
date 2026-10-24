@@ -1,4 +1,4 @@
-// Ported from the companion project (an unpublished companion project).
+// Ported from an unpublished companion project.
 #include "kynapse/behavior_factories.hpp"
 
 namespace Kaim {

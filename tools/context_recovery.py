@@ -9,6 +9,7 @@ import argparse
 import collections
 import hashlib
 import json
+import os
 import re
 import struct
 from dataclasses import dataclass
@@ -701,7 +702,7 @@ def abi_slots(params):
     Original parameter ordering is preserved for source signatures. Without a source
     signature, integer-then-float ordering describes the same register ABI; the original
     mixed ordering remains unknown. Wider integers occupy one 128-bit GPR slot.
-    SN's software double uses the integer bank, as confirmed by a worker probe.
+    SN's software double uses the integer bank, as confirmed by a compiler probe.
     """
     gpr, fpr, stack, out = 0, 0, 0, []
     for typ, _ in params:
@@ -1160,15 +1161,24 @@ def verified_layout_users(names, root=ROOT):
     return {name: sorted(users) for name, users in result.items()}
 
 
+def counterpart_dir(root=ROOT):
+    """Optional input: a directory with an Xbox-to-PS2 counterpart map (`xbox_ps2_map.json`, pairs of xbox/ps2 addresses with
+    confidence and region) and, beside it, module descriptions (`src/**/*.json` with a `.cpp` of the same name). Default
+    .local/counterparts/, or $BLACK_COUNTERPARTS. The recovery works without it; the pairs are discovery leads only."""
+    chosen = os.environ.get('BLACK_COUNTERPARTS')
+    return Path(chosen) if chosen else root / '.local/counterparts'
+
+
 def fingerprint(root=ROOT):
     h = hashlib.sha256()
     paths = [Path(__file__), root / 'config/units.yaml', root / 'config/symbols.txt', root / 'build/SLUS_213.76/placement.json']
     paths += sorted((root / 'src').rglob('*.[ch]')) + sorted((root / 'src').rglob('*.cpp'))
     paths += sorted((root / 'include').rglob('*.h')) + sorted((root / 'include').rglob('*.hpp'))
     paths += sorted((root / '.local/ghidra').glob('*.json'))
-    paths += [root.parent / 'the counterpart map']
-    paths += sorted((root.parent / 'an unpublished companion project').rglob('*.json'))
-    paths += sorted((root.parent / 'an unpublished companion project').rglob('*.cpp'))
+    other = counterpart_dir(root)
+    paths += [other / 'xbox_ps2_map.json']
+    paths += sorted((other / 'src').rglob('*.json'))
+    paths += sorted((other / 'src').rglob('*.cpp'))
     for p in paths:
         if p.is_file() and '/layouts/' not in p.as_posix():
             h.update(p.read_bytes())
@@ -1216,11 +1226,12 @@ def recover(inv=None, root=ROOT, refresh=False):
             if row['params'][ordinal] == 'void *':
                 row.setdefault('param_views', {})[str(ordinal)] = next(iter(names)) + ' *'
     # Counterpart identities are discovery leads only: Xbox offsets never enter a PS2 layout.
-    counterpart = root.parent / 'the counterpart map'
+    other = counterpart_dir(root)
+    counterpart = other / 'xbox_ps2_map.json'
     leads = {}
-    parent_sources = collections.defaultdict(list)
+    module_sources = collections.defaultdict(list)
     if counterpart.exists():
-        for module in sorted((root.parent / 'an unpublished companion project').rglob('*.json')):
+        for module in sorted((other / 'src').rglob('*.json')):
             try:
                 config = json.loads(module.read_text())
             except (ValueError, OSError):
@@ -1236,11 +1247,11 @@ def recover(inv=None, root=ROOT, refresh=False):
                 match = re.match(r'\?([^@]+)@([^@]*)@@', symbol)
                 name = ((match.group(2) + '::') if match and match.group(2) else '') + match.group(1) if match else symbol
                 related = [d['raw'] for d in declarations if d['name'] == name]
-                parent_sources[address.lower()].append(dict(module=module.relative_to(root.parent).as_posix(), name=name, signatures=related))
+                module_sources[address.lower()].append(dict(module=module.relative_to(other).as_posix(), name=name, signatures=related))
         for pair in json.loads(counterpart.read_text()).get('pairs', []):
             a = int(pair['ps2'], 16)
             leads.setdefault(str(a), []).append(dict(xbox=pair['xbox'], confidence=pair['confidence'], region=pair['region'],
-                                                   source_leads=parent_sources.get(pair['xbox'].lower(), [])))
+                                                   source_leads=module_sources.get(pair['xbox'].lower(), [])))
     has_views = any('/layouts/Recovered_' in p.read_text() for p in (root / 'src').rglob('*') if p.suffix in ('.c', '.cpp', '.h', '.hpp'))
     if has_views:
         verified = verified_layout_users(layouts, root)

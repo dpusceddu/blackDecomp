@@ -1,5 +1,5 @@
 # PS2 function address -> region (game, kynapse, animation, physics, other), from the
-# companion project counterpart map (discovery leads, not byte-compared); tools/progress.py --refresh
+# optional Xbox-to-PS2 counterpart map (discovery leads, not byte-compared); tools/progress.py --refresh
 0x001004B0 game
 0x00100518 game
 0x001005C0 game

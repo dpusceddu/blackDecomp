@@ -3,7 +3,7 @@
 
 Usage: python3 configure.py [--version SLUS_213.76]    then `ninja`
 Stages (see README.md): extract -> split (splat) -> support symbols -> post-process (fixasm) -> link script ->
-assemble+link in the build backend -> pack the ELF container -> check against config/<GAME_ID>/checksums.sha256.
+assemble+link with the build toolchain -> pack the ELF container -> check against config/<GAME_ID>/checksums.sha256.
 `ninja` ends with `OK` or a mismatch report.
 """
 import argparse, json, sys
@@ -45,7 +45,7 @@ rule ldscript
   description = write the linker script (original order, source units replace functions)
 rule link
   command = $py tools/build_objects.py {slug}
-  description = assemble and compile what changed, then link, in the build backend
+  description = assemble and compile what changed, then link, with the build toolchain
   depfile = {b}/link.d
   pool = console
 rule pack

@@ -1,4 +1,4 @@
-# Runs inside the build backend: assemble a GNU object with the EE assembler, link it with an SN-compiled object using the
+# Runs inside the build job: assemble a GNU object with the EE assembler, link it with an SN-compiled object using the
 # mainline MIPS ld and a trivial linker script, then inspect the result.
 import subprocess
 def sh(c):

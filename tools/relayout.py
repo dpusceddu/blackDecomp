@@ -8,7 +8,7 @@ Rules (tools/layout.py): the library comes from the TU map for the unit's first 
 descriptive name it already had (wave suffixes dropped) or else after its TU (`tu_<address>`, plus `_<unit address>` when the
 unit does not start the TU). Sources that no unit uses (nonmatching drafts) go to src/<library>/nonmatching/. A file that is
 already at src/<library>/<name> stays, so the script can be re-run after other tools added files. The provenance
-(`auto`, `imported`, `campaign`, `equivalent`) is read from the old directory and the `origin` label once and then kept as a field.
+(`auto`, `imported`, `manual`, `equivalent`) is read from the old directory and the `origin` label once and then kept as a field.
 `origin` keeps its meaning as the progress-report label.
 """
 import sys as _sys
@@ -86,7 +86,7 @@ def provenance(unit, old):
         return 'auto'
     if origin in ('kynapse', 'game', 'vector') and unit['name'].split('_')[0] in ('kynapse', 'game'):
         return 'imported'
-    return 'campaign'
+    return 'manual'
 
 
 def unit_tier(unit):

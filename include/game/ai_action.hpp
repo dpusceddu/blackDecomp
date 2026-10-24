@@ -1,4 +1,4 @@
-// Ported from the companion project (an unpublished companion project), PS2 branches only.
+// Ported from an unpublished companion project, PS2 branches only.
 #ifndef BLACK_GAME_AI_ACTION_HPP
 #define BLACK_GAME_AI_ACTION_HPP
 

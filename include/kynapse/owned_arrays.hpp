@@ -1,5 +1,5 @@
-// Declarations of the Kynapse source module "owned_arrays" (ported from the companion project:
-// an unpublished companion project). Function definitions are in the units that provide them.
+// Declarations of the Kynapse source module "owned_arrays" (ported from an unpublished companion project).
+// Function definitions are in the units that provide them.
 #ifndef BLACK_KYNAPSE_MODULE_OWNED_ARRAYS_HPP
 #define BLACK_KYNAPSE_MODULE_OWNED_ARRAYS_HPP
 #include "kynapse/compat.hpp"

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Assemble and compile what changed, then link, in one call to the build backend (never on this host).
+"""Assemble and compile what changed, then link, in one call to the build toolchain .
 
 Usage: build_objects.py SLUG
 Reads build/<GAME_ID>/objects.json and link.ld (tools/make_ld.py). Every object (one per function, shared constant run,
 splat data file, or compiled unit) is cached by the hash of its inputs in build/<GAME_ID>/cache/, so only changed
-sources are assembled or compiled. One worker call receives the changed sources plus the cached objects, builds
+sources are assembled or compiled. One build call receives the changed sources plus the cached objects, builds
 the missing ones, links everything with mainline GNU ld, and returns linked.elf, link.map and the new objects.
 """
 import sys as _sys

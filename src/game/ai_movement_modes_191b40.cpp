@@ -1,4 +1,4 @@
-// Ported from the companion project (an unpublished companion project), PS2 branches only.
+// Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
 namespace BlackGame {

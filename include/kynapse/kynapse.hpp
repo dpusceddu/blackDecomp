@@ -1,11 +1,11 @@
-// Ported from the companion project (an unpublished companion project).
+// Ported from an unpublished companion project.
 #ifndef BLACK_KYNAPSE_HPP
 #include "kynapse/compat.hpp"
 #define BLACK_KYNAPSE_HPP
 
 // Kynogon Kynapse AI middleware (namespace Kaim in the original strings).
 // Built without /arch:SSE: all float math is x87. The dynamic-avoidance part
-// of this library is reconstructed separately in an unpublished companion project*.
+// of this library is reconstructed separately.
 #include "kynapse/alloc.hpp"
 
 namespace Kaim {

@@ -27,12 +27,12 @@ ROOT = Path(__file__).resolve().parents[1]
 REGIONS = ROOT / 'config/regions.txt'
 
 
-def refresh_regions(parent_map):
+def refresh_regions(counterpart_map):
     """Rewrite config/regions.txt (address, region) from an Xbox-to-PS2 counterpart map (json with `pairs`), optional input."""
-    pairs = json.loads(Path(parent_map).read_text())['pairs']
+    pairs = json.loads(Path(counterpart_map).read_text())['pairs']
     rows = sorted({(int(p['ps2'], 16), p['region']) for p in pairs})
     REGIONS.write_text('# PS2 function address -> region (game, kynapse, animation, physics, other), from the\n'
-                       '# companion project counterpart map (discovery leads, not byte-compared); tools/progress.py --refresh\n' +
+                       '# optional Xbox-to-PS2 counterpart map (discovery leads, not byte-compared); tools/progress.py --refresh\n' +
                        ''.join('0x%08X %s\n' % r for r in rows))
     print('wrote %s: %d functions' % (REGIONS.name, len(rows)))
 

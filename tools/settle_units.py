@@ -3,7 +3,7 @@
 
 Compiles every unit, demotes functions whose object cannot take the place of the assembly (units_verify.py prepare),
 then links repeatedly, demoting the units the linker names, and finally demotes the units owning any differing word.
-Usage: settle_units.py [SLUG]         (needs the build backend; ends by running ninja, which must print OK)
+Usage: settle_units.py [SLUG]         (needs the toolchain; ends by running ninja, which must print OK)
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):

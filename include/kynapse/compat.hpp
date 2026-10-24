@@ -1,7 +1,7 @@
 // Declarations the Kynapse sources use from the C library and from Windows-style
 // keywords the reconstructed code was written with. The compiler catalog has no
 // complete target SDK headers, so they are supplied here. Carried over from the
-// companion project's studies/ps2_xbox_compat.hpp.
+// unpublished companion project.
 #ifndef BLACK_KYNAPSE_COMPAT_HPP
 #define BLACK_KYNAPSE_COMPAT_HPP
 

@@ -1,4 +1,4 @@
-// Ported from the companion project (an unpublished companion project).
+// Ported from an unpublished companion project.
 #include "kynapse/host_2850c0.hpp"
 
 namespace Kaim {

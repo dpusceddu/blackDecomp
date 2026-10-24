@@ -3,7 +3,7 @@
 
 `gen` samples the USA retail .text (every distinct mnemonic plus random contiguous windows), disassembles with
 rabbitizer's R5900 support and writes sample.s plus sample.json (original words and texts) under .local/asmcheck/.
-`run` assembles it inside the build backend (tools/sandbox.py) with each available assembler, retries after
+`run` assembles it inside the build toolchain (tools/sandbox.py) with each available assembler, retries after
 removing lines the assembler rejects, and compares the resulting .text words with the originals.
 
 Usage: asmcheck.py gen [--windows N --window-size N --per-mnemonic N --seed N]

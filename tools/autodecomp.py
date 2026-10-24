@@ -8,7 +8,7 @@
   autodecomp.py report                   outcome table for build/auto.json
   autodecomp.py show ADDR                print the best draft of a function and its diff
 
-Sizes are the function's code size in bytes. Compilation happens only in the build backend (tools/sandbox.py, one call
+Sizes are the function's code size in bytes. Compilation happens only with the build toolchain (tools/sandbox.py, one call
 per batch of candidates); m2c and scoring run on the host because they only read and write text. Scoring compares the
 compiled .text with the original instruction words, masking relocated fields, and compares each relocation's target
 (symbol address plus addend) with the symbolic operand of the original assembly. The final authority is the identical
@@ -244,10 +244,10 @@ def recovered_context(refresh=False):
     if RECOVERED is None or refresh:
         if os.environ.get('AUTODECOMP_FREEZE_CONTEXT') == '1':
             if refresh:
-                raise SystemExit('Frozen context cannot be refreshed; refresh centrally before the campaign.')
+                raise SystemExit('Frozen context cannot be refreshed; refresh it once, before parallel runs.')
             cache = AUTO / 'context.json'
             if not cache.exists() or not (ROOT / 'include/game/layouts/layouts.h').exists() or not (AUTO / 'ctx.c').exists():
-                raise SystemExit('Frozen recovery context is missing; export it centrally before the campaign.')
+                raise SystemExit('Frozen recovery context is missing; create it first with `autodecomp.py context --refresh`.')
             RECOVERED = json.loads(cache.read_text())
         else:
             import context_recovery
@@ -829,7 +829,7 @@ def compile_dependencies(source):
 
 
 def worker_compile(jobs, tag='auto'):
-    """jobs: list of (key, source text, flags). Compiles in one worker call. Returns {key: (rc, message, object bytes)}.
+    """jobs: list of (key, source text, flags). Compiles in one build call. Returns {key: (rc, message, object bytes)}.
     Results are cached by hash of source and flags in build/auto/cache/."""
     cache = AUTO / 'cache'
     cache.mkdir(parents=True, exist_ok=True)
@@ -1262,7 +1262,7 @@ def extra_sets(fn):
     if tf and tf[0] != COMPILER:
         return vu0_flags(fn, force_cc(SONY_EXTRA + assembler_sets))
     # The bundled GNU assembler and SN assembler differ on short-loop/hazard
-    # padding. Both have full-image-verified campaign matches; try both rather
+    # padding. Both have full-image-verified matches; try both rather
     # than treating an assembler NOP difference as an unfixable C mismatch.
     sets = EXTRA_FLAG_SETS + [['-O2', '-G0'], ['-O2', '-G0', '-fbyte-bool'], ['-Os', '-G0'],
                               ['-O2', '-G0', '-fno-schedule-insns']]
@@ -1475,7 +1475,7 @@ def fine_score(target, toks, orig):
 
 class Climb:
     """Hill climbing on one function with decomp-permuter's randomizer. Candidates of many functions are compiled
-    together (permute_many), so the build backend's per-call latency is shared."""
+    together (permute_many), so the backend's per-call latency is shared."""
     def __init__(self, f, src, flags, target, orig, rng=1):
         sys.path.insert(0, str(PERMUTER))
         import random

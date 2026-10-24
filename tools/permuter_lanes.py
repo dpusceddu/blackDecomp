@@ -36,7 +36,7 @@ def preemption_key(records, states, active):
 
 
 def budget_finished(manifest, elapsed, now):
-    """A restart preserves accumulated wall time and the absolute campaign end."""
+    """A restart preserves accumulated wall time and the absolute end time."""
     return elapsed >= manifest['total_hours'] * 3600 or (
         manifest.get('deadline_unix') is not None and now >= manifest['deadline_unix'])
 

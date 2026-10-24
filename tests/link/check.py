@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Link check for the isolated MIPS binutils: SN-compiled probe + GNU-assembled object, trivial linker script.
-Usage: .venv/bin/python tests/link/check.py   (needs the build backend; prints the linked image's layout)"""
+Usage: .venv/bin/python tests/link/check.py   (needs the toolchain; prints the linked image's layout)"""
 import subprocess, sys
 from pathlib import Path
 

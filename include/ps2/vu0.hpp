@@ -1,4 +1,4 @@
-// Ported from the companion project (an unpublished companion project), PS2 branches only.
+// Ported from an unpublished companion project, PS2 branches only.
 #ifndef BLACK_PS2_VU0_HPP
 #define BLACK_PS2_VU0_HPP
 

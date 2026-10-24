@@ -1,5 +1,5 @@
-// Declarations of the Game source module "ai_movement_modes" (ported from the companion project:
-// an unpublished companion project). Function definitions are in the units that provide them.
+// Declarations of the Game source module "ai_movement_modes" (ported from an unpublished companion project).
+// Function definitions are in the units that provide them.
 #ifndef BLACK_GAME_MODULE_AI_MOVEMENT_MODES_HPP
 #define BLACK_GAME_MODULE_AI_MOVEMENT_MODES_HPP
 

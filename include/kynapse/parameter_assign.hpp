@@ -1,5 +1,5 @@
-// Declarations of the Kynapse source module "parameter_assign" (ported from the companion project:
-// an unpublished companion project). Function definitions are in the units that provide them.
+// Declarations of the Kynapse source module "parameter_assign" (ported from an unpublished companion project).
+// Function definitions are in the units that provide them.
 #ifndef BLACK_KYNAPSE_MODULE_PARAMETER_ASSIGN_HPP
 #define BLACK_KYNAPSE_MODULE_PARAMETER_ASSIGN_HPP
 #include "kynapse/compat.hpp"

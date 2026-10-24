@@ -6,7 +6,7 @@ Format (see README.md):
     - name: kynapse_children          # object name; also build/<GAME_ID>/units/<name>.o
       source: src/kynapse/children.cpp   # src/<library>/<name>; see tools/layout.py
       library: kynapse                   # kynapse | game | apt | animation | physics | rw_core | rw_audio | sony | libc | linkonce
-      provenance: imported               # imported | auto | campaign | equivalent: how the source arrived
+      provenance: imported               # imported | auto | manual | equivalent: how the source arrived
       tier: exact                        # strongest evidence tier of the unit's functions: exact | equivalent | draft
       origin: kynapse                    # label of the progress report
       compiler: ee-gcc2.95.3-136      # optional, this is the default
