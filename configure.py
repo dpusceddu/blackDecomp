@@ -2,7 +2,7 @@
 """Write build.ninja for the identical rebuild of one boot executable.
 
 Usage: python3 configure.py [--version SLUS_213.76]    then `ninja`
-Stages (see README.md): extract -> split (splat) -> support symbols -> post-process (fixasm) -> link script ->
+Stages (see docs/build.md): extract -> split (splat) -> support symbols -> post-process (fixasm) -> link script ->
 assemble+link with the build toolchain -> pack the ELF container -> check against config/<GAME_ID>/checksums.sha256.
 `ninja` ends with `OK` or a mismatch report.
 """
@@ -55,6 +55,14 @@ rule progress
   command = $py tools/progress.py {slug}
   description = share of .text provided by source
   pool = console
+rule objdiff
+  command = $py tools/objdiff.py {slug}
+  description = write objdiff.json and the per-unit target and base objects
+  pool = console
+rule report
+  command = $py tools/objdiff.py {slug} --report
+  description = generate the objdiff progress report ({b}/report.json)
+  pool = console
 rule check
   command = $py tools/check_elf.py {slug} {b}/{boot}.elf --stamp $out
   description = compare with the target
@@ -69,6 +77,8 @@ build {b}/linked.elf: link | {b}/link.ld {b}/objects.json include/macro.inc {too
 build {b}/{boot}.elf: pack | {b}/linked.elf tools/pack_elf.py
 build {b}/ok.stamp: check | {b}/{boot}.elf tools/check_elf.py config/{slug}/checksums.sha256
 build progress: progress | {b}/linked.elf
+build objdiff: objdiff | {b}/linked.elf {tools('objdiff.py', 'objdiff_job.py')}
+build report: report | {b}/linked.elf {tools('objdiff.py', 'objdiff_job.py')}
 build all: phony {b}/ok.stamp
 default all
 """

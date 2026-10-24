@@ -13,3 +13,6 @@ build.ninja
 .ninja_log
 .ninja_deps
 .DS_Store
+
+# objdiff project file written by `ninja objdiff`
+objdiff.json

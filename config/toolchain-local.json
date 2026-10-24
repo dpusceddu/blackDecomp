@@ -24,5 +24,27 @@
  "binutils_prefixes": [
   "mipsel-linux-gnu-",
   "mips-ps2-decompals-"
- ]
+ ],
+ "objdiff": {
+  "version": "v3.8.2",
+  "url": "https://github.com/encounter/objdiff/releases/download/v3.8.2/",
+  "assets": {
+   "linux-x86_64": {
+    "name": "objdiff-cli-linux-x86_64",
+    "sha256": "e5445089a6f707e30cb5e02992451b604619cedfd2660ee2373a86bfefd9e718"
+   },
+   "linux-aarch64": {
+    "name": "objdiff-cli-linux-aarch64",
+    "sha256": "087516e73e1b3223b39974f00bc2810fea5c3dc2c93a8e1f06442ec68acaacb4"
+   },
+   "macos-arm64": {
+    "name": "objdiff-cli-macos-arm64",
+    "sha256": "767c67e13b7b5e6ca545e7d2235e47c7bceac07d47a52776f74a52914cb4085a"
+   },
+   "macos-x86_64": {
+    "name": "objdiff-cli-macos-x86_64",
+    "sha256": "2cfe0f46fc84cef7d96813f100a0f01fbf99ac7e423b7fda1d314aada4d5ff72"
+   }
+  }
+ }
 }

@@ -2,7 +2,8 @@
 """Local build toolchain: download, verify and unpack the pinned compilers, assemblers and wibo.
 
 Usage:
-  toolchain.py install [--root DIR] [--binutils prebuilt]   download everything the build needs (idempotent)
+  toolchain.py install [--root DIR] [--binutils prebuilt] [--objdiff]
+                                                            download everything the build needs (idempotent)
   toolchain.py check   [--root DIR]                         report what is present and what is missing
   toolchain.py env     [--root DIR]                         print the environment the build jobs use
 
@@ -157,6 +158,24 @@ def install_binutils(base):
     return True
 
 
+def objdiff_asset():
+    system = {'Linux': 'linux', 'Darwin': 'macos'}.get(platform.system())
+    machine = {'x86_64': 'x86_64', 'AMD64': 'x86_64', 'arm64': 'arm64', 'aarch64': 'aarch64'}.get(platform.machine())
+    entry = settings()['objdiff']
+    asset = entry['assets'].get('%s-%s' % (system, machine))
+    if not asset:
+        raise SystemExit('no pinned objdiff-cli for %s/%s; download one from the objdiff releases' % (platform.system(), platform.machine()))
+    return entry['url'] + asset['name'], asset['sha256']
+
+
+def install_objdiff(base):
+    url, digest = objdiff_asset()
+    target = base / 'bin' / 'objdiff-cli'
+    changed = download(url, digest, target)
+    target.chmod(target.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+    return changed
+
+
 def find_binutils(base=None):
     """Return (directory or None, prefix) of the first usable linker: the cache, then the PATH."""
     base = base or root()
@@ -209,11 +228,16 @@ def main():
     ap.add_argument('command', choices=['install', 'check', 'env'])
     ap.add_argument('--root', help='toolchain directory (default build/toolchain or $BLACK_TOOLCHAIN_DIR)')
     ap.add_argument('--binutils', choices=['prebuilt'], help='also install the decompals prebuilt binutils')
+    ap.add_argument('--objdiff', action='store_true', help='also install the pinned objdiff-cli (for `ninja report`)')
+    ap.add_argument('--only-objdiff', action='store_true', help='install nothing but objdiff-cli (no compilers)')
     a = ap.parse_args()
     base = root(a.root)
     if a.command == 'env':
         for key, value in job_environment(base).items():
             print('%s=%s' % (key, value))
+        return 0
+    if a.command == 'install' and a.only_objdiff:
+        print('objdiff-cli %s %s' % (settings()['objdiff']['version'], 'installed' if install_objdiff(base) else 'present'))
         return 0
     if a.command == 'install':
         if platform.system() != 'Linux' or platform.machine() not in ('x86_64', 'AMD64'):
@@ -227,6 +251,9 @@ def main():
         if a.binutils:
             print('%-28s %s' % ('binutils ' + settings()['binutils_prebuilt']['version'],
                                 'installed' if install_binutils(base) else 'present'), flush=True)
+        if a.objdiff:
+            print('%-28s %s' % ('objdiff-cli ' + settings()['objdiff']['version'],
+                                'installed' if install_objdiff(base) else 'present'), flush=True)
     missing = problems(base)
     directory, prefix = find_binutils(base)
     print('toolchain root: %s' % (base.relative_to(ROOT) if base.is_relative_to(ROOT) else base))
