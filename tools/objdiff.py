@@ -2,7 +2,10 @@
 """Per-unit objects and the project file for objdiff, and the progress report that decomp.dev reads.
 
 Usage: objdiff.py [GAME_ID] [--report]       (GAME_ID defaults to SLUS_213.76; source units apply to that version only)
+       objdiff.py --build PATH               rebuild the base object PATH of one unit (what the objdiff GUI calls after an edit)
 Needs a finished `ninja` build (the compiled unit objects are cached under build/<GAME_ID>/cache/).
+`--build` is the build command written to objdiff.json: it recompiles the changed sources through the build backend (the
+same incremental compile stage as `ninja`, without the link), then rebuilds the object of that one unit.
 
 The image is built as one program, but objdiff compares objects, so this tool derives one pair of objects per source unit:
   target  the original machine code of the unit's functions (their split assembly, assembled again), symbols func_XXXXXXXX
@@ -145,7 +148,7 @@ def run_job(slug, plan):
                 for f in unit['functions']:
                     tar.add(ROOT / f['asm'], arcname=f['asm'])
         build_objects(slug, work, buf.getvalue())
-    keys_file.write_text(json.dumps(keys))
+    keys_file.write_text(json.dumps(dict(old_keys, **keys)))
 
 
 def build_objects(slug, work, payload):
@@ -175,9 +178,10 @@ def write_project(slug, plan):
         else:
             entry['metadata']['auto_generated'] = True     # original code that is not recovered yet: counted, not listed
         units.append(entry)
+    py = '.venv/bin/python' if (ROOT / '.venv/bin/python').exists() else 'python3'
     project = {'$schema': 'https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json',
-               'min_version': '3.0.0', 'custom_make': 'ninja', 'custom_args': ['-f', 'build.ninja'],
-               'build_target': False, 'build_base': False, 'watch_patterns': ['src/**/*.c', 'src/**/*.cpp', 'include/**/*'],
+               'min_version': '3.0.0', 'custom_make': py, 'custom_args': ['tools/objdiff.py', '--build'],
+               'build_target': False, 'build_base': True, 'watch_patterns': ['src/**/*.c', 'src/**/*.cpp', 'include/**/*'],
                'options': OPTIONS, 'progress_categories': [dict(id=l, name=l) for l in libraries], 'units': units}
     (ROOT / 'objdiff.json').write_text(json.dumps(project, indent=2) + '\n')
     return len(units)
@@ -201,7 +205,26 @@ def report(slug):
             print('  %-26s %s' % (key, m[key]))
 
 
+def build_unit(slug, path):
+    """Rebuild the objects of the unit whose base object is PATH (objdiff passes the base_path of the unit)."""
+    path = Path(path)
+    if path.parent.name != 'base':
+        return 0                                    # target objects are fixed by the assembly; `ninja objdiff` writes them
+    done = subprocess.run(['ninja', '-f', 'build.ninja', 'build/%s/compiled.stamp' % slug], cwd=ROOT)
+    if done.returncode:
+        return done.returncode
+    plan = [u for u in unit_plan(slug) if u['name'] == path.stem]
+    if not plan:
+        raise SystemExit('no source unit %s in the last full build; run `ninja` and `ninja objdiff` first' % path.stem)
+    run_job(slug, plan)
+    return 0
+
+
 def main():
+    if sys.argv[1:2] == ['--build']:
+        if len(sys.argv) != 3:
+            raise SystemExit('usage: objdiff.py --build PATH')
+        return build_unit(DEFAULT, sys.argv[2])
     args = [a for a in sys.argv[1:] if not a.startswith('-')]
     slug = args[0] if args else DEFAULT
     if slug != DEFAULT:

@@ -31,8 +31,11 @@ were 11,233 functions of which 5,547 match, and 14.76 % of the code matched (`ni
 (constants named differently by the compiler, interior data references), never in direction. The build's `OK` stays the
 authority for exactness.
 
-To look at a function, open the repository root as an objdiff project (objdiff GUI: Project, Open). Build objects are not
-rebuilt by objdiff; re-run `ninja objdiff` after a change.
+To work on a function, open the repository root as an objdiff project (objdiff GUI: Project, Open), pick the unit and the
+function, edit the source file, and objdiff rebuilds the unit's object and shows the diff. The build command in
+`objdiff.json` is `tools/objdiff.py --build <object>`: it runs the incremental compile stage of `ninja` through the build
+backend for the changed sources (seconds), then rebuilds that unit's two objects. Run `ninja objdiff` once after a full
+`ninja` (and again when units are added) to create the objects and the project file.
 
 ## Publishing
 
