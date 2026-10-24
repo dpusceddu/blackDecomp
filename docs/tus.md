@@ -76,7 +76,7 @@ Sony compilers from the toolchain. `autodecomp.py run --cc NAME` and `permute --
 
 **Short-loop padding.** Retail has both six- and seven-word patterns, including identical loop
 bodies with different padding; a compiler's identity alone does not determine its assembler policy.
-Ghidra analysis located SN 1.9.25.758's unconditional short-loop routine: it extends negative branch
+Disassembly of the assembler located SN 1.9.25.758's unconditional short-loop routine: it extends negative branch
 word displacements −1…−5 to −6 (seven words including the delay slot). The separately written
 `sn-min6` derivative changes two immediate bytes, extending −1…−4 to −5 instead. It reproduces the
 six-word family while retaining division, FPU and other hazard handling. No compiler assembly or game

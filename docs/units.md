@@ -54,6 +54,8 @@ the function is compiled by the file that does not mark it, and the other file k
 `symbols.txt` (splat's `name = 0xADDRESS; // type:func`) holds the names a compiled function may carry (a mangled C++
 name; otherwise `func_XXXXXXXX`) and the addresses of names the code uses without defining them (`gClock`, a callee in
 another TU). Add a line when the build says a symbol has no address, or when a function is defined under its mangled name.
+A line ending in `alias` (`// type:func alias`) is only a readable name and never affects the build
+([build.md](build.md#symbols-and-progress)).
 
 `equivalent.yaml` records the functions of the `equivalent` tier (14) with their evidence; they stay assembly.
 

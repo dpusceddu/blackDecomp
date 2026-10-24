@@ -34,11 +34,11 @@ struct UnknownVtable_003DD330 {
     S128 Function_00191798();
     // 0x00193488: UNVERIFIED signature (src/game/ai_movement_modes_193488.cpp).
     unsigned char Function_00193488();
-    // 0x001934A8: UNVERIFIED signature (ghidra).
+    // 0x001934A8: UNVERIFIED signature (recovered prototype).
     int Function_001934A8();
-    // 0x00193568: UNVERIFIED signature (ghidra).
+    // 0x00193568: UNVERIFIED signature (recovered prototype).
     unsigned int Function_00193568(unsigned int argument0);
-    // 0x001936C0: UNVERIFIED signature (ghidra).
+    // 0x001936C0: UNVERIFIED signature (recovered prototype).
     int Function_001936C0(long argument0);
 
     // Vtable 0x003DD330; vptr field offset unknown; referenced zero RTTI header.

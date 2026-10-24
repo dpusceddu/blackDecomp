@@ -38,7 +38,7 @@ struct UnknownVtable_003DD2E0 {
     unsigned char Function_00193700();
     // 0x00193720: UNVERIFIED signature (src/game/ai_movement_modes_193700.cpp).
     void Function_00193720();
-    // 0x00193778: UNVERIFIED signature (ghidra).
+    // 0x00193778: UNVERIFIED signature (recovered prototype).
     unsigned int Function_00193778(unsigned int argument0);
 
     // Vtable 0x003DD2E0; vptr field offset unknown; referenced zero RTTI header.

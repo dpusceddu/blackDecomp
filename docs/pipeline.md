@@ -180,28 +180,26 @@ carry and REL addends. This handles a retail LUI shared by several addresses whe
 object has a symbolic relocation. Unknown symbols and unpaired highs stay unresolved; no output bytes
 are rewritten, and full-image equality remains the placement check.
 
-`python3 tools/autodecomp.py context --refresh` exports both contexts and analyzes every function, matched C/C++ signatures, read-only Ghidra
-snapshots and counterpart source leads. Normal `run` refreshes stale context automatically; `--refresh-context` forces
+`python3 tools/autodecomp.py context --refresh` exports both contexts and analyzes every function, matched C/C++ signatures, the recovered
+prototypes in `include/ps2/prototypes.h` and optional counterpart source leads. Normal `run` refreshes stale context automatically; `--refresh-context` forces
 it. `build/auto/context.json` keeps evidence, unresolved arities and conflicts. Integer and floating argument banks are
 independent on the EE. Caller counts and register-use constraints are lower bounds; the original order of mixed
 parameters is unknown without a signature. Xbox types remain leads and never establish PS2 field offsets.
 
-`include/<library>/layouts/` holds shared PS2 access views with field-offset assertions, plus a compile signature context.
-Normal drafts include only the views they use, and backend jobs package their quoted-header dependencies. Overlapping,
-unaligned or conflicting fields stay opaque. A view's extent is an accessed prefix, not an allocation-size assertion;
-its UNVERIFIED mark changes only after a matched source function actually accesses members through that view.
-`include/game/layouts/signatures.h` is a complete compile context for experiments; normal drafts declare referenced
-callees individually so speculative signatures do not conflict with unrelated definitions. Re-run recovery after
-settling to refresh verification marks. When several runs share a checkout, `AUTODECOMP_FREEZE_CONTEXT=1` consumes the
-already exported context; a missing context is an error.
+`include/<library>/layouts/` holds the shared PS2 access views, with field-offset assertions. They are hand-maintained source: add or
+correct a view by editing its header (and `include/game/layouts/layouts.h`, which lists them). Normal drafts include only the
+views they use, and backend jobs package their quoted-header dependencies. Overlapping, unaligned or conflicting fields stay opaque.
+A view's extent is an accessed prefix, not an allocation-size assertion; its first line says UNVERIFIED until a matched source
+function actually accesses members through that view, and then names the function (`VERIFIED access view by 0x...`).
+`python3 tools/autodecomp.py context --refresh` writes what the recovery infers from the code to the ignored `build/auto/`
+(`context.json` lists each layout's `verified_by` functions, `recovered_layouts.c` is the m2c copy of the layouts), which is a
+starting point for editing a view, never a replacement for it. Normal drafts declare referenced callees individually so
+speculative signatures do not conflict with unrelated definitions. When several runs share a checkout,
+`AUTODECOMP_FREEZE_CONTEXT=1` consumes the already exported context; a missing context is an error.
 
-The committed headers are never rewritten by a contributor tool: `decompile.py`, `autodecomp.py` and the build only write
-under `build/auto/` (the m2c context: `context.json`, `ctx*.c`, `recovered_layouts.c`) from the committed headers,
-sources and configuration, which is all a fresh checkout has. Regenerating the committed access views and
-`signatures.h` is a separate, **maintainer-only** command, `python3 tools/context_recovery.py --write-headers`, which also
-reads the private Ghidra snapshots under `.local/ghidra/` when they exist; review its diff before committing, because
-different private data produces different headers. `tools/ghidra_types.py` (`include/types_ghidra.h`) and
-`tools/class_skeletons.py` (`include/*/classes/`) are maintainer commands of the same kind.
+No tool rewrites a committed header: `decompile.py`, `autodecomp.py` and the build only write under `build/auto/` (the m2c
+context: `context.json`, `ctx*.c`, `recovered_layouts.c`) from the committed headers, sources and configuration, which is all a
+fresh checkout has. `tools/class_skeletons.py` (`include/*/classes/`) is the one maintainer command that writes headers.
 
 After `python3 tools/autodecomp.py context --refresh`, run `python3 tools/class_skeletons.py` to recover
 the legacy GCC RTTI graph and vtables and write
@@ -214,14 +212,14 @@ generated API and verification limits.
 
 Type and instruction support, all of it mechanical and checked by exact matches:
 
-- **Types.** `python3 tools/ghidra_types.py` writes `include/types_ghidra.h` from the raw Ghidra pages in `.local/ghidra/`
-  (`structures_N.json`, one `get-structure-info` response per structure listed by `list-structures`, and the signatures in
-  `config/symbols.txt`): 25 structures (the PS2 collision, game-object, Kynapse and AI/route types the Ghidra program holds)
-  and 267 signatures under the image's `func_XXXXXXXX` names, with compile-time offset and size asserts. They are recovered
-  guesses; each structure is marked `UNVERIFIED` until a matched function actually accesses its members.
-  `ctx.c` combines these layouts with recovered signatures and access views; every draft includes the Ghidra header.
-  `tools/m2c_wrap.py` is m2c with one change: a dereference of an untyped expression becomes `M2C_FIELD(expr, T *, 0)` (valid
-  C) instead of `*expr`.
+- **Types and signatures.** `include/ps2/recovered_types.h` holds 24 structures (the PS2 collision,
+  game-object, Kynapse and AI/route types) with compile-time offset and size asserts, and `include/ps2/prototypes.h` 267 signatures
+  under the image's `func_XXXXXXXX` names (the readable alias of each in a comment). Both are hand-maintained and recovered guesses:
+  each structure is marked `UNVERIFIED` until a matched function actually accesses its members, and a prototype is only a weak
+  declaration that a proved ABI correction (`selected_prototype`) or a matched definition overrides. `ctx.c` combines them with the
+  recovered signatures and access views; every draft includes `ps2/recovered_types.h`. Files that call a prototyped function include
+  `ps2/prototypes.h`, which includes the types. `tools/m2c_wrap.py` is m2c with one change: a dereference of an untyped expression
+  becomes `M2C_FIELD(expr, T *, 0)` (valid C) instead of `*expr`.
 - **Stack objects.** m2c's frame objects (`sp`, `&spN`, `spN`) become one `u8 sp[N] __attribute__((aligned(16)))` buffer whose
   size is searched against the frame size; reads of an argument register the function never sets become `argN`.
 - **EE instructions** (`tools/ee_prep.py`). SN GCC 2.95 for the EE has `long` = 64 bits and `long long` = 128 bits. `lq`/`sq`/

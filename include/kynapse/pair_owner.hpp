@@ -80,7 +80,7 @@ struct PairOwnerBase : Tagged {
 struct PairOwner : PairOwnerBase {
     PairOwner(int value);
     bool Configure(ChildBuffers* config);
-    virtual __declspec(noinline) ~PairOwner();   // Ghidra /default.xbe 0x68030 (deleting 0x68330)
+    virtual __declspec(noinline) ~PairOwner();   // Xbox /default.xbe 0x68030 (deleting 0x68330)
 };
 
 #endif

@@ -37,7 +37,7 @@
     "4": "runtime_vtable",
     "8": "base_storage"
    },
-   "evidence": "Read-only Ghidra decompilation and PS2 stores at 0x370168-0x370184"
+   "evidence": "Read-only decompilation and PS2 stores at 0x370168-0x370184"
   },
   {
    "name": "__rtti_user",
@@ -52,7 +52,7 @@
     "0": "encoded_name",
     "4": "runtime_vtable"
    },
-   "evidence": "Read-only Ghidra decompilation and PS2 stores at 0x370188-0x3701a0"
+   "evidence": "Read-only decompilation and PS2 stores at 0x370188-0x3701a0"
   }
  ],
  "base_info": {
@@ -81,7 +81,7 @@
    "storage": 4829328,
    "base_encoded_name": "Q24Kaim7CObject",
    "base_storage": 4254656,
-   "evidence": "Read-only Ghidra 0x38c318; source-exact independent RTTI getter probe"
+   "evidence": "Read-only decompilation 0x38c318; source-exact independent RTTI getter probe"
   }
  ],
  "references": [
@@ -157,7 +157,7 @@
    "kind": "destructor",
    "encoded_name": "Q24Kaim15CBasicAllocator",
    "vtable": 4103088,
-   "evidence": "Read-only Ghidra: restores CAllocator then CObject vptrs, releases member, and in-charge bit zero skips release(this)"
+   "evidence": "Read-only decompilation: restores CAllocator then CObject vptrs, releases member, and in-charge bit zero skips release(this)"
   }
  ]
 }

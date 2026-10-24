@@ -147,7 +147,7 @@ driver, not of `cc1`).
 ## Target choice
 
 **Primary target: USA retail (`SLUS_213.76`).** No version has symbols or debug data, so nothing makes
-another build a better target, and USA retail is where the Ghidra database and the Xbox counterpart leads were made.
+another build a better target, and USA retail is where the name aliases and the Xbox counterpart leads were made.
 Other versions give no names or types.
 
 How to use the others:

@@ -72,7 +72,7 @@ struct PhysicsSegmentQuery {
     unsigned int identityBits;          // 0x108
 
     PhysicsSegmentQuery(unsigned int first, unsigned int second, unsigned int third);
-    int Execute() __asm__("func_0033A488");                      // Ghidra /default.xbe 0x70e30
+    int Execute() __asm__("func_0033A488");                      // Xbox /default.xbe 0x70e30
     PhysicsQueuedShape& LeafSlot() { return static_cast<PhysicsQueuedShape*>(firstItems)[leafCount]; }
     PhysicsQueuedShape& CompoundSlot() { return static_cast<PhysicsQueuedShape*>(buffer)[compoundCount]; }
     unsigned int QueueLeaf(const SegmentShapePS2* shape, const PhysicsMatrix* frame, unsigned int identity,

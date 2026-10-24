@@ -25,7 +25,7 @@ sys.path.insert(0,str(ROOT/'tools'))
 from elfinfo import Elf
 from progress import regions
 
-# Ghidra: 0x264018 calls 0x102bd0 with *(0x40f0e0) in its main loop.
+# Decompilation: 0x264018 calls 0x102bd0 with *(0x40f0e0) in its main loop.
 # The active state's virtual update is 0x105518. These root calls are explicitly
 # bootstrapped from recovered call contracts, not captured at the original PC.
 FRAME_ENTRY = 0x102bd0

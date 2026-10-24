@@ -43,7 +43,7 @@ leads, never proof of PS2 layouts.
 | Assemblers | untouched compiler assembler (`-snas`) by default; `--assembler=sn-min6` (hash-guarded derivative of Ps2EeAs 1.9.25.758 that pads short loops to six words, reproduced by `tools/patch_ps2eeas.py`) on verified units only; `gas-2.40`, `gas-2.40-fix`, `sony-2.9`, `sn-2.73a` are explicit experiments. The 65 splits that select `assembler: sn-min6` in `config/SLUS_213.76/splits.yaml` use it because it reproduces their bytes, not because a recovered rule says the original used it: treat that choice as weak evidence (open problem 4) |
 | Assembly files | EE GNU assembler 2.10 (from the `ee-gcc2.96` archive); short backward branches stay `.word`; gp-relative symbols need `.extern sym, 1` |
 | Linker | mainline GNU `ld` 2.40 (`binutils-mipsel-linux-gnu`), generated script with `SORT_BY_NAME` input sections; `tools/pack_elf.py` writes the retail container (`e_flags 0x20924001`) |
-| Everything else | splat/spimdisasm/rabbitizer split, Ninja, m2c (`-t mipsee-gcc-c`), decomp-permuter, Ghidra export for names |
+| Everything else | splat/spimdisasm/rabbitizer split, Ninja, m2c (`-t mipsee-gcc-c`), decomp-permuter; names, prototypes and types are committed, hand-maintained files (`config/SLUS_213.76/symbols.txt`, `include/ps2/`) |
 | Running the tools | the compilers are decomp.me archives pinned by SHA-256 (`config/toolchain-*.json`); the Windows programs run under wibo, the Sony tools are 32-bit Linux programs (`tools/toolchain.py`, [build.md](build.md)) |
 
 ## Source layout
@@ -118,8 +118,10 @@ bytes without padding and orphans: 14.95 % (401,428 / 2,685,060 bytes), equal to
    whole-program frame agreement.
 6. **Data**: 27 additional mapped TUs have complete owned-data audits; this is not a repository-wide audit. Native CFI
    and shared pools still block several otherwise complete objects.
-7. **Names and counterparts**: Ghidra names and an Xbox-to-PS2 counterpart map are optional inputs that this repository
-   does not ship (the committed `config/symbols.txt` and `config/regions.txt` are their exported results).
+7. **Names and counterparts**: working names (`alias` lines of `config/SLUS_213.76/symbols.txt`), recovered prototypes
+   (`include/ps2/prototypes.h`) and structures (`include/ps2/recovered_types.h`) are committed and edited by hand; no tool needs
+   outside analysis data. An Xbox-to-PS2 counterpart map is an optional input that this repository does not ship
+   (`config/regions.txt` is its exported result).
 
 ## Next steps
 

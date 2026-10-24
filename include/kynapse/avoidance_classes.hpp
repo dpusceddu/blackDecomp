@@ -8,7 +8,7 @@
 
 namespace KaimAvoidance {
 
-// Ghidra /default.xbe: the shared value table's empty deleting destructor
+// Xbox /default.xbe: the shared value table's empty deleting destructor
 // has an empty destructor body. Allocation/deallocation belongs to the external
 // engine allocator; the compiler supplies the virtual deletion wrapper.
 struct Object {

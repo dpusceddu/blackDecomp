@@ -34,7 +34,7 @@ struct UnknownVtable_003DD380 {
     inline unsigned int & Field_0188() { return *(unsigned int *)((unsigned char *)this + 0x188); }
     // 0x00191C20: UNVERIFIED signature (src/game/ai_movement_modes_191c18.cpp).
     void Function_00191C20(void * argument0);
-    // 0x00191C80: UNVERIFIED signature (ghidra).
+    // 0x00191C80: UNVERIFIED signature (recovered prototype).
     int Function_00191C80();
     // 0x00191D40: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_00191D40();

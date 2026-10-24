@@ -8,7 +8,7 @@
 // (see owned_arrays.cpp for its constructor, destructor and DeleteChildren).
 #include "kynapse/alloc.hpp"
 
-extern void (*memoryRelease)(void*);  // Ghidra /default.xbe 0x297f10
+extern void (*memoryRelease)(void*);  // Xbox /default.xbe 0x297f10
 
 #pragma intrinsic(strcmp, strlen, strcpy)
 

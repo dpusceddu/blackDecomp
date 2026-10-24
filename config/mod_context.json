@@ -2017,7 +2017,7 @@
       "ps2": "0x1409c0",
       "confidence": "high semantic identity from paired player call chains; not byte-exact source proof",
       "evidence": [
-        "Xbox Ghidra PlayerController_SelectAimConeCandidate1BD3D0 DATA xref1ECF46 fromPlayerController_Update1EC480.",
+        "Xbox decompilation PlayerController_SelectAimConeCandidate1BD3D0 DATA xref1ECF46 fromPlayerController_Update1EC480.",
         "XboxPlayerController_Update decomp421 passescallback1BD3D0 toAimCone_QueryCandidates1CDA60.",
         "PS2Player13F618 PARAM xref13FCF0 passescallback1409C0 toquery12BB60 at13FD04.",
         "Same candidate actor/projection/perpendicular-distance fields and closest eligible target policy; retain PS2 branch/NaN behavior."

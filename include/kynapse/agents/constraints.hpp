@@ -87,7 +87,7 @@ struct SphereConstraint : PolyRoot {
     static SphereConstraint* Create() __asm__("func_002F1B58");
     virtual ~SphereConstraint();
     virtual void Slot1();
-    virtual bool Cost(void* context, NavEdge* edge, float* cost) __asm__("func_002F1BD8");   // slot 2 (Ghidra /default.xbe 0x5a6c0)
+    virtual bool Cost(void* context, NavEdge* edge, float* cost) __asm__("func_002F1BD8");   // slot 2 (Xbox /default.xbe 0x5a6c0)
     Vec3 center;                           // 0x04
     float radius;                          // 0x10
 };

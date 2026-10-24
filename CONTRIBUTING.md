@@ -50,7 +50,9 @@ order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines.
 4. A function that compiles under another name (a C++ method) needs one line in `config/SLUS_213.76/symbols.txt`
    (`Reset__4Game = 0x1b78d8; // type:func`); code that needs other compiler flags than the rest of its file gets a file of its
    own and an entry in `splits.yaml` (see [docs/units.md](docs/units.md)); a name the code uses without defining also goes in
-   `symbols.txt`. A normal contribution edits one source file and at most one `splits.yaml` entry and `symbols.txt` line.
+   `symbols.txt`. A readable name that is not a definition is an alias line (`Reset = 0x1b78d8; // type:func alias`): it
+   never changes the build ([docs/build.md](docs/build.md#symbols-and-progress)). A normal contribution edits one source file
+   and at most one `splits.yaml` entry and `symbols.txt` line.
 5. Run `ninja`, `ninja progress` and the tests (below). If the change moves progress, run `ninja badges` and commit
    `progress/` (and the table it refreshes in `README.md`) with it.
 
@@ -68,6 +70,10 @@ Evidence tiers matter: never describe a function as more than its tier (`exact`,
 - **Never commit game data**: no executables, disc contents, extracted files, generated assembly (`asm/`, `build/`, `data/`),
   savestates, compiler archives or build output. They live in ignored directories. Generated headers and data are committed
   only when a tool in `tools/` owns and can regenerate them.
+- **Names, prototypes, types and access views are ordinary source.** `config/SLUS_213.76/symbols.txt`, `include/ps2/prototypes.h`,
+  `include/ps2/recovered_types.h` and `include/<library>/layouts/` are edited by hand and reviewed like code; mark what is not
+  confirmed by a matched function `UNVERIFIED`. No tool or test needs data from outside the repository. If you analyse the
+  executable with Ghidra, IDA or another disassembler, that is your own tool: put what you learn into these files.
 - **Keep committed text free of machine-specific details**: host names, user names, absolute paths, network addresses and
   credentials. Local settings go in `.local/` (ignored).
 - Small logical commits with a clear message (what and why). One TU or one tool change per commit is ideal.

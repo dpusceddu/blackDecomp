@@ -31,7 +31,8 @@ are earlier builds and only give naming and ordering hints. The USA retail execu
 - Function boundaries: 1,169 orphan `<instruction>; nop` pieces sit between functions and are not code of either
   neighbour; `tools/boundaries.py` splits them off (123 functions that splat had fused with a piece now match
   individually) and adds the `__CTOR_LIST__` entries as starts.
-- `config/symbols.txt` holds Ghidra's 9,946 functions (268 with a recovered name); splat finds 1,832 more starts.
+- An earlier analysis of the executable listed 9,946 functions (268 with a recovered name); splat finds 1,832 more starts. The
+  names are now `alias` lines in `config/SLUS_213.76/symbols.txt` and the signatures live in `include/ps2/prototypes.h`.
 - The first sources were ported from an unpublished companion project that reconstructs the Xbox build: 191 PS2-exact Kynapse
   bodies and 65 game functions (0.7 % of `.text`). The early sources were imported once from that project; the importers are
   not part of this repository, and the imported files keep a header comment naming their origin.

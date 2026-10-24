@@ -33,7 +33,7 @@ struct EntityObject {
 // Base of configurable components: visits every child entry that is not the class entry.
 struct ConfigHost {
     virtual void Slot0();
-    virtual bool ConfigureAll(ChildBuffers* config);         // slot 1, Ghidra /default.xbe 0x54bf0
+    virtual bool ConfigureAll(ChildBuffers* config);         // slot 1, Xbox /default.xbe 0x54bf0
     virtual bool Configure(ChildBuffers* child);             // slot 2
 };
 
