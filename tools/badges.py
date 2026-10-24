@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the self-hosted progress badges and the per-library table (progress/) from the exact progress data.
+"""Write the self-hosted progress badges (progress/) and the per-library table of the README from the exact progress data.
 
 Metric source: `tools/progress.py --libraries`, which computes objdiff's definition of code, matched function bytes /
 total function bytes, from the function extents tools/objdiff.py uses (no padding, no orphan pieces). The figures need only
@@ -10,10 +10,9 @@ numbers that disagree with it. Libraries are by address (tools/build/layout.py);
 
 Usage: badges.py [SLUG]       runs progress.py (default SLUS_213.76 only), then writes
          progress/code.json, progress/functions.json   shields.io endpoint files (share of code bytes / of functions)
-         progress/libraries/<library>.json             the same for one library
-         progress/summary.md                           per-library table
+         build/<GAME_ID>/badges/<library>.json        the same for one library (ignored)
        and refreshes the table between the progress markers of README.md.
-Commit progress/ and README.md with the change that moved the numbers. The output has no timestamps, so an unchanged
+Commit progress/ (the two files the README badges read) and README.md with the change that moved the numbers. The output has no timestamps, so an unchanged
 progress leaves Git clean.
 """
 import sys as _sys
@@ -84,7 +83,8 @@ def main():
     libs = data['code_by_library']
     md, total = table(libs)
     out = ROOT / 'progress'
-    (out / 'libraries').mkdir(parents=True, exist_ok=True)
+    libraries = ROOT / 'build' / slug / 'badges'
+    libraries.mkdir(parents=True, exist_ok=True)
 
     def dump(path, obj):
         write_if_changed(path, json.dumps(obj, indent=2) + '\n')
@@ -92,13 +92,7 @@ def main():
     dump(out / 'code.json', badge('code', pct(total['matched_bytes'], total['bytes'])))
     dump(out / 'functions.json', badge('functions', pct(total['matched_functions'], total['functions'])))
     for name, r in libs.items():
-        dump(out / 'libraries' / ('%s.json' % name), badge(name, pct(r['matched_bytes'], r['bytes'])))
-    write_if_changed(out / 'summary.md',
-                     '# Progress (SLUS_213.76)\n\nFunctions and code bytes matched by recovered source, per library (by address; `src/<library>`), '
-                     'with objdiff\'s definition: matched function bytes / total function bytes, without alignment padding and orphan '
-                     'pieces ([docs/progress-reports.md](../docs/progress-reports.md)). Matched functions rebuild the '
-                     'executable byte for byte. Produced by `ninja badges` (`tools/badges.py`, from `tools/progress.py`); do not edit.\n\n'
-                     + md + '\n')
+        dump(libraries / ('%s.json' % name), badge(name, pct(r['matched_bytes'], r['bytes'])))
     readme = ROOT / 'README.md'
     new = replace_between(readme.read_text(), md)
     if new is None:

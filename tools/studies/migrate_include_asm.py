@@ -17,7 +17,7 @@ options, and when the constants of the assembly functions between them do not in
 sources keep their file and their text. A TU that cannot be one file is split at the places where flags, language, constants or
 declarations disagree, and each part is a file of its own. Sources compiled several times with -D selectors are left alone.
 `write` is re-runnable from a checkout of the old layout (commit f972a63e: src/ and config/units.yaml) and reproduces the committed
-files using the fallback levels in migrate_include_asm_state.json; `run` (settlement loop) needs the old tools of that commit.
+files (the fallback levels it found were kept in a state file that is no longer committed); `run` (settlement loop) needs the old tools of that commit.
 Stage 2 is tools/studies/migrate_split_list.py.
 """
 import sys as _sys

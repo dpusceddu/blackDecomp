@@ -2,8 +2,8 @@
 
 [![CI](https://github.com/dpusceddu/blackDecomp/actions/workflows/ci.yml/badge.svg)](https://github.com/dpusceddu/blackDecomp/actions/workflows/ci.yml)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
-[![Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/code.json)](progress/summary.md)
-[![Functions](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/functions.json)](progress/summary.md)
+[![Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/code.json)](#progress)
+[![Functions](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/functions.json)](#progress)
 
 A work-in-progress matching decompilation of the PS2 version of *Black* (Criterion Games, 2006). The goal is readable C/C++
 source that compiles, with the original compilers, to the exact bytes of the retail executable. `ninja` rebuilds the executable
@@ -85,7 +85,7 @@ On Apple silicon this relies on the emulation of x86-64 Linux containers and has
 ```sh
 ninja progress                              # code (objdiff definition) and functions matched, image measure, per region and TU
 python3 tools/progress.py --libraries       # ... per library directory of src/
-ninja badges                                # refresh progress/ (badge files, summary.md) and the table below
+ninja badges                                # refresh progress/ (the two badge files) and the table below
 ```
 
 Functions and code bytes matched by recovered source (USA, `SLUS_213.76`), per library:
@@ -154,7 +154,7 @@ src/<library>/        (src/game/ has subsystem directories) one file per transla
 include/<library>/    headers per library, include/ps2/ for helpers shared by all
 tools/                the everyday tools (decompile, objdiff, progress, toolchain, ...); tools/build/ (internals `ninja` runs),
                       tools/pipeline/ (automatic pipeline), tools/maint/ (maintainer and analysis), tools/studies/ (finished experiments)
-progress/             badge files and the per-library table written by `ninja badges` (committed)
+progress/             the two badge files the README reads, written by `ninja badges` (committed)
 docs/                 build, translation unit files and split list, pipeline, TU map, matching handbook, status, history
 tests/                tests that need no game files
 asm/ build/ data/     generated (asm/<GAME_ID>/nonmatchings/ holds the assembly of every function), ignored

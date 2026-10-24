@@ -85,8 +85,8 @@ backend for the changed sources (seconds), then rebuilds that unit's two objects
 ## Publishing
 
 The README badges and table are written by `ninja badges` (`tools/badges.py`) from the code measure of `ninja progress`,
-which equals this report and needs no extra download. The files are committed under `progress/` and
-served by shields.io from the repository. The objdiff report (`build/SLUS_213.76/report.json`) stays available for any
+which equals this report and needs no extra download. The two badge files are committed under `progress/` and
+served by shields.io from the repository (the per-library badges go to the ignored `build/SLUS_213.76/badges/`). The objdiff report (`build/SLUS_213.76/report.json`) stays available for any
 tool that reads it; CI does not generate one, because that needs the game executable.
 
 decomp.dev no longer accepts new projects (it is being sunset), so this project is not registered there.
