@@ -13,14 +13,14 @@ ninja report                               # build/SLUS_213.76/report.json
 ```
 
 The image is linked as one program, but objdiff compares objects. `tools/objdiff.py` therefore derives, for every source unit
-in `config/units.yaml`, a pair of objects under `build/SLUS_213.76/objdiff/`:
+in `config/SLUS_213.76/splits.yaml`, a pair of objects under `build/SLUS_213.76/objdiff/`:
 
 - **target**: the original machine code of the unit's functions (their split assembly, assembled again), symbols named
   `func_XXXXXXXX` with their original sizes;
 - **base**: the object compiled from the unit's source, with its function symbols and references renamed to the same
   `func_`/`D_` names.
 
-Functions that no unit covers get a target object only (one per translation unit of `config/tus.yaml`, hidden from the
+Functions that no split compiles get a target object only (one per translation unit of `config/tus.yaml`, hidden from the
 objdiff sidebar), so the report covers the whole program and unrecovered code counts as unmatched. Orphan pieces are left out.
 `objdiff.json` (project root, ignored by Git) lists all units with one progress category per library. Source units apply to
 USA retail (`SLUS_213.76`) only.

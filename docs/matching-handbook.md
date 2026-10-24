@@ -6,7 +6,7 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All compiler ex
 
 ## Whole-TU ladder
 
-1. Check `build/permuter/` for a better candidate. Note the TU's units in `config/units.yaml` before editing. Inventory
+1. Check `build/permuter/` for a better candidate. Note the TU's splits in `config/SLUS_213.76/splits.yaml` before editing. Inventory
    every real function and its rodata/data/sdata/bss/exception tables from `config/tus.yaml`; uncertain boundaries stay
    qualified. A code-complete TU is not data-complete until ownership is audited.
 2. Recover behavior, callee arity/return widths, field offsets, hidden results and cleanup edges first. Xbox source gives
@@ -24,7 +24,7 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All compiler ex
 6. Before leaving a hard function, exhaust the applicable ladder and leave one precise `// Unmatched:` obstruction in
    source; keep variants/diffs in `build/`. Revisit service improvements before moving to another TU.
 7. Settle, then run `ninja` and `ninja progress`. Never demote previously exact work to
-   claim a gain. Keep one owner for shared headers and `units.yaml`.
+   claim a gain. Keep one owner for shared headers and `splits.yaml`.
 
 ## Verified recipes
 

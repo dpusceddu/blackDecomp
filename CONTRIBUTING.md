@@ -13,24 +13,43 @@ be committed.
   picture.
 - Small TUs with a single class or library function are the best first targets. Large functions (over 300 bytes), vector code
   and the Sony and RenderWare libraries are hard; the [open problems](docs/status.md#open-problems) say why.
-- Open an issue or a draft pull request naming the TU before you start, so two people do not match the same file. A unit in
-  `config/units.yaml` may carry `owner` and `claim` fields for the same purpose; edit only the sources of units you own.
+- Open an issue or a draft pull request naming the TU before you start, so two people do not match the same file. An entry of
+  `config/SLUS_213.76/splits.yaml` may carry an `owner` field for the same purpose; edit only the files you own.
 
 ## The matching workflow
 
+Each translation unit (TU) is one file, `src/<library>/tu_<address>.c|cpp`, that lists every function of the TU in address
+order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines.
+
 1. Read the [matching handbook](docs/matching-handbook.md) before each TU: measured recipes for the usual obstructions and
-   the order in which to try things. Types, callee signatures and object lifetimes explain most mismatches.
-2. Write or generate a draft. `python3 tools/autodecomp.py run ...` produces m2c drafts, compiles flag variants, scores and runs
-   the permuter ([docs/pipeline.md](docs/pipeline.md)); or write the source by hand and try one function with
-   `python3 tools/trysrc.py ADDR file.c`.
-3. Register what is exact: `python3 tools/autodecomp.py register` then `python3 tools/autodecomp.py settle` for generated
-   drafts, `python3 tools/settle_units.py` for hand-written units. Settling compiles every unit, demotes whatever cannot be
-   placed identically and relinks until the build says `OK`. How units, symbols, statuses and reasons work:
-   [docs/units.md](docs/units.md).
-4. Leave a one-line `// Unmatched:` comment on every function that stays inexact, saying what differs. Do not keep
-   per-function journals in `src/`; measured results belong in the handbook.
+   the order in which to try things. Types, callee signatures and object lifetimes explain most mismatches. The assembly of a
+   function is `asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s` after the first `ninja`.
+2. Replace the function's `INCLUDE_ASM` line with your C or C++ and run `ninja`. It ends with `OK`, or with
+   `MISMATCH src/game/tu_100258.c: func_00100258: differs from the original` (compile errors name the file too). Drafts come
+   from `python3 tools/autodecomp.py run ...` ([docs/pipeline.md](docs/pipeline.md)), or write the source by hand and try one
+   function with `python3 tools/trysrc.py ADDR file.c`; `autodecomp.py register` then `settle` put exact drafts into their TU files.
+3. If it does not match yet, keep the readable version under `#ifdef NON_MATCHING` with the marker as the `#else` branch, and a
+   one-line `// Unmatched:` comment saying what differs. `python3 configure.py --non-matching` followed by `ninja` builds all
+   drafts into a separate, non-matching executable (`python3 configure.py` goes back):
+
+   ```c
+   #ifdef NON_MATCHING
+   // Unmatched: loop scheduling differs.
+   int func_001B78D8(BkEffectPoolPS2* pool) { ... }
+   #else
+   INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B78D8);
+   #endif
+   ```
+4. A function that compiles under another name (a C++ method) needs one line in `config/SLUS_213.76/symbols.txt`
+   (`Reset__4Game = 0x1b78d8; // type:func`); code that needs other compiler flags than the rest of its file gets a file of its
+   own and an entry in `splits.yaml` (see [docs/units.md](docs/units.md)); a name the code uses without defining also goes in
+   `symbols.txt`. A normal contribution edits one source file and at most one `splits.yaml` entry and `symbols.txt` line.
 5. Run `ninja`, `ninja progress` and the tests (below). If the change moves progress, run `ninja badges` and commit
    `progress/` (and the table it refreshes in `README.md`) with it.
+
+Example: `func_00100258` is `return arg0;`. In `src/game/tu_100258.c` the line `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings",
+func_00100258);` becomes `s32 func_00100258(s32 arg0) { return arg0; }`; `ninja` says `OK` and `ninja progress` counts one
+more function.
 
 Evidence tiers matter: never describe a function as more than its tier (`exact`, `equivalent`, `draft`).
 
@@ -61,8 +80,8 @@ Tests need no game files; those that would need private inputs skip. CI runs bot
 
 - Format new C/C++ with the repository's `.clang-format` (4-space indents, attached braces, `T* p`, 120 columns). Do not
   reformat existing files: matching depends on exact source shape, and unrelated whitespace changes make review harder.
-- Source layout: `src/<library>/<name>.c|cpp`, one file per recovered TU; drafts no unit uses go to
-  `src/<library>/nonmatching/`. Headers follow the libraries (`include/<library>/`, shared helpers in `include/ps2/`).
+- Source layout: `src/<library>/<name>.c|cpp`, one file per TU with every function of the TU (INCLUDE_ASM lines, drafts in
+  `#ifdef NON_MATCHING` blocks). Headers follow the libraries (`include/<library>/`, shared helpers in `include/ps2/`).
   `tools/layout.py` has the naming rules.
 - Name functions and types after what the code does only where the evidence supports it; unknown functions stay
   `func_XXXXXXXX`. Mark field offsets that are only accessed, not understood, as such (`UNVERIFIED`).

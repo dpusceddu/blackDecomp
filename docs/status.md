@@ -13,9 +13,9 @@ far a readable function is trusted.
 
 | Tier | Meaning | Where it lives |
 | --- | --- | --- |
-| `exact` | the full rebuilt image stays byte-identical with the function compiled from source | `status: source` in `config/units.yaml`; replaces the assembly in the build |
-| `equivalent` | agrees with the original on recorded states with measured coverage; not a proof | function `evidence:` in `units.yaml`, source under `src/<library>/nonmatching/` (or in a unit); never replaces assembly |
-| `draft` | readable or machine draft with no evidence | the rest of `src/`, marked `// Unmatched:` |
+| `exact` | the full rebuilt image stays byte-identical with the function compiled from source | a function without INCLUDE_ASM marker in its TU file ([units.md](units.md)); replaces the assembly in the build |
+| `equivalent` | agrees with the original on recorded states with measured coverage; not a proof | `config/SLUS_213.76/equivalent.yaml`, candidate in the TU file's `#ifdef NON_MATCHING` block; never replaces assembly |
+| `draft` | readable or machine draft with no evidence | `#ifdef NON_MATCHING` blocks in the TU files, marked `// Unmatched:` |
 
 The same game code also ships on Xbox; this repository covers the PS2 side only. Names and types seen in the Xbox build are
 leads, never proof of PS2 layouts.
@@ -48,12 +48,12 @@ leads, never proof of PS2 layouts.
 
 ## Source layout
 
-`src/<library>/<name>.c|cpp`, one file per recovered TU (`tu_<address>`, plus `_<unit address>` for units that do not start
-the TU) or a descriptive name inherited from the class or module. Units that are deliberately split keep separate files.
-`src/<library>/nonmatching/` holds drafts that no unit uses. Libraries: `game`, `apt` (EA Apt/Flash UI), `kynapse`,
-`animation`, `physics`, `rw_core`, `rw_audio`, `sony`, `libc`, `linkonce` (link-once area). `config/units.yaml` records per
-unit `library`, `provenance` (`imported`, `auto`, `manual`, `equivalent`) and `tier`; `tools/relayout.py` and
-`tools/layout.py` own the naming rules.
+`src/<library>/<name>.c|cpp`, one file per translation unit that has recovered code (`tu_<address>`, plus `_<address>` for
+the further files of a TU that cannot be one: other flags, language or constants) or a descriptive name inherited from the
+class or module. The file lists every function of the TU, the unrecovered ones as INCLUDE_ASM lines; drafts are
+`#ifdef NON_MATCHING` blocks in it. TUs without recovered code have no file. Libraries: `game`, `apt` (EA Apt/Flash UI), `kynapse`,
+`animation`, `physics`, `rw_core`, `rw_audio`, `sony`, `libc`, `linkonce` (link-once area). `config/SLUS_213.76/splits.yaml`
+lists the files with their address ranges and flags; `tools/layout.py` owns the naming rules.
 
 Headers follow the libraries: `include/<library>/` for `game`, `kynapse`, `animation`, `physics`, `rw_core`, `rw_audio`
 and `apt`, and `include/ps2/` for helpers shared by all of them (EE types, VU0 operations, the draft prelude). Generated
@@ -79,8 +79,7 @@ Everything below rebuilds byte-identical. Routine work checks USA only; the last
 | **Total** | **11,899** | **5,563 (46.75 %)** | **2,715,464** | **410,384 (15.11 %)** | **1,636 / 3,036** |
 
 Evidence tiers: `exact` 5,563 functions / 410,384 B, `equivalent` 14 / 984 B, `draft` 6,322 / 2,304,096 B. Complete TUs
-include many one- or two-function TUs (116,600 B in code-complete TUs). Of 2,919 units: 2,316 `auto`, 347 `manual`, 255
-`imported`, 1 `equivalent` provenance. TU confidence by bytes: `exact` 14.5 %, `high` 2.9 %, `medium` 52.8 %, `low` 29.8 %.
+include many one- or two-function TUs (116,600 B in code-complete TUs). Of 2,671 splits (2,656 source files), 48,498 functions are INCLUDE_ASM lines and 189 files hold NON_MATCHING drafts. TU confidence by bytes: `exact` 14.5 %, `high` 2.9 %, `medium` 52.8 %, `low` 29.8 %.
 The calibration of the automatic pipeline remains poor above 300 B; the large hand-shaped gains do not establish a new
 automatic matching rate. Code completion alone does not establish owned-data completion.
 

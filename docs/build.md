@@ -11,6 +11,7 @@ Needs the target executable in `orig/<GAME_ID>/<GAME_ID>` (see [orig/README.md](
 python3 configure.py --version SLUS_213.76     # writes build.ninja (SLUS_213.76 is the default; also SLES_538.86, SLES_540.30, SLKA_253.72, SLPM_663.54)
 ninja                                          # ends with `OK  SLUS_213.76 ...` or a mismatch report
 ninja progress                                 # share of .text provided by source (see below)
+python3 configure.py --non-matching && ninja   # NON_MATCHING drafts into build/SLUS_213.76-nm (not a match; see below)
 ninja objdiff && ninja report                  # objdiff project and progress report (docs/progress-reports.md)
 ```
 
@@ -50,20 +51,55 @@ Stages (one `ninja` rule each; everything generated is under the ignored `asm/`,
    file per section; `.vutext` and `.vudata` stay binary blobs.
 3. `tools/link_support.py` defines the symbols splat cannot (labels inside code, offsets into data objects, section
    ends and plain constants).
-4. `tools/split_objects.py` cuts `.text` into **one assembly file per function** (`build/<GAME_ID>/s/text/func_XXXXXXXX.s`,
+4. `tools/split_objects.py --functions` writes `functions.json` (the function starts); `tools/units.py` derives the units
+   from `splits.yaml`, the INCLUDE_ASM markers of the source files and `symbols.txt` ([units.md](units.md)).
+5. `tools/split_objects.py` cuts `.text` into **one assembly file per function** (`asm/<GAME_ID>/nonmatchings/func_XXXXXXXX.s`,
    with the function's own `.extern` block) and migrates the constants that only one function uses into that
    function's file (see "Constants" below). `.rodata`, `.lit4` and `.gcc_except_table` keep their remaining shared objects
    as runs; the other data sections stay one object each. It also writes `placement.json` (every object and the original
    order of every section) and `labels.json`.
-5. `tools/make_ld.py` writes the linker script. Every function and constant run is an input section named
+6. compile: `tools/build_objects.py --compile-only` compiles the source files (SN compiler, one backend job; compile errors
+   are printed with the file name); then `tools/units_verify.py prepare` checks that each compiled function can take the
+   original's place and records the extern bindings (`unit_facts.json`).
+7. `tools/make_ld.py` writes the linker script. Every function and constant run is an input section named
    `<section>.<its original address>`, and the script places them with `*(SORT_BY_NAME(<section>.*))`, which restores the
-   original order (one ld statement per object would take hours for 12,000 objects). Source units from
-   `config/units.yaml` replace functions here (see "Replacing a function with source").
-6. `tools/build_objects.py` runs, in one backend job, the EE assembler 2.10 on the objects that changed
-   and the SN compiler on changed source units, then mainline GNU `ld` on everything. Objects are cached by the hash of
-   their inputs in `build/<GAME_ID>/cache/`, so an incremental build re-assembles or recompiles only what changed.
-7. `tools/pack_elf.py` re-packs ld's loaded sections into the retail container (see below);
-   `tools/check_elf.py` compares the result with `config/checksums.sha256`.
+   original order (one ld statement per object would take hours for 12,000 objects). A function that a TU file compiles
+   replaces its assembly object by taking over the slot (its `.text.<symbol>` section is renamed to the slot's key).
+8. `tools/build_objects.py` assembles what changed, takes the cached compiled objects and links everything with mainline
+   GNU `ld`. Objects are cached by the hash of their inputs in `build/<GAME_ID>/cache/`, so an incremental build
+   re-assembles or recompiles only what changed.
+9. `tools/pack_elf.py` re-packs ld's loaded sections into the retail container (see below);
+   `tools/check_elf.py` compares the result with `config/<GAME_ID>/checksums.sha256` and, on a mismatch, names the
+   functions and source files that differ (`tools/units_verify.py compare`).
+
+## INCLUDE_ASM
+
+Every source file lists all functions of its range; `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_XXXXXXXX);` marks one
+that is still assembly. Two ways to implement it were considered:
+
+1. *Include the assembly into the compiled object* (as oot or sly1 do with `.include`). Not adopted: the SN assembler
+   (`-snas`) does not accept the splat output as is (`.size`, macros, gp-relative expressions, loop padding; splat issue #525),
+   the exact short-loop padding of each unit depends on the assembler variant, and the build already assembles every
+   function with the EE GNU assembler 2.10 as a separate object. Making all of that byte-identical through the compiler
+   would put the existing matches at risk for no gain in workflow.
+2. *A declarative marker* (chosen). `INCLUDE_ASM` expands to a harmless declaration (`include/include_asm.h`). The build reads
+   the markers from the source (`tools/include_asm.py`), links each marked function from its per-function assembly object
+   at its original position, as before, and takes every other function of the file's range from the compiled object.
+   Assembly is therefore always assembled by the EE GNU assembler that rebuilds the unmodified image, and a compiled function
+   cannot disturb its neighbours (`-ffunction-sections` gives it a section of its own, placed in its original slot).
+
+The workflow is the same as with a real include: open the file, replace an INCLUDE_ASM line with C, run `ninja`, read `OK` or
+the name of the function that differs. Conditionals around markers (`#ifdef NON_MATCHING`) are evaluated with the file's `-D`
+flags.
+
+## NON_MATCHING
+
+A draft that does not match yet lives in its TU file as `#ifdef NON_MATCHING` <draft> `#else` INCLUDE_ASM `#endif`.
+`python3 configure.py --non-matching` followed by `ninja` builds the drafts into `build/<GAME_ID>-nm/<boot>.nonmatching.elf`
+(`tools/nm_build.py`): the markers inside `#else` branches stop applying, the drafts replace the assembly, and the shiftable
+link moves everything else. It is not compared with the original and is not expected to boot. A file whose drafts do not
+compile or link (their declarations are incomplete) keeps its matching version; the list is in
+`build/<GAME_ID>-nm/nm_fallback.json`. `python3 configure.py` returns to the matching build.
 
 Times (USA retail, two cores): a build from nothing (extract, splat, split, assemble 12,000 objects, link, pack) takes
 about 1.5 to 2 minutes with the local toolchain; with the objects cached and one source unit changed about 15 s; with
@@ -73,7 +109,7 @@ ld cannot write the retail container: section-header order, the non-loaded `.reg
 sections, and `e_flags` 0x20924001. `pack_elf.py` therefore takes the linked section contents and addresses from ld and
 writes the headers from `config/<GAME_ID>/layout.json`, regenerating `.shstrtab` and `.reginfo` (with the linked `_gp`)
 and rebasing the `.DVP.ovlytab` addresses that point into `.vutext`. The overlays and `.vutext`/`.vudata` are extracted
-payloads, not rebuilt. Code and data come only from the reassembled sources and the source units.
+payloads, not rebuilt. Code and data come only from the reassembled sources and the compiled source files.
 
 ## Constants (rodata migration)
 
@@ -121,7 +157,7 @@ readable aliases, not original symbols; unknown functions stay `func_XXXXXXXX`.
 overall and by region, then by translation unit (complete, partial and untouched TUs by confidence and by library), and writes
 `build/<GAME_ID>/progress.json`. `python3 tools/next.py tus` lists candidate TUs.
 
-Other tools: `tools/tus.py` (TU boundaries and map), `tools/regroup.py` (one source file per TU), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/studies/shift_test.py` (shiftability test),
+Other tools: `tools/tus.py` (TU boundaries and map), `tools/layout.py` (naming of TU files), `tools/include_asm.py` (markers), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/studies/shift_test.py` (shiftability test),
 `tests/link/check.py` (SN object + GNU object linked by the toolchain's `ld`). In a sandbox script, the binutils tools
 (`mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}`, or the prefix in `$BLACK_BINUTILS_PREFIX`) are on PATH.
 

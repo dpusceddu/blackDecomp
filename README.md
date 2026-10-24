@@ -7,7 +7,8 @@
 
 A work-in-progress matching decompilation of the PS2 version of *Black* (Criterion Games, 2006). The goal is readable C/C++
 source that compiles, with the original compilers, to the exact bytes of the retail executable. `ninja` rebuilds the executable
-byte for byte, with recovered source replacing its assembly one function at a time. Because the rebuild is *shiftable*
+byte for byte, with recovered source replacing its assembly one function at a time (`INCLUDE_ASM` lines in the translation
+unit files). Because the rebuild is *shiftable*
 (code and data can move and every reference is fixed up by the linker), it also works as a base for modding.
 
 ## Supported versions
@@ -124,7 +125,7 @@ The rebuild links every function and data object from separate pieces and lays t
 adding, removing or growing code moves everything behind it and the linker fixes the references (`jal`, `%hi/%lo`, gp-relative
 accesses, pointers in data, exception tables). A test inserting 200 NOPs into one function relinks with no inconsistency
 ([docs/build.md](docs/build.md#shiftability)); the known exceptions are raw numbers in data that look like addresses. To change
-behavior, edit a source unit (`src/<library>/`, listed in `config/units.yaml`) and rebuild; the result is a modified
+behavior, edit a translation unit file (`src/<library>/`, listed in `config/SLUS_213.76/splits.yaml`) and rebuild; the result is a modified
 executable, not a match, so `ninja` will report a mismatch against the original hash. Never distribute the game's executable
 or assets; distribute patches in a form that needs the user's own copy.
 
@@ -132,24 +133,31 @@ or assets; distribute patches in a form that needs the user's own copy.
 
 ```
 configure.py          writes build.ninja (and picks the version)
-config/<GAME_ID>/     per-version splat configuration, ELF layout, function boundaries, expected SHA-256
-config/               units.yaml (source units and their status), tus.yaml (translation unit map), toolchain pins, shared data
+config/<GAME_ID>/     per-version splat configuration, ELF layout, function boundaries, expected SHA-256; SLUS_213.76 also has
+                      splits.yaml (source files, address ranges, flags), symbols.txt (names), equivalent.yaml
+config/               tus.yaml (translation unit map), toolchain pins, shared data
 orig/<GAME_ID>/       your executable goes here (ignored by Git)
-src/<library>/        recovered source: game, kynapse, animation, physics, rw_core, rw_audio, apt, sony, libc, linkonce
+src/<library>/        one file per translation unit: recovered functions as C/C++, the rest as INCLUDE_ASM lines, drafts in
+                      #ifdef NON_MATCHING blocks (game, kynapse, animation, physics, rw_core, rw_audio, apt, sony, libc, linkonce)
 include/<library>/    headers per library, include/ps2/ for helpers shared by all
 tools/                build, analysis and pipeline tools; tools/studies/ keeps finished experiments
 progress/             badge files and the per-library table written by `ninja badges` (committed)
-docs/                 build, units, pipeline, TU map, matching handbook, status, history
+docs/                 build, translation unit files and split list, pipeline, TU map, matching handbook, status, history
 tests/                tests that need no game files
-asm/ build/ data/     generated, ignored
+asm/ build/ data/     generated (asm/<GAME_ID>/nonmatchings/ holds the assembly of every function), ignored
 ```
 
 ## FAQ
 
 **How does the matching work?** The executable is split into one assembly object per function plus data objects, which link
-back into the identical image. A recovered source file (a *unit*) replaces the assembly of the functions it contains; if the
+back into the identical image. A translation unit file lists all functions of its range; the ones written in C or C++ replace the assembly of the ones still marked `INCLUDE_ASM`; if the
 compiler reproduces the original instructions and the full image stays identical, the function is *exact*. Details:
 [docs/build.md](docs/build.md), [docs/units.md](docs/units.md), [docs/matching-handbook.md](docs/matching-handbook.md).
+
+**How do I work on a function?** Open its TU file (`python3 tools/next.py tus` lists candidates), replace the function's
+`INCLUDE_ASM(...)` line with C or C++, run `ninja`: it prints `OK`, or the file and function that differ. A draft that does not
+match yet goes in `#ifdef NON_MATCHING` ... `#else` INCLUDE_ASM `#endif`; `python3 configure.py --non-matching` builds the drafts into
+a separate executable. Steps and an example: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 **What do exact, equivalent and draft mean?** Every function has an evidence tier. `exact`: compiled from source, the whole
 image is byte-identical. `equivalent`: agrees with the original on recorded machine states with measured coverage; it is not

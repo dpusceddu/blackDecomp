@@ -1,101 +1,96 @@
-# Source units
+# Translation unit files and the split list
 
-How source replaces assembly in the build (`config/units.yaml`, `tools/settle_units.py`).
+How source replaces assembly in the build. The inputs are `src/`, `config/SLUS_213.76/splits.yaml`, `symbols.txt` and
+`equivalent.yaml`; nothing is generated into Git (`tools/units.py` derives the *units* into `build/`).
 
-## Units
+## One file per translation unit
 
-A *unit* is a source file that replaces a run of adjacent functions of the image. List it in `config/units.yaml`
-(the file is maintained by `tools/settle_units.py`; the format is described in `tools/units.py`):
+`src/<library>/tu_<address>.c|cpp` lists every function of one translation unit (`config/tus.yaml`) in address order. A
+recovered function is C or C++; the others are markers:
+
+```c
+#include "include_asm.h"
+#include "ps2/prelude.h"
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00100518);
+void func_001005A0(void* arg0) { ... }               /* recovered */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00100628);
+
+#ifdef NON_MATCHING
+int func_001B78D8(BkEffectPoolPS2* pool) { ... }     /* draft, not exact yet */
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B78D8);
+#endif
+```
+
+The marker names the function's assembly (`asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s`, written by the build). Every
+function of the file's address range that has no marker must be defined by the file; the build checks that the compiled
+function takes the original's place and that the whole image stays identical. A TU without recovered code needs no file.
+Hand-written files keep descriptive names (`kynapse/behaviors_pathway.cpp`).
+
+## The split list
+
+`config/SLUS_213.76/splits.yaml`, one line per file (a TU is split into several files only where a reason is noted):
 
 ```yaml
-variant: SLUS_213.76
-units:
-- name: kynapse_leaf_2d15a0
-  source: src/kynapse/leaf_functions_2d15a0.cpp
-  origin: kynapse                    # label for the progress report
-  flags: [-O2, -G0, -snas, -fbyte-bool]
-  externs: {gIdA: 0x44ecd0}          # name the code refers to but does not define -> original address
-  functions:
-  - {addr: 0x2d15a0, symbol: Kaim_AllIdsValid__Fv, size: 108, status: source}   # asm + reason: to keep the assembly
+defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas], sections: true}
+splits:
+  - {src: src/game/tu_100518.c, range: [0x100518, 0x103858]}
+  - {src: src/game/frontend_menu_notify.cpp, range: [0x103db0, 0x103df0], flags: [-O1, -G0, -snas]}
+  - {src: src/physics/tu_32bc70.cpp, range: [0x32bc70, 0x32e3d0], flags: [-O2, -G8, -snas], assembler: sn-min6,
+     owner: physics-scene, data_ranges: [...], full_tu_context: true, note: "..."}
 ```
 
-`symbol` is the exact mangled name the compiler emits; `make_ld.py` makes the image's `func_XXXXXXXX` name an alias of it,
-so assembly callers link against the source. The unit's `.text` and its constants take the place of the functions'
-objects; its other sections (unwind data in `.data`, vtables and inline copies in `.gnu.linkonce.*`) are not linked by default, and
-global symbols they defined are bound to the originals through `externs`. Then:
+`range` is `[start, end)`. `flags` and `compiler` replace the defaults; `assembler` names a per-unit assembler variant
+(`sn-min6`, ... see [tus.md](tus.md)); `sections: false` compiles without `-ffunction-sections` (the compiled functions
+must then be adjacent); `owner` marks who works on the file. A file that is compiled several times with `-D` selectors
+and carries no markers lists its compiled addresses in `functions`. Rare keys keep the options of the old unit format
+(`data_ranges`, `rodata_type_splits`, `shared_exception_tables`, `full_tu_context`, `unlinked_context_helpers`, `externs`).
+A function that needs other flags than its neighbours gets its own file and entry. Two files may cover overlapping ranges;
+the function is compiled by the file that does not mark it, and the other file keeps its marker.
 
-```sh
-python3 tools/settle_units.py      # compile every unit, demote what cannot be placed identically, relink until OK
-ninja && ninja progress
-```
+## Names
 
-`settle_units.py` uses `tools/units_verify.py`: `prepare` checks each object (symbol, size, extra code, constants it brings
-that the original did not migrate, unbound externs), `link` demotes units the linker names, `compare` demotes the units
-that own any differing word of the linked image. Reasons recorded in `config/units.yaml`: `extra` (the unit emits other
-functions too), `name`, `size`, `section`, `shared`, `layout`, `extern`, `labels`, `link`, `bytes`, `compile`. Provenance
-of the first sources: they were ported once from an unpublished companion project (headers in `include/kynapse/`,
-`include/game/`, sources in `src/kynapse/`, `src/game/`; see [history.md](history.md)). Diagnostic helpers:
-`tools/objdump.py` (sections, symbols, relocations of an object), `BLACK_UNITS_ALL=1` (pretend every unit function is
-source, to compile demoted units).
+`symbols.txt` (splat's `name = 0xADDRESS; // type:func`) holds the names a compiled function may carry (a mangled C++
+name; otherwise `func_XXXXXXXX`) and the addresses of names the code uses without defining them (`gClock`, a callee in
+another TU). Add a line when the build says a symbol has no address, or when a function is defined under its mangled name.
 
-Text and owned data may end before their slot boundary when the actual next cached input section's alignment fills exactly that gap
-and the original gap contains only zeros. This accepts natural linker alignment without changing the object or adding
-instructions; the full-image comparison remains mandatory.
-An absent owned-data section cannot stand in for a table or constant.
-When one splat label combines an ordinary ASCIZ with adjacent runtime type data, a live unit may request
-`rodata_type_splits: ['0x40a668']`. The boundary must be the next actual item after the complete first string and its
-natural alignment, and begin a validated legacy GCC class name or standard exception name. This opt-in split preserves
-all directives and recomputes references/ownership on each side; it does not claim the runtime tail for the first string's TU.
-Settlement protects the source addresses committed in `HEAD` and restores its input units file if a candidate causes
-their demotion, so a placement error cannot silently discard earlier matches.
+`equivalent.yaml` records the functions of the `equivalent` tier (14) with their evidence; they stay assembly.
 
-## Full TU compiler context
+## What the build does with it
 
-With function sections, `full_tu_context: true` permits real unfinished function bodies to remain visible to the compiler.
-Every emitted function must be a declared unit function or an explicitly listed `unlinked_context_helpers` symbol.
-The latter list names reviewed algorithm helpers and makes no original-address or evidence claim. Only `status: source`
-inputs are retained; all other allocated inputs receive discard-only names, and their globals resolve to the original
-assembly definitions. This prevents an unrenamed `.text.*` input from leaking through the sorted output wildcard.
-Native metadata may point to an assembly-backed function through a local section symbol. A kept `R_MIPS_32`
-pointer to a uniquely named function entry is rebound to that function's existing global symbol. Interior,
-ambiguous and non-function references remain unresolved; this does not replace metadata bytes or function extents.
+`tools/units.py` reads the splits, scans each file's markers (`tools/include_asm.py`, which understands `#ifdef NON_MATCHING`
+and `-D` flags) and writes `build/<GAME_ID>/units.json`. `tools/make_ld.py` places each compiled function (its own
+`.text.<symbol>` section) at the slot of the original function and the file's constants at the first slot they replace;
+`tools/units_verify.py prepare` checks every object (names, extra code, constants, unbound symbols) and writes
+`unit_facts.json`; `link` and `compare` name the files and functions that do not link or differ. Reasons: `compile`, `name`,
+`extra` (the object has code the original does not: a definition next to an INCLUDE_ASM line), `size`, `section`, `shared`,
+`layout` (constants of the assembly functions in between interleave with the file's own), `extern`, `labels`, `link`, `bytes`.
+Diagnostics: `tools/objdump.py`, `BLACK_UNITS_ALL=1` (pretend every listed function is source).
 
-Kept functions still require exact sizes, natural section tails, real callee bindings and the identical full image.
-Unplaced function/constant relocations do not introduce dependencies. A kept call to an unplaced helper still requires
-its actual original binding; the option cannot supply invented callees or discard constants referenced by kept code.
-Without this opt-in, the existing extra-function rejection remains in force. Monolithic `.text` cannot use this option.
+Text and owned data may end before their slot boundary when the next input section's alignment fills exactly that gap and
+the original gap holds only zeros; the full-image comparison stays mandatory.
+
+## Full TU context
+
+With function sections, `full_tu_context: true` lets real unfinished function bodies stay visible to the compiler. Every
+emitted function must be a function of the file or listed in `unlinked_context_helpers` (reviewed helpers, no claim about
+originals); all other allocated inputs are discarded and their globals resolve to the original assembly. Kept functions
+still require exact sizes, natural section tails, real callee bindings and the identical image.
 
 ## Explicit source data
 
-A live source unit can opt into storage using exact half-open ranges:
+A file can take over storage with exact half-open ranges:
 
 ```yaml
-data_ranges:
-- {section: .data, input: .data.my_tu, start: '0x3ea768', end: '0x3ea7e8'}
-- {section: .data, input: .data, start: '0x3c9364', end: '0x3c94a4', kind: unwind}
-- {section: .bss, input: .bss, start: '0x4513d8', end: '0x4514f0'}
+data_ranges: [{section: .data, input: .data.my_tu, start: '0x3ea768', end: '0x3ea7e8'},
+              {section: .data, input: .data, start: '0x3c9364', end: '0x3c94a4', kind: unwind},
+              {section: .bss, input: .bss, start: '0x4513d8', end: '0x4514f0'}]
 ```
 
-Supported output sections are `.data`, `.sdata`, `.rodata`, `.bss` and `.sbss`. `input` names the compiled section to retain.
-Each input must fill its range completely, with the correct PROGBITS/NOBITS kind and compatible alignment. A NOBITS
-input may leave a small natural tail only when the actual immediately following linked NOBITS input proves that alignment;
-unknown inputs and larger gaps are rejected. Const initialized inputs may be read-only; the final ELF verifies output
-permissions. Uninitialized inputs must remain writable. Ranges cannot overlap, and each edge must be an existing splat `dlabel` or the output section's end; the tool never cuts an item.
-Explicit `.rodata` inputs must be complete read-only PROGBITS sections. Their ranges replace inferred constant migration
-only at existing object labels; partial cuts through function-owned constant runs are rejected, and retained runs keep every item.
-The optional `kind: unwind` permits an unlabeled edge only for a complete decoded original CIE/FDE group. The decoder
-checks version, relative CIE backlinks, function extents and the terminator, then introduces split labels in build output.
-It cannot authorize an arbitrary interior cut or a partial metadata record.
-Use typed definitions and symbolic relocations. SN 1.36 emits a custom `.bss.name` attribute as PROGBITS; ordinary
-uninitialized storage in `.bss` retains NOBITS. Inspect the object before declaring a range.
-
-`split_objects.py` carves only opted-in sections; `make_ld.py` substitutes the named source input and preserves original
-interior labels as section-relative aliases. Retained fragments split again at aligned labels when necessary to preserve
-their original alignment phase. Unlisted sections retain their existing behavior. `units_verify.py` checks
-the input and attributes data mismatches or missing interior labels to the owning unit. A full identical image is still
-required. Owning these ranges does not establish semantic field names or prove the TU map's proposed data ownership.
-Settlement refreshes placement before generating the linker script; direct linker generation requires current placement.
-
-A `shared_exception_tables: ['0x...']` opt-in migrates an original exception-table object shared by several functions
-only when every handler belongs to an exact source function in that same unit. The complete native compiler table must
-still match. It neither cuts a record nor permits a table to cross unit boundaries.
+Supported sections are `.data`, `.sdata`, `.rodata`, `.bss` and `.sbss`. Each input must fill its range completely with the
+right PROGBITS/NOBITS kind; ranges cannot overlap and each edge must be an existing splat `dlabel`, except `kind: unwind`,
+which accepts a complete decoded original CIE/FDE group. Use typed definitions; SN 1.36 emits a custom `.bss.name` attribute
+as PROGBITS. `rodata_type_splits: ['0x40a668']` splits a label that combines an ASCIZ with adjacent runtime type data.
+`shared_exception_tables: ['0x...']` takes over an exception table shared by several functions when every handler is a
+function of the same file. A full identical image is required in every case.

@@ -43,7 +43,7 @@ certain TU ends), library strings and code style, data-order joins and call edge
 functions (120 exact), 1,586 isolated functions and 852 link-once sections, with library ranges, compiler and flags.
 Orphan pieces, alignment and cross-build shifts do not mark boundaries. The Sony libraries (`sd` register saves, blocks
 `0x28fab0-0x2a5038`, `0x355278-0x35c308`, `0x367e28-0x372d68`) match with `ee-gcc2.9-991111-01 -O2 -G0` and never
-with SN 1.36. `tools/regroup.py` merges the units of a TU into one file (`-ffunction-sections`, assembly kept in place).
+with SN 1.36. a former `tools/regroup.py` merged the units of a TU into one file (`-ffunction-sections`, assembly kept in place).
 Evidence: [tus.md](tus.md).
 
 ## Phase 4: automatic pipeline

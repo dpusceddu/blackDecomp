@@ -1,6 +1,6 @@
 # Translation units and toolchain facts
 
-Evidence for TU boundaries and libraries (`tools/tus.py`), per-TU compilers and flags, the assembler short-loop padding study, regrouping.
+Evidence for TU boundaries and libraries (`tools/tus.py`), per-TU compilers and flags, the assembler short-loop padding study, one file per TU.
 
 ## Translation units
 
@@ -112,14 +112,13 @@ rule. Static tracing finds a section-relative displacement check, without an ali
 gate. Keep the independently verified recipes; no position-based derivative is justified.
 
 
-## Regrouping
+## One file per TU
 
-**Regrouping** (`tools/regroup.py`). `merge` makes one unit of the adjacent source units of a TU (one `src/<library>/<tu>.c`);
-`merge --sections` makes one unit and one source file (`src/<library>/<tu>.c`) of all the source functions of a TU, compiled with
-`-ffunction-sections`: SN 1.36 then writes `.text.<symbol>` per function without changing a code byte, `make_ld.py` renames each section
-to the slot of its function and `units_verify.py` checks each section against the span of the original function, so assembly functions
-(orphan pieces, hard cases) stay between the source functions in the image and the source shows them as comments. Constants keep one
-section per unit (the literal pool of GCC 2.95 has no per-constant sections: `-fdata-sections` only splits named variables), so a TU
-whose assembly functions between its source functions own constants stays in several units. A merged unit that does not link
-identically (conflicting declarations between the drafts, constant layout) is replaced by the units it came from; `ninja` stays OK.
-
+Each TU of the map that has recovered code is one file (`src/<library>/tu_<address>.c|cpp`, [units.md](units.md)); the split list
+records where a TU is several files. Compiled with `-ffunction-sections`, SN 1.36 writes `.text.<symbol>` per function without
+changing a code byte, `make_ld.py` renames each section to the slot of its function and `units_verify.py` checks each section
+against the span of the original function, so INCLUDE_ASM functions (orphan pieces, hard cases) stay between the compiled ones.
+Constants keep one section per file (the literal pool of GCC 2.95 has no per-constant sections: `-fdata-sections` only splits
+named variables), so a TU whose assembly functions between its compiled functions own constants is several files. The one-time
+regrouping from the earlier one-file-per-function layout is `tools/studies/migrate_include_asm.py` (parts that disagreed in
+flags, language, declarations or constants stayed separate files; `note:` in the split list says why).

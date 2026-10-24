@@ -46,8 +46,8 @@ python3 tools/autodecomp.py run --min-size 100 --max-size 300 --region game
 python3 tools/autodecomp.py run --max-size 100 --status near --status mismatch --ctx ctx2.c --tag arity-int
 python3 tools/autodecomp.py permute --max-score 8         # decomp-permuter on near misses (one member per family)
 python3 tools/autodecomp.py family                        # clone exact sources onto identical-body functions
-python3 tools/autodecomp.py register                      # exact drafts -> src/<library>/<tu>.c + config/units.yaml
-python3 tools/autodecomp.py settle                        # compile, link, demote what cannot be placed, retry alone; ninja must say OK
+python3 tools/autodecomp.py register                      # exact drafts -> their TU files (the INCLUDE_ASM line is replaced)
+python3 tools/autodecomp.py settle                        # compile, link, put back the INCLUDE_ASM line of what does not place identically; ninja must say OK
 python3 tools/autodecomp.py report [--max-size N]         # outcome classes, failure reasons
 python3 tools/next.py [near|types|families|data|ee]       # best next work
 ```
@@ -212,9 +212,11 @@ Type and instruction support, all of it mechanical and checked by exact matches:
   for functions that own rodata); a template for a family is adopted with `autodecomp.py adopt ADDR file.c` and tried with
   `tools/trysrc.py ADDR file.c`.
 
-An exact draft is only a candidate: `register` writes it as a unit (adjacent exact drafts are grouped, at most 24) and
-`settle` uses `tools/settle_units.py` to demote whatever does not link identically; a demoted group is retried one function
-per unit. Results and reasons (`verify-failed`: `size` = the function owns rodata that the source does not define, `extra`,
+An exact draft is only a candidate: `register` replaces the function's INCLUDE_ASM line in its TU file by the draft
+(`tools/tu_files.py`; declarations go after the includes; a function compiled with other flags than its file, or whose group
+failed, gets a small file of its own and a line in `config/SLUS_213.76/splits.yaml`, and its mangled name a line in
+`symbols.txt`). `settle` compiles and links, puts the marker back for whatever does not place identically, and retries a
+failed file's new functions one per file. Results and reasons (`verify-failed`: `size` = the function owns rodata that the source does not define, `extra`,
 `layout`, `bytes`) are kept in `build/auto.json` (ignored). The drafts keep m2c's variable names (`temp_5`, `var_3`) and
 `M2C_FIELD` accesses; they compile as C under the image's `func_XXXXXXXX` names, so assembly callers link unchanged, and
-carry `origin: auto` in `config/units.yaml`. Later phases turn them into C++ methods once classes are known.
+are plain C in the TU files. Later phases turn them into C++ methods once classes are known.
