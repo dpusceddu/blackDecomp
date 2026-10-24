@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_BKACTORRATEPS2_H
+#define RECOVERED_BKACTORRATEPS2_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_BkActorRatePS2 {
+    u8 opaque_0[812];
+    s32 field_32C; /* PS2 +0x32C */
+} Recovered_BkActorRatePS2;
+typedef char assert_Recovered_BkActorRatePS2_32C[(((int)&((Recovered_BkActorRatePS2 *)0)->field_32C) == 812) ? 1 : -1];
+#endif

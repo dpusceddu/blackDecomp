@@ -70,8 +70,8 @@ Evidence tiers matter: never describe a function as more than its tier (`exact`,
 - **Never commit game data**: no executables, disc contents, extracted files, generated assembly (`asm/`, `build/`, `data/`),
   savestates, compiler archives or build output. They live in ignored directories. Generated headers and data are committed
   only when a tool in `tools/` owns and can regenerate them.
-- **Names, prototypes, types and access views are ordinary source.** `config/SLUS_213.76/symbols.txt`, `include/ps2/prototypes.h`,
-  `include/ps2/recovered_types.h` and `include/<library>/layouts/` are edited by hand and reviewed like code; mark what is not
+- **Names, prototypes, types and partial views are ordinary source.** `config/SLUS_213.76/symbols.txt`, `include/ps2/prototypes.h`,
+  `include/ps2/recovered_types.h` and `include/<library>/partial/` (read its `README.md`: a partial view is not a class definition) are edited by hand and reviewed like code; mark what is not
   confirmed by a matched function `UNVERIFIED`. No tool or test needs data from outside the repository. If you analyse the
   executable with Ghidra, IDA or another disassembler, that is your own tool: put what you learn into these files.
 - **Keep committed text free of machine-specific details**: host names, user names, absolute paths, network addresses and

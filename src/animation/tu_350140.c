@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "animation/layouts/Recovered_AnimationParameterBank.h"
+#include "animation/partial/Recovered_AnimationParameterBank.h"
 #include "ps2/recovered_types.h"
 extern void func_00350098(Recovered_AnimationParameterBank *);
 

@@ -3,9 +3,9 @@
 extern unsigned char poseCacheStorage[] __asm__("D_0045F0C0") __attribute__((aligned(16)));
 #include "ps2/ee_fpu.h"
 #include "ps2/prelude.h"
-#include "animation/layouts/Recovered_AnimationGraphNode.h"
-#include "animation/layouts/Recovered_AnimationParameters.h"
-#include "animation/layouts/Recovered_OverlayBinding.h"
+#include "animation/partial/Recovered_AnimationGraphNode.h"
+#include "animation/partial/Recovered_AnimationParameters.h"
+#include "animation/partial/Recovered_OverlayBinding.h"
 #include "ps2/recovered_types.h"
 #include "ps2/vu0_micro.hpp"
 #include "ps2/vu0_quaternion.hpp"

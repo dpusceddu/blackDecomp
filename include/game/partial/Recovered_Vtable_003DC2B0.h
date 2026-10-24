@@ -1,0 +1,17 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_VTABLE_003DC2B0_H
+#define RECOVERED_VTABLE_003DC2B0_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_Vtable_003DC2B0 {
+    u8 opaque_0[240];
+    u128 field_F0; /* PS2 +0xF0 */
+    u8 opaque_100[16];
+    f32 field_110; /* PS2 +0x110 */
+    u8 opaque_114[1];
+    u8 field_115; /* PS2 +0x115 */
+} Recovered_Vtable_003DC2B0;
+typedef char assert_Recovered_Vtable_003DC2B0_F0[(((int)&((Recovered_Vtable_003DC2B0 *)0)->field_F0) == 240) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003DC2B0_110[(((int)&((Recovered_Vtable_003DC2B0 *)0)->field_110) == 272) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003DC2B0_115[(((int)&((Recovered_Vtable_003DC2B0 *)0)->field_115) == 277) ? 1 : -1];
+#endif

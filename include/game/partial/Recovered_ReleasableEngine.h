@@ -1,0 +1,13 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_RELEASABLEENGINE_H
+#define RECOVERED_RELEASABLEENGINE_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_ReleasableEngine {
+    void * field_0; /* PS2 +0x0 */
+    u8 opaque_4[40];
+    s32 field_2C; /* PS2 +0x2C */
+} Recovered_ReleasableEngine;
+typedef char assert_Recovered_ReleasableEngine_0[(((int)&((Recovered_ReleasableEngine *)0)->field_0) == 0) ? 1 : -1];
+typedef char assert_Recovered_ReleasableEngine_2C[(((int)&((Recovered_ReleasableEngine *)0)->field_2C) == 44) ? 1 : -1];
+#endif

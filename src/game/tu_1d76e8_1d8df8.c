@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/layouts/Recovered_Vtable_003E08D8.h"
+#include "game/partial/Recovered_Vtable_003E08D8.h"
 #include "ps2/recovered_types.h"
 
 void * func_001D8DF8(Recovered_Vtable_003E08D8 *arg0) {

@@ -1,0 +1,14 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_BOTHIDS60_H
+#define RECOVERED_BOTHIDS60_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_BothIds60 {
+    u8 opaque_0[96];
+    s32 field_60; /* PS2 +0x60 */
+    u8 opaque_64[8];
+    s32 field_6C; /* PS2 +0x6C */
+} Recovered_BothIds60;
+typedef char assert_Recovered_BothIds60_60[(((int)&((Recovered_BothIds60 *)0)->field_60) == 96) ? 1 : -1];
+typedef char assert_Recovered_BothIds60_6C[(((int)&((Recovered_BothIds60 *)0)->field_6C) == 108) ? 1 : -1];
+#endif

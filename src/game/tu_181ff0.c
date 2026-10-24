@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/layouts/Recovered_MovementModeBase.h"
-#include "game/layouts/Recovered_RouteMode.h"
+#include "game/partial/Recovered_MovementModeBase.h"
+#include "game/partial/Recovered_RouteMode.h"
 #include "ps2/recovered_types.h"
 extern void func_00191C20(Recovered_RouteMode *, void *);
 extern void func_00191568(Recovered_MovementModeBase *, void *);

@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_RWMATRIXTOLERANCEPS2_H
+#define RECOVERED_RWMATRIXTOLERANCEPS2_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_RwMatrixTolerancePS2 {
+    u8 opaque_0[8];
+    s32 field_8; /* PS2 +0x8 */
+} Recovered_RwMatrixTolerancePS2;
+typedef char assert_Recovered_RwMatrixTolerancePS2_8[(((int)&((Recovered_RwMatrixTolerancePS2 *)0)->field_8) == 8) ? 1 : -1];
+#endif

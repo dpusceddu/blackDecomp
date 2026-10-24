@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "rw_core/layouts/Recovered_RwErrorRecordPS2.h"
+#include "rw_core/partial/Recovered_RwErrorRecordPS2.h"
 #include "ps2/recovered_types.h"
 extern s32 (*D_0044944C)();
 extern s32 func_002A5548(s32, ...);

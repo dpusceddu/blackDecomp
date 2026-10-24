@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/layouts/Recovered_Vtable_003DE590.h"
+#include "game/partial/Recovered_Vtable_003DE590.h"
 #include "ps2/recovered_types.h"
 extern s32 func_00193980();
 extern s32 * func_00181A90(void *, s32 *);

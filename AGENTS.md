@@ -19,9 +19,9 @@ Short, neutral rules for coding assistants and the people directing them. They a
 - Build with `ninja`; every commit leaves it printing `OK` for USA retail (`SLUS_213.76`, the only version checked routinely).
   Run `python3 tools/check_versions.py` (all five versions) before releases or after changing shared build tools. Work by replacing a function's `INCLUDE_ASM` line in its TU file; the
   build inputs are `config/SLUS_213.76/splits.yaml`, `symbols.txt` and `equivalent.yaml` (edited by hand and by `autodecomp.py register`). Report progress with `ninja progress`; when it changes, run `ninja badges` and commit `progress/`.
-- Names, prototypes, types and access views are hand-maintained source: `config/SLUS_213.76/symbols.txt` (`// type:func alias`
+- Names, prototypes, types and partial views are hand-maintained source: `config/SLUS_213.76/symbols.txt` (`// type:func alias`
   lines are readable names that never change linking), `include/ps2/prototypes.h`, `include/ps2/recovered_types.h` and
-  `include/<library>/layouts/`. Mark what no matched function confirms `UNVERIFIED`. Nothing here needs analysis data from outside
+  `include/<library>/partial/`. Mark what no matched function confirms `UNVERIFIED`. Nothing here needs analysis data from outside
   the repository; an analysis tool such as Ghidra is optional and personal, and its output enters only as edits to these files.
 - Evidence tiers: `exact` (byte-identical in the full image), `equivalent` (agrees on recorded states, recorded in
   `equivalent.yaml`; never replaces assembly), `draft`. Do not claim more than the evidence shows.

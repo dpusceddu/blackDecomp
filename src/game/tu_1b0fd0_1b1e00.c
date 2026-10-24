@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/layouts/Recovered_BkEffectLightsPS2.h"
+#include "game/partial/Recovered_BkEffectLightsPS2.h"
 #include "ps2/recovered_types.h"
 extern s32 func_001B86F8(s32);
 extern void func_001C1930(Recovered_BkEffectLightsPS2 *);

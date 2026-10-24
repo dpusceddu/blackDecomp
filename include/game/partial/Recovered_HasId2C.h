@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_HASID2C_H
+#define RECOVERED_HASID2C_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_HasId2C {
+    u8 opaque_0[44];
+    s32 field_2C; /* PS2 +0x2C */
+} Recovered_HasId2C;
+typedef char assert_Recovered_HasId2C_2C[(((int)&((Recovered_HasId2C *)0)->field_2C) == 44) ? 1 : -1];
+#endif

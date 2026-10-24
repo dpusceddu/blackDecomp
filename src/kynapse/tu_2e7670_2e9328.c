@@ -39,7 +39,7 @@ void func_002E9538(void *arg0, f32 fparg0) {
     M2C_FIELD(arg0, f32 *, 0x1C) = fparg0;
 }
 
-#include "kynapse/layouts/Recovered_ParameterTables.h"
+#include "kynapse/partial/Recovered_ParameterTables.h"
 #include "ps2/recovered_types.h"
 
 void func_002E9540(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {

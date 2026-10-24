@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_CURSOR94_H
+#define RECOVERED_CURSOR94_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_Cursor94 {
+    u8 opaque_0[148];
+    u32 field_94; /* PS2 +0x94 */
+} Recovered_Cursor94;
+typedef char assert_Recovered_Cursor94_94[(((int)&((Recovered_Cursor94 *)0)->field_94) == 148) ? 1 : -1];
+#endif

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "kynapse/layouts/Recovered_AIRouteFollower.h"
-#include "kynapse/layouts/Recovered_RouteRequest.h"
+#include "kynapse/partial/Recovered_AIRouteFollower.h"
+#include "kynapse/partial/Recovered_RouteRequest.h"
 #include "ps2/recovered_types.h"
 extern void * func_00300278(Recovered_AIRouteFollower *, Recovered_RouteRequest *);
 

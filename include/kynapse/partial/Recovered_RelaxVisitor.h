@@ -1,0 +1,18 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_RELAXVISITOR_H
+#define RECOVERED_RELAXVISITOR_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_RelaxVisitor {
+    u8 opaque_0[4];
+    s32 * field_4; /* PS2 +0x4 */
+    s32 field_8; /* PS2 +0x8 */
+    u8 opaque_C[4];
+    void * field_10; /* PS2 +0x10 */
+    s32 field_14; /* PS2 +0x14 */
+} Recovered_RelaxVisitor;
+typedef char assert_Recovered_RelaxVisitor_4[(((int)&((Recovered_RelaxVisitor *)0)->field_4) == 4) ? 1 : -1];
+typedef char assert_Recovered_RelaxVisitor_8[(((int)&((Recovered_RelaxVisitor *)0)->field_8) == 8) ? 1 : -1];
+typedef char assert_Recovered_RelaxVisitor_10[(((int)&((Recovered_RelaxVisitor *)0)->field_10) == 16) ? 1 : -1];
+typedef char assert_Recovered_RelaxVisitor_14[(((int)&((Recovered_RelaxVisitor *)0)->field_14) == 20) ? 1 : -1];
+#endif

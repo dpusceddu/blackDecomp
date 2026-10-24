@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_BKFLAGASSETPS2_H
+#define RECOVERED_BKFLAGASSETPS2_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_BkFlagAssetPS2 {
+    u8 opaque_0[72];
+    s32 field_48; /* PS2 +0x48 */
+} Recovered_BkFlagAssetPS2;
+typedef char assert_Recovered_BkFlagAssetPS2_48[(((int)&((Recovered_BkFlagAssetPS2 *)0)->field_48) == 72) ? 1 : -1];
+#endif

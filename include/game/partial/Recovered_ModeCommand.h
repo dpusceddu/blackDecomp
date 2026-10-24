@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_MODECOMMAND_H
+#define RECOVERED_MODECOMMAND_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_ModeCommand {
+    u8 opaque_0[36];
+    void * field_24; /* PS2 +0x24 */
+} Recovered_ModeCommand;
+typedef char assert_Recovered_ModeCommand_24[(((int)&((Recovered_ModeCommand *)0)->field_24) == 36) ? 1 : -1];
+#endif

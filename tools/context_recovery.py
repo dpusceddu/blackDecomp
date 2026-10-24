@@ -3,7 +3,7 @@
 
 The ignored build/auto/context.json keeps conflicting evidence and unproved leads. The recovery only writes ignored files
 under build/auto/ (the m2c context); the committed headers under include/ are hand-maintained source and are never touched.
-The access views in include/<library>/layouts/ are PS2 access views, not claims about allocation size or C++ inheritance.
+The partial views in include/<library>/partial/ are PS2 partial views, not claims about allocation size or C++ inheritance.
 Only a source function which actually accesses a view can verify that view.
 """
 import argparse
@@ -348,7 +348,7 @@ def source_seeds(root=ROOT, matched_only=False):
     seeds, evidence, parsed, texts = {}, [], {}, {}
     units = load_units(variant='SLUS_213.76')
     for p in (root / 'include').rglob('*'):
-        if p.suffix in ('.h', '.hpp') and 'layouts' not in p.parts:
+        if p.suffix in ('.h', '.hpp') and 'partial' not in p.parts:
             text = COMMENT.sub('', p.read_text())
             CLASS_NAMES.update(re.findall(r'\b(?:class|struct)\s+(\w+)', text))
             NAMESPACE_NAMES.update(re.findall(r'\bnamespace\s+(\w+)', text))
@@ -1164,7 +1164,7 @@ def fingerprint(root=ROOT):
     paths += sorted((other / 'src').rglob('*.json'))
     paths += sorted((other / 'src').rglob('*.cpp'))
     for p in paths:
-        if p.is_file() and '/layouts/' not in p.as_posix():
+        if p.is_file() and '/partial/' not in p.as_posix():
             h.update(p.read_bytes())
     return h.hexdigest()
 
@@ -1230,7 +1230,7 @@ def recover(inv=None, root=ROOT, refresh=False, cache=None):
             a = int(pair['ps2'], 16)
             leads.setdefault(str(a), []).append(dict(xbox=pair['xbox'], confidence=pair['confidence'], region=pair['region'],
                                                    source_leads=module_sources.get(pair['xbox'].lower(), [])))
-    has_views = any('/layouts/Recovered_' in p.read_text() for p in (root / 'src').rglob('*') if p.suffix in ('.c', '.cpp', '.h', '.hpp'))
+    has_views = any('/partial/Recovered_' in p.read_text() for p in (root / 'src').rglob('*') if p.suffix in ('.c', '.cpp', '.h', '.hpp'))
     if has_views:
         verified = verified_layout_users(layouts, root)
         for name, layout in layouts.items():

@@ -3,7 +3,7 @@
 #ifdef NONMATCHING_RWA_3168C8
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/emitter.h"
-#include "rw_audio/layouts/Recovered_RwaFormat.h"
+#include "rw_audio/partial/Recovered_RwaFormat.h"
 #include "ps2/recovered_types.h"
 
 extern s32 * D_0040E1B0;

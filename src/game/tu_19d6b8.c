@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "ps2/vu0_lowering.h"
-#include "game/layouts/Recovered_Action.h"
-#include "game/layouts/Recovered_Vtable_003DE8A0.h"
+#include "game/partial/Recovered_Action.h"
+#include "game/partial/Recovered_Vtable_003DE8A0.h"
 
 #include "ps2/recovered_types.h"
 extern void * D_0040F4D0;

@@ -1,0 +1,14 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_SLOTUSER_H
+#define RECOVERED_SLOTUSER_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_SlotUser {
+    u8 opaque_0[20];
+    s32 field_14; /* PS2 +0x14 */
+    u8 opaque_18[16];
+    u32 field_28; /* PS2 +0x28 */
+} Recovered_SlotUser;
+typedef char assert_Recovered_SlotUser_14[(((int)&((Recovered_SlotUser *)0)->field_14) == 20) ? 1 : -1];
+typedef char assert_Recovered_SlotUser_28[(((int)&((Recovered_SlotUser *)0)->field_28) == 40) ? 1 : -1];
+#endif

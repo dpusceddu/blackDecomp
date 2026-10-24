@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_HOST2850C0_H
+#define RECOVERED_HOST2850C0_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_Host2850C0 {
+    u8 opaque_0[104];
+    s32 field_68; /* PS2 +0x68 */
+} Recovered_Host2850C0;
+typedef char assert_Recovered_Host2850C0_68[(((int)&((Recovered_Host2850C0 *)0)->field_68) == 104) ? 1 : -1];
+#endif

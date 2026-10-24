@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_PROVIDERUSER_H
+#define RECOVERED_PROVIDERUSER_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_ProviderUser {
+    u8 opaque_0[4];
+    u32 field_4; /* PS2 +0x4 */
+} Recovered_ProviderUser;
+typedef char assert_Recovered_ProviderUser_4[(((int)&((Recovered_ProviderUser *)0)->field_4) == 4) ? 1 : -1];
+#endif

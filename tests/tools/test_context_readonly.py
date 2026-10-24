@@ -30,7 +30,7 @@ class BuildContext(unittest.TestCase):
         """In a throwaway repository: after the context is built, git sees nothing but the ignored build/ directory."""
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            headers = root / 'include/game/layouts'
+            headers = root / 'include/game/partial'
             headers.mkdir(parents=True)
             (headers / 'Recovered_Thing.h').write_text('/* committed */\n')
             (headers / 'layouts.h').write_text('/* committed */\n')

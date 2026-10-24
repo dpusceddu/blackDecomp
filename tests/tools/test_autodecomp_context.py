@@ -133,7 +133,7 @@ dlabel D_00400000
             self.assertEqual([choice for choice in choices if choice], list(FALLBACKS))
 
     def test_permuter_expansion_removes_header_comments_and_preserves_literals(self):
-        source = '#include "game/layouts/Recovered_Vtable_003DBDC8.h"\nint f(void) { return 1; /* note */ }\n'
+        source = '#include "game/partial/Recovered_Vtable_003DBDC8.h"\nint f(void) { return 1; /* note */ }\n'
         expanded = auto.expand_macros(source)
         self.assertNotIn('/*', expanded)
         sys.path.insert(0, str(auto.PERMUTER))

@@ -51,7 +51,7 @@ def tu_of(addr):
 
 
 def layout_library(name):
-    """Library whose include/<library>/layouts/ directory holds the access view `name` (default: game)."""
+    """Library whose include/<library>/partial/ directory holds the partial view `name` (default: game)."""
     global _VIEW_LIBRARIES
     if _VIEW_LIBRARIES is None:
         path = ROOT / 'config/layout_libraries.json'
@@ -60,8 +60,8 @@ def layout_library(name):
 
 
 def view_include(name):
-    """Quoted include of an access view, e.g. 'game/layouts/Recovered_Action.h'."""
-    return '%s/layouts/%s.h' % (layout_library(name), name)
+    """Quoted include of a partial view, e.g. 'game/partial/Recovered_Action.h'."""
+    return '%s/partial/%s.h' % (layout_library(name), name)
 
 
 def library_of(addr):

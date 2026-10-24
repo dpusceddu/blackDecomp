@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_KEY_H
+#define RECOVERED_KEY_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_Key {
+    u8 opaque_0[8];
+    s32 * field_8; /* PS2 +0x8 */
+} Recovered_Key;
+typedef char assert_Recovered_Key_8[(((int)&((Recovered_Key *)0)->field_8) == 8) ? 1 : -1];
+#endif

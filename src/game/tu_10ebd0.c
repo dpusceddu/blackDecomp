@@ -3,7 +3,7 @@
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010EBD0);
 
-#include "game/layouts/Recovered_FrontendProfilePool.h"
+#include "game/partial/Recovered_FrontendProfilePool.h"
 #include "ps2/recovered_types.h"
 extern s32 func_00122AF0();
 
@@ -24,7 +24,7 @@ s32 func_0010F188(Recovered_FrontendProfilePool *arg0) {
     return (s32) temp_2;
 }
 
-#include "game/layouts/Recovered_FrontendProfilePool.h"
+#include "game/partial/Recovered_FrontendProfilePool.h"
 #include "ps2/recovered_types.h"
 extern s32 func_00122B10(void *);
 

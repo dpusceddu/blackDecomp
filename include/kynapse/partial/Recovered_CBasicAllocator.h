@@ -1,0 +1,16 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_CBASICALLOCATOR_H
+#define RECOVERED_CBASICALLOCATOR_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_CBasicAllocator {
+    u8 opaque_0[8];
+    void * field_8; /* PS2 +0x8 */
+    u8 opaque_C[4];
+    u32 field_10; /* PS2 +0x10 */
+    u32 field_14; /* PS2 +0x14 */
+} Recovered_CBasicAllocator;
+typedef char assert_Recovered_CBasicAllocator_8[(((int)&((Recovered_CBasicAllocator *)0)->field_8) == 8) ? 1 : -1];
+typedef char assert_Recovered_CBasicAllocator_10[(((int)&((Recovered_CBasicAllocator *)0)->field_10) == 16) ? 1 : -1];
+typedef char assert_Recovered_CBasicAllocator_14[(((int)&((Recovered_CBasicAllocator *)0)->field_14) == 20) ? 1 : -1];
+#endif

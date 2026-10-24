@@ -1,0 +1,13 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_BLACKPS2_DIRECTIONSOURCE_H
+#define RECOVERED_BLACKPS2_DIRECTIONSOURCE_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_BlackPS2_DirectionSource {
+    void * field_0; /* PS2 +0x0 */
+    u8 opaque_4[80];
+    void * field_54; /* PS2 +0x54 */
+} Recovered_BlackPS2_DirectionSource;
+typedef char assert_Recovered_BlackPS2_DirectionSource_0[(((int)&((Recovered_BlackPS2_DirectionSource *)0)->field_0) == 0) ? 1 : -1];
+typedef char assert_Recovered_BlackPS2_DirectionSource_54[(((int)&((Recovered_BlackPS2_DirectionSource *)0)->field_54) == 84) ? 1 : -1];
+#endif

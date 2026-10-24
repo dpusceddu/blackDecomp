@@ -1,0 +1,34 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). VERIFIED access view by 0x1F7B90; allocation size unknown. */
+#ifndef RECOVERED_VTABLE_003E0B90_H
+#define RECOVERED_VTABLE_003E0B90_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_Vtable_003E0B90 {
+    s32 field_0; /* PS2 +0x0 */
+    u32 field_4; /* PS2 +0x4 */
+    u32 field_8; /* PS2 +0x8 */
+    u32 field_C; /* PS2 +0xC */
+    u8 opaque_10[4];
+    u32 field_14; /* PS2 +0x14 */
+    void * field_18; /* PS2 +0x18 */
+    void * field_1C; /* PS2 +0x1C */
+    void * field_20; /* PS2 +0x20 */
+    void * field_24; /* PS2 +0x24 */
+    void * field_28; /* PS2 +0x28 */
+    u8 opaque_2C[4];
+    void * field_30; /* PS2 +0x30 */
+    void * field_34; /* PS2 +0x34 */
+} Recovered_Vtable_003E0B90;
+typedef char assert_Recovered_Vtable_003E0B90_0[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_0) == 0) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_4[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_4) == 4) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_8[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_8) == 8) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_C[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_C) == 12) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_14[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_14) == 20) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_18[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_18) == 24) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_1C[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_1C) == 28) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_20[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_20) == 32) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_24[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_24) == 36) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_28[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_28) == 40) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_30[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_30) == 48) ? 1 : -1];
+typedef char assert_Recovered_Vtable_003E0B90_34[(((int)&((Recovered_Vtable_003E0B90 *)0)->field_34) == 52) ? 1 : -1];
+#endif

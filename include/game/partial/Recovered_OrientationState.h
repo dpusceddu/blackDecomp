@@ -1,0 +1,43 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_ORIENTATIONSTATE_H
+#define RECOVERED_ORIENTATIONSTATE_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_OrientationState {
+    f32 field_0; /* PS2 +0x0 */
+    f32 field_4; /* PS2 +0x4 */
+    f32 field_8; /* PS2 +0x8 */
+    u8 opaque_C[46];
+    u8 field_3A; /* PS2 +0x3A */
+    u8 opaque_3B[57];
+    f32 field_74; /* PS2 +0x74 */
+    u8 field_78; /* PS2 +0x78 */
+    u8 opaque_79[3];
+    void * field_7C; /* PS2 +0x7C */
+    u8 opaque_80[16];
+    u32 field_90; /* PS2 +0x90 */
+    u8 opaque_94[36];
+    u8 field_B8; /* PS2 +0xB8 */
+    u8 field_B9; /* PS2 +0xB9 */
+    u8 opaque_BA[2];
+    u32 field_BC; /* PS2 +0xBC */
+    u8 field_C0; /* PS2 +0xC0 */
+    u8 field_C1; /* PS2 +0xC1 */
+    u8 opaque_C2[2];
+    u32 field_C4; /* PS2 +0xC4 */
+} Recovered_OrientationState;
+typedef char assert_Recovered_OrientationState_0[(((int)&((Recovered_OrientationState *)0)->field_0) == 0) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_4[(((int)&((Recovered_OrientationState *)0)->field_4) == 4) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_8[(((int)&((Recovered_OrientationState *)0)->field_8) == 8) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_3A[(((int)&((Recovered_OrientationState *)0)->field_3A) == 58) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_74[(((int)&((Recovered_OrientationState *)0)->field_74) == 116) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_78[(((int)&((Recovered_OrientationState *)0)->field_78) == 120) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_7C[(((int)&((Recovered_OrientationState *)0)->field_7C) == 124) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_90[(((int)&((Recovered_OrientationState *)0)->field_90) == 144) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_B8[(((int)&((Recovered_OrientationState *)0)->field_B8) == 184) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_B9[(((int)&((Recovered_OrientationState *)0)->field_B9) == 185) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_BC[(((int)&((Recovered_OrientationState *)0)->field_BC) == 188) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_C0[(((int)&((Recovered_OrientationState *)0)->field_C0) == 192) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_C1[(((int)&((Recovered_OrientationState *)0)->field_C1) == 193) ? 1 : -1];
+typedef char assert_Recovered_OrientationState_C4[(((int)&((Recovered_OrientationState *)0)->field_C4) == 196) ? 1 : -1];
+#endif

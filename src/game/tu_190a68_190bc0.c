@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/layouts/Recovered_Vtable_003DD980.h"
-#include "game/layouts/Recovered_Vtable_003DDE88.h"
+#include "game/partial/Recovered_Vtable_003DD980.h"
+#include "game/partial/Recovered_Vtable_003DDE88.h"
 #include "ps2/recovered_types.h"
 extern void * func_0018E458(Recovered_Vtable_003DDE88 *, void *);
 extern s128 func_00190C18(void *);

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/layouts/Recovered_FrontendSaveDialog.h"
+#include "game/partial/Recovered_FrontendSaveDialog.h"
 #include "ps2/recovered_types.h"
 
 s32 func_0010B1C8(Recovered_FrontendSaveDialog *arg0) {
@@ -22,7 +22,7 @@ s32 func_0010B1C8(Recovered_FrontendSaveDialog *arg0) {
     return 2;
 }
 
-#include "game/layouts/Recovered_FrontendSaveDialog.h"
+#include "game/partial/Recovered_FrontendSaveDialog.h"
 #include "ps2/recovered_types.h"
 
 s32 func_0010B200(Recovered_FrontendSaveDialog *arg0) {
@@ -43,7 +43,7 @@ s32 func_0010B200(Recovered_FrontendSaveDialog *arg0) {
     return 8;
 }
 
-#include "game/layouts/Recovered_FrontendSaveDialog.h"
+#include "game/partial/Recovered_FrontendSaveDialog.h"
 #include "ps2/recovered_types.h"
 
 s32 func_0010B238(Recovered_FrontendSaveDialog *arg0) {

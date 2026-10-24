@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_LABEL_H
+#define RECOVERED_LABEL_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_Label {
+    u8 opaque_0[12];
+    u8 field_C; /* PS2 +0xC */
+} Recovered_Label;
+typedef char assert_Recovered_Label_C[(((int)&((Recovered_Label *)0)->field_C) == 12) ? 1 : -1];
+#endif

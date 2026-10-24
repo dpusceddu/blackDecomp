@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/layouts/Recovered_FrontendSaveDialog.h"
+#include "game/partial/Recovered_FrontendSaveDialog.h"
 #include "ps2/recovered_types.h"
 
 s32 func_0010B270(Recovered_FrontendSaveDialog *arg0) {

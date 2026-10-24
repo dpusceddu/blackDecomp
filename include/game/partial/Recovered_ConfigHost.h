@@ -1,0 +1,10 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_CONFIGHOST_H
+#define RECOVERED_CONFIGHOST_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_ConfigHost {
+    void * field_0; /* PS2 +0x0 */
+} Recovered_ConfigHost;
+typedef char assert_Recovered_ConfigHost_0[(((int)&((Recovered_ConfigHost *)0)->field_0) == 0) ? 1 : -1];
+#endif

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/layouts/Recovered_Notifiable.h"
-#include "game/layouts/Recovered_SlotUser.h"
+#include "game/partial/Recovered_Notifiable.h"
+#include "game/partial/Recovered_SlotUser.h"
 #include "ps2/recovered_types.h"
 extern void * func_0016EAD0(void *);
 extern void * func_0016FB18(s32, s32);

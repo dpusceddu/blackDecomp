@@ -186,8 +186,8 @@ it. `build/auto/context.json` keeps evidence, unresolved arities and conflicts. 
 independent on the EE. Caller counts and register-use constraints are lower bounds; the original order of mixed
 parameters is unknown without a signature. Xbox types remain leads and never establish PS2 field offsets.
 
-`include/<library>/layouts/` holds the shared PS2 access views, with field-offset assertions. They are hand-maintained source: add or
-correct a view by editing its header (and `include/game/layouts/layouts.h`, which lists them). Normal drafts include only the
+`include/<library>/partial/` holds the shared PS2 partial views, with field-offset assertions. They are hand-maintained source: add or
+correct a view by editing its header (and `include/game/partial/all.h`, which lists them). Normal drafts include only the
 views they use, and backend jobs package their quoted-header dependencies. Overlapping, unaligned or conflicting fields stay opaque.
 A view's extent is an accessed prefix, not an allocation-size assertion; its first line says UNVERIFIED until a matched source
 function actually accesses members through that view, and then names the function (`VERIFIED access view by 0x...`).
@@ -217,7 +217,7 @@ Type and instruction support, all of it mechanical and checked by exact matches:
   under the image's `func_XXXXXXXX` names (the readable alias of each in a comment). Both are hand-maintained and recovered guesses:
   each structure is marked `UNVERIFIED` until a matched function actually accesses its members, and a prototype is only a weak
   declaration that a proved ABI correction (`selected_prototype`) or a matched definition overrides. `ctx.c` combines them with the
-  recovered signatures and access views; every draft includes `ps2/recovered_types.h`. Files that call a prototyped function include
+  recovered signatures and partial views; every draft includes `ps2/recovered_types.h`. Files that call a prototyped function include
   `ps2/prototypes.h`, which includes the types. `tools/m2c_wrap.py` is m2c with one change: a dereference of an untyped expression
   becomes `M2C_FIELD(expr, T *, 0)` (valid C) instead of `*expr`.
 - **Stack objects.** m2c's frame objects (`sp`, `&spN`, `spN`) become one `u8 sp[N] __attribute__((aligned(16)))` buffer whose

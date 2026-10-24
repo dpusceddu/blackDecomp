@@ -58,7 +58,7 @@ lists the files with their address ranges and flags; `tools/layout.py` owns the 
 Headers follow the libraries: `include/<library>/` for `game`, `kynapse`, `animation`, `physics`, `rw_core`, `rw_audio`
 and `apt`, and `include/ps2/` for helpers shared by all of them (EE types, VU0 operations, the draft prelude). Generated
 headers sit beside the hand-written ones: `include/game/classes/` and `include/kynapse/classes/` (class interfaces from
-`tools/class_skeletons.py`) and `include/<library>/layouts/` (access views from `tools/context_recovery.py`).
+`tools/class_skeletons.py`) and `include/<library>/partial/` (partial views from `tools/context_recovery.py`).
 
 ## Current state (USA retail, `ninja progress`)
 

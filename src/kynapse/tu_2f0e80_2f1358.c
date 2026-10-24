@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "kynapse/layouts/Recovered_Object59D40.h"
+#include "kynapse/partial/Recovered_Object59D40.h"
 #include "ps2/recovered_types.h"
 extern M2C_UNK D_003EC9F0;
 extern void * D_003C9ED4;

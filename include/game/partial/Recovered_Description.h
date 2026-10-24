@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_DESCRIPTION_H
+#define RECOVERED_DESCRIPTION_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_Description {
+    u8 opaque_0[20];
+    s32 field_14; /* PS2 +0x14 */
+} Recovered_Description;
+typedef char assert_Recovered_Description_14[(((int)&((Recovered_Description *)0)->field_14) == 20) ? 1 : -1];
+#endif

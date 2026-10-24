@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "game/layouts/Recovered_FrontendLoadState.h"
+#include "game/partial/Recovered_FrontendLoadState.h"
 #include "ps2/recovered_types.h"
 
 s32 func_00106068(Recovered_FrontendLoadState *arg0) {

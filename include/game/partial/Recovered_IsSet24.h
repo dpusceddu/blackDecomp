@@ -1,0 +1,11 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_ISSET24_H
+#define RECOVERED_ISSET24_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_IsSet24 {
+    u8 opaque_0[36];
+    s32 field_24; /* PS2 +0x24 */
+} Recovered_IsSet24;
+typedef char assert_Recovered_IsSet24_24[(((int)&((Recovered_IsSet24 *)0)->field_24) == 36) ? 1 : -1];
+#endif

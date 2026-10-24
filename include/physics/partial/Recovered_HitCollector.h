@@ -1,0 +1,104 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_HITCOLLECTOR_H
+#define RECOVERED_HITCOLLECTOR_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_HitCollector {
+    s128 field_0; /* PS2 +0x0 */
+    void * field_10; /* PS2 +0x10 */
+    f32 field_14; /* PS2 +0x14 */
+    f32 field_18; /* PS2 +0x18 */
+    u8 field_1C; /* PS2 +0x1C */
+    u8 opaque_1D[3];
+    s128 field_20; /* PS2 +0x20 */
+    void * field_30; /* PS2 +0x30 */
+    f32 field_34; /* PS2 +0x34 */
+    f32 field_38; /* PS2 +0x38 */
+    u8 field_3C; /* PS2 +0x3C */
+    u8 opaque_3D[3];
+    s128 field_40; /* PS2 +0x40 */
+    void * field_50; /* PS2 +0x50 */
+    f32 field_54; /* PS2 +0x54 */
+    f32 field_58; /* PS2 +0x58 */
+    u8 field_5C; /* PS2 +0x5C */
+    u8 opaque_5D[3];
+    s128 field_60; /* PS2 +0x60 */
+    void * field_70; /* PS2 +0x70 */
+    f32 field_74; /* PS2 +0x74 */
+    f32 field_78; /* PS2 +0x78 */
+    u8 field_7C; /* PS2 +0x7C */
+    u8 opaque_7D[3];
+    s128 field_80; /* PS2 +0x80 */
+    void * field_90; /* PS2 +0x90 */
+    f32 field_94; /* PS2 +0x94 */
+    f32 field_98; /* PS2 +0x98 */
+    u8 field_9C; /* PS2 +0x9C */
+    u8 opaque_9D[3];
+    s128 field_A0; /* PS2 +0xA0 */
+    void * field_B0; /* PS2 +0xB0 */
+    f32 field_B4; /* PS2 +0xB4 */
+    f32 field_B8; /* PS2 +0xB8 */
+    u8 field_BC; /* PS2 +0xBC */
+    u8 opaque_BD[3];
+    s128 field_C0; /* PS2 +0xC0 */
+    void * field_D0; /* PS2 +0xD0 */
+    f32 field_D4; /* PS2 +0xD4 */
+    f32 field_D8; /* PS2 +0xD8 */
+    u8 field_DC; /* PS2 +0xDC */
+    u8 opaque_DD[3];
+    s128 field_E0; /* PS2 +0xE0 */
+    void * field_F0; /* PS2 +0xF0 */
+    f32 field_F4; /* PS2 +0xF4 */
+    f32 field_F8; /* PS2 +0xF8 */
+    u8 field_FC; /* PS2 +0xFC */
+    u8 opaque_FD[19];
+    void * field_110; /* PS2 +0x110 */
+    u8 opaque_114[4];
+    f32 field_118; /* PS2 +0x118 */
+    u8 opaque_11C[228];
+    s32 field_200; /* PS2 +0x200 */
+} Recovered_HitCollector;
+typedef char assert_Recovered_HitCollector_0[(((int)&((Recovered_HitCollector *)0)->field_0) == 0) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_10[(((int)&((Recovered_HitCollector *)0)->field_10) == 16) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_14[(((int)&((Recovered_HitCollector *)0)->field_14) == 20) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_18[(((int)&((Recovered_HitCollector *)0)->field_18) == 24) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_1C[(((int)&((Recovered_HitCollector *)0)->field_1C) == 28) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_20[(((int)&((Recovered_HitCollector *)0)->field_20) == 32) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_30[(((int)&((Recovered_HitCollector *)0)->field_30) == 48) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_34[(((int)&((Recovered_HitCollector *)0)->field_34) == 52) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_38[(((int)&((Recovered_HitCollector *)0)->field_38) == 56) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_3C[(((int)&((Recovered_HitCollector *)0)->field_3C) == 60) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_40[(((int)&((Recovered_HitCollector *)0)->field_40) == 64) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_50[(((int)&((Recovered_HitCollector *)0)->field_50) == 80) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_54[(((int)&((Recovered_HitCollector *)0)->field_54) == 84) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_58[(((int)&((Recovered_HitCollector *)0)->field_58) == 88) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_5C[(((int)&((Recovered_HitCollector *)0)->field_5C) == 92) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_60[(((int)&((Recovered_HitCollector *)0)->field_60) == 96) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_70[(((int)&((Recovered_HitCollector *)0)->field_70) == 112) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_74[(((int)&((Recovered_HitCollector *)0)->field_74) == 116) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_78[(((int)&((Recovered_HitCollector *)0)->field_78) == 120) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_7C[(((int)&((Recovered_HitCollector *)0)->field_7C) == 124) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_80[(((int)&((Recovered_HitCollector *)0)->field_80) == 128) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_90[(((int)&((Recovered_HitCollector *)0)->field_90) == 144) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_94[(((int)&((Recovered_HitCollector *)0)->field_94) == 148) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_98[(((int)&((Recovered_HitCollector *)0)->field_98) == 152) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_9C[(((int)&((Recovered_HitCollector *)0)->field_9C) == 156) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_A0[(((int)&((Recovered_HitCollector *)0)->field_A0) == 160) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_B0[(((int)&((Recovered_HitCollector *)0)->field_B0) == 176) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_B4[(((int)&((Recovered_HitCollector *)0)->field_B4) == 180) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_B8[(((int)&((Recovered_HitCollector *)0)->field_B8) == 184) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_BC[(((int)&((Recovered_HitCollector *)0)->field_BC) == 188) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_C0[(((int)&((Recovered_HitCollector *)0)->field_C0) == 192) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_D0[(((int)&((Recovered_HitCollector *)0)->field_D0) == 208) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_D4[(((int)&((Recovered_HitCollector *)0)->field_D4) == 212) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_D8[(((int)&((Recovered_HitCollector *)0)->field_D8) == 216) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_DC[(((int)&((Recovered_HitCollector *)0)->field_DC) == 220) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_E0[(((int)&((Recovered_HitCollector *)0)->field_E0) == 224) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_F0[(((int)&((Recovered_HitCollector *)0)->field_F0) == 240) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_F4[(((int)&((Recovered_HitCollector *)0)->field_F4) == 244) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_F8[(((int)&((Recovered_HitCollector *)0)->field_F8) == 248) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_FC[(((int)&((Recovered_HitCollector *)0)->field_FC) == 252) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_110[(((int)&((Recovered_HitCollector *)0)->field_110) == 272) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_118[(((int)&((Recovered_HitCollector *)0)->field_118) == 280) ? 1 : -1];
+typedef char assert_Recovered_HitCollector_200[(((int)&((Recovered_HitCollector *)0)->field_200) == 512) ? 1 : -1];
+#endif

@@ -74,7 +74,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DC2C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DC448);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DC498);
 
-#include "game/layouts/Recovered_Vtable_003E26B8.h"
+#include "game/partial/Recovered_Vtable_003E26B8.h"
 #include "ps2/recovered_types.h"
 extern s32 func_002810A0(Recovered_Vtable_003E26B8 *);
 

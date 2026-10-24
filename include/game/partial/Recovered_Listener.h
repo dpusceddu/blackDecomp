@@ -1,0 +1,15 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_LISTENER_H
+#define RECOVERED_LISTENER_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_Listener {
+    u8 opaque_0[48];
+    f32 field_30; /* PS2 +0x30 */
+    f32 field_34; /* PS2 +0x34 */
+    f32 field_38; /* PS2 +0x38 */
+} Recovered_Listener;
+typedef char assert_Recovered_Listener_30[(((int)&((Recovered_Listener *)0)->field_30) == 48) ? 1 : -1];
+typedef char assert_Recovered_Listener_34[(((int)&((Recovered_Listener *)0)->field_34) == 52) ? 1 : -1];
+typedef char assert_Recovered_Listener_38[(((int)&((Recovered_Listener *)0)->field_38) == 56) ? 1 : -1];
+#endif

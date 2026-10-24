@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-#include "kynapse/layouts/Recovered_Vtable_003EDC38.h"
+#include "kynapse/partial/Recovered_Vtable_003EDC38.h"
 #include "ps2/recovered_types.h"
 
 s32 func_002F3530(Recovered_Vtable_003EDC38 *arg0, s32 arg1) {

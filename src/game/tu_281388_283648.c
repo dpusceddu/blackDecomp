@@ -195,7 +195,7 @@ void func_00284A98(void *arg0, f32 fparg0) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00284AE8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00284B28);
 
-#include "game/layouts/Recovered_Vtable_003E26E8.h"
+#include "game/partial/Recovered_Vtable_003E26E8.h"
 #include "ps2/recovered_types.h"
 
 s32 func_00284BB0(Recovered_Vtable_003E26E8 *arg0, f32 fparg0) {

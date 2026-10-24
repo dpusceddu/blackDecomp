@@ -248,7 +248,7 @@ def recovered_context(refresh=False):
             if refresh:
                 raise SystemExit('Frozen context cannot be refreshed; refresh it once, before parallel runs.')
             cache = AUTO / 'context.json'
-            if not cache.exists() or not (ROOT / 'include/game/layouts/layouts.h').exists() or not (AUTO / 'ctx.c').exists():
+            if not cache.exists() or not (ROOT / 'include/game/partial/all.h').exists() or not (AUTO / 'ctx.c').exists():
                 raise SystemExit('Frozen recovery context is missing; create it first with `autodecomp.py context --refresh`.')
             RECOVERED = json.loads(cache.read_text())
         else:
@@ -1421,7 +1421,7 @@ def expand_macros(src):
     prelude = (ROOT / 'include/ps2/prelude.h').read_text()
     types = '\n'.join(l for l in prelude.split('\n') if l.startswith('typedef'))
     body = src.replace('#include "ps2/prelude.h"\n', '')
-    for view in re.findall(r'^#include "(\w+/layouts/Recovered_\w+\.h)"$', body, re.M):
+    for view in re.findall(r'^#include "(\w+/partial/Recovered_\w+\.h)"$', body, re.M):
         header = (ROOT / 'include' / view).read_text()
         layout = '\n'.join(line for line in header.splitlines() if not line.startswith('#') and not line.startswith('typedef char assert_'))
         body = body.replace('#include "%s"' % view, layout)

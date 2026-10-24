@@ -1,0 +1,15 @@
+/* Partial view of a PS2 type (hand-maintained; see README.md in this directory). UNVERIFIED access view; allocation size unknown. */
+#ifndef RECOVERED_BKEFFECTLIGHTSPS2_H
+#define RECOVERED_BKEFFECTLIGHTSPS2_H
+#include "ps2/prelude.h"
+
+typedef struct Recovered_BkEffectLightsPS2 {
+    u8 opaque_0[24580];
+    s32 field_6004; /* PS2 +0x6004 */
+    u32 field_6008; /* PS2 +0x6008 */
+    u16 field_600C; /* PS2 +0x600C */
+} Recovered_BkEffectLightsPS2;
+typedef char assert_Recovered_BkEffectLightsPS2_6004[(((int)&((Recovered_BkEffectLightsPS2 *)0)->field_6004) == 24580) ? 1 : -1];
+typedef char assert_Recovered_BkEffectLightsPS2_6008[(((int)&((Recovered_BkEffectLightsPS2 *)0)->field_6008) == 24584) ? 1 : -1];
+typedef char assert_Recovered_BkEffectLightsPS2_600C[(((int)&((Recovered_BkEffectLightsPS2 *)0)->field_600C) == 24588) ? 1 : -1];
+#endif
