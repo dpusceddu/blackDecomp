@@ -22,3 +22,6 @@ build.ninja
 # objdiff project file written by `ninja objdiff`
 objdiff.json
 /nonmatchings/
+
+# Assistant rules live in AGENTS.md; CLAUDE.md is a local symlink to it for tools that look for that name
+CLAUDE.md
