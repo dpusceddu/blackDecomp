@@ -12,7 +12,7 @@ Sizes are the function's code size in bytes. Compilation happens only with the b
 per batch of candidates); m2c and scoring run on the host because they only read and write text. Scoring compares the
 compiled .text with the original instruction words, masking relocated fields, and compares each relocation's target
 (symbol address plus addend) with the symbolic operand of the original assembly. The final authority is the identical
-link (tools/settle_units.py). Setup and pinned versions: README.md, "Automatic pipeline".
+link (tools/settle_units.py). Setup and pinned versions: docs/pipeline.md.
 """
 import argparse, base64, collections, difflib, hashlib, io, json, os, re, struct, subprocess, sys, tarfile, time
 from pathlib import Path

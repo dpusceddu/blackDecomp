@@ -1,6 +1,6 @@
 """Loader for config/units.yaml: the provisional translation units that replace assembly functions.
 
-Format (see README.md):
+Format (see docs/units.md):
   variant: SLUS_213.76               # the image whose addresses the units use
   units:
     - name: kynapse_children          # object name; also build/<GAME_ID>/units/<name>.o

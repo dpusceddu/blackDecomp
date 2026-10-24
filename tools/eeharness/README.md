@@ -1,15 +1,11 @@
 # EE differential-execution harness
 
-**Gate 1 passed the functional audit. Gate 2 is not passed.** This independently authored
-host C++ interpreter does not execute SDK tools. Game compilation still uses
-`tools/compile.py` and the build backend. Generated reports, ELF overlays and
-reference material belong in ignored directories.
+**Gate 1 (functional audit) passed; Gate 2 (enough recorded real-game states) is not passed.** This independently authored
+host C++ interpreter executes no compiler or SDK tool; game code is still compiled with `tools/compile.py` and the build
+backend. Generated reports, ELF overlays and reference material belong in ignored directories.
 
-Native harness compilation is also covered by the repository's compiler isolation
-rule. Run CMake configuration and compilation only through `tools/sandbox.py` with
-an authorized compiler. If that compiler is unavailable, reuse a validated
-existing binary or report the limitation. Host compilation is
-not an allowed fallback. The commands below require an already built harness.
+Build the harness with CMake and any C++17 compiler (`cmake -S tools/eeharness -B build/eeharness/host && cmake --build
+build/eeharness/host`); the commands below use the built binary.
 
 ```sh
 ctest --test-dir build/eeharness/host --output-on-failure
@@ -34,9 +30,8 @@ copy-on-write pages. Hardware and syscall defaults are zero, explicitly marked
 in the trace; configured register responses are separate from gameplay memory.
 Unknown addresses and unsupported instructions stop the run.
 
-The user authorized the Phase 3 function pilot alongside continued Phase 2
-collection. Stage its 50 candidates from existing private autodecomp results,
-claim the tracked candidates, then compile and replay through the build backend:
+The function pilot stages 50 candidates from existing private autodecomp results,
+claims the tracked candidates, then compiles and replays them through the build backend:
 
 ```sh
 .venv/bin/python tools/eeharness/pilot_plan.py

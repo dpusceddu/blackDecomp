@@ -1,12 +1,12 @@
 # SN 1.36 matching handbook
 
 Read this before each TU. The acceptance test is an identical full image, including owned data; an instruction score is
-only a diagnostic. Use the unit's compiler, flags and assembler. All SDK execution goes through `compile.py` or
-`sandbox.py`; a worker connection failure ends the campaign. Keep experiments and detailed results in ignored `build/`.
+only a diagnostic. Use the unit's compiler, flags and assembler. All compiler execution goes through `compile.py` or
+`sandbox.py` (the pinned toolchain). Keep experiments and detailed results in ignored `build/`.
 
 ## Whole-TU ladder
 
-1. Check `build/permuter/` for a better candidate. Claim the TU's units in `config/units.yaml` before editing. Inventory
+1. Check `build/permuter/` for a better candidate. Note the TU's units in `config/units.yaml` before editing. Inventory
    every real function and its rodata/data/sdata/bss/exception tables from `config/tus.yaml`; uncertain boundaries stay
    qualified. A code-complete TU is not data-complete until ownership is audited.
 2. Recover behavior, callee arity/return widths, field offsets, hidden results and cleanup edges first. Xbox source gives
@@ -23,13 +23,13 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All SDK executi
    and scoring the caller's emitted body. Freeze the helper ABI and review float grouping before accepting a result.
 6. Before leaving a hard function, exhaust the applicable ladder and leave one precise `// Unmatched:` obstruction in
    source; keep variants/diffs in `build/`. Revisit service improvements before moving to another TU.
-7. Integrate with the coordinator, settle, then run `ninja` and `ninja progress`. Never demote previously exact work to
-   claim a gain. Keep one owner for shared headers and `units.yaml`. Do not push.
+7. Settle, then run `ninja` and `ninja progress`. Never demote previously exact work to
+   claim a gain. Keep one owner for shared headers and `units.yaml`.
 
 ## Verified recipes
 
 These are scoped controls, not promises that a rewrite will improve another function. Reproduce the retail checks with
-`.venv/bin/python tools/studies/handbook_controls.py`; results and objects go to `build/final-campaign/`. Each retail baseline
+`.venv/bin/python tools/studies/handbook_controls.py`; results and objects go to `build/handbook-controls/`. Each retail baseline
 was recompiled with SN GCC 2.95.3 build 1.36 and scored **zero** against retail with relocation bindings, except the
 explicitly identified native-CFI diagnostic whose metadata is exact while its body remains a draft. Synthetic
 compiler controls are identified explicitly and make no retail-match claim. Flags are the

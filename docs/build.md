@@ -4,24 +4,51 @@ How the identical rebuild works. Everything generated stays under the ignored `a
 
 ## Stages
 
-Needs the target executable in `orig/<variant>/files/` (see `tools/discs.py`), the build backend, and `ninja`.
+Needs the target executable in `orig/<GAME_ID>/<GAME_ID>` (see [orig/README.md](../orig/README.md)), the toolchain
+(`python3 tools/toolchain.py install`; see "Toolchain" below) and `ninja`.
 
 ```sh
-python3 configure.py --variant SLUS_213.76     # writes build.ninja (variants: SLUS_213.76, SLES_540.30, SLES_538.86, SLKA_253.72, SLPM_663.54)
+python3 configure.py --version SLUS_213.76     # writes build.ninja (SLUS_213.76 is the default; also SLES_538.86, SLES_540.30, SLKA_253.72, SLPM_663.54)
 ninja                                          # ends with `OK  SLUS_213.76 ...` or a mismatch report
 ninja progress                                 # share of .text provided by source (see below)
+ninja objdiff && ninja report                  # objdiff project and progress report (docs/progress-reports.md)
 ```
+
+## Toolchain
+
+`python3 tools/toolchain.py install` downloads, verifies by SHA-256 and unpacks into the ignored `build/toolchain/`
+(or `$BLACK_TOOLCHAIN_DIR`):
+
+- the decomp.me compiler archives the build uses (`config/toolchain-compilers.json`): `ee-gcc2.95.3-136` (SN 1.36, a Windows
+  program) for most of the game, `ee-gcc2.9-991111-01` (32-bit Linux) for the Sony libraries, `ee-gcc2.96` (its GNU
+  assembler assembles all split assembly; one scoped unit uses its compiler) and `ee-gcc2.95.2-273a` (an alternative
+  assembler for three units);
+- the patched short-loop assembler `ps2eeas-1.9.25.758-min6`, reproduced from the downloaded original `Ps2EeAs.exe` with
+  `tools/patch_ps2eeas.py` and checked against the pinned hashes in `config/toolchain-assemblers.json`;
+- [wibo](https://github.com/decompals/wibo) 1.2.0 (`config/toolchain-local.json`), which runs the Windows programs on Linux.
+
+The linker and `objcopy` come from `binutils-mipsel-linux-gnu` (Debian package, 2.40 tested) or from the decompals prebuilt
+release (`install --binutils prebuilt`); the build looks for `mipsel-linux-gnu-ld`, then `mips-ps2-decompals-ld`.
+`python3 tools/toolchain.py check` reports what is missing. The Sony tools are 32-bit Linux programs, hence `libc6-i386`
+on Debian. The `Dockerfile` builds an image with all of this.
+
+Two quirks the tools handle: SN's `Ps2EeAs.exe` crashes when it has to print a warning and its own path is longer than about
+80 characters (Windows form), so the Windows tools run from a short copy under `/tmp` (`tools/assembler.py`, `short_path`);
+and compiler warnings are printed only for failed jobs (set `BLACK_VERBOSE=1` for all).
+
+The jobs run through `tools/sandbox.py` on the local backend. An optional backend plugin (`tools/backend.py`, selected in the
+ignored `.local/config.json`) runs the same jobs in a disposable offline container elsewhere.
 
 Stages (one `ninja` rule each; everything generated is under the ignored `asm/`, `data/`, `build/`):
 
 1. extract: `tools/splat_config.py` writes `config/<GAME_ID>/splat.yaml` (splat segments from the ELF section table) and the
    headerless image splat reads; `tools/elf_layout.py` writes `config/<GAME_ID>/layout.json` (ELF header, program
    header and one record per section) and extracts the opaque non-loaded payloads (DVP overlays) to `data/`.
-2. split: `splat split` (spimdisasm, rabbitizer) writes `asm/<variant>/text.s` (all functions, one file) and one data
+2. split: `splat split` (spimdisasm, rabbitizer) writes `asm/<GAME_ID>/text.s` (all functions, one file) and one data
    file per section; `.vutext` and `.vudata` stay binary blobs.
 3. `tools/link_support.py` defines the symbols splat cannot (labels inside code, offsets into data objects, section
    ends and plain constants).
-4. `tools/split_objects.py` cuts `.text` into **one assembly file per function** (`build/<variant>/s/text/func_XXXXXXXX.s`,
+4. `tools/split_objects.py` cuts `.text` into **one assembly file per function** (`build/<GAME_ID>/s/text/func_XXXXXXXX.s`,
    with the function's own `.extern` block) and migrates the constants that only one function uses into that
    function's file (see "Constants" below). `.rodata`, `.lit4` and `.gcc_except_table` keep their remaining shared objects
    as runs; the other data sections stay one object each. It also writes `placement.json` (every object and the original
@@ -30,15 +57,15 @@ Stages (one `ninja` rule each; everything generated is under the ignored `asm/`,
    `<section>.<its original address>`, and the script places them with `*(SORT_BY_NAME(<section>.*))`, which restores the
    original order (one ld statement per object would take hours for 12,000 objects). Source units from
    `config/units.yaml` replace functions here (see "Replacing a function with source").
-6. `tools/build_objects.py` runs, in one call to the build backend, the EE assembler 2.10 on the objects that changed
+6. `tools/build_objects.py` runs, in one backend job, the EE assembler 2.10 on the objects that changed
    and the SN compiler on changed source units, then mainline GNU `ld` on everything. Objects are cached by the hash of
-   their inputs in `build/<variant>/cache/`, so an incremental build re-assembles or recompiles only what changed.
+   their inputs in `build/<GAME_ID>/cache/`, so an incremental build re-assembles or recompiles only what changed.
 7. `tools/pack_elf.py` re-packs ld's loaded sections into the retail container (see below);
    `tools/check_elf.py` compares the result with `config/checksums.sha256`.
 
-Times (USA retail, a 2-core build backend): a build from nothing (extract, splat, split, assemble 12,000 objects,
-link, pack) takes about 42 s; with the objects cached and one source unit changed about 13 s, of which the link and the
-transfer of the cached objects to the build backend are most (about 11 s); with nothing changed `ninja` does nothing.
+Times (USA retail, two cores): a build from nothing (extract, splat, split, assemble 12,000 objects, link, pack) takes
+about 1.5 to 2 minutes with the local toolchain; with the objects cached and one source unit changed about 15 s; with
+nothing changed `ninja` does nothing.
 
 ld cannot write the retail container: section-header order, the non-loaded `.reginfo`, `.DVP.*` and `.debug_str`
 sections, and `e_flags` 0x20924001. `pack_elf.py` therefore takes the linked section contents and addresses from ld and
@@ -59,13 +86,13 @@ a directive would need an earlier start than the original address allows. Result
 from data (string tables, vtable-like arrays), 9,763 referenced by several functions, 2,148 unreferenced, 2,520 whose
 function had a second, non-adjacent run. `.gcc_except_table` migrates only 456 of 3,972 bytes: the other tables
 belong to a whole object file (their handler labels span several functions), which is translation-unit evidence for
-Phase 3 rather than something one function can carry.
+the translation-unit map rather than something one function can carry.
 
 ## Function boundaries
 
-Splat finds the function starts; `tools/boundaries.py` adds the ones it cannot see (`config/boundaries.<variant>.txt`, splat's
-`symbol_addrs` format, regenerated by `python3 tools/boundaries.py VARIANT` and read by the `split` stage). Evidence from the
-instructions of the image (all five retail images behave alike):
+Splat finds the function starts; `tools/boundaries.py` adds the ones it cannot see (`config/<GAME_ID>/boundaries.txt`, splat's
+`symbol_addrs` format, regenerated by `python3 tools/boundaries.py GAME_ID` and read by the `split` stage). Evidence from the
+instructions of the image (all five retail versions behave alike):
 
 - **Orphan pieces.** 8-byte pieces `<one non-branch instruction>; nop` (mostly `addiu $sp, $sp, N; nop`) sit between functions,
   1,169 of them in USA retail. Nothing calls or jumps to them or builds their address, their `N` does not follow the
@@ -85,16 +112,16 @@ instructions of the image (all five retail images behave alike):
 
 ## Symbols and progress
 
-`python3 tools/ghidra_export.py` writes `config/symbols.txt` from raw Ghidra pages in `.local/ghidra/` (the three Ghidra MCP
-calls it lists) and reconciles Ghidra's function list with splat's (`build/<variant>/ghidra_reconcile.json`). Names are
+`python3 tools/ghidra_export.py` writes `config/symbols.txt` from raw Ghidra pages in `.local/ghidra/` (the three Ghidra exports
+it lists; optional, the committed file is enough to build) and reconciles Ghidra's function list with splat's (`build/<GAME_ID>/ghidra_reconcile.json`). Names are
 readable aliases, not original symbols; unknown functions stay `func_XXXXXXXX`.
 `ninja progress` (or `python3 tools/progress.py [--tus N]`) prints the share of `.text` bytes and functions provided by source,
 overall and by region, then by translation unit (complete, partial and untouched TUs by confidence and by library), and writes
-`build/<variant>/progress.json`. `python3 tools/next.py tus` lists candidate TUs for a Phase 5 agent.
+`build/<GAME_ID>/progress.json`. `python3 tools/next.py tus` lists candidate TUs.
 
 Other tools: `tools/tus.py` (TU boundaries and map), `tools/regroup.py` (one source file per TU), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/studies/shift_test.py` (shiftability test),
-`tests/link/check.py` (SN object + GNU object linked by the build backend's ld).
-In a sandbox script, `mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}` are on PATH.
+`tests/link/check.py` (SN object + GNU object linked by the toolchain's `ld`). In a sandbox script, the binutils tools
+(`mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}` or the decompals equivalents, see `$BLACK_BINUTILS_PREFIX`) are on PATH.
 
 ## Shiftability
 

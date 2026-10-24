@@ -12,7 +12,7 @@ variant: SLUS_213.76
 units:
 - name: kynapse_leaf_2d15a0
   source: src/kynapse/leaf_functions_2d15a0.cpp
-  origin: kynapse                    # kynapse | game | vector, for the progress report
+  origin: kynapse                    # label for the progress report
   flags: [-O2, -G0, -snas, -fbyte-bool]
   externs: {gIdA: 0x44ecd0}          # name the code refers to but does not define -> original address
   functions:
@@ -33,8 +33,9 @@ ninja && ninja progress
 that the original did not migrate, unbound externs), `link` demotes units the linker names, `compare` demotes the units
 that own any differing word of the linked image. Reasons recorded in `config/units.yaml`: `extra` (the unit emits other
 functions too), `name`, `size`, `section`, `shared`, `layout`, `extern`, `labels`, `link`, `bytes`, `compile`. Provenance
-of the first sources: `tools/studies/import_kynapse.py` and `tools/studies/import_game.py` port the PS2-exact bodies of the companion project
-(headers in `include/kynapse/`, `include/game/`, sources in `src/kynapse/`, `src/game/`; now under `tools/studies/`, they need the companion project and were run once). Diagnostic helpers:
+of the first sources: `tools/studies/import_kynapse.py` and `tools/studies/import_game.py` ported PS2-exact bodies from an
+unpublished companion project (headers in `include/kynapse/`, `include/game/`, sources in `src/kynapse/`, `src/game/`);
+they need that project's checkout (`--source DIR`) and were run once. Diagnostic helpers:
 `tools/objdump.py` (sections, symbols, relocations of an object), `BLACK_UNITS_ALL=1` (pretend every unit function is
 source, to compile demoted units).
 

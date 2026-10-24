@@ -42,7 +42,7 @@ What the executable shows (USA retail):
   barely differ at known boundaries and inside objects (breaks 6.5 % vs 3.0 %, shift changes 7.0 % vs 8.8 %): supporting evidence only.
 - **Compilers.** Callee-saved registers are saved with `sq` in the SN 1.36 output (5,415 functions); 334 functions save them with `sd` in
   16-byte slots, in three solid blocks (`0x28fab0-0x2a5038`, `0x355278-0x35c308`, `0x367e28-0x372d68`: Sony's precompiled libraries).
-  The catalog compiler `ee-gcc2.9-991111-01 -O2 -G0` (no `-snas`) emits exactly that style: 36 of the functions of these blocks match
+  The compiler `ee-gcc2.9-991111-01 -O2 -G0` (no `-snas`) emits exactly that style: 36 of the functions of these blocks match
   with it and none matches with SN 1.36. `ee-gcc2.95.3-114`, `ee-gcc2.95.2-273a` and the 2.96 build match nothing more than SN 1.36 does.
   A later scoped scalar-leaf control at `0x3484d0` matches Sony 2.9 and 2.96 defaults because of their divide workaround;
   the larger methods in that TU still require SN 1.36, so this does not establish a new compiler zone.
@@ -69,7 +69,7 @@ several objects.
 
 **Per-TU flags.** `AUTODECOMP_TU=1` (or `autodecomp.py run --tu all|COMPILER`) tries each function with its TU's compiler and flags first
 (`--cc=NAME` in a flag set selects another compiler; `register` turns it into the unit's `compiler`). `build_job.py` runs the native
-Sony compilers of the catalog. `autodecomp.py run --cc NAME` and `permute --cc NAME` are for experiments.
+Sony compilers from the toolchain. `autodecomp.py run --cc NAME` and `permute --cc NAME` are for experiments.
 
 
 ## Assemblers and short-loop padding
@@ -77,15 +77,15 @@ Sony compilers of the catalog. `autodecomp.py run --cc NAME` and `permute --cc N
 **Short-loop padding.** Retail has both six- and seven-word patterns, including identical loop
 bodies with different padding; a compiler's identity alone does not determine its assembler policy.
 Ghidra analysis located SN 1.9.25.758's unconditional short-loop routine: it extends negative branch
-word displacements −1…−5 to −6 (seven words including the delay slot). The separately installed
+word displacements −1…−5 to −6 (seven words including the delay slot). The separately written
 `sn-min6` derivative changes two immediate bytes, extending −1…−4 to −5 instead. It reproduces the
 six-word family while retaining division, FPU and other hazard handling. No compiler assembly or game
 instruction bytes are edited. Existing recipes stay in place: uniform substitution regresses matches.
 
-The derivative is installed once in the toolchain catalog.
+`python3 tools/toolchain.py install` writes the derivative next to the downloaded original.
 `config/toolchain-assemblers.json` records original/output hashes, exact patch sites and upstream
-references; the installer retains the original, verifies full hashes/preimages and is idempotent.
-Worker compilation checks the derivative hash again before execution. Add `--assembler=sn-min6` to a
+references; `tools/patch_ps2eeas.py` retains the original, verifies full hashes/preimages and is idempotent.
+Compilation checks the derivative hash again before execution. Add `--assembler=sn-min6` to a
 unit's flags or pass it to `tools/compile.py`; the selected compiler emits untouched `-S` output.
 Candidate and production caches include the recipe. The automatic pipeline tries this verified
 fallback before the older `sn-2.73a` assembler; `gas-2.40`, `gas-2.40-fix` and `sony-2.9` remain

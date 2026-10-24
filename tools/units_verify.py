@@ -45,7 +45,7 @@ def save(units):
             d['externs'] = {k: hex(v) for k, v in sorted(d['externs'].items())}
         out.append(d)
     (ROOT / 'config/units.yaml').write_text(
-        '# Provisional translation units that replace assembly functions with source; see README.md.\n'
+        '# Provisional translation units that replace assembly functions with source; see docs/units.md.\n'
         '# status: source = provided by the unit; asm = stays assembly, with a one-word reason.\n' +
         yaml.safe_dump({'variant': SLUG, 'units': out}, sort_keys=False, width=140))
 

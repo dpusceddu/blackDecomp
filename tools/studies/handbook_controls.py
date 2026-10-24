@@ -754,7 +754,7 @@ def verify_consumed_next_cursor_native_cfi(directory, builder=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--output', type=Path, default=ROOT / 'build/final-campaign/handbook-controls.json')
+    parser.add_argument('--output', type=Path, default=ROOT / 'build/handbook-controls/handbook-controls.json')
     parser.add_argument('--only', choices=sorted([*CONTROLS, 'asm-source-identity', 'consumed-next-cursor-native-cfi', 'builder-cursor-lifetimes']), action='append')
     args = parser.parse_args()
     verify(args.output, args.only)

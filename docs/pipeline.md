@@ -4,7 +4,7 @@ The m2c-based draft pipeline (`tools/autodecomp.py`), its context recovery and t
 
 ## Pipeline
 
-Shared PS2 inline helpers and target types live in [include/ps2/](include/ps2/README.md), owned by
+Shared PS2 inline helpers and target types live in [include/ps2/](../include/ps2/README.md), owned by
 the shared context maintainer. `config/shared_context.json` records the field/operation scope of
 each exact consumer; `python3 tools/shared_context.py verify` checks actual header use, instruction
 matches and the full image. Reuse these headers and preserve their helper order, widths and VU
@@ -34,8 +34,8 @@ Drafts C for assembly functions with no per-function judgment and keeps what reb
 .venv/bin/python tools/autodecomp.py setup           # decomp-permuter at its pinned commit, into .venv/ (git clone)
 ```
 
-m2c and the scoring run on the host (they only read and write text); every compile runs in the build backend, hundreds
-of candidates per call (about 0.8 s latency per call, about 90 compiles per second). m2c's little-endian MIPS GCC target
+m2c and the scoring run on the host (they only read and write text); every compile runs through the build backend, hundreds
+of candidates per call (about 0.8 s latency per call on a backend plugin, about 90 compiles per second). m2c's little-endian MIPS GCC target
 is `-t mipsee-gcc-c` (with `--valid-syntax`, which turns unknown field accesses into `M2C_FIELD` macros, see
 `include/ps2/prelude.h`).
 
@@ -52,8 +52,8 @@ python3 tools/autodecomp.py report [--max-size N]         # outcome classes, fai
 python3 tools/next.py [near|types|families|data|ee]       # best next work
 ```
 
-For sustained search, use the durable worker service rather than the short legacy
-`permute` command:
+For sustained search, use the durable search service (needs the backend plugin, which keeps a container alive between
+calls) rather than the short legacy `permute` command:
 
 ```sh
 .venv/bin/python tools/permuter_service.py start --hours-per-function 2 --total-hours 10
@@ -68,7 +68,7 @@ This preserves compiler recognition of names such as `sqrtf`; the same addresses
 used when scoring the seed, restored checkpoints and randomized candidates. Unknown
 or wrong bindings remain mismatches.
 
-The detached container has no network and a read-only toolchain catalog;
+The detached container has no network and a read-only toolchain;
 only its named `/work` volume persists. Restart with the same `--name` to resume
 checkpoints; budgets are cumulative, so increase them to extend an exhausted run.
 `fetch` exports every checkpoint and best source to `build/permuter/<name>/`.
@@ -91,7 +91,7 @@ even after their functions leave the queue; already-exact controls do not count.
 Report reviewed, full-image wins separately: a raw candidate can fail source review.
 
 Use `start --lanes 2` or `--lanes 3` for disjoint searches in the same isolated container;
-the existing two-CPU/two-GiB cap stays unchanged. One worker supervisor assigns
+the existing two-CPU/two-GiB cap stays unchanged. One supervisor assigns
 the globally largest available functions, keeps each key exclusive, and gives
 each lane a separate compiler directory. A larger submission can displace the
 smallest active function after its checkpoint. Default concurrency is one.
@@ -147,7 +147,7 @@ the flag set is varied (`-O1`, `-O3`, `-fbyte-bool`, `-G8`, `-fno-peephole`, `-f
 compiled `.text` is compared with the original words, relocated fields masked, and each relocation target (symbol address
 plus addend; constants by their bytes) must equal the symbolic operand of the original assembly; (5) up to 8 differing
 instructions: decomp-permuter's randomizer, a hill climb on the compile score, 50 candidates per function and round
-compiled together in one worker call; (6) identical bodies (`family`): an exact source is cloned onto the members of its
+compiled together in one backend job; (6) identical bodies (`family`): an exact source is cloned onto the members of its
 family by renaming symbols; (7) functions m2c cannot read but that are a few special instructions (`li $v1, N; syscall`,
 `ei`, `di`, `sync`) come from one inline-asm template.
 
@@ -162,18 +162,18 @@ it. `build/auto/context.json` keeps evidence, unresolved arities and conflicts. 
 independent on the EE. Caller counts and register-use constraints are lower bounds; the original order of mixed
 parameters is unknown without a signature. Xbox types remain leads and never establish PS2 field offsets.
 
-`include/recovered/` holds shared PS2 access views with field-offset assertions, plus a compile signature context.
-Normal drafts include only the views they use, and worker jobs package their quoted-header dependencies. Overlapping,
+`include/<library>/layouts/` holds shared PS2 access views with field-offset assertions, plus a compile signature context.
+Normal drafts include only the views they use, and backend jobs package their quoted-header dependencies. Overlapping,
 unaligned or conflicting fields stay opaque. A view's extent is an accessed prefix, not an allocation-size assertion;
 its UNVERIFIED mark changes only after a matched source function actually accesses members through that view.
 `include/game/layouts/signatures.h` is a complete compile context for experiments; normal drafts declare referenced
 callees individually so speculative signatures do not conflict with unrelated definitions. Re-run recovery after
-settling to refresh verification marks. During parallel campaigns, `AUTODECOMP_FREEZE_CONTEXT=1` consumes the
-centrally exported context without rewriting shared headers; a missing context is an error.
+settling to refresh verification marks. When several runs share a checkout, `AUTODECOMP_FREEZE_CONTEXT=1` consumes the
+already exported context without rewriting shared headers; a missing context is an error.
 
 After `python3 tools/autodecomp.py context --refresh`, run `python3 tools/class_skeletons.py` to recover
 the legacy GCC RTTI graph and vtables and write
-`include/classes/` and an address/slot index in ignored build output. The generator is the sole owner
+`include/game/classes/`, `include/kynapse/classes/` and an address/slot index in ignored build output. The generator is the sole owner
 of these headers: put verified corrections in its evidence configuration and regenerate. RTTI names,
 base links and virtual slots carry separate evidence from inferred signatures and field accesses.
 Opaque prefixes and accessor offsets do not establish a complete object size. Xbox layouts remain

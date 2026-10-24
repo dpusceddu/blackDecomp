@@ -56,7 +56,7 @@ json.dump(dict(text_bytes={name: len(data) for name, data in results.items()},
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path,
-                        default=ROOT / 'build/final-campaign/context-link-control')
+                        default=ROOT / 'build/handbook-controls/context-link-control')
     args = parser.parse_args()
     output = args.output.resolve()
     if not output.is_relative_to(ROOT / 'build'):

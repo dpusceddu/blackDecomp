@@ -84,7 +84,7 @@ def verify(source, output):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--source', type=Path, help='optional unchanged scalar leaf source; default is the embedded PS2 access view')
-    parser.add_argument('--output', type=Path, default=ROOT / 'build/final-campaign/divide-compiler-control',
+    parser.add_argument('--output', type=Path, default=ROOT / 'build/handbook-controls/divide-compiler-control',
                         help='ignored directory for compiler objects and measured ledger')
     args = parser.parse_args()
     verify(args.source.resolve() if args.source else None, args.output.resolve())

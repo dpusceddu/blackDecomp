@@ -1,4 +1,4 @@
-# Provisional translation units that replace assembly functions with source; see README.md.
+# Provisional translation units that replace assembly functions with source; see docs/units.md.
 # status: source = provided by the unit; asm = stays assembly, with a one-word reason.
 variant: SLUS_213.76
 units:
