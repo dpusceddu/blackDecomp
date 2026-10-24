@@ -38,8 +38,12 @@ def parse_target(text):
 
 
 def locate(addr):
-    """(split, path, line) of the INCLUDE_ASM marker of the function, or None when no source file lists it as assembly."""
+    """(split, path, line) of the INCLUDE_ASM marker of the function, or None when no source file lists it as assembly.
+
+    Two files may cover the same range (a broad file and a narrower one carved out of it for other flags or language,
+    docs/units.md); the function belongs to the narrowest file that lists it."""
     name = 'func_%08X' % addr
+    found = []
     for split in S.load_splits(SLUG):
         if not split.start <= addr < split.end:
             continue
@@ -48,8 +52,12 @@ def locate(addr):
             continue
         for marker in include_asm.markers(path.read_text(), split.defines()):
             if marker.name == name:
-                return split, path, marker.line
-    return None
+                found.append((split.end - split.start, split, path, marker.line))
+                break
+    if not found:
+        return None
+    _, split, path, line = min(found, key=lambda f: f[0])
+    return split, path, line
 
 
 def draft(addr, ctx):
