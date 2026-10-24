@@ -2,16 +2,16 @@
 """Run one of the pinned EE compilers on a standalone source file.
 
 Usage: compile.py COMPILER [flags] -c source.c|.cpp|.s -o output.o
-The local backend (default) uses the toolchain installed by tools/toolchain.py. Only standalone sources are
-supported. Outputs must go under build/ or .local/.
+The backend (tools/backend.py) is the local toolchain installed by tools/toolchain.py unless an optional plugin is
+configured. Only standalone sources are supported. Outputs must go under build/ or .local/.
 Objects get one header fix (tools/elfobj.py: symbol order and sh_info) so that mainline GNU ld accepts SN-assembled output.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import base64, json, os, shlex, subprocess, sys, tempfile, uuid
-from pathlib import Path, PurePosixPath
+import base64, sys
+from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import backend
@@ -79,7 +79,7 @@ def main():
             mapped.append(arg)
         i += 1
     request = {'compiler': compiler, 'args': mapped, 'files': files}
-    reply = run_local(request)
+    reply = backend.compile_standalone(request)
     sys.stdout.write(reply['stdout'])
     sys.stderr.write(reply['stderr'])
     for name, dest in outputs.items():
@@ -88,44 +88,6 @@ def main():
             data = base64.b64decode(reply['artifacts'][name], validate=True)
             dest.write_bytes(normalize_object(data) if dest.suffix == '.o' else data)  # header fix for GNU ld
     return reply['returncode']
-
-
-def run_local(request):
-    """Run the compiler from the local toolchain in a scratch directory; same reply shape as the build backend."""
-    import toolchain
-    from assembler import short_path
-    toolchain.require()
-    base = toolchain.root()
-    compiler = request['compiler']
-    root = base / 'compilers' / compiler
-    if not root.is_dir():
-        raise SystemExit('compiler %s is not installed; it is not part of the local toolchain' % compiler)
-    with tempfile.TemporaryDirectory(prefix='black-compile-') as directory:
-        work = Path(directory)
-        for name, data in request['files'].items():
-            path = PurePosixPath(name)
-            if path.is_absolute() or '..' in path.parts:
-                raise ValueError('Unsafe input path')
-            (work / name).write_bytes(base64.b64decode(data, validate=True))
-        env = dict(os.environ, TMPDIR=str(work), WINEDEBUG='-all')
-        env['PATH'] = str(base / 'bin') + os.pathsep + env.get('PATH', '')
-        flags = request['args']
-        if compiler.startswith('mwcps2-'):
-            command = ['wibo', str(root / 'mwccps2.exe'), *flags]
-        elif (root / 'bin/ee-gcc.exe').is_file():
-            backend_dir = next(d for d in sorted((root / 'lib/gcc-lib/ee').iterdir()) if d.is_dir() and d.name[0] != '.')
-            backend_dir = Path(short_path(backend_dir))     # Ps2EeAs.exe crashes when its own path is long
-            env['WIBO_PATH'] = str(backend_dir)
-            command = ['wibo', str(root / 'bin/ee-gcc.exe'), '-B' + str(backend_dir) + '/', *flags]
-        else:
-            command = [str(root / 'bin/ee-gcc'), '-B' + str(root / 'bin/ee-'), *flags]
-        done = subprocess.run(command, cwd=work, env=env, capture_output=True, timeout=120)
-        artifacts = {}
-        for path in work.rglob('*'):
-            if path.is_file() and not path.is_symlink() and path.suffix in {'.o', '.s', '.i'}:
-                artifacts[path.relative_to(work).as_posix()] = base64.b64encode(path.read_bytes()).decode()
-    return {'returncode': done.returncode, 'stdout': done.stdout.decode(errors='replace'),
-            'stderr': done.stderr.decode(errors='replace'), 'artifacts': artifacts}
 
 
 if __name__ == '__main__':

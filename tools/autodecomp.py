@@ -892,7 +892,7 @@ def worker_compile(jobs, tag='auto'):
                  elapsed_seconds=time.time() - t0, has_results=(d / 'results.json').exists())
     if not (d / 'results.json').exists():
         sys.stderr.write(r.stdout[-2000:] + r.stderr[-2000:])
-        raise SystemExit('Build backend failed; check the build backend configuration.')
+        raise SystemExit('Build backend failed; run tools/toolchain.py check (or see the backend plugin named in .local/config.json).')
     results = json.loads((d / 'results.json').read_text())
     objs = {}
     if (d / 'newobjs.tgz').exists():

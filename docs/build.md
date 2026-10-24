@@ -39,8 +39,26 @@ Two quirks the tools handle: SN's `Ps2EeAs.exe` crashes when it has to print a w
 80 characters (Windows form), so the Windows tools run from a short copy under `/tmp` (`tools/assembler.py`, `short_path`);
 and compiler warnings are printed only for failed jobs (set `BLACK_VERBOSE=1` for all).
 
-The jobs run through `tools/sandbox.py` on the local backend. An optional backend plugin (`tools/backend.py`, selected in the
-ignored `.local/config.json`) runs the same jobs in a disposable offline container elsewhere.
+Every tool that needs a compiler, assembler or linker sends its work through `tools/backend.py` (batches of jobs via
+`tools/sandbox.py`), so there is one place that decides where the toolchain runs; the default is the local one above.
+
+### Running the toolchain elsewhere (optional)
+
+The toolchain only runs on Linux x86-64. A contributor who prefers to run it elsewhere can name a Python file in
+the ignored `.local/config.json`:
+
+```json
+{"backend_plugin": "path/to/plugin.py"}
+```
+
+(relative to the repository root, or absolute). The file must define `run_script(request, config)`: it receives one batch of
+jobs (`files`, a `script` to run, the `out` names to return and a `timeout`) and returns `{rc, out, err, artifacts}`, the
+same contract as the local backend; `backend.WRAPPER` is the program that runs such a batch and can be reused. It may also
+define `compile_standalone(request, config)` (single compiles for `tools/compile.py`) and `service(...)` (long-running
+detached jobs for `tools/permuter_service.py`). The full interface is in the docstring of `tools/backend.py`. One call
+carries a whole batch (a full build is a few calls), so a plugin may be slow per call. `BLACK_BACKEND=local` ignores the
+plugin for one command. A plugin reports its own failures by raising `SystemExit('Build backend failed; ...')`; the tools
+stop on that message instead of treating it as a compile error.
 
 Stages (one `ninja` rule each; everything generated is under the ignored `asm/`, `data/`, `build/`):
 
@@ -150,7 +168,7 @@ instructions of the image (all five retail versions behave alike):
 
 ## Symbols and progress
 
-`python3 tools/ghidra_export.py` writes `config/symbols.txt` from raw Ghidra pages in `.local/ghidra/` (the three Ghidra exports
+`python3 tools/ghidra_export.py` (maintainer only) writes `config/symbols.txt` from raw Ghidra pages in `.local/ghidra/` (the three Ghidra exports
 it lists; optional, the committed file is enough to build) and reconciles Ghidra's function list with splat's (`build/<GAME_ID>/ghidra_reconcile.json`). Names are
 readable aliases, not original symbols; unknown functions stay `func_XXXXXXXX`.
 `ninja progress` (or `python3 tools/progress.py [--tus N]`) prints the share of `.text` bytes and functions provided by source,

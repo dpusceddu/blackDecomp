@@ -5,7 +5,9 @@ Short, neutral rules for coding assistants and the people directing them. They a
 
 - Start with [README.md](README.md) (setup, build), [docs/status.md](docs/status.md) (state, method, open problems) and the
   [matching handbook](docs/matching-handbook.md) before working on a TU.
-- Use the build tools in `tools/`; they run the pinned compilers through `tools/toolchain.py` (local) or an optional backend plugin configured in the ignored `.local/config.json`. If the backend reports a failure (for example a connection error), stop and report it; do not work around it.
+- Use the build tools in `tools/`; they run the pinned compilers through `tools/toolchain.py` (local) or an optional
+  backend plugin named in the ignored `.local/config.json` (`docs/build.md`). Never start compilers or other toolchain
+  programs directly. If the backend reports a failure ("Build backend failed"), stop and report it; do not work around it.
 - Never commit game bytes, extracted files, generated assembly or data, savestates, compilers or build output. `orig/`,
   `asm/`, `data/`, `build/`, `.local/` and `.venv/` are ignored; keep it that way.
 - Keep committed text free of machine-specific details: host names, user names, absolute paths, network addresses and

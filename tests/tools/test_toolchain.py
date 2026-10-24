@@ -86,8 +86,68 @@ class ShortPaths(unittest.TestCase):
 
 
 class Backend(unittest.TestCase):
-    def test_local_is_the_backend(self):
-        self.assertEqual('local', backend.name())
+    PLUGIN = (
+        "NAME = 'sample'\n"
+        "def run_script(request, config):\n"
+        "    return dict(rc=0, out='ran ' + config['tag'] + ' ' + str(request['timeout']), err='', artifacts={})\n")
+
+    def setUp(self):
+        backend._plugin.clear()
+        self.addCleanup(backend._plugin.clear)
+
+    def with_plugin(self, **extra):
+        directory = tempfile.TemporaryDirectory()
+        self.addCleanup(directory.cleanup)
+        file = Path(directory.name) / 'plugin.py'
+        file.write_text(self.PLUGIN)
+        return dict(backend_plugin=str(file), tag='t', **extra)
+
+    def test_local_is_the_default(self):
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop('BLACK_BACKEND', None)
+            with patch.object(backend, 'config', return_value={}):
+                self.assertIsNone(backend.plugin())
+                self.assertEqual('local', backend.name())
+
+    def test_a_configured_plugin_receives_the_batch_and_the_configuration(self):
+        settings = self.with_plugin()
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop('BLACK_BACKEND', None)
+            with patch.object(backend, 'config', return_value=settings):
+                self.assertEqual('sample', backend.name())
+                reply = backend.run_script(dict(files={}, script='', out=[], timeout=7))
+                self.assertEqual('ran t 7', reply['out'])
+
+    def test_the_environment_forces_the_local_backend(self):
+        with patch.dict(os.environ, {'BLACK_BACKEND': 'local'}):
+            with patch.object(backend, 'config', return_value=self.with_plugin()):
+                self.assertEqual('local', backend.name())
+
+    def test_unknown_backend_is_rejected(self):
+        with patch.dict(os.environ, {'BLACK_BACKEND': 'cloud'}):
+            with self.assertRaises(SystemExit):
+                backend.name()
+
+    def test_a_missing_or_incomplete_plugin_is_reported(self):
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop('BLACK_BACKEND', None)
+            with patch.object(backend, 'config', return_value={'backend_plugin': '/nonexistent/plugin.py'}):
+                with self.assertRaises(SystemExit):
+                    backend.name()
+            settings = self.with_plugin()
+            Path(settings['backend_plugin']).write_text('NAME = "empty"\n')
+            with patch.object(backend, 'config', return_value=settings):
+                with self.assertRaises(SystemExit):
+                    backend.name()
+
+    def test_optional_functions_are_reported_when_the_plugin_lacks_them(self):
+        with patch.dict(os.environ, {}, clear=False):
+            os.environ.pop('BLACK_BACKEND', None)
+            with patch.object(backend, 'config', return_value=self.with_plugin()):
+                with self.assertRaises(SystemExit):
+                    backend.service('status', 'x')
+                with self.assertRaises(SystemExit):
+                    backend.compile_standalone({})
 
 
 if __name__ == '__main__':

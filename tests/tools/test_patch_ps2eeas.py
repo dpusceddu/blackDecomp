@@ -1,4 +1,4 @@
-"""Synthetic patch/catalog guards; no SDK, game data, or binary execution."""
+"""Synthetic patch guards; no SDK, game data, or binary execution."""
 import copy
 import json
 from pathlib import Path
@@ -85,7 +85,6 @@ class PatchGuards(SyntheticAssembler, unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'symlink'):
                 patcher.write_derivative(original, target)
             self.assertTrue(target.is_symlink())
-
 
 
 if __name__ == '__main__':

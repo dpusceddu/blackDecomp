@@ -21,7 +21,7 @@ import time
 import uuid
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-import sandbox
+import backend
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'build/permuter'
@@ -215,7 +215,7 @@ def cmd_start(args):
     destination.mkdir(parents=True, exist_ok=True)
     (destination / 'queue.json').write_text(json.dumps(manifest, indent=1))
     payload = package(manifest)
-    reply = sandbox.service_request('start', args.name, files={'inputs.tgz': payload}, script=BOOTSTRAP)
+    reply = backend.service('start', args.name, files={'inputs.tgz': payload}, script=BOOTSTRAP)
     print(json.dumps(dict(service=args.name, queued=len(manifest['queue']),
                          bytes=sum(r['function']['size'] for r in manifest['queue']),
                          running=reply.get('state', {}).get('Running', False),
@@ -224,7 +224,7 @@ def cmd_start(args):
 
 
 def cmd_snapshot(args):
-    reply = sandbox.service_request(args.command, args.name)
+    reply = backend.service(args.command, args.name)
     if args.command == 'fetch':
         reply['files'] = unpack_snapshot(reply.pop('archive'), OUTPUT / args.name)
     state = reply.get('state') or {}
@@ -290,7 +290,7 @@ def cmd_enqueue(args):
     destination = OUTPUT / args.name / 'submissions'
     destination.mkdir(parents=True, exist_ok=True)
     (destination / (record['key'] + '-' + submission + '.json')).write_text(json.dumps(record, indent=1))
-    reply = sandbox.service_request('submit', args.name, files={submission + '.json': json.dumps(record).encode()})
+    reply = backend.service('submit', args.name, files={submission + '.json': json.dumps(record).encode()})
     print(json.dumps(dict(queued=hex(address), differing_instructions=differing, note=note,
                          unsupported=record.get('unsupported'), running=(reply.get('state') or {}).get('Running', False))))
 
