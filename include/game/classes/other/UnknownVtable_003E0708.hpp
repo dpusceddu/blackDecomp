@@ -34,11 +34,11 @@ struct UnknownVtable_003E0708 {
     int Function_001E9B30();
     // 0x001E9B58: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001E9B58();
-    // 0x001E9C48: UNVERIFIED signature (src/game/tu_1e9c48.c).
+    // 0x001E9C48: UNVERIFIED signature (src/game/unsorted/tu_1e9c48.c).
     int Function_001E9C48();
     // 0x001E9C68: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001E9C68();
-    // 0x001E9D28: UNVERIFIED signature (src/game/tu_1e9d28.c).
+    // 0x001E9D28: UNVERIFIED signature (src/game/unsorted/tu_1e9d28.c).
     unsigned int Function_001E9D28();
 
     // Vtable 0x003E0708; vptr field offset unknown; referenced zero RTTI header.

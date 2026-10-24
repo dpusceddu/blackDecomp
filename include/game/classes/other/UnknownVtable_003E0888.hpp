@@ -62,7 +62,7 @@ struct UnknownVtable_003E0888 {
     int Function_001EDDE0(unsigned int argument0, float argument1);
     // 0x001EDE98: UNVERIFIED signature (include/game/graphics/sound_envelopes.hpp).
     int Function_001EDE98();
-    // 0x001EE270: UNVERIFIED signature (src/game/tu_1ed9c8_1eddb8.c).
+    // 0x001EE270: UNVERIFIED signature (src/game/audio/tu_1ed9c8_1eddb8.c).
     unsigned int Function_001EE270();
     // 0x00384660: UNVERIFIED signature (src/game/inline/linkonce_384660.c).
     unsigned int Function_00384660(float argument0);

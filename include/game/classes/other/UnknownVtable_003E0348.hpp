@@ -14,11 +14,11 @@ struct UnknownVtable_003E0348 {
     int Function_001CEB50(void * argument0, void * argument1);
     // 0x001CEDA0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001CEDA0();
-    // 0x001CEED0: UNVERIFIED signature (src/game/tu_1ceed0.c).
+    // 0x001CEED0: UNVERIFIED signature (src/game/unsorted/tu_1ceed0.c).
     int Function_001CEED0(void * argument0);
-    // 0x001CEEE8: UNVERIFIED signature (src/game/tu_1ceee8.c).
+    // 0x001CEEE8: UNVERIFIED signature (src/game/unsorted/tu_1ceee8.c).
     void * Function_001CEEE8(void * argument0, int argument1);
-    // 0x001CEF30: UNVERIFIED signature (src/game/tu_1cef30.c).
+    // 0x001CEF30: UNVERIFIED signature (src/game/unsorted/tu_1cef30.c).
     unsigned int Function_001CEF30();
     // 0x00384630: UNVERIFIED signature (src/game/inline/linkonce_384630.c).
     unsigned int Function_00384630();

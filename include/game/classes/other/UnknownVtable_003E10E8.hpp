@@ -14,7 +14,7 @@ struct UnknownVtable_003E10E8 {
     unsigned int Function_0020DF50();
     // 0x0020DF60: UNVERIFIED signature (src/game/tu_2094b0_20df30.c).
     unsigned int Function_0020DF60();
-    // 0x0020E200: UNVERIFIED signature (src/game/tu_2094b0_20e200.c).
+    // 0x0020E200: UNVERIFIED signature (src/game/unsorted/tu_2094b0_20e200.c).
     int Function_0020E200();
     // 0x0020E338: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0020E338();

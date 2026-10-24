@@ -16,7 +16,7 @@ struct UnknownVtable_003E0E08 {
     unsigned int Function_0020DF58();
     // 0x0020DF60: UNVERIFIED signature (src/game/tu_2094b0_20df30.c).
     unsigned int Function_0020DF60();
-    // 0x002162C8: UNVERIFIED signature (src/game/tu_2094b0_2162c8.c).
+    // 0x002162C8: UNVERIFIED signature (src/game/unsorted/tu_2094b0_2162c8.c).
     int Function_002162C8();
     // 0x00216878: UNVERIFIED signature (src/game/tu_2094b0_216878.c).
     int Function_00216878();

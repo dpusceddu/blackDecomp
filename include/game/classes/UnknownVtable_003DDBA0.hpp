@@ -20,13 +20,13 @@ struct UnknownVtable_003DDBA0 {
     inline unsigned char & Field_0015() { return *(unsigned char *)((unsigned char *)this + 0x15); }
     // 0x16: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0016() { return *(unsigned char *)((unsigned char *)this + 0x16); }
-    // 0x0018E2F0: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E2F0: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     int Function_0018E2F0();
-    // 0x0018E448: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E448: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     int Function_0018E448();
-    // 0x0018E450: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E450: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     unsigned int Function_0018E450();
-    // 0x0018E488: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E488: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     unsigned int Function_0018E488();
     // 0x0018E4C0: UNVERIFIED signature (include/game/graphics/movement_core.hpp).
     int Function_0018E4C0(unsigned int * argument0);
@@ -38,15 +38,15 @@ struct UnknownVtable_003DDBA0 {
     unsigned int Function_0018EBE0(S128 argument0);
     // 0x0018F408: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_0018F408();
-    // 0x0018F4E8: UNVERIFIED signature (src/game/tu_18dd88_18f4e8.c).
+    // 0x0018F4E8: UNVERIFIED signature (src/game/ai/movement/tu_18dd88_18f4e8.c).
     signed char * Function_0018F4E8();
-    // 0x0018F6A8: UNVERIFIED signature (src/game/tu_18dd88_18f6a8.c).
+    // 0x0018F6A8: UNVERIFIED signature (src/game/ai/movement/tu_18dd88_18f6a8.c).
     int Function_0018F6A8();
     // 0x0018F6D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0018F6D0();
     // 0x0018F700: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0018F700();
-    // 0x0018F730: UNVERIFIED signature (src/game/tu_18dd88_18f730.c).
+    // 0x0018F730: UNVERIFIED signature (src/game/ai/movement/tu_18dd88_18f730.c).
     int Function_0018F730();
     // 0x0018F750: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018F750();

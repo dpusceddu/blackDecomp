@@ -24,13 +24,13 @@ struct UnknownVtable_003DD570 {
     unsigned int Function_001A2588();
     // 0x001A2590: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001A2590();
-    // 0x001A2610: UNVERIFIED signature (src/game/tu_1a24b8_1a2610.c).
+    // 0x001A2610: UNVERIFIED signature (src/game/unsorted/tu_1a24b8_1a2610.c).
     unsigned int Function_001A2610();
-    // 0x001A2698: UNVERIFIED signature (src/game/tu_1a24b8_1a2620.c).
+    // 0x001A2698: UNVERIFIED signature (src/game/unsorted/tu_1a24b8_1a2620.c).
     int Function_001A2698(int argument0);
-    // 0x001A2C68: UNVERIFIED signature (src/game/tu_1a24b8_1a2c68.c).
+    // 0x001A2C68: UNVERIFIED signature (src/game/unsorted/tu_1a24b8_1a2c68.c).
     int Function_001A2C68();
-    // 0x001A40E0: UNVERIFIED signature (src/game/tu_1a24b8_1a3a08.c).
+    // 0x001A40E0: UNVERIFIED signature (src/game/unsorted/tu_1a24b8_1a3a08.c).
     int Function_001A40E0();
     // 0x001A4130: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A4130(unsigned int argument0);

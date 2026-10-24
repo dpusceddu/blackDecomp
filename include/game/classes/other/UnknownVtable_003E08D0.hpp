@@ -40,7 +40,7 @@ struct UnknownVtable_003E08D0 {
     inline unsigned int & Field_0038() { return *(unsigned int *)((unsigned char *)this + 0x38); }
     // 0x3C: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_003C() { return *(unsigned int *)((unsigned char *)this + 0x3C); }
-    // 0x001D8DF8: UNVERIFIED signature (src/game/tu_1d76e8_1d8df8.c).
+    // 0x001D8DF8: UNVERIFIED signature (src/game/unsorted/tu_1d76e8_1d8df8.c).
     void * Function_001D8DF8();
     // 0x001D8E38: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001D8E38(void * argument0, unsigned int argument1, unsigned int argument2);

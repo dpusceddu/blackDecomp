@@ -34,15 +34,15 @@ struct UnknownVtable_003DB488 {
     unsigned int Function_001069F8();
     // 0x00106D70: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00106D70();
-    // 0x00106DF0: UNVERIFIED signature (src/game/frontend_sequential_exit.cpp).
+    // 0x00106DF0: UNVERIFIED signature (src/game/ui/frontend_sequential_exit.cpp).
     int Function_00106DF0();
-    // 0x00106ED8: UNVERIFIED signature (src/game/tu_105bc0_106ed8.c).
+    // 0x00106ED8: UNVERIFIED signature (src/game/ui/tu_105bc0_106ed8.c).
     unsigned int Function_00106ED8();
-    // 0x00106EF8: UNVERIFIED signature (src/game/tu_105bc0_106ed8.c).
+    // 0x00106EF8: UNVERIFIED signature (src/game/ui/tu_105bc0_106ed8.c).
     int Function_00106EF8();
-    // 0x00106F80: UNVERIFIED signature (src/game/tu_105bc0_106ed8.c).
+    // 0x00106F80: UNVERIFIED signature (src/game/ui/tu_105bc0_106ed8.c).
     int Function_00106F80();
-    // 0x00106FE8: UNVERIFIED signature (src/game/tu_105bc0_106ed8.c).
+    // 0x00106FE8: UNVERIFIED signature (src/game/ui/tu_105bc0_106ed8.c).
     int Function_00106FE8(int argument0, long argument1);
 
     // Vtable 0x003DB488; vptr field offset unknown; referenced zero RTTI header.

@@ -18,7 +18,7 @@ struct UnknownVtable_003E06C8 {
     void Function_001CDA00(void * argument0);
     // 0x001CDA28: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     void * Function_001CDA28(void * argument0, unsigned int argument1);
-    // 0x001CDAA8: UNVERIFIED signature (src/game/tu_1cdaa8.c).
+    // 0x001CDAA8: UNVERIFIED signature (src/game/unsorted/tu_1cdaa8.c).
     unsigned int Function_001CDAA8();
     // 0x00384630: UNVERIFIED signature (src/game/inline/linkonce_384630.c).
     unsigned int Function_00384630();

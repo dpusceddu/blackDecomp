@@ -74,11 +74,11 @@ struct UnknownVtable_003DCC20 {
     unsigned int Function_0013EE60();
     // 0x0013F618: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0013F618();
-    // 0x0013FFA0: UNVERIFIED signature (src/game/actor_input.cpp).
+    // 0x0013FFA0: UNVERIFIED signature (src/game/camera/actor_input.cpp).
     void Function_0013FFA0(int argument0, int argument1, unsigned int argument2);
-    // 0x00140A40: UNVERIFIED signature (src/game/actor_input.cpp).
+    // 0x00140A40: UNVERIFIED signature (src/game/camera/actor_input.cpp).
     void Function_00140A40();
-    // 0x00140AA8: UNVERIFIED signature (src/game/tu_140aa8.c).
+    // 0x00140AA8: UNVERIFIED signature (src/game/camera/tu_140aa8.c).
     unsigned int Function_00140AA8();
 
     // Vtable 0x003DCC20; vptr field offset unknown; referenced zero RTTI header.

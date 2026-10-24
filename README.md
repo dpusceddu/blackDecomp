@@ -148,7 +148,7 @@ config/<GAME_ID>/     per-version splat configuration, ELF layout, function boun
                       splits.yaml (source files, address ranges, flags), symbols.txt (names), equivalent.yaml
 config/               tus.yaml (translation unit map), toolchain pins, shared data
 orig/<GAME_ID>/       your executable goes here (ignored by Git)
-src/<library>/        one file per translation unit: recovered functions as C/C++, the rest as INCLUDE_ASM lines, drafts in
+src/<library>/        (src/game/ has subsystem directories) one file per translation unit: recovered functions as C/C++, the rest as INCLUDE_ASM lines, drafts in
                       #ifdef NON_MATCHING blocks (game, kynapse, animation, physics, rw_core, rw_audio, apt, sony, libc);
                       compiler-emitted inline and template copies are in src/<library>/inline/ (docs/build.md#link-once-copies)
 include/<library>/    headers per library, include/ps2/ for helpers shared by all

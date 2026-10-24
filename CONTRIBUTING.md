@@ -29,7 +29,7 @@ order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines.
    the order in which to try things. Types, callee signatures and object lifetimes explain most mismatches. The assembly of a
    function is `asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s` after the first `ninja`.
 2. Replace the function's `INCLUDE_ASM` line with your C or C++ and run `ninja`. It ends with `OK`, or with
-   `MISMATCH src/game/tu_100258.c: func_00100258: differs from the original` (compile errors name the file too). A first
+   `MISMATCH src/game/unsorted/tu_100258.c: func_00100258: differs from the original` (compile errors name the file too). A first
    draft: `python3 tools/decompile.py func_00100258` prints an m2c draft (with the project's context) and the file and line
    it belongs to; `--write` replaces the `INCLUDE_ASM` line in place, and you then edit and rebuild. For many functions at
    once, `python3 tools/autodecomp.py run ...` ([docs/pipeline.md](docs/pipeline.md)); to try one hand-written function without
@@ -56,7 +56,7 @@ order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines.
 5. Run `ninja`, `ninja progress` and the tests (below). If the change moves progress, run `ninja badges` and commit
    `progress/` (and the table it refreshes in `README.md`) with it.
 
-Example: `func_00100258` is `return arg0;`. In `src/game/tu_100258.c` the line `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings",
+Example: `func_00100258` is `return arg0;`. In `src/game/unsorted/tu_100258.c` the line `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings",
 func_00100258);` becomes `s32 func_00100258(s32 arg0) { return arg0; }`; `ninja` says `OK` and `ninja progress` counts one
 more function.
 
@@ -95,8 +95,12 @@ Matching is not the only useful contribution. Two kinds of cleanup are always we
   classes (`include/<library>/classes/`), with real names, types and parameter names, makes the code useful. The mangled
   name changes with the declaration: update `config/SLUS_213.76/symbols.txt` so assembly callers still link. RenderWare,
   the Sony libraries and libc are C, so C is correct there.
-- **Real file names.** Files are named `tu_<address>` until evidence shows the original name or class (strings, RTTI,
-  class ownership). Rename with `git mv` and update the `src:` path in `splits.yaml`.
+- **Real file names and directories.** Files are named `tu_<address>` until evidence shows the original name or class
+  (strings, RTTI, class ownership). The rule for `src/game/`: **move a file when you learn what it is, rename it when the
+  original name is known.** Moving means setting its directory in `config/SLUS_213.76/game_subsystems.txt` (the line gets the
+  evidence `manual`, which the grouping tool never overwrites) and running `python3 tools/studies/group_game_sources.py --apply`;
+  a rename is a `git mv` plus the `src:` path in `splits.yaml`. A new file starts in `src/game/unsorted/`. Compiler-emitted
+  inline and template copies go in `src/<library>/inline/` (`config/SLUS_213.76/inline_owners.txt` says whose).
 
 ## Tests
 
@@ -112,7 +116,7 @@ Tests need no game files; those that would need private inputs skip. CI runs bot
 
 - Format new C/C++ with the repository's `.clang-format` (4-space indents, attached braces, `T* p`, 120 columns). Do not
   reformat existing files: matching depends on exact source shape, and unrelated whitespace changes make review harder.
-- Source layout: `src/<library>/<name>.c|cpp`, one file per TU with every function of the TU (INCLUDE_ASM lines, drafts in
+- Source layout: `src/<library>/<name>.c|cpp` (`src/game/<subsystem>/` for the game library), one file per TU with every function of the TU (INCLUDE_ASM lines, drafts in
   `#ifdef NON_MATCHING` blocks). Headers follow the libraries (`include/<library>/`, shared helpers in `include/ps2/`).
   `tools/layout.py` has the naming rules.
 - Name functions and types after what the code does only where the evidence supports it; unknown functions stay

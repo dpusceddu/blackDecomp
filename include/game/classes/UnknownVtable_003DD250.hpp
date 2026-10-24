@@ -34,9 +34,9 @@ struct UnknownVtable_003DD250 {
     inline S128 & Field_0070() { return *(S128 *)((unsigned char *)this + 0x70); }
     // 0x0018C938: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018C938();
-    // 0x0018CE18: UNVERIFIED signature (src/game/tu_18ce18.c).
+    // 0x0018CE18: UNVERIFIED signature (src/game/ai/movement/tu_18ce18.c).
     unsigned int Function_0018CE18();
-    // 0x0018CE68: UNVERIFIED signature (src/game/tu_18ce68.c).
+    // 0x0018CE68: UNVERIFIED signature (src/game/ai/movement/tu_18ce68.c).
     int Function_0018CE68();
     // 0x0018CE78: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0018CE78(unsigned int argument0);

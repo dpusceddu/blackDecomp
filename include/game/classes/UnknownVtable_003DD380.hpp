@@ -32,23 +32,23 @@ struct UnknownVtable_003DD380 {
     inline unsigned int & Field_0184() { return *(unsigned int *)((unsigned char *)this + 0x184); }
     // 0x188: UNVERIFIED type; PS2 access offset.
     inline unsigned int & Field_0188() { return *(unsigned int *)((unsigned char *)this + 0x188); }
-    // 0x00191C20: UNVERIFIED signature (src/game/ai_movement_modes_191c18.cpp).
+    // 0x00191C20: UNVERIFIED signature (src/game/ai/movement/ai_movement_modes_191c18.cpp).
     void Function_00191C20(void * argument0);
     // 0x00191C80: UNVERIFIED signature (recovered prototype).
     int Function_00191C80();
     // 0x00191D40: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_00191D40();
-    // 0x001920D8: UNVERIFIED signature (src/game/ai_movement_modes_1920d8.cpp).
+    // 0x001920D8: UNVERIFIED signature (src/game/ai/ai_movement_modes_1920d8.cpp).
     void Function_001920D8(S128 argument0);
-    // 0x00192140: UNVERIFIED signature (src/game/ai_movement_modes_1920d8.cpp).
+    // 0x00192140: UNVERIFIED signature (src/game/ai/ai_movement_modes_1920d8.cpp).
     void Function_00192140(S128 argument0);
     // 0x001922E8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     S128 Function_001922E8();
-    // 0x00192DC0: UNVERIFIED signature (src/game/ai_movement_modes_192dc0.cpp).
+    // 0x00192DC0: UNVERIFIED signature (src/game/ai/ai_movement_modes_192dc0.cpp).
     unsigned char Function_00192DC0();
-    // 0x00192E50: UNVERIFIED signature (src/game/ai_movement_modes_192dc0.cpp).
+    // 0x00192E50: UNVERIFIED signature (src/game/ai/ai_movement_modes_192dc0.cpp).
     void Function_00192E50();
-    // 0x00192FB0: UNVERIFIED signature (src/game/actor_route.cpp).
+    // 0x00192FB0: UNVERIFIED signature (src/game/ai/navigation/actor_route.cpp).
     unsigned char Function_00192FB0(S128 argument0);
 
     // Vtable 0x003DD380; vptr field offset unknown; referenced zero RTTI header.

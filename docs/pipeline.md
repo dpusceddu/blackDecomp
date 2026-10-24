@@ -62,7 +62,7 @@ Keep the draft in its TU file inside the `#ifdef NON_MATCHING` block, then:
 
 ```sh
 python3 tools/permuter/prepare.py func_00105BC0        # the function's assembly in the plain form import.py reads
-python3 .venv/decomp-permuter/import.py src/game/tu_105bc0.c build/permuter/func_00105BC0.s
+python3 .venv/decomp-permuter/import.py src/game/ui/tu_105bc0.c build/permuter/func_00105BC0.s
 python3 .venv/decomp-permuter/permuter.py nonmatchings/func_00105BC0 -j 8
 ```
 

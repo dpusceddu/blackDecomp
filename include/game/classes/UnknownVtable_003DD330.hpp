@@ -24,15 +24,15 @@ struct UnknownVtable_003DD330 {
     inline float & Field_003C() { return *(float *)((unsigned char *)this + 0x3C); }
     // 0x80: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0080() { return *(void * *)((unsigned char *)this + 0x80); }
-    // 0x00191778: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).
+    // 0x00191778: UNVERIFIED signature (src/game/ai/movement/ai_movement_modes_191778.cpp).
     void Function_00191778(S128 argument0);
-    // 0x00191788: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).
+    // 0x00191788: UNVERIFIED signature (src/game/ai/movement/ai_movement_modes_191778.cpp).
     unsigned char Function_00191788();
-    // 0x00191790: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).
+    // 0x00191790: UNVERIFIED signature (src/game/ai/movement/ai_movement_modes_191778.cpp).
     void Function_00191790();
-    // 0x00191798: UNVERIFIED signature (src/game/ai_movement_modes_191778.cpp).
+    // 0x00191798: UNVERIFIED signature (src/game/ai/movement/ai_movement_modes_191778.cpp).
     S128 Function_00191798();
-    // 0x00193488: UNVERIFIED signature (src/game/ai_movement_modes_193488.cpp).
+    // 0x00193488: UNVERIFIED signature (src/game/ai/movement/ai_movement_modes_193488.cpp).
     unsigned char Function_00193488();
     // 0x001934A8: UNVERIFIED signature (recovered prototype).
     int Function_001934A8();

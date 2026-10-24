@@ -30,9 +30,9 @@ struct UnknownVtable_003DC268 {
     int Function_0013D308();
     // 0x0013D388: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0013D388(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, void * argument4, float argument5, float argument6);
-    // 0x0013DAF0: UNVERIFIED signature (src/game/tu_13da60.c).
+    // 0x0013DAF0: UNVERIFIED signature (src/game/unsorted/tu_13da60.c).
     int Function_0013DAF0();
-    // 0x0013DB10: UNVERIFIED signature (src/game/tu_13db10.c).
+    // 0x0013DB10: UNVERIFIED signature (src/game/unsorted/tu_13db10.c).
     int Function_0013DB10(int argument0, S128 argument1, float argument2);
 
     // Vtable 0x003DC268; vptr field offset unknown; referenced zero RTTI header.

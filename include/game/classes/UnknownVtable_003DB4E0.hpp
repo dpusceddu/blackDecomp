@@ -26,9 +26,9 @@ struct UnknownVtable_003DB4E0 {
     unsigned int Function_00106200();
     // 0x00106550: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00106550();
-    // 0x001065D0: UNVERIFIED signature (src/game/frontend_load_exit.cpp).
+    // 0x001065D0: UNVERIFIED signature (src/game/ui/frontend_load_exit.cpp).
     int Function_001065D0();
-    // 0x00106690: UNVERIFIED signature (src/game/tu_105bc0_106690.c).
+    // 0x00106690: UNVERIFIED signature (src/game/ui/tu_105bc0_106690.c).
     unsigned int Function_00106690();
     // 0x001066D0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001066D0();

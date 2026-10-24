@@ -100,9 +100,9 @@ struct UnknownVtable_003DD3D8 {
     inline void * & Field_01B0() { return *(void * *)((unsigned char *)this + 0x1B0); }
     // 0x1B5: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_01B5() { return *(unsigned char *)((unsigned char *)this + 0x1B5); }
-    // 0x001723E8: UNVERIFIED signature (src/game/tu_1723e8.c).
+    // 0x001723E8: UNVERIFIED signature (src/game/unsorted/tu_1723e8.c).
     int Function_001723E8();
-    // 0x00172518: UNVERIFIED signature (src/game/tu_172518.c).
+    // 0x00172518: UNVERIFIED signature (src/game/unsorted/tu_172518.c).
     int Function_00172518();
     // 0x002FF148: UNVERIFIED signature (src/kynapse/graph_pathfinder.cpp).
     void Function_002FF148();

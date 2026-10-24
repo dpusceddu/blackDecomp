@@ -16,15 +16,15 @@ struct UnknownVtable_003DE340 {
     inline S128 & Field_0010() { return *(S128 *)((unsigned char *)this + 0x10); }
     // 0x20: UNVERIFIED type; PS2 access offset.
     inline float & Field_0020() { return *(float *)((unsigned char *)this + 0x20); }
-    // 0x00193970: UNVERIFIED signature (src/game/tu_193970.c).
+    // 0x00193970: UNVERIFIED signature (src/game/ai/tu_193970.c).
     unsigned int Function_00193970(int argument0);
-    // 0x00193978: UNVERIFIED signature (src/game/tu_193970.c).
+    // 0x00193978: UNVERIFIED signature (src/game/ai/tu_193970.c).
     unsigned int Function_00193978();
     // 0x0019FE28: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_0019FE28();
     // 0x0019FF20: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_0019FF20();
-    // 0x0019FFF8: UNVERIFIED signature (src/game/tu_19fff8.c).
+    // 0x0019FFF8: UNVERIFIED signature (src/game/unsorted/tu_19fff8.c).
     unsigned int Function_0019FFF8();
     // 0x00383DB8: UNVERIFIED signature (src/game/inline/linkonce_383db8.c).
     unsigned int Function_00383DB8();

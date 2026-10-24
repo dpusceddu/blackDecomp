@@ -22,7 +22,7 @@ struct UnknownVtable_003E0250 {
     int Function_001A8D50(signed char * argument0, signed char * argument1, unsigned int argument2);
     // 0x001A8E30: UNVERIFIED signature (src/game/tu_1a83a0_1a8e30.c).
     unsigned int Function_001A8E30(signed char * argument0, signed char * argument1);
-    // 0x001A8F10: UNVERIFIED signature (src/game/tu_1a83a0_1a8f10.c).
+    // 0x001A8F10: UNVERIFIED signature (src/game/actor/tu_1a83a0_1a8f10.c).
     unsigned int Function_001A8F10(signed char * argument0, signed char * argument1);
     // 0x001A8F78: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001A8F78(unsigned int argument0, int * argument1, unsigned int argument2);
@@ -32,23 +32,23 @@ struct UnknownVtable_003E0250 {
     signed char * Function_001A9908(signed char * argument0, signed char * argument1, unsigned int argument2, float argument3);
     // 0x001A9ED0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001A9ED0(signed char * argument0, signed char * argument1);
-    // 0x001AA280: UNVERIFIED signature (src/game/firing_animation.c).
+    // 0x001AA280: UNVERIFIED signature (src/game/actor/firing_animation.c).
     void Function_001AA280(void * argument0, void * argument1, int argument2, int argument3);
-    // 0x001AA490: UNVERIFIED signature (src/game/firing_animation.c).
+    // 0x001AA490: UNVERIFIED signature (src/game/actor/firing_animation.c).
     void Function_001AA490(void * argument0, void * argument1, int argument2, int argument3);
-    // 0x001AA7E8: UNVERIFIED signature (src/game/tu_1a83a0_1aa7e8.c).
+    // 0x001AA7E8: UNVERIFIED signature (src/game/actor/tu_1a83a0_1aa7e8.c).
     signed char * Function_001AA7E8(signed char * argument0, signed char * argument1);
-    // 0x001AA848: UNVERIFIED signature (src/game/tu_1a83a0_1aa7e8.c).
+    // 0x001AA848: UNVERIFIED signature (src/game/actor/tu_1a83a0_1aa7e8.c).
     signed char * Function_001AA848(signed char * argument0, signed char * argument1);
-    // 0x001AA8A8: UNVERIFIED signature (src/game/tu_1a83a0_1aa7e8.c).
+    // 0x001AA8A8: UNVERIFIED signature (src/game/actor/tu_1a83a0_1aa7e8.c).
     signed char * Function_001AA8A8(signed char * argument0, signed char * argument1);
-    // 0x001AA908: UNVERIFIED signature (src/game/tu_1a83a0_1aa7e8.c).
+    // 0x001AA908: UNVERIFIED signature (src/game/actor/tu_1a83a0_1aa7e8.c).
     signed char * Function_001AA908(signed char * argument0, signed char * argument1);
-    // 0x001AA968: UNVERIFIED signature (src/game/tu_1a83a0_1aa7e8.c).
+    // 0x001AA968: UNVERIFIED signature (src/game/actor/tu_1a83a0_1aa7e8.c).
     signed char * Function_001AA968(signed char * argument0, signed char * argument1);
-    // 0x001AA9C8: UNVERIFIED signature (src/game/tu_1a83a0_1aa7e8.c).
+    // 0x001AA9C8: UNVERIFIED signature (src/game/actor/tu_1a83a0_1aa7e8.c).
     unsigned int Function_001AA9C8();
-    // 0x001AA9D0: UNVERIFIED signature (src/game/tu_1a83a0_1aa7e8.c).
+    // 0x001AA9D0: UNVERIFIED signature (src/game/actor/tu_1a83a0_1aa7e8.c).
     unsigned int Function_001AA9D0();
     // 0x001AA9D8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_001AA9D8(signed char * argument0, signed char * argument1, unsigned int argument2, float argument3);

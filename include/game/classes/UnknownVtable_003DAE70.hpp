@@ -30,11 +30,11 @@ struct UnknownVtable_003DAE70 {
     inline float & Field_0094() { return *(float *)((unsigned char *)this + 0x94); }
     // 0x0011D440: UNVERIFIED signature (src/game/tu_11d358_11d430.c).
     int Function_0011D440(int argument0);
-    // 0x0011DE30: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
+    // 0x0011DE30: UNVERIFIED signature (src/game/unsorted/tu_11d358_11de30.c).
     unsigned int Function_0011DE30();
-    // 0x0011DE38: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
+    // 0x0011DE38: UNVERIFIED signature (src/game/unsorted/tu_11d358_11de30.c).
     unsigned int Function_0011DE38();
-    // 0x0011FCD8: UNVERIFIED signature (src/game/tu_11d358_11fcd8.c).
+    // 0x0011FCD8: UNVERIFIED signature (src/game/unsorted/tu_11d358_11fcd8.c).
     int Function_0011FCD8();
     // 0x0011FCF8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0011FCF8();

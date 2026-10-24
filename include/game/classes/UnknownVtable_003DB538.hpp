@@ -22,11 +22,11 @@ struct UnknownVtable_003DB538 {
     int Function_00106058();
     // 0x00106060: UNVERIFIED signature (src/game/tu_105bc0_106008.c).
     unsigned int Function_00106060();
-    // 0x00382330: UNVERIFIED signature (src/game/tu_382330.c).
+    // 0x00382330: UNVERIFIED signature (src/game/unsorted/tu_382330.c).
     unsigned int Function_00382330();
-    // 0x00382338: UNVERIFIED signature (src/game/tu_382338.c).
+    // 0x00382338: UNVERIFIED signature (src/game/unsorted/tu_382338.c).
     unsigned int Function_00382338();
-    // 0x00382340: UNVERIFIED signature (src/game/tu_382340.c).
+    // 0x00382340: UNVERIFIED signature (src/game/effects/tu_382340.c).
     unsigned int Function_00382340();
 
     // Vtable 0x003DB538; vptr field offset unknown; referenced zero RTTI header.

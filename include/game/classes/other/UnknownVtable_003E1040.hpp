@@ -18,7 +18,7 @@ struct UnknownVtable_003E1040 {
     unsigned int Function_0020DF60();
     // 0x002109E0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_002109E0();
-    // 0x00210C40: UNVERIFIED signature (src/game/tu_2094b0_210c40.c).
+    // 0x00210C40: UNVERIFIED signature (src/game/unsorted/tu_2094b0_210c40.c).
     int Function_00210C40();
 
     // Vtable 0x003E1040; vptr field offset unknown; referenced zero RTTI header.

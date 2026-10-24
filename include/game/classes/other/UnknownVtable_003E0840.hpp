@@ -52,7 +52,7 @@ struct UnknownVtable_003E0840 {
     inline unsigned char & Field_004C() { return *(unsigned char *)((unsigned char *)this + 0x4C); }
     // 0x4D: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_004D() { return *(unsigned char *)((unsigned char *)this + 0x4D); }
-    // 0x001ED968: UNVERIFIED signature (src/game/tu_1ed968.c).
+    // 0x001ED968: UNVERIFIED signature (src/game/unsorted/tu_1ed968.c).
     float Function_001ED968();
     // 0x001EDC80: UNVERIFIED signature (include/game/graphics/timed_envelope.hpp).
     int Function_001EDC80();
@@ -60,9 +60,9 @@ struct UnknownVtable_003E0840 {
     int Function_001EDD80();
     // 0x001EE0B0: UNVERIFIED signature (include/game/graphics/sound_envelopes.hpp).
     int Function_001EE0B0();
-    // 0x001EE150: UNVERIFIED signature (src/game/tu_1ed9c8_1eddb8.c).
+    // 0x001EE150: UNVERIFIED signature (src/game/audio/tu_1ed9c8_1eddb8.c).
     unsigned int Function_001EE150();
-    // 0x001EE270: UNVERIFIED signature (src/game/tu_1ed9c8_1eddb8.c).
+    // 0x001EE270: UNVERIFIED signature (src/game/audio/tu_1ed9c8_1eddb8.c).
     unsigned int Function_001EE270();
     // 0x00384660: UNVERIFIED signature (src/game/inline/linkonce_384660.c).
     unsigned int Function_00384660(float argument0);

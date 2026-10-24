@@ -16,15 +16,15 @@ struct UnknownVtable_003DB0E0 {
     inline unsigned char & Field_00A1() { return *(unsigned char *)((unsigned char *)this + 0xA1); }
     // 0xA2: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_00A2() { return *(unsigned char *)((unsigned char *)this + 0xA2); }
-    // 0x001175E8: UNVERIFIED signature (src/game/tu_116f60_1175e8.c).
+    // 0x001175E8: UNVERIFIED signature (src/game/unsorted/tu_116f60_1175e8.c).
     int Function_001175E8();
-    // 0x00117630: UNVERIFIED signature (src/game/tu_116f60_117630.c).
+    // 0x00117630: UNVERIFIED signature (src/game/unsorted/tu_116f60_117630.c).
     unsigned int Function_00117630();
-    // 0x00117668: UNVERIFIED signature (src/game/tu_116f60_117630.c).
+    // 0x00117668: UNVERIFIED signature (src/game/unsorted/tu_116f60_117630.c).
     int Function_00117668(float * argument0);
-    // 0x001176D0: UNVERIFIED signature (src/game/tu_116f60_117630.c).
+    // 0x001176D0: UNVERIFIED signature (src/game/unsorted/tu_116f60_117630.c).
     unsigned char Function_001176D0(int argument0);
-    // 0x00117738: UNVERIFIED signature (src/game/tu_116f60_117630.c).
+    // 0x00117738: UNVERIFIED signature (src/game/unsorted/tu_116f60_117630.c).
     unsigned int Function_00117738(void * argument0, float argument1);
 
     // Vtable 0x003DB0E0; vptr field offset unknown; referenced zero RTTI header.

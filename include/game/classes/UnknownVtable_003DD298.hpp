@@ -32,7 +32,7 @@ struct UnknownVtable_003DD298 {
     unsigned int Function_0018C440();
     // 0x0018C878: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0018C878();
-    // 0x0018C8D8: UNVERIFIED signature (src/game/tu_18c260.c).
+    // 0x0018C8D8: UNVERIFIED signature (src/game/ai/movement/tu_18c260.c).
     int Function_0018C8D8();
     // 0x0018C8E8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0018C8E8(unsigned int argument0);

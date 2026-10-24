@@ -16,9 +16,9 @@ struct UnknownVtable_003E0F60 {
     unsigned int Function_0020DF58();
     // 0x0020DF60: UNVERIFIED signature (src/game/tu_2094b0_20df30.c).
     unsigned int Function_0020DF60();
-    // 0x00212528: UNVERIFIED signature (src/game/tu_2094b0_212528.c).
+    // 0x00212528: UNVERIFIED signature (src/game/unsorted/tu_2094b0_212528.c).
     int Function_00212528();
-    // 0x00212770: UNVERIFIED signature (src/game/tu_2094b0_212528.c).
+    // 0x00212770: UNVERIFIED signature (src/game/unsorted/tu_2094b0_212528.c).
     int Function_00212770();
 
     // Vtable 0x003E0F60; vptr field offset unknown; referenced zero RTTI header.

@@ -26,9 +26,9 @@ struct UnknownVtable_003DAEC8 {
     inline int & Field_0084() { return *(int *)((unsigned char *)this + 0x84); }
     // 0x0011D440: UNVERIFIED signature (src/game/tu_11d358_11d430.c).
     int Function_0011D440(int argument0);
-    // 0x0011DE30: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
+    // 0x0011DE30: UNVERIFIED signature (src/game/unsorted/tu_11d358_11de30.c).
     unsigned int Function_0011DE30();
-    // 0x0011DE38: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
+    // 0x0011DE38: UNVERIFIED signature (src/game/unsorted/tu_11d358_11de30.c).
     unsigned int Function_0011DE38();
     // 0x001207D8: UNVERIFIED signature (src/game/tu_120068_1207b8.c).
     int Function_001207D8();

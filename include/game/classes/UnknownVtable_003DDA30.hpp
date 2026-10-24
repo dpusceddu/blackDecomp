@@ -18,15 +18,15 @@ struct UnknownVtable_003DDA30 {
     inline int & Field_0014() { return *(int *)((unsigned char *)this + 0x14); }
     // 0x18: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0018() { return *(unsigned char *)((unsigned char *)this + 0x18); }
-    // 0x0018E2F0: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E2F0: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     int Function_0018E2F0();
-    // 0x0018E448: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E448: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     int Function_0018E448();
-    // 0x0018E450: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E450: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     unsigned int Function_0018E450();
-    // 0x0018E588: UNVERIFIED signature (src/game/tu_18dd88_18e578.c).
+    // 0x0018E588: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e578.c).
     int Function_0018E588();
-    // 0x0018E5B8: UNVERIFIED signature (src/game/tu_18dd88_18e578.c).
+    // 0x0018E5B8: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e578.c).
     int Function_0018E5B8(int argument0);
     // 0x0018E7C0: UNVERIFIED signature (include/game/graphics/movement_core.hpp).
     int Function_0018E7C0(unsigned int argument0);
@@ -46,9 +46,9 @@ struct UnknownVtable_003DDA30 {
     int Function_001907E0(S128 argument0);
     // 0x00190840: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     signed char * Function_00190840();
-    // 0x001909F8: UNVERIFIED signature (src/game/tu_1909f8.c).
+    // 0x001909F8: UNVERIFIED signature (src/game/ai/movement/tu_1909f8.c).
     int Function_001909F8();
-    // 0x00190A00: UNVERIFIED signature (src/game/tu_190a00.c).
+    // 0x00190A00: UNVERIFIED signature (src/game/ai/movement/tu_190a00.c).
     int Function_00190A00(unsigned int argument0);
     // 0x00383E68: UNVERIFIED signature (src/game/inline/linkonce_383e68.c).
     unsigned int Function_00383E68(S128 * argument0);

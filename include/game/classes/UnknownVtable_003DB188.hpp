@@ -22,13 +22,13 @@ struct UnknownVtable_003DB188 {
     inline unsigned char & Field_0060() { return *(unsigned char *)((unsigned char *)this + 0x60); }
     // 0x00118348: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00118348();
-    // 0x00118410: UNVERIFIED signature (src/game/tu_116f60_118410.c).
+    // 0x00118410: UNVERIFIED signature (src/game/unsorted/tu_116f60_118410.c).
     int Function_00118410();
     // 0x00118430: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned char Function_00118430(void * argument0);
     // 0x001187A8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001187A8();
-    // 0x00118800: UNVERIFIED signature (src/game/tu_116f60_118800.c).
+    // 0x00118800: UNVERIFIED signature (src/game/unsorted/tu_116f60_118800.c).
     unsigned int Function_00118800();
 
     // Vtable 0x003DB188; vptr field offset unknown; referenced zero RTTI header.

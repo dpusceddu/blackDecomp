@@ -48,15 +48,15 @@ struct UnknownVtable_003DDAE8 {
     inline unsigned char & Field_003F() { return *(unsigned char *)((unsigned char *)this + 0x3F); }
     // 0x40: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0040() { return *(unsigned char *)((unsigned char *)this + 0x40); }
-    // 0x0018E2F0: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E2F0: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     int Function_0018E2F0();
-    // 0x0018E448: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E448: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     int Function_0018E448();
-    // 0x0018E450: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E450: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     unsigned int Function_0018E450();
-    // 0x0018E588: UNVERIFIED signature (src/game/tu_18dd88_18e578.c).
+    // 0x0018E588: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e578.c).
     int Function_0018E588();
-    // 0x0018E5B8: UNVERIFIED signature (src/game/tu_18dd88_18e578.c).
+    // 0x0018E5B8: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e578.c).
     int Function_0018E5B8(int argument0);
     // 0x0018EA20: UNVERIFIED signature (include/game/graphics/movement_core.hpp).
     unsigned int Function_0018EA20();

@@ -28,9 +28,9 @@ struct UnknownVtable_003DC9B8 {
     inline unsigned char & Field_00C1() { return *(unsigned char *)((unsigned char *)this + 0xC1); }
     // 0xC4: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned int & Field_00C4() { return *(unsigned int *)((unsigned char *)this + 0xC4); }
-    // 0x0013DCA0: UNVERIFIED signature (src/game/tu_13db40_13dc38.c).
+    // 0x0013DCA0: UNVERIFIED signature (src/game/actor/tu_13db40_13dc38.c).
     int Function_0013DCA0();
-    // 0x0013DD18: UNVERIFIED signature (src/game/tu_13db40_13dd18.c).
+    // 0x0013DD18: UNVERIFIED signature (src/game/actor/tu_13db40_13dd18.c).
     int Function_0013DD18();
     // 0x0013DD68: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_0013DD68();

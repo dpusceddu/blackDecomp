@@ -301,7 +301,7 @@ class FieldPointerTests(unittest.TestCase):
 class VerificationTests(unittest.TestCase):
     def test_namespaced_camera_method_exports_exact_128_bit_arguments(self):
         from unittest.mock import patch
-        unit = dict(source='src/game/actor_camera.cpp', externs={}, functions=[dict(
+        unit = dict(source='src/game/camera/actor_camera.cpp', externs={}, functions=[dict(
             addr=0x141248, symbol='SetTarget__Q213CampaignActor16CameraControllerxxfl', status='source')])
         with patch('units.load_units', return_value=[unit]):
             seeds, _ = cr.source_seeds(matched_only=True)
@@ -411,7 +411,7 @@ Value func_00100020(Value count) { return count; }
     def test_exact_matrix_consumers_export_signed_128_bit_values(self):
         from unittest.mock import patch
         # These production consumers also validate the shared matrix helpers against retail.
-        unit = dict(source='src/game/vu0_matrix.cpp', externs={}, functions=[
+        unit = dict(source='src/game/ai/vu0_matrix.cpp', externs={}, functions=[
             dict(addr=addr, symbol='func_%08X' % addr, status='source')
             for addr in (0x17bdf0, 0x1a71f8)])
         with patch('units.load_units', return_value=[unit]):

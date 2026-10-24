@@ -12,17 +12,17 @@ struct UnknownVtable_003DF348 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
     // 0x0: UNVERIFIED type; PS2 access offset.
     inline int & Field_0000() { return *(int *)((unsigned char *)this + 0x0); }
-    // 0x00193970: UNVERIFIED signature (src/game/tu_193970.c).
+    // 0x00193970: UNVERIFIED signature (src/game/ai/tu_193970.c).
     unsigned int Function_00193970(int argument0);
-    // 0x00193978: UNVERIFIED signature (src/game/tu_193970.c).
+    // 0x00193978: UNVERIFIED signature (src/game/ai/tu_193970.c).
     unsigned int Function_00193978();
     // 0x00198588: UNVERIFIED signature (src/game/tu_1984f0_198568.c).
     unsigned int Function_00198588();
-    // 0x00198A68: UNVERIFIED signature (src/game/tu_1984f0_198a68.c).
+    // 0x00198A68: UNVERIFIED signature (src/game/ai/tu_1984f0_198a68.c).
     unsigned int Function_00198A68();
-    // 0x00198B10: UNVERIFIED signature (src/game/tu_1984f0_198b10.c).
+    // 0x00198B10: UNVERIFIED signature (src/game/ai/tu_1984f0_198b10.c).
     signed char * Function_00198B10();
-    // 0x00198BB0: UNVERIFIED signature (src/game/tu_1984f0_198bb0.c).
+    // 0x00198BB0: UNVERIFIED signature (src/game/ai/tu_1984f0_198bb0.c).
     int Function_00198BB0();
     // 0x00198BD0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00198BD0();

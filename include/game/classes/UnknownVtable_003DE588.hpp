@@ -14,13 +14,13 @@ struct UnknownVtable_003DE588 {
     inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
     // 0x8: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline int & Field_0008() { return *(int *)((unsigned char *)this + 0x8); }
-    // 0x00193970: UNVERIFIED signature (src/game/tu_193970.c).
+    // 0x00193970: UNVERIFIED signature (src/game/ai/tu_193970.c).
     unsigned int Function_00193970(int argument0);
-    // 0x00193978: UNVERIFIED signature (src/game/tu_193970.c).
+    // 0x00193978: UNVERIFIED signature (src/game/ai/tu_193970.c).
     unsigned int Function_00193978();
     // 0x0019A578: UNVERIFIED signature (src/game/tu_199988_199f08.c).
     int Function_0019A578();
-    // 0x0019A5E0: UNVERIFIED signature (src/game/tu_199988_19a5e0.c).
+    // 0x0019A5E0: UNVERIFIED signature (src/game/ai/tu_199988_19a5e0.c).
     signed char * Function_0019A5E0();
     // 0x0019A648: UNVERIFIED signature (src/game/tu_199988_199f08.c).
     unsigned int Function_0019A648();

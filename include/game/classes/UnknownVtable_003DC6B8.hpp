@@ -26,7 +26,7 @@ struct UnknownVtable_003DC6B8 {
     int Function_00154518();
     // 0x00154640: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00154640();
-    // 0x00165B00: UNVERIFIED signature (src/game/actor_event_fanout.cpp).
+    // 0x00165B00: UNVERIFIED signature (src/game/actor/actor_event_fanout.cpp).
     void Function_00165B00(int argument0);
 
     // Vtable 0x003DC6B8; vptr field offset unknown; referenced zero RTTI header.

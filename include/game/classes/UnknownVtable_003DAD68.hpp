@@ -14,19 +14,19 @@ struct UnknownVtable_003DAD68 {
     inline int & Field_0000() { return *(int *)((unsigned char *)this + 0x0); }
     // 0x0011D440: UNVERIFIED signature (src/game/tu_11d358_11d430.c).
     int Function_0011D440(int argument0);
-    // 0x0011DE30: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
+    // 0x0011DE30: UNVERIFIED signature (src/game/unsorted/tu_11d358_11de30.c).
     unsigned int Function_0011DE30();
-    // 0x0011DE38: UNVERIFIED signature (src/game/tu_11d358_11de30.c).
+    // 0x0011DE38: UNVERIFIED signature (src/game/unsorted/tu_11d358_11de30.c).
     unsigned int Function_0011DE38();
-    // 0x0011EDB8: UNVERIFIED signature (src/game/tu_11d358_11ed98.c).
+    // 0x0011EDB8: UNVERIFIED signature (src/game/unsorted/tu_11d358_11ed98.c).
     int Function_0011EDB8();
-    // 0x0011EDD8: UNVERIFIED signature (src/game/tu_11d358_11ed98.c).
+    // 0x0011EDD8: UNVERIFIED signature (src/game/unsorted/tu_11d358_11ed98.c).
     unsigned int Function_0011EDD8();
-    // 0x0011EDF8: UNVERIFIED signature (src/game/tu_11d358_11ed98.c).
+    // 0x0011EDF8: UNVERIFIED signature (src/game/unsorted/tu_11d358_11ed98.c).
     int Function_0011EDF8();
     // 0x0011EE00: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     void * Function_0011EE00();
-    // 0x0011EEC8: UNVERIFIED signature (src/game/tu_11d358_11eec8.c).
+    // 0x0011EEC8: UNVERIFIED signature (src/game/unsorted/tu_11d358_11eec8.c).
     unsigned int Function_0011EEC8();
     // 0x00382BE0: UNVERIFIED signature (src/game/tu_382500_382bd8.c).
     int Function_00382BE0();

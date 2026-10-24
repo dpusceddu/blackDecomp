@@ -18,15 +18,15 @@ struct UnknownVtable_003DBCA8 {
     inline unsigned char & Field_000C() { return *(unsigned char *)((unsigned char *)this + 0xC); }
     // 0x20: UNVERIFIED type; PS2 access offset.
     inline void * & Field_0020() { return *(void * *)((unsigned char *)this + 0x20); }
-    // 0x00160ED0: UNVERIFIED signature (src/game/tu_15d958_160ea0.c).
+    // 0x00160ED0: UNVERIFIED signature (src/game/unsorted/tu_15d958_160ea0.c).
     unsigned int Function_00160ED0();
-    // 0x00161530: UNVERIFIED signature (src/game/tu_15d958_160ea0.c).
+    // 0x00161530: UNVERIFIED signature (src/game/unsorted/tu_15d958_160ea0.c).
     int Function_00161530();
     // 0x00161558: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     long Function_00161558();
-    // 0x00165B00: UNVERIFIED signature (src/game/actor_event_fanout.cpp).
+    // 0x00165B00: UNVERIFIED signature (src/game/actor/actor_event_fanout.cpp).
     void Function_00165B00(int argument0);
-    // 0x00165B90: UNVERIFIED signature (src/game/tu_1650b8_165af8.c).
+    // 0x00165B90: UNVERIFIED signature (src/game/actor/tu_1650b8_165af8.c).
     unsigned int Function_00165B90();
 
     // Vtable 0x003DBCA8; vptr field offset unknown; referenced zero RTTI header.

@@ -114,13 +114,13 @@ struct UnknownVtable_003DC5F8 {
     inline unsigned char & Field_08B2() { return *(unsigned char *)((unsigned char *)this + 0x8B2); }
     // 0x8B4: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_08B4() { return *(unsigned char *)((unsigned char *)this + 0x8B4); }
-    // 0x00125E30: UNVERIFIED signature (src/game/tu_125e20.c).
+    // 0x00125E30: UNVERIFIED signature (src/game/unsorted/tu_125e20.c).
     unsigned int Function_00125E30();
-    // 0x00125E38: UNVERIFIED signature (src/game/tu_125e20.c).
+    // 0x00125E38: UNVERIFIED signature (src/game/unsorted/tu_125e20.c).
     unsigned int Function_00125E38();
-    // 0x00126090: UNVERIFIED signature (src/game/tu_126090.c).
+    // 0x00126090: UNVERIFIED signature (src/game/unsorted/tu_126090.c).
     unsigned int Function_00126090();
-    // 0x001261F8: UNVERIFIED signature (src/game/tu_1261f8.c).
+    // 0x001261F8: UNVERIFIED signature (src/game/unsorted/tu_1261f8.c).
     int Function_001261F8();
     // 0x00132D98: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00132D98(int argument0, int argument1, float argument2);
@@ -146,15 +146,15 @@ struct UnknownVtable_003DC5F8 {
     unsigned int Function_0013C3E8(unsigned int argument0, unsigned int argument1, int * argument2, float argument3);
     // 0x0013C528: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0013C528(unsigned int argument0, unsigned int argument1, unsigned int argument2, float argument3);
-    // 0x00165B00: UNVERIFIED signature (src/game/actor_event_fanout.cpp).
+    // 0x00165B00: UNVERIFIED signature (src/game/actor/actor_event_fanout.cpp).
     void Function_00165B00(int argument0);
-    // 0x00165B88: UNVERIFIED signature (src/game/tu_1650b8_165af8.c).
+    // 0x00165B88: UNVERIFIED signature (src/game/actor/tu_1650b8_165af8.c).
     unsigned int Function_00165B88();
-    // 0x00383768: UNVERIFIED signature (src/game/tu_383768.c).
+    // 0x00383768: UNVERIFIED signature (src/game/unsorted/tu_383768.c).
     int Function_00383768();
-    // 0x00383770: UNVERIFIED signature (src/game/tu_383770.c).
+    // 0x00383770: UNVERIFIED signature (src/game/unsorted/tu_383770.c).
     unsigned int Function_00383770();
-    // 0x00383780: UNVERIFIED signature (src/game/tu_383770.c).
+    // 0x00383780: UNVERIFIED signature (src/game/unsorted/tu_383770.c).
     float Function_00383780();
     // 0x00383920: UNVERIFIED signature (PS2 exact source probe; full-build status recorded separately).
     void Function_00383920();

@@ -14,17 +14,17 @@ struct UnknownVtable_003DF638 {
     inline void * & Field_0000() { return *(void * *)((unsigned char *)this + 0x0); }
     // 0x8: UNVERIFIED type; PS2 access offset.
     inline unsigned char & Field_0008() { return *(unsigned char *)((unsigned char *)this + 0x8); }
-    // 0x00193970: UNVERIFIED signature (src/game/tu_193970.c).
+    // 0x00193970: UNVERIFIED signature (src/game/ai/tu_193970.c).
     unsigned int Function_00193970(int argument0);
-    // 0x00193978: UNVERIFIED signature (src/game/tu_193970.c).
+    // 0x00193978: UNVERIFIED signature (src/game/ai/tu_193970.c).
     unsigned int Function_00193978();
     // 0x00197C60: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00197C60();
-    // 0x00197CF0: UNVERIFIED signature (src/game/tu_197cf0.c).
+    // 0x00197CF0: UNVERIFIED signature (src/game/ai/tu_197cf0.c).
     int Function_00197CF0();
-    // 0x00197D48: UNVERIFIED signature (src/game/ai_action_197d48.cpp).
+    // 0x00197D48: UNVERIFIED signature (src/game/ai/ai_action_197d48.cpp).
     void Function_00197D48();
-    // 0x00197D98: UNVERIFIED signature (src/game/tu_197d98.c).
+    // 0x00197D98: UNVERIFIED signature (src/game/ai/tu_197d98.c).
     unsigned int Function_00197D98();
     // 0x00383DB8: UNVERIFIED signature (src/game/inline/linkonce_383db8.c).
     unsigned int Function_00383DB8();

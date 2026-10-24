@@ -5,7 +5,8 @@ How source replaces assembly in the build. The inputs are `src/`, `config/SLUS_2
 
 ## One file per translation unit
 
-`src/<library>/tu_<address>.c|cpp` lists every function of one translation unit (`config/tus.yaml`) in address order. A
+`src/<library>/tu_<address>.c|cpp` (for the game library `src/game/<subsystem>/tu_<address>.c|cpp`, see
+[src/game/README.md](../src/game/README.md)) lists every function of one translation unit (`config/tus.yaml`) in address order. A
 recovered function is C or C++; the others are markers:
 
 ```c
@@ -36,8 +37,8 @@ code) live in `src/<library>/inline/` ([build.md](build.md#link-once-copies)).
 ```yaml
 defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas], sections: true}
 splits:
-  - {src: src/game/tu_100518.c, range: [0x100518, 0x103858]}
-  - {src: src/game/frontend_menu_notify.cpp, range: [0x103db0, 0x103df0], flags: [-O1, -G0, -snas]}
+  - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x103858]}
+  - {src: src/game/ui/frontend_menu_notify.cpp, range: [0x103db0, 0x103df0], flags: [-O1, -G0, -snas]}
   - {src: src/physics/tu_32bc70.cpp, range: [0x32bc70, 0x32e3d0], flags: [-O2, -G8, -snas], assembler: sn-min6,
      owner: physics-scene, data_ranges: [...], full_tu_context: true, note: "..."}
 ```

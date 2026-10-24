@@ -3,7 +3,7 @@
 
   splits.yaml      the split list: one entry per source file that replaces assembly, with the address range it covers and
                    how to compile it. Example:
-                     - {src: src/game/tu_100518.c, range: [0x100518, 0x103858]}
+                     - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x103858]}
                      - {src: src/kynapse/behaviors_hide.cpp, range: [0x2d4148, 0x2d4a20], flags: [-O2, -G0, -snas, -fbyte-bool]}
                    Keys: src, range (start inclusive, end exclusive), compiler, flags, assembler (a variant such as sn-min6),
                    sections (false: no -ffunction-sections), owner, note; rare ones: functions (the addresses the split

@@ -31,6 +31,7 @@ TU_STEM = re.compile(r'^(?:tu_[0-9a-f]{6}|crt0)(?:_[0-9a-f]{6})?$')
 _MAP = None
 _VIEW_LIBRARIES = None
 _INLINE_OWNERS = None
+_GAME_SUBSYSTEMS = None
 
 
 def _num(v):
@@ -100,9 +101,28 @@ def library_of(addr):
     return library_of_tu(addr)
 
 
-def source_dir(addr):
-    """Directory under src/ for a new source unit at `addr`: src/<library>, or src/<owner>/inline for a link-once copy."""
-    return 'src/%s/inline' % library_of(addr) if is_inline(addr) else 'src/%s' % library_of(addr)
+def game_subsystem(name):
+    """Subdirectory of src/game/ for the file `name` (with extension) from config/SLUS_213.76/game_subsystems.txt; 'unsorted' if unlisted."""
+    global _GAME_SUBSYSTEMS
+    if _GAME_SUBSYSTEMS is None:
+        _GAME_SUBSYSTEMS = {}
+        path = ROOT / 'config/SLUS_213.76/game_subsystems.txt'
+        for line in path.read_text().splitlines() if path.exists() else ():
+            if line.strip() and not line.startswith('#'):
+                file, subsystem = line.split()[:2]
+                _GAME_SUBSYSTEMS[file] = subsystem
+    return _GAME_SUBSYSTEMS.get(name, 'unsorted')
+
+
+def source_dir(addr, name=None):
+    """Directory under src/ for a new source unit at `addr`: src/<library>, src/<owner>/inline for a link-once copy, and
+    src/game/<subsystem> for game code (a file that the subsystem list does not name goes to src/game/unsorted)."""
+    library = library_of(addr)
+    if is_inline(addr):
+        return 'src/%s/inline' % library
+    if library == 'game':
+        return 'src/game/' + game_subsystem(name)
+    return 'src/' + library
 
 
 def tu_stem(tu):
@@ -119,4 +139,5 @@ def stem_for(addr):
 
 def source_path(addr, suffix='.c'):
     """Repo-relative path for a source unit that starts at `addr` and has no better name."""
-    return '%s/%s%s' % (source_dir(addr), stem_for(addr), suffix)
+    name = stem_for(addr) + suffix
+    return '%s/%s' % (source_dir(addr, name), name)

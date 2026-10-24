@@ -36,11 +36,11 @@ struct UnknownVtable_003DB828 {
     int Function_00163D08(unsigned long argument0, void * argument1);
     // 0x00163DA8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_00163DA8();
-    // 0x00163DC0: UNVERIFIED signature (src/game/tu_163dc0.c).
+    // 0x00163DC0: UNVERIFIED signature (src/game/unsorted/tu_163dc0.c).
     int Function_00163DC0();
-    // 0x00165B00: UNVERIFIED signature (src/game/actor_event_fanout.cpp).
+    // 0x00165B00: UNVERIFIED signature (src/game/actor/actor_event_fanout.cpp).
     void Function_00165B00(int argument0);
-    // 0x00165B90: UNVERIFIED signature (src/game/tu_1650b8_165af8.c).
+    // 0x00165B90: UNVERIFIED signature (src/game/actor/tu_1650b8_165af8.c).
     unsigned int Function_00165B90();
 
     // Vtable 0x003DB828; vptr field offset unknown; referenced zero RTTI header.

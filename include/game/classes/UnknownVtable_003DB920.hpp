@@ -46,19 +46,19 @@ struct UnknownVtable_003DB920 {
     inline U128 & Field_0180() { return *(U128 *)((unsigned char *)this + 0x180); }
     // 0x190: UNVERIFIED type; PS2 access offset.
     inline int & Field_0190() { return *(int *)((unsigned char *)this + 0x190); }
-    // 0x00125D10: UNVERIFIED signature (src/game/tu_125d10.c).
+    // 0x00125D10: UNVERIFIED signature (src/game/unsorted/tu_125d10.c).
     int Function_00125D10();
-    // 0x00125E20: UNVERIFIED signature (src/game/tu_125e20.c).
+    // 0x00125E20: UNVERIFIED signature (src/game/unsorted/tu_125e20.c).
     unsigned int Function_00125E20();
-    // 0x00125E28: UNVERIFIED signature (src/game/tu_125e20.c).
+    // 0x00125E28: UNVERIFIED signature (src/game/unsorted/tu_125e20.c).
     unsigned int Function_00125E28();
-    // 0x00125E30: UNVERIFIED signature (src/game/tu_125e20.c).
+    // 0x00125E30: UNVERIFIED signature (src/game/unsorted/tu_125e20.c).
     unsigned int Function_00125E30();
-    // 0x00125E38: UNVERIFIED signature (src/game/tu_125e20.c).
+    // 0x00125E38: UNVERIFIED signature (src/game/unsorted/tu_125e20.c).
     unsigned int Function_00125E38();
-    // 0x00126090: UNVERIFIED signature (src/game/tu_126090.c).
+    // 0x00126090: UNVERIFIED signature (src/game/unsorted/tu_126090.c).
     unsigned int Function_00126090();
-    // 0x001261F8: UNVERIFIED signature (src/game/tu_1261f8.c).
+    // 0x001261F8: UNVERIFIED signature (src/game/unsorted/tu_1261f8.c).
     int Function_001261F8();
     // 0x00164268: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00164268(unsigned long argument0, void * argument1);
@@ -66,29 +66,29 @@ struct UnknownVtable_003DB920 {
     int Function_00164548(unsigned int argument0);
     // 0x00164860: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00164860();
-    // 0x001648B8: UNVERIFIED signature (src/game/tu_1648b8.c).
+    // 0x001648B8: UNVERIFIED signature (src/game/actor/tu_1648b8.c).
     int Function_001648B8();
-    // 0x00169C10: UNVERIFIED signature (src/game/actor_c4c8.cpp).
+    // 0x00169C10: UNVERIFIED signature (src/game/actor/actor_c4c8.cpp).
     int Function_00169C10(unsigned long argument0, void * argument1);
-    // 0x00169D20: UNVERIFIED signature (src/game/tu_169d20.c).
+    // 0x00169D20: UNVERIFIED signature (src/game/actor/tu_169d20.c).
     int Function_00169D20();
-    // 0x00169D28: UNVERIFIED signature (src/game/tu_169d20.c).
+    // 0x00169D28: UNVERIFIED signature (src/game/actor/tu_169d20.c).
     int Function_00169D28();
-    // 0x00169D48: UNVERIFIED signature (src/game/tu_169d20.c).
+    // 0x00169D48: UNVERIFIED signature (src/game/actor/tu_169d20.c).
     int Function_00169D48();
-    // 0x00169EE0: UNVERIFIED signature (src/game/tu_169ee0.c).
+    // 0x00169EE0: UNVERIFIED signature (src/game/actor/tu_169ee0.c).
     unsigned int Function_00169EE0();
-    // 0x00169EE8: UNVERIFIED signature (src/game/tu_169ee8.c).
+    // 0x00169EE8: UNVERIFIED signature (src/game/actor/tu_169ee8.c).
     unsigned int Function_00169EE8();
-    // 0x00169EF0: UNVERIFIED signature (src/game/tu_169ee8.c).
+    // 0x00169EF0: UNVERIFIED signature (src/game/actor/tu_169ee8.c).
     unsigned int Function_00169EF0();
-    // 0x00383768: UNVERIFIED signature (src/game/tu_383768.c).
+    // 0x00383768: UNVERIFIED signature (src/game/unsorted/tu_383768.c).
     int Function_00383768();
-    // 0x00383770: UNVERIFIED signature (src/game/tu_383770.c).
+    // 0x00383770: UNVERIFIED signature (src/game/unsorted/tu_383770.c).
     unsigned int Function_00383770();
-    // 0x00383778: UNVERIFIED signature (src/game/tu_383770.c).
+    // 0x00383778: UNVERIFIED signature (src/game/unsorted/tu_383770.c).
     unsigned int Function_00383778();
-    // 0x00383780: UNVERIFIED signature (src/game/tu_383770.c).
+    // 0x00383780: UNVERIFIED signature (src/game/unsorted/tu_383770.c).
     float Function_00383780();
 
     // Vtable 0x003DB920; vptr field offset unknown; referenced zero RTTI header.

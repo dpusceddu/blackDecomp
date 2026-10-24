@@ -107,6 +107,7 @@ Experiments and one-time migrations whose results are recorded in [history.md](h
 | `tools/studies/asmcheck.py` | Phase 0 assembler check: does a given EE-aware GNU assembler reassemble retail instruction words identically? |
 | `tools/studies/divide_compiler_control.py` | Compare a retail scalar divide under catalog SN and Sony compiler defaults. |
 | `tools/studies/full_tu_context_control.py` | Verify that real unfinished TU context cannot leak through sorted text inputs. |
+| `tools/studies/group_game_sources.py` | Group the translation unit files of src/game/ into subsystem directories, from the evidence the repository already holds. |
 | `tools/studies/handbook_controls.py` | Verify handbook recipes with isolated SN 1.36 retail controls and perturbations. |
 | `tools/studies/large_study.py` | Reproduce a fixed private calibration set against the isolated compiler catalog. |
 | `tools/studies/linkonce_owners.py` | Decide which library owns each link-once copy (compiler-emitted inline and template code) and write the owner list. |

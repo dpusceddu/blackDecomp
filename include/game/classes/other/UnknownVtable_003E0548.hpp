@@ -16,11 +16,11 @@ struct UnknownVtable_003E0548 {
     unsigned int Function_001CBEA8(void * argument0);
     // 0x001CBED0: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_001CBED0(unsigned int argument0, unsigned int argument1, void * argument2);
-    // 0x001CC338: UNVERIFIED signature (src/game/tu_1cc338.c).
+    // 0x001CC338: UNVERIFIED signature (src/game/unsorted/tu_1cc338.c).
     int Function_001CC338(void * argument0);
-    // 0x001CC350: UNVERIFIED signature (src/game/tu_1cc350.c).
+    // 0x001CC350: UNVERIFIED signature (src/game/unsorted/tu_1cc350.c).
     void * Function_001CC350(void * argument0, int argument1);
-    // 0x001CC398: UNVERIFIED signature (src/game/tu_1cc398.c).
+    // 0x001CC398: UNVERIFIED signature (src/game/unsorted/tu_1cc398.c).
     unsigned int Function_001CC398();
 
     // Vtable 0x003E0548; vptr field offset unknown; referenced zero RTTI header.

@@ -26,13 +26,13 @@ struct UnknownVtable_003DC9F8 {
     unsigned int Function_0013EE50();
     // 0x0013EE60: UNVERIFIED signature (src/game/tu_13db40_13ee20.c).
     unsigned int Function_0013EE60();
-    // 0x0013F160: UNVERIFIED signature (src/game/actor_13db40.cpp).
+    // 0x0013F160: UNVERIFIED signature (src/game/camera/actor_13db40.cpp).
     void Function_0013F160();
-    // 0x0013F290: UNVERIFIED signature (src/game/tu_13db40_13f290.c).
+    // 0x0013F290: UNVERIFIED signature (src/game/camera/tu_13db40_13f290.c).
     unsigned int Function_0013F290();
-    // 0x0013F2E8: UNVERIFIED signature (src/game/tu_13db40_13f290.c).
+    // 0x0013F2E8: UNVERIFIED signature (src/game/camera/tu_13db40_13f290.c).
     int Function_0013F2E8();
-    // 0x0013F308: UNVERIFIED signature (src/game/tu_13db40_13f290.c).
+    // 0x0013F308: UNVERIFIED signature (src/game/camera/tu_13db40_13f290.c).
     unsigned int Function_0013F308();
 
     // Vtable 0x003DC9F8; vptr field offset unknown; referenced zero RTTI header.

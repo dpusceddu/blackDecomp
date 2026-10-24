@@ -18,21 +18,21 @@ struct UnknownVtable_003DD978 {
     inline unsigned char & Field_0014() { return *(unsigned char *)((unsigned char *)this + 0x14); }
     // 0x18: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0018() { return *(float *)((unsigned char *)this + 0x18); }
-    // 0x0018E2F0: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E2F0: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     int Function_0018E2F0();
-    // 0x0018E448: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E448: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     int Function_0018E448();
-    // 0x0018E450: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E450: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     unsigned int Function_0018E450();
-    // 0x0018E488: UNVERIFIED signature (src/game/tu_18dd88_18e2e8.c).
+    // 0x0018E488: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e2e8.c).
     unsigned int Function_0018E488();
     // 0x0018E4C0: UNVERIFIED signature (include/game/graphics/movement_core.hpp).
     int Function_0018E4C0(unsigned int * argument0);
-    // 0x0018E578: UNVERIFIED signature (src/game/tu_18dd88_18e578.c).
+    // 0x0018E578: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e578.c).
     unsigned int Function_0018E578();
-    // 0x0018E588: UNVERIFIED signature (src/game/tu_18dd88_18e578.c).
+    // 0x0018E588: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e578.c).
     int Function_0018E588();
-    // 0x0018E5B8: UNVERIFIED signature (src/game/tu_18dd88_18e578.c).
+    // 0x0018E5B8: UNVERIFIED signature (src/game/unsorted/tu_18dd88_18e578.c).
     int Function_0018E5B8(int argument0);
     // 0x0018E7C0: UNVERIFIED signature (include/game/graphics/movement_core.hpp).
     int Function_0018E7C0(unsigned int argument0);
@@ -42,9 +42,9 @@ struct UnknownVtable_003DD978 {
     unsigned int Function_0018EBE0(S128 argument0);
     // 0x00190A68: UNVERIFIED signature (include/game/graphics/movement_core.hpp).
     void Function_00190A68();
-    // 0x00190BC0: UNVERIFIED signature (src/game/tu_190a68_190bc0.c).
+    // 0x00190BC0: UNVERIFIED signature (src/game/ai/movement/tu_190a68_190bc0.c).
     signed char * Function_00190BC0(void * argument0);
-    // 0x00190CB0: UNVERIFIED signature (src/game/tu_190cb0.c).
+    // 0x00190CB0: UNVERIFIED signature (src/game/ai/movement/tu_190cb0.c).
     int Function_00190CB0();
     // 0x00383E68: UNVERIFIED signature (src/game/inline/linkonce_383e68.c).
     unsigned int Function_00383E68(S128 * argument0);
