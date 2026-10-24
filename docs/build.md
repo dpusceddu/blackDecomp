@@ -44,8 +44,8 @@ Every tool that needs a compiler, assembler or linker sends its work through `to
 
 ### Running the toolchain elsewhere (optional)
 
-The toolchain only runs on Linux x86-64. A contributor who prefers to run it elsewhere can name a Python file in
-the ignored `.local/config.json`:
+The toolchain only runs on Linux x86-64. A contributor who prefers to run it elsewhere can name a Python file in the ignored
+`.local/config.json`:
 
 ```json
 {"backend_plugin": "path/to/plugin.py"}
