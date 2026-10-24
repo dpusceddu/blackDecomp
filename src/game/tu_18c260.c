@@ -1,5 +1,4 @@
-/* Translation unit tu_18c260 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_0018C368();
@@ -26,8 +25,19 @@ void func_0018C260(void *arg0)
   }
 }
 
-/* Assembly between the functions: func_0018C2D8 (8 bytes), func_0018C2E0 (136 bytes), func_0018C368 (88 bytes), func_0018C3C0 (72 bytes), func_0018C408 (56 bytes), func_0018C440 (584 bytes), func_0018C688 (496 bytes), func_0018C878 (96 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C2D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C2E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C368);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C3C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C408);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C440);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C688);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C878);
 
 s32 func_0018C8D8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34) == 3;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C8E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018CC20);

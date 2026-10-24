@@ -1,7 +1,12 @@
+#include "include_asm.h"
+
 #include "animation/runtime.h"
 
 extern "C" void *func_00350060(void *);
 extern "C" void *func_00351A40(void *);
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034EAE0);
+
 extern "C" s32 func_0034EB88(PlaybackState *state, PlaybackAllocator *allocator) {
     void *memory;
     u8 *row;

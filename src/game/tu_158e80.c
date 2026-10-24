@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 void func_00158E80(void *arg0) {

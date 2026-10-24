@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 s32 func_0026F320(s32 arg0)
@@ -10,3 +11,6 @@ s32 func_0026F320(s32 arg0)
   new_var = 4;
   return (arg0 & 0xF) + (((arg0 >> new_var) & 0xFFFF) * 0xA);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026F340);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026F3C0);

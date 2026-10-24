@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "rw_audio/sound.h"
 
 extern void func_00315EE8(RwaSound *, s32);

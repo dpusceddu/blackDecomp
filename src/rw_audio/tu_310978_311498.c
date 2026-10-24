@@ -1,5 +1,4 @@
-/* Translation unit rwa_ee/tu_310978 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern M2C_UNK D_00455F58;
@@ -17,7 +16,8 @@ s32 func_00311498(void *arg0, void *arg1) {
     return 1;
 }
 
-/* Assembly between the functions: func_003114C8 (8 bytes), func_003114D0 (136 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003114C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003114D0);
 
 M2C_UNK * func_00311558(void) {
     return &D_00455F58;

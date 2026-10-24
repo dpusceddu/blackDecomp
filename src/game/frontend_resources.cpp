@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/frontend_resources.hpp"
 
 extern "C" void func_00274F60(void*);
@@ -103,3 +105,73 @@ extern "C" void func_00107CF8(void* data) { D_0040F0F0.ReleaseData(data); }
 extern "C" void func_00107D20(void* data) { D_0040F0F0.ReleaseData(data); }
 extern "C" void func_00107D48() {}
 extern "C" void func_00107D50() {}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107B18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107D58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107DF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107F60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107FB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107FB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108050);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001080A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001080C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001080F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108120);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108218);
+
+#ifdef NON_MATCHING
+// Unmatched: func_00108328: nested lookup control flow and register allocation.
+#include "game/frontend_resources.hpp"
+struct FrontendNamedResource { char reserved[0xa8]; char name[1]; };
+struct FrontendNamedArchiveEntry { int reserved0,reserved4; FrontendNamedResource* resource; int reservedc; };
+struct FrontendNamedArchive { int reserved0,reserved4,count; FrontendNamedArchiveEntry* entries; };
+struct FrontendNamedArchiveManager {
+    char reserved[0xc8c];
+    FrontendNamedArchive* archives[11];
+    FrontendNamedResource* Find(const char* name) __asm__("func_00108328");
+};
+extern FrontendResourceTable D_0040F0F0;
+extern "C" int func_001080F0();
+extern "C" int func_00360838(const char*,const char*);
+FrontendNamedResource* FrontendNamedArchiveManager::Find(const char* name) {
+    int worker=func_001080F0();
+    int current=D_0040F0F0.selectedIndex;
+    int all=(unsigned)(current-13)<2;
+    FrontendNamedArchive** archive=archives;
+    for(int index=0;index<11;++index,++archive) {
+        if(*archive) {
+            int bank=D_0040F0F0.Find(*archive);
+            if(all || bank==1 || (worker && current==bank)) {
+                FrontendNamedArchive* currentArchive=*archive;
+                FrontendNamedResource* found=0;
+                for(int resource=0;resource<currentArchive->count;++resource) {
+                    FrontendNamedResource* object=currentArchive->entries[resource].resource;
+                    if(!func_00360838(object->name,name)) { found=object; break; }
+                }
+                if(found) return found;
+            }
+        }
+    }
+    return 0;
+}
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108328);
+#endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001084F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108540);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108718);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108748);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001087C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001087C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108818);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108890);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108958);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001089A8);

@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 void func_0028BB68(void *arg0, s32 arg1) {

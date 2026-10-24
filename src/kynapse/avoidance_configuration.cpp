@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/avoidance_classes.hpp"
 
 namespace KaimAvoidance {

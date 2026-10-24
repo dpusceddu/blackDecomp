@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/parameter_tables.hpp"
 
 BufferSet::BufferSet()
@@ -228,3 +230,11 @@ ParameterTables::ParameterTables()
         order[i] = i;
     gCompare = CompareSets;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8650);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8740);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8830);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8AB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8C50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8FA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E90B8);

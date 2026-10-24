@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/actor/renderable_state.hpp"
 namespace CampaignActor {
 extern "C" {
@@ -10,6 +12,7 @@ void func_00126D78(void *, void *, int);
 void func_00129108(void *, void *, int, int, long);
 extern char *D_0040F4D0, *D_0040F4E4, *D_0040F4F4;
 }
+
 void RenderableState::Update(float delta)
 {
     func_0014BE20(this, delta);
@@ -38,3 +41,6 @@ void RenderableState::Release()
 
 // Unmatched: 0x14BD58 RGB component load/store allocation.
 // Unmatched: 0x14F498 visibility-mask helper and render-loop register allocation.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014F490);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014F498);

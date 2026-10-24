@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "animation/arms/lifecycle.hpp"
 #include "ps2/vu0_micro.hpp"
 #include "ps2/ee_fpu.h"
@@ -5,6 +7,7 @@
 #include "ps2/prelude.h"
 namespace ArmsAnimation {
 /* Irreducible EE matrix primitives within the recovered initialization. */
+
 static inline void EmptyBone(AnimationHierarchy*) {}
 static inline void Matrix_Identity(AnimationMatrix *matrix) {
     __asm__ volatile("pand $8,$0,$0\n\tlui $8,0x3f80\n\tsq $8,0x0(%0)\n\tpextlw $8,$8,$0\n\tsq $8,0x10(%0)\n\tpextlw $9,$0,$8\n\tsq $9,0x20(%0)\n\tpextlw $9,$8,$0\n\tsq $9,0x30(%0)": :"r"(matrix):"$8","$9","memory");

@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/constraints.hpp"
 namespace Kaim {
+
 inline float NavEdge::GetAuthoredLength() const {
  NodeGraph* owner=graph;
  if(this==&owner->syntheticEdge)return owner->syntheticLength;
@@ -154,3 +157,13 @@ bool GridConstraint::Sample(void*,const int* x,const int* y,float* out) {
 }
 }
 // Unmatched: class registration retains address-grouping and scheduling differences.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F12C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F1358);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F15E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F1678);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F1D70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F1DD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F1E40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F1EB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F22D8);

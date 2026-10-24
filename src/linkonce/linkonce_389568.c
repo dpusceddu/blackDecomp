@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "ps2/prelude.h"
 
 extern s32 D_0049A978;

@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 #include "animation/graph.h"
 #include "animation/parameter_bank.h"
 
 /* Names are inferred from the fixed-capacity parameter bank operations. */
 AnimationParameterBank *AnimationParameterBank_Initialize(AnimationParameterBank *bank)
     ANIMATION_FUNCTION(00350060);
+
 AnimationParameterBank *AnimationParameterBank_Initialize(AnimationParameterBank *bank) {
     bank->count = 0;
     AnimationParameterMemory_Set(bank, 0, 0x118);

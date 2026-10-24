@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_stages_decls.hpp"
 
@@ -6,6 +8,7 @@ namespace BlackGame {
 // Drops route points the follower already passed (keeping at least two) and republishes the
 // follower's current waypoint.
 // Unmatched: Xbox mode in ESI (private contract).
+
 void TrimConsumedRoutePoints(RouteMode* mode)
 {
     while (mode->follower->cursor > 1 && mode->active->PointCount() > 2) {

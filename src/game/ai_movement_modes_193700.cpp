@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
 namespace BlackGame {
 // /SLUS_213.76 0x193700
 // Unmatched: Xbox fills the vector members component by component; the PS2 splats a register.
+
 bool FormationMode::Reset()
 {
     bound = 0;
@@ -22,3 +25,5 @@ void FormationMode::Update()
 }
 
 }  // namespace BlackGame
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00193778);

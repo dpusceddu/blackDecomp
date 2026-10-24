@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
@@ -18,3 +19,26 @@ s32 * func_00296468(s32 *arg0, s32 *arg1) {
     }
     return func_002962F0(arg1);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002964C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00296500);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00296688);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00296D90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00296FE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00297468);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00297688);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002978C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00297BF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298020);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002981C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298718);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298890);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002989F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298B78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298C60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298CF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298D88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298DC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298E88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00298F78);

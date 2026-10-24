@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 extern "C" long func_0035E730(const char*);
 extern "C" float func_00291C68(long);
 #include "kynapse/behaviors/pathway_vectors.hpp"
@@ -240,3 +242,7 @@ done:return true;
 }
 
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D61B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6218);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6278);

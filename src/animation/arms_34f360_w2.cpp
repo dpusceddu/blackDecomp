@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "animation/arms/sampler.hpp"
 namespace ArmsAnimation {
+
 static inline float SampleAbs(float value){return __builtin_fabsf(value);}
 }
 namespace ArmsAnimation {
@@ -121,8 +124,6 @@ s32 func_0034FA60(SamplingPipeline *context, SamplingPoseHeader *out, SamplingPo
 }
 
 namespace Fragment34FAF8 {
-/* Translation unit animation/tu_34f360 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
 
 extern s32 func_00343FC8(...) __asm__("func_00343FC8");
 extern s32 func_00344008(...) __asm__("func_00344008");
@@ -185,8 +186,6 @@ SampleHeader* __attribute__((section(".text.func_0034FC80"))) Sampler::HeaderPai
 }
 
 namespace Fragment34FE10 {
-/* Translation unit animation/tu_34f360 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
 
 extern s32 func_00343FC8(...) __asm__("func_00343FC8");
 extern s32 func_00344008(...) __asm__("func_00344008");

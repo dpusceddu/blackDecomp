@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 namespace SoundEventRecovery {
 // SoundPool's Reset call and the Xbox counterpart support this identity. The
 // PS2 access widths/offsets are verified; Xbox field meanings remain provisional.
@@ -13,6 +15,7 @@ struct SoundEventPrefix {
 }
 using namespace SoundEventRecovery;
 // Preserve the floating return temporary: direct literals lower to integer stores.
+
 static inline float Zero() { return 0.0f; }
 extern "C" {
 void func_0030E9C8(SoundEventPrefix* event)

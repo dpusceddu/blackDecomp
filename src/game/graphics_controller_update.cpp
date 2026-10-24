@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/camera/pad.hpp"
 
 extern "C"{
@@ -9,6 +11,7 @@ extern int func_0029CB50(int, int, int);
 extern float func_0026C098(void *, int, int, int, int);
 extern float func_0026BF60(void *, float, float);
 }
+
 void CampaignGraphics::Controller::Update() {
     float *pressure;
     float scaled1;
@@ -220,3 +223,5 @@ void CampaignGraphics::Controller::Update() {
         this->initialized = 1;
     }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C798);

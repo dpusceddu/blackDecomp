@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_stages_decls.hpp"
 
@@ -6,6 +8,7 @@ namespace BlackGame {
 // Steps a request through its stage; false means wait until the next update. Kinds 0, 9 and 10
 // have nothing to do.
 // Unmatched: Xbox request in EAX and the stages are private callees (reproduced only under /GL).
+
 bool AdvanceRouteRequest(RouteRequest* request)
 {
     switch (request->kind) {
@@ -50,3 +53,5 @@ bool BeginQueuedRoute(RouteRequest* request)
 }
 
 }  // namespace BlackGame
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A220);

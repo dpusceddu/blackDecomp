@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/manager.hpp"
 namespace Kaim {
+
 CGraphManager::CGraphManager()
 {
     items = new CGraphMap*[8];
@@ -142,3 +145,10 @@ bool CGraphManager::AddGraph(const char*name,CSpatialGraph *graph,unsigned char 
 
 }
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2578);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2BF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2E28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2F58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F30E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F3208);

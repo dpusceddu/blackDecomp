@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/accessways.hpp"
 using namespace Kaim;
 
@@ -161,3 +163,11 @@ bool ComputeAccessWaysTraversal::Consider(SpatialNode *node){
 }
 
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCB50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCEC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD4A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD780);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD7D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD800);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD8C8);

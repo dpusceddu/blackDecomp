@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/factory.hpp"
 namespace KaimFactory {
+
 Engine*CreateEngine(InitConfig*config,ObjectRoot*context) {
  if(!IsStarted())return 0;unsigned int sum=0;for(unsigned int i=0;i<0x5b;++i)sum+=gCheckTable[i];if(sum!=0x4106)return 0;
  unsigned int i=0;for(;i<gSettings.engineSlots;++i)if(!gEngineSlots[i]){if(i>=gEnginesUsed)++gEnginesUsed;break;}
@@ -31,3 +34,21 @@ void Method4(Entity*e,unsigned char b){e->Method4(b);}
 // Unmatched: entity/team creation retains iterator-return copies and branch merging differences.
 // Unmatched: the registered-entity forwarder retains an unresolved return contract and branch layout.
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0410);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0750);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0D20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1038);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1058);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1078);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1098);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E11A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1208);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1228);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1248);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1280);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E13B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1470);

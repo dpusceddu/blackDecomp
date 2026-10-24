@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/pointmapper.hpp"
 
 int PointMapper::Map(PointLocator* locator,unsigned int container,unsigned int* mapped) {
@@ -14,3 +16,7 @@ int PointMapper::Map(PointLocator* locator,unsigned int container,unsigned int* 
 
 // Unmatched: Clear (368 B) differs in loop scheduling and row-base lifetimes.
 // Unmatched: Build (1800 B), Save (788 B), LoadSmall (1364 B), and Load (1448 B) differ in allocator and stream-helper lifetimes.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC9F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DCA00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DCA20);

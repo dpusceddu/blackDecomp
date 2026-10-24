@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "game/effects/render_state.h"
 extern void func_001B08A8(void *,int,int,int),func_0027B2F0(void *,float);
+
 void func_001AE860(BkActorRenderPS2 *actor) {
  int *position=(int *)actor;
  func_001B08A8(&actor->buffers[0],position[0],position[1],position[2]);
@@ -8,3 +11,5 @@ void func_001AE860(BkActorRenderPS2 *actor) {
  func_0027B2F0(&actor->buffers[0],30.0f);
  actor->resource=0;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE8F0);

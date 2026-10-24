@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_stages_decls.hpp"
 
@@ -6,6 +8,7 @@ namespace BlackGame {
 // Stage 7: probes the controller's local route from the origin to the next stored point (unlifted);
 // finishes the request, and consumes that point when the probe is clear.
 // Unmatched: Xbox request in EDI with packed-vector temporaries; PS2 vector math.
+
 bool CheckFinalRouteLeg(RouteRequest* request)
 {
     bool clear = CheckLocalRoute(&request->owner->controller, Load(request->origin),

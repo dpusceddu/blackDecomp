@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 u8 func_001ADBF0(s32 arg0, void *arg1)
@@ -18,3 +19,6 @@ u8 func_001ADBF0(s32 arg0, void *arg1)
   }
   return 0U;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ADC10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ADC30);

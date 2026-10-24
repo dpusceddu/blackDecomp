@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
 namespace BlackGame {
 // /SLUS_213.76 0x191568
 // PS2 0x191568
+
 void MovementModeBase::BindBase(Brain* owner)
 {
     brain = owner;

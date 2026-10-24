@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern M2C_UNK D_004835C0;
@@ -15,3 +16,10 @@ M2C_UNK *func_003688D8(s32 arg0)
   *((void **) (((s8 *) new_var) + 8)) = temp_4;
   return new_var;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00368900);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00368940);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00368980);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00368B18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00368C90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00368D60);

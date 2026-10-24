@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
@@ -21,3 +22,13 @@ void * func_00286698(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     M2C_FIELD(arg0, s8 *, 0x288C) = 0;
     return temp_2;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00286720);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00286770);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002867C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002867F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00286878);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00286990);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00286C10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00286C80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00286CA0);

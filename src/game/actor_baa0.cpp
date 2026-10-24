@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "game/actor/sphere_region.hpp"
 namespace CampaignActor {
+
 long SphericalRegion::Update(PositionArg point,long message){
  using namespace BlackPS2::VU0;
  Vec delta=Sub3(point,Load(configuration->center));

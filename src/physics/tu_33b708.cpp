@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "physics/relocation.hpp"
 #include "physics/startup_constants.h"
 
@@ -52,3 +54,5 @@ StartupToken D_0040E938 __attribute__((section(".sbss")));
 StartupToken D_0040E940 __attribute__((section(".sbss")));
 ConstantQuad D_0045E860, D_0045E870, D_0045E880, D_0045E890;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033B850);

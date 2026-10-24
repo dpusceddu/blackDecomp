@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/actor/prop_state.hpp"
 namespace CampaignActor {
 using namespace BlackGame;
@@ -10,6 +12,7 @@ void func_001B1728(PositionArg, PositionArg, Matrix4 *);
 void func_001B7A00(void *, const Matrix4 *, unsigned long, int);
 extern char *D_0040F4D8;
 }
+
 Position4*PropState::StateBounds(){RuntimeConfig*r=func_00151E60(this);if(!r)return 0;return(Position4*)((char*)r+0xB0);}
 bool PropState::Contact(const ContactData*contact){
  if(!ready)return false;RuntimeConfig*r=func_00151E60(this);int state=func_001AFDA8(&selector);if(!r)return false;if(contacted)return false;{
@@ -31,3 +34,11 @@ bool PropState::Contact(const ContactData*contact){
 // Unmatched: 0x151E80 inertia vector constructor and component reads.
 // Unmatched: 0x152000 activation predicate callback register lifetime.
 // Unmatched: 0x152698 bounds predicate branch and spill reuse.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152108);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152148);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001521B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152588);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152680);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152690);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152698);

@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Inferred PS2 frontend layout and behavior.
 extern "C" int func_00129DE8(void*);
 extern "C" int func_001E8900(int);
@@ -12,6 +14,7 @@ struct FrontendSequentialExit {
     int state;
     int Step() __asm__("func_00106DF0");
 };
+
 int FrontendSequentialExit::Step() {
     switch(state) {
     case 2: case 3: case 4: case 28:

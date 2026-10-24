@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "kynapse/behaviors/shooter.hpp"
 namespace Kaim {
+
 bool ShooterAgent::IsClear(const Vec3* direction)
 {
     if (dangerousConeAngle <= 0.0f)

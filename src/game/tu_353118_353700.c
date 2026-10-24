@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern char D_0040A718[];
@@ -7,3 +8,17 @@ extern s32 func_0036A038();
 void func_00353700(s32 arg0) {
     func_0036A038(D_0040A718, arg0);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00353728);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00353758);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00353F50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00353FB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354190);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354228);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354628);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354630);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354968);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354970);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354A68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354A70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354C58);

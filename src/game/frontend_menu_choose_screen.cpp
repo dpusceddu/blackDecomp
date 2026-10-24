@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/frontend_resources.hpp"
 struct MenuMovie {
   const char *format;
@@ -31,6 +33,7 @@ extern "C" {
 extern int *D_0040F53C;
 extern char D_003F2540[], D_003F28D0[];
 }
+
 extern "C" void func_001050A8(FrontendMenuState *menu, const char *name) {
   menu->pending = 0;
   menu->elapsed = 0;

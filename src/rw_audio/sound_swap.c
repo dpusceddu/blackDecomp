@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "rw_audio/sound.h"
 extern void func_003164D0(void *);
 extern void func_00314DE0(RwaFormat *);
@@ -10,6 +12,7 @@ extern s32 func_00316400(const void *,const void *);
 extern u32 func_00314630(RwaFormat *);
 extern char D_004092E0[],D_004092D0[],D_004092F0[],D_00409360[],D_00409300[],D_00409310[],D_00409370[],D_00409330[],D_00409340[],D_00409350[];
 typedef struct {u32 value;} __attribute__((packed)) RwaPackedWord;
+
 void func_00315B60(RwaSound *sound) {
     RwaSound copy;u8 *cursor=(u8 *)&copy;
     func_003164D0(sound);
@@ -23,3 +26,13 @@ void func_00315B60(RwaSound *sound) {
     *(RwaPackedWord *)cursor=*(RwaPackedWord *)&sound->user;cursor+=4;
     *sound=copy;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315DE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315EE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315F18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315F28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315FF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316180);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316190);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003161C8);

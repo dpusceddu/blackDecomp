@@ -1,12 +1,11 @@
-/* Translation unit tu_1650b8 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 s32 func_00165AF8(void) {
     return 1;
 }
 
-/* Assembly between the functions: func_00165B00 (136 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165B00);
 
 void func_00165B88(void) {
 

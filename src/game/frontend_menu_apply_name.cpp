@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/frontend_resources.hpp"
 extern "C" {
 extern unsigned char D_0040EAE0;
@@ -5,6 +7,7 @@ extern FrontendScreenManager *D_0040F544;
 extern char D_0048EF88[];
 char *func_0035CBC0(char *, const char *);
 }
+
 extern "C" int func_00103FF0(int conditional) {
   unsigned char result;
   if (!conditional || (result = D_0040EAE0) != 0) {

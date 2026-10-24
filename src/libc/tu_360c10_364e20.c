@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern char D_0040B4A0[];
@@ -6,3 +7,5 @@ const u32 rodata_0040B4A0[12] __asm__("D_0040B4A0") __attribute__((aligned(8))) 
 M2C_UNK * func_00364E20(void) {
     return &D_0040B4A0;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00364E30);

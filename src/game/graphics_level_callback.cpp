@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/graphics/level_callbacks.hpp"
 extern "C" {
 extern CampaignGraphics::GameState* D_0040F0E0;
@@ -11,3 +13,5 @@ int CampaignGraphics::LevelCallbacks::SetDifficulty(const char* command) {
     func_00217408();
     return func_0020F268(command);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020F5E8);

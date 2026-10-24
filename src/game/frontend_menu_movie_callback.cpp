@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/frontend_resources.hpp"
 struct ControllerStatus {
   char prefix[8];
@@ -31,6 +33,7 @@ int func_00123BD0(void *, int, int);
 signed char func_001228E0(void *, int);
 void func_001050A8(FrontendMenuState *, const char *);
 }
+
 static inline bool ControllerActive(ControllerStatus *status) {
   return status->active != 0;
 }

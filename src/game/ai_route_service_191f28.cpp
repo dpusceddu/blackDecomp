@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_service_decls.hpp"
 
@@ -5,6 +7,7 @@ namespace BlackGame {
 // /SLUS_213.76 0x191f28
 // Resets the follower's route state and releases both requests.
 // Unmatched: mode in ESI and request release expanded inline; 667 vs 657 bytes.
+
 void ReleaseMovementRoute(RouteMode* mode)
 {
     mode->follower->idle = 1;

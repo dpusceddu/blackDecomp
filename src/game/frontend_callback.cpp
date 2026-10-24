@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/frontend_resources.hpp"
 
 int FrontendCallbackQueue::Enqueue(void (*next)(void*), void* data) {

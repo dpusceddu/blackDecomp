@@ -1,4 +1,27 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/nearest.hpp"
+
+#ifdef NON_MATCHING
+// Ported from an unpublished companion project.
+#include "kynapse/buffers3.hpp"
+
+// /SLUS_213.76 0x2eef88
+ObjectBase* CreateBoundBuffers(BufferOwner* bound)
+{
+    return new BoundBuffers(bound);
+}
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EEF88);
+#endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF030);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF1A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF3D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF6F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF7A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF850);
+
 Kaim::CFindNearestData::~CFindNearestData(){if(order)D_003C87E0(order);if(rank)D_003C87E0(rank);if(aux)D_003C87E0(aux);}
 extern Kaim::SearchGraph *D_003CA804;
 extern "C" int func_002EF6F0(const void *,const void *);
@@ -313,3 +336,11 @@ void Kaim::CFindNearestData::CopyOrder(const int *source)
     for (int i = 0; i < count * 3; ++i)
         order[i] = source[i];
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EFC50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EFF00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F0110);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F02E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F06C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F09A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F0A00);

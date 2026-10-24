@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/point_mapper.hpp"
 
 extern unsigned int D_003E6438[], D_003E0040, D_003E6428;
@@ -5,6 +7,7 @@ extern unsigned int D_00450FD8, D_003E5E40;
 extern unsigned int *D_004510E8;
 extern "C" void func_002E7610(void *, const char *, PointMapper *(*)(), int, int, int);
 extern "C" PointMapper *func_002DAD10();
+
 extern "C" PointMapper *func_002DADA8(PointMapper *self) {
     self->count = 0;
     *(void **) self = D_003E6438;
@@ -295,3 +298,12 @@ unsigned int container, unsigned int *mapped) {
     return 0;
 }
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DADD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DAF40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB140);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB848);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB9C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DBCE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC930);

@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 struct Vec3Value {
     float x, y, z;
 };

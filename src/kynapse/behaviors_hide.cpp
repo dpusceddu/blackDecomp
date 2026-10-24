@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/property.hpp"
 #include "kynapse/behaviors/hide.hpp"
 
@@ -14,7 +16,9 @@ const char D_00404398[] __attribute__((aligned(8))) = "MaxDangerousEntities";
 namespace HideRecovery {
 
 
-    bool HideAgent::Configure(ChildBuffers* entry)
+    
+
+bool HideAgent::Configure(ChildBuffers* entry)
    {
         if (!entry)
         return false;

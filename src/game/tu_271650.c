@@ -1,5 +1,4 @@
-/* Translation unit tu_271650 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "types_ghidra.h"
 
@@ -53,7 +52,7 @@ void func_00271710(void *arg0)
   M2C_FIELD(new_var, s32 *, 8) = -1;
 }
 
-/* Assembly between the functions: func_00271728 (576 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00271728);
 
 s32 func_00271968(s32 arg0, s32 arg1, s32 arg2) {
     func_0028F618(arg2 + 0xB8);
@@ -68,3 +67,7 @@ s32 func_00271988(s32 arg0, s32 arg1, s32 arg2) {
 s32 func_002719A8(s32 arg0) {
     return func_0028FA60(arg0 + 0xB8) <= 0xFFFF;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002719D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00271AF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00271B50);

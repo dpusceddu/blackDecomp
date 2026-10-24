@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "physics/startup_constants.h"
 
 using namespace PhysicsStartup;

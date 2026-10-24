@@ -1,5 +1,4 @@
-/* Translation unit libstdcxx_typeinfo/tu_3700d0 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern M2C_UNK D_0040BF00;
@@ -21,7 +20,9 @@ void func_00370188(void *arg0, void *arg1) {
     }
 }
 
-/* Assembly between the functions: func_003701A8 (48 bytes), func_003701D8 (152 bytes), func_00370270 (472 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003701A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003701D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00370270);
 
 void *func_00370448(void *arg0, s32 arg1, s32 arg2, s32 arg3)
 {

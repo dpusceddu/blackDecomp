@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "game/actor/views.hpp"
 #include "game/ai_vector.hpp"
 namespace BlackPS2Campaign {
+
 template<class T> inline T &At(void *base,int offset) { return *(T *)((char *)base+offset); }
 struct CollisionEvent { BlackGame::Position4 first,second; };
 struct Matrix { BlackGame::Position4 rows[4]; };
@@ -43,3 +46,6 @@ int ActorEntries::Collision(void *raw) {
     return result;
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00149798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00149828);

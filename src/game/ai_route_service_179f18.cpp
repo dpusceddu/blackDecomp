@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_service_decls.hpp"
 
 namespace BlackGame {
 // /SLUS_213.76 0x179f18
 // Unmatched: PS2 distance is VU0 macro code (vsqrt); the Xbox returns it in XMM0.
+
 float EndpointDistance(const RouteRequest* request)
 {
     Vec from = Load(request->origin);
@@ -27,3 +30,6 @@ void BorrowStorage(const RouteRequest* request, RouteStorage* into)
 }
 
 }  // namespace BlackGame
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179FD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A008);

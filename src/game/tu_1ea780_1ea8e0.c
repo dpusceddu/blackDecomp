@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
@@ -20,3 +21,57 @@ s32 func_001EA8E0(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4, f32 fpar
     }
     return var_2;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EA930);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EAA20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EAAC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EAAF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EAB30);
+
+#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "types_ghidra.h"
+#undef TYPES_GHIDRA_NO_PROTOTYPES
+
+s32 func_001EAB60(void *arg0) {
+    s32 *var_3;
+    s32 temp_2;
+    s32 var_5;
+    s32 var_6;
+
+    var_6 = 0;
+    var_3 = (s32 *) (((s8 *) arg0) + 4);
+    var_5 = 7;
+    do {
+        temp_2 = *var_3 - 1;
+        *var_3 = temp_2;
+        if (temp_2 > 0) {
+            var_6 += 1;
+        } else {
+            *var_3 = 0;
+        }
+        var_5 -= 1;
+        var_3 = (s32 *) (((s8 *) var_3) + 8);
+    } while (var_5 >= 0);
+    M2C_FIELD(arg0, s32 *, 0x44) = var_6;
+    return temp_2;
+}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EABA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EABD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EAC18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EAD48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EB490);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EB4C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EB838);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EB998);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EBC88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EBD88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EBEB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EBEB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EBF68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EBFC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EC060);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EC0B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EC158);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EC248);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EC330);

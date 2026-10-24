@@ -1,7 +1,10 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/settings.hpp"
 
 // /SLUS_213.76 0x2e4070
+
 Settings& Settings::operator=(const Settings& other)
 {
     field00 = other.field00;
@@ -35,3 +38,5 @@ Settings& Settings::operator=(const Settings& other)
     field70 = other.field70;
     return *this;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E4160);

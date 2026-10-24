@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "game/camera/axes.hpp"
 namespace ActorInventory7 {
 extern "C" {extern AxisWorld*D_0040F4D0;float func_00124840(void*,int);int func_0013EE28(void*);}
+
 inline AxisWorld*GetWorld(){return D_0040F4D0;}
 void InputAxes::Update(){if(func_00124840(input,1)!=0)lateral+=func_00124840(input,1)*GetWorld()->delta;else if(func_00124840(input,2)!=0)lateral-=func_00124840(input,2)*GetWorld()->delta;if(func_00124840(input,3)!=0)forward+=func_00124840(input,3)*GetWorld()->delta;else if(func_00124840(input,4)!=0)forward-=func_00124840(input,4)*GetWorld()->delta;}
 int InputBinding::Clear(){if(!func_0013EE28(this))return 0;input=0;active=0;return 1;}
@@ -20,3 +23,14 @@ int InputBinding::Clear(){if(!func_0013EE28(this))return 0;input=0;active=0;retu
 // Unmatched: 0x140468 native field/helper allocation and scheduling.
 // Unmatched: 0x1404a8 FPU allocation and scheduling.
 // Unmatched: 0x1407c8 inverse matrix and vector temporary context.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013F290);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013F298);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013F2C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013F2E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013F308);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013F310);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013F328);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013F3E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013F618);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013FFA0);

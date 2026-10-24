@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/world.hpp"
 namespace KaimWorld {
+
 void Engine::Reset() {
  for(ListIterator<Entity*> it(entities->head);it.node;it.node=it.node->next)it.node->value->Reset();
  for(unsigned int i=0;i<serviceCount;++i)((Service*)services[i])->Reset();
@@ -67,3 +70,11 @@ void Engine::RegisterSecond(EntityCallback callback,void* context) {
 // Unmatched: World destructor retains callback-table address scheduling differences.
 // Unmatched: Configure retains native array cleanup, temporary lifetimes and string/data ownership differences.
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EA898);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EABB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EAD58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EAF30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EB280);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EB450);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC020);

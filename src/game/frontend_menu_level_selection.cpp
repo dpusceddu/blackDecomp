@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/frontend_resources.hpp"
 extern "C" {
 extern char *D_0040F0E0;
@@ -14,6 +16,7 @@ void func_0035D1A0(char *, const char *, int);
 int func_0035E750(const char *);
 int func_00103FF0(int);
 }
+
 extern "C" void func_00103D08(const char *selection) {
   D_0040EAE0 = 0;
   func_0035D1A0(D_0048EF88, selection + 60, 30);

@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern char D_00400B00[];
@@ -9,3 +10,6 @@ M2C_UNK ** func_002891D8(M2C_UNK ***arg0) {
     func_00289028(sp, arg0, D_00400B00, M2C_FIELD(arg0, M2C_UNK **, 4));
     return M2C_FIELD(arg0, M2C_UNK ***, 0);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00289218);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00289230);

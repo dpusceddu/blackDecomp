@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/frontend_resources.hpp"
 extern "C" {
 extern char *D_0040F0E0;
@@ -12,6 +14,7 @@ extern "C" {
 void func_00103DF0(int);
 int func_00109FF8(void *);
 }
+
 extern "C" int func_00103F50(int check) {
   unsigned char result;
   if (!check || (result = D_0040EAE0) != 0) {

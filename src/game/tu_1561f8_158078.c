@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "game/weapons/state.h"
 
@@ -30,3 +31,8 @@ void func_001580C0(void *arg0) {
 s16 func_001580E0(void *arg0) {
     return BkModWeaponClipPS2(arg0);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001580F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001583D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00158668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001588F0);

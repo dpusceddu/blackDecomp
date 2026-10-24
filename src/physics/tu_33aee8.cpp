@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Xbox mesh_scratch.cpp supplies the algorithm; offsets below follow PS2 accesses.
 // Class/field names are provisional; unknown members have no inferred semantics.
 namespace MeshScratchRecovery {

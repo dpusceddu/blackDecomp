@@ -1,5 +1,4 @@
-/* Translation unit tu_1fcd90 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_001F1C08();
@@ -10,7 +9,7 @@ void func_001FDF28(void) {
     func_001FDFF8();
 }
 
-/* Assembly between the functions: func_001FDF48 (176 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FDF48);
 
 void func_001FDFF8(void) {
 
@@ -26,3 +25,15 @@ void func_001FE000(void *arg0) {
     func_00275260(&D_0040DDA8, arg0 + 0x24, 0x40);
     func_00275260(&D_0040DDA8, arg0 + 0xA4, 0x40);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FE068);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FE380);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FFDC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FFE70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FFF88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FFF90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00200080);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00200088);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00200678);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002006F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00200858);

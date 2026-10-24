@@ -1,5 +1,4 @@
-/* Translation unit tu_2792c0 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_002AC628();
@@ -12,7 +11,9 @@ void func_0027ACC8(void) {
 
 }
 
-/* Assembly between the functions: func_0027ACD0 (1144 bytes), func_0027B148 (280 bytes), func_0027B260 (104 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027ACD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027B148);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027B260);
 
 s32 func_0027B2C8(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x6C) = -1.0f;
@@ -24,7 +25,7 @@ void func_0027B2E0(void *arg0, void *arg1) {
     M2C_FIELD(arg1, void **, 0x30) = arg0;
 }
 
-/* Assembly between the functions: func_0027B2F0 (152 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027B2F0);
 
 void func_0027B388(void *arg0, f32 fparg0) {
     M2C_FIELD(arg0, f32 *, 0x74) = fparg0;
@@ -46,7 +47,7 @@ s32 func_0027B390(s32 arg0, s32 arg1, s32 arg2) {
     return temp_2;
 }
 
-/* Assembly between the functions: func_0027B408 (576 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027B408);
 
 void func_0027B648(void *arg0, s32 arg1, s32 arg2)
 {
@@ -56,7 +57,7 @@ void func_0027B648(void *arg0, s32 arg1, s32 arg2)
   func_0035C6EC(arg1, 0, arg2 << 5);
 }
 
-/* Assembly between the functions: func_0027B688 (80 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027B688);
 
 s32 func_0027B6D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     s32 temp_18;
@@ -73,7 +74,15 @@ s32 func_0027B6D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     return (s32) temp_4;
 }
 
-/* Assembly between the functions: func_0027B780 (256 bytes), func_0027B880 (208 bytes), func_0027B950 (272 bytes), func_0027BA60 (8 bytes), func_0027BA68 (128 bytes), func_0027BAE8 (104 bytes), func_0027BB50 (72 bytes), func_0027BB98 (32 bytes), func_0027BBB8 (128 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027B780);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027B880);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027B950);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027BA60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027BA68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027BAE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027BB50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027BB98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027BBB8);
 
 void func_0027BC38(void) {
 
@@ -95,7 +104,7 @@ void func_0027BC58(void) {
 
 }
 
-/* Assembly between the functions: func_0027BC60 (160 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027BC60);
 
 void func_0027BD00(void) {
     func_0027BB98();

@@ -1,7 +1,10 @@
+#include "include_asm.h"
+
 // Segment ray queries and the bounded hit buffer.
 #include "physics/segment_query.hpp"
 #include "ps2/matrix.hpp"
 
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033A488);
 
 #ifdef BLACK_NONMATCHING
 // Unmatched: resumable traversal, SN callback member pointers and VU0 frame lifetimes.
@@ -203,3 +206,7 @@ PhysicsSegmentHit* PhysicsSegmentQuery::AnyHit()
 extern "C" void func_0033AC48(int,int);
 extern "C" void func_0033AEA8(){func_0033AC48(1,65535);}
 extern "C" void func_0033AEC8(){func_0033AC48(0,65535);}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033AC48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033ADD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033AE38);

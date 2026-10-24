@@ -1,4 +1,7 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/spatial.hpp"
+
 void Kaim::CSpatialGraph::Reset()
 {
     // The two object arrays carry the observed 16-byte allocation cookie.
@@ -61,3 +64,12 @@ Kaim::CSpatialGraph::~CSpatialGraph()
 {
     Reset();
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F8DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F9338);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F97A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA030);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA4C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA930);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB1C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB3C8);

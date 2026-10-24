@@ -1,5 +1,4 @@
-/* Translation unit libipu_libmpeg/tu_292f08 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "types_ghidra.h"
 
@@ -48,7 +47,9 @@ u8 * func_00292F50(u8 *arg0, s32 *arg1) {
     return var_4;
 }
 
-/* Assembly between the functions: func_00292FA0 (256 bytes), func_002930A0 (616 bytes), func_00293308 (72 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00292FA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002930A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00293308);
 
 s32 func_00293350(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_4;
@@ -82,3 +83,8 @@ s32 func_00293350(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(arg3, u32 *, 0) = var_10;
     return (s32) var_2;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002933D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00293518);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00293600);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00293708);

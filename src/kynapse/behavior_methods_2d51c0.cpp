@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/behavior_methods.hpp"
 
 namespace Kaim {
 // /SLUS_213.76 0x2d51c0
+
 void Behavior28441C::ResetState()
 {
     position = gOrigin;

@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_helpers_decls.hpp"
 
@@ -6,6 +8,7 @@ namespace BlackGame {
 // Publishes "no motion" first; when the actor strays from its route segment it escalates through
 // a recovery timer and finally asks the mode to recover.
 // Unmatched: inlined timer, grace and off-route expansions differ in register assignment.
+
 void MovementModeBase::UpdateStallRecovery()
 {
     heading = 0;

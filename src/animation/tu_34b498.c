@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "animation/graph.h"
 
 float AnimationTime_Wrap(float time, float span) {
@@ -486,3 +488,35 @@ void AnimationGraph_BindInverseControl(void *owner, AnimationGraphNode *node, An
 }
 
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034B4E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034B5A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034B5B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034B6E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034B910);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034BA50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034BC30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034BFE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034C0C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034C128);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034C7D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034C968);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CA18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CA68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CAE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CC00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CE20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D040);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D0B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D1E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D300);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D530);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D738);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D838);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D920);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D9B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034DC30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034DDD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E220);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E5C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E828);

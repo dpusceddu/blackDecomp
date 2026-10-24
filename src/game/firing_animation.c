@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "ps2/prelude.h"
 typedef struct { char bytes[12]; } BkAnimationName12PS2;
 extern const BkAnimationName12PS2 D_003F6C00,D_003F6C10,D_003F6C20,D_003F6C30,D_003F6C40;
+
 void func_001AA280(void *selector,BkAnimationName12PS2 *name,void *actor,int state,int alternate) {
  switch(state) {
  case 19:*name=D_003F6C00;break;
@@ -29,3 +32,5 @@ void func_001AA490(void *selector,BkAnimationName12PS2 *name,void *actor,int sta
  case 18:if(alternate)*name=*(const BkAnimationName12PS2 *)"SH_AR_S_383";else *name=*(const BkAnimationName12PS2 *)"SH_AR_S_373";break;
  }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA768);

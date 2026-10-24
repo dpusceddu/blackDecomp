@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/path_object.hpp"
 extern const unsigned char D_00452158,D_004524A0,D_004525B8;
 namespace Kaim {
+
 inline bool PathClassInfo::IsDerivedFrom(PathClassInfo *wanted) {
     PathClassInfo *info = this;
     do {
@@ -95,3 +98,5 @@ bool CPathObject::Release(int id, PathPropertySlot *slot) {
     return false;
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F44E8);

@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 namespace NearestPointRecovery {
 // Scoped PS2 access views; unused fields and original class identities remain UNVERIFIED.
 struct IndexView { int value; };

@@ -1,7 +1,10 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/parameters.hpp"
 
 
 // Unmatched: name-array reference and allocation register scheduling.
+
 #if 0
 int AddPeriodicName(const char *name) {
     ParameterTables *tables=GetNameTables();
@@ -227,3 +230,22 @@ float ParameterTables::Remaining(int index)
 void ParameterCampaign::MarkFired() {
     if(!fired) {float now=Kaim_QueryFloat();if(threshold<now)fired=1;}
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9280);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9328);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9538);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9540);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9570);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E95A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E95D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9600);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9630);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E96F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E97B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E98F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9BC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9CB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9CC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9D10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9D50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9DB8);

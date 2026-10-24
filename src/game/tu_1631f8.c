@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_001F2A60(s32, s8, M2C_UNK, M2C_UNK, M2C_UNK);

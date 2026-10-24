@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/owned_arrays.hpp"
 
 namespace Kaim {
 // /SLUS_213.76 0x2dfc38
+
 PointerBankOwner::~PointerBankOwner()
 {
     if (count) {
@@ -15,3 +18,5 @@ PointerBankOwner::~PointerBankOwner()
 }
 
 }  // namespace Kaim
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DFD08);

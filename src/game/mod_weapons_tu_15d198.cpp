@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/weapons/manager_methods.hpp"
 
 namespace ModWeapons {

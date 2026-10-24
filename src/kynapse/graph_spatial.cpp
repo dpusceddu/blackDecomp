@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/spatial.hpp"
 
 #define CONVERT(field) { for(unsigned int word=0;word<sizeof(field)/4;++word){unsigned int *p=(unsigned int*)&(field);p[word]=p[word];} }
 namespace Kaim {
 // Unmatched: chunk-copy aggregate and conversion-loop register allocation.
+
 #if 0
 bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
 {
@@ -352,3 +355,5 @@ bool CSpatialGraph::Write(const void* path, unsigned int saveFlags)
 }
 #endif
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F8238);

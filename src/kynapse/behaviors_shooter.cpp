@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "kynapse/behaviors/shooter_angles.hpp"
 namespace Kaim {
+
 bool ShooterAgent::Init(ChildBuffers* config)
 {
     provider = context->FindTarget(&gTargetClass);
@@ -72,3 +75,5 @@ selected:
     return true;
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6CB0);

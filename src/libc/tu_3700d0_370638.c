@@ -1,6 +1,7 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
-
 #include "types_ghidra.h"
+
 extern s32 D_0049BF10;
 extern s32 * func_00370090();
 extern s32 D_0040EC40;

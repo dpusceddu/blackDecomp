@@ -1,7 +1,10 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/batch9.hpp"
 
 // /SLUS_213.76 0x2f3208
+
 bool MemberList::Contains(int id)
 {
     for (unsigned int i = 0; i < count; ++i) {
@@ -10,3 +13,5 @@ bool MemberList::Contains(int id)
     }
     return false;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F3250);

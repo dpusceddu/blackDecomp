@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 #include "ps2/prelude.h"
 typedef float (*BkAnimationCallbackPS2)(void *);
 typedef struct { const char *name; BkAnimationCallbackPS2 callback; } BkAnimationVariablePS2;
 extern BkAnimationVariablePS2 D_0048F708[13];
 extern float func_001AC268(void *),func_001AC278(void *),func_001AC398(void *),func_001AC3F8(void *),func_001AC440(void *),func_001AC4B8(void *),func_001AC568(void *),func_001AC330(void *),func_001AC5B8(void *),func_001AC648(void *);
 extern void func_00348A10(BkAnimationVariablePS2 *,int);
+
 void func_001ABA98(void) {
  D_0048F708[0].name="unknown";D_0048F708[0].callback=0;
  D_0048F708[1].name="true";D_0048F708[1].callback=func_001AC268;
@@ -20,3 +23,5 @@ void func_001ABA98(void) {
  D_0048F708[12].name="shot_on_air";D_0048F708[12].callback=func_001AC648;
  func_00348A10(D_0048F708,13);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ABC28);

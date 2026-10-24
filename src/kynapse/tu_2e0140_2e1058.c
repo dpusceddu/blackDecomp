@@ -1,5 +1,4 @@
-/* Translation unit kynapse/tu_2e0140 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_002EBE90();
@@ -21,13 +20,13 @@ void func_002E1058(void) {
     func_002EBE90();
 }
 
-/* Assembly between the functions: func_002E1078 (32 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1078);
 
 void func_002E1098(void) {
     func_002EBF58();
 }
 
-/* Assembly between the functions: func_002E10B8 (32 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10B8);
 
 void func_002E10D8(void) {
     func_002E3928();
@@ -37,7 +36,8 @@ void func_002E10F8(void) {
     func_002E3D28();
 }
 
-/* Assembly between the functions: func_002E1118 (136 bytes), func_002E11A0 (104 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1118);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E11A0);
 
 void func_002E1208(s32 arg0) {
     if (arg0 != 0) {
@@ -51,7 +51,10 @@ void func_002E1228(s32 arg0) {
     }
 }
 
-/* Assembly between the functions: func_002E1248 (56 bytes), func_002E1280 (48 bytes), func_002E12B0 (208 bytes), func_002E1380 (56 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1248);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1280);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E12B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1380);
 
 void * func_002E13B8(void *arg0, void *arg1, void *arg2, void *arg3) {
     void *temp_16;
@@ -69,7 +72,10 @@ void * func_002E13B8(void *arg0, void *arg1, void *arg2, void *arg3) {
     return temp_16;
 }
 
-/* Assembly between the functions: func_002E1438 (56 bytes), func_002E1470 (64 bytes), func_002E14B0 (40 bytes), func_002E14D8 (48 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1438);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1470);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E14B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E14D8);
 
 void func_002E1508(void) {
     D_003E7C00 = 0;

@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/tables.hpp"
 namespace Kaim {
 struct RoutePointCell {
@@ -7,6 +9,7 @@ struct RoutePointCell {
     static void *operator new[](unsigned int bytes) { return Allocate(bytes); }
     static void operator delete[](void *p) { D_003C87E0(p); }
 };
+
 void RouteBuffers::Reserve(int newCapacity) {
     // The PS2 point array has a 16-byte count/alignment cookie before its data.
     if (points)
@@ -62,3 +65,6 @@ unsigned int RouteBuffers::ClosestWeightedWaypoint(const Vec3 *point) const {
     return best;
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB4D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB538);

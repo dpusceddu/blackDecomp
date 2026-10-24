@@ -1,5 +1,4 @@
-/* Translation unit kynapse/tu_2f4bc0 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_002E7610();
@@ -18,7 +17,12 @@ void func_002F5760(s32 arg0, s32 arg1) {
     }
 }
 
-/* Assembly between the functions: func_002F57C0 (168 bytes), func_002F5868 (128 bytes), func_002F58E8 (128 bytes), func_002F5968 (216 bytes), func_002F5A40 (160 bytes), func_002F5AE0 (240 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F57C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5868);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F58E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5968);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5A40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5AE0);
 
 void func_002F5BD0(void) {
     func_002F5760(1, 0xFFFF);

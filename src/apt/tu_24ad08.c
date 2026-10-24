@@ -1,5 +1,4 @@
-/* Translation unit apt/tu_24ad08 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_00386EC8();
@@ -16,7 +15,7 @@ s32 func_0024AD08(s32 arg0) {
     return arg0;
 }
 
-/* Assembly between the functions: func_0024AD60 (144 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024AD60);
 
 s32 func_0024ADF0(s32 arg0, s32 arg1) {
     func_00386EC8(arg0, 1);

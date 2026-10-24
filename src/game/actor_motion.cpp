@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/camera/motion.hpp"
 
 extern "C" {
@@ -6,6 +8,7 @@ extern void *D_0040F4E0;
 }
 
 namespace CampaignActor {
+
 BlackPS2::VU0::Matrix4 ActorMotion::GetWorldMatrix()
 {
     BlackPS2::VU0::Matrix4 result;

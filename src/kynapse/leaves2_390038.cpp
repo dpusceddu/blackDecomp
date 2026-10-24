@@ -1,7 +1,10 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/leaves2.hpp"
 
 // /SLUS_213.76 0x390038
+
 float Vec3_Component(void* unused, const Vec3* v, int index)
 {
     if (index == 0)

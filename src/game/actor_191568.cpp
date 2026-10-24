@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #define BLACK_PS2 1
 #include "game/ai_movement_modes_decls.hpp"
 #include "ps2/vu0.hpp"
@@ -38,3 +40,11 @@ PositionResult ProjectOntoSegment(const MovementModeBase* mode, PositionArg star
 // Unmatched: 0x1930f8 node iterator lifetime and vector endpoint spills.
 // Unmatched: 0x1934a8 controller publication lvalue and store scheduling.
 // Unmatched: 0x193568 direction vector component extraction and allocation.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191778);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191788);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191790);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001917A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191A28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191AA0);

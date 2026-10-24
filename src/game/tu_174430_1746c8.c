@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_00178408(void *, s32, s32, s64, s32, u8, s32, u8);

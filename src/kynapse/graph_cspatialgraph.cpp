@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/spatial.hpp"
 namespace Kaim {
+
 bool CSpatialGraph::LoadFromPath(const char* path)
 {
     char buffer[0x1000];

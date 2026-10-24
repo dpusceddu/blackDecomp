@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/graphics/animation_selector.hpp"
 using namespace AnimationSelectPS2;
 extern "C" {

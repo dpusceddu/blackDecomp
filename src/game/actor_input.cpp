@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/actor/views.hpp"
 extern "C" {
 void func_0011A890(void *, void *, unsigned int);
@@ -8,6 +10,7 @@ extern void *D_0040F530;
 extern char *D_0040F0E0;
 }
 namespace BlackPS2Campaign {
+
 static inline bool ModeTwo(void*owner){return *(int*)((char*)owner+0x38c)==2;}
 void ActorStateMachine::Event(int event, int unused, unsigned int flags) {
     if (event == 5) {
@@ -30,3 +33,11 @@ void ActorStateMachine::Leave() {
 }
 
 // Unmatched: 0x13F618 input dispatch vector-copy temporaries, predicate lifetime and branch scheduling.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140048);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140068);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140468);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001404A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001407C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001409C0);

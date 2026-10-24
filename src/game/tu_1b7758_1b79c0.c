@@ -1,6 +1,7 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
-
 #include "types_ghidra.h"
+
 extern s32 func_001B7A70();
 
 s32 func_001B79C0(s32 arg0, s32 arg1, s32 arg2) {

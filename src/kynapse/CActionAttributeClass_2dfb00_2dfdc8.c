@@ -1,5 +1,4 @@
-/* Translation unit kynapse/CActionAttributeClass_2dfb00 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_0038B6B0();
@@ -15,7 +14,8 @@ s32 func_002DFDC8(s32 arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
-/* Assembly between the functions: func_002DFE08 (56 bytes), func_002DFE40 (112 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DFE08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DFE40);
 
 void * func_002DFEB0(void *arg0, void *arg1, void *arg2) {
     func_0038B840((s32) arg0, (s32) arg1, (s32) arg2, 0, 0, 0);

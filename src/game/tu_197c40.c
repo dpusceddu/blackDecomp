@@ -1,5 +1,5 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
-
 #include "types_ghidra.h"
 
 void func_00197C40(RecoveredAIActionHeader *arg0) {

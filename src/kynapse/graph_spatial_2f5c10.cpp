@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/spatial_iteration.hpp"
 
 namespace Kaim {
+
 CSpatialGraph::CSpatialGraph():flags(31),coverageDistance(-1.0f),nodeCapacity(0),nodeSlots(0),nodeCount(0),nodes(0),nodeTable1c(0),firstEdgeFrom(0),firstEdgeTo(0),edgeCapacity(0),edgeSlots(0),edgeCount(0),edges(0),edgeEnd(0),edgeStart(0),edgeTable40(0),edgeNext(0),edgeTable48(0),edgeTable4c(0),edgeTable50(0),costPolicy(0),heuristic(0) {
  syntheticEdge.graph=this;
  syntheticEdge.index=-1;syntheticNodes[0].id=-1;syntheticNodes[1].id=-1;
@@ -302,3 +305,22 @@ void CSpatialGraph::SetFlags(unsigned int newFlags)
 }
 }
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5E20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F66D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F6880);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F6E08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F7D80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F7F48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F8238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F8C38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F8DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F97A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA030);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA4C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA930);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB1C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB3C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB4D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB558);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB590);

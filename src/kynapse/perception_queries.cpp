@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/perception.hpp"
 
 Entity* Perception::NearestVisible()
@@ -89,3 +91,6 @@ Entity* Perception::NearestClearOtherGroup()
     return tracked[4];
 }
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003100A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310120);

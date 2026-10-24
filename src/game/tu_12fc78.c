@@ -1,6 +1,7 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
-
 #include "types_ghidra.h"
+
 extern M2C_UNK D_003BCDF8;
 
 u8 func_0012FC78(s32 arg0, u32 arg1, u32 arg2)

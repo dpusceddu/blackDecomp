@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/owned_arrays.hpp"
 
 namespace Kaim {
 // /SLUS_213.76 0x2e37a0
+
 void ChildBuffers::DeleteChildren()
 {
     if (count > 0) {

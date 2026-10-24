@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "ps2/ee_types.h"
 
 namespace CompoundRecovery {

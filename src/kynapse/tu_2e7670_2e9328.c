@@ -1,5 +1,4 @@
-/* Translation unit kynapse/tu_2e7670 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern M2C_UNK * D_003EB798;
@@ -32,13 +31,54 @@ void func_002E9328(void *arg0, s32 arg1) {
     }
 }
 
-/* Assembly between the functions: func_002E93B8 (128 bytes), func_002E9438 (128 bytes), func_002E94B8 (128 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E93B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9438);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E94B8);
 
 void func_002E9538(void *arg0, f32 fparg0) {
     M2C_FIELD(arg0, f32 *, 0x1C) = fparg0;
 }
 
-/* Assembly between the functions: func_002E9540 (48 bytes), func_002E9570 (48 bytes), func_002E95A0 (48 bytes), func_002E95D0 (48 bytes), func_002E9600 (48 bytes), func_002E9630 (24 bytes), func_002E9648 (176 bytes), func_002E96F8 (184 bytes), func_002E97B0 (184 bytes), func_002E9868 (136 bytes) */
+#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "kynapse/layouts/Recovered_ParameterTables.h"
+#include "types_ghidra.h"
+#undef TYPES_GHIDRA_NO_PROTOTYPES
+
+void func_002E9540(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_8)) {
+        M2C_FIELD(((arg1 * 4) + arg0->field_28), f32 *, 0) = fparg0;
+    }
+}
+
+void func_002E9570(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_8)) {
+        M2C_FIELD(((arg1 * 4) + arg0->field_20), f32 *, 0) = fparg0;
+    }
+}
+
+void func_002E95A0(Recovered_ParameterTables *arg0, s32 arg1, s32 arg2) {
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_8)) {
+        M2C_FIELD(((arg1 * 4) + arg0->field_24), s32 *, 0) = arg2;
+    }
+}
+
+void func_002E95D0(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_4)) {
+        M2C_FIELD(((arg1 * 4) + arg0->field_2C), f32 *, 0) = fparg0;
+    }
+}
+
+void func_002E9600(Recovered_ParameterTables *arg0, s32 arg1, f32 fparg0) {
+    if ((arg1 >= 0) && ((u32) arg1 < (u32) arg0->field_C)) {
+        M2C_FIELD(((arg1 * 4) + arg0->field_30), f32 *, 0) = fparg0;
+    }
+}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9630);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9648);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E96F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E97B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9868);
 
 void func_002E98F0(void *arg0, s32 arg1, s32 arg2) {
     u32 temp_6;
@@ -49,13 +89,16 @@ void func_002E98F0(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
-/* Assembly between the functions: func_002E9978 (224 bytes), func_002E9A58 (216 bytes), func_002E9B30 (152 bytes), func_002E9BC8 (232 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9978);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9A58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9B30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9BC8);
 
 void func_002E9CB0(void) {
     D_003C9590 = D_003C958C;
 }
 
-/* Assembly between the functions: func_002E9CC8 (72 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9CC8);
 
 void func_002E9D10(s32 arg0, void *arg1) {
     u32 temp_2;

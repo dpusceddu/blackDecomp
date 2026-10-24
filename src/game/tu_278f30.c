@@ -1,5 +1,5 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
-
 #include "types_ghidra.h"
 
 s32 func_00278F30(s32 arg0) {

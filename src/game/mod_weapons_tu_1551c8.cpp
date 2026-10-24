@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/weapons/reserves.hpp"
 
 namespace ModWeapons {
@@ -14,3 +16,5 @@ int Reserves::AtMaximum(int index)
     return reserve[index]==D_003F5328[index];
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00155230);

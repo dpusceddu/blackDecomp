@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 #include "animation/arms/rig.hpp"
 #include "ps2/vu0_micro.hpp"
 
 namespace ArmsAnimation {
 
 // The PS2 matrix copy uses two rolling 128-bit loads, with no conversion.
+
 static inline void CopyMatrix(RigMatrix* output, const RigMatrix* input)
 {
     asm volatile("lq $8,0(%0)\n\t"

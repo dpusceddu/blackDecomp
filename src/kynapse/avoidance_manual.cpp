@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/avoidance.hpp"
 
 SharedUser* CreateAvoidance(void* follower) { return new SharedUser(follower); }
@@ -791,3 +793,9 @@ unsigned char Avoidance::Configure(const Property* p)
 
 }
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00306848);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003071A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00307480);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003077F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00307970);

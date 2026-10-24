@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_stages_decls.hpp"
 
@@ -6,6 +8,7 @@ namespace BlackGame {
 // Stage 3: waits for the node search at the origin; a node ends the stage by starting the search
 // at the destination, none fails the request (result 1).
 // Unmatched: Xbox request in EDI (private contract).
+
 bool CollectRouteStart(RouteRequest* request)
 {
     if (!Manager()->nodeSearch.Advance()) return false;
@@ -77,3 +80,6 @@ bool RunTimedRouteSearch(RouteRequest* request)
 }
 
 }  // namespace BlackGame
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A588);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A720);

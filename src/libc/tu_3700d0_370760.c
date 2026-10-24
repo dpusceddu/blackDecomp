@@ -1,8 +1,9 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
+#include "types_ghidra.h"
 
 const char rodata_0040BFD8[32] __asm__("D_0040BFD8") __attribute__((aligned(8))) = "9type_info" "\000\000\000\000\000\000" "bad_alloc" "\000\000\000\000\000\000\000";
 extern char D_0040BFD8[];
-#include "types_ghidra.h"
 extern s32 D_0040EC48;
 
 s32 * func_00370760(void) {

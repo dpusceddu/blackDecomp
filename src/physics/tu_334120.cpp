@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "physics/startup_constants.h"
 // SN requires the sized extern before this initializer to select its GP form.
 __asm__(".extern D_0040E8C8,8\n.extern D_0040E8D0,8");
@@ -163,3 +165,7 @@ Descriptor D_003D1430 __attribute__((section(".data.shape_3d1430"))) = {2, &Opaq
 Descriptor D_003D1468 __attribute__((section(".data.shape_3d1468"))) = {1, &OpaqueShape::F_0033EBD0, &OpaqueShape::F_0033F2C8, &OpaqueShape::F_0033F2D0, &OpaqueShape::F_0033ECF8, &OpaqueShape::F_0033EF60, D_0040A520, 0, 0};
 Descriptor D_003D14A0 __attribute__((section(".data.shape_3d14a0"))) = {3, &OpaqueShape::F_0033F328, &OpaqueShape::F_00341670, &OpaqueShape::F_0033FF48, &OpaqueShape::F_0033FC38, &OpaqueShape::F_003411C8, D_0040A540, 0, 0};
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00334268);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003342D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00334338);

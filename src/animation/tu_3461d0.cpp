@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 extern unsigned char poseCacheStorage[] __asm__("D_0045F0C0") __attribute__((aligned(16)));
 #include "ps2/ee_fpu.h"
 #include "ps2/prelude.h"
@@ -30,6 +32,7 @@ extern void SampleBone(Pose*, const void*, int, float) __asm__("func_00345480");
 extern f32* SelectCopy(f32*,f32*) __asm__("func_00344020");
 
 namespace ArmsPose {
+
 static inline void BlendCopyBone(Pose* destination,const Pose* source) {
     destination->rotation=source->rotation;
     destination->position=source->position;
@@ -671,3 +674,7 @@ __attribute__((section(".text.func_00347738"))) void Cache::Construct(int initia
 namespace ArmsPose {
 __attribute__((section(".text.func_003477D0"))) void Cache::Initialize() { Construct(1, 0xffff); }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00346230);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00346668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00347280);

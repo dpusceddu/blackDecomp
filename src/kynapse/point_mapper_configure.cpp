@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/point_mapper.hpp"
 
 extern const char D_00405AE8[16] __attribute__((aligned(8))) = "MaxDeltaUp";
@@ -8,6 +10,7 @@ extern const char D_00405B20[8] __attribute__((aligned(8))) = "yes";
 extern const char D_00405B28[8] __attribute__((aligned(8))) = "true";
 extern const char D_00405B30[8] __attribute__((aligned(8))) = "RawData";
 extern const char D_00405B38[16] __attribute__((aligned(8))) = "OutputFile";
+
 int PointMapper::Configure(ChildBuffers *config) {
     if (!config) return 0;
     float unit = 0.0f;
@@ -42,3 +45,5 @@ int PointMapper::Configure(ChildBuffers *config) {
     }
     return 1;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB140);

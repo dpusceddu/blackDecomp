@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
@@ -25,3 +26,5 @@ void * func_002F1358(Recovered_Object59D40 *arg0) {
     arg0->field_5C = var_f2 * 20.0f;
     return arg0;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F13B0);

@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/search_workspace.hpp"
 
 namespace KaimSearch {
+
 void FreeSearch()
 {
     if (gOpenList)
@@ -321,3 +324,9 @@ unsigned int SearchGraph::AdvanceTimed(SearchRoute* route, GraphNode* start, Gra
 #endif
 
 }  // namespace Kaim
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ED3A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ED530);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EE078);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EE688);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EEA28);

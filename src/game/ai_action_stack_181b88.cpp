@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_action_stack_decls.hpp"
 
 namespace BlackGame {
 // /SLUS_213.76 0x181b88
 // Unmatched: private EBX stack/EAX event contract and expanded Resolve.
+
 void ActionStack::DispatchEvent(QueuedActionEvent* event)
 {
     owner->dispatcher.Event(event);
@@ -44,3 +47,6 @@ void ActionStack::DeliverEvents()
 }
 
 }  // namespace BlackGame
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00181DA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00181DF8);

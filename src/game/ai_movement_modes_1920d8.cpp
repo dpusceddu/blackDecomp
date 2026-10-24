@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
 namespace BlackGame {
 // /SLUS_213.76 0x1920d8
 // Unmatched: private register contract and inlined submit/release expansion.
+
 void RouteMode::Start(PositionArg point)
 {
     SetDestination(point);
@@ -26,3 +29,5 @@ void RouteMode::Retarget(PositionArg point)
 }
 
 }  // namespace BlackGame
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001921D8);

@@ -1,6 +1,9 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "game/weapons/inventory.h"
+
 extern s32 func_00107D20();
+
 void func_00155088(BkModInventoryPS2 *arg0, s8 arg1)
 {
   arg0->count=arg1;

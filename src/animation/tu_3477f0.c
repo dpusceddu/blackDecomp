@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 void func_003477F0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -11,3 +12,6 @@ void func_003477F0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
         M2C_FIELD(arg0, s16 *, 0x5C) = (s16) ((u16) M2C_FIELD(arg0, s16 *, 0x5C) + 1);
     }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00347858);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003478F0);

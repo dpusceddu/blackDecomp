@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/weapons/inventory_methods.hpp"
 
 namespace ModWeapons {
@@ -13,7 +15,9 @@ namespace ModWeapons {
         int func_00156450(Weapon*);
         extern char D_0040F0F0;
     }
-    void InventoryManager::Allocate(){
+    
+
+void InventoryManager::Allocate(){
         func_00107B78(&D_0040F0F0,1,16,0);
         void*allocated=func_00107D20(0x31f0);
         for(int i=46;i!=-1;--i){
@@ -55,3 +59,7 @@ namespace ModWeapons {
         controllerFlags[i]=0;
     }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CC40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CEC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CEF0);

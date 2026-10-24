@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/pathmanager.hpp"
 extern const char D_004059F8[], D_00405A00[];
 namespace KaimPathRegistry {
+
 PathManager::PathManager() {
     entries=(Record**)KaimAllocate(8*sizeof(Record*));capacity=8;count=0;
 }
@@ -33,3 +36,8 @@ Record::~Record(){delete value;value=0;}
 
 // Unmatched: Attach (544 B) retains branch-shape differences and one short-loop padding difference.
 // Unmatched: Configure (192 B) retains success/failure block-order differences.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DA700);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DA920);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DA980);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DA9B0);

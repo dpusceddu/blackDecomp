@@ -1,6 +1,7 @@
+#include "include_asm.h"
+
 // Scene storage, broadphase pools and bitmap iteration; PS2 member offsets are in scene.hpp.
 #include "physics/scene.hpp"
-
 
 #ifdef BLACK_NONMATCHING
 // Each alignment stage is kept in the storage-size expression before array sizes are added.
@@ -672,3 +673,12 @@ extern "C" void func_0032E328(PhysicsScene* scene){
 extern "C" void func_0032DF00(int,int);
 extern "C" void func_0032E390(){func_0032DF00(1,65535);}
 extern "C" void func_0032E3B0(){func_0032DF00(0,65535);}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032BDC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032C0D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032C5A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032D238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032D990);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E048);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E208);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E310);

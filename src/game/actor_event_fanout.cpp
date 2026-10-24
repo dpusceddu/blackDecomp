@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "game/actor/event_fanout.hpp"
 namespace BlackPS2Campaign {
+
 void ActorFanout3::Dispatch(int event) {
     if (count) {
         for (int i=0; i<count; ++i) {
@@ -12,3 +15,7 @@ void ActorFanout3::Dispatch(int event) {
     }
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165B88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165B90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165B98);

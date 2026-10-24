@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "rw_audio/bank.h"
 
 extern s32 D_0040E158;
@@ -14,3 +16,5 @@ s32 func_003131C0(void) {
     }
     return result;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003131F8);

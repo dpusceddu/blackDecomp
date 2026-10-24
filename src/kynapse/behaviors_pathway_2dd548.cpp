@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/pathway.hpp"
 
 namespace KaimPathData {
+
 PathWay& PathWay::operator=(const PathWay& other){
  if(this!=&other){closed=other.closed;func_0035CBC0(name,other.name);count=other.count;capacity=count;
   if(count){records=new ScriptWP[count];func_0035C544(records,other.records,capacity*sizeof(ScriptWP));}else records=0;
@@ -40,3 +43,10 @@ int PathWay::Translate(const Vec3& v){for(unsigned int i=0;i<count;++i)records[i
 // Unmatched: InsertPosition (328 B) and Move (452 B) retain exception cleanup scheduling differences.
 // Unmatched: TranslateOne (96 B) and SetPosition (72 B) retain branch-layout differences.
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DD778);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DDE28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DE3C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DE8F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DEE98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DF198);

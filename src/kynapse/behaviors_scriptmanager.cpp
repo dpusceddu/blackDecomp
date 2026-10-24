@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/scriptmanager.hpp"
 extern const char D_00405C40[], D_00405C48[];
 namespace KaimScriptRegistry {
+
 ScriptManager::ScriptManager() {
     entries=(Record**)KaimAllocate(8*sizeof(Record*));capacity=8;count=0;
 }
@@ -33,3 +36,8 @@ Record::~Record(){delete value;value=0;}
 
 // Unmatched: Attach (544 B) retains branch-shape differences and one short-loop padding difference.
 // Unmatched: Configure (192 B) retains success/failure block-order differences.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DCF38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DD158);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DD1B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DD1E8);

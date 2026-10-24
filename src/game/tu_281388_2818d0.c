@@ -1,5 +1,4 @@
-/* Translation unit tu_281388 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "types_ghidra.h"
 
@@ -22,7 +21,7 @@ void func_00281908(s32 arg0, void *arg1) {
     M2C_FIELD(arg1, u16 *, 0x30) = (u16) (M2C_FIELD(arg1, u16 *, 0x30) & 0xFFFE);
 }
 
-/* Assembly between the functions: func_00281940 (8 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281940);
 
 void func_00281948(s32 arg0, s32 arg1) {
     func_002819E0();
@@ -42,13 +41,14 @@ void func_00281988(s32 arg0, s32 arg1) {
     } while (var_17 < 0x23U);
 }
 
-/* Assembly between the functions: func_002819E0 (88 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002819E0);
 
 void func_00281A38(s32 arg0, s32 arg1) {
     func_002811E8(arg1);
 }
 
-/* Assembly between the functions: func_00281A58 (128 bytes), func_00281AD8 (120 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281A58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281AD8);
 
 void * func_00281B50(void *arg0) {
     s32 temp_2;
@@ -65,7 +65,7 @@ void * func_00281B50(void *arg0) {
     return var_3;
 }
 
-/* Assembly between the functions: func_00281B88 (48 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281B88);
 
 s32 func_00281BB8(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_2;
@@ -90,7 +90,11 @@ s32 func_00281BB8(s32 arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
-/* Assembly between the functions: func_00281BF8 (160 bytes), func_00281C98 (184 bytes), func_00281D50 (208 bytes), func_00281E20 (8 bytes), func_00281E28 (184 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281BF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281C98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281D50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281E20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281E28);
 
 void func_00281EE0(void *arg0, s64 *arg1, s32 arg2) {
     u8 sp[24] __attribute__((aligned(16)));

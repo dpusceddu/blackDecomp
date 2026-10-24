@@ -1,6 +1,10 @@
+#include "include_asm.h"
+
 #include "kynapse/behaviors/hide_queries.hpp"
 namespace HideRecovery {
-    bool HideAgent::Update()
+    
+
+bool HideAgent::Update()
    {
         bank->ClearActivation();
         allHidden = true;

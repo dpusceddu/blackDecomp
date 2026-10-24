@@ -1,6 +1,10 @@
+#include "include_asm.h"
+
 // Collision-definition layout and caller-visible storage requirements.
 #include "physics/collision_storage.hpp"
 
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E3D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E490);
 
 #ifdef BLACK_NONMATCHING
 // Unmatched: four instruction load/arithmetic scheduling difference after recovering result-first stack order.
@@ -63,3 +67,5 @@ extern "C" PhysicsStorageRequirement* func_0032E5D8(PhysicsStorageRequirement* s
 extern "C" void func_0032E490(int,int);
 extern "C" void func_0032E6D0(){func_0032E490(1,65535);}
 extern "C" void func_0032E6F0(){func_0032E490(0,65535);}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E618);

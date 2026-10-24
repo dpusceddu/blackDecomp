@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/graphics/timed_envelope.hpp"
 #include "ps2/prelude.h"
 using namespace CampaignGraphics;
@@ -22,6 +24,7 @@ extern void func_00286120(float,float,void *);
 extern void func_001D7238(float,float,float,void *);
 extern void func_001F07B8(float,void *);
 }
+
 static inline void **SoundObjects() { return *(void ***)(D_0040F510+0xcbd8); }
 static inline float Clock() { return *(float *)(D_0040F4D0+0x20); }
 
@@ -53,3 +56,10 @@ int TimedEnvelope::Begin(float value,unsigned useEndpoint)
     func_001EFE70(this,1);
     return 1;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDD80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDDB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDDE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDE98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE0B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE150);

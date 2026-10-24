@@ -1,5 +1,4 @@
-/* Translation unit tu_1e4e50 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "types_ghidra.h"
 
@@ -30,13 +29,19 @@ s32 func_001E66F0(s32 arg0) {
     return arg0;
 }
 
-/* Assembly between the functions: func_001E6700 (184 bytes), func_001E67B8 (192 bytes), func_001E6878 (208 bytes), func_001E6948 (152 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6700);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E67B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6878);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6948);
 
 s16 func_001E69E0(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x62);
 }
 
-/* Assembly between the functions: func_001E69E8 (88 bytes), func_001E6A40 (88 bytes), func_001E6A98 (88 bytes), func_001E6AF0 (8 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E69E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6A40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6A98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6AF0);
 
 s32 func_001E6AF8(s32 arg0, void *arg1) {
     s32 temp_2;
@@ -58,7 +63,11 @@ s32 func_001E6B70(s32 arg0, void *arg1) {
     return var_2;
 }
 
-/* Assembly between the functions: func_001E6B88 (72 bytes), func_001E6BD0 (104 bytes), func_001E6C38 (536 bytes), func_001E6E50 (552 bytes), func_001E7078 (160 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6B88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6BD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6C38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E6E50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E7078);
 
 s32 func_001E7118(void *arg0) {
     s32 var_5;
@@ -70,7 +79,11 @@ s32 func_001E7118(void *arg0) {
     return var_5;
 }
 
-/* Assembly between the functions: func_001E7150 (24 bytes), func_001E7168 (352 bytes), func_001E72C8 (384 bytes), func_001E7448 (320 bytes), func_001E7588 (104 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E7150);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E7168);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E72C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E7448);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E7588);
 
 void func_001E75F0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;

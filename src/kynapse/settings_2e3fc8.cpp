@@ -1,7 +1,14 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/settings.hpp"
 
 // /SLUS_213.76 0x2e3fc8
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E3928);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E3D28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E3F28);
+
 Settings::Settings(int first, int unused)
     : field00(first), field04(1), field08(0), field0c(0), field10(0), field14(0), field18(0),
       field1c(0), field20(1), field24(0), field28(0), field2c(0), field30(0), field34(0), field38(0),

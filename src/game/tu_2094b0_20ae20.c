@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_001F2870();
@@ -25,3 +26,5 @@ void func_0020AE20(void *arg0)
   }
   func_0020B678(D_0040F544, &D_003FA300, 4);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020AEA0);

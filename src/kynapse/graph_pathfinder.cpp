@@ -1,7 +1,10 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/pathfinder.hpp"
 namespace Kaim {
 extern "C" long func_0035E730(const char*);
 extern "C" float func_00291C68(long);
+
 static inline float ParseFloat(const char *s){return func_00291C68(func_0035E730(s));}
 static inline float Kaim_WorldUnit(){return gWorldScale?gWorldScale->unit:0.0f;}
 static inline float Degrees_WrapUnsigned(float v){if(v>360.0f)v-=360.0f;else if(v<0.0f)v+=360.0f;return v;}
@@ -1245,3 +1248,40 @@ bool CPathFinder::InstallService(const void*descriptor){const ServiceClass*which
 #endif
 
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FEFB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FF250);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FF890);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00300278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003003B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00300A40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00301418);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003016E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00301A30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00301C68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00301E78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00302198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00302388);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00302EE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00303388);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003037B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003039D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304BE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304CB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304D28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304D60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304D98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304DA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304DB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304DE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304E38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304EE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304F08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305090);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305110);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305148);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305150);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305188);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305190);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305200);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305250);

@@ -1,7 +1,10 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/predicates.hpp"
 
 // /SLUS_213.76 0x2d6460
+
 bool HasLink::IsSet() const
 {
     if (!link)

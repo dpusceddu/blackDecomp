@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 #include "ps2/prelude.h"
 typedef struct { char p[0x74]; float speed; char q[8]; int kind; } BkActorMovementPS2;
 typedef struct { char p[0x2e0]; float speed; } BkActorRatePS2;
 extern BkActorRatePS2 **func_001AC040(void *);
 extern BkActorMovementPS2 *func_00135550(BkActorRatePS2 *);
 extern float func_0018D9F8(void *);
+
 float func_001AC278(void *context) {
  BkActorRatePS2 **actor=func_001AC040(context); float rate;
  if(func_00135550(*actor)) {

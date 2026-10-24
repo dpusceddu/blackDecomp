@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/weapons/instance.hpp"
 
 namespace ModWeapons {
@@ -5,6 +7,7 @@ extern "C" {
 void func_001551C8(void*,int,EeU16);
 EeU16 func_00155140(void*,int,EeU8);
 }
+
 static inline bool IsObject(const BkModWeaponOwnerPS2*entity){int kind=entity->kind;return (unsigned)(kind-3)<2||kind==7;}
 void Instance::Reload(){
  if(weapon->owner->kind==2){int index=definition->reserveIndex;func_001551C8(weapon->inventory,index,(EeU16)clip);clip=func_00155140(weapon->inventory,index,(EeU8)definition->capacity);}
@@ -36,3 +39,14 @@ void HitCollector::Dispatch(Vec direction,signed char weaponId,BkModWeaponOwnerP
 // Unmatched: 0015B028: effect argument and sound resource scheduling.
 // Unmatched: 0015B118: damage and virtual receive source context.
 // Unmatched: 0015B360: spread helpers and VU basis temporaries.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015A8D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015A938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015A948);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015A990);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015AA60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015ADA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015B028);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015B118);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015B360);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015B8F0);

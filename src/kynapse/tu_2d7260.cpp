@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/wander.hpp"
 #include "kynapse/predicates.hpp"
 // Property and registration names retain the original source-data order.
+
 static inline const char* WanderGraphProperty() {return "Graph";}
 struct WanderVirtualEntry {short adjustment;unsigned short reserved;void(*function)();};
 struct __attribute__((aligned(8))) WanderRegistrationStorage {unsigned char unverified00[0x110];WanderVirtualEntry* classTable;};

@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/graphics/movement_core.hpp"
 using namespace CampaignGraphics;
 using namespace BlackGame;
@@ -39,6 +41,7 @@ extern void func_00193990(void *,bool);
 extern unsigned func_00173610(void *);
 extern void func_0017E488(void *,float);
 }
+
 static inline float DistanceSquared(Vec a,Vec b)
 {return BlackPS2::VU0::ReadXWord(SumSquares3(Sub3(a,b)));}
 void MovementCore::Update()
@@ -99,3 +102,52 @@ void MovementCore::UpdateProximity()
     float distance=DistanceSquared(target,brain->Position());
     if(func_001829E8(brain->Part(0x810))||!func_001829A8(brain->Part(0x810))||distance<radius*0.5f*0.5f)func_00190C18(this);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018ED50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018EE00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018EF70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018EFE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F0B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F100);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F178);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F2A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F2E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F358);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F3E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F3E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F408);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F4E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F548);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F6A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F6D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F700);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F730);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F750);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F7C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F910);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FB40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FB88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FC18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FCB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FD80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FE28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FE30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FE50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FE58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FF38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FFC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190020);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001901E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001902D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190380);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190428);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001904D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190580);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190730);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190768);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001907E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190840);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001908A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190958);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001909F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190A00);

@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 u8 * func_001B82B0(u8 *arg0) {
@@ -15,4 +16,14 @@ loop_1:
         goto loop_1;
     }
     return var_4;
+}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B82E0);
+
+void func_001B8630(void) {
+
+}
+
+s32 func_001B8638(void) {
+    return 1;
 }

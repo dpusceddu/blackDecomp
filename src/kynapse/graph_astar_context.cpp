@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/tables.hpp"
 extern const char D_00407F08[];
 extern const int D_00407F1C;
@@ -225,3 +227,10 @@ bool Kaim::CAstarData::ExtractRoute(unsigned int from, unsigned int to, RouteBuf
 }
 
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDA40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDBA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDD88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDF40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FE370);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FE570);

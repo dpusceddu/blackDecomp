@@ -1,6 +1,7 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
-
 #include "types_ghidra.h"
+
 extern s32 func_0036D518();
 extern s32 (*D_003D113C)();
 extern s32 func_0036D568();
@@ -20,3 +21,8 @@ void func_00328E60(s32 arg0) {
     func_00329710(&D_0045C120, sp);
     func_0036D568();
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328EB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328F00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328FF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00329030);

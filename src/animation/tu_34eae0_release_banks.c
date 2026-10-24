@@ -1,4 +1,7 @@
+#include "include_asm.h"
+
 #include "animation/playback_state.h"
+
 s32 func_0034ECD8(PlaybackState *state, PlaybackAllocator *allocator) {
     s32 result = 0;
     u8 *row;

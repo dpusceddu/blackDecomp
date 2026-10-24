@@ -1,7 +1,10 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/tracker.hpp"
 
 // /SLUS_213.76 0x2f4c58
+
 Tracker::Tracker()
 {
     Entity_ApplyA(gEngine, (int)TrackerOnAdded, (int)this);

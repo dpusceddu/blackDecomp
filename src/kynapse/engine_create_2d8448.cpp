@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/engine_create.hpp"
 
 namespace Kaim {
 // /SLUS_213.76 0x2d8448
+
 bool Kaim_AllClassesRegistered()
 {
     if (gClassId2B4874 == -1 ||

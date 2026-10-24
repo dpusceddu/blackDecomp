@@ -1,6 +1,7 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
-
 #include "types_ghidra.h"
+
 extern s32 func_002530E8();
 extern s32 func_0035C544();
 
@@ -17,3 +18,5 @@ s32 func_00253058(s32 arg0, s32 arg1) {
     M2C_FIELD(M2C_FIELD(arg0, u32 *, 0), u16 *, 6) = (u16) M2C_FIELD(M2C_FIELD(arg1, u32 *, 0), u16 *, 6);
     return arg0;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002530E8);

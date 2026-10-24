@@ -1,6 +1,10 @@
+#include "include_asm.h"
+
 #include "kynapse/behaviors/flee_queries.hpp"
 namespace FleeRecovery {
-    int InitAgent::Initialize(ChildBuffers* config)
+    
+
+int InitAgent::Initialize(ChildBuffers* config)
    {
         float unit = gEngine->unit;
         requery = unit * unit;
@@ -116,3 +120,18 @@ succeeded:
     }
  }
 namespace FleeQueries {int Checks::Validate(){if(!graph)return 0;if(pointCount)goto yes;if(!entityCount)return 0;yes:return 1;}}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D1BC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2098);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D23B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D27D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2A60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2CE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2D48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2DB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2E48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2E68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2E90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2EE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2F00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2F40);

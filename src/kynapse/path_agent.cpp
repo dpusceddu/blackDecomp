@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/path_agent.hpp"
 
 namespace Kaim {
+
 bool PathWayAgent::Init(ChildBuffers* config)
 {
     paused = false;

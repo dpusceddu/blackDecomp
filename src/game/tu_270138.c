@@ -1,5 +1,4 @@
-/* Translation unit tu_270138 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_00270D80(M2C_UNK *, s32, s32);
@@ -36,10 +35,37 @@ void func_002701E8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x2E4) = (s32) (temp_6 + temp_2);
 }
 
-/* Assembly between the functions: func_00270228 (272 bytes), func_00270338 (152 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00270228);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00270338);
 
 void func_002703D0(M2C_UNK *arg0) {
     func_002710D8(&D_00440280);
     func_002CE010();
     M2C_FIELD(arg0, s32 *, 0x2F8) = 0;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00270408);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002705A8);
+
+#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "types_ghidra.h"
+#undef TYPES_GHIDRA_NO_PROTOTYPES
+extern s32 func_002707D8(void *, void *, s32, s32, s32, f32);
+
+void func_002707A8(void *arg0, void *arg1, s32 arg2, s32 arg3, s32 arg4, f32 fparg0) {
+    if (arg3 != 0) {
+        func_002707D8(arg0, arg1, arg2, 1, arg4, fparg0);
+        return;
+    }
+    func_002707D8(arg0, arg1, arg2, 0, arg4, fparg0);
+}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002707D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00270938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00270B98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00270D80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00270FD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002710D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002710D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002711C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00271230);

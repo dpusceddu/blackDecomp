@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/camera/pad.hpp"
 
 bool CampaignGraphics::Controller::Open(unsigned int backendHandle, unsigned int portIndex) {

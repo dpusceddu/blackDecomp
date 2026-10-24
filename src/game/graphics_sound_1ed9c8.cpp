@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "game/graphics/sound_envelopes.hpp"
 using namespace CampaignGraphics;
+
 void SoundEnvelope::Register(const char *name,int includeHold)
 {
     RegisterEnvelopeParameter(D_003C09E8+4,&high,"Start Frequency",name,D_003BDA08,0,0.0f,0.0f,0);

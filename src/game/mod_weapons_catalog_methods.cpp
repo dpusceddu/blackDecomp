@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "game/weapons/manager_methods.hpp"
 
 namespace ModWeapons {
+
 BkModWeaponCatalogRowPS2 *WeaponManagerMethods::Row(int id)
 {
     return BkModWeaponCatalogAtPS2((BkModWeaponCatalogOwnerPS2*)this,id);
@@ -22,3 +25,5 @@ int WeaponManagerMethods::Word18(int id)
     return BkModWeaponCatalogIndexedPS2((BkModWeaponCatalogOwnerPS2*)this,id)->word18;
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D248);

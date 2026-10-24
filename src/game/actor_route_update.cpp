@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/ai_movement_modes_decls.hpp"
 namespace BlackGame {
 extern bool MotionSubmit(MovementModeBase*,PositionArg,float,bool,float) __asm__("func_001917A0");

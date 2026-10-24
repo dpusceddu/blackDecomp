@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 void func_0037BEF0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4) {

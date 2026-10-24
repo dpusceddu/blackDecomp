@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/classes/other/UnknownVtable_003E10B0.hpp"
 struct FrontendValue;
 // Callback signatures and wrapper return semantics remain provisional ABI views.
@@ -41,6 +43,7 @@ extern const char D_003FAE20[];
 extern const char D_003FAE38[];
 extern int D_003BE7D4;
 }
+
 int BlackPS2Classes::UnknownVtable_003E10B0::Function_0020EAC8() {
 
     func_0020DF68(this, D_003FACD0, func_0020EF28);

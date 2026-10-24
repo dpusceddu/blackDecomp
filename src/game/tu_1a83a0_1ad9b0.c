@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 typedef struct { char opaque[0x60]; char animationVariant[1]; } BkActorNamePS2;

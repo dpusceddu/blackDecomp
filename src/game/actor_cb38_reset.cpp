@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/actor/renderable_state.hpp"
 namespace CampaignActor {
 extern "C" {
@@ -10,6 +12,7 @@ void func_00126D78(void *, void *, int);
 void func_00129108(void *, void *, int, int, long);
 extern char *D_0040F4D0, *D_0040F4E4, *D_0040F4F4;
 }
+
 void RenderableState::Reset()
 {
     func_0014BD18(this);
@@ -19,3 +22,5 @@ void RenderableState::Reset()
     flags16 = 0; pending = 0; flags = 0; flag153 = 0;
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014EE48);

@@ -1,0 +1,16 @@
+#include "include_asm.h"
+#include "ps2/prelude.h"
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017BC18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017BCD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017BD10);
+
+void func_0017BDC0(s32 arg0, s32 arg1, s32 arg2)
+{
+  u8 *temp_3;
+  int new_var;
+  new_var = arg0 + 0x80;
+  temp_3 = new_var + arg1;
+  *((s32 *) (((s8 *) (arg0 + (((*temp_3) * 4) + (arg1 << 6)))) + 0)) = arg2;
+  *temp_3 += 1;
+}

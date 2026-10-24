@@ -1,7 +1,10 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/grid.hpp"
 
 // /SLUS_213.76 0x393320
+
 void Grid::AllocateFlags(const GridSource* source)
 {
     flags = (char*)KaimAllocate(source->flagCount);

@@ -1,5 +1,4 @@
-/* Translation unit tu_19ae08 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "types_ghidra.h"
 
@@ -31,7 +30,9 @@ void func_0019AF20(void) {
     func_00193988();
 }
 
-/* Assembly between the functions: func_0019AF40 (176 bytes), func_0019AFF0 (208 bytes), func_0019B0C0 (112 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0019AF40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0019AFF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0019B0C0);
 
 void func_0019B130(void) {
     func_0019B0C0();

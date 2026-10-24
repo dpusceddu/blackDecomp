@@ -441,7 +441,7 @@ def plan_group(world, pieces, lo, hi, notes):
     return parts + extra
 
 
-STATE = BUILD / 'migrate_include_asm.json'
+STATE = Path(__file__).with_name('migrate_include_asm_state.json')   # per-piece fallback levels found by the first run
 
 
 def load_state():
@@ -453,6 +453,10 @@ def plan(world, state=None):
     pieces = make_pieces(world)
     for p in pieces:
         p.level = state.get(p.id, 0)
+        if p.level == 1 and p.srcs:
+            idx = [world.starts.index(x) for x in p.srcs]
+            if idx != list(range(idx[0], idx[0] + len(idx))):
+                p.level = 2                    # without function sections the functions must be adjacent
     allsrc = {a for p in pieces for a in p.srcs}
     for p in pieces:                                   # notes-only drafts follow the siblings with the same name prefix
         if p.draft and not p.funcs and not p.anchor:
@@ -723,6 +727,8 @@ def write(world, parts, stale, report):
     for u in units:
         for f in u['functions']:
             f['addr'] = f['addr'] if isinstance(f['addr'], int) else num(f['addr'])
+        if u.get('externs'):
+            u['externs'] = {k: num(v) for k, v in u['externs'].items()}
     units_verify.save(units)
     report.update(counts)
     return entries
@@ -824,8 +830,12 @@ def main():
             if not failed:
                 return 0
             for name in failed:
-                for piece in by_name[name].pieces:
-                    state[piece.id] = state.get(piece.id, 0) + 1
+                pt = by_name[name]
+                for piece in pt.pieces:
+                    cur = state.get(piece.id, 0)
+                    idx = [world.starts.index(x) for x in piece.srcs]
+                    contiguous = idx == list(range(idx[0], idx[0] + len(idx)))
+                    state[piece.id] = 1 if (cur == 0 and len(pt.pieces) == 1 and contiguous) else max(2, cur + 1)
             STATE.write_text(json.dumps(state, indent=1))
         return 1
     world = World()

@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_action_decls.hpp"
 
 namespace BlackGame {
 // /SLUS_213.76 0x198458
+
 void Action::LeaveMovementPermission()
 {
     BaseLeave();

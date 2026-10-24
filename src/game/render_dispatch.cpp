@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Virtual slot names describe observed use; original class names are unknown.
 class BkRenderDispatchPS2 {
 public:
@@ -9,6 +11,7 @@ public:
     virtual int End(void *record);
 };
 extern "C" BkRenderDispatchPS2 *func_001AFF88(void *, int);
+
 extern "C" int func_001AFF98(void *context, signed char *record) {
     return func_001AFF88(context, *record)->Begin(record);
 }

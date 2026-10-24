@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
@@ -18,3 +19,7 @@ s32 func_002831A0(void *arg0, void *arg1) {
     M2C_FIELD(arg0, s8 *, 0xCBB4) = 1;
     return 0x8000;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00283200);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002832A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002835C8);

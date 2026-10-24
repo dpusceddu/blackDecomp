@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "animation/channel_state.h"
 #include "animation/instance.h"
 #include "ps2/ee_fpu.h"
@@ -8,6 +10,7 @@ struct AnimationChannelView : AnimationChannelState {
 };
 extern "C" f32 func_003527E8(f32);
 extern "C" void func_003492E0(AnimationChannelState*);
+
 f32 AnimationChannelView::FadeWeight(f32 fade_out_duration) {
     AnimationChannelState* state=this;
     f32 weight = 0.0f;

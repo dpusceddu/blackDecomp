@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/perception.hpp"
 
 bool Perception::Init(ChildBuffers* config)

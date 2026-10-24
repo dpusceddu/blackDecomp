@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 #include "game/weapons/moving.hpp"
 
 namespace ModWeapons {
 extern void*impactService __asm__("D_0040F4D4");
 extern int maximumMovingIndex __asm__("D_003BCEB8");
 extern "C" void func_0016E0C0(void*,Vec,Vec,BkModWeaponOwnerPS2*);
+
 static inline Position4&Vector(Position4&v){return v;}
 struct ImpactIteration {signed char bounce;bool again;} __attribute__((aligned(16)));
 int MovingPool::Spawn(float remaining,float speed,Instance*source,Vec origin,Vec direction,signed char flags){
@@ -27,3 +30,10 @@ void MovingShot::CachedHit(){
 // Unmatched: 0015D3E0: initialization store order and frame alias context.
 // Unmatched: 0015D440: motion vector and temporary scheduling.
 // Unmatched: 0015D620: cached query boolean and stored-float vector helper context.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D3D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D3E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D440);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D620);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D750);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D850);

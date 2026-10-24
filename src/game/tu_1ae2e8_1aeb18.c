@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_001AF6D0();
@@ -10,3 +11,6 @@ void func_001AEB18(s32 actor_address)
   D_0040F4D8 += 0;
   func_001B86D0(D_0040F4D8 + 0x54AB0);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AEB50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AEBB0);

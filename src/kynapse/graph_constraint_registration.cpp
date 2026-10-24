@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/constraint_registration.hpp"
 
 namespace ConstraintRegistration {
+
 void Register(int initialize,int priority){
  if(priority==65535){
   if(initialize){
@@ -20,3 +23,10 @@ void Register(int initialize,int priority){
  }
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F20A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2180);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F21D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2210);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2248);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F22A0);

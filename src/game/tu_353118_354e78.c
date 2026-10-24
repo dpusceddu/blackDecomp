@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern void * func_00354F58();
@@ -46,3 +47,8 @@ block_3:
     }
     return var_17;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00354F58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355080);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003550E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355268);

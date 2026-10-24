@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_helpers_decls.hpp"
 
 namespace BlackGame {
 // /SLUS_213.76 0x193818
+
 void FormationMode::ContinueToGoal()
 {
     PositionArg goal = FormationGoalPoint(&brain->formation);

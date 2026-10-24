@@ -1,0 +1,26 @@
+#include "include_asm.h"
+
+#ifdef NON_MATCHING
+// Unmatched: matrix construction and culling helper context; Add retains six scheduling differences.
+#include "game/effects/runtime.hpp"
+#include "game/effects/vu_math.h"
+extern "C" {extern char*D_0040F4D0;extern char*D_0040F4C0;extern s128 D_004432A0;}
+using ModEffects::Matrix;
+struct TimedSlot {void*asset;char unknown04[12];Matrix input,output;float offset,rate,started,expires,fade,unknowna4,alpha,unknownac;};
+struct TimedBank {TimedSlot slots[8];void Clear() __asm__("func_001BE890");void Add(void*,const Matrix*,float,float,float,float,float) __asm__("func_001BE7F0");void Update() __asm__("func_001BE330");void Render() __asm__("func_001BE4C0");};
+static inline s128 Axis(float x,float y,float z){BkEffectPointPS2 p={x,y,z,0};return *(s128*)&p;}
+static inline Matrix Product(const Matrix &m,const Matrix &n){Matrix r;r.row[0]=BkEffectRotatePS2((s128*)m.row,n.row[0]);r.row[1]=BkEffectRotatePS2((s128*)m.row,n.row[1]);r.row[2]=BkEffectRotatePS2((s128*)m.row,n.row[2]);r.row[3]=BkEffectTransformPS2((s128*)m.row,n.row[3]);return r;}
+void TimedBank::Clear(){Matrix identity;ModEffects::IdentityXYZ(identity);short i=0;TimedSlot *cursor=slots;do{TimedSlot &slot=*cursor;slot.output=identity;slot.asset=0;slot.expires=-1;slot.started=1e9f;slot.rate=0;slot.offset=0;slot.fade=1;slot.alpha=1;slot.input=identity;cursor++;i++;}while(i<8);}
+void TimedBank::Add(void *asset,const Matrix *matrix,float duration,float delay,float start,float end,float fade){float now=*(float*)(D_0040F4D0+0x20);short i=0;do{TimedSlot*slot=&slots[i];if(slot->expires<now){slot->asset=asset;now+=delay;slot->input=*matrix;slot->alpha=1;slot->rate=(end-start)/duration;slot->offset=start;slot->expires=now+duration;slot->fade=fade;slot->started=now;return;}i++;}while(i<8);}
+void TimedBank::Update(){float now=*(float*)(D_0040F4D0+0x20);short i=0;TimedSlot *slot=slots;do{if(now<slot->expires){float elapsed=now-slot->started;float scale=elapsed*slot->rate+slot->offset;slot->output.row[3]=D_004432A0;slot->output.row[0]=Axis(scale,0,0);slot->output.row[1]=Axis(0,scale,0);slot->output.row[2]=Axis(0,0,scale);slot->output=Product(slot->input,slot->output);if(slot->fade<1){float phase=elapsed/(slot->expires-slot->started);asm("min.s %0,%1,%2":"=f"(phase):"f"(phase),"f"(1.0f));if(slot->fade<=phase)slot->alpha=1-phase;}}slot++;i++;}while(i<8);}
+extern "C" void func_001AF738(int,void*,int,int,int,void*,void*,bool,int);
+static inline float Plane(s128 plane,s128 sphere){BkEffectPointPS2 a=BkEffectSpillPS2(plane),b=BkEffectSpillPS2(sphere);return a.x*b.x+a.y*b.y+a.z*b.z-a.w;}
+static inline s128 Project(const s128*planes,s128 sphere){BkEffectPointPS2 s=BkEffectSpillPS2(sphere);return BkEffectSubPS2(BkEffectAddPS2(BkEffectAddPS2(BkEffectScalePS2(planes[0],s.x),BkEffectScalePS2(planes[1],s.y)),BkEffectScalePS2(planes[2],s.z)),planes[3]);}
+static inline bool AnyGreater(s128 a,float limit){BkEffectPointPS2 v=BkEffectSpillPS2(a);return v.x>limit||v.y>limit||v.z>limit||v.w>limit;}
+void TimedBank::Render(){float now=*(float*)(D_0040F4D0+0x20);for(int i=0;i<8;i++){TimedSlot*slot=slots+i;if(slot->started<=now&&now<slot->expires){s128 sphere=*(s128*)slot->asset;BkEffectPointPS2 p=BkEffectSpillPS2(sphere);float scale=(now-slot->started)*slot->rate+slot->offset;BkEffectPointPS2 scaled=p;scaled.w*=scale;sphere=*(s128*)&scaled;s128 world=BkEffectTransformPS2(slot->input.row,sphere);BkEffectPointPS2 w=BkEffectSpillPS2(world);w.w=scaled.w;sphere=*(s128*)&w;float radius=w.w,negative=-radius;int visibility=1;const s128*planes=(s128*)(D_0040F4C0+0xcfd0);for(int j=0;j<2;j++){float d=Plane(planes[j],sphere);if(radius<d){visibility=0;break;}if(negative<d)visibility=3;}if(visibility&&AnyGreater(Project(planes+2,sphere),radius))visibility=0;if(visibility==1&&AnyGreater(Project(planes+6,sphere),negative))visibility=3;union{float f;unsigned u;}alpha;alpha.f=slot->alpha;if(visibility&&(alpha.u&0x7f800000)>0x37800000){char*asset=(char*)slot->asset;func_001AF738(0,D_0040F4C0+0x14,*(int*)(asset+0x1c),*(int*)(asset+0x38),*(int*)(asset+0x40),&slot->unknowna4,&slot->output,visibility==1,1);}}}}
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE330);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE4C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE7F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE890);
+#endif

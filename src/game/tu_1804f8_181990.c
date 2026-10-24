@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
@@ -14,3 +15,5 @@ void func_00181990(void *arg0, s32 arg1) {
     }
     func_00181660((RecoveredAIActionStack *) arg0, (u32) arg1, 0);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001819F0);

@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/actor/views.hpp"
 extern "C" {
 void func_00148550(void *);
@@ -12,6 +14,7 @@ extern char *D_0040F4D4;
 extern void *D_0040F4D0;
 }
 namespace BlackPS2Campaign {
+
 void ActorEntries::Update(float delta) {
     if (Field_01F0()) func_00148550(this);
     func_00145400(this);
@@ -45,3 +48,8 @@ void ActorEntries::Update(float delta) {
 
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00145400);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00145558);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00145A50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00145B98);

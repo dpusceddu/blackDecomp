@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "ps2/prelude.h"
 
 extern char D_004064A0[];

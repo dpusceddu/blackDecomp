@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/weapons/inventory_methods.hpp"
 
 namespace ModWeapons {
@@ -12,7 +14,22 @@ namespace ModWeapons {
         void *func_00107D20(unsigned);
         extern void *D_0040F4E4,*D_0040F4DC,*D_0040F514;
     }
-    Weapon* Inventory::Current(){
+    
+
+#ifdef NON_MATCHING
+// Unmatched: 0015BBD8: state-machine and action forwarding context.
+// Unmatched: 0015C1A8: pickup slot iteration and return-tail context.
+// Unmatched: 0015C3C8: inline VU axis rotation and matrix temporary ordering.
+// Unmatched: 0015CC40: catalog classification loops and helper context.
+// Unmatched: 0015CEF0: remaining caller register allocation.
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015BBD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015C1A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015C3C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CC40);
+#endif
+
+Weapon* Inventory::Current(){
         return (Weapon*)Field<Weapon*>(poseManager->pair->primary,0x1b4);
     }
     void Inventory::Switch(){
@@ -116,3 +133,7 @@ namespace ModWeapons {
         selectedSlot=-1;
     }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015C970);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CAB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CBA0);

@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 void func_001AF180(void *draw_list, s32 kind, s32 comparator) {

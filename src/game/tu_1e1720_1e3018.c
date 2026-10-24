@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
@@ -31,3 +33,5 @@ s32 func_001E3018(void *arg0, s32 arg1, s32 arg2) {
         return 0;
     }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E3098);

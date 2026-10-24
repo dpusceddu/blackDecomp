@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "rw_audio/sound.h"
 
 extern RwaSound *func_00314488(RwaBank *, s32);
@@ -13,3 +15,10 @@ void *func_00313C90(RwaBank *bank, u32 size) {
     bank->data_size = copy.output_format.extent;
     return data;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313DC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313E60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313E88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313EA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313EC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313F00);

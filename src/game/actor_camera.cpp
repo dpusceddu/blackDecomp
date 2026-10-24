@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/camera/controller.hpp"
 #include "game/ai_vector.hpp"
 
@@ -77,3 +79,46 @@ void CameraController::Configure(BlackGame::PositionArg a, BlackGame::PositionAr
     if (child) child->V4(a, b, firstTime, firstFlag, secondFlag, secondTime, data);
 }
 }
+
+#ifdef NON_MATCHING
+// Unmatched: 0x140e48 scalar-to-VU temporary allocated V1 instead of final argument A1.
+// Unmatched: 0x140ea8 native matrix return and shared Y-scratch address lifetime.
+// Unmatched: 0x141008 VU normalization/copy helpers, register allocation and spill ordering.
+// Unmatched: 0x141308 native pending-selection iterator and early-success return layout.
+// Unmatched: 0x141460 small-data/byte-flag constant lifetime and return-tail scheduling.
+// Unmatched: 0x1414a0 native narrow predicate and VU component-readback/spill ordering.
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140E48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140EA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141308);
+#endif
+
+#ifdef NON_MATCHING
+#include "game/camera/controller.hpp"
+#include "ps2/matrix.hpp"
+
+// Unmatched: 0x141008 VU normalization copies and scalar/temporary scheduling.
+// Unmatched: 0x140E48 scalar-to-VU scratch-register allocation (two operands).
+// Unmatched: 0x140EA8 vector-component accessor lifetime and virtual matrix return.
+// Unmatched: 0x141308 queued child-selection loop and success-return control flow.
+// Unmatched: 0x141460 small-data byte access and duplicate boolean constant lifetimes.
+// Unmatched: 0x1414A0 component-spill reuse and narrow-predicate control flow.
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140E48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140EA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141308);
+#endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141000);
+
+#ifdef NON_MATCHING
+// Unmatched: 0x141008 signed-angle VU normalization, temporary spills and scheduling remain after native camera reconstruction.
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141008);
+#endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141168);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001412C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001412E8);

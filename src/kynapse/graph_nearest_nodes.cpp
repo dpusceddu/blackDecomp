@@ -1,4 +1,14 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/node_queries.hpp"
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB6D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB850);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB9D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FBC20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC260);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC3C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC668);
 
 inline void QueryDrawPoint(const QueryVector *point, int red, int green, int blue)
 {

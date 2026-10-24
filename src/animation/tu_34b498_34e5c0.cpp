@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "animation/graph_runtime.h"
 /* Inferred graph callback names; the linked symbols remain the retail address aliases. */
+
 float *Graph_WindowClip(void *owner, AnimationGraphNode *node, AnimationParameters *bank, float current,
     float previous, unsigned int flags, float rate, float weight) {
     InstanceView *instance = (InstanceView *)owner;
@@ -395,3 +398,10 @@ float *Graph_Overlay(void *owner, AnimationGraphNode *node, AnimationParameters 
 
 // Unmatched: func_0034C128, controlled blend live span reads and weight-stack lifetimes.
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E758);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E7C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E828);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E908);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E9E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034EAA0);

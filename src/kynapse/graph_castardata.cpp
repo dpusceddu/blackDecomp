@@ -1,4 +1,7 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/tables.hpp"
+
 Kaim::CAstarData::~CAstarData(){ if(rows){for(int i=0;i<count;++i)D_003C87E0(rows[i]);D_003C87E0(rows);} }
 
 #if 0
@@ -103,3 +106,6 @@ int Kaim::CAstarData::Save(const void* path)
 }
 
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FEBD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FEBF0);

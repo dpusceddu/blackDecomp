@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/weapons/reserves.hpp"
 
 namespace ModWeapons {

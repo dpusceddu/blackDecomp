@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/property.hpp"
 #include "kynapse/behaviors/flee.hpp"
 extern const char D_00404030[], D_00404048[], D_00404058[], D_00404068[];
@@ -13,7 +15,9 @@ const char D_00404098[] __attribute__((aligned(8))) = "MaxEntitiesToFlee";
 
 namespace FleeRecovery {
 
-    bool FleeAgent::Configure(ChildBuffers* entry)
+    
+
+bool FleeAgent::Configure(ChildBuffers* entry)
    {
         if (!entry) return false;
             const char* key = entry->GetSecond();

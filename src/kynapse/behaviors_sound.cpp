@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/sound.hpp"
 
 namespace Kaim {
 extern int gTeamKey;
 struct IntProperty { int unused; int value; };
+
 static inline float DistanceSquared(const SoundEvent* sound,const Listener* listener) {
     const Vec3& a=*(const Vec3*)&sound->x;
     const Vec3& b=*(const Vec3*)&listener->x;
@@ -129,3 +132,18 @@ SoundEvent* SoundPool::GetSound(int index) {
 // Unmatched: Hears, EmitSound, AddSound, Update and Draw retain inline/scheduling differences.
 // Unmatched: Matches retains vector accessor scheduling differences.
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030D1F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030D370);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030D5F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030DAA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030DC28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030DDE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030DFC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E100);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E128);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E180);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E320);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E550);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E558);

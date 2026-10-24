@@ -1,4 +1,7 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
+
+extern s32 func_001E36A0();
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"
@@ -56,3 +59,48 @@ block_14:
         return 0;
     }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E3C90);
+
+s32 func_001E3FA0(s32 arg0, s32 arg1) {
+    s32 var_17;
+    s32 var_2;
+    void *var_16;
+
+    var_16 = arg0 + 0x250;
+    var_17 = 3;
+    do {
+        var_2 = M2C_FIELD(var_16, s32 *, 0x28);
+        if (var_2 == arg1) {
+            var_2 = func_001E36A0((s32) var_16);
+        }
+        var_17 -= 1;
+        var_16 += 0x30;
+    } while (var_17 >= 0);
+    return var_2;
+}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E3FF8);
+
+#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "types_ghidra.h"
+#undef TYPES_GHIDRA_NO_PROTOTYPES
+extern s32 func_00280C90(void *, s32);
+extern f32 func_001ED820(void *);
+extern void * D_0040F510;
+
+f32 func_001E4260(void *arg0, s32 arg1, s32 arg2) {
+    f32 var_f0;
+
+    func_00280C90(arg0, arg2);
+    if (arg2 != 0) {
+        var_f0 = func_001ED820(M2C_FIELD(M2C_FIELD(D_0040F510, void **, 0xCBD8), void **, 0x2C));
+    } else {
+        var_f0 = 1.0f;
+    }
+    M2C_FIELD(arg0, f32 *, 0x37C) = var_f0;
+    return var_f0;
+}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E42D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E44A0);

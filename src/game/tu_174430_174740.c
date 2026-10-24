@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern u8 func_001746D8();
@@ -35,3 +36,5 @@ block_9:
         break;
     }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001747D0);

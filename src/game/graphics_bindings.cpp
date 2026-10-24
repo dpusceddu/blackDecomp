@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/classes/other/UnknownVtable_003E0EB8.hpp"
 struct FrontendValue;
 struct UnlockDefinition { const char* name; unsigned char opaque[12]; };
@@ -25,6 +27,7 @@ extern const char D_003FB800[];
 extern const char D_003FB818[];
 extern const char D_003FB838[];
 }
+
 int BlackPS2Classes::UnknownVtable_003E0EB8::Function_00213758(){
 UnlockDefinition* entry=&D_003FC8C8;
 for(int i=0;i<16;++i)func_0020E0C8(this,(&D_003FC8C8)[i].name);
@@ -101,3 +104,11 @@ func_0020DCF8(&D_004923D0,"FE_REQUIREMENT3");
 func_0020DCF8(&D_00492400,"FE_REQUIREMENT4");
 return 1;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00213938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002139C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00213CA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00213DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00213FA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00214130);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00214300);

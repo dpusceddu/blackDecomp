@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "physics/collision_work.h"
 
 /* Inferred storage-request type; the PS2 object stores size and alignment. */
@@ -17,6 +19,12 @@ void func_0032F928(int, int);
 // Unmatched: 0032ED80 contact publication; packed point copies and VU register scheduling differ.
 // Unmatched: 0032F1A0 convex clipping; support-feature object lifetimes and VU allocation differ.
 // Unmatched: 0032F928 static vector construction; temporary lifetime and small-data scheduling differ.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E810);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032ED80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032F198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032F1A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032F928);
 
 CollisionStorageRequestPS2 *func_0032FA70(CollisionStorageRequestPS2 *storage, u32 pairs)
 {

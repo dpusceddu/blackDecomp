@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/point_mapper.hpp"
 
 extern const float D_00405B60;
+
 unsigned int PointMapper::FindTarget(PointContainer *source, PointContainer *target, const Vec3 *point) {
     unsigned int best = (unsigned int)-1;
     float bestDistance = D_00405B60;
@@ -25,3 +28,10 @@ unsigned int PointMapper::FindTarget(PointContainer *source, PointContainer *tar
 
 extern const float D_00405B60 = 3.4028235e38f;
 extern const float nearestPointPadding = 0.0f;
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB9C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DBCE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC7E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC840);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC8A0);

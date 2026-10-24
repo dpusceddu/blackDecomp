@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 volatile unsigned short func_001E3500(void *arg0)
@@ -12,3 +13,5 @@ volatile unsigned short func_001E3500(void *arg0)
   M2C_FIELD(arg0, s8 *, 0x2C) = 0;
   return 1;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E3518);

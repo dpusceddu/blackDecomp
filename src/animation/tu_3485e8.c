@@ -1,5 +1,4 @@
-/* Translation unit animation/tu_3485e8 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_003486E0();
@@ -17,7 +16,8 @@ s32 func_003485E8(u32 *arg0, u32 *arg1) {
     return 1;
 }
 
-/* Assembly between the functions: func_00348610 (208 bytes), func_003486E0 (88 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00348610);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003486E0);
 
 void func_00348738(s32 arg0, s32 arg1, s32 arg2) {
     func_003486E0(func_00352A30(), arg1, arg2);

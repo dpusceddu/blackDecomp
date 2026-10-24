@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/agents/sight.hpp"
 
 namespace KaimSight {

@@ -1,5 +1,4 @@
-/* Translation unit tu_16eb80 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_00274E40();
@@ -49,7 +48,7 @@ void func_0016EB80(void *arg0) {
     func_0016F3D0(arg0);
 }
 
-/* Assembly between the functions: func_0016EC78 (264 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016EC78);
 
 void func_0016ED80(void) {
     if ((func_002D15A0() != 0) && (func_002D8448() != 0) && (func_002DA1C8() != 0) && (func_002F0DA8() != 0) && (func_003054F8() != 0)) {
@@ -66,7 +65,7 @@ s32 func_0016EDF0(void *arg0) {
     return 1;
 }
 
-/* Assembly between the functions: func_0016EE38 (56 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016EE38);
 
 s32 func_0016EE70(void *arg0) {
     if (D_003C9ED4 != 0) {
@@ -76,7 +75,8 @@ s32 func_0016EE70(void *arg0) {
     return 1;
 }
 
-/* Assembly between the functions: func_0016EE90 (8 bytes), func_0016EE98 (80 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016EE90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016EE98);
 
 s32 func_0016EEE8(void) {
     return 0;
@@ -90,13 +90,16 @@ s32 func_0016EEF8(void) {
     return 8;
 }
 
-/* Assembly between the functions: func_0016EF00 (1232 bytes), func_0016F3D0 (1496 bytes), func_0016F9A8 (144 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016EF00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016F3D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016F9A8);
 
 s32 func_0016FA38(void) {
     return M2C_FIELD(D_0040F4D4, s32 *, 0x22B98);
 }
 
-/* Assembly between the functions: func_0016FA50 (96 bytes), func_0016FAB0 (104 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016FA50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016FAB0);
 
 s32 func_0016FB18(s32 arg0, s32 arg1) {
     if (arg1 == 1) {

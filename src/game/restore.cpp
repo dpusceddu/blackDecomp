@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "game/camera/vitals.hpp"
 #include "game/math/scalar.hpp"
 namespace ModCamera {
@@ -11,6 +13,7 @@ void func_001EED98(float,void*,int);int func_001F2A60(void*,int,int,int,int);
 int func_0021A7E0(const char*,int,int,int,...);int func_0024F7D0(int,...);
 const char D_003F49C8[]="ReloadHealth";
 }
+
 static inline float Normalized(PlayerVitals *player){
  switch(D_0040F0E0->difficulty){
  case 0:return player->health/1200.0f;case 1:return player->health/1200.0f;

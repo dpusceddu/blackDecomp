@@ -1,5 +1,4 @@
-/* Translation unit tu_17c908 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "types_ghidra.h"
 
@@ -17,7 +16,7 @@ void func_0017E710(void *arg0, s128 arg1) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x44), s128 *, 0x20) = arg1;
 }
 
-/* Assembly between the functions: func_0017E770 (144 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017E770);
 
 s32 func_0017E800(void *arg0) {
     if (M2C_FIELD(arg0, u8 *, 0x82) == 0) {
@@ -30,7 +29,16 @@ s32 func_0017E800(void *arg0) {
     return 1;
 }
 
-/* Assembly between the functions: func_0017E860 (264 bytes), func_0017E968 (264 bytes), func_0017EA70 (96 bytes), func_0017EAD0 (456 bytes), func_0017EC98 (872 bytes), func_0017F000 (664 bytes), func_0017F298 (512 bytes), func_0017F498 (648 bytes), func_0017F720 (328 bytes), func_0017F868 (496 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017E860);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017E968);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017EA70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017EAD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017EC98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017F000);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017F298);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017F498);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017F720);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017F868);
 
 u8 func_0017FA58(void *arg0) {
     u8 var_5;
@@ -80,7 +88,7 @@ s32 func_0017FB70(void) {
     return 0;
 }
 
-/* Assembly between the functions: func_0017FB78 (176 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017FB78);
 
 void func_0017FC28(void) {
 
@@ -97,7 +105,8 @@ void func_0017FC30(void *arg0, s32 arg1) {
     }
 }
 
-/* Assembly between the functions: func_0017FC70 (104 bytes), func_0017FCD8 (848 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017FC70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017FCD8);
 
 void func_00180028(void *arg0) {
     void *temp_4;
@@ -115,3 +124,5 @@ void func_00180070(void) {
 s32 func_00180078(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x8C) == 0;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00180088);

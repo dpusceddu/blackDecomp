@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
 namespace BlackGame {
 // /SLUS_213.76 0x192dc0
 // Unmatched: private register contract (mode in EDI) and inlined resubmit expansion.
+
 bool RouteMode::Recover()
 {
     if (resubmit) {
@@ -29,3 +32,5 @@ void RouteMode::Stop()
 }
 
 }  // namespace BlackGame
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192EB0);

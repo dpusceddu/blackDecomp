@@ -1,5 +1,4 @@
-/* Translation unit tu_15d958 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern s32 func_00165AF8();
@@ -37,54 +36,70 @@ void func_00160F20(void *arg0, s32 arg1) {
     func_00165BC8(arg0, arg1);
 }
 
-/* Assembly between the functions: func_00160F60 (1008 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00160F60);
 
 s32 func_00161350(void) {
     func_00160ED8();
     return 1;
 }
 
-/* Assembly between the functions: func_00161370 (8 bytes), func_00161378 (160 bytes), func_00161418 (72 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161370);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161378);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161418);
 
 s32 func_00161460(void) {
     func_00160ED8();
     return 1;
 }
 
-/* Assembly between the functions: func_00161480 (8 bytes), func_00161488 (96 bytes), func_001614E8 (72 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161480);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161488);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001614E8);
 
 s32 func_00161530(void) {
     func_00160ED8();
     return 1;
 }
 
-/* Assembly between the functions: func_00161550 (8 bytes), func_00161558 (80 bytes), func_001615A8 (72 bytes), func_001615F0 (112 bytes), func_00161660 (72 bytes), func_001616A8 (136 bytes), func_00161730 (72 bytes), func_00161778 (144 bytes), func_00161808 (280 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161550);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161558);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001615A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001615F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161660);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001616A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161730);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161778);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161808);
 
 void func_00161920(void) {
     func_00160E70();
 }
 
-/* Assembly between the functions: func_00161940 (80 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161940);
 
 s32 func_00161990(void) {
     func_00160ED8();
     return 1;
 }
 
-/* Assembly between the functions: func_001619B0 (8 bytes), func_001619B8 (240 bytes), func_00161AA8 (72 bytes), func_00161AF0 (456 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001619B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001619B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161AA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161AF0);
 
 s32 func_00161CB8(void) {
     func_00160ED8();
     return 1;
 }
 
-/* Assembly between the functions: func_00161CD8 (8 bytes), func_00161CE0 (120 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161CD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161CE0);
 
 void func_00161D58(void) {
     func_00160E70();
 }
 
-/* Assembly between the functions: func_00161D78 (80 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161D78);
 
 s32 func_00161DC8(void) {
     func_00160ED8();

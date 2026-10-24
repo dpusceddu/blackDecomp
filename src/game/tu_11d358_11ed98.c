@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "types_ghidra.h"
 
@@ -20,3 +21,5 @@ void func_0011EDD8(s32 *arg0) {
 s32 func_0011EDF8(void) {
     return 1;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0011EE00);

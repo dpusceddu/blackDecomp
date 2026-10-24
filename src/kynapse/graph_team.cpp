@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "kynapse/graph/team.hpp"
 namespace Kaim {
+
 CTeam::CTeam(unsigned int count,const char *teamName) {
     flag=0;
     if(teamName) {name=(char*)Allocate(func_0035CCD8(teamName)+1);func_0035CBC0(name,teamName);}
@@ -43,3 +46,10 @@ unsigned int CTeam::GetIndex() {
     return ((unsigned int)slot.node-(unsigned int)gTeamWorld->teams->storage)/20U;
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC4B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC5B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC7D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC8A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC918);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC9D0);

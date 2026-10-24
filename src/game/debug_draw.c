@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 #include "ps2/prelude.h"
 typedef struct {int unknown,count,capacity;void **items;} BkDebugListPS2;
 extern void func_00266088(void),func_00268250(int),func_002662A8(void);
 extern void func_001AB6C0(void *,const char *,...);extern void func_001AB468(void *,void *);
 extern int D_003BCFB4,D_003D1CD4;extern char *D_0040F514;
+
 void func_001AB500(char *debug) {
  int i; BkDebugListPS2 *first,*second;
  if(M2C_FIELD(debug,u8 *,0x42)) {
@@ -22,3 +25,5 @@ void func_001AB500(char *debug) {
   for(i=0;i<second->count;i++)if(second->items[i])func_001AB468(debug,second->items[i]);
  }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AB6C0);

@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "types_ghidra.h"
 
@@ -29,3 +30,5 @@ void func_001240B0(void *arg0, s8 arg1) {
 void func_001240B8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x58) = func_00123BC8(&D_0048EFA8);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001240E8);

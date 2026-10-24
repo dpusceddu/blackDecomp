@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "rw_core/error.h"
 extern u8 D_00449438[];extern s32 D_0040E5A0;
+
 RwErrorRecordPS2 *func_002A55D8(RwErrorRecordPS2 *error) {
  RwErrorRecordPS2 *current=(RwErrorRecordPS2 *)(D_00449438+D_0040E5A0);
  if(!current->plugin_id && current->error_code==(s32)0x80000000) {
@@ -8,3 +11,8 @@ RwErrorRecordPS2 *func_002A55D8(RwErrorRecordPS2 *error) {
  }
  return error;
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5640);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5840);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5850);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5A78);

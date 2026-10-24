@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "physics/startup_constants.h"
 // SN requires the sized extern before this initializer to select its GP form.
 __asm__(".extern D_0040E9C8,8\n.extern D_0040E9D0,8");

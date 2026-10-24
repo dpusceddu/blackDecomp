@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #define BLACK_PS2 1
 #include "game/ai_movement_modes_decls.hpp"
 namespace BlackGame {
+
 PositionResult RouteMode::GetTarget() const
 {
     if (active) {
@@ -18,3 +21,6 @@ PositionResult RouteMode::GetTarget() const
     return AsResult(target);
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192380);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192470);

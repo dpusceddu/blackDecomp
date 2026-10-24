@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 #include "game/effects/asset.h"
 
@@ -44,3 +45,10 @@ void *func_001AFF88(s32 context_address, s32 kind) {
     int entry_address = context_address + kind * 4;
     return M2C_FIELD(entry_address, void **, 0x214);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFC80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFD18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFD80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFDE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFE38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFEE0);

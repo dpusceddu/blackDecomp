@@ -1,9 +1,12 @@
+#include "include_asm.h"
+
 #include "game/frontend_resources.hpp"
 extern "C" {
 void func_00109E70(void *);
 void func_0010A860(void *);
 int func_00102080(void *);
 }
+
 void FrontendMenuState::Destroy() {
   func_00109E70(loader);
   func_0010A860(message);

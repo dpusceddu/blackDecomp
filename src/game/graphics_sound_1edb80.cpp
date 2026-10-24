@@ -1,5 +1,8 @@
+#include "include_asm.h"
+
 #include "game/graphics/sound_envelopes.hpp"
 using namespace CampaignGraphics;
+
 int SoundEnvelope::ActivateChannels()
 {
     func_001E1690(SoundObjects()[4],kind,channels[2]);

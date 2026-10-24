@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "game/weapons/manager_methods.hpp"
 
 namespace ModWeapons {
+
 BkModWeaponDefinitionPS2 *WeaponManagerMethods::Definition(EeS8 id,int alternate)
 {
     if(!alternate)

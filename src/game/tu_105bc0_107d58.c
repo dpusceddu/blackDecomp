@@ -1,5 +1,4 @@
-/* Translation unit tu_105bc0 of the TU map: its source functions in address order; assembly functions between them stay
-   in the image and are placed by address. */
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 void func_00107D58(void *arg0) {
@@ -43,7 +42,7 @@ void func_00107D58(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x94) = -1;
 }
 
-/* Assembly between the functions: func_00107DF8 (8 bytes) */
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107DF8);
 
 void func_00107E00(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;

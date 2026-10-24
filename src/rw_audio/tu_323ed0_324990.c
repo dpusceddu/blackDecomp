@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
@@ -37,3 +38,23 @@ void * func_003249E8(s32 arg0) {
     func_003680A0(temp_16, (s32) ((void *) (((s8 *) temp_16) + 0x6F)));
     return func_003242B0(D_0040E7F0 + temp_18, temp_16, 0x70, 0x32, 0, 0, (s32 *) temp_17, 0);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324A88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324BA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324CB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324D98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324DE8);
+
+#define TYPES_GHIDRA_NO_PROTOTYPES
+#include "types_ghidra.h"
+#undef TYPES_GHIDRA_NO_PROTOTYPES
+extern s32 * D_0040E25C;
+extern u32 D_0040E260;
+
+void func_00324E38(s32 *arg0, u32 arg1) {
+    D_0040E25C = arg0;
+    D_0040E260 = arg1;
+}
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324E48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324F90);

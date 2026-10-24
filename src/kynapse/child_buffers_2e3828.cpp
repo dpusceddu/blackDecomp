@@ -1,7 +1,11 @@
+#include "include_asm.h"
+
 // Child-buffer names are inferred from the PS2 layout and the parent reconstruction.
 #include "kynapse/child_buffers.hpp"
 namespace Kaim {
-    void ChildBuffers::RemoveChild(ChildBuffers* child)
+    
+
+void ChildBuffers::RemoveChild(ChildBuffers* child)
     {
         unsigned int i;
         for (i = 0; i < count; ++i)

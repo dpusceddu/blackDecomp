@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 
 extern void func_00118900(s32);
@@ -71,3 +72,5 @@ s32 func_00117800(s32 arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s8 *, 0xA0) = 1;
     return func_00118810(arg0 + 4);
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00117828);

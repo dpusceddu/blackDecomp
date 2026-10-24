@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "game/weapons/controller.hpp"
 
 namespace ModWeapons {
+
 void Weapon::Update(int fire,int alternate,int grenade,int reload,int aim,int special,int change,Action *action){
  float dt=frame->delta;cooldown-=dt;if(phase==1)elapsed+=dt;else elapsed=0;
  Advance(fire,alternate,grenade,reload,aim,special,change,action);
@@ -29,3 +32,17 @@ void Weapon::SetPose(int secondaryPose){
 // Unmatched: 00158668: hit callback signature and matrix temporaries.
 // Unmatched: 001588F0: virtual hit arguments and aggregate lifetime.
 // Unmatched: 00158AE0: event resource layout and event hash dispatch.
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156450);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001564D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156A20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156A88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156CA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156D60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156D80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156E70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156E80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156E90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156F00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156F10);

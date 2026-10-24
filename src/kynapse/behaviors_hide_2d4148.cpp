@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/behaviors/hide_search.hpp"
 #include "kynapse/compat.hpp"
 namespace HideSearch {
+
 HideAgent::HideAgent(Context* context):Behavior(context),rank((unsigned)-1) {
  currentId=0x7fffffff;maxDangerous=20;graphSlot=(unsigned)-1;perception=0;provider=0;offsetProperty=0;dangerous=0;nodes=0;dangerousCount=0;graph=0;lookup=0;currentNode=0;
 }
@@ -115,3 +118,7 @@ result: return found;
 // Unmatched: Test vector lifetimes and visibility-loop scheduling.
 // Unmatched: Evaluate query temporaries and iterator allocation.
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D49A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D4B68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5008);

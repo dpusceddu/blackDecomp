@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/flee_agent.hpp"
 using namespace FleeRecovery;
 extern unsigned int D_003E2A58[],D_003E2AE0,D_0044ECD0;
@@ -6,6 +8,7 @@ extern "C" void func_002E00F0(void *,const char *,void *(*)(),int,int,int);
 extern "C" void *func_002D1610();
 extern "C" int func_002DFF98(FleeAgent *,int);
 extern int (*D_003C87E0)(void *);
+
 extern "C" void func_002D2CE8(int initialize,int priority) {
     if (priority==0xffff) {
         if (initialize) {
@@ -553,3 +556,8 @@ namespace FleeRecovery {
     }
 }
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2D48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2E48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2E68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2F48);

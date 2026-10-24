@@ -1,8 +1,11 @@
+#include "include_asm.h"
+
 // Ported from an unpublished companion project.
 #include "kynapse/engine_class.hpp"
 
 namespace Kaim {
 // /SLUS_213.76 0x2eb280
+
 void Engine::AddService(Object* service)
 {
     if (serviceCapacity == serviceCount) {
@@ -22,3 +25,8 @@ void Engine::AddService(Object* service)
 }
 
 }  // namespace Kaim
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EB398);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EB450);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EBE90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EBF58);

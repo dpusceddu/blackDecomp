@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "game/actor/actor_command.hpp"
 namespace CampaignActor {
 extern "C" {extern CommandWorld*D_0040F514;}
+
 inline CommandWorld*World(){return D_0040F514;}
 void WeightCommand::Execute(){
  float value=data->value;float fraction=1.0f-data->fraction;

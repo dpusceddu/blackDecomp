@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "animation/graph.h"
 #include "animation/collection_indices.h"
 
@@ -5,6 +7,7 @@
 extern unsigned int AnimationString_Hash(const char *) __asm__("func_00352A30");
 
 unsigned int AnimationCollection_Hash(const char *name) ANIMATION_FUNCTION(00342A60);
+
 unsigned int AnimationCollection_Hash(const char *name) {
     return AnimationString_Hash(name);
 }
@@ -283,3 +286,18 @@ void AnimationCollection_VisitClips(AnimationCollectionIndices *collection, int 
     }
 }
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342A80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342D48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342ED8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342FA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343030);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343148);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003432E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343358);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003433C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343470);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343518);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343658);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343798);

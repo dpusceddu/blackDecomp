@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/property.hpp"
 #include "kynapse/behaviors/entities.hpp"
 extern "C" int _stricmp(const char*,const char*);

@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 #include "kynapse/hide_agent.hpp"
 using namespace HideRecovery;
 extern char D_00404400[];
@@ -8,6 +10,7 @@ extern int (*D_003C87E0)(void *);
 extern "C" void *func_002D3C90();
 extern "C" int func_002DFF98(HideAgent *,int);
 extern "C" void func_002E00F0(void *,const char *,void *(*)(),int,int,int);
+
 extern "C" void func_002D5008(int initialize,int priority) {
     if (priority==0xffff) {
         if (initialize) {
@@ -553,3 +556,11 @@ namespace HideRecovery {
     }
 }
 #endif
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5068);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5178);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D51C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5248);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5398);

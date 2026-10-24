@@ -1,3 +1,5 @@
+#include "include_asm.h"
+
 // Inferred PS2 frontend layout and behavior.
 extern unsigned char D_0040D99A,D_0040D99B;
 extern char* D_0040F4C4;
@@ -8,6 +10,7 @@ extern "C" int func_0035D728(char*,const char*,...);
 extern "C" void func_00108958();
 extern "C" void func_001093C0(void*,void*,int,int,void(*)(),void*,int,int);
 struct FrontendStringRequestFlags { char reserved[0x138]; unsigned char first,second; };
+
 static inline bool HasPendingStringRequests(FrontendStringRequestFlags* status) { return status->first || status->second; }
 extern "C" void func_00108890() {
     char path[64];

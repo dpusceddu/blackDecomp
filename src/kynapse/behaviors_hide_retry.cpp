@@ -1,6 +1,9 @@
+#include "include_asm.h"
+
 #include "kynapse/behaviors/hide.hpp"
 
 namespace HideRecovery {
+
 bool HideAgent::Init(ChildBuffers* config)
 {
     destination = gOrigin;
@@ -35,3 +38,5 @@ bool HideAgent::Init(ChildBuffers* config)
     return true;
 }
 }
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D4148);
