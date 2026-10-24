@@ -1,0 +1,23 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+[*.{yaml,yml,json,md}]
+indent_size = 2
+
+[*.{s,inc}]
+indent_style = tab
+
+[Makefile]
+indent_style = tab
+
+# generated or captured data: keep byte for byte
+[{config/units.yaml,config/tus.yaml,config/symbols.txt,config/regions.txt,config/*/boundaries.txt}]
+trim_trailing_whitespace = false
+insert_final_newline = unset

@@ -1,0 +1,21 @@
+# Style of the recovered sources: 4-space indents, attached braces, pointer star next to the type, long lines allowed
+# (declarations are often one-liners). Format only the code you write; do not reformat existing files.
+BasedOnStyle: LLVM
+Language: Cpp
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 120
+BreakBeforeBraces: Attach
+PointerAlignment: Left
+AccessModifierOffset: -4
+AllowShortFunctionsOnASingleLine: All
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: true
+AllowShortBlocksOnASingleLine: Always
+AllowShortCaseLabelsOnASingleLine: true
+IndentCaseLabels: true
+NamespaceIndentation: None
+SortIncludes: Never
+ReflowComments: false
+SpaceAfterCStyleCast: false

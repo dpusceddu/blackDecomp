@@ -1,4 +1,9 @@
-orig/
+/orig/*
+!/orig/README.md
+!/orig/*/
+/orig/*/*
+!/orig/*/.gitkeep
+!/orig/*/README.md
 asm/
 data/
 build/
