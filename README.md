@@ -49,12 +49,13 @@ git clone https://github.com/dpusceddu/blackDecomp.git
 cd blackDecomp
 mkdir -p orig/SLUS_213.76 && cp /path/to/SLUS_213.76 orig/SLUS_213.76/
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+. .venv/bin/activate                      # the tools below need the packages; ninja finds the venv itself
 python3 tools/toolchain.py install        # pinned compilers, assemblers and wibo into build/toolchain (SHA-256 checked)
 python3 configure.py                      # default --version SLUS_213.76
 ninja
 ```
 
-A build from scratch takes a few minutes; a rebuild after changing one file takes seconds. It ends with
+In a container or as root there is no `sudo`: drop it from the first line. A build from scratch takes a few minutes; a rebuild after changing one file takes seconds. It ends with
 
 ```
 OK  SLUS_213.76  SLUS_213.76  sha256 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c

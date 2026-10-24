@@ -56,9 +56,10 @@ order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines.
 5. Run `ninja`, `ninja progress` and the tests (below). If the change moves progress, run `ninja badges` and commit
    `progress/` (and the table it refreshes in `README.md`) with it.
 
-Example: `func_00100258` is `return arg0;`. In `src/game/unsorted/tu_100258.c` the line `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings",
-func_00100258);` becomes `s32 func_00100258(s32 arg0) { return arg0; }`; `ninja` says `OK` and `ninja progress` counts one
-more function.
+Example: `func_001531C0` returns 1. In `src/game/unsorted/tu_153058_153190.c` the line `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings",
+func_001531C0);` becomes `s32 func_001531C0(void) { return 1; }` (`python3 tools/decompile.py func_001531C0 --write` writes this
+draft for you; run it with the virtual environment active); `ninja` says `OK` and `ninja progress` counts one more function.
+Revert with `git checkout src` when you only tried it.
 
 Evidence tiers matter: never describe a function as more than its tier (`exact`, `equivalent`, `draft`).
 
