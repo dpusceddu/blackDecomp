@@ -74,6 +74,7 @@ docker run --rm -it --platform linux/amd64 -v "$PWD":/workspace black-decomp
 # inside: python3 configure.py && ninja
 ```
 
+With Podman, or on a host with SELinux (Fedora, RHEL), mount with `-v "$PWD":/workspace:Z`, or the container cannot read the checkout.
 On Apple silicon this relies on the emulation of x86-64 Linux containers and has not been tested.
 
 **Binutils.** `ld` and `objcopy` for little-endian MIPS come from the distribution package `binutils-mipsel-linux-gnu`
