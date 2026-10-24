@@ -1,5 +1,7 @@
 #include "vu.hpp"
 #include <array>
+#include <bit>
+#include <cmath>
 #include <iostream>
 
 namespace {
@@ -122,9 +124,82 @@ void conversion_and_random() {
     ee::Machine cross;
     cross.state.vf[1].w = {0x3f800000,0x40000000,0x40400000,0x40800000};
     cross.state.vf[2].w = {0x40800000,0x40a00000,0x40c00000,0x40e00000};
-    pair(cross,0,upper(0x2fe,0,1,2)); pair(cross,8,upper(0x2e,3,1,2)); end(cross,16);
+    pair(cross,0,upper(0x2fe,0,1,2)); pair(cross,8,upper(0x2e,3,2,1)); end(cross,16);
     ee::VuEngine cp(cross.state,cross.memory,cross.trace); cp.start(0); cp.run(100);
     check(cross.state.vf[3].w == std::array<uint32_t,4>{0xc0400000,0x40c00000,0xc0400000,0},"outer-product pair preserves native operand order and W");
+}
+void outer_product_and_normalization() {
+    // VU User's Manual 6.0, pp. 116-117 and 305-306: both operations
+    // multiply (fs.y*ft.z, fs.z*ft.x, fs.x*ft.y). The second operation's
+    // register operands are reversed to obtain a vector cross product.
+    for (bool macro : {false,true}) {
+        const auto execute = [macro](ee::Machine& m,const std::vector<uint32_t>& words) {
+            if (macro) {
+                unsigned pc = 0x1000;
+                for (auto word : words) { m.memory.write(pc,4,0x4a000000|word); pc += 4; }
+                m.memory.write(pc,4,0x03e00008); m.memory.write(pc+4,4,0);
+                check(m.call(0x1000,100).stop == ee::Stop::returned,"macro outer-product fixture returns");
+                ee::VuEngine engine(m.state,m.memory,m.trace); engine.drain();
+            } else {
+                unsigned pc = 0;
+                for (auto word : words) { pair(m,pc,word); pc += 8; }
+                end(m,pc);
+                ee::VuEngine engine(m.state,m.memory,m.trace); engine.start(0);
+                check(engine.run(100).stop == ee::Stop::returned,"micro outer-product fixture returns");
+            }
+        };
+        const auto inputs = [](ee::Machine& m) {
+            m.state.vf[1].w = {0x3f800000,0x40000000,0x40400000,0x40800000}; // (1,2,3,4)
+            m.state.vf[2].w = {0x40800000,0x40a00000,0x40c00000,0x40e00000}; // (4,5,6,7)
+            m.state.vf[3].w[3] = 0x12345678;
+        };
+        ee::Machine subtract;
+        inputs(subtract);
+        subtract.state.vacc.w = {0x41a00000,0x41f00000,0x42200000,0x76543210}; // (20,30,40)
+        execute(subtract,{upper(0x2e,3,1,2,14)});
+        check(subtract.state.vf[3].w == std::array<uint32_t,4>{0x41000000,0x41900000,0x420c0000,0x12345678},
+              "OPMSUB independently subtracts (12,12,5) from (20,30,40)");
+        check(subtract.state.vacc.w == std::array<uint32_t,4>{0x41a00000,0x41f00000,0x42200000,0x76543210},
+              "OPMSUB preserves the supplied accumulator");
+        ee::Machine cancel;
+        inputs(cancel);
+        execute(cancel,{upper(0x2fe,0,1,2,14),upper(0x2e,3,1,2,14)});
+        check(cancel.state.vf[3].w == std::array<uint32_t,4>{0,0,0,0x12345678},
+              "the same operand order cancels the outer-product accumulator");
+        check(cancel.state.vi[17] == 14,"outer-product cancellation sets all XYZ zero flags");
+        for (unsigned destination : {1u,2u,3u}) {
+            ee::Machine cross;
+            inputs(cross);
+            const auto untouched = cross.state.vf[destination].w[3];
+            execute(cross,{upper(0x2fe,0,1,2,14),upper(0x2e,destination,2,1,14)});
+            check(cross.state.vf[destination].w == std::array<uint32_t,4>{0xc0400000,0x40c00000,0xc0400000,untouched},
+                  "(1,2,3) crossed with (4,5,6) is (-3,6,-3), including aliased destinations");
+            check(cross.state.vi[17] == 0xa0,"cross product reports negative X/Z with no zero lanes");
+        }
+    }
+    ee::Machine normal;
+    normal.state.vf[1].w = {0,0xc0800000,0x40400000,0}; // (0,-4,3)
+    normal.state.vf[2].w = {0x3f800000,0,0,0}; // (1,0,0)
+    normal.state.vf[3].w[3] = 0x12345678;
+    pair(normal,0,upper(0x2fe,0,1,2,14));
+    pair(normal,8,upper(0x2e,3,2,1,14)); // cross = (0,3,4)
+    pair(normal,16,upper(0x2a,4,3,3,14));
+    pair(normal,24,upper(0x01,5,4,4,8));
+    pair(normal,32,upper(0x02,5,5,4,8)); // length squared = 25
+    pair(normal,40,nop,ext(0x3be,0,5,3)); // RSQRT Q,VF0.w,VF5.x
+    pair(normal,48,nop,ext(0x3bf)); // WAITQ
+    pair(normal,56,upper(0x1c,3,3,0,14)); // MULq.xyz
+    end(normal,64);
+    ee::VuEngine engine(normal.state,normal.memory,normal.trace); engine.start(0);
+    check(engine.run(100).stop == ee::Stop::returned,"cross-product normalization fixture returns");
+    check(normal.state.vf[5].w[0] == 0x41c80000,"nondegenerate cross product has squared length 25");
+    const auto x = std::bit_cast<float>(normal.state.vf[3].w[0]);
+    const auto y = std::bit_cast<float>(normal.state.vf[3].w[1]);
+    const auto z = std::bit_cast<float>(normal.state.vf[3].w[2]);
+    check(x == 0 && std::abs(y-0.6f) < 0.000001f && std::abs(z-0.8f) < 0.000001f,
+          "cross-product normalization produces the independent 3-4-5 unit vector");
+    check(std::abs(x*x+y*y+z*z-1.0f) < 0.000002f,"normalized cross product has unit length");
+    check(normal.state.vf[3].w[3] == 0x12345678,"normalization preserves the unselected W lane");
 }
 void replay_and_termination() {
     ee::Machine m;
@@ -484,7 +559,7 @@ void macro_hazards() {
 
 int main() {
     try {
-        flags_and_hazards(); simultaneous(); memory_and_branch(); conversion_and_random(); replay_and_termination(); deadlines(); ee_integration(); edge_flags_and_control(); product_sum_flags(); concurrent_flag_writeback(); macro_hazards();
+        flags_and_hazards(); simultaneous(); memory_and_branch(); conversion_and_random(); outer_product_and_normalization(); replay_and_termination(); deadlines(); ee_integration(); edge_flags_and_control(); product_sum_flags(); concurrent_flag_writeback(); macro_hazards();
         std::cout << "OK " << checks << " VU semantic assertions\n";
         return 0;
     } catch (const std::exception& error) { std::cerr << "after " << checks << " VU checks: " << error.what() << '\n'; return 1; }

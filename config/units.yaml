@@ -13249,13 +13249,16 @@ units:
   - -G0
   - -snas
   - -fno-schedule-insns2
+  - -DACTION_ENTER_ONLY
   functions:
   - addr: '0x199850'
     symbol: func_00199850
     size: 52
     status: source
+  owner: final-depth-action-event
+  claim: final-depth-action-event
 - name: auto_game_199888
-  source: src/game/tu_199850_199888.c
+  source: src/game/tu_199850.c
   library: game
   provenance: auto
   tier: exact
@@ -13264,13 +13267,21 @@ units:
   - -O2
   - -G0
   - -snas
+  - -DACTION_NOTIFY_ONLY
   functions:
   - addr: '0x199888'
     symbol: func_00199888
     size: 56
     status: source
+  owner: final-depth-action-event
+  claim: final-depth-action-event
+  data_ranges:
+  - section: .data
+    input: .data.action_dispatch
+    start: '0x3de6d8'
+    end: '0x3de748'
 - name: auto_game_1998f8
-  source: src/game/tu_199850_1998f8.c
+  source: src/game/tu_199850.c
   library: game
   provenance: auto
   tier: exact
@@ -13284,10 +13295,8 @@ units:
     symbol: func_001998F8
     size: 84
     status: source
-  - addr: '0x199950'
-    symbol: func_00199950
-    size: 56
-    status: source
+  owner: final-depth-action-event
+  claim: final-depth-action-event
 - name: tuf_199f08
   source: src/game/tu_199988_199f08.c
   library: game
@@ -27416,72 +27425,6 @@ units:
     size: 40
     status: source
   owner: cpp-campaign-behaviors
-- name: tuf_2d34c0
-  source: src/kynapse/tu_2d2ff8_2d34c0.c
-  library: kynapse
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x2d34c0'
-    symbol: func_002D34C0
-    size: 96
-    status: source
-  - addr: '0x2d3520'
-    symbol: func_002D3520
-    size: 64
-    status: source
-  - addr: '0x2d3560'
-    symbol: func_002D3560
-    size: 88
-    status: source
-  - addr: '0x2d37d8'
-    symbol: func_002D37D8
-    size: 52
-    status: source
-  - addr: '0x2d3810'
-    symbol: func_002D3810
-    size: 36
-    status: source
-  - addr: '0x2d3838'
-    symbol: func_002D3838
-    size: 28
-    status: source
-  - addr: '0x2d3888'
-    symbol: func_002D3888
-    size: 32
-    status: source
-  - addr: '0x2d38a8'
-    symbol: func_002D38A8
-    size: 32
-    status: source
-  owner: cpp-campaign-behaviors
-- name: kynapse_predicates_2d35b8
-  source: src/kynapse/predicates_2d35b8.cpp
-  library: kynapse
-  provenance: imported
-  tier: exact
-  origin: kynapse
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  functions:
-  - addr: '0x2d35b8'
-    symbol: IsSet__C7IsSet0C
-    size: 12
-    status: source
-  - addr: '0x2d35c8'
-    symbol: HasId__C7HasId2C
-    size: 16
-    status: source
-  owner: cpp-campaign-behaviors
 - name: tuf_2d3970
   source: src/kynapse/tu_2d38c8_2d3970.c
   library: kynapse
@@ -27787,54 +27730,6 @@ units:
   - addr: '0x2d7108'
     symbol: HasId__C7HasId68
     size: 16
-    status: source
-- name: tuf_2d74a0
-  source: src/kynapse/tu_2d7260_2d74a0.c
-  library: kynapse
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x2d74a0'
-    symbol: func_002D74A0
-    size: 96
-    status: source
-  - addr: '0x2d7558'
-    symbol: func_002D7558
-    size: 88
-    status: source
-  - addr: '0x2d76a0'
-    symbol: func_002D76A0
-    size: 164
-    status: source
-  - addr: '0x2d7930'
-    symbol: func_002D7930
-    size: 32
-    status: source
-  - addr: '0x2d7950'
-    symbol: func_002D7950
-    size: 32
-    status: source
-- name: kynapse_predicates_2d7690
-  source: src/kynapse/predicates_2d7690.cpp
-  library: kynapse
-  provenance: imported
-  tier: exact
-  origin: kynapse
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  functions:
-  - addr: '0x2d7690'
-    symbol: IsSet__C7IsSet24
-    size: 12
     status: source
 - name: kynapse_parameter_classes_2d7970
   source: src/kynapse/parameter_classes_2d7970.cpp
@@ -29989,71 +29884,6 @@ units:
     symbol: func_002E72D0
     size: 32
     status: source
-- name: auto_other_2e72f0
-  source: src/kynapse/tu_2e72f0.c
-  library: kynapse
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x2e72f0'
-    symbol: func_002E72F0
-    size: 112
-    status: source
-- name: auto_kynapse_2e7398
-  source: src/kynapse/tu_2e72f0_2e7398.c
-  library: kynapse
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O1
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x2e7398'
-    symbol: func_002E7398
-    size: 20
-    status: source
-- name: tu_2e7400
-  source: src/kynapse/tu_2e72f0_2e7400.c
-  library: kynapse
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x2e7400'
-    symbol: func_002E7400
-    size: 60
-    status: source
-  - addr: '0x2e7440'
-    symbol: func_002E7440
-    size: 60
-    status: source
-  - addr: '0x2e7480'
-    symbol: func_002E7480
-    size: 12
-    status: source
-  - addr: '0x2e7490'
-    symbol: func_002E7490
-    size: 12
-    status: source
-  - addr: '0x2e74a0'
-    symbol: func_002E74A0
-    size: 32
-    status: source
-  - addr: '0x2e74c0'
-    symbol: func_002E74C0
-    size: 32
-    status: source
 - name: kynapse_configure_2e74e0
   source: src/kynapse/configure_2e74e0.cpp
   library: kynapse
@@ -30282,21 +30112,6 @@ units:
   - addr: '0x2ea258'
     symbol: func_002EA258
     size: 160
-    status: source
-- name: auto_kynapse_2ea368
-  source: src/kynapse/tu_2ea2f8_2ea368.c
-  library: kynapse
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x2ea368'
-    symbol: func_002EA368
-    size: 32
     status: source
 - name: kynapse_engine_class_2eb280
   source: src/kynapse/engine_class_2eb280.cpp
@@ -31543,7 +31358,7 @@ units:
     size: 60
     status: source
 - name: kynapse_factories_305538
-  source: src/kynapse/factories_305538.cpp
+  source: src/kynapse/behaviors_repulsor.cpp
   library: kynapse
   provenance: imported
   tier: exact
@@ -31553,6 +31368,7 @@ units:
   - -G0
   - -snas
   - -fbyte-bool
+  - -DSTEERING_FACTORY_ONLY
   functions:
   - addr: '0x305538'
     symbol: CreateObject62D40__Fi
@@ -31565,17 +31381,22 @@ units:
     gKaimAllocator: '0x3c87e8'
     memoryRelease: '0x3c87e0'
     terminate__Fv: '0x36f978'
+  owner: final-deep-kynapse-steering
+  claim: final-deep-kynapse-steering
 - name: tuf_3063a8
-  source: src/kynapse/tu_305538_3063a8.c
+  source: src/kynapse/behaviors_repulsor.cpp
   library: kynapse
   provenance: auto
   tier: exact
   origin: auto
   flags:
+  - -x
+  - c
   - -O2
   - -G0
   - -snas
   - -ffunction-sections
+  - -DSTEERING_REGISTRATION_ONLY
   functions:
   - addr: '0x3063a8'
     symbol: func_003063A8
@@ -31601,6 +31422,8 @@ units:
     symbol: func_00306780
     size: 32
     status: source
+  owner: final-deep-kynapse-steering
+  claim: final-deep-kynapse-steering
 - name: auto_other_30b750
   source: src/kynapse/tu_3067a0_30b750.c
   library: kynapse
@@ -31822,25 +31645,6 @@ units:
   - addr: '0x30e728'
     symbol: func_0030E728
     size: 108
-    status: source
-- name: auto_kynapse_30ea18
-  source: src/kynapse/tu_30e9c8_30ea18.c
-  library: kynapse
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x30ea18'
-    symbol: func_0030EA18
-    size: 16
-    status: source
-  - addr: '0x30ea28'
-    symbol: func_0030EA28
-    size: 16
     status: source
 - name: kynapse_factories_30ea38
   source: src/kynapse/factories_30ea38.cpp
@@ -32957,11 +32761,12 @@ units:
     symbol: func_00317300
     size: 60
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+  owner: final-deep-audio
 - name: auto_other_3174d0
   source: src/rw_audio/tu_3168c8_3174d0.c
   library: rw_audio
@@ -32976,11 +32781,12 @@ units:
     symbol: func_003174D0
     size: 32
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+  owner: final-deep-audio
 - name: auto_other_3176d0
   source: src/rw_audio/tu_3168c8_3176d0.c
   library: rw_audio
@@ -32996,7 +32802,8 @@ units:
     symbol: func_003176D0
     size: 16
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
+  owner: final-deep-audio
 - name: auto_other_317868
   source: src/rw_audio/tu_3168c8_317868.c
   library: rw_audio
@@ -33015,11 +32822,12 @@ units:
     symbol: func_00317888
     size: 44
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+  owner: final-deep-audio
 - name: auto_other_3178b8
   source: src/rw_audio/tu_3168c8_3178b8.c
   library: rw_audio
@@ -33035,7 +32843,8 @@ units:
     symbol: func_003178B8
     size: 8
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
+  owner: final-deep-audio
 - name: tuf_318250
   source: src/rw_audio/tu_3168c8_318250.c
   library: rw_audio
@@ -33063,10 +32872,6 @@ units:
   - addr: '0x318bc0'
     symbol: func_00318BC0
     size: 28
-    status: source
-  - addr: '0x318ce8'
-    symbol: func_00318CE8
-    size: 52
     status: source
   - addr: '0x319410'
     symbol: func_00319410
@@ -33132,7 +32937,8 @@ units:
     symbol: func_0031A400
     size: 16
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
+  owner: final-deep-audio
 - name: auto_other_3194a0
   source: src/rw_audio/tu_3168c8_3194a0.c
   library: rw_audio
@@ -33148,7 +32954,8 @@ units:
     symbol: func_003194A0
     size: 52
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
+  owner: final-deep-audio
 - name: auto_other_3195d0
   source: src/rw_audio/tu_3168c8_3195d0.c
   library: rw_audio
@@ -33164,7 +32971,8 @@ units:
     symbol: func_003195D0
     size: 60
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
+  owner: final-deep-audio
 - name: auto_other_31a4e8
   source: src/rw_audio/tu_31a4e8.c
   library: rw_audio
@@ -34757,40 +34565,6 @@ units:
     symbol: func_0032AB60
     size: 96
     status: source
-- name: auto_physics_32b6e0
-  source: src/physics/tu_32b598_32b6e0.c
-  library: physics
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x32b6e0'
-    symbol: func_0032B6E0
-    size: 32
-    status: source
-- name: auto_physics_32b820
-  source: src/physics/tu_32b598_32b820.c
-  library: physics
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x32b820'
-    symbol: func_0032B820
-    size: 32
-    status: source
-  - addr: '0x32b840'
-    symbol: func_0032B840
-    size: 32
-    status: source
 - name: tu_32bc30
   source: src/physics/tu_32b928_32bc30.c
   library: physics
@@ -34818,17 +34592,21 @@ units:
   origin: physics
   flags:
   - -O2
-  - -G0
+  - -G8
   - -snas
   - -x
   - c++
   - -ffunction-sections
+  - -fstrict-aliasing
+  - --assembler=sn-min6
+  - -fno-exceptions
+  - -DBLACK_NONMATCHING
+  - -mvu0-use-vf0-vf31
   functions:
   - addr: '0x32bc70'
     symbol: func_0032BC70
     size: 332
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32bdc0'
     symbol: func_0032BDC0
     size: 788
@@ -34847,48 +34625,39 @@ units:
   - addr: '0x32c838'
     symbol: func_0032C838
     size: 560
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32ca68'
     symbol: func_0032CA68
     size: 236
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32cb58'
     symbol: func_0032CB58
     size: 648
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32cde0'
     symbol: func_0032CDE0
     size: 808
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32d108'
     symbol: func_0032D108
     size: 304
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32d248'
     symbol: func_0032D248
     size: 268
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32d358'
     symbol: func_0032D358
     size: 568
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32d590'
     symbol: func_0032D590
     size: 560
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32d7c0'
     symbol: func_0032D7C0
     size: 460
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32d990'
     symbol: func_0032D990
     size: 856
@@ -34897,13 +34666,11 @@ units:
   - addr: '0x32dce8'
     symbol: func_0032DCE8
     size: 532
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32df00'
     symbol: func_0032DF00
     size: 324
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x32e048'
     symbol: func_0032E048
     size: 148
@@ -34912,6 +34679,10 @@ units:
   - addr: '0x32e0e0'
     symbol: func_0032E0E0
     size: 60
+    status: source
+  - addr: '0x32e120'
+    symbol: func_0032E120
+    size: 144
     status: source
   - addr: '0x32e1b0'
     symbol: func_0032E1B0
@@ -34941,21 +34712,27 @@ units:
     symbol: func_0032E3B0
     size: 32
     status: source
-- name: physics_scene_bind_32e120
-  source: src/physics/tu_32bc70_32e120.c
-  library: physics
-  provenance: campaign
-  tier: exact
-  origin: physics
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x32e120'
-    symbol: func_0032E120
-    size: 144
-    status: source
+  owner: final-deep-physics-scene
+  claim: final-deep-physics-scene
+  data_ranges:
+  - input: .sbss
+    start: '0x40e848'
+    end: '0x40e858'
+    section: .sbss
+  - input: .bss
+    start: '0x45cc30'
+    end: '0x45cc70'
+    section: .bss
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+  full_tu_context: true
+  unlinked_context_helpers:
+  - AllocatePair__12PhysicsSceneUiUi
+  - FirstClear__FPC13PhysicsBitmap
+  - PairGroups__12PhysicsSceneUiUi
+  - Separation__FRC13PhysicsBoundsT0
 - name: tuf_32e5d8
   source: src/physics/tu_32e3d0_32e5d8.cpp
   library: physics
@@ -35049,48 +34826,6 @@ units:
     symbol: func_0032FBA0
     size: 32
     status: source
-- name: auto_unclassified_332728
-  source: src/game/tu_3325e0_332728.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x332728'
-    symbol: func_00332728
-    size: 32
-    status: source
-  - addr: '0x332748'
-    symbol: func_00332748
-    size: 32
-    status: source
-- name: auto_unclassified_3328b0
-  source: src/game/tu_332768_3328b0.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x3328b0'
-    symbol: func_003328B0
-    size: 56
-    status: source
-  - addr: '0x3328e8'
-    symbol: func_003328E8
-    size: 32
-    status: source
-  - addr: '0x332908'
-    symbol: func_00332908
-    size: 32
-    status: source
 - name: tuf_332ae8
   source: src/game/tu_332928_332ae8.c
   library: game
@@ -35160,16 +34895,17 @@ units:
   tier: exact
   origin: physics
   flags:
+  - -x
+  - c++
   - -O2
-  - -G0
+  - -G8
   - -snas
   - -ffunction-sections
   functions:
   - addr: '0x334120'
     symbol: func_00334120
     size: 324
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x334268'
     symbol: func_00334268
     size: 100
@@ -35192,6 +34928,37 @@ units:
     symbol: func_003343B0
     size: 32
     status: source
+  owner: final-deep-physics
+  claim: final-deep-physics
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e8c8'
+    end: '0x40e8d8'
+  - section: .bss
+    input: .bss
+    start: '0x45ce30'
+    end: '0x45ce70'
+  - section: .data
+    input: .data.shape_3d1368
+    start: '0x3d1368'
+    end: '0x3d13a0'
+  - section: .data
+    input: .data.shape_3d13a0
+    start: '0x3d13a0'
+    end: '0x3d13d8'
+  - section: .data
+    input: .data.shape_3d1430
+    start: '0x3d1430'
+    end: '0x3d1468'
+  - section: .data
+    input: .data.shape_3d1468
+    start: '0x3d1468'
+    end: '0x3d14a0'
+  - section: .data
+    input: .data.shape_3d14a0
+    start: '0x3d14a0'
+    end: '0x3d14d8'
 - name: tuf_3349c0
   source: src/physics/tu_334870_3349c0.c
   library: physics
@@ -35377,14 +35144,14 @@ units:
     size: 32
     status: source
 - name: auto_physics_33b890
-  source: src/physics/tu_33b708_33b890.cpp
+  source: src/physics/tu_33b708.cpp
   library: physics
   provenance: campaign
   tier: exact
   origin: physics
   flags:
   - -O2
-  - -G0
+  - -G8
   - -snas
   - -x
   - c++
@@ -35401,177 +35168,22 @@ units:
   - addr: '0x33b708'
     symbol: func_0033B708
     size: 324
-    status: asm
-    reason: claimed physics campaign
+    status: source
   - addr: '0x33b858'
     symbol: func_0033B858
     size: 56
     status: source
-- name: auto_physics_33bbd8
-  source: src/physics/tu_33ba90_33bbd8.c
-  library: physics
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x33bbd8'
-    symbol: func_0033BBD8
-    size: 8
-    status: source
-  - addr: '0x33bbe0'
-    symbol: func_0033BBE0
-    size: 8
-    status: source
-  - addr: '0x33bbe8'
-    symbol: func_0033BBE8
-    size: 32
-    status: source
-  - addr: '0x33bc08'
-    symbol: func_0033BC08
-    size: 32
-    status: source
-- name: tuf_33da88
-  source: src/physics/tu_33d940_33da88.c
-  library: physics
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x33da88'
-    symbol: func_0033DA88
-    size: 8
-    status: source
-  - addr: '0x33da90'
-    symbol: func_0033DA90
-    size: 8
-    status: source
-  - addr: '0x33dab8'
-    symbol: func_0033DAB8
-    size: 32
-    status: source
-  - addr: '0x33dad8'
-    symbol: func_0033DAD8
-    size: 32
-    status: source
-- name: tuf_33eb00
-  source: src/physics/tu_33e9b8_33eb00.c
-  library: physics
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x33eb00'
-    symbol: func_0033EB00
-    size: 8
-    status: source
-  - addr: '0x33eb88'
-    symbol: func_0033EB88
-    size: 8
-    status: source
-  - addr: '0x33eb90'
-    symbol: func_0033EB90
-    size: 32
-    status: source
-  - addr: '0x33ebb0'
-    symbol: func_0033EBB0
-    size: 32
-    status: source
-- name: tuf_33f228
-  source: src/physics/tu_33f0e0_33f228.c
-  library: physics
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x33f228'
-    symbol: func_0033F228
-    size: 8
-    status: source
-  - addr: '0x33f2c8'
-    symbol: func_0033F2C8
-    size: 8
-    status: source
-  - addr: '0x33f2d0'
-    symbol: func_0033F2D0
-    size: 20
-    status: source
-  - addr: '0x33f2e8'
-    symbol: func_0033F2E8
-    size: 32
-    status: source
-  - addr: '0x33f308'
-    symbol: func_0033F308
-    size: 32
-    status: source
-- name: auto_unclassified_341668
-  source: src/game/tu_341520_341668.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x341668'
-    symbol: func_00341668
-    size: 8
-    status: source
-  - addr: '0x341670'
-    symbol: func_00341670
-    size: 8
-    status: source
-  - addr: '0x341678'
-    symbol: func_00341678
-    size: 32
-    status: source
-  - addr: '0x341698'
-    symbol: func_00341698
-    size: 32
-    status: source
-- name: tu_341808
-  source: src/game/tu_3416b8_341808.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x341808'
-    symbol: func_00341808
-    size: 28
-    status: source
-  - addr: '0x341828'
-    symbol: func_00341828
-    size: 32
-    status: source
-  - addr: '0x341848'
-    symbol: func_00341848
-    size: 32
-    status: source
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e938'
+    end: '0x40e948'
+  - section: .bss
+    input: .bss
+    start: '0x45e860'
+    end: '0x45e8a0'
 - name: tu_3419c0
   source: src/game/tu_341868_3419c0.c
   library: game
@@ -35589,49 +35201,6 @@ units:
     status: source
   - addr: '0x3419e0'
     symbol: func_003419E0
-    size: 32
-    status: source
-- name: tuf_341b48
-  source: src/game/tu_341a00_341b48.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x341b48'
-    symbol: func_00341B48
-    size: 8
-    status: source
-  - addr: '0x341b58'
-    symbol: func_00341B58
-    size: 32
-    status: source
-  - addr: '0x341b78'
-    symbol: func_00341B78
-    size: 32
-    status: source
-- name: auto_unclassified_341ce0
-  source: src/game/tu_341b98_341ce0.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x341ce0'
-    symbol: func_00341CE0
-    size: 32
-    status: source
-  - addr: '0x341d00'
-    symbol: func_00341D00
     size: 32
     status: source
 - name: auto_unclassified_3420a8
@@ -35782,142 +35351,6 @@ units:
     symbol: func_00344118
     size: 96
     status: source
-- name: auto_animation_345500
-  source: src/animation/tu_345500.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x345500'
-    symbol: func_00345500
-    size: 8
-    status: source
-  - addr: '0x345508'
-    symbol: func_00345508
-    size: 8
-    status: source
-  owner: wave1-animation
-- name: auto_animation_345bc8
-  source: src/animation/tu_345500_345bc8.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x345bc8'
-    symbol: func_00345BC8
-    size: 176
-    status: source
-  - addr: '0x345c78'
-    symbol: func_00345C78
-    size: 108
-    status: source
-  owner: wave1-animation
-- name: animation_instance_345500
-  source: src/animation/tu_345500_345ce8.cpp
-  library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation
-  owner: math-micro
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x345ce8'
-    symbol: func_00345CE8
-    size: 216
-    status: source
-  - addr: '0x345e60'
-    symbol: func_00345E60
-    size: 48
-    status: source
-  - addr: '0x345ed0'
-    symbol: func_00345ED0
-    size: 84
-    status: source
-  - addr: '0x345f98'
-    symbol: func_00345F98
-    size: 32
-    status: source
-  claim: math-layer-study
-- name: auto_animation_345e90
-  source: src/animation/tu_345500_345e90.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x345e90'
-    symbol: func_00345E90
-    size: 64
-    status: source
-  owner: wave1-animation
-- name: auto_animation_345f28
-  source: src/animation/tu_345500_345f28.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x345f28'
-    symbol: func_00345F28
-    size: 112
-    status: source
-  owner: wave1-animation
-- name: auto_animation_345fb8
-  source: src/animation/tu_345500_345fb8.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x345fb8'
-    symbol: func_00345FB8
-    size: 28
-    status: source
-  owner: wave1-animation
-- name: tuf_3461d0
-  source: src/animation/tu_3461d0_346f48.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x346f48'
-    symbol: func_00346F48
-    size: 16
-    status: source
-  owner: mod-context
-  claim: mod-wave3-preparation
 - name: auto_animation_3477f0
   source: src/animation/tu_3477f0.c
   library: animation
@@ -35947,180 +35380,6 @@ units:
   - addr: '0x347948'
     symbol: func_00347948
     size: 12
-    status: source
-- name: auto_animation_347a50
-  source: src/animation/tu_347a50.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x347a50'
-    symbol: func_00347A50
-    size: 60
-    status: source
-- name: auto_animation_347b90
-  source: src/animation/tu_347a50_347b90.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x347b90'
-    symbol: func_00347B90
-    size: 116
-    status: source
-- name: auto_animation_347c08
-  source: src/animation/tu_347a50_347c08.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x347c08'
-    symbol: func_00347C08
-    size: 100
-    status: source
-- name: auto_animation_347ca0
-  source: src/animation/tu_347a50_347ca0.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x347ca0'
-    symbol: func_00347CA0
-    size: 132
-    status: source
-- name: auto_animation_347d28
-  source: src/animation/tu_347a50_347d28.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x347d28'
-    symbol: func_00347D28
-    size: 32
-    status: source
-- name: tu_347d48
-  source: src/animation/tu_347a50_347d48.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto; mod context owner
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x347d48'
-    symbol: func_00347D48
-    size: 28
-    status: source
-  - addr: '0x347d68'
-    symbol: func_00347D68
-    size: 172
-    status: source
-- name: auto_animation_348018
-  source: src/animation/tu_347a50_348018.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto; mod context owner
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x348018'
-    symbol: func_00348018
-    size: 84
-    status: source
-- name: tu_348378
-  source: src/animation/tu_347a50_348378.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x348378'
-    symbol: func_00348378
-    size: 40
-    status: source
-  - addr: '0x3483a0'
-    symbol: func_003483A0
-    size: 60
-    status: source
-  - addr: '0x3483e0'
-    symbol: func_003483E0
-    size: 80
-    status: source
-  - addr: '0x348430'
-    symbol: func_00348430
-    size: 60
-    status: source
-  - addr: '0x348470'
-    symbol: func_00348470
-    size: 80
-    status: source
-  - addr: '0x3484c0'
-    symbol: func_003484C0
-    size: 12
-    status: source
-- name: auto_animation_3485b8
-  source: src/animation/tu_347a50_3485b8.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x3485b8'
-    symbol: func_003485B8
-    size: 12
-    status: source
-- name: auto_animation_3485c8
-  source: src/animation/tu_347a50_3485c8.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x3485c8'
-    symbol: func_003485C8
-    size: 32
     status: source
 - name: tuf_3485e8
   source: src/animation/tu_3485e8.c
@@ -36235,146 +35494,6 @@ units:
     symbol: func_00348B18
     size: 52
     status: source
-- name: auto_animation_348e78
-  source: src/animation/tu_348d00_348e78.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto; mod context owner
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x348e78'
-    symbol: func_00348E78
-    size: 12
-    status: source
-  claim: wave2-animation
-- name: auto_animation_3490a8
-  source: src/animation/tu_348d00_3490a8.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x3490a8'
-    symbol: func_003490A8
-    size: 124
-    status: source
-  claim: wave2-animation
-- name: auto_animation_349158
-  source: src/animation/tu_348d00_349158.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x349158'
-    symbol: func_00349158
-    size: 140
-    status: source
-  claim: wave2-animation
-- name: auto_animation_349220
-  source: src/animation/tu_348d00_349220.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x349220'
-    symbol: func_00349220
-    size: 88
-    status: source
-  - addr: '0x349278'
-    symbol: func_00349278
-    size: 16
-    status: source
-  claim: wave2-animation
-- name: auto_animation_349288
-  source: src/animation/tu_348d00_349288.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x349288'
-    symbol: func_00349288
-    size: 84
-    status: source
-  claim: wave2-animation
-- name: auto_animation_3492e0
-  source: src/animation/tu_348d00_3492e0.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x3492e0'
-    symbol: func_003492E0
-    size: 16
-    status: source
-  claim: wave2-animation
-- name: auto_animation_3492f0
-  source: src/animation/tu_348d00_3492f0.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x3492f0'
-    symbol: func_003492F0
-    size: 84
-    status: source
-  claim: wave2-animation
-- name: auto_animation_349348
-  source: src/animation/tu_348d00_349348.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x349348'
-    symbol: func_00349348
-    size: 48
-    status: source
-  - addr: '0x349378'
-    symbol: func_00349378
-    size: 44
-    status: source
-  - addr: '0x3493a8'
-    symbol: func_003493A8
-    size: 68
-    status: source
-  claim: wave2-animation
 - name: auto_animation_34a7c8
   source: src/animation/tu_34a1e8_34a7c8.c
   library: animation
@@ -36793,7 +35912,8 @@ units:
     symbol: func_0034F2E0
     size: 68
     status: source
-  claim: wave2-animation
+  claim: final-depth-animation
+  owner: final-depth-animation
 - name: auto_animation_34f328
   source: src/animation/tu_34eae0_34f328.c
   library: animation
@@ -36809,32 +35929,8 @@ units:
     symbol: func_0034F328
     size: 52
     status: source
-  claim: wave2-animation
-- name: tuf_34f360
-  source: src/animation/tu_34f360_34f950.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  functions:
-  - addr: '0x34f950'
-    symbol: func_0034F950
-    size: 44
-    status: source
-  - addr: '0x34faf8'
-    symbol: func_0034FAF8
-    size: 92
-    status: source
-  - addr: '0x34fe10'
-    symbol: func_0034FE10
-    size: 92
-    status: source
-  claim: wave2-animation
+  claim: final-depth-animation
+  owner: final-depth-animation
 - name: auto_animation_34fe70
   source: src/animation/tu_34fe70.c
   library: animation
@@ -36850,7 +35946,6 @@ units:
     symbol: func_0034FE70
     size: 24
     status: source
-  claim: shared-mod-context
 - name: animation_parameter_bank_350060
   source: src/animation/tu_350060.cpp
   library: animation
@@ -36862,6 +35957,7 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
+  - --assembler=sn-min6
   functions:
   - addr: '0x350060'
     symbol: func_00350060
@@ -36883,7 +35979,22 @@ units:
     symbol: func_00350130
     size: 12
     status: source
-  owner: wave1-animation
+  - addr: '0x3500e0'
+    symbol: func_003500E0
+    size: 76
+    status: source
+  owner: final-depth-animation
+  claim: final-depth-animation
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+  data_ranges:
+  - section: .data
+    input: .data
+    start: '0x3d4a3c'
+    end: '0x3d4adc'
+    kind: unwind
 - name: auto_animation_3509e0
   source: src/animation/tu_350140_3509e0.c
   library: animation
@@ -39856,25 +38967,6 @@ units:
     symbol: func_0037EC30
     size: 32
     status: source
-- name: auto_unclassified_37f010
-  source: src/game/tu_37eec8_37f010.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x37f010'
-    symbol: func_0037F010
-    size: 32
-    status: source
-  - addr: '0x37f030'
-    symbol: func_0037F030
-    size: 32
-    status: source
 - name: auto_unclassified_37f238
   source: src/game/tu_37f050_37f238.c
   library: game
@@ -39894,44 +38986,6 @@ units:
     symbol: func_0037F258
     size: 32
     status: source
-- name: auto_unclassified_37f8e8
-  source: src/game/tu_37f7a0_37f8e8.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x37f8e8'
-    symbol: func_0037F8E8
-    size: 32
-    status: source
-  - addr: '0x37f908'
-    symbol: func_0037F908
-    size: 32
-    status: source
-- name: auto_unclassified_3818a0
-  source: src/game/tu_381758_3818a0.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x3818a0'
-    symbol: func_003818A0
-    size: 32
-    status: source
-  - addr: '0x3818c0'
-    symbol: func_003818C0
-    size: 32
-    status: source
 - name: auto_unclassified_381a70
   source: src/game/tu_3818e0_381a70.c
   library: game
@@ -39949,25 +39003,6 @@ units:
     status: source
   - addr: '0x381a90'
     symbol: func_00381A90
-    size: 32
-    status: source
-- name: auto_unclassified_382278
-  source: src/game/tu_382130_382278.c
-  library: game
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  functions:
-  - addr: '0x382278'
-    symbol: func_00382278
-    size: 32
-    status: source
-  - addr: '0x382298'
-    symbol: func_00382298
     size: 32
     status: source
 - name: auto_unclassified_3822e0
@@ -50159,90 +49194,6 @@ units:
     symbol: func_001C0760
     size: 224
     status: source
-- name: animation_channel_set
-  source: src/animation/tu_348d00_set_clip.c
-  library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: wave2-animation
-  functions:
-  - addr: '0x348e88'
-    symbol: func_00348E88
-    status: source
-    size: 160
-- name: animation_channel_fade
-  source: src/animation/tu_348d00_fade_transition.c
-  library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: wave2-animation
-  functions:
-  - addr: '0x348f28'
-    symbol: func_00348F28
-    status: source
-    size: 384
-- name: animation_channel_wrappers
-  source: src/animation/tu_348d00_wrappers.c
-  library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: wave2-animation
-  functions:
-  - addr: '0x349128'
-    symbol: func_00349128
-    status: source
-    size: 48
-  - addr: '0x3491e8'
-    symbol: func_003491E8
-    status: source
-    size: 56
-- name: animation_channel_unmatched
-  source: src/animation/tu_348d00_channel_methods.cpp
-  library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation
-  flags:
-  - -x
-  - c++
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  - --assembler=sn-min6
-  claim: context-wave5-graphics
-  functions:
-  - addr: '0x348d00'
-    symbol: func_00348D00
-    status: asm
-    reason: schedule
-    size: 300
-  - addr: '0x348e30'
-    symbol: Lookup__20AnimationChannelViewP21AnimationChannelStatei
-    status: source
-    size: 72
-  assembler_evidence:
-    strength: weak
-    basis: individually verified output
-    historical_provenance: unresolved
 - name: effect_1b33b8
   source: src/game/slot_lookup.c
   library: game
@@ -50333,11 +49284,12 @@ units:
     symbol: func_00317838
     size: 48
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+  owner: final-deep-audio
 - name: rwa_wave2_319ca8
   source: src/rw_audio/tu_3168c8_317838.c
   library: rw_audio
@@ -50353,11 +49305,12 @@ units:
     symbol: func_00319CA8
     size: 64
     status: source
-  claim: wave2-rw-audio
+  claim: final-deep-audio
   assembler_evidence:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
+  owner: final-deep-audio
 - name: animation_playback_allocation
   source: src/animation/tu_34eae0_allocate_banks.cpp
   library: animation
@@ -50369,12 +49322,13 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: final-depth-animation
   functions:
   - addr: '0x34eb88'
     symbol: func_0034EB88
     size: 332
     status: source
+  owner: final-depth-animation
 - name: animation_playback_release
   source: src/animation/tu_34eae0_release_banks.c
   library: animation
@@ -50386,12 +49340,13 @@ units:
   - -G0
   - -snas
   - -ffunction-sections
-  claim: wave2-animation
+  claim: final-depth-animation
   functions:
   - addr: '0x34ecd8'
     symbol: func_0034ECD8
     size: 168
     status: source
+  owner: final-depth-animation
 - name: rwa_wave2_311048
   source: src/rw_audio/tu_310978_311048.c
   library: rw_audio
@@ -50407,74 +49362,6 @@ units:
   - addr: '0x311048'
     symbol: func_00311048
     size: 100
-    status: source
-- name: animation_sampling_sample_root
-  source: src/animation/tu_34f360_sample_root.c
-  library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: shared-mod-context
-  functions:
-  - addr: '0x34f980'
-    symbol: func_0034F980
-    size: 80
-    status: source
-- name: animation_sampling_sample_pose
-  source: src/animation/tu_34f360_sample_pose.c
-  library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: shared-mod-context
-  functions:
-  - addr: '0x34f9d0'
-    symbol: func_0034F9D0
-    size: 140
-    status: source
-- name: animation_sampling_sample_header
-  source: src/animation/tu_34f360_sample_header.c
-  library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: shared-mod-context
-  functions:
-  - addr: '0x34fa60'
-    symbol: func_0034FA60
-    size: 148
-    status: source
-- name: animation_sampling_allocate_header
-  source: src/animation/tu_34f360_allocate_header.c
-  library: animation
-  provenance: campaign
-  tier: exact
-  origin: animation
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -ffunction-sections
-  claim: shared-mod-context
-  functions:
-  - addr: '0x34f668'
-    symbol: func_0034F668
-    size: 200
     status: source
 - name: wave2_rw_core_2af800
   source: src/rw_core/tu_2af800.c
@@ -52255,22 +51142,6 @@ units:
     symbol: func_0029C6C8
     size: 64
     status: source
-- name: auto_kynapse_2d3858
-  source: src/kynapse/tu_2d2ff8_2d3858.c
-  library: kynapse
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -G0
-  - -snas
-  - -O2
-  - -fno-schedule-insns
-  functions:
-  - addr: '0x2d3858'
-    symbol: func_002D3858
-    size: 44
-    status: source
 - name: auto_kynapse_2df9b8
   source: src/kynapse/tu_2df658_2df9b8.c
   library: kynapse
@@ -52442,22 +51313,6 @@ units:
   - addr: '0x32a4b0'
     symbol: func_0032A4B0
     size: 60
-    status: source
-- name: auto_animation_348560
-  source: src/animation/tu_347a50_348560.c
-  library: animation
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -G0
-  - -snas
-  - -O2
-  - -fno-schedule-insns
-  functions:
-  - addr: '0x348560'
-    symbol: func_00348560
-    size: 84
     status: source
 - name: auto_animation_348a38
   source: src/animation/tu_348a10_348a38.c
@@ -53512,26 +52367,6 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: auto_kynapse_2e7360
-  source: src/kynapse/tu_2e72f0_2e7360.c
-  library: kynapse
-  provenance: auto
-  tier: exact
-  origin: auto
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - --assembler=sn-min6
-  functions:
-  - addr: '0x2e7360'
-    symbol: func_002E7360
-    size: 56
-    status: source
-  assembler_evidence:
-    strength: weak
-    basis: individually verified output
-    historical_provenance: unresolved
 - name: auto_kynapse_2f1678
   source: src/kynapse/tu_2f0e80_2f1678.c
   library: kynapse
@@ -53786,28 +52621,6 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: campaign_behaviors_follower
-  source: src/kynapse/behaviors_follower.cpp
-  library: kynapse
-  provenance: campaign
-  tier: exact
-  origin: kynapse
-  owner: cpp-campaign-behaviors
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  - -ffunction-sections
-  functions:
-  - addr: '0x2d30a0'
-    size: 336
-    symbol: func_002D30A0
-    status: source
-  - addr: '0x2d35d8'
-    size: 56
-    symbol: func_002D35D8
-    status: source
 - name: campaign_actor_collision
   source: src/game/actor_collision.cpp
   library: game
@@ -54624,68 +53437,6 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: context_behaviors_wander
-  source: src/kynapse/behaviors_wander.cpp
-  library: kynapse
-  provenance: campaign
-  tier: exact
-  origin: kynapse
-  owner: context-wave3-behaviors
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  - -ffunction-sections
-  - -fno-rtti
-  functions:
-  - addr: '0x2d7260'
-    size: 168
-    status: source
-    symbol: func_002D7260
-  - addr: '0x2d7308'
-    size: 404
-    status: source
-    symbol: Update__Q24Kaim11WanderAgent
-  - addr: '0x2d7500'
-    size: 88
-    status: source
-    symbol: func_002D7500
-  - addr: '0x2d75b0'
-    size: 224
-    status: source
-    symbol: func_002D75B0
-  - addr: '0x2d7748'
-    size: 84
-    status: source
-    symbol: func_002D7748
-  - addr: '0x2d77a0'
-    size: 156
-    status: asm
-    reason: registers
-    symbol: func_002D77A0
-  - addr: '0x2d7840'
-    size: 236
-    status: source
-    symbol: func_002D7840
-  externs:
-    ClearActivation__Q24Kaim10ActionBank: '0x2dfbf8'
-    GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
-    GetValue__CQ24Kaim12ChildBuffers: '0x2e3918'
-    _4Kaim$gLookupClass: '0x450fd8'
-    _4Kaim$gTypeRegistryClass: '0x452158'
-    _4Kaim$gWanderEngine: '0x3c9ed4'
-    __Q24Kaim10ZeroedBase: '0x2e7360'
-    __Q24Kaim8BehaviorPQ24Kaim15BehaviorContext: '0x2dff10'
-    __throw: '0x292b40'
-    _stricmp: '0x360838'
-    _vt$Q24Kaim11FollowQuery: '0x3e2ab8'
-    _vt$Q24Kaim11WanderAgent: '0x3e3bb0'
-    _vt$Q24Kaim8PolyRoot: '0x3e0040'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
-    gKaimFree: '0x3c87e0'
-    terminate__Fv: '0x36f978'
 - name: context_graph_accessways
   source: src/kynapse/graph_accessways.cpp
   library: kynapse
@@ -55123,7 +53874,7 @@ units:
   provenance: campaign
   tier: exact
   origin: kynapse
-  owner: context-wave3-behaviors
+  owner: final-deep-kynapse-steering
   flags:
   - -O2
   - -G0
@@ -55131,6 +53882,7 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   - -fno-rtti
+  - -DBLACK_NONMATCHING
   functions:
   - addr: '0x3055e0'
     size: 520
@@ -55142,8 +53894,7 @@ units:
     symbol: func_003057E8
   - addr: '0x3059f0'
     size: 1508
-    status: asm
-    reason: registers
+    status: source
     symbol: func_003059F0
   - addr: '0x305fd8'
     size: 972
@@ -55157,7 +53908,7 @@ units:
   - addr: '0x306538'
     size: 336
     status: asm
-    reason: registers
+    reason: linked by contact outline recipe
     symbol: func_00306538
   - addr: '0x306688'
     size: 216
@@ -55168,6 +53919,7 @@ units:
     GetAuthoredProperty__Q213KaimAvoidance6EntityPCQ213KaimAvoidance11PropertyKey: '0x2e4ce0'
     GetKey__CQ213KaimAvoidance8Property: '0x2e3920'
     GetText__CQ213KaimAvoidance8Property: '0x2e3918'
+    _13KaimAvoidance$entityMaskDefinition: '0x4548b8'
     _13KaimAvoidance$gameTime: '0x3c958c'
     _13KaimAvoidance$movementSpeedKey: '0x4504e0'
     _13KaimAvoidance$obstacleHeightKey: '0x450198'
@@ -55176,12 +53928,27 @@ units:
     __throw: '0x292b40'
     _stricmp: '0x360838'
     _vt$Q213KaimAvoidance8Steering: '0x3f0760'
+    _vt$Q24Kaim13ActorIterator: '0x3e0028'
     _vt$Q24Kaim8PolyRoot: '0x3e0040'
     atof: '0x35e730'
     dptofp: '0x291c68'
-    func_003059F0: '0x3059f0'
     func_00305FD8: '0x305fd8'
     memset: '0x35c6ec'
+    sqrtf: '0x29eb90'
+  claim: final-deep-kynapse-steering
+  data_ranges:
+  - section: .data
+    input: .data.steering_vtable
+    start: '0x3f0760'
+    end: '0x3f07a0'
+  - section: .bss
+    input: .bss
+    start: '0x455ad0'
+    end: '0x455be8'
+  full_tu_context: true
+  unlinked_context_helpers:
+  - _$_Q24Kaim13ActorIterator
+  - _$_Q24Kaim8PolyRoot
 - name: campaign_actor_motion_wave3
   source: src/game/actor_motion.cpp
   library: game
@@ -58280,42 +57047,6 @@ units:
     size: 212
     status: asm
     reason: claimed
-- name: campaign_wave6_follower
-  source: src/kynapse/behaviors_follower_2d31f0.cpp
-  library: kynapse
-  provenance: campaign
-  tier: exact
-  origin: kynapse
-  owner: context-wave6-behaviors
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  - -ffunction-sections
-  - -fno-rtti
-  functions:
-  - addr: '0x2d31f0'
-    size: 268
-    status: source
-    symbol: func_002D31F0
-  - addr: '0x2d3300'
-    size: 448
-    status: asm
-    reason: vector-helper-scheduling
-    symbol: func_002D3300
-  - addr: '0x2d3610'
-    size: 152
-    status: source
-    symbol: func_002D3610
-  - addr: '0x2d36a8'
-    size: 304
-    status: source
-    symbol: func_002D36A8
-  externs:
-    func_002E1C58: '0x2e1c58'
-    func_002E4CE0: '0x2e4ce0'
-    func_002E8AB8: '0x2e8ab8'
 - name: campaign_wave6_shooter
   source: src/kynapse/behaviors_shooter.cpp
   library: kynapse
@@ -58882,35 +57613,6 @@ units:
     symbol: func_00289C10
     status: asm
     reason: unmatched vector/index context
-- name: campaign_wave7_follower
-  source: src/kynapse/behaviors_follower_2d2ff8.cpp
-  library: kynapse
-  provenance: campaign
-  tier: exact
-  language: c++
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  - -ffunction-sections
-  - -fno-rtti
-  functions:
-  - addr: '0x2d2ff8'
-    size: 168
-    status: source
-    symbol: func_002D2FF8
-  - addr: '0x2d3300'
-    size: 448
-    status: asm
-    reason: campaign
-  externs:
-    D_003C87E0: '0x3c87e0'
-    __throw: '0x292b40'
-    func_002D3520: '0x2d3520'
-    gKaimAllocateHook: '0x3c87ec'
-    gKaimAllocator: '0x3c87e8'
-    terminate__Fv: '0x36f978'
 - name: campaign_actor_16a250_wave7
   source: src/game/actor_16a250.cpp
   library: game
@@ -59234,71 +57936,6 @@ units:
     strength: weak
     basis: individually verified output
     historical_provenance: unresolved
-- name: mod_arms_347a50
-  source: src/animation/arms_347a50.cpp
-  library: animation
-  provenance: campaign
-  tier: exact
-  language: c++
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  - -ffunction-sections
-  - -fno-rtti
-  functions:
-  - addr: '0x347a90'
-    size: 172
-    status: source
-    symbol: func_00347A90
-  - addr: '0x347b40'
-    size: 76
-    status: source
-    symbol: func_00347B40
-  - addr: '0x347c70'
-    size: 44
-    status: source
-    symbol: func_00347C70
-  - addr: '0x347e18'
-    size: 104
-    status: source
-    symbol: func_00347E18
-  - addr: '0x347e80'
-    size: 408
-    status: source
-    symbol: func_00347E80
-  - addr: '0x348070'
-    size: 532
-    status: asm
-    reason: campaign
-  - addr: '0x348288'
-    size: 240
-    status: source
-    symbol: func_00348288
-  - addr: '0x3484d0'
-    size: 32
-    status: asm
-    reason: campaign
-  - addr: '0x3484f0'
-    size: 112
-    status: asm
-    reason: campaign
-  externs:
-    func_00343C28: '0x343c28'
-    func_00343FC8: '0x343fc8'
-    func_003461E0: '0x3461e0'
-    func_00346510: '0x346510'
-    func_00346668: '0x346668'
-    func_00347600: '0x347600'
-    func_00347C08: '0x347c08'
-    func_00348070: '0x348070'
-    func_003489A8: '0x3489a8'
-    func_00348D00: '0x348d00'
-    func_0034F080: '0x34f080'
-    func_00350570: '0x350570'
-    func_00350890: '0x350890'
-    func_003511D0: '0x3511d0'
 - name: mod_arms_1a51c8
   source: src/game/arms_1a51c8.cpp
   library: game
@@ -59452,6 +58089,8 @@ units:
     size: 268
     status: asm
     reason: campaign
+  owner: final-depth-animation
+  claim: final-depth-animation
 - name: mod_camera_13db40
   source: src/game/tu_13db40.cpp
   library: game
@@ -60056,6 +58695,8 @@ units:
     size: 316
     status: source
     symbol: func_0034F080
+  owner: final-depth-animation
+  claim: final-depth-animation
 - name: mod_camera_w2_tu_1409c0
   source: src/game/tu_1409c0.cpp
   library: game
@@ -60376,82 +59017,6 @@ units:
     func_002881A8: '0x2881a8'
     func_00288488: '0x288488'
     func_003822F8: '0x3822f8'
-- name: mod_arms_w2_345500
-  source: src/animation/arms_345500_w2.cpp
-  library: animation
-  provenance: campaign
-  tier: exact
-  language: c++
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  - -ffunction-sections
-  - -fno-rtti
-  functions:
-  - addr: '0x345510'
-    size: 1464
-    status: asm
-    reason: campaign
-  - addr: '0x345ac8'
-    size: 256
-    status: source
-    symbol: func_00345AC8
-  - addr: '0x345dc0'
-    size: 108
-    status: asm
-    reason: campaign
-  - addr: '0x345fd8'
-    size: 268
-    status: source
-    symbol: func_00345FD8
-  - addr: '0x3460e8'
-    size: 232
-    status: source
-    symbol: func_003460E8
-  - addr: '0x345e30'
-    symbol: func_00345E30
-    size: 44
-    status: source
-- name: mod_arms_w2_34f360
-  source: src/animation/arms_34f360_w2.cpp
-  library: animation
-  provenance: campaign
-  tier: exact
-  language: c++
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  - -ffunction-sections
-  - -fno-rtti
-  functions:
-  - addr: '0x34f430'
-    size: 568
-    status: source
-    symbol: func_0034F430
-  - addr: '0x34f730'
-    size: 544
-    status: source
-    symbol: func_0034F730
-  - addr: '0x34fb58'
-    size: 296
-    status: asm
-    reason: campaign
-  - addr: '0x34fc80'
-    size: 400
-    status: asm
-    reason: campaign
-  - addr: '0x34f360'
-    symbol: func_0034F360
-    size: 192
-    status: source
-  - addr: '0x34f420'
-    symbol: func_0034F420
-    size: 16
-    status: source
 - name: mod_arms_w2_3511d0
   source: src/animation/arms_3511d0_w2.cpp
   library: animation
@@ -60468,8 +59033,8 @@ units:
   functions:
   - addr: '0x3511d0'
     size: 1944
-    status: asm
-    reason: campaign
+    status: source
+    symbol: func_003511D0
   - addr: '0x351968'
     size: 52
     status: source
@@ -60478,8 +59043,14 @@ units:
     size: 100
     status: source
     symbol: func_003519A0
-  owner: math-micro
-  claim: math-layer-study
+  owner: final-depth-animation
+  claim: final-depth-animation
+  data_ranges:
+  - section: .data
+    input: .data
+    start: '0x3d4eec'
+    end: '0x3d4fac'
+    kind: unwind
 - name: mod_weapons_tu_15bbd8
   source: src/game/mod_weapons_tu_15bbd8.cpp
   library: game
@@ -61375,7 +59946,7 @@ units:
     symbol: func_001BEB50
     status: source
 - name: mod_arms_w3_pose_ops
-  source: src/animation/arms_pose_ops_w3.cpp
+  source: src/animation/tu_3461d0.cpp
   library: animation
   provenance: campaign
   tier: exact
@@ -61387,6 +59958,8 @@ units:
   - -fbyte-bool
   - -ffunction-sections
   - -fno-rtti
+  - -fno-common
+  - --assembler=sn-min6
   functions:
   - addr: '0x3461d0'
     symbol: func_003461D0
@@ -61397,61 +59970,97 @@ units:
     size: 12
     status: source
   - addr: '0x3461f0'
+    symbol: func_003461F0
     size: 64
     status: source
-    symbol: func_003461F0
   - addr: '0x346230'
+    symbol: func_00346230
     size: 732
     status: asm
-    reason: campaign
+    reason: registers
   - addr: '0x346510'
+    symbol: func_00346510
     size: 344
-    status: asm
-    reason: campaign
+    status: source
   - addr: '0x346668'
+    symbol: func_00346668
     size: 728
     status: asm
-    reason: campaign
+    reason: registers
   - addr: '0x346940'
+    symbol: func_00346940
     size: 876
-    status: asm
-    reason: campaign
+    status: source
   - addr: '0x346cb0'
+    symbol: func_00346CB0
     size: 644
-    status: asm
-    reason: campaign
+    status: source
   - addr: '0x346f38'
     symbol: func_00346F38
     size: 12
     status: source
+  - addr: '0x346f48'
+    symbol: func_00346F48
+    size: 16
+    status: source
   - addr: '0x346f58'
+    symbol: func_00346F58
     size: 732
-    status: asm
-    reason: campaign
+    status: source
   - addr: '0x347238'
+    symbol: func_00347238
     size: 68
     status: source
-    symbol: func_00347238
   - addr: '0x347280'
+    symbol: func_00347280
     size: 428
     status: asm
-    reason: campaign
+    reason: registers
+  - addr: '0x347430'
+    symbol: func_00347430
+    size: 196
+    status: source
   - addr: '0x3474f8'
+    symbol: func_003474F8
     size: 96
     status: source
-    symbol: func_003474F8
   - addr: '0x347558'
+    symbol: func_00347558
     size: 164
     status: source
-    symbol: func_00347558
   - addr: '0x347600'
+    symbol: func_00347600
     size: 308
-    status: asm
-    reason: campaign
+    status: source
+  - addr: '0x347738'
+    symbol: func_00347738
+    size: 148
+    status: source
   - addr: '0x3477d0'
     symbol: func_003477D0
     size: 32
     status: source
+  owner: final-depth-animation
+  claim: final-depth-animation
+  data_ranges:
+  - section: .data
+    input: .data.pose_cache
+    start: '0x3d20d0'
+    end: '0x3d20e4'
+  - section: .bss
+    input: .bss
+    start: '0x45f0c0'
+    end: '0x46a510'
+  - section: .data
+    input: .data
+    start: '0x3d20e4'
+    end: '0x3d247c'
+    kind: unwind
+  full_tu_context: true
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
 - name: mod_arms_w3_token
   source: src/game/arms_token_w3.cpp
   library: game
@@ -61470,29 +60079,6 @@ units:
     size: 216
     status: asm
     reason: campaign
-- name: mod_arms_w3_pose_static
-  source: src/animation/arms_pose_static_w3.cpp
-  library: animation
-  provenance: campaign
-  tier: exact
-  language: c++
-  flags:
-  - -O2
-  - -G0
-  - -snas
-  - -fbyte-bool
-  - -ffunction-sections
-  - -fno-rtti
-  - --assembler=sn-min6
-  functions:
-  - addr: '0x347738'
-    size: 148
-    status: source
-    symbol: func_00347738
-  assembler_evidence:
-    strength: weak
-    basis: individually verified output
-    historical_provenance: unresolved
 - name: mod_effects_1bec68
   source: src/game/emitter_1bec68.cpp
   library: game
@@ -61610,10 +60196,8 @@ units:
     symbol: func_003440B8
     status: source
     size: 92
-  - addr: '0x347430'
-    symbol: func_00347430
-    status: source
-    size: 196
+  owner: final-depth-animation
+  claim: final-depth-animation
 - name: auto_game_19d6b8
   source: src/game/tu_19d6b8.c
   library: game
@@ -62166,3 +60750,1938 @@ units:
       report: build/eeharness/pilot/pilot.json
   owner: phase3-pilot
   claim: equivalence-pilot
+- name: campaign_final_2e73b0
+  source: src/kynapse/tu_2e72f0.cpp
+  library: kynapse
+  provenance: campaign
+  tier: exact
+  origin: kynapse
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - --assembler=sn-min6
+  owner: final-deep-kynapse
+  claim: final-deep-kynapse
+  functions:
+  - addr: '0x2e72f0'
+    symbol: func_002E72F0
+    size: 112
+    status: source
+  - addr: '0x2e7360'
+    symbol: func_002E7360
+    size: 56
+    status: source
+  - addr: '0x2e7398'
+    symbol: func_002E7398
+    size: 20
+    status: source
+  - addr: '0x2e73b0'
+    symbol: func_002E73B0
+    size: 80
+    status: source
+  - addr: '0x2e7400'
+    symbol: func_002E7400
+    size: 60
+    status: source
+  - addr: '0x2e7440'
+    symbol: func_002E7440
+    size: 60
+    status: source
+  - addr: '0x2e7480'
+    symbol: func_002E7480
+    size: 12
+    status: source
+  - addr: '0x2e7490'
+    symbol: func_002E7490
+    size: 12
+    status: source
+  - addr: '0x2e74a0'
+    symbol: func_002E74A0
+    size: 32
+    status: source
+  - addr: '0x2e74c0'
+    symbol: func_002E74C0
+    size: 32
+    status: source
+  data_ranges:
+  - section: .data
+    input: .data
+    start: '0x3c9364'
+    end: '0x3c94a4'
+    kind: unwind
+  - section: .data
+    input: .data.nearest_point
+    start: '0x3ea768'
+    end: '0x3ea7e8'
+  - section: .bss
+    input: .bss
+    start: '0x4513d8'
+    end: '0x4514f0'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: campaign_final_33ba90
+  source: src/physics/tu_33ba90.cpp
+  library: physics
+  provenance: campaign
+  tier: exact
+  origin: physics
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  owner: final-deep-physics
+  claim: final-deep-physics
+  functions:
+  - addr: '0x33ba90'
+    symbol: func_0033BA90
+    size: 324
+    status: source
+  - addr: '0x33bbd8'
+    symbol: func_0033BBD8
+    size: 8
+    status: source
+  - addr: '0x33bbe0'
+    symbol: func_0033BBE0
+    size: 8
+    status: source
+  - addr: '0x33bbe8'
+    symbol: func_0033BBE8
+    size: 32
+    status: source
+  - addr: '0x33bc08'
+    symbol: func_0033BC08
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e948'
+    end: '0x40e958'
+  - section: .bss
+    input: .bss
+    start: '0x45e8a0'
+    end: '0x45e8e0'
+- name: final_kynapse_2ea2f8
+  source: src/kynapse/tu_2ea2f8.cpp
+  library: kynapse
+  provenance: campaign
+  tier: exact
+  origin: kynapse
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  owner: final-deep-kynapse-b
+  claim: final-deep-kynapse-b
+  functions:
+  - addr: '0x2ea2f8'
+    symbol: func_002EA2F8
+    status: source
+    size: 112
+  - addr: '0x2ea368'
+    symbol: func_002EA368
+    status: source
+    size: 32
+  data_ranges:
+  - section: .data
+    input: .data
+    start: '0x3c9e8c'
+    end: '0x3c9ed4'
+    kind: unwind
+  - section: .bss
+    input: .bss
+    start: '0x451518'
+    end: '0x451528'
+- name: final_audio_3168c8
+  source: src/rw_audio/tu_3168c8.c
+  library: rw_audio
+  provenance: campaign
+  tier: exact
+  origin: rw_audio
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  owner: final-deep-audio
+  claim: final-deep-audio
+  functions:
+  - addr: '0x3168c8'
+    symbol: func_003168C8
+    status: source
+    size: 876
+  - addr: '0x316e90'
+    symbol: func_00316E90
+    size: 416
+    status: source
+  - addr: '0x317030'
+    symbol: func_00317030
+    size: 720
+    status: source
+  - addr: '0x317490'
+    symbol: func_00317490
+    size: 60
+    status: source
+  - addr: '0x3178c0'
+    symbol: func_003178C0
+    size: 48
+    status: source
+  - addr: '0x317a78'
+    symbol: func_00317A78
+    size: 420
+    status: source
+  - addr: '0x317c20'
+    symbol: func_00317C20
+    size: 328
+    status: source
+  - addr: '0x317d68'
+    symbol: func_00317D68
+    size: 132
+    status: source
+  - addr: '0x317df0'
+    symbol: func_00317DF0
+    size: 76
+    status: source
+  - addr: '0x317e40'
+    symbol: func_00317E40
+    size: 384
+    status: source
+  - addr: '0x317fc0'
+    symbol: func_00317FC0
+    size: 184
+    status: source
+  - addr: '0x318080'
+    symbol: func_00318080
+    size: 160
+    status: source
+  - addr: '0x318120'
+    symbol: func_00318120
+    size: 100
+    status: source
+  - addr: '0x318188'
+    symbol: func_00318188
+    size: 96
+    status: source
+  - addr: '0x3181e8'
+    symbol: func_003181E8
+    size: 100
+    status: source
+  - addr: '0x318288'
+    symbol: func_00318288
+    size: 64
+    status: source
+  - addr: '0x3182c8'
+    symbol: func_003182C8
+    size: 120
+    status: source
+  - addr: '0x318340'
+    symbol: func_00318340
+    size: 124
+    status: source
+  - addr: '0x318400'
+    symbol: func_00318400
+    size: 80
+    status: source
+  - addr: '0x318450'
+    symbol: func_00318450
+    size: 36
+    status: source
+  - addr: '0x318478'
+    symbol: func_00318478
+    size: 216
+    status: source
+  - addr: '0x318600'
+    symbol: func_00318600
+    size: 176
+    status: source
+  - addr: '0x3186b0'
+    symbol: func_003186B0
+    size: 60
+    status: source
+  - addr: '0x3186f0'
+    symbol: func_003186F0
+    size: 260
+    status: source
+  - addr: '0x3187f8'
+    symbol: func_003187F8
+    size: 132
+    status: source
+  - addr: '0x318880'
+    symbol: func_00318880
+    size: 208
+    status: source
+  - addr: '0x318b08'
+    symbol: func_00318B08
+    size: 88
+    status: source
+  - addr: '0x318b60'
+    symbol: func_00318B60
+    size: 96
+    status: source
+  - addr: '0x318be0'
+    symbol: func_00318BE0
+    size: 92
+    status: source
+  - addr: '0x318c40'
+    symbol: func_00318C40
+    size: 76
+    status: source
+  - addr: '0x318c90'
+    symbol: func_00318C90
+    size: 88
+    status: source
+  - addr: '0x318ce8'
+    symbol: func_00318CE8
+    size: 52
+    status: source
+  - addr: '0x319268'
+    symbol: func_00319268
+    size: 112
+    status: source
+  - addr: '0x319368'
+    symbol: func_00319368
+    size: 168
+    status: source
+  - addr: '0x319578'
+    symbol: func_00319578
+    size: 88
+    status: source
+  - addr: '0x319628'
+    symbol: func_00319628
+    size: 128
+    status: source
+  - addr: '0x3196a8'
+    symbol: func_003196A8
+    size: 48
+    status: source
+  - addr: '0x319950'
+    symbol: func_00319950
+    size: 112
+    status: source
+  - addr: '0x3199e0'
+    symbol: func_003199E0
+    size: 112
+    status: source
+  - addr: '0x319a70'
+    symbol: func_00319A70
+    size: 112
+    status: source
+  - addr: '0x319ce8'
+    symbol: func_00319CE8
+    size: 180
+    status: source
+  - addr: '0x319de0'
+    symbol: func_00319DE0
+    size: 72
+    status: source
+  - addr: '0x319e28'
+    symbol: func_00319E28
+    size: 136
+    status: source
+  - addr: '0x319ed0'
+    symbol: func_00319ED0
+    size: 176
+    status: source
+  - addr: '0x31a108'
+    symbol: func_0031A108
+    size: 84
+    status: source
+  - addr: '0x31a188'
+    symbol: func_0031A188
+    size: 84
+    status: source
+  - addr: '0x31a208'
+    symbol: func_0031A208
+    size: 84
+    status: source
+  - addr: '0x31a288'
+    symbol: func_0031A288
+    size: 84
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+  data_ranges:
+  - section: .sdata
+    input: .sdata
+    start: 4252072
+    end: 4252148
+  - section: .sbss
+    input: .sbss
+    start: 4253568
+    end: 4253624
+  - section: .bss
+    input: .bss
+    start: '0x4584c0'
+    end: 4556232
+  - section: .data
+    input: .data
+    start: '0x3cf380'
+    end: '0x3cfb98'
+  - section: .rodata
+    input: .rodata
+    start: '0x409400'
+    end: '0x4096e0'
+- name: campaign_final_30e9c8
+  source: src/kynapse/tu_30e9c8.cpp
+  library: kynapse
+  provenance: campaign
+  tier: exact
+  origin: kynapse
+  owner: final-deep-kynapse
+  claim: final-deep-kynapse
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -fno-schedule-insns
+  functions:
+  - addr: '0x30e9c8'
+    symbol: func_0030E9C8
+    size: 40
+    status: source
+  - addr: '0x30e9f0'
+    symbol: func_0030E9F0
+    size: 36
+    status: source
+  - addr: '0x30ea18'
+    symbol: func_0030EA18
+    size: 16
+    status: source
+  - addr: '0x30ea28'
+    symbol: func_0030EA28
+    size: 16
+    status: source
+  data_ranges:
+  - section: .data
+    input: .data
+    start: '0x3ce544'
+    end: '0x3ce59c'
+    kind: unwind
+- name: campaign_final_32b598
+  source: src/physics/tu_32b598.cpp
+  library: physics
+  provenance: campaign
+  tier: exact
+  origin: physics
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x32b598'
+    symbol: func_0032B598
+    size: 324
+    status: source
+  - addr: '0x32b700'
+    symbol: func_0032B700
+    size: 152
+    status: source
+  - addr: '0x32b798'
+    symbol: func_0032B798
+    size: 132
+    status: source
+  - addr: '0x32b6e0'
+    symbol: func_0032B6E0
+    size: 32
+    status: source
+  - addr: '0x32b820'
+    symbol: func_0032B820
+    size: 32
+    status: source
+  - addr: '0x32b840'
+    symbol: func_0032B840
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e828'
+    end: '0x40e838'
+  - section: .bss
+    input: .bss
+    start: '0x45cbb0'
+    end: '0x45cbf0'
+- name: campaign_final_332768
+  source: src/game/tu_332768.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x332768'
+    symbol: func_00332768
+    size: 324
+    status: source
+  - addr: '0x3328b0'
+    symbol: func_003328B0
+    size: 56
+    status: source
+  - addr: '0x3328e8'
+    symbol: func_003328E8
+    size: 32
+    status: source
+  - addr: '0x332908'
+    symbol: func_00332908
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e888'
+    end: '0x40e898'
+  - section: .bss
+    input: .bss
+    start: '0x45cd30'
+    end: '0x45cd70'
+- name: campaign_final_341b98
+  source: src/game/tu_341b98.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-game
+  claim: final-deep-game
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x341b98'
+    symbol: func_00341B98
+    size: 324
+    status: source
+  - addr: '0x341ce0'
+    symbol: func_00341CE0
+    size: 32
+    status: source
+  - addr: '0x341d00'
+    symbol: func_00341D00
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e9c8'
+    end: '0x40e9d8'
+  - section: .bss
+    input: .bss
+    start: '0x45eaa0'
+    end: '0x45eae0'
+- name: campaign_final_341520
+  source: src/game/tu_341520.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x341520'
+    symbol: func_00341520
+    size: 324
+    status: source
+  - addr: '0x341668'
+    symbol: func_00341668
+    size: 8
+    status: source
+  - addr: '0x341670'
+    symbol: func_00341670
+    size: 8
+    status: source
+  - addr: '0x341678'
+    symbol: func_00341678
+    size: 32
+    status: source
+  - addr: '0x341698'
+    symbol: func_00341698
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e988'
+    end: '0x40e998'
+  - section: .bss
+    input: .bss
+    start: '0x45e9a0'
+    end: '0x45e9e0'
+- name: campaign_final_33aee8
+  source: src/physics/tu_33aee8.cpp
+  library: physics
+  provenance: imported
+  tier: exact
+  origin: physics
+  owner: final-deep-physics
+  claim: final-deep-physics
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x33aee8'
+    symbol: func_0033AEE8
+    size: 196
+    status: source
+- name: campaign_final_3325e0
+  source: src/game/tu_3325e0.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x3325e0'
+    symbol: func_003325E0
+    size: 324
+    status: source
+  - addr: '0x332728'
+    symbol: func_00332728
+    size: 32
+    status: source
+  - addr: '0x332748'
+    symbol: func_00332748
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e878'
+    end: '0x40e888'
+  - section: .bss
+    input: .bss
+    start: '0x45ccf0'
+    end: '0x45cd30'
+- name: campaign_final_37eec8
+  source: src/game/tu_37eec8.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x37eec8'
+    symbol: func_0037EEC8
+    size: 324
+    status: source
+  - addr: '0x37f010'
+    symbol: func_0037F010
+    size: 32
+    status: source
+  - addr: '0x37f030'
+    symbol: func_0037F030
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40ea78'
+    end: '0x40ea88'
+  - section: .bss
+    input: .bss
+    start: '0x48edf0'
+    end: '0x48ee30'
+- name: campaign_final_37f7a0
+  source: src/game/tu_37f7a0.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x37f7a0'
+    symbol: func_0037F7A0
+    size: 324
+    status: source
+  - addr: '0x37f8e8'
+    symbol: func_0037F8E8
+    size: 32
+    status: source
+  - addr: '0x37f908'
+    symbol: func_0037F908
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40ea98'
+    end: '0x40eaa8'
+  - section: .bss
+    input: .bss
+    start: '0x48ee70'
+    end: '0x48eeb0'
+- name: final_audio_317340
+  source: src/rw_audio/tu_3168c8.c
+  library: rw_audio
+  provenance: campaign
+  tier: exact
+  origin: rw_audio
+  owner: final-deep-audio
+  claim: final-deep-audio
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  - -malign-loops=2
+  - -DRWA_CONTROL_ONLY
+  functions:
+  - addr: '0x317340'
+    symbol: func_00317340
+    size: 332
+    status: source
+  - addr: '0x3175c8'
+    symbol: func_003175C8
+    size: 260
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: campaign_final_381758
+  source: src/game/tu_381758.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x381758'
+    symbol: func_00381758
+    size: 324
+    status: source
+  - addr: '0x3818a0'
+    symbol: func_003818A0
+    size: 32
+    status: source
+  - addr: '0x3818c0'
+    symbol: func_003818C0
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40eaa8'
+    end: '0x40eab8'
+  - section: .bss
+    input: .bss
+    start: '0x48eeb0'
+    end: '0x48eef0'
+- name: campaign_final_382130
+  source: src/game/tu_382130.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  functions:
+  - addr: '0x382130'
+    symbol: func_00382130
+    size: 324
+    status: source
+  - addr: '0x382278'
+    symbol: func_00382278
+    size: 32
+    status: source
+  - addr: '0x382298'
+    symbol: func_00382298
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40eac8'
+    end: '0x40ead8'
+  - section: .bss
+    input: .bss
+    start: '0x48ef30'
+    end: '0x48ef70'
+- name: campaign_final_3416b8
+  source: src/game/tu_3416b8.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x3416b8'
+    symbol: func_003416B8
+    size: 324
+    status: source
+  - addr: '0x341808'
+    symbol: func_00341808
+    size: 28
+    status: source
+  - addr: '0x341828'
+    symbol: func_00341828
+    size: 32
+    status: source
+  - addr: '0x341848'
+    symbol: func_00341848
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e998'
+    end: '0x40e9a8'
+  - section: .bss
+    input: .bss
+    start: '0x45e9e0'
+    end: '0x45ea20'
+- name: campaign_final_341a00
+  source: src/game/tu_341a00.cpp
+  library: game
+  provenance: campaign
+  tier: exact
+  origin: game
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x341a00'
+    symbol: func_00341A00
+    size: 324
+    status: source
+  - addr: '0x341b48'
+    symbol: func_00341B48
+    size: 8
+    status: source
+  - addr: '0x341b58'
+    symbol: func_00341B58
+    size: 32
+    status: source
+  - addr: '0x341b78'
+    symbol: func_00341B78
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e9b8'
+    end: '0x40e9c8'
+  - section: .bss
+    input: .bss
+    start: '0x45ea60'
+    end: '0x45eaa0'
+- name: campaign_final_33d940
+  source: src/physics/tu_33d940.cpp
+  library: physics
+  provenance: campaign
+  tier: exact
+  origin: physics
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  - -ffunction-sections
+  functions:
+  - addr: '0x33d940'
+    symbol: func_0033D940
+    size: 324
+    status: source
+  - addr: '0x33da88'
+    symbol: func_0033DA88
+    size: 8
+    status: source
+  - addr: '0x33da90'
+    symbol: func_0033DA90
+    size: 8
+    status: source
+  - addr: '0x33da98'
+    symbol: func_0033DA98
+    size: 20
+    status: asm
+    reason: 20-byte body exact; native function section lacks eight original tail padding bytes
+  - addr: '0x33dab8'
+    symbol: func_0033DAB8
+    size: 32
+    status: source
+  - addr: '0x33dad8'
+    symbol: func_0033DAD8
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e958'
+    end: '0x40e968'
+  - section: .bss
+    input: .bss
+    start: '0x45e8e0'
+    end: '0x45e920'
+- name: campaign_final_33e9b8
+  source: src/physics/tu_33e9b8.cpp
+  library: physics
+  provenance: campaign
+  tier: exact
+  origin: physics
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x33e9b8'
+    symbol: func_0033E9B8
+    size: 324
+    status: source
+  - addr: '0x33eb00'
+    symbol: func_0033EB00
+    size: 8
+    status: source
+  - addr: '0x33eb08'
+    symbol: func_0033EB08
+    size: 128
+    status: source
+  - addr: '0x33eb88'
+    symbol: func_0033EB88
+    size: 8
+    status: source
+  - addr: '0x33eb90'
+    symbol: func_0033EB90
+    size: 32
+    status: source
+  - addr: '0x33ebb0'
+    symbol: func_0033EBB0
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e968'
+    end: '0x40e978'
+  - section: .bss
+    input: .bss
+    start: '0x45e920'
+    end: '0x45e960'
+- name: mod_arms_347a50
+  source: src/animation/arms_347a50.cpp
+  library: animation
+  provenance: campaign
+  tier: exact
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x347a50'
+    symbol: func_00347A50
+    size: 60
+    status: source
+  - addr: '0x347a90'
+    size: 172
+    status: source
+    symbol: func_00347A90
+  - addr: '0x347b40'
+    size: 76
+    status: source
+    symbol: func_00347B40
+  - addr: '0x347b90'
+    symbol: func_00347B90
+    size: 116
+    status: source
+  - addr: '0x347c08'
+    symbol: func_00347C08
+    size: 100
+    status: source
+  - addr: '0x347c70'
+    size: 44
+    status: source
+    symbol: func_00347C70
+  - addr: '0x347ca0'
+    symbol: func_00347CA0
+    size: 132
+    status: source
+  - addr: '0x347d28'
+    symbol: func_00347D28
+    size: 32
+    status: source
+  - addr: '0x347d48'
+    symbol: func_00347D48
+    size: 28
+    status: source
+  - addr: '0x347d68'
+    symbol: func_00347D68
+    size: 172
+    status: source
+  - addr: '0x347e18'
+    size: 104
+    status: source
+    symbol: func_00347E18
+  - addr: '0x347e80'
+    size: 408
+    status: source
+    symbol: func_00347E80
+  - addr: '0x348018'
+    symbol: func_00348018
+    size: 84
+    status: source
+  - addr: '0x348070'
+    size: 532
+    status: source
+    symbol: func_00348070
+  - addr: '0x348288'
+    size: 240
+    status: source
+    symbol: func_00348288
+  - addr: '0x348378'
+    symbol: func_00348378
+    size: 40
+    status: source
+  - addr: '0x3483a0'
+    symbol: func_003483A0
+    size: 60
+    status: source
+  - addr: '0x3483e0'
+    symbol: func_003483E0
+    size: 80
+    status: source
+  - addr: '0x348430'
+    symbol: func_00348430
+    size: 60
+    status: source
+  - addr: '0x348470'
+    symbol: func_00348470
+    size: 80
+    status: source
+  - addr: '0x3484c0'
+    symbol: func_003484C0
+    size: 12
+    status: source
+  - addr: '0x3484d0'
+    symbol: func_003484D0
+    size: 32
+    status: source
+  - addr: '0x3484f0'
+    size: 112
+    status: source
+    symbol: func_003484F0
+  - addr: '0x348560'
+    symbol: func_00348560
+    size: 84
+    status: source
+  - addr: '0x3485b8'
+    symbol: func_003485B8
+    size: 12
+    status: source
+  - addr: '0x3485c8'
+    symbol: func_003485C8
+    size: 32
+    status: source
+  externs:
+    func_00343C28: '0x343c28'
+    func_00343FC8: '0x343fc8'
+    func_003461E0: '0x3461e0'
+    func_00346510: '0x346510'
+    func_00346668: '0x346668'
+    func_00347600: '0x347600'
+    func_003489A8: '0x3489a8'
+    func_00348D00: '0x348d00'
+    func_0034F080: '0x34f080'
+    func_00350570: '0x350570'
+    func_00350890: '0x350890'
+    func_003511D0: '0x3511d0'
+  owner: final-depth-animation
+  claim: final-depth-animation
+  data_ranges:
+  - section: .data
+    input: .data.animation_graph_mode
+    start: '0x3d2520'
+    end: '0x3d2524'
+  - section: .data
+    input: .data
+    start: '0x3d2524'
+    end: '0x3d2910'
+    kind: unwind
+  rodata_type_splits:
+  - '0x40a668'
+- name: campaign_final_33f0e0
+  source: src/physics/tu_33f0e0.cpp
+  library: physics
+  provenance: campaign
+  tier: exact
+  origin: physics
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G8
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x33f0e0'
+    symbol: func_0033F0E0
+    size: 324
+    status: source
+  - addr: '0x33f228'
+    symbol: func_0033F228
+    size: 8
+    status: source
+  - addr: '0x33f230'
+    symbol: func_0033F230
+    size: 20
+    status: source
+  - addr: '0x33f248'
+    symbol: func_0033F248
+    size: 44
+    status: source
+  - addr: '0x33f278'
+    symbol: func_0033F278
+    size: 76
+    status: source
+  - addr: '0x33f2c8'
+    symbol: func_0033F2C8
+    size: 8
+    status: source
+  - addr: '0x33f2d0'
+    symbol: func_0033F2D0
+    size: 20
+    status: source
+  - addr: '0x33f2e8'
+    symbol: func_0033F2E8
+    size: 32
+    status: source
+  - addr: '0x33f308'
+    symbol: func_0033F308
+    size: 32
+    status: source
+  data_ranges:
+  - section: .sbss
+    input: .sbss
+    start: '0x40e978'
+    end: '0x40e988'
+  - section: .bss
+    input: .bss
+    start: '0x45e960'
+    end: '0x45e9a0'
+- name: campaign_final_33f400
+  source: src/physics/tu_33f400.cpp
+  library: physics
+  provenance: campaign
+  tier: draft
+  origin: physics
+  owner: final-deep-physics-b
+  claim: final-deep-physics-b
+  flags:
+  - -x
+  - c++
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - -mvu0-use-vf0-vf31
+  functions:
+  - addr: '0x33f400'
+    symbol: func_0033F400
+    size: 1700
+    status: asm
+    reason: Xbox behavioral skeleton pending PS2 layout and codegen reconstruction
+- name: mod_arms_w2_345500
+  source: src/animation/arms_345500_w2.cpp
+  library: animation
+  provenance: campaign
+  tier: exact
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - --assembler=sn-min6
+  functions:
+  - addr: '0x345500'
+    size: 8
+    status: source
+    symbol: func_00345500
+  - addr: '0x345508'
+    size: 8
+    status: source
+    symbol: func_00345508
+  - addr: '0x345510'
+    size: 1464
+    status: source
+    symbol: func_00345510
+  - addr: '0x345ac8'
+    size: 256
+    status: source
+    symbol: func_00345AC8
+  - addr: '0x345bc8'
+    size: 176
+    status: source
+    symbol: func_00345BC8
+  - addr: '0x345c78'
+    size: 108
+    status: source
+    symbol: func_00345C78
+  - addr: '0x345ce8'
+    size: 216
+    status: source
+    symbol: func_00345CE8
+  - addr: '0x345dc0'
+    size: 108
+    status: source
+    symbol: func_00345DC0
+  - addr: '0x345e30'
+    size: 44
+    status: source
+    symbol: func_00345E30
+  - addr: '0x345e60'
+    size: 48
+    status: source
+    symbol: func_00345E60
+  - addr: '0x345e90'
+    size: 64
+    status: source
+    symbol: func_00345E90
+  - addr: '0x345ed0'
+    size: 84
+    status: source
+    symbol: func_00345ED0
+  - addr: '0x345f28'
+    size: 112
+    status: source
+    symbol: func_00345F28
+  - addr: '0x345f98'
+    size: 32
+    status: source
+    symbol: func_00345F98
+  - addr: '0x345fb8'
+    size: 28
+    status: source
+    symbol: func_00345FB8
+  - addr: '0x345fd8'
+    size: 268
+    status: source
+    symbol: func_00345FD8
+  - addr: '0x3460e8'
+    size: 232
+    status: source
+    symbol: func_003460E8
+  owner: final-depth-animation
+  claim: final-depth-animation
+  data_ranges:
+  - section: .data
+    input: .data.animation_null_name
+    start: '0x3d1e18'
+    end: '0x3d1e30'
+  - section: .data
+    input: .data.animation_none_name
+    start: '0x3d1e30'
+    end: '0x3d1e38'
+  - section: .data
+    input: .data
+    start: '0x3d1e38'
+    end: '0x3d20cc'
+    kind: unwind
+  - section: .bss
+    input: .bss
+    start: '0x45ecb0'
+    end: '0x45f0c0'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: animation_channel_348d00
+  source: src/animation/tu_348d00.cpp
+  library: animation
+  provenance: campaign
+  tier: exact
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -ffunction-sections
+  - --assembler=sn-min6
+  owner: final-depth-animation
+  claim: final-depth-animation
+  functions:
+  - addr: '0x348d00'
+    symbol: func_00348D00
+    size: 300
+    status: source
+  - addr: '0x348e30'
+    symbol: Lookup__20AnimationChannelViewP21AnimationChannelStatei
+    size: 72
+    status: source
+  - addr: '0x348e78'
+    symbol: func_00348E78
+    size: 12
+    status: source
+  - addr: '0x348e88'
+    symbol: func_00348E88
+    size: 160
+    status: source
+  - addr: '0x348f28'
+    symbol: func_00348F28
+    size: 384
+    status: source
+  - addr: '0x3490a8'
+    symbol: func_003490A8
+    size: 124
+    status: source
+  - addr: '0x349128'
+    symbol: func_00349128
+    size: 48
+    status: source
+  - addr: '0x349158'
+    symbol: func_00349158
+    size: 140
+    status: source
+  - addr: '0x3491e8'
+    symbol: func_003491E8
+    size: 56
+    status: source
+  - addr: '0x349220'
+    symbol: func_00349220
+    size: 88
+    status: source
+  - addr: '0x349278'
+    symbol: func_00349278
+    size: 16
+    status: source
+  - addr: '0x349288'
+    symbol: func_00349288
+    size: 84
+    status: source
+  - addr: '0x3492e0'
+    symbol: func_003492E0
+    size: 16
+    status: source
+  - addr: '0x3492f0'
+    symbol: func_003492F0
+    size: 84
+    status: source
+  - addr: '0x349348'
+    symbol: func_00349348
+    size: 48
+    status: source
+  - addr: '0x349378'
+    symbol: func_00349378
+    size: 44
+    status: source
+  - addr: '0x3493a8'
+    symbol: func_003493A8
+    size: 68
+    status: source
+  data_ranges:
+  - section: .data
+    input: .data
+    start: '0x3d2be0'
+    end: '0x3d2e9c'
+    kind: unwind
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: kynapse_follower_2d2ff8
+  source: src/kynapse/tu_2d2ff8.cpp
+  library: kynapse
+  provenance: campaign
+  tier: exact
+  origin: kynapse
+  owner: final-depth-follower-data
+  claim: final-depth-follower-data
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  functions:
+  - addr: '0x2d2ff8'
+    size: 168
+    status: source
+    symbol: func_002D2FF8
+  - addr: '0x2d30a0'
+    size: 336
+    symbol: func_002D30A0
+    status: source
+  - addr: '0x2d31f0'
+    size: 268
+    status: source
+    symbol: func_002D31F0
+  - addr: '0x2d3300'
+    size: 448
+    status: source
+    symbol: func_002D3300
+  - addr: '0x2d34c0'
+    symbol: func_002D34C0
+    size: 96
+    status: source
+  - addr: '0x2d3520'
+    symbol: func_002D3520
+    size: 64
+    status: source
+  - addr: '0x2d3560'
+    symbol: func_002D3560
+    size: 88
+    status: source
+  - addr: '0x2d35b8'
+    symbol: IsSet__C7IsSet0C
+    size: 12
+    status: source
+  - addr: '0x2d35c8'
+    symbol: HasId__C7HasId2C
+    size: 16
+    status: source
+  - addr: '0x2d35d8'
+    size: 56
+    symbol: func_002D35D8
+    status: source
+  - addr: '0x2d3610'
+    size: 152
+    status: source
+    symbol: func_002D3610
+  - addr: '0x2d36a8'
+    size: 304
+    status: source
+    symbol: func_002D36A8
+  - addr: '0x2d37d8'
+    symbol: func_002D37D8
+    size: 52
+    status: source
+  - addr: '0x2d3810'
+    symbol: func_002D3810
+    size: 36
+    status: source
+  - addr: '0x2d3838'
+    symbol: func_002D3838
+    size: 28
+    status: source
+  - addr: '0x2d3888'
+    symbol: func_002D3888
+    size: 32
+    status: source
+  - addr: '0x2d38a8'
+    symbol: func_002D38A8
+    size: 32
+    status: source
+  externs:
+    D_003C87E0: '0x3c87e0'
+    __throw: '0x292b40'
+    func_002E1C58: '0x2e1c58'
+    func_002E4CE0: '0x2e4ce0'
+    func_002E8AB8: '0x2e8ab8'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    terminate__Fv: '0x36f978'
+  data_ranges:
+  - section: .data
+    input: .data.follower_vtable
+    start: '0x3e3130'
+    end: '0x3e3198'
+  - section: .bss
+    input: .bss
+    start: '0x44ede8'
+    end: '0x44ef00'
+- name: kynapse_follower_callback
+  source: src/kynapse/tu_2d2ff8.cpp
+  library: kynapse
+  provenance: campaign
+  tier: exact
+  origin: kynapse
+  owner: final-depth-follower-data
+  claim: final-depth-follower-data
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - -DFOLLOWER_CALLBACK_ONLY
+  - -fno-schedule-insns
+  functions:
+  - addr: '0x2d3858'
+    symbol: func_002D3858
+    size: 44
+    status: source
+- name: kynapse_wander_2d7260
+  source: src/kynapse/tu_2d7260.cpp
+  library: kynapse
+  provenance: campaign
+  tier: exact
+  origin: kynapse
+  owner: final-deep-kynapse-wander
+  claim: final-deep-kynapse-wander
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -fno-rtti
+  functions:
+  - addr: '0x2d7260'
+    size: 168
+    status: source
+    symbol: func_002D7260
+  - addr: '0x2d7308'
+    size: 404
+    status: source
+    symbol: Update__Q24Kaim11WanderAgent
+  - addr: '0x2d74a0'
+    symbol: func_002D74A0
+    size: 96
+    status: source
+  - addr: '0x2d7500'
+    size: 88
+    status: source
+    symbol: func_002D7500
+  - addr: '0x2d7558'
+    symbol: func_002D7558
+    size: 88
+    status: source
+  - addr: '0x2d75b0'
+    size: 224
+    status: source
+    symbol: func_002D75B0
+  - addr: '0x2d7690'
+    symbol: IsSet__C7IsSet24
+    size: 12
+    status: source
+  - addr: '0x2d76a0'
+    symbol: func_002D76A0
+    size: 164
+    status: source
+  - addr: '0x2d7748'
+    size: 84
+    status: source
+    symbol: func_002D7748
+  - addr: '0x2d77a0'
+    size: 156
+    status: source
+    symbol: func_002D77A0
+  - addr: '0x2d7840'
+    size: 236
+    status: source
+    symbol: func_002D7840
+  - addr: '0x2d7930'
+    symbol: func_002D7930
+    size: 32
+    status: source
+  - addr: '0x2d7950'
+    symbol: func_002D7950
+    size: 32
+    status: source
+  externs:
+    ClearActivation__Q24Kaim10ActionBank: '0x2dfbf8'
+    GetSecond__CQ24Kaim12ChildBuffers: '0x2e3920'
+    GetValue__CQ24Kaim12ChildBuffers: '0x2e3918'
+    _4Kaim$gLookupClass: '0x450fd8'
+    _4Kaim$gTypeRegistryClass: '0x452158'
+    _4Kaim$gWanderEngine: '0x3c9ed4'
+    __Q24Kaim10ZeroedBase: '0x2e7360'
+    __Q24Kaim8BehaviorPQ24Kaim15BehaviorContext: '0x2dff10'
+    __throw: '0x292b40'
+    _stricmp: '0x360838'
+    _vt$Q24Kaim11FollowQuery: '0x3e2ab8'
+    _vt$Q24Kaim11WanderAgent: '0x3e3bb0'
+    _vt$Q24Kaim8PolyRoot: '0x3e0040'
+    gKaimAllocateHook: '0x3c87ec'
+    gKaimAllocator: '0x3c87e8'
+    gKaimFree: '0x3c87e0'
+    terminate__Fv: '0x36f978'
+  rodata_type_splits:
+  - '0x404708'
+  data_ranges:
+  - section: .data
+    input: .data
+    start: '0x3c5278'
+    end: '0x3c54ac'
+    kind: unwind
+  - section: .data
+    input: .data.wander_vtable
+    start: '0x3e3bb0'
+    end: '0x3e3c08'
+  - section: .bss
+    input: .bss
+    start: '0x44f360'
+    end: '0x44f478'
+  shared_exception_tables:
+  - '0x40c920'
+- name: mod_arms_w2_34f360
+  source: src/animation/arms_34f360_w2.cpp
+  library: animation
+  provenance: campaign
+  tier: exact
+  language: c++
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  owner: final-depth-animation
+  claim: final-depth-animation
+  functions:
+  - addr: '0x34f360'
+    size: 192
+    symbol: func_0034F360
+    status: source
+  - addr: '0x34f420'
+    size: 16
+    symbol: func_0034F420
+    status: source
+  - addr: '0x34f430'
+    size: 568
+    symbol: func_0034F430
+    status: source
+  - addr: '0x34f668'
+    size: 200
+    symbol: func_0034F668
+    status: source
+  - addr: '0x34f730'
+    size: 544
+    symbol: func_0034F730
+    status: source
+  - addr: '0x34f950'
+    size: 44
+    symbol: func_0034F950
+    status: source
+  - addr: '0x34f980'
+    size: 80
+    symbol: func_0034F980
+    status: source
+  - addr: '0x34f9d0'
+    size: 140
+    symbol: func_0034F9D0
+    status: source
+  - addr: '0x34fa60'
+    size: 148
+    symbol: func_0034FA60
+    status: source
+  - addr: '0x34faf8'
+    size: 92
+    symbol: func_0034FAF8
+    status: source
+  - addr: '0x34fb58'
+    size: 296
+    symbol: func_0034FB58
+    status: source
+  - addr: '0x34fc80'
+    size: 400
+    symbol: func_0034FC80
+    status: source
+  - addr: '0x34fe10'
+    size: 92
+    symbol: func_0034FE10
+    status: source
+  data_ranges:
+  - section: .data
+    input: .data
+    start: '0x3d4684'
+    end: '0x3d49f4'
+    kind: unwind
+- name: final_audio_vector_getters
+  source: src/rw_audio/tu_3168c8.c
+  library: rw_audio
+  provenance: campaign
+  tier: exact
+  origin: rw_audio
+  owner: final-deep-audio
+  claim: final-deep-audio
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  - -fno-schedule-insns
+  - -DRWA_VECTOR_GETTERS_ONLY
+  functions:
+  - addr: '0x31a160'
+    symbol: func_0031A160
+    size: 36
+    status: source
+  - addr: '0x31a1e0'
+    symbol: func_0031A1E0
+    size: 36
+    status: source
+  - addr: '0x31a260'
+    symbol: func_0031A260
+    size: 36
+    status: source
+  - addr: '0x31a2e0'
+    symbol: func_0031A2E0
+    size: 36
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: final_audio_byte_setters
+  source: src/rw_audio/tu_3168c8.c
+  library: rw_audio
+  provenance: campaign
+  tier: exact
+  origin: rw_audio
+  owner: final-deep-audio
+  claim: final-deep-audio
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  - -fno-schedule-insns2
+  - -DRWA_BYTE_SETTERS_ONLY
+  functions:
+  - addr: '0x31a068'
+    symbol: func_0031A068
+    size: 36
+    status: source
+  - addr: '0x31a0b8'
+    symbol: func_0031A0B8
+    size: 36
+    status: source
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: final_audio_cache_storage
+  source: src/rw_audio/tu_3168c8.c
+  library: rw_audio
+  provenance: campaign
+  tier: exact
+  origin: rw_audio
+  owner: final-deep-audio
+  claim: final-deep-audio
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  - -DRWA_CACHE_CONTROL_ONLY
+  functions:
+  - addr: '0x319928'
+    symbol: func_00319928
+    size: 36
+    status: source
+  data_ranges:
+  - section: .bss
+    input: .bss
+    start: '0x456480'
+    end: '0x458490'
+  assembler_evidence:
+    strength: weak
+    basis: individually verified output
+    historical_provenance: unresolved
+- name: context_repulsor_contact_outline
+  source: src/kynapse/behaviors_repulsor.cpp
+  library: kynapse
+  provenance: campaign
+  tier: exact
+  origin: kynapse
+  owner: final-deep-kynapse-steering
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -fbyte-bool
+  - -ffunction-sections
+  - -fno-rtti
+  - -DBLACK_NONMATCHING
+  - -DSTEERING_CONTACT_OUTLINE
+  functions:
+  - addr: '0x3055e0'
+    size: 520
+    status: asm
+    symbol: func_003055E0
+    reason: full TU context; linked by primary recipe
+  - addr: '0x3057e8'
+    size: 520
+    status: asm
+    symbol: func_003057E8
+    reason: full TU context; linked by primary recipe
+  - addr: '0x3059f0'
+    size: 1508
+    status: asm
+    symbol: func_003059F0
+    reason: full TU context; linked by primary recipe
+  - addr: '0x305fd8'
+    size: 972
+    status: asm
+    reason: full TU context; linked by primary recipe
+    symbol: func_00305FD8
+  - addr: '0x306448'
+    size: 240
+    status: asm
+    symbol: func_00306448
+    reason: full TU context; linked by primary recipe
+  - addr: '0x306538'
+    size: 336
+    status: source
+    symbol: func_00306538
+  - addr: '0x306688'
+    size: 216
+    status: asm
+    symbol: func_00306688
+    reason: full TU context; linked by primary recipe
+  externs:
+    sqrtf: '0x29eb90'
+  claim: final-deep-kynapse-contact-outline
+  full_tu_context: true
+  unlinked_context_helpers:
+  - _$_Q24Kaim13ActorIterator
+  - _$_Q24Kaim8PolyRoot
+- name: final_audio_scalar_getters_sony296
+  source: src/rw_audio/tu_3168c8.c
+  library: rw_audio
+  provenance: campaign
+  tier: exact
+  origin: rw_audio
+  owner: final-deep-audio
+  claim: final-deep-audio-scalar-getters
+  flags:
+  - -O2
+  - -G8
+  - -ffunction-sections
+  - -mno-handle-ee-div-pipeline-bug
+  - -DRWA_NORMALIZED_GETTERS_ONLY
+  functions:
+  - addr: '0x31a090'
+    symbol: func_0031A090
+    size: 36
+    status: source
+  - addr: '0x31a0e0'
+    symbol: func_0031A0E0
+    size: 36
+    status: source
+  - addr: '0x31a470'
+    symbol: func_0031A470
+    size: 36
+    status: source
+  compiler: ee-gcc2.96
+- name: campaign_final_game_1998c0
+  source: src/game/tu_199850.c
+  library: game
+  provenance: campaign
+  tier: exact
+  owner: final-depth-action-event
+  claim: final-depth-action-event
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  - -DACTION_EVENT_ONLY
+  functions:
+  - addr: '0x1998c0'
+    symbol: func_001998C0
+    size: 52
+    status: source
+- name: auto_game_199950
+  source: src/game/tu_199950.c
+  library: game
+  provenance: auto
+  tier: exact
+  origin: auto
+  flags:
+  - -O2
+  - -G0
+  - -snas
+  functions:
+  - addr: '0x199950'
+    symbol: func_00199950
+    size: 56
+    status: source
+  owner: final-depth-action-event
+  claim: final-depth-action-event

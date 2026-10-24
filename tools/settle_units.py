@@ -60,6 +60,9 @@ def main():
     original_units = units.read_bytes()
     committed = subprocess.run(['git', 'show', 'HEAD:config/units.yaml'], cwd=ROOT, capture_output=True)
     protected = source_addresses(committed.stdout) if committed.returncode == 0 else set()
+    # Explicit storage and shared constants depend on the current manifest. Do
+    # not validate a new ownership claim against an earlier placement snapshot.
+    print(run('tools/split_objects.py', SLUG).stdout.strip().split('\n')[-1])
     print(run('tools/make_ld.py', SLUG).stdout.strip())
     results = ROOT / 'build' / SLUG / 'results.json'
     results.unlink(missing_ok=True)

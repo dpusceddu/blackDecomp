@@ -7,6 +7,8 @@ import json
 from pathlib import Path
 from elfinfo import Elf
 
+DATA_SECTIONS = ('.rodata', '.lit4', '.gcc_except_table', '.data', '.sdata', '.bss', '.sbss')
+
 
 def natural_text_span(size, start, stop, alignment, padding, input_alignment=1):
     """Only a zero-filled gap exactly produced by the next input's alignment fits."""
@@ -37,7 +39,7 @@ class InputAlignments:
                     except ValueError:
                         continue
                     self.slots.setdefault(address, []).append((obj['name'], old))
-                for sec in ('.rodata', '.lit4', '.gcc_except_table'):
+                for sec in DATA_SECTIONS:
                     if new.startswith(sec + '.'):
                         try:
                             address = int(new.removeprefix(sec + '.'), 16)
@@ -47,7 +49,7 @@ class InputAlignments:
         placement = self.build / 'placement.json'
         if placement.exists():
             for sec, entries in json.loads(placement.read_text())['sections'].items():
-                if sec not in ('.rodata', '.lit4', '.gcc_except_table'):
+                if sec not in DATA_SECTIONS:
                     continue
                 for entry in entries:
                     if entry['obj'] in names and 'key' in entry:
@@ -59,7 +61,11 @@ class InputAlignments:
     def data_at(self, section, address):
         return self._alignment(self.data_slots.get((section, address), []))
 
-    def _alignment(self, slots):
+    def data_section(self, section, address):
+        """The unique actual data input, including its native kind and alignment."""
+        return self._section(self.data_slots.get((section, address), []))
+
+    def _section(self, slots):
         if len(slots) != 1:
             return None
         obj, section = slots[0]
@@ -68,4 +74,8 @@ class InputAlignments:
             self.objects[obj] = Elf(path.read_bytes()) if path.is_file() else None
         elf = self.objects[obj]
         record = elf.section(section) if elf else None
-        return record['align'] if record and record['size'] else None
+        return record if record and record['size'] else None
+
+    def _alignment(self, slots):
+        record = self._section(slots)
+        return record['align'] if record else None

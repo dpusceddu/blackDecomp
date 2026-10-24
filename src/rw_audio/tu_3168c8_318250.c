@@ -94,11 +94,6 @@ void func_00318BC0(void) {
 
 /* Assembly between the functions: func_00318BE0 (96 bytes), func_00318C40 (80 bytes), func_00318C90 (88 bytes) */
 
-void func_00318CE8(s32 *arg0) {
-    if (!(*arg0 & 1)) {
-        func_00317C20(&D_00456448, arg0);
-    }
-}
 
 /* Assembly between the functions: func_00318D20 (8 bytes), func_00318D28 (344 bytes), func_00318E80 (1000 bytes), func_00319268 (112 bytes), func_003192D8 (144 bytes), func_00319368 (168 bytes) */
 

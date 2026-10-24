@@ -5,9 +5,13 @@ host C++ interpreter does not execute SDK tools. Game compilation still uses
 `tools/compile.py` and the build backend. Generated reports, ELF overlays and
 reference material belong in ignored directories.
 
+Native harness compilation is also covered by the repository's compiler isolation
+rule. Run CMake configuration and compilation only through `tools/sandbox.py` with
+an authorized compiler. If that compiler is unavailable, reuse a validated
+existing binary or report the limitation. Host compilation is
+not an allowed fallback. The commands below require an already built harness.
+
 ```sh
-cmake -S tools/eeharness -B build/eeharness/host -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DEEHARNESS_SANITIZERS=ON
-cmake --build build/eeharness/host
 ctest --test-dir build/eeharness/host --output-on-failure
 .venv/bin/python tools/eeharness/audit.py
 .venv/bin/python tools/eeharness/selfcheck.py
@@ -83,8 +87,12 @@ external stubs. The published micro fixtures pass both standalone and through
 the EE call interface. Arithmetic tests distinguish final-result cause/MAC flags
 from product-stage sticky flags, including an overflowed accumulator and
 overlapping FMAC/divider writeback.
+OPMULA and OPMSUB use the same cyclic lane products; a cross product reverses
+the second instruction's register operands. Independent tests check supplied
+accumulators, cancellation, aliased destinations and 3-4-5 normalization in
+addition to the instruction-pair fixtures.
 
-The functional gate combines 1,471 sanitizer assertions, all retail decoder words,
+The functional gate combines 1,506 sanitizer assertions, all retail decoder words,
 published instruction fixtures, and the exact/mutated-source controls. Its report
 binds the executable and authored sources in `build/eeharness/gate-1.json`.
 The three compiled fixtures that reach reviewed undefined/reserved operations
@@ -156,8 +164,7 @@ dispatcher iterations each; other device waits remain. Of 1,745 typed mutations,
 .venv/bin/python tools/eeharness/savestate_tests.py
 .venv/bin/python tools/eeharness/corpus_tests.py
 .venv/bin/python tools/eeharness/savestate.py --output build/eeharness/savestate-inputs.json
-cmake -S tools/eeharness -B build/eeharness/release -G Ninja -DCMAKE_BUILD_TYPE=Release
-cmake --build build/eeharness/release
+# Requires a validated existing release harness; see compiler isolation above.
 .venv/bin/python tools/eeharness/phase2.py --harness build/eeharness/release/eeharness --frames 40 --budget 16000000
 # Reanalyze unchanged corpora without repeating their interpreter execution:
 .venv/bin/python tools/eeharness/phase2.py --reuse-captures

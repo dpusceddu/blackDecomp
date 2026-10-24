@@ -15,7 +15,7 @@ typedef struct BkModSourceClipPS2 {
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern s8 D_003D20D0;
+extern u8 D_003D20D0;
 extern s32 D_003D20D4,D_003D20E0,D_0046A500;
 extern u8 *D_003D20D8;
 extern s32 D_003D20DC;
@@ -30,7 +30,8 @@ typedef char SourceClipFrame14[(unsigned)&((BkModSourceClipPS2*)0)->frameCount==
 typedef char SourceClipSkeleton18[(unsigned)&((BkModSourceClipPS2*)0)->skeletonIndex==0x18?1:-1];
 typedef char SourceClipFormat1c[(unsigned)&((BkModSourceClipPS2*)0)->trackFormat==0x1c?1:-1];
 typedef char SourceClipTracks20[(unsigned)&((BkModSourceClipPS2*)0)->tracks==0x20?1:-1];
-/* Unresolved ABI:fixed VF Slerp microcall330 has inputsVF18/19 andVF28.x,
-   outputVF20. Clobber/synchronization contract is unknown, so no wrapper is
-   provided.347558 must retain ignored owner/flags and frame/time bank order. */
+/* ps2/vu0_micro.hpp provides the scoped AnimationMicro::Slerp contract for
+   microcall330: inputsVF18/19 andVF28.x, outputVF20, reviewed clobbers and VNOP.
+   Keep its per-recipe evidence limits.347558 retains the unused owner/flags
+   and original frame/time argument-bank order. */
 #endif

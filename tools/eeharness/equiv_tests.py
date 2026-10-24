@@ -3,8 +3,39 @@
 import sys
 from pathlib import Path
 import unittest
+import struct
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from equiv import coverage
+from equiv import coverage, overlay_linker_script, reference_gp
+
+
+class ReferenceGpTests(unittest.TestCase):
+    class Reference:
+        def __init__(self, payload, kind=0x70000006):
+            self.payload = payload
+            self.kind = kind
+
+        def section(self, name):
+            return dict(type=self.kind) if self.payload is not None else None
+
+        def content(self, section):
+            return self.payload
+
+    def test_original_gp_is_independent_of_overlay_address(self):
+        gp = reference_gp(self.Reference(struct.pack('<6I', 0, 0, 0, 0, 0, 0x4157f0)))
+        script = overlay_linker_script('candidate', '.text.candidate', ['D_0040E1C4'],
+                                      {'D_0040E1C4': 0x40e1c4}, gp)
+        self.assertIn('_gp = 0x4157f0;', script)
+        self.assertIn('D_0040E1C4 = 0x40e1c4;', script)
+        self.assertIn('. = 0x08000000;', script)
+        # The original small-data displacement fits; candidate-relative GP would not.
+        self.assertTrue(-32768 <= 0x40e1c4 - gp <= 32767)
+        self.assertFalse(-32768 <= 0x40e1c4 - 0x08000000 <= 32767)
+
+    def test_missing_malformed_or_zero_gp_is_rejected(self):
+        for elf in (self.Reference(None), self.Reference(bytes(20)),
+                    self.Reference(bytes(24)), self.Reference(bytes(24), kind=1)):
+            with self.subTest(elf=elf), self.assertRaises(ValueError):
+                reference_gp(elf)
 
 
 class CoverageTests(unittest.TestCase):

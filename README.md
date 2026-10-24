@@ -63,7 +63,8 @@ module they implement. `tools/relayout.py` applies the rules of `tools/layout.py
 
 ## Working on a TU
 
-1. Pick work with `python3 tools/next.py [tus|near|types|families|data|ee]`; `python3 tools/progress.py --tus 15` lists the
+1. Read [the matching handbook](docs/matching-handbook.md) before each TU. Pick work with
+   `python3 tools/next.py [tus|near|types|families|data|ee]`; `python3 tools/progress.py --tus 15` lists the
    partly done TUs closest to completion.
 2. Claim the TU: add or edit its units in `config/units.yaml` (`owner`, `claim`) before touching its sources, and edit only
    those sources unless you are the coordinator. Shared headers belong to their owners.
@@ -75,7 +76,7 @@ module they implement. `tools/relayout.py` applies the rules of `tools/layout.py
 5. Leave a one-line `// Unmatched:` note on every function that stays inexact. Keep `src/` free of per-function journals.
 6. Run `ninja`, `ninja progress` and the tests; commit without attribution lines; do not push.
 
-Planned: `docs/matching-handbook.md`, the working handbook for matching (method, typical mismatch causes, helper headers).
+The handbook records measured SN controls, the obstruction ladder, data ownership and permuter handoff.
 
 ## Tools
 

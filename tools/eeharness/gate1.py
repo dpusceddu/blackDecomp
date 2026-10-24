@@ -3,6 +3,8 @@
 
 This gate checks instruction behavior, decode coverage and the source controls.
 It does not certify cycle accuracy, hardware replay or game-function equivalence.
+It requires existing harness executables; native compilation belongs in the
+build backend and is never an implicit validation step.
 """
 import argparse
 from concurrent.futures import ThreadPoolExecutor
@@ -68,10 +70,13 @@ def compiled_results(report,logs):
 
 
 def check(args):
-    run(['cmake','--build',args.harness.parent])
+    for binary in (args.harness, *(args.harness.parent/name for name in
+                                  ('ee_semantics','vu_semantics','cop0_semantics'))):
+        require(binary.is_file(), 'existing harness executable required: '+str(binary)+
+                '; compile only through the build backend')
     run(['ctest','--test-dir',args.harness.parent,'--output-on-failure'])
     assertions = {}
-    for name,minimum in [('ee_semantics',1000),('vu_semantics',350),('cop0_semantics',121)]:
+    for name,minimum in [('ee_semantics',1000),('vu_semantics',385),('cop0_semantics',121)]:
         output = run([args.harness.parent/name])
         match = re.match(r'OK (\d+) ',output)
         require(match is not None and int(match[1]) >= minimum,name+' is missing required assertions')

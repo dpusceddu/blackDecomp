@@ -192,8 +192,10 @@ VuEngine::Effect VuEngine::upper(const Decoded& d) {
             else if (operand.kind == Source::quotient) b = s_.vi[22];
             else if (operand.kind == Source::broadcast) b = s_.vf[d.rt].w[operand.component];
             if (n == "vopmula" || n == "vopmsub") {
-                const unsigned x = n == "vopmula" ? (lane+1)%3 : (lane+2)%3;
-                const unsigned y = n == "vopmula" ? (lane+2)%3 : (lane+1)%3;
+                // Both operations use the same cyclic lane product. The
+                // instruction operands, not these lanes, are swapped for a cross.
+                const unsigned x = (lane+1)%3;
+                const unsigned y = (lane+2)%3;
                 a = s_.vf[d.rd].w[x]; b = s_.vf[d.rt].w[y];
             }
             if (n.starts_with("vadd")) value = fpu::add(a,b);

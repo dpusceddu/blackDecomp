@@ -21,6 +21,7 @@ import yaml
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from elfinfo import Elf
 from units import load_units, ROOT
+from source_data import source_ranges, validate_inputs, validate_input_symbols, range_owner
 
 SLUG = 'usa-retail'
 BUILD = ROOT / 'build' / SLUG
@@ -94,6 +95,42 @@ def owned_data_gap_fits(size, start, stop, section, input_alignment):
                              data[low:high], input_alignment)
 
 
+def kept_text_names(elf, symbols, live):
+    """Only enabled function inputs participate in relocation/data validation."""
+    wanted = {f['symbol'] for f in live}
+    return {elf.sections[s['shndx']]['name'] for s in symbols
+            if s['type'] == 2 and s['name'] in wanted and 0 < s['shndx'] < len(elf.sections)
+            and is_text(elf.sections[s['shndx']]['name'])}
+
+
+def valid_context_sections(elf, symbols, unit):
+    """Opt-in context consists of declared real functions and named helpers.
+
+    Helpers carry no original-address or evidence claim. References to a dropped
+    helper from kept code still require a real original binding and may fail.
+    """
+    allowed = {f['symbol'] for f in unit['functions'] if f.get('symbol')}
+    allowed.update(unit.get('unlinked_context_helpers', []))
+    for section in elf.sections:
+        if not is_text(section['name']) or not section['size']:
+            continue
+        if section['name'] == '.text':
+            return False
+        functions = [s for s in symbols if s['type'] == 2 and s['shndx'] == section['index']]
+        if not functions or any(s['name'] not in allowed for s in functions):
+            return False
+    return True
+
+
+def owned_constant_names(live, placement):
+    """Unplaced context constants do not introduce bindings into kept code."""
+    live_addresses = {f['addr'] for f in live}
+    addresses = {f['name']: f['addr'] for f in placement['functions']}
+    return {name for name in ('.rodata', '.lit4', '.gcc_except_table')
+            if any(addresses.get(entry.get('owner')) in live_addresses
+                   for entry in placement['sections'].get(name, []))}
+
+
 def data_sections(e, syms, u, live, placement):
     """Constants and data the compiled unit brings along. Returns a reason when they cannot take the place of what the
     assembly objects carried: code refers to a section no original slot exists for, the slots are not adjacent, or the
@@ -101,8 +138,10 @@ def data_sections(e, syms, u, live, placement):
     by_name = {f['name']: f for f in placement['functions']}
     addrs = {f['addr'] for f in live}
     referenced = set()
+    explicit_inputs = {r['input'] for r in u.get('data_ranges', [])}
+    linked_text = kept_text_names(e, syms, live)
     for t in e.sections:
-        if t['type'] == 9 and is_text(e.sections[t['info']]['name']):
+        if t['type'] == 9 and e.sections[t['info']]['name'] in linked_text:
             c = e.content(t)
             for o in range(0, len(c), 8):
                 off, info = struct.unpack_from('<II', c, o)
@@ -113,9 +152,12 @@ def data_sections(e, syms, u, live, placement):
                     if y['bind'] in (1, 2) and y['name'] and not is_text(name) and name not in ('.rodata', '.lit4', '.gcc_except_table'):
                         continue
                     referenced.add(name)
-    for sec in sorted(x for x in referenced if not is_text(x) and x not in ('.rodata', '.lit4', '.gcc_except_table')):
+    for sec in sorted(x for x in referenced if not is_text(x)
+                      and x not in ('.rodata', '.lit4', '.gcc_except_table') and x not in explicit_inputs):
         return 'section'              # own data or bss: not placed
     for sec in ('.rodata', '.lit4', '.gcc_except_table'):
+        if sec in explicit_inputs:
+            continue                 # strict complete-input validation owns this section
         ents = placement['sections'][sec]
         slots = [i for i, ent in enumerate(ents) if ent.get('owner') and by_name[ent['owner']]['addr'] in addrs]
         so = e.section(sec)
@@ -159,12 +201,20 @@ def image_names():
 def prepare():
     from text_placement import InputAlignments, natural_text_span
     units = load_units()
+    explicit_data = source_ranges(units)
+    original_labels = {name: address for address, name in json.loads((BUILD / 'labels.json').read_text())}
     bind = bindings()
     results = json.loads((BUILD / 'results.json').read_text()) if (BUILD / 'results.json').exists() else {}
     stats = {}
     placement = json.loads((BUILD / 'placement.json').read_text())
     ends = {f['addr']: f['end'] for f in placement['functions']}
     alignments, original_text, text_base = None, None, 0
+
+    def following_data_input(section, address):
+        nonlocal alignments
+        if alignments is None:
+            alignments = InputAlignments(BUILD)
+        return alignments.data_section(section, address)
 
     def fits_text(section, start, stop):
         nonlocal alignments, original_text, text_base
@@ -176,6 +226,7 @@ def prepare():
             return False
         if alignments is None:
             alignments = InputAlignments(BUILD)
+        if original_text is None:
             original = Elf((ROOT / 'orig' / SLUG / 'files' / 'SLUS_213.76').read_bytes())
             text = original.section('.text')
             original_text, text_base = original.content(text), text['addr']
@@ -212,6 +263,9 @@ def prepare():
                 total += s['size']
         # the object's code must fill exactly the original span (first function to the next one behind the unit)
         live = [f for f in u['functions'] if f.get('status') == 'source']
+        if live and u.get('full_tu_context') and not fsecs:
+            stats['context'] = stats.get('context', 0) + demote(u, None, 'context')
+            live = []
         if live and fsecs:
             # One section per function. The next actual input's alignment may fill
             # a verified zero tail; no extra code or invented padding is accepted.
@@ -224,6 +278,9 @@ def prepare():
                     bad.add(f['addr'])
             if bad:
                 stats['extra'] = stats.get('extra', 0) + demote(u, bad, 'extra')
+            elif u.get('full_tu_context'):
+                if not valid_context_sections(e, syms, u):
+                    stats['context'] = stats.get('context', 0) + demote(u, None, 'context')
             elif (text and text['size']) or sum(e.sections[i]['size'] for i in fsecs) != sum(
                     e.sections[defined[f['symbol']]['shndx']]['size'] for f in live):
                 stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
@@ -234,20 +291,22 @@ def prepare():
                 stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
         live = [f for f in u['functions'] if f.get('status') == 'source']
         if live:
-            why = data_sections(e, syms, u, live, placement)
+            why = validate_inputs(e, [r for r in explicit_data if r['unit'] == u['name']], placement,
+                                  following_data_input)
+            why = why or validate_input_symbols(e, [r for r in explicit_data if r['unit'] == u['name']], original_labels)
+            why = why or data_sections(e, syms, u, live, placement)
             if why:
                 stats[why] = stats.get(why, 0) + demote(u, None, why)
         # bind what the object leaves undefined
         used = set()     # only what the linked sections refer to; the dropped ones (unwind data, linkonce copies) do not count
+        kept_names = kept_text_names(e, syms, live) | owned_constant_names(live, placement) | {r['input'] for r in u.get('data_ranges', [])}
         for t in e.sections:
-            if t['type'] == 9 and (is_text(e.sections[t['info']]['name']) or e.sections[t['info']]['name'] in ('.rodata', '.lit4', '.gcc_except_table')):
+            if t['type'] == 9 and e.sections[t['info']]['name'] in kept_names:
                 c = e.content(t)
                 for o in range(0, len(c), 8):
                     used.add(struct.unpack_from('<I', c, o + 4)[0] >> 8)
-        kept_names = ('.text', '.rodata', '.lit4', '.gcc_except_table')
         want = sorted({syms[i]['name'] for i in used if syms[i]['name'] and syms[i]['bind'] in (1, 2) and
                        (syms[i]['shndx'] == 0 or (syms[i]['shndx'] < 0xff00 and e.sections[syms[i]['shndx']]['name'] not in kept_names
-                                                  and not is_text(e.sections[syms[i]['shndx']]['name'])
                                                   and i not in [j for j, y in enumerate(syms) if y['type'] == 2 and y['shndx'] == tidx]))})
         ex, missing = {}, []
         known = dict(u.get('externs') or {})
@@ -282,6 +341,7 @@ def link_errors():
                    for e in placement['sections'][sec] if e.get('owner'))
     okeys = [k for k, _ in owned]
     units = load_units()
+    explicit_data = source_ranges(units)
     owner = {f['addr']: u['name'] for u in units for f in u['functions'] if f.get('status') == 'source'}
     bad = {}
     for line in log.split('\n'):
@@ -292,6 +352,10 @@ def link_errors():
         m = re.search(r"undefined reference to `[^`']*?([0-9A-F]{8})'", line)
         if m:
             a = int(m.group(1), 16)
+            data_unit = range_owner(explicit_data, None, a)
+            if data_unit is not None:
+                bad.setdefault(data_unit, (line, 'labels'))
+                continue
             fa = starts[bisect.bisect_right(starts, a) - 1]
             if fa in owner:
                 bad.setdefault(owner[fa], (line, 'labels'))
@@ -320,6 +384,8 @@ def compare():
     funcs = placement['functions']
     starts = [f['addr'] for f in funcs]
     units = load_units()
+    explicit_data = source_ranges(units)
+    units_by_name = {u['name']: u for u in units}
     owner = {f['addr']: u for u in units for f in u['functions'] if f.get('status') == 'source'}
     ents = {sec: [(e['key'], e) for e in placement['sections'][sec] if 'key' in e]
             for sec in ('.rodata', '.lit4', '.gcc_except_table')}
@@ -333,7 +399,11 @@ def compare():
                 continue
             addr = a['addr'] + i
             who = None
-            if sec == '.text':
+            data_unit = range_owner(explicit_data, sec, addr)
+            if data_unit is not None:
+                who = units_by_name[data_unit]
+                where = data_unit
+            elif sec == '.text':
                 fa = starts[bisect.bisect_right(starts, addr) - 1]
                 who = owner.get(fa)
                 where = 'func_%08X' % fa

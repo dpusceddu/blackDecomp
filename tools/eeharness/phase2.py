@@ -37,6 +37,22 @@ FRAME_SERVICES = [('ui',0x20b2b0,0x40f544),
                   ('service-10b018',0x10b018,0x40f4f0)]
 
 
+def capture_catalog(fuzz_limit, path):
+    """Natural-input-only capture needs no generated class or field catalog."""
+    return None if fuzz_limit == 0 else json.loads(path.read_text())
+
+
+def capture_fuzz(fuzz_limit, prefix, snapshot, catalog):
+    """Keep the patch file empty when typed mutations were explicitly disabled."""
+    if fuzz_limit:
+        return corpus.make_fuzz(prefix.with_suffix('.eec'),snapshot.regions['eeMemory.bin'],catalog,
+                                prefix.with_suffix('.fuzz'),fuzz_limit)
+    prefix.with_suffix('.fuzz.txt').write_text('')
+    prefix.with_suffix('.fuzz.json').write_text(json.dumps(dict(
+        cases=[],observed_receivers={},scope='disabled; natural recorded inputs only'),indent=2)+'\n')
+    return []
+
+
 def main_thread_stack(snapshot):
     """Recover the boot thread's saved stack when captured on another thread.
 
@@ -142,8 +158,7 @@ def capture_run(args, functions, snapshot, catalog, prefix, entry, receiver, sta
         raise ValueError('persisted entry counts differ from observed execution')
     replay_checks = [run_json([args.harness,'replay-entry',bridge,prefix.with_suffix('.eec'),i,200000],
                              prefix.with_suffix(f'.replay-{i}.json')) for i in sample_ids]
-    fuzz = corpus.make_fuzz(prefix.with_suffix('.eec'),snapshot.regions['eeMemory.bin'],catalog,
-                           prefix.with_suffix('.fuzz'),args.fuzz_limit)
+    fuzz = capture_fuzz(args.fuzz_limit,prefix,snapshot,catalog)
     fuzz_results = run_json([args.harness,'replay-fuzz',bridge,prefix.with_suffix('.eec'),
                             prefix.with_suffix('.fuzz.txt'),100000],prefix.with_suffix('.fuzz-results.json')) if fuzz else []
     run = dict(entry=hex(entry),receiver=hex(receiver),execution=result,bootstrap_stack=stack,
@@ -214,7 +229,8 @@ def main():
     parser.add_argument('--harness',type=Path,default=ROOT/'build/eeharness/host/eeharness')
     parser.add_argument('--frames',type=int,default=40)
     parser.add_argument('--budget',type=int,default=6000000)
-    parser.add_argument('--fuzz-limit',type=int,default=256)
+    parser.add_argument('--fuzz-limit',type=int,default=256,
+                        help='maximum typed mutations; zero captures natural inputs without a class catalog')
     parser.add_argument('--reuse-captures',action='store_true',
                         help='reanalyze existing captures; new savestates are still captured')
     parser.add_argument('--jobs',type=int,default=2,help='independent input states processed concurrently')
@@ -222,12 +238,13 @@ def main():
     output = args.output.resolve()
     if not output.is_relative_to((ROOT/'build').resolve()):
         parser.error('private replay output must stay under ignored build/')
-    if args.frames<1 or args.budget<1 or args.fuzz_limit<1 or args.jobs<1:
-        parser.error('budgets must be positive')
+    if args.frames<1 or args.budget<1 or args.fuzz_limit<0 or args.jobs<1:
+        parser.error('budgets must be positive; fuzz-limit may be zero')
     output.mkdir(parents=True,exist_ok=True)
     adopt_legacy(output)
     args.harness_sha256 = hashlib.sha256(args.harness.read_bytes()).hexdigest()
     args.analysis_signature = hashlib.sha256(inspect.getsource(capture_run).encode()+
+        inspect.getsource(capture_fuzz).encode()+
         Path(corpus.__file__).read_bytes()+args.harness_sha256.encode()+str(args.fuzz_limit).encode()).hexdigest()
     sources = ('ee.hpp','decode.cpp','cpu.cpp','cop0.cpp','memory.cpp','fpu.cpp','fpu.hpp','vu.cpp','vu.hpp',
                'replay.cpp','replay.hpp','event_journal.cpp','event_journal.hpp','main.cpp')
@@ -239,7 +256,7 @@ def main():
     fs = inventory()
     functions = output/'functions.txt'
     functions.write_text(''.join(f"{f['address']:x}\n" for f in fs))
-    catalog = json.loads((ROOT/'build/classes/catalog.json').read_text())
+    catalog = capture_catalog(args.fuzz_limit,ROOT/'build/classes/catalog.json')
     elf = Elf((ROOT/'orig/usa-retail/files/SLUS_213.76').read_bytes())
     text = elf.section('.text'); retail = elf.content(text)
     totals, inputs, digests = collections.Counter(),[],set()
@@ -263,7 +280,7 @@ def main():
         if any(lo<=a<hi for a in changed for lo,hi in game_ranges):
             raise ValueError('savestate has modified game-region instructions')
         prefix = output/('input-'+snapshot.sha256[:16])
-        objects = corpus.object_candidates(ram,catalog)
+        objects = corpus.object_candidates(ram,catalog) if catalog is not None else []
         prefix.with_suffix('.objects.json').write_text(json.dumps(objects,indent=2)+'\n')
         root = struct.unpack_from('<I',ram,ROOT_POINTER)[0]
         stack = main_thread_stack(snapshot)
@@ -303,6 +320,8 @@ def main():
                 print(f'{path.name}: rejected: {error}',flush=True)
             inputs.append(row)
             report = summarize(fs,inputs,totals,len(unique)-len(inputs))
+            report['fuzzing_scope'] = ('disabled; natural recorded inputs only; class scan skipped'
+                                       if args.fuzz_limit == 0 else 'typed mutations from the generated class catalog')
             temporary = output/'gate-2.pending.json'
             temporary.write_text(json.dumps(report,indent=2)+'\n');temporary.replace(output/'gate-2.json')
             print(f"Gate 2 checkpoint: {report['game_functions_with_20_states']}/{report['required_functions']} required game functions; "

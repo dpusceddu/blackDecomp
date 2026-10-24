@@ -923,8 +923,8 @@ PRELUDE_HASH = hashlib.sha256((ROOT / 'include/auto/prelude.h').read_bytes() + (
 
 
 # ---------------------------------------------------------------------------------------------------------- scoring
-HI, LO, GP, J26 = 5, 6, 7, 4
-KIND = {HI: 'hi', LO: 'lo', GP: 'gprel', J26: 'jal'}
+HI, LO, GP, LITERAL, J26 = 5, 6, 7, 8, 4
+KIND = {HI: 'hi', LO: 'lo', GP: 'gprel', LITERAL: 'gprel', J26: 'jal'}
 MASK = {'hi': 0xFFFF0000, 'lo': 0xFFFF0000, 'gprel': 0xFFFF0000, 'jal': 0xFC000000}
 
 
@@ -970,7 +970,36 @@ class CompiledTokens(list):
         self.resolved_words = {}
 
 
-def resolved_address_words(code, relocations, bindings):
+def source_symbol_address(elf, symbol, kind, bindings, section_bindings):
+    """Resolve only named image symbols or explicitly placed source sections.
+
+    Local MIPS GPREL and LITERAL addends include minus the object's GP0. Its
+    .reginfo value must be restored for section symbols; external symbol GP
+    relocations already use the ordinary named-symbol convention.
+    """
+    name = symbol.get('name', '')
+    image = ADDRNAME.match(name) if name else None
+    if image:
+        return int(image.group(1), 16)
+    if name in bindings:
+        return bindings[name]
+    index = symbol.get('shndx', 0)
+    if symbol.get('type') != 3 or not 0 < index < len(elf.sections):
+        return None
+    section = elf.sections[index]
+    base = section_bindings.get(section['name'])
+    if base is None:
+        return None
+    base += symbol.get('value', 0)
+    if kind in (GP, LITERAL):
+        reginfo = elf.section('.reginfo')
+        if reginfo is None or reginfo['size'] < 24:
+            return None
+        base += struct.unpack_from('<i', elf.content(reginfo), 20)[0]
+    return base
+
+
+def resolved_address_words(code, relocations, bindings, symbol_address=None):
     """Resolve known address operands for comparison only, following MIPS REL pairing.
 
     A retail LUI can serve several addresses without its own inferred relocation.
@@ -984,7 +1013,8 @@ def resolved_address_words(code, relocations, bindings):
             continue
         name = symbol.get('name', '')
         address_name = ADDRNAME.match(name) if name else None
-        address = int(address_name.group(1), 16) if address_name else bindings.get(name)
+        address = (symbol_address(symbol, kind) if symbol_address else
+                   int(address_name.group(1), 16) if address_name else bindings.get(name))
         if not isinstance(address, int):
             continue
         word = struct.unpack_from('<I', code, offset)[0]
@@ -1012,11 +1042,18 @@ def resolved_address_match(target, index, tokens):
             and word == target.fn['words'][index])
 
 
-def compiled_tokens(obj_bytes, symbol, consts=None, bindings=None):
-    """Tokens of `symbol`'s code in a compiled object, or (None, reason)."""
+def compiled_tokens(obj_bytes, symbol, consts=None, bindings=None, section_bindings=None):
+    """Tokens of `symbol`'s code, or (None, reason).
+
+    section_bindings optionally maps verified source input-section names to
+    their final image bases. It never infers placement from zero/constant data.
+    """
     e = Elf(obj_bytes)
     syms = e.symbols()
     bindings = bindings or {}
+    section_bindings = section_bindings or {}
+    def symbol_address(entry, kind):
+        return source_symbol_address(e, entry, kind, bindings, section_bindings)
     fs = next((s for s in syms if s['name'] == symbol and 0 < s['shndx'] < len(e.sections)
                and (e.sections[s['shndx']]['name'] == '.text'
                     or e.sections[s['shndx']]['name'].startswith('.text.'))), None)
@@ -1033,7 +1070,7 @@ def compiled_tokens(obj_bytes, symbol, consts=None, bindings=None):
                 off, info = struct.unpack_from('<II', c, o)
                 rels[off] = (info & 255, syms[info >> 8])
     toks = CompiledTokens()
-    resolved = resolved_address_words(code, rels, bindings)
+    resolved = resolved_address_words(code, rels, bindings, symbol_address)
     toks.resolved_words = {(offset - start) // 4: word for offset, word in resolved.items()
                            if start <= offset < start + size}
     for off in range(start, start + size, 4):
@@ -1055,8 +1092,7 @@ def compiled_tokens(obj_bytes, symbol, consts=None, bindings=None):
             add = s16(w)
         masked = w & MASK[k]
         name = y['name']
-        am = ADDRNAME.match(name) if name else None
-        base = int(am.group(1), 16) if am else bindings.get(name)
+        base = symbol_address(y, kind)
         if y['shndx'] not in (0, 0xFFF1, 0xFFF2) and base is None:
             # symbol defined in the compiled unit itself (a constant it brought along): compare the bytes it points at
             sec = e.sections[y['shndx']]
@@ -1417,7 +1453,7 @@ def expand_macros(src):
                     cur += c
                 k += 1
             args.append(cur)
-            out.append(make([a.strip() for a in args]))
+            out.append(make([call(a.strip(), name, make) for a in args]))
             i = k + 1
     body = call(body, 'M2C_FIELD', lambda a: '(*(%s)((s8 *)(%s) + (%s)))' % (a[1], a[0], a[2]))
     body = call(body, 'M2C_BITWISE', lambda a: '((%s)(%s))' % (a[0], a[1]))
@@ -1492,10 +1528,16 @@ class Climb:
 
 def committed_form(text):
     """Source of an exact permuter result in the repository's form: prelude include instead of typedefs, macros back."""
-    text = re.sub(r'(typedef struct\s*)?\{\s*s64 v;\s*\}\s*__attribute__\(\(packed\)\)\s*M2C_U64;', '', text)    # the permuter prints it over lines
+    text = re.sub(r'(?m)^\s*typedef\s+struct\s*\{\s*s64\s+v;\s*\}\s*__attribute__\(\(packed\)\)\s*M2C_U64;', '', text)
+    # Only complete declarations of the shared prelude's aliases may disappear.
+    # A user typedef can span many lines; dropping just its first line corrupts
+    # recovered structs. Restoring the prelude also restores SN's mode(TI) widths
+    # if the C parser printed its s128/u128 placeholders as ordinary int types.
+    aliases = 's8|u8|s16|u16|s32|u32|s64|u64|s128|u128|f32|f64|M2C_UNK|M2C_UNK8|M2C_UNK16|M2C_UNK32|M2C_UNK64'
+    shared = re.compile(r'\s*typedef\s+[^;{}]+\b(?:' + aliases + r')\s*(?:__attribute__\(\(.*\)\))?\s*;\s*$')
     lines = text.split('\n')
     i = 0
-    while i < len(lines) and (lines[i].startswith('typedef') or not lines[i].strip() or lines[i].startswith('#pragma')):
+    while i < len(lines) and (shared.fullmatch(lines[i]) or not lines[i].strip() or lines[i].startswith('#pragma _permuter')):
         i += 1
     body = '\n'.join(l for l in lines[i:] if not l.startswith('#pragma _permuter'))
     body = re.sub(r'\*\(\((\w+ \*)\) \(\(\(s8 \*\) (\w+)\) \+ (0x[0-9A-Fa-f]+|\d+)\)\)', r'M2C_FIELD(\2, \1, \3)', body)

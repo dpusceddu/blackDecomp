@@ -27,6 +27,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from fixasm import process, load_labels  # noqa: E402
+from source_data import source_ranges, carve_ranges, unwind_groups, partition_constant_runs
+from units import load_units
 
 MIGRATED = ('.rodata', '.lit4', '.gcc_except_table')
 REF = re.compile(r'\b(?:D|jtbl|ehtbl|STR)_([0-9A-F]{8})\b(?:\s*\+\s*(0x[0-9A-Fa-f]+))?')
@@ -134,6 +136,56 @@ def split_scalar_type_tails(objects, literal_at):
     return out
 
 
+def split_literal_type_tails(objects, literal_at, boundaries=None):
+    """Separate a complete ASCIZ from a following validated GCC type name.
+
+    A splat label can encompass an ordinary string and neighboring runtime
+    metadata. Require two actual item boundaries, a complete first string and
+    only its natural four/eight-byte alignment gap before the encoded type or
+    standard exception name. Retain every directive and recompute ownership.
+    The build passes opt-in unit boundaries; None is useful for a read-only audit.
+    """
+    from class_skeletons import decode_name
+    out, recognized = [], set()
+    for obj in objects:
+        items = [(i, ITEM.match(line.strip())) for i, line in enumerate(obj['lines'])]
+        items = [(i, int(m.group(1), 16)) for i, m in items if m]
+        if len(items) < 2 or items[0][1] != obj['addr']:
+            out.append(obj)
+            continue
+        first, boundary = items[0][0], items[1][0]
+        if boundaries is not None and items[1][1] not in boundaries:
+            out.append(obj)
+            continue
+        if not re.search(r'\*/\s+\.asciz\s', obj['lines'][first]):
+            out.append(obj)
+            continue
+        prefix, name = literal_at(obj['addr']), literal_at(items[1][1])
+        end = obj['addr'] + len(prefix) + 1 if prefix else None
+        valid = name in ('bad_alloc', 'bad_cast', 'bad_typeid')
+        if name and (name.startswith('Q') or name[0].isdigit()):
+            _, decoded = decode_name(name)
+            valid = valid or decoded
+        if end is None or not valid or items[1][1] not in (end, (end + 3) & ~3, (end + 7) & ~7):
+            out.append(obj)
+            continue
+        cut = boundary
+        while cut > first + 1 and (not obj['lines'][cut - 1].strip()
+                                  or ALIGN.match(obj['lines'][cut - 1].strip())):
+            cut -= 1
+        label = 'D_%08X' % items[1][1]
+        out.append(dict(name=obj['name'], addr=obj['addr'],
+                        lines=obj['lines'][:cut] + ['enddlabel ' + obj['name']]))
+        tail = obj['lines'][cut:boundary] + ['dlabel ' + label] + obj['lines'][boundary:]
+        tail[-1] = 'enddlabel ' + label
+        out.append(dict(name=label, addr=items[1][1], lines=tail))
+        recognized.add(items[1][1])
+    if boundaries is not None and recognized != set(boundaries):
+        raise ValueError('rodata type boundary is not a complete string/type split: %s' %
+                         ', '.join(hex(a) for a in sorted(set(boundaries) - recognized)))
+    return out
+
+
 DIRECTIVE = re.compile(r'\*/\s+(\.\w+)')
 IMPLIED = {'.short': 1, '.half': 1, '.word': 2, '.float': 2, '.dword': 3, '.double': 3, '.quad': 3}   # log2; gas aligns these
 
@@ -191,6 +243,30 @@ def build_runs(units, owners):
     return runs
 
 
+def shared_exception_owners(live_units, objects, starts):
+    """Opt into one compiler table only when all handlers belong to that live unit."""
+    by_address = {obj['addr']: obj for obj in objects}
+    selected = {}
+    for unit in live_units:
+        source = {int(f['addr'], 0) if isinstance(f['addr'], str) else f['addr']
+                  for f in unit.get('functions', []) if f.get('status') == 'source'}
+        if not source:
+            continue
+        for value in unit.get('shared_exception_tables', []):
+            address = int(value, 0) if isinstance(value, str) else value
+            if address in selected or address not in by_address:
+                raise ValueError('shared exception table needs a unique original object boundary')
+            targets = {int(match.group(1), 16) for line in by_address[address]['lines']
+                       for match in CODE_REF.finditer(line)}
+            if not targets or any(target < starts[0] for target in targets):
+                raise ValueError('shared exception table has no valid code targets')
+            functions = {starts[bisect.bisect_right(starts, target) - 1] for target in targets}
+            if not functions <= source:
+                raise ValueError('shared exception table crosses its exact source unit')
+            selected[address] = min(functions)
+    return selected
+
+
 def main():
     slug = sys.argv[1]
     work = sys.argv[2] if len(sys.argv) > 2 else slug   # the asm/ and build/ directory names
@@ -200,6 +276,11 @@ def main():
     src = build / 's'
     asm = ROOT / 'asm' / work
     secinfo = {s['name']: s for s in layout['sections'] if s['source'] == 'linked'}
+    live_units = load_units(variant=slug)
+    explicit_data = source_ranges(live_units)
+    literal_boundaries = {int(a, 0) if isinstance(a, str) else int(a)
+                          for u in live_units if any(f.get('status') == 'source' for f in u['functions'])
+                          for a in u.get('rodata_type_splits', [])}
 
     # ---- functions
     raw = (asm / 'text.s').read_text().split('\n')
@@ -235,6 +316,7 @@ def main():
                     return None
 
             objs = split_scalar_type_tails(objs, literal_at)
+            objs = split_literal_type_tails(objs, literal_at, literal_boundaries)
         units_by_sec[sec] = [u for o in objs for u in pieces(o)]
         all_objs[sec] = objs
     obj_starts = {sec: [o['addr'] for o in objs] for sec, objs in all_objs.items()}
@@ -277,6 +359,8 @@ def main():
                 k = find_obj(a)
                 if k and k != own:
                     dataref.add(k)
+    # Shared compiler tables require explicit whole-unit ownership.
+    shared_eh = shared_exception_owners(live_units, all_objs['.gcc_except_table'], starts)
     # ownership
     stats, owner_of_obj, reasons = {}, {}, {}
     for sec in MIGRATED:
@@ -286,7 +370,9 @@ def main():
             if sec == '.gcc_except_table':
                 targets = {int(m.group(1), 16) for l in o['lines'] for m in CODE_REF.finditer(l)}
                 fs = {starts[bisect.bisect_right(starts, t) - 1] for t in targets}
-                if len(fs) == 1:
+                if o['addr'] in shared_eh:
+                    owner = shared_eh[o['addr']]
+                elif len(fs) == 1:
                     owner = fs.pop()
             elif k in refs and len(refs[k]) == 1 and k not in dataref:
                 owner = next(iter(refs[k]))
@@ -322,6 +408,11 @@ def main():
                 break
         final[sec] = runs
 
+    # Explicit read-only storage replaces a complete labeled interval. Partition
+    # before attaching inferred runs to functions so neither copy survives twice.
+    final['.rodata'] = partition_constant_runs(final['.rodata'], '.rodata',
+        *sec_range['.rodata'], explicit_data, obj_starts['.rodata'])
+
     # ---- write objects
     placement = dict(objects={}, sections={s: [] for s in ('.text', '.vutext', '.data', '.vudata', '.rodata',
                                                              '.gcc_except_table', '.lit4', '.sdata', '.sbss', '.bss')},
@@ -340,7 +431,10 @@ def main():
                     body += u['lines']
                 write_if_changed(src / (oname + '.s'), '\n'.join(body) + '\n')
                 placement['objects'][oname] = dict(src='build/%s/s/%s.s' % (work, oname), kind='asm')
-                placement['sections'][sec].append(dict(obj=oname, sec='%s.%08X' % (sec, r['head']), key=r['head']))
+                entry = dict(obj=oname, sec='%s.%08X' % (sec, r['head']), key=r['head'])
+                if r.get('explicit_range'):
+                    entry['end'] = r['explicit_range']['end']
+                placement['sections'][sec].append(entry)
             else:
                 fname = next(f[0] for f in funcs if f[1] == r['owner'])
                 placement['sections'][sec].append(dict(obj='text/' + fname + ('.lit4' if sec == '.lit4' else ''),
@@ -384,6 +478,23 @@ def main():
         oname = 'data/' + p.stem
         text = p.read_text()
         m = re.search(r'^\.section (\.[\w.]+)', text, re.M)
+        info = secinfo[sec]
+        unwind = None
+        if sec == '.data' and any(r['section'] == sec and r['kind'] == 'unwind' for r in explicit_data):
+            section = image.section(sec)
+            text_section = image.section('.text')
+            unwind = unwind_groups(image.content(section), section['addr'], text_section['addr'],
+                                   text_section['addr'] + text_section['size'])
+        fragments = carve_ranges(text, sec, info['addr'], info['addr'] + info['orig_size'], explicit_data, unwind)
+        if fragments is not None:
+            for fragment in fragments:
+                name = oname + '.%08X' % fragment['start']
+                path = src / (name + '.s')
+                write_if_changed(path, fragment['text'])
+                placement['objects'][name] = dict(src=path.relative_to(ROOT).as_posix(), kind='asm')
+                placement['sections'][sec].append(dict(obj=name, sec=m.group(1),
+                                                       key=fragment['start'], end=fragment['end']))
+            continue
         placement['objects'][oname] = dict(src=p.relative_to(ROOT).as_posix(), kind='asm')
         placement['sections'][sec].append(dict(obj=oname, sec=m.group(1)))
     # statistics: constant bytes migrated per section
@@ -402,12 +513,16 @@ def main():
         why = {}
         for i, o in enumerate(objs):
             size = (objs[i + 1]['addr'] if i + 1 < len(objs) else hi) - o['addr']
-            r = reasons[(sec, o['name'])]
-            if r == 'owned' and owners.get(o['name']) is None:
+            explicit = next((r for r in explicit_data if r['section'] == sec
+                             and r['start'] <= o['addr'] < r['end']), None)
+            r = 'explicit source range' if explicit else reasons[(sec, o['name'])]
+            if not explicit and r == 'owned' and owners.get(o['name']) is None:
                 r = 'owner run lost'
             why[r] = why.get(r, 0) + size
+        explicit_bytes = sum(r['end'] - r['start'] for r in explicit_data if r['section'] == sec)
         stats[sec] = dict(why=why, total=total, migrated=moved, functions=sum(1 for o in func_runs.values() if sec in o),
-                          shared_runs=sum(1 for r in final[sec] if r['owner'] is None))
+                          explicit_source=explicit_bytes,
+                          shared_runs=sum(1 for r in final[sec] if r['owner'] is None and not r.get('explicit_range')))
     placement['stats'] = stats
     # every global label with its address, for resolving external references of compiled code
     lab = re.compile(r'^\s*(?:glabel|jlabel|alabel|dlabel|ehlabel)\s+(\S+)')
@@ -421,13 +536,17 @@ def main():
         if ln.strip():
             n, a = ln.split()
             labels_out.setdefault(int(a, 16), n)
+    for item in explicit_data:
+        if item['kind'] == 'unwind':
+            for address in (item['start'], item['end']):
+                labels_out.setdefault(address, 'D_%08X' % address)
     (build / 'labels.json').write_text(json.dumps(sorted(labels_out.items())))
     (build / 'placement.json').write_text(json.dumps(placement, indent=1))
     for sec, v in stats.items():
         print(sec, 'by reason (bytes):', v['why'])
     print('%d functions, %d branches as raw words; migrated: %s' % (
-        len(funcs), nraw, ', '.join('%s %d/%d bytes (%d functions, %d shared runs)' % (
-            s, v['migrated'], v['total'], v['functions'], v['shared_runs']) for s, v in stats.items())))
+        len(funcs), nraw, ', '.join('%s %d/%d inferred bytes, %d explicit source bytes (%d functions, %d shared runs)' % (
+            s, v['migrated'], v['total'], v['explicit_source'], v['functions'], v['shared_runs']) for s, v in stats.items())))
 
 
 if __name__ == '__main__':

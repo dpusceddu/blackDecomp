@@ -5,6 +5,10 @@ The SN assembler does not keep local symbols in front of the global ones in `.sy
 section symbols. Mainline ld rejects both ("local symbol at index N >= sh_info"). The symbol table is stably
 reordered, locals first, the symbol indices of every relocation entry are renumbered, and sh_info is set. No code,
 data or relocation type/offset changes; symbol names, values and bindings are unchanged.
+
+The separate discarded-input helpers retain original assembly bindings. Kept
+absolute function-entry pointers may use an existing global symbol instead of a
+local section symbol; the final linked address is unchanged.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -49,7 +53,10 @@ def normalize_object(data):
 def undefine_dropped(data, keep):
     """Make the global symbols defined in sections the link will not place undefined, so that they resolve to the
     original definitions elsewhere in the image (vtables, unwind data and other duplicates a compiled unit emits).
-    `keep` is the set of section names that will be linked; only allocated sections outside it are dropped."""
+    Kept absolute pointers to a dropped function's entry use its existing global
+    symbol instead of a local section symbol. Interior or ambiguous references
+    remain unresolved. `keep` names linked sections; only allocated inputs drop.
+    """
     shoff, = struct.unpack_from('<I', data, 32)
     shentsize, shnum, shstrndx = struct.unpack_from('<HHH', data, 46)
     out = bytearray(data)
@@ -61,6 +68,34 @@ def undefine_dropped(data, keep):
     for i, h in enumerate(hdrs):
         if h[1] != 2:
             continue
+        symbols = [struct.unpack_from('<IIIBBH', data, h[4] + k * 16)
+                   for k in range(h[5] // 16)]
+        entries = {}
+        for k, (symbol_name, value, size, info, _, shndx) in enumerate(symbols):
+            if symbol_name and shndx in dropped and info >> 4 in (1, 2) and info & 15 == 2 and size:
+                entries.setdefault((shndx, value), []).append(k)
+        for rel in hdrs:
+            if rel[1] != 9 or rel[6] != i or name(rel[7]) not in keep:
+                continue
+            target = hdrs[rel[7]]
+            if target[1] != 1:
+                continue
+            for offset in range(rel[4], rel[4] + rel[5], 8):
+                at, info = struct.unpack_from('<II', data, offset)
+                if info & 255 != 2 or at + 4 > target[5]:  # R_MIPS_32, backed by bytes
+                    continue
+                symbol = symbols[info >> 8]
+                if symbol[3] >> 4 != 0 or symbol[3] & 15 != 3 or symbol[5] not in dropped:  # local STT_SECTION
+                    continue
+                addend, = struct.unpack_from('<I', data, target[4] + at)
+                entry = symbol[1] + addend
+                candidates = entries.get((symbol[5], entry), [])
+                if len(candidates) != 1:
+                    continue
+                # The same entry address is now global_function + zero. This
+                # permits native FDEs for assembly-backed context functions.
+                struct.pack_into('<I', out, offset + 4, candidates[0] << 8 | 2)
+                struct.pack_into('<I', out, target[4] + at, 0)
         for k in range(h[5] // 16):
             o = h[4] + k * 16
             n, value, size, info, other, shndx = struct.unpack_from('<IIIBBH', data, o)
@@ -68,6 +103,22 @@ def undefine_dropped(data, keep):
                 struct.pack_into('<IIIBBH', out, o, n, 0, 0, 0x10 | (info & 0xF), other, 0)   # global: weak undefined would link as 0
                 count += 1
     return bytes(out), count
+
+
+def unplaced_allocated_sections(data, keep):
+    """Name allocated inputs that must miss the linker's sorted wildcards.
+
+    Undefining a discarded function's symbol alone does not remove its bytes:
+    an unchanged .text.* input still matches SORT_BY_NAME(.text.*). Rename all
+    unplaced allocated sections to a namespace handled only by /DISCARD/.
+    """
+    shoff, = struct.unpack_from('<I', data, 32)
+    shentsize, shnum, shstrndx = struct.unpack_from('<HHH', data, 46)
+    headers = [struct.unpack_from('<IIIIIIIIII', data, shoff + i * shentsize) for i in range(shnum)]
+    strings = data[headers[shstrndx][4]:headers[shstrndx][4] + headers[shstrndx][5]]
+    names = [strings[h[0]:].split(b'\0', 1)[0].decode() for h in headers]
+    return {name: '.discard.source.%d' % i for i, (name, h) in enumerate(zip(names, headers))
+            if i and h[2] & 2 and name not in keep}
 
 
 def trim_sections(data, sizes):

@@ -52,6 +52,93 @@ python3 tools/autodecomp.py report [--max-size N]         # outcome classes, fai
 python3 tools/next.py [near|types|families|data|ee]       # best next work
 ```
 
+For sustained search, use the durable worker service rather than the short legacy
+`permute` command:
+
+```sh
+.venv/bin/python tools/permuter_service.py start --hours-per-function 2 --total-hours 10
+.venv/bin/python tools/permuter_service.py status
+.venv/bin/python tools/permuter_service.py fetch
+.venv/bin/python tools/permuter_service.py enqueue 0xADDRESS build/candidate.c --flags -O2 -G0 -snas
+.venv/bin/python tools/permuter_service.py stop
+```
+
+For verified named imports, pass repeatable `--binding SYMBOL=ADDRESS` before `--flags`.
+This preserves compiler recognition of names such as `sqrtf`; the same addresses are
+used when scoring the seed, restored checkpoints and randomized candidates. Unknown
+or wrong bindings remain mismatches.
+
+The detached container has no network and a read-only toolchain catalog;
+only its named `/work` volume persists. Restart with the same `--name` to resume
+checkpoints; budgets are cumulative, so increase them to extend an exhausted run.
+`fetch` exports every checkpoint and best source to `build/permuter/<name>/`.
+Inspect those results before hand work on a TU. New submissions are checkpointed
+during search and scheduled between functions; a stopped service accepts them
+for its next start. Submitted text is parser-checked immediately, and its local
+receipt stays under `build/permuter/<name>/submissions/`.
+
+For C++/EE syntax the parser cannot read, pass `--parser-source build/parser.c`
+before `--flags`. Keep the original compiler-ready source as the positional input;
+the override can use upstream `PERM_IGNORE`/`PERM_PRETEND` around types, helpers,
+signatures and asm. Both original and restored candidates are compiled/scored.
+Checkpoints retain `best.c`, its `best.o` and object hash, plus the raw parser AST
+as `best.permuter.c`; this preserves ignored C++ text across hill climbs/restarts.
+A newly submitted larger candidate preempts smaller work at a checkpoint without
+resetting the smaller function's RNG, best result or elapsed budget.
+Accepted submissions replay after restart; functions since integrated by hand
+are retired from search. `permuter_wins` retains raw nonzero-to-exact candidates
+even after their functions leave the queue; already-exact controls do not count.
+Report reviewed, full-image wins separately: a raw candidate can fail source review.
+
+Use `start --lanes 2` or `--lanes 3` for disjoint searches in the same isolated container;
+the existing two-CPU/two-GiB cap stays unchanged. One worker supervisor assigns
+the globally largest available functions, keeps each key exclusive, and gives
+each lane a separate compiler directory. A larger submission can displace the
+smallest active function after its checkpoint. Default concurrency is one.
+`--end-at` accepts an ISO timestamp with an explicit timezone and caps the run
+at that absolute deadline. Lane count and deadline persist on restart; the
+primary cumulative budget, per-function elapsed time, RNG and best object remain.
+Status separates cumulative container wall time, per-lane wall time since lane
+accounting began, and retained function search time. None is CPU accounting.
+The `candidates` total sums current seed attempts, including rejected mutations;
+replacing a seed resets that function's attempt count, so it is not a lifetime
+compiler-call total. Cumulative elapsed time remains the service budget measure.
+
+The queue includes all saved drafts with **1–29 differing instructions**, including
+legacy `mismatch` records, excludes current exact-source functions, and orders by
+largest code size first, then closeness. It recompiles each baseline before search.
+This count comes from the relocation-aware pipeline scorer; the permuter's weighted
+score and the old `1000 + 100*d + hamming` value are not instruction counts.
+Parser failures (including unsupported C++, EE types or headers) remain explicit
+queue records rather than disappearing. The GCC randomizer emphasizes temporary
+lifetimes and declaration/statement order, combines short mutations with longer
+jumps, and periodically restarts from the original source. Its seed, RNG state,
+source/context hash, elapsed budget and best source survive restart. External ABI
+type mutations, artificial identical conditional arms, empty statements and
+constant-condition wrappers are disabled. Search improvements and even zero-difference candidates
+are leads until settlement and the full identical build accept them.
+The target return/parameter declarator is checked against the submitted baseline
+before compilation; local type mutations can otherwise reach parameters in the upstream
+randomizer. A saved best with interface drift is archived and rebased without resetting
+its RNG, attempts, elapsed time or deadline. Local mutations still require semantic review.
+An opaque initial source block stays before executable mutations; only uninitialized
+declarations without VLA bounds or type-side evaluations may precede it. Parser-only
+views of its values must model their initialized state, rather than invent uninitialized locals.
+For a reviewed improved seed, `enqueue --preserve-search-accounting` archives the
+previous source, object and checkpoint, validates the new baseline, and retains
+the function's attempts, RNG and elapsed budget. The global deadline is unchanged.
+Without this option, a changed seed starts a new per-function budget as before.
+For a reviewed seed, repeat `enqueue --disable-randomizer NAME` before `--flags`
+to exclude an upstream transform from that candidate alone. For example,
+`--disable-randomizer perm_split_assignment` freezes that transformation while
+other lifetime/declaration passes remain available. The setting is part of the saved seed hash;
+unknown names fail before submission. Other keys keep their own search settings.
+For native-width-sensitive seeds, `--typed-temporaries` retains inferred expression
+types in new temporaries, disables speculative reuse of existing variables, and
+excludes local type randomization and simple cast insertion. Genuine temporary,
+declaration and lifetime transforms remain enabled. This per-seed mode survives
+restart; it narrows the search and does not replace native load-width or semantic review.
+
 Per function: (1) m2c on its `.s` (plus the sibling `.lit4.s`), with the recovered whole-callgraph context (`ctx.c`);
 `ctx2.c` and `ctx3.c` retain scalar/pointer fallback variants; `ctx_void.c` tests unresolved scalar returns as void; (2) mechanical cleaning: missing leading parameters, K&R
 declarations for callees, function-pointer globals, strings the function owns turned back into literals; (3) compile as

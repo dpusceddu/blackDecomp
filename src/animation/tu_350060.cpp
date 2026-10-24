@@ -29,16 +29,8 @@ void AnimationParameterBank_Copy(AnimationParameterBank *bank, const AnimationPa
     }
 }
 
-float *AnimationParameterBank_At(AnimationParameterBank *bank, unsigned int index)
-    ANIMATION_FUNCTION(00350130);
-float *AnimationParameterBank_At(AnimationParameterBank *bank, unsigned int index) {
-    return (float *)(bank->slots + index);
-}
-
-#ifdef NONMATCHING
-// Unmatched: assembler inserts two branch hazard NOPs inside the loop; PS2 has one.
 float *AnimationParameterBank_GrowAt(AnimationParameterBank *bank, unsigned int index)
-    __asm__("func_003500E0");
+    ANIMATION_FUNCTION(003500E0);
 float *AnimationParameterBank_GrowAt(AnimationParameterBank *bank, unsigned int index) {
     unsigned int required = index + 1;
     for (unsigned int i = bank->count; i < required; ++i)
@@ -47,4 +39,9 @@ float *AnimationParameterBank_GrowAt(AnimationParameterBank *bank, unsigned int 
         bank->count = required;
     return (float *)(bank->slots + index);
 }
-#endif
+
+float *AnimationParameterBank_At(AnimationParameterBank *bank, unsigned int index)
+    ANIMATION_FUNCTION(00350130);
+float *AnimationParameterBank_At(AnimationParameterBank *bank, unsigned int index) {
+    return (float *)(bank->slots + index);
+}

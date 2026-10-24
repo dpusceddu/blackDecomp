@@ -6,11 +6,13 @@ namespace BehaviorCampaign {
 struct Vec3 {
     float x,y,z;
     Vec3() {}
+    Vec3(float a,float b,float c) : x(a), y(b), z(c) {}
     Vec3(const Vec3& q) : x(q.x), y(q.y), z(q.z) {}
     Vec3& operator=(const Vec3& p) { x=p.x;y=p.y;z=p.z;return *this; }
-    Vec3 operator*(float scale) const { Vec3 p; p.x=x*scale;p.y=y*scale;p.z=z*scale;return p; }
-    Vec3 operator+(const Vec3& q) const { Vec3 p;p.x=x+q.x;p.y=y+q.y;p.z=z+q.z;return p; }
-    int operator==(const Vec3& q) const { return x==q.x && y==q.y && z==q.z; }
+    Vec3 operator*(float scale) const { return Vec3(scale*x,scale*y,scale*z); }
+    Vec3 operator+(const Vec3& q) const { return Vec3(x+q.x,y+q.y,z+q.z); }
+    // The original comparison typedef is unknown; this narrow result is always zero or one.
+    short operator==(const Vec3& q) const { return x==q.x && y==q.y && z==q.z; }
 };
 struct ChildBuffers { const char* GetSecond() const __asm__("func_002E3920"); const char* GetValue() const __asm__("func_002E3918"); };
 struct NameTable { int FindName(const char*) __asm__("func_002E93B8"); };

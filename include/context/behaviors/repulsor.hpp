@@ -36,7 +36,7 @@ struct Steering : Object {
     void PublishMove(Movement* move) __asm__("func_00306688");
     unsigned char SelectDirection(const Vec3* goal) __asm__("func_00305FD8");
     unsigned char PredictContacts(const Vec3* goal) __asm__("func_003059F0");
-    unsigned char SteeringContactTimes(const Vec3* velocity,const Vec3& displacement,
+    unsigned char SteeringContactTimes(const Vec3* velocity,Vec3 displacement,
         const float* radius,float* first,float* last) __asm__("func_00306538");
 };
 

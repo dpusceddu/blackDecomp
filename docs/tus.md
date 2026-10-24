@@ -44,6 +44,8 @@ What the executable shows (USA retail):
   16-byte slots, in three solid blocks (`0x28fab0-0x2a5038`, `0x355278-0x35c308`, `0x367e28-0x372d68`: Sony's precompiled libraries).
   The catalog compiler `ee-gcc2.9-991111-01 -O2 -G0` (no `-snas`) emits exactly that style: 36 of the functions of these blocks match
   with it and none matches with SN 1.36. `ee-gcc2.95.3-114`, `ee-gcc2.95.2-273a` and the 2.96 build match nothing more than SN 1.36 does.
+  A later scoped scalar-leaf control at `0x3484d0` matches Sony 2.9 and 2.96 defaults because of their divide workaround;
+  the larger methods in that TU still require SN 1.36, so this does not establish a new compiler zone.
   `-O1` (127 functions), `-G8` (22) and `-fno-schedule-insns2` (16) match in scattered TUs and need no zone of their own.
 - **Libraries** (strings, style, frames; `libraries:` in `tus.yaml`; edges between libraries are certain only where a style or frame
   change marks them). Game code `0x100338-0x28fab0`, containing the EA Apt/Flash UI `0x218000-0x258000` and the Sony video decoder

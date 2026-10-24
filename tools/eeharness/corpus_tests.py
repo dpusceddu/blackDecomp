@@ -4,6 +4,7 @@ from pathlib import Path
 import struct
 import tempfile
 import unittest
+from unittest.mock import patch
 from types import SimpleNamespace
 
 import corpus
@@ -11,6 +12,33 @@ import phase2
 
 
 class CorpusTests(unittest.TestCase):
+    def test_natural_only_capture_needs_no_catalog_or_mutation_inputs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            prefix = Path(directory)/'capture'
+            missing = Path(directory)/'missing-catalog.json'
+            self.assertIsNone(phase2.capture_catalog(0,missing))
+            with self.assertRaises(FileNotFoundError):
+                phase2.capture_catalog(1,missing)
+            # A prior positive run must not leak mutations into a zero-fuzz replay.
+            prefix.with_suffix('.fuzz.txt').write_text('stale mutation\n')
+            with patch.object(corpus,'make_fuzz',side_effect=AssertionError('typed fuzz was called')):
+                self.assertEqual(phase2.capture_fuzz(0,prefix,None,None),[])
+            self.assertEqual(prefix.with_suffix('.fuzz.txt').read_text(),'')
+
+    def test_positive_capture_keeps_catalog_and_typed_fuzz_contract(self):
+        import json
+        with tempfile.TemporaryDirectory() as directory:
+            prefix = Path(directory)/'capture'
+            path = Path(directory)/'catalog.json'
+            catalog = {'classes':[]}
+            path.write_text(json.dumps(catalog))
+            self.assertEqual(phase2.capture_catalog(2,path),catalog)
+            snapshot = SimpleNamespace(regions={'eeMemory.bin':b'ram'})
+            with patch.object(corpus,'make_fuzz',return_value=['typed case']) as generate:
+                self.assertEqual(phase2.capture_fuzz(2,prefix,snapshot,catalog),['typed case'])
+            generate.assert_called_once_with(prefix.with_suffix('.eec'),b'ram',catalog,
+                                             prefix.with_suffix('.fuzz'),2)
+
     def test_live_state_virtual_call_contract(self):
         ram = bytearray(2*1024*1024)
         struct.pack_into('<I',ram,0x100000+0x21070,0x180000)

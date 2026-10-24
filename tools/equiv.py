@@ -112,6 +112,27 @@ def bindings():
     return result
 
 
+def reference_gp(elf):
+    """Keep overlay GPREL relocations relative to the running reference image."""
+    section = elf.section('.reginfo')
+    if section is None or section['type'] != 0x70000006:
+        raise ValueError('reference ELF needs MIPS .reginfo for its original GP')
+    data = elf.content(section)
+    if len(data) != 24:
+        raise ValueError('reference ELF has invalid MIPS .reginfo size')
+    gp = struct.unpack_from('<I', data, 20)[0]
+    if not gp:
+        raise ValueError('reference ELF has no original GP')
+    return gp
+
+
+def overlay_linker_script(symbol, section, undefined, resolved, gp):
+    """Bind original data/callees and GP while placing candidate code elsewhere."""
+    script = '\n'.join(f'{name} = 0x{resolved[name]:x};' for name in sorted(set(undefined)))
+    script += f'\n_gp = 0x{gp:x};\nENTRY({symbol})\nSECTIONS {{\n . = 0x08000000;\n .text : {{ input.o({section}) }}\n'
+    return script + ' .rodata : { input.o(.rodata .rodata.* .lit4 .lit4.*) }\n /DISCARD/ : { *(*) }\n}\n'
+
+
 def prepare(plan, output):
     """Compile each source once, then link only the chosen body plus constants.
 
@@ -119,6 +140,7 @@ def prepare(plan, output):
     out-of-line helpers or writable candidate storage fail linking/validation.
     """
     names = bindings()
+    gp = reference_gp(Elf((ROOT/'orig/usa-retail/files/SLUS_213.76').read_bytes()))
     compiled, results = {},[]
     for row in plan:
         row = dict(row)
@@ -174,9 +196,7 @@ def prepare(plan, output):
         if unknown:
             row['prepare_error']='unknown original bindings: '+', '.join(unknown)
             results.append(row);continue
-        script = '\n'.join(f'{name} = 0x{resolved[name]:x};' for name in sorted(set(undefined)))
-        script += f'\nENTRY({row["symbol"]})\nSECTIONS {{\n . = 0x08000000;\n .text : {{ input.o({section["name"]}) }}\n'
-        script += ' .rodata : { input.o(.rodata .rodata.* .lit4 .lit4.*) }\n /DISCARD/ : { *(*) }\n}\n'
+        script = overlay_linker_script(row['symbol'], section['name'], undefined, resolved, gp)
         stem.with_suffix('.ld').write_text(script)
         row.update(object=str(stem.with_suffix('.o').relative_to(ROOT)),linker=str(stem.with_suffix('.ld').relative_to(ROOT)),
                    elf=str(stem.with_suffix('.elf').relative_to(ROOT)),candidate=0x08000000+symbol['value'],candidate_size=symbol['size'])
@@ -342,7 +362,8 @@ def main():
     parser.add_argument('--claim-only',action='store_true')
     parser.add_argument('--record-evidence',action='store_true',help='write qualifying evidence through the units serializer')
     args=parser.parse_args()
-    if not args.output.resolve().is_relative_to(ROOT/'build') or args.coverage<.9 or args.coverage>1 or args.budget<1 or args.jobs<1:
+    args.output=args.output.resolve()
+    if not args.output.is_relative_to(ROOT/'build') or args.coverage<.9 or args.coverage>1 or args.budget<1 or args.jobs<1:
         parser.error('use ignored build output, positive budgets/jobs and coverage >= 0.9')
     args.output.mkdir(parents=True,exist_ok=True)
     plan=json.loads(args.plan.read_text())

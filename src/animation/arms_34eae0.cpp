@@ -1,7 +1,7 @@
 #include "mod/arms/playback.hpp"
 namespace ArmsAnimation {
 static inline float Minimum(float a,float b){float out;asm("min.s %0,%1,%2":"=f"(out):"f"(a),"f"(b));return out;}
-// Unmatched: Reset member initialization store scheduling differs.
+// Unmatched: Reset has three scalar-store scheduling differences; the best draft is in nonmatching/tu_34eae0_reset.c.
 #ifndef MOD_ARMS_EVALUATE_ONLY
 float Playback::ChangedSpan(float span,float old,float coordinate,AnimationGraphNode* node,AnimationParameters* bank,unsigned options) {
     if(span!=old) {
@@ -86,5 +86,5 @@ Pose* Playback::Evaluate(Pose* optional_pose) {
     return pose;
 }
 #endif
-// Unmatched: EvaluateHeader shifted flag lifetime across scratch reset differs.
+// Unmatched: EvaluateHeader combine removes the accumulator-to-argument copy; the best draft is in nonmatching/tu_34eae0_evaluate_header.c.
 }

@@ -7,8 +7,10 @@ The script runs as `python3` in the container with the private toolchain catalog
 `-readelf`, `-objdump`, ...); the EE assembler is /toolchains/compilers/ee-gcc2.96/ee/bin/as. Each --file is copied to /work/NAME first (read it from the script);
 each --out copies /work/NAME back to PATH afterwards. The script's stdout/stderr are relayed. The
 network is disabled; nothing persists. Reads .local/config.json (private).
+The service_request() API provides detached jobs with the same isolation and a
+durable named /work volume; tools/permuter_service.py owns that lifecycle.
 """
-import argparse, base64, json, shlex, subprocess, sys, uuid
+import argparse, base64, json, re, shlex, subprocess, sys, uuid
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,6 +32,11 @@ for n in req['out']:
 print(json.dumps(dict(rc=p.returncode, out=p.stdout.decode('utf8', 'replace'),
                       err=p.stderr.decode('utf8', 'replace'), artifacts=art)))
 '''
+
+
+def service_request(action, name, *, files=None, script=None, timeout=180):
+    """Detached search jobs need a build backend that provides them."""
+    raise SystemExit('Detached search jobs need a build backend that provides them.')
 
 
 def run_batch(request):
