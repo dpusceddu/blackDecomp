@@ -9,11 +9,10 @@ added after the file's #include lines); then run `ninja` and compare in objdiff 
 A function that already has a draft in an `#ifdef NON_MATCHING` block is replaced as a whole. --raw prints m2c's own output
 without the cleaning, which is also what you get when the cleaning gives up (the reason is printed).
 Needs one finished `ninja` (the per-function assembly under asm/) and `pip install -r requirements.txt` (m2c). The first
-run recovers the context from the committed headers and configuration (about a minute; it works on a fresh checkout, private
-Ghidra snapshots under .local/ only add leads) and writes it to the ignored build/auto/; later runs reuse build/auto/ctx.c.
-`python3 tools/autodecomp.py context --refresh` renews it after shared headers change. The only tracked file this tool ever
-changes is the translation unit file named by --write; the committed headers under include/ are never regenerated here
-(that is the maintainer-only `python3 tools/context_recovery.py --write-headers`).
+run recovers the context from the committed headers and configuration (about a minute; it works on a fresh checkout) and
+writes it to the ignored build/auto/; later runs reuse build/auto/ctx.c. `python3 tools/autodecomp.py context --refresh` renews
+it after shared headers change. The only tracked file this tool ever changes is the translation unit file named by --write;
+the committed headers under include/ are hand-maintained source and are never rewritten here.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):

@@ -87,8 +87,6 @@ Every tool answers `--help`. One-line purposes are taken from each tool's docstr
 | `tools/layout.py` | Source layout rules: which library directory and which file name a source unit gets (src/<library>/<name>.c\|cpp). |
 | `tools/class_skeletons.py` | Generate conservative GCC 2.95 PS2 class interfaces from RTTI and vtables. |
 | `tools/rtti_evidence.py` | Recover legacy GCC RTTI initialization evidence without executing target code. |
-| `tools/ghidra_export.py` | Export the names Ghidra knows for /SLUS_213.76 into config/symbols.txt, and reconcile Ghidra with splat. Maintainer only: needs private Ghidra exports; a headless Ghidra script is a possible future improvement. |
-| `tools/ghidra_types.py` | Write include/types_ghidra.h: the data types and function signatures of the Ghidra program /SLUS_213.76 as C, for the m2c context and for the compile context of the automatically drafted sources. Maintainer only: needs private Ghidra exports; a headless Ghidra script is a possible future improvement. |
 | `tools/symbols.py` | Dump symbols and debug data from every ELF kept under orig/ and estimate transfer to USA retail. |
 | `tools/discs.py` | Phase 0: unpack each disc image one at a time and keep only executables and debug candidates. |
 | `tools/iso.py` | Minimal ISO 9660 reader for plain ISO (2048) and raw CD images (MODE1/MODE2, 2352). |

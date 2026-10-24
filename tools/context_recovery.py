@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """Recover PS2 call and layout constraints; never execute target tools on the host.
 
-The ignored build/auto/context.json keeps conflicting evidence and unproved leads. By default (and for every contributor
-tool) the recovery only writes ignored files under build/auto/; the committed headers under include/ stay as they are.
-`--write-headers` regenerates them and is for maintainers with the private Ghidra data.
-Generated headers are PS2 access views, not claims about allocation size or C++ inheritance.
-Only a source function which actually accesses a generated view can verify that view.
+The ignored build/auto/context.json keeps conflicting evidence and unproved leads. The recovery only writes ignored files
+under build/auto/ (the m2c context); the committed headers under include/ are hand-maintained source and are never touched.
+The access views in include/<library>/layouts/ are PS2 access views, not claims about allocation size or C++ inheritance.
+Only a source function which actually accesses a view can verify that view.
 """
 import argparse
 import collections
@@ -180,7 +179,7 @@ class ScopedAliases:
         return SCALARS.get(text, 'unknown')
 
 
-def normalize_type(text, ghidra=False, aliases=None, scope=()):
+def normalize_type(text, aliases=None, scope=()):
     text = type_spelling(text)
     scalar_type = lambda name: aliases.scalar(name, scope) if aliases else SCALARS.get(name, 'unknown')
     if text in POINTER_ALIASES and scalar_type(text) == 'unknown':
@@ -190,7 +189,7 @@ def normalize_type(text, ghidra=False, aliases=None, scope=()):
         scalar = scalar_type(base)
         cls = base if re.fullmatch(r'[A-Za-z_]\w*(?:::\w+)*', base) and scalar == 'unknown' else None
         return (scalar + ' ' + '*' * max(1, text.count('*')) if scalar not in ('unknown', 'void') else 'void *'), cls
-    # Ghidra's data model is not SN's spelling: undefined8/longlong are eight bytes.
+    # Decompiler spellings differ from SN's: undefined8 and longlong are eight bytes.
     return scalar_type(text), None
 
 
@@ -720,22 +719,6 @@ def abi_slots(params):
     return out
 
 
-def ghidra_seeds(root=ROOT):
-    out = {}
-    p = root / '.local/ghidra/functions_named.json'
-    if not p.exists():
-        return out
-    for f in json.loads(p.read_text()).get('functions', []):
-        if f.get('isThunk') or f.get('isDefaultName') or f['returnType'] == 'undefined':
-            continue
-        ps = [normalize_type(x['dataType'], True) for x in f.get('parameters', [])]
-        ret, cls = normalize_type(f['returnType'], True)
-        out[int(f['address'], 16)] = dict(name=f['name'], params=ps, ret=ret, retclass=cls, cls=None,
-                                        quality=1, matched=False, raw=f['signature'], source='ghidra',
-                                        this_usage=bool(f.get('parameters') and f['parameters'][0].get('name') in ('this', 'self')))
-    return out
-
-
 def closed_leaf(f):
     """A small straight-line leaf whose live argument registers are fully observed.
 
@@ -1173,10 +1156,9 @@ def counterpart_dir(root=ROOT):
 
 def fingerprint(root=ROOT):
     h = hashlib.sha256()
-    paths = [Path(__file__), root / 'config/SLUS_213.76/splits.yaml', root / 'config/symbols.txt', root / 'build/SLUS_213.76/placement.json']
+    paths = [Path(__file__), root / 'config/SLUS_213.76/splits.yaml', root / 'build/SLUS_213.76/placement.json']
     paths += sorted((root / 'src').rglob('*.[ch]')) + sorted((root / 'src').rglob('*.cpp'))
     paths += sorted((root / 'include').rglob('*.h')) + sorted((root / 'include').rglob('*.hpp'))
-    paths += sorted((root / '.local/ghidra').glob('*.json'))
     other = counterpart_dir(root)
     paths += [other / 'xbox_ps2_map.json']
     paths += sorted((other / 'src').rglob('*.json'))
@@ -1187,8 +1169,8 @@ def fingerprint(root=ROOT):
     return h.hexdigest()
 
 
-def recover(inv=None, root=ROOT, refresh=False):
-    cache = root / 'build/auto/context.json'
+def recover(inv=None, root=ROOT, refresh=False, cache=None):
+    cache = Path(cache) if cache else root / 'build/auto/context.json'
     stamp = fingerprint(root)
     if not refresh and cache.exists():
         old = json.loads(cache.read_text())
@@ -1204,12 +1186,6 @@ def recover(inv=None, root=ROOT, refresh=False):
         if (index + 1) % 2000 == 0:
             print('context: analyzed %d/%d' % (index + 1, len(inv)), flush=True)
     seeds, conflicts = source_seeds(root)
-    ghidra = ghidra_seeds(root)
-    for a, s in ghidra.items():
-        if a not in seeds:
-            seeds[a] = s
-        elif (s['ret'], s['params']) != (seeds[a]['ret'], seeds[a]['params']):
-            conflicts.append(dict(addr=a, kind='ghidra-source-conflict', signatures=[s['raw'], seeds[a]['raw']]))
     signatures, links = recover_signatures(inv, analysis, seeds)
     layouts, vtables = recover_layouts(inv, analysis, seeds, signatures, root)
     views = collections.defaultdict(set)
@@ -1261,7 +1237,7 @@ def recover(inv=None, root=ROOT, refresh=False):
             layout['verified_by'] = verified[name]
     summary = dict(functions=len(inv), source_signatures=sum(bool(s.get('matched')) for s in seeds.values()),
                    ambiguous_cpp_signatures=sum(bool(s.get('abi_uncertainty')) for s in seeds.values()),
-                   ghidra_signatures=len(ghidra), direct_calls=sum(sum(k[1] is not None for k in a['calls']) for a in analysis.values()),
+                   direct_calls=sum(sum(k[1] is not None for k in a['calls']) for a in analysis.values()),
                    indirect_calls=sum(sum(k[1] is None for k in a['calls']) for a in analysis.values()),
                    propagated_links=len(links), signatures_with_conflicts=sum(bool(s['conflicts']) for s in signatures.values()),
                    unknown_arities=sum(s['arity'] is None for s in signatures.values()),
@@ -1277,20 +1253,6 @@ def recover(inv=None, root=ROOT, refresh=False):
     return result
 
 
-def required_layout_headers(root=ROOT):
-    """Inference names may change; exact source still owns its imported access view."""
-    from units import dependencies, load_units
-    required = set()
-    for unit in load_units(variant='SLUS_213.76'):
-        if not any(f.get('status') == 'source' for f in unit['functions']):
-            continue
-        for dependency in dependencies(unit['source']):
-            path = Path(dependency)
-            if path.parent.name == 'layouts' and path.stem.startswith('Recovered_'):
-                required.add(path.stem)
-    return required
-
-
 def write_build_context(result, root=None):
     """Write the m2c layout context, build/auto/recovered_layouts.c (ignored). This is all a contributor's tools need:
     the committed headers under include/ are never touched by it."""
@@ -1303,60 +1265,13 @@ def write_build_context(result, root=None):
     (auto / 'recovered_layouts.c').write_text('\n'.join(ctx) + '\n')
 
 
-def write_outputs(result, root=ROOT):
-    """MAINTAINER ONLY: rewrite the committed access views in include/<library>/layouts/ (library:
-    config/layout_libraries.json, default game), layouts.h and signatures.h from a recovery, which may come from private
-    Ghidra data. Only `context_recovery.py --write-headers` calls it; no contributor tool does."""
-    def view_file(name):
-        return root / 'include' / source_layout.view_include(name)
-    aggregate = root / 'include/game/layouts'
-    aggregate.mkdir(parents=True, exist_ok=True)
-    names = set(result['layouts'])
-    required = required_layout_headers(root)
-    # Only remove files this generator owns, never a hand-authored shared header.
-    for p in (root / 'include').glob('*/layouts/Recovered_*.h'):
-        if p.stem not in names | required and p.read_text().startswith('/* Generated by tools/context_recovery.py.'):
-            p.unlink()
-    all_headers = ['/* Generated by tools/context_recovery.py. PS2 access views; extent is not allocation size. */',
-                   '#ifndef RECOVERED_LAYOUTS_H', '#define RECOVERED_LAYOUTS_H']
-    for name, layout in sorted(result['layouts'].items()):
-        status = 'VERIFIED access view by ' + ', '.join('0x%X' % a for a in layout['verified_by']) if layout['verified_by'] else 'UNVERIFIED access view'
-        lines = ['/* Generated by tools/context_recovery.py. %s; allocation size unknown. */' % status,
-                 '#ifndef %s_H' % name.upper(), '#define %s_H' % name.upper(), '#include "ps2/prelude.h"', '']
-        lines += generated_layout_text(name, layout)
-        for f in layout['fields']:
-            lines.append('typedef char assert_%s_%X[(((int)&((%s *)0)->field_%X) == %d) ? 1 : -1];' % (name, f['offset'], name, f['offset'], f['offset']))
-        lines += ['#endif', '']
-        view_file(name).parent.mkdir(parents=True, exist_ok=True)
-        view_file(name).write_text('\n'.join(lines))
-        all_headers.append('#include "%s"' % source_layout.view_include(name))
-    for name in sorted(required - names):
-        if not view_file(name).exists():
-            raise ValueError('Exact source requires missing access view: ' + name)
-        all_headers.append('#include "%s"' % source_layout.view_include(name))
-    all_headers += ['#endif', '']
-    (aggregate / 'layouts.h').write_text('\n'.join(all_headers))
-    write_build_context(result, root)
-    compile_lines = ['/* Generated by tools/context_recovery.py. Constraints, not proof of source signatures. */',
-                     '#ifndef RECOVERED_SIGNATURES_H', '#define RECOVERED_SIGNATURES_H', '#include "ps2/prelude.h"', '#include "game/layouts/layouts.h"']
-    for _, row in sorted(result['signatures'].items(), key=lambda kv: int(kv[0])):
-        compile_lines.append('extern ' + prototype(row))
-    compile_lines += ['#endif', '']
-    (aggregate / 'signatures.h').write_text('\n'.join(compile_lines))
-
-
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--refresh', action='store_true')
     ap.add_argument('--report', action='store_true', help='report the recovery only, write nothing')
-    ap.add_argument('--write-headers', action='store_true',
-                    help='MAINTAINER ONLY: rewrite the committed access views and signatures under include/ from this '
-                         'recovery (which uses private Ghidra data when .local/ghidra exists); review the diff before committing')
     args = ap.parse_args()
     result = recover(refresh=args.refresh)
-    if args.write_headers:
-        write_outputs(result)
-    elif not args.report:
+    if not args.report:
         write_build_context(result)
     print(json.dumps(result['summary'], indent=2))
 

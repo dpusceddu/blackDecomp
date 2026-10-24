@@ -31,13 +31,9 @@ SECTIONS = [
         'shared_context.py', 'mod_context.py', 'context_recovery.py', 'permuter_service.py', 'permuter_worker.py',
         'permuter_lanes.py', 'compiler_dumps.py', 'equiv.py']),
     ('Analysis and metadata', [
-        'tus.py', 'layout.py', 'class_skeletons.py', 'rtti_evidence.py', 'ghidra_export.py', 'ghidra_types.py', 'symbols.py',
+        'tus.py', 'layout.py', 'class_skeletons.py', 'rtti_evidence.py', 'symbols.py',
         'discs.py', 'iso.py', 'inputs.py', 'elfinfo.py', 'objdump.py']),
 ]
-MAINTAINER_ONLY = {
-    'ghidra_export.py': 'Maintainer only: needs private Ghidra exports; a headless Ghidra script is a possible future improvement.',
-    'ghidra_types.py': 'Maintainer only: needs private Ghidra exports; a headless Ghidra script is a possible future improvement.',
-}
 NOTES = {
     'check_elf.py': 'Build check, run by `ninja`.',
     'diffelf.py': 'Convenience script; binutils `readelf` and `objdump` work too.',
@@ -70,7 +66,7 @@ def purpose(path):
 
 def row(rel, path):
     name = Path(rel).name
-    extra = MAINTAINER_ONLY.get(name) or NOTES.get(name)
+    extra = NOTES.get(name)
     text = purpose(path) + (' ' + extra if extra else '')
     return '| `tools/%s` | %s |' % (rel, text.replace('|', '\\|'))
 
