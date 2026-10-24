@@ -1,6 +1,6 @@
 /* Translation unit tu_1c22a0 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_001C2A48(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0x70002000;

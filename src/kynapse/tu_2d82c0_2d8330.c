@@ -1,6 +1,6 @@
 /* Translation unit kynapse/tu_2d82c0 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern s32 func_002DFEB0();
 extern M2C_UNK D_0044FB08;

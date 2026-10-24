@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_00407D08[];
 const char rodata_00407D08[48] __asm__("D_00407D08") __attribute__((aligned(8))) = "24FindNearestEdgeTraversal" "\000\000\000\000\000\000" "bad_alloc" "\000\000\000\000\000\000\000";

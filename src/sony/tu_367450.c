@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_00367450(void) {
     __asm__ volatile("li $3, 1\n\tsyscall");

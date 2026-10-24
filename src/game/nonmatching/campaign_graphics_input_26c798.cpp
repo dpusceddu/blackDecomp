@@ -1,4 +1,4 @@
-#include "campaign/graphics/pad_backend.hpp"
+#include "game/camera/pad_backend.hpp"
 // Unmatched: 27 instruction differences after native layout, argument-bank and helper probes.
 extern "C" {
 void *func_0035C6EC(void *,int,unsigned int);

@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #ifdef NONMATCHING
 // Unmatched: combine folds the header-bit OR into a3, omitting the original accumulator-to-argument copy (three differences).

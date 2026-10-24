@@ -1,6 +1,6 @@
 // Unmatched: state fallthrough scheduling and register allocation.
 #if 0
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "game/frontend/save_dialog.hpp"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"

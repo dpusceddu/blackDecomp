@@ -1,4 +1,4 @@
-#include "campaign/graph/search_workspace.hpp"
+#include "kynapse/graph/search_workspace.hpp"
 
 namespace KaimSearch {
 void FreeSearch()

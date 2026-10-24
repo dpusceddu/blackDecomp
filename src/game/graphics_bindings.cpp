@@ -1,4 +1,4 @@
-#include "classes/other/UnknownVtable_003E0EB8.hpp"
+#include "game/classes/other/UnknownVtable_003E0EB8.hpp"
 struct FrontendValue;
 struct UnlockDefinition { const char* name; unsigned char opaque[12]; };
 typedef char UnlockDefinition_stride[(sizeof(UnlockDefinition)==16)?1:-1];

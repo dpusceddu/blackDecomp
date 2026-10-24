@@ -1,4 +1,4 @@
-#include "campaign/graphics/sound_envelopes.hpp"
+#include "game/graphics/sound_envelopes.hpp"
 using namespace CampaignGraphics;
 void SoundEnvelope::Register(const char *name,int includeHold)
 {

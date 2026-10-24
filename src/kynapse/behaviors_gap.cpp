@@ -1,4 +1,4 @@
-#include "context/behaviors/gap.hpp"
+#include "kynapse/agents/gap.hpp"
 
 namespace KaimAvoidance {
 inline float SquaredDistance(const Vec3& b,const Vec3& a)

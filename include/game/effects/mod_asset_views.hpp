@@ -1,6 +1,6 @@
 #ifndef BLACK_EFFECTS_MOD_ASSET_VIEWS_HPP
 #define BLACK_EFFECTS_MOD_ASSET_VIEWS_HPP
-#include "mod/effects/asset.h"
+#include "game/effects/asset.h"
 
 namespace ModEffects {
 // Descriptive access views; historical class identities remain unverified.

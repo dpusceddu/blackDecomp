@@ -4,7 +4,7 @@ int FrontendStreamScheduler::Schedule(const char* name,int index,int kind,int ca
     return func_00109308(this,index,flags==0x02000000?1u:2u,name,callback,data,kind,callbackFlags,flags);
 }
 
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "game/frontend/movie_stream.hpp"
 
 extern "C" s32 func_00109BB0(void *);

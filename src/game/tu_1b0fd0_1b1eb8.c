@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern s32 func_001B6908(s32);
 extern s32 func_001C05F8(s32);

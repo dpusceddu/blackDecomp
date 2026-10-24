@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_001F1A70(void *arg0) {
     void *temp_16;

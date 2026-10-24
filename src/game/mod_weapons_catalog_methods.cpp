@@ -1,4 +1,4 @@
-#include "campaign/weapons/manager_methods.hpp"
+#include "game/weapons/manager_methods.hpp"
 
 namespace ModWeapons {
 BkModWeaponCatalogRowPS2 *WeaponManagerMethods::Row(int id)

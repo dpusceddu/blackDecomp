@@ -4,7 +4,7 @@
 SN GCC 2.95 for the EE has `long` = 64 bits and `long long` = 128 bits, so (verified by compiling, see README):
   lq / sq / por rd, rs, $0     128-bit load, store and register move: a `long long` (here s128/u128) value
   ldl+ldr / sdl+sdr pairs      one 8-byte access at byte alignment: a copy of a `struct { char c[8]; }`, or a member of a
-                               packed struct; written here as M2C_UNALIGNED64 (include/auto/prelude.h)
+                               packed struct; written here as M2C_UNALIGNED64 (include/ps2/prelude.h)
 m2c is shown `ld` / `sd` / `daddu` instead and its 64-bit types are turned into the 128-bit type (or the unaligned accessor)
 afterwards, but only when the function has no real 64-bit access of its own (`ld` / `sd` off $sp are the frame saves).
 Other multimedia and VU0 instructions are left alone (the function then fails in m2c and is reported by instruction).
@@ -131,7 +131,7 @@ def prep(text, *, native128=False):
 
 
 # Instructions m2c has no model for that are plain statements or expressions in the source: shown to m2c as calls of
-# placeholder functions, which include/auto/prelude.h defines as inline assembly (SN accepts the instructions as text).
+# placeholder functions, which include/ps2/prelude.h defines as inline assembly (SN accepts the instructions as text).
 PLACEHOLDERS = ['void __ee_ei(void);', 'void __ee_di(void);', 'f32 __ee_max_s(f32, f32);', 'f32 __ee_min_s(f32, f32);', 'f32 __ee_sqrt_s(f32);'] + \
     ['s32 __ee_mfc0_%d(void);' % n for n in range(32)] + ['void __ee_mtc0_%d(s32);' % n for n in range(32)]
 

@@ -1,4 +1,4 @@
-#include "campaign/behaviors/hide.hpp"
+#include "kynapse/behaviors/hide.hpp"
 
 namespace HideRecovery {
 bool HideAgent::Init(ChildBuffers* config)

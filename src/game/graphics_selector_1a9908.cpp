@@ -1,4 +1,4 @@
-#include "campaign/graphics/animation_selector.hpp"
+#include "game/graphics/animation_selector.hpp"
 using namespace AnimationSelectPS2;
 extern "C" { extern const char D_003F6B60[];extern const char D_003F6B70[];extern const char D_003F6B78[];extern const char D_003F6B88[];extern const char D_003F6B80[];extern const char D_003F6900[];extern const char D_003F6B90[];extern const char D_003F6B68[];extern const char D_003F6BE8[];extern const char D_003F6BF0[];extern const char D_003F6BA8[];extern const char D_003F6BB0[];extern const char D_003F6BB8[];extern const char D_003F6BC0[];extern const char D_003F6BC8[];extern const char D_003F6BD0[];extern const char D_003F6BD8[];extern const char D_003F6BE0[];extern const char D_003F6E10[];extern const char D_003F6E18[];extern const char D_0040D9E8[];extern const char D_0040D9E0[];extern const char D_0040D9D8[];extern const char D_0040D9D0[]; extern const char *D_003BCFF0[],*D_003BD0B0[],*D_003BCFC0[]; }
 // Unmatched: branch layout, floating-point lifetimes and original helper expansion.

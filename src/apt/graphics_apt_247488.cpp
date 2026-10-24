@@ -1,4 +1,4 @@
-#include "campaign/graphics/apt_pair.hpp"
+#include "apt/apt_pair.hpp"
 using namespace AptPS2;
 // Unmatched: typed string destruction and deleting-destructor convention.
 void TextPair::Destroy(int flags)

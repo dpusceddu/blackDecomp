@@ -1,4 +1,4 @@
-#include "campaign/graph/accessways.hpp"
+#include "kynapse/graph/accessways.hpp"
 using namespace Kaim;
 
 extern "C" CAccessWaysData *func_002FCAA8(SearchGraph *graph)

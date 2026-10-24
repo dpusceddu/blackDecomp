@@ -1,2 +1,2 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 s32 func_002A5548(s32 code,...) {return code;}

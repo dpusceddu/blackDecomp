@@ -1,6 +1,6 @@
 /* Translation unit tu_372fc0 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern int D_003E0040;
 extern void (*D_003C87E0)(void *);

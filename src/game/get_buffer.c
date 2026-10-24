@@ -1,4 +1,4 @@
-#include "game/actor/render_state.h"
+#include "game/effects/render_state.h"
 extern int func_001B0910(void *);
 int func_001AE998(BkActorRenderPS2 *actor,int index) {
  void *buffer=0;

@@ -1,4 +1,4 @@
-#include "campaign/graphics/apt_pair.hpp"
+#include "apt/apt_pair.hpp"
 using namespace AptPS2;
 // Unmatched: named string-property temporary and shared cleanup block.
 int TextPair::Write(int unused,Token** name,Value* incoming)

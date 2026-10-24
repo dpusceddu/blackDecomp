@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 const u32 rodata_003F4228[14] __asm__("D_003F4228") __attribute__((aligned(8))) = { 0x00000032, 0x00000078, 0x0000008C, 0x00000082, 0x0000007D, 0x0000006E, 0x00000064, 0x00000096, 0x3F800000, 0x3E99999A, 0x3F800000, 0x3F19999A, 0x3F800000, 0x00000000 };
 extern volatile char D_003F4228;

@@ -1,5 +1,5 @@
-#include "auto/prelude.h"
-#include "mod/weapons/inventory.h"
+#include "ps2/prelude.h"
+#include "game/weapons/inventory.h"
 
 u16 func_00155198(BkModInventoryPS2 *arg0) {
     return BkModInventorySlotPS2(arg0,7);

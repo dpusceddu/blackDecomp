@@ -1,5 +1,5 @@
-#include "auto/prelude.h"
-#include "game/actor/render_state.h"
+#include "ps2/prelude.h"
+#include "game/effects/render_state.h"
 
 extern void func_0027B2C8(void *), func_001C6608(void *), func_001B0A20(void *);
 extern void func_001B0068(void *), func_001B0FC8(void *);

@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 s32 func_001A2800(void *arg0) {
     s32 var_3;

@@ -1,4 +1,4 @@
-#include "campaign/graph/allocators.hpp"
+#include "kynapse/graph/allocators.hpp"
 namespace Kaim {
 CBaseAllocator::CBaseAllocator(unsigned int n) { owner=0;if(!n)children=0;else children=new CVarList<CBaseAllocator*>(n); }
 

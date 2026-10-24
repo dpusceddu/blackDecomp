@@ -1,4 +1,4 @@
-#include "campaign/graphics/animation_selector.hpp"
+#include "game/graphics/animation_selector.hpp"
 using namespace AnimationSelectPS2;
 extern "C" {
 extern const char D_003F7138[8] __attribute__((aligned(8)))="S_174";

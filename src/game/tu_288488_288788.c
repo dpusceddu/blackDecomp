@@ -1,6 +1,6 @@
 /* Translation unit tu_288488 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_00288788(void) {
 

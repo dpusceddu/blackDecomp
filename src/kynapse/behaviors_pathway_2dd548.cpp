@@ -1,4 +1,4 @@
-#include "context/behaviors/pathway.hpp"
+#include "kynapse/agents/pathway.hpp"
 
 namespace KaimPathData {
 PathWay& PathWay::operator=(const PathWay& other){

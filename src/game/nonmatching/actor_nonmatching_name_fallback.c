@@ -1,6 +1,6 @@
 // Unmatched: 0x1ab1c0: fallback branch layout and register lifetimes.
 #ifdef NONMATCHING
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 extern int func_00360838(const char *, const char *);
 extern char *D_003BD13C, *D_003BD140, *D_003BD144;
 extern char *func_001AB338(void *, char *, const char *, const char *, const char *, void *);

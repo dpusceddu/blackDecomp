@@ -1,4 +1,4 @@
-#include "campaign/graph/path_object.hpp"
+#include "kynapse/graph/path_object.hpp"
 extern const unsigned char D_00452158,D_004524A0,D_004525B8;
 namespace Kaim {
 void CPathObject::Replay()
@@ -21,7 +21,7 @@ void CPathObject::Replay()
     }
 }
 }
-#include "campaign/graph/path_object.hpp"
+#include "kynapse/graph/path_object.hpp"
 extern const unsigned char D_00452158,D_004524A0,D_004525B8;
 namespace Kaim {
 CPathObject::~CPathObject()
@@ -33,7 +33,7 @@ CPathObject::~CPathObject()
 #if 0
 
 // Unmatched: class-hierarchy traversal loop arrangement.
-#include "campaign/graph/path_object.hpp"
+#include "kynapse/graph/path_object.hpp"
 extern const unsigned char D_00452158,D_004524A0,D_004525B8;
 namespace Kaim {
 bool CPathObject::Init(ChildBuffers* config)
@@ -56,7 +56,7 @@ bool CPathObject::Init(ChildBuffers* config)
 }
 
 // Unmatched: slot accessor inline context and scan loops.
-#include "campaign/graph/path_object.hpp"
+#include "kynapse/graph/path_object.hpp"
 extern const unsigned char D_00452158,D_004524A0,D_004525B8;
 namespace Kaim {
 bool CPathObject::Claim(int id, PathPropertySlot* slot)
@@ -81,7 +81,7 @@ bool CPathObject::Claim(int id, PathPropertySlot* slot)
 }
 
 // Unmatched: owner-chain helper context and loop lifetimes.
-#include "campaign/graph/path_object.hpp"
+#include "kynapse/graph/path_object.hpp"
 extern const unsigned char D_00452158,D_004524A0,D_004525B8;
 namespace Kaim {
 bool CPathObject::Release(int id, PathPropertySlot* slot)

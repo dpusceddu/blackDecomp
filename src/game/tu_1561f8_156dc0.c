@@ -1,5 +1,5 @@
-#include "auto/prelude.h"
-#include "mod/weapons/state.h"
+#include "ps2/prelude.h"
+#include "game/weapons/state.h"
 
 extern s32 func_00155118();
 extern void func_0015A830();

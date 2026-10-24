@@ -2,7 +2,7 @@
 
 #ifdef NONMATCHING_2A8F78
 // Unmatched: compiler control flow, aggregate lifetime and scheduling still differ.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "rw_core/camera.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"
@@ -62,7 +62,7 @@ RwCameraPS2 *func_002A8F78(void) {
 
 #ifdef NONMATCHING_2A9640
 // Unmatched: compiler control flow, aggregate lifetime and scheduling still differ.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
@@ -122,7 +122,7 @@ s32 func_002A9640(void) {
 
 #ifdef NONMATCHING_2A9B70
 // Unmatched: compiler control flow, aggregate lifetime and scheduling still differ.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct RwErrorPS2 {s32 plugin,code;} RwErrorPS2;
 extern u8 D_00449438[];extern s32 D_0040DF14;
 extern s32 func_002A5548(s32,...);extern void func_002A55D8(RwErrorPS2 *);extern void *func_002BFE58(void);
@@ -141,7 +141,7 @@ s32 func_002A9B70(void *parameters) {
 
 #ifdef NONMATCHING_2A9CB8
 // Unmatched: compiler control flow, aggregate lifetime and scheduling still differ.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES

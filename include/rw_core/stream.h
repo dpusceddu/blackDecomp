@@ -1,6 +1,6 @@
 #ifndef BLACK_RENDERWARE_CORE_STREAM_H
 #define BLACK_RENDERWARE_CORE_STREAM_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 /* PS2 stream union remains UNVERIFIED; custom callbacks share memory/file offsets.
    The matching chunk classifier verifies the chunk header type field. */
 typedef struct RwStreamPS2 {

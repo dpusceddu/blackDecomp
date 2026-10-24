@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_00407900[];
 const char rodata_00407900[32] __asm__("D_00407900") __attribute__((aligned(8))) = "CPathCostData" "\000\000\000" "Q24Kaim7CObject" "\000";

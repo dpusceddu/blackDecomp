@@ -1,6 +1,6 @@
 extern "C" long func_0035E730(const char*);
 extern "C" float func_00291C68(long);
-#include "campaign/behaviors/pathway_vectors.hpp"
+#include "kynapse/behaviors/pathway_vectors.hpp"
 extern "C" int _stricmp(const char*,const char*);
 extern "C" int func_0035E750(const char*);
 namespace Kaim {

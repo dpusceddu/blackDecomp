@@ -1,6 +1,6 @@
 #ifndef BLACK_RENDERWARE_CORE_HEAP_H
 #define BLACK_RENDERWARE_CORE_HEAP_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 /* UNVERIFIED PS2 allocator access views; confirm with a matching typed consumer. */
 typedef struct RwHeapBlockPS2 RwHeapBlockPS2;
 typedef struct RwHeapEntryPS2 { u32 bytes; RwHeapBlockPS2 *block; } RwHeapEntryPS2;

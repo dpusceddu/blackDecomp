@@ -1,4 +1,4 @@
-#include "campaign/actor/camera.hpp"
+#include "game/camera/controller.hpp"
 #include "ps2/matrix.hpp"
 
 // Unmatched: 0x141008 VU normalization copies and scalar/temporary scheduling.

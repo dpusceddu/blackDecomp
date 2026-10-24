@@ -1,6 +1,6 @@
 // Unmatched: 00163328: vector temporary scheduling, saved pointer allocation and FPU argument lifetime.
 #if 0
-#include "campaign/weapons/delayed.hpp"
+#include "game/weapons/delayed.hpp"
 namespace ModWeapons {
 struct ImpactIteration {EeS8 bounce;bool again;} __attribute__((aligned(16)));
 static inline Vec ScalarVector(float x){Vec v;asm("qmtc2.ni scalarf, vectorv":"=j vectorv"(v):"r scalarf"(x));return v;}

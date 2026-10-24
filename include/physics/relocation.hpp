@@ -1,6 +1,6 @@
 #ifndef BLACK_PHYSICS_RELOCATION_HPP
 #define BLACK_PHYSICS_RELOCATION_HPP
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 // Prefix views used by the PS2 relocation callback; object extents remain unknown.
 struct PhysicsRelocationContext {unsigned char unknown00[8];const void* originalBase;};
 struct PhysicsRelocatedHandle {

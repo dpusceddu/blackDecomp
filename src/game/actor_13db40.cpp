@@ -1,4 +1,4 @@
-#include "campaign/actor/input_axis.hpp"
+#include "game/camera/axes.hpp"
 namespace ActorInventory7 {
 extern "C" {extern AxisWorld*D_0040F4D0;float func_00124840(void*,int);int func_0013EE28(void*);}
 inline AxisWorld*GetWorld(){return D_0040F4D0;}

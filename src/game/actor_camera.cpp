@@ -1,4 +1,4 @@
-#include "campaign/actor/camera.hpp"
+#include "game/camera/controller.hpp"
 #include "game/ai_vector.hpp"
 
 namespace CampaignActor {

@@ -1,4 +1,4 @@
-#include "context/behaviors/sight.hpp"
+#include "kynapse/agents/sight.hpp"
 
 namespace KaimSight {
 

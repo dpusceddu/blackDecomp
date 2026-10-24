@@ -1,4 +1,4 @@
-#include "campaign/graphics/game_path.hpp"
+#include "game/graphics/game_path.hpp"
 using namespace GamePathPS2;
 // Unmatched: identity-load register allocation differs by two instructions.
 int PathObject::UpdateUse(PathAgent* agent,RouteNode* node,int unused,unsigned char* stopped)

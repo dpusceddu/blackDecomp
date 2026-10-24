@@ -4,7 +4,7 @@
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 #include "rw_audio/emitter.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_RwaFormat.h"
+#include "rw_audio/layouts/Recovered_RwaFormat.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 
@@ -120,7 +120,7 @@ s32 func_003168C8(void) {
 
 #ifdef NONMATCHING_RWA_316C38
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
@@ -493,7 +493,7 @@ void func_003176E0(RwaVec3 *value,const RwaListener *listener) {
 
 #ifdef NONMATCHING_RWA_3178F0
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
@@ -554,7 +554,7 @@ s32 func_003178F0(void *input, void *operation, void *length, void *event, s32 c
 
 #ifdef NONMATCHING_RWA_317A78
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
@@ -699,7 +699,7 @@ void func_00317C20(RwaPool *pool,void *allocation) {
 
 #ifdef NONMATCHING_RWA_317E40
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
@@ -1143,7 +1143,7 @@ s32 func_00319B00(RwaCallbackObject *input) {
 #endif
 
 #ifdef RWA_MATCH_317838
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 extern M2C_UNK *D_0040E79C,*D_0040E798;
 extern s32 D_0040E1CC;
 extern s32 *func_0031AA20(void);
@@ -1157,7 +1157,7 @@ s32 func_00317838(void) {
 #endif
 
 #ifdef RWA_MATCH_319CA8
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 extern s32 D_0040E1F0;
 extern s32 func_00322A78(void);
 extern s32 func_0031D7A8(void *);

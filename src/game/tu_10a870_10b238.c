@@ -1,7 +1,7 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_FrontendSaveDialog.h"
+#include "game/layouts/Recovered_FrontendSaveDialog.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 

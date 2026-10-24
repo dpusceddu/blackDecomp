@@ -1,8 +1,8 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_Instance.h"
-#include "recovered/Recovered_WeaponManagerMethods.h"
+#include "game/layouts/Recovered_Instance.h"
+#include "game/layouts/Recovered_WeaponManagerMethods.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 extern void func_0015D198(Recovered_WeaponManagerMethods *, Recovered_Instance *);

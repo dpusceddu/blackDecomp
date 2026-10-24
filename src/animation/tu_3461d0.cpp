@@ -1,15 +1,15 @@
 extern unsigned char poseCacheStorage[] __asm__("D_0045F0C0") __attribute__((aligned(16)));
 #include "ps2/ee_fpu.h"
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_AnimationGraphNode.h"
-#include "recovered/Recovered_AnimationParameters.h"
-#include "recovered/Recovered_OverlayBinding.h"
+#include "animation/layouts/Recovered_AnimationGraphNode.h"
+#include "animation/layouts/Recovered_AnimationParameters.h"
+#include "animation/layouts/Recovered_OverlayBinding.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 #include "ps2/vu0_micro.hpp"
 #include "ps2/vu0_quaternion.hpp"
-#include "animation/pose_campaign.hpp"
+#include "animation/pose_operations.hpp"
 
 // Cache configuration, sampler limit and explicit arena storage. Construction
 // remains in Cache::Construct; a typed Slot definition would add a second init.

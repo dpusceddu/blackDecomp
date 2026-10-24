@@ -1,4 +1,4 @@
-#include "mod/arms/owner.hpp"
+#include "animation/arms/owner.hpp"
 namespace ArmsAnimation {
 // Unmatched: Initialize retains a compiler scheduling or layout difference.
 #ifdef MOD_ARMS_TICK_ONLY

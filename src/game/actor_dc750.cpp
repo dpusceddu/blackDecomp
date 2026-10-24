@@ -1,4 +1,4 @@
-#include "campaign/actor/prop_state.hpp"
+#include "game/actor/prop_state.hpp"
 namespace CampaignActor {
 using namespace BlackGame;
 using BlackPS2::VU0::Matrix4;

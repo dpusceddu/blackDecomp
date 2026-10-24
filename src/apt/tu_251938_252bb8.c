@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern u16 * func_00250058();
 extern void * D_0043DEE0;

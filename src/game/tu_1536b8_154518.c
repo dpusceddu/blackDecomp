@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_00154518(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x94) == 0) {

@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 s32 func_0012EEB8(s32 arg0) {
     s32 temp_2;

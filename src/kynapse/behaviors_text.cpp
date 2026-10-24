@@ -1,4 +1,4 @@
-#include "context/behaviors/text.hpp"
+#include "kynapse/agents/text.hpp"
 
 namespace KaimText {
 

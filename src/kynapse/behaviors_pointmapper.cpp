@@ -1,4 +1,4 @@
-#include "context/behaviors/pointmapper.hpp"
+#include "kynapse/agents/pointmapper.hpp"
 
 int PointMapper::Map(PointLocator* locator,unsigned int container,unsigned int* mapped) {
     unsigned int point,owner;

@@ -1,7 +1,7 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_FrontendResourceCache.h"
+#include "game/layouts/Recovered_FrontendResourceCache.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 extern s32 func_0010BAE0(void *, s32 *, s32);

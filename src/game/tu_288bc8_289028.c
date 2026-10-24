@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_00400A08[];
 const char rodata_00400A08[104] __asm__("D_00400A08") __attribute__((aligned(8))) = "%d" "\000\000\000\000\000\000" "RawData" "\000" "Graph" "\000\000\000" "AdditionalData" "\000\000" "CFindNearestData" "\000\000\000\000\000\000\000\000" "CAstarData" "\000\000\000\000\000\000" "UpdateWithPathObjects" "\000\000\000";

@@ -1,4 +1,4 @@
-#include "mod/weapons/moving.hpp"
+#include "game/weapons/moving.hpp"
 
 namespace ModWeapons {
 extern void*impactService __asm__("D_0040F4D4");

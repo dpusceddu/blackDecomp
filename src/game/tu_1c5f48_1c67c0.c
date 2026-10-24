@@ -1,7 +1,7 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_BkActorRenderPS2.h"
+#include "game/layouts/Recovered_BkActorRenderPS2.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 extern s32 func_001C6FA0(void *, s32);

@@ -1,6 +1,6 @@
 /* Translation unit tu_375178 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "types_ghidra.h"
 
 extern s32 func_003753E0();

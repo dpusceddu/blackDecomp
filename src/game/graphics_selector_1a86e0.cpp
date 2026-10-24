@@ -1,6 +1,6 @@
-#include "campaign/graphics/animation_selector.hpp"
+#include "game/graphics/animation_selector.hpp"
 using namespace AnimationSelectPS2;
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "game/actor/vector_math.h"
 extern "C" void func_001A8A20(void*,char*,Actor*);
 extern float D_003BD158; extern BkVectorPS2 D_004432C0,D_004432D0; extern const char D_003F6A40[],D_003F6A48[],D_003F6A50[];

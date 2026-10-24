@@ -1,4 +1,4 @@
-#include "campaign/graphics/controller.hpp"
+#include "game/camera/pad.hpp"
 using namespace CampaignGraphics;
 extern "C" int func_0026BCF8(Controller *,unsigned);
 extern "C" int func_0026BC88(float,Controller *);

@@ -1,4 +1,4 @@
-#include "campaign/graph/meta_entries.hpp"
+#include "kynapse/graph/meta_entries.hpp"
 
 namespace Kaim {
 template<> CMetaClass<CTeam,TeamFactory>::CMetaClass(const char *source,TeamFactory fn,int flags,unsigned char allocateMask,unsigned char publishMask) {

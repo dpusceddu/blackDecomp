@@ -1,5 +1,5 @@
-#include "campaign/graphics/sound_envelopes.hpp"
-#include "auto/prelude.h"
+#include "game/graphics/sound_envelopes.hpp"
+#include "ps2/prelude.h"
 using namespace CampaignGraphics;
 // Unmatched: 27 instruction differences after native layout, EE clamp and helper-context probes.
 void LowHealthEnvelope::Update()

@@ -1,4 +1,4 @@
-#include "campaign/actor/orientation.hpp"
+#include "game/actor/orientation.hpp"
 
 namespace CampaignActor {
 int OrientationState::Begin(void *actor)

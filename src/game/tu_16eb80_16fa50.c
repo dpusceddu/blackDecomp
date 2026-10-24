@@ -1,8 +1,8 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_Notifiable.h"
-#include "recovered/Recovered_SlotUser.h"
+#include "game/layouts/Recovered_Notifiable.h"
+#include "game/layouts/Recovered_SlotUser.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 extern void * func_0016EAD0(void *);

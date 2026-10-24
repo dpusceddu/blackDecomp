@@ -1,6 +1,6 @@
 #ifndef BLACK_ANIMATION_CHANNEL_STATE_H
 #define BLACK_ANIMATION_CHANNEL_STATE_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 /* Inferred channel view; offsets are the USA PS2 accesses. */
 typedef struct AnimationChannelState {

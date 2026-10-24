@@ -1,6 +1,6 @@
 // Unmatched: 00155C28: inline normalization and matrix references improve code, but call scheduling and byte-loop allocation differ.
 #if 0
-#include "campaign/weapons/projectiles.hpp"
+#include "game/weapons/projectiles.hpp"
 namespace ModWeapons {
 extern void*presentationRoot __asm__("D_0040F4D8");
 extern "C" void func_001B6CF8(void*,Projectile*,int);

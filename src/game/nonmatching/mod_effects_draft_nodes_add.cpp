@@ -1,6 +1,6 @@
 // Unmatched: native receiver and iterator/store lifetimes remain inexact.
 #ifdef NONMATCHING
-#include "mod/effects/runtime.hpp"
+#include "game/effects/runtime.hpp"
 #include "game/effects/geometry.h"
 #include "game/effects/pool.h"
 using ModEffects::Matrix;

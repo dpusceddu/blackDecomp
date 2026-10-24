@@ -1,4 +1,4 @@
-#include "campaign/weapons/reserves.hpp"
+#include "game/weapons/reserves.hpp"
 
 namespace ModWeapons {
 extern "C" EeU16 D_003F5310[10];

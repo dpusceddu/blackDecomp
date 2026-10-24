@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 f32 func_0018E150(void *arg0) {
     f32 var_f0;

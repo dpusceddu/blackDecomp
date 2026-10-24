@@ -376,7 +376,7 @@ finally:
                         permuter_worker.rank(False, 3, [(0, None)], target))
 
     def test_nested_field_macro_expands_completely(self):
-        source = '#include "auto/prelude.h"\ns32 f(void *p) { return M2C_FIELD(M2C_FIELD(p, void **, 0), s32 *, 4); }\n'
+        source = '#include "ps2/prelude.h"\ns32 f(void *p) { return M2C_FIELD(M2C_FIELD(p, void **, 0), s32 *, 4); }\n'
         expanded = autodecomp.expand_macros(source)
         self.assertNotIn('M2C_FIELD(', expanded)
         self.assertIn('(void **)', expanded)
@@ -395,7 +395,7 @@ typedef unsigned int UserHandle;
 s32 f(Recovered_View *p) { return p->field; }
 '''
         restored = autodecomp.committed_form(source)
-        self.assertIn('#include "auto/prelude.h"', restored)
+        self.assertIn('#include "ps2/prelude.h"', restored)
         self.assertNotIn('typedef int s128;', restored)
         self.assertNotIn('typedef unsigned int u128;', restored)
         self.assertNotIn('M2C_U64;', restored)

@@ -1,4 +1,4 @@
-#include "campaign/graphics/level_callbacks.hpp"
+#include "game/graphics/level_callbacks.hpp"
 extern "C" {
 extern CampaignGraphics::GameState* D_0040F0E0;
 int func_0035E750(const char*);

@@ -1,4 +1,4 @@
-#include "campaign/graphics/apt_value.hpp"
+#include "apt/apt_value.hpp"
 using namespace AptPS2;
 namespace AptPS2 {
 struct Token { short refs;unsigned short unknown,length;short unknown6;char text[1]; };

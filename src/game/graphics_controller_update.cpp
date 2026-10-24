@@ -1,4 +1,4 @@
-#include "campaign/graphics/controller.hpp"
+#include "game/camera/pad.hpp"
 
 extern "C"{
 extern int func_0026C9C0(void *, int);

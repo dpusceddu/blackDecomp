@@ -1,4 +1,4 @@
-#include "classes/game/UnknownVtable_003DC5F8.hpp"
+#include "game/classes/UnknownVtable_003DC5F8.hpp"
 #include "ps2/matrix.hpp"
 
 // Unmatched: 0013A300 state update retains scalar allocation and counter-bank differences.

@@ -3,7 +3,7 @@
   "owner": "shared mod context owner",
   "layers": [
     {
-      "header": "include/mod/camera/controller.hpp",
+      "header": "include/game/camera/controller.hpp",
       "api": [
         "CampaignActor::CameraController",
         "Child",
@@ -19,7 +19,7 @@
       ]
     },
     {
-      "header": "include/mod/camera/axes.hpp",
+      "header": "include/game/camera/axes.hpp",
       "api": [
         "ActorInventory7::InputAxes",
         "InputBinding",
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "header": "include/mod/camera/pad.hpp",
+      "header": "include/game/camera/pad.hpp",
       "api": [
         "CampaignGraphics::Controller",
         "ControllerInterface"
@@ -47,7 +47,7 @@
       ]
     },
     {
-      "header": "include/mod/camera/pad_backend.hpp",
+      "header": "include/game/camera/pad_backend.hpp",
       "api": [
         "CampaignGraphics::PadBackend"
       ],
@@ -59,7 +59,7 @@
       ]
     },
     {
-      "header": "include/mod/weapons/state.h",
+      "header": "include/game/weapons/state.h",
       "api": [
         "BkModWeaponControllerPS2",
         "BkModWeaponDefinitionPS2",
@@ -80,7 +80,7 @@
       ]
     },
     {
-      "header": "include/mod/weapons/shot.h",
+      "header": "include/game/weapons/shot.h",
       "api": [
         "BkModMovingShotPS2",
         "BkModShotDeactivatePS2",
@@ -98,7 +98,7 @@
       ]
     },
     {
-      "header": "include/mod/animation/instance.h",
+      "header": "include/animation/instance.h",
       "api": [
         "BkModAnimationInstancePS2",
         "BkModAnimationPoseHeaderPS2",
@@ -116,7 +116,7 @@
       ]
     },
     {
-      "header": "include/mod/animation/runtime.h",
+      "header": "include/animation/runtime.h",
       "api": [
         "PlaybackState",
         "PlaybackHistory",
@@ -130,7 +130,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/asset.h",
+      "header": "include/game/effects/asset.h",
       "api": [
         "BkActorAssetPS2",
         "BkActorAssetRecordPS2",
@@ -146,7 +146,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/slot.h",
+      "header": "include/game/effects/slot.h",
       "api": [
         "BkEffectSlotPS2",
         "BkEffectSlotCallbackPS2",
@@ -162,7 +162,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/render_state.h",
+      "header": "include/game/effects/render_state.h",
       "api": [
         "BkActorRenderPS2",
         "BkRenderBufferPS2"
@@ -175,7 +175,7 @@
       ]
     },
     {
-      "header": "include/mod/weapons/inventory.h",
+      "header": "include/game/weapons/inventory.h",
       "api": [
         "BkModInventoryPS2",
         "BkModInventorySlotPS2"
@@ -190,7 +190,7 @@
       ]
     },
     {
-      "header": "include/mod/weapons/controller.hpp",
+      "header": "include/game/weapons/controller.hpp",
       "api": [
         "ModWeapons::Weapon",
         "Action",
@@ -205,7 +205,7 @@
       ]
     },
     {
-      "header": "include/mod/weapons/instance.hpp",
+      "header": "include/game/weapons/instance.hpp",
       "api": [
         "ModWeapons::Instance",
         "CollectedHit",
@@ -225,7 +225,7 @@
       ]
     },
     {
-      "header": "include/mod/weapons/moving.hpp",
+      "header": "include/game/weapons/moving.hpp",
       "api": [
         "ModWeapons::MovingShot",
         "MovingPool"
@@ -242,7 +242,7 @@
       ]
     },
     {
-      "header": "include/mod/animation/sampling.h",
+      "header": "include/animation/sampling.h",
       "api": [
         "SamplingPipeline",
         "SamplingPair",
@@ -262,7 +262,7 @@
       ]
     },
     {
-      "header": "include/mod/arms/instance.hpp",
+      "header": "include/animation/arms/instance.hpp",
       "api": [
         "ArmsAnimation::Instance",
         "Pose"
@@ -276,7 +276,7 @@
       ]
     },
     {
-      "header": "include/mod/arms/owner.hpp",
+      "header": "include/animation/arms/owner.hpp",
       "api": [
         "ArmsAnimation::Owner",
         "Selector",
@@ -292,7 +292,7 @@
       ]
     },
     {
-      "header": "include/mod/arms/playback.hpp",
+      "header": "include/animation/arms/playback.hpp",
       "api": [
         "ArmsAnimation::Playback"
       ],
@@ -305,7 +305,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/runtime.hpp",
+      "header": "include/game/effects/runtime.hpp",
       "api": [
         "ModEffects::Child",
         "Entry",
@@ -327,7 +327,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/slot_views.hpp",
+      "header": "include/game/effects/slot_views.hpp",
       "api": [
         "ModEffects::ActorInterface",
         "Actor",
@@ -341,7 +341,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/random.h",
+      "header": "include/game/effects/random_state.h",
       "api": [
         "BkModEffectRandomStatePS2",
         "BkModEffectRandomSeedPS2"
@@ -354,7 +354,7 @@
       ]
     },
     {
-      "header": "include/mod/camera/aim.hpp",
+      "header": "include/game/camera/aim.hpp",
       "api": [
         "ModCamera::AimSelection",
         "AimActor",
@@ -369,7 +369,7 @@
       ]
     },
     {
-      "header": "include/mod/camera/motion.hpp",
+      "header": "include/game/camera/motion.hpp",
       "api": [
         "CampaignActor::ActorMotion",
         "GetWorldMatrix",
@@ -383,7 +383,7 @@
       ]
     },
     {
-      "header": "include/mod/camera/vitals.h",
+      "header": "include/game/camera/vitals.h",
       "api": [
         "BkModPlayerVitalsPS2"
       ],
@@ -396,7 +396,7 @@
       ]
     },
     {
-      "header": "include/mod/weapons/catalog.h",
+      "header": "include/game/weapons/catalog.h",
       "api": [
         "BkModWeaponCatalogOwnerPS2",
         "BkModWeaponCatalogPS2",
@@ -416,7 +416,7 @@
       ]
     },
     {
-      "header": "include/mod/weapons/inventory_methods.hpp",
+      "header": "include/game/weapons/inventory_methods.hpp",
       "api": [
         "ModWeapons::Inventory",
         "Catalog",
@@ -433,7 +433,7 @@
       ]
     },
     {
-      "header": "include/mod/weapons/projectile_lifetime.hpp",
+      "header": "include/game/weapons/projectile_lifetime.hpp",
       "api": [
         "CampaignActor::ExpiryEffect",
         "ExpiryWorld"
@@ -446,7 +446,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/attachments.h",
+      "header": "include/game/effects/attachments.h",
       "api": [
         "BkModAttachedEffectPS2",
         "BkModAttachedEffectsPS2",
@@ -460,7 +460,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/emitter.h",
+      "header": "include/game/effects/emitter.h",
       "api": [
         "BkEffectLightsPS2",
         "BkEffectLightPS2",
@@ -478,7 +478,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/emitter_list.h",
+      "header": "include/game/effects/emitter_list.h",
       "api": [
         "BkEmitterListPS2",
         "BkTimedEmitterNodePS2",
@@ -493,7 +493,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/random.hpp",
+      "header": "include/game/effects/random.hpp",
       "api": [
         "ModEffects::RandomState",
         "Next",
@@ -508,7 +508,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/simulation.hpp",
+      "header": "include/game/effects/simulation.hpp",
       "api": [
         "ModEffects::GeometryNodes",
         "ModEffects::Simulation"
@@ -523,7 +523,7 @@
       ]
     },
     {
-      "header": "include/mod/animation/pose_cache.h",
+      "header": "include/animation/pose_cache.h",
       "api": [
         "BkModPoseCacheSlotPS2",
         "BkModSourceClipPS2",
@@ -544,7 +544,7 @@
       ]
     },
     {
-      "header": "include/mod/camera/local_pose.hpp",
+      "header": "include/game/camera/local_pose.hpp",
       "api": [
         "ModCamera::LowerY",
         "LocalPoseAnimation",
@@ -558,7 +558,7 @@
       ]
     },
     {
-      "header": "include/mod/math/scalar.hpp",
+      "header": "include/game/math/scalar.hpp",
       "api": [
         "ModMath::SquareRoot"
       ],
@@ -570,7 +570,7 @@
       ]
     },
     {
-      "header": "include/mod/camera/vitals.hpp",
+      "header": "include/game/camera/vitals.hpp",
       "api": [
         "ModCamera::PlayerVitals",
         "Restore",
@@ -584,7 +584,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/damage_window.h",
+      "header": "include/game/effects/damage_window.h",
       "api": [
         "BkModEffectDamageWindowPS2",
         "BkModEffectDamageWindowsPS2"
@@ -597,7 +597,7 @@
       ]
     },
     {
-      "header": "include/mod/math/scalar.h",
+      "header": "include/game/math/scalar.h",
       "api": [
         "BkModSquareRootPS2"
       ],
@@ -614,7 +614,7 @@
       "address": "0x140cf8",
       "source_function": "Update",
       "headers": [
-        "include/mod/camera/controller.hpp"
+        "include/game/camera/controller.hpp"
       ],
       "uses": [
         "GetChild",
@@ -628,7 +628,7 @@
       "address": "0x141248",
       "source_function": "SetTarget",
       "headers": [
-        "include/mod/camera/controller.hpp"
+        "include/game/camera/controller.hpp"
       ],
       "uses": [
         "Target"
@@ -638,7 +638,7 @@
       "address": "0x1411a0",
       "source_function": "Configure",
       "headers": [
-        "include/mod/camera/controller.hpp"
+        "include/game/camera/controller.hpp"
       ],
       "uses": [
         "V4"
@@ -648,7 +648,7 @@
       "address": "0x13f160",
       "source_function": "Update",
       "headers": [
-        "include/mod/camera/axes.hpp"
+        "include/game/camera/axes.hpp"
       ],
       "uses": [
         "lateral",
@@ -661,7 +661,7 @@
       "address": "0x140008",
       "source_function": "Clear",
       "headers": [
-        "include/mod/camera/axes.hpp"
+        "include/game/camera/axes.hpp"
       ],
       "uses": [
         "input",
@@ -672,7 +672,7 @@
       "address": "0x26baf8",
       "source_function": "Reset",
       "headers": [
-        "include/mod/camera/pad.hpp"
+        "include/game/camera/pad.hpp"
       ],
       "uses": [
         "Connected",
@@ -685,7 +685,7 @@
       "address": "0x26c9c0",
       "source_function": "GetState",
       "headers": [
-        "include/mod/camera/pad_backend.hpp"
+        "include/game/camera/pad_backend.hpp"
       ],
       "uses": [
         "state"
@@ -695,7 +695,7 @@
       "address": "0x156dc0",
       "source_function": "func_00156DC0",
       "headers": [
-        "include/mod/weapons/state.h"
+        "include/game/weapons/state.h"
       ],
       "uses": [
         "weapon->owner->kind",
@@ -708,7 +708,7 @@
       "address": "0x158078",
       "source_function": "func_00158078",
       "headers": [
-        "include/mod/weapons/state.h"
+        "include/game/weapons/state.h"
       ],
       "uses": [
         "BkModWeaponReloadingPS2"
@@ -718,7 +718,7 @@
       "address": "0x1580e0",
       "source_function": "func_001580E0",
       "headers": [
-        "include/mod/weapons/state.h"
+        "include/game/weapons/state.h"
       ],
       "uses": [
         "BkModWeaponClipPS2"
@@ -728,7 +728,7 @@
       "address": "0x15d3d8",
       "source_function": "func_0015D3D8",
       "headers": [
-        "include/mod/weapons/shot.h"
+        "include/game/weapons/shot.h"
       ],
       "uses": [
         "BkModShotDeactivatePS2"
@@ -738,7 +738,7 @@
       "address": "0x15d850",
       "source_function": "func_0015D850",
       "headers": [
-        "include/mod/weapons/shot.h"
+        "include/game/weapons/shot.h"
       ],
       "uses": [
         "endpoint",
@@ -749,7 +749,7 @@
       "address": "0x347d68",
       "source_function": "func_00347D68",
       "headers": [
-        "include/mod/animation/instance.h"
+        "include/animation/instance.h"
       ],
       "uses": [
         "root.translation",
@@ -761,7 +761,7 @@
       "address": "0x348018",
       "source_function": "func_00348018",
       "headers": [
-        "include/mod/animation/instance.h"
+        "include/animation/instance.h"
       ],
       "uses": [
         "evaluationFlags",
@@ -772,7 +772,7 @@
       "address": "0x348e78",
       "source_function": "func_00348E78",
       "headers": [
-        "include/mod/animation/instance.h"
+        "include/animation/instance.h"
       ],
       "uses": [
         "BkModAnimationHasNextPS2"
@@ -782,7 +782,7 @@
       "address": "0x34f328",
       "source_function": "func_0034F328",
       "headers": [
-        "include/mod/animation/instance.h"
+        "include/animation/instance.h"
       ],
       "uses": [
         "flags",
@@ -793,7 +793,7 @@
       "address": "0x34eb88",
       "source_function": "func_0034EB88",
       "headers": [
-        "include/mod/animation/runtime.h"
+        "include/animation/runtime.h"
       ],
       "uses": [
         "state->bank",
@@ -806,7 +806,7 @@
       "address": "0x1afba8",
       "source_function": "func_001AFBA8",
       "headers": [
-        "include/mod/effects/asset.h"
+        "include/game/effects/asset.h"
       ],
       "uses": [
         "asset->records",
@@ -817,7 +817,7 @@
       "address": "0x1afc30",
       "source_function": "func_001AFC30",
       "headers": [
-        "include/mod/effects/asset.h"
+        "include/game/effects/asset.h"
       ],
       "uses": [
         "asset->records",
@@ -828,7 +828,7 @@
       "address": "0x1afcd8",
       "source_function": "func_001AFCD8",
       "headers": [
-        "include/mod/effects/asset.h"
+        "include/game/effects/asset.h"
       ],
       "uses": [
         "remaining",
@@ -839,7 +839,7 @@
       "address": "0x1b33b8",
       "source_function": "func_001B33B8",
       "headers": [
-        "include/mod/effects/slot.h"
+        "include/game/effects/slot.h"
       ],
       "uses": [
         "object->slot",
@@ -850,7 +850,7 @@
       "address": "0x1b37c8",
       "source_function": "func_001B37C8",
       "headers": [
-        "include/mod/effects/slot.h"
+        "include/game/effects/slot.h"
       ],
       "uses": [
         "callbacks->release",
@@ -862,7 +862,7 @@
       "address": "0x1b3cf8",
       "source_function": "func_001B3CF8",
       "headers": [
-        "include/mod/effects/slot.h"
+        "include/game/effects/slot.h"
       ],
       "uses": [
         "slot->object",
@@ -874,7 +874,7 @@
       "address": "0x1ae860",
       "source_function": "func_001AE860",
       "headers": [
-        "include/mod/effects/render_state.h"
+        "include/game/effects/render_state.h"
       ],
       "uses": [
         "actor->buffers",
@@ -885,7 +885,7 @@
       "address": "0x155198",
       "source_function": "func_00155198",
       "headers": [
-        "include/mod/weapons/inventory.h"
+        "include/game/weapons/inventory.h"
       ],
       "uses": [
         "BkModInventorySlotPS2"
@@ -895,7 +895,7 @@
       "address": "0x1551a0",
       "source_function": "func_001551A0",
       "headers": [
-        "include/mod/weapons/inventory.h"
+        "include/game/weapons/inventory.h"
       ],
       "uses": [
         "reserve[7]"
@@ -905,7 +905,7 @@
       "address": "0x155088",
       "source_function": "func_00155088",
       "headers": [
-        "include/mod/weapons/inventory.h"
+        "include/game/weapons/inventory.h"
       ],
       "uses": [
         "count",
@@ -916,7 +916,7 @@
       "address": "0x1632e0",
       "source_function": "func_001632E0",
       "headers": [
-        "include/mod/weapons/shot.h"
+        "include/game/weapons/shot.h"
       ],
       "uses": [
         "active",
@@ -929,7 +929,7 @@
       "address": "0x1632f8",
       "source_function": "func_001632F8",
       "headers": [
-        "include/mod/weapons/shot.h"
+        "include/game/weapons/shot.h"
       ],
       "uses": [
         "direction",
@@ -944,7 +944,7 @@
       "address": "0x156388",
       "source_function": "Update",
       "headers": [
-        "include/mod/weapons/controller.hpp"
+        "include/game/weapons/controller.hpp"
       ],
       "uses": [
         "Advance",
@@ -955,7 +955,7 @@
       "address": "0x156f18",
       "source_function": "SetPose",
       "headers": [
-        "include/mod/weapons/controller.hpp"
+        "include/game/weapons/controller.hpp"
       ],
       "uses": [
         "poseManager",
@@ -966,7 +966,7 @@
       "address": "0x15a830",
       "source_function": "Reload",
       "headers": [
-        "include/mod/weapons/instance.hpp"
+        "include/game/weapons/instance.hpp"
       ],
       "uses": [
         "reserveIndex",
@@ -979,7 +979,7 @@
       "address": "0x15b8f8",
       "source_function": "Add",
       "headers": [
-        "include/mod/weapons/instance.hpp"
+        "include/game/weapons/instance.hpp"
       ],
       "uses": [
         "CollectedHit",
@@ -992,7 +992,7 @@
       "address": "0x15ba80",
       "source_function": "Dispatch",
       "headers": [
-        "include/mod/weapons/instance.hpp"
+        "include/game/weapons/instance.hpp"
       ],
       "uses": [
         "records",
@@ -1004,7 +1004,7 @@
       "address": "0x15d370",
       "source_function": "Spawn",
       "headers": [
-        "include/mod/weapons/moving.hpp"
+        "include/game/weapons/moving.hpp"
       ],
       "uses": [
         "shots",
@@ -1016,7 +1016,7 @@
       "address": "0x15d758",
       "source_function": "FreshHit",
       "headers": [
-        "include/mod/weapons/moving.hpp"
+        "include/game/weapons/moving.hpp"
       ],
       "uses": [
         "Impact",
@@ -1029,7 +1029,7 @@
       "address": "0x15d818",
       "source_function": "NotifyOwner",
       "headers": [
-        "include/mod/weapons/moving.hpp"
+        "include/game/weapons/moving.hpp"
       ],
       "uses": [
         "endpoint",
@@ -1040,7 +1040,7 @@
       "address": "0x15d870",
       "source_function": "CachedHit",
       "headers": [
-        "include/mod/weapons/moving.hpp"
+        "include/game/weapons/moving.hpp"
       ],
       "uses": [
         "Collision",
@@ -1054,7 +1054,7 @@
       "address": "0x34f668",
       "source_function": "func_0034F668",
       "headers": [
-        "include/mod/animation/sampling.h"
+        "include/animation/sampling.h"
       ],
       "uses": [
         "SamplingPoseHeader temporary",
@@ -1067,7 +1067,7 @@
       "address": "0x34f980",
       "source_function": "func_0034F980",
       "headers": [
-        "include/mod/animation/sampling.h"
+        "include/animation/sampling.h"
       ],
       "uses": [
         "context->clip",
@@ -1079,7 +1079,7 @@
       "address": "0x34f9d0",
       "source_function": "func_0034F9D0",
       "headers": [
-        "include/mod/animation/sampling.h"
+        "include/animation/sampling.h"
       ],
       "uses": [
         "root_track",
@@ -1091,7 +1091,7 @@
       "address": "0x34fa60",
       "source_function": "func_0034FA60",
       "headers": [
-        "include/mod/animation/sampling.h"
+        "include/animation/sampling.h"
       ],
       "uses": [
         "SamplingPoseHeader sample",
@@ -1103,7 +1103,7 @@
       "address": "0x347e18",
       "source_function": "Matrices",
       "headers": [
-        "include/mod/arms/instance.hpp"
+        "include/animation/arms/instance.hpp"
       ],
       "uses": [
         "selectedMatrices",
@@ -1116,7 +1116,7 @@
       "address": "0x347e80",
       "source_function": "Evaluate",
       "headers": [
-        "include/mod/arms/instance.hpp"
+        "include/animation/arms/instance.hpp"
       ],
       "uses": [
         "Pose rootPose",
@@ -1129,7 +1129,7 @@
       "address": "0x1a54e0",
       "source_function": "Tick",
       "headers": [
-        "include/mod/arms/owner.hpp"
+        "include/animation/arms/owner.hpp"
       ],
       "uses": [
         "ProfileScope profile",
@@ -1142,7 +1142,7 @@
       "address": "0x1a6330",
       "source_function": "RequestAction",
       "headers": [
-        "include/mod/arms/owner.hpp"
+        "include/animation/arms/owner.hpp"
       ],
       "uses": [
         "ProfileScope profile",
@@ -1155,7 +1155,7 @@
       "address": "0x34f080",
       "source_function": "Evaluate",
       "headers": [
-        "include/mod/arms/playback.hpp"
+        "include/animation/arms/playback.hpp"
       ],
       "uses": [
         "evaluation",
@@ -1168,7 +1168,7 @@
       "address": "0x34ee90",
       "source_function": "Advance",
       "headers": [
-        "include/mod/arms/playback.hpp"
+        "include/animation/arms/playback.hpp"
       ],
       "uses": [
         "history",
@@ -1180,7 +1180,7 @@
       "address": "0x1b0ff8",
       "source_function": "Clear",
       "headers": [
-        "include/mod/effects/runtime.hpp"
+        "include/game/effects/runtime.hpp"
       ],
       "uses": [
         "IdentityXYZ",
@@ -1192,7 +1192,7 @@
       "address": "0x1b1080",
       "source_function": "Reset",
       "headers": [
-        "include/mod/effects/runtime.hpp"
+        "include/game/effects/runtime.hpp"
       ],
       "uses": [
         "IdentityXYZ",
@@ -1204,7 +1204,7 @@
       "address": "0x1b1038",
       "source_function": "Initialize",
       "headers": [
-        "include/mod/effects/runtime.hpp"
+        "include/game/effects/runtime.hpp"
       ],
       "uses": [
         "resource",
@@ -1218,7 +1218,7 @@
       "address": "0x1b1168",
       "source_function": "Initialize",
       "headers": [
-        "include/mod/effects/runtime.hpp"
+        "include/game/effects/runtime.hpp"
       ],
       "uses": [
         "resource",
@@ -1231,7 +1231,7 @@
       "address": "0x1b1518",
       "source_function": "Release",
       "headers": [
-        "include/mod/effects/runtime.hpp"
+        "include/game/effects/runtime.hpp"
       ],
       "uses": [
         "children",
@@ -1242,7 +1242,7 @@
       "address": "0x1b16a8",
       "source_function": "Active",
       "headers": [
-        "include/mod/effects/runtime.hpp"
+        "include/game/effects/runtime.hpp"
       ],
       "uses": [
         "children",
@@ -1253,7 +1253,7 @@
       "address": "0x1b2408",
       "source_function": "Clear",
       "headers": [
-        "include/mod/effects/runtime.hpp"
+        "include/game/effects/runtime.hpp"
       ],
       "uses": [
         "pairs"
@@ -1263,7 +1263,7 @@
       "address": "0x1b38f8",
       "source_function": "RemoveBone",
       "headers": [
-        "include/mod/effects/slot_views.hpp"
+        "include/game/effects/slot_views.hpp"
       ],
       "uses": [
         "indices",
@@ -1276,7 +1276,7 @@
       "address": "0x382348",
       "source_function": "func_00382348",
       "headers": [
-        "include/mod/effects/random.h"
+        "include/game/effects/random_state.h"
       ],
       "uses": [
         "BkModEffectRandomSeedPS2"
@@ -1286,7 +1286,7 @@
       "address": "0x34fe70",
       "source_function": "func_0034FE70",
       "headers": [
-        "include/mod/animation/sampling.h"
+        "include/animation/sampling.h"
       ],
       "uses": [
         "first",
@@ -1299,7 +1299,7 @@
       "address": "0x1409c0",
       "source_function": "Select",
       "headers": [
-        "include/mod/camera/aim.hpp"
+        "include/game/camera/aim.hpp"
       ],
       "uses": [
         "actor->eligibility",
@@ -1313,7 +1313,7 @@
       "address": "0x12aaf8",
       "source_function": "MarkSolid",
       "headers": [
-        "include/mod/weapons/instance.hpp"
+        "include/game/weapons/instance.hpp"
       ],
       "uses": [
         "MaterialFlags",
@@ -1324,7 +1324,7 @@
       "address": "0x12b2a8",
       "source_function": "SelectWorldHit",
       "headers": [
-        "include/mod/weapons/instance.hpp"
+        "include/game/weapons/instance.hpp"
       ],
       "uses": [
         "MaterialFlags",
@@ -1337,7 +1337,7 @@
       "address": "0x135878",
       "source_function": "GetWorldMatrix",
       "headers": [
-        "include/mod/camera/motion.hpp"
+        "include/game/camera/motion.hpp"
       ],
       "uses": [
         "GetLocalMatrix",
@@ -1350,7 +1350,7 @@
       "address": "0x13cd20",
       "source_function": "AddMedkit",
       "headers": [
-        "include/mod/camera/vitals.h"
+        "include/game/camera/vitals.h"
       ],
       "uses": [
         "medkitCount"
@@ -1360,7 +1360,7 @@
       "address": "0x15d210",
       "source_function": "Row",
       "headers": [
-        "include/mod/weapons/catalog.h"
+        "include/game/weapons/catalog.h"
       ],
       "uses": [
         "BkModWeaponCatalogAtPS2"
@@ -1370,7 +1370,7 @@
       "address": "0x15d228",
       "source_function": "PrimaryDefinition",
       "headers": [
-        "include/mod/weapons/catalog.h"
+        "include/game/weapons/catalog.h"
       ],
       "uses": [
         "BkModWeaponCatalogIndexedPS2",
@@ -1381,7 +1381,7 @@
       "address": "0x15d288",
       "source_function": "Word10",
       "headers": [
-        "include/mod/weapons/catalog.h"
+        "include/game/weapons/catalog.h"
       ],
       "uses": [
         "word10"
@@ -1391,7 +1391,7 @@
       "address": "0x15d2a8",
       "source_function": "Word14",
       "headers": [
-        "include/mod/weapons/catalog.h"
+        "include/game/weapons/catalog.h"
       ],
       "uses": [
         "word14"
@@ -1401,7 +1401,7 @@
       "address": "0x15d2c8",
       "source_function": "Word18",
       "headers": [
-        "include/mod/weapons/catalog.h"
+        "include/game/weapons/catalog.h"
       ],
       "uses": [
         "word18"
@@ -1411,7 +1411,7 @@
       "address": "0x15c970",
       "source_function": "Allocate",
       "headers": [
-        "include/mod/weapons/inventory_methods.hpp"
+        "include/game/weapons/inventory_methods.hpp"
       ],
       "uses": [
         "instances",
@@ -1422,7 +1422,7 @@
       "address": "0x15cab0",
       "source_function": "Reset",
       "headers": [
-        "include/mod/weapons/inventory_methods.hpp"
+        "include/game/weapons/inventory_methods.hpp"
       ],
       "uses": [
         "instanceFlags",
@@ -1434,7 +1434,7 @@
       "address": "0x15cba0",
       "source_function": "Tick",
       "headers": [
-        "include/mod/weapons/inventory_methods.hpp"
+        "include/game/weapons/inventory_methods.hpp"
       ],
       "uses": [
         "frame->delta",
@@ -1446,7 +1446,7 @@
       "address": "0x14fa80",
       "source_function": "Update",
       "headers": [
-        "include/mod/weapons/projectile_lifetime.hpp"
+        "include/game/weapons/projectile_lifetime.hpp"
       ],
       "uses": [
         "remaining",
@@ -1459,7 +1459,7 @@
       "address": "0x1bec68",
       "source_function": "ModEffects::Flights::Clear",
       "headers": [
-        "include/mod/effects/attachments.h"
+        "include/game/effects/attachments.h"
       ],
       "uses": [
         "records",
@@ -1473,7 +1473,7 @@
       "address": "0x1bf720",
       "source_function": "ModEffects::EmitterRecord::Clear",
       "headers": [
-        "include/mod/effects/emitter.h"
+        "include/game/effects/emitter.h"
       ],
       "uses": [
         "owner"
@@ -1483,7 +1483,7 @@
       "address": "0x1bfea0",
       "source_function": "ModEffects::EmitterRecord::Reset",
       "headers": [
-        "include/mod/effects/emitter.h"
+        "include/game/effects/emitter.h"
       ],
       "uses": [
         "owner"
@@ -1493,7 +1493,7 @@
       "address": "0x1c1578",
       "source_function": "func_001C1578",
       "headers": [
-        "include/mod/effects/emitter.h"
+        "include/game/effects/emitter.h"
       ],
       "uses": [
         "lights",
@@ -1505,7 +1505,7 @@
       "address": "0x1c1930",
       "source_function": "func_001C1930",
       "headers": [
-        "include/mod/effects/emitter.h"
+        "include/game/effects/emitter.h"
       ],
       "uses": [
         "definitionCount",
@@ -1516,7 +1516,7 @@
       "address": "0x1c0760",
       "source_function": "func_001C0760",
       "headers": [
-        "include/mod/effects/emitter_list.h"
+        "include/game/effects/emitter_list.h"
       ],
       "uses": [
         "head",
@@ -1529,7 +1529,7 @@
       "address": "0x1bd508",
       "source_function": "Start",
       "headers": [
-        "include/mod/effects/random.hpp"
+        "include/game/effects/random.hpp"
       ],
       "uses": [
         "D_00418590.Next",
@@ -1540,7 +1540,7 @@
       "address": "0x1bcdf8",
       "source_function": "Advance",
       "headers": [
-        "include/mod/effects/random.hpp"
+        "include/game/effects/random.hpp"
       ],
       "uses": [
         "D_00418590.Fraction"
@@ -1550,7 +1550,7 @@
       "address": "0x1b8138",
       "source_function": "Clear",
       "headers": [
-        "include/mod/effects/simulation.hpp"
+        "include/game/effects/simulation.hpp"
       ],
       "uses": [
         "heads",
@@ -1563,7 +1563,7 @@
       "address": "0x1b90d0",
       "source_function": "Clear",
       "headers": [
-        "include/mod/effects/simulation.hpp"
+        "include/game/effects/simulation.hpp"
       ],
       "uses": [
         "pending",
@@ -1579,7 +1579,7 @@
       "address": "0x1b86f8",
       "source_function": "Render",
       "headers": [
-        "include/mod/effects/simulation.hpp"
+        "include/game/effects/simulation.hpp"
       ],
       "uses": [
         "(char*)this+0x11604",
@@ -1590,7 +1590,7 @@
       "address": "0x3461d0",
       "source_function": "Cache::Enable",
       "headers": [
-        "include/mod/animation/pose_cache.h"
+        "include/animation/pose_cache.h"
       ],
       "uses": [
         "BkModPoseCacheEnablePS2"
@@ -1600,7 +1600,7 @@
       "address": "0x3461e0",
       "source_function": "Cache::Clear",
       "headers": [
-        "include/mod/animation/pose_cache.h"
+        "include/animation/pose_cache.h"
       ],
       "uses": [
         "BkModPoseCacheClearPS2"
@@ -1610,7 +1610,7 @@
       "address": "0x346f38",
       "source_function": "Cache::ForceBone",
       "headers": [
-        "include/mod/animation/pose_cache.h"
+        "include/animation/pose_cache.h"
       ],
       "uses": [
         "BkModPoseCacheForceBonePS2"
@@ -1620,7 +1620,7 @@
       "address": "0x3487d0",
       "source_function": "func_003487D0",
       "headers": [
-        "include/mod/animation/pose_cache.h"
+        "include/animation/pose_cache.h"
       ],
       "uses": [
         "frameCount"
@@ -1630,7 +1630,7 @@
       "address": "0x3487e0",
       "source_function": "func_003487E0",
       "headers": [
-        "include/mod/animation/pose_cache.h"
+        "include/animation/pose_cache.h"
       ],
       "uses": [
         "skeletonIndex"
@@ -1640,7 +1640,7 @@
       "address": "0x3487e8",
       "source_function": "func_003487E8",
       "headers": [
-        "include/mod/animation/pose_cache.h"
+        "include/animation/pose_cache.h"
       ],
       "uses": [
         "frameCount"
@@ -1650,7 +1650,7 @@
       "address": "0x1357b8",
       "source_function": "GetLocalMatrix",
       "headers": [
-        "include/mod/camera/local_pose.hpp"
+        "include/game/camera/local_pose.hpp"
       ],
       "uses": [
         "definition->rootIndex",
@@ -1666,10 +1666,10 @@
       "address": "0x13c9d8",
       "source_function": "Restore",
       "headers": [
-        "include/mod/camera/vitals.h",
-        "include/mod/camera/vitals.hpp",
-        "include/mod/math/scalar.hpp",
-        "include/mod/math/scalar.h"
+        "include/game/camera/vitals.h",
+        "include/game/camera/vitals.hpp",
+        "include/game/math/scalar.hpp",
+        "include/game/math/scalar.h"
       ],
       "uses": [
         "Normalized",
@@ -1683,7 +1683,7 @@
       "address": "0x1beb50",
       "source_function": "Clear",
       "headers": [
-        "include/mod/effects/damage_window.h"
+        "include/game/effects/damage_window.h"
       ],
       "uses": [
         "records",
@@ -1699,7 +1699,7 @@
       "address": "0x15d248",
       "source_function": "Definition",
       "headers": [
-        "include/mod/weapons/state.h"
+        "include/game/weapons/state.h"
       ],
       "uses": [
         "definition->secondary"
@@ -1710,16 +1710,16 @@
     {
       "area": "camera/player/input",
       "headers": [
-        "mod/camera/controller.hpp",
-        "mod/camera/axes.hpp",
-        "mod/camera/pad.hpp",
-        "mod/camera/pad_backend.hpp",
-        "mod/camera/aim.hpp",
-        "mod/camera/motion.hpp",
-        "mod/camera/vitals.h",
-        "mod/camera/local_pose.hpp",
-        "mod/camera/vitals.hpp",
-        "mod/math/scalar.hpp"
+        "game/camera/controller.hpp",
+        "game/camera/axes.hpp",
+        "game/camera/pad.hpp",
+        "game/camera/pad_backend.hpp",
+        "game/camera/aim.hpp",
+        "game/camera/motion.hpp",
+        "game/camera/vitals.h",
+        "game/camera/local_pose.hpp",
+        "game/camera/vitals.hpp",
+        "game/math/scalar.hpp"
       ],
       "tus": [
         "tu_13db40",
@@ -1757,15 +1757,15 @@
     {
       "area": "weapons/shots/fire/reload/impact",
       "headers": [
-        "mod/weapons/state.h",
-        "mod/weapons/shot.h",
-        "mod/weapons/controller.hpp",
-        "mod/weapons/instance.hpp",
-        "mod/weapons/moving.hpp",
-        "mod/weapons/inventory.h",
-        "mod/weapons/catalog.h",
-        "mod/weapons/inventory_methods.hpp",
-        "mod/weapons/projectile_lifetime.hpp"
+        "game/weapons/state.h",
+        "game/weapons/shot.h",
+        "game/weapons/controller.hpp",
+        "game/weapons/instance.hpp",
+        "game/weapons/moving.hpp",
+        "game/weapons/inventory.h",
+        "game/weapons/catalog.h",
+        "game/weapons/inventory_methods.hpp",
+        "game/weapons/projectile_lifetime.hpp"
       ],
       "tus": [
         "tu_1561f8",
@@ -1812,13 +1812,13 @@
     {
       "area": "first-person arms/weapon animation",
       "headers": [
-        "mod/animation/instance.h",
-        "mod/animation/runtime.h",
-        "mod/animation/sampling.h",
-        "mod/arms/instance.hpp",
-        "mod/arms/owner.hpp",
-        "mod/arms/playback.hpp",
-        "mod/animation/pose_cache.h"
+        "animation/instance.h",
+        "animation/runtime.h",
+        "animation/sampling.h",
+        "animation/arms/instance.hpp",
+        "animation/arms/owner.hpp",
+        "animation/arms/playback.hpp",
+        "animation/pose_cache.h"
       ],
       "tus": [
         "tu_347a50",
@@ -1845,21 +1845,21 @@
     {
       "area": "particles/muzzle/decals",
       "headers": [
-        "mod/effects/asset.h",
-        "mod/effects/slot.h",
-        "mod/effects/render_state.h",
-        "mod/effects/emitter_list.h",
+        "game/effects/asset.h",
+        "game/effects/slot.h",
+        "game/effects/render_state.h",
+        "game/effects/emitter_list.h",
         "game/effects/pool.h",
         "game/effects/vector.h",
-        "mod/effects/runtime.hpp",
-        "mod/effects/slot_views.hpp",
-        "mod/effects/random.h",
-        "mod/effects/vu_math.h",
-        "mod/effects/attachments.h",
-        "mod/effects/damage_window.h",
-        "mod/effects/emitter.h",
-        "mod/effects/random.hpp",
-        "mod/effects/simulation.hpp"
+        "game/effects/runtime.hpp",
+        "game/effects/slot_views.hpp",
+        "game/effects/random_state.h",
+        "game/effects/vu_math.h",
+        "game/effects/attachments.h",
+        "game/effects/damage_window.h",
+        "game/effects/emitter.h",
+        "game/effects/random.hpp",
+        "game/effects/simulation.hpp"
       ],
       "tus": [
         "tu_1b0fd0",
@@ -1896,7 +1896,7 @@
   ],
   "instruction_views": [
     {
-      "header": "include/mod/camera/aim.hpp",
+      "header": "include/game/camera/aim.hpp",
       "source_verified": false,
       "api": [
         "ModCamera::AimCandidate",
@@ -1911,7 +1911,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/runtime.hpp",
+      "header": "include/game/effects/runtime.hpp",
       "source_verified": false,
       "api": [
         "Muzzle",
@@ -1931,7 +1931,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/vu_math.h",
+      "header": "include/game/effects/vu_math.h",
       "source_verified": false,
       "api": [
         "BkEffectVUSinCosPS2",
@@ -1945,7 +1945,7 @@
       ]
     },
     {
-      "header": "include/mod/effects/damage_window.h",
+      "header": "include/game/effects/damage_window.h",
       "source_verified": false,
       "api": [
         "BkModDamageWindowPS2",
@@ -1959,7 +1959,7 @@
       ]
     },
     {
-      "header": "include/mod/animation/pose_cache.h",
+      "header": "include/animation/pose_cache.h",
       "source_verified": false,
       "api": [
         "BkModPoseCacheSlotPS2",
@@ -1974,7 +1974,7 @@
       ]
     },
     {
-      "header": "include/mod/camera/vitals.hpp",
+      "header": "include/game/camera/vitals.hpp",
       "source_verified": false,
       "api": [
         "ModCamera::PlayerVitals",

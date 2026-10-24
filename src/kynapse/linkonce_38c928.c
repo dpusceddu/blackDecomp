@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_004062F8[];
 const char rodata_004062F8[88] __asm__("D_004062F8") __attribute__((aligned(8))) = "Q24Kaimt8CVarList1ZPQ24Kaim7CEntity" "\000\000\000\000\000" "Q34Kaimt8CVarList1ZPQ24Kaim7CEntity9CIterator" "\000\000\000";

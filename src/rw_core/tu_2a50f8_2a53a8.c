@@ -1,6 +1,6 @@
 /* Translation unit renderware_core/tu_2a50f8 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "rw_core/stream.h"
 #include "ps2/renderware_inline.h"
 

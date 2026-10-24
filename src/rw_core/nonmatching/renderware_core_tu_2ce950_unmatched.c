@@ -93,7 +93,7 @@ RwHeapPS2 *func_002CF150(u32 bytes) {
 
 #ifdef NONMATCHING_2CF440
 // Unmatched: stack aggregates, loop expansion and scheduling still differ from the PS2 body.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct RwCallbacksPS2 {s32 entries[11];} __attribute__((packed)) RwCallbacksPS2;
 typedef struct RwErrorPS2 {s32 plugin,code;} RwErrorPS2;
 extern u8 D_00449438[];extern s32 D_0040E6F0;
@@ -114,7 +114,7 @@ RwCallbacksPS2 *func_002CF440(RwCallbacksPS2 *callbacks) {
 
 #ifdef NONMATCHING_2CF610
 // Unmatched: stack aggregates, loop expansion and scheduling still differ from the PS2 body.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct RwLinkPS2 {struct RwLinkPS2 *next,*previous;} RwLinkPS2;
 typedef struct RwPoolPS2 {s32 size, reserved[2];void *memory;RwLinkPS2 used,free;RwLinkPS2 *last_free,*last_used;} RwPoolPS2;
 typedef struct RwErrorPS2 {s32 plugin,code;} RwErrorPS2;
@@ -202,7 +202,7 @@ s32 func_002CFAC0(RwRegistryPS2 *registry,u32 size,s32 id,void *construct,void *
 
 #ifdef NONMATCHING_2D0280
 // Unmatched: stack aggregates, loop expansion and scheduling still differ from the PS2 body.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct RwChunkHeaderPS2 {u32 type,length,version,build;} RwChunkHeaderPS2;
 typedef struct RwErrorPS2 {s32 plugin,code;} RwErrorPS2;
 extern u8 D_00449438[];extern s32 func_002A5548(s32,...);extern void func_002A55D8(RwErrorPS2 *);

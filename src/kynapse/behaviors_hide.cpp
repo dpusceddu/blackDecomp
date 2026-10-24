@@ -1,5 +1,5 @@
-#include "ps2/kynapse/property.hpp"
-#include "campaign/behaviors/hide.hpp"
+#include "kynapse/property.hpp"
+#include "kynapse/behaviors/hide.hpp"
 
 extern const char D_00404350[], D_00404358[], D_00404368[], D_00404378[];
 extern const char D_00404388[], D_00404398[];

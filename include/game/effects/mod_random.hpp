@@ -1,4 +1,0 @@
-#ifndef BLACK_COMPAT_INCLUDE_GAME_EFFECTS_MOD_RANDOM_HPP
-#define BLACK_COMPAT_INCLUDE_GAME_EFFECTS_MOD_RANDOM_HPP
-#include "mod/effects/random.hpp"
-#endif

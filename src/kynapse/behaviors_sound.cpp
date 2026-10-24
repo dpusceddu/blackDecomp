@@ -1,4 +1,4 @@
-#include "context/behaviors/sound.hpp"
+#include "kynapse/agents/sound.hpp"
 
 namespace Kaim {
 extern int gTeamKey;

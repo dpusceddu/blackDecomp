@@ -1,7 +1,7 @@
 // Unmatched: matrix construction and culling helper context; Add retains six scheduling differences.
 #ifdef NONMATCHING
-#include "mod/effects/runtime.hpp"
-#include "mod/effects/vu_math.h"
+#include "game/effects/runtime.hpp"
+#include "game/effects/vu_math.h"
 extern "C" {extern char*D_0040F4D0;extern char*D_0040F4C0;extern s128 D_004432A0;}
 using ModEffects::Matrix;
 struct TimedSlot {void*asset;char unknown04[12];Matrix input,output;float offset,rate,started,expires,fade,unknowna4,alpha,unknownac;};

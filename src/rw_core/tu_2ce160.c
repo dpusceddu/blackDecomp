@@ -1,5 +1,5 @@
 // RenderWare immediate-mode plugin; names inferred from operations.
-#include "rw_core/im3d_campaign.h"
+#include "rw_core/im3d_operations.h"
 
 void *func_002CE7C8(void *instance) {
  func_002CF5D8(&IM3D_PLUGIN->defaultTriangleFan);func_002CF5D0(&IM3D_PLUGIN->defaultTriangleList);D_0040E6EC--;return instance;

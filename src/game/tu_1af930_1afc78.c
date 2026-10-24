@@ -1,5 +1,5 @@
-#include "auto/prelude.h"
-#include "game/actor/asset.h"
+#include "ps2/prelude.h"
+#include "game/effects/asset.h"
 
 void func_001AFC78(void) {}
 

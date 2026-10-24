@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 s32 func_00103908(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x2109C);

@@ -1,4 +1,0 @@
-#ifndef BLACK_COMPAT_INCLUDE_CAMPAIGN_ACTOR_MOTION_HPP
-#define BLACK_COMPAT_INCLUDE_CAMPAIGN_ACTOR_MOTION_HPP
-#include "mod/camera/motion.hpp"
-#endif

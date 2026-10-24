@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_0013DB10(void *arg0, s32 arg1, s128 arg2, f32 fparg0) {
     if ((arg1 >= M2C_FIELD(arg0, s32 *, 0x1F9C)) && (M2C_FIELD(arg0, s32 *, 0x4C) == 0)) {

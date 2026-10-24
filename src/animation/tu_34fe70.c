@@ -1,4 +1,4 @@
-#include "mod/animation/sampling.h"
+#include "animation/sampling.h"
 SamplingPair *func_0034FE70(SamplingPair *pair) {
     pair->first=0;
     pair->second=0;

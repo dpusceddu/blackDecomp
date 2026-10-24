@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #include "ps2/vu0_lowering.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES

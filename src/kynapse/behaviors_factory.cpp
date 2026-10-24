@@ -1,4 +1,4 @@
-#include "context/behaviors/factory.hpp"
+#include "kynapse/agents/factory.hpp"
 namespace KaimFactory {
 Engine*CreateEngine(InitConfig*config,ObjectRoot*context) {
  if(!IsStarted())return 0;unsigned int sum=0;for(unsigned int i=0;i<0x5b;++i)sum+=gCheckTable[i];if(sum!=0x4106)return 0;

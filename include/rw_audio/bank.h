@@ -1,6 +1,6 @@
 #ifndef RWA_EE_BANK_H
 #define RWA_EE_BANK_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 /* Inferred names; accessed bank and disk-header offsets are verified by matching users.
    This bank view does not establish the complete bank size.

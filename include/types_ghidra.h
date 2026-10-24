@@ -4,7 +4,7 @@
  * (see the "used by" mark on each). Offsets and sizes are asserted below. Names are Ghidra's, not the original's. */
 #ifndef TYPES_GHIDRA_H
 #define TYPES_GHIDRA_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 typedef struct PS2AnimationExpression PS2AnimationExpression;
 typedef struct PS2CollisionQueue PS2CollisionQueue;

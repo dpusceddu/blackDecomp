@@ -1,4 +1,4 @@
-#include "mod/arms/sampler.hpp"
+#include "animation/arms/sampler.hpp"
 namespace ArmsAnimation {
 static inline float SampleAbs(float value){return __builtin_fabsf(value);}
 }

@@ -1,4 +1,4 @@
-#include "campaign/actor/room_region.hpp"
+#include "game/actor/room_region.hpp"
 namespace CampaignActor {
 extern "C" {
 void func_0026AA68(int);void func_0026A840(int);

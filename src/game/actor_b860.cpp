@@ -1,4 +1,4 @@
-#include "campaign/actor/volume_state.hpp"
+#include "game/actor/volume_state.hpp"
 namespace CampaignActor {
 extern "C" {
 void func_0026AA68(int);void func_0026A840(int);

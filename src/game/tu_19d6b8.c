@@ -1,8 +1,8 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #include "ps2/vu0_lowering.h"
-#include "recovered/Recovered_Action.h"
-#include "recovered/Recovered_Vtable_003DE8A0.h"
+#include "game/layouts/Recovered_Action.h"
+#include "game/layouts/Recovered_Vtable_003DE8A0.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES

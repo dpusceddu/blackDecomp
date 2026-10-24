@@ -1,6 +1,6 @@
 /* Translation unit apt/tu_246060 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern volatile unsigned char func_00248C78();
 extern s32 func_0024C300();

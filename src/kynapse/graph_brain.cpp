@@ -1,4 +1,4 @@
-#include "campaign/graph/brain.hpp"
+#include "kynapse/graph/brain.hpp"
 using namespace Kaim;
 
 #if 0

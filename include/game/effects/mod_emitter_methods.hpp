@@ -1,9 +1,9 @@
 #ifndef BLACK_MOD_EFFECT_EMITTER_METHODS_HPP
 #define BLACK_MOD_EFFECT_EMITTER_METHODS_HPP
-#include "mod/effects/runtime.hpp"
-#include "mod/effects/attachments.h"
-#include "mod/effects/emitter.h"
-#include "mod/effects/emitter_list.h"
+#include "game/effects/runtime.hpp"
+#include "game/effects/attachments.h"
+#include "game/effects/emitter.h"
+#include "game/effects/emitter_list.h"
 namespace ModEffects {
 // Descriptive nonvirtual methods over observed PS2 storage. Original names unknown.
 class Flights : public BkModAttachedEffectsPS2 {

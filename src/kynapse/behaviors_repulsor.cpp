@@ -8,7 +8,7 @@ ObjectBase* CreateObject62D40(int a) { return new Object62D40(a); }
 #elif defined(STEERING_REGISTRATION_ONLY)
 /* Translation unit kynapse/tu_305538 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 // Native class and iterator names; SN supplies their natural eight-byte placement.
 const char SteeringClassName[] __asm__("D_00408630") = "CRepulsorDynamicAvoidance";
@@ -61,7 +61,7 @@ void func_00306780(void) {
 }
 
 #else
-#include "context/behaviors/repulsor.hpp"
+#include "kynapse/agents/repulsor.hpp"
 
 #ifdef BLACK_NONMATCHING
 // Unmatched: SelectDirection is 52 bytes short; normalization and aggregate-copy lifetimes remain unresolved.

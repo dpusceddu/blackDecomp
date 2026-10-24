@@ -1,6 +1,6 @@
 // Methods recovered through PS2 class views; unknown original names retain their addresses.
-#include "classes/kynapse/Kaim_CHideAgent.hpp"
-#include "classes/kynapse/Kaim_CBasicAllocator.hpp"
+#include "kynapse/classes/Kaim_CHideAgent.hpp"
+#include "kynapse/classes/Kaim_CBasicAllocator.hpp"
 
 namespace BlackPS2Classes {
 

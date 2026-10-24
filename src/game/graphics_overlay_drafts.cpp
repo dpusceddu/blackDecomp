@@ -3,7 +3,7 @@
 
 #if 0
 // Unmatched: vector-copy alignment, inline helpers and temporary lifetimes; best aligned candidate 333 differences.
-#include "classes/other/UnknownVtable_003E0A40.hpp"
+#include "game/classes/other/UnknownVtable_003E0A40.hpp"
 #include "game/ai_vector.hpp"
 namespace CampaignGraphics {
 struct __attribute__((aligned(16))) Vec4 {float x,y,z,w;};
@@ -118,7 +118,7 @@ void Notification::Update(float delta){
 
 #if 0
 // Unmatched: teardown loop shape and register scheduling; 45 differences.
-#include "classes/other/UnknownVtable_003E0AC0.hpp"
+#include "game/classes/other/UnknownVtable_003E0AC0.hpp"
 struct Sprite;
 extern "C" {void func_00278F00(void*,int,Sprite*);extern char* D_0040F518;}
 template<class T> inline T& At(void* p,int offset){return *(T*)((char*)p+offset);}
@@ -136,7 +136,7 @@ int BlackPS2Classes::UnknownVtable_003E0AC0::Function_001FBB48(){
 
 #if 0
 // Unmatched: renderer pointer and player-index load scheduling; 6 differences.
-#include "classes/other/UnknownVtable_003E0A40.hpp"
+#include "game/classes/other/UnknownVtable_003E0A40.hpp"
 struct Sprite;
 extern "C" {void func_00278F00(void*,int,Sprite*);extern char* D_0040F518;}
 template<class T> inline T& At(void* p,int offset){return *(T*)((char*)p+offset);}

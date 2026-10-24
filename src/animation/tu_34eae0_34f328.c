@@ -1,5 +1,5 @@
-#include "auto/prelude.h"
-#include "mod/animation/instance.h"
+#include "ps2/prelude.h"
+#include "animation/instance.h"
 
 void func_0034F328(void *arg0, s32 arg1) {
     s32 temp_2;

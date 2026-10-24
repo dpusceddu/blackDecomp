@@ -1,4 +1,4 @@
-#include "mod/camera/aim.hpp"
+#include "game/camera/aim.hpp"
 namespace ModCamera {
 extern char *world __asm__("D_0040F4D0");
 extern PlayerAim *CurrentPlayer(void*) __asm__("func_00135550");

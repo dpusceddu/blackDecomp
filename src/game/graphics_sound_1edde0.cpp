@@ -1,4 +1,4 @@
-#include "campaign/graphics/sound_envelopes.hpp"
+#include "game/graphics/sound_envelopes.hpp"
 using namespace CampaignGraphics;
 // Unmatched: 8 instruction differences after native layout, EE clamp and helper-context probes.
 int DestructionEnvelope::Begin(float value,unsigned useEndpoint)

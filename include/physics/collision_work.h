@@ -1,6 +1,6 @@
 #ifndef BLACK_PHYSICS_COLLISION_WORK_H
 #define BLACK_PHYSICS_COLLISION_WORK_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 /* Accessed prefixes verified by collision pair processing; names are inferred. */
 typedef struct {void *first, *second;} CollisionPairPS2;
 typedef struct {u8 unknown00[0x30];u32 contactCount, equationCount;} CollisionSolverPS2;

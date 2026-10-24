@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_00405EC0[];
 const char rodata_00405EC0[48] __asm__("D_00405EC0") __attribute__((aligned(8))) = "Q24Kaim7CScript" "\000" "Q24Kaim7CObject" "\000" "bad_alloc" "\000\000\000\000\000\000\000";

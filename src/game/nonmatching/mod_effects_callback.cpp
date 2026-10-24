@@ -1,7 +1,7 @@
 // Unmatched: VU operator load order and seven remaining allocation differences.
 #ifdef NONMATCHING
 // Layouts are accessed prefixes, not assertions about the original class names.
-#include "mod/effects/vu_math.h"
+#include "game/effects/vu_math.h"
 namespace EffectCallbackProposal {
 typedef s128 Value;
 struct Matrix { Value row[4]; };

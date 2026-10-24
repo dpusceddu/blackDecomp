@@ -1,6 +1,6 @@
 #ifndef BLACK_MOD_MUZZLE_METHODS_HPP
 #define BLACK_MOD_MUZZLE_METHODS_HPP
-#include "mod/effects/runtime.hpp"
+#include "game/effects/runtime.hpp"
 namespace ModEffects {
 // Named PS2 access methods; original class identity and allocation extent are unverified.
 class MuzzleMethods : public Muzzle {

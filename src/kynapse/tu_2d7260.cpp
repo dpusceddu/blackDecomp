@@ -1,4 +1,4 @@
-#include "context/behaviors/wander.hpp"
+#include "kynapse/agents/wander.hpp"
 #include "kynapse/predicates.hpp"
 // Property and registration names retain the original source-data order.
 static inline const char* WanderGraphProperty() {return "Graph";}

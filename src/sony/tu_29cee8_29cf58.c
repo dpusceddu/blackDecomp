@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #include "types_ghidra.h"
 extern s8 D_003C15F8;

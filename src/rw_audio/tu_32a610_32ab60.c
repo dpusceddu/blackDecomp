@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_0032AB60(void *arg0, s32 arg1) {
     M2C_UNK (*temp_2)(void *);

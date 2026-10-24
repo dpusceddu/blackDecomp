@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 f32 func_0018DD60(void) {
     return 0.1f;

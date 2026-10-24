@@ -1,4 +1,4 @@
-#include "campaign/graphics/controller.hpp"
+#include "game/camera/pad.hpp"
 using namespace CampaignGraphics;
 struct PressureView {EeU8 prefix[0x4c];float values[28];};
 float Controller::Pressure(unsigned index) const {

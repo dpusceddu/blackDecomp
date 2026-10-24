@@ -1,4 +1,4 @@
-#include "campaign/behaviors/hide_search.hpp"
+#include "kynapse/behaviors/hide_search.hpp"
 #include "kynapse/compat.hpp"
 namespace HideSearch {
 HideAgent::HideAgent(Context* context):Behavior(context),rank((unsigned)-1) {

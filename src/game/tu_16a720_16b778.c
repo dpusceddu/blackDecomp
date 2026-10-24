@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_0016B778(void *arg0, s128 arg1, f32 fparg0, f32 fparg1) {
     M2C_FIELD(arg0, f32 *, 0x44) = fparg1;

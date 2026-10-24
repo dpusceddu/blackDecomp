@@ -1,8 +1,8 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_MovementModeBase.h"
-#include "recovered/Recovered_RouteMode.h"
+#include "game/layouts/Recovered_MovementModeBase.h"
+#include "game/layouts/Recovered_RouteMode.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 extern void func_00191C20(Recovered_RouteMode *, void *);

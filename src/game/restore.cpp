@@ -1,5 +1,5 @@
-#include "mod/camera/vitals.hpp"
-#include "mod/math/scalar.hpp"
+#include "game/camera/vitals.hpp"
+#include "game/math/scalar.hpp"
 namespace ModCamera {
 struct Settings { unsigned char unknown00[0x2014c]; int difficulty; };
 struct Hud {unsigned char unknown00[0x30];void*health;};

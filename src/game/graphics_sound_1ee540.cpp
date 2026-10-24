@@ -1,4 +1,4 @@
-#include "campaign/graphics/sound_envelopes.hpp"
+#include "game/graphics/sound_envelopes.hpp"
 using namespace CampaignGraphics;
 // Unmatched: 20 instruction differences after native layout, EE clamp and helper-context probes.
 void LowHealthEnvelope::Reset()

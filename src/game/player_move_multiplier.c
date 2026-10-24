@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct { char padding[0x2e0]; float speed; } BkActorRatePS2;
 extern BkActorRatePS2 **func_001AC040(void *);
 extern void *func_00135550(BkActorRatePS2 *);

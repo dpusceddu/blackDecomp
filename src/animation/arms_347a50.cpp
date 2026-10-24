@@ -1,6 +1,6 @@
 #include "ps2/ee_fpu.h"
-#include "mod/arms/instance.hpp"
-#include "auto/prelude.h"
+#include "animation/arms/instance.hpp"
+#include "ps2/prelude.h"
 namespace ArmsAnimation {
 static inline void ScaleRow(float scalar,const BlackGame::Position4& input,BlackGame::Position4& output) {
     asm("lqc2 vf9,0(%1)\n\tmfc1 $8,%2\n\tqmtc2.ni $8,vf11\n\tvmulx.xyzw vf12,vf9,vf11x\n\tsqc2 vf12,0(%0)"

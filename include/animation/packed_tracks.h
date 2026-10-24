@@ -1,6 +1,6 @@
 #ifndef BLACK_ANIMATION_PACKED_TRACKS_H
 #define BLACK_ANIMATION_PACKED_TRACKS_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 /* Inferred packed-track kinds; the four-byte prefix and widths follow the PS2 switches. */
 typedef struct TrackVector { f32 x, y, z, w; } __attribute__((aligned(16))) TrackVector;

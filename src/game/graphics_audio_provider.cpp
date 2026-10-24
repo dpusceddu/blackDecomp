@@ -1,4 +1,4 @@
-#include "campaign/graphics/audio_provider.hpp"
+#include "game/graphics/audio_provider.hpp"
 using namespace CampaignGraphics;
 using namespace BlackGame;
 extern "C" {

@@ -1,4 +1,4 @@
-#include "campaign/behaviors/pathway.hpp"
+#include "kynapse/behaviors/pathway.hpp"
 
 namespace Kaim {
 // Both motion-control pairs must have exactly one member. This occupies virtual slot 9.

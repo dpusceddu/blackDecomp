@@ -1,4 +1,4 @@
-#include "context/behaviors/scriptmanager.hpp"
+#include "kynapse/agents/scriptmanager.hpp"
 extern const char D_00405C40[], D_00405C48[];
 namespace KaimScriptRegistry {
 ScriptManager::ScriptManager() {

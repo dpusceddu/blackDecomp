@@ -1,4 +1,4 @@
-#include "campaign/behaviors/hide.hpp"
+#include "kynapse/behaviors/hide.hpp"
 extern const float kNearestLimit;
 namespace HideRecovery {
 void HideAgent::Reset() {

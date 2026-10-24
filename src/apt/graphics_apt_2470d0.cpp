@@ -1,4 +1,4 @@
-#include "campaign/graphics/apt_pair.hpp"
+#include "apt/apt_pair.hpp"
 using namespace AptPS2;
 // Unmatched: pooled text construction and named-property branch lifetimes.
 Value* TextPair::Read(int unused,Token** name)

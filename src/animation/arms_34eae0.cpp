@@ -1,4 +1,4 @@
-#include "mod/arms/playback.hpp"
+#include "animation/arms/playback.hpp"
 namespace ArmsAnimation {
 static inline float Minimum(float a,float b){float out;asm("min.s %0,%1,%2":"=f"(out):"f"(a),"f"(b));return out;}
 // Unmatched: Reset has three scalar-store scheduling differences; the best draft is in nonmatching/tu_34eae0_reset.c.

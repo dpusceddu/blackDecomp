@@ -118,7 +118,7 @@ def main():
              ' *',
              ' * Ghidra\'s types are recovered guesses, not facts. A structure is trusted only once a function using it matches',
              ' * (see the "used by" mark on each). Offsets and sizes are asserted below. Names are Ghidra\'s, not the original\'s. */',
-             '#ifndef TYPES_GHIDRA_H', '#define TYPES_GHIDRA_H', '#include "auto/prelude.h"', '']
+             '#ifndef TYPES_GHIDRA_H', '#define TYPES_GHIDRA_H', '#include "ps2/prelude.h"', '']
     for n in sorted(structs):
         lines.append('typedef struct %s %s;' % (n, n))
     lines.append('')

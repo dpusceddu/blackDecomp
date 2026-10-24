@@ -1,4 +1,4 @@
-#include "mod/effects/asset.h"
+#include "game/effects/asset.h"
 typedef BkActorAssetRecordPS2 BkFlagRecordPS2;
 typedef BkActorAssetPS2 BkFlagAssetPS2;
 extern "C" int func_001AFBF0(void *);

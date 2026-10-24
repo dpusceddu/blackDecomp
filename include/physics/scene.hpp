@@ -1,6 +1,6 @@
 #ifndef BLACK_PHYSICS_SCENE_HPP
 #define BLACK_PHYSICS_SCENE_HPP
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 // PS2 views: offsets below follow the scene's retail loads and stores.
 // Vector fourth lanes hold unrelated list payloads; do not overwrite them.
 typedef long long PhysicsVec;

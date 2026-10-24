@@ -1,4 +1,4 @@
-#include "campaign/actor/views.hpp"
+#include "game/actor/views.hpp"
 extern "C" {
 void func_00148550(void *);
 void func_00145400(void *);

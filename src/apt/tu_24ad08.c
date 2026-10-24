@@ -1,6 +1,6 @@
 /* Translation unit apt/tu_24ad08 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern s32 func_00386EC8();
 extern M2C_UNK D_003E22B8;

@@ -1,9 +1,9 @@
 #ifdef NONMATCHING
 // Unmatched: flag condition scheduling and float argument allocation differ.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_AnimationGraphNode.h"
-#include "recovered/Recovered_AnimationParameters.h"
+#include "animation/layouts/Recovered_AnimationGraphNode.h"
+#include "animation/layouts/Recovered_AnimationParameters.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 

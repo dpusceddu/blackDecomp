@@ -1,15 +1,15 @@
 // Methods recovered through PS2 class views; unknown original names retain their addresses.
-#include "classes/game/UnknownVtable_003DC838.hpp"
-#include "classes/game/UnknownVtable_003DC5F8.hpp"
-#include "classes/game/UnknownVtable_003DC100.hpp"
-#include "classes/game/UnknownVtable_003DB1F8.hpp"
-#include "classes/game/UnknownVtable_003DB828.hpp"
-#include "classes/game/UnknownVtable_003DC130.hpp"
-#include "classes/other/UnknownVtable_003E07F8.hpp"
-#include "classes/other/UnknownVtable_003E06C8.hpp"
-#include "classes/other/UnknownVtable_003E0688.hpp"
-#include "classes/other/UnknownVtable_003E0058.hpp"
-#include "classes/other/UnknownVtable_003E0140.hpp"
+#include "game/classes/UnknownVtable_003DC838.hpp"
+#include "game/classes/UnknownVtable_003DC5F8.hpp"
+#include "game/classes/UnknownVtable_003DC100.hpp"
+#include "game/classes/UnknownVtable_003DB1F8.hpp"
+#include "game/classes/UnknownVtable_003DB828.hpp"
+#include "game/classes/UnknownVtable_003DC130.hpp"
+#include "game/classes/other/UnknownVtable_003E07F8.hpp"
+#include "game/classes/other/UnknownVtable_003E06C8.hpp"
+#include "game/classes/other/UnknownVtable_003E0688.hpp"
+#include "game/classes/other/UnknownVtable_003E0058.hpp"
+#include "game/classes/other/UnknownVtable_003E0140.hpp"
 
 namespace BlackPS2Classes {
 

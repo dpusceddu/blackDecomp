@@ -1,6 +1,6 @@
 // Unmatched: named-resource lookup, mixed-width call contracts and VU temporary lifetimes.
 #ifdef NONMATCHING
-#include "mod/effects/runtime.hpp"
+#include "game/effects/runtime.hpp"
 #include "ps2/vu0.hpp"
 
 // Types below are local instruction views; canonical shared headers are untouched.

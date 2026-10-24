@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 s32 func_00173FE8(s16 *arg0) {
     *arg0 = 0;

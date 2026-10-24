@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 u8 func_001ADBF0(s32 arg0, void *arg1)
 {

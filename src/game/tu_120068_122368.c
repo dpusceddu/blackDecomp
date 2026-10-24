@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 s16 func_00122368(void **arg0, s32 arg1) {
     if (arg1 & 1) {

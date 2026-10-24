@@ -1,4 +1,4 @@
-#include "campaign/graph/spatial_iteration.hpp"
+#include "kynapse/graph/spatial_iteration.hpp"
 
 namespace Kaim {
 CSpatialGraph::CSpatialGraph():flags(31),coverageDistance(-1.0f),nodeCapacity(0),nodeSlots(0),nodeCount(0),nodes(0),nodeTable1c(0),firstEdgeFrom(0),firstEdgeTo(0),edgeCapacity(0),edgeSlots(0),edgeCount(0),edges(0),edgeEnd(0),edgeStart(0),edgeTable40(0),edgeNext(0),edgeTable48(0),edgeTable4c(0),edgeTable50(0),costPolicy(0),heuristic(0) {

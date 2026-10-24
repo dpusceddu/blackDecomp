@@ -1,5 +1,5 @@
-#include "ps2/kynapse/property.hpp"
-#include "campaign/behaviors/entities.hpp"
+#include "kynapse/property.hpp"
+#include "kynapse/behaviors/entities.hpp"
 extern "C" int _stricmp(const char*,const char*);
 extern "C" long func_0035E730(const char*);
 extern "C" float func_00291C68(long);

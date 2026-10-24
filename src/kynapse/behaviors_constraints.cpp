@@ -1,4 +1,4 @@
-#include "context/behaviors/constraints.hpp"
+#include "kynapse/agents/constraints.hpp"
 namespace Kaim {
 inline float NavEdge::GetAuthoredLength() const {
  NodeGraph* owner=graph;

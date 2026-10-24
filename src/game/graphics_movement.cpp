@@ -1,4 +1,4 @@
-#include "campaign/graphics/movement_core.hpp"
+#include "game/graphics/movement_core.hpp"
 using namespace CampaignGraphics;
 using namespace BlackGame;
 extern "C" {

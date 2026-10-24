@@ -1,7 +1,7 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_Object59D40.h"
+#include "kynapse/layouts/Recovered_Object59D40.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 extern M2C_UNK D_003EC9F0;

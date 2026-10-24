@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_0017BDC0(s32 arg0, s32 arg1, s32 arg2)
 {

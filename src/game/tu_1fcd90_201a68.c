@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 f32 func_00201A68(f32 fparg0) {
     if (fparg0 < 0.5f) {

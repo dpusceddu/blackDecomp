@@ -1,4 +1,4 @@
-#include "campaign/actor/expiry_effect.hpp"
+#include "game/weapons/projectile_lifetime.hpp"
 namespace CampaignActor {
 extern "C" {
 void func_0014BA80(void*,float);long func_0014FBE8(void*,float);void func_001EA580(void*,unsigned long,int);void func_00155C28(void*,void*,unsigned char,unsigned char);

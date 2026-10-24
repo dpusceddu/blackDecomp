@@ -1,4 +1,4 @@
-#include "campaign/graphics/controller.hpp"
+#include "game/camera/pad.hpp"
 // Unmatched: 2 instruction differences after native layout, argument-bank and helper probes.
 using namespace CampaignGraphics;
 float Controller::Smooth(float value,float step) {

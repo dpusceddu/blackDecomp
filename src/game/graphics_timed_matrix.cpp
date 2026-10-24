@@ -1,4 +1,4 @@
-#include "campaign/graphics/timed_matrix.hpp"
+#include "game/graphics/timed_matrix.hpp"
 
 using namespace BlackGame;
 using namespace BlackPS2::VU0;

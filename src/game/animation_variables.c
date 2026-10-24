@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef float (*BkAnimationCallbackPS2)(void *);
 typedef struct { const char *name; BkAnimationCallbackPS2 callback; } BkAnimationVariablePS2;
 extern BkAnimationVariablePS2 D_0048F708[13];

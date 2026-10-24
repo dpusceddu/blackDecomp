@@ -1,4 +1,4 @@
-#include "campaign/behaviors/flee_queries.hpp"
+#include "kynapse/behaviors/flee_queries.hpp"
 namespace FleeRecovery {
     int InitAgent::Initialize(ChildBuffers* config)
    {

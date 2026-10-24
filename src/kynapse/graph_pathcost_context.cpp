@@ -1,4 +1,4 @@
-#include "campaign/graph/tables.hpp"
+#include "kynapse/graph/tables.hpp"
 extern const char D_00407950[];
 namespace Kaim {
 // PS2 callback offset 0x68; this extension has no exact consumer yet.

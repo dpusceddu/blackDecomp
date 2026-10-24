@@ -1,6 +1,6 @@
 #ifndef BLACK_RENDERWARE_CORE_FRAME_H
 #define BLACK_RENDERWARE_CORE_FRAME_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "rw_core/math.h"
 /* UNVERIFIED PS2 frame prefix. Matrix rows require EE quadword alignment. */
 typedef struct RwFramePS2 RwFramePS2;

@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern void func_00122DF0(M2C_UNK *);
 extern M2C_UNK D_0048EFA8;

@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "rw_core/stream.h"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"

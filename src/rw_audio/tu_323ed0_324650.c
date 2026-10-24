@@ -1,6 +1,6 @@
 /* Translation unit rwa_ee/tu_323ed0 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern s32 D_00458DC0;
 extern s32 func_0036CD08(M2C_UNK, s32, M2C_UNK);

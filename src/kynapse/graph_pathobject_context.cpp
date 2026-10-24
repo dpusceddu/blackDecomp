@@ -1,4 +1,4 @@
-#include "campaign/graph/path_object.hpp"
+#include "kynapse/graph/path_object.hpp"
 extern const unsigned char D_00452158,D_004524A0,D_004525B8;
 namespace Kaim {
 inline bool PathClassInfo::IsDerivedFrom(PathClassInfo *wanted) {

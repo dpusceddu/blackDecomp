@@ -1,4 +1,4 @@
-#include "campaign/graphics/pad_backend.hpp"
+#include "game/camera/pad_backend.hpp"
 
 using namespace CampaignGraphics;
 

@@ -1,4 +1,4 @@
-#include "campaign/actor/mod_world.hpp"
+#include "game/actor/mod_world.hpp"
 namespace ModWorld {
 extern char *effects __asm__("D_0040F4D8");
 extern char *objects __asm__("D_0040F4CC");

@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_0018D978(void *arg0, unsigned int arg1)
 {

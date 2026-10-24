@@ -1,6 +1,6 @@
 #ifndef BLACK_RENDERWARE_CORE_PLUGIN_H
 #define BLACK_RENDERWARE_CORE_PLUGIN_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 /* VERIFIED accessed fields: the matched plugin destructor walk uses these offsets.
    Remaining members are PS2 access views, not allocation-size assertions. */
 typedef struct RwPluginPS2 RwPluginPS2;

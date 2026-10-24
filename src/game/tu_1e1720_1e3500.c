@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 volatile unsigned short func_001E3500(void *arg0)
 {

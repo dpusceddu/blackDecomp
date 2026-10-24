@@ -22,22 +22,20 @@ _staged, _lock, _stage_root = {}, threading.Lock(), []
 def short_path(path):
     """Return PATH itself when it is short, otherwise the path of a copy of that file or directory under /tmp."""
     path = str(path)
-    if len(path) <= SHORT_LIMIT:
+    if len(path) <= SHORT_LIMIT or not os.path.exists(path):
         return path
     with _lock:
         if path not in _staged:
             if not _stage_root:
                 _stage_root.append(tempfile.mkdtemp(prefix='sn', dir='/tmp' if os.path.isdir('/tmp') else None))
                 atexit.register(shutil.rmtree, _stage_root[0], True)
-            target = os.path.join(_stage_root[0], 's%d' % len(_staged))
+            target = tempfile.mkdtemp(prefix='s', dir=_stage_root[0])
             if os.path.isdir(path):
-                os.makedirs(target)
                 for name in os.listdir(path):
                     source = os.path.join(path, name)
                     if os.path.isfile(source):
                         shutil.copy2(source, os.path.join(target, name))
             else:
-                os.makedirs(target)
                 target = os.path.join(target, os.path.basename(path))
                 shutil.copy2(path, target)
             _staged[path] = target

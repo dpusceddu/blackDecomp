@@ -1,8 +1,8 @@
-#include "mod/arms/lifecycle.hpp"
+#include "animation/arms/lifecycle.hpp"
 #include "ps2/vu0_micro.hpp"
 #include "ps2/ee_fpu.h"
 #include "animation/graph.h"
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 namespace ArmsAnimation {
 /* Irreducible EE matrix primitives within the recovered initialization. */
 static inline void EmptyBone(AnimationHierarchy*) {}

@@ -1,5 +1,5 @@
 // RenderWare texture allocation and image callbacks; names inferred.
-#include "rw_core/image_campaign.h"
+#include "rw_core/image_operations.h"
 
 int func_002AF158(RwRasterView *raster,RwImageView *image) {
  return ((RwRasterView *(*)(RwRasterView *,RwImageView *))IMAGE_PLUGIN->mipmapGenerate)(raster,image)!=0;

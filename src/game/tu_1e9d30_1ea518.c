@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #include "types_ghidra.h"
 extern M2C_UNK D_0042A630;

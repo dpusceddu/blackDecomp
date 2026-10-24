@@ -37,7 +37,7 @@ Drafts C for assembly functions with no per-function judgment and keeps what reb
 m2c and the scoring run on the host (they only read and write text); every compile runs in the build backend, hundreds
 of candidates per call (about 0.8 s latency per call, about 90 compiles per second). m2c's little-endian MIPS GCC target
 is `-t mipsee-gcc-c` (with `--valid-syntax`, which turns unknown field accesses into `M2C_FIELD` macros, see
-`include/auto/prelude.h`).
+`include/ps2/prelude.h`).
 
 ```sh
 python3 tools/autodecomp.py run --max-size 100            # all assembly functions under 100 bytes -> build/auto.json
@@ -166,7 +166,7 @@ parameters is unknown without a signature. Xbox types remain leads and never est
 Normal drafts include only the views they use, and worker jobs package their quoted-header dependencies. Overlapping,
 unaligned or conflicting fields stay opaque. A view's extent is an accessed prefix, not an allocation-size assertion;
 its UNVERIFIED mark changes only after a matched source function actually accesses members through that view.
-`include/recovered/signatures.h` is a complete compile context for experiments; normal drafts declare referenced
+`include/game/layouts/signatures.h` is a complete compile context for experiments; normal drafts declare referenced
 callees individually so speculative signatures do not conflict with unrelated definitions. Re-run recovery after
 settling to refresh verification marks. During parallel campaigns, `AUTODECOMP_FREEZE_CONTEXT=1` consumes the
 centrally exported context without rewriting shared headers; a missing context is an error.
@@ -177,7 +177,7 @@ the legacy GCC RTTI graph and vtables and write
 of these headers: put verified corrections in its evidence configuration and regenerate. RTTI names,
 base links and virtual slots carry separate evidence from inferred signatures and field accesses.
 Opaque prefixes and accessor offsets do not establish a complete object size. Xbox layouts remain
-leads until PS2 code and an exact source match verify them. See `include/classes/README.md` for the
+leads until PS2 code and an exact source match verify them. See `include/game/classes/README.md` for the
 generated API and verification limits.
 
 Type and instruction support, all of it mechanical and checked by exact matches:
@@ -200,7 +200,7 @@ Type and instruction support, all of it mechanical and checked by exact matches:
   context as `s64`. `max.s`/`min.s` and MMI/VU0 instructions m2c cannot read are reported by instruction (`next.py ee`).
   The vector layer (`include/game/ai_vector.hpp`, compile with `-mvu0-use-vf0-vf31`) is the form SN accepts for them.
   `m2c_input.py` decodes EE `sqrt.s` (FT input, FS zero), including generic `c1` text.
-  Direct roots use `mod/math/scalar.h` (C++ `ModMath::SquareRoot`); recognized libc
+  Direct roots use `game/math/scalar.h` (C++ `ModMath::SquareRoot`); recognized libc
   `sqrtf` calls and errno-handling sequences retain their library semantics.
 - **Tail calls and indexed globals.** m2c drops the delay-slot instruction of a `j func` tail call (an argument set there is lost):
   `ee_prep.py` puts it before the jump. m2c writes `&D_x + n` for byte arithmetic on a global of unknown type, which C scales by the

@@ -1,4 +1,4 @@
-#include "classes/kynapse/Kaim_CPointMapper.hpp"
+#include "kynapse/classes/Kaim_CPointMapper.hpp"
 extern "C" const char *func_002E3920(void *);
 int BlackPS2Classes::Kaim_CPointMapper::Function_0038E768(void *config) {
     if (config && func_002E3920(config) && *(const signed char *)func_002E3920(config) == '_') return 1;
@@ -8,7 +8,7 @@ int BlackPS2Classes::Kaim_CPointMapper::Function_0038E768(void *config) {
 #if 0
 
 // Unmatched: allocator lifetimes and saved-register allocation.
-#include "campaign/graph/tables.hpp"
+#include "kynapse/graph/tables.hpp"
 struct RegisteredClass { const char *name; PointContainer *(*create)(); };
 extern "C" RegisteredClass *func_0038B150(const char *);
 extern const char D_00405B48[], D_00405B58[];
@@ -106,7 +106,7 @@ int PointMapper::Save(const void *path) {
     return 0;
 }
 // Unmatched: stream-loader stack lifetimes and scheduling.
-#include "campaign/graph/tables.hpp"
+#include "kynapse/graph/tables.hpp"
 extern "C" int LoadSmall(PointMapper *, const void *, int) __asm__("func_002DBCE0");
 extern const char D_00405B98[];
 int PointMapper::Load(const void *resource) {

@@ -1,4 +1,4 @@
-#include "mod/arms/rig.hpp"
+#include "animation/arms/rig.hpp"
 #include "ps2/vu0_micro.hpp"
 
 namespace ArmsAnimation {

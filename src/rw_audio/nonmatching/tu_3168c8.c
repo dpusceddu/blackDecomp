@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #ifdef NONMATCHING_RWA_316C38
 // Unmatched: 28 instructions in allocation failure layout and request store scheduling.
@@ -270,7 +270,7 @@ void *func_00318A40(AudioArenaBlock *block,u32 bytes,u32 alignment) {
 
 #ifdef NONMATCHING_RWA_QUEUE
 // Unmatched: request/constant allocation, repeated address materialization and immediate-dispatch scheduling; no recorded states.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct AudioIoOperation AudioIoOperation;
 typedef struct AudioIoOwner {u32 mode,parameter,status;void*stream;}AudioIoOwner;
 typedef void (*AudioIoCallback)(s32,s32,s32,s32,void*);
@@ -324,7 +324,7 @@ void func_00319828(AudioIoRequest *request,void *destination,u32 bytes,AudioIoCa
 
 #ifdef NONMATCHING_RWA_SHUTDOWN
 // Unmatched: Seven scheduling/branch differences; first Wait/Delete transition and nested conditional load duplication.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 extern s32 D_0040E214;
 extern s32 D_00458490[];
 extern s32 D_004584C4[];
@@ -337,7 +337,7 @@ void func_003192D8(void){s32 mode;if(D_0040E214==2)func_003678A0(D_00458490[0]);
 
 #ifdef NONMATCHING_RWA_SEEK
 // Unmatched: Seventeen allocation/scheduling differences; requested offset and aligned block use opposite temporary roles.
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef void(*Callback)(s32,u32,s32,s32,void*);
 typedef struct Request{u8 prefix[0x10];u32 position;u8 unknown14[12];s32 operationFile;u8 unknown24[32];u32 phase;Callback completion;void*user;u32 target;void*record;u32 pending;s32 file;u32 block;}Request;
 typedef struct Cache{u8 bytes[8192];void*owner;s32 file;u32 position,count;}Cache;

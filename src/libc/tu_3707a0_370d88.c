@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_0040C080[];
 const u32 rodata_0040C080[4] __asm__("D_0040C080") __attribute__((aligned(8))) = { 0x00000000, 0x00371210, 0x00000000, 0x00371260 };

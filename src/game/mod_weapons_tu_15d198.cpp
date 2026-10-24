@@ -1,4 +1,4 @@
-#include "campaign/weapons/manager_methods.hpp"
+#include "game/weapons/manager_methods.hpp"
 
 namespace ModWeapons {
 extern "C" int func_00159148(Instance*);

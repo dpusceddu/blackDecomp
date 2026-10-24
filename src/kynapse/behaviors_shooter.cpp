@@ -1,4 +1,4 @@
-#include "campaign/behaviors/shooter_angles.hpp"
+#include "kynapse/behaviors/shooter_angles.hpp"
 namespace Kaim {
 bool ShooterAgent::Init(ChildBuffers* config)
 {

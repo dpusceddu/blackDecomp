@@ -1,6 +1,6 @@
 /* Translation unit tu_1e4e50 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "types_ghidra.h"
 
 extern void * func_001E51E0();

@@ -1,4 +1,0 @@
-#ifndef BLACK_COMPAT_INCLUDE_CAMPAIGN_ACTOR_EXPIRY_EFFECT_HPP
-#define BLACK_COMPAT_INCLUDE_CAMPAIGN_ACTOR_EXPIRY_EFFECT_HPP
-#include "mod/weapons/projectile_lifetime.hpp"
-#endif

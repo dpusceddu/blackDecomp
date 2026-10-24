@@ -1,4 +1,4 @@
-#include "campaign/graph/tables.hpp"
+#include "kynapse/graph/tables.hpp"
 extern const char D_00407950[],D_00407F08[];
 extern const int D_00407968,D_00407F1C;
 int Kaim::CPathCostData::Save(const void *path) {

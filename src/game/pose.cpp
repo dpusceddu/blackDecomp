@@ -1,4 +1,4 @@
-#include "mod/camera/local_pose.hpp"
+#include "game/camera/local_pose.hpp"
 namespace CampaignActor {
 extern "C" BlackPS2::VU0::Matrix4 *func_001A68E0(ModCamera::LocalPoseAnimation*,int);
 BlackPS2::VU0::Matrix4 ActorMotion::GetLocalMatrix() {

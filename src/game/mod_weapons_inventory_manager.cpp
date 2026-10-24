@@ -1,4 +1,4 @@
-#include "campaign/weapons/inventory_methods.hpp"
+#include "game/weapons/inventory_methods.hpp"
 
 namespace ModWeapons {
     extern "C" {

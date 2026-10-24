@@ -1,4 +1,4 @@
-#include "campaign/graph/team.hpp"
+#include "kynapse/graph/team.hpp"
 namespace Kaim {
 CTeam::CTeam(unsigned int count,const char *teamName) {
     flag=0;

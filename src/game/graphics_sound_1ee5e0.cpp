@@ -1,4 +1,4 @@
-#include "campaign/graphics/sound_envelopes.hpp"
+#include "game/graphics/sound_envelopes.hpp"
 using namespace CampaignGraphics;
 int LowHealthEnvelope::Begin(float value,unsigned useEndpoint)
 {

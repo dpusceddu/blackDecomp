@@ -1,6 +1,6 @@
 /* Translation unit libipu_libmpeg/tu_293e90 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "types_ghidra.h"
 
 extern s32 func_0036A038();

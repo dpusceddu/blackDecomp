@@ -1,4 +1,4 @@
-#include "campaign/graph/node_queries.hpp"
+#include "kynapse/graph/node_queries.hpp"
 
 inline void QueryDrawPoint(const QueryVector *point, int red, int green, int blue)
 {

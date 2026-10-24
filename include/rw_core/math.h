@@ -1,6 +1,6 @@
 #ifndef BLACK_RENDERWARE_CORE_MATH_H
 #define BLACK_RENDERWARE_CORE_MATH_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 /* VERIFIED accessed fields: matching flag reset uses the fourth integer lane.
    Matrix arithmetic fields remain PS2 access views; the tolerance copy matches. */
 typedef struct RwVector3PS2 {f32 x,y,z;} RwVector3PS2;

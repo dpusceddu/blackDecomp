@@ -1,4 +1,4 @@
-#include "campaign/graphics/pad_backend.hpp"
+#include "game/camera/pad_backend.hpp"
 // Unmatched: 8 instruction differences after native layout, argument-bank and helper probes.
 using namespace CampaignGraphics;
 extern "C" void func_0026CBA8(PadBackend *,int);

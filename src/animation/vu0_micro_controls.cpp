@@ -1,5 +1,5 @@
 #include "ps2/vu0_micro.hpp"
-#include "mod/animation/instance.h"
+#include "animation/instance.h"
 
 // Descriptive names; the original pose class identity is unverified.
 extern "C" BkModAnimationPoseHeaderPS2 *func_00344178(

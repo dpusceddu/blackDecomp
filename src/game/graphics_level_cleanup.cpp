@@ -1,4 +1,4 @@
-#include "classes/other/UnknownVtable_003E10B0.hpp"
+#include "game/classes/other/UnknownVtable_003E10B0.hpp"
 struct FrontendValue;
 extern "C" {
 void func_0020DF90(void*,const char*);

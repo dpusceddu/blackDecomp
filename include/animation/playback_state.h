@@ -1,6 +1,6 @@
 #ifndef BLACK_ANIMATION_PLAYBACK_STATE_H
 #define BLACK_ANIMATION_PLAYBACK_STATE_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 /* Inferred playback names; fields follow the USA PS2 accesses. */
 typedef struct PlaybackHistory {

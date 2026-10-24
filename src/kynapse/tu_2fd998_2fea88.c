@@ -1,6 +1,6 @@
 /* Translation unit kynapse/tu_2fd998 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_00407EB8[];
 const char rodata_00407EB8[32] __asm__("D_00407EB8") __attribute__((aligned(8))) = "CAstarData" "\000\000\000\000\000\000" "Q24Kaim7CObject" "\000";

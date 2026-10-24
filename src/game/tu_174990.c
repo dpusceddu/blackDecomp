@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 s32 func_00174990(s32 arg0) {
     if (M2C_FIELD(arg0, u8 *, 9) != 0) {

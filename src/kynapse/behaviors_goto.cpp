@@ -1,4 +1,4 @@
-#include "context/behaviors/goto.hpp"
+#include "kynapse/agents/goto.hpp"
 namespace KaimGoto {
 extern "C" GotoAgent* func_002D38C8(ClassRegistry* context){return new GotoAgent(context);}
 int GotoAgent::Init(ChildBuffers* config){

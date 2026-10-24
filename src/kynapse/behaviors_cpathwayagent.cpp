@@ -1,7 +1,7 @@
-#include "campaign/behaviors/pathway.hpp"
+#include "kynapse/behaviors/pathway.hpp"
 // Unmatched: class campaign is recovering the remaining C++ member context.
 
-#include "campaign/behaviors/pathway.hpp"
+#include "kynapse/behaviors/pathway.hpp"
 namespace Kaim {
 PathWayAgent* PathWayAgent::Create(Context* context) { return new PathWayAgent(context); }
 }

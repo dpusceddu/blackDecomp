@@ -1,6 +1,6 @@
 #ifndef BLACK_EFFECTS_VECTOR_H
 #define BLACK_EFFECTS_VECTOR_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef s128 BkEffectVectorPS2;
 typedef struct { f32 x,y,z,w; } __attribute__((aligned(16))) BkEffectPointPS2;
 typedef struct { f32 u,v; } BkEffectUVPS2;

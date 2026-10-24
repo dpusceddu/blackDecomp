@@ -1,6 +1,6 @@
-#include "campaign/graphics/animation_selector.hpp"
+#include "game/graphics/animation_selector.hpp"
 using namespace AnimationSelectPS2;
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "game/actor/vector_math.h"
 typedef struct {char bytes[12];} BkAnimationName12PS2;
 extern float D_003BD154;extern int D_004158D8[2];extern const char D_003F68E0[],D_003F68E8[],D_003F68B8[];extern const char *D_003BD080[],*D_003BD020[],*D_003BD050[];

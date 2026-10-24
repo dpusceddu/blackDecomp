@@ -20,6 +20,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from elfinfo import Elf
 from build_telemetry import record as record_build
+from layout import view_include
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = 'SLUS_213.76'
@@ -245,7 +246,7 @@ def recovered_context(refresh=False):
             if refresh:
                 raise SystemExit('Frozen context cannot be refreshed; refresh centrally before the campaign.')
             cache = AUTO / 'context.json'
-            if not cache.exists() or not (ROOT / 'include/recovered/layouts.h').exists() or not (AUTO / 'ctx.c').exists():
+            if not cache.exists() or not (ROOT / 'include/game/layouts/layouts.h').exists() or not (AUTO / 'ctx.c').exists():
                 raise SystemExit('Frozen recovery context is missing; export it centrally before the campaign.')
             RECOVERED = json.loads(cache.read_text())
         else:
@@ -571,7 +572,7 @@ def idiom_source(f):
             return None
     kind = 'syscall-stub' if any(l.startswith('syscall') for l in lines) else 'cop0-stub'
     body = '\\n\\t'.join(lines)
-    return '#include "auto/prelude.h"\n\nvoid %s(void) {\n    __asm__ volatile("%s");\n}\n' % (f['name'], body), kind
+    return '#include "ps2/prelude.h"\n\nvoid %s(void) {\n    __asm__ volatile("%s");\n}\n' % (f['name'], body), kind
 
 
 def stack_rewrite(body, size):
@@ -681,7 +682,7 @@ def clean_function(name, r, sigs, strings=None, stack=None):
         if re.search(r'\b%s\b' % sym, body):
             body = re.sub(r'&?\b%s\b' % sym, lambda m: '"%s"' % lit, body)
     sig = '%s %s(%s)' % (ret, name, params)
-    lines = ['#include "auto/prelude.h"', '#define TYPES_GHIDRA_NO_PROTOTYPES', '#include "types_ghidra.h"', '#undef TYPES_GHIDRA_NO_PROTOTYPES', '']
+    lines = ['#include "ps2/prelude.h"', '#define TYPES_GHIDRA_NO_PROTOTYPES', '#include "types_ghidra.h"', '#undef TYPES_GHIDRA_NO_PROTOTYPES', '']
     if '__ee_vu_' in body:
         lines.insert(1, '#include "ps2/vu0_lowering.h"')
     seen = set()
@@ -713,7 +714,7 @@ def clean_function(name, r, sigs, strings=None, stack=None):
     if changed and not os.environ.get('AUTODECOMP_NO_BYTEADDR'):
         body = body2
     views = sorted(set(re.findall(r'\bRecovered_\w+\b', '\n'.join(lines) + sig + body)))
-    lines[2:2] = ['#include "recovered/%s.h"' % view for view in views]
+    lines[2:2] = ['#include "%s"' % view_include(view) for view in views]
     src = '\n'.join(lines) + '\n\n' + sig + ' {\n' + body + '\n}\n'
     return src, sig
 
@@ -919,7 +920,7 @@ def worker_compile(jobs, tag='auto'):
 
 
 STATS = collections.Counter()
-PRELUDE_HASH = hashlib.sha256((ROOT / 'include/auto/prelude.h').read_bytes() + ((ROOT / 'include/types_ghidra.h').read_bytes() if (ROOT / 'include/types_ghidra.h').exists() else b'')).hexdigest()
+PRELUDE_HASH = hashlib.sha256((ROOT / 'include/ps2/prelude.h').read_bytes() + ((ROOT / 'include/types_ghidra.h').read_bytes() if (ROOT / 'include/types_ghidra.h').exists() else b'')).hexdigest()
 
 
 # ---------------------------------------------------------------------------------------------------------- scoring
@@ -1413,14 +1414,14 @@ def strip_c_comments(text):
 
 def expand_macros(src):
     """Self-contained C for the permuter's parser: inline the prelude's typedefs and expand its macros."""
-    prelude = (ROOT / 'include/auto/prelude.h').read_text()
+    prelude = (ROOT / 'include/ps2/prelude.h').read_text()
     types = '\n'.join(l for l in prelude.split('\n') if l.startswith('typedef'))
-    body = src.replace('#include "auto/prelude.h"\n', '')
+    body = src.replace('#include "ps2/prelude.h"\n', '')
     body = body.replace('#define TYPES_GHIDRA_NO_PROTOTYPES\n', '').replace('#undef TYPES_GHIDRA_NO_PROTOTYPES\n', '')
-    for view in re.findall(r'^#include "recovered/(Recovered_\w+\.h)"$', body, re.M):
-        header = (ROOT / 'include/recovered' / view).read_text()
+    for view in re.findall(r'^#include "(\w+/layouts/Recovered_\w+\.h)"$', body, re.M):
+        header = (ROOT / 'include' / view).read_text()
         layout = '\n'.join(line for line in header.splitlines() if not line.startswith('#') and not line.startswith('typedef char assert_'))
-        body = body.replace('#include "recovered/%s"' % view, layout)
+        body = body.replace('#include "%s"' % view, layout)
     if '#include "types_ghidra.h"' in body:
         names = re.findall(r'^typedef struct (\w+)', (ROOT / 'include/types_ghidra.h').read_text(), re.M)
         if any(re.search(r'\b%s\b' % n, body) for n in names):
@@ -1542,7 +1543,7 @@ def committed_form(text):
     body = '\n'.join(l for l in lines[i:] if not l.startswith('#pragma _permuter'))
     body = re.sub(r'\*\(\((\w+ \*)\) \(\(\(s8 \*\) (\w+)\) \+ (0x[0-9A-Fa-f]+|\d+)\)\)', r'M2C_FIELD(\2, \1, \3)', body)
     body = body.replace('((void *) 0)', 'NULL')
-    return '#include "auto/prelude.h"\n#include "types_ghidra.h"\n\n' + body.strip() + '\n'
+    return '#include "ps2/prelude.h"\n#include "types_ghidra.h"\n\n' + body.strip() + '\n'
 
 
 def permute_many(climbs, rounds, per_round, label=''):
@@ -1876,7 +1877,7 @@ def cmd_register(a):
         # a function defined in the unit must not also be declared extern
         names = {rec['name'] for _, rec in g}
         lines = [l for k, l in decls.items() if k not in names]
-        text = '#include "auto/prelude.h"\n\n' + ('\n'.join(lines) + '\n\n' if lines else '') + '\n'.join(bodies)
+        text = '#include "ps2/prelude.h"\n\n' + ('\n'.join(lines) + '\n\n' if lines else '') + '\n'.join(bodies)
         base = '%06x' % first
         suffix = ''
         attempt = 0

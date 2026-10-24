@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_001BD620(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x13E1) = 0;

@@ -1,4 +1,4 @@
-#include "campaign/behaviors/hide_queries.hpp"
+#include "kynapse/behaviors/hide_queries.hpp"
 namespace HideRecovery {
     bool HideAgent::Update()
    {

@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct {int unknown,count,capacity;void **items;} BkDebugListPS2;
 extern void func_00266088(void),func_00268250(int),func_002662A8(void);
 extern void func_001AB6C0(void *,const char *,...);extern void func_001AB468(void *,void *);

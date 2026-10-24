@@ -1,4 +1,4 @@
-#include "campaign/graph/spatial.hpp"
+#include "kynapse/graph/spatial.hpp"
 
 #define CONVERT(field) { for(unsigned int word=0;word<sizeof(field)/4;++word){unsigned int *p=(unsigned int*)&(field);p[word]=p[word];} }
 namespace Kaim {

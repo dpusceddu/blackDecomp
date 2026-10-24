@@ -1,0 +1,142 @@
+#ifndef BLACK_MOD_ARMS_OWNER_HPP
+#define BLACK_MOD_ARMS_OWNER_HPP
+#include "animation/arms/instance.hpp"
+#include "ps2/matrix.hpp"
+namespace ArmsAnimation {
+// Scoped PS2 access and call views. Original class names, complete ownership and
+// semantic signatures remain inferred; mixed-bank argument order is a matching recipe.
+struct Matrix {BlackGame::Vec basis[4];Matrix(){}} __attribute__((aligned(16)));
+typedef BlackGame::Vec Vector;
+struct Actor {template<class T>T& At(int o){return *(T*)((char*)this+o);}};
+struct Row {int key,reissue;int unknown08,channelFlag;int unknown10[4];int channel,blocksSecondary;};
+struct Selector {
+    char opaque[0x5c];
+    virtual void Slot0(char*,Actor*);
+    virtual void Slot1(char*,Actor*,int);
+    virtual void Slot2(char*,Actor*);
+    virtual void Slot3(char*,Actor*,int,long);
+    virtual void Slot4(char*,Actor*,long,int);
+    virtual void Slot5(char*,Actor*);
+    virtual void Slot6(char*,Actor*,int,unsigned char);
+    virtual void Slot7(char*,Actor*,int,unsigned char);
+    virtual void Slot8(char*,Actor*,int);
+    virtual void Slot9(char*,Actor*,unsigned char,int,float,int);
+    virtual void Slot10(char*,Actor*,float,unsigned int);
+    virtual void Slot11(char*,Actor*);
+    virtual void Slot12(char*,Actor*);
+    virtual void Slot13(char*,Actor*);
+    virtual void Slot14(char*,Actor*);
+    virtual void Slot15(char*,Actor*);
+    virtual void Slot16(char*,Actor*);
+    virtual void Slot17(char*,Actor*);
+    virtual void Slot18(char*,Actor*,float,unsigned int);
+    virtual void Slot19(char*,Actor*,unsigned char);
+    virtual void Slot20(char*,Actor*,long);
+    virtual void Slot21(char*,Actor*);
+    virtual void Slot22(char*,Actor*);
+    template<class T>T& At(int o){return *(T*)((char*)this+o);}
+};
+struct Action {int kind,key;float value;int mode;unsigned char flag;};
+struct Owner {
+    Actor* entity;unsigned char unknown04[0x2c];
+    Matrix* attachments[8];Selector* selector;Instance* primary;Instance* secondary;
+    char names[2][13],pendingNames[2][13];Row* rows[2];Row* pendingRows[2];
+    float lastCommit,nextCommit,pendingDelay;int publication,secondaryPublication;
+    unsigned char permits[2],player,b7,b8,b9,ba,changed;
+    char saved[13];unsigned char unknownc9[0x230-0xc9];
+    signed char mode,bone1,bone2,bone3;unsigned char active,flag235;
+    template<class T>T& At(int o){return *(T*)((char*)this+o);}
+    int Initialize(Actor*,Selector*) __asm__("func_001A51C8");
+    void Tick(float,int) __asm__("func_001A54E0");
+    void CommitPrimary() __asm__("func_001A5738");
+    void CommitSecondary() __asm__("func_001A59D8");
+    void Publish(unsigned long) __asm__("func_001A5B10");
+    void Neutral() __asm__("func_001A5F38");
+    void Request(char*) __asm__("func_001A61D0");
+    void RequestAction(const Action*) __asm__("func_001A6330");
+    bool Event(unsigned long) __asm__("func_001A67B8");
+    long Permitted(int,int) __asm__("func_001A6840");
+    Matrix* Attachment(int) __asm__("func_001A68B0");
+    Vector BoneDirection() __asm__("func_001A6930");
+    Vector BoneDelta() __asm__("func_001A6988");
+    Vector BonePosition() __asm__("func_001A6A28");
+    void BoneMatrix(Matrix*) __asm__("func_001A6AB0");
+    void UpdateAttachments() __asm__("func_001A6BE0");
+    void Submit(char*,Row**,int,Row*) __asm__("func_001A6F68");
+    float Heading() __asm__("func_001A72B0");
+    void PrepareOverride() __asm__("func_001A73F0");
+    int ChannelFlag() __asm__("func_001A74E0");
+    void ActorReset() __asm__("func_001A7500");
+    Matrix Locator(int) __asm__("func_001A7528");
+    long HasPending(int) __asm__("func_001A7660");
+    void Capture(Matrix*) __asm__("func_001A76E0");
+    void Velocities(Matrix*,float) __asm__("func_001A77C8");
+    long CanTransition(int) __asm__("func_001A7D48");
+    long RequestState(int,int) __asm__("func_001A7DF0");
+    void Prepare() __asm__("func_001A7E58");
+};
+typedef char OwnerPrimary54[(unsigned)&((Owner*)0)->primary==0x54?1:-1];
+typedef char OwnerCurrent90[(unsigned)&((Owner*)0)->rows==0x90?1:-1];
+typedef char OwnerActive234[(unsigned)&((Owner*)0)->active==0x234?1:-1];
+extern void ProfileEnter(int) __asm__("func_001AB760");
+extern void ProfileLeave(int) __asm__("func_001AB768");
+struct ProfileScope {int id;ProfileScope(int value):id(value){ProfileEnter(value);}~ProfileScope(){ProfileLeave(id);}};
+extern void SetupGlobals() __asm__("func_003528E0");
+extern void Retire(Owner*) __asm__("func_001A5EE8");
+extern void* Component(Actor*) __asm__("func_00135550");
+extern Actor* Data(Actor*) __asm__("func_00135570");
+extern void SetBank(void*,int) __asm__("func_001AC020");
+extern void SetAux(void*,int) __asm__("func_001AC940");
+extern void SetSelector(void*,int) __asm__("func_001AD050");
+extern int InitInstance(Instance*,Owner*,void*,int) __asm__("func_00345510");
+extern void InstanceControl(Instance*) __asm__("func_001AD070");
+extern void InitPose(Instance*) __asm__("func_003438D8");
+extern Row* FindRow(Selector*,const char*) __asm__("func_001A9EA0");
+extern long ResolveName(const char*,Instance*,int*) __asm__("func_00345F28");
+extern long Complete(Instance*,float) __asm__("func_00347A50");
+extern void SelectorCommit(Selector*,Instance*) __asm__("func_001AA768");
+extern void RetirePose(int) __asm__("func_003461D0");
+extern void SetActorPosition(Actor*,Vector) __asm__("func_00126058");
+extern void OwnerService(Owner*,float) __asm__("func_00384448");
+extern void ServiceB9(Owner*) __asm__("func_001A7498");
+extern void StopSecondary(Owner*) __asm__("func_001A6E58");
+extern void ExcludeSecondary(Owner*) __asm__("func_001A7188");
+extern void CreateSecondary(Owner*) __asm__("func_001A6EB8");
+extern void ResetOverlay(Instance*) __asm__("func_00349288");
+extern void OverlayDirect(Instance*,int,int) __asm__("func_00349128");
+extern void OverlayTransition(Instance*,int,int,int,int) __asm__("func_003491E8");
+extern int StringCompare(const char*,const char*) __asm__("func_0035CA74");
+extern int StringLength(const char*) __asm__("func_0035CCD8");
+extern char* StringCopy(char*,const char*) __asm__("func_0035CBC0");
+extern int StringPrefix(const char*,const char*,int) __asm__("func_0035CFD8");
+extern long Reissue(Row*) __asm__("func_001AD368");
+extern int EvaluateRule(Row*,char*,Row*,Owner*,int,char*,float*) __asm__("func_001AD0D8");
+extern long WantsNeutral(Owner*) __asm__("func_001A7F88");
+extern int EntityCategory(Actor*) __asm__("func_00138320");
+extern void Action21(Selector*,char*,Actor*) __asm__("func_001AADF0");
+extern void Action23(Selector*,char*,Actor*) __asm__("func_001AAE50");
+extern void Action24(Selector*,char*,Actor*) __asm__("func_001AAEB0");
+extern bool WeaponReady(void*) __asm__("func_00158098");
+extern void SetOverride(Instance*,void*,int,int) __asm__("func_003477F0");
+extern void ResetActor(Actor*,float,float) __asm__("func_00135EA8");
+extern int TransitionCount(void*) __asm__("func_00343508");
+extern int* TransitionRow(void*,int) __asm__("func_003433C8");
+extern float ActorMetric(Actor*) __asm__("func_001378F0");
+extern void Pulse(void*,float,float,float) __asm__("func_001C2798");
+extern void ResetResponse(void*) __asm__("func_001C27D0");
+extern Vector Recoil() __asm__("func_0025D8E0");
+extern Matrix* LocatorCorrection(unsigned) __asm__("func_00138378");
+extern float ACos(float) __asm__("func_0029E0D8");
+extern float ATan2(float,float) __asm__("func_0029E2D8");
+extern int gTick __asm__("D_003BCFB4"),gReady __asm__("D_003BFB28"),gThreshold __asm__("D_003BCFBC");
+extern float gMinimumElapsed __asm__("D_003BCFB8"),gMetricThreshold __asm__("D_003BCF30");
+extern int gPoseCount __asm__("D_003D20DC"),gPoseSize __asm__("D_003D20D4");
+extern void* gPoseScratch __asm__("D_003D20D8"),*gBank __asm__("D_0040F50C");
+extern Actor* gClock __asm__("D_0040F4D0"),*gPresentation __asm__("D_0040F4D8"),*gEngine __asm__("D_0040F0E0");
+extern const Matrix gIdentity __asm__("D_00443350");
+extern const Vector gZero __asm__("D_004432C0"),gDefault __asm__("D_004432D0"),gForward __asm__("D_004432B0");
+extern void* gScratch1 __asm__("D_003BCF38"),*gScratch2 __asm__("D_003BCF68");
+extern const int gPoseCounts[3] __asm__("D_003BCF98"),gPoseSizes[3] __asm__("D_003BCFA8");
+extern unsigned char gModeNames[] __asm__("D_003F7188");
+}
+#endif

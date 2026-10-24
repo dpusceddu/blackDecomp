@@ -1,4 +1,4 @@
-#include "campaign/graph/constraint_registration.hpp"
+#include "kynapse/graph/constraint_registration.hpp"
 
 namespace ConstraintRegistration {
 void Register(int initialize,int priority){

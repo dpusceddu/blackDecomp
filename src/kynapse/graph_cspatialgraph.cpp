@@ -1,4 +1,4 @@
-#include "campaign/graph/spatial.hpp"
+#include "kynapse/graph/spatial.hpp"
 namespace Kaim {
 bool CSpatialGraph::LoadFromPath(const char* path)
 {

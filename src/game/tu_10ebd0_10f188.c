@@ -1,7 +1,7 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_FrontendProfilePool.h"
+#include "game/layouts/Recovered_FrontendProfilePool.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 extern s32 func_00122AF0();

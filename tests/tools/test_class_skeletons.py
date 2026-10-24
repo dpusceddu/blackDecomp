@@ -19,7 +19,7 @@ class SyntheticImage:
 def class_row(name='Example'):
     return dict(name=name, cpp_name=name, class_identity='RTTI', getters=[], bases=[], methods=[],
                 fields=[], constructors=[], destructors=[], vtables=[], virtual_view=None,
-                header='classes/other/' + name + '.hpp')
+                header='game/classes/other/' + name + '.hpp')
 
 
 class LegacyNames(unittest.TestCase):
@@ -166,13 +166,13 @@ class TypesAndGeneration(unittest.TestCase):
         child['bases'] = [dict(cpp_name='Base', access='public', offset=0, virtual=False)]
         model = {'classes': [child, base], 'records': {}}
         files = rendered_files(model)
-        self.assertIn('Hierarchy_Child : public Hierarchy_Base', files[Path('hierarchy.hpp')])
-        self.assertNotIn('struct Child :', files[Path('other/Child.hpp')])
+        self.assertIn('Hierarchy_Child : public Hierarchy_Base', files[Path('game/classes/hierarchy.hpp')])
+        self.assertNotIn('struct Child :', files[Path('game/classes/other/Child.hpp')])
         with tempfile.TemporaryDirectory() as d:
             root = Path(d)
             generate(model, root)
             first = {p.relative_to(root): p.read_bytes() for p in root.rglob('*.hpp')}
-            (root / 'stale.hpp').write_text('obsolete')
+            (root / 'game/classes/stale.hpp').write_text('obsolete')
             generate(model, root)
             self.assertEqual(first, {p.relative_to(root): p.read_bytes() for p in root.rglob('*.hpp')})
 

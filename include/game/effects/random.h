@@ -1,6 +1,6 @@
 #ifndef BLACK_EFFECTS_RANDOM_H
 #define BLACK_EFFECTS_RANDOM_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 extern u32 D_00418590[2];
 static inline f32 BkEffectRandomPS2(void) {
  u32 value=D_00418590[0];

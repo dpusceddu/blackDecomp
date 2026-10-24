@@ -133,7 +133,7 @@ dlabel D_00400000
             self.assertEqual([choice for choice in choices if choice], list(FALLBACKS))
 
     def test_permuter_expansion_removes_header_comments_and_preserves_literals(self):
-        source = '#include "recovered/Recovered_Vtable_003DBDC8.h"\nint f(void) { return 1; /* note */ }\n'
+        source = '#include "game/layouts/Recovered_Vtable_003DBDC8.h"\nint f(void) { return 1; /* note */ }\n'
         expanded = auto.expand_macros(source)
         self.assertNotIn('/*', expanded)
         sys.path.insert(0, str(auto.PERMUTER))
@@ -159,9 +159,9 @@ dlabel D_00400000
                 climb.generate(3)
 
     def test_header_closure_includes_custom_area_dependencies(self):
-        result = auto.compile_dependencies('#include "animation/graph.h"\n#include "auto/prelude.h"\n')
+        result = auto.compile_dependencies('#include "animation/graph.h"\n#include "ps2/prelude.h"\n')
         self.assertIn('include/animation/graph.h', result)
-        self.assertIn('include/auto/prelude.h', result)
+        self.assertIn('include/ps2/prelude.h', result)
 
     def test_replacement_only_retires_asm_placeholder(self):
         units = [dict(name='mixed', functions=[dict(addr=1, status='source'), dict(addr=2, status='asm')]),

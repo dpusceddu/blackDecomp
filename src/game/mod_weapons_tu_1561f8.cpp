@@ -1,4 +1,4 @@
-#include "mod/weapons/controller.hpp"
+#include "game/weapons/controller.hpp"
 
 namespace ModWeapons {
 void Weapon::Update(int fire,int alternate,int grenade,int reload,int aim,int special,int change,Action *action){

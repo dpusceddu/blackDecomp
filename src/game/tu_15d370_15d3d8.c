@@ -1,7 +1,7 @@
 /* Translation unit tu_15d370 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
-#include "mod/weapons/shot.h"
+#include "ps2/prelude.h"
+#include "game/weapons/shot.h"
 
 extern s32 func_0015D620();
 

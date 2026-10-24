@@ -1,4 +1,4 @@
-#include "campaign/graph/path_manager.hpp"
+#include "kynapse/graph/path_manager.hpp"
 using namespace Kaim;
 
 inline bool IsA(PathClassInfo *wanted, PathClassInfo *info)

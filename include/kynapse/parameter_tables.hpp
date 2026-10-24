@@ -46,7 +46,7 @@ struct SlotTable {
     unsigned char unknown08[0x10];
     unsigned int capacity;
 };
-#include "ps2/kynapse/parameter_slots.hpp"
+#include "kynapse/parameter_slots.hpp"
 
 struct SlotUser {
     unsigned char unknown00[0x14];

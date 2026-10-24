@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_001AF180(void *draw_list, s32 kind, s32 comparator) {
     M2C_FIELD(draw_list, s32 *, 0x14) = comparator;

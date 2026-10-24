@@ -8,7 +8,7 @@ import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import bisect
+import bisect, json
 import re
 from pathlib import Path
 
@@ -28,6 +28,7 @@ LIBRARY_DIR = {
 LIBRARIES = sorted(set(LIBRARY_DIR.values()))
 TU_STEM = re.compile(r'^(?:tu_[0-9a-f]{6}|crt0)(?:_[0-9a-f]{6})?$')
 _MAP = None
+_VIEW_LIBRARIES = None
 
 
 def _num(v):
@@ -47,6 +48,20 @@ def tu_map():
 def tu_of(addr):
     starts, tus = tu_map()
     return tus[max(bisect.bisect_right(starts, addr) - 1, 0)]
+
+
+def layout_library(name):
+    """Library whose include/<library>/layouts/ directory holds the generated access view `name` (default: game)."""
+    global _VIEW_LIBRARIES
+    if _VIEW_LIBRARIES is None:
+        path = ROOT / 'config/layout_libraries.json'
+        _VIEW_LIBRARIES = json.loads(path.read_text()) if path.exists() else {}
+    return _VIEW_LIBRARIES.get(name, 'game')
+
+
+def view_include(name):
+    """Quoted include of a generated access view, e.g. 'game/layouts/Recovered_Action.h'."""
+    return '%s/layouts/%s.h' % (layout_library(name), name)
 
 
 def library_of(addr):

@@ -1,5 +1,5 @@
-#include "ps2/kynapse/property.hpp"
-#include "campaign/behaviors/flee.hpp"
+#include "kynapse/property.hpp"
+#include "kynapse/behaviors/flee.hpp"
 extern const char D_00404030[], D_00404048[], D_00404058[], D_00404068[];
 extern const char D_00404070[], D_00404080[], D_00404088[], D_00404098[];
 const char D_00404030[] __attribute__((aligned(8))) = "ComputeDestInterval";

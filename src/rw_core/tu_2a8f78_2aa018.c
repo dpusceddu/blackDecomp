@@ -1,6 +1,6 @@
 /* Translation unit renderware_core/tu_2a8f78 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern s32 (*D_00449540)();
 extern void * D_004494F4;

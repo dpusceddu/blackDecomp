@@ -1,5 +1,5 @@
-#include "auto/prelude.h"
-#include "mod/effects/random.h"
+#include "ps2/prelude.h"
+#include "game/effects/random_state.h"
 
 void func_00382340(void) {
 

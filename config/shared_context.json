@@ -119,7 +119,7 @@
       ]
     },
     {
-      "header": "include/ps2/kynapse/property.hpp",
+      "header": "include/kynapse/property.hpp",
       "api": [
         "IsPrivateProperty<Entry>"
       ],
@@ -135,7 +135,7 @@
       ]
     },
     {
-      "header": "include/ps2/kynapse/list.hpp",
+      "header": "include/kynapse/list.hpp",
       "api": [
         "Kaim::ListNode<T> prefix",
         "Kaim::List<T> prefix",
@@ -149,7 +149,7 @@
       ]
     },
     {
-      "header": "include/ps2/kynapse/parameter_slots.hpp",
+      "header": "include/kynapse/parameter_slots.hpp",
       "api": [
         "SlotOwner prefix",
         "GetSlotOwner"
@@ -331,7 +331,7 @@
       "address": "0x2d16b8",
       "source_function": "FleeAgent::Configure",
       "headers": [
-        "include/ps2/kynapse/property.hpp"
+        "include/kynapse/property.hpp"
       ],
       "uses": [
         "BlackPS2::Kynapse::IsPrivateProperty"
@@ -341,7 +341,7 @@
       "address": "0x2d3d38",
       "source_function": "HideAgent::Configure",
       "headers": [
-        "include/ps2/kynapse/property.hpp"
+        "include/kynapse/property.hpp"
       ],
       "uses": [
         "BlackPS2::Kynapse::IsPrivateProperty"
@@ -351,7 +351,7 @@
       "address": "0x2d30a0",
       "source_function": "Follower::Configure",
       "headers": [
-        "include/ps2/kynapse/property.hpp"
+        "include/kynapse/property.hpp"
       ],
       "uses": [
         "BlackPS2::Kynapse::IsPrivateProperty"
@@ -361,7 +361,7 @@
       "address": "0x30fe98",
       "source_function": "Perception::Configure",
       "headers": [
-        "include/ps2/kynapse/property.hpp"
+        "include/kynapse/property.hpp"
       ],
       "uses": [
         "BlackPS2::Kynapse::IsPrivateProperty"
@@ -371,7 +371,7 @@
       "address": "0x2d6690",
       "source_function": "ShooterAgent::Configure",
       "headers": [
-        "include/ps2/kynapse/property.hpp"
+        "include/kynapse/property.hpp"
       ],
       "uses": [
         "BlackPS2::Kynapse::IsPrivateProperty"
@@ -381,7 +381,7 @@
       "address": "0x2d6e48",
       "source_function": "ShooterAgent::IsClear",
       "headers": [
-        "include/ps2/kynapse/list.hpp"
+        "include/kynapse/list.hpp"
       ],
       "uses": [
         "ActorIterator",
@@ -393,7 +393,7 @@
       "address": "0x2e7ac0",
       "source_function": "ParameterTables::ParameterTables",
       "headers": [
-        "include/ps2/kynapse/parameter_slots.hpp"
+        "include/kynapse/parameter_slots.hpp"
       ],
       "uses": [
         "GetSlotOwner",
@@ -405,7 +405,7 @@
       "address": "0x2e8920",
       "source_function": "ParameterTables::Update",
       "headers": [
-        "include/ps2/kynapse/parameter_slots.hpp"
+        "include/kynapse/parameter_slots.hpp"
       ],
       "uses": [
         "gSlotOwner",

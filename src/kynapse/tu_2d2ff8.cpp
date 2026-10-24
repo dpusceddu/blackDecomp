@@ -1,6 +1,6 @@
 #ifndef FOLLOWER_CALLBACK_ONLY
-#include "campaign/behaviors/follower_construction.hpp"
-#include "ps2/kynapse/property.hpp"
+#include "kynapse/behaviors/follower_construction.hpp"
+#include "kynapse/property.hpp"
 #include "kynapse/predicates.hpp"
 // Accessed layout and table entries are verified; original registration type is unknown.
 // Unmatched: native 648-byte unwind needs one shared recipe; callback extent must be 44 bytes, default emits 48.

@@ -1,5 +1,5 @@
-#include "campaign/graphics/timed_envelope.hpp"
-#include "auto/prelude.h"
+#include "game/graphics/timed_envelope.hpp"
+#include "ps2/prelude.h"
 using namespace CampaignGraphics;
 extern "C" {
 extern unsigned char *D_0040F510,*D_0040F4D0,*D_003C09E8;

@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void func_0013B4A0(void *arg0, f32 fparg0, f32 fparg1, f32 fparg2) {
     f32 temp_f0;

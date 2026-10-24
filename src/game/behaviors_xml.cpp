@@ -1,4 +1,4 @@
-#include "context/behaviors/xml.hpp"
+#include "kynapse/agents/xml.hpp"
 extern const char D_0040C418[];
 namespace KaimXmlReader {
 int XmlDataReader::ReadAll(void* file,void* context){

@@ -1,7 +1,7 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_Vtable_003DC9C0.h"
+#include "game/layouts/Recovered_Vtable_003DC9C0.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 extern s32 func_001F2838(s32, s32, s32);

@@ -1,4 +1,4 @@
-#include "campaign/actor/views.hpp"
+#include "game/actor/views.hpp"
 #include "game/ai_vector.hpp"
 namespace BlackPS2Campaign {
 template<class T> inline T &At(void *base,int offset) { return *(T *)((char *)base+offset); }

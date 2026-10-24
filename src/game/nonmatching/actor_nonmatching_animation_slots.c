@@ -1,6 +1,6 @@
 // Unmatched: 0x1ac798: slot pointer register allocation and call scheduling.
 #ifdef NONMATCHING
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct BkAnimationSlotPS2 { char pad[0xb0]; int index; } BkAnimationSlotPS2;
 typedef struct BkActorAnimationPS2 { char pad[0x8f0]; char pool[0x4c]; BkAnimationSlotPS2 **slots; } BkActorAnimationPS2;
 extern int func_001AE0A8(void *, int);

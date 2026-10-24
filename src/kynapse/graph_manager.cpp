@@ -1,4 +1,4 @@
-#include "campaign/graph/manager.hpp"
+#include "kynapse/graph/manager.hpp"
 namespace Kaim {
 CGraphManager::CGraphManager()
 {

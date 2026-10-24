@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 typedef struct { char opaque[0x60]; char animationVariant[1]; } BkActorNamePS2;
 extern char *func_001AB1C0(BkActorNamePS2 *, char *, const char *, const char *, const char *, void *);

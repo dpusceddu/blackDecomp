@@ -1,6 +1,6 @@
 /* Translation unit tu_186e68 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern s32 func_00187018();
 

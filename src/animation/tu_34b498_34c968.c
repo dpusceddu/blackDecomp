@@ -1,8 +1,8 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #define TYPES_GHIDRA_NO_PROTOTYPES
-#include "recovered/Recovered_AnimationGraphNode.h"
-#include "recovered/Recovered_AnimationParameters.h"
+#include "animation/layouts/Recovered_AnimationGraphNode.h"
+#include "animation/layouts/Recovered_AnimationParameters.h"
 #include "types_ghidra.h"
 #undef TYPES_GHIDRA_NO_PROTOTYPES
 extern f32 * func_0034BC30(s32 *, Recovered_AnimationGraphNode *, Recovered_AnimationParameters *, u32, void *, s32, f32, f32, f32, f32, f32);

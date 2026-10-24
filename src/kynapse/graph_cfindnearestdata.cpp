@@ -1,4 +1,4 @@
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 Kaim::CFindNearestData::~CFindNearestData(){if(order)D_003C87E0(order);if(rank)D_003C87E0(rank);if(aux)D_003C87E0(aux);}
 extern Kaim::SearchGraph *D_003CA804;
 extern "C" int func_002EF6F0(const void *,const void *);
@@ -46,7 +46,7 @@ int Kaim::CFindNearestData::Build()
 #if 0
 
 // Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 extern const char D_00407268[];
 extern const int D_00407284;
 extern Kaim::SearchGraph *D_003CA804;
@@ -68,7 +68,7 @@ int Kaim::CFindNearestData::Init(ChildBuffers* config)
 }
 
 
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 extern const char D_00407268[];
 extern const int D_00407284;
 extern Kaim::SearchGraph *D_003CA804;
@@ -79,7 +79,7 @@ extern "C" void func_0035EC50(void *,unsigned int,unsigned int,int (*)(const voi
 
 
 // Unmatched: stream cleanup block order and callback-base register lifetimes.
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 extern const char D_00407268[];
 extern const int D_00407284;
 extern Kaim::SearchGraph *D_003CA804;
@@ -125,7 +125,7 @@ int Kaim::CFindNearestData::Save(const void* path)
 }
 
 // Unmatched: header-read branches and native-endian no-op loop shape.
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 extern const char D_00407268[];
 inline void NativeWord(int *p) { *p = *p; }
 int Kaim::CFindNearestData::Load(const void *path) {
@@ -151,7 +151,7 @@ int Kaim::CFindNearestData::Load(const void *path) {
 }
 
 // Unmatched: raw file cleanup and allocator local lifetimes.
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 extern const char D_00407268[];
 struct RawGraphFileHooks {
  char unknown00[0x54];
@@ -185,7 +185,7 @@ int Kaim::CFindNearestData::LoadFile(const void *path){
 }
 
 // Unmatched: range arrays and register allocation.
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 int Kaim::CFindNearestData::CollectColumn(const Vec3 *point,int **output,float radius) {
  int axis; float defaultRadius=DefaultRadius(); int lower[3],upper[3];
  int bestAxis=-1,bestCount=-1,total=0;
@@ -206,7 +206,7 @@ int Kaim::CFindNearestData::CollectColumn(const Vec3 *point,int **output,float r
 }
 
 // Unmatched: range arrays and loop scheduling.
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 int Kaim::CFindNearestData::CollectBox(const Vec3 *point,int **output,float radius) {
  int axis; int lower[3],upper[3];
  int bestAxis=-1,bestCount=-1,total=0;
@@ -227,7 +227,7 @@ int Kaim::CFindNearestData::CollectBox(const Vec3 *point,int **output,float radi
 }
 
 // Unmatched: binary-search branch layout.
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 extern "C" float func_00390038(void *,const Vec3 *,int);
 inline float SortedCoordinate(Kaim::CFindNearestData *data,int axis,int index) {
  return func_00390038(data,(const Vec3 *)&data->OrderedNode(axis,index)->x,axis);
@@ -260,7 +260,7 @@ int Kaim::CFindNearestData::EqualBoundary(int position,int axis,unsigned char lo
 }
 
 // Unmatched: binary-search branch layout.
-#include "campaign/graph/nearest.hpp"
+#include "kynapse/graph/nearest.hpp"
 extern "C" float func_00390038(void *,const Vec3 *,int);
 inline float SortedCoordinate(Kaim::CFindNearestData *data,int axis,int index) {
  return func_00390038(data,(const Vec3 *)&data->OrderedNode(axis,index)->x,axis);

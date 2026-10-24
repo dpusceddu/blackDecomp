@@ -1,6 +1,6 @@
 #ifndef BLACK_RENDERWARE_CORE_FREELIST_H
 #define BLACK_RENDERWARE_CORE_FREELIST_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 /* UNVERIFIED PS2 free-list block and bitmap layout. */
 typedef struct RwFreeLinkPS2 {struct RwFreeLinkPS2 *next,*previous;} RwFreeLinkPS2;
 typedef struct RwFreeListPS2 {

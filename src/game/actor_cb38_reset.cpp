@@ -1,4 +1,4 @@
-#include "campaign/actor/renderable_state.hpp"
+#include "game/actor/renderable_state.hpp"
 namespace CampaignActor {
 extern "C" {
 void func_0014BD18(void *); void func_0014EE48(void *);

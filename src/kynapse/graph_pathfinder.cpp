@@ -1,4 +1,4 @@
-#include "campaign/graph/pathfinder.hpp"
+#include "kynapse/graph/pathfinder.hpp"
 namespace Kaim {
 extern "C" long func_0035E730(const char*);
 extern "C" float func_00291C68(long);

@@ -1,4 +1,4 @@
-#include "campaign/weapons/manager_methods.hpp"
+#include "game/weapons/manager_methods.hpp"
 
 namespace ModWeapons {
 BkModWeaponDefinitionPS2 *WeaponManagerMethods::Definition(EeS8 id,int alternate)

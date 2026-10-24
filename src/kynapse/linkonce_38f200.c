@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_004070A8[];
 const char rodata_004070A8[40] __asm__("D_004070A8") __attribute__((aligned(8))) = "Q24Kaim10CTeamClass" "\000\000\000\000\000" "bad_alloc" "\000\000\000\000\000\000\000";

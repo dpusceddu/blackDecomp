@@ -1,4 +1,4 @@
-#include "campaign/graphics/game_path.hpp"
+#include "game/graphics/game_path.hpp"
 using namespace GamePathPS2;
 // Unmatched: two callback-argument and byte-bool scheduling instructions.
 unsigned int PathObject::CanUse(PathAgent* agent,RouteNode* node,Callback* callback,unsigned int reason)

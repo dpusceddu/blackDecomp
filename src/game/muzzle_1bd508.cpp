@@ -1,5 +1,5 @@
 #include "game/effects/mod_muzzle.hpp"
-#include "game/effects/mod_random.hpp"
+#include "game/effects/random.hpp"
 extern "C" {extern ModEffects::RandomState D_00418590;}
 void ModEffects::MuzzleMethods::Start(MuzzleResource *record) {
  if(phase>2) {

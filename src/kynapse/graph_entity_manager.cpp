@@ -1,4 +1,4 @@
-#include "campaign/graph/entity_manager.hpp"
+#include "kynapse/graph/entity_manager.hpp"
 
 void Perception::Reset()
 {

@@ -1,7 +1,7 @@
 // Unmatched: actor attachment and matrix operator context; native allocation and branch order.
 #ifdef NONMATCHING
-#include "mod/effects/runtime.hpp"
-#include "mod/effects/vu_math.h"
+#include "game/effects/runtime.hpp"
+#include "game/effects/vu_math.h"
 using ModEffects::Matrix;
 struct AttachmentActor {char unknown00[0x70];Matrix world;char unknownb0[0x1f4];char*definition;char unknown2a8[0x88];void*pose;};
 struct Attachment : ModEffects::AttachmentManager {

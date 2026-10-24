@@ -1,4 +1,4 @@
-#include "campaign/actor/region_state.hpp"
+#include "game/actor/region_state.hpp"
 namespace CampaignActor {
 extern "C" {
 void func_00125CD8(void *);

@@ -1,4 +1,4 @@
-#include "context/behaviors/entity.hpp"
+#include "kynapse/agents/entity.hpp"
 namespace KaimEntity {
 Entity::Entity(const char*newName,int id) {
  child=0;ownerId=id;field24=0;owner=0;

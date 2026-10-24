@@ -1,6 +1,6 @@
 /* Translation unit libmc2/tu_35a990 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern s32 func_0035B738();
 extern s32 func_0035B910();

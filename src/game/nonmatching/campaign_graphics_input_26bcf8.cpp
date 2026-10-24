@@ -1,4 +1,4 @@
-#include "campaign/graphics/controller.hpp"
+#include "game/camera/pad.hpp"
 // Unmatched: 5 instruction differences remain in branch layout and return merging.
 using namespace CampaignGraphics;
 int Controller::Rumble(unsigned enabled) {

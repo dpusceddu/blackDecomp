@@ -1,4 +1,4 @@
-#include "campaign/graph/tables.hpp"
+#include "kynapse/graph/tables.hpp"
 
 Kaim::CPathCostData::~CPathCostData()
 {

@@ -1,5 +1,5 @@
-#include "ps2/kynapse/property.hpp"
-#include "campaign/behaviors/shooter.hpp"
+#include "kynapse/property.hpp"
+#include "kynapse/behaviors/shooter.hpp"
 namespace Kaim {
 
 bool ShooterAgent::Configure(ChildBuffers* entry)
@@ -63,7 +63,7 @@ bool ShooterAgent::Prepare()
 // Unmatched: Aim needs the original scalar/vector temporary lifetimes.
 }
 
-#include "campaign/behaviors/shooter.hpp"
+#include "kynapse/behaviors/shooter.hpp"
 namespace Kaim {
 ShooterAgent* ShooterAgent::Create(BehaviorContext* context) { return new ShooterAgent(context); }
 }

@@ -1,5 +1,5 @@
 #include "animation/channel_state.h"
-#include "mod/animation/instance.h"
+#include "animation/instance.h"
 #include "ps2/ee_fpu.h"
 // A scoped view adds methods without asserting historical inheritance.
 struct AnimationChannelView : AnimationChannelState {

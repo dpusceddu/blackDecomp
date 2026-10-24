@@ -1,5 +1,5 @@
 /* Remaining drafts in animation/tu_34b498. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern s32 func_00347430(s32, s32, s32);
 extern s32 func_0034B910();

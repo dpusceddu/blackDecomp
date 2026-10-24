@@ -1,6 +1,6 @@
 /* Translation unit tu_178f18 of the TU map: its source functions in address order; assembly functions between them stay
    in the image and are placed by address. */
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 s32 func_00178F18(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) == 0;

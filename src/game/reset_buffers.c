@@ -1,4 +1,4 @@
-#include "game/actor/render_state.h"
+#include "game/effects/render_state.h"
 extern void func_001B08A8(void *,int,int,int),func_0027B2F0(void *,float);
 void func_001AE860(BkActorRenderPS2 *actor) {
  int *position=(int *)actor;

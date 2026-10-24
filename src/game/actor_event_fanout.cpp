@@ -1,4 +1,4 @@
-#include "campaign/actor/event_fanout.hpp"
+#include "game/actor/event_fanout.hpp"
 namespace BlackPS2Campaign {
 void ActorFanout3::Dispatch(int event) {
     if (count) {

@@ -1,6 +1,6 @@
 // Unmatched: timer address construction, unsigned conversion and state scheduling.
 #if 0
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "game/frontend/movie_stream.hpp"
 #define TYPES_GHIDRA_NO_PROTOTYPES
 #include "types_ghidra.h"

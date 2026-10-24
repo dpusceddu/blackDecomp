@@ -1,6 +1,6 @@
 #ifndef BLACK_EFFECTS_POOL_H
 #define BLACK_EFFECTS_POOL_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 /* Inferred effect names; field offsets and strides are observed on PS2. */
 typedef struct BkEffectEntryPS2 { u8 prefix[0x60]; void *resource; u8 suffix[0xc]; } BkEffectEntryPS2;
 typedef struct BkEffectResourcePS2 {

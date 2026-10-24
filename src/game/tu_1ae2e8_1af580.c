@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 #include "types_ghidra.h"
 extern s32 func_001AF1A0(void *, s32, s32, s32);

@@ -1,4 +1,4 @@
-#include "campaign/behaviors/entities.hpp"
+#include "kynapse/behaviors/entities.hpp"
 
 extern int gPerceptionCount;
 void Entity_RemoveC(World*, void (__cdecl *)(Entity*,Perception*),Perception*);

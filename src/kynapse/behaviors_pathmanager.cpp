@@ -1,4 +1,4 @@
-#include "context/behaviors/pathmanager.hpp"
+#include "kynapse/agents/pathmanager.hpp"
 extern const char D_004059F8[], D_00405A00[];
 namespace KaimPathRegistry {
 PathManager::PathManager() {

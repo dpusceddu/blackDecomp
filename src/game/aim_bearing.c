@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 extern void **func_001AC040(void *);
 extern void *func_00135550(void *);
 extern float func_0013EF08(void *);

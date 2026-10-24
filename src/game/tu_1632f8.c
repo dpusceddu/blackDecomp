@@ -1,5 +1,5 @@
-#include "auto/prelude.h"
-#include "mod/weapons/shot.h"
+#include "ps2/prelude.h"
+#include "game/weapons/shot.h"
 
 void func_001632F8(BkModDelayedShotPS2 *arg0, s32 arg1, s32 arg2, s128 arg3, s128 arg4, s8 arg5, f32 fparg0, f32 fparg1) {
     arg0->direction = arg4;

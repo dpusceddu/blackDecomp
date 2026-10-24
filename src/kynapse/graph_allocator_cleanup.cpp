@@ -1,4 +1,4 @@
-#include "campaign/graph/allocators.hpp"
+#include "kynapse/graph/allocators.hpp"
 namespace Kaim {
 CBaseAllocator::~CBaseAllocator() { delete children; }
 CAllocator::~CAllocator() {}

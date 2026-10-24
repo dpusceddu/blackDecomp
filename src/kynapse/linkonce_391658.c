@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 s32 func_00391658(s32 arg0) {
     return arg0 + 0x5C;

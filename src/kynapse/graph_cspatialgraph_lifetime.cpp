@@ -1,4 +1,4 @@
-#include "campaign/graph/spatial.hpp"
+#include "kynapse/graph/spatial.hpp"
 void Kaim::CSpatialGraph::Reset()
 {
     // The two object arrays carry the observed 16-byte allocation cookie.

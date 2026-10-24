@@ -1,4 +1,4 @@
-#include "campaign/graph/parameters.hpp"
+#include "kynapse/graph/parameters.hpp"
 
 
 // Unmatched: name-array reference and allocation register scheduling.

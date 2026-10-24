@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_00408A40[];
 const char rodata_00408A40[204] __asm__("D_00408A40") __attribute__((aligned(8))) = "Q34Kaimt8CVarList1ZQ24Kaim4CGap9CIterator" "\000\000\000\000\000\000\000" "Q24Kaimt10CMetaClass2ZQ24Kaim17IDynamicAvoidanceZPFPQ24Kaim11CPathFinder_PQ24Kaim17IDynamicAvoidance" "\000\000\000\000" "Q24Kaim17IDynamicAvoidance" "\000\000\000\000\000\000\000\000\000\000\000\000\000\000" "bad_alloc" "\000\000\000";

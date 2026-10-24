@@ -1,7 +1,7 @@
 // Unmatched: 0x1af930: asset relocation loop scheduling and register lifetimes.
 #ifdef NONMATCHING
-#include "auto/prelude.h"
-#include "game/actor/asset.h"
+#include "ps2/prelude.h"
+#include "game/effects/asset.h"
 extern void func_001C64E8(void *),func_0027E760(void *),func_001AFFD8(void *,void *,void *);
 extern char *D_0040F4C0;
 #define RELOCATE(member) if(asset->member) asset->member=(__typeof__(asset->member))((unsigned int)asset->member+(unsigned int)asset)

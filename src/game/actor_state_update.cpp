@@ -1,4 +1,4 @@
-#include "campaign/actor/state.hpp"
+#include "game/actor/state.hpp"
 namespace CampaignActor {
 extern "C" {
 extern unsigned char *D_0040F4BC;extern char *D_0040F4D0;extern void*D_0040F51C;

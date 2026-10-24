@@ -1,5 +1,5 @@
-#include "campaign/graphics/game_path.hpp"
-#include "campaign/graph/spatial.hpp"
+#include "game/graphics/game_path.hpp"
+#include "kynapse/graph/spatial.hpp"
 namespace Kaim { inline SearchNode *SearchEdge::End() const { if(this==&graph->syntheticEdge)return &graph->syntheticEnd;return &graph->nodes[graph->ends[index]]; } }
 
 using namespace GamePathPS2;

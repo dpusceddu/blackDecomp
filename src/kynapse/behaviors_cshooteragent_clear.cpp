@@ -1,4 +1,4 @@
-#include "campaign/behaviors/shooter.hpp"
+#include "kynapse/behaviors/shooter.hpp"
 namespace Kaim {
 bool ShooterAgent::IsClear(const Vec3* direction)
 {

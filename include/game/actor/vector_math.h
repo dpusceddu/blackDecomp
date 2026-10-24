@@ -1,6 +1,6 @@
 #ifndef BLACK_ACTOR_VECTOR_MATH_H
 #define BLACK_ACTOR_VECTOR_MATH_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef s128 BkVectorPS2;
 static inline BkVectorPS2 BkOnePS2(void) {
  BkVectorPS2 one; __asm__("vaddw.x onev, vf0, vf0w" : "=j onev"(one)); return one;

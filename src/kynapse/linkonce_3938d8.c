@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_004083F0[];
 const char rodata_004083F0[112] __asm__("D_004083F0") __attribute__((aligned(8))) = "Q24Kaim11CPathFinder" "\000\000\000\000" "Q24Kaimt10CMetaClass2ZQ24Kaim13CBrainServiceZPFPQ24Kaim6CBrain_PQ24Kaim13CBrainService" "\000\000";

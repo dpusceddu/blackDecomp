@@ -1,6 +1,6 @@
 // Unmatched: 0x1aebf8: scalar matrix hypothesis still needs original VU0 lifetime structure.
 #ifdef NONMATCHING
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct {float x,y,z,w;} BkLightingVectorPS2;
 extern BkLightingVectorPS2 D_004432F0;
 void func_001AEBF8(const BkLightingVectorPS2 *rotation,const signed char *coefficients,BkLightingVectorPS2 *quadratic,BkLightingVectorPS2 *cross,BkLightingVectorPS2 *linear) {

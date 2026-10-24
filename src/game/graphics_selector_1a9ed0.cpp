@@ -1,6 +1,6 @@
-#include "campaign/graphics/animation_selector.hpp"
+#include "game/graphics/animation_selector.hpp"
 using namespace AnimationSelectPS2;
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 #include "game/actor/vector_math.h"
 extern BkVectorPS2 D_004432C0,D_004432D0;extern const char *D_003BD0E0[],*D_003BD0F8[],*D_003BD110[],*D_003BD128[];
 // Unmatched: VU0 lifetimes, branch layout and original inline expansion remain unresolved.

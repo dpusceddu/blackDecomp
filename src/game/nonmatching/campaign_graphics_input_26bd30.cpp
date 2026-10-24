@@ -1,6 +1,6 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 // Unmatched: 13 instruction differences after native layout, argument-bank and helper probes.
-#include "campaign/graphics/controller.hpp"
+#include "game/camera/pad.hpp"
 extern "C"{
 extern s32 func_0026C9C0(void *, s32);
 extern s32 func_0029D4C0(s32, s32, void *, s32, void *);

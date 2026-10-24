@@ -1,6 +1,6 @@
 // Unmatched: 0x1ac960: layer indexing and 64-bit-key ABI scheduling.
 #ifdef NONMATCHING
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct { s64 key; void *value; int pad; } BkAnimationEntryPS2;
 typedef struct { int a,b,count; BkAnimationEntryPS2 *entries; } BkAnimationMapPS2;
 typedef struct { char pad[0x20]; BkAnimationMapPS2 *map; int unknown; void *first,*second,*third,*fourth,*fifth; } BkAnimationAssetPS2;

@@ -1,4 +1,4 @@
-#include "campaign/graphics/animation_selector.hpp"
+#include "game/graphics/animation_selector.hpp"
 using namespace AnimationSelectPS2;
 // Unmatched: branch merging and preserved selector/movement lifetimes.
 void Selector::Stand(char* name,Actor* actor,long action) {

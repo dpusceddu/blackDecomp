@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 typedef struct { char bytes[12]; } BkAnimationName12PS2;
 extern const BkAnimationName12PS2 D_003F6C00,D_003F6C10,D_003F6C20,D_003F6C30,D_003F6C40;
 void func_001AA280(void *selector,BkAnimationName12PS2 *name,void *actor,int state,int alternate) {

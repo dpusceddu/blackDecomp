@@ -1,4 +1,4 @@
-#include "classes/other/UnknownVtable_003E10B0.hpp"
+#include "game/classes/other/UnknownVtable_003E10B0.hpp"
 struct FrontendValue;
 // Callback signatures and wrapper return semantics remain provisional ABI views.
 extern "C" {

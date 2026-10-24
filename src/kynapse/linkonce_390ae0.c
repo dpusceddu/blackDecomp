@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 extern char D_00407538[];
 const char rodata_00407538[88] __asm__("D_00407538") __attribute__((aligned(8))) = "Q24Kaim7CObject" "\000" "Q24Kaimt10CMetaClass2ZQ24Kaim11IConstraintZPFv_PQ24Kaim11IConstraint" "\000\000\000\000";

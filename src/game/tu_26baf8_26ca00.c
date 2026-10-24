@@ -1,4 +1,4 @@
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 
 void *func_0026CA00(void *arg0, void *arg1)
 {

@@ -1,4 +1,4 @@
-#include "campaign/actor/views.hpp"
+#include "game/actor/views.hpp"
 namespace BlackPS2Campaign {
 template<class T> inline T &At(void *p,int o) { return *(T *)((char *)p+o); }
 

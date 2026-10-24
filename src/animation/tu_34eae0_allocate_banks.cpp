@@ -1,4 +1,4 @@
-#include "mod/animation/runtime.h"
+#include "animation/runtime.h"
 
 extern "C" void *func_00350060(void *);
 extern "C" void *func_00351A40(void *);

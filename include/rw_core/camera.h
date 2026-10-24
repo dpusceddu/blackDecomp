@@ -1,6 +1,6 @@
 #ifndef BLACK_RENDERWARE_CORE_CAMERA_H
 #define BLACK_RENDERWARE_CORE_CAMERA_H
-#include "auto/prelude.h"
+#include "ps2/prelude.h"
 /* UNVERIFIED PS2 camera prefix, offsets checked against creation and update. */
 typedef struct RwCameraPS2 {
  u8 type,subtype,flags,private_flags;void *frame;u32 links[2];

@@ -1,4 +1,4 @@
-#include "campaign/graphics/movement_core.hpp"
+#include "game/graphics/movement_core.hpp"
 #include "game/effects/vu_math.h"
 using namespace CampaignGraphics;
 using namespace BlackGame;

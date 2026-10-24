@@ -1,4 +1,4 @@
-#include "campaign/actor/motion.hpp"
+#include "game/camera/motion.hpp"
 
 extern "C" {
 void *func_0015D248(void *, int, int);
