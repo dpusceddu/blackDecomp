@@ -33,8 +33,8 @@ are earlier builds and only give naming and ordering hints. The USA retail execu
   individually) and adds the `__CTOR_LIST__` entries as starts.
 - `config/symbols.txt` holds Ghidra's 9,946 functions (268 with a recovered name); splat finds 1,832 more starts.
 - The first sources were ported from an unpublished companion project that reconstructs the Xbox build: 191 PS2-exact Kynapse
-  bodies and 65 game functions (0.7 % of `.text`). The importers remain in `tools/studies/`; they need that project and
-  were run once.
+  bodies and 65 game functions (0.7 % of `.text`). The early sources were imported once from that project; the importers are
+  not part of this repository, and the imported files keep a header comment naming their origin.
 
 ## Phase 3: translation units
 

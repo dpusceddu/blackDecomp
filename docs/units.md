@@ -33,9 +33,8 @@ ninja && ninja progress
 that the original did not migrate, unbound externs), `link` demotes units the linker names, `compare` demotes the units
 that own any differing word of the linked image. Reasons recorded in `config/units.yaml`: `extra` (the unit emits other
 functions too), `name`, `size`, `section`, `shared`, `layout`, `extern`, `labels`, `link`, `bytes`, `compile`. Provenance
-of the first sources: `tools/studies/import_kynapse.py` and `tools/studies/import_game.py` ported PS2-exact bodies from an
-unpublished companion project (headers in `include/kynapse/`, `include/game/`, sources in `src/kynapse/`, `src/game/`);
-they need that project's checkout (`--source DIR`) and were run once. Diagnostic helpers:
+of the first sources: they were ported once from an unpublished companion project (headers in `include/kynapse/`,
+`include/game/`, sources in `src/kynapse/`, `src/game/`; see [history.md](history.md)). Diagnostic helpers:
 `tools/objdump.py` (sections, symbols, relocations of an object), `BLACK_UNITS_ALL=1` (pretend every unit function is
 source, to compile demoted units).
 
