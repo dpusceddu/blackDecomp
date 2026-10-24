@@ -12,7 +12,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['list', 'verify'])
     args = parser.parse_args()
-    config = json.loads((ROOT / 'config/mod_context.json').read_text())
+    config = json.loads((ROOT / 'config/SLUS_213.76/native_header_evidence.json').read_text())
     if config.get('version') != 1:
         raise SystemExit('unsupported mod context version')
     # Instruction-only views are useful context, but never become exact controls

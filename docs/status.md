@@ -121,7 +121,7 @@ bytes without padding and orphans: 14.95 % (401,428 / 2,685,060 bytes), equal to
 7. **Names and counterparts**: working names (`alias` lines of `config/SLUS_213.76/symbols.txt`), recovered prototypes
    (`include/ps2/prototypes.h`) and structures (`include/ps2/recovered_types.h`) are committed and edited by hand; no tool needs
    outside analysis data. An Xbox-to-PS2 counterpart map is an optional input that this repository does not ship
-   (`config/regions.txt` is its exported result).
+   (`config/SLUS_213.76/function_regions.txt` is its exported result).
 
 ## Next steps
 

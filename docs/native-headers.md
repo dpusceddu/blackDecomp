@@ -1,6 +1,6 @@
 # Native header views (camera, weapons, arms, effects)
 
-`config/mod_context.json` maps these headers to their exact PS2 source consumers, subsystem entry points and unresolved
+`config/SLUS_213.76/native_header_evidence.json` maps these headers to their exact PS2 source consumers, subsystem entry points and unresolved
 parts. Run `python3 tools/mod_context.py verify` to check native consumers, relocation targets, preservation of committed
 source addresses and the identical full image. Private disassembly and experiment logs stay under ignored build output.
 

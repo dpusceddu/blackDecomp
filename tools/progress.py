@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Report how much of .text is provided by source (tools/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by region.
 
-Regions come from config/regions.txt (PS2 address -> game, kynapse, animation, physics or other), derived from an
+Regions come from config/SLUS_213.76/function_regions.txt (PS2 address -> game, kynapse, animation, physics or other), derived from an
 Xbox-to-PS2 counterpart map (`progress.py --refresh MAP.json` rewrites it; the committed file is enough to build and report). An unmapped function takes the
 region of its neighbours when both sides agree, otherwise it is `unclassified`. Regions are therefore approximate;
 the overall number is exact.
@@ -29,11 +29,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from units import load_units
 
 ROOT = Path(__file__).resolve().parents[1]
-REGIONS = ROOT / 'config/regions.txt'
+REGIONS = ROOT / 'config/SLUS_213.76/function_regions.txt'
 
 
 def refresh_regions(counterpart_map):
-    """Rewrite config/regions.txt (address, region) from an Xbox-to-PS2 counterpart map (json with `pairs`), optional input."""
+    """Rewrite config/SLUS_213.76/function_regions.txt (address, region) from an Xbox-to-PS2 counterpart map (json with `pairs`), optional input."""
     pairs = json.loads(Path(counterpart_map).read_text())['pairs']
     rows = sorted({(int(p['ps2'], 16), p['region']) for p in pairs})
     REGIONS.write_text('# PS2 function address -> region (game, kynapse, animation, physics, other), from the\n'

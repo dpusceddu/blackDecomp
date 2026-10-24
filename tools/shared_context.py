@@ -19,7 +19,7 @@ import units
 import units_verify
 
 ROOT = Path(__file__).resolve().parents[1]
-CONFIG = ROOT / 'config/shared_context.json'
+CONFIG = ROOT / 'config/SLUS_213.76/ps2_header_evidence.json'
 
 
 def source_body(source, name):

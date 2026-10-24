@@ -5,7 +5,7 @@ Calls construct type-info records lazily in zero-initialized storage, so scannin
 only data misses them. Track constant GPR values through each getter's control
 flow, including delay slots, branch joins and caller clobbers. Getter-return
 constants propagate between functions. Names and initializer sites remain in
-ignored build/classes/rtti.json; verified ABI seeds are config/rtti_evidence.json.
+ignored build/classes/rtti.json; verified ABI seeds are config/SLUS_213.76/rtti_abi.json.
 Class-name demangling and generated headers belong to class_skeletons.py.
 """
 import argparse
@@ -243,7 +243,7 @@ def collect_evidence(root=ROOT):
     """Return class records with numeric addresses; no private paths in output."""
     from autodecomp import load_inventory
     root = Path(root)
-    seeds = json.loads((root / 'config/rtti_evidence.json').read_text())
+    seeds = json.loads((root / 'config/SLUS_213.76/rtti_abi.json').read_text())
     helpers = {row['address']: row for row in seeds['helpers']}
     elf = Elf((root / 'orig/SLUS_213.76/SLUS_213.76').read_bytes())
     text = elf.section('.text')

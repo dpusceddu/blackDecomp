@@ -27,7 +27,6 @@ options:
   use_gp_rel_macro: False
   use_gp_rel_macro_nonmatching: False
   symbol_addrs_path: config/SLKA_253.72/boundaries.txt
-  reloc_addrs_path: config/reloc_addrs.txt
   undefined_funcs_auto_path: build/SLKA_253.72/undefined_funcs_auto.txt
   undefined_syms_auto_path: build/SLKA_253.72/undefined_syms_auto.txt
   string_encoding: ASCII

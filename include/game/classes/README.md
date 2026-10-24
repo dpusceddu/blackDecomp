@@ -1,7 +1,7 @@
 # Generated PS2 class interfaces
 
 `tools/class_skeletons.py` is the single owner of this directory. Change verified
-ABI evidence in `config/class_skeletons.json` or `config/rtti_evidence.json`, then
+ABI evidence in `config/SLUS_213.76/class_method_abi.json` or `config/SLUS_213.76/rtti_abi.json`, then
 regenerate; do not edit generated headers. Run `tools/class_skeletons.py --check`
 to check the complete generated tree. The detailed catalog stays in ignored
 `build/classes/catalog.json`.

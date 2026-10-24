@@ -62,7 +62,7 @@ def main():
            '  ld_wildcard_sections: False', '  ld_bss_contains_common: False',
            '  create_asm_dependencies: False', '  find_file_boundaries: False',
            '  o_as_suffix: True', '  use_gp_rel_macro: False', '  use_gp_rel_macro_nonmatching: False',
-           '  symbol_addrs_path: config/%s/boundaries.txt' % boot, '  reloc_addrs_path: config/reloc_addrs.txt',
+           '  symbol_addrs_path: config/%s/boundaries.txt' % boot,
            '  undefined_funcs_auto_path: build/%s/undefined_funcs_auto.txt' % a.slug,
            '  undefined_syms_auto_path: build/%s/undefined_syms_auto.txt' % a.slug,
            '  string_encoding: ASCII', '  data_string_encoding: ASCII',

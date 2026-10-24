@@ -5,7 +5,7 @@ The m2c-based draft pipeline (`tools/autodecomp.py`), its context recovery and t
 ## Pipeline
 
 Shared PS2 inline helpers and target types live in [include/ps2/](../include/ps2/README.md), owned by
-the shared context maintainer. `config/shared_context.json` records the field/operation scope of
+the shared context maintainer. `config/SLUS_213.76/ps2_header_evidence.json` records the field/operation scope of
 each exact consumer; `python3 tools/shared_context.py verify` checks actual header use, instruction
 matches and the full image. Reuse these headers and preserve their helper order, widths and VU
 spill recipes. Report shared changes to their owner; unverified layouts remain explicitly partial.

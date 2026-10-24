@@ -54,8 +54,7 @@ def layout_library(name):
     """Library whose include/<library>/partial/ directory holds the partial view `name` (default: game)."""
     global _VIEW_LIBRARIES
     if _VIEW_LIBRARIES is None:
-        path = ROOT / 'config/layout_libraries.json'
-        _VIEW_LIBRARIES = json.loads(path.read_text()) if path.exists() else {}
+        _VIEW_LIBRARIES = {p.stem: p.parent.parent.name for p in (ROOT / 'include').glob('*/partial/Recovered_*.h')}
     return _VIEW_LIBRARIES.get(name, 'game')
 
 
