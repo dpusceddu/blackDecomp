@@ -3,9 +3,11 @@
 
 For every zip in the images directory this extracts the image into .local/tmp, lists the disc, copies
 SYSTEM.CNF, the boot executable, other ELF files and symbol/map/debug candidates into
-orig/<slug>/, writes the full listing and deletes the image again. Game assets are never kept.
+orig/survey/<GAME_ID>/ (and the retail boot executable also to orig/<GAME_ID>/<GAME_ID>, where the build reads it), writes
+the full listing and deletes the image again. Game assets are never kept. The disc survey is a maintainer tool; the build
+only needs the boot executables.
 
-Usage: discs.py [--images DIR] [--only SLUG ...] [--min-free-gb 12]
+Usage: discs.py --images DIR [--only GAME_ID ...] [--min-free-gb 12]
 """
 import argparse, hashlib, json, re, shutil, subprocess, sys
 from pathlib import Path
@@ -14,17 +16,19 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from iso import Iso
 
 ROOT = Path(__file__).resolve().parents[1]
+# Image file name -> boot game ID. The Europe "beta" dated 2006-01-09 boots the same SLES_538.86 executable as the Europe
+# retail disc, so it is not surveyed separately.
 SLUGS = {
-    'Black (USA).zip': 'usa-retail',
-    'Black (USA) (Beta) (2005-08-16).zip': 'usa-beta-2005-08-16',
-    'Black (USA) (Demo).zip': 'usa-demo',
-    'Black (Europe) (Beta) (2006-01-09).zip': 'eu-beta-2006-01-09',
-    'Black (Europe) (En,Fr,De,Es,It).zip': 'eu-retail',
-    'Black (Europe) (En,Fr,De,Es,It) (Demo).zip': 'eu-demo',
-    'Black (Europe, Australia).zip': 'eu-au-retail',
-    'Black (Japan).zip': 'jp-retail',
-    'Black (Korea).zip': 'kr-retail',
+    'Black (USA).zip': 'SLUS_213.76',
+    'Black (USA) (Beta) (2005-08-16).zip': 'SLUS_000.00',
+    'Black (USA) (Demo).zip': 'SLUS_291.80',
+    'Black (Europe) (En,Fr,De,Es,It).zip': 'SLES_538.86',
+    'Black (Europe) (En,Fr,De,Es,It) (Demo).zip': 'SLED_539.37',
+    'Black (Europe, Australia).zip': 'SLES_540.30',
+    'Black (Japan).zip': 'SLPM_663.54',
+    'Black (Korea).zip': 'SLKA_253.72',
 }
+RETAIL = ('SLUS_213.76', 'SLES_538.86', 'SLES_540.30', 'SLKA_253.72', 'SLPM_663.54')
 KEEP_EXT = {'.map', '.sym', '.elf', '.dbg', '.stabs', '.lst', '.txt', '.xml', '.log', '.ini', '.cfg',
             '.h', '.c', '.cpp', '.mdebug', '.lnk', '.cmd', '.bat', '.py', '.pl'}
 MAX_KEEP = 8 << 20
@@ -43,7 +47,7 @@ def is_texty(b):
 
 
 def process(zip_path, slug, tmp, min_free):
-    out = ROOT / 'orig' / slug
+    out = ROOT / 'orig/survey' / slug
     out.mkdir(parents=True, exist_ok=True)
     listing = subprocess.run(['7z', 'l', '-slt', str(zip_path)], capture_output=True, text=True).stdout
     sizes = [int(m) for m in re.findall(r'^Size = (\d+)', listing, re.M)]
@@ -89,8 +93,11 @@ def process(zip_path, slug, tmp, min_free):
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 dest.write_bytes(data)
                 kept[p] = reason
+                if reason == 'boot' and slug in RETAIL:
+                    (ROOT / 'orig' / slug).mkdir(parents=True, exist_ok=True)
+                    (ROOT / 'orig' / slug / slug).write_bytes(data)
         (out / 'listing.json').write_text(json.dumps(listing_rows, indent=1) + '\n')
-        info = dict(slug=slug, zip=zip_path.name, zip_size=zip_path.stat().st_size,
+        info = dict(game_id=slug, zip=zip_path.name, zip_size=zip_path.stat().st_size,
                     zip_sha256=sha256(zip_path), image=image.name, image_size=image.stat().st_size,
                     image_sha256=sha256(image), sector=iso.ssize, volume=iso.volume,
                     boot=boot_name, system_cnf=cnf.decode('ascii', 'replace'), kept=kept)

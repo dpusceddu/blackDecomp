@@ -1,9 +1,9 @@
 """Loader for config/units.yaml: the provisional translation units that replace assembly functions.
 
 Format (see README.md):
-  variant: usa-retail               # the image whose addresses the units use
+  variant: SLUS_213.76               # the image whose addresses the units use
   units:
-    - name: kynapse_children          # object name; also build/<slug>/units/<name>.o
+    - name: kynapse_children          # object name; also build/<GAME_ID>/units/<name>.o
       source: src/kynapse/children.cpp   # src/<library>/<name>; see tools/layout.py
       library: kynapse                   # kynapse | game | apt | animation | physics | rw_core | rw_audio | sony | libc | linkonce
       provenance: imported               # imported | auto | campaign | equivalent: how the source arrived
@@ -41,7 +41,7 @@ def load_units(path=None, variant=None):
     """Units of config/units.yaml. They hold addresses of the USA retail image: for another `variant` there are none."""
     path = Path(path or ROOT / 'config/units.yaml')
     data = yaml.safe_load(path.read_text()) if path.exists() else None
-    if variant and (data or {}).get('variant', 'usa-retail') != variant:
+    if variant and (data or {}).get('variant', 'SLUS_213.76') != variant:
         return []
     units = (data or {}).get('units') or []
     for u in units:

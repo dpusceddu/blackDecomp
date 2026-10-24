@@ -341,7 +341,7 @@ def demangle_method(symbol):
 def source_seeds(root=ROOT, matched_only=False):
     from units import load_units, dependencies
     seeds, evidence, parsed, texts = {}, [], {}, {}
-    units = load_units(root / 'config/units.yaml', variant='usa-retail')
+    units = load_units(root / 'config/units.yaml', variant='SLUS_213.76')
     for p in (root / 'include').rglob('*'):
         if p.suffix in ('.h', '.hpp') and 'recovered' not in p.parts:
             text = COMMENT.sub('', p.read_text())
@@ -973,7 +973,7 @@ def recover_signatures(inv, analysis, seeds):
 
 def vtable_groups(inv, root=ROOT):
     from elfinfo import Elf
-    boots = list((root / 'orig/usa-retail/files').glob('SLUS*'))
+    boots = [p for p in [root / 'orig/SLUS_213.76/SLUS_213.76'] if p.is_file()]
     if not boots:
         return {}
     elf = Elf(boots[0].read_bytes())
@@ -1159,7 +1159,7 @@ def verified_layout_users(names, root=ROOT):
 
 def fingerprint(root=ROOT):
     h = hashlib.sha256()
-    paths = [Path(__file__), root / 'config/units.yaml', root / 'config/symbols.txt', root / 'build/usa-retail/placement.json']
+    paths = [Path(__file__), root / 'config/units.yaml', root / 'config/symbols.txt', root / 'build/SLUS_213.76/placement.json']
     paths += sorted((root / 'src').rglob('*.[ch]')) + sorted((root / 'src').rglob('*.cpp'))
     paths += sorted((root / 'include').rglob('*.h')) + sorted((root / 'include').rglob('*.hpp'))
     paths += sorted((root / '.local/ghidra').glob('*.json'))
@@ -1265,7 +1265,7 @@ def required_layout_headers(root=ROOT):
     """Inference names may change; exact source still owns its imported access view."""
     from units import dependencies, load_units
     required = set()
-    for unit in load_units(root / 'config/units.yaml', variant='usa-retail'):
+    for unit in load_units(root / 'config/units.yaml', variant='SLUS_213.76'):
         if not any(f.get('status') == 'source' for f in unit['functions']):
             continue
         for dependency in dependencies(unit['source']):

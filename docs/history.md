@@ -16,7 +16,7 @@ are earlier builds and only give naming and ordering hints. The USA retail execu
 `ninja` rebuilds the boot ELF byte for byte for all five retail images. Facts that shaped the design:
 
 - GNU `ld` cannot write the retail container, so `tools/pack_elf.py` re-packs the linked sections from
-  `config/<boot>.layout.json`; DVP overlays and `.vutext`/`.vudata` are extracted payloads.
+  `config/<GAME_ID>/layout.json`; DVP overlays and `.vutext`/`.vudata` are extracted payloads.
 - One ld statement per object is quadratic (did not finish in 15 minutes for 12,000 objects): input sections are named
   `<section>.<address>` and placed by `SORT_BY_NAME`.
 - 200 NOPs inserted into one function relink with every symbolic reference moved (the image is shiftable); the

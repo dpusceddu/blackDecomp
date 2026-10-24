@@ -48,8 +48,8 @@ def original_source_addresses():
 
 def verify(config):
     subprocess.run(['ninja'], cwd=ROOT, check=True)
-    built = ROOT / 'build/usa-retail/SLUS_213.76.elf'
-    original = ROOT / 'orig/usa-retail/files/SLUS_213.76'
+    built = ROOT / 'build/SLUS_213.76/SLUS_213.76.elf'
+    original = ROOT / 'orig/SLUS_213.76/SLUS_213.76'
     if built.read_bytes() != original.read_bytes():
         raise ValueError('the full USA image is not identical')
     all_units = units.load_units()

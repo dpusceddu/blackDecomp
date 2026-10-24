@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Phase 0 triage of every procured disc variant (run tools/discs.py first).
 
-Reads orig/<slug>/ and writes config/variants.json (hashes and ELF metadata only) plus raw dumps
+Reads orig/survey/<GAME_ID>/ and writes config/variants.json (hashes and ELF metadata only) plus raw dumps
 (string lists, listings, similarity details) under .local/inputs/.
 
 Usage: inputs.py [--no-similarity]
@@ -13,10 +13,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from elfinfo import Elf, sha256
 
 ROOT = Path(__file__).resolve().parents[1]
-RETAIL = 'usa-retail'
+RETAIL = 'SLUS_213.76'
+RETAIL_IDS = (RETAIL, 'SLES_538.86', 'SLES_540.30', 'SLKA_253.72', 'SLPM_663.54')
+REGIONS = {'SLUS_213.76': 'USA', 'SLES_538.86': 'Europe', 'SLES_540.30': 'Europe, Australia', 'SLKA_253.72': 'Korea',
+           'SLPM_663.54': 'Japan', 'SLUS_000.00': 'USA (beta, 2005-08-16)', 'SLUS_291.80': 'USA (demo)',
+           'SLED_539.37': 'Europe (demo)'}
 DEBUG_PATTERNS = ('.symtab', '.strtab', '.mdebug', '.debug_', '.stab', '.comment', '.gcc_except_table',
                   '.pdr', '.line', '.gnu', '.note', '.eh_frame', '.sdata', '.lit')
-# Version 1 CIE emitted by SN EE (see frames.py in the companion project): marks per-object unwind groups.
+# Version 1 CIE emitted by SN EE (see tools/tus.py): marks per-object unwind groups.
 CIE = bytes.fromhex('100000000000000001000178400c1d0009401f00')
 
 STR_RE = re.compile(rb'[\x20-\x7e\t]{5,}')
@@ -177,22 +181,22 @@ def main():
     a = ap.parse_args()
     raw = ROOT / '.local/inputs'
     raw.mkdir(parents=True, exist_ok=True)
-    discs = {p.parent.name: json.loads(p.read_text()) for p in sorted((ROOT / 'orig').glob('*/disc.json'))}
-    listings = {s: {r['path']: r for r in json.loads((ROOT / 'orig' / s / 'listing.json').read_text())}
+    discs = {p.parent.name: json.loads(p.read_text()) for p in sorted((ROOT / 'orig/survey').glob('*/disc.json'))}
+    listings = {s: {r['path']: r for r in json.loads((ROOT / 'orig/survey' / s / 'listing.json').read_text())}
                 for s in discs}
-    retail_exe = ROOT / 'orig' / RETAIL / 'files' / discs[RETAIL]['boot']
+    retail_exe = ROOT / 'orig' / RETAIL / RETAIL
     retail_elf = Elf(retail_exe.read_bytes())
     rtext = retail_elf.section('.text')
     retail_words = struct.unpack('<%dI' % (rtext['size'] // 4), retail_elf.content(rtext))
     retail = Retail(list(retail_words)) if not a.no_similarity else None
     retail_names = {s['name'] for s in retail_elf.sections}
     retail_sizes = {s['name']: s['size'] for s in retail_elf.sections}
-    retail_files = {p: sha256((ROOT / 'orig' / RETAIL / 'files' / p).read_bytes())
+    retail_files = {p: sha256((ROOT / 'orig/survey' / RETAIL / 'files' / p).read_bytes())
                     for p in discs[RETAIL]['kept']}
     result = {}
     for slug, d in discs.items():
-        files = ROOT / 'orig' / slug / 'files'
-        entry = dict(slug=slug, zip=d['zip'], zip_size=d['zip_size'], zip_sha256=d['zip_sha256'],
+        files = ROOT / 'orig/survey' / slug / 'files'
+        entry = dict(region=REGIONS[slug], retail=slug in RETAIL_IDS, zip=d['zip'], zip_size=d['zip_size'], zip_sha256=d['zip_sha256'],
                      image=d['image'], image_size=d['image_size'], image_sha256=d['image_sha256'],
                      sector_size=d['sector'], boot=d['boot'], system_cnf=d['system_cnf'].replace('\r', '').split('\n')[:-1],
                      file_count=len(listings[slug]))

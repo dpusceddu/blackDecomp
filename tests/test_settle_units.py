@@ -34,18 +34,18 @@ class SettleFailures(unittest.TestCase):
         result = subprocess.CompletedProcess([], 1, '', 'invalid placement')
         with patch.object(settle_units.subprocess, 'run', return_value=result):
             with self.assertRaises(SystemExit):
-                settle_units.run('tools/make_ld.py', 'usa-retail')
+                settle_units.run('tools/make_ld.py', 'SLUS_213.76')
 
     def test_worker_failure_is_fatal_even_for_candidate_compile(self):
         result = subprocess.CompletedProcess([], 1, '', 'Build backend failed; check the build backend configuration.')
         with patch.object(settle_units.subprocess, 'run', return_value=result):
             with self.assertRaises(SystemExit):
-                settle_units.run('tools/build_objects.py', 'usa-retail', check=False)
+                settle_units.run('tools/build_objects.py', 'SLUS_213.76', check=False)
 
     def test_compiler_diagnostic_can_be_settled(self):
         result = subprocess.CompletedProcess([], 1, 'compiler: unknown type name', '')
         with patch.object(settle_units.subprocess, 'run', return_value=result):
-            self.assertIs(settle_units.run('tools/build_objects.py', 'usa-retail', check=False), result)
+            self.assertIs(settle_units.run('tools/build_objects.py', 'SLUS_213.76', check=False), result)
 
 
 if __name__ == '__main__':

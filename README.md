@@ -16,8 +16,8 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt     # rabbiti
 
 Private inputs (not in the repository):
 
-- `orig/<variant>/files/<boot executable>`: the retail executables (variants `usa-retail`, `eu-retail`, `eu-au-retail`,
-  `kr-retail`, `jp-retail`; hashes in `config/variants.json`). `tools/discs.py --images DIR` extracts them from disc image
+- `orig/<variant>/files/<boot executable>`: the retail executables (variants `SLUS_213.76`, `SLES_538.86`, `SLES_540.30`,
+  `SLKA_253.72`, `SLPM_663.54`; hashes in `config/variants.json`). `tools/discs.py --images DIR` extracts them from disc image
   zips one image at a time (see `docs/inputs.md`).
 - `.local/config.json`: machine-specific settings (ignored by Git).
   SDK compilers, assemblers and binutils run only through the build backend, never on the host
@@ -36,7 +36,7 @@ Optional inputs, needed only by the tools that refresh committed metadata (the b
 ## Build
 
 ```sh
-python3 configure.py --variant usa-retail     # writes build.ninja (usa-retail, eu-retail, eu-au-retail, kr-retail, jp-retail)
+python3 configure.py --variant SLUS_213.76     # writes build.ninja (SLUS_213.76, SLES_538.86, SLES_540.30, SLKA_253.72, SLPM_663.54)
 ninja                                          # ends with `OK  SLUS_213.76 ...` or a mismatch report
 ninja progress                                 # share of .text provided by source (python3 tools/progress.py --libraries: per library)
 ```

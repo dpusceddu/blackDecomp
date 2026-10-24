@@ -15,7 +15,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 PY = sys.executable
-SLUG = 'usa-retail'
+SLUG = 'SLUS_213.76'
 
 
 def source_addresses(text):
@@ -92,5 +92,5 @@ def main():
 
 
 if __name__ == '__main__':
-    SLUG = sys.argv[1] if len(sys.argv) > 1 else 'usa-retail'
+    SLUG = sys.argv[1] if len(sys.argv) > 1 else 'SLUS_213.76'
     sys.exit(main())

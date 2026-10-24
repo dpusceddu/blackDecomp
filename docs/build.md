@@ -7,15 +7,15 @@ How the identical rebuild works. Everything generated stays under the ignored `a
 Needs the target executable in `orig/<variant>/files/` (see `tools/discs.py`), the build backend, and `ninja`.
 
 ```sh
-python3 configure.py --variant usa-retail     # writes build.ninja (variants: usa-retail, eu-au-retail, eu-retail, kr-retail, jp-retail)
+python3 configure.py --variant SLUS_213.76     # writes build.ninja (variants: SLUS_213.76, SLES_540.30, SLES_538.86, SLKA_253.72, SLPM_663.54)
 ninja                                          # ends with `OK  SLUS_213.76 ...` or a mismatch report
 ninja progress                                 # share of .text provided by source (see below)
 ```
 
 Stages (one `ninja` rule each; everything generated is under the ignored `asm/`, `data/`, `build/`):
 
-1. extract: `tools/splat_config.py` writes `config/<boot>.yaml` (splat segments from the ELF section table) and the
-   headerless image splat reads; `tools/elf_layout.py` writes `config/<boot>.layout.json` (ELF header, program
+1. extract: `tools/splat_config.py` writes `config/<GAME_ID>/splat.yaml` (splat segments from the ELF section table) and the
+   headerless image splat reads; `tools/elf_layout.py` writes `config/<GAME_ID>/layout.json` (ELF header, program
    header and one record per section) and extracts the opaque non-loaded payloads (DVP overlays) to `data/`.
 2. split: `splat split` (spimdisasm, rabbitizer) writes `asm/<variant>/text.s` (all functions, one file) and one data
    file per section; `.vutext` and `.vudata` stay binary blobs.
@@ -42,7 +42,7 @@ transfer of the cached objects to the build backend are most (about 11 s); with 
 
 ld cannot write the retail container: section-header order, the non-loaded `.reginfo`, `.DVP.*` and `.debug_str`
 sections, and `e_flags` 0x20924001. `pack_elf.py` therefore takes the linked section contents and addresses from ld and
-writes the headers from `config/<boot>.layout.json`, regenerating `.shstrtab` and `.reginfo` (with the linked `_gp`)
+writes the headers from `config/<GAME_ID>/layout.json`, regenerating `.shstrtab` and `.reginfo` (with the linked `_gp`)
 and rebasing the `.DVP.ovlytab` addresses that point into `.vutext`. The overlays and `.vutext`/`.vudata` are extracted
 payloads, not rebuilt. Code and data come only from the reassembled sources and the source units.
 
@@ -98,7 +98,7 @@ In a sandbox script, `mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}` are on P
 
 ## Shiftability
 
-`python3 tools/studies/shift_test.py usa-retail --nops 200` copies the split assembly to a scratch name, inserts NOPs into one
+`python3 tools/studies/shift_test.py SLUS_213.76 --nops 200` copies the split assembly to a scratch name, inserts NOPs into one
 function, rebuilds and checks every symbolic reference against a symbol-derived address map. Result for 200 NOPs
 (everything from `.text` onward moves): all 19,781 `jal`/`j`, 19,121 `%hi`, 25,118 `%lo`, 2,997 gp-relative accesses,
 8,499 + 4,321 + 5 data pointers and 903 exception-table entries moved correctly, 0 inconsistencies. Known non-shiftable

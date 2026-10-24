@@ -4,8 +4,8 @@
 GNU ld cannot produce the retail container (section header order, non-loaded SN/DVP sections, `.reginfo`,
 e_flags 0x20924001), so ld output is used for what it is good at, laying out and relocating the loaded sections
 (`.text` ... `.bss`), and this step re-packs them from committed configuration:
-  * config/<boot>.layout.json: ELF header fields, program header and one record per section (no game bytes);
-  * the extracted opaque payloads in data/<slug>/elf (DVP overlays and their tables; ignored, like .vutext);
+  * config/<GAME_ID>/layout.json: ELF header fields, program header and one record per section (no game bytes);
+  * the extracted opaque payloads in data/<GAME_ID>/elf (DVP overlays and their tables; ignored, like .vutext);
   * `_gp` from the linked image for `.reginfo`; `.shstrtab` is regenerated from the section names;
   * `.DVP.ovlytab` addresses that point into `.vutext` are rebased if `.vutext` moved.
 Section addresses and sizes of the loaded sections come from the linked image, file offsets from the usual

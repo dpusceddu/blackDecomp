@@ -7,15 +7,15 @@ Produced by `tools/discs.py`, `tools/inputs.py`, `tools/symbols.py`, `tools/comp
 
 | Slug | Boot file | Image | Files | Boot ELF size | `.text` | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
-| `usa-retail` | `SLUS_213.76` | DVD 3.92 GB | 585 | 3,371,868 | 2,715,464 | Reference. SHA-256 `141b0520…6254ffe4c` matches the extracted copy |
+| `SLUS_213.76` | `SLUS_213.76` | DVD 3.92 GB | 585 | 3,371,868 | 2,715,464 | Reference. SHA-256 `141b0520…6254ffe4c` matches the extracted copy |
 | `usa-beta-2005-08-16` | `SLUS_000.00` | CD 322 MB | 102 | 2,388,744 | 1,913,448 | Early development build, entry `0x13e718` |
 | `usa-demo` | `SLUS_291.80` | CD 661 MB | 128 | 3,148,184 | 2,496,200 | Entry `0x157d30` |
-| `eu-beta-2006-01-09` | `SLES_538.86` | DVD 3.91 GB | 697 | 3,371,996 | 2,715,656 | Boot ELF identical to `eu-retail` |
-| `eu-retail` | `SLES_538.86` | DVD 3.91 GB | 697 | 3,371,996 | 2,715,656 | PAL, five languages |
+| `eu-beta-2006-01-09` | `SLES_538.86` | DVD 3.91 GB | 697 | 3,371,996 | 2,715,656 | Boot ELF identical to `SLES_538.86` |
+| `SLES_538.86` | `SLES_538.86` | DVD 3.91 GB | 697 | 3,371,996 | 2,715,656 | PAL, five languages |
 | `eu-demo` | `SLED_539.37` | CD 667 MB | 136 | 3,148,568 | 2,496,840 | Same build family as `usa-demo` |
-| `eu-au-retail` | `SLES_540.30` | DVD 3.92 GB | 602 | 3,371,868 | 2,715,528 | Same ELF size as USA, 64 bytes more `.text` |
-| `jp-retail` | `SLPM_663.54` | DVD 3.93 GB | 584 | 3,372,252 | 2,715,912 | `VER = 1.01`, NTSC |
-| `kr-retail` | `SLKA_253.72` | DVD 3.92 GB | 585 | 3,371,996 | 2,715,560 | NTSC |
+| `SLES_540.30` | `SLES_540.30` | DVD 3.92 GB | 602 | 3,371,868 | 2,715,528 | Same ELF size as USA, 64 bytes more `.text` |
+| `SLPM_663.54` | `SLPM_663.54` | DVD 3.93 GB | 584 | 3,372,252 | 2,715,912 | `VER = 1.01`, NTSC |
+| `SLKA_253.72` | `SLKA_253.72` | DVD 3.92 GB | 585 | 3,371,996 | 2,715,560 | NTSC |
 
 The beta and demo images are raw CD images (MODE2/2352 bin plus cue); the rest are 2048-byte DVD ISOs.
 `tools/iso.py` reads both. Zip and image hashes are in `config/variants.json`.
@@ -47,19 +47,19 @@ covered by an 8-word masked run that also occurs in retail.
 
 | Variant | `.text` delta | Window exact | Window loose | Shingle (masked) | Shingle (loose) | SN unwind groups | DVP overlays |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `eu-au-retail` | +64 | 98.3% | 99.9% | 99.98% | 100% | 281 | 88 |
-| `eu-retail` / `eu-beta` | +192 | 80.8% | 99.9% | 99.2% | 99.99% | 281 | 88 |
-| `kr-retail` | +96 | 80.7% | 99.8% | 99.2% | 99.99% | 281 | 88 |
-| `jp-retail` | +448 | 80.5% | 99.4% | 99.2% | 99.95% | 281 | 88 |
+| `SLES_540.30` | +64 | 98.3% | 99.9% | 99.98% | 100% | 281 | 88 |
+| `SLES_538.86` / `eu-beta` | +192 | 80.8% | 99.9% | 99.2% | 99.99% | 281 | 88 |
+| `SLKA_253.72` | +96 | 80.7% | 99.8% | 99.2% | 99.99% | 281 | 88 |
+| `SLPM_663.54` | +448 | 80.5% | 99.4% | 99.2% | 99.95% | 281 | 88 |
 | `usa-demo` | -219,264 | 36% | 45% | 64% | 69% | 279 | 90 |
 | `eu-demo` | -218,624 | 36% | 45% | 64% | 69% | 279 | 90 |
 | `usa-beta-2005-08-16` | -802,016 | 46% | 57% | 71% | 77% | 259 | 56 |
-| `usa-retail` | 0 | | | | | 281 | 88 |
+| `SLUS_213.76` | 0 | | | | | 281 | 88 |
 
 The PAL, Korean and Japanese builds are the USA code plus small changes. The 19% of windows that differ
 only in exact masking, as sampled in the Korean build, differ by a constant `+0x80` shift of member
 offsets from one base register (a structure that grew by 128 bytes), which the loose column absorbs; the `.rodata` differences are a few
-dozen bytes. `eu-au-retail` has no such shift and is the closest relative of USA (it still differs
+dozen bytes. `SLES_540.30` has no such shift and is the closest relative of USA (it still differs
 elsewhere: the `.rodata` and `.text` deltas above). The demos and the beta are earlier builds with 6%, 40%
 and 31% less `.text` and visibly different code. All variants have the same CIE form of embedded unwind
 groups that `the companion project` ties to SN 1.36 (259 to 281 groups), so one compiler family is used throughout.
@@ -199,7 +199,7 @@ How to use the others:
 - **PAL, Korean, Japanese and EU/AU retail (and the EU "beta", which is the PAL retail executable):** boundary
   evidence. Their code is the same compilation with small deltas, so a function's diffs show which functions
   are region-specific, which data each routine touches (a `+0x80` member shift marks a structure that
-  differs, usually language or region data), and where `.text` and `.rodata` grew. `eu-au-retail` is the
+  differs, usually language or region data), and where `.text` and `.rodata` grew. `SLES_540.30` is the
   closest relative and a cheap second image for shiftability tests. They are not independent matching targets.
 - **USA beta (2005-08-16) and the two demos:** name and type sources and order evidence, not byte targets.
   Their code is only 64% to 71% shingle-similar. The beta's profiler zone names and memory-pool names give a

@@ -4,7 +4,7 @@
   units_verify.py prepare   after `build_objects.py --compile-only`: read each unit's compiled object, bind the symbols
                             it refers to (from .local/import/*_bindings.json, original addresses), and mark functions
                             whose object does not fit (no symbol, other size, extra code) as `asm` with a reason
-  units_verify.py link      after a failed link: read build/<slug>/link.log and demote the units it names
+  units_verify.py link      after a failed link: read build/<GAME_ID>/link.log and demote the units it names
   units_verify.py compare   after a link: compare the linked image with the target section by section and demote the
                             units that own the differing bytes
 Reasons: compile, name, size, extra, extern, section, link, bytes. Writes config/units.yaml (a machine-maintained file).
@@ -23,7 +23,7 @@ from elfinfo import Elf
 from units import load_units, ROOT
 from source_data import source_ranges, validate_inputs, validate_input_symbols, range_owner
 
-SLUG = 'usa-retail'
+SLUG = 'SLUS_213.76'
 BUILD = ROOT / 'build' / SLUG
 
 
@@ -83,7 +83,7 @@ def owned_data_gap_fits(size, start, stop, section, input_alignment):
     from text_placement import InputAlignments, natural_text_span
     if size <= 0:
         return False
-    original = Elf((ROOT / 'orig' / SLUG / 'files' / 'SLUS_213.76').read_bytes())
+    original = Elf((ROOT / 'orig' / SLUG / 'SLUS_213.76').read_bytes())
     record = original.section(section)
     if record is None:
         return False
@@ -227,7 +227,7 @@ def prepare():
         if alignments is None:
             alignments = InputAlignments(BUILD)
         if original_text is None:
-            original = Elf((ROOT / 'orig' / SLUG / 'files' / 'SLUS_213.76').read_bytes())
+            original = Elf((ROOT / 'orig' / SLUG / 'SLUS_213.76').read_bytes())
             text = original.section('.text')
             original_text, text_base = original.content(text), text['addr']
         padding_start = start + section['size'] - text_base
@@ -378,7 +378,7 @@ def link_errors():
 def compare():
     """Attribute every differing word of the linked image to the unit (or assembly function) that owns it."""
     import bisect
-    ref = Elf((ROOT / 'orig' / SLUG / 'files' / 'SLUS_213.76').read_bytes())
+    ref = Elf((ROOT / 'orig' / SLUG / 'SLUS_213.76').read_bytes())
     got = Elf((BUILD / 'linked.elf').read_bytes())
     placement = json.loads((BUILD / 'placement.json').read_text())
     funcs = placement['functions']

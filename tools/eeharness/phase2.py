@@ -179,7 +179,7 @@ def run_json(command, output):
 
 
 def inventory():
-    functions = json.loads((ROOT/'build/usa-retail/placement.json').read_text())['functions']
+    functions = json.loads((ROOT/'build/SLUS_213.76/placement.json').read_text())['functions']
     labels,_ = regions([f['addr'] for f in functions])
     return [dict(address=f['addr'],size=(functions[i+1]['addr'] if i+1<len(functions) else 0x396f48)-f['addr'],region=label)
             for i,(f,label) in enumerate(zip(functions,labels))]
@@ -257,7 +257,7 @@ def main():
     functions = output/'functions.txt'
     functions.write_text(''.join(f"{f['address']:x}\n" for f in fs))
     catalog = capture_catalog(args.fuzz_limit,ROOT/'build/classes/catalog.json')
-    elf = Elf((ROOT/'orig/usa-retail/files/SLUS_213.76').read_bytes())
+    elf = Elf((ROOT/'orig/SLUS_213.76/SLUS_213.76').read_bytes())
     text = elf.section('.text'); retail = elf.content(text)
     totals, inputs, digests = collections.Counter(),[],set()
     unique = []

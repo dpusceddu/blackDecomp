@@ -2,13 +2,13 @@
 """Write the GNU ld script and the object list for the rebuild.
 
 Every loaded section is placed by alignment only (no hard-coded addresses except the image base), so sizes can change.
-The input order of each section is the original order recorded by split_objects.py (build/<slug>/placement.json):
+The input order of each section is the original order recorded by split_objects.py (build/<GAME_ID>/placement.json):
 one object per function, shared constant runs, and splat's data files. A function listed with `status: source` in
 config/units.yaml is replaced by its unit's compiled object: the object takes the slot of the unit's first function in
 every section it occupies, and the unit's other functions are dropped from the order. Their `func_XXXXXXXX` names are
 defined as aliases of the compiled symbols, so assembly callers link against the source definition.
-Writes build/<slug>/link.ld and build/<slug>/objects.json (name, kind, source, sections).
-Usage: make_ld.py VARIANT_SLUG [WORK]
+Writes build/<GAME_ID>/link.ld and build/<GAME_ID>/objects.json (name, kind, source, sections).
+Usage: make_ld.py GAME_ID [WORK]
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -63,7 +63,7 @@ def main():
     slug = sys.argv[1]
     work = sys.argv[2] if len(sys.argv) > 2 else slug
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
-    layout = json.loads((ROOT / 'config' / ('%s.layout.json' % boot)).read_text())
+    layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
     build = ROOT / 'build' / work
     placement = json.loads((build / 'placement.json').read_text())
     objects = {name: dict(o, name=name) for name, o in placement['objects'].items()}

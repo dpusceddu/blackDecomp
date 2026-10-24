@@ -18,9 +18,9 @@ config/symbols.txt has one line per symbol, tab separated:
            readable aliases, not original symbols.
   PROTOTYPE  Ghidra's signature where one was set, else `-`.
 
-Reconciliation with splat's function list (build/<slug>/placement.json) is written to build/<slug>/ghidra_reconcile.json
+Reconciliation with splat's function list (build/<GAME_ID>/placement.json) is written to build/<GAME_ID>/ghidra_reconcile.json
 and summarised on stdout.
-Usage: ghidra_export.py [--pages DIR] [--slug usa-retail]
+Usage: ghidra_export.py [--pages DIR] [--slug SLUS_213.76]
 """
 import argparse, bisect, json, re, sys
 from pathlib import Path
@@ -170,7 +170,7 @@ def reconcile(slug, ghidra):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--pages', default=str(ROOT / '.local/ghidra'))
-    ap.add_argument('--slug', default='usa-retail')
+    ap.add_argument('--slug', default='SLUS_213.76')
     a = ap.parse_args()
     funcs, protos, labels = load(a.pages)
     # source-provided functions carry their mangled name

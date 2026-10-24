@@ -1,6 +1,6 @@
 # Provisional translation units that replace assembly functions with source; see README.md.
 # status: source = provided by the unit; asm = stays assembly, with a one-word reason.
-variant: usa-retail
+variant: SLUS_213.76
 units:
 - name: auto_unclassified_100218
   source: src/game/tu_100218.c

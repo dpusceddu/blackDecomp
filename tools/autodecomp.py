@@ -22,7 +22,7 @@ from elfinfo import Elf
 from build_telemetry import record as record_build
 
 ROOT = Path(__file__).resolve().parents[1]
-SLUG = 'usa-retail'
+SLUG = 'SLUS_213.76'
 BUILD = ROOT / 'build' / SLUG
 AUTO = ROOT / 'build' / 'auto'
 RESULTS = Path(os.environ.get('AUTODECOMP_RESULTS', ROOT / 'build' / 'auto.json'))
@@ -1161,7 +1161,7 @@ def score(target, toks, orig_const):
 
 class OrigImage:
     def __init__(self):
-        self.e = Elf((ROOT / 'orig' / SLUG / 'files' / 'SLUS_213.76').read_bytes())
+        self.e = Elf((ROOT / 'orig' / SLUG / 'SLUS_213.76').read_bytes())
         self.secs = [s for s in self.e.sections if s['addr'] and s['name'] in ('.rodata', '.lit4', '.sdata', '.data', '.text')]
 
     def word(self, addr):

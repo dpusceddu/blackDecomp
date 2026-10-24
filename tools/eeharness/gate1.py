@@ -128,8 +128,8 @@ def check(args):
     require(len(retail) == 42 and all(row['repeat_agreement'] and row['stop'] == 'returned' for row in retail),
             'synthetic retail micro execution/replay check failed')
     matching = []
-    for slug,boot in [('usa-retail','SLUS_213.76'),('eu-au-retail','SLES_540.30'),('eu-retail','SLES_538.86'),
-                      ('kr-retail','SLKA_253.72'),('jp-retail','SLPM_663.54')]:
+    for slug,boot in [('SLUS_213.76','SLUS_213.76'),('SLES_540.30','SLES_540.30'),('SLES_538.86','SLES_538.86'),
+                      ('SLKA_253.72','SLKA_253.72'),('SLPM_663.54','SLPM_663.54')]:
         run([sys.executable,ROOT/'tools/check_elf.py',slug,ROOT/'build'/slug/(boot+'.elf')])
         matching.append(slug)
     source = {str(path.relative_to(ROOT)):hashlib.sha256(path.read_bytes()).hexdigest()

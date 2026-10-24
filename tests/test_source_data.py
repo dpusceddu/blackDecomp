@@ -343,8 +343,8 @@ class SourceDataRanges(unittest.TestCase):
         original = SimpleNamespace(section=lambda name: dict(addr=0x1000), content=lambda _: bytes(16))
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); build = root / 'build'; build.mkdir()
-            (root/'orig/usa-retail/files').mkdir(parents=True)
-            (root/'orig/usa-retail/files/SLUS_213.76').write_bytes(b'authored ELF fixture')
+            (root/'orig/SLUS_213.76').mkdir(parents=True)
+            (root/'orig/SLUS_213.76/SLUS_213.76').write_bytes(b'authored ELF fixture')
             (build/'placement.json').write_text(json.dumps(placement))
             (build/'labels.json').write_text('[]')
             with patch.object(V, 'ROOT', root), patch.object(V, 'BUILD', build), \
@@ -384,8 +384,8 @@ class SourceDataRanges(unittest.TestCase):
         unit = self.unit()
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory); build = root / 'build'; build.mkdir()
-            (root/'orig/usa-retail/files').mkdir(parents=True)
-            (root/'orig/usa-retail/files/SLUS_213.76').write_bytes(b'original')
+            (root/'orig/SLUS_213.76').mkdir(parents=True)
+            (root/'orig/SLUS_213.76/SLUS_213.76').write_bytes(b'original')
             (build/'linked.elf').write_bytes(b'changed')
             (build/'placement.json').write_text(json.dumps(dict(functions=[dict(addr=0x1000, name='body')],
                  sections={sec: [] for sec in ('.rodata', '.lit4', '.gcc_except_table')})))

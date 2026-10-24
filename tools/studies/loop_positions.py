@@ -301,7 +301,7 @@ def main():
         parser.error('--output must name a Git-ignored path')
     import yaml
     from elfinfo import Elf
-    original=Elf((ROOT/'orig/usa-retail/files/SLUS_213.76').read_bytes())
+    original=Elf((ROOT/'orig/SLUS_213.76/SLUS_213.76').read_bytes())
     mapping=yaml.safe_load((ROOT/'config/tus.yaml').read_text())
     census=json.loads(Path(args.census).read_text()) if args.census else loop_padding.classification()
     result=report(census,mapping['tus'],mapping['libraries'],original.section('.text')['addr'])

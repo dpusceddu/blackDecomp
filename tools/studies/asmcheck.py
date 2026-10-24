@@ -34,7 +34,7 @@ HEADER = '\t.set noreorder\n\t.set noat\n\t.set nomacro\n\t.text\n'
 
 
 def load_words():
-    e = Elf((ROOT / 'orig/usa-retail/files/SLUS_213.76').read_bytes())
+    e = Elf((ROOT / 'orig/SLUS_213.76/SLUS_213.76').read_bytes())
     t = e.section('.text')
     c = e.content(t)
     return t['addr'], struct.unpack('<%dI' % (len(c) // 4), c)

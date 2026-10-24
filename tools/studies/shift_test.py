@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Shiftability test: insert NOPs into one function of a scratch copy, rebuild and check that references moved.
 
-Usage: shift_test.py VARIANT_SLUG [--func func_001DD838] [--nops 1] [--work shift] [--analyze-only]
-Copies asm/<slug> and data/<slug> to the scratch name (default `shift`), inserts the NOPs right after the function's
+Usage: shift_test.py GAME_ID [--func func_001DD838] [--nops 1] [--work shift] [--analyze-only]
+Copies asm/<GAME_ID> and data/<GAME_ID> to the scratch name (default `shift`), inserts the NOPs right after the function's
 label, runs the normal post-process/link/pack stages on the copy (never touching the main build) and compares the
 result with the reference image in orig/ using a symbol-derived address map. All symbols carry their original
 address in their name, so the old->new address map is exact at every label. Reports, for code and data separately,
@@ -210,7 +210,7 @@ def main():
     else:
         shifted = ROOT / 'build' / a.work / (boot + '.elf')
         linked = ROOT / 'build' / a.work / 'linked.elf'
-    analyze(a.slug, ROOT / 'orig' / a.slug / 'files' / boot, shifted, linked, a.func, a.nops)
+    analyze(a.slug, ROOT / 'orig' / a.slug / boot, shifted, linked, a.func, a.nops)
 
 
 if __name__ == '__main__':

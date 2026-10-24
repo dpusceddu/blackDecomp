@@ -101,7 +101,7 @@ def bindings():
         parts = line.split('\t')
         if len(parts)>=4 and parts[0].startswith('0x'):
             result[parts[3]] = int(parts[0],16)
-    placement = json.loads((ROOT/'build/usa-retail/placement.json').read_text())
+    placement = json.loads((ROOT/'build/SLUS_213.76/placement.json').read_text())
     result.update({f['name']:f['addr'] for f in placement['functions']})
     for unit in load_units():
         result.update(unit['externs'])
@@ -140,7 +140,7 @@ def prepare(plan, output):
     out-of-line helpers or writable candidate storage fail linking/validation.
     """
     names = bindings()
-    gp = reference_gp(Elf((ROOT/'orig/usa-retail/files/SLUS_213.76').read_bytes()))
+    gp = reference_gp(Elf((ROOT/'orig/SLUS_213.76/SLUS_213.76').read_bytes()))
     compiled, results = {},[]
     for row in plan:
         row = dict(row)
@@ -313,7 +313,7 @@ def execute(rows,args):
                     agg['pcs'].update(result['pcs']);agg['edges'].update(map(tuple,result['edges']))
                     if result['failed']:agg['failures'].append(dict(corpus=name,index=result['first_failure_index'],error=result['first_error']))
                 print(f'{name}: {sum(r["recorded"] for r in results)} recorded, {sum(r["fuzzed"] for r in results)} fuzzed, {sum(r["failed"] for r in results)} disagreements/incomplete',flush=True)
-    elf=Elf((ROOT/'orig/usa-retail/files/SLUS_213.76').read_bytes());section=elf.section('.text');data=elf.content(section)
+    elf=Elf((ROOT/'orig/SLUS_213.76/SLUS_213.76').read_bytes());section=elf.section('.text');data=elf.content(section)
     report=[]
     for row in rows:
         agg=aggregates[row['address']]

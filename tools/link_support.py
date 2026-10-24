@@ -5,10 +5,10 @@ splat names every address that code or data refers to, but it cannot define thos
 object (a byte inside a larger variable, a code address in the middle of a function, a VU program inside the
 .vutext blob) or that are not addresses at all (hardware registers, masks). Reads splat's
 undefined_syms_auto.txt / undefined_funcs_auto.txt and the generated assembly, and writes
-  build/<slug>/extra_labels.txt  NAME ADDRESS: code labels fixasm.py inserts into the text file;
-  build/<slug>/symbols.ld        linker assignments: `NAME = <preceding symbol> + <delta>` inside data sections,
+  build/<GAME_ID>/extra_labels.txt  NAME ADDRESS: code labels fixasm.py inserts into the text file;
+  build/<GAME_ID>/symbols.ld        linker assignments: `NAME = <preceding symbol> + <delta>` inside data sections,
                                  `NAME = <section>_end` at a section end, `NAME = VALUE` for plain constants.
-Usage: link_support.py VARIANT_SLUG [WORK]    (WORK names the asm/ and build/ directories, default the slug)
+Usage: link_support.py GAME_ID [WORK]    (WORK names the asm/ and build/ directories, default the slug)
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -26,7 +26,7 @@ def main():
     slug = sys.argv[1]
     work = sys.argv[2] if len(sys.argv) > 2 else slug
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
-    layout = json.loads((ROOT / 'config' / ('%s.layout.json' % boot)).read_text())
+    layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
     secs = [(s['name'], s['addr'], s['addr'] + s['orig_size']) for s in layout['sections']
             if s['source'] == 'linked' and s['orig_size']]
     build = ROOT / 'build' / work

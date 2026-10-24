@@ -8,7 +8,7 @@ A *unit* is a source file that replaces a run of adjacent functions of the image
 (the file is maintained by `tools/settle_units.py`; the format is described in `tools/units.py`):
 
 ```yaml
-variant: usa-retail
+variant: SLUS_213.76
 units:
 - name: kynapse_leaf_2d15a0
   source: src/kynapse/leaf_functions_2d15a0.cpp

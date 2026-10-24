@@ -32,7 +32,7 @@ from units import load_units, ROOT
 import layout
 import units_verify
 
-SLUG = 'usa-retail'
+SLUG = 'SLUS_213.76'
 BUILD = ROOT / 'build' / SLUG
 
 

@@ -337,8 +337,8 @@ def analyze(elf_path, placement_path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--elf', type=Path, default=ROOT/'orig/usa-retail/files/SLUS_213.76')
-    parser.add_argument('--placement', type=Path, default=ROOT/'build/usa-retail/placement.json')
+    parser.add_argument('--elf', type=Path, default=ROOT/'orig/SLUS_213.76/SLUS_213.76')
+    parser.add_argument('--placement', type=Path, default=ROOT/'build/SLUS_213.76/placement.json')
     parser.add_argument('--output', type=Path, default=ROOT/'build/math-study/micro-contracts.json')
     args = parser.parse_args()
     result = analyze(args.elf, args.placement)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Dump symbols and debug data from every ELF kept under orig/ and estimate transfer to USA retail.
 
-For each ELF with .symtab, .mdebug or DWARF1/2 sections this writes, under .local/inputs/symbols/<slug>/:
+For each ELF with .symtab, .mdebug or DWARF1/2 sections this writes, under .local/inputs/symbols/<GAME_ID>/:
 functions (address, size), objects, source files, a line-table summary and the compiler banner. The
 transfer estimate looks for each symbol-bearing function body inside the retail .text using
 address-masked instruction windows (meaningful only for code built for the same CPU).
@@ -40,7 +40,7 @@ def dump(slug, path, retail_index):
              and e.section(n)['size'] > 1]
     if not has_sym and not debug:
         return None
-    rec = dict(slug=slug, file=str(path.relative_to(ROOT / 'orig' / slug / 'files')),
+    rec = dict(slug=slug, file=str(path.relative_to(ROOT / 'orig/survey' / slug / 'files')),
                machine=e.machine, debug_sections={n: e.section(n)['size'] for n in sorted(debug)})
     comment = e.section('.comment')
     if comment:
@@ -87,17 +87,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--summary-json', type=Path, default=ROOT / '.local/inputs/symbols-summary.json')
     a = ap.parse_args()
-    retail = Elf((ROOT / 'orig/usa-retail/files/SLUS_213.76').read_bytes())
+    retail = Elf((ROOT / 'orig/SLUS_213.76/SLUS_213.76').read_bytes())
     t = retail.section('.text')
     words = list(struct.unpack('<%dI' % (t['size'] // 4), retail.content(t)))
     sm, _ = mask_text(words)
     heads = {hash(tuple(sm[i:i + 6])) for i in range(len(sm) - 6)}
     index = dict(heads=heads, machines={retail.machine})
     recs, seen = [], set()
-    for p in sorted((ROOT / 'orig').glob('*/files/**/*')):
+    for p in sorted((ROOT / 'orig/survey').glob('*/files/**/*')):
         if not p.is_file() or p.read_bytes()[:4] != b'\x7fELF':
             continue
-        slug = p.relative_to(ROOT / 'orig').parts[0]
+        slug = p.relative_to(ROOT / 'orig/survey').parts[0]
         digest = hashlib.sha256(p.read_bytes()).hexdigest()
         if digest in seen:
             continue

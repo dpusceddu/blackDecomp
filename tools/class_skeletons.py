@@ -335,7 +335,7 @@ def collect_model(root=ROOT):
     matched = {f['addr'] for u in units for f in u['functions'] if f.get('status') == 'source'}
     inv = auto.load_inventory()
     function_by_address = {f['addr']: f for f in inv}
-    image = Image((root / 'orig/usa-retail/files/SLUS_213.76').read_bytes())
+    image = Image((root / 'orig/SLUS_213.76/SLUS_213.76').read_bytes())
     classes, getter_class = {}, {}
     for record in evidence['classes']:
         encoded = record['encoded_name']

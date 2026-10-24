@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """Cut splat's output into one assembly file (and later one object) per function, migrating constants with them.
 
-Reads  asm/<slug>/text.s and asm/<slug>/data/*.s (splat), build/<slug>/extra_labels.txt (link_support.py),
-       config/<boot>.layout.json.
-Writes build/<slug>/s/text/<function>.s       one function: its `.extern` block, code, and the constants only it uses
-       build/<slug>/s/<section>/<section>.<address>.s   the shared remainder of .rodata, .lit4 and .gcc_except_table
-       build/<slug>/placement.json            objects, their sources, and the original order of every output section
+Reads  asm/<GAME_ID>/text.s and asm/<GAME_ID>/data/*.s (splat), build/<GAME_ID>/extra_labels.txt (link_support.py),
+       config/<GAME_ID>/layout.json.
+Writes build/<GAME_ID>/s/text/<function>.s       one function: its `.extern` block, code, and the constants only it uses
+       build/<GAME_ID>/s/<section>/<section>.<address>.s   the shared remainder of .rodata, .lit4 and .gcc_except_table
+       build/<GAME_ID>/placement.json            objects, their sources, and the original order of every output section
 
 Constant migration (the equivalent of splat's rodata migration, for .rodata, .lit4 and .gcc_except_table):
 a splat data object (dlabel .. enddlabel) belongs to a function when exactly one function refers to its address
@@ -15,7 +15,7 @@ per section (the linker places an input section as a whole, so a run must be adj
 objects stay shared. `.align` directives are checked so that every object's start address satisfies its own
 alignments: objects are cut at an inner `.align` that the start does not guarantee, and shared runs are cut
 where the alignment of the run's start would be violated.
-Usage: split_objects.py VARIANT_SLUG [WORK]
+Usage: split_objects.py GAME_ID [WORK]
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -271,7 +271,7 @@ def main():
     slug = sys.argv[1]
     work = sys.argv[2] if len(sys.argv) > 2 else slug   # the asm/ and build/ directory names
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
-    layout = json.loads((ROOT / 'config' / ('%s.layout.json' % boot)).read_text())
+    layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
     build = ROOT / 'build' / work
     src = build / 's'
     asm = ROOT / 'asm' / work
@@ -297,7 +297,7 @@ def main():
         objs = parse_objects(p)
         if sec == '.rodata':
             from elfinfo import Elf
-            image = Elf((ROOT / 'orig' / slug / 'files' / boot).read_bytes())
+            image = Elf((ROOT / 'orig' / slug / boot).read_bytes())
             rodata = image.section(sec)
             data = image.content(rodata)
 

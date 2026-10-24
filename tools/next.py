@@ -24,7 +24,7 @@ CALLEE = re.compile(r'\bfunc_[0-9A-F]{6,8}\b')
 
 def load():
     res = json.loads(RESULTS.read_text()) if RESULTS.exists() else {}
-    done = {f['addr'] for u in load_units(variant='usa-retail') for f in u['functions'] if f.get('status') == 'source'}
+    done = {f['addr'] for u in load_units(variant='SLUS_213.76') for f in u['functions'] if f.get('status') == 'source'}
     return {k: v for k, v in res.items() if int(k, 16) not in done}
 
 
@@ -88,7 +88,7 @@ def families(res, top, max_size):
     sys.path.insert(0, str(ROOT / 'tools'))
     import autodecomp
     inv = autodecomp.load_inventory()
-    done = {f['addr'] for u in load_units(variant='usa-retail') for f in u['functions'] if f.get('status') == 'source'}
+    done = {f['addr'] for u in load_units(variant='SLUS_213.76') for f in u['functions'] if f.get('status') == 'source'}
     groups = collections.defaultdict(list)
     for f in inv:
         if f['addr'] in done or f['size'] <= 4 or (max_size is not None and f['size'] >= max_size):
@@ -138,7 +138,7 @@ def candidates(top, args=None):
     import autodecomp
     tus = [t for t in yaml.safe_load(path.read_text())['tus'] if t['kind'] == 'object']
     inv = autodecomp.load_inventory()
-    done = {f['addr'] for u in load_units(variant='usa-retail') for f in u['functions'] if f.get('status') == 'source'}
+    done = {f['addr'] for u in load_units(variant='SLUS_213.76') for f in u['functions'] if f.get('status') == 'source'}
     alias = {}
     for line in (ROOT / 'config/symbols.txt').read_text().split('\n'):
         f = line.split('\t')

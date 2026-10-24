@@ -7,7 +7,7 @@ region of its neighbours when both sides agree, otherwise it is `unclassified`. 
 the overall number is exact.
 A function counts as source when config/units.yaml lists it with `status: source` (units_verify.py/settle_units.py keep
 that list identical to the target); bytes are the original span of the function up to the next function.
-Usage: progress.py [SLUG]       writes build/<slug>/progress.json and prints a table
+Usage: progress.py [SLUG]       writes build/<GAME_ID>/progress.json and prints a table
        progress.py --libraries   also print the totals per library directory of src/
        progress.py --tus [N]     also list the N (default 15) partially done translation units with most bytes still in assembly
 When config/tus.yaml exists (tools/tus.py) the report adds the progress by TU: complete TUs (every function from source),
@@ -63,7 +63,7 @@ def orphan_pieces(slug, fs):
     """Addresses of the functions that are orphan pieces: `<one non-branch instruction>; nop` repeated (see tools/boundaries.py)."""
     from elfinfo import Elf
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
-    elf = Elf((ROOT / 'orig' / slug / 'files' / boot).read_bytes())
+    elf = Elf((ROOT / 'orig' / slug / boot).read_bytes())
     sec = elf.section('.text')
     data = elf.content(sec)
 
@@ -86,7 +86,7 @@ def orphan_pieces(slug, fs):
 def tu_report(slug, fs, spans, source, top):
     """Progress by translation unit (config/tus.yaml): rows by confidence and the TUs closest to completion."""
     path = ROOT / 'config/tus.yaml'
-    if not path.exists() or slug != 'usa-retail':
+    if not path.exists() or slug != 'SLUS_213.76':
         return None
     import bisect, yaml
     tus = yaml.safe_load(path.read_text())['tus']
@@ -148,11 +148,10 @@ def main():
     if '--tus' in sys.argv:
         k = sys.argv.index('--tus')
         top = int(sys.argv[k + 1]) if k + 1 < len(sys.argv) and sys.argv[k + 1].isdigit() else 15
-    slug = next((a for a in sys.argv[1:] if not a.startswith('-') and not a.isdigit()), 'usa-retail')
+    slug = next((a for a in sys.argv[1:] if not a.startswith('-') and not a.isdigit()), 'SLUS_213.76')
     build = ROOT / 'build' / slug
     fs = json.loads((build / 'placement.json').read_text())['functions']
-    layout = json.loads((ROOT / 'config' / ('%s.layout.json' % json.loads(
-        (ROOT / 'config/variants.json').read_text())[slug]['boot'])).read_text())
+    layout = json.loads((ROOT / 'config' / slug / 'layout.json').read_text())
     text = next(s for s in layout['sections'] if s['name'] == '.text')
     spans = [(fs[i + 1]['addr'] if i + 1 < len(fs) else text['addr'] + text['orig_size']) - fs[i]['addr']
              for i in range(len(fs))]
@@ -200,7 +199,7 @@ def main():
     print('\nRecorded evidence (matching source stays exact; equivalent means tested states):')
     for tier,r in tiers.items():
         print('  %-12s %7d functions %9d bytes' % (tier,r['functions'],r['bytes']))
-    if '--libraries' in sys.argv and slug == 'usa-retail':
+    if '--libraries' in sys.argv and slug == 'SLUS_213.76':
         import layout
         libs = {}
         for f, span in zip(fs, spans):

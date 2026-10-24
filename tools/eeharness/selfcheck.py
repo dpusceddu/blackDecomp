@@ -34,13 +34,13 @@ def simple_control(words):
 
 def check(harness):
     command(['ninja'])
-    original_path = ROOT / 'orig/usa-retail/files/SLUS_213.76'
-    source_path = ROOT / 'build/usa-retail/SLUS_213.76.elf'
-    command([sys.executable, 'tools/check_elf.py', 'usa-retail', source_path])
+    original_path = ROOT / 'orig/SLUS_213.76/SLUS_213.76'
+    source_path = ROOT / 'build/SLUS_213.76/SLUS_213.76.elf'
+    command([sys.executable, 'tools/check_elf.py', 'SLUS_213.76', source_path])
     original = Elf(original_path.read_bytes())
     text = original.section('.text')
     data = original.content(text)
-    functions = [f for u in load_units(variant='usa-retail') for f in u['functions']
+    functions = [f for u in load_units(variant='SLUS_213.76') for f in u['functions']
                  if f.get('status') == 'source' and 8 <= f.get('size',0) <= 80]
     controls = []
     for f in sorted(functions, key=lambda f: f['addr']):

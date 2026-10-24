@@ -23,7 +23,7 @@ from vu0_micro import UPLOADS
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--harness',type=Path,default=ROOT/'build/eeharness/host/eeharness')
-    parser.add_argument('--elf',type=Path,default=ROOT/'orig/usa-retail/files/SLUS_213.76')
+    parser.add_argument('--elf',type=Path,default=ROOT/'orig/SLUS_213.76/SLUS_213.76')
     parser.add_argument('--output',type=Path,default=ROOT/'build/eeharness/retail-micro-check.json')
     args = parser.parse_args()
     if not args.output.resolve().is_relative_to((ROOT/'build').resolve()):

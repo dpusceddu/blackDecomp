@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Translation-unit (TU) boundary evidence and the TU map of the boot executable.
 
-  tus.py evidence    collect every signal and print what each one says (build/<slug>/tus_evidence.json)
+  tus.py evidence    collect every signal and print what each one says (build/<GAME_ID>/tus_evidence.json)
   tus.py map         combine the signals into config/tus.yaml (hand corrections: config/tus_overrides.yaml)
   tus.py validate    agreement between the signals, with the exception-frame and constructor-stub signals held out
   tus.py all         evidence + map + validate
 
-Everything is computed from the retail image (SLUS_213.76), the split in build/<slug>/ (run `ninja` first) and the
+Everything is computed from the retail image (SLUS_213.76), the split in build/<GAME_ID>/ (run `ninja` first) and the
 function inventory of the automatic pipeline (build/auto/inventory.json). Nothing here runs an SDK binary.
 
 Signals (README.md, "Translation units", has the findings):
@@ -33,7 +33,8 @@ from elfinfo import Elf
 import boundaries
 
 ROOT = Path(__file__).resolve().parents[1]
-SLUG = 'usa-retail'
+SLUG = 'SLUS_213.76'
+BETA, DEMO = 'SLUS_000.00', 'SLUS_291.80'   # earlier USA builds, kept only in the disc survey (orig/survey/)
 CIE_SIMPLE = bytes.fromhex('100000000000000001000178400c1d0009401f00')
 DATA_SECTIONS = ('.rodata', '.lit4', '.gcc_except_table', '.data', '.sdata', '.sbss', '.bss')
 HARD_SECTIONS = ('.rodata', '.lit4', '.gcc_except_table')
@@ -58,8 +59,8 @@ class Image:
         self.slug = slug
         build = ROOT / 'build' / slug
         boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
-        self.elf = Elf((ROOT / 'orig' / slug / 'files' / boot).read_bytes())
-        layout = json.loads((ROOT / 'config' / ('%s.layout.json' % boot)).read_text())
+        self.elf = Elf((ROOT / 'orig' / slug / boot).read_bytes())
+        layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
         self.sections = [(s['name'], s['addr'], s['orig_size']) for s in layout['sections']
                          if s['source'] == 'linked' and s['name'] not in ('.vutext', '.vubss')]
         text = self.elf.section('.text')
@@ -402,9 +403,13 @@ def build_signals(img):
         return json.loads(cache.read_text())
     rs, rl = mask_text(list(img.words))
     out = {'adjacency': {}, 'shift': {}}
-    for slug in ('usa-beta-2005-08-16', 'usa-demo', 'eu-au-retail', 'eu-retail', 'kr-retail', 'jp-retail'):
-        boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
-        e = Elf((ROOT / 'orig' / slug / 'files' / boot).read_bytes())
+    for slug in (BETA, DEMO, 'SLES_540.30', 'SLES_538.86', 'SLKA_253.72', 'SLPM_663.54'):
+        path = ROOT / 'orig' / slug / slug
+        if not path.exists():       # beta and demo executables come from the disc survey (tools/discs.py)
+            path = ROOT / 'orig/survey' / slug / 'files' / slug
+        if not path.exists():
+            continue
+        e = Elf(path.read_bytes())
         t = e.section('.text')
         ow = struct.unpack('<%dI' % (t['size'] // 4), e.content(t))
         os_, ol = mask_text(list(ow))
@@ -421,7 +426,7 @@ def build_signals(img):
             h = hash(tuple(rl[i:i + K]))
             if ha[h] == 1 and h in hb and h not in dup:
                 m[i] = hb[h]
-        if slug.startswith('usa-'):
+        if slug in (BETA, DEMO):
             adj = {}
             for i in img.real[1:]:
                 w = (img.F[i] - img.tbase) >> 2
@@ -874,8 +879,8 @@ def gap_signals(img, rel, libs, xb):
         last = (p, st[p])
     for slug in xb['adjacency']:
         adj = xb['adjacency'][slug]
-        sig['break_' + slug.split('-')[1]] = {p for p in P if adj.get(str((img.F[R[p]] - img.tbase) >> 2)) == 'break'}
-    sh = xb['shift'].get('kr-retail', {})
+        sig['break_' + ('beta' if slug == BETA else 'demo')] = {p for p in P if adj.get(str((img.F[R[p]] - img.tbase) >> 2)) == 'break'}
+    sh = xb['shift'].get('SLKA_253.72', {})
     sig['shift_change'] = {p for p in P if sh.get(str(R[p - 1])) in ('same', 'shifted') and sh.get(str(R[p])) in ('same', 'shifted')
                            and sh.get(str(R[p - 1])) != sh.get(str(R[p]))}
     return sig, linkpos
