@@ -20,6 +20,7 @@ from concurrent.futures import ThreadPoolExecutor
 TOOLCHAINS = os.environ.get('BLACK_TOOLCHAINS', '/toolchains')
 WORK = os.environ.get('BLACK_WORK', '/work')
 BINUTILS = os.environ.get('BLACK_BINUTILS_PREFIX', 'mipsel-linux-gnu-')
+VERBOSE = bool(os.environ.get('BLACK_VERBOSE'))   # compiler warnings are printed only on failure unless set
 CC = TOOLCHAINS + '/compilers'
 AS = CC + '/ee-gcc2.96/ee/bin/as'
 tarfile.open('inputs.tgz').extractall('.')
@@ -104,12 +105,12 @@ built = []
 results = {}
 with ThreadPoolExecutor(2) as pool:
     for src, rc, msg in pool.map(assemble, plan.get('assemble', [])):
-        if rc or msg:
+        if rc or VERBOSE:
             print('AS %s rc=%d\n%s' % (src, rc, '\n'.join(msg.split('\n')[:40])))
         failed += bool(rc)
         results[src] = dict(rc=rc, msg=msg)
     for src, rc, msg in pool.map(compile_one, plan.get('compile', [])):
-        if rc or msg:
+        if rc or VERBOSE:
             print('CC %s rc=%d\n%s' % (src, rc, '\n'.join(msg.split('\n')[:80])))
         failed += bool(rc)
         results[src] = dict(rc=rc, msg=msg)
