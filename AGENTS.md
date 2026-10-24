@@ -2,8 +2,9 @@
 
 - Read `PLAN.md` (goal, method, state, open problems) and `README.md` (setup, build, working on a TU) first;
   `docs/inputs.md` has the inputs and variants. Read `docs/matching-handbook.md` before each TU.
-- Never run SDK, compiler or assembler binaries on the host. Use `tools/compile.py` and `tools/sandbox.py`, which use
-  the build backend in `.local/config.json`. If the build backend is unreachable (connection error), stop and report it;
+- Never run SDK or proprietary toolchain binaries (SN and Sony compilers and assemblers, the catalog binutils) on the
+  host. Use `tools/compile.py` and `tools/sandbox.py`, which use the build backend in `.local/config.json`.
+  Building and running the project's own tools (for example `tools/eeharness/`) with the host compiler is fine. If the build backend is unreachable (connection error), stop and report it;
   do not work around the isolation.
 - Never commit game bytes, extracted files, generated assembly or data, savestates, compilers or build output. `orig/`,
   `asm/`, `data/`, `build/`, `.local/` and `.venv/` are ignored; keep it that way.
