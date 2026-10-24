@@ -24,8 +24,8 @@ request = json.load(open('request.json'))
 sys.path.insert(0, 'tools')
 from assembler import compile_with_assembler
 from elfobj import normalize_object
-root = pathlib.Path('/toolchains/compilers') / request['compiler']
-env = dict(os.environ, TMPDIR='/work', WINEDEBUG='-all')
+root = pathlib.Path(os.environ.get('BLACK_TOOLCHAINS', '/toolchains')) / 'compilers' / request['compiler']
+env = dict(os.environ, TMPDIR=os.environ.get('BLACK_WORK', '/work'), WINEDEBUG='-all')
 if (root / 'bin/ee-gcc.exe').is_file():
     backend = next(p for p in sorted((root / 'lib/gcc-lib/ee').iterdir())
                    if p.is_dir() and not p.name.startswith('.'))

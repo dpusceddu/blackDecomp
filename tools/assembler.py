@@ -7,9 +7,11 @@ import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import hashlib
+import hashlib, os, shutil
 from pathlib import Path
 import subprocess
+
+TOOLCHAINS = os.environ.get('BLACK_TOOLCHAINS', '/toolchains')
 
 
 CHOICES = ('gas-2.40', 'gas-2.40-fix', 'sn-2.73a', 'sony-2.9', 'sn-min6')
@@ -32,18 +34,18 @@ def command(choice, args, source, output):
     small = next((x for x in reversed(args) if x.startswith('-G')), '-G0')
     common = [small, '-mabi=eabi', '-I', 'include']
     if choice.startswith('gas-2.40'):
-        return ['/toolchains/binutils/root/usr/bin/mipsel-linux-gnu-as',
+        return [shutil.which(os.environ.get('BLACK_BINUTILS_PREFIX', 'mipsel-linux-gnu-') + 'as') or TOOLCHAINS + '/binutils/root/usr/bin/mipsel-linux-gnu-as',
                 '-EL', '-march=r5900', '-O2',
                 '-mfix-r5900' if choice.endswith('-fix') else '-mno-fix-r5900',
                 *common, '-o', output, source]
     if choice == 'sn-2.73a':
-        return ['wibo', '/toolchains/compilers/ee-gcc2.95.2-273a/lib/gcc-lib/ee/2.95.2/ps2eeas.exe',
+        return ['wibo', TOOLCHAINS + '/compilers/ee-gcc2.95.2-273a/lib/gcc-lib/ee/2.95.2/ps2eeas.exe',
                 '-O2', *common, '-o', output, source]
     if choice == 'sn-min6':
-        return ['wibo', '/toolchains/assemblers/ps2eeas-1.9.25.758-min6/Ps2EeAs.exe',
+        return ['wibo', TOOLCHAINS + '/assemblers/ps2eeas-1.9.25.758-min6/Ps2EeAs.exe',
                 '-O2', *common, '-o', output, source]
     if choice == 'sony-2.9':
-        return ['/toolchains/compilers/ee-gcc2.9-991111-01/ee/bin/as',
+        return [TOOLCHAINS + '/compilers/ee-gcc2.9-991111-01/ee/bin/as',
                 '-EL', '-m5900', *common, '-o', output, source]
     raise ValueError('unknown assembler configuration')
 
@@ -58,7 +60,7 @@ def compile_with_assembler(prefix, args, source, output, env, timeout):
             valid = False
         if not valid:
             return subprocess.CompletedProcess(assembler, 1, '',
-                'catalog sn-min6 missing or hash mismatch; run tools/toolchain.py install')
+                'sn-min6 assembler missing or hash mismatch; run tools/toolchain.py install')
     if choice is None:
         return subprocess.run(prefix + flags + ['-c', source, '-o', output], env=env,
                               capture_output=True, text=True, timeout=timeout)

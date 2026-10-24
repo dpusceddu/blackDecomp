@@ -1,0 +1,28 @@
+{
+ "comment": "What `python3 tools/toolchain.py install` downloads for a local build. Every download is pinned by SHA-256; compiler archives and the original Ps2EeAs.exe hashes come from toolchain-compilers.json and toolchain-assemblers.json.",
+ "compilers": [
+  "ee-gcc2.95.3-136",
+  "ee-gcc2.9-991111-01",
+  "ee-gcc2.96",
+  "ee-gcc2.95.2-273a"
+ ],
+ "assemblers": [
+  "ps2eeas-1.9.25.758-min6"
+ ],
+ "wibo": {
+  "version": "1.2.0",
+  "url": "https://github.com/decompals/wibo/releases/download/1.2.0/wibo-x86_64",
+  "sha256": "13f86a2d618f0dbe67179d349625345eabf9b46450295cb4c904e49f6aff85af"
+ },
+ "binutils_prebuilt": {
+  "name": "binutils-mips-ps2-decompals",
+  "version": "v0.10",
+  "url": "https://github.com/decompals/binutils-mips-ps2-decompals/releases/download/v0.10/binutils-mips-ps2-decompals-linux-x86-64.tar.gz",
+  "sha256": "9fe31ea3ee1a37536f9f0e2e12c668e7c3cb99e59f5154bd2f1fc4762473094c",
+  "prefix": "mips-ps2-decompals-"
+ },
+ "binutils_prefixes": [
+  "mipsel-linux-gnu-",
+  "mips-ps2-decompals-"
+ ]
+}

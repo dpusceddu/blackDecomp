@@ -1,6 +1,8 @@
-"""Worker-side job runner: assemble, compile, link and pack inside the isolated container (sent by build_objects.py).
+"""Job runner: assemble, compile, link and pack with the toolchain of the selected backend (sent by build_objects.py).
 
-Runs inside the build backend (sent by tools/build_objects.py through tools/sandbox.py).
+Runs through tools/sandbox.py, either on this machine (local backend, toolchain from tools/toolchain.py) or in a
+container (backend plugin). $BLACK_TOOLCHAINS is the toolchain directory (/toolchains in the container), $BLACK_WORK the
+scratch directory (/work), $BLACK_BINUTILS_PREFIX the binutils prefix (mipsel-linux-gnu-).
 Reads plan.json:
   assemble: [[src, obj], ...]     EE GNU assembler 2.10 (objects keep whatever the assembler writes)
   compile:  [{src, obj, compiler, args}, ...]   SN GCC under wibo; the object's symbol table is normalised for ld
@@ -15,8 +17,11 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import json, os, struct, subprocess, sys, tarfile
 from concurrent.futures import ThreadPoolExecutor
 
-AS = '/toolchains/compilers/ee-gcc2.96/ee/bin/as'
-CC = '/toolchains/compilers'
+TOOLCHAINS = os.environ.get('BLACK_TOOLCHAINS', '/toolchains')
+WORK = os.environ.get('BLACK_WORK', '/work')
+BINUTILS = os.environ.get('BLACK_BINUTILS_PREFIX', 'mipsel-linux-gnu-')
+CC = TOOLCHAINS + '/compilers'
+AS = CC + '/ee-gcc2.96/ee/bin/as'
 tarfile.open('inputs.tgz').extractall('.')
 plan = json.load(open('plan.json'))
 sys.path.insert(0, 'tools')
@@ -57,7 +62,7 @@ def compile_one(job):
         os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
         cmd = ['wibo', root + '/mwccps2.exe'] + job['args'] + ['-c', job['src'], '-o', job['obj']]
         try:
-            p = subprocess.run(cmd, env=dict(os.environ, TMPDIR='/work', WINEDEBUG='-all'),
+            p = subprocess.run(cmd, env=dict(os.environ, TMPDIR=WORK, WINEDEBUG='-all'),
                                capture_output=True, text=True, timeout=job.get('timeout', 300))
         except subprocess.TimeoutExpired:
             return job['src'], 124, 'compiler timeout'
@@ -67,7 +72,7 @@ def compile_one(job):
         return job['src'], p.returncode, (p.stdout + p.stderr).strip()
     if not os.path.isfile(root + '/bin/ee-gcc.exe'):          # native Linux compilers (Sony 2.9 / 2.96)
         os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
-        env = dict(os.environ, TMPDIR='/work')
+        env = dict(os.environ, TMPDIR=WORK)
         prefix = [root + '/bin/ee-gcc', '-B' + root + '/bin/ee-']
         try:
             p = compile_with_assembler(prefix, job['args'], job['src'], job['obj'], env, job.get('timeout', 300))
@@ -81,7 +86,7 @@ def compile_one(job):
     versions = root + '/lib/gcc-lib/ee'
     backend = next(versions + '/' + v for v in sorted(os.listdir(versions))
                    if not v.startswith('.') and os.path.isdir(versions + '/' + v))
-    env = dict(os.environ, TMPDIR='/work', WINEDEBUG='-all', WIBO_PATH=backend)
+    env = dict(os.environ, TMPDIR=WORK, WINEDEBUG='-all', WIBO_PATH=backend)
     os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
     prefix = ['wibo', root + '/bin/ee-gcc.exe', '-B' + backend + '/']
     try:
@@ -125,7 +130,7 @@ for r in plan.get('rename', []):   # give a unit's sections the sort key of the 
     if r.get('trim'):
         edited = trim_sections(edited, r['trim'])
     open(r['obj'], 'wb').write(edited)
-    args = ['mipsel-linux-gnu-objcopy']
+    args = [BINUTILS + 'objcopy']
     renamed = dict(unplaced_allocated_sections(raw, set(r['sections'])), **r['sections'])
     for old, new in renamed.items():
         args += ['--rename-section', '%s=%s' % (old, new)]
@@ -136,6 +141,6 @@ for r in plan.get('rename', []):   # give a unit's sections the sort key of the 
         print('objcopy %s: %s' % (r['obj'], p.stderr))
         sys.exit(1)
 if plan.get('link'):
-    p = subprocess.run(['mipsel-linux-gnu-ld'] + plan['link'], capture_output=True, text=True)
+    p = subprocess.run([BINUTILS + 'ld'] + plan['link'], capture_output=True, text=True)
     print((p.stdout + p.stderr).strip()[:6000])
     sys.exit(p.returncode)

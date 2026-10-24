@@ -95,7 +95,7 @@ class CatalogLaunch(unittest.TestCase):
             (compiler / 'bin/ee-gcc.exe').touch()
             backend = compiler / 'lib/gcc-lib/ee/2.9-ee-991111'
             backend.mkdir(parents=True)
-            namespace = dict(os=__import__('os'), subprocess=subprocess, CC=str(root))
+            namespace = dict(os=__import__('os'), subprocess=subprocess, CC=str(root), WORK='/work')
             exec(compile(ast.Module(body=[function], type_ignores=[]), str(path), 'exec'), namespace)
             result = subprocess.CompletedProcess([], 1, '', 'expected fixture rejection')
             with patch.object(subprocess, 'run', return_value=result) as run:
