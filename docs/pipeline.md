@@ -35,7 +35,7 @@ Drafts C for assembly functions with no per-function judgment and keeps what reb
 ```
 
 m2c and the scoring run on the host (they only read and write text); every compile runs through the build backend, hundreds
-of candidates per call (about 0.8 s latency per call on a backend plugin, about 90 compiles per second). m2c's little-endian MIPS GCC target
+of candidates per call (a call has a fixed latency, which is why candidates are batched; about 90 compiles per second on two cores). m2c's little-endian MIPS GCC target
 is `-t mipsee-gcc-c` (with `--valid-syntax`, which turns unknown field accesses into `M2C_FIELD` macros, see
 `include/ps2/prelude.h`).
 
@@ -52,8 +52,32 @@ python3 tools/autodecomp.py report [--max-size N]         # outcome classes, fai
 python3 tools/next.py [near|types|families|data|ee]       # best next work
 ```
 
-For sustained search, use the durable search service (needs the backend plugin, which keeps a container alive between
-calls) rather than the short legacy `permute` command:
+### Using decomp-permuter directly
+
+The standard way to improve one near miss is the permuter itself, as in other decompilation projects. `autodecomp.py setup`
+clones it into `.venv/decomp-permuter`; `permuter_settings.toml` at the repository root tells its `import.py` how to compile
+(the pinned SN compiler through `tools/permuter/cc.py`, which uses wibo and the local toolchain), how to assemble the target
+(`tools/permuter/as.py`) and how to disassemble (`mipsel-linux-gnu-objdump`, part of the binutils package of the README).
+Keep the draft in its TU file inside the `#ifdef NON_MATCHING` block, then:
+
+```sh
+python3 tools/permuter/prepare.py func_00105BC0        # the function's assembly in the plain form import.py reads
+python3 .venv/decomp-permuter/import.py src/game/tu_105bc0.c build/permuter/func_00105BC0.s
+python3 .venv/decomp-permuter/permuter.py nonmatchings/func_00105BC0 -j 8
+```
+
+`import.py` needs a C preprocessor named `cpp` (Linux: part of gcc) and writes `nonmatchings/func_00105BC0/` (ignored).
+Change the flags in `permuter_settings.toml` (`-O2 -G0 -snas` are the defaults of the game code) to the ones of the TU in
+`config/SLUS_213.76/splits.yaml` if they differ. The permuter prints improved candidates with their score; copy the best
+back into the TU file and run `ninja`. Its score counts instructions and ignores relocations, so only `ninja` (or objdiff)
+says whether the result is exact. `import.py` may warn about a syntax error from the inline-assembly helpers of
+`include/ps2/prelude.h`; that matters only if the function calls one of them.
+
+### Long searches (optional)
+
+`tools/permuter_service.py` is a batch helper for long searches. It needs a backend plugin that provides `service()`
+(`tools/backend.py`), which keeps a job alive between calls; with the local backend only the direct use above applies.
+Use it rather than the short legacy `permute` command:
 
 ```sh
 .venv/bin/python tools/permuter_service.py start --hours-per-function 2 --total-hours 10

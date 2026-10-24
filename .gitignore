@@ -21,3 +21,4 @@ build.ninja
 
 # objdiff project file written by `ninja objdiff`
 objdiff.json
+/nonmatchings/

@@ -1,0 +1,6 @@
+# Settings for decomp-permuter's import.py (see docs/pipeline.md, "Using decomp-permuter directly").
+compiler_type = "gcc"
+compiler_command = "python3 tools/permuter/cc.py -Iinclude -O2 -G0 -snas"
+assembler_command = "python3 tools/permuter/as.py"
+asm_prelude_file = "tools/permuter/prelude.inc"
+objdump_command = "mipsel-linux-gnu-objdump -drz -m mips:5900"
