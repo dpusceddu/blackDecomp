@@ -661,7 +661,7 @@ def unit_entries(world, parts, path_map):
             nm = f.get('nonmatching')
             if nm and nm.get('source') in path_map:
                 f['nonmatching'] = dict(nm, source=path_map[nm['source']])
-        in_range = {a: f for a, f in funcs.items() if pt.lo <= a < pt.hi}
+        in_range = {a: f for a, f in funcs.items() if pt.lo <= a < pt.hi or f.get('evidence')}
         e = {k: v for k, v in first.items() if k in ('provenance', 'tier', 'origin', 'owner', 'claim', 'tu', 'language',
                                                      'assembler_evidence', 'trim') or k in SPECIAL_KEYS}
         entry = dict(name=name, source=pt.path, library=Path(pt.path).parts[1],
@@ -692,9 +692,36 @@ def unit_entries(world, parts, path_map):
 
 # -------------------------------------------------------------------------------------------------------------- write
 
+import copy
+
+
+def save_units_yaml(units):
+    out = []
+    for u in units:
+        d = {k: v for k, v in u.items() if k not in ('compiler',) or v != 'ee-gcc2.95.3-136'}
+        choices = [f.split('=', 1)[1] for f in u.get('flags', []) if f.startswith('--assembler=')]
+        sn_driver_gnu = u.get('compiler', 'ee-gcc2.95.3-136').startswith('ee-gcc2.95') and '-snas' not in u.get('flags', [])
+        if choices or sn_driver_gnu:
+            d['assembler_evidence'] = dict(strength='weak', basis='individually verified output',
+                                           historical_provenance='unresolved')
+        else:
+            d.pop('assembler_evidence', None)
+        d['functions'] = [{k: (hex(v) if k == 'addr' else v) for k, v in f.items()} for f in u['functions']]
+        if not d.get('externs'):
+            d.pop('externs', None)
+        else:
+            d['externs'] = {k: hex(v) for k, v in sorted(d['externs'].items())}
+        out.append(d)
+    (ROOT / 'config/units.yaml').write_text(
+        '# Provisional translation units that replace assembly functions with source; see docs/units.md.\n'
+        '# status: source = provided by the unit; asm = stays assembly, with a one-word reason.\n' +
+        yaml.safe_dump({'variant': SLUG, 'units': out}, sort_keys=False, width=140))
+
+
+
+
 def write(world, parts, stale, report):
     """Write the TU files, remove the superseded sources and rewrite config/units.yaml."""
-    import units_verify
     path_map = {}
     for pt in parts:
         for piece in pt.pieces + pt.drafts:
@@ -723,13 +750,12 @@ def write(world, parts, stale, report):
         except OSError:
             print('not empty:', d)
     units = [dict(e) for e, _ in entries]
-    units_verify.ROOT = ROOT
     for u in units:
         for f in u['functions']:
             f['addr'] = f['addr'] if isinstance(f['addr'], int) else num(f['addr'])
         if u.get('externs'):
             u['externs'] = {k: num(v) for k, v in u['externs'].items()}
-    units_verify.save(units)
+    save_units_yaml(units)
     report.update(counts)
     return entries
 

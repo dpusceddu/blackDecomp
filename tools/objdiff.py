@@ -60,7 +60,7 @@ def unit_plan(slug):
         present = {s['name'] for s in Elf((build / cached).read_bytes()).symbols()}
         functions, redefine = [], {}
         for f in unit['functions']:
-            asm = build / 's/text' / ('func_%08X.s' % f['addr'])
+            asm = ROOT / 'asm' / slug / 'nonmatchings' / ('func_%08X.s' % f['addr'])
             symbol = f.get('symbol') or ('func_%08X' % f['addr'])
             if symbol not in present or not asm.is_file() or not f.get('size'):
                 continue
@@ -99,7 +99,7 @@ def remaining_plan(slug, covered):
     for f in fs:
         if f['addr'] in covered or f['addr'] in orphans:
             continue
-        asm = build / 's/text' / ('func_%08X.s' % f['addr'])
+        asm = ROOT / 'asm' / slug / 'nonmatchings' / ('func_%08X.s' % f['addr'])
         if not asm.is_file():
             continue
         library = layout.library_of(f['addr'])

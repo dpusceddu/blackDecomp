@@ -41,9 +41,7 @@ def source_body(source, name):
 
 
 def original_source_addresses():
-    content = subprocess.check_output(['git', 'show', 'HEAD:config/units.yaml'], cwd=ROOT, text=True)
-    return {int(str(f['addr']), 0) for u in yaml.safe_load(content)['units']
-            for f in u['functions'] if f.get('status') == 'source'}
+    return units.committed_source_addresses()
 
 
 def verify(config):

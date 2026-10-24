@@ -1,43 +1,32 @@
 """Assembler provenance is separate from full-image byte identity."""
 from pathlib import Path
 import sys
-import tempfile
 import unittest
-from unittest.mock import patch
-
-import yaml
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
-import units_verify
+import splits as S
+import units
 
 
 class AssemblerEvidence(unittest.TestCase):
-    def save_unit(self, flags, evidence=None):
-        unit = dict(name='example', source='src/example.cpp', flags=flags,
-                    functions=[dict(addr=0x100000, symbol='Example', status='source')])
-        if evidence is not None:
-            unit['assembler_evidence'] = evidence
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            (root / 'config').mkdir()
-            with patch.object(units_verify, 'ROOT', root):
-                units_verify.save([unit])
-            return yaml.safe_load((root / 'config/units.yaml').read_text())['units'][0]
+    def derive(self, **entry):
+        split = S.Split(dict(src='src/example.cpp', range=[0x100000, 0x100008], **entry), {})
+        unit, = units.derive_units([split], [(0x100000, 0x100008)], S.Symbols(), read=lambda p: '')
+        return unit
 
     def test_selected_assembler_has_weak_historical_provenance(self):
         for variant in ('sn-min6', 'sn-2.73a'):
-            unit = self.save_unit(['-O2', '--assembler=' + variant])
+            unit = self.derive(flags=['-O2'], assembler=variant)
+            self.assertIn('--assembler=' + variant, unit['flags'])
             self.assertEqual(unit['assembler_evidence']['strength'], 'weak')
             self.assertEqual(unit['assembler_evidence']['historical_provenance'], 'unresolved')
             self.assertEqual(unit['functions'][0]['status'], 'source')
 
-    def test_removed_selector_drops_stale_evidence(self):
-        unit = self.save_unit(['-O2', '-snas'], {'strength': 'weak'})
-        self.assertNotIn('assembler_evidence', unit)
+    def test_snas_without_selector_has_no_evidence(self):
+        self.assertNotIn('assembler_evidence', self.derive(flags=['-O2', '-snas']))
 
     def test_sn_driver_gnu_choice_also_has_weak_provenance(self):
-        unit = self.save_unit(['-O2', '-G0'])
-        self.assertEqual(unit['assembler_evidence']['strength'], 'weak')
+        self.assertEqual(self.derive(flags=['-O2', '-G0'])['assembler_evidence']['strength'], 'weak')
 
 
 if __name__ == '__main__':

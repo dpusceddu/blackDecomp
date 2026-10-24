@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Write build.ninja for the identical rebuild of one boot executable.
 
-Usage: python3 configure.py [--version SLUS_213.76]    then `ninja`
-Stages (see docs/build.md): extract -> split (splat) -> support symbols -> post-process (fixasm) -> link script ->
-assemble+link with the build toolchain -> pack the ELF container -> check against config/<GAME_ID>/checksums.sha256.
-`ninja` ends with `OK` or a mismatch report.
+Usage: python3 configure.py [--version SLUS_213.76] [--non-matching]    then `ninja`
+Stages (see docs/build.md): extract -> split (splat) -> support symbols -> function table -> units (split list + INCLUDE_ASM
+markers) -> per-function assembly -> compile -> verify -> link script -> assemble+link with the build toolchain -> pack the ELF
+container -> check against config/<GAME_ID>/checksums.sha256. `ninja` ends with `OK` or a mismatch report naming the functions.
+--non-matching writes a build.ninja whose `ninja` builds the NON_MATCHING drafts into a separate executable
+(build/<GAME_ID>-nm/<boot>.nonmatching.elf); it is not checked against the original.
 """
 import argparse, json, sys
 from pathlib import Path
@@ -14,6 +16,7 @@ ROOT = Path(__file__).resolve().parent
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument('--non-matching', action='store_true', help='build the NON_MATCHING drafts into a separate ELF (not a match)')
     ap.add_argument('--version', default='SLUS_213.76', help='boot game ID: SLUS_213.76 (default), SLES_538.86, SLES_540.30, SLKA_253.72, SLPM_663.54')
     a = ap.parse_args()
     slug = a.version
@@ -42,12 +45,33 @@ rule split
 rule support
   command = $py tools/link_support.py {slug}
   description = define symbols splat cannot (labels inside code, offsets into data)
+rule functions
+  command = $py tools/split_objects.py {slug} --functions
+  description = function table of the image
+rule units
+  command = $py tools/units.py {slug}
+  depfile = {b}/units.d
+  description = derive the source units (split list, INCLUDE_ASM markers, symbols)
 rule objsplit
   command = $py tools/split_objects.py {slug}
-  description = one assembly file per function; constants migrate to their only user
+  description = one assembly file per function (asm/{slug}/nonmatchings); constants migrate to their only user
+rule compile
+  command = $py tools/make_ld.py {slug} && $py tools/build_objects.py {slug} --compile-only && touch $out
+  depfile = {b}/compile.d
+  description = compile the source files
+  pool = console
+rule verify
+  command = $py tools/units_verify.py prepare
+  description = check that the compiled functions can take the place of the assembly
+  restat = 1
+  pool = console
 rule ldscript
   command = $py tools/make_ld.py {slug}
   description = write the linker script (original order, source units replace functions)
+rule nonmatching
+  command = $py tools/nm_build.py {slug}
+  description = build the NON_MATCHING drafts into build/{slug}-nm
+  pool = console
 rule link
   command = $py tools/build_objects.py {slug}
   description = assemble and compile what changed, then link, with the build toolchain
@@ -80,20 +104,27 @@ rule check
 build {b}/extract.stamp config/{slug}/splat.yaml config/{slug}/layout.json: extract orig/{slug}/{boot} | {tools('splat_config.py', 'elf_layout.py', 'elfinfo.py')}
 build {b}/split.stamp: split | {b}/extract.stamp config/{slug}/boundaries.txt
 build {b}/extra_labels.txt {b}/symbols.ld: support | {b}/split.stamp tools/link_support.py
-build {b}/placement.json: objsplit | {b}/extra_labels.txt tools/split_objects.py tools/fixasm.py tools/source_data.py tools/units.py config/units.yaml
-build {b}/link.ld {b}/objects.json: ldscript | {b}/placement.json {b}/symbols.ld tools/make_ld.py tools/source_data.py tools/units.py config/units.yaml config/{slug}/layout.json
-build {b}/linked.elf: link | {b}/link.ld {b}/objects.json include/macro.inc {tools('build_objects.py', 'build_job.py', 'sandbox.py', 'elfobj.py', 'assembler.py', 'units.py')}
+build {b}/functions.json: functions | {b}/extra_labels.txt tools/split_objects.py
+build {b}/units.json: units | {b}/functions.json config/{slug}/splits.yaml config/{slug}/symbols.txt config/{slug}/equivalent.yaml {tools('units.py', 'splits.py', 'include_asm.py')}
+build {b}/placement.json: objsplit | {b}/units.json {b}/extra_labels.txt tools/split_objects.py tools/fixasm.py tools/source_data.py
+build {b}/compiled.stamp: compile | {b}/placement.json {b}/units.json {b}/symbols.ld include/include_asm.h {tools('make_ld.py', 'build_objects.py', 'build_job.py', 'sandbox.py', 'assembler.py', 'source_data.py')}
+build {b}/unit_facts.json: verify | {b}/compiled.stamp tools/units_verify.py config/{slug}/symbols.txt
+build {b}/link.ld {b}/objects.json: ldscript | {b}/unit_facts.json {b}/placement.json {b}/symbols.ld tools/make_ld.py tools/source_data.py config/{slug}/layout.json
+build {b}/linked.elf: link | {b}/link.ld {b}/objects.json include/macro.inc {tools('build_objects.py', 'build_job.py', 'sandbox.py', 'elfobj.py', 'assembler.py')}
 build {b}/{boot}.elf: pack | {b}/linked.elf tools/pack_elf.py
 build {b}/ok.stamp: check | {b}/{boot}.elf tools/check_elf.py config/{slug}/checksums.sha256
-build progress: progress | {b}/linked.elf
+build run_progress: progress | {b}/linked.elf
+build progress: phony run_progress
 build objdiff: objdiff | {b}/linked.elf {tools('objdiff.py', 'objdiff_job.py')}
-build badges: badges | {b}/linked.elf {tools('badges.py', 'progress.py')} config/units.yaml
+build run_badges: badges | {b}/linked.elf {tools('badges.py', 'progress.py')}
+build badges: phony run_badges
 build report: report | {b}/linked.elf {tools('objdiff.py', 'objdiff_job.py')}
+build nonmatching: nonmatching | {b}/placement.json {tools('nm_build.py')}
 build all: phony {b}/ok.stamp
-default all
+default {'nonmatching' if a.non_matching else 'all'}
 """
     (ROOT / 'build.ninja').write_text(out)
-    print('wrote build.ninja for %s (%s)' % (slug, boot))
+    print('wrote build.ninja for %s (%s)%s' % (slug, boot, ', NON_MATCHING build' if a.non_matching else ''))
 
 
 if __name__ == '__main__':

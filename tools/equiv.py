@@ -28,48 +28,45 @@ def digest(data):
 
 
 def claim(plan):
-    """Keep matching placement unchanged while assigning candidate ownership."""
-    from units_verify import save
-    units=load_units();by_address={f['addr']:(u,f) for u in units for f in u['functions']}
-    extra=None
+    """Record the candidate contract of each planned function in config/SLUS_213.76/equivalent.yaml (draft tier until evidence).
+
+    The candidate lives in the NON_MATCHING block of its translation unit file; the matching build is untouched."""
+    import splits as S
+    records = S.load_equivalent()
+    sources = {f['addr'] for u in load_units() for f in u['functions'] if f['status'] == 'source'}
     for row in plan:
-        if not (ROOT/row['source']).resolve().is_relative_to(ROOT/'src'):
+        if not (ROOT/row['source']).resolve().is_relative_to(ROOT/'src') or row['address'] in sources:
             continue
-        if row['address'] in by_address:
-            unit,function=by_address[row['address']]
-        else:
-            if extra is None:
-                extra=dict(name='equivalence_pilot',source=row['source'],flags=['-O2','-G0','-snas','-ffunction-sections'],functions=[])
-                units.append(extra)
-            unit=extra;function=dict(addr=row['address'],symbol=f'func_{row["address"]:08X}',size=row['size'],status='asm',reason='differential-draft')
-            unit['functions'].append(function)
-        unit['owner']='phase3-pilot';unit['claim']='equivalence-pilot'
-        function['nonmatching']=dict(source=row['source'],symbol=row['symbol'],returns=row['returns'])
-        if function['status']!='source':function.setdefault('evidence',dict(tier='draft'))
-    save(units)
+        record = records.setdefault(row['address'], {})
+        record.update(source=row['source'], symbol=row['symbol'], returns=row['returns'])
+        record.setdefault('evidence', dict(tier='draft'))
+    S.save_equivalent(records)
 
 
 def record_evidence(report):
-    from units_verify import save
-    units=load_units();by_address={f['addr']:f for u in units for f in u['functions']}
-    count=0
+    import splits as S
+    records = S.load_equivalent()
+    sources = {f['addr'] for u in load_units() for f in u['functions'] if f['status'] == 'source'}
+    count = 0
     for row in report['functions']:
-        if row['status']!='eligible':continue
-        function=by_address[row['address']]
+        if row['status'] != 'eligible':
+            continue
         # An existing byte-matched implementation always retains the exact tier.
-        if function['status']=='source':continue
-        expected=dict(source=row['source'],symbol=row['symbol'],returns=row['returns'])
-        if function.get('nonmatching')!=expected:
+        if row['address'] in sources:
+            continue
+        record = records.get(row['address'])
+        expected = dict(source=row['source'], symbol=row['symbol'], returns=row['returns'])
+        if record is None or {k: record.get(k) for k in expected} != expected:
             raise ValueError('claim the current candidate contract before recording evidence')
-        function['evidence']=dict(tier='equivalent',meaning='agreement on tested states; not a proof',
-            recorded_states=row['recorded'],fuzzed_states=row['fuzzed'],coverage=row['coverage'],
-            coverage_threshold=report['coverage_threshold'],source_sha256=row['source_sha256'],
-            candidate_sha256=row['candidate_sha256'],harness_sha256=report['harness_sha256'],
-            reference_sha256=report['reference_sha256'],compiler='ee-gcc2.95.3-136',flags=row['flags'],
+        record['evidence'] = dict(tier='equivalent', meaning='agreement on tested states; not a proof',
+            recorded_states=row['recorded'], fuzzed_states=row['fuzzed'], coverage=row['coverage'],
+            coverage_threshold=report['coverage_threshold'], source_sha256=row['source_sha256'],
+            candidate_sha256=row['candidate_sha256'], harness_sha256=report['harness_sha256'],
+            reference_sha256=report['reference_sha256'], compiler='ee-gcc2.95.3-136', flags=row['flags'],
             input_manifest_sha256=report['input_manifest_sha256'],
             report='build/eeharness/pilot/pilot.json')
-        count+=1
-    save(units)
+        count += 1
+    S.save_equivalent(records)
     return count
 
 
@@ -106,9 +103,8 @@ def bindings():
     for unit in load_units():
         result.update(unit['externs'])
         result.update({f['symbol']:f['addr'] for f in unit['functions'] if f.get('symbol')})
-    for path in (ROOT/'.local/import').glob('*_bindings.json'):
-        for values in json.loads(path.read_text()).values():
-            result.update({name:int(value,0) if isinstance(value,str) else value for name,value in values.items()})
+    import splits as S
+    result.update({name:addrs[0] for name,addrs in S.load_symbols().by_name.items() if len(set(addrs))==1})
     return result
 
 
@@ -147,7 +143,7 @@ def prepare(plan, output):
         source = ROOT/row['source']
         text = flatten(source)
         flags = row.get('flags',['-O2','-G0','-snas','-ffunction-sections'])
-        key = digest((text+'\0'+' '.join(flags)).encode())
+        key = digest((text+'\0'+' '.join(flags)+'\0NON_MATCHING').encode())    # candidates are the NON_MATCHING blocks
         folder = output/'objects'/key[:20]
         folder.mkdir(parents=True,exist_ok=True)
         flat = folder/('candidate'+source.suffix)
@@ -156,7 +152,7 @@ def prepare(plan, output):
             flat.write_text(text)
             if not obj.exists():
                 try:
-                    run([sys.executable,'tools/compile.py','ee-gcc2.95.3-136',*flags,'-c',flat,'-o',obj])
+                    run([sys.executable,'tools/compile.py','ee-gcc2.95.3-136',*flags,'-DNON_MATCHING','-c',flat,'-o',obj])
                 except RuntimeError as error:
                     # Infrastructure failures are fatal; do not bypass isolation.
                     if any(x in str(error) for x in ('Build backend failed','Connection refused','Connection reset')):
@@ -360,7 +356,7 @@ def main():
     parser.add_argument('--jobs',type=int,default=2)
     parser.add_argument('--prepare-only',action='store_true')
     parser.add_argument('--claim-only',action='store_true')
-    parser.add_argument('--record-evidence',action='store_true',help='write qualifying evidence through the units serializer')
+    parser.add_argument('--record-evidence',action='store_true',help='write qualifying evidence to config/SLUS_213.76/equivalent.yaml')
     args=parser.parse_args()
     args.output=args.output.resolve()
     if not args.output.is_relative_to(ROOT/'build') or args.coverage<.9 or args.coverage>1 or args.budget<1 or args.jobs<1:

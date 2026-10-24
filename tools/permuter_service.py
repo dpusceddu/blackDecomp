@@ -108,10 +108,8 @@ def parser_preflight(record):
 
 
 def source_addresses():
-    import yaml
-    data = yaml.safe_load((ROOT / 'config/units.yaml').read_text())
-    return {int(f['addr'], 0) if isinstance(f['addr'], str) else f['addr']
-            for unit in data['units'] for f in unit.get('functions', []) if f.get('status') == 'source'}
+    from units import load_units
+    return {f['addr'] for unit in load_units() for f in unit['functions'] if f.get('status') == 'source'}
 
 
 def create_queue(args):

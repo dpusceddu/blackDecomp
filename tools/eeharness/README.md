@@ -43,7 +43,7 @@ claims the tracked candidates, then compiles and replays them through the build 
 
 The first batch tested 6,132 recorded inputs and 249 existing typed mutations.
 Fourteen readable C++ functions (984 original bytes) passed with 100% measured
-basic-block coverage; their evidence is in `config/units.yaml`. Those fourteen
+basic-block coverage; their evidence is in `config/SLUS_213.76/equivalent.yaml`. Those fourteen
 had no applicable pre-existing typed mutations; their claims concern recorded
 states only. All ten candidates above 1 KB remain drafts. The 50-function target
 is not passed. Full results, inputs and hashes stay under `build/eeharness/pilot/`.

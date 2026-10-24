@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-"""Report how much of .text is provided by source (config/units.yaml, status source), overall and by region.
+"""Report how much of .text is provided by source (tools/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by region.
 
 Regions come from config/regions.txt (PS2 address -> game, kynapse, animation, physics or other), derived from an
 Xbox-to-PS2 counterpart map (`progress.py --refresh MAP.json` rewrites it; the committed file is enough to build and report). An unmapped function takes the
 region of its neighbours when both sides agree, otherwise it is `unclassified`. Regions are therefore approximate;
 the overall number is exact.
-A function counts as source when config/units.yaml lists it with `status: source` (units_verify.py/settle_units.py keep
-that list identical to the target); bytes are the original span of the function up to the next function.
+A function counts as source when its split compiles it (no INCLUDE_ASM marker), which the build's OK keeps identical to the target; bytes are the original span of the function up to the next function.
 Usage: progress.py [SLUG]       writes build/<GAME_ID>/progress.json and prints a table
        progress.py --libraries   also print the totals per library directory of src/
        progress.py --tus [N]     also list the N (default 15) partially done translation units with most bytes still in assembly

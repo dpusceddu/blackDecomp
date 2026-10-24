@@ -13,7 +13,7 @@ config/symbols.txt has one line per symbol, tab separated:
   ADDRESS  SIZE  KIND  SYMBOL  ALIAS  PROTOTYPE
   KIND     func or data. SIZE is the Ghidra size in bytes (`-` if unknown, for example data labels).
   SYMBOL   the link-time name of the assembly: func_XXXXXXXX, or D_XXXXXXXX for data. Functions provided by source
-           (config/units.yaml, status source) carry the exact compiler-emitted mangled name instead.
+           (compiled from source, tools/units.py) carry the exact compiler-emitted mangled name instead.
   ALIAS    Ghidra's name where it is a recovered one (not FUN_/DAT_/PTR_/LAB_/... defaults); `-` otherwise. These are
            readable aliases, not original symbols.
   PROTOTYPE  Ghidra's signature where one was set, else `-`.
@@ -69,13 +69,13 @@ def splat_functions(slug):
 
 
 def zero_function(slug, f):
-    text = (ROOT / 'build' / slug / 's' / (f['obj'] + '.s')).read_text()
+    text = (ROOT / 'asm' / slug / 'nonmatchings' / (f['obj'].split('/')[-1] + '.s')).read_text()
     words = re.findall(r'/\* [0-9A-F]+ [0-9A-F]{8} ([0-9A-F]{8}) \*/', text)
     return bool(words) and all(w == '00000000' for w in words)
 
 
 def function_words(slug, f):
-    text = (ROOT / 'build' / slug / 's' / (f['obj'] + '.s')).read_text()
+    text = (ROOT / 'asm' / slug / 'nonmatchings' / (f['obj'].split('/')[-1] + '.s')).read_text()
     return [int(w, 16) for w in re.findall(r'/\* [0-9A-F]+ [0-9A-F]{8} ([0-9A-F]{8}) \*/', text)]
 
 

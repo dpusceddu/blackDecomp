@@ -3,7 +3,8 @@
 
 Reads  asm/<GAME_ID>/text.s and asm/<GAME_ID>/data/*.s (splat), build/<GAME_ID>/extra_labels.txt (link_support.py),
        config/<GAME_ID>/layout.json.
-Writes build/<GAME_ID>/s/text/<function>.s       one function: its `.extern` block, code, and the constants only it uses
+Writes asm/<GAME_ID>/nonmatchings/<function>.s   one function: its `.extern` block, code, and the constants only it uses
+       (the files INCLUDE_ASM markers in src/ name; `.lit4` constants go to <function>.lit4.s)
        build/<GAME_ID>/s/<section>/<section>.<address>.s   the shared remainder of .rodata, .lit4 and .gcc_except_table
        build/<GAME_ID>/placement.json            objects, their sources, and the original order of every output section
 
@@ -16,6 +17,7 @@ objects stay shared. `.align` directives are checked so that every object's star
 alignments: objects are cut at an inner `.align` that the start does not guarantee, and shared runs are cut
 where the alignment of the run's start would be violated.
 Usage: split_objects.py GAME_ID [WORK]
+       split_objects.py GAME_ID --functions    only write build/<GAME_ID>/functions.json (the function starts the units need)
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -28,7 +30,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from fixasm import process, load_labels  # noqa: E402
 from source_data import source_ranges, carve_ranges, unwind_groups, partition_constant_runs
-from units import load_units
+from units import load_units, write_function_table
 
 MIGRATED = ('.rodata', '.lit4', '.gcc_except_table')
 REF = re.compile(r'\b(?:D|jtbl|ehtbl|STR)_([0-9A-F]{8})\b(?:\s*\+\s*(0x[0-9A-Fa-f]+))?')
@@ -268,14 +270,25 @@ def shared_exception_owners(live_units, objects, starts):
 
 
 def main():
-    slug = sys.argv[1]
-    work = sys.argv[2] if len(sys.argv) > 2 else slug   # the asm/ and build/ directory names
+    args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    slug = args[0]
+    work = args[1] if len(args) > 1 else slug           # the asm/ and build/ directory names
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
     layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
     build = ROOT / 'build' / work
     src = build / 's'
     asm = ROOT / 'asm' / work
+    nonmatchings = asm / 'nonmatchings'               # one assembly file per function: what INCLUDE_ASM refers to
+    nonmatchings.mkdir(parents=True, exist_ok=True)
     secinfo = {s['name']: s for s in layout['sections'] if s['source'] == 'linked'}
+    # the function table first: the units (and so the INCLUDE_ASM functions) are derived from it
+    funcs = split_functions((asm / 'text.s').read_text().split('\n'))
+    table = [(f[1], funcs[i + 1][1] if i + 1 < len(funcs) else None) for i, f in enumerate(funcs)]
+    if '--functions' in sys.argv:
+        text_end = next(s['addr'] + s['orig_size'] for s in layout['sections'] if s['name'] == '.text')
+        write_function_table(work, [(a, e if e is not None else text_end) for a, e in table])
+        print('functions.json: %d functions' % len(table))
+        return
     live_units = load_units(variant=slug)
     explicit_data = source_ranges(live_units)
     literal_boundaries = {int(a, 0) if isinstance(a, str) else int(a)
@@ -461,11 +474,11 @@ def main():
             lit = ['.include "macro.inc"', '', '.section .lit4.%08X, "wa"' % runs['.lit4']['head'], '']
             for u in runs['.lit4']['units']:
                 lit += u['lines']
-            write_if_changed(src / 'text' / (name + '.lit4.s'), '\n'.join(lit) + '\n')
-            placement['objects']['text/%s.lit4' % name] = dict(src='build/%s/s/text/%s.lit4.s' % (work, name), kind='asm')
+            write_if_changed(nonmatchings / (name + '.lit4.s'), '\n'.join(lit) + '\n')
+            placement['objects']['text/%s.lit4' % name] = dict(src='asm/%s/nonmatchings/%s.lit4.s' % (work, name), kind='asm')
         oname = 'text/' + name
-        write_if_changed(src / (oname + '.s'), '\n'.join(text) + '\n')
-        placement['objects'][oname] = dict(src='build/%s/s/%s.s' % (work, oname), kind='asm')
+        write_if_changed(nonmatchings / (name + '.s'), '\n'.join(text) + '\n')
+        placement['objects'][oname] = dict(src='asm/%s/nonmatchings/%s.s' % (work, name), kind='asm')
         placement['sections']['.text'].append(dict(obj=oname, sec='.text.%08X' % addr, key=addr))
         last = [int(m.group(1), 16) for l in lines for m in [ITEM.match(l.strip())] if m]
         placement['functions'].append(dict(name=name, addr=addr, end=(max(last) + 4 if last else addr), obj=oname,

@@ -356,6 +356,7 @@ class SourceDataRanges(unittest.TestCase):
                     patch.object(V, 'save') as save, contextlib.redirect_stdout(io.StringIO()):
                 V.prepare()
             self.assertTrue(all(f['status'] == 'source' for u in save.call_args[0][0] for f in u['functions']))
+            self.assertEqual(V.PROBLEMS, [])
 
     def test_actual_nobits_inputs_resolve_source_and_retained_objects(self):
         from text_placement import InputAlignments
@@ -391,11 +392,10 @@ class SourceDataRanges(unittest.TestCase):
                  sections={sec: [] for sec in ('.rodata', '.lit4', '.gcc_except_table')})))
             with patch.object(V, 'ROOT', root), patch.object(V, 'BUILD', build), \
                  patch.object(V, 'Elf', side_effect=[Object(False), Object(True)]), \
-                 patch.object(V, 'load_units', return_value=[unit]), patch.object(V, 'save') as save, \
-                 patch.object(sys, 'argv', ['units_verify.py', 'compare', '--fix']), contextlib.redirect_stdout(io.StringIO()):
+                 patch.object(V, 'OUT', build), patch.object(V, 'load_units', return_value=[unit]), \
+                 contextlib.redirect_stdout(io.StringIO()):
                 V.compare()
-            self.assertEqual(save.call_args[0][0][0]['functions'][0]['status'], 'asm')
-            self.assertEqual(save.call_args[0][0][0]['functions'][0]['reason'], 'bytes')
+            self.assertEqual(V.PROBLEMS, [(unit['name'], None, 'bytes')])
 
     def test_missing_interior_data_label_is_attributed_to_data_owner(self):
         unit = self.unit()
@@ -404,10 +404,10 @@ class SourceDataRanges(unittest.TestCase):
             (build/'link.log').write_text("obj/data/remainder.o: undefined reference to `D_00002004'\n")
             (build/'placement.json').write_text(json.dumps(dict(functions=[dict(addr=0x1000, name='body')],
                  sections={sec: [] for sec in ('.rodata', '.lit4', '.gcc_except_table')})))
-            with patch.object(V, 'BUILD', build), patch.object(V, 'load_units', return_value=[unit]), \
-                 patch.object(V, 'save') as save, contextlib.redirect_stdout(io.StringIO()):
+            with patch.object(V, 'BUILD', build), patch.object(V, 'OUT', build), patch.object(V, 'load_units', return_value=[unit]), \
+                 patch.object(V, 'save'), contextlib.redirect_stdout(io.StringIO()):
                 V.link_errors()
-            self.assertEqual(save.call_args[0][0][0]['functions'][0]['reason'], 'labels')
+            self.assertEqual([p[2] for p in V.PROBLEMS], ['labels'])
 
 
 if __name__ == '__main__':

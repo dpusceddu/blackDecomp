@@ -1,8 +1,8 @@
 """Source layout rules: which library directory and which file name a source unit gets (src/<library>/<name>.c|cpp).
 
 The library comes from the address ranges of config/tus.yaml; the name from the translation unit that holds the unit's
-first function (`tu_<address>`, plus `_<unit address>` when the unit does not start the TU). tools/relayout.py applies
-these rules to the whole tree; tools/autodecomp.py and tools/regroup.py use them for new files.
+first function (`tu_<address>`, plus `_<unit address>` when the unit does not start the TU). tools/autodecomp.py and
+tools/tu_files.py use them for new files.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):

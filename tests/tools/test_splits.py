@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools'))
 import splits as S
-import tu_units as U
+import units as U
 
 SPLITS = '''variant: SLUS_213.76
 defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas]}

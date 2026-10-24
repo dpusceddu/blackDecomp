@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
-"""Check the source units of config/units.yaml and demote what cannot be placed identically.
+"""Check the compiled source units against the original image; report what cannot be placed identically.
 
-  units_verify.py prepare   after `build_objects.py --compile-only`: read each unit's compiled object, bind the symbols
-                            it refers to (from .local/import/*_bindings.json, original addresses), and mark functions
-                            whose object does not fit (no symbol, other size, extra code) as `asm` with a reason
-  units_verify.py link      after a failed link: read build/<GAME_ID>/link.log and demote the units it names
-  units_verify.py compare   after a link: compare the linked image with the target section by section and demote the
-                            units that own the differing bytes
-Reasons: compile, name, size, extra, extern, section, link, bytes. Writes config/units.yaml (a machine-maintained file).
+  units_verify.py prepare   after the compile step: read each unit's compiled object, resolve the names of its functions
+                            (symbols.txt, else func_XXXXXXXX), bind the symbols it refers to (symbols.txt, split `externs`), and
+                            report functions whose object does not fit (name, size, extra code, constants, unbound symbols).
+                            Writes build/<GAME_ID>/unit_facts.json (read by tools/make_ld.py through tools/units.py) and
+                            build/<GAME_ID>/unit_problems.json; exits 1 when there are problems
+  units_verify.py link      after a failed link: read build/<GAME_ID>/link.log and name the units it complains about
+  units_verify.py compare   after a link: compare the linked image with the target section by section and name the
+                            functions (and source files) that own the differing words
+Nothing under config/ or src/ is written. Reasons: compile, name, size, extra, extern, section, shared, layout, link, bytes.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -16,61 +18,90 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import json, re, struct, sys
 from pathlib import Path
 
-import yaml
-
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from elfinfo import Elf
-from units import load_units, ROOT
+from units import load_units, out_dir, non_matching, ROOT
+import splits as SPL
 from source_data import source_ranges, validate_inputs, validate_input_symbols, range_owner
 
 SLUG = 'SLUS_213.76'
 BUILD = ROOT / 'build' / SLUG
+OUT = out_dir(SLUG)       # compile results, link log and image (build/<GAME_ID>-nm for the NON_MATCHING build)
+PROBLEMS = []          # (unit name, address or None, reason), filled by demote()
 
 
 def save(units):
-    out = []
+    """Write the facts compilation taught (never the configuration): resolved symbols, extern bindings, trimmed constants,
+    and the problems found."""
+    facts = {}
     for u in units:
-        d = {k: v for k, v in u.items() if k not in ('compiler',) or v != 'ee-gcc2.95.3-136'}
-        choices = [f.split('=', 1)[1] for f in u.get('flags', []) if f.startswith('--assembler=')]
-        sn_driver_gnu = u.get('compiler', 'ee-gcc2.95.3-136').startswith('ee-gcc2.95') and '-snas' not in u.get('flags', [])
-        if choices or sn_driver_gnu:
-            d['assembler_evidence'] = dict(strength='weak', basis='individually verified output',
-                                           historical_provenance='unresolved')
-        else:
-            d.pop('assembler_evidence', None)
-        d['functions'] = [{k: (hex(v) if k == 'addr' else v) for k, v in f.items()} for f in u['functions']]
-        if not d.get('externs'):
-            d.pop('externs', None)
-        else:
-            d['externs'] = {k: hex(v) for k, v in sorted(d['externs'].items())}
-        out.append(d)
-    (ROOT / 'config/units.yaml').write_text(
-        '# Provisional translation units that replace assembly functions with source; see docs/units.md.\n'
-        '# status: source = provided by the unit; asm = stays assembly, with a one-word reason.\n' +
-        yaml.safe_dump({'variant': SLUG, 'units': out}, sort_keys=False, width=140))
+        if not u.get('assembly') and not any(f.get('status') == 'source' or f.get('reason') for f in u['functions']):
+            continue
+        entry = dict(symbols={str(f['addr']): f['symbol'] for f in u['functions'] if f.get('status') == 'source' and f.get('symbol')},
+                     externs={k: hex(v) for k, v in sorted((u.get('externs') or {}).items())})
+        if u.get('trim'):
+            entry['trim'] = u['trim']
+        if u.get('unbound'):
+            entry['unbound'] = u['unbound']
+        if u.get('assembly'):
+            entry['assembly'] = u['assembly']
+        facts[u['name']] = entry
+    out = out_dir(SLUG)
+    out.mkdir(parents=True, exist_ok=True)
+    for name, text in (('unit_facts.json', json.dumps(facts, indent=1)), ('unit_problems.json', json.dumps(PROBLEMS, indent=1))):
+        if not (out / name).exists() or (out / name).read_text() != text:       # keep the timestamp for ninja when nothing changed
+            (out / name).write_text(text)
+
+
+WHY = {'compile': 'does not compile', 'name': 'defines none of the names expected for the function',
+       'size': 'size differs', 'extra': 'emits code the original does not have there (or INCLUDE_ASM and a definition for one function)',
+       'extern': 'refers to symbols without an address (add them to symbols.txt)',
+       'section': 'brings data or bss that is not placed', 'shared': 'uses constants the original shares between functions',
+       'layout': 'constants of the assembly functions in between interleave with its own',
+       'labels': 'a label inside it is still referenced', 'link': 'link error', 'bytes': 'differs from the original'}
+
+
+def report(units, problems):
+    """Readable lines for the problems: source file, function, reason."""
+    by_name = {u['name']: u for u in units}
+    lines = []
+    for name, addr, reason in problems:
+        u = by_name.get(name, {})
+        where = 'func_%08X' % addr if addr is not None else 'whole file'
+        lines.append('%s: %s: %s' % (u.get('source', name), where, WHY.get(reason, reason)))
+    return lines
 
 
 def demote(unit, funcs, reason):
+    """Mark functions as assembly in memory (so the checks go on) and record the problem."""
     n = 0
     for f in unit['functions']:
         if f.get('status') == 'source' and (funcs is None or f['addr'] in funcs):
             f['status'], f['reason'] = 'asm', reason
+            PROBLEMS.append((unit['name'], f['addr'], reason))
             n += 1
     return n
 
 
 def cached_object(name):
-    m = json.loads((BUILD / 'objects_cache.json').read_text())
+    m = json.loads((OUT / 'objects_cache.json').read_text())
     p = BUILD / m.get('units/' + name, 'missing')
     return Elf(p.read_bytes()) if p.exists() else None
 
 
 def bindings():
-    out = {}
-    for p in (ROOT / '.local/import').glob('*_bindings.json'):
-        for unit, b in json.loads(p.read_text()).items():
-            out.setdefault(unit, {}).update({k: int(v) if isinstance(v, int) else int(v, 0) for k, v in b.items()})
-    return out
+    """Legacy hook kept for callers: bindings now come from symbols.txt and the splits (see known_symbols)."""
+    return {}
+
+
+_SYMBOLS = None
+
+
+def known_symbols():
+    global _SYMBOLS
+    if _SYMBOLS is None:
+        _SYMBOLS = SPL.load_symbols(SLUG)
+    return _SYMBOLS
 
 
 def is_text(name):
@@ -200,11 +231,13 @@ def image_names():
 
 def prepare():
     from text_placement import InputAlignments, natural_text_span
-    units = load_units()
+    units = load_units(facts=False)       # earlier facts must not hide functions from the checks
     explicit_data = source_ranges(units)
     original_labels = {name: address for address, name in json.loads((BUILD / 'labels.json').read_text())}
-    bind = bindings()
-    results = json.loads((BUILD / 'results.json').read_text()) if (BUILD / 'results.json').exists() else {}
+    symbols = known_symbols()
+    PROBLEMS.clear()
+    lenient = non_matching()      # drafts differ in size: only names and bindings are checked there
+    results = json.loads((OUT / 'results.json').read_text()) if (OUT / 'results.json').exists() else {}
     stats = {}
     placement = json.loads((BUILD / 'placement.json').read_text())
     ends = {f['addr']: f['end'] for f in placement['functions']}
@@ -250,23 +283,26 @@ def prepare():
         fsecs = {t['index'] for t in e.sections if t['name'].startswith('.text.')}
         tidx = text['index'] if text else -1
         defined = {s['name']: s for s in syms if s['type'] == 2 and (s['shndx'] == tidx or s['shndx'] in fsecs)}
-        total = 0
         for f in u['functions']:
             if f.get('status') != 'source':
                 continue
-            s = defined.get(f['symbol'])
-            if s is None:
+            # the name the source gives the function: the one symbols.txt lists for the address, else func_XXXXXXXX
+            name = next((c for c in f.get('candidates', [f['symbol']]) if c in defined), None)
+            if name is None and lenient:
+                f['status'] = 'asm'
+                u.setdefault('assembly', []).append(f['addr'])
+            elif name is None:
                 stats['name'] = stats.get('name', 0) + demote(u, {f['addr']}, 'name')
-            elif s['size'] != f['size']:
-                stats['size'] = stats.get('size', 0) + demote(u, {f['addr']}, 'size')
             else:
-                total += s['size']
+                f['symbol'] = name
         # the object's code must fill exactly the original span (first function to the next one behind the unit)
         live = [f for f in u['functions'] if f.get('status') == 'source']
-        if live and u.get('full_tu_context') and not fsecs:
+        if lenient:
+            pass
+        elif live and u.get('full_tu_context') and not fsecs:
             stats['context'] = stats.get('context', 0) + demote(u, None, 'context')
             live = []
-        if live and fsecs:
+        if live and fsecs and not lenient:
             # One section per function. The next actual input's alignment may fill
             # a verified zero tail; no extra code or invented padding is accepted.
             bad = set()
@@ -283,14 +319,17 @@ def prepare():
                     stats['context'] = stats.get('context', 0) + demote(u, None, 'context')
             elif (text and text['size']) or sum(e.sections[i]['size'] for i in fsecs) != sum(
                     e.sections[defined[f['symbol']]['shndx']]['size'] for f in live):
+                mine = {e.sections[defined[f['symbol']]['shndx']]['name'] for f in live}
+                print('%s: also defines %s (INCLUDE_ASM and a definition for one function, or a helper that emits code)' % (
+                    u['source'], ', '.join(sorted(e.sections[i]['name'] for i in fsecs if e.sections[i]['name'] not in mine)[:6])))
                 stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
-        elif live:
+        elif live and not lenient:
             first, last = min(f['addr'] for f in live), max(f['addr'] for f in live)
             nxt = ends[last]
             if not fits_text(text, first, nxt):
                 stats['extra'] = stats.get('extra', 0) + demote(u, None, 'extra')
         live = [f for f in u['functions'] if f.get('status') == 'source']
-        if live:
+        if live and not lenient:
             why = validate_inputs(e, [r for r in explicit_data if r['unit'] == u['name']], placement,
                                   following_data_input)
             why = why or validate_input_symbols(e, [r for r in explicit_data if r['unit'] == u['name']], original_labels)
@@ -310,10 +349,10 @@ def prepare():
                                                   and i not in [j for j, y in enumerate(syms) if y['type'] == 2 and y['shndx'] == tidx]))})
         ex, missing = {}, []
         known = dict(u.get('externs') or {})
-        known.update(bind.get(u['name'], {}))
         for name in want:
-            if name in known:
-                ex[name] = known[name]
+            address = symbols.address(name, known)
+            if address is not None:
+                ex[name] = address
             elif name in image_names():
                 continue                  # a label the image's own assembly defines (func_XXXXXXXX, D_XXXXXXXX): ld resolves it
             else:
@@ -325,14 +364,17 @@ def prepare():
         else:
             u.pop('unbound', None)
     save(units)
-    print('demoted:', stats)
+    lines = report(units, PROBLEMS)
+    print('\n'.join(lines[:60]) + ('\n... %d more' % (len(lines) - 60) if len(lines) > 60 else ''))
+    print('problems:', stats)
+    return 1 if PROBLEMS else 0
 
 
 def link_errors():
     """Demote the units a failed link names: their object is the one that is wrong, or the label another object needs
     (an exception handler or jump target inside the replaced function) no longer exists."""
     import bisect
-    log = (BUILD / 'link.log').read_text()
+    log = (OUT / 'link.log').read_text()
     placement = json.loads((BUILD / 'placement.json').read_text())
     funcs = placement['functions']
     starts = [f['addr'] for f in funcs]
@@ -363,23 +405,24 @@ def link_errors():
                 i = bisect.bisect_right(okeys, a) - 1
                 if i >= 0 and owned[i][1] in owner:
                     bad.setdefault(owner[owned[i][1]], (line, 'labels'))
-    n = 0
+    PROBLEMS.clear()
     for u in units:
         if u['name'] in bad:
-            n += demote(u, None, bad[u['name']][1])
+            demote(u, None, bad[u['name']][1])
     save(units)
-    print('demoted %d functions in %d units' % (n, len(bad)))
+    print('\n'.join(report(units, PROBLEMS)[:40]))
     for k, (line, why) in list(bad.items())[:12]:
         print('  %s (%s): %s' % (k, why, line[:150]))
     if not bad:
         print(log[-2000:])
+    return 1 if bad else 0
 
 
 def compare():
     """Attribute every differing word of the linked image to the unit (or assembly function) that owns it."""
     import bisect
     ref = Elf((ROOT / 'orig' / SLUG / 'SLUS_213.76').read_bytes())
-    got = Elf((BUILD / 'linked.elf').read_bytes())
+    got = Elf((OUT / 'linked.elf').read_bytes())
     placement = json.loads((BUILD / 'placement.json').read_text())
     funcs = placement['functions']
     starts = [f['addr'] for f in funcs]
@@ -390,6 +433,7 @@ def compare():
     ents = {sec: [(e['key'], e) for e in placement['sections'][sec] if 'key' in e]
             for sec in ('.rodata', '.lit4', '.gcc_except_table')}
     bad = {}
+    bad_functions = {}
     other = []
     for sec in ('.text', '.rodata', '.lit4', '.gcc_except_table', '.data', '.sdata'):
         a, b = ref.section(sec), got.section(sec)
@@ -418,22 +462,25 @@ def compare():
                 where = sec
             if who is not None:
                 bad.setdefault(who['name'], []).append((sec, addr))
+                if sec == '.text':
+                    bad_functions.setdefault((who['name'], fa), (sec, addr))
             else:
                 other.append((sec, addr, where))
+    PROBLEMS.clear()
+    for (name, fa), _ in sorted(bad_functions.items(), key=lambda kv: kv[0][1]):
+        PROBLEMS.append((name, fa, 'bytes'))
     for name, v in bad.items():
-        print('unit %s: %d words differ, first %s %#x' % (name, len(v), *v[0]))
-    print('differences outside units: %d' % len(other))
+        if not any(p[0] == name for p in PROBLEMS):
+            PROBLEMS.append((name, None, 'bytes'))
+    for line in report(units, PROBLEMS)[:40]:
+        print('MISMATCH ' + line)
+    print('differences outside source units: %d' % len(other))
     for sec, addr, where in other[:25]:
         print('  %s %#x in %s' % (sec, addr, where))
-    if '--fix' in sys.argv:
-        n = 0
-        for u in units:
-            if u['name'] in bad:
-                n += demote(u, None, 'bytes')
-        save(units)
-        print('demoted', n)
+    return 1 if PROBLEMS else 0
 
 
 if __name__ == '__main__':
     cmd = sys.argv[1] if len(sys.argv) > 1 else ''
-    {'prepare': prepare, 'link': link_errors, 'compare': compare}.get(cmd, lambda: print(__doc__))()
+    run = {'prepare': prepare, 'link': link_errors, 'compare': compare}.get(cmd)
+    sys.exit(run() if run else print(__doc__) or 2)

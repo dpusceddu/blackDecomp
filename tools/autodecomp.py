@@ -4,7 +4,7 @@
   autodecomp.py run [--max-size N] [--min-size N] [--region R] [--addr A ...] [--limit N] [--no-permute]
                     [--permute-seconds S] [--batch N]
         draft every selected assembly function and record the outcome in build/auto.json
-  autodecomp.py register [--group N]     turn exact matches into source units (config/units.yaml) and src/<library>/
+  autodecomp.py register [--group N]     put exact matches into their TU files (replacing the INCLUDE_ASM line; tools/tu_files.py)
   autodecomp.py report                   outcome table for build/auto.json
   autodecomp.py show ADDR                print the best draft of a function and its diff
 
@@ -12,7 +12,7 @@ Sizes are the function's code size in bytes. Compilation happens only with the b
 per batch of candidates); m2c and scoring run on the host because they only read and write text. Scoring compares the
 compiled .text with the original instruction words, masking relocated fields, and compares each relocation's target
 (symbol address plus addend) with the symbolic operand of the original assembly. The final authority is the identical
-link (tools/settle_units.py). Setup and pinned versions: docs/pipeline.md.
+link (`ninja` ends with OK); `settle` puts back the INCLUDE_ASM line of what does not place identically. Setup and pinned versions: docs/pipeline.md.
 """
 import argparse, base64, collections, difflib, hashlib, io, json, os, re, struct, subprocess, sys, tarfile, time
 from pathlib import Path
@@ -25,6 +25,7 @@ from layout import view_include
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = 'SLUS_213.76'
 BUILD = ROOT / 'build' / SLUG
+FUNCTION_ASM = ROOT / 'asm' / SLUG / 'nonmatchings'      # one assembly file per function (tools/split_objects.py)
 AUTO = ROOT / 'build' / 'auto'
 RESULTS = Path(os.environ.get('AUTODECOMP_RESULTS', ROOT / 'build' / 'auto.json'))
 M2C = ROOT / '.venv/bin/m2c'
@@ -119,11 +120,11 @@ def load_inventory():
     reg, _ = regions([f['addr'] for f in placement])
     out = []
     for f, r in zip(placement, reg):
-        p = BUILD / 's/text' / (f['name'] + '.s')
+        p = FUNCTION_ASM / (f['name'] + '.s')
         words, rel, mnem, strings = parse_function(p)
         out.append(dict(addr=f['addr'], name=f['name'], span=f['end'] - f['addr'], size=4 * len(words), words=words,
                         rel={str(k): list(v) for k, v in rel.items()}, mnem=mnem, region=r, owned=sorted(f['owned']), strings=strings,
-                        lit4=(BUILD / 's/text' / (f['name'] + '.lit4.s')).exists()))
+                        lit4=(FUNCTION_ASM / (f['name'] + '.lit4.s')).exists()))
     cache.write_text(json.dumps(dict(stamp=stamp, version=5, functions=out)))
     return out
 
@@ -462,7 +463,7 @@ def run_m2c(fns, options=(), ctx='ctx.c'):
     prep_dir.mkdir(exist_ok=True)
     for f in fns:
         try:
-            text, flags[f['name']] = m2c_input.prepare((BUILD / 's/text' / (f['name'] + '.s')).read_text())
+            text, flags[f['name']] = m2c_input.prepare((FUNCTION_ASM / (f['name'] + '.s')).read_text())
         except ValueError as error:
             rejected[f['name']] = dict(error='ee-instruction: ' + str(error), decls={})
             continue
@@ -470,7 +471,7 @@ def run_m2c(fns, options=(), ctx='ctx.c'):
         paths.append(str(prep_dir / (f['name'] + '.s')))
         if f['lit4']:
             lit = prep_dir / (f['name'] + '.lit4.s')
-            lit.write_text(m2c_input.normalize_sections((BUILD / 's/text' / (f['name'] + '.lit4.s')).read_text()))
+            lit.write_text(m2c_input.normalize_sections((FUNCTION_ASM / (f['name'] + '.lit4.s')).read_text()))
             paths.append(str(lit))
     if not paths:
         STATS['m2c_function_failures'] += len(rejected)
@@ -1636,7 +1637,7 @@ def owned_rodata(f, orig):
     placement = json.loads((BUILD / 'placement.json').read_text())
     ents = placement['sections']['.rodata']
     sec = next(s for s in orig.e.sections if s['name'] == '.rodata')
-    text = (BUILD / 's/text' / (f['name'] + '.s')).read_text().split('\n')
+    text = (FUNCTION_ASM / (f['name'] + '.s')).read_text().split('\n')
     labels = []
     align = None
     for i, l in enumerate(text):
@@ -1820,151 +1821,112 @@ def decl_name(line):
     return m.group(1) if m else line
 
 
-def retire_asm_entries(units, addresses):
-    """Retire only replaced ASM placeholders; preserve every baseline source entry."""
-    result = []
-    for unit in units:
-        functions = [f for f in unit['functions'] if f['addr'] not in addresses or f.get('status') == 'source']
-        if functions:
-            result.append(dict(unit, functions=functions))
-    return result
-
-
 def cmd_register(a):
-    """Write src/<library>/<tu>.c (tools/layout.py) and add units to config/units.yaml for every exact draft that is not registered yet."""
+    """Put every exact draft that is not registered yet into its translation unit file, replacing the function's INCLUDE_ASM
+    line (tools/tu_files.py); a function whose compiler flags differ from its file's, or that failed in a group, gets a small
+    file of its own with an entry in config/SLUS_213.76/splits.yaml."""
     sys.path.insert(0, str(ROOT / 'tools'))
     from units import load_units
-    import layout
-    import units_verify
+    import tu_files
     res = load_results()
-    inv = {f['addr']: f for f in load_inventory()}
-    placement = json.loads((BUILD / 'placement.json').read_text())['functions']
-    index = {f['addr']: i for i, f in enumerate(placement)}
     units = load_units(variant=SLUG)
     have = {f['addr'] for u in units for f in u['functions'] if f.get('status') == 'source'}
     todo = sorted((int(k, 16), v) for k, v in res.items()
                   if v['status'] == 'matched' and 'registered' not in v and int(k, 16) not in have and 'source' in v)
     if a.limit:
         todo = todo[:a.limit]
-    groups, cur, decls = [], [], {}
+    done = 0
     for addr, rec in todo:
-        d, body = split_source(rec)
-        dn = {decl_name(l): l for l in d}
-        ok = cur and not rec.get('single') and not cur[-1][1].get('single') and index[addr] == index[cur[-1][0]] + 1 and cur[-1][1]['flags'] == rec['flags'] and \
-            cur[-1][1]['region'] == rec['region'] and len(cur) < a.group and \
-            all(decls.get(k, v) == v for k, v in dn.items()) and not any(k == rec['name'] for k in decls)
-        if not ok:
-            if cur:
-                groups.append(cur)
-            cur, decls = [], {}
-        cur.append((addr, rec))
-        decls.update(dn)
-    if cur:
-        groups.append(cur)
-    replacing = {addr for addr, _ in todo}
-    units = retire_asm_entries(units, replacing)
-    used_names = {u['name'] for u in units}
-    out = []
-    for g in groups:
-        first = g[0][0]
-        region = g[0][1]['region']
-        decls, bodies = {}, []
-        for addr, rec in g:
-            d, body = split_source(rec)
-            for l in d:
-                decls[decl_name(l)] = l
-            bodies.append(body)
-        # a function defined in the unit must not also be declared extern
-        names = {rec['name'] for _, rec in g}
-        lines = [l for k, l in decls.items() if k not in names]
-        text = '#include "ps2/prelude.h"\n\n' + ('\n'.join(lines) + '\n\n' if lines else '') + '\n'.join(bodies)
-        base = '%06x' % first
-        suffix = ''
-        attempt = 0
-        while (ROOT / layout.source_path(first, suffix + '.c')).exists() or ('auto_%s_%s%s' % (region, base, suffix)) in used_names:
-            attempt += 1
-            suffix = '_retry%d' % attempt
-        rel = layout.source_path(first, suffix + '.c')
-        unit_name = 'auto_%s_%s%s' % (region, base, suffix)
-        used_names.add(unit_name)
-        (ROOT / rel).parent.mkdir(parents=True, exist_ok=True)
-        (ROOT / rel).write_text(text)
-        cc, fl = split_cc(g[0][1]['flags'])
-        out.append(dict(name=unit_name, source=rel, library=Path(rel).parts[1], provenance='auto', tier='exact', origin='auto', compiler=cc,
-                        flags=fl, externs={},
-                        functions=[dict(addr=addr, symbol=rec['name'], size=rec['size'], status='source') for addr, rec in g]))
-        for addr, rec in g:
-            rec['registered'] = out[-1]['name']
-    units_verify.save(units + out)
+        decls, body = split_source(rec)
+        names = {rec['name']}
+        decls = [l for l in decls if decl_name(l) not in names]
+        cc, fl = split_cc(rec['flags'])
+        try:
+            record = tu_files.add_function(addr, body, decls, cc, fl, symbol=rec['name'], single=bool(rec.get('single')))
+        except (KeyError, StopIteration) as error:
+            rec['status'], rec['reason'] = 'verify-failed', 'no INCLUDE_ASM line (%s)' % error
+            continue
+        rec['registered'] = record['path']
+        rec['registration'] = {k: v for k, v in record.items() if k != 'code'} | dict(code=record['code'])
+        done += 1
     save_results(res)
-    print('registered %d functions in %d units' % (len(todo), len(out)))
-
-
-def retryable_auto_unit(unit, records):
-    """A historical auto name can now belong to an authored, partially matched TU."""
-    return (unit.get('origin') == 'auto' and unit['name'] in records
-            and all(f['addr'] in records[unit['name']] for f in unit['functions']))
+    print('registered %d functions' % done)
 
 
 def cmd_settle(a):
-    """Link the registered drafts (tools/settle_units.py), record why any were demoted, retry demoted group members alone."""
+    """Compile and link what `register` wrote (the build backend), put the INCLUDE_ASM line back for every function that does not
+    place identically (a file that fails to compile takes its new functions back out, to be retried one per file), and end
+    with a build that says OK."""
     sys.path.insert(0, str(ROOT / 'tools'))
-    from units import load_units
-    import units_verify
+    import tu_files
     for rnd in range(3):
-        r = subprocess.run([sys.executable, str(ROOT / 'tools/settle_units.py')], cwd=ROOT, capture_output=True, text=True)
-        if r.returncode:
-            sys.stderr.write(r.stdout + r.stderr)
-            raise SystemExit('Settle failed; stopping before further unit changes.')
-        print(r.stdout.strip().split('\n')[-1])
-        units = load_units(variant=SLUG)
         res = load_results()
-        byunit = {}
-        for k, v in res.items():
-            if v.get('registered'):
-                byunit.setdefault(v['registered'], {})[int(k, 16)] = v
-        keep, retry = [], 0
-        for u in units:
-            if not retryable_auto_unit(u, byunit):
-                keep.append(u)
+        fresh = {k: v for k, v in res.items() if v.get('registration') and not v.get('settled')}
+        if not fresh:
+            break
+        problems = verify_build()
+        bad = {}
+        for unit, addr, reason in problems:
+            bad.setdefault(addr, reason)
+        by_file = {}
+        for k, v in fresh.items():
+            by_file.setdefault(v['registration']['path'], []).append(k)
+        retry = 0
+        for path, keys in by_file.items():
+            file_bad = [k for k in keys if int(k, 16) in bad or None in bad]
+            whole_file = None in bad and not file_bad
+            if not file_bad and not whole_file:
+                for k in keys:
+                    res[k]['settled'] = True
                 continue
-            fs = u['functions']
-            if all(f['status'] == 'source' for f in fs):
-                keep.append(u)
-                continue
-            if any(f['status'] == 'source' for f in fs):
-                # Preserve the already verified members and their source file.
-                # Failed members can later be registered as independent units.
-                keep.append(u)
-                for f in fs:
-                    if f['status'] != 'source':
-                        rec = byunit[u['name']][f['addr']]
-                        rec.pop('registered', None)
-                        rec['status'], rec['reason'] = 'verify-failed', f.get('reason') or 'unknown'
-                continue
-            for f in fs:
-                rec = byunit.get(u['name'], {}).get(f['addr'])
-                if rec is None:
-                    continue
+            for k in keys:                              # a failure in one function takes the whole object down: back out all
+                rec = res[k]
+                tu_files.revert_function(rec['registration'])
                 rec.pop('registered', None)
-                if len(fs) == 1 or rec.get('single'):
-                    rec['status'], rec['reason'] = 'verify-failed', f.get('reason') or 'unknown'
+                rec.pop('registration', None)
+                if len(keys) == 1 or rec.get('single'):
+                    rec['status'], rec['reason'] = 'verify-failed', bad.get(int(k, 16), 'compile')
                 else:
-                    rec['single'] = True          # a neighbour's failure took the whole group down: try each alone
+                    rec['single'] = True               # try each alone, in a file of its own
                     retry += 1
-            if (ROOT / u['source']).exists():
-                (ROOT / u['source']).unlink()
-        units_verify.save(keep)
         save_results(res)
         if not retry:
             break
-        print('retrying %d group members as single units' % retry)
+        print('retrying %d functions in files of their own' % retry)
         cmd_register(argparse.Namespace(group=a.group, limit=None))
     r = subprocess.run(['ninja'], cwd=ROOT, capture_output=True, text=True)
     if r.returncode:
         sys.stderr.write(r.stdout + r.stderr)
         raise SystemExit('Final identical build failed.')
     print(r.stdout.strip().split('\n')[-1])
+
+
+def verify_build():
+    """[(unit name, address or None, reason)] of what the current sources do not place identically (never raises on those)."""
+    def run(*args):
+        r = subprocess.run([sys.executable] + [str(x) for x in args], cwd=ROOT, capture_output=True, text=True)
+        if any(m in r.stdout + r.stderr for m in ('Build backend failed', 'Connection refused')):
+            raise SystemExit(r.stdout + r.stderr)
+        return r
+    run('tools/units.py', SLUG)
+    run('tools/split_objects.py', SLUG)
+    run('tools/make_ld.py', SLUG)
+    c = run('tools/build_objects.py', SLUG, '--compile-only')
+    if c.returncode and not (BUILD / 'results.json').exists():
+        raise SystemExit(c.stdout + c.stderr)
+    run('tools/units_verify.py', 'prepare')
+    problems = json.loads((BUILD / 'unit_problems.json').read_text())
+    if problems:
+        return problems
+    run('tools/make_ld.py', SLUG)
+    link = run('tools/build_objects.py', SLUG)
+    if link.returncode:
+        run('tools/units_verify.py', 'link')
+        return json.loads((BUILD / 'unit_problems.json').read_text()) or [[None, None, 'link']]
+    run('tools/pack_elf.py', BUILD / 'linked.elf', ROOT / 'config' / SLUG / 'layout.json', ROOT / 'data' / SLUG / 'elf',
+        BUILD / (json.loads((ROOT / 'config/variants.json').read_text())[SLUG]['boot'] + '.elf'))
+    run('tools/units_verify.py', 'compare')
+    return json.loads((BUILD / 'unit_problems.json').read_text())
 
 
 def propagate_families(res, inv, orig):
@@ -2123,19 +2085,17 @@ def clone_source(src, a, b):
 
 
 def reconcile(res):
-    """Records of functions that are source units now say so (units.yaml is the truth)."""
+    """Records of functions that are compiled from source now say so (the TU files and the split list are the truth)."""
     from units import load_units
     n = 0
     live = {'0x%x' % f['addr'] for f in load_inventory()}
     for k in [k for k in res if k not in live]:          # a boundary repair removed this start
         res.pop(k)
     for u in load_units(variant=SLUG):
-        if not u['name'].startswith('auto_'):
-            continue
         for f in u['functions']:
             rec = res.get('0x%x' % f['addr'])
-            if f.get('status') == 'source' and rec is not None and rec.get('registered') != u['name']:
-                rec['status'], rec['registered'] = 'matched', u['name']
+            if f.get('status') == 'source' and rec is not None and rec.get('registered') != u['source']:
+                rec['status'], rec['registered'] = 'matched', u['source']
                 rec.pop('reason', None)
                 n += 1
     return n

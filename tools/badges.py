@@ -2,7 +2,7 @@
 """Write the self-hosted progress badges and the per-library table (progress/) from the exact progress data.
 
 Metric source: `tools/progress.py --libraries`, not the objdiff report. `ninja progress` measures the finished image: a
-function counts when config/units.yaml lists it with `status: source`, which the build's `OK` guarantees byte-identical,
+function counts when a split compiles it (no INCLUDE_ASM marker in its TU file), which the build's `OK` guarantees byte-identical,
 and bytes are the original spans up to the next function. It needs only the build (no objdiff-cli download), covers
 every library directory of src/, and is the number the README and docs/status.md quote. The objdiff report
 (`ninja report`) counts per object and differs slightly (docs/progress-reports.md); it is not used here.

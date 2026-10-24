@@ -2,7 +2,8 @@
 """Compare a rebuilt executable with the target hash in config/<GAME_ID>/checksums.sha256.
 Usage: check_elf.py GAME_ID BUILT.elf [--stamp FILE]
 Prints OK if the SHA-256 is equal. Otherwise prints a mismatch report: size, e_flags, entry and the sections whose
-header or content differ, compared with the target image in orig/ (private) when it is present."""
+header or content differ, compared with the target image in orig/ (private) when it is present, followed by the functions (and source
+files) that own the differing words."""
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
@@ -34,6 +35,8 @@ def main():
     ref = ROOT / 'orig' / slug / want[1]
     if ref.exists():
         subprocess.run([sys.executable, str(ROOT / 'tools/diffelf.py'), str(ref), str(built)])
+        if (built.parent / 'linked.elf').exists() and slug == 'SLUS_213.76':   # name the functions and files that differ
+            subprocess.run([sys.executable, str(ROOT / 'tools/units_verify.py'), 'compare'])
     return 1
 
 

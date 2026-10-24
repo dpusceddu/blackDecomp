@@ -345,7 +345,7 @@ def demangle_method(symbol):
 def source_seeds(root=ROOT, matched_only=False):
     from units import load_units, dependencies
     seeds, evidence, parsed, texts = {}, [], {}, {}
-    units = load_units(root / 'config/units.yaml', variant='SLUS_213.76')
+    units = load_units(variant='SLUS_213.76')
     for p in (root / 'include').rglob('*'):
         if p.suffix in ('.h', '.hpp') and 'layouts' not in p.parts:
             text = COMMENT.sub('', p.read_text())
@@ -1171,7 +1171,7 @@ def counterpart_dir(root=ROOT):
 
 def fingerprint(root=ROOT):
     h = hashlib.sha256()
-    paths = [Path(__file__), root / 'config/units.yaml', root / 'config/symbols.txt', root / 'build/SLUS_213.76/placement.json']
+    paths = [Path(__file__), root / 'config/SLUS_213.76/splits.yaml', root / 'config/symbols.txt', root / 'build/SLUS_213.76/placement.json']
     paths += sorted((root / 'src').rglob('*.[ch]')) + sorted((root / 'src').rglob('*.cpp'))
     paths += sorted((root / 'include').rglob('*.h')) + sorted((root / 'include').rglob('*.hpp'))
     paths += sorted((root / '.local/ghidra').glob('*.json'))
@@ -1279,7 +1279,7 @@ def required_layout_headers(root=ROOT):
     """Inference names may change; exact source still owns its imported access view."""
     from units import dependencies, load_units
     required = set()
-    for unit in load_units(root / 'config/units.yaml', variant='SLUS_213.76'):
+    for unit in load_units(variant='SLUS_213.76'):
         if not any(f.get('status') == 'source' for f in unit['functions']):
             continue
         for dependency in dependencies(unit['source']):

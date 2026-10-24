@@ -15,10 +15,10 @@ class VuPipeline(unittest.TestCase):
     def test_unsupported_operation_does_not_abort_batch(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / 's/text').mkdir(parents=True)
-            (root / 's/text/func_00F00000.s').write_text('vcallms 0')
+            (root / 'nonmatchings').mkdir(parents=True)
+            (root / 'nonmatchings/func_00F00000.s').write_text('vcallms 0')
             with patch.object(autodecomp, 'AUTO', root), \
-                    patch.object(autodecomp, 'BUILD', root), \
+                    patch.object(autodecomp, 'BUILD', root), patch.object(autodecomp, 'FUNCTION_ASM', root / 'nonmatchings'), \
                     patch('m2c_input.prepare', side_effect=ValueError('unverified microprogram')), \
                     patch.object(autodecomp.subprocess, 'run') as run:
                 result = autodecomp.run_m2c([dict(name='func_00F00000', lit4=False)])

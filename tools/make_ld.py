@@ -4,10 +4,10 @@
 Every loaded section is placed by alignment only (no hard-coded addresses except the image base), so sizes can change.
 The input order of each section is the original order recorded by split_objects.py (build/<GAME_ID>/placement.json):
 one object per function, shared constant runs, and splat's data files. A function listed with `status: source` in
-config/units.yaml is replaced by its unit's compiled object: the object takes the slot of the unit's first function in
+a function that a split of config/<GAME_ID>/splits.yaml compiles is replaced by the split's compiled object: the object takes the slot of the unit's first function in
 every section it occupies, and the unit's other functions are dropped from the order. Their `func_XXXXXXXX` names are
 defined as aliases of the compiled symbols, so assembly callers link against the source definition.
-Writes build/<GAME_ID>/link.ld and build/<GAME_ID>/objects.json (name, kind, source, sections).
+Writes build/<GAME_ID>/link.ld and build/<GAME_ID>/objects.json (build/<GAME_ID>-nm/ for the NON_MATCHING build) (name, kind, source, sections).
 Usage: make_ld.py GAME_ID [WORK]
 """
 import sys as _sys
@@ -18,7 +18,7 @@ import bisect, json, sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from units import load_units
+from units import load_units, out_dir
 from source_data import source_ranges
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,6 +65,8 @@ def main():
     boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
     layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
     build = ROOT / 'build' / work
+    outdir = out_dir(slug) if work == slug else build
+    outdir.mkdir(parents=True, exist_ok=True)
     placement = json.loads((build / 'placement.json').read_text())
     objects = {name: dict(o, name=name) for name, o in placement['objects'].items()}
     func_by_name = {f['name']: f for f in placement['functions']}
@@ -216,7 +218,7 @@ def main():
         if n == '.bss':
             out.append('    __end_bss = .;')
     out += ['', '    /DISCARD/ : { *(*) }', '}', '']
-    (build / 'link.ld').write_text('\n'.join(out))
+    (outdir / 'link.ld').write_text('\n'.join(out))
     listing = []
     for n in dict.fromkeys(objs_in_link):
         o = dict(objects[n])
@@ -225,7 +227,7 @@ def main():
             o['redefine'] = redefine.get(n[len('units/'):], {})
             o['trim'] = trims.get(n[len('units/'):], {})
         listing.append(o)
-    (build / 'objects.json').write_text(json.dumps(listing, indent=1))
+    (outdir / 'objects.json').write_text(json.dumps(listing, indent=1))
     print('link.ld: %d objects (%d replaced by source)' % (len(listing), len(replaced)))
 
 

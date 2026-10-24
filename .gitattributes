@@ -8,7 +8,6 @@
 *.iso binary
 *.zip binary
 # generated at the root by `ninja objdiff`; large and uninteresting in a diff
-config/units.yaml linguist-generated=false
 config/tus.yaml linguist-generated=true
 config/symbols.txt linguist-generated=true
 include/game/layouts/** linguist-generated=true

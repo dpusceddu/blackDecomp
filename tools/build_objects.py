@@ -15,7 +15,7 @@ import hashlib, io, json, subprocess, sys, tarfile, time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from units import dependencies
+from units import dependencies, non_matching
 from build_telemetry import record as record_build
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -32,8 +32,10 @@ def sha(*parts):
 
 def main():
     slug = sys.argv[1]
-    build = ROOT / 'build' / slug
-    cache = build / 'cache'
+    shared = ROOT / 'build' / slug              # split assembly and the object cache are shared by both builds
+    build = ROOT / 'build' / (slug + '-nm' if non_matching() else slug)   # link script, plan, ELF: build/<GAME_ID>-nm/ for --non-matching
+    build.mkdir(parents=True, exist_ok=True)
+    cache = shared / 'cache'
     cache.mkdir(exist_ok=True)
     t0 = time.time()
     objects = json.loads((build / 'objects.json').read_text())
@@ -81,7 +83,10 @@ def main():
                 files[d.as_posix()] = ROOT / d
             plan['assemble' if o['kind'] == 'asm' else 'compile'].append(job)
     deps_all = sorted({d.as_posix() for o in objects if o['kind'] == 'cc' for d in dependencies(o['src'])})
-    (build / 'link.d').write_text('build/%s/linked.elf: %s\n' % (slug, ' '.join(deps_all)))
+    if compile_only:
+        (build / 'compile.d').write_text('%s/compiled.stamp: %s\n' % (build.relative_to(ROOT).as_posix(), ' '.join(deps_all)))
+    else:
+        (build / 'link.d').write_text('%s/linked.elf: %s\n' % (build.relative_to(ROOT).as_posix(), ' '.join(deps_all)))
     files['include/macro.inc'] = ROOT / 'include/macro.inc'
     files['link.ld'] = build / 'link.ld'
     files['tools/elfobj.py'] = ROOT / 'tools/elfobj.py'
@@ -110,6 +115,8 @@ def main():
                            compile_jobs=len(plan['compile']), assemble_jobs=len(plan['assemble']),
                            cached_objects=have, pack_seconds=t1 - t0)
     r = subprocess.run(cmd, capture_output=True, text=True)
+    if non_matching() and compile_only:
+        rc = r.returncode          # compile errors are expected: the fallback below decides
     record_build(build, 'compile-only' if compile_only else 'link', 'completed', call_id,
                  worker_rc=r.returncode, worker_seconds=time.time() - t1,
                  has_results=(build / 'results.json').exists())
@@ -126,7 +133,17 @@ def main():
                 if name in keys and m.isfile():
                     (cache / (keys[name] + '.o')).write_bytes(tar.extractfile(m).read())
                     new += 1
-    if rc == 0 and not compile_only:   # drop cached objects nothing refers to any more
+    if non_matching() and compile_only and (build / 'results.json').exists():
+        # a draft that does not compile keeps its translation unit as it is in the matching build (docs/build.md)
+        results = json.loads((build / 'results.json').read_text())
+        fallback_path = build / 'nm_fallback.json'
+        fallback = set(json.loads(fallback_path.read_text())) if fallback_path.exists() else set()
+        failed = {o['name'][len('units/'):] for o in objects if o['kind'] == 'cc' and results.get(o['src'], {}).get('rc')}
+        if failed - fallback:
+            fallback_path.write_text(json.dumps(sorted(fallback | failed)))
+            print('non-matching: %d translation units keep their matching version (compile errors)' % len(failed - fallback))
+            return 75      # the caller regenerates the units and runs again
+    if rc == 0 and not compile_only and not non_matching():   # drop cached objects nothing refers to any more
         live = {k + '.o' for k in keys.values()}
         stale = [p for p in cache.iterdir() if p.name not in live]
         if len(stale) > 500:

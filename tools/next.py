@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Best next work, from the automatic pipeline's results (build/auto.json) and the source units (config/units.yaml).
+"""Best next work, from the automatic pipeline's results (build/auto.json) and the source units (tools/units.py).
 
   next.py [near|types|families|data|ee|all] [--top N] [--max-size N]
 

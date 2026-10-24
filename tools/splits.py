@@ -6,7 +6,8 @@
                      - {src: src/game/tu_100518.c, range: [0x100518, 0x103858]}
                      - {src: src/kynapse/behaviors_hide.cpp, range: [0x2d4148, 0x2d4a20], flags: [-O2, -G0, -snas, -fbyte-bool]}
                    Keys: src, range (start inclusive, end exclusive), compiler, flags, assembler (a variant such as sn-min6),
-                   sections (false: no -ffunction-sections), owner, note; rare ones: externs, data_ranges,
+                   sections (false: no -ffunction-sections), owner, note; rare ones: functions (the addresses the split
+                   compiles, for a file that is compiled several times with -D selectors and carries no markers), externs, data_ranges,
                    rodata_type_splits, shared_exception_tables, full_tu_context, unlinked_context_helpers.
                    `defaults:` at the top holds compiler, flags and sections for entries that omit them.
   symbols.txt      names and addresses, one per line in splat's symbol_addrs form:  name = 0xADDRESS; // type:func
@@ -32,7 +33,7 @@ DEFAULT_SLUG = 'SLUS_213.76'
 DEFAULT_COMPILER = 'ee-gcc2.95.3-136'
 DEFAULT_FLAGS = ['-O2', '-G0', '-snas']
 
-SPLIT_KEYS = {'src', 'range', 'compiler', 'flags', 'assembler', 'sections', 'owner', 'note', 'externs', 'data_ranges',
+SPLIT_KEYS = {'src', 'range', 'functions', 'compiler', 'flags', 'assembler', 'sections', 'owner', 'note', 'externs', 'data_ranges',
               'rodata_type_splits', 'shared_exception_tables', 'full_tu_context', 'unlinked_context_helpers'}
 SYMBOL_LINE = re.compile(r'^\s*([^\s=;/]+)\s*=\s*(0[xX][0-9a-fA-F]+|\d+)\s*;\s*(?://\s*(.*))?$')
 
@@ -63,7 +64,8 @@ class Split:
         self.sections = bool(entry.get('sections', defaults.get('sections', True)))
         self.owner = entry.get('owner')
         self.note = entry.get('note')
-        self.extra = {k: entry[k] for k in SPLIT_KEYS - {'src', 'range', 'compiler', 'flags', 'assembler', 'sections', 'owner', 'note'}
+        self.functions = [num(a) for a in entry['functions']] if 'functions' in entry else None
+        self.extra = {k: entry[k] for k in SPLIT_KEYS - {'src', 'range', 'functions', 'compiler', 'flags', 'assembler', 'sections', 'owner', 'note'}
                       if k in entry}
         self.entry = entry
 
@@ -77,7 +79,7 @@ class Split:
         flags = list(self.flags)
         if self.assembler:
             flags.append('--assembler=' + self.assembler)
-        if self.sections:
+        if self.sections or non_matching:          # drafts add functions anywhere in the range
             flags.append('-ffunction-sections')
         if non_matching:
             flags.append('-DNON_MATCHING')
@@ -188,6 +190,17 @@ def load_equivalent(slug=DEFAULT_SLUG, path=None):
     return {num(f['addr']): f for f in data.get('functions') or []}
 
 
+EQUIVALENT_HEADER = ('# Functions of the `equivalent` evidence tier (agreement on recorded states, measured coverage; not a proof).\n'
+                     '# They stay assembly in the build; `source` is the TU file whose NON_MATCHING block holds the candidate.\n')
+
+
+def save_equivalent(records, slug=DEFAULT_SLUG, path=None):
+    """Write config/<slug>/equivalent.yaml from {address: record} (records hold source, symbol, returns, evidence)."""
+    path = Path(path) if path else config_dir(slug) / 'equivalent.yaml'
+    rows = [dict(addr='0x%06x' % a, **{k: v for k, v in r.items() if k != 'addr'}) for a, r in sorted(records.items())]
+    path.write_text(EQUIVALENT_HEADER + yaml.safe_dump({'functions': rows}, sort_keys=False, width=140))
+
+
 # ------------------------------------------------------------------------------------------------------ split writer
 
 def flow(value):
@@ -201,6 +214,8 @@ def format_split(entry):
     for key in ('compiler', 'flags', 'assembler', 'sections', 'owner'):
         if key in entry:
             parts.append('%s: %s' % (key, flow(entry[key])))
+    if 'functions' in entry:
+        parts.append('functions: [%s]' % ', '.join('0x%06x' % num(a) for a in entry['functions']))
     for key in ('data_ranges', 'rodata_type_splits', 'shared_exception_tables', 'full_tu_context',
                 'unlinked_context_helpers', 'externs'):
         if key in entry:
