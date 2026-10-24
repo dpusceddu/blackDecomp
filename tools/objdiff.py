@@ -11,19 +11,20 @@ The image is built as one program, but objdiff compares objects, so this tool de
   target  the original machine code of the unit's functions (their split assembly, assembled again), symbols func_XXXXXXXX
   base    the object compiled from the unit's source, its function symbols and references renamed to the same func_/D_ names
 Both go to build/<GAME_ID>/objdiff/{target,base}/<unit>.o and are listed in objdiff.json (project root, not committed) with
-one progress category per library. Functions not compiled from a unit are not part of any object; the report therefore
-measures the share of recovered source, not the whole program. `--report` then runs objdiff-cli (see
-`tools/toolchain.py install --objdiff`) and writes build/<GAME_ID>/report.json.
+one progress category per library. A function belongs to the unit that compiles it; every other function (INCLUDE_ASM, or
+in a split that compiles nothing) gets a target-only unit per translation unit, so the report covers the whole program and
+unrecovered code is unmatched. `--report` then runs objdiff-cli (see `tools/toolchain.py install --objdiff`) and writes
+build/<GAME_ID>/report.json. The objects are normalized (sizes without padding, names, ABI flags, data symbols; see
+docs/progress-reports.md) so that every function that is exact in the image is 100 % here.
 
-objdiff compares instructions and relocations: a function can match here and still not be byte-exact in the image (data
-placement), and the other way round for constants that the compiler names differently. The build's `OK` and
-`ninja progress` remain the authority for exactness.
+objdiff compares instructions and relocations: a function could match here and still not be byte-exact in the image (data
+placement). The build's `OK` and `ninja progress` remain the authority for exactness.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import hashlib, io, json, subprocess, sys, tarfile
+import hashlib, io, json, re, subprocess, sys, tarfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -33,6 +34,86 @@ from units import load_units
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT = 'SLUS_213.76'
 OPTIONS = {'demangler': 'gnu_legacy'}      # the SN compiler mangles like GCC 2.x
+
+
+INSTRUCTION = re.compile(r'^\s*/\*\s*[0-9A-Fa-f]+\s+([0-9A-Fa-f]{8})\s+[0-9A-Fa-f]{8}\s*\*/', re.M)
+
+
+SECTION = re.compile(r'^\s*\.section\s+(\S+)', re.M)
+
+
+def code_size(asm_text, addr, span):
+    """Bytes of the function's code: from its start to its last `endlabel` in the text section, without the alignment
+    padding that follows (the compiler's own symbol size does not include the padding either). A function with switch
+    cases has several labelled fragments, hence the last one. `span` (up to the next function) is the fallback."""
+    text = asm_text
+    for m in SECTION.finditer(asm_text):
+        if not m.group(1).strip(',"').startswith('.text'):
+            text = asm_text[:m.start()]
+            break
+    end = text.rfind('\nendlabel')
+    if end < 0:
+        return span
+    last = [int(m.group(1), 16) for m in INSTRUCTION.finditer(text[:end])]
+    return min(span, last[-1] + 4 - addr) if last else span
+
+
+ABSOLUTE = re.compile(r'^(D_[0-9A-Fa-f]+)\s*=\s*(0x[0-9A-Fa-f]+)\s*;', re.M)
+NAME = re.compile(r'\bD_[0-9A-Fa-f]+\b')
+
+
+def numeric_names(text, constants):
+    """The assembly with the numeric names (`%lo(D_10F00)`) replaced by their values: the original code holds the number,
+    and an assembler would still emit a relocation against the name."""
+    def value(m):
+        v = constants.get(m.group(2))
+        if v is None:
+            return m.group(0)
+        lo = (v & 0xFFFF) - 0x10000 if v & 0x8000 else v & 0xFFFF
+        return str(lo) if m.group(1) == 'lo' else '%#x' % (((v - lo) >> 16) & 0xFFFF)
+    return re.sub(r'%(hi|lo)\((D_[0-9A-Fa-f]+)\)', value, text)
+
+
+def absolute_symbols(slug):
+    """Numeric constants the split assembly names like data (`%lo(D_10F00)`), from the linker symbols of the build: the
+    original code holds the number, not a relocation, so the target object must define the name as a number too."""
+    path = ROOT / 'build' / slug / 'symbols.ld'
+    return {m.group(1): int(m.group(2), 16) for m in ABSOLUTE.finditer(path.read_text())} if path.is_file() else {}
+
+
+DATA_SECTIONS = ('.rodata', '.lit4', '.lit8', '.sdata', '.sbss', '.data', '.bss', '.gcc_except_table')
+DATA_NAME = re.compile(r'\bD_([0-9A-Fa-f]{8})\b')
+
+
+def data_slots(slug):
+    """{unit name: {section: address}}: where the link places each data section of a compiled unit. The build renames them
+    to `<section>.<ADDRESS>` (build/<GAME_ID>/plan.json); the address is that of the original data the unit replaces."""
+    path = ROOT / 'build' / slug / 'plan.json'
+    slots = {}
+    for entry in json.loads(path.read_text()).get('rename', []) if path.is_file() else []:
+        unit = entry['obj'][len('obj/units/'):-len('.o')]
+        for old, new in entry['sections'].items():
+            key = new[len(old) + 1:]
+            if old in DATA_SECTIONS and new.startswith(old + '.') and re.fullmatch(r'[0-9A-Fa-f]{8}', key):
+                slots.setdefault(unit, {})[old] = int(key, 16)
+    return slots
+
+
+def local_data_symbols(texts, slots, sizes, known):
+    """{name: (section, offset)} for the data the unit's own functions refer to by address name (`D_003F7150`) that the
+    compiler keeps in a section of the unit's object: the object has no symbol there, so its reference would read
+    `.rodata+0x8`, which objdiff does not equate with the original's name."""
+    found = {}
+    for text in texts:
+        for m in DATA_NAME.finditer(text):
+            name, address = m.group(0), int(m.group(1), 16)
+            if name in known or name in found:
+                continue
+            for section, key in slots.items():
+                if key <= address < key + sizes.get(section, 0):
+                    found[name] = (section, address - key)
+                    break
+    return found
 
 
 def unit_plan(slug):
@@ -53,6 +134,8 @@ def unit_plan(slug):
     for u in units.values():
         for name, addr in (u.get('externs') or {}).items():
             extern_names.setdefault(name, int(addr, 0) if isinstance(addr, str) else int(addr))
+    absolute = absolute_symbols(slug)
+    slots = data_slots(slug)
     plan = []
     for o in objects:
         name = o['name'][len('units/'):]
@@ -60,32 +143,56 @@ def unit_plan(slug):
         cached = cache.get(o['name'])
         if unit is None or not cached or not (build / cached).is_file():
             continue
-        present = {s['name'] for s in Elf((build / cached).read_bytes()).symbols()}
+        elf = Elf((build / cached).read_bytes())
+        symbols = elf.symbols()
+        sections = {x['name'] for x in elf.sections}
+        section_sizes = {x['name']: x['size'] for x in elf.sections}
+        present = {s['name'] for s in symbols}
+        defined = {s['name'] for s in symbols if s['shndx']}
         functions, redefine = [], {}
         for f in unit['functions']:
+            if f.get('status') != 'source':
+                continue                  # INCLUDE_ASM: still assembly, listed with the unrecovered code (remaining_plan)
             asm = ROOT / 'asm' / slug / 'nonmatchings' / ('func_%08X.s' % f['addr'])
             symbol = f.get('symbol') or ('func_%08X' % f['addr'])
-            if symbol not in present or not asm.is_file() or not f.get('size'):
+            if symbol not in defined or not asm.is_file() or not f.get('size'):
                 continue
             label = 'func_%08X' % f['addr']
-            functions.append(dict(addr=f['addr'], symbol=symbol, status=f.get('status'), size=f['size'],
+            functions.append(dict(addr=f['addr'], symbol=symbol, status=f.get('status'),
+                                  size=code_size(asm.read_text(), f['addr'], f['size']),
                                   asm=asm.relative_to(ROOT).as_posix(), label=label))
             redefine[symbol] = label
         if not functions:
             continue
+        texts = [(ROOT / f['asm']).read_text() for f in functions]
+        constants = {n: absolute[n] for text in texts for n in NAME.findall(text) if n in absolute}
+        mine = {f['addr'] for f in functions}
         for sym in present - set(redefine):
             if sym in globals_:
-                redefine[sym] = 'func_%08X' % globals_[sym]
+                addr = globals_[sym]
+                new = 'func_%08X' % addr
             elif sym in extern_names:
                 addr = extern_names[sym]
-                redefine[sym] = ('func_%08X' if addr in starts else 'D_%08X') % addr
-        taken, clean = set(present) - set(redefine), {}
+                new = ('func_%08X' if addr in starts else 'D_%08X') % addr
+            else:
+                continue
+            if sym in defined and addr in starts and addr not in mine:
+                continue                  # another function's duplicate definition (weak template or inline): not this unit's
+            redefine[sym] = new
+        taken, clean = defined - set(redefine), {}
         for old_name, new_name in redefine.items():       # a name can be the target of one rename only
             if old_name != new_name and new_name not in taken:
                 clean[old_name] = new_name
                 taken.add(new_name)
+        # -ffunction-sections names a function's section after its symbol (`.text._$_Q24Kaim9PoolArray`); objdiff pairs
+        # symbols badly when the section name is a mangled name that no longer belongs to the symbol, so the section
+        # follows the symbol's new name
+        renamed = {'.text.' + f['symbol']: '.text.' + f['label'] for f in functions
+                   if '.text.' + f['symbol'] in sections and f['symbol'] != f['label']}
+        local = local_data_symbols(texts, slots.get(name, {}), section_sizes, present | set(clean.values()) | taken)
         plan.append(dict(name=name, base_in=cached, source=unit['source'], library=unit.get('library') or 'game',
-                         functions=functions, redefine=clean,
+                         functions=functions, redefine=clean, sections=renamed, constants=constants,
+                         symbols=local,
                          complete=all(f.get('status') == 'source' for f in unit['functions'])))
     return plan
 
@@ -109,7 +216,8 @@ def remaining_plan(slug, covered):
         stem = layout.tu_stem(layout.tu_of(f['addr']))
         unit = groups.setdefault((library, stem), dict(name='asm_%s_%s' % (library, stem), base_in=None, source=None,
                                                          library=library, functions=[], redefine={}, complete=False))
-        unit['functions'].append(dict(addr=f['addr'], symbol=f['name'], status='asm', size=f['end'] - f['addr'],
+        unit['functions'].append(dict(addr=f['addr'], symbol=f['name'], status='asm',
+                                      size=code_size(asm.read_text(), f['addr'], f['end'] - f['addr']),
                                       asm=asm.relative_to(ROOT).as_posix(), label='func_%08X' % f['addr']))
     return [groups[k] for k in sorted(groups)]
 
@@ -128,25 +236,35 @@ def run_job(slug, plan):
         for f in u['functions']:
             h.update((ROOT / f['asm']).read_bytes() + b'%d%s' % (f['size'], f['label'].encode()))
         if u['base_in']:
-            h.update((build / u['base_in']).read_bytes() + json.dumps(u['redefine'], sort_keys=True).encode())
-        h.update((ROOT / 'tools/objdiff_job.py').read_bytes())
+            h.update((build / u['base_in']).read_bytes() + json.dumps([u['redefine'], u.get('sections'), u.get('constants'), u.get('symbols')],
+                                                                             sort_keys=True).encode())
+        h.update((ROOT / 'tools/objdiff_job.py').read_bytes() + (ROOT / 'tools/elfobj.py').read_bytes())
         keys[u['name']] = h.hexdigest()
         outputs = [work / 'target' / (u['name'] + '.o')] + ([work / 'base' / (u['name'] + '.o')] if u['base_in'] else [])
         if old_keys.get(u['name']) != keys[u['name']] or not all(p.exists() for p in outputs):
             todo.append(u)
     print('objdiff: %d of %d units to build' % (len(todo), len(plan)))
     if todo:
+        names = lambda u, f: 'numbers/%s.s' % f['label'] if u.get('constants') else f['asm']    # assembly as the job reads it
         send = [dict(name=u['name'], base_in=rel(u['base_in']) if u['base_in'] else None, redefine=u['redefine'],
-                     functions=[dict(asm=f['asm'], label=f['label'], size=f['size']) for f in u['functions']]) for u in todo]
+                     sections=u.get('sections') or {}, symbols=u.get('symbols') or {},
+                     functions=[dict(asm=names(u, f), label=f['label'], size=f['size']) for f in u['functions']]) for u in todo]
         (work / 'plan.json').write_text(json.dumps(dict(units=send)))
         buf = io.BytesIO()
         with tarfile.open(fileobj=buf, mode='w:gz', compresslevel=1) as tar:
             tar.add(ROOT / 'include/macro.inc', arcname='include/macro.inc')
+            tar.add(ROOT / 'tools/elfobj.py', arcname='tools/elfobj.py')
             for unit in todo:
                 if unit['base_in']:
                     tar.add(build / unit['base_in'], arcname=rel(unit['base_in']))
                 for f in unit['functions']:
-                    tar.add(ROOT / f['asm'], arcname=f['asm'])
+                    if unit.get('constants'):
+                        text = numeric_names((ROOT / f['asm']).read_text(), unit['constants']).encode()
+                        info = tarfile.TarInfo(names(unit, f))
+                        info.size = len(text)
+                        tar.addfile(info, io.BytesIO(text))
+                    else:
+                        tar.add(ROOT / f['asm'], arcname=f['asm'])
         build_objects(slug, work, buf.getvalue())
     keys_file.write_text(json.dumps(dict(old_keys, **keys)))
 

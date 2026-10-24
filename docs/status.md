@@ -85,7 +85,8 @@ automatic matching rate. Code completion alone does not establish owned-data com
 
 The objdiff report (`ninja report`, [progress-reports.md](progress-reports.md)) measures the same recovery per function
 with a different yardstick: it compares instructions and relocations of each unit against the original code and leaves out
-the 666 orphan `<instruction>; nop` pieces, so its percentages differ slightly from `ninja progress`.
+the 672 orphan `<instruction>; nop` pieces and the alignment padding behind functions, so its percentages differ slightly from
+`ninja progress` while it counts the same functions as matched.
 
 ## Key lessons
 

@@ -109,8 +109,8 @@ Functions and bytes of `.text` rebuilt from recovered source (USA, `SLUS_213.76`
 <!-- progress:end -->
 
 The numbers are produced locally with `ninja badges` from `ninja progress`, which measures the finished, byte-identical
-image; anyone with the game can reproduce them with `ninja` and `ninja progress`. The objdiff report counts slightly
-differently ([docs/progress-reports.md](docs/progress-reports.md)).
+image; anyone with the game can reproduce them with `ninja` and `ninja progress`. The objdiff report matches the same
+functions but measures bytes differently ([docs/progress-reports.md](docs/progress-reports.md)).
 
 ## Working on a function: objdiff
 

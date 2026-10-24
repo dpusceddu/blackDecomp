@@ -134,3 +134,32 @@ def trim_sections(data, sizes):
         if name in sizes and sizes[name] < h[5]:
             struct.pack_into('<I', out, shoff + i * shentsize + 20, sizes[name])
     return bytes(out)
+
+
+def copy_header_flags(data, template):
+    """The object bytes with the ELF header flags (e_flags, which hold the MIPS ABI) of the template object. The EE assembler
+    leaves the ABI field empty while the compiler sets EABI64, and objdiff names the registers $8..$11 after it (t0..t3 or
+    a4..a7), so an instruction with a relocation that uses one of them would differ by the register name alone."""
+    out = bytearray(data)
+    out[0x24:0x28] = template[0x24:0x28]
+    return bytes(out)
+
+
+def literal_as_gprel(data):
+    """The object bytes with R_MIPS_LITERAL relocations (how the compiler addresses .lit4/.lit8 constants from $gp) retyped
+    as R_MIPS_GPREL16, the way the split assembly writes them (`%gp_rel(D_...)($gp)`). The linker resolves both the same;
+    objdiff compares the types."""
+    out = bytearray(data)
+    shoff, = struct.unpack_from('<I', out, 0x20)
+    entsize, count = struct.unpack_from('<HH', out, 0x2E)
+    for i in range(count):
+        header = shoff + i * entsize
+        kind, = struct.unpack_from('<I', out, header + 4)
+        offset, size = struct.unpack_from('<II', out, header + 16)
+        if kind != 9:                                  # SHT_REL
+            continue
+        for at in range(offset, offset + size, 8):
+            info, = struct.unpack_from('<I', out, at + 4)
+            if info & 0xFF == 8:                       # R_MIPS_LITERAL
+                struct.pack_into('<I', out, at + 4, (info & ~0xFF) | 7)
+    return bytes(out)

@@ -1,24 +1,27 @@
 """Job for tools/objdiff.py (runs through tools/sandbox.py): build the target and base objects objdiff compares.
 
 Reads plan.json and inputs.tgz (sent by objdiff.py):
-  units: [{name, base_in, redefine, functions: [{symbol, size, asm}]}]
+  units: [{name, base_in, redefine, sections, symbols, functions: [{symbol, size, asm}]}]
 For each unit it writes
   target/<name>.o   the original machine code of the unit's functions: the split assembly of each function, assembled
-                    with the EE assembler, symbols named func_XXXXXXXX with their original sizes
-  base/<name>.o     the object compiled from source, its symbols renamed to the same func_/D_ names (objcopy)
+                    with the EE assembler, symbols named func_XXXXXXXX with their original sizes (and the ELF flags of base/)
+  base/<name>.o     the object compiled from source, its symbols and function sections renamed to the same func_/D_ names, and the unit's own
+                    data named where the original code refers to it by address (objcopy)
 and packs both directories into out.tgz.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import json, os, subprocess, sys, tarfile
+import json, os, re, subprocess, sys, tarfile
 from concurrent.futures import ThreadPoolExecutor
 
 TOOLCHAINS = os.environ.get('BLACK_TOOLCHAINS', '/toolchains')
 BINUTILS = os.environ.get('BLACK_BINUTILS_PREFIX', 'mipsel-linux-gnu-')
 AS = TOOLCHAINS + '/compilers/ee-gcc2.96/ee/bin/as'
 tarfile.open('inputs.tgz').extractall('.', **({'filter': 'data'} if hasattr(tarfile, 'data_filter') else {}))
+sys.path.insert(0, 'tools')
+import elfobj                                  # shipped in inputs.tgz
 plan = json.load(open('plan.json'))
 os.makedirs('target', exist_ok=True)
 os.makedirs('base', exist_ok=True)
@@ -41,8 +44,14 @@ def build(unit):
     os.makedirs(os.path.dirname('base/%s.o' % name), exist_ok=True)
     mapping = 'base/%s.syms' % name
     open(mapping, 'w').write(''.join('%s %s\n' % kv for kv in unit['redefine'].items()))
-    q = subprocess.run([BINUTILS + 'objcopy', '--redefine-syms', mapping, unit['base_in'], 'base/%s.o' % name],
+    renames = ['--rename-section=%s=%s' % kv for kv in (unit.get('sections') or {}).items()]
+    adds = ['--add-symbol=%s=%s:%d,global,object' % (n, section, offset) for n, (section, offset) in sorted((unit.get('symbols') or {}).items())]
+    q = subprocess.run([BINUTILS + 'objcopy', '--redefine-syms', mapping] + renames + adds + [unit['base_in'], 'base/%s.o' % name],
                        capture_output=True, text=True)
+    if not q.returncode:
+        base, target = open('base/%s.o' % name, 'rb').read(), open('target/%s.o' % name, 'rb').read()
+        open('target/%s.o' % name, 'wb').write(elfobj.copy_header_flags(target, base))
+        open('base/%s.o' % name, 'wb').write(elfobj.literal_as_gprel(base))
     return name, p.returncode or q.returncode, errors + (q.stderr or '').strip()
 
 
