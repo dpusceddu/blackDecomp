@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Phase 0 triage of every procured disc variant (run tools/maint/discs.py first).
 
-Reads orig/survey/<GAME_ID>/ and writes config/variants.json (hashes and ELF metadata only) plus raw dumps
-(string lists, listings, similarity details) under .local/inputs/.
+Reads orig/survey/<GAME_ID>/ and writes build/survey/variants.json (hashes and ELF metadata only, not committed: the committed
+config/versions.json is hand-edited) plus raw dumps (string lists, listings, similarity details) under .local/inputs/.
 
 Usage: inputs.py [--no-similarity]
 """
@@ -238,13 +238,13 @@ def main():
         entry['elfs'] = elfs
         result[slug] = entry
         print(slug, 'done', flush=True)
-    (ROOT / 'config').mkdir(exist_ok=True)
+    (ROOT / "build/survey").mkdir(parents=True, exist_ok=True)
     slim = json.loads(json.dumps(result))
     for v in slim.values():
         for e in v['elfs']:
             if e['role'] == 'boot':
                 e['source_path_tokens'] = e.get('source_path_tokens', [])[:0]
-    (ROOT / 'config/variants.json').write_text(json.dumps(slim, indent=1) + '\n')
+    (ROOT / "build/survey/variants.json").write_text(json.dumps(slim, indent=1) + '\n')
     (raw / 'variants-full.json').write_text(json.dumps(result, indent=1) + '\n')
 
 

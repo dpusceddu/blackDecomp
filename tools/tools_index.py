@@ -28,13 +28,13 @@ SECTIONS = [
         'build/elfinfo.py', 'build/elfobj.py', 'build/include_asm.py', 'build/splits.py', 'build/units.py',
         'build/units_verify.py', 'build/layout.py', 'build/nm_build.py', 'build/text_placement.py', 'build/constant_relocs.py',
         'build/source_data.py', 'build/assembler.py', 'build/patch_ps2eeas.py', 'build/fixasm.py', 'build/objdiff_job.py',
-        'build/build_telemetry.py']),
+        'build/build_telemetry.py', 'build/tus.py', 'build/linkonce_owners.py']),
     ('Automatic pipeline (`tools/pipeline/`)', [
         'pipeline/tu_files.py', 'pipeline/m2c_input.py', 'pipeline/m2c_wrap.py', 'pipeline/ee_prep.py', 'pipeline/vu0_m2c.py',
         'pipeline/vu0_micro.py', 'pipeline/stack_context.py', 'pipeline/context_recovery.py', 'pipeline/permuter_service.py',
         'pipeline/permuter_worker.py', 'pipeline/permuter_lanes.py', 'pipeline/compiler_dumps.py', 'pipeline/equiv.py']),
     ('Maintainer and analysis tools (`tools/maint/`)', [
-        'maint/tus.py', 'maint/boundaries.py', 'maint/class_skeletons.py', 'maint/rtti_evidence.py', 'maint/shared_context.py',
+        'maint/boundaries.py', 'maint/class_skeletons.py', 'maint/rtti_evidence.py', 'maint/shared_context.py',
         'maint/mod_context.py', 'maint/symbols.py', 'maint/discs.py', 'maint/iso.py', 'maint/inputs.py']),
 ]
 NOTES = {

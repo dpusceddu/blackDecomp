@@ -25,7 +25,7 @@ leads, never proof of PS2 layouts.
 1. **Full build from day one.** The executable is split into assembly and data that reassemble to the identical image;
    source replaces assembly inside that build, so linking, relocations and data are always real ([build.md](build.md)).
 2. **Original TUs.** Boundaries come from unwind frames, the constructor list, library strings, code style and data joins
-   (`tools/maint/tus.py`, `config/tus.yaml`, [tus.md](tus.md)). Match whole files where the evidence is exact.
+   (`tools/build/tus.py`, which `ninja` runs into the ignored `build/SLUS_213.76/tus.yaml`; [tus.md](tus.md)). Match whole files where the evidence is exact.
 3. **One check for exactness**: `ninja` ends with `OK`. No per-function proof journals.
 4. **Automate the routine path**: m2c draft, compile flag variants, relocation-aware scoring, permuter, family cloning
    ([pipeline.md](pipeline.md)). People spend their time on types, classes and the functions the pipeline cannot do.
@@ -52,7 +52,7 @@ leads, never proof of PS2 layouts.
 the further files of a TU that cannot be one: other flags, language or constants) or a descriptive name inherited from the
 class or module. The file lists every function of the TU, the unrecovered ones as INCLUDE_ASM lines; drafts are
 `#ifdef NON_MATCHING` blocks in it. TUs without recovered code have no file. Libraries: `game`, `apt` (EA Apt/Flash UI), `kynapse`,
-`animation`, `physics`, `rw_core`, `rw_audio`, `sony`, `libc`. Compiler-emitted inline and template copies (link-once code) live in `src/<owner>/inline/` of the library that owns them (`config/SLUS_213.76/inline_owners.txt`). `config/SLUS_213.76/splits.yaml`
+`animation`, `physics`, `rw_core`, `rw_audio`, `sony`, `libc`. Compiler-emitted inline and template copies (link-once code) live in `src/<owner>/inline/` of the library that owns them (owners are computed into `build/SLUS_213.76/inline_owners.txt`). `config/SLUS_213.76/splits.yaml`
 lists the files with their address ranges and flags; `tools/build/layout.py` owns the naming rules.
 
 Headers follow the libraries: `include/<library>/` for `game`, `kynapse`, `animation`, `physics`, `rw_core`, `rw_audio`
@@ -119,8 +119,7 @@ bytes without padding and orphans: 14.95 % (401,428 / 2,685,060 bytes), equal to
    and shared pools still block several otherwise complete objects.
 7. **Names and counterparts**: working names (`alias` lines of `config/SLUS_213.76/symbols.txt`), recovered prototypes
    (`include/ps2/prototypes.h`) and structures (`include/ps2/recovered_types.h`) are committed and edited by hand; no tool needs
-   outside analysis data. An Xbox-to-PS2 counterpart map is an optional input that this repository does not ship
-   (`config/SLUS_213.76/function_regions.txt` is its exported result).
+   outside analysis data. An Xbox-to-PS2 counterpart map is an optional input that this repository does not ship.
 
 ## Next steps
 

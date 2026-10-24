@@ -273,7 +273,7 @@ def main():
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     slug = args[0]
     work = args[1] if len(args) > 1 else slug           # the asm/ and build/ directory names
-    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
     layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
     build = ROOT / 'build' / work
     src = build / 's'

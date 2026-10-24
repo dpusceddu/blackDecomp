@@ -30,7 +30,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/check_elf.py` | Compare a rebuilt executable with the target hash in config/<GAME_ID>/checksums.sha256. Build check, run by `ninja`. |
 | `tools/diffelf.py` | Compare two ELF files section by section (a debugging aid for the identical rebuild). Convenience script; binutils `readelf` and `objdump` work too. |
 | `tools/objdump.py` | Print the sections, symbols and relocations of a relocatable ELF object (reads the file only). Convenience script; binutils `mipsel-linux-gnu-objdump` and `readelf` work too. |
-| `tools/progress.py` | Report how much of .text is provided by source (tools/build/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by region. |
+| `tools/progress.py` | Report how much of .text is provided by source (tools/build/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by library. |
 | `tools/badges.py` | Write the self-hosted progress badges and the per-library table (progress/) from the exact progress data. |
 | `tools/tools_index.py` | Regenerate docs/tools.md, the index of the tools, from the docstring of every tool. |
 
@@ -64,6 +64,8 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/build/fixasm.py` | Line-level rules that let the EE GNU assembler 2.10 reproduce the original words (used by split_objects.py). |
 | `tools/build/objdiff_job.py` | Job for tools/objdiff.py (runs through tools/build/sandbox.py): build the target and base objects objdiff compares. |
 | `tools/build/build_telemetry.py` | Append small worker-call records under ignored build directories. |
+| `tools/build/tus.py` | Translation-unit (TU) boundary evidence and the TU map of the boot executable. |
+| `tools/build/linkonce_owners.py` | Decide which library owns each link-once copy (compiler-emitted inline and template code) and write the owner list. |
 
 ## Automatic pipeline (`tools/pipeline/`)
 
@@ -87,7 +89,6 @@ committed data. Tools import each other by bare module name; every tool puts `to
 
 | Tool | Purpose |
 | --- | --- |
-| `tools/maint/tus.py` | Translation-unit (TU) boundary evidence and the TU map of the boot executable. |
 | `tools/maint/boundaries.py` | Function boundaries splat cannot see: write config/<GAME_ID>/boundaries.txt (splat's symbol_addrs format). |
 | `tools/maint/class_skeletons.py` | Generate conservative GCC 2.95 PS2 class interfaces from RTTI and vtables. |
 | `tools/maint/rtti_evidence.py` | Recover legacy GCC RTTI initialization evidence without executing target code. |
@@ -114,7 +115,6 @@ Experiments and one-time migrations whose results are recorded in [history.md](h
 | `tools/studies/group_game_sources.py` | Group the translation unit files of src/game/ into subsystem directories, from the evidence the repository already holds. |
 | `tools/studies/handbook_controls.py` | Verify handbook recipes with isolated SN 1.36 retail controls and perturbations. |
 | `tools/studies/large_study.py` | Reproduce a fixed private calibration set against the isolated compiler catalog. |
-| `tools/studies/linkonce_owners.py` | Decide which library owns each link-once copy (compiler-emitted inline and template code) and write the owner list. |
 | `tools/studies/loop_padding.py` | Read-only short-loop diagnostics. |
 | `tools/studies/loop_positions.py` | Read-only address-position study of retail SN-assigned short loops. |
 | `tools/studies/loop_provenance.py` | Audit retail short-loop forms against the recovered TU and library map. |

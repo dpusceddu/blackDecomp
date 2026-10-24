@@ -8,7 +8,7 @@
   families  groups of assembly functions with identical bodies (candidates for one template or one shared source)
   data      exact drafts that could not be placed because the function owns rodata (strings, tables)
   ee        functions m2c cannot read (EE instructions), grouped by instruction
-  tus       candidate translation units for a Phase 5 agent (config/tus.yaml): shown first by `all`
+  tus       candidate translation units for a Phase 5 agent (build/SLUS_213.76/tus.yaml): shown first by `all`
 Functions already provided by source units are left out everywhere.
 """
 import argparse, collections, json, re, struct, sys
@@ -129,12 +129,11 @@ EE_VECTOR = re.compile(r'^(p(add|sub|cpy|ext|pac|mul|div|and|or|nor|xor|abs|min|
 
 def candidates(top, args=None):
     """TUs a Phase 5 agent can finish by hand: most of the TU already in source, a moderate rest, known classes, few EE vector
-    functions. Scored from config/tus.yaml, the source units and the function inventory."""
+    functions. Scored from the generated build/SLUS_213.76/tus.yaml, the source units and the function inventory."""
     import bisect, yaml
-    path = ROOT / 'config/tus.yaml'
-    if not path.exists():
-        return
     sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
+    import layout
+    path = layout.tus_file()
     import autodecomp
     tus = [t for t in yaml.safe_load(path.read_text())['tus'] if t['kind'] == 'object']
     inv = autodecomp.load_inventory()

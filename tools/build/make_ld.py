@@ -62,7 +62,7 @@ def explicit_data_aliases(ranges, labels, layout):
 def main():
     slug = sys.argv[1]
     work = sys.argv[2] if len(sys.argv) > 2 else slug
-    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
     layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
     build = ROOT / 'build' / work
     outdir = out_dir(slug) if work == slug else build

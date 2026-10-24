@@ -197,7 +197,7 @@ def ctor_list_starts(elf):
 def main():
     args = [x for x in sys.argv[1:] if not x.startswith('--')]
     slug = args[0]
-    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
     elf = Elf((ROOT / 'orig' / slug / boot).read_bytes())
     explicit = explicit_starts(slug)
     splits, orphans = orphan_splits(elf, frozenset(explicit))

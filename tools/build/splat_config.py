@@ -34,7 +34,7 @@ def main():
     ap.add_argument('slug')
     ap.add_argument('--elf')
     a = ap.parse_args()
-    variants = json.loads((ROOT / 'config/variants.json').read_text())
+    variants = json.loads((ROOT / 'config/versions.json').read_text())
     boot = variants[a.slug]['boot']
     path = Path(a.elf) if a.elf else ROOT / 'orig' / a.slug / boot
     data = path.read_bytes()

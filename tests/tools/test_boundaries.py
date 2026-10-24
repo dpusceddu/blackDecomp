@@ -82,7 +82,7 @@ class DerivedFromTheImage(unittest.TestCase):
     def test_committed_file_is_what_the_scan_derives_from_the_image(self):
         import json
         from elfinfo import Elf
-        boot = json.loads((ROOT / 'config/variants.json').read_text())['SLUS_213.76']['boot']
+        boot = json.loads((ROOT / 'config/versions.json').read_text())['SLUS_213.76']['boot']
         elf = Elf((ROOT / 'orig/SLUS_213.76' / boot).read_bytes())
         explicit = B.explicit_starts('SLUS_213.76')
         splits, _ = B.orphan_splits(elf, frozenset(explicit))

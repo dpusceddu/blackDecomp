@@ -1,7 +1,7 @@
 # Inputs and versions
 
-Produced by `tools/maint/discs.py`, `tools/maint/inputs.py`, `tools/maint/symbols.py` and `tools/studies/asmcheck.py`. Hashes and ELF metadata
-are in `config/variants.json`; raw dumps stay in `.local/`. The build itself only needs the boot executables in
+Produced by `tools/maint/discs.py`, `tools/maint/inputs.py`, `tools/maint/symbols.py` and `tools/studies/asmcheck.py`. The survey writes hashes and ELF metadata
+to the ignored `build/survey/variants.json` and raw dumps to `.local/`; `config/versions.json` (by hand) keeps the five supported versions. The build itself only needs the boot executables in
 `orig/<GAME_ID>/`; the disc survey tools are for maintainers who have the disc images.
 
 ## Versions
@@ -21,7 +21,7 @@ Europe disc labelled beta; those are not build targets.
 | `SLKA_253.72` | Korea retail | DVD 3.92 GB | 585 | 3,371,996 | 2,715,560 | NTSC |
 
 The beta and demo images are raw CD images (MODE2/2352 bin plus cue); the rest are 2048-byte DVD ISOs.
-`tools/maint/iso.py` reads both. Zip and image hashes are in `config/variants.json`.
+`tools/maint/iso.py` reads both. The disc image hashes of the supported versions are in `config/versions.json`.
 
 Every boot executable is a statically linked 32-bit little-endian MIPS ELF with `e_flags 0x20924001` and
 a single PT_LOAD segment. All have the same section skeleton as USA retail (`.text`, `.vutext`, `.reginfo`,

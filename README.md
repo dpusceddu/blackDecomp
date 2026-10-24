@@ -146,7 +146,7 @@ or assets; distribute patches in a form that needs the user's own copy.
 configure.py          writes build.ninja (and picks the version)
 config/<GAME_ID>/     per-version splat configuration, ELF layout, function boundaries, expected SHA-256; SLUS_213.76 also has
                       splits.yaml (source files, address ranges, flags), symbols.txt (names), equivalent.yaml
-config/               tus.yaml (translation unit map), toolchain pins, shared data
+config/               versions.json, tus_overrides.yaml, toolchain pins, shared data
 orig/<GAME_ID>/       your executable goes here (ignored by Git)
 src/<library>/        (src/game/ has subsystem directories) one file per translation unit: recovered functions as C/C++, the rest as INCLUDE_ASM lines, drafts in
                       #ifdef NON_MATCHING blocks (game, kynapse, animation, physics, rw_core, rw_audio, apt, sony, libc);

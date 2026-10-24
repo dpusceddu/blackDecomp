@@ -25,7 +25,7 @@ ADDR = re.compile(r'([0-9A-Fa-f]+)$')
 def main():
     slug = sys.argv[1]
     work = sys.argv[2] if len(sys.argv) > 2 else slug
-    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
     layout = json.loads((ROOT / 'config' / boot / 'layout.json').read_text())
     secs = [(s['name'], s['addr'], s['addr'] + s['orig_size']) for s in layout['sections']
             if s['source'] == 'linked' and s['orig_size']]

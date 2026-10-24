@@ -6,7 +6,7 @@ How source replaces assembly in the build. The inputs are `src/`, `config/SLUS_2
 ## One file per translation unit
 
 `src/<library>/tu_<address>.c|cpp` (for the game library `src/game/<subsystem>/tu_<address>.c|cpp`, see
-[src/game/README.md](../src/game/README.md)) lists every function of one translation unit (`config/tus.yaml`) in address order. A
+[src/game/README.md](../src/game/README.md)) lists every function of one translation unit (the generated `build/SLUS_213.76/tus.yaml`) in address order. A
 recovered function is C or C++; the others are markers:
 
 ```c

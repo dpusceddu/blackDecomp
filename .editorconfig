@@ -18,6 +18,6 @@ indent_style = tab
 indent_style = tab
 
 # generated or captured data: keep byte for byte
-[{config/tus.yaml,config/SLUS_213.76/function_regions.txt,config/*/boundaries.txt}]
+[{config/*/boundaries.txt}]
 trim_trailing_whitespace = false
 insert_final_newline = unset

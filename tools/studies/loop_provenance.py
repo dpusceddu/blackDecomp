@@ -199,7 +199,7 @@ def main():
     if ignored.returncode:
         parser.error('--output must name a Git-ignored path')
     import yaml
-    mapping = yaml.safe_load((ROOT / 'config/tus.yaml').read_text())
+    mapping = yaml.safe_load(__import__('layout').tus_file().read_text())
     census = json.loads(Path(args.census).read_text()) if args.census else loop_padding.classification()
     audit_path = Path(args.control_audit)
     audit = json.loads(audit_path.read_text()) if audit_path.exists() else {}

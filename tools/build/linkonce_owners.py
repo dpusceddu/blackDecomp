@@ -3,16 +3,17 @@
 
 The linker keeps one copy of an inline function or template instantiation for the whole program, so the copies of the
 original build sit in a block behind the regular code (0x383b50..0x396f48 in USA retail), in link order, grouped by the object
-file that emitted them first. This study assigns every copy to a library from evidence in the split assembly, in this order:
+file that emitted them first. This tool assigns every copy to a library from evidence in the split assembly, in this order:
 `callers` (every caller outside the block, direct or through a vtable slot, lies in one library), `between` (the neighbouring
 copies on both sides have one owner and no caller disagrees), `via-inline` (every caller is a copy that already has one owner),
 `callees` (the only specific callees are in one library), `vtable` (the other copies in the same vtable have one owner) and `shared` (callers in several libraries and nothing narrower:
-the library that comes first in link order). The result is config/SLUS_213.76/inline_owners.txt, one line per run of translation units
-of the block with one owner and evidence: `0xSTART 0xEND library evidence`, the evidence being the weakest one among the unit's functions. A unit whose
-functions disagree is an error. tools/build/layout.py reads the list, so progress, new source files and src/<library>/inline/ follow it.
+the library that comes first in link order). The result is build/SLUS_213.76/inline_owners.txt (ignored, written by `ninja`), one line per run of
+copies with one owner and evidence: `0xSTART 0xEND library evidence`, the evidence being the weakest one in the run.
+tools/build/layout.py reads it, so progress and new source files follow it; the libraries of the regular code are the hand-edited
+config/SLUS_213.76/libraries.txt, and a source file in src/<library>/inline/ is that library's by its directory.
 
-Needs the split assembly (asm/SLUS_213.76/, written by `ninja`); the committed list is enough for everything else.
-Usage: linkonce_owners.py [--write]     without --write only print the summary
+Needs the split assembly (asm/SLUS_213.76/, written by `ninja`).
+Usage: linkonce_owners.py [--write]     without --write only print the summary; --write writes build/SLUS_213.76/inline_owners.txt
        linkonce_owners.py --pairs       print `old new` for every src/ file of the block that is not in src/<owner>/inline/ yet
                                         (feed it to tools/studies/relocate_sources.py)
 """
@@ -27,7 +28,7 @@ sys.path[:0] = [str(Path(__file__).resolve().parents[1] / _d) for _d in ('', 'bu
 import layout
 
 ROOT = layout.ROOT
-OUT = ROOT / 'config/SLUS_213.76/inline_owners.txt'
+OUT = ROOT / 'build/SLUS_213.76/inline_owners.txt'
 SLUG = 'SLUS_213.76'
 ORDER = ['callers', 'between', 'via-inline', 'callees', 'vtable', 'shared']     # strongest first
 LINK_ORDER = ['game', 'apt', 'rw_core', 'kynapse', 'rw_audio', 'physics', 'animation']
@@ -35,9 +36,7 @@ GENERIC_CALLEE = 20            # a callee with this many callers (allocator, ass
 
 
 def block():
-    lo = min(int(t['text'][0], 0) for t in layout.tu_map()[1] if t['library'] == 'linkonce')
-    hi = max(int(t['text'][1], 0) for t in layout.tu_map()[1] if t['library'] == 'linkonce')
-    return lo, hi
+    return layout.linkonce_block()
 
 
 def analyse():
@@ -124,24 +123,15 @@ def analyse():
 
 
 def lines(copies, owner, why):
-    out = []
-    for tu in layout.tu_map()[1]:
-        if tu['library'] != 'linkonce':
-            continue
-        a, b = int(tu['text'][0], 0), int(tu['text'][1], 0)
-        inside = [f for f in copies if a <= f < b]
-        owners = {owner[f] for f in inside}
-        if len(owners) != 1:
-            raise SystemExit('translation unit %s has copies of several owners: %s' % (tu['name'], sorted(owners)))
-        weakest = max((why[f] for f in inside), key=ORDER.index)
-        out.append((a, b, owners.pop(), weakest))
-    out.sort()
-    merged = []                      # adjacent units with the same owner and evidence share a line
-    for a, b, lib, ev in out:
-        if merged and merged[-1][1] == a and merged[-1][2:] == [lib, ev]:
+    """[start, end, library, weakest evidence] for runs of consecutive copies with one owner (the last run ends at the block end)."""
+    merged = []
+    ends = copies[1:] + [layout.linkonce_block()[1]]
+    for a, b in zip(copies, ends):
+        if merged and merged[-1][2] == owner[a]:
             merged[-1][1] = b
+            merged[-1][3] = max(merged[-1][3], why[a], key=ORDER.index)
         else:
-            merged.append([a, b, lib, ev])
+            merged.append([a, b, owner[a], why[a]])
     return merged
 
 
@@ -164,10 +154,10 @@ def main():
     print('%d copies' % len(copies), dict(collections.Counter(owner.values())), dict(collections.Counter(why.values())))
     if write:
         text = ('# Owner of every link-once copy (compiler-emitted inline and template code, docs/build.md), per range [start, end).\n'
-                '# Written by tools/studies/linkonce_owners.py; review and refine by hand. Evidence, weakest in the range:\n'
-                '#   callers, between, via-inline, callees, vtable, shared (see the tool for what each means).\n'
-                '# tools/build/layout.py reads this file: src/<owner>/inline/ holds the source files, progress counts the code for <owner>.\n')
+                '# Generated by tools/build/linkonce_owners.py (ninja); not committed. Evidence, weakest in the range:\n'
+                '#   callers, between, via-inline, callees, vtable, shared (see the tool for what each means).\n')
         text += ''.join('0x%06x 0x%06x %s %s\n' % tuple(r) for r in rows)
+        OUT.parent.mkdir(parents=True, exist_ok=True)
         OUT.write_text(text)
         print('wrote', OUT.relative_to(ROOT), len(rows), 'lines')
 

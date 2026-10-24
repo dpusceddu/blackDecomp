@@ -8,7 +8,7 @@
 
 The old layout has one source file per unit (about 2,900 files); every file holds only recovered functions and the other
 functions of the translation unit are implicit. The new layout (tools/build/include_asm.py, include/include_asm.h) has one file per
-translation unit of config/tus.yaml that lists every function of its address range in address order: recovered functions
+translation unit of build/SLUS_213.76/tus.yaml that lists every function of its address range in address order: recovered functions
 as C/C++, the others as `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_XXXXXXXX);` lines, and drafts that do not match
 yet (src/*/nonmatching/ and the sources of all-assembly units) as `#ifdef NON_MATCHING` blocks whose `#else` branch is the marker.
 
@@ -68,7 +68,7 @@ class World:
         by_name = {f['name']: f['addr'] for f in placement['functions']}
         self.slots = {sec: [by_name[e['owner']] if e.get('owner') else None for e in placement['sections'][sec]]
                       for sec in CONSTANT_SECTIONS}
-        tus = yaml.safe_load((ROOT / 'config/tus.yaml').read_text())['tus']
+        tus = yaml.safe_load(__import__('layout').tus_file().read_text())['tus']
         tus.sort(key=lambda t: num(t['text'][0]))
         self.tus = tus
         self.tu_starts = [num(t['text'][0]) for t in tus]

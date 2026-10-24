@@ -49,7 +49,7 @@ def prepare(slug, work, func, nops):
 
 
 def build(slug, work):
-    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
     b = ROOT / 'build' / work
     run('tools/build/link_support.py', slug, work)
     run('tools/build/split_objects.py', slug, work)
@@ -203,7 +203,7 @@ def main():
     ap.add_argument('--work', default='shift')
     ap.add_argument('--analyze-only', action='store_true')
     a = ap.parse_args()
-    boot = json.loads((ROOT / 'config/variants.json').read_text())[a.slug]['boot']
+    boot = json.loads((ROOT / 'config/versions.json').read_text())[a.slug]['boot']
     if not a.analyze_only:
         prepare(a.slug, a.work, a.func, a.nops)
         shifted, linked = build(a.slug, a.work)

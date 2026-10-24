@@ -1,0 +1,30 @@
+# Which library each stretch of .text belongs to: `START END library`, half-open, sorted. Edited by hand.
+#   library: the directory under src/ that holds the code (game, apt, rw_core, kynapse, rw_audio, physics, animation, sony, libc),
+#   or `linkonce` for the block of compiler-emitted inline and template copies behind the regular code (docs/build.md#link-once-copies).
+# Evidence: strings, link order, exception-frame groups, RTTI (docs/tus.md). `game` is the default for what no library claims.
+# The owner of each link-once copy is not listed here: the build computes it into build/SLUS_213.76/inline_owners.txt
+# (tools/build/linkonce_owners.py), and a source file in src/<library>/inline/ is that library's by its directory.
+0x100000 0x218370 game
+0x218370 0x259950 apt
+0x259950 0x28ef98 game
+0x28ef98 0x28fa60 sony
+0x28fa60 0x28fab0 game
+0x28fab0 0x29d4c0 sony
+0x29d4c0 0x2a4410 libc
+0x2a4410 0x2a50f8 sony
+0x2a50f8 0x2d15a0 rw_core
+0x2d15a0 0x310278 kynapse
+0x310278 0x32ae70 rw_audio
+0x32ae70 0x331d70 physics
+0x331d70 0x333808 game
+0x333808 0x33faa8 physics
+0x33faa8 0x3420e8 game
+0x3420e8 0x353118 animation
+0x353118 0x355278 game
+0x355278 0x35ebb0 sony
+0x35ebb0 0x367400 libc
+0x367400 0x36f978 sony
+0x36f978 0x371520 libc
+0x371520 0x372fc0 sony
+0x372fc0 0x383b50 game
+0x383b50 0x396f48 linkonce

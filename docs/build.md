@@ -100,9 +100,10 @@ and uses it. That is why a destructor of a Kynapse class or an Apt `Value::Dispo
 
 The sources keep the same split. A copy is a function of the library that uses it, not a library of its own:
 `src/<library>/inline/linkonce_<address>.c|cpp` (and descriptive names for recovered ones) hold the copies of that library, and
-progress counts them there. `config/SLUS_213.76/inline_owners.txt` lists the owner of every range with the strength of the
-evidence (`tools/studies/linkonce_owners.py` produced it from the callers, vtable slots and neighbours in the split assembly;
-refine it by hand when you learn better). Where the right C++ is an inline member function in the class header, a copy that
+progress counts them there. `ninja` computes the owner of every range into the ignored `build/SLUS_213.76/inline_owners.txt` with the strength of the
+evidence (`tools/build/linkonce_owners.py`, from the callers, vtable slots and neighbours in the split assembly); a source file in
+`src/<library>/inline/` is that library's by its directory. The libraries of the regular code are the hand-edited ranges of
+`config/SLUS_213.76/libraries.txt`. Where the right C++ is an inline member function in the class header, a copy that
 matches belongs there eventually; for now each copy stays a separate unit because its address, flags and the surrounding
 link-once order are part of what the build reproduces.
 
@@ -209,7 +210,7 @@ the alias in a comment) and the structures they use in `include/ps2/recovered_ty
 overall and by region, then by translation unit (complete, partial and untouched TUs by confidence and by library), and writes
 `build/<GAME_ID>/progress.json`. `python3 tools/next.py tus` lists candidate TUs.
 
-Other tools: `tools/maint/tus.py` (TU boundaries and map), `tools/build/layout.py` (naming of TU files), `tools/build/include_asm.py` (markers), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/studies/shift_test.py` (shiftability test),
+Other tools: `tools/build/tus.py` (TU boundaries and map, `ninja tus`), `tools/build/layout.py` (naming of TU files), `tools/build/include_asm.py` (markers), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/studies/shift_test.py` (shiftability test),
 `tests/link/check.py` (SN object + GNU object linked by the toolchain's `ld`). In a sandbox script, the binutils tools
 (`mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}`, or the prefix in `$BLACK_BINUTILS_PREFIX`) are on PATH.
 

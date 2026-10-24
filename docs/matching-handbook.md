@@ -7,7 +7,7 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All compiler ex
 ## Whole-TU ladder
 
 1. Check `build/permuter/` for a better candidate. Note the TU's splits in `config/SLUS_213.76/splits.yaml` before editing. Inventory
-   every real function and its rodata/data/sdata/bss/exception tables from `config/tus.yaml`; uncertain boundaries stay
+   every real function and its rodata/data/sdata/bss/exception tables from the generated `build/SLUS_213.76/tus.yaml`; uncertain boundaries stay
    qualified. A code-complete TU is not data-complete until ownership is audited.
 2. Recover behavior, callee arity/return widths, field offsets, hidden results and cleanup edges first. Xbox source gives
    algorithms and names, not PS2 layout proof. Use `tools/pipeline/equiv.py` and recorded EE states when available; absent states

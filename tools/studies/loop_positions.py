@@ -302,7 +302,7 @@ def main():
     import yaml
     from elfinfo import Elf
     original=Elf((ROOT/'orig/SLUS_213.76/SLUS_213.76').read_bytes())
-    mapping=yaml.safe_load((ROOT/'config/tus.yaml').read_text())
+    mapping=yaml.safe_load(__import__('layout').tus_file().read_text())
     census=json.loads(Path(args.census).read_text()) if args.census else loop_padding.classification()
     result=report(census,mapping['tus'],mapping['libraries'],original.section('.text')['addr'])
     output=Path(args.output);output.parent.mkdir(parents=True,exist_ok=True)

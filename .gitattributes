@@ -8,6 +8,5 @@
 *.iso binary
 *.zip binary
 # generated at the root by `ninja objdiff`; large and uninteresting in a diff
-config/tus.yaml linguist-generated=true
 include/game/classes/** linguist-generated=true
 include/kynapse/classes/** linguist-generated=true

@@ -2,18 +2,17 @@
 """Group the translation unit files of src/game/ into subsystem directories, from the evidence the repository already holds.
 
 Files keep their names (`tu_<address>` until the original name is known); only the directory says what they are for.
-The mapping is config/SLUS_213.76/game_subsystems.txt, one line per file name: `file subsystem evidence`. It is reviewed and
-edited by hand: a line with the evidence `manual` is never rewritten. Everything not listed, and every file without evidence,
-is in src/game/unsorted/.
+The directory a file is in is its subsystem: the layout is the record, nothing about it is committed besides the files. This study
+only proposes: it writes build/SLUS_213.76/game_subsystems.txt, one line per file name (`file subsystem evidence`); a file that
+is already in a subsystem directory counts as `manual` and keeps it. Every file without evidence stays in src/game/unsorted/.
 
-  group_game_sources.py                 recompute the mapping (keeps `manual` lines) and print the counts per directory
-  group_game_sources.py --apply         move the files to the directories the mapping names (git mv; splits.yaml, docs and
+  group_game_sources.py                 compute the proposal into build/ (files already sorted keep their directory) and print the counts
+  group_game_sources.py --apply         move the files to the directories the proposal names (git mv; splits.yaml, docs and
                                         generated comments follow, tools/studies/relocate_sources.py); run `ninja` afterwards
 
 Needs the units that `ninja` derives (build/SLUS_213.76/units.json). A file gets the subsystem with the most evidence among:
 the classes of the bound and alias names of the functions it compiles (config/SLUS_213.76/symbols.txt: ModWeapons, ModWorld, CameraController, AIMovement, RouteRequest, Frontend...), the headers it
-includes (include/game/weapons, camera, effects, frontend, actor), the partial views it uses (Recovered_Action*, Recovered_Frontend*),
-the descriptive prefix of its name (ai_route_*, frontend_*, muzzle_*), and the exact consumers of the native header views
+includes (include/game/weapons, camera, effects, frontend, actor), the descriptive prefix of its name (ai_route_*, frontend_*, muzzle_*), and the exact consumers of the native header views
 (config/SLUS_213.76/native_header_evidence.json: weapons, camera, effects). Classes that name a general area (CampaignActor) count
 half. If two subsystems of one parent tie (ai/movement and ai/navigation) the file gets the parent (ai). A file without evidence of
 its own gets the subsystem its two neighbours in address order agree on (`bracketed`: the engine's code is laid out by subsystem,
@@ -32,7 +31,7 @@ import splits as S
 
 
 ROOT = Path(__file__).resolve().parents[2]
-MAP = ROOT / 'config/SLUS_213.76/game_subsystems.txt'
+MAP = ROOT / 'build/SLUS_213.76/game_subsystems.txt'
 SLUG = 'SLUS_213.76'
 SPECIFIC = [
     ('ai/movement', r'AIMovement|MovementMode|FormationMode|DirectMode|MovementCore|^ai_movement|Recovered_Movement'),
@@ -151,24 +150,23 @@ def classify(files):
     return result
 
 
-def read_mapping():
+def read_mapping(files):
+    """{stem: (subsystem, evidence)} of the files that are already in a subsystem directory (the layout is the record)."""
     rows = {}
-    if MAP.exists():
-        for line in MAP.read_text().splitlines():
-            if line.strip() and not line.startswith('#'):
-                stem, sub, ev = line.split()[:3]
-                rows[stem] = (sub, ev)
+    for stem, d in files.items():
+        sub = Path(d['path']).parent.relative_to('src/game').as_posix()
+        if sub != 'unsorted' and sub != '.':
+            rows[stem] = (sub, 'manual')
     return rows
 
 
 def write_mapping(result, files):
-    old = read_mapping()
-    manual = {s: v for s, v in old.items() if v[1] == 'manual' and s in files}
-    merged = {**result, **manual}
-    head = ('# Subsystem directory of every src/game/ file: `file directory evidence`, sorted by address. Written by\n'
-            '# tools/studies/group_game_sources.py (evidence: direct:<what>, bracketed, none); a line whose evidence is `manual` is\n'
-            '# kept as it is. Move a file when you learn what it is, rename it when you learn its name (CONTRIBUTING.md).\n')
+    merged = {**result, **read_mapping(files)}
+    head = ('# Proposed subsystem directory of every src/game/ file: `file directory evidence`, sorted by address. Written by\n'
+            '# tools/studies/group_game_sources.py into build/ (evidence: direct:<what>, bracketed, none, manual = already placed).\n'
+            '# Move a file when you learn what it is, rename it when you learn its name (CONTRIBUTING.md).\n')
     lines = ['%s %s %s' % (s, merged[s][0], merged[s][1]) for s in sorted(files, key=lambda s: (files[s]['lo'], s))]
+    MAP.parent.mkdir(parents=True, exist_ok=True)
     MAP.write_text(head + '\n'.join(lines) + '\n')
     return merged
 
@@ -183,7 +181,8 @@ def main():
     if '--apply' in sys.argv:
         sys.path.insert(0, str(Path(__file__).resolve().parent))
         import relocate_sources
-        rows = read_mapping()
+        merged = write_mapping(classify(files), files)
+        rows = merged
         pairs = [(d['path'], target('src/game/' + Path(d['path']).name, rows.get(stem, ('unsorted', ''))[0]))
                  for stem, d in files.items()]
         print(relocate_sources.relocate(pairs), 'files moved')

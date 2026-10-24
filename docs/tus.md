@@ -1,11 +1,11 @@
 # Translation units and toolchain facts
 
-Evidence for TU boundaries and libraries (`tools/maint/tus.py`), per-TU compilers and flags, the assembler short-loop padding study, one file per TU.
+Evidence for TU boundaries and libraries (`tools/build/tus.py`), per-TU compilers and flags, the assembler short-loop padding study, one file per TU.
 
 ## Translation units
 
-The executable has no symbols, so the object files are recovered from what the linker and compiler left behind. `python3 tools/maint/tus.py
-all` collects the signals (`evidence`), writes `config/tus.yaml` (`map`; hand corrections in `config/tus_overrides.yaml`) and measures how
+The executable has no symbols, so the object files are recovered from what the linker and compiler left behind. `python3 tools/build/tus.py
+all` collects the signals (`evidence`), writes `build/SLUS_213.76/tus.yaml` (`map`, run by `ninja`, not committed; hand corrections in `config/tus_overrides.yaml`) and measures how
 the signals agree (`validate`). Each TU in the map has a text range, data ranges (items only its functions use), compiler and flags (those of
 its matched functions, else a guess from the code style), a confidence and its evidence. Confidence: `exact` = unwind frames (the TU is
 one frame group, 822 of them, 120 outside the link-once area), `high` = both edges from constructor stubs, compiler-style or library changes, `medium` = proposed edges
@@ -47,7 +47,7 @@ What the executable shows (USA retail):
   A later scoped scalar-leaf control at `0x3484d0` matches Sony 2.9 and 2.96 defaults because of their divide workaround;
   the larger methods in that TU still require SN 1.36, so this does not establish a new compiler zone.
   `-O1` (127 functions), `-G8` (22) and `-fno-schedule-insns2` (16) match in scattered TUs and need no zone of their own.
-- **Libraries** (strings, style, frames; `libraries:` in `tus.yaml`; edges between libraries are certain only where a style or frame
+- **Libraries** (strings, style, frames; `libraries:` in `tus.yaml`, kept by hand as `config/SLUS_213.76/libraries.txt`; edges between libraries are certain only where a style or frame
   change marks them). Game code `0x100338-0x28fab0`, containing the EA Apt/Flash UI `0x218000-0x258000` and the Sony video decoder
   sample `vibuf.c` near `0x28f000`; then, all in the `sd` style, Sony's start-up and constructor walker `0x28fab0-0x292f08`, libipu/libmpeg
   `0x292f08-0x29b0a8`, libdbc, libdma/libpad2, libm `0x29d4c0-0x2a4410` and libcdvd `0x2a4410-0x2a50f8`; RenderWare Core
@@ -60,7 +60,7 @@ What the executable shows (USA retail):
 Agreement, with the unwind-frame and constructor boundaries held out (`tus.py validate`): predicting boundaries from "no data join, call or
 shared item crosses the gap" (edges up to 32 functions) finds 53 % of the 185 certain boundaries and wrongly cuts 5.1 % of the 1,225 gaps
 inside frame groups (precision 61 % in that set); 63 % of the frame groups of two or more functions and 99 % of the constructor sequences
-stay whole. Shorter edges find more boundaries and cut more (16: 69 % / 11.8 %; 8: 78 % / 22 %). The map (`config/tus.yaml`) has
+stay whole. Shorter edges find more boundaries and cut more (16: 69 % / 11.8 %; 8: 78 % / 22 %). The map (`build/SLUS_213.76/tus.yaml`) has
 599 object TUs of two or more functions (120 `exact`, 30 `high`, 165 `medium`, 284 `low`; the longest has 289 functions), 1,586
 **isolated** functions that no relation ties to a neighbour (each is an object of its own or a piece of a larger one: accessors and
 leaf code) and 852 link-once sections (702 `exact`). By bytes of `.text`: `exact` 14.5 %, `high` 2.9 %, `medium` 52.8 %, `low` 29.8 %.

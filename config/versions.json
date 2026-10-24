@@ -1,0 +1,37 @@
+{
+ "SLUS_213.76": {
+  "region": "USA",
+  "boot": "SLUS_213.76",
+  "executable_sha256": "141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c",
+  "disc_image_size": 3919609856,
+  "disc_image_sha256": "65768cade88bfbaf566b67a3ef7a0bda5a9669779833914ffe7cd73a3e45cccd"
+ },
+ "SLES_538.86": {
+  "region": "Europe",
+  "boot": "SLES_538.86",
+  "executable_sha256": "bbed3444a22d28b7fdc641e15a1759b6ece1c9cbc5a13331586025ff8fc2b948",
+  "disc_image_size": 3914596352,
+  "disc_image_sha256": "510e3d3bacbcbbcb652ac2683f8121ee41394558786384487195e8eb42efdbea"
+ },
+ "SLES_540.30": {
+  "region": "Europe, Australia",
+  "boot": "SLES_540.30",
+  "executable_sha256": "7e6f25966389656a9bdc534c2514a3a56f205054ee66b43c27a18b111add309f",
+  "disc_image_size": 3922165760,
+  "disc_image_sha256": "37dcc6dd93acd6a959b6e6127412a27ceed69df0fccc194d908e39d46122db64"
+ },
+ "SLKA_253.72": {
+  "region": "Korea",
+  "boot": "SLKA_253.72",
+  "executable_sha256": "fb59440b00444ff64be1436fd757452c3eead9e560532fad74e4d05e913a6b94",
+  "disc_image_size": 3919609856,
+  "disc_image_sha256": "8b67409880248239020a9d3667772d79533bab99fbff34584155810b9e547084"
+ },
+ "SLPM_663.54": {
+  "region": "Japan",
+  "boot": "SLPM_663.54",
+  "executable_sha256": "bf70d92152237eae6908e973d44dde8ce49d9e7e32b34e9b7ad41f79ad569f43",
+  "disc_image_size": 3930062848,
+  "disc_image_sha256": "32e5ab381457819134d5515a16ea9ec5f8428f06990831eddb9c9d07d61345b8"
+ }
+}

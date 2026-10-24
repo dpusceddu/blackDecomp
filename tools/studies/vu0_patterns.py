@@ -480,7 +480,7 @@ def main():
     import autodecomp
     import yaml
     started = time.time()
-    tus = yaml.safe_load((ROOT / 'config/tus.yaml').read_text())['tus']
+    tus = yaml.safe_load(__import__('layout').tus_file().read_text())['tus']
     automatic_path = ROOT / 'build/auto.json'
     automatic = json.loads(automatic_path.read_text()) if automatic_path.exists() else {}
     report = build_report(autodecomp.load_inventory(), tus, autodecomp.source_functions(), automatic,

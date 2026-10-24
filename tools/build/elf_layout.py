@@ -22,7 +22,7 @@ from elfinfo import Elf
 
 def main():
     slug = sys.argv[1]
-    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
     data = (ROOT / 'orig' / slug / boot).read_bytes()
     e = Elf(data)
     out = ROOT / 'data' / slug / 'elf'

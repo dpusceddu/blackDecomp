@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Rebuild every supported version and print OK or MISMATCH for each; run before a release or after changes to shared build tools.
 
-Usage: check_versions.py [GAME_ID ...]     default: all versions of config/variants.json, USA first
+Usage: check_versions.py [GAME_ID ...]     default: all versions of config/versions.json, USA first
 For each version it runs `configure.py --version GAME_ID` and `ninja`, and prints one line per version:
   OK        the rebuilt executable has the SHA-256 recorded in config/<GAME_ID>/checksums.sha256
   MISMATCH  ninja ran and reported a mismatch (its report follows)
@@ -21,7 +21,7 @@ DEFAULT = 'SLUS_213.76'
 
 
 def versions():
-    found = json.loads((ROOT / 'config/variants.json').read_text())
+    found = json.loads((ROOT / 'config/versions.json').read_text())
     names = [v for v in found if (ROOT / 'config' / v / 'checksums.sha256').exists()]
     return sorted(names, key=lambda v: (v != DEFAULT, v))
 
@@ -37,7 +37,7 @@ def check(version):
         return 'ERROR', c.stdout
     b = run(['ninja'])
     if b.returncode == 0:      # an up-to-date build prints nothing, so the image is compared again (cheap)
-        boot = json.loads((ROOT / 'config/variants.json').read_text())[version]['boot']
+        boot = json.loads((ROOT / 'config/versions.json').read_text())[version]['boot']
         k = run([sys.executable, 'tools/check_elf.py', version, 'build/%s/%s.elf' % (version, boot)])
         return ('OK' if k.returncode == 0 else 'MISMATCH'), k.stdout
     if any(l.startswith('MISMATCH') for l in b.stdout.splitlines()):

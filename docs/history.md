@@ -39,7 +39,7 @@ are earlier builds and only give naming and ordering hints. The USA retail execu
 
 ## Phase 3: translation units
 
-`tools/maint/tus.py` combines unwind-frame groups (822 CIE groups, exact object boundaries), the constructor list (116 entries,
+`tools/build/tus.py` combines unwind-frame groups (822 CIE groups, exact object boundaries), the constructor list (116 entries,
 certain TU ends), library strings and code style, data-order joins and call edges. Result: 599 object TUs of two or more
 functions (120 exact), 1,586 isolated functions and 852 link-once sections, with library ranges, compiler and flags.
 Orphan pieces, alignment and cross-build shifts do not mark boundaries. The Sony libraries (`sd` register saves, blocks

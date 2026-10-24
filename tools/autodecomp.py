@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Automatic decompilation pilot: m2c -> clean -> compile variants -> score -> permuter -> register as source units.
 
-  autodecomp.py run [--max-size N] [--min-size N] [--region R] [--addr A ...] [--limit N] [--no-permute]
+  autodecomp.py run [--max-size N] [--min-size N] [--region LIBRARY] [--addr A ...] [--limit N] [--no-permute]
                     [--permute-seconds S] [--batch N]
         draft every selected assembly function and record the outcome in build/auto.json
   autodecomp.py register [--group N]     put exact matches into their TU files (replacing the INCLUDE_ASM line; tools/pipeline/tu_files.py)
@@ -1192,14 +1192,14 @@ _TUMAP = None
 
 
 def tu_flags(addr):
-    """(compiler, flags, basis) the TU map (config/tus.yaml) gives the TU of this function, or None. Used when the environment
+    """(compiler, flags, basis) the TU map (build/SLUS_213.76/tus.yaml) gives the TU of this function, or None. Used when the environment
     variable AUTODECOMP_TU is set; see tools/maint/tus.py."""
     global _TUMAP
     if not os.environ.get('AUTODECOMP_TU'):
         return None
     if _TUMAP is None:
         import bisect, yaml
-        d = yaml.safe_load((ROOT / 'config/tus.yaml').read_text())
+        d = yaml.safe_load(__import__('layout').tus_file().read_text())
         rows = sorted((int(t['text'][0], 16), int(t['text'][1], 16), t['compiler'], t['flags'], t['flags_basis']) for t in d['tus'])
         _TUMAP = (rows, [r[0] for r in rows])
     import bisect
@@ -1927,7 +1927,7 @@ def verify_build():
         run('tools/build/units_verify.py', 'link')
         return json.loads((BUILD / 'unit_problems.json').read_text()) or [[None, None, 'link']]
     run('tools/build/pack_elf.py', BUILD / 'linked.elf', ROOT / 'config' / SLUG / 'layout.json', ROOT / 'data' / SLUG / 'elf',
-        BUILD / (json.loads((ROOT / 'config/variants.json').read_text())[SLUG]['boot'] + '.elf'))
+        BUILD / (json.loads((ROOT / 'config/versions.json').read_text())[SLUG]['boot'] + '.elf'))
     run('tools/build/units_verify.py', 'compare')
     return json.loads((BUILD / 'unit_problems.json').read_text())
 
@@ -2227,7 +2227,7 @@ def main():
     r.add_argument('--status', action='append', help='redo the functions whose earlier outcome was this')
     r.add_argument('--refresh-context', action='store_true')
     r.add_argument('--cc', help='experiment: compile every flag set with this compiler (use AUTODECOMP_RESULTS to keep the records apart)')
-    r.add_argument('--tu', help='use the TU map flags (config/tus.yaml): `all`, or a compiler name to select only the functions of those TUs')
+    r.add_argument('--tu', help='use the TU map flags (build/SLUS_213.76/tus.yaml): `all`, or a compiler name to select only the functions of those TUs')
     r.set_defaults(fn=cmd_run)
     rp = sub.add_parser('report')
     rp.add_argument('--max-size', type=int)

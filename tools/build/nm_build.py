@@ -30,7 +30,7 @@ def run(*args, check=True):
 
 def main():
     slug = sys.argv[1] if len(sys.argv) > 1 and not sys.argv[1].startswith('-') else 'SLUS_213.76'
-    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
     out = ROOT / 'build' / (slug + '-nm')
     out.mkdir(parents=True, exist_ok=True)
     fallback = out / 'nm_fallback.json'

@@ -242,7 +242,7 @@ def classification():
     original = auto.OrigImage().e
     text = original.section('.text')
     words = list(struct.unpack('<%dI' % (text['size'] // 4), original.content(text)))
-    tus = yaml.safe_load((ROOT / 'config/tus.yaml').read_text())['tus']
+    tus = yaml.safe_load(__import__('layout').tus_file().read_text())['tus']
     return summarize_classification(classify_short_loops(words, text['addr'], tus,
                                                        auto.load_inventory(), load_units()))
 

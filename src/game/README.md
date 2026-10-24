@@ -15,10 +15,10 @@ The game library, grouped by subsystem. A file is one translation unit (or a pie
 | `audio/` | Sound envelopes and voices | `*Envelope`, `sound_envelopes.hpp` |
 | `ui/` | Front-end menus, movies, save dialogs, profiles | `Frontend*`, `include/game/frontend` |
 | `actor/` | Actor state, entries, renderable and prop state | `CampaignActor::*`, `include/game/actor` |
-| `inline/` | Compiler-emitted inline and template copies owned by the game library | `config/SLUS_213.76/inline_owners.txt` |
+| `inline/` | Compiler-emitted inline and template copies owned by the game library | `build/SLUS_213.76/inline_owners.txt` (generated) |
 | `unsorted/` | Everything without clear evidence yet | none |
 
-`config/SLUS_213.76/game_subsystems.txt` maps every file to its directory, with the evidence (`direct:<kinds>`, `bracketed`
-between two units of one subsystem, `none`, or `manual` for hand-set lines). `python3 tools/studies/group_game_sources.py`
-recomputes it (it keeps the `manual` lines) and `--apply` moves the files. Do not expect `unsorted/` to be junk: it is mostly
+The directory a file is in is its subsystem; nothing else records it. `python3 tools/studies/group_game_sources.py` proposes
+directories for the files still in `unsorted/` into `build/SLUS_213.76/game_subsystems.txt` (evidence: `direct:<kinds>`,
+`bracketed` between two units of one subsystem, `none`; a file already placed counts as `manual`), and `--apply` moves them. Do not expect `unsorted/` to be junk: it is mostly
 code whose subsystem nobody has established. Move a file when you learn what it is; rename it when the original name is known.

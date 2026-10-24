@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-"""Report how much of .text is provided by source (tools/build/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by region.
+"""Report how much of .text is provided by source (tools/build/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by library.
 
-Regions come from config/SLUS_213.76/function_regions.txt (PS2 address -> game, kynapse, animation, physics or other), derived from an
-Xbox-to-PS2 counterpart map (`progress.py --refresh MAP.json` rewrites it; the committed file is enough to build and report). An unmapped function takes the
-region of its neighbours when both sides agree, otherwise it is `unclassified`. Regions are therefore approximate;
-the overall number is exact.
+Libraries come from the hand-edited address ranges of config/SLUS_213.76/libraries.txt (tools/build/layout.py); the link-once
+block is shown as `linkonce` in the image table and counted with the owner library in the code table.
 A function counts as source when its split compiles it (no INCLUDE_ASM marker), which the build's OK keeps identical to the target.
 Headline ("code"): objdiff's definition, matched function bytes / total function bytes, with the function extents objdiff
 uses (tools/objdiff.py code_size: up to the function's endlabel, no alignment padding, orphan pieces left out). It equals
@@ -15,8 +13,8 @@ Usage: progress.py [SLUG]       writes build/<GAME_ID>/progress.json and prints 
        progress.py --check      fail when no objdiff report exists to compare with (the check always runs when a current one does)
        progress.py --libraries   also print the totals per library directory of src/
        progress.py --tus [N]     also list the N (default 15) partially done translation units with most bytes still in assembly
-When config/tus.yaml exists (tools/maint/tus.py) the report adds the progress by TU: complete TUs (every function from source),
-partially done ones and bytes per TU, by confidence of the TU boundaries.
+The report adds the progress by TU from the generated TU map (build/SLUS_213.76/tus.yaml, tools/build/tus.py; written on first use):
+complete TUs (every function from source), partially done ones and bytes per TU, by confidence of the TU boundaries.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -29,45 +27,18 @@ sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 
 from units import load_units
 
 ROOT = Path(__file__).resolve().parents[1]
-REGIONS = ROOT / 'config/SLUS_213.76/function_regions.txt'
-
-
-def refresh_regions(counterpart_map):
-    """Rewrite config/SLUS_213.76/function_regions.txt (address, region) from an Xbox-to-PS2 counterpart map (json with `pairs`), optional input."""
-    pairs = json.loads(Path(counterpart_map).read_text())['pairs']
-    rows = sorted({(int(p['ps2'], 16), p['region']) for p in pairs})
-    REGIONS.write_text('# PS2 function address -> region (game, kynapse, animation, physics, other), from the\n'
-                       '# optional Xbox-to-PS2 counterpart map (discovery leads, not byte-compared); tools/progress.py --refresh\n' +
-                       ''.join('0x%08X %s\n' % r for r in rows))
-    print('wrote %s: %d functions' % (REGIONS.name, len(rows)))
 
 
 def regions(addrs):
-    reg = {}
-    if REGIONS.exists():
-        for line in REGIONS.read_text().split('\n'):
-            if line and not line.startswith('#'):
-                a, r = line.split()
-                reg[int(a, 16)] = r
-    lab = [reg.get(a) for a in addrs]
-    nxt, n = [None] * len(lab), None
-    for i in range(len(lab) - 1, -1, -1):
-        n = lab[i] or n
-        nxt[i] = n
-    out, prev = [], None
-    for i, l in enumerate(lab):
-        if l:
-            prev = l
-            out.append(l)
-        else:
-            out.append(prev if prev == nxt[i] and prev else 'unclassified')
-    return out, bool(reg)
+    """(library per address, True): the library directory by libraries.txt, `linkonce` for the link-once block."""
+    import layout
+    return [layout.library_of_tu(a) for a in addrs], True
 
 
 def orphan_pieces(slug, fs):
     """Addresses of the functions that are orphan pieces: `<one non-branch instruction>; nop` repeated (see tools/maint/boundaries.py)."""
     from elfinfo import Elf
-    boot = json.loads((ROOT / 'config/variants.json').read_text())[slug]['boot']
+    boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
     elf = Elf((ROOT / 'orig' / slug / boot).read_bytes())
     sec = elf.section('.text')
     data = elf.content(sec)
@@ -171,12 +142,11 @@ def check_report(slug, build, exact, total, required):
 
 
 def tu_report(slug, fs, spans, source, top):
-    """Progress by translation unit (config/tus.yaml): rows by confidence and the TUs closest to completion."""
-    path = ROOT / 'config/tus.yaml'
-    if not path.exists() or slug != 'SLUS_213.76':
+    """Progress by translation unit (generated TU map): rows by confidence and the TUs closest to completion."""
+    if slug != 'SLUS_213.76':
         return None
-    import bisect, yaml
-    tus = yaml.safe_load(path.read_text())['tus']
+    import bisect, layout, yaml
+    tus = yaml.safe_load(layout.tus_file().read_text())['tus']
     starts = [int(t['text'][0], 16) for t in tus]
     rows = [dict(name=t['name'], kind=t['kind'], conf=t['confidence'], lib=t['library'], lo=starts[k], functions=0,
                  source_functions=0, bytes=0, source_bytes=0) for k, t in enumerate(tus)]
@@ -196,7 +166,7 @@ def tu_report(slug, fs, spans, source, top):
     import layout
     for r in rows:
         lib = r['lib'] or '?'
-        if lib == 'linkonce':          # a link-once copy is counted with the library that owns it (config/SLUS_213.76/inline_owners.txt)
+        if lib == 'linkonce':          # a link-once copy is counted with the library that owns it (build/SLUS_213.76/inline_owners.txt)
             lib = 'inline>' + layout.library_of(r['lo'])
         for key in ('ALL', 'conf: ' + r['conf'], 'kind: ' + r['kind'], 'lib: ' + lib):
             k = kinds.setdefault(key, dict(tus=0, complete=0, partial=0, untouched=0, complete_bytes=0, source_bytes=0, bytes=0))
@@ -211,7 +181,7 @@ def tu_report(slug, fs, spans, source, top):
             else:
                 k['untouched'] += 1
     print()
-    print('by translation unit (config/tus.yaml; boundaries of the TUs below `exact` are proposals)')
+    print('by translation unit (build/SLUS_213.76/tus.yaml; boundaries of the TUs below `exact` are proposals)')
     print('%-18s %6s %9s %8s %10s   %11s %11s %9s' % ('', 'TUs', 'complete', 'partial', 'untouched', 'complete B', 'source B', 'bytes'))
     for key in sorted(kinds, key=lambda k: (k != 'ALL', k.startswith('lib'), k)):
         k = kinds[key]
@@ -230,11 +200,6 @@ def tu_report(slug, fs, spans, source, top):
 
 
 def main():
-    if '--refresh' in sys.argv:
-        k = sys.argv.index('--refresh')
-        if k + 1 >= len(sys.argv):
-            raise SystemExit('--refresh needs the path of the counterpart map json')
-        return refresh_regions(sys.argv[k + 1])
     top = 0
     if '--tus' in sys.argv:
         k = sys.argv.index('--tus')
@@ -255,7 +220,7 @@ def main():
                 equivalent.add(f['addr'])
             if f.get('status') == 'source':
                 source[f['addr']] = u.get('origin', u['name'].split('_')[0])
-    region, mapped = regions([f['addr'] for f in fs])
+    region, _ = regions([f['addr'] for f in fs])
     rows = {}
 
     def add(key, span, src):
@@ -269,7 +234,7 @@ def main():
     for f, span, reg in zip(fs, spans, region):
         src = f['addr'] in source
         add('ALL', span, src)
-        add('region: ' + reg, span, src)
+        add('library: ' + reg, span, src)
         if src:
             add('origin: ' + source[f['addr']], span, True)
     tiers = {key:dict(functions=0,bytes=0) for key in ('exact','equivalent','draft')}
@@ -280,7 +245,7 @@ def main():
     import layout
     code, code_libs = code_totals(code_extents(slug, fs, units), set(source), layout.library_of) \
         if slug == 'SLUS_213.76' else (None, None)
-    out = dict(text_bytes=text['orig_size'], regions_from_map=mapped, rows=rows, evidence_tiers=tiers)
+    out = dict(text_bytes=text['orig_size'], rows=rows, evidence_tiers=tiers)
     if code:
         out['code'], out['code_by_library'] = code, code_libs
     (build / 'progress.json').write_text(json.dumps(out, indent=1))
