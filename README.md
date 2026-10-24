@@ -152,7 +152,7 @@ asm/ build/ data/     generated (asm/<GAME_ID>/nonmatchings/ holds the assembly 
 **How does the matching work?** The executable is split into one assembly object per function plus data objects, which link
 back into the identical image. A translation unit file lists all functions of its range; the ones written in C or C++ replace the assembly of the ones still marked `INCLUDE_ASM`; if the
 compiler reproduces the original instructions and the full image stays identical, the function is *exact*. Details:
-[docs/build.md](docs/build.md), [docs/units.md](docs/units.md), [docs/matching-handbook.md](docs/matching-handbook.md).
+[docs/build.md](docs/build.md), [docs/units.md](docs/units.md), [docs/matching-handbook.md](docs/matching-handbook.md), [docs/tools.md](docs/tools.md) (index of the tools).
 
 **How do I work on a function?** Open its TU file (`python3 tools/next.py tus` lists candidates), replace the function's
 `INCLUDE_ASM(...)` line with C or C++, run `ninja`: it prints `OK`, or the file and function that differ. A draft that does not

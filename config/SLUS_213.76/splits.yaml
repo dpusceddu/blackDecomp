@@ -1,6 +1,7 @@
 # Source splits of SLUS_213.76: one entry per source file and address range (docs/build.md). Edit by hand.
 # range is [start, end); every function of the range is compiled from the file unless the file marks it
 # INCLUDE_ASM. `functions` lists the compiled addresses of files that carry no markers.
+# `assembler: sn-min6` is a per-file recipe that reproduces the bytes, not a recovered rule (docs/status.md, open problem 4).
 variant: SLUS_213.76
 defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas], sections: true}
 splits:

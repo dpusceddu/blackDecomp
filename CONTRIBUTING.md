@@ -66,6 +66,18 @@ Evidence tiers matter: never describe a function as more than its tier (`exact`,
 - Small logical commits with a clear message (what and why). One TU or one tool change per commit is ideal.
 - Keep documentation short and current; update the relevant file in `docs/` when behavior changes.
 
+## Cleanup work
+
+Matching is not the only useful contribution. Two kinds of cleanup are always welcome, as long as `ninja` still prints `OK`:
+
+- **Readable C++ for automatic drafts.** Many matched game, Kynapse, animation and physics functions are plain C named
+  `func_XXXXXXXX`, as the decompiler produced them, although those libraries are C++. Turning them into methods of known
+  classes (`include/<library>/classes/`), with real names, types and parameter names, makes the code useful. The mangled
+  name changes with the declaration: update `config/SLUS_213.76/symbols.txt` so assembly callers still link. RenderWare,
+  the Sony libraries and libc are C, so C is correct there.
+- **Real file names.** Files are named `tu_<address>` until evidence shows the original name or class (strings, RTTI,
+  class ownership). Rename with `git mv` and update the `src:` path in `splits.yaml`.
+
 ## Tests
 
 ```sh
