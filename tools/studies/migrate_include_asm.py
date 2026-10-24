@@ -16,7 +16,9 @@ Units of one TU are merged only when they are plain automatic drafts (origin aut
 options, and when the constants of the assembly functions between them do not interleave (units_verify.py's slot rule). Hand-written
 sources keep their file and their text. A TU that cannot be one file is split at the places where flags, language, constants or
 declarations disagree, and each part is a file of its own. Sources compiled several times with -D selectors are left alone.
-The migration is re-runnable from a clean checkout of the old layout (git stash / checkout) and idempotent on its own output.
+`write` is re-runnable from a checkout of the old layout (commit f972a63e: src/ and config/units.yaml) and reproduces the committed
+files using the fallback levels in migrate_include_asm_state.json; `run` (settlement loop) needs the old tools of that commit.
+Stage 2 is tools/studies/migrate_split_list.py.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
