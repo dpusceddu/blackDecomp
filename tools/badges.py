@@ -39,7 +39,8 @@ def pct(part, whole):
 
 
 def badge(label, percent):
-    return dict(schemaVersion=1, label=label, message='%.1f%%' % percent, color=color(percent))
+    shown = '%.1f' % percent  # color follows the displayed value, so "15.0%" is never colored as below 15
+    return dict(schemaVersion=1, label=label, message=shown + '%', color=color(float(shown)))
 
 
 def table(libs):
