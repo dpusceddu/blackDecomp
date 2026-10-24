@@ -98,7 +98,8 @@ class CatalogLaunch(unittest.TestCase):
             namespace = dict(os=__import__('os'), subprocess=subprocess, CC=str(root), WORK='/work')
             exec(compile(ast.Module(body=[function], type_ignores=[]), str(path), 'exec'), namespace)
             result = subprocess.CompletedProcess([], 1, '', 'expected fixture rejection')
-            with patch.object(subprocess, 'run', return_value=result) as run:
+            with patch.object(subprocess, 'run', return_value=result) as run, \
+                 patch('assembler.short_path', side_effect=lambda p: p):
                 rc = namespace['compile_one'](dict(compiler=compiler.name, src='fixture.c',
                                                    obj=str(root / 'obj/fixture.o'), args=['-O2']))[1]
             self.assertEqual(rc, 1)

@@ -57,7 +57,7 @@ def assemble(job):
 
 def compile_one(job):
     from elfobj import normalize_object
-    from assembler import compile_with_assembler
+    from assembler import compile_with_assembler, short_path
     root = '%s/%s' % (CC, job['compiler'])
     if job['compiler'].startswith('mwcps2-'):
         os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
@@ -87,6 +87,7 @@ def compile_one(job):
     versions = root + '/lib/gcc-lib/ee'
     backend = next(versions + '/' + v for v in sorted(os.listdir(versions))
                    if not v.startswith('.') and os.path.isdir(versions + '/' + v))
+    backend = short_path(backend)    # see tools/assembler.py: Ps2EeAs.exe crashes when its own path is long
     env = dict(os.environ, TMPDIR=WORK, WINEDEBUG='-all', WIBO_PATH=backend)
     os.makedirs(os.path.dirname(job['obj']), exist_ok=True)
     prefix = ['wibo', root + '/bin/ee-gcc.exe', '-B' + backend + '/']

@@ -7,11 +7,41 @@ import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import hashlib, os, shutil
+import atexit, hashlib, os, shutil, tempfile, threading
 from pathlib import Path
 import subprocess
 
 TOOLCHAINS = os.environ.get('BLACK_TOOLCHAINS', '/toolchains')
+# SN's Ps2EeAs.exe overflows a buffer when its own path is long: it crashes as soon as it has to print a warning if the
+# Windows form of the path (Z:\... with backslashes) exceeds about 80 characters. A toolchain below a deep checkout
+# directory is that long, so the Windows tools run from a short copy in the temporary directory.
+SHORT_LIMIT = 56
+_staged, _lock, _stage_root = {}, threading.Lock(), []
+
+
+def short_path(path):
+    """Return PATH itself when it is short, otherwise the path of a copy of that file or directory under /tmp."""
+    path = str(path)
+    if len(path) <= SHORT_LIMIT:
+        return path
+    with _lock:
+        if path not in _staged:
+            if not _stage_root:
+                _stage_root.append(tempfile.mkdtemp(prefix='sn', dir='/tmp' if os.path.isdir('/tmp') else None))
+                atexit.register(shutil.rmtree, _stage_root[0], True)
+            target = os.path.join(_stage_root[0], 's%d' % len(_staged))
+            if os.path.isdir(path):
+                os.makedirs(target)
+                for name in os.listdir(path):
+                    source = os.path.join(path, name)
+                    if os.path.isfile(source):
+                        shutil.copy2(source, os.path.join(target, name))
+            else:
+                os.makedirs(target)
+                target = os.path.join(target, os.path.basename(path))
+                shutil.copy2(path, target)
+            _staged[path] = target
+        return _staged[path]
 
 
 CHOICES = ('gas-2.40', 'gas-2.40-fix', 'sn-2.73a', 'sony-2.9', 'sn-min6')
@@ -39,10 +69,10 @@ def command(choice, args, source, output):
                 '-mfix-r5900' if choice.endswith('-fix') else '-mno-fix-r5900',
                 *common, '-o', output, source]
     if choice == 'sn-2.73a':
-        return ['wibo', TOOLCHAINS + '/compilers/ee-gcc2.95.2-273a/lib/gcc-lib/ee/2.95.2/ps2eeas.exe',
+        return ['wibo', short_path(TOOLCHAINS + '/compilers/ee-gcc2.95.2-273a/lib/gcc-lib/ee/2.95.2/ps2eeas.exe'),
                 '-O2', *common, '-o', output, source]
     if choice == 'sn-min6':
-        return ['wibo', TOOLCHAINS + '/assemblers/ps2eeas-1.9.25.758-min6/Ps2EeAs.exe',
+        return ['wibo', short_path(TOOLCHAINS + '/assemblers/ps2eeas-1.9.25.758-min6/Ps2EeAs.exe'),
                 '-O2', *common, '-o', output, source]
     if choice == 'sony-2.9':
         return [TOOLCHAINS + '/compilers/ee-gcc2.9-991111-01/ee/bin/as',

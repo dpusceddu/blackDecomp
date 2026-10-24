@@ -93,6 +93,7 @@ def main():
 def run_local(request):
     """Run the compiler from the local toolchain in a scratch directory; same reply shape as the build backend."""
     import toolchain
+    from assembler import short_path
     toolchain.require()
     base = toolchain.root()
     compiler = request['compiler']
@@ -113,6 +114,7 @@ def run_local(request):
             command = ['wibo', str(root / 'mwccps2.exe'), *flags]
         elif (root / 'bin/ee-gcc.exe').is_file():
             backend_dir = next(d for d in sorted((root / 'lib/gcc-lib/ee').iterdir()) if d.is_dir() and d.name[0] != '.')
+            backend_dir = Path(short_path(backend_dir))     # Ps2EeAs.exe crashes when its own path is long
             env['WIBO_PATH'] = str(backend_dir)
             command = ['wibo', str(root / 'bin/ee-gcc.exe'), '-B' + str(backend_dir) + '/', *flags]
         else:
