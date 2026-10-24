@@ -15,9 +15,10 @@ Short, neutral rules for coding assistants and the people directing them. They a
   libc, linkonce), one file per recovered TU; drafts no unit uses go to `src/<library>/nonmatching/`. Headers follow the
   libraries in `include/<library>/` (shared helpers in `include/ps2/`). `tools/layout.py` has the naming rules and
   `tools/relayout.py` re-applies them.
-- Build with `ninja`; every commit leaves it printing `OK` for USA retail. Edit the units you own in `config/units.yaml`;
+- Build with `ninja`; every commit leaves it printing `OK` for USA retail (`SLUS_213.76`, the only version checked routinely).
+  Run `python3 tools/check_versions.py` (all five versions) before releases or after changing shared build tools. Edit the units you own in `config/units.yaml`;
   that file is maintained by `tools/settle_units.py` and the autodecomp tools, and each unit records `library`,
-  `provenance` and `tier`. Report progress with `ninja progress`.
+  `provenance` and `tier`. Report progress with `ninja progress`; when it changes, run `ninja badges` and commit `progress/`.
 - Evidence tiers: `exact` (byte-identical in the full image), `equivalent` (agrees on recorded states, recorded in function
   `evidence:`; never replaces assembly), `draft`. Do not claim more than the evidence shows.
 - Tools live in `tools/` (core) and `tools/studies/` (finished experiments); every tool needs a purpose docstring and

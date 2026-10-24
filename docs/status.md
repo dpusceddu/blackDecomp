@@ -6,8 +6,8 @@ results history is in [history.md](history.md).
 
 ## Goal
 
-Readable C/C++ source for the retail PS2 executable of Black (`SLUS_213.76`, with four more regional builds that rebuild
-from assembly), organized into the original libraries and translation units (TUs), where every function carries explicit
+Readable C/C++ source for the retail PS2 executable of Black (`SLUS_213.76`, the only first-class target: source, progress and routine checks; four more regional builds rebuild
+from assembly and are checked before releases with `tools/check_versions.py`), organized into the original libraries and translation units (TUs), where every function carries explicit
 evidence. Byte identity is the strongest tier and the matching build is mandatory in every commit; the other tiers say how
 far a readable function is trusted.
 
@@ -62,7 +62,7 @@ headers sit beside the hand-written ones: `include/game/classes/` and `include/k
 
 ## Current state (USA retail, `ninja progress`)
 
-Everything below rebuilds byte-identical; all five retail images pass (USA, Europe, Europe/Australia, Korea, Japan).
+Everything below rebuilds byte-identical. Routine work checks USA only; the last all-versions check (`tools/check_versions.py`) passed for all five retail images (USA, Europe, Europe/Australia, Korea, Japan). Run it before releases and after changes to shared build tools. The same numbers feed the badges and the table in the README (`ninja badges`, `progress/`).
 
 | Library (`src/`) | Functions | From source | Bytes (`.text` spans) | From source | Complete TUs |
 | --- | ---: | ---: | ---: | ---: | ---: |
