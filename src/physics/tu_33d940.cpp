@@ -53,16 +53,6 @@ struct PointCoreShape {
 extern "C" void func_0033DA88() {}
 extern "C" int func_0033DA90() { return 1; }
 
-// Unmatched: 0033DA98 body is exact; original section is eight tail padding bytes short.
-#ifdef BLACK_NONMATCHING
-int PointCoreShape::GetPointCore(void*, void*, PointCoreFeature* feature) const
-{
-    feature->edgeCount = 0;
-    feature->point = position;
-    return 1;
-}
-
-#endif
 
 extern "C" void func_0033DAB8() { func_0033D940(1, 65535); }
 extern "C" void func_0033DAD8() { func_0033D940(0, 65535); }
@@ -73,4 +63,14 @@ StartupToken D_0040E960 __attribute__((section(".sbss")));
 ConstantQuad D_0045E8E0, D_0045E8F0, D_0045E900, D_0045E910;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: 0033DA98 body is exact; original section is eight tail padding bytes short.
+int PointCoreShape::GetPointCore(void*, void*, PointCoreFeature* feature) const
+{
+    feature->edgeCount = 0;
+    feature->point = position;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033DA98);
+#endif

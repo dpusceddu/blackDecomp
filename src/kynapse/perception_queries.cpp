@@ -79,16 +79,4 @@ void OnSubjectRemoved(Entity* subject, Perception* perception)
     }
 }
 
-#ifdef NONMATCHING
-// Unmatched: the last flag store is scheduled before the call's delay slot.
-Entity* Perception::NearestClearOtherGroup()
-{
-    dirtyCone = false;
-    tracked[4] = 0;
-    pendingLine = true;
-    dirtyGroup = true;
-    FindNearest();
-    return tracked[4];
-}
-#endif
 

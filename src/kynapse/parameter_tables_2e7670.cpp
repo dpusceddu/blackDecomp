@@ -97,74 +97,7 @@ ParameterTables::~ParameterTables()
     if (c18) memoryRelease(c18);
 }
 
-#ifdef NONMATCHING
-// Unmatched: threshold branch and epilogue scheduling, four-byte length difference.
-bool ParameterTables::Consume(int index, SlotUser* user)
-{
-    if (threshold <= kDefaultFloat)
-        return true;
-    int slot = user->GetIndex();
-    if (index < 0 || (unsigned int)index >= countA || (unsigned int)slot >= gSlotOwner->slotCount)
-        return false;
-    BufferSet* set = 0;
-    if (slot != -1)
-        set = &sets[slot];
-    if (fired) {
-        if (set)
-            set->sums[index] += a28[index];
-        return false;
-    }
-    float now = Kaim_QueryFloat();
-    fired = now > threshold;
-    if (!fired) {
-        if (a44[index] < a24[index] && !(a40[index] > a20[index])) {
-            a44[index]++;
-            if (set) {
-                set->sums[index] = 0;
-                set->values[index] = now;
-            }
-            return true;
-        }
-    }
-    if (set)
-        set->sums[index] += a28[index];
-    return false;
-}
 
-#endif
-
-#ifdef NONMATCHING
-// Unmatched: polymorphic iterator cleanup and register lifetimes.
-bool ParameterTables::ConsumeList(int index, IndexUser* user)
-{
-    if (threshold <= 0) return true;
-    if (index < 0 || (unsigned int)index >= countA) return false;
-    if (fired) {
-        for (SlotCursor cursor(user->slots);cursor.current;cursor.current=cursor.current->next) {
-            int slot=cursor.current->user->GetIndex();
-            if (slot!=-1) sets[slot].sums[index]+=a28[index];
-        }
-        return false;
-    }
-    float now=Kaim_QueryFloat();
-    fired=now>threshold;
-    if (!fired && a44[index]<a24[index] && a40[index]<=a20[index]) {
-        ++a44[index];
-        for (SlotCursor cursor(user->slots);cursor.current;cursor.current=cursor.current->next) {
-            int slot=cursor.current->user->GetIndex();
-            if (slot!=-1) { sets[slot].sums[index]=0;sets[slot].values[index]=now; }
-        }
-        indexTables[user->GetIndex()].indices[index]=*(unsigned int*)&now;
-        return true;
-    }
-    for (SlotCursor cursor(user->slots);cursor.current;cursor.current=cursor.current->next) {
-        int slot=cursor.current->user->GetIndex();
-        if (slot!=-1) sets[slot].sums[index]+=a28[index];
-    }
-    return false;
-}
-
-#endif
 
 ParameterTables::ParameterTables()
 {

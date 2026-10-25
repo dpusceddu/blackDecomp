@@ -46,7 +46,8 @@ int AnimationCollection_CountTransitions(AnimationCollectionIndices *collection)
     return collection->transitions->count;
 }
 
-#ifdef NONMATCHING
+
+#ifdef NON_MATCHING
 static inline AnimationAllocationTag *CloneTags(const AnimationAllocationTag *source, AnimationContainerAllocator *allocator) {
     if (!source->first && !source->next)return 0;
     int count = 0;
@@ -110,16 +111,32 @@ inline void *operator new(unsigned int size, AnimationContainerAllocator *alloca
 inline void operator delete(void *block, AnimationContainerAllocator *allocator) {
     allocator->Free(block, 0);
 }
+void __attribute__((section(".text.func_00342A80"))) AnimationCollection_CreateIndices(AnimationCollectionIndices *collection, AnimationContainerAllocator *allocator) __asm__("func_00342A80");
+void __attribute__((section(".text.func_00342D48"))) AnimationCollection_DestroyIndices(AnimationCollectionIndices *collection, AnimationContainerAllocator *allocator) __asm__("func_00342D48");
+void __attribute__((section(".text.func_00342ED8"))) AnimationCollection_AddNamedGraph(AnimationCollectionIndices *collection, const char *name, void *graph) __asm__("func_00342ED8");
+void __attribute__((section(".text.func_00342FA8"))) AnimationCollection_AddClipValue(AnimationCollectionIndices *collection, int hash, void *clip) __asm__("func_00342FA8");
+void __attribute__((section(".text.func_00343030"))) AnimationCollection_AddTransitionRow(AnimationCollectionIndices *collection, void *transition) __asm__("func_00343030");
+void __attribute__((section(".text.func_00343148"))) AnimationCollection_RemoveTransitionRow(AnimationCollectionIndices *collection, int index) __asm__("func_00343148");
+void __attribute__((section(".text.func_00343278"))) *AnimationCollection_FindName(AnimationCollectionIndices *collection, int hash) __asm__("func_00343278");
+void __attribute__((section(".text.func_003432E8"))) *AnimationCollection_FindGraphValue(AnimationCollectionIndices *collection, int hash) __asm__("func_003432E8");
+void __attribute__((section(".text.func_00343358"))) *AnimationCollection_FindClipValue(AnimationCollectionIndices *collection, int hash) __asm__("func_00343358");
+void __attribute__((section(".text.func_003433C8"))) *AnimationCollection_TransitionAt(AnimationCollectionIndices *collection, int index) __asm__("func_003433C8");
+int __attribute__((section(".text.func_00343470"))) AnimationCollection_HasGraph(AnimationCollectionIndices *collection, int hash) __asm__("func_00343470");
+void __attribute__((section(".text.func_00343518"))) AnimationCollection_VisitNames(AnimationCollectionIndices *collection, int (*visitor)(int, void *, void *), void *context) __asm__("func_00343518");
+void __attribute__((section(".text.func_00343658"))) AnimationCollection_VisitGraphs(AnimationCollectionIndices *collection, int (*visitor)(int, void *, void *), void *context) __asm__("func_00343658");
+void __attribute__((section(".text.func_00343798"))) AnimationCollection_VisitClips(AnimationCollectionIndices *collection, int (*visitor)(int, void *, void *), void *context) __asm__("func_00343798");
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
-void AnimationCollection_CreateIndices(AnimationCollectionIndices *collection, AnimationContainerAllocator *allocator) __asm__("func_00342A80");
 void AnimationCollection_CreateIndices(AnimationCollectionIndices *collection, AnimationContainerAllocator *allocator) {
     collection->graphs = new(allocator)AnimationGraphIndex(allocator, &AnimationAllocationTag());
     collection->graphNames = new(allocator)AnimationNameIndex(allocator, &AnimationAllocationTag());
     collection->clips = new(allocator)AnimationClipIndex(allocator, &AnimationAllocationTag());
     collection->transitions=(AnimationTransitionList *)new(allocator)AnimationTransitionContainer(allocator, &AnimationAllocationTag());
 }
-// Unmatched: allocator virtual-call scheduling and list/tag teardown allocation.
-void AnimationCollection_DestroyIndices(AnimationCollectionIndices *collection, AnimationContainerAllocator *allocator) __asm__("func_00342D48");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342A80);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void AnimationCollection_DestroyIndices(AnimationCollectionIndices *collection, AnimationContainerAllocator *allocator) {
     AnimationIndex_DestroyGraph(collection->graphs, 2);
     AnimationIndex_DestroyName(collection->graphNames, 2);
@@ -146,8 +163,11 @@ void AnimationCollection_DestroyIndices(AnimationCollectionIndices *collection, 
     allocator->Free(collection->transitions, 0);
     collection->transitions = 0;
 }
-// Unmatched: inlined iterator temporaries and callback argument allocation.
-void AnimationCollection_AddNamedGraph(AnimationCollectionIndices *collection, const char *name, void *graph) __asm__("func_00342ED8");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342D48);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void AnimationCollection_AddNamedGraph(AnimationCollectionIndices *collection, const char *name, void *graph) {
     int hash = AnimationCollection_Hash(name);
     AnimationIndexIterator found = collection->graphs->Find(&hash);
@@ -156,15 +176,21 @@ void AnimationCollection_AddNamedGraph(AnimationCollectionIndices *collection, c
         AnimationIndex_InsertGraph(collection->graphs, &hash, &graph);
     }
 }
-// Unmatched: inlined iterator temporaries and callback argument allocation.
-void AnimationCollection_AddClipValue(AnimationCollectionIndices *collection, int hash, void *clip) __asm__("func_00342FA8");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342ED8);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void AnimationCollection_AddClipValue(AnimationCollectionIndices *collection, int hash, void *clip) {
     AnimationIndex *index = collection->clips;
     AnimationIndexIterator found = index->Find(&hash);
     if (!(found != index->End())) AnimationIndex_InsertClip(index, &hash, &clip);
 }
-// Unmatched: virtual allocation and list append scheduling.
-void AnimationCollection_AddTransitionRow(AnimationCollectionIndices *collection, void *transition) __asm__("func_00343030");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342FA8);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void AnimationCollection_AddTransitionRow(AnimationCollectionIndices *collection, void *transition) {
     AnimationTransitionList *list = collection->transitions;
     AnimationTransitionNode *node=(AnimationTransitionNode *)list->allocator->Allocate(12, list->tags ? list->tags : &AnimationContainer_DefaultTag);
@@ -184,8 +210,11 @@ void AnimationCollection_AddTransitionRow(AnimationCollectionIndices *collection
     }
     ++list->count;
 }
-// Unmatched: inlined list iterator and erase register allocation.
-void AnimationCollection_RemoveTransitionRow(AnimationCollectionIndices *collection, int index) __asm__("func_00343148");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343030);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void AnimationCollection_RemoveTransitionRow(AnimationCollectionIndices *collection, int index) {
     void *value = AnimationCollection_GetTransition(collection, index);
     AnimationTransitionList *list = collection->transitions;
@@ -220,26 +249,38 @@ void AnimationCollection_RemoveTransitionRow(AnimationCollectionIndices *collect
         else ++current;
     }
 }
-// Unmatched: inlined AVL search iterator temporary layout.
-void *AnimationCollection_FindName(AnimationCollectionIndices *collection, int hash) __asm__("func_00343278");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343148);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void *AnimationCollection_FindName(AnimationCollectionIndices *collection, int hash) {
     AnimationIndexIterator found = collection->graphNames->Find(&hash);
     return found != collection->graphNames->End() ? found.node->value : 0;
 }
-// Unmatched: inlined AVL search iterator temporary layout.
-void *AnimationCollection_FindGraphValue(AnimationCollectionIndices *collection, int hash) __asm__("func_003432E8");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343278);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void *AnimationCollection_FindGraphValue(AnimationCollectionIndices *collection, int hash) {
     AnimationIndexIterator found = collection->graphs->Find(&hash);
     return found != collection->graphs->End() ? found.node->value : 0;
 }
-// Unmatched: inlined AVL search iterator temporary layout.
-void *AnimationCollection_FindClipValue(AnimationCollectionIndices *collection, int hash) __asm__("func_00343358");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003432E8);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void *AnimationCollection_FindClipValue(AnimationCollectionIndices *collection, int hash) {
     AnimationIndexIterator found = collection->clips->Find(&hash);
     return found != collection->clips->End() ? found.node->value : 0;
 }
-// Unmatched: inlined list iterator temporary layout and loop scheduling.
-void *AnimationCollection_TransitionAt(AnimationCollectionIndices *collection, int index) __asm__("func_003433C8");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343358);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void *AnimationCollection_TransitionAt(AnimationCollectionIndices *collection, int index) {
     if (index < 0 || index >= AnimationCollection_CountTransitions(collection)) return 0;
     AnimationTransitionIterator current(collection->transitions->head);
@@ -250,13 +291,19 @@ void *AnimationCollection_TransitionAt(AnimationCollectionIndices *collection, i
     }
     return current.node->value;
 }
-// Unmatched: inlined iterator copies and stack stores.
-int AnimationCollection_HasGraph(AnimationCollectionIndices *collection, int hash) __asm__("func_00343470");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003433C8);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 int AnimationCollection_HasGraph(AnimationCollectionIndices *collection, int hash) {
     return collection->graphs->Find(&hash) != collection->graphs->End();
 }
-// Unmatched: inlined AVL iterator traversal and callback scheduling.
-void AnimationCollection_VisitNames(AnimationCollectionIndices *collection, int (*visitor)(int, void *, void *), void *context) __asm__("func_00343518");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343470);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void AnimationCollection_VisitNames(AnimationCollectionIndices *collection, int (*visitor)(int, void *, void *), void *context) {
     AnimationIndexIterator current = collection->graphNames->Begin();
     AnimationIndexIterator end = collection->graphNames->End();
@@ -265,8 +312,11 @@ void AnimationCollection_VisitNames(AnimationCollectionIndices *collection, int 
         ++current;
     }
 }
-// Unmatched: inlined AVL iterator traversal and callback scheduling.
-void AnimationCollection_VisitGraphs(AnimationCollectionIndices *collection, int (*visitor)(int, void *, void *), void *context) __asm__("func_00343658");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343518);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void AnimationCollection_VisitGraphs(AnimationCollectionIndices *collection, int (*visitor)(int, void *, void *), void *context) {
     AnimationIndexIterator current = collection->graphs->Begin();
     AnimationIndexIterator end = collection->graphs->End();
@@ -275,8 +325,11 @@ void AnimationCollection_VisitGraphs(AnimationCollectionIndices *collection, int
         ++current;
     }
 }
-// Unmatched: inlined AVL iterator traversal and callback scheduling.
-void AnimationCollection_VisitClips(AnimationCollectionIndices *collection, int (*visitor)(int, void *, void *), void *context) __asm__("func_00343798");
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343658);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
 void AnimationCollection_VisitClips(AnimationCollectionIndices *collection, int (*visitor)(int, void *, void *), void *context) {
     AnimationIndexIterator current = collection->clips->Begin();
     AnimationIndexIterator end = collection->clips->End();
@@ -285,19 +338,6 @@ void AnimationCollection_VisitClips(AnimationCollectionIndices *collection, int 
         ++current;
     }
 }
-#endif
-
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342A80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342D48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342ED8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342FA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343030);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343148);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343278);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003432E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343358);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003433C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343470);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343518);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343658);
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343798);
+#endif

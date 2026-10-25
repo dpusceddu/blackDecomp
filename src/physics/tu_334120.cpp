@@ -62,43 +62,6 @@ extern Matrix* D_0040E438[];
 extern Descriptor D_003D1368, D_003D1468, D_003D1430, D_003D14A0, D_003D13A0;
 }
 
-#ifdef BLACK_NONMATCHING
-// Shape initialization with PS2 offsets and 128-bit identity transport.
-static inline Shape* InitializeShape(Holder* holder, unsigned int type)
-{
-    Shape* shape = holder->shape;
-    if (shape) {
-        shape->type = static_cast<ShapeType*>(D_0048F6F0[type]);
-        shape->unknown5c = 1;
-        const Matrix* identity = D_0040E438[0];
-        shape->radius = 0.0f;
-        shape->unknown50 = 0;
-        shape->unknown54 = 0;
-        shape->frame.right = identity->right;
-        shape->frame.up = identity->up;
-        shape->frame.at = identity->at;
-        shape->frame.position = identity->position;
-    }
-    return shape;
-}
-
-extern "C" Shape* func_00334268(Holder* holder,unsigned int type){return InitializeShape(holder,type);}
-
-static inline Shape*& ShapeAddress(Shape*& p){return p;}
-extern "C" Shape* func_003342D0(Shape* storage, unsigned int type)
-{
-    Shape* input = static_cast<Shape*>(static_cast<void*>(storage));
-    Shape* shape = ShapeAddress(input);
-    Holder holder;
-    holder.shape = shape;
-    Shape* result = InitializeShape(&holder, type);
-    return result;
-}
-
-#else
-// Unmatched: 00334268 four scheduling differences around flag/table stores and identity-pointer lifetime.
-// Unmatched: 003342D0 four scheduling differences remain; reference view restores the original pointer lifetimes.
-#endif
 
 extern "C" int func_00334340()
 {

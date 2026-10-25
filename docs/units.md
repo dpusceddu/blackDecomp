@@ -118,6 +118,10 @@ emitted function must be a function of the file or listed in `unlinked_context_h
 originals); all other allocated inputs are discarded and their globals resolve to the original assembly. Kept functions
 still require exact sizes, natural section tails, real callee bindings and the identical image.
 
+The unfinished bodies sit in `#ifdef FULL_TU_CONTEXT` blocks, and the split entry of such a unit passes `-DFULL_TU_CONTEXT` to
+the compiler. That is the only conditional besides `NON_MATCHING` that may surround function bodies in `src/`;
+`tests/tools/test_no_dead_code.py` rejects any other draft guard and any guard macro that nothing defines.
+
 ## Explicit source data
 
 A file can take over storage with exact half-open ranges:

@@ -2,6 +2,9 @@
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
 #ifdef NON_MATCHING
+#include "rw_audio/emitter.h"
+#endif
+#ifdef NON_MATCHING
 #include "rw_audio/request.h"
 #endif
 
@@ -82,15 +85,113 @@ s32 func_003183C0(s32 arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003183F8);
+#ifdef NON_MATCHING
+typedef struct AudioLengthVector {f32 x,y,z;} AudioLengthVector;
+typedef union AudioLengthWord {f32 number;u32 word;u16 halves[2];} AudioLengthWord;
+extern s16 D_003CED80[];
+// Unmatched: fifteen initial FP allocation/scheduling and parity-join alignment differences.
+void func_00318550(AudioLengthWord *result, const AudioLengthVector *input) {
+    result->number = (input->x * input->x + input->y * input->y) + input->z * input->z;
+    if (result->number != 0.0f) {
+        u32 bits = result->word;
+        s16 exponent = (bits >> 23) - 127;
+        result->word = bits & 0x7fffff;
+        if (exponent & 1) {
+            result->word |= 0x800000;
+        }
+        result->word = (D_003CED80[result->halves[1]] << 16) |
+                       (((exponent >> 1) + 127) << 23);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318550);
+#endif
+#ifdef NON_MATCHING
+typedef struct AudioArenaLink {struct AudioArenaLink *next,*previous;} AudioArenaLink;
+typedef struct AudioArenaChunk {struct AudioArenaChunk *next,*previous;u32 bytes;} AudioArenaChunk;
+typedef struct AudioArenaBlock {AudioArenaLink link;AudioArenaChunk *first;u8 *end;} AudioArenaBlock;
+typedef struct AudioArena {u32 flags,block_bytes,alignment;AudioArenaLink blocks,registry;} AudioArena;
+extern void func_00318B08(AudioArenaBlock*,void*);
+extern AudioArenaBlock *func_00318B60(u32);
+static inline void ArenaRemoveLink(AudioArenaLink *node) {
+    node->previous->next=node->next;
+    node->next->previous=node->previous;
+}
+static inline void ArenaInsertAfter(AudioArenaLink *head,AudioArenaLink *node) {
+    AudioArenaLink *next=head->next;
+    node->previous=head;
+    *(void **)node=next;
+    head->next->previous=node;
+    head->next=node;
+}
+static inline AudioArenaBlock *ArenaNewBlock(AudioArena *arena) {
+    AudioArenaBlock *block=func_00318B60(arena->block_bytes);
+    if(block==NULL)return NULL;
+    ArenaInsertAfter(&arena->blocks,&block->link);
+    return block;
+}
+static inline AudioArenaLink *ArenaHead(AudioArena *arena){return &arena->blocks;}
+// Unmatched: five entry/head-copy instructions differ; all remaining release instructions match.
+void func_00318950(AudioArena *arena,void *allocation) {
+    AudioArenaLink *head=&arena->blocks;
+    AudioArenaBlock *block=(AudioArenaBlock*)arena->blocks.next;
+    while(&block->link!=ArenaHead(arena)) {
+        if((u32)block<(u32)allocation && (u32)allocation<(u32)block+arena->block_bytes) {
+            func_00318B08(block,allocation);
+            if(func_00318A28(block)) {
+                ArenaRemoveLink(&block->link);
+                {AudioArenaLink *next=arena->blocks.next;if(next==head){block->link.next=next;block->link.previous=next;arena->blocks.next->previous=&block->link;arena->blocks.next=&block->link;}else func_00318BC0(block);}
+
+            }
+            break;
+        }
+        block=(AudioArenaBlock*)block->link.next;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318950);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318A20);
 
 s32 func_00318A28(void *arg0) {
     return *M2C_FIELD(arg0, s32 **, 8) == M2C_FIELD(arg0, s32 *, 0xC);
 }
 
+#ifdef NON_MATCHING
+static inline u8 *ArenaRound(u8 *address,u32 alignment){return (u8*)(((u32)(address+alignment-1))&-alignment);}
+// Unmatched: 22 chunk arithmetic/lifetime differences with -fno-expensive-optimizations; 32 with the primary recipe.
+void *func_00318A40(AudioArenaBlock *block,u32 bytes,u32 alignment) {
+    AudioArenaChunk *chunk=block->first;
+    u32 required=bytes+sizeof(AudioArenaChunk);
+    u32 inverseAlignment=-alignment;
+    void *result=NULL;
+    AudioArenaChunk *selected=NULL;
+    do {
+        AudioArenaChunk *next=chunk->next;
+        u32 used=chunk->bytes;
+        if((u32)next-(u32)chunk-sizeof(AudioArenaChunk)-used>=required) {
+            selected=(AudioArenaChunk *)((u8 *)(chunk+1)+used);
+            selected=(AudioArenaChunk *)(ArenaRound((u8*)(selected+1),alignment)-sizeof(AudioArenaChunk));
+            if((u32)next<(u32)selected+required)selected=NULL;
+            else if((u32)selected<(u32)chunk+used+sizeof(AudioArenaChunk))selected=NULL;
+            else break;
+        }
+        chunk=next;
+    } while(chunk!=(AudioArenaChunk *)block->end);
+    if(selected!=NULL) {
+        AudioArenaChunk *next=chunk->next;
+        selected->previous=chunk;
+        selected->next=next;
+        if(next!=(AudioArenaChunk *)block->end)next->previous=selected;
+        if(selected->previous!=(AudioArenaChunk *)block->end)selected->previous->next=selected;
+        selected->bytes=bytes;
+        result=selected+1;
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318A40);
+#endif
 
 void func_00318BC0(void) {
     func_00312C70();
@@ -315,5 +416,35 @@ s32 func_0031A400(s32 arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
+#ifdef NON_MATCHING
+/* Accessed playback prefix; this view does not establish its allocation size. */
+typedef struct RwaPlaybackAccess {u8 prefix[0x28];RwaEmitter emitter;} RwaPlaybackAccess;
+typedef char PlaybackEmitterAt28[((int)&((RwaPlaybackAccess*)0)->emitter==0x28)?1:-1];
+// Unmatched: ten FP allocation/scheduling and branch-join alignment differences; no recorded states.
+RwaPlaybackAccess *func_0031A410(RwaPlaybackAccess *playback,u32 selector,const f32 *value) {
+    playback->emitter.gain=(u8)(*value*255.0f);
+    if(playback->emitter.handle!=NULL)
+        func_003106F0(playback->emitter.handle,7,1,*value);
+    return playback;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031A410);
+#endif
+#ifdef NON_MATCHING
+extern s32 D_0040E1C4;
+static inline void PausePlayback(RwaPlaybackAccess *playback,s32 pause) {
+    if(pause) {
+        func_00317340(&playback->emitter,0);
+        playback->emitter.last_tick=D_0040E1C4;
+    } else {
+        func_00317340(&playback->emitter,1);
+    }
+}
+// Unmatched: two restore-order differences with -fno-schedule-insns2; three prologue-load differences otherwise.
+RwaPlaybackAccess *func_0031A498(RwaPlaybackAccess *playback,u32 selector,const s32 *value) {
+    PausePlayback(playback,*value);
+    return playback;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031A498);
+#endif
