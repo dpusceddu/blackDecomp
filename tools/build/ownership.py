@@ -2,7 +2,7 @@
 """Which source file owns a function, and where in the file it is: the answer of `python3 tools/where.py`.
 
 Every function belongs to exactly one entry of config/SLUS_213.76/splits.yaml (tools/build/splits.py, `check_ownership`), so the
-owner is the entry whose range contains the address (or lists it in `functions`). Inside the file a function is one of
+owner is the entry whose range contains the address. Inside the file a function is one of
   assembly   an INCLUDE_ASM marker names it,
   draft      the marker is the `#else` branch of an `#ifdef NON_MATCHING` block that holds a readable version,
   source     no marker: the file defines it (found by its symbol, `func_XXXXXXXX` or the C++ spelling of a mangled name).
@@ -22,10 +22,7 @@ import splits as S
 def owner_entry(addr, splits):
     """The split that owns the function at `addr`, or None when no entry claims it."""
     for s in splits:
-        if s.functions is not None and addr in s.functions:
-            return s
-    for s in splits:
-        if s.functions is None and s.start <= addr < s.end:
+        if s.start <= addr < s.end:
             return s
     return None
 

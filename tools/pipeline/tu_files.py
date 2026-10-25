@@ -71,7 +71,7 @@ def release_function(addr, slug=S.DEFAULT_SLUG):
     split_file = S.config_dir(slug) / 'splits.yaml'
     head, entries, tail = S.split_entries(split_file.read_text())
     ends = dict(U.function_table(slug))
-    owner = next((e for e in entries if 'functions' not in e and S.num(e['range'][0]) <= addr < S.num(e['range'][1])), None)
+    owner = next((e for e in entries if S.num(e['range'][0]) <= addr < S.num(e['range'][1])), None)
     if owner is None:
         raise KeyError('no file owns func_%08X' % addr)
     src = owner['src']
@@ -116,7 +116,7 @@ def find_split(addr, compiler, flags, slug=S.DEFAULT_SLUG):
     """(split, text) of a C file whose range holds the function, whose recipe agrees and which lists it as INCLUDE_ASM."""
     name = 'func_%08X' % addr
     for s in S.load_splits(slug):
-        if s.start <= addr < s.end and s.functions is None and s.src.endswith('.c') and same_recipe(s, compiler, flags):
+        if s.start <= addr < s.end and s.src.endswith('.c') and same_recipe(s, compiler, flags):
             path = ROOT / s.src
             if path.exists() and any(m.name == name for m in include_asm.markers(path.read_text(), s.defines())):
                 return s, path.read_text()

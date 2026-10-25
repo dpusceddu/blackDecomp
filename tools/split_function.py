@@ -44,8 +44,6 @@ def split_function(addr, cpp=False, flags=None, compiler=None, dry_run=False):
     name = 'func_%08X' % addr
     if split is None:
         raise SystemExit('%s: no file owns it (is it a function start of the image?)' % name)
-    if split.functions is not None:
-        raise SystemExit('%s: %s is compiled once per entry with -D selectors; edit its entries by hand' % (name, split.src))
     if kind != 'assembly':
         raise SystemExit('%s: only plain INCLUDE_ASM functions can be moved, this one is %s in %s:%s' % (
             name, {'draft': 'a draft', 'source': 'recovered'}.get(kind, 'not found'), split.src, line))

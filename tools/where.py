@@ -39,7 +39,7 @@ def describe(addr, splits, symbols):
         where = path.relative_to(S.ROOT).as_posix()
     except ValueError:
         where = str(path)
-    rng = '0x%x-0x%x' % (split.start, split.end) if split.functions is None else 'functions %s' % ', '.join('0x%x' % a for a in split.functions[:4])
+    rng = '0x%x-0x%x' % (split.start, split.end)
     out = ['%s: %s%s' % (head, where, ':%d' % line if line else '')]
     out.append('  %s' % MEANING.get(kind, 'the file lists no marker and no definition by name; if it has no INCLUDE_ASM line it is recovered'))
     out.append('  entry %s, compiler %s %s' % (rng, split.compiler, ' '.join(split.flags)))

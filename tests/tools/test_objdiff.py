@@ -73,8 +73,8 @@ SPLIT_LIST = '''variant: SLUS_213.76
 defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas], sections: true}
 splits:
   - {src: src/game/merged.cpp, range: [0x100000, 0x100080]}
-  - {src: src/game/selectors.c, range: [0x100080, 0x100090], flags: [-O2, -G0, -snas, -DFIRST_ONLY], sections: false, functions: [0x100080]}
-  - {src: src/game/selectors.c, range: [0x100090, 0x1000a0], flags: [-O2, -G0, -snas, -DSECOND_ONLY], sections: false, functions: [0x100090]}
+  - {src: src/game/first.c, range: [0x100080, 0x100090], flags: [-O2, -G0, -snas, -fno-schedule-insns], sections: false}
+  - {src: src/game/second.c, range: [0x100090, 0x1000a0], flags: [-O2, -G1, -snas], sections: false}
 '''
 MERGED = '''#include "include_asm.h"
 void recovered_a(void) {}
@@ -101,7 +101,7 @@ class FakeElf:
 
 class UnitMapping(unittest.TestCase):
     """The mapping of source units onto objdiff units, for a split list with an INCLUDE_ASM translation unit, a file compiled
-    twice with -D selectors, a mangled symbol that the base object refers to by its address name, and padding."""
+    two small files with their own flags, a mangled symbol that the base object refers to by its address name, and padding."""
 
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory()
@@ -118,11 +118,11 @@ class UnitMapping(unittest.TestCase):
                            ('second', dict(sections=['.text'], symbols=[dict(name='func_00100090')]))):
             (build / 'cache' / (name + '.o')).write_text(json.dumps(spec))
         (build / 'objects.json').write_text(json.dumps([dict(name='units/merged', kind='cc'),
-                                                         dict(name='units/selectors_100080', kind='cc'),
-                                                         dict(name='units/selectors_100090', kind='cc')]))
+                                                         dict(name='units/first', kind='cc'),
+                                                         dict(name='units/second', kind='cc')]))
         (build / 'objects_cache.json').write_text(json.dumps({'units/merged': 'cache/merged.o',
-                                                              'units/selectors_100080': 'cache/first.o',
-                                                              'units/selectors_100090': 'cache/second.o'}))
+                                                              'units/first': 'cache/first.o',
+                                                              'units/second': 'cache/second.o'}))
         (build / 'plan.json').write_text(json.dumps(dict(rename=[
             dict(obj='obj/units/merged.o', sections={'.rodata': '.rodata.00400010', '.text.func_00100000': '.text.00100000'})])))
         (build / 'symbols.ld').write_text('D_10F00 = 0x10F00;\nD_49BFBC = __end_bss;\n')
@@ -136,7 +136,7 @@ class UnitMapping(unittest.TestCase):
         first.write_text(text.replace('00000000 */  nop', '24420000 */  addiu $2, $2, %lo(D_10F00)', 1))
         split_file = self.root / 'splits.yaml'
         split_file.write_text(SPLIT_LIST)
-        texts = {'src/game/merged.cpp': MERGED, 'src/game/selectors.c': '// selectors\n'}
+        texts = {'src/game/merged.cpp': MERGED, 'src/game/first.c': '// first\n', 'src/game/second.c': '// second\n'}
         self.units = U.derive_units(S.load_splits(path=split_file), TABLE, S.Symbols(S.parse_symbols(SYMBOLS)),
                                     read=lambda path: texts[path])
         for target in (patch.object(objdiff, 'ROOT', self.root), patch.object(objdiff, 'Elf', FakeElf),
@@ -146,14 +146,14 @@ class UnitMapping(unittest.TestCase):
 
     def test_the_fixture_units_are_what_the_test_assumes(self):
         names = [u['name'] for u in self.units]
-        self.assertEqual(['merged', 'selectors_100080', 'selectors_100090'], names)
+        self.assertEqual(['merged', 'first', 'second'], names)
         merged = self.units[0]
         self.assertEqual(['source', 'asm', 'source', 'asm'], [f['status'] for f in merged['functions']])
 
     def test_every_source_function_is_in_a_base_unit_and_asm_functions_are_not(self):
         plan = objdiff.unit_plan('SLUS_213.76')
         by_unit = {u['name']: u for u in plan}
-        self.assertEqual(['merged', 'selectors_100080', 'selectors_100090'], sorted(by_unit))
+        self.assertEqual(['first', 'merged', 'second'], sorted(by_unit))
         in_base = {f['addr'] for u in plan for f in u['functions']}
         expected = {f['addr'] for u in self.units for f in u['functions'] if f['status'] == 'source'}
         self.assertEqual(expected, in_base)

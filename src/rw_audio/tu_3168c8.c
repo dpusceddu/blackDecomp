@@ -2,7 +2,6 @@
 typedef struct AudioListHead{void *next,*previous;}AudioListHead;
 
 #include "ps2/prototypes.h"
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 /* Active/idle emitter heads, channel table and listener-list head. */
 void *D_0040E780 __attribute__((section(".sbss")));
 void *D_0040E784 __attribute__((section(".sbss")));
@@ -15,16 +14,9 @@ void *D_0040E7A4 __attribute__((section(".sbss")));
 void *D_0040E7A8 __attribute__((section(".sbss")));
 void *D_0040E7AC __attribute__((section(".sbss")));
 AudioListHead D_0040E7B0 __attribute__((section(".sbss")));
-#endif
 
-typedef struct AudioIoCache {u8 buffer[8192];void*owner;s32 file;u32 position,bytes;}AudioIoCache;
-#ifdef RWA_CACHE_CONTROL_ONLY
-/* DMA fallback buffer followed by its observed four-word cache state. */
-AudioIoCache D_00456480 __attribute__((section(".bss")));
-#else
+#include "rw_audio/io_cache.h"
 extern AudioIoCache D_00456480;
-#endif
-
 
 extern s32 *D_0040E1B0;
 extern RwaEmitter *D_0040E788;
@@ -40,7 +32,6 @@ extern void *func_00310870(void *, s32, s32, void *);
 extern s32 func_003106F0(void *, s32, s32, f32);
 extern s32 func_00310640(void *, s32, s32, s32);
 extern s32 func_00310590(void *, s32, s32, void *);
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 s32 func_003168C8(void)
 {
     RwaEmitter *next;
@@ -160,7 +151,6 @@ s32 func_003168C8(void)
     }
     return result;
 }
-#endif
 
 extern s32 func_00310768(void *, s32, s32, void *);
 extern void * D_0040E780;
@@ -168,7 +158,6 @@ extern s32 D_0040E1BC;
 extern void func_00317030(RwaEmitter *);
 extern u8 D_0040A0F0[];
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 void func_00316E90(RwaEmitter *input) {
     u8 channels;
     void *handle;
@@ -214,9 +203,7 @@ void func_00316E90(RwaEmitter *input) {
     D_0040E1BC += 1;
     return;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 extern s32 func_003178F0(void *, void *, void *, void *, s32, s32);
 extern void *D_0040E1B4;
 inline static void RwaUnlink(RwaEmitter *input)
@@ -353,9 +340,7 @@ void func_00317030(RwaEmitter *input)
   input->flags = flags;
   return;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 extern RwaEmitter *D_0040E78C;
 extern void *D_0040E784;
 extern s32 D_0040E1A8;
@@ -368,98 +353,7 @@ s32 func_00317490(void) {
     func_00319CE8();
     return 1;
 }
-#endif
 
-#ifdef RWA_CONTROL_ONLY
-extern void func_00316E90(RwaEmitter *);
-void func_00317340(RwaEmitter *input, u32 operation) {
-    s32 active;
-    u8 flags;
-    void *handle;
-
-    switch (operation) {
-    case 1:
-        active = input->flags & 1;
-        if (active != 0) {
-            input->previous->next = input->next;
-            input->next->previous=input->previous;
-            handle = input->handle;
-            if (handle != NULL) {
-                if (func_00310768(handle, 8, 2, NULL) != 0) {
-                    func_003105E8(handle, 8, 1, 0);
-                }
-                func_00310698(handle, 0xB, 1, NULL);
-                func_00310698(handle, 0xE, 1, NULL);
-                input->handle = NULL;
-            }
-            input->previous = (RwaEmitter *)&D_0040E780;
-            M2C_FIELD(input,void **,0)=D_0040E780;
-            M2C_FIELD(D_0040E780, void **, 4) = input;
-            D_0040E780 = input;
-            D_0040E1BC -= 1;
-            D_0040E1C0 -= input->channels;
-            /* Preserve the reset scope and its matching loop-label setting. */
-            do {
-                input->channels = 0;
-                flags = input->flags & 0xFC;
-                input->level = 0;
-                input->position_bytes = input->start_bytes;
-            } while (0);
-            input->flags = flags;
-            return;
-        }
-        return;
-    case 0:
-        func_00316E90(input); return;
-    case 2:
-        active = input->flags & 1;
-        if (active != 0) {
-            func_00317030(input);
-        }
-        return;
-    default:
-        return;
-    }
-}
-void func_003175C8(RwaEmitter *input) {
-    s32 active;
-    u8 flags;
-    void *handle;
-
-    active = input->flags & 1;
-    if (active != 0) {
-        input->previous->next = input->next;
-        input->next->previous=input->previous;
-        handle = input->handle;
-        if (handle != NULL) {
-            if (func_00310768(handle, 8, 2, NULL) != 0) {
-                func_003105E8(handle, 8, 1, 0);
-            }
-            func_00310698(handle, 0xB, 1, NULL);
-            func_00310698(handle, 0xE, 1, NULL);
-            input->handle = NULL;
-        }
-        input->previous = (RwaEmitter *)&D_0040E780;
-        M2C_FIELD(input,void **,0)=D_0040E780;
-        M2C_FIELD(D_0040E780, void **, 4) = input;
-        D_0040E780 = input;
-        D_0040E1BC -= 1;
-        D_0040E1C0 -= input->channels;
-        /* Preserve the reset scope and its matching loop-label setting. */
-        do {
-            input->channels = 0;
-            flags = input->flags & 0xFC;
-            input->level = 0;
-            input->position_bytes = input->start_bytes;
-        } while (0);
-        input->flags = flags;
-        return;
-    }
-    return;
-}
-#endif
-
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 extern AudioListHead D_0040E798;
 extern RwaListener *D_0040E1D4;
 void func_003178C0(RwaListener *listener) {
@@ -470,9 +364,7 @@ void func_003178C0(RwaListener *listener) {
         entry=*(void **)entry;
     }
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 extern void *func_00312C48(s32, s32);
 extern void *func_0035C6EC(void *, s32, u32);
 
@@ -549,9 +441,7 @@ void *func_00317A78(RwaPool *pool, s32 tag)
     }
     return result;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 typedef struct AudioPoolLink {struct AudioPoolLink *next,*previous;} AudioPoolLink;
 // Accessed full layout; the initializer allocates 0x24 bytes. Names are inferred.
 typedef struct AudioPoolObject {u32 stride,count,bitmap_bytes,alignment;AudioPoolLink blocks;u32 flags;AudioPoolLink registry;} AudioPoolObject;
@@ -604,11 +494,8 @@ static inline void PoolReleaseStorage(AudioPoolObject *pool,s32 unregister) {
 }
 void func_00317FC0(AudioPoolObject *pool) {PoolReleaseStorage(pool,1);}
 void func_00318080(AudioPoolObject *pool) {PoolReleaseStorage(pool,0);}
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 typedef struct AudioValueNode {struct AudioValueNode *next,*previous;void *value;} AudioValueNode;
-
 
 static inline void ValueInsertAfter(AudioValueNode *head,AudioValueNode *node) {
     AudioValueNode *next=head->next;
@@ -641,9 +528,7 @@ AudioValueNode *func_00318188(AudioValueNode *head,void *value) {
     func_003181E8(head,node);
     return head;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 extern void *D_0040E7A0,*D_0040E7A4;
 extern u32 D_0040E1E0;
 extern AudioPoolObject D_004563F8;
@@ -673,9 +558,7 @@ void func_00317DF0(void) {
     D_0040E1E4=NULL;
     D_0040E1E0=0;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 static inline u8 PoolSlotMask(u32 bit) {
     return 0x80 >> bit;
 }
@@ -729,9 +612,7 @@ void func_00317C20(AudioPoolObject *pool, void *allocation) {
         block = block->next;
     }
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 static inline AudioValueNode *ValueNodeAt(AudioValueNode *head, u32 index) {
     u32 i = 0;
     AudioValueNode *node = head->previous;
@@ -751,9 +632,7 @@ void *func_00318288(AudioValueNode *head, u32 index) {
     }
     return NULL;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 typedef struct AudioEndianWriter {u8 *cursor;} AudioEndianWriter;
 typedef struct AudioEndianVector {f32 x,y,z;} AudioEndianVector;
 extern void func_00318600(AudioEndianWriter *, const void *, u32);
@@ -795,9 +674,7 @@ void func_00318600(AudioEndianWriter *writer, const void *source, u32 size) {
     }
     }
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 extern AudioPoolObject D_00456420;
 
 void func_00318340(AudioValueNode *head) {
@@ -820,9 +697,7 @@ void func_00318450(void) {
     func_00317FC0(&D_00456420);
     D_0040E1E8 = 0;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 typedef struct AudioArenaLink {struct AudioArenaLink *next,*previous;} AudioArenaLink;
 typedef struct AudioArenaChunk {struct AudioArenaChunk *next,*previous;u32 bytes;} AudioArenaChunk;
 typedef struct AudioArenaBlock {AudioArenaLink link;AudioArenaChunk *first;u8 *end;} AudioArenaBlock;
@@ -869,9 +744,7 @@ void func_00318CE8(AudioArena *arena) {
         func_00317C20(&D_00456448, arena);
     }
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 extern void func_00318BC0(void *);
 extern AudioArenaBlock *func_00318C90(AudioArena *);
 
@@ -956,9 +829,7 @@ AudioArenaBlock *func_00318C90(AudioArena *arena) {
     ArenaInsertAfter(&arena->blocks, &block->link);
     return block;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 void func_00318B08(AudioArenaBlock *block,void *allocation) {
     AudioArenaChunk *chunk=block->first;
     do {
@@ -970,9 +841,7 @@ void func_00318B08(AudioArenaBlock *block,void *allocation) {
         chunk=chunk->next;
     } while(chunk!=(AudioArenaChunk *)block->end);
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 static inline AudioArenaBlock *ArenaNewBlock(AudioArena *arena) {
     AudioArenaBlock *block=func_00318B60(arena->block_bytes);
     if(block==NULL)return NULL;
@@ -1000,9 +869,7 @@ void *func_00318880(AudioArena *arena, u32 bytes) {
     }
     return result;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 /* Retain the legacy 32-bit carry accumulator and its final high-bit truncation. */
 void func_00318478(u32 left,u32 right,u32 *highResult,u32 *lowResult) {
     u32 low = 0;
@@ -1043,11 +910,7 @@ void func_00318478(u32 left,u32 right,u32 *highResult,u32 *lowResult) {
     *highResult = high;
     *lowResult = low;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
-/* Accessed prefix only; the complete playback allocation remains unaudited. */
-typedef struct AudioPlayback {u8 unknown00[0x28];RwaEmitter emitter;} AudioPlayback;
 typedef char PlaybackEmitterAt28[((int)&((AudioPlayback*)0)->emitter == 0x28)?1:-1];
 extern void func_00317340(RwaEmitter*,u32);
 extern s32 D_0040E1C4;
@@ -1072,9 +935,7 @@ void func_00319E28(AudioPlayback *playback,RwaSound *sound) {
         func_00310698(playback->emitter.handle,11,1,playback->emitter.sound);
     }
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 AudioPlayback *func_0031A108(AudioPlayback *playback,u32 selector,const RwaVec3 *value) {
     *(RwaVec3 *)playback->emitter.position=*value;
     if(playback->emitter.handle!=NULL)func_00310590(playback->emitter.handle,0,1,(void*)value);
@@ -1095,42 +956,7 @@ AudioPlayback *func_0031A288(AudioPlayback *playback,u32 selector,const RwaVec3 
     if(playback->emitter.handle!=NULL)func_00310590(playback->emitter.handle,3,1,(void*)value);
     return playback;
 }
-#endif
 
-#if defined(RWA_VECTOR_GETTERS_ONLY) || defined(RWA_BYTE_SETTERS_ONLY) || defined(RWA_NORMALIZED_GETTERS_ONLY)
-/* Access prefix only; complete playback allocation remains unaudited. */
-typedef struct AudioPlayback {u8 unknown00[0x28];RwaEmitter emitter;} AudioPlayback;
-#endif
-#ifdef RWA_VECTOR_GETTERS_ONLY
-AudioPlayback *func_0031A160(AudioPlayback *playback,u32 selector,RwaVec3 *value) {
-    *value=*(RwaVec3 *)playback->emitter.position;
-    return playback;
-}
-AudioPlayback *func_0031A1E0(AudioPlayback *playback,u32 selector,RwaVec3 *value) {
-    *value=*(RwaVec3 *)playback->emitter.velocity;
-    return playback;
-}
-AudioPlayback *func_0031A260(AudioPlayback *playback,u32 selector,RwaVec3 *value) {
-    *value=*(RwaVec3 *)playback->emitter.local_position;
-    return playback;
-}
-AudioPlayback *func_0031A2E0(AudioPlayback *playback,u32 selector,RwaVec3 *value) {
-    *value=*(RwaVec3 *)playback->emitter.local_velocity;
-    return playback;
-}
-#endif
-#ifdef RWA_BYTE_SETTERS_ONLY
-AudioPlayback *func_0031A068(AudioPlayback *playback,u32 selector,const f32 *value) {
-    playback->emitter.priority=(u8)(*value*255.0f);
-    return playback;
-}
-AudioPlayback *func_0031A0B8(AudioPlayback *playback,u32 selector,const f32 *value) {
-    playback->emitter.blend=(u8)(*value*255.0f);
-    return playback;
-}
-#endif
-
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 extern s32 func_00317300(AudioPlayback*);
 typedef char PlaybackEmitterStorageIs100[sizeof(RwaEmitter)==100?1:-1];
 AudioPlayback *func_00319ED0(AudioPlayback *playback,u32 selector,const u8 *flags) {
@@ -1210,9 +1036,7 @@ RwaIoOwner *func_00319368(RwaIoOwner *owner,RwaIoRequest *request,u32 mode,u32 p
  }
  return owner;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 /* The request scans three-word record headers for its requested identifier. */
 typedef struct RwaIoRecordHeader {u32 id,next_offset,size;} RwaIoRecordHeader;
 typedef char RwaIoRecordHeaderIs12[sizeof(RwaIoRecordHeader)==12?1:-1];
@@ -1229,9 +1053,7 @@ void func_00319578(RwaIoOwner *owner,RwaIoRequest *request,u32 id,
     request->scan_pending=0;
     func_00319828(request,(u32)record,sizeof(*record),func_00319628,request);
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 #include "rw_audio/property.h"
 /* Constructor311BF8 initializes the class prefix, field1c and both list links. */
 typedef struct AudioPropertyRegistry {RwaPropertyClass type;u32 field1c;RwaValueLink link;}AudioPropertyRegistry;
@@ -1381,9 +1203,6 @@ RwaPropertyClass *func_00319A70(void){
  }else result=NULL;
  return result;
 }
-#endif
-
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 
 typedef char AudioIoCacheIs8208[sizeof(AudioIoCache)==8208?1:-1];
 typedef char AudioIoCachePositionAt8200[((int)&((AudioIoCache*)0)->position==8200)?1:-1];
@@ -1393,19 +1212,7 @@ void func_003196A8(void *file,u32 bytes,s32 status,s32 reason,RwaIoRequest *requ
  request->owner->stream=file;
  request->completion(file,bytes,status,reason,request->user);
 }
-#endif
 
-#ifdef RWA_CACHE_CONTROL_ONLY
-void func_00319928(void)
-{
- D_00456480.position=0xffffffffu;
- D_00456480.owner=NULL;
- D_00456480.file=0;
- D_00456480.bytes=0;
-}
-#endif
-
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 /* Accessed queue prefix; semaphore storage remains in the original BSS. */
 extern u8 D_00458490[];
 extern void func_00319928(void);
@@ -1425,9 +1232,7 @@ s32 func_00319268(void)
  func_0031D268(&queue->semaphore,1,1);
  return 1;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 extern void func_003196D8(void*,u32,s32,s32,RwaIoRequest*);
 /* I/O completion preserves the four operation results and replaces only user. */
 void func_00319628(void *file,u32 bytes,s32 status,s32 reason,void *context)
@@ -1445,9 +1250,7 @@ void func_00319628(void *file,u32 bytes,s32 status,s32 reason,void *context)
         break;
     }
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 /* Register the playback class and attach its default property collection. */
 extern void*D_0040E7D0;
 typedef struct AudioPlaybackProperties {
@@ -1508,9 +1311,7 @@ PlaybackClass *func_00319CE8(void)
     }
     return NULL;
 }
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 /* Property identifiers, mutable runtime fields, value descriptors and handlers. */
 extern const AudioPropertyGuid D_004091B0;
 extern const AudioPropertyGuid D_004091C0;
@@ -1715,9 +1516,7 @@ AudioClassPropertyEntry D_003CF9E8[18]={
     {{&D_004095E0,0,0,&D_004091F0,1},(AudioPropertyHandler)func_0031A7D0},
     {{&D_00409600,0,0,&D_00409230,1},(AudioPropertyHandler)func_0031A840},
 };
-#endif
 
-#if !defined(RWA_CONTROL_ONLY) && !defined(RWA_VECTOR_GETTERS_ONLY) && !defined(RWA_BYTE_SETTERS_ONLY) && !defined(RWA_NORMALIZED_GETTERS_ONLY) && !defined(RWA_CACHE_CONTROL_ONLY)
 /* Bit0 retains caller storage; bit1 permits empty-block reuse. */
 static inline void PoolConstructLink(AudioPoolLink *node) {
     node->previous=NULL;
@@ -1772,25 +1571,3 @@ AudioPoolObject *func_00317E40(u32 bytes,u32 count,u32 alignment,s32 reserve,Aud
     D_0040E7A0=&pool->registry;
     return pool;
 }
-#endif
-
-#ifdef RWA_NORMALIZED_GETTERS_ONLY
-/* Narrow scalar property ABI; this compiler choice is scoped to these getters. */
-typedef char PlaybackPointerIs32[sizeof(void*)==4?1:-1];
-typedef char PlaybackFloatIs32[sizeof(f32)==4?1:-1];
-typedef char PlaybackPriorityAt84[((int)&((AudioPlayback*)0)->emitter.priority==0x84)?1:-1];
-typedef char PlaybackBlendAt87[((int)&((AudioPlayback*)0)->emitter.blend==0x87)?1:-1];
-typedef char PlaybackGainAt85[((int)&((AudioPlayback*)0)->emitter.gain==0x85)?1:-1];
-AudioPlayback *func_0031A090(AudioPlayback *playback,u32 selector,f32 *value) {
-    *value=(f32)playback->emitter.priority/255.0f;
-    return playback;
-}
-AudioPlayback *func_0031A0E0(AudioPlayback *playback,u32 selector,f32 *value) {
-    *value=(f32)playback->emitter.blend/255.0f;
-    return playback;
-}
-AudioPlayback *func_0031A470(AudioPlayback *playback,u32 selector,f32 *value) {
-    *value=(f32)playback->emitter.gain/255.0f;
-    return playback;
-}
-#endif

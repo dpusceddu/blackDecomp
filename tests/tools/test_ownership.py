@@ -57,20 +57,26 @@ class Check(unittest.TestCase):
         found = self.problems([{'src': 'a.c', 'range': [0x100000, 0x100020]}], {'a.c': ''}, table=TABLE, complete=True)
         self.assertEqual(['func_00100020 belongs to no file', 'func_00100030 belongs to no file', 'func_00100040 belongs to no file'], found)
 
-    def test_a_listed_function_must_not_lie_in_another_files_range(self):
-        entries = [{'src': 'a.c', 'range': [0x100000, 0x100030]}, {'src': 'b.c', 'range': [0x100010, 0x100011], 'functions': [0x100010]}]
-        found = self.problems(entries, {'a.c': '', 'b.c': ''})
-        self.assertTrue(any('lies in the range of a.c' in p for p in found))
+    def test_no_overlap_is_accepted_not_even_one_byte_or_inside_one_file_or_a_nested_entry(self):
+        for entries in (
+                [{'src': 'a.c', 'range': [0x100000, 0x100021]}, {'src': 'b.c', 'range': [0x100020, 0x100050]}],   # one byte
+                [{'src': 'a.c', 'range': [0x100000, 0x100030]}, {'src': 'a.c', 'range': [0x100010, 0x100040]}],   # same file
+                [{'src': 'a.c', 'range': [0x100000, 0x100050]}, {'src': 'b.c', 'range': [0x100010, 0x100020]},   # nested
+                 {'src': 'c.c', 'range': [0x100030, 0x100040]}]):
+            found = self.problems(entries, {'a.c': '', 'b.c': '', 'c.c': ''})
+            self.assertTrue(found and all('overlap' in p for p in found), entries)
 
-    def test_a_listed_function_in_two_entries_is_reported_but_interleaved_lists_are_fine(self):
-        a = {'src': 'a.c', 'range': [0x100000, 0x100030], 'functions': [0x100000, 0x100020]}
-        b = {'src': 'a.c', 'range': [0x100010, 0x100011], 'functions': [0x100010]}
-        self.assertEqual([], self.problems([a, b], {'a.c': ''}))
-        c = {'src': 'a.c', 'range': [0x100010, 0x100011], 'functions': [0x100020]}
-        self.assertTrue(any('func_00100020 is listed by' in p for p in self.problems([a, c], {'a.c': ''})))
+    def test_adjacent_entries_and_a_file_with_separate_stretches_are_not_overlaps(self):
+        entries = [{'src': 'a.c', 'range': [0x100000, 0x100010]}, {'src': 'b.c', 'range': [0x100010, 0x100030]},
+                   {'src': 'a.c', 'range': [0x100030, 0x100050]}]
+        self.assertEqual([], self.problems(entries, {'a.c': '', 'b.c': ''}))
+
+    def test_a_functions_key_is_no_longer_accepted(self):
+        with self.assertRaisesRegex(ValueError, 'unknown keys functions'):
+            splits({'src': 'a.c', 'range': [0x100000, 0x100030], 'functions': [0x100000]})
 
     def test_the_committed_split_list_has_no_ownership_problems(self):
-        # sources only, no game files: ranges, markers and listed functions
+        # sources only, no game files: ranges and markers
         self.assertEqual([], S.check_ownership(S.load_splits()))
 
 
@@ -222,11 +228,11 @@ class WhereIsIt(unittest.TestCase):
         self.assertEqual(('source', 3), ownership.locate_in_text(self.TEXT, 0x100010, ['Tick__4Game', 'Game::Tick']))
         self.assertEqual((None, None), ownership.locate_in_text(self.TEXT, 0x100040, []))
 
-    def test_owner_entry_prefers_the_listed_function(self):
-        a, b = splits({'src': 'a.c', 'range': [0x100000, 0x100050], 'functions': [0x100020]}, {'src': 'b.c', 'range': [0x100000, 0x100020]})
+    def test_the_owner_is_the_entry_whose_range_contains_the_address(self):
+        a, b = splits({'src': 'a.c', 'range': [0x100020, 0x100040]}, {'src': 'b.c', 'range': [0x100000, 0x100020]})
         self.assertEqual('a.c', ownership.owner_entry(0x100020, [a, b]).src)
-        self.assertEqual('b.c', ownership.owner_entry(0x100000, [a, b]).src)
-        self.assertIsNone(ownership.owner_entry(0x100030, [a, b]))
+        self.assertEqual('b.c', ownership.owner_entry(0x10001c, [a, b]).src)
+        self.assertIsNone(ownership.owner_entry(0x100040, [a, b]))
 
 
 if __name__ == '__main__':

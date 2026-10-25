@@ -14,6 +14,8 @@ struct RwaEmitter {
     u8 priority,gain,field5e,blend,level,channels,flags;
     s8 pan;
 };
+/* Accessed prefix of a playback allocation, which is only partly audited: the emitter sits at 0x28. */
+typedef struct AudioPlayback {u8 unknown00[0x28];RwaEmitter emitter;} AudioPlayback;
 typedef struct RwaPoolBlock {struct RwaPoolBlock *next,*previous;u8 bits[1];} RwaPoolBlock;
 typedef struct RwaPool {
     u32 stride,count,bitmap_bytes,alignment;

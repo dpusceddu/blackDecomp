@@ -77,14 +77,13 @@ owner. A file whose functions are not adjacent (a class whose methods are spread
 other flags and was carved out of its neighbours) has one entry per stretch: the first carries all the options, the others only
 `src`, `range` and `note`, and the file is compiled once. `flags` and `compiler` replace the defaults; `assembler` names a per-unit
 assembler variant (`sn-min6`, ... see [tus.md](tus.md)); `sections: false` compiles without `-ffunction-sections` (the
-compiled functions must then be adjacent); `note` says why a TU is several files. A file that is compiled several
-times with `-D` selectors and carries no markers has an entry per compilation with `functions`, the addresses it compiles:
-such an entry owns exactly those functions and its range is only their bounding interval, which may contain functions of
-other entries (the only case where ranges overlap). Rare keys keep the options of the old unit format (`data_ranges`,
+compiled functions must then be adjacent); `note` says why a TU is several files. A file is compiled once, with the options of
+its first entry; code that needs other options (another compiler flag, language or assembler) is a file of its own, however
+small, so a function that sits between two functions of another file does not overlap them. Rare keys keep the options of the old unit format (`data_ranges`,
 `rodata_type_splits`, `shared_exception_tables`, `full_tu_context`, `unlinked_context_helpers`, `externs`).
 
 The rule is checked by `python3 tools/build/splits.py check` (no game files), by `python3 configure.py` and by the tests: ranges
-that overlap, a function listed in two files, an `INCLUDE_ASM` line for a function outside the file's ranges or listed twice, and
+that overlap by even one byte (also two stretches of one file), an `INCLUDE_ASM` line for a function outside the file's ranges or listed twice, and
 (with a build) a function that no entry owns are errors. To give a function to a file of its own (other flags, `-x c++`, a file
 with `sections: false`), run `python3 tools/split_function.py func_XXXXXXXX [--cpp] [--flags "..."]`: it removes the marker and
 that stretch of the range from the old owner and creates the new file and entry (`tools/pipeline/tu_files.py` does the same when the

@@ -86,11 +86,7 @@ def derive_units(splits, table, symbols, read=None, is_non_matching=False, fallb
         nm = is_non_matching and name not in fallback      # a unit whose drafts do not compile stays as in the matching build
         text = read(split.src)
         lo_all, hi_all = min(g.start for g in group), max(g.end for g in group)
-        if split.functions is not None:         # a file compiled several times with -D selectors: no markers
-            marked = {a for a in starts[bisect.bisect_left(starts, split.start):bisect.bisect_left(starts, split.end)]
-                      if a not in set(split.functions)}
-        else:
-            marked = set(include_asm.marker_addresses(text, split.defines(nm)))
+        marked = set(include_asm.marker_addresses(text, split.defines(nm)))
         lo, hi = bisect.bisect_left(starts, lo_all), bisect.bisect_left(starts, hi_all)
         owned = set()                                  # the functions of the group's own ranges
         for g in group:

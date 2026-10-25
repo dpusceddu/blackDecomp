@@ -6,8 +6,7 @@
                      - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x103858]}
                      - {src: src/kynapse/behaviors_hide.cpp, range: [0x2d4148, 0x2d4a20], flags: [-O2, -G0, -snas, -fbyte-bool]}
                    Keys: src, range (start inclusive, end exclusive), compiler, flags, assembler (a variant such as sn-min6),
-                   sections (false: no -ffunction-sections), note; rare ones: functions (the addresses the split
-                   compiles, for a file that is compiled several times with -D selectors and carries no markers), externs, data_ranges,
+                   sections (false: no -ffunction-sections), note; rare ones: externs, data_ranges,
                    rodata_type_splits, shared_exception_tables, full_tu_context, unlinked_context_helpers.
                    `defaults:` at the top holds compiler, flags and sections for entries that omit them.
   symbols.txt      names and addresses, one per line in splat's symbol_addrs form:  name = 0xADDRESS; // type:func
@@ -19,8 +18,8 @@
 Ownership: every function belongs to exactly one entry, and the ranges of the entries do not overlap. An entry owns every
 function in its range; one that is still assembly is an INCLUDE_ASM line in the entry's file, every other function of the
 range must be defined by the file (tools/build/include_asm.py, tools/build/units.py). A file that owns several separate
-stretches has several entries, the first one with all the options and the others with only `src`, `range` and `note`. An
-entry with `functions` owns exactly those functions (its range is only their bounding interval) and carries no markers.
+stretches has several entries, the first one with all the options and the others with only `src`, `range` and `note`. Every
+file is compiled once, with one set of options; code that needs other options is a file of its own.
 `python3 tools/build/splits.py check` validates the files and the ownership; `python3 tools/where.py ADDRESS` names the owner.
 """
 import sys as _sys
@@ -38,7 +37,7 @@ DEFAULT_SLUG = 'SLUS_213.76'
 DEFAULT_COMPILER = 'ee-gcc2.95.3-136'
 DEFAULT_FLAGS = ['-O2', '-G0', '-snas']
 
-SPLIT_KEYS = {'src', 'range', 'functions', 'compiler', 'flags', 'assembler', 'sections', 'note', 'externs', 'data_ranges',
+SPLIT_KEYS = {'src', 'range', 'compiler', 'flags', 'assembler', 'sections', 'note', 'externs', 'data_ranges',
               'rodata_type_splits', 'shared_exception_tables', 'full_tu_context', 'unlinked_context_helpers'}
 SYMBOL_LINE = re.compile(r'^\s*([^\s=;/]+)\s*=\s*(0[xX][0-9a-fA-F]+|\d+)\s*;\s*(?://\s*(.*))?$')
 
@@ -68,8 +67,7 @@ class Split:
         self.assembler = entry.get('assembler')
         self.sections = bool(entry.get('sections', defaults.get('sections', True)))
         self.note = entry.get('note')
-        self.functions = [num(a) for a in entry['functions']] if 'functions' in entry else None
-        self.extra = {k: entry[k] for k in SPLIT_KEYS - {'src', 'range', 'functions', 'compiler', 'flags', 'assembler', 'sections', 'note'}
+        self.extra = {k: entry[k] for k in SPLIT_KEYS - {'src', 'range', 'compiler', 'flags', 'assembler', 'sections', 'note'}
                       if k in entry}
         self.entry = entry
 
@@ -112,15 +110,9 @@ CONTINUATION_KEYS = {'src', 'range', 'note'}
 
 def group_splits(splits):
     """[[Split, ...], ...]: the entries of one source file are one group, compiled once into one unit. The later entries of a
-    group are continuations (only `src`, `range`, `note`); an entry with `functions` is a group of its own, because such a
-    file is compiled once per entry with its own -D selectors."""
+    group are continuations (only `src`, `range`, `note`)."""
     groups, byfile = [], {}
     for s in splits:
-        if s.functions is not None:
-            if s.src in byfile:
-                raise ValueError('%s: entries with and without `functions` in one file' % s.src)
-            groups.append([s])
-            continue
         group = byfile.get(s.src)
         if group is None:
             byfile[s.src] = [s]
@@ -136,7 +128,7 @@ def group_splits(splits):
 
 def unit_names(splits):
     """Unique object names for the first entries of the groups (group_splits): the file stem, plus the start address when
-    a stem occurs several times (a file compiled once per entry, or two files of one name)."""
+    a stem occurs several times (two files of one name in different directories)."""
     names, seen = [], {}
     for s in splits:
         seen[Path(s.src).stem] = seen.get(Path(s.src).stem, 0) + 1
@@ -256,8 +248,6 @@ def format_split(entry):
     for key in ('compiler', 'flags', 'assembler', 'sections'):
         if key in entry:
             parts.append('%s: %s' % (key, flow(entry[key])))
-    if 'functions' in entry:
-        parts.append('functions: [%s]' % ', '.join('0x%06x' % num(a) for a in entry['functions']))
     for key in ('data_ranges', 'rodata_type_splits', 'shared_exception_tables', 'full_tu_context',
                 'unlinked_context_helpers', 'externs'):
         if key in entry:
@@ -279,37 +269,26 @@ def format_splits(entries, defaults, header=''):
 def check_ownership(splits, read=None, table=None, complete=False):
     """Problems (strings) of the ownership rules; empty when every function has exactly one owner.
 
-    Needs no game files without `table`: ranges of entries must not overlap, a `functions` list must not lie inside another
-    entry's range or repeat an address, and every INCLUDE_ASM marker of a file must name an address inside the file's own ranges
-    (with `read(src)` giving the text). With `table` (the function starts of the image) a marker must be a function start,
-    and with `complete` every function start must be claimed by some entry."""
+    Needs no game files without `table`: no two entries may overlap, even by one byte and even when they belong to the same
+    file, and every INCLUDE_ASM marker of a file must name an address inside the file's own ranges (with `read(src)` giving
+    the text). With `table` (the function starts of the image) a marker must be a function start, and with `complete` every
+    function start must be inside some entry."""
+    import bisect
     import include_asm
     problems = []
     read = read or (lambda path: (ROOT / path).read_text())
-    ranged = sorted(((s.start, s.end, s.src) for s in splits if s.functions is None))
-    for (lo1, hi1, src1), (lo2, hi2, src2) in zip(ranged, ranged[1:]):
-        if lo2 < hi1:
-            problems.append('ranges overlap: %s [0x%x, 0x%x) and %s [0x%x, 0x%x)' % (src1, lo1, hi1, src2, lo2, hi2))
-    owner_of_listed = {}
-    for s in splits:
-        for addr in (s.functions or ()):
-            if addr in owner_of_listed:
-                problems.append('func_%08X is listed by %s and %s' % (addr, owner_of_listed[addr], s.src))
-            owner_of_listed[addr] = s.src
-            if not s.start <= addr < s.end:
-                problems.append('%s lists func_%08X outside its range' % (s.src, addr))
-    starts_only = [r[0] for r in ranged]
-    import bisect
-    for addr, src in sorted(owner_of_listed.items()):
-        k = bisect.bisect_right(starts_only, addr) - 1
-        if k >= 0 and ranged[k][0] <= addr < ranged[k][1]:
-            problems.append('func_%08X is listed by %s but lies in the range of %s' % (addr, src, ranged[k][2]))
+    ranged = sorted((s.start, s.end, s.src) for s in splits)
+    reach = None                                  # the entry with the furthest end so far, so that a long entry is not missed
+    for cur in ranged:
+        if reach is not None and cur[0] < reach[1]:
+            problems.append('ranges overlap: %s [0x%x, 0x%x) and %s [0x%x, 0x%x)' % (
+                reach[2], reach[0], reach[1], cur[2], cur[0], cur[1]))
+        if reach is None or cur[1] > reach[1]:
+            reach = cur
     own_ranges = {}
     for s in splits:
-        if s.functions is None:
-            own_ranges.setdefault(s.src, []).append((s.start, s.end))
+        own_ranges.setdefault(s.src, []).append((s.start, s.end))
     start_set = {a for a, _ in table} if table is not None else None
-    marked_in = {}
     for src, rs in sorted(own_ranges.items()):
         text = read(src)
         for defines in (set(), {'NON_MATCHING'}):
@@ -327,13 +306,16 @@ def check_ownership(splits, read=None, table=None, complete=False):
                 if addr in seen:
                     problems.append('%s:%d: func_%08X is marked twice' % (src, marker.line, addr))
                 seen.add(addr)
-                marked_in.setdefault(addr, set()).add(src)
     if complete and table is not None:
-        lo_list = [r[0] for r in ranged]
+        los = [r[0] for r in ranged]
+        his = []
+        top = 0
+        for r in ranged:
+            top = max(top, r[1])
+            his.append(top)
         for addr, _ in table:
-            k = bisect.bisect_right(lo_list, addr) - 1
-            inside = k >= 0 and ranged[k][0] <= addr < ranged[k][1]
-            if not inside and addr not in owner_of_listed:
+            k = bisect.bisect_right(los, addr) - 1
+            if not (k >= 0 and addr < his[k]):
                 problems.append('func_%08X belongs to no file' % addr)
     return list(dict.fromkeys(problems))
 
@@ -360,7 +342,7 @@ def carve_range(entries, addr, end):
     (entries, options) where `options` are the removed first entry's keys when the file has no entry left, else None.
     The first entry of a file (the lowest range) carries all options, the others only src, range and note."""
     out, options = [], None
-    hit = next((e for e in entries if 'functions' not in e and num(e['range'][0]) <= addr < num(e['range'][1])), None)
+    hit = next((e for e in entries if num(e['range'][0]) <= addr < num(e['range'][1])), None)
     if hit is None:
         raise KeyError('no marker-mode entry of the split list contains func_%08X' % addr)
     lo, hi = num(hit['range'][0]), num(hit['range'][1])
@@ -391,7 +373,7 @@ def carve_range(entries, addr, end):
 def adopt_range(entries, src, addr, end, options=None):
     """Give [addr, end) to `src`: extend an adjacent entry of that file, or add a continuation (or, for a file with no
     entry, a first entry with `options`); entries of the file that touch afterwards become one. Returns the entries."""
-    mine = sorted((e for e in entries if e['src'] == src and 'functions' not in e), key=lambda e: num(e['range'][0]))
+    mine = sorted((e for e in entries if e['src'] == src), key=lambda e: num(e['range'][0]))
     for e in mine:
         if num(e['range'][1]) == addr:
             e['range'] = [num(e['range'][0]), end]
@@ -412,7 +394,7 @@ def adopt_range(entries, src, addr, end, options=None):
     merged = True
     while merged:
         merged = False
-        mine = sorted((e for e in entries if e['src'] == src and 'functions' not in e), key=lambda e: num(e['range'][0]))
+        mine = sorted((e for e in entries if e['src'] == src), key=lambda e: num(e['range'][0]))
         for first, second in zip(mine, mine[1:]):
             if num(first['range'][1]) == num(second['range'][0]) and set(second) <= CONTINUATION_KEYS:
                 first['range'] = [num(first['range'][0]), num(second['range'][1])]

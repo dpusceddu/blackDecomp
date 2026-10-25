@@ -1,4 +1,3 @@
-#ifndef FOLLOWER_CALLBACK_ONLY
 #include "kynapse/behaviors/follower_construction.hpp"
 #include "kynapse/property.hpp"
 #include "kynapse/predicates.hpp"
@@ -166,12 +165,3 @@ void func_002D38A8() {func_002D34C0(0,0xFFFF);}
 // Image labels, including the table pointer at +0x110, alias this native storage.
 extern "C" {FollowerRegistrationStorage Follower_RegistrationStorage __attribute__((aligned(8)));}
 
-#else
-// This virtual dispatch uses the TU's independently verified no-first-scheduler recipe.
-extern "C" int func_002D3858(void* self) {
-    void** target=*(void***)((char*)self+0xC);
-    void* table=*target;
-    return (*(int (**)(void*,void**))((char*)table+0x5C))(
-        (char*)target+*(short*)((char*)table+0x58),target);
-}
-#endif

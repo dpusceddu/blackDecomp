@@ -1013,10 +1013,10 @@ splits:
   - {src: src/game/ai/tu_1984f0_1994f0.c, range: [0x1994f0, 0x199700], sections: false}
   - {src: src/game/ai/tu_1984f0_199700.c, range: [0x199700, 0x199790], sections: false}
   - {src: src/game/ai/tu_1984f0_199790.c, range: [0x199790, 0x199850], sections: false}
-  - {src: src/game/ai/tu_199850.c, range: [0x199850, 0x199888], flags: [-O2, -G0, -snas, -fno-schedule-insns2, -DACTION_ENTER_ONLY], sections: false, functions: [0x199850]}
-  - {src: src/game/ai/tu_199850.c, range: [0x199888, 0x1998c0], flags: [-O2, -G0, -snas, -DACTION_NOTIFY_ONLY], sections: false, functions: [0x199888], data_ranges: [{end: '0x3de748', input: .data.action_dispatch, section: .data, start: '0x3de6d8'}]}
-  - {src: src/game/ai/tu_199850.c, range: [0x1998c0, 0x1998f8], flags: [-O2, -G0, -snas, -DACTION_EVENT_ONLY], sections: false, functions: [0x1998c0]}
-  - {src: src/game/ai/tu_199850.c, range: [0x1998f8, 0x199950], sections: false, functions: [0x1998f8]}
+  - {src: src/game/ai/tu_199850.c, range: [0x199850, 0x199888], flags: [-O2, -G0, -snas, -fno-schedule-insns2], sections: false}
+  - {src: src/game/ai/tu_199850_199888.c, range: [0x199888, 0x1998c0], flags: [-O2, -G0, -snas], sections: false, data_ranges: [{end: '0x3de748', input: .data.action_dispatch, section: .data, start: '0x3de6d8'}]}
+  - {src: src/game/ai/tu_199850_1998c0.c, range: [0x1998c0, 0x1998f8], flags: [-O2, -G0, -snas], sections: false}
+  - {src: src/game/ai/tu_199850_1998f8.c, range: [0x1998f8, 0x199950], sections: false}
   - {src: src/game/ai/tu_199950.c, range: [0x199950, 0x199988]}
   - {src: src/game/ai/tu_199988.c, range: [0x199988, 0x19a5e0]}
   - {src: src/game/ai/tu_199988_19a5e0.c, range: [0x19a5e0, 0x19a648], sections: false}
@@ -1095,19 +1095,24 @@ splits:
   - {src: src/game/unsorted/tu_1a24b8_1a3a08.c, range: [0x1a3a08, 0x1a4930]}
   - {src: src/game/unsorted/tu_1a4930.c, range: [0x1a4930, 0x1a4ff0]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1a4ff0, 0x1a54e0]}
-  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a54e0, 0x1a5738], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions, -DARMS_TICK_ONLY], assembler: sn-min6, functions: [0x1a54e0]}
+  - {src: src/game/unsorted/arms_1a54e0.cpp, range: [0x1a54e0, 0x1a5738], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions], assembler: sn-min6}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1a5738, 0x1a5ee8]}
   - {src: src/game/unsorted/tu_1a51c8_1a5ee8.c, range: [0x1a5ee8, 0x1a6330], sections: false}
-  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a6330, 0x1a7e58], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions], functions: [0x1a6330, 0x1a68b0, 0x1a6988, 0x1a6a28, 0x1a73f0, 0x1a74e0, 0x1a7500, 0x1a7d48, 0x1a7df0]}
+  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a6330, 0x1a67b0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions]}
   - {src: src/game/unsorted/tu_1a51c8_1a5ee8.c, range: [0x1a67b0, 0x1a68b0]}
+  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a68b0, 0x1a68e0]}
   - {src: src/game/unsorted/tu_1a51c8_1a68e0.c, range: [0x1a68e0, 0x1a6988], sections: false}
+  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a6988, 0x1a6ab0]}
   - {src: src/game/unsorted/tu_1a51c8_1a68e0.c, range: [0x1a6ab0, 0x1a6e58]}
   - {src: src/game/unsorted/tu_1a51c8_1a6e58.c, range: [0x1a6e58, 0x1a7188], sections: false}
   - {src: src/game/unsorted/tu_1a51c8_1a7188.c, range: [0x1a7188, 0x1a71f8], sections: false}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1a71f8, 0x1a72b0]}
   - {src: src/game/unsorted/tu_1a51c8_1a7188.c, range: [0x1a72b0, 0x1a73f0]}
+  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a73f0, 0x1a7450]}
   - {src: src/game/unsorted/tu_1a51c8_1a7450.c, range: [0x1a7450, 0x1a74e0], sections: false}
+  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a74e0, 0x1a7528]}
   - {src: src/game/unsorted/tu_1a51c8_1a7450.c, range: [0x1a7528, 0x1a7d48]}
+  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a7d48, 0x1a7e58]}
   - {src: src/game/unsorted/tu_1a51c8_1a7450.c, range: [0x1a7e58, 0x1a7f88]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x1a7f88, 0x1a80f8]}
   - {src: src/game/unsorted/tu_1a80f8.c, range: [0x1a80f8, 0x1a8168], assembler: sn-min6}
@@ -2064,8 +2069,9 @@ splits:
   - {src: src/kynapse/flee_agent_2d1610.cpp, range: [0x2d2e90, 0x2d2f48]}
   - {src: src/kynapse/behaviors_flee_2d1918.cpp, range: [0x2d2f48, 0x2d2f80]}
   - {src: src/kynapse/flee_agent_2d1610.cpp, range: [0x2d2f80, 0x2d2ff8]}
-  - {src: src/kynapse/tu_2d2ff8.cpp, range: [0x2d2ff8, 0x2d38c8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], functions: [0x2d2ff8, 0x2d30a0, 0x2d31f0, 0x2d3300, 0x2d34c0, 0x2d3520, 0x2d3560, 0x2d35b8, 0x2d35c8, 0x2d35d8, 0x2d3610, 0x2d36a8, 0x2d37d8, 0x2d3810, 0x2d3838, 0x2d3888, 0x2d38a8], data_ranges: [{end: '0x3e3198', input: .data.follower_vtable, section: .data, start: '0x3e3130'}, {end: '0x44ef00', input: .bss, section: .bss, start: '0x44ede8'}]}
-  - {src: src/kynapse/tu_2d2ff8.cpp, range: [0x2d3858, 0x2d3888], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DFOLLOWER_CALLBACK_ONLY, -fno-schedule-insns], functions: [0x2d3858]}
+  - {src: src/kynapse/tu_2d2ff8.cpp, range: [0x2d2ff8, 0x2d3858], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3e3198', input: .data.follower_vtable, section: .data, start: '0x3e3130'}, {end: '0x44ef00', input: .bss, section: .bss, start: '0x44ede8'}]}
+  - {src: src/kynapse/tu_2d2ff8_2d3858.cpp, range: [0x2d3858, 0x2d3888], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-schedule-insns]}
+  - {src: src/kynapse/tu_2d2ff8.cpp, range: [0x2d3888, 0x2d38c8]}
   - {src: src/kynapse/behaviors_goto.cpp, range: [0x2d38c8, 0x2d3970], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2d38c8_2d3970.c, range: [0x2d3970, 0x2d3a68]}
   - {src: src/kynapse/predicates_2d3a68.cpp, range: [0x2d3a68, 0x2d3a78], flags: [-O2, -G0, -snas, -fbyte-bool]}
@@ -2425,11 +2431,14 @@ splits:
   - {src: src/kynapse/misc6_3053f0.cpp, range: [0x3053f0, 0x305438], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2fec10_305110.c, range: [0x305438, 0x3054a8]}
   - {src: src/kynapse/tu_2fec10_3054a8.c, range: [0x3054a8, 0x305538]}
-  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x305538, 0x3055e0], flags: [-O2, -G0, -snas, -fbyte-bool, -DSTEERING_FACTORY_ONLY], sections: false, functions: [0x305538]}
-  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3055e0, 0x306760], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING], functions: [0x3055e0, 0x3057e8, 0x3059f0, 0x306448, 0x306688], data_ranges: [{end: '0x3f07a0', input: .data.steering_vtable, section: .data, start: '0x3f0760'}, {end: '0x455be8', input: .bss, section: .bss, start: '0x455ad0'}], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_00305FD8, func_00306538]}
+  - {src: src/kynapse/tu_305538.cpp, range: [0x305538, 0x3055e0], flags: [-O2, -G0, -snas, -fbyte-bool], sections: false}
+  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3055e0, 0x305fd8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING], data_ranges: [{end: '0x3f07a0', input: .data.steering_vtable, section: .data, start: '0x3f0760'}, {end: '0x455be8', input: .bss, section: .bss, start: '0x455ad0'}], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_00305FD8, func_00306538]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x305fd8, 0x3063a8]}
-  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3063a8, 0x3067a0], flags: [-x, c, -O2, -G0, -snas, -DSTEERING_REGISTRATION_ONLY], functions: [0x3063a8, 0x306400, 0x306438, 0x306440, 0x306760, 0x306780]}
-  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x306538, 0x306688], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING, -DSTEERING_CONTACT_OUTLINE], functions: [0x306538], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_003055E0, func_003057E8, func_003059F0, func_00305FD8, func_00306448, func_00306688]}
+  - {src: src/kynapse/tu_305538_3063a8.c, range: [0x3063a8, 0x306448], flags: [-O2, -G0, -snas]}
+  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x306448, 0x306538]}
+  - {src: src/kynapse/behaviors_repulsor_contact.cpp, range: [0x306538, 0x306688], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING]}
+  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x306688, 0x306760]}
+  - {src: src/kynapse/tu_305538_3063a8.c, range: [0x306760, 0x3067a0]}
   - {src: src/kynapse/avoidance_manual.cpp, range: [0x3067a0, 0x307fb0]}
   - {src: src/kynapse/behaviors_gap.cpp, range: [0x307fb0, 0x30b4a8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/avoidance_configuration.cpp, range: [0x30b4a8, 0x30b750]}
@@ -2531,39 +2540,70 @@ splits:
   - {src: src/rw_audio/tu_314630_3151d8.c, range: [0x3165c8, 0x316698]}
   - {src: src/rw_audio/tu_314630_316698.c, range: [0x316698, 0x316770]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x316770, 0x3168c8]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x3168c8, 0x31a2e0], flags: [-O2, -G8], functions: [0x3168c8, 0x316e90, 0x317030, 0x317490, 0x3178c0, 0x317a78, 0x317c20, 0x317d68, 0x317df0, 0x317e40, 0x317fc0, 0x318080, 0x318120, 0x318188, 0x3181e8, 0x318288, 0x3182c8, 0x318340, 0x318400, 0x318450, 0x318478, 0x318600, 0x3186b0, 0x3186f0, 0x3187f8, 0x318880, 0x318b08, 0x318b60, 0x318be0, 0x318c40, 0x318c90, 0x318ce8, 0x319268, 0x319368, 0x319578, 0x319628, 0x3196a8, 0x319950, 0x3199e0, 0x319a70, 0x319ce8, 0x319de0, 0x319e28, 0x319ed0, 0x31a108, 0x31a188, 0x31a208, 0x31a288], data_ranges: [{end: 4252148, input: .sdata, section: .sdata, start: 4252072}, {end: 4253624, input: .sbss, section: .sbss, start: 4253568}, {end: 4556232, input: .bss, section: .bss, start: '0x4584c0'}, {end: '0x3cfb98', input: .data, section: .data, start: '0x3cf380'}, {end: '0x4096e0', input: .rodata, section: .rodata, start: '0x409400'}]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x3168c8, 0x316c38], flags: [-O2, -G8], data_ranges: [{end: 4252148, input: .sdata, section: .sdata, start: 4252072}, {end: 4253624, input: .sbss, section: .sbss, start: 4253568}, {end: 4556232, input: .bss, section: .bss, start: '0x4584c0'}, {end: '0x3cfb98', input: .data, section: .data, start: '0x3cf380'}, {end: '0x4096e0', input: .rodata, section: .rodata, start: '0x409400'}]}
   - {src: src/rw_audio/tu_3168c8_316c38.c, range: [0x316c38, 0x316e90], flags: [-O2, -G8], note: flags or language differ}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x316e90, 0x317300]}
   - {src: src/rw_audio/tu_3168c8_316c38.c, range: [0x317300, 0x317340]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x317340, 0x3176d0], flags: [-O2, -G8, -malign-loops=2, -DRWA_CONTROL_ONLY], functions: [0x317340, 0x3175c8]}
+  - {src: src/rw_audio/tu_3168c8_317340.c, range: [0x317340, 0x317490], flags: [-O2, -G8, -malign-loops=2]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x317490, 0x3174d0]}
   - {src: src/rw_audio/tu_3168c8_316c38.c, range: [0x3174d0, 0x3175c8]}
+  - {src: src/rw_audio/tu_3168c8_317340.c, range: [0x3175c8, 0x3176d0]}
   - {src: src/rw_audio/tu_3168c8_3176d0.c, range: [0x3176d0, 0x317838], note: flags or language differ}
-  - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x317838, 0x317868], flags: [-O2, -G8, -DRWA_MATCH_317838], sections: false, functions: [0x317838]}
+  - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x317838, 0x317868], flags: [-O2, -G8], sections: false}
   - {src: src/rw_audio/tu_3168c8_317868.c, range: [0x317868, 0x3178b8], flags: [-O2, -G8], note: flags or language differ}
   - {src: src/rw_audio/tu_3168c8_3178b8.c, range: [0x3178b8, 0x3178c0], flags: [-O2, -G8, -snas], note: flags or language differ}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x3178c0, 0x3178f0]}
   - {src: src/rw_audio/tu_3168c8_3178b8.c, range: [0x3178f0, 0x317a78]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x317a78, 0x318078]}
   - {src: src/rw_audio/tu_3168c8_3178b8.c, range: [0x318078, 0x318080]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x318080, 0x318250]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x318250, 0x318288]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x318288, 0x3183c0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x3183c0, 0x318400]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x318400, 0x318550]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x318550, 0x318600]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x318600, 0x318950]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x318950, 0x318b08]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x318b08, 0x318bc0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x318bc0, 0x318be0]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x318be0, 0x318d20]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x318d20, 0x319268]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319268, 0x3192d8]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x3192d8, 0x319368]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319368, 0x319410]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319410, 0x319578]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319578, 0x3195d0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x3195d0, 0x319628]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319628, 0x3196d8]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x3196d8, 0x319928]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x319928, 0x319950], flags: [-O2, -G8, -DRWA_CACHE_CONTROL_ONLY], functions: [0x319928], data_ranges: [{end: '0x458490', input: .bss, section: .bss, start: '0x456480'}]}
+  - {src: src/rw_audio/tu_3168c8_319928.c, range: [0x319928, 0x319950], flags: [-O2, -G8], data_ranges: [{end: '0x458490', input: .bss, section: .bss, start: '0x456480'}]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319950, 0x3199c0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x3199c0, 0x3199e0]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x3199e0, 0x319a50]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319a50, 0x319a70]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319a70, 0x319ae0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319ae0, 0x319ca8]}
-  - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x319ca8, 0x319ce8], flags: [-O2, -G8, -DRWA_MATCH_319CA8], sections: false, functions: [0x319ca8]}
+  - {src: src/rw_audio/tu_3168c8_319ca8.c, range: [0x319ca8, 0x319ce8], flags: [-O2, -G8], sections: false}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319ce8, 0x319da0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319da0, 0x319de0]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319de0, 0x319eb0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319eb0, 0x319ed0]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319ed0, 0x319f80]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319f80, 0x31a068]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a068, 0x31a0e0], flags: [-O2, -G8, -fno-schedule-insns2, -DRWA_BYTE_SETTERS_ONLY], functions: [0x31a068, 0x31a0b8]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a090, 0x31a498], compiler: ee-gcc2.96, flags: [-O2, -G8, -mno-handle-ee-div-pipeline-bug, -DRWA_NORMALIZED_GETTERS_ONLY], functions: [0x31a090, 0x31a0e0, 0x31a470]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a160, 0x31a308], flags: [-O2, -G8, -fno-schedule-insns, -DRWA_VECTOR_GETTERS_ONLY], functions: [0x31a160, 0x31a1e0, 0x31a260, 0x31a2e0]}
+  - {src: src/rw_audio/tu_3168c8_31a068.c, range: [0x31a068, 0x31a090], flags: [-O2, -G8, -fno-schedule-insns2]}
+  - {src: src/rw_audio/tu_3168c8_31a090.c, range: [0x31a090, 0x31a0b8], compiler: ee-gcc2.96, flags: [-O2, -G8, -mno-handle-ee-div-pipeline-bug]}
+  - {src: src/rw_audio/tu_3168c8_31a068.c, range: [0x31a0b8, 0x31a0e0]}
+  - {src: src/rw_audio/tu_3168c8_31a090.c, range: [0x31a0e0, 0x31a108]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a108, 0x31a160]}
+  - {src: src/rw_audio/tu_3168c8_31a160.c, range: [0x31a160, 0x31a188], flags: [-O2, -G8, -fno-schedule-insns]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a188, 0x31a1e0]}
+  - {src: src/rw_audio/tu_3168c8_31a160.c, range: [0x31a1e0, 0x31a208]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a208, 0x31a260]}
+  - {src: src/rw_audio/tu_3168c8_31a160.c, range: [0x31a260, 0x31a288]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a288, 0x31a2e0]}
+  - {src: src/rw_audio/tu_3168c8_31a160.c, range: [0x31a2e0, 0x31a308]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x31a308, 0x31a470]}
+  - {src: src/rw_audio/tu_3168c8_31a090.c, range: [0x31a470, 0x31a498]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x31a498, 0x31a4e8]}
   - {src: src/rw_audio/tu_31a4e8.c, range: [0x31a4e8, 0x31a500]}
   - {src: src/rw_audio/tu_31a500.c, range: [0x31a500, 0x31a548]}
@@ -2788,8 +2828,8 @@ splits:
   - {src: src/animation/tu_34eae0_allocate_banks.cpp, range: [0x34eb88, 0x34ecd8]}
   - {src: src/animation/tu_34eae0_release_banks.c, range: [0x34ecd8, 0x34ed80]}
   - {src: src/animation/tu_34eae0_34ed80.c, range: [0x34ed80, 0x34edb8], note: flags or language differ}
-  - {src: src/animation/arms_34eae0.cpp, range: [0x34edb8, 0x34f080], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], functions: [0x34edb8, 0x34ee90]}
-  - {src: src/animation/arms_34eae0.cpp, range: [0x34f080, 0x34f1c0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DARMS_EVALUATE_ONLY, -fno-schedule-insns, -fno-expensive-optimizations], functions: [0x34f080]}
+  - {src: src/animation/arms_34eae0.cpp, range: [0x34edb8, 0x34f080], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/animation/arms_34f080.cpp, range: [0x34f080, 0x34f1c0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-schedule-insns, -fno-expensive-optimizations]}
   - {src: src/animation/tu_34eae0_34ed80.c, range: [0x34f1c0, 0x34f328]}
   - {src: src/animation/tu_34eae0_34f328.c, range: [0x34f328, 0x34f360], flags: [-O1, -G0, -snas]}
   - {src: src/animation/arms_34f360.cpp, range: [0x34f360, 0x34fe70], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d49f4', input: .data, kind: unwind, section: .data, start: '0x3d4684'}]}
