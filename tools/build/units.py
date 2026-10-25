@@ -12,7 +12,7 @@ Nothing here is stored in Git as a unit list: `load_units()` builds it from
 
 and caches the result in build/<GAME_ID>/units.json. Each unit is a dict:
   name, source, library, compiler, flags (as handed to the compiler), range [start, end), externs {name: address},
-  functions [{addr, symbol, size, status: 'source' | 'asm'}], and the optional keys of a split (data_ranges, owner, ...).
+  functions [{addr, symbol, size, status: 'source' | 'asm'}], and the optional keys of a split (data_ranges, ...).
 `size` is the distance to the next function. With BLACK_NON_MATCHING=1 the markers of `#ifdef NON_MATCHING` blocks are
 read as if NON_MATCHING were defined, and -DNON_MATCHING is added to the flags (configure.py --non-matching).
 """
@@ -115,8 +115,6 @@ def derive_units(splits, table, symbols, read=None, is_non_matching=False, fallb
         if len(group) > 1:
             unit['ranges'] = [[g.start, g.end] for g in group]
         unit.update({k: v for k, v in split.extra.items() if k != 'externs'})
-        if split.owner:
-            unit['owner'] = split.owner
         if split.note:
             unit['note'] = split.note
         if split.assembler or (split.compiler.startswith('ee-gcc2.95') and '-snas' not in split.flags):

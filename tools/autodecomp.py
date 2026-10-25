@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Automatic decompilation pilot: m2c -> clean -> compile variants -> score -> permuter -> register as source units.
+"""Automatic decompilation: m2c -> clean -> compile variants -> score -> permuter -> register as source units.
 
   autodecomp.py run [--max-size N] [--min-size N] [--region LIBRARY] [--addr A ...] [--limit N] [--no-permute]
                     [--permute-seconds S] [--batch N]
@@ -12,7 +12,7 @@ Sizes are the function's code size in bytes. Compilation happens only with the b
 per batch of candidates); m2c and scoring run on the host because they only read and write text. Scoring compares the
 compiled .text with the original instruction words, masking relocated fields, and compares each relocation's target
 (symbol address plus addend) with the symbolic operand of the original assembly. The final authority is the identical
-link (`ninja` ends with OK); `settle` puts back the INCLUDE_ASM line of what does not place identically. Setup and pinned versions: docs/pipeline.md.
+link (`ninja` ends with OK); `confirm` puts back the INCLUDE_ASM line of what does not place identically. Setup and pinned versions: docs/pipeline.md.
 """
 import argparse, base64, collections, difflib, hashlib, io, json, os, re, struct, subprocess, sys, tarfile, time
 from pathlib import Path
@@ -2261,7 +2261,7 @@ def main():
     rg.add_argument('--group', type=int, default=24, help='most adjacent functions per unit')
     rg.add_argument('--limit', type=int)
     rg.set_defaults(fn=cmd_register)
-    st = sub.add_parser('settle')
+    st = sub.add_parser('confirm', aliases=['settle'], help='compile and link what register wrote; put back the INCLUDE_ASM line of what does not place identically')
     st.add_argument('--group', type=int, default=24)
     st.set_defaults(fn=cmd_settle)
     pm = sub.add_parser('permute')
@@ -2273,7 +2273,7 @@ def main():
     pm.add_argument('--rounds', type=int, default=6)
     pm.add_argument('--per-round', type=int, default=60, help='candidates per function and round')
     pm.set_defaults(fn=cmd_permute)
-    fm = sub.add_parser('family')
+    fm = sub.add_parser('clone', aliases=['family'], help='clone exact sources onto functions with identical bodies')
     fm.set_defaults(fn=lambda a: (lambda res: (reconcile(res), propagate_families(res, load_inventory(), OrigImage()), save_results(res)))(load_results()))
     mg = sub.add_parser('merge')
     mg.add_argument('file')

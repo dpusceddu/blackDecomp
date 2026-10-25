@@ -15,7 +15,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/objdiff.py` | Per-unit objects and the project file for objdiff, and the progress report that decomp.dev reads. |
 | `tools/trysrc.py` | Compile a hand-written or templated C source for one function and score it against the original. |
 | `tools/next.py` | Best next work, from the automatic pipeline's results (build/auto.json) and the source units (tools/build/units.py). |
-| `tools/autodecomp.py` | Automatic decompilation pilot: m2c -> clean -> compile variants -> score -> permuter -> register as source units. |
+| `tools/autodecomp.py` | Automatic decompilation: m2c -> clean -> compile variants -> score -> permuter -> register as source units. |
 | `tools/where.py` | Name the source file that owns a function, and the line where it is: assembly, draft or source. |
 | `tools/relocate_sources.py` | Move source files and keep every reference to them consistent: the build inputs, documentation and generated comments. |
 | `tools/permuter/prepare.py` | Write the assembly of one function in the plain form decomp-permuter's import.py reads. |

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Best next work, from the automatic pipeline's results (build/auto.json) and the source units (tools/build/units.py).
 
-  next.py [near|types|families|data|ee|all] [--top N] [--max-size N]
+  next.py [near|types|identical|data|ee|all] [--top N] [--max-size N]
 
   near      near misses by differing-instruction count, with what differs (registers, order, code, length)
   types     functions the pipeline could not compile or decompile for want of a type, grouped by what they need
-  families  groups of assembly functions with identical bodies (candidates for one template or one shared source)
+  identical groups of assembly functions with identical bodies (candidates for one template or one shared source)
   data      exact drafts that could not be placed because the function owns rodata (strings, tables)
   ee        functions m2c cannot read (EE instructions), grouped by instruction
-  tus       candidate translation units for a Phase 5 agent (build/SLUS_213.76/tus.yaml): shown first by `all`
+  tus       candidate translation units for a contributor (build/SLUS_213.76/tus.yaml): shown first by `all`
 Functions already provided by source units are left out everywhere.
 """
 import argparse, collections, json, re, struct, sys
@@ -100,7 +100,7 @@ def families(res, top, max_size):
         groups[tuple(masked)].append(f)
     fams = [g for g in groups.values() if len(g) > 1]
     fams.sort(key=lambda g: -len(g) * g[0]['size'])
-    print('families of identical bodies (relocations masked): %d families, %d functions' % (len(fams), sum(len(g) for g in fams)))
+    print('groups of identical bodies (relocations masked): %d groups, %d functions' % (len(fams), sum(len(g) for g in fams)))
     for g in fams[:top]:
         st = collections.Counter(res.get('0x%x' % f['addr'], {}).get('status', 'untried') for f in g)
         print('  %4d x %3d bytes  e.g. 0x%x  %s' % (len(g), g[0]['size'], g[0]['addr'], dict(st)))
@@ -128,7 +128,7 @@ EE_VECTOR = re.compile(r'^(p(add|sub|cpy|ext|pac|mul|div|and|or|nor|xor|abs|min|
 
 
 def candidates(top, args=None):
-    """TUs a Phase 5 agent can finish by hand: most of the TU already in source, a moderate rest, known classes, few EE vector
+    """TUs a contributor can finish by hand: most of the TU already in source, a moderate rest, known classes, few EE vector
     functions. Scored from the generated build/SLUS_213.76/tus.yaml, the source units and the function inventory."""
     import bisect, yaml
     sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
@@ -213,7 +213,7 @@ def candidates(top, args=None):
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('what', nargs='?', default='all', choices=['near', 'types', 'families', 'data', 'ee', 'tus', 'all'])
+    ap.add_argument('what', nargs='?', default='all', choices=['near', 'types', 'identical', 'families', 'data', 'ee', 'tus', 'all'])
     ap.add_argument('--top', type=int, default=15)
     ap.add_argument('--max-size', type=int)
     ap.add_argument('--library', action='append', help='TU library filter (repeatable)')
@@ -221,6 +221,8 @@ def main():
     ap.add_argument('--per-library', type=int, default=3, help='maximum candidates per library; 0 means unlimited')
     ap.add_argument('--json', action='store_true', help='machine-readable TU queue candidates')
     a = ap.parse_args()
+    if a.what == 'families':
+        a.what = 'identical'
     if a.what in ('tus', 'all'):
         candidates(max(a.top, 10) if a.what == 'all' else a.top, a)
         if a.what == 'tus':
@@ -228,7 +230,7 @@ def main():
     res = load()
     if not res:
         raise SystemExit('no results: run tools/autodecomp.py run first')
-    for name, fn in (('near', near), ('types', types), ('families', families), ('data', data), ('ee', ee)):
+    for name, fn in (('near', near), ('types', types), ('identical', families), ('data', data), ('ee', ee)):
         if a.what in (name, 'all'):
             fn(res, a.top, a.max_size)
             print()

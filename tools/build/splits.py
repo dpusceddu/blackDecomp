@@ -6,7 +6,7 @@
                      - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x103858]}
                      - {src: src/kynapse/behaviors_hide.cpp, range: [0x2d4148, 0x2d4a20], flags: [-O2, -G0, -snas, -fbyte-bool]}
                    Keys: src, range (start inclusive, end exclusive), compiler, flags, assembler (a variant such as sn-min6),
-                   sections (false: no -ffunction-sections), owner, note; rare ones: functions (the addresses the split
+                   sections (false: no -ffunction-sections), note; rare ones: functions (the addresses the split
                    compiles, for a file that is compiled several times with -D selectors and carries no markers), externs, data_ranges,
                    rodata_type_splits, shared_exception_tables, full_tu_context, unlinked_context_helpers.
                    `defaults:` at the top holds compiler, flags and sections for entries that omit them.
@@ -38,7 +38,7 @@ DEFAULT_SLUG = 'SLUS_213.76'
 DEFAULT_COMPILER = 'ee-gcc2.95.3-136'
 DEFAULT_FLAGS = ['-O2', '-G0', '-snas']
 
-SPLIT_KEYS = {'src', 'range', 'functions', 'compiler', 'flags', 'assembler', 'sections', 'owner', 'note', 'externs', 'data_ranges',
+SPLIT_KEYS = {'src', 'range', 'functions', 'compiler', 'flags', 'assembler', 'sections', 'note', 'externs', 'data_ranges',
               'rodata_type_splits', 'shared_exception_tables', 'full_tu_context', 'unlinked_context_helpers'}
 SYMBOL_LINE = re.compile(r'^\s*([^\s=;/]+)\s*=\s*(0[xX][0-9a-fA-F]+|\d+)\s*;\s*(?://\s*(.*))?$')
 
@@ -67,10 +67,9 @@ class Split:
         self.flags = list(entry.get('flags', defaults.get('flags', DEFAULT_FLAGS)))
         self.assembler = entry.get('assembler')
         self.sections = bool(entry.get('sections', defaults.get('sections', True)))
-        self.owner = entry.get('owner')
         self.note = entry.get('note')
         self.functions = [num(a) for a in entry['functions']] if 'functions' in entry else None
-        self.extra = {k: entry[k] for k in SPLIT_KEYS - {'src', 'range', 'functions', 'compiler', 'flags', 'assembler', 'sections', 'owner', 'note'}
+        self.extra = {k: entry[k] for k in SPLIT_KEYS - {'src', 'range', 'functions', 'compiler', 'flags', 'assembler', 'sections', 'note'}
                       if k in entry}
         self.entry = entry
 
@@ -254,7 +253,7 @@ def flow(value):
 def format_split(entry):
     """One `- {src: ..., range: [0x.., 0x..], ...}` line; ranges and data addresses in hex."""
     parts = ['src: %s' % entry['src'], 'range: [0x%06x, 0x%06x]' % tuple(num(v) for v in entry['range'])]
-    for key in ('compiler', 'flags', 'assembler', 'sections', 'owner'):
+    for key in ('compiler', 'flags', 'assembler', 'sections'):
         if key in entry:
             parts.append('%s: %s' % (key, flow(entry[key])))
     if 'functions' in entry:

@@ -1,6 +1,7 @@
-# Source splits of SLUS_213.76: one entry per source file and address range (docs/build.md). Edit by hand.
-# range is [start, end); every function of the range is compiled from the file unless the file marks it
-# INCLUDE_ASM. `functions` lists the compiled addresses of files that carry no markers.
+# Source splits of SLUS_213.76: one entry per source file and address range (docs/units.md). Edit by hand.
+# An entry owns every function in [start, end) and ranges never overlap: a function is either an INCLUDE_ASM line or a definition in
+# its owner file. A file with separate stretches has one entry per stretch, the first with all the options. An entry with `functions`
+# owns exactly those addresses (a file compiled several times with -D selectors, no markers); its range is only their bounding interval.
 # `assembler: sn-min6` is a per-file recipe that reproduces the bytes, not a recovered rule (docs/status.md, open problem 4).
 variant: SLUS_213.76
 defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas], sections: true}
@@ -223,7 +224,7 @@ splits:
   - {src: src/game/unsorted/tu_1264c0.c, range: [0x1264c0, 0x1264c8]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x1264c8, 0x127118]}
   - {src: src/game/unsorted/tu_127118.c, range: [0x127118, 0x127738]}
-  - {src: src/game/world/tu_127118.cpp, range: [0x127738, 0x1277a0], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf16], owner: pilot}
+  - {src: src/game/world/tu_127118.cpp, range: [0x127738, 0x1277a0], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf16]}
   - {src: src/game/unsorted/tu_127118.c, range: [0x1277a0, 0x127a40]}
   - {src: src/game/world/tu_127118.cpp, range: [0x127a40, 0x127ab8]}
   - {src: src/game/unsorted/tu_127118.c, range: [0x127ab8, 0x1282b0]}
@@ -277,8 +278,8 @@ splits:
   - {src: src/game/unsorted/tu_135558.c, range: [0x135558, 0x135570]}
   - {src: src/game/unsorted/tu_135570.c, range: [0x135570, 0x135580]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x135580, 0x1357b8]}
-  - {src: src/game/camera/pose.cpp, range: [0x1357b8, 0x135878], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16], owner: camera}
-  - {src: src/game/camera/actor_motion.cpp, range: [0x135878, 0x135940], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16], owner: camera}
+  - {src: src/game/camera/pose.cpp, range: [0x1357b8, 0x135878], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
+  - {src: src/game/camera/actor_motion.cpp, range: [0x135878, 0x135940], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x135940, 0x135b28]}
   - {src: src/game/camera/tu_135b28.c, range: [0x135b28, 0x135b60]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x135b60, 0x135b80]}
@@ -306,11 +307,11 @@ splits:
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x139b68, 0x139bb0]}
   - {src: src/game/camera/tu_139bb0.c, range: [0x139bb0, 0x13bb78]}
   - {src: src/game/camera/tu_139bb0_13a300.cpp, range: [0x13bb78, 0x13c778], sections: false}
-  - {src: src/game/camera/tu_13c778.cpp, range: [0x13c778, 0x13c868], sections: false, owner: camera}
+  - {src: src/game/camera/tu_13c778.cpp, range: [0x13c778, 0x13c868], sections: false}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x13c868, 0x13c950]}
   - {src: src/game/camera/tu_13c950.c, range: [0x13c950, 0x13c9b0]}
   - {src: src/game/camera/tu_13c9b0.c, range: [0x13c9b0, 0x13c9d8]}
-  - {src: src/game/camera/restore.cpp, range: [0x13c9d8, 0x13ce08], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16, -fbyte-bool], owner: camera}
+  - {src: src/game/camera/restore.cpp, range: [0x13c9d8, 0x13ce08], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16, -fbyte-bool]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x13ce08, 0x13d1d0]}
   - {src: src/game/unsorted/tu_13d1d0.c, range: [0x13d1d0, 0x13d7a0]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x13d7a0, 0x13d8a0]}
@@ -328,7 +329,7 @@ splits:
   - {src: src/game/camera/actor_input.cpp, range: [0x13ffa0, 0x140008]}
   - {src: src/game/camera/actor_13db40.cpp, range: [0x140008, 0x140048]}
   - {src: src/game/camera/tu_13db40_140048.c, range: [0x140048, 0x1409c0]}
-  - {src: src/game/camera/tu_1409c0.cpp, range: [0x1409c0, 0x140a40], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf16], owner: camera}
+  - {src: src/game/camera/tu_1409c0.cpp, range: [0x1409c0, 0x140a40], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf16]}
   - {src: src/game/camera/actor_input.cpp, range: [0x140a40, 0x140aa8]}
   - {src: src/game/camera/tu_140aa8.c, range: [0x140aa8, 0x140ad0]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x140ad0, 0x140ca0]}
@@ -445,7 +446,7 @@ splits:
   - {src: src/game/unsorted/tu_153588.c, range: [0x153588, 0x153690]}
   - {src: src/game/unsorted/tu_153690.c, range: [0x153690, 0x1536b0]}
   - {src: src/game/unsorted/tu_1536b0.c, range: [0x1536b0, 0x154fd8]}
-  - {src: src/game/weapons/weapons_tu_154fd8.cpp, range: [0x154fd8, 0x155088], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_154fd8.cpp, range: [0x154fd8, 0x155088], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/game/weapons/tu_155088.c, range: [0x155088, 0x1550c0]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x1550c0, 0x155118]}
   - {src: src/game/weapons/tu_155118.c, range: [0x155118, 0x155130]}
@@ -454,14 +455,14 @@ splits:
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x155178, 0x155198]}
   - {src: src/game/weapons/tu_155198.c, range: [0x155198, 0x1551a8]}
   - {src: src/game/weapons/tu_1551a8.c, range: [0x1551a8, 0x1551c8]}
-  - {src: src/game/weapons/weapons_tu_1551c8.cpp, range: [0x1551c8, 0x155238], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
-  - {src: src/game/weapons/tu_155238.cpp, range: [0x155238, 0x155b08], sections: false, owner: weapons}
+  - {src: src/game/weapons/weapons_tu_1551c8.cpp, range: [0x1551c8, 0x155238], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/game/weapons/tu_155238.cpp, range: [0x155238, 0x155b08], sections: false}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x155b08, 0x155c28]}
-  - {src: src/game/weapons/tu_155c28.cpp, range: [0x155c28, 0x155dc8], sections: false, owner: weapons}
+  - {src: src/game/weapons/tu_155c28.cpp, range: [0x155c28, 0x155dc8], sections: false}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x155dc8, 0x1561f8]}
   - {src: src/game/weapons/tu_1561f8.c, range: [0x1561f8, 0x156278], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/weapons/tu_1561f8_156278.c, range: [0x156278, 0x156388]}
-  - {src: src/game/weapons/weapons_tu_1561f8.cpp, range: [0x156388, 0x156450], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_1561f8.cpp, range: [0x156388, 0x156450], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/game/weapons/tu_1561f8_156450.c, range: [0x156450, 0x156d60], flags: [-O2, -G0, -snas, -fno-schedule-insns]}
   - {src: src/game/weapons/tu_1561f8_156d60.c, range: [0x156d60, 0x156dc0], sections: false}
   - {src: src/game/weapons/tu_1561f8_156dc0.c, range: [0x156dc0, 0x156e70], sections: false}
@@ -476,25 +477,25 @@ splits:
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x158e88, 0x158ea8]}
   - {src: src/game/weapons/tu_158ea8.c, range: [0x158ea8, 0x158f08]}
   - {src: src/game/weapons/tu_158f08.c, range: [0x158f08, 0x15a830]}
-  - {src: src/game/weapons/weapons_tu_158f08.cpp, range: [0x15a830, 0x15a8d0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_158f08.cpp, range: [0x15a830, 0x15a8d0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/game/weapons/tu_158f08.c, range: [0x15a8d0, 0x15a990]}
   - {src: src/game/weapons/weapons_tu_158f08.cpp, range: [0x15a990, 0x15b8f0]}
   - {src: src/game/weapons/tu_158f08.c, range: [0x15b8f0, 0x15b8f8]}
   - {src: src/game/weapons/weapons_tu_158f08.cpp, range: [0x15b8f8, 0x15bb48]}
   - {src: src/game/weapons/tu_15bb48.c, range: [0x15bb48, 0x15bb90]}
   - {src: src/game/weapons/tu_15bb90.c, range: [0x15bb90, 0x15bbd8]}
-  - {src: src/game/weapons/weapons_inventory_inventory.cpp, range: [0x15bbd8, 0x15c970], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
-  - {src: src/game/weapons/weapons_inventory_manager.cpp, range: [0x15c970, 0x15cec8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], assembler: sn-min6, owner: weapons}
+  - {src: src/game/weapons/weapons_inventory_inventory.cpp, range: [0x15bbd8, 0x15c970], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31]}
+  - {src: src/game/weapons/weapons_inventory_manager.cpp, range: [0x15c970, 0x15cec8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], assembler: sn-min6}
   - {src: src/game/weapons/weapons_inventory_inventory.cpp, range: [0x15cec8, 0x15cef0]}
   - {src: src/game/weapons/weapons_inventory_manager.cpp, range: [0x15cef0, 0x15d060]}
-  - {src: src/game/weapons/tu_15d060.cpp, range: [0x15d060, 0x15d198], sections: false, owner: weapons}
-  - {src: src/game/weapons/weapons_tu_15d198.cpp, range: [0x15d198, 0x15d210], flags: [-O2, -G0, -snas, -fbyte-bool], assembler: sn-min6, owner: weapons}
-  - {src: src/game/weapons/weapons_catalog_methods.cpp, range: [0x15d210, 0x15d248], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
-  - {src: src/game/weapons/weapons_tu_15d248.cpp, range: [0x15d248, 0x15d288], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
+  - {src: src/game/weapons/tu_15d060.cpp, range: [0x15d060, 0x15d198], sections: false}
+  - {src: src/game/weapons/weapons_tu_15d198.cpp, range: [0x15d198, 0x15d210], flags: [-O2, -G0, -snas, -fbyte-bool], assembler: sn-min6}
+  - {src: src/game/weapons/weapons_catalog_methods.cpp, range: [0x15d210, 0x15d248], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/game/weapons/weapons_tu_15d248.cpp, range: [0x15d248, 0x15d288], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31]}
   - {src: src/game/weapons/weapons_catalog_methods.cpp, range: [0x15d288, 0x15d2e8]}
-  - {src: src/game/weapons/tu_15d2e8.cpp, range: [0x15d2e8, 0x15d310], sections: false, owner: weapons}
-  - {src: src/game/weapons/weapons_tu_15d310.cpp, range: [0x15d310, 0x15d370], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
-  - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d370, 0x15d3d8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
+  - {src: src/game/weapons/tu_15d2e8.cpp, range: [0x15d2e8, 0x15d310], sections: false}
+  - {src: src/game/weapons/weapons_tu_15d310.cpp, range: [0x15d310, 0x15d370], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31]}
+  - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d370, 0x15d3d8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31]}
   - {src: src/game/weapons/tu_15d370_15d3d8.c, range: [0x15d3d8, 0x15d758]}
   - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d758, 0x15d850]}
   - {src: src/game/weapons/tu_15d370_15d3d8.c, range: [0x15d850, 0x15d870]}
@@ -546,7 +547,7 @@ splits:
   - {src: src/game/unsorted/tu_1632b8.c, range: [0x1632b8, 0x1632e0]}
   - {src: src/game/weapons/tu_1632e0.c, range: [0x1632e0, 0x1632f8], flags: [-O1, -G0, -snas]}
   - {src: src/game/weapons/tu_1632f8.c, range: [0x1632f8, 0x163328]}
-  - {src: src/game/weapons/tu_163328.cpp, range: [0x163328, 0x163498], sections: false, owner: weapons}
+  - {src: src/game/weapons/tu_163328.cpp, range: [0x163328, 0x163498], sections: false}
   - {src: src/game/unsorted/tu_163498.c, range: [0x163498, 0x1634d8]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x1634d8, 0x163530]}
   - {src: src/game/unsorted/tu_163530.c, range: [0x163530, 0x163550]}
@@ -687,7 +688,7 @@ splits:
   - {src: src/game/unsorted/tu_176f00.c, range: [0x176f00, 0x176f20]}
   - {src: src/game/unsorted/tu_176f20.c, range: [0x176f20, 0x176f30], flags: [-O1, -G0, -snas]}
   - {src: src/game/unsorted/tu_176f30.c, range: [0x176f30, 0x176f38]}
-  - {src: src/game/unsorted/tu_176f38.cpp, range: [0x176f38, 0x176f60], sections: false, owner: pilot}
+  - {src: src/game/unsorted/tu_176f38.cpp, range: [0x176f38, 0x176f60], sections: false}
   - {src: src/game/unsorted/tu_176f60.c, range: [0x176f60, 0x176f70]}
   - {src: src/game/unsorted/tu_176f70.c, range: [0x176f70, 0x176f88], flags: [-O1, -G0, -snas]}
   - {src: src/game/unsorted/tu_176f88.c, range: [0x176f88, 0x176fb0]}
@@ -1012,11 +1013,11 @@ splits:
   - {src: src/game/ai/tu_1984f0_1994f0.c, range: [0x1994f0, 0x199700], sections: false}
   - {src: src/game/ai/tu_1984f0_199700.c, range: [0x199700, 0x199790], sections: false}
   - {src: src/game/ai/tu_1984f0_199790.c, range: [0x199790, 0x199850], sections: false}
-  - {src: src/game/ai/tu_199850.c, range: [0x199850, 0x199888], flags: [-O2, -G0, -snas, -fno-schedule-insns2, -DACTION_ENTER_ONLY], sections: false, owner: action-event, functions: [0x199850]}
-  - {src: src/game/ai/tu_199850.c, range: [0x199888, 0x1998c0], flags: [-O2, -G0, -snas, -DACTION_NOTIFY_ONLY], sections: false, owner: action-event, functions: [0x199888], data_ranges: [{end: '0x3de748', input: .data.action_dispatch, section: .data, start: '0x3de6d8'}]}
-  - {src: src/game/ai/tu_199850.c, range: [0x1998c0, 0x1998f8], flags: [-O2, -G0, -snas, -DACTION_EVENT_ONLY], sections: false, owner: action-event, functions: [0x1998c0]}
-  - {src: src/game/ai/tu_199850.c, range: [0x1998f8, 0x199950], sections: false, owner: action-event, functions: [0x1998f8]}
-  - {src: src/game/ai/tu_199950.c, range: [0x199950, 0x199988], owner: action-event}
+  - {src: src/game/ai/tu_199850.c, range: [0x199850, 0x199888], flags: [-O2, -G0, -snas, -fno-schedule-insns2, -DACTION_ENTER_ONLY], sections: false, functions: [0x199850]}
+  - {src: src/game/ai/tu_199850.c, range: [0x199888, 0x1998c0], flags: [-O2, -G0, -snas, -DACTION_NOTIFY_ONLY], sections: false, functions: [0x199888], data_ranges: [{end: '0x3de748', input: .data.action_dispatch, section: .data, start: '0x3de6d8'}]}
+  - {src: src/game/ai/tu_199850.c, range: [0x1998c0, 0x1998f8], flags: [-O2, -G0, -snas, -DACTION_EVENT_ONLY], sections: false, functions: [0x1998c0]}
+  - {src: src/game/ai/tu_199850.c, range: [0x1998f8, 0x199950], sections: false, functions: [0x1998f8]}
+  - {src: src/game/ai/tu_199950.c, range: [0x199950, 0x199988]}
   - {src: src/game/ai/tu_199988.c, range: [0x199988, 0x19a5e0]}
   - {src: src/game/ai/tu_199988_19a5e0.c, range: [0x19a5e0, 0x19a648], sections: false}
   - {src: src/game/ai/tu_199988.c, range: [0x19a648, 0x19a670]}
@@ -1274,7 +1275,7 @@ splits:
   - {src: src/game/effects/damage_1be940.cpp, range: [0x1be940, 0x1beba0], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1beba0, 0x1bec18]}
   - {src: src/game/effects/emitter_1bec68.cpp, range: [0x1bec18, 0x1becc8], flags: [-x, c++, -O2, -G0, -snas]}
-  - {src: src/game/effects/tu_1bec18_1becc8.c, range: [0x1becc8, 0x1becd0], owner: context}
+  - {src: src/game/effects/tu_1bec18_1becc8.c, range: [0x1becc8, 0x1becd0]}
   - {src: src/game/effects/tu_1bec18_1becd0.cpp, range: [0x1becd0, 0x1bf720], sections: false}
   - {src: src/game/effects/emitter_1bf720.cpp, range: [0x1bf720, 0x1bfea0], flags: [-x, c++, -O2, -G0, -snas]}
   - {src: src/game/effects/emitter_1bfea0.cpp, range: [0x1bfea0, 0x1bffe0], flags: [-x, c++, -O2, -G0, -snas]}
@@ -2055,17 +2056,17 @@ splits:
   - {src: src/rw_core/tu_2ce950_2cead8.c, range: [0x2cead8, 0x2cf5c0], flags: [-O2, -G8, -snas], note: flags or language differ}
   - {src: src/rw_core/tu_2ce950_2cf5c0.c, range: [0x2cf5c0, 0x2d15a0]}
   - {src: src/kynapse/leaf_functions_2d15a0.cpp, range: [0x2d15a0, 0x2d1610], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behavior_factories_2d1610.cpp, range: [0x2d1610, 0x2d16b8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/behaviors_flee.cpp, range: [0x2d16b8, 0x2d1918], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/kynapse/behaviors_flee_2d1918.cpp, range: [0x2d1918, 0x2d2ce8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: behaviors}
-  - {src: src/kynapse/flee_agent_2d1610.cpp, range: [0x2d2ce8, 0x2d2e48], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/kynapse/predicates_2d2e48.cpp, range: [0x2d2e48, 0x2d2e90], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/behavior_factories_2d1610.cpp, range: [0x2d1610, 0x2d16b8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/behaviors_flee.cpp, range: [0x2d16b8, 0x2d1918], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/behaviors_flee_2d1918.cpp, range: [0x2d1918, 0x2d2ce8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
+  - {src: src/kynapse/flee_agent_2d1610.cpp, range: [0x2d2ce8, 0x2d2e48], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/predicates_2d2e48.cpp, range: [0x2d2e48, 0x2d2e90], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/flee_agent_2d1610.cpp, range: [0x2d2e90, 0x2d2f48]}
   - {src: src/kynapse/behaviors_flee_2d1918.cpp, range: [0x2d2f48, 0x2d2f80]}
   - {src: src/kynapse/flee_agent_2d1610.cpp, range: [0x2d2f80, 0x2d2ff8]}
-  - {src: src/kynapse/tu_2d2ff8.cpp, range: [0x2d2ff8, 0x2d38c8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: follower-data, functions: [0x2d2ff8, 0x2d30a0, 0x2d31f0, 0x2d3300, 0x2d34c0, 0x2d3520, 0x2d3560, 0x2d35b8, 0x2d35c8, 0x2d35d8, 0x2d3610, 0x2d36a8, 0x2d37d8, 0x2d3810, 0x2d3838, 0x2d3888, 0x2d38a8], data_ranges: [{end: '0x3e3198', input: .data.follower_vtable, section: .data, start: '0x3e3130'}, {end: '0x44ef00', input: .bss, section: .bss, start: '0x44ede8'}]}
-  - {src: src/kynapse/tu_2d2ff8.cpp, range: [0x2d3858, 0x2d3888], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DFOLLOWER_CALLBACK_ONLY, -fno-schedule-insns], owner: follower-data, functions: [0x2d3858]}
-  - {src: src/kynapse/behaviors_goto.cpp, range: [0x2d38c8, 0x2d3970], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: behaviors}
+  - {src: src/kynapse/tu_2d2ff8.cpp, range: [0x2d2ff8, 0x2d38c8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], functions: [0x2d2ff8, 0x2d30a0, 0x2d31f0, 0x2d3300, 0x2d34c0, 0x2d3520, 0x2d3560, 0x2d35b8, 0x2d35c8, 0x2d35d8, 0x2d3610, 0x2d36a8, 0x2d37d8, 0x2d3810, 0x2d3838, 0x2d3888, 0x2d38a8], data_ranges: [{end: '0x3e3198', input: .data.follower_vtable, section: .data, start: '0x3e3130'}, {end: '0x44ef00', input: .bss, section: .bss, start: '0x44ede8'}]}
+  - {src: src/kynapse/tu_2d2ff8.cpp, range: [0x2d3858, 0x2d3888], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DFOLLOWER_CALLBACK_ONLY, -fno-schedule-insns], functions: [0x2d3858]}
+  - {src: src/kynapse/behaviors_goto.cpp, range: [0x2d38c8, 0x2d3970], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2d38c8_2d3970.c, range: [0x2d3970, 0x2d3a68]}
   - {src: src/kynapse/predicates_2d3a68.cpp, range: [0x2d3a68, 0x2d3a78], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_goto.cpp, range: [0x2d3a78, 0x2d3b00]}
@@ -2075,43 +2076,43 @@ splits:
   - {src: src/kynapse/predicates_2d3a68.cpp, range: [0x2d3bd8, 0x2d3c50]}
   - {src: src/kynapse/tu_2d38c8_2d3970.c, range: [0x2d3c50, 0x2d3c90]}
   - {src: src/kynapse/behavior_factories_2d3c90.cpp, range: [0x2d3c90, 0x2d3d38], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_hide.cpp, range: [0x2d3d38, 0x2d3f10], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/kynapse/behaviors_hide_retry.cpp, range: [0x2d3f10, 0x2d42c8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: behaviors}
-  - {src: src/kynapse/behaviors_hide_2d42c8.cpp, range: [0x2d42c8, 0x2d4520], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/behaviors_hide.cpp, range: [0x2d3d38, 0x2d3f10], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/behaviors_hide_retry.cpp, range: [0x2d3f10, 0x2d42c8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/kynapse/behaviors_hide_2d42c8.cpp, range: [0x2d42c8, 0x2d4520], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_hide_2d4148.cpp, range: [0x2d4520, 0x2d5008], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
-  - {src: src/kynapse/hide_agent_2d3c90.cpp, range: [0x2d5008, 0x2d5068], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/hide_agent_2d3c90.cpp, range: [0x2d5008, 0x2d5068], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_hide_2d4148.cpp, range: [0x2d5068, 0x2d50e8]}
   - {src: src/kynapse/hide_agent_2d3c90.cpp, range: [0x2d50e8, 0x2d5178]}
-  - {src: src/kynapse/kynapse_methods.cpp, range: [0x2d5178, 0x2d5198], owner: behaviors}
-  - {src: src/kynapse/predicates_2d5198.cpp, range: [0x2d5198, 0x2d51c0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/kynapse/behavior_methods_2d51c0.cpp, range: [0x2d51c0, 0x2d5238], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/kynapse/predicates_2d5238.cpp, range: [0x2d5238, 0x2d5328], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/kynapse_methods.cpp, range: [0x2d5178, 0x2d5198]}
+  - {src: src/kynapse/predicates_2d5198.cpp, range: [0x2d5198, 0x2d51c0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/behavior_methods_2d51c0.cpp, range: [0x2d51c0, 0x2d5238], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/predicates_2d5238.cpp, range: [0x2d5238, 0x2d5328], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/hide_agent_2d3c90.cpp, range: [0x2d5328, 0x2d5398]}
-  - {src: src/kynapse/behaviors_hide_reset.cpp, range: [0x2d5398, 0x2d53b0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/behaviors_hide_reset.cpp, range: [0x2d5398, 0x2d53b0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/hide_agent_2d3c90.cpp, range: [0x2d53b0, 0x2d53f0]}
-  - {src: src/kynapse/behaviors_cpathwayagent.cpp, range: [0x2d53f0, 0x2d5498], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/behaviors_cpathwayagent.cpp, range: [0x2d53f0, 0x2d5498], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/path_agent.cpp, range: [0x2d5498, 0x2d5650], flags: [-O2, -G0, -snas, -fbyte-bool], externs: {ConfigureAll__Q24Kaim8BehaviorPQ24Kaim12ChildBuffers: '0x2e0018'}}
   - {src: src/kynapse/behaviors_pathway.cpp, range: [0x2d5650, 0x2d61b8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2d53f0_2d61b8.c, range: [0x2d61b8, 0x2d62d0]}
   - {src: src/kynapse/behaviors_pathway.cpp, range: [0x2d62d0, 0x2d63c0]}
   - {src: src/kynapse/predicates_2d63c0.cpp, range: [0x2d63c0, 0x2d63e0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_path_controls.cpp, range: [0x2d63e0, 0x2d6440], flags: [-O2, -G0, -snas, -fbyte-bool], assembler: sn-min6, owner: behaviors}
+  - {src: src/kynapse/behaviors_path_controls.cpp, range: [0x2d63e0, 0x2d6440], flags: [-O2, -G0, -snas, -fbyte-bool], assembler: sn-min6}
   - {src: src/kynapse/tu_2d53f0_2d61b8.c, range: [0x2d6440, 0x2d6460]}
   - {src: src/kynapse/predicates_2d6460.cpp, range: [0x2d6460, 0x2d6480], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/cursor_wrap.cpp, range: [0x2d6480, 0x2d64d8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d53f0_2d61b8.c, range: [0x2d64d8, 0x2d6520]}
   - {src: src/kynapse/behaviors_cpathwayagent.cpp, range: [0x2d6520, 0x2d6580]}
   - {src: src/kynapse/tu_2d53f0_2d61b8.c, range: [0x2d6580, 0x2d65e8]}
-  - {src: src/kynapse/behaviors_cshooteragent.cpp, range: [0x2d65e8, 0x2d6860], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/kynapse/behaviors_shooter.cpp, range: [0x2d6860, 0x2d6e48], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: behaviors, externs: {ConfigureAll__Q24Kaim8BehaviorPQ24Kaim12ChildBuffers: '0x2e0018'}}
-  - {src: src/kynapse/behaviors_cshooteragent_clear.cpp, range: [0x2d6e48, 0x2d6fa8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: behaviors}
+  - {src: src/kynapse/behaviors_cshooteragent.cpp, range: [0x2d65e8, 0x2d6860], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/behaviors_shooter.cpp, range: [0x2d6860, 0x2d6e48], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], externs: {ConfigureAll__Q24Kaim8BehaviorPQ24Kaim12ChildBuffers: '0x2e0018'}}
+  - {src: src/kynapse/behaviors_cshooteragent_clear.cpp, range: [0x2d6e48, 0x2d6fa8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2d65e8_2d6fa8.c, range: [0x2d6fa8, 0x2d7008]}
-  - {src: src/kynapse/behaviors_cshooteragent_constructor.cpp, range: [0x2d7008, 0x2d7068], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/behaviors_cshooteragent_constructor.cpp, range: [0x2d7008, 0x2d7068], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d65e8_2d6fa8.c, range: [0x2d7068, 0x2d70c0]}
   - {src: src/kynapse/predicates_2d70c0.cpp, range: [0x2d70c0, 0x2d7118], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_cshooteragent.cpp, range: [0x2d7118, 0x2d71e8]}
   - {src: src/kynapse/tu_2d65e8_2d6fa8.c, range: [0x2d71e8, 0x2d7260]}
-  - {src: src/kynapse/tu_2d7260.cpp, range: [0x2d7260, 0x2d7970], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], sections: false, owner: kynapse-wander, data_ranges: [{end: '0x3c54ac', input: .data, kind: unwind, section: .data, start: '0x3c5278'}, {end: '0x3e3c08', input: .data.wander_vtable, section: .data, start: '0x3e3bb0'}, {end: '0x44f478', input: .bss, section: .bss, start: '0x44f360'}], rodata_type_splits: ['0x404708'], shared_exception_tables: ['0x40c920']}
+  - {src: src/kynapse/tu_2d7260.cpp, range: [0x2d7260, 0x2d7970], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], sections: false, data_ranges: [{end: '0x3c54ac', input: .data, kind: unwind, section: .data, start: '0x3c5278'}, {end: '0x3e3c08', input: .data.wander_vtable, section: .data, start: '0x3e3bb0'}, {end: '0x44f478', input: .bss, section: .bss, start: '0x44f360'}], rodata_type_splits: ['0x404708'], shared_exception_tables: ['0x40c920']}
   - {src: src/kynapse/parameter_classes_2d7970.cpp, range: [0x2d7970, 0x2d79e0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d7970_2d79e0.c, range: [0x2d79e0, 0x2d7af8]}
   - {src: src/kynapse/parameter_classes_2d7af8.cpp, range: [0x2d7af8, 0x2d7b68], flags: [-O2, -G0, -snas, -fbyte-bool]}
@@ -2129,7 +2130,7 @@ splits:
   - {src: src/kynapse/parameter_classes_2d82c0.cpp, range: [0x2d82c0, 0x2d8330], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d82c0_2d8330.c, range: [0x2d8330, 0x2d8448]}
   - {src: src/kynapse/engine_create_2d8448.cpp, range: [0x2d8448, 0x2d8578], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_sight.cpp, range: [0x2d8578, 0x2d86a8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/behaviors_sight.cpp, range: [0x2d8578, 0x2d86a8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/parameter_classes_2d86a8.cpp, range: [0x2d86a8, 0x2d8718], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d86a8_2d8718.c, range: [0x2d8718, 0x2d8770]}
   - {src: src/kynapse/parameter_assign_2d8770.cpp, range: [0x2d8770, 0x2d87e8], flags: [-O2, -G0, -snas, -fbyte-bool]}
@@ -2166,28 +2167,28 @@ splits:
   - {src: src/kynapse/parameter_classes_2da040.cpp, range: [0x2da040, 0x2da0b0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2da040_2da0b0.c, range: [0x2da0b0, 0x2da208]}
   - {src: src/kynapse/factories_2da208.cpp, range: [0x2da208, 0x2da2a0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_pathmanager.cpp, range: [0x2da2a0, 0x2da920], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: behaviors}
+  - {src: src/kynapse/behaviors_pathmanager.cpp, range: [0x2da2a0, 0x2da920], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2da208_2da920.c, range: [0x2da920, 0x2daa70]}
   - {src: src/kynapse/behaviors_pathmanager.cpp, range: [0x2daa70, 0x2dacd0]}
   - {src: src/kynapse/tu_2da208_2da920.c, range: [0x2dacd0, 0x2dad10]}
-  - {src: src/kynapse/point_mapper_factory.cpp, range: [0x2dad10, 0x2dada8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
-  - {src: src/kynapse/point_mapper_core.cpp, range: [0x2dada8, 0x2daf40], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
-  - {src: src/kynapse/point_mapper_configure.cpp, range: [0x2daf40, 0x2db848], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
-  - {src: src/kynapse/point_mapper_nearest.cpp, range: [0x2db848, 0x2dc7e0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
+  - {src: src/kynapse/point_mapper_factory.cpp, range: [0x2dad10, 0x2dada8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/point_mapper_core.cpp, range: [0x2dada8, 0x2daf40], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/point_mapper_configure.cpp, range: [0x2daf40, 0x2db848], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/point_mapper_nearest.cpp, range: [0x2db848, 0x2dc7e0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/point_mapper_core.cpp, range: [0x2dc7e0, 0x2dc930]}
-  - {src: src/kynapse/behaviors_pointmapper.cpp, range: [0x2dc930, 0x2dc9f0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/behaviors_pointmapper.cpp, range: [0x2dc930, 0x2dc9f0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/point_mapper_core.cpp, range: [0x2dc9f0, 0x2dca40]}
   - {src: src/kynapse/factories_2dca40.cpp, range: [0x2dca40, 0x2dcad8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_scriptmanager.cpp, range: [0x2dcad8, 0x2dd158], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: behaviors}
+  - {src: src/kynapse/behaviors_scriptmanager.cpp, range: [0x2dcad8, 0x2dd158], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2dca40_2dd158.c, range: [0x2dd158, 0x2dd2a8]}
   - {src: src/kynapse/behaviors_scriptmanager.cpp, range: [0x2dd2a8, 0x2dd508]}
   - {src: src/kynapse/tu_2dca40_2dd158.c, range: [0x2dd508, 0x2dd548]}
-  - {src: src/kynapse/behaviors_pathway_2dd548.cpp, range: [0x2dd548, 0x2df198], flags: [-O2, -G0, -snas, -fno-rtti], assembler: sn-min6, owner: behaviors}
-  - {src: src/kynapse/behaviors_waypoint.cpp, range: [0x2df198, 0x2df230], flags: [-O2, -G0, -snas, -fno-rtti], owner: behaviors}
+  - {src: src/kynapse/behaviors_pathway_2dd548.cpp, range: [0x2dd548, 0x2df198], flags: [-O2, -G0, -snas, -fno-rtti], assembler: sn-min6}
+  - {src: src/kynapse/behaviors_waypoint.cpp, range: [0x2df198, 0x2df230], flags: [-O2, -G0, -snas, -fno-rtti]}
   - {src: src/kynapse/behaviors_pathway_2dd548.cpp, range: [0x2df230, 0x2df5a8]}
   - {src: src/kynapse/behaviors_waypoint.cpp, range: [0x2df5a8, 0x2df650]}
   - {src: src/kynapse/label_2df650.cpp, range: [0x2df650, 0x2df658], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_text.cpp, range: [0x2df658, 0x2df8c8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: behaviors}
+  - {src: src/kynapse/behaviors_text.cpp, range: [0x2df658, 0x2df8c8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/owned_arrays_2df8c8.cpp, range: [0x2df8c8, 0x2df8e8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2df658_2df8e8.c, range: [0x2df8e8, 0x2df960], note: flags or language differ}
   - {src: src/kynapse/behaviors_text.cpp, range: [0x2df960, 0x2df9b8]}
@@ -2197,7 +2198,7 @@ splits:
   - {src: src/kynapse/owned_arrays_2dfc38.cpp, range: [0x2dfc38, 0x2dfdc8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/CActionAttributeClass_2dfb00_2dfdc8.c, range: [0x2dfdc8, 0x2dff10]}
   - {src: src/kynapse/tu_2dff10.c, range: [0x2dff10, 0x2e0140]}
-  - {src: src/kynapse/behaviors_factory.cpp, range: [0x2e0140, 0x2e1038], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: behaviors}
+  - {src: src/kynapse/behaviors_factory.cpp, range: [0x2e0140, 0x2e1038], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/forwarders_2e1038.cpp, range: [0x2e1038, 0x2e1058], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e0140_2e1058.c, range: [0x2e1058, 0x2e1078]}
   - {src: src/kynapse/forwarders_2e1078.cpp, range: [0x2e1078, 0x2e1098], flags: [-O2, -G0, -snas, -fbyte-bool]}
@@ -2216,44 +2217,44 @@ splits:
   - {src: src/kynapse/behaviors_factory.cpp, range: [0x2e14b0, 0x2e1508]}
   - {src: src/kynapse/tu_2e0140_2e1058.c, range: [0x2e1508, 0x2e1548]}
   - {src: src/kynapse/behaviors_hide_reset.cpp, range: [0x2e1548, 0x2e1818]}
-  - {src: src/kynapse/graph_brain.cpp, range: [0x2e1818, 0x2e1b08], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: graph}
+  - {src: src/kynapse/graph_brain.cpp, range: [0x2e1818, 0x2e1b08], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/lookups_2e1b08.cpp, range: [0x2e1b08, 0x2e1bc0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_brain.cpp, range: [0x2e1bc0, 0x2e1da8]}
   - {src: src/kynapse/tu_2e1548_2e1da8.c, range: [0x2e1da8, 0x2e1e18]}
   - {src: src/kynapse/tu_2e1e18.c, range: [0x2e1e18, 0x2e2828]}
-  - {src: src/kynapse/child_buffers_2e2828.cpp, range: [0x2e2828, 0x2e2910], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e2910.cpp, range: [0x2e2910, 0x2e2b78], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e2b78.cpp, range: [0x2e2b78, 0x2e2d40], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e2d40.cpp, range: [0x2e2d40, 0x2e2ef0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e2ef0.cpp, range: [0x2e2ef0, 0x2e3100], flags: [-O2, -G0, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e3100.cpp, range: [0x2e3100, 0x2e3288], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e3288.cpp, range: [0x2e3288, 0x2e3330], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e3330.cpp, range: [0x2e3330, 0x2e3408], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/owned_arrays_2e3408.cpp, range: [0x2e3408, 0x2e3440], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e3440.cpp, range: [0x2e3440, 0x2e34b8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/owned_arrays_2e34b8.cpp, range: [0x2e34b8, 0x2e3578], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e3578.cpp, range: [0x2e3578, 0x2e37a0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/owned_arrays_2e37a0.cpp, range: [0x2e37a0, 0x2e3828], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e3828.cpp, range: [0x2e3828, 0x2e3918], flags: [-O2, -G0, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e3918.cpp, range: [0x2e3918, 0x2e3920], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/child_buffers_2e3920.cpp, range: [0x2e3920, 0x2e3928], flags: [-O2, -G0, -snas, -fbyte-bool], owner: kynapse}
+  - {src: src/kynapse/child_buffers_2e2828.cpp, range: [0x2e2828, 0x2e2910], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e2910.cpp, range: [0x2e2910, 0x2e2b78], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e2b78.cpp, range: [0x2e2b78, 0x2e2d40], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e2d40.cpp, range: [0x2e2d40, 0x2e2ef0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e2ef0.cpp, range: [0x2e2ef0, 0x2e3100], flags: [-O2, -G0, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e3100.cpp, range: [0x2e3100, 0x2e3288], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e3288.cpp, range: [0x2e3288, 0x2e3330], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e3330.cpp, range: [0x2e3330, 0x2e3408], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/owned_arrays_2e3408.cpp, range: [0x2e3408, 0x2e3440], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e3440.cpp, range: [0x2e3440, 0x2e34b8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/owned_arrays_2e34b8.cpp, range: [0x2e34b8, 0x2e3578], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e3578.cpp, range: [0x2e3578, 0x2e37a0], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/owned_arrays_2e37a0.cpp, range: [0x2e37a0, 0x2e3828], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e3828.cpp, range: [0x2e3828, 0x2e3918], flags: [-O2, -G0, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e3918.cpp, range: [0x2e3918, 0x2e3920], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/child_buffers_2e3920.cpp, range: [0x2e3920, 0x2e3928], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/settings_2e3fc8.cpp, range: [0x2e3928, 0x2e4048], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e3928_2e4048.c, range: [0x2e4048, 0x2e4070]}
   - {src: src/kynapse/settings_2e4070.cpp, range: [0x2e4070, 0x2e4160], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e3928_2e4048.c, range: [0x2e4160, 0x2e4188]}
   - {src: src/kynapse/small_misc_2e4188.cpp, range: [0x2e4188, 0x2e4198], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e3928_2e4048.c, range: [0x2e4198, 0x2e41d8]}
-  - {src: src/kynapse/behaviors_entity.cpp, range: [0x2e41d8, 0x2e4ca8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: behaviors}
+  - {src: src/kynapse/behaviors_entity.cpp, range: [0x2e41d8, 0x2e4ca8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/misc8_2e4ca8.cpp, range: [0x2e4ca8, 0x2e4d88], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e41d8_2e4d88.c, range: [0x2e4d88, 0x2e4e28]}
   - {src: src/kynapse/behaviors_hide_reset.cpp, range: [0x2e4e28, 0x2e4f58]}
   - {src: src/kynapse/tu_2e4f58.c, range: [0x2e4f58, 0x2e52c8]}
   - {src: src/kynapse/behaviors_hide_reset.cpp, range: [0x2e52c8, 0x2e5358]}
-  - {src: src/kynapse/graph_allocators.cpp, range: [0x2e5358, 0x2e5848], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/graph_allocators.cpp, range: [0x2e5358, 0x2e5848], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e5848, 0x2e58a0]}
   - {src: src/kynapse/graph_allocators.cpp, range: [0x2e58a0, 0x2e5ae8]}
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e5ae8, 0x2e5d90]}
-  - {src: src/kynapse/graph_allocator_cleanup.cpp, range: [0x2e5d90, 0x2e6cf0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -finline-functions, -finline-limit-100], owner: graph}
+  - {src: src/kynapse/graph_allocator_cleanup.cpp, range: [0x2e5d90, 0x2e6cf0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -finline-functions, -finline-limit-100]}
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e6cf0, 0x2e6d10]}
   - {src: src/kynapse/graph_allocator_cleanup.cpp, range: [0x2e6d10, 0x2e6d90]}
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e6d90, 0x2e6dd8]}
@@ -2270,11 +2271,11 @@ splits:
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e71e0, 0x2e7220]}
   - {src: src/kynapse/graph_allocator_cleanup.cpp, range: [0x2e7220, 0x2e72d0]}
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e72d0, 0x2e72f0]}
-  - {src: src/kynapse/tu_2e72f0.cpp, range: [0x2e72f0, 0x2e74e0], flags: [-x, c++, -O2, -G0, -snas], assembler: sn-min6, sections: false, owner: kynapse, data_ranges: [{end: '0x3c94a4', input: .data, kind: unwind, section: .data, start: '0x3c9364'}, {end: '0x3ea7e8', input: .data.nearest_point, section: .data, start: '0x3ea768'}, {end: '0x4514f0', input: .bss, section: .bss, start: '0x4513d8'}]}
+  - {src: src/kynapse/tu_2e72f0.cpp, range: [0x2e72f0, 0x2e74e0], flags: [-x, c++, -O2, -G0, -snas], assembler: sn-min6, sections: false, data_ranges: [{end: '0x3c94a4', input: .data, kind: unwind, section: .data, start: '0x3c9364'}, {end: '0x3ea7e8', input: .data.nearest_point, section: .data, start: '0x3ea768'}, {end: '0x4514f0', input: .bss, section: .bss, start: '0x4513d8'}]}
   - {src: src/kynapse/configure_2e74e0.cpp, range: [0x2e74e0, 0x2e75b8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e74e0_2e75b8.c, range: [0x2e75b8, 0x2e7670]}
   - {src: src/kynapse/parameter_tables_manual.cpp, range: [0x2e7670, 0x2e91c0], assembler: sn-min6}
-  - {src: src/kynapse/graph_parameter_tables.cpp, range: [0x2e91c0, 0x2e9280], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/graph_parameter_tables.cpp, range: [0x2e91c0, 0x2e9280], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/owned_arrays_2e9280.cpp, range: [0x2e9280, 0x2e9328], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e7670_2e9328.c, range: [0x2e9328, 0x2e93b8]}
   - {src: src/kynapse/graph_parameter_tables.cpp, range: [0x2e93b8, 0x2e9538]}
@@ -2293,8 +2294,8 @@ splits:
   - {src: src/kynapse/tu_2e9e88.c, range: [0x2e9e88, 0x2ea218], sections: false}
   - {src: src/kynapse/tu_2e9e88_2ea218.c, range: [0x2ea218, 0x2ea258], sections: false}
   - {src: src/kynapse/tu_2e9e88_2ea258.c, range: [0x2ea258, 0x2ea2f8], sections: false}
-  - {src: src/kynapse/tu_2ea2f8.cpp, range: [0x2ea2f8, 0x2ea388], flags: [-x, c++, -O2, -G0, -snas], owner: kynapse-b, data_ranges: [{end: '0x3c9ed4', input: .data, kind: unwind, section: .data, start: '0x3c9e8c'}, {end: '0x451528', input: .bss, section: .bss, start: '0x451518'}]}
-  - {src: src/kynapse/behaviors_world.cpp, range: [0x2ea388, 0x2eb280], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: behaviors}
+  - {src: src/kynapse/tu_2ea2f8.cpp, range: [0x2ea2f8, 0x2ea388], flags: [-x, c++, -O2, -G0, -snas], data_ranges: [{end: '0x3c9ed4', input: .data, kind: unwind, section: .data, start: '0x3c9e8c'}, {end: '0x451528', input: .bss, section: .bss, start: '0x451518'}]}
+  - {src: src/kynapse/behaviors_world.cpp, range: [0x2ea388, 0x2eb280], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/engine_class_2eb280.cpp, range: [0x2eb280, 0x2eb398], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_world.cpp, range: [0x2eb398, 0x2eb450]}
   - {src: src/kynapse/engine_class_2eb280.cpp, range: [0x2eb450, 0x2ebe90]}
@@ -2302,22 +2303,22 @@ splits:
   - {src: src/kynapse/engine_class_2ec020.cpp, range: [0x2ec020, 0x2ec058], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_world.cpp, range: [0x2ec058, 0x2ec1a8]}
   - {src: src/kynapse/tu_2ea388_2ec1a8.c, range: [0x2ec1a8, 0x2ec1b8]}
-  - {src: src/kynapse/graph_team.cpp, range: [0x2ec1b8, 0x2ec8a0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: graph}
+  - {src: src/kynapse/graph_team.cpp, range: [0x2ec1b8, 0x2ec8a0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/tu_2ec1b8_2ec8a0.c, range: [0x2ec8a0, 0x2ec918]}
   - {src: src/kynapse/factories_2ec918.cpp, range: [0x2ec918, 0x2ec9d0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/configure_2ec9d0.cpp, range: [0x2ec9d0, 0x2ecaa8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_team.cpp, range: [0x2ecaa8, 0x2ecaf0]}
   - {src: src/kynapse/tu_2ec1b8_2ec8a0.c, range: [0x2ecaf0, 0x2ecb80]}
-  - {src: src/kynapse/graph_search_workspace.cpp, range: [0x2ecb80, 0x2eef78], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: graph}
+  - {src: src/kynapse/graph_search_workspace.cpp, range: [0x2ecb80, 0x2eef78], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/tu_2ecb80_2eef78.c, range: [0x2eef78, 0x2eef88]}
-  - {src: src/kynapse/graph_cfindnearestdata.cpp, range: [0x2eef88, 0x2f09a8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
-  - {src: src/kynapse/tu_2eef88_2f09a8.c, range: [0x2f09a8, 0x2f0a00], owner: graph}
+  - {src: src/kynapse/graph_cfindnearestdata.cpp, range: [0x2eef88, 0x2f09a8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/tu_2eef88_2f09a8.c, range: [0x2f09a8, 0x2f0a00]}
   - {src: src/kynapse/buffers3_2f0a00.cpp, range: [0x2f0a00, 0x2f0a30], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_cfindnearestdata.cpp, range: [0x2f0a30, 0x2f0d68]}
   - {src: src/kynapse/tu_2eef88_2f09a8.c, range: [0x2f0d68, 0x2f0da8]}
   - {src: src/kynapse/callbacks_2f0da8.cpp, range: [0x2f0da8, 0x2f0e80], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/factories_2f0e80.cpp, range: [0x2f0e80, 0x2f0f80], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_constraints.cpp, range: [0x2f0f80, 0x2f12c0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: behaviors}
+  - {src: src/kynapse/behaviors_constraints.cpp, range: [0x2f0f80, 0x2f12c0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/factories_2f12c0.cpp, range: [0x2f12c0, 0x2f1358], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2f0e80_2f1358.c, range: [0x2f1358, 0x2f13b0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_constraints.cpp, range: [0x2f13b0, 0x2f15e0]}
@@ -2325,14 +2326,14 @@ splits:
   - {src: src/kynapse/tu_2f0e80_2f1678.c, range: [0x2f1678, 0x2f16e0], flags: [-O2, -G0, -snas, -fbyte-bool], assembler: sn-min6}
   - {src: src/kynapse/behaviors_constraints.cpp, range: [0x2f16e0, 0x2f1d70]}
   - {src: src/kynapse/factories_2f1d70.cpp, range: [0x2f1d70, 0x2f1eb0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/graph_constraint_registration.cpp, range: [0x2f1eb0, 0x2f20a0], flags: [-O2, -G0, -snas, -fno-rtti, -fbyte-bool], owner: graph}
+  - {src: src/kynapse/graph_constraint_registration.cpp, range: [0x2f1eb0, 0x2f20a0], flags: [-O2, -G0, -snas, -fno-rtti, -fbyte-bool]}
   - {src: src/kynapse/behaviors_constraints.cpp, range: [0x2f20a0, 0x2f22d8]}
   - {src: src/kynapse/tu_2f0e80_2f22d8.c, range: [0x2f22d8, 0x2f2318]}
   - {src: src/kynapse/behaviors_constraints.cpp, range: [0x2f2318, 0x2f2380]}
   - {src: src/kynapse/batch10_2f2380.cpp, range: [0x2f2380, 0x2f23e8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2f0e80_2f22d8.c, range: [0x2f23e8, 0x2f2438]}
   - {src: src/kynapse/factories_2f2438.cpp, range: [0x2f2438, 0x2f24d0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/graph_manager.cpp, range: [0x2f24d0, 0x2f2578], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/graph_manager.cpp, range: [0x2f24d0, 0x2f2578], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/owned_arrays_2f2578.cpp, range: [0x2f2578, 0x2f2660], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_manager.cpp, range: [0x2f2660, 0x2f2bf8]}
   - {src: src/kynapse/owned_arrays_2f2578.cpp, range: [0x2f2bf8, 0x2f2e28]}
@@ -2354,12 +2355,12 @@ splits:
   - {src: src/kynapse/tu_2f35b0.c, range: [0x2f35b0, 0x2f3600]}
   - {src: src/kynapse/factories_2f3600.cpp, range: [0x2f3600, 0x2f36a8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/source_objects_2f36a8.cpp, range: [0x2f36a8, 0x2f4100], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/graph_cpathcostdata.cpp, range: [0x2f4100, 0x2f4260], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
-  - {src: src/kynapse/tu_2f3600_2f4260.c, range: [0x2f4260, 0x2f42b8], owner: graph}
-  - {src: src/kynapse/graph_cpathcostdata_dtor.cpp, range: [0x2f42b8, 0x2f4330], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
+  - {src: src/kynapse/graph_cpathcostdata.cpp, range: [0x2f4100, 0x2f4260], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/tu_2f3600_2f4260.c, range: [0x2f4260, 0x2f42b8]}
+  - {src: src/kynapse/graph_cpathcostdata_dtor.cpp, range: [0x2f42b8, 0x2f4330], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2f3600_2f4260.c, range: [0x2f4330, 0x2f4390]}
-  - {src: src/kynapse/graph_pathobject_context.cpp, range: [0x2f4390, 0x2f44e8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: graph}
-  - {src: src/kynapse/graph_cpathobject.cpp, range: [0x2f44e8, 0x2f4620], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
+  - {src: src/kynapse/graph_pathobject_context.cpp, range: [0x2f4390, 0x2f44e8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
+  - {src: src/kynapse/graph_cpathobject.cpp, range: [0x2f44e8, 0x2f4620], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_pathobject_context.cpp, range: [0x2f4620, 0x2f49f0]}
   - {src: src/kynapse/tu_2f4390_2f49f0.c, range: [0x2f49f0, 0x2f4a90]}
   - {src: src/kynapse/graph_cpathobject.cpp, range: [0x2f4a90, 0x2f4b50]}
@@ -2367,7 +2368,7 @@ splits:
   - {src: src/kynapse/tu_2f4390_2f49f0.c, range: [0x2f4b80, 0x2f4bc0]}
   - {src: src/kynapse/factories_2f4bc0.cpp, range: [0x2f4bc0, 0x2f4c58], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tracker_2f4c58.cpp, range: [0x2f4c58, 0x2f4cf8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/graph_path_manager.cpp, range: [0x2f4cf8, 0x2f4e90], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: graph}
+  - {src: src/kynapse/graph_path_manager.cpp, range: [0x2f4cf8, 0x2f4e90], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/tracker_2f4e90.cpp, range: [0x2f4e90, 0x2f4f80], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_path_manager.cpp, range: [0x2f4f80, 0x2f51b0]}
   - {src: src/kynapse/tracker_2f4e90.cpp, range: [0x2f51b0, 0x2f5348]}
@@ -2375,32 +2376,32 @@ splits:
   - {src: src/kynapse/tu_2f4bc0_2f5760.c, range: [0x2f5760, 0x2f57c0]}
   - {src: src/kynapse/graph_path_manager.cpp, range: [0x2f57c0, 0x2f5bd0]}
   - {src: src/kynapse/tu_2f4bc0_2f5760.c, range: [0x2f5bd0, 0x2f5c10]}
-  - {src: src/kynapse/graph_spatial_2f5c10.cpp, range: [0x2f5c10, 0x2f7d80], flags: [-O2, -G0, -snas, -fno-rtti, -fbyte-bool], assembler: sn-min6, owner: graph}
-  - {src: src/kynapse/graph_cspatialgraph.cpp, range: [0x2f7d80, 0x2f7f48], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
-  - {src: src/kynapse/graph_spatial.cpp, range: [0x2f7f48, 0x2f8c38], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
-  - {src: src/kynapse/graph_cspatialgraph_lifetime.cpp, range: [0x2f8c38, 0x2f9338], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
+  - {src: src/kynapse/graph_spatial_2f5c10.cpp, range: [0x2f5c10, 0x2f7d80], flags: [-O2, -G0, -snas, -fno-rtti, -fbyte-bool], assembler: sn-min6}
+  - {src: src/kynapse/graph_cspatialgraph.cpp, range: [0x2f7d80, 0x2f7f48], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/graph_spatial.cpp, range: [0x2f7f48, 0x2f8c38], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/kynapse/graph_cspatialgraph_lifetime.cpp, range: [0x2f8c38, 0x2f9338], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_spatial_2f5c10.cpp, range: [0x2f9338, 0x2f97a0]}
   - {src: src/kynapse/graph_cspatialgraph_lifetime.cpp, range: [0x2f97a0, 0x2fb1c8]}
-  - {src: src/kynapse/graph_path_storage.cpp, range: [0x2fb1c8, 0x2fb4d8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions], assembler: sn-min6, owner: graph}
+  - {src: src/kynapse/graph_path_storage.cpp, range: [0x2fb1c8, 0x2fb4d8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions], assembler: sn-min6}
   - {src: src/kynapse/graph_cspatialgraph_lifetime.cpp, range: [0x2fb4d8, 0x2fb538]}
   - {src: src/kynapse/graph_spatial_2f5c10.cpp, range: [0x2fb538, 0x2fb558]}
   - {src: src/kynapse/owned_arrays_2fb558.cpp, range: [0x2fb558, 0x2fb590], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2f5c10_2fb590.c, range: [0x2fb590, 0x2fb650]}
   - {src: src/kynapse/graph_spatial_2f5c10.cpp, range: [0x2fb650, 0x2fb6d8]}
-  - {src: src/kynapse/graph_nearest_nodes.cpp, range: [0x2fb6d8, 0x2fca20], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/graph_nearest_nodes.cpp, range: [0x2fb6d8, 0x2fca20], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2fb6d8_2fca20.c, range: [0x2fca20, 0x2fcaa8]}
-  - {src: src/kynapse/graph_accessways.cpp, range: [0x2fcaa8, 0x2fd780], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/graph_accessways.cpp, range: [0x2fcaa8, 0x2fd780], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2fcaa8_2fd780.c, range: [0x2fd780, 0x2fd800]}
   - {src: src/kynapse/owned_arrays_2fd800.cpp, range: [0x2fd800, 0x2fd8c8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/configure_2fd8c8.cpp, range: [0x2fd8c8, 0x2fd908], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_accessways.cpp, range: [0x2fd908, 0x2fd958]}
   - {src: src/kynapse/tu_2fcaa8_2fd780.c, range: [0x2fd958, 0x2fd998]}
-  - {src: src/kynapse/graph_astar_context.cpp, range: [0x2fd998, 0x2fea88], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/graph_astar_context.cpp, range: [0x2fd998, 0x2fea88], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2fd998_2fea88.c, range: [0x2fea88, 0x2feb08]}
-  - {src: src/kynapse/graph_castardata.cpp, range: [0x2feb08, 0x2febd0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
+  - {src: src/kynapse/graph_castardata.cpp, range: [0x2feb08, 0x2febd0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2fd998_2fea88.c, range: [0x2febd0, 0x2fec10]}
   - {src: src/kynapse/factories_2fec10.cpp, range: [0x2fec10, 0x2fecb8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/graph_pathfinder.cpp, range: [0x2fecb8, 0x300278], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/graph_pathfinder.cpp, range: [0x2fecb8, 0x300278], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/route_manual.cpp, range: [0x300278, 0x301d60], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_pathfinder.cpp, range: [0x301d60, 0x301e78]}
   - {src: src/kynapse/route_manual.cpp, range: [0x301e78, 0x303630]}
@@ -2424,13 +2425,13 @@ splits:
   - {src: src/kynapse/misc6_3053f0.cpp, range: [0x3053f0, 0x305438], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2fec10_305110.c, range: [0x305438, 0x3054a8]}
   - {src: src/kynapse/tu_2fec10_3054a8.c, range: [0x3054a8, 0x305538]}
-  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x305538, 0x3055e0], flags: [-O2, -G0, -snas, -fbyte-bool, -DSTEERING_FACTORY_ONLY], sections: false, owner: kynapse-steering, functions: [0x305538]}
-  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3055e0, 0x306760], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING], owner: kynapse-steering, functions: [0x3055e0, 0x3057e8, 0x3059f0, 0x306448, 0x306688], data_ranges: [{end: '0x3f07a0', input: .data.steering_vtable, section: .data, start: '0x3f0760'}, {end: '0x455be8', input: .bss, section: .bss, start: '0x455ad0'}], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_00305FD8, func_00306538]}
+  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x305538, 0x3055e0], flags: [-O2, -G0, -snas, -fbyte-bool, -DSTEERING_FACTORY_ONLY], sections: false, functions: [0x305538]}
+  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3055e0, 0x306760], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING], functions: [0x3055e0, 0x3057e8, 0x3059f0, 0x306448, 0x306688], data_ranges: [{end: '0x3f07a0', input: .data.steering_vtable, section: .data, start: '0x3f0760'}, {end: '0x455be8', input: .bss, section: .bss, start: '0x455ad0'}], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_00305FD8, func_00306538]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x305fd8, 0x3063a8]}
-  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3063a8, 0x3067a0], flags: [-x, c, -O2, -G0, -snas, -DSTEERING_REGISTRATION_ONLY], owner: kynapse-steering, functions: [0x3063a8, 0x306400, 0x306438, 0x306440, 0x306760, 0x306780]}
-  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x306538, 0x306688], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING, -DSTEERING_CONTACT_OUTLINE], owner: kynapse-steering, functions: [0x306538], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_003055E0, func_003057E8, func_003059F0, func_00305FD8, func_00306448, func_00306688]}
+  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3063a8, 0x3067a0], flags: [-x, c, -O2, -G0, -snas, -DSTEERING_REGISTRATION_ONLY], functions: [0x3063a8, 0x306400, 0x306438, 0x306440, 0x306760, 0x306780]}
+  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x306538, 0x306688], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING, -DSTEERING_CONTACT_OUTLINE], functions: [0x306538], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_003055E0, func_003057E8, func_003059F0, func_00305FD8, func_00306448, func_00306688]}
   - {src: src/kynapse/avoidance_manual.cpp, range: [0x3067a0, 0x307fb0]}
-  - {src: src/kynapse/behaviors_gap.cpp, range: [0x307fb0, 0x30b4a8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: behaviors}
+  - {src: src/kynapse/behaviors_gap.cpp, range: [0x307fb0, 0x30b4a8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/avoidance_configuration.cpp, range: [0x30b4a8, 0x30b750]}
   - {src: src/kynapse/tu_3067a0_30b750.c, range: [0x30b750, 0x30b988]}
   - {src: src/kynapse/behaviors_gap.cpp, range: [0x30b988, 0x30ba10]}
@@ -2439,7 +2440,7 @@ splits:
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x30ba58, 0x30d0e0]}
   - {src: src/kynapse/tu_30d0e0.c, range: [0x30d0e0, 0x30d130]}
   - {src: src/kynapse/leaves2_30d130.cpp, range: [0x30d130, 0x30d160], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_sound.cpp, range: [0x30d160, 0x30d1f8], flags: [-O2, -G0, -snas, -fno-byte-bool, -fno-rtti], assembler: sn-min6, owner: behaviors}
+  - {src: src/kynapse/behaviors_sound.cpp, range: [0x30d160, 0x30d1f8], flags: [-O2, -G0, -snas, -fno-byte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/CSoundManager_30d160_30d1f8.c, range: [0x30d1f8, 0x30d228]}
   - {src: src/kynapse/behaviors_sound.cpp, range: [0x30d228, 0x30dfc0]}
   - {src: src/kynapse/CSoundManager_30d160_30d1f8.c, range: [0x30dfc0, 0x30e020]}
@@ -2456,17 +2457,17 @@ splits:
   - {src: src/kynapse/sound_pool_30e6b8.cpp, range: [0x30e6b8, 0x30e728], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/CSoundManager_30d160_30e728.c, range: [0x30e728, 0x30e988]}
   - {src: src/kynapse/CSoundManager_30d160_30d1f8.c, range: [0x30e988, 0x30e9c8]}
-  - {src: src/kynapse/tu_30e9c8.cpp, range: [0x30e9c8, 0x30ea38], flags: [-x, c++, -O2, -G0, -snas, -fno-schedule-insns], sections: false, owner: kynapse, data_ranges: [{end: '0x3ce59c', input: .data, kind: unwind, section: .data, start: '0x3ce544'}]}
+  - {src: src/kynapse/tu_30e9c8.cpp, range: [0x30e9c8, 0x30ea38], flags: [-x, c++, -O2, -G0, -snas, -fno-schedule-insns], sections: false, data_ranges: [{end: '0x3ce59c', input: .data, kind: unwind, section: .data, start: '0x3ce544'}]}
   - {src: src/kynapse/factories_30ea38.cpp, range: [0x30ea38, 0x30eae0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_centitymanager.cpp, range: [0x30eae0, 0x30eca8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/kynapse/perception_30eca8.cpp, range: [0x30eca8, 0x30f000], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: kynapse}
-  - {src: src/kynapse/graph_entity_manager.cpp, range: [0x30f000, 0x30fd68], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/behaviors_centitymanager.cpp, range: [0x30eae0, 0x30eca8], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/perception_30eca8.cpp, range: [0x30eca8, 0x30f000], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/kynapse/graph_entity_manager.cpp, range: [0x30f000, 0x30fd68], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_30ea38_30fd68.c, range: [0x30fd68, 0x30fdf8]}
   - {src: src/kynapse/pair_owner_30fdf8.cpp, range: [0x30fdf8, 0x30fe98], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/behaviors_centitymanager_config.cpp, range: [0x30fe98, 0x30ff90], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
-  - {src: src/kynapse/perception_clear.cpp, range: [0x30ff90, 0x30ffa0], flags: [-O1, -G0, -snas, -fbyte-bool], owner: kynapse}
-  - {src: src/kynapse/perception_queries.cpp, range: [0x30ffa0, 0x3100a0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: kynapse}
-  - {src: src/kynapse/tu_30ea38_3100a0.c, range: [0x3100a0, 0x3100e0], owner: kynapse}
+  - {src: src/kynapse/behaviors_centitymanager_config.cpp, range: [0x30fe98, 0x30ff90], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/perception_clear.cpp, range: [0x30ff90, 0x30ffa0], flags: [-O1, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/perception_queries.cpp, range: [0x30ffa0, 0x3100a0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/kynapse/tu_30ea38_3100a0.c, range: [0x3100a0, 0x3100e0]}
   - {src: src/kynapse/perception_queries.cpp, range: [0x3100e0, 0x310120]}
   - {src: src/kynapse/perception_310120.cpp, range: [0x310120, 0x310190], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/perception_queries.cpp, range: [0x310190, 0x310228]}
@@ -2530,18 +2531,18 @@ splits:
   - {src: src/rw_audio/tu_314630_3151d8.c, range: [0x3165c8, 0x316698]}
   - {src: src/rw_audio/tu_314630_316698.c, range: [0x316698, 0x316770]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x316770, 0x3168c8]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x3168c8, 0x31a2e0], flags: [-O2, -G8], owner: audio, functions: [0x3168c8, 0x316e90, 0x317030, 0x317490, 0x3178c0, 0x317a78, 0x317c20, 0x317d68, 0x317df0, 0x317e40, 0x317fc0, 0x318080, 0x318120, 0x318188, 0x3181e8, 0x318288, 0x3182c8, 0x318340, 0x318400, 0x318450, 0x318478, 0x318600, 0x3186b0, 0x3186f0, 0x3187f8, 0x318880, 0x318b08, 0x318b60, 0x318be0, 0x318c40, 0x318c90, 0x318ce8, 0x319268, 0x319368, 0x319578, 0x319628, 0x3196a8, 0x319950, 0x3199e0, 0x319a70, 0x319ce8, 0x319de0, 0x319e28, 0x319ed0, 0x31a108, 0x31a188, 0x31a208, 0x31a288], data_ranges: [{end: 4252148, input: .sdata, section: .sdata, start: 4252072}, {end: 4253624, input: .sbss, section: .sbss, start: 4253568}, {end: 4556232, input: .bss, section: .bss, start: '0x4584c0'}, {end: '0x3cfb98', input: .data, section: .data, start: '0x3cf380'}, {end: '0x4096e0', input: .rodata, section: .rodata, start: '0x409400'}]}
-  - {src: src/rw_audio/tu_3168c8_2.c, range: [0x316c38, 0x316e90], flags: [-O2, -G8], owner: audio, note: flags or language differ}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x3168c8, 0x31a2e0], flags: [-O2, -G8], functions: [0x3168c8, 0x316e90, 0x317030, 0x317490, 0x3178c0, 0x317a78, 0x317c20, 0x317d68, 0x317df0, 0x317e40, 0x317fc0, 0x318080, 0x318120, 0x318188, 0x3181e8, 0x318288, 0x3182c8, 0x318340, 0x318400, 0x318450, 0x318478, 0x318600, 0x3186b0, 0x3186f0, 0x3187f8, 0x318880, 0x318b08, 0x318b60, 0x318be0, 0x318c40, 0x318c90, 0x318ce8, 0x319268, 0x319368, 0x319578, 0x319628, 0x3196a8, 0x319950, 0x3199e0, 0x319a70, 0x319ce8, 0x319de0, 0x319e28, 0x319ed0, 0x31a108, 0x31a188, 0x31a208, 0x31a288], data_ranges: [{end: 4252148, input: .sdata, section: .sdata, start: 4252072}, {end: 4253624, input: .sbss, section: .sbss, start: 4253568}, {end: 4556232, input: .bss, section: .bss, start: '0x4584c0'}, {end: '0x3cfb98', input: .data, section: .data, start: '0x3cf380'}, {end: '0x4096e0', input: .rodata, section: .rodata, start: '0x409400'}]}
+  - {src: src/rw_audio/tu_3168c8_2.c, range: [0x316c38, 0x316e90], flags: [-O2, -G8], note: flags or language differ}
   - {src: src/rw_audio/tu_3168c8_2.c, range: [0x317300, 0x317340]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x317340, 0x3176d0], flags: [-O2, -G8, -malign-loops=2, -DRWA_CONTROL_ONLY], owner: audio, functions: [0x317340, 0x3175c8]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x317340, 0x3176d0], flags: [-O2, -G8, -malign-loops=2, -DRWA_CONTROL_ONLY], functions: [0x317340, 0x3175c8]}
   - {src: src/rw_audio/tu_3168c8_2.c, range: [0x3174d0, 0x3175c8]}
-  - {src: src/rw_audio/tu_3168c8_3176d0.c, range: [0x3176d0, 0x317838], owner: audio, note: flags or language differ}
-  - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x317838, 0x317868], flags: [-O2, -G8, -DRWA_MATCH_317838], sections: false, owner: audio, functions: [0x317838]}
-  - {src: src/rw_audio/tu_3168c8_317868.c, range: [0x317868, 0x3178b8], flags: [-O2, -G8], owner: audio, note: flags or language differ}
-  - {src: src/rw_audio/tu_3168c8_3178b8.c, range: [0x3178b8, 0x3178c0], flags: [-O2, -G8, -snas], owner: audio, note: flags or language differ}
+  - {src: src/rw_audio/tu_3168c8_3176d0.c, range: [0x3176d0, 0x317838], note: flags or language differ}
+  - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x317838, 0x317868], flags: [-O2, -G8, -DRWA_MATCH_317838], sections: false, functions: [0x317838]}
+  - {src: src/rw_audio/tu_3168c8_317868.c, range: [0x317868, 0x3178b8], flags: [-O2, -G8], note: flags or language differ}
+  - {src: src/rw_audio/tu_3168c8_3178b8.c, range: [0x3178b8, 0x3178c0], flags: [-O2, -G8, -snas], note: flags or language differ}
   - {src: src/rw_audio/tu_3168c8_3178b8.c, range: [0x3178f0, 0x317a78]}
   - {src: src/rw_audio/tu_3168c8_3178b8.c, range: [0x318078, 0x318080]}
-  - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x318250, 0x318288], owner: audio}
+  - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x318250, 0x318288]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x3183c0, 0x318400]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x318550, 0x318600]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x318950, 0x318b08]}
@@ -2551,17 +2552,17 @@ splits:
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319410, 0x319578]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x3195d0, 0x319628]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x3196d8, 0x319928]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x319928, 0x319950], flags: [-O2, -G8, -DRWA_CACHE_CONTROL_ONLY], owner: audio, functions: [0x319928], data_ranges: [{end: '0x458490', input: .bss, section: .bss, start: '0x456480'}]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x319928, 0x319950], flags: [-O2, -G8, -DRWA_CACHE_CONTROL_ONLY], functions: [0x319928], data_ranges: [{end: '0x458490', input: .bss, section: .bss, start: '0x456480'}]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x3199c0, 0x3199e0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319a50, 0x319a70]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319ae0, 0x319ca8]}
-  - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x319ca8, 0x319ce8], flags: [-O2, -G8, -DRWA_MATCH_319CA8], sections: false, owner: audio, functions: [0x319ca8]}
+  - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x319ca8, 0x319ce8], flags: [-O2, -G8, -DRWA_MATCH_319CA8], sections: false, functions: [0x319ca8]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319da0, 0x319de0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319eb0, 0x319ed0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319f80, 0x31a068]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a068, 0x31a0e0], flags: [-O2, -G8, -fno-schedule-insns2, -DRWA_BYTE_SETTERS_ONLY], owner: audio, functions: [0x31a068, 0x31a0b8]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a090, 0x31a498], compiler: ee-gcc2.96, flags: [-O2, -G8, -mno-handle-ee-div-pipeline-bug, -DRWA_NORMALIZED_GETTERS_ONLY], owner: audio, functions: [0x31a090, 0x31a0e0, 0x31a470]}
-  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a160, 0x31a308], flags: [-O2, -G8, -fno-schedule-insns, -DRWA_VECTOR_GETTERS_ONLY], owner: audio, functions: [0x31a160, 0x31a1e0, 0x31a260, 0x31a2e0]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a068, 0x31a0e0], flags: [-O2, -G8, -fno-schedule-insns2, -DRWA_BYTE_SETTERS_ONLY], functions: [0x31a068, 0x31a0b8]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a090, 0x31a498], compiler: ee-gcc2.96, flags: [-O2, -G8, -mno-handle-ee-div-pipeline-bug, -DRWA_NORMALIZED_GETTERS_ONLY], functions: [0x31a090, 0x31a0e0, 0x31a470]}
+  - {src: src/rw_audio/tu_3168c8.c, range: [0x31a160, 0x31a308], flags: [-O2, -G8, -fno-schedule-insns, -DRWA_VECTOR_GETTERS_ONLY], functions: [0x31a160, 0x31a1e0, 0x31a260, 0x31a2e0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x31a308, 0x31a470]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x31a498, 0x31a4e8]}
   - {src: src/rw_audio/tu_31a4e8.c, range: [0x31a4e8, 0x31a500]}
@@ -2684,22 +2685,22 @@ splits:
   - {src: src/rw_audio/tu_32a610_32ab18.c, range: [0x32ab18, 0x32ab60], flags: [-O2, -G8, -snas], note: flags or language differ}
   - {src: src/rw_audio/tu_32a610_32ab60.c, range: [0x32ab60, 0x32abd0]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x32abd0, 0x32b598]}
-  - {src: src/physics/tu_32b598.cpp, range: [0x32b598, 0x32b860], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40e838', input: .sbss, section: .sbss, start: '0x40e828'}, {end: '0x45cbf0', input: .bss, section: .bss, start: '0x45cbb0'}]}
+  - {src: src/physics/tu_32b598.cpp, range: [0x32b598, 0x32b860], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e838', input: .sbss, section: .sbss, start: '0x40e828'}, {end: '0x45cbf0', input: .bss, section: .bss, start: '0x45cbb0'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x32b860, 0x32b928]}
   - {src: src/physics/tu_32b928.c, range: [0x32b928, 0x32bc70]}
-  - {src: src/physics/tu_32bc70.cpp, range: [0x32bc70, 0x32e3d0], flags: [-O2, -G8, -snas, -x, c++, -fstrict-aliasing, -fno-exceptions, -DBLACK_NONMATCHING, -mvu0-use-vf0-vf31], assembler: sn-min6, owner: physics-scene, data_ranges: [{end: '0x40e858', input: .sbss, section: .sbss, start: '0x40e848'}, {end: '0x45cc70', input: .bss, section: .bss, start: '0x45cc30'}], full_tu_context: true, unlinked_context_helpers: [AllocatePair__12PhysicsSceneUiUi, FirstClear__FPC13PhysicsBitmap, PairGroups__12PhysicsSceneUiUi, Separation__FRC13PhysicsBoundsT0, func_0032BDC0, func_0032C0D8, func_0032C5A0, func_0032D990, func_0032E048]}
+  - {src: src/physics/tu_32bc70.cpp, range: [0x32bc70, 0x32e3d0], flags: [-O2, -G8, -snas, -x, c++, -fstrict-aliasing, -fno-exceptions, -DBLACK_NONMATCHING, -mvu0-use-vf0-vf31], assembler: sn-min6, data_ranges: [{end: '0x40e858', input: .sbss, section: .sbss, start: '0x40e848'}, {end: '0x45cc70', input: .bss, section: .bss, start: '0x45cc30'}], full_tu_context: true, unlinked_context_helpers: [AllocatePair__12PhysicsSceneUiUi, FirstClear__FPC13PhysicsBitmap, PairGroups__12PhysicsSceneUiUi, Separation__FRC13PhysicsBoundsT0, func_0032BDC0, func_0032C0D8, func_0032C5A0, func_0032D990, func_0032E048]}
   - {src: src/physics/tu_32e3d0_32e5d8.cpp, range: [0x32e3d0, 0x32e710], flags: [-O2, -G0, -snas, -x, c++]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x32e710, 0x32e810]}
   - {src: src/physics/tu_32e810.cpp, range: [0x32e810, 0x32fbc0]}
   - {src: src/physics/tu_32fbc0.c, range: [0x32fbc0, 0x331d70], sections: false}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x331d70, 0x3325e0]}
-  - {src: src/game/unsorted/tu_3325e0.cpp, range: [0x3325e0, 0x332768], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40e888', input: .sbss, section: .sbss, start: '0x40e878'}, {end: '0x45cd30', input: .bss, section: .bss, start: '0x45ccf0'}]}
-  - {src: src/game/unsorted/tu_332768.cpp, range: [0x332768, 0x332928], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40e898', input: .sbss, section: .sbss, start: '0x40e888'}, {end: '0x45cd70', input: .bss, section: .bss, start: '0x45cd30'}]}
+  - {src: src/game/unsorted/tu_3325e0.cpp, range: [0x3325e0, 0x332768], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e888', input: .sbss, section: .sbss, start: '0x40e878'}, {end: '0x45cd30', input: .bss, section: .bss, start: '0x45ccf0'}]}
+  - {src: src/game/unsorted/tu_332768.cpp, range: [0x332768, 0x332928], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e898', input: .sbss, section: .sbss, start: '0x40e888'}, {end: '0x45cd70', input: .bss, section: .bss, start: '0x45cd30'}]}
   - {src: src/game/unsorted/tu_332928.c, range: [0x332928, 0x332b68]}
   - {src: src/game/unsorted/tu_332b68.c, range: [0x332b68, 0x332d88]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x332d88, 0x333ee0]}
   - {src: src/physics/tu_333ee0.c, range: [0x333ee0, 0x334120]}
-  - {src: src/physics/tu_334120.cpp, range: [0x334120, 0x3343d0], flags: [-x, c++, -O2, -G8, -snas], owner: physics, data_ranges: [{end: '0x40e8d8', input: .sbss, section: .sbss, start: '0x40e8c8'}, {end: '0x45ce70', input: .bss, section: .bss, start: '0x45ce30'}, {end: '0x3d13a0', input: .data.shape_3d1368, section: .data, start: '0x3d1368'}, {end: '0x3d13d8', input: .data.shape_3d13a0, section: .data, start: '0x3d13a0'}, {end: '0x3d1468', input: .data.shape_3d1430, section: .data, start: '0x3d1430'}, {end: '0x3d14a0', input: .data.shape_3d1468, section: .data, start: '0x3d1468'}, {end: '0x3d14d8', input: .data.shape_3d14a0, section: .data, start: '0x3d14a0'}]}
+  - {src: src/physics/tu_334120.cpp, range: [0x334120, 0x3343d0], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e8d8', input: .sbss, section: .sbss, start: '0x40e8c8'}, {end: '0x45ce70', input: .bss, section: .bss, start: '0x45ce30'}, {end: '0x3d13a0', input: .data.shape_3d1368, section: .data, start: '0x3d1368'}, {end: '0x3d13d8', input: .data.shape_3d13a0, section: .data, start: '0x3d13a0'}, {end: '0x3d1468', input: .data.shape_3d1430, section: .data, start: '0x3d1430'}, {end: '0x3d14a0', input: .data.shape_3d1468, section: .data, start: '0x3d1468'}, {end: '0x3d14d8', input: .data.shape_3d14a0, section: .data, start: '0x3d14a0'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x3343d0, 0x334870]}
   - {src: src/physics/tu_334870.c, range: [0x334870, 0x334b98]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x334b98, 0x335db8]}
@@ -2709,42 +2710,42 @@ splits:
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x339c68, 0x33a260]}
   - {src: src/physics/tu_33a260.c, range: [0x33a260, 0x33a488]}
   - {src: src/physics/tu_33a488_33ad90.cpp, range: [0x33a488, 0x33aee8], flags: [-O2, -G0, -snas, -x, c++]}
-  - {src: src/physics/tu_33aee8.cpp, range: [0x33aee8, 0x33afb0], flags: [-x, c++, -O2, -G0, -snas], owner: physics}
+  - {src: src/physics/tu_33aee8.cpp, range: [0x33aee8, 0x33afb0], flags: [-x, c++, -O2, -G0, -snas]}
   - {src: src/physics/tu_33afb0.c, range: [0x33afb0, 0x33b708]}
-  - {src: src/physics/tu_33b708.cpp, range: [0x33b708, 0x33b8d0], flags: [-O2, -G8, -snas, -x, c++], owner: physics-b, data_ranges: [{end: '0x40e948', input: .sbss, section: .sbss, start: '0x40e938'}, {end: '0x45e8a0', input: .bss, section: .bss, start: '0x45e860'}]}
+  - {src: src/physics/tu_33b708.cpp, range: [0x33b708, 0x33b8d0], flags: [-O2, -G8, -snas, -x, c++], data_ranges: [{end: '0x40e948', input: .sbss, section: .sbss, start: '0x40e938'}, {end: '0x45e8a0', input: .bss, section: .bss, start: '0x45e860'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x33b8d0, 0x33ba90]}
-  - {src: src/physics/tu_33ba90.cpp, range: [0x33ba90, 0x33bc28], flags: [-x, c++, -O2, -G8, -snas], owner: physics, data_ranges: [{end: '0x40e958', input: .sbss, section: .sbss, start: '0x40e948'}, {end: '0x45e8e0', input: .bss, section: .bss, start: '0x45e8a0'}]}
+  - {src: src/physics/tu_33ba90.cpp, range: [0x33ba90, 0x33bc28], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e958', input: .sbss, section: .sbss, start: '0x40e948'}, {end: '0x45e8e0', input: .bss, section: .bss, start: '0x45e8a0'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x33bc28, 0x33d940]}
-  - {src: src/physics/tu_33d940.cpp, range: [0x33d940, 0x33daf8], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40e968', input: .sbss, section: .sbss, start: '0x40e958'}, {end: '0x45e920', input: .bss, section: .bss, start: '0x45e8e0'}]}
+  - {src: src/physics/tu_33d940.cpp, range: [0x33d940, 0x33daf8], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e968', input: .sbss, section: .sbss, start: '0x40e958'}, {end: '0x45e920', input: .bss, section: .bss, start: '0x45e8e0'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x33daf8, 0x33e9b8]}
-  - {src: src/physics/tu_33e9b8.cpp, range: [0x33e9b8, 0x33ebd0], flags: [-x, c++, -O2, -G8, -snas, -mvu0-use-vf0-vf31], owner: physics-b, data_ranges: [{end: '0x40e978', input: .sbss, section: .sbss, start: '0x40e968'}, {end: '0x45e960', input: .bss, section: .bss, start: '0x45e920'}]}
+  - {src: src/physics/tu_33e9b8.cpp, range: [0x33e9b8, 0x33ebd0], flags: [-x, c++, -O2, -G8, -snas, -mvu0-use-vf0-vf31], data_ranges: [{end: '0x40e978', input: .sbss, section: .sbss, start: '0x40e968'}, {end: '0x45e960', input: .bss, section: .bss, start: '0x45e920'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x33ebd0, 0x33f0e0]}
-  - {src: src/physics/tu_33f0e0.cpp, range: [0x33f0e0, 0x33f328], flags: [-x, c++, -O2, -G8, -snas, -mvu0-use-vf0-vf31], owner: physics-b, data_ranges: [{end: '0x40e988', input: .sbss, section: .sbss, start: '0x40e978'}, {end: '0x45e9a0', input: .bss, section: .bss, start: '0x45e960'}]}
+  - {src: src/physics/tu_33f0e0.cpp, range: [0x33f0e0, 0x33f328], flags: [-x, c++, -O2, -G8, -snas, -mvu0-use-vf0-vf31], data_ranges: [{end: '0x40e988', input: .sbss, section: .sbss, start: '0x40e978'}, {end: '0x45e9a0', input: .bss, section: .bss, start: '0x45e960'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x33f328, 0x33f400]}
-  - {src: src/physics/tu_33f400.cpp, range: [0x33f400, 0x33faa8], sections: false, owner: physics-b}
+  - {src: src/physics/tu_33f400.cpp, range: [0x33f400, 0x33faa8], sections: false}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x33faa8, 0x341520]}
-  - {src: src/game/unsorted/tu_341520.cpp, range: [0x341520, 0x3416b8], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40e998', input: .sbss, section: .sbss, start: '0x40e988'}, {end: '0x45e9e0', input: .bss, section: .bss, start: '0x45e9a0'}]}
-  - {src: src/game/unsorted/tu_3416b8.cpp, range: [0x3416b8, 0x341868], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40e9a8', input: .sbss, section: .sbss, start: '0x40e998'}, {end: '0x45ea20', input: .bss, section: .bss, start: '0x45e9e0'}]}
+  - {src: src/game/unsorted/tu_341520.cpp, range: [0x341520, 0x3416b8], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e998', input: .sbss, section: .sbss, start: '0x40e988'}, {end: '0x45e9e0', input: .bss, section: .bss, start: '0x45e9a0'}]}
+  - {src: src/game/unsorted/tu_3416b8.cpp, range: [0x3416b8, 0x341868], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e9a8', input: .sbss, section: .sbss, start: '0x40e998'}, {end: '0x45ea20', input: .bss, section: .bss, start: '0x45e9e0'}]}
   - {src: src/game/unsorted/tu_341868.c, range: [0x341868, 0x341a00]}
-  - {src: src/game/unsorted/tu_341a00.cpp, range: [0x341a00, 0x341b98], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40e9c8', input: .sbss, section: .sbss, start: '0x40e9b8'}, {end: '0x45eaa0', input: .bss, section: .bss, start: '0x45ea60'}]}
-  - {src: src/game/unsorted/tu_341b98.cpp, range: [0x341b98, 0x341d20], flags: [-x, c++, -O2, -G8, -snas], owner: game, data_ranges: [{end: '0x40e9d8', input: .sbss, section: .sbss, start: '0x40e9c8'}, {end: '0x45eae0', input: .bss, section: .bss, start: '0x45eaa0'}]}
+  - {src: src/game/unsorted/tu_341a00.cpp, range: [0x341a00, 0x341b98], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e9c8', input: .sbss, section: .sbss, start: '0x40e9b8'}, {end: '0x45eaa0', input: .bss, section: .bss, start: '0x45ea60'}]}
+  - {src: src/game/unsorted/tu_341b98.cpp, range: [0x341b98, 0x341d20], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e9d8', input: .sbss, section: .sbss, start: '0x40e9c8'}, {end: '0x45eae0', input: .bss, section: .bss, start: '0x45eaa0'}]}
   - {src: src/game/unsorted/tu_341d20.c, range: [0x341d20, 0x3420e8]}
   - {src: src/animation/tu_3420e8.c, range: [0x3420e8, 0x342a60]}
-  - {src: src/animation/tu_342a60.cpp, range: [0x342a60, 0x3438d8], owner: animation}
+  - {src: src/animation/tu_342a60.cpp, range: [0x342a60, 0x3438d8]}
   - {src: src/animation/tu_3438d8.c, range: [0x3438d8, 0x343ed0]}
   - {src: src/animation/tu_343ed0.c, range: [0x343ed0, 0x343fc8]}
-  - {src: src/animation/animation_math.cpp, range: [0x343fc8, 0x344118], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf31], owner: animation}
+  - {src: src/animation/animation_math.cpp, range: [0x343fc8, 0x344118], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/animation/tu_343fc8_344118.c, range: [0x344118, 0x344178]}
-  - {src: src/animation/vu0_micro_controls.cpp, range: [0x344178, 0x3441d0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], owner: math-micro}
+  - {src: src/animation/vu0_micro_controls.cpp, range: [0x344178, 0x3441d0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/animation/tu_3441d0_sample_bone.c, range: [0x3441d0, 0x345500]}
-  - {src: src/animation/arms_345500_w2.cpp, range: [0x345500, 0x3461d0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, owner: animation, data_ranges: [{end: '0x3d1e30', input: .data.animation_null_name, section: .data, start: '0x3d1e18'}, {end: '0x3d1e38', input: .data.animation_none_name, section: .data, start: '0x3d1e30'}, {end: '0x3d20cc', input: .data, kind: unwind, section: .data, start: '0x3d1e38'}, {end: '0x45f0c0', input: .bss, section: .bss, start: '0x45ecb0'}]}
-  - {src: src/animation/tu_3461d0.cpp, range: [0x3461d0, 0x3477f0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-common], assembler: sn-min6, owner: animation, data_ranges: [{end: '0x3d20e4', input: .data.pose_cache, section: .data, start: '0x3d20d0'}, {end: '0x46a510', input: .bss, section: .bss, start: '0x45f0c0'}, {end: '0x3d247c', input: .data, kind: unwind, section: .data, start: '0x3d20e4'}], full_tu_context: true, unlinked_context_helpers: [func_00346230, func_00346668, func_00347280]}
+  - {src: src/animation/arms_345500_w2.cpp, range: [0x345500, 0x3461d0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, data_ranges: [{end: '0x3d1e30', input: .data.animation_null_name, section: .data, start: '0x3d1e18'}, {end: '0x3d1e38', input: .data.animation_none_name, section: .data, start: '0x3d1e30'}, {end: '0x3d20cc', input: .data, kind: unwind, section: .data, start: '0x3d1e38'}, {end: '0x45f0c0', input: .bss, section: .bss, start: '0x45ecb0'}]}
+  - {src: src/animation/tu_3461d0.cpp, range: [0x3461d0, 0x3477f0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-common], assembler: sn-min6, data_ranges: [{end: '0x3d20e4', input: .data.pose_cache, section: .data, start: '0x3d20d0'}, {end: '0x46a510', input: .bss, section: .bss, start: '0x45f0c0'}, {end: '0x3d247c', input: .data, kind: unwind, section: .data, start: '0x3d20e4'}], full_tu_context: true, unlinked_context_helpers: [func_00346230, func_00346668, func_00347280]}
   - {src: src/animation/tu_3477f0.c, range: [0x3477f0, 0x347948]}
   - {src: src/animation/tu_347948.c, range: [0x347948, 0x347a28], note: flags or language differ}
   - {src: src/animation/tu_347948_347a28.c, range: [0x347a28, 0x347a50], assembler: sn-min6}
-  - {src: src/animation/arms_347a50.cpp, range: [0x347a50, 0x3485e8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: animation, data_ranges: [{end: '0x3d2524', input: .data.animation_graph_mode, section: .data, start: '0x3d2520'}, {end: '0x3d2910', input: .data, kind: unwind, section: .data, start: '0x3d2524'}], rodata_type_splits: ['0x40a668']}
+  - {src: src/animation/arms_347a50.cpp, range: [0x347a50, 0x3485e8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d2524', input: .data.animation_graph_mode, section: .data, start: '0x3d2520'}, {end: '0x3d2910', input: .data, kind: unwind, section: .data, start: '0x3d2524'}], rodata_type_splits: ['0x40a668']}
   - {src: src/animation/tu_3485e8.c, range: [0x3485e8, 0x348778]}
-  - {src: src/animation/tu_348778.c, range: [0x348778, 0x3489a0], owner: context}
+  - {src: src/animation/tu_348778.c, range: [0x348778, 0x3489a0]}
   - {src: src/animation/tu_3489a0.c, range: [0x3489a0, 0x3489e0], sections: false}
   - {src: src/animation/tu_3489a0_3489e0.c, range: [0x3489e0, 0x348a10], sections: false}
   - {src: src/animation/tu_348a10.c, range: [0x348a10, 0x348a38], note: flags or language differ}
@@ -2752,14 +2753,14 @@ splits:
   - {src: src/animation/vu0_micro_controls.cpp, range: [0x348a90, 0x348b18]}
   - {src: src/animation/tu_348a90_348b18.c, range: [0x348b18, 0x348c08]}
   - {src: src/animation/vu0_micro_controls.cpp, range: [0x348c08, 0x348d00]}
-  - {src: src/animation/tu_348d00.cpp, range: [0x348d00, 0x3493f0], assembler: sn-min6, owner: animation, data_ranges: [{end: '0x3d2e9c', input: .data, kind: unwind, section: .data, start: '0x3d2be0'}]}
+  - {src: src/animation/tu_348d00.cpp, range: [0x348d00, 0x3493f0], assembler: sn-min6, data_ranges: [{end: '0x3d2e9c', input: .data, kind: unwind, section: .data, start: '0x3d2be0'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x3493f0, 0x34a1e8]}
   - {src: src/animation/tu_34a1e8.c, range: [0x34a1e8, 0x34ae60]}
   - {src: src/animation/tu_34ae60.c, range: [0x34ae60, 0x34aea0]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x34aea0, 0x34b460]}
   - {src: src/animation/tu_34b460.c, range: [0x34b460, 0x34b498]}
-  - {src: src/animation/tu_34b498.c, range: [0x34b498, 0x34b5a8], owner: animation}
-  - {src: src/animation/tu_34b498_34b5a8.c, range: [0x34b5a8, 0x34bfb8], owner: animation}
+  - {src: src/animation/tu_34b498.c, range: [0x34b498, 0x34b5a8]}
+  - {src: src/animation/tu_34b498_34b5a8.c, range: [0x34b5a8, 0x34bfb8]}
   - {src: src/animation/tu_34b498.c, range: [0x34bfb8, 0x34bfe8]}
   - {src: src/animation/tu_34b498_34b5a8.c, range: [0x34bfe8, 0x34c898]}
   - {src: src/animation/tu_34b498.c, range: [0x34c898, 0x34c968]}
@@ -2779,24 +2780,24 @@ splits:
   - {src: src/animation/tu_34b498.c, range: [0x34de98, 0x34e220]}
   - {src: src/animation/tu_34b498_34c968.c, range: [0x34e220, 0x34e328]}
   - {src: src/animation/tu_34b498.c, range: [0x34e328, 0x34e5c0]}
-  - {src: src/animation/tu_34b498_34e5c0.cpp, range: [0x34e5c0, 0x34e758], owner: animation}
+  - {src: src/animation/tu_34b498_34e5c0.cpp, range: [0x34e5c0, 0x34e758]}
   - {src: src/animation/tu_34b498.c, range: [0x34e758, 0x34e828]}
   - {src: src/animation/tu_34b498_34e5c0.cpp, range: [0x34e828, 0x34e908]}
   - {src: src/animation/tu_34b498.c, range: [0x34e908, 0x34eae0]}
   - {src: src/animation/tu_34eae0.c, range: [0x34eae0, 0x34eb88], sections: false}
-  - {src: src/animation/tu_34eae0_allocate_banks.cpp, range: [0x34eb88, 0x34ecd8], owner: animation}
-  - {src: src/animation/tu_34eae0_release_banks.c, range: [0x34ecd8, 0x34ed80], owner: animation}
-  - {src: src/animation/tu_34eae0_34ed80.c, range: [0x34ed80, 0x34edb8], owner: animation, note: flags or language differ}
-  - {src: src/animation/arms_34eae0.cpp, range: [0x34edb8, 0x34f080], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: animation, functions: [0x34edb8, 0x34ee90]}
-  - {src: src/animation/arms_34eae0.cpp, range: [0x34f080, 0x34f1c0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DARMS_EVALUATE_ONLY, -fno-schedule-insns, -fno-expensive-optimizations], owner: animation, functions: [0x34f080]}
+  - {src: src/animation/tu_34eae0_allocate_banks.cpp, range: [0x34eb88, 0x34ecd8]}
+  - {src: src/animation/tu_34eae0_release_banks.c, range: [0x34ecd8, 0x34ed80]}
+  - {src: src/animation/tu_34eae0_34ed80.c, range: [0x34ed80, 0x34edb8], note: flags or language differ}
+  - {src: src/animation/arms_34eae0.cpp, range: [0x34edb8, 0x34f080], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], functions: [0x34edb8, 0x34ee90]}
+  - {src: src/animation/arms_34eae0.cpp, range: [0x34f080, 0x34f1c0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DARMS_EVALUATE_ONLY, -fno-schedule-insns, -fno-expensive-optimizations], functions: [0x34f080]}
   - {src: src/animation/tu_34eae0_34ed80.c, range: [0x34f1c0, 0x34f328]}
-  - {src: src/animation/tu_34eae0_34f328.c, range: [0x34f328, 0x34f360], flags: [-O1, -G0, -snas], owner: animation}
-  - {src: src/animation/arms_34f360_w2.cpp, range: [0x34f360, 0x34fe70], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: animation, data_ranges: [{end: '0x3d49f4', input: .data, kind: unwind, section: .data, start: '0x3d4684'}]}
+  - {src: src/animation/tu_34eae0_34f328.c, range: [0x34f328, 0x34f360], flags: [-O1, -G0, -snas]}
+  - {src: src/animation/arms_34f360_w2.cpp, range: [0x34f360, 0x34fe70], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d49f4', input: .data, kind: unwind, section: .data, start: '0x3d4684'}]}
   - {src: src/animation/tu_34fe70.c, range: [0x34fe70, 0x350060]}
-  - {src: src/animation/tu_350060.cpp, range: [0x350060, 0x350140], assembler: sn-min6, owner: animation, data_ranges: [{end: '0x3d4adc', input: .data, kind: unwind, section: .data, start: '0x3d4a3c'}]}
+  - {src: src/animation/tu_350060.cpp, range: [0x350060, 0x350140], assembler: sn-min6, data_ranges: [{end: '0x3d4adc', input: .data, kind: unwind, section: .data, start: '0x3d4a3c'}]}
   - {src: src/animation/tu_350140.c, range: [0x350140, 0x3509e0], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/animation/tu_350140_3509e0.c, range: [0x3509e0, 0x3511d0]}
-  - {src: src/animation/arms_3511d0_w2.cpp, range: [0x3511d0, 0x351a08], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: animation, data_ranges: [{end: '0x3d4fac', input: .data, kind: unwind, section: .data, start: '0x3d4eec'}]}
+  - {src: src/animation/arms_3511d0_w2.cpp, range: [0x3511d0, 0x351a08], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d4fac', input: .data, kind: unwind, section: .data, start: '0x3d4eec'}]}
   - {src: src/animation/tu_351a08.c, range: [0x351a08, 0x351a40]}
   - {src: src/animation/tu_351a40.c, range: [0x351a40, 0x351ad0], assembler: sn-min6, note: flags or language differ}
   - {src: src/animation/tu_351a40_351ad0.c, range: [0x351ad0, 0x351b78]}
@@ -2926,7 +2927,7 @@ splits:
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x371520, 0x371c88]}
   - {src: src/sony/tu_371c88.c, range: [0x371c88, 0x3720b0]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x3720b0, 0x372fc0]}
-  - {src: src/game/unsorted/behaviors_xml.cpp, range: [0x372fc0, 0x373250], flags: [-O2, -G0, -snas, -fno-rtti], assembler: sn-min6, owner: behaviors}
+  - {src: src/game/unsorted/behaviors_xml.cpp, range: [0x372fc0, 0x373250], flags: [-O2, -G0, -snas, -fno-rtti], assembler: sn-min6}
   - {src: src/game/unsorted/ctors2_373250.cpp, range: [0x373250, 0x373268], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/game/unsorted/tu_372fc0_373268.c, range: [0x373268, 0x373300]}
   - {src: src/game/unsorted/behaviors_xml.cpp, range: [0x373300, 0x373348]}
@@ -2972,15 +2973,15 @@ splits:
   - {src: src/game/unsorted/tu_37df30.c, range: [0x37df30, 0x37e6b8]}
   - {src: src/game/unsorted/tu_37e6b8.c, range: [0x37e6b8, 0x37ec50]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x37ec50, 0x37eec8]}
-  - {src: src/game/unsorted/tu_37eec8.cpp, range: [0x37eec8, 0x37f050], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40ea88', input: .sbss, section: .sbss, start: '0x40ea78'}, {end: '0x48ee30', input: .bss, section: .bss, start: '0x48edf0'}]}
+  - {src: src/game/unsorted/tu_37eec8.cpp, range: [0x37eec8, 0x37f050], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40ea88', input: .sbss, section: .sbss, start: '0x40ea78'}, {end: '0x48ee30', input: .bss, section: .bss, start: '0x48edf0'}]}
   - {src: src/game/unsorted/tu_37f050.c, range: [0x37f050, 0x37f278]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x37f278, 0x37f7a0]}
-  - {src: src/game/unsorted/tu_37f7a0.cpp, range: [0x37f7a0, 0x37f928], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40eaa8', input: .sbss, section: .sbss, start: '0x40ea98'}, {end: '0x48eeb0', input: .bss, section: .bss, start: '0x48ee70'}]}
+  - {src: src/game/unsorted/tu_37f7a0.cpp, range: [0x37f7a0, 0x37f928], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40eaa8', input: .sbss, section: .sbss, start: '0x40ea98'}, {end: '0x48eeb0', input: .bss, section: .bss, start: '0x48ee70'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x37f928, 0x381758]}
-  - {src: src/game/unsorted/tu_381758.cpp, range: [0x381758, 0x3818e0], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40eab8', input: .sbss, section: .sbss, start: '0x40eaa8'}, {end: '0x48eef0', input: .bss, section: .bss, start: '0x48eeb0'}]}
+  - {src: src/game/unsorted/tu_381758.cpp, range: [0x381758, 0x3818e0], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40eab8', input: .sbss, section: .sbss, start: '0x40eaa8'}, {end: '0x48eef0', input: .bss, section: .bss, start: '0x48eeb0'}]}
   - {src: src/game/unsorted/tu_3818e0.c, range: [0x3818e0, 0x381ab0]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x381ab0, 0x382130]}
-  - {src: src/game/unsorted/tu_382130.cpp, range: [0x382130, 0x3822b8], flags: [-x, c++, -O2, -G8, -snas], owner: physics-b, data_ranges: [{end: '0x40ead8', input: .sbss, section: .sbss, start: '0x40eac8'}, {end: '0x48ef70', input: .bss, section: .bss, start: '0x48ef30'}]}
+  - {src: src/game/unsorted/tu_382130.cpp, range: [0x382130, 0x3822b8], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40ead8', input: .sbss, section: .sbss, start: '0x40eac8'}, {end: '0x48ef70', input: .bss, section: .bss, start: '0x48ef30'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x3822b8, 0x3822e0]}
   - {src: src/game/unsorted/tu_3822e0.c, range: [0x3822e0, 0x382330]}
   - {src: src/game/unsorted/tu_382330.c, range: [0x382330, 0x382338]}
@@ -3123,14 +3124,14 @@ splits:
   - {src: src/kynapse/inline/misc4_389200.cpp, range: [0x389200, 0x389208], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x389208, 0x389240]}
   - {src: src/kynapse/inline/linkonce_389240.c, range: [0x389240, 0x389290]}
-  - {src: src/kynapse/inline/class_info_389290.cpp, range: [0x389290, 0x3892a0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/inline/class_info_389290.cpp, range: [0x389290, 0x3892a0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/linkonce_3892a0.c, range: [0x3892a0, 0x3892e0]}
   - {src: src/kynapse/inline/linkonce_3892e0.c, range: [0x3892e0, 0x389318]}
   - {src: src/kynapse/inline/linkonce_389318.c, range: [0x389318, 0x389400]}
   - {src: src/kynapse/inline/linkonce_389400.c, range: [0x389400, 0x389450]}
   - {src: src/kynapse/inline/linkonce_389450.c, range: [0x389450, 0x389480]}
   - {src: src/kynapse/inline/linkonce_389480.c, range: [0x389480, 0x3894d0]}
-  - {src: src/kynapse/inline/class_info_3894d0.cpp, range: [0x3894d0, 0x3894e0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/inline/class_info_3894d0.cpp, range: [0x3894d0, 0x3894e0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/linkonce_3894e0.c, range: [0x3894e0, 0x3894e8]}
   - {src: src/kynapse/inline/linkonce_3894e8.c, range: [0x3894e8, 0x3894f0]}
   - {src: src/kynapse/inline/linkonce_3894f0.c, range: [0x3894f0, 0x3894f8]}
@@ -3139,7 +3140,7 @@ splits:
   - {src: src/kynapse/inline/class_info_389550.cpp, range: [0x389550, 0x389560], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/linkonce_389560.c, range: [0x389560, 0x389568]}
   - {src: src/kynapse/inline/linkonce_389568.c, range: [0x389568, 0x3895c8]}
-  - {src: src/kynapse/inline/class_info_3895c8.cpp, range: [0x3895c8, 0x3895d8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/inline/class_info_3895c8.cpp, range: [0x3895c8, 0x3895d8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/linkonce_3895d8.c, range: [0x3895d8, 0x3895e0]}
   - {src: src/kynapse/inline/linkonce_3895e0.c, range: [0x3895e0, 0x3895e8]}
   - {src: src/kynapse/inline/linkonce_3895e8.c, range: [0x3895e8, 0x3895f0]}
@@ -3346,7 +3347,7 @@ splits:
   - {src: src/kynapse/inline/linkonce_38ba30.c, range: [0x38ba30, 0x38ba88]}
   - {src: src/kynapse/inline/linkonce_38ba88.c, range: [0x38ba88, 0x38bad8]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x38bad8, 0x38bb28]}
-  - {src: src/kynapse/inline/small_misc_38bb28.cpp, range: [0x38bb28, 0x38bb30], flags: [-O2, -G0, -snas, -fbyte-bool], owner: behaviors}
+  - {src: src/kynapse/inline/small_misc_38bb28.cpp, range: [0x38bb28, 0x38bb30], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/linkonce_38bb30.c, range: [0x38bb30, 0x38bb60]}
   - {src: src/kynapse/inline/linkonce_38bb60.c, range: [0x38bb60, 0x38bbb0]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x38bbb0, 0x38bd40]}
@@ -3417,7 +3418,7 @@ splits:
   - {src: src/kynapse/inline/linkonce_38e688.c, range: [0x38e688, 0x38e6e0]}
   - {src: src/kynapse/inline/linkonce_38e6e0.c, range: [0x38e6e0, 0x38e730]}
   - {src: src/kynapse/inline/linkonce_38e730.c, range: [0x38e730, 0x38e768]}
-  - {src: src/kynapse/inline/graph_cpointmapper.cpp, range: [0x38e768, 0x38e7b8], flags: [-O2, -G0, -snas, -fbyte-bool], owner: graph}
+  - {src: src/kynapse/inline/graph_cpointmapper.cpp, range: [0x38e768, 0x38e7b8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/small_misc_38e7b8.cpp, range: [0x38e7b8, 0x38e7c0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/linkonce_38e7c0.c, range: [0x38e7c0, 0x38e810]}
   - {src: src/kynapse/inline/linkonce_38e810.c, range: [0x38e810, 0x38e840]}
@@ -3435,7 +3436,7 @@ splits:
   - {src: src/kynapse/inline/class_info_38ef98.cpp, range: [0x38ef98, 0x38efa8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/misc4_38efa8.cpp, range: [0x38efa8, 0x38efb0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/hidden_name_condition.cpp, range: [0x38efb0, 0x38f000], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/inline/graph_meta_entries.cpp, range: [0x38f000, 0x38f190], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: graph}
+  - {src: src/kynapse/inline/graph_meta_entries.cpp, range: [0x38f000, 0x38f190], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/inline/linkonce_38f190.c, range: [0x38f190, 0x38f1d0]}
   - {src: src/kynapse/inline/linkonce_38f1d0.c, range: [0x38f1d0, 0x38f200]}
   - {src: src/kynapse/inline/linkonce_38f200.c, range: [0x38f200, 0x38f278]}

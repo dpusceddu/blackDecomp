@@ -12,7 +12,7 @@ SPLITS = '''variant: SLUS_213.76
 defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas]}
 splits:
   - {src: src/game/tu_100000.c, range: [0x100000, 0x100030]}
-  - {src: src/game/tu_100030.cpp, range: [0x100030, 0x100050], flags: [-O1, -G0, -snas], assembler: sn-min6, sections: false, owner: me}
+  - {src: src/game/tu_100030.cpp, range: [0x100030, 0x100050], flags: [-O1, -G0, -snas], assembler: sn-min6, sections: false}
   - {src: src/game/tu_100030.cpp, range: [0x100050, 0x100060]}
 '''
 SYMBOLS = '''# comment
@@ -37,7 +37,6 @@ class Splits(unittest.TestCase):
         self.assertEqual((a.start, a.end, a.flags, a.sections, a.library), (0x100000, 0x100030, ['-O2', '-G0', '-snas'], True, 'game'))
         self.assertEqual(b.compile_flags(), ['-O1', '-G0', '-snas', '--assembler=sn-min6'])
         self.assertEqual(a.compile_flags(non_matching=True), ['-O2', '-G0', '-snas', '-ffunction-sections', '-DNON_MATCHING'])
-        self.assertEqual(b.owner, 'me')
 
     def test_unknown_key_is_rejected(self):
         self.path.write_text('splits:\n- {src: a.c, range: [1, 2], colour: red}\n')
