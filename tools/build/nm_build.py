@@ -37,6 +37,12 @@ def main():
     fallback.unlink(missing_ok=True)
     (out / 'units-nm.json').unlink(missing_ok=True)
     for attempt in range(8):
+        # `prepare` writes unit_facts.json from the objects of this attempt, and the units read it back (a draft whose object
+        # lacks the name the image expects becomes assembly again). Facts of an earlier attempt or run must not decide which
+        # units are compiled: a unit they demote gets no object, the next `prepare` finds none, forgets the demotion, and
+        # the link then lacks a function the units still call for ("undefined symbol func_00112808", on every other run).
+        for stale in ('unit_facts.json', 'unit_problems.json'):
+            (out / stale).unlink(missing_ok=True)
         run('tools/build/units.py', slug)
         run('tools/build/make_ld.py', slug)
         r = run('tools/build/build_objects.py', slug, '--compile-only', check=False)

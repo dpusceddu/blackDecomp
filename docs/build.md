@@ -136,6 +136,11 @@ link moves everything else. It is not compared with the original and is not expe
 compile or link (their declarations are incomplete) keeps its matching version; the list is in
 `build/<GAME_ID>-nm/nm_fallback.json`. `python3 configure.py` returns to the matching build.
 
+The build repeats until that set is stable (up to 8 attempts). Each attempt starts without the facts file of the one before
+(`unit_facts.json`, written by `tools/build/units_verify.py prepare` from the objects of the attempt and read back by the units):
+a stale copy would drop units from the compile, `prepare` would find no object for them and forget the demotion, and the link would
+lack a function the units still call. `tests/tools/test_nm_build.py` checks this ordering without a backend.
+
 Times (USA retail, two cores): a build from nothing (extract, splat, split, assemble 12,000 objects, link, pack) takes
 about 1.5 to 2 minutes with the local toolchain; with the objects cached and one source unit changed about 15 s; with
 nothing changed `ninja` does nothing.
