@@ -95,7 +95,7 @@ Stages (one `ninja` rule each; everything generated is under the ignored `asm/`,
 GCC emits inline functions, template instantiations, vtables and type information that several object files need as
 *link-once* sections (`.gnu.linkonce.*`): every object that uses one carries its own copy, and the linker keeps the first
 and drops the others. In the retail image the kept copies of the code form a block behind the regular code (USA:
-0x383b50 to 0x396f48, 954 functions), in link order, so a copy sits next to the others of the object file that came first
+0x383b50 to 0x396f48), in link order, so a copy sits next to the others of the object file that came first
 and uses it. That is why a destructor of a Kynapse class or an Apt `Value::Dispose` is not next to the rest of its class.
 
 The sources keep the same split. A copy is a function of the library that uses it, not a library of its own:
@@ -154,10 +154,9 @@ one function refers to it and no data does; it is then written into that functio
 `func_XXXXXXXX.lit4.s`, because the assembler mishandles a small-data symbol defined next to the code that addresses it
 off `$gp`). Constraints it enforces, found by building: an input section is placed whole, so a function keeps one
 contiguous run per section; the assembler aligns `.short`/`.word`/`.float`/`.double` by itself, so a run is cut where such
-a directive would need an earlier start than the original address allows. Result for USA retail: `.rodata` 79,417 of
-107,816 bytes (74 %, 1,022 functions), `.lit4` 228 of 260 bytes (28 functions). What stays shared: 13,968 bytes referenced
-from data (string tables, vtable-like arrays), 9,763 referenced by several functions, 2,148 unreferenced, 2,520 whose
-function had a second, non-adjacent run. `.gcc_except_table` migrates only 456 of 3,972 bytes: the other tables
+a directive would need an earlier start than the original address allows. `ninja` prints, per section, how many bytes migrated and why the rest stays shared:
+referenced from data (string tables, vtable-like arrays), referenced by several functions, unreferenced, or whose
+function had a second, non-adjacent run. Most `.rodata` and `.lit4` migrates; `.gcc_except_table` migrates little: most tables
 belong to a whole object file (their handler labels span several functions), which is translation-unit evidence for
 the translation-unit map rather than something one function can carry.
 

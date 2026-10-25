@@ -49,11 +49,12 @@ as partly or not matching without it:
 - **Numeric names** such as `%lo(D_10F00)`, where the original holds a number and no relocation, are replaced by the number in
   the target.
 
-`ninja report` runs `objdiff-cli report generate` and prints the totals. At the time of writing: 11,227 functions, of which
-5,563 match (49.55 %), and 14.95 % of the code (401,428 of 2,685,060 bytes) matches; this is the headline. The image
-measure counts the same 5,563 functions over all 11,899 functions and 2,715,464 bytes (15.11 %); it additionally holds the
-672 orphan `<instruction>; nop` pieces (9,488 bytes) and the alignment padding behind functions (20,916 bytes in total,
-8,956 of them behind recovered functions).
+`ninja report` runs `objdiff-cli report generate` and prints the totals; they are the headline figures of the README table
+(written by `ninja badges`, which fails if they disagree with a current report). A *function* there is what objdiff counts: the
+orphan `<instruction>; nop` pieces between functions are not functions, and *code* is matched function bytes over total
+function bytes, without alignment padding. The image measure of `ninja progress` counts the same matched functions over all
+function starts of the image, including the orphan pieces, and the bytes between function starts, including padding; it is the
+smaller number's cousin and is only ever quoted as the image measure.
 
 Agreement check: when `build/SLUS_213.76/report.json` exists and is not older than the build, `ninja progress` (and so
 `ninja badges`) compares the set of exact functions (the image check: a split compiles them) with the functions objdiff
@@ -89,4 +90,4 @@ which equals this report and needs no extra download. The two badge files are co
 served by shields.io from the repository (the per-library badges go to the ignored `build/SLUS_213.76/badges/`). The objdiff report (`build/SLUS_213.76/report.json`) stays available for any
 tool that reads it; CI does not generate one, because that needs the game executable.
 
-decomp.dev no longer accepts new projects (it is being sunset), so this project is not registered there.
+As of 2026-10 decomp.dev does not accept new projects, so this project is not registered there.

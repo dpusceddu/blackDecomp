@@ -60,10 +60,10 @@ What the executable shows (USA retail):
 Agreement, with the unwind-frame and constructor boundaries held out (`tus.py validate`): predicting boundaries from "no data join, call or
 shared item crosses the gap" (edges up to 32 functions) finds 53 % of the 185 certain boundaries and wrongly cuts 5.1 % of the 1,225 gaps
 inside frame groups (precision 61 % in that set); 63 % of the frame groups of two or more functions and 99 % of the constructor sequences
-stay whole. Shorter edges find more boundaries and cut more (16: 69 % / 11.8 %; 8: 78 % / 22 %). The map (`build/SLUS_213.76/tus.yaml`) has
-599 object TUs of two or more functions (120 `exact`, 30 `high`, 165 `medium`, 284 `low`; the longest has 289 functions), 1,586
-**isolated** functions that no relation ties to a neighbour (each is an object of its own or a piece of a larger one: accessors and
-leaf code) and 852 link-once sections (702 `exact`). By bytes of `.text`: `exact` 14.5 %, `high` 2.9 %, `medium` 52.8 %, `low` 29.8 %.
+stay whole. Shorter edges find more boundaries and cut more (16: 69 % / 11.8 %; 8: 78 % / 22 %). The map (`build/SLUS_213.76/tus.yaml`) has object TUs of two or more functions, **isolated** functions that no relation
+ties to a neighbour (each is an object of its own or a piece of a larger one: accessors and leaf code) and link-once sections;
+every TU has a confidence (`exact`, `high`, `medium`, `low`). `ninja tus` writes it, and the counts and the share of `.text` by
+confidence are in [status.md](status.md#current-state-usa-retail).
 Treat proposed edges as likely and the joins inside a TU as certain; a stretch of related functions that no cut separates may hold
 several objects.
 

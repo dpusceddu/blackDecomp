@@ -13,12 +13,12 @@ qualified evidence, and overlapping shape counts are not additive. An
 operation is promoted to a shared recipe only with two complete exact source consumers. Full matrix/transpose and several normalization recipes remain
 unverified. Animation's recurring fixed-VF macros have a separate header from allocatable `j` helpers.
 
-For a targeted retry, select `users[].address` from the census with repeated `--addr` arguments and
+For a targeted retry, select `users[].address` from the inventory with repeated `--addr` arguments and
 run `AUTODECOMP_VU0=1 python3 tools/autodecomp.py run --redo --tu all ...` (game region first).
 Use `AUTODECOMP_RESULTS=build/math-study/auto.json` to retain an independent experiment ledger.
 This opt-in path models native 128-bit transfers, preserves live partial lanes and lowers a closed
 subset to shared operations. Unknown upper lanes, flags, microcalls and open ACC/Q state still fail
-explicitly; it does not invent a general VU library. Every accepted result still requires settlement
+explicitly; it does not invent a general VU library. Every accepted result still requires `confirm`
 and an identical full link. Microcode stays binary; SN cannot express special-register clobbers, so
 the documented micro/macro wrappers require hidden ACC/Q/I/flag state to be dead at their boundary.
 
@@ -39,12 +39,12 @@ python3 tools/autodecomp.py run --max-size 100            # all assembly functio
 python3 tools/autodecomp.py rescore                     # revalidate saved drafts after shared headers change
 python3 tools/autodecomp.py run --min-size 100 --max-size 300 --region game
 python3 tools/autodecomp.py run --max-size 100 --status near --status mismatch --ctx ctx2.c --tag arity-int
-python3 tools/autodecomp.py permute --max-score 8         # decomp-permuter on near misses (one member per family)
-python3 tools/autodecomp.py family                        # clone exact sources onto identical-body functions
+python3 tools/autodecomp.py permute --max-score 8         # decomp-permuter on near misses (one member per group of identical bodies)
+python3 tools/autodecomp.py clone                         # clone exact sources onto identical-body functions
 python3 tools/autodecomp.py register                      # exact drafts -> their TU files (the INCLUDE_ASM line is replaced)
-python3 tools/autodecomp.py settle                        # compile, link, put back the INCLUDE_ASM line of what does not place identically; ninja must say OK
+python3 tools/autodecomp.py confirm                       # compile, link, put back the INCLUDE_ASM line of what does not place identically; ninja must say OK
 python3 tools/autodecomp.py report [--max-size N]         # outcome classes, failure reasons
-python3 tools/next.py [near|types|families|data|ee]       # best next work
+python3 tools/next.py [near|types|identical|data|ee]       # best next work
 ```
 
 ### Using decomp-permuter directly
@@ -109,7 +109,7 @@ are retired from search. `permuter_wins` retains raw nonzero-to-exact candidates
 even after their functions leave the queue; already-exact controls do not count.
 Report reviewed, full-image wins separately: a raw candidate can fail source review.
 
-Use `start --lanes 2` or `--lanes 3` for disjoint searches in the same isolated container;
+Use `start --lanes 2` or `--lanes 3` to run two or three disjoint searches in parallel in the same isolated container;
 the existing two-CPU/two-GiB cap stays unchanged. One supervisor assigns
 the globally largest available functions, keeps each key exclusive, and gives
 each lane a separate compiler directory. A larger submission can displace the
@@ -166,8 +166,8 @@ the flag set is varied (`-O1`, `-O3`, `-fbyte-bool`, `-G8`, `-fno-peephole`, `-f
 compiled `.text` is compared with the original words, relocated fields masked, and each relocation target (symbol address
 plus addend; constants by their bytes) must equal the symbolic operand of the original assembly; (5) up to 8 differing
 instructions: decomp-permuter's randomizer, a hill climb on the compile score, 50 candidates per function and round
-compiled together in one backend job; (6) identical bodies (`family`): an exact source is cloned onto the members of its
-family by renaming symbols; (7) functions m2c cannot read but that are a few special instructions (`li $v1, N; syscall`,
+compiled together in one backend job; (6) identical bodies (`clone`): an exact source is cloned onto the other functions with the same body
+by renaming symbols; (7) functions m2c cannot read but that are a few special instructions (`li $v1, N; syscall`,
 `ei`, `di`, `sync`) come from one inline-asm template.
 
 Known HI16/LO16 address pairs also compare their complete encoded instructions, including signed-low
@@ -231,15 +231,15 @@ Type and instruction support, all of it mechanical and checked by exact matches:
   size of `D_x`: `byte_addresses` makes such addresses integers and types the dereferences (`*(s32 *)(...)`). Together +22 functions.
 - **Owned rodata** (`autodecomp.py rodata`). An exact draft that owns `.rodata` gets the run defined in its unit, as
   `const u32 rodata_XXXXXXXX[] __asm__("D_XXXXXXXX")` words or a `const char` string array laid out as the original run, and
-  string literals point at the array. Then `register`/`settle` place it.
-- **Families** (`family`). Exact sources are cloned onto the members of a family of identical bodies by renaming symbols (also
-  for functions that own rodata); a template for a family is adopted with `autodecomp.py adopt ADDR file.c` and tried with
+  string literals point at the array. Then `register`/`confirm` place it.
+- **Identical bodies** (`clone`). Exact sources are cloned onto the other functions with the same body by renaming symbols (also
+  for functions that own rodata); a template for such a group is adopted with `autodecomp.py adopt ADDR file.c` and tried with
   `tools/trysrc.py ADDR file.c`.
 
 An exact draft is only a candidate: `register` replaces the function's INCLUDE_ASM line in its TU file by the draft
 (`tools/pipeline/tu_files.py`; declarations go after the includes; a function compiled with other flags than its file, or whose group
 failed, gets a small file of its own and a line in `config/SLUS_213.76/splits.yaml`, and its mangled name a line in
-`symbols.txt`). `settle` compiles and links, puts the marker back for whatever does not place identically, and retries a
+`symbols.txt`). `confirm` compiles and links, puts the marker back for whatever does not place identically, and retries a
 failed file's new functions one per file. Results and reasons (`verify-failed`: `size` = the function owns rodata that the source does not define, `extra`,
 `layout`, `bytes`) are kept in `build/auto.json` (ignored). The drafts keep m2c's variable names (`temp_5`, `var_3`) and
 `M2C_FIELD` accesses; they compile as C under the image's `func_XXXXXXXX` names, so assembly callers link unchanged, and

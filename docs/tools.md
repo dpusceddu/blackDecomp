@@ -34,7 +34,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/diffelf.py` | Compare two ELF files section by section (a debugging aid for the identical rebuild). Convenience script; binutils `readelf` and `objdump` work too. |
 | `tools/objdump.py` | Print the sections, symbols and relocations of a relocatable ELF object (reads the file only). Convenience script; binutils `mipsel-linux-gnu-objdump` and `readelf` work too. |
 | `tools/progress.py` | Report how much of .text is provided by source (tools/build/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by library. |
-| `tools/badges.py` | Write the self-hosted progress badges (progress/) and the per-library table of the README from the exact progress data. |
+| `tools/badges.py` | Write the self-hosted progress badges (progress/), the per-library table of the README and the source facts of docs/status.md. |
 | `tools/tools_index.py` | Regenerate docs/tools.md, the index of the tools, from the docstring of every tool. |
 
 ## Build internals (`tools/build/`)

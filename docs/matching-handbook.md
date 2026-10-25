@@ -22,8 +22,8 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All compiler ex
    and scoring the caller's emitted body. Freeze the helper ABI and review float grouping before accepting a result.
 6. Before leaving a hard function, exhaust the applicable ladder and leave one precise `// Unmatched:` obstruction in
    source; keep variants/diffs in `build/`. Revisit service improvements before moving to another TU.
-7. Settle, then run `ninja` and `ninja progress`. Never demote previously exact work to
-   claim a gain. Keep one owner for shared headers and `splits.yaml`.
+7. Confirm the registration, then run `ninja` and `ninja progress`. Never demote previously exact work to
+   claim a gain. Review shared headers and `splits.yaml` changes with extra care: they affect every file.
 
 ## Verified recipes
 
@@ -131,7 +131,7 @@ verify all consumers; no per-address padding or unused FPR input is needed.
 - SN's native `.lit4` pool can use `R_MIPS_LITERAL` (8), with the same local GP0 adjustment as GPREL. Keep the owned
   pool when promoting its function. The audio constructor's native `22050.0f` and `10000.0f` emit the exact eight-byte
   pool; extern-only declarations match its instructions but lose that owned input at full link.
-- A permuter improvement remains a candidate until source review, settlement and full-image equality. Random rewrites can
+- A permuter improvement remains a candidate until source review, confirmation and full-image equality. Random rewrites can
   change signedness, aliasing, evaluation order or exception behavior. Keep the readable seed and review the resulting diff.
 
 ## Community leads and limits

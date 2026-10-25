@@ -9,7 +9,7 @@ A work-in-progress matching decompilation of the PS2 version of *Black* (Criteri
 source that compiles, with the original compilers, to the exact bytes of the retail executable. `ninja` rebuilds the executable
 byte for byte, with recovered source replacing its assembly one function at a time (`INCLUDE_ASM` lines in the translation
 unit files). Because the rebuild is *shiftable*
-(code and data can move and every reference is fixed up by the linker), it also works as a base for modding.
+(code and data can move and every reference is fixed up by the linker), it also works as a base for modding. Terms such as *TU*, *INCLUDE_ASM* and *shiftable* are explained in the [glossary](docs/glossary.md).
 
 ## Supported versions
 
@@ -17,7 +17,7 @@ Each version is identified by the game ID of its boot executable (`SYSTEM.CNF`, 
 
 | Game ID | Region | SHA-256 of the executable | Rebuild matches | Recovered source |
 | --- | --- | --- | --- | --- |
-| `SLUS_213.76` | USA | `141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c` | yes | 5,563 functions (15.0 % of the code) |
+| `SLUS_213.76` | USA | `141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c` | yes | see [Progress](#progress) |
 | `SLES_538.86` | Europe | `bbed3444a22d28b7fdc641e15a1759b6ece1c9cbc5a13331586025ff8fc2b948` | yes, from assembly | none yet |
 | `SLES_540.30` | Europe, Australia | `7e6f25966389656a9bdc534c2514a3a56f205054ee66b43c27a18b111add309f` | yes, from assembly | none yet |
 | `SLKA_253.72` | Korea | `fb59440b00444ff64be1436fd757452c3eead9e560532fad74e4d05e913a6b94` | yes, from assembly | none yet |
@@ -33,7 +33,11 @@ and are checked before releases (`python3 tools/check_versions.py` configures an
 This repository contains no game assets and no game code: no disc contents, no executables, no disassembly and no compiler
 output. The source is a new work written to compile to the same behavior. You need your own copy of the game, and you extract
 the executable from it yourself. The build tools download the third-party compilers from their public archives on your
-machine; they are not redistributed here.
+machine; they are not redistributed here. The project claims no rights in the original game or its code. The CC0 dedication
+([License](#license)) covers only the work of the contributors in this repository.
+
+The first recovered sources were written by the same author in a separate, unpublished project and imported here once
+([docs/history.md](docs/history.md#where-the-first-sources-came-from)).
 
 ## Quickstart
 
@@ -49,7 +53,7 @@ git clone https://github.com/dpusceddu/blackDecomp.git
 cd blackDecomp
 mkdir -p orig/SLUS_213.76 && cp /path/to/SLUS_213.76 orig/SLUS_213.76/
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-. .venv/bin/activate                      # the tools below need the packages; ninja finds the venv itself
+. .venv/bin/activate                      # from here on `python3` is the virtual environment's; every command in this README assumes it
 python3 tools/toolchain.py install        # pinned compilers, assemblers and wibo into build/toolchain (SHA-256 checked)
 python3 configure.py                      # default --version SLUS_213.76
 ninja
@@ -71,8 +75,11 @@ check all five, run `python3 tools/check_versions.py`.
 ```sh
 docker build --platform linux/amd64 -t black-decomp .
 docker run --rm -it --platform linux/amd64 -v "$PWD":/workspace black-decomp
-# inside: python3 configure.py && ninja
+# inside (the virtual environment is already on PATH): python3 configure.py && ninja
 ```
+
+`docker build` downloads the pinned compilers, assemblers and wibo from their public archives (SHA-256 checked), so it needs
+network access; the image contains no game files.
 
 With Podman, or on a host with SELinux (Fedora, RHEL), mount with `-v "$PWD":/workspace:Z`, or the container cannot read the checkout.
 On Apple silicon this relies on the emulation of x86-64 Linux containers and has not been tested.
@@ -87,10 +94,11 @@ On Apple silicon this relies on the emulation of x86-64 Linux containers and has
 ```sh
 ninja progress                              # code (objdiff definition) and functions matched, image measure, per region and TU
 python3 tools/progress.py --libraries       # ... per library directory of src/
-ninja badges                                # refresh progress/ (the two badge files) and the table below
+ninja badges                                # maintainer only: rewrites progress/ and the table below (contributors do not commit them)
 ```
 
-Functions and code bytes matched by recovered source (USA, `SLUS_213.76`), per library:
+Functions and code bytes matched by recovered source (USA, `SLUS_213.76`), per library. The progress numbers in this README and in
+[docs/](docs/) come from this table, written by `ninja badges`, or are links to it:
 
 <!-- progress:begin (tools/badges.py) -->
 
@@ -107,13 +115,18 @@ Functions and code bytes matched by recovered source (USA, `SLUS_213.76`), per l
 | libc | 75 / 209 | 35.9 % | 3,944 / 69,952 | 5.6 % |
 | **Total** | **5,563 / 11,227** | **49.6 %** | **401,428 / 2,685,060** | **15.0 %** |
 
+Functions as objdiff counts them: 5,563 of 11,227 (49.6 %); code: 401,428 of 2,685,060 bytes (14.95 %). Image measure (`ninja progress`): 5,563 of 11,899 function starts and 410,384 of 2,715,464 bytes (15.11 %), which includes the 672 orphan pieces and the alignment padding.
+
 <!-- progress:end -->
 
-"Code" is objdiff's definition, the one decomp.dev uses: matched function bytes / total function bytes, with function sizes
-as objdiff measures them (alignment padding and orphan pieces excluded). The totals equal `ninja report`; `ninja badges`
-computes them from the build and fails if the exact functions differ from the ones in a current objdiff report. `ninja
-progress` also prints the image measure (bytes of the final image, padding and orphans included), 15.1 % today. Details:
-[docs/progress-reports.md](docs/progress-reports.md).
+A *function* is what objdiff counts: a function start of the image, **without the orphan pieces** (the eight-byte
+`<instruction>; nop` fragments between functions, which are not code). "Code" is objdiff's definition, the one decomp.dev
+uses: matched function bytes / total function bytes, with function sizes as objdiff measures them (alignment padding and orphan
+pieces excluded). The totals equal `ninja report`; `ninja badges` computes them from the build and fails if the exact
+functions differ from the ones in a current objdiff report. The *image measure* that `ninja progress` also prints is the
+other way to count: all function starts including the orphan pieces, and all bytes between function starts including
+alignment padding, so it is a little different (the line above the table gives both). Details:
+[docs/progress-reports.md](docs/progress-reports.md); terms: [docs/glossary.md](docs/glossary.md).
 
 ## Working on a function: objdiff
 
@@ -155,9 +168,9 @@ src/<library>/        (src/game/ has subsystem directories) one file per transla
                       #ifdef NON_MATCHING blocks (game, kynapse, animation, physics, rw_core, rw_audio, apt, sony, libc);
                       compiler-emitted inline and template copies are in src/<library>/inline/ (docs/build.md#link-once-copies)
 include/<library>/    headers per library, include/ps2/ for helpers shared by all
-tools/                the everyday tools (decompile, objdiff, progress, toolchain, ...); tools/build/ (internals `ninja` runs),
+tools/                the everyday tools (decompile, where, split_function, objdiff, progress, toolchain, ...); tools/build/ (internals `ninja` runs),
                       tools/pipeline/ (automatic pipeline), tools/maint/ (maintainer and analysis)
-progress/             the two badge files the README reads, written by `ninja badges` (committed)
+progress/             the two badge files the README reads, written by `ninja badges` (the maintainer commits them)
 docs/                 build, translation unit files and split list, pipeline, TU map, matching handbook, status, history
 tests/                tests that need no game files
 asm/ build/ data/     generated (asm/<GAME_ID>/nonmatchings/ holds the assembly of every function), ignored
@@ -170,7 +183,8 @@ back into the identical image. A translation unit file lists all functions of it
 compiler reproduces the original instructions and the full image stays identical, the function is *exact*. Details:
 [docs/build.md](docs/build.md), [docs/units.md](docs/units.md), [docs/matching-handbook.md](docs/matching-handbook.md), [docs/tools.md](docs/tools.md) (index of the tools).
 
-**How do I work on a function?** Pick a TU (`python3 tools/next.py tus` lists candidates), get a draft with `python3
+**How do I work on a function?** Pick a TU (`python3 tools/next.py tus` lists candidates; claim it with an issue), find its
+file with `python3 tools/where.py func_XXXXXXXX`, get a draft with `python3
 tools/decompile.py func_XXXXXXXX` if you like, replace the function's `INCLUDE_ASM(...)` line with C or C++, and compare in
 objdiff (see above); `ninja` prints `OK`, or the file and function that differ. A draft that does not
 match yet goes in `#ifdef NON_MATCHING` ... `#else` INCLUDE_ASM `#endif`; `python3 configure.py --non-matching` builds the drafts into
@@ -189,8 +203,9 @@ Agents and other automation: [AGENTS.md](AGENTS.md).
 
 ## License
 
-[CC0 1.0 Universal](LICENSE): the source in this repository is dedicated to the public domain. The game, its code and its
-assets belong to their owners and are not included.
+[CC0 1.0 Universal](LICENSE): the contributors' own work in this repository (source, tools, documentation) is dedicated to the
+public domain. The project claims no rights in the original game or its code; the game, its code and its assets belong to
+their owners and are not included.
 
 ## Acknowledgments
 
