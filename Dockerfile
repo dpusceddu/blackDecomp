@@ -22,7 +22,8 @@ RUN python3 -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir -r /tm
 COPY tools/toolchain.py tools/build/patch_ps2eeas.py /opt/black/tools/
 COPY config/toolchain-local.json config/toolchain-compilers.json config/toolchain-assemblers.json /opt/black/config/
 ENV BLACK_TOOLCHAIN_DIR=/opt/toolchain
-RUN python3 /opt/black/tools/toolchain.py install
+RUN python3 /opt/black/tools/toolchain.py install --objdiff \
+ && chmod -R a+rX /opt/toolchain
 
 ENV PATH=/opt/venv/bin:$PATH
 WORKDIR /workspace
