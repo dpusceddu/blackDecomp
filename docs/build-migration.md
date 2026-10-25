@@ -35,3 +35,25 @@ includes. Data-only assembly objects remain separate; none is an unmatched sourc
 combined-text CFI recipes are normalized within their single TU objects. The old per-function code objects, address-sorted
 link, `sections:` keys, compile batching, backend hook and custom permuter service have been removed. The source label
 reader remains for editing and ownership analysis, rather than substituting assembly objects for compiler input.
+
+## Validation
+
+The final USA clean build in a fresh `debian:bookworm` container followed the README and printed
+`OK  SLUS_213.76 ... sha256 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c`.
+A fresh report agreed with progress: 5,563 exact functions, 14.95% code and 15.11% image. Both suites passed
+(91 build tests, 319 tool tests, no skips with the optional pinned permuter installed), along with CLI help,
+byte-compilation, configuration parsing, split consistency and the tools-index check.
+
+`tools/check_versions.py` passed all five retail versions. Its cold regional assembly rebuilds took 1,838.030 seconds;
+ordinary USA clean and incremental measurements are in [build.md](build.md#measured-build-times).
+
+The CONTRIBUTING edit-in-place example built its single objdiff object, passed the full image comparison and reverted
+cleanly. An 8-byte function deliberately expanded to 20 bytes still built in objdiff without linking; the full check
+reported its size and decoded instruction diff. `where.py` and `decompile.py --write` worked in that workflow.
+
+A clean `configure.py --non-matching` and Ninja run linked successfully. Its 76 unfinished-draft fallbacks have individual
+compiler or symbol diagnostics in the generated `nm_fallback.json`; they retain the real-include matching recipe.
+Compiler timeout testing also verifies that an assembler child cannot survive the stopped process group.
+
+The per-file permuter compile and assemble scripts passed SN 1.36, `sn-min6` and Sony 2.9 controls. Upstream `import.py`
+with the documented `--no-prune` command imported the C example without warnings, and upstream debug scoring returned zero.
