@@ -1,6 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
+#ifdef NON_MATCHING
+#include "rw_audio/request.h"
+#endif
 
 extern s32 func_00312C70();
 extern s32 func_00317C20(M2C_UNK *, s32 *);
@@ -150,7 +153,60 @@ s32 func_00319610(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00319618);
+#ifdef NON_MATCHING
+// Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
+extern s32 func_0032A938(void *);
+extern void * func_00324CB0(s32, s32, s32, void *);
+extern void * func_00318E80(s32, s32, s32, s32, void *);
+
+void * func_003196D8(s32 input, s32 operation, s32 length, s32 event, RwaAsyncFile *context) {
+    M2C_UNK var_5;
+    s32 temp_2;
+    s32 var_6;
+    void *temp_3;
+    void *var_4;
+
+    var_6 = length;
+    if (var_6 == 4) {
+        context->pending = 0;
+        M2C_FIELD(context->header, s32 *, 0) = 0;
+        M2C_FIELD(context->header, s32 *, 4) = 0;
+        M2C_FIELD(context->header, s32 *, 8) = 0;
+        var_5 = 0;
+        var_6 = 4;
+        var_4 = M2C_FIELD(M2C_FIELD(context, void **, 0), void **, 0xC);
+        goto block_10;
+    }
+    if (context->read_header != 0) {
+        context->read_header = 0;
+        return func_00319828(context, (s32) context->header, 0xC, (s32) func_00319628, context);
+    }
+    if (M2C_FIELD(context->header, s32 *, 0) == context->target) {
+        context->pending = 0;
+        var_5 = 0xC;
+        var_4 = M2C_FIELD(M2C_FIELD(context, void **, 0), void **, 0xC);
+        goto block_11;
+    }
+    context->read_header = 1;
+    temp_2 = func_0032A938(M2C_FIELD(M2C_FIELD(context, void **, 0), void **, 0xC));
+    if (temp_2 >= 0) {
+        temp_3 = context->header;
+        context->position = (s32) (temp_2 + M2C_FIELD(temp_3, s32 *, 4));
+        return func_00324CB0(context->handle, temp_2 + M2C_FIELD(temp_3, s32 *, 4), (s32) func_00318E80, context);
+    }
+    M2C_FIELD(context->header, s32 *, 0) = 0;
+    M2C_FIELD(context->header, s32 *, 4) = 0;
+    M2C_FIELD(context->header, s32 *, 8) = 0;
+    var_5 = 0;
+    var_6 = 4;
+    var_4 = M2C_FIELD(M2C_FIELD(context, void **, 0), void **, 0xC);
+block_10:
+block_11:
+    return M2C_FIELD(context, void *(**)(void *, M2C_UNK, s32, s32, s32), 0x48)(var_4, var_5, var_6, event, M2C_FIELD(context, s32 *, 0x4C));
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003196D8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00319828);
 
 void func_003199C0(void) {
