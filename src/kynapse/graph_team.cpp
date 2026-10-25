@@ -9,6 +9,7 @@ CTeam::CTeam(unsigned int count,const char *teamName) {
     else name=0;
     members=new CVarList<CEntity*>(count);
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: iterator temporary ownership and unsigned index return layout.
 CTeam::~CTeam() {
@@ -17,6 +18,7 @@ CTeam::~CTeam() {
     delete members;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: iterator temporary ownership and unsigned index return layout.
 bool CTeam::Register(CEntity *entity) {
@@ -33,6 +35,7 @@ void CTeam::Unregister(CEntity *entity) {
         if(i.node->value==entity) {members->Remove(i);return;}
     }
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: iterator temporary ownership and unsigned index return layout.
 CTeam *CTeam::FromIndex(unsigned int index) {

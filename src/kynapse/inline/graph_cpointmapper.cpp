@@ -8,6 +8,7 @@ int Unnamed::Kaim_CPointMapper::Function_0038E768(void *config) {
     return 0;
 }
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 
 // Unmatched: allocator lifetimes and saved-register allocation.

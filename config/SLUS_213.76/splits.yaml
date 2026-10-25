@@ -2532,10 +2532,10 @@ splits:
   - {src: src/rw_audio/tu_314630_316698.c, range: [0x316698, 0x316770]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x316770, 0x3168c8]}
   - {src: src/rw_audio/tu_3168c8.c, range: [0x3168c8, 0x31a2e0], flags: [-O2, -G8], functions: [0x3168c8, 0x316e90, 0x317030, 0x317490, 0x3178c0, 0x317a78, 0x317c20, 0x317d68, 0x317df0, 0x317e40, 0x317fc0, 0x318080, 0x318120, 0x318188, 0x3181e8, 0x318288, 0x3182c8, 0x318340, 0x318400, 0x318450, 0x318478, 0x318600, 0x3186b0, 0x3186f0, 0x3187f8, 0x318880, 0x318b08, 0x318b60, 0x318be0, 0x318c40, 0x318c90, 0x318ce8, 0x319268, 0x319368, 0x319578, 0x319628, 0x3196a8, 0x319950, 0x3199e0, 0x319a70, 0x319ce8, 0x319de0, 0x319e28, 0x319ed0, 0x31a108, 0x31a188, 0x31a208, 0x31a288], data_ranges: [{end: 4252148, input: .sdata, section: .sdata, start: 4252072}, {end: 4253624, input: .sbss, section: .sbss, start: 4253568}, {end: 4556232, input: .bss, section: .bss, start: '0x4584c0'}, {end: '0x3cfb98', input: .data, section: .data, start: '0x3cf380'}, {end: '0x4096e0', input: .rodata, section: .rodata, start: '0x409400'}]}
-  - {src: src/rw_audio/tu_3168c8_2.c, range: [0x316c38, 0x316e90], flags: [-O2, -G8], note: flags or language differ}
-  - {src: src/rw_audio/tu_3168c8_2.c, range: [0x317300, 0x317340]}
+  - {src: src/rw_audio/tu_3168c8_316c38.c, range: [0x316c38, 0x316e90], flags: [-O2, -G8], note: flags or language differ}
+  - {src: src/rw_audio/tu_3168c8_316c38.c, range: [0x317300, 0x317340]}
   - {src: src/rw_audio/tu_3168c8.c, range: [0x317340, 0x3176d0], flags: [-O2, -G8, -malign-loops=2, -DRWA_CONTROL_ONLY], functions: [0x317340, 0x3175c8]}
-  - {src: src/rw_audio/tu_3168c8_2.c, range: [0x3174d0, 0x3175c8]}
+  - {src: src/rw_audio/tu_3168c8_316c38.c, range: [0x3174d0, 0x3175c8]}
   - {src: src/rw_audio/tu_3168c8_3176d0.c, range: [0x3176d0, 0x317838], note: flags or language differ}
   - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x317838, 0x317868], flags: [-O2, -G8, -DRWA_MATCH_317838], sections: false, functions: [0x317838]}
   - {src: src/rw_audio/tu_3168c8_317868.c, range: [0x317868, 0x3178b8], flags: [-O2, -G8], note: flags or language differ}
@@ -2738,7 +2738,7 @@ splits:
   - {src: src/animation/tu_343fc8_344118.c, range: [0x344118, 0x344178]}
   - {src: src/animation/vu0_micro_controls.cpp, range: [0x344178, 0x3441d0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/animation/tu_3441d0_sample_bone.c, range: [0x3441d0, 0x345500]}
-  - {src: src/animation/arms_345500_w2.cpp, range: [0x345500, 0x3461d0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, data_ranges: [{end: '0x3d1e30', input: .data.animation_null_name, section: .data, start: '0x3d1e18'}, {end: '0x3d1e38', input: .data.animation_none_name, section: .data, start: '0x3d1e30'}, {end: '0x3d20cc', input: .data, kind: unwind, section: .data, start: '0x3d1e38'}, {end: '0x45f0c0', input: .bss, section: .bss, start: '0x45ecb0'}]}
+  - {src: src/animation/arms_345500.cpp, range: [0x345500, 0x3461d0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, data_ranges: [{end: '0x3d1e30', input: .data.animation_null_name, section: .data, start: '0x3d1e18'}, {end: '0x3d1e38', input: .data.animation_none_name, section: .data, start: '0x3d1e30'}, {end: '0x3d20cc', input: .data, kind: unwind, section: .data, start: '0x3d1e38'}, {end: '0x45f0c0', input: .bss, section: .bss, start: '0x45ecb0'}]}
   - {src: src/animation/tu_3461d0.cpp, range: [0x3461d0, 0x3477f0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-common], assembler: sn-min6, data_ranges: [{end: '0x3d20e4', input: .data.pose_cache, section: .data, start: '0x3d20d0'}, {end: '0x46a510', input: .bss, section: .bss, start: '0x45f0c0'}, {end: '0x3d247c', input: .data, kind: unwind, section: .data, start: '0x3d20e4'}], full_tu_context: true, unlinked_context_helpers: [func_00346230, func_00346668, func_00347280]}
   - {src: src/animation/tu_3477f0.c, range: [0x3477f0, 0x347948]}
   - {src: src/animation/tu_347948.c, range: [0x347948, 0x347a28], note: flags or language differ}
@@ -2792,12 +2792,12 @@ splits:
   - {src: src/animation/arms_34eae0.cpp, range: [0x34f080, 0x34f1c0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DARMS_EVALUATE_ONLY, -fno-schedule-insns, -fno-expensive-optimizations], functions: [0x34f080]}
   - {src: src/animation/tu_34eae0_34ed80.c, range: [0x34f1c0, 0x34f328]}
   - {src: src/animation/tu_34eae0_34f328.c, range: [0x34f328, 0x34f360], flags: [-O1, -G0, -snas]}
-  - {src: src/animation/arms_34f360_w2.cpp, range: [0x34f360, 0x34fe70], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d49f4', input: .data, kind: unwind, section: .data, start: '0x3d4684'}]}
+  - {src: src/animation/arms_34f360.cpp, range: [0x34f360, 0x34fe70], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d49f4', input: .data, kind: unwind, section: .data, start: '0x3d4684'}]}
   - {src: src/animation/tu_34fe70.c, range: [0x34fe70, 0x350060]}
   - {src: src/animation/tu_350060.cpp, range: [0x350060, 0x350140], assembler: sn-min6, data_ranges: [{end: '0x3d4adc', input: .data, kind: unwind, section: .data, start: '0x3d4a3c'}]}
   - {src: src/animation/tu_350140.c, range: [0x350140, 0x3509e0], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/animation/tu_350140_3509e0.c, range: [0x3509e0, 0x3511d0]}
-  - {src: src/animation/arms_3511d0_w2.cpp, range: [0x3511d0, 0x351a08], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d4fac', input: .data, kind: unwind, section: .data, start: '0x3d4eec'}]}
+  - {src: src/animation/arms_3511d0.cpp, range: [0x3511d0, 0x351a08], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d4fac', input: .data, kind: unwind, section: .data, start: '0x3d4eec'}]}
   - {src: src/animation/tu_351a08.c, range: [0x351a08, 0x351a40]}
   - {src: src/animation/tu_351a40.c, range: [0x351a40, 0x351ad0], assembler: sn-min6, note: flags or language differ}
   - {src: src/animation/tu_351a40_351ad0.c, range: [0x351ad0, 0x351b78]}

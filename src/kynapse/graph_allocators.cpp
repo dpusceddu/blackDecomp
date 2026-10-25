@@ -11,6 +11,7 @@ CBaseAllocator *CBaseAllocator::Find(void *key) {
     for(CVarList<CBaseAllocator*>::CIterator p(children->head);p.node;++p) {CBaseAllocator *found=p.node->value->Resolve((unsigned int)key);if(found)return found;}
     return 0;
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 bool CBaseAllocator::Add(CBaseAllocator *value) {
@@ -25,6 +26,7 @@ void CBasicAllocator::Reset(unsigned int n,void *start,unsigned int count) {
     delete children;buffer=start;bytes=count;
     if(!n)children=0;else children=new CVarList<CBaseAllocator*>(n);
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 CPoolBasedAllocator::CPoolBasedAllocator(int n,CAllocator *parent,unsigned int childrenCount):CAllocator(childrenCount) {
@@ -32,6 +34,7 @@ CPoolBasedAllocator::CPoolBasedAllocator(int n,CAllocator *parent,unsigned int c
     if(!buffer)bytes=0;used=0;unused=0;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 CPoolBasedAllocator::CPoolBasedAllocator(void *p,int n,CAllocator *parent,unsigned int childrenCount):CAllocator(childrenCount) {
@@ -39,6 +42,7 @@ CPoolBasedAllocator::CPoolBasedAllocator(void *p,int n,CAllocator *parent,unsign
 }
 #endif
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 void *CPoolBasedAllocator::GetBlock(unsigned int count) {
@@ -50,12 +54,14 @@ void *CPoolBasedAllocator::GetBlock(unsigned int count) {
     used=end;void *result=(char*)buffer+old;used=end+padding[end&mask];return result;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 CFreeList::CFreeList(int bytes,unsigned int count,CAllocator *parent):CBaseAllocator(count),blockBytes(AlignedSize(bytes)),pool((AlignedSize(bytes)+AlignedSize(sizeof(CFreeListBlock)))*count,parent,count),freeBlocks(count),busyBlocks(count) {
     for(unsigned int i=0;i<count;++i){CFreeListBlock *p=new CFreeListBlock(this);freeBlocks.Append(p);}
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 CFreeList::~CFreeList() {
@@ -63,10 +69,12 @@ CFreeList::~CFreeList() {
     for(CVarList<CFreeListBlock*>::CIterator p(busyBlocks.head);p.node;++p)delete p.node->value;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 void CFreeList::MakeAvailable(CVarList<CFreeListBlock*>::CIterator at) {freeBlocks.Append(at.node->value);busyBlocks.Remove(at);}
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 CFreeListBlock *CFreeList::TakeBlock() {
@@ -79,15 +87,18 @@ void *CAllocator::FindAny(unsigned int count,CBaseAllocator *requester) {
     requester->owner=0;CAllocator *p=this;
     if(p)do{void *found=p->GetBlock(count);if(found){if(requester->owner && requester->owner!=p)return 0;requester->owner=p;p->Add(requester);return found;}p=p->next;}while(p);return 0;
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 CBaseAllocator *CPoolBasedAllocator::Resolve(unsigned int address) {if(address>=(unsigned int)buffer){if(address<(unsigned int)buffer+bytes){CBaseAllocator *p=Find((void*)address);if(p)return p;return this;}}return 0;}
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 CBaseAllocator *CFreeList::Resolve(unsigned int address) {if(address>=(unsigned int)pool.buffer){if(address<(unsigned int)pool.buffer+pool.bytes){CBaseAllocator *p=pool.Find((void*)address);if(p)return p;return &pool;}}return 0;}
 #endif
 CAllocator *CFreeListBlock::AllocateBlock(unsigned int count,void **out) {*out=CPoolBasedAllocator::GetBlock(count);if(*out){++allocations;return this;}if(next)return next->AllocateBlock(count,out);return 0;}
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 CBaseAllocator *CFreeListBlock::Resolve(unsigned int address) {CBaseAllocator *p=CPoolBasedAllocator::Resolve(address);if(p==this){if(!--allocations){used=0;parent->MakeAvailable(position);}}return p;}

@@ -32,6 +32,31 @@ and that the whole image stays identical. `python3 tools/where.py func_XXXXXXXX`
 Hand-written files keep descriptive names (`kynapse/behaviors_pathway.cpp`). Link-once copies (compiler-emitted inline and
 template code) live in `src/<library>/inline/` ([build.md](build.md#link-once-copies)).
 
+## Drafts
+
+A function that does not match yet keeps its `INCLUDE_ASM` line and its readable version sits above it in an
+`#ifdef NON_MATCHING` block (the `#else` branch is the marker), with a one-line `// Unmatched:` note. `python3 configure.py
+--non-matching` followed by `ninja` builds the drafts into a separate executable.
+
+A few files also contain `#if 0` blocks. They are not drafts of a known function: they are readable code (mostly ported from the
+Xbox build of the Kynapse library, or candidates whose function could not be tied to an address) that is kept for reference and
+never compiled. Each one has an "Unplaced draft" comment above it; when its function is found, move it into the
+`#ifdef NON_MATCHING` form above.
+
+## File names
+
+A file that has no descriptive name is named after addresses (the rules are in `tools/build/layout.py`):
+
+| Name | Meaning |
+| --- | --- |
+| `tu_<A>.c` | the unit of the translation unit whose first function is at `A` (hexadecimal, no `0x`) |
+| `tu_<A>_<B>.c` | a further unit of the same TU, starting at `B`: the part that needs other flags, another language or its own constants (`tu_103930_105228.c` is the unit at 0x105228 of the TU that starts at 0x103930); its `note:` in the split list says why |
+| `linkonce_<A>.c`, `linkonce_<A>_<B>.c` | compiler-emitted inline and template copies (link-once code) in `src/<library>/inline/` |
+| `<name>_<A>.cpp` | a file named after the class or module (`frontend_menu_load.cpp`, `arms_345500.cpp`), with the address of its first function when the name alone is not unique |
+
+`.c` or `.cpp` is the language the file compiles as. A file moves to a descriptive name when the evidence shows what it is
+([CONTRIBUTING.md](../CONTRIBUTING.md#naming)).
+
 ## The split list
 
 `config/SLUS_213.76/splits.yaml`, one line per entry, ordered by address:
@@ -60,9 +85,10 @@ other entries (the only case where ranges overlap). Rare keys keep the options o
 
 The rule is checked by `python3 tools/build/splits.py check` (no game files), by `python3 configure.py` and by the tests: ranges
 that overlap, a function listed in two files, an `INCLUDE_ASM` line for a function outside the file's ranges or listed twice, and
-(with a build) a function that no entry owns are errors. To give a function to another file, remove its marker and its stretch of
-the range from the old owner and add the stretch to the new one; `tools/pipeline/tu_files.py` does this when the automatic
-pipeline makes a file of its own for a function.
+(with a build) a function that no entry owns are errors. To give a function to a file of its own (other flags, `-x c++`, a file
+with `sections: false`), run `python3 tools/split_function.py func_XXXXXXXX [--cpp] [--flags "..."]`: it removes the marker and
+that stretch of the range from the old owner and creates the new file and entry (`tools/pipeline/tu_files.py` does the same when the
+automatic pipeline makes a file for a function). `python3 tools/relocate_sources.py old new` renames or moves a whole file.
 
 ## Names
 

@@ -41,6 +41,7 @@ void CPathFinder::Reset()
     if (policy)
         policy->Reset();
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned char CPathFinder::Initialize(ChildBuffers* definition)
@@ -141,6 +142,7 @@ unsigned char CPathFinder::Initialize(ChildBuffers* definition)
     return 0;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned char __cdecl CPathFinder_PublishControls(CPathFinder* follower, MoveRecord* move)
@@ -286,6 +288,7 @@ unsigned char __cdecl CPathFinder_PublishControls(CPathFinder* follower, MoveRec
     return 1;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 bool CPathFinder::FindNextMove(MoveRecord* move, RouteRequest* request)
@@ -511,6 +514,7 @@ finish:
     return true;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 bool CPathFinder::RefreshSearch(bool invalidateStart, bool* changed, RouteRequest* request)
@@ -561,6 +565,7 @@ bool CPathFinder::RefreshSearch(bool invalidateStart, bool* changed, RouteReques
     return false;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 float CPathFinder::RemainingDistance()
@@ -590,6 +595,7 @@ float CPathFinder::RemainingDistance()
     return total;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 bool CPathFinder::SetGraph(NavigationGraph*newGraph)
@@ -647,6 +653,7 @@ void CPathFinder::UpdateProgress()
         }
     }
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned char __cdecl CPathFinder_HasUnsupportedGround(CPathFinder* follower, const float* point)
@@ -736,6 +743,7 @@ unsigned char __cdecl CPathFinder_HasUnsupportedGround(CPathFinder* follower, co
     return 1;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned int __cdecl CPathFinder_GenerateMove(CPathFinder* owner, float* move, const float* point)
@@ -776,6 +784,7 @@ unsigned int __cdecl CPathFinder_GenerateMove(CPathFinder* owner, float* move, c
     return 1;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned char __cdecl CPathFinder_AdvanceSubgoal(CPathFinder* owner)
@@ -820,6 +829,7 @@ unsigned char __cdecl CPathFinder_AdvanceSubgoal(CPathFinder* owner)
     return 1;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned int __cdecl CPathFinder_AdvanceSubgoalSmooth(CPathFinder* owner)
@@ -941,6 +951,7 @@ unsigned int __cdecl CPathFinder_AdvanceSubgoalSmooth(CPathFinder* owner)
     return 1;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 bool CPathFinder::Configure(ChildBuffers* property)
@@ -1145,6 +1156,7 @@ CPathFinder::CPathFinder(void *brain):IPathFinder(brain)
  if(!agentCount)agentList=0;else{agentList=(AgentObject**)Allocate(agentCount*4);for(unsigned int i=0;i<agentCount;++i)agentList[i]=0;}
  lastProbe=pathOrigin;segmentLength=-1.0f;policy=0;
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 CPathFinder::~CPathFinder()
@@ -1166,6 +1178,7 @@ inline float EdgeRef::GetAuthoredLength()const
  if(this==(EdgeRef*)&owner->syntheticIndex)return owner->syntheticLength;
  if(!owner->edgeLengths){const float*a=(const float*)((char*)func_0038F2B0(this)+4);const float*b=(const float*)((char*)func_0038F2F0(this)+4);float dx=b[0]-a[0],dz=b[2]-a[2],dy=b[1]-a[1];return sqrtf(dz*dz+dx*dx+dy*dy);}return owner->edgeLengths[index];
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned char CPathFinder_CheckSegmentCorridor(CPathFinder *self,const float*point)
@@ -1180,6 +1193,7 @@ unsigned char CPathFinder_CheckSegmentCorridor(CPathFinder *self,const float*poi
  unsigned char unsupported=CPathFinder_HasUnsupportedGround(self,point);if(unsupported)self->turnState=2;return unsupported==0;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned char CPathFinder_SelectSteeringProbe(CPathFinder*self,const float*from,const float*to,float*out)
@@ -1198,6 +1212,7 @@ unsigned char CPathFinder_SelectSteeringProbe(CPathFinder*self,const float*from,
  *(Vec3f*)out=right;return 1;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned char CPathFinder_GenerateSteeringMove(CPathFinder*self,float*out,const float*point)
@@ -1208,20 +1223,24 @@ unsigned char CPathFinder_GenerateSteeringMove(CPathFinder*self,float*out,const 
  self->waypointPosition=self->position;return 1;
 }
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 bool CPathFinder::Bind1(){if(!yawChannel){if(!turnChannel)return false;}else if(turnChannel)return false;return true;}
 #endif
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 bool CPathFinder::Bind2(){if(!speedChannel){if(!speedChannelAlt)return false;}else if(speedChannelAlt)return false;return true;}
 #endif
 unsigned char CPathFinder_IsAtGoal(CPathFinder*self){float d=sqrtf(self->lateralDelta.HorizontalSquared());if(d<self->heightRadiusA && fabsf(self->lateralDelta.y)<self->radius)return 1;return 0;}
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 void CPathFinder::PredictMove(const float*move){predicted=position+Vec3f(move[1],move[2],move[3])*(move[0]/10.0f);}
 #endif
 extern "C" unsigned char func_002E27F8(float,const float*,const float*,Actor*,int);
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 unsigned char CPathFinder_AcceptActorSegment(CPathFinder*self,const float*point)
@@ -1242,6 +1261,7 @@ struct ServiceClass {int index;unsigned char unknown04[0x104];ServiceClass*paren
 extern ServiceClass allowedServiceClass __asm__("D_00451778");
 extern "C" void func_002E5218(CPathFinder*,const void*);
 inline bool ServiceIsA(const ServiceClass*want,const ServiceClass*info){do{if(want==info)return true;info=info->parent;}while(info);return false;}
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: remaining class-call context, lifetime or scheduling differences.
 bool CPathFinder::InstallService(const void*descriptor){const ServiceClass*which=(const ServiceClass*)descriptor;if(!ServiceIsA(&allowedServiceClass,which))return false;ServiceObject *prior=serviceList[which->index];func_002E5218(this,which);if(!prior)serviceList[which->index]->SetGraph(graph);return true;}

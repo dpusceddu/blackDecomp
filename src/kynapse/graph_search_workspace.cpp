@@ -55,6 +55,7 @@ bool InitSearch(unsigned int capacity)
 
 
 // Unmatched: predecessor helper and vector temporary register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool SearchGraph::ReconstructRoute(SearchRoute* route, GraphNode* goal)
 {
@@ -122,6 +123,7 @@ finished:
 
 
 // Unmatched: C++ iterator return temporaries and inlining.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 NodeCursor InsertByScore(SearchList *list,GraphNode *node) {
     NodeCursor before=list->Begin();
@@ -176,6 +178,7 @@ inline bool RelaxVisitor::EnumerateOutgoingEdges(GraphNode* node)
     return true;
 }
 // Unmatched: outgoing helper inlining and visitor register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 void SearchGraph::Expand(GraphNode *node,GraphNode *goal,GraphNode *start,void *context) {
     RelaxVisitor visitor;
@@ -186,6 +189,7 @@ void SearchGraph::Expand(GraphNode *node,GraphNode *goal,GraphNode *start,void *
 
 
 // Unmatched: cursor temporaries and node traversal register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool SearchGraph::FindRoute(SearchRoute* route, GraphNode* start, GraphNode* goal, void* context)
 {
@@ -239,6 +243,7 @@ static __forceinline void PublishStatistics(unsigned int* samples, float* mean, 
 
 
 // Unmatched: timed state-machine and cursor lifetimes.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 unsigned int SearchGraph::AdvanceTimed(SearchRoute* route, GraphNode* start, GraphNode* goal, void* context,
                                        unsigned int* samples, float* mean, float* deviation,

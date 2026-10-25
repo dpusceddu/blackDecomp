@@ -66,6 +66,7 @@ int Kaim::CFindNearestData::Build()
     }
     return true;
 }
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 
 // Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.

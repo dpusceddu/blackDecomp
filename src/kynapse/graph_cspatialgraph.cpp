@@ -22,6 +22,7 @@ bool CSpatialGraph::LoadFromPath(const char* path)
 }
 }
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 #define CONVERT(field) { for(unsigned int word=0;word<sizeof(field)/4;++word){unsigned int *p=(unsigned int*)&(field);p[word]=p[word];} }
 namespace Kaim {

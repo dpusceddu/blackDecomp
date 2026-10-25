@@ -1,4 +1,6 @@
 """A source-only pass must have the next assembly input's alignment evidence: cached, or assembled in the pass."""
+import contextlib
+import io
 import json
 from pathlib import Path
 import subprocess
@@ -35,10 +37,11 @@ class CompileOnlyCacheTests(unittest.TestCase):
             with patch.object(build, 'ROOT', root), patch.object(build, 'dependencies', return_value=[]), \
                  patch.object(sys, 'argv', ['build_objects.py', 'test', '--compile-only']), \
                  patch.object(build.subprocess, 'run', return_value=subprocess.CompletedProcess([], 0, '', '')):
-                self.assertEqual(build.main(), 0)
-                first_mapping = json.loads((target / 'objects_cache.json').read_text())
-                (root / 'include/macro.inc').write_text('.macro glabel name\n.align 4\n.endm\n')
-                self.assertEqual(build.main(), 0)
+                with contextlib.redirect_stdout(io.StringIO()):
+                    self.assertEqual(build.main(), 0)
+                    first_mapping = json.loads((target / 'objects_cache.json').read_text())
+                    (root / 'include/macro.inc').write_text('.macro glabel name\n.align 4\n.endm\n')
+                    self.assertEqual(build.main(), 0)
             mapping = json.loads((target / 'objects_cache.json').read_text())
             self.assertEqual(first_mapping, dict(original='cache/' + asm_key + '.o', unit='cache/' + unit_key + '.o'))
             self.assertNotEqual(mapping['original'], first_mapping['original'])

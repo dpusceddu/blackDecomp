@@ -29,6 +29,7 @@ static inline int SamePoint(const Vec3 &a,const Vec3 &b){return a.x==b.x&&a.y==b
 unsigned int RouteBuffers::FindPoint(const Vec3 *point)const{for(unsigned int i=0;i<count;++i)if(SamePoint(points[i],*point))return i;return (unsigned int)-1;}
 }
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 namespace Kaim {
 

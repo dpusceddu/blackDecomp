@@ -33,6 +33,7 @@ CPathObject::~CPathObject()
 }
 }
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 
 // Unmatched: class-hierarchy traversal loop arrangement.

@@ -6,6 +6,7 @@
 namespace Kaim {
 // Unmatched: chunk-copy aggregate and conversion-loop register allocation.
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
 {
@@ -86,6 +87,7 @@ bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
 #endif
 
 // Unmatched: field conversion helpers and error cleanup block ordering.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool CSpatialGraph::Load(const void* resource)
 {
@@ -236,6 +238,7 @@ bool CSpatialGraph::SaveOld(const void *path) {
 
 template<class T> inline bool SpatialWriteScalar(const T &value,void *file){unsigned int converted=*(const unsigned int*)&value;return D_00451228.write(&converted,4,1,file)==1;}
 // Unmatched: scalar serialization temporary lifetimes and register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool CSpatialGraph::Write(const void* path, unsigned int saveFlags)
 {

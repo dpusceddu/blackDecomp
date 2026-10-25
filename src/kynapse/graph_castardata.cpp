@@ -4,6 +4,7 @@
 
 Kaim::CAstarData::~CAstarData(){ if(rows){for(int i=0;i<count;++i)D_003C87E0(rows[i]);D_003C87E0(rows);} }
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 
 // Unmatched: stream-loading branch layout.

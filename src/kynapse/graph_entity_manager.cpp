@@ -20,6 +20,7 @@ void Perception::Reset()
 }
 
 // Unmatched: iterator return view, authored-vector temporaries and floating guard/register lifetimes.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool Perception::Refresh(unsigned int index)
 {
@@ -107,6 +108,7 @@ bool Perception::Refresh(unsigned int index)
 #endif
 
 // Unmatched: iterator and authored-vector value-copy context and register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 void Perception::UpdatePair(int a, int b, unsigned char lineCheck)
 {
@@ -156,6 +158,7 @@ void Perception::UpdatePair(int a, int b, unsigned char lineCheck)
 #endif
 
 // Unmatched: iterator temporary lifetime, packed request flags and float register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 void Perception::FindNearest(){
  float visible=3.402823466e+38F,clearGroup=3.402823466e+38F,any=3.402823466e+38F,visibleGroup=3.402823466e+38F,clear=3.402823466e+38F,anyGroup=3.402823466e+38F;

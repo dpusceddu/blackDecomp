@@ -26,6 +26,7 @@ extern NearestEdgeVisitor QueryEdgeStorage __asm__("D_00452700");
 extern unsigned int QueryEdgeGuard __asm__("D_00452728");
 
 // Unmatched: visitor and iterator register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 NavNode *FindNearestVertex(NodeGraph *graph,const Vec3 *point,unsigned char outgoing,unsigned char incoming) {
     if (!QuerySimpleGuard) {
@@ -41,6 +42,7 @@ NavNode *FindNearestVertex(NodeGraph *graph,const Vec3 *point,unsigned char outg
 }
 #endif
 // Unmatched: visitor lifetime and register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 NavNode *FindNearestVisible(NodeGraph *graph,const Vec3 *point,Actor *actor,unsigned char outgoing,unsigned char incoming) {
     VisibleNodeVisitor visitor;
@@ -55,6 +57,7 @@ NavNode *FindNearestVisible(NodeGraph *graph,const Vec3 *point,Actor *actor,unsi
 }
 #endif
 // Unmatched: visitor lifetime and loop register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 NavNode *FindNearestLocal(NodeGraph *graph,const Vec3 *point,Actor *actor,float radius,unsigned char outgoing,unsigned char incoming) {
     NearestNodeVisitor visitor;
@@ -78,6 +81,7 @@ NavNode *FindNearestLocal(NodeGraph *graph,const Vec3 *point,Actor *actor,float 
 }
 #endif
 // Unmatched: adjacency inline helpers and live-range allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 NavNode *QueryNearestCandidate(const Vec3 *point,Actor *actor,QueryPointIndex *index,unsigned char outgoing,unsigned char incoming) {
     int *candidates;
@@ -106,6 +110,7 @@ NavNode *QueryNearestCandidate(const Vec3 *point,Actor *actor,QueryPointIndex *i
 }
 #endif
 // Unmatched: iterator register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 QueryEdge *FindNearestEdge(QueryGraph *graph,const Vec3 *point,float radius) {
     if(!QueryEdgeGuard) {
@@ -120,6 +125,7 @@ QueryEdge *FindNearestEdge(QueryGraph *graph,const Vec3 *point,float radius) {
 }
 #endif
 // Unmatched: vector temporary ordering and register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 void DrawGraph(QueryGraph *graph,int red,int green,int blue) {
     for(unsigned int i=0;i<graph->edgeCount;++i) {
@@ -138,6 +144,7 @@ void DrawGraph(QueryGraph *graph,int red,int green,int blue) {
 }
 #endif
 // Unmatched: vector temporary ordering and register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 void DrawGraphDefault(QueryGraph *graph) {
     for(unsigned int i=0;i<graph->edgeCount;++i) {

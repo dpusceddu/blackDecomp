@@ -52,6 +52,7 @@ unsigned int CPathObjectManager::GetSegments(CPointPair **out)
     return segmentCount;
 }
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: mirror-call virtual target registers differ despite matching control flow.
 bool CPathObjectManager::Add(CPathObject *object)

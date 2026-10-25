@@ -4,6 +4,7 @@
 // Partial PS2 views retained for subsequent reconstruction. Enable one candidate
 // only after re-scoring its complete class context. No full object sizes are known.
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: vector-copy alignment, inline helpers and temporary lifetimes; best aligned candidate 333 differences.
 #include "game/classes/other/UnknownVtable_003E0A40.hpp"
@@ -119,6 +120,7 @@ void Notification::Update(float delta){
 
 #endif
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: teardown loop shape and register scheduling; 45 differences.
 #include "game/classes/other/UnknownVtable_003E0AC0.hpp"
@@ -137,6 +139,7 @@ int Unnamed::UnknownVtable_003E0AC0::Function_001FBB48(){
 
 #endif
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 // Unmatched: renderer pointer and player-index load scheduling; 6 differences.
 #include "game/classes/other/UnknownVtable_003E0A40.hpp"

@@ -5,6 +5,7 @@
 
 // Unmatched: name-array reference and allocation register scheduling.
 
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 int AddPeriodicName(const char *name) {
     ParameterTables *tables=GetNameTables();
@@ -17,6 +18,7 @@ int AddPeriodicName(const char *name) {
 }
 #endif
 // Unmatched: name-array reference and allocation register scheduling.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 int AddAperiodicName(const char *name) {
     ParameterTables *tables=GetNameTables();
@@ -29,6 +31,7 @@ int AddAperiodicName(const char *name) {
 }
 #endif
 // Unmatched: name-array reference and allocation register scheduling.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 int AddEstimatedName(const char *name) {
     ParameterTables *tables=GetNameTables();
@@ -42,6 +45,7 @@ int AddEstimatedName(const char *name) {
 #endif
 
 // Unmatched: threshold CFG and register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool ParameterTables::Consume(int index,SlotUser *user) {
     if(!(threshold<=0)) {
@@ -64,6 +68,7 @@ bool ParameterTables::Consume(int index,SlotUser *user) {
 #endif
 
 // Unmatched: iterator cleanup and success/error block ordering.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool ParameterTables::ConsumeList(int index,IndexUser *user) {
     if(threshold<=0)return true;
@@ -95,6 +100,7 @@ bool ParameterTables::ConsumeList(int index,IndexUser *user) {
 #endif
 
 // Unmatched: fired branch scheduling.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool ParameterViews::ConsumeGlobal(int index) {
     if(threshold<=0)return true;
@@ -110,6 +116,7 @@ bool ParameterViews::ConsumeGlobal(int index) {
 }
 #endif
 // Unmatched: recursive fallback and compiler tail recursion.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 int ParameterTables::NextSlot() {
     if(selected>=0 && (unsigned int)selected>=GetSlotOwner()->slotCount)return -1;
@@ -160,6 +167,7 @@ int CompareSets(const void* left, const void* right)
 }
 
 // Unmatched: rank-pointer helper register scheduling.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool ParameterTables::Raise(int index,SlotUser *user) {
     int slot=user->GetIndex();
@@ -171,6 +179,7 @@ bool ParameterTables::Raise(int index,SlotUser *user) {
 }
 #endif
 // Unmatched: rank-pointer helper register scheduling.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 bool ParameterViews::RaiseIndex(int index,IndexUser *user) {
     int slot=user->GetIndex();
@@ -208,6 +217,7 @@ void ParameterViews::AccumulateGlobal(int index) {
     }
 }
 // Unmatched: float return register allocation.
+// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
 #if 0
 float ParameterTables::Remaining(int index)
 {

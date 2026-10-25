@@ -48,7 +48,7 @@ class BuildContext(unittest.TestCase):
         self.assertFalse(hasattr(cr, 'write_outputs'))
         for argv, builds in ((['context_recovery.py'], True), (['context_recovery.py', '--report'], False)):
             with patch.object(sys, 'argv', argv), patch.object(cr, 'recover', return_value=result()), \
-                 patch.object(cr, 'write_build_context') as write_build:
+                 patch.object(cr, 'write_build_context') as write_build, contextlib.redirect_stdout(io.StringIO()):
                 cr.main()
             self.assertEqual(builds, write_build.called, argv)
         with patch.object(sys, 'argv', ['context_recovery.py', '--write-headers']), \
@@ -76,7 +76,8 @@ class DecompileContext(unittest.TestCase):
                  patch.object(autodecomp, 'is_orphan', return_value=False), \
                  patch.object(autodecomp, 'run_m2c', return_value={fn['name']: dict(body='', ret='void', params='')}), \
                  patch.object(autodecomp, 'clean_function', return_value=('void func_00100258(void) {}\n', 'sig')):
-                decompile.draft(0x100258, 'ctx.c')
+                with contextlib.redirect_stdout(io.StringIO()):
+                    decompile.draft(0x100258, 'ctx.c')
             self.assertTrue((root / 'build/auto/recovered_layouts.c').is_file())
             self.assertTrue((root / 'build/auto/ctx.c').is_file())
             self.assertEqual(['build'], sorted(p.name for p in root.iterdir()))
@@ -89,7 +90,8 @@ class DecompileContext(unittest.TestCase):
         with patch.dict(os.environ, {k: v for k, v in os.environ.items() if k != 'AUTODECOMP_FREEZE_CONTEXT'}, clear=True), \
              patch.object(autodecomp, 'RECOVERED', None), patch.object(cr, 'recover', return_value=result()), \
              patch.object(cr, 'write_build_context') as build:
-            autodecomp.recovered_context()
+            with contextlib.redirect_stdout(io.StringIO()):
+                autodecomp.recovered_context()
         build.assert_called_once()
 
 
