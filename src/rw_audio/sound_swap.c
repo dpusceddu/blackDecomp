@@ -28,11 +28,9 @@ void func_00315B60(RwaSound *sound) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315DC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315DE8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315EE8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315F18);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315F28);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315FF0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316180);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316190);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003161C8);

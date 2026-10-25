@@ -31,9 +31,3 @@ void MovingShot::CachedHit(){
 // Unmatched: 0015D440: motion vector and temporary scheduling.
 // Unmatched: 0015D620: cached query boolean and stored-float vector helper context.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D3D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D3E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D440);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D620);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D750);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D850);

@@ -30,11 +30,6 @@ s32 func_0027F5E0(void) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027F5E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027F640);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027F6B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027F6D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027F6F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027F708);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027F728);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027F730);
 
 void func_0027F778(void) {
     D_003C0E04 += 1;

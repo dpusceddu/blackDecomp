@@ -265,6 +265,4 @@ int FrontendMenuState::Exit() {
     return 0;
   }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00104E10);
 #endif

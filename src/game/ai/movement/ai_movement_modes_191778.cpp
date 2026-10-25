@@ -27,4 +27,3 @@ PositionResult MovementModeBase::GetTarget() const { return AsResult(target); }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001917A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191A28);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191AA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191AF8);

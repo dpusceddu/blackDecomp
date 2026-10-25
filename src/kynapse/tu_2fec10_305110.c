@@ -30,9 +30,6 @@ s32 func_00305188(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305190);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305200);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305250);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003052A0);
 
 #include "ps2/recovered_types.h"
 extern s32 func_002FB9D0(void *, void *, void *, s32, s32, f32);
@@ -41,10 +38,6 @@ s32 func_00305340(void *arg0, void *arg1, s32 arg2, s32 arg3) {
     return func_002FB9D0(M2C_FIELD(arg0, void **, 0x64), arg1, M2C_FIELD(M2C_FIELD(arg0, void **, 4), void **, 0x14), arg2 & 0xFF, arg3 & 0xFF, M2C_FIELD(arg0, f32 *, 0x38));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305378);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003053C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003053F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305428);
 
 void func_00305438(void) {
     D_003EFCC0 = 0;

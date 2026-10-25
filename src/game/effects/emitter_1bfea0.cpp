@@ -11,9 +11,7 @@ int ModEffects::EmitterRecord::Reset() {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFEC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFED0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFFE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C01E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C02A0);
 
 #ifdef NON_MATCHING
 #include "game/effects/emitter.h"
@@ -30,7 +28,5 @@ extern "C" void func_001C0518(BkEffectEmittersPS2 *pool) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0518);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C05D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C05F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0600);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0728);

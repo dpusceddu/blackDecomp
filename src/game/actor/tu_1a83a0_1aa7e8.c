@@ -42,8 +42,6 @@ void func_001AA9D0(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA9D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AACF8);
 
 void func_001AAD90(s32 arg0, s32 arg1, s32 arg2) {
     func_001AB1C0(arg0, arg1, arg2 + 0x3B9, func_00137AE0(arg2), &D_003F6E30, arg2);

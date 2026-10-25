@@ -73,7 +73,6 @@ void Selector::Idle(char* name,Actor* actor) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A86E0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A8A20);
 
 #ifdef NON_MATCHING
 #include "game/graphics/animation_selector.hpp"
@@ -86,8 +85,6 @@ if(!actor->HasLayer()) { if(!alternate)EmitFallback(name,actor->AnimationPrefix(
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A8D50);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A8E30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A8F10);
 
 #ifdef NON_MATCHING
 #include "game/graphics/animation_selector.hpp"
@@ -221,7 +218,6 @@ speed:
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A9908);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A9EA0);
 
 #ifdef NON_MATCHING
 #include "game/graphics/animation_selector.hpp"
@@ -254,16 +250,6 @@ void Selector::Aim(char* name,Actor* actor) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A9ED0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA280);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA490);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA768);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA7E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA848);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA8A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA908);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA968);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA9C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA9D0);
 
 #ifdef NON_MATCHING
 #include "game/graphics/animation_selector.hpp"

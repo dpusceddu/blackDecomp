@@ -139,7 +139,6 @@ extern "C" void func_0010BC10() {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010BC10);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010C2F8);
 
 #ifdef NON_MATCHING
 // Unmatched: func_0010C398: profile aggregate copy allocation and state/callee

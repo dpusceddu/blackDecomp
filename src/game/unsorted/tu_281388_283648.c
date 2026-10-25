@@ -147,19 +147,16 @@ void func_00284668(void) {
     func_002851E0();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00284688);
 
 void func_002848A0(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002848A8);
 
 void func_00284918(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00284920);
 
 void func_00284990(void *arg0, void *arg1) {
     M2C_FIELD(arg0, void **, 4) = arg1;
@@ -168,8 +165,6 @@ void func_00284990(void *arg0, void *arg1) {
     func_00319E28(M2C_FIELD(arg0, s32 *, 0x34), M2C_FIELD(arg1, s32 *, 0x18));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002849C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00284A10);
 
 void func_00284A60(void *arg0, f32 fparg0) {
     s32 temp_4;
@@ -192,8 +187,6 @@ void func_00284A98(void *arg0, f32 fparg0) {
     M2C_FIELD(arg0, f32 *, 0x24) = fparg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00284AE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00284B28);
 
 /* Recovered_Vtable_003E26E8: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
 typedef struct Recovered_Vtable_003E26E8 {

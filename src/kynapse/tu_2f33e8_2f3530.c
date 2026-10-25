@@ -24,5 +24,3 @@ s32 func_002F3530(Recovered_Vtable_003EDC38 *arg0, s32 arg1) {
     return (s32) ((void *) (((s8 *) var_2) + 4));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F3570);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F3590);

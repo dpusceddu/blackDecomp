@@ -24,20 +24,11 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4268);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4328);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4330);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D43B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4618);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4630);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4858);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4998);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4A50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4BD8);
 
 void func_001D4C78(void) {
     D_0040DFD0 = D_0040EB28;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4C90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4D00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4F38);
 
 void func_001D5028(void) {
     func_001C2D90();
@@ -48,8 +39,6 @@ s32 func_001D5048(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D5068);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D5370);
 
 void func_001D5808(void) {
     func_001D5370(1, 0xFFFF);

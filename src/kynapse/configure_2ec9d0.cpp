@@ -21,8 +21,3 @@ bool ConfigHostB::ConfigureAll(ChildBuffers* config)
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ECAA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ECAF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ECB30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ECB40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ECB60);

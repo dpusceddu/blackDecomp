@@ -54,9 +54,6 @@ s32 func_001C6608(s32 arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C6660);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C6668);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C67C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C6828);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C6860);
 
 void func_001C6A68(void) {
     func_001C5F48(D_0040F4C0);

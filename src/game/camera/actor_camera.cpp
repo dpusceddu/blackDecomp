@@ -91,7 +91,6 @@ void CameraController::Configure(BlackGame::PositionArg a, BlackGame::PositionAr
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140E48);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140EA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141308);
 #endif
 
 #ifdef NON_MATCHING
@@ -104,21 +103,11 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141308);
 // Unmatched: 0x141308 queued child-selection loop and success-return control flow.
 // Unmatched: 0x141460 small-data byte access and duplicate boolean constant lifetimes.
 // Unmatched: 0x1414A0 component-spill reuse and narrow-predicate control flow.
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140E48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140EA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141308);
 #endif
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141000);
 
 #ifdef NON_MATCHING
 // Unmatched: 0x141008 signed-angle VU normalization, temporary spills and scheduling remain after native camera reconstruction.
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141008);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141168);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001412C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001412E8);

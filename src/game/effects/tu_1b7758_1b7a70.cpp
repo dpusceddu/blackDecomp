@@ -102,13 +102,6 @@ void PoolMethods::Stop(){struct Book {unsigned short *indices,*reverse;unsigned 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7E60);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7F08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7F28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7F50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7FC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8138);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8180);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B82B0);
 
 #ifdef NON_MATCHING
 #include "game/effects/geometry.h"
@@ -151,36 +144,6 @@ extern "C" void func_001B82E0(char *buckets,u32 pass) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B82E0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8630);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8638);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8640);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B86D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B86F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8798);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B89C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B90D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B9198);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B96B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B9A40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B9B58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BAB90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BAD90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BAF90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BB190);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BC428);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BC548);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BC880);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCA30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCC18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCC30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCDD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCDF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCDF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCF50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD508);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD610);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD620);
 
 #ifdef NON_MATCHING
 #include "game/effects/pool.h"

@@ -20,7 +20,6 @@ void OnceVolume::Debug(){
 // Unmatched: 0x165430 VU yaw polynomial and rigid-inverse temporary copies.
 // Unmatched: 0x1656F0 byte-bool normalization and VU register lifetimes.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165A38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165A58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165A60);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165AA8);

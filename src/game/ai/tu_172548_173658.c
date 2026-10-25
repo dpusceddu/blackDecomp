@@ -8,10 +8,6 @@ s32 func_00173658(f32 *arg0) {
     return func_00173640(arg0, 0.0f);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00173678);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00173690);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001736A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001736B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001736B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00173748);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001739E0);

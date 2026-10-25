@@ -41,7 +41,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324A88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324BA0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324CB0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324D98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324DE8);
 
 #include "ps2/recovered_types.h"
 extern s32 * D_0040E25C;

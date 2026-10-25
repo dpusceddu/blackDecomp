@@ -6,7 +6,6 @@ s32 func_0014F490(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014F498);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014F668);
 
 void func_0014F6F0(void *arg0, s32 arg1) {
     if (arg1 == 0) {

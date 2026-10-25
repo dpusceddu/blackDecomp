@@ -39,4 +39,3 @@ s8 * func_0018ED50(Recovered_Vtable_003DDDD0 *arg0, void *arg1) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018EE00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018EF70);

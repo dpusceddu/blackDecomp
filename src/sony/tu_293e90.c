@@ -15,20 +15,11 @@ s32 func_00294AB8(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294AC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294AC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294B10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294B18);
 
 s32 func_00294B98(void *arg0) {
     return *M2C_FIELD(arg0, s32 **, 0x40);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294BA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294BB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294BE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294BF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294C70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294CE8);
 
 s32 func_00294D30(void *arg0) {
     void *temp_2;

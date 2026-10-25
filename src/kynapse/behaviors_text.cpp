@@ -61,6 +61,3 @@ bool Script::SaveFile(const char* name)
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DF8C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DF8E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DF9B8);

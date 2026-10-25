@@ -137,12 +137,15 @@ def lines(copies, owner, why):
 
 def pairs():
     import yaml
+    moves = {}
     for s in yaml.safe_load((ROOT / 'config' / SLUG / 'splits.yaml').read_text())['splits']:
         start = s['range'][0]
         if layout.is_inline(start):
             new = '%s/%s' % (layout.source_dir(start), Path(s['src']).name)
             if new != s['src']:
-                print(s['src'], new)
+                moves.setdefault(s['src'], new)       # a file with several ranges moves once
+    for old, new in moves.items():
+        print(old, new)
 
 
 def main():

@@ -25,9 +25,7 @@ s32 func_001276B8(void *arg0, s32 arg1) {
     return M2C_FIELD((temp_17 + M2C_FIELD(arg0, s32 *, 0x5800)), s32 *, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00127738);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001277A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00127A40);
 
 void func_00127AB8(void) {
 
@@ -41,8 +39,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00127AC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00127CF0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00128008);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00128120);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001282B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001282B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001282C8);
 
 s32 func_001282D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -56,7 +52,6 @@ s32 func_001282D0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001282E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00128480);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00129090);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00129108);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00129160);
 
 void * func_001291C0(void *arg0, void *arg1, void *arg2, void *arg3, void *arg4) {

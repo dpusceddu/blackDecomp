@@ -18,4 +18,3 @@ extern "C" void func_00108958() {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001089A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001089B0);

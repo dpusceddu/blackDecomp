@@ -558,6 +558,3 @@ namespace FleeRecovery {
 #endif
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2D48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2E48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2E68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2F48);

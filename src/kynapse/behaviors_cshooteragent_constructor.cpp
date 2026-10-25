@@ -10,4 +10,3 @@ ShooterAgent::ShooterAgent(BehaviorContext* c):Behavior(c) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D7068);

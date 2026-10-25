@@ -30,7 +30,6 @@ s32 func_003732A0(s32 arg0, void *arg1) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00373300);
 
 void func_00373348(s32 arg0, void *arg1) {
     s32 temp_4;

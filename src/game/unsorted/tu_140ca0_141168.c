@@ -10,5 +10,3 @@ void func_00141168(s32 arg0) {
     func_0011D1F0(D_0040F508, arg0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001411A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141248);

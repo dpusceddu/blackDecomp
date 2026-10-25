@@ -17,6 +17,4 @@ bool Tracker::Init(ChildBuffers* config)
     return true;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F4F80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F51B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5348);

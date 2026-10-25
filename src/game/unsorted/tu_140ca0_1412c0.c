@@ -34,7 +34,6 @@ void func_001412E8(void *arg0, s32 arg1)
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141308);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141390);
 
 #include "ps2/recovered_types.h"
 extern s32 func_00173640(f32 *, f32);

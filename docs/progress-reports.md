@@ -27,8 +27,8 @@ in `config/SLUS_213.76/splits.yaml` that compiles at least one function, a pair 
 A function belongs to exactly one unit: the one whose source compiles it. Functions that stay `INCLUDE_ASM` (also those inside a
 source file that is partly recovered), and every function of a split that compiles nothing, get a target object only (one per
 translation unit of the generated `build/SLUS_213.76/tus.yaml`, hidden from the objdiff sidebar), so the report covers the whole program and unrecovered
-code counts as unmatched. Several splits of one file (`-D` selectors, overlapping ranges) are separate units, each with the
-functions it compiles. Orphan pieces are left out. `objdiff.json` (project root, ignored by Git) lists all units with one
+code counts as unmatched. The entries of a file that is compiled once with several ranges are one unit; entries of a file compiled
+several times (`-D` selectors, `functions` lists) are separate units, each with the functions it compiles. Orphan pieces are left out. `objdiff.json` (project root, ignored by Git) lists all units with one
 progress category per library. Source units apply to USA retail (`SLUS_213.76`) only.
 
 objdiff compares symbol names, instructions and relocation types, so the two objects are normalized until a byte-identical

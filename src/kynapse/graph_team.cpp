@@ -50,6 +50,3 @@ unsigned int CTeam::GetIndex() {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC4B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC5B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC7D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC8A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC918);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC9D0);

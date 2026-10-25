@@ -16,6 +16,3 @@ void ComponentSweep::Sweep()
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1BC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1C58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1D10);

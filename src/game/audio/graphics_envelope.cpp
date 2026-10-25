@@ -57,9 +57,3 @@ int TimedEnvelope::Begin(float value,unsigned useEndpoint)
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDD80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDDB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDDE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDE98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE0B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE150);

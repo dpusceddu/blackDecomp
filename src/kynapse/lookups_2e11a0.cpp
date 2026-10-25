@@ -19,5 +19,3 @@ bool Kaim_DestroyEngine(ReleasableEngine* engine)
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1208);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1228);

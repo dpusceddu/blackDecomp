@@ -13,6 +13,3 @@ bool RawDataUser::Apply(ChildBuffers* config)
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD908);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD958);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD978);

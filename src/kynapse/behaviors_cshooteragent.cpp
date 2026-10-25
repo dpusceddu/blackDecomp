@@ -70,13 +70,3 @@ namespace Kaim {
 ShooterAgent* ShooterAgent::Create(BehaviorContext* context) { return new ShooterAgent(context); }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6860);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6A38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6CB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6E48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6FA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D7008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D7068);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D70C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D70E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D7108);

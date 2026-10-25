@@ -6,7 +6,7 @@
 !/orig/*/README.md
 asm/
 data/
-build/
+/build/
 .local/
 .venv/
 *.iso

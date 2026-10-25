@@ -35,7 +35,3 @@ void * func_002F1678(Recovered_Object59DB0 *arg0) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F16E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F18D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F1B58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F1BD8);

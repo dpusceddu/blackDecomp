@@ -22,10 +22,3 @@ s32 func_0010B270(Recovered_FrontendSaveDialog *arg0) {
     return (s32) var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B2A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B2C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B2D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B2F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B308);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B320);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B328);

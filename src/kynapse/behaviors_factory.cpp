@@ -38,17 +38,3 @@ void Method4(Entity*e,unsigned char b){e->Method4(b);}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0410);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0750);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0D20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1038);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1058);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1078);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1098);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E11A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1208);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1228);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1248);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1280);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E13B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1470);

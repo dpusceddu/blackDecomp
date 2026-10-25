@@ -39,7 +39,6 @@ M2C_UNK * func_002BFE58(void) {
     return &D_003C3D80;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFE68);
 
 M2C_UNK * func_002BFEC0(void) {
     return &D_0044E750;
@@ -60,15 +59,6 @@ s32 func_002BFED0(s32 arg0) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0038);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C00F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0168);
 
 s32 func_002C01C0(s32 *arg0) {
     s32 var_3;

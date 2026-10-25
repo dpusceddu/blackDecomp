@@ -38,25 +38,13 @@ def parse_target(text):
 
 
 def locate(addr):
-    """(split, path, line) of the INCLUDE_ASM marker of the function, or None when no source file lists it as assembly.
+    """(split, path, line) of the INCLUDE_ASM marker of the function, or None when its file does not list it as assembly.
 
-    Two files may cover the same range (a broad file and a narrower one carved out of it for other flags or language,
-    docs/units.md); the function belongs to the narrowest file that lists it."""
-    name = 'func_%08X' % addr
-    found = []
-    for split in S.load_splits(SLUG):
-        if not split.start <= addr < split.end:
-            continue
-        path = ROOT / split.src
-        if not path.is_file():
-            continue
-        for marker in include_asm.markers(path.read_text(), split.defines()):
-            if marker.name == name:
-                found.append((split.end - split.start, split, path, marker.line))
-                break
-    if not found:
+    Every function belongs to exactly one file (docs/units.md; tools/where.py prints the same answer)."""
+    import ownership
+    split, kind, line, path = ownership.locate(addr, S.load_splits(SLUG), S.load_symbols(SLUG))
+    if split is None or kind not in ('assembly', 'draft') or not path.is_file():
         return None
-    _, split, path, line = min(found, key=lambda f: f[0])
     return split, path, line
 
 

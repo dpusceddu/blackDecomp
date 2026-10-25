@@ -96,23 +96,3 @@ CBaseAllocator *CFreeListBlock::Resolve(unsigned int address) {CBaseAllocator *p
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5660);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5848);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5AE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5C38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5D90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5E58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5FB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6740);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E69E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6B60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6CF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6D10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6D90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6F10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6F90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6FB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E7008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E7028);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E7088);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E7090);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E70F0);

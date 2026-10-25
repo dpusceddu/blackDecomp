@@ -16,9 +16,6 @@ int PadBackend::GetHandle(unsigned port){if(port>=2)return 0;return handles[port
 
 void PadBackend::SetFeedback(int enabled){if(enabled!=feedback){Controller **it=controllers;feedback=enabled;int i=1;do{if(*it)(*it)->SetFeedback(feedback);--i;++it;}while(i>=0);}}
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BC50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BC80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BC88);
 
 #ifdef NON_MATCHING
 // Unmatched: 0x26bcf8 native connected/enable branch-tail and return allocation.
@@ -29,12 +26,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BC88);
 // Unmatched: 0x26ca98 pointer validity predicate and virtual Open allocation.
 // Unmatched: 0x26cb38 ownership predicate and virtual Close allocation.
 // Unmatched: 0x26cba8 native indexed-lvalue base/scale instruction order.
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BCF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BD30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BF60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C798);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C8E0);
 #endif
 
 #ifdef NON_MATCHING
@@ -63,7 +54,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BCF8);
 // Unmatched: PollPort retains 32 differences after packed parameter recovery.
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BD28);
 
 #ifdef NON_MATCHING
 #include "ps2/prelude.h"
@@ -123,11 +113,6 @@ block_13:
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BD30);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BE68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BE78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BEA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BEC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BF10);
 
 #ifdef NON_MATCHING
 #include "game/camera/pad.hpp"
@@ -153,10 +138,6 @@ float Controller::Smooth(float value,float step) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BF60);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BFF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C030);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C098);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C100);
 
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
@@ -188,7 +169,6 @@ void PadBackend::Initialize(EeU8 single){
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C798);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C8D0);
 
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
@@ -208,4 +188,3 @@ void PadBackend::Poll() {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C8E0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026CA00);

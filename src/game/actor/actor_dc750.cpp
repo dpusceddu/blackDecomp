@@ -35,10 +35,3 @@ bool PropState::Contact(const ContactData*contact){
 // Unmatched: 0x152000 activation predicate callback register lifetime.
 // Unmatched: 0x152698 bounds predicate branch and spill reuse.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152108);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152148);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001521B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152588);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152680);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152690);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152698);

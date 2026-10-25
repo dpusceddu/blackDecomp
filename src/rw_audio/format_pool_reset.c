@@ -12,6 +12,3 @@ void func_00316598(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003165C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003165C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316618);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316668);

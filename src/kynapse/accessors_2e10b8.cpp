@@ -17,6 +17,3 @@ int GrowthCounter_Double()
     return value;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1118);

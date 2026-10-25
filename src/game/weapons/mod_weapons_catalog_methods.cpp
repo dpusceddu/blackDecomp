@@ -26,4 +26,3 @@ int WeaponManagerMethods::Word18(int id)
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D248);

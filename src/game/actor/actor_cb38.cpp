@@ -42,5 +42,3 @@ void RenderableState::Release()
 // Unmatched: 0x14BD58 RGB component load/store allocation.
 // Unmatched: 0x14F498 visibility-mask helper and render-loop register allocation.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014F490);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014F498);

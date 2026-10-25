@@ -16,9 +16,6 @@ void func_0034EDA0(f32 fparg0) {
     D_003D4464 += fparg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034EDB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034EE90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034F080);
 
 #ifdef NON_MATCHING
 #include "ps2/prelude.h"

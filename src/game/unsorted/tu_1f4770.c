@@ -3,8 +3,6 @@
 
 extern void * D_0040F0E0;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F4770);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F4CB0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F4D30);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F4D88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F4DE0);

@@ -32,6 +32,11 @@ def main():
     py = str(py.relative_to(ROOT)) if py.exists() else sys.executable
     def tools(*names):       # paths of tools/ files by name, wherever they live (tools/, tools/build/, ...)
         return ' '.join(str(next(p for p in ((ROOT / 'tools' / d / n) for d in ('', 'build', 'pipeline', 'maint')) if p.exists()).relative_to(ROOT)) for n in names)
+    if (ROOT / 'config' / slug / 'splits.yaml').exists():       # every function has one owner file, the ranges do not overlap
+        import splits
+        problems = splits.check(slug)
+        if problems:
+            raise SystemExit('config/%s/splits.yaml: %d problems, for example\n  %s' % (slug, len(problems), '\n  '.join(problems[:10])))
     b = 'build/%s' % slug
     have = [n for n in ('splits.yaml', 'symbols.txt') if (ROOT / 'config' / slug / n).exists()]
     inputs = ' '.join('config/%s/%s' % (slug, n) for n in have)

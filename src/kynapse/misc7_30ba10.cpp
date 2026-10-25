@@ -7,5 +7,3 @@
 
 void Cursor94::Rewind() { position = 0; }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030BA18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030BA38);

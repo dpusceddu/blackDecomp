@@ -35,7 +35,7 @@ class Decompile(unittest.TestCase):
         self.path = self.root / 'src/tu_100258.c'
         self.path.write_text(TU)
         self.split = SimpleNamespace(start=0x100258, end=0x100300, src='src/tu_100258.c', compiler='cc', flags=['-O2'],
-                                     defines=lambda: set())
+                                     functions=None, defines=lambda: set())
         for target in (patch.object(decompile, 'ROOT', self.root), patch.object(decompile.S, 'ROOT', self.root),
                        patch.object(decompile.S, 'load_splits', return_value=[self.split]),
                        patch.object(decompile, 'draft', return_value=(dict(size=8), {}, DRAFT, 'sig'))):

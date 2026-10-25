@@ -41,24 +41,12 @@ void * func_00377C80(void *arg0, s32 arg1, s16 arg2) {
     return (func_0031D268(arg0 + 0xC, 1, 1) == 0) ? NULL : arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00377CD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00377CF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00377E10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00377F00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00377F60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00378118);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003782E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00378500);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00378570);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003785A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00378668);
 
 s32 func_00378698(s32 arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x340) = 0;
     return (func_0037B1D0(arg0 + 0x104, arg1, 0xBB80, M2C_FIELD(arg2, s32 *, 0), M2C_FIELD(arg2, s32 *, 4), M2C_FIELD(arg2, s32 *, 8)) == 0) ? 0 : arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003786E0);
 
 s32 func_00378740(s32 arg0) {
     func_0037B220(arg0 + 0x104);

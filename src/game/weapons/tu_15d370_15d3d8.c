@@ -12,12 +12,9 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D3E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D440);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D620);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D750);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D758);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D818);
 
 void func_0015D850(void *arg0, s128 arg1) {
     ((BkModMovingShotPS2*)arg0)->endpoint = arg1;
     func_0015D620();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015D870);

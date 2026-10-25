@@ -30,8 +30,6 @@ extern "C" int func_001AFBF0(void *);
 // Unmatched: 0x1b3818 slot transfer differs in packed minimum and copy scheduling.
 // Unmatched: 0x1b3ae8 allocation still hoists its object column differently.
 // Unmatched: 0x1b3bd0 eviction needs the original vector transform and callback lifetimes.
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AF930);
 #endif
 
 extern "C" bool func_001AFBA8(BkFlagAssetPS2 *asset) {
@@ -46,4 +44,3 @@ extern "C" bool func_001AFC30(BkFlagAssetPS2 *asset) {
     return false;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFBF0);

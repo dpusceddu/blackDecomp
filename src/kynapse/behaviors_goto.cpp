@@ -14,9 +14,3 @@ void GotoAgent::Stop(){target->Stop();}
 // Unmatched: SetDestination (120 B) retains seven temporary-register differences.
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D3970);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D39D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D3A10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D3A68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D3B00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D3B08);

@@ -20,6 +20,4 @@ PoolArray::~PoolArray()
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2660);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F28F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2BF8);

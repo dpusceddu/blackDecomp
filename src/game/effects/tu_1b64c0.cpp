@@ -3,44 +3,6 @@
 #ifdef NON_MATCHING
 #include "game/effects/runtime.hpp"
 // Mod effect queues claimed before native reconstruction.
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B64C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6910);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B69E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6CF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6DC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7160);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B72E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7758);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B78D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7A70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7B80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7E60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7F50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7FC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8180);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B82E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8798);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B89C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B9198);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B96B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B9A40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B9B58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BAB90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BAD90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BAF90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BB190);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BC428);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BC548);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BC880);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCA30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCC30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCF50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD638);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE330);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE4C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE7F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE890);
 #endif
 
 #ifdef NON_MATCHING
@@ -63,7 +25,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6910);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6CF8);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6908);
 
 #ifdef NON_MATCHING
 // Unmatched: named-resource lookup, mixed-width call contracts and VU temporary lifetimes.
@@ -344,33 +305,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B72E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B74F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7590);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7640);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7968);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B79C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7A00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7F08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7F28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8138);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B82B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8630);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8638);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8640);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B86D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B86F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B90D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCC18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCDD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCDF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCDF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD508);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD610);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD620);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD8D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BDB08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BDEE8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE108);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE2A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE2E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE2E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE2F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE310);

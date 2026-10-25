@@ -16,8 +16,6 @@ void * func_00313048(void *arg0, void *arg1, s32 arg2) {
     return temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313080);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313098);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003130A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313120);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313148);

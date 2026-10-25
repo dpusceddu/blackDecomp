@@ -98,8 +98,6 @@ s32 func_0016FA38(void) {
     return M2C_FIELD(D_0040F4D4, s32 *, 0x22B98);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016FA50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016FAB0);
 
 s32 func_0016FB18(s32 arg0, s32 arg1) {
     if (arg1 == 1) {

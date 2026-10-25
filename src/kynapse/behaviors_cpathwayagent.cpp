@@ -20,17 +20,3 @@ void PathWayAgent::SetPathWay(PathWay* path) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5498);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5650);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D59F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D61B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6218);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6278);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D62D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D63C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D63D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D63E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6440);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6460);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6480);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D64D8);

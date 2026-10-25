@@ -49,7 +49,6 @@ f32 func_0026BF10(void *arg0, f32 fparg0) {
     return var_f12 * (1.0f / (temp_f1 - temp_f0));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BF60);
 
 s32 func_0026BFF0(void *arg0)
 {

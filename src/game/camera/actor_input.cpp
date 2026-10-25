@@ -34,10 +34,3 @@ void ActorStateMachine::Leave() {
 
 // Unmatched: 0x13F618 input dispatch vector-copy temporaries, predicate lifetime and branch scheduling.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140048);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140068);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140468);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001404A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001407C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001409C0);

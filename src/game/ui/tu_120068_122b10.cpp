@@ -31,43 +31,6 @@ void FrontendProfileSnapshot::Apply() {
 #endif
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122B10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122B60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122B88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122BB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122BD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122BF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122C20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122C50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122C80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122CC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122D10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122D48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122D98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122DE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122DF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122DF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122E38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123020);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001231C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123248);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123960);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123980);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123988);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123B80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123BC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123BD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123BF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123C20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123C90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123CA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123CB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123CB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123CC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123CC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123CD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123CD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123CE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123E70);
 
 #ifdef NON_MATCHING
 // Unmatched: aggregate-copy register allocation, absolute-offset symbols and scheduling.
@@ -96,4 +59,3 @@ void FrontendProfileSnapshot::Capture(void* object,int defaults) {
 }
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00124048);

@@ -34,10 +34,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BECD0);
 // Unmatched: 0x1bef70: 44 flight slots, true 64-bit IDs, VU I/ACC trig orientation and 128-bit particle state.
 // Unmatched: 0x1bf918: signed rounding and packed count clamp, emitter fraction and mixed-width spawn callback ABI.
 // Unmatched: 0x1c0a78: signed fractional light counts, VU I/ACC random basis and vector-valued spawn arguments.
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BEF70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BF918);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0A78);
 #endif
 
 #ifdef NON_MATCHING
@@ -79,28 +75,6 @@ extern "C" int func_001BEF70(BkEffectFlightPS2 *flights,s128 point,BkFlightConfi
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BEF70);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BF720);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BF740);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFEA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFEC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFED0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFFE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C01E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C02A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0518);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C05D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C05F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0600);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0728);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0730);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0740);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0750);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0760);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0840);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0890);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C08B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C08D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C08F0);
 
 #ifdef NON_MATCHING
 #include "game/effects/vector.h"

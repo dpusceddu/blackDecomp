@@ -79,6 +79,3 @@ void func_001AE5E8(void *unused,void *renderer,BkVectorPS2 low,BkVectorPS2 high,
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE5E8);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE860);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE938);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE998);

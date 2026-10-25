@@ -75,7 +75,6 @@ void func_00322C70(void *arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00322C90);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00322D20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00322DA8);
 
 s32 func_00322DD8(s32 arg0) {
     u8 sp[8] __attribute__((aligned(16)));
@@ -88,7 +87,6 @@ s32 func_00322E00(s32 arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00322E18);
 
 s32 func_00322ED8(void) {
     return 0;
@@ -106,7 +104,6 @@ s32 func_00322F10(s32 arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00322F20);
 
 void func_00322F80(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK (**)(s32, s32), 4)(M2C_FIELD(arg0, s32 *, 0), M2C_FIELD(arg0, s32 *, 8));

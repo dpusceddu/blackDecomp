@@ -36,7 +36,6 @@ extern "C" void func_001B2E08(BkEffectSlotPS2 *slots,BkEffectSlotHitPS2 *hit,u8 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B2E08);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B33B8);
 
 #ifdef NON_MATCHING
 #include "game/effects/slot.h"
@@ -73,18 +72,9 @@ extern "C" BkEffectSlotPS2 *func_001B3590(BkEffectSlotPS2 *slots,char *attachmen
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3590);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3780);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B37B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B37C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3818);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B38F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3A10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3A50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3A90);
 
 #ifdef NON_MATCHING
 // Unmatched: remaining slot lifecycle loops and distance-based eviction.
 #include "game/effects/slot.h"
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3AE8);

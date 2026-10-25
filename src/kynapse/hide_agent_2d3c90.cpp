@@ -557,10 +557,3 @@ namespace HideRecovery {
 }
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5068);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5178);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5198);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D51C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5238);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5248);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5398);

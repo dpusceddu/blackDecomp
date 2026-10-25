@@ -14,6 +14,4 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016A5E8);
 
 #ifdef NON_MATCHING
 // Unmatched: 0x16A2F8 byte predicate, trigger/policy control flow and repeated virtual-call lifetimes.
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016A2F8);
 #endif

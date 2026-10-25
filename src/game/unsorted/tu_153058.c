@@ -26,7 +26,6 @@ s32 func_001530B8(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001530D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001530E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00153190);
 
 void func_001531B8(void) {
 

@@ -203,6 +203,3 @@ void CPathObjectManager::AddListener(PathListener function, void *data, void *ow
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F4E90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F51B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5760);

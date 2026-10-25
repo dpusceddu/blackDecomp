@@ -12,4 +12,3 @@ void func_001AE860(BkActorRenderPS2 *actor) {
  actor->resource=0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE8F0);

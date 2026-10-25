@@ -34,6 +34,3 @@ unsigned int XmlDataReader::Read(Resource* resource,void* buffer,unsigned int si
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00373250);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00373268);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003732A0);

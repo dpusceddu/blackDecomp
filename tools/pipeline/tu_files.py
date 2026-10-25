@@ -5,6 +5,9 @@
                       the function a small file of its own when its compiler flags differ or the TU has no file yet
   revert_function(..) put the INCLUDE_ASM line back (a function that did not place identically), delete a file made for it
 
+A function belongs to exactly one file (docs/units.md), so a file made for it takes the function over from the file that
+owned it: the old file loses its INCLUDE_ASM line and that stretch of its range (S.carve_range), and gets both back on revert.
+
 Everything here is plain text editing of src/, config/<GAME_ID>/splits.yaml and symbols.txt; the build decides whether the
 result is byte-identical. Used by tools/autodecomp.py (register, settle); contributors edit the files by hand.
 Usage: tu_files.py --help
@@ -63,6 +66,47 @@ def remove_split_line(text, src, start):
     return '\n'.join(keep)
 
 
+def release_function(addr, slug=S.DEFAULT_SLUG):
+    """Take the function away from the file that owns it (marker line and range); returns what restore_function needs."""
+    split_file = S.config_dir(slug) / 'splits.yaml'
+    head, entries, tail = S.split_entries(split_file.read_text())
+    ends = dict(U.function_table(slug))
+    owner = next((e for e in entries if 'functions' not in e and S.num(e['range'][0]) <= addr < S.num(e['range'][1])), None)
+    if owner is None:
+        raise KeyError('no file owns func_%08X' % addr)
+    src = owner['src']
+    entries, options = S.carve_range(entries, addr, ends[addr])
+    record = dict(src=src, end=ends[addr], options=options, text=None)
+    path = ROOT / src
+    text = path.read_text()
+    name = 'func_%08X' % addr
+    if any(m.name == name for m in include_asm.markers(text, set()) + include_asm.markers(text, {'NON_MATCHING'})):
+        record['text'] = text
+        text = include_asm.remove(text, name)
+        path.write_text(text)
+    if options is not None:                               # the file owns nothing any more
+        path.unlink()
+    split_file.write_text(S.join_entries(head, entries, tail))
+    return record
+
+
+def restore_function(addr, record, slug=S.DEFAULT_SLUG):
+    """Undo release_function: the file owns the function again, with its marker."""
+    split_file = S.config_dir(slug) / 'splits.yaml'
+    head, entries, tail = S.split_entries(split_file.read_text())
+    entries = S.adopt_range(entries, record['src'], addr, record['end'], record.get('options'))
+    split_file.write_text(S.join_entries(head, entries, tail))
+    path = ROOT / record['src']
+    if record.get('text') is not None:
+        if record.get('options') is not None:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(record['text'])
+        else:
+            text = path.read_text()
+            if 'func_%08X' % addr not in text:
+                path.write_text(include_asm.insert(text, 'func_%08X' % addr, ASM_DIR))
+
+
 def same_recipe(split, compiler, flags):
     base = lambda fl: [f for f in fl if f != '-ffunction-sections']
     return split.compiler == compiler and base(split.flags) == base(flags) and not split.assembler and split.sections
@@ -109,6 +153,7 @@ def add_function(addr, code, decls, compiler, flags, symbol=None, single=False, 
     else:
         path = unique_path(addr)
         entry = {'src': path, 'range': [addr, ends[addr]]}
+        record['released'] = release_function(addr, slug)
         if compiler != S.DEFAULT_COMPILER:
             entry['compiler'] = compiler
         if [f for f in flags if f != '-ffunction-sections'] != S.DEFAULT_FLAGS:
@@ -116,7 +161,8 @@ def add_function(addr, code, decls, compiler, flags, symbol=None, single=False, 
         body = '#include "include_asm.h"\n#include "ps2/prelude.h"\n' + ''.join(d + '\n' for d in decls) + '\n' + code.rstrip('\n') + '\n'
         (ROOT / path).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / path).write_text(body)
-        split_file.write_text(insert_split_line(split_file.read_text(), '  ' + S.format_split(entry), addr))
+        head, entries, tail = S.split_entries(split_file.read_text())
+        split_file.write_text(S.join_entries(head, entries + [entry], tail))
         record.update(path=path, created=entry)
     if symbol and symbol != 'func_%08X' % addr:
         rows = [(n, a, k or 'func') for n, a, k in S.parse_symbols((S.config_dir(slug) / 'symbols.txt').read_text())]
@@ -132,6 +178,8 @@ def revert_function(record, slug=S.DEFAULT_SLUG):
         path.unlink(missing_ok=True)
         split_file = S.config_dir(slug) / 'splits.yaml'
         split_file.write_text(remove_split_line(split_file.read_text(), record['path'], record['addr']))
+        if record.get('released'):
+            restore_function(record['addr'], record['released'], slug)
     elif path.exists():
         text = path.read_text()
         code = record['code'].rstrip('\n')

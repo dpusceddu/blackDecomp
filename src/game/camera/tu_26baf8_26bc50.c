@@ -29,9 +29,7 @@ s32 func_0026BC88(void *arg0, f32 fparg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BCF8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BD28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BD30);
 
 void func_0026BE68(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s8 *, 0x4A) = (s8) (arg1 ^ 1);

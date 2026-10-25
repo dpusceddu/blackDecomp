@@ -184,6 +184,63 @@ def replace(text, name, code):
     return '\n'.join(lines)
 
 
+def nm_blocks(text):
+    """The `#ifdef NON_MATCHING ... #else ... #endif` blocks of a file, as dicts with the 0-based line indexes `start`, `els`,
+    `end`, the addresses of the markers in the `#else` branch (`marks`) and the number of function bodies in the draft
+    branch (`defs`; a block with none only carries includes and comments)."""
+    lines = blank_comments(text).split('\n')
+    out, stack = [], []
+    for n, line in enumerate(lines):
+        m = DIRECTIVE.match(line)
+        if not m:
+            continue
+        kind, args = m.groups()
+        if kind in ('ifdef', 'ifndef', 'if'):
+            stack.append(dict(kind=kind, args=args.strip(), start=n, els=None))
+        elif kind in ('else', 'elif') and stack:
+            stack[-1]['els'] = n
+        elif kind == 'endif' and stack:
+            b = stack.pop()
+            if b['kind'] == 'ifdef' and b['args'] == 'NON_MATCHING' and b['els'] is not None:
+                b['end'] = n
+                b['marks'] = [function_address(m2.group(2)) for k in range(b['els'], n) for m2 in [MARKER.search(lines[k])] if m2]
+                b['defs'] = len(re.findall(r'\)\s*(?:const\s*)?\{', '\n'.join(lines[b['start'] + 1:b['els']])))
+                out.append(b)
+    return out
+
+
+def remove(text, name):
+    """Delete the INCLUDE_ASM line of function `name` (the whole `#ifdef NON_MATCHING` block when the marker is all of its
+    `#else` branch, as `replace` does). Raises KeyError when there is no marker."""
+    return '\n'.join(l for l in replace(text, name, '\0').split('\n') if l != '\0')
+
+
+def insert(text, name, directory):
+    """Add the INCLUDE_ASM line of function `name` in address order among the markers of the file (before the first marker of
+    a higher address, or before the draft block that holds it; at the end when there is none)."""
+    address = function_address(name)
+    lines = text.split('\n')
+    blocks = nm_blocks(text)
+    at = None
+    for number, line in enumerate(blank_comments(text).split('\n')):
+        m = MARKER.search(line)
+        other = function_address(m.group(2)) if m else None
+        if other is not None and other > address:
+            at = number
+            block = next((b for b in blocks if b['els'] < number < b['end']), None)
+            if block:
+                at = block['start']
+            break
+    new = marker_line(name, directory)
+    if at is None:
+        while lines and not lines[-1].strip():
+            lines.pop()
+        lines += [new, '']
+    else:
+        lines.insert(at, new)
+    return '\n'.join(lines)
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('-')]
     if len(args) != 1:

@@ -16,5 +16,3 @@ s32 func_00153190(void *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001531B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001531C0);

@@ -38,6 +38,3 @@ Record::~Record(){delete value;value=0;}
 // Unmatched: Configure (192 B) retains success/failure block-order differences.
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DCF38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DD158);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DD1B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DD1E8);

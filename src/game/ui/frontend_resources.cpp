@@ -107,23 +107,6 @@ extern "C" void func_00107D48() {}
 extern "C" void func_00107D50() {}
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107B18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107D58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107DF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107F60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107FB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107FB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108050);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001080A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001080C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001080F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108120);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108218);
 
 #ifdef NON_MATCHING
 // Unmatched: func_00108328: nested lookup control flow and register allocation.
@@ -164,14 +147,3 @@ FrontendNamedResource* FrontendNamedArchiveManager::Find(const char* name) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108328);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001084F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108540);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108668);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108718);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108748);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001087C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001087C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108818);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108890);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108958);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001089A8);

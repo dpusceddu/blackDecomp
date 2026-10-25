@@ -41,14 +41,11 @@ void func_00281988(s32 arg0, s32 arg1) {
     } while (var_17 < 0x23U);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002819E0);
 
 void func_00281A38(s32 arg0, s32 arg1) {
     func_002811E8(arg1);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281A58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281AD8);
 
 void * func_00281B50(void *arg0) {
     s32 temp_2;
@@ -65,7 +62,6 @@ void * func_00281B50(void *arg0) {
     return var_3;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281B88);
 
 s32 func_00281BB8(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_2;
@@ -90,11 +86,6 @@ s32 func_00281BB8(s32 arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281BF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281C98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281D50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281E20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281E28);
 
 void func_00281EE0(void *arg0, s64 *arg1, s32 arg2) {
     u8 sp[24] __attribute__((aligned(16)));

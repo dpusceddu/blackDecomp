@@ -48,7 +48,3 @@ void *func_001AFF88(s32 context_address, s32 kind) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFC80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFD18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFD80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFDE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFE38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFEE0);

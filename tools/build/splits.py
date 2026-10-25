@@ -16,8 +16,12 @@
                    (`GameObjectManager_FindByName = 0x129160; // type:func alias`) is a readable name for documentation and
                    tools: it never defines or binds a symbol and cannot change the build.
 
-Which functions of a range are compiled is not listed here: every function of the range whose INCLUDE_ASM marker is
-absent from the source file is (tools/build/include_asm.py, tools/build/units.py). `python3 tools/build/splits.py check` validates the files.
+Ownership: every function belongs to exactly one entry, and the ranges of the entries do not overlap. An entry owns every
+function in its range; one that is still assembly is an INCLUDE_ASM line in the entry's file, every other function of the
+range must be defined by the file (tools/build/include_asm.py, tools/build/units.py). A file that owns several separate
+stretches has several entries, the first one with all the options and the others with only `src`, `range` and `note`. An
+entry with `functions` owns exactly those functions (its range is only their bounding interval) and carries no markers.
+`python3 tools/build/splits.py check` validates the files and the ownership; `python3 tools/where.py ADDRESS` names the owner.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -104,8 +108,36 @@ def load_splits(slug=DEFAULT_SLUG, path=None):
     return [Split(e, defaults) for e in data.get('splits') or []]
 
 
+CONTINUATION_KEYS = {'src', 'range', 'note'}
+
+
+def group_splits(splits):
+    """[[Split, ...], ...]: the entries of one source file are one group, compiled once into one unit. The later entries of a
+    group are continuations (only `src`, `range`, `note`); an entry with `functions` is a group of its own, because such a
+    file is compiled once per entry with its own -D selectors."""
+    groups, byfile = [], {}
+    for s in splits:
+        if s.functions is not None:
+            if s.src in byfile:
+                raise ValueError('%s: entries with and without `functions` in one file' % s.src)
+            groups.append([s])
+            continue
+        group = byfile.get(s.src)
+        if group is None:
+            byfile[s.src] = [s]
+            groups.append(byfile[s.src])
+            continue
+        extra = sorted(set(s.entry) - CONTINUATION_KEYS)
+        if extra:
+            raise ValueError('%s: the entry at 0x%x continues the file\'s first entry and may only have src, range and note, not %s'
+                             % (s.src, s.start, ', '.join(extra)))
+        group.append(s)
+    return groups
+
+
 def unit_names(splits):
-    """Unique object names for the splits: the file stem, plus the start address when a file is split several times."""
+    """Unique object names for the first entries of the groups (group_splits): the file stem, plus the start address when
+    a stem occurs several times (a file compiled once per entry, or two files of one name)."""
     names, seen = [], {}
     for s in splits:
         seen[Path(s.src).stem] = seen.get(Path(s.src).stem, 0) + 1
@@ -245,6 +277,152 @@ def format_splits(entries, defaults, header=''):
     return '\n'.join(lines) + '\n'
 
 
+def check_ownership(splits, read=None, table=None, complete=False):
+    """Problems (strings) of the ownership rules; empty when every function has exactly one owner.
+
+    Needs no game files without `table`: ranges of entries must not overlap, a `functions` list must not lie inside another
+    entry's range or repeat an address, and every INCLUDE_ASM marker of a file must name an address inside the file's own ranges
+    (with `read(src)` giving the text). With `table` (the function starts of the image) a marker must be a function start,
+    and with `complete` every function start must be claimed by some entry."""
+    import include_asm
+    problems = []
+    read = read or (lambda path: (ROOT / path).read_text())
+    ranged = sorted(((s.start, s.end, s.src) for s in splits if s.functions is None))
+    for (lo1, hi1, src1), (lo2, hi2, src2) in zip(ranged, ranged[1:]):
+        if lo2 < hi1:
+            problems.append('ranges overlap: %s [0x%x, 0x%x) and %s [0x%x, 0x%x)' % (src1, lo1, hi1, src2, lo2, hi2))
+    owner_of_listed = {}
+    for s in splits:
+        for addr in (s.functions or ()):
+            if addr in owner_of_listed:
+                problems.append('func_%08X is listed by %s and %s' % (addr, owner_of_listed[addr], s.src))
+            owner_of_listed[addr] = s.src
+            if not s.start <= addr < s.end:
+                problems.append('%s lists func_%08X outside its range' % (s.src, addr))
+    starts_only = [r[0] for r in ranged]
+    import bisect
+    for addr, src in sorted(owner_of_listed.items()):
+        k = bisect.bisect_right(starts_only, addr) - 1
+        if k >= 0 and ranged[k][0] <= addr < ranged[k][1]:
+            problems.append('func_%08X is listed by %s but lies in the range of %s' % (addr, src, ranged[k][2]))
+    own_ranges = {}
+    for s in splits:
+        if s.functions is None:
+            own_ranges.setdefault(s.src, []).append((s.start, s.end))
+    start_set = {a for a, _ in table} if table is not None else None
+    marked_in = {}
+    for src, rs in sorted(own_ranges.items()):
+        text = read(src)
+        for defines in (set(), {'NON_MATCHING'}):
+            seen = set()
+            for marker in include_asm.markers(text, defines):
+                addr = include_asm.function_address(marker.name)
+                if addr is None:
+                    problems.append('%s:%d: INCLUDE_ASM names %s, not func_XXXXXXXX' % (src, marker.line, marker.name))
+                    continue
+                if not any(lo <= addr < hi for lo, hi in rs):
+                    problems.append('%s:%d: func_%08X is not in the file\'s range%s; it belongs to another file' % (
+                        src, marker.line, addr, 's' if len(rs) > 1 else ''))
+                elif start_set is not None and addr not in start_set:
+                    problems.append('%s:%d: func_%08X is not a function start' % (src, marker.line, addr))
+                if addr in seen:
+                    problems.append('%s:%d: func_%08X is marked twice' % (src, marker.line, addr))
+                seen.add(addr)
+                marked_in.setdefault(addr, set()).add(src)
+    if complete and table is not None:
+        lo_list = [r[0] for r in ranged]
+        for addr, _ in table:
+            k = bisect.bisect_right(lo_list, addr) - 1
+            inside = k >= 0 and ranged[k][0] <= addr < ranged[k][1]
+            if not inside and addr not in owner_of_listed:
+                problems.append('func_%08X belongs to no file' % addr)
+    return list(dict.fromkeys(problems))
+
+
+# ------------------------------------------------------------------------------------- moving a function between files
+
+def split_entries(text):
+    """(head lines, [entry dict, ...], tail lines) of a splits.yaml text; the entries are the one-line `- {src: ...}` items."""
+    lines = text.split('\n')
+    idx = [i for i, line in enumerate(lines) if line.startswith('  - {')]
+    entries = [yaml.safe_load('[' + lines[i].strip()[2:] + ']')[0] for i in idx]
+    first, last = (idx[0], idx[-1] + 1) if idx else (len(lines), len(lines))
+    return lines[:first], entries, lines[last:]
+
+
+def join_entries(head, entries, tail):
+    """The inverse of split_entries; the entries are written ordered by range."""
+    ordered = sorted(entries, key=lambda e: (num(e['range'][0]), num(e['range'][1])))
+    return '\n'.join(head + ['  ' + format_split(e) for e in ordered] + tail)
+
+
+def carve_range(entries, addr, end):
+    """Remove [addr, end) from the marker-mode entry that contains it so another file can own the function. Returns
+    (entries, options) where `options` are the removed first entry's keys when the file has no entry left, else None.
+    The first entry of a file (the lowest range) carries all options, the others only src, range and note."""
+    out, options = [], None
+    hit = next((e for e in entries if 'functions' not in e and num(e['range'][0]) <= addr < num(e['range'][1])), None)
+    if hit is None:
+        raise KeyError('no marker-mode entry of the split list contains func_%08X' % addr)
+    lo, hi = num(hit['range'][0]), num(hit['range'][1])
+    same = sorted((e for e in entries if e['src'] == hit['src']), key=lambda e: num(e['range'][0]))
+    carrier = same[0] is hit
+    pieces = [(a, b) for a, b in ((lo, addr), (end, hi)) if a < b]
+    keys = {k: v for k, v in hit.items() if k not in ('src', 'range')}
+    for e in entries:
+        if e is not hit:
+            out.append(e)
+            continue
+        for n, (a, b) in enumerate(pieces):
+            piece = {'src': hit['src'], 'range': [a, b]}
+            if carrier and n == 0:
+                piece.update(keys)
+            elif not carrier and 'note' in keys:
+                piece['note'] = keys['note']
+            out.append(piece)
+    if carrier and not pieces:
+        rest = sorted((e for e in out if e['src'] == hit['src']), key=lambda e: num(e['range'][0]))
+        if rest:
+            rest[0].update(keys)
+        else:
+            options = keys
+    return out, options
+
+
+def adopt_range(entries, src, addr, end, options=None):
+    """Give [addr, end) to `src`: extend an adjacent entry of that file, or add a continuation (or, for a file with no
+    entry, a first entry with `options`); entries of the file that touch afterwards become one. Returns the entries."""
+    mine = sorted((e for e in entries if e['src'] == src and 'functions' not in e), key=lambda e: num(e['range'][0]))
+    for e in mine:
+        if num(e['range'][1]) == addr:
+            e['range'] = [num(e['range'][0]), end]
+            break
+        if num(e['range'][0]) == end:
+            e['range'] = [addr, num(e['range'][1])]
+            break
+    else:
+        new = {'src': src, 'range': [addr, end]}
+        if not mine:
+            new.update(options or {})
+        elif addr < num(mine[0]['range'][0]):            # the new lowest entry becomes the one that carries the options
+            keys = {k: v for k, v in mine[0].items() if k not in ('src', 'range')}
+            for k in keys:
+                del mine[0][k]
+            new.update(keys)
+        entries = entries + [new]
+    merged = True
+    while merged:
+        merged = False
+        mine = sorted((e for e in entries if e['src'] == src and 'functions' not in e), key=lambda e: num(e['range'][0]))
+        for first, second in zip(mine, mine[1:]):
+            if num(first['range'][1]) == num(second['range'][0]) and set(second) <= CONTINUATION_KEYS:
+                first['range'] = [num(first['range'][0]), num(second['range'][1])]
+                entries = [e for e in entries if e is not second]
+                merged = True
+                break
+    return entries
+
+
 def check(slug=DEFAULT_SLUG):
     """Static checks of the split list; returns a list of problem strings (no game files needed)."""
     problems = []
@@ -256,6 +434,12 @@ def check(slug=DEFAULT_SLUG):
         load_symbols(slug)
     except ValueError as e:
         problems.append(str(e))
+    try:
+        group_splits(splits)
+    except ValueError as e:
+        problems.append(str(e))
+    table = function_starts(slug)
+    problems.extend(check_ownership(splits, table=table, complete=table is not None))
     seen = set()
     for s in splits:
         if (s.src, s.start) in seen:
@@ -264,6 +448,17 @@ def check(slug=DEFAULT_SLUG):
         if not (ROOT / s.src).is_file():
             problems.append('%s: source file is missing' % s.src)
     return problems
+
+
+def function_starts(slug=DEFAULT_SLUG):
+    """[(start, end)] of the functions of the image from the last build (build/<GAME_ID>/functions.json), or None."""
+    path = ROOT / 'build' / slug / 'functions.json'
+    try:
+        import json
+        data = json.loads(path.read_text())
+        return [(a, b) for a, b in data]
+    except (OSError, ValueError):
+        return None
 
 
 def main():

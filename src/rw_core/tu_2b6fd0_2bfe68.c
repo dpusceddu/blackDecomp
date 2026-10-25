@@ -24,8 +24,6 @@ s32 func_002BFE68(void) {
     return temp_16;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFEC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFED0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF00);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF10);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF50);
@@ -83,6 +81,5 @@ s32 func_002C0038(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C00F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0168);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C01C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C01E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0298);

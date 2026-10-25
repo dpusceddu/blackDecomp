@@ -53,10 +53,7 @@ void func_00107010(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x778) = 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107020);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107228);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107460);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107470);
 
 #include "ps2/recovered_types.h"
 extern s32 func_001077B8(s32, s32, s32, f32, f32);
@@ -90,7 +87,6 @@ void func_00107788(s32 arg0, s32 arg1, f32 fparg0)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001077B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107800);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107878);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107880);

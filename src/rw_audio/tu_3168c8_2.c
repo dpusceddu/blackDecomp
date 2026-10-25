@@ -1,7 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003168C8);
 
 #ifdef NON_MATCHING
 #include "ps2/prelude.h"
@@ -80,7 +79,6 @@ s32 func_00316C38(void *input,void **inputs,s32 length) {
     return 1;
 }
 #endif
-
 
 
 #ifdef NONMATCHING_RWA_3174F0
@@ -512,8 +510,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316C38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003174F0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316E90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00317030);
 
 #include "ps2/recovered_types.h"
 extern void * D_0040E780;
@@ -532,8 +528,6 @@ s32 func_00317300(void *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00317340);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00317490);
 
 #include "ps2/recovered_types.h"
 extern s32 func_00319CA8();
@@ -548,4 +542,3 @@ s32 func_003174D0(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003175C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003175C8);

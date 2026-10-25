@@ -121,4 +121,3 @@ result: return found;
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D49A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D4B68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5008);

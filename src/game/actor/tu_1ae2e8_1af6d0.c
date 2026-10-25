@@ -19,8 +19,6 @@ s32 func_001AF6D0(s32 arg0) {
     return arg0 + 0x8000;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AF738);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AF768);
 
 #ifdef NON_MATCHING
 // Unmatched: 0x1af798: identity-matrix and packet store scheduling; signed flag ABI partly recovered.

@@ -13,8 +13,6 @@ s32 func_001EA7C0(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EA7C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EA898);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EA8E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EA930);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EAA20);
 
@@ -36,7 +34,6 @@ s32 func_001EAB30(s32 arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EAB60);
 
 s32 func_001EABA0(s32 arg0) {
     M2C_FIELD(arg0, s32 *, 0x40) = -1;

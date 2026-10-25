@@ -32,14 +32,7 @@ extern "C" void func_0010B4D8(void*,int);
 void FrontendSaveDialog::ClearMessage() { func_0010B338(this,0);func_0010B3A8(this,0,0,0,0);func_0010B4D8(this,0);flags[3]=0;slot=-1;}
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B3A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B4D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B4E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B530);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B590);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B610);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B618);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B620);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B630);
 
 #ifdef NON_MATCHING

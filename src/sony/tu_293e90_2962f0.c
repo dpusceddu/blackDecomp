@@ -13,7 +13,6 @@ void func_002962F0(M2C_UNK *arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00296300);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002963A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00296468);
 
 void func_002964C0(M2C_UNK *arg0, s32 arg1, s32 arg2) {
     u8 sp[248] __attribute__((aligned(16)));

@@ -10,4 +10,3 @@ void ModEffects::Bank::RemoveBone(Actor *actor,unsigned char bone){
  if(count)actor->indices[(unsigned char)(count-1)]=0xffff;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3A10);

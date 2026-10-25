@@ -69,39 +69,51 @@ def write_function_table(slug, functions):
 
 # ------------------------------------------------------------------------------------------------------------ derive
 
-def derive_units(splits, table, symbols, read=None, is_non_matching=False, fallback=()):
-    """Units for the splits (see the module docstring). `read(path)` returns the text of a source file."""
+def derive_units(splits, table, symbols, read=None, is_non_matching=False, fallback=(), complete=False):
+    """Units for the splits (see the module docstring). `read(path)` returns the text of a source file. A split list that
+    breaks the ownership rules (splits.check_ownership) is an error; `complete` also demands that every function has an owner."""
     read = read or (lambda p: (ROOT / p).read_text())
     starts = [a for a, _ in table]
     ends = dict(table)
-    names = S.unit_names(splits)
+    groups = S.group_splits(splits)
+    names = S.unit_names([g[0] for g in groups])
+    problems = S.check_ownership(splits, read=read, table=table, complete=complete and bool(splits))   # a version without split list has no owners to demand
+    if problems:
+        raise ValueError('ownership: ' + '; '.join(problems[:5]) + ('; ... %d more' % (len(problems) - 5) if len(problems) > 5 else ''))
     units = []
-    for split, name in zip(splits, names):
+    for group, name in zip(groups, names):
+        split = group[0]
         nm = is_non_matching and name not in fallback      # a unit whose drafts do not compile stays as in the matching build
         text = read(split.src)
+        lo_all, hi_all = min(g.start for g in group), max(g.end for g in group)
         if split.functions is not None:         # a file compiled several times with -D selectors: no markers
             marked = {a for a in starts[bisect.bisect_left(starts, split.start):bisect.bisect_left(starts, split.end)]
                       if a not in set(split.functions)}
         else:
             marked = set(include_asm.marker_addresses(text, split.defines(nm)))
-        lo, hi = bisect.bisect_left(starts, split.start), bisect.bisect_left(starts, split.end)
-        inside = starts[lo:hi]
-        unknown = marked - set(inside)
+        lo, hi = bisect.bisect_left(starts, lo_all), bisect.bisect_left(starts, hi_all)
+        owned = set()                                  # the functions of the group's own ranges
+        for g in group:
+            owned.update(starts[bisect.bisect_left(starts, g.start):bisect.bisect_left(starts, g.end)])
+        inside = starts[lo:hi]                         # the hull: foreign functions between the ranges stay assembly
+        unknown = marked - owned
         if unknown:
-            raise ValueError('%s: INCLUDE_ASM names functions outside its range [%#x, %#x): %s' % (
-                split.src, split.start, split.end, ', '.join('func_%08X' % a for a in sorted(unknown))))
+            raise ValueError('%s: INCLUDE_ASM names functions outside its ranges: %s' % (
+                split.src, ', '.join('func_%08X' % a for a in sorted(unknown))))
         functions = []
         for addr in inside:
             names_at = symbols.function_names(addr)
             default = 'func_%08X' % addr
             f = dict(addr=addr, symbol=names_at[0] if names_at else default, size=ends[addr] - addr,
-                     status='asm' if addr in marked else 'source')
+                     status='asm' if addr in marked or addr not in owned else 'source')
             if names_at:
                 f['candidates'] = names_at + [default]
             functions.append(f)
         unit = dict(name=name, source=split.src, library=split.library, origin=split.library, compiler=split.compiler,
-                    flags=split.compile_flags(nm), range=[split.start, split.end], functions=functions,
+                    flags=split.compile_flags(nm), range=[lo_all, hi_all], functions=functions,
                     externs={k: _num(v) for k, v in (split.entry.get('externs') or {}).items()})
+        if len(group) > 1:
+            unit['ranges'] = [[g.start, g.end] for g in group]
         unit.update({k: v for k, v in split.extra.items() if k != 'externs'})
         if split.owner:
             unit['owner'] = split.owner
@@ -181,7 +193,7 @@ def write_units(slug=DEFAULT_SLUG):
     out.mkdir(parents=True, exist_ok=True)
     fallback = set(json.loads((out / 'nm_fallback.json').read_text())) if nm and (out / 'nm_fallback.json').exists() else set()
     units = derive_units(S.load_splits(slug), function_table(slug), S.load_symbols(slug),
-                         is_non_matching=nm, fallback=fallback)
+                         is_non_matching=nm, fallback=fallback, complete=True)
     (out / ('units-nm.json' if nm else 'units.json')).write_text(json.dumps(dict(version=CACHE_VERSION, units=units)))
     return units
 

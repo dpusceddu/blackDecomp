@@ -14,6 +14,3 @@ void ProviderUser::Init(int argument)
         provider = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F23E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F23F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2418);

@@ -7,14 +7,6 @@ s32 func_001BECC8(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BECD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BEF70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BF720);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BF740);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BF918);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFEA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFEC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFED0);
 
 #ifdef NON_MATCHING
 #include "game/effects/emitter.h"
@@ -36,7 +28,6 @@ int func_001BFFE0(BkEffectEmittersPS2 *pool,BkEffectEmitterResourcePS2 *resource
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFFE0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C01E0);
 
 #ifdef NON_MATCHING
 #include "game/effects/emitter.h"
@@ -68,7 +59,6 @@ void func_001C02A0(BkEffectEmittersPS2 *pool) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C02A0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0518);
 
 void func_001C05D8(s32 arg0, s32 arg1) {
     func_001D0010(arg1);

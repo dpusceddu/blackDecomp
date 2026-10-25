@@ -17,16 +17,11 @@ s32 func_0027C110(void *arg0, s32 arg1) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027C128);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027C198);
 
 void func_0027C1A0(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027C1A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027C1B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027C270);
 
 void func_0027C278(s8 *arg0) {
     func_0027C2A8(arg0, func_0035CCD8());

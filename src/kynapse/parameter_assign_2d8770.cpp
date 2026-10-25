@@ -12,5 +12,3 @@ ParamFlag& ParamFlag::operator=(const ParameterRoot& other)
     return *this;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D87E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D8808);

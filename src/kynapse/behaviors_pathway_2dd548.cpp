@@ -49,4 +49,3 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DDE28);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DE3C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DE8F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DEE98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DF198);

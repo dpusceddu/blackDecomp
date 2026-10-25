@@ -26,7 +26,6 @@ namespace ModWeapons {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015BBD8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015C1A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015C3C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CC40);
 #endif
 
 Weapon* Inventory::Current(){
@@ -134,6 +133,3 @@ Weapon* Inventory::Current(){
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015C970);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CAB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CBA0);

@@ -9,5 +9,4 @@ int func_001AE998(BkActorRenderPS2 *actor,int index) {
  return func_001B0910(buffer);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE9F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AEA18);

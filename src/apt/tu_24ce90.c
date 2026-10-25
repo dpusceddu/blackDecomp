@@ -27,7 +27,6 @@ void func_0024F578(u32 *arg0) {
     *arg0 = (*arg0 & 0xFFFC003F) | ((var_4 & 0xFFF) << 6);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024F5D8);
 
 s32 func_0024F760(s32 arg0) {
     return arg0 + 8;

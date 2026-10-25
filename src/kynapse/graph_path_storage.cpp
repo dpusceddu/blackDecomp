@@ -66,5 +66,3 @@ unsigned int RouteBuffers::ClosestWeightedWaypoint(const Vec3 *point) const {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB4D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB538);

@@ -66,10 +66,7 @@ Kaim::CSpatialGraph::~CSpatialGraph()
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F8DC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F9338);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F97A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA030);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA4C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA930);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB1C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB3C8);

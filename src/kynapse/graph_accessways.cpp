@@ -39,7 +39,6 @@ int CAccessWaysData::Build()
 #if 0
 
 
-
 // Unmatched: serializer cleanup branches and callback-base/local register lifetimes.
 extern char D_00407D50[];
 int CAccessWaysData::Save(const void* path)
@@ -167,7 +166,3 @@ bool ComputeAccessWaysTraversal::Consider(SpatialNode *node){
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCB50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCEC0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD4A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD780);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD7D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD800);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD8C8);

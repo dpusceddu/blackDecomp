@@ -69,9 +69,6 @@ void * func_00382BF0(void *arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00382C70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00382D60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00382E78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00382EE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00382F90);
 
 void * func_00383068(void *arg0) {
     func_00382740();
@@ -83,13 +80,11 @@ void * func_00383068(void *arg0) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003830D0);
 
 void func_00383208(void) {
     func_00287118();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00383228);
 
 void * func_00383608(void *arg0) {
     M2C_FIELD(arg0, M2C_UNK **, 0x64) = &D_003DDE80;

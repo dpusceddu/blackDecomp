@@ -19,6 +19,3 @@ SlotOwner::~SlotOwner()
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F3398);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F33A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F33C8);

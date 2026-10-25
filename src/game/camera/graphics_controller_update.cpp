@@ -224,4 +224,3 @@ void CampaignGraphics::Controller::Update() {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C798);

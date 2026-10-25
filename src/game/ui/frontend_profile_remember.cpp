@@ -13,5 +13,3 @@ void FrontendProfileSnapshot::Remember() {
     previousTime=now;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010F648);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010F680);

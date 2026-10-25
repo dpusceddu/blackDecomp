@@ -300,10 +300,3 @@ unsigned int container, unsigned int *mapped) {
 #endif
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DADD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DAF40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB140);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB848);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB9C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DBCE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC238);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC930);

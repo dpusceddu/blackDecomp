@@ -24,15 +24,17 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B78D8);
 #endif
 ```
 
-The marker names the function's assembly (`asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s`, written by the build). Every
-function of the file's address range that has no marker must be defined by the file; the build checks that the compiled
-function takes the original's place and that the whole image stays identical. A TU without recovered code needs no file.
-Hand-written files keep descriptive names (`kynapse/behaviors_pathway.cpp`). Link-once copies (compiler-emitted inline and template
-code) live in `src/<library>/inline/` ([build.md](build.md#link-once-copies)).
+The marker names the function's assembly (`asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s`, written by the build). **Every function
+is listed in exactly one file**: as an `INCLUDE_ASM` line while it is assembly, as a definition once it is recovered. The file
+is the one whose entry in the split list owns the function (below); no other file mentions it. Every function of a file's
+ranges that has no marker must be defined by the file; the build checks that the compiled function takes the original's place
+and that the whole image stays identical. `python3 tools/where.py func_XXXXXXXX` prints the owning file and line (offline).
+Hand-written files keep descriptive names (`kynapse/behaviors_pathway.cpp`). Link-once copies (compiler-emitted inline and
+template code) live in `src/<library>/inline/` ([build.md](build.md#link-once-copies)).
 
 ## The split list
 
-`config/SLUS_213.76/splits.yaml`, one line per file (a TU is split into several files only where a reason is noted):
+`config/SLUS_213.76/splits.yaml`, one line per entry, ordered by address:
 
 ```yaml
 defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas], sections: true}
@@ -40,16 +42,27 @@ splits:
   - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x103858]}
   - {src: src/game/ui/frontend_menu_notify.cpp, range: [0x103db0, 0x103df0], flags: [-O1, -G0, -snas]}
   - {src: src/physics/tu_32bc70.cpp, range: [0x32bc70, 0x32e3d0], flags: [-O2, -G8, -snas], assembler: sn-min6,
-     owner: physics-scene, data_ranges: [...], full_tu_context: true, note: "..."}
+     data_ranges: [...], full_tu_context: true, note: "..."}
+  - {src: src/game/unsorted/game_methods.cpp, range: [0x114160, 0x114168]}
+  - {src: src/game/unsorted/game_methods.cpp, range: [0x1148d0, 0x114960]}
 ```
 
-`range` is `[start, end)`. `flags` and `compiler` replace the defaults; `assembler` names a per-unit assembler variant
-(`sn-min6`, ... see [tus.md](tus.md)); `sections: false` compiles without `-ffunction-sections` (the compiled functions
-must then be adjacent); `owner` marks who works on the file. A file that is compiled several times with `-D` selectors
-and carries no markers lists its compiled addresses in `functions`. Rare keys keep the options of the old unit format
-(`data_ranges`, `rodata_type_splits`, `shared_exception_tables`, `full_tu_context`, `unlinked_context_helpers`, `externs`).
-A function that needs other flags than its neighbours gets its own file and entry. Two files may cover overlapping ranges;
-the function is compiled by the file that does not mark it, and the other file keeps its marker.
+`range` is `[start, end)`. **An entry owns every function in its range, and ranges never overlap**, so each function has one
+owner. A file whose functions are not adjacent (a class whose methods are spread over the executable, a function that needed
+other flags and was carved out of its neighbours) has one entry per stretch: the first carries all the options, the others only
+`src`, `range` and `note`, and the file is compiled once. `flags` and `compiler` replace the defaults; `assembler` names a per-unit
+assembler variant (`sn-min6`, ... see [tus.md](tus.md)); `sections: false` compiles without `-ffunction-sections` (the
+compiled functions must then be adjacent); `note` says why a TU is several files. A file that is compiled several
+times with `-D` selectors and carries no markers has an entry per compilation with `functions`, the addresses it compiles:
+such an entry owns exactly those functions and its range is only their bounding interval, which may contain functions of
+other entries (the only case where ranges overlap). Rare keys keep the options of the old unit format (`data_ranges`,
+`rodata_type_splits`, `shared_exception_tables`, `full_tu_context`, `unlinked_context_helpers`, `externs`).
+
+The rule is checked by `python3 tools/build/splits.py check` (no game files), by `python3 configure.py` and by the tests: ranges
+that overlap, a function listed in two files, an `INCLUDE_ASM` line for a function outside the file's ranges or listed twice, and
+(with a build) a function that no entry owns are errors. To give a function to another file, remove its marker and its stretch of
+the range from the old owner and add the stretch to the new one; `tools/pipeline/tu_files.py` does this when the automatic
+pipeline makes a file of its own for a function.
 
 ## Names
 

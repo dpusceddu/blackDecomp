@@ -24,11 +24,3 @@ bool BothIds60::HasBoth() const
     return false;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2E90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2EE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2F00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2F40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2F48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2F80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2FB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2FD8);

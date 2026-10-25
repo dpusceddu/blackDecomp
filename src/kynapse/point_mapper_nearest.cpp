@@ -32,6 +32,3 @@ extern const float nearestPointPadding = 0.0f;
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB9C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DBCE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC238);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC7E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC840);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC8A0);

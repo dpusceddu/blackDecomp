@@ -33,7 +33,6 @@ void *func_002FEAE0(void *arg0, void *arg1)
   return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FEB08);
 
 void func_002FEBD0(void) {
     func_002FEA88(1, 0xFFFF);

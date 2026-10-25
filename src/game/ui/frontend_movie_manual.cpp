@@ -73,19 +73,6 @@ int FrontendStreamScheduler::ErrorCode(int kind) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109410);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109468);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109488);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001094C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109550);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109578);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109588);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109640);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109760);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109918);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109AE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109BB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109CC0);
 
 #ifdef NON_MATCHING
 // Unmatched: timer address construction, unsigned conversion and state scheduling.
@@ -170,8 +157,6 @@ block_22:
 }
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109CF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109E70);
 
 #ifdef NON_MATCHING
 // Unmatched: busy boolean normalization, fallthrough scheduling and saved-register allocation.
@@ -214,4 +199,3 @@ int FrontendMovieState::Prepare(void* decoderObject,void* renderTarget) {
 }
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109E78);

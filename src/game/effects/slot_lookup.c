@@ -4,7 +4,6 @@
 extern BkEffectSlotTargetPS2 *func_001B1848(s128);
 extern void func_001B3A10(BkEffectSlotPS2 *,BkEffectSlotTargetPS2 *);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B2E08);
 
 BkEffectSlotPS2 *func_001B33B8(BkEffectSlotPS2 *slots,const s128 *key) {
  BkEffectSlotTargetPS2 *object=func_001B1848(*key);
@@ -13,5 +12,3 @@ BkEffectSlotPS2 *func_001B33B8(BkEffectSlotPS2 *slots,const s128 *key) {
  return slots+object->slot;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3420);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3590);

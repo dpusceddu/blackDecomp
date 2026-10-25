@@ -101,13 +101,6 @@ extern "C" void func_00105D48() {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00105D48);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106010);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106048);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106050);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106058);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106060);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106068);
 
 #ifdef NON_MATCHING
 // Unmatched: func_00106080: switch exit layout and call/store scheduling.
@@ -224,18 +217,6 @@ updateOwner:
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106200);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001063F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001064D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106550);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001065D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106690);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106698);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001066D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001067A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106808);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106820);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106828);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106830);
 
 #ifdef NON_MATCHING
 // Unmatched: func_00106868: switch exit layout and virtual-call scheduling.
@@ -352,17 +333,6 @@ updateOwner:
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001069F8);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106BF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106CD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106D70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106DF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106ED8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106EF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106F80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106FE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107000);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107010);
 
 #ifdef NON_MATCHING
 // Unmatched: func_00107020: signed-byte loop induction and call scheduling.
@@ -464,7 +434,6 @@ void FrontendControllerScreen::Update() {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107228);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107460);
 
 #ifdef NON_MATCHING
 // Unmatched: func_00107470: indexed feedback aliases and float register allocation.
@@ -523,8 +492,6 @@ void FrontendControllerFeedback::Update(signed char index) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107470);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107730);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107788);
 
 #ifdef NON_MATCHING
 // Unmatched: func_00106068: store scheduling in the load-state initializer.

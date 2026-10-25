@@ -23,6 +23,3 @@ void func_001B7A00(BkEffectPoolPS2 *pool,void *transform,s64 id,int mode) {
  }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7A70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7B80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7E60);

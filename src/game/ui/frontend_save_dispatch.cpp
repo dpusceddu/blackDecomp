@@ -31,15 +31,3 @@ extern "C" void func_0010C2F8(int command) {
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010C398);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010C8E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010CF18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010D9F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010E0F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010E498);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010E5F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010E720);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010E740);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010EAC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010EAF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010EBC0);

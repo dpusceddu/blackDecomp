@@ -18,7 +18,4 @@ PerceptionRecord* Perception::GetRecord(SlotUser* user)
     return records;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310190);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310228);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310248);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310268);

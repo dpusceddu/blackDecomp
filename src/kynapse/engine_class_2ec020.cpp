@@ -14,5 +14,3 @@ Engine::Engine(Object* newContext)
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC058);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC110);

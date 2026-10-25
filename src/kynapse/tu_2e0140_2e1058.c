@@ -20,13 +20,11 @@ void func_002E1058(void) {
     func_002EBE90();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1078);
 
 void func_002E1098(void) {
     func_002EBF58();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E10B8);
 
 void func_002E10D8(void) {
     func_002E3928();
@@ -36,8 +34,6 @@ void func_002E10F8(void) {
     func_002E3D28();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1118);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E11A0);
 
 void func_002E1208(s32 arg0) {
     if (arg0 != 0) {
@@ -51,10 +47,6 @@ void func_002E1228(s32 arg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1248);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1280);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E12B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1380);
 
 void * func_002E13B8(void *arg0, void *arg1, void *arg2, void *arg3) {
     void *temp_16;
@@ -72,10 +64,6 @@ void * func_002E13B8(void *arg0, void *arg1, void *arg2, void *arg3) {
     return temp_16;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1438);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1470);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E14B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E14D8);
 
 void func_002E1508(void) {
     D_003E7C00 = 0;

@@ -107,5 +107,3 @@ int Kaim::CAstarData::Save(const void* path)
 
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FEBD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FEBF0);

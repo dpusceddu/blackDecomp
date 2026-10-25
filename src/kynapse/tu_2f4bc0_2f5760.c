@@ -17,12 +17,6 @@ void func_002F5760(s32 arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F57C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5868);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F58E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5968);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5A40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5AE0);
 
 void func_002F5BD0(void) {
     func_002F5760(1, 0xFFFF);

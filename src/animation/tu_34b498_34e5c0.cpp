@@ -399,9 +399,4 @@ float *Graph_Overlay(void *owner, AnimationGraphNode *node, AnimationParameters 
 // Unmatched: func_0034C128, controlled blend live span reads and weight-stack lifetimes.
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E758);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E7C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E828);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E908);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E9E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034EAA0);

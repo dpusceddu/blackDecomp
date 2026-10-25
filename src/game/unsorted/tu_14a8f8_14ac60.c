@@ -12,17 +12,4 @@ s32 func_0014AC60(s32 *arg0) {
     return 5;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014AC98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014ADF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014B4D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014B878);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014B880);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014B8A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014B8E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014B948);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014BA58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014BA78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014BA80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014BAA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014BC98);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014BCA0);

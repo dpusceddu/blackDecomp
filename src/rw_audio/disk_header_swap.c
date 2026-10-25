@@ -26,8 +26,5 @@ void func_00313650(RwaDiskHeader *header) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003137C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003137D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313948);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313970);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003139A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313B18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313BF0);

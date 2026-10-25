@@ -61,5 +61,4 @@ void InventoryManager::Allocate(){
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CC40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CEC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015CEF0);
