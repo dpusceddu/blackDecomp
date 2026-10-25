@@ -23,6 +23,8 @@ import json, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build')]
+import preflight
 LIBRARIES = ['game', 'kynapse', 'rw_core', 'rw_audio', 'animation', 'physics', 'apt', 'sony', 'libc']
 BEGIN, END = '<!-- progress:begin (tools/badges.py) -->', '<!-- progress:end -->'
 COLORS = [(5, 'red'), (15, 'orange'), (30, 'yellow'), (50, 'yellowgreen'), (75, 'green')]
@@ -78,6 +80,7 @@ def main():
     slug = next((a for a in sys.argv[1:] if not a.startswith('-')), 'SLUS_213.76')
     if slug != 'SLUS_213.76':
         raise SystemExit('badges are produced for SLUS_213.76 only')
+    preflight.require(slug, build=('placement.json', 'layout.json'))
     subprocess.run([sys.executable, str(ROOT / 'tools/progress.py'), slug, '--libraries'], check=True, stdout=subprocess.DEVNULL)
     data = json.loads((ROOT / 'build' / slug / 'progress.json').read_text())
     libs = data['code_by_library']
@@ -105,4 +108,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    preflight.guard(main)

@@ -30,6 +30,7 @@ from pathlib import Path
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
 from units import load_units
+import preflight
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT = 'SLUS_213.76'
@@ -339,6 +340,7 @@ def build_unit(slug, path):
 
 
 def main():
+    preflight.require(DEFAULT)
     if sys.argv[1:2] == ['--build']:
         if len(sys.argv) != 3:
             raise SystemExit('usage: objdiff.py --build PATH')
@@ -357,4 +359,4 @@ def main():
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(preflight.guard(main))

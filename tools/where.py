@@ -16,6 +16,7 @@ from pathlib import Path
 
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build')]
 import ownership
+import preflight
 import splits as S
 
 MEANING = {'assembly': 'INCLUDE_ASM line: still assembly', 'draft': 'INCLUDE_ASM line under #ifdef NON_MATCHING: a draft above it does not match yet',
@@ -59,10 +60,13 @@ def main(argv=None):
     except (OSError, ValueError) as e:
         print('where.py: cannot read config/SLUS_213.76/splits.yaml or symbols.txt: %s' % e, file=sys.stderr)
         return 1
+    if not splits:
+        print('where.py: config/SLUS_213.76/splits.yaml is missing or empty: run it from a checkout of the repository.', file=sys.stderr)
+        return 1
     for text in argv:
         print(describe(parse_target(text), splits, symbols))
     return 0
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(preflight.guard(main))

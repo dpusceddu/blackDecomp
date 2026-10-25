@@ -17,7 +17,7 @@ OUTPUT = ROOT / 'docs' / 'tools.md'
 
 SECTIONS = [
     ('Everyday tools: working on a function', [
-        'decompile.py', 'objdiff.py', 'trysrc.py', 'next.py', 'autodecomp.py', 'where.py', 'relocate_sources.py', 'permuter/prepare.py', 'permuter/cc.py',
+        'decompile.py', 'objdiff.py', 'trysrc.py', 'next.py', 'autodecomp.py', 'where.py', 'split_function.py', 'relocate_sources.py', 'permuter/prepare.py', 'permuter/cc.py',
         'permuter/as.py']),
     ('Everyday tools: build, check and progress', [
         'toolchain.py', 'compile.py', 'check_versions.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',
@@ -27,7 +27,7 @@ SECTIONS = [
         'build/splat_config.py', 'build/make_ld.py', 'build/link_support.py', 'build/pack_elf.py', 'build/elf_layout.py',
         'build/elfinfo.py', 'build/elfobj.py', 'build/include_asm.py', 'build/splits.py', 'build/units.py',
         'build/units_verify.py', 'build/layout.py', 'build/nm_build.py', 'build/text_placement.py', 'build/constant_relocs.py',
-        'build/source_data.py', 'build/ownership.py', 'build/assembler.py', 'build/patch_ps2eeas.py', 'build/fixasm.py', 'build/objdiff_job.py',
+        'build/source_data.py', 'build/ownership.py', 'build/preflight.py', 'build/assembler.py', 'build/patch_ps2eeas.py', 'build/fixasm.py', 'build/objdiff_job.py',
         'build/build_telemetry.py', 'build/tus.py', 'build/linkonce_owners.py', 'build/boundaries.py']),
     ('Automatic pipeline (`tools/pipeline/`)', [
         'pipeline/tu_files.py', 'pipeline/m2c_input.py', 'pipeline/m2c_wrap.py', 'pipeline/ee_prep.py', 'pipeline/vu0_m2c.py',

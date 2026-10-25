@@ -55,6 +55,10 @@ build tus: phony {b}/tus.yaml
 ninja_required_version = 1.10
 py = {py}
 
+rule needexe
+  command = $py tools/build/preflight.py exe {slug}
+  description = the original executable orig/{slug}/{boot}
+  generator = 1
 rule extract
   command = $py tools/build/splat_config.py {slug} && $py tools/build/elf_layout.py {slug} && touch $out
   description = extract section layout and blobs from the target image
@@ -134,6 +138,7 @@ rule check
   description = compare with the target
   pool = console
 
+build orig/{slug}/{boot}: needexe
 build {b}/extract.stamp {b}/splat.yaml {b}/layout.json: extract orig/{slug}/{boot} | {tools('splat_config.py', 'elf_layout.py', 'elfinfo.py')}
 build {b}/boundaries.txt: boundaries | orig/{slug}/{boot} {tools('boundaries.py', 'elfinfo.py')} {explicit}
 build {b}/split.stamp: split | {b}/extract.stamp {b}/boundaries.txt

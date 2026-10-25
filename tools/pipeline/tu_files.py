@@ -9,7 +9,7 @@ A function belongs to exactly one file (docs/units.md), so a file made for it ta
 owned it: the old file loses its INCLUDE_ASM line and that stretch of its range (S.carve_range), and gets both back on revert.
 
 Everything here is plain text editing of src/, config/<GAME_ID>/splits.yaml and symbols.txt; the build decides whether the
-result is byte-identical. Used by tools/autodecomp.py (register, settle); contributors edit the files by hand.
+result is byte-identical. Used by tools/autodecomp.py (register, confirm); contributors edit the files by hand.
 Usage: tu_files.py --help
 """
 import sys as _sys

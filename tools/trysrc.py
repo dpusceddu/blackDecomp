@@ -9,16 +9,18 @@ import argparse, difflib, sys
 from pathlib import Path
 
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
-import autodecomp as A
+import preflight
 
 
 def main():
-    ap = argparse.ArgumentParser()
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('addr')
     ap.add_argument('source')
     ap.add_argument('--flags', help='only this flag set')
     ap.add_argument('--quiet', action='store_true')
     a = ap.parse_args()
+    preflight.require()
+    import autodecomp as A
     import rabbitizer
     f = next(x for x in A.load_inventory() if x['addr'] == int(a.addr, 16))
     src = Path(a.source).read_text()
@@ -41,4 +43,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    preflight.guard(main)

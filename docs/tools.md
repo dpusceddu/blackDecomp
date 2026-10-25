@@ -17,6 +17,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/next.py` | Best next work, from the automatic pipeline's results (build/auto.json) and the source units (tools/build/units.py). |
 | `tools/autodecomp.py` | Automatic decompilation: m2c -> clean -> compile variants -> score -> permuter -> register as source units. |
 | `tools/where.py` | Name the source file that owns a function, and the line where it is: assembly, draft or source. |
+| `tools/split_function.py` | Give one assembly function a source file of its own: the way to put a function in a file with other flags or another language. |
 | `tools/relocate_sources.py` | Move source files and keep every reference to them consistent: the build inputs, documentation and generated comments. |
 | `tools/permuter/prepare.py` | Write the assembly of one function in the plain form decomp-permuter's import.py reads. |
 | `tools/permuter/cc.py` | Compile script for decomp-permuter: run the pinned SN compiler on one self-contained source file. |
@@ -62,6 +63,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/build/constant_relocs.py` | Resolve words in compiler-owned constants for matching, including switch targets. |
 | `tools/build/source_data.py` | Validate opt-in source-owned data ranges at labels or complete unwind groups. |
 | `tools/build/ownership.py` | Which source file owns a function, and where in the file it is: the answer of `python3 tools/where.py`. |
+| `tools/build/preflight.py` | One-line answers instead of tracebacks when the game's executable or the first build is missing. |
 | `tools/build/assembler.py` | Explicit compiler -S / catalog assembler configurations. |
 | `tools/build/patch_ps2eeas.py` | Reproduce retail's six-word short loops with SN Ps2EeAs 1.9.25.758. |
 | `tools/build/fixasm.py` | Line-level rules that let the EE GNU assembler 2.10 reproduce the original words (used by split_objects.py). |

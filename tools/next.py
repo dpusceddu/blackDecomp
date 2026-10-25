@@ -16,6 +16,7 @@ from pathlib import Path
 
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from units import load_units, ROOT
+import preflight
 
 RESULTS = ROOT / 'build' / 'auto.json'
 GLOBAL = re.compile(r'\bD_[0-9A-F]{6,8}\b')
@@ -221,6 +222,7 @@ def main():
     ap.add_argument('--per-library', type=int, default=3, help='maximum candidates per library; 0 means unlimited')
     ap.add_argument('--json', action='store_true', help='machine-readable TU queue candidates')
     a = ap.parse_args()
+    preflight.require()
     if a.what == 'families':
         a.what = 'identical'
     if a.what in ('tus', 'all'):
@@ -237,4 +239,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    preflight.guard(main)

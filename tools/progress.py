@@ -25,6 +25,7 @@ from pathlib import Path
 
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from units import load_units
+import preflight
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -201,6 +202,7 @@ def tu_report(slug, fs, spans, source, top):
 
 def main():
     top = 0
+    preflight.require(next((a for a in sys.argv[1:] if not a.startswith('-') and not a.isdigit()), 'SLUS_213.76'), build=('placement.json', 'layout.json'))
     if '--tus' in sys.argv:
         k = sys.argv.index('--tus')
         top = int(sys.argv[k + 1]) if k + 1 < len(sys.argv) and sys.argv[k + 1].isdigit() else 15
@@ -288,4 +290,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    preflight.guard(main)

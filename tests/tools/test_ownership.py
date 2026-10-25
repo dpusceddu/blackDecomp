@@ -3,11 +3,13 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import include_asm
 import ownership
 import splits as S
+import split_function
 import tu_files
 import units as U
 
@@ -162,6 +164,45 @@ class MovingAFunction(unittest.TestCase):
                 self.assertEqual(['-O1', '-G0'], again[0].flags)
             finally:
                 S.ROOT, tu_files.ROOT, U.ROOT = saved
+
+
+class SplitFunction(unittest.TestCase):
+    def setUp(self):
+        self.dir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.dir.cleanup)
+        self.root = root = Path(self.dir.name)
+        (root / 'config/SLUS_213.76').mkdir(parents=True)
+        (root / 'build/SLUS_213.76').mkdir(parents=True)
+        (root / 'src/game/unsorted').mkdir(parents=True)
+        (root / 'config/SLUS_213.76/splits.yaml').write_text(
+            'variant: SLUS_213.76\nsplits:\n  - {src: src/game/unsorted/tu_100000.c, range: [0x100000, 0x100050], sections: false}\n')
+        self.old = root / 'src/game/unsorted/tu_100000.c'
+        self.old.write_text('#include "include_asm.h"\n' + ''.join(marker(x).replace('asm/x', tu_files.ASM_DIR) for x, _ in TABLE))
+        (root / 'build/SLUS_213.76/functions.json').write_text('[%s]' % ','.join('[%d,%d]' % t for t in TABLE))
+        self.saved = (S.ROOT, tu_files.ROOT, U.ROOT, split_function.ROOT)
+        S.ROOT = tu_files.ROOT = U.ROOT = split_function.ROOT = root
+        self.addCleanup(lambda: (setattr(S, 'ROOT', self.saved[0]), setattr(tu_files, 'ROOT', self.saved[1]),
+                                 setattr(U, 'ROOT', self.saved[2]), setattr(split_function, 'ROOT', self.saved[3])))
+
+    def test_the_function_gets_a_file_of_its_own_and_the_old_file_keeps_the_rest(self):
+        with patch.object(tu_files, 'unique_path', return_value='src/game/unsorted/tu_100000_100020.c'):
+            new, old = split_function.split_function(0x100020, flags=['-O1', '-G0', '-snas'])
+        self.assertEqual(('src/game/unsorted/tu_100000_100020.c', 'src/game/unsorted/tu_100000.c'), (new, old))
+        self.assertNotIn('func_00100020', self.old.read_text())
+        self.assertEqual(4, self.old.read_text().count('INCLUDE_ASM('))
+        self.assertIn('func_00100020', (self.root / new).read_text())
+        splits = S.load_splits(path=self.root / 'config/SLUS_213.76/splits.yaml')
+        self.assertEqual([('src/game/unsorted/tu_100000.c', 0x100000, 0x100020, False), ('src/game/unsorted/tu_100000_100020.c', 0x100020, 0x100030, True),
+                          ('src/game/unsorted/tu_100000.c', 0x100030, 0x100050, False)],
+                         [(s.src, s.start, s.end, s.flags == ['-O1', '-G0', '-snas']) for s in splits])
+        self.assertEqual([], S.check_ownership(splits, read=lambda p: (self.root / p).read_text(), table=TABLE, complete=True))
+
+    def test_a_recovered_function_or_an_unknown_one_is_refused(self):
+        self.old.write_text(self.old.read_text().replace(marker(0x100020).replace('asm/x', tu_files.ASM_DIR), 'void func_00100020(void) {}\n'))
+        with self.assertRaisesRegex(SystemExit, 'only plain INCLUDE_ASM functions'):
+            split_function.split_function(0x100020)
+        with self.assertRaisesRegex(SystemExit, 'no file owns it'):
+            split_function.split_function(0x200000)
 
 
 class WhereIsIt(unittest.TestCase):

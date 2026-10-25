@@ -23,6 +23,7 @@ from pathlib import Path
 
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 import include_asm
+import preflight
 import splits as S
 
 ROOT = S.ROOT
@@ -97,6 +98,7 @@ def main(argv=None):
     ap.add_argument('--raw', action='store_true', help="print m2c's output without the mechanical cleaning")
     a = ap.parse_args(argv)
     addr = parse_target(a.function)
+    preflight.require(SLUG, build=('placement.json',))
     name = 'func_%08X' % addr
     if not (ROOT / 'asm' / SLUG / 'nonmatchings' / (name + '.s')).is_file():
         raise SystemExit('%s: no assembly under asm/%s/nonmatchings; run `ninja` once first' % (name, SLUG))
@@ -135,4 +137,4 @@ def main(argv=None):
 
 
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(preflight.guard(main))
