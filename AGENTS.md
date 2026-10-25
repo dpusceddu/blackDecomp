@@ -28,6 +28,7 @@ Short, neutral rules for coding assistants and the people directing them. They a
   headers under `include/<library>/` (recovered layouts are `Recovered_*` structs with `unk_XX` fields). Mark what no matched function confirms `UNVERIFIED`. Nothing here needs analysis data from outside
   the repository; an analysis tool such as Ghidra is optional and personal, and its output enters only as edits to these files.
 - Evidence: `exact` (byte-identical in the full image) or `draft` (a `NON_MATCHING` block). Do not claim more than the evidence shows.
+- Drafts only as `#ifdef NON_MATCHING` above the function's `INCLUDE_ASM` line; no `#if 0` blocks or other draft macros.
 - Tools: the everyday ones in `tools/`, build internals in `tools/build/`, the automatic pipeline in `tools/pipeline/`,
   maintainer and analysis tools in `tools/maint/` (index: `docs/tools.md`); every tool needs a purpose docstring and
   `--help`. Keep docs short and current: no per-function proof journals, a one-line `// Unmatched:` comment on
