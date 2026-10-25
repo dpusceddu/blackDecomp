@@ -95,19 +95,9 @@ check the callee's real arity and return use before blaming the compiler; one as
 than one global rule; extrapolations from small-function rates do not hold for functions above 300 B (76 % of the
 remaining bytes), and no function above 1 KB has matched from stock output except `ParameterTables`.
 
-## Equivalence track (gated)
+## Equivalence experiment (moved out)
 
-Because most remaining bytes are large functions, a second evidence tier was added: readable source whose behavior agrees
-with the original on recorded states, with measured coverage, without claiming a byte match.
-
-1. **EE harness** (`tools/eeharness/`, passed the functional audit): integer/MMI, COP0, bit-level COP1, VU0 macro/micro
-   execution, sanitizer suites (1,471 assertions), 908 published COP1 cases, 3,728 scalar/MMI cases, 329 microprograms,
-   20 compiled hardware fixtures over 64 million instructions, every `.text` word cross-checked against rabbitizer,
-   exact-source controls (1,408 executions) and mutation detection. Not cycle accurate.
-2. **Real input states** (not passed): eight PCSX2 states gave 238,062 entry states reaching 1,841 game functions;
-   1,429 of 6,512 have at least 20 states (3,257 needed). Typed fuzzing: 1,745 mutations, none faulted.
-3. **Equivalence driver and pilot** (`tools/pipeline/equiv.py`): 50 candidates (ten above 1 KB) on 6,132 recorded states; 14 readable
-   C++ functions (984 B) reached `equivalent` with full basic-block coverage; the other 36 stay drafts, including all ten
-   large ones (low coverage, call-argument differences, device waits). A compiled positive control passed twenty inputs and
-   a mutation failed all twenty. The pilot target (50 functions, whole-program frame agreement) is not met and no
-   nonmatching ELF exists yet.
+A second evidence level was tried: readable source whose behavior agrees with the original on recorded machine states
+(an EE interpreter and a differential tester; 50 candidates, 14 small functions agreed with full block coverage, none above
+1 KB). It was not carried far enough to cover the hard functions and is not part of this repository: evidence here is exact
+or draft.

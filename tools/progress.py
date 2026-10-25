@@ -212,12 +212,9 @@ def main():
     spans = [(fs[i + 1]['addr'] if i + 1 < len(fs) else text['addr'] + text['orig_size']) - fs[i]['addr']
              for i in range(len(fs))]
     source = {}
-    equivalent = set()
     units = load_units(variant=slug)
     for u in units:
         for f in u['functions']:
-            if f.get('evidence',{}).get('tier') == 'equivalent':
-                equivalent.add(f['addr'])
             if f.get('status') == 'source':
                 source[f['addr']] = u.get('origin', u['name'].split('_')[0])
     region, _ = regions([f['addr'] for f in fs])
@@ -237,9 +234,9 @@ def main():
         add('library: ' + reg, span, src)
         if src:
             add('origin: ' + source[f['addr']], span, True)
-    tiers = {key:dict(functions=0,bytes=0) for key in ('exact','equivalent','draft')}
+    tiers = {key:dict(functions=0,bytes=0) for key in ('exact','draft')}
     for f,span in zip(fs,spans):
-        tier = 'exact' if f['addr'] in source else 'equivalent' if f['addr'] in equivalent else 'draft'
+        tier = 'exact' if f['addr'] in source else 'draft'
         tiers[tier]['functions'] += 1
         tiers[tier]['bytes'] += span
     import layout
@@ -264,7 +261,7 @@ def main():
         print('%-22s %7d %7d %5.2f%%   %9d %9d %5.2f%%' % (
             key, r['functions'], r['source_functions'], 100.0 * r['source_functions'] / r['functions'],
             r['bytes'], r['source_bytes'], 100.0 * r['source_bytes'] / max(r['bytes'], 1)))
-    print('\nRecorded evidence (matching source stays exact; equivalent means tested states):')
+    print('\nEvidence (exact: byte-identical in the image; draft: everything else):')
     for tier,r in tiers.items():
         print('  %-12s %7d functions %9d bytes' % (tier,r['functions'],r['bytes']))
     if '--libraries' in sys.argv and slug == 'SLUS_213.76':

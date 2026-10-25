@@ -61,7 +61,8 @@ func_001531C0);` becomes `s32 func_001531C0(void) { return 1; }` (`python3 tools
 draft for you; run it with the virtual environment active); `ninja` says `OK` and `ninja progress` counts one more function.
 Revert with `git checkout src` when you only tried it.
 
-Evidence tiers matter: never describe a function as more than its tier (`exact`, `equivalent`, `draft`).
+Evidence matters: a function is `exact` (the whole image stays byte-identical) or a `draft` (a `NON_MATCHING` block); never
+describe a function as more than that.
 
 ## Commit rules
 

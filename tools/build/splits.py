@@ -15,7 +15,6 @@
                    the source uses without defining are bound to their original address. A line marked `alias`
                    (`GameObjectManager_FindByName = 0x129160; // type:func alias`) is a readable name for documentation and
                    tools: it never defines or binds a symbol and cannot change the build.
-  equivalent.yaml  functions of the `equivalent` evidence tier with their evidence summary.
 
 Which functions of a range are compiled is not listed here: every function of the range whose INCLUDE_ASM marker is
 absent from the source file is (tools/build/include_asm.py, tools/build/units.py). `python3 tools/build/splits.py check` validates the files.
@@ -211,28 +210,6 @@ def format_symbols(rows):
     for name, addr, kind in sorted(set(rows), key=lambda r: (r[1], 'alias' in r[2].split(), r[0])):
         out.append('%s = 0x%06X; // type:%s' % (name, addr, kind))
     return '\n'.join(out) + '\n'
-
-
-# ----------------------------------------------------------------------------------------------------- equivalent.yaml
-
-def load_equivalent(slug=DEFAULT_SLUG, path=None):
-    """{address: record} of config/<slug>/equivalent.yaml (source, symbol, returns, evidence)."""
-    path = Path(path) if path else config_dir(slug) / 'equivalent.yaml'
-    if not path.exists():
-        return {}
-    data = yaml.safe_load(path.read_text()) or {}
-    return {num(f['addr']): f for f in data.get('functions') or []}
-
-
-EQUIVALENT_HEADER = ('# Functions of the `equivalent` evidence tier (agreement on recorded states, measured coverage; not a proof).\n'
-                     '# They stay assembly in the build; `source` is the TU file whose NON_MATCHING block holds the candidate.\n')
-
-
-def save_equivalent(records, slug=DEFAULT_SLUG, path=None):
-    """Write config/<slug>/equivalent.yaml from {address: record} (records hold source, symbol, returns, evidence)."""
-    path = Path(path) if path else config_dir(slug) / 'equivalent.yaml'
-    rows = [dict(addr='0x%06x' % a, **{k: v for k, v in r.items() if k != 'addr'}) for a, r in sorted(records.items())]
-    path.write_text(EQUIVALENT_HEADER + yaml.safe_dump({'functions': rows}, sort_keys=False, width=140))
 
 
 # ------------------------------------------------------------------------------------------------------ split writer

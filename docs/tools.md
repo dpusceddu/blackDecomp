@@ -84,7 +84,6 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/pipeline/permuter_worker.py` | Worker-only durable decomp-permuter search with relocation-aware PS2 scores. |
 | `tools/pipeline/permuter_lanes.py` | Worker-only supervisor for disjoint durable permuter search lanes. |
 | `tools/pipeline/compiler_dumps.py` | Retrieve GCC pass dumps through the build backend for source-shape diagnosis. |
-| `tools/pipeline/equiv.py` | Differentially execute compiled candidates on every available recorded input. |
 
 ## Maintainer and analysis tools (`tools/maint/`)
 
@@ -98,10 +97,6 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/maint/discs.py` | Phase 0: unpack each disc image one at a time and keep only executables and debug candidates. |
 | `tools/maint/iso.py` | Minimal ISO 9660 reader for plain ISO (2048) and raw CD images (MODE1/MODE2, 2352). |
 | `tools/maint/inputs.py` | Phase 0 triage of every procured disc variant (run tools/maint/discs.py first). |
-
-## Equivalence harness (`tools/eeharness/`)
-
-An EE interpreter and differential-test driver for the `equivalent` evidence tier; see its README.
 
 ## Finished studies (`tools/studies/`)
 

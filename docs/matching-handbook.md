@@ -10,8 +10,7 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All compiler ex
    every real function and its rodata/data/sdata/bss/exception tables from the generated `build/SLUS_213.76/tus.yaml`; uncertain boundaries stay
    qualified. A code-complete TU is not data-complete until ownership is audited.
 2. Recover behavior, callee arity/return widths, field offsets, hidden results and cleanup edges first. Xbox source gives
-   algorithms and names, not PS2 layout proof. Use `tools/pipeline/equiv.py` and recorded EE states when available; absent states
-   mean untested behavior, never an invented equivalent-tier result. Matching work can continue without states.
+   algorithms and names, not PS2 layout proof. Matching work needs no recorded states.
 3. Compare the first divergent instructions with `tools/trysrc.py`, using the actual bindings for named C++ symbols.
    Classify the obstruction below. Change one source feature, retain the best candidate, and compare the complete diff.
    Equal opcode lists can hide wrong offsets or widths; they do not prove a register-only problem.
@@ -66,7 +65,7 @@ original unit flags, recorded by the tool. Restoring the original source restore
 | VU scalar readback / absolute value | Keep the float-return boundary, float/word view and storage lifetime distinct when the original transports a VU scalar through integer bits. Use the existing native VU helpers and let `j` operands allocate registers. | `0x33EB08` (128 B): typed dot/word/absolute helpers are exact; removing volatile from only the absolute-value union adds **9** differences. The dot helper transfers unchanged to three exact sphere callbacks. |
 | Complete VU operations / native scratch | Keep an observed inverse, native scratch store/read and quaternion product inside one truthful operation when separate inline helpers extend the scratch-address lifetime. Retain real memory transfers, FPR roundtrips and hidden-state clobbers; let pointer/FPR operands allocate normally. | `0x346940` (876 B): complete quaternion difference exact; splitting only inverse and product into two visible helpers adds **10** differences. The helper, cache data and native 920-byte unwind group pass the full image; three unfinished bodies remain assembly-backed. |
 | Native scalar builtin visibility | Use the supported single-precision builtin for a native scalar operation before shaping downstream registers. Opaque inline assembly can hide enough information to retain otherwise redundant argument copies; making that assembly volatile can add scheduling dependencies. | `0x34FB58` (296 B) and `0x34FC80` (400 B): `__builtin_fabsf` exact; replacing only the helper with opaque `abs.s` adds **5/6** differences, or volatile `abs.s` adds **10/11**. All 13 sampling TU bodies and native 880-byte unwind group match. Double-precision and conditional alternatives regress; preserve float semantics. |
-| Switch / jump tables | Reconstruct the source `switch`, explicit default, shared cases and case-local scopes. Keep its table with the function; matching the body does not verify table placement. | `0x18DCE0`: switch exact, equivalent if-chain **30** differences. The object contains `.rodata` plus relocations into the generated jump table. |
+| Switch / jump tables | Reconstruct the source `switch`, explicit default, shared cases and case-local scopes. Keep its table with the function; matching the body does not verify table placement. | `0x18DCE0`: switch exact, an if-chain with **30** differences. The object contains `.rodata` plus relocations into the generated jump table. |
 | C++ cleanup / destructors | Define inline destructors before callers and preserve exit scopes, including early returns. Use ordinary destructor names; if a label alias is required, retain destructor-shaped ABI spelling and verify both normal and exceptional cleanup. | `0x2D6E48`: destructor definition after caller adds **38** differences. A synthetic SN control retains cleanup with the normal `_$_5Probe` alias; a plain `cleanup` alias removes both cleanup paths (104→68 B). Compiler-only evidence does not identify a retail class. |
 | gp-relative data | Match `-G` and the declaration's known size. A small sized extern and an unsized array can lower differently under the same flags. Resolve the actual GPREL relocation target and addend; never forgive it just because the instruction matches. | `0x10BBF8`: sized extern under `-G8 -snas` exact; either `-G0` or unsized extern adds **2** differences. Assembly inputs require the existing `.extern symbol, 1` convention. A locally defined small-data section uses unnamed section relocations and object GP0; pass its verified base via `compiled_tokens(section_bindings=...)`, then verify the full link. |
 
@@ -81,10 +80,9 @@ and the second copies them into VU lanes, so an XYZ
 operation can store an inherited W payload. An earlier 166-instruction `0x32C5A0` control with all opcodes matching
 changed bound W bytes when its caller-side allocation changed. Correcting the genuine native frame-copy capture order
 subsequently preserved the observed upper lanes of V0 entering the callback: the 18-difference draft passes all 178 recorded inputs, including
-whole-quad writes and VU outputs, but its 83.3% basic-block coverage does not qualify for the equivalent tier. A separate
+whole-quad writes and VU outputs, though that coverage is incomplete. A separate
 20-case artificial diagnostic varies full 128-bit W payloads and substitutes static/no-body and callback outcomes; its
-union reaches all 12 blocks, 166 instructions and eight branch outcomes. This does not increase natural coverage or
-promote the draft. Check whole
+union reaches all 12 blocks, 166 instructions and eight branch outcomes. This does not increase natural coverage. Check whole
 quad writes and the strict recorded contract; matching XYZ arithmetic does not establish equivalence or justify register pins.
 
 For a hard allocation/scheduling problem, SN accepts `-da -fdump-unnumbered`. An isolated compiler control emitted

@@ -26,7 +26,6 @@ Every version has `checksums.sha256`. Only `SLUS_213.76` has recovered source, s
 | `checksums.sha256` | SHA-256 the rebuilt executable must have | by hand (never changes for a release) |
 | `splits.yaml` | The split list: which source file covers which address range, with flags (docs/units.md) | by hand and `tools/autodecomp.py register` |
 | `symbols.txt` | Names: bound (mangled) names, names the code uses, and `alias` lines that never change linking | by hand and `tools/autodecomp.py register` |
-| `equivalent.yaml` | Functions of the `equivalent` evidence tier and their evidence | by hand and `tools/autodecomp.py register` |
 | `libraries.txt` | Which library (a directory of `src/`) each stretch of `.text` belongs to, and where the link-once block is; progress, file placement and the TU map use it | by hand |
 | `explicit_boundaries.txt` | Function starts that look like orphan pieces but are code, each with its reason; `tools/build/boundaries.py` adds them to the boundaries it derives | by hand |
 | `class_method_abi.json` | Verified method ABI evidence (return, parameters, fields) for the class skeleton generator `tools/maint/class_skeletons.py` | by hand |

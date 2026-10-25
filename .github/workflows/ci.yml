@@ -36,7 +36,7 @@ jobs:
           import json, pathlib, yaml
           for p in pathlib.Path("config").rglob("*.json"):
               json.loads(p.read_text())
-          for name in ("tus_overrides.yaml", "SLUS_213.76/splits.yaml", "SLUS_213.76/equivalent.yaml"):
+          for name in ("tus_overrides.yaml", "SLUS_213.76/splits.yaml"):
               yaml.safe_load(pathlib.Path("config", name).read_text())
           PY
       - name: configure.py writes a build file

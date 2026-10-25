@@ -199,7 +199,7 @@ mangled name of a function it compiles), in splat's `symbol_addrs` form. There a
 - **Aliases** (`GameObjectManager_FindByName = 0x129160; // type:func alias`, `REG_GS_CSR = 0x12001000; // type:data alias`):
   readable working names, 268 for functions and 174 for data (hardware registers and the gp value). An alias never defines or binds a symbol and is not
   an original symbol; `tools/build/splits.py` keeps aliases apart from the bound names, so adding or changing one cannot change the
-  build. Tools use them to label functions (`tus.py`, `next.py`) and to bind hardware-register names (`equiv.py`). To give a
+  build. Tools use them to label functions (`tus.py`, `next.py`). To give a
   function a real name, rename its definition in the source and add a bound-name line as above, not an alias.
 
 Prototypes are not in `symbols.txt`. Recovered signatures live in `include/ps2/prototypes.h` (under the `func_XXXXXXXX` names,

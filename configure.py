@@ -33,7 +33,7 @@ def main():
     def tools(*names):       # paths of tools/ files by name, wherever they live (tools/, tools/build/, ...)
         return ' '.join(str(next(p for p in ((ROOT / 'tools' / d / n) for d in ('', 'build', 'pipeline', 'maint')) if p.exists()).relative_to(ROOT)) for n in names)
     b = 'build/%s' % slug
-    have = [n for n in ('splits.yaml', 'symbols.txt', 'equivalent.yaml') if (ROOT / 'config' / slug / n).exists()]
+    have = [n for n in ('splits.yaml', 'symbols.txt') if (ROOT / 'config' / slug / n).exists()]
     inputs = ' '.join('config/%s/%s' % (slug, n) for n in have)
     sym = 'config/%s/symbols.txt' % slug if 'symbols.txt' in have else ''
     explicit = 'config/%s/explicit_boundaries.txt' % slug if (ROOT / 'config' / slug / 'explicit_boundaries.txt').exists() else ''

@@ -8,13 +8,11 @@ results history is in [history.md](history.md).
 
 Readable C/C++ source for the retail PS2 executable of Black (`SLUS_213.76`, the only first-class target: source, progress and routine checks; four more regional builds rebuild
 from assembly and are checked before releases with `tools/check_versions.py`), organized into the original libraries and translation units (TUs), where every function carries explicit
-evidence. Byte identity is the strongest tier and the matching build is mandatory in every commit; the other tiers say how
-far a readable function is trusted.
+evidence. Byte identity is the evidence this project accepts and the matching build is mandatory in every commit; everything else is a draft.
 
 | Tier | Meaning | Where it lives |
 | --- | --- | --- |
 | `exact` | the full rebuilt image stays byte-identical with the function compiled from source | a function without INCLUDE_ASM marker in its TU file ([units.md](units.md)); replaces the assembly in the build |
-| `equivalent` | agrees with the original on recorded states with measured coverage; not a proof | `config/SLUS_213.76/equivalent.yaml`, candidate in the TU file's `#ifdef NON_MATCHING` block; never replaces assembly |
 | `draft` | readable or machine draft with no evidence | `#ifdef NON_MATCHING` blocks in the TU files, marked `// Unmatched:` |
 
 The same game code also ships on Xbox; this repository covers the PS2 side only. Names and types seen in the Xbox build are
@@ -77,7 +75,7 @@ Everything below rebuilds byte-identical. Routine work checks USA only; the last
 | physics | 207 | 93 (44.9 %) | 78,296 | 11,864 (15.2 %) | 6 / 53 |
 | **Total** | **11,899** | **5,563 (46.75 %)** | **2,715,464** | **410,384 (15.11 %)** | **1,636 / 3,036** |
 
-Evidence tiers: `exact` 5,563 functions / 410,384 B, `equivalent` 14 / 984 B, `draft` 6,322 / 2,304,096 B. Complete TUs
+Evidence tiers: `exact` 5,563 functions / 410,384 B, `draft` 6,336 / 2,305,080 B. Complete TUs
 include many one- or two-function TUs (116,600 B in code-complete TUs). Of 2,671 splits (2,656 source files), 48,498 functions are INCLUDE_ASM lines and 189 files hold NON_MATCHING drafts. TU confidence by bytes: `exact` 14.5 %, `high` 2.9 %, `medium` 52.8 %, `low` 29.8 %.
 The calibration of the automatic pipeline remains poor above 300 B; the large hand-shaped gains do not establish a new
 automatic matching rate. Code completion alone does not establish owned-data completion.
@@ -100,7 +98,6 @@ bytes without padding and orphans: 14.95 % (401,428 / 2,685,060 bytes), equal to
 - Boundaries below `exact` confidence are proposals; a run of related functions may hold several objects.
 - Constants travel with their function; `.gcc_except_table` and shared data belong to whole objects.
 - Small-function rates do not extrapolate to large functions; measure each new band before forecasting.
-- Equivalent-tier evidence needs measured original-code coverage and reviewed ABI, otherwise it stays a draft.
 
 ## Open problems
 
@@ -112,12 +109,9 @@ bytes without padding and orphans: 14.95 % (401,428 / 2,685,060 bytes), equal to
    physics has six code/data-audited complete mapped TUs; uncertain boundaries remain leads from the Xbox build.
 4. **Assembler provenance** is unresolved: six/seven-word loops mix inside libraries and no position or content rule
    explains them; `sn-min6` is a per-unit recipe, not a recovered rule.
-5. **Equivalence track**: the gate for broad coverage is not passed (1,429 of 6,512 game functions have at least 20
-   recorded states, 3,257 needed); the pilot reached 14 of 50 functions, none above 1 KB; no nonmatching ELF and no
-   whole-program frame agreement.
-6. **Data**: 27 additional mapped TUs have complete owned-data audits; this is not a repository-wide audit. Native CFI
+5. **Data**: 27 additional mapped TUs have complete owned-data audits; this is not a repository-wide audit. Native CFI
    and shared pools still block several otherwise complete objects.
-7. **Names and counterparts**: working names (`alias` lines of `config/SLUS_213.76/symbols.txt`), recovered prototypes
+6. **Names and counterparts**: working names (`alias` lines of `config/SLUS_213.76/symbols.txt`), recovered prototypes
    (`include/ps2/prototypes.h`) and structures (`include/ps2/recovered_types.h`) are committed and edited by hand; no tool needs
    outside analysis data. An Xbox-to-PS2 counterpart map is an optional input that this repository does not ship.
 
@@ -128,9 +122,7 @@ bytes without padding and orphans: 14.95 % (401,428 / 2,685,060 bytes), equal to
    reviewed near misses.
 3. Convert `auto` drafts into readable C++ (`provenance` stays; names and types improve) as classes are recovered; keep
    every function either `exact` or `// Unmatched:`.
-4. Continue equivalence collection only for functions the matching track cannot reach: more savestates and gameplay
-   coverage, then a nonmatching ELF.
-5. Keep documentation current: this file (state table via `ninja progress` and `python3 tools/progress.py --libraries`),
+4. Keep documentation current: this file (state table via `ninja progress` and `python3 tools/progress.py --libraries`),
    [history.md](history.md) (results), the other files in this directory (how the build and tools work).
 
 ## Recent results: the last depth pass
@@ -160,7 +152,7 @@ fixed two callers. Manual matches, artificial wrappers and uninitialized-value c
 Deep-TU endpoints: animation pose operations 16/19 exact with all native owned data, including 920 unwind bytes; physics
 scene 21/26 exact with its 80 native storage bytes; audio 91/107 exact with 11,420/11,604 estimated owned-data bytes
 source-backed; Kynapse steering 13/14 exact. The remaining allocation, scheduling, native unwind and shared-pool
-obstructions have precise `// Unmatched:` notes in source. No source was promoted to the equivalent tier.
+obstructions have precise `// Unmatched:` notes in source.
 
 Projection: 2,305,080 text bytes remain. At the final rate (about 276 B/hour in the last interval) this is not a completion
 estimate; depth produced substantial new large matches but did not remove the large-function bottleneck.

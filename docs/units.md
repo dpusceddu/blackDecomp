@@ -1,7 +1,7 @@
 # Translation unit files and the split list
 
-How source replaces assembly in the build. The inputs are `src/`, `config/SLUS_213.76/splits.yaml`, `symbols.txt` and
-`equivalent.yaml`; nothing is generated into Git (`tools/build/units.py` derives the *units* into `build/`).
+How source replaces assembly in the build. The inputs are `src/`, `config/SLUS_213.76/splits.yaml`, and
+`symbols.txt`; nothing is generated into Git (`tools/build/units.py` derives the *units* into `build/`).
 
 ## One file per translation unit
 
@@ -58,8 +58,6 @@ name; otherwise `func_XXXXXXXX`) and the addresses of names the code uses withou
 another TU). Add a line when the build says a symbol has no address, or when a function is defined under its mangled name.
 A line ending in `alias` (`// type:func alias`) is only a readable name and never affects the build
 ([build.md](build.md#symbols-and-progress)).
-
-`equivalent.yaml` records the functions of the `equivalent` tier (14) with their evidence; they stay assembly.
 
 ## What the build does with it
 

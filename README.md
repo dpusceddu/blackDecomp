@@ -147,7 +147,7 @@ or assets; distribute patches in a form that needs the user's own copy.
 ```
 configure.py          writes build.ninja (and picks the version)
 config/<GAME_ID>/     per-version expected SHA-256; SLUS_213.76 also has splits.yaml (source files, address ranges, flags), symbols.txt
-                      (names), equivalent.yaml, libraries.txt (which library each stretch of .text is), explicit boundaries; the splat
+                      (names), libraries.txt (which library each stretch of .text is), explicit boundaries; the splat
                       configuration, ELF layout, TU map and the like are generated into build/ (config/README.md)
 config/               versions.json, tus_overrides.yaml, toolchain pins, shared data
 orig/<GAME_ID>/       your executable goes here (ignored by Git)
@@ -176,10 +176,9 @@ objdiff (see above); `ninja` prints `OK`, or the file and function that differ. 
 match yet goes in `#ifdef NON_MATCHING` ... `#else` INCLUDE_ASM `#endif`; `python3 configure.py --non-matching` builds the drafts into
 a separate executable. Steps and an example: [CONTRIBUTING.md](CONTRIBUTING.md).
 
-**What do exact, equivalent and draft mean?** Every function has an evidence tier. `exact`: compiled from source, the whole
-image is byte-identical. `equivalent`: agrees with the original on recorded machine states with measured coverage; it is not
-a proof and never replaces assembly in the build. `draft`: readable or machine-written, no evidence. A function is never
-described as more than its tier. See [docs/status.md](docs/status.md).
+**What do exact and draft mean?** Every function has one of two evidence levels. `exact`: compiled from source, and the
+whole image is byte-identical. `draft`: readable or machine-written source in a `NON_MATCHING` block that does not match
+(yet). A function is never described as more than its level. See [docs/status.md](docs/status.md).
 
 **How was this made?** Much of the work was done with AI coding agents under human direction.
 

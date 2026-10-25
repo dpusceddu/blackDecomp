@@ -7,7 +7,6 @@ Nothing here is stored in Git as a unit list: `load_units()` builds it from
   the source file itself           its INCLUDE_ASM markers (tools/build/include_asm.py): marked functions stay assembly, every
                                    other function of the range is provided by the source
   config/<GAME_ID>/symbols.txt     the names a compiled function may carry, and the addresses of names it refers to
-  config/<GAME_ID>/equivalent.yaml evidence of the `equivalent` tier
   build/<GAME_ID>/functions.json   function starts of the image (written by tools/build/split_objects.py --functions)
   build/<GAME_ID>/unit_facts.json  what compiling taught (extern bindings, trimmed constants; tools/build/units_verify.py)
 
@@ -70,10 +69,9 @@ def write_function_table(slug, functions):
 
 # ------------------------------------------------------------------------------------------------------------ derive
 
-def derive_units(splits, table, symbols, equivalent=None, read=None, is_non_matching=False, fallback=()):
+def derive_units(splits, table, symbols, read=None, is_non_matching=False, fallback=()):
     """Units for the splits (see the module docstring). `read(path)` returns the text of a source file."""
     read = read or (lambda p: (ROOT / p).read_text())
-    equivalent = equivalent or {}
     starts = [a for a, _ in table]
     ends = dict(table)
     names = S.unit_names(splits)
@@ -100,9 +98,6 @@ def derive_units(splits, table, symbols, equivalent=None, read=None, is_non_matc
                      status='asm' if addr in marked else 'source')
             if names_at:
                 f['candidates'] = names_at + [default]
-            if addr in equivalent and f['status'] == 'asm':
-                f['evidence'] = equivalent[addr].get('evidence', {})
-                f['nonmatching'] = {k: equivalent[addr][k] for k in ('source', 'symbol', 'returns') if k in equivalent[addr]}
             functions.append(f)
         unit = dict(name=name, source=split.src, library=split.library, origin=split.library, compiler=split.compiler,
                     flags=split.compile_flags(nm), range=[split.start, split.end], functions=functions,
@@ -143,7 +138,7 @@ def apply_facts(units, facts):
 
 def _inputs(slug, units=None):
     cfg = S.config_dir(slug)
-    out = [out_dir(slug) / 'nm_fallback.json', cfg / 'splits.yaml', cfg / 'symbols.txt', cfg / 'equivalent.yaml', build_dir(slug) / 'functions.json',
+    out = [out_dir(slug) / 'nm_fallback.json', cfg / 'splits.yaml', cfg / 'symbols.txt', build_dir(slug) / 'functions.json',
            ROOT / 'tools/build/units.py', ROOT / 'tools/build/include_asm.py', ROOT / 'tools/build/splits.py']
     return out
 
@@ -185,7 +180,7 @@ def write_units(slug=DEFAULT_SLUG):
     out = out_dir(slug)
     out.mkdir(parents=True, exist_ok=True)
     fallback = set(json.loads((out / 'nm_fallback.json').read_text())) if nm and (out / 'nm_fallback.json').exists() else set()
-    units = derive_units(S.load_splits(slug), function_table(slug), S.load_symbols(slug), S.load_equivalent(slug),
+    units = derive_units(S.load_splits(slug), function_table(slug), S.load_symbols(slug),
                          is_non_matching=nm, fallback=fallback)
     (out / ('units-nm.json' if nm else 'units.json')).write_text(json.dumps(dict(version=CACHE_VERSION, units=units)))
     return units

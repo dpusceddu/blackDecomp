@@ -32,7 +32,7 @@ SECTIONS = [
     ('Automatic pipeline (`tools/pipeline/`)', [
         'pipeline/tu_files.py', 'pipeline/m2c_input.py', 'pipeline/m2c_wrap.py', 'pipeline/ee_prep.py', 'pipeline/vu0_m2c.py',
         'pipeline/vu0_micro.py', 'pipeline/stack_context.py', 'pipeline/context_recovery.py', 'pipeline/permuter_service.py',
-        'pipeline/permuter_worker.py', 'pipeline/permuter_lanes.py', 'pipeline/compiler_dumps.py', 'pipeline/equiv.py']),
+        'pipeline/permuter_worker.py', 'pipeline/permuter_lanes.py', 'pipeline/compiler_dumps.py']),
     ('Maintainer and analysis tools (`tools/maint/`)', [
         'maint/class_skeletons.py', 'maint/rtti_evidence.py', 'maint/shared_context.py',
         'maint/mod_context.py', 'maint/symbols.py', 'maint/discs.py', 'maint/iso.py', 'maint/inputs.py']),
@@ -52,10 +52,6 @@ build internals itself, the automatic pipeline is reached through `tools/autodec
 committed data. Tools import each other by bare module name; every tool puts `tools/` and its subdirectories on `sys.path`.
 '''
 FOOTER = '''
-## Equivalence harness (`tools/eeharness/`)
-
-An EE interpreter and differential-test driver for the `equivalent` evidence tier; see its README.
-
 ## Finished studies (`tools/studies/`)
 
 Experiments and one-time migrations whose results are recorded in [history.md](history.md). They are kept for reproducibility and are not part of the normal workflow.
