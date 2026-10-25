@@ -25,8 +25,9 @@ Pull requests do not touch `progress/` or the progress table of the README (see 
 
 ## The matching workflow
 
-Each translation unit (TU) is one file, `src/<library>/tu_<address>.c|cpp`, that lists every function of the TU in address
-order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines.
+Each translation unit (TU) is one file, `src/<library>/tu_<address>.c|cpp`, that lists the functions it owns in address
+order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines. Every function is listed in exactly one file:
+`python3 tools/where.py func_XXXXXXXX` prints the file and the line, with no game files or build needed.
 
 0. Setup for the loop: `ninja` once, then `ninja objdiff`, and open the repository root in the
    [objdiff](https://github.com/encounter/objdiff) GUI. Pick the unit and the function; every time you save the TU file objdiff
