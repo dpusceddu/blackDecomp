@@ -27,8 +27,8 @@ Every version has `checksums.sha256`. Only `SLUS_213.76` has recovered source, s
 | `symbols.txt` | Names: bound (mangled) names, names the code uses, and `alias` lines that never change linking | by hand and `tools/autodecomp.py register` |
 | `libraries.txt` | Which library (a directory of `src/`) each stretch of `.text` belongs to, and where the link-once block is; progress, file placement and the TU map use it | by hand |
 | `explicit_boundaries.txt` | Function starts that look like orphan pieces but are code, each with its reason; `tools/build/boundaries.py` adds them to the boundaries it derives | by hand |
-| `class_method_abi.json` | Verified method ABI evidence (return, parameters, fields) for the class skeleton generator `tools/maint/class_skeletons.py` | by hand |
-| `rtti_abi.json` | Verified GCC 2.95 RTTI helper ABI seeds for `tools/maint/rtti_evidence.py` and `tools/maint/class_skeletons.py` | by hand |
+| `class_method_abi.json` | Class information recovered from the binary: for 32 methods, the return type, parameters and accessed fields read from their instructions. Input of `tools/maint/class_skeletons.py`; it cannot be derived by a tool because the types are a reviewer's reading of the code | by hand |
+| `rtti_abi.json` | Class information recovered from the binary: where the GCC 2.95 run-time type information helpers (`__rtti_class`, `__rtti_si`, ...) and their virtual tables are, and the layout of their records. Seeds `tools/maint/rtti_evidence.py`, which then derives every class, base link and vtable of the executable into `build/classes/` (ignored); the seeds themselves had to be identified by hand | by hand |
 
 ## What is generated instead (ignored, under `build/`)
 

@@ -1,7 +1,6 @@
 {
  "variant": "SLUS_213.76",
  "abi": "GCC 2.95 legacy RTTI with eight-byte virtual-table entries",
- "owner": "class_skeletons.py",
  "helpers": [
   {
    "name": "__rtti_class",
