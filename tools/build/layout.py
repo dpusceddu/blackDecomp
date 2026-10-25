@@ -27,7 +27,7 @@ TUS_FILE = ROOT / 'build' / SLUG / 'tus.yaml'
 # inline code) has no directory of its own: build/SLUS_213.76/inline_owners.txt names the library that owns each range.
 LIBRARY_DIR = {
     'game': 'game', 'apt': 'apt', 'kynapse': 'kynapse', 'animation': 'animation', 'physics': 'physics',
-    'renderware_core': 'rw_core', 'rwa_ee': 'rw_audio',
+    'rw_core': 'rw_core', 'rw_audio': 'rw_audio',
     'vibuf': 'sony', 'sony_unidentified': 'sony', 'libipu_libmpeg': 'sony', 'libdbc': 'sony', 'libdma_libpad2': 'sony',
     'libcdvd': 'sony', 'libmc2': 'sony', 'libkernl': 'sony', 'libgs': 'sony',
     'libm': 'libc', 'libc_stdio': 'libc', 'libstdcxx_typeinfo': 'libc',

@@ -12,4 +12,4 @@ s32 func_003285D0(s32 arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003285E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_3285c0", func_003285E8);

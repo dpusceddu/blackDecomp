@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035B470);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470", func_0035B470);
 
 #include "ps2/recovered_types.h"
 extern void func_003678A0(); /* WaitSema */
@@ -18,6 +18,6 @@ void * func_0035B540(void) {
     return &D_00480B00;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035B598);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035B5C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035B658);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470", func_0035B598);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470", func_0035B5C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470", func_0035B658);

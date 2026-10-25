@@ -1,41 +1,25 @@
 #!/usr/bin/env python3
-"""Per-unit objects and the project file for objdiff, and the progress report that decomp.dev reads.
+"""Generate a per-object objdiff project, build one comparison view, or write a fresh report.
 
-Usage: objdiff.py [GAME_ID] [--report]       (GAME_ID defaults to SLUS_213.76; source units apply to that version only)
-       objdiff.py --build PATH               rebuild the base object PATH of one unit (what the objdiff GUI calls after an edit)
-Needs a finished `ninja` build (the compiled unit objects are cached under build/<GAME_ID>/cache/).
-`--build` is the build command written to objdiff.json: it recompiles the changed sources through the build backend (the
-same incremental compile stage as `ninja`, without the link), then rebuilds the object of that one unit.
-
-The image is built as one program, but objdiff compares objects, so this tool derives one pair of objects per source unit:
-  target  the original machine code of the unit's functions (their split assembly, assembled again), symbols func_XXXXXXXX
-  base    the object compiled from the unit's source, its function symbols and references renamed to the same func_/D_ names
-Both go to build/<GAME_ID>/objdiff/{target,base}/<unit>.o and are listed in objdiff.json (project root, not committed) with
-one progress category per library. A function belongs to the unit that compiles it; every other function (INCLUDE_ASM, or
-in a split that compiles nothing) gets a target-only unit per translation unit, so the report covers the whole program and
-unrecovered code is unmatched. `--report` then runs objdiff-cli (see `tools/toolchain.py install --objdiff`) and writes
-build/<GAME_ID>/report.json. The objects are normalized (sizes without padding, names, ABI flags, data symbols; see
-docs/progress-reports.md) so that every function that is exact in the image is 100 % here.
-
-objdiff compares instructions and relocations: a function could match here and still not be byte-exact in the image (data
-placement). The build's `OK` and `ninja progress` remain the authority for exactness.
+The GUI runs `ninja build/<version>/objdiff/base/<unit>.o`; it never links the
+image. Assembly-backed functions stay in the linked object but are removed from
+the comparison base, so progress measures recovered source only.
 """
-import sys as _sys
-if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
-    print(__doc__.strip())
-    raise SystemExit(0)
-import hashlib, io, json, re, subprocess, sys, tarfile
+import argparse
+import json
 from pathlib import Path
-
+import re
+import subprocess
+import struct
+import sys
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
-from units import load_units
-import preflight
+import elfobj
+from object_compile import environment
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT = 'SLUS_213.76'
-OPTIONS = {'demangler': 'gnu_legacy'}      # the SN compiler mangles like GCC 2.x
-
+OPTIONS = {'demangler': 'gnu_legacy'}
 
 INSTRUCTION = re.compile(r'^\s*/\*\s*[0-9A-Fa-f]+\s+([0-9A-Fa-f]{8})\s+[0-9A-Fa-f]{8}\s*\*/', re.M)
 
@@ -117,193 +101,142 @@ def local_data_symbols(texts, slots, sizes, known):
     return found
 
 
+
 def unit_plan(slug):
-    """One entry per compiled source unit: cached object, function list and the symbol renames."""
+    """One comparison unit for each ordinary source object."""
     build = ROOT / 'build' / slug
-    objects = [o for o in json.loads((build / 'objects.json').read_text()) if o['kind'] == 'cc']
-    cache = json.loads((build / 'objects_cache.json').read_text())
-    placement = json.loads((build / 'placement.json').read_text())
-    starts = {f['addr'] for f in placement['functions']}
-    units = {u['name']: u for u in load_units(variant=slug)}
-    owners = {}                         # symbol -> addresses of the functions that define it
-    for u in units.values():
-        for f in u['functions']:
-            if f.get('symbol') and not f['symbol'].startswith('func_'):
-                owners.setdefault(f['symbol'], set()).add(f['addr'])
-    globals_ = {s: next(iter(a)) for s, a in owners.items() if len(a) == 1}
-    extern_names = {}
-    for u in units.values():
-        for name, addr in (u.get('externs') or {}).items():
-            extern_names.setdefault(name, int(addr, 0) if isinstance(addr, str) else int(addr))
-    absolute = absolute_symbols(slug)
-    slots = data_slots(slug)
-    plan = []
-    for o in objects:
-        name = o['name'][len('units/'):]
-        unit = units.get(name)
-        cached = cache.get(o['name'])
-        if unit is None or not cached or not (build / cached).is_file():
-            continue
-        elf = Elf((build / cached).read_bytes())
-        symbols = elf.symbols()
-        sections = {x['name'] for x in elf.sections}
-        section_sizes = {x['name']: x['size'] for x in elf.sections}
-        present = {s['name'] for s in symbols}
-        defined = {s['name'] for s in symbols if s['shndx']}
-        functions, redefine = [], {}
-        for f in unit['functions']:
-            if f.get('status') != 'source':
-                continue                  # INCLUDE_ASM: still assembly, listed with the unrecovered code (remaining_plan)
-            asm = ROOT / 'asm' / slug / 'nonmatchings' / ('func_%08X.s' % f['addr'])
-            symbol = f.get('symbol') or ('func_%08X' % f['addr'])
-            if symbol not in defined or not asm.is_file() or not f.get('size'):
-                continue
-            label = 'func_%08X' % f['addr']
-            functions.append(dict(addr=f['addr'], symbol=symbol, status=f.get('status'),
-                                  size=code_size(asm.read_text(), f['addr'], f['size']),
-                                  asm=asm.relative_to(ROOT).as_posix(), label=label))
-            redefine[symbol] = label
-        if not functions:
-            continue
-        texts = [(ROOT / f['asm']).read_text() for f in functions]
-        constants = {n: absolute[n] for text in texts for n in NAME.findall(text) if n in absolute}
-        mine = {f['addr'] for f in functions}
-        for sym in present - set(redefine):
-            if sym in globals_:
-                addr = globals_[sym]
-                new = 'func_%08X' % addr
-            elif sym in extern_names:
-                addr = extern_names[sym]
-                new = ('func_%08X' if addr in starts else 'D_%08X') % addr
-            else:
-                continue
-            if sym in defined and addr in starts and addr not in mine:
-                continue                  # another function's duplicate definition (weak template or inline): not this unit's
-            redefine[sym] = new
-        taken, clean = defined - set(redefine), {}
-        for old_name, new_name in redefine.items():       # a name can be the target of one rename only
-            if old_name != new_name and new_name not in taken:
-                clean[old_name] = new_name
-                taken.add(new_name)
-        # -ffunction-sections names a function's section after its symbol (`.text._$_Q24Kaim9PoolArray`); objdiff pairs
-        # symbols badly when the section name is a mangled name that no longer belongs to the symbol, so the section
-        # follows the symbol's new name
-        renamed = {'.text.' + f['symbol']: '.text.' + f['label'] for f in functions
-                   if '.text.' + f['symbol'] in sections and f['symbol'] != f['label']}
-        local = local_data_symbols(texts, slots.get(name, {}), section_sizes, present | set(clean.values()) | taken)
-        plan.append(dict(name=name, base_in=cached, source=unit['source'], library=unit.get('library') or 'game',
-                         functions=functions, redefine=clean, sections=renamed, constants=constants,
-                         symbols=local,
-                         complete=all(f.get('status') == 'source' for f in unit['functions'])))
-    return plan
-
-
-def remaining_plan(slug, covered):
-    """Target-only units for the functions no source unit lists, one per translation unit, so that the report covers the
-    whole program. Orphan pieces (`<instruction>; nop` between functions) are not functions and are left out."""
-    import layout
-    from progress import orphan_pieces
-    build = ROOT / 'build' / slug
-    fs = json.loads((build / 'placement.json').read_text())['functions']
-    orphans = orphan_pieces(slug, fs)
-    groups = {}
-    for f in fs:
-        if f['addr'] in covered or f['addr'] in orphans:
-            continue
-        asm = ROOT / 'asm' / slug / 'nonmatchings' / ('func_%08X.s' % f['addr'])
-        if not asm.is_file():
-            continue
-        library = layout.library_of(f['addr'])
-        stem = layout.tu_stem(layout.tu_of(f['addr']))
-        unit = groups.setdefault((library, stem), dict(name='asm_%s_%s' % (library, stem), base_in=None, source=None,
-                                                         library=library, functions=[], redefine={}, complete=False))
-        unit['functions'].append(dict(addr=f['addr'], symbol=f['name'], status='asm',
-                                      size=code_size(asm.read_text(), f['addr'], f['end'] - f['addr']),
-                                      asm=asm.relative_to(ROOT).as_posix(), label='func_%08X' % f['addr']))
-    return [groups[k] for k in sorted(groups)]
-
-
-def run_job(slug, plan):
-    """Build every target and base object in one backend job and unpack them under build/<GAME_ID>/objdiff/."""
-    build = ROOT / 'build' / slug
-    work = build / 'objdiff'
-    work.mkdir(parents=True, exist_ok=True)
-    rel = lambda cached: (Path('build') / slug / cached).as_posix()      # inputs keep repository-relative names in the job
-    keys_file = work / 'keys.json'
-    old_keys = json.loads(keys_file.read_text()) if keys_file.exists() else {}
-    keys, todo = {}, []
-    for u in plan:                       # a unit is rebuilt when its assembly, sizes, object or renames changed
-        h = hashlib.sha256()
-        for f in u['functions']:
-            h.update((ROOT / f['asm']).read_bytes() + b'%d%s' % (f['size'], f['label'].encode()))
-        if u['base_in']:
-            h.update((build / u['base_in']).read_bytes() + json.dumps([u['redefine'], u.get('sections'), u.get('constants'), u.get('symbols')],
-                                                                             sort_keys=True).encode())
-        h.update((ROOT / 'tools/build/objdiff_job.py').read_bytes() + (ROOT / 'tools/build/elfobj.py').read_bytes())
-        keys[u['name']] = h.hexdigest()
-        outputs = [work / 'target' / (u['name'] + '.o')] + ([work / 'base' / (u['name'] + '.o')] if u['base_in'] else [])
-        if old_keys.get(u['name']) != keys[u['name']] or not all(p.exists() for p in outputs):
-            todo.append(u)
-    print('objdiff: %d of %d units to build' % (len(todo), len(plan)))
-    if todo:
-        names = lambda u, f: 'numbers/%s.s' % f['label'] if u.get('constants') else f['asm']    # assembly as the job reads it
-        send = [dict(name=u['name'], base_in=rel(u['base_in']) if u['base_in'] else None, redefine=u['redefine'],
-                     sections=u.get('sections') or {}, symbols=u.get('symbols') or {},
-                     functions=[dict(asm=names(u, f), label=f['label'], size=f['size']) for f in u['functions']]) for u in todo]
-        (work / 'plan.json').write_text(json.dumps(dict(units=send)))
-        buf = io.BytesIO()
-        with tarfile.open(fileobj=buf, mode='w:gz', compresslevel=1) as tar:
-            tar.add(ROOT / 'include/macro.inc', arcname='include/macro.inc')
-            tar.add(ROOT / 'tools/build/elfobj.py', arcname='tools/elfobj.py')
-            for unit in todo:
-                if unit['base_in']:
-                    tar.add(build / unit['base_in'], arcname=rel(unit['base_in']))
-                for f in unit['functions']:
-                    if unit.get('constants'):
-                        text = numeric_names((ROOT / f['asm']).read_text(), unit['constants']).encode()
-                        info = tarfile.TarInfo(names(unit, f))
-                        info.size = len(text)
-                        tar.addfile(info, io.BytesIO(text))
-                    else:
-                        tar.add(ROOT / f['asm'], arcname=f['asm'])
-        build_objects(slug, work, buf.getvalue())
-    keys_file.write_text(json.dumps(dict(old_keys, **keys)))
-
-
-def build_objects(slug, work, payload):
-    (work / 'inputs.tgz').write_bytes(payload)
-    (work / 'out.tgz').unlink(missing_ok=True)
-    r = subprocess.run([sys.executable, str(ROOT / 'tools/build/sandbox.py'), str(ROOT / 'tools/build/objdiff_job.py'), '--timeout', '1800',
-                        '--file', 'inputs.tgz=' + str(work / 'inputs.tgz'), '--file', 'plan.json=' + str(work / 'plan.json'),
-                        '--out', 'out.tgz=' + str(work / 'out.tgz')], capture_output=True, text=True)
-    sys.stdout.write(r.stdout[-3000:])
-    if r.returncode or not (work / 'out.tgz').exists():
-        sys.stderr.write(r.stderr[-3000:])
-        raise SystemExit('objdiff objects could not be built')
-    with tarfile.open(work / 'out.tgz') as tar:
-        tar.extractall(work, **({'filter': 'data'} if hasattr(tarfile, 'data_filter') else {}))
+    objects = json.loads((build / 'unit_objects.json').read_text())
+    return [dict(name=o['unit']['name'], library=o['unit']['library'], source=o['src'],
+                 base_in='obj/'+o['name']+'.o', functions=o['unit']['functions'],
+                 complete=all(f['status']=='source' for f in o['unit']['functions']))
+            for o in objects if o['kind']=='cc']
 
 
 def write_project(slug, plan):
     libraries = sorted({u['library'] for u in plan})
-    units = []
-    for u in plan:
-        entry = dict(name='%s/%s' % (u['library'], u['name']),
-                     target_path='build/%s/objdiff/target/%s.o' % (slug, u['name']),
-                     metadata=dict(complete=u['complete'], progress_categories=[u['library']]))
-        if u['base_in']:
-            entry['base_path'] = 'build/%s/objdiff/base/%s.o' % (slug, u['name'])
-            entry['metadata']['source_path'] = u['source']
-        else:
-            entry['metadata']['auto_generated'] = True     # original code that is not recovered yet: counted, not listed
-        units.append(entry)
-    py = '.venv/bin/python' if (ROOT / '.venv/bin/python').exists() else 'python3'
-    project = {'$schema': 'https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json',
-               'min_version': '3.0.0', 'custom_make': py, 'custom_args': ['tools/objdiff.py', '--build'],
-               'build_target': False, 'build_base': True, 'watch_patterns': ['src/**/*.c', 'src/**/*.cpp', 'include/**/*'],
-               'options': OPTIONS, 'progress_categories': [dict(id=l, name=l) for l in libraries], 'units': units}
-    (ROOT / 'objdiff.json').write_text(json.dumps(project, indent=2) + '\n')
+    units = [dict(name=u['library']+'/'+u['name'],
+                  target_path='build/%s/objdiff/target/%s.o' % (slug,u['name']),
+                  base_path='build/%s/objdiff/base/%s.o' % (slug,u['name']),
+                  metadata=dict(source_path=u['source'], complete=u['complete'], progress_categories=[u['library']])) for u in plan]
+    project = {'$schema':'https://raw.githubusercontent.com/encounter/objdiff/main/config.schema.json',
+               'min_version':'3.0.0','custom_make':'ninja','custom_args':[], 'build_target':False, 'build_base':True,
+               'watch_patterns':['src/**/*.c','src/**/*.cpp','include/**/*'], 'options':OPTIONS,
+               'progress_categories':[dict(id=l,name=l) for l in libraries], 'units':units}
+    local = ROOT / '.local/objdiff.json'
+    if local.is_file():
+        override = json.loads(local.read_text())
+        for key in ('custom_make','custom_args'):
+            if key in override:
+                project[key] = override[key]
+    (ROOT/'objdiff.json').write_text(json.dumps(project,indent=2)+'\n')
     return len(units)
+
+
+def build_view(spec_path, output):
+    spec = json.loads(Path(spec_path).read_text())
+    raw_path = Path(output).parents[2] / 'obj' / (spec['name']+'.o')
+    raw = raw_path.read_bytes()
+    state = json.loads(Path(str(raw_path)+'.json').read_text())
+    source = Elf(raw)
+    symbols = source.symbols()
+    present = {s['name'] for s in symbols}
+    slug = raw_path.parts[1]
+    from progress import orphan_pieces
+    placement = json.loads((ROOT/'build'/slug/'placement.json').read_text())
+    orphans = orphan_pieces(slug, placement['functions'])
+    functions, lines, texts, keep, redefine, renames = [], [], [], set(), {}, {}
+    constants = absolute_symbols(slug)
+    for f in spec['unit']['functions']:
+        if f['addr'] in orphans:
+            continue
+        label = 'func_%08X' % f['addr']
+        original = ROOT/'asm'/slug/'nonmatchings'/(label+'.s')
+        text = original.read_text()
+        size = code_size(text,f['addr'],f['size'])
+        texts.append(text)
+        lines += [numeric_names(text,constants), '.type %s, @function' % label, '.size %s, %d' % (label,size)]
+        r = state['resolved'].get(str(f['addr']))
+        if r and r['status']=='source':
+            keep.add(r['section'])
+            redefine[r['link_name']] = label
+            if r['section'].startswith('.text.'):
+                renames[r['section']] = '.text.'+label
+    # Retain compiler data, but remove assembly inputs and discarded context.
+    keep.update(sec for sec in DATA_SECTIONS if source.section(sec))
+    # A retained table may point into an included function through a local
+    # section symbol. Keep that symbolic reference when removing assembly from
+    # the comparison base: its public function entry denotes the same zero base.
+    edited = bytearray(raw)
+    by_name = {s['name']:i for i,s in enumerate(symbols)}
+    assembly_sections = {source.section(r['section'])['index']:by_name[r['link_name']]
+                         for r in state['resolved'].values() if r['status']=='asm'}
+    for relocation in source.sections:
+        if relocation['type'] != 9:
+            continue
+        for offset in range(relocation['offset'],relocation['offset']+relocation['size'],8):
+            info = struct.unpack_from('<I',edited,offset+4)[0]
+            symbol = symbols[info>>8]
+            replacement = assembly_sections.get(symbol['shndx'])
+            if symbol['type']==3 and replacement is not None:
+                if symbols[replacement]['value'] != 0:
+                    raise ValueError('included function does not start its input section')
+                struct.pack_into('<I',edited,offset+4,replacement<<8 | (info&255))
+    edited, _ = elfobj.undefine_dropped(bytes(edited), keep)
+    output = Path(output)
+    output.parent.mkdir(parents=True,exist_ok=True)
+    output.write_bytes(edited)
+    base, env = environment()
+    args = [env['BLACK_BINUTILS_PREFIX']+'objcopy']
+    for s in source.sections:
+        if s['flags'] & 2 and s['name'] not in keep:
+            args += ['--remove-section='+s['name']]
+    # Original-name references and per-unit compiler bindings share canonical names.
+    for s in symbols:
+        m = re.fullmatch(r'(.+)\$([0-9A-F]+)',s['name'])
+        if m and s['name'] not in redefine:
+            addr = int(m[2],16)
+            name = ('func_%08X' if any(f['addr']==addr for f in placement['functions']) else 'D_%08X') % addr
+            if name not in present:
+                redefine[s['name']] = name
+    # Several C++ declarations can bind the same original function. objcopy
+    # rejects duplicate rename targets, so first merge their relocation uses.
+    groups = {}
+    for old,new in redefine.items():
+        groups.setdefault(new,[]).append(old)
+    redirects = {}
+    for new,old_names in groups.items():
+        if len(old_names)<2:
+            continue
+        primary = next((n for n in old_names if symbols[by_name[n]]['shndx']),old_names[0])
+        for name in old_names:
+            if name!=primary:
+                redirects[by_name[name]]=by_name[primary]
+                del redefine[name]
+    if redirects:
+        data=bytearray(output.read_bytes())
+        for relocation in source.sections:
+            if relocation['type']==9:
+                for offset in range(relocation['offset'],relocation['offset']+relocation['size'],8):
+                    info=struct.unpack_from('<I',data,offset+4)[0]
+                    if info>>8 in redirects:
+                        struct.pack_into('<I',data,offset+4,redirects[info>>8]<<8 | (info&255))
+        output.write_bytes(data)
+    args += ['--redefine-sym=%s=%s' % x for x in redefine.items() if x[0]!=x[1]]
+    args += ['--rename-section=%s=%s' % x for x in renames.items() if x[0]!=x[1]]
+    slots = {sec:min(a for a,b,addr in intervals if state['resolved'].get(str(addr),{}).get('status')=='source')
+             for sec,intervals in spec.get('slots',{}).items()
+             if any(state['resolved'].get(str(addr),{}).get('status')=='source' for a,b,addr in intervals)}
+    sizes = {s['name']:s['size'] for s in source.sections}
+    local = local_data_symbols(texts,slots,sizes,present | set(redefine.values()))
+    args += ['--add-symbol=%s=%s:%d,global,object' % (n,sec,off) for n,(sec,off) in local.items()]
+    subprocess.run(args+[str(output)],env=env,check=True)
+    output.write_bytes(elfobj.literal_as_gprel(output.read_bytes()))
+    target = output.parent.parent/'target'/output.name
+    target.parent.mkdir(parents=True,exist_ok=True)
+    assembly = target.with_suffix('.s')
+    assembly.write_text('\n'.join(lines)+'\n')
+    subprocess.run([str(base/'compilers/ee-gcc2.96/ee/bin/as'),'-I','include','-o',str(target),str(assembly)],env=env,check=True)
+    target.write_bytes(elfobj.copy_header_flags(target.read_bytes(),raw))
 
 
 def report(slug):
@@ -324,39 +257,29 @@ def report(slug):
             print('  %-26s %s' % (key, m[key]))
 
 
-def build_unit(slug, path):
-    """Rebuild the objects of the unit whose base object is PATH (objdiff passes the base_path of the unit)."""
-    path = Path(path)
-    if path.parent.name != 'base':
-        return 0                                    # target objects are fixed by the assembly; `ninja objdiff` writes them
-    done = subprocess.run(['ninja', '-f', 'build.ninja', 'build/%s/compiled.stamp' % slug], cwd=ROOT)
-    if done.returncode:
-        return done.returncode
-    plan = [u for u in unit_plan(slug) if u['name'] == path.stem]
-    if not plan:
-        raise SystemExit('no source unit %s in the last full build; run `ninja` and `ninja objdiff` first' % path.stem)
-    run_job(slug, plan)
-    return 0
-
 
 def main():
-    preflight.require(DEFAULT)
-    if sys.argv[1:2] == ['--build']:
-        if len(sys.argv) != 3:
-            raise SystemExit('usage: objdiff.py --build PATH')
-        return build_unit(DEFAULT, sys.argv[2])
-    args = [a for a in sys.argv[1:] if not a.startswith('-')]
-    slug = args[0] if args else DEFAULT
-    if slug != DEFAULT:
-        raise SystemExit('source units apply to %s only' % DEFAULT)
-    plan = unit_plan(slug)
-    plan += remaining_plan(slug, {f['addr'] for u in plan for f in u['functions']})
-    run_job(slug, plan)
-    print('objdiff.json: %d units, %d functions' % (write_project(slug, plan), sum(len(u['functions']) for u in plan)))
-    if '--report' in sys.argv:
-        report(slug)
-    return 0
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('version',nargs='?',default=DEFAULT)
+    ap.add_argument('--report',action='store_true')
+    ap.add_argument('--unit',help='build the view of this generated object specification')
+    ap.add_argument('--output')
+    a=ap.parse_args()
+    if a.unit:
+        build_view(a.unit,a.output)
+        return
+    if a.version!=DEFAULT:
+        ap.error('source units apply to '+DEFAULT+' only')
+    import preflight
+    preflight.require(a.version)
+    plan=unit_plan(a.version)
+    write_project(a.version,plan)
+    result = subprocess.run(['ninja','objdiff_objects'])
+    if result.returncode:
+        raise SystemExit(result.returncode)
+    if a.report:
+        report(a.version)
 
 
-if __name__ == '__main__':
-    sys.exit(preflight.guard(main))
+if __name__=='__main__':
+    main()

@@ -84,11 +84,11 @@ extern "C" void* func_00305378(AIRouteFollower* follower, const float* point,
 
 
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003003B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00300A40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003016E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00301A30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00301E78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00302388);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00302EE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003039D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_300278", func_003003B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_300278", func_00300A40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_300278", func_003016E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_300278", func_00301A30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_300278", func_00301E78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_300278", func_00302388);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_300278", func_00302EE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_300278", func_003039D8);

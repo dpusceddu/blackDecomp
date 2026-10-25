@@ -14,4 +14,4 @@ s32 func_001ADF58(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ADFC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1adf58", func_001ADFC0);

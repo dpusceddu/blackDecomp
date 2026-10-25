@@ -160,8 +160,8 @@ int World::SelectWorldHit(QueryHit *hit, ClosestHit *out)
 // Unmatched: 0x127CF0 corner-constructor/readback temporaries, clip iteration and submission control flow.
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00129240);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00129360);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001297A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001297E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00129DE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_127118", func_00129240);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_127118", func_00129360);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_127118", func_001297A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_127118", func_001297E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_127118", func_00129DE8);

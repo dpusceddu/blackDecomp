@@ -33,5 +33,5 @@ void func_001AEBF8(const BkLightingVectorPS2 *rotation,const signed char *coeffi
  linear->x=m[0][3]+m[3][0];linear->y=m[1][3]+m[3][1];linear->z=m[2][3]+m[3][2];linear->w=D_004432F0.w;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AEBF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/opacity", func_001AEBF8);
 #endif

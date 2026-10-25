@@ -3,7 +3,7 @@
 
 extern s32 func_00201108();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F42C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f42c8", func_001F42C8);
 
 void func_001F43F0(void *arg0, f32 fparg0)
 {
@@ -23,4 +23,4 @@ void func_001F43F0(void *arg0, f32 fparg0)
   func_00201108(arg0 + 0x20);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F4458);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f42c8", func_001F4458);

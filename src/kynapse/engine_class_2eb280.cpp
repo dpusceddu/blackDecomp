@@ -26,4 +26,4 @@ void Engine::AddService(Object* service)
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EB450);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/engine_class_2eb280", func_002EB450);

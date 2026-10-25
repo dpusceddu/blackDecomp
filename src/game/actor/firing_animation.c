@@ -33,4 +33,4 @@ void func_001AA490(void *selector,BkAnimationName12PS2 *name,void *actor,int sta
  }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA768);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/firing_animation", func_001AA768);

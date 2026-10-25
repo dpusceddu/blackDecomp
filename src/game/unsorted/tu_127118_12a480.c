@@ -16,16 +16,16 @@ void func_0012A480(void) {
     func_00108540(D_0040F4C4, 0xC, temp_2, func_0012D508(D_0040F4D0));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012A4D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012A5F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012A7C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012A918);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012AB28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012AB90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012AE58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012B0E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012B328);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012B448);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012B720);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012B950);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012BB60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012A4D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012A5F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012A7C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012A918);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012AB28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012AB90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012AE58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B0E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B328);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B448);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B720);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B950);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012BB60);

@@ -14,5 +14,5 @@ bool ComputeAccessWaysTraversal::Consider(SpatialNode *node){
  if(owner->progress)owner->progress((unsigned int)(node->id*100)/graph->nodeCount);return true;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00392E50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/linkonce_392e50", func_00392E50);
 #endif

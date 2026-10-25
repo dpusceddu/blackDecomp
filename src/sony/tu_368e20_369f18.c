@@ -18,4 +18,4 @@ s32 func_00369F40(s32 arg0, s32 arg1, s32 arg2) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00369F68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_368e20_369f18", func_00369F68);

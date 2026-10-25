@@ -46,8 +46,8 @@ void func_001AF798(char *actor) {
  *D_0040E5F0++=packet;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AF798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1ae2e8_1af6d0", func_001AF798);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AF8E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AF8F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1ae2e8_1af6d0", func_001AF8E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1ae2e8_1af6d0", func_001AF8F8);

@@ -5,7 +5,7 @@ Usage: check_versions.py [GAME_ID ...]     default: all versions of config/versi
 For each version it runs `configure.py --version GAME_ID` and `ninja`, and prints one line per version:
   OK        the rebuilt executable has the SHA-256 recorded in config/<GAME_ID>/checksums.sha256
   MISMATCH  ninja ran and reported a mismatch (its report follows)
-  ERROR     the build did not finish (missing executable in orig/, toolchain or backend failure); the check stops there
+  ERROR     the build did not finish (missing executable in orig/, toolchain failure); the check stops there
 At the end build.ninja is configured for SLUS_213.76 again. Exit status 0 only if every version is OK.
 Routine work checks SLUS_213.76 only (plain `ninja`); the other four versions are rebuilt from assembly.
 """
@@ -59,7 +59,7 @@ def main():
             if status != 'OK':
                 print('\n'.join('    ' + l for l in out.splitlines()[-25:]))
             if status == 'ERROR':
-                print('stopping: the build for %s did not finish (check orig/, the toolchain and the backend)' % v)
+                print('stopping: the build for %s did not finish (check orig/, the toolchain)' % v)
                 break
     finally:
         run([sys.executable, 'configure.py', '--version', DEFAULT])

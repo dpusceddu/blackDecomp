@@ -66,5 +66,5 @@ extern "C" int func_00103A28(const char *name) {
   return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00103A28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_menu_return", func_00103A28);
 #endif

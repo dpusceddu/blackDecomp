@@ -12,7 +12,7 @@ void func_002A6C00(s32 arg0) {
     D_0040DEE4 = arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A6C08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a6c00", func_002A6C08);
 #ifdef NON_MATCHING
 extern u8 D_00449438[];extern s32 D_0040DEE4;extern void *D_0040DEEC;extern RwFreeLinkPS2 D_0040E5B0;
 // Unmatched: loop expansion, FP scheduling or stack aggregate lifetime still differs.
@@ -38,5 +38,5 @@ RwFreeListPS2 *func_002A6CC8(u32 entry_size,u32 entries,u32 alignment,s32 preall
  return list;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A6CC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a6c00", func_002A6CC8);
 #endif

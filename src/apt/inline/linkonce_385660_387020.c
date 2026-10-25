@@ -27,7 +27,7 @@ s32 func_00387020(s32 arg0, s32 arg1) {
     return (s32) var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387050);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387050);
 
 void func_00387058(s32 *arg0, s32 arg1)
 {
@@ -55,9 +55,9 @@ void func_003870E0(s32 *arg0, s32 arg1) {
     *arg0 = (*arg0 & 0x01FFFFFF) | (arg1 << 0x19);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387100);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387120);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387140);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387100);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387120);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387140);
 
 void func_00387170(s32 *arg0) {
     *arg0 |= 4;
@@ -67,13 +67,13 @@ void func_00387180(s32 *arg0) {
     *arg0 &= ~4;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387198);
 
 s32 func_003871C0(s32 *arg0) {
     return (((s32) *arg0 >> 4) & 1) ^ 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003871D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_003871D8);
 
 s32 func_003872A8(s32 *arg0) {
     return *arg0 == (s32) &D_003BFAF8;
@@ -120,8 +120,8 @@ void func_00387328(u16 **arg0, s32 arg1)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387398);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387410);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387398);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387410);
 
 s32 func_00387458(s32 *arg0) {
     return func_0035CA74(*arg0 + 8) == 0;
@@ -151,9 +151,9 @@ void func_003874A8(u16 **arg0)
   D_003BFAF8 += 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387510);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003875D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003875E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387510);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_003875D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_003875E8);
 
 void func_00387C70(void *arg0) {
     s32 temp_2;
@@ -163,8 +163,8 @@ void func_00387C70(void *arg0) {
     func_0035C6EC(temp_2, 0, M2C_FIELD(arg0, s32 *, 0) * 8);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387CC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00387D08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387CC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_387020", func_00387D08);
 
 void func_00387D50(void *arg0, s32 arg1)
 {

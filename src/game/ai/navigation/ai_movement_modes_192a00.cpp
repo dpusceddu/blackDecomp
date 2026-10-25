@@ -19,5 +19,5 @@ bool RouteMode::StepPhase()
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192A78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192D48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_movement_modes_192a00", func_00192A78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_movement_modes_192a00", func_00192D48);

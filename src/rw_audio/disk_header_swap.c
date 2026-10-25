@@ -28,7 +28,7 @@ void func_00313650(RwaDiskHeader *header) {
     *header=copy;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003137C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/disk_header_swap", func_003137C8);
 #ifdef NON_MATCHING
 extern s32 (*D_003CEC68)();
 extern s32 func_00313EA8(s32);
@@ -72,7 +72,7 @@ void func_003137D8(RwaBank *bank,s32 base,s32 initialize) {
     }while(current!=sentinel);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003137D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/disk_header_swap", func_003137D8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: allocation/open control-flow and saved argument allocation differ.
@@ -93,6 +93,6 @@ open: stream->handle=func_00324990(name);
 fail:stream->state=status;return stream;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003139A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/disk_header_swap", func_003139A8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313B18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/disk_header_swap", func_00313B18);

@@ -22,6 +22,6 @@ void * func_00252AC8(void *arg0, s32 arg1) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00252B08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00252B10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00252BA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938_252a98", func_00252B08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938_252a98", func_00252B10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938_252a98", func_00252BA0);

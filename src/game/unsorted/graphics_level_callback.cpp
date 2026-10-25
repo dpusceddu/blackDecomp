@@ -14,4 +14,4 @@ int Graphics::LevelCallbacks::SetDifficulty(const char* command) {
     return func_0020F268(command);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020F5E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_level_callback", func_0020F5E8);

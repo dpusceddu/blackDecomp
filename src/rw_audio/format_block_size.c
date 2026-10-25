@@ -20,8 +20,8 @@ const RwaFormatId codecGuid409350 __asm__("D_00409350") __attribute__((aligned(8
 
 
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314630);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314760);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/format_block_size", func_00314630);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/format_block_size", func_00314760);
 #ifdef NON_MATCHING
 // Unmatched: format read/write cursor aliasing and scheduling differ.
 RwaFormat *func_00314848(RwaFormat *format,u8 *bytes,s32 writing,s32 swap) {
@@ -49,10 +49,10 @@ RwaFormat *func_00314848(RwaFormat *format,u8 *bytes,s32 writing,s32 swap) {
     return format;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314848);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/format_block_size", func_00314848);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314D60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314DE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/format_block_size", func_00314D60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/format_block_size", func_00314DE0);
 #ifdef NON_MATCHING
 extern f32 D_0040D894;
 // Unmatched: exact external-float body needs owned GP-relative literal placement.
@@ -64,9 +64,9 @@ s32 func_00314F08(RwaFormat *format,u32 count) {
     return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314F08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/format_block_size", func_00314F08);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315048);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/format_block_size", func_00315048);
 
 u32 func_00314B98(RwaFormat *format) {
     if(!func_00316400(format->encoding,D_004092E0))return 1;

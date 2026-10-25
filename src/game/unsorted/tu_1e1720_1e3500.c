@@ -14,4 +14,4 @@ volatile unsigned short func_001E3500(void *arg0)
   return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001E3518);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720_1e3500", func_001E3518);

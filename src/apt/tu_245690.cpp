@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00245690);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00245838);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_245690", func_00245690);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_245690", func_00245838);
 
 #ifdef NON_MATCHING
 #include "apt/apt_function.hpp"
@@ -39,5 +39,5 @@ Value* BuiltinValue::Lookup(Value* owner,Token** name)
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00245840);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_245690", func_00245840);
 #endif

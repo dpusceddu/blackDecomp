@@ -20,7 +20,7 @@ void func_001AF1B8(void *draw_list) {
     M2C_FIELD(draw_list, s32 *, 8) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AF1C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1ae2e8_1af1a0", func_001AF1C0);
 
 #ifdef NON_MATCHING
 // Unmatched: 0x1af298: sorted/direct batch traversal register allocation.
@@ -56,7 +56,7 @@ void func_001AF298(BkDrawListPS2 *list) {
  *D_0040E5F0++=packet;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AF298);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1ae2e8_1af1a0", func_001AF298);
 #endif
 
 void func_001AF4C0(void *actor) {

@@ -8,4 +8,4 @@ s32 func_0011FCD8(s32 arg0) {
     return func_0011D430(arg0, 3);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0011FCF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358_11fcd8", func_0011FCF8);

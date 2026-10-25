@@ -310,4 +310,4 @@ void AnimationGraph_BindPreorder(void *owner, AnimationGraphNode *node, Animatio
 }
 
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034B4E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498", func_0034B4E8);

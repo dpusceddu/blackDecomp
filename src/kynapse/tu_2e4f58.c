@@ -11,8 +11,8 @@ extern s32 func_0038D4C0();
 extern M2C_UNK D_003E9678;
 extern s32 D_0049B938;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E4F58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5088);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2e4f58", func_002E4F58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2e4f58", func_002E5088);
 
 void func_002E5178(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {

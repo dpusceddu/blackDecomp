@@ -155,5 +155,5 @@ bool CSpatialGraph::Write(const void* path, unsigned int saveFlags)
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F8238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_spatial", func_002F8238);
 #endif

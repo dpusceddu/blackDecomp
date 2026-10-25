@@ -34,8 +34,8 @@ int func_001C15D0(BkEffectLightsPS2 *pool,BkEffectLightResourcePS2 *resource) {
  pool->activeCount=0;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C15D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/light_reset", func_001C15D0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C1740);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C1810);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/light_reset", func_001C1740);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/light_reset", func_001C1810);

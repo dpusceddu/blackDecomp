@@ -9,9 +9,9 @@ int Effects::EmitterRecord::Reset() {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFEC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFED0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C01E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/emitter_1bfea0", func_001BFEC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/emitter_1bfea0", func_001BFED0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/emitter_1bfea0", func_001C01E0);
 
 #ifdef NON_MATCHING
 #include "game/effects/emitter.h"
@@ -25,8 +25,8 @@ extern "C" void func_001C0518(BkEffectEmittersPS2 *pool) {
  if(tail->count)do {BkEmitterListPS2 *list=tail->lists+i;if(list->HasEmitters())func_001CFFB8(list,*(u8 *)(list->definition+0xe6));i++;}while(i<tail->count);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0518);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/emitter_1bfea0", func_001C0518);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0600);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0728);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/emitter_1bfea0", func_001C0600);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/emitter_1bfea0", func_001C0728);

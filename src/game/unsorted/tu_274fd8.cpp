@@ -10,5 +10,5 @@ int ContainsAddress(void* object,void* address) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00274FD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_274fd8", func_00274FD8);
 #endif

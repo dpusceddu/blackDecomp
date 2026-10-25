@@ -6,9 +6,9 @@ extern void func_0035EBB0(void *);
 extern s32 func_00364538(void *, s32, s32);
 extern void func_0035EC10(void *);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035EBB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035EC10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035EC50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_35ebb0", func_0035EBB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_35ebb0", func_0035EC10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_35ebb0", func_0035EC50);
 
 s32 func_0035F630(void) {
     s32 temp_3;

@@ -1,3 +1,5 @@
+// Keep compiler-context definitions separate from included retail code.
+#define BLACK_SCENE_BUILD_CONTEXT
 #include "include_asm.h"
 
 // Scene storage, broadphase pools and bitmap iteration; PS2 member offsets are in scene.hpp.
@@ -41,7 +43,7 @@ extern "C" PhysicsSceneLayout func_0032BC70(const PhysicsSceneSettings* settings
 #ifdef FULL_TU_CONTEXT
 inline void* operator new(unsigned int, void* memory) throw() { return memory; }
 // Unmatched: 124 differences and three words short in storage/bitmap allocation; artificial inputs still disagree on ordered call argument banks.
-extern "C" PhysicsScene* func_0032BDC0(PhysicsStorageBlock* storage, const PhysicsSceneSettings* settings)
+extern "C" PhysicsScene* context_func_0032BDC0(PhysicsStorageBlock* storage, const PhysicsSceneSettings* settings)
 {
     PhysicsSceneLayout layout = func_0032BC70(settings);
     PhysicsScene* scene = static_cast<PhysicsScene*>(storage->memory);
@@ -583,7 +585,7 @@ static inline void ScenePublish(PhysicsVec* address,PhysicsVec value){*(volatile
 static inline float SceneExtent(float scale){float result;asm("mul.s %0,%1,%2":"=f"(result):"f"(scale),"f"(1000.f));return result;}
 static inline float SceneNegate(float value){float result;asm volatile("neg.s %0,%1":"=f"(result):"f"(value));return result;}
 // Unmatched: 19 ordering differences in original Y/Z and store/return scheduling; 256 artificial inputs still disagree on VU outputs.
-extern "C" PhysicsSceneSettings* func_0032E048(PhysicsSceneSettings* settings,unsigned groups,unsigned instances,unsigned pairs,unsigned unknown,unsigned joints,float scale){
+extern "C" PhysicsSceneSettings* context_func_0032E048(PhysicsSceneSettings* settings,unsigned groups,unsigned instances,unsigned pairs,unsigned unknown,unsigned joints,float scale){
  PhysicsVec highX,lowX,px,py,highY,nx,ny,nz,lowY,pz;
  float extent=SceneExtent(scale);
  highX=settings->maximum;lowX=settings->minimum;
@@ -674,11 +676,11 @@ extern "C" void func_0032DF00(int,int);
 extern "C" void func_0032E390(){func_0032DF00(1,65535);}
 extern "C" void func_0032E3B0(){func_0032DF00(0,65535);}
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032BDC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032C0D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032C5A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032D238);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032D990);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E048);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E208);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E310);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32bc70", func_0032BDC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32bc70", func_0032C0D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32bc70", func_0032C5A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32bc70", func_0032D238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32bc70", func_0032D990);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32bc70", func_0032E048);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32bc70", func_0032E208);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32bc70", func_0032E310);

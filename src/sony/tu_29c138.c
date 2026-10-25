@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C138);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C1A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138", func_0029C138);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138", func_0029C1A8);
 
 u32 func_0029C1B0(u32 arg0)
 {

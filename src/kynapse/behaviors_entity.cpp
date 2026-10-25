@@ -27,5 +27,5 @@ unsigned int Entity::GetId(){if(!node.node)return (unsigned int)-1;return ((unsi
 // Unmatched: attribute lookup and creation retain branch layout and index lifetime differences.
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E4798);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E4860);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_entity", func_002E4798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_entity", func_002E4860);

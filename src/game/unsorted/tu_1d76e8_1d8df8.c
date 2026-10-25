@@ -41,8 +41,8 @@ void * func_001D8DF8(Recovered_Vtable_003E08D8 *arg0) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D8E38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D8F38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D8FD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D9100);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D91F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8_1d8df8", func_001D8E38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8_1d8df8", func_001D8F38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8_1d8df8", func_001D8FD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8_1d8df8", func_001D9100);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8_1d8df8", func_001D91F0);

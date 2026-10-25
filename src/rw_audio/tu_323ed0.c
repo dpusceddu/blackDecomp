@@ -5,24 +5,24 @@ extern s32 D_00458DC0;
 extern s32 func_0036CD08(M2C_UNK, s32, M2C_UNK);
 extern void func_00324E38(s32 arg0, s32 arg1);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00323ED0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003240D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003242B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324530);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003245C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324640);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_00323ED0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_003240D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_003242B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_00324530);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_003245C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_00324640);
 
 s32 func_00324650(void) {
     return D_00458DC0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324660);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003246E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003247A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003248A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324900);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324948);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00324968);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_00324660);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_003246E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_003247A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_003248A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_00324900);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_00324948);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0", func_00324968);
 
 s32 func_00324DE8(s32 arg0) {
     s32 temp_2;

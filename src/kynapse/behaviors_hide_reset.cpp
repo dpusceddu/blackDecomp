@@ -36,7 +36,7 @@ CBrain::CBrain(void *ownerValue, BrainHandlerClass *handlerClass)
         handler = handlerClass->create();
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E1548);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_hide_reset", func_002E1548);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: owned-array cleanup branches and pointer lifetimes differ.
@@ -56,7 +56,7 @@ CBrain::~CBrain()
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E16B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_hide_reset", func_002E16B8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E4E28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E52C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_hide_reset", func_002E4E28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_hide_reset", func_002E52C8);

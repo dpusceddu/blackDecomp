@@ -16,8 +16,8 @@ s32 func_00311498(void *arg0, void *arg1) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003114C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003114D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311498", func_003114C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311498", func_003114D0);
 
 M2C_UNK * func_00311558(void) {
     return &D_00455F58;

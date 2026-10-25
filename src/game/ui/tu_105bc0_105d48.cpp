@@ -98,7 +98,7 @@ extern "C" void func_00105D48() {
     *destination=package->root.Get();
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00105D48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_105d48", func_00105D48);
 #endif
 
 
@@ -162,7 +162,7 @@ int FrontendLoadingState::Enter() {
     return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106080);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_105d48", func_00106080);
 #endif
 
 #ifdef NON_MATCHING
@@ -214,7 +214,7 @@ updateOwner:
     owner->virtualTable[2].function((char*)owner+owner->virtualTable[2].adjustment);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106200);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_105d48", func_00106200);
 #endif
 
 
@@ -276,7 +276,7 @@ int FrontendSequentialLoadingState::Enter() {
     return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106868);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_105d48", func_00106868);
 #endif
 
 #ifdef NON_MATCHING
@@ -330,7 +330,7 @@ updateOwner:
     owner->virtualTable[2].function((char*)owner+owner->virtualTable[2].adjustment);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001069F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_105d48", func_001069F8);
 #endif
 
 
@@ -381,7 +381,7 @@ int FrontendControllerScreen::Enter() {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107020);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_105d48", func_00107020);
 #endif
 
 #ifdef NON_MATCHING
@@ -431,7 +431,7 @@ void FrontendControllerScreen::Update() {
     func_00125970(this);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107228);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_105d48", func_00107228);
 #endif
 
 
@@ -489,7 +489,7 @@ void FrontendControllerFeedback::Update(signed char index) {
     if(value!=lane->secondary) { lane->secondary=value; control[0x77e]=1; }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107470);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_105d48", func_00107470);
 #endif
 
 
@@ -547,5 +547,5 @@ void FrontendControllerThresholds::Raise(signed char index,int mask,float value)
 // Unmatched: func_00108668: cache cursor and return-register liveness.
 // Unmatched: func_001087C8: conditional-return block layout under -G1.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001077B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_105d48", func_001077B8);
 #endif

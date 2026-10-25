@@ -11,10 +11,10 @@ void func_0012D458(void) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012D490);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_12d458", func_0012D490);
 
 s16 func_0012D508(void *arg0) {
     return (s16) ((s8) M2C_FIELD(arg0, u8 *, 0x5AAC) | (M2C_FIELD(arg0, u8 *, 0x5CA0) << 8));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012D530);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_12d458", func_0012D530);

@@ -63,20 +63,20 @@ s32 func_001D5EA8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D5F58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D6038);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D60B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D6178);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D6230);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D62F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D5F58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6038);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D60B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6178);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6230);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D62F8);
 
 void func_001D6388(s32 arg0) {
     func_00281E28(arg0 + 0x94);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D63A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D6488);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D65F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D63A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6488);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D65F8);
 
 void func_001D6C48(void *arg0)
 {
@@ -99,11 +99,11 @@ void func_001D6C48(void *arg0)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D6CB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D6E70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D6E78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D6F90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D7020);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6CB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6E70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6E78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6F90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7020);
 
 void func_001D7100(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
     s32 temp_11;
@@ -114,8 +114,8 @@ void func_001D7100(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D7128);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D7198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7128);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7198);
 
 void func_001D7238(void *arg0) {
     func_001F08E8(M2C_FIELD(arg0, s32 *, 0x1BE0));
@@ -125,7 +125,7 @@ void func_001D7258(void *arg0) {
     func_001F0958(M2C_FIELD(arg0, s32 *, 0x1BE0));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D7278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7278);
 
 void func_001D72B8(s32 arg0, void *arg1) {
     M2C_FIELD(arg1, s8 *, 0x90) = 0;
@@ -147,9 +147,9 @@ void func_001D7338(s32 arg0, void *arg1) {
     M2C_FIELD(arg1, void **, 0x1C08) = func_001092F8();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D7360);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D73D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D7460);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7360);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D73D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7460);
 
 void func_001D7498(s32 arg0, s32 arg1) {
     s32 var_3;
@@ -170,6 +170,6 @@ loop_1:
     goto loop_1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D74C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D7500);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D75E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D74C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7500);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D75E0);

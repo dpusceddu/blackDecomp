@@ -11,4 +11,4 @@ void func_00316598(void) {
     D_0040E198=0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003165C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/format_pool_reset", func_003165C0);

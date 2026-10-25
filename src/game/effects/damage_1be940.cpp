@@ -10,7 +10,7 @@ int Effects::DamageWindows::Reset(){Clear();return 1;}
 #include "game/effects/attachments.h"
 // The remaining effect functions are INCLUDE_ASM lines.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE960);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/damage_1be940", func_001BE960);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BEB48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/damage_1be940", func_001BEB48);

@@ -1,3 +1,8 @@
+#ifdef BLACK_POSE_BUILD_CONTEXT
+#define BLACK_CONTEXT_LABEL(name) "context_" name
+#else
+#define BLACK_CONTEXT_LABEL(name) name
+#endif
 #ifndef BLACK_ANIMATION_POSE_OPERATIONS_HPP
 #define BLACK_ANIMATION_POSE_OPERATIONS_HPP
 #include "animation/pose_cache.h"
@@ -22,9 +27,9 @@ struct Cache {
     static void Initialize() __asm__("func_003477D0");
 };
 struct Operations : BkAnimationInstancePS2 {
-    Pose* Blend(Pose*,Pose*,unsigned,float) __asm__("func_00346230");
+    Pose* Blend(Pose*,Pose*,unsigned,float) __asm__(BLACK_CONTEXT_LABEL("func_00346230"));
     Pose* Select(Pose*,Pose*,unsigned) __asm__("func_00346510");
-    Pose* Compose(Pose*,Pose*,unsigned) __asm__("func_00346668");
+    Pose* Compose(Pose*,Pose*,unsigned) __asm__(BLACK_CONTEXT_LABEL("func_00346668"));
     Pose* Difference(Pose*,Pose*,unsigned) __asm__("func_00346940");
     Pose* Weight(Pose*,unsigned,float) __asm__("func_00346CB0");
     Pose* Overlay(Pose*,Pose*,float) __asm__("func_00347600");
@@ -47,3 +52,5 @@ typedef char PoseSize32[sizeof(Pose)==32?1:-1];
 typedef char SlotSize670[sizeof(Slot)==0x670?1:-1];
 }
 #endif
+
+#undef BLACK_CONTEXT_LABEL

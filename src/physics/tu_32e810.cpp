@@ -20,11 +20,11 @@ void func_0032F928(int, int);
 // Unmatched: 0032F1A0 convex clipping; support-feature object lifetimes and VU allocation differ.
 // Unmatched: 0032F928 static vector construction; temporary lifetime and small-data scheduling differ.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032E810);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032ED80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032F198);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032F1A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032F928);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32e810", func_0032E810);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32e810", func_0032ED80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32e810", func_0032F198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32e810", func_0032F1A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32e810", func_0032F928);
 
 CollisionStorageRequestPS2 *func_0032FA70(CollisionStorageRequestPS2 *storage, u32 pairs)
 {

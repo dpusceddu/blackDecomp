@@ -12,5 +12,5 @@ s32 func_0036CFA8(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036CFE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036CFF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36a168_36cfa8", func_0036CFE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36a168_36cfa8", func_0036CFF0);

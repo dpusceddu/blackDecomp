@@ -14,7 +14,7 @@ bool PadBackend::Attach(Controller *controller,unsigned port) {
     return true;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026CA98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_26baf8_26ca98", func_0026CA98);
 #endif
 
 #ifdef NON_MATCHING
@@ -27,7 +27,7 @@ void PadBackend::Detach(Controller *controller,unsigned port) {
     if(valid&&port<2){controllers[port]=0;--count;controller->Close();}
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026CB38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_26baf8_26ca98", func_0026CB38);
 #endif
 
 #ifdef NON_MATCHING
@@ -60,5 +60,5 @@ void PadBackend::PollPort(int port){
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026CBA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_26baf8_26ca98", func_0026CBA8);
 #endif

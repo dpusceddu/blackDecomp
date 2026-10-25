@@ -14,4 +14,4 @@ s32 func_00384DA8(s32 arg0, void *arg1, void *arg2, void *arg3, void *arg4) {
     return func_00275748(arg1, arg2, (s32) ((arg3 != NULL) ? arg3 : sp), (s32) ((arg4 != NULL) ? arg4 : (sp + 64)), 0, 0, arg0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00384E00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/inline/linkonce_384da8", func_00384E00);

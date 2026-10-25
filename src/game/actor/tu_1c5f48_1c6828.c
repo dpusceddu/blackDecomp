@@ -12,4 +12,4 @@ s32 func_001C6828(s32 arg0, s32 arg1, s32 arg2) {
     return func_001C5F48((s32) D_0040F4C0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C6860);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1c5f48_1c6828", func_001C6860);

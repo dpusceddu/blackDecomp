@@ -10,4 +10,4 @@ void func_002807B0(s32 arg0, f32 fparg0, f32 fparg1, f32 fparg2, f32 fparg3, f32
     func_002805A0(arg0 + 0xCB7C, fparg2);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002807F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2805a0_2807b0", func_002807F8);

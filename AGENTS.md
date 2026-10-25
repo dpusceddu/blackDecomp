@@ -5,9 +5,8 @@ Short, neutral rules for coding assistants and the people directing them. They a
 
 - Start with [README.md](README.md) (setup, build), [docs/status.md](docs/status.md) (state, method, open problems) and the
   [matching handbook](docs/matching-handbook.md) before working on a TU.
-- Use the build tools in `tools/`; they run the pinned compilers through `tools/toolchain.py` (local) or an optional
-  backend plugin named in the ignored `.local/config.json` (`docs/build.md`). Never start compilers or other toolchain
-  programs directly. If the backend reports a failure ("Build backend failed"), stop and report it; do not work around it.
+- Use the build tools in `tools/`; they run the pinned local compilers installed by `tools/toolchain.py` in the Linux
+  x86-64 environment documented in README.md. Build with ordinary `ninja` targets; never start proprietary tools directly.
 - Commit only real work: source, drafts, headers, hand-edited configuration, docs and tests. Whatever the executable plus the committed
   sources and configuration determine (TU map, splat configuration, ELF layout, function boundaries, link-once owners, class skeletons,
   decompiler context) is generated into `build/` by `ninja` or a tool and never committed. Never commit game bytes, extracted files,

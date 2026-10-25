@@ -19,8 +19,8 @@ void func_00312A28(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312A40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312A80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312AD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312B40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312B78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60_312a10", func_00312A40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60_312a10", func_00312A80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60_312a10", func_00312AD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60_312a10", func_00312B40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60_312a10", func_00312B78);

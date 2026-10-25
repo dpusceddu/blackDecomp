@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024B4A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24b4a8", func_0024B4A8);
 
 #ifdef NON_MATCHING
 #include "apt/apt_pool.hpp"
@@ -34,7 +34,7 @@ Value* PropertyValue::Read(int present,void* nameHandle) {
  return (Value*)D_0043DF40;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024B618);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24b4a8", func_0024B618);
 #endif
 
 #ifdef NON_MATCHING
@@ -108,9 +108,9 @@ int PropertyValue::Write(int present,void* nameHandle,Value* incoming)
  return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024BC80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24b4a8", func_0024BC80);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024C0E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024C300);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024C410);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24b4a8", func_0024C0E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24b4a8", func_0024C300);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24b4a8", func_0024C410);

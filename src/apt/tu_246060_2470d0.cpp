@@ -18,7 +18,7 @@ Value* TextPair::Read(int unused,Token** name)
  return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002470D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_246060_2470d0", func_002470D0);
 #endif
 
 #ifdef NON_MATCHING
@@ -36,7 +36,7 @@ int TextPair::Write(int unused,Token** name,Value* incoming)
  return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00247388);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_246060_2470d0", func_00247388);
 #endif
 
 #ifdef NON_MATCHING
@@ -53,5 +53,5 @@ void TextPair::Destroy(int flags)
  if(flags&1)func_0024FA98(D_0043DEE4,this,40);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00247488);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_246060_2470d0", func_00247488);
 #endif

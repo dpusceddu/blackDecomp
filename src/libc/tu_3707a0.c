@@ -12,7 +12,7 @@ u32 func_003707A0(s32 *arg0, s32 *arg1) {
     return func_0035CA74(*arg0, *arg1) >> 0x1F;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003707C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_3707a0", func_003707C8);
 
 s32 func_00370C90(void *arg0) {
     s32 var_2;
@@ -34,4 +34,4 @@ void func_00370CE0(void *arg0, s32 arg1, s32 arg2) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00370D00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_3707a0", func_00370D00);

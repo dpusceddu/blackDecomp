@@ -40,5 +40,5 @@ void func_001AF930(BkActorAssetPS2 *asset) {
 }
 #undef RELOCATE
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AF930);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1af930", func_001AF930);
 #endif

@@ -23,7 +23,7 @@ Movement* movement=func_00135550(actor);
  EmitFallback(name,actor->AnimationPrefix(),func_00137AE0(actor),suffix,D_003F6A00,actor);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A83A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001A83A0);
 #endif
 
 #ifdef NON_MATCHING
@@ -36,7 +36,7 @@ Movement* movement=func_00135550(actor);
   Emit(name,actor->AnimationPrefix(),func_00137AE0(actor),D_003F6A20,actor);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A8618);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001A8618);
 #endif
 
 #ifdef NON_MATCHING
@@ -70,7 +70,7 @@ void Selector::Idle(char* name,Actor* actor) {
 
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A86E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001A86E0);
 #endif
 
 
@@ -82,7 +82,7 @@ void Selector::MoveAlternate(char* name,Actor* actor,long alternate) {
 if(!actor->HasLayer()) { if(!alternate)EmitFallback(name,actor->AnimationPrefix(),func_00137AE0(actor),D_003F6A80,D_0040D9C8,actor);else EmitFallback(name,actor->AnimationPrefix(),func_00137AE0(actor),D_003F6A78,D_0040D9C8,actor); }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A8D50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001A8D50);
 #endif
 
 
@@ -135,7 +135,7 @@ common:EmitFallback(name,(char*)actor+0x3b9,D_003BD140,suffix,D_003F68E0,actor);
 
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A8F78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001A8F78);
 #endif
 
 #ifdef NON_MATCHING
@@ -172,7 +172,7 @@ int state=actor->At<int>(0x39c);
  Emit(name,actor->AnimationPrefix(),func_00137AE0(actor),D_003F6B68,actor);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A9538);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001A9538);
 #endif
 
 #ifdef NON_MATCHING
@@ -215,7 +215,7 @@ speed:
  if(movement->At<int>(0x80)==1)movement->At<float>(0x6c0)=__builtin_fabsf(angle);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A9908);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001A9908);
 #endif
 
 
@@ -247,7 +247,7 @@ void Selector::Aim(char* name,Actor* actor) {
 
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A9ED0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001A9ED0);
 #endif
 
 
@@ -274,7 +274,7 @@ func_00135550(actor);
  Emit(name,actor->AnimationPrefix(),func_00137AE0(actor),suffix,actor);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AA9D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001AA9D8);
 #endif
 
 #ifdef NON_MATCHING
@@ -287,5 +287,5 @@ char suffix[6];
  Emit(name,actor->AnimationPrefix(),func_00137AE0(actor),suffix,actor);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AACF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001AACF8);
 #endif

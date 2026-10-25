@@ -34,5 +34,5 @@ bool CPathObjectManager::Add(CPathObject *object)
     return true;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F51B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2f4bc0_2f51b0", func_002F51B0);
 #endif

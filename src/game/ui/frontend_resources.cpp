@@ -106,7 +106,7 @@ extern "C" void func_00107D20(void* data) { D_0040F0F0.ReleaseData(data); }
 extern "C" void func_00107D48() {}
 extern "C" void func_00107D50() {}
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107B18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_resources", func_00107B18);
 
 #ifdef NON_MATCHING
 // Unmatched: func_00108328: nested lookup control flow and register allocation.
@@ -144,6 +144,6 @@ FrontendNamedResource* FrontendNamedArchiveManager::Find(const char* name) {
     return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108328);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_resources", func_00108328);
 #endif
 

@@ -16,5 +16,5 @@ void *func_00313C90(RwaBank *bank, u32 size) {
     return data;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313DC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313F00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_create_data", func_00313DC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_create_data", func_00313F00);

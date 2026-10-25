@@ -31,9 +31,9 @@ extern "C" void func_0010B3A8(void*,const short*,const short*,const short*,const
 extern "C" void func_0010B4D8(void*,int);
 void FrontendSaveDialog::ClearMessage() { func_0010B338(this,0);func_0010B3A8(this,0,0,0,0);func_0010B4D8(this,0);flags[3]=0;slot=-1;}
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B3A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B4E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B630);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010B3A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010B4E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010B630);
 
 #ifdef NON_MATCHING
 // Unmatched: state fallthrough scheduling and register allocation.
@@ -138,11 +138,11 @@ int FrontendSaveDialog::Enter() {
 }
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B6B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B7A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B7F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B8B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B8E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010B9B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010BA00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010BA78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010B6B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010B7A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010B7F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010B8B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010B8E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010B9B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010BA00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_dialog_10b338", func_0010BA78);

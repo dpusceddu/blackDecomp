@@ -5,11 +5,11 @@ extern s32 func_0033AFB0();
 extern s32 func_003398D8(s32, s32, s32, s32, s32, f32);
 extern s32 func_0033B4C0(M2C_UNK, M2C_UNK);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033AFB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033B4C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033B608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033B610);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033B680);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033AFB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033B4C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033B608);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033B610);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033B680);
 
 void func_0033B688(void *arg0) {
     func_0033AFB0();

@@ -14,7 +14,7 @@ void func_00315598(void) {
     D_0040E184=0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003155D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003155E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315650);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003156C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/driver_reset", func_003155D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/driver_reset", func_003155E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/driver_reset", func_00315650);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/driver_reset", func_003156C0);

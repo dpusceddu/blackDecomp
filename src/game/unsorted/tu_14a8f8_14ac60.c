@@ -12,4 +12,4 @@ s32 func_0014AC60(s32 *arg0) {
     return 5;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014BCA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14a8f8_14ac60", func_0014BCA0);

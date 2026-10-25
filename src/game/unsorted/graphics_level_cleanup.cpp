@@ -135,8 +135,8 @@ int LevelCallbacks::Start(const char*){
  return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020EF28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020F268);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_level_cleanup", func_0020EF28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_level_cleanup", func_0020F268);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020F490);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_level_cleanup", func_0020F490);

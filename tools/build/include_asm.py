@@ -3,15 +3,15 @@
 
 A source file lists every function of its address range in address order. A function that is still assembly is a line
 
-    INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00100628);
+    INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/<file>", func_00100628);
 
-(include/include_asm.h makes it a harmless declaration for the compiler); a recovered function is ordinary C or C++.
+(include/include_asm.h emits an assembler include in the TU object); a recovered function is ordinary C or C++.
 Drafts that do not match yet sit in `#ifdef NON_MATCHING` blocks whose `#else` branch holds the marker:
 
     #ifdef NON_MATCHING
     int func_001B78D8(BkEffectPoolPS2* pool) { ... }
     #else
-    INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B78D8);
+    INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/<file>", func_001B78D8);
     #endif
 
 `markers(text, defines)` evaluates only `#ifdef`, `#ifndef`, `#if 0/1`, `#if [!]defined(X)`, `#else` and `#endif`

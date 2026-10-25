@@ -90,7 +90,7 @@ int CAccessWaysData::Load(const void* resource)
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCB50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_accessways", func_002FCB50);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: original short conversion and read-count lifetimes differ.
@@ -116,7 +116,7 @@ int CAccessWaysData::LoadFile(const void *resource){
  AccessFile.close(file);return true;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCEC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_accessways", func_002FCEC0);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: serializer cleanup branches and callback-base/local register lifetimes.
@@ -159,5 +159,5 @@ int CAccessWaysData::Save(const void* path)
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD4A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_accessways", func_002FD4A0);
 #endif

@@ -21,7 +21,7 @@ void func_00281908(s32 arg0, void *arg1) {
     M2C_FIELD(arg1, u16 *, 0x30) = (u16) (M2C_FIELD(arg1, u16 *, 0x30) & 0xFFFE);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281940);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_2818d0", func_00281940);
 
 void func_00281948(s32 arg0, s32 arg1) {
     func_002819E0();

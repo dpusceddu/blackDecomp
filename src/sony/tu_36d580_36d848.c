@@ -16,4 +16,4 @@ s32 func_0036D848(void) {
     return ((*(u32 *)(sp + 4) >> 0xD) & 7) == 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036D8B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36d580_36d848", func_0036D8B0);

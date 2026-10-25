@@ -111,7 +111,7 @@ bool Perception::Refresh(unsigned int index)
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030F160);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_entity_manager", func_0030F160);
 #endif
 
 #ifdef NON_MATCHING
@@ -173,7 +173,7 @@ void Perception::FindNearest()
     if (dirtyGroup) pendingLine = false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030F678);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_entity_manager", func_0030F678);
 #endif
 
 #ifdef NON_MATCHING
@@ -233,5 +233,5 @@ void Perception::UpdatePair(int a, int b, unsigned char lineCheck)
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030F940);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_entity_manager", func_0030F940);
 #endif

@@ -3,8 +3,8 @@
 #include "game/frontend/movie_stream.hpp"
 extern "C" int func_00109308(void*,int,unsigned,const char*,int,void*,int,unsigned,unsigned);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109308);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001093B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_movie_109308", func_00109308);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_movie_109308", func_001093B0);
 
 int FrontendStreamScheduler::Schedule(const char* name,int index,int kind,int callback,void* data,unsigned callbackFlags,unsigned flags) {
     return func_00109308(this,index,flags==0x02000000?1u:2u,name,callback,data,kind,callbackFlags,flags);

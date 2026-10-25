@@ -19,8 +19,8 @@ static inline s128 Project(const s128*planes,s128 sphere){BkEffectPointPS2 s=BkE
 static inline bool AnyGreater(s128 a,float limit){BkEffectPointPS2 v=BkEffectSpillPS2(a);return v.x>limit||v.y>limit||v.z>limit||v.w>limit;}
 void TimedBank::Render(){float now=*(float*)(D_0040F4D0+0x20);for(int i=0;i<8;i++){TimedSlot*slot=slots+i;if(slot->started<=now&&now<slot->expires){s128 sphere=*(s128*)slot->asset;BkEffectPointPS2 p=BkEffectSpillPS2(sphere);float scale=(now-slot->started)*slot->rate+slot->offset;BkEffectPointPS2 scaled=p;scaled.w*=scale;sphere=*(s128*)&scaled;s128 world=BkEffectTransformPS2(slot->input.row,sphere);BkEffectPointPS2 w=BkEffectSpillPS2(world);w.w=scaled.w;sphere=*(s128*)&w;float radius=w.w,negative=-radius;int visibility=1;const s128*planes=(s128*)(D_0040F4C0+0xcfd0);for(int j=0;j<2;j++){float d=Plane(planes[j],sphere);if(radius<d){visibility=0;break;}if(negative<d)visibility=3;}if(visibility&&AnyGreater(Project(planes+2,sphere),radius))visibility=0;if(visibility==1&&AnyGreater(Project(planes+6,sphere),negative))visibility=3;union{float f;unsigned u;}alpha;alpha.f=slot->alpha;if(visibility&&(alpha.u&0x7f800000)>0x37800000){char*asset=(char*)slot->asset;func_001AF738(0,D_0040F4C0+0x14,*(int*)(asset+0x1c),*(int*)(asset+0x38),*(int*)(asset+0x40),&slot->unknowna4,&slot->output,visibility==1,1);}}}}
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE330);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE4C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE7F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE890);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1be2f0_1be330", func_001BE330);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1be2f0_1be330", func_001BE4C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1be2f0_1be330", func_001BE7F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1be2f0_1be330", func_001BE890);
 #endif

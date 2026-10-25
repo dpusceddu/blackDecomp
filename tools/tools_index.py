@@ -23,16 +23,16 @@ SECTIONS = [
         'toolchain.py', 'compile.py', 'check_versions.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',
         'badges.py', 'tools_index.py']),
     ('Build internals (`tools/build/`)', [
-        'build/backend.py', 'build/sandbox.py', 'build/build_objects.py', 'build/build_job.py', 'build/split_objects.py',
+        'build/object_graph.py', 'build/object_compile.py', 'build/unit_link.py', 'build/unit_compare.py', 'build/asm_syntax.py', 'build/split_objects.py',
         'build/splat_config.py', 'build/make_ld.py', 'build/link_support.py', 'build/pack_elf.py', 'build/elf_layout.py',
         'build/elfinfo.py', 'build/elfobj.py', 'build/include_asm.py', 'build/splits.py', 'build/units.py',
-        'build/units_verify.py', 'build/layout.py', 'build/nm_build.py', 'build/text_placement.py', 'build/constant_relocs.py',
-        'build/source_data.py', 'build/ownership.py', 'build/preflight.py', 'build/assembler.py', 'build/patch_ps2eeas.py', 'build/fixasm.py', 'build/objdiff_job.py',
+        'build/units_verify.py', 'build/layout.py', 'build/text_placement.py', 'build/constant_relocs.py',
+        'build/source_data.py', 'build/ownership.py', 'build/preflight.py', 'build/assembler.py', 'build/patch_ps2eeas.py', 'build/fixasm.py',
         'build/build_telemetry.py', 'build/tus.py', 'build/linkonce_owners.py', 'build/boundaries.py']),
     ('Automatic pipeline (`tools/pipeline/`)', [
         'pipeline/tu_files.py', 'pipeline/m2c_input.py', 'pipeline/m2c_wrap.py', 'pipeline/ee_prep.py', 'pipeline/vu0_m2c.py',
-        'pipeline/vu0_micro.py', 'pipeline/stack_context.py', 'pipeline/context_recovery.py', 'pipeline/permuter_service.py',
-        'pipeline/permuter_worker.py', 'pipeline/permuter_lanes.py', 'pipeline/compiler_dumps.py']),
+        'pipeline/vu0_micro.py', 'pipeline/stack_context.py', 'pipeline/context_recovery.py',
+        'pipeline/compiler_dumps.py']),
     ('Maintainer and analysis tools (`tools/maint/`)', [
         'maint/class_skeletons.py', 'maint/rtti_evidence.py',
         'maint/shift_test.py', 'maint/handbook_controls.py', 'maint/symbols.py', 'maint/discs.py', 'maint/iso.py', 'maint/inputs.py']),

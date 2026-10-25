@@ -68,8 +68,7 @@ Treat proposed edges as likely and the joins inside a TU as certain; a stretch o
 several objects.
 
 **Per-TU flags.** `AUTODECOMP_TU=1` (or `autodecomp.py run --tu all|COMPILER`) tries each function with its TU's compiler and flags first
-(`--cc=NAME` in a flag set selects another compiler; `register` turns it into the unit's `compiler`). `build_job.py` runs the native
-Sony compilers from the toolchain. `autodecomp.py run --cc NAME` and `permute --cc NAME` are for experiments.
+(`--cc=NAME` in a flag set selects another compiler; `register` turns it into the unit's `compiler`). `object_compile.py` runs the selected compiler and assembler from the pinned local toolchain. `autodecomp.py run --cc NAME` and `permute --cc NAME` are for experiments.
 
 
 ## Assemblers and short-loop padding
@@ -87,7 +86,7 @@ instruction bytes are edited. Existing recipes stay in place: uniform substituti
 references; `tools/build/patch_ps2eeas.py` retains the original, verifies full hashes/preimages and is idempotent.
 Compilation checks the derivative hash again before execution. Add `--assembler=sn-min6` to a
 unit's flags or pass it to `tools/compile.py`; the selected compiler emits untouched `-S` output.
-Candidate and production caches include the recipe. The automatic pipeline tries this verified
+Candidate caches include the recipe; production Ninja specifications record it. The automatic pipeline tries this verified
 fallback before the older `sn-2.73a` assembler; `gas-2.40`, `gas-2.40-fix` and `sony-2.9` remain
 explicit experiments. Every new match must pass the full image comparison.
 
@@ -102,10 +101,11 @@ unresolved); full-image byte identity remains mandatory. Consistent filtered coh
 
 ## One file per TU
 
-Each TU of the map that has recovered code is one file (`src/<library>/tu_<address>.c|cpp`, [units.md](units.md)); the split list
-records where a TU is several files. Compiled with `-ffunction-sections`, SN 1.36 writes `.text.<symbol>` per function without
-changing a code byte, `make_ld.py` renames each section to the slot of its function and `units_verify.py` checks each section
-against the span of the original function, so INCLUDE_ASM functions (orphan pieces, hard cases) stay between the compiled ones.
-Constants keep one section per file (the literal pool of GCC 2.95 has no per-constant sections: `-fdata-sections` only splits
-named variables), so a TU whose assembly functions between its compiled functions own constants is several files. Parts of a TU that disagree in
-flags, language, declarations or constants are separate files (`note:` in the split list says why).
+Each source file produces one object containing its C/C++ and real INCLUDE_ASM functions. The linker places ordinary
+named function sections in original order, including disjoint ranges owned by a file. It does not rename sections to
+addresses or require the recovered functions to be contiguous. Three complete C++ files keep their original combined
+text during compilation to preserve CFI ranges; object normalization separates their functions before linking.
+
+Constants retain their audited ownership and positions. Historical source partitions with different flags, languages,
+declarations or constant ownership remain explicit in the split list. A new recovered function normally replaces its
+INCLUDE_ASM line in place; it does not require splitting its file. See [build.md](build.md).

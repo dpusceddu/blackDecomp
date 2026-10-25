@@ -8,12 +8,12 @@ extern s32 func_00178F18();
 extern s32 func_00176310();
 extern s32 func_00173610();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001891C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00189208);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00189250);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001892C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001892C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00189310);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1891c0", func_001891C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1891c0", func_00189208);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1891c0", func_00189250);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1891c0", func_001892C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1891c0", func_001892C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1891c0", func_00189310);
 
 void * func_001893A0(void *arg0) {
     return (M2C_FIELD(arg0, s32 *, 0x120) * 0x60) + arg0 + 0x20;

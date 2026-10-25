@@ -17,4 +17,4 @@ void ExpiryEffect::Update(float dt){
 
 // Unmatched: 0x14FBE8 matrix-copy and vector/FPU operand order after reference-lifetime recovery.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014FBE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/actor_c388", func_0014FBE8);

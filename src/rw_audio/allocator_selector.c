@@ -17,4 +17,4 @@ s32 func_003131C0(void) {
     return result;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003131F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/allocator_selector", func_003131F8);

@@ -20,4 +20,4 @@ void func_00314570(s32 *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003145C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_312bd0_314570", func_003145C8);

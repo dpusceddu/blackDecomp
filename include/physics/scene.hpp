@@ -1,3 +1,8 @@
+#ifdef BLACK_SCENE_BUILD_CONTEXT
+#define BLACK_CONTEXT_LABEL(name) "context_" name
+#else
+#define BLACK_CONTEXT_LABEL(name) name
+#endif
 #ifndef BLACK_PHYSICS_SCENE_HPP
 #define BLACK_PHYSICS_SCENE_HPP
 #include "ps2/prelude.h"
@@ -142,10 +147,10 @@ struct PhysicsScene {
  void UpdateDirtyBounds() __asm__("func_0032D358");
 
  void QueryDirtyGroups() __asm__("func_0032D7C0");
- void CollectIslandPairs(unsigned,unsigned,unsigned) __asm__("func_0032D990");
+ void CollectIslandPairs(unsigned,unsigned,unsigned) __asm__(BLACK_CONTEXT_LABEL("func_0032D990"));
  void PublishSleepWake() __asm__("func_0032DCE8");
  int RebuildGroupBounds(unsigned,PhysicsBounds*) __asm__("func_0032C838");
- int UpdateShapeBounds(PhysicsInstance*,unsigned) __asm__("func_0032C5A0");
+ int UpdateShapeBounds(PhysicsInstance*,unsigned) __asm__(BLACK_CONTEXT_LABEL("func_0032C5A0"));
  void UpdateSpatialGroup(unsigned);
  void UpdateDirtyGroups() __asm__("func_0032D590");
  void RetireShapePairs(unsigned ordinal){while(shapePairs[ordinal]){PhysicsPairNode* node=shapePairs[ordinal];ReleasePairNode(node,shapePairs);ReleasePairNode(node->partner,shapePairs);}}
@@ -156,7 +161,7 @@ struct PhysicsScene {
  void AllocatePair(unsigned,unsigned);
  void SetCompoundUpdateMask(PhysicsCompound*,int) __asm__("func_0032E218");
  void DeregisterCompound(PhysicsCompound*) __asm__("func_0032CDE0");
- int QueryGroup(unsigned,const PhysicsBounds*) __asm__("func_0032C0D8");
+ int QueryGroup(unsigned,const PhysicsBounds*) __asm__(BLACK_CONTEXT_LABEL("func_0032C0D8"));
 };
 static inline unsigned PhysicsAlignUp(unsigned n,unsigned a){return (n+a-1)&-a;}
 extern "C" {
@@ -193,3 +198,5 @@ extern "C" {
  void func_0037C4E0(PhysicsSolver*);
 }
 #endif
+
+#undef BLACK_CONTEXT_LABEL

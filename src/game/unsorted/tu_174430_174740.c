@@ -37,4 +37,4 @@ block_9:
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001747D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_174430_174740", func_001747D0);

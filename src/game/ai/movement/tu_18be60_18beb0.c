@@ -11,8 +11,8 @@ s32 func_0018BEB0(s32 arg0, s32 arg1) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018BEE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018BF28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018BFA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018BFE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C068);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18be60_18beb0", func_0018BEE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18be60_18beb0", func_0018BF28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18be60_18beb0", func_0018BFA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18be60_18beb0", func_0018BFE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18be60_18beb0", func_0018C068);

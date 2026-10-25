@@ -35,6 +35,6 @@ void Method4(Entity*e,unsigned char b){e->Method4(b);}
 // Unmatched: the registered-entity forwarder retains an unresolved return contract and branch layout.
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0410);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0750);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0D20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_factory", func_002E0410);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_factory", func_002E0750);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_factory", func_002E0D20);

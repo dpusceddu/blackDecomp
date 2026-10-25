@@ -25,8 +25,8 @@ M2C_UNK ** func_00170258(M2C_UNK **arg0) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00170320);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00170668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16eb80_170258", func_00170320);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16eb80_170258", func_00170668);
 
 void func_00170670(void *arg0, f32 fparg0) {
     M2C_FIELD(M2C_FIELD(arg0, void **, 0x60), f32 *, 4) = fparg0;

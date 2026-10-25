@@ -63,7 +63,7 @@ void func_0034F1C0(void *arg0, f32 *arg1) {
 
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034F1C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34eae0_34ed80", func_0034F1C0);
 #endif
 
 s32 func_0034F2D0(void *arg0) {

@@ -118,5 +118,5 @@ int PointMapper::Build(ChildBuffers *config) {
     return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB140);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/point_mapper_configure", func_002DB140);
 #endif

@@ -30,8 +30,15 @@ ASM_DIR = 'asm/SLUS_213.76/nonmatchings'
 SPLIT_LINE = re.compile(r'^\s*- \{src: (\S+), range: \[(0x[0-9a-f]+)')
 
 
-def marker(addr):
-    return include_asm.marker_line('func_%08X' % addr, ASM_DIR)
+def asm_directory(source):
+    source=Path(source)
+    if source.parts[0]=='src':
+        source=source.relative_to('src')
+    return ASM_DIR+'/'+source.with_suffix('').as_posix()
+
+
+def marker(addr, source=None):
+    return include_asm.marker_line('func_%08X' % addr, asm_directory(source) if source else ASM_DIR)
 
 
 def insert_declarations(text, decls):
@@ -104,12 +111,13 @@ def restore_function(addr, record, slug=S.DEFAULT_SLUG):
         else:
             text = path.read_text()
             if 'func_%08X' % addr not in text:
-                path.write_text(include_asm.insert(text, 'func_%08X' % addr, ASM_DIR))
+                directory = next((m.directory for m in include_asm.markers(record['text']) if m.name=='func_%08X'%addr), asm_directory(record['src']))
+                path.write_text(include_asm.insert(text, 'func_%08X' % addr, directory))
 
 
 def same_recipe(split, compiler, flags):
     base = lambda fl: [f for f in fl if f != '-ffunction-sections']
-    return split.compiler == compiler and base(split.flags) == base(flags) and not split.assembler and split.sections
+    return split.compiler == compiler and base(split.flags) == base(flags) and not split.assembler
 
 
 def find_split(addr, compiler, flags, slug=S.DEFAULT_SLUG):
@@ -127,7 +135,7 @@ def new_file(path, lo, hi, table, header=('#include "include_asm.h"', '#include 
     """Text of a fresh TU file for [lo, hi): INCLUDE_ASM for every function."""
     starts = [a for a, _ in table]
     funcs = starts[bisect.bisect_left(starts, lo):bisect.bisect_left(starts, hi)]
-    return '\n'.join(header) + '\n\n' + '\n'.join(marker(a) for a in funcs) + '\n'
+    return '\n'.join(header) + '\n\n' + '\n'.join(marker(a, path) for a in funcs) + '\n'
 
 
 def unique_path(addr, suffix='.c', taken=()):
@@ -149,6 +157,7 @@ def add_function(addr, code, decls, compiler, flags, symbol=None, single=False, 
     if found:
         split, text = found
         record['path'] = split.src
+        record['asm_directory'] = next(m.directory for m in include_asm.markers(text,split.defines()) if m.name=='func_%08X'%addr)
         (ROOT / split.src).write_text(insert_declarations(include_asm.replace(text, 'func_%08X' % addr, code.rstrip('\n')), decls))
     else:
         path = unique_path(addr)
@@ -184,7 +193,7 @@ def revert_function(record, slug=S.DEFAULT_SLUG):
         text = path.read_text()
         code = record['code'].rstrip('\n')
         if code in text:
-            path.write_text(text.replace(code, marker(record['addr']), 1))
+            path.write_text(text.replace(code, include_asm.marker_line('func_%08X'%record['addr'],record.get('asm_directory',asm_directory(record['path']))), 1))
     if record.get('symbol') and record['symbol'] != 'func_%08X' % record['addr']:
         sym = S.config_dir(slug) / 'symbols.txt'
         rows = [(n, a, k or 'func') for n, a, k in S.parse_symbols(sym.read_text())

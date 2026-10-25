@@ -25,7 +25,7 @@ s32 func_003156C8(s32 arg0, void *arg1) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315718);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3156c8", func_00315718);
 #ifdef NON_MATCHING
 extern void *func_0035C544(void *,const void *,u32);
 extern s32 func_00315440(RwaSoundDriver *,RwaFormat *);
@@ -73,7 +73,7 @@ initialized:
 failure:return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315790);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3156c8", func_00315790);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: format selection register allocation and control flow differ.
@@ -93,6 +93,6 @@ u32 func_003159C8(RwaSound *sound,RwaFormat *source,RwaFormat *output) {
     return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003159C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3156c8", func_003159C8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315B58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3156c8", func_00315B58);

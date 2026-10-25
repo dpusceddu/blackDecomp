@@ -8,4 +8,4 @@ void func_00348B18(s32 arg0, s8 *arg1) {
     func_00348A90(arg0, func_00352A30(arg1));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00348B50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_348a90_348b18", func_00348B50);

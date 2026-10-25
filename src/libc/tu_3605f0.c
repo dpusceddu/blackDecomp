@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003605F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_3605f0", func_003605F0);
 
 #include "ps2/recovered_types.h"
 extern s32 func_003605F0(s32, void *, void *, s32);

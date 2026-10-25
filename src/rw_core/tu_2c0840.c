@@ -1,17 +1,17 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0840);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0A98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0C10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0D58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C1178);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C12B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C14A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C18E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C34A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C4B38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C6570);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C0840);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C0A98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C0C10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C0D58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C1178);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C12B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C14A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C18E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C34A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C4B38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C6570);
 
 #include "ps2/recovered_types.h"
 extern void * D_0040E6C8;
@@ -46,4 +46,4 @@ s32 func_002C6620(s32 arg0, s32 arg1, s32 arg2) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C6668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2c0840", func_002C6668);

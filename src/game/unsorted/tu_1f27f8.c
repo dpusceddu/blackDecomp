@@ -13,7 +13,7 @@ extern s32 func_002019A0();
 extern void func_001F4DE0();
 extern void func_001F4D30();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F27F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f27f8", func_001F27F8);
 
 void func_001F2828(void) {
 
@@ -70,10 +70,10 @@ void func_001F29E8(s32 arg0, s32 arg1, s32 arg2) {
     func_002019A0(M2C_FIELD(D_0040F518, s32 *, 0x2C), arg2);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F2A30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f27f8", func_001F2A30);
 
 void func_001F2A38(void) {
     func_001F4D30(M2C_FIELD(D_0040F518, s32 *, 0x14));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F2A60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f27f8", func_001F2A60);

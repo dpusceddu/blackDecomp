@@ -20,9 +20,9 @@ void func_00370188(void *arg0, void *arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003701A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003701D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00370270);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_3700d0_370168", func_003701A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_3700d0_370168", func_003701D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_3700d0_370168", func_00370270);
 
 void *func_00370448(void *arg0, s32 arg1, s32 arg2, s32 arg3)
 {

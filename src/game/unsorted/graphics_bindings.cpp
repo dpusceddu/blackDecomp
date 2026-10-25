@@ -105,10 +105,10 @@ func_0020DCF8(&D_00492400,"FE_REQUIREMENT4");
 return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00213938);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002139C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00213CA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00213DC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00213FA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00214130);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00214300);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_bindings", func_00213938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_bindings", func_002139C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_bindings", func_00213CA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_bindings", func_00213DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_bindings", func_00213FA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_bindings", func_00214130);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_bindings", func_00214300);

@@ -41,5 +41,5 @@ void func_0034EAE0(PlaybackState* state, void *collection, void *owner) {
     state->translation[3] = 1.0f;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034EAE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34eae0", func_0034EAE0);
 #endif

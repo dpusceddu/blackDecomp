@@ -17,7 +17,7 @@ void func_00158F08(void *arg0)
   M2C_FIELD(arg0, s8 *, 0x20) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00158F50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_158f08", func_00158F50);
 
 void func_00159120(void *arg0) {
     s32 temp_4;
@@ -40,11 +40,11 @@ s32 func_00159148(void *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00159198);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00159938);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00159AE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015A098);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015A400);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_158f08", func_00159198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_158f08", func_00159938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_158f08", func_00159AE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_158f08", func_0015A098);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_158f08", func_0015A400);
 
 s32 func_0015A8D0(void *arg0) {
     void *temp_5;

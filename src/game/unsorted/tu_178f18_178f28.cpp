@@ -9,5 +9,5 @@ int IsUnblockedPlayer(void* object) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00178F28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18_178f28", func_00178F28);
 #endif

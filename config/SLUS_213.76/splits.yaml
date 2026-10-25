@@ -4,7 +4,7 @@
 # owns exactly those addresses (a file compiled several times with -D selectors, no markers); its range is only their bounding interval.
 # `assembler: sn-min6` is a per-file recipe that reproduces the bytes, not a recovered rule (docs/status.md, open problem 4).
 variant: SLUS_213.76
-defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas], sections: true}
+defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas]}
 splits:
   - {src: src/game/unsorted/tu_100000.c, range: [0x100000, 0x100218]}
   - {src: src/game/unsorted/tu_100218.c, range: [0x100218, 0x100220], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
@@ -45,7 +45,7 @@ splits:
   - {src: src/game/ui/tu_105808.c, range: [0x105808, 0x105858]}
   - {src: src/game/unsorted/tu_105858.c, range: [0x105858, 0x105bc0]}
   - {src: src/game/ui/tu_105bc0.c, range: [0x105bc0, 0x105d48], note: flags or language differ}
-  - {src: src/game/ui/tu_105bc0_105d48.cpp, range: [0x105d48, 0x106008], sections: false}
+  - {src: src/game/ui/tu_105bc0_105d48.cpp, range: [0x105d48, 0x106008]}
   - {src: src/game/ui/tu_105bc0.c, range: [0x106008, 0x106068]}
   - {src: src/game/ui/tu_105bc0_106068.c, range: [0x106068, 0x106080], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/ui/tu_105bc0_105d48.cpp, range: [0x106080, 0x1063f8]}
@@ -67,10 +67,10 @@ splits:
   - {src: src/game/ui/tu_105bc0_107e10.c, range: [0x107e10, 0x107fb8]}
   - {src: src/game/ui/frontend_resource_thread.cpp, range: [0x107fb8, 0x1080a0]}
   - {src: src/game/ui/frontend_callback.cpp, range: [0x1080a0, 0x1080c0], flags: [-O1, -G0, -snas]}
-  - {src: src/game/ui/tu_105bc0_1080c0.c, range: [0x1080c0, 0x108328], sections: false}
+  - {src: src/game/ui/tu_105bc0_1080c0.c, range: [0x1080c0, 0x108328]}
   - {src: src/game/ui/frontend_resources.cpp, range: [0x108328, 0x1084f8]}
-  - {src: src/game/ui/tu_105bc0_1084f8.c, range: [0x1084f8, 0x108718], sections: false}
-  - {src: src/game/ui/tu_105bc0_108718.c, range: [0x108718, 0x108818], sections: false}
+  - {src: src/game/ui/tu_105bc0_1084f8.c, range: [0x1084f8, 0x108718]}
+  - {src: src/game/ui/tu_105bc0_108718.c, range: [0x108718, 0x108818]}
   - {src: src/game/ui/frontend_language_lookup.cpp, range: [0x108818, 0x108890], flags: [-O2, -G1]}
   - {src: src/game/ui/frontend_string_request.cpp, range: [0x108890, 0x108958], flags: [-O2, -G1, -fbyte-bool]}
   - {src: src/game/ui/frontend_strings_loaded.cpp, range: [0x108958, 0x1089b0], flags: [-O2, -G1]}
@@ -116,15 +116,15 @@ splits:
   - {src: src/game/ui/frontend_profile_remember.cpp, range: [0x10f620, 0x10f648], flags: [-O1, -G0, -snas]}
   - {src: src/game/ui/tu_10ebd0_10f258.c, range: [0x10f648, 0x10f6d8]}
   - {src: src/game/unsorted/tu_10ebd0_10f6d8.c, range: [0x10f6d8, 0x10f700], assembler: sn-2.73a}
-  - {src: src/game/unsorted/tu_10f700.c, range: [0x10f700, 0x10f740], sections: false}
-  - {src: src/game/unsorted/tu_10f700_10f740.c, range: [0x10f740, 0x110010], sections: false}
-  - {src: src/game/unsorted/tu_10f700_110010.c, range: [0x110010, 0x110430], sections: false}
-  - {src: src/game/unsorted/tu_10f700_110430.c, range: [0x110430, 0x110610], sections: false}
-  - {src: src/game/unsorted/tu_10f700_110610.c, range: [0x110610, 0x110698], sections: false}
-  - {src: src/game/unsorted/tu_10f700_110698.c, range: [0x110698, 0x110858], sections: false}
-  - {src: src/game/unsorted/tu_10f700_110858.c, range: [0x110858, 0x110a88], sections: false}
+  - {src: src/game/unsorted/tu_10f700.c, range: [0x10f700, 0x10f740]}
+  - {src: src/game/unsorted/tu_10f700_10f740.c, range: [0x10f740, 0x110010]}
+  - {src: src/game/unsorted/tu_10f700_110010.c, range: [0x110010, 0x110430]}
+  - {src: src/game/unsorted/tu_10f700_110430.c, range: [0x110430, 0x110610]}
+  - {src: src/game/unsorted/tu_10f700_110610.c, range: [0x110610, 0x110698]}
+  - {src: src/game/unsorted/tu_10f700_110698.c, range: [0x110698, 0x110858]}
+  - {src: src/game/unsorted/tu_10f700_110858.c, range: [0x110858, 0x110a88]}
   - {src: src/game/unsorted/tu_10f700_110a88.c, range: [0x110a88, 0x112808], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
-  - {src: src/game/unsorted/tu_10f700_112808.cpp, range: [0x112808, 0x113fe8], sections: false}
+  - {src: src/game/unsorted/tu_10f700_112808.cpp, range: [0x112808, 0x113fe8]}
   - {src: src/game/unsorted/tu_10f700_110a88.c, range: [0x113fe8, 0x114160]}
   - {src: src/game/unsorted/game_methods.cpp, range: [0x114160, 0x114168]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x114168, 0x115d60]}
@@ -137,42 +137,42 @@ splits:
   - {src: src/game/unsorted/tu_116de8.c, range: [0x116de8, 0x116e28]}
   - {src: src/game/unsorted/tu_116e28.c, range: [0x116e28, 0x116e80]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x116e80, 0x116f08]}
-  - {src: src/game/unsorted/tu_116f08.c, range: [0x116f08, 0x116f68], sections: false}
-  - {src: src/game/unsorted/tu_116f60_116f68.c, range: [0x116f68, 0x1175c0], sections: false}
-  - {src: src/game/unsorted/tu_116f60_1175c0.c, range: [0x1175c0, 0x1175e8], sections: false}
+  - {src: src/game/unsorted/tu_116f08.c, range: [0x116f08, 0x116f68]}
+  - {src: src/game/unsorted/tu_116f60_116f68.c, range: [0x116f68, 0x1175c0]}
+  - {src: src/game/unsorted/tu_116f60_1175c0.c, range: [0x1175c0, 0x1175e8]}
   - {src: src/game/unsorted/tu_116f60_1175e8.c, range: [0x1175e8, 0x117630], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
-  - {src: src/game/unsorted/tu_116f60_117630.c, range: [0x117630, 0x117830], sections: false}
-  - {src: src/game/unsorted/tu_116f60_117830.c, range: [0x117830, 0x1178d8], sections: false}
-  - {src: src/game/unsorted/tu_116f60_1178d8.c, range: [0x1178d8, 0x117930], sections: false}
-  - {src: src/game/unsorted/tu_116f60_117930.c, range: [0x117930, 0x118078], sections: false}
-  - {src: src/game/unsorted/tu_116f60_118078.c, range: [0x118078, 0x118158], sections: false}
-  - {src: src/game/unsorted/tu_116f60_118158.c, range: [0x118158, 0x118240], sections: false}
-  - {src: src/game/unsorted/tu_116f60_118240.c, range: [0x118240, 0x118290], sections: false}
-  - {src: src/game/unsorted/tu_116f60_118290.c, range: [0x118290, 0x118320], sections: false}
-  - {src: src/game/unsorted/tu_116f60_118320.c, range: [0x118320, 0x118410], sections: false}
-  - {src: src/game/unsorted/tu_116f60_118410.c, range: [0x118410, 0x118800], sections: false}
-  - {src: src/game/unsorted/tu_116f60_118800.c, range: [0x118800, 0x118858], sections: false}
-  - {src: src/game/unsorted/tu_116f60_118858.c, range: [0x118858, 0x1188e0], sections: false}
-  - {src: src/game/unsorted/tu_116f60_1188e0.c, range: [0x1188e0, 0x1199d8], sections: false}
+  - {src: src/game/unsorted/tu_116f60_117630.c, range: [0x117630, 0x117830]}
+  - {src: src/game/unsorted/tu_116f60_117830.c, range: [0x117830, 0x1178d8]}
+  - {src: src/game/unsorted/tu_116f60_1178d8.c, range: [0x1178d8, 0x117930]}
+  - {src: src/game/unsorted/tu_116f60_117930.c, range: [0x117930, 0x118078]}
+  - {src: src/game/unsorted/tu_116f60_118078.c, range: [0x118078, 0x118158]}
+  - {src: src/game/unsorted/tu_116f60_118158.c, range: [0x118158, 0x118240]}
+  - {src: src/game/unsorted/tu_116f60_118240.c, range: [0x118240, 0x118290]}
+  - {src: src/game/unsorted/tu_116f60_118290.c, range: [0x118290, 0x118320]}
+  - {src: src/game/unsorted/tu_116f60_118320.c, range: [0x118320, 0x118410]}
+  - {src: src/game/unsorted/tu_116f60_118410.c, range: [0x118410, 0x118800]}
+  - {src: src/game/unsorted/tu_116f60_118800.c, range: [0x118800, 0x118858]}
+  - {src: src/game/unsorted/tu_116f60_118858.c, range: [0x118858, 0x1188e0]}
+  - {src: src/game/unsorted/tu_116f60_1188e0.c, range: [0x1188e0, 0x1199d8]}
   - {src: src/game/unsorted/tu_1199d8.c, range: [0x1199d8, 0x11c558], note: flags or language differ}
   - {src: src/game/unsorted/tu_1199d8_11c558.c, range: [0x11c558, 0x11c878], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/unsorted/tu_11c878.c, range: [0x11c878, 0x11c8c0], assembler: sn-min6}
   - {src: src/game/unsorted/tu_11c8c0.c, range: [0x11c8c0, 0x11c930]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x11c930, 0x11cd00]}
   - {src: src/game/unsorted/tu_11cd00.c, range: [0x11cd00, 0x11d358]}
-  - {src: src/game/unsorted/tu_11d358.c, range: [0x11d358, 0x11de30], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11de30.c, range: [0x11de30, 0x11e2e0], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11e2e0.c, range: [0x11e2e0, 0x11e488], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11e488.c, range: [0x11e488, 0x11e6c8], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11e6c8.c, range: [0x11e6c8, 0x11ea40], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11ea40.c, range: [0x11ea40, 0x11ebf0], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11ebf0.c, range: [0x11ebf0, 0x11ed00], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11ed00.c, range: [0x11ed00, 0x11ed98], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11ed98.c, range: [0x11ed98, 0x11eec8], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11eec8.c, range: [0x11eec8, 0x11f000], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11f000.c, range: [0x11f000, 0x11f350], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11f350.c, range: [0x11f350, 0x11f8f8], sections: false}
-  - {src: src/game/unsorted/tu_11d358_11f8f8.c, range: [0x11f8f8, 0x11fc80], sections: false}
+  - {src: src/game/unsorted/tu_11d358.c, range: [0x11d358, 0x11de30]}
+  - {src: src/game/unsorted/tu_11d358_11de30.c, range: [0x11de30, 0x11e2e0]}
+  - {src: src/game/unsorted/tu_11d358_11e2e0.c, range: [0x11e2e0, 0x11e488]}
+  - {src: src/game/unsorted/tu_11d358_11e488.c, range: [0x11e488, 0x11e6c8]}
+  - {src: src/game/unsorted/tu_11d358_11e6c8.c, range: [0x11e6c8, 0x11ea40]}
+  - {src: src/game/unsorted/tu_11d358_11ea40.c, range: [0x11ea40, 0x11ebf0]}
+  - {src: src/game/unsorted/tu_11d358_11ebf0.c, range: [0x11ebf0, 0x11ed00]}
+  - {src: src/game/unsorted/tu_11d358_11ed00.c, range: [0x11ed00, 0x11ed98]}
+  - {src: src/game/unsorted/tu_11d358_11ed98.c, range: [0x11ed98, 0x11eec8]}
+  - {src: src/game/unsorted/tu_11d358_11eec8.c, range: [0x11eec8, 0x11f000]}
+  - {src: src/game/unsorted/tu_11d358_11f000.c, range: [0x11f000, 0x11f350]}
+  - {src: src/game/unsorted/tu_11d358_11f350.c, range: [0x11f350, 0x11f8f8]}
+  - {src: src/game/unsorted/tu_11d358_11f8f8.c, range: [0x11f8f8, 0x11fc80]}
   - {src: src/game/unsorted/tu_11d358_11fc80.c, range: [0x11fc80, 0x11fcd8], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
   - {src: src/game/unsorted/tu_11d358_11fcd8.c, range: [0x11fcd8, 0x120068]}
   - {src: src/game/unsorted/tu_120068.c, range: [0x120068, 0x121600], note: flags or language differ}
@@ -184,24 +184,24 @@ splits:
   - {src: src/game/unsorted/tu_120068_121ce8.c, range: [0x121ce8, 0x121de8], note: flags or language differ}
   - {src: src/game/unsorted/tu_120068_121de8.c, range: [0x121de8, 0x121ef0], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/unsorted/tu_120068_121ef0.c, range: [0x121ef0, 0x122b10], note: flags or language differ}
-  - {src: src/game/ui/tu_120068_122b10.cpp, range: [0x122b10, 0x122b60], sections: false}
+  - {src: src/game/ui/tu_120068_122b10.cpp, range: [0x122b10, 0x122b60]}
   - {src: src/game/unsorted/tu_120068_121ef0.c, range: [0x122b60, 0x122c80]}
   - {src: src/game/unsorted/tu_120068_122c80.c, range: [0x122c80, 0x122df0], flags: [-O1, -G0, -snas], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/unsorted/tu_120068_122df0.c, range: [0x122df0, 0x122df8], note: flags or language differ}
   - {src: src/game/unsorted/tu_120068_122df8.c, range: [0x122df8, 0x123960], flags: [-O1, -G0, -snas]}
-  - {src: src/game/unsorted/tu_120068_123960.c, range: [0x123960, 0x123b80], sections: false}
-  - {src: src/game/unsorted/tu_120068_123b80.c, range: [0x123b80, 0x123bf0], sections: false}
-  - {src: src/game/unsorted/tu_120068_123bf0.c, range: [0x123bf0, 0x123c90], sections: false}
-  - {src: src/game/unsorted/tu_120068_123c90.c, range: [0x123c90, 0x123cc8], sections: false}
-  - {src: src/game/unsorted/tu_120068_123cc8.c, range: [0x123cc8, 0x124048], sections: false}
-  - {src: src/game/unsorted/tu_120068_124048.c, range: [0x124048, 0x124258], sections: false}
-  - {src: src/game/unsorted/tu_120068_124258.c, range: [0x124258, 0x124708], sections: false}
-  - {src: src/game/unsorted/tu_120068_124708.c, range: [0x124708, 0x124a20], sections: false}
-  - {src: src/game/unsorted/tu_120068_124a20.c, range: [0x124a20, 0x124a58], sections: false}
-  - {src: src/game/unsorted/tu_120068_124a58.c, range: [0x124a58, 0x124ae8], sections: false}
-  - {src: src/game/unsorted/tu_120068_124ae8.c, range: [0x124ae8, 0x124d98], sections: false}
-  - {src: src/game/unsorted/tu_120068_124d98.c, range: [0x124d98, 0x124e48], sections: false}
-  - {src: src/game/unsorted/tu_120068_124e48.c, range: [0x124e48, 0x125060], sections: false}
+  - {src: src/game/unsorted/tu_120068_123960.c, range: [0x123960, 0x123b80]}
+  - {src: src/game/unsorted/tu_120068_123b80.c, range: [0x123b80, 0x123bf0]}
+  - {src: src/game/unsorted/tu_120068_123bf0.c, range: [0x123bf0, 0x123c90]}
+  - {src: src/game/unsorted/tu_120068_123c90.c, range: [0x123c90, 0x123cc8]}
+  - {src: src/game/unsorted/tu_120068_123cc8.c, range: [0x123cc8, 0x124048]}
+  - {src: src/game/unsorted/tu_120068_124048.c, range: [0x124048, 0x124258]}
+  - {src: src/game/unsorted/tu_120068_124258.c, range: [0x124258, 0x124708]}
+  - {src: src/game/unsorted/tu_120068_124708.c, range: [0x124708, 0x124a20]}
+  - {src: src/game/unsorted/tu_120068_124a20.c, range: [0x124a20, 0x124a58]}
+  - {src: src/game/unsorted/tu_120068_124a58.c, range: [0x124a58, 0x124ae8]}
+  - {src: src/game/unsorted/tu_120068_124ae8.c, range: [0x124ae8, 0x124d98]}
+  - {src: src/game/unsorted/tu_120068_124d98.c, range: [0x124d98, 0x124e48]}
+  - {src: src/game/unsorted/tu_120068_124e48.c, range: [0x124e48, 0x125060]}
   - {src: src/game/unsorted/tu_120068_125060.c, range: [0x125060, 0x1250c8], flags: [-O2, -G8, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_120068_1250c8.c, range: [0x1250c8, 0x125208], note: flags or language differ}
   - {src: src/game/unsorted/tu_120068_125208.c, range: [0x125208, 0x125588], flags: [-Os, -G0], note: flags or language differ}
@@ -248,10 +248,10 @@ splits:
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x12c650, 0x12d458]}
   - {src: src/game/unsorted/tu_12d458.c, range: [0x12d458, 0x12d588], note: flags or language differ}
   - {src: src/game/unsorted/tu_12d458_12d588.c, range: [0x12d588, 0x12d910], flags: [-O1, -G0, -snas]}
-  - {src: src/game/unsorted/tu_12d458_12d910.c, range: [0x12d910, 0x12dff0], sections: false}
-  - {src: src/game/unsorted/tu_12d458_12dff0.c, range: [0x12dff0, 0x12e8b8], sections: false}
-  - {src: src/game/unsorted/tu_12d458_12e8b8.c, range: [0x12e8b8, 0x12eeb8], sections: false}
-  - {src: src/game/unsorted/tu_12d458_12eeb8.c, range: [0x12eeb8, 0x12eec8], sections: false}
+  - {src: src/game/unsorted/tu_12d458_12d910.c, range: [0x12d910, 0x12dff0]}
+  - {src: src/game/unsorted/tu_12d458_12dff0.c, range: [0x12dff0, 0x12e8b8]}
+  - {src: src/game/unsorted/tu_12d458_12e8b8.c, range: [0x12e8b8, 0x12eeb8]}
+  - {src: src/game/unsorted/tu_12d458_12eeb8.c, range: [0x12eeb8, 0x12eec8]}
   - {src: src/game/unsorted/tu_12d458_12eec8.c, range: [0x12eec8, 0x12eee8], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x12eee8, 0x12f058]}
   - {src: src/game/unsorted/tu_12f058.c, range: [0x12f058, 0x12f060]}
@@ -299,15 +299,15 @@ splits:
   - {src: src/game/camera/tu_138970.c, range: [0x138970, 0x1389a0]}
   - {src: src/game/camera/tu_1389a0.c, range: [0x1389a0, 0x1389a8]}
   - {src: src/game/camera/tu_1389a8.c, range: [0x1389a8, 0x138f08]}
-  - {src: src/game/camera/tu_1389a8_138f08.c, range: [0x138f08, 0x138fa0], flags: [-Os, -G0], sections: false}
-  - {src: src/game/camera/tu_1389a8_138fa0.c, range: [0x138fa0, 0x139060], flags: [-Os, -G0], sections: false}
+  - {src: src/game/camera/tu_1389a8_138f08.c, range: [0x138f08, 0x138fa0], flags: [-Os, -G0]}
+  - {src: src/game/camera/tu_1389a8_138fa0.c, range: [0x138fa0, 0x139060], flags: [-Os, -G0]}
   - {src: src/game/camera/tu_1389a8_139060.c, range: [0x139060, 0x1394b8], note: flags or language differ}
   - {src: src/game/camera/tu_1389a8_1394b8.c, range: [0x1394b8, 0x139780], flags: [-O2, -G0], note: flags or language differ}
   - {src: src/game/camera/tu_1389a8_139780.c, range: [0x139780, 0x139b68]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x139b68, 0x139bb0]}
   - {src: src/game/camera/tu_139bb0.c, range: [0x139bb0, 0x13bb78]}
-  - {src: src/game/camera/tu_139bb0_13a300.cpp, range: [0x13bb78, 0x13c778], sections: false}
-  - {src: src/game/camera/tu_13c778.cpp, range: [0x13c778, 0x13c868], sections: false}
+  - {src: src/game/camera/tu_139bb0_13a300.cpp, range: [0x13bb78, 0x13c778]}
+  - {src: src/game/camera/tu_13c778.cpp, range: [0x13c778, 0x13c868]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x13c868, 0x13c950]}
   - {src: src/game/camera/tu_13c950.c, range: [0x13c950, 0x13c9b0]}
   - {src: src/game/camera/tu_13c9b0.c, range: [0x13c9b0, 0x13c9d8]}
@@ -354,13 +354,13 @@ splits:
   - {src: src/game/actor/tu_1448c8_145fb0.c, range: [0x145fb0, 0x146a28]}
   - {src: src/game/actor/actor_reset.cpp, range: [0x146a28, 0x146af0]}
   - {src: src/game/actor/actor_entries_1448c8.cpp, range: [0x146af0, 0x146bf8], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16, -fbyte-bool]}
-  - {src: src/game/actor/tu_1448c8_146bf8.c, range: [0x146bf8, 0x1476d0], sections: false}
-  - {src: src/game/actor/tu_1448c8_1476d0.c, range: [0x1476d0, 0x147988], sections: false}
-  - {src: src/game/actor/tu_1448c8_147988.c, range: [0x147988, 0x1479b8], sections: false}
-  - {src: src/game/actor/tu_1448c8_1479b8.c, range: [0x1479b8, 0x148430], sections: false}
-  - {src: src/game/actor/tu_1448c8_148430.c, range: [0x148430, 0x148438], sections: false}
-  - {src: src/game/actor/tu_1448c8_148438.c, range: [0x148438, 0x148498], sections: false}
-  - {src: src/game/actor/tu_1448c8_148498.c, range: [0x148498, 0x149120], sections: false}
+  - {src: src/game/actor/tu_1448c8_146bf8.c, range: [0x146bf8, 0x1476d0]}
+  - {src: src/game/actor/tu_1448c8_1476d0.c, range: [0x1476d0, 0x147988]}
+  - {src: src/game/actor/tu_1448c8_147988.c, range: [0x147988, 0x1479b8]}
+  - {src: src/game/actor/tu_1448c8_1479b8.c, range: [0x1479b8, 0x148430]}
+  - {src: src/game/actor/tu_1448c8_148430.c, range: [0x148430, 0x148438]}
+  - {src: src/game/actor/tu_1448c8_148438.c, range: [0x148438, 0x148498]}
+  - {src: src/game/actor/tu_1448c8_148498.c, range: [0x148498, 0x149120]}
   - {src: src/game/actor/tu_1448c8_149120.c, range: [0x149120, 0x149158], assembler: sn-min6}
   - {src: src/game/unsorted/game_methods.cpp, range: [0x149158, 0x149178]}
   - {src: src/game/actor/tu_1448c8_149120.c, range: [0x149178, 0x149608]}
@@ -369,7 +369,7 @@ splits:
   - {src: src/game/unsorted/tu_14a8d0.c, range: [0x14a8d0, 0x14a8f8]}
   - {src: src/game/unsorted/tu_14a8f8.c, range: [0x14a8f8, 0x14ac60], note: flags or language differ}
   - {src: src/game/unsorted/tu_14a8f8_14ac60.c, range: [0x14ac60, 0x14ac98], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
-  - {src: src/game/unsorted/tu_14a8f8_14ac98.cpp, range: [0x14ac98, 0x14b878], sections: false}
+  - {src: src/game/unsorted/tu_14a8f8_14ac98.cpp, range: [0x14ac98, 0x14b878]}
   - {src: src/game/unsorted/tu_14a8f8.c, range: [0x14b878, 0x14b948]}
   - {src: src/game/unsorted/tu_14a8f8_14ac98.cpp, range: [0x14b948, 0x14ba58]}
   - {src: src/game/unsorted/tu_14a8f8.c, range: [0x14ba58, 0x14ba78]}
@@ -380,18 +380,18 @@ splits:
   - {src: src/game/unsorted/tu_14a8f8_14ac60.c, range: [0x14bca0, 0x14bd18]}
   - {src: src/game/unsorted/tu_14bd18.c, range: [0x14bd18, 0x14bd58], flags: [-O1, -G0, -snas]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14bd58, 0x14be20]}
-  - {src: src/game/unsorted/tu_14be20.c, range: [0x14be20, 0x14c100], sections: false}
-  - {src: src/game/unsorted/tu_14be20_14c100.c, range: [0x14c100, 0x14c160], sections: false}
-  - {src: src/game/unsorted/tu_14be20_14c160.c, range: [0x14c160, 0x14c330], sections: false}
-  - {src: src/game/unsorted/tu_14be20_14c330.c, range: [0x14c330, 0x14c548], sections: false}
-  - {src: src/game/unsorted/tu_14be20_14c548.c, range: [0x14c548, 0x14c640], sections: false}
-  - {src: src/game/unsorted/tu_14be20_14c640.c, range: [0x14c640, 0x14c888], sections: false}
-  - {src: src/game/unsorted/tu_14be20_14c888.c, range: [0x14c888, 0x14c9c8], sections: false}
-  - {src: src/game/unsorted/tu_14be20_14c9c8.c, range: [0x14c9c8, 0x14ca40], sections: false}
+  - {src: src/game/unsorted/tu_14be20.c, range: [0x14be20, 0x14c100]}
+  - {src: src/game/unsorted/tu_14be20_14c100.c, range: [0x14c100, 0x14c160]}
+  - {src: src/game/unsorted/tu_14be20_14c160.c, range: [0x14c160, 0x14c330]}
+  - {src: src/game/unsorted/tu_14be20_14c330.c, range: [0x14c330, 0x14c548]}
+  - {src: src/game/unsorted/tu_14be20_14c548.c, range: [0x14c548, 0x14c640]}
+  - {src: src/game/unsorted/tu_14be20_14c640.c, range: [0x14c640, 0x14c888]}
+  - {src: src/game/unsorted/tu_14be20_14c888.c, range: [0x14c888, 0x14c9c8]}
+  - {src: src/game/unsorted/tu_14be20_14c9c8.c, range: [0x14c9c8, 0x14ca40]}
   - {src: src/game/unsorted/tu_14be20_14ca40.c, range: [0x14ca40, 0x14ca70], flags: [-O1, -G0, -snas]}
-  - {src: src/game/unsorted/tu_14be20_14ca70.c, range: [0x14ca70, 0x14cc90], sections: false}
-  - {src: src/game/unsorted/tu_14be20_14cc90.c, range: [0x14cc90, 0x14cd38], sections: false}
-  - {src: src/game/unsorted/tu_14be20_14cd38.c, range: [0x14cd38, 0x14cdb8], sections: false}
+  - {src: src/game/unsorted/tu_14be20_14ca70.c, range: [0x14ca70, 0x14cc90]}
+  - {src: src/game/unsorted/tu_14be20_14cc90.c, range: [0x14cc90, 0x14cd38]}
+  - {src: src/game/unsorted/tu_14be20_14cd38.c, range: [0x14cd38, 0x14cdb8]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14cdb8, 0x14ce40]}
   - {src: src/game/unsorted/tu_14ce40.c, range: [0x14ce40, 0x14ce68]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14ce68, 0x14d3b8]}
@@ -426,10 +426,10 @@ splits:
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x1507e8, 0x150d68]}
   - {src: src/game/unsorted/tu_150d68.c, range: [0x150d68, 0x1520e0]}
   - {src: src/game/actor/actor_dc750.cpp, range: [0x1520e0, 0x152108], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
-  - {src: src/game/unsorted/tu_150d68_152108.c, range: [0x152108, 0x152680], sections: false}
-  - {src: src/game/unsorted/tu_150d68_152680.c, range: [0x152680, 0x152728], sections: false}
+  - {src: src/game/unsorted/tu_150d68_152108.c, range: [0x152108, 0x152680]}
+  - {src: src/game/unsorted/tu_150d68_152680.c, range: [0x152680, 0x152728]}
   - {src: src/game/actor/actor_dc750.cpp, range: [0x152728, 0x152878]}
-  - {src: src/game/unsorted/tu_150d68_152878.c, range: [0x152878, 0x1528e8], sections: false}
+  - {src: src/game/unsorted/tu_150d68_152878.c, range: [0x152878, 0x1528e8]}
   - {src: src/game/unsorted/tu_1528e8.c, range: [0x1528e8, 0x152988]}
   - {src: src/game/unsorted/tu_152988.c, range: [0x152988, 0x1529d0]}
   - {src: src/game/unsorted/tu_1529d0.c, range: [0x1529d0, 0x152a50]}
@@ -456,23 +456,23 @@ splits:
   - {src: src/game/weapons/tu_155198.c, range: [0x155198, 0x1551a8]}
   - {src: src/game/weapons/tu_1551a8.c, range: [0x1551a8, 0x1551c8]}
   - {src: src/game/weapons/weapons_tu_1551c8.cpp, range: [0x1551c8, 0x155238], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/game/weapons/tu_155238.cpp, range: [0x155238, 0x155b08], sections: false}
+  - {src: src/game/weapons/tu_155238.cpp, range: [0x155238, 0x155b08]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x155b08, 0x155c28]}
-  - {src: src/game/weapons/tu_155c28.cpp, range: [0x155c28, 0x155dc8], sections: false}
+  - {src: src/game/weapons/tu_155c28.cpp, range: [0x155c28, 0x155dc8]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x155dc8, 0x1561f8]}
   - {src: src/game/weapons/tu_1561f8.c, range: [0x1561f8, 0x156278], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/weapons/tu_1561f8_156278.c, range: [0x156278, 0x156388]}
   - {src: src/game/weapons/weapons_tu_1561f8.cpp, range: [0x156388, 0x156450], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/game/weapons/tu_1561f8_156450.c, range: [0x156450, 0x156d60], flags: [-O2, -G0, -snas, -fno-schedule-insns]}
-  - {src: src/game/weapons/tu_1561f8_156d60.c, range: [0x156d60, 0x156dc0], sections: false}
-  - {src: src/game/weapons/tu_1561f8_156dc0.c, range: [0x156dc0, 0x156e70], sections: false}
-  - {src: src/game/weapons/tu_1561f8_156e70.c, range: [0x156e70, 0x156e90], sections: false}
-  - {src: src/game/weapons/tu_1561f8_156e90.c, range: [0x156e90, 0x156f00], sections: false}
-  - {src: src/game/weapons/tu_1561f8_156f00.c, range: [0x156f00, 0x156f10], sections: false}
+  - {src: src/game/weapons/tu_1561f8_156d60.c, range: [0x156d60, 0x156dc0]}
+  - {src: src/game/weapons/tu_1561f8_156dc0.c, range: [0x156dc0, 0x156e70]}
+  - {src: src/game/weapons/tu_1561f8_156e70.c, range: [0x156e70, 0x156e90]}
+  - {src: src/game/weapons/tu_1561f8_156e90.c, range: [0x156e90, 0x156f00]}
+  - {src: src/game/weapons/tu_1561f8_156f00.c, range: [0x156f00, 0x156f10]}
   - {src: src/game/weapons/weapons_tu_1561f8.cpp, range: [0x156f10, 0x156fd0]}
   - {src: src/game/weapons/tu_1561f8_156f00.c, range: [0x156fd0, 0x158078]}
-  - {src: src/game/weapons/tu_1561f8_158078.c, range: [0x158078, 0x158a98], sections: false}
-  - {src: src/game/weapons/tu_1561f8_158a98.c, range: [0x158a98, 0x158e80], sections: false}
+  - {src: src/game/weapons/tu_1561f8_158078.c, range: [0x158078, 0x158a98]}
+  - {src: src/game/weapons/tu_1561f8_158a98.c, range: [0x158a98, 0x158e80]}
   - {src: src/game/weapons/tu_158e80.c, range: [0x158e80, 0x158e88]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x158e88, 0x158ea8]}
   - {src: src/game/weapons/tu_158ea8.c, range: [0x158ea8, 0x158f08]}
@@ -488,12 +488,12 @@ splits:
   - {src: src/game/weapons/weapons_inventory_manager.cpp, range: [0x15c970, 0x15cec8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], assembler: sn-min6}
   - {src: src/game/weapons/weapons_inventory_inventory.cpp, range: [0x15cec8, 0x15cef0]}
   - {src: src/game/weapons/weapons_inventory_manager.cpp, range: [0x15cef0, 0x15d060]}
-  - {src: src/game/weapons/tu_15d060.cpp, range: [0x15d060, 0x15d198], sections: false}
+  - {src: src/game/weapons/tu_15d060.cpp, range: [0x15d060, 0x15d198]}
   - {src: src/game/weapons/weapons_tu_15d198.cpp, range: [0x15d198, 0x15d210], flags: [-O2, -G0, -snas, -fbyte-bool], assembler: sn-min6}
   - {src: src/game/weapons/weapons_catalog_methods.cpp, range: [0x15d210, 0x15d248], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/game/weapons/weapons_tu_15d248.cpp, range: [0x15d248, 0x15d288], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31]}
   - {src: src/game/weapons/weapons_catalog_methods.cpp, range: [0x15d288, 0x15d2e8]}
-  - {src: src/game/weapons/tu_15d2e8.cpp, range: [0x15d2e8, 0x15d310], sections: false}
+  - {src: src/game/weapons/tu_15d2e8.cpp, range: [0x15d2e8, 0x15d310]}
   - {src: src/game/weapons/weapons_tu_15d310.cpp, range: [0x15d310, 0x15d370], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31]}
   - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d370, 0x15d3d8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31]}
   - {src: src/game/weapons/tu_15d370_15d3d8.c, range: [0x15d3d8, 0x15d758]}
@@ -512,7 +512,7 @@ splits:
   - {src: src/game/unsorted/tu_15d958_161aa8.c, range: [0x161de8, 0x161df0]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x161df0, 0x161ed0]}
   - {src: src/game/unsorted/tu_161ed0.c, range: [0x161ed0, 0x161f58]}
-  - {src: src/game/unsorted/tu_161f58.cpp, range: [0x161f58, 0x162160], sections: false}
+  - {src: src/game/unsorted/tu_161f58.cpp, range: [0x161f58, 0x162160]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x162160, 0x162258]}
   - {src: src/game/unsorted/tu_162258.c, range: [0x162258, 0x1625e0]}
   - {src: src/game/unsorted/tu_1625e0.c, range: [0x1625e0, 0x162600]}
@@ -530,7 +530,7 @@ splits:
   - {src: src/game/unsorted/tu_162a40.c, range: [0x162a40, 0x162a60]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x162a60, 0x162ac0]}
   - {src: src/game/unsorted/tu_162ac0.c, range: [0x162ac0, 0x162ae8]}
-  - {src: src/game/unsorted/tu_162ae8.cpp, range: [0x162ae8, 0x162cf0], sections: false}
+  - {src: src/game/unsorted/tu_162ae8.cpp, range: [0x162ae8, 0x162cf0]}
   - {src: src/game/unsorted/tu_162cf0.c, range: [0x162cf0, 0x162d10]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x162d10, 0x162d70]}
   - {src: src/game/unsorted/tu_162d70.c, range: [0x162d70, 0x162d98]}
@@ -547,7 +547,7 @@ splits:
   - {src: src/game/unsorted/tu_1632b8.c, range: [0x1632b8, 0x1632e0]}
   - {src: src/game/weapons/tu_1632e0.c, range: [0x1632e0, 0x1632f8], flags: [-O1, -G0, -snas]}
   - {src: src/game/weapons/tu_1632f8.c, range: [0x1632f8, 0x163328]}
-  - {src: src/game/weapons/tu_163328.cpp, range: [0x163328, 0x163498], sections: false}
+  - {src: src/game/weapons/tu_163328.cpp, range: [0x163328, 0x163498]}
   - {src: src/game/unsorted/tu_163498.c, range: [0x163498, 0x1634d8]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x1634d8, 0x163530]}
   - {src: src/game/unsorted/tu_163530.c, range: [0x163530, 0x163550]}
@@ -610,7 +610,7 @@ splits:
   - {src: src/game/actor/tu_169ee0.c, range: [0x169ee0, 0x169ee8]}
   - {src: src/game/actor/tu_169ee8.c, range: [0x169ee8, 0x169f38]}
   - {src: src/game/actor/actor_c4c8.cpp, range: [0x169f38, 0x16a250]}
-  - {src: src/game/actor/tu_16a250.cpp, range: [0x16a250, 0x16a720], sections: false}
+  - {src: src/game/actor/tu_16a250.cpp, range: [0x16a250, 0x16a720]}
   - {src: src/game/actor/actor_bf48.cpp, range: [0x16a720, 0x16a778], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
   - {src: src/game/unsorted/tu_16a720_16a778.c, range: [0x16a778, 0x16b778], note: flags or language differ}
   - {src: src/game/unsorted/tu_16a720_16b778.c, range: [0x16b778, 0x16b788], flags: [-O1, -G0, -snas], note: flags or language differ}
@@ -668,9 +668,9 @@ splits:
   - {src: src/game/unsorted/tu_174218.c, range: [0x174218, 0x174228]}
   - {src: src/game/unsorted/tu_174228.c, range: [0x174228, 0x1743f0]}
   - {src: src/game/unsorted/tu_1743f0.c, range: [0x1743f0, 0x174430]}
-  - {src: src/game/unsorted/tu_174430.c, range: [0x174430, 0x1746c8], sections: false}
-  - {src: src/game/unsorted/tu_174430_1746c8.c, range: [0x1746c8, 0x174740], sections: false}
-  - {src: src/game/unsorted/tu_174430_174740.c, range: [0x174740, 0x174858], sections: false}
+  - {src: src/game/unsorted/tu_174430.c, range: [0x174430, 0x1746c8]}
+  - {src: src/game/unsorted/tu_174430_1746c8.c, range: [0x1746c8, 0x174740]}
+  - {src: src/game/unsorted/tu_174430_174740.c, range: [0x174740, 0x174858]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x174858, 0x174990]}
   - {src: src/game/unsorted/tu_174990.c, range: [0x174990, 0x1749c8]}
   - {src: src/game/unsorted/tu_1749c8.c, range: [0x1749c8, 0x1755a0]}
@@ -688,7 +688,7 @@ splits:
   - {src: src/game/unsorted/tu_176f00.c, range: [0x176f00, 0x176f20]}
   - {src: src/game/unsorted/tu_176f20.c, range: [0x176f20, 0x176f30], flags: [-O1, -G0, -snas]}
   - {src: src/game/unsorted/tu_176f30.c, range: [0x176f30, 0x176f38]}
-  - {src: src/game/unsorted/tu_176f38.cpp, range: [0x176f38, 0x176f60], sections: false}
+  - {src: src/game/unsorted/tu_176f38.cpp, range: [0x176f38, 0x176f60]}
   - {src: src/game/unsorted/tu_176f60.c, range: [0x176f60, 0x176f70]}
   - {src: src/game/unsorted/tu_176f70.c, range: [0x176f70, 0x176f88], flags: [-O1, -G0, -snas]}
   - {src: src/game/unsorted/tu_176f88.c, range: [0x176f88, 0x176fb0]}
@@ -770,15 +770,15 @@ splits:
   - {src: src/game/ai/tu_17c908_17e710.c, range: [0x17ead0, 0x180090]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x180090, 0x1804d0]}
   - {src: src/game/ai/tu_1804d0.c, range: [0x1804d0, 0x1804f8]}
-  - {src: src/game/ai/tu_1804f8.c, range: [0x1804f8, 0x1808d0], sections: false}
-  - {src: src/game/ai/tu_1804f8_1808d0.c, range: [0x1808d0, 0x1809f0], sections: false}
-  - {src: src/game/ai/tu_1804f8_1809f0.c, range: [0x1809f0, 0x180a30], sections: false}
-  - {src: src/game/ai/tu_1804f8_180a30.c, range: [0x180a30, 0x180ae0], sections: false}
-  - {src: src/game/ai/tu_1804f8_180ae0.c, range: [0x180ae0, 0x180cc8], sections: false}
-  - {src: src/game/ai/tu_1804f8_180cc8.c, range: [0x180cc8, 0x180ed8], sections: false}
-  - {src: src/game/ai/tu_1804f8_180ed8.c, range: [0x180ed8, 0x181028], sections: false}
-  - {src: src/game/ai/tu_1804f8_181028.c, range: [0x181028, 0x181418], sections: false}
-  - {src: src/game/ai/tu_1804f8_181418.c, range: [0x181418, 0x1815d8], sections: false}
+  - {src: src/game/ai/tu_1804f8.c, range: [0x1804f8, 0x1808d0]}
+  - {src: src/game/ai/tu_1804f8_1808d0.c, range: [0x1808d0, 0x1809f0]}
+  - {src: src/game/ai/tu_1804f8_1809f0.c, range: [0x1809f0, 0x180a30]}
+  - {src: src/game/ai/tu_1804f8_180a30.c, range: [0x180a30, 0x180ae0]}
+  - {src: src/game/ai/tu_1804f8_180ae0.c, range: [0x180ae0, 0x180cc8]}
+  - {src: src/game/ai/tu_1804f8_180cc8.c, range: [0x180cc8, 0x180ed8]}
+  - {src: src/game/ai/tu_1804f8_180ed8.c, range: [0x180ed8, 0x181028]}
+  - {src: src/game/ai/tu_1804f8_181028.c, range: [0x181028, 0x181418]}
+  - {src: src/game/ai/tu_1804f8_181418.c, range: [0x181418, 0x1815d8]}
   - {src: src/game/ai/ai_action_1815d8.cpp, range: [0x1815d8, 0x181660]}
   - {src: src/game/ai/ai_action_stack_181660.cpp, range: [0x181660, 0x181960]}
   - {src: src/game/ai/ai_action_stack_181960.cpp, range: [0x181960, 0x181990]}
@@ -835,9 +835,9 @@ splits:
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x18ad88, 0x18ade0]}
   - {src: src/game/ai/tu_18ade0.c, range: [0x18ade0, 0x18b168]}
   - {src: src/game/ai/movement/ai_movement_modes_18b168.cpp, range: [0x18b168, 0x18be60], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/game/ai/movement/tu_18be60.c, range: [0x18be60, 0x18beb0], sections: false}
-  - {src: src/game/ai/movement/tu_18be60_18beb0.c, range: [0x18beb0, 0x18c088], sections: false}
-  - {src: src/game/ai/movement/tu_18be60_18c088.c, range: [0x18c088, 0x18c168], sections: false}
+  - {src: src/game/ai/movement/tu_18be60.c, range: [0x18be60, 0x18beb0]}
+  - {src: src/game/ai/movement/tu_18be60_18beb0.c, range: [0x18beb0, 0x18c088]}
+  - {src: src/game/ai/movement/tu_18be60_18c088.c, range: [0x18c088, 0x18c168]}
   - {src: src/game/ai/movement/tu_18c168.c, range: [0x18c168, 0x18c178], flags: [-O1, -G0, -snas]}
   - {src: src/game/ai/movement/tu_18c178.c, range: [0x18c178, 0x18c1e0], flags: [-G0, -snas, -O2, -fno-schedule-insns], assembler: sn-min6}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x18c1e0, 0x18c260]}
@@ -855,35 +855,35 @@ splits:
   - {src: src/game/unsorted/tu_18dcd0.c, range: [0x18dcd0, 0x18dce0]}
   - {src: src/game/unsorted/tu_18dce0.c, range: [0x18dce0, 0x18dd60]}
   - {src: src/game/unsorted/tu_18dd60.c, range: [0x18dd60, 0x18dd88]}
-  - {src: src/game/unsorted/tu_18dd88.c, range: [0x18dd88, 0x18dea0], sections: false}
-  - {src: src/game/unsorted/tu_18dd88_18dea0.c, range: [0x18dea0, 0x18e0a0], sections: false}
-  - {src: src/game/unsorted/tu_18dd88_18e0a0.c, range: [0x18e0a0, 0x18e150], sections: false}
-  - {src: src/game/unsorted/tu_18dd88_18e150.c, range: [0x18e150, 0x18e208], sections: false}
-  - {src: src/game/unsorted/tu_18dd88_18e208.c, range: [0x18e208, 0x18e2e8], sections: false}
-  - {src: src/game/unsorted/tu_18dd88_18e2e8.c, range: [0x18e2e8, 0x18e4c0], sections: false}
-  - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18e4c0, 0x18e578], sections: false}
-  - {src: src/game/unsorted/tu_18dd88_18e578.c, range: [0x18e578, 0x18e7c0], sections: false}
+  - {src: src/game/unsorted/tu_18dd88.c, range: [0x18dd88, 0x18dea0]}
+  - {src: src/game/unsorted/tu_18dd88_18dea0.c, range: [0x18dea0, 0x18e0a0]}
+  - {src: src/game/unsorted/tu_18dd88_18e0a0.c, range: [0x18e0a0, 0x18e150]}
+  - {src: src/game/unsorted/tu_18dd88_18e150.c, range: [0x18e150, 0x18e208]}
+  - {src: src/game/unsorted/tu_18dd88_18e208.c, range: [0x18e208, 0x18e2e8]}
+  - {src: src/game/unsorted/tu_18dd88_18e2e8.c, range: [0x18e2e8, 0x18e4c0]}
+  - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18e4c0, 0x18e578]}
+  - {src: src/game/unsorted/tu_18dd88_18e578.c, range: [0x18e578, 0x18e7c0]}
   - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18e7c0, 0x18eb78]}
   - {src: src/game/unsorted/tu_18dd88_18e578.c, range: [0x18eb78, 0x18ebe0]}
   - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18ebe0, 0x18eca0]}
   - {src: src/game/ai/movement/graphics_movement.cpp, range: [0x18eca0, 0x18ed50], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
-  - {src: src/game/ai/movement/tu_18dd88_18ed50.c, range: [0x18ed50, 0x18ef70], sections: false}
+  - {src: src/game/ai/movement/tu_18dd88_18ed50.c, range: [0x18ed50, 0x18ef70]}
   - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18ef70, 0x18efe8]}
-  - {src: src/game/ai/movement/tu_18dd88_18efe8.c, range: [0x18efe8, 0x18f008], sections: false}
+  - {src: src/game/ai/movement/tu_18dd88_18efe8.c, range: [0x18efe8, 0x18f008]}
   - {src: src/game/ai/movement/graphics_movement.cpp, range: [0x18f008, 0x18f0b8]}
-  - {src: src/game/ai/movement/tu_18dd88_18f0b8.c, range: [0x18f0b8, 0x18f100], sections: false}
+  - {src: src/game/ai/movement/tu_18dd88_18f0b8.c, range: [0x18f0b8, 0x18f100]}
   - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18f100, 0x18f178]}
-  - {src: src/game/ai/movement/tu_18dd88_18f178.c, range: [0x18f178, 0x18f180], sections: false}
+  - {src: src/game/ai/movement/tu_18dd88_18f178.c, range: [0x18f178, 0x18f180]}
   - {src: src/game/ai/movement/graphics_movement.cpp, range: [0x18f180, 0x18f2a0]}
   - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18f2a0, 0x18f2e0]}
-  - {src: src/game/ai/movement/tu_18dd88_18f2e0.c, range: [0x18f2e0, 0x18f358], sections: false}
-  - {src: src/game/ai/movement/tu_18dd88_18f358.c, range: [0x18f358, 0x18f378], sections: false}
+  - {src: src/game/ai/movement/tu_18dd88_18f2e0.c, range: [0x18f2e0, 0x18f358]}
+  - {src: src/game/ai/movement/tu_18dd88_18f358.c, range: [0x18f358, 0x18f378]}
   - {src: src/game/ai/movement/graphics_movement.cpp, range: [0x18f378, 0x18f3e0]}
   - {src: src/game/ai/movement/tu_18dd88_18f358.c, range: [0x18f3e0, 0x18f3e8]}
-  - {src: src/game/ai/movement/tu_18dd88_18f3e8.c, range: [0x18f3e8, 0x18f4e8], sections: false}
-  - {src: src/game/ai/movement/tu_18dd88_18f4e8.c, range: [0x18f4e8, 0x18f6a8], sections: false}
-  - {src: src/game/ai/movement/tu_18dd88_18f6a8.c, range: [0x18f6a8, 0x18f730], sections: false}
-  - {src: src/game/ai/movement/tu_18dd88_18f730.c, range: [0x18f730, 0x18f7c8], sections: false}
+  - {src: src/game/ai/movement/tu_18dd88_18f3e8.c, range: [0x18f3e8, 0x18f4e8]}
+  - {src: src/game/ai/movement/tu_18dd88_18f4e8.c, range: [0x18f4e8, 0x18f6a8]}
+  - {src: src/game/ai/movement/tu_18dd88_18f6a8.c, range: [0x18f6a8, 0x18f730]}
+  - {src: src/game/ai/movement/tu_18dd88_18f730.c, range: [0x18f730, 0x18f7c8]}
   - {src: src/game/ai/movement/tu_18f7c8.c, range: [0x18f7c8, 0x190428]}
   - {src: src/game/ai/movement/tu_18dd88_18f730.c, range: [0x190428, 0x1904d8]}
   - {src: src/game/ai/movement/tu_1904d8.c, range: [0x1904d8, 0x1909f8]}
@@ -928,15 +928,15 @@ splits:
   - {src: src/game/ai/ai_action_stack_193a28.cpp, range: [0x193a28, 0x193ac8]}
   - {src: src/game/ai/tu_193978_193ac8.c, range: [0x193ac8, 0x193af8]}
   - {src: src/game/ai/ai_action_stack_193af8.cpp, range: [0x193af8, 0x193b98]}
-  - {src: src/game/ai/tu_193978_193b98.c, range: [0x193b98, 0x193bc8], sections: false}
-  - {src: src/game/ai/tu_193978_193bc8.c, range: [0x193bc8, 0x193cc8], sections: false}
-  - {src: src/game/ai/tu_193978_193cc8.c, range: [0x193cc8, 0x1940c8], sections: false}
-  - {src: src/game/ai/tu_193978_1940c8.c, range: [0x1940c8, 0x1941a8], sections: false}
-  - {src: src/game/ai/tu_193978_1941a8.c, range: [0x1941a8, 0x1945f0], sections: false}
-  - {src: src/game/ai/tu_193978_1945f0.c, range: [0x1945f0, 0x194888], sections: false}
-  - {src: src/game/ai/tu_193978_194888.c, range: [0x194888, 0x1948a0], sections: false}
+  - {src: src/game/ai/tu_193978_193b98.c, range: [0x193b98, 0x193bc8]}
+  - {src: src/game/ai/tu_193978_193bc8.c, range: [0x193bc8, 0x193cc8]}
+  - {src: src/game/ai/tu_193978_193cc8.c, range: [0x193cc8, 0x1940c8]}
+  - {src: src/game/ai/tu_193978_1940c8.c, range: [0x1940c8, 0x1941a8]}
+  - {src: src/game/ai/tu_193978_1941a8.c, range: [0x1941a8, 0x1945f0]}
+  - {src: src/game/ai/tu_193978_1945f0.c, range: [0x1945f0, 0x194888]}
+  - {src: src/game/ai/tu_193978_194888.c, range: [0x194888, 0x1948a0]}
   - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x1948a0, 0x1949f8]}
-  - {src: src/game/ai/tu_193978_1949f8.c, range: [0x1949f8, 0x194a38], sections: false}
+  - {src: src/game/ai/tu_193978_1949f8.c, range: [0x1949f8, 0x194a38]}
   - {src: src/game/ai/tu_193978_194a38.c, range: [0x194a38, 0x194a80], flags: [-Os, -G0], note: flags or language differ}
   - {src: src/game/ai/tu_193978_194a80.c, range: [0x194a80, 0x194bc8]}
   - {src: src/game/ai/tu_194bc8.c, range: [0x194bc8, 0x194d30]}
@@ -953,10 +953,10 @@ splits:
   - {src: src/game/ai/tu_195ba0.c, range: [0x195ba0, 0x195bc0]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x195bc0, 0x195ce8]}
   - {src: src/game/ai/tu_195ce8.c, range: [0x195ce8, 0x195d20]}
-  - {src: src/game/ai/tu_195d20.c, range: [0x195d20, 0x195d98], sections: false}
-  - {src: src/game/ai/tu_195d48_195d98.c, range: [0x195d98, 0x195df0], sections: false}
-  - {src: src/game/ai/tu_195d48_195df0.c, range: [0x195df0, 0x195e10], sections: false}
-  - {src: src/game/ai/tu_195d48_195e10.c, range: [0x195e10, 0x195ff0], sections: false}
+  - {src: src/game/ai/tu_195d20.c, range: [0x195d20, 0x195d98]}
+  - {src: src/game/ai/tu_195d48_195d98.c, range: [0x195d98, 0x195df0]}
+  - {src: src/game/ai/tu_195d48_195df0.c, range: [0x195df0, 0x195e10]}
+  - {src: src/game/ai/tu_195d48_195e10.c, range: [0x195e10, 0x195ff0]}
   - {src: src/game/ai/tu_195ff0.c, range: [0x195ff0, 0x1962f0]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1962f0, 0x1963a8]}
   - {src: src/game/ai/tu_1963a8.c, range: [0x1963a8, 0x1963e8]}
@@ -998,28 +998,28 @@ splits:
   - {src: src/game/ai/ai_action_198458.cpp, range: [0x198458, 0x1984a8]}
   - {src: src/game/ai/tu_1984a8.c, range: [0x1984a8, 0x1984c8]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1984c8, 0x1984f0]}
-  - {src: src/game/ai/tu_1984f0.c, range: [0x1984f0, 0x198a68], sections: false}
-  - {src: src/game/ai/tu_1984f0_198a68.c, range: [0x198a68, 0x198b10], sections: false}
-  - {src: src/game/ai/tu_1984f0_198b10.c, range: [0x198b10, 0x198bb0], sections: false}
-  - {src: src/game/ai/tu_1984f0_198bb0.c, range: [0x198bb0, 0x198c40], sections: false}
-  - {src: src/game/ai/tu_1984f0_198c40.c, range: [0x198c40, 0x198cf8], sections: false}
-  - {src: src/game/ai/tu_1984f0_198cf8.c, range: [0x198cf8, 0x198e28], sections: false}
-  - {src: src/game/ai/tu_1984f0_198e28.c, range: [0x198e28, 0x1992e0], sections: false}
-  - {src: src/game/ai/tu_1984f0_1992e0.c, range: [0x1992e0, 0x199300], sections: false}
-  - {src: src/game/ai/tu_1984f0_199300.c, range: [0x199300, 0x1993a8], sections: false}
-  - {src: src/game/ai/tu_1984f0_1993a8.c, range: [0x1993a8, 0x199468], sections: false}
-  - {src: src/game/ai/tu_1984f0_199468.c, range: [0x199468, 0x1994c0], sections: false}
-  - {src: src/game/ai/tu_1984f0_1994c0.c, range: [0x1994c0, 0x1994f0], sections: false}
-  - {src: src/game/ai/tu_1984f0_1994f0.c, range: [0x1994f0, 0x199700], sections: false}
-  - {src: src/game/ai/tu_1984f0_199700.c, range: [0x199700, 0x199790], sections: false}
-  - {src: src/game/ai/tu_1984f0_199790.c, range: [0x199790, 0x199850], sections: false}
-  - {src: src/game/ai/tu_199850.c, range: [0x199850, 0x199888], flags: [-O2, -G0, -snas, -fno-schedule-insns2], sections: false}
-  - {src: src/game/ai/tu_199850_199888.c, range: [0x199888, 0x1998c0], flags: [-O2, -G0, -snas], sections: false, data_ranges: [{end: '0x3de748', input: .data.action_dispatch, section: .data, start: '0x3de6d8'}]}
-  - {src: src/game/ai/tu_199850_1998c0.c, range: [0x1998c0, 0x1998f8], flags: [-O2, -G0, -snas], sections: false}
-  - {src: src/game/ai/tu_199850_1998f8.c, range: [0x1998f8, 0x199950], sections: false}
+  - {src: src/game/ai/tu_1984f0.c, range: [0x1984f0, 0x198a68]}
+  - {src: src/game/ai/tu_1984f0_198a68.c, range: [0x198a68, 0x198b10]}
+  - {src: src/game/ai/tu_1984f0_198b10.c, range: [0x198b10, 0x198bb0]}
+  - {src: src/game/ai/tu_1984f0_198bb0.c, range: [0x198bb0, 0x198c40]}
+  - {src: src/game/ai/tu_1984f0_198c40.c, range: [0x198c40, 0x198cf8]}
+  - {src: src/game/ai/tu_1984f0_198cf8.c, range: [0x198cf8, 0x198e28]}
+  - {src: src/game/ai/tu_1984f0_198e28.c, range: [0x198e28, 0x1992e0]}
+  - {src: src/game/ai/tu_1984f0_1992e0.c, range: [0x1992e0, 0x199300]}
+  - {src: src/game/ai/tu_1984f0_199300.c, range: [0x199300, 0x1993a8]}
+  - {src: src/game/ai/tu_1984f0_1993a8.c, range: [0x1993a8, 0x199468]}
+  - {src: src/game/ai/tu_1984f0_199468.c, range: [0x199468, 0x1994c0]}
+  - {src: src/game/ai/tu_1984f0_1994c0.c, range: [0x1994c0, 0x1994f0]}
+  - {src: src/game/ai/tu_1984f0_1994f0.c, range: [0x1994f0, 0x199700]}
+  - {src: src/game/ai/tu_1984f0_199700.c, range: [0x199700, 0x199790]}
+  - {src: src/game/ai/tu_1984f0_199790.c, range: [0x199790, 0x199850]}
+  - {src: src/game/ai/tu_199850.c, range: [0x199850, 0x199888], flags: [-O2, -G0, -snas, -fno-schedule-insns2]}
+  - {src: src/game/ai/tu_199850_199888.c, range: [0x199888, 0x1998c0], flags: [-O2, -G0, -snas], data_ranges: [{end: '0x3de748', input: .data.action_dispatch, section: .data, start: '0x3de6d8'}]}
+  - {src: src/game/ai/tu_199850_1998c0.c, range: [0x1998c0, 0x1998f8], flags: [-O2, -G0, -snas]}
+  - {src: src/game/ai/tu_199850_1998f8.c, range: [0x1998f8, 0x199950]}
   - {src: src/game/ai/tu_199950.c, range: [0x199950, 0x199988]}
   - {src: src/game/ai/tu_199988.c, range: [0x199988, 0x19a5e0]}
-  - {src: src/game/ai/tu_199988_19a5e0.c, range: [0x19a5e0, 0x19a648], sections: false}
+  - {src: src/game/ai/tu_199988_19a5e0.c, range: [0x19a5e0, 0x19a648]}
   - {src: src/game/ai/tu_199988.c, range: [0x19a648, 0x19a670]}
   - {src: src/game/ai/tu_199988_19a5e0.c, range: [0x19a670, 0x19a798]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x19a798, 0x19a908]}
@@ -1031,8 +1031,8 @@ splits:
   - {src: src/game/ai/tu_19b208.c, range: [0x19b208, 0x19b270]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x19b270, 0x19b398]}
   - {src: src/game/ai/tu_19b398.c, range: [0x19b398, 0x19b3b8]}
-  - {src: src/game/ai/tu_19b3b8.c, range: [0x19b3b8, 0x19b638], sections: false}
-  - {src: src/game/ai/tu_19b3b8_19b638.c, range: [0x19b638, 0x19b868], sections: false}
+  - {src: src/game/ai/tu_19b3b8.c, range: [0x19b3b8, 0x19b638]}
+  - {src: src/game/ai/tu_19b3b8_19b638.c, range: [0x19b638, 0x19b868]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x19b868, 0x19b998]}
   - {src: src/game/ai/tu_19b998.c, range: [0x19b998, 0x19be70]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x19be70, 0x19c1a8]}
@@ -1048,8 +1048,8 @@ splits:
   - {src: src/game/unsorted/tu_19d768.c, range: [0x19d768, 0x19d870]}
   - {src: src/game/unsorted/tu_19d870.c, range: [0x19d870, 0x19dbd0]}
   - {src: src/game/unsorted/tu_19dbd0.c, range: [0x19dbd0, 0x19ef80]}
-  - {src: src/game/unsorted/tu_19ef80.c, range: [0x19ef80, 0x19f408], sections: false}
-  - {src: src/game/unsorted/tu_19ef80_19f408.c, range: [0x19f408, 0x19f590], sections: false}
+  - {src: src/game/unsorted/tu_19ef80.c, range: [0x19ef80, 0x19f408]}
+  - {src: src/game/unsorted/tu_19ef80_19f408.c, range: [0x19f408, 0x19f590]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x19f590, 0x19f650]}
   - {src: src/game/unsorted/tu_19f650.c, range: [0x19f650, 0x19f6a0]}
   - {src: src/game/unsorted/tu_19f6a0.c, range: [0x19f6a0, 0x19f6e0]}
@@ -1061,9 +1061,9 @@ splits:
   - {src: src/game/unsorted/tu_1a06c0.c, range: [0x1a06c0, 0x1a06c8]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1a06c8, 0x1a0800]}
   - {src: src/game/unsorted/tu_1a0800.c, range: [0x1a0800, 0x1a0820]}
-  - {src: src/game/unsorted/tu_1a0820.c, range: [0x1a0820, 0x1a0a30], sections: false}
-  - {src: src/game/unsorted/tu_1a0820_1a0a30.c, range: [0x1a0a30, 0x1a0af0], sections: false}
-  - {src: src/game/unsorted/tu_1a0820_1a0af0.c, range: [0x1a0af0, 0x1a0b68], sections: false}
+  - {src: src/game/unsorted/tu_1a0820.c, range: [0x1a0820, 0x1a0a30]}
+  - {src: src/game/unsorted/tu_1a0820_1a0a30.c, range: [0x1a0a30, 0x1a0af0]}
+  - {src: src/game/unsorted/tu_1a0820_1a0af0.c, range: [0x1a0af0, 0x1a0b68]}
   - {src: src/game/unsorted/tu_1a0b68.c, range: [0x1a0b68, 0x1a0b88]}
   - {src: src/game/unsorted/tu_1a0b88.c, range: [0x1a0b88, 0x1a0d80], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
   - {src: src/game/unsorted/tu_1a0b88_1a0d80.c, range: [0x1a0d80, 0x1a0dc8], note: flags or language differ}
@@ -1083,33 +1083,33 @@ splits:
   - {src: src/game/unsorted/tu_1a24b0.c, range: [0x1a24b0, 0x1a24b8]}
   - {src: src/game/unsorted/tu_1a24b8.c, range: [0x1a24b8, 0x1a2610], note: flags or language differ}
   - {src: src/game/unsorted/tu_1a24b8_1a2610.c, range: [0x1a2610, 0x1a2620], flags: [-O1, -G0, -snas]}
-  - {src: src/game/unsorted/tu_1a24b8_1a2620.c, range: [0x1a2620, 0x1a27a8], sections: false}
+  - {src: src/game/unsorted/tu_1a24b8_1a2620.c, range: [0x1a2620, 0x1a27a8]}
   - {src: src/game/unsorted/tu_1a24b8_1a27a8.cpp, range: [0x1a27a8, 0x1a2800], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
-  - {src: src/game/unsorted/tu_1a24b8_1a2800.c, range: [0x1a2800, 0x1a2c68], sections: false}
-  - {src: src/game/unsorted/tu_1a24b8_1a2c68.c, range: [0x1a2c68, 0x1a3110], sections: false}
-  - {src: src/game/unsorted/tu_1a24b8_1a3110.c, range: [0x1a3110, 0x1a3470], sections: false}
-  - {src: src/game/unsorted/tu_1a24b8_1a3470.c, range: [0x1a3470, 0x1a35a8], sections: false}
-  - {src: src/game/unsorted/tu_1a24b8_1a35a8.c, range: [0x1a35a8, 0x1a3998], sections: false}
-  - {src: src/game/unsorted/tu_1a24b8_1a3998.c, range: [0x1a3998, 0x1a39d8], sections: false}
+  - {src: src/game/unsorted/tu_1a24b8_1a2800.c, range: [0x1a2800, 0x1a2c68]}
+  - {src: src/game/unsorted/tu_1a24b8_1a2c68.c, range: [0x1a2c68, 0x1a3110]}
+  - {src: src/game/unsorted/tu_1a24b8_1a3110.c, range: [0x1a3110, 0x1a3470]}
+  - {src: src/game/unsorted/tu_1a24b8_1a3470.c, range: [0x1a3470, 0x1a35a8]}
+  - {src: src/game/unsorted/tu_1a24b8_1a35a8.c, range: [0x1a35a8, 0x1a3998]}
+  - {src: src/game/unsorted/tu_1a24b8_1a3998.c, range: [0x1a3998, 0x1a39d8]}
   - {src: src/game/unsorted/tu_1a24b8_1a39d8.c, range: [0x1a39d8, 0x1a3a08], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1a24b8_1a3a08.c, range: [0x1a3a08, 0x1a4930]}
   - {src: src/game/unsorted/tu_1a4930.c, range: [0x1a4930, 0x1a4ff0]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1a4ff0, 0x1a54e0]}
   - {src: src/game/unsorted/animation_owner_1a54e0.cpp, range: [0x1a54e0, 0x1a5738], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions], assembler: sn-min6}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1a5738, 0x1a5ee8]}
-  - {src: src/game/unsorted/tu_1a51c8_1a5ee8.c, range: [0x1a5ee8, 0x1a6330], sections: false}
+  - {src: src/game/unsorted/tu_1a51c8_1a5ee8.c, range: [0x1a5ee8, 0x1a6330]}
   - {src: src/game/unsorted/animation_owner_1a51c8.cpp, range: [0x1a6330, 0x1a67b0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions]}
   - {src: src/game/unsorted/tu_1a51c8_1a5ee8.c, range: [0x1a67b0, 0x1a68b0]}
   - {src: src/game/unsorted/animation_owner_1a51c8.cpp, range: [0x1a68b0, 0x1a68e0]}
-  - {src: src/game/unsorted/tu_1a51c8_1a68e0.c, range: [0x1a68e0, 0x1a6988], sections: false}
+  - {src: src/game/unsorted/tu_1a51c8_1a68e0.c, range: [0x1a68e0, 0x1a6988]}
   - {src: src/game/unsorted/animation_owner_1a51c8.cpp, range: [0x1a6988, 0x1a6ab0]}
   - {src: src/game/unsorted/tu_1a51c8_1a68e0.c, range: [0x1a6ab0, 0x1a6e58]}
-  - {src: src/game/unsorted/tu_1a51c8_1a6e58.c, range: [0x1a6e58, 0x1a7188], sections: false}
-  - {src: src/game/unsorted/tu_1a51c8_1a7188.c, range: [0x1a7188, 0x1a71f8], sections: false}
+  - {src: src/game/unsorted/tu_1a51c8_1a6e58.c, range: [0x1a6e58, 0x1a7188]}
+  - {src: src/game/unsorted/tu_1a51c8_1a7188.c, range: [0x1a7188, 0x1a71f8]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1a71f8, 0x1a72b0]}
   - {src: src/game/unsorted/tu_1a51c8_1a7188.c, range: [0x1a72b0, 0x1a73f0]}
   - {src: src/game/unsorted/animation_owner_1a51c8.cpp, range: [0x1a73f0, 0x1a7450]}
-  - {src: src/game/unsorted/tu_1a51c8_1a7450.c, range: [0x1a7450, 0x1a74e0], sections: false}
+  - {src: src/game/unsorted/tu_1a51c8_1a7450.c, range: [0x1a7450, 0x1a74e0]}
   - {src: src/game/unsorted/animation_owner_1a51c8.cpp, range: [0x1a74e0, 0x1a7528]}
   - {src: src/game/unsorted/tu_1a51c8_1a7450.c, range: [0x1a7528, 0x1a7d48]}
   - {src: src/game/unsorted/animation_owner_1a51c8.cpp, range: [0x1a7d48, 0x1a7e58]}
@@ -1117,11 +1117,11 @@ splits:
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x1a7f88, 0x1a80f8]}
   - {src: src/game/unsorted/tu_1a80f8.c, range: [0x1a80f8, 0x1a8168], assembler: sn-min6}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x1a8168, 0x1a83a0]}
-  - {src: src/game/actor/tu_1a83a0.cpp, range: [0x1a83a0, 0x1a8a20], sections: false}
-  - {src: src/game/actor/tu_1a83a0.c, range: [0x1a8a20, 0x1a8d50], sections: false}
+  - {src: src/game/actor/tu_1a83a0.cpp, range: [0x1a83a0, 0x1a8a20]}
+  - {src: src/game/actor/tu_1a83a0.c, range: [0x1a8a20, 0x1a8d50]}
   - {src: src/game/actor/tu_1a83a0.cpp, range: [0x1a8d50, 0x1a8e30]}
   - {src: src/game/actor/tu_1a83a0.c, range: [0x1a8e30, 0x1a8f10]}
-  - {src: src/game/actor/tu_1a83a0_1a8f10.c, range: [0x1a8f10, 0x1a8f78], sections: false}
+  - {src: src/game/actor/tu_1a83a0_1a8f10.c, range: [0x1a8f10, 0x1a8f78]}
   - {src: src/game/actor/tu_1a83a0.cpp, range: [0x1a8f78, 0x1a9ea0]}
   - {src: src/game/actor/tu_1a83a0_1a8f10.c, range: [0x1a9ea0, 0x1a9ed0]}
   - {src: src/game/actor/tu_1a83a0.cpp, range: [0x1a9ed0, 0x1aa280]}
@@ -1134,17 +1134,17 @@ splits:
   - {src: src/game/actor/debug_draw.c, range: [0x1ab500, 0x1ab760]}
   - {src: src/game/actor/tu_1a83a0_1ab760.c, range: [0x1ab760, 0x1aba98]}
   - {src: src/game/actor/animation_variables.c, range: [0x1aba98, 0x1abe08]}
-  - {src: src/game/actor/tu_1a83a0_1abe08.c, range: [0x1abe08, 0x1abeb8], sections: false}
-  - {src: src/game/actor/tu_1a83a0_1abeb8.c, range: [0x1abeb8, 0x1abfa8], sections: false}
-  - {src: src/game/actor/tu_1a83a0_1abfa8.c, range: [0x1abfa8, 0x1ac020], sections: false}
-  - {src: src/game/actor/tu_1a83a0_1ac020.c, range: [0x1ac020, 0x1ac040], sections: false}
-  - {src: src/game/actor/tu_1a83a0_1ac040.c, range: [0x1ac040, 0x1ac050], sections: false}
-  - {src: src/game/actor/tu_1a83a0_1ac050.c, range: [0x1ac050, 0x1ac268], sections: false}
-  - {src: src/game/unsorted/tu_1a83a0_1ac268.c, range: [0x1ac268, 0x1ac278], sections: false}
+  - {src: src/game/actor/tu_1a83a0_1abe08.c, range: [0x1abe08, 0x1abeb8]}
+  - {src: src/game/actor/tu_1a83a0_1abeb8.c, range: [0x1abeb8, 0x1abfa8]}
+  - {src: src/game/actor/tu_1a83a0_1abfa8.c, range: [0x1abfa8, 0x1ac020]}
+  - {src: src/game/actor/tu_1a83a0_1ac020.c, range: [0x1ac020, 0x1ac040]}
+  - {src: src/game/actor/tu_1a83a0_1ac040.c, range: [0x1ac040, 0x1ac050]}
+  - {src: src/game/actor/tu_1a83a0_1ac050.c, range: [0x1ac050, 0x1ac268]}
+  - {src: src/game/unsorted/tu_1a83a0_1ac268.c, range: [0x1ac268, 0x1ac278]}
   - {src: src/game/unsorted/player_move_rate.c, range: [0x1ac278, 0x1ac330]}
   - {src: src/game/unsorted/player_move_multiplier.c, range: [0x1ac330, 0x1ac398]}
-  - {src: src/game/unsorted/tu_1a83a0_1ac398.c, range: [0x1ac398, 0x1ac3f8], sections: false}
-  - {src: src/game/unsorted/tu_1a83a0_1ac3f8.c, range: [0x1ac3f8, 0x1ac440], sections: false}
+  - {src: src/game/unsorted/tu_1a83a0_1ac398.c, range: [0x1ac398, 0x1ac3f8]}
+  - {src: src/game/unsorted/tu_1a83a0_1ac3f8.c, range: [0x1ac3f8, 0x1ac440]}
   - {src: src/game/unsorted/aim_bearing.c, range: [0x1ac440, 0x1ac4b8]}
   - {src: src/game/unsorted/torso_pitch.c, range: [0x1ac4b8, 0x1ac940]}
   - {src: src/game/unsorted/tu_1a83a0_1ac940.c, range: [0x1ac940, 0x1ad070], note: flags or language differ}
@@ -1183,7 +1183,7 @@ splits:
   - {src: src/game/actor/tu_1ae2e8_1af6d0.c, range: [0x1af6d0, 0x1af738], flags: [-G0, -snas, -O2, -fno-schedule-insns], assembler: sn-min6}
   - {src: src/game/actor/tu_1ae2e8_1af1a0.c, range: [0x1af738, 0x1af798]}
   - {src: src/game/actor/tu_1ae2e8_1af6d0.c, range: [0x1af798, 0x1af930]}
-  - {src: src/game/effects/tu_1af930.c, range: [0x1af930, 0x1afba8], sections: false}
+  - {src: src/game/effects/tu_1af930.c, range: [0x1af930, 0x1afba8]}
   - {src: src/game/effects/record_flags.cpp, range: [0x1afba8, 0x1afbf0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/game/effects/asset_1afbf0.cpp, range: [0x1afbf0, 0x1afc30], flags: [-x, c++, -O2, -G0, -snas]}
   - {src: src/game/effects/record_flags.cpp, range: [0x1afc30, 0x1afc78]}
@@ -1212,9 +1212,9 @@ splits:
   - {src: src/game/effects/lifecycle_1b1038.cpp, range: [0x1b1038, 0x1b1070], flags: [-x, c++, -O2, -G0, -snas]}
   - {src: src/game/effects/tu_1b0fd0_1b1070.c, range: [0x1b1070, 0x1b1080]}
   - {src: src/game/effects/lifecycle_1b1080.cpp, range: [0x1b1080, 0x1b10f8], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf16]}
-  - {src: src/game/effects/tu_1b0fd0_1b10f8.c, range: [0x1b10f8, 0x1b1110], sections: false}
-  - {src: src/game/effects/tu_1b0fd0_1b1110.c, range: [0x1b1110, 0x1b1138], sections: false}
-  - {src: src/game/effects/tu_1b0fd0_1b1138.c, range: [0x1b1138, 0x1b1168], sections: false}
+  - {src: src/game/effects/tu_1b0fd0_1b10f8.c, range: [0x1b10f8, 0x1b1110]}
+  - {src: src/game/effects/tu_1b0fd0_1b1110.c, range: [0x1b1110, 0x1b1138]}
+  - {src: src/game/effects/tu_1b0fd0_1b1138.c, range: [0x1b1138, 0x1b1168]}
   - {src: src/game/effects/lifecycle_1b1168.cpp, range: [0x1b1168, 0x1b1318], flags: [-x, c++, -O2, -G0, -snas]}
   - {src: src/game/effects/tu_1b0fd0_1b1318.c, range: [0x1b1318, 0x1b1518]}
   - {src: src/game/effects/lifecycle_1b1518.cpp, range: [0x1b1518, 0x1b16a8], flags: [-x, c++, -O2, -G0, -snas]}
@@ -1233,7 +1233,7 @@ splits:
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1b2a78, 0x1b2b60]}
   - {src: src/game/effects/tu_1b2b60.c, range: [0x1b2b60, 0x1b2b68]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1b2b68, 0x1b2e08]}
-  - {src: src/game/effects/tu_1b2e08.cpp, range: [0x1b2e08, 0x1b33b8], sections: false}
+  - {src: src/game/effects/tu_1b2e08.cpp, range: [0x1b2e08, 0x1b33b8]}
   - {src: src/game/effects/slot_lookup.c, range: [0x1b33b8, 0x1b3420]}
   - {src: src/game/effects/tu_1b2e08.cpp, range: [0x1b3420, 0x1b3780]}
   - {src: src/game/effects/tu_1b2e08_1b3780.c, range: [0x1b3780, 0x1b37c8]}
@@ -1248,13 +1248,13 @@ splits:
   - {src: src/game/effects/tu_1b3d38.c, range: [0x1b3d38, 0x1b3d40]}
   - {src: src/game/effects/tu_1b3d40.c, range: [0x1b3d40, 0x1b6188]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1b6188, 0x1b64c0]}
-  - {src: src/game/effects/tu_1b64c0.cpp, range: [0x1b64c0, 0x1b6908], sections: false}
+  - {src: src/game/effects/tu_1b64c0.cpp, range: [0x1b64c0, 0x1b6908]}
   - {src: src/game/effects/tu_1b64c0.c, range: [0x1b6908, 0x1b6910]}
   - {src: src/game/effects/tu_1b64c0.cpp, range: [0x1b6910, 0x1b7758]}
   - {src: src/game/effects/dispatch.c, range: [0x1b7758, 0x1b79c0]}
   - {src: src/game/effects/tu_1b7758_1b79c0.c, range: [0x1b79c0, 0x1b7a00]}
   - {src: src/game/effects/find_effect.c, range: [0x1b7a00, 0x1b7a70]}
-  - {src: src/game/effects/tu_1b7758_1b7a70.cpp, range: [0x1b7a70, 0x1b7f08], sections: false}
+  - {src: src/game/effects/tu_1b7758_1b7a70.cpp, range: [0x1b7a70, 0x1b7f08]}
   - {src: src/game/effects/tu_1b7758_1b7f08.c, range: [0x1b7f08, 0x1b7f28], note: flags or language differ}
   - {src: src/game/effects/tu_1b7758_1b7f28.c, range: [0x1b7f28, 0x1b8138], assembler: sn-min6}
   - {src: src/game/effects/simulation_1b8138.cpp, range: [0x1b8138, 0x1b82b0], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf31], assembler: sn-min6}
@@ -1275,13 +1275,13 @@ splits:
   - {src: src/game/effects/tu_1b64c0.cpp, range: [0x1bd8d0, 0x1be2e0]}
   - {src: src/game/effects/tu_1be2e0.c, range: [0x1be2e0, 0x1be2f0]}
   - {src: src/game/effects/tu_1be2f0.c, range: [0x1be2f0, 0x1be330]}
-  - {src: src/game/effects/tu_1be2f0_1be330.cpp, range: [0x1be330, 0x1be938], sections: false}
+  - {src: src/game/effects/tu_1be2f0_1be330.cpp, range: [0x1be330, 0x1be938]}
   - {src: src/game/effects/tu_1be938.c, range: [0x1be938, 0x1be940]}
   - {src: src/game/effects/damage_1be940.cpp, range: [0x1be940, 0x1beba0], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1beba0, 0x1bec18]}
   - {src: src/game/effects/emitter_1bec68.cpp, range: [0x1bec18, 0x1becc8], flags: [-x, c++, -O2, -G0, -snas]}
   - {src: src/game/effects/tu_1bec18_1becc8.c, range: [0x1becc8, 0x1becd0]}
-  - {src: src/game/effects/tu_1bec18_1becd0.cpp, range: [0x1becd0, 0x1bf720], sections: false}
+  - {src: src/game/effects/tu_1bec18_1becd0.cpp, range: [0x1becd0, 0x1bf720]}
   - {src: src/game/effects/emitter_1bf720.cpp, range: [0x1bf720, 0x1bfea0], flags: [-x, c++, -O2, -G0, -snas]}
   - {src: src/game/effects/emitter_1bfea0.cpp, range: [0x1bfea0, 0x1bffe0], flags: [-x, c++, -O2, -G0, -snas]}
   - {src: src/game/effects/tu_1bec18_1becc8.c, range: [0x1bffe0, 0x1c01e0]}
@@ -1292,11 +1292,11 @@ splits:
   - {src: src/game/effects/emitter_1bfea0.cpp, range: [0x1c0600, 0x1c0730]}
   - {src: src/game/effects/tu_1bec18_1c0730.c, range: [0x1c0730, 0x1c0760], flags: [-O1, -G0, -snas]}
   - {src: src/game/effects/recycle_emitters.cpp, range: [0x1c0760, 0x1c0840], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31]}
-  - {src: src/game/effects/tu_1bec18_1c0840.c, range: [0x1c0840, 0x1c0890], sections: false}
-  - {src: src/game/effects/tu_1bec18_1c0890.c, range: [0x1c0890, 0x1c08f0], sections: false}
-  - {src: src/game/effects/tu_1bec18_1c08f0.c, range: [0x1c08f0, 0x1c0910], sections: false}
+  - {src: src/game/effects/tu_1bec18_1c0840.c, range: [0x1c0840, 0x1c0890]}
+  - {src: src/game/effects/tu_1bec18_1c0890.c, range: [0x1c0890, 0x1c08f0]}
+  - {src: src/game/effects/tu_1bec18_1c08f0.c, range: [0x1c08f0, 0x1c0910]}
   - {src: src/game/effects/tu_1bec18_1becd0.cpp, range: [0x1c0910, 0x1c1548]}
-  - {src: src/game/effects/tu_1bec18_1c1548.c, range: [0x1c1548, 0x1c1578], sections: false}
+  - {src: src/game/effects/tu_1bec18_1c1548.c, range: [0x1c1548, 0x1c1578]}
   - {src: src/game/effects/light_reset.c, range: [0x1c1578, 0x1c1930], flags: [-O2, -G0, -fno-schedule-insns]}
   - {src: src/game/effects/light_render.c, range: [0x1c1930, 0x1c1a68]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c1a68, 0x1c1a98]}
@@ -1460,12 +1460,12 @@ splits:
   - {src: src/game/unsorted/tu_1ea780_1ec458.c, range: [0x1ec458, 0x1ec560], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1ea780_1ec560.c, range: [0x1ec560, 0x1ec690], note: flags or language differ}
   - {src: src/game/unsorted/tu_1ea780_1ec690.c, range: [0x1ec690, 0x1ec768], flags: [-O1, -G0, -snas]}
-  - {src: src/game/unsorted/tu_1ea780_1ec768.c, range: [0x1ec768, 0x1ec840], sections: false}
-  - {src: src/game/unsorted/tu_1ea780_1ec840.c, range: [0x1ec840, 0x1ec970], sections: false}
-  - {src: src/game/unsorted/tu_1ea780_1ec970.c, range: [0x1ec970, 0x1ecad8], sections: false}
-  - {src: src/game/unsorted/tu_1ea780_1ecad8.c, range: [0x1ecad8, 0x1ed0a0], sections: false}
-  - {src: src/game/unsorted/tu_1ea780_1ed0a0.c, range: [0x1ed0a0, 0x1ed170], sections: false}
-  - {src: src/game/unsorted/tu_1ea780_1ed170.c, range: [0x1ed170, 0x1ed2c8], sections: false}
+  - {src: src/game/unsorted/tu_1ea780_1ec768.c, range: [0x1ec768, 0x1ec840]}
+  - {src: src/game/unsorted/tu_1ea780_1ec840.c, range: [0x1ec840, 0x1ec970]}
+  - {src: src/game/unsorted/tu_1ea780_1ec970.c, range: [0x1ec970, 0x1ecad8]}
+  - {src: src/game/unsorted/tu_1ea780_1ecad8.c, range: [0x1ecad8, 0x1ed0a0]}
+  - {src: src/game/unsorted/tu_1ea780_1ed0a0.c, range: [0x1ed0a0, 0x1ed170]}
+  - {src: src/game/unsorted/tu_1ea780_1ed170.c, range: [0x1ed170, 0x1ed2c8]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed2c8, 0x1ed3a0]}
   - {src: src/game/unsorted/tu_1ed3a0.c, range: [0x1ed3a0, 0x1ed3c0]}
   - {src: src/game/unsorted/tu_1ed3c0.c, range: [0x1ed3c0, 0x1ed3e0]}
@@ -1476,7 +1476,7 @@ splits:
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed648, 0x1ed820]}
   - {src: src/game/unsorted/tu_1ed820.c, range: [0x1ed820, 0x1ed830]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed830, 0x1ed8d0]}
-  - {src: src/game/unsorted/tu_1ed8d0.cpp, range: [0x1ed8d0, 0x1ed968], sections: false}
+  - {src: src/game/unsorted/tu_1ed8d0.cpp, range: [0x1ed8d0, 0x1ed968]}
   - {src: src/game/unsorted/tu_1ed968.c, range: [0x1ed968, 0x1ed9c8], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/audio/graphics_sound_1ed9c8.cpp, range: [0x1ed9c8, 0x1edb80], flags: [-x, c++, -O2, -G0, -snas]}
   - {src: src/game/audio/graphics_sound_1edb80.cpp, range: [0x1edb80, 0x1edc80], flags: [-x, c++, -O2, -G0, -snas]}
@@ -1503,17 +1503,17 @@ splits:
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x1efe70, 0x1effc8]}
   - {src: src/game/unsorted/tu_1effc8.c, range: [0x1effc8, 0x1f0320]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x1f0320, 0x1f1530]}
-  - {src: src/game/unsorted/tu_1f1530.c, range: [0x1f1530, 0x1f1608], sections: false}
+  - {src: src/game/unsorted/tu_1f1530.c, range: [0x1f1530, 0x1f1608]}
   - {src: src/game/unsorted/tu_1f1530_1f1608.cpp, range: [0x1f1608, 0x1f1660], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_1f1530.c, range: [0x1f1660, 0x1f1a70]}
-  - {src: src/game/unsorted/tu_1f1530_1f1a70.c, range: [0x1f1a70, 0x1f1c00], sections: false}
-  - {src: src/game/unsorted/tu_1f1530_1f1c00.c, range: [0x1f1c00, 0x1f1db0], sections: false}
-  - {src: src/game/unsorted/tu_1f1530_1f1db0.c, range: [0x1f1db0, 0x1f1df8], sections: false}
-  - {src: src/game/unsorted/tu_1f1530_1f1df8.c, range: [0x1f1df8, 0x1f1e20], sections: false}
-  - {src: src/game/unsorted/tu_1f1530_1f1e20.c, range: [0x1f1e20, 0x1f1e90], sections: false}
-  - {src: src/game/unsorted/tu_1f1530_1f1e90.c, range: [0x1f1e90, 0x1f1ee0], sections: false}
-  - {src: src/game/unsorted/tu_1f1530_1f1ee0.c, range: [0x1f1ee0, 0x1f2790], sections: false}
-  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f2790, 0x1f27f0], sections: false}
+  - {src: src/game/unsorted/tu_1f1530_1f1a70.c, range: [0x1f1a70, 0x1f1c00]}
+  - {src: src/game/unsorted/tu_1f1530_1f1c00.c, range: [0x1f1c00, 0x1f1db0]}
+  - {src: src/game/unsorted/tu_1f1530_1f1db0.c, range: [0x1f1db0, 0x1f1df8]}
+  - {src: src/game/unsorted/tu_1f1530_1f1df8.c, range: [0x1f1df8, 0x1f1e20]}
+  - {src: src/game/unsorted/tu_1f1530_1f1e20.c, range: [0x1f1e20, 0x1f1e90]}
+  - {src: src/game/unsorted/tu_1f1530_1f1e90.c, range: [0x1f1e90, 0x1f1ee0]}
+  - {src: src/game/unsorted/tu_1f1530_1f1ee0.c, range: [0x1f1ee0, 0x1f2790]}
+  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f2790, 0x1f27f0]}
   - {src: src/game/unsorted/tu_1f27f0.c, range: [0x1f27f0, 0x1f27f8]}
   - {src: src/game/unsorted/tu_1f27f8.c, range: [0x1f27f8, 0x1f2c68]}
   - {src: src/game/unsorted/tu_1f2c68.c, range: [0x1f2c68, 0x1f2c98]}
@@ -1530,7 +1530,7 @@ splits:
   - {src: src/game/unsorted/tu_1f44b8.c, range: [0x1f44b8, 0x1f44c0]}
   - {src: src/game/unsorted/tu_1f44c0.c, range: [0x1f44c0, 0x1f44f0], flags: [-O1, -G0, -snas]}
   - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f44f0, 0x1f4770]}
-  - {src: src/game/unsorted/tu_1f4770.cpp, range: [0x1f4770, 0x1f4d30], sections: false}
+  - {src: src/game/unsorted/tu_1f4770.cpp, range: [0x1f4770, 0x1f4d30]}
   - {src: src/game/unsorted/tu_1f4770.c, range: [0x1f4d30, 0x1f59c0]}
   - {src: src/game/unsorted/tu_1f59c0.c, range: [0x1f59c0, 0x1f59e8]}
   - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f59e8, 0x1f7b90]}
@@ -1543,7 +1543,7 @@ splits:
   - {src: src/game/unsorted/tu_1f4770.cpp, range: [0x1f8608, 0x1f8ff8]}
   - {src: src/game/unsorted/tu_1f8ff8.c, range: [0x1f8ff8, 0x1f9028]}
   - {src: src/game/unsorted/tu_1f9028.c, range: [0x1f9028, 0x1fa658]}
-  - {src: src/game/unsorted/tu_1f9028_1fa658.cpp, range: [0x1fa658, 0x1fab98], sections: false}
+  - {src: src/game/unsorted/tu_1f9028_1fa658.cpp, range: [0x1fa658, 0x1fab98]}
   - {src: src/game/unsorted/tu_1f9028.c, range: [0x1fab98, 0x1fac78]}
   - {src: src/game/unsorted/tu_1f4770.cpp, range: [0x1fac78, 0x1fba78]}
   - {src: src/game/unsorted/tu_1fba78.c, range: [0x1fba78, 0x1fbb48]}
@@ -1554,11 +1554,11 @@ splits:
   - {src: src/game/unsorted/tu_1fcd90_1fdbf8.c, range: [0x1fdbf8, 0x1fdf28], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
   - {src: src/game/unsorted/tu_1fcd90_1fdf28.c, range: [0x1fdf28, 0x200a68], note: flags or language differ}
   - {src: src/game/unsorted/tu_1fcd90_200a68.c, range: [0x200a68, 0x200f00], flags: [-O1, -G0, -snas]}
-  - {src: src/game/unsorted/tu_1fcd90_200f00.c, range: [0x200f00, 0x201518], sections: false}
-  - {src: src/game/unsorted/tu_1fcd90_201518.c, range: [0x201518, 0x2019a0], sections: false}
-  - {src: src/game/unsorted/tu_1fcd90_2019a0.c, range: [0x2019a0, 0x201a68], sections: false}
-  - {src: src/game/unsorted/tu_1fcd90_201a68.c, range: [0x201a68, 0x2041b0], sections: false}
-  - {src: src/game/unsorted/tu_1fcd90_2041b0.c, range: [0x2041b0, 0x2041f8], sections: false}
+  - {src: src/game/unsorted/tu_1fcd90_200f00.c, range: [0x200f00, 0x201518]}
+  - {src: src/game/unsorted/tu_1fcd90_201518.c, range: [0x201518, 0x2019a0]}
+  - {src: src/game/unsorted/tu_1fcd90_2019a0.c, range: [0x2019a0, 0x201a68]}
+  - {src: src/game/unsorted/tu_1fcd90_201a68.c, range: [0x201a68, 0x2041b0]}
+  - {src: src/game/unsorted/tu_1fcd90_2041b0.c, range: [0x2041b0, 0x2041f8]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x2041f8, 0x204910]}
   - {src: src/game/unsorted/tu_204910.c, range: [0x204910, 0x204a50]}
   - {src: src/game/unsorted/tu_204a50.c, range: [0x204a50, 0x204ff0], note: flags or language differ}
@@ -1569,8 +1569,8 @@ splits:
   - {src: src/game/unsorted/tu_204a50_2052a0.c, range: [0x2053e0, 0x205808]}
   - {src: src/game/unsorted/tu_204a50_2050b0.c, range: [0x205808, 0x205830]}
   - {src: src/game/unsorted/tu_204a50_205830.c, range: [0x205830, 0x205878], flags: [-O2, -G0, -snas, -fno-schedule-insns2]}
-  - {src: src/game/unsorted/tu_204a50_205878.c, range: [0x205878, 0x205980], sections: false}
-  - {src: src/game/unsorted/tu_204a50_205980.c, range: [0x205980, 0x205a00], sections: false}
+  - {src: src/game/unsorted/tu_204a50_205878.c, range: [0x205878, 0x205980]}
+  - {src: src/game/unsorted/tu_204a50_205980.c, range: [0x205980, 0x205a00]}
   - {src: src/game/unsorted/tu_204a50_205a00.c, range: [0x205a00, 0x205bf0], flags: [-O2, -G0, -snas, -fno-schedule-insns2], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/unsorted/tu_204a50_205bf0.c, range: [0x205bf0, 0x205c50], note: flags or language differ}
   - {src: src/game/unsorted/tu_204a50_205c50.c, range: [0x205c50, 0x205ca0], flags: [-O1, -G0, -snas], note: flags or language differ}
@@ -1585,70 +1585,70 @@ splits:
   - {src: src/game/unsorted/tu_2094a8.c, range: [0x2094a8, 0x2094b0]}
   - {src: src/game/unsorted/tu_2094b0.c, range: [0x2094b0, 0x209760], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/unsorted/tu_2094b0_209760.c, range: [0x209760, 0x2097b8], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
-  - {src: src/game/unsorted/tu_2094b0_2097b8.c, range: [0x2097b8, 0x209a50], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_209a50.c, range: [0x209a50, 0x209bd8], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_209bd8.c, range: [0x209bd8, 0x209c08], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_209c08.c, range: [0x209c08, 0x209c38], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_209c38.c, range: [0x209c38, 0x209cf0], sections: false}
+  - {src: src/game/unsorted/tu_2094b0_2097b8.c, range: [0x2097b8, 0x209a50]}
+  - {src: src/game/unsorted/tu_2094b0_209a50.c, range: [0x209a50, 0x209bd8]}
+  - {src: src/game/unsorted/tu_2094b0_209bd8.c, range: [0x209bd8, 0x209c08]}
+  - {src: src/game/unsorted/tu_2094b0_209c08.c, range: [0x209c08, 0x209c38]}
+  - {src: src/game/unsorted/tu_2094b0_209c38.c, range: [0x209c38, 0x209cf0]}
   - {src: src/game/unsorted/tu_2094b0_209cf0.c, range: [0x209cf0, 0x209e78], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/unsorted/tu_2094b0_209e78.c, range: [0x209e78, 0x20aac8], note: flags or language differ}
   - {src: src/game/unsorted/tu_2094b0_20aac8.c, range: [0x20aac8, 0x20ae20], flags: [-O2, -G0, -snas, -fno-schedule-insns2]}
-  - {src: src/game/unsorted/tu_2094b0_20ae20.c, range: [0x20ae20, 0x20aff8], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20aff8.c, range: [0x20aff8, 0x20b0c0], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20b0c0.c, range: [0x20b0c0, 0x20b8c0], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20b8c0.c, range: [0x20b8c0, 0x20b980], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20b980.c, range: [0x20b980, 0x20ba98], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20ba98.c, range: [0x20ba98, 0x20bc00], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20bc00.c, range: [0x20bc00, 0x20be90], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20be90.c, range: [0x20be90, 0x20bfe8], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20bfe8.c, range: [0x20bfe8, 0x20c098], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20c098.c, range: [0x20c098, 0x20c440], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20c440.c, range: [0x20c440, 0x20c4b8], sections: false}
+  - {src: src/game/unsorted/tu_2094b0_20ae20.c, range: [0x20ae20, 0x20aff8]}
+  - {src: src/game/unsorted/tu_2094b0_20aff8.c, range: [0x20aff8, 0x20b0c0]}
+  - {src: src/game/unsorted/tu_2094b0_20b0c0.c, range: [0x20b0c0, 0x20b8c0]}
+  - {src: src/game/unsorted/tu_2094b0_20b8c0.c, range: [0x20b8c0, 0x20b980]}
+  - {src: src/game/unsorted/tu_2094b0_20b980.c, range: [0x20b980, 0x20ba98]}
+  - {src: src/game/unsorted/tu_2094b0_20ba98.c, range: [0x20ba98, 0x20bc00]}
+  - {src: src/game/unsorted/tu_2094b0_20bc00.c, range: [0x20bc00, 0x20be90]}
+  - {src: src/game/unsorted/tu_2094b0_20be90.c, range: [0x20be90, 0x20bfe8]}
+  - {src: src/game/unsorted/tu_2094b0_20bfe8.c, range: [0x20bfe8, 0x20c098]}
+  - {src: src/game/unsorted/tu_2094b0_20c098.c, range: [0x20c098, 0x20c440]}
+  - {src: src/game/unsorted/tu_2094b0_20c440.c, range: [0x20c440, 0x20c4b8]}
   - {src: src/game/unsorted/tu_2094b0_20c4b8.c, range: [0x20c4b8, 0x20c4f0], flags: [-O2, -G0, -snas, -fno-schedule-insns2]}
-  - {src: src/game/unsorted/tu_2094b0_20c4f0.c, range: [0x20c4f0, 0x20c5e8], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20c5e8.c, range: [0x20c5e8, 0x20c848], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20c848.c, range: [0x20c848, 0x20c998], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20c998.c, range: [0x20c998, 0x20ca70], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20ca70.c, range: [0x20ca70, 0x20cbc0], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20cbc0.c, range: [0x20cbc0, 0x20cc98], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20cc98.c, range: [0x20cc98, 0x20cca0], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20cca0.c, range: [0x20cca0, 0x20ccf8], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20ccf8.c, range: [0x20ccf8, 0x20d188], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20d188.c, range: [0x20d188, 0x20d910], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20d910.c, range: [0x20d910, 0x20db40], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20db40.c, range: [0x20db40, 0x20db90], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20db90.c, range: [0x20db90, 0x20dc20], sections: false}
+  - {src: src/game/unsorted/tu_2094b0_20c4f0.c, range: [0x20c4f0, 0x20c5e8]}
+  - {src: src/game/unsorted/tu_2094b0_20c5e8.c, range: [0x20c5e8, 0x20c848]}
+  - {src: src/game/unsorted/tu_2094b0_20c848.c, range: [0x20c848, 0x20c998]}
+  - {src: src/game/unsorted/tu_2094b0_20c998.c, range: [0x20c998, 0x20ca70]}
+  - {src: src/game/unsorted/tu_2094b0_20ca70.c, range: [0x20ca70, 0x20cbc0]}
+  - {src: src/game/unsorted/tu_2094b0_20cbc0.c, range: [0x20cbc0, 0x20cc98]}
+  - {src: src/game/unsorted/tu_2094b0_20cc98.c, range: [0x20cc98, 0x20cca0]}
+  - {src: src/game/unsorted/tu_2094b0_20cca0.c, range: [0x20cca0, 0x20ccf8]}
+  - {src: src/game/unsorted/tu_2094b0_20ccf8.c, range: [0x20ccf8, 0x20d188]}
+  - {src: src/game/unsorted/tu_2094b0_20d188.c, range: [0x20d188, 0x20d910]}
+  - {src: src/game/unsorted/tu_2094b0_20d910.c, range: [0x20d910, 0x20db40]}
+  - {src: src/game/unsorted/tu_2094b0_20db40.c, range: [0x20db40, 0x20db90]}
+  - {src: src/game/unsorted/tu_2094b0_20db90.c, range: [0x20db90, 0x20dc20]}
   - {src: src/game/unsorted/tu_2094b0_20dc20.c, range: [0x20dc20, 0x20dc60], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_2094b0_20dc60.c, range: [0x20dc60, 0x20e118]}
   - {src: src/game/unsorted/tu_2094b0_20e118.c, range: [0x20e118, 0x20e200]}
   - {src: src/game/unsorted/tu_2094b0_20e200.c, range: [0x20e200, 0x20e630]}
-  - {src: src/game/unsorted/tu_2094b0_20e630.c, range: [0x20e630, 0x20e678], flags: [-G1, -Os], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20e678.c, range: [0x20e678, 0x20e6c8], flags: [-G1, -Os], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20e6c8.c, range: [0x20e6c8, 0x20e768], flags: [-G1, -Os], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20e768.c, range: [0x20e768, 0x20e7a8], flags: [-G1, -Os], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_20e7a8.c, range: [0x20e7a8, 0x20e840], flags: [-G1, -Os], sections: false}
+  - {src: src/game/unsorted/tu_2094b0_20e630.c, range: [0x20e630, 0x20e678], flags: [-G1, -Os]}
+  - {src: src/game/unsorted/tu_2094b0_20e678.c, range: [0x20e678, 0x20e6c8], flags: [-G1, -Os]}
+  - {src: src/game/unsorted/tu_2094b0_20e6c8.c, range: [0x20e6c8, 0x20e768], flags: [-G1, -Os]}
+  - {src: src/game/unsorted/tu_2094b0_20e768.c, range: [0x20e768, 0x20e7a8], flags: [-G1, -Os]}
+  - {src: src/game/unsorted/tu_2094b0_20e7a8.c, range: [0x20e7a8, 0x20e840], flags: [-G1, -Os]}
   - {src: src/game/unsorted/tu_2094b0_20e840.c, range: [0x20e840, 0x20eac8]}
   - {src: src/game/unsorted/graphics_level_register.cpp, range: [0x20eac8, 0x20edb0]}
   - {src: src/game/unsorted/graphics_level_cleanup.cpp, range: [0x20edb0, 0x20f5a0], flags: [-O2, -G1]}
   - {src: src/game/unsorted/graphics_level_callback.cpp, range: [0x20f5a0, 0x20f6c8]}
   - {src: src/game/unsorted/tu_2094b0_20f6c8.c, range: [0x20f6c8, 0x210160], note: flags or language differ}
   - {src: src/game/unsorted/tu_2094b0_210160.c, range: [0x210160, 0x210450], flags: [-Os, -G0]}
-  - {src: src/game/unsorted/tu_2094b0_210450.c, range: [0x210450, 0x2105f8], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_2105f8.c, range: [0x2105f8, 0x210c40], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_210c40.c, range: [0x210c40, 0x210db8], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_210db8.c, range: [0x210db8, 0x211380], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_211380.c, range: [0x211380, 0x211580], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_211580.c, range: [0x211580, 0x211ac0], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_211ac0.c, range: [0x211ac0, 0x211c90], sections: false}
+  - {src: src/game/unsorted/tu_2094b0_210450.c, range: [0x210450, 0x2105f8]}
+  - {src: src/game/unsorted/tu_2094b0_2105f8.c, range: [0x2105f8, 0x210c40]}
+  - {src: src/game/unsorted/tu_2094b0_210c40.c, range: [0x210c40, 0x210db8]}
+  - {src: src/game/unsorted/tu_2094b0_210db8.c, range: [0x210db8, 0x211380]}
+  - {src: src/game/unsorted/tu_2094b0_211380.c, range: [0x211380, 0x211580]}
+  - {src: src/game/unsorted/tu_2094b0_211580.c, range: [0x211580, 0x211ac0]}
+  - {src: src/game/unsorted/tu_2094b0_211ac0.c, range: [0x211ac0, 0x211c90]}
   - {src: src/game/unsorted/tu_2094b0_211c90.c, range: [0x211c90, 0x211e60], flags: [-Os, -G0], note: flags or language differ}
   - {src: src/game/unsorted/tu_2094b0_211e60.c, range: [0x211e60, 0x2122d0], note: constants of assembly functions interleave}
   - {src: src/game/unsorted/tu_2094b0_2122d0.c, range: [0x2122d0, 0x212528], note: constants of assembly functions interleave}
   - {src: src/game/unsorted/tu_2094b0_212528.c, range: [0x212528, 0x2133c0]}
-  - {src: src/game/unsorted/tu_2094b0_2133c0.c, range: [0x2133c0, 0x2134f0], sections: false}
-  - {src: src/game/unsorted/tu_2094b0_2134f0.c, range: [0x2134f0, 0x2134f8], sections: false}
+  - {src: src/game/unsorted/tu_2094b0_2133c0.c, range: [0x2133c0, 0x2134f0]}
+  - {src: src/game/unsorted/tu_2094b0_2134f0.c, range: [0x2134f0, 0x2134f8]}
   - {src: src/game/unsorted/graphics_bindings.cpp, range: [0x2134f8, 0x214408], flags: [-O2, -G0]}
   - {src: src/game/unsorted/tu_2094b0_214408.c, range: [0x214408, 0x214cf8], note: constants of assembly functions interleave}
-  - {src: src/game/unsorted/tu_2094b0_214cf8.cpp, range: [0x214cf8, 0x215028], sections: false}
+  - {src: src/game/unsorted/tu_2094b0_214cf8.cpp, range: [0x214cf8, 0x215028]}
   - {src: src/game/unsorted/tu_2094b0_214408.c, range: [0x215028, 0x215250]}
   - {src: src/game/unsorted/tu_2094b0_214cf8.cpp, range: [0x215250, 0x2156b0]}
   - {src: src/game/unsorted/tu_2094b0_214408.c, range: [0x2156b0, 0x2162c8]}
@@ -1696,27 +1696,27 @@ splits:
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x234ed0, 0x2365c8]}
   - {src: src/apt/tu_2365c8.c, range: [0x2365c8, 0x236668]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x236668, 0x236ac0]}
-  - {src: src/apt/tu_236ac0.c, range: [0x236ac0, 0x23dd28], sections: false}
-  - {src: src/apt/tu_236ac0_23dd28.c, range: [0x23dd28, 0x23e698], sections: false}
-  - {src: src/apt/tu_236ac0_23e698.c, range: [0x23e698, 0x23e830], sections: false}
-  - {src: src/apt/tu_236ac0_23e830.c, range: [0x23e830, 0x23e8b8], sections: false}
-  - {src: src/apt/tu_236ac0_23e8b8.c, range: [0x23e8b8, 0x23e958], sections: false}
-  - {src: src/apt/tu_236ac0_23e958.c, range: [0x23e958, 0x23e9e0], sections: false}
+  - {src: src/apt/tu_236ac0.c, range: [0x236ac0, 0x23dd28]}
+  - {src: src/apt/tu_236ac0_23dd28.c, range: [0x23dd28, 0x23e698]}
+  - {src: src/apt/tu_236ac0_23e698.c, range: [0x23e698, 0x23e830]}
+  - {src: src/apt/tu_236ac0_23e830.c, range: [0x23e830, 0x23e8b8]}
+  - {src: src/apt/tu_236ac0_23e8b8.c, range: [0x23e8b8, 0x23e958]}
+  - {src: src/apt/tu_236ac0_23e958.c, range: [0x23e958, 0x23e9e0]}
   - {src: src/apt/tu_23e9e0.c, range: [0x23e9e0, 0x23eb78]}
   - {src: src/apt/tu_23eb78.c, range: [0x23eb78, 0x241b40]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x241b40, 0x241c40]}
   - {src: src/apt/tu_241c40.c, range: [0x241c40, 0x241c88]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x241c88, 0x241e98]}
   - {src: src/apt/tu_241e98.c, range: [0x241e98, 0x241ea0]}
-  - {src: src/apt/tu_241ea0.c, range: [0x241ea0, 0x242778], sections: false}
-  - {src: src/apt/tu_241ea0_242778.c, range: [0x242778, 0x243060], sections: false}
-  - {src: src/apt/tu_241ea0_243060.c, range: [0x243060, 0x244cd8], sections: false}
-  - {src: src/apt/tu_241ea0_244cd8.c, range: [0x244cd8, 0x244d78], sections: false}
-  - {src: src/apt/tu_241ea0_244d78.c, range: [0x244d78, 0x2454d0], sections: false}
+  - {src: src/apt/tu_241ea0.c, range: [0x241ea0, 0x242778]}
+  - {src: src/apt/tu_241ea0_242778.c, range: [0x242778, 0x243060]}
+  - {src: src/apt/tu_241ea0_243060.c, range: [0x243060, 0x244cd8]}
+  - {src: src/apt/tu_241ea0_244cd8.c, range: [0x244cd8, 0x244d78]}
+  - {src: src/apt/tu_241ea0_244d78.c, range: [0x244d78, 0x2454d0]}
   - {src: src/apt/tu_2454d0.c, range: [0x2454d0, 0x245690], flags: [-O2, -G8]}
-  - {src: src/apt/tu_245690.cpp, range: [0x245690, 0x246060], sections: false}
+  - {src: src/apt/tu_245690.cpp, range: [0x245690, 0x246060]}
   - {src: src/apt/tu_246060.c, range: [0x246060, 0x2470d0], note: flags or language differ}
-  - {src: src/apt/tu_246060_2470d0.cpp, range: [0x2470d0, 0x247560], sections: false}
+  - {src: src/apt/tu_246060_2470d0.cpp, range: [0x2470d0, 0x247560]}
   - {src: src/apt/tu_246060.c, range: [0x247560, 0x249cf0]}
   - {src: src/apt/tu_246060_249cf0.c, range: [0x249cf0, 0x249d40], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/apt/tu_246060_249d40.c, range: [0x249d40, 0x24a7f8]}
@@ -1724,31 +1724,31 @@ splits:
   - {src: src/apt/tu_24ad08.c, range: [0x24ad08, 0x24ae48]}
   - {src: src/apt/tu_24ae48.c, range: [0x24ae48, 0x24aef0]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x24aef0, 0x24b4a8]}
-  - {src: src/apt/tu_24b4a8.cpp, range: [0x24b4a8, 0x24c4f0], sections: false}
+  - {src: src/apt/tu_24b4a8.cpp, range: [0x24b4a8, 0x24c4f0]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x24c4f0, 0x24cba0]}
   - {src: src/apt/tu_24cba0.c, range: [0x24cba0, 0x24cbb0]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x24cbb0, 0x24ce90]}
   - {src: src/apt/tu_24ce90.c, range: [0x24ce90, 0x24f5d8], note: flags or language differ}
-  - {src: src/apt/tu_24ce90_24f5d8.cpp, range: [0x24f5d8, 0x24f760], sections: false}
+  - {src: src/apt/tu_24ce90_24f5d8.cpp, range: [0x24f5d8, 0x24f760]}
   - {src: src/apt/tu_24ce90.c, range: [0x24f760, 0x24fa38]}
   - {src: src/apt/tu_24ce90_24fa38.c, range: [0x24fa38, 0x24fe68], flags: [-O2, -G8, -snas], note: flags or language differ}
   - {src: src/apt/tu_24ce90_24fe68.c, range: [0x24fe68, 0x250970]}
   - {src: src/apt/tu_250970.c, range: [0x250970, 0x2509e8]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x2509e8, 0x251938]}
-  - {src: src/apt/tu_251938.c, range: [0x251938, 0x251f70], sections: false}
-  - {src: src/apt/tu_251938_251f70.c, range: [0x251f70, 0x2521f0], sections: false}
-  - {src: src/apt/tu_251938_2521f0.c, range: [0x2521f0, 0x252310], sections: false}
-  - {src: src/apt/tu_251938_252310.c, range: [0x252310, 0x2523a8], sections: false}
-  - {src: src/apt/tu_251938_2523a8.c, range: [0x2523a8, 0x252830], sections: false}
-  - {src: src/apt/tu_251938_252830.c, range: [0x252830, 0x252928], sections: false}
-  - {src: src/apt/tu_251938_252928.c, range: [0x252928, 0x2529e0], sections: false}
-  - {src: src/apt/tu_251938_2529e0.c, range: [0x2529e0, 0x252a98], sections: false}
-  - {src: src/apt/tu_251938_252a98.c, range: [0x252a98, 0x252bb8], sections: false}
-  - {src: src/apt/tu_251938_252bb8.c, range: [0x252bb8, 0x252c58], sections: false}
-  - {src: src/apt/tu_251938_252c58.c, range: [0x252c58, 0x253058], sections: false}
-  - {src: src/apt/tu_251938_253058.c, range: [0x253058, 0x253128], sections: false}
-  - {src: src/apt/tu_251938_253128.c, range: [0x253128, 0x2537b0], sections: false}
-  - {src: src/apt/tu_251938_2537b0.c, range: [0x2537b0, 0x259950], sections: false}
+  - {src: src/apt/tu_251938.c, range: [0x251938, 0x251f70]}
+  - {src: src/apt/tu_251938_251f70.c, range: [0x251f70, 0x2521f0]}
+  - {src: src/apt/tu_251938_2521f0.c, range: [0x2521f0, 0x252310]}
+  - {src: src/apt/tu_251938_252310.c, range: [0x252310, 0x2523a8]}
+  - {src: src/apt/tu_251938_2523a8.c, range: [0x2523a8, 0x252830]}
+  - {src: src/apt/tu_251938_252830.c, range: [0x252830, 0x252928]}
+  - {src: src/apt/tu_251938_252928.c, range: [0x252928, 0x2529e0]}
+  - {src: src/apt/tu_251938_2529e0.c, range: [0x2529e0, 0x252a98]}
+  - {src: src/apt/tu_251938_252a98.c, range: [0x252a98, 0x252bb8]}
+  - {src: src/apt/tu_251938_252bb8.c, range: [0x252bb8, 0x252c58]}
+  - {src: src/apt/tu_251938_252c58.c, range: [0x252c58, 0x253058]}
+  - {src: src/apt/tu_251938_253058.c, range: [0x253058, 0x253128]}
+  - {src: src/apt/tu_251938_253128.c, range: [0x253128, 0x2537b0]}
+  - {src: src/apt/tu_251938_2537b0.c, range: [0x2537b0, 0x259950]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x259950, 0x2599d8]}
   - {src: src/game/unsorted/tu_2599d8.c, range: [0x2599d8, 0x259da8]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x259da8, 0x25b5d0]}
@@ -1787,14 +1787,14 @@ splits:
   - {src: src/game/camera/graphics_input_access.cpp, range: [0x26c8e0, 0x26ca00]}
   - {src: src/game/camera/tu_26baf8_26c8d0.c, range: [0x26ca00, 0x26ca20]}
   - {src: src/game/camera/graphics_input_access.cpp, range: [0x26ca20, 0x26ca98]}
-  - {src: src/game/camera/tu_26baf8_26ca98.cpp, range: [0x26ca98, 0x26cd20], sections: false}
+  - {src: src/game/camera/tu_26baf8_26ca98.cpp, range: [0x26ca98, 0x26cd20]}
   - {src: src/game/camera/tu_26baf8_26c8d0.c, range: [0x26cd20, 0x26cd28]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x26cd28, 0x26f258]}
   - {src: src/game/unsorted/tu_26f258.c, range: [0x26f258, 0x26f2e0]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x26f2e0, 0x26f320]}
   - {src: src/game/unsorted/tu_26f320.c, range: [0x26f320, 0x26f440]}
   - {src: src/game/unsorted/tu_26f440.c, range: [0x26f440, 0x26f580]}
-  - {src: src/game/ui/tu_26f440_26f580.cpp, range: [0x26f580, 0x26f640], sections: false}
+  - {src: src/game/ui/tu_26f440_26f580.cpp, range: [0x26f580, 0x26f640]}
   - {src: src/game/unsorted/tu_26f440.c, range: [0x26f640, 0x270138]}
   - {src: src/game/unsorted/tu_270138.c, range: [0x270138, 0x271348]}
   - {src: src/game/unsorted/tu_271348.c, range: [0x271348, 0x271368]}
@@ -1808,7 +1808,7 @@ splits:
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x272300, 0x272308]}
   - {src: src/game/unsorted/tu_272308.c, range: [0x272308, 0x272328]}
   - {src: src/game/unsorted/tu_272328.c, range: [0x272328, 0x2723b0]}
-  - {src: src/game/unsorted/tu_2723b0.cpp, range: [0x2723b0, 0x272488], sections: false}
+  - {src: src/game/unsorted/tu_2723b0.cpp, range: [0x2723b0, 0x272488]}
   - {src: src/game/unsorted/tu_272488.c, range: [0x272488, 0x272b58], note: flags or language differ}
   - {src: src/game/unsorted/tu_272488_272b58.c, range: [0x272b58, 0x272c18], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_272488_272c18.c, range: [0x272c18, 0x274e40]}
@@ -1830,9 +1830,9 @@ splits:
   - {src: src/game/unsorted/tu_278b48.c, range: [0x278b48, 0x278ec0]}
   - {src: src/game/unsorted/tu_278ec0.c, range: [0x278ec0, 0x278f00], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/unsorted/tu_278f00.c, range: [0x278f00, 0x278f30]}
-  - {src: src/game/unsorted/tu_278f30.c, range: [0x278f30, 0x278f40], sections: false}
-  - {src: src/game/unsorted/tu_278f30_278f40.c, range: [0x278f40, 0x2791b0], sections: false}
-  - {src: src/game/unsorted/tu_278f30_2791b0.c, range: [0x2791b0, 0x2792c0], sections: false}
+  - {src: src/game/unsorted/tu_278f30.c, range: [0x278f30, 0x278f40]}
+  - {src: src/game/unsorted/tu_278f30_278f40.c, range: [0x278f40, 0x2791b0]}
+  - {src: src/game/unsorted/tu_278f30_2791b0.c, range: [0x2791b0, 0x2792c0]}
   - {src: src/game/unsorted/tu_2792c0.c, range: [0x2792c0, 0x27a798], note: flags or language differ}
   - {src: src/game/unsorted/tu_2792c0_27a798.c, range: [0x27a798, 0x27a7a8], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_2792c0_27a7a8.c, range: [0x27a7a8, 0x27acb8], note: flags or language differ}
@@ -1869,20 +1869,20 @@ splits:
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280360, 0x2803f0]}
   - {src: src/game/unsorted/tu_2803f0.c, range: [0x2803f0, 0x280400]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280400, 0x2805a0]}
-  - {src: src/game/unsorted/tu_2805a0.c, range: [0x2805a0, 0x280748], sections: false}
-  - {src: src/game/unsorted/tu_2805a0_280748.c, range: [0x280748, 0x2807b0], sections: false}
-  - {src: src/game/unsorted/tu_2805a0_2807b0.c, range: [0x2807b0, 0x280808], sections: false}
-  - {src: src/game/unsorted/tu_2805a0_280808.c, range: [0x280808, 0x280848], sections: false}
-  - {src: src/game/unsorted/tu_2805a0_280848.c, range: [0x280848, 0x280c90], sections: false}
-  - {src: src/game/unsorted/tu_2805a0_280c90.c, range: [0x280c90, 0x280e10], sections: false}
+  - {src: src/game/unsorted/tu_2805a0.c, range: [0x2805a0, 0x280748]}
+  - {src: src/game/unsorted/tu_2805a0_280748.c, range: [0x280748, 0x2807b0]}
+  - {src: src/game/unsorted/tu_2805a0_2807b0.c, range: [0x2807b0, 0x280808]}
+  - {src: src/game/unsorted/tu_2805a0_280808.c, range: [0x280808, 0x280848]}
+  - {src: src/game/unsorted/tu_2805a0_280848.c, range: [0x280848, 0x280c90]}
+  - {src: src/game/unsorted/tu_2805a0_280c90.c, range: [0x280c90, 0x280e10]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280e10, 0x280fe0]}
   - {src: src/game/unsorted/tu_280fe0.c, range: [0x280fe0, 0x281010]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x281010, 0x281198]}
   - {src: src/game/unsorted/tu_281198.c, range: [0x281198, 0x2811e8], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/unsorted/tu_2811e8.c, range: [0x2811e8, 0x281238]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x281238, 0x281388]}
-  - {src: src/game/unsorted/tu_281388.c, range: [0x281388, 0x2813a0], flags: [-O1, -G0, -snas], sections: false}
-  - {src: src/game/unsorted/tu_281388_2813a0.c, range: [0x2813a0, 0x2817c8], flags: [-O1, -G0, -snas], sections: false}
+  - {src: src/game/unsorted/tu_281388.c, range: [0x281388, 0x2813a0], flags: [-O1, -G0, -snas]}
+  - {src: src/game/unsorted/tu_281388_2813a0.c, range: [0x2813a0, 0x2817c8], flags: [-O1, -G0, -snas]}
   - {src: src/game/unsorted/tu_281388_2817c8.c, range: [0x2817c8, 0x2818d0], flags: [-O2, -G0], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_2818d0.c, range: [0x2818d0, 0x2819e0], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_2819e0.c, range: [0x2819e0, 0x281a38], flags: [-O2, -G0], note: flags or language differ}
@@ -1899,7 +1899,7 @@ splits:
   - {src: src/game/unsorted/tu_281388_282880.c, range: [0x282880, 0x2831a0], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_2831a0.c, range: [0x2831a0, 0x283648], flags: [-Os, -G0], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x283648, 0x284688], note: flags or language differ}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x284688, 0x2848a0], sections: false}
+  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x284688, 0x2848a0]}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x2848a0, 0x2848a8]}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x2848a8, 0x284918]}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x284918, 0x284920]}
@@ -1916,9 +1916,9 @@ splits:
   - {src: src/game/unsorted/tu_281388_285ad0.c, range: [0x285ad0, 0x285c20], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_285c20.c, range: [0x285c20, 0x285ca0], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_285ca0.c, range: [0x285ca0, 0x2860d0], assembler: sn-min6}
-  - {src: src/game/unsorted/tu_281388_2860d0.c, range: [0x2860d0, 0x2860f0], sections: false}
-  - {src: src/game/unsorted/tu_281388_2860f0.c, range: [0x2860f0, 0x286120], sections: false}
-  - {src: src/game/unsorted/tu_281388_286120.c, range: [0x286120, 0x286220], sections: false}
+  - {src: src/game/unsorted/tu_281388_2860d0.c, range: [0x2860d0, 0x2860f0]}
+  - {src: src/game/unsorted/tu_281388_2860f0.c, range: [0x2860f0, 0x286120]}
+  - {src: src/game/unsorted/tu_281388_286120.c, range: [0x286120, 0x286220]}
   - {src: src/game/unsorted/tu_281388_286220.c, range: [0x286220, 0x286558], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_286558.c, range: [0x286558, 0x286698], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_286698.c, range: [0x286698, 0x2867c0], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
@@ -1942,16 +1942,16 @@ splits:
   - {src: src/game/unsorted/tu_288bc8_288d08.c, range: [0x288d08, 0x2891d8], note: constants of assembly functions interleave}
   - {src: src/game/unsorted/tu_288bc8_2891d8.c, range: [0x2891d8, 0x2892f0], note: constants of assembly functions interleave}
   - {src: src/game/unsorted/tu_288bc8_2892f0.c, range: [0x2892f0, 0x2899a0]}
-  - {src: src/game/ai/navigation/tu_2899a0.cpp, range: [0x2899a0, 0x289ae0], sections: false}
-  - {src: src/game/ai/navigation/tu_289ae0.cpp, range: [0x289ae0, 0x289da8], sections: false}
+  - {src: src/game/ai/navigation/tu_2899a0.cpp, range: [0x2899a0, 0x289ae0]}
+  - {src: src/game/ai/navigation/tu_289ae0.cpp, range: [0x289ae0, 0x289da8]}
   - {src: src/game/unsorted/tu_289ae0.c, range: [0x289da8, 0x289dd0]}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x289dd0, 0x28b848]}
   - {src: src/game/unsorted/tu_28b848.c, range: [0x28b848, 0x28b940], flags: [-O1, -G0, -snas]}
-  - {src: src/game/unsorted/tu_28b848_28b940.c, range: [0x28b940, 0x28bb68], sections: false}
-  - {src: src/game/unsorted/tu_28b848_28bb68.c, range: [0x28bb68, 0x28bba0], sections: false}
-  - {src: src/game/unsorted/tu_28b848_28bba0.c, range: [0x28bba0, 0x28bbf8], sections: false}
-  - {src: src/game/unsorted/tu_28bbf8.c, range: [0x28bbf8, 0x28bd68], sections: false}
-  - {src: src/game/unsorted/tu_28bbf8_28bd68.c, range: [0x28bd68, 0x28bd80], sections: false}
+  - {src: src/game/unsorted/tu_28b848_28b940.c, range: [0x28b940, 0x28bb68]}
+  - {src: src/game/unsorted/tu_28b848_28bb68.c, range: [0x28bb68, 0x28bba0]}
+  - {src: src/game/unsorted/tu_28b848_28bba0.c, range: [0x28bba0, 0x28bbf8]}
+  - {src: src/game/unsorted/tu_28bbf8.c, range: [0x28bbf8, 0x28bd68]}
+  - {src: src/game/unsorted/tu_28bbf8_28bd68.c, range: [0x28bd68, 0x28bd80]}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x28bd80, 0x28c040]}
   - {src: src/game/unsorted/tu_28c040.c, range: [0x28c040, 0x28c3e0]}
   - {src: src/game/unsorted/tu_28c3e0.c, range: [0x28c3e0, 0x28c4f8]}
@@ -1978,12 +1978,12 @@ splits:
   - {src: src/sony/tu_293e90_294e80.c, range: [0x294e80, 0x294e98], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/sony/tu_293e90_294e98.c, range: [0x294e98, 0x2962f0]}
   - {src: src/sony/tu_293e90_2962f0.c, range: [0x2962f0, 0x296468], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
-  - {src: src/sony/tu_293e90_296468.c, range: [0x296468, 0x2964c0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], sections: false}
+  - {src: src/sony/tu_293e90_296468.c, range: [0x296468, 0x2964c0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_293e90_2962f0.c, range: [0x2964c0, 0x298dc8]}
   - {src: src/sony/tu_293e90_296468.c, range: [0x298dc8, 0x299038]}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x299038, 0x299f48]}
-  - {src: src/sony/tu_299f48.c, range: [0x299f48, 0x29b050], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], sections: false}
-  - {src: src/sony/tu_299f48_29b050.c, range: [0x29b050, 0x29b0a8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], sections: false}
+  - {src: src/sony/tu_299f48.c, range: [0x299f48, 0x29b050], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
+  - {src: src/sony/tu_299f48_29b050.c, range: [0x29b050, 0x29b0a8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_29b0a8.c, range: [0x29b0a8, 0x29b1d0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29b1d0, 0x29b2c8]}
   - {src: src/sony/tu_29b2c8.c, range: [0x29b2c8, 0x29b500]}
@@ -2118,7 +2118,7 @@ splits:
   - {src: src/kynapse/predicates_2d70c0.cpp, range: [0x2d70c0, 0x2d7118], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_cshooteragent.cpp, range: [0x2d7118, 0x2d71e8]}
   - {src: src/kynapse/tu_2d65e8_2d6fa8.c, range: [0x2d71e8, 0x2d7260]}
-  - {src: src/kynapse/tu_2d7260.cpp, range: [0x2d7260, 0x2d7970], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], sections: false, data_ranges: [{end: '0x3c54ac', input: .data, kind: unwind, section: .data, start: '0x3c5278'}, {end: '0x3e3c08', input: .data.wander_vtable, section: .data, start: '0x3e3bb0'}, {end: '0x44f478', input: .bss, section: .bss, start: '0x44f360'}], rodata_type_splits: ['0x404708'], shared_exception_tables: ['0x40c920']}
+  - {src: src/kynapse/tu_2d7260.cpp, range: [0x2d7260, 0x2d7970], flags: [-fno-function-sections, -O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3c54ac', input: .data, kind: unwind, section: .data, start: '0x3c5278'}, {end: '0x3e3c08', input: .data.wander_vtable, section: .data, start: '0x3e3bb0'}, {end: '0x44f478', input: .bss, section: .bss, start: '0x44f360'}], rodata_type_splits: ['0x404708'], shared_exception_tables: ['0x40c920']}
   - {src: src/kynapse/parameter_classes_2d7970.cpp, range: [0x2d7970, 0x2d79e0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d7970_2d79e0.c, range: [0x2d79e0, 0x2d7af8]}
   - {src: src/kynapse/parameter_classes_2d7af8.cpp, range: [0x2d7af8, 0x2d7b68], flags: [-O2, -G0, -snas, -fbyte-bool]}
@@ -2278,7 +2278,7 @@ splits:
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e71e0, 0x2e7220]}
   - {src: src/kynapse/graph_allocator_cleanup.cpp, range: [0x2e7220, 0x2e72d0]}
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e72d0, 0x2e72f0]}
-  - {src: src/kynapse/tu_2e72f0.cpp, range: [0x2e72f0, 0x2e74e0], flags: [-x, c++, -O2, -G0, -snas], assembler: sn-min6, sections: false, data_ranges: [{end: '0x3c94a4', input: .data, kind: unwind, section: .data, start: '0x3c9364'}, {end: '0x3ea7e8', input: .data.nearest_point, section: .data, start: '0x3ea768'}, {end: '0x4514f0', input: .bss, section: .bss, start: '0x4513d8'}]}
+  - {src: src/kynapse/tu_2e72f0.cpp, range: [0x2e72f0, 0x2e74e0], flags: [-fno-function-sections, -x, c++, -O2, -G0, -snas], assembler: sn-min6, data_ranges: [{end: '0x3c94a4', input: .data, kind: unwind, section: .data, start: '0x3c9364'}, {end: '0x3ea7e8', input: .data.nearest_point, section: .data, start: '0x3ea768'}, {end: '0x4514f0', input: .bss, section: .bss, start: '0x4513d8'}]}
   - {src: src/kynapse/configure_2e74e0.cpp, range: [0x2e74e0, 0x2e75b8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e74e0_2e75b8.c, range: [0x2e75b8, 0x2e7670]}
   - {src: src/kynapse/parameter_tables_2e7670.cpp, range: [0x2e7670, 0x2e91c0], assembler: sn-min6}
@@ -2299,9 +2299,9 @@ splits:
   - {src: src/kynapse/global_accessors_2e9cc8.cpp, range: [0x2e9cc8, 0x2e9d10], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e7670_2e9328.c, range: [0x2e9d10, 0x2e9e20]}
   - {src: src/kynapse/graph_parameter_tables.cpp, range: [0x2e9e20, 0x2e9e88]}
-  - {src: src/kynapse/tu_2e9e88.c, range: [0x2e9e88, 0x2ea218], sections: false}
-  - {src: src/kynapse/tu_2e9e88_2ea218.c, range: [0x2ea218, 0x2ea258], sections: false}
-  - {src: src/kynapse/tu_2e9e88_2ea258.c, range: [0x2ea258, 0x2ea2f8], sections: false}
+  - {src: src/kynapse/tu_2e9e88.c, range: [0x2e9e88, 0x2ea218]}
+  - {src: src/kynapse/tu_2e9e88_2ea218.c, range: [0x2ea218, 0x2ea258]}
+  - {src: src/kynapse/tu_2e9e88_2ea258.c, range: [0x2ea258, 0x2ea2f8]}
   - {src: src/kynapse/tu_2ea2f8.cpp, range: [0x2ea2f8, 0x2ea388], flags: [-x, c++, -O2, -G0, -snas], data_ranges: [{end: '0x3c9ed4', input: .data, kind: unwind, section: .data, start: '0x3c9e8c'}, {end: '0x451528', input: .bss, section: .bss, start: '0x451518'}]}
   - {src: src/kynapse/behaviors_world.cpp, range: [0x2ea388, 0x2eb280], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/engine_class_2eb280.cpp, range: [0x2eb280, 0x2eb398], flags: [-O2, -G0, -snas, -fbyte-bool]}
@@ -2442,7 +2442,7 @@ splits:
   - {src: src/kynapse/slot_and_tolerance_records_3053f0.cpp, range: [0x3053f0, 0x305438], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2fec10_305110.c, range: [0x305438, 0x3054a8]}
   - {src: src/kynapse/tu_2fec10_3054a8.c, range: [0x3054a8, 0x305538]}
-  - {src: src/kynapse/tu_305538.cpp, range: [0x305538, 0x3055e0], flags: [-O2, -G0, -snas, -fbyte-bool], sections: false}
+  - {src: src/kynapse/tu_305538.cpp, range: [0x305538, 0x3055e0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3055e0, 0x305fd8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DFULL_TU_CONTEXT], data_ranges: [{end: '0x3f07a0', input: .data.steering_vtable, section: .data, start: '0x3f0760'}, {end: '0x455be8', input: .bss, section: .bss, start: '0x455ad0'}], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_00305FD8, func_00306538]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x305fd8, 0x3063a8]}
   - {src: src/kynapse/tu_305538_3063a8.c, range: [0x3063a8, 0x306448], flags: [-O2, -G0, -snas]}
@@ -2477,7 +2477,7 @@ splits:
   - {src: src/kynapse/sound_pool_30e6b8.cpp, range: [0x30e6b8, 0x30e728], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/CSoundManager_30d160_30e728.c, range: [0x30e728, 0x30e988]}
   - {src: src/kynapse/CSoundManager_30d160_30d1f8.c, range: [0x30e988, 0x30e9c8]}
-  - {src: src/kynapse/tu_30e9c8.cpp, range: [0x30e9c8, 0x30ea38], flags: [-x, c++, -O2, -G0, -snas, -fno-schedule-insns], sections: false, data_ranges: [{end: '0x3ce59c', input: .data, kind: unwind, section: .data, start: '0x3ce544'}]}
+  - {src: src/kynapse/tu_30e9c8.cpp, range: [0x30e9c8, 0x30ea38], flags: [-fno-function-sections, -x, c++, -O2, -G0, -snas, -fno-schedule-insns], data_ranges: [{end: '0x3ce59c', input: .data, kind: unwind, section: .data, start: '0x3ce544'}]}
   - {src: src/kynapse/factories_30ea38.cpp, range: [0x30ea38, 0x30eae0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_centitymanager.cpp, range: [0x30eae0, 0x30eca8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/perception_30eca8.cpp, range: [0x30eca8, 0x30f000], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
@@ -2503,12 +2503,12 @@ splits:
   - {src: src/rw_audio/tu_311e60.c, range: [0x311e60, 0x312a10], note: flags or language differ}
   - {src: src/rw_audio/tu_311e60_312a10.c, range: [0x312a10, 0x312bc8], flags: [-O1, -G0, -snas]}
   - {src: src/rw_audio/tu_312bc8.c, range: [0x312bc8, 0x312bd0]}
-  - {src: src/rw_audio/tu_312bd0.c, range: [0x312bd0, 0x312ca0], sections: false}
-  - {src: src/rw_audio/tu_312bd0_312ca0.c, range: [0x312ca0, 0x312cc8], sections: false}
-  - {src: src/rw_audio/tu_312bd0_312cc8.c, range: [0x312cc8, 0x312d08], sections: false}
-  - {src: src/rw_audio/tu_312bd0_312d08.c, range: [0x312d08, 0x312d28], sections: false}
-  - {src: src/rw_audio/tu_312bd0_312d28.c, range: [0x312d28, 0x312d48], sections: false}
-  - {src: src/rw_audio/tu_312bd0_312d48.c, range: [0x312d48, 0x313008], sections: false}
+  - {src: src/rw_audio/tu_312bd0.c, range: [0x312bd0, 0x312ca0]}
+  - {src: src/rw_audio/tu_312bd0_312ca0.c, range: [0x312ca0, 0x312cc8]}
+  - {src: src/rw_audio/tu_312bd0_312cc8.c, range: [0x312cc8, 0x312d08]}
+  - {src: src/rw_audio/tu_312bd0_312d08.c, range: [0x312d08, 0x312d28]}
+  - {src: src/rw_audio/tu_312bd0_312d28.c, range: [0x312d28, 0x312d48]}
+  - {src: src/rw_audio/tu_312bd0_312d48.c, range: [0x312d48, 0x313008]}
   - {src: src/rw_audio/tu_312bd0_313008.c, range: [0x313008, 0x313048], flags: [-O2, -G8, -snas], note: flags or language differ}
   - {src: src/rw_audio/tu_312bd0_313048.c, range: [0x313048, 0x313080], flags: [-O2, -G8]}
   - {src: src/rw_audio/tu_312bd0_313008.c, range: [0x313080, 0x3130a0]}
@@ -2560,7 +2560,7 @@ splits:
   - {src: src/rw_audio/tu_3168c8_316c38.c, range: [0x3174d0, 0x3175c8]}
   - {src: src/rw_audio/tu_3168c8_317340.c, range: [0x3175c8, 0x3176d0]}
   - {src: src/rw_audio/tu_3168c8_3176d0.c, range: [0x3176d0, 0x317838], note: flags or language differ}
-  - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x317838, 0x317868], flags: [-O2, -G8], sections: false}
+  - {src: src/rw_audio/tu_3168c8_317838.c, range: [0x317838, 0x317868], flags: [-O2, -G8]}
   - {src: src/rw_audio/tu_3168c8_317868.c, range: [0x317868, 0x3178b8], flags: [-O2, -G8], note: flags or language differ}
   - {src: src/rw_audio/tu_3168c8_3178b8.c, range: [0x3178b8, 0x3178c0], flags: [-O2, -G8, -snas], note: flags or language differ}
   - {src: src/rw_audio/tu_3168c8.c, range: [0x3178c0, 0x3178f0]}
@@ -2594,7 +2594,7 @@ splits:
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319a50, 0x319a70]}
   - {src: src/rw_audio/tu_3168c8.c, range: [0x319a70, 0x319ae0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319ae0, 0x319ca8]}
-  - {src: src/rw_audio/tu_3168c8_319ca8.c, range: [0x319ca8, 0x319ce8], flags: [-O2, -G8], sections: false}
+  - {src: src/rw_audio/tu_3168c8_319ca8.c, range: [0x319ca8, 0x319ce8], flags: [-O2, -G8]}
   - {src: src/rw_audio/tu_3168c8.c, range: [0x319ce8, 0x319da0]}
   - {src: src/rw_audio/tu_3168c8_318250.c, range: [0x319da0, 0x319de0]}
   - {src: src/rw_audio/tu_3168c8.c, range: [0x319de0, 0x319eb0]}
@@ -2668,7 +2668,7 @@ splits:
   - {src: src/rw_audio/tu_31e5a0.c, range: [0x31e5a0, 0x31e5c8]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x31e5c8, 0x31e648]}
   - {src: src/rw_audio/tu_31e648.c, range: [0x31e648, 0x31e650]}
-  - {src: src/rw_audio/tu_31e650.c, range: [0x31e650, 0x321f10], sections: false}
+  - {src: src/rw_audio/tu_31e650.c, range: [0x31e650, 0x321f10]}
   - {src: src/rw_audio/tu_31e650_321f10.c, range: [0x321f10, 0x322da8]}
   - {src: src/rw_audio/tu_31e650_322da8.c, range: [0x322da8, 0x322dd8], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/rw_audio/tu_31e650_321f10.c, range: [0x322dd8, 0x322e18]}
@@ -2695,10 +2695,10 @@ splits:
   - {src: src/rw_audio/tu_323ed0_324f98.c, range: [0x324f98, 0x325058], flags: [-O2, -G8, -snas], note: flags or language differ}
   - {src: src/rw_audio/tu_323ed0_325058.c, range: [0x325058, 0x3250d0], note: flags or language differ}
   - {src: src/rw_audio/tu_323ed0_3250d0.c, range: [0x3250d0, 0x326538], flags: [-O2, -G8, -snas]}
-  - {src: src/rw_audio/tu_323ed0_326538.c, range: [0x326538, 0x326858], sections: false}
-  - {src: src/rw_audio/tu_323ed0_326858.c, range: [0x326858, 0x3269d0], sections: false}
-  - {src: src/rw_audio/tu_323ed0_3269d0.c, range: [0x3269d0, 0x326aa0], sections: false}
-  - {src: src/rw_audio/tu_323ed0_326aa0.c, range: [0x326aa0, 0x326b60], sections: false}
+  - {src: src/rw_audio/tu_323ed0_326538.c, range: [0x326538, 0x326858]}
+  - {src: src/rw_audio/tu_323ed0_326858.c, range: [0x326858, 0x3269d0]}
+  - {src: src/rw_audio/tu_323ed0_3269d0.c, range: [0x3269d0, 0x326aa0]}
+  - {src: src/rw_audio/tu_323ed0_326aa0.c, range: [0x326aa0, 0x326b60]}
   - {src: src/rw_audio/tu_323ed0_326b60.c, range: [0x326b60, 0x326b70], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/rw_audio/tu_323ed0_326b70.c, range: [0x326b70, 0x3283b8], note: flags or language differ}
   - {src: src/rw_audio/tu_323ed0_3283b8.c, range: [0x3283b8, 0x3283c8], flags: [-O1, -G0, -snas], note: flags or language differ}
@@ -2708,24 +2708,24 @@ splits:
   - {src: src/rw_audio/tu_323ed0_3283f8.c, range: [0x3283f8, 0x328418], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/rw_audio/tu_323ed0_328418.c, range: [0x328418, 0x328428], note: flags or language differ}
   - {src: src/rw_audio/tu_323ed0_328428.c, range: [0x328428, 0x328448], flags: [-O1, -G0, -snas]}
-  - {src: src/rw_audio/tu_323ed0_328448.c, range: [0x328448, 0x3284e0], sections: false}
-  - {src: src/rw_audio/tu_323ed0_3284e0.c, range: [0x3284e0, 0x3285c0], sections: false}
-  - {src: src/rw_audio/tu_323ed0_3285c0.c, range: [0x3285c0, 0x328610], sections: false}
-  - {src: src/rw_audio/tu_323ed0_328610.c, range: [0x328610, 0x3286b0], sections: false}
-  - {src: src/rw_audio/tu_323ed0_3286b0.c, range: [0x3286b0, 0x328bb8], sections: false}
-  - {src: src/rw_audio/tu_323ed0_328bb8.c, range: [0x328bb8, 0x328c08], sections: false}
-  - {src: src/rw_audio/tu_323ed0_328c08.c, range: [0x328c08, 0x328c50], sections: false}
-  - {src: src/rw_audio/tu_323ed0_328c50.c, range: [0x328c50, 0x328ce8], sections: false}
-  - {src: src/rw_audio/tu_323ed0_328ce8.c, range: [0x328ce8, 0x328d58], sections: false}
-  - {src: src/rw_audio/tu_323ed0_328d58.c, range: [0x328d58, 0x328e60], sections: false}
-  - {src: src/rw_audio/tu_323ed0_328e60.c, range: [0x328e60, 0x329078], sections: false}
-  - {src: src/rw_audio/tu_323ed0_329078.c, range: [0x329078, 0x3291e0], sections: false}
-  - {src: src/rw_audio/tu_323ed0_3291e0.c, range: [0x3291e0, 0x329710], sections: false}
-  - {src: src/rw_audio/tu_323ed0_329710.c, range: [0x329710, 0x3298d8], sections: false}
-  - {src: src/rw_audio/tu_323ed0_3298d8.c, range: [0x3298d8, 0x329958], sections: false}
-  - {src: src/rw_audio/tu_323ed0_329958.c, range: [0x329958, 0x32a0e8], sections: false}
-  - {src: src/rw_audio/tu_323ed0_32a0e8.c, range: [0x32a0e8, 0x32a238], sections: false}
-  - {src: src/rw_audio/tu_323ed0_32a238.c, range: [0x32a238, 0x32a440], sections: false}
+  - {src: src/rw_audio/tu_323ed0_328448.c, range: [0x328448, 0x3284e0]}
+  - {src: src/rw_audio/tu_323ed0_3284e0.c, range: [0x3284e0, 0x3285c0]}
+  - {src: src/rw_audio/tu_323ed0_3285c0.c, range: [0x3285c0, 0x328610]}
+  - {src: src/rw_audio/tu_323ed0_328610.c, range: [0x328610, 0x3286b0]}
+  - {src: src/rw_audio/tu_323ed0_3286b0.c, range: [0x3286b0, 0x328bb8]}
+  - {src: src/rw_audio/tu_323ed0_328bb8.c, range: [0x328bb8, 0x328c08]}
+  - {src: src/rw_audio/tu_323ed0_328c08.c, range: [0x328c08, 0x328c50]}
+  - {src: src/rw_audio/tu_323ed0_328c50.c, range: [0x328c50, 0x328ce8]}
+  - {src: src/rw_audio/tu_323ed0_328ce8.c, range: [0x328ce8, 0x328d58]}
+  - {src: src/rw_audio/tu_323ed0_328d58.c, range: [0x328d58, 0x328e60]}
+  - {src: src/rw_audio/tu_323ed0_328e60.c, range: [0x328e60, 0x329078]}
+  - {src: src/rw_audio/tu_323ed0_329078.c, range: [0x329078, 0x3291e0]}
+  - {src: src/rw_audio/tu_323ed0_3291e0.c, range: [0x3291e0, 0x329710]}
+  - {src: src/rw_audio/tu_323ed0_329710.c, range: [0x329710, 0x3298d8]}
+  - {src: src/rw_audio/tu_323ed0_3298d8.c, range: [0x3298d8, 0x329958]}
+  - {src: src/rw_audio/tu_323ed0_329958.c, range: [0x329958, 0x32a0e8]}
+  - {src: src/rw_audio/tu_323ed0_32a0e8.c, range: [0x32a0e8, 0x32a238]}
+  - {src: src/rw_audio/tu_323ed0_32a238.c, range: [0x32a238, 0x32a440]}
   - {src: src/rw_audio/tu_32a440.c, range: [0x32a440, 0x32a488]}
   - {src: src/rw_audio/tu_32a488.c, range: [0x32a488, 0x32a4b0], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/rw_audio/tu_32a4b0.c, range: [0x32a4b0, 0x32a4f0]}
@@ -2743,7 +2743,7 @@ splits:
   - {src: src/physics/tu_32e3d0_32e5d8.cpp, range: [0x32e3d0, 0x32e710], flags: [-O2, -G0, -snas, -x, c++]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x32e710, 0x32e810]}
   - {src: src/physics/tu_32e810.cpp, range: [0x32e810, 0x32fbc0]}
-  - {src: src/physics/tu_32fbc0.c, range: [0x32fbc0, 0x331d70], sections: false}
+  - {src: src/physics/tu_32fbc0.c, range: [0x32fbc0, 0x331d70]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x331d70, 0x3325e0]}
   - {src: src/game/unsorted/tu_3325e0.cpp, range: [0x3325e0, 0x332768], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e888', input: .sbss, section: .sbss, start: '0x40e878'}, {end: '0x45cd30', input: .bss, section: .bss, start: '0x45ccf0'}]}
   - {src: src/game/unsorted/tu_332768.cpp, range: [0x332768, 0x332928], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e898', input: .sbss, section: .sbss, start: '0x40e888'}, {end: '0x45cd70', input: .bss, section: .bss, start: '0x45cd30'}]}
@@ -2773,7 +2773,7 @@ splits:
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x33ebd0, 0x33f0e0]}
   - {src: src/physics/tu_33f0e0.cpp, range: [0x33f0e0, 0x33f328], flags: [-x, c++, -O2, -G8, -snas, -mvu0-use-vf0-vf31], data_ranges: [{end: '0x40e988', input: .sbss, section: .sbss, start: '0x40e978'}, {end: '0x45e9a0', input: .bss, section: .bss, start: '0x45e960'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x33f328, 0x33f400]}
-  - {src: src/physics/tu_33f400.cpp, range: [0x33f400, 0x33faa8], sections: false}
+  - {src: src/physics/tu_33f400.cpp, range: [0x33f400, 0x33faa8]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x33faa8, 0x341520]}
   - {src: src/game/unsorted/tu_341520.cpp, range: [0x341520, 0x3416b8], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e998', input: .sbss, section: .sbss, start: '0x40e988'}, {end: '0x45e9e0', input: .bss, section: .bss, start: '0x45e9a0'}]}
   - {src: src/game/unsorted/tu_3416b8.cpp, range: [0x3416b8, 0x341868], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e9a8', input: .sbss, section: .sbss, start: '0x40e998'}, {end: '0x45ea20', input: .bss, section: .bss, start: '0x45e9e0'}]}
@@ -2797,8 +2797,8 @@ splits:
   - {src: src/animation/animation_instance_347a50.cpp, range: [0x347a50, 0x3485e8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d2524', input: .data.animation_graph_mode, section: .data, start: '0x3d2520'}, {end: '0x3d2910', input: .data, kind: unwind, section: .data, start: '0x3d2524'}], rodata_type_splits: ['0x40a668']}
   - {src: src/animation/tu_3485e8.c, range: [0x3485e8, 0x348778]}
   - {src: src/animation/tu_348778.c, range: [0x348778, 0x3489a0]}
-  - {src: src/animation/tu_3489a0.c, range: [0x3489a0, 0x3489e0], sections: false}
-  - {src: src/animation/tu_3489a0_3489e0.c, range: [0x3489e0, 0x348a10], sections: false}
+  - {src: src/animation/tu_3489a0.c, range: [0x3489a0, 0x3489e0]}
+  - {src: src/animation/tu_3489a0_3489e0.c, range: [0x3489e0, 0x348a10]}
   - {src: src/animation/tu_348a10.c, range: [0x348a10, 0x348a38], note: flags or language differ}
   - {src: src/animation/tu_348a10_348a38.c, range: [0x348a38, 0x348a90], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/animation/vu0_micro_controls.cpp, range: [0x348a90, 0x348b18]}
@@ -2835,7 +2835,7 @@ splits:
   - {src: src/animation/tu_34b498.c, range: [0x34e758, 0x34e828]}
   - {src: src/animation/tu_34b498_34e5c0.cpp, range: [0x34e828, 0x34e908]}
   - {src: src/animation/tu_34b498.c, range: [0x34e908, 0x34eae0]}
-  - {src: src/animation/tu_34eae0.c, range: [0x34eae0, 0x34eb88], sections: false}
+  - {src: src/animation/tu_34eae0.c, range: [0x34eae0, 0x34eb88]}
   - {src: src/animation/tu_34eae0_allocate_banks.cpp, range: [0x34eb88, 0x34ecd8]}
   - {src: src/animation/tu_34eae0_release_banks.c, range: [0x34ecd8, 0x34ed80]}
   - {src: src/animation/tu_34eae0_34ed80.c, range: [0x34ed80, 0x34edb8], note: flags or language differ}
@@ -2857,16 +2857,16 @@ splits:
   - {src: src/animation/tu_352b00.c, range: [0x352b00, 0x352b30], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/animation/tu_352b00_352b30.c, range: [0x352b30, 0x352b50]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x352b50, 0x353118]}
-  - {src: src/game/unsorted/tu_353118.c, range: [0x353118, 0x353518], sections: false}
-  - {src: src/game/unsorted/tu_353118_353518.c, range: [0x353518, 0x353550], sections: false}
-  - {src: src/game/unsorted/tu_353118_353550.c, range: [0x353550, 0x3535b0], sections: false}
-  - {src: src/game/unsorted/tu_353118_3535b0.c, range: [0x3535b0, 0x3535e0], sections: false}
-  - {src: src/game/unsorted/tu_353118_3535e0.c, range: [0x3535e0, 0x353670], sections: false}
-  - {src: src/game/unsorted/tu_353118_353670.c, range: [0x353670, 0x3536d0], sections: false}
-  - {src: src/game/unsorted/tu_353118_3536d0.c, range: [0x3536d0, 0x353700], sections: false}
-  - {src: src/game/unsorted/tu_353118_353700.c, range: [0x353700, 0x354c60], sections: false}
-  - {src: src/game/unsorted/tu_353118_354c60.c, range: [0x354c60, 0x354e78], sections: false}
-  - {src: src/game/unsorted/tu_353118_354e78.c, range: [0x354e78, 0x355278], sections: false}
+  - {src: src/game/unsorted/tu_353118.c, range: [0x353118, 0x353518]}
+  - {src: src/game/unsorted/tu_353118_353518.c, range: [0x353518, 0x353550]}
+  - {src: src/game/unsorted/tu_353118_353550.c, range: [0x353550, 0x3535b0]}
+  - {src: src/game/unsorted/tu_353118_3535b0.c, range: [0x3535b0, 0x3535e0]}
+  - {src: src/game/unsorted/tu_353118_3535e0.c, range: [0x3535e0, 0x353670]}
+  - {src: src/game/unsorted/tu_353118_353670.c, range: [0x353670, 0x3536d0]}
+  - {src: src/game/unsorted/tu_353118_3536d0.c, range: [0x3536d0, 0x353700]}
+  - {src: src/game/unsorted/tu_353118_353700.c, range: [0x353700, 0x354c60]}
+  - {src: src/game/unsorted/tu_353118_354c60.c, range: [0x354c60, 0x354e78]}
+  - {src: src/game/unsorted/tu_353118_354e78.c, range: [0x354e78, 0x355278]}
   - {src: src/sony/tu_355278.c, range: [0x355278, 0x356030], compiler: ee-gcc2.9-991111-01, flags: [-O2, -fno-schedule-insns, -G0], note: flags or language differ}
   - {src: src/sony/tu_355278_356030.c, range: [0x356030, 0x3560f0]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x3560f0, 0x3563a0]}
@@ -2880,7 +2880,7 @@ splits:
   - {src: src/sony/tu_35b470.c, range: [0x35b470, 0x35b6d0], compiler: ee-gcc2.9-991111-01, flags: [-Os, -G0], note: flags or language differ}
   - {src: src/sony/tu_35b470_35b6d0.c, range: [0x35b6d0, 0x35c4a0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: flags or language differ}
   - {src: src/sony/tu_35b470_35c4a0.c, range: [0x35c4a0, 0x35c6ec]}
-  - {src: src/sony/tu_35b470_35c6ec.cpp, range: [0x35c6ec, 0x35c7a4], sections: false}
+  - {src: src/sony/tu_35b470_35c6ec.cpp, range: [0x35c6ec, 0x35c7a4]}
   - {src: src/sony/tu_35c7a4.c, range: [0x35c7a4, 0x35ebb0]}
   - {src: src/libc/tu_35ebb0.c, range: [0x35ebb0, 0x35f6c0]}
   - {src: src/libc/tu_35f6c0.c, range: [0x35f6c0, 0x3605f0]}
@@ -2890,9 +2890,9 @@ splits:
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x360938, 0x360ac8]}
   - {src: src/libc/tu_360ac8.c, range: [0x360ac8, 0x360b90]}
   - {src: src/libc/tu_360b90.c, range: [0x360b90, 0x360c10]}
-  - {src: src/libc/tu_360c10.c, range: [0x360c10, 0x364e20], sections: false}
-  - {src: src/libc/tu_360c10_364e20.c, range: [0x364e20, 0x364e38], sections: false}
-  - {src: src/libc/tu_360c10_364e38.c, range: [0x364e38, 0x364f50], sections: false}
+  - {src: src/libc/tu_360c10.c, range: [0x360c10, 0x364e20]}
+  - {src: src/libc/tu_360c10_364e20.c, range: [0x364e20, 0x364e38]}
+  - {src: src/libc/tu_360c10_364e38.c, range: [0x364e38, 0x364f50]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x364f50, 0x365d48]}
   - {src: src/libc/tu_365d48.c, range: [0x365d48, 0x365f80]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x365f80, 0x366468]}
@@ -2920,13 +2920,13 @@ splits:
   - {src: src/sony/tu_36a168.c, range: [0x36a6e0, 0x36b340]}
   - {src: src/sony/tu_36a168_36a660.c, range: [0x36b340, 0x36b9c8]}
   - {src: src/sony/tu_36a168_36b9c8.c, range: [0x36b9c8, 0x36bce8], compiler: ee-gcc2.9-991111-01, flags: [-Os, -G0]}
-  - {src: src/sony/tu_36a168_36bce8.c, range: [0x36bce8, 0x36cfa8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], sections: false}
-  - {src: src/sony/tu_36a168_36cfa8.c, range: [0x36cfa8, 0x36d218], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], sections: false}
+  - {src: src/sony/tu_36a168_36bce8.c, range: [0x36bce8, 0x36cfa8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
+  - {src: src/sony/tu_36a168_36cfa8.c, range: [0x36cfa8, 0x36d218], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_36a168_36d218.c, range: [0x36d218, 0x36d260]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x36d260, 0x36d580]}
   - {src: src/sony/tu_36d580.c, range: [0x36d580, 0x36d848]}
-  - {src: src/sony/tu_36d580_36d848.c, range: [0x36d848, 0x36d960], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], sections: false}
-  - {src: src/sony/tu_36d580_36d960.c, range: [0x36d960, 0x36d9c8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], sections: false}
+  - {src: src/sony/tu_36d580_36d848.c, range: [0x36d848, 0x36d960], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
+  - {src: src/sony/tu_36d580_36d960.c, range: [0x36d960, 0x36d9c8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_36d580_36d9c8.c, range: [0x36d9c8, 0x36db08]}
   - {src: src/sony/tu_36db08.c, range: [0x36db08, 0x36dfb8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: flags or language differ}
   - {src: src/sony/tu_36db08_36dfb8.c, range: [0x36dfb8, 0x36e360], note: flags or language differ}
@@ -2957,10 +2957,10 @@ splits:
   - {src: src/libc/tu_3700d0_370720.c, range: [0x370720, 0x370760], note: flags or language differ}
   - {src: src/libc/tu_3700d0_370760.c, range: [0x370760, 0x3707a0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/libc/tu_3707a0.c, range: [0x3707a0, 0x370d28]}
-  - {src: src/libc/tu_3707a0_370d28.c, range: [0x370d28, 0x370d48], sections: false}
-  - {src: src/libc/tu_3707a0_370d48.c, range: [0x370d48, 0x370d68], sections: false}
-  - {src: src/libc/tu_3707a0_370d68.c, range: [0x370d68, 0x370d88], sections: false}
-  - {src: src/libc/tu_3707a0_370d88.c, range: [0x370d88, 0x370da8], sections: false}
+  - {src: src/libc/tu_3707a0_370d28.c, range: [0x370d28, 0x370d48]}
+  - {src: src/libc/tu_3707a0_370d48.c, range: [0x370d48, 0x370d68]}
+  - {src: src/libc/tu_3707a0_370d68.c, range: [0x370d68, 0x370d88]}
+  - {src: src/libc/tu_3707a0_370d88.c, range: [0x370d88, 0x370da8]}
   - {src: src/libc/tu_3707a0_370da8.c, range: [0x370da8, 0x371260], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: flags or language differ}
   - {src: src/libc/tu_3707a0_371260.c, range: [0x371260, 0x371280], note: flags or language differ}
   - {src: src/libc/tu_3707a0_371280.c, range: [0x371280, 0x3712d0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: flags or language differ}
@@ -2998,7 +2998,7 @@ splits:
   - {src: src/game/unsorted/tu_375170.c, range: [0x375170, 0x375178]}
   - {src: src/game/unsorted/tu_375178.c, range: [0x375178, 0x377840], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/unsorted/tu_375178_377840.c, range: [0x377840, 0x377cd0]}
-  - {src: src/game/unsorted/tu_375178_377cd0.c, range: [0x377cd0, 0x378698], sections: false}
+  - {src: src/game/unsorted/tu_375178_377cd0.c, range: [0x377cd0, 0x378698]}
   - {src: src/game/unsorted/tu_375178_377840.c, range: [0x378698, 0x3786e0]}
   - {src: src/game/unsorted/tu_375178_377cd0.c, range: [0x3786e0, 0x378740]}
   - {src: src/game/unsorted/tu_375178_377840.c, range: [0x378740, 0x378770]}
@@ -3138,20 +3138,20 @@ splits:
   - {src: src/apt/inline/linkonce_385548.c, range: [0x385548, 0x385568]}
   - {src: src/apt/inline/linkonce_385568.c, range: [0x385568, 0x3855d8]}
   - {src: src/apt/inline/linkonce_3855d8.c, range: [0x3855d8, 0x385660]}
-  - {src: src/apt/inline/linkonce_385660.c, range: [0x385660, 0x385b10], sections: false}
-  - {src: src/apt/inline/linkonce_385660_385b10.c, range: [0x385b10, 0x385db0], sections: false}
-  - {src: src/apt/inline/linkonce_385660_385db0.c, range: [0x385db0, 0x385e68], sections: false}
-  - {src: src/apt/inline/linkonce_385660_385e68.c, range: [0x385e68, 0x386030], sections: false}
-  - {src: src/apt/inline/linkonce_385660_386030.c, range: [0x386030, 0x386100], sections: false}
-  - {src: src/apt/inline/linkonce_385660_386100.c, range: [0x386100, 0x386188], sections: false}
-  - {src: src/apt/inline/linkonce_385660_386188.c, range: [0x386188, 0x3861f8], sections: false}
-  - {src: src/apt/inline/linkonce_385660_3861f8.c, range: [0x3861f8, 0x386268], sections: false}
-  - {src: src/apt/inline/linkonce_385660_386268.c, range: [0x386268, 0x386358], sections: false}
-  - {src: src/apt/inline/linkonce_385660_386358.c, range: [0x386358, 0x3863c8], sections: false}
-  - {src: src/apt/inline/linkonce_385660_3863c8.c, range: [0x3863c8, 0x3865c0], sections: false}
-  - {src: src/apt/inline/linkonce_385660_3865c0.c, range: [0x3865c0, 0x386838], sections: false}
-  - {src: src/apt/inline/linkonce_385660_386838.c, range: [0x386838, 0x3868f8], sections: false}
-  - {src: src/apt/inline/linkonce_385660_3868f8.c, range: [0x3868f8, 0x386ec8], sections: false}
+  - {src: src/apt/inline/linkonce_385660.c, range: [0x385660, 0x385b10]}
+  - {src: src/apt/inline/linkonce_385660_385b10.c, range: [0x385b10, 0x385db0]}
+  - {src: src/apt/inline/linkonce_385660_385db0.c, range: [0x385db0, 0x385e68]}
+  - {src: src/apt/inline/linkonce_385660_385e68.c, range: [0x385e68, 0x386030]}
+  - {src: src/apt/inline/linkonce_385660_386030.c, range: [0x386030, 0x386100]}
+  - {src: src/apt/inline/linkonce_385660_386100.c, range: [0x386100, 0x386188]}
+  - {src: src/apt/inline/linkonce_385660_386188.c, range: [0x386188, 0x3861f8]}
+  - {src: src/apt/inline/linkonce_385660_3861f8.c, range: [0x3861f8, 0x386268]}
+  - {src: src/apt/inline/linkonce_385660_386268.c, range: [0x386268, 0x386358]}
+  - {src: src/apt/inline/linkonce_385660_386358.c, range: [0x386358, 0x3863c8]}
+  - {src: src/apt/inline/linkonce_385660_3863c8.c, range: [0x3863c8, 0x3865c0]}
+  - {src: src/apt/inline/linkonce_385660_3865c0.c, range: [0x3865c0, 0x386838]}
+  - {src: src/apt/inline/linkonce_385660_386838.c, range: [0x386838, 0x3868f8]}
+  - {src: src/apt/inline/linkonce_385660_3868f8.c, range: [0x3868f8, 0x386ec8]}
   - {src: src/apt/inline/linkonce_385660_386ec8.c, range: [0x386ec8, 0x387020], flags: [-Os, -G0], note: flags or language differ}
   - {src: src/apt/inline/linkonce_385660_387020.c, range: [0x387020, 0x387e08]}
   - {src: src/apt/inline/linkonce_387e08.c, range: [0x387e08, 0x387e50]}

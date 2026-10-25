@@ -11,4 +11,4 @@ void func_0036EBC0(s32 arg0, s32 arg1) {
     func_00367C90(0x10, sp);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036EBE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36ebc0", func_0036EBE8);

@@ -4,8 +4,8 @@
 extern s32 func_00193988();
 extern s32 func_001880D8();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00195710);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00195860);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_195710", func_00195710);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_195710", func_00195860);
 
 void func_001958E0(void **arg0)
 {

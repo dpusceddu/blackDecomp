@@ -218,7 +218,7 @@ int FrontendMenuState::Enter() {
   }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00104210);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_menu_initialize", func_00104210);
 #endif
 
 #ifdef NON_MATCHING
@@ -597,7 +597,7 @@ void FrontendMenuState::Update() {
   func_001E8980(*(void **)(D_0040F510 + 0xcbd8));
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001046B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_menu_initialize", func_001046B0);
 #endif
 
 #ifdef NON_MATCHING

@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355278);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355420);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355420);
 
 #include "ps2/recovered_types.h"
 extern s32 D_003D6340;
@@ -27,15 +27,15 @@ s32 func_003554F8(void *arg0, s32 arg1) {
     return func_0035C470(temp_2);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355588);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355598);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355648);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355708);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355808);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355928);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355A48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355B40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355C70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355D68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355D70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00355F88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355588);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355598);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355648);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355708);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355808);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355928);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355A48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355B40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355C70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355D68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355D70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278", func_00355F88);

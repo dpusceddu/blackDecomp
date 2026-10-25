@@ -12,7 +12,7 @@ SPLITS = '''variant: SLUS_213.76
 defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas]}
 splits:
   - {src: src/game/tu_100000.c, range: [0x100000, 0x100030]}
-  - {src: src/game/tu_100030.cpp, range: [0x100030, 0x100050], flags: [-O1, -G0, -snas], assembler: sn-min6, sections: false}
+  - {src: src/game/tu_100030.cpp, range: [0x100030, 0x100050], flags: [-O1, -G0, -snas], assembler: sn-min6}
   - {src: src/game/tu_100030.cpp, range: [0x100050, 0x100060]}
 '''
 SYMBOLS = '''# comment
@@ -34,8 +34,8 @@ class Splits(unittest.TestCase):
 
     def test_defaults_and_overrides(self):
         a, b, c = S.load_splits(path=self.path)
-        self.assertEqual((a.start, a.end, a.flags, a.sections, a.library), (0x100000, 0x100030, ['-O2', '-G0', '-snas'], True, 'game'))
-        self.assertEqual(b.compile_flags(), ['-O1', '-G0', '-snas', '--assembler=sn-min6'])
+        self.assertEqual((a.start, a.end, a.flags, a.library), (0x100000, 0x100030, ['-O2', '-G0', '-snas'], 'game'))
+        self.assertEqual(b.compile_flags(), ['-O1', '-G0', '-snas', '--assembler=sn-min6', '-ffunction-sections'])
         self.assertEqual(a.compile_flags(non_matching=True), ['-O2', '-G0', '-snas', '-ffunction-sections', '-DNON_MATCHING'])
 
     def test_unknown_key_is_rejected(self):
@@ -89,9 +89,9 @@ class Splits(unittest.TestCase):
             self.assertNotIn(sym.function_aliases()[addr], sym.by_addr.get(addr, []))
 
     def test_format_split_round_trips(self):
-        entry = {'src': 'src/a.c', 'range': [0x100, 0x200], 'flags': ['-O1', '-G0'], 'sections': False}
+        entry = {'src': 'src/a.c', 'range': [0x100, 0x200], 'flags': ['-O1', '-G0']}
         line = S.format_split(entry)
-        self.assertEqual(line, '- {src: src/a.c, range: [0x000100, 0x000200], flags: [-O1, -G0], sections: false}')
+        self.assertEqual(line, '- {src: src/a.c, range: [0x000100, 0x000200], flags: [-O1, -G0]}')
         import yaml
         back = yaml.safe_load('[' + line[2:] + ']')[0]
         self.assertEqual(back['range'], [0x100, 0x200])

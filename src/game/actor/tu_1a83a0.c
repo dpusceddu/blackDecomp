@@ -33,7 +33,7 @@ char *func_001A8A20(void *selector,char *name,char *actor) {
  return func_001AB1C0(selector,name,actor+0x3b9,func_00137AE0(actor),"S_092",actor);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A8A20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0", func_001A8A20);
 #endif
 
 

@@ -26,4 +26,4 @@ void func_001CFCF8(void *arg0) {
     func_003680A0(arg0, arg0 + 0x6CF);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001CFDC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1cfcf8", func_001CFDC0);

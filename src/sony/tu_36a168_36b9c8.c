@@ -12,7 +12,7 @@ s32 func_0036B9C8(s32 arg0) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036B9F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036BA08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036BA50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036BC58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36a168_36b9c8", func_0036B9F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36a168_36b9c8", func_0036BA08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36a168_36b9c8", func_0036BA50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36a168_36b9c8", func_0036BC58);

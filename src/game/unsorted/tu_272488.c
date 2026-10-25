@@ -1,20 +1,20 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272488);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272580);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272610);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002726C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002726D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272730);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272788);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002728C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002728D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272960);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272A58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272A60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00272AA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272488);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272580);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272608);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272610);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_002726C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_002726D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272730);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272788);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_002728C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_002728D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272960);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272A58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272A60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272AA8);
 
 #include "ps2/recovered_types.h"
 extern s32 func_00272B78(void *);

@@ -17,7 +17,7 @@ void func_002D8330(s32 arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D8388);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2d82c0_2d8330", func_002D8388);
 
 void func_002D8408(void) {
     func_002D8330(1, 0xFFFF);

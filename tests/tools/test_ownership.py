@@ -181,7 +181,7 @@ class SplitFunction(unittest.TestCase):
         (root / 'build/SLUS_213.76').mkdir(parents=True)
         (root / 'src/game/unsorted').mkdir(parents=True)
         (root / 'config/SLUS_213.76/splits.yaml').write_text(
-            'variant: SLUS_213.76\nsplits:\n  - {src: src/game/unsorted/tu_100000.c, range: [0x100000, 0x100050], sections: false}\n')
+            'variant: SLUS_213.76\nsplits:\n  - {src: src/game/unsorted/tu_100000.c, range: [0x100000, 0x100050]}\n')
         self.old = root / 'src/game/unsorted/tu_100000.c'
         self.old.write_text('#include "include_asm.h"\n' + ''.join(marker(x).replace('asm/x', tu_files.ASM_DIR) for x, _ in TABLE))
         (root / 'build/SLUS_213.76/functions.json').write_text('[%s]' % ','.join('[%d,%d]' % t for t in TABLE))

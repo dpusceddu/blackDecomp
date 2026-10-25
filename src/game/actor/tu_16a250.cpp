@@ -6,10 +6,10 @@
 // Unmatched: 0x16A4C0 near-point byte helper, affine matrix and Y-offset VU allocation.
 // Unmatched: 0x16A5E8 AABB short-circuit accumulator and VU lvalue allocation.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016A250);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016A2F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016A4C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016A5E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_16a250", func_0016A250);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_16a250", func_0016A2F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_16a250", func_0016A4C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_16a250", func_0016A5E8);
 #endif
 
 #ifdef NON_MATCHING

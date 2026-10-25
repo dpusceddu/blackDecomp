@@ -133,8 +133,8 @@ SoundEvent* SoundPool::GetSound(int index) {
 // Unmatched: Matches retains vector accessor scheduling differences.
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030D370);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030D5F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030DAA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030DC28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030DDE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_sound", func_0030D370);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_sound", func_0030D5F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_sound", func_0030DAA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_sound", func_0030DC28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_sound", func_0030DDE8);

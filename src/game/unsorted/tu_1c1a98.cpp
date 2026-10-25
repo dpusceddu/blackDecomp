@@ -21,5 +21,5 @@ int RefreshAtCoordinates(void* object,const int* coordinates) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C1A98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c1a98", func_001C1A98);
 #endif

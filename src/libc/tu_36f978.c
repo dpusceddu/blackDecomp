@@ -9,7 +9,7 @@ extern M2C_UNK D_0040BEA0;
 extern s32 func_00107D48();
 extern M2C_UNK D_0040BE88;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036F978);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_36f978", func_0036F978);
 
 s32 func_0036F9B0(s32 arg0) {
     s32 temp_2;
@@ -19,7 +19,7 @@ s32 func_0036F9B0(s32 arg0) {
     return temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036F9C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_36f978", func_0036F9C0);
 
 void * func_0036FA00(void) {
     return *func_00292088();
@@ -34,17 +34,17 @@ void * func_0036FA20(void) {
     return temp_3;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036FA58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_36f978", func_0036FA58);
 
 void func_0036FA80(void) {
     func_0035E828();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036FAA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036FB10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036FBA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036FC68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036FC98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_36f978", func_0036FAA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_36f978", func_0036FB10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_36f978", func_0036FBA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_36f978", func_0036FC68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_36f978", func_0036FC98);
 
 s32 func_0036FF88(void **arg0) {
     return *M2C_FIELD(*arg0, s32 *(**)(), 4)();

@@ -13,4 +13,4 @@ void func_001993A8(s32 *arg0) {
     func_00182410(temp_16 + 0x810, *func_00189478(temp_16 + 0x150), 0, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001993F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1984f0_1993a8", func_001993F8);

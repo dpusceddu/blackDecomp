@@ -31,4 +31,4 @@ void func_001EC690(void *arg0)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EC6F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ec690", func_001EC6F8);

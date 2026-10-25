@@ -21,4 +21,4 @@ s32 ** func_001706C0(s32 arg0, s32 arg1) {
     return func_00171110((s32 **) *(Recovered_Object56980 * *)(sp + 0), arg0, arg1);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00170740);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16eb80_1706c0", func_00170740);

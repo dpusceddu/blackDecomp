@@ -26,4 +26,4 @@ void FormationMode::Update()
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00193778);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/ai_movement_modes_193700", func_00193778);

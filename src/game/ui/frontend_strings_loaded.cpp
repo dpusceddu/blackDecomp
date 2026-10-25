@@ -17,4 +17,4 @@ extern "C" void func_00108958() {
     D_0040D99A=1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001089A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_strings_loaded", func_001089A8);

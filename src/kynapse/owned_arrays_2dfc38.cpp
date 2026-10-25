@@ -19,4 +19,4 @@ PointerBankOwner::~PointerBankOwner()
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DFD08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/owned_arrays_2dfc38", func_002DFD08);

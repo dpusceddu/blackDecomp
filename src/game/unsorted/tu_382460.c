@@ -12,4 +12,4 @@ void func_00382480(void) {
     func_00313048();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003824A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_382460", func_003824A0);

@@ -28,4 +28,4 @@ s32 func_00328C70(void)
   return D_003D1140();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328CC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_328c50", func_00328CC0);

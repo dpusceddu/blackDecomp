@@ -23,4 +23,4 @@ s32 func_00161F30(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00161F50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_161ed0", func_00161F50);

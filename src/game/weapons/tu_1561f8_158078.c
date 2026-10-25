@@ -32,7 +32,7 @@ s16 func_001580E0(void *arg0) {
     return BkWeaponClipPS2(arg0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001580F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001583D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00158668);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001588F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_158078", func_001580F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_158078", func_001583D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_158078", func_00158668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_158078", func_001588F0);

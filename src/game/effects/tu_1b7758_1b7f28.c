@@ -32,7 +32,7 @@ void func_001B7F50(BkEffectBucketPS2 *buckets,BkEffectBatchPS2 *batch) {
  }while(bucket<end);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7F50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b7758_1b7f28", func_001B7F50);
 #endif
 
 #ifdef NON_MATCHING
@@ -58,5 +58,5 @@ void func_001B7FC8(BkEffectBucketPS2 *buckets,u32 pass) {
  }while(bucketIndex<8);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7FC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b7758_1b7f28", func_001B7FC8);
 #endif

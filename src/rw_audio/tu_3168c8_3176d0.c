@@ -40,5 +40,5 @@ void func_003176E0(RwaVec3 *value,const RwaListener *listener) {
     value[1].y=right.x*x+right.y*y+right.z*z;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003176E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_3176d0", func_003176E0);
 #endif

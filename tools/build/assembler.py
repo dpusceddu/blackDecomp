@@ -7,7 +7,7 @@ import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import atexit, hashlib, os, shutil, tempfile, threading
+import atexit, hashlib, os, shutil, tempfile, threading, signal
 from pathlib import Path
 import subprocess
 
@@ -78,6 +78,23 @@ def command(choice, args, source, output):
     raise ValueError('unknown assembler configuration')
 
 
+def run_tool(command, env, timeout):
+    """Bound the whole SDK process tree, including a stalled assembler child."""
+    with subprocess.Popen(command, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                          text=True, start_new_session=True) as process:
+        try:
+            stdout, stderr = process.communicate(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            try:
+                os.killpg(process.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            stdout, stderr = process.communicate()
+            return subprocess.CompletedProcess(command, 124, stdout,
+                stderr+'\nToolchain timed out after %s seconds; its process group was stopped.\n' % timeout)
+        return subprocess.CompletedProcess(command, process.returncode, stdout, stderr)
+
+
 def compile_with_assembler(prefix, args, source, output, env, timeout):
     choice, flags = selection(args)
     if choice == 'sn-min6':
@@ -90,15 +107,12 @@ def compile_with_assembler(prefix, args, source, output, env, timeout):
             return subprocess.CompletedProcess(assembler, 1, '',
                 'sn-min6 assembler missing or hash mismatch; run tools/toolchain.py install')
     if choice is None:
-        return subprocess.run(prefix + flags + ['-c', source, '-o', output], env=env,
-                              capture_output=True, text=True, timeout=timeout)
+        return run_tool(prefix + flags + ['-c', source, '-o', output], env, timeout)
     assembly = output + '.s'
-    p = subprocess.run(prefix + flags + ['-S', source, '-o', assembly], env=env,
-                       capture_output=True, text=True, timeout=timeout)
+    p = run_tool(prefix + flags + ['-S', source, '-o', assembly], env, timeout)
     if p.returncode:
         return p
-    q = subprocess.run(command(choice, flags, assembly, output), env=env,
-                       capture_output=True, text=True, timeout=timeout)
+    q = run_tool(command(choice, flags, assembly, output), env, timeout)
     q.stdout = p.stdout + q.stdout
     q.stderr = p.stderr + q.stderr
     return q

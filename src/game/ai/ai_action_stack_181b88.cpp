@@ -48,5 +48,5 @@ void ActionStack::DeliverEvents()
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00181DA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00181DF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/ai_action_stack_181b88", func_00181DA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/ai_action_stack_181b88", func_00181DF8);

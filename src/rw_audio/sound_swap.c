@@ -27,10 +27,10 @@ void func_00315B60(RwaSound *sound) {
     *sound=copy;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315DC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315EE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315F18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315F28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_swap", func_00315DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_swap", func_00315EE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_swap", func_00315F18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_swap", func_00315F28);
 #ifdef NON_MATCHING
 extern s32 func_00315440(RwaSoundDriver *,RwaFormat *);
 extern s32 func_00315048(RwaFormat *,RwaFormat *,s32);
@@ -68,7 +68,7 @@ RwaSound *func_00315FF0(RwaSound *sound,u32 count,void *data,u32 requested) {
     return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315FF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_swap", func_00315FF0);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316180);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003161C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_swap", func_00316180);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_swap", func_003161C8);

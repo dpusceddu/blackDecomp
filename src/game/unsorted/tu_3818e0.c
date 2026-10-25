@@ -3,8 +3,8 @@
 
 extern s32 func_003818E0(M2C_UNK, M2C_UNK);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003818E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00381A28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_3818e0", func_003818E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_3818e0", func_00381A28);
 
 void func_00381A70(void) {
     func_003818E0(1, 0xFFFF);

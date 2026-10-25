@@ -22,5 +22,5 @@ PositionResult RouteMode::GetTarget() const
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192380);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192470);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/actor_route_target", func_00192380);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/actor_route_target", func_00192470);

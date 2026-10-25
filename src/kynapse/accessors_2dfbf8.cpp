@@ -5,7 +5,7 @@
 
 // /SLUS_213.76 0x2dfbf8
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DFB00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/accessors_2dfbf8", func_002DFB00);
 
 void ActionBank::ClearActivation()
 {

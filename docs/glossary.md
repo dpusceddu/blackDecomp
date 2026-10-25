@@ -9,8 +9,8 @@ follow it where the evidence allows. [tus.md](tus.md)
 **split**: an entry of `config/SLUS_213.76/splits.yaml`: a source file, the address range of the functions it owns, and the
 compiler flags. Every function is owned by exactly one split. [units.md](units.md)
 
-**INCLUDE_ASM**: a line `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_XXXXXXXX);` in a source file that stands for the
-original assembly of one function that is not recovered yet; replacing it by C/C++ is the work. [units.md](units.md)
+**INCLUDE_ASM**: a line `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/<file>", func_XXXXXXXX);` that includes the
+original assembly in its TU object of one function that is not recovered yet; replacing it by C/C++ is the work. [units.md](units.md)
 
 **NON_MATCHING**: an `#ifdef NON_MATCHING` block holding a readable version of a function that does not compile to the
 original bytes (yet); its `#else` branch keeps the `INCLUDE_ASM` line, so the normal build still uses the assembly. A
@@ -20,14 +20,14 @@ function in such a block is a *draft*; a function without an `INCLUDE_ASM` marke
 [status.md](status.md)
 
 **orphan piece**: an eight-byte `<one instruction>; nop` fragment between two functions. It is not code of either neighbour,
-stays assembly, and is not a function in the objdiff count. [build.md](build.md#function-boundaries)
+stays assembly, and is not a function in the objdiff count. [build.md](build.md#objects-and-includes)
 
 **link-once copy**: code the compiler emits in every object that needs it (inline functions, templates, virtual
 destructors, type information) of which the linker keeps the first copy; the kept copies form a block behind the regular code
 and live in `src/<library>/inline/`. [build.md](build.md#link-once-copies)
 
 **shiftable**: code and data can change size or move and the linker fixes every reference, so the rebuilt executable can be
-modified (the base for modding), not only reproduced. [build.md](build.md#shiftability)
+modified (the base for modding), not only reproduced. [build.md](build.md#objects-and-includes)
 
 **SN 1.36**: the compiler of the game, SN Systems' build 1.36 of GCC 2.95.3 for the EE (`ee-gcc2.95.3-136`); run with
 `-O2 -G0 -snas`. [status.md](status.md#toolchain-facts)

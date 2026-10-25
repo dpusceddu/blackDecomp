@@ -179,7 +179,7 @@ int AddPeriodicName(const char *name) {
     return -1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8650);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8650);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: name-array reference and allocation register scheduling.
@@ -193,7 +193,7 @@ int AddAperiodicName(const char *name) {
     return -1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8740);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8740);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: name-array reference and allocation register scheduling.
@@ -207,7 +207,7 @@ int AddEstimatedName(const char *name) {
     return -1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8830);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8830);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: threshold CFG and register allocation.
@@ -230,7 +230,7 @@ bool ParameterTables::Consume(int index,SlotUser *user) {
     return true;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8AB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8AB8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: iterator cleanup and success/error block ordering.
@@ -262,7 +262,7 @@ bool ParameterTables::ConsumeList(int index,IndexUser *user) {
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8C50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8C50);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: fired branch scheduling.
@@ -279,6 +279,6 @@ bool ParameterViews::ConsumeGlobal(int index) {
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8FA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8FA0);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E90B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E90B8);

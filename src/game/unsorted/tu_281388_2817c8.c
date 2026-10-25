@@ -19,5 +19,5 @@ s32 func_002817C8(s32 arg0) {
     return temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281808);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00281878);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_2817c8", func_00281808);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_2817c8", func_00281878);

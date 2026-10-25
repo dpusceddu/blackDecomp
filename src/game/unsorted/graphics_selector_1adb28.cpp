@@ -10,4 +10,4 @@ void PrefixedSelector::Final(char* name,Actor* actor) {
 if(CheckBC(actor)) EmitFallback(name,D_003BD190,prefix,D_003F7180,D_003F6E30,actor); else Emit(name,D_003BD190,prefix,D_003F6E30,actor);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ADBC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_selector_1adb28", func_001ADBC0);

@@ -46,5 +46,5 @@ void *func_001AFF88(s32 context_address, s32 kind) {
     return M2C_FIELD(entry_address, void **, 0x214);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFC80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AFD18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1af930_1afc78", func_001AFC80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1af930_1afc78", func_001AFD18);

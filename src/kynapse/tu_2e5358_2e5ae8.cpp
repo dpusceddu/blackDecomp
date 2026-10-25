@@ -13,5 +13,5 @@ CPoolBasedAllocator::CPoolBasedAllocator(int n,CAllocator *parent,unsigned int c
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5AE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2e5358_2e5ae8", func_002E5AE8);
 #endif

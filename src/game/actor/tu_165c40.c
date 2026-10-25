@@ -21,4 +21,4 @@ void func_00165C78(s64 *arg0) {
     func_0035E750((sp + 16));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165CB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_165c40", func_00165CB8);

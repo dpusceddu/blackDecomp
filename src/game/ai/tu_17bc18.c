@@ -1,9 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017BC18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017BCD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017BD10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17bc18", func_0017BC18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17bc18", func_0017BCD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17bc18", func_0017BD10);
 
 void func_0017BDC0(s32 arg0, s32 arg1, s32 arg2)
 {

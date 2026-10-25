@@ -31,4 +31,4 @@ s32 func_00109F68(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00109FA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_109308_109f68", func_00109FA8);

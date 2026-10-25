@@ -12,6 +12,6 @@ void *func_0031CCE8(void *state, s32 *queued) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031CE50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031CE58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031CEC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/playback_queued", func_0031CE50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/playback_queued", func_0031CE58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/playback_queued", func_0031CEC8);

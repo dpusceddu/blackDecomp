@@ -14,6 +14,6 @@ bool SoundPool::Restart()
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E180);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E320);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E5A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/sound_pool_30e100", func_0030E180);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/sound_pool_30e100", func_0030E320);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/sound_pool_30e100", func_0030E5A0);

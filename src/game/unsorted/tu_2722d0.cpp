@@ -11,5 +11,5 @@ void* SelectedRecord(void* object) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002722D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2722d0", func_002722D0);
 #endif

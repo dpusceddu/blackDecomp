@@ -21,8 +21,8 @@ namespace ActorParts {
 // Unmatched: 0x1404a8 original FPU curve/helper and smoothing temporary scheduling.
 // Unmatched: 0x1407c8 matrix copy/inverse and VU component scheduling.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013DB40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013DC00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_orientation", func_0013DB40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_orientation", func_0013DC00);
 #endif
 
 int OrientationState::Begin(void *actor)

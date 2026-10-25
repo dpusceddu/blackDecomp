@@ -24,9 +24,9 @@ s32 func_002BFE68(void) {
     return temp_16;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2b6fd0_2bfe68", func_002BFF00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2b6fd0_2bfe68", func_002BFF10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2b6fd0_2bfe68", func_002BFF50);
 
 #include "ps2/recovered_types.h"
 extern s32 D_0040E070;
@@ -36,8 +36,8 @@ s32 func_002BFF70(s32 arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002BFF88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2b6fd0_2bfe68", func_002BFF80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2b6fd0_2bfe68", func_002BFF88);
 
 #include "ps2/recovered_types.h"
 extern s32 func_002AC850(s32, s32, s32, s32, s32);
@@ -79,7 +79,7 @@ s32 func_002C0038(void) {
     return (s32) var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C00F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0168);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C01E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002C0298);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2b6fd0_2bfe68", func_002C00F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2b6fd0_2bfe68", func_002C0168);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2b6fd0_2bfe68", func_002C01E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2b6fd0_2bfe68", func_002C0298);

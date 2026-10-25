@@ -9,4 +9,4 @@ void func_00244CE8(s32 *arg0) {
     *arg0 -= 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00244CF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_241ea0_244cd8", func_00244CF8);

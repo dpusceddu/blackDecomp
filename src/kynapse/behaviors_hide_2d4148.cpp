@@ -170,7 +170,7 @@ namespace HideViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D49A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_hide_2d4148", func_002D49A8);
 #endif
 #ifdef NON_MATCHING
 namespace HideViews {
@@ -246,5 +246,5 @@ namespace HideViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D4B68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_hide_2d4148", func_002D4B68);
 #endif

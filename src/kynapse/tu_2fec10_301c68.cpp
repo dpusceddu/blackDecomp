@@ -16,5 +16,5 @@ unsigned char CPathFinder_GenerateSteeringMove(CPathFinder*self,float*out,const 
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00301C68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2fec10_301c68", func_00301C68);
 #endif

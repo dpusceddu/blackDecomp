@@ -9,5 +9,5 @@ SamplingPair *func_0034FE70(SamplingPair *pair) {
     return pair;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034FE88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034FFA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34fe70", func_0034FE88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34fe70", func_0034FFA0);

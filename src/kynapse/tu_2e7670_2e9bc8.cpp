@@ -24,5 +24,5 @@ float ParameterTables::Remaining(int index)
     return left;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E9BC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2e7670_2e9bc8", func_002E9BC8);
 #endif

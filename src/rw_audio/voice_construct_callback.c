@@ -18,6 +18,6 @@ void *func_0031C578(void **object, RwaConstructCallback *callback) {
     return func_0035C6EC(callback->memory,0xcd,0xd0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031C7B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031CB78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031CCE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/voice_construct_callback", func_0031C7B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/voice_construct_callback", func_0031CB78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/voice_construct_callback", func_0031CCE0);

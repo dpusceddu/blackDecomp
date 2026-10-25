@@ -1,11 +1,11 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A7798);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A77D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A77E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A7868);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A78C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a7798", func_002A7798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a7798", func_002A77D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a7798", func_002A77E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a7798", func_002A7868);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a7798", func_002A78C0);
 
 #include "ps2/recovered_types.h"
 extern void * func_002A7B18(void *, void *, void *);

@@ -164,4 +164,4 @@ pollError:
 }
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026F580);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_26f440_26f580", func_0026F580);

@@ -40,9 +40,9 @@ void func_002A5640(RwMatrixPS2 *result,const RwMatrixPS2 *left,const RwMatrixPS2
  result->components.position.z=a30*b02+a31*right->components.up.z+a32*b22+right->components.position.z;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5640);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a55d8", func_002A5640);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5840);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a55d8", func_002A5840);
 #ifdef NON_MATCHING
 extern u8 D_00449444[];extern s32 D_0040E5A8;
 // Unmatched: loop expansion, FP scheduling or stack aggregate lifetime still differs.
@@ -60,6 +60,6 @@ RwMatrixPS2 *func_002A5850(RwMatrixPS2 *matrix,const RwMatrixTolerancePS2 *toler
  if(normal)flags&=~1;else flags|=1;if(orthogonal)flags&=~2;else flags|=2;if(identity)flags|=0x20000;else flags&=~0x20000;matrix->components.flags=flags;return matrix;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5850);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a55d8", func_002A5850);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5A78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a55d8", func_002A5A78);

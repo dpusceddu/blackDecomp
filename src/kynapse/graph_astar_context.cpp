@@ -61,7 +61,7 @@ int Kaim::CAstarData::Init(ChildBuffers *config) {
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDA40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_astar_context", func_002FDA40);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: resource stream loop scheduling and inline original-word conversion.
@@ -90,7 +90,7 @@ fail:
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDBA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_astar_context", func_002FDBA8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: raw stream loop scheduling and header branch placement.
@@ -119,7 +119,7 @@ fail:
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDD88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_astar_context", func_002FDD88);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: index-sentinel representation, route-result join and row cleanup scheduling.
@@ -167,7 +167,7 @@ int Kaim::CAstarData::Build()
     return true;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDF40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_astar_context", func_002FDF40);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: header-write join and conversion buffer lifetimes.
@@ -198,7 +198,7 @@ int Kaim::CAstarData::Save(const void* path)
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FE370);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_astar_context", func_002FE370);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: route append helper, vector temporary and traversal scheduling.
@@ -247,5 +247,5 @@ bool Kaim::CAstarData::ExtractRoute(unsigned int from, unsigned int to, RouteBuf
     return true;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FE570);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_astar_context", func_002FE570);
 #endif

@@ -21,7 +21,7 @@ s32 func_001777D0(void *arg0) {
     return (s32) var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00177800);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001778A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00177930);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001779E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_177148_1777d0", func_00177800);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_177148_1777d0", func_001778A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_177148_1777d0", func_00177930);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_177148_1777d0", func_001779E8);

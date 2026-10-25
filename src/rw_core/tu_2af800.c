@@ -3,21 +3,21 @@
 // RenderWare image quantization; names inferred from operations.
 #include "rw_core/quantize.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF800);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF938);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AFA48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AFB90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AFCB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AFDB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002B0290);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002B04D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002B0780);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002B0DA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002B17C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002B1E60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002B1E68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002B1F90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002B20B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002AF800);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002AF938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002AFA48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002AFB90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002AFCB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002AFDB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002B0290);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002B04D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002B0780);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002B0DA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002B17C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002B1E60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002B1E68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002B1F90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2af800", func_002B20B0);
 
 int func_002B2288(QuantNode *node,int depth) {
  int count=0;

@@ -24,7 +24,7 @@ void *CPoolBasedAllocator::GetBlock(unsigned int count) {
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5E58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E5E58);
 #endif
 #ifdef NON_MATCHING
 namespace Kaim {
@@ -34,7 +34,7 @@ CFreeList::CFreeList(int bytes,unsigned int count,CAllocator *parent):CBaseAlloc
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5FB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E5FB8);
 #endif
 #ifdef NON_MATCHING
 namespace Kaim {
@@ -45,17 +45,17 @@ CFreeList::~CFreeList() {
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6740);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E6740);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E69E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E6B60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E69E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E6B60);
 #ifdef NON_MATCHING
 namespace Kaim {
 // Unmatched: container temporaries, cleanup visibility or register scheduling.
 CBaseAllocator *CPoolBasedAllocator::Resolve(unsigned int address) {if(address>=(unsigned int)buffer){if(address<(unsigned int)buffer+bytes){CBaseAllocator *p=Find((void*)address);if(p)return p;return this;}}return 0;}
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E7028);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E7028);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E7090);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E7220);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E7090);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E7220);

@@ -21,6 +21,6 @@ s32 func_00106068(Recovered_FrontendLoadState *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001063F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001064D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00106550);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_106068", func_001063F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_106068", func_001064D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_106068", func_00106550);

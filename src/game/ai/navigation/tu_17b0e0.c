@@ -37,7 +37,7 @@ u8 func_0017B178(void *arg0, void *arg1) {
     return func_001743C0();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017B198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/tu_17b0e0", func_0017B198);
 
 void func_0017B220(void) {
     func_00174320();
@@ -51,8 +51,8 @@ void func_0017B260(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017B268);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017B290);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/tu_17b0e0", func_0017B268);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/tu_17b0e0", func_0017B290);
 
 void func_0017B310(void *arg0) {
     if ((u32) (M2C_FIELD(arg0, s32 *, 0x24) - 1) < 2U) {

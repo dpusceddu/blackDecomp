@@ -44,9 +44,9 @@ void Avoidance::ScoreCandidate(Candidate* candidate,const float* right,const flo
 // Unmatched: collection (728 B), refresh (380 B), begin-update (876 B), diagram (676 B), scoring (564 B), ranking (568 B), and removal (184 B) differ in helpers and scheduling.
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003080B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00308360);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00309580);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00309B10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030B038);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030B270);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_gap", func_003080B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_gap", func_00308360);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_gap", func_00309580);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_gap", func_00309B10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_gap", func_0030B038);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_gap", func_0030B270);

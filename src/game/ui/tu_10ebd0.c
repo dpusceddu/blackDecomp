@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010EBD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_10ebd0", func_0010EBD0);
 
 /* Recovered_FrontendProfilePool: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
 typedef struct Recovered_FrontendProfilePool {
@@ -46,4 +46,4 @@ s32 func_0010F1E0(Recovered_FrontendProfilePool *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010F240);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_10ebd0", func_0010F240);

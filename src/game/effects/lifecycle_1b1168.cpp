@@ -5,4 +5,4 @@ extern "C" {void func_001B1110(void *,void *);int func_001B1138(void *);void fun
 
 int Effects::Entry::Initialize(const Matrix *matrix,char *asset,unsigned char enabled,float now){resource=asset;started=now;world=*matrix;flags=enabled;return 1;}
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B11A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/lifecycle_1b1168", func_001B11A0);

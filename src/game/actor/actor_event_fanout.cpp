@@ -16,4 +16,4 @@ void ActorFanout3::Dispatch(int event) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00165B98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_event_fanout", func_00165B98);

@@ -84,5 +84,5 @@ namespace FleeViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2D48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/flee_agent_2d1610", func_002D2D48);
 #endif

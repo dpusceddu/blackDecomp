@@ -2,12 +2,12 @@
 
 /* Provisional object-allocation TU from call and shared-data joins. */
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310978);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310C88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310DE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310DE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00310F68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00311008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311048", func_00310978);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311048", func_00310C88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311048", func_00310DE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311048", func_00310DE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311048", func_00310F68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311048", func_00311008);
 
 
 
@@ -24,7 +24,7 @@ RwaObject *func_00311048(RwaClass *type,u32 *flags,void *defaults,s32 size){
     return func_0031E2C0(type,size);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003110B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311048", func_003110B0);
 #ifdef NON_MATCHING
 // Unmatched: typed object/class and property-link hypothesis differs in allocation and scheduling.
 u32 func_003111A8(RwaClass *type,u32 flags,u32 *offset){
@@ -40,5 +40,5 @@ u32 func_003111A8(RwaClass *type,u32 flags,u32 *offset){
     return size;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003111A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_310978_311048", func_003111A8);
 #endif

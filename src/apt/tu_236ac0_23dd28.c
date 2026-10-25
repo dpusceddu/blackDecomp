@@ -23,8 +23,8 @@ void func_0023DD68(void *arg0, s32 arg1) {
     M2C_FIELD(temp_2, s32 *, 0x10) = (s32) (M2C_FIELD(temp_2, s32 *, 0x10) & ~arg1);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0023DDB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0023DE70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0023E3D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0023E5E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0023E5F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_236ac0_23dd28", func_0023DDB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_236ac0_23dd28", func_0023DE70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_236ac0_23dd28", func_0023E3D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_236ac0_23dd28", func_0023E5E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_236ac0_23dd28", func_0023E5F0);

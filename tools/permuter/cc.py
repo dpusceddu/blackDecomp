@@ -1,48 +1,34 @@
 #!/usr/bin/env python3
-"""Compile script for decomp-permuter: run the pinned SN compiler on one self-contained source file.
+"""Per-file compile command for decomp-permuter's import.py, using splits.yaml.
 
-Usage: cc.py [compiler flags] SOURCE.c -o OUTPUT.o        (permuter_settings.toml makes import.py call it this way)
-The compiler runs through tools/build/backend.py: wibo and the pinned toolchain of `python3 tools/toolchain.py install` by
-default. Flags are passed to the compiler as given (the TU's flags are in config/SLUS_213.76/splits.yaml; -I and -D flags
-only matter to the permuter's import step, which expands the includes). Set CC to use another pinned compiler.
+Usage: cc.py --file src/<library>/<unit>.c INPUT.c -o OUTPUT.o
+Run in Linux, WSL, or the project container. The input is permuter's preprocessed
+candidate; compiler, flags and assembler remain those of the selected source file.
 """
-import sys as _sys
-if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
-    print(__doc__.strip())
-    raise SystemExit(0)
-import base64, os, sys
+import argparse
 from pathlib import Path
-
-sys.path[:0] = [str(Path(__file__).resolve().parents[1] / _d) for _d in ('', 'build', 'pipeline', 'maint')]
-import backend
-from elfobj import normalize_object
-
-COMPILER = os.environ.get('CC', 'ee-gcc2.95.3-136')
+import sys
+sys.path[:0] = [str(Path(__file__).resolve().parents[1]/d) for d in ('','build')]
+from splits import load_splits, group_splits
+from object_compile import compile_file
 
 
-def main(args):
-    if '-o' not in args or args.index('-o') + 1 >= len(args):
-        raise SystemExit(__doc__)
-    at = args.index('-o')
-    output = Path(args[at + 1])
-    rest = args[:at] + args[at + 2:]
-    sources = [a for a in rest if not a.startswith('-') and Path(a).is_file()]
-    if len(sources) != 1:
-        raise SystemExit('expected exactly one source file')
-    source = Path(sources[0])
-    name = 'input' + source.suffix
-    flags = [name if a == sources[0] else a for a in rest]
-    if '-c' not in flags:
-        flags.append('-c')
-    reply = backend.compile_standalone(dict(compiler=COMPILER, args=flags + ['-o', 'output.o'],
-                                            files={name: base64.b64encode(source.read_bytes()).decode()}))
-    sys.stdout.write(reply['stdout'])
-    sys.stderr.write(reply['stderr'])
-    if reply['returncode'] == 0 and 'output.o' in reply['artifacts']:
-        output.write_bytes(normalize_object(base64.b64decode(reply['artifacts']['output.o'])))
-        return 0
-    return reply['returncode'] or 1
+def recipe(source):
+    return next(group[0] for group in group_splits(load_splits()) if group[0].src == source)
 
 
-if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--file', required=True, help='owning source file in splits.yaml')
+    ap.add_argument('-o', required=True)
+    ap.add_argument('input')
+    a, extra = ap.parse_known_args()
+    split = recipe(a.file)
+    flags = split.compile_flags()
+    if Path(a.file).suffix == '.cpp' and '-x' not in flags:
+        flags = ['-x','c++']+flags
+    compile_file(split.compiler,flags+extra+['-I','include'],a.input,a.o)
+
+
+if __name__=='__main__':
+    main()

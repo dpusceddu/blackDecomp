@@ -11,5 +11,5 @@ M2C_UNK ** func_002891D8(M2C_UNK ***arg0) {
     return M2C_FIELD(arg0, M2C_UNK ***, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00289218);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00289230);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288bc8_2891d8", func_00289218);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288bc8_2891d8", func_00289230);

@@ -42,15 +42,15 @@ class IntegrationTests(unittest.TestCase):
                 path.write_text('')
             auto_dir = root / 'build/auto'
             def worker(*args, **kwargs):
-                job = auto_dir / ('job-%d' % auto.os.getpid())
-                plan = json.loads((job / 'plan.json').read_text())
-                self.assertEqual(len(plan['compile']), 1)
-                (job / 'results.json').write_text(json.dumps({plan['compile'][0]['src']: dict(rc=1, msg='rejected')}))
-                return subprocess.CompletedProcess([], 1, '', '')
+                command=args[0]
+                self.assertEqual(Path(command[1]).name, 'compile.py')
+                self.assertIn('-o',command)
+                return subprocess.CompletedProcess([], 1, '', 'rejected')
             jobs = [('first', 'int f(void) {return 0;}', ['-O2', '-G0']),
                     ('same', 'int f(void) {return 0;}', ['-O2', '-G0'])]
             with patch.object(auto, 'ROOT', root), patch.object(auto, 'AUTO', auto_dir), \
                  patch.object(auto, 'compile_dependencies', return_value={}), \
+                 patch('object_compile.environment'), \
                  patch.object(auto.subprocess, 'run', side_effect=worker) as run:
                 first = auto.worker_compile(jobs)
                 second = auto.worker_compile(jobs)

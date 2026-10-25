@@ -10,4 +10,4 @@ void func_001B37C8(BkEffectSlotPS2 *slots,u16 index) {
  func_001B3D18(slot);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3818);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/slot_release", func_001B3818);

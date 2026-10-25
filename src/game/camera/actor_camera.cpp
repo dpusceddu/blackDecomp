@@ -88,9 +88,9 @@ void CameraController::Configure(Game::PositionArg a, Game::PositionArg b,
 // Unmatched: 0x141460 small-data/byte-flag constant lifetime and return-tail scheduling.
 // Unmatched: 0x1414a0 original narrow predicate and VU component-readback/spill ordering.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140E48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140EA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/actor_camera", func_00140E48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/actor_camera", func_00140EA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/actor_camera", func_00141008);
 #endif
 
 #ifdef NON_MATCHING
@@ -105,7 +105,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141008);
 // Unmatched: 0x1414A0 component-spill reuse and narrow-predicate control flow.
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141000);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/actor_camera", func_00141000);
 
 #ifdef NON_MATCHING
 // Unmatched: 0x141008 signed-angle VU normalization, temporary spills and scheduling remain after original camera reconstruction.

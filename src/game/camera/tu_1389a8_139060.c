@@ -52,6 +52,6 @@ void func_00139150(s32 arg0, s32 arg1) {
     func_0015C100(arg1 + 0x280);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00139170);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00139190);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00139480);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_1389a8_139060", func_00139170);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_1389a8_139060", func_00139190);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_1389a8_139060", func_00139480);

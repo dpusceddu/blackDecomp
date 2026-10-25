@@ -34,5 +34,5 @@ bool CGraphManager::AddGraph(const char*name,CSpatialGraph *graph,unsigned char 
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F2BF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/owned_arrays_2f2578", func_002F2BF8);
 #endif

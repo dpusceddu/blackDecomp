@@ -65,9 +65,9 @@ Kaim::CSpatialGraph::~CSpatialGraph()
     Reset();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F8DC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F97A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA030);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cspatialgraph_lifetime", func_002F8DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cspatialgraph_lifetime", func_002F97A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cspatialgraph_lifetime", func_002FA030);
 #ifdef NON_MATCHING
 #define CONVERT(field) { for(unsigned int word=0;word<sizeof(field)/4;++word){unsigned int *p=(unsigned int*)&(field);p[word]=p[word];} }
 #undef CONVERT
@@ -135,7 +135,7 @@ void CSpatialGraph::Compact()
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA4C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cspatialgraph_lifetime", func_002FA4C8);
 #endif
 #ifdef NON_MATCHING
 namespace Kaim {
@@ -254,5 +254,5 @@ void CSpatialGraph::SetFlags(unsigned int newFlags)
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FA930);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cspatialgraph_lifetime", func_002FA930);
 #endif

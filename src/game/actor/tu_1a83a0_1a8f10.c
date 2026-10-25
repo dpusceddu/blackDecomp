@@ -10,5 +10,5 @@ void func_001A8F10(s8 *arg0, s32 arg1, s8 *arg2) {
 }
 
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A9EA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0_1a8f10", func_001A9EA0);
 

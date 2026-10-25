@@ -27,7 +27,7 @@ extern "C" void func_001BECD0(BkEffectFlightPS2 *flights) {
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BECD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1bec18_1becd0", func_001BECD0);
 #endif
 
 #ifdef NON_MATCHING
@@ -72,7 +72,7 @@ extern "C" int func_001BEF70(BkEffectFlightPS2 *flights,s128 point,BkFlightConfi
  return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BEF70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1bec18_1becd0", func_001BEF70);
 #endif
 
 
@@ -93,7 +93,7 @@ extern "C" int func_001C0910(char *light,void *owner,void *resource,void *contex
  *(void **)(light+0x50)=context;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0910);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1bec18_1becd0", func_001C0910);
 #endif
 
 #ifdef NON_MATCHING
@@ -124,5 +124,5 @@ extern "C" int func_001C0A78(BkLightEmissionPS2 *record,f32 now) {
  return func_001B1070(record,now);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C0A78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1bec18_1becd0", func_001C0A78);
 #endif

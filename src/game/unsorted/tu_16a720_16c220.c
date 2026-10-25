@@ -21,7 +21,7 @@ void func_0016C250(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016C2A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16c220", func_0016C2A8);
 
 #include "ps2/recovered_types.h"
 extern s32 D_003BCEE0;
@@ -36,4 +36,4 @@ void func_0016C380(s32 arg0) {
     D_0040EAFC = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016C3B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16c220", func_0016C3B8);

@@ -20,4 +20,4 @@ void func_0020CA98(s32 arg0) {
     func_0035D1A0(arg0 + 0x38BC, func_00108A20(), 3);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020CAD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_20ca70", func_0020CAD0);

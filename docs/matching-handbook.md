@@ -1,8 +1,8 @@
 # SN 1.36 matching handbook
 
 Read this before each TU. The acceptance test is an identical full image, including owned data; an instruction score is
-only a diagnostic. Use the unit's compiler, flags and assembler. All compiler execution goes through `compile.py` or
-`sandbox.py` (the pinned toolchain). Keep experiments and detailed results in ignored `build/`.
+only a diagnostic. Use the unit's compiler, flags and assembler. All compiler execution goes through the per-object Ninja rule or
+`compile.py` with the pinned toolchain in the Linux environment. Keep experiments and detailed results in ignored `build/`.
 
 ## Whole-TU ladder
 
@@ -21,7 +21,7 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All compiler ex
    When the remaining instructions come from an inline helper, randomize that genuine helper while preserving its caller
    and scoring the caller's emitted body. Freeze the helper ABI and review float grouping before accepting a result.
 6. Before leaving a hard function, exhaust the applicable ladder and leave one precise `// Unmatched:` obstruction in
-   source; keep variants/diffs in `build/`. Revisit service improvements before moving to another TU.
+   source; keep variants/diffs in `build/`. Revisit compiler and search evidence before moving to another TU.
 7. Confirm the registration, then run `ninja` and `ninja progress`. Never demote previously exact work to
    claim a gain. Review shared headers and `splits.yaml` changes with extra care: they affect every file.
 
@@ -88,7 +88,7 @@ For a hard allocation/scheduling problem, SN accepts `-da -fdump-unnumbered`. An
 RTL, GCSE/loop/combine, first scheduling, local/global allocation, second scheduling and delay-slot dumps; adding these
 flags preserved every text section of three exact controls. Compare the earliest divergent pass of two source variants:
 fix lowering/combine before blaming allocation, then inspect scheduling. Use
-`.venv/bin/python tools/pipeline/compiler_dumps.py SOURCE --flags '-O2 -G0 -snas'` to retrieve them through `sandbox.py`.
+`.venv/bin/python tools/pipeline/compiler_dumps.py SOURCE --flags '-O2 -G0 -snas'` to generate them with the pinned local compiler.
 Dumps and generated assembly stay under `build/`.
 
 A scalar divide with otherwise identical instructions can expose a compiler-default workaround. Reproduce

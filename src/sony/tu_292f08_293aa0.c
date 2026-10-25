@@ -17,6 +17,6 @@ s32 func_00293AA0(s32 arg0, s32 arg1) {
     return temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00293AC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00293B40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00293D18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_292f08_293aa0", func_00293AC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_292f08_293aa0", func_00293B40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_292f08_293aa0", func_00293D18);

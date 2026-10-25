@@ -15,5 +15,5 @@ unsigned char CPathFinder_AcceptActorSegment(CPathFinder*self,const float*point)
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305190);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2fec10_305190", func_00305190);
 #endif

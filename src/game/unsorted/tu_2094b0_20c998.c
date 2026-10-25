@@ -44,4 +44,4 @@ s32 func_0020CA60(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020CA68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_20c998", func_0020CA68);

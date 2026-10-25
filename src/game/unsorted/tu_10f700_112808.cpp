@@ -54,6 +54,6 @@ int Graphics::TimedMatrix::Reset()
 
 // Unmatched: Update (5676 bytes) needs verified axis rotation and quaternion/matrix inline contracts.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00112808);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001129B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_10f700_112808", func_00112808);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_10f700_112808", func_001129B8);
 #endif

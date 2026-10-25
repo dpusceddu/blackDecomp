@@ -14,4 +14,4 @@ void func_003164D0(RwaRuntimeHeader *header) {
     *header=copy;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316548);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/object_header_swap", func_00316548);

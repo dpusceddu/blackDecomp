@@ -150,7 +150,7 @@ def ee_function_abi(self, fn_sig, likely_regs, *, for_call):
 
     Unknown signatures retain m2c's inference. Double register parameters and known
     double returns are supported. A double signature that spills either argument
-    bank to the stack, or has varargs, is explicitly unsupported until the build backend
+    bank to the stack, or has varargs, is explicitly unsupported until the toolchain
     establishes its alignment and promotion rules.
     """
     if not for_call:

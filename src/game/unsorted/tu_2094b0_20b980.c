@@ -5,4 +5,4 @@ s32 func_0020B980(s32 arg0) {
     return arg0 + 0x389C;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020B988);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_20b980", func_0020B988);

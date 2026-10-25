@@ -30,4 +30,4 @@ void RouteMode::Retarget(PositionArg point)
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001921D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/ai_movement_modes_1920d8", func_001921D8);

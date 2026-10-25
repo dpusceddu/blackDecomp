@@ -24,8 +24,8 @@ void func_0029D1C0(void *arg0) {
     M2C_FIELD(arg0, u8 *, 1) = func_0029D108(M2C_FIELD(arg0, u8 *, 1));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029D228);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029D2E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29cee8_29d158", func_0029D228);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29cee8_29d158", func_0029D2E0);
 
 short func_0029D388(void *arg0)
 {
@@ -40,8 +40,8 @@ short func_0029D388(void *arg0)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029D3B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029D3E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29cee8_29d158", func_0029D3B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29cee8_29d158", func_0029D3E0);
 
 #include "ps2/recovered_types.h"
 extern s32 func_0029D3E0(void *, s32);
@@ -50,4 +50,4 @@ void func_0029D470(void *arg0) {
     func_0029D3E0(arg0, -0x21C);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029D478);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29cee8_29d158", func_0029D478);

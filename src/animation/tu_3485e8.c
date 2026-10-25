@@ -16,8 +16,8 @@ s32 func_003485E8(u32 *arg0, u32 *arg1) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00348610);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003486E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3485e8", func_00348610);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3485e8", func_003486E0);
 
 void func_00348738(s32 arg0, s32 arg1, s32 arg2) {
     func_003486E0(func_00352A30(), arg1, arg2);

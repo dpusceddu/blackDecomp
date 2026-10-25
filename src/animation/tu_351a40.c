@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00351A40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_351a40", func_00351A40);
 
 #include "ps2/recovered_types.h"
 extern s32 * func_00107D48(s32, s32);

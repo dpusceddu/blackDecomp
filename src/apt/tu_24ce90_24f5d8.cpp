@@ -22,5 +22,5 @@ void Value::Release()
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024F5D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ce90_24f5d8", func_0024F5D8);
 #endif

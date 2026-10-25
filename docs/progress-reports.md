@@ -16,19 +16,11 @@ ninja objdiff                              # objdiff.json and the per-unit objec
 ninja report                               # build/SLUS_213.76/report.json
 ```
 
-The image is linked as one program, but objdiff compares objects. `tools/objdiff.py` therefore derives, for every source unit
-in `config/SLUS_213.76/splits.yaml` that compiles at least one function, a pair of objects under `build/SLUS_213.76/objdiff/`:
-
-- **target**: the original machine code of the unit's recovered functions (their split assembly, assembled again), symbols
-  named `func_XXXXXXXX`;
-- **base**: the object compiled from the unit's source, with its function symbols, references and `-ffunction-sections`
-  section names renamed to the same `func_`/`D_` names.
-
-A function belongs to exactly one unit: the one whose source compiles it. Functions that stay `INCLUDE_ASM` (also those inside a
-source file that is partly recovered), and every function of a split that compiles nothing, get a target object only (one per
-translation unit of the generated `build/SLUS_213.76/tus.yaml`, hidden from the objdiff sidebar), so the report covers the whole program and unrecovered
-code counts as unmatched. The entries of a file with several ranges are one unit. Orphan pieces are left out. `objdiff.json` (project root, ignored by Git) lists all units with one
-progress category per library. Source units apply to USA retail (`SLUS_213.76`) only.
+Every source object has one comparison pair under `build/SLUS_213.76/objdiff/`: the target contains all its original
+functions, and the base contains its recovered functions. The linked object contains the actual INCLUDE_ASM code as well;
+only the comparison base removes it. Even a file consisting entirely of INCLUDE_ASM has a visible unit, so the sidebar's
+sizes and match percentages cover the work still to do. Files with several ranges remain one unit. Orphan pieces are
+excluded. The nine progress categories use the source library names.
 
 objdiff compares symbol names, instructions and relocation types, so the two objects are normalized until a byte-identical
 function also looks identical to it. Each rule exists because a function that `ninja progress` counts as exact was reported
@@ -77,10 +69,9 @@ image but below 100 % in the report points at a normalization rule that is missi
 the unit and function mapping with a small split list.
 
 To work on a function, open the repository root as an objdiff project (objdiff GUI: Project, Open), pick the unit and the
-function, edit the source file, and objdiff rebuilds the unit's object and shows the diff. The build command in
-`objdiff.json` is `tools/objdiff.py --build <object>`: it runs the incremental compile stage of `ninja` through the build
-backend for the changed sources (seconds), then rebuilds that unit's two objects. Run `ninja objdiff` once after a full
-`ninja` (and again when units are added) to create the objects and the project file.
+function, edit the source file, and objdiff rebuilds the unit's object and shows the diff. The build command is `ninja build/SLUS_213.76/objdiff/base/<unit>.o`: one object and its comparison view, without a
+full link or size check. Run `ninja objdiff` to prepare the project. An ignored `.local/objdiff.json` can override
+`custom_make` and `custom_args`; the default is ordinary Ninja.
 
 ## Publishing
 

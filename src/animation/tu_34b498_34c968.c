@@ -33,7 +33,7 @@ float *AnimationGraph_PoseCappedTime(void *owner, AnimationGraphNode *node, Anim
         weight);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CA18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CA18);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: func_0034CA68 (128 bytes), scheduling: scale-state stores and dispatch.
@@ -53,9 +53,9 @@ float *AnimationGraph_PoseScale(void *owner, AnimationGraphNode *node, Animation
     return pose;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CA68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CA68);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CAE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CAE8);
 #ifdef NON_MATCHING
 // Unmatched: layer pose allocation and repeated span call ordering.
 float *Graph_ComposedLayers(void *owner, AnimationGraphNode *node, AnimationParameters *bank, float current,
@@ -82,7 +82,7 @@ float *Graph_ComposedLayers(void *owner, AnimationGraphNode *node, AnimationPara
     return Pose_Compose(owner, a, b, flags);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CC00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CC00);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: layer pose allocation and repeated span call ordering.
@@ -110,7 +110,7 @@ float *Graph_DifferenceLayers(void *owner, AnimationGraphNode *node, AnimationPa
     return Pose_Difference(owner, a, b, flags);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034CE20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CE20);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: func_0034CAE8 (272 bytes), types: clip-event callback argument order.
@@ -129,7 +129,7 @@ float *AnimationGraph_PoseWeight(void *owner, AnimationGraphNode *node, Animatio
     return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D040);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D040);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: two missing division hazard NOPs.
@@ -151,9 +151,9 @@ float *Graph_EventWeight(void *owner, AnimationGraphNode *node, AnimationParamet
     return Pose_WeightOrdered(owner, pose, value, flags);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D0B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D0B0);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D1E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D1E0);
 #ifdef NON_MATCHING
 // Unmatched: repeat arithmetic scheduling and live span reads.
 float *Graph_RandomRepeat(void *owner, AnimationGraphNode *node, AnimationParameters *bank, float current,
@@ -186,7 +186,7 @@ float *Graph_RandomRepeat(void *owner, AnimationGraphNode *node, AnimationParame
     return Graph_Sequence(owner, node, bank, current, previous, flags, rate, weight);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D300);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D300);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: span rescaling allocation and dispatch scheduling.
@@ -219,9 +219,9 @@ float *Graph_InverseControlScale(void *owner, AnimationGraphNode *node, Animatio
     return pose;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D530);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D530);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D738);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D738);
 #ifdef NON_MATCHING
 // Unmatched: func_0034D0B0 (304 bytes), types: pose operation signatures.
 // Unmatched: func_0034D1E0 (288 bytes), types: dual-child pose operation signatures.
@@ -237,7 +237,7 @@ float *AnimationGraph_PoseBoundMaximum(void *owner, AnimationGraphNode *node, An
         *AnimationParameters_Get(bank, ((int *)control)[3]), coefficient, weight);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D838);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D838);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: software-double temporary and constant register allocation.
@@ -271,7 +271,7 @@ float *Graph_Overlay(void *owner, AnimationGraphNode *node, AnimationParameters 
     return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034D9B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D9B0);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: func_0034D9B0 (584 bytes), types: transition callback and argument order.
@@ -290,7 +290,7 @@ float AnimationGraph_ResolveWindowSpan(void *owner, AnimationGraphNode *node, An
     return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034DC30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034DC30);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: func_0034DDD0 (196 bytes), register allocation: child selection loop temporaries.
@@ -312,7 +312,7 @@ float AnimationGraph_ResolveSelectedSpan(void *owner, AnimationGraphNode *node, 
     return AnimationGraph_ReadSpan(children[(int)*AnimationParameters_Get(bank, binding[0])], bank);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034DDD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034DDD0);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: func_0034E220 (264 bytes), scheduling: blend-span branch layout.
@@ -335,5 +335,5 @@ float AnimationGraph_ResolveBlendSpan(void *owner, AnimationGraphNode *node, Ani
     return first > second?first:second;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E220);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034E220);
 #endif

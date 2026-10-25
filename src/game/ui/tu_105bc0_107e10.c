@@ -16,7 +16,7 @@ void func_00107E28(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107E30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_107e10", func_00107E30);
 
 s32 func_00107F60(s32 arg0) {
     if (M2C_FIELD(arg0, s32 *, 0xC88) != 1) {
@@ -32,4 +32,4 @@ block_4:
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107FB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_107e10", func_00107FB0);

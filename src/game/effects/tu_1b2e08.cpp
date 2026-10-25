@@ -33,7 +33,7 @@ extern "C" void func_001B2E08(BkEffectSlotPS2 *slots,BkEffectSlotHitPS2 *hit,u8 
  slot->used=slot->used+1<slot->count?slot->used+1:slot->count;slot->write=(slot->write+1)%slot->count;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B2E08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b2e08", func_001B2E08);
 #endif
 
 
@@ -48,7 +48,7 @@ extern "C" BkEffectSlotPS2 *func_001B3420(BkEffectSlotPS2 *slots,char *attachmen
  return slots+index;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3420);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b2e08", func_001B3420);
 #endif
 
 #ifdef NON_MATCHING
@@ -69,7 +69,7 @@ extern "C" BkEffectSlotPS2 *func_001B3590(BkEffectSlotPS2 *slots,char *attachmen
  return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3590);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b2e08", func_001B3590);
 #endif
 
 

@@ -24,7 +24,7 @@ extern "C" int func_001BF740(BkEffectEmitterRecordPS2 *record,void *context,char
  if(D_003BD1C8==-1)D_003BD1C8=0;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BF740);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/emitter_1bf720", func_001BF740);
 #endif
 
 #ifdef NON_MATCHING
@@ -76,5 +76,5 @@ extern "C" int func_001BF918(BkEffectEmitterRecordPS2 *record,BkParticleBatchPS2
  return func_001B1070(record,now);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BF918);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/emitter_1bf720", func_001BF918);
 #endif

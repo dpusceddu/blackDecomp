@@ -4,8 +4,8 @@
 extern s32 func_00386668();
 extern s32 func_00386698();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0023E9E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0023EA30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_23e9e0", func_0023E9E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_23e9e0", func_0023EA30);
 
 void func_0023EAC8(s32 arg0, void *arg1, void *arg2) {
     void *temp_2;

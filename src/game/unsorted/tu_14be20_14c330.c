@@ -24,5 +24,5 @@ s32 func_0014C3D0(void *arg0) {
     return (u32) (M2C_FIELD(arg0, s32 *, 0xC4) - 3) < 2U;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014C3E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014C488);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14be20_14c330", func_0014C3E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14be20_14c330", func_0014C488);

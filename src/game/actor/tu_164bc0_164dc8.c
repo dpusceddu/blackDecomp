@@ -10,7 +10,7 @@ s32 func_00164DC8(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00164DE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_164bc0_164dc8", func_00164DE8);
 
 void func_00164DF0(void *arg0) {
     void *temp_3;

@@ -136,7 +136,7 @@ extern "C" void func_0010BC10() {
   }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010BC10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010BC10);
 #endif
 
 
@@ -377,7 +377,7 @@ void FrontendSaveState::Load()
   return;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010C398);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010C398);
 #endif
 
 #ifdef NON_MATCHING
@@ -666,7 +666,7 @@ void FrontendSaveState::SelectProfile()
   return;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010C8E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010C8E8);
 #endif
 
 #ifdef NON_MATCHING
@@ -1164,7 +1164,7 @@ void FrontendSaveState::Save()
   return;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010CF18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010CF18);
 #endif
 
 #ifdef NON_MATCHING
@@ -1495,7 +1495,7 @@ switchD_0010da38_caseD_e:
   return;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010D9F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010D9F0);
 #endif
 
 #ifdef NON_MATCHING
@@ -1709,7 +1709,7 @@ void FrontendSaveState::Delete()
   return;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010E0F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010E0F0);
 #endif
 
 #ifdef NON_MATCHING
@@ -1765,7 +1765,7 @@ void FrontendSaveState::Enable() {
   }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010E498);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010E498);
 #endif
 
 #ifdef NON_MATCHING
@@ -1815,7 +1815,7 @@ void FrontendSaveState::Disable() {
   }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010E5F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010E5F0);
 #endif
 
 #ifdef NON_MATCHING
@@ -1985,7 +1985,7 @@ void FrontendSaveState::Format()
   return;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010E740);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010E740);
 #endif
 
 #ifdef NON_MATCHING
@@ -2016,5 +2016,5 @@ int FrontendSaveState::Wait() {
   return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010EAF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010EAF8);
 #endif

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Cut splat's output into one assembly file (and later one object) per function, migrating constants with them.
+"""Generate original function includes and constant ownership from splat output.
 
 Reads  asm/<GAME_ID>/text.s and asm/<GAME_ID>/data/*.s (splat), build/<GAME_ID>/extra_labels.txt (link_support.py),
        build/<GAME_ID>/layout.json.

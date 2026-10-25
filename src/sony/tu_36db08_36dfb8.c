@@ -21,7 +21,7 @@ void * func_0036DFB8(void *arg0) {
     return temp_3;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036DFF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036E298);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036E2E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036E2F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36db08_36dfb8", func_0036DFF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36db08_36dfb8", func_0036E298);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36db08_36dfb8", func_0036E2E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36db08_36dfb8", func_0036E2F0);

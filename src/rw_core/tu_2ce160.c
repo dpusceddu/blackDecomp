@@ -3,10 +3,10 @@
 // RenderWare immediate-mode plugin; names inferred from operations.
 #include "rw_core/im3d_operations.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CE160);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CE2F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CE470);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CE708);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce160", func_002CE160);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce160", func_002CE2F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce160", func_002CE470);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce160", func_002CE708);
 
 void *func_002CE7C8(void *instance) {
  func_002CF5D8(&IM3D_PLUGIN->defaultTriangleFan);func_002CF5D0(&IM3D_PLUGIN->defaultTriangleList);D_0040E6EC--;return instance;
@@ -33,5 +33,5 @@ void *func_002CE848(int primitive) {
 // Unmatched: func_002CE828 needs matching pipeline switch and callback lifetime scheduling.
 // Unmatched: func_002CE948 needs matching pipeline switch and callback lifetime scheduling.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CE828);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CE948);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce160", func_002CE828);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce160", func_002CE948);

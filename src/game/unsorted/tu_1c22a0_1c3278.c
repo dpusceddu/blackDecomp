@@ -15,9 +15,9 @@ block_3:
     M2C_FIELD(arg0, f32 *, 0x14) = fparg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C32B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C3470);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C3740);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C3A28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C3D50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C3DC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c3278", func_001C32B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c3278", func_001C3470);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c3278", func_001C3740);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c3278", func_001C3A28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c3278", func_001C3D50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c3278", func_001C3DC0);

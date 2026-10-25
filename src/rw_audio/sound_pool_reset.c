@@ -11,9 +11,9 @@ void func_00316218(void) {
     D_0040E188=0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316240);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003162D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003163F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316400);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316430);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316438);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_pool_reset", func_00316240);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_pool_reset", func_003162D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_pool_reset", func_003163F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_pool_reset", func_00316400);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_pool_reset", func_00316430);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/sound_pool_reset", func_00316438);

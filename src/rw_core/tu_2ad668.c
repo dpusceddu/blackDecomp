@@ -3,15 +3,15 @@
 // RenderWare texture allocation and image callbacks; names inferred.
 #include "rw_core/image_operations.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AD668);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AD9F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ADE38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AE0B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AE790);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AED50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AEEE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF0F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF118);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AD668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AD9F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002ADE38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AE0B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AE790);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AED50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AEEE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF0F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF118);
 
 int func_002AF158(RwRasterView *raster,RwImageView *image) {
  return ((RwRasterView *(*)(RwRasterView *,RwImageView *))IMAGE_PLUGIN->mipmapGenerate)(raster,image)!=0;
@@ -49,13 +49,13 @@ RwTextureView *func_002AF300(RwRasterView *raster) {
 // Unmatched: func_002AF6A8 needs matching image/plugin control flow and callback scheduling.
 // Unmatched: func_002AF6F0 needs matching image/plugin control flow and callback scheduling.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF190);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF1A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF240);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF2E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF388);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF430);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF438);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF528);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF530);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002AF5A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF190);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF1A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF240);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF2E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF388);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF430);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF438);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF528);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF530);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ad668", func_002AF5A0);

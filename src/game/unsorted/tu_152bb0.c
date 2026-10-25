@@ -3,7 +3,7 @@
 
 extern void * func_001AFD80();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152BB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_152bb0", func_00152BB0);
 
 s32 func_00152DB0(void *arg0) {
     void *temp_2;
@@ -15,7 +15,7 @@ s32 func_00152DB0(void *arg0) {
     return M2C_FIELD(temp_2, s32 *, 0x54) == 8;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152DE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_152bb0", func_00152DE8);
 
 f32 func_00152E38(void *arg0) {
     f32 var_f0;
@@ -29,4 +29,4 @@ f32 func_00152E38(void *arg0) {
     return var_f0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00152E80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_152bb0", func_00152E80);

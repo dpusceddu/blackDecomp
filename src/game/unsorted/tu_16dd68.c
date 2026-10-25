@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016DD68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016DD68);
 
 s32 func_0016DDB0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x22BBC) != 0;
@@ -20,15 +20,15 @@ void func_0016DDE0(void *arg0, void *arg1) {
     M2C_FIELD(arg0, void **, 0x22BBC) = arg1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016DDF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016DE70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016DEF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016DFB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016E008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016E0C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016E148);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016E1F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016E250);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016DDF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016DE70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016DEF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016DFB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E0C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E148);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E1F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E250);
 
 #include "ps2/recovered_types.h"
 extern s8 * func_00172C88(void *, s128, s128);
@@ -48,7 +48,7 @@ s8 * func_0016E2B8(void *arg0, s128 arg1, s128 arg2, s32 arg3, s32 arg4, s32 arg
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016E318);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016E3C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016E430);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0016E588);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E318);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E3C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E430);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E588);

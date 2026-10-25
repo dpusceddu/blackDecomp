@@ -34,9 +34,13 @@ def main():
     print('MISMATCH  %s  %s\n  want %s\n  got  %s  (%d bytes)' % (want[1], slug, want[0], got, len(data)))
     ref = ROOT / 'orig' / slug / want[1]
     if ref.exists():
-        subprocess.run([sys.executable, str(ROOT / 'tools/diffelf.py'), str(ref), str(built)])
-        if (built.parent / 'linked.elf').exists() and slug == 'SLUS_213.76':   # name the functions and files that differ
-            subprocess.run([sys.executable, str(ROOT / 'tools/build/units_verify.py'), 'compare'])
+        explained = False
+        if (built.parent/'objects.json').exists() and slug=='SLUS_213.76':
+            sys.path[:0]=[str(ROOT/'tools'),str(ROOT/'tools/build')]
+            from unit_compare import compare
+            explained = bool(compare(slug,built.parent))
+        if not explained:
+            subprocess.run([sys.executable,str(ROOT/'tools/diffelf.py'),str(ref),str(built)])
     return 1
 
 

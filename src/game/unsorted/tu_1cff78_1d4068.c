@@ -19,11 +19,11 @@ s32 func_001D4078(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4080);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4268);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4328);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D4330);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001D43B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1cff78_1d4068", func_001D4080);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1cff78_1d4068", func_001D4268);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1cff78_1d4068", func_001D4328);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1cff78_1d4068", func_001D4330);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1cff78_1d4068", func_001D43B0);
 
 void func_001D4C78(void) {
     D_0040DFD0 = D_0040EB28;

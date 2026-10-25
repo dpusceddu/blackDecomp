@@ -24,5 +24,5 @@ s32 func_0030E728(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E798);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0030E8D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/CSoundManager_30d160_30e728", func_0030E798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/CSoundManager_30d160_30e728", func_0030E8D8);

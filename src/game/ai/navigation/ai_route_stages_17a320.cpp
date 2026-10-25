@@ -81,5 +81,5 @@ bool RunTimedRouteSearch(RouteRequest* request)
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A588);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A720);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_route_stages_17a320", func_0017A588);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_route_stages_17a320", func_0017A720);

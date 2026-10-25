@@ -3,7 +3,7 @@
 
 extern s32 func_00366468();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366468);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366468);
 
 void func_00366510(void *arg0, void *arg1) {
     s32 temp_4;
@@ -15,10 +15,10 @@ void func_00366510(void *arg0, void *arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366548);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366650);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366788);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366810);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366548);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366650);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366788);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366810);
 
 s32 func_003668D0(s32 arg0, s32 arg1) {
     void *temp_2;
@@ -29,12 +29,12 @@ s32 func_003668D0(s32 arg0, s32 arg1) {
     return (s32) temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366908);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366B10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366C10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366D68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366DD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00366F60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00367028);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003671C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00367340);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366908);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366B10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366C10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366D68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366DD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00366F60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00367028);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_003671C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_366468", func_00367340);

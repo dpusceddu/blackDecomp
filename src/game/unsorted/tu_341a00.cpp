@@ -50,4 +50,4 @@ StartupToken D_0040E9C0 __attribute__((section(".sbss")));
 ConstantQuad D_0045EA60, D_0045EA70, D_0045EA80, D_0045EA90;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00341B50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_341a00", func_00341B50);

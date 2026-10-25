@@ -12,7 +12,7 @@ extern "C" void func_001BEC18(void) {
  temporary=low;D_00415B80[1]=BkEffectSubPS2(high,low);temporary=high;D_00415B80[0]=high;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BEC18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/emitter_1bec68", func_001BEC18);
 #endif
 
 int Effects::Flights::Clear() {

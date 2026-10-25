@@ -50,6 +50,160 @@ def normalize_object(data):
     return bytes(out)
 
 
+def restore_gprel(data):
+    """SN has no explicit GPREL16 operand under -G0. Translate marked symbolic
+    .word relocations to their declared instruction and R_MIPS_GPREL16. Neither
+    symbol targets nor addends are inferred from the image or patched at link.
+    """
+    from elfinfo import Elf
+    import re
+    elf = Elf(data)
+    out = bytearray(data)
+    for symbol in elf.symbols():
+        marker = re.fullmatch(r'__(gprel|jump)_([0-9A-F]{8})_[0-9A-F]{8}', symbol['name'])
+        if not marker:
+            continue
+        section = elf.sections[symbol['shndx']]
+        offset = symbol['value']
+        matches = []
+        for reloc in elf.sections:
+            if reloc['type'] == 9 and reloc['info'] == symbol['shndx']:
+                for at in range(reloc['offset'], reloc['offset']+reloc['size'], 8):
+                    address, info = struct.unpack_from('<II', data, at)
+                    if address == offset:
+                        matches.append((at, info))
+        if len(matches) != 1 or matches[0][1] & 255 != 2:
+            raise ValueError('GP marker needs exactly one R_MIPS_32 relocation: '+symbol['name'])
+        at, info = matches[0]
+        addend = struct.unpack_from('<I', data, section['offset']+offset)[0]
+        if marker[1] == 'gprel' and 0x8000 <= addend < 0xffff8000:
+            raise ValueError('GP addend does not fit the instruction field')
+        struct.pack_into('<I', out, section['offset']+offset, int(marker[2],16) | (addend >> 2 if marker[1] == 'jump' else addend & 0xffff))
+        struct.pack_into('<I', out, at+4, (info & ~255) | (4 if marker[1] == 'jump' else 7))
+    return bytes(out)
+
+
+def fit_included_sections(data, spec):
+    """Remove only SN's zero section tails and excessive default alignment from
+    original assembly inputs. Recovered C code never passes through this rule.
+    The original include spans already contain their real instruction/padding words.
+    """
+    from elfinfo import Elf
+    elf = Elf(data)
+    syms = {s['name']:s for s in elf.symbols()}
+    bounds = {}
+    for f in spec['unit']['functions']:
+        marker = syms.get('__nonmatching_func_%08X' % f['addr'])
+        if marker:
+            bounds[elf.sections[marker['shndx']]['name']] = (f['addr'],f['size'])
+    for sec, slots in spec.get('slots',{}).items():
+        for low, high, addr in slots:
+            bounds['%s.%08X' % (sec,low)] = (low,high-low)
+    out = bytearray(data)
+    trims = {}
+    for name,(address,span) in bounds.items():
+        section = elf.section(name)
+        if not section:
+            continue
+        alignment = min(section['align'], address & -address)
+        struct.pack_into('<I',out,elf.shoff+section['index']*elf.shentsize+32,alignment)
+        if section['size'] > span:
+            if any(elf.content(section)[span:]):
+                raise ValueError('assembler emitted nonzero bytes beyond '+name)
+            trims[name] = span
+    return trim_sections(bytes(out),trims) if trims else bytes(out)
+
+
+def split_text_sections(data, spec):
+    """Split an unsectioned compiler text input without changing code or CFI.
+
+    This preserves compilers' native unwind ranges when -ffunction-sections changes
+    their end labels. Relocations to the former section become function-relative;
+    no per-function object or address-keyed section is created.
+    """
+    from elfinfo import Elf
+    elf = Elf(data)
+    text = elf.section('.text')
+    if not text or not text['size']:
+        return data
+    syms = elf.symbols()
+    defined = {s['name']:(i,s) for i,s in enumerate(syms) if s['shndx']==text['index'] and s['type']==2}
+    pieces = []
+    for f in spec['unit']['functions']:
+        match = next((defined[n] for n in f.get('candidates',[f['symbol']])+['func_%08X'%f['addr']] if n in defined),None)
+        if match:
+            index, symbol = match
+            pieces.append(dict(start=symbol['value'],symbol=index,name='.text.'+symbol['name'],address=f['addr']))
+    pieces.sort(key=lambda p:p['start'])
+    if not pieces or pieces[0]['start']!=0 or len({p['start'] for p in pieces})!=len(pieces):
+        raise ValueError('unsectioned text does not have unique owned function starts')
+    for i,piece in enumerate(pieces):
+        piece['end'] = pieces[i+1]['start'] if i+1<len(pieces) else text['size']
+        piece['index'] = len(elf.sections)+i
+    def owner(value):
+        return next((p for p in reversed(pieces) if p['start']<=value),None)
+    out=bytearray(data)
+    table=elf.section('.symtab')
+    split_relocs={p['index']:[] for p in pieces}
+    for r in elf.sections:
+        if r['type']!=9 or r['link']!=table['index']:
+            continue
+        target=elf.sections[r['info']]
+        for offset in range(r['offset'],r['offset']+r['size'],8):
+            at,info=struct.unpack_from('<II',out,offset)
+            symbol=syms[info>>8];kind=info&255
+            if symbol['type']==3 and symbol['shndx']==text['index']:
+                word=struct.unpack_from('<I',out,target['offset']+at)[0]
+                if kind==2:
+                    value=word
+                elif kind==4:
+                    value=(word&0x3ffffff)<<2
+                else:
+                    raise ValueError('unsupported relocation to unsectioned text: '+str(kind))
+                piece=owner(value)
+                if piece is None or value>text['size']:
+                    raise ValueError('unsectioned text addend outside input')
+                delta=value-piece['start']
+                word=delta if kind==2 else (word&0xfc000000)|(delta>>2)
+                struct.pack_into('<I',out,target['offset']+at,word)
+                info=piece['symbol']<<8|kind
+                struct.pack_into('<I',out,offset+4,info)
+            if target['index']==text['index']:
+                piece=owner(at)
+                split_relocs[piece['index']].append((at-piece['start'],info))
+    for i,symbol in enumerate(syms):
+        if symbol['shndx']!=text['index'] or symbol['type']==3:
+            continue
+        piece=owner(symbol['value'])
+        struct.pack_into('<I',out,table['offset']+i*16+4,symbol['value']-piece['start'])
+        struct.pack_into('<H',out,table['offset']+i*16+14,piece['index'])
+    headers=[list(struct.unpack_from('<10I',out,elf.shoff+i*elf.shentsize)) for i in range(elf.shnum)]
+    headers[text['index']][2]=0
+    headers[text['index']][5]=0
+    for section in elf.sections:
+        if section['type']==9 and section['info']==text['index']:
+            headers[section['index']][5]=0
+    strings=bytearray(elf.content(elf.sections[elf.shstrndx]))
+    def append(name,payload,kind,flags,link,info,alignment,entry_size=0):
+        name_offset=len(strings);strings.extend(name.encode()+b'\0')
+        out.extend(bytes((-len(out))%4));offset=len(out);out.extend(payload)
+        headers.append([name_offset,kind,flags,0,offset,len(payload),link,info,alignment,entry_size])
+    for piece in pieces:
+        append(piece['name'],out[text['offset']+piece['start']:text['offset']+piece['end']],1,text['flags'],0,0,
+               min(text['align'],piece['address']&-piece['address']))
+    for piece in pieces:
+        entries=split_relocs[piece['index']]
+        if entries:
+            append('.rel'+piece['name'],b''.join(struct.pack('<II',*p) for p in entries),9,0,table['index'],piece['index'],4,8)
+    out.extend(bytes((-len(out))%4));offset=len(out);out.extend(strings)
+    headers[elf.shstrndx][4:6]=[offset,len(strings)]
+    out.extend(bytes((-len(out))%4));offset=len(out)
+    out.extend(b''.join(struct.pack('<10I',*h) for h in headers))
+    struct.pack_into('<I',out,32,offset)
+    struct.pack_into('<H',out,48,len(headers))
+    return bytes(out)
+
+
 def undefine_dropped(data, keep):
     """Make the global symbols defined in sections the link will not place undefined, so that they resolve to the
     original definitions elsewhere in the image (vtables, unwind data and other duplicates a compiled unit emits).
@@ -106,11 +260,11 @@ def undefine_dropped(data, keep):
 
 
 def unplaced_allocated_sections(data, keep):
-    """Name allocated inputs that must miss the linker's sorted wildcards.
+    """Move unplaced allocated inputs to the linker's explicit discard namespace.
 
-    Undefining a discarded function's symbol alone does not remove its bytes:
-    an unchanged .text.* input still matches SORT_BY_NAME(.text.*). Rename all
-    unplaced allocated sections to a namespace handled only by /DISCARD/.
+    Undefining a context function's symbol alone leaves its bytes allocated.
+    Rename its section so the linker discards those bytes instead of treating
+    them as an orphan input.
     """
     shoff, = struct.unpack_from('<I', data, 32)
     shentsize, shnum, shstrndx = struct.unpack_from('<HHH', data, 46)

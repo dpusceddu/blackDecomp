@@ -38,7 +38,7 @@ finished:
 }
 
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00306848);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/avoidance_3067a0", func_00306848);
 #ifdef NON_MATCHING
 namespace KaimAvoidance {
 inline TrackedActor::TrackedActor() {}
@@ -128,9 +128,9 @@ void CollectTrackedActors()
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003071A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/avoidance_3067a0", func_003071A8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00307480);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/avoidance_3067a0", func_00307480);
 #ifdef NON_MATCHING
 namespace KaimAvoidance {
 // Unmatched: cell conversion, loop register lifetimes and floating scheduling.
@@ -144,6 +144,6 @@ void RefreshCells()
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003077F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/avoidance_3067a0", func_003077F0);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00307970);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/avoidance_3067a0", func_00307970);

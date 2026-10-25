@@ -18,10 +18,10 @@ s32 func_00294AC8(void *arg0, s32 arg1, s32 arg2) {
     return func_00294260(arg0, temp_5, arg2, (s32) temp_7);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294B10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294B18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294BA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294BB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294BE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294BF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294C70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90_294ac8", func_00294B10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90_294ac8", func_00294B18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90_294ac8", func_00294BA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90_294ac8", func_00294BB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90_294ac8", func_00294BE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90_294ac8", func_00294BF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90_294ac8", func_00294C70);

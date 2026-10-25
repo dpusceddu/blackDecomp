@@ -25,8 +25,8 @@ void func_001A7498(void **arg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A7528);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A7660);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A76E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A77C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A7E58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a51c8_1a7450", func_001A7528);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a51c8_1a7450", func_001A7660);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a51c8_1a7450", func_001A76E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a51c8_1a7450", func_001A77C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a51c8_1a7450", func_001A7E58);

@@ -19,11 +19,11 @@ float func_001AC4B8(void *context) {
  return -pitch;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AC568);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AC5B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AC638);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AC648);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AC680);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/torso_pitch", func_001AC568);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/torso_pitch", func_001AC5B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/torso_pitch", func_001AC638);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/torso_pitch", func_001AC648);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/torso_pitch", func_001AC680);
 
 #ifdef NON_MATCHING
 // Unmatched: 0x1ac798: slot pointer register allocation and call scheduling.
@@ -62,7 +62,7 @@ char *func_001AC798(BkActorAnimationPS2 *actor, BkAnimationSlotPS2 *slot) {
  return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AC798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/torso_pitch", func_001AC798);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AC8D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/torso_pitch", func_001AC8D0);

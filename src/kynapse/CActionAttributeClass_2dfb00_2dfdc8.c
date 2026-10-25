@@ -14,8 +14,8 @@ s32 func_002DFDC8(s32 arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DFE08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DFE40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/CActionAttributeClass_2dfb00_2dfdc8", func_002DFE08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/CActionAttributeClass_2dfb00_2dfdc8", func_002DFE40);
 
 void * func_002DFEB0(void *arg0, void *arg1, void *arg2) {
     func_0038B840((s32) arg0, (s32) arg1, (s32) arg2, 0, 0, 0);

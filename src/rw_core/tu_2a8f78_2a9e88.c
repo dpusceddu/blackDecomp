@@ -25,5 +25,5 @@ void * func_002A9E88(s32 arg0, s32 arg1) {
     return (void *) ((temp_2 != 0) ? arg0 : 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A9F00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A9F08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a8f78_2a9e88", func_002A9F00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a8f78_2a9e88", func_002A9F08);

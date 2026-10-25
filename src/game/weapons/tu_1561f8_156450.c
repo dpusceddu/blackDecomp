@@ -91,7 +91,7 @@ s32 func_00156450(void *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001564D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156A20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156A88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156CA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_001564D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_00156A20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_00156A88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_00156CA0);

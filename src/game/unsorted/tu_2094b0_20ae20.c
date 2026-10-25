@@ -27,4 +27,4 @@ void func_0020AE20(void *arg0)
   func_0020B678(D_0040F544, &D_003FA300, 4);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020AEA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_20ae20", func_0020AEA0);

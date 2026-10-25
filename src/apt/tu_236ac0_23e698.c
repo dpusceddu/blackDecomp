@@ -14,5 +14,5 @@ void func_0023E698(void *arg0)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0023E6D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0023E6D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_236ac0_23e698", func_0023E6D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_236ac0_23e698", func_0023E6D8);

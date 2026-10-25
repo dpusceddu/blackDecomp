@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031AEE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031B030);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_31aee0", func_0031AEE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_31aee0", func_0031B030);
 
 #include "ps2/recovered_types.h"
 extern s32 D_0040E1FC;

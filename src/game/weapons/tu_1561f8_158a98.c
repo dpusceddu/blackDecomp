@@ -21,4 +21,4 @@ s32 func_00158A98(void *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00158AE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_158a98", func_00158AE0);

@@ -62,7 +62,7 @@ A file that has no descriptive name is named after addresses (the rules are in `
 `config/SLUS_213.76/splits.yaml`, one line per entry, ordered by address:
 
 ```yaml
-defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas], sections: true}
+defaults: {compiler: ee-gcc2.95.3-136, flags: [-O2, -G0, -snas]}
 splits:
   - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x103858]}
   - {src: src/game/ui/frontend_menu_notify.cpp, range: [0x103db0, 0x103df0], flags: [-O1, -G0, -snas]}
@@ -76,16 +76,14 @@ splits:
 owner. A file whose functions are not adjacent (a class whose methods are spread over the executable, a function that needed
 other flags and was carved out of its neighbours) has one entry per stretch: the first carries all the options, the others only
 `src`, `range` and `note`, and the file is compiled once. `flags` and `compiler` replace the defaults; `assembler` names a per-unit
-assembler variant (`sn-min6`, ... see [tus.md](tus.md)); `sections: false` compiles without `-ffunction-sections` (the
-compiled functions must then be adjacent); `note` says why a TU is several files. A file is compiled once, with the options of
+assembler variant (`sn-min6`, ... see [tus.md](tus.md)); `note` says why a TU is several files. A file is compiled once, with the options of
 its first entry; code that needs other options (another compiler flag, language or assembler) is a file of its own, however
 small, so a function that sits between two functions of another file does not overlap them. Rare keys keep the options of the old unit format (`data_ranges`,
 `rodata_type_splits`, `shared_exception_tables`, `full_tu_context`, `unlinked_context_helpers`, `externs`).
 
 The rule is checked by `python3 tools/build/splits.py check` (no game files), by `python3 configure.py` and by the tests: ranges
 that overlap by even one byte (also two stretches of one file), an `INCLUDE_ASM` line for a function outside the file's ranges or listed twice, and
-(with a build) a function that no entry owns are errors. To give a function to a file of its own (other flags, `-x c++`, a file
-with `sections: false`), run `python3 tools/split_function.py func_XXXXXXXX [--cpp] [--flags "..."]`: it removes the marker and
+(with a build) a function that no entry owns are errors. To give a function to a file of its own (other flags, `-x c++`, another compiler), run `python3 tools/split_function.py func_XXXXXXXX [--cpp] [--flags "..."]`: it removes the marker and
 that stretch of the range from the old owner and creates the new file and entry (`tools/pipeline/tu_files.py` does the same when the
 automatic pipeline makes a file for a function). `python3 tools/relocate_sources.py old new` renames or moves a whole file.
 
@@ -99,17 +97,12 @@ A line ending in `alias` (`// type:func alias`) is only a readable name and neve
 
 ## What the build does with it
 
-`tools/build/units.py` reads the splits, scans each file's markers (`tools/build/include_asm.py`, which understands `#ifdef NON_MATCHING`
-and `-D` flags) and writes `build/<GAME_ID>/units.json`. `tools/build/make_ld.py` places each compiled function (its own
-`.text.<symbol>` section) at the slot of the original function and the file's constants at the first slot they replace;
-`tools/build/units_verify.py prepare` checks every object (names, extra code, constants, unbound symbols) and writes
-`unit_facts.json`; `link` and `compare` name the files and functions that do not link or differ. Reasons: `compile`, `name`,
-`extra` (the object has code the original does not: a definition next to an INCLUDE_ASM line), `size`, `section`, `shared`,
-`layout` (constants of the assembly functions in between interleave with the file's own), `extern`, `labels`, `link`, `bytes`.
-Diagnostics: `tools/objdump.py`, `BLACK_UNITS_ALL=1` (pretend every listed function is source).
-
-Text and owned data may end before their slot boundary when the next input section's alignment fills exactly that gap and
-the original gap holds only zeros; the full-image comparison stays mandatory.
+The build compiles each file once with real assembler includes. `object_compile.py` normalizes SN objects and records
+resolved symbols; `unit_link.py` orders ordinary input sections and invokes GNU ld. Function sections permit arbitrary
+C/INCLUDE_ASM interleaving. Three complete C++ files retain `-fno-function-sections` to preserve their compiler's native CFI;
+the object normalizer separates their text into named function sections without changing instructions or unwind ranges.
+`units.py` and the source label reader still support ownership, editing and progress; assembly selection is performed by
+the compiler and assembler. No source-unit function has a separate assembly object. See [build.md](build.md).
 
 ## Full TU context
 

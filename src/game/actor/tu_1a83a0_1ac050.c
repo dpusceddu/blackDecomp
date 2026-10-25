@@ -42,5 +42,5 @@ void func_001AC0E0(int event,void **context) {
  func_0012C428(D_0040F4D0,point,*(BkVectorPS2 *)(actor+0x90),0,1.5f,150.0f,13,0,0,1,0);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AC0E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0_1ac050", func_001AC0E0);
 #endif

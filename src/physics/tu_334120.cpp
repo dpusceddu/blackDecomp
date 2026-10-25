@@ -129,6 +129,6 @@ Descriptor D_003D1468 __attribute__((section(".data.shape_3d1468"))) = {1, &Opaq
 Descriptor D_003D14A0 __attribute__((section(".data.shape_3d14a0"))) = {3, &OpaqueShape::F_0033F328, &OpaqueShape::F_00341670, &OpaqueShape::F_0033FF48, &OpaqueShape::F_0033FC38, &OpaqueShape::F_003411C8, D_0040A540, 0, 0};
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00334268);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003342D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00334338);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_334120", func_00334268);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_334120", func_003342D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_334120", func_00334338);

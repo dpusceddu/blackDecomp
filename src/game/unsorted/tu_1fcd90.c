@@ -9,14 +9,14 @@ extern s32 func_001F1F08();
 extern s32 func_001F1E20();
 extern M2C_UNK D_003F9DD8;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FCD90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FCDB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FCDE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FCFE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FD178);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FD220);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FD230);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FD298);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FCD90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FCDB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FCDE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FCFE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD178);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD220);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD230);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD298);
 
 void func_001FD3E8(void *arg0) {
     if (M2C_FIELD(arg0, u8 *, 0x2DB) == 0) {
@@ -32,8 +32,8 @@ s32 func_001FD438(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FD440);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FD648);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD440);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD648);
 
 void func_001FD8A0(void *arg0)
 {
@@ -56,7 +56,7 @@ void func_001FD8A0(void *arg0)
   M2C_FIELD(arg0, s32 *, 0x78) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FD8F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD8F0);
 
 void func_001FD978(void) {
     func_001F1F08();
@@ -67,5 +67,5 @@ s32 func_001FD998(s32 arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FD9C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FDAD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD9C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FDAD0);

@@ -47,7 +47,7 @@ RwaPropertyClass *func_00311E60(RwaPropertyClass *type,RwaProperty *input,u32 in
     return type;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00311E60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60", func_00311E60);
 #endif
 #ifdef NON_MATCHING
 extern u32 func_00312DB8(u32);
@@ -81,7 +81,7 @@ RwaValue *func_00312000(u32 type,const void *input,const void *output,RwaValue *
     return value;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312000);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60", func_00312000);
 #endif
 #ifdef NON_MATCHING
 extern RwaValue *func_00312B40(void *,RwaValue *);
@@ -102,7 +102,7 @@ void func_00312228(RwaValue *value,s32 recursive){
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312228);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60", func_00312228);
 #endif
 #ifdef NON_MATCHING
 extern void func_00312A10(void *),func_00317FC0(RwaPool *);
@@ -125,13 +125,13 @@ s32 func_003123B8(void){
     D_0040E0F8=0;return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003123B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60", func_003123B8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312510);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60", func_00312510);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00311FF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003127B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003127E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60", func_00311FF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60", func_003127B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60", func_003127E0);
 
 s32 func_00312880(s32 arg0) {
     s32 temp_2;
@@ -163,4 +163,4 @@ void func_00312900(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_311e60", func_00312938);

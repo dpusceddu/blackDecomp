@@ -104,7 +104,7 @@ def main(argv=None):
         raise SystemExit('%s: no assembly under asm/%s/nonmatchings; run `ninja` once first' % (name, SLUG))
     found = locate(addr)
     if found is None:
-        raise SystemExit('%s is not an INCLUDE_ASM line of any source file: it is already recovered (see `python3 tools/next.py tus`)' % name)
+        raise SystemExit('%s is not an INCLUDE_ASM line of any source file: it is already recovered (pick another target in objdiff)' % name)
     split, path, line = found
     f, result, source, note = draft(addr, a.ctx)
     rel = path.relative_to(ROOT).as_posix()

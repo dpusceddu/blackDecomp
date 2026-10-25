@@ -56,5 +56,5 @@ void AnimationGraph_BindInverseControl(void *owner, AnimationGraphNode *node, An
     } else *AnimationParameters_Get(bank, binding[0]) = 1000.0f;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034E828);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34e5c0", func_0034E828);
 #endif

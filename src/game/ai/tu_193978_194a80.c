@@ -28,4 +28,4 @@ s32 func_00194A80(void **arg0, s32 *arg1) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00194B08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_193978_194a80", func_00194B08);

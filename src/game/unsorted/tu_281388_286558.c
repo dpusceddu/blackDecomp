@@ -21,7 +21,7 @@ s32 func_00286558(s32 arg0) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00286598);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_286558", func_00286598);
 
 s32 func_002867C0(s32 arg0, s32 arg1, s32 arg2)
 {

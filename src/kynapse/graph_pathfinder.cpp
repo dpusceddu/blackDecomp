@@ -139,7 +139,7 @@ CPathFinder::~CPathFinder()
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FEFB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_pathfinder", func_002FEFB0);
 #endif
 #ifdef NON_MATCHING
 namespace Kaim {
@@ -243,6 +243,6 @@ unsigned char CPathFinder::Initialize(ChildBuffers* definition)
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FF250);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_pathfinder", func_002FF250);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FF890);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_pathfinder", func_002FF890);

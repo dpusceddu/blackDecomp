@@ -17,5 +17,5 @@ void func_00328DB0(void) {
     func_00329958(&D_0045C120);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328DF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328DF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_328d58", func_00328DF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_328d58", func_00328DF8);

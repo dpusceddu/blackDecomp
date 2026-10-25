@@ -11,5 +11,5 @@ void Forwarder::RunTarget()
         target->Run();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E4CE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E4D18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/slot_forwarders_2e4ca8", func_002E4CE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/slot_forwarders_2e4ca8", func_002E4D18);

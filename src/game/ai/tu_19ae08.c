@@ -30,9 +30,9 @@ void func_0019AF20(void) {
     func_00193988();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0019AF40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0019AFF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0019B0C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_19ae08", func_0019AF40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_19ae08", func_0019AFF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_19ae08", func_0019B0C0);
 
 void func_0019B130(void) {
     func_0019B0C0();

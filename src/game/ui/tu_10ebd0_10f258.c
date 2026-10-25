@@ -8,14 +8,14 @@ void func_0010F258(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010F260);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_10ebd0_10f258", func_0010F260);
 
 s32 func_0010F280(s32 arg0) {
     return arg0 + 0x18;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010F288);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010F470);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_10ebd0_10f258", func_0010F288);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_10ebd0_10f258", func_0010F470);
 
 void func_0010F648(void *arg0) {
     func_001240B0(arg0 + 0xE0, 1);

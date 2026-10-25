@@ -12,4 +12,4 @@ s32 func_0010BAE0(s32 arg0, s32 arg1, s32 arg2) {
     return temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0010BAF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_10a870_10bae0", func_0010BAF8);

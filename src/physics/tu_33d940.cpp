@@ -72,5 +72,5 @@ int PointCoreShape::GetPointCore(void*, void*, PointCoreFeature* feature) const
     return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033DA98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33d940", func_0033DA98);
 #endif

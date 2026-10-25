@@ -6,9 +6,9 @@
                      - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x103858]}
                      - {src: src/kynapse/behaviors_hide.cpp, range: [0x2d4148, 0x2d4a20], flags: [-O2, -G0, -snas, -fbyte-bool]}
                    Keys: src, range (start inclusive, end exclusive), compiler, flags, assembler (a variant such as sn-min6),
-                   sections (false: no -ffunction-sections), note; rare ones: externs, data_ranges,
+                   note; rare ones: externs, data_ranges,
                    rodata_type_splits, shared_exception_tables, full_tu_context, unlinked_context_helpers.
-                   `defaults:` at the top holds compiler, flags and sections for entries that omit them.
+                   `defaults:` at the top holds compiler and flags for entries that omit them.
   symbols.txt      names and addresses, one per line in splat's symbol_addrs form:  name = 0xADDRESS; // type:func
                    A compiled function may be defined under the name given for its address (a mangled C++ name); names
                    the source uses without defining are bound to their original address. A line marked `alias`
@@ -37,7 +37,7 @@ DEFAULT_SLUG = 'SLUS_213.76'
 DEFAULT_COMPILER = 'ee-gcc2.95.3-136'
 DEFAULT_FLAGS = ['-O2', '-G0', '-snas']
 
-SPLIT_KEYS = {'src', 'range', 'compiler', 'flags', 'assembler', 'sections', 'note', 'externs', 'data_ranges',
+SPLIT_KEYS = {'src', 'range', 'compiler', 'flags', 'assembler', 'note', 'externs', 'data_ranges',
               'rodata_type_splits', 'shared_exception_tables', 'full_tu_context', 'unlinked_context_helpers'}
 SYMBOL_LINE = re.compile(r'^\s*([^\s=;/]+)\s*=\s*(0[xX][0-9a-fA-F]+|\d+)\s*;\s*(?://\s*(.*))?$')
 
@@ -65,9 +65,8 @@ class Split:
         self.compiler = entry.get('compiler', defaults.get('compiler', DEFAULT_COMPILER))
         self.flags = list(entry.get('flags', defaults.get('flags', DEFAULT_FLAGS)))
         self.assembler = entry.get('assembler')
-        self.sections = bool(entry.get('sections', defaults.get('sections', True)))
         self.note = entry.get('note')
-        self.extra = {k: entry[k] for k in SPLIT_KEYS - {'src', 'range', 'compiler', 'flags', 'assembler', 'sections', 'note'}
+        self.extra = {k: entry[k] for k in SPLIT_KEYS - {'src', 'range', 'compiler', 'flags', 'assembler', 'note'}
                       if k in entry}
         self.entry = entry
 
@@ -81,7 +80,7 @@ class Split:
         flags = list(self.flags)
         if self.assembler:
             flags.append('--assembler=' + self.assembler)
-        if self.sections or non_matching:          # drafts add functions anywhere in the range
+        if '-fno-function-sections' not in flags:
             flags.append('-ffunction-sections')
         if non_matching:
             flags.append('-DNON_MATCHING')
@@ -245,7 +244,7 @@ def flow(value):
 def format_split(entry):
     """One `- {src: ..., range: [0x.., 0x..], ...}` line; ranges and data addresses in hex."""
     parts = ['src: %s' % entry['src'], 'range: [0x%06x, 0x%06x]' % tuple(num(v) for v in entry['range'])]
-    for key in ('compiler', 'flags', 'assembler', 'sections'):
+    for key in ('compiler', 'flags', 'assembler'):
         if key in entry:
             parts.append('%s: %s' % (key, flow(entry[key])))
     for key in ('data_ranges', 'rodata_type_splits', 'shared_exception_tables', 'full_tu_context',

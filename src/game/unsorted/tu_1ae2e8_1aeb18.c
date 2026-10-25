@@ -12,5 +12,5 @@ void func_001AEB18(s32 actor_address)
   func_001B86D0(D_0040F4D8 + 0x54AB0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AEB50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AEBB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ae2e8_1aeb18", func_001AEB50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ae2e8_1aeb18", func_001AEBB0);

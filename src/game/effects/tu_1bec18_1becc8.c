@@ -25,7 +25,7 @@ int func_001BFFE0(BkEffectEmittersPS2 *pool,BkEffectEmitterResourcePS2 *resource
  pool->activeCount=0;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BFFE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1bec18_1becc8", func_001BFFE0);
 #endif
 
 
@@ -56,7 +56,7 @@ void func_001C02A0(BkEffectEmittersPS2 *pool) {
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C02A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1bec18_1becc8", func_001C02A0);
 #endif
 
 

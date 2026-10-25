@@ -11,7 +11,7 @@ s32 func_0027C128(s32 arg0, s8 *arg1, s32 arg2, s32 arg3, s32 arg4) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027C198);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027C1A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027C1B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0027C270);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27be98_27c128", func_0027C198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27be98_27c128", func_0027C1A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27be98_27c128", func_0027C1B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27be98_27c128", func_0027C270);

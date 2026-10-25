@@ -71,7 +71,7 @@ void Engine::RegisterSecond(EntityCallback callback,void* context) {
 // Unmatched: Configure retains original array cleanup, temporary lifetimes and string/data ownership differences.
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EA898);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EABB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EAD58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EAF30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_world", func_002EA898);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_world", func_002EABB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_world", func_002EAD58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_world", func_002EAF30);

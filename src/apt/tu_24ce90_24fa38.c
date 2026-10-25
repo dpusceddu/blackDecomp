@@ -16,8 +16,8 @@ s32 * func_0024FA38(void) {
     return temp_3;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024FA98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024FB00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024FD18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024FDE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024FE60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ce90_24fa38", func_0024FA98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ce90_24fa38", func_0024FB00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ce90_24fa38", func_0024FD18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ce90_24fa38", func_0024FDE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ce90_24fa38", func_0024FE60);

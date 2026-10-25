@@ -10,4 +10,4 @@ bool AIRouteFollower::FollowPointOnly(const float* point)
     return FollowPoint(point, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305090);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/ai_route_follower_304ee8", func_00305090);

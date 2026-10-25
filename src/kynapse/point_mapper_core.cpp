@@ -55,4 +55,4 @@ extern "C" void func_002DCA20() {
 
 
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DADD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/point_mapper_core", func_002DADD0);

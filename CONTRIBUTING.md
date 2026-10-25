@@ -7,16 +7,13 @@ be committed. Terms are in the [glossary](docs/glossary.md).
 
 ## Picking work
 
-- `python3 tools/next.py tus` lists candidate translation units (TUs); other views are `near` (functions a few instructions
-  from matching), `types`, `identical` (identical bodies), `data` and `ee` (vector and 128-bit code).
-- `python3 tools/progress.py --tus 15` lists the partly recovered TUs closest to completion; `ninja progress` shows the whole
-  picture.
-- Small TUs with a single class or library function are the best first targets. Large functions (over 300 bytes), vector code
-  and the Sony and RenderWare libraries are hard; the [open problems](docs/status.md#open-problems) say why.
+Open the objdiff unit list after `ninja objdiff`: it shows unit sizes and match percentages. Pick a coherent file with
+remaining code you can understand. `tools/next.py` adds analyses objdiff does not show: near-miss causes, missing types,
+identical bodies, owned-data obstacles and unsupported EE instructions. Claim the source file before editing it.
 
 ### Claiming a TU
 
-Open an issue with the "Claim a TU" template naming the file (`src/<library>/<name>`, or the address from `tools/next.py tus`)
+Open an issue with the "Claim a TU" template naming the file (`src/<library>/<name>`, or the address from objdiff)
 before you start, so two people do not match the same file; say if you work on only some functions of it. The maintainer
 labels the issue "claimed" and you work on a branch of your own. A claim that shows no activity for a few weeks lapses (say so
 in the issue to release it earlier). Nothing in the repository records a claim, and the split list has no owner fields. Edit
@@ -31,11 +28,11 @@ order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines. Eve
 
 0. Setup for the loop: `ninja` once, then `ninja objdiff`, and open the repository root in the
    [objdiff](https://github.com/encounter/objdiff) GUI. Pick the unit and the function; every time you save the TU file objdiff
-   rebuilds the unit's object (`tools/objdiff.py --build`, through the build backend) and shows the diff. `ninja` remains the
+   runs the unit's single-object Ninja target and shows the diff. `ninja` remains the
    byte-exact check of the whole image.
 1. Read the [matching handbook](docs/matching-handbook.md) before each TU: measured recipes for the usual obstructions and
    the order in which to try things. Types, callee signatures and object lifetimes explain most mismatches. The assembly of a
-   function is `asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s` after the first `ninja`.
+   function is `asm/SLUS_213.76/nonmatchings/<file>/func_XXXXXXXX.s` after the first `ninja`.
 2. Replace the function's `INCLUDE_ASM` line with your C or C++ and run `ninja`. It ends with `OK`, or with
    `MISMATCH src/game/unsorted/tu_100258.c: func_00100258: differs from the original` (compile errors name the file too). A first
    draft: `python3 tools/decompile.py func_00100258` prints an m2c draft (with the project's context) and the file and line
@@ -52,7 +49,7 @@ order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines. Eve
    // Unmatched: loop scheduling differs.
    int func_001B78D8(BkEffectPoolPS2* pool) { ... }
    #else
-   INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B78D8);
+   INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/<file>", func_001B78D8);
    #endif
    ```
 4. A function that compiles under another name (a C++ method) needs one line in `config/SLUS_213.76/symbols.txt`
@@ -66,18 +63,24 @@ order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines. Eve
    change moves the numbers: they are generated (`ninja badges`) and the maintainer regenerates them after merging, so that
    pull requests never conflict on them. Put the before/after numbers of `ninja progress` in the pull request description.
 
-Example (tried on a scratch copy): `func_00201960` loads two fields of its argument and calls a function. Its file,
-`tu_1fcd90_201518.c`, is compiled with `sections: false` (its compiled functions must sit side by side), so the function first
-gets a file of its own; `python3 tools/where.py func_00201960` shows the owner before and after:
+Example: edit `func_00201960` directly in its existing file. It loads two fields and calls a function; no file split is
+needed. Start with a clean working tree, and save the exact file before the experiment:
 
 ```sh
-python3 tools/split_function.py func_00201960      # new tu_1fcd90_201960.c; the old file and its range lose the function
-python3 tools/decompile.py func_00201960 --write   # the m2c draft replaces the INCLUDE_ASM line of the new file
-ninja                                              # OK
-ninja progress                                     # one more function matched
+python3 tools/where.py func_00201960
+cp src/game/unsorted/tu_1fcd90_201518.c build/example.before.c
+python3 tools/decompile.py func_00201960 --write
+ninja build/SLUS_213.76/objdiff/base/tu_1fcd90_201518.o
+# Inspect the function in the objdiff GUI, then:
+ninja
+cp build/example.before.c src/game/unsorted/tu_1fcd90_201518.c
+ninja
+rm build/example.before.c
 ```
 
-Undo an experiment with `git checkout -- src config && git clean -fd src` (this removes every new file under `src/`).
+An unfinished edit can have a different size: objdiff still builds its object. The full-image check prints, for example,
+`func_00201960: size differs (40 bytes, original 32)` and an instruction diff. Commit an unfinished body under
+`#ifdef NON_MATCHING` with the INCLUDE_ASM alternative, as above. Restore only your experiment's file when reverting.
 
 Evidence matters: a function is `exact` (the whole image stays byte-identical) or a `draft` (a `NON_MATCHING` block); never
 describe a function as more than that.
@@ -144,9 +147,8 @@ CurrentPosition__Q29HideViews9HideAgent = 0x2D5368; // type:func
 ```
 
 A method of a class in the global namespace is `Method__<len>Class` (`Reset__4Game`), a `const` method has `C` before the class
-(`Head__C10RouteQueue`), parameters follow the class (`i`, `f`, `Pv`, `P<len>Name`). If the name is wrong `ninja` says
-`func_002D5368: defines none of the names expected for the function` and, below, `also defines .text.<mangled name>`: that
-is the name to put in `symbols.txt`. `python3 tools/where.py func_002D5368` finds the definition afterwards (it also understands
+(`Head__C10RouteQueue`), parameters follow the class (`i`, `f`, `Pv`, `P<len>Name`). If the binding is wrong, `ninja` reports `func_002D5368: no definition in object`. Inspect the compiled object
+with `python3 tools/objdump.py build/SLUS_213.76/obj/units/<unit>.o` and put its actual mangled name in `symbols.txt`. `python3 tools/where.py func_002D5368` finds the definition afterwards (it also understands
 `Class::Method`).
 
 ### A type or struct rename with unk_ fields

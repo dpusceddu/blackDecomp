@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018D9A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18d9a0", func_0018D9A0);
 
 void func_0018D9E8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = arg1;

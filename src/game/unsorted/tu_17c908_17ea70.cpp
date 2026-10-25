@@ -12,5 +12,5 @@ int IsWeaponReadyWithoutAction(void* object) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017EA70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_17c908_17ea70", func_0017EA70);
 #endif

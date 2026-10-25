@@ -11,4 +11,4 @@ M2C_UNK * func_00389040(void) {
     return &D_004433C0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00389050);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/inline/linkonce_389038", func_00389050);

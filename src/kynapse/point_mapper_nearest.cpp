@@ -76,9 +76,9 @@ int PointMapper::Save(const void *path) {
     return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DB9C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/point_mapper_nearest", func_002DB9C8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DBCE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/point_mapper_nearest", func_002DBCE0);
 #ifdef NON_MATCHING
 // Unmatched: allocator lifetimes and saved-register allocation.
 int PointMapper::Load(const void *resource) {
@@ -134,5 +134,5 @@ int PointMapper::Load(const void *resource) {
     return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DC238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/point_mapper_nearest", func_002DC238);
 #endif

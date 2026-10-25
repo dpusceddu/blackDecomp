@@ -26,5 +26,5 @@ switch(state) {
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AD610);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/graphics_selector_1ad510", func_001AD610);
 #endif

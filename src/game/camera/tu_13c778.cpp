@@ -16,5 +16,5 @@ void PlayerVitals::Damage(Game::Vec point,float amount){
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013C778);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_13c778", func_0013C778);
 #endif

@@ -30,7 +30,7 @@ int PoolMethods::Queue(void *definition,const Matrix *transform,long mode){
  pendingCount++;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7A70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b7758_1b7a70", func_001B7A70);
 #endif
 
 #ifdef NON_MATCHING
@@ -75,7 +75,7 @@ extern "C" void func_001B7B80(BkEffectPoolPS2 *pool,void *,f32 time) {
  pool->pendingCount=0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7B80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b7758_1b7a70", func_001B7B80);
 #endif
 
 #ifdef NON_MATCHING
@@ -99,7 +99,7 @@ extern "C" int func_001B16A8(BkEffectEntryPS2*);extern "C" void func_001B15A0(Bk
 struct Pending {Matrix matrix;void*definition;char pad[12];};
 void PoolMethods::Stop(){struct Book {unsigned short *indices,*reverse;unsigned short activeCount;};Book *book=(Book*)((char*)this+0x1a000);unsigned short remaining=book->activeCount-1,*cursor=book->indices;while(remaining!=65535){BkEffectEntryPS2 *entry=entries+*cursor;if(func_001B16A8(entry))func_001B15A0(entry);--remaining;++cursor;}}
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7E60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b7758_1b7a70", func_001B7E60);
 #endif
 
 
@@ -141,7 +141,7 @@ extern "C" void func_001B82E0(char *buckets,u32 pass) {
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B82E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b7758_1b7a70", func_001B82E0);
 #endif
 
 
@@ -186,5 +186,5 @@ extern "C" int func_001BD638(char *effect) {
  effect[0x23f0]=0;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD638);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b7758_1b7a70", func_001BD638);
 #endif

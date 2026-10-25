@@ -18,6 +18,6 @@ s32 func_002094B0(void *arg0) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002094D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00209618);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002096A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0", func_002094D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0", func_00209618);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0", func_002096A8);

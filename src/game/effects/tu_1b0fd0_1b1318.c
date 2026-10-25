@@ -9,4 +9,4 @@ void * func_001B1318(void *arg0, void *arg1) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B1340);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b0fd0_1b1318", func_001B1340);

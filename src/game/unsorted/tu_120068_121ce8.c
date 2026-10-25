@@ -24,4 +24,4 @@ s16 func_00121CE8(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00121D78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ce8", func_00121D78);

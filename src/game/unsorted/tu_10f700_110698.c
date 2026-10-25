@@ -8,5 +8,5 @@ s32 func_00110698(void *arg0, s32 arg1, s32 arg2, f32 fparg0) {
     return func_001106B8(arg0, (u32) arg1, arg2, fparg0, 0.0f);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001106B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00110850);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_10f700_110698", func_001106B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_10f700_110698", func_00110850);

@@ -20,9 +20,9 @@ void Attachment::Update(){float now=*(float*)(D_0040F4D0+0x20);Flush(previousTim
 int Attachment::Clear(){unsigned short i=0;do{if(entries[i].resource){func_001B1518(entries+i);actors[i]=0;kinds[i]=8;modes[i]=-1;}i++;}while(i<80);activeCount=0;pending=0;return 1;}
 void Attachment::Detach(void*actor,long stop){unsigned short i=0;do{if(actors[i]==actor){if(stop&&entries[i].resource)func_001B15A0(entries+i);actors[i]=0;kinds[i]=8;}i++;}while(i<80);}
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B64C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6910);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6CF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B64C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B6910);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B6CF8);
 #endif
 
 
@@ -296,17 +296,17 @@ Value AttachmentRecovery::RandomPoint(Actor *actor)
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B69E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6DC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7160);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B72E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B69E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B6DC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B7160);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B72E0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B74F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7590);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7640);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BD8D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BDB08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BDEE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE108);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BE2A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B74F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B7590);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001B7640);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001BD8D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001BDB08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001BDEE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001BE108);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b64c0", func_001BE2A0);

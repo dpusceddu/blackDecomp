@@ -37,4 +37,4 @@ Record::~Record(){delete value;value=0;}
 // Unmatched: Attach (544 B) retains branch-shape differences and one short-loop padding difference.
 // Unmatched: Configure (192 B) retains success/failure block-order differences.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DA700);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_pathmanager", func_002DA700);

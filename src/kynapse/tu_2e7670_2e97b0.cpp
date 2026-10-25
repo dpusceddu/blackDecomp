@@ -15,5 +15,5 @@ bool ParameterViews::RaiseIndex(int index,IndexUser *user) {
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E97B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2e7670_2e97b0", func_002E97B0);
 #endif

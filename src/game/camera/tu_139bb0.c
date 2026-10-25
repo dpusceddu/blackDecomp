@@ -21,16 +21,16 @@ extern s32 func_001310B8();
 extern s32 func_0013F2C8(s32);
 extern void func_0013DF38(s32);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00139BB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0", func_00139BB0);
 
 void func_00139C58(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xBC) = (s32) M2C_FIELD(arg0, s32 *, 0xB8);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00139C68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013A300);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013A640);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013A6E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0", func_00139C68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0", func_0013A300);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0", func_0013A640);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0", func_0013A6E8);
 
 void func_0013B4A0(void *arg0, f32 fparg0, f32 fparg1, f32 fparg2) {
     f32 temp_f0;
@@ -40,8 +40,8 @@ void func_0013B4A0(void *arg0, f32 fparg0, f32 fparg1, f32 fparg2) {
     M2C_FIELD(arg0, f32 *, 0x4C4) = (f32) (temp_f0 + ((fparg0 - temp_f0) * fparg1));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013B4C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013B628);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0", func_0013B4C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0", func_0013B628);
 
 s32 func_0013B9A0(s32 arg0) {
     func_0013BAF8();
@@ -69,7 +69,7 @@ s32 func_0013BA40(s32 arg0) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013BAC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0", func_0013BAC8);
 
 void func_0013BAF8(s32 arg0) {
     func_00140008(arg0 + 0x4F0);

@@ -9,5 +9,5 @@ unsigned TableWord(void* object,int index) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_179400_179668", func_00179668);
 #endif

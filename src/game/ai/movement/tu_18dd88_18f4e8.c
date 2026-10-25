@@ -15,4 +15,4 @@ void func_0018F4E8(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F548);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18dd88_18f4e8", func_0018F548);

@@ -103,7 +103,7 @@ void SoundEnvelope::Release()
     deadline=now+release;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDD80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EDD80);
 #endif
 
 
@@ -124,7 +124,7 @@ int DestructionEnvelope::Begin(float value,unsigned useEndpoint)
     return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDDE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EDDE0);
 #endif
 
 #ifdef NON_MATCHING
@@ -154,7 +154,7 @@ releaseState:
     if(!(progress<1.0f))state=0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDE98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EDE98);
 #endif
 
 #ifdef NON_MATCHING
@@ -172,7 +172,7 @@ int DestructionEnvelope::Unregister()
     return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE0B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EE0B0);
 #endif
 
 
@@ -208,7 +208,7 @@ releaseState:
     if(!(progress<1.0f))state=0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE298);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EE298);
 #endif
 
 #ifdef NON_MATCHING
@@ -224,7 +224,7 @@ void LowHealthEnvelope::Reset()
     unknown4a=1;unknown4b=1;initialized=0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE540);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EE540);
 #endif
 
 
@@ -259,6 +259,6 @@ releaseState:
     state=0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE678);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EE678);
 #endif
 

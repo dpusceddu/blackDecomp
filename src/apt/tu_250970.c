@@ -19,4 +19,4 @@ void func_00250970(void *arg0, s32 arg1)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002509E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_250970", func_002509E0);

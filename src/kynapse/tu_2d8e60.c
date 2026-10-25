@@ -7,7 +7,7 @@ extern M2C_UNK func_002D8E60;
 extern M2C_UNK * D_004502A8;
 extern M2C_UNK D_003E4728;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D8E60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2d8e60", func_002D8E60);
 
 void func_002D8EF8(s32 arg0, s32 arg1) {
     if (arg1 == 0xFFFF) {
@@ -19,7 +19,7 @@ void func_002D8EF8(s32 arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D8F50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2d8e60", func_002D8F50);
 
 void func_002D8FC0(void) {
     func_002D8EF8(1, 0xFFFF);

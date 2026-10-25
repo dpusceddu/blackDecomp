@@ -26,4 +26,4 @@ void func_001AB500(char *debug) {
  }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AB6C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/debug_draw", func_001AB6C0);

@@ -30,17 +30,17 @@ int Unnamed::UnknownVtable_003E0AC0::Function_001FBB48(){
 }
 
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F4770);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F4CB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FBB48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F4770);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F4CB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001FBB48);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F8208);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F8318);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F84E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F8528);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F8608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F8808);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F8FB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FAC78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001FAE18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F8208);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F8318);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F84E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F8528);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F8608);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F8808);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F8FB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001FAC78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001FAE18);

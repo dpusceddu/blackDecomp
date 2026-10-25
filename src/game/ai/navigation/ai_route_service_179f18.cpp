@@ -31,5 +31,5 @@ void BorrowStorage(const RouteRequest* request, RouteStorage* into)
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179FD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_route_service_179f18", func_00179FD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_route_service_179f18", func_0017A008);

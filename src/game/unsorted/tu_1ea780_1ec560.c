@@ -48,4 +48,4 @@ s32 func_001EC5C8(void *arg0)
   return var_5;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EC600);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ec560", func_001EC600);

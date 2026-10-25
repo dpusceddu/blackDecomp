@@ -8,12 +8,12 @@ s32 func_00173658(f32 *arg0) {
     return func_00173640(arg0, 0.0f);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001736B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00173748);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001739E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00173D38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00173D80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00173E18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_001736B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173748);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_001739E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173D38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173D80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173E18);
 
 #include "ps2/recovered_types.h"
 extern M2C_UNK D_003F6228;
@@ -40,5 +40,5 @@ void func_00173E30(void *arg0, s32 arg1, f32 fparg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00173EE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00173F18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173EE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173F18);

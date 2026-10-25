@@ -9,4 +9,4 @@ void func_00140AB0(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 0xFA) = arg1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140AB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_140aa8", func_00140AB8);

@@ -23,9 +23,9 @@ namespace Weapons {
 // Unmatched: 0015CC40: catalog classification loops and helper context.
 // Unmatched: 0015CEF0: remaining caller register allocation.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015BBD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015C1A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015C3C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_inventory_inventory", func_0015BBD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_inventory_inventory", func_0015C1A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_inventory_inventory", func_0015C3C8);
 #endif
 
 Weapon* Inventory::Current(){

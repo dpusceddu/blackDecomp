@@ -13,7 +13,7 @@ s32 func_00122DF8(M2C_UNK *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122E38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123020);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001231C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00123248);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_122df8", func_00122E38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_122df8", func_00123020);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_122df8", func_001231C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_122df8", func_00123248);

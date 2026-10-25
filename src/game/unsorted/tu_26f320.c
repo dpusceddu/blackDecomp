@@ -12,5 +12,5 @@ s32 func_0026F320(s32 arg0)
   return (arg0 & 0xF) + (((arg0 >> new_var) & 0xFFFF) * 0xA);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026F340);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026F3C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_26f320", func_0026F340);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_26f320", func_0026F3C0);

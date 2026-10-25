@@ -49,7 +49,7 @@ void ActorEntries::Update(float delta) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00145400);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00145558);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00145A50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00145B98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_entries", func_00145400);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_entries", func_00145558);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_entries", func_00145A50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_entries", func_00145B98);

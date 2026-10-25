@@ -26,6 +26,6 @@ s32 func_0018E5B8(s32 arg0, s32 arg1) {
     return func_0018DE48((s32) (temp_4 + 0xC94), arg1, M2C_FIELD(temp_4, s32 *, 0x754));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018E5E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018E680);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018EB78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_18dd88_18e578", func_0018E5E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_18dd88_18e578", func_0018E680);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_18dd88_18e578", func_0018EB78);

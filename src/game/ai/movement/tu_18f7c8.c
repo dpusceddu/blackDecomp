@@ -9,8 +9,8 @@ extern s32 func_001897E8();
 extern s32 func_00180A00(s32);
 extern s32 func_0018E4C0();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F7C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F910);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018F7C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018F910);
 
 void func_0018FB40(void *arg0) {
     func_0018E488();
@@ -43,9 +43,9 @@ s32 func_0018FB88(s32 arg0, s32 arg1) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FC18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FCB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FD80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018FC18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018FCB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018FD80);
 
 u8 func_0018FE28(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x40);
@@ -59,8 +59,8 @@ s32 func_0018FE50(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FE58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018FF38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018FE58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018FF38);
 
 s32 func_0018FFC0(void *arg0, s32 *arg1) {
     void *temp_3;
@@ -73,7 +73,7 @@ s32 func_0018FFC0(void *arg0, s32 *arg1) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190020);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001901E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001902D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190380);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_00190020);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_001901E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_001902D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_00190380);

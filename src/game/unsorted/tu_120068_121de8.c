@@ -18,4 +18,4 @@ s32 * func_00121DE8(void *arg0) {
     return temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00121E28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121de8", func_00121E28);

@@ -1,231 +1,127 @@
-# Build stages
+# Build
 
-How the identical rebuild works. Everything generated stays under the ignored `asm/`, `data/` and `build/`.
-
-## Stages
-
-Needs the target executable in `orig/<GAME_ID>/<GAME_ID>` (see [orig/README.md](../orig/README.md)), the toolchain
-(`python3 tools/toolchain.py install`; see "Toolchain" below) and `ninja`.
+Use the Linux x86-64 setup in [README](../README.md). `configure.py` prepares the split image and writes an ordinary Ninja
+build. `ninja` compiles or assembles individual objects, links once, packs the retail ELF container and checks its SHA-256.
 
 ```sh
-python3 configure.py --version SLUS_213.76     # writes build.ninja (SLUS_213.76 is the default; also SLES_538.86, SLES_540.30, SLKA_253.72, SLPM_663.54)
-ninja                                          # ends with `OK  SLUS_213.76 ...` or a mismatch report
-ninja progress                                 # share of .text provided by source (see below)
-python3 configure.py --non-matching && ninja   # NON_MATCHING drafts into build/SLUS_213.76-nm (not a match; see below)
-ninja objdiff && ninja report                  # objdiff project and progress report (docs/progress-reports.md)
+python3 configure.py
+ninja
+ninja progress
+ninja report
+python3 tools/progress.py --check
 ```
 
-## Toolchain
+## Objects and includes
 
-`python3 tools/toolchain.py install` downloads, verifies by SHA-256 and unpacks into the ignored `build/toolchain/`
-(or `$BLACK_TOOLCHAIN_DIR`):
+All 2,732 USA source files in `splits.yaml` use real INCLUDE_ASM, with no code fallback objects. Each produces one object, `build/<version>/obj/units/<unit>.o`. It contains its recovered C/C++
+and its original assembly. `INCLUDE_ASM` is an assembler `.include`, for example:
 
-- the decomp.me compiler archives the build uses (`config/toolchain-compilers.json`): `ee-gcc2.95.3-136` (SN 1.36, a Windows
-  program) for most of the game, `ee-gcc2.9-991111-01` (32-bit Linux) for the Sony libraries, `ee-gcc2.96` (its GNU
-  assembler assembles all split assembly; one scoped unit uses its compiler) and `ee-gcc2.95.2-273a` (an alternative
-  assembler for three units);
-- the patched short-loop assembler `ps2eeas-1.9.25.758-min6`, reproduced from the downloaded original `Ps2EeAs.exe` with
-  `tools/build/patch_ps2eeas.py` and checked against the pinned hashes in `config/toolchain-assemblers.json`;
-- [wibo](https://github.com/decompals/wibo) 1.2.0 (`config/toolchain-local.json`), which runs the Windows programs on Linux.
-
-The linker and `objcopy` come from `binutils-mipsel-linux-gnu` (Debian/Ubuntu package, 2.40 tested); the build looks for
-`mipsel-linux-gnu-ld` on `PATH` (or the prefix in `$BLACK_BINUTILS_PREFIX`). The decompals `binutils-mips-ps2-decompals` release
-was tried and does not work: its `ld` only supports the big-endian MIPS emulation, while the executable links little-endian
-(`-m elf32ltsmip`).
-`python3 tools/toolchain.py check` reports what is missing. The Sony tools are 32-bit Linux programs, hence `libc6-i386`
-on Debian. The `Dockerfile` builds an image with all of this.
-
-Two quirks the tools handle: SN's `Ps2EeAs.exe` crashes when it has to print a warning and its own path is longer than about
-80 characters (Windows form), so the Windows tools run from a short copy under `/tmp` (`tools/build/assembler.py`, `short_path`);
-and compiler warnings are printed only for failed jobs (set `BLACK_VERBOSE=1` for all).
-
-Every tool that needs a compiler, assembler or linker sends its work through `tools/build/backend.py` (batches of jobs via
-`tools/build/sandbox.py`), so there is one place that decides where the toolchain runs; the default is the local one above.
-
-### Running the toolchain elsewhere (optional)
-
-The toolchain only runs on Linux x86-64. A contributor who prefers to run it elsewhere can name a Python file in the ignored
-`.local/config.json`:
-
-```json
-{"backend_plugin": "path/to/plugin.py"}
+```c
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90_201518", func_00201960);
 ```
 
-(relative to the repository root, or absolute). The file must define `run_script(request, config)`: it receives one batch of
-jobs (`files`, a `script` to run, the `out` names to return and a `timeout`) and returns `{rc, out, err, artifacts}`, the
-same contract as the local backend; `backend.WRAPPER` is the program that runs such a batch and can be reused. It may also
-define `compile_standalone(request, config)` (single compiles for `tools/compile.py`) and `service(...)` (long-running
-detached jobs for `tools/pipeline/permuter_service.py`). The full interface is in the docstring of `tools/build/backend.py`. One call
-carries a whole batch (a full build is a few calls), so a plugin may be slow per call. `BLACK_BACKEND=local` ignores the
-plugin for one command. A plugin reports its own failures by raising `SystemExit('Build backend failed; ...')`; the tools
-stop on that message instead of treating it as a compile error.
+Generated assembly stays ignored. A version without recovered source assembles its text segment from its own assembly;
+it does not create one object per function. Data and shared constant runs have their own assembly objects. The existing
+ownership analysis keeps compiler-owned constants, exception tables and explicitly reconstructed data in their original
+positions. The label reader remains useful to source-editing and ownership tools; it does not substitute assembly objects
+for source-unit functions.
 
-Stages (one `ninja` rule each; everything generated is under the ignored `asm/`, `data/`, `build/`):
+Ninja has one compile/assemble edge per object and depfiles for project headers and assembly includes. Changing one
+function recompiles its file and relinks. An unchanged default build does no work. Source objects retain ordinary named
+function sections: some historical files own disjoint stretches of the executable. The link script places these input
+sections explicitly in original order. It has no address-named text sections, numeric sorting, contiguity requirement or
+`sections:` setting.
 
-1. extract: `tools/build/splat_config.py` writes `build/<GAME_ID>/splat.yaml` (splat segments from the ELF section table) and the
-   headerless image splat reads; `tools/build/elf_layout.py` writes `build/<GAME_ID>/layout.json` (ELF header, program
-   header and one record per section) and extracts the opaque non-loaded payloads (DVP overlays) to `data/`.
-2. split: `splat split` (spimdisasm, rabbitizer) writes `asm/<GAME_ID>/text.s` (all functions, one file) and one data
-   file per section; `.vutext` and `.vudata` stay binary blobs.
-3. `tools/build/link_support.py` defines the symbols splat cannot (labels inside code, offsets into data objects, section
-   ends and plain constants).
-4. `tools/build/split_objects.py --functions` writes `functions.json` (the function starts); `tools/build/units.py` derives the units
-   from `splits.yaml`, the INCLUDE_ASM markers of the source files and `symbols.txt` ([units.md](units.md)).
-5. `tools/build/split_objects.py` cuts `.text` into **one assembly file per function** (`asm/<GAME_ID>/nonmatchings/func_XXXXXXXX.s`,
-   with the function's own `.extern` block) and migrates the constants that only one function uses into that
-   function's file (see "Constants" below). `.rodata`, `.lit4` and `.gcc_except_table` keep their remaining shared objects
-   as runs; the other data sections stay one object each. It also writes `placement.json` (every object and the original
-   order of every section) and `labels.json`.
-6. compile: `tools/build/build_objects.py --compile-only` compiles the source files (SN compiler, one backend job; compile errors
-   are printed with the file name); then `tools/build/units_verify.py prepare` checks that each compiled function can take the
-   original's place and records the extern bindings (`unit_facts.json`).
-7. `tools/build/make_ld.py` writes the linker script. Every function and constant run is an input section named
-   `<section>.<its original address>`, and the script places them with `*(SORT_BY_NAME(<section>.*))`, which restores the
-   original order (one ld statement per object would take hours for 12,000 objects). A function that a TU file compiles
-   replaces its assembly object by taking over the slot (its `.text.<symbol>` section is renamed to the slot's key).
-8. `tools/build/build_objects.py` assembles what changed, takes the cached compiled objects and links everything with mainline
-   GNU `ld`. Objects are cached by the hash of their inputs in `build/<GAME_ID>/cache/`, so an incremental build
-   re-assembles or recompiles only what changed.
-9. `tools/build/pack_elf.py` re-packs ld's loaded sections into the retail container (see below);
-   `tools/check_elf.py` compares the result with `config/<GAME_ID>/checksums.sha256` and, on a mismatch, names the
-   functions and source files that differ (`tools/build/units_verify.py compare`).
+`tools/build/object_compile.py` runs the per-file compiler, flags and assembler selected by `splits.yaml`, through the
+pinned local installation from `tools/toolchain.py`. There is no backend plugin, build service, batched compile/link job or
+content-addressed build cache. Ninja owns incremental rebuilding. The linker is GNU binutils 2.40, installed by the
+`binutils-mipsel-linux-gnu` distribution package; `BLACK_BINUTILS_PREFIX` can select another compatible prefix.
+
+The compiler installer checks archive hashes. SN 1.36 runs under the pinned wibo; Sony's compiler and GNU assembler are
+32-bit Linux programs. `sn-min6` remains the explicitly selected, hash-checked assembler derivative on its established
+files. `tools/build/pack_elf.py` preserves the original ELF container and opaque DVP overlays; it takes rebuilt loaded
+sections from the ordinary linked ELF. No game bytes enter the source tree.
+
+## Assembler compatibility
+
+[splat issue #525](https://github.com/ethteck/splat/issues/525) describes the SN integration problems. The generated includes
+expand label macros directly and omit `.size` and incompatible macros. The original function sizes are supplied separately
+when generating objdiff targets. Fixed `.word` encodings cover undecodable words, VU instructions (including reversed
+operand conventions), coprocessor spellings such as `c1`/`cop1`, and padding-sensitive short branches.
+
+GP operands need extra care even with GNU: the older assemblers can expand a small-data operand under a file's `-G0`.
+Includes emit a symbolic word and an explicit relocation marker. Object normalization converts that declared word to its
+instruction encoding and `R_MIPS_GPREL16`. GP symbol-plus-offset operands use named linker aliases. SN direct jumps use the
+same mechanism with `R_MIPS_26`; this avoids its delay-slot tracker treating a following raw word as an unconsumed slot.
+These remain symbolic linker relocations; no linked addresses are patched into objects. The normalizer rejects unexpected
+relocation forms and out-of-range addends. It also sorts SN's ELF symbols for GNU ld.
+
+Floating constants in SN includes use original words, preserving negative zero. SN can impose excessive default alignment
+and zero tails on included constant sections. Their original intervals establish
+which zero tails may be removed and which alignment their original starts actually support. Recovered C functions never
+pass through that include-layout adjustment. Exception labels SN drops from its symbol table retain function-relative
+linker aliases. Three complete C++ files retain `-fno-function-sections` for native CFI; normalization splits their text
+and rebases section references without changing instructions or unwind ranges. Two files keep unfinished bodies as
+compiler context under separate context symbols and discard those inputs; their actual assembly still enters through real INCLUDE_ASM.
+
+## Objdiff and drafts
+
+`ninja objdiff` writes `objdiff.json` and a comparison pair per source object. The GUI invokes
+`ninja build/SLUS_213.76/objdiff/base/<unit>.o`, which builds only that file and its comparison view. It requires neither a
+link nor a fit check. The comparison base excludes included assembly, preserving honest source progress; the linked object
+contains it. `ninja report` regenerates the report from these views, and `tools/progress.py --check` checks agreement with
+the exact source functions.
+
+An ignored `.local/objdiff.json` may override `custom_make` and `custom_args`, using the same fields as objdiff's project
+schema. It is never committed. Public builds and the default generated command use `ninja`.
+
+```sh
+python3 configure.py --non-matching
+ninja
+python3 configure.py
+```
+
+Files whose unfinished drafts fail compilation, stall the assembler or introduce unbound symbols retain their matching
+object recipe, still with real includes. A timeout stops the entire compiler/assembler process group before fallback. Each fallback and its reason is recorded in `build/<version>-nm/nm_fallback.json`. There is no iterative
+whole-build demotion loop. The draft build has its own objects and linked ELF under `build/<version>-nm/`. It does not compare against retail. An
+unfinished edit belongs under `#ifdef NON_MATCHING` with INCLUDE_ASM in the `#else` only when committing; use the unwrapped
+edit while watching objdiff. Full-image mismatch diagnostics report function sizes and decoded instruction differences.
 
 ## Link-once copies
 
-GCC emits inline functions, template instantiations, vtables and type information that several object files need as
-*link-once* sections (`.gnu.linkonce.*`): every object that uses one carries its own copy, and the linker keeps the first
-and drops the others. In the retail image the kept copies of the code form a block behind the regular code (USA:
-0x383b50 to 0x396f48), in link order, so a copy sits next to the others of the object file that came first
-and uses it. That is why a destructor of a Kynapse class or an Apt `Value::Dispose` is not next to the rest of its class.
-
-The sources keep the same split. A copy is a function of the library that uses it, not a library of its own:
-`src/<library>/inline/linkonce_<address>.c|cpp` (and descriptive names for recovered ones) hold the copies of that library, and
-progress counts them there. `ninja` computes the owner of every range into the ignored `build/SLUS_213.76/inline_owners.txt` with the strength of the
-evidence (`tools/build/linkonce_owners.py`, from the callers, vtable slots and neighbours in the split assembly); a source file in
-`src/<library>/inline/` is that library's by its directory. The libraries of the regular code are the hand-edited ranges of
-`config/SLUS_213.76/libraries.txt`. Where the right C++ is an inline member function in the class header, a copy that
-matches belongs there eventually; for now each copy stays a separate unit because its address, flags and the surrounding
-link-once order are part of what the build reproduces.
-
-## INCLUDE_ASM
-
-Every source file lists all functions of its range; `INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_XXXXXXXX);` marks one
-that is still assembly. Two ways to implement it were considered:
-
-1. *Include the assembly into the compiled object* (as oot or sly1 do with `.include`). Not adopted: the SN assembler
-   (`-snas`) does not accept the splat output as is (`.size`, macros, gp-relative expressions, loop padding; splat issue #525),
-   the exact short-loop padding of each unit depends on the assembler variant, and the build already assembles every
-   function with the EE GNU assembler 2.10 as a separate object. Making all of that byte-identical through the compiler
-   would put the existing matches at risk for no gain in workflow.
-2. *A declarative marker* (chosen). `INCLUDE_ASM` expands to a harmless declaration (`include/include_asm.h`). The build reads
-   the markers from the source (`tools/build/include_asm.py`), links each marked function from its per-function assembly object
-   at its original position, as before, and takes every other function of the file's range from the compiled object.
-   Assembly is therefore always assembled by the EE GNU assembler that rebuilds the unmodified image, and a compiled function
-   cannot disturb its neighbours (`-ffunction-sections` gives it a section of its own, placed in its original slot).
-
-The workflow is the same as with a real include: open the file, replace an INCLUDE_ASM line with C, run `ninja`, read `OK` or
-the name of the function that differs. Conditionals around markers (`#ifdef NON_MATCHING`) are evaluated with the file's `-D`
-flags.
-
-## NON_MATCHING
-
-A draft that does not match yet lives in its TU file as `#ifdef NON_MATCHING` <draft> `#else` INCLUDE_ASM `#endif`.
-`python3 configure.py --non-matching` followed by `ninja` builds the drafts into `build/<GAME_ID>-nm/<boot>.nonmatching.elf`
-(`tools/build/nm_build.py`): the markers inside `#else` branches stop applying, the drafts replace the assembly, and the shiftable
-link moves everything else. It is not compared with the original and is not expected to boot. A file whose drafts do not
-compile or link (their declarations are incomplete), or that the checks of `tools/build/units_verify.py prepare` reject (a symbol with no address), keeps its matching version; the list is in
-`build/<GAME_ID>-nm/nm_fallback.json`. `python3 configure.py` returns to the matching build.
-
-The build repeats until that set is stable (up to 8 attempts). Each attempt starts without the facts file of the one before
-(`unit_facts.json`, written by `tools/build/units_verify.py prepare` from the objects of the attempt and read back by the units):
-a stale copy would drop units from the compile, `prepare` would find no object for them and forget the demotion, and the link would
-lack a function the units still call. `tests/tools/test_nm_build.py` checks this ordering without a backend.
-
-Times (USA retail, two cores): a build from nothing (extract, splat, split, assemble 12,000 objects, link, pack) takes
-about 1.5 to 2 minutes with the local toolchain; with the objects cached and one source unit changed about 15 s; with
-nothing changed `ninja` does nothing.
-
-ld cannot write the retail container: section-header order, the non-loaded `.reginfo`, `.DVP.*` and `.debug_str`
-sections, and `e_flags` 0x20924001. `pack_elf.py` therefore takes the linked section contents and addresses from ld and
-writes the headers from `build/<GAME_ID>/layout.json`, regenerating `.shstrtab` and `.reginfo` (with the linked `_gp`)
-and rebasing the `.DVP.ovlytab` addresses that point into `.vutext`. The overlays and `.vutext`/`.vudata` are extracted
-payloads, not rebuilt. Code and data come only from the reassembled sources and the compiled source files.
-
-## Constants (rodata migration)
-
-`split_objects.py` does for `.rodata`, `.lit4` and `.gcc_except_table` what splat's rodata migration does, with checks
-splat does not make for this assembler. A splat data object (`dlabel` .. `enddlabel`) belongs to a function when exactly
-one function refers to it and no data does; it is then written into that function's file (`.lit4` into a sibling
-`func_XXXXXXXX.lit4.s`, because the assembler mishandles a small-data symbol defined next to the code that addresses it
-off `$gp`). Constraints it enforces, found by building: an input section is placed whole, so a function keeps one
-contiguous run per section; the assembler aligns `.short`/`.word`/`.float`/`.double` by itself, so a run is cut where such
-a directive would need an earlier start than the original address allows. `ninja` prints, per section, how many bytes migrated and why the rest stays shared:
-referenced from data (string tables, vtable-like arrays), referenced by several functions, unreferenced, or whose
-function had a second, non-adjacent run. Most `.rodata` and `.lit4` migrates; `.gcc_except_table` migrates little: most tables
-belong to a whole object file (their handler labels span several functions), which is translation-unit evidence for
-the translation-unit map rather than something one function can carry.
-
-## Function boundaries
-
-Splat finds the function starts; `tools/build/boundaries.py` adds the ones it cannot see (`build/<GAME_ID>/boundaries.txt`, splat's
-`symbol_addrs` format, written by `ninja` before the `split` stage from the image and the hand-listed `// explicit:` entries). Evidence from the
-instructions of the image (all five retail versions behave alike):
-
-- **Orphan pieces.** 8-byte pieces `<one non-branch instruction>; nop` (mostly `addiu $sp, $sp, N; nop`) sit between functions,
-  1,169 of them in USA retail. Nothing calls or jumps to them or builds their address, their `N` does not follow the
-  neighbouring frames, functions that match from C do not emit them, and a reference to the function behind a run points
-  behind it (`%lo(func_00103928 + 0x8)`). Splat fused 123 runs with the function that follows, which kept those functions from
-  matching; the tool starts a function behind every run (not across a branch, and not past an explicit start, see below).
-  The runs stay assembly (`orphan` in `build/auto.json`).
-- **Explicit starts.** A real function can open with the same shape (`mtc1 $zero, $f1; nop`, an FPU hazard nop, or an `addiu`
-  or `daddu` that the code behind it consumes), so the last piece of a run is code. Such starts are listed by hand in
-  `config/<GAME_ID>/explicit_boundaries.txt`, each behind a `// explicit: <reason>` line; `boundaries.py` ends the run there and
-  adds the entry to the file it generates. USA retail has four: 0x1B0BD0, 0x280500, 0x316840 and 0x384E28. Without them the scan
-  would start those functions one piece late.
-- **Constructor list.** `__CTOR_LIST__` in `.data` (count word, that many pointers, zero) names every `_GLOBAL__I_*` stub. One of the
-  116 entries in USA retail, 0x339c28, sat behind five orphan pieces that splat fused with it: `boundaries.py` adds the entries of the
-  list as function starts (the stub then matches like the others).
-- **Fall-through over-splits.** Where a function seems to fall through into the next one, the "extra" words are the function's
-  own jump table (migrated `.rodata` counted as code) or follow an orphan piece. A function that ends in a computed `jr` is
-  one function: internal branches or jump tables reach the rest, and no frame is allocated behind it. No real over-split remains.
-
-The function list the tools use is splat's: `build/<GAME_ID>/placement.json` (starts and ends) and the split assembly, whose last
-`endlabel` gives a function's size without the alignment padding (`tools/objdiff.py`). Nothing reads a second function list.
+Compiler-emitted inline/template copies remain in `src/<library>/inline/`, with their established ownership, flags and
+original positions. Their compiler symbols and per-file external bindings receive unique link names when necessary;
+original address labels remain aliases.
 
 ## Symbols and progress
 
-`config/SLUS_213.76/symbols.txt` is the one place for names. It is edited by hand (and by `autodecomp.py register`, which adds the
-mangled name of a function it compiles), in splat's `symbol_addrs` form. There are two kinds of line:
+Hand-maintained `symbols.txt` binds recovered compiler names and external references. Lines marked `alias` are readable names only and never affect linking.
 
-- **Bound names** (`Tick__4Game = 0x1b78d8; // type:func`): the name a compiled function is defined under (a mangled C++ name), or a
-  name the source uses without defining. Linking depends on them, so `func_XXXXXXXX` stays the name of everything else and
-  assembly references keep working.
-- **Aliases** (`GameObjectManager_FindByName = 0x129160; // type:func alias`, `REG_GS_CSR = 0x12001000; // type:data alias`):
-  readable working names, 269 for functions and 174 for data (hardware registers and the gp value). An alias never defines or binds a symbol and is not
-  an original symbol; `tools/build/splits.py` keeps aliases apart from the bound names, so adding or changing one cannot change the
-  build. Tools use them to label functions (`tus.py`, `next.py`). To give a
-  function a real name, rename its definition in the source and add a bound-name line as above, not an alias.
-
-Prototypes are not in `symbols.txt`. Recovered signatures live in `include/ps2/prototypes.h` (under the `func_XXXXXXXX` names,
-the alias in a comment) and the structures they use in `include/ps2/recovered_types.h`; see "Types and signatures" in
-[pipeline.md](pipeline.md).
-
-`ninja progress` (or `python3 tools/progress.py [--tus N]`) prints the share of `.text` bytes and functions provided by source,
-overall and by region, then by translation unit (complete, partial and untouched TUs by confidence and by library), and writes
-`build/<GAME_ID>/progress.json`. `python3 tools/next.py tus` lists candidate TUs.
-
-Other tools: `tools/build/tus.py` (TU boundaries and map, `ninja tus`), `tools/build/layout.py` (naming of TU files), `tools/build/include_asm.py` (markers), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/maint/shift_test.py` (shiftability test),
-`tests/link/check.py` (SN object + GNU object linked by the toolchain's `ld`). In a sandbox script, the binutils tools
-(`mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}`, or the prefix in `$BLACK_BINUTILS_PREFIX`) are on PATH.
+The nine progress categories are `game`, `kynapse`, `rw_core`, `rw_audio`, `animation`, `physics`, `apt`, `sony`, `libc`.
+The image measure includes padding and orphan pieces; objdiff's code measure excludes them. See
+[progress reports](progress-reports.md).
 
 ## Shiftability
 
-`python3 tools/maint/shift_test.py SLUS_213.76 --nops 200` copies the split assembly to a scratch name, inserts NOPs into one
-function, rebuilds and checks every symbolic reference against a symbol-derived address map. Result for 200 NOPs
-(everything from `.text` onward moves): all 19,781 `jal`/`j`, 19,121 `%hi`, 25,118 `%lo`, 2,997 gp-relative accesses,
-8,499 + 4,321 + 5 data pointers and 903 exception-table entries moved correctly, 0 inconsistencies. Known non-shiftable
-spots: 984 raw `.word` values in `.data`, `.rodata` and `.sdata` that fall inside the image address range but are not
-symbols in the split (almost all are numbers such as colours, hashes and flags; at least 33 words around `.data` 0x3C3DC0
-point into the `.vutext` blob and would need symbols), and any address built by arithmetic that is not a `%hi/%lo` pair.
-One NOP only moves the code behind it by 8 bytes (function alignment) and the alignment slack before `.vutext` hides it
-from the data sections.
+The linker moves symbolic jumps, HI16/LO16 pairs, GP references, data pointers and exception references with their targets.
+Fixed raw branch words describe local loops whose relative offsets stay constant when their function moves. Raw numbers
+in data that resemble addresses remain an open limitation, including pointers into opaque DVP blobs that lack symbols.
+Arithmetic-built addresses also need individual review. `tools/maint/shift_test.py` audits an explicitly edited build
+against a symbol-derived address map; use its `--help` for the ordinary Ninja edit-and-link workflow.
+
+## Measured build times
+
+Measured on Linux x86-64 in a fresh `debian:bookworm` container, using the README setup and default Ninja parallelism.
+Toolchain downloads and environment installation are excluded; the clean time starts at `configure.py` with no generated
+assembly or build outputs. These are individual wall-clock observations, not benchmark averages.
+
+| Operation | Seconds |
+| --- | ---: |
+| Clean configure, extraction and graph generation | 38.856 |
+| Clean Ninja compile, link, pack and comparison | 62.991 |
+| Clean total | 101.847 |
+| One exact function edited in place: one object, link, pack, comparison | 14.792 |
+| No-op Ninja: no commands and unchanged linked ELF | 0.118 |
+
+The incremental edit changes `return arg0;` to `return (arg0);` in `tu_100258.c`; both versions are exact.
+Objdiff's single-object target skips the full link and image comparison even for a draft with a different size.

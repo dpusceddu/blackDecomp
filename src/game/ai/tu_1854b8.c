@@ -5,17 +5,17 @@ extern void func_0018BFE8();
 extern s32 func_00181B08();
 extern s32 func_00173FB8(s32);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001854B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_001854B8);
 
 void func_00185530(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x68) = arg1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00185538);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001855F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001856B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00185708);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00185798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185538);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_001855F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_001856B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185708);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185798);
 
 void func_00185870(s32 *arg0) {
     u8 sp[24];
@@ -23,17 +23,17 @@ void func_00185870(s32 *arg0) {
     func_00181B08(*arg0 + 0xEC0, sp);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001858A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00185A70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00185B50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00185B80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00185BA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_001858A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185A70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185B50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185B80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185BA8);
 
 void func_00185C38(s32 arg0) {
     func_00173FB8(arg0 + 0x2C);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00185C58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185C58);
 
 #include "ps2/recovered_types.h"
 extern s32 * func_00173640(f32 *, f32);

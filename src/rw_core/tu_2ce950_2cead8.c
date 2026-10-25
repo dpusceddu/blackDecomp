@@ -10,8 +10,8 @@ s32 func_002CEAD8(void) {
     return D_0040E0B0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CEAE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CEBB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CEAE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CEBB0);
 
 /* Typed PS2 hypotheses for the provisional heap/plugin/image grouping. */
 
@@ -50,7 +50,7 @@ s32 func_002CEBE0(RwHeapSegmentPS2 *segment,RwHeapSegmentPS2 *previous,RwHeapPS2
  return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CEBE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CEBE0);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: stack aggregates, loop expansion and scheduling still differ from the PS2 body.
@@ -81,7 +81,7 @@ void func_002CEE38(RwHeapPS2 *heap,void *memory) {
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CEE38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CEE38);
 #endif
 #ifdef NON_MATCHING
 extern u8 D_00449438[];
@@ -109,7 +109,7 @@ RwHeapPS2 *func_002CF150(u32 bytes) {
  return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CF150);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CF150);
 #endif
 #ifdef NON_MATCHING
 typedef struct RwCallbacksPS2 {s32 entries[11];} __attribute__((packed)) RwCallbacksPS2;
@@ -128,11 +128,11 @@ RwCallbacksPS2 *func_002CF440(RwCallbacksPS2 *callbacks) {
  callbacks->entries[9]=0;__builtin_memcpy(&callbacks->entries[10],&D_0040E0C0,4);return callbacks;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CF440);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CF440);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CF148);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CF2E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CF388);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CF438);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002CF5A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CF148);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CF2E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CF388);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CF438);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2ce950_2cead8", func_002CF5A8);

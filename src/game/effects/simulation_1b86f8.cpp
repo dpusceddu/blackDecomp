@@ -32,7 +32,7 @@ extern "C" void func_001B8798(void *system,BkEffectGeometryPS2 *geometry,BkEffec
  func_001DED60(transform+4,transform[3],D_004432E0);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B8798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b86f8", func_001B8798);
 #endif
 
 #ifdef NON_MATCHING
@@ -82,5 +82,5 @@ extern "C" void func_001B89C8(BkEffectSimulationPS2 *system) {
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B89C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b86f8", func_001B89C8);
 #endif

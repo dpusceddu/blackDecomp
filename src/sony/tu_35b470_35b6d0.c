@@ -13,22 +13,22 @@ s32 func_0035B6D0(s32 arg0, s32 arg1, s32 arg2)
   return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035B6F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035B738);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035B910);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035BA10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035BAE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035BBD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035BD10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035BE18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035BFB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035BFD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035C160);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035C168);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035C298);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035C2D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035C308);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035C428);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035B6F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035B738);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035B910);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035BA10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035BAE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035BBD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035BD10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035BE18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035BFB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035BFD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035C160);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035C168);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035C298);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035C2D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035C308);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35b6d0", func_0035C428);
 
 s32 func_0035C470(s32 arg0) {
     s32 temp_4;

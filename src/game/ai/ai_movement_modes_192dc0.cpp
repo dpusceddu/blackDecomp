@@ -33,4 +33,4 @@ void RouteMode::Stop()
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192EB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/ai_movement_modes_192dc0", func_00192EB0);

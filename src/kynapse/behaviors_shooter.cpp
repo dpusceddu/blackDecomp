@@ -76,4 +76,4 @@ selected:
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D6CB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_shooter", func_002D6CB0);

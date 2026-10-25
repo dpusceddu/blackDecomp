@@ -24,8 +24,8 @@ template<> CMetaClass<UnknownMetaOwner,UnknownFactory>::CMetaClass(const char *s
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0038F2B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0038F2F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0038F508);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0038F668);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00390640);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F2B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F2F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F508);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_00390640);

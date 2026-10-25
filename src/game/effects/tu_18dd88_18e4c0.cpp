@@ -159,18 +159,18 @@ void MovementPolicy::Update()
     }else func_00193990(this,false);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018E4C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018E7C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018EA20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018EBE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018EF70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F100);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018F2A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001948A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018E4C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018E7C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018EA20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018EBE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018EF70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018F100);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018F2A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001948A0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190CB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190D30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00193608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001936C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001938C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00190CB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00190D30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00193608);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001936C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001938C0);

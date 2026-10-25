@@ -21,6 +21,6 @@ f32 func_002A76E0(f32 *destination,const f32 *source) {
  return length;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A76E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a76c0", func_002A76E0);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A7790);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a76c0", func_002A7790);

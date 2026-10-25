@@ -5,7 +5,7 @@ s32 func_00178F18(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) == 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00178F50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_00178F50);
 
 s32 func_00178FC8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4) == 3;
@@ -31,7 +31,7 @@ void func_00179010(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179018);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_00179018);
 
 void func_00179050(void) {
 
@@ -41,10 +41,10 @@ s32 func_00179058(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179060);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001790D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179140);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001791D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_00179060);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_001790D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_00179140);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_001791D8);
 
 s32 func_00179238(s32 *arg0, s32 arg1) {
     s32 temp_3;
@@ -57,8 +57,8 @@ void * func_00179258(void *arg0, void *arg1) {
     return arg0 + (((s32) arg1 * 0xC) + 4);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179270);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001792A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_00179270);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_001792A8);
 
 s32 func_001792B0(s32 arg0, s32 arg1) {
     s32 var_3;
@@ -88,5 +88,5 @@ block_8:
     return -1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001792F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179300);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_001792F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_178f18", func_00179300);

@@ -11,7 +11,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
       ca-certificates git ninja-build python3 python3-pip python3-venv \
-      binutils-mipsel-linux-gnu libc6-i386 xz-utils \
+      binutils-mipsel-linux-gnu libc6-i386 xz-utils cpp \
  && rm -rf /var/lib/apt/lists/*
 
 # Python packages (splat, spimdisasm, rabbitizer, m2c, ...), pinned in requirements.txt.

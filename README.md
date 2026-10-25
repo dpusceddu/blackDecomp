@@ -7,8 +7,8 @@
 
 A work-in-progress matching decompilation of the PS2 version of *Black* (Criterion Games, 2006). The goal is readable C/C++
 source that compiles, with the original compilers, to the exact bytes of the retail executable. `ninja` rebuilds the executable
-byte for byte, with recovered source replacing its assembly one function at a time (`INCLUDE_ASM` lines in the translation
-unit files). Because the rebuild is *shiftable*
+byte for byte, with recovered source replacing its assembly one function at a time (real `INCLUDE_ASM` in each translation
+unit object). Because the rebuild is *shiftable*
 (code and data can move and every reference is fixed up by the linker), it also works as a base for modding. Terms such as *TU*, *INCLUDE_ASM* and *shiftable* are explained in the [glossary](docs/glossary.md).
 
 ## Supported versions
@@ -59,7 +59,7 @@ python3 configure.py                      # default --version SLUS_213.76
 ninja
 ```
 
-In a container or as root there is no `sudo`: drop it from the first line. A build from scratch takes a few minutes; a rebuild after changing one file takes seconds. It ends with
+In a container or as root there is no `sudo`: drop it from the first line. Build timings and the object architecture are in [docs/build.md](docs/build.md). It ends with
 
 ```
 OK  SLUS_213.76  SLUS_213.76  sha256 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
@@ -135,8 +135,7 @@ The everyday loop is the one of other decompilation projects, in the [objdiff](h
 1. `ninja` once (it must print `OK`), then `ninja objdiff`: this writes `objdiff.json` and, for every source unit, an object
    with the original code and an object compiled from source.
 2. Open the repository root in objdiff, pick the translation unit and the function.
-3. Edit the unit's file in `src/` (replace the function's `INCLUDE_ASM` line with C or C++). objdiff rebuilds the unit through
-   the build backend and shows the instruction diff; edit until it is clean.
+3. Edit the unit's file in `src/` (replace the function's `INCLUDE_ASM` line with C or C++). objdiff runs the unit's single-object Ninja target and shows the instruction diff; edit until it is clean.
 4. Run `ninja` for the byte-exact check of the whole image.
 
 To get a first draft of a function that is still assembly, run `python3 tools/decompile.py func_XXXXXXXX` (m2c draft with the
@@ -183,7 +182,7 @@ back into the identical image. A translation unit file lists all functions of it
 compiler reproduces the original instructions and the full image stays identical, the function is *exact*. Details:
 [docs/build.md](docs/build.md), [docs/units.md](docs/units.md), [docs/matching-handbook.md](docs/matching-handbook.md), [docs/tools.md](docs/tools.md) (index of the tools).
 
-**How do I work on a function?** Pick a TU (`python3 tools/next.py tus` lists candidates; claim it with an issue), find its
+**How do I work on a function?** Pick a TU in the objdiff unit list (sizes and match percentages; claim it with an issue), find its
 file with `python3 tools/where.py func_XXXXXXXX`, get a draft with `python3
 tools/decompile.py func_XXXXXXXX` if you like, replace the function's `INCLUDE_ASM(...)` line with C or C++, and compare in
 objdiff (see above); `ninja` prints `OK`, or the file and function that differ. A draft that does not

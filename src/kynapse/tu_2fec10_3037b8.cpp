@@ -23,5 +23,5 @@ bool CPathFinder::SetGraph(NavigationGraph*newGraph)
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003037B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2fec10_3037b8", func_003037B8);
 #endif

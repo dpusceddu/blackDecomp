@@ -19,4 +19,4 @@ void func_0036EB10(s32 arg0) {
     func_00367C90(4, sp);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036EB38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36eae0", func_0036EB38);

@@ -25,19 +25,19 @@ void func_0018C260(void *arg0)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C2D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C2E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C368);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C3C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C408);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C440);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C688);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C878);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C2D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C2E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C368);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C3C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C408);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C440);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C688);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C878);
 
 s32 func_0018C8D8(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34) == 3;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C8E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018C938);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018CC20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C8E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018CC20);

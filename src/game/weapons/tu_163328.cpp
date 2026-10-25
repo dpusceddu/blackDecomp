@@ -28,5 +28,5 @@ void DelayedShotMethods::Update(float dt){
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00163328);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_163328", func_00163328);
 #endif

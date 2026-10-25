@@ -8,4 +8,4 @@ void func_00117830(void *arg0) {
     func_00118248(arg0 + 0x60);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00117858);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_116f60_117830", func_00117858);

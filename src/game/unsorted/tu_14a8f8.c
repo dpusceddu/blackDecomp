@@ -8,11 +8,11 @@ extern s32 D_0040F4C4;
 extern s32 func_00125E40();
 extern s32 func_00125D10();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014A8F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014A938);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014A978);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014AA60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014AB10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14a8f8", func_0014A8F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14a8f8", func_0014A938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14a8f8", func_0014A978);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14a8f8", func_0014AA60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14a8f8", func_0014AB10);
 
 s32 func_0014AC58(void) {
     return 9;

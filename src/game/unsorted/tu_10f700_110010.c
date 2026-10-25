@@ -5,4 +5,4 @@ s32 func_00110010(void *arg0) {
     return M2C_FIELD(arg0, s64 *, 0x1670) != *M2C_FIELD(arg0, s64 **, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00110028);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_10f700_110010", func_00110028);

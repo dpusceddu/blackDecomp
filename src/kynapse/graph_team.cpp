@@ -21,7 +21,7 @@ unsigned int CTeam::GetIndex() {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC4B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_team", func_002EC4B0);
 #ifdef NON_MATCHING
 namespace Kaim {
 // Unmatched: iterator temporary ownership and unsigned index return layout.
@@ -34,6 +34,6 @@ bool CTeam::Register(CEntity *entity) {
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC5B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_team", func_002EC5B8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EC7D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_team", func_002EC7D8);

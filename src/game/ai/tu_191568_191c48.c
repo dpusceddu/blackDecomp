@@ -8,4 +8,4 @@ void func_00191C48(void *arg0) {
     func_00179BD0(arg0 + 0x110, M2C_FIELD(arg0, s32 *, 0x34));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191C80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_191568_191c48", func_00191C80);

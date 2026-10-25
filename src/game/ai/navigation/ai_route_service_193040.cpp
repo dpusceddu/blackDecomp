@@ -22,4 +22,4 @@ bool RetargetLive(RouteMode* mode, PositionArg point)
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001930F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_route_service_193040", func_001930F8);

@@ -11,4 +11,4 @@ s32 func_0021ADA8(void) {
     return D_003BE8FC;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0021ADB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_218930_21ad98", func_0021ADB8);

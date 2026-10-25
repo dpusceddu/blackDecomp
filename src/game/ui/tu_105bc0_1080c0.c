@@ -12,5 +12,5 @@ s32 func_001080F0(void) {
     return func_00367750() == M2C_FIELD(D_0040F4C4, s32 *, 0xE0C);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108120);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00108218);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_1080c0", func_00108120);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_1080c0", func_00108218);

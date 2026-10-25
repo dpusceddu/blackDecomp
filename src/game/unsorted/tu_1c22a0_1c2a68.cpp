@@ -11,5 +11,5 @@ unsigned SwapBuffer(void* object) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C2A68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c2a68", func_001C2A68);
 #endif

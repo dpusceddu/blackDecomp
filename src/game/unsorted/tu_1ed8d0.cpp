@@ -74,5 +74,5 @@ releaseState:
     if(!(progress<1.0f))state=0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ED8D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ed8d0", func_001ED8D0);
 #endif

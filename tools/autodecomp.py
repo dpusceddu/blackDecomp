@@ -8,13 +8,13 @@
   autodecomp.py report                   outcome table for build/auto.json
   autodecomp.py show ADDR                print the best draft of a function and its diff
 
-Sizes are the function's code size in bytes. Compilation happens only with the build toolchain (tools/build/sandbox.py, one call
-per batch of candidates); m2c and scoring run on the host because they only read and write text. Scoring compares the
+Sizes are the function's code size in bytes. Each candidate compiles individually with the pinned local toolchain;
+m2c and scoring only read and write text. Scoring compares the
 compiled .text with the original instruction words, masking relocated fields, and compares each relocation's target
 (symbol address plus addend) with the symbolic operand of the original assembly. The final authority is the identical
 link (`ninja` ends with OK); `confirm` puts back the INCLUDE_ASM line of what does not place identically. Setup and pinned versions: docs/pipeline.md.
 """
-import argparse, base64, collections, difflib, hashlib, io, json, os, re, struct, subprocess, sys, tarfile, time
+import argparse, base64, collections, difflib, hashlib, io, json, os, re, struct, subprocess, sys, tarfile, time, shutil
 from pathlib import Path
 
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
@@ -27,7 +27,7 @@ BUILD = ROOT / 'build' / SLUG
 FUNCTION_ASM = ROOT / 'asm' / SLUG / 'nonmatchings'      # one assembly file per function (tools/build/split_objects.py)
 AUTO = ROOT / 'build' / 'auto'
 RESULTS = Path(os.environ.get('AUTODECOMP_RESULTS', ROOT / 'build' / 'auto.json'))
-M2C = ROOT / '.venv/bin/m2c'
+M2C = Path(shutil.which('m2c') or ROOT / '.venv/bin/m2c')
 COMPILER = 'ee-gcc2.95.3-136'
 BASE_FLAGS = ['-O2', '-G0', '-snas']
 INSN = re.compile(r'^\s+/\* ([0-9A-F]+) ([0-9A-F]{8}) ([0-9A-F]{8}) \*/\s+(\S+)\s*(.*?)\s*$')
@@ -240,7 +240,7 @@ RECOVERED = None
 
 
 def recovered_context(refresh=False):
-    """The same recovery feeds m2c and the build backend; retain diagnostics in ignored JSON."""
+    """The same recovery feeds m2c and the local toolchain; retain diagnostics in ignored JSON."""
     global RECOVERED
     if RECOVERED is None or refresh:
         if os.environ.get('AUTODECOMP_FREEZE_CONTEXT') == '1':
@@ -885,61 +885,29 @@ def worker_compile(jobs, tag='auto'):
         record_build(AUTO, 'candidate', 'cached', requested=len(jobs), cached=len(out), compile_jobs=0, tag=tag)
         return out
     t0 = time.time()
-    buf = io.BytesIO()
-    plan = dict(compile=[], pack='newobjs.tgz')
-    with tarfile.open(fileobj=buf, mode='w:gz', compresslevel=1) as tar:
-        for rel, arc in (('include/macro.inc', 'include/macro.inc'), ('tools/build/elfobj.py', 'tools/elfobj.py'),
-                         ('tools/build/assembler.py', 'tools/assembler.py')):    # the job finds the helpers in its own tools/
-            tar.add(ROOT / rel, arcname=arc)
-        for rel, data in sorted(headers.items()):
-            item = tarfile.TarInfo(rel)
-            item.size = len(data)
-            tar.addfile(item, io.BytesIO(data))
-        for key, src, flags, h in todo:
-            data = src.encode()
-            ti = tarfile.TarInfo('src/%s.c' % h)
-            ti.size = len(data)
-            tar.addfile(ti, io.BytesIO(data))
-            cc, fl = split_cc(flags)
-            plan['compile'].append(dict(src='src/%s.c' % h, obj='obj/%s.o' % h, compiler=cc,
-                                        args=fl + (['-Iinclude'] if cc.startswith('mwcps2-') else ['-I', 'include']), timeout=30))
-    d = AUTO / ('job-%d' % os.getpid())          # one directory per process: several runs may share the build backend
-    d.mkdir(exist_ok=True)
-    (d / 'inputs.tgz').write_bytes(buf.getvalue())
-    (d / 'plan.json').write_text(json.dumps(plan))
-    for n in ('newobjs.tgz', 'results.json'):
-        (d / n).unlink(missing_ok=True)
+    from concurrent.futures import ThreadPoolExecutor
+    from object_compile import environment
+    environment()   # fail before dispatch on an unsupported platform or missing toolchain
+    def compile_one(job):
+        key, src, flags, h = job
+        source = cache / (h+'.c')
+        obj = cache / (h+'.o')
+        source.write_text(src)
+        cc, flags = split_cc(flags)
+        r = subprocess.run([sys.executable, str(ROOT/'tools/compile.py'),cc]+flags+
+                           ['-I','include','-c',str(source),'-o',str(obj)], cwd=ROOT, capture_output=True,text=True)
+        message = (r.stdout+r.stderr).strip()
+        if not os.environ.get('AUTODECOMP_VERBOSE'):
+            message = '\n'.join(l for l in message.splitlines() if 'warning' not in l)[-200:]
+        (cache/(h+'.json')).write_text(json.dumps(dict(rc=r.returncode,msg=message)))
+        data = obj.read_bytes() if r.returncode==0 else b''
+        return h,(r.returncode,message,data)
     call_id = record_build(AUTO, 'candidate', 'submitted', requested=len(jobs), cached=len(out), compile_jobs=len(todo), tag=tag)
-    r = subprocess.run([sys.executable, str(ROOT / 'tools/build/sandbox.py'), str(ROOT / 'tools/build/build_job.py'), '--timeout', '1800',
-                        '--file', 'inputs.tgz=' + str(d / 'inputs.tgz'), '--file', 'plan.json=' + str(d / 'plan.json'),
-                        '--out', 'newobjs.tgz=' + str(d / 'newobjs.tgz'), '--out', 'results.json=' + str(d / 'results.json')],
-                       capture_output=True, text=True)
-    record_build(AUTO, 'candidate', 'completed', call_id, worker_rc=r.returncode,
-                 elapsed_seconds=time.time() - t0, has_results=(d / 'results.json').exists())
-    if not (d / 'results.json').exists():
-        sys.stderr.write(r.stdout[-2000:] + r.stderr[-2000:])
-        raise SystemExit('Build backend failed; run tools/toolchain.py check (or see the backend plugin named in .local/config.json).')
-    results = json.loads((d / 'results.json').read_text())
-    objs = {}
-    if (d / 'newobjs.tgz').exists():
-        with tarfile.open(d / 'newobjs.tgz') as tar:
-            for m in tar.getmembers():
-                if m.isfile():
-                    objs[m.name[len('obj/'):-2]] = tar.extractfile(m).read()
-    for key, src, flags, h in todo:
-        res = results.get('src/%s.c' % h, dict(rc=1, msg='no result'))
-        obj = objs.get(h, b'') if res['rc'] == 0 else b''
-        msg = ''
-        if res['rc']:
-            ls = [x.split(': ', 1)[-1] if ': ' in x else x for x in res['msg'].strip().split('\n') if x.strip() and 'In function' not in x and 'warning' not in x]
-            msg = (ls[0] if ls else res['msg'][:100])[:200]
-            if os.environ.get('AUTODECOMP_VERBOSE'):
-                msg = res['msg'][-600:]
-        (cache / (h + '.json')).write_text(json.dumps(dict(rc=res['rc'], msg=msg)))
-        if obj:
-            (cache / (h + '.o')).write_bytes(obj)
-        for alias in aliases[h]:
-            out[alias] = (res['rc'], msg, obj)
+    with ThreadPoolExecutor(2) as pool:
+        for h,result in pool.map(compile_one,todo):
+            for key in aliases[h]:
+                out[key]=result
+    record_build(AUTO, 'candidate', 'completed', call_id, worker_rc=int(any(out[k][0] for k,_,_,_ in todo)), elapsed_seconds=time.time()-t0, has_results=True)
     STATS['compiles'] += len(todo)
     STATS['compile_calls'] += 1
     STATS['compile_seconds'] += time.time() - t0
@@ -1502,7 +1470,7 @@ def fine_score(target, toks, orig):
 
 class Climb:
     """Hill climbing on one function with decomp-permuter's randomizer. Candidates of many functions are compiled
-    together (permute_many), so the backend's per-call latency is shared."""
+    individually with the file compiler (permute_many)."""
     def __init__(self, f, src, flags, target, orig, rng=1):
         sys.path.insert(0, str(PERMUTER))
         import random
@@ -1880,7 +1848,7 @@ def cmd_register(a):
 
 
 def cmd_confirm(a):
-    """Compile and link what `register` wrote (the build backend), put the INCLUDE_ASM line back for every function that does not
+    """Compile and link what `register` wrote (the local toolchain), put the INCLUDE_ASM line back for every function that does not
     place identically (a file that fails to compile takes its new functions back out, to be retried one per file), and end
     with a build that says OK."""
     sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
@@ -1897,7 +1865,6 @@ def cmd_confirm(a):
         by_file = {}
         for k, v in fresh.items():
             by_file.setdefault(v['registration']['path'], []).append(k)
-        retry = 0
         for path, keys in by_file.items():
             file_bad = [k for k in keys if int(k, 16) in bad or None in bad]
             whole_file = None in bad and not file_bad
@@ -1910,16 +1877,9 @@ def cmd_confirm(a):
                 tu_files.revert_function(rec['registration'])
                 rec.pop('registered', None)
                 rec.pop('registration', None)
-                if len(keys) == 1 or rec.get('single'):
-                    rec['status'], rec['reason'] = 'verify-failed', bad.get(int(k, 16), 'compile')
-                else:
-                    rec['single'] = True               # try each alone, in a file of its own
-                    retry += 1
+                rec['status'], rec['reason'] = 'verify-failed', bad.get(int(k, 16), 'compile')
         save_results(res)
-        if not retry:
-            break
-        print('retrying %d functions in files of their own' % retry)
-        cmd_register(argparse.Namespace(group=a.group, limit=None))
+        break
     r = subprocess.run(['ninja'], cwd=ROOT, capture_output=True, text=True)
     if r.returncode:
         sys.stderr.write(r.stdout + r.stderr)
@@ -1928,31 +1888,16 @@ def cmd_confirm(a):
 
 
 def verify_build():
-    """[(unit name, address or None, reason)] of what the current sources do not place identically (never raises on those)."""
-    def run(*args):
-        r = subprocess.run([sys.executable] + [str(x) for x in args], cwd=ROOT, capture_output=True, text=True)
-        if any(m in r.stdout + r.stderr for m in ('Build backend failed', 'Connection refused')):
-            raise SystemExit(r.stdout + r.stderr)
-        return r
-    run('tools/build/units.py', SLUG)
-    run('tools/build/split_objects.py', SLUG)
-    run('tools/build/make_ld.py', SLUG)
-    c = run('tools/build/build_objects.py', SLUG, '--compile-only')
-    if c.returncode and not (BUILD / 'results.json').exists():
-        raise SystemExit(c.stdout + c.stderr)
-    run('tools/build/units_verify.py', 'prepare')
-    problems = json.loads((BUILD / 'unit_problems.json').read_text())
-    if problems:
-        return problems
-    run('tools/build/make_ld.py', SLUG)
-    link = run('tools/build/build_objects.py', SLUG)
-    if link.returncode:
-        run('tools/build/units_verify.py', 'link')
-        return json.loads((BUILD / 'unit_problems.json').read_text()) or [[None, None, 'link']]
-    run('tools/build/pack_elf.py', BUILD / 'linked.elf', ROOT / 'build' / SLUG / 'layout.json', ROOT / 'data' / SLUG / 'elf',
-        BUILD / (json.loads((ROOT / 'config/versions.json').read_text())[SLUG]['boot'] + '.elf'))
-    run('tools/build/units_verify.py', 'compare')
-    return json.loads((BUILD / 'unit_problems.json').read_text())
+    """Verify registered edits through the ordinary build; retain function diagnostics."""
+    result = subprocess.run(['ninja'],cwd=ROOT,capture_output=True,text=True)
+    if result.returncode==0:
+        return []
+    problems = []
+    for line in (result.stdout+result.stderr).splitlines():
+        match = re.search(r'(src/[^:]+): func_([0-9A-Fa-f]{8}): (.+)',line)
+        if match:
+            problems.append([match[1],int(match[2],16),match[3]])
+    return problems or [[None,None,'build failed: '+(result.stdout+result.stderr)[-1000:]]]
 
 
 def clone_identical_bodies(res, inv, orig):

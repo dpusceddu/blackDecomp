@@ -25,4 +25,4 @@ void func_00252830(void *arg0, s32 arg1)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002528A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938_252830", func_002528A0);

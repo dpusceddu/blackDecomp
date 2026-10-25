@@ -7,6 +7,6 @@ void func_0011F350(void) {
     func_0011D490();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0011F370);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0011F7E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0011F808);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358_11f350", func_0011F370);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358_11f350", func_0011F7E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358_11f350", func_0011F808);

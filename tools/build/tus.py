@@ -282,9 +282,9 @@ LIB_RULES = [
     ('libdma_libpad2', 'sony', r'libdma|libpad2|ROMVER'),
     ('libm', 'sony', r'^(atan2|acosf|asinf|fmodf|atan2f)$'),
     ('libcdvd', 'sony', r'SceCd|Libcdvd|sceCdC|DiskReady'),
-    ('renderware_core', 'middleware', r'Core built|Invalid combination type|Invalid projection type|Only rendering sub system'),
+    ('rw_core', 'middleware', r'Core built|Invalid combination type|Invalid projection type|Only rendering sub system'),
     ('kynapse', 'middleware', r'Kynogon|Kaim|kyastar|CAccessWays|CAstarData|CPathFinder|CFleeAgent|CHideAgent|CFollowerAgent|CShooterAgent|CActionShoot|CActionSpeed|CEntityEyePosition'),
-    ('rwa_ee', 'middleware', r'RwaRPC|RWA'),
+    ('rw_audio', 'middleware', r'RwaRPC|RWA'),
     ('libmc2', 'sony', r'libmc2|sceMc2|Memory Card Format|MC2SOCKET|C-SJIS|C-EUCJP'),
     ('libc_stdio', 'runtime', r'^0123456789abcdefghijklmnopqrstuvwxyz|ungetc error|^\(null\)$'),
     ('libkernl', 'sony', r'libkernl|SceKernel|SceSifrpc|SceStdio|TLB spad|TTY:|rom0:UDNL|too long parameter'),
@@ -748,6 +748,10 @@ def assign_libraries(img, seg, tus, ov):
         for t in tus:
             if lo <= t['lo'] < hi:
                 t['library'] = name
+
+    import layout
+    for t in tus:
+        t['library'] = layout.library_of(t['lo'])
 
 
 def flags_of(img, t, ov):

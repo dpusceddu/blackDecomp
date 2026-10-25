@@ -44,6 +44,10 @@ def relocate(pairs, dry_run=False):
         (ROOT / new).parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(['git', 'mv', old, new], cwd=ROOT, check=True)
     table = dict(todo)
+    for old,new in todo:
+        if old.startswith('src/') and new.startswith('src/'):
+            stem = lambda p: Path(p).relative_to('src').with_suffix('').as_posix()
+            table['asm/SLUS_213.76/nonmatchings/'+stem(old)] = 'asm/SLUS_213.76/nonmatchings/'+stem(new)
     pattern = re.compile('(?<![\\w/.-])(' + '|'.join(re.escape(old) for old in sorted(table, key=len, reverse=True)) + ')(?![\\w])')
     tracked = subprocess.run(['git', 'ls-files', '-z'], cwd=ROOT, check=True, capture_output=True, text=True).stdout.split('\0')
     for name in tracked:

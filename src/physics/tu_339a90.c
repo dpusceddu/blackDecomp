@@ -5,9 +5,9 @@
 extern s32 func_00339A90();
 extern s32 func_00339A90(M2C_UNK, M2C_UNK);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00339A90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00339BD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00339C00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_339a90", func_00339A90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_339a90", func_00339BD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_339a90", func_00339C00);
 
 void func_00339C28(void) {
     func_00339A90(1, 0xFFFF);

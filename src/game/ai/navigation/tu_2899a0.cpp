@@ -21,5 +21,5 @@ unsigned int PathObject::CanUse(PathAgent* agent,RouteNode* node,Callback* callb
  return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002899A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/tu_2899a0", func_002899A0);
 #endif

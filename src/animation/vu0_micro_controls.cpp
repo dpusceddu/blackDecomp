@@ -38,4 +38,4 @@ extern "C" int func_00348C08(AnimationInstanceView* instance,int index,Animation
  return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00348A90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/vu0_micro_controls", func_00348A90);

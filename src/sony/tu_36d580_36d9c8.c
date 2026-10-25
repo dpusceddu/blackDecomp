@@ -9,10 +9,10 @@ void func_0036D9D8(void) {
     __asm__ volatile("li $3, 90\n\tsyscall");
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036D9E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36d580_36d9c8", func_0036D9E8);
 
 void func_0036DA20(void) {
     __asm__ volatile("li $3, 91\n\tsyscall");
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0036DA30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_36d580_36d9c8", func_0036DA30);

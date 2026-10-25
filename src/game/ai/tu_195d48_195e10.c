@@ -33,4 +33,4 @@ void func_00195E80(void **arg0) {
     func_00193A60(arg0, 0, 0.0f);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00195F08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_195d48_195e10", func_00195F08);

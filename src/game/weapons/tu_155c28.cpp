@@ -41,5 +41,5 @@ void ProjectilePool::RetireOther(Projectile*actor,int emit,int alternate){
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00155C28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_155c28", func_00155C28);
 #endif

@@ -21,4 +21,4 @@ f32 func_0018E180(void *arg0) {
     return var_f0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018E1B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_18dd88_18e150", func_0018E1B0);

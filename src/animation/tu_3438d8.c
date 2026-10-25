@@ -7,8 +7,8 @@ void func_003438D8(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003438E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343A30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3438d8", func_003438E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3438d8", func_00343A30);
 
 void * func_00343BC0(void *arg0, f32 fparg0, f32 fparg1, f32 fparg2) {
     M2C_FIELD(arg0, f32 *, 0x10) = (f32) (M2C_FIELD(arg0, f32 *, 0x10) * fparg0);
@@ -34,5 +34,5 @@ s32 func_00343C28(s32 arg0, s32 arg1) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343C60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343E08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3438d8", func_00343C60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3438d8", func_00343E08);

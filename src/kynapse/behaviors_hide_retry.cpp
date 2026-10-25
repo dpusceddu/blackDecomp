@@ -87,5 +87,5 @@ namespace HideViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D4148);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_hide_retry", func_002D4148);
 #endif

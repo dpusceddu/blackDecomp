@@ -14,10 +14,10 @@
 // Unmatched: 0013C528 directional damage retains eight component-address/scheduling differences.
 // Unmatched: 00383920 kind setter is instruction-exact but leaves an unexplained 12-byte retail gap.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013BB78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013BDF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013C3E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013C528);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0_13a300", func_0013BB78);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0_13a300", func_0013BDF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0_13a300", func_0013C3E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0_13a300", func_0013C528);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0013C1B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_139bb0_13a300", func_0013C1B0);

@@ -37,5 +37,5 @@ bool CBaseAllocator::Add(CBaseAllocator *value) {
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5660);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocators", func_002E5660);
 #endif

@@ -26,7 +26,7 @@ void func_001B7758(BkEffectPoolPS2 *pool) {
  pool->time=now;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7758);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/dispatch", func_001B7758);
 #endif
 
 #ifdef NON_MATCHING
@@ -43,7 +43,7 @@ int func_001B78D8(BkEffectPoolPS2 *pool) {
  pool->resource=0;pool->activeCount=0;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B78D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/dispatch", func_001B78D8);
 #endif
 
 void func_001B7968(BkEffectPoolPS2 *pool,void *transform,u32 index) {

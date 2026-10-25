@@ -16,4 +16,4 @@ void func_0012D588(void *arg0)
   *((s8 *) (new_var + 0x38)) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012D5A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_12d458_12d588", func_0012D5A8);

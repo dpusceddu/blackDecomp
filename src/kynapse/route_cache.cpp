@@ -12,5 +12,5 @@ void CreatableCache::Select(TypeInfo* type)
     current = *slot;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304D28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304D60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_cache", func_00304D28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/route_cache", func_00304D60);

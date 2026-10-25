@@ -2,9 +2,9 @@
 """Give one assembly function a source file of its own: the way to put a function in a file with other flags or another language.
 
 Usage: split_function.py func_XXXXXXXX|ADDRESS [--cpp] [--flags "-O1 -G0 -snas"] [--compiler NAME] [--dry-run]
-Every function belongs to exactly one file (docs/units.md), and a file is compiled with one set of flags, one language and,
-for a file with `sections: false`, with its compiled functions side by side. A function that needs something else cannot be
-recovered inside its current file. This tool takes the function away from the file that owns it (its INCLUDE_ASM line and its
+Every file has one compiler recipe. Use this tool only for a genuinely different
+compiler, flags or language. Ordinary matching edits stay in their existing file.
+This tool transfers an assembly function's INCLUDE_ASM line and its
 stretch of the range in config/SLUS_213.76/splits.yaml) and creates a small file next to it, `tu_<address>.c` (`.cpp` with
 --cpp), that owns only that function, with the INCLUDE_ASM line, an entry with the given flags and compiler, and prints the next
 steps. Then `python3 tools/decompile.py func_XXXXXXXX --write` puts a draft in the new file and `ninja` checks it. Only functions
@@ -65,7 +65,7 @@ def split_function(addr, cpp=False, flags=None, compiler=None, dry_run=False):
     split_file = S.config_dir(SLUG) / 'splits.yaml'
     head, entries, tail = S.split_entries(split_file.read_text())
     split_file.write_text(S.join_entries(head, entries + [entry], tail))
-    (ROOT / new).write_text(HEADER + tu_files.marker(addr) + '\n')
+    (ROOT / new).write_text(HEADER + tu_files.marker(addr, new) + '\n')
     return new, split.src
 
 

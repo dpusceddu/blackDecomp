@@ -19,7 +19,7 @@ u16 func_001B3AE8(BkEffectSlotPS2 *slots,u16 first,u16 limit,u16 offset,u16 stri
  func_001B3CF8(slots+index,object,(u16)((index-first)*stride+offset),stride,mode);return index;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3AE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/slot_bone", func_001B3AE8);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B3BD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/slot_bone", func_001B3BD0);

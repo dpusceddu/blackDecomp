@@ -12,7 +12,7 @@ s32 func_00294CE8(void *arg0, s32 arg1, s32 arg2) {
     return func_002946D0(arg0, arg1, arg2);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294D88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90_294ce8", func_00294D88);
 
 #include "ps2/recovered_types.h"
 extern s32 * func_00296468(s32 *, s32 *);

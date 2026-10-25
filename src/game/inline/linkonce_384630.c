@@ -21,4 +21,4 @@ void func_00384650(f32 *arg0, f32 fparg0) {
     *arg0 = fparg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00384658);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/inline/linkonce_384630", func_00384658);

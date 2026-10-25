@@ -9,5 +9,5 @@ s32 func_001C29A8(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C29B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C29C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c29a0", func_001C29B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c29a0", func_001C29C0);

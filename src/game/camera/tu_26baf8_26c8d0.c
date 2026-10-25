@@ -21,4 +21,4 @@ void *func_0026CA00(void *arg0, void *arg1)
   return (void *) 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026CD20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_26baf8_26c8d0", func_0026CD20);

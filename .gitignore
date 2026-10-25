@@ -23,5 +23,5 @@ build.ninja
 objdiff.json
 /nonmatchings/
 
-# Assistant rules live in AGENTS.md; CLAUDE.md is a local symlink to it for tools that look for that name
+# Assistant rules live in AGENTS.md; CLAUDE.md is an optional local adapter for other tools
 CLAUDE.md

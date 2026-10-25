@@ -13,5 +13,5 @@ void func_003477F0(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00347858);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003478F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3477f0", func_00347858);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3477f0", func_003478F0);

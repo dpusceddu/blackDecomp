@@ -52,7 +52,7 @@ extern "C" void func_001B9198(BkEffectGeometryPS2 *geometry,s128 normal,s128 vel
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B9198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001B9198);
 #endif
 
 #ifdef NON_MATCHING
@@ -82,7 +82,7 @@ extern "C" void func_001B96B8(void *system,BkEffectGeometryPS2 *geometry,s128 po
  func_001DEC08(&orientation,transform[3]);func_001DED60(&orientation,transform[3],D_004432E0);func_0016E250(D_0040F4D4,transform[3],surface?*(void **)(surface+0xf0):0);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B96B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001B96B8);
 #endif
 
 #ifdef NON_MATCHING
@@ -109,7 +109,7 @@ struct SimulationMethods{int count;char pad[12];BkEffectGeometryPS2 records[255]
 extern "C" void func_001B8798(void*,BkEffectGeometryPS2*,void*,short,unsigned char,float);
 void SimulationMethods::Defer(float scale,float duration,BkEffectGeometryPS2*geometry,void*batch,short index,unsigned char kind){if(scale>0.15f){if(!(*(unsigned short*)((char*)batch+6)&1)||((float*)geometry)[3]<0.8f)func_001B8798(this,geometry,batch,index,kind,scale);else{pending[next]=geometry;timeout[next]=duration*0.15f;batches[next]=batch;indices[next]=index;scales[next]=scale;kinds[next]=kind;next++;if(next==32)next=0;BkEffectPointPS2 v=BkEffectSpillPS2(geometry->normal);v.w=-999.9f;geometry->normal=*(s128*)&v;}}}
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B9A40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001B9A40);
 #endif
 
 #ifdef NON_MATCHING
@@ -150,7 +150,7 @@ extern "C" void func_001B9B58(BkEffectFracturePoolPS2 *pool,BkEffectGeometryPS2 
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B9B58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001B9B58);
 #endif
 
 #ifdef NON_MATCHING
@@ -172,7 +172,7 @@ extern "C" void func_001BAB90(BkEffectUVPS2 *out,const BkEffectVectorPS2 *points
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BAB90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001BAB90);
 #endif
 
 #ifdef NON_MATCHING
@@ -194,7 +194,7 @@ extern "C" void func_001BAD90(BkEffectUVPS2 *out,const BkEffectVectorPS2 *points
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BAD90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001BAD90);
 #endif
 
 #ifdef NON_MATCHING
@@ -216,7 +216,7 @@ extern "C" void func_001BAF90(BkEffectUVPS2 *out,const BkEffectVectorPS2 *points
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BAF90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001BAF90);
 #endif
 
 #ifdef NON_MATCHING
@@ -258,7 +258,7 @@ extern "C" void func_001BB190(BkEffectFracturePoolPS2 *pool,BkEffectGeometryPS2 
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BB190);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001BB190);
 #endif
 
 #ifdef NON_MATCHING
@@ -329,7 +329,7 @@ void Callback::Emit(const Hit* hit,void* context)
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BC428);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001BC428);
 #endif
 
 #ifdef NON_MATCHING
@@ -355,7 +355,7 @@ extern "C" void func_001BC548(void *,s128 position,s128 normal,int count,f32 wid
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BC548);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001BC548);
 #endif
 
 #ifdef NON_MATCHING
@@ -375,7 +375,7 @@ extern "C" s128 func_001BC880(void) {
  __asm__("qmfc2.ni outv, vv":"=r outv"(result):"j vv"(vector));return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BC880);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001BC880);
 #endif
 
 #ifdef NON_MATCHING
@@ -390,5 +390,5 @@ extern "C" s128 func_001BCA30(void *,s128 range,f32 scale) {
  return *(s128 *)&result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCA30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/simulation_1b90d0", func_001BCA30);
 #endif

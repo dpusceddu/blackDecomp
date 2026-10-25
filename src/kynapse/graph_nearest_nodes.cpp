@@ -33,7 +33,7 @@ NavNode *FindNearestVertex(NodeGraph *graph,const Vec3 *point,unsigned char outg
     return QuerySimple.result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB6D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_nearest_nodes", func_002FB6D8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: visitor lifetime and register allocation.
@@ -49,7 +49,7 @@ NavNode *FindNearestVisible(NodeGraph *graph,const Vec3 *point,Actor *actor,unsi
     return visitor.result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB850);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_nearest_nodes", func_002FB850);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: visitor lifetime and loop register allocation.
@@ -74,7 +74,7 @@ NavNode *FindNearestLocal(NodeGraph *graph,const Vec3 *point,Actor *actor,float 
     return visitor.result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB9D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_nearest_nodes", func_002FB9D0);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: adjacency inline helpers and live-range allocation.
@@ -104,7 +104,7 @@ NavNode *QueryNearestCandidate(const Vec3 *point,Actor *actor,QueryPointIndex *i
     return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FBC20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_nearest_nodes", func_002FBC20);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: iterator register allocation.
@@ -120,7 +120,7 @@ QueryEdge *FindNearestEdge(QueryGraph *graph,const Vec3 *point,float radius) {
     return QueryEdgeStorage.result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC260);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_nearest_nodes", func_002FC260);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: vector temporary ordering and register allocation.
@@ -140,7 +140,7 @@ void DrawGraph(QueryGraph *graph,int red,int green,int blue) {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC3C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_nearest_nodes", func_002FC3C8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: vector temporary ordering and register allocation.
@@ -160,7 +160,7 @@ void DrawGraphDefault(QueryGraph *graph) {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_nearest_nodes", func_002FC668);
 #endif
 void DrawPath(QueryPath *path) {
     for(int i=0;i+1<path->count;++i) {

@@ -47,5 +47,5 @@ int ActorEntries::Collision(void *raw) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00149798);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00149828);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_collision", func_00149798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_collision", func_00149828);

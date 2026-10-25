@@ -25,4 +25,4 @@ void RegionState::RenderBox(){
 // Unmatched: 0x16C728 yaw polynomial and rigid-inverse temporary copies.
 // Unmatched: 0x16C9E8 trigger predicate and callback control-flow lifetimes.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00169F38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_c4c8", func_00169F38);

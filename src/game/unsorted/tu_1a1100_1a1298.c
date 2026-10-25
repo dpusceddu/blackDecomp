@@ -12,4 +12,4 @@ void func_001A1298(s32 *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A12E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a1100_1a1298", func_001A12E0);

@@ -5,7 +5,7 @@ Usage:
   toolchain.py install [--root DIR] [--objdiff]
                                                             download everything the build needs (idempotent)
   toolchain.py check   [--root DIR]                         report what is present and what is missing
-  toolchain.py env     [--root DIR]                         print the environment the build jobs use
+  toolchain.py env     [--root DIR]                         print the local compiler environment
 
 The compilers are the decomp.me archives pinned in config/toolchain-compilers.json; the patched short-loop assembler is
 reproduced from the original Ps2EeAs.exe with tools/build/patch_ps2eeas.py; wibo (a small loader for Windows command-line
@@ -203,7 +203,7 @@ def require(base=None):
 
 
 def job_environment(base=None):
-    """Variables the build jobs read (see tools/build/sandbox.py and tools/build/build_job.py)."""
+    """Environment used by local per-object compiler and assembler invocations."""
     base = base or root()
     binutils, prefix = find_binutils(base)
     path = [str(base / 'bin')] + ([str(binutils)] if binutils else [])

@@ -59,13 +59,13 @@ void func_00313FD0(RwaBank *bank) {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313FD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_disable", func_00313FD0);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314130);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003141E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314278);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314370);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003143C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314478);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003144C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314530);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_disable", func_00314130);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_disable", func_003141E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_disable", func_00314278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_disable", func_00314370);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_disable", func_003143C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_disable", func_00314478);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_disable", func_003144C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/bank_disable", func_00314530);

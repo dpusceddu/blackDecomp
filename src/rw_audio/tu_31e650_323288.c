@@ -13,8 +13,8 @@ void func_003232A8(void) {
     func_00312C70();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003232C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00323458);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00323688);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00323730);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00323758);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_31e650_323288", func_003232C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_31e650_323288", func_00323458);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_31e650_323288", func_00323688);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_31e650_323288", func_00323730);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_31e650_323288", func_00323758);

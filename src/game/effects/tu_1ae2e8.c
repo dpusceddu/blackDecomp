@@ -8,7 +8,7 @@ extern void func_002A90E8(void *), func_002A9140(void *, int, int);
 extern void func_0026A6F0(void *), func_0026A7A0(void), func_0027B260(void *);
 extern int func_001AEA18(void *, int);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE2E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1ae2e8", func_001AE2E8);
 
 int func_001AE3A8(char *actor) {
     func_0027B2C8(actor + 0xd360);
@@ -50,7 +50,7 @@ int func_001AE9F8(BkActorRenderPS2 *actor) {
     return func_001AEA18(actor, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE420);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1ae2e8", func_001AE420);
 
 #ifdef NON_MATCHING
 // Unmatched: 0x1ae5e8: VU0 corner construction, packed color, and vertex stack layout.
@@ -76,6 +76,6 @@ void func_001AE5E8(void *unused,void *renderer,BkVectorPS2 low,BkVectorPS2 high,
  func_0026B480(renderer,vertices,24);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AE5E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1ae2e8", func_001AE5E8);
 #endif
 

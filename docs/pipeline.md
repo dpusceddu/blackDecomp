@@ -29,8 +29,8 @@ Drafts C for assembly functions with no per-function judgment and keeps what reb
 .venv/bin/python tools/autodecomp.py setup           # decomp-permuter at its pinned commit, into .venv/ (git clone)
 ```
 
-m2c and the scoring run on the host (they only read and write text); every compile runs through the build backend, hundreds
-of candidates per call (a call has a fixed latency, which is why candidates are batched; about 90 compiles per second on two cores). m2c's little-endian MIPS GCC target
+Drafting and scoring read and write text. Candidate compilation uses individual local toolchain invocations in the
+Linux environment of the README. m2c's little-endian MIPS GCC target
 is `-t mipsee-gcc-c` (with `--valid-syntax`, which turns unknown field accesses into `M2C_FIELD` macros, see
 `include/ps2/prelude.h`).
 
@@ -49,114 +49,23 @@ python3 tools/next.py [near|types|identical|data|ee]       # best next work
 
 ### Using decomp-permuter directly
 
-The standard way to improve one near miss is the permuter itself, as in other decompilation projects. `autodecomp.py setup`
-clones it into `.venv/decomp-permuter`; `permuter_settings.toml` at the repository root tells its `import.py` how to compile
-(the pinned SN compiler through `tools/permuter/cc.py`, which uses wibo and the local toolchain), how to assemble the target
-(`tools/permuter/as.py`) and how to disassemble (`mipsel-linux-gnu-objdump`, part of the binutils package of the README).
-Keep the draft in its TU file inside the `#ifdef NON_MATCHING` block, then:
+Use upstream decomp-permuter's own `import.py` and `permuter.py` in Linux, WSL 2, or the project Docker container. Install
+`cpp` in that environment (`apt install cpp` on Debian). `autodecomp.py setup` clones the pinned permuter into `.venv/`.
+Prepare a target and its per-file settings, then import your draft:
 
 ```sh
-python3 tools/permuter/prepare.py func_00105BC0        # the function's assembly in the plain form import.py reads
-python3 .venv/decomp-permuter/import.py src/game/ui/tu_105bc0.c build/permuter/func_00105BC0.s
-python3 .venv/decomp-permuter/permuter.py nonmatchings/func_00105BC0 -j 8
+python3 tools/permuter/prepare.py func_00105BC0
+python3 .venv/decomp-permuter/import.py --no-prune --settings build/permuter/func_00105BC0.toml \
+  src/game/ui/tu_105bc0.c build/permuter/func_00105BC0.s
+python3 .venv/decomp-permuter/permuter.py nonmatchings/func_00105BC0 -j 2
 ```
 
-`import.py` needs a C preprocessor named `cpp` (Linux: part of gcc) and writes `nonmatchings/func_00105BC0/` (ignored).
-Change the flags in `permuter_settings.toml` (`-O2 -G0 -snas` are the defaults of the game code) to the ones of the TU in
-`config/SLUS_213.76/splits.yaml` if they differ. The permuter prints improved candidates with their score; copy the best
-back into the TU file and run `ninja`. Its score counts instructions and ignores relocations, so only `ninja` (or objdiff)
-says whether the result is exact. `import.py` may warn about a syntax error from the inline-assembly helpers of
-`include/ps2/prelude.h`; that matters only if the function calls one of them.
-
-### Long searches (optional)
-
-`tools/pipeline/permuter_service.py` is a batch helper for long searches. It needs a backend plugin that provides `service()`
-(`tools/build/backend.py`), which keeps a job alive between calls; with the local backend only the direct use above applies.
-Use it rather than the short legacy `permute` command:
-
-```sh
-.venv/bin/python tools/pipeline/permuter_service.py start --hours-per-function 2 --total-hours 10
-.venv/bin/python tools/pipeline/permuter_service.py status
-.venv/bin/python tools/pipeline/permuter_service.py fetch
-.venv/bin/python tools/pipeline/permuter_service.py enqueue 0xADDRESS build/candidate.c --flags -O2 -G0 -snas
-.venv/bin/python tools/pipeline/permuter_service.py stop
-```
-
-For verified named imports, pass repeatable `--binding SYMBOL=ADDRESS` before `--flags`.
-This preserves compiler recognition of names such as `sqrtf`; the same addresses are
-used when scoring the seed, restored checkpoints and randomized candidates. Unknown
-or wrong bindings remain mismatches.
-
-The detached container has no network and a read-only toolchain;
-only its named `/work` volume persists. Restart with the same `--name` to resume
-checkpoints; budgets are cumulative, so increase them to extend an exhausted run.
-`fetch` exports every checkpoint and best source to `build/permuter/<name>/`.
-Inspect those results before hand work on a TU. New submissions are checkpointed
-during search and scheduled between functions; a stopped service accepts them
-for its next start. Submitted text is parser-checked immediately, and its local
-receipt stays under `build/permuter/<name>/submissions/`.
-
-For C++/EE syntax the parser cannot read, pass `--parser-source build/parser.c`
-before `--flags`. Keep the original compiler-ready source as the positional input;
-the override can use upstream `PERM_IGNORE`/`PERM_PRETEND` around types, helpers,
-signatures and asm. Both original and restored candidates are compiled/scored.
-Checkpoints retain `best.c`, its `best.o` and object hash, plus the raw parser AST
-as `best.permuter.c`; this preserves ignored C++ text across hill climbs/restarts.
-A newly submitted larger candidate preempts smaller work at a checkpoint without
-resetting the smaller function's RNG, best result or elapsed budget.
-Accepted submissions replay after restart; functions since integrated by hand
-are retired from search. `permuter_wins` retains raw nonzero-to-exact candidates
-even after their functions leave the queue; already-exact controls do not count.
-Report reviewed, full-image wins separately: a raw candidate can fail source review.
-
-Use `start --lanes 2` or `--lanes 3` to run two or three disjoint searches in parallel in the same isolated container;
-the existing two-CPU/two-GiB cap stays unchanged. One supervisor assigns
-the globally largest available functions, keeps each key exclusive, and gives
-each lane a separate compiler directory. A larger submission can displace the
-smallest active function after its checkpoint. Default concurrency is one.
-`--end-at` accepts an ISO timestamp with an explicit timezone and caps the run
-at that absolute deadline. Lane count and deadline persist on restart; the
-primary cumulative budget, per-function elapsed time, RNG and best object remain.
-Status separates cumulative container wall time, per-lane wall time since lane
-accounting began, and retained function search time. None is CPU accounting.
-The `candidates` total sums current seed attempts, including rejected mutations;
-replacing a seed resets that function's attempt count, so it is not a lifetime
-compiler-call total. Cumulative elapsed time remains the service budget measure.
-
-The queue includes all saved drafts with **1–29 differing instructions**, including
-legacy `mismatch` records, excludes current exact-source functions, and orders by
-largest code size first, then closeness. It recompiles each baseline before search.
-This count comes from the relocation-aware pipeline scorer; the permuter's weighted
-score and the old `1000 + 100*d + hamming` value are not instruction counts.
-Parser failures (including unsupported C++, EE types or headers) remain explicit
-queue records rather than disappearing. The GCC randomizer emphasizes temporary
-lifetimes and declaration/statement order, combines short mutations with longer
-jumps, and periodically restarts from the original source. Its seed, RNG state,
-source/context hash, elapsed budget and best source survive restart. External ABI
-type mutations, artificial identical conditional arms, empty statements and
-constant-condition wrappers are disabled. Search improvements and even zero-difference candidates
-are leads until settlement and the full identical build accept them.
-The target return/parameter declarator is checked against the submitted baseline
-before compilation; local type mutations can otherwise reach parameters in the upstream
-randomizer. A saved best with interface drift is archived and rebased without resetting
-its RNG, attempts, elapsed time or deadline. Local mutations still require semantic review.
-An opaque initial source block stays before executable mutations; only uninitialized
-declarations without VLA bounds or type-side evaluations may precede it. Parser-only
-views of its values must model their initialized state, rather than invent uninitialized locals.
-For a reviewed improved seed, `enqueue --preserve-search-accounting` archives the
-previous source, object and checkpoint, validates the new baseline, and retains
-the function's attempts, RNG and elapsed budget. The global deadline is unchanged.
-Without this option, a changed seed starts a new per-function budget as before.
-For a reviewed seed, repeat `enqueue --disable-randomizer NAME` before `--flags`
-to exclude an upstream transform from that candidate alone. For example,
-`--disable-randomizer perm_split_assignment` freezes that transformation while
-other lifetime/declaration passes remain available. The setting is part of the saved seed hash;
-unknown names fail before submission. Other keys keep their own search settings.
-For native-width-sensitive seeds, `--typed-temporaries` retains inferred expression
-types in new temporaries, disables speculative reuse of existing variables, and
-excludes local type randomization and simple cast insertion. Genuine temporary,
-declaration and lifetime transforms remain enabled. This per-seed mode survives
-restart; it narrows the search and does not replace native load-width or semantic review.
+`tools/permuter/cc.py --file <source>` reads the file's compiler, flags and assembler from `splits.yaml` for each candidate.
+The generated import settings also select the owning file's target assembler and enable upstream's inline-assembly
+literal handling. `--no-prune` retains typedefs needed by those opaque helper bodies. There is no project permuter service or
+search supervisor. Upstream C++ parsing is a known limitation; unsupported C++/EE constructs may need an upstream
+`PERM_IGNORE`/`PERM_PRETEND` parser view. Such a view must preserve the actual compiler input and ABI. Review improved
+candidates, copy them into the TU, inspect objdiff, and require `ninja` to print `OK` before claiming a match.
 
 Per function: (1) m2c on its `.s` (plus the sibling `.lit4.s`), with the recovered whole-callgraph context (`ctx.c`);
 `ctx2.c` and `ctx3.c` retain scalar/pointer fallback variants; `ctx_void.c` tests unresolved scalar returns as void; (2) mechanical cleaning: missing leading parameters, K&R
@@ -166,7 +75,7 @@ the flag set is varied (`-O1`, `-O3`, `-fbyte-bool`, `-G8`, `-fno-peephole`, `-f
 compiled `.text` is compared with the original words, relocated fields masked, and each relocation target (symbol address
 plus addend; constants by their bytes) must equal the symbolic operand of the original assembly; (5) up to 8 differing
 instructions: decomp-permuter's randomizer, a hill climb on the compile score, 50 candidates per function and round
-compiled together in one backend job; (6) identical bodies (`clone`): an exact source is cloned onto the other functions with the same body
+compiled individually with the pinned toolchain; (6) identical bodies (`clone`): an exact source is cloned onto the other functions with the same body
 by renaming symbols; (7) functions m2c cannot read but that are a few special instructions (`li $v1, N; syscall`,
 `ei`, `di`, `sync`) come from one inline-asm template.
 

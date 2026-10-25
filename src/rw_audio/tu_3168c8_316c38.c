@@ -92,7 +92,7 @@ s32 func_00316C38(void *input,void **inputs,s32 length) {
     return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00316C38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_316c38", func_00316C38);
 #endif
 #ifdef NON_MATCHING
 extern u32 func_0031D510(void),func_0031D520(void);
@@ -108,7 +108,7 @@ void func_003174F0(void) {
     D_0040E1C8=now;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003174F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_316c38", func_003174F0);
 #endif
 
 
@@ -142,4 +142,4 @@ s32 func_003174D0(void) {
     return temp_v0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003175C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_316c38", func_003175C0);

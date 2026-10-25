@@ -14,19 +14,19 @@ s32 func_002A5A90(const RwMatrixTolerancePS2 *tolerance) {
  RwCopyMatrixTolerancePS2((RwMatrixTolerancePS2 *)(D_00449444+D_0040E5A8),tolerance);return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5AC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5AC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5B48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5B80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A5AC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A5AC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A5B48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A5B80);
 #ifdef NON_MATCHING
 extern u8 D_00449438[];extern s32 D_0040E5A8;extern void func_002A5640(RwMatrixPS2 *,const RwMatrixPS2 *,const RwMatrixPS2 *);
 // Unmatched: constant-address folding or FP scheduling remains different.
 s32 func_002A5B98(void (*multiply)(RwMatrixPS2 *,const RwMatrixPS2 *,const RwMatrixPS2 *)) {if(!multiply)multiply=func_002A5640;M2C_FIELD(D_00449438+D_0040E5A8,void (**)(void),8)=(void (*)(void))multiply;return 1;}
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5B98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A5B98);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5BC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5C80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A5BC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A5C80);
 #ifdef NON_MATCHING
 extern u8 D_00449438[];extern s32 D_0040DEE4;extern void *D_0040DEEC;extern RwFreeLinkPS2 D_0040E5B0;
 extern void func_002A6C08(RwFreeListPS2 *);extern void *func_0035C6EC(void *,s32,u32);
@@ -52,7 +52,7 @@ RwFreeListPS2 *func_002A5CE8(u32 entry_size,u32 entries,u32 alignment,u32 hint) 
  return list;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5CE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A5CE8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: loop expansion, FP scheduling or stack aggregate lifetime still differs.
@@ -78,7 +78,7 @@ RwFreeListPS2 *func_002A6010(u32 entry_size,u32 entries,u32 alignment,s32 preall
  return list;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A6010);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A6010);
 #endif
 #ifdef NON_MATCHING
 extern u8 D_00449438[];extern void *func_0035C6EC(void *,s32,u32);
@@ -103,10 +103,10 @@ void *func_002A6340(RwFreeListPS2 *list,u32 hint) {
  return (void *)(((u32)block+list->alignment+bytes+7)&-list->alignment);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A6340);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A6340);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A65F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A66C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A65F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A66C0);
 #ifdef NON_MATCHING
 extern u8 D_00449438[];
 // Unmatched: loop expansion, FP scheduling or stack aggregate lifetime still differs.
@@ -126,9 +126,9 @@ RwFreeListPS2 *func_002A66C8(RwFreeListPS2 *list,void *memory) {
  return list;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A66C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A66C8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A6860);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A6860);
 #ifdef NON_MATCHING
 extern u8 D_00449438[];extern void *func_0035C544(void *,const void *,u32);
 // Unmatched: loop expansion, FP scheduling or stack aggregate lifetime still differs.
@@ -143,7 +143,7 @@ RwFreeListPS2 *func_002A6868(RwFreeListPS2 *list,void (*callback)(void *,void *)
  return list;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A6868);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A6868);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A6AB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A6B08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A6AB8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a5a90", func_002A6B08);

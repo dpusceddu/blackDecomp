@@ -30,8 +30,8 @@ void func_00210E68(void) {
     M2C_FIELD(D_0040F0E0, s8 *, 0x20165) = (s8) (D_003BE80C != 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00210ED0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00210FE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002110A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00211108);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00211210);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_210db8", func_00210ED0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_210db8", func_00210FE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_210db8", func_002110A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_210db8", func_00211108);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_210db8", func_00211210);

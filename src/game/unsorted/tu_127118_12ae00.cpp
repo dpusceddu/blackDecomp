@@ -14,5 +14,5 @@ int VisitWorldActor(void* node,int,void* hit) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0012AE00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12ae00", func_0012AE00);
 #endif

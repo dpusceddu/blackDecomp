@@ -13,29 +13,29 @@ s32 func_00326B70(s32 arg0, s32 arg1, s32 arg2) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00326B80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00326CC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00326CF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00326D80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00326E68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00326B80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00326CC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00326CF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00326D80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00326E68);
 
 void func_00326ED8(void) {
     func_00311CA0(&D_0045BFF8);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00326EF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00327070);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00327248);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00327D10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00326EF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00327070);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00327248);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00327D10);
 
 s32 func_00327F20(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return func_00310978((s32) &D_0045C020, arg0, arg2, arg1, arg3, arg4);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00327F58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00327FC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328008);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003280D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00327F58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00327FC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00328008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_003280D8);
 
 s32 func_00328108(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_2;
@@ -71,7 +71,7 @@ void func_00328180(void *arg0, f32 fparg0) {
     M2C_FIELD(arg0, f32 *, 0xA4) = (f32) ((fparg0 * 0.5f) + 0.5f);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003281A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_003281A8);
 
 void func_003281B0(void *arg0, f32 fparg0) {
     if (M2C_FIELD(arg0, s32 *, 0x58) & 2) {
@@ -91,13 +91,13 @@ s32 func_003281F8(s32 arg0, void *arg1) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328210);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328240);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328278);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003282A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003282C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003282F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328318);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328340);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328368);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00328390);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00328210);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00328240);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00328278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_003282A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_003282C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_003282F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00328318);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00328340);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00328368);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_326b70", func_00328390);

@@ -146,7 +146,7 @@ int Kaim::CPathCostData::Build()
     return true;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F3770);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F3948);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F3AB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/source_objects_2f36a8", func_002F3770);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/source_objects_2f36a8", func_002F3948);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/source_objects_2f36a8", func_002F3AB0);
 #endif

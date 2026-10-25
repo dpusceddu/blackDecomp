@@ -5,9 +5,9 @@ extern s32 func_0038BBB0();
 extern M2C_UNK D_003E75A0;
 extern s32 D_003E7548;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DFF10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DFF98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E0018);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2dff10", func_002DFF10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2dff10", func_002DFF98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2dff10", func_002E0018);
 
 s32 func_002E00F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     func_0038BBB0(arg0, arg1, arg2, arg3, arg4 & 0xFF, arg5 & 0xFF);

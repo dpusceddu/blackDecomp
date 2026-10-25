@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
-"""Shiftability test: insert NOPs into one function of a scratch copy, rebuild and check that references moved.
+"""Audit relocation movement in an edited build using the linked symbol address map.
 
-Usage: shift_test.py GAME_ID [--func func_001DD838] [--nops 1] [--work shift] [--analyze-only]
-Copies asm/<GAME_ID> and data/<GAME_ID> to the scratch name (default `shift`), inserts the NOPs right after the function's
-label, runs the normal post-process/link/pack stages on the copy (never touching the main build) and compares the
-result with the reference image in orig/ using a symbol-derived address map. All symbols carry their original
-address in their name, so the old->new address map is exact at every label. Reports, for code and data separately,
-how many address-bearing words were relocated, how many stayed stale and how many are inconsistent.
+Usage: shift_test.py GAME_ID --shifted PACKED.elf --linked LINKED.elf [--func func_XXXXXXXX] [--nops 1]
+Create the edit with the ordinary Ninja build in a separate checkout. This tool
+only reads the original and edited ELFs and reports relocated and stale references.
 """
 import sys as _sys
 from pathlib import Path as _Path
@@ -19,45 +16,6 @@ sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'main
 from elfinfo import Elf
 
 PY = sys.executable
-
-
-def run(*args):
-    r = subprocess.run([PY] + [str(a) for a in args], cwd=ROOT, capture_output=True, text=True)
-    sys.stdout.write(r.stdout[-1500:])
-    if r.returncode:
-        sys.stderr.write(r.stderr[-3000:])
-        raise SystemExit('step failed: %s' % ' '.join(map(str, args[:2])))
-
-
-def prepare(slug, work, func, nops):
-    for d in ('asm', 'data', 'build'):
-        if (ROOT / d / work).exists():
-            shutil.rmtree(ROOT / d / work)
-    shutil.copytree(ROOT / 'asm' / slug, ROOT / 'asm' / work)
-    shutil.copytree(ROOT / 'data' / slug, ROOT / 'data' / work)
-    (ROOT / 'build' / work).mkdir(parents=True)
-    for f in ('undefined_syms_auto.txt', 'undefined_funcs_auto.txt'):
-        shutil.copy(ROOT / 'build' / slug / f, ROOT / 'build' / work / f)
-    for src in sorted((ROOT / 'asm' / work / 'data').glob('vu*.s')):   # blob wrappers name the blob path
-        src.write_text(src.read_text().replace('data/%s/' % slug, 'data/%s/' % work))
-    text = ROOT / 'asm' / work / 'text.s'
-    lines = text.read_text().split('\n')
-    i = lines.index('glabel ' + func)
-    lines[i + 1:i + 1] = ['    nop'] * nops
-    text.write_text('\n'.join(lines))
-    print('inserted %d nop(s) after glabel %s' % (nops, func))
-
-
-def build(slug, work):
-    boot = json.loads((ROOT / 'config/versions.json').read_text())[slug]['boot']
-    b = ROOT / 'build' / work
-    run('tools/build/link_support.py', slug, work)
-    run('tools/build/split_objects.py', slug, work)
-    run('tools/build/make_ld.py', slug, work)
-    run('tools/build/build_objects.py', work)
-    run('tools/build/pack_elf.py', b / 'linked.elf', 'build/%s/layout.json' % slug, 'data/%s/elf' % slug,
-        b / (boot + '.elf'))
-    return b / (boot + '.elf'), b / 'linked.elf'
 
 
 class Map:
@@ -200,16 +158,11 @@ def main():
     ap.add_argument('slug')
     ap.add_argument('--func', default='func_001DD838')
     ap.add_argument('--nops', type=int, default=1)
-    ap.add_argument('--work', default='shift')
-    ap.add_argument('--analyze-only', action='store_true')
+    ap.add_argument('--shifted', type=Path, required=True, help='packed ELF from an edited build')
+    ap.add_argument('--linked', type=Path, required=True, help='corresponding linked ELF with symbols')
     a = ap.parse_args()
     boot = json.loads((ROOT / 'config/versions.json').read_text())[a.slug]['boot']
-    if not a.analyze_only:
-        prepare(a.slug, a.work, a.func, a.nops)
-        shifted, linked = build(a.slug, a.work)
-    else:
-        shifted = ROOT / 'build' / a.work / (boot + '.elf')
-        linked = ROOT / 'build' / a.work / 'linked.elf'
+    shifted, linked = a.shifted, a.linked
     analyze(a.slug, ROOT / 'orig' / a.slug / boot, shifted, linked, a.func, a.nops)
 
 

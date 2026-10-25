@@ -58,7 +58,7 @@ s32 func_0020E200(void *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020E338);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_20e200", func_0020E338);
 
 s32 func_0020E4A8(s32 arg0) {
     func_0020DF90(arg0, (s32) &D_003FAB48);
@@ -74,7 +74,7 @@ s32 func_0020E4A8(s32 arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0020E560);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_20e200", func_0020E560);
 
 s32 func_0020E620(void) {
     return D_003BE7A4 != 0;

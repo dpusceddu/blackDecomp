@@ -5,7 +5,7 @@
 // Unmatched: frontend registration needs the original loop lifetime and virtual interface context.
 // Unmatched: save dialog update needs inline accessor and local-lifetime recovery.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00214CF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00215250);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214cf8", func_00214CF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214cf8", func_00215250);
 #endif
 

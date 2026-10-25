@@ -9,7 +9,7 @@ void func_00135ED0(void *arg0, f32 fparg0, f32 fparg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00135F00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001362D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00136548);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001366B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_135c78_135ed0", func_00135F00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_135c78_135ed0", func_001362D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_135c78_135ed0", func_00136548);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_135c78_135ed0", func_001366B0);

@@ -84,7 +84,7 @@ s32 func_003183C0(s32 arg0) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003183F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_003183F8);
 #ifdef NON_MATCHING
 typedef struct AudioLengthVector {f32 x,y,z;} AudioLengthVector;
 typedef union AudioLengthWord {f32 number;u32 word;u16 halves[2];} AudioLengthWord;
@@ -104,7 +104,7 @@ void func_00318550(AudioLengthWord *result, const AudioLengthVector *input) {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318550);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00318550);
 #endif
 #ifdef NON_MATCHING
 typedef struct AudioArenaLink {struct AudioArenaLink *next,*previous;} AudioArenaLink;
@@ -149,9 +149,9 @@ void func_00318950(AudioArena *arena,void *allocation) {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318950);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00318950);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318A20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00318A20);
 
 s32 func_00318A28(void *arg0) {
     return *M2C_FIELD(arg0, s32 **, 8) == M2C_FIELD(arg0, s32 *, 0xC);
@@ -190,17 +190,17 @@ void *func_00318A40(AudioArenaBlock *block,u32 bytes,u32 alignment) {
     return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318A40);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00318A40);
 #endif
 
 void func_00318BC0(void) {
     func_00312C70();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318D20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318D28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318E80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003192D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00318D20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00318D28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00318E80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_003192D8);
 
 void func_00319410(void *arg0)
 {
@@ -236,7 +236,7 @@ s32 func_003194A0(void *arg0, s32 arg1, s32 arg2, s32 arg3, void *arg4) {
     return func_00319828(arg0, arg1, arg2, arg3, arg4);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003194D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_003194D8);
 
 #include "ps2/recovered_types.h"
 extern s32 func_00319828(void *, s32, s32, s32, void *);
@@ -253,7 +253,7 @@ s32 func_00319610(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x10);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00319618);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00319618);
 #ifdef NON_MATCHING
 // Unmatched: typed PS2 access/control-flow hypothesis still differs in ABI, scheduling or register allocation.
 extern s32 func_0032A938(void *);
@@ -306,9 +306,9 @@ block_11:
     return M2C_FIELD(context, void *(**)(void *, M2C_UNK, s32, s32, s32), 0x48)(var_4, var_5, var_6, event, M2C_FIELD(context, s32 *, 0x4C));
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003196D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_003196D8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00319828);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00319828);
 
 void func_003199C0(void) {
     func_00311CA0(&D_004584D8);
@@ -324,14 +324,14 @@ void func_00319AE0(void) {
     func_00311CA0(&D_00458528);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00319B00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00319B00);
 
 s32 func_00319C70(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     return func_00310978((s32) &D_00458550, arg0, arg2, arg1, arg3, arg4);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00319DA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00319EB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00319DA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_00319EB0);
 
 void func_00319F80(void *arg0) {
     void *temp_3;
@@ -428,7 +428,7 @@ RwaPlaybackAccess *func_0031A410(RwaPlaybackAccess *playback,u32 selector,const 
     return playback;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031A410);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_0031A410);
 #endif
 #ifdef NON_MATCHING
 extern s32 D_0040E1C4;
@@ -446,5 +446,5 @@ RwaPlaybackAccess *func_0031A498(RwaPlaybackAccess *playback,u32 selector,const 
     return playback;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031A498);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_318250", func_0031A498);
 #endif

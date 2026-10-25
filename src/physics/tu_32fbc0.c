@@ -8,8 +8,8 @@
 // Unmatched: 00330CF8 sphere, capsule and rounded-box inertia; VU lane updates and float scheduling differ.
 // Unmatched: 00331008 mass definition and principal-axis decomposition; centered tensor and matrix temporary lowering differs.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032FBC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032FCA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00330CF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00331008);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32fbc0", func_0032FBC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32fbc0", func_0032FCA0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32fbc0", func_00330CF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32fbc0", func_00331008);
 #endif

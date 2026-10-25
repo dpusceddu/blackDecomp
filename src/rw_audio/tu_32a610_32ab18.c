@@ -11,4 +11,4 @@ s32 func_0032AB20(void) {
     return D_0040E824;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032AB28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_32a610_32ab18", func_0032AB28);

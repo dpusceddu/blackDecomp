@@ -35,5 +35,5 @@ float CPathFinder::RemainingDistance()
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00303388);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2fec10_303388", func_00303388);
 #endif

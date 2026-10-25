@@ -54,4 +54,4 @@ bool BeginQueuedRoute(RouteRequest* request)
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A220);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_route_stages_17a0a8", func_0017A220);

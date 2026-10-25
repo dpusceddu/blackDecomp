@@ -12,7 +12,7 @@ extern s32 func_001E8900(s32);
 extern void * D_0040F510;
 extern void * D_0040F0E0;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00105BC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0", func_00105BC0);
 
 void func_00105C40(void)
 {
@@ -36,7 +36,7 @@ void func_00105CE8(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00105CF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0", func_00105CF0);
 
 void func_00106008(void) {
 

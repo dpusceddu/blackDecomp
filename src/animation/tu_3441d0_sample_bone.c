@@ -19,7 +19,7 @@ const u8 *func_003441D0(const u8 *bytes, TrackVector *out) {
     return bytes + 12;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003441D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3441d0_sample_bone", func_003441D0);
 #endif
 
 #ifdef NON_MATCHING
@@ -54,7 +54,7 @@ const u8 *func_00344240(const u8 *bytes) {
     return bytes + length + 4;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00344240);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3441d0_sample_bone", func_00344240);
 #endif
 
 #ifdef NON_MATCHING
@@ -269,7 +269,7 @@ void func_003443E0(const u8 **stream, TrackVector *out, f32 time) {
     *stream = cursor;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003443E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3441d0_sample_bone", func_003443E0);
 #endif
 
 #ifdef NON_MATCHING
@@ -334,7 +334,7 @@ void func_003452B0(TrackPose *out, const u8 *bytes, s32 count, f32 time) {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003452B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3441d0_sample_bone", func_003452B0);
 #endif
 
 void func_00345480(TrackBone *out, const u8 *bytes, s32 index, f32 time) {

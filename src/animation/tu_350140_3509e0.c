@@ -23,9 +23,9 @@ s32 func_003509E0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, f32 fparg0, f32 fparg
     return func_003504C8(arg0, sp, 0, fparg0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00350A50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00350AC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00350B30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00350F28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00351030);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00351168);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00350A50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00350AC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00350B30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00350F28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00351030);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00351168);

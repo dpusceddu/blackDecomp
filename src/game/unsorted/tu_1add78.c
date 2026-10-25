@@ -18,7 +18,7 @@ void func_001ADD78(void *arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_001ADDF8(arg0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ADDF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78", func_001ADDF8);
 
 s32 func_001ADE50(void *arg0, s32 arg1, s32 arg2) {
     s32 *temp_7;
@@ -32,7 +32,7 @@ s32 func_001ADE50(void *arg0, s32 arg1, s32 arg2) {
     return ((u32) (M2C_FIELD((temp_5 + M2C_FIELD(arg0, s32 *, 0)), s32 *, 0) + M2C_FIELD(arg0, s32 *, 0xC)) < (u32) M2C_FIELD((temp_5 + M2C_FIELD(arg0, s32 *, 4)), u32 *, 0)) ? 0 : temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ADEA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78", func_001ADEA8);
 
 void func_001ADF18(void *arg0, s32 arg1) {
     M2C_FIELD(((arg1 * 4) + M2C_FIELD(arg0, s32 *, 4)), s32 *, 0) = 0;
@@ -45,4 +45,4 @@ void func_001ADF30(void *arg0, s32 arg1) {
     M2C_FIELD((temp_5 + M2C_FIELD(arg0, s32 *, 4)), s32 *, 0) = M2C_FIELD((temp_5 + M2C_FIELD(arg0, s32 *, 0)), s32 *, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ADF50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78", func_001ADF50);

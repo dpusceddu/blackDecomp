@@ -14,5 +14,5 @@ inline bool ServiceIsA(const ServiceClass*want,const ServiceClass*info){do{if(wa
 bool CPathFinder::InstallService(const void*descriptor){const ServiceClass*which=(const ServiceClass*)descriptor;if(!ServiceIsA(&allowedServiceClass,which))return false;ServiceObject *prior=serviceList[which->index];func_002E5218(this,which);if(!prior)serviceList[which->index]->SetGraph(graph);return true;}
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00304BE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2fec10_304be8", func_00304BE8);
 #endif

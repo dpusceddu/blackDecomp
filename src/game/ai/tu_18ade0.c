@@ -7,4 +7,4 @@ void func_0018ADE0(void) {
     func_0018AE00();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0018AE00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_18ade0", func_0018AE00);

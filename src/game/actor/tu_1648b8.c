@@ -8,4 +8,4 @@ s32 func_001648B8(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001648D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1648b8", func_001648D8);

@@ -13,5 +13,5 @@ void AdvanceRing(void* object) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00176F38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176f38", func_00176F38);
 #endif

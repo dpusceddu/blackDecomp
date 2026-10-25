@@ -7,4 +7,4 @@ M2C_UNK * func_00383FB8(void) {
     return &D_004155F0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00383FC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/inline/linkonce_383fb8", func_00383FC8);

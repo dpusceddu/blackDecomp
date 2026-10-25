@@ -21,4 +21,4 @@ void func_0032AB60(void *arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0032ABC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_32a610_32ab60", func_0032ABC0);

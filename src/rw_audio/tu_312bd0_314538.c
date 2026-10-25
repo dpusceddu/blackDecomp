@@ -7,5 +7,5 @@ s32 func_00314538(void) {
     return D_0040E178;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314540);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00314548);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_312bd0_314538", func_00314540);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_312bd0_314538", func_00314548);

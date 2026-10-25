@@ -145,7 +145,7 @@ int FrontendMenuState::Exit() {
   }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00104E10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/graphics_frontend_104d60", func_00104E10);
 #endif
 
 #ifdef NON_MATCHING

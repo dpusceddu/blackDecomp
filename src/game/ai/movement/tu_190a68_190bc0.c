@@ -20,4 +20,4 @@ s8 * func_00190BC0(Recovered_Vtable_003DD980 *arg0, s32 arg1) {
     return func_00181F48(arg0->unk_4 + 0xC80, 0, 0x27, 0.0f, 2.0f);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00190C18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_190a68_190bc0", func_00190C18);

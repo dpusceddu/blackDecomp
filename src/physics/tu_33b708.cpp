@@ -55,4 +55,4 @@ StartupToken D_0040E940 __attribute__((section(".sbss")));
 ConstantQuad D_0045E860, D_0045E870, D_0045E880, D_0045E890;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033B850);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33b708", func_0033B850);

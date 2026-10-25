@@ -11,4 +11,4 @@ void func_00356058(s32 arg0, s32 arg1) {
     func_00355F88(0, arg0, arg1);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00356080);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_355278_356030", func_00356080);

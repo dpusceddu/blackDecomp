@@ -6,7 +6,7 @@ extern s32 (*D_003CEC6C)();
 
 /* Medium-confidence bank/stream TU: call and shared-data edges. */
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312BD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_312bd0", func_00312BD0);
 
 void func_00312C48(s32 arg0) {
     D_003CEC68(arg0 + 0x40);
@@ -16,4 +16,4 @@ void func_00312C70(void) {
     D_003CEC6C();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00312C98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_312bd0", func_00312C98);

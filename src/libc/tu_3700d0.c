@@ -15,4 +15,4 @@ s32 func_003700D0(s32 arg0, s32 arg1) {
     return (s32) var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00370100);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_3700d0", func_00370100);

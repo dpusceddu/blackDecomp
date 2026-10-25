@@ -25,4 +25,4 @@ s32 func_00385E18(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00385E20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_385660_385db0", func_00385E20);

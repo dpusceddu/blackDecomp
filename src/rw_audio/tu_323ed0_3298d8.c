@@ -21,4 +21,4 @@ s32 func_00329928(void *arg0, s32 arg1, s32 arg2)
   return ((arg2 & temp_3) - new_var) * (M2C_FIELD(arg0, s32 *, 0x14));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00329950);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_3298d8", func_00329950);

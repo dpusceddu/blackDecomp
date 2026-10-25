@@ -38,7 +38,7 @@ u32 func_002A7050(RwStreamPS2 *stream,void *destination,u32 size) {
  {RwErrorPS2 error;error.plugin=1;error.code=func_002A5548(14);func_002A55D8(&error);return 0;}
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A7050);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a6ff0", func_002A7050);
 #endif
 #ifdef NON_MATCHING
 extern u8 D_00449438[];extern s32 func_002A5548(s32,...);extern void func_002A55D8(RwErrorPS2 *);extern void *func_0035C544(void *,const void *,u32);extern u32 func_0032A7A0(const void *,u32,u32,void *);
@@ -61,7 +61,7 @@ RwStreamPS2 *func_002A71E0(RwStreamPS2 *stream,const void *source,u32 size) {
  {RwErrorPS2 error;error.plugin=1;error.code=func_002A5548(14);func_002A55D8(&error);return 0;}
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A71E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a6ff0", func_002A71E0);
 #endif
 #ifdef NON_MATCHING
 extern s32 func_002A5548(s32,...);extern void func_002A55D8(RwErrorPS2 *);extern s32 func_0032A7F0(void *,u32,s32),func_0032A8C8(void *);
@@ -78,9 +78,9 @@ RwStreamPS2 *func_002A73D8(RwStreamPS2 *stream,u32 size) {
  {RwErrorPS2 error;error.plugin=1;error.code=func_002A5548(14);func_002A55D8(&error);return 0;}
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A73D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a6ff0", func_002A73D8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A7510);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A7520);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A7598);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A75F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a6ff0", func_002A7510);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a6ff0", func_002A7520);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a6ff0", func_002A7598);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8_2a6ff0", func_002A75F0);

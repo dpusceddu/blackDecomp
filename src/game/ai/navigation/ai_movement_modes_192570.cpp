@@ -49,4 +49,4 @@ bool RouteMode::ResolveCurrent()
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192698);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_movement_modes_192570", func_00192698);

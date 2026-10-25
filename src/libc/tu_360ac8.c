@@ -9,4 +9,4 @@ s32 func_00360AC8(s32 arg0, s32 arg1) {
     return func_00360AF0(arg0, arg1, (s32) (D_003D6944 + 0x5C));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00360AF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_360ac8", func_00360AF0);

@@ -40,9 +40,9 @@ void HitCollector::Dispatch(Vec direction,signed char weaponId,BkWeaponOwnerPS2*
 // Unmatched: 0015B118: damage and virtual receive source context.
 // Unmatched: 0015B360: spread helpers and VU basis temporaries.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015A990);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015AA60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015ADA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015B028);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015B118);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0015B360);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_158f08", func_0015A990);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_158f08", func_0015AA60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_158f08", func_0015ADA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_158f08", func_0015B028);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_158f08", func_0015B118);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_158f08", func_0015B360);

@@ -1,44 +1,47 @@
 #!/usr/bin/env python3
-"""Assemble the target of decomp-permuter with the EE assembler of the pinned toolchain.
-
-Usage: as.py INPUT.s -o OUTPUT.o        (run from the repository root; permuter_settings.toml makes import.py call it)
-The split assembly of a function (asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s) includes include/macro.inc; the job runs
-through tools/build/backend.py like every other toolchain job.
-"""
-import sys as _sys
-if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
-    print(__doc__.strip())
-    raise SystemExit(0)
-import base64, sys
+"""Assemble a decomp-permuter target with its owning file's assembler from splits.yaml."""
+import argparse
 from pathlib import Path
-
-ROOT = Path(__file__).resolve().parents[2]
-sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
-import backend
-
-JOB = '''
-import os, subprocess, sys
-AS = os.environ.get('BLACK_TOOLCHAINS', '/toolchains') + '/compilers/ee-gcc2.96/ee/bin/as'
-p = subprocess.run([AS, '-I', 'include', '-o', 'output.o', 'input.s'], capture_output=True, text=True)
-sys.stdout.write(p.stdout + p.stderr)
-sys.exit(p.returncode)
-'''
+import subprocess
+import sys
+import tempfile
+sys.path[:0] = [str(Path(__file__).resolve().parents[1]/d) for d in ('','build')]
+from cc import recipe
+from object_compile import environment
+import assembler
+from asm_syntax import translate
+from elfobj import normalize_object, restore_gprel
 
 
-def main(args):
-    if len(args) != 3 or args[1] != '-o':
-        raise SystemExit(__doc__)
-    source, output = Path(args[0]), Path(args[2])
-    encode = lambda path: base64.b64encode(path.read_bytes()).decode()
-    reply = backend.run_script(dict(files={'input.s': encode(source), 'include/macro.inc': encode(ROOT / 'include/macro.inc')},
-                                    script=JOB, out=['output.o'], timeout=120))
-    sys.stdout.write(reply['out'])
-    sys.stderr.write(reply['err'])
-    if reply['rc'] == 0 and 'output.o' in reply['artifacts']:
-        output.write_bytes(base64.b64decode(reply['artifacts']['output.o']))
-        return 0
-    return reply['rc'] or 1
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('--file', required=True)
+    ap.add_argument('input')
+    ap.add_argument('-o', required=True)
+    a = ap.parse_args()
+    split = recipe(a.file)
+    base, env = environment()
+    choice, flags = assembler.selection(split.compile_flags())
+    sn = '-snas' in flags or (choice or '').startswith('sn-')
+    text, aliases = translate(Path(a.input).read_text(),sn=sn)
+    # Permuter compares relocatable instructions; addend aliases remain symbolic.
+    text = '\n'.join('%s = %s' % p for p in aliases.items())+'\n'+text
+    with tempfile.TemporaryDirectory(prefix='black-permuter-as-') as directory:
+        source = Path(directory)/'input.s'
+        source.write_text(text)
+        if choice:
+            command = assembler.command(choice, flags, str(source), a.o)
+        elif sn:
+            root = base/'compilers'/split.compiler/'lib/gcc-lib/ee'
+            backend = next(p for p in sorted(root.iterdir()) if p.is_dir() and not p.name.startswith('.'))
+            command = [str(base/'bin/wibo'), assembler.short_path(backend/'Ps2EeAs.exe'), '-O2',
+                       next((f for f in flags if f.startswith('-G')), '-G0'), '-mabi=eabi', '-I','include','-o',a.o,str(source)]
+        else:
+            command = [str(base/'compilers'/split.compiler/'ee/bin/as'),'-EL','-m5900','-I','include','-o',a.o,str(source)]
+        subprocess.run(command,env=env,check=True)
+    out = Path(a.o)
+    out.write_bytes(restore_gprel(normalize_object(out.read_bytes())))
 
 
-if __name__ == '__main__':
-    sys.exit(main(sys.argv[1:]))
+if __name__=='__main__':
+    main()

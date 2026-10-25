@@ -1,10 +1,10 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034A1E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034A3C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034A598);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034A770);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A1E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A3C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A598);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A770);
 
 #include "ps2/recovered_types.h"
 extern s32 func_0034B128(void *, void *, s32, s32, s32, void *);
@@ -92,6 +92,6 @@ s32 func_0034AB18(void *arg0, s32 arg1, void *arg2, void *arg3, s32 arg4, s32 ar
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034AC70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034AD48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034ADD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034AC70);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034AD48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034ADD8);

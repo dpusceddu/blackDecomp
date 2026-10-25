@@ -24,15 +24,15 @@ s32 func_001217D0(s32 arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00121808);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001218B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001219B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_1217c8", func_00121808);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_1217c8", func_001218B8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_1217c8", func_001219B0);
 
 s32 func_00121AF0(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00121AF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_1217c8", func_00121AF8);
 
 void func_00121B40(void) {
     void *temp_16;

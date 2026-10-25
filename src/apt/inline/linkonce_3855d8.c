@@ -19,4 +19,4 @@ void func_003855D8(void *arg0, s32 arg1)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00385648);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/inline/linkonce_3855d8", func_00385648);

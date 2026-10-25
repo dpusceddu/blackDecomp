@@ -168,7 +168,7 @@ namespace FleeViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D1BC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_flee_2d1918", func_002D1BC8);
 #endif
 #ifdef NON_MATCHING
 namespace FleeViews {
@@ -227,7 +227,7 @@ namespace FleeViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2098);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_flee_2d1918", func_002D2098);
 #endif
 #ifdef NON_MATCHING
 namespace FleeViews {
@@ -258,7 +258,7 @@ namespace FleeViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D23B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_flee_2d1918", func_002D23B0);
 #endif
 #ifdef NON_MATCHING
 namespace FleeViews {
@@ -301,7 +301,7 @@ namespace FleeViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D27D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_flee_2d1918", func_002D27D8);
 #endif
 #ifdef NON_MATCHING
 namespace FleeViews {
@@ -371,5 +371,5 @@ namespace FleeViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D2A60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_flee_2d1918", func_002D2A60);
 #endif

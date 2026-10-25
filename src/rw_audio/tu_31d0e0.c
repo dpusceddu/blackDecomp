@@ -11,4 +11,4 @@ void *func_0031D0E0(void *arg0, void *arg1, s32 arg2, s32 arg3)
   return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0031D120);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_31d0e0", func_0031D120);

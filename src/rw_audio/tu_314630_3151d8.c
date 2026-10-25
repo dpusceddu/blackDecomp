@@ -22,7 +22,7 @@ s32 func_003151D8(void *arg0) {
     return var_6;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315208);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3151d8", func_00315208);
 
 s32 func_00315278(s32 arg0, s32 arg1, s32 arg2) {
     if (func_00316618(arg0, arg1) != 0) {
@@ -31,8 +31,8 @@ s32 func_00315278(s32 arg0, s32 arg1, s32 arg2) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003152C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315378);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3151d8", func_003152C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3151d8", func_00315378);
 
 #include "ps2/recovered_types.h"
 extern void * func_0031E0E0(s32, void *, s32, void *, s32);
@@ -62,9 +62,9 @@ void func_003153C0(M2C_UNK **arg0, M2C_UNK *arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x3C) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315438);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315440);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00315548);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3151d8", func_00315438);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3151d8", func_00315440);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_314630_3151d8", func_00315548);
 
 void * func_00315DE8(void *arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, void *arg5) {
     u8 sp[16] __attribute__((aligned(16)));

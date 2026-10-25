@@ -20,6 +20,6 @@ Point3* RoutePointAddress(const RouteRequest* request, int index)
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179D58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179E50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179EC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_route_service_179ce0", func_00179D58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_route_service_179ce0", func_00179E50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/ai_route_service_179ce0", func_00179EC8);

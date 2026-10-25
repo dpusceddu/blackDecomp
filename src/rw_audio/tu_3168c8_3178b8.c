@@ -63,6 +63,6 @@ s32 func_003178F0(void *input, void *operation, void *length, void *event, s32 c
     return func_0031B030(input, length, event, context, sp10);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003178F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_3178b8", func_003178F0);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00318078);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_3168c8_3178b8", func_00318078);

@@ -7,7 +7,7 @@ void func_00218398(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002183A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_218398", func_002183A0);
 
 void * func_002183A8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0) = 0;
@@ -55,12 +55,12 @@ void * func_002183A8(void *arg0) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00218458);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00218758);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00218768);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_218398", func_00218458);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_218398", func_00218758);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_218398", func_00218768);
 
 void func_00218870(void) {
     func_00241C40();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00218890);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_218398", func_00218890);

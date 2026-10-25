@@ -133,7 +133,7 @@ void AnimationCollection_CreateIndices(AnimationCollectionIndices *collection, A
     collection->transitions=(AnimationTransitionList *)new(allocator)AnimationTransitionContainer(allocator, &AnimationAllocationTag());
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342A80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00342A80);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -164,7 +164,7 @@ void AnimationCollection_DestroyIndices(AnimationCollectionIndices *collection, 
     collection->transitions = 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342D48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00342D48);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -177,7 +177,7 @@ void AnimationCollection_AddNamedGraph(AnimationCollectionIndices *collection, c
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342ED8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00342ED8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -187,7 +187,7 @@ void AnimationCollection_AddClipValue(AnimationCollectionIndices *collection, in
     if (!(found != index->End())) AnimationIndex_InsertClip(index, &hash, &clip);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00342FA8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00342FA8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -211,7 +211,7 @@ void AnimationCollection_AddTransitionRow(AnimationCollectionIndices *collection
     ++list->count;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343030);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00343030);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -250,7 +250,7 @@ void AnimationCollection_RemoveTransitionRow(AnimationCollectionIndices *collect
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343148);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00343148);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -259,7 +259,7 @@ void *AnimationCollection_FindName(AnimationCollectionIndices *collection, int h
     return found != collection->graphNames->End() ? found.node->value : 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00343278);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -268,7 +268,7 @@ void *AnimationCollection_FindGraphValue(AnimationCollectionIndices *collection,
     return found != collection->graphs->End() ? found.node->value : 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003432E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_003432E8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -277,7 +277,7 @@ void *AnimationCollection_FindClipValue(AnimationCollectionIndices *collection, 
     return found != collection->clips->End() ? found.node->value : 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343358);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00343358);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -292,7 +292,7 @@ void *AnimationCollection_TransitionAt(AnimationCollectionIndices *collection, i
     return current.node->value;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003433C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_003433C8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -300,7 +300,7 @@ int AnimationCollection_HasGraph(AnimationCollectionIndices *collection, int has
     return collection->graphs->Find(&hash) != collection->graphs->End();
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343470);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00343470);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -313,7 +313,7 @@ void AnimationCollection_VisitNames(AnimationCollectionIndices *collection, int 
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343518);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00343518);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -326,7 +326,7 @@ void AnimationCollection_VisitGraphs(AnimationCollectionIndices *collection, int
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343658);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00343658);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: placement construction, tag-chain inlining and exception cleanup shape.
@@ -339,5 +339,5 @@ void AnimationCollection_VisitClips(AnimationCollectionIndices *collection, int 
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00343798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_342a60", func_00343798);
 #endif

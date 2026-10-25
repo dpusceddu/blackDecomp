@@ -38,8 +38,8 @@ leads, never proof of PS2 layouts.
 | Scoped scalar exception | three audio getters use Sony `ee-gcc2.96` with `-mno-handle-ee-div-pipeline-bug`; measured divide controls scope this choice without identifying the original whole-TU compiler |
 | Per-TU flag variants | `-O1`, `-G8` where gp-relative small data is used, `-fno-schedule-insns`, `-fbyte-bool`, `-fno-rtti`, `-x c++`, `-ffunction-sections` (merged TUs), `-mvu0-use-vf0-vf31` / `-vf16` (VU0 inline helpers) |
 | Assemblers | untouched compiler assembler (`-snas`) by default; `--assembler=sn-min6` (hash-guarded derivative of Ps2EeAs 1.9.25.758 that pads short loops to six words, reproduced by `tools/build/patch_ps2eeas.py`) on verified units only; `gas-2.40`, `gas-2.40-fix`, `sony-2.9`, `sn-2.73a` are explicit experiments. The splits that select `assembler: sn-min6` in `config/SLUS_213.76/splits.yaml` use it because it reproduces their bytes, not because a recovered rule says the original used it: treat that choice as weak evidence (open problem 4) |
-| Assembly files | EE GNU assembler 2.10 (from the `ee-gcc2.96` archive); short backward branches stay `.word`; gp-relative symbols need `.extern sym, 1` |
-| Linker | mainline GNU `ld` 2.40 (`binutils-mipsel-linux-gnu`), generated script with `SORT_BY_NAME` input sections; `tools/build/pack_elf.py` writes the retail container (`e_flags 0x20924001`) |
+| Assembly files | Per-file assembler from `splits.yaml`, through real INCLUDE_ASM; fixed words and symbolic relocation records handle assembler quirks |
+| Linker | mainline GNU `ld` 2.40 (`binutils-mipsel-linux-gnu`), explicitly ordered ordinary input sections; `tools/build/pack_elf.py` writes the retail container (`e_flags 0x20924001`) |
 | Everything else | splat/spimdisasm/rabbitizer split, Ninja, m2c (`-t mipsee-gcc-c`), decomp-permuter; names, prototypes and types are committed, hand-maintained files (`config/SLUS_213.76/symbols.txt`, `include/ps2/`) |
 | Running the tools | the compilers are decomp.me archives pinned by SHA-256 (`config/toolchain-*.json`); the Windows programs run under wibo, the Sony tools are 32-bit Linux programs (`tools/toolchain.py`, [build.md](build.md)) |
 

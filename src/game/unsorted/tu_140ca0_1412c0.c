@@ -33,7 +33,7 @@ void func_001412E8(void *arg0, s32 arg1)
   M2C_FIELD(arg0, s32 *, 0x4DC) = (s32) (temp_3 + 1);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141308);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_140ca0_1412c0", func_00141308);
 
 #include "ps2/recovered_types.h"
 extern s32 func_00173640(f32 *, f32);
@@ -46,7 +46,7 @@ void func_00141440(s32 arg0) {
     func_001735E0(arg0 + 0x4E0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141460);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_140ca0_1412c0", func_00141460);
 
 u8 func_00141490(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x4E5);
@@ -56,4 +56,4 @@ u8 func_00141498(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x4E4);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001414A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_140ca0_1412c0", func_001414A0);

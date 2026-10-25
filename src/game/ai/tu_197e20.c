@@ -6,7 +6,7 @@ extern s32 func_00193988();
 extern s32 func_001825B0();
 extern s32 func_00188148();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00197E20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_197e20", func_00197E20);
 
 void func_00197F68(void **arg0) {
     func_00193988();
@@ -22,5 +22,5 @@ void func_00197FD0(RecoveredAIActionHeader *arg0) {
     func_00193990(arg0, 1U);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00197FF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00198018);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_197e20", func_00197FF0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_197e20", func_00198018);

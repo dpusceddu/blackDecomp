@@ -30,7 +30,7 @@ void FrontendProfileSnapshot::Apply() {
 }
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00122B10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_120068_122b10", func_00122B10);
 
 #ifdef NON_MATCHING
 // Unmatched: aggregate-copy register allocation, absolute-offset symbols and scheduling.

@@ -10,5 +10,5 @@ int IsMovementReady(void* object) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001A27A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a24b8_1a27a8", func_001A27A8);
 #endif

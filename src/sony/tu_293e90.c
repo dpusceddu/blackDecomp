@@ -1,20 +1,20 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00293E90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00293F60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294198);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294260);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294418);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002946D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294840);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294A08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90", func_00293E90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90", func_00293F60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90", func_00294198);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90", func_00294260);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90", func_00294418);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90", func_002946D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90", func_00294840);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90", func_00294A08);
 
 s32 func_00294AB8(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00294AC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_293e90", func_00294AC0);
 
 s32 func_00294B98(void *arg0) {
     return *M2C_FIELD(arg0, s32 **, 0x40);

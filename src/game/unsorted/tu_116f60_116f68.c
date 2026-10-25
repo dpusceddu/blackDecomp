@@ -14,4 +14,4 @@ void func_00116FA8(void) {
     func_00116FC8();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00116FC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_116f60_116f68", func_00116FC8);

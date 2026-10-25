@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Report how much of .text is provided by source (tools/build/units.py: functions the TU files do not mark INCLUDE_ASM), overall and by library.
+"""Report how much of .text is provided by compiled source, overall and by library.
 
 Libraries come from the hand-edited address ranges of config/SLUS_213.76/libraries.txt (tools/build/layout.py); the link-once
-block is shown as `linkonce` in the image table and counted with the owner library in the code table.
-A function counts as source when its split compiles it (no INCLUDE_ASM marker), which the build's OK keeps identical to the target.
+copies are counted with their owner library in both the image and code tables.
+A function counts as source when the object contains its recovered implementation, which the build's OK keeps identical to the target.
 Headline ("code"): objdiff's definition, matched function bytes / total function bytes, with the function extents objdiff
 uses (tools/objdiff.py code_size: up to the function's endlabel, no alignment padding, orphan pieces left out). It equals
 `ninja report`'s matched_code / total_code. Secondary ("image"): bytes of the finished image, spans up to the next
@@ -31,9 +31,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def regions(addrs):
-    """(library per address, True): the library directory by libraries.txt, `linkonce` for the link-once block."""
+    """(library per address, True): the canonical library directory, including inline-copy ownership."""
     import layout
-    return [layout.library_of_tu(a) for a in addrs], True
+    return [layout.library_of(a) for a in addrs], True
 
 
 def orphan_pieces(slug, fs):
@@ -168,7 +168,7 @@ def tu_report(slug, fs, spans, source, top):
     for r in rows:
         lib = r['lib'] or '?'
         if lib == 'linkonce':          # a link-once copy is counted with the library that owns it (build/SLUS_213.76/inline_owners.txt)
-            lib = 'inline>' + layout.library_of(r['lo'])
+            lib = layout.library_of(r['lo'])
         for key in ('ALL', 'conf: ' + r['conf'], 'kind: ' + r['kind'], 'lib: ' + lib):
             k = kinds.setdefault(key, dict(tus=0, complete=0, partial=0, untouched=0, complete_bytes=0, source_bytes=0, bytes=0))
             k['tus'] += 1

@@ -37,5 +37,5 @@ namespace HideViews {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D5248);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/predicates_2d5238", func_002D5248);
 #endif

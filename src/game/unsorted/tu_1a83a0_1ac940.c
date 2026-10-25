@@ -36,7 +36,7 @@ void func_001AC960(char *actor,int index,BkAnimationAssetPS2 *asset,int id,int f
  while(!func_001A51C8(actor+0x470+index*0x240,id,layer)) {}
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AC960);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a83a0_1ac940", func_001AC960);
 #endif
 
 #ifdef NON_MATCHING
@@ -86,12 +86,12 @@ void func_001ACAC8(char *actor,BkAnimationAssetPS2 *asset,int own) {
  }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ACAC8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a83a0_1ac940", func_001ACAC8);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ACEB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ACF88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ACFC0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a83a0_1ac940", func_001ACEB0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a83a0_1ac940", func_001ACF88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a83a0_1ac940", func_001ACFC0);
 
 void func_001AD030(s32 arg0) {
     func_001AE078(arg0 + 0x8F0);

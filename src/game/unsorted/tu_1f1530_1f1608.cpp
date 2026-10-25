@@ -16,5 +16,5 @@ void UpdateLinkedItems(void* object,float delta) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001F1608);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1608", func_001F1608);
 #endif

@@ -1,3 +1,5 @@
+// Keep compiler-context definitions separate from included retail code.
+#define BLACK_POSE_BUILD_CONTEXT
 #include "include_asm.h"
 
 extern unsigned char poseCacheStorage[] __asm__("D_0045F0C0") __attribute__((aligned(16)));
@@ -185,7 +187,7 @@ extern s32 func_0034FFA0(void *, f32, f32, s32, f32) __asm__("func_0034FFA0");
 extern f32 * func_00344020(f32 *, f32 *) __asm__("func_00344020");
 
 }
-namespace DiscreteViews { f32 * func_00347280(s32 *arg0, Recovered_AnimationGraphNode *arg1, Recovered_AnimationParameters *arg2, u32 arg3, f32 fparg0, f32 fparg1, f32 fparg2, f32 fparg3) __asm__("func_00347280"); }
+namespace DiscreteViews { f32 * func_00347280(s32 *arg0, Recovered_AnimationGraphNode *arg1, Recovered_AnimationParameters *arg2, u32 arg3, f32 fparg0, f32 fparg1, f32 fparg2, f32 fparg3) __asm__("context_func_00347280"); }
 namespace PoseViews {
 __attribute__((section(".text.func_003461D0"))) void Cache::Enable(s8 enabled) { BkPoseCacheEnablePS2(enabled); }
 }
@@ -220,7 +222,7 @@ static inline Pose* BlendBoneAdvance(Pose* out,const Pose* first,const Pose* sec
 }
 
 // Unmatched: two reversed input-setup instructions and five cursor-step instructions; original unwind exact.
-__attribute__((section(".text.func_00346230"))) Pose* Operations::Blend(Pose* first,Pose* second,unsigned flags,float weight) {
+__attribute__((section(".context.func_00346230"))) Pose* Operations::Blend(Pose* first,Pose* second,unsigned flags,float weight) {
     if(!first || !second)return 0;
     int used=D_0046A500;
     if(used>=D_003D20D4){if(weight<0.5f)return first;return second;}
@@ -321,7 +323,7 @@ extern "C" f32 * func_00346510(void *owner, f32 *first, f32 *second, s32 flags) 
 
 namespace PoseViews {
 // Unmatched: first/second bone-address setup ordering (2 instructions).
-__attribute__((section(".text.func_00346668"))) Pose* Operations::Compose(Pose* first,Pose* second,unsigned flags) {
+__attribute__((section(".context.func_00346668"))) Pose* Operations::Compose(Pose* first,Pose* second,unsigned flags) {
     if(!first || !second)return 0;
     int used=ComposeUsedCount();
     if(used>=D_003D20D4)return first;
@@ -523,7 +525,7 @@ __attribute__((section(".text.func_00347238"))) float* GraphOperations::Scaled(v
 
 namespace DiscreteViews {
 // Unmatched: conversion scratch and boundary scheduling (19 instructions); closest 7-difference draft is 4 bytes longer.
-__attribute__((section(".text.func_00347280"))) f32 * func_00347280(s32 *arg0, Recovered_AnimationGraphNode *arg1, Recovered_AnimationParameters *arg2, u32 arg3, f32 fparg0, f32 fparg1, f32 fparg2, f32 fparg3) {
+__attribute__((section(".context.func_00347280"))) f32 * func_00347280(s32 *arg0, Recovered_AnimationGraphNode *arg1, Recovered_AnimationParameters *arg2, u32 arg3, f32 fparg0, f32 fparg1, f32 fparg2, f32 fparg3) {
     u8 sp[32] __attribute__((aligned(16)));
     f32 *temp_2;
     f32 *temp_2_2;
@@ -679,6 +681,6 @@ namespace PoseViews {
 __attribute__((section(".text.func_003477D0"))) void Cache::Initialize() { Construct(1, 0xffff); }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00346230);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00346668);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00347280);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3461d0", func_00346230);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3461d0", func_00346668);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3461d0", func_00347280);

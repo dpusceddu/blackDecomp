@@ -6,14 +6,14 @@ body:
   - type: markdown
     attributes:
       value: |
-        One file at a time, one person at a time (see "Claiming a TU" in CONTRIBUTING.md). Find candidates with
-        `python3 tools/next.py tus`, and check that the file is free by searching the open issues labelled "claim".
+        One file at a time, one person at a time (see "Claiming a TU" in CONTRIBUTING.md). Find candidates in
+        the objdiff unit list (sizes and match percentages), and check that the file is free by searching the open issues labelled "claim".
         `python3 tools/where.py func_XXXXXXXX` tells you which file a function lives in.
   - type: input
     id: file
     attributes:
       label: Source file
-      description: For example `src/kynapse/tu_2d65e8_2d6fa8.c`; or the address of the TU from `tools/next.py tus`
+      description: For example `src/kynapse/tu_2d65e8_2d6fa8.c`; or the unit name shown in objdiff
     validations:
       required: true
   - type: textarea

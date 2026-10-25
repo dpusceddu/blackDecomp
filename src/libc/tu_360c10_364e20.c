@@ -8,4 +8,4 @@ M2C_UNK * func_00364E20(void) {
     return &D_0040B4A0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00364E30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/libc/tu_360c10_364e20", func_00364E30);

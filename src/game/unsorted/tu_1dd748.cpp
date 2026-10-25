@@ -11,5 +11,5 @@ float PlaybackInterval(void* object) {
 }
 } }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001DD748);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd748", func_001DD748);
 #endif

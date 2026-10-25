@@ -81,4 +81,4 @@ void FrontendSaveDialog::Initialize() {
 }
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0035C6EC);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35b470_35c6ec", func_0035C6EC);

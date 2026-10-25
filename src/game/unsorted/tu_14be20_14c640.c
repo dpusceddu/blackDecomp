@@ -26,5 +26,5 @@ s32 func_0014C640(void *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014C6B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014C7C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14be20_14c640", func_0014C6B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14be20_14c640", func_0014C7C8);

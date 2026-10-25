@@ -14,5 +14,5 @@ void Action::RequestSuccessor(unsigned int kind, int argument)
 
 }  // namespace Game
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00193A58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00193A60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/ai_action_stack_193a28", func_00193A58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/ai_action_stack_193a28", func_00193A60);

@@ -4,9 +4,9 @@
 extern s32 D_003BFAD4;
 extern s32 D_003BFAD8;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00251938);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00251980);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002519D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938", func_00251938);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938", func_00251980);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938", func_002519D0);
 
 s32 func_00251A60(void) {
     s32 temp_2;
@@ -19,6 +19,6 @@ s32 func_00251A60(void) {
     return temp_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00251A88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00251B38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00251D98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938", func_00251A88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938", func_00251B38);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_251938", func_00251D98);

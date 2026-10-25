@@ -22,7 +22,7 @@ int PathObject::UpdateUse(PathAgent* agent,RouteNode* node,int unused,unsigned c
  return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00289AE0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/tu_289ae0", func_00289AE0);
 #endif
 
 #ifdef NON_MATCHING
@@ -69,5 +69,5 @@ int PathObject::FindLinked(RouteNode *input)
     return -1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00289C10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/navigation/tu_289ae0", func_00289C10);
 #endif

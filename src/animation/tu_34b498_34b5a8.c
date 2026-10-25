@@ -42,7 +42,7 @@ float *Graph_SampleClip(void *owner, AnimationGraphNode *node, AnimationParamete
     return SamplingContext_Whole(&context, current, previous, span, count, spacing, flags);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034B5B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034B5B0);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: transition branch scheduling and live float allocation.
@@ -79,7 +79,7 @@ float *Graph_TimedTransition(void *owner, AnimationGraphNode *node, AnimationPar
     return Pose_Blend(owner, a, b, flags, blend);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034B6E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034B6E0);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: child cursor allocation and sequence branch layout.
@@ -109,7 +109,7 @@ float *Graph_Sequence(void *owner, AnimationGraphNode *node, AnimationParameters
         previous - cumulative, flags, rate, weight);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034B910);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034B910);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: weighted choice loop allocation.
@@ -176,12 +176,12 @@ int Graph_ChooseWeighted(void *owner, AnimationGraphNode *node, AnimationParamet
     return result;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034BA50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034BA50);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034BC30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034BFE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034C0C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034C128);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034BC30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034BFE8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034C0C8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034C128);
 #ifdef NON_MATCHING
 // Unmatched: func_0034B4E8 (192 bytes), flags: coordinate-boundary branch layout.
 // Unmatched: func_0034B5B0 (304 bytes), types: clip-sampling stack object.
@@ -201,5 +201,5 @@ float *AnimationGraph_PoseBoundControl(void *owner, AnimationGraphNode *node, An
         *AnimationParameters_Get(bank, ((int *)control)[3]), coefficient, weight);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0034C7D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034C7D8);
 #endif

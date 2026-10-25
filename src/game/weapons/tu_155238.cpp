@@ -6,8 +6,8 @@
 // Unmatched: 001556D8: explosion helper and source matrix-reference context.
 // Unmatched: 00155830: inline vector, field ordering and activation context.
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00155238);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001553E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001556D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00155830);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_155238", func_00155238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_155238", func_001553E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_155238", func_001556D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_155238", func_00155830);
 #endif

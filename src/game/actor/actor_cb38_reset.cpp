@@ -23,4 +23,4 @@ void RenderableState::Reset()
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0014EE48);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_cb38_reset", func_0014EE48);

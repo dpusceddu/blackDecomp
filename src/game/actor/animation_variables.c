@@ -24,4 +24,4 @@ void func_001ABA98(void) {
  func_00348A10(D_0048F708,13);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001ABC28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/animation_variables", func_001ABC28);

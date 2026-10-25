@@ -30,7 +30,7 @@ s32 func_003291E0(void *arg0, s32 arg1, s32 arg2) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00329278);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00329370);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00329588);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003296F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_3291e0", func_00329278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_3291e0", func_00329370);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_3291e0", func_00329588);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_323ed0_3291e0", func_003296F0);

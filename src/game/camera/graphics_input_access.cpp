@@ -38,7 +38,7 @@ int Controller::Rumble(unsigned enabled) {
     field_49=1;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BCF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/graphics_input_access", func_0026BCF8);
 #endif
 
 #ifdef NON_MATCHING
@@ -110,7 +110,7 @@ block_13:
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BD30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/graphics_input_access", func_0026BD30);
 #endif
 
 
@@ -135,7 +135,7 @@ float Controller::Smooth(float value,float step) {
     return value*(1.0f/(limit-threshold));
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BF60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/graphics_input_access", func_0026BF60);
 #endif
 
 
@@ -166,7 +166,7 @@ void PadBackend::Initialize(EeU8 single){
  handles[1]=second;lastMode=-1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C798);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/graphics_input_access", func_0026C798);
 #endif
 
 
@@ -185,6 +185,6 @@ void PadBackend::Poll() {
     else {if(controllers[0])controllers[0]->UpdateMotors();lastMode=0;}
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C8E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/graphics_input_access", func_0026C8E0);
 #endif
 

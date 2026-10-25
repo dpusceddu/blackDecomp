@@ -10,7 +10,7 @@ import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import re, sys
+import json, re, shlex, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -28,6 +28,23 @@ def prepare(name):
     out = ROOT / 'build' / 'permuter' / (name + '.s')
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(text)
+    sys.path[:0] = [str(ROOT/'tools/build'),str(ROOT/'tools/permuter')]
+    from splits import load_splits
+    from cc import recipe
+    addr = int(name[-8:],16)
+    owner = next(s.src for s in load_splits() if s.start <= addr < s.end)
+    split = recipe(owner)
+    flags = [f for f in split.flags if f.startswith(('-D','-U'))]
+    settings = out.with_suffix('.toml')
+    commands = dict(compiler_type='gcc',
+        compiler_command=shlex.join(['python3','tools/permuter/cc.py','--file',owner,'-Iinclude']+flags),
+        assembler_command=shlex.join(['python3','tools/permuter/as.py','--file',owner]),
+        asm_prelude_file='tools/permuter/prelude.inc',
+        objdump_command='mipsel-linux-gnu-objdump -drz -m mips:5900')
+    # Upstream's macro-preserving preprocessor also retains inline assembly as
+    # literal pragmas. NULL's ordinary pointer type enables that standard path.
+    settings.write_text('\n'.join(k+' = '+json.dumps(v) for k,v in commands.items())+
+                        '\n\n[preserve_macros]\n"NULL" = "void *"\n')
     return out
 
 
@@ -39,7 +56,7 @@ def main(args):
         raise SystemExit('expected func_XXXXXXXX or an address')
     name = 'func_%08X' % int(m.group(1), 16)
     out = prepare(name)
-    print('wrote %s\nnext: python3 .venv/decomp-permuter/import.py src/<library>/<file> %s' % (out.relative_to(ROOT), out.relative_to(ROOT)))
+    print('wrote %s\nUse upstream import.py --no-prune --settings %s DRAFT.c %s (C++ parsing is a known limitation).' % (out.relative_to(ROOT),out.with_suffix('.toml').relative_to(ROOT),out.relative_to(ROOT)))
     return 0
 
 

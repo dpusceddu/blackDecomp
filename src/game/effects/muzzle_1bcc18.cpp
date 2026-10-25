@@ -26,5 +26,5 @@ extern "C" int func_001BCC30(BkEffectVertexPS2 *vertices) {
  vertices[3].u=0;vertices[3].v=1;vertices[4].u=1;vertices[4].v=0;vertices[5].u=1;vertices[5].v=1;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BCC30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/muzzle_1bcc18", func_001BCC30);
 #endif

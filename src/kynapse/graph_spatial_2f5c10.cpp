@@ -33,7 +33,7 @@ unsigned int RouteBuffers::FindPoint(const Vec3 *point)const{for(unsigned int i=
 }
 
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F5E20);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_spatial_2f5c10", func_002F5E20);
 #ifdef NON_MATCHING
 #define CONVERT(field) { for(unsigned int word=0;word<sizeof(field)/4;++word){unsigned int *p=(unsigned int*)&(field);p[word]=p[word];} }
 #undef CONVERT
@@ -86,7 +86,7 @@ SpatialEdge* CSpatialGraph::FindEdge(unsigned int endId, unsigned int startId)
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F66D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_spatial_2f5c10", func_002F66D0);
 #endif
 #ifdef NON_MATCHING
 #define CONVERT(field) { for(unsigned int word=0;word<sizeof(field)/4;++word){unsigned int *p=(unsigned int*)&(field);p[word]=p[word];} }
@@ -170,7 +170,7 @@ bool CSpatialGraph::LoadOld(FileService* files, const void* resource)
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F6880);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_spatial_2f5c10", func_002F6880);
 #endif
 #ifdef NON_MATCHING
 #define CONVERT(field) { for(unsigned int word=0;word<sizeof(field)/4;++word){unsigned int *p=(unsigned int*)&(field);p[word]=p[word];} }
@@ -300,5 +300,5 @@ if(files->Read(resource,&nodeCount,4)!=4){files->Close(resource);return false;}C
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F6E08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_spatial_2f5c10", func_002F6E08);
 #endif

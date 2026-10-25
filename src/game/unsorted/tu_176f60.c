@@ -5,4 +5,4 @@ void func_00176F60(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00176F68);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176f60", func_00176F68);

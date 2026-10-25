@@ -33,4 +33,4 @@ void Weapon::SetPose(int secondaryPose){
 // Unmatched: 001588F0: virtual hit arguments and aggregate lifetime.
 // Unmatched: 00158AE0: event resource layout and event hash dispatch.
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00156F10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_1561f8", func_00156F10);

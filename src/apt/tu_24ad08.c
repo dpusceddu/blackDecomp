@@ -15,7 +15,7 @@ s32 func_0024AD08(s32 arg0) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024AD60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ad08", func_0024AD60);
 
 s32 func_0024ADF0(s32 arg0, s32 arg1) {
     func_00386EC8(arg0, 1);

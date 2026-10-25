@@ -9,5 +9,5 @@ void func_001C1930(BkEffectLightsPS2 *pool) {
  func_001D0D80();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C19B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C1A60);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/light_render", func_001C19B0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/light_render", func_001C1A60);

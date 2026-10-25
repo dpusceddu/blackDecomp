@@ -44,8 +44,8 @@ int PathWay::Translate(const Vec3& v){for(unsigned int i=0;i<count;++i)records[i
 // Unmatched: TranslateOne (96 B) and SetPosition (72 B) retain branch-layout differences.
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DD778);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DDE28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DE3C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DE8F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002DEE98);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_pathway_2dd548", func_002DD778);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_pathway_2dd548", func_002DDE28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_pathway_2dd548", func_002DE3C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_pathway_2dd548", func_002DE8F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_pathway_2dd548", func_002DEE98);

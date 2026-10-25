@@ -42,7 +42,7 @@ void func_00107D58(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x94) = -1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00107DF8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_107d58", func_00107DF8);
 
 void func_00107E00(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 8) = arg1;

@@ -14,9 +14,9 @@ extern M2C_UNK D_003E12F8;
 extern s32 func_00107D48();
 extern s32 func_00241228(s32);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00232F90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002330D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002330D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00232F90);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002330D0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002330D8);
 
 void func_00233150(void *arg0, s32 arg1)
 {
@@ -32,20 +32,20 @@ void func_00233150(void *arg0, s32 arg1)
   }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002331C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00233278);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00233300);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002333E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002334A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002334E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002334F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00233670);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002337E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00233818);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00233890);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002339F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00233A80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00233B30);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002331C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00233278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00233300);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002333E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002334A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002334E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002334F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00233670);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002337E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00233818);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00233890);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002339F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00233A80);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00233B30);
 
 s32 func_00233C60(s32 arg0, s32 arg1) {
     s32 temp_4;
@@ -72,7 +72,7 @@ void func_00233CF8(s32 arg0) {
     func_00241228(arg0 + 0x24);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00233D18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002340D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00234398);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00234468);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00233D18);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_002340D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00234398);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_232f90", func_00234468);

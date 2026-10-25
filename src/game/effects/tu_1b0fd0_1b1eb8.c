@@ -64,4 +64,4 @@ s32 func_001B1F48(s32 arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B2078);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1b0fd0_1b1eb8", func_001B2078);

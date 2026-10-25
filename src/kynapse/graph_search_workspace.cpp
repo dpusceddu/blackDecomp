@@ -117,8 +117,8 @@ static __forceinline void PublishStatistics(unsigned int* samples, float* mean, 
 
 }  // namespace Kaim
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ED3A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002ED530);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_search_workspace", func_002ED3A8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_search_workspace", func_002ED530);
 #ifdef NON_MATCHING
 namespace KaimSearch {
 // Unmatched: cursor temporaries and node traversal register allocation.
@@ -161,7 +161,7 @@ bool SearchGraph::FindRoute(SearchRoute* route, GraphNode* start, GraphNode* goa
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EE078);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_search_workspace", func_002EE078);
 #endif
 #ifdef NON_MATCHING
 namespace KaimSearch {
@@ -173,7 +173,7 @@ void SearchGraph::Expand(GraphNode *node,GraphNode *goal,GraphNode *start,void *
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EE688);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_search_workspace", func_002EE688);
 #endif
 #ifdef NON_MATCHING
 namespace KaimSearch {
@@ -242,5 +242,5 @@ finished:
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EEA28);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_search_workspace", func_002EEA28);
 #endif

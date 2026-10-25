@@ -28,9 +28,9 @@ void * func_0029C210(u32 arg0) {
     return NULL;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C238);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C318);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C4F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138_29c1d8", func_0029C238);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138_29c1d8", func_0029C318);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138_29c1d8", func_0029C4F0);
 
 void func_0029C4F8(s32 *arg0, s32 arg1)
 {
@@ -46,8 +46,8 @@ void func_0029C4F8(s32 *arg0, s32 arg1)
   M2C_FIELD(arg0, s32 *, 0) = ((M2C_FIELD(arg0, s32 *, 0)) & (~0xC)) | 0x105;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C560);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C5D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138_29c1d8", func_0029C560);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138_29c1d8", func_0029C5D8);
 
 s32 func_0029C5E8(u32 *arg0, s32 arg1) {
     if (arg1 == 1) {
@@ -57,6 +57,6 @@ s32 func_0029C5E8(u32 *arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C620);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C628);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0029C6C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138_29c1d8", func_0029C620);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138_29c1d8", func_0029C628);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c138_29c1d8", func_0029C6C0);

@@ -22,7 +22,7 @@ void func_001700F0(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001700F8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16eb80_170090", func_001700F8);
 
 M2C_UNK ** func_00170178(M2C_UNK **arg0) {
     func_00171A08();

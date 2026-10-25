@@ -10,4 +10,4 @@ void func_00136818(void *arg0, f32 fparg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00136848);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_135c78_136818", func_00136848);

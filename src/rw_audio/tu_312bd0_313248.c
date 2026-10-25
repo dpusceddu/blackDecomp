@@ -80,7 +80,7 @@ RwaStream *func_00313278(RwaStream *stream) {
     }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00313278);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_312bd0_313248", func_00313278);
 #endif
 #ifdef NON_MATCHING
 extern void func_00324A88(s32,void *,u32,u32,s32,s32,void *);
@@ -121,7 +121,7 @@ RwaStream *func_003134E0(RwaStream *stream) {
     return stream;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003134E0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_audio/tu_312bd0_313248", func_003134E0);
 #endif
 
 s32 func_00313948(s32 arg0) {

@@ -12,7 +12,7 @@ ObjectBase* CreateBoundBuffers(BufferOwner* bound)
     return new BoundBuffers(bound);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EEF88);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EEF88);
 #endif
 
 #ifdef NON_MATCHING
@@ -48,7 +48,7 @@ int Kaim::CFindNearestData::Init(ChildBuffers* config)
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF030);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF030);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
@@ -74,7 +74,7 @@ int Kaim::CFindNearestData::Load(const void *path) {
  fail: files->Close(path);return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF1A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF1A0);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
@@ -99,11 +99,11 @@ int Kaim::CFindNearestData::LoadFile(const void *path){
  fail: GraphHooks.close(file);return 0;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF3D8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF3D8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF6F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF7A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF850);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF6F0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF7A0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF850);
 
 Kaim::CFindNearestData::~CFindNearestData(){if(order)D_003C87E0(order);if(rank)D_003C87E0(rank);if(aux)D_003C87E0(aux);}
 extern Kaim::SearchGraph *D_003CA804;
@@ -214,7 +214,7 @@ int Kaim::CFindNearestData::Save(const void* path)
     return false;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EFC50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EFC50);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
@@ -237,7 +237,7 @@ int Kaim::CFindNearestData::CollectColumn(const Vec3 *point,int **output,float r
  return total;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EFF00);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EFF00);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
@@ -260,7 +260,7 @@ int Kaim::CFindNearestData::CollectBox(const Vec3 *point,int **output,float radi
  return total;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F0110);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002F0110);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
@@ -291,7 +291,7 @@ int Kaim::CFindNearestData::EqualBoundary(int position,int axis,unsigned char lo
  return SortedCoordinate(this,axis,left)==value ? left:right;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F02E8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002F02E8);
 #endif
 #ifdef NON_MATCHING
 // Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
@@ -316,5 +316,5 @@ int Kaim::CFindNearestData::FindBound(int axis,unsigned char lower,float value) 
  return EqualBoundary(left,axis,lower,a);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F06C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002F06C0);
 #endif

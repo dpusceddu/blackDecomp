@@ -7,5 +7,5 @@
 
 bool IsSet0C::IsSet() const { if (value != 0) return true; return false; }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D3B08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002D3BD8);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/predicates_2d3a68", func_002D3B08);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/predicates_2d3a68", func_002D3BD8);

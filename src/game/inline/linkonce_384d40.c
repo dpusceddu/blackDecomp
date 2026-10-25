@@ -9,4 +9,4 @@ void func_00384D48(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00384D50);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/inline/linkonce_384d40", func_00384D50);

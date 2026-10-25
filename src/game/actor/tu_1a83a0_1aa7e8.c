@@ -59,7 +59,7 @@ void func_001AAEB0(s32 arg0, s32 arg1, s32 arg2) {
     func_001AB1C0(arg0, arg1, arg2 + 0x3B9, func_00137AE0(arg2), "S_650", arg2);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AAF10);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0_1aa7e8", func_001AAF10);
 
 #ifdef NON_MATCHING
 // Unmatched: 0x1ab1c0: fallback branch layout and register lifetimes.
@@ -87,7 +87,7 @@ char *func_001AB1C0(void *actor, char *name, const char *prefix, const char *var
     return func_0035C7A4(name, suffix);
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001AB1C0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1a83a0_1aa7e8", func_001AB1C0);
 #endif
 
 s32 func_001AB338(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, void *arg5) {

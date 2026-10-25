@@ -56,5 +56,5 @@ bool CPathFinder::RefreshSearch(bool invalidateStart, bool* changed, RouteReques
 }
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00301418);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/tu_2fec10_301418", func_00301418);
 #endif

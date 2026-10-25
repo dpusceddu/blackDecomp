@@ -71,5 +71,5 @@ s32 func_002A5140(RwStreamPS2 *stream,u32 type,u32 *length,u32 *version) {
  if(length)*length=header.length;if(version)*version=header.version;return 1;
 }
 #else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002A5140);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/rw_core/tu_2a50f8", func_002A5140);
 #endif
