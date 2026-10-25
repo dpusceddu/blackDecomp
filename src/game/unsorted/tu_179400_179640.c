@@ -12,8 +12,6 @@ void * func_00179650(void *arg0, s32 arg1) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), s32 *, 0x2C) + (arg1 * 0x50);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179668);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179680);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179698);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001796B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001796C8);

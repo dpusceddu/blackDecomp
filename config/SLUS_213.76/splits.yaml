@@ -236,7 +236,9 @@ splits:
   - {src: src/game/world/tu_127118.cpp, range: [0x12a310, 0x12a480]}
   - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a480, 0x12aaf8], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
   - {src: src/game/world/tu_127118.cpp, range: [0x12aaf8, 0x12ab28]}
-  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ab28, 0x12b2a8]}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ab28, 0x12ae00]}
+  - {src: src/game/unsorted/tu_127118_12ae00.cpp, range: [0x12ae00, 0x12ae58], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ae58, 0x12b2a8]}
   - {src: src/game/world/tu_127118.cpp, range: [0x12b2a8, 0x12b328]}
   - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12b328, 0x12bd98]}
   - {src: src/game/world/tu_127118.cpp, range: [0x12bd98, 0x12bdc8]}
@@ -723,13 +725,18 @@ splits:
   - {src: src/game/unsorted/tu_177d90.c, range: [0x177d90, 0x1783e0]}
   - {src: src/game/unsorted/tu_1783e0.c, range: [0x1783e0, 0x178408]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x178408, 0x178f18]}
-  - {src: src/game/unsorted/tu_178f18.c, range: [0x178f18, 0x1793c0]}
+  - {src: src/game/unsorted/tu_178f18.c, range: [0x178f18, 0x178f28]}
+  - {src: src/game/unsorted/tu_178f18_178f28.cpp, range: [0x178f28, 0x178f50], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/unsorted/tu_178f18.c, range: [0x178f50, 0x1793c0]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x1793c0, 0x1793e8]}
   - {src: src/game/unsorted/tu_1793e8.c, range: [0x1793e8, 0x1793f8]}
   - {src: src/game/unsorted/tu_1793f8.c, range: [0x1793f8, 0x179400]}
   - {src: src/game/unsorted/tu_179400.c, range: [0x179400, 0x1794a0], note: flags or language differ}
   - {src: src/game/unsorted/tu_179400_1794a0.c, range: [0x1794a0, 0x179640], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179640, 0x179b40]}
+  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179640, 0x179668]}
+  - {src: src/game/unsorted/tu_179400_179668.cpp, range: [0x179668, 0x179680], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/unsorted/tu_179400_179680.cpp, range: [0x179680, 0x179698], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179698, 0x179b40]}
   - {src: src/game/unsorted/tu_179b40.c, range: [0x179b40, 0x179b60]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x179b60, 0x179c60]}
   - {src: src/game/ai/navigation/ai_movement_modes_179c60.cpp, range: [0x179c60, 0x179c88], flags: [-O2, -G0, -snas, -fbyte-bool]}
@@ -757,7 +764,9 @@ splits:
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x17bdf0, 0x17c908], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
   - {src: src/game/ai/tu_17c908.c, range: [0x17c908, 0x17e5a8], note: flags or language differ}
   - {src: src/game/ai/tu_17c908_17e5a8.c, range: [0x17e5a8, 0x17e710], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/ai/tu_17c908_17e710.c, range: [0x17e710, 0x180090]}
+  - {src: src/game/ai/tu_17c908_17e710.c, range: [0x17e710, 0x17ea70]}
+  - {src: src/game/unsorted/tu_17c908_17ea70.cpp, range: [0x17ea70, 0x17ead0], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/ai/tu_17c908_17e710.c, range: [0x17ead0, 0x180090]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x180090, 0x1804d0]}
   - {src: src/game/ai/tu_1804d0.c, range: [0x1804d0, 0x1804f8]}
   - {src: src/game/ai/tu_1804f8.c, range: [0x1804f8, 0x1808d0], sections: false}
@@ -1073,7 +1082,8 @@ splits:
   - {src: src/game/unsorted/tu_1a24b0.c, range: [0x1a24b0, 0x1a24b8]}
   - {src: src/game/unsorted/tu_1a24b8.c, range: [0x1a24b8, 0x1a2610], note: flags or language differ}
   - {src: src/game/unsorted/tu_1a24b8_1a2610.c, range: [0x1a2610, 0x1a2620], flags: [-O1, -G0, -snas]}
-  - {src: src/game/unsorted/tu_1a24b8_1a2620.c, range: [0x1a2620, 0x1a2800], sections: false}
+  - {src: src/game/unsorted/tu_1a24b8_1a2620.c, range: [0x1a2620, 0x1a27a8], sections: false}
+  - {src: src/game/unsorted/tu_1a24b8_1a27a8.cpp, range: [0x1a27a8, 0x1a2800], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_1a24b8_1a2800.c, range: [0x1a2800, 0x1a2c68], sections: false}
   - {src: src/game/unsorted/tu_1a24b8_1a2c68.c, range: [0x1a2c68, 0x1a3110], sections: false}
   - {src: src/game/unsorted/tu_1a24b8_1a3110.c, range: [0x1a3110, 0x1a3470], sections: false}
@@ -1284,7 +1294,8 @@ splits:
   - {src: src/game/effects/light_reset.c, range: [0x1c1578, 0x1c1930], flags: [-O2, -G0, -fno-schedule-insns]}
   - {src: src/game/effects/light_render.c, range: [0x1c1930, 0x1c1a68]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c1a68, 0x1c1a98]}
-  - {src: src/game/unsorted/tu_1c1a98.c, range: [0x1c1a98, 0x1c1b88], flags: [-O1, -G0, -snas], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1c1a98.cpp, range: [0x1c1a98, 0x1c1b78], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/unsorted/tu_1c1a98.c, range: [0x1c1b78, 0x1c1b88], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c1a98_1c1b88.c, range: [0x1c1b88, 0x1c1c10], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c1a98_1c1c10.c, range: [0x1c1c10, 0x1c1c40], flags: [-O1, -G0, -snas]}
   - {src: src/game/unsorted/tu_1c1c40.c, range: [0x1c1c40, 0x1c1c48]}
@@ -1298,7 +1309,10 @@ splits:
   - {src: src/game/unsorted/tu_1c22a0_1c2990.c, range: [0x1c2990, 0x1c29a0], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c22a0_1c29a0.c, range: [0x1c29a0, 0x1c2a18], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c22a0_1c2a18.c, range: [0x1c2a18, 0x1c2a48], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/unsorted/tu_1c22a0_1c2a48.c, range: [0x1c2a48, 0x1c3278], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1c22a0_1c2a48.c, range: [0x1c2a48, 0x1c2a68], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1c22a0_1c2a68.cpp, range: [0x1c2a68, 0x1c2a98], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/unsorted/tu_1c22a0_1c2a98.cpp, range: [0x1c2a98, 0x1c2ab0], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/unsorted/tu_1c22a0_1c2a48.c, range: [0x1c2ab0, 0x1c3278]}
   - {src: src/game/unsorted/tu_1c22a0_1c3278.c, range: [0x1c3278, 0x1c3e08], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c22a0_1c3e08.c, range: [0x1c3e08, 0x1c5f48]}
   - {src: src/game/unsorted/tu_1c5f48.c, range: [0x1c5f48, 0x1c67c0], note: flags or language differ}
@@ -1389,7 +1403,8 @@ splits:
   - {src: src/game/unsorted/tu_1d97d0.c, range: [0x1d97d0, 0x1daf20]}
   - {src: src/game/unsorted/tu_1daf20.c, range: [0x1daf20, 0x1dd728]}
   - {src: src/game/unsorted/tu_1dd728.c, range: [0x1dd728, 0x1dd748]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1dd748, 0x1dd838]}
+  - {src: src/game/unsorted/tu_1dd748.cpp, range: [0x1dd748, 0x1dd7b8], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1dd7b8, 0x1dd838]}
   - {src: src/game/unsorted/tu_1dd838.c, range: [0x1dd838, 0x1e09a8], note: flags or language differ}
   - {src: src/game/unsorted/tu_1dd838_1e09a8.c, range: [0x1e09a8, 0x1e1068], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/game/unsorted/tu_1dd838.c, range: [0x1e1068, 0x1e1100]}
@@ -1482,7 +1497,9 @@ splits:
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x1efe70, 0x1effc8]}
   - {src: src/game/unsorted/tu_1effc8.c, range: [0x1effc8, 0x1f0320]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x1f0320, 0x1f1530]}
-  - {src: src/game/unsorted/tu_1f1530.c, range: [0x1f1530, 0x1f1a70], sections: false}
+  - {src: src/game/unsorted/tu_1f1530.c, range: [0x1f1530, 0x1f1608], sections: false}
+  - {src: src/game/unsorted/tu_1f1530_1f1608.cpp, range: [0x1f1608, 0x1f1660], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/unsorted/tu_1f1530.c, range: [0x1f1660, 0x1f1a70]}
   - {src: src/game/unsorted/tu_1f1530_1f1a70.c, range: [0x1f1a70, 0x1f1c00], sections: false}
   - {src: src/game/unsorted/tu_1f1530_1f1c00.c, range: [0x1f1c00, 0x1f1db0], sections: false}
   - {src: src/game/unsorted/tu_1f1530_1f1db0.c, range: [0x1f1db0, 0x1f1df8], sections: false}
@@ -1781,7 +1798,8 @@ splits:
   - {src: src/game/unsorted/tu_271650.c, range: [0x271650, 0x271be8], note: flags or language differ}
   - {src: src/game/unsorted/tu_271650_271be8.c, range: [0x271be8, 0x2722b8], flags: [-O2, -G0]}
   - {src: src/game/unsorted/tu_2722b8.c, range: [0x2722b8, 0x2722d0]}
-  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x2722d0, 0x272308]}
+  - {src: src/game/unsorted/tu_2722d0.cpp, range: [0x2722d0, 0x272300], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x272300, 0x272308]}
   - {src: src/game/unsorted/tu_272308.c, range: [0x272308, 0x272328]}
   - {src: src/game/unsorted/tu_272328.c, range: [0x272328, 0x2723b0]}
   - {src: src/game/unsorted/tu_2723b0.cpp, range: [0x2723b0, 0x272488], sections: false}
@@ -1791,7 +1809,8 @@ splits:
   - {src: src/game/unsorted/tu_274e40.c, range: [0x274e40, 0x274f80]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x274f80, 0x274fc8]}
   - {src: src/game/unsorted/tu_274fc8.c, range: [0x274fc8, 0x274fd8]}
-  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x274fd8, 0x275068]}
+  - {src: src/game/unsorted/tu_274fd8.cpp, range: [0x274fd8, 0x275000], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x275000, 0x275068]}
   - {src: src/game/unsorted/tu_275068.c, range: [0x275068, 0x275090]}
   - {src: src/game/unsorted/tu_275090.c, range: [0x275090, 0x2750b8]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x2750b8, 0x275128]}

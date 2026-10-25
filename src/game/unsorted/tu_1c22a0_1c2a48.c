@@ -7,8 +7,6 @@ void func_001C2A48(void *arg0) {
     M2C_FIELD(arg0, s32 *, 8) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C2A68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C2A98);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C2AB0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C2BC0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001C2C50);
