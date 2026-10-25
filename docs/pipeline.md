@@ -104,7 +104,7 @@ speculative signatures do not conflict with unrelated definitions. When several 
 
 No tool rewrites a committed header: `decompile.py`, `autodecomp.py` and the build only write under `build/auto/` (the m2c
 context: `context.json`, `ctx*.c`, `recovered_layouts.c`) from the committed headers, sources and configuration, which is all a
-fresh checkout has. `ninja classes` (`tools/maint/class_skeletons.py`, after `context --refresh`) recovers the legacy GCC RTTI graph
+fresh checkout has. `python3 tools/maint/class_skeletons.py` (after `python3 tools/autodecomp.py context --refresh`) recovers the legacy GCC RTTI graph
 and vtables and writes class skeletons and an address/slot index into the ignored `build/classes/`; the class views the sources
 include (`include/game/classes/`, `include/kynapse/classes/`) are hand-edited headers that began as such skeletons. Verified ABI
 evidence for the generator is in `config/SLUS_213.76/class_method_abi.json`. RTTI names,

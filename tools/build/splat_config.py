@@ -14,6 +14,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
+from graph_io import write_text, write_bytes
 
 MAP = {'.text': 'asm', '.vutext': 'textbin', '.data': 'data', '.vudata': 'databin', '.rodata': 'rodata',
        '.gcc_except_table': 'gcc_except_table', '.lit4': 'lit4', '.lit8': 'lit8', '.sdata': 'sdata',
@@ -45,7 +46,7 @@ def main():
     last_file = max((s for s in secs if s['type'] != 8), key=lambda s: s['offset'])
     rom = data[base:last_file['offset'] + last_file['size']]
     (ROOT / 'build' / a.slug).mkdir(parents=True, exist_ok=True)
-    (ROOT / 'build' / a.slug / 'rom.bin').write_bytes(rom)
+    write_bytes(ROOT / 'build' / a.slug / 'rom.bin',rom)
     gp = Elf(data).content(elf.section('.reginfo'))[20:24]
     gp = int.from_bytes(gp, 'little')
     names = [s['name'] for s in secs]
@@ -89,7 +90,7 @@ def main():
                 out.append('      - [0x%06X, pad, %s_gap] # alignment gap, not linked' % (end - first['addr'], nm))
     out.append('  - [0x%X]' % len(rom))
     cfg = ROOT / 'build' / boot / 'splat.yaml'
-    cfg.write_text('\n'.join(out) + '\n')
+    write_text(cfg,'\n'.join(out)+'\n')
     print('wrote', cfg.relative_to(ROOT), 'and build/%s/rom.bin' % a.slug, '(%d bytes)' % len(rom))
 
 

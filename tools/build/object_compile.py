@@ -152,7 +152,11 @@ def finish_object(spec, output):
     args += ['--rename-section=%s=%s' % p for p in unplaced_allocated_sections(raw, keep).items()]
     if len(args) > 1:
         subprocess.run(args + [str(path)], env=env, check=True)
-    Path(str(path)+'.json').write_text(json.dumps(dict(resolved=resolved, externs=externs)))
+    import re
+    contexts=[s['name'] for s in symbols if s['shndx']==0 and s['name'] not in renames
+              and re.fullmatch(r'context_func_[0-9A-F]{8}',s['name'])]
+    from graph_io import write_text
+    write_text(str(path)+'.json',json.dumps(dict(resolved=resolved, externs=externs, context_undefined=contexts)))
 
 
 def main():
@@ -163,6 +167,8 @@ def main():
     spec = json.loads(Path(a.spec).read_text())
     output = Path(a.output)
     output.parent.mkdir(parents=True, exist_ok=True)
+    before=output.read_bytes() if output.exists() else None
+    timestamps=output.stat() if before is not None else None
     deps = [a.spec, spec['src']]
     if spec['kind'] == 'cc':
         deps += [p.as_posix() for p in dependencies(spec['src'])]
@@ -198,11 +204,16 @@ def main():
                     lines += ['.byte ' + ','.join(str(x) for x in data[i:i+32]) for i in range(0, len(data), 32)]
                 else:
                     lines.append(line)
-            src = str(output) + '.s'
+            scratch = tempfile.TemporaryDirectory(prefix='black-data-as-')
+            src = str(Path(scratch.name)/'input.s')
             Path(src).write_text('\n'.join(lines) + '\n')
         p = subprocess.run([str(base / 'compilers/ee-gcc2.96/ee/bin/as'), '-I', 'include', '-o', str(output), src], env=env)
+        if '.incbin' in text:
+            scratch.cleanup()
         if p.returncode:
             raise SystemExit(p.returncode)
+    if before is not None and output.read_bytes()==before:
+        os.utime(output,ns=(timestamps.st_atime_ns,timestamps.st_mtime_ns))
     (Path(str(output) + '.d')).write_text('%s: %s\n' % (output, ' '.join(dict.fromkeys(deps))))
 
 

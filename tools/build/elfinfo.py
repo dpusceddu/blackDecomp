@@ -10,6 +10,12 @@ SHT = {0: 'NULL', 1: 'PROGBITS', 2: 'SYMTAB', 3: 'STRTAB', 4: 'RELA', 5: 'HASH',
        0x70000006: 'MIPS_REGINFO', 0x70000700: 'EE_IOPMOD', 0x70000080: 'EE_EEMOD', 0x70000014: 'MIPS_DWARF'}
 
 
+def string_at(data, offset):
+    # Slice only this name, not the remainder of a potentially huge strtab.
+    end=data.find(b'\0',offset)
+    return data[offset:end if end>=0 else len(data)].decode('latin1')
+
+
 class Elf:
     def __init__(self, data):
         self.data = data
@@ -26,7 +32,7 @@ class Elf:
         if self.shnum:
             names = self.content(self.sections[self.shstrndx])
             for s in self.sections:
-                s['name'] = names[s['name_off']:].split(b'\0', 1)[0].decode('latin1')
+                s['name'] = string_at(names,s['name_off'])
         self.segments = []
         for i in range(self.phnum):
             t, off, va, pa, fs, ms, fl, al = struct.unpack_from('<IIIIIIII', data, self.phoff + i * self.phentsize)
@@ -49,7 +55,7 @@ class Elf:
         c = self.content(s)
         for o in range(0, len(c) - 15, 16):
             n, v, sz, info, other, shn = struct.unpack_from('<IIIBBH', c, o)
-            out.append(dict(name=strs[n:].split(b'\0', 1)[0].decode('latin1'), value=v, size=sz,
+            out.append(dict(name=string_at(strs,n), value=v, size=sz,
                             type=info & 15, bind=info >> 4, shndx=shn))
         return out
 

@@ -130,7 +130,8 @@ def main():
     if slug != 'SLUS_213.76':
         raise SystemExit('badges are produced for SLUS_213.76 only')
     preflight.require(slug, build=('placement.json', 'layout.json'))
-    subprocess.run([sys.executable, str(ROOT / 'tools/progress.py'), slug, '--libraries'], check=True, stdout=subprocess.DEVNULL)
+    if '--no-progress' not in sys.argv:
+        subprocess.run([sys.executable, str(ROOT / 'tools/progress.py'), slug, '--libraries'], check=True, stdout=subprocess.DEVNULL)
     data = json.loads((ROOT / 'build' / slug / 'progress.json').read_text())
     libs = data['code_by_library']
     md, total = table(libs)

@@ -262,6 +262,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('version',nargs='?',default=DEFAULT)
     ap.add_argument('--report',action='store_true')
+    ap.add_argument('--project',action='store_true',help='write only objdiff.json')
+    ap.add_argument('--report-only',action='store_true',help='report from existing comparison objects')
     ap.add_argument('--unit',help='build the view of this generated object specification')
     ap.add_argument('--output')
     a=ap.parse_args()
@@ -272,8 +274,13 @@ def main():
         ap.error('source units apply to '+DEFAULT+' only')
     import preflight
     preflight.require(a.version)
+    if a.report_only:
+        report(a.version)
+        return
     plan=unit_plan(a.version)
     write_project(a.version,plan)
+    if a.project:
+        return
     result = subprocess.run(['ninja','objdiff_objects'])
     if result.returncode:
         raise SystemExit(result.returncode)

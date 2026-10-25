@@ -108,11 +108,12 @@ def compile_with_assembler(prefix, args, source, output, env, timeout):
                 'sn-min6 assembler missing or hash mismatch; run tools/toolchain.py install')
     if choice is None:
         return run_tool(prefix + flags + ['-c', source, '-o', output], env, timeout)
-    assembly = output + '.s'
-    p = run_tool(prefix + flags + ['-S', source, '-o', assembly], env, timeout)
-    if p.returncode:
-        return p
-    q = run_tool(command(choice, flags, assembly, output), env, timeout)
-    q.stdout = p.stdout + q.stdout
-    q.stderr = p.stderr + q.stderr
-    return q
+    with tempfile.TemporaryDirectory(prefix='black-assembler-') as directory:
+        assembly = str(Path(directory)/'input.s')
+        p = run_tool(prefix + flags + ['-S', source, '-o', assembly], env, timeout)
+        if p.returncode:
+            return p
+        q = run_tool(command(choice, flags, assembly, output), env, timeout)
+        q.stdout = p.stdout + q.stdout
+        q.stderr = p.stderr + q.stderr
+        return q

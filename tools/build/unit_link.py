@@ -10,6 +10,7 @@ import subprocess
 import sys
 sys.path[:0] = [str(Path(__file__).resolve().parents[1]), str(Path(__file__).resolve().parent)]
 from elfinfo import Elf
+from graph_io import write_text
 from splits import load_symbols
 from make_ld import migrated_data_aliases, explicit_data_aliases
 from source_data import source_ranges
@@ -22,7 +23,7 @@ def plan_objects(objects, placement):
     for o in objects:
         for f in o.get('unit', {}).get('functions', []):
             if any(lo <= f['addr'] < hi for lo, hi in o['unit'].get('ranges', [o['unit']['range']])):
-                by_function[f['addr']] = o
+                by_function[f['addr']] = (o,f)
     sections, used = {}, {}
     by_func_name = {f['name']: f for f in placement['functions']}
     by_func_obj = {f['obj']: f for f in placement['functions']}
@@ -34,11 +35,11 @@ def plan_objects(objects, placement):
             f = by_func_name.get(entry.get('owner'))
             if section == '.text':
                 f = by_func_obj.get(entry['obj'])
-            o = by_function.get(f['addr']) if f else None
-            if o:
+            owned = by_function.get(f['addr']) if f else None
+            if owned:
+                o,info=owned
                 target = o['name']
                 addr = f['addr']
-                info = next(x for x in o['unit']['functions'] if x['addr'] == addr)
                 if section == '.text':
                     name = o['resolved'][str(addr)]['section']
                 elif info['status'] == 'source':
@@ -90,11 +91,8 @@ def main():
             continue
         state = json.loads(Path(o['path'] + '.json').read_text())
         o.update(state)
-        import re
-        for s in Elf(Path(o['path']).read_bytes()).symbols():
-            m = re.fullmatch(r'context_func_([0-9A-F]{8})', s['name'])
-            if m and s['shndx'] == 0:
-                aliases.append('PROVIDE(%s = func_%s);' % (s['name'], m[1]))
+        for name in state['context_undefined']:
+            aliases.append('PROVIDE(%s = func_%s);' % (name,name[-8:]))
         u = o['unit']
         for f in u['functions']:
             if str(f['addr']) in state['resolved']:
@@ -141,20 +139,20 @@ def main():
         if name == '.bss':
             lines.append(' __end_bss = .;')
     lines += [' /DISCARD/ : { *(*) }', '}']
-    (out / 'link.ld').write_text('\n'.join(lines) + '\n')
-    (out / 'unit_facts.json').write_text(json.dumps(facts))
+    write_text(out/'link.ld','\n'.join(lines)+'\n')
+    write_text(out/'unit_facts.json',json.dumps(facts))
     if a.non_matching:
         (out/'nm_fallback.json').write_text(json.dumps({o['name']:o['draft_fallback'] for o in objects if o.get('draft_fallback')},indent=2)+'\n')
-    (out / 'objects.json').write_text(json.dumps(objects))
+    write_text(out/'objects.json',json.dumps(objects))
     # Compatibility for read-only analysis tools; these are ordinary objects, not a content-hash cache.
-    (out / 'objects_cache.json').write_text(json.dumps({o['name']: 'obj/' + o['name'] + '.o' for o in objects}))
+    write_text(out/'objects_cache.json',json.dumps({o['name']:'obj/'+o['name']+'.o' for o in objects}))
     base, env = environment()
     args = [env['BLACK_BINUTILS_PREFIX'] + 'ld', '-m', 'elf32ltsmip', '-nostdlib', '-static', '-z', 'norelro',
             '-z', 'noseparate-code', '--no-warn-rwx-segments', '-T', str(out / 'link.ld'), '-Map', str(out / 'link.map'),
             '-o', str(out / 'linked.elf')]
     response = out / 'objects.rsp'
     used = {obj for entries in sections.values() for obj, _, _ in entries}
-    response.write_text('\n'.join(o['path'] for o in objects if o['name'] in used) + '\n')
+    write_text(response,'\n'.join(o['path'] for o in objects if o['name'] in used)+'\n')
     p = subprocess.run(args + ['@' + str(response)], env=env, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     (out / 'link.log').write_text(p.stdout)
     print(p.stdout, end='')

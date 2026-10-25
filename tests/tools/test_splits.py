@@ -3,6 +3,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 import splits as S
@@ -98,6 +99,22 @@ class Splits(unittest.TestCase):
 
 
 class Derive(unittest.TestCase):
+    def test_unchanged_metadata_keeps_its_timestamp_despite_dictionary_order(self):
+        # Split extras originate in a set. Different Python hash seeds must
+        # not turn an unchanged source-unit description into a relink.
+        with tempfile.TemporaryDirectory() as folder, patch.object(U, 'ROOT', Path(folder)), \
+             patch.object(U.S, 'load_splits', return_value=[]), \
+             patch.object(U, 'function_table', return_value=[]), \
+             patch.object(U.S, 'load_symbols', return_value=S.Symbols()), \
+             patch.object(U, 'derive_units', side_effect=[
+                 [dict(name='unit', extra=dict(a=1,b=2))],
+                 [dict(extra=dict(b=2,a=1), name='unit')]]):
+            U.write_units()
+            output=U.out_dir(S.DEFAULT_SLUG)/'units.json'
+            before=(output.read_bytes(),output.stat().st_mtime_ns)
+            U.write_units()
+            self.assertEqual((output.read_bytes(),output.stat().st_mtime_ns),before)
+
     def units(self, text, **kw):
         splits = [S.Split({'src': 'src/game/a.c', 'range': [0x100000, 0x100060]}, {})]
         return U.derive_units(splits, TABLE, S.Symbols(S.parse_symbols(SYMBOLS)), read=lambda p: text, **kw)

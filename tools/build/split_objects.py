@@ -47,6 +47,7 @@ def ctz(v):
 
 
 def write_if_changed(path, text):
+    sys.audit('black.output', str(path))
     path.parent.mkdir(parents=True, exist_ok=True)
     if not path.exists() or path.read_text() != text:
         path.write_text(text)
@@ -289,7 +290,7 @@ def main():
         write_function_table(work, [(a, e if e is not None else text_end) for a, e in table])
         print('functions.json: %d functions' % len(table))
         return
-    live_units = load_units(variant=slug)
+    live_units = load_units(variant=slug, facts=False)
     explicit_data = source_ranges(live_units)
     literal_boundaries = {int(a, 0) if isinstance(a, str) else int(a)
                           for u in live_units if any(f.get('status') == 'source' for f in u['functions'])
@@ -553,8 +554,8 @@ def main():
         if item['kind'] == 'unwind':
             for address in (item['start'], item['end']):
                 labels_out.setdefault(address, 'D_%08X' % address)
-    (build / 'labels.json').write_text(json.dumps(sorted(labels_out.items())))
-    (build / 'placement.json').write_text(json.dumps(placement, indent=1))
+    write_if_changed(build/'labels.json',json.dumps(sorted(labels_out.items())))
+    write_if_changed(build/'placement.json',json.dumps(placement,indent=1))
     for sec, v in stats.items():
         print(sec, 'by reason (bytes):', v['why'])
     print('%d functions, %d branches as raw words; migrated: %s' % (

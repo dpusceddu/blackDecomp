@@ -57,3 +57,23 @@ Compiler timeout testing also verifies that an assembler child cannot survive th
 
 The per-file permuter compile and assemble scripts passed SN 1.36, `sn-min6` and Sony 2.9 controls. Upstream `import.py`
 with the documented `--no-prune` command imported the C example without warnings, and upstream debug scoring returned zero.
+
+## Generated-file graph follow-up
+
+The clean-recovery audit found preparation metadata and object sidecars that were produced outside declared Ninja edges.
+Preparation now records its complete input/output inventory, while object/link/report edges share their dependency lists
+with enforced I/O contracts. The graph checker covers 47,421 generated paths. The root manifest contains the generated
+edges directly, so removing `objects.ninja` cannot prevent Ninja from loading its repair rule.
+
+A fresh workspace rebuilt the retail image. Deletion sweeps recovered 46 individually deleted files spanning every
+preparation producer, all preparation inventories and each leaf-output kind. Separate cold tests cover the default build, progress, objdiff, report and a single
+object after `ninja -t clean`. The CI regression tests also check missing/duplicate producers, direct read dependencies,
+actual undeclared reads, multi-output clean recovery and missing-manifest recovery without game files or an SDK.
+
+Unchanged object and metadata bytes retain their timestamps; canonical JSON ordering prevents Python hash seeds from
+causing spurious relinks. Context symbols are recorded with each object, and linker planning uses indexed function lookups.
+Current wall-clock measurements and the remaining GNU ld cost are in [build.md](build.md#measured-build-times).
+
+The follow-up validation passed 91 build tests and 326 tool tests (two optional permuter tests skipped), CLI help,
+byte-compilation, configuration parsing, split consistency and the tools-index check. A new fresh report again agreed
+with 5,563 exact functions, 14.95% code and 15.11% image. All five retail versions passed the version check.

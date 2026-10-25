@@ -108,8 +108,10 @@ def load_inventory():
     """Every function of the image: address, name, true code size, words, relocations. Cached in build/auto/."""
     AUTO.mkdir(parents=True, exist_ok=True)
     cache = AUTO / 'inventory.json'
+    if os.environ.get('BLACK_NINJA') and not os.environ.get('BLACK_INVENTORY_WRITE'):
+        return json.loads(cache.read_text())['functions']
     stamp = (BUILD / 'placement.json').stat().st_mtime
-    if cache.exists():
+    if cache.exists() and not os.environ.get('BLACK_INVENTORY_WRITE'):
         d = json.loads(cache.read_text())
         if d['stamp'] == stamp and d.get('version') == 5:
             return d['functions']
@@ -124,7 +126,8 @@ def load_inventory():
         out.append(dict(addr=f['addr'], name=f['name'], span=f['end'] - f['addr'], size=4 * len(words), words=words,
                         rel={str(k): list(v) for k, v in rel.items()}, mnem=mnem, region=r, owned=sorted(f['owned']), strings=strings,
                         lit4=(FUNCTION_ASM / (f['name'] + '.lit4.s')).exists()))
-    cache.write_text(json.dumps(dict(stamp=stamp, version=5, functions=out)))
+    from graph_io import write_text
+    write_text(cache,json.dumps(dict(stamp=stamp,version=5,functions=out)))
     return out
 
 
@@ -420,6 +423,8 @@ def analyze_arity(f):
 def compute_arities(inv):
     """Argument count per function from its own reads and from every call site (max); cached in build/auto/arity.json."""
     cache = AUTO / 'arity.json'
+    if os.environ.get('BLACK_NINJA') and not os.environ.get('BLACK_INVENTORY_WRITE'):
+        return json.loads(cache.read_text())['functions']
     stamp = (BUILD / 'placement.json').stat().st_mtime
     if cache.exists():
         d = json.loads(cache.read_text())

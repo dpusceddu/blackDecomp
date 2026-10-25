@@ -10,7 +10,7 @@ import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import bisect, subprocess
+import bisect, subprocess, os
 import re
 from pathlib import Path
 
@@ -83,7 +83,7 @@ def inline_owners():
     The file is generated from the split assembly; it is written on first use if `ninja` has not done it yet."""
     global _INLINE_OWNERS
     if _INLINE_OWNERS is None:
-        if not INLINE_OWNERS_FILE.exists():
+        if not os.environ.get('BLACK_NINJA') and not INLINE_OWNERS_FILE.exists():
             subprocess.run([_sys.executable, str(ROOT / 'tools/build/linkonce_owners.py'), '--write'], check=True, stdout=subprocess.DEVNULL)
         _INLINE_OWNERS = _ranges(INLINE_OWNERS_FILE)
     return _INLINE_OWNERS
@@ -104,7 +104,7 @@ def tus_file():
     """Path of the generated TU map, written first if it is missing or older than its inputs (4 s)."""
     inputs = [ROOT / 'build' / SLUG / 'placement.json', ROOT / 'build' / SLUG / 'units.json', ROOT / 'config/tus_overrides.yaml',
               ROOT / 'config' / SLUG / 'libraries.txt', ROOT / 'tools/build/tus.py']
-    if not TUS_FILE.exists() or any(p.exists() and p.stat().st_mtime > TUS_FILE.stat().st_mtime for p in inputs):
+    if not os.environ.get('BLACK_NINJA') and (not TUS_FILE.exists() or any(p.exists() and p.stat().st_mtime > TUS_FILE.stat().st_mtime for p in inputs)):
         subprocess.run([_sys.executable, str(ROOT / 'tools/build/tus.py'), 'map', '--out', str(TUS_FILE)], check=True, stdout=subprocess.DEVNULL)
     return TUS_FILE
 

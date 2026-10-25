@@ -64,7 +64,8 @@ def function_table(slug=DEFAULT_SLUG):
 
 def write_function_table(slug, functions):
     """Write build/<slug>/functions.json from [(address, end)]."""
-    (build_dir(slug) / 'functions.json').write_text(json.dumps([[a, e] for a, e in functions]) + '\n')
+    from graph_io import write_text
+    write_text(build_dir(slug)/'functions.json',json.dumps([[a,e] for a,e in functions])+'\n')
 
 
 # ------------------------------------------------------------------------------------------------------------ derive
@@ -156,6 +157,12 @@ def load_units(path=None, variant=None, refresh=False, facts=True):
     split_list = S.config_dir(slug) / 'splits.yaml'
     if not split_list.exists():
         return []
+    if os.environ.get('BLACK_NINJA'):
+        cache = out_dir(slug) / ('units-nm.json' if non_matching() else 'units.json')
+        units = json.loads(cache.read_text())['units']
+        if facts:
+            apply_facts(units, json.loads((out_dir(slug)/'unit_facts.json').read_text()))
+        return units
     cache = out_dir(slug) / ('units-nm.json' if non_matching() else 'units.json')
     units = None
     if cache.exists() and not refresh:
@@ -188,7 +195,8 @@ def write_units(slug=DEFAULT_SLUG):
     fallback = set(json.loads((out / 'nm_fallback.json').read_text())) if nm and (out / 'nm_fallback.json').exists() else set()
     units = derive_units(S.load_splits(slug), function_table(slug), S.load_symbols(slug),
                          is_non_matching=nm, fallback=fallback, complete=True)
-    (out / ('units-nm.json' if nm else 'units.json')).write_text(json.dumps(dict(version=CACHE_VERSION, units=units)))
+    from graph_io import write_text
+    write_text(out / ('units-nm.json' if nm else 'units.json'), json.dumps(dict(version=CACHE_VERSION, units=units),sort_keys=True))
     return units
 
 
@@ -217,8 +225,9 @@ def main():
     units = write_units(slug)
     # ninja re-derives the units when a source file changes (its INCLUDE_ASM markers may have changed)
     sources = sorted({u['source'] for u in units})
-    (out_dir(slug) / 'units.d').write_text('build/%s/%s: %s\n' % (
-        out_dir(slug).name, 'units-nm.json' if non_matching() else 'units.json', ' '.join(sources)))
+    if not os.environ.get('BLACK_NINJA'):
+        (out_dir(slug) / 'units.d').write_text('build/%s/%s: %s\n' % (
+            out_dir(slug).name, 'units-nm.json' if non_matching() else 'units.json', ' '.join(sources)))
     live = [u for u in units if any(f['status'] == 'source' for f in u['functions'])]
     source = {f['addr'] for u in units for f in u['functions'] if f['status'] == 'source'}
     every = {f['addr'] for u in units for f in u['functions']}

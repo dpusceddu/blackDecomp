@@ -18,6 +18,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
+from graph_io import write_text, write_bytes
 
 
 def main():
@@ -53,7 +54,7 @@ def main():
             rec['source'] = 'blob'
             rec['blob'] = 'elf/%03d.bin' % s['index']
             rec['size'] = s['size']
-            (out / ('%03d.bin' % s['index'])).write_bytes(e.content(s))
+            write_bytes(out / ('%03d.bin' % s['index']),e.content(s))
         layout['sections'].append(rec)
     # .DVP.ovlytab holds (id, address inside .vutext, offset) triples; the packer rebases the addresses
     vt = e.section('.vutext')
@@ -67,7 +68,7 @@ def main():
     layout['entry_symbol'] = 'func_%08X' % e.entry
     p = ROOT / 'build' / boot / 'layout.json'
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(layout, indent=1) + '\n')
+    write_text(p,json.dumps(layout,indent=1)+'\n')
     print('wrote', p.relative_to(ROOT), '%d sections' % len(layout['sections']), '; blobs in data/%s/elf' % slug)
 
 

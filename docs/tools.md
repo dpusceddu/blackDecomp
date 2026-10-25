@@ -41,6 +41,11 @@ committed data. Tools import each other by bare module name; every tool puts `to
 
 | Tool | Purpose |
 | --- | --- |
+| `tools/build/check_graph.py` | Check unique producers, direct generated-input dependencies and recovery of every generated file. |
+| `tools/build/graph_io.py` | Record generator files or enforce a Ninja edge's declared generated-file reads and writes. |
+| `tools/build/ninja_graph.py` | Construct Ninja edges and their generated-file I/O contracts from the same dependency lists. |
+| `tools/build/prepare.py` | Run one source-generation stage; each invocation records its complete output inventory. |
+| `tools/build/inventory.py` | Generate the USA function inventory used by the TU map and source analysis tools. |
 | `tools/build/object_graph.py` | Generate real assembler includes and ordinary per-object Ninja edges from the split image. |
 | `tools/build/object_compile.py` | Compile or assemble one Ninja input with its pinned local toolchain and write its depfile. |
 | `tools/build/unit_link.py` | Place unit input sections in original order and invoke the ordinary GNU link once. |

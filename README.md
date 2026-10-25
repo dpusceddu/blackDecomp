@@ -54,7 +54,7 @@ cd blackDecomp
 mkdir -p orig/SLUS_213.76 && cp /path/to/SLUS_213.76 orig/SLUS_213.76/
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 . .venv/bin/activate                      # from here on `python3` is the virtual environment's; every command in this README assumes it
-python3 tools/toolchain.py install        # pinned compilers, assemblers and wibo into build/toolchain (SHA-256 checked)
+python3 tools/toolchain.py install --objdiff # pinned compilers, assemblers and wibo into build/toolchain (SHA-256 checked)
 python3 configure.py                      # default --version SLUS_213.76
 ninja
 ```

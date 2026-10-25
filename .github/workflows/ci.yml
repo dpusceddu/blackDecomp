@@ -19,8 +19,8 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
-      - name: Install MIPS binutils for relocation tests
-        run: sudo apt-get update && sudo apt-get install -y binutils-mipsel-linux-gnu
+      - name: Install MIPS binutils and Ninja for relocation and graph tests
+        run: sudo apt-get update && sudo apt-get install -y binutils-mipsel-linux-gnu ninja-build
       - name: Install Python packages
         run: python -m pip install -r requirements.txt
       - name: Byte-compile the tools and tests
@@ -47,7 +47,7 @@ jobs:
         run: python tools/build/splits.py check
       - name: configure.py writes a build file
         run: python configure.py --version SLUS_213.76 && test -s build.ninja
-      - name: Build and tool tests
+      - name: Build, tool and generated-file graph tests
         run: |
           python -m unittest discover -s tests
           python -m unittest discover -s tests/tools

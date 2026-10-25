@@ -15,6 +15,7 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
 import json, re, sys
+from graph_io import write_text
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -38,7 +39,7 @@ def main():
                 undefined[m.group(1)] = int(m.group(2), 16)
     # defined labels per section, from the generated assembly (names carry their address)
     defined = {name: [] for name, _, _ in secs}
-    for p in sorted((ROOT / 'asm' / work).rglob('*.s')):
+    for p in [ROOT/'asm'/work/'text.s'] + sorted((ROOT/'asm'/work/'data').glob('*.s')):
         for name in LABEL.findall(p.read_text()):
             m = ADDR.search(name)
             if not m or name.startswith('.L'):
@@ -69,8 +70,8 @@ def main():
         else:
             ld.append('%s = 0x%X;' % (name, a))
             kinds['const'] += 1
-    (build / 'extra_labels.txt').write_text('\n'.join(labels) + '\n')
-    (build / 'symbols.ld').write_text('\n'.join(ld) + '\n')
+    write_text(build/'extra_labels.txt','\n'.join(labels)+'\n')
+    write_text(build/'symbols.ld','\n'.join(ld)+'\n')
     print('link support:', kinds)
 
 

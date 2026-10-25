@@ -23,7 +23,7 @@ SECTIONS = [
         'toolchain.py', 'compile.py', 'check_versions.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',
         'badges.py', 'tools_index.py']),
     ('Build internals (`tools/build/`)', [
-        'build/object_graph.py', 'build/object_compile.py', 'build/unit_link.py', 'build/unit_compare.py', 'build/asm_syntax.py', 'build/split_objects.py',
+        'build/check_graph.py', 'build/graph_io.py', 'build/ninja_graph.py', 'build/prepare.py', 'build/inventory.py', 'build/object_graph.py', 'build/object_compile.py', 'build/unit_link.py', 'build/unit_compare.py', 'build/asm_syntax.py', 'build/split_objects.py',
         'build/splat_config.py', 'build/make_ld.py', 'build/link_support.py', 'build/pack_elf.py', 'build/elf_layout.py',
         'build/elfinfo.py', 'build/elfobj.py', 'build/include_asm.py', 'build/splits.py', 'build/units.py',
         'build/units_verify.py', 'build/layout.py', 'build/text_placement.py', 'build/constant_relocs.py',

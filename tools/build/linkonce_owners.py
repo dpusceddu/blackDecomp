@@ -161,7 +161,8 @@ def main():
                 '#   callers, between, via-inline, callees, vtable, shared (see the tool for what each means).\n')
         text += ''.join('0x%06x 0x%06x %s %s\n' % tuple(r) for r in rows)
         OUT.parent.mkdir(parents=True, exist_ok=True)
-        OUT.write_text(text)
+        from graph_io import write_text
+        write_text(OUT,text)
         print('wrote', OUT.relative_to(ROOT), len(rows), 'lines')
 
 

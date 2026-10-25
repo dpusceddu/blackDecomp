@@ -69,7 +69,7 @@ compiler context under separate context symbols and discard those inputs; their 
 `ninja objdiff` writes `objdiff.json` and a comparison pair per source object. The GUI invokes
 `ninja build/SLUS_213.76/objdiff/base/<unit>.o`, which builds only that file and its comparison view. It requires neither a
 link nor a fit check. The comparison base excludes included assembly, preserving honest source progress; the linked object
-contains it. `ninja report` regenerates the report from these views, and `tools/progress.py --check` checks agreement with
+contains it. `ninja progress` builds its report dependency too. `ninja report` regenerates the report from these views, and `tools/progress.py --check` checks agreement with
 the exact source functions.
 
 An ignored `.local/objdiff.json` may override `custom_make` and `custom_args`, using the same fields as objdiff's project
@@ -111,17 +111,48 @@ against a symbol-derived address map; use its `--help` for the ordinary Ninja ed
 
 ## Measured build times
 
-Measured on Linux x86-64 in a fresh `debian:bookworm` container, using the README setup and default Ninja parallelism.
-Toolchain downloads and environment installation are excluded; the clean time starts at `configure.py` with no generated
-assembly or build outputs. These are individual wall-clock observations, not benchmark averages.
+Measured on Linux x86-64 in the project's Debian Bookworm container, using default Ninja parallelism. Downloads and
+environment installation are excluded. These are individual wall-clock observations, not benchmark averages. The clean
+measurement starts after `ninja -t clean`; Ninja retains generator manifests and recreates all removed build inputs.
 
 | Operation | Seconds |
 | --- | ---: |
-| Clean configure, extraction and graph generation | 38.856 |
-| Clean Ninja compile, link, pack and comparison | 62.991 |
-| Clean total | 101.847 |
-| One exact function edited in place: one object, link, pack, comparison | 14.792 |
-| No-op Ninja: no commands and unchanged linked ELF | 0.118 |
+| `ninja` after `ninja -t clean`: regenerate, compile, link, pack and compare | 99.215 |
+| One exact function edited in place; identical object bytes, no link | 3.590 |
+| One function changed; object, link, pack and decoded mismatch diagnostic | 8.756 |
+| No-op Ninja: no commands and unchanged linked ELF | 0.384 |
 
-The incremental edit changes `return arg0;` to `return (arg0);` in `tu_100258.c`; both versions are exact.
-Objdiff's single-object target skips the full link and image comparison even for a draft with a different size.
+The exact edit changes `return arg0;` to `return (arg0);` in `tu_100258.c`; both versions match retail. The changed-code
+control uses `return arg0 + 1;` and deliberately fails the image comparison, then is reverted. Objdiff's single-object
+target skips the full link and image comparison even for a draft with a different size.
+
+The previous 14.792-second exact-edit build unnecessarily relinked. Profiling found repeated ELF-symbol parsing and
+function-list scans in link preparation; context-symbol sidecars and indexed lookups remove that work. Unchanged-byte
+restat now skips the link entirely. A full link still spends about 3.2 seconds in GNU ld. Mismatch diagnostics also used
+to copy the remainder of the linked ELF's string table for every symbol; bounded string slices remove that quadratic cost.
+
+## Generated-file dependencies
+
+`build/<version>/graph.json` lists the producers and direct inputs of the active Ninja graph. Source-generation stages
+record their dynamic output inventories in `prepare/*.json`: this includes splat configuration, section layout and blobs,
+undefined-symbol lists, function tables, unit recipes, placement, original assembly, the analysis inventory and generated
+per-unit inputs. Each file belongs to one edge. The graph generator retains its manifests and recipe files during an
+ordinary `ninja -t clean`; removed source-generation inputs are rebuilt before those manifests are used again. The root
+Ninja file contains all edges, so deleting a generated manifest cannot prevent Ninja from parsing the rule that repairs it.
+
+Object state (`.o.json`), link facts, linker scripts/maps, objdiff target assembly and comparison objects, reports and
+progress JSON are declared outputs too. Build-rule readers do not create missing caches. Per-edge `io/*.json` contracts
+are generated from the same input/output lists as the Ninja edges; `graph_io.py` rejects an actual undeclared generated-file
+read or write. This includes file-existence checks. `python3 tools/build/check_graph.py --ninja` checks producer uniqueness,
+direct dependencies, cycles and agreement with Ninja's output list. CI exercises clean/deletion recovery and rejects an
+intentionally undeclared read without needing the game or SDK.
+
+Ninja owns compiler depfiles and its internal log/dependency databases. The separately installed SDK is an external
+prerequisite, including when it is installed under `build/toolchain/`; clean does not uninstall it. One-off decompiler,
+permuter and class-recovery experiments remain explicit analysis commands rather than hidden build-rule side effects.
+
+Compilation and packing preserve timestamps when their final output bytes are identical. Ninja's `restat` then skips
+unnecessary downstream linking or comparison; changed objects still undergo the ordinary link and full image check.
+Unit metadata uses canonical JSON ordering, so a different Python hash seed cannot trigger a relink by reordering keys.
+The link preparation reads context-symbol metadata recorded during each compile, rather than reparsing every ELF symbol
+table on every link.

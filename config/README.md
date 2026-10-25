@@ -36,13 +36,21 @@ Every version has `checksums.sha256`. Only `SLUS_213.76` has recovered source, s
 | --- | --- | --- |
 | `build/<GAME_ID>/splat.yaml`, `layout.json`, `rom.bin` | `tools/build/splat_config.py`, `tools/build/elf_layout.py` (the `extract` stage) | splat, the linker script, the ELF packer |
 | `build/<GAME_ID>/boundaries.txt` | `tools/build/boundaries.py`, from the executable and `explicit_boundaries.txt` | splat |
+| `build/<GAME_ID>/functions.json`, `placement.json`, `labels.json` | `tools/build/split_objects.py` (separate function-table and placement stages) | object recipes, linker, diagnostics and progress |
+| `build/SLUS_213.76/units.json` | `tools/build/units.py` | placement, object recipes and progress |
 | `build/<GAME_ID>/objects.ninja`, `spec/`, `unit_objects.json` | `tools/build/object_graph.py` | individual Ninja compile/assemble edges, linker and objdiff |
 | `build/<GAME_ID>/obj/`, `objects.json`, `link.ld` | per-object compiler/assembler rules and `tools/build/unit_link.py` | GNU ld, diagnostics and analysis |
+| `build/SLUS_213.76/unit_facts.json` | `tools/build/unit_link.py` | TU map and progress |
 | `build/<GAME_ID>/objdiff/`, `report.json` | `tools/objdiff.py` (`ninja objdiff`, `ninja report`) | objdiff GUI and progress agreement |
 | `build/SLUS_213.76/tus.yaml` | `tools/build/tus.py map` (`ninja tus`; written on first use otherwise) | `tools/next.py`, `tools/progress.py`, new file names (`tools/build/layout.py`), `autodecomp.py --tu` |
 | `build/SLUS_213.76/inline_owners.txt` | `tools/build/linkonce_owners.py` (`ninja owners`) | progress, badges, objdiff |
 | `build/auto/` (context, `ctx.c`, recovered layouts) | `tools/autodecomp.py context`, `tools/decompile.py` | m2c drafts, class skeletons |
-| `build/classes/include/` | `tools/maint/class_skeletons.py` (`ninja classes`) | reference when writing a class view |
+| `build/auto/inventory.json` | `tools/build/inventory.py` | TU map and progress |
+| `build/classes/include/` | `tools/maint/class_skeletons.py` (explicit class-recovery command; see docs/pipeline.md) | reference when writing a class view |
 | `build/SLUS_213.76/badges/` | `tools/badges.py` | nothing (the two committed files in `progress/` are what the README reads) |
 
 The survey of the disc images (`tools/maint/inputs.py`) writes its dump to `build/survey/` and `.local/`.
+
+The active build's `graph.json`, source-stage inventories (`prepare/*.json`) and per-edge I/O contracts (`io/*.json`) make
+these dependencies explicit. Run `python3 tools/build/check_graph.py --ninja` to check them. Depfiles and Ninja's own state
+are managed by Ninja; optional source-analysis experiments are separate from the normal build graph.

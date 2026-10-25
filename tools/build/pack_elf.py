@@ -111,7 +111,9 @@ def pack(linked, layout, blobdir):
 def main():
     linked, layout, blobs, dest = sys.argv[1:5]
     data = pack(Path(linked).read_bytes(), json.loads(Path(layout).read_text()), blobs)
-    Path(dest).write_bytes(data)
+    output=Path(dest)
+    if not output.exists() or output.read_bytes()!=data:
+        output.write_bytes(data)
     import hashlib
     print('%s: %d bytes sha256 %s' % (dest, len(data), hashlib.sha256(data).hexdigest()))
 
