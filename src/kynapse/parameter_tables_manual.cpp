@@ -1,6 +1,9 @@
 #include "include_asm.h"
 
 #include "kynapse/parameter_tables.hpp"
+#ifdef NON_MATCHING
+#include "kynapse/graph/parameters.hpp"
+#endif
 
 BufferSet::BufferSet()
     : total(0), weight(1.0f)
@@ -231,10 +234,118 @@ ParameterTables::ParameterTables()
     gCompare = CompareSets;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: not compared to the original beyond its call and data references.
+int AddPeriodicName(const char *name) {
+    ParameterTables *tables=GetNameTables();
+    if(tables->countB<gTableSizeB) {
+        ((char**)tables->b10)[tables->countB++]=(char*)KaimAllocate(strlen(name)+1);
+        strcpy(((char**)tables->b10)[tables->countB-1],name);
+        return tables->countB-1;
+    }
+    return -1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8650);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: name-array reference and allocation register scheduling.
+int AddAperiodicName(const char *name) {
+    ParameterTables *tables=GetNameTables();
+    if(tables->countA<gTableSizeA) {
+        ((char**)tables->a14)[tables->countA++]=(char*)KaimAllocate(strlen(name)+1);
+        strcpy(((char**)tables->a14)[tables->countA-1],name);
+        return tables->countA-1;
+    }
+    return -1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8740);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: name-array reference and allocation register scheduling.
+int AddEstimatedName(const char *name) {
+    ParameterTables *tables=GetNameTables();
+    if(tables->countC<gTableSizeC) {
+        ((char**)tables->c18)[tables->countC++]=(char*)KaimAllocate(strlen(name)+1);
+        strcpy(((char**)tables->c18)[tables->countC-1],name);
+        return tables->countC-1;
+    }
+    return -1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8830);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: threshold CFG and register allocation.
+bool ParameterTables::Consume(int index,SlotUser *user) {
+    if(!(threshold<=0)) {
+        unsigned int slot=user->GetIndex();
+        if(index>=0 && (unsigned int)index<countA) {
+            if(slot>=GetSlotOwner()->slotCount)return false;
+            BufferSet *set=0;if(slot!=(unsigned int)-1)set=sets+slot;
+            if(!fired) {
+                float now=Kaim_QueryFloat();fired=threshold<now;
+                if(!fired && a44[index]<a24[index] && !(a40[index]>a20[index])) {
+                    ++a44[index];if(set){set->sums[index]=0;set->values[index]=now;}return true;
+                }
+            }
+            if(set)set->sums[index]+=a28[index];
+        }
+        return false;
+    }
+    return true;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8AB8);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: iterator cleanup and success/error block ordering.
+bool ParameterTables::ConsumeList(int index,IndexUser *user) {
+    if(threshold<=0)return true;
+    if(index<0 || (unsigned int)index>=countA)return false;
+    if(fired) {
+        for(ParameterSlotIterator cursor(user->slots->first);cursor.IsValid();++cursor) {
+            unsigned int slot=cursor.Get()->GetIndex();
+            if(slot!=(unsigned int)-1)sets[slot].sums[index]+=a28[index];
+        }
+        return false;
+    }
+    float now=Kaim_QueryFloat();
+    fired=threshold<now;
+    if(!fired && a44[index]<a24[index] && !(a40[index]>a20[index])) {
+        ++a44[index];
+        for(ParameterSlotIterator cursor(user->slots->first);cursor.IsValid();++cursor) {
+            unsigned int slot=cursor.Get()->GetIndex();
+            if(slot!=(unsigned int)-1){sets[slot].sums[index]=0;sets[slot].values[index]=now;}
+        }
+        ((float*)indexTables[user->GetIndex()].indices)[index]=now;
+        return true;
+    }
+    for(ParameterSlotIterator cursor(user->slots->first);cursor.IsValid();++cursor) {
+        unsigned int slot=cursor.Get()->GetIndex();
+        if(slot!=(unsigned int)-1)sets[slot].sums[index]+=a28[index];
+    }
+    return false;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8C50);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: fired branch scheduling.
+bool ParameterViews::ConsumeGlobal(int index) {
+    if(threshold<=0)return true;
+    if(index>=0 && (unsigned int)index<countA && !fired) {
+        float now=Kaim_QueryFloat();fired=threshold<now;
+        if(!fired) {
+            if(a44[index]>=a24[index])return false;
+            if(a20[index]<a40[index])return false;
+            ++a44[index];a3c[index]=now;return true;
+        }
+    }
+    return false;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E8FA0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E90B8);

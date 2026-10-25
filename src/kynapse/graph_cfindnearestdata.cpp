@@ -15,9 +15,92 @@ ObjectBase* CreateBoundBuffers(BufferOwner* bound)
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EEF88);
 #endif
 
+#ifdef NON_MATCHING
+extern const char D_00407268[];
+extern const int D_00407284;
+extern const char D_00407228[];
+inline void NativeWord(int *p) { *p = *p; }
+struct RawGraphFileHooks {
+ char unknown00[0x54];
+ void *(*open)(const void *,const char *);
+ void (*close)(void *);
+ char unknown5c[8];
+ unsigned int (*write)(const void *,unsigned int,unsigned int,void *);
+ unsigned int (*read)(void *,unsigned int,unsigned int,void *);
+};
+extern RawGraphFileHooks GraphHooks __asm__("D_00451228");
+inline void ConvertWord(int *p){*p=*p;}
+extern "C" float func_00390038(void *,const Vec3 *,int);
+inline float SortedCoordinate(Kaim::CFindNearestData *data,int axis,int index) {
+ return func_00390038(data,(const Vec3 *)&data->OrderedNode(axis,index)->x,axis);
+}
+// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
+int Kaim::CFindNearestData::Init(ChildBuffers* config)
+{
+    if (count > 0) {
+        order = new int[count * 3];
+        rank = new int[count * 3];
+        aux = new int[count];
+        ChildBuffers* raw = func_002E31E0(config, "RawData");
+        if (raw)
+            return Load(raw);
+    }
+    return false;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF030);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
+int Kaim::CFindNearestData::Load(const void *path) {
+ FileService *files=D_003C9ED4->files;
+ if(!files || !files->Exists(path))return 0;
+ char header[64];
+ __builtin_strcpy(header,"none");
+ unsigned int version=0;
+ unsigned int length=func_0035CCD8(D_00407268);
+ if(files->Read(path,header,length)!=length)goto fail;
+ if(length!=func_0035CCD8(D_00407268))goto fail;
+ if(files->Read(path,&version,4)!=4)goto fail;
+ header[length]=0;
+ if(func_00360838(D_00407268,header) || version!=1)goto fail;
+ {int bytes=count*12;
+ if(files->Read(path,order,bytes)!=bytes)goto fail;
+ for(int i=0;i<count*3;++i)NativeWord(&order[i]);
+ bytes=count*12;
+ if(files->Read(path,rank,bytes)!=bytes)goto fail;
+ for(int i=0;i<count*3;++i)NativeWord(&rank[i]);}
+ files->Close(path);return 1;
+ fail: files->Close(path);return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF1A0);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
+int Kaim::CFindNearestData::LoadFile(const void *path){
+ void *file=GraphHooks.open(path,"rb");
+ if(!file)return 0;
+ char header[64]; int version;
+ unsigned int length=GraphHooks.read(header,1,func_0035CCD8(D_00407268),file);
+ if(length!=func_0035CCD8(D_00407268))goto fail;
+ if(GraphHooks.read(&version,4,1,file)!=1)goto fail;
+ header[length]=0;
+ if(func_00360838(D_00407268,header) || version!=1)goto fail;
+ count=graph->liveNodes;
+ if(count>0){
+  order=new int[count*3]; rank=new int[count*3]; aux=new int[count];
+  if(GraphHooks.read(order,4,count*3,file)!=count*3)goto fail;
+  for(int i=0;i<count*3;++i)ConvertWord(&order[i]);
+  if(GraphHooks.read(rank,4,count*3,file)!=count*3)goto fail;
+  for(int i=0;i<count*3;++i)ConvertWord(&rank[i]);
+ }
+ GraphHooks.close(file);return 1;
+ fail: GraphHooks.close(file);return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF3D8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF6F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF7A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EF850);
@@ -66,52 +149,35 @@ int Kaim::CFindNearestData::Build()
     }
     return true;
 }
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
 
-// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
-#include "kynapse/graph/nearest.hpp"
-extern const char D_00407268[];
-extern const int D_00407284;
-extern Kaim::SearchGraph *D_003CA804;
-extern "C" int func_002EF6F0(const void *,const void *);
-extern "C" int func_002EF7A0(const void *,const void *);
-extern "C" int func_002EF850(const void *,const void *);
-extern "C" void func_0035EC50(void *,unsigned int,unsigned int,int (*)(const void *,const void *));
-int Kaim::CFindNearestData::Init(ChildBuffers* config)
-{
-    if (count > 0) {
-        order = new int[count * 3];
-        rank = new int[count * 3];
-        aux = new int[count];
-        ChildBuffers* raw = func_002E31E0(config, "RawData");
-        if (raw)
-            return Load(raw);
-    }
-    return false;
+int Kaim::CFindNearestData::GetRange(const Vec3 *point,int axis,int *lower,int *upper,float radius){
+ float value=Coordinate(point,axis);
+ *lower=FindBound(axis,1,value-radius);
+ if(*lower!=-1){
+  *upper=FindBound(axis,0,value+radius);
+  if(*upper!=-1)return *upper-*lower+1;
+ }
+ return 0;
 }
 
+void Kaim::CFindNearestData::CopyRank(const int *source)
+{
+    if (!rank && count > 0)
+        rank = new int[count * 3];
+    for (int i = 0; i < count * 3; ++i)
+        rank[i] = source[i];
+}
 
-#include "kynapse/graph/nearest.hpp"
-extern const char D_00407268[];
-extern const int D_00407284;
-extern Kaim::SearchGraph *D_003CA804;
-extern "C" int func_002EF6F0(const void *,const void *);
-extern "C" int func_002EF7A0(const void *,const void *);
-extern "C" int func_002EF850(const void *,const void *);
-extern "C" void func_0035EC50(void *,unsigned int,unsigned int,int (*)(const void *,const void *));
+void Kaim::CFindNearestData::CopyOrder(const int *source)
+{
+    if (!order && count > 0)
+        order = new int[count * 3];
+    for (int i = 0; i < count * 3; ++i)
+        order[i] = source[i];
+}
 
-
-// Unmatched: stream cleanup block order and callback-base register lifetimes.
-#include "kynapse/graph/nearest.hpp"
-extern const char D_00407268[];
-extern const int D_00407284;
-extern Kaim::SearchGraph *D_003CA804;
-extern "C" int func_002EF6F0(const void *,const void *);
-extern "C" int func_002EF7A0(const void *,const void *);
-extern "C" int func_002EF850(const void *,const void *);
-extern "C" void func_0035EC50(void *,unsigned int,unsigned int,int (*)(const void *,const void *));
-extern const char D_00407228[];
+#ifdef NON_MATCHING
+// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
 int Kaim::CFindNearestData::Save(const void* path)
 {
     if (order) {
@@ -147,69 +213,11 @@ int Kaim::CFindNearestData::Save(const void* path)
     }}
     return false;
 }
-
-// Unmatched: header-read branches and native-endian no-op loop shape.
-#include "kynapse/graph/nearest.hpp"
-extern const char D_00407268[];
-inline void NativeWord(int *p) { *p = *p; }
-int Kaim::CFindNearestData::Load(const void *path) {
- FileService *files=D_003C9ED4->files;
- if(!files || !files->Exists(path))return 0;
- char header[64];
- __builtin_strcpy(header,"none");
- unsigned int version=0;
- unsigned int length=func_0035CCD8(D_00407268);
- if(files->Read(path,header,length)!=length)goto fail;
- if(length!=func_0035CCD8(D_00407268))goto fail;
- if(files->Read(path,&version,4)!=4)goto fail;
- header[length]=0;
- if(func_00360838(D_00407268,header) || version!=1)goto fail;
- {int bytes=count*12;
- if(files->Read(path,order,bytes)!=bytes)goto fail;
- for(int i=0;i<count*3;++i)NativeWord(&order[i]);
- bytes=count*12;
- if(files->Read(path,rank,bytes)!=bytes)goto fail;
- for(int i=0;i<count*3;++i)NativeWord(&rank[i]);}
- files->Close(path);return 1;
- fail: files->Close(path);return 0;
-}
-
-// Unmatched: raw file cleanup and allocator local lifetimes.
-#include "kynapse/graph/nearest.hpp"
-extern const char D_00407268[];
-struct RawGraphFileHooks {
- char unknown00[0x54];
- void *(*open)(const void *,const char *);
- void (*close)(void *);
- char unknown5c[8];
- unsigned int (*write)(const void *,unsigned int,unsigned int,void *);
- unsigned int (*read)(void *,unsigned int,unsigned int,void *);
-};
-extern RawGraphFileHooks GraphHooks __asm__("D_00451228");
-inline void ConvertWord(int *p){*p=*p;}
-int Kaim::CFindNearestData::LoadFile(const void *path){
- void *file=GraphHooks.open(path,"rb");
- if(!file)return 0;
- char header[64]; int version;
- unsigned int length=GraphHooks.read(header,1,func_0035CCD8(D_00407268),file);
- if(length!=func_0035CCD8(D_00407268))goto fail;
- if(GraphHooks.read(&version,4,1,file)!=1)goto fail;
- header[length]=0;
- if(func_00360838(D_00407268,header) || version!=1)goto fail;
- count=graph->liveNodes;
- if(count>0){
-  order=new int[count*3]; rank=new int[count*3]; aux=new int[count];
-  if(GraphHooks.read(order,4,count*3,file)!=count*3)goto fail;
-  for(int i=0;i<count*3;++i)ConvertWord(&order[i]);
-  if(GraphHooks.read(rank,4,count*3,file)!=count*3)goto fail;
-  for(int i=0;i<count*3;++i)ConvertWord(&rank[i]);
- }
- GraphHooks.close(file);return 1;
- fail: GraphHooks.close(file);return 0;
-}
-
-// Unmatched: range arrays and register allocation.
-#include "kynapse/graph/nearest.hpp"
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EFC50);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
 int Kaim::CFindNearestData::CollectColumn(const Vec3 *point,int **output,float radius) {
  int axis; float defaultRadius=DefaultRadius(); int lower[3],upper[3];
  int bestAxis=-1,bestCount=-1,total=0;
@@ -228,9 +236,11 @@ int Kaim::CFindNearestData::CollectColumn(const Vec3 *point,int **output,float r
  *output=aux;
  return total;
 }
-
-// Unmatched: range arrays and loop scheduling.
-#include "kynapse/graph/nearest.hpp"
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EFF00);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
 int Kaim::CFindNearestData::CollectBox(const Vec3 *point,int **output,float radius) {
  int axis; int lower[3],upper[3];
  int bestAxis=-1,bestCount=-1,total=0;
@@ -249,13 +259,11 @@ int Kaim::CFindNearestData::CollectBox(const Vec3 *point,int **output,float radi
  *output=aux;
  return total;
 }
-
-// Unmatched: binary-search branch layout.
-#include "kynapse/graph/nearest.hpp"
-extern "C" float func_00390038(void *,const Vec3 *,int);
-inline float SortedCoordinate(Kaim::CFindNearestData *data,int axis,int index) {
- return func_00390038(data,(const Vec3 *)&data->OrderedNode(axis,index)->x,axis);
-}
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F0110);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
 int Kaim::CFindNearestData::EqualBoundary(int position,int axis,unsigned char lower,float value) {
  int left,right;
  if(lower){
@@ -282,13 +290,11 @@ int Kaim::CFindNearestData::EqualBoundary(int position,int axis,unsigned char lo
  }
  return SortedCoordinate(this,axis,left)==value ? left:right;
 }
-
-// Unmatched: binary-search branch layout.
-#include "kynapse/graph/nearest.hpp"
-extern "C" float func_00390038(void *,const Vec3 *,int);
-inline float SortedCoordinate(Kaim::CFindNearestData *data,int axis,int index) {
- return func_00390038(data,(const Vec3 *)&data->OrderedNode(axis,index)->x,axis);
-}
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F02E8);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: auxiliary-pointer store scheduling persists with the typed lookup, inline loader and full TU context.
 int Kaim::CFindNearestData::FindBound(int axis,unsigned char lower,float value) {
  int left=0,right=graph->liveNodes-1;
  while(left<right-1){
@@ -309,37 +315,6 @@ int Kaim::CFindNearestData::FindBound(int axis,unsigned char lower,float value) 
  if(b<=value)return EqualBoundary(right,axis,lower,b);
  return EqualBoundary(left,axis,lower,a);
 }
-
-#endif
-
-int Kaim::CFindNearestData::GetRange(const Vec3 *point,int axis,int *lower,int *upper,float radius){
- float value=Coordinate(point,axis);
- *lower=FindBound(axis,1,value-radius);
- if(*lower!=-1){
-  *upper=FindBound(axis,0,value+radius);
-  if(*upper!=-1)return *upper-*lower+1;
- }
- return 0;
-}
-
-void Kaim::CFindNearestData::CopyRank(const int *source)
-{
-    if (!rank && count > 0)
-        rank = new int[count * 3];
-    for (int i = 0; i < count * 3; ++i)
-        rank[i] = source[i];
-}
-
-void Kaim::CFindNearestData::CopyOrder(const int *source)
-{
-    if (!order && count > 0)
-        order = new int[count * 3];
-    for (int i = 0; i < count * 3; ++i)
-        order[i] = source[i];
-}
-
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EFC50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EFF00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F0110);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F02E8);
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002F06C0);
+#endif

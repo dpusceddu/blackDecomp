@@ -4,45 +4,6 @@
 using namespace Kaim;
 
 
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
-// Unmatched: handler factory target register differs by four instructions.
-CBrain::CBrain(void *ownerValue, BrainHandlerClass *handlerClass)
-{
-    agentCount = 0;
-    serviceCount = 0;
-    owner = ownerValue;
-    if (func_0038BA30()->count)
-        agents = (BrainComponent**)Allocate(func_0038BA30()->count * 4);
-    else
-        agents = 0;
-    if (func_0038C3E0()->count)
-        services = (BrainComponent**)Allocate(func_0038C3E0()->count * 4);
-    else
-        services = 0;
-    if (!handlerClass->create)
-        handler = 0;
-    else
-        handler = handlerClass->create();
-}
-
-// Unmatched: owned-array cleanup branches and pointer lifetimes differ.
-CBrain::~CBrain()
-{
-    if (handler)
-        delete handler;
-    if (agents) {
-        for (int i = 0; i < agentCount; ++i)
-            delete agents[i];
-        D_003C87E0(agents);
-    }
-    if (services) {
-        for (int i = 0; i < serviceCount; ++i)
-            delete services[i];
-        D_003C87E0(services);
-    }
-}
-#endif
 
 bool CBrain::Configure(GraphConfig *config)
 {

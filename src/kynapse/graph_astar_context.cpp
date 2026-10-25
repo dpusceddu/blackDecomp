@@ -44,8 +44,8 @@ Kaim::CAstarData *CreateAstarData(Kaim::SearchGraph *graph) {
     return new Kaim::CAstarData(graph);
 }
 
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
+
+#ifdef NON_MATCHING
 // Unmatched: matrix-allocation branch placement and inline loading scope.
 int Kaim::CAstarData::Init(ChildBuffers *config) {
     if (count < 1) {
@@ -60,6 +60,10 @@ int Kaim::CAstarData::Init(ChildBuffers *config) {
     }
     return false;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDA40);
+#endif
+#ifdef NON_MATCHING
 // Unmatched: resource stream loop scheduling and inline native-word conversion.
 bool Kaim::CAstarData::Load(const void *resource) {
     FileService *files = D_003C9ED4->files;
@@ -85,6 +89,10 @@ fail:
     files->Close(resource);
     return false;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDBA8);
+#endif
+#ifdef NON_MATCHING
 // Unmatched: raw stream loop scheduling and header branch placement.
 bool Kaim::CAstarData::LoadFile(const void *path) {
     void *file = D_00451228.open(path, "rb");
@@ -110,6 +118,10 @@ fail:
     }
     return false;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDD88);
+#endif
+#ifdef NON_MATCHING
 // Unmatched: index-sentinel representation, route-result join and row cleanup scheduling.
 int Kaim::CAstarData::Build()
 {
@@ -154,6 +166,10 @@ int Kaim::CAstarData::Build()
     graph->costPolicy = savedPolicy;
     return true;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDF40);
+#endif
+#ifdef NON_MATCHING
 // Unmatched: header-write join and conversion buffer lifetimes.
 int Kaim::CAstarData::Save(const void* path)
 {
@@ -181,6 +197,10 @@ int Kaim::CAstarData::Save(const void* path)
     }
     return false;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FE370);
+#endif
+#ifdef NON_MATCHING
 // Unmatched: route append helper, vector temporary and traversal scheduling.
 bool Kaim::CAstarData::ExtractRoute(unsigned int from, unsigned int to, RouteBuffers *route) {
     route->Clear();
@@ -226,12 +246,6 @@ bool Kaim::CAstarData::ExtractRoute(unsigned int from, unsigned int to, RouteBuf
     } while (from != to);
     return true;
 }
-
-#endif
-
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDA40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDBA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDD88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDF40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FE370);
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FE570);
+#endif

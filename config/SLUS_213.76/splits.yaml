@@ -2259,7 +2259,8 @@ splits:
   - {src: src/kynapse/graph_allocators.cpp, range: [0x2e5358, 0x2e5848], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e5848, 0x2e58a0]}
   - {src: src/kynapse/graph_allocators.cpp, range: [0x2e58a0, 0x2e5ae8]}
-  - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e5ae8, 0x2e5d90]}
+  - {src: src/kynapse/tu_2e5358_2e5ae8.cpp, range: [0x2e5ae8, 0x2e5c38], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/kynapse/tu_2e5358_2e5c38.cpp, range: [0x2e5c38, 0x2e5d90], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/graph_allocator_cleanup.cpp, range: [0x2e5d90, 0x2e6cf0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -finline-functions, -finline-limit-100]}
   - {src: src/kynapse/tu_2e5358_2e5848.c, range: [0x2e6cf0, 0x2e6d10]}
   - {src: src/kynapse/graph_allocator_cleanup.cpp, range: [0x2e6d10, 0x2e6d90]}
@@ -2288,11 +2289,12 @@ splits:
   - {src: src/kynapse/tu_2e7670_2e9328.c, range: [0x2e9538, 0x2e9630]}
   - {src: src/kynapse/small_misc_2e9630.cpp, range: [0x2e9630, 0x2e9648], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_parameter_tables.cpp, range: [0x2e9648, 0x2e96f8]}
-  - {src: src/kynapse/small_misc_2e9630.cpp, range: [0x2e96f8, 0x2e9868]}
+  - {src: src/kynapse/tu_2e7670_2e96f8.cpp, range: [0x2e96f8, 0x2e97b0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/kynapse/tu_2e7670_2e97b0.cpp, range: [0x2e97b0, 0x2e9868], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/graph_parameter_tables.cpp, range: [0x2e9868, 0x2e98f0]}
   - {src: src/kynapse/tu_2e7670_2e9328.c, range: [0x2e98f0, 0x2e9978]}
   - {src: src/kynapse/graph_parameter_tables.cpp, range: [0x2e9978, 0x2e9bc8]}
-  - {src: src/kynapse/small_misc_2e9630.cpp, range: [0x2e9bc8, 0x2e9cb0]}
+  - {src: src/kynapse/tu_2e7670_2e9bc8.cpp, range: [0x2e9bc8, 0x2e9cb0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2e7670_2e9328.c, range: [0x2e9cb0, 0x2e9cc8]}
   - {src: src/kynapse/small_misc_2e9cc8.cpp, range: [0x2e9cc8, 0x2e9d10], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e7670_2e9328.c, range: [0x2e9d10, 0x2e9e20]}
@@ -2377,7 +2379,7 @@ splits:
   - {src: src/kynapse/graph_path_manager.cpp, range: [0x2f4cf8, 0x2f4e90], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/tracker_2f4e90.cpp, range: [0x2f4e90, 0x2f4f80], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_path_manager.cpp, range: [0x2f4f80, 0x2f51b0]}
-  - {src: src/kynapse/tracker_2f4e90.cpp, range: [0x2f51b0, 0x2f5348]}
+  - {src: src/kynapse/tu_2f4bc0_2f51b0.cpp, range: [0x2f51b0, 0x2f5348], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/graph_path_manager.cpp, range: [0x2f5348, 0x2f5760]}
   - {src: src/kynapse/tu_2f4bc0_2f5760.c, range: [0x2f5760, 0x2f57c0]}
   - {src: src/kynapse/graph_path_manager.cpp, range: [0x2f57c0, 0x2f5bd0]}
@@ -2408,11 +2410,19 @@ splits:
   - {src: src/kynapse/tu_2fd998_2fea88.c, range: [0x2febd0, 0x2fec10]}
   - {src: src/kynapse/factories_2fec10.cpp, range: [0x2fec10, 0x2fecb8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/graph_pathfinder.cpp, range: [0x2fecb8, 0x300278], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
-  - {src: src/kynapse/route_manual.cpp, range: [0x300278, 0x301d60], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/route_manual.cpp, range: [0x300278, 0x301418], flags: [-O2, -G0, -snas, -fbyte-bool]}
+  - {src: src/kynapse/tu_2fec10_301418.cpp, range: [0x301418, 0x3016e8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/kynapse/route_manual.cpp, range: [0x3016e8, 0x301c68]}
+  - {src: src/kynapse/tu_2fec10_301c68.cpp, range: [0x301c68, 0x301d60], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/graph_pathfinder.cpp, range: [0x301d60, 0x301e78]}
-  - {src: src/kynapse/route_manual.cpp, range: [0x301e78, 0x303630]}
+  - {src: src/kynapse/route_manual.cpp, range: [0x301e78, 0x302198]}
+  - {src: src/kynapse/tu_2fec10_302198.cpp, range: [0x302198, 0x302388], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/kynapse/route_manual.cpp, range: [0x302388, 0x303388]}
+  - {src: src/kynapse/tu_2fec10_303388.cpp, range: [0x303388, 0x303630], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/graph_pathfinder.cpp, range: [0x303630, 0x3037b8]}
-  - {src: src/kynapse/route_manual.cpp, range: [0x3037b8, 0x304cb0]}
+  - {src: src/kynapse/tu_2fec10_3037b8.cpp, range: [0x3037b8, 0x3039d8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
+  - {src: src/kynapse/route_manual.cpp, range: [0x3039d8, 0x304be8]}
+  - {src: src/kynapse/tu_2fec10_304be8.cpp, range: [0x304be8, 0x304cb0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/route_cache.cpp, range: [0x304cb0, 0x304d98], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/predicates_304d98.cpp, range: [0x304d98, 0x304db8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/route_manual.cpp, range: [0x304db8, 0x304de8]}
@@ -2422,7 +2432,8 @@ splits:
   - {src: src/kynapse/route_manual.cpp, range: [0x304f08, 0x305010]}
   - {src: src/kynapse/graph_pathfinder.cpp, range: [0x305010, 0x305090]}
   - {src: src/kynapse/ai_route_follower_304ee8.cpp, range: [0x305090, 0x305110]}
-  - {src: src/kynapse/tu_2fec10_305110.c, range: [0x305110, 0x305200]}
+  - {src: src/kynapse/tu_2fec10_305110.c, range: [0x305110, 0x305190]}
+  - {src: src/kynapse/tu_2fec10_305190.cpp, range: [0x305190, 0x305200], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/route_manual.cpp, range: [0x305200, 0x3052a0]}
   - {src: src/kynapse/graph_pathfinder.cpp, range: [0x3052a0, 0x305340]}
   - {src: src/kynapse/tu_2fec10_305110.c, range: [0x305340, 0x305378]}
@@ -3600,7 +3611,7 @@ splits:
   - {src: src/kynapse/inline/linkonce_392db0.c, range: [0x392db0, 0x392dc0]}
   - {src: src/kynapse/inline/linkonce_392dc0.c, range: [0x392dc0, 0x392df8]}
   - {src: src/kynapse/inline/linkonce_392df8.c, range: [0x392df8, 0x392e50]}
-  - {src: src/kynapse/inline/linkonce_392e50.c, range: [0x392e50, 0x393200]}
+  - {src: src/kynapse/inline/linkonce_392e50.cpp, range: [0x392e50, 0x393200], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/inline/linkonce_393200.c, range: [0x393200, 0x393288]}
   - {src: src/kynapse/inline/owned_arrays_393288.cpp, range: [0x393288, 0x393320], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/inline/grid_393320.cpp, range: [0x393320, 0x393470], flags: [-O2, -G0, -snas, -fbyte-bool]}

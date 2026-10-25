@@ -38,10 +38,10 @@ A function that does not match yet keeps its `INCLUDE_ASM` line and its readable
 `#ifdef NON_MATCHING` block (the `#else` branch is the marker), with a one-line `// Unmatched:` note. `python3 configure.py
 --non-matching` followed by `ninja` builds the drafts into a separate executable.
 
-A few files also contain `#if 0` blocks. They are not drafts of a known function: they are readable code (mostly ported from the
-Xbox build of the Kynapse library, or candidates whose function could not be tied to an address) that is kept for reference and
-never compiled. Each one has an "Unplaced draft" comment above it; when its function is found, move it into the
-`#ifdef NON_MATCHING` form above.
+A draft sits right above the marker of the function it is for, in the file that owns the function. Readable code whose
+function cannot be identified does not stay in the tree: `src/` has no `#if 0` blocks. A draft that needs headers or flags of
+its own gets a small file of its own (`python3 tools/split_function.py func_XXXXXXXX --cpp`), so that it does not collide with
+the declarations of the file around it.
 
 ## File names
 

@@ -29,7 +29,6 @@ s32 func_00305188(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00305190);
 
 #include "ps2/recovered_types.h"
 extern s32 func_002FB9D0(void *, void *, void *, s32, s32, f32);

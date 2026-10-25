@@ -2,13 +2,6 @@
 
 #include "kynapse/graph/node_queries.hpp"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB6D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB850);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB9D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FBC20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC260);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC3C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC668);
 
 inline void QueryDrawPoint(const QueryVector *point, int red, int green, int blue)
 {
@@ -25,9 +18,8 @@ extern unsigned int QuerySimpleGuard __asm__("D_004526F8");
 extern NearestEdgeVisitor QueryEdgeStorage __asm__("D_00452700");
 extern unsigned int QueryEdgeGuard __asm__("D_00452728");
 
+#ifdef NON_MATCHING
 // Unmatched: visitor and iterator register allocation.
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
 NavNode *FindNearestVertex(NodeGraph *graph,const Vec3 *point,unsigned char outgoing,unsigned char incoming) {
     if (!QuerySimpleGuard) {
         new (&QuerySimple) NearestSimpleVisitor;
@@ -40,10 +32,11 @@ NavNode *FindNearestVertex(NodeGraph *graph,const Vec3 *point,unsigned char outg
     QuerySimple.VisitNodes(graph);
     return QuerySimple.result;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB6D8);
 #endif
+#ifdef NON_MATCHING
 // Unmatched: visitor lifetime and register allocation.
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
 NavNode *FindNearestVisible(NodeGraph *graph,const Vec3 *point,Actor *actor,unsigned char outgoing,unsigned char incoming) {
     VisibleNodeVisitor visitor;
     visitor.point=*point;
@@ -55,10 +48,11 @@ NavNode *FindNearestVisible(NodeGraph *graph,const Vec3 *point,Actor *actor,unsi
     visitor.VisitNodes(graph);
     return visitor.result;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB850);
 #endif
+#ifdef NON_MATCHING
 // Unmatched: visitor lifetime and loop register allocation.
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
 NavNode *FindNearestLocal(NodeGraph *graph,const Vec3 *point,Actor *actor,float radius,unsigned char outgoing,unsigned char incoming) {
     NearestNodeVisitor visitor;
     visitor.point=*point;
@@ -79,10 +73,11 @@ NavNode *FindNearestLocal(NodeGraph *graph,const Vec3 *point,Actor *actor,float 
     }
     return visitor.result;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FB9D0);
 #endif
+#ifdef NON_MATCHING
 // Unmatched: adjacency inline helpers and live-range allocation.
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
 NavNode *QueryNearestCandidate(const Vec3 *point,Actor *actor,QueryPointIndex *index,unsigned char outgoing,unsigned char incoming) {
     int *candidates;
     unsigned int count=index->QueryBox(point,&candidates);
@@ -108,10 +103,11 @@ NavNode *QueryNearestCandidate(const Vec3 *point,Actor *actor,QueryPointIndex *i
     }
     return 0;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FBC20);
 #endif
+#ifdef NON_MATCHING
 // Unmatched: iterator register allocation.
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
 QueryEdge *FindNearestEdge(QueryGraph *graph,const Vec3 *point,float radius) {
     if(!QueryEdgeGuard) {
         new (&QueryEdgeStorage) NearestEdgeVisitor;
@@ -123,10 +119,11 @@ QueryEdge *FindNearestEdge(QueryGraph *graph,const Vec3 *point,float radius) {
     QueryEdgeStorage.VisitEdges(graph);
     return QueryEdgeStorage.result;
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC260);
 #endif
+#ifdef NON_MATCHING
 // Unmatched: vector temporary ordering and register allocation.
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
 void DrawGraph(QueryGraph *graph,int red,int green,int blue) {
     for(unsigned int i=0;i<graph->edgeCount;++i) {
         QueryEdge *edge=QueryEdgeAt(graph,i);
@@ -142,10 +139,11 @@ void DrawGraph(QueryGraph *graph,int red,int green,int blue) {
         QueryDrawPoint((QueryVector*)&node->position,red,green,blue);
     }
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC3C8);
 #endif
+#ifdef NON_MATCHING
 // Unmatched: vector temporary ordering and register allocation.
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
 void DrawGraphDefault(QueryGraph *graph) {
     for(unsigned int i=0;i<graph->edgeCount;++i) {
         QueryEdge *edge=QueryEdgeAt(graph,i);
@@ -161,6 +159,8 @@ void DrawGraphDefault(QueryGraph *graph) {
         QueryDrawPoint((QueryVector*)&node->position,0,255,0);
     }
 }
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FC668);
 #endif
 void DrawPath(QueryPath *path) {
     for(int i=0;i+1<path->count;++i) {

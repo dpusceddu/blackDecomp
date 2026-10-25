@@ -22,14 +22,6 @@ unsigned short* UnknownVtable_003DC838::Function_00149158(unsigned char index)
     return entries;
 }
 
-// Unmatched: exact body, but its section leaves an unexplained zero gap before the next function.
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
-void UnknownVtable_003DC5F8::Function_00383920()
-{
-    Field_00C4() = 2;
-}
-#endif
 
 void UnknownVtable_003E07F8::Function_001EE278(int active)
 {

@@ -36,51 +36,9 @@ int CAccessWaysData::Build()
     return true;
 }
 
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
 
-
-// Unmatched: serializer cleanup branches and callback-base/local register lifetimes.
+#ifdef NON_MATCHING
 extern char D_00407D50[];
-int CAccessWaysData::Save(const void* path)
-{
-    void* file = AccessFile.open(path, D_00407D50);
-    if (file) {
-        int version = D_00407DD0;
-        int i;
-        if (AccessFile.write(D_00407DB8, 1, strlen(D_00407DB8), file) == strlen(D_00407DB8) && AccessFile.write(&version, 4, 1, file) == 1) {
-            unsigned short words = (unsigned short)nodeCount;
-            if (AccessFile.write(&words, 2, 1, file) == 1) {
-                short* buffer = (short*)Allocate(nodeCount << 1);
-                for (i = 0; i < nodeCount; ++i)
-                    buffer[i] = counts[i];
-                int total = AccessFile.write(buffer, 2, nodeCount, file);
-                if (total != nodeCount) {
-                    D_003C87E0(buffer);
-                    AccessFile.close(file);
-                    return false;
-                }
-                int node = 0;
-                if (total > 0) do {
-                    for (i = 0; i < counts[node]; ++i)
-                        buffer[i] = lists[node][i];
-                    if (AccessFile.write(buffer, 2, counts[node], file) != counts[node]) {
-                        D_003C87E0(buffer);
-                        AccessFile.close(file);
-                        return false;
-                    }
-                    ++node;
-                } while (node < nodeCount);
-                D_003C87E0(buffer);
-                AccessFile.close(file);
-                return true;
-            }
-        }
-        AccessFile.close(file);
-    }
-    return false;
-}
-
 // Unmatched: header/read guards and native short-conversion helpers differ.
 int CAccessWaysData::Load(const void* resource)
 {
@@ -131,7 +89,10 @@ int CAccessWaysData::Load(const void* resource)
     }
     return false;
 }
-
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCB50);
+#endif
+#ifdef NON_MATCHING
 // Unmatched: native short conversion and read-count lifetimes differ.
 int CAccessWaysData::LoadFile(const void *resource){
  void *file=AccessFile.open(resource,"rb");if(!file)return false;
@@ -154,16 +115,49 @@ int CAccessWaysData::LoadFile(const void *resource){
  }
  AccessFile.close(file);return true;
 }
-
-// Unmatched: vertex/edge iterator and grid lifetime context differs.
-bool ComputeAccessWaysTraversal::Consider(SpatialNode *node){
- ComputeVisibilityTraversal grid;grid.origin.x=node->x;grid.origin.y=node->y;grid.origin.z=node->z;grid.owner=owner;
- grid.VisitNodes(graph);grid.VisitAll(graph);short n=grid.count;owner->counts[node->id]=n;int bytes=n<<1;short *block=new short[n];owner->lists[node->id]=block;memcpy(owner->lists[node->id],grid.values,bytes);
- if(owner->progress)owner->progress((unsigned int)(node->id*100)/graph->nodeCount);return true;
-}
-
-#endif
-
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCB50);
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCEC0);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: serializer cleanup branches and callback-base/local register lifetimes.
+int CAccessWaysData::Save(const void* path)
+{
+    void* file = AccessFile.open(path, D_00407D50);
+    if (file) {
+        int version = D_00407DD0;
+        int i;
+        if (AccessFile.write(D_00407DB8, 1, strlen(D_00407DB8), file) == strlen(D_00407DB8) && AccessFile.write(&version, 4, 1, file) == 1) {
+            unsigned short words = (unsigned short)nodeCount;
+            if (AccessFile.write(&words, 2, 1, file) == 1) {
+                short* buffer = (short*)Allocate(nodeCount << 1);
+                for (i = 0; i < nodeCount; ++i)
+                    buffer[i] = counts[i];
+                int total = AccessFile.write(buffer, 2, nodeCount, file);
+                if (total != nodeCount) {
+                    D_003C87E0(buffer);
+                    AccessFile.close(file);
+                    return false;
+                }
+                int node = 0;
+                if (total > 0) do {
+                    for (i = 0; i < counts[node]; ++i)
+                        buffer[i] = lists[node][i];
+                    if (AccessFile.write(buffer, 2, counts[node], file) != counts[node]) {
+                        D_003C87E0(buffer);
+                        AccessFile.close(file);
+                        return false;
+                    }
+                    ++node;
+                } while (node < nodeCount);
+                D_003C87E0(buffer);
+                AccessFile.close(file);
+                return true;
+            }
+        }
+        AccessFile.close(file);
+    }
+    return false;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FD4A0);
+#endif

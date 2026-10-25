@@ -132,18 +132,4 @@ bool CGraphManager::Configure(GraphConfig *config)
 }
 }
 
-// Unplaced draft, not compiled: readable code kept for reference whose PS2 address is not established (docs/units.md, "Drafts").
-#if 0
-namespace Kaim {
-// Unmatched: lookup branch placement and allocation-loop scheduling.
-bool CGraphManager::AddGraph(const char*name,CSpatialGraph *graph,unsigned char update){
- if(!name||!graph)return 0;
- if(!FindGraph(name)){
- if(count==capacity){capacity+=capacity;CGraphMap **grown=new CGraphMap*[capacity];for(unsigned int i=0;i<count;++i)grown[i]=items[i];D_003C87E0(items);items=grown;}
- items[count]=new CGraphMap(name,graph,update);++count;return true;}return false;
-}
-
-
-}
-#endif
 

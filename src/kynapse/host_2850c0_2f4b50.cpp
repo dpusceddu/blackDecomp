@@ -2,6 +2,19 @@
 
 // Ported from an unpublished companion project.
 #include "kynapse/host_2850c0.hpp"
+#ifdef NON_MATCHING
+#include "game/classes/UnknownVtable_003DC838.hpp"
+#include "game/classes/UnknownVtable_003DC5F8.hpp"
+#include "game/classes/UnknownVtable_003DC100.hpp"
+#include "game/classes/UnknownVtable_003DB1F8.hpp"
+#include "game/classes/UnknownVtable_003DB828.hpp"
+#include "game/classes/UnknownVtable_003DC130.hpp"
+#include "game/classes/other/UnknownVtable_003E07F8.hpp"
+#include "game/classes/other/UnknownVtable_003E06C8.hpp"
+#include "game/classes/other/UnknownVtable_003E0688.hpp"
+#include "game/classes/other/UnknownVtable_003E0058.hpp"
+#include "game/classes/other/UnknownVtable_003E0140.hpp"
+#endif
 
 namespace Kaim {
 // /SLUS_213.76 0x2f4b50
@@ -304,7 +317,17 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003822B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_003822D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00382358);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00383890);
+#ifdef NON_MATCHING
+namespace Unnamed {
+// Unmatched: exact body, but its section leaves an unexplained zero gap before the next function.
+void UnknownVtable_003DC5F8::Function_00383920()
+{
+    Field_00C4() = 2;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00383920);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00383938);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00383978);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00384448);

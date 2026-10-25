@@ -20,8 +20,6 @@ s32 func_002E5848(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5AE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002E5C38);
 
 void func_002E6CF0(s32 arg0, s32 arg1) {
     if ((arg1 == 0xFFFF) && (arg0 != 0)) {
