@@ -101,7 +101,8 @@ rename that is not just a local variable touches `config/SLUS_213.76/symbols.txt
    `Function_<address>` for an unnamed virtual method in a generated class view. They are kept until a better name is justified.
 4. **Descriptive names** we choose for classes and namespaces that have no original name: plain English for what the code does
    (`Weapons`, `WorldObjects`, `HideAgent`), never prefixed with `Mod`, `Campaign` or `Black`, and namespaces that hold only
-   partial layouts end in `Views`. Do not take a name from the Xbox build as if it were a PS2 fact.
+   partial layouts end in `Views`. Names such as `Fragment34FE10` or `KaimAvoidance` are scopes local to one file or group of files, not
+   class names. Do not take a name from the Xbox build as if it were a PS2 fact.
 
 ### A readable name for a C function
 
