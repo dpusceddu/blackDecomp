@@ -38,7 +38,11 @@ jobs:
               json.loads(p.read_text())
           for name in ("tus_overrides.yaml", "SLUS_213.76/splits.yaml"):
               yaml.safe_load(pathlib.Path("config", name).read_text())
+          for p in pathlib.Path(".github").rglob("*.yml"):
+              yaml.safe_load(p.read_text())
           PY
+      - name: The split list is consistent (every function has one owner file, no overlapping ranges)
+        run: python tools/build/splits.py check
       - name: configure.py writes a build file
         run: python configure.py --version SLUS_213.76 && test -s build.ninja
       - name: Build and tool tests

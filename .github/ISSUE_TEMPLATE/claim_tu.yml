@@ -1,0 +1,34 @@
+name: Claim a TU
+description: Say which translation unit you are going to work on, so that two people do not match the same file
+title: "Claim: "
+labels: ["claim"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        One file at a time, one person at a time (see "Claiming a TU" in CONTRIBUTING.md). Find candidates with
+        `python3 tools/next.py tus`, and check that the file is free by searching the open issues labelled "claim".
+        `python3 tools/where.py func_XXXXXXXX` tells you which file a function lives in.
+  - type: input
+    id: file
+    attributes:
+      label: Source file
+      description: For example `src/kynapse/tu_2d65e8_2d6fa8.c`; or the address of the TU from `tools/next.py tus`
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: What you intend to do
+      description: All functions of the file, or only some (name them); drafts, names or types as well?
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Before you start
+      options:
+        - label: I have my own copy of the game and the build prints OK on a clean checkout
+          required: true
+        - label: I will not commit game data, and I will not commit progress/ or the README progress table
+          required: true

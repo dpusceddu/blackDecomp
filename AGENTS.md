@@ -1,7 +1,7 @@
 # Rules for AI-assisted contributions
 
 Short, neutral rules for coding assistants and the people directing them. They are the same rules as in
-[CONTRIBUTING.md](CONTRIBUTING.md).
+[CONTRIBUTING.md](CONTRIBUTING.md); terms are in the [glossary](docs/glossary.md).
 
 - Start with [README.md](README.md) (setup, build), [docs/status.md](docs/status.md) (state, method, open problems) and the
   [matching handbook](docs/matching-handbook.md) before working on a TU.
@@ -16,12 +16,13 @@ Short, neutral rules for coding assistants and the people directing them. They a
 - Keep committed text free of machine-specific details: host names, user names, absolute paths, network addresses and
   credentials belong only in `.local/`.
 - Check free disk space before unpacking disc images and process one image at a time.
+- Every function belongs to exactly one file (`python3 tools/where.py func_XXXXXXXX` names it); work on a TU only after claiming it in an issue (CONTRIBUTING.md, "Claiming a TU"). Names follow the "Naming" section of CONTRIBUTING.md: no `Mod`, `Campaign` or `Black` prefixes, placeholders until the evidence supports a name.
 - Source layout: `src/<library>/<name>.c|cpp` (`src/game/<subsystem>/` for game code, see CONTRIBUTING.md; libraries: game, apt, kynapse, animation, physics, rw_core, rw_audio, sony,
   libc; link-once copies in `src/<library>/inline/`), one file per TU listing every function (recovered code, `INCLUDE_ASM` lines, drafts in `#ifdef NON_MATCHING` blocks). Headers follow the
   libraries in `include/<library>/` (shared helpers in `include/ps2/`). `tools/build/layout.py` has the naming rules.
 - Build with `ninja`; every commit leaves it printing `OK` for USA retail (`SLUS_213.76`, the only version checked routinely).
   Run `python3 tools/check_versions.py` (all five versions) before releases or after changing shared build tools. Work by replacing a function's `INCLUDE_ASM` line in its TU file; the
-  build inputs are `config/SLUS_213.76/splits.yaml`, and `symbols.txt` (edited by hand and by `autodecomp.py register`). Report progress with `ninja progress`; when it changes, run `ninja badges` and commit `progress/`.
+  build inputs are `config/SLUS_213.76/splits.yaml`, and `symbols.txt` (edited by hand and by `autodecomp.py register`). Report progress with `ninja progress` in the pull request description; do not commit `progress/` or the progress table of the README (`ninja badges` writes them; the maintainer regenerates them after merging, so pull requests never conflict on them).
 - Names, prototypes, types and layouts are hand-maintained source: `config/SLUS_213.76/symbols.txt` (`// type:func alias`
   lines are readable names that never change linking), `include/ps2/prototypes.h`, `include/ps2/recovered_types.h` and the
   headers under `include/<library>/` (recovered layouts are `Recovered_*` structs with `unk_XX` fields). Mark what no matched function confirms `UNVERIFIED`. Nothing here needs analysis data from outside

@@ -1,0 +1,48 @@
+name: Bug report
+description: The build, a tool or the documentation does not do what it says
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not attach game files, executables, disassembly or build output. Describe what you ran and what you saw.
+  - type: input
+    id: version
+    attributes:
+      label: Version and commit
+      description: Game ID (SLUS_213.76, ...) and the output of `git rev-parse --short HEAD`
+    validations:
+      required: true
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where does it go wrong?
+      options:
+        - ninja / the identical rebuild (does not print OK)
+        - a tool in tools/ (name it below)
+        - configure.py or the toolchain install
+        - the Docker image
+        - documentation
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: What you ran
+      description: The commands, in order, and the environment (OS, Docker or WSL)
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: What you saw
+      description: The last lines of the output, a mismatch report, or the error message. Paths with your user name can be shortened.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
