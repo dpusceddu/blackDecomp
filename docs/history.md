@@ -2,7 +2,7 @@
 
 Condensed results of the phases and studies, in order, with the numbers that still matter. Measurements are on USA retail
 (`SLUS_213.76`); "bytes" are `.text` spans from `ninja progress`, including alignment. The current state is in
-[status.md](status.md). Tool names refer to the layout of the time; one-off studies now live in `tools/studies/`.
+[status.md](status.md). Tool names refer to the layout of the time. One-off studies are no longer in the tree; their code is in the Git history of `tools/studies/`.
 
 ## Phase 0: inputs (see [inputs.md](inputs.md))
 
@@ -72,7 +72,7 @@ Work proceeded in rounds, each on a set of TUs with one owner per TU:
 - **Kynapse context follow-up**: whole-TU context and PS2 declarations helped a few cases (436-byte initializer, cache
   method); the 2,128-byte `ParameterTables` constructor matched once the assembler padding rule was recovered.
 - **Short-loop padding**: of 1,278 SN-assigned short backward branches, 712 are padded and 566 not; six- and seven-word
-  forms mix inside libraries and even identical bodies, and no position or content rule explains them (`tools/studies/loop_*.py`).
+  forms mix inside libraries and even identical bodies, and no position or content rule explains them .
   SN Ps2EeAs 1.9.25.758 pads displacement -1..-5 to six words; a two-byte hash-guarded derivative (`sn-min6`) gives the
   six-word family. A uniform substitution regresses 46 of 5,018 controls, so it is selected per unit only
   (`--assembler=sn-min6`, `assembler_evidence: weak` in `units.yaml`). +41 functions / 5,248 B.

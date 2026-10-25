@@ -28,7 +28,7 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All compiler ex
 ## Verified recipes
 
 These are scoped controls, not promises that a rewrite will improve another function. Reproduce the retail checks with
-`.venv/bin/python tools/studies/handbook_controls.py`; results and objects go to `build/handbook-controls/`. Each retail baseline
+`.venv/bin/python tools/maint/handbook_controls.py`; results and objects go to `build/handbook-controls/`. Each retail baseline
 was recompiled with SN GCC 2.95.3 build 1.36 and scored **zero** against retail with relocation bindings, except the
 explicitly identified native-CFI diagnostic whose metadata is exact while its body remains a draft. Synthetic
 compiler controls are identified explicitly and make no retail-match claim. Flags are the
@@ -69,10 +69,9 @@ original unit flags, recorded by the tool. Restoring the original source restore
 | C++ cleanup / destructors | Define inline destructors before callers and preserve exit scopes, including early returns. Use ordinary destructor names; if a label alias is required, retain destructor-shaped ABI spelling and verify both normal and exceptional cleanup. | `0x2D6E48`: destructor definition after caller adds **38** differences. A synthetic SN control retains cleanup with the normal `_$_5Probe` alias; a plain `cleanup` alias removes both cleanup paths (104→68 B). Compiler-only evidence does not identify a retail class. |
 | gp-relative data | Match `-G` and the declaration's known size. A small sized extern and an unsized array can lower differently under the same flags. Resolve the actual GPREL relocation target and addend; never forgive it just because the instruction matches. | `0x10BBF8`: sized extern under `-G8 -snas` exact; either `-G0` or unsized extern adds **2** differences. Assembly inputs require the existing `.extern symbol, 1` convention. A locally defined small-data section uses unnamed section relocations and object GP0; pass its verified base via `compiled_tokens(section_bindings=...)`, then verify the full link. |
 
-For VU verification run `.venv/bin/python tools/studies/verify_vu0_math.py` followed by
-`.venv/bin/python tools/maint/shared_context.py verify`. Register-renamed arithmetic windows alone do not verify physical
+Register-renamed arithmetic windows alone do not verify physical
 allocation, surrounding scheduling or a new W/flag-state contract. Scale, cross and normalization recipes still marked
-provisional in `config/vu0_math.json` remain provisional.
+provisional in `include/ps2/README.md` remain provisional.
 
 Do not discard a caller's upper GPR lanes as harmless scratch. The actual `0x33DAF8` bounds callback uses `MFC1`
 followed by `QMTC2`: the first preserves the GPR's upper 64 bits ([PCSX2's implementation](https://github.com/PCSX2/pcsx2/blob/master/pcsx2/FPU.cpp#L270))
@@ -93,7 +92,7 @@ fix lowering/combine before blaming allocation, then inspect scheduling. Use
 Dumps and generated assembly stay under `build/`.
 
 A scalar divide with otherwise identical instructions can expose a compiler-default workaround. Reproduce
-`.venv/bin/python tools/studies/divide_compiler_control.py`: the unchanged `0x3484D0` field expression is **2**
+it by compiling the leaf under both compilers (the helper script is in the Git history of `tools/studies/`): the unchanged `0x3484D0` field expression is **2**
 instructions short under SN 1.36 and **exact** under Sony `ee-gcc2.9-991111-01`. This leaf uses no wide ABI;
 its two field offsets are asserted. Sony `ee-gcc2.96` also matches: disabling its accepted
 `-mhandle-ee-div-pipeline-bug` option removes exactly those two instructions, establishing the workaround effect.

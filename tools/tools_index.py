@@ -17,7 +17,7 @@ OUTPUT = ROOT / 'docs' / 'tools.md'
 
 SECTIONS = [
     ('Everyday tools: working on a function', [
-        'decompile.py', 'objdiff.py', 'trysrc.py', 'next.py', 'autodecomp.py', 'permuter/prepare.py', 'permuter/cc.py',
+        'decompile.py', 'objdiff.py', 'trysrc.py', 'next.py', 'autodecomp.py', 'relocate_sources.py', 'permuter/prepare.py', 'permuter/cc.py',
         'permuter/as.py']),
     ('Everyday tools: build, check and progress', [
         'toolchain.py', 'compile.py', 'check_versions.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',
@@ -35,7 +35,7 @@ SECTIONS = [
         'pipeline/permuter_worker.py', 'pipeline/permuter_lanes.py', 'pipeline/compiler_dumps.py']),
     ('Maintainer and analysis tools (`tools/maint/`)', [
         'maint/class_skeletons.py', 'maint/rtti_evidence.py', 'maint/shared_context.py',
-        'maint/mod_context.py', 'maint/symbols.py', 'maint/discs.py', 'maint/iso.py', 'maint/inputs.py']),
+        'maint/mod_context.py', 'maint/shift_test.py', 'maint/handbook_controls.py', 'maint/symbols.py', 'maint/discs.py', 'maint/iso.py', 'maint/inputs.py']),
 ]
 NOTES = {
     'check_elf.py': 'Build check, run by `ninja`.',
@@ -50,11 +50,6 @@ Every tool answers `--help`. One-line purposes are taken from each tool's docstr
 A contributor needs the first two sections, which are the files directly in `tools/` (and `tools/permuter/`). `ninja` runs the
 build internals itself, the automatic pipeline is reached through `tools/autodecomp.py`, and the maintainer tools regenerate
 committed data. Tools import each other by bare module name; every tool puts `tools/` and its subdirectories on `sys.path`.
-'''
-FOOTER = '''
-## Finished studies (`tools/studies/`)
-
-Experiments and one-time migrations whose results are recorded in [history.md](history.md). They are kept for reproducibility and are not part of the normal workflow.
 '''
 
 
@@ -86,10 +81,6 @@ def render():
         out += ['## %s\n' % title, '| Tool | Purpose |', '| --- | --- |']
         out += [row(rel, ROOT / 'tools' / rel) for rel in tools if (ROOT / 'tools' / rel).is_file()]
         out.append('')
-    out.append(FOOTER.strip('\n') + '\n')
-    studies = sorted((ROOT / 'tools/studies').glob('*.py'))
-    out += ['| Tool | Purpose |', '| --- | --- |']
-    out += [row('studies/' + p.name, p) for p in studies if p.name != '__init__.py']
     return '\n'.join(out) + '\n'
 
 

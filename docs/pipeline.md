@@ -10,12 +10,10 @@ each exact consumer; `python3 tools/maint/shared_context.py verify` checks actua
 matches and the full image. Reuse these headers and preserve their helper order, widths and VU
 spill recipes. Report shared changes to their owner; unverified layouts remain explicitly partial.
 
-VU math study tools: `tools/studies/vu0_patterns.py` inventories recurring instruction/dataflow shapes;
-`tools/pipeline/vu0_micro.py` decodes conservative contracts keyed by uploaded image and entry address.
+VU math: `tools/pipeline/vu0_micro.py` decodes conservative contracts keyed by uploaded image and entry address.
 Their generated site lists belong under `build/`. Library labels inherited from the TU map are
-qualified evidence, and overlapping shape counts are not additive. `tools/studies/verify_vu0_math.py`
-checks isolated arithmetic windows; `config/vu0_math.json` promotes an operation only with two
-complete exact source consumers. Full matrix/transpose and several normalization recipes remain
+qualified evidence, and overlapping shape counts are not additive. An
+operation is promoted to a shared recipe only with two complete exact source consumers. Full matrix/transpose and several normalization recipes remain
 unverified. Animation's recurring fixed-VF macros have a separate header from allocatable `j` helpers.
 
 For a targeted retry, select `users[].address` from the census with repeated `--addr` arguments and

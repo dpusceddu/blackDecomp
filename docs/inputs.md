@@ -1,6 +1,6 @@
 # Inputs and versions
 
-Produced by `tools/maint/discs.py`, `tools/maint/inputs.py`, `tools/maint/symbols.py` and `tools/studies/asmcheck.py`. The survey writes hashes and ELF metadata
+Produced by `tools/maint/discs.py`, `tools/maint/inputs.py`, and `tools/maint/symbols.py`. The survey writes hashes and ELF metadata
 to the ignored `build/survey/variants.json` and raw dumps to `.local/`; `config/versions.json` (by hand) keeps the five supported versions. The build itself only needs the boot executables in
 `orig/<GAME_ID>/`; the disc survey tools are for maintainers who have the disc images.
 
@@ -124,7 +124,7 @@ cannot be read from any variant's symbols.
 
 ## What the first disassembly round found
 
-Reassembling the USA retail `.text` with the EE-aware GNU assemblers (`tools/studies/asmcheck.py`; rabbitizer's R5900
+Reassembling the USA retail `.text` with the EE-aware GNU assemblers (an early check, since removed; rabbitizer's R5900
 support, numeric registers) reproduces every one of the 256 distinct mnemonics (2,684 words) and 40 random windows of 1,500
 words, with three points that shaped the build:
 

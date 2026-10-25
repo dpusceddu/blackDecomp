@@ -28,7 +28,7 @@ Short, neutral rules for coding assistants and the people directing them. They a
   the repository; an analysis tool such as Ghidra is optional and personal, and its output enters only as edits to these files.
 - Evidence: `exact` (byte-identical in the full image) or `draft` (a `NON_MATCHING` block). Do not claim more than the evidence shows.
 - Tools: the everyday ones in `tools/`, build internals in `tools/build/`, the automatic pipeline in `tools/pipeline/`,
-  maintainer and analysis tools in `tools/maint/`, finished experiments in `tools/studies/` (index: `docs/tools.md`); every tool needs a purpose docstring and
+  maintainer and analysis tools in `tools/maint/` (index: `docs/tools.md`); every tool needs a purpose docstring and
   `--help`. Keep docs short and current: no per-function proof journals, a one-line `// Unmatched:` comment on
   non-matching functions.
 - Format new C/C++ with `.clang-format`; do not reformat existing sources.

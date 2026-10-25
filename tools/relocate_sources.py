@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Move source files and keep every reference to them consistent: the build inputs, documentation and generated comments.
 
-Usage: relocate_sources.py PAIRS [--dry-run]       PAIRS is a file of `old new` repo-relative paths, one pair per line
+Usage: relocate_sources.py OLD NEW [--dry-run]     one file, repo-relative paths: src/game/unsorted/tu_100258.c src/game/ui/foo.c
+       relocate_sources.py PAIRS [--dry-run]       PAIRS is a file of `old new` paths, one pair per line
                                                    (`-` reads standard input; blank lines and `#` comments are ignored)
 For every pair whose old file exists it runs `git mv`, then rewrites the exact old path in `src:` lines of
 config/SLUS_213.76/splits.yaml and in any other tracked text file that mentions it (docs, headers with generated comments,
 tools). Pairs whose old file is already gone are skipped, so the tool can be run again. It changes only paths: the build
-must stay byte-identical, check it with `ninja` afterwards. Used by linkonce_owners.py (--pairs) and group_game_sources.py.
-"""
+must stay byte-identical, check it with `ninja` afterwards. """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
@@ -15,7 +15,7 @@ if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
 import re, subprocess, sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 TEXT = ('.py', '.md', '.yaml', '.yml', '.txt', '.json', '.h', '.hpp', '.c', '.cpp', '.inc', '.toml', '.ninja')
 
 
@@ -62,9 +62,15 @@ def relocate(pairs, dry_run=False):
 
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
-    if len(args) != 1:
+    if len(args) == 2:
+        if not (ROOT / args[0]).is_file():
+            raise SystemExit('no such file: %s (give repo-relative paths)' % args[0])
+        pairs = [(args[0], args[1])]
+    elif len(args) == 1:
+        pairs = read_pairs(args[0])
+    else:
         raise SystemExit(__doc__.strip())
-    n = relocate(read_pairs(args[0]), '--dry-run' in sys.argv)
+    n = relocate(pairs, '--dry-run' in sys.argv)
     print('%d files %s' % (n, 'would move' if '--dry-run' in sys.argv else 'moved'))
 
 

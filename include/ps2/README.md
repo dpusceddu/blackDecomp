@@ -52,11 +52,9 @@ these software helpers to their original addresses. This is a scoped native-doub
 not verification of every floating operation or another compiler's ABI.
 
 `vu0_math.h` exposes the C-compatible arithmetic blocks used by `vu0.hpp`.
-`config/vu0_math.json` separates operations with two exact source consumers from
-provisional scale/cross/normalization recipes. Run `tools/studies/verify_vu0_math.py` for
-isolated, register-renamed VF dataflow equality against retail, followed by
-`tools/maint/shared_context.py verify` for full physical allocation and image checks.
-Isolation does not prove surrounding scheduling. XYZ writes do not define W;
+Add, subtract, multiply, one-x, sum-xyz, sqrt-x and the animation quaternion and translation recipes each have two exact
+source consumers; scale, cross and the two normalizations are provisional. Isolated, register-renamed dataflow equality
+does not prove physical allocation or surrounding scheduling. XYZ writes do not define W;
 normalize-with-copy and normalize-without-copy are distinct recipes. ACC and Q
 are consumed inside one assembly block; MAC/status flags are not exported.
 

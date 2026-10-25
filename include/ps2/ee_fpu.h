@@ -5,7 +5,7 @@
    -mhandle-ee-div-pipeline-bug option emits these two guard instructions;
    SN 1.36 has no equivalent option. Use only for independently verified
    consumers, not as a global compiler-identity or hardware-safety claim.
-   See docs/matching-handbook.md and tools/studies/divide_compiler_control.py. */
+   See docs/matching-handbook.md. */
 typedef char BkEeFloatIs32[sizeof(float) == 4 ? 1 : -1];
 static inline float BkEeDividePipelineGuarded(float numerator, float denominator)
 {

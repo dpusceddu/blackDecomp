@@ -91,25 +91,13 @@ Candidate and production caches include the recipe. The automatic pipeline tries
 fallback before the older `sn-2.73a` assembler; `gas-2.40`, `gas-2.40-fix` and `sony-2.9` remain
 explicit experiments. Every new match must pass the full image comparison.
 
-`python3 tools/studies/loop_padding.py --classify --output build/loop-classification.json` classifies every
-SN-assigned short branch using the TU map and matched-source compiler overrides, including delay
-slots, branch-likely, loads/stores, mult/div, COP1/COP2, calls and loop lengths. Contiguous prebranch
-NOPs are candidate padding: their origin cannot be proved from bytes alone. Sony-assigned regions
-are reported separately; detailed instructions stay in ignored output. Omit `--classify` for the
-original whole-executable census. See PLAN for the measured limits.
-
-`python3 tools/studies/loop_provenance.py` joins every site to TU and library ranges and reports raw and
-hardware/control-flow-qualified cohorts. The forms do not partition all libraries or TUs cleanly.
-Keep alternate assemblers as individually verified unit recipes. The units serializer marks them
-`assembler_evidence: {strength: weak, ...}`: historical toolchain provenance is unresolved; full-image
-byte identity remains mandatory. Consistent filtered cohorts are leads, not recovered build flags.
-
-`python3 tools/studies/loop_positions.py` tests linked, function-, TU- and text-relative positions,
-alignment residues and boundary crossings. Six/seven candidates still collide after accounting for
-candidate padding, including combined residues through 512 bytes. Exact linked offsets identify
-individual sites; observed endpoints encode the resulting length. Neither establishes an assembler
-rule. Static tracing finds a section-relative displacement check, without an alignment/cache-line
-gate. Keep the independently verified recipes; no position-based derivative is justified.
+Studies of the short loops (since removed from the tree, see the Git history of `tools/studies/`) classified every
+SN-assigned short branch by TU, library, compiler override, delay-slot and loop length, and tested linked, function-,
+TU- and text-relative positions and alignment residues. The forms do not partition libraries or TUs cleanly; six- and
+seven-word candidates still collide after accounting for candidate padding, and a static trace finds a section-relative
+displacement check without an alignment or cache-line gate. Keep alternate assemblers as individually verified unit
+recipes (the units serializer marks them `assembler_evidence: {strength: weak, ...}`: historical toolchain provenance is
+unresolved); full-image byte identity remains mandatory. Consistent filtered cohorts are leads, not recovered build flags.
 
 
 ## One file per TU
@@ -119,6 +107,5 @@ records where a TU is several files. Compiled with `-ffunction-sections`, SN 1.3
 changing a code byte, `make_ld.py` renames each section to the slot of its function and `units_verify.py` checks each section
 against the span of the original function, so INCLUDE_ASM functions (orphan pieces, hard cases) stay between the compiled ones.
 Constants keep one section per file (the literal pool of GCC 2.95 has no per-constant sections: `-fdata-sections` only splits
-named variables), so a TU whose assembly functions between its compiled functions own constants is several files. The one-time
-regrouping from the earlier one-file-per-function layout is `tools/studies/migrate_include_asm.py` (parts that disagreed in
-flags, language, declarations or constants stayed separate files; `note:` in the split list says why).
+named variables), so a TU whose assembly functions between its compiled functions own constants is several files. Parts of a TU that disagree in
+flags, language, declarations or constants are separate files (`note:` in the split list says why).

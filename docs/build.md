@@ -210,13 +210,13 @@ the alias in a comment) and the structures they use in `include/ps2/recovered_ty
 overall and by region, then by translation unit (complete, partial and untouched TUs by confidence and by library), and writes
 `build/<GAME_ID>/progress.json`. `python3 tools/next.py tus` lists candidate TUs.
 
-Other tools: `tools/build/tus.py` (TU boundaries and map, `ninja tus`), `tools/build/layout.py` (naming of TU files), `tools/build/include_asm.py` (markers), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/studies/shift_test.py` (shiftability test),
+Other tools: `tools/build/tus.py` (TU boundaries and map, `ninja tus`), `tools/build/layout.py` (naming of TU files), `tools/build/include_asm.py` (markers), `tools/diffelf.py REF BUILT` (section-by-section diff), `tools/maint/shift_test.py` (shiftability test),
 `tests/link/check.py` (SN object + GNU object linked by the toolchain's `ld`). In a sandbox script, the binutils tools
 (`mipsel-linux-gnu-{ld,objcopy,readelf,objdump,nm}`, or the prefix in `$BLACK_BINUTILS_PREFIX`) are on PATH.
 
 ## Shiftability
 
-`python3 tools/studies/shift_test.py SLUS_213.76 --nops 200` copies the split assembly to a scratch name, inserts NOPs into one
+`python3 tools/maint/shift_test.py SLUS_213.76 --nops 200` copies the split assembly to a scratch name, inserts NOPs into one
 function, rebuilds and checks every symbolic reference against a symbol-derived address map. Result for 200 NOPs
 (everything from `.text` onward moves): all 19,781 `jal`/`j`, 19,121 `%hi`, 25,118 `%lo`, 2,997 gp-relative accesses,
 8,499 + 4,321 + 5 data pointers and 903 exception-table entries moved correctly, 0 inconsistencies. Known non-shiftable

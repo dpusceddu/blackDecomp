@@ -102,8 +102,7 @@ Matching is not the only useful contribution. Two kinds of cleanup are always we
 - **Real file names and directories.** Files are named `tu_<address>` until evidence shows the original name or class
   (strings, RTTI, class ownership). The rule for `src/game/`: **move a file when you learn what it is, rename it when the
   original name is known.** Moving means a `git mv` into the subsystem directory plus the `src:` path in `splits.yaml`
-  (`tools/studies/relocate_sources.py` does both; `tools/studies/group_game_sources.py` proposes directories for the files still in
-  `unsorted/`); a rename is the same. A new file starts in `src/game/unsorted/`. Compiler-emitted
+  (`python3 tools/relocate_sources.py old new` does both); a rename is the same. A new file starts in `src/game/unsorted/`. Compiler-emitted
   inline and template copies go in `src/<library>/inline/` (the build computes whose they are, `build/SLUS_213.76/inline_owners.txt`).
 
 ## Tests

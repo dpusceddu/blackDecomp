@@ -16,6 +16,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/trysrc.py` | Compile a hand-written or templated C source for one function and score it against the original. |
 | `tools/next.py` | Best next work, from the automatic pipeline's results (build/auto.json) and the source units (tools/build/units.py). |
 | `tools/autodecomp.py` | Automatic decompilation pilot: m2c -> clean -> compile variants -> score -> permuter -> register as source units. |
+| `tools/relocate_sources.py` | Move source files and keep every reference to them consistent: the build inputs, documentation and generated comments. |
 | `tools/permuter/prepare.py` | Write the assembly of one function in the plain form decomp-permuter's import.py reads. |
 | `tools/permuter/cc.py` | Compile script for decomp-permuter: run the pinned SN compiler on one self-contained source file. |
 | `tools/permuter/as.py` | Assemble the target of decomp-permuter with the EE assembler of the pinned toolchain. |
@@ -93,30 +94,10 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/maint/rtti_evidence.py` | Recover legacy GCC RTTI initialization evidence without executing target code. |
 | `tools/maint/shared_context.py` | Verify the shared PS2 inline context against its real source consumers. |
 | `tools/maint/mod_context.py` | Verify the shared mod context using real PS2 source consumers and the full image. |
+| `tools/maint/shift_test.py` | Shiftability test: insert NOPs into one function of a scratch copy, rebuild and check that references moved. |
+| `tools/maint/handbook_controls.py` | Verify handbook recipes with isolated SN 1.36 retail controls and perturbations. |
 | `tools/maint/symbols.py` | Dump symbols and debug data from every ELF kept under orig/ and estimate transfer to USA retail. |
 | `tools/maint/discs.py` | Phase 0: unpack each disc image one at a time and keep only executables and debug candidates. |
 | `tools/maint/iso.py` | Minimal ISO 9660 reader for plain ISO (2048) and raw CD images (MODE1/MODE2, 2352). |
 | `tools/maint/inputs.py` | Phase 0 triage of every procured disc variant (run tools/maint/discs.py first). |
 
-## Finished studies (`tools/studies/`)
-
-Experiments and one-time migrations whose results are recorded in [history.md](history.md). They are kept for reproducibility and are not part of the normal workflow.
-
-| Tool | Purpose |
-| --- | --- |
-| `tools/studies/asmcheck.py` | Phase 0 assembler check: does a given EE-aware GNU assembler reassemble retail instruction words identically? |
-| `tools/studies/divide_compiler_control.py` | Compare a retail scalar divide under catalog SN and Sony compiler defaults. |
-| `tools/studies/full_tu_context_control.py` | Verify that real unfinished TU context cannot leak through sorted text inputs. |
-| `tools/studies/group_game_sources.py` | Group the translation unit files of src/game/ into subsystem directories, from the evidence the repository already holds. |
-| `tools/studies/handbook_controls.py` | Verify handbook recipes with isolated SN 1.36 retail controls and perturbations. |
-| `tools/studies/large_study.py` | Reproduce a fixed private calibration set against the isolated compiler catalog. |
-| `tools/studies/loop_padding.py` | Read-only short-loop diagnostics. |
-| `tools/studies/loop_positions.py` | Read-only address-position study of retail SN-assigned short loops. |
-| `tools/studies/loop_provenance.py` | Audit retail short-loop forms against the recovered TU and library map. |
-| `tools/studies/migrate_include_asm.py` | One-time migration to one source file per translation unit with INCLUDE_ASM markers (stage 1 of docs/build.md history). |
-| `tools/studies/migrate_split_list.py` | One-time migration, stage 2: config/units.yaml -> split list, symbol table and equivalent-tier file. |
-| `tools/studies/relocate_sources.py` | Move source files and keep every reference to them consistent: the build inputs, documentation and generated comments. |
-| `tools/studies/reorganize_includes.py` | One-time move of include/ from origin-based directories to one directory per library, updating every #include. |
-| `tools/studies/shift_test.py` | Shiftability test: insert NOPs into one function of a scratch copy, rebuild and check that references moved. |
-| `tools/studies/verify_vu0_math.py` | Worker-compile isolated VU shapes and compare register-renamed retail windows. |
-| `tools/studies/vu0_patterns.py` | Read-only VU0 shape census; generated instruction/site reports stay in build/. |

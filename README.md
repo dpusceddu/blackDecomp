@@ -156,7 +156,7 @@ src/<library>/        (src/game/ has subsystem directories) one file per transla
                       compiler-emitted inline and template copies are in src/<library>/inline/ (docs/build.md#link-once-copies)
 include/<library>/    headers per library, include/ps2/ for helpers shared by all
 tools/                the everyday tools (decompile, objdiff, progress, toolchain, ...); tools/build/ (internals `ninja` runs),
-                      tools/pipeline/ (automatic pipeline), tools/maint/ (maintainer and analysis), tools/studies/ (finished experiments)
+                      tools/pipeline/ (automatic pipeline), tools/maint/ (maintainer and analysis)
 progress/             the two badge files the README reads, written by `ninja badges` (committed)
 docs/                 build, translation unit files and split list, pipeline, TU map, matching handbook, status, history
 tests/                tests that need no game files
