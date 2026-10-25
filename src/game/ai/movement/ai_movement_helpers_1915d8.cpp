@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_helpers_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x1915d8
 // Publishes "no motion" first; when the actor strays from its route segment it escalates through
 // a recovery timer and finally asks the mode to recover.
@@ -34,4 +34,4 @@ void MovementModeBase::UpdateStallRecovery()
     }
 }
 
-}  // namespace BlackGame
+}  // namespace Game

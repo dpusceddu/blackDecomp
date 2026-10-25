@@ -6,7 +6,7 @@ extern s32 func_00155118();
 extern void func_0015A830();
 
 s32 func_00156DC0(void *arg0) {
-    BkModWeaponControllerPS2 *weapon=arg0;
+    BkWeaponControllerPS2 *weapon=arg0;
     s32 var_2;
     void *temp_4;
     void *temp_5;
@@ -17,13 +17,13 @@ s32 func_00156DC0(void *arg0) {
             temp_5 = weapon->primary;
             temp_4 = weapon->definition;
             var_2 = 0;
-            if (((BkModWeaponInstancePS2*)temp_5)->clip != ((BkModWeaponDefinitionPS2*)temp_4)->capacity) {
+            if (((BkWeaponInstancePS2*)temp_5)->clip != ((BkWeaponDefinitionPS2*)temp_4)->capacity) {
                 weapon->outOfAmmo = 0;
-                if (((BkModWeaponDefinitionPS2*)temp_4)->perRound == 0) {
+                if (((BkWeaponDefinitionPS2*)temp_4)->perRound == 0) {
                     weapon->phase = 4;
                 } else {
                     weapon->phase = 5;
-                    weapon->flags100[1] = (s8) ((u8) ((BkModWeaponDefinitionPS2*)temp_4)->capacity - (u8) ((BkModWeaponInstancePS2*)temp_5)->clip);
+                    weapon->flags100[1] = (s8) ((u8) ((BkWeaponDefinitionPS2*)temp_4)->capacity - (u8) ((BkWeaponInstancePS2*)temp_5)->clip);
                 }
                 return 1;
             }

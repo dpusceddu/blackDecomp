@@ -1,6 +1,6 @@
 #ifndef BLACK_PS2_KYNAPSE_PROPERTY_HPP
 #define BLACK_PS2_KYNAPSE_PROPERTY_HPP
-namespace BlackPS2 {
+namespace Ps2Math {
 namespace Kynapse {
 // Shared authored-property fallback. Keep the bool return and the two getter calls:
 // caching the string or spelling this condition in the caller changes exact PS2 control flow.

@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_service_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x179ce0
 // Unmatched: PS2 vector subtraction is VU0 macro code; the Xbox passes the result through EAX.
 
@@ -18,7 +18,7 @@ Point3* RoutePointAddress(const RouteRequest* request, int index)
     return &request->storage->points[index];
 }
 
-}  // namespace BlackGame
+}  // namespace Game
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179D58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00179E50);

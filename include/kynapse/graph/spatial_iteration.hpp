@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_SPATIAL_ITERATION_HPP
-#define BLACK_CAMPAIGN_GRAPH_SPATIAL_ITERATION_HPP
+#ifndef BLACK_GRAPH_SPATIAL_ITERATION_HPP
+#define BLACK_GRAPH_SPATIAL_ITERATION_HPP
 #include "kynapse/graph/spatial.hpp"
 namespace Kaim {
 // Unsigned sentinels, indexed access and counter lifetimes are verified by

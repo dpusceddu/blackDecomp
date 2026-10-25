@@ -19,7 +19,7 @@ static inline void Matrix_Copy(AnimationMatrix* output,const AnimationMatrix* in
     asm volatile("lq $8,0(%0)\n\tlq $9,16(%0)\n\tsq $8,0(%1)\n\tlq $8,32(%0)\n\tsq $9,16(%1)\n\tlq $9,48(%0)\n\tsq $8,32(%1)\n\tsq $9,48(%1)" : : "r"(input), "r"(output) : "$8", "$9", "memory");
 }
 static inline void Matrix_MultiplyParent(AnimationMatrix *matrix,const AnimationMatrix *parent) {
-    BlackPS2::AnimationMicro::Multiply4x4(matrix, matrix, parent);
+    Ps2Math::AnimationMicro::Multiply4x4(matrix, matrix, parent);
 }
 static inline float Ee_Sqrt(float value) { float result; __asm__("sqrt.s %0,%1":"=f"(result):"f"(value));return result; }
 static inline float Ee_Abs(float value) { float result; __asm__("abs.s %0,%1":"=f"(result):"f"(value));return result; }

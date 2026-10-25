@@ -7,18 +7,18 @@ void *func_0015D248(void *, int, int);
 extern void *D_0040F4E0;
 }
 
-namespace CampaignActor {
+namespace ActorParts {
 
-BlackPS2::VU0::Matrix4 ActorMotion::GetWorldMatrix()
+Ps2Math::VU0::Matrix4 ActorMotion::GetWorldMatrix()
 {
-    BlackPS2::VU0::Matrix4 result;
+    Ps2Math::VU0::Matrix4 result;
     if (Field_00C4() != 2) {
         result = GetLocalMatrix();
         if (Field_02A4()) {
             void *entity = func_0015D248(D_0040F4E0, *(signed char *)Field_02A4(), 0);
-            BlackGame::Vec offset = *(BlackGame::Vec *)((char *)entity + 0x80);
-            result.basis[3] = BlackGame::Add3(result.basis[3],
-                BlackPS2::VU0::TransformDirection(offset, result.basis));
+            Game::Vec offset = *(Game::Vec *)((char *)entity + 0x80);
+            result.basis[3] = Game::Add3(result.basis[3],
+                Ps2Math::VU0::TransformDirection(offset, result.basis));
         }
     }
     return result;

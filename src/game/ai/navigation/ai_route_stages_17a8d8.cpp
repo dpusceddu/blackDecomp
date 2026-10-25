@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_stages_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x17a8d8
 // Stage 7: probes the controller's local route from the origin to the next stored point (unlifted);
 // finishes the request, and consumes that point when the probe is clear.
@@ -31,4 +31,4 @@ void RouteRequest::DropFinalPoint()
     storage->links[storage->count] = 0xffffffffu;
 }
 
-}  // namespace BlackGame
+}  // namespace Game

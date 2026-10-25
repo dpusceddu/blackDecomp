@@ -3,14 +3,14 @@
 #ifdef NON_MATCHING
 // Unmatched: 00163328: vector temporary scheduling, saved pointer allocation and FPU argument lifetime.
 #include "game/weapons/delayed.hpp"
-namespace ModWeapons {
+namespace Weapons {
 struct ImpactIteration {EeS8 bounce;bool again;} __attribute__((aligned(16)));
 static inline Vec ScalarVector(float x){Vec v;asm("qmtc2.ni scalarf, vectorv":"=j vectorv"(v):"r scalarf"(x));return v;}
 void DelayedShotMethods::Update(float dt){
  if(active){
   Instance*source=(Instance*)weapon;
   if(!source->weapon){active=0;return;}
-  BkModWeaponOwnerPS2*owner=source->weapon->owner;
+  BkWeaponOwnerPS2*owner=source->weapon->owner;
   remaining-=dt;
   int player=owner->kind==2;
   if(remaining<=0.0f){

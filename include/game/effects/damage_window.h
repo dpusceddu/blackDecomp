@@ -6,9 +6,9 @@
    or interval/damage meanings. Instruction-only1BE960: the effect pointer
    is checked at+60; actor bounds250/260 and rangeSquared28C are descriptive
    access leads.1BE960 calls player damage13C778. Original class unknown. */
-typedef struct BkModEffectDamageWindowPS2 {
+typedef struct BkEffectDamageWindowPS2 {
     void *effect,*actor; float begin,end,damage;
-} BkModEffectDamageWindowPS2;
-typedef struct BkModEffectDamageWindowsPS2 { BkModEffectDamageWindowPS2 records[32]; } BkModEffectDamageWindowsPS2;
-typedef char EffectDamageWindow14[sizeof(BkModEffectDamageWindowPS2)==0x14?1:-1];
+} BkEffectDamageWindowPS2;
+typedef struct BkEffectDamageWindowsPS2 { BkEffectDamageWindowPS2 records[32]; } BkEffectDamageWindowsPS2;
+typedef char EffectDamageWindow14[sizeof(BkEffectDamageWindowPS2)==0x14?1:-1];
 #endif

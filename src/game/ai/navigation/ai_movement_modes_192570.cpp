@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x192570
 // PS2 0x192570; the Xbox build expands it inside RouteMode::Update.
 
@@ -47,6 +47,6 @@ bool RouteMode::ResolveCurrent()
     return false;
 }
 
-}  // namespace BlackGame
+}  // namespace Game
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00192698);

@@ -13,7 +13,7 @@ const char D_00404080[] __attribute__((aligned(8))) = "Graph";
 const char D_00404088[] __attribute__((aligned(8))) = "MaxPointsToFlee";
 const char D_00404098[] __attribute__((aligned(8))) = "MaxEntitiesToFlee";
 
-namespace FleeRecovery {
+namespace FleeViews {
 
     
 
@@ -77,7 +77,7 @@ bool FleeAgent::Configure(ChildBuffers* entry)
                     return true;
                 }
             }
-        return BlackPS2::Kynapse::IsPrivateProperty(entry);
+        return Ps2Math::Kynapse::IsPrivateProperty(entry);
     }
 // Unmatched: Init needs the original allocation-cookie and validation lifetimes.
 // Unmatched: Update needs visibility-loop and controller cleanup reconstruction.

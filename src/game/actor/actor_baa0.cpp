@@ -1,10 +1,10 @@
 #include "include_asm.h"
 
 #include "game/actor/sphere_region.hpp"
-namespace CampaignActor {
+namespace ActorParts {
 
 long SphericalRegion::Update(PositionArg point,long message){
- using namespace BlackPS2::VU0;
+ using namespace Ps2Math::VU0;
  Vec delta=Sub3(point,Load(configuration->center));
  float distance=Length3Word(delta),radius=configuration->radius;
  if(radius<distance){if(inside){inside=0;Signal(message);}}

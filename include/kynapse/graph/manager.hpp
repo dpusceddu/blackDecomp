@@ -1,7 +1,7 @@
 // PS2 graph-manager views. RTTI supplies hierarchy/slot order; matched users
 // verify the accessed prefixes. Complete base fields and unused signatures remain UNVERIFIED.
-#ifndef BLACK_CAMPAIGN_GRAPH_MANAGER_HPP
-#define BLACK_CAMPAIGN_GRAPH_MANAGER_HPP
+#ifndef BLACK_GRAPH_MANAGER_HPP
+#define BLACK_GRAPH_MANAGER_HPP
 #include "kynapse/classes/Kaim_CGraphManager.hpp"
 #include "kynapse/graph/spatial.hpp"
 #include "kynapse/property.hpp"

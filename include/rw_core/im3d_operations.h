@@ -1,5 +1,5 @@
-#ifndef BLACK_RW_IM3D_CAMPAIGN_H
-#define BLACK_RW_IM3D_CAMPAIGN_H
+#ifndef BLACK_RW_IM3D_OPERATIONS_H
+#define BLACK_RW_IM3D_OPERATIONS_H
 /* Inferred prefixes for immediate-mode pipeline state, from PS2 word accesses. */
 typedef struct RwImDrawStateView {unsigned char prefix[32];void *pipeline;int primitive;unsigned short *indices;int count;} RwImDrawStateView;
 typedef struct RwIm3DPluginView {

@@ -2,7 +2,7 @@
 
 #include "game/camera/pad_backend.hpp"
 
-using namespace CampaignGraphics;
+using namespace Graphics;
 
 unsigned char Controller::Button(unsigned index) const {if(index>=28)return 0;return *((const EeU8*)this+index+42);}
 
@@ -31,7 +31,7 @@ void PadBackend::SetFeedback(int enabled){if(enabled!=feedback){Controller **it=
 #ifdef NON_MATCHING
 #include "game/camera/pad.hpp"
 // Unmatched: 5 instruction differences remain in branch layout and return merging.
-using namespace CampaignGraphics;
+using namespace Graphics;
 int Controller::Rumble(unsigned enabled) {
     if(!Connected())return 0;
     if(!enabled){field_49=0;return 0;}
@@ -64,7 +64,7 @@ extern s32 func_0026C9C0(void *, s32);
 extern s32 func_0029D4C0(s32, s32, void *, s32, void *);
 extern s32 func_0026C9E0(s32, s32);
 }
-void CampaignGraphics::Controller::UpdateMotors() {
+void Graphics::Controller::UpdateMotors() {
     struct MotorCommand {u8 command;u8 padding;s16 flags;};
     struct Commands {MotorCommand first,second;} commands __attribute__((aligned(16)));
     s16 var_2;
@@ -117,7 +117,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BD30);
 #ifdef NON_MATCHING
 #include "game/camera/pad.hpp"
 // Unmatched: 2 instruction differences after native layout, argument-bank and helper probes.
-using namespace CampaignGraphics;
+using namespace Graphics;
 float Controller::Smooth(float value,float step) {
     float limit=axisLimit;
     float threshold;
@@ -154,7 +154,7 @@ int func_0029C810(int);
 }
 struct PadOpenParameters {int kind,port;EeS64 reserved[3];} __attribute__((packed));
 extern const PadOpenParameters defaultPadParameters __asm__("D_004001D0");
-using namespace CampaignGraphics;
+using namespace Graphics;
 void PadBackend::Initialize(EeU8 single){
  PadOpenParameters config=defaultPadParameters;
  { int i=1;Controller **controller=&controllers[1];
@@ -173,7 +173,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C798);
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
 // Unmatched: 8 instruction differences after native layout, argument-bank and helper probes.
-using namespace CampaignGraphics;
+using namespace Graphics;
 extern "C" void func_0026CBA8(PadBackend *,int);
 void PadBackend::Poll() {
     func_0026CBA8(this,0);

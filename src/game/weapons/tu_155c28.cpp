@@ -3,7 +3,7 @@
 #ifdef NON_MATCHING
 // Unmatched: 00155C28: inline normalization and matrix references improve code, but call scheduling and byte-loop allocation differ.
 #include "game/weapons/projectiles.hpp"
-namespace ModWeapons {
+namespace Weapons {
 extern void*presentationRoot __asm__("D_0040F4D8");
 extern "C" void func_001B6CF8(void*,Projectile*,int);
 extern "C" void func_0012A280(Frame*,Projectile*);

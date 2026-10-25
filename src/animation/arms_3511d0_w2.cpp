@@ -129,7 +129,7 @@ void Rig::Build(Pose *pose)
             FindOverride(this, index, &overridePose, &overrideFlags);
             if (overridePose != 0) {
                 if (overrideFlags & 1) {
-                    BlackPS2::AnimationMicro::QuaternionRotation(output, local->quaternion);
+                    Ps2Math::AnimationMicro::QuaternionRotation(output, local->quaternion);
                     if (bone->flags & 4) {
                         const AnimationBind *binding = jointCache[bone - skeleton->hierarchy];
                         output->v[12] = binding->matrix.v[12];
@@ -144,7 +144,7 @@ void Rig::Build(Pose *pose)
                     }
                     MultiplyMatrices(output, output, parent);
                     if (overrideFlags & 4) {
-                        BlackPS2::AnimationMicro::QuaternionRotation(&overrideMatrix, overridePose->quaternion);
+                        Ps2Math::AnimationMicro::QuaternionRotation(&overrideMatrix, overridePose->quaternion);
                         asm volatile("sqc2 vf0,0(%0)" : : "r"(overrideTranslationPointer) : "memory");
                         if (overrideFlags & 8) {
                             overrideMatrix.v[12] = overridePose->translation[0];
@@ -161,11 +161,11 @@ void Rig::Build(Pose *pose)
                     }
                 } else {
                     if (overrideFlags & 4) {
-                        BlackPS2::AnimationMicro::QuaternionRotation(output, overridePose->quaternion);
+                        Ps2Math::AnimationMicro::QuaternionRotation(output, overridePose->quaternion);
                         IdentityRotation(&parentCopy);
                         asm volatile("lq $8,0(%1)\n\tsq $8,0(%0)" : : "r"(parentTranslationPointer), "r"(parent->row + 3) : "$8", "memory");
                     } else {
-                        BlackPS2::AnimationMicro::QuaternionRotation(output, local->quaternion);
+                        Ps2Math::AnimationMicro::QuaternionRotation(output, local->quaternion);
                         CopyMatrix(&parentCopy, parent);
                     }
                     if (overrideFlags & 8) {
@@ -194,7 +194,7 @@ void Rig::Build(Pose *pose)
                     MultiplyMatrices(output, output, &parentCopy);
                 }
             } else {
-                BlackPS2::AnimationMicro::QuaternionRotation(output, local->quaternion);
+                Ps2Math::AnimationMicro::QuaternionRotation(output, local->quaternion);
                 if (bone->flags & 4) {
                     const AnimationBind *binding = jointCache[bone - skeleton->hierarchy];
                     output->v[12] = binding->matrix.v[12];
@@ -245,7 +245,7 @@ void Rig::SetBind(int index, const RigMatrix* input)
     char* offset = (char*)(index << 6);
     RigMatrix* output = (RigMatrix*)((int)offset + (int)base);
 
-    BlackPS2::AnimationMicro::InverseRigid(output, input);
+    Ps2Math::AnimationMicro::InverseRigid(output, input);
 }
 
 }

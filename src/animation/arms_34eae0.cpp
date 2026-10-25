@@ -2,7 +2,7 @@
 namespace ArmsAnimation {
 static inline float Minimum(float a,float b){float out;asm("min.s %0,%1,%2":"=f"(out):"f"(a),"f"(b));return out;}
 // Unmatched: Reset has three scalar-store scheduling differences; the best draft is in nonmatching/tu_34eae0_reset.c.
-#ifndef MOD_ARMS_EVALUATE_ONLY
+#ifndef ARMS_EVALUATE_ONLY
 float Playback::ChangedSpan(float span,float old,float coordinate,AnimationGraphNode* node,AnimationParameters* bank,unsigned options) {
     if(span!=old) {
         int low=options&1;
@@ -13,7 +13,7 @@ float Playback::ChangedSpan(float span,float old,float coordinate,AnimationGraph
     return coordinate;
 }
 #endif
-#ifndef MOD_ARMS_EVALUATE_ONLY
+#ifndef ARMS_EVALUATE_ONLY
 long Playback::Advance(f32 delta) {
     Playback* state=this;
     long result = 0;
@@ -55,7 +55,7 @@ long Playback::Advance(f32 delta) {
     return result;
 }
 #endif
-#ifdef MOD_ARMS_EVALUATE_ONLY
+#ifdef ARMS_EVALUATE_ONLY
 Pose* Playback::Evaluate(Pose* optional_pose) {
     Playback* state=this;
     s32 flags, evaluation;

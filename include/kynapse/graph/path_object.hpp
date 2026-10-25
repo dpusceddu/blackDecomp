@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_PATH_OBJECT_HPP
-#define BLACK_CAMPAIGN_GRAPH_PATH_OBJECT_HPP
+#ifndef BLACK_GRAPH_PATH_OBJECT_HPP
+#define BLACK_GRAPH_PATH_OBJECT_HPP
 #include "kynapse/graph/tables.hpp"
 #include "kynapse/classes/Kaim_CPathObject.hpp"
 #include "kynapse/classes/Kaim_CPathObject_CLinkedEdge.hpp"

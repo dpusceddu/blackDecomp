@@ -1,13 +1,13 @@
-#ifndef BLACK_CAMPAIGN_ANIMATION_SELECTOR_HPP
-#define BLACK_CAMPAIGN_ANIMATION_SELECTOR_HPP
+#ifndef BLACK_ANIMATION_SELECTOR_HPP
+#define BLACK_ANIMATION_SELECTOR_HPP
 #include "ps2/vu0.hpp"
 namespace AnimationSelectPS2 {
 // Partial PS2 views. Original class names and inheritance are still unverified.
-static inline float SumWord(BlackGame::Vec value) {
- BlackGame::Vec one,result;
+static inline float SumWord(Game::Vec value) {
+ Game::Vec one,result;
  asm("vaddw.x onev, vf0, vf0w" : "=j onev"(one));
  asm("vadday.x ACC, vv, vvy\n\tvmaddz.x resultv, onev, vvz" : "=j resultv"(result):"j vv"(value),"j onev"(one));
- return BlackPS2::VU0::ReadXWord(result);
+ return Ps2Math::VU0::ReadXWord(result);
 }
 struct Actor {
  template<class T> inline T& At(int offset) { return *(T*)((char*)this+offset); }

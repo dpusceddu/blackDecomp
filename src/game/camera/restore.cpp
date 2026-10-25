@@ -2,7 +2,7 @@
 
 #include "game/camera/vitals.hpp"
 #include "game/math/scalar.hpp"
-namespace ModCamera {
+namespace Camera {
 struct Settings { unsigned char unknown00[0x2014c]; int difficulty; };
 struct Hud {unsigned char unknown00[0x30];void*health;};
 struct ServiceWorld {unsigned char unknown00[0xcbd8];Hud*hud;};
@@ -35,7 +35,7 @@ void PlayerVitals::Restore(int kind){
   if(Full(this))return;
   if(medkitCount==0)return;
   value+=0.5f;
-  if(value>=1.0f)value=1.0f;else value=ModMath::SquareRoot(value);
+  if(value>=1.0f)value=1.0f;else value=Math::SquareRoot(value);
   SetNormalized(this,value);
   func_001EED98(0.0f,D_0040F510->hud->health,6);
   func_0021A7E0(D_003F49C8,0,D_0040F544+0x38c9,0);
@@ -43,7 +43,7 @@ void PlayerVitals::Restore(int kind){
   break;
  case 1:
   value+=0.25f;
-  if(value>=1.0f)value=1.0f;else value=ModMath::SquareRoot(value);
+  if(value>=1.0f)value=1.0f;else value=Math::SquareRoot(value);
   SetNormalized(this,value);
   func_001F2A60(D_0040F51C,0x12,1,0,1);
   break;

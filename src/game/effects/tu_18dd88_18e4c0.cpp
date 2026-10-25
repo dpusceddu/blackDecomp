@@ -3,8 +3,8 @@
 #ifdef NON_MATCHING
 #include "game/graphics/movement_core.hpp"
 #include "game/effects/vu_math.h"
-using namespace CampaignGraphics;
-using namespace BlackGame;
+using namespace Graphics;
+using namespace Game;
 extern "C" {
 extern unsigned char *D_0040F4D4,*D_0040F4D0;
 extern void *func_00179258(void *,long);
@@ -44,7 +44,7 @@ extern unsigned func_00173610(void *);
 extern void func_0017E488(void *,float);
 }
 static inline float DistanceSquared(Vec a,Vec b)
-{return BlackPS2::VU0::ReadXWord(SumSquares3(Sub3(a,b)));}
+{return Ps2Math::VU0::ReadXWord(SumSquares3(Sub3(a,b)));}
 // Unmatched: 26 instruction differences in helper lifetime, allocation or scheduling.
 long MovementCore::Event(unsigned *event)
 {

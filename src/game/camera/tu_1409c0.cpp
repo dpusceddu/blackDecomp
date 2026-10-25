@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/camera/aim.hpp"
-namespace ModCamera {
+namespace Camera {
 extern char *world __asm__("D_0040F4D0");
 extern PlayerAim *CurrentPlayer(void*) __asm__("func_00135550");
 // Callback entry; the containing TU and historical class identity are unverified.

@@ -8,7 +8,7 @@
 // Unmatched: vector-copy alignment, inline helpers and temporary lifetimes; best aligned candidate 333 differences.
 #include "game/classes/other/UnknownVtable_003E0A40.hpp"
 #include "game/ai_vector.hpp"
-namespace CampaignGraphics {
+namespace Graphics {
 struct __attribute__((aligned(16))) Vec4 {float x,y,z,w;};
 struct Tween {
     Vec4 from,to,fromColor,toColor;
@@ -35,13 +35,13 @@ typedef char Notification_index[((int)&((Notification*)0)->index==0x1964)?1:-1];
 typedef char Notification_request[((int)&((Notification*)0)->request==0x19a4)?1:-1];
 template<class T> inline T& At(void* p,int o){return *(T*)((char*)p+o);}
 inline void SetAlpha(Vec4& v,float alpha){
-    BlackGame::Vec value=BlackGame::Load(*(BlackGame::Position4*)&v),scalar;
+    Game::Vec value=Game::Load(*(Game::Position4*)&v),scalar;
     asm("qmtc2.ni alphaf,alphav":"=j alphav"(scalar):"r alphaf"(alpha));
     asm("vmulx.w colorv,vf0,alphav":"+j colorv"(value):"j alphav"(scalar));
-    BlackGame::Store(*(BlackGame::Position4*)&v,value);
+    Game::Store(*(Game::Position4*)&v,value);
 }
 }
-using namespace CampaignGraphics;
+using namespace Graphics;
 extern "C" {
 extern char *D_0040F0E0,*D_0040F510,*D_0040F518;
 extern void *D_0040F4DC;
@@ -126,7 +126,7 @@ struct Sprite;
 extern "C" {void func_00278F00(void*,int,Sprite*);extern char* D_0040F518;}
 template<class T> inline T& At(void* p,int offset){return *(T*)((char*)p+offset);}
 inline void ReleaseSprite(void* self,int group,int offset){func_00278F00(D_0040F518+At<signed char>(self,0x12)*0xa8+0x40,At<short>(self,0x10)+group,At<Sprite*>(self,offset));}
-int BlackPS2Classes::UnknownVtable_003E0AC0::Function_001FBB48(){
+int Unnamed::UnknownVtable_003E0AC0::Function_001FBB48(){
  ReleaseSprite(this,0,0x50);ReleaseSprite(this,0,0x58);ReleaseSprite(this,2,0x18);ReleaseSprite(this,2,0x20);
  for(int i=0;i<3;++i)ReleaseSprite(this,1,0x28+i*4);
  ReleaseSprite(this,2,0x40);ReleaseSprite(this,1,0x48);ReleaseSprite(this,2,0x60);ReleaseSprite(this,2,0x68);
@@ -144,7 +144,7 @@ struct Sprite;
 extern "C" {void func_00278F00(void*,int,Sprite*);extern char* D_0040F518;}
 template<class T> inline T& At(void* p,int offset){return *(T*)((char*)p+offset);}
 inline void ReleaseSprite(void* self,int group,int offset){func_00278F00(D_0040F518+At<signed char>(self,0x12)*0xa8+0x40,At<short>(self,0x10)+group,At<Sprite*>(self,offset));}
-int BlackPS2Classes::UnknownVtable_003E0A40::Function_001F4CB0(){
+int Unnamed::UnknownVtable_003E0A40::Function_001F4CB0(){
  ReleaseSprite(this,0,0x1c);ReleaseSprite(this,0,0x18);return 1;
 }
 

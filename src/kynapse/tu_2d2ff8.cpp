@@ -13,20 +13,20 @@ extern "C" {
 extern FollowerVirtualEntry D_003E3130[13], D_003E2AE0[];
 extern FollowerRegistrationStorage D_0044EDE8;
 extern FollowerVirtualEntry* D_0044EEF8;
-void* func_002DFF10(void*,BehaviorCampaign::Context*);
+void* func_002DFF10(void*,FollowerBehavior::Context*);
 int func_002DFF98(void*,int);
-int func_002E00F0(void*,const char*,BehaviorCampaign::Follower* (*)(BehaviorCampaign::Context*),int,int,int);
+int func_002E00F0(void*,const char*,FollowerBehavior::Follower* (*)(FollowerBehavior::Context*),int,int,int);
 extern int (*D_003C87E0)(void*);
 int func_00360838(const char*,const char*);
 long func_0035E730(const char*);
 float func_00291C68(long);
-float func_002E1FD0(float,const BehaviorCampaign::Vec3*,void*,BehaviorCampaign::Actor*,int);
-BehaviorCampaign::Vec3 func_002E9E88(const BehaviorCampaign::Vec3*);
+float func_002E1FD0(float,const FollowerBehavior::Vec3*,void*,FollowerBehavior::Actor*,int);
+FollowerBehavior::Vec3 func_002E9E88(const FollowerBehavior::Vec3*);
 }
-extern "C" BehaviorCampaign::Follower* func_002D2FF8(BehaviorCampaign::Context* context) {
-    return new BehaviorCampaign::FollowerConstructible(context);
+extern "C" FollowerBehavior::Follower* func_002D2FF8(FollowerBehavior::Context* context) {
+    return new FollowerBehavior::FollowerConstructible(context);
 }
-namespace BehaviorCampaign {
+namespace FollowerBehavior {
 bool Follower::Configure(ChildBuffers* entry) {
     if (!entry) return false;
     const char* key=entry->GetSecond();
@@ -40,7 +40,7 @@ bool Follower::Configure(ChildBuffers* entry) {
         const char* value=entry->GetValue();
         if (value) {followed=((Registry*)gEngine)->FindByName(value);return true;}
     }
-    return BlackPS2::Kynapse::IsPrivateProperty(entry);
+    return Ps2Math::Kynapse::IsPrivateProperty(entry);
 }
 bool Follower::Init(ChildBuffers* config) {
     arrived=false;position=gOrigin;NameTable* names=GetNames();
@@ -85,9 +85,9 @@ void func_002D34C0(int enabled,int phase) {
         D_0044EEF8=D_003E2AE0;
     }
 }
-void* func_002D3520(void* memory,BehaviorCampaign::Context* context) {
+void* func_002D3520(void* memory,FollowerBehavior::Context* context) {
     func_002DFF10(memory,context);
-    BehaviorCampaign::Follower* self=(BehaviorCampaign::Follower*)memory;
+    FollowerBehavior::Follower* self=(FollowerBehavior::Follower*)memory;
     self->followed=0;
     *(FollowerVirtualEntry**)self=D_003E3130;
     self->target=0;
@@ -105,7 +105,7 @@ int func_002D3560(void* self,int flags) {
 }
 bool IsSet0C::IsSet() const { if (value != 0) return true; return false; }
 bool HasId2C::HasId() const { if (id != -1) return true; return false; }
-namespace BehaviorCampaign {
+namespace FollowerBehavior {
 bool Follower::IsReady() {
     if (!followed) return false;
     if (limit < 0.0f) return false;
@@ -135,14 +135,14 @@ void Follower::ComputeDistance(void* observer) {
 }
 }
 extern "C" {
-void func_002D37D8(BehaviorCampaign::Follower* self,float value) {
-    float scaled=value*BehaviorCampaign::gEngine->unit;
+void func_002D37D8(FollowerBehavior::Follower* self,float value) {
+    float scaled=value*FollowerBehavior::gEngine->unit;
     if(self->limit!=scaled) {self->limit=scaled;self->arrived=false;}
 }
-void func_002D3810(BehaviorCampaign::Follower* self,float value) {
+void func_002D3810(FollowerBehavior::Follower* self,float value) {
     if(self->angle!=value) {self->angle=value;self->arrived=false;}
 }
-float func_002D3838(BehaviorCampaign::Follower* self) {return self->limit/BehaviorCampaign::gEngine->unit;}
+float func_002D3838(FollowerBehavior::Follower* self) {return self->limit/FollowerBehavior::gEngine->unit;}
 
 }
 

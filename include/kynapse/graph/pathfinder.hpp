@@ -1,7 +1,7 @@
 // PS2 CPathFinder class view. RTTI supplies the service hierarchy; exact imported
 // callers verify selected offsets. Base-field ownership and unused signatures remain UNVERIFIED.
-#ifndef BLACK_CAMPAIGN_GRAPH_PATHFINDER_HPP
-#define BLACK_CAMPAIGN_GRAPH_PATHFINDER_HPP
+#ifndef BLACK_GRAPH_PATHFINDER_HPP
+#define BLACK_GRAPH_PATHFINDER_HPP
 #include "kynapse/compat.hpp"
 #include "kynapse/graph/tables.hpp"
 #include "kynapse/classes/Kaim_CPathFinder.hpp"

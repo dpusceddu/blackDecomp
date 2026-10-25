@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/camera/pad.hpp"
-using namespace CampaignGraphics;
+using namespace Graphics;
 extern "C" int func_0026BCF8(Controller *,unsigned);
 extern "C" int func_0026BC88(float,Controller *);
 

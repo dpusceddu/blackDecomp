@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_SEARCH_WORKSPACE_HPP
-#define BLACK_CAMPAIGN_GRAPH_SEARCH_WORKSPACE_HPP
+#ifndef BLACK_GRAPH_SEARCH_WORKSPACE_HPP
+#define BLACK_GRAPH_SEARCH_WORKSPACE_HPP
 #include "kynapse/compat.hpp"
 #include "kynapse/point_mapper.hpp"
 

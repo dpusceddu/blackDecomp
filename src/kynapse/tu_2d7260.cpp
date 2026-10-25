@@ -105,7 +105,7 @@ bool WanderAgent::Configure(ChildBuffers* property) {
             return true;
         }
     }
-    return BlackPS2::Kynapse::IsPrivateProperty(property);
+    return Ps2Math::Kynapse::IsPrivateProperty(property);
 }
 }
 bool IsSet24::IsSet() const {if(value!=0)return true;return false;}

@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_BEHAVIORS_PATHWAY_HPP
-#define BLACK_CAMPAIGN_BEHAVIORS_PATHWAY_HPP
+#ifndef BLACK_BEHAVIORS_PATHWAY_HPP
+#define BLACK_BEHAVIORS_PATHWAY_HPP
 #include "kynapse/compat.hpp"
 #include "kynapse/alloc.hpp"
 extern void (*gKaimFree)(void*);

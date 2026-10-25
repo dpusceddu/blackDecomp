@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_CONSTRAINT_REGISTRATION_HPP
-#define BLACK_CAMPAIGN_GRAPH_CONSTRAINT_REGISTRATION_HPP
+#ifndef BLACK_GRAPH_CONSTRAINT_REGISTRATION_HPP
+#define BLACK_GRAPH_CONSTRAINT_REGISTRATION_HPP
 
 #include "kynapse/compat.hpp"
 // Registration payload and end-position vptr are verified by this TU's exact

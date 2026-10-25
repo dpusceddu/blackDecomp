@@ -17,7 +17,7 @@
 #define BLACK_GLOBAL_POINTER(T, name) extern T* name
 #define BLACK_GLOBAL_OBJECT(T, name) extern const T name
 #include "ps2/vector_storage.hpp"
-namespace BlackGame {
+namespace Game {
 typedef unsigned char Byte;
 struct Brain;
 struct RouteRequest;

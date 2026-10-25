@@ -5,17 +5,17 @@
    Native controls verify reserve[7], entries+14 and signed count+18.
    The ten-element extent also follows the PS2 reset loop. Actor embedding+280
    is instruction evidence only; the Xbox counterpart embeds this at+278. */
-typedef struct BkModInventoryPS2 {
+typedef struct BkInventoryPS2 {
     EeU16 reserve[10];
     void *entries;
     EeS8 count;
-} BkModInventoryPS2;
-static inline EeU16 BkModInventorySlotPS2(const BkModInventoryPS2 *inventory, int index)
+} BkInventoryPS2;
+static inline EeU16 BkInventorySlotPS2(const BkInventoryPS2 *inventory, int index)
 {
     return inventory->reserve[index];
 }
-typedef char BkModInventoryEntries14[(unsigned)&((BkModInventoryPS2*)0)->entries==0x14?1:-1];
-typedef char BkModInventoryCount18[(unsigned)&((BkModInventoryPS2*)0)->count==0x18?1:-1];
+typedef char BkInventoryEntries14[(unsigned)&((BkInventoryPS2*)0)->entries==0x14?1:-1];
+typedef char BkInventoryCount18[(unsigned)&((BkInventoryPS2*)0)->count==0x18?1:-1];
 /* ReserveReturn 1551C8 narrows addition to u16 BEFORE comparing against the
    table maximum. Its new native implementation is still a matching task. */
 #endif

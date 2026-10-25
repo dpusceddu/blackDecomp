@@ -2,11 +2,11 @@
 
 #include "game/weapons/inventory_methods.hpp"
 
-namespace ModWeapons {
+namespace Weapons {
     extern "C" {
         void func_00156E70(Weapon*);
         void func_00156E80(Weapon*);
-        void func_0013C868(BkModWeaponOwnerPS2*,EeS8);
+        void func_0013C868(BkWeaponOwnerPS2*,EeS8);
         void *func_0015D248(void*,EeS8,int);
         int func_00155178(void*,int,EeU8);
         int func_00288790(void*);

@@ -2,7 +2,7 @@
 #ifndef BLACK_PS2_VECTOR_STORAGE_HPP
 #define BLACK_PS2_VECTOR_STORAGE_HPP
 #include "ps2/ee_types.h"
-namespace BlackGame {
+namespace Game {
 struct Vector4 { float x, y, z, w; };
 // Vector values. The Xbox passes the address of an __m128 (copies are movaps) and reads single
 // components through the float view of the same storage; the PS2 passes one 128-bit register

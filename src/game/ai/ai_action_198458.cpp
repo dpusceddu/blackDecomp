@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_action_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x198458
 
 void Action::LeaveMovementPermission()
@@ -13,4 +13,4 @@ void Action::LeaveMovementPermission()
     brain->permission.SetAllowed(0);
 }
 
-}  // namespace BlackGame
+}  // namespace Game

@@ -1,7 +1,7 @@
-#ifndef BLACK_CAMPAIGN_WEAPON_PROJECTILES_HPP
-#define BLACK_CAMPAIGN_WEAPON_PROJECTILES_HPP
+#ifndef BLACK_WEAPON_PROJECTILES_HPP
+#define BLACK_WEAPON_PROJECTILES_HPP
 #include "game/weapons/instance.hpp"
-namespace ModWeapons {
+namespace Weapons {
 /* PS2 instruction-derived partial views. Original class names are unknown;
    no placed method yet verifies this view. Activation return type is tentative. */
 struct Projectile {

@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x191c18
 
 bool MovementModeBase::UpdateTarget(PositionArg) { return false; }
@@ -15,4 +15,4 @@ void RouteMode::Bind(Brain* owner)
     follower = 0;
 }
 
-}  // namespace BlackGame
+}  // namespace Game

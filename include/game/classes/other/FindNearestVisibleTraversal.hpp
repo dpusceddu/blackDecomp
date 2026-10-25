@@ -4,7 +4,7 @@
 #include "game/classes/support.hpp"
 #include "game/classes/hierarchy.hpp"
 
-namespace BlackPS2Classes {
+namespace Unnamed {
 
 // FindNearestVisibleTraversal
 // Identity: RTTI. Complete size and inheritance layout are UNVERIFIED.
@@ -43,6 +43,6 @@ struct FindNearestVisibleTraversal {
     };
 };
 
-} // namespace BlackPS2Classes
+} // namespace Unnamed
 
 #endif

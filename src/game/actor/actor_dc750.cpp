@@ -1,9 +1,9 @@
 #include "include_asm.h"
 
 #include "game/actor/prop_state.hpp"
-namespace CampaignActor {
-using namespace BlackGame;
-using BlackPS2::VU0::Matrix4;
+namespace ActorParts {
+using namespace Game;
+using Ps2Math::VU0::Matrix4;
 extern "C" {
 RuntimeConfig *func_00151E60(void *);
 int func_001AFDA8(PropSelector *);

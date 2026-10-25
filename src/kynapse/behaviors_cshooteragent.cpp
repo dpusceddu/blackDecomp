@@ -42,7 +42,7 @@ bool ShooterAgent::Configure(ChildBuffers* entry)
             return true;
         }
     }
-    return BlackPS2::Kynapse::IsPrivateProperty(entry);
+    return Ps2Math::Kynapse::IsPrivateProperty(entry);
 }
 bool ShooterAgent::Prepare()
 {

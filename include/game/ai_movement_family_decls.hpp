@@ -5,7 +5,7 @@
 
 #include "game/ai_movement.hpp"
 
-namespace BlackGame {
+namespace Game {
 
 // Unmatched: ordinary build keeps the stack argument and x87 result; exact in the separate-file /GL context.
 float FamilySpeed(const FamilyRef* family);

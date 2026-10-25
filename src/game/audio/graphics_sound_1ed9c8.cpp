@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/graphics/sound_envelopes.hpp"
-using namespace CampaignGraphics;
+using namespace Graphics;
 
 void SoundEnvelope::Register(const char *name,int includeHold)
 {

@@ -2,20 +2,20 @@
 #define BLACK_MOD_CAMERA_AIM_HPP
 #include "ps2/vector_storage.hpp"
 
-namespace ModCamera {
+namespace Camera {
 // Partial access views from 1409C0/12BB60; original class identities are unverified.
 // Exact Select verifies eligibility3A4 and player selected9C/distancesA0/A4.
 // Xbox counterparts 1BD3D0/1CDA60 have different actor/player/manager offsets.
 struct AimActor {
     unsigned char unknown00[0x70];
-    BlackGame::Position4 world[4];
+    Game::Position4 world[4];
     unsigned char unknownb0[0xc];
     void *animation;
     unsigned char unknownc0[0x2e4];
     int eligibility;
 };
 struct AimCandidate {
-    BlackGame::Position4 point;
+    Game::Position4 point;
     float projection, perpendicularSquared;
     AimActor *actor;
 };

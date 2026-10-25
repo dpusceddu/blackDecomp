@@ -2,7 +2,7 @@
 
 #include "game/weapons/reserves.hpp"
 
-namespace ModWeapons {
+namespace Weapons {
 extern "C" EeU16 D_003F5310[10];
 
 void Reserves::Initialize()

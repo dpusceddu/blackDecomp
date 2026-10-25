@@ -2,14 +2,14 @@
 
 #include "game/effects/simulation.hpp"
 
-void ModEffects::GeometryNodes::Clear(){int i=11;BkEffectGeometryBucketPS2**p=heads;do{((void**)p)[-12]=0;--i;*p++=0;}while(i>=0);BkEffectGeometryBucketPS2*b=nodes,*end=nodes+8;do{b->count=0;b->next=0;b++;}while((int)b<(int)end);}
+void Effects::GeometryNodes::Clear(){int i=11;BkEffectGeometryBucketPS2**p=heads;do{((void**)p)[-12]=0;--i;*p++=0;}while(i>=0);BkEffectGeometryBucketPS2*b=nodes,*end=nodes+8;do{b->count=0;b->next=0;b++;}while((int)b<(int)end);}
 
 #ifdef NON_MATCHING
 // Unmatched: native receiver and iterator/store lifetimes remain inexact.
 #include "game/effects/runtime.hpp"
 #include "game/effects/geometry.h"
 #include "game/effects/pool.h"
-using ModEffects::Matrix;
+using Effects::Matrix;
 extern "C" {extern char *D_0040F4D8,*D_0040F4D4;}
 struct NodeManager {
  BkEffectGeometryBucketPS2 nodes[8]; void*materials[12];BkEffectGeometryBucketPS2*heads[12];

@@ -13,7 +13,7 @@ void func_00129240(void *, void *, int);
 extern char *D_0040F4D4;
 extern void *D_0040F4D0;
 }
-namespace BlackPS2Campaign {
+namespace ActorEvents {
 
 void ActorEntries::Update(float delta) {
     if (Field_01F0()) func_00148550(this);

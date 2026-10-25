@@ -13,7 +13,7 @@
 #include "game/classes/other/UnknownVtable_003E0058.hpp"
 #include "game/classes/other/UnknownVtable_003E0140.hpp"
 
-namespace BlackPS2Classes {
+namespace Unnamed {
 
 unsigned short* UnknownVtable_003DC838::Function_00149158(unsigned char index)
 {
@@ -99,7 +99,7 @@ void UnknownVtable_003DC130::Function_001652E0()
 
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
-using namespace CampaignGraphics;
+using namespace Graphics;
 // Unmatched: 5 instruction differences after native layout, EE clamp and helper-context probes.
 void SoundEnvelope::Release()
 {
@@ -116,7 +116,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDD80);
 
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
-using namespace CampaignGraphics;
+using namespace Graphics;
 // Unmatched: 8 instruction differences after native layout, EE clamp and helper-context probes.
 int DestructionEnvelope::Begin(float value,unsigned useEndpoint)
 {
@@ -137,7 +137,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDDE0);
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
 #include "ps2/prelude.h"
-using namespace CampaignGraphics;
+using namespace Graphics;
 // Unmatched: 20 instruction differences after native layout, EE clamp and helper-context probes.
 void DestructionEnvelope::Update()
 {
@@ -166,7 +166,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDE98);
 
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
-using namespace CampaignGraphics;
+using namespace Graphics;
 // Unmatched: 6 instruction differences after native layout, EE clamp and helper-context probes.
 int DestructionEnvelope::Unregister()
 {
@@ -186,7 +186,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE0B0);
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
 #include "ps2/prelude.h"
-using namespace CampaignGraphics;
+using namespace Graphics;
 // Unmatched: 18 instruction differences after native layout, EE clamp and helper-context probes.
 extern "C" float D_003BDA0C;
 extern "C" void func_001F07B8(float,void *);
@@ -220,7 +220,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE298);
 
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
-using namespace CampaignGraphics;
+using namespace Graphics;
 // Unmatched: 20 instruction differences after native layout, EE clamp and helper-context probes.
 void LowHealthEnvelope::Reset()
 {
@@ -238,7 +238,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE540);
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
 #include "ps2/prelude.h"
-using namespace CampaignGraphics;
+using namespace Graphics;
 // Unmatched: 27 instruction differences after native layout, EE clamp and helper-context probes.
 void LowHealthEnvelope::Update()
 {

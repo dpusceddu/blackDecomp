@@ -1,7 +1,7 @@
 #ifndef BLACK_MOD_EFFECT_SIMULATION_HPP
 #define BLACK_MOD_EFFECT_SIMULATION_HPP
 #include "game/effects/geometry.h"
-namespace ModEffects {
+namespace Effects {
 // Descriptive PS2 access views, not recovered original class identities.
 class GeometryNodes {
 public:

@@ -3,13 +3,13 @@
 #ifdef NON_MATCHING
 #include "game/graphics/timed_matrix.hpp"
 
-using namespace BlackGame;
-using namespace BlackPS2::VU0;
+using namespace Game;
+using namespace Ps2Math::VU0;
 extern "C" {
 extern void func_00107928(float, unsigned, int);
 extern void func_001108D0(unsigned, unsigned);
 extern float func_00113FE8(float, float, float, const float *);
-extern Vec func_00114170(CampaignGraphics::TimedMatrix *, const Vec *, float);
+extern Vec func_00114170(Graphics::TimedMatrix *, const Vec *, float);
 extern unsigned D_0040F0E8;
 extern unsigned char *D_0040F4D0;
 extern Vec D_0040F070, D_0040F080, D_0040F090;
@@ -23,7 +23,7 @@ static inline int FloatBits(float f) { union {float f;int i;}u;u.f=f;return u.i;
 static inline float Greater(float a,float b) { asm("max.s av, av, bv" : "+f av"(a) : "f bv"(b) : "memory"); return a; }
 
 // Unmatched: Reset retains 52 instruction differences in max/copy inline contracts and scheduling.
-int CampaignGraphics::TimedMatrix::Reset()
+int Graphics::TimedMatrix::Reset()
 {
     elapsed = 0.0f;
     switch (kind) {

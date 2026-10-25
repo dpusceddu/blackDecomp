@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
-#include "game/actor/mod_world.hpp"
-namespace ModWorld {
+#include "game/actor/world_objects.hpp"
+namespace WorldObjects {
 extern char *effects __asm__("D_0040F4D8");
 extern char *objects __asm__("D_0040F4CC");
 extern World *world __asm__("D_0040F4D0");

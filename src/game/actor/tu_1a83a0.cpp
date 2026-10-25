@@ -51,14 +51,14 @@ void Selector::Idle(char* name,Actor* actor) {
 
  Movement* movement=func_00135550(actor);float dot,angle;BkVectorPS2 direction,forward;
  if(M2C_FIELD((char*)movement,u8 *,0x38)) {
-  dot=SumWord(BlackGame::Mul3(*(BkVectorPS2 *)((char*)movement+0x60),*(BkVectorPS2 *)((char*)actor+0x70)));
+  dot=SumWord(Game::Mul3(*(BkVectorPS2 *)((char*)movement+0x60),*(BkVectorPS2 *)((char*)actor+0x70)));
   if(dot< -D_003BD158)return Emit(name,(char*)actor+0x3b9,func_00137AE0(actor),"C_080",actor);
   if(dot>D_003BD158)return Emit(name,(char*)actor+0x3b9,func_00137AE0(actor),"C_081",actor);
  }
  if(M2C_FIELD((char*)movement,u8 *,0x36)) {
   direction=BkNormalizePS2(*(BkVectorPS2 *)((char*)movement+0x60));forward=BkNormalizePS2(D_004432D0);
   angle=func_0029E0D8(BkClampedDotPS2(direction,forward))*57.295780181884766f;
-  if(SumWord(BlackGame::Mul3(BkCrossPS2(direction,forward),D_004432C0))>0.0f)angle=-angle;
+  if(SumWord(Game::Mul3(BkCrossPS2(direction,forward),D_004432C0))>0.0f)angle=-angle;
   if(__builtin_fabsf(angle)<90.0f)return EmitFallback(name,(char*)actor+0x3b9,func_00137AE0(actor),"S_372",D_003F6A40,actor);
   return EmitFallback(name,(char*)actor+0x3b9,func_00137AE0(actor),D_003F6A48,D_003F6A40,actor);
  }
@@ -97,7 +97,7 @@ extern float D_003BD154;extern int D_004158D8[2];extern const char D_003F68E0[],
 void Selector::Action(char* name,Actor* actor,int action) {
 
  Movement* movement=func_00135550(actor);char* motion=(char*)movement+0xa0;int backwards,state,crouching,choice;const char *suffix;float speed;unsigned int random;
- backwards=SumWord(BlackGame::Mul3(*(BkVectorPS2 *)(motion+0x10),M2C_FIELD((char*)movement,char **,0x7c)?*(BkVectorPS2 *)(M2C_FIELD((char*)movement,char **,0x7c)+0xf0):0))<0.0f;
+ backwards=SumWord(Game::Mul3(*(BkVectorPS2 *)(motion+0x10),M2C_FIELD((char*)movement,char **,0x7c)?*(BkVectorPS2 *)(M2C_FIELD((char*)movement,char **,0x7c)+0xf0):0))<0.0f;
  state=M2C_FIELD((char*)actor,int *,0x39c);crouching=M2C_FIELD((char*)actor,u8 *,0x3aa);
  if(state==38 && func_00360838("SK_DF_S_490",M2C_FIELD((char*)actor,char **,0x330)+0x5c)==0){crouching=1;M2C_FIELD((char*)func_00135550(actor),u8 *,0x30)=1;func_00135578(actor,1);}
  choice=M2C_FIELD(func_0015D248(D_0040F4E0,func_00136B30(D_0040F4D0+0x30),0),int *,0x94)==2;
@@ -233,7 +233,7 @@ void Selector::Aim(char* name,Actor* actor) {
  __asm__("vsub.xyz deltav, targetv, posv":"=j deltav"(delta):"j targetv"(target),"j posv"(position));
  normalDelta=BkNormalizePS2(delta);forward=BkNormalizePS2(D_004432D0);speed=M2C_FIELD((char*)movement,float *,0x1fa0);
  angle=func_0029E0D8(BkClampedDotPS2(normalDelta,forward))*57.295780181884766f;
- if(SumWord(BlackGame::Mul3(BkCrossPS2(normalDelta,forward),D_004432C0))>0.0f)angle=-angle;
+ if(SumWord(Game::Mul3(BkCrossPS2(normalDelta,forward),D_004432C0))>0.0f)angle=-angle;
  angle-=M2C_FIELD((char*)movement,float *,0);
  if(angle<0.0f) {float magnitude=-angle;angle=-(magnitude-(float)(int)(magnitude/360.0f)*360.0f);}
  else angle=angle-(float)(int)(angle/360.0f)*360.0f;

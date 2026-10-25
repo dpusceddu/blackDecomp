@@ -26,7 +26,7 @@ extern const char D_003FADC0[];
 extern const char D_003FADD8[];
 }
 
-int BlackPS2Classes::UnknownVtable_003E10B0::Function_0020EDB0() {
+int Unnamed::UnknownVtable_003E10B0::Function_0020EDB0() {
 
     func_0020DF90(this, D_003FACD0);
     func_0020DF90(this, D_003FACE0);

@@ -1,7 +1,7 @@
 // Declarations of the Kynapse source module "shooter_agent" (ported from an unpublished companion project).
 // Function definitions are in the units that provide them.
-#ifndef BLACK_CAMPAIGN_SHOOTER_AGENT_HPP
-#define BLACK_CAMPAIGN_SHOOTER_AGENT_HPP
+#ifndef BLACK_SHOOTER_AGENT_HPP
+#define BLACK_SHOOTER_AGENT_HPP
 #include "kynapse/compat.hpp"
 #include "kynapse/alloc.hpp"
 extern void (*gKaimFree)(void*);

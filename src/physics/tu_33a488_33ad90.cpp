@@ -8,7 +8,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0033A488);
 
 #ifdef BLACK_NONMATCHING
 // Unmatched: resumable traversal, SN callback member pointers and VU0 frame lifetimes.
-static inline PhysicsMatrix Compose(const PhysicsMatrix& a,const PhysicsMatrix& b){PhysicsMatrix r;r.row[0]=BlackPS2::VU0::TransformDirection(b.row,a.row[0]);r.row[1]=BlackPS2::VU0::TransformDirection(b.row,a.row[1]);r.row[2]=BlackPS2::VU0::TransformDirection(b.row,a.row[2]);r.row[3]=BlackPS2::VU0::TransformPoint(b.row,a.row[3]);return r;}
+static inline PhysicsMatrix Compose(const PhysicsMatrix& a,const PhysicsMatrix& b){PhysicsMatrix r;r.row[0]=Ps2Math::VU0::TransformDirection(b.row,a.row[0]);r.row[1]=Ps2Math::VU0::TransformDirection(b.row,a.row[1]);r.row[2]=Ps2Math::VU0::TransformDirection(b.row,a.row[2]);r.row[3]=Ps2Math::VU0::TransformPoint(b.row,a.row[3]);return r;}
 inline unsigned int PhysicsSegmentQuery::QueueLeaf(const SegmentShapePS2* shapeToQueue, const PhysicsMatrix* frame,
                                             unsigned int identity, unsigned char tag)
 {

@@ -9,14 +9,14 @@
 // Unmatched: actor attachment and matrix operator context; native allocation and branch order.
 #include "game/effects/runtime.hpp"
 #include "game/effects/vu_math.h"
-using ModEffects::Matrix;
+using Effects::Matrix;
 struct AttachmentActor {char unknown00[0x70];Matrix world;char unknownb0[0x1f4];char*definition;char unknown2a8[0x88];void*pose;};
-struct Attachment : ModEffects::AttachmentManager {
+struct Attachment : Effects::AttachmentManager {
  void Update() __asm__("func_001B64C0");int Clear() __asm__("func_001B6910");void Detach(void*,long) __asm__("func_001B6CF8");void Flush(float) __asm__("func_001B6DC8");void Deferred(float) __asm__("func_001B7160");
 };
 extern "C" {extern char*D_0040F4D0,*D_0040F4E0;void func_001B1518(void*);void func_001B15A0(void*);void func_001B11A0(void*,const Matrix*);int func_001B1340(float,float,void*,void*);Matrix*func_001A68E0(void*,int);unsigned long func_00136B30(void*);int func_0015D2E8(void*,unsigned long);char*func_0015D248(void*,unsigned long,int);}
 static inline Matrix Product(const Matrix&m,const Matrix&n){Matrix r;r.row[0]=BkEffectRotatePS2(m.row,n.row[0]);r.row[1]=BkEffectRotatePS2(m.row,n.row[1]);r.row[2]=BkEffectRotatePS2(m.row,n.row[2]);r.row[3]=BkEffectTransformPS2(m.row,n.row[3]);return r;}
-void Attachment::Update(){float now=*(float*)(D_0040F4D0+0x20);Flush(previousTime);Deferred(now);short remaining=activeCount-1;unsigned short *cursor=indices;while(remaining!=-1){unsigned short index=*cursor;AttachmentActor *actor=(AttachmentActor*)actors[index];if(actor){Matrix transform;int kind=kinds[index];if(kind==8){if(modes[index]==0){ModEffects::IdentityXYZ(transform);transform.row[3]=actor->world.row[3];}else if(modes[index]==1)transform=actor->world;func_001B11A0(entries+index,&transform);}else{transform=*func_001A68E0(actor->pose,kind);Matrix*result=&transform;Matrix adjusted;if(kind==0){Matrix correction,offset;ModEffects::IdentityXYZ(correction);ModEffects::IdentityXYZ(offset);unsigned long key=func_00136B30(actor);if(func_0015D2E8(D_0040F4E0,key)){char *context=func_0015D248(D_0040F4E0,key,0);correction.row[3]=*(s128*)(context+0x80);adjusted=Product(transform,correction);if(actor->definition[0x108]){char *resource=*(char**)(actor->definition+0xe8);resource=*(char**)(resource+0x10);float height=*(float*)(resource+0x48);BkEffectPointPS2 translation={0,0,height,0};offset.row[3]=*(s128*)&translation;adjusted=Product(adjusted,offset);}result=&adjusted;func_001B11A0(entries+index,result);}}else func_001B11A0(entries+index,result);}}if(!func_001B1340(now,previousTime,entries+index,*(void**)((char*)this+0x344c))){func_001B1518(entries+index);unsigned short last=activeCount-1;unsigned short*reverse=*(unsigned short**)((char*)this+0x3444);unsigned short old=reverse[index],moved=indices[last];indices[old]=moved;reverse[index]=last;indices[last]=index;reverse[moved]=old;activeCount--;}else cursor++;remaining--;}previousTime=now;}
+void Attachment::Update(){float now=*(float*)(D_0040F4D0+0x20);Flush(previousTime);Deferred(now);short remaining=activeCount-1;unsigned short *cursor=indices;while(remaining!=-1){unsigned short index=*cursor;AttachmentActor *actor=(AttachmentActor*)actors[index];if(actor){Matrix transform;int kind=kinds[index];if(kind==8){if(modes[index]==0){Effects::IdentityXYZ(transform);transform.row[3]=actor->world.row[3];}else if(modes[index]==1)transform=actor->world;func_001B11A0(entries+index,&transform);}else{transform=*func_001A68E0(actor->pose,kind);Matrix*result=&transform;Matrix adjusted;if(kind==0){Matrix correction,offset;Effects::IdentityXYZ(correction);Effects::IdentityXYZ(offset);unsigned long key=func_00136B30(actor);if(func_0015D2E8(D_0040F4E0,key)){char *context=func_0015D248(D_0040F4E0,key,0);correction.row[3]=*(s128*)(context+0x80);adjusted=Product(transform,correction);if(actor->definition[0x108]){char *resource=*(char**)(actor->definition+0xe8);resource=*(char**)(resource+0x10);float height=*(float*)(resource+0x48);BkEffectPointPS2 translation={0,0,height,0};offset.row[3]=*(s128*)&translation;adjusted=Product(adjusted,offset);}result=&adjusted;func_001B11A0(entries+index,result);}}else func_001B11A0(entries+index,result);}}if(!func_001B1340(now,previousTime,entries+index,*(void**)((char*)this+0x344c))){func_001B1518(entries+index);unsigned short last=activeCount-1;unsigned short*reverse=*(unsigned short**)((char*)this+0x3444);unsigned short old=reverse[index],moved=indices[last];indices[old]=moved;reverse[index]=last;indices[last]=index;reverse[moved]=old;activeCount--;}else cursor++;remaining--;}previousTime=now;}
 int Attachment::Clear(){unsigned short i=0;do{if(entries[i].resource){func_001B1518(entries+i);actors[i]=0;kinds[i]=8;modes[i]=-1;}i++;}while(i<80);activeCount=0;pending=0;return 1;}
 void Attachment::Detach(void*actor,long stop){unsigned short i=0;do{if(actors[i]==actor){if(stop&&entries[i].resource)func_001B15A0(entries+i);actors[i]=0;kinds[i]=8;}i++;}while(i<80);}
 #else
@@ -32,7 +32,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B6CF8);
 #include "ps2/vu0.hpp"
 
 // Types below are local instruction views; canonical shared headers are untouched.
-namespace ModEffects {
+namespace Effects {
 template<class T> inline T& At(void *p,unsigned offset) { return *(T*)((char*)p+offset); }
 struct Name {
     unsigned long value;
@@ -107,11 +107,11 @@ void func_001EC060(float,void*,Value,int,Actor*);
 void func_001B1318(Matrix*,Entry*);
 void func_001BEF70(void*,Value);
 void func_0014EBE0(void*,Matrix*,DeferredConfig*);
-void func_00152BB0(Actor*,Matrix*,BlackGame::Position4*);
+void func_00152BB0(Actor*,Matrix*,Game::Position4*);
 unsigned long func_001484C8(Actor*);
 int func_0014A650(Actor*,unsigned long);
 float func_0014A568(Actor*,unsigned long);
-void func_0014A6A0(Actor*,unsigned long,int,Matrix*,BlackGame::Position4*);
+void func_0014A6A0(Actor*,unsigned long,int,Matrix*,Game::Position4*);
 float func_0012D0D0(float,float,void*);
 }
 
@@ -145,7 +145,7 @@ void AttachmentRecovery::Queue(Name name,Actor *actor,int mode,int part)
             offset=group->delays[i]; asset=group->assets[i];
             if(group->randomPoint) {
                 follow=0;
-                world.row[3]=BlackPS2::VU0::TransformPoint(actor->world.row,RandomPoint(actor));
+                world.row[3]=Ps2Math::VU0::TransformPoint(actor->world.row,RandomPoint(actor));
             }
         }
         Request&request=Queued(State().queued);
@@ -216,7 +216,7 @@ void AttachmentRecovery::Consume(float now)
 // untouched lanes remain unspecified, as in the original inline vector layer.
 static inline Value RaiseY(Value point,float amount)
 {
-    Value scalar=BlackGame::BitsVec(*(int*)&amount),sum,result=point;
+    Value scalar=Game::BitsVec(*(int*)&amount),sum,result=point;
     asm("vaddx.y sumv, pointv, scalarvx\n\tvaddy.y resultv, vf0, sumvy\n\tvmove.xyzw resultv, resultv"
         : "=&j sumv"(sum),"+j resultv"(result)
         : "j pointv"(point),"j scalarv"(scalar));
@@ -248,24 +248,24 @@ void AttachmentRecovery::Expire(float now)
     }
 }
 
-static inline float BoxVolume(const BlackGame::Position4&extent)
+static inline float BoxVolume(const Game::Position4&extent)
 {
-    Value input=BlackGame::Load(extent),eight=BlackGame::BitsVec(0x41000000),result;
+    Value input=Game::Load(extent),eight=Game::BitsVec(0x41000000),result;
     asm("vmuly.x resultv, extentv, extentvy\n\tvmulz.x resultv, resultv, extentvz\n\tvmulx.x resultv, resultv, eightvx"
         : "=j resultv"(result) : "j extentv"(input),"j eightv"(eight));
-    return BlackGame::X(result);
+    return Game::X(result);
 }
-static inline float NegativeComponent(const BlackGame::Position4&extent,int lane)
+static inline float NegativeComponent(const Game::Position4&extent,int lane)
 {
-    Value in=BlackGame::Load(extent),negative;
-    if(lane==0) {asm("vsub.x outputv, vf0, inputv":"=j outputv"(negative):"j inputv"(in));return BlackGame::X(negative);}
-    BlackGame::Position4 spilled;
-    if(lane==1) {asm("vsub.y outputv, vf0, inputv":"=j outputv"(negative):"j inputv"(in));BlackGame::Store(spilled,negative);return spilled.y;}
-    asm("vsub.z outputv, vf0, inputv":"=j outputv"(negative):"j inputv"(in));BlackGame::Store(spilled,negative);return spilled.z;
+    Value in=Game::Load(extent),negative;
+    if(lane==0) {asm("vsub.x outputv, vf0, inputv":"=j outputv"(negative):"j inputv"(in));return Game::X(negative);}
+    Game::Position4 spilled;
+    if(lane==1) {asm("vsub.y outputv, vf0, inputv":"=j outputv"(negative):"j inputv"(in));Game::Store(spilled,negative);return spilled.y;}
+    asm("vsub.z outputv, vf0, inputv":"=j outputv"(negative):"j inputv"(in));Game::Store(spilled,negative);return spilled.z;
 }
 static inline void SetComponent(Value&point,float number,int lane)
 {
-    Value scalar=BlackGame::BitsVec(*(int*)&number),result=point;
+    Value scalar=Game::BitsVec(*(int*)&number),result=point;
     if(lane==0) asm("vaddx.x outputv, vf0, scalarvx":"+j outputv"(result):"j scalarv"(scalar));
     else if(lane==1) asm("vaddx.y outputv, vf0, scalarvx":"+j outputv"(result):"j scalarv"(scalar));
     else asm("vaddx.z outputv, vf0, scalarvx":"+j outputv"(result):"j scalarv"(scalar));
@@ -275,7 +275,7 @@ static inline void SetComponent(Value&point,float number,int lane)
 Value AttachmentRecovery::RandomPoint(Actor *actor)
 {
     Matrix transform;
-    BlackGame::Position4 extent;
+    Game::Position4 extent;
     if(actor->kind==3) func_00152BB0(actor,&transform,&extent);
     else {
         unsigned long handle=func_001484C8(actor);
@@ -292,7 +292,7 @@ Value AttachmentRecovery::RandomPoint(Actor *actor)
     SetComponent(point,func_0012D0D0(NegativeComponent(extent,0),extent.x,D_0040F4D0),0);
     SetComponent(point,func_0012D0D0(NegativeComponent(extent,1),extent.y,D_0040F4D0),1);
     SetComponent(point,func_0012D0D0(NegativeComponent(extent,2),extent.z,D_0040F4D0),2);
-    return BlackPS2::VU0::TransformPoint(transform.row,point);
+    return Ps2Math::VU0::TransformPoint(transform.row,point);
 }
 }
 #else

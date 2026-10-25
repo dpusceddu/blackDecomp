@@ -13,7 +13,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00344050);
 
 extern "C" Transform *func_003440B8(Transform *out, const Transform *a, const Transform *b)
 {
-    BlackPS2::AnimationMath::Multiply(&out->rotation, &a->rotation, &b->rotation);
-    BlackPS2::AnimationMath::Add(&out->position, &a->position, &b->position);
+    Ps2Math::AnimationMath::Multiply(&out->rotation, &a->rotation, &b->rotation);
+    Ps2Math::AnimationMath::Add(&out->position, &a->position, &b->position);
     return out;
 }

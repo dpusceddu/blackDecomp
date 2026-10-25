@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_action_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x181a18
 // Unmatched: original EDX stack/ESI action contract and expanded Resolve helper.
 
@@ -16,4 +16,4 @@ int ActionStack::FindAction(const Action* action) const
     return -1;
 }
 
-}  // namespace BlackGame
+}  // namespace Game

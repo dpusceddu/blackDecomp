@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/actor/region_state.hpp"
-namespace CampaignActor {
+namespace ActorParts {
 extern "C" {
 void func_00125CD8(void *);
 void func_0026AA68(int);void func_0026A840(int);

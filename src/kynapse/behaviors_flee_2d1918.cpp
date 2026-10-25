@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "kynapse/behaviors/flee_queries.hpp"
-namespace FleeRecovery {
+namespace FleeViews {
     
 
 int InitAgent::Initialize(ChildBuffers* config)

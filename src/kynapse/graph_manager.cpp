@@ -126,7 +126,7 @@ bool CGraphManager::Configure(GraphConfig *config)
         func_002ECB80(func_0035E750(config->GetValue()));
         searchConfigured = true;
     } else {
-        return BlackPS2::Kynapse::IsPrivateProperty(config);
+        return Ps2Math::Kynapse::IsPrivateProperty(config);
     }
     return true;
 }

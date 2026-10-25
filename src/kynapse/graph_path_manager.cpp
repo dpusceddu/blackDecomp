@@ -96,7 +96,7 @@ bool CPathObjectManager::Configure(GraphConfig *config)
             return false;
         }
     }
-    return BlackPS2::Kynapse::IsPrivateProperty(config);
+    return Ps2Math::Kynapse::IsPrivateProperty(config);
 }
 
 extern "C" void func_002F5868(CPathObject *object, CPathObjectManager *self)

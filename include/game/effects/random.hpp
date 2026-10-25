@@ -1,7 +1,7 @@
 #ifndef BLACK_MOD_EFFECTS_RANDOM_METHODS_HPP
 #define BLACK_MOD_EFFECTS_RANDOM_METHODS_HPP
 #include "game/effects/random_state.h"
-namespace ModEffects {
+namespace Effects {
 // PS2-verified two-word state and source-shaped inline methods. Original name unknown.
 class RandomState {
 public:

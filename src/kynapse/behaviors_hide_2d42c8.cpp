@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "kynapse/behaviors/hide_queries.hpp"
-namespace HideRecovery {
+namespace HideViews {
     
 
 bool HideAgent::Update()

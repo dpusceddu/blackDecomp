@@ -1,5 +1,5 @@
-#ifndef BLACK_MOD_ARMS_SAMPLER_HPP
-#define BLACK_MOD_ARMS_SAMPLER_HPP
+#ifndef BLACK_ARMS_SAMPLER_HPP
+#define BLACK_ARMS_SAMPLER_HPP
 #include "animation/runtime.h"
 namespace ArmsAnimation {
 // PS2 storage and caller contracts; original class identities remain inferred.

@@ -4,7 +4,7 @@
 #include "game/classes/support.hpp"
 #include "game/classes/hierarchy.hpp"
 
-namespace BlackPS2Classes {
+namespace Unnamed {
 
 // UnknownVtable_003DC100
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
@@ -41,16 +41,16 @@ struct UnknownVtable_003DC100 {
     };
 };
 
-} // namespace BlackPS2Classes
+} // namespace Unnamed
 
 // Separate, source-probed virtual dispatch view; not a complete class layout.
-namespace BlackPS2Classes {
+namespace Unnamed {
 struct ABI_UnknownVtable_003DC100 {
     unsigned char unknown_prefix[0x10];
     virtual void Slot000();
     virtual void Slot001();
     virtual void Slot002();
 };
-} // namespace BlackPS2Classes
+} // namespace Unnamed
 
 #endif

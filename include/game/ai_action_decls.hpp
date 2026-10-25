@@ -5,7 +5,7 @@
 
 #include "game/ai_action.hpp"
 
-namespace BlackGame {
+namespace Game {
 
 // Unmatched: the original takes its controller in EAX, returning a byte in AL.
 

@@ -12,7 +12,7 @@
 #include "game/ai_action.hpp"
 #include "game/ai_vector.hpp"
 
-namespace BlackGame {
+namespace Game {
 // Vector values (Position4, PositionArg, ...) are shared with the Controller; see ai_action.hpp.
 
 // Scalar square root: SN has no builtin in this configuration (sqrt.s), MSVC uses sqrtss.

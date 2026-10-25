@@ -4,8 +4,8 @@
 #include "game/effects/random_state.h"
 #include "game/effects/vu_math.h"
 
-namespace ModEffects {
-typedef BlackPS2::VU0::Value Value;
+namespace Effects {
+typedef Ps2Math::VU0::Value Value;
 struct Matrix { Value row[4]; };
 class Entry;
 // Accessed PS2 prefixes. These names do not identify the original C++ classes.

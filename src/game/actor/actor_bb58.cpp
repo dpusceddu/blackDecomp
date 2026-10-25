@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/actor/actor_command.hpp"
-namespace CampaignActor {
+namespace ActorParts {
 extern "C" {extern CommandWorld*D_0040F514;}
 
 inline CommandWorld*World(){return D_0040F514;}

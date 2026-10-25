@@ -1,10 +1,10 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_PARAMETERS_HPP
-#define BLACK_CAMPAIGN_GRAPH_PARAMETERS_HPP
+#ifndef BLACK_GRAPH_PARAMETERS_HPP
+#define BLACK_GRAPH_PARAMETERS_HPP
 #include "kynapse/parameter_tables.hpp"
 
 // The inherited prefix is verified by the exact PS2 table constructors. The
 // additional methods below are scoped views; unused behavior remains provisional.
-struct ParameterCampaign : ParameterTables {
+struct ParameterViews : ParameterTables {
     int FindAperiodicName(const char*)const;
     int FindPeriodicName(const char*)const;
     int FindEstimatedName(const char*)const;

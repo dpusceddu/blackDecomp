@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_action_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x197d48
 
 void Action::LeaveReactionWait()
@@ -14,4 +14,4 @@ void Action::LeaveReactionWait()
     brain->reaction = 0;
 }
 
-}  // namespace BlackGame
+}  // namespace Game

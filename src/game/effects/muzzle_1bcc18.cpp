@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
-#include "game/effects/mod_muzzle.hpp"
+#include "game/effects/muzzle.hpp"
 
-void ModEffects::MuzzleMethods::InitializeFields() {rotation=0.0f;resource=0;phase=3;}
+void Effects::MuzzleMethods::InitializeFields() {rotation=0.0f;resource=0;phase=3;}
 
 #ifdef NON_MATCHING
 #include "game/effects/vector.h"

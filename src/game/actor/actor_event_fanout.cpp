@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/actor/event_fanout.hpp"
-namespace BlackPS2Campaign {
+namespace ActorEvents {
 
 void ActorFanout3::Dispatch(int event) {
     if (count) {

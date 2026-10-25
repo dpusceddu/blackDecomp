@@ -1,7 +1,7 @@
 // Partial actor view. Names and full allocation size remain unverified.
-#ifndef BLACK_CAMPAIGN_ACTOR_STATE_HPP
-#define BLACK_CAMPAIGN_ACTOR_STATE_HPP
-namespace CampaignActor {
+#ifndef BLACK_ACTOR_STATE_HPP
+#define BLACK_ACTOR_STATE_HPP
+namespace ActorParts {
 struct Request {int kind;int unknown;int first;int second;unsigned char flag;};
 struct Owner {
  inline void * Animation() {return *(void**)((char*)this+0x330);}

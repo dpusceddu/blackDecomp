@@ -2,7 +2,7 @@
 
 #include "kynapse/behaviors/hide.hpp"
 extern const float kNearestLimit;
-namespace HideRecovery {
+namespace HideViews {
 
 void HideAgent::Reset() {
     farLimit=0;

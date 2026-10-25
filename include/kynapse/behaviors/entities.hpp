@@ -1,6 +1,6 @@
 // PS2 entity-manager layout; the polymorphic base and allocation hooks are verified by the destructor.
-#ifndef BLACK_CAMPAIGN_BEHAVIORS_ENTITIES_HPP
-#define BLACK_CAMPAIGN_BEHAVIORS_ENTITIES_HPP
+#ifndef BLACK_BEHAVIORS_ENTITIES_HPP
+#define BLACK_BEHAVIORS_ENTITIES_HPP
 #include "kynapse/compat.hpp"
 #include "kynapse/classes/Kaim_CEntityManager.hpp"
 

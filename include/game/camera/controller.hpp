@@ -1,11 +1,11 @@
 // Shared mod context; accessed PS2 prefixes only. Original identities and full allocations remain qualified.
 // Partial actor view. Semantic class identities and full sizes remain unverified.
-#ifndef BLACK_CAMPAIGN_ACTOR_CAMERA_HPP
-#define BLACK_CAMPAIGN_ACTOR_CAMERA_HPP
+#ifndef BLACK_ACTOR_CAMERA_HPP
+#define BLACK_ACTOR_CAMERA_HPP
 #include "game/ai_action.hpp"
 #include "game/camera/aim.hpp"
 
-namespace CampaignActor {
+namespace ActorParts {
 // The non-virtual base puts the GCC 2.95 vptr at the verified PS2 offset 0x4C.
 struct ChildData {
     char pad[0x48];
@@ -17,9 +17,9 @@ struct Child : ChildData {
     virtual void V1();
     virtual void Update();
     virtual int V3();
-    virtual void V4(BlackGame::PositionArg, BlackGame::PositionArg, float,
+    virtual void V4(Game::PositionArg, Game::PositionArg, float,
             unsigned char, signed char, float, long);
-    virtual void Target(BlackGame::PositionArg, BlackGame::PositionArg, float, long);
+    virtual void Target(Game::PositionArg, Game::PositionArg, float, long);
     virtual bool Available();
     virtual void Activate();
     virtual void Deactivate();
@@ -36,10 +36,10 @@ public:
     void Tick() __asm__("func_00140E48");
     void Update();
     int Choose(int);
-    void SetTarget(BlackGame::PositionArg, BlackGame::PositionArg, float, long);
+    void SetTarget(Game::PositionArg, Game::PositionArg, float, long);
     int Enable();
     int Clear();
-    void Configure(BlackGame::PositionArg, BlackGame::PositionArg, float,
+    void Configure(Game::PositionArg, Game::PositionArg, float,
             unsigned char, signed char, float, long);
 };
 }

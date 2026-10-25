@@ -1,8 +1,8 @@
 // Partial native PS2 view; semantic class identity and complete allocation remain unverified.
-#ifndef BLACK_CAMPAIGN_ACTOR_RENDERABLE_STATE_HPP
-#define BLACK_CAMPAIGN_ACTOR_RENDERABLE_STATE_HPP
+#ifndef BLACK_ACTOR_RENDERABLE_STATE_HPP
+#define BLACK_ACTOR_RENDERABLE_STATE_HPP
 #include "ps2/vu0.hpp"
-namespace CampaignActor {
+namespace ActorParts {
 struct RenderablePrefix { char prefix[0x10]; };
 // The intermediate virtual base preserves the PS2 vptr at0x10. Unused slots are provisional.
 class RenderableInterface : public RenderablePrefix {

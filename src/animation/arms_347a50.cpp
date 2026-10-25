@@ -5,11 +5,11 @@
 #include "ps2/prelude.h"
 namespace ArmsAnimation {
 
-static inline void ScaleRow(float scalar,const BlackGame::Position4& input,BlackGame::Position4& output) {
+static inline void ScaleRow(float scalar,const Game::Position4& input,Game::Position4& output) {
     asm("lqc2 vf9,0(%1)\n\tmfc1 $8,%2\n\tqmtc2.ni $8,vf11\n\tvmulx.xyzw vf12,vf9,vf11x\n\tsqc2 vf12,0(%0)"
         : :"r"(&output),"r"(&input),"f"(scalar):"$8","vf9","vf11","vf12","memory");
 }
-static inline void CopyRow(const BlackGame::Position4& input,BlackGame::Position4& output) {
+static inline void CopyRow(const Game::Position4& input,Game::Position4& output) {
     asm("lq $8,0(%1)\n\tsq $8,0(%0)": :"r"(&output),"r"(&input):"$8","memory");
 }
 
@@ -168,23 +168,23 @@ void func_00347D68(void *arg0)
   s32 temp_17;
   s8 *new_var2;
   f32 *new_var;
-  if ((((BkModAnimationInstancePS2*)arg0)->graph) != 0)
+  if ((((BkAnimationInstancePS2*)arg0)->graph) != 0)
   {
     M2C_FIELD(arg0, s32 *, 0) = (s32) ((M2C_FIELD(arg0, s32 *, 0)) | 0x800000);
     func_003461E0();
     temp_17 = func_0034F080(arg0, 0);
     new_var2 = ((s8 *) arg0) + 0;
     *((s32 *) new_var2) = (s32) ((*((s32 *) new_var2)) & 0xFF7FFFFF);
-    new_var = &((BkModAnimationInstancePS2*)arg0)->root.quaternion[3];
+    new_var = &((BkAnimationInstancePS2*)arg0)->root.quaternion[3];
     if (temp_17 != 0)
     {
-      ((BkModAnimationInstancePS2*)arg0)->root.translation[0] = 0.0f;
-      ((BkModAnimationInstancePS2*)arg0)->root.translation[1] = 0.0f;
-      ((BkModAnimationInstancePS2*)arg0)->root.translation[2] = 0.0f;
-      ((BkModAnimationInstancePS2*)arg0)->root.quaternion[0] = 0.0f;
-      ((BkModAnimationInstancePS2*)arg0)->root.quaternion[1] = 0.0f;
-      ((BkModAnimationInstancePS2*)arg0)->root.quaternion[2] = 0.0f;
-      ((BkModAnimationInstancePS2*)arg0)->root.translation[3] = 1.0f;
+      ((BkAnimationInstancePS2*)arg0)->root.translation[0] = 0.0f;
+      ((BkAnimationInstancePS2*)arg0)->root.translation[1] = 0.0f;
+      ((BkAnimationInstancePS2*)arg0)->root.translation[2] = 0.0f;
+      ((BkAnimationInstancePS2*)arg0)->root.quaternion[0] = 0.0f;
+      ((BkAnimationInstancePS2*)arg0)->root.quaternion[1] = 0.0f;
+      ((BkAnimationInstancePS2*)arg0)->root.quaternion[2] = 0.0f;
+      ((BkAnimationInstancePS2*)arg0)->root.translation[3] = 1.0f;
       *new_var = 1.0f;
       if (func_003489A8(arg0) != NULL)
       {
@@ -257,13 +257,13 @@ void func_00348018(void *arg0)
 {
   int new_var;
   s32 temp_3;
-  if ((((BkModAnimationInstancePS2*)arg0)->evaluationFlags) == 0)
+  if ((((BkAnimationInstancePS2*)arg0)->evaluationFlags) == 0)
   {
-    temp_3 = ((BkModAnimationInstancePS2*)arg0)->flags;
+    temp_3 = ((BkAnimationInstancePS2*)arg0)->flags;
     new_var = 1;
     if ((temp_3 & new_var) && (temp_3 & 0x10000000))
     {
-      ((BkModAnimationInstancePS2*)arg0)->flags = (s32) (temp_3 & 0xEFFFFFFF);
+      ((BkAnimationInstancePS2*)arg0)->flags = (s32) (temp_3 & 0xEFFFFFFF);
       func_00349278(arg0);
     }
   }
@@ -519,7 +519,7 @@ void __attribute__((section(".text.func_003484D0"))) Instance::Scale(float value
 }
 
 namespace ArmsAnimation {
-void __attribute__((section(".text.func_003484F0"))) Instance::ScaleMatrix(const BlackGame::Position4* input,BlackGame::Position4* output) {
+void __attribute__((section(".text.func_003484F0"))) Instance::ScaleMatrix(const Game::Position4* input,Game::Position4* output) {
     ScaleRow(inverseRootScale,input[0],output[0]);
     ScaleRow(inverseRootScale,input[1],output[1]);
     ScaleRow(inverseRootScale,input[2],output[2]);

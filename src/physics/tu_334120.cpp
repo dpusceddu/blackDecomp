@@ -42,7 +42,7 @@ extern "C" void func_00334120(int initialize, int priority)
 
 struct Descriptor;
 
-namespace ShapeRecovery {
+namespace ShapeViews {
 struct ShapeType;
 struct Matrix { EeS128 right, up, at, position; };
 struct Shape {
@@ -55,7 +55,7 @@ struct Shape {
 };
 struct Holder { Shape* shape; };
 }
-using namespace ShapeRecovery;
+using namespace ShapeViews;
 extern "C" {
 extern void* D_0048F6F0[6];
 extern Matrix* D_0040E438[];

@@ -2,7 +2,7 @@
 #define BLACK_EFFECTS_MOD_ASSET_VIEWS_HPP
 #include "game/effects/asset.h"
 
-namespace ModEffects {
+namespace Effects {
 // Descriptive access views; historical class identities remain unverified.
 class Timer : public BkActorTimerPS2 {
 public:

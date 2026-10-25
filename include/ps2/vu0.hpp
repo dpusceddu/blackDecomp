@@ -10,7 +10,7 @@
 #include "ps2/vector_storage.hpp"
 #include "ps2/vu0_math.h"
 
-namespace BlackGame {
+namespace Game {
 struct Point3 { float x, y, z; };
 typedef PositionArg Vec;
 // Builds a vector from three floats: the floats move to GPRs and are interleaved (pextlw twice);
@@ -95,9 +95,9 @@ static inline float Length3(Vec v)
 }
 }
 
-namespace BlackPS2 {
+namespace Ps2Math {
 namespace VU0 {
-typedef BlackGame::Vec Value;
+typedef Game::Vec Value;
 // Keep the integer temporary's width explicit. An SF-mode asm output or a union
 // bit cast can change allocation or retain a store in this SN compiler.
 static inline float ReadXWord(Value value)
@@ -110,7 +110,7 @@ static inline float ReadXWord(Value value)
 }
 static inline float Length3Word(Value value)
 {
-    return ReadXWord(BkVuSqrtX(BlackGame::SumSquares3(value)));
+    return ReadXWord(BkVuSqrtX(Game::SumSquares3(value)));
 }
 }
 }

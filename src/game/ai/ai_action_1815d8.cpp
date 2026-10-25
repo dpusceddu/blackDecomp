@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_action_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x1815d8
 // Unmatched: original EDI stack/EBX identity contract and callback register lifetimes.
 
@@ -16,4 +16,4 @@ void ActionStack::NotifyIdentityRemoved(void* identity)
     }
 }
 
-}  // namespace BlackGame
+}  // namespace Game

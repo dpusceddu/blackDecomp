@@ -1,7 +1,7 @@
 // Brain and component prefixes inferred from PS2 access patterns and RTTI.
 // Unused component slots and full component layouts remain UNVERIFIED.
-#ifndef BLACK_CAMPAIGN_GRAPH_BRAIN_HPP
-#define BLACK_CAMPAIGN_GRAPH_BRAIN_HPP
+#ifndef BLACK_GRAPH_BRAIN_HPP
+#define BLACK_GRAPH_BRAIN_HPP
 #include "kynapse/graph/manager.hpp"
 #include "kynapse/graph/path_object.hpp"
 namespace Kaim {

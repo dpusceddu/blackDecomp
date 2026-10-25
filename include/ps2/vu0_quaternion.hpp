@@ -8,7 +8,7 @@
    but cannot represent ACC/flags: those hidden states must be dead across calls.
    Inputs load before output stores, so either input may alias the output. */
 #include "ps2/vu0_math.h"
-namespace BlackPS2 {
+namespace Ps2Math {
 namespace AnimationMath {
 static inline void Multiply(void *out, const void *a, const void *b)
 {

@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/actor/views.hpp"
-namespace BlackPS2Campaign {
+namespace ActorEvents {
 
 template<class T> inline T &At(void *p,int o) { return *(T *)((char *)p+o); }
 
@@ -16,7 +16,7 @@ void func_00129108(void *,void *,int,int,int);
 void func_0014C3E0(void *);
 extern char *D_0040F4D0;
 }
-namespace BlackPS2Campaign {
+namespace ActorEvents {
 inline bool ActorEntries::GetCommandState() {
     if (At<unsigned char>(this,0x13a)) return 0;
     char *table=(char *)Field_0010();

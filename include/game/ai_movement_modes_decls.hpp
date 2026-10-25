@@ -5,7 +5,7 @@
 
 #include "game/ai_movement.hpp"
 
-namespace BlackGame {
+namespace Game {
 // PS2 0x18b168; the Xbox build expands it (ai_movement.hpp) inside UpdateStallRecovery.
 
 static inline float FrameDelta() { return gGameClock->frameDelta; }

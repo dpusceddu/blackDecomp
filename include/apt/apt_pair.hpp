@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_APT_PAIR_HPP
-#define BLACK_CAMPAIGN_APT_PAIR_HPP
+#ifndef BLACK_APT_PAIR_HPP
+#define BLACK_APT_PAIR_HPP
 #include "apt/apt_function.hpp"
 namespace AptPS2 {
 extern "C" {

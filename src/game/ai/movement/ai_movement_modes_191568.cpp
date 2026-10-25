@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x191568
 // PS2 0x191568
 
@@ -33,4 +33,4 @@ bool MovementModeBase::ResetBase()
     return true;
 }
 
-}  // namespace BlackGame
+}  // namespace Game

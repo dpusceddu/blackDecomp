@@ -4,9 +4,9 @@
 #include "game/weapons/instance.hpp"
 #include "ps2/matrix.hpp"
 #include "ps2/ee_types.h"
-namespace ModWorld {
-using BlackGame::Vec;
-using BlackGame::Position4;
+namespace WorldObjects {
+using Game::Vec;
+using Game::Position4;
 struct ObjectActor; struct World; struct Definition;
 // Access/ABI views of this medium-confidence object range; historical names and
 // complete inheritance remain unknown. Field widths follow PS2 accesses.
@@ -43,9 +43,9 @@ struct CollisionCell {char unknown00[0x40];void* world;char unknown44[0x1c];};
 struct Region {char unknown00[8];int id;void* geometry;void* data;char unknown14[0x24];signed char active;char unknown39[0x6c7];CollisionCell cells[4];};
 struct ActorNode {char unknown00[0x34];ObjectActor* actor;};
 struct QueryMaterial {char unknown00[4];unsigned flags;};
-typedef ModWeapons::WorldCollision QueryHit;
+typedef Weapons::WorldCollision QueryHit;
 struct ClosestHit {Position4 point,normal;float fraction;unsigned unknown24,mask,unknown2c;Position4 extra[2];};
-typedef ModWeapons::WorldCollision TraceHit;
+typedef Weapons::WorldCollision TraceHit;
 struct FrameConfig {char unknown00[0x20208];int playerCount;};
 class World {public:
  char unknown00[0x30];Player players[2];char unknown11b0[0x3770];char space[0x70];Region regions[2];

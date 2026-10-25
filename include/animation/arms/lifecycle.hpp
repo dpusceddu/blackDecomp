@@ -1,5 +1,5 @@
-#ifndef BLACK_MOD_ARMS_LIFECYCLE_HPP
-#define BLACK_MOD_ARMS_LIFECYCLE_HPP
+#ifndef BLACK_ARMS_LIFECYCLE_HPP
+#define BLACK_ARMS_LIFECYCLE_HPP
 #include "animation/runtime.h"
 namespace ArmsAnimation {
 // Scoped native methods over the established PS2 instance/source-bank views.

@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x191778
 // Unmatched: private register contract for the stored __m128 argument.
 
@@ -22,7 +22,7 @@ void MovementModeBase::Stop() { state = 0; }
 // /SLUS_213.76 0x191798
 PositionResult MovementModeBase::GetTarget() const { return AsResult(target); }
 
-}  // namespace BlackGame
+}  // namespace Game
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001917A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00191A28);

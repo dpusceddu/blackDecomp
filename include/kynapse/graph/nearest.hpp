@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_NEAREST_HPP
-#define BLACK_CAMPAIGN_GRAPH_NEAREST_HPP
+#ifndef BLACK_GRAPH_NEAREST_HPP
+#define BLACK_GRAPH_NEAREST_HPP
 #include "kynapse/graph/tables.hpp"
 #include "kynapse/classes/Kaim_CFindNearestData.hpp"
 namespace Kaim {

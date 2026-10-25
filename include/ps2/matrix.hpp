@@ -2,7 +2,7 @@
 #define BLACK_PS2_MATRIX_HPP
 #include "ps2/vu0.hpp"
 
-namespace BlackPS2 {
+namespace Ps2Math {
 namespace VU0 {
 // Four 16-byte basis/translation values. This is storage, not an engine/RwMatrix class.
 struct Matrix4 { Value basis[4]; } __attribute__((aligned(16)));

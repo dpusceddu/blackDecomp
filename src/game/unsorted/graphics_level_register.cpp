@@ -44,7 +44,7 @@ extern const char D_003FAE38[];
 extern int D_003BE7D4;
 }
 
-int BlackPS2Classes::UnknownVtable_003E10B0::Function_0020EAC8() {
+int Unnamed::UnknownVtable_003E10B0::Function_0020EAC8() {
 
     func_0020DF68(this, D_003FACD0, func_0020EF28);
     func_0020DF68(this, D_003FACE0, func_0020F268);

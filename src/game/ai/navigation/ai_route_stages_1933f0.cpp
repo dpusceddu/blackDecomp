@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_stages_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x1933f0
 // Drops route points the follower already passed (keeping at least two) and republishes the
 // follower's current waypoint.
@@ -18,4 +18,4 @@ void TrimConsumedRoutePoints(RouteMode* mode)
     Assign(mode->follower->waypoint, RoutePoint(mode->active, mode->follower->cursor));
 }
 
-}  // namespace BlackGame
+}  // namespace Game

@@ -10,14 +10,14 @@ void func_0034F328(void *arg0, s32 arg1) {
     var_4 = arg0;
     if (var_4 != NULL) {
         do {
-            temp_2 = ((BkModAnimationInstancePS2*)var_4)->flags;
+            temp_2 = ((BkAnimationInstancePS2*)var_4)->flags;
             if (arg1 != 0) {
                 var_2 = temp_2 | 0x1000;
             } else {
                 var_2 = temp_2 & ~0x1000;
             }
-            ((BkModAnimationInstancePS2*)var_4)->flags = var_2;
-            var_4 = ((BkModAnimationInstancePS2*)var_4)->next;
+            ((BkAnimationInstancePS2*)var_4)->flags = var_2;
+            var_4 = ((BkAnimationInstancePS2*)var_4)->next;
         } while (var_4 != NULL);
     }
 }

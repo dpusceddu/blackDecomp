@@ -2,10 +2,10 @@
 
 #include "game/weapons/moving.hpp"
 
-namespace ModWeapons {
+namespace Weapons {
 extern void*impactService __asm__("D_0040F4D4");
 extern int maximumMovingIndex __asm__("D_003BCEB8");
-extern "C" void func_0016E0C0(void*,Vec,Vec,BkModWeaponOwnerPS2*);
+extern "C" void func_0016E0C0(void*,Vec,Vec,BkWeaponOwnerPS2*);
 
 static inline Position4&Vector(Position4&v){return v;}
 struct ImpactIteration {signed char bounce;bool again;} __attribute__((aligned(16)));

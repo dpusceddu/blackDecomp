@@ -3,7 +3,7 @@
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
 // Unmatched: 10 instruction differences after native layout, argument-bank and helper probes.
-using namespace CampaignGraphics;
+using namespace Graphics;
 bool PadBackend::Attach(Controller *controller,unsigned port) {
     bool valid=controller!=0;
     if(port<2){if(!valid)return false;valid=controller->field_4==state[port];}
@@ -20,7 +20,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026CA98);
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
 // Unmatched: 12 instruction differences after native layout, argument-bank and helper probes.
-using namespace CampaignGraphics;
+using namespace Graphics;
 void PadBackend::Detach(Controller *controller,unsigned port) {
     bool valid=controller!=0;
     if(port<2){if(!valid)return;valid=controllers[port]==controller;}
@@ -45,7 +45,7 @@ int func_0029C810(int);
 }
 struct PadOpenParameters {int kind,port;EeS64 reserved[3];} __attribute__((packed));
 extern const PadOpenParameters defaultPadParameters __asm__("D_004001D0");
-using namespace CampaignGraphics;
+using namespace Graphics;
 static inline int *Slot(int *array,int index){return array+index;}
 void PadBackend::PollPort(int port){
  unsigned int info[4];PadOpenParameters config=defaultPadParameters;

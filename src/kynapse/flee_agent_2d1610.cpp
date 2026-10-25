@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "kynapse/flee_agent.hpp"
-using namespace FleeRecovery;
+using namespace FleeViews;
 extern unsigned int D_003E2A58[],D_003E2AE0,D_0044ECD0;
 extern unsigned int *D_0044EDE0;
 extern "C" void func_002E00F0(void *,const char *,void *(*)(),int,int,int);
@@ -34,7 +34,7 @@ extern "C" void func_002D2EE8(FleeAgent *self) {
 extern "C" void func_002D2F40(FleeAgent *self) {
     self->entityCount=0;
 }
-namespace FleeRecovery {
+namespace FleeViews {
     float FleeAgent::Rate(void *,int blocked,float sum,int depth) {
         return (sum/(float)(depth+1))/(float)(blocked*10+1);
     }
@@ -60,7 +60,7 @@ extern "C" void func_002D2FD8() {
 
 #ifdef NONMATCHING
 // Unmatched: independent initialization stores are scheduled differently.
-namespace FleeRecovery {
+namespace FleeViews {
     FleeAgent::FleeAgent(Context *context):Behavior(context),graphSlot((unsigned int)-1) {
         maxEntities=20;
         pathId=0x7fffffff;
@@ -95,10 +95,10 @@ extern const char D_00404068[];
 extern const char D_00404058[];
 extern const char D_00404048[];
 extern const char D_00404030[];
-namespace FleeRecovery {
+namespace FleeViews {
     bool Kaim_InCorridor(const Vec3 *, const Vec3 *, const Vec3 *) __asm__("func_002D27D8");
 }
-namespace FleeRecovery {
+namespace FleeViews {
     bool FleeAgent::Configure(ChildBuffers* entry)
    {
         if (entry) {
@@ -169,10 +169,10 @@ namespace FleeRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: array-cookie construction and stack/register lifetimes differ.
-namespace FleeRecovery {
+namespace FleeViews {
     bool Kaim_InCorridor(const Vec3 *, const Vec3 *, const Vec3 *) __asm__("func_002D27D8");
 }
-namespace FleeRecovery {
+namespace FleeViews {
     bool FleeAgent::Init(ChildBuffers* config)
    {
         float unit = gEngine->unit;
@@ -223,10 +223,10 @@ namespace FleeRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: registry/component loop registers differ.
-namespace FleeRecovery {
+namespace FleeViews {
     bool Kaim_InCorridor(const Vec3 *, const Vec3 *, const Vec3 *) __asm__("func_002D27D8");
 }
-namespace FleeRecovery {
+namespace FleeViews {
     bool FleeAgent::SetGraph(void* id)
    {
         graph = (NodeGraph*)id;
@@ -269,10 +269,10 @@ namespace FleeRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: query-object lifetimes and visibility callback ABI differ.
-namespace FleeRecovery {
+namespace FleeViews {
     bool Kaim_InCorridor(const Vec3 *, const Vec3 *, const Vec3 *) __asm__("func_002D27D8");
 }
-namespace FleeRecovery {
+namespace FleeViews {
     bool FleeAgent::Update()
    {
         float now = gNow;
@@ -348,10 +348,10 @@ namespace FleeRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: vector temporaries and distance-helper calls differ.
-namespace FleeRecovery {
+namespace FleeViews {
     bool Kaim_InCorridor(const Vec3 *, const Vec3 *, const Vec3 *) __asm__("func_002D27D8");
 }
-namespace FleeRecovery {
+namespace FleeViews {
     bool FleeAgent::ComputeDestination()
    {
         Actor* actor = context->actor;
@@ -409,10 +409,10 @@ namespace FleeRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: outgoing-edge enumeration is inlined in the target.
-namespace FleeRecovery {
+namespace FleeViews {
     bool Kaim_InCorridor(const Vec3 *, const Vec3 *, const Vec3 *) __asm__("func_002D27D8");
 }
-namespace FleeRecovery {
+namespace FleeViews {
     float FleeAgent::ScorePath(GraphNode** result, GraphNode* from, int depth, int maxDepth, int blocked, float sum)
    {
         float score = Rate(*result, blocked, sum, depth);
@@ -442,10 +442,10 @@ namespace FleeRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: vector normalization and squared-length helper temporaries differ.
-namespace FleeRecovery {
+namespace FleeViews {
     bool Kaim_InCorridor(const Vec3 *, const Vec3 *, const Vec3 *) __asm__("func_002D27D8");
 }
-namespace FleeRecovery {
+namespace FleeViews {
     bool Kaim_InCorridor(const Vec3* origin, const Vec3* through, const Vec3* point)
    {
         float px = point->x - origin->x;
@@ -487,10 +487,10 @@ namespace FleeRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: distance-helper temporaries and loop registers differ.
-namespace FleeRecovery {
+namespace FleeViews {
     bool Kaim_InCorridor(const Vec3 *, const Vec3 *, const Vec3 *) __asm__("func_002D27D8");
 }
-namespace FleeRecovery {
+namespace FleeViews {
     bool FleeVisitor::OnEdge(GraphEdge* edge)
    {
         NodeGraph* owner = edge->graph;

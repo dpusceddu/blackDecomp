@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "kynapse/hide_agent.hpp"
-using namespace HideRecovery;
+using namespace HideViews;
 extern char D_00404400[];
 const char rodata_00404400[56] __asm__("D_00404400") __attribute__((aligned(8))) = "CHideAgent" "\000\000\000\000\000\000" "Q24Kaim7CObject" "\000" "Q24Kaim11CGraphPoint" "\000\000\000";
 extern unsigned int D_0044F018,D_003E2AE0,D_003E3428[];
@@ -35,7 +35,7 @@ extern "C" const Vec3 *func_002D5368(HideAgent *self) {
     }
     return &self->context->actor->position;
 }
-namespace HideRecovery {
+namespace HideViews {
     int HideAgent::AddDangerous(Actor *actor) {
         if (dangerousCount>=maxDangerous)return 0;
         dangerous[dangerousCount]=actor;
@@ -81,7 +81,7 @@ extern const char D_00404368[];
 extern const char D_00404378[];
 extern const char D_00404388[];
 extern const char D_00404398[];
-namespace HideRecovery {
+namespace HideViews {
     bool HideAgent::Configure(ChildBuffers* entry)
    {
         if (!entry)
@@ -137,7 +137,7 @@ namespace HideRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: allocator lifetimes and preparation/validation branches differ.
-namespace HideRecovery {
+namespace HideViews {
     bool HideAgent::Init(ChildBuffers* config)
    {
         destination = gOrigin;
@@ -180,7 +180,7 @@ namespace HideRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: registry/component iterator registers differ.
-namespace HideRecovery {
+namespace HideViews {
     bool HideAgent::SetGraph(void* id)
    {
         graph = (NodeGraph*)id;
@@ -225,7 +225,7 @@ namespace HideRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: controller-object lifetimes and return branches differ.
-namespace HideRecovery {
+namespace HideViews {
     bool HideAgent::Update()
    {
         bank->ClearActivation();
@@ -276,7 +276,7 @@ namespace HideRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: packed visibility-state and vector-temporary scheduling differs.
-namespace HideRecovery {
+namespace HideViews {
     bool HideAgent::Search()
    {
         Vec3 offset = gOrigin;
@@ -324,7 +324,7 @@ namespace HideRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: candidate loop and graph-query register allocation differs.
-namespace HideRecovery {
+namespace HideViews {
     void HideAgent::Scan(const Vec3* offset)
    {
         if (stage == -1 && graphSlot != -1) {
@@ -398,7 +398,7 @@ namespace HideRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: observer/target vector temporaries differ.
-namespace HideRecovery {
+namespace HideViews {
     bool HideAgent::Test(const Candidate* candidate, const Vec3* offset, bool* seen)
    {
         Vec3 observer = gOrigin;
@@ -446,7 +446,7 @@ namespace HideRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: controller-object lifetimes and distance-helper temporaries differ.
-namespace HideRecovery {
+namespace HideViews {
     bool HideAgent::Evaluate(const Candidate* candidate, const Vec3* offset, float* score, bool* handled,
     bool* proceed)
    {
@@ -521,7 +521,7 @@ namespace HideRecovery {
 
 #ifdef NONMATCHING
 // Unmatched: one redundant argument reload differs.
-namespace HideRecovery {
+namespace HideViews {
     bool HideAgent::Consider(const Candidate* candidate, const Vec3* offset, bool* handled)
    {
         if (candidate->id != currentId) {
@@ -549,7 +549,7 @@ namespace HideRecovery {
 #ifdef NONMATCHING
 // Unmatched: owned constants require four-byte placement, but SN emits eight-byte section alignment.
 extern const float D_00404454;
-namespace HideRecovery {
+namespace HideViews {
     void HideAgent::Reset() {
         farLimit = 0.0f;
         nearLimit = D_00404454;

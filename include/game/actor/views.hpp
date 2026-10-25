@@ -1,13 +1,13 @@
-#ifndef BLACK_CAMPAIGN_ACTOR_VIEWS_HPP
-#define BLACK_CAMPAIGN_ACTOR_VIEWS_HPP
+#ifndef BLACK_ACTOR_VIEWS_HPP
+#define BLACK_ACTOR_VIEWS_HPP
 #include "game/classes/UnknownVtable_003DC838.hpp"
 #include "game/classes/UnknownVtable_003DCC20.hpp"
 #include "game/classes/UnknownVtable_003DC5F8.hpp"
 
-namespace BlackPS2Campaign {
+namespace ActorEvents {
 // Class identity and complete size are not established. These views retain the
 // PS2 offsets recovered from this class's callers and virtual-method table.
-struct ActorEntries : BlackPS2Classes::UnknownVtable_003DC838 {
+struct ActorEntries : Unnamed::UnknownVtable_003DC838 {
     struct Entry { unsigned char active, pending, a, b, c, d; };
     inline Entry * Entries() { return (Entry *)Field_01A8(); }
     inline unsigned char & Field_01ED() { return *(unsigned char *)((char *)this + 0x1ed); }
@@ -19,12 +19,12 @@ struct ActorEntries : BlackPS2Classes::UnknownVtable_003DC838 {
     unsigned int Initialize();
     int Collision(void *event);
 };
-struct ActorStateMachine : BlackPS2Classes::UnknownVtable_003DCC20 {
+struct ActorStateMachine : Unnamed::UnknownVtable_003DCC20 {
     void Event(int event, int unused, unsigned int flags);
     void Leave();
     void SampleInput();
 };
-struct ActorState : BlackPS2Classes::UnknownVtable_003DC5F8 {
+struct ActorState : Unnamed::UnknownVtable_003DC5F8 {
     void UpdateState(float delta);
 };
 }

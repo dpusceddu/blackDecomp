@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_SHOOTER_ANGLES_HPP
-#define BLACK_CAMPAIGN_SHOOTER_ANGLES_HPP
+#ifndef BLACK_SHOOTER_ANGLES_HPP
+#define BLACK_SHOOTER_ANGLES_HPP
 #include "kynapse/behaviors/shooter.hpp"
 namespace Kaim {
 // This discarded-result call matches an integer-return declaration. It establishes

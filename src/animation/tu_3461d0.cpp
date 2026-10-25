@@ -53,7 +53,7 @@ static inline void ComposeAddPositionXYZW(void* out,const void* first,const void
 static inline int& ComposeUsedCount(){return D_0046A500;}
 static inline void ComposeCopyBone(Pose* out,const Pose* source){out->rotation=source->rotation;out->position=source->position;}
 static inline void ComposeBone(Pose* out,const Pose* first,const Pose* second) {
-    BlackPS2::AnimationMath::Multiply(out,first,second);
+    Ps2Math::AnimationMath::Multiply(out,first,second);
     float* firstPosition=(float*)first->translation;
     float* secondPosition=(float*)second->translation;
     float* outputPosition=out->translation;
@@ -118,7 +118,7 @@ static inline void WeightScalePositionXYZW(void* out,const void* source,float st
                  : : "r"(source),"r"(out),"f"(strength):"$8","vf9","vf11","vf12","memory");
 }
 static inline void WeightBone(Pose* out,const Pose* source,const void* identity,float strength) {
-    BlackPS2::AnimationMicro::Slerp(out,identity,source,strength);
+    Ps2Math::AnimationMicro::Slerp(out,identity,source,strength);
     const float* input=source->translation;
     float* output=out->translation;
     WeightScalePositionXYZW(output,input,strength);
@@ -128,7 +128,7 @@ static inline void WeightBone(Pose* out,const Pose* source,const void* identity,
 namespace ArmsPose {
 static inline int& ClipBuildUsedCount(){return D_0046A500;}
 struct TrackSuffix {int frames,skeleton,format;void* tracks;};
-extern const TrackSuffix* ClipFrameSlot(BkModSourceClipPS2*) __asm__("func_003487E8");
+extern const TrackSuffix* ClipFrameSlot(BkSourceClipPS2*) __asm__("func_003487E8");
 extern int CacheReserve(void*,unsigned,void*,int,int,Pose**) __asm__("func_00342478");
 extern void* CurrentCache __asm__("D_003F15B4");
 extern float WrapFrame(float,float) __asm__("func_0034B498");
@@ -187,11 +187,11 @@ extern f32 * func_00344020(f32 *, f32 *) __asm__("func_00344020");
 }
 namespace DiscreteViews { f32 * func_00347280(s32 *arg0, Recovered_AnimationGraphNode *arg1, Recovered_AnimationParameters *arg2, u32 arg3, f32 fparg0, f32 fparg1, f32 fparg2, f32 fparg3) __asm__("func_00347280"); }
 namespace ArmsPose {
-__attribute__((section(".text.func_003461D0"))) void Cache::Enable(s8 enabled) { BkModPoseCacheEnablePS2(enabled); }
+__attribute__((section(".text.func_003461D0"))) void Cache::Enable(s8 enabled) { BkPoseCacheEnablePS2(enabled); }
 }
 
 namespace ArmsPose {
-__attribute__((section(".text.func_003461E0"))) void Cache::Clear() { BkModPoseCacheClearPS2(); }
+__attribute__((section(".text.func_003461E0"))) void Cache::Clear() { BkPoseCacheClearPS2(); }
 }
 
 namespace ArmsPose {
@@ -210,11 +210,11 @@ static inline Pose* BlendCopyAdvance(Pose* out,const Pose* source) {
     return out+1;
 }
 static inline Pose* BlendBoneAdvance(Pose* out,const Pose* first,const Pose* second,float weight) {
-    BlackPS2::AnimationMicro::Slerp(out,first,second,weight);
+    Ps2Math::AnimationMicro::Slerp(out,first,second,weight);
     const float* firstPosition=first->translation;
     const float* secondPosition=second->translation;
     float* outPosition=out->translation;
-    BlackPS2::AnimationMicro::InterpolateXYZW(outPosition,firstPosition,secondPosition,weight);
+    Ps2Math::AnimationMicro::InterpolateXYZW(outPosition,firstPosition,secondPosition,weight);
     out->translation[3]=0.0f;
     return out+1;
 }
@@ -415,7 +415,7 @@ __attribute__((section(".text.func_00346CB0"))) Pose* Operations::Weight(Pose* p
     identity[0]=zero;
     if(pose->quaternion[3]>1.5f)out->Copy(pose);
     else {
-        BlackPS2::AnimationMicro::Slerp(rootRotation,identity,pose,strength);
+        Ps2Math::AnimationMicro::Slerp(rootRotation,identity,pose,strength);
         const float* input=pose->translation;
         float* output=out->translation;
         WeightScalePositionXYZW(output,input,strength);
@@ -446,7 +446,7 @@ __attribute__((section(".text.func_00346CB0"))) Pose* Operations::Weight(Pose* p
 }
 
 namespace ArmsPose {
-__attribute__((section(".text.func_00346F38"))) void Cache::ForceBone(int index) { BkModPoseCacheForceBonePS2(index); }
+__attribute__((section(".text.func_00346F38"))) void Cache::ForceBone(int index) { BkPoseCacheForceBonePS2(index); }
 }
 
 extern "C" __attribute__((section(".text.func_00346F48"))) void func_00346F48(void) {
@@ -454,7 +454,7 @@ extern "C" __attribute__((section(".text.func_00346F48"))) void func_00346F48(vo
 }
 
 namespace ArmsPose {
-extern "C" __attribute__((section(".text.func_00346F58"))) Pose* func_00346F58(Operations* owner,BkModSourceClipPS2* clip,Skeleton* skeleton,float frame,unsigned flags) {
+extern "C" __attribute__((section(".text.func_00346F58"))) Pose* func_00346F58(Operations* owner,BkSourceClipPS2* clip,Skeleton* skeleton,float frame,unsigned flags) {
     const TrackSuffix* source=ClipFrameSlot(clip);
     if(!source || !skeleton)return 0;
     int used=ClipBuildUsedCount();
@@ -570,8 +570,8 @@ extern "C" __attribute__((section(".text.func_00347430"))) void *func_00347430(Q
             Offset *o = r->offsets;
             for (int j = 0; j < r->count; ++j, ++o) {
                 Transform *p = (Transform *)((char *)poses + 0x20 + (o->index << 5));
-                BlackPS2::AnimationMath::Multiply(&p->rotation, &o->rotation, &p->rotation);
-                BlackPS2::AnimationMath::Add(&p->position, &o->position, &p->position);
+                Ps2Math::AnimationMath::Multiply(&p->rotation, &o->rotation, &p->rotation);
+                Ps2Math::AnimationMath::Add(&p->position, &o->position, &p->position);
             }
             return poses;
         }
@@ -581,19 +581,19 @@ extern "C" __attribute__((section(".text.func_00347430"))) void *func_00347430(Q
 }
 
 namespace ArmsPose {
-__attribute__((section(".text.func_003474F8"))) Pose* ClipOperations::Default(Operations* owner, BkModSourceClipPS2* clip,
+__attribute__((section(".text.func_003474F8"))) Pose* ClipOperations::Default(Operations* owner, BkSourceClipPS2* clip,
                               unsigned flags, float frame)
 {
     Skeleton* skeleton = GetSkeleton(owner);
     // This argument order is a scoped, exact caller recipe for the same ABI.
-    extern Pose* BuildOrdered(Operations*, BkModSourceClipPS2*, Skeleton*, float,
+    extern Pose* BuildOrdered(Operations*, BkSourceClipPS2*, Skeleton*, float,
                               unsigned) __asm__("func_00346F58");
     return BuildOrdered(owner, clip, skeleton, frame, flags);
 }
 }
 
 namespace ArmsPose {
-__attribute__((section(".text.func_00347558"))) Pose* ClipOperations::Root(Pose* out, Operations* owner, BkModSourceClipPS2* clip,
+__attribute__((section(".text.func_00347558"))) Pose* ClipOperations::Root(Pose* out, Operations* owner, BkSourceClipPS2* clip,
                            unsigned flags, int index, float time)
 {
     if (!clip || !clip->tracks) return 0;
@@ -652,8 +652,8 @@ __attribute__((section(".text.func_00347600"))) Pose* Operations::Overlay(Pose* 
                 outputBone->rotation = firstBone->rotation;
                 outputBone->position = firstBone->position;
             } else {
-                BlackPS2::AnimationMicro::Slerp(outputBone, firstBone, secondBone, blend);
-                BlackPS2::AnimationMicro::InterpolateXYZW(outputPosition, firstPosition, secondPosition, blend);
+                Ps2Math::AnimationMicro::Slerp(outputBone, firstBone, secondBone, blend);
+                Ps2Math::AnimationMicro::InterpolateXYZW(outputPosition, firstPosition, secondPosition, blend);
             }
             ++index;
             outputPosition += 8;

@@ -4,10 +4,10 @@
 /* Access view only: no original class identity, inheritance or allocation claim.
    Keep legacy instance/playback/channel semantic views separate. Unknown fields
    and prototype order must not be inferred from an Xbox layout. */
-typedef struct BkModAnimationPoseHeaderPS2 {
+typedef struct BkAnimationPoseHeaderPS2 {
     float quaternion[4], translation[4];
-} BkModAnimationPoseHeaderPS2 __attribute__((aligned(16)));
-typedef struct BkModAnimationInstancePS2 {
+} BkAnimationPoseHeaderPS2 __attribute__((aligned(16)));
+typedef struct BkAnimationInstancePS2 {
     EeS32 flags;
     void *collection;
     EeS16 skeleton; EeU8 unknown0a[2];
@@ -15,7 +15,7 @@ typedef struct BkModAnimationInstancePS2 {
     EeU32 graphHash;
     float current, previous, span;
     EeU8 unknown20[0x10];
-    BkModAnimationPoseHeaderPS2 root;
+    BkAnimationPoseHeaderPS2 root;
     /* Override instruction view3478F0: 12-byte records {pose pointer,bone s32,
        flags u32}; no native control yet proves that complete record contract. */
     void *selectedMatrices, *matrixBase, *jointOverrides;
@@ -34,13 +34,13 @@ typedef struct BkModAnimationInstancePS2 {
     void *blendWeights;
     EeS32 evaluationFlags;
     EeU8 unknown99c[0x10];
-    struct BkModAnimationInstancePS2 *next;
+    struct BkAnimationInstancePS2 *next;
     void *eventStorage;
     EeU8 unknown9b4[8], eventsActive;
-} BkModAnimationInstancePS2;
-static inline int BkModAnimationHasNextPS2(const BkModAnimationInstancePS2 *instance) { return instance->next!=0; }
-typedef char BkModPoseSize20[sizeof(BkModAnimationPoseHeaderPS2)==0x20?1:-1];
-typedef char BkModInstanceRoot30[(unsigned)&((BkModAnimationInstancePS2*)0)->root==0x30?1:-1];
-typedef char BkModInstanceFlags998[(unsigned)&((BkModAnimationInstancePS2*)0)->evaluationFlags==0x998?1:-1];
-typedef char BkModInstanceNext9AC[(unsigned)&((BkModAnimationInstancePS2*)0)->next==0x9ac?1:-1];
+} BkAnimationInstancePS2;
+static inline int BkAnimationHasNextPS2(const BkAnimationInstancePS2 *instance) { return instance->next!=0; }
+typedef char BkPoseSize20[sizeof(BkAnimationPoseHeaderPS2)==0x20?1:-1];
+typedef char BkInstanceRoot30[(unsigned)&((BkAnimationInstancePS2*)0)->root==0x30?1:-1];
+typedef char BkInstanceFlags998[(unsigned)&((BkAnimationInstancePS2*)0)->evaluationFlags==0x998?1:-1];
+typedef char BkInstanceNext9AC[(unsigned)&((BkAnimationInstancePS2*)0)->next==0x9ac?1:-1];
 #endif

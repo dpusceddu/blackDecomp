@@ -13,7 +13,7 @@
 // a mode is following. Evidence per function is in the README of this directory; each function
 // names its Xbox and PS2 address. On the Xbox the stages are LTCG-private functions (request in
 // EDI/ESI/EBX); the PS2 passes the request as an ordinary argument.
-namespace BlackGame {
+namespace Game {
 // The PS2 re-reads the manager pointer after every store through a request, as it would for a
 // member of an aggregate rather than a plain global pointer; the handle reproduces that (it sits
 // at the address of gActionManager).

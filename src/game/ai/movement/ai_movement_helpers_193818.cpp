@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_helpers_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x193818
 
 void FormationMode::ContinueToGoal()
@@ -13,4 +13,4 @@ void FormationMode::ContinueToGoal()
     if (arrived) state = 8;
 }
 
-}  // namespace BlackGame
+}  // namespace Game

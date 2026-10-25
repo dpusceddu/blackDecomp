@@ -4,9 +4,9 @@
 #include "game/effects/attachments.h"
 #include "game/effects/emitter.h"
 #include "game/effects/emitter_list.h"
-namespace ModEffects {
+namespace Effects {
 // Descriptive nonvirtual methods over observed PS2 storage. Original names unknown.
-class Flights : public BkModAttachedEffectsPS2 {
+class Flights : public BkAttachedEffectsPS2 {
 public:
     int Clear() __asm__("func_001BEC68");
 };

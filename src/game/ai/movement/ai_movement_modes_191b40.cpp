@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x191b40
 // PS2 0x191b40; Xbox 0x1858c0 (owner in EAX), also expanded inside both Start functions.
 // Unmatched: private EAX owner contract and packed-vector arguments.
@@ -23,4 +23,4 @@ bool MovementModeBase::IsOffRoute() const
     return 0.25f < PlanarSegmentDistance(this, Load(from), Load(to));
 }
 
-}  // namespace BlackGame
+}  // namespace Game

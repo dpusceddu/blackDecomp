@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/actor/volume_state.hpp"
-namespace CampaignActor {
+namespace ActorParts {
 extern "C" {
 void func_0026AA68(int);void func_0026A840(int);
 void func_001AE5E8(void*,const Matrix4*,PositionArg,PositionArg,PositionArg);

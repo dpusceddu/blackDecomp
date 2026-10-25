@@ -1,11 +1,11 @@
 #include "include_asm.h"
 
 #include "game/actor/renderable_state.hpp"
-namespace CampaignActor {
+namespace ActorParts {
 extern "C" {
 void func_0014BD18(void *); void func_0014EE48(void *);
 void func_0014BE20(void *, float);
-BlackGame::PositionArg func_0025D8E0(void *); void func_0025DC80(void *);
+Game::PositionArg func_0025D8E0(void *); void func_0025DC80(void *);
 void func_0014F708(void *); void func_00129240(void *, void *, int);
 void func_00168618(void *, void *, unsigned char, void *);
 void func_00126D78(void *, void *, int);
@@ -16,7 +16,7 @@ extern char *D_0040F4D0, *D_0040F4E4, *D_0040F4F4;
 void RenderableState::Update(float delta)
 {
     func_0014BE20(this, delta);
-    if (body && BlackPS2::VU0::ReadXWord(BlackGame::SumSquares3(func_0025D8E0(body))) > 0.05f)
+    if (body && Ps2Math::VU0::ReadXWord(Game::SumSquares3(func_0025D8E0(body))) > 0.05f)
         func_0025DC80(body);
     if (rebuild) { func_0014F708(this); rebuild = 0; }
     if (pending && ready) {

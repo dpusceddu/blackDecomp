@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_stages_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x17a320
 // Stage 3: waits for the node search at the origin; a node ends the stage by starting the search
 // at the destination, none fails the request (result 1).
@@ -79,7 +79,7 @@ bool RunTimedRouteSearch(RouteRequest* request)
     return false;
 }
 
-}  // namespace BlackGame
+}  // namespace Game
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A588);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A720);

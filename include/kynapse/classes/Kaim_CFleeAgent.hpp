@@ -4,7 +4,7 @@
 #include "game/classes/support.hpp"
 #include "game/classes/hierarchy.hpp"
 
-namespace BlackPS2Classes {
+namespace Unnamed {
 
 // Kaim::CFleeAgent
 // Identity: RTTI. Complete size and inheritance layout are UNVERIFIED.
@@ -125,6 +125,6 @@ struct Kaim_CFleeAgent {
     };
 };
 
-} // namespace BlackPS2Classes
+} // namespace Unnamed
 
 #endif

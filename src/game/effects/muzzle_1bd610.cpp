@@ -1,5 +1,5 @@
 #include "include_asm.h"
 
-#include "game/effects/mod_muzzle.hpp"
+#include "game/effects/muzzle.hpp"
 
-int ModEffects::MuzzleMethods::IsActive() {return phase<3;}
+int Effects::MuzzleMethods::IsActive() {return phase<3;}

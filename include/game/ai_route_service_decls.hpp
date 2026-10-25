@@ -10,7 +10,7 @@
 // stages (AdvanceRouteRequest and its handlers), the Kynapse follower itself and the vector math
 // helpers stay external. Evidence per function is in the README of this directory; each function
 // names its Xbox and PS2 address.
-namespace BlackGame {
+namespace Game {
 // Marker for "no point" (three floats), PS2 0x4514f8 (set at run time).
 extern const Point3 gUnsetPoint;
 // The brain whose route the follower is currently advancing (PS2 0x3bcf24).

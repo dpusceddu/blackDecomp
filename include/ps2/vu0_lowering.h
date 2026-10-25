@@ -21,7 +21,7 @@
 #define __ee_vu_normalize_keep BkVuLowerNormalizeXYZ
 #define __ee_vu_sqrt_keep BkVuLowerSqrtX
 
-/* Same integer-word -> FPR transport as the exact BlackPS2::ReadXWord recipe.
+/* Same integer-word -> FPR transport as the exact Ps2Math::ReadXWord recipe.
    A numeric C conversion would change the value rather than its register bank. */
 static inline float __ee_vu_read_x(BkVuVector value)
 {

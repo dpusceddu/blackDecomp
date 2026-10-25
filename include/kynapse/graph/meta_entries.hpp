@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_META_ENTRIES_HPP
-#define BLACK_CAMPAIGN_GRAPH_META_ENTRIES_HPP
+#ifndef BLACK_GRAPH_META_ENTRIES_HPP
+#define BLACK_GRAPH_META_ENTRIES_HPP
 #include "kynapse/compat.hpp"
 #include "kynapse/classes/Kaim_CMetaClass_Kaim_CTeam_Kaim_CTeam_unsigned_int_const_char_6cbd356840f7.hpp"
 // CTeam metadata identity is RTTI-backed. The second metadata owner remains

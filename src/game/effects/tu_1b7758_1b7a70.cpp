@@ -5,7 +5,7 @@
 #include "game/effects/runtime.hpp"
 #include "game/effects/geometry.h"
 #include "game/effects/pool.h"
-using ModEffects::Matrix;
+using Effects::Matrix;
 extern "C" {extern char *D_0040F4D8,*D_0040F4D4;}
 struct NodeManager {
  BkEffectGeometryBucketPS2 nodes[8]; void*materials[12];BkEffectGeometryBucketPS2*heads[12];
@@ -22,7 +22,7 @@ struct Pending {Matrix matrix;void*definition;char pad[12];};
 int PoolMethods::Queue(void *definition,const Matrix *transform,long mode){
  if(pendingCount==256)return 0;
  Matrix temporary;
- if(mode==0){ModEffects::IdentityXYZ(temporary);temporary.row[3]=transform->row[3];}
+ if(mode==0){Effects::IdentityXYZ(temporary);temporary.row[3]=transform->row[3];}
  else if(mode==1)temporary=*transform;
  Pending *slot=(Pending*)((char*)this+0x15000)+pendingCount;
  slot->matrix=temporary;
@@ -83,7 +83,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7B80);
 #include "game/effects/runtime.hpp"
 #include "game/effects/geometry.h"
 #include "game/effects/pool.h"
-using ModEffects::Matrix;
+using Effects::Matrix;
 extern "C" {extern char *D_0040F4D8,*D_0040F4D4;}
 struct NodeManager {
  BkEffectGeometryBucketPS2 nodes[8]; void*materials[12];BkEffectGeometryBucketPS2*heads[12];

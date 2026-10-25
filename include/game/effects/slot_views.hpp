@@ -2,7 +2,7 @@
 #define BLACK_EFFECTS_MOD_SLOT_VIEWS_HPP
 #include "game/effects/slot.h"
 
-namespace ModEffects {
+namespace Effects {
 struct ActorPrefix { char opaque[0x10]; };
 // A descriptive ABI interface. The original class identity and hierarchy are unknown.
 // Keeping all data in Actor would put GCC 2.95's vptr after that data instead of at 0x10.

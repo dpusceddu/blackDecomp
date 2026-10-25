@@ -2,16 +2,16 @@
 
 #include "game/weapons/inventory_methods.hpp"
 
-namespace ModWeapons {
+namespace Weapons {
     extern "C" {
         int func_00288790(void*);
         void *func_00107D20(unsigned);
         void func_00107B78(void*,int,int,int);
         void func_001561F8(Weapon*);
         void func_00158F08(Instance*);
-        void func_001632E0(BkModDelayedShotPS2*);
+        void func_001632E0(BkDelayedShotPS2*);
         void func_0015D3D8(MovingShot*);
-        void func_00163328(float,BkModDelayedShotPS2*);
+        void func_00163328(float,BkDelayedShotPS2*);
         int func_00156450(Weapon*);
         extern char D_0040F0F0;
     }

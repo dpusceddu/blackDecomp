@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_ALLOCATORS_HPP
-#define BLACK_CAMPAIGN_GRAPH_ALLOCATORS_HPP
+#ifndef BLACK_GRAPH_ALLOCATORS_HPP
+#define BLACK_GRAPH_ALLOCATORS_HPP
 #include "kynapse/compat.hpp"
 #include "kynapse/point_mapper.hpp"
 #include "kynapse/classes/Kaim_CFreeList.hpp"

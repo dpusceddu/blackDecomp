@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-#include "game/effects/mod_emitter_methods.hpp"
+#include "game/effects/emitter_methods.hpp"
 
 #ifdef NON_MATCHING
 // Unmatched: VU broadcast construction register allocation.
@@ -15,13 +15,13 @@ extern "C" void func_001BEC18(void) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001BEC18);
 #endif
 
-int ModEffects::Flights::Clear() {
+int Effects::Flights::Clear() {
     u32 i = 0, j;
     do {
-        BkModAttachedEffectPS2 *record = records + i;
+        BkAttachedEffectPS2 *record = records + i;
         record->active = 0;
         j = 0;
-        BkModEffectChildrenPS2 *child = &record->children;
+        BkEffectChildrenPS2 *child = &record->children;
         do {
             child->items[j] = 0;
             j = (j + 1) & 0xFFFF;

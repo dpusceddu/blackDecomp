@@ -13,7 +13,7 @@ const char D_00404378[] __attribute__((aligned(8))) = "CLOSE_TO_ME";
 const char D_00404388[] __attribute__((aligned(8))) = "MaxDeltaHeight";
 const char D_00404398[] __attribute__((aligned(8))) = "MaxDangerousEntities";
 
-namespace HideRecovery {
+namespace HideViews {
 
 
     
@@ -64,7 +64,7 @@ bool HideAgent::Configure(ChildBuffers* entry)
                 return true;
             }
         }
-        return BlackPS2::Kynapse::IsPrivateProperty(entry);
+        return Ps2Math::Kynapse::IsPrivateProperty(entry);
     }
 
 

@@ -1,8 +1,8 @@
-#ifndef BLACK_CAMPAIGN_FOLLOWER_HPP
-#define BLACK_CAMPAIGN_FOLLOWER_HPP
+#ifndef BLACK_FOLLOWER_HPP
+#define BLACK_FOLLOWER_HPP
 #include "kynapse/classes/Kaim_CFollowerAgent.hpp"
 
-namespace BehaviorCampaign {
+namespace FollowerBehavior {
 struct Vec3 {
     float x,y,z;
     Vec3() {}

@@ -1,12 +1,12 @@
-#ifndef BLACK_MOD_ARMS_OWNER_HPP
-#define BLACK_MOD_ARMS_OWNER_HPP
+#ifndef BLACK_ARMS_OWNER_HPP
+#define BLACK_ARMS_OWNER_HPP
 #include "animation/arms/instance.hpp"
 #include "ps2/matrix.hpp"
 namespace ArmsAnimation {
 // Scoped PS2 access and call views. Original class names, complete ownership and
 // semantic signatures remain inferred; mixed-bank argument order is a matching recipe.
-struct Matrix {BlackGame::Vec basis[4];Matrix(){}} __attribute__((aligned(16)));
-typedef BlackGame::Vec Vector;
+struct Matrix {Game::Vec basis[4];Matrix(){}} __attribute__((aligned(16)));
+typedef Game::Vec Vector;
 struct Actor {template<class T>T& At(int o){return *(T*)((char*)this+o);}};
 struct Row {int key,reissue;int unknown08,channelFlag;int unknown10[4];int channel,blocksSecondary;};
 struct Selector {

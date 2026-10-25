@@ -16,7 +16,7 @@
 // now include Slerp and XYZW interpolation in pose Overlay (0x347600).
 // Check the study's two-real-consumer threshold separately for each recipe.
 
-namespace BlackPS2 {
+namespace Ps2Math {
 namespace AnimationMicro {
 
 // Animation Slerp ABI: value inputs VF18/19.xyzw and VF28.x; result VF20.xyzw.

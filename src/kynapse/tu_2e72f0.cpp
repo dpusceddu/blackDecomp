@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-namespace NearestPointRecovery {
+namespace NearestPointViews {
 // Scoped PS2 access views; unused fields and original class identities remain UNVERIFIED.
 struct IndexView { int value; };
 struct PointView {
@@ -23,7 +23,7 @@ struct __attribute__((aligned(8))) RegistrationStorage {
     VirtualEntry* classTable;
 };
 }
-using namespace NearestPointRecovery;
+using namespace NearestPointViews;
 
 extern "C" {
 void* func_0038E108(void*, const char*, int, int, int, int);

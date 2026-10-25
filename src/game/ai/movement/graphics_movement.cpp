@@ -1,8 +1,8 @@
 #include "include_asm.h"
 
 #include "game/graphics/movement_core.hpp"
-using namespace CampaignGraphics;
-using namespace BlackGame;
+using namespace Graphics;
+using namespace Game;
 extern "C" {
 extern unsigned char *D_0040F4D4,*D_0040F4D0;
 extern void *func_00179258(void *,long);
@@ -43,7 +43,7 @@ extern void func_0017E488(void *,float);
 }
 
 static inline float DistanceSquared(Vec a,Vec b)
-{return BlackPS2::VU0::ReadXWord(SumSquares3(Sub3(a,b)));}
+{return Ps2Math::VU0::ReadXWord(SumSquares3(Sub3(a,b)));}
 void MovementCore::Update()
 {
     func_0018E338(this);

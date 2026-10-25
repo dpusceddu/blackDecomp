@@ -1,9 +1,9 @@
 // Partial PS2 effect view. Exact Update verifies world1C and receiver110/114/115.
 // Semantic class identity, complete hierarchy and allocation size remain unverified.
-#ifndef BLACK_CAMPAIGN_ACTOR_EXPIRY_EFFECT_HPP
-#define BLACK_CAMPAIGN_ACTOR_EXPIRY_EFFECT_HPP
+#ifndef BLACK_ACTOR_EXPIRY_EFFECT_HPP
+#define BLACK_ACTOR_EXPIRY_EFFECT_HPP
 #include "game/actor/region_state.hpp"
-namespace CampaignActor {
+namespace ActorParts {
 struct ExpiryWorld {char pad[0x1C];float delay;};
 struct ExpiryServices {char pad[8];void*events;};
 struct ExpiryServiceWorld {char pad[0xCBD8];ExpiryServices*services;};

@@ -2,7 +2,7 @@
 
 #include "game/weapons/controller.hpp"
 
-namespace ModWeapons {
+namespace Weapons {
 
 void Weapon::Update(int fire,int alternate,int grenade,int reload,int aim,int special,int change,Action *action){
  float dt=frame->delta;cooldown-=dt;if(phase==1)elapsed+=dt;else elapsed=0;

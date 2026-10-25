@@ -14,7 +14,7 @@ extern "C" {
     int func_0035E750(const char *);
     float func_00291C68(long);
 }
-namespace FleeRecovery {
+namespace FleeViews {
     struct ObjectBase {
         virtual ~ObjectBase();
     };
@@ -310,7 +310,7 @@ namespace FleeRecovery {
 
 }
 
-#define FLEE_OFFSET(member, offset) typedef char FleeAgent_##member##_offset[(unsigned int)&((FleeRecovery::FleeAgent *)0)->member == offset ? 1 : -1]
+#define FLEE_OFFSET(member, offset) typedef char FleeAgent_##member##_offset[(unsigned int)&((FleeViews::FleeAgent *)0)->member == offset ? 1 : -1]
 FLEE_OFFSET(points, 0x1C);
 FLEE_OFFSET(pointCount, 0x20);
 FLEE_OFFSET(maxPoints, 0x24);
@@ -321,5 +321,5 @@ FLEE_OFFSET(destination, 0x34);
 FLEE_OFFSET(pathId, 0x40);
 FLEE_OFFSET(graphSlot, 0x7C);
 #undef FLEE_OFFSET
-typedef char FleeAgent_extent[sizeof(FleeRecovery::FleeAgent) == 0x88 ? 1 : -1];
+typedef char FleeAgent_extent[sizeof(FleeViews::FleeAgent) == 0x88 ? 1 : -1];
 #endif

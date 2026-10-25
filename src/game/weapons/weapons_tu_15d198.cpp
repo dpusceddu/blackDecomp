@@ -2,7 +2,7 @@
 
 #include "game/weapons/manager_methods.hpp"
 
-namespace ModWeapons {
+namespace Weapons {
 extern "C" int func_00159148(Instance*);
 
 void WeaponManagerMethods::ReleaseInstance(Instance *instance)

@@ -1,7 +1,7 @@
 // PS2 path-object manager prefix. RTTI supplies the hierarchy; exact users verify
 // the accessed fields. Unused virtual signatures and complete types remain UNVERIFIED.
-#ifndef BLACK_CAMPAIGN_GRAPH_PATH_MANAGER_HPP
-#define BLACK_CAMPAIGN_GRAPH_PATH_MANAGER_HPP
+#ifndef BLACK_GRAPH_PATH_MANAGER_HPP
+#define BLACK_GRAPH_PATH_MANAGER_HPP
 #include "kynapse/graph/manager.hpp"
 #include "kynapse/graph/path_object.hpp"
 namespace Kaim {

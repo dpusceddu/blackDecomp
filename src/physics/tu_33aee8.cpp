@@ -2,7 +2,7 @@
 
 // Xbox mesh_scratch.cpp supplies the algorithm; offsets below follow PS2 accesses.
 // Class/field names are provisional; unknown members have no inferred semantics.
-namespace MeshScratchRecovery {
+namespace MeshScratchViews {
 struct ManifoldScratch;
 struct StorageRequirement {
     unsigned int size;
@@ -32,7 +32,7 @@ struct MeshScratch {
     MeshScratch(unsigned int vertices, unsigned int triangles);
 };
 }
-using namespace MeshScratchRecovery;
+using namespace MeshScratchViews;
 // SN returns the storage requirement through its hidden aggregate-result pointer.
 extern "C" StorageRequirement func_0033A3B0(unsigned int, unsigned int);
 extern "C" ManifoldScratch* func_0033A3F0(StorageBlock*, unsigned int, unsigned int);

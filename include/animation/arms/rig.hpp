@@ -1,5 +1,5 @@
-#ifndef BLACK_MOD_ARMS_RIG_HPP
-#define BLACK_MOD_ARMS_RIG_HPP
+#ifndef BLACK_ARMS_RIG_HPP
+#define BLACK_ARMS_RIG_HPP
 #include "animation/arms/instance.hpp"
 
 namespace ArmsAnimation {

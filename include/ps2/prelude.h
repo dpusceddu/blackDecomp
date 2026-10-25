@@ -37,7 +37,7 @@ static inline void __ee_di(void) { __asm__ volatile("di"); }
 static inline f32 __ee_max_s(f32 a, f32 b) { f32 r; __asm__("max.s %0, %1, %2" : "=f" (r) : "f" (a), "f" (b)); return r; }
 static inline f32 __ee_min_s(f32 a, f32 b) { f32 r; __asm__("min.s %0, %1, %2" : "=f" (r) : "f" (a), "f" (b)); return r; }
 #include "game/math/scalar.h"
-static inline f32 __ee_sqrt_s(f32 value) { return BkModSquareRootPS2(value); }
+static inline f32 __ee_sqrt_s(f32 value) { return BkSquareRootPS2(value); }
 #define EE_COP0(n) \
     static inline s32 __ee_mfc0_##n(void) { s32 r; __asm__ volatile("mfc0 %0, $" #n : "=r" (r)); return r; } \
     static inline void __ee_mtc0_##n(s32 v) { __asm__ volatile("mtc0 %0, $" #n : : "r" (v)); }

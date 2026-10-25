@@ -103,14 +103,14 @@ def variants(label, source, flags):
         changed = source.replace('func_0017BDF0(Value point)', 'func_0017BDF0(unsigned long point)').replace('basis,point)', 'basis,(Value)point)')
         yield 'narrow-argument-ABI-negative', changed, flags
     elif label == 'vu-fixed-register':
-        first = '    BlackPS2::AnimationMath::Multiply(&out->rotation, &a->rotation, &b->rotation);'
-        second = '    BlackPS2::AnimationMath::Add(&out->position, &a->position, &b->position);'
+        first = '    Ps2Math::AnimationMath::Multiply(&out->rotation, &a->rotation, &b->rotation);'
+        second = '    Ps2Math::AnimationMath::Add(&out->position, &a->position, &b->position);'
         yield 'independent-operation-order', source.replace(first + '\n' + second, second + '\n' + first), flags
     elif label == 'inline-helper':
         source = flatten(source)
         helper = re.search(r'template<class Entry>\s*static inline bool IsPrivateProperty\(Entry \*entry\)\s*\{.*?\n\}', source, re.S)[0]
         changed = source.replace(helper, 'template<class Entry> static inline bool IsPrivateProperty(Entry *entry);')
-        changed += '\nnamespace BlackPS2 { namespace Kynapse {\n' + helper + '\n} }\n'
+        changed += '\nnamespace Ps2Math { namespace Kynapse {\n' + helper + '\n} }\n'
         yield 'definition-after-caller', changed, flags
         old = 'long parsed = func_0035E730(value);\n                    Engine* engine = gEngine;'
         new = 'Engine* engine; long parsed;\n                    parsed = func_0035E730(value); engine = gEngine;'
@@ -170,7 +170,7 @@ def variants(label, source, flags):
         end = source.index('\nnamespace ArmsPose', start)
         body = source[start:end]
         view = '    float* rootRotation=out->quaternion;\n'
-        operation = '        BlackPS2::AnimationMicro::Slerp(rootRotation,identity,pose,strength);'
+        operation = '        Ps2Math::AnimationMicro::Slerp(rootRotation,identity,pose,strength);'
         stores = ('float identity[4] __attribute__((aligned(16)));\n'
                   '    identity[3]=1.0f;\n'
                   '    identity[2]=zero;\n'
@@ -218,7 +218,7 @@ def variants(label, source, flags):
 }
 static inline void DifferenceRotation(void* out,const void* first,const void* second,void* inverse) {
     DifferenceInverse(inverse,second);
-    BlackPS2::AnimationMath::Multiply(out,inverse,first);
+    Ps2Math::AnimationMath::Multiply(out,inverse,first);
 }
 '''
         yield 'split-inverse-and-product', source[:start] + split + source[end:], flags

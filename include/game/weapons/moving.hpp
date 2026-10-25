@@ -1,8 +1,8 @@
-#ifndef BLACK_CAMPAIGN_WEAPONS_MOVING_HPP
-#define BLACK_CAMPAIGN_WEAPONS_MOVING_HPP
+#ifndef BLACK_WEAPONS_MOVING_HPP
+#define BLACK_WEAPONS_MOVING_HPP
 #include "game/weapons/instance.hpp"
 #include "game/weapons/shot.h"
-namespace ModWeapons {
+namespace Weapons {
 // Native receiver view. SOURCE controls verify only the fields they consume;
 // the original C++ identity and remaining payload semantics are unverified.
 struct MovingShot {
@@ -23,7 +23,7 @@ typedef char MovingShotNativeStride90[sizeof(MovingShot)==0x90?1:-1];
 struct MovingPool {
  void *catalog,*controllers;unsigned char *controllerFlags;Instance *instances;
  unsigned char *instanceFlags,unknown14[0xc];
- BkModDelayedShotPS2 delayed[36];MovingShot shots[16];
+ BkDelayedShotPS2 delayed[36];MovingShot shots[16];
  int Spawn(float,float,Instance*,Vec,Vec,signed char) __asm__("func_0015D370");
 };
 typedef char MovingPoolDelayed20[(unsigned)&((MovingPool*)0)->delayed==0x20?1:-1];

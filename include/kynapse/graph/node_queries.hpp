@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_NODE_QUERIES_HPP
-#define BLACK_CAMPAIGN_GRAPH_NODE_QUERIES_HPP
+#ifndef BLACK_GRAPH_NODE_QUERIES_HPP
+#define BLACK_GRAPH_NODE_QUERIES_HPP
 // Scoped PS2 graph-query views. RTTI establishes the object/traversal hierarchy;
 // unused callback signatures and unmatched algorithm source shapes remain provisional.
 #include "kynapse/compat.hpp"

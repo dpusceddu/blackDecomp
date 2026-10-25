@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_PATHWAY_VECTORS_HPP
-#define BLACK_CAMPAIGN_PATHWAY_VECTORS_HPP
+#ifndef BLACK_PATHWAY_VECTORS_HPP
+#define BLACK_PATHWAY_VECTORS_HPP
 #include "kynapse/behaviors/pathway.hpp"
 namespace Kaim {
 struct PathTurnVector {

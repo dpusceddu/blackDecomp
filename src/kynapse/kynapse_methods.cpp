@@ -4,7 +4,7 @@
 #include "kynapse/classes/Kaim_CHideAgent.hpp"
 #include "kynapse/classes/Kaim_CBasicAllocator.hpp"
 
-namespace BlackPS2Classes {
+namespace Unnamed {
 
 int Kaim_CHideAgent::Function_002D5178()
 {

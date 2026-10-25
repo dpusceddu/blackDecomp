@@ -1,13 +1,13 @@
-#ifndef BLACK_MOD_ARMS_INSTANCE_HPP
-#define BLACK_MOD_ARMS_INSTANCE_HPP
+#ifndef BLACK_ARMS_INSTANCE_HPP
+#define BLACK_ARMS_INSTANCE_HPP
 #include "animation/runtime.h"
 #include "ps2/vu0.hpp"
 namespace ArmsAnimation {
 // Scoped behavior names; only the accessed PS2 fields are established.
-struct Pose : BkModAnimationPoseHeaderPS2 {
+struct Pose : BkAnimationPoseHeaderPS2 {
     Pose() __asm__("func_00343FC8");
 };
-struct Instance : BkModAnimationInstancePS2 {
+struct Instance : BkAnimationInstancePS2 {
     template<class T> T& At(int offset) {return *(T*)((char*)this+offset);}
     long SetGraph(int,int,int,float) __asm__("func_00347A90");
     long SetGraphFlags(int,int,int) __asm__("func_00347B40");
@@ -17,7 +17,7 @@ struct Instance : BkModAnimationInstancePS2 {
     long Advance(float*,float) __asm__("func_00348070");
     Pose* Update(float) __asm__("func_00348288");
     void Scale(float) __asm__("func_003484D0");
-    void ScaleMatrix(const BlackGame::Position4*,BlackGame::Position4*) __asm__("func_003484F0");
+    void ScaleMatrix(const Game::Position4*,Game::Position4*) __asm__("func_003484F0");
 };
 extern long TryTransition(Instance*,int,int,float) __asm__("func_00350890");
 extern void BindGraph(Instance*,int,int,float) __asm__("func_00350570");

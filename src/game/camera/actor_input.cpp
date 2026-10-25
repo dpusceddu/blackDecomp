@@ -9,7 +9,7 @@ void func_00103800(void *, int);
 extern void *D_0040F530;
 extern char *D_0040F0E0;
 }
-namespace BlackPS2Campaign {
+namespace ActorEvents {
 
 static inline bool ModeTwo(void*owner){return *(int*)((char*)owner+0x38c)==2;}
 void ActorStateMachine::Event(int event, int unused, unsigned int flags) {

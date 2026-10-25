@@ -102,7 +102,7 @@ struct SoundPool : ObjectRoot {
 
     bool Reset();
     bool ConfigureAll(ChildBuffers* config);
-    bool ConfigureBase(ChildBuffers* property) { return BlackPS2::Kynapse::IsPrivateProperty(property); }
+    bool ConfigureBase(ChildBuffers* property) { return Ps2Math::Kynapse::IsPrivateProperty(property); }
     int* GetCounter(unsigned int mask);
     bool Matches(Listener* listener, SoundEvent* event);
     bool Hears(Listener* listener, int mask);

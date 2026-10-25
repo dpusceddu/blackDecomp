@@ -1,6 +1,6 @@
-#ifndef BLACK_CAMPAIGN_ACTOR_EVENT_FANOUT_HPP
-#define BLACK_CAMPAIGN_ACTOR_EVENT_FANOUT_HPP
-namespace BlackPS2Campaign {
+#ifndef BLACK_ACTOR_EVENT_FANOUT_HPP
+#define BLACK_ACTOR_EVENT_FANOUT_HPP
+namespace ActorEvents {
 // Provisional identities. Exact Dispatch verifies these PS2 offsets, not complete class sizes.
 struct EventItem3 { unsigned char unknown00[0x10]; char *table; };
 struct ActorFanout3 {

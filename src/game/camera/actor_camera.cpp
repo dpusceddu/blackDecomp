@@ -3,7 +3,7 @@
 #include "game/camera/controller.hpp"
 #include "game/ai_vector.hpp"
 
-namespace CampaignActor {
+namespace ActorParts {
 extern "C" {
 extern void *D_0040F508;
 void func_0011D158(void *, CameraController *);
@@ -15,7 +15,7 @@ void CameraController::Update()
     Child *child = GetChild();
     if (child) {
         child->Update();
-        if (BlackGame::Y(BlackGame::Load(*(BlackGame::Position4 *)
+        if (Game::Y(Game::Load(*(Game::Position4 *)
                 ((char *)Owner() + 0xA0))) < -100.0f) {
             child->Deactivate();
             Current() = -1;
@@ -51,7 +51,7 @@ int CameraController::Choose(int n)
     }
     return 0;
 }
-void CameraController::SetTarget(BlackGame::PositionArg a, BlackGame::PositionArg b,
+void CameraController::SetTarget(Game::PositionArg a, Game::PositionArg b,
         float time, long kind)
 {
     Child *child = GetChild();
@@ -71,7 +71,7 @@ int CameraController::Clear()
     return 1;
 }
 
-void CameraController::Configure(BlackGame::PositionArg a, BlackGame::PositionArg b,
+void CameraController::Configure(Game::PositionArg a, Game::PositionArg b,
         float firstTime, unsigned char firstFlag, signed char secondFlag,
         float secondTime, long data)
 {

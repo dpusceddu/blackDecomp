@@ -1,8 +1,8 @@
 // Shared mod context; accessed PS2 prefixes only. Original identities and full allocations remain qualified.
-#ifndef CAMPAIGN_GRAPHICS_PAD_BACKEND_HPP
-#define CAMPAIGN_GRAPHICS_PAD_BACKEND_HPP
+#ifndef BLACK_GRAPHICS_PAD_BACKEND_HPP
+#define BLACK_GRAPHICS_PAD_BACKEND_HPP
 #include "game/camera/pad.hpp"
-namespace CampaignGraphics {
+namespace Graphics {
 // PS2 access prefix. Interface identity, unused fields and full allocation are unverified.
 struct PadBackend {
     EeU8 unknown00[0x40];

@@ -3,7 +3,7 @@
 #ifdef NON_MATCHING
 // Scoped access views for the differential pilot. Offsets describe observed
 // storage, without claiming complete class layouts or original class names.
-namespace BlackGame { namespace Pilot {
+namespace Game { namespace Pilot {
 template<class T> inline T& Field(void* object,int offset) {
     return *reinterpret_cast<T*>(static_cast<char*>(object)+offset);
 }

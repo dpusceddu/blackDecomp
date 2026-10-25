@@ -4,15 +4,15 @@
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00348778);
 
-f32 func_003487D0(BkModSourceClipPS2 *arg0) {
+f32 func_003487D0(BkSourceClipPS2 *arg0) {
     return (f32) arg0->frameCount;
 }
 
-s32 func_003487E0(BkModSourceClipPS2 *arg0) {
+s32 func_003487E0(BkSourceClipPS2 *arg0) {
     return arg0->skeletonIndex;
 }
 
-s32 func_003487E8(BkModSourceClipPS2 *arg0) {
+s32 func_003487E8(BkSourceClipPS2 *arg0) {
     return (s32)&arg0->frameCount;
 }
 

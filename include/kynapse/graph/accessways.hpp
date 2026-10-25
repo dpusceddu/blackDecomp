@@ -1,7 +1,7 @@
 // PS2 accessways prefix and its traversal helpers. Slots come from RTTI/vtables;
 // unused signatures and full traversal layouts remain UNVERIFIED.
-#ifndef BLACK_CAMPAIGN_GRAPH_ACCESSWAYS_HPP
-#define BLACK_CAMPAIGN_GRAPH_ACCESSWAYS_HPP
+#ifndef BLACK_GRAPH_ACCESSWAYS_HPP
+#define BLACK_GRAPH_ACCESSWAYS_HPP
 #include "kynapse/graph/spatial.hpp"
 extern "C" void *memset(void*,int,unsigned int);
 extern "C" void *memcpy(void*,const void*,unsigned int);

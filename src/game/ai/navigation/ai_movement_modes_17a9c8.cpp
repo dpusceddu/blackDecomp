@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x17a9c8
 // Unmatched: private register contract for the stored __m128 argument.
 
@@ -16,4 +16,4 @@ bool RouteRequest::UpdateDestination(PositionArg point)
     return false;
 }
 
-}  // namespace BlackGame
+}  // namespace Game

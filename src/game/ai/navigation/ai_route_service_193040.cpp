@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_service_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x193040
 // Moves the pending alternate request to a new destination, restarting it from the active
 // request's end node when it can no longer be updated in place.
@@ -20,6 +20,6 @@ bool RetargetLive(RouteMode* mode, PositionArg point)
     return true;
 }
 
-}  // namespace BlackGame
+}  // namespace Game
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001930F8);

@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_APT_POOL_HPP
-#define BLACK_CAMPAIGN_APT_POOL_HPP
+#ifndef BLACK_APT_POOL_HPP
+#define BLACK_APT_POOL_HPP
 // PS2 field-derived pool helpers; unverified until a matching consumer uses them.
 #include "apt/apt_value.hpp"
 namespace AptPS2 {

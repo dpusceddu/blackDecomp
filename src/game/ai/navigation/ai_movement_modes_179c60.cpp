@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_movement_modes_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x179c60
 // PS2 0x179c60; the Xbox build expands it inside RouteMode::Reset.
 
@@ -18,4 +18,4 @@ void RouteRequest::Clear()
     kind = 0;
 }
 
-}  // namespace BlackGame
+}  // namespace Game

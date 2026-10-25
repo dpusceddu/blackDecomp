@@ -4,14 +4,14 @@
 
 using namespace PhysicsStartup;
 
-namespace RecordRecovery {
+namespace RecordViews {
 // Only these five word accesses are established; class identity and field
 // meanings are unknown.
 struct FiveWordRecord {
     unsigned int word00, word04, word08, word0c, word10;
 };
 }
-using namespace RecordRecovery;
+using namespace RecordViews;
 
 extern "C" {
 extern StartupToken D_0040E888, D_0040E890;

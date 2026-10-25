@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_TEAM_HPP
-#define BLACK_CAMPAIGN_GRAPH_TEAM_HPP
+#ifndef BLACK_GRAPH_TEAM_HPP
+#define BLACK_GRAPH_TEAM_HPP
 #include "kynapse/graph/allocators.hpp"
 #include "kynapse/classes/Kaim_CTeam.hpp"
 namespace Kaim {

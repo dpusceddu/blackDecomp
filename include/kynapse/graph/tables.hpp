@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GRAPH_TABLES_HPP
-#define BLACK_CAMPAIGN_GRAPH_TABLES_HPP
+#ifndef BLACK_GRAPH_TABLES_HPP
+#define BLACK_GRAPH_TABLES_HPP
 #include "kynapse/point_mapper.hpp"
 #include "kynapse/classes/Kaim_CPathCostData.hpp"
 #include "kynapse/classes/Kaim_CAstarData.hpp"

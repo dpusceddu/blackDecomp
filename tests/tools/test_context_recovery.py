@@ -129,8 +129,8 @@ class SignatureTests(unittest.TestCase):
 
     def test_old_gcc_qualified_method_names(self):
         cases = {
-            'SetTarget__Q213CampaignActor16CameraControllerxxfl': 'CampaignActor::CameraController::SetTarget',
-            'Button__CQ216CampaignGraphics10ControllerUi': 'CampaignGraphics::Controller::Button',
+            'SetTarget__Q210ActorParts16CameraControllerxxfl': 'ActorParts::CameraController::SetTarget',
+            'Button__CQ28Graphics10ControllerUi': 'Graphics::Controller::Button',
             '__Q24Kaim6CBrain': 'Kaim::CBrain::CBrain',
             '_$_Q24Kaim18CPathObjectManager': 'Kaim::CPathObjectManager::~CPathObjectManager',
             '___5Queue': 'Queue::~Queue',
@@ -302,7 +302,7 @@ class VerificationTests(unittest.TestCase):
     def test_namespaced_camera_method_exports_exact_128_bit_arguments(self):
         from unittest.mock import patch
         unit = dict(source='src/game/camera/actor_camera.cpp', externs={}, functions=[dict(
-            addr=0x141248, symbol='SetTarget__Q213CampaignActor16CameraControllerxxfl', status='source')])
+            addr=0x141248, symbol='SetTarget__Q210ActorParts16CameraControllerxxfl', status='source')])
         with patch('units.load_units', return_value=[unit]):
             seeds, _ = cr.source_seeds(matched_only=True)
         self.assertEqual(seeds[0x141248]['ret'], 'void')
@@ -382,12 +382,12 @@ int func_00100010(float n) { return n; }
             (root / 'include').mkdir()
             (root / 'src').mkdir()
             (root / 'include/vector.hpp').write_text('''
-namespace BlackGame { typedef long long PositionArg; typedef PositionArg Vec; }
-namespace BlackPS2 { namespace VU0 { typedef BlackGame::Vec Value; } }
+namespace Game { typedef long long PositionArg; typedef PositionArg Vec; }
+namespace Ps2Math { namespace VU0 { typedef Game::Vec Value; } }
 ''')
             (root / 'src/wide.cpp').write_text('''
 #include "vector.hpp"
-using BlackPS2::VU0::Value;
+using Ps2Math::VU0::Value;
 Value func_00100000(Value point) { return point; }
 ''')
             (root / 'src/narrow.cpp').write_text('''
@@ -419,7 +419,7 @@ Value func_00100020(Value count) { return count; }
         self.assertEqual(seeds[0x17bdf0]['ret'], 'void')
         self.assertEqual(seeds[0x17bdf0]['params'], [('s128', None)])
         self.assertEqual(seeds[0x1a71f8]['ret'], 's128')
-        self.assertEqual(seeds[0x1a71f8]['params'], [('void *', 'BlackPS2::DirectionSource')])
+        self.assertEqual(seeds[0x1a71f8]['params'], [('void *', 'Ps2Math::DirectionSource')])
 
     def test_unmatched_signature_does_not_hide_matched_layout_user(self):
         import tempfile
@@ -464,19 +464,19 @@ Value func_00100020(Value count) { return count; }
 class CppAbiTests(unittest.TestCase):
     def test_namespace_and_class_aliases_resolve_without_global_name_guesses(self):
         declarations = cr.parse_declarations('''
-namespace BlackGame {
+namespace Game {
 typedef long long PositionArg;
 typedef long long PositionResult;
 typedef PositionArg Vec;
 PositionResult Load(PositionArg);
 struct Reader { typedef unsigned short Value; Value Count(Value); };
 }
-namespace BlackPS2 { namespace VU0 {
-typedef BlackGame::Vec Value;
+namespace Ps2Math { namespace VU0 {
+typedef Game::Vec Value;
 Value Transform(Value point);
 } }
 namespace Other { typedef unsigned int Value; Value Read(Value count); }
-BlackGame::Vec Wide(BlackGame::PositionArg point);
+Game::Vec Wide(Game::PositionArg point);
 Value Unresolved(Value point);
 ''')
         methods = {d['short']: d for d in declarations}

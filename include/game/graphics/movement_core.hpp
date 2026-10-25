@@ -1,8 +1,8 @@
-#ifndef BLACK_CAMPAIGN_MOVEMENT_CORE_HPP
-#define BLACK_CAMPAIGN_MOVEMENT_CORE_HPP
+#ifndef BLACK_MOVEMENT_CORE_HPP
+#define BLACK_MOVEMENT_CORE_HPP
 #include "ps2/vu0.hpp"
-namespace CampaignGraphics {
-using BlackGame::Vec;
+namespace Graphics {
+using Game::Vec;
 // Access view only. Exact consumers verify selected offsets; total class size is unknown.
 struct BrainView {
     template<class T> T& Field(unsigned offset) {return *(T *)((unsigned char *)this+offset);}
@@ -23,6 +23,6 @@ struct MovementCore : MovementInterface {
 };
 struct ActionWeight { void *value;float Score(unsigned char *event); };
 struct MovementPolicy { BrainView *brain;void Update(); };
-struct GoalRecord {unsigned unknown00; BlackGame::Point3 point;};
+struct GoalRecord {unsigned unknown00; Game::Point3 point;};
 }
 #endif

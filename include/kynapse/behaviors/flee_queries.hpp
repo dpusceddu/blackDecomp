@@ -1,8 +1,8 @@
 // PS2 query temporary: vptr at 0, axis at 0x24, component at 0x30.
-#ifndef BLACK_CAMPAIGN_FLEE_QUERIES_HPP
-#define BLACK_CAMPAIGN_FLEE_QUERIES_HPP
+#ifndef BLACK_FLEE_QUERIES_HPP
+#define BLACK_FLEE_QUERIES_HPP
 #include "kynapse/behaviors/flee.hpp"
-namespace FleeRecovery {struct InitAgent:FleeAgent {InitAgent(Context*);int Initialize(ChildBuffers*) __asm__("func_002D1918");};}
+namespace FleeViews {struct InitAgent:FleeAgent {InitAgent(Context*);int Initialize(ChildBuffers*) __asm__("func_002D1918");};}
 namespace FleeQueries {
 struct Root { virtual ~Root() {} };
 struct Base:Root {
@@ -12,12 +12,12 @@ struct Base:Root {
 };
 struct Vec3 {
     float x,y,z;
-    Vec3(const FleeRecovery::Vec3& v):x(v.x),y(v.y),z(v.z) {}
+    Vec3(const FleeViews::Vec3& v):x(v.x),y(v.y),z(v.z) {}
 };
 struct Query:Base {
     Vec3 axis;
     int component,extra;
-    Query(const FleeRecovery::Vec3& source,int c,int e):axis(source),component(c),extra(e) {}
+    Query(const FleeViews::Vec3& source,int c,int e):axis(source),component(c),extra(e) {}
     virtual ~Query() {}
 };
 // Prepare/Validate return a full PS2 integer, independently of Xbox bool declarations.
@@ -34,14 +34,14 @@ struct Checks:Root {
     unsigned entityCount;
 };
 struct PointCell {
-    FleeRecovery::Vec3 value;
+    FleeViews::Vec3 value;
     PointCell() {}
     ~PointCell() {}
     static void* operator new[](unsigned size) {return KaimAllocate(size);}
 };
 struct Hooks {
     unsigned char unknown00[0x28];
-    unsigned char (*visibility)(const FleeRecovery::Vec3*,const FleeRecovery::Vec3*,void*,int);
+    unsigned char (*visibility)(const FleeViews::Vec3*,const FleeViews::Vec3*,void*,int);
 };
 extern Hooks hooks;
 typedef char QuerySize[sizeof(Query)==0x38?1:-1];

@@ -9,7 +9,7 @@
 // formation goal and completing a route destination. In the original these sit together
 // (0x1a62e0-0x1a6550), apart from the mode methods that call them.
 // Unmatched: callee contract (this in EAX) is reproduced only in the /GL context; hidden-pointer goal point and spilled speed differ.
-namespace BlackGame {
+namespace Game {
 
 
 

@@ -3,7 +3,7 @@
 #include "game/weapons/manager_methods.hpp"
 #include "game/weapons/delayed.hpp"
 
-namespace ModWeapons {
+namespace Weapons {
 
 void WeaponManagerMethods::QueueDelayed(float time,float distance,Instance *source,
                                        int unused,Vec point,Vec direction,EeS8 flags)

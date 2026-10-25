@@ -2,8 +2,8 @@
 
 #ifdef NON_MATCHING
 #include "game/graphics/audio_provider.hpp"
-using namespace CampaignGraphics;
-using namespace BlackGame;
+using namespace Graphics;
+using namespace Game;
 extern "C" {
 extern unsigned func_003107E0(void *,int,int,int);
 extern void func_00319DE0(Voice *,int);

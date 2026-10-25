@@ -12,7 +12,7 @@ extern "C" {
     int func_0035E750(const char *);
     float func_00291C68(long);
 }
-namespace HideRecovery {
+namespace HideViews {
     struct ObjectBase {
         virtual ~ObjectBase();
     };
@@ -268,7 +268,7 @@ namespace HideRecovery {
 
 }
 
-#define HIDE_OFFSET(member, offset) typedef char HideAgent_##member##_offset[(unsigned int)&((HideRecovery::HideAgent *)0)->member == offset ? 1 : -1]
+#define HIDE_OFFSET(member, offset) typedef char HideAgent_##member##_offset[(unsigned int)&((HideViews::HideAgent *)0)->member == offset ? 1 : -1]
 HIDE_OFFSET(provider, 0x10);
 HIDE_OFFSET(destination, 0x14);
 HIDE_OFFSET(dangerous, 0x40);
@@ -280,5 +280,5 @@ HIDE_OFFSET(farLimit, 0x5C);
 HIDE_OFFSET(nearLimit, 0x60);
 HIDE_OFFSET(graphSlot, 0x70);
 #undef HIDE_OFFSET
-typedef char HideAgent_extent[sizeof(HideRecovery::HideAgent) == 0x80 ? 1 : -1];
+typedef char HideAgent_extent[sizeof(HideViews::HideAgent) == 0x80 ? 1 : -1];
 #endif

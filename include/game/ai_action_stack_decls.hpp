@@ -5,7 +5,7 @@
 
 #include "game/ai_action.hpp"
 
-namespace BlackGame {
+namespace Game {
 
 
 

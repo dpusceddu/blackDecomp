@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/actor/state.hpp"
-namespace CampaignActor {
+namespace ActorParts {
 extern "C" {
 extern unsigned char *D_0040F4BC;extern char *D_0040F4D0;extern void*D_0040F51C;
 long func_001A6840(void*,int,int);void func_001354E0(void*,void*);void func_00156E90(void*);void func_001A6330(void*,Request*);void func_001F2838(void*,int,int);

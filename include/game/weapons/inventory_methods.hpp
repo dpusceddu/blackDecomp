@@ -1,12 +1,12 @@
-#ifndef BLACK_CAMPAIGN_WEAPON_INVENTORY_METHODS_HPP
-#define BLACK_CAMPAIGN_WEAPON_INVENTORY_METHODS_HPP
+#ifndef BLACK_WEAPON_INVENTORY_METHODS_HPP
+#define BLACK_WEAPON_INVENTORY_METHODS_HPP
 #include "game/weapons/moving.hpp"
 #include "game/weapons/inventory.h"
-namespace ModWeapons {
+namespace Weapons {
 /* Partial actor inventory access view. Fields not consumed by exact methods
    remain instruction leads; the original C++ class identity is unknown. */
-struct Inventory : BkModInventoryPS2 {
- BkModWeaponOwnerPS2 *owner;
+struct Inventory : BkInventoryPS2 {
+ BkWeaponOwnerPS2 *owner;
  Weapon **slots; Weapon *current, *next;
  float gain; EeU64 pendingIdentity; int phase; float timer;
  EeU16 pickupAmount; EeS8 slotCount, selectedSlot, pendingWeapon;
@@ -17,11 +17,11 @@ struct Inventory : BkModInventoryPS2 {
  static Weapon *Current();
 };
 // Row field widths/offsets follow exact15D210/228/288/2A8/2C8 access controls.
-struct CatalogEntry { EeU64 identity; BkModWeaponDefinitionPS2*definition; EeU32 unknown0c; EeS32 word10,word14,word18,kind; };
+struct CatalogEntry { EeU64 identity; BkWeaponDefinitionPS2*definition; EeU32 unknown0c; EeS32 word10,word14,word18,kind; };
 struct Catalog { EeU8 unknown00, count; EeU8 unknown02[2]; CatalogEntry *entries; };
 struct InventoryManager : MovingPool {
  void Allocate(); int Reset(); void Tick(); void Load(Catalog*); void ClearCatalog();
- Weapon *Create(BkModWeaponOwnerPS2*,EeS8); void Release(Weapon*);
+ Weapon *Create(BkWeaponOwnerPS2*,EeS8); void Release(Weapon*);
 };
 typedef char InventoryOwner1c[(unsigned)&((Inventory*)0)->owner==0x1c?1:-1];
 typedef char InventoryPhase38[(unsigned)&((Inventory*)0)->phase==0x38?1:-1];

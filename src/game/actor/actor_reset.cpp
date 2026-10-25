@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #include "game/actor/views.hpp"
-namespace BlackPS2Campaign {
+namespace ActorEvents {
 
 template<class T> inline T &At(void *p,int o) { return *(T *)((char *)p+o); }
 
@@ -13,7 +13,7 @@ void func_00149828(void *,int,int);
 float func_001AFDB0(void *);
 void func_00146578(void *,int,int,int,float);
 }
-namespace BlackPS2Campaign {
+namespace ActorEvents {
 void ActorEntries::ResetEntries(int reason) {
     Field_0124()=0;
     for (int i=0;i<Field_01F5();++i)

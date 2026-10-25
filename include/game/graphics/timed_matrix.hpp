@@ -1,8 +1,8 @@
-#ifndef BLACK_CAMPAIGN_TIMED_MATRIX_HPP
-#define BLACK_CAMPAIGN_TIMED_MATRIX_HPP
+#ifndef BLACK_TIMED_MATRIX_HPP
+#define BLACK_TIMED_MATRIX_HPP
 #include "ps2/matrix.hpp"
 
-namespace CampaignGraphics {
+namespace Graphics {
 // Access view of vtable 003DB1F8. The semantic class name and fields 14/18
 // remain inferred; the offsets below come from PS2 accesses, not Xbox packing.
 class TimedMatrixInterface {
@@ -20,7 +20,7 @@ public:
     float elapsed, duration, amplitude;
     int kind;
     unsigned owner, token, unknown1c;
-    BlackPS2::VU0::Value curvePoints[4];
+    Ps2Math::VU0::Value curvePoints[4];
 };
 }
 #endif

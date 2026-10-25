@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_GAME_PATH_HPP
-#define BLACK_CAMPAIGN_GAME_PATH_HPP
+#ifndef BLACK_GAME_PATH_HPP
+#define BLACK_GAME_PATH_HPP
 #include "kynapse/graph/path_object.hpp"
 #include "ps2/ee_types.h"
 // PS2 callback and container views. The derived historical class name, complete

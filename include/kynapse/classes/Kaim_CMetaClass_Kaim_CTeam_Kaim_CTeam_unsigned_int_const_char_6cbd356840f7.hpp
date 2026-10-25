@@ -4,7 +4,7 @@
 #include "game/classes/support.hpp"
 #include "game/classes/hierarchy.hpp"
 
-namespace BlackPS2Classes {
+namespace Unnamed {
 
 // Kaim::CMetaClass<Kaim::CTeam, Kaim::CTeam* (*)(unsigned int, const char*)>
 // Identity: RTTI. Complete size and inheritance layout are UNVERIFIED.
@@ -25,6 +25,6 @@ struct Kaim_CMetaClass_Kaim_CTeam_Kaim_CTeam_unsigned_int_const_char_6cbd356840f
     };
 };
 
-} // namespace BlackPS2Classes
+} // namespace Unnamed
 
 #endif

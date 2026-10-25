@@ -13,5 +13,5 @@ bool Perception::Configure(ChildBuffers* entry) {
     if(!_stricmp(entry->GetSecond(),"ComputeCommonInfoDelay")) {
         const char* value=entry->GetValue();if(value) {pairInterval=func_00291C68(func_0035E730(value));return true;}return false;
     }
-    return BlackPS2::Kynapse::IsPrivateProperty(entry);
+    return Ps2Math::Kynapse::IsPrivateProperty(entry);
 }

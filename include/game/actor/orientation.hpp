@@ -1,6 +1,6 @@
-#ifndef BLACK_CAMPAIGN_ACTOR_ORIENTATION_HPP
-#define BLACK_CAMPAIGN_ACTOR_ORIENTATION_HPP
-namespace CampaignActor {
+#ifndef BLACK_ACTOR_ORIENTATION_HPP
+#define BLACK_ACTOR_ORIENTATION_HPP
+namespace ActorParts {
 // Provisional class identity. Begin verifies the named fields below; the opaque
 // prefix includes other state and does not establish an allocation size or base.
 struct OrientationState {

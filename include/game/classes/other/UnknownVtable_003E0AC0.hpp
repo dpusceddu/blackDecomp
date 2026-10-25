@@ -4,7 +4,7 @@
 #include "game/classes/support.hpp"
 #include "game/classes/hierarchy.hpp"
 
-namespace BlackPS2Classes {
+namespace Unnamed {
 
 // UnknownVtable_003E0AC0
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
@@ -95,6 +95,6 @@ struct UnknownVtable_003E0AC0 {
     };
 };
 
-} // namespace BlackPS2Classes
+} // namespace Unnamed
 
 #endif

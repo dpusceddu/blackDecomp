@@ -1,7 +1,7 @@
-#ifndef BLACK_CAMPAIGN_SOUND_ENVELOPES_HPP
-#define BLACK_CAMPAIGN_SOUND_ENVELOPES_HPP
+#ifndef BLACK_SOUND_ENVELOPES_HPP
+#define BLACK_SOUND_ENVELOPES_HPP
 #include "game/graphics/timed_envelope.hpp"
-namespace CampaignGraphics {
+namespace Graphics {
 // Access layouts are shared with the matched Tinnitus methods. These names
 // describe behavior and strings; original class identities remain unverified.
 struct SoundEnvelope : EnvelopeInterface {
@@ -51,7 +51,7 @@ void func_001D7238(float,float,float,void *);
 void func_001D7258(float,void *);
 void func_002860D0(float,void *);
 }
-namespace CampaignGraphics {
+namespace Graphics {
 static inline void **SoundObjects() { return *(void ***)(D_0040F510+0xcbd8); }
 static inline void *SoundFilter() { return *(void **)(D_0040F510+0xcbe0); }
 static inline float SoundClock() { return *(float *)(D_0040F4D0+0x20); }

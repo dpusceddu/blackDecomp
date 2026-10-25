@@ -4,7 +4,7 @@
 
 extern s32 func_00107D20();
 
-void func_00155088(BkModInventoryPS2 *arg0, s8 arg1)
+void func_00155088(BkInventoryPS2 *arg0, s8 arg1)
 {
   arg0->count=arg1;
   if (1)

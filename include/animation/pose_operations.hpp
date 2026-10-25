@@ -1,5 +1,5 @@
-#ifndef BLACK_ANIMATION_POSE_CAMPAIGN_HPP
-#define BLACK_ANIMATION_POSE_CAMPAIGN_HPP
+#ifndef BLACK_ANIMATION_POSE_OPERATIONS_HPP
+#define BLACK_ANIMATION_POSE_OPERATIONS_HPP
 #include "animation/pose_cache.h"
 #include "animation/instance.h"
 #include "animation/graph.h"
@@ -21,7 +21,7 @@ struct Cache {
     static void Construct(int,int) __asm__("func_00347738");
     static void Initialize() __asm__("func_003477D0");
 };
-struct Operations : BkModAnimationInstancePS2 {
+struct Operations : BkAnimationInstancePS2 {
     Pose* Blend(Pose*,Pose*,unsigned,float) __asm__("func_00346230");
     Pose* Select(Pose*,Pose*,unsigned) __asm__("func_00346510");
     Pose* Compose(Pose*,Pose*,unsigned) __asm__("func_00346668");
@@ -30,8 +30,8 @@ struct Operations : BkModAnimationInstancePS2 {
     Pose* Overlay(Pose*,Pose*,float) __asm__("func_00347600");
 };
 struct ClipOperations {
-    static Pose* Default(Operations*,BkModSourceClipPS2*,unsigned,float) __asm__("func_003474F8");
-    static Pose* Root(Pose*,Operations*,BkModSourceClipPS2*,unsigned,int,float) __asm__("func_00347558");
+    static Pose* Default(Operations*,BkSourceClipPS2*,unsigned,float) __asm__("func_003474F8");
+    static Pose* Root(Pose*,Operations*,BkSourceClipPS2*,unsigned,int,float) __asm__("func_00347558");
 };
 struct GraphOperations {
     static float* Scaled(void*,AnimationGraphNode*,AnimationParameters*,unsigned,float,float,float,float) __asm__("func_00347238");

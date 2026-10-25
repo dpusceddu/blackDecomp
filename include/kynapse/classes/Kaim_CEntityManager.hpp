@@ -4,7 +4,7 @@
 #include "game/classes/support.hpp"
 #include "game/classes/hierarchy.hpp"
 
-namespace BlackPS2Classes {
+namespace Unnamed {
 
 // Kaim::CEntityManager
 // Identity: RTTI. Complete size and inheritance layout are UNVERIFIED.
@@ -63,6 +63,6 @@ struct Kaim_CEntityManager {
     };
 };
 
-} // namespace BlackPS2Classes
+} // namespace Unnamed
 
 #endif

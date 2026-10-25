@@ -2,7 +2,7 @@
 
 #include "game/actor/orientation.hpp"
 
-namespace CampaignActor {
+namespace ActorParts {
 
 #ifdef NON_MATCHING
 // Unmatched: 0x13db40 native class/helper allocation and control-flow context.

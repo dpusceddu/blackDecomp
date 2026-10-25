@@ -4,14 +4,14 @@
 #include "game/ai_movement_modes_decls.hpp"
 #include "ps2/vu0.hpp"
 
-namespace BlackGame {
+namespace Game {
 extern "C" void SegmentProject7(PositionArg start, PositionArg direction, PositionArg point,
                                 Position4* result, float* fraction) __asm__("func_0027F470");
 
 void MovementModeBase::SetDestination(PositionArg point)
 {
     Store(target, point);
-    distance = BlackPS2::VU0::Length3Word(Sub3(point, Load(brain->actor->position)));
+    distance = Ps2Math::VU0::Length3Word(Sub3(point, Load(brain->actor->position)));
     retargeted = 0;
     stallTimer.Clear();
     resumeTimer.Clear();

@@ -1,8 +1,8 @@
 // Scoped source view for RTTI Kaim::CEntityManager (retained legacy name Perception).
 // Existing PS2 prefixes come from the source-backed legacy view. Iterator and
 // authored-vector value-return contracts in unmatched consumers remain UNVERIFIED.
-#ifndef BLACK_CAMPAIGN_GRAPH_ENTITY_MANAGER_HPP
-#define BLACK_CAMPAIGN_GRAPH_ENTITY_MANAGER_HPP
+#ifndef BLACK_GRAPH_ENTITY_MANAGER_HPP
+#define BLACK_GRAPH_ENTITY_MANAGER_HPP
 #include "kynapse/behaviors/entities.hpp"
 extern unsigned int D_00455F24;
 extern "C" float sqrtf(float);

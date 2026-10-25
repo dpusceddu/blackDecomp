@@ -1,5 +1,5 @@
-#ifndef BLACK_MOD_ARMS_PLAYBACK_HPP
-#define BLACK_MOD_ARMS_PLAYBACK_HPP
+#ifndef BLACK_ARMS_PLAYBACK_HPP
+#define BLACK_ARMS_PLAYBACK_HPP
 #include "animation/arms/instance.hpp"
 namespace ArmsAnimation {
 // Scoped method names. PlaybackState offsets are shared PS2 exact-backed views.

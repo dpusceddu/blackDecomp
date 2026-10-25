@@ -96,7 +96,7 @@ bool ParameterTables::ConsumeList(int index,IndexUser *user) {
 
 // Unmatched: fired branch scheduling.
 #if 0
-bool ParameterCampaign::ConsumeGlobal(int index) {
+bool ParameterViews::ConsumeGlobal(int index) {
     if(threshold<=0)return true;
     if(index>=0 && (unsigned int)index<countA && !fired) {
         float now=Kaim_QueryFloat();fired=threshold<now;
@@ -125,15 +125,15 @@ ParameterTables *GetNameTables() {
     return ParameterSingleton;
 }
 
-int ParameterCampaign::FindAperiodicName(const char *name)const {
+int ParameterViews::FindAperiodicName(const char *name)const {
     for(unsigned int i=0;i<countA;++i)if(!_stricmp(name,((char**)a14)[i]))return i;
     return -1;
 }
-int ParameterCampaign::FindPeriodicName(const char *name)const {
+int ParameterViews::FindPeriodicName(const char *name)const {
     for(unsigned int i=0;i<countB;++i)if(!_stricmp(name,((char**)b10)[i]))return i;
     return -1;
 }
-int ParameterCampaign::FindEstimatedName(const char *name)const {
+int ParameterViews::FindEstimatedName(const char *name)const {
     for(unsigned int i=0;i<countC;++i)if(!_stricmp(name,((char**)c18)[i]))return i;
     return -1;
 }
@@ -172,7 +172,7 @@ bool ParameterTables::Raise(int index,SlotUser *user) {
 #endif
 // Unmatched: rank-pointer helper register scheduling.
 #if 0
-bool ParameterCampaign::RaiseIndex(int index,IndexUser *user) {
+bool ParameterViews::RaiseIndex(int index,IndexUser *user) {
     int slot=user->GetIndex();
     if(index>=0 && (unsigned int)index<countB && (unsigned int)slot<GetSlotOwner()->indexCount) {
         float *rank=indexTables[slot].values+index;
@@ -194,7 +194,7 @@ void ParameterTables::Accumulate(int index,SlotUser *user) {
         }
     }
 }
-void ParameterCampaign::AccumulateIndex(int index,IndexUser *user) {
+void ParameterViews::AccumulateIndex(int index,IndexUser *user) {
     if(!(threshold<=0)) {
         int slot=user->GetIndex();
         if(index>=0 && (unsigned int)index<countA && (unsigned int)slot<GetSlotOwner()->indexCount) {
@@ -202,7 +202,7 @@ void ParameterCampaign::AccumulateIndex(int index,IndexUser *user) {
         }
     }
 }
-void ParameterCampaign::AccumulateGlobal(int index) {
+void ParameterViews::AccumulateGlobal(int index) {
     if(!(threshold<=0) && index>=0 && (unsigned int)index<countA) {
         float now=Kaim_QueryFloat();a40[index]+=now-a3c[index];
     }
@@ -227,7 +227,7 @@ float ParameterTables::Remaining(int index)
     return left;
 }
 #endif
-void ParameterCampaign::MarkFired() {
+void ParameterViews::MarkFired() {
     if(!fired) {float now=Kaim_QueryFloat();if(threshold<now)fired=1;}
 }
 

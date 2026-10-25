@@ -1,7 +1,7 @@
 // Scoped PS2 hide-agent views. Exact consumers verify the fields they access;
 // unused signatures, opaque storage and original C++ spelling remain inferred.
-#ifndef BLACK_CAMPAIGN_HIDE_SEARCH_HPP
-#define BLACK_CAMPAIGN_HIDE_SEARCH_HPP
+#ifndef BLACK_HIDE_SEARCH_HPP
+#define BLACK_HIDE_SEARCH_HPP
 
 #include "kynapse/alloc.hpp"
 

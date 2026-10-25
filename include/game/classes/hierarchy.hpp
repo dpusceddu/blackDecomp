@@ -1,7 +1,7 @@
 // Semantic RTTI hierarchy of the classes (edited by hand). Never use these empty types as PS2 object layouts.
 #ifndef BLACK_CLASSES_HIERARCHY_HPP
 #define BLACK_CLASSES_HIERARCHY_HPP
-namespace BlackPS2Classes {
+namespace Unnamed {
 struct Hierarchy_Kaim_CMetaClass_Kaim_CActionAttribute_Kaim_CActionAttribute_void_d8b7348b3130 {};
 struct Hierarchy_Kaim_CMetaClass_Kaim_CAction_Kaim_CAction_void_41ff87fabc2f {};
 struct Hierarchy_Kaim_CMetaClass_Kaim_CAgent_Kaim_CAgent_Kaim_CBrain_e16bb049eefd {};

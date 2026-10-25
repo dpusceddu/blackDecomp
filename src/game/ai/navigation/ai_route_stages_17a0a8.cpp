@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_route_stages_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x17a0a8
 // Steps a request through its stage; false means wait until the next update. Kinds 0, 9 and 10
 // have nothing to do.
@@ -52,6 +52,6 @@ bool BeginQueuedRoute(RouteRequest* request)
     return true;
 }
 
-}  // namespace BlackGame
+}  // namespace Game
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0017A220);

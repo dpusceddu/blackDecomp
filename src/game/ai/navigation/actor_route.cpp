@@ -2,7 +2,7 @@
 
 #define BLACK_PS2 1
 #include "game/ai_movement_modes_decls.hpp"
-namespace BlackGame {
+namespace Game {
 
 bool RouteMode::UpdateTarget(PositionArg point)
 {

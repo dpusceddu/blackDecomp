@@ -443,7 +443,7 @@ splits:
   - {src: src/game/unsorted/tu_153588.c, range: [0x153588, 0x153690]}
   - {src: src/game/unsorted/tu_153690.c, range: [0x153690, 0x1536b0]}
   - {src: src/game/unsorted/tu_1536b0.c, range: [0x1536b0, 0x154fd8]}
-  - {src: src/game/weapons/mod_weapons_tu_154fd8.cpp, range: [0x154fd8, 0x155088], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_154fd8.cpp, range: [0x154fd8, 0x155088], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
   - {src: src/game/weapons/tu_155088.c, range: [0x155088, 0x1550c0]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x1550c0, 0x155118]}
   - {src: src/game/weapons/tu_155118.c, range: [0x155118, 0x155130]}
@@ -452,21 +452,21 @@ splits:
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x155178, 0x155198]}
   - {src: src/game/weapons/tu_155198.c, range: [0x155198, 0x1551a8]}
   - {src: src/game/weapons/tu_1551a8.c, range: [0x1551a8, 0x1551c8]}
-  - {src: src/game/weapons/mod_weapons_tu_1551c8.cpp, range: [0x1551c8, 0x155238], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_1551c8.cpp, range: [0x1551c8, 0x155238], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
   - {src: src/game/weapons/tu_155238.cpp, range: [0x155238, 0x155b08], sections: false, owner: weapons}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x155b08, 0x155c28]}
   - {src: src/game/weapons/tu_155c28.cpp, range: [0x155c28, 0x155dc8], sections: false, owner: weapons}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x155dc8, 0x1561f8]}
   - {src: src/game/weapons/tu_1561f8.c, range: [0x1561f8, 0x156278], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/weapons/tu_1561f8_156278.c, range: [0x156278, 0x156388]}
-  - {src: src/game/weapons/mod_weapons_tu_1561f8.cpp, range: [0x156388, 0x156450], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_1561f8.cpp, range: [0x156388, 0x156450], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
   - {src: src/game/weapons/tu_1561f8_156450.c, range: [0x156450, 0x156d60], flags: [-O2, -G0, -snas, -fno-schedule-insns]}
   - {src: src/game/weapons/tu_1561f8_156d60.c, range: [0x156d60, 0x156dc0], sections: false}
   - {src: src/game/weapons/tu_1561f8_156dc0.c, range: [0x156dc0, 0x156e70], sections: false}
   - {src: src/game/weapons/tu_1561f8_156e70.c, range: [0x156e70, 0x156e90], sections: false}
   - {src: src/game/weapons/tu_1561f8_156e90.c, range: [0x156e90, 0x156f00], sections: false}
   - {src: src/game/weapons/tu_1561f8_156f00.c, range: [0x156f00, 0x156f10], sections: false}
-  - {src: src/game/weapons/mod_weapons_tu_1561f8.cpp, range: [0x156f10, 0x156fd0]}
+  - {src: src/game/weapons/weapons_tu_1561f8.cpp, range: [0x156f10, 0x156fd0]}
   - {src: src/game/weapons/tu_1561f8_156f00.c, range: [0x156fd0, 0x158078]}
   - {src: src/game/weapons/tu_1561f8_158078.c, range: [0x158078, 0x158a98], sections: false}
   - {src: src/game/weapons/tu_1561f8_158a98.c, range: [0x158a98, 0x158e80], sections: false}
@@ -474,29 +474,29 @@ splits:
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x158e88, 0x158ea8]}
   - {src: src/game/weapons/tu_158ea8.c, range: [0x158ea8, 0x158f08]}
   - {src: src/game/weapons/tu_158f08.c, range: [0x158f08, 0x15a830]}
-  - {src: src/game/weapons/mod_weapons_tu_158f08.cpp, range: [0x15a830, 0x15a8d0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_158f08.cpp, range: [0x15a830, 0x15a8d0], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
   - {src: src/game/weapons/tu_158f08.c, range: [0x15a8d0, 0x15a990]}
-  - {src: src/game/weapons/mod_weapons_tu_158f08.cpp, range: [0x15a990, 0x15b8f0]}
+  - {src: src/game/weapons/weapons_tu_158f08.cpp, range: [0x15a990, 0x15b8f0]}
   - {src: src/game/weapons/tu_158f08.c, range: [0x15b8f0, 0x15b8f8]}
-  - {src: src/game/weapons/mod_weapons_tu_158f08.cpp, range: [0x15b8f8, 0x15bb48]}
+  - {src: src/game/weapons/weapons_tu_158f08.cpp, range: [0x15b8f8, 0x15bb48]}
   - {src: src/game/weapons/tu_15bb48.c, range: [0x15bb48, 0x15bb90]}
   - {src: src/game/weapons/tu_15bb90.c, range: [0x15bb90, 0x15bbd8]}
-  - {src: src/game/weapons/mod_weapons_inventory_inventory.cpp, range: [0x15bbd8, 0x15c970], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
-  - {src: src/game/weapons/mod_weapons_inventory_manager.cpp, range: [0x15c970, 0x15cec8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], assembler: sn-min6, owner: weapons}
-  - {src: src/game/weapons/mod_weapons_inventory_inventory.cpp, range: [0x15cec8, 0x15cef0]}
-  - {src: src/game/weapons/mod_weapons_inventory_manager.cpp, range: [0x15cef0, 0x15d060]}
+  - {src: src/game/weapons/weapons_inventory_inventory.cpp, range: [0x15bbd8, 0x15c970], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
+  - {src: src/game/weapons/weapons_inventory_manager.cpp, range: [0x15c970, 0x15cec8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], assembler: sn-min6, owner: weapons}
+  - {src: src/game/weapons/weapons_inventory_inventory.cpp, range: [0x15cec8, 0x15cef0]}
+  - {src: src/game/weapons/weapons_inventory_manager.cpp, range: [0x15cef0, 0x15d060]}
   - {src: src/game/weapons/tu_15d060.cpp, range: [0x15d060, 0x15d198], sections: false, owner: weapons}
-  - {src: src/game/weapons/mod_weapons_tu_15d198.cpp, range: [0x15d198, 0x15d210], flags: [-O2, -G0, -snas, -fbyte-bool], assembler: sn-min6, owner: weapons}
-  - {src: src/game/weapons/mod_weapons_catalog_methods.cpp, range: [0x15d210, 0x15d248], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
-  - {src: src/game/weapons/mod_weapons_tu_15d248.cpp, range: [0x15d248, 0x15d288], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
-  - {src: src/game/weapons/mod_weapons_catalog_methods.cpp, range: [0x15d288, 0x15d2e8]}
+  - {src: src/game/weapons/weapons_tu_15d198.cpp, range: [0x15d198, 0x15d210], flags: [-O2, -G0, -snas, -fbyte-bool], assembler: sn-min6, owner: weapons}
+  - {src: src/game/weapons/weapons_catalog_methods.cpp, range: [0x15d210, 0x15d248], flags: [-O2, -G0, -snas, -fbyte-bool], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_15d248.cpp, range: [0x15d248, 0x15d288], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
+  - {src: src/game/weapons/weapons_catalog_methods.cpp, range: [0x15d288, 0x15d2e8]}
   - {src: src/game/weapons/tu_15d2e8.cpp, range: [0x15d2e8, 0x15d310], sections: false, owner: weapons}
-  - {src: src/game/weapons/mod_weapons_tu_15d310.cpp, range: [0x15d310, 0x15d370], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
-  - {src: src/game/weapons/mod_weapons_tu_15d370.cpp, range: [0x15d370, 0x15d3d8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_15d310.cpp, range: [0x15d310, 0x15d370], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
+  - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d370, 0x15d3d8], flags: [-O2, -G0, -snas, -fbyte-bool, -mvu0-use-vf0-vf31], owner: weapons}
   - {src: src/game/weapons/tu_15d370_15d3d8.c, range: [0x15d3d8, 0x15d758]}
-  - {src: src/game/weapons/mod_weapons_tu_15d370.cpp, range: [0x15d758, 0x15d850]}
+  - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d758, 0x15d850]}
   - {src: src/game/weapons/tu_15d370_15d3d8.c, range: [0x15d850, 0x15d870]}
-  - {src: src/game/weapons/mod_weapons_tu_15d370.cpp, range: [0x15d870, 0x15d958]}
+  - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d870, 0x15d958]}
   - {src: src/game/unsorted/tu_15d958.c, range: [0x15d958, 0x160e70], note: flags or language differ}
   - {src: src/game/unsorted/tu_15d958_160e70.c, range: [0x160e70, 0x160ea0], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_15d958_160ea0.c, range: [0x160ea0, 0x161aa8], note: flags or language differ}
@@ -1084,7 +1084,7 @@ splits:
   - {src: src/game/unsorted/tu_1a24b8_1a3a08.c, range: [0x1a3a08, 0x1a4930]}
   - {src: src/game/unsorted/tu_1a4930.c, range: [0x1a4930, 0x1a4ff0]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1a4ff0, 0x1a54e0]}
-  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a54e0, 0x1a5738], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions, -DMOD_ARMS_TICK_ONLY], assembler: sn-min6, functions: [0x1a54e0]}
+  - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a54e0, 0x1a5738], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions, -DARMS_TICK_ONLY], assembler: sn-min6, functions: [0x1a54e0]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x1a5738, 0x1a5ee8]}
   - {src: src/game/unsorted/tu_1a51c8_1a5ee8.c, range: [0x1a5ee8, 0x1a6330], sections: false}
   - {src: src/game/unsorted/arms_1a51c8.cpp, range: [0x1a6330, 0x1a7e58], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-exceptions], functions: [0x1a6330, 0x1a68b0, 0x1a6988, 0x1a6a28, 0x1a73f0, 0x1a74e0, 0x1a7500, 0x1a7d48, 0x1a7df0]}
@@ -2769,7 +2769,7 @@ splits:
   - {src: src/animation/tu_34eae0_release_banks.c, range: [0x34ecd8, 0x34ed80], owner: animation}
   - {src: src/animation/tu_34eae0_34ed80.c, range: [0x34ed80, 0x34edb8], owner: animation, note: flags or language differ}
   - {src: src/animation/arms_34eae0.cpp, range: [0x34edb8, 0x34f080], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: animation, functions: [0x34edb8, 0x34ee90]}
-  - {src: src/animation/arms_34eae0.cpp, range: [0x34f080, 0x34f1c0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DMOD_ARMS_EVALUATE_ONLY, -fno-schedule-insns, -fno-expensive-optimizations], owner: animation, functions: [0x34f080]}
+  - {src: src/animation/arms_34eae0.cpp, range: [0x34f080, 0x34f1c0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DARMS_EVALUATE_ONLY, -fno-schedule-insns, -fno-expensive-optimizations], owner: animation, functions: [0x34f080]}
   - {src: src/animation/tu_34eae0_34ed80.c, range: [0x34f1c0, 0x34f328]}
   - {src: src/animation/tu_34eae0_34f328.c, range: [0x34f328, 0x34f360], flags: [-O1, -G0, -snas], owner: animation}
   - {src: src/animation/arms_34f360_w2.cpp, range: [0x34f360, 0x34fe70], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], owner: animation, data_ranges: [{end: '0x3d49f4', input: .data, kind: unwind, section: .data, start: '0x3d4684'}]}

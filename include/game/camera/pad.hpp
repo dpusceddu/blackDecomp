@@ -1,11 +1,11 @@
 // Shared mod context; accessed PS2 prefixes only. Original identities and full allocations remain qualified.
-#ifndef CAMPAIGN_GRAPHICS_CONTROLLER_HPP
-#define CAMPAIGN_GRAPHICS_CONTROLLER_HPP
+#ifndef BLACK_GRAPHICS_CONTROLLER_HPP
+#define BLACK_GRAPHICS_CONTROLLER_HPP
 #include "ps2/ee_types.h"
 // Partial PS2 controller view. Accessed offsets and five virtual slots are verified.
 // The original class identity, base-class hierarchy and allocation size remain unverified.
 // The prefix/interface views reproduce the observed vptr at +8 under GCC 2.95.
-namespace CampaignGraphics {
+namespace Graphics {
 struct ControllerBase { EeS32 unknown00; EeS32 field_4; };
 struct ControllerInterface : ControllerBase {
     virtual void Update();
@@ -77,10 +77,10 @@ virtual void SetFeedback(EeU8 enabled);
 virtual bool Open(unsigned int backendHandle, unsigned int portIndex);
 virtual bool Close();
 unsigned char Button(unsigned index) const; bool Pressed(unsigned index) const; bool Released(unsigned index) const; float Pressure(unsigned index) const; int Rumble(unsigned enabled); float Smooth(float value,float step); int Reset();};}
-typedef char check_field_C[(((int)&((CampaignGraphics::Controller*)0)->connected)==12)?1:-1];
-typedef char check_opaque_E[(((int)&((CampaignGraphics::Controller*)0)->previousStates)==14)?1:-1];
-typedef char check_field_2A[(((int)&((CampaignGraphics::Controller*)0)->button0)==42)?1:-1];
-typedef char check_field_4C[(((int)&((CampaignGraphics::Controller*)0)->pressure0)==76)?1:-1];
-typedef char check_field_E8[(((int)&((CampaignGraphics::Controller*)0)->backend)==232)?1:-1];
+typedef char check_field_C[(((int)&((Graphics::Controller*)0)->connected)==12)?1:-1];
+typedef char check_opaque_E[(((int)&((Graphics::Controller*)0)->previousStates)==14)?1:-1];
+typedef char check_field_2A[(((int)&((Graphics::Controller*)0)->button0)==42)?1:-1];
+typedef char check_field_4C[(((int)&((Graphics::Controller*)0)->pressure0)==76)?1:-1];
+typedef char check_field_E8[(((int)&((Graphics::Controller*)0)->backend)==232)?1:-1];
 
 #endif

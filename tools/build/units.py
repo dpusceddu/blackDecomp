@@ -226,10 +226,9 @@ def main():
     (out_dir(slug) / 'units.d').write_text('build/%s/%s: %s\n' % (
         out_dir(slug).name, 'units-nm.json' if non_matching() else 'units.json', ' '.join(sources)))
     live = [u for u in units if any(f['status'] == 'source' for f in u['functions'])]
-    print('%d units (%d with source), %d source functions, %d INCLUDE_ASM functions' % (
-        len(units), len(live), sum(f['status'] == 'source' for u in units for f in u['functions']),
-        sum(f['status'] == 'asm' for u in units for f in u['functions'])))
-
+    source = {f['addr'] for u in units for f in u['functions'] if f['status'] == 'source'}
+    every = {f['addr'] for u in units for f in u['functions']}
+    print('%d units (%d with source), %d source functions, %d INCLUDE_ASM functions' % (len(units), len(live), len(source), len(every - source)))
 
 if __name__ == '__main__':
     main()

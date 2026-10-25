@@ -3,7 +3,7 @@
 // Ported from an unpublished companion project, PS2 branches only.
 #include "game/ai_action_stack_decls.hpp"
 
-namespace BlackGame {
+namespace Game {
 // /SLUS_213.76 0x193990
 // Unmatched: expanded Record helper and private EAX action contract.
 
@@ -23,4 +23,4 @@ void Action::UnwindAbove()
     brain->stack.UnwindAction(this);
 }
 
-}  // namespace BlackGame
+}  // namespace Game

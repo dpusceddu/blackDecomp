@@ -1,5 +1,5 @@
-#ifndef BLACK_CAMPAIGN_APT_FUNCTION_HPP
-#define BLACK_CAMPAIGN_APT_FUNCTION_HPP
+#ifndef BLACK_APT_FUNCTION_HPP
+#define BLACK_APT_FUNCTION_HPP
 // PS2 field-derived view; native constructor remains unverified.
 #include "apt/apt_pool.hpp"
 namespace AptPS2 {

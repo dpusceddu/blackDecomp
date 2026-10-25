@@ -12,7 +12,7 @@ extern float func_0026C098(void *, int, int, int, int);
 extern float func_0026BF60(void *, float, float);
 }
 
-void CampaignGraphics::Controller::Update() {
+void Graphics::Controller::Update() {
     float *pressure;
     float scaled1;
     float smoothNegative0;

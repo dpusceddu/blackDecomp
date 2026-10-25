@@ -1,7 +1,7 @@
-#ifndef BLACK_CAMPAIGN_TIMED_ENVELOPE_HPP
-#define BLACK_CAMPAIGN_TIMED_ENVELOPE_HPP
+#ifndef BLACK_TIMED_ENVELOPE_HPP
+#define BLACK_TIMED_ENVELOPE_HPP
 #include "ps2/ee_types.h"
-namespace CampaignGraphics {
+namespace Graphics {
 // PS2 access layout. Strings identify a Tinnitus sound effect; original class
 // names and the inheritance relationship remain unverified.
 struct EnvelopeFields {

@@ -46,7 +46,7 @@ namespace Fragment348E78 {
 
 s32 func_00348E78(void *arg0) __asm__("func_00348E78") __attribute__((section(".text.func_00348E78")));
 s32 func_00348E78(void *arg0) {
-    return BkModAnimationHasNextPS2((const BkModAnimationInstancePS2*)arg0);
+    return BkAnimationHasNextPS2((const BkAnimationInstancePS2*)arg0);
 }
 }
 

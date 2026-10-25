@@ -2,8 +2,8 @@
 // agree with the executable; native array initialization is checked against the loaders,
 // but their source shape remains UNVERIFIED. Complete size, opaque fields and unused signatures
 // remain UNVERIFIED. This area is owned by the graph code.
-#ifndef BLACK_CAMPAIGN_GRAPH_SPATIAL_HPP
-#define BLACK_CAMPAIGN_GRAPH_SPATIAL_HPP
+#ifndef BLACK_GRAPH_SPATIAL_HPP
+#define BLACK_GRAPH_SPATIAL_HPP
 #include "kynapse/graph/tables.hpp"
 extern "C" int _stricmp(const char*, const char*) __asm__("func_00360838");
 extern "C" float sqrtf(float);

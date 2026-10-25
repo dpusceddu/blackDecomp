@@ -1,8 +1,8 @@
 // Shared mod context; accessed PS2 prefixes only. Original identities and full allocations remain qualified.
 // Partial PS2 views verified by 0x13F160 and 0x140008. Original class identities,
 // full hierarchies and allocation extents remain unverified.
-#ifndef BLACK_CAMPAIGN_ACTOR_INPUT_AXIS_HPP
-#define BLACK_CAMPAIGN_ACTOR_INPUT_AXIS_HPP
+#ifndef BLACK_ACTOR_INPUT_AXIS_HPP
+#define BLACK_ACTOR_INPUT_AXIS_HPP
 namespace ActorInventory7 {
 struct InputAxes {
  char prefix[0x90];float lateral,forward;void*input;

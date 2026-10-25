@@ -1,9 +1,9 @@
 // Partial PS2 command views, verified by 0x162FB0 and 0x162D98. Full class identities, hierarchy
 // and extents remain unverified. Opaque spans do not imply verified field types.
-#ifndef BLACK_CAMPAIGN_ACTOR_COMMAND_HPP
-#define BLACK_CAMPAIGN_ACTOR_COMMAND_HPP
+#ifndef BLACK_ACTOR_COMMAND_HPP
+#define BLACK_ACTOR_COMMAND_HPP
 #include "ps2/ee_types.h"
-namespace CampaignActor {
+namespace ActorParts {
 struct Steering {char opaque;};
 struct Drive {
  char opaque;

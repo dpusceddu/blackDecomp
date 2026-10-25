@@ -2,7 +2,7 @@
 
 #include "kynapse/behaviors/hide.hpp"
 
-namespace HideRecovery {
+namespace HideViews {
 
 bool HideAgent::Init(ChildBuffers* config)
 {
