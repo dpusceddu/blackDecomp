@@ -20,8 +20,9 @@ import nm_build
 class FakeBuild:
     """Stands in for the build steps. Records, at every `units.py`, whether facts of an earlier attempt are still there."""
 
-    def __init__(self, root, link_failures):
+    def __init__(self, root, link_failures, prepare_problems=()):
         self.root = root
+        self.prepare_problems = list(prepare_problems)     # per prepare call: the unit names it reports
         self.out = root / 'build' / 'SLUS_213.76-nm'
         self.link_failures = list(link_failures)       # per link attempt: the unit names the link error is attributed to
         self.facts_seen_by_units = []
@@ -41,6 +42,8 @@ class FakeBuild:
             (self.out / 'results.json').write_text('{}')
         elif step == 'units_verify.py' and args[1] == 'prepare':
             (self.out / 'unit_facts.json').write_text('{"unit": {"assembly": [1048576]}}')
+            names = self.prepare_problems.pop(0) if self.prepare_problems else []
+            (self.out / 'unit_problems.json').write_text(json.dumps([[n, None, 'extern'] for n in names]))
         elif step == 'build_objects.py':
             if self.link_failures:
                 rc = 1
@@ -66,8 +69,8 @@ class NonMatchingBuild(unittest.TestCase):
         for name in ('unit_facts.json', 'unit_problems.json'):
             (self.out / name).write_text('stale')       # left by an earlier run
 
-    def run_build(self, link_failures=()):
-        fake = FakeBuild(self.root, link_failures)
+    def run_build(self, link_failures=(), prepare_problems=()):
+        fake = FakeBuild(self.root, link_failures, prepare_problems)
         with patch.object(nm_build, 'ROOT', self.root), patch.object(nm_build, 'run', fake.run), \
                 patch.object(sys, 'argv', ['nm_build.py']), contextlib.redirect_stdout(io.StringIO()):
             nm_build.main()
@@ -81,6 +84,13 @@ class NonMatchingBuild(unittest.TestCase):
         fake = self.run_build(link_failures=[['unit_a']])
         self.assertEqual([False, False], fake.facts_seen_by_units)
         self.assertEqual(['unit_a'], json.loads((self.out / 'nm_fallback.json').read_text()))
+
+    def test_a_unit_prepare_found_wrong_keeps_its_matching_version_before_any_link(self):
+        fake = self.run_build(prepare_problems=[['unit_b'], []])
+        self.assertEqual(['unit_b'], json.loads((self.out / 'nm_fallback.json').read_text()))
+        self.assertEqual(['units.py', 'make_ld.py', 'build_objects.py', 'units_verify.py prepare',
+                          'units.py', 'make_ld.py', 'build_objects.py', 'units_verify.py prepare',
+                          'units.py', 'make_ld.py', 'build_objects.py', 'pack_elf.py'], fake.calls)
 
     def test_the_facts_the_last_attempt_wrote_stay_for_the_link(self):
         self.run_build()

@@ -133,7 +133,7 @@ A draft that does not match yet lives in its TU file as `#ifdef NON_MATCHING` <d
 `python3 configure.py --non-matching` followed by `ninja` builds the drafts into `build/<GAME_ID>-nm/<boot>.nonmatching.elf`
 (`tools/build/nm_build.py`): the markers inside `#else` branches stop applying, the drafts replace the assembly, and the shiftable
 link moves everything else. It is not compared with the original and is not expected to boot. A file whose drafts do not
-compile or link (their declarations are incomplete) keeps its matching version; the list is in
+compile or link (their declarations are incomplete), or that the checks of `tools/build/units_verify.py prepare` reject (a symbol with no address), keeps its matching version; the list is in
 `build/<GAME_ID>-nm/nm_fallback.json`. `python3 configure.py` returns to the matching build.
 
 The build repeats until that set is stable (up to 8 attempts). Each attempt starts without the facts file of the one before

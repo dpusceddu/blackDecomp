@@ -53,6 +53,15 @@ def main():
             sys.stdout.write(r.stdout[-3000:] + r.stderr[-3000:])
             raise SystemExit('nm_build: the build backend failed')
         run('tools/build/units_verify.py', 'prepare', check=False)
+        # a unit prepare found wrong (a draft that refers to symbols without an address, for instance) cannot link: it keeps
+        # its matching version now, instead of the link failing on it later in a way that names no unit
+        problems = json.loads((out / 'unit_problems.json').read_text()) if (out / 'unit_problems.json').exists() else []
+        known = set(json.loads(fallback.read_text())) if fallback.exists() else set()
+        wrong = {p[0] for p in problems} - known
+        if wrong:
+            fallback.write_text(json.dumps(sorted(known | wrong)))
+            print('non-matching: %d more translation units keep their matching version (checks)' % len(wrong))
+            continue
         run('tools/build/units.py', slug)
         run('tools/build/make_ld.py', slug)
         r = run('tools/build/build_objects.py', slug, check=False)
