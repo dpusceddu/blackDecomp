@@ -96,7 +96,7 @@ struct Kaim_CFleeAgent {
     float Function_002D2F80(void * argument0, int argument1, float argument2, int argument3);
     // 0x00389290: UNVERIFIED signature (src/kynapse/inline/class_info_389290.cpp).
     void * Function_00389290();
-    // 0x0038BB28: UNVERIFIED signature (src/kynapse/inline/small_misc_38bb28.cpp).
+    // 0x0038BB28: UNVERIFIED signature (src/kynapse/inline/global_accessors_38bb28.cpp).
     void Function_0038BB28();
 
     // Vtable 0x003E2A58; vptr field offset unknown; RTTI header.

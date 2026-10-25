@@ -2,13 +2,13 @@
 #define BLACK_MOD_WEAPON_STATE_H
 #include "ps2/ee_types.h"
 /* Partial PS2 access views, not original class identities or allocation sizes.
-   Native controls 156DC0 and 158078..1580E0 verify the fields they use.
+   Matched functions 156DC0 and 158078..1580E0 verify the fields they use.
    Other named fields below remain PS2 instruction leads until a control consumes them. */
 typedef struct BkWeaponDefinitionPS2 {
     EeU8 unknown00[0x60];
     EeS32 capacity, reserveIndex;
     EeU8 unknown68[0x38];
-    struct BkWeaponDefinitionPS2 *secondary; /* A0:pointer access verified by native15D248. */
+    struct BkWeaponDefinitionPS2 *secondary; /* A0:pointer access verified by function 15D248. */
     EeU8 unknowna4[0x20];
     EeU8 flagC4, unknownC5[2], perRound;
 } BkWeaponDefinitionPS2;

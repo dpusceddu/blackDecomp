@@ -30,7 +30,7 @@ void RouteBuffers::Reserve(int newCapacity) {
     points = (Vec3 *)new RoutePointCell[newCapacity];
     guards = (void **)Allocate(newCapacity * 4);
 }
-// Scoped three-float vector recipe; scalar assignment preserves the native temporary stores.
+// Scoped three-float vector recipe; scalar assignment preserves the original temporary stores.
 struct PathVector {
     float x, y, z;
     PathVector(float px, float py, float pz) : x(px), y(py), z(pz) {}

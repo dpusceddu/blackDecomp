@@ -3,7 +3,7 @@
 #include "animation/pose_cache.h"
 #include "animation/instance.h"
 #include "animation/graph.h"
-namespace ArmsPose {
+namespace PoseViews {
 // Scoped PS2 behavior views; original class identities remain unverified.
 struct Pose {
     union { float quaternion[4];s128 rotation; };

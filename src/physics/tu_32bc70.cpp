@@ -108,7 +108,7 @@ extern "C" PhysicsScene* func_0032BDC0(PhysicsStorageBlock* storage, const Physi
 #endif
 
 #ifdef BLACK_NONMATCHING
-// Native packed-overlap and XYZ separation operations.
+// Packed-overlap and XYZ separation operations.
 static inline float SceneVectorX(PhysicsVec v){float result;asm("qmfc2.ni bitsr, inputv":"=r bitsr"(result):"j inputv"(v));return result;}
 static inline PhysicsVec SceneBoxGap(const PhysicsBounds& a,const PhysicsBounds& b){PhysicsVec low=b.low,high=a.low;
  asm("vsub.xyz lowv, lowv, ahigh\n\tvsub.xyz highv, highv, bhigh\n\tvmax.xyz highv, highv, lowv":"+&j lowv"(low),"+j highv"(high):"j ahigh"(a.high),"j bhigh"(b.high));return high;}
@@ -159,7 +159,7 @@ inline int PhysicsScene::PairGroups(unsigned int first, unsigned int second)
     return pairs;
 }
 
-// Unmatched: 121 differences and one word short in native mask/pair-loop allocation; official recorded replay passes 4/178 because call argument banks differ.
+// Unmatched: 121 differences and one word short in original mask/pair-loop allocation; official recorded replay passes 4/178 because call argument banks differ.
 int PhysicsScene::QueryGroup(unsigned int group, const PhysicsBounds* box)
 {
     float margin = solver->contactMargin;
@@ -500,7 +500,7 @@ void PhysicsScene::PublishSleepWake()
         PhysicsBody* body = instances[ordinal]->body;
         func_0037CF60(body->solver, body);
     }
-    // Reading Begin's word retains its native aggregate construction temporary.
+    // Reading Begin's word retains its original aggregate construction temporary.
     PhysicsBitCursor cursor(quiet.Begin().word, 0);
     while (PhysicsCursorAdvanceSet(cursor, quiet.End())) {
         PhysicsBody* body = instances[quiet.IndexOf(cursor)]->body;
@@ -513,7 +513,7 @@ void PhysicsScene::PublishSleepWake()
 #include "physics/startup_constants.h"
 
 using namespace PhysicsStartup;
-// The named union member supplies a real native view under strict aliasing.
+// The named union member supplies a real 128-bit view under strict aliasing.
 // XYZ are written; the fourth stack lane is transported unchanged.
 struct SceneVectorTemporary {
     union {
@@ -582,7 +582,7 @@ static inline PhysicsVec SceneComponentZ(PhysicsVec value,PhysicsVec scalar){asm
 static inline void ScenePublish(PhysicsVec* address,PhysicsVec value){*(volatile PhysicsVec*)address=value;}
 static inline float SceneExtent(float scale){float result;asm("mul.s %0,%1,%2":"=f"(result):"f"(scale),"f"(1000.f));return result;}
 static inline float SceneNegate(float value){float result;asm volatile("neg.s %0,%1":"=f"(result):"f"(value));return result;}
-// Unmatched: 19 ordering differences in native Y/Z and store/return scheduling; 256 artificial inputs still disagree on VU outputs.
+// Unmatched: 19 ordering differences in original Y/Z and store/return scheduling; 256 artificial inputs still disagree on VU outputs.
 extern "C" PhysicsSceneSettings* func_0032E048(PhysicsSceneSettings* settings,unsigned groups,unsigned instances,unsigned pairs,unsigned unknown,unsigned joints,float scale){
  PhysicsVec highX,lowX,px,py,highY,nx,ny,nz,lowY,pz;
  float extent=SceneExtent(scale);

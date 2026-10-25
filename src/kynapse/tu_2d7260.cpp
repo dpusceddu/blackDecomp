@@ -151,7 +151,7 @@ void WanderAgent::SetType(int id) {
 }
 }
 
-// Native virtual-entry layout is verified; unused slot identities remain unknown.
+// Virtual-entry layout is verified; unused slot identities remain unknown.
 extern "C" {
 void func_003897C8();int func_002D7558(void*,int);int func_002D76A0(Kaim::WanderAgent*,void*);void func_002D75B0();
 void func_0038BB28();void func_00389818();void func_002D7748();void func_002D7308();
@@ -163,7 +163,7 @@ WanderVirtualEntry Wander_VirtualEntries[11] __attribute__((section(".data.wande
 };
 }
 
-// Original image labels alias this native registration storage, including its table pointer.
+// Original image labels alias this registration storage, including its table pointer.
 extern "C" {WanderRegistrationStorage Wander_RegistrationStorage __attribute__((aligned(8)));}
 extern "C" {
 void func_002D7930() {func_002D74A0(1,0xFFFF);}

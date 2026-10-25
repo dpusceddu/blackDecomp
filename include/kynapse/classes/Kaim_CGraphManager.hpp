@@ -28,9 +28,9 @@ struct Kaim_CGraphManager {
     unsigned char Function_002F2660(void * argument0);
     // 0x002F2E88: UNVERIFIED signature (src/kynapse/graph_manager.cpp).
     unsigned char Function_002F2E88(void * argument0);
-    // 0x0038AED8: UNVERIFIED signature (src/kynapse/inline/small_misc_38aed8.cpp).
+    // 0x0038AED8: UNVERIFIED signature (src/kynapse/inline/global_accessors_38aed8.cpp).
     void Function_0038AED8();
-    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/inline/small_misc_38e7b8.cpp).
+    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/inline/global_accessors_38e7b8.cpp).
     void Function_0038E7B8();
     // 0x00390CE8: UNVERIFIED signature (src/kynapse/inline/class_info_390ce8.cpp).
     void * Function_00390CE8();

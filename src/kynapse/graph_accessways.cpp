@@ -39,7 +39,7 @@ int CAccessWaysData::Build()
 
 #ifdef NON_MATCHING
 extern char D_00407D50[];
-// Unmatched: header/read guards and native short-conversion helpers differ.
+// Unmatched: header/read guards and original short-conversion helpers differ.
 int CAccessWaysData::Load(const void* resource)
 {
     char header[64];
@@ -93,7 +93,7 @@ int CAccessWaysData::Load(const void* resource)
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FCB50);
 #endif
 #ifdef NON_MATCHING
-// Unmatched: native short conversion and read-count lifetimes differ.
+// Unmatched: original short conversion and read-count lifetimes differ.
 int CAccessWaysData::LoadFile(const void *resource){
  void *file=AccessFile.open(resource,"rb");if(!file)return false;
  char header[64];unsigned int version;

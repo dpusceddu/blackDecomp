@@ -20,7 +20,7 @@ void FrontendMenuState::Initialize() {
 }
 
 #ifdef NON_MATCHING
-// Unmatched: native state/callback lifetimes and branch scheduling.
+// Unmatched: original state/callback lifetimes and branch scheduling.
 #include "game/frontend_resources.hpp"
 struct MenuMovie {
   const char *format;
@@ -423,7 +423,7 @@ int FrontendMenuState::Enter() {
 #endif
 
 #ifdef NON_MATCHING
-// Unmatched: native state/callback lifetimes and branch scheduling.
+// Unmatched: original state/callback lifetimes and branch scheduling.
 #include "game/frontend_resources.hpp"
 struct MenuMovie {
   const char *format;

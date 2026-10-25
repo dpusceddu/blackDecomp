@@ -53,7 +53,7 @@ struct PointCoreShape {
 extern "C" void func_0033DA88() {}
 extern "C" int func_0033DA90() { return 1; }
 
-// Unmatched: 0033DA98 body is exact; native section is eight tail padding bytes short.
+// Unmatched: 0033DA98 body is exact; original section is eight tail padding bytes short.
 #ifdef BLACK_NONMATCHING
 int PointCoreShape::GetPointCore(void*, void*, PointCoreFeature* feature) const
 {

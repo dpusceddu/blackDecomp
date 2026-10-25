@@ -2,7 +2,7 @@
 #define BLACK_APT_POOL_HPP
 // PS2 field-derived pool helpers; unverified until a matching consumer uses them.
 #include "apt/apt_value.hpp"
-namespace AptPS2 {
+namespace AptViews {
 struct PropertySpec { int unknown; int code; };
 struct Token { unsigned short refs,hash,length,pad;char text[1]; };
 extern "C" void func_00387328(void*,int);

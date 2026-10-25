@@ -2,11 +2,11 @@
 
 #ifdef NON_MATCHING
 #include "game/effects/runtime.hpp"
-// Mod effect queues claimed before native reconstruction.
+// Effect queues.
 #endif
 
 #ifdef NON_MATCHING
-// Unmatched: actor attachment and matrix operator context; native allocation and branch order.
+// Unmatched: actor attachment and matrix operator context; original allocation and branch order.
 #include "game/effects/runtime.hpp"
 #include "game/effects/vu_math.h"
 using Effects::Matrix;

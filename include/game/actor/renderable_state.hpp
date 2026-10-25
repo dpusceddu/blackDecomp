@@ -1,4 +1,4 @@
-// Partial native PS2 view; semantic class identity and complete allocation remain unverified.
+// Partial PS2 view; semantic class identity and complete allocation remain unverified.
 #ifndef BLACK_ACTOR_RENDERABLE_STATE_HPP
 #define BLACK_ACTOR_RENDERABLE_STATE_HPP
 #include "ps2/vu0.hpp"

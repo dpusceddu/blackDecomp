@@ -2,7 +2,7 @@
 
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
-// Unmatched: 10 instruction differences after native layout, argument-bank and helper probes.
+// Unmatched: 10 instruction differences after original layout, argument-bank and helper probes.
 using namespace Graphics;
 bool PadBackend::Attach(Controller *controller,unsigned port) {
     bool valid=controller!=0;
@@ -19,7 +19,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026CA98);
 
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
-// Unmatched: 12 instruction differences after native layout, argument-bank and helper probes.
+// Unmatched: 12 instruction differences after original layout, argument-bank and helper probes.
 using namespace Graphics;
 void PadBackend::Detach(Controller *controller,unsigned port) {
     bool valid=controller!=0;
@@ -32,7 +32,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026CB38);
 
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
-// Unmatched: 2 instruction differences after native layout, argument-bank and helper probes.
+// Unmatched: 2 instruction differences after original layout, argument-bank and helper probes.
 extern "C" {
 void *func_0035C6EC(void *,int,unsigned int);
 int func_0029B558();

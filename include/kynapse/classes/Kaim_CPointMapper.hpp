@@ -38,13 +38,13 @@ struct Kaim_CPointMapper {
     int Function_002DC8A0(signed char * argument0, void * argument1);
     // 0x002DC930: UNVERIFIED signature (src/kynapse/behaviors_pointmapper.cpp).
     int Function_002DC930(void * argument0, unsigned int argument1, unsigned int * argument2);
-    // 0x0038AED8: UNVERIFIED signature (src/kynapse/inline/small_misc_38aed8.cpp).
+    // 0x0038AED8: UNVERIFIED signature (src/kynapse/inline/global_accessors_38aed8.cpp).
     void Function_0038AED8();
     // 0x0038B140: UNVERIFIED signature (src/kynapse/inline/class_info_38b140.cpp).
     void * Function_0038B140();
     // 0x0038E768: UNVERIFIED signature (src/kynapse/inline/graph_cpointmapper.cpp).
     int Function_0038E768(void * argument0);
-    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/inline/small_misc_38e7b8.cpp).
+    // 0x0038E7B8: UNVERIFIED signature (src/kynapse/inline/global_accessors_38e7b8.cpp).
     void Function_0038E7B8();
 
     // Vtable 0x003E6438; vptr field offset unknown; RTTI header.

@@ -5,13 +5,13 @@ const char SteeringClassName[] __asm__("D_00408630") = "CRepulsorDynamicAvoidanc
 const char RootTypeName[] __asm__("D_00408650") = "Q24Kaim7CObject";
 const char IteratorTypeName[] __asm__("D_00408660") = "Q34Kaimt8CVarList1ZPQ24Kaim7CEntity9CIterator";
 struct SteeringRegistrationState;
-struct NativeVirtualTable;
+struct VirtualTable;
 typedef void* (*SteeringFactory)(int);
 extern void* func_0030D0E0(void*,const char*,SteeringFactory);
 extern struct SteeringRegistrationState D_00455AD0;
 extern void* func_00305538(int);
-extern const struct NativeVirtualTable* D_00455BE0;
-extern const struct NativeVirtualTable D_003F07A0,D_003E0040;
+extern const struct VirtualTable* D_00455BE0;
+extern const struct VirtualTable D_003F07A0,D_003E0040;
 extern void (*D_003C87E0)(void *);
 
 /* Register the factory during initialization, or restore its base class table. */

@@ -201,7 +201,7 @@ mangled name of a function it compiles), in splat's `symbol_addrs` form. There a
   name the source uses without defining. Linking depends on them, so `func_XXXXXXXX` stays the name of everything else and
   assembly references keep working.
 - **Aliases** (`GameObjectManager_FindByName = 0x129160; // type:func alias`, `REG_GS_CSR = 0x12001000; // type:data alias`):
-  readable working names, 268 for functions and 174 for data (hardware registers and the gp value). An alias never defines or binds a symbol and is not
+  readable working names, 269 for functions and 174 for data (hardware registers and the gp value). An alias never defines or binds a symbol and is not
   an original symbol; `tools/build/splits.py` keeps aliases apart from the bound names, so adding or changing one cannot change the
   build. Tools use them to label functions (`tus.py`, `next.py`). To give a
   function a real name, rename its definition in the source and add a bound-name line as above, not an alias.

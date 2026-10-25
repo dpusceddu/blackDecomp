@@ -59,7 +59,7 @@ static inline void IdentityXYZ(Matrix &matrix)
     matrix.row[3] = d;
 }
 
-// Remaining views are PS2 instruction evidence only. No native source control
+// Remaining views are PS2 instruction evidence only. No matched source
 // yet proves these semantic names, original classes or complete allocations.
 struct MuzzleConfig {
     unsigned char unknown00[0x20];

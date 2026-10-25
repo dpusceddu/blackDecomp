@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #ifdef NON_MATCHING
-// Unmatched: native receiver and iterator/store lifetimes remain inexact.
+// Unmatched: original receiver and iterator/store lifetimes remain inexact.
 #include "game/effects/runtime.hpp"
 #include "game/effects/geometry.h"
 #include "game/effects/pool.h"
@@ -79,7 +79,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001B7B80);
 #endif
 
 #ifdef NON_MATCHING
-// Unmatched: native receiver and iterator/store lifetimes remain inexact.
+// Unmatched: original receiver and iterator/store lifetimes remain inexact.
 #include "game/effects/runtime.hpp"
 #include "game/effects/geometry.h"
 #include "game/effects/pool.h"

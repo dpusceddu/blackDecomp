@@ -2,7 +2,7 @@
 
 #ifdef NON_MATCHING
 #include "apt/apt_pair.hpp"
-using namespace AptPS2;
+using namespace AptViews;
 // Unmatched: pooled text construction and named-property branch lifetimes.
 Value* TextPair::Read(int unused,Token** name)
 {
@@ -23,7 +23,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002470D0);
 
 #ifdef NON_MATCHING
 #include "apt/apt_pair.hpp"
-using namespace AptPS2;
+using namespace AptViews;
 // Unmatched: named string-property temporary and shared cleanup block.
 int TextPair::Write(int unused,Token** name,Value* incoming)
 {
@@ -41,7 +41,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00247388);
 
 #ifdef NON_MATCHING
 #include "apt/apt_pair.hpp"
-using namespace AptPS2;
+using namespace AptViews;
 // Unmatched: typed string destruction and deleting-destructor convention.
 void TextPair::Destroy(int flags)
 {

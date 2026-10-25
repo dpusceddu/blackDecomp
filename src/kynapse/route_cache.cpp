@@ -1,6 +1,6 @@
 #include "include_asm.h"
 
-#include "kynapse/batch10.hpp"
+#include "kynapse/type_registry.hpp"
 
 void CreatableCache::Select(TypeInfo* type)
 {

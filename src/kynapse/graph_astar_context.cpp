@@ -64,7 +64,7 @@ int Kaim::CAstarData::Init(ChildBuffers *config) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002FDA40);
 #endif
 #ifdef NON_MATCHING
-// Unmatched: resource stream loop scheduling and inline native-word conversion.
+// Unmatched: resource stream loop scheduling and inline original-word conversion.
 bool Kaim::CAstarData::Load(const void *resource) {
     FileService *files = D_003C9ED4->files;
     if (!files || !files->Exists(resource))

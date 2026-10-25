@@ -29,11 +29,11 @@ PositionResult ProjectOntoSegment(const MovementModeBase* mode, PositionArg star
 // Unmatched: 0x1917a0 VU normalization, heading helpers and FPU temporary lifetimes.
 // Unmatched: 0x191a28 VU lane update and scalar spill ordering.
 // Unmatched: 0x191aa0 VU in-place lane updates and argument allocation.
-// Unmatched: 0x191c80 native reset helper argument scheduling.
+// Unmatched: 0x191c80 original reset helper argument scheduling.
 // Unmatched: 0x1921d8 controller publication lvalue and store scheduling.
 // Unmatched: 0x192380 callback selection and pointer allocation.
-// Unmatched: 0x192470 native request helper and phase lifetimes.
-// Unmatched: 0x192698 native follower state and vector temporary context.
+// Unmatched: 0x192470 original request helper and phase lifetimes.
+// Unmatched: 0x192698 original follower state and vector temporary context.
 // Unmatched: 0x192a78 request ownership and follower field allocation.
 // Unmatched: 0x192d48 point equality comparison operand scheduling.
 // Unmatched: 0x192eb0 callback ABI and raised-segment helper context.

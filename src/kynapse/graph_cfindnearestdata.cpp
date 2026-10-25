@@ -4,7 +4,7 @@
 
 #ifdef NON_MATCHING
 // Ported from an unpublished companion project.
-#include "kynapse/buffers3.hpp"
+#include "kynapse/bound_buffers.hpp"
 
 // /SLUS_213.76 0x2eef88
 ObjectBase* CreateBoundBuffers(BufferOwner* bound)
@@ -19,7 +19,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EEF88);
 extern const char D_00407268[];
 extern const int D_00407284;
 extern const char D_00407228[];
-inline void NativeWord(int *p) { *p = *p; }
+inline void RewriteWord(int *p) { *p = *p; }
 struct RawGraphFileHooks {
  char unknown00[0x54];
  void *(*open)(const void *,const char *);
@@ -66,10 +66,10 @@ int Kaim::CFindNearestData::Load(const void *path) {
  if(func_00360838(D_00407268,header) || version!=1)goto fail;
  {int bytes=count*12;
  if(files->Read(path,order,bytes)!=bytes)goto fail;
- for(int i=0;i<count*3;++i)NativeWord(&order[i]);
+ for(int i=0;i<count*3;++i)RewriteWord(&order[i]);
  bytes=count*12;
  if(files->Read(path,rank,bytes)!=bytes)goto fail;
- for(int i=0;i<count*3;++i)NativeWord(&rank[i]);}
+ for(int i=0;i<count*3;++i)RewriteWord(&rank[i]);}
  files->Close(path);return 1;
  fail: files->Close(path);return 0;
 }

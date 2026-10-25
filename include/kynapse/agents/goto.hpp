@@ -1,4 +1,4 @@
-// PS2 GotoAgent receiver offsets and native virtual interfaces.
+// PS2 GotoAgent receiver offsets and virtual interfaces.
 #ifndef BLACK_CONTEXT_BEHAVIORS_GOTO_HPP
 #define BLACK_CONTEXT_BEHAVIORS_GOTO_HPP
 #include "kynapse/alloc.hpp"

@@ -2,7 +2,7 @@
 #define BLACK_MOD_CAMERA_LOCAL_POSE_HPP
 #include "game/camera/motion.hpp"
 namespace Camera {
-/* Partial animation access chain used by the native local-pose consumer.
+/* Partial animation access chain used by the local-pose consumer.
    Names are descriptive; the complete animation class identity is unknown. */
 struct LocalPoseDefinition { unsigned char unknown00[0x34]; int rootIndex; };
 struct LocalPoseAnimation { unsigned char unknown00[0x50]; LocalPoseDefinition *definition; };

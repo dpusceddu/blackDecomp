@@ -1,4 +1,4 @@
-// Partial native PS2 region view; semantic class identity/inheritance and allocation remain unverified.
+// Partial PS2 region view; semantic class identity/inheritance and allocation remain unverified.
 // Exact Initialize verifies config20/21/22 and receiver0/114/118/11C/11D/120/124.
 // Exact RenderBox verifies receiverD0/140/150 and three128-bit draw arguments.
 #ifndef BLACK_ACTOR_REGION_STATE_HPP

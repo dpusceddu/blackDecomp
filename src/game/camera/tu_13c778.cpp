@@ -1,7 +1,7 @@
 #include "include_asm.h"
 
 #ifdef NON_MATCHING
-// Unmatched: native damage retains15 differing instructions from vector spill/accessor scheduling.
+// Unmatched: original damage retains15 differing instructions from vector spill/accessor scheduling.
 #include "game/camera/vitals.hpp"
 namespace Camera {
 extern "C" {extern void *D_0040F51C,*D_0040F4BC;void func_001F28D0(void*,int,DamagePoint2*);void func_00110698(float,void*,int,int);}

@@ -7,7 +7,7 @@
 #include "kynapse/property.hpp"
 extern "C" char *func_0035D1A0(char*,const char*,unsigned int);
 extern "C" int func_0035E750(const char*);
-// The matched Configure consumer verifies the native software-double ABI.
+// The matched Configure consumer verifies the software-double ABI of the executable.
 extern "C" double GraphAtof(const char*) __asm__("func_0035E730");
 extern "C" bool func_002ECB80(unsigned int);
 namespace Kaim {

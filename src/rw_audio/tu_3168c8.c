@@ -1166,7 +1166,7 @@ const AudioPropertyGuid D_004096B0={0xfc94f894,0x672f,0x4db2,{0xa4,0xb2,0xba,0x8
 const AudioPropertyGuid D_004096C0={0x81f44747,0xb3f3,0x438f,{0x94,0xe4,0x7b,0x90,0x20,0x23,0x94,0xd4}};
 /* 7f2a948f-cabf-4d7d-855c-f1e4a1769ba4 */
 const AudioPropertyGuid D_004096D0={0x7f2a948f,0xcabf,0x4d7d,{0x85,0x5c,0xf1,0xe4,0xa1,0x76,0x9b,0xa4}};
-/* Typed native storage; the existing registration API uses its legacy20-byte view. */
+/* Typed storage; the existing registration API uses its legacy20-byte view. */
 typedef struct AudioPropertyEntry{const AudioPropertyGuid *id;u32 field4,state;const AudioPropertyGuid *value_type;u32 count;}AudioPropertyEntry;
 typedef void*(*AudioPropertyHandler)(void*,u32,void*);
 typedef struct AudioClassPropertyEntry{AudioPropertyEntry property;AudioPropertyHandler handler;}AudioClassPropertyEntry;
@@ -1259,7 +1259,7 @@ typedef struct AudioPlaybackProperties {
     u16 input_count,output_count;
     AudioClassPropertyEntry *input,*output;
 } AudioPlaybackProperties;
-/* Native class pool uses92bytes; handler signatures remain opaque here. */
+/* The class pool uses 92 bytes; handler signatures remain opaque here. */
 struct PlaybackClass {
     const AudioPropertyGuid *identifier;
     const char *name;

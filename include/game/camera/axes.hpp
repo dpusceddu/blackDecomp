@@ -3,7 +3,7 @@
 // full hierarchies and allocation extents remain unverified.
 #ifndef BLACK_ACTOR_INPUT_AXIS_HPP
 #define BLACK_ACTOR_INPUT_AXIS_HPP
-namespace ActorInventory7 {
+namespace CameraInputViews {
 struct InputAxes {
  char prefix[0x90];float lateral,forward;void*input;
  void Update();

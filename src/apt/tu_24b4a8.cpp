@@ -4,8 +4,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024B4A8);
 
 #ifdef NON_MATCHING
 #include "apt/apt_pool.hpp"
-using namespace AptPS2;
-// Unmatched: native pooled-value helpers, string cleanup and switch allocation.
+using namespace AptViews;
+// Unmatched: original pooled-value helpers, string cleanup and switch allocation.
 Value* PropertyValue::Read(int present,void* nameHandle) {
  PropertySpec* spec=0;
  if(present) {Token* token=*(Token**)nameHandle;spec=func_0024B4A8(token->text,token->hash);}
@@ -39,8 +39,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0024B618);
 
 #ifdef NON_MATCHING
 #include "apt/apt_value.hpp"
-using namespace AptPS2;
-namespace AptPS2 {
+using namespace AptViews;
+namespace AptViews {
 struct Token { short refs;unsigned short unknown,length;short unknown6;char text[1]; };
 extern "C" {
  extern Token D_003BFAF8;

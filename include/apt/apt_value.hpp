@@ -3,7 +3,7 @@
 // PS2 APT prefix views; historical class names and complete sizes are unverified.
 // Exact Dispose/Cleanup consumers verify the +4 vptr and slots 10, 11 and 14.
 // SetEnabled verifies its word at +0x1c. Other virtual signatures remain unverified.
-namespace AptPS2 {
+namespace AptViews {
 struct Value {
  int flags;
  virtual void AddRef();

@@ -3,7 +3,7 @@
 #include "game/weapons/instance.hpp"
 #include "game/weapons/shot.h"
 namespace Weapons {
-// Native receiver view. SOURCE controls verify only the fields they consume;
+// Receiver view. Matched functions verify only the fields they consume;
 // the original C++ identity and remaining payload semantics are unverified.
 struct MovingShot {
  Hit query;Position4 endpoint,origin,direction;Instance*weapon;float distance,remaining,speed;signed char flags80;unsigned char unknown81[3];float launchTime;unsigned char active,flags89,flags8a,flags8b,flags8c;unsigned char unknown8d[3];
@@ -17,7 +17,7 @@ struct MovingShot {
  inline Instance*Source(){return (Instance*)weapon;}
  inline Hit&Collision(){return query;}
 };
-typedef char MovingShotNativeStride90[sizeof(MovingShot)==0x90?1:-1];
+typedef char MovingShotStride90[sizeof(MovingShot)==0x90?1:-1];
 // 15CBA0 is the frame tick, not a constructor. It traverses 36 delayed
 // records from+20 and 16 moving records from+6E0. Spawn verifies the latter.
 struct MovingPool {

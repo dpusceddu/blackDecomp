@@ -5,8 +5,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00245838);
 
 #ifdef NON_MATCHING
 #include "apt/apt_function.hpp"
-using namespace AptPS2;
-// Unmatched: native pooled constants and cached function-value constructor lifetimes.
+using namespace AptViews;
+// Unmatched: original pooled constants and cached function-value constructor lifetimes.
 Value* BuiltinValue::Lookup(Value* owner,Token** name)
 {
  PropertySpec* spec=0;

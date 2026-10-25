@@ -1,0 +1,17 @@
+#include "include_asm.h"
+
+// Ported from an unpublished companion project.
+#include "kynapse/bound_buffers.hpp"
+
+// /SLUS_213.76 0x2f0a00
+
+BoundBuffers::BoundBuffers(BufferOwner* bound)
+    : BoundBase(bound)
+{
+    handle = bound->handle;
+    first = 0;
+    second = 0;
+    third = 0;
+    count = 0;
+}
+

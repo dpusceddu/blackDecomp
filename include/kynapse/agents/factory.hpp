@@ -1,4 +1,4 @@
-// Native factory views; class identities and active offsets follow PS2 callers.
+// Factory views; class identities and active offsets follow PS2 callers.
 #ifndef BLACK_CONTEXT_BEHAVIORS_FACTORY_HPP
 #define BLACK_CONTEXT_BEHAVIORS_FACTORY_HPP
 #include "kynapse/alloc.hpp"

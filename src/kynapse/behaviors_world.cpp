@@ -68,7 +68,7 @@ void Engine::RegisterSecond(EntityCallback callback,void* context) {
 // Unmatched: Update retains iterator-return lifetimes and register allocation differences.
 // Unmatched: Register and Unregister retain iterator-copy/destructor scheduling differences.
 // Unmatched: World destructor retains callback-table address scheduling differences.
-// Unmatched: Configure retains native array cleanup, temporary lifetimes and string/data ownership differences.
+// Unmatched: Configure retains original array cleanup, temporary lifetimes and string/data ownership differences.
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_002EA898);

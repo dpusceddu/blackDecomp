@@ -93,7 +93,7 @@ void UnknownVtable_003DC130::Function_001652E0()
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
 using namespace Graphics;
-// Unmatched: 5 instruction differences after native layout, EE clamp and helper-context probes.
+// Unmatched: 5 instruction differences after original layout, EE clamp and helper-context probes.
 void SoundEnvelope::Release()
 {
     state=3;
@@ -110,7 +110,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDD80);
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
 using namespace Graphics;
-// Unmatched: 8 instruction differences after native layout, EE clamp and helper-context probes.
+// Unmatched: 8 instruction differences after original layout, EE clamp and helper-context probes.
 int DestructionEnvelope::Begin(float value,unsigned useEndpoint)
 {
     if(!initialized)func_001ED9C8(this,D_003BDA14,0);
@@ -131,7 +131,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDDE0);
 #include "game/graphics/sound_envelopes.hpp"
 #include "ps2/prelude.h"
 using namespace Graphics;
-// Unmatched: 20 instruction differences after native layout, EE clamp and helper-context probes.
+// Unmatched: 20 instruction differences after original layout, EE clamp and helper-context probes.
 void DestructionEnvelope::Update()
 {
     if(state==1) {
@@ -160,7 +160,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EDE98);
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
 using namespace Graphics;
-// Unmatched: 6 instruction differences after native layout, EE clamp and helper-context probes.
+// Unmatched: 6 instruction differences after original layout, EE clamp and helper-context probes.
 int DestructionEnvelope::Unregister()
 {
     state=0;
@@ -180,7 +180,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE0B0);
 #include "game/graphics/sound_envelopes.hpp"
 #include "ps2/prelude.h"
 using namespace Graphics;
-// Unmatched: 18 instruction differences after native layout, EE clamp and helper-context probes.
+// Unmatched: 18 instruction differences after original layout, EE clamp and helper-context probes.
 extern "C" float D_003BDA0C;
 extern "C" void func_001F07B8(float,void *);
 void TimedEnvelope::Update()
@@ -214,7 +214,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE298);
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
 using namespace Graphics;
-// Unmatched: 20 instruction differences after native layout, EE clamp and helper-context probes.
+// Unmatched: 20 instruction differences after original layout, EE clamp and helper-context probes.
 void LowHealthEnvelope::Reset()
 {
     kind=3;high=24000.0f;low=200.0f;multiplier=1.2f;unknown2c=2.0f;gain=1.0f;
@@ -232,7 +232,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_001EE540);
 #include "game/graphics/sound_envelopes.hpp"
 #include "ps2/prelude.h"
 using namespace Graphics;
-// Unmatched: 27 instruction differences after native layout, EE clamp and helper-context probes.
+// Unmatched: 27 instruction differences after original layout, EE clamp and helper-context probes.
 void LowHealthEnvelope::Update()
 {
     if(state==1)state=2;else if(state<2)return;else if(state==2){}else if(state==3)goto releaseState;else return;

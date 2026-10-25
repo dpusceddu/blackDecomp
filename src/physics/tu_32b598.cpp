@@ -66,7 +66,7 @@ extern "C" void func_0032B598(int initialize, int priority)
         if (initialize) {
             func_00100228(&D_0040E828);
             func_00100258(&D_0040E830);
-            // Volatile XYZ writes and a native volatile 128-bit read preserve
+            // Volatile XYZ writes and a volatile 128-bit read preserve
             // each temporary's unassigned fourth lane and its copy lifetime.
             ConstantTemporary a(1.5707963705062866f, -0.15915493667125702f, 12582912.0f);
             EeS128 qa = (EeS128)a;

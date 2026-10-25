@@ -25,17 +25,17 @@ u8* D_003D20D8 __attribute__((section(".data.pose_cache"))) = 0;
 s32 D_003D20DC __attribute__((section(".data.pose_cache"))) = 64;
 s32 D_003D20E0 __attribute__((section(".data.pose_cache"))) = -1;
 s32 D_0046A500;
-unsigned char poseCacheStorage[sizeof(ArmsPose::Slot)*28]
+unsigned char poseCacheStorage[sizeof(PoseViews::Slot)*28]
     __asm__("D_0045F0C0") __attribute__((aligned(16)));
 
-namespace ArmsPose { extern Skeleton* GetSkeleton(Operations*) __asm__("func_003489A8");
+namespace PoseViews { extern Skeleton* GetSkeleton(Operations*) __asm__("func_003489A8");
 extern void SampleBone(Pose*, const void*, int, float) __asm__("func_00345480"); }
 
-// Branch-local native captures preserve independent rotation/position lifetimes.
+// Branch-local quadword captures preserve independent rotation/position lifetimes.
 // Float aliases at the public pose boundary retain the original load scheduling.
 extern f32* SelectCopy(f32*,f32*) __asm__("func_00344020");
 
-namespace ArmsPose {
+namespace PoseViews {
 
 static inline void BlendCopyBone(Pose* destination,const Pose* source) {
     destination->rotation=source->rotation;
@@ -43,7 +43,7 @@ static inline void BlendCopyBone(Pose* destination,const Pose* source) {
 }
 
 }
-namespace ArmsPose {
+namespace PoseViews {
 // Fixed VF9/10 translation family observed in both loops. All XYZW lanes
 // participate; MAC/status are overwritten, ACC/Q/I/R/VI/clip are preserved.
 static inline void ComposeAddPositionXYZW(void* out,const void* first,const void* second) {
@@ -61,14 +61,14 @@ static inline void ComposeBone(Pose* out,const Pose* first,const Pose* second) {
 }
 
 }
-namespace ArmsPose {
+namespace PoseViews {
 static inline void DifferenceSubtractPositionXYZW(void* out,const void* first,const void* second) {
     asm volatile("lqc2 vf9,0(%0)\n\tlqc2 vf10,0(%1)\n\tvsub.xyzw vf10,vf9,vf10\n\tsqc2 vf10,0(%2)"
                  : : "r"(first),"r"(second),"r"(out):"vf9","vf10","memory");
 }
 static inline int& DifferenceUsedCount(){return D_0046A500;}
 static inline void DifferenceCopyBone(Pose* out,const Pose* source){out->rotation=source->rotation;out->position=source->position;}
-// Inverse(second) * first uses a native quadword scratch, preserving the
+// Inverse(second) * first uses a quadword scratch, preserving the
 // observed FPR readback and VU store/load boundary. The complete operation
 // overwrites VF1..4, VF9/10, VF31.x, ACC, Q and arithmetic MAC/status flags.
 // T0 is the observed transfer scratch; pointer/FPR operands allocate normally.
@@ -106,7 +106,7 @@ static inline void DifferenceBone(Pose* out,const Pose* first,const Pose* second
 }
 
 }
-namespace ArmsPose {
+namespace PoseViews {
 static inline int& WeightUsedCount(){return D_0046A500;}
 static inline float WeightZero(){return 0.0f;}
 static inline void WeightCopyBone(Pose* out,const Pose* source){out->rotation=source->rotation;out->position=source->position;}
@@ -125,7 +125,7 @@ static inline void WeightBone(Pose* out,const Pose* source,const void* identity,
 }
 
 }
-namespace ArmsPose {
+namespace PoseViews {
 static inline int& ClipBuildUsedCount(){return D_0046A500;}
 struct TrackSuffix {int frames,skeleton,format;void* tracks;};
 extern const TrackSuffix* ClipFrameSlot(BkSourceClipPS2*) __asm__("func_003487E8");
@@ -133,12 +133,12 @@ extern int CacheReserve(void*,unsigned,void*,int,int,Pose**) __asm__("func_00342
 extern void* CurrentCache __asm__("D_003F15B4");
 extern float WrapFrame(float,float) __asm__("func_0034B498");
 extern void SampleMasked(Pose*,const void*,int,int,float) __asm__("func_003452B0");
-// Raw rotation transport uses the observed native quadword macro. XYZ retains
+// Raw rotation transport uses the observed quadword macro. XYZ retains
 // its separate64+32 bit reads; the fourth source translation lane is not copied.
 static inline void ClipBuildCopyRotation(void* out,const void* source) {
     asm volatile("lq $8,0(%0)\n\tsq $8,0(%1)" : : "r"(source),"r"(out):"$8","memory");
 }
-// Copy the bone following each header. Native loads and precise quadword stores
+// Copy the bone following each header. Quadword loads and precise quadword stores
 // preserve the real header bases; scratch registers allocate normally.
 static inline void ClipBuildCopyHeader(const Pose* in,Pose* out) {
     s128 rotation=in[1].rotation;
@@ -158,7 +158,7 @@ static inline void ClipBuildIdentity(float* lanes) {
 }
 
 }
-namespace ArmsPose {
+namespace PoseViews {
 static inline int& OverlayUsedCount(){return D_0046A500;}
 
 }
@@ -186,15 +186,15 @@ extern f32 * func_00344020(f32 *, f32 *) __asm__("func_00344020");
 
 }
 namespace DiscreteViews { f32 * func_00347280(s32 *arg0, Recovered_AnimationGraphNode *arg1, Recovered_AnimationParameters *arg2, u32 arg3, f32 fparg0, f32 fparg1, f32 fparg2, f32 fparg3) __asm__("func_00347280"); }
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_003461D0"))) void Cache::Enable(s8 enabled) { BkPoseCacheEnablePS2(enabled); }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_003461E0"))) void Cache::Clear() { BkPoseCacheClearPS2(); }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_003461F0"))) Pose* Cache::Allocate()
 {
     if (D_0046A500 >= D_003D20D4) return 0;
@@ -202,7 +202,7 @@ __attribute__((section(".text.func_003461F0"))) Pose* Cache::Allocate()
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 // The next output cursor is the consumed result of each complete bone operation.
 static inline Pose* BlendCopyAdvance(Pose* out,const Pose* source) {
     BlendCopyBone(out,source);
@@ -219,7 +219,7 @@ static inline Pose* BlendBoneAdvance(Pose* out,const Pose* first,const Pose* sec
     return out+1;
 }
 
-// Unmatched: two reversed input-setup instructions and five cursor-step instructions; native unwind exact.
+// Unmatched: two reversed input-setup instructions and five cursor-step instructions; original unwind exact.
 __attribute__((section(".text.func_00346230"))) Pose* Operations::Blend(Pose* first,Pose* second,unsigned flags,float weight) {
     if(!first || !second)return 0;
     int used=D_0046A500;
@@ -319,7 +319,7 @@ extern "C" f32 * func_00346510(void *owner, f32 *first, f32 *second, s32 flags) 
     return out;
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 // Unmatched: first/second bone-address setup ordering (2 instructions).
 __attribute__((section(".text.func_00346668"))) Pose* Operations::Compose(Pose* first,Pose* second,unsigned flags) {
     if(!first || !second)return 0;
@@ -359,7 +359,7 @@ __attribute__((section(".text.func_00346668"))) Pose* Operations::Compose(Pose* 
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_00346940"))) Pose* Operations::Difference(Pose* first,Pose* second,unsigned flags) {
     if(!first || !second)return 0;
     int used=DifferenceUsedCount();
@@ -399,7 +399,7 @@ __attribute__((section(".text.func_00346940"))) Pose* Operations::Difference(Pos
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_00346CB0"))) Pose* Operations::Weight(Pose* pose,unsigned flags,float strength) {
     if(!pose)return 0;
     int used=WeightUsedCount();
@@ -445,7 +445,7 @@ __attribute__((section(".text.func_00346CB0"))) Pose* Operations::Weight(Pose* p
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_00346F38"))) void Cache::ForceBone(int index) { BkPoseCacheForceBonePS2(index); }
 }
 
@@ -453,7 +453,7 @@ extern "C" __attribute__((section(".text.func_00346F48"))) void func_00346F48(vo
     D_003D20E0 = -1;
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 extern "C" __attribute__((section(".text.func_00346F58"))) Pose* func_00346F58(Operations* owner,BkSourceClipPS2* clip,Skeleton* skeleton,float frame,unsigned flags) {
     const TrackSuffix* source=ClipFrameSlot(clip);
     if(!source || !skeleton)return 0;
@@ -510,7 +510,7 @@ extern "C" __attribute__((section(".text.func_00346F58"))) Pose* func_00346F58(O
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_00347238"))) float* GraphOperations::Scaled(void* owner, AnimationGraphNode* node,
                                AnimationParameters* parameters, unsigned flags,
                                float current, float previous, float factor,
@@ -580,7 +580,7 @@ extern "C" __attribute__((section(".text.func_00347430"))) void *func_00347430(Q
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_003474F8"))) Pose* ClipOperations::Default(Operations* owner, BkSourceClipPS2* clip,
                               unsigned flags, float frame)
 {
@@ -592,7 +592,7 @@ __attribute__((section(".text.func_003474F8"))) Pose* ClipOperations::Default(Op
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_00347558"))) Pose* ClipOperations::Root(Pose* out, Operations* owner, BkSourceClipPS2* clip,
                            unsigned flags, int index, float time)
 {
@@ -625,7 +625,7 @@ __attribute__((section(".text.func_00347558"))) Pose* ClipOperations::Root(Pose*
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_00347600"))) Pose* Operations::Overlay(Pose* first, Pose* second, float blend)
 {
     if (!first || !second) return 0;
@@ -668,14 +668,14 @@ __attribute__((section(".text.func_00347600"))) Pose* Operations::Overlay(Pose* 
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_00347738"))) void Cache::Construct(int initialize, int priority)
 {
     if (priority == 0xffff && initialize) new(slots) Slot[28];
 }
 }
 
-namespace ArmsPose {
+namespace PoseViews {
 __attribute__((section(".text.func_003477D0"))) void Cache::Initialize() { Construct(1, 0xffff); }
 }
 

@@ -63,7 +63,7 @@ extern Descriptor D_003D1368, D_003D1468, D_003D1430, D_003D14A0, D_003D13A0;
 }
 
 #ifdef BLACK_NONMATCHING
-// Xbox shape initialization, with PS2 offsets and native128 identity transport.
+// Shape initialization with PS2 offsets and 128-bit identity transport.
 static inline Shape* InitializeShape(Holder* holder, unsigned int type)
 {
     Shape* shape = holder->shape;
@@ -123,7 +123,7 @@ ConstantQuad D_0045CE50;
 ConstantQuad D_0045CE60;
 }
 
-// Native pointer-to-member layout control; callback contracts remain opaque.
+// Pointer-to-member layout control; callback contracts remain opaque.
 struct OpaqueShape {
  int F_0033B8D0(...) const __asm__("func_0033B8D0");
  int F_0033BBD8(...) const __asm__("func_0033BBD8");
@@ -151,8 +151,8 @@ struct OpaqueShape {
 };
 typedef int (OpaqueShape::*OpaqueMethod)(...) const;
 struct Descriptor { unsigned kind; OpaqueMethod bounds,query,core,support,last; const char* name; unsigned reserved0,reserved1; };
-typedef char NativeMethodIs8[sizeof(OpaqueMethod)==8?1:-1];
-typedef char NativeDescriptorIs56[sizeof(Descriptor)==56?1:-1];
+typedef char OpaqueMethodIs8[sizeof(OpaqueMethod)==8?1:-1];
+typedef char DescriptorIs56[sizeof(Descriptor)==56?1:-1];
 extern "C" {
 extern const char D_0040A4C0[];
 extern const char D_0040A4E0[];

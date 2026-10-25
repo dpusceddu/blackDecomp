@@ -65,7 +65,7 @@ unsigned char Steering::PredictContacts(const Vec3* goal) {
     for(Kaim::ActorIterator it((Kaim::ListNode<Kaim::Actor*>*)world->entities->head);it.node;++it) {
         Entity* other=(Entity*)it.node->value;
         if(other==self)continue;
-        // Preserve the native global-mask then entity-flag observation order.
+        // Preserve the original global-mask then entity-flag observation order.
         unsigned mask=ContactMaskDefinition().flags;
         unsigned entityFlags=((const volatile Entity*)other)->flags;
         if(!(entityFlags&mask))continue;
@@ -193,7 +193,7 @@ void Steering::GenerateMove(const Vec3* goal,Movement* move)
 }
 }
 
-// Native virtual-entry layout is verified; inherited callback identities remain unknown.
+// Virtual-entry layout is verified; inherited callback identities remain unknown.
 struct SteeringVirtualEntry {short adjustment;unsigned short reserved;void (*function)();};
 struct __attribute__((aligned(8))) SteeringRegistrationStorage {
     unsigned char unverified00[0x110];SteeringVirtualEntry* classTable;

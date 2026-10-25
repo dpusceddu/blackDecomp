@@ -8,7 +8,7 @@ static inline void BkEffectRandomSeedPS2(BkEffectRandomStatePS2 *random, EeU32 s
     random->accumulator=seed;
     random->state=~seed;
 }
-/* Arithmetic instruction recipe. The native state-member form in random.hpp
+/* Arithmetic instruction recipe. The original state-member form in random.hpp
    is exact at1BD508/1BCDF8; this local-return C form has a different unverified
    return/allocation shape and is retained independently. */
 static inline EeU32 BkEffectRandomSignedStepPS2(BkEffectRandomStatePS2 *random)

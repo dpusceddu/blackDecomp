@@ -167,7 +167,7 @@ def variants(label, source, flags):
         yield 'independent-partner-index', source.replace(old, 'pairNodes[i].partner = &pairNodes[i - (i & 1) * 2 + 1];'), flags
     elif label == 'root-quaternion-view-lifetime':
         start = source.index('Pose* Operations::Weight(')
-        end = source.index('\nnamespace ArmsPose', start)
+        end = source.index('\nnamespace PoseViews', start)
         body = source[start:end]
         view = '    float* rootRotation=out->quaternion;\n'
         operation = '        Ps2Math::AnimationMicro::Slerp(rootRotation,identity,pose,strength);'
@@ -190,7 +190,7 @@ def variants(label, source, flags):
         yield 'output-position-capture-first', source[:start] + changed + source[end:], flags
     elif label == 'overlay-iterator-lifetimes':
         start = source.index('Pose* Operations::Overlay(')
-        end = source.index('\nnamespace ArmsPose', start)
+        end = source.index('\nnamespace PoseViews', start)
         body = source[start:end]
         declarations = ('        Pose* outputBone = outputBase;\n'
                         '        Pose* firstBone = firstBase;\n'
@@ -651,7 +651,7 @@ def verify_consumed_next_cursor_native_cfi(directory, builder=False):
         current = helpers.replace('return out+1;', 'return out;')
         changed = source[:start] + current + source[end:]
         start = changed.index('Pose* Operations::Blend(')
-        end = changed.index('\nnamespace ArmsPose', start)
+        end = changed.index('\nnamespace PoseViews', start)
         body = changed[start:end]
         body, count = re.subn(r'result=(Blend(?:Copy|Bone)Advance\([^;\n]+\));',
                               r'result=\1+1;', body)
@@ -661,7 +661,7 @@ def verify_consumed_next_cursor_native_cfi(directory, builder=False):
         split_helpers = helpers.replace('    out->translation[3]=0.0f;\n', '').replace('return out+1;', 'return out;')
         changed = source[:source.index('static inline Pose* BlendCopyAdvance(')] + split_helpers + source[source.index('// Unmatched:', source.index('static inline Pose* BlendCopyAdvance(')):]
         start = changed.index('Pose* Operations::Blend(')
-        end = changed.index('\nnamespace ArmsPose', start)
+        end = changed.index('\nnamespace PoseViews', start)
         body = changed[start:end]
         masked = 'result=BlendCopyAdvance(result,a);\n            }'
         if body.count(masked) != 1:

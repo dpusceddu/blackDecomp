@@ -1,5 +1,5 @@
 // PS2 class view: RTTI and vtable identity are known. Accessed graph offsets
-// agree with the executable; native array initialization is checked against the loaders,
+// agree with the executable; array initialization is checked against the loaders,
 // but their source shape remains UNVERIFIED. Complete size, opaque fields and unused signatures
 // remain UNVERIFIED. This area is owned by the graph code.
 #ifndef BLACK_GRAPH_SPATIAL_HPP
@@ -20,7 +20,7 @@ struct SpatialIndex {
 };
 typedef char SpatialIndexSize[sizeof(SpatialIndex)==4?1:-1];
 struct CSpatialGraph;
-// Trivial node/edge destruction and the native two-node array are exact-backed
+// Trivial node/edge destruction and the two-node array are exact-backed
 // by both graph constructors. Heap-array lifetime wrappers remain UNVERIFIED.
 struct SpatialNode { SpatialIndex id; float x,y,z; CSpatialGraph *graph; SpatialNode():id(-1),graph(0){}  };
 struct SpatialEdge { SpatialIndex index; CSpatialGraph *graph; SpatialEdge():index(-1),graph(0){}  inline SpatialNode *EndNode(); inline SpatialNode *StartNode(); unsigned int GetIndex() __asm__("func_00383D40"); };

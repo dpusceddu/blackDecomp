@@ -8,7 +8,7 @@ struct StartupToken {} __attribute__((aligned(8)));
 struct ConstantQuad { EeS128 value; };
 
 // XYZ are assigned; the original transports the fourth stack lane unchanged.
-// Both volatile scalar writes and the volatile native read preserve EE ordering.
+// Both volatile scalar writes and the volatile 128-bit read preserve EE ordering.
 struct VectorTemporary {
     volatile float x, y, z, unspecifiedW;
     VectorTemporary(float first, float second, float third)

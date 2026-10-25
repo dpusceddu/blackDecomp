@@ -31,7 +31,7 @@ int FrontendMenuState::PrepareExit() {
 }
 
 #ifdef NON_MATCHING
-// Unmatched: native state/callback lifetimes and branch scheduling.
+// Unmatched: original state/callback lifetimes and branch scheduling.
 #include "game/frontend_resources.hpp"
 struct MenuMovie {
   const char *format;

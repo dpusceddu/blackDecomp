@@ -2,7 +2,7 @@
 #include "kynapse/property.hpp"
 #include "kynapse/predicates.hpp"
 // Accessed layout and table entries are verified; original registration type is unknown.
-// Unmatched: native 648-byte unwind needs one shared recipe; callback extent must be 44 bytes, default emits 48.
+// Unmatched: original 648-byte unwind needs one shared recipe; callback extent must be 44 bytes, default emits 48.
 struct FollowerVirtualEntry { short adjustment; unsigned short reserved; void (*function)(); };
 struct __attribute__((aligned(8))) FollowerRegistrationStorage {
     unsigned char unverified00[0x110];
@@ -145,7 +145,7 @@ float func_002D3838(FollowerBehavior::Follower* self) {return self->limit/Follow
 
 }
 
-// Native eight-byte virtual entries; semantic identities of unused slots remain unverified.
+// Eight-byte virtual entries; semantic identities of unused slots remain unverified.
 extern "C" {
 void func_002D35B8();void func_002D35C8();void func_00389480();void func_0038BB28();void func_003894D0();
 void func_002D31F0();void func_002D30A0();void func_002D35D8();void func_002D3610();
@@ -162,6 +162,6 @@ void func_002D3888() {func_002D34C0(1,0xFFFF);}
 void func_002D38A8() {func_002D34C0(0,0xFFFF);}
 }
 
-// Image labels, including the table pointer at +0x110, alias this native storage.
+// Image labels, including the table pointer at +0x110, alias this storage.
 extern "C" {FollowerRegistrationStorage Follower_RegistrationStorage __attribute__((aligned(8)));}
 

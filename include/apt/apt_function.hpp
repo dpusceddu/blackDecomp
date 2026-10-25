@@ -1,8 +1,8 @@
 #ifndef BLACK_APT_FUNCTION_HPP
 #define BLACK_APT_FUNCTION_HPP
-// PS2 field-derived view; native constructor remains unverified.
+// PS2 field-derived view; constructor remains unverified.
 #include "apt/apt_pool.hpp"
-namespace AptPS2 {
+namespace AptViews {
 struct NativeFunction:Value {
  char unknown08[0x14];
  int options;

@@ -81,7 +81,7 @@ struct Kaim_CShooterAgent {
     bool Function_002D7118();
     // 0x00389770: UNVERIFIED signature (src/kynapse/inline/class_info_389770.cpp).
     void * Function_00389770();
-    // 0x0038BB28: UNVERIFIED signature (src/kynapse/inline/small_misc_38bb28.cpp).
+    // 0x0038BB28: UNVERIFIED signature (src/kynapse/inline/global_accessors_38bb28.cpp).
     void Function_0038BB28();
 
     // Vtable 0x003E3888; vptr field offset unknown; RTTI header.

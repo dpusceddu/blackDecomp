@@ -1,7 +1,7 @@
 #ifndef BLACK_APT_PAIR_HPP
 #define BLACK_APT_PAIR_HPP
 #include "apt/apt_function.hpp"
-namespace AptPS2 {
+namespace AptViews {
 extern "C" {
  extern Token D_003BFAF8;
  void func_00250198(void*,Token*,int);

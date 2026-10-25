@@ -18,14 +18,14 @@ void PadBackend::SetFeedback(int enabled){if(enabled!=feedback){Controller **it=
 
 
 #ifdef NON_MATCHING
-// Unmatched: 0x26bcf8 native connected/enable branch-tail and return allocation.
+// Unmatched: 0x26bcf8 original connected/enable branch-tail and return allocation.
 // Unmatched: 0x26bd30 command byte/halfword lifetimes and cached motor flag allocation.
-// Unmatched: 0x26bf60 native scalar return tail keeps product in F0 rather than F12.
+// Unmatched: 0x26bf60 original scalar return tail keeps product in F0 rather than F12.
 // Unmatched: 0x26c798 packed parameter copy, argument width and short-loop/call scheduling.
-// Unmatched: 0x26c8e0 native controller iterator and virtual-call scheduling.
+// Unmatched: 0x26c8e0 original controller iterator and virtual-call scheduling.
 // Unmatched: 0x26ca98 pointer validity predicate and virtual Open allocation.
 // Unmatched: 0x26cb38 ownership predicate and virtual Close allocation.
-// Unmatched: 0x26cba8 native indexed-lvalue base/scale instruction order.
+// Unmatched: 0x26cba8 original indexed-lvalue base/scale instruction order.
 #endif
 
 #ifdef NON_MATCHING
@@ -57,7 +57,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BCF8);
 
 #ifdef NON_MATCHING
 #include "ps2/prelude.h"
-// Unmatched: 13 instruction differences after native layout, argument-bank and helper probes.
+// Unmatched: 13 instruction differences after original layout, argument-bank and helper probes.
 #include "game/camera/pad.hpp"
 extern "C"{
 extern s32 func_0026C9C0(void *, s32);
@@ -116,7 +116,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BD30);
 
 #ifdef NON_MATCHING
 #include "game/camera/pad.hpp"
-// Unmatched: 2 instruction differences after native layout, argument-bank and helper probes.
+// Unmatched: 2 instruction differences after original layout, argument-bank and helper probes.
 using namespace Graphics;
 float Controller::Smooth(float value,float step) {
     float limit=axisLimit;
@@ -141,7 +141,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026BF60);
 
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
-// Unmatched: 27 instruction differences after native layout, argument-bank and helper probes.
+// Unmatched: 27 instruction differences after original layout, argument-bank and helper probes.
 extern "C" {
 void *func_0035C6EC(void *,int,unsigned int);
 int func_0029B558();
@@ -172,7 +172,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_0026C798);
 
 #ifdef NON_MATCHING
 #include "game/camera/pad_backend.hpp"
-// Unmatched: 8 instruction differences after native layout, argument-bank and helper probes.
+// Unmatched: 8 instruction differences after original layout, argument-bank and helper probes.
 using namespace Graphics;
 extern "C" void func_0026CBA8(PadBackend *,int);
 void PadBackend::Poll() {

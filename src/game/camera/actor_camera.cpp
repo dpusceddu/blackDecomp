@@ -82,11 +82,11 @@ void CameraController::Configure(Game::PositionArg a, Game::PositionArg b,
 
 #ifdef NON_MATCHING
 // Unmatched: 0x140e48 scalar-to-VU temporary allocated V1 instead of final argument A1.
-// Unmatched: 0x140ea8 native matrix return and shared Y-scratch address lifetime.
+// Unmatched: 0x140ea8 original matrix return and shared Y-scratch address lifetime.
 // Unmatched: 0x141008 VU normalization/copy helpers, register allocation and spill ordering.
-// Unmatched: 0x141308 native pending-selection iterator and early-success return layout.
+// Unmatched: 0x141308 original pending-selection iterator and early-success return layout.
 // Unmatched: 0x141460 small-data/byte-flag constant lifetime and return-tail scheduling.
-// Unmatched: 0x1414a0 native narrow predicate and VU component-readback/spill ordering.
+// Unmatched: 0x1414a0 original narrow predicate and VU component-readback/spill ordering.
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140E48);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00140EA8);
@@ -108,6 +108,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141008);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings", func_00141000);
 
 #ifdef NON_MATCHING
-// Unmatched: 0x141008 signed-angle VU normalization, temporary spills and scheduling remain after native camera reconstruction.
+// Unmatched: 0x141008 signed-angle VU normalization, temporary spills and scheduling remain after original camera reconstruction.
 #endif
 

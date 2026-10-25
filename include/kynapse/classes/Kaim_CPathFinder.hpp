@@ -139,7 +139,7 @@ struct Kaim_CPathFinder {
     unsigned char Function_00304D98();
     // 0x00304DA8: UNVERIFIED signature (src/kynapse/predicates_304d98.cpp).
     unsigned char Function_00304DA8();
-    // 0x00304DB8: UNVERIFIED signature (src/kynapse/route_manual.cpp).
+    // 0x00304DB8: UNVERIFIED signature (src/kynapse/route_300278.cpp).
     unsigned char Function_00304DB8();
     // 0x00304DE8: UNVERIFIED signature (src/kynapse/ai_route_follower_304de8.cpp).
     unsigned char Function_00304DE8(void * argument0);
@@ -149,7 +149,7 @@ struct Kaim_CPathFinder {
     unsigned char Function_00304EE8(float * argument0);
     // 0x003053C8: UNVERIFIED signature (src/kynapse/predicates_3053c8.cpp).
     unsigned char Function_003053C8();
-    // 0x00305428: UNVERIFIED signature (src/kynapse/misc6_3053f0.cpp).
+    // 0x00305428: UNVERIFIED signature (src/kynapse/slot_and_tolerance_records_3053f0.cpp).
     void Function_00305428(int argument0);
     // 0x0038D330: UNVERIFIED signature (src/kynapse/inline/linkonce_38d330.c).
     int Function_0038D330();
@@ -157,7 +157,7 @@ struct Kaim_CPathFinder {
     void * Function_00393928();
     // 0x00393938: UNVERIFIED signature (src/kynapse/inline/linkonce_393938.c).
     int Function_00393938();
-    // 0x00393940: UNVERIFIED signature (src/kynapse/inline/misc6_393940.cpp).
+    // 0x00393940: UNVERIFIED signature (src/kynapse/inline/slot_and_tolerance_records_393940.cpp).
     void Function_00393940();
 
     // Vtable 0x003EFE10; vptr field offset unknown; RTTI header.

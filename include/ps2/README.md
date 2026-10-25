@@ -18,7 +18,7 @@ function back into assembly; every helper here has at least one exact consumer i
   `kynapse/` supplies the underscore-key fallback, list/iterator prefixes and parameter owner getter.
   Their verification scopes are field-specific; unknown SDK/container fields remain unknown.
 
-Use native fields when known. A reference-returning offset helper can evaluate its address early and
+Use the original field types when known. A reference-returning offset helper can evaluate its address early and
 extend register lifetimes. Preserve helper-before-caller order, return widths and normal destructor
 names: an assembler alias on a destructor can suppress automatic cleanup in SN 2.95.
 
@@ -43,10 +43,10 @@ method instead keeps `this` in A0, output in A1 and Actor in A2. These recipes a
 this control does not establish an ABI for non-POD classes or other compiler versions.
 
 The exact SN 1.36 `-O2 -G0 -snas` consumer `CGraphManager::Configure` at 0x2F2660
-also verifies a native `double` return from `atof` (0x35E730), float-to-double `fptodp`
+also verifies a `double` return from `atof` (0x35E730), float-to-double `fptodp`
 (0x291F58), double multiply `dpmul` (0x2914D0), and double-to-float `dptofp` (0x291C68).
 Its coverage-distance expression retains an explicit `float` local before use; the unit binds
-these software helpers to their original addresses. This is a scoped native-double recipe,
+these software helpers to their original addresses. This is a scoped software-double recipe,
 not verification of every floating operation or another compiler's ABI.
 
 `vu0_math.h` exposes the C-compatible arithmetic blocks used by `vu0.hpp`.

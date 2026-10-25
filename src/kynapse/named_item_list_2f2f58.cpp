@@ -1,0 +1,16 @@
+#include "include_asm.h"
+
+// Ported from an unpublished companion project.
+#include "kynapse/named_item_list.hpp"
+
+// /SLUS_213.76 0x2f2f58
+
+int ItemList::IdByName(const char* name)
+{
+    for (unsigned int i = 0; i < count; ++i) {
+        if (_stricmp(name, items[i]->name + 4) == 0)
+            return items[i]->id;
+    }
+    return 0;
+}
+

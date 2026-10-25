@@ -3,7 +3,7 @@
 #include "game/weapons/inventory_methods.hpp"
 #include "game/weapons/catalog.h"
 namespace Weapons {
-// Descriptive native methods over the canonical PS2 pool; original names unknown.
+// Descriptive methods over the canonical PS2 pool; original names unknown.
 struct WeaponManagerMethods : InventoryManager {
     void BindInstances(Weapon*,EeU64);
     void ReleaseInstance(Instance*);

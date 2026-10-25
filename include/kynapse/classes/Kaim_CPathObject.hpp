@@ -29,7 +29,7 @@ struct Kaim_CPathObject {
     inline int & Field_006C() { return *(int *)((unsigned char *)this + 0x6C); }
     // 0x002904E8: UNVERIFIED signature (src/sony/tu_2902f8_2904e8.c).
     unsigned int Function_002904E8();
-    // 0x002E4CA8: UNVERIFIED signature (src/kynapse/misc8_2e4ca8.cpp).
+    // 0x002E4CA8: UNVERIFIED signature (src/kynapse/slot_forwarders_2e4ca8.cpp).
     void Function_002E4CA8();
     // 0x002F4390: UNVERIFIED signature (src/kynapse/graph_pathobject_context.cpp).
     unsigned char Function_002F4390(void * argument0);
