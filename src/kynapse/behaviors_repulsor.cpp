@@ -1,6 +1,6 @@
 #include "kynapse/agents/repulsor.hpp"
 
-#ifdef BLACK_NONMATCHING
+#ifdef FULL_TU_CONTEXT
 // Unmatched: SelectDirection is 52 bytes short; normalization and aggregate-copy lifetimes remain unresolved.
 namespace KaimAvoidance {
 struct EntityMaskDefinition {

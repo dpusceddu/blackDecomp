@@ -140,7 +140,7 @@ def variants(label, source, flags):
         yield 'nonvolatile-scalar-members', source.replace('volatile float x, y, z, unspecifiedW;',
                                                           'float x, y, z, unspecifiedW;'), flags
     elif label == 'full-tu-context':
-        yield 'omit-real-neighbor-bodies', source, [x for x in flags if x != '-DBLACK_NONMATCHING']
+        yield 'omit-real-neighbor-bodies', source, [x for x in flags if x != '-DFULL_TU_CONTEXT']
     elif label == 'scene-alias-and-null':
         source = flatten(source)
         old = 'if(!node->previous)lists[node->index]=node->next;else node->previous->next=node->next;'

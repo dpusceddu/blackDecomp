@@ -2443,11 +2443,11 @@ splits:
   - {src: src/kynapse/tu_2fec10_305110.c, range: [0x305438, 0x3054a8]}
   - {src: src/kynapse/tu_2fec10_3054a8.c, range: [0x3054a8, 0x305538]}
   - {src: src/kynapse/tu_305538.cpp, range: [0x305538, 0x3055e0], flags: [-O2, -G0, -snas, -fbyte-bool], sections: false}
-  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3055e0, 0x305fd8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING], data_ranges: [{end: '0x3f07a0', input: .data.steering_vtable, section: .data, start: '0x3f0760'}, {end: '0x455be8', input: .bss, section: .bss, start: '0x455ad0'}], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_00305FD8, func_00306538]}
+  - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x3055e0, 0x305fd8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DFULL_TU_CONTEXT], data_ranges: [{end: '0x3f07a0', input: .data.steering_vtable, section: .data, start: '0x3f0760'}, {end: '0x455be8', input: .bss, section: .bss, start: '0x455ad0'}], full_tu_context: true, unlinked_context_helpers: [_$_Q24Kaim13ActorIterator, _$_Q24Kaim8PolyRoot, func_00305FD8, func_00306538]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x305fd8, 0x3063a8]}
   - {src: src/kynapse/tu_305538_3063a8.c, range: [0x3063a8, 0x306448], flags: [-O2, -G0, -snas]}
   - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x306448, 0x306538]}
-  - {src: src/kynapse/behaviors_repulsor_contact.cpp, range: [0x306538, 0x306688], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -DBLACK_NONMATCHING]}
+  - {src: src/kynapse/behaviors_repulsor_contact.cpp, range: [0x306538, 0x306688], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/behaviors_repulsor.cpp, range: [0x306688, 0x306760]}
   - {src: src/kynapse/tu_305538_3063a8.c, range: [0x306760, 0x3067a0]}
   - {src: src/kynapse/avoidance_3067a0.cpp, range: [0x3067a0, 0x307fb0]}
@@ -2739,7 +2739,7 @@ splits:
   - {src: src/physics/tu_32b598.cpp, range: [0x32b598, 0x32b860], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e838', input: .sbss, section: .sbss, start: '0x40e828'}, {end: '0x45cbf0', input: .bss, section: .bss, start: '0x45cbb0'}]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x32b860, 0x32b928]}
   - {src: src/physics/tu_32b928.c, range: [0x32b928, 0x32bc70]}
-  - {src: src/physics/tu_32bc70.cpp, range: [0x32bc70, 0x32e3d0], flags: [-O2, -G8, -snas, -x, c++, -fstrict-aliasing, -fno-exceptions, -DBLACK_NONMATCHING, -mvu0-use-vf0-vf31], assembler: sn-min6, data_ranges: [{end: '0x40e858', input: .sbss, section: .sbss, start: '0x40e848'}, {end: '0x45cc70', input: .bss, section: .bss, start: '0x45cc30'}], full_tu_context: true, unlinked_context_helpers: [AllocatePair__12PhysicsSceneUiUi, FirstClear__FPC13PhysicsBitmap, PairGroups__12PhysicsSceneUiUi, Separation__FRC13PhysicsBoundsT0, func_0032BDC0, func_0032C0D8, func_0032C5A0, func_0032D990, func_0032E048]}
+  - {src: src/physics/tu_32bc70.cpp, range: [0x32bc70, 0x32e3d0], flags: [-O2, -G8, -snas, -x, c++, -fstrict-aliasing, -fno-exceptions, -DFULL_TU_CONTEXT, -mvu0-use-vf0-vf31], assembler: sn-min6, data_ranges: [{end: '0x40e858', input: .sbss, section: .sbss, start: '0x40e848'}, {end: '0x45cc70', input: .bss, section: .bss, start: '0x45cc30'}], full_tu_context: true, unlinked_context_helpers: [AllocatePair__12PhysicsSceneUiUi, FirstClear__FPC13PhysicsBitmap, PairGroups__12PhysicsSceneUiUi, Separation__FRC13PhysicsBoundsT0, func_0032BDC0, func_0032C0D8, func_0032C5A0, func_0032D990, func_0032E048]}
   - {src: src/physics/tu_32e3d0_32e5d8.cpp, range: [0x32e3d0, 0x32e710], flags: [-O2, -G0, -snas, -x, c++]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x32e710, 0x32e810]}
   - {src: src/physics/tu_32e810.cpp, range: [0x32e810, 0x32fbc0]}

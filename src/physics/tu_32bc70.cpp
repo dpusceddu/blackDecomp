@@ -3,7 +3,7 @@
 // Scene storage, broadphase pools and bitmap iteration; PS2 member offsets are in scene.hpp.
 #include "physics/scene.hpp"
 
-#ifdef BLACK_NONMATCHING
+#ifdef FULL_TU_CONTEXT
 // Each alignment stage is kept in the storage-size expression before array sizes are added.
 static inline unsigned SceneStorageAlign(unsigned bytes, unsigned alignment)
 {
@@ -38,7 +38,7 @@ extern "C" PhysicsSceneLayout func_0032BC70(const PhysicsSceneSettings* settings
 }
 #endif
 
-#ifdef BLACK_NONMATCHING
+#ifdef FULL_TU_CONTEXT
 inline void* operator new(unsigned int, void* memory) throw() { return memory; }
 // Unmatched: 124 differences and three words short in storage/bitmap allocation; artificial inputs still disagree on ordered call argument banks.
 extern "C" PhysicsScene* func_0032BDC0(PhysicsStorageBlock* storage, const PhysicsSceneSettings* settings)
@@ -107,7 +107,7 @@ extern "C" PhysicsScene* func_0032BDC0(PhysicsStorageBlock* storage, const Physi
 }
 #endif
 
-#ifdef BLACK_NONMATCHING
+#ifdef FULL_TU_CONTEXT
 // Packed-overlap and XYZ separation operations.
 static inline float SceneVectorX(PhysicsVec v){float result;asm("qmfc2.ni bitsr, inputv":"=r bitsr"(result):"j inputv"(v));return result;}
 static inline PhysicsVec SceneBoxGap(const PhysicsBounds& a,const PhysicsBounds& b){PhysicsVec low=b.low,high=a.low;
@@ -177,7 +177,7 @@ int PhysicsScene::QueryGroup(unsigned int group, const PhysicsBounds* box)
 }
 #endif
 
-#ifdef BLACK_NONMATCHING
+#ifdef FULL_TU_CONTEXT
 // Unmatched: body/frame-copy scheduling and scalar-lane address allocation (18 differing instructions).
 static inline PhysicsVec SceneMatrixDirection(const PhysicsMatrix& m,const PhysicsVec& v){PhysicsVec r;asm("vmulax.xyz ACC, basisx, srcvx\n\tvmadday.xyz ACC, basisy, srcvy\n\tvmaddz.xyz dstv, basisz, srcvz":"=j dstv"(r):"j basisx"(m.row[0]),"j basisy"(m.row[1]),"j basisz"(m.row[2]),"j srcv"(v));return r;}
 static inline PhysicsVec SceneMatrixPosition(const PhysicsMatrix& m,const PhysicsVec& v){PhysicsVec r;asm("vmulax.xyz ACC, basisx, srcvx\n\tvmadday.xyz ACC, basisy, srcvy\n\tvmaddaz.xyz ACC, basisz, srcvz\n\tvmaddw.xyz dstv, posv, vf0w":"=j dstv"(r):"j basisx"(m.row[0]),"j basisy"(m.row[1]),"j basisz"(m.row[2]),"j posv"(m.row[3]),"j srcv"(v));return r;}
@@ -278,7 +278,7 @@ extern "C" unsigned func_0032CA68(const PhysicsBitmap* bitmap){
 }
 
 
-#ifdef BLACK_NONMATCHING
+#ifdef FULL_TU_CONTEXT
 static unsigned FirstClear(const PhysicsBitmap* bitmap){PhysicsBitCursor c=bitmap->Begin(),end=bitmap->End();c.AdvanceClear(&end);return bitmap->IndexOf(c);}
 
 #endif
@@ -432,7 +432,7 @@ void PhysicsScene::QueryDirtyGroups()
     }
 }
 
-#ifdef BLACK_NONMATCHING
+#ifdef FULL_TU_CONTEXT
 // Unmatched: 27 differing instructions in sentinel/counter allocation and one extra loop-exit word; 114 recorded states agree at 82% block coverage.
 void PhysicsScene::CollectIslandPairs(unsigned int passes, unsigned int pairLimit, unsigned int stepLimit)
 {
@@ -571,7 +571,7 @@ ConstantQuad D_0045CC30, D_0045CC40, D_0045CC50, D_0045CC60;
 }
 
 
-#ifdef BLACK_NONMATCHING
+#ifdef FULL_TU_CONTEXT
 static inline int SceneFloatWord(float value){int result;asm volatile("mfc1 %0,%1":"=r"(result):"f"(value));return result;}
 static inline PhysicsVec SceneScalarX(int input){PhysicsVec value;asm volatile("qmtc2.ni %1,%0":"=j"(value):"r"(input));return value;}
 static inline PhysicsVec SceneScalarY(int input){PhysicsVec value;asm("qmtc2.ni %1,%0":"=j"(value):"r"(input));return value;}
