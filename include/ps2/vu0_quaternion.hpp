@@ -1,6 +1,6 @@
 #ifndef BLACK_PS2_VU0_QUATERNION_HPP
 #define BLACK_PS2_VU0_QUATERNION_HPP
-/* Recurring authored animation-macro family: ten independent Hamilton products
+/* Recurring authored animation macro: ten independent Hamilton products
    in six functions use these same VF1..4 roles. This is not the generic SN j
    allocation recipe or a claim of SDK identity. Pointer operands remain compiler
    allocated. Multiply overwrites ACC and MAC/status; Add preserves destination W

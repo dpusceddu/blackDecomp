@@ -96,7 +96,7 @@
    "kind": "pointer",
    "runtime_vtable": 4243680,
    "direct_calls": 0,
-   "evidence": "PS2 store sequence and full executable direct-call census"
+   "evidence": "PS2 store sequence and a scan of every direct call in the executable"
   },
   {
    "name": "__rtti_attr",
@@ -104,7 +104,7 @@
    "kind": "attribute",
    "runtime_vtable": 4243664,
    "direct_calls": 0,
-   "evidence": "PS2 store sequence and full executable direct-call census"
+   "evidence": "PS2 store sequence and a scan of every direct call in the executable"
   },
   {
    "name": "__rtti_func",
@@ -112,7 +112,7 @@
    "kind": "function",
    "runtime_vtable": 4243632,
    "direct_calls": 0,
-   "evidence": "PS2 store sequence and full executable direct-call census"
+   "evidence": "PS2 store sequence and a scan of every direct call in the executable"
   },
   {
    "name": "__rtti_ptmf",
@@ -120,7 +120,7 @@
    "kind": "member_function_pointer",
    "runtime_vtable": 4243616,
    "direct_calls": 0,
-   "evidence": "PS2 store sequence and full executable direct-call census"
+   "evidence": "PS2 store sequence and a scan of every direct call in the executable"
   },
   {
    "name": "__rtti_ptmd",
@@ -128,7 +128,7 @@
    "kind": "member_data_pointer",
    "runtime_vtable": 4243600,
    "direct_calls": 0,
-   "evidence": "PS2 store sequence and full executable direct-call census"
+   "evidence": "PS2 store sequence and a scan of every direct call in the executable"
   },
   {
    "name": "__rtti_array",
@@ -136,7 +136,7 @@
    "kind": "array",
    "runtime_vtable": 4243584,
    "direct_calls": 0,
-   "evidence": "PS2 store sequence and full executable direct-call census"
+   "evidence": "PS2 store sequence and a scan of every direct call in the executable"
   }
  ],
  "builtin_runtime_vtable": 4243648,

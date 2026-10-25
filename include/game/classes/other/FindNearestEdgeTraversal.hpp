@@ -18,7 +18,7 @@ struct FindNearestEdgeTraversal {
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x003915C0: UNVERIFIED signature (include/kynapse/graph/spatial.hpp).
     unsigned int Function_003915C0(void * argument0);
-    // 0x00391E10: UNVERIFIED signature (src/kynapse/linkonce_391e10.c).
+    // 0x00391E10: UNVERIFIED signature (src/kynapse/inline/linkonce_391e10.c).
     int Function_00391E10();
     // 0x00392A68: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_00392A68();

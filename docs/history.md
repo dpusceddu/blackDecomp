@@ -64,7 +64,7 @@ Work proceeded file by file with one person per TU, in rounds that stopped when 
   and fixing the tools recovered functions.
 - Short-loop padding: six- and seven-word forms mix inside libraries and even identical bodies, and no position or content rule
   explains them. SN Ps2EeAs 1.9.25.758 pads short backward branches to six words; a two-byte, hash-guarded derivative
-  (`sn-min6`) gives the six-word family. A uniform substitution regresses controls, so it is selected per unit only.
+  (`sn-min6`) gives the six-word form. A uniform substitution regresses controls, so it is selected per unit only.
 - RTTI gives the class hierarchy: the type-info records name the Kaim classes and some others, and give base links and
   virtual-table slots. `tools/maint/class_skeletons.py` turns them into class skeletons from which the hand-edited class views
   under `include/game/classes/` and `include/kynapse/classes/` began. Classes without a type-info name are known by their

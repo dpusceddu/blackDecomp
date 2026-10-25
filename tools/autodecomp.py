@@ -1791,7 +1791,7 @@ def cmd_report(a):
     byt = collections.Counter()
     for k, v in sel:
         if v['status'] == 'matched':
-            c = 'matched: ' + {'first': 'first try', 'flags': 'after flag variants', 'permuter': 'after permuter', 'm2c-variant': 'after m2c variant (callee arity context)', 'template': 'idiom template (asm stub)', 'family': 'cloned from a family member', 'stack-local': 'after a local buffer for sp'}.get(v.get('stage'), v.get('stage', '?'))
+            c = 'matched: ' + {'first': 'first try', 'flags': 'after flag variants', 'permuter': 'after permuter', 'm2c-variant': 'after m2c variant (callee arity context)', 'template': 'idiom template (asm stub)', 'clone': 'cloned from an identical function', 'stack-local': 'after a local buffer for sp'}.get(v.get('stage'), v.get('stage', '?'))
         elif v['status'] == 'fragment':
             c = 'not a function (4-byte split artifact)'
         elif v['status'] == 'verify-failed':
@@ -1879,7 +1879,7 @@ def cmd_register(a):
     print('registered %d functions' % done)
 
 
-def cmd_settle(a):
+def cmd_confirm(a):
     """Compile and link what `register` wrote (the build backend), put the INCLUDE_ASM line back for every function that does not
     place identically (a file that fails to compile takes its new functions back out, to be retried one per file), and end
     with a build that says OK."""
@@ -1887,7 +1887,7 @@ def cmd_settle(a):
     import tu_files
     for rnd in range(3):
         res = load_results()
-        fresh = {k: v for k, v in res.items() if v.get('registration') and not v.get('settled')}
+        fresh = {k: v for k, v in res.items() if v.get('registration') and not v.get('confirmed')}
         if not fresh:
             break
         problems = verify_build()
@@ -1903,7 +1903,7 @@ def cmd_settle(a):
             whole_file = None in bad and not file_bad
             if not file_bad and not whole_file:
                 for k in keys:
-                    res[k]['settled'] = True
+                    res[k]['confirmed'] = True
                 continue
             for k in keys:                              # a failure in one function takes the whole object down: back out all
                 rec = res[k]
@@ -1955,13 +1955,13 @@ def verify_build():
     return json.loads((BUILD / 'unit_problems.json').read_text())
 
 
-def propagate_families(res, inv, orig):
-    """Clone every exact source onto the unmatched members of its family; keep the clones that compile to the same words."""
+def clone_identical_bodies(res, inv, orig):
+    """Clone every exact source onto the unmatched functions with identical bodies; keep the clones that compile to the same words."""
     by = {f['addr']: f for f in inv}
     rep = {}
     for k, v in sorted(res.items()):
         f = by[int(k, 16)]
-        key, ok = family_key(f)
+        key, ok = body_key(f)
         if ok and v['status'] == 'matched' and 'source' in v and key not in rep and (not f['owned'] or 'base_source' in v):
             rep[key] = (f, v)
     jobs, who = [], {}
@@ -1969,13 +1969,13 @@ def propagate_families(res, inv, orig):
         if v['status'] in ('matched', 'verify-failed', 'fragment') or v.get('registered'):
             continue
         f = by[int(k, 16)]
-        key, ok = family_key(f)
+        key, ok = body_key(f)
         if ok and key in rep and rep[key][0]['addr'] != f['addr']:
             src = clone_source(rep[key][1].get('base_source') or rep[key][1]['source'], rep[key][0], f)
             if src and f['owned']:
                 src = add_owned_defs(f, src, orig)
             if src and bool(f['owned']) == bool(rep[key][0]['owned']):
-                jobs.append(((f['name'], 'family'), src, rep[key][1]['flags']))
+                jobs.append(((f['name'], 'clone'), src, rep[key][1]['flags']))
                 who[f['name']] = (k, src, rep[key][1]['flags'], rep[key][0]['name'])
     done = 0
     res2 = {}
@@ -1991,7 +1991,7 @@ def propagate_families(res, inv, orig):
         f = by[int(k, 16)]
         exact, d, note = score(Target(f, orig), toks, orig.word)
         if exact:
-            res[k].update(status='matched', stage='family', source=src, flags=flags, score=0, family_of=parent)
+            res[k].update(status='matched', stage='clone', source=src, flags=flags, score=0, clone_of=parent)
             res[k].pop('reason', None)
             done += 1
     print('families: %d clones tried, %d exact' % (len(jobs), done))
@@ -2008,8 +2008,8 @@ def cmd_permute(a):
                    and (not a.cc or ('--cc=' + a.cc) in v.get('flags', []))))
     seen = set()
     reps = []
-    for sc, k in todo:                      # one member per family: the others get the result by cloning
-        key, ok = family_key(inv[int(k, 16)])
+    for sc, k in todo:                      # one function per group of identical bodies: the others get the result by cloning
+        key, ok = body_key(inv[int(k, 16)])
         if ok and key in seen:
             continue
         seen.add(key)
@@ -2035,7 +2035,7 @@ def cmd_permute(a):
             rec['permuter'] = dict(best=c.best, tries=c.tried)
             if c.done:
                 rec.update(status='matched', stage='permuter', source=committed_form(c.src))
-        propagate_families(res, list(inv.values()), orig)
+        clone_identical_bodies(res, list(inv.values()), orig)
         save_results(res)
         print('[%d/%d] solved so far: %d' % (min(i + a.group, len(todo)), len(todo),
                                               sum(1 for v in res.values() if v.get('stage') == 'permuter')), flush=True)
@@ -2070,7 +2070,7 @@ def merge_records(res, recs):
     return out
 
 
-def family_key(f):
+def body_key(f):
     """Functions with equal keys are the same code over other symbols: identical words once relocated fields are masked,
     identical addends, and the same pattern of which relocations share a symbol."""
     rel = f['rel']
@@ -2099,7 +2099,7 @@ def symbol_names(f):
 
 
 def clone_source(src, a, b):
-    """Source of function `b` from the exact source of its family member `a` (rename the symbols in order)."""
+    """Source of function `b` from the exact source of an identical function `a` (rename the symbols in order)."""
     na, nb = symbol_names(a), symbol_names(b)
     if len(na) != len(nb):
         return None
@@ -2261,9 +2261,9 @@ def main():
     rg.add_argument('--group', type=int, default=24, help='most adjacent functions per unit')
     rg.add_argument('--limit', type=int)
     rg.set_defaults(fn=cmd_register)
-    st = sub.add_parser('confirm', aliases=['settle'], help='compile and link what register wrote; put back the INCLUDE_ASM line of what does not place identically')
+    st = sub.add_parser('confirm', help='compile and link what register wrote; put back the INCLUDE_ASM line of what does not place identically')
     st.add_argument('--group', type=int, default=24)
-    st.set_defaults(fn=cmd_settle)
+    st.set_defaults(fn=cmd_confirm)
     pm = sub.add_parser('permute')
     pm.add_argument('--max-score', type=int, default=8)
     pm.add_argument('--max-size', type=int)
@@ -2273,8 +2273,8 @@ def main():
     pm.add_argument('--rounds', type=int, default=6)
     pm.add_argument('--per-round', type=int, default=60, help='candidates per function and round')
     pm.set_defaults(fn=cmd_permute)
-    fm = sub.add_parser('clone', aliases=['family'], help='clone exact sources onto functions with identical bodies')
-    fm.set_defaults(fn=lambda a: (lambda res: (reconcile(res), propagate_families(res, load_inventory(), OrigImage()), save_results(res)))(load_results()))
+    fm = sub.add_parser('clone', help='clone exact sources onto functions with identical bodies')
+    fm.set_defaults(fn=lambda a: (lambda res: (reconcile(res), clone_identical_bodies(res, load_inventory(), OrigImage()), save_results(res)))(load_results()))
     mg = sub.add_parser('merge')
     mg.add_argument('file')
     mg.set_defaults(fn=lambda a: (lambda res: (res.update(merge_records(res, {k: v for k, v in json.loads(Path(a.file).read_text()).items()})), save_results(res)))(load_results()))

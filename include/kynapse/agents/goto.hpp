@@ -29,7 +29,7 @@ struct ObjectRoot {virtual ~ObjectRoot();};
 struct Agent:ObjectRoot {
  virtual ~Agent();
  ActionBank* bank;ClassRegistry* context;
- // This agent-family traversal is distinct from the other configurable-object copy.
+ // This agent traversal is distinct from the other configurable-object copy.
  int ConfigureAll(ChildBuffers*) __asm__("func_002E0018");
  static void* operator new(unsigned int size){return KaimAllocate(size);}
  static void operator delete(void* block){memoryRelease(block);}

@@ -10,11 +10,11 @@ namespace Unnamed {
 // Identity: unverified vtable owner. Complete size and inheritance layout are UNVERIFIED.
 struct UnknownVtable_003E0EB8 {
     // Field references address the original object; sizeof(this view) is not the allocation size.
-    // 0x0020DF50: UNVERIFIED signature (src/game/tu_2094b0_20df30.c).
+    // 0x0020DF50: UNVERIFIED signature (src/game/unsorted/tu_2094b0_20dc60.c).
     unsigned int Function_0020DF50();
-    // 0x0020DF58: UNVERIFIED signature (src/game/tu_2094b0_20df30.c).
+    // 0x0020DF58: UNVERIFIED signature (src/game/unsorted/tu_2094b0_20dc60.c).
     unsigned int Function_0020DF58();
-    // 0x0020DF60: UNVERIFIED signature (src/game/tu_2094b0_20df30.c).
+    // 0x0020DF60: UNVERIFIED signature (src/game/unsorted/tu_2094b0_20dc60.c).
     unsigned int Function_0020DF60();
     // 0x002134F8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     int Function_002134F8();

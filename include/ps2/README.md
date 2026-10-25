@@ -61,7 +61,7 @@ These generic names do not identify an original class. Game vector values have
 flag/payload lanes that generic game affine transforms leave unspecified. Similar
 arithmetic does not establish interchangeable types, load order or aliasing.
 
-`vu0_quaternion.hpp` reconstructs a different animation macro family: its
+`vu0_quaternion.hpp` reconstructs a different animation macro: its
 Hamilton product uses VF1..4 at ten sites in six functions; the companion
 translation add uses VF9..11 and preserves destination W. The wrappers declare
 VF and memory clobbers and require ACC/MAC/status to be dead across calls.

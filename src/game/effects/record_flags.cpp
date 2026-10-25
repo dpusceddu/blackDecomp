@@ -7,7 +7,7 @@ extern "C" int func_001AFBF0(void *);
 
 #ifdef NON_MATCHING
 #include "game/effects/asset.h"
-// Remaining effect functions are listed in config/units.yaml.
+// The remaining effect functions are INCLUDE_ASM lines.
 // Unmatched: 0x1af930 asset relocation still differs in iterator/register lifetimes.
 // Unmatched: 0x1afc80 timer start needs the original inline setter evaluation order.
 // Unmatched: 0x1afd18 timer advance differs in index register and address-operand order.

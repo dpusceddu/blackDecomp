@@ -138,7 +138,7 @@ struct UnknownVtable_003DC838 {
     unsigned int Function_00125E38();
     // 0x001448C8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001448C8();
-    // 0x00144E00: UNVERIFIED signature (src/game/tu_1448c8_144e00.c).
+    // 0x00144E00: UNVERIFIED signature (src/game/camera/tu_10f700_114168.c).
     int Function_00144E00();
     // 0x00145240: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     void Function_00145240(float argument0);
@@ -174,7 +174,7 @@ struct UnknownVtable_003DC838 {
     int Function_00149608(void * argument0);
     // 0x00149798: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_00149798();
-    // 0x0014A560: UNVERIFIED signature (src/game/tu_1448c8_14a560.c).
+    // 0x0014A560: UNVERIFIED signature (src/game/weapons/tu_1448c8_149ac8.c).
     int Function_0014A560();
     // 0x0014BD18: UNVERIFIED signature (src/game/unsorted/tu_14bd18.c).
     unsigned int Function_0014BD18();

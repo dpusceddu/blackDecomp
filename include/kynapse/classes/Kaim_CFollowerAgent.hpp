@@ -42,23 +42,23 @@ struct Kaim_CFollowerAgent {
     inline float & Field_0040() { return *(float *)((unsigned char *)this + 0x40); }
     // 0x44: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline float & Field_0044() { return *(float *)((unsigned char *)this + 0x44); }
-    // 0x002D30A0: UNVERIFIED signature (src/kynapse/behaviors_follower.cpp).
+    // 0x002D30A0: UNVERIFIED signature (src/kynapse/tu_2d2ff8.cpp).
     unsigned char Function_002D30A0(void * argument0);
-    // 0x002D31F0: UNVERIFIED signature (src/kynapse/behaviors_follower_2d31f0.cpp).
+    // 0x002D31F0: UNVERIFIED signature (src/kynapse/tu_2d2ff8.cpp).
     unsigned char Function_002D31F0(void * argument0);
     // 0x002D3300: UNVERIFIED signature (include/kynapse/behaviors/follower.hpp).
     unsigned int Function_002D3300();
     // 0x002D3560: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_002D3560();
-    // 0x002D35B8: UNVERIFIED signature (src/kynapse/predicates_2d35b8.cpp).
+    // 0x002D35B8: UNVERIFIED signature (src/kynapse/tu_2d2ff8.cpp).
     unsigned char Function_002D35B8();
-    // 0x002D35C8: UNVERIFIED signature (src/kynapse/predicates_2d35b8.cpp).
+    // 0x002D35C8: UNVERIFIED signature (src/kynapse/tu_2d2ff8.cpp).
     unsigned char Function_002D35C8();
-    // 0x002D35D8: UNVERIFIED signature (src/kynapse/behaviors_follower.cpp).
+    // 0x002D35D8: UNVERIFIED signature (src/kynapse/tu_2d2ff8.cpp).
     unsigned char Function_002D35D8();
-    // 0x002D3610: UNVERIFIED signature (src/kynapse/behaviors_follower_2d31f0.cpp).
+    // 0x002D3610: UNVERIFIED signature (src/kynapse/tu_2d2ff8.cpp).
     unsigned char Function_002D3610();
-    // 0x002D36A8: UNVERIFIED signature (src/kynapse/behaviors_follower_2d31f0.cpp).
+    // 0x002D36A8: UNVERIFIED signature (src/kynapse/tu_2d2ff8.cpp).
     void Function_002D36A8(void * argument0);
     // 0x003894D0: UNVERIFIED signature (src/kynapse/inline/class_info_3894d0.cpp).
     void * Function_003894D0();

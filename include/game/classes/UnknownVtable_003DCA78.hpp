@@ -146,7 +146,7 @@ struct UnknownVtable_003DCA78 {
     int Function_00133FA8(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, int * argument4, unsigned int argument5, float argument6);
     // 0x001347B8: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_001347B8(S128 argument0, S128 argument1, unsigned int argument2, float argument3);
-    // 0x00134970: UNVERIFIED signature (src/game/tu_133fa8_134970.c).
+    // 0x00134970: UNVERIFIED signature (src/game/unsorted/tu_133fa8.c).
     int Function_00134970(int argument0, int argument1, int argument2, int argument3, int argument4);
     // 0x00134990: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00134990(unsigned int argument0, S128 argument1, int * argument2);

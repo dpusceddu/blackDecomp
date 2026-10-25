@@ -79,7 +79,7 @@ bodies with different padding; a compiler's identity alone does not determine it
 Disassembly of the assembler located SN 1.9.25.758's unconditional short-loop routine: it extends negative branch
 word displacements −1…−5 to −6 (seven words including the delay slot). The separately written
 `sn-min6` derivative changes two immediate bytes, extending −1…−4 to −5 instead. It reproduces the
-six-word family while retaining division, FPU and other hazard handling. No compiler assembly or game
+six-word form while retaining division, FPU and other hazard handling. No compiler assembly or game
 instruction bytes are edited. Existing recipes stay in place: uniform substitution regresses matches.
 
 `python3 tools/toolchain.py install` writes the derivative next to the downloaded original.
@@ -91,11 +91,11 @@ Candidate and production caches include the recipe. The automatic pipeline tries
 fallback before the older `sn-2.73a` assembler; `gas-2.40`, `gas-2.40-fix` and `sony-2.9` remain
 explicit experiments. Every new match must pass the full image comparison.
 
-Studies of the short loops (since removed from the tree, see the Git history of `tools/studies/`) classified every
+Studies of the short loops (not kept in the tree) classified every
 SN-assigned short branch by TU, library, compiler override, delay-slot and loop length, and tested linked, function-,
 TU- and text-relative positions and alignment residues. The forms do not partition libraries or TUs cleanly; six- and
 seven-word candidates still collide after accounting for candidate padding, and a static trace finds a section-relative
-displacement check without an alignment or cache-line gate. Keep alternate assemblers as individually verified unit
+displacement check without an alignment or cache-line condition. Keep alternate assemblers as individually verified unit
 recipes (the units serializer marks them `assembler_evidence: {strength: weak, ...}`: historical toolchain provenance is
 unresolved); full-image byte identity remains mandatory. Consistent filtered cohorts are leads, not recovered build flags.
 

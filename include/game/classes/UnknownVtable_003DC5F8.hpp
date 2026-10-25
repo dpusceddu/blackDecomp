@@ -124,9 +124,9 @@ struct UnknownVtable_003DC5F8 {
     int Function_001261F8();
     // 0x00132D98: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_00132D98(int argument0, int argument1, float argument2);
-    // 0x00134970: UNVERIFIED signature (src/game/tu_133fa8_134970.c).
+    // 0x00134970: UNVERIFIED signature (src/game/unsorted/tu_133fa8.c).
     int Function_00134970(int argument0, int argument1, int argument2, int argument3, int argument4);
-    // 0x00139C58: UNVERIFIED signature (src/game/tu_139bb0_139c58.c).
+    // 0x00139C58: UNVERIFIED signature (src/game/camera/tu_139bb0.c).
     int Function_00139C58();
     // 0x0013A300: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0013A300(float argument0);
@@ -136,7 +136,7 @@ struct UnknownVtable_003DC5F8 {
     void * Function_0013B4C0(void * argument0);
     // 0x0013B628: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     unsigned int Function_0013B628(unsigned int argument0);
-    // 0x0013B9A0: UNVERIFIED signature (src/game/tu_139bb0_13b9a0.c).
+    // 0x0013B9A0: UNVERIFIED signature (src/game/camera/tu_139bb0.c).
     int Function_0013B9A0();
     // 0x0013BB78: UNVERIFIED signature (PS2 register/type inference; unverified unused parameters).
     int Function_0013BB78(unsigned int argument0, unsigned int argument1, unsigned int argument2, unsigned int argument3, int * argument4, float argument5);

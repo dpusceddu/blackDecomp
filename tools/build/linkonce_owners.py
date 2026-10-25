@@ -15,7 +15,7 @@ config/SLUS_213.76/libraries.txt, and a source file in src/<library>/inline/ is 
 Needs the split assembly (asm/SLUS_213.76/, written by `ninja`).
 Usage: linkonce_owners.py [--write]     without --write only print the summary; --write writes build/SLUS_213.76/inline_owners.txt
        linkonce_owners.py --pairs       print `old new` for every src/ file of the block that is not in src/<owner>/inline/ yet
-                                        (feed it to tools/studies/relocate_sources.py)
+                                        (feed it to tools/relocate_sources.py)
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):

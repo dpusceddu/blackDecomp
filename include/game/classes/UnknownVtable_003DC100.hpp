@@ -18,7 +18,7 @@ struct UnknownVtable_003DC100 {
     inline void * & Field_0010() { return *(void * *)((unsigned char *)this + 0x10); }
     // 0x1C: VERIFIED PS2 offset/access; semantic field type UNVERIFIED.
     inline unsigned char & Field_001C() { return *(unsigned char *)((unsigned char *)this + 0x1C); }
-    // 0x00165380: UNVERIFIED signature (src/game/tu_1650b8.c).
+    // 0x00165380: UNVERIFIED signature (src/game/weapons/tu_1448c8_149ac8.c).
     int Function_00165380();
     // 0x001653A8: code-compatible exact source signature; original semantic types UNVERIFIED (PS2 exact source probe; full-build status recorded separately).
     int Function_001653A8();

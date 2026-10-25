@@ -18,7 +18,7 @@ struct FindNearestVisibleTraversal {
     inline unsigned int & Field_0000() { return *(unsigned int *)((unsigned char *)this + 0x0); }
     // 0x003915C8: UNVERIFIED signature (include/kynapse/graph/spatial.hpp).
     unsigned int Function_003915C8(void * argument0);
-    // 0x00391E18: UNVERIFIED signature (src/kynapse/linkonce_391e10.c).
+    // 0x00391E18: UNVERIFIED signature (src/kynapse/inline/linkonce_391e10.c).
     int Function_00391E18();
     // 0x003921B8: UNVERIFIED signature (PS2 in-charge flag and conditional release; hidden destructor flag omitted).
     void Function_003921B8();

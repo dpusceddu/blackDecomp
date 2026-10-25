@@ -52,7 +52,7 @@ A file that has no descriptive name is named after addresses (the rules are in `
 | `tu_<A>.c` | the unit of the translation unit whose first function is at `A` (hexadecimal, no `0x`) |
 | `tu_<A>_<B>.c` | a further unit of the same TU, starting at `B`: the part that needs other flags, another language or its own constants (`tu_103930_105228.c` is the unit at 0x105228 of the TU that starts at 0x103930); its `note:` in the split list says why |
 | `linkonce_<A>.c`, `linkonce_<A>_<B>.c` | compiler-emitted inline and template copies (link-once code) in `src/<library>/inline/` |
-| `<name>_<A>.cpp` | a file named after the class or module (`frontend_menu_load.cpp`, `arms_345500.cpp`), with the address of its first function when the name alone is not unique |
+| `<name>_<A>.cpp` | a file named after the class or module (`frontend_menu_load.cpp`, `animation_lifecycle_345500.cpp`), with the address of its first function when the name alone is not unique |
 
 `.c` or `.cpp` is the language the file compiles as. A file moves to a descriptive name when the evidence shows what it is
 ([CONTRIBUTING.md](../CONTRIBUTING.md#naming)).

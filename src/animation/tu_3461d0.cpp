@@ -44,7 +44,7 @@ static inline void BlendCopyBone(Pose* destination,const Pose* source) {
 
 }
 namespace PoseViews {
-// Fixed VF9/10 translation family observed in both loops. All XYZW lanes
+// Fixed VF9/10 translation form observed in both loops. All XYZW lanes
 // participate; MAC/status are overwritten, ACC/Q/I/R/VI/clip are preserved.
 static inline void ComposeAddPositionXYZW(void* out,const void* first,const void* second) {
     asm volatile("lqc2 vf9,0(%0)\n\tlqc2 vf10,0(%1)\n\tvadd.xyzw vf10,vf9,vf10\n\tsqc2 vf10,0(%2)"
@@ -110,7 +110,7 @@ namespace PoseViews {
 static inline int& WeightUsedCount(){return D_0046A500;}
 static inline float WeightZero(){return 0.0f;}
 static inline void WeightCopyBone(Pose* out,const Pose* source){out->rotation=source->rotation;out->position=source->position;}
-// Whole XYZW scaling family; T0/VF9/11/12 are the observed transfer roles.
+// Whole XYZW scaling form; T0/VF9/11/12 are the observed transfer roles.
 // MAC/status are overwritten; ACC/Q/I/R/VI/clip remain untouched.
 static inline void WeightScalePositionXYZW(void* out,const void* source,float strength) {
     asm volatile("lqc2 vf9,0(%0)\n\tmfc1 $8,%2\n\tqmtc2.ni $8,vf11\n\t"

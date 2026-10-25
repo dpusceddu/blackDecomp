@@ -166,12 +166,12 @@ dlabel D_00400000
     def test_known_float_and_128bit_prototypes_are_preserved(self):
         self.assertEqual(auto.decl_function('f', ('func', 's128', 's64, f32')), 'extern s128 f(s64, f32);')
 
-    def test_failed_settle_stops_before_unit_mutation(self):
+    def test_failed_confirm_stops_before_unit_mutation(self):
         import argparse
         from subprocess import CompletedProcess
         with patch.object(auto, 'load_results', return_value={}), patch.object(auto.subprocess, 'run', return_value=CompletedProcess([], 1, 'worker failed', 'connection error')) as run, patch.object(auto.sys, 'stderr'):
             with self.assertRaises(SystemExit):
-                auto.cmd_settle(argparse.Namespace(group=1))
+                auto.cmd_confirm(argparse.Namespace(group=1))
             self.assertEqual(run.call_count, 1)
 
     def test_forwarded128_abi_uses_physical_gpr_slot_and_preserves_true64(self):
