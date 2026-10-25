@@ -1,9 +1,7 @@
 # Shared PS2 inline context
 
-The shared context maintainer owns this directory and `config/SLUS_213.76/ps2_header_evidence.json`.
-`tools/maint/shared_context.py verify` runs the build, preserves the HEAD source-address set,
-and checks the manifest's real consumers against retail instructions and relocation targets.
-The complete image must also remain identical. Verification details stay in ignored build output.
+These headers are shared by many source files. A change to one must keep `ninja` printing `OK` and must not turn an exact
+function back into assembly; every helper here has at least one exact consumer in `src/`.
 
 - `ee_types.h`: SN 2.95 target widths. `long` is 64 bits and `long long` is 128 bits;
   pointers and `int` are 32 bits. These are target assertions, not host or Sony compiler assumptions.

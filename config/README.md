@@ -29,8 +29,6 @@ Every version has `checksums.sha256`. Only `SLUS_213.76` has recovered source, s
 | `explicit_boundaries.txt` | Function starts that look like orphan pieces but are code, each with its reason; `tools/build/boundaries.py` adds them to the boundaries it derives | by hand |
 | `class_method_abi.json` | Verified method ABI evidence (return, parameters, fields) for the class skeleton generator `tools/maint/class_skeletons.py` | by hand |
 | `rtti_abi.json` | Verified GCC 2.95 RTTI helper ABI seeds for `tools/maint/rtti_evidence.py` and `tools/maint/class_skeletons.py` | by hand |
-| `ps2_header_evidence.json` | Which `include/ps2/` headers are verified by which exact source functions (checked by `tools/maint/shared_context.py`) | by hand |
-| `native_header_evidence.json` | The same for the native header views (camera, weapons, arms, effects; docs/native-headers.md, checked by `tools/maint/mod_context.py`) | by hand |
 
 ## What is generated instead (ignored, under `build/`)
 

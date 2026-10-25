@@ -34,8 +34,8 @@ SECTIONS = [
         'pipeline/vu0_micro.py', 'pipeline/stack_context.py', 'pipeline/context_recovery.py', 'pipeline/permuter_service.py',
         'pipeline/permuter_worker.py', 'pipeline/permuter_lanes.py', 'pipeline/compiler_dumps.py']),
     ('Maintainer and analysis tools (`tools/maint/`)', [
-        'maint/class_skeletons.py', 'maint/rtti_evidence.py', 'maint/shared_context.py',
-        'maint/mod_context.py', 'maint/shift_test.py', 'maint/handbook_controls.py', 'maint/symbols.py', 'maint/discs.py', 'maint/iso.py', 'maint/inputs.py']),
+        'maint/class_skeletons.py', 'maint/rtti_evidence.py',
+        'maint/shift_test.py', 'maint/handbook_controls.py', 'maint/symbols.py', 'maint/discs.py', 'maint/iso.py', 'maint/inputs.py']),
 ]
 NOTES = {
     'check_elf.py': 'Build check, run by `ninja`.',

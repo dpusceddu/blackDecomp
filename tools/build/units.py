@@ -186,25 +186,6 @@ def write_units(slug=DEFAULT_SLUG):
     return units
 
 
-def committed_source_addresses(slug=DEFAULT_SLUG):
-    """Addresses compiled from source at HEAD (derived from the committed split list and sources), to protect them."""
-    import subprocess
-    def show(path):
-        r = subprocess.run(['git', 'show', 'HEAD:' + path], cwd=ROOT, capture_output=True, text=True)
-        return r.stdout if r.returncode == 0 else None
-    import tempfile, yaml
-    text = show('config/%s/splits.yaml' % slug)
-    if text is None:
-        return set()
-    with tempfile.TemporaryDirectory() as d:
-        (Path(d) / 'splits.yaml').write_text(text)
-        splits = S.load_splits(slug, path=Path(d) / 'splits.yaml')
-    sym = show('config/%s/symbols.txt' % slug)
-    symbols = S.Symbols(S.parse_symbols(sym)) if sym else S.Symbols()
-    units = derive_units(splits, function_table(slug), symbols, read=lambda p: show(p) or '')
-    return {f['addr'] for u in units for f in u['functions'] if f['status'] == 'source'}
-
-
 INCLUDE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 
 

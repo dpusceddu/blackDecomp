@@ -92,8 +92,6 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | --- | --- |
 | `tools/maint/class_skeletons.py` | Generate conservative GCC 2.95 PS2 class skeletons from RTTI and vtables into build/classes/include/ (ignored). |
 | `tools/maint/rtti_evidence.py` | Recover legacy GCC RTTI initialization evidence without executing target code. |
-| `tools/maint/shared_context.py` | Verify the shared PS2 inline context against its real source consumers. |
-| `tools/maint/mod_context.py` | Verify the shared mod context using real PS2 source consumers and the full image. |
 | `tools/maint/shift_test.py` | Shiftability test: insert NOPs into one function of a scratch copy, rebuild and check that references moved. |
 | `tools/maint/handbook_controls.py` | Verify handbook recipes with isolated SN 1.36 retail controls and perturbations. |
 | `tools/maint/symbols.py` | Dump symbols and debug data from every ELF kept under orig/ and estimate transfer to USA retail. |
