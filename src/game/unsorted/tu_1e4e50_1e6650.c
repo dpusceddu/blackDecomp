@@ -25,6 +25,27 @@ typedef struct Recovered_SlotPool {
 } Recovered_SlotPool;
 typedef char RecoveredSlotPointerIs32[(sizeof(void*) == 4) ? 1 : -1];
 
+/* Partial timing and random-state views; full layouts are UNVERIFIED. */
+typedef struct Recovered_RandomState {
+    u32 unk_00;
+    u32 unk_04;
+} Recovered_RandomState;
+extern Recovered_RandomState D_0040EB30;
+
+typedef struct Recovered_TimingRange {
+    u8 unk_000[0x8AC];
+    f32 unk_8AC;
+    f32 unk_8B0;
+} Recovered_TimingRange;
+
+typedef struct Recovered_TimedObject {
+    u8 unk_00[4];
+    Recovered_TimingRange* unk_04;
+    u8 unk_08[0x28];
+    f32 unk_30;
+    f32 unk_34;
+} Recovered_TimedObject;
+
 /* Partial state initialized with a slot pool; other fields are UNVERIFIED. */
 typedef struct Recovered_PoolState {
     s32 unk_00;
@@ -209,7 +230,25 @@ s32 func_001E6BD0(Recovered_PoolState* state, void* unused, u64 key) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6C38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6E50);
+#ifdef NON_MATCHING
+// Unmatched: random-value conversion and load scheduling differ.
+void func_001E7078(Recovered_TimedObject* object) {
+    Recovered_TimingRange* range = object->unk_04;
+    f32 base = range->unk_8AC;
+    f32 width = range->unk_8B0;
+    u32 first = D_0040EB30.unk_00;
+    u32 second = D_0040EB30.unk_04;
+    u32 next = (first << 16) + ((s32)first >> 16) + second;
+    f32 converted;
+    D_0040EB30.unk_04 = second + next;
+    D_0040EB30.unk_00 = next;
+    converted = (f32)next;
+    object->unk_34 = base + width * (converted * 2.3283064365386963e-10f);
+    object->unk_30 = M2C_FIELD(D_0040F4D0, f32*, 0x20);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E7078);
+#endif
 
 s32 func_001E7118(void *arg0) {
     s32 var_5;
