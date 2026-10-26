@@ -1,6 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
+extern void func_00352958(void*, float, float, float);
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A1E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A3C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A598);
@@ -92,6 +94,31 @@ s32 func_0034AB18(void *arg0, s32 arg1, void *arg2, void *arg3, s32 arg4, s32 ar
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034AC70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034AD48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034ADD8);
+/* Convert packed turns to negative radians for the rotation helper. */
+void func_0034AC70(const unsigned short* values, char* output, int count) {
+    if (count > 0) {
+        int remaining = count;
+        do {
+            float y = -((float)values[1] * 6.2831855f) * 0.0000152587890625f;
+            float z = -((float)values[2] * 6.2831855f) * 0.0000152587890625f;
+            float x = -((float)values[0] * 6.2831855f) * 0.0000152587890625f;
+            func_00352958(output, y, z, x);
+            values += 3;
+            output += 16;
+            --remaining;
+        } while (remaining != 0);
+    }
+}
+void func_0034AD48(const unsigned short* data, void* output, int index) {
+    const unsigned short* values = data + index * 3;
+    float y = -((float)values[1] * 6.2831855f) * 0.0000152587890625f;
+    float z = -((float)values[2] * 6.2831855f) * 0.0000152587890625f;
+    float x = -((float)values[0] * 6.2831855f) * 0.0000152587890625f;
+    func_00352958(output, y, z, x);
+}
+void func_0034ADD8(const unsigned short* values, void* output) {
+    float y = -((float)values[1] * 6.2831855f) * 0.0000152587890625f;
+    float z = -((float)values[2] * 6.2831855f) * 0.0000152587890625f;
+    float x = -((float)values[0] * 6.2831855f) * 0.0000152587890625f;
+    func_00352958(output, y, z, x);
+}
