@@ -64,7 +64,7 @@ class Tools(unittest.TestCase):
     def test_every_front_door_says_it_in_one_line(self):
         with tempfile.TemporaryDirectory() as d:
             root = empty_checkout(Path(d))
-            for args in (['tools/next.py'], ['tools/progress.py'], ['tools/decompile.py', 'func_00100258'],
+            for args in (['tools/next.py'], ['tools/progress.py'], ['tools/decompile.py', 'func_00100258'], ['tools/brief.py', 'func_00100258'],
                          ['tools/trysrc.py', '100258', 'x.c'], ['tools/objdiff.py'], ['tools/badges.py']):
                 result = self.run_tool(root, *args)
                 with self.subTest(tool=args[0]):
@@ -86,7 +86,7 @@ class Tools(unittest.TestCase):
     def test_help_needs_neither(self):
         with tempfile.TemporaryDirectory() as d:
             root = empty_checkout(Path(d))
-            for tool in ('next', 'progress', 'decompile', 'trysrc', 'objdiff', 'badges', 'where'):
+            for tool in ('next', 'progress', 'decompile', 'trysrc', 'objdiff', 'badges', 'where', 'brief', 'setup'):
                 with self.subTest(tool=tool):
                     self.assertEqual(self.run_tool(root, 'tools/%s.py' % tool, '--help').returncode, 0)
 

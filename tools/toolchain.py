@@ -137,11 +137,17 @@ def install_assembler(base, ident):
     return True
 
 
+def make_executable(path):
+    mode = path.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH
+    if mode != path.stat().st_mode:             # a read-only toolchain (the Docker image's) is already executable
+        path.chmod(mode)
+
+
 def install_wibo(base):
     entry = settings()['wibo']
     target = base / 'bin' / 'wibo'
     changed = download(entry['url'], entry['sha256'], target)
-    target.chmod(target.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+    make_executable(target)
     return changed
 
 
@@ -159,7 +165,7 @@ def install_objdiff(base):
     url, digest = objdiff_asset()
     target = base / 'bin' / 'objdiff-cli'
     changed = download(url, digest, target)
-    target.chmod(target.stat().st_mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
+    make_executable(target)
     return changed
 
 

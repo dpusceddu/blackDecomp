@@ -17,7 +17,7 @@ OUTPUT = ROOT / 'docs' / 'tools.md'
 
 SECTIONS = [
     ('Everyday tools: working on a function', [
-        'decompile.py', 'objdiff.py', 'trysrc.py', 'next.py', 'autodecomp.py', 'where.py', 'split_function.py', 'relocate_sources.py', 'permuter/prepare.py', 'permuter/cc.py',
+        'setup.py', 'next.py', 'brief.py', 'decompile.py', 'objdiff.py', 'trysrc.py', 'autodecomp.py', 'where.py', 'split_function.py', 'relocate_sources.py', 'permuter/prepare.py', 'permuter/cc.py',
         'permuter/as.py']),
     ('Everyday tools: build, check and progress', [
         'toolchain.py', 'compile.py', 'check_versions.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',

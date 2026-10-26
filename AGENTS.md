@@ -17,12 +17,14 @@
 When asked to "do a work session" (or to work on the decompilation without more detail), follow these steps. Several agents
 can run sessions at the same time, each in its own Git worktree and branch; the claims keep them apart.
 
-1. **Build.** Work in a worktree of your own on a branch from the current `main` (or `upstream/main`). Run `ninja`: it must
-   print `OK`. Save `build/SLUS_213.76/units.json` as `.local/session-baseline-units.json`; its functions with status
+1. **Build.** Work in a worktree of your own on a branch from the current `main` (or `upstream/main`). Run
+   `python3 tools/setup.py`: it installs what is missing and builds, and must end with `Ready`. Save `build/SLUS_213.76/units.json` as `.local/session-baseline-units.json`; its functions with status
    `source` are the protected set.
 2. **Pick.** Run `python3 tools/next.py --pick`: one unclaimed file, drawn at random from the best candidates (game code
    first), so sessions that start together rarely collide. If its functions make no sense to you, pick again; add related
-   unclaimed files of the same family (`python3 tools/next.py` lists the candidates).
+   unclaimed files of the same family (`python3 tools/next.py` lists the candidates). Then run `python3 tools/brief.py
+   <file>`: the file's recipe, recovered functions, earlier drafts and their notes, and for each target its callers,
+   callees, data, an m2c draft and the assembly. Start from it instead of exploring the repository.
 3. **Claim.** Open a draft pull request at once, before the real work: an empty commit is enough, with a description line
    `Claims: src/<file> [src/<file> ...]`. Then run `python3 tools/next.py claims`: if one of your files is listed with a
    lower pull request number than yours, it was claimed first; drop it from your claim and pick again. Without GitHub

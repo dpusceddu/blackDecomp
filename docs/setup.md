@@ -22,6 +22,9 @@ and are checked before releases (`python3 tools/check_versions.py` configures an
 
 ## Linux, Windows, macOS and Docker
 
+`python3 tools/setup.py` does the steps below in one go (and checks them again on later runs); this section is the manual
+version.
+
 You need the boot executable of your own copy (see [Versions](#versions)) as `orig/<GAME_ID>/<GAME_ID>`, for example
 `orig/SLUS_213.76/SLUS_213.76`, and a Linux x86-64 environment: the compilers are a Windows program (run through
 [wibo](https://github.com/decompals/wibo)) and 32-bit Linux programs.

@@ -58,13 +58,11 @@ You need your own copy of the game (USA, `SLUS_213.76`) and Linux x86-64; on Win
 sudo apt install -y git ninja-build python3 python3-venv binutils-mipsel-linux-gnu libc6-i386 xz-utils
 git clone https://github.com/dpusceddu/blackDecomp.git && cd blackDecomp
 mkdir -p orig/SLUS_213.76 && cp /path/to/SLUS_213.76 orig/SLUS_213.76/
-python3 -m venv .venv && . .venv/bin/activate && pip install -r requirements.txt
-python3 tools/toolchain.py install --objdiff   # pinned compilers and tools, SHA-256 checked
-python3 configure.py && ninja
+python3 tools/setup.py    # Python packages in .venv, the pinned toolchain (SHA-256 checked), the build
 ```
 
-A clean build takes about two minutes and ends with
-`OK  SLUS_213.76  SLUS_213.76  sha256 141b0520...`.
+The first build takes about two minutes and ends with `OK  SLUS_213.76  SLUS_213.76  sha256 141b0520...`; running
+`tools/setup.py` again later only checks.
 
 ## Contribute
 

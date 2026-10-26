@@ -38,6 +38,8 @@ build with the [README](README.md#get-started). Terms are in the [glossary](docs
 `python3 tools/next.py` lists the files to work on next: game code first, files with the most untried functions of
 tractable size at the top, claimed files left out (`--pick` draws one of the best at random). The objdiff unit list shows
 sizes and match percentages; `python3 tools/next.py near|types|identical|data|ee` adds analyses objdiff does not show.
+`python3 tools/brief.py <file>` prints what you need to start on a file: its compile recipe, recovered functions, earlier
+drafts with their notes, and for each target its callers, callees, data, an m2c draft and its assembly.
 
 ### Claiming a file
 
