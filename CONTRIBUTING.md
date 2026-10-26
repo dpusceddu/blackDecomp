@@ -1,50 +1,70 @@
 # Contributing
 
-Thank you for helping. The project reconstructs the source of the PS2 version of *Black*; a contribution is a recovered
-function, a better type or name, a tool improvement or documentation. Read [README.md](README.md) first (setup and build) and
-[docs/status.md](docs/status.md) (what exists, what is hard). You need your own copy of the game; nothing derived from it may
-be committed. Terms are in the [glossary](docs/glossary.md).
+This file is the rulebook for everyone, people and AI agents alike (agents also read [AGENTS.md](AGENTS.md)). A contribution
+is a recovered function, a better type or name, a tool fix or documentation. You need your own copy of the game; set up the
+build with the [README](README.md#get-started). Terms are in the [glossary](docs/glossary.md).
 
-## Picking work
+## Rules
+
+- **Evidence.** A function is `exact` (compiled from source, and the whole image stays byte-identical) or a `draft` (a
+  `NON_MATCHING` block). Never describe a function as more than its level, and never demote an exact function to gain another.
+- **The build stays identical.** Every commit leaves `ninja` printing `OK` for USA retail (`SLUS_213.76`). After changing
+  shared build tools, the linker or splitting code, also run `python3 tools/check_versions.py` (all five versions).
+- **No shortcuts.** No filler, padding, byte patches or hand-written assembly to make something match. A per-file compiler
+  flag or assembler in `config/SLUS_213.76/splits.yaml` needs a concrete reason in the native code, written in a `note:` on
+  the entry; reject one that only makes a single function match by coincidence.
+- **One owner per function.** Every function belongs to exactly one file (`python3 tools/where.py func_XXXXXXXX`). Claim a
+  file before editing it and edit only what you claimed; shared headers (`include/ps2/`, headers other files use) and
+  `splits.yaml` are small, reviewed changes, in commits of their own.
+- **Drafts** go only in `#ifdef NON_MATCHING` above the function's `INCLUDE_ASM` line, with a one-line `// Unmatched:` note
+  saying what differs; no `#if 0` blocks or other draft macros.
+- **Only real work is committed**: source, drafts, headers, hand-edited configuration, docs and tests. Never commit game
+  data or anything generated from it (executables, disc contents, `asm/`, `build/`, `data/`, savestates, compilers, build
+  output), nor `progress/` or the progress table of the README (`ninja badges` writes them after merging).
+- **Names, prototypes, types and layouts are source**, edited by hand and reviewed like code: `config/SLUS_213.76/symbols.txt`,
+  `include/ps2/prototypes.h`, `include/ps2/recovered_types.h`, `include/<library>/`. Names need evidence (see
+  [Naming](#naming)); mark what no matched function confirms `UNVERIFIED`. Nothing may depend on data from outside the
+  repository: what you learn with Ghidra or IDA enters as edits to these files.
+- **No machine-specific details** in committed text: host names, user names, absolute paths, addresses, credentials. Local
+  settings go in `.local/` (ignored).
+- **Style.** Format new C/C++ with `.clang-format`; never reformat existing sources (matching depends on their shape).
+  Source layout: `src/<library>/<name>.c|cpp` (`src/game/<subsystem>/` for game code, link-once copies in
+  `src/<library>/inline/`), one file per TU listing every function; headers in `include/<library>/`. Tools are stdlib-first
+  Python with a purpose docstring and `--help`. Docs stay short and current; no per-function proof journals.
+- **Commits** are small and logical (one file or one tool change is ideal), with a clear message.
+
+## Picking and claiming work
 
 `python3 tools/next.py` lists the files to work on next: game code first, files with the most untried functions of
-tractable size at the top, claimed files left out. The objdiff unit list shows unit sizes and match percentages, and
-`python3 tools/next.py near|types|identical|data|ee` adds analyses objdiff does not show (near-miss causes, missing types,
-identical bodies, owned-data obstacles, unsupported EE instructions). Claim the file before editing it.
+tractable size at the top, claimed files left out (`--pick` draws one of the best at random). The objdiff unit list shows
+sizes and match percentages; `python3 tools/next.py near|types|identical|data|ee` adds analyses objdiff does not show.
 
 ### Claiming a file
 
 A claim is an open pull request: the files it changes, plus the ones named on a `Claims:` line of its description, are
 claimed. Open a draft pull request when you start (an empty commit is enough), with a line such as
-`Claims: src/game/ai/tu_18c260.c`, and push as you go; `tools/next.py` skips claimed files for everyone, and also files that
-your other local worktrees change, so several sessions on one machine do not collide. If two pull requests claim the same
-file, the lower number keeps it (`python3 tools/next.py claims` lists such files). A draft without updates for 48 hours
-lapses: push your work in progress, or comment, to keep it. Edit only the files you claimed; shared headers (`include/ps2/`) and `config/SLUS_213.76/splits.yaml` are small,
-reviewed changes. Pull requests do not touch `progress/` or the progress table of the README (see Commit rules).
+`Claims: src/game/ai/tu_18c260.c`, and push as you go. `tools/next.py` skips claimed files, and files that your other local
+worktrees change. If two pull requests claim the same file, the lower number keeps it (`python3 tools/next.py claims`). A
+draft without updates for 48 hours lapses: push your work in progress, or comment, to keep it.
 
-## The matching workflow
+## The matching loop
 
-Each translation unit (TU) is one file, `src/<library>/tu_<address>.c|cpp`, that lists the functions it owns in address
-order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines. Every function is listed in exactly one file:
-`python3 tools/where.py func_XXXXXXXX` prints the file and the line, with no game files or build needed.
+Each translation unit (TU) is one file that lists the functions it owns in address order: recovered functions in C or C++,
+the others as `INCLUDE_ASM` lines.
 
-0. Setup for the loop: `ninja` once, then `ninja objdiff`, and open the repository root in the
-   [objdiff](https://github.com/encounter/objdiff) GUI. Pick the unit and the function; every time you save the TU file objdiff
-   runs the unit's single-object Ninja target and shows the diff. `ninja` remains the
-   byte-exact check of the whole image.
-1. Read the [matching handbook](docs/matching-handbook.md) before each TU: measured recipes for the usual obstructions and
-   the order in which to try things. Types, callee signatures and object lifetimes explain most mismatches. The assembly of a
-   function is `asm/SLUS_213.76/nonmatchings/<file>/func_XXXXXXXX.s` after the first `ninja`.
-2. Replace the function's `INCLUDE_ASM` line with your C or C++ and run `ninja`. It ends with `OK`, or with
-   `MISMATCH src/game/unsorted/tu_100258.c: func_00100258: differs from the original` (compile errors name the file too). A first
-   draft: `python3 tools/decompile.py func_00100258` prints an m2c draft (with the project's context) and the file and line
-   it belongs to; `--write` replaces the `INCLUDE_ASM` line in place, and you then edit and rebuild. For many functions at
-   once, `python3 tools/autodecomp.py run ...` ([docs/pipeline.md](docs/pipeline.md)); to try one hand-written function without
-   editing the TU, `python3 tools/trysrc.py ADDR file.c`. When a few instructions differ, run
-   [decomp-permuter](docs/pipeline.md#using-decomp-permuter-directly) on the function directly.
-3. If it does not match yet, keep the readable version under `#ifdef NON_MATCHING` with the marker as the `#else` branch, and a
-   one-line `// Unmatched:` comment saying what differs. `python3 configure.py --non-matching` followed by `ninja` builds all
-   drafts into a separate, non-matching executable (`python3 configure.py` goes back):
+1. `ninja` once (it prints `OK`), then `ninja objdiff`, and open the repository root in the
+   [objdiff](https://github.com/encounter/objdiff) GUI. Saving a TU file rebuilds its object and shows the diff.
+2. Read the [matching handbook](docs/matching-handbook.md) before each TU: types, callee signatures and object lifetimes
+   explain most mismatches. A function's assembly is `asm/SLUS_213.76/nonmatchings/<file>/func_XXXXXXXX.s`.
+3. Replace the `INCLUDE_ASM` line with C or C++. `python3 tools/decompile.py func_XXXXXXXX` prints an m2c draft with the
+   project's context (`--write` puts it in place). For the last differing instructions, run
+   [decomp-permuter](docs/pipeline.md#using-decomp-permuter-directly) on the function.
+4. `ninja` is the byte-exact check of the whole image: `OK`, or the file and function that differ, with the size and an
+   instruction diff.
+5. A function that compiles under another name (a C++ method) needs a line in `symbols.txt`
+   (`Reset__4Game = 0x1b78d8; // type:func`). Code that needs other flags than the rest of its file gets a file of its own
+   (`python3 tools/split_function.py func_XXXXXXXX [--cpp] [--flags "..."]`, see [docs/units.md](docs/units.md)).
+6. If it does not match yet, keep the draft:
 
    ```c
    #ifdef NON_MATCHING
@@ -54,38 +74,9 @@ order. Recovered functions are C or C++; the others are `INCLUDE_ASM` lines. Eve
    INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/<file>", func_001B78D8);
    #endif
    ```
-4. A function that compiles under another name (a C++ method) needs one line in `config/SLUS_213.76/symbols.txt`
-   (`Reset__4Game = 0x1b78d8; // type:func`); code that needs other compiler flags than the rest of its file gets a file of its
-   own and an entry in `splits.yaml` (`python3 tools/split_function.py func_XXXXXXXX [--cpp] [--flags "-O1 -G0 -snas"]` does both;
-   see [docs/units.md](docs/units.md)); a name the code uses without defining also goes in
-   `symbols.txt`. A readable name that is not a definition is an alias line (`Reset = 0x1b78d8; // type:func alias`): it
-   never changes the build ([docs/build.md](docs/build.md#symbols-and-progress)). A normal contribution edits one source file
-   and at most one `splits.yaml` entry and `symbols.txt` line.
-5. Run `ninja`, `ninja progress` and the tests (below). Do not commit `progress/` or the table in `README.md`, even when your
-   change moves the numbers: they are generated (`ninja badges`) and the maintainer regenerates them after merging, so that
-   pull requests never conflict on them. Put the before/after numbers of `ninja progress` in the pull request description.
 
-Example: edit `func_00201960` directly in its existing file. It loads two fields and calls a function; no file split is
-needed. Start with a clean working tree, and save the exact file before the experiment:
-
-```sh
-python3 tools/where.py func_00201960
-cp src/game/unsorted/tu_1fcd90_201518.c build/example.before.c
-python3 tools/decompile.py func_00201960 --write
-ninja build/SLUS_213.76/objdiff/base/tu_1fcd90_201518.o
-# Inspect the function in the objdiff GUI, then:
-ninja
-cp build/example.before.c src/game/unsorted/tu_1fcd90_201518.c
-ninja
-rm build/example.before.c
-```
-
-An unfinished edit can have a different size: objdiff still builds its object. The full-image check prints, for example,
-`func_00201960: size differs (40 bytes, original 32)` and an instruction diff. Commit an unfinished body under
-`#ifdef NON_MATCHING` with the INCLUDE_ASM alternative, as above. Restore only your experiment's file when reverting.
-
-Evidence matters: a function is `exact` (the whole image stays byte-identical) or a `draft` (a `NON_MATCHING` block); never
-describe a function as more than that.
+   `python3 configure.py --non-matching` and `ninja` build all drafts into a separate executable (`python3 configure.py`
+   goes back).
 
 ## Naming
 
@@ -168,85 +159,41 @@ Renaming changes no bytes in C. For a C++ class or namespace it changes the mang
 prefix too: `Q29HideViews9HideAgent` becomes `Q210SearchView9HideAgent`), so search `symbols.txt` and the `__asm__("...")` labels
 for the old name and rewrite them together with the length. Mark a field `UNVERIFIED` when no matched function uses it.
 
-### Moving a file into a subsystem directory
-
-New game files start in `src/game/unsorted/`; move one when you learn what it is (`src/game/README.md` lists the directories):
-
-```sh
-python3 tools/relocate_sources.py src/game/unsorted/tu_153058.c src/game/ai/tu_153058.c
-ninja        # OK
-```
-
-The tool does the `git mv` and rewrites the `src:` paths of every split entry of the file and every other mention of the path
-(documentation, headers, comments); `--dry-run` only counts. For several files give it a file of `old new` pairs instead.
-
-## Commit rules
-
-- **The build stays identical.** Every commit leaves `ninja` printing `OK` for USA retail (`SLUS_213.76`), the only version
-  routine work builds and checks. The other four versions are rebuilt from assembly; run `python3 tools/check_versions.py`
-  (all five, `OK` or `MISMATCH` each) before a release and after changing shared build tools, linker or splitting code. `ninja progress` must not regress: never demote a previously exact function to claim a gain.
-- **Never commit game data**: no executables, disc contents, extracted files, generated assembly (`asm/`, `build/`, `data/`),
-  savestates, compiler archives or build output. They live in ignored directories. Only real work is committed: what the executable plus the
-  committed sources and configuration determine is generated into `build/` and not committed (`config/README.md`).
-- **Names, prototypes, types and layouts are ordinary source.** `config/SLUS_213.76/symbols.txt`, `include/ps2/prototypes.h`,
-  `include/ps2/recovered_types.h` and the headers under `include/<library>/` are edited by hand and reviewed like code. A recovered layout is a
-  `Recovered_<Name>` struct with `unk_XX` fields (named after the PS2 offset) for the accessed prefix of an object: define it in the one
-  source file that uses it, or in a plainly named header when several files do, and fold it into the class header once the class is known; mark what is not
-  confirmed by a matched function `UNVERIFIED`. No tool or test needs data from outside the repository. If you analyse the
-  executable with Ghidra, IDA or another disassembler, that is your own tool: put what you learn into these files.
-- **Keep committed text free of machine-specific details**: host names, user names, absolute paths, network addresses and
-  credentials. Local settings go in `.local/` (ignored).
-- Small logical commits with a clear message (what and why). One TU or one tool change per commit is ideal.
-- Keep documentation short and current; update the relevant file in `docs/` when behavior changes.
-
-## Checking and inspecting a build
-
-`ninja` ends with `tools/check_elf.py`, which compares the rebuilt executable with the expected hashes and names the
-functions that differ. `tools/diffelf.py REF BUILT` diffs two executables section by section and `tools/objdump.py` prints
-the sections, symbols and relocations of an object file; they are conveniences, not requirements. The ordinary binutils work
-on the same files: `mipsel-linux-gnu-objdump -d` and `mipsel-linux-gnu-readelf` (package `binutils-mipsel-linux-gnu`).
-
 ## Cleanup work
 
-Matching is not the only useful contribution. Two kinds of cleanup are always welcome, as long as `ninja` still prints `OK`:
+Always welcome, as long as `ninja` prints `OK`:
 
 - **Readable C++ for automatic drafts.** Many matched game, Kynapse, animation and physics functions are plain C named
-  `func_XXXXXXXX`, as the decompiler produced them, although those libraries are C++. Turning them into methods of known
-  classes (`include/<library>/classes/`), with real names, types and parameter names, makes the code useful. The mangled
-  name changes with the declaration: update `config/SLUS_213.76/symbols.txt` so assembly callers still link (see Naming). RenderWare,
-  the Sony libraries and libc are C, so C is correct there.
-- **Real file names and directories.** Files are named `tu_<address>` until evidence shows the original name or class
-  (strings, RTTI, class ownership). The rule for `src/game/`: **move a file when you learn what it is, rename it when the
-  original name is known.** Moving means a `git mv` into the subsystem directory plus the `src:` path in `splits.yaml`
-  (`python3 tools/relocate_sources.py old new` does both, see Naming); a rename is the same. A new file starts in `src/game/unsorted/`. Compiler-emitted
-  inline and template copies go in `src/<library>/inline/` (the build computes whose they are, `build/SLUS_213.76/inline_owners.txt`).
+  `func_XXXXXXXX`, although those libraries are C++. Turning them into methods of known classes, with real names and types,
+  makes the code useful (update `symbols.txt` for the new mangled name, see [Naming](#naming)). RenderWare, the Sony
+  libraries and libc are C.
+- **Real file names and directories.** Move a file into its `src/game/` subsystem when you learn what it is, rename it when
+  the original name is known: `python3 tools/relocate_sources.py old new` moves the file and rewrites every mention of its
+  path, including the `src:` entries in `splits.yaml` (`src/game/README.md` lists the directories).
 
-## Tests
+## Checks and pull requests
 
 ```sh
-python3 -m unittest discover -s tests          # build and linker tests
-python3 -m unittest discover -s tests/tools    # tool tests
+ninja                                           # OK for SLUS_213.76
+ninja progress                                  # functions and code matched; put before/after in the pull request
+python3 -m unittest discover -s tests           # build and linker tests
+python3 -m unittest discover -s tests/tools     # tool tests
 ```
 
-Tests need no game files; those that would need private inputs skip. CI runs both, checks that every tool answers `--help`, and
-(informationally) compiles a trivial file with the pinned toolchain.
+Tests need no game files. To inspect a build: `tools/diffelf.py REF BUILT` diffs two executables, `tools/objdump.py` prints
+an object's sections, symbols and relocations, and the ordinary `mipsel-linux-gnu-objdump` works too.
 
-## Code style
+Whoever opens a pull request is responsible for it: read the diff, run the checks, and say in the description how the change
+was produced (by hand, with tools, or by an AI agent).
 
-- Format new C/C++ with the repository's `.clang-format` (4-space indents, attached braces, `T* p`, 120 columns). Do not
-  reformat existing files: matching depends on exact source shape, and unrelated whitespace changes make review harder.
-- Source layout: `src/<library>/<name>.c|cpp` (`src/game/<subsystem>/` for the game library), one file per TU with every function of the TU (INCLUDE_ASM lines, drafts in
-  `#ifdef NON_MATCHING` blocks). Headers follow the libraries (`include/<library>/`, shared helpers in `include/ps2/`).
-  `tools/build/layout.py` has the naming rules.
-- Name functions and types after what the code does only where the evidence supports it; unknown functions stay
-  `func_XXXXXXXX`. Mark field offsets that are only accessed, not understood, as such (`UNVERIFIED`).
-- Python tools: stdlib first, a purpose docstring and `--help` for every tool, no machine-specific paths.
-- Do not push generated or private artifacts; do not add dependencies without a reason.
+## Reference
 
-## Using AI assistants
-
-Automated contributors follow the same rules; see [AGENTS.md](AGENTS.md). Whoever opens the pull request is responsible for
-it: read the diff, run the build and say in the description how the change was produced.
+- For everyone: [docs/status.md](docs/status.md) (state and open problems), [docs/matching-handbook.md](docs/matching-handbook.md),
+  [docs/units.md](docs/units.md) (TU files and the split list), [docs/glossary.md](docs/glossary.md),
+  [docs/tools.md](docs/tools.md) (index of the tools), [docs/setup.md](docs/setup.md), [docs/modding.md](docs/modding.md).
+- For maintainers and build work: [docs/build.md](docs/build.md), [docs/pipeline.md](docs/pipeline.md),
+  [docs/tus.md](docs/tus.md), [docs/inputs.md](docs/inputs.md), [docs/progress-reports.md](docs/progress-reports.md),
+  [docs/history.md](docs/history.md).
 
 ## License
 
