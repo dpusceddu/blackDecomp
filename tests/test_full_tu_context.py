@@ -44,14 +44,16 @@ class FullTUContext(unittest.TestCase):
         self.assertEqual(V.owned_constant_names([dict(addr=0x1000)],placement),{'.lit4'})
 
     def test_unplaced_allocated_inputs_miss_every_sorted_output_wildcard(self):
-        names=['','.text.kept','.text.pending','.rodata.pending','.debug_info','.shstrtab']
+        names=['','.text.kept','.text.pending','.rodata.pending','.debug_info','.shstrtab',
+               '.reginfo','.MIPS.abiflags']
         strings=b'\0';offsets=[0]
         for name in names[1:]:offsets.append(len(strings));strings+=name.encode()+b'\0'
         raw=bytearray(52+len(strings));raw[52:]=strings
         table=len(raw);headers=[]
         for i,name in enumerate(names):
-            flags=6 if i in(1,2) else 2 if i==3 else 0
-            headers.append((offsets[i],3 if i==5 else 1,flags,0,52 if i==5 else 0,len(strings)if i==5 else 4,0,0,4,0))
+            flags=6 if i in(1,2) else 2 if i in(3,6,7) else 0
+            kind=0x70000006 if i==6 else 0x7000002A if i==7 else 3 if i==5 else 1
+            headers.append((offsets[i],kind,flags,0,52 if i==5 else 0,len(strings)if i==5 else 4,0,0,4,0))
         raw.extend(b''.join(struct.pack('<10I',*h)for h in headers))
         struct.pack_into('<I',raw,32,table);struct.pack_into('<HHH',raw,46,40,len(names),5)
         result=elfobj.unplaced_allocated_sections(raw,{'.text.kept'})

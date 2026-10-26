@@ -265,6 +265,10 @@ def unplaced_allocated_sections(data, keep):
     Undefining a context function's symbol alone leaves its bytes allocated.
     Rename its section so the linker discards those bytes instead of treating
     them as an orphan input.
+
+    MIPS ABI metadata must retain its canonical section names for BFD to read
+    the object again. It has no sorted output wildcard and reaches the linker's
+    catch-all discard rule without being renamed.
     """
     shoff, = struct.unpack_from('<I', data, 32)
     shentsize, shnum, shstrndx = struct.unpack_from('<HHH', data, 46)
@@ -272,7 +276,7 @@ def unplaced_allocated_sections(data, keep):
     strings = data[headers[shstrndx][4]:headers[shstrndx][4] + headers[shstrndx][5]]
     names = [strings[h[0]:].split(b'\0', 1)[0].decode() for h in headers]
     return {name: '.discard.source.%d' % i for i, (name, h) in enumerate(zip(names, headers))
-            if i and h[2] & 2 and name not in keep}
+            if i and h[2] & 2 and name not in keep and h[1] not in (0x70000006, 0x7000002A)}
 
 
 def trim_sections(data, sizes):
