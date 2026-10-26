@@ -1,19 +1,12 @@
 #include "include_asm.h"
 
 #include "kynapse/graph/nearest.hpp"
-
-#ifdef NON_MATCHING
-// Ported from an unpublished companion project.
 #include "kynapse/bound_buffers.hpp"
 
-// /SLUS_213.76 0x2eef88
 ObjectBase* CreateBoundBuffers(BufferOwner* bound)
 {
     return new BoundBuffers(bound);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EEF88);
-#endif
 
 #ifdef NON_MATCHING
 extern const char D_00407268[];
