@@ -24,21 +24,23 @@ s32 func_003509E0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, f32 fparg0, f32 fparg
 }
 
 #include "animation/playback_state.h"
+#include "animation/instance.h"
 #include "animation/transition_records.h"
 
 extern PlaybackHistory* AnimationPlayback_PreviousHistory(PlaybackState*, int) ANIMATION_FUNCTION(003502C0);
 extern float AnimationPlayback_ChangedSpan(void*, AnimationGraphNode*, AnimationParameters*, unsigned, float, float,
                                            float) ANIMATION_FUNCTION(0034EDB8);
-extern float* AnimationPlayback_EvaluateMotion(PlaybackState*, AnimationGraphNode*, AnimationParameters*, unsigned, int,
-                                               int, float, float, float) ANIMATION_FUNCTION(00350B30);
+extern BkAnimationPoseHeaderPS2* AnimationPlayback_EvaluateMotion(PlaybackState*, AnimationGraphNode*,
+                                                                  AnimationParameters*, unsigned, int, int, float,
+                                                                  float, float) ANIMATION_FUNCTION(00350B30);
 
 float Graph_Advance(TransitionTiming*, float, float, float) ANIMATION_FUNCTION(00350A50);
 
 float AnimationPlayback_RefreshSpan(PlaybackState*, AnimationGraphNode*, AnimationParameters*)
     ANIMATION_FUNCTION(00351030);
 
-float* AnimationPlayback_RootMotion(PlaybackState*, AnimationGraphNode*, AnimationParameters*, unsigned, int, float,
-                                    float) ANIMATION_FUNCTION(00350F28);
+BkAnimationPoseHeaderPS2* AnimationPlayback_RootMotion(PlaybackState*, AnimationGraphNode*, AnimationParameters*, float,
+                                                       float, unsigned, int) ANIMATION_FUNCTION(00350F28);
 
 int AnimationPlayback_IsTransitionActive(PlaybackState*, int) ANIMATION_FUNCTION(00351168);
 
@@ -74,8 +76,9 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_0035
 
 #ifdef NON_MATCHING
 // Unmatched: native final argument scheduling differs.
-float* AnimationPlayback_RootMotion(PlaybackState* state, AnimationGraphNode* node, AnimationParameters* bank,
-                                    unsigned flags, int root, float current, float previous) {
+BkAnimationPoseHeaderPS2* AnimationPlayback_RootMotion(PlaybackState* state, AnimationGraphNode* node,
+                                                       AnimationParameters* bank, float current, float previous,
+                                                       unsigned flags, int historyCursor) {
     if (node->childCount <= 0 && (node->opcode & 0x80)) return 0;
     if (state->flags & 4) {
         float previousSpan = state->span;
@@ -83,7 +86,7 @@ float* AnimationPlayback_RootMotion(PlaybackState* state, AnimationGraphNode* no
         AnimationPlayback_RefreshSpan(state, node, bank);
         current = AnimationPlayback_ChangedSpan(state, node, bank, flags, state->span, previousSpan, current);
     }
-    return AnimationPlayback_EvaluateMotion(state, node, bank, flags, root, 0, current, previous, state->span);
+    return AnimationPlayback_EvaluateMotion(state, node, bank, flags, historyCursor, 0, current, previous, state->span);
 }
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00350F28);
