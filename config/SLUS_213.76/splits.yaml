@@ -294,7 +294,7 @@ splits:
   - {src: src/game/camera/tu_136b50.c, range: [0x136b50, 0x136ba8]}
   - {src: src/game/camera/tu_136ba8.c, range: [0x136ba8, 0x136bd0]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x136bd0, 0x136f10]}
-  - {src: src/game/camera/tu_136f10.c, range: [0x136f10, 0x1386c8]}
+  - {src: src/game/camera/tu_136f10.cpp, range: [0x136f10, 0x1386c8], note: "Native paired Y-vector construction at 0x137490 uses canonical C++ storage helpers; original TU and language are unverified."}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x1386c8, 0x138970]}
   - {src: src/game/camera/tu_138970.c, range: [0x138970, 0x1389a0]}
   - {src: src/game/camera/tu_1389a0.c, range: [0x1389a0, 0x1389a8]}

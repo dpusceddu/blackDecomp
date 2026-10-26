@@ -2,18 +2,31 @@
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
 #include "game/actor/control_view.h"
+#include "ps2/vu0.hpp"
+
+/* XYZ are (0, value, 0); W follows the shared native constructor. */
+static inline Game::Vec ActorYVector(f32 value) {
+    Game::Position4 point;
+    Game::Store(point, Game::Make3(0.0f, value, 0.0f));
+    return Game::Load(point);
+}
+extern "C" {
 
 extern void* D_0040F4D0;
 extern s32 func_0012D158(void*, s32, s32);
 extern f32 func_0012D0D0(void*, f32, f32);
 extern s32 func_00138320(void*);
 extern f32 func_00138360(s32);
+extern s128 D_004147A0;
+extern f32 D_003BCE68, D_003BCE64;
+/* UNVERIFIED: downstream return type is unused; the mixed-bank input values are explicit. */
+extern void func_00143158(void*, s128, s128, s128, f32, f32);
 
 extern void * D_0040F4BC;
 extern s32 D_003BD140;
 extern unsigned char D_004147C0;
 extern M2C_UNK D_003F5138;
-const u32 rodata_003F5168[12] __asm__("D_003F5168") __attribute__((aligned(8))) = { 0x3DCCCCCD, 0x3E800000, 0x3E19999A, 0x3D99999A, 0x3D99999A, 0x3D99999A, 0x3D99999A, 0x3D99999A, 0x3D851EB8, 0x3D99999A, 0x3D851EB8, 0x00000000 };
+extern const u32 rodata_003F5168[12] __asm__("D_003F5168") __attribute__((aligned(8))) = { 0x3DCCCCCD, 0x3E800000, 0x3E19999A, 0x3D99999A, 0x3D99999A, 0x3D99999A, 0x3D99999A, 0x3D99999A, 0x3D851EB8, 0x3D99999A, 0x3D851EB8, 0x00000000 };
 extern volatile char D_003F5168;
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00136F10);
@@ -35,7 +48,15 @@ s32 func_00137450(Recovered_ManagedActor* actor) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137450);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137490);
+void func_00137490(Recovered_ManagedActor* actor, f32 firstValue, f32 secondValue) {
+    void* control = actor->unk_26C;
+    if (control) {
+        s128 first = ActorYVector(firstValue);
+        s128 second = ActorYVector(secondValue);
+        func_00143158(control, first, second,
+            D_004147A0, D_003BCE68, D_003BCE64);
+    }
+}
 void func_001374F8(Recovered_ManagedActor* actor, s32 index) {
     Actor_IndexedRecord(actor, index)->unk_4C = 0.0f;
 }
@@ -128,9 +149,11 @@ void func_00138470(void *arg0, void *arg1) {
     var_f1 = 0.0f;
     M2C_FIELD(arg0, void **, 0) = arg1;
     if (M2C_FIELD(arg1, f32 *, 0x308) > 0.0f) {
-        var_f1 = 1.0f / func_001378F0(arg1);
+        var_f1 = 1.0f / func_001378F0((Recovered_ManagedActor*)arg1);
     }
     M2C_FIELD(arg0, f32 *, 4) = var_f1;
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_001384C8);
+
+}
