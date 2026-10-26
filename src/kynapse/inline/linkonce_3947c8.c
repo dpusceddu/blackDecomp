@@ -35,4 +35,21 @@ void func_003947C8(Recovered_KynapseArrayOwner* self, int flags) {
     self->table = &D_003E0040;
     if (flags & 1) D_003C87E0(self);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/linkonce_3947c8", func_003948A0);
+/* Partial owner view; its identity and complete extent are UNVERIFIED. */
+typedef struct Recovered_KynapseChildOwner {
+    void* table;
+    Recovered_KynapseArrayElement* child;
+} Recovered_KynapseChildOwner;
+
+extern int D_003F0F00;
+
+void func_003948A0(Recovered_KynapseChildOwner* self, int flags) {
+    self->table = &D_003F0F00;
+    if (self->child) {
+        Recovered_KynapseArrayElement* child = self->child;
+        Recovered_KynapseArrayElementTable* table = child->table;
+        table->destroy((char*)child + table->adjustment, 3);
+    }
+    self->table = &D_003E0040;
+    if (flags & 1) D_003C87E0(self);
+}
