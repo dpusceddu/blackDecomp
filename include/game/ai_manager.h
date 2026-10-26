@@ -26,7 +26,7 @@ typedef struct {
     u8 unk_B8[0xC];
     s32 unk_C4; // Native actor category; the gameplay meaning of category 2 is unknown.
     u8 unk_C8[0x190];
-    f32 unk_258; // UNVERIFIED: native flag setup randomizes this scalar; its gameplay role is unknown.
+    f32 unk_258; // Exact 0x137b08 writes a random integer minus a random float; gameplay role is unknown.
     u8 unk_25C[0x10];
     void* unk_26C; // UNVERIFIED: native layer-entry predicate accesses a selector and pointer table here.
     u8 unk_270[0x34];
@@ -48,7 +48,7 @@ typedef struct {
     s32 unk_3A0;
     u32 groupKey;
     u8 unk_3A8[4];
-    u8 unk_3AC; // UNVERIFIED: native flag setup writes this byte; its gameplay role is unknown.
+    u8 unk_3AC; // Exact 0x137b08 confirms flag storage; its gameplay role is unknown.
     u8 controlsChanged;
     u8 unk_3AE[6];
     u8 unk_3B4;
