@@ -8,6 +8,15 @@ extern void * D_0040F4D0;
 extern s32 func_00135550();
 extern s32 func_001848C0();
 
+/* Partial slot pool; the capacity and slot meanings are UNVERIFIED. */
+typedef struct Recovered_SlotPool {
+    void* unk_00[18];
+    u8 unk_48[24];
+    s16 unk_60;
+    u16 unk_62;
+} Recovered_SlotPool;
+typedef char RecoveredSlotPointerIs32[(sizeof(void*) == 4) ? 1 : -1];
+
 s32 func_001E6650(void *arg0, s32 arg1, s64 arg2, s32 arg3) {
     u8 sp[8] __attribute__((aligned(16)));
 
@@ -38,8 +47,34 @@ s16 func_001E69E0(void *arg0) {
     return M2C_FIELD(arg0, s16 *, 0x62);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E69E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6A40);
+void* func_001E69E8(Recovered_SlotPool* pool) {
+    int index;
+    for (index = 0; index < pool->unk_60; index++) {
+        if (pool->unk_48[index] == 0) {
+            pool->unk_48[index] = 1;
+            pool->unk_62--;
+            return pool->unk_00[index];
+        }
+    }
+    return 0;
+}
+
+void func_001E6A40(Recovered_SlotPool* pool, void* object) {
+    int index = 0;
+    if (pool->unk_60 > 0) {
+        u8* used = pool->unk_48;
+        void** slot = pool->unk_00;
+        do {
+            if (*slot == object) {
+                used[index] = 0;
+                pool->unk_62++;
+                return;
+            }
+            index++;
+            slot++;
+        } while (index < pool->unk_60);
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6A98);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6AF0);
 
