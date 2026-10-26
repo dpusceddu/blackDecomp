@@ -7,5 +7,16 @@ namespace KaimPathData {
 ScriptWP::ScriptWP():position(gOrigin){func_0035CBC0(mode,D_003C71F8);func_0035CBC0(action,D_003C7208);}
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_waypoint", func_002DF5A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/behaviors_waypoint", func_002DF608);
+namespace KaimPathData {
+bool PathWay::TranslateOne(const Vec3& delta, unsigned int index) {
+    if (index >= count) return false;
+    records[index].position += delta;
+    return true;
+}
+
+bool PathWay::SetPosition(const Vec3& position, unsigned int index) {
+    if (index >= count) return false;
+    records[index].position = position;
+    return true;
+}
+}
