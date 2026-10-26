@@ -3694,11 +3694,11 @@ splits:
   - {src: src/animation/inline/linkonce_394e58.c, range: [0x394e58, 0x394e90]}
   - {src: src/animation/inline/linkonce_394e90.c, range: [0x394e90, 0x3950f8]}
   - {src: src/animation/inline/linkonce_3950f8.c, range: [0x3950f8, 0x395130]}
-  - {src: src/animation/inline/linkonce_395130.c, range: [0x395130, 0x3953f0]}
+  - {src: src/animation/inline/linkonce_395130.c, range: [0x395130, 0x3953f0], flags: [-x, c++, -O2, -G0, -snas], note: C++ index destructor uses virtual allocator methods}
   - {src: src/animation/inline/linkonce_3953f0.c, range: [0x3953f0, 0x395428]}
-  - {src: src/animation/inline/linkonce_395428.c, range: [0x395428, 0x3956e8]}
+  - {src: src/animation/inline/linkonce_395428.c, range: [0x395428, 0x3956e8], flags: [-x, c++, -O2, -G0, -snas], note: C++ index destructor uses virtual allocator methods}
   - {src: src/animation/inline/linkonce_3956e8.c, range: [0x3956e8, 0x395720]}
-  - {src: src/animation/inline/linkonce_395720.c, range: [0x395720, 0x395890]}
+  - {src: src/animation/inline/linkonce_395720.c, range: [0x395720, 0x395890], flags: [-x, c++, -O2, -G0, -snas], note: C++ index destructor uses virtual allocator methods}
   - {src: src/animation/inline/linkonce_395890.c, range: [0x395890, 0x395958]}
   - {src: src/animation/inline/linkonce_395958.c, range: [0x395958, 0x3959e8]}
   - {src: src/animation/inline/linkonce_3959e8.c, range: [0x3959e8, 0x395c18]}

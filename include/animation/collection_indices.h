@@ -11,7 +11,7 @@ struct AnimationContainerAllocator {
     virtual void *Allocate(int, const AnimationAllocationTag *) = 0;
     virtual void Free(void *, const AnimationAllocationTag *) = 0;
     virtual void AddRef() = 0;
-    virtual void Release() = 0;
+    virtual int Release() = 0; // Return meaning is UNVERIFIED.
 };
 struct AnimationIndexNode {
     int height;
@@ -45,12 +45,15 @@ struct AnimationIndexIterator {
         return *this;
     }
 };
+struct AnimationIndexTagView {
+    void *tags;
+    AnimationContainerAllocator *allocator;
+};
 struct AnimationIndex {
     AnimationIndexNode *root;
     int count;
     AnimationContainerAllocator *allocator;
-    void *tags;
-    AnimationContainerAllocator *tagAllocator;
+    AnimationIndexTagView tagStorage;
     AnimationIndexIterator Find(const int *key) const {
         AnimationIndexNode *current = root, *found = 0;
         while (current && !found) {
