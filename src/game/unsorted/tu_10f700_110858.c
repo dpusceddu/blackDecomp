@@ -28,6 +28,23 @@ typedef struct Recovered_SlotOwner {
     u8 unk_7E2;
 } Recovered_SlotOwner;
 
+/* Partial sampled-track layout; member meanings remain UNVERIFIED. */
+typedef struct Recovered_SamplePoint {
+    f32 unk_00;
+    u8 unk_04[0x3C];
+} Recovered_SamplePoint;
+
+typedef char RecoveredSamplePointerIs32[(sizeof(void*) == 4) ? 1 : -1];
+typedef char RecoveredSamplePointSize[(sizeof(Recovered_SamplePoint) == 0x40) ? 1 : -1];
+
+typedef struct Recovered_SampleTrack {
+    s32 unk_00;
+    u8 unk_04[4];
+    s16 unk_08;
+    u8 unk_0A[0xE];
+    Recovered_SamplePoint* unk_18;
+} Recovered_SampleTrack;
+
 s32 func_00110858(s32 arg0) {
     return arg0 + 0x7F0;
 }
@@ -59,5 +76,27 @@ void func_00110940(Recovered_SlotOwner* owner, int index) {
     owner->unk_7E0 = 1;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_10f700_110858", func_001109C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_10f700_110858", func_001109C8);
+s32 func_001109C8(Recovered_SampleTrack* track, f32 value) {
+    s16 index = track->unk_08;
+    Recovered_SamplePoint* point;
+    int finished;
+
+    if (index < 0) { index = 0; }
+    if (index > track->unk_00 - 2) { index = track->unk_00 - 2; }
+    point = (Recovered_SamplePoint*)(index * 0x40 + (u32)track->unk_18);
+    do {
+        finished = 1;
+        if (value < point->unk_00 && index > 0) {
+            point--;
+            finished = 0;
+            index--;
+        }
+        if (point[1].unk_00 <= value && index < track->unk_00 - 2) {
+            point++;
+            finished = 0;
+            index++;
+        }
+    } while (!finished);
+    return index;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_10f700_110858", func_00110A78);
