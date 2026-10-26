@@ -96,7 +96,7 @@ splits:
   - {src: src/game/ui/tu_10a870_10b1c8.c, range: [0x10b1c8, 0x10b270], flags: [-G0, -snas, -O2, -fno-schedule-insns], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/ui/tu_10a870_10b270.c, range: [0x10b270, 0x10b2a8], assembler: sn-min6}
   - {src: src/game/ui/tu_10a870.c, range: [0x10b2a8, 0x10b338]}
-  - {src: src/game/ui/frontend_dialog_10b338.cpp, range: [0x10b338, 0x10b4d8]}
+  - {src: src/game/ui/frontend_dialog_10b338.cpp, range: [0x10b338, 0x10b4d8], flags: [-O2, -G0, -snas, -mno-check-zero-division], assembler: sn-min6}
   - {src: src/game/ui/tu_10a870.c, range: [0x10b4d8, 0x10b4e0]}
   - {src: src/game/ui/frontend_dialog_10b338.cpp, range: [0x10b4e0, 0x10b530]}
   - {src: src/game/ui/tu_10a870.c, range: [0x10b530, 0x10b5b0]}
