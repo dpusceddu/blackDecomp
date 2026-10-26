@@ -1,10 +1,21 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
+/* Partial timer view; its class identity and complete extent are unknown. */
+typedef struct Recovered_ActionTimerPair {
+    f32 unk_00; /* UNVERIFIED: only the initializer draft uses this field. */
+    f32 unk_04;
+    f32 unk_08;
+} Recovered_ActionTimerPair;
+
 extern s32 func_00176F00();
 extern s32 func_0017B6F8();
 extern void * D_0040F4D4;
 extern void * D_0040F4D0;
+extern s32 func_00173610(f32*);
+extern void func_00173640(f32*, f32);
+extern f32 AIManager_RandomRange(void*, f32, f32);
+extern s32 func_00172548(f32*);
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172548);
 
@@ -38,15 +49,52 @@ void func_00172638(void) {
 
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172640);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_001726A0);
+s32 func_00172640(Recovered_ActionTimerPair* self) {
+    f32* timer = &self->unk_04;
+    s32 result;
+    if (func_00173610(timer)) {
+        func_00173640(timer, AIManager_RandomRange(D_0040F4D4, 1.0f, 2.0f));
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
+}
+s32 func_001726A0(Recovered_ActionTimerPair* self) {
+    f32* timer = &self->unk_08;
+    s32 result;
+    if (func_00173610(timer)) {
+        func_00173640(timer, AIManager_RandomRange(D_0040F4D4, 1.0f, 2.0f));
+        result = 1;
+    } else {
+        result = 0;
+    }
+    return result;
+}
 
 void func_00172700(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xC) = 0;
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172708);
+#ifdef NON_MATCHING
+// Unmatched: native short loop has one fewer assembler NOP.
+s32 func_001727C0(f32* self) {
+    f32* value;
+    s32 count;
+    if (!func_00172548(self)) return 0;
+    value = (f32*)((u8*)self + 0x4C);
+    count = 3;
+    do {
+        *value = 0.0f;
+        count--;
+        value--;
+    } while (count >= 0);
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_001727C0);
+#endif
 
 s32 func_00172818(void) {
     return 1;
@@ -74,7 +122,14 @@ s32 func_00172C00(s32 arg0, s32 arg1, s32 arg2)
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172C18);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172C50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172C88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172E28);
+s32 func_00172E28(void* self, s32 kind) {
+    switch (kind) {
+    case 0: return 2;
+    case 1: return 0;
+    case 2: return 1;
+    default: return 4;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172E80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172ED8);
 
