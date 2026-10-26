@@ -303,7 +303,7 @@ splits:
   - {src: src/game/camera/tu_1389a8_138fa0.c, range: [0x138fa0, 0x139060], flags: [-Os, -G0]}
   - {src: src/game/camera/tu_1389a8_139060.c, range: [0x139060, 0x1394b8], note: flags or language differ}
   - {src: src/game/camera/tu_1389a8_1394b8.c, range: [0x1394b8, 0x139780], flags: [-O2, -G0], note: flags or language differ}
-  - {src: src/game/camera/tu_1389a8_139780.c, range: [0x139780, 0x139b68]}
+  - {src: src/game/camera/tu_1389a8_139780.c, range: [0x139780, 0x139b68], assembler: sn-min6, flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x139b68, 0x139bb0]}
   - {src: src/game/camera/tu_139bb0.c, range: [0x139bb0, 0x13bb78]}
   - {src: src/game/camera/tu_139bb0_13a300.cpp, range: [0x13bb78, 0x13c778]}
