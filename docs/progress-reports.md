@@ -78,6 +78,6 @@ full link or size check. Run `ninja objdiff` to prepare the project. An ignored 
 The README badges and table are written by `ninja badges` (`tools/badges.py`) from the code measure of `ninja progress`,
 which equals this report and needs no extra download. The two badge files are committed under `progress/` and
 served by shields.io from the repository (the per-library badges go to the ignored `build/SLUS_213.76/badges/`). The objdiff report (`build/SLUS_213.76/report.json`) stays available for any
-tool that reads it; CI does not generate one, because that needs the game executable.
+tool that reads it.
 
 As of 2026-10 decomp.dev does not accept new projects, so this project is not registered there.

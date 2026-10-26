@@ -1,6 +1,5 @@
 # Black (PS2) decompilation
 
-[![CI](https://github.com/dpusceddu/blackDecomp/actions/workflows/ci.yml/badge.svg)](https://github.com/dpusceddu/blackDecomp/actions/workflows/ci.yml)
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
 [![Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/code.json)](#progress)
 [![Functions](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/functions.json)](#progress)

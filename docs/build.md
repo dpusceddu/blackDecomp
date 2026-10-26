@@ -144,7 +144,7 @@ Object state (`.o.json`), link facts, linker scripts/maps, objdiff target assemb
 progress JSON are declared outputs too. Build-rule readers do not create missing caches. Per-edge `io/*.json` contracts
 are generated from the same input/output lists as the Ninja edges; `graph_io.py` rejects an actual undeclared generated-file
 read or write. This includes file-existence checks. `python3 tools/build/check_graph.py --ninja` checks producer uniqueness,
-direct dependencies, cycles and agreement with Ninja's output list. CI exercises clean/deletion recovery and rejects an
+direct dependencies, cycles and agreement with Ninja's output list. The tests exercise clean/deletion recovery and reject an
 intentionally undeclared read without needing the game or SDK.
 
 Ninja owns compiler depfiles and its internal log/dependency databases. The separately installed SDK is an external
