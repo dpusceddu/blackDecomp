@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
+#include "game/ai_manager.h"
 
 extern s32 func_00126098();
 
@@ -19,6 +20,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_133fa8", func_0013513
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_133fa8", func_001353F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_133fa8", func_001354E0);
 
-void * func_00135550(void *arg0) {
-    return M2C_FIELD(arg0, void **, 0x32C);
+Recovered_ManagedSlot* Actor_GetManagedSlot(Recovered_ManagedActor* actor) {
+    return actor->managedSlot;
 }

@@ -728,9 +728,9 @@ splits:
   - {src: src/game/unsorted/tu_177d90.c, range: [0x177d90, 0x1783e0]}
   - {src: src/game/unsorted/tu_1783e0.c, range: [0x1783e0, 0x178408]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x178408, 0x178f18]}
-  - {src: src/game/unsorted/tu_178f18.c, range: [0x178f18, 0x178f28]}
-  - {src: src/game/unsorted/tu_178f18_178f28.cpp, range: [0x178f28, 0x178f50], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
-  - {src: src/game/unsorted/tu_178f18.c, range: [0x178f50, 0x1793c0]}
+  - {src: src/game/ai/tu_178f18.c, range: [0x178f18, 0x178f28], assembler: sn-min6}
+  - {src: src/game/ai/tu_178f18_178f28.cpp, range: [0x178f28, 0x178f50], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
+  - {src: src/game/ai/tu_178f18.c, range: [0x178f50, 0x1793c0]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x1793c0, 0x1793e8]}
   - {src: src/game/unsorted/tu_1793e8.c, range: [0x1793e8, 0x1793f8]}
   - {src: src/game/unsorted/tu_1793f8.c, range: [0x1793f8, 0x179400]}
