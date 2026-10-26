@@ -5,12 +5,13 @@
 extern "C" void* func_001282D0(void*);
 struct FrontendResourceSlot {
     char opaque[0x14];
-    int status;
+    union { int status; unsigned int alignment; };
     char reserved18[8];
     void* data;
 };
 
 struct FrontendResourcePair { void* data; int flags; };
+struct FrontendAllocationSpec { unsigned int bytes, alignment; };
 
 struct FrontendResourceTable {
     int header;
@@ -19,6 +20,15 @@ struct FrontendResourceTable {
     int reserved3b0;
     int selectedIndex;
     unsigned char retain;
+    // Allocation and range-query views, confirmed by the aligned-buffer callees.
+    unsigned int SelectBuffer(int index) __asm__("func_00107AB8");
+    void SetSelectedAlignment(int unused, unsigned int alignment) __asm__("func_00107B78");
+    unsigned int Capacity(int index) __asm__("func_00107B98");
+    void* Allocate(unsigned int bytes) __asm__("func_00107C20");
+    void* AllocateAligned(FrontendAllocationSpec* specification) __asm__("func_00107C98");
+    void SetAlignment(unsigned int alignment) __asm__("func_00107CC8");
+    unsigned int Alignment() __asm__("func_00107CE8");
+    // Existing declarations remain available while their callers are migrated.
     void Select(int index) __asm__("func_00107AB8");
     void ClearSelection() __asm__("func_00107B08");
     void SetSelectedFlags(int unused, int flags) __asm__("func_00107B78");
