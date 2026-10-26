@@ -13,9 +13,13 @@ typedef struct {
 
 typedef struct Recovered_ManagedSlot Recovered_ManagedSlot;
 struct Recovered_ManagedSlotDispatch;
+struct Recovered_ActorCreationDescriptor;
 
 typedef struct {
-    u8 unk_00[0x70];
+    u8 unk_00[8];
+    u32 unk_08; // UNVERIFIED: assigned by the native core creation draft; original role is unknown.
+    u8 unk_0C; // UNVERIFIED: assigned by the native core creation draft; original role is unknown.
+    u8 unk_0D[0x63];
     Recovered_ManagedTransform transform;
     u8 unk_B0[4];
     void* body; // Confirmed at +0xb4 by the exact RenderableState::Update body access.
@@ -26,7 +30,9 @@ typedef struct {
     u8 unk_2FC[0x14];
     f32 unk_310;
     f32 unk_314;
-    u8 unk_318[0x14];
+    u8 unk_318[0xC];
+    struct Recovered_ActorCreationDescriptor* unk_324; // UNVERIFIED: native creation retains its descriptor here.
+    u8 unk_328[4];
     Recovered_ManagedSlot* managedSlot;
     u8 unk_330[0x50];
     s32 recordId; // Actor-slot id used by record lookup.
@@ -77,6 +83,9 @@ typedef struct {
 /* Only accessed spans are modeled; full actor/component extents remain unknown.
  * Existing exact 0x135e28/0x135ea8 accesses confirm mode and scalar-control fields;
  * 0x135c78 confirms the changed byte. Their broader gameplay roles remain open. */
+typedef char ManagedActor08Offset[(u32)&((Recovered_ManagedActor*)0)->unk_08 == 8 ? 1 : -1];
+typedef char ManagedActor0COffset[(u32)&((Recovered_ManagedActor*)0)->unk_0C == 0xC ? 1 : -1];
+typedef char ManagedActor324Offset[(u32)&((Recovered_ManagedActor*)0)->unk_324 == 0x324 ? 1 : -1];
 typedef char ManagedActor2F8Offset[(u32)&((Recovered_ManagedActor*)0)->unk_2F8 == 0x2F8 ? 1 : -1];
 typedef char ManagedActorBodyOffset[(u32)&((Recovered_ManagedActor*)0)->body == 0xB4 ? 1 : -1];
 typedef char ManagedActorControlModeOffset[(u32)&((Recovered_ManagedActor*)0)->unk_3A0 == 0x3A0 ? 1 : -1];

@@ -6,10 +6,21 @@
 /* Exact forwarding methods confirm request tags/descriptors, descriptor keys
  * and accessed resource keys. UNVERIFIED: unaccessed spans, original classes
  * and full object extents; remaining draft-only fields are marked below. */
-typedef struct {
-    u8 unk_00[0x20];
+typedef struct Recovered_ActorCreationDescriptor {
+    u8 unk_00[0x10];
+    s128 position; // UNVERIFIED: copied only by the core creation draft.
     u64 key;
     u64 unk_28;
+    u32 unk_30; // UNVERIFIED: remaining fields are consumed only by the parameterized creation draft.
+    u32 unk_34;
+    u8 unk_38[8];
+    f32 unk_40, unk_44, unk_48;
+    u8 unk_4C[7];
+    u8 unk_53, unk_54;
+    u8 unk_55[2];
+    u8 unk_57;
+    u8 unk_58[2];
+    u8 unk_5A, unk_5B, unk_5C, unk_5D;
 } Recovered_ActorCreationDescriptor;
 
 typedef struct {
@@ -21,6 +32,28 @@ typedef struct {
 typedef struct {
     u32 count; // UNVERIFIED: the core creation increments this word; its original role is unknown.
 } Recovered_ActorCreationScope;
+
+/* UNVERIFIED: partial native stack record passed to the actor factory. Only
+ * the accessed spans are represented; original class, unwritten spans and
+ * complete record extent remain unknown while the core stays a draft. */
+typedef struct {
+    void* definition;
+    u8 unk_04[0xC];
+    s128 position;
+    u64 requestKey;
+    u64 resourceKey;
+    u32 unk_30;
+    u8 unk_34;
+    u8 unk_35[3];
+    u32 scopeValue;
+    s32 mode;
+    s32 kind;
+    s32 unk_44;
+    Recovered_ActorCreationRequest* request;
+    u8 unk_4C[4];
+    u64 key;
+    u8 unk_58;
+} Recovered_ActorCreationPacket;
 
 typedef struct {
     u8 unk_00[0x2C8];
@@ -41,6 +74,10 @@ static inline BkWeaponControllerPS2** ActorCreation_WeaponSlots(Recovered_Manage
     return *(BkWeaponControllerPS2***)((u8*)actor + 0x2A0);
 }
 
+typedef char ActorCreationDescriptorPositionOffset[
+    (u32)&((Recovered_ActorCreationDescriptor*)0)->position == 0x10 ? 1 : -1];
+typedef char ActorCreationPacketKeyOffset[
+    (u32)&((Recovered_ActorCreationPacket*)0)->key == 0x50 ? 1 : -1];
 typedef char ActorCreationDescriptorKeyOffset[
     (u32)&((Recovered_ActorCreationDescriptor*)0)->key == 0x20 ? 1 : -1];
 typedef char ActorCreationRequestDescriptorOffset[
