@@ -1,8 +1,25 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
+/* Offsets in serialized objects become addresses relative to the object base. */
+typedef struct Recovered_RelocatableObject {
+    u8 unk_00[0x30];
+    u32 unk_30;
+    u32 unk_34;
+    u8 unk_38[0x18];
+    u32 unk_50;
+    u32 unk_54;
+    u8 unk_58[0x38];
+    u32 unk_90;
+    u32 unk_94;
+} Recovered_RelocatableObject;
+
+extern void reloc_base_58(void *) __asm__("func_00287658");
+extern void reloc_base_18(void *) __asm__("func_00287618");
+extern void reloc_base_38(void *) __asm__("func_00287638");
+
 extern s32 func_00287600();
-extern s32 func_00287698();
+extern void func_00287698();
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287120);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287218);
@@ -24,7 +41,15 @@ void func_00287678(void) {
     func_00287658();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287698);
+void func_00287698(Recovered_RelocatableObject *object) {
+    reloc_base_58(object);
+    if (object->unk_30 != 0) {
+        object->unk_30 += (u32)object;
+    }
+    if (object->unk_34 != 0) {
+        object->unk_34 += (u32)object;
+    }
+}
 
 void func_002876E0(void) {
     func_00287678();
@@ -42,32 +67,32 @@ void func_00287740(void) {
     func_00287678();
 }
 
-void func_00287760(void) {
-    func_00287698();
+void func_00287760(Recovered_RelocatableObject *object) {
+    func_00287698(object);
 }
 
-void func_00287780(void) {
-    func_00287698();
+void func_00287780(Recovered_RelocatableObject *object) {
+    func_00287698(object);
 }
 
-void func_002877A0(void) {
-    func_00287698();
+void func_002877A0(Recovered_RelocatableObject *object) {
+    func_00287698(object);
 }
 
-void func_002877C0(void) {
-    func_00287698();
+void func_002877C0(Recovered_RelocatableObject *object) {
+    func_00287698(object);
 }
 
-void func_002877E0(void) {
-    func_00287698();
+void func_002877E0(Recovered_RelocatableObject *object) {
+    func_00287698(object);
 }
 
-void func_00287800(void) {
-    func_00287698();
+void func_00287800(Recovered_RelocatableObject *object) {
+    func_00287698(object);
 }
 
-void func_00287820(void) {
-    func_00287698();
+void func_00287820(Recovered_RelocatableObject *object) {
+    func_00287698(object);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287840);
@@ -81,13 +106,29 @@ void func_00287920(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287940);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287978);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_002879B0);
+void func_002879B0(Recovered_RelocatableObject *object) {
+    reloc_base_18(object);
+    if (object->unk_90 != 0) {
+        object->unk_90 += (u32)object;
+    }
+    if (object->unk_94 != 0) {
+        object->unk_94 += (u32)object;
+    }
+}
 
 void func_002879F8(void) {
     func_00287638();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287A18);
+void func_00287A18(Recovered_RelocatableObject *object) {
+    reloc_base_38(object);
+    if (object->unk_50 != 0) {
+        object->unk_50 += (u32)object;
+    }
+    if (object->unk_54 != 0) {
+        object->unk_54 += (u32)object;
+    }
+}
 
 void func_00287A60(void) {
     func_00287618();
