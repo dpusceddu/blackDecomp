@@ -17,6 +17,27 @@ extern s32 func_001F08E8(s32);
 extern s32 func_001F0958(s32);
 extern void * func_001092F8();
 
+/* Partial resource owner; object and timestamp meanings are UNVERIFIED. */
+typedef struct Recovered_ResourceEntry {
+    void* resource;
+    u32 unk_04;
+    u32 stamp;
+} Recovered_ResourceEntry;
+typedef struct Recovered_ResourceOwner {
+    u8 unk_00[0x5C];
+    Recovered_ResourceEntry* entries;
+    u32 count;
+    u8 unk_64[0x1C];
+    u32 stamp;
+    u32 state;
+    u8 unk_88[0x12C];
+    void* playback;
+} Recovered_ResourceOwner;
+extern void* func_002842E8(void*);
+extern void func_00284298(void*);
+extern s32 func_001D7A60(void*);
+extern void func_00281C98(void*);
+
 s32 func_001D5E40(void) {
     return 0;
 }
@@ -63,10 +84,73 @@ s32 func_001D5EA8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: the resource loop uses different saved registers.
+s32 func_001D5F58(Recovered_ResourceOwner* owner) {
+    u32 index;
+    switch (owner->state) {
+        case 1:
+            owner->state = 2;
+            /* fallthrough */
+        case 2:
+        case 3:
+        case 4:
+            index = 0;
+            if (owner->count != 0) {
+                u32 offset = 0;
+                do {
+                    Recovered_ResourceEntry* entry = (Recovered_ResourceEntry*)((u8*)owner->entries + offset);
+                    index++;
+                    offset += sizeof(Recovered_ResourceEntry);
+                    func_00284298(entry->resource);
+                } while (index < owner->count);
+            }
+            if (func_001D7A60(owner->playback) != 0) {
+                M2C_FIELD(owner, void**, 0x78) = 0;
+                owner->state = 5;
+                owner->playback = 0;
+                case 5:
+                    func_00281C98((u8*)owner + 0x94);
+                    owner->entries = 0;
+                    owner->state = 7;
+                    owner->count = 0;
+                case 7: return 1;
+            }
+        default: return 0;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D5F58);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6038);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D60B8);
+#ifdef NON_MATCHING
+// Unmatched: the loop index and byte offset use swapped saved registers.
+Recovered_ResourceEntry* func_001D6178(Recovered_ResourceOwner* owner) {
+    u32 offset;
+    u32 index;
+    Recovered_ResourceEntry* oldest = owner->entries;
+    index = 0;
+    if (owner->count != 0) {
+        offset = 0;
+        do {
+            Recovered_ResourceEntry* entry = (Recovered_ResourceEntry*)((u8*)owner->entries + offset);
+            if (func_002842E8(entry->resource) == 0) {
+                entry->stamp = owner->stamp;
+                return entry;
+            }
+            index++;
+            offset += sizeof(Recovered_ResourceEntry);
+            oldest = entry->stamp < oldest->stamp ? entry : oldest;
+        } while (index < owner->count);
+    }
+    func_00284298(oldest->resource);
+    oldest->stamp = owner->stamp;
+    return oldest;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6178);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6230);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D62F8);
 
