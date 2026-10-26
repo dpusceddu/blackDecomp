@@ -24,4 +24,12 @@ struct Recovered_ManagedSlotDispatch {
 static inline void** Actor_IndexedControls(Recovered_ManagedActor* actor) {
     return (void**)((u8*)actor + 0x25C);
 }
+/* UNVERIFIED: native selector +0x19 and table base +0x0c, shared with the
+ * animation selector's existing HasLayer access. Full table extent is unknown. */
+static inline u8 Actor_LayerHasEntry(Recovered_ManagedActor* actor) {
+    u8* layer = (u8*)actor->unk_26C;
+    u8 found = 0;
+    if (layer) found = *(void**)(layer + 0xC + 4 * layer[0x19]) != NULL;
+    return found;
+}
 #endif
