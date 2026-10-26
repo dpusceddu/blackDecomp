@@ -180,7 +180,8 @@ struct Recovered_DispatchedMode : Recovered_DispatchedModeData {
     virtual int Unknown7(void* argument);
     virtual int Unknown8(void* argument);
     virtual int Unknown9(void* argument);
-    virtual int Unknown10();
+    // Position-valued slot; the meaning depends on the active mode.
+    virtual PositionResult Unknown10();
     virtual int Unknown11();
     virtual int Unknown12(void* argument);
     virtual int Unknown13(void* argument);

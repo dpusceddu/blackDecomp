@@ -104,7 +104,7 @@ void ModeDispatcher_ClearBinding(ModeDispatcher* self) {
     func_0018AB98(self->unk_08);
     self->modes[self->active]->Leave();
 }
-int func_0018D5D0(ModeDispatcher* self) { return self->modes[self->active]->Unknown10(); }
+PositionResult func_0018D5D0(ModeDispatcher* self) { return self->modes[self->active]->Unknown10(); }
 unsigned char ModeDispatcher_IsPaused(ModeDispatcher* self) { return self->paused; }
 void ModeDispatcher_Resume(ModeDispatcher* self) {
     if (self->paused) {
