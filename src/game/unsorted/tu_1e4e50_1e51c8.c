@@ -34,11 +34,51 @@ typedef char RecoveredGridEntrySize[(sizeof(Recovered_GridEntry) == 0x2C) ? 1 : 
 typedef char RecoveredGridRowSize[(sizeof(Recovered_GridRow) == 0x190) ? 1 : -1];
 extern s32 func_001E7448(Recovered_GridEntry*);
 
+/* Partial keyed table; the entry and group meanings are UNVERIFIED. */
+typedef struct Recovered_KeyEntry {
+    u64 unk_00;
+    u32 unk_08;
+    u16 unk_0C;
+    u8 unk_0E[0xA];
+} Recovered_KeyEntry;
+typedef struct Recovered_KeyGroup {
+    u8 unk_00[8];
+    u64 unk_08;
+    u16 unk_10;
+    u8 unk_12[2];
+    Recovered_KeyEntry* unk_14;
+} Recovered_KeyGroup;
+typedef struct Recovered_KeyTable {
+    u8 unk_00[0x50];
+    u32 unk_50;
+    u8 unk_54[4];
+    Recovered_KeyGroup** unk_58;
+} Recovered_KeyTable;
+typedef struct Recovered_KeyOwner {
+    u8 unk_00[0x44];
+    Recovered_KeyTable* unk_44;
+} Recovered_KeyOwner;
+typedef char RecoveredKeyEntrySize[(sizeof(Recovered_KeyEntry) == 0x18) ? 1 : -1];
+typedef char RecoveredKeyPointerIs32[(sizeof(void*) == 4) ? 1 : -1];
+
 s32 func_001E51C8(void *arg0, s32 arg1) {
     return M2C_FIELD(((arg1 * 4) + M2C_FIELD(M2C_FIELD(arg0, void **, 0x44), s32 *, 0x5C)), s32 *, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E51E0);
+Recovered_KeyEntry* func_001E51E0(Recovered_KeyOwner* owner, const u64* group_key, const u64* entry_key) {
+    u32 group_index;
+    for (group_index = 0; group_index < owner->unk_44->unk_50; group_index++) {
+        Recovered_KeyGroup* group = owner->unk_44->unk_58[group_index];
+        if (group->unk_08 == *group_key) {
+            u32 entry_index;
+            for (entry_index = 0; entry_index < group->unk_10; entry_index++) {
+                Recovered_KeyEntry* entry = &group->unk_14[entry_index];
+                if (entry->unk_00 == *entry_key) { return entry->unk_0C ? entry : 0; }
+            }
+        }
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5270);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5360);
 
