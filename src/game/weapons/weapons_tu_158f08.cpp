@@ -6,6 +6,7 @@ namespace Weapons {
 extern "C" {
 void func_001551C8(void*,int,EeU16);
 EeU16 func_00155140(void*,int,EeU8);
+void func_001F2CA8(int, EeS8*);
 }
 
 static inline bool IsObject(const BkWeaponOwnerPS2*entity){int kind=entity->kind;return (unsigned)(kind-3)<2||kind==7;}
@@ -40,6 +41,28 @@ void HitCollector::Dispatch(Vec direction,signed char weaponId,BkWeaponOwnerPS2*
 // Unmatched: 0015B118: damage and virtual receive source context.
 // Unmatched: 0015B360: spread helpers and VU basis temporaries.
 
+// Unmatched: 0015A990: divide check and saved-register scheduling.
+#ifdef NON_MATCHING
+namespace Weapons {
+int Instance::CycleMode() {
+    if (!weapon->definition->flagC4) {
+        EeS8 disabled = 3;
+        func_001F2CA8(audioManager, &disabled);
+        return 0;
+    }
+    int nextMode = (mode + 1) % 3;
+    mode = nextMode;
+    if (nextMode == 2) burstCount = 1;
+    int enabled = 0;
+    if (func_0015A948(this) == 1) {
+        enabled = weapon->flags100[8] == 0;
+    }
+    Field<EeU8>(presentation->animation->graph, 0x1C44) = enabled;
+    func_001F2CA8(audioManager, &mode);
+    return 1;
+}
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_158f08", func_0015A990);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_158f08", func_0015AA60);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/weapons_tu_158f08", func_0015ADA8);
