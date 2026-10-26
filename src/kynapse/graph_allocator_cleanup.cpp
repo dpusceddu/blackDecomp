@@ -47,8 +47,33 @@ CFreeList::~CFreeList() {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E6740);
 #endif
+#ifdef NON_MATCHING
+namespace Kaim {
+// Unmatched: insertion remains out of line; returned iterator copies and destruction differ.
+void CFreeList::MakeAvailable(CVarList<CFreeListBlock*>::CIterator at) {
+    freeBlocks.Insert(at.node->value, CVarList<CFreeListBlock*>::CIterator(0));
+    busyBlocks.Remove(at);
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E69E8);
+#endif
+
+#ifdef NON_MATCHING
+namespace Kaim {
+// Unmatched: insertion remains out of line; returned iterator assignment and destruction differ.
+CFreeListBlock* CFreeList::TakeBlock() {
+    CVarList<CFreeListBlock*>::CIterator at(freeBlocks.head);
+    if (!at.node) return 0;
+    CFreeListBlock* block = at.node->value;
+    freeBlocks.Remove(at);
+    block->position = busyBlocks.Insert(block, CVarList<CFreeListBlock*>::CIterator(0));
+    return block;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E6B60);
+#endif
 namespace Kaim {
 CBaseAllocator* CPoolBasedAllocator::Resolve(unsigned int address) {
     if (address < (unsigned int)buffer || address >= (unsigned int)buffer + bytes) return 0;
