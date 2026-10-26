@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "game/aligned_buffer.h"
 
 #include "game/graphics/sound_envelopes.hpp"
 using namespace Graphics;
@@ -230,7 +231,20 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271558);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271610);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00272300);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00274F80);
+void* AlignedBuffer_Allocate(Recovered_AlignedBuffer* self, u32 bytes) {
+    u32 cursor = (u32)self->cursor - 1;
+    u32 alignment = self->alignment;
+    u8* aligned = (u8*)((cursor + alignment) & -alignment);
+    u8* next = aligned + bytes;
+    if (self->end < next) {
+        self->lastAllocation = NULL;
+        return NULL;
+    }
+    self->cursor = next;
+    self->lastAllocation = aligned;
+    return aligned;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00275000);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00275060);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002750B8);

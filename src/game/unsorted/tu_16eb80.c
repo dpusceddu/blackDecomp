@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "game/aligned_buffer.h"
 #include "ps2/prelude.h"
 
 extern s32 func_00274E40();
@@ -8,7 +9,6 @@ extern s32 func_00107B08();
 extern M2C_UNK D_0040F0F0;
 extern s32 func_00107AB8();
 extern void * func_00107D20();
-extern s32 func_00274E68();
 extern s32 func_0016EF00();
 extern s32 func_0016F3D0();
 extern s32 func_002D15A0();
@@ -43,7 +43,7 @@ void func_0016EB80(void *arg0) {
     func_00107B08(&D_0040F0F0, 2, 0);
     func_00107AB8(&D_0040F0F0, 0, 0);
     func_00274E40(temp_18);
-    func_00274E68(temp_18, temp_19, 0x40000);
+    AlignedBuffer_Bind((Recovered_AlignedBuffer*)temp_18, temp_19, 0x40000);
     func_0016EF00(arg0);
     func_0016F3D0(arg0);
 }

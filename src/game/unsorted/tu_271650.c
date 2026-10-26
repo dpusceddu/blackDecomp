@@ -1,8 +1,8 @@
 #include "include_asm.h"
+#include "game/aligned_buffer.h"
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
 
-extern s32 func_00274F80();
 extern s32 func_0028F618(s32);
 extern s32 func_0028F718(s32);
 extern s32 func_0028FA60(s32);
@@ -36,7 +36,7 @@ void * func_00271668(void *arg0, void *arg1, void *arg2, void *arg3, void *arg4)
     if (arg3 != (temp_3 * 4)) {
         M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) + 1);
     }
-    M2C_FIELD(arg0, void **, 0) = func_00274F80(arg1, (void *) (((s32) M2C_FIELD(arg0, void **, 0xC) * (s32) M2C_FIELD(arg0, void **, 0x10)) << 0xA));
+    M2C_FIELD(arg0, void **, 0) = AlignedBuffer_Allocate(arg1, (u32) (((s32) M2C_FIELD(arg0, void **, 0xC) * (s32) M2C_FIELD(arg0, void **, 0x10)) << 0xA));
     return (void *)1;
 }
 

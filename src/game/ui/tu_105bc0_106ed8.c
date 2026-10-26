@@ -1,11 +1,11 @@
 #include "include_asm.h"
+#include "game/aligned_buffer.h"
 #include "ps2/prelude.h"
 
 extern s32 func_001536B0(s32);
 extern s32 func_00105228();
 extern void * D_0040F0E0;
 extern s32 func_0026CA20();
-extern s32 func_00274E68();
 extern s32 func_00107AB8();
 extern s32 func_00107B08();
 
@@ -112,7 +112,7 @@ void func_00107A00(void) {
 s32 func_00107A08(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     M2C_FIELD(arg0, s32 *, 0x1C) = arg2;
     M2C_FIELD(arg0, s32 *, 0x20) = arg1;
-    return func_00274E68(arg0, arg1, arg3);
+    return AlignedBuffer_Bind((Recovered_AlignedBuffer*)arg0, (void*)arg1, arg3);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_106ed8", func_00107A38);
