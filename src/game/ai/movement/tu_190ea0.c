@@ -93,9 +93,8 @@ void func_001911A8(Recovered_MovementControl* self) {
     func_00181F48((u8*)self->unk_04 + 0xC80, 0, 0x25, 0.0f, 2.0f);
     if (!func_00188F10((u8*)self->unk_04 + 0x150)) func_0018A890((u8*)self->unk_04 + 0x150);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_190ea0", func_001911A8);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_190ea0", func_001911A8);
 
 s32 func_00191270(Recovered_MovementControl *arg0) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0), s8 *, 0x29) == M2C_FIELD(M2C_FIELD(arg0, void **, 4), s32 *, 0x1EF4);

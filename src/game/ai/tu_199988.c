@@ -65,9 +65,8 @@ void func_00199C40(Recovered_ActionTimers* self) {
     self->unk_10 = M2C_FIELD(M2C_FIELD(actor, void**, 0x7C), s128*, 0x90);
     self->unk_3C = 0;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_199988", func_00199C40);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_199988", func_00199C40);
 #ifdef NON_MATCHING
 // Unmatched: pointer register allocation differs.
 void func_00199D20(Recovered_ActionTimers* self) {
@@ -92,9 +91,8 @@ void func_00199D20(Recovered_ActionTimers* self) {
         M2C_FIELD(M2C_FIELD(owner, void**, 0x7C), u8*, 0x3AF) = 0;
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_199988", func_00199D20);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_199988", func_00199D20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_199988", func_00199D90);
 
 void func_00199F08(void *arg0) {

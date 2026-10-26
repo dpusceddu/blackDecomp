@@ -92,9 +92,8 @@ s32 func_001727C0(f32* self) {
     } while (count >= 0);
     return 1;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_001727C0);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_001727C0);
 
 s32 func_00172818(void) {
     return 1;

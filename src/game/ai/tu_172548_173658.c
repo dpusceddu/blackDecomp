@@ -23,9 +23,8 @@ s32 func_00173D38(void* self, s32 index) {
     else return index - 1;
     return *(s32*)((u8*)table + index * 32);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173D38);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173D38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173D80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173E18);
 

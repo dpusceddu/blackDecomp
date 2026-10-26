@@ -82,9 +82,8 @@ s32 func_0018C2E0(Recovered_MovementSelection* self, Recovered_MovementRequest* 
     }
     return result;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C2E0);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C2E0);
 #ifdef NON_MATCHING
 // Unmatched: virtual-call register allocation differs.
 s32 func_0018C368(Recovered_MovementSelection* self) {
@@ -99,9 +98,8 @@ s32 func_0018C368(Recovered_MovementSelection* self) {
     }
     return result;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C368);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C368);
 #ifdef NON_MATCHING
 // Unmatched: virtual-call return join and scheduling differ.
 s32 func_0018C3C0(Recovered_MovementSelection* self, Recovered_MovementRequest* request, u32 value, s32 arg3) {
@@ -114,9 +112,8 @@ s32 func_0018C3C0(Recovered_MovementSelection* self, Recovered_MovementRequest* 
     }
     return result;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C3C0);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C3C0);
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C408);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C440);
@@ -144,8 +141,7 @@ s32 func_0018C8E8(void* self, s32 value) {
     if (count > 0) return func_0035CA74(value, M2C_FIELD(self, const char**, 0x30)) == 0;
     return 0;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C8E8);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C8E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018C938);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18c260", func_0018CC20);

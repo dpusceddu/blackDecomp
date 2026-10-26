@@ -80,9 +80,8 @@ s128 func_00190768(Recovered_MovementObserver* self) {
     }
     return func_00180A00((u8*)self->unk_04 + 0xB30);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_1904d8", func_00190768);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_1904d8", func_00190768);
 #ifdef NON_MATCHING
 // Unmatched: boolean result lifetime removes one native register copy.
 s32 func_001907E0(Recovered_MovementObserver* self, s128 position) {
@@ -93,9 +92,8 @@ s32 func_001907E0(Recovered_MovementObserver* self, s128 position) {
     }
     return result;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_1904d8", func_001907E0);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_1904d8", func_001907E0);
 s32 func_00190840(Recovered_MovementObserver* self, s32 index) {
     s32 result;
     if (self->unk_14) {
@@ -144,6 +142,5 @@ void func_00190958(Recovered_MovementObserver* self) {
         offset += sizeof(Recovered_ManagedSlot);
     } while (count >= 0);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_1904d8", func_00190958);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_1904d8", func_00190958);

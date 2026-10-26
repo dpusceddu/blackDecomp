@@ -59,6 +59,5 @@ s32 func_00199690(u8** self) {
     if (func_00198908(self)) result = func_00180B70(*self + 0xB30, position) != 0;
     return result;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1984f0_1994f0", func_00199690);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1984f0_1994f0", func_00199690);
