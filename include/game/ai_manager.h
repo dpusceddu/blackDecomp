@@ -14,6 +14,7 @@ typedef struct {
 typedef struct Recovered_ManagedSlot Recovered_ManagedSlot;
 struct Recovered_ManagedSlotDispatch;
 struct Recovered_ActorCreationDescriptor;
+struct Recovered_ActorIndexedComponent;
 
 typedef struct {
     u8 unk_00[8];
@@ -23,7 +24,9 @@ typedef struct {
     Recovered_ManagedTransform transform;
     u8 unk_B0[4];
     void* body; // Confirmed at +0xb4 by the exact RenderableState::Update body access.
-    u8 unk_B8[0xC];
+    void* unk_B8; // UNVERIFIED: native control routing forwards this pointer; original role is unknown.
+    struct Recovered_ActorIndexedComponent* unk_BC; // UNVERIFIED: indexed scalar-control consumer remains a draft.
+    f32 unk_C0; // Exact 0x1378f0 scales this float; original units and gameplay role are unknown.
     s32 unk_C4; // Native actor category; the gameplay meaning of category 2 is unknown.
     u8 unk_C8[0x190];
     f32 unk_258; // Exact 0x137b08 writes a random integer minus a random float; gameplay role is unknown.
@@ -110,6 +113,9 @@ typedef struct {
 typedef char ManagedActor08Offset[(u32)&((Recovered_ManagedActor*)0)->unk_08 == 8 ? 1 : -1];
 typedef char ManagedActor0COffset[(u32)&((Recovered_ManagedActor*)0)->unk_0C == 0xC ? 1 : -1];
 typedef char ManagedActor324Offset[(u32)&((Recovered_ManagedActor*)0)->unk_324 == 0x324 ? 1 : -1];
+typedef char ManagedActorB8Offset[(u32)&((Recovered_ManagedActor*)0)->unk_B8 == 0xB8 ? 1 : -1];
+typedef char ManagedActorBCOffset[(u32)&((Recovered_ManagedActor*)0)->unk_BC == 0xBC ? 1 : -1];
+typedef char ManagedActorC0Offset[(u32)&((Recovered_ManagedActor*)0)->unk_C0 == 0xC0 ? 1 : -1];
 typedef char ManagedActor258Offset[(u32)&((Recovered_ManagedActor*)0)->unk_258 == 0x258 ? 1 : -1];
 typedef char ManagedActor3ACOffset[(u32)&((Recovered_ManagedActor*)0)->unk_3AC == 0x3AC ? 1 : -1];
 typedef char ManagedActor26COffset[(u32)&((Recovered_ManagedActor*)0)->unk_26C == 0x26C ? 1 : -1];

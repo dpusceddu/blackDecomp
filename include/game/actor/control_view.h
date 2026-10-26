@@ -20,6 +20,32 @@ struct Recovered_ManagedSlotDispatch {
     void (*vectorEvent)(void*, s32, s128, f32, s32);
 };
 
+/* UNVERIFIED: indexed scalar-control methods remain drafts. Native index
+ * multiplication establishes a 0x60 record stride; unknown spans and original
+ * record/table/component identities remain unresolved. */
+typedef struct {
+    u8 unk_00[0x4C];
+    f32 unk_4C;
+    u8 unk_50[0x10];
+} Recovered_ActorIndexedControl;
+
+typedef struct {
+    u8 unk_00[0x30];
+    Recovered_ActorIndexedControl* records;
+} Recovered_ActorIndexedTable;
+
+typedef struct Recovered_ActorIndexedComponent {
+    u8 unk_00[0x40];
+    Recovered_ActorIndexedTable* controls;
+} Recovered_ActorIndexedComponent;
+
+static inline Recovered_ActorIndexedControl* Actor_IndexedRecord(Recovered_ManagedActor* actor, s32 index) {
+    return actor->unk_BC->controls->records + (u16)index;
+}
+
+typedef char ActorIndexedControlStride[sizeof(Recovered_ActorIndexedControl) == 0x60 ? 1 : -1];
+typedef char ActorIndexedControl4C[(u32)&((Recovered_ActorIndexedControl*)0)->unk_4C == 0x4C ? 1 : -1];
+
 /* The native indexed pointer table begins at +0x25c. Its extent is unknown. */
 static inline void** Actor_IndexedControls(Recovered_ManagedActor* actor) {
     return (void**)((u8*)actor + 0x25C);
