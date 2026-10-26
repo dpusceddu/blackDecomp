@@ -15,8 +15,8 @@ typedef struct {
     const s128* position;
 } Recovered_ActorSlotPositionGroup;
 
-/* UNVERIFIED: these views come from unfinished value getters. Unaccessed byte
- * spans, original class identities and complete object extents remain unknown. */
+/* Exact value getters confirm the accessed actor/group pointers and table base.
+ * UNVERIFIED: unaccessed byte spans, class identities and complete object extents. */
 static inline Recovered_ActorSlotPositionGroup** ActorSlot_PositionGroups(Recovered_AIManager* manager) {
     /* Native table base; its number of entries is unknown. */
     return (Recovered_ActorSlotPositionGroup**)((u8*)manager + 0x22B20);
