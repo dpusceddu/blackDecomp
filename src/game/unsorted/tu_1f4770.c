@@ -2,10 +2,39 @@
 #include "ps2/prelude.h"
 
 extern void * D_0040F0E0;
+extern s32 func_001F5950(void*, void*);
+extern s32 func_001F4E38(void*, void*, s32, s8*);
 
+#ifdef NON_MATCHING
+// Unmatched: owner and target use swapped saved registers.
+s32 func_001F4D30(void* owner, s8* value, void* target) {
+    s32 result = func_001F5950(owner, target);
+    if (result != 0) { result = func_001F4E38(owner, target, 0, value); }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F4D30);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: owner and target use swapped saved registers.
+s32 func_001F4D88(void* owner, s8* value, void* target) {
+    s32 result = func_001F5950(owner, target);
+    if (result != 0) { result = func_001F4E38(owner, target, 1, value); }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F4D88);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: owner and target use swapped saved registers.
+s32 func_001F4DE0(void* owner, s8* value, void* target) {
+    s32 result = func_001F5950(owner, target);
+    if (result != 0) { result = func_001F4E38(owner, target, 3, value); }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F4DE0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F4E38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F5410);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F5418);
