@@ -50,6 +50,14 @@ typedef struct {
     u8 unk_3B7;
 } Recovered_ManagedActor;
 
+/* UNVERIFIED: only the parameterized creation draft accesses these query
+ * fields. Original class, gameplay roles and complete query extent are unknown. */
+typedef struct {
+    u8 unk_00[0x14];
+    f32 unk_14, unk_18, unk_1C;
+    u8 unk_20;
+} Recovered_ManagedSlotQuery;
+
 struct Recovered_ManagedSlot {
     u8 unk_00[0x50];
     s128 unk_50; // UNVERIFIED: fallback vector consumer remains a draft.
@@ -65,8 +73,15 @@ struct Recovered_ManagedSlot {
     u8 events[0x5A4];
     u8 query[0x125C];
     Recovered_ManagedSlot* freeNext;
-    u8 unk_1EF4[0xDC];
+    u8 unk_1EF4[0xD0];
+    u32 unk_1FC4; // UNVERIFIED: assigned by the parameterized creation draft; original role is unknown.
+    u32 unk_1FC8; // UNVERIFIED: assigned from a descriptor byte by the same draft.
+    u8 unk_1FCC[4];
 };
+
+static inline Recovered_ManagedSlotQuery* ManagedSlot_Query(Recovered_ManagedSlot* slot) {
+    return (Recovered_ManagedSlotQuery*)slot->query;
+}
 
 typedef struct {
     u8 unk_00[0xA48];
@@ -95,6 +110,10 @@ typedef char ManagedActorSlotPointerOffset[(u32)&((Recovered_ManagedActor*)0)->m
 typedef char ManagedSlotStride[sizeof(Recovered_ManagedSlot) == 0x1FD0 ? 1 : -1];
 typedef char ManagedSlotRecords[(u32) & ((Recovered_ManagedSlot*)0)->records == 0x150 ? 1 : -1];
 typedef char ManagedSlotEvents[(u32) & ((Recovered_ManagedSlot*)0)->events == 0x6F0 ? 1 : -1];
+typedef char ManagedSlotQuery14Offset[(u32)&((Recovered_ManagedSlotQuery*)0)->unk_14 == 0x14 ? 1 : -1];
+typedef char ManagedSlotQuery20Offset[(u32)&((Recovered_ManagedSlotQuery*)0)->unk_20 == 0x20 ? 1 : -1];
+typedef char ManagedSlot1FC4Offset[(u32)&((Recovered_ManagedSlot*)0)->unk_1FC4 == 0x1FC4 ? 1 : -1];
+typedef char ManagedSlot1FC8Offset[(u32)&((Recovered_ManagedSlot*)0)->unk_1FC8 == 0x1FC8 ? 1 : -1];
 typedef char ManagedSlotQuery[(u32) & ((Recovered_ManagedSlot*)0)->query == 0xC94 ? 1 : -1];
 typedef char ManagerSlots[(u32) & ((Recovered_AIManager*)0)->slots == 0x2B00 ? 1 : -1];
 typedef char ManagerRandom[(u32) & ((Recovered_AIManager*)0)->random == 0x22BC0 ? 1 : -1];
