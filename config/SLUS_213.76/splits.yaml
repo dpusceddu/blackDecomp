@@ -1995,7 +1995,7 @@ splits:
   - {src: src/sony/tu_29c6c8.c, range: [0x29c6c8, 0x29cee8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_29cee8.c, range: [0x29cee8, 0x29d108], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: flags or language differ}
   - {src: src/sony/tu_29cee8_29d108.c, range: [0x29d108, 0x29d158], note: flags or language differ}
-  - {src: src/sony/tu_29cee8_29d158.c, range: [0x29d158, 0x29d4c0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
+  - {src: src/sony/tu_29cee8_29d158.c, range: [0x29d158, 0x29d4c0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0, -fno-gcse]}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29d4c0, 0x29d5b0]}
   - {src: src/libc/tu_29d5b0.c, range: [0x29d5b0, 0x2a4410]}
   - {src: src/sony/tu_2a4410.c, range: [0x2a4410, 0x2a50f8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
