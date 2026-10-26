@@ -7,8 +7,9 @@
  * original identities and full extents remain UNVERIFIED.
  * Matched option consumers confirm invert-look and crouch fields. Volume and
  * vibration fields remain UNVERIFIED until their draft consumers match. */
-/* UNVERIFIED: the native update addresses both gains through this common
- * subobject, but the original setting names and other members are unknown. */
+/* The matched runtime update addresses both gains through this common
+ * subobject. Original setting names, units, unaccessed storage and full extents
+ * remain UNVERIFIED. */
 typedef struct {
     u8 unk_00[0x1C];
     f32 unk_1C, unk_20;
