@@ -8,7 +8,22 @@ extern s32 func_0033B4C0(M2C_UNK, M2C_UNK);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033AFB0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033B4C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033B608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033B610);
+typedef struct {
+    u32 size;
+    u32 alignment;
+    u32 unk_08; /* UNVERIFIED: unused by this function. */
+    u32 unk_0c; /* UNVERIFIED: unused by this function. */
+} Recovered_PhysicsScratchRequirement;
+extern Recovered_PhysicsScratchRequirement func_0033A3B0(u32, u32);
+Recovered_PhysicsScratchRequirement* func_0033B610(Recovered_PhysicsScratchRequirement* result, u32 vertices,
+                                                   u32 triangles) {
+    u32 baseSize;
+    Recovered_PhysicsScratchRequirement manifold = func_0033A3B0(vertices, triangles);
+    result->alignment = 16;
+    baseSize = (manifold.size * 2) + 0x50;
+    result->size = ((baseSize + (triangles * 8)) + (triangles * 0x420)) + (triangles * 0xA0);
+    return result;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033B680);
 
 void func_0033B688(void *arg0) {
