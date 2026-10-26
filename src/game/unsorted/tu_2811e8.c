@@ -1,12 +1,11 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/resource_pool.hpp"
 
 extern char D_0049A858;
 
-void *func_002811E8(s32 arg0)
-{
-  return (arg0 * 8) + (&D_0049A858);
- dummy_label_769319: ;
+Recovered_FloatPair* FloatPairOutput_At(s32 index) {
+    return (Recovered_FloatPair*)((index * 8) + &D_0049A858);
 }
 
 void func_00281200(void *arg0, f32 fparg0)

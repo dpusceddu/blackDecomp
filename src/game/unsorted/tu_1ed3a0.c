@@ -1,8 +1,6 @@
 #include "include_asm.h"
-#include "ps2/prelude.h"
+#include "game/timed_value_pool.h"
 
-extern s32 func_00282218();
-
-void func_001ED3A0(void) {
-    func_00282218();
+void func_001ED3A0(Recovered_TimedValuePool* self) {
+    TimedValuePool_Initialize(self);
 }
