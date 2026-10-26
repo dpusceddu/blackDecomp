@@ -6,6 +6,33 @@
 extern s32 func_0028F618(s32);
 extern s32 func_0028F718(s32);
 extern s32 func_0028FA60(s32);
+extern void func_0028F3B0(void *, s32);
+extern void func_0028F408(void *);
+extern s32 func_002719D0(void *, s32);
+
+typedef struct {
+    u8 unk_00[0x40];
+    s16 readyAdjustment;
+    u16 unk_42;
+    s32 (*ready)(void *);
+} Recovered_StreamDeviceVtable;
+
+typedef struct {
+    u8 unk_00[0x28];
+    Recovered_StreamDeviceVtable *vtable;
+} Recovered_StreamDevice;
+
+typedef struct {
+    u8 unk_00[0x43];
+    u8 unk_43;
+    u8 active;
+    u8 unk_45;
+    u8 unk_46[0x1E];
+    Recovered_StreamDevice *device;
+    s32 pending;
+    u8 unk_6C[0x4C];
+    u8 stream[1];
+} Recovered_StreamControl; /* Field roles UNVERIFIED. */
 
 void func_00271650(void *arg0)
 {
@@ -69,5 +96,29 @@ s32 func_002719A8(s32 arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_271650", func_002719D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_271650", func_00271AF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_271650", func_00271B50);
+void func_00271AF0(Recovered_StreamControl *self) {
+    if (self->pending > 0) {
+        Recovered_StreamDevice *device = self->device;
+        Recovered_StreamDeviceVtable *vtable = device->vtable;
+        if (vtable->ready((u8 *)device + vtable->readyAdjustment) == 1) {
+            func_0028F3B0(self->stream, self->pending);
+            self->pending = 0;
+        }
+    }
+}
+s32 func_00271B50(s32 unused1, s32 unused2, Recovered_StreamControl *self) {
+    if (func_002719A8((s32)self) != 0) {
+        if (self->active == 0) {
+            func_00271AF0(self);
+            func_0028F408(self->stream);
+            func_002719D0(self, 1);
+        } else {
+            self->unk_45 = 1;
+            func_0028F3B0(self->stream, 0x10000);
+            func_0028F408(self->stream);
+        }
+    } else {
+        func_0028F408(self->stream);
+    }
+    return 1;
+}
