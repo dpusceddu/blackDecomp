@@ -13,6 +13,8 @@ extern s32 func_00123020(M2C_UNK *, s32);
 extern s32 func_00123248(M2C_UNK *);
 extern void func_00123960(M2C_UNK *);
 extern s32 func_00123980(M2C_UNK *, M2C_UNK, s32, s32);
+extern s32 func_001229F8();
+extern s8 func_001228E0(s32, s8);
 
 void func_00121EF0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) | arg1);
@@ -126,8 +128,23 @@ void func_001227A8(s32 *arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_001227C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_001228E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_00122900);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_00122980);
+s32 func_00122900(s32 owner, s32 value) {
+    s32 index = 0;
+    while (index < func_001229F8(owner)) {
+        s8 current = index;
+        if (func_001228E0(owner, current) == value) { return current; }
+        index++;
+    }
+    return -1;
+}
+s32 func_00122980(s32 owner, s32 value) {
+    s32 index = 0;
+    while (index < func_001229F8(owner)) {
+        if (func_001228E0(owner, (s8)index) == value) { return 1; }
+        index++;
+    }
+    return 0;
+}
 
 s32 func_001229F8(void) {
     return 8;
