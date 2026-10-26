@@ -124,7 +124,9 @@ extern int* TransitionRow(void*,int) __asm__("func_003433C8");
 extern float ActorMetric(Actor*) __asm__("func_001378F0");
 extern void Pulse(void*,float,float,float) __asm__("func_001C2798");
 extern void ResetResponse(void*) __asm__("func_001C27D0");
-extern Vector Recoil() __asm__("func_0025D8E0");
+// The native component argument and full vector return are confirmed by the
+// exact actor update; the recoil interpretation remains UNVERIFIED.
+extern Vector Recoil(void* component) __asm__("func_0025D8E0");
 extern Matrix* LocatorCorrection(unsigned) __asm__("func_00138378");
 extern float ACos(float) __asm__("func_0029E0D8");
 extern float ATan2(float,float) __asm__("func_0029E2D8");
