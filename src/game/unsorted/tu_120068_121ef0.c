@@ -15,6 +15,26 @@ extern void func_00123960(M2C_UNK *);
 extern s32 func_00123980(M2C_UNK *, M2C_UNK, s32, s32);
 extern s32 func_001229F8();
 extern s8 func_001228E0(s32, s8);
+/* Partial keyed catalog and discovery counters; names and unused fields are UNVERIFIED. */
+typedef struct Recovered_CatalogEntry {
+    u64 key;
+    u8 unk_08[0x18];
+} Recovered_CatalogEntry;
+typedef struct Recovered_Catalog {
+    u8 unk_00;
+    u8 count;
+    u8 unk_02[2];
+    Recovered_CatalogEntry* entries;
+} Recovered_Catalog;
+typedef struct Recovered_DiscoveryData {
+    u8 unk_00[0x3A];
+    u16 count;
+    u8* flags;
+} Recovered_DiscoveryData;
+typedef struct Recovered_DiscoveryOwner {
+    Recovered_DiscoveryData* data;
+} Recovered_DiscoveryOwner;
+extern Recovered_Catalog** D_0040F4E0;
 
 void func_00121EF0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) | arg1);
@@ -67,7 +87,41 @@ s16 func_00122368(void **arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_00122478);
+#ifdef NON_MATCHING
+// Unmatched: catalog-search register allocation and loop scheduling differ.
+s32 func_00122520(Recovered_DiscoveryOwner* owner, u64 key) {
+    Recovered_Catalog* catalog = *D_0040F4E0;
+    u8 count = catalog->count;
+    s32 index = 0;
+    s32 selected;
+    if (count != 0) {
+        Recovered_CatalogEntry* entry = catalog->entries;
+        do {
+            if (entry->key == key) {
+                selected = index;
+                goto found;
+            }
+            entry++;
+            index = (s8)(index + 1);
+        } while (index < count);
+    }
+    selected = -1;
+found:
+    {
+        /* A missing key selects index -1 in the native code. */
+        u8* flag = owner->data->flags + (s8)selected;
+        s32 result = 1;
+        if (*flag == 0) {
+            *flag = 1;
+            result = owner->data->count + 1;
+            owner->data->count = result;
+        }
+        return result;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_00122520);
+#endif
 
 void func_001225B8(void **arg0, s32 arg1) {
     void *temp_3;
