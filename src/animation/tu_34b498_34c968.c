@@ -30,26 +30,23 @@ float *AnimationGraph_PoseCappedTime(void *owner, AnimationGraphNode *node, Anim
         time = node->parameters[1];
     return AnimationGraph_EvaluateNode(owner, child, bank, time, previous, flags, coefficient, weight);
 }
-#ifdef NON_MATCHING
-// Unmatched: func_0034CA68 (128 bytes), scheduling: scale-state stores and dispatch.
 float *AnimationGraph_PoseScale(void *owner, AnimationGraphNode *node, AnimationParameters *bank,
     float current, float previous, unsigned int flags, float coefficient, float weight) {
     float *scale, *pose;
+    AnimationGraphNode *child;
     if (node->childCount <= 0)
         return 0;
     scale = node->parameters;
+    child = node->children[0];
     ((float *)owner)[0x960 / 4] = scale[0];
     ((float *)owner)[0x964 / 4] = scale[1];
     ((float *)owner)[0x968 / 4] = scale[2];
-    pose = AnimationGraph_EvaluateNode(owner, node->children[0], bank, current, previous, flags, coefficient,
+    pose = AnimationGraph_EvaluateNode(owner, child, bank, current, previous, flags, coefficient,
         weight);
     if (pose)
         AnimationPose_Scale(pose, scale[0], scale[1], scale[2]);
     return pose;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CA68);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CAE8);
 #ifdef NON_MATCHING
 // Unmatched: layer pose allocation and repeated span call ordering.
