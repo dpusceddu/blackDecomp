@@ -22,7 +22,8 @@ typedef struct Recovered_ScoredQueueEntry {
     f32 unk_0C;
 } Recovered_ScoredQueueEntry;
 typedef struct Recovered_ScoredOwner {
-    u8 unk_00[0xD0];
+    u8 unk_00[0x74];
+    u16 counts[46];
     Recovered_ScoredSlot slots[8];
     Recovered_ScoredQueueEntry queue[8];
     u8 unk_230[0x10];
@@ -32,6 +33,11 @@ typedef char RecoveredScoredSlotSize[(sizeof(Recovered_ScoredSlot) == 0x1C) ? 1 
 extern void* D_0040F4D0;
 extern s32 func_00176C70(Recovered_ScoredOwner*, s8);
 extern s32 func_00176770(Recovered_ScoredOwner*, s32);
+extern f32 func_00176D18(Recovered_ScoredOwner*, Recovered_ScoredSlot*);
+extern void func_00176DD0(Recovered_ScoredOwner*, Recovered_ScoredSlot*);
+extern f32 func_00176D90(Recovered_ScoredOwner*, Recovered_ScoredSlot*);
+extern void func_00176AF0(Recovered_ScoredOwner*, Recovered_ScoredSlot*);
+extern s32 func_00176B50(Recovered_ScoredOwner*, f32);
 
 s32 func_00176730(void *arg0, s32 arg1) {
     s32 temp_5;
@@ -44,7 +50,42 @@ s32 func_00176730(void *arg0, s32 arg1) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176768);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176770);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_001768D0);
+#ifdef NON_MATCHING
+// Unmatched: temporary record setup and saved-register allocation differ.
+s32 func_00176978(Recovered_ScoredOwner* owner, void* object, s32 value, s32 kind, f32 delay, f32 duration) {
+    Recovered_ScoredSlot candidate __attribute__((aligned(16)));
+    f32 start;
+    s32 index;
+    s32 result = 0;
+    s32 active = 1;
+
+    candidate.unk_00 = object;
+    start = M2C_FIELD(D_0040F4D0, f32*, 0x20) + delay;
+    candidate.unk_04 = value;
+    candidate.unk_14 = -1.0f;
+    candidate.unk_08 = kind;
+    candidate.unk_0C = start;
+    candidate.unk_18 = active;
+    candidate.unk_10 = start + duration;
+    func_00176AF0(owner, &candidate);
+    index = func_00176B50(owner, candidate.unk_14);
+    if (index >= 0) {
+        Recovered_ScoredSlot* slot = &owner->slots[index];
+        result = 1;
+        slot->unk_08 = candidate.unk_08;
+        slot->unk_00 = candidate.unk_00;
+        slot->unk_04 = candidate.unk_04;
+        slot->unk_0C = candidate.unk_0C;
+        slot->unk_10 = candidate.unk_10;
+        slot->unk_14 = candidate.unk_14;
+        slot->unk_18 = active;
+        owner->counts[kind]++;
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176978);
+#endif
 s32 func_00176A78(Recovered_ScoredOwner* owner, u32 first, u32 second, u32 third, f32 score) {
     s32 result = 0;
     if (owner->queueCount < 8) {
@@ -62,7 +103,16 @@ f32 func_00176AE0(void) {
     return 0.0f;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: the first score move is scheduled before the call's delay slot.
+void func_00176AF0(Recovered_ScoredOwner* owner, Recovered_ScoredSlot* slot) {
+    f32 value = func_00176D18(owner, slot);
+    func_00176DD0(owner, slot);
+    slot->unk_14 = value * func_00176D90(owner, slot);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176AF0);
+#endif
 s32 func_00176B50(Recovered_ScoredOwner* owner, f32 score) {
     f32* slotScore = &owner->slots[0].unk_14;
     s32 selected = -1;
