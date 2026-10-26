@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "game/ai/actor_slot_values.h"
+#include "game/ai/actor_creation.h"
 
 extern Recovered_AIManager* D_0040F4D4;
 extern const s128 D_004432A0;
