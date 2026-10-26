@@ -6,7 +6,7 @@
 /* Partial native views. The original class identity, complete allocations and
  * meanings of the numeric lifecycle states are not yet established. */
 typedef struct {
-    // UNVERIFIED: buffer accesses are not yet confirmed by matched consumers.
+    // Buffer slots/count are confirmed by the matched attachment routine.
     Recovered_StreamBuffer* buffers[4];
     s32 bufferCount;
     u8 unk_14[0x14];
@@ -22,8 +22,8 @@ typedef struct {
 
 /* Partial request interface recovered from native controller call sites.
  * UNVERIFIED: original identities, unused slots, full extents and the producer
- * contract for prepare's full-width tag; the current producer draft uses only
- * its low word. Signed this adjustments are part of each native method record. */
+ * tag semantics. Native controller calls forward all 64 tag bits; signed this
+ * adjustments are part of each native method record. */
 typedef struct {
     s16 thisAdjustment;
     u16 unk_02;
@@ -55,7 +55,7 @@ typedef struct {
     u32 values[2];
     s32 valueCount;
     Recovered_StreamBuffer* buffers[2]; // UNVERIFIED: request pool operations remain drafts.
-    s32 variant;      // UNVERIFIED: load request remains a draft.
+    Recovered_StreamRange* variant; // UNVERIFIED: request binding remains draft-backed.
     const Recovered_PlaybackRequestVtable* vtable; // Confirmed by matched controller consumers.
 } Recovered_PlaybackRequest;
 
