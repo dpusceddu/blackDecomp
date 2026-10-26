@@ -1,7 +1,7 @@
 #include "include_asm.h"
+#include "game/graphics/audio_provider.hpp"
 
 #ifdef NON_MATCHING
-#include "game/graphics/audio_provider.hpp"
 using namespace Graphics;
 using namespace Game;
 extern "C" {
@@ -10,8 +10,8 @@ extern void func_00319DE0(Voice *,int);
 extern unsigned func_002851E0(AudioProvider *);
 extern void func_00310640(void *,int,int,unsigned);
 extern void func_00310590(void *,int,int,const Point3 *);
-extern void func_003106F0(void *,int,int);
-extern void func_003105E8(void *,int,int);
+extern void func_003106F0(void *,int,int,float);
+extern void func_003105E8(void *,int,int,int);
 }
 // Unmatched: 51 differences: flag helper and state/control-flow lifetimes.
 float AudioProvider::Transition()
@@ -63,26 +63,19 @@ void AudioProvider::SetVelocity(Vec v)
 void AudioProvider::SetGain(float value)
 {
     voice->gain=(int)(value*255.0f);
-    if(voice->channel)func_003106F0(voice->channel,13,1);
+    if(voice->channel)func_003106F0(voice->channel,13,1,value);
 }
 // Unmatched: 9 differences: floating register allocation and scheduling.
 void AudioProvider::SetPan(float value)
 {
     voice->pan=(int)(value*127.0f);
-    if(voice->channel)func_003106F0(voice->channel,12,1);
+    if(voice->channel)func_003106F0(voice->channel,12,1,value);
 }
 // Unmatched: 2 differences: NOP and branch displacement.
 void AudioProvider::SetPlayback(unsigned value)
 {
     voice->playback=value;
     if(voice->channel)func_00310640(voice->channel,9,1,value);
-}
-// Unmatched: 5 differences: condition and scheduling.
-void AudioProvider::SetFlag(unsigned value)
-{
-    if(value)voice->flags|=4;else voice->flags&=0xfb;
-    if(voice->channel)func_003105E8(voice->channel,10,1);
-    if(value)flags|=0x80;else flags&=0xff7f;
 }
 // Unmatched: 3 differences: result-register lifetime.
 bool AudioProvider::IsStopped()
@@ -98,9 +91,23 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002849C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00284A10);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00284AE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00284B28);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00388DD8);
 #endif
+
+extern "C" {
+void func_003105E8(void *, int, int, int);
+
+void func_00284B28(Graphics::AudioProvider *self, int value) {
+    int enabled = value != 0;
+    if (enabled) self->voice->flags |= 4;
+    else self->voice->flags &= 0xFB;
+    if (self->voice->channel != 0) {
+        func_003105E8(self->voice->channel, 10, 1, enabled);
+    }
+    if (value) self->flags |= 0x80;
+    else self->flags &= 0xFF7F;
+}
+}
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00286CA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00286DB8);
