@@ -1297,6 +1297,7 @@ Reset__Q24Kaim9SoundPool = 0x30E400; // type:func
 Matches__Q24Kaim9SoundPoolPQ24Kaim8ListenerPQ24Kaim10SoundEvent = 0x30E5A0; // type:func
 GetCounter__Q24Kaim9SoundPoolUi = 0x30E6B8; // type:func
 Kaim_CSoundManager_GetCounter = 0x30E6B8; // type:func alias
+Kaim_EmitSound = 0x30E798; // type:func alias
 Reset__Q24Kaim10SoundEvent = 0x30E9C8; // type:func
 CreateObject67FC0__Fi = 0x30EA38; // type:func
 _$_10Perception = 0x30EAE0; // type:func
