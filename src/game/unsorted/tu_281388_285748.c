@@ -1,7 +1,11 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_00281F88();
+#include "game/resource_value.h"
+
+extern u64 func_002723B0(const char* name);
+extern void func_00281EE0(Recovered_ValueRatioSource* self, u64* key, s32 convert);
+extern u32 func_00291E90(f32 value);
 
 #include "ps2/recovered_types.h"
 extern M2C_UNK D_003E26B0;
@@ -37,7 +41,12 @@ block_3:
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_285748", func_00285810);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_285748", func_00285818);
+void ResourceValue_Bind(Recovered_ResourceValue* self, Recovered_ResourceValueDescriptor* descriptor, s32 convert) {
+    u64 key;
+    self->descriptor = descriptor;
+    key = func_002723B0(descriptor->name);
+    func_00281EE0(&self->base, &key, convert);
+}
 
 s32 func_00285868(void) {
     return 1;
@@ -51,11 +60,21 @@ s32 func_00285878(void) {
     return 1;
 }
 
-s32 func_00285880(s32 arg0) {
-    M2C_FIELD(arg0, s32 *, 0x18) = 0;
-    return func_00281F88(arg0);
+void ResourceValue_Initialize(Recovered_ResourceValue* self) {
+    self->descriptor = NULL;
+    ValueRatio_Initialize(&self->base);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_285748", func_002858A0);
+f32 ResourceValue_Get(Recovered_ResourceValue* self) {
+    return self->descriptor->metadata.value;
+}
+#ifdef NON_MATCHING
+// Unmatched: the native unsigned-conversion join has one additional unreachable NOP.
+u32 ResourceValue_GetScaled(Recovered_ResourceValue* self) {
+    Recovered_ResourceValueMetadata metadata = self->descriptor->metadata;
+    return func_00291E90(metadata.scaledValue * 1.75f);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_285748", func_002858E0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_285748", func_00285980);
