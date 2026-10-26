@@ -2934,7 +2934,7 @@ splits:
   - {src: src/sony/tu_36d580_36d960.c, range: [0x36d960, 0x36d9c8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_36d580_36d9c8.c, range: [0x36d9c8, 0x36db08]}
   - {src: src/sony/tu_36db08.c, range: [0x36db08, 0x36dfb8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: flags or language differ}
-  - {src: src/sony/tu_36db08_36dfb8.c, range: [0x36dfb8, 0x36e360], note: flags or language differ}
+  - {src: src/sony/tu_36db08_36dfb8.c, range: [0x36dfb8, 0x36e360], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_36db08_36e360.c, range: [0x36e360, 0x36e9b0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x36e9b0, 0x36eae0]}
   - {src: src/sony/tu_36eae0.c, range: [0x36eae0, 0x36eb40], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
