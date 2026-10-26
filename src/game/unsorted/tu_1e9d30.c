@@ -4,6 +4,8 @@
 
 extern s32 func_001E9EE8();
 extern M2C_UNK D_0042A630;
+/* The meanings of these 17 keys are UNVERIFIED. */
+extern u64 D_003F9410[];
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001E9D30);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001E9E08);
@@ -36,4 +38,15 @@ void func_001EA518(void *arg0, s32 arg1, s32 arg2) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA580);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA620);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA628);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA728);
+s32 func_001EA728(void* owner, u64 key, s32* index) {
+    s32 found = 0;
+    *index = 0;
+    do {
+        if (D_003F9410[*index] == key) {
+            found = 1;
+        } else {
+            (*index)++;
+        }
+    } while (!found && *index < 17);
+    return found;
+}
