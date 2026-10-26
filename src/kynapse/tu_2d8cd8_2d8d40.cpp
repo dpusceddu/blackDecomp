@@ -1,8 +1,9 @@
 #include "kynapse/parameter_assign.hpp"
 #include "ps2/prelude.h"
 
-extern "C" void func_002E4DC8(void*, const char*, void (*)());
-extern "C" void func_002D8CD8();
+struct ObjectBase;
+ObjectBase* CreateParameter284900();
+extern "C" void func_002E4DC8(void*, const char*, ObjectBase* (*)());
 extern char D_00450080;
 extern void* D_00450190;
 extern char D_003E4728;
@@ -10,7 +11,7 @@ extern char D_003E4728;
 extern "C" void func_002D8D40(s32 enabled, s32 phase) {
     if (phase == 0xFFFF) {
         if (enabled != 0) {
-            func_002E4DC8(&D_00450080, "CEntityHearingAcuteness", &func_002D8CD8);
+            func_002E4DC8(&D_00450080, "CEntityHearingAcuteness", &CreateParameter284900);
             return;
         }
         D_00450190 = &D_003E4728;
