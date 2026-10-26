@@ -3,6 +3,9 @@
 #include "ps2/prototypes.h"
 
 extern s32 func_00175F50();
+extern s32 func_00189250(void *, s32);
+extern f32 func_0018E130(void *);
+extern f32 func_0018E110(void *);
 extern void * D_0040F4D4;
 
 s32 func_001848B8(void *arg0) {
@@ -34,5 +37,52 @@ s32 func_00185318(s32 arg0, s32 arg1, s32 arg2) {
     return func_00175F50((s32) (D_0040F4D4 + 0xFA0), arg1, arg2, 0x221, M2C_FIELD(M2C_FIELD(arg0, u32 *, 0), s32 *, 0x7C), 1);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260_1848b8", func_00185350);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260_1848b8", func_00185438);
+f32 func_00185350(s32 *state, void *target) {
+    s32 selected = 0;
+    s32 mode;
+    f32 value;
+    if (target != NULL) {
+        selected = func_00189250((void *) (state[0] + 0x150), M2C_FIELD(target, s32 *, 0x380));
+    }
+    mode = M2C_FIELD(state, s32 *, 0x64);
+    switch (mode) {
+    case 0:
+        value = M2C_FIELD(state, f32 *, 0x14) * func_0018E130((void *) (state[0] + 0xC94));
+        break;
+    case 2:
+    case 3:
+        if (selected != 0) {
+            value = __ee_max_s(M2C_FIELD(state, f32 *, 0x10),
+                M2C_FIELD(state, f32 *, 0x14) * func_0018E110((void *) (state[0] + 0xC94)));
+            break;
+        }
+        /* Fall through. */
+    case 1:
+    default:
+        value = M2C_FIELD(state, f32 *, 0x14) * func_0018E110((void *) (state[0] + 0xC94));
+        break;
+    }
+    if (M2C_FIELD(state, f32 *, 0x18) >= 0.0f) {
+        value = __ee_min_s(value, M2C_FIELD(state, f32 *, 0x18));
+    }
+    return value;
+}
+f32 func_00185438(s32 *state, void *target) {
+    s32 selected = 0;
+    s32 mode;
+    if (target != NULL) {
+        selected = func_00189250((void *) (state[0] + 0x150), M2C_FIELD(target, s32 *, 0x380));
+    }
+    mode = M2C_FIELD(state, s32 *, 0x64);
+    switch (mode) {
+    case 0:
+        return M2C_FIELD(state, f32 *, 0x28);
+    case 2:
+    case 3:
+        if (selected != 0) return M2C_FIELD(state, f32 *, 0x20);
+        /* Fall through. */
+    case 1:
+    default:
+        return M2C_FIELD(state, f32 *, 0x24);
+    }
+}
