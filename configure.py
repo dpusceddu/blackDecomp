@@ -31,6 +31,11 @@ def stages(slug, nm):
 
 def stage_rules(records, py):
     lines=[]
+    # A recorded source/header can disappear during a rename. Let its producer
+    # rediscover the current inputs before Ninja attempts to build leaf objects.
+    sources=sorted({path for _,_,io in records for path in io['reads']
+                    if path.startswith(('src/','include/'))})
+    lines += ['build '+escape(path)+': phony' for path in sources]
     for name,path,io in records:
         command=[py,'tools/build/graph_io.py','record',path,'--']+io['command']
         if name=='split':
