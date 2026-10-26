@@ -6,6 +6,7 @@
 extern void* D_0040F4D0;
 extern s32 func_0012D158(void*, s32, s32);
 extern f32 func_0012D0D0(void*, f32, f32);
+extern s32 func_00138320(void*);
 
 extern void * D_0040F4BC;
 extern s32 D_003BD140;
@@ -23,7 +24,16 @@ void func_00137318(s64 *arg0, s64 arg1) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137320);
+#ifdef NON_MATCHING
+// Unmatched: body instructions agree, but native section extent is eight bytes larger.
+s32 func_00137450(Recovered_ManagedActor* actor) {
+    s32 active = 0;
+    if (actor->unk_2A4) active = Actor_GetManagedSlot(actor)->unk_31 != 0;
+    return active;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137450);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137490);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_001374F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137520);
@@ -35,7 +45,18 @@ f32 func_001378F0(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137908);
+#ifdef NON_MATCHING
+// Unmatched: inlined layer predicate and register allocation differ.
+s32 func_00137A78(Recovered_ManagedActor* actor) {
+    s32 result = 0;
+    if (Actor_LayerHasEntry(actor)) {
+        if (func_00138320(actor->unk_328) == 0x28) result = 1;
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137A78);
+#endif
 
 s32 func_00137AE0(void *arg0) {
     void *temp_2;
