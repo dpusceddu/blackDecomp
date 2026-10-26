@@ -5,8 +5,8 @@
 /* Native frontend command registration identifies these options. These are
  * partial access views, not complete original classes; all unaccessed storage,
  * original identities and full extents remain UNVERIFIED.
- * UNVERIFIED: named frontend/input/vibration access fields await matched option
- * consumers; their command names come from the native registration. */
+ * Matched option consumers confirm invert-look and crouch fields. Volume and
+ * vibration fields remain UNVERIFIED until their draft consumers match. */
 typedef struct {
     u8 unk_00[0x2015C];
     f32 sfxVolume;
