@@ -5,8 +5,7 @@ extern s32 func_00193980();
 extern s32 func_00187FE0(s32, M2C_UNK);
 extern s32 func_001825B0(void *);
 extern void func_00193988(void);
-// UNVERIFIED: the return values of this helper and its callbacks.
-extern s32 func_001880D8(void *);
+extern void func_001880D8(void *);
 extern void func_00173690(f32 *);
 extern void func_00173640(f32 *, f32);
 
@@ -28,19 +27,16 @@ void func_001941A8(void **arg0) {
 
 // Unmatched: 001941F8: movement pointer lifetime and branch delay slot.
 #ifdef NON_MATCHING
-s32 func_001941F8(void **state) {
+void func_001941F8(void **state) {
     void *owner;
-    s32 result;
     u8 *movement;
     func_00193988();
     M2C_FIELD(M2C_FIELD(*state, void **, 0x694), s8 *, 0x30) = 0;
     owner = *state;
     movement = (u8 *) owner + 0x290;
-    result = *movement;
-    if (result != 0) {
-        result = func_001880D8(movement);
+    if (*movement != 0) {
+        func_001880D8(movement);
     }
-    return result;
 }
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_193978_1941a8", func_001941F8);
@@ -59,18 +55,15 @@ void func_00194420(void **state) {
 }
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_193978_1941a8", func_00194420);
-s32 func_00194490(ActionState *state) {
+void func_00194490(ActionState *state) {
     void *owner;
-    s32 result;
     u8 *movement;
     func_00193988();
     M2C_FIELD(state->owner, s8 *, 0x38) = 0;
     owner = state->owner;
     movement = (u8 *) owner + 0x290;
-    result = *movement;
-    if (result != 0) {
-        result = func_001880D8(movement);
+    if (*movement != 0) {
+        func_001880D8(movement);
     }
-    return result;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_193978_1941a8", func_001944D8);
