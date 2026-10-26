@@ -5,10 +5,19 @@
 /* Native frontend command registration identifies these options. These are
  * partial access views, not complete original classes; all unaccessed storage,
  * original identities and full extents remain UNVERIFIED.
- * UNVERIFIED: named frontend/input/vibration access fields await matched option
- * consumers; their command names come from the native registration. */
+ * Matched option consumers confirm invert-look and crouch fields. Volume and
+ * vibration fields remain UNVERIFIED until their draft consumers match. */
+/* UNVERIFIED: the native update addresses both gains through this common
+ * subobject, but the original setting names and other members are unknown. */
 typedef struct {
-    u8 unk_00[0x2015C];
+    u8 unk_00[0x1C];
+    f32 unk_1C, unk_20;
+} Recovered_AudioMixPreferences;
+
+typedef struct {
+    u8 unk_00[0x20120];
+    Recovered_AudioMixPreferences audioMix;
+    u8 unk_20144[0x18];
     f32 sfxVolume;
     f32 musicVolume;
     u8 unk_20164;

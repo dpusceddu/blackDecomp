@@ -727,7 +727,7 @@ splits:
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x177d10, 0x177d90]}
   - {src: src/game/unsorted/tu_177d90.c, range: [0x177d90, 0x1783e0]}
   - {src: src/game/unsorted/tu_1783e0.c, range: [0x1783e0, 0x178408]}
-  - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x178408, 0x178f18]}
+  - {src: src/game/ai/actor_slot_values.c, range: [0x178408, 0x178f18]}
   - {src: src/game/ai/tu_178f18.c, range: [0x178f18, 0x178f28], assembler: sn-min6}
   - {src: src/game/ai/tu_178f18_178f28.cpp, range: [0x178f28, 0x178f50], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/ai/tu_178f18.c, range: [0x178f50, 0x1793c0]}

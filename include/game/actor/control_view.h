@@ -9,9 +9,10 @@ typedef struct {
     u8 vectorActive;
 } Recovered_ActorBodyState;
 
-/* UNVERIFIED until a source-exact caller confirms this view. Native callers
- * supply an integer kind, full-quad payload and FPR weight; the virtual result
- * is unused. The original method and enclosing class identities are unknown. */
+/* Source-confirmed dispatch view: integer kind, full-quad payload and FPR
+ * weight. The native return type remains UNVERIFIED because the result is unused.
+ * Original method/class identities, unaccessed entries and full table extent
+ * remain unknown. */
 struct Recovered_ManagedSlotDispatch {
     u8 unk_00[0x28];
     s16 vectorEventAdjustment;
