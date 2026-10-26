@@ -36,6 +36,19 @@ typedef char AudioRuntimeDriverOffset[(u32)&((Recovered_AudioRuntime*)0)->driver
 typedef char AudioRuntimeInitializedOffset[(u32)&((Recovered_AudioRuntime*)0)->initialized == 0xCBB4 ? 1 : -1];
 typedef char AudioSetupCommandSize[sizeof(Recovered_AudioSetupCommand) == 24 ? 1 : -1];
 
+/* Partial voice view. The initializer confirms byte accesses and the driver
+ * handle word; unaccessed storage, original identity and total extents are
+ * UNVERIFIED. */
+typedef struct {
+    u8 unk_00[0x32];
+    u8 kind, unk_33, unk_34, unk_35;
+    u16 unk_36;
+    s32 handle;
+} Recovered_AudioVoice;
+typedef char AudioVoiceHandleOffset[(u32)&((Recovered_AudioVoice*)0)->handle == 0x38 ? 1 : -1];
+
+void AudioVoice_Initialize(Recovered_AudioVoice* self, void* unused1, s32 driver, s32 alternate,
+                           void* unused4, void* unused5, s32 kind);
 void AudioRuntime_Configure(Recovered_AudioRuntime* self, s32 firstValue, s32 secondValue, s32 thirdValue, void* bank);
 void AudioRuntime_SetMode(Recovered_AudioRuntime* self, s32 mode);
 #endif
