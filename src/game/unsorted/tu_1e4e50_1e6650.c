@@ -1,13 +1,14 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
+#include "game/playback_state_pool.h"
 
 extern void * func_001E51E0();
 extern s32 func_001E63B8();
 extern void * D_0040F4D0;
 extern s32 func_00135550();
 extern s32 func_001848C0();
-extern void* D_0040F510;
+extern Recovered_PlaybackServices* D_0040F510;
 extern void* func_001D8478(void*);
 extern void func_001D84C8(void*, void*);
 
@@ -20,6 +21,18 @@ typedef struct Recovered_SlotPool {
     u16 unk_62;
 } Recovered_SlotPool;
 typedef char RecoveredSlotPointerIs32[(sizeof(void*) == 4) ? 1 : -1];
+
+/* Partial playback owner; field meanings outside the matched calls are UNVERIFIED. */
+typedef struct Recovered_PlaybackOwner {
+    u8 unk_00[0xB0];
+    void* unk_B0[1];
+    void* unk_B4[1];
+    Recovered_PlaybackState* unk_B8;
+    u8 unk_BC;
+} Recovered_PlaybackOwner;
+
+void* func_001E69E8(Recovered_SlotPool*);
+void func_001E6A40(Recovered_SlotPool*, void*);
 
 s32 func_001E6650(void *arg0, s32 arg1, s64 arg2, s32 arg3) {
     u8 sp[8] __attribute__((aligned(16)));
@@ -42,8 +55,25 @@ s32 func_001E66F0(s32 arg0) {
     return arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6700);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E67B8);
+void func_001E6700(Recovered_PlaybackOwner* owner, u64 key) {
+    u32 index;
+    owner->unk_B8 = PlaybackStatePool_Acquire(D_0040F510->playbackPools.states, key);
+    for (index = 0; index < 1; index++) { owner->unk_B4[index] = 0; }
+    for (index = 0; index < 1; index++) {
+        owner->unk_B0[index] = func_001E69E8(M2C_FIELD(D_0040F510->playbackPools.unk_4BD8, Recovered_SlotPool**, 4));
+    }
+    owner->unk_BC = 0;
+}
+void func_001E67B8(Recovered_PlaybackOwner* owner) {
+    u32 index;
+    for (index = 0; index < 1; index++) { owner->unk_B4[index] = 0; }
+    for (index = 0; index < 1; index++) {
+        func_001E6A40(M2C_FIELD(D_0040F510->playbackPools.unk_4BD8, Recovered_SlotPool**, 4), owner->unk_B0[index]);
+        owner->unk_B0[index] = 0;
+    }
+    PlaybackStatePool_Release(D_0040F510->playbackPools.states, owner->unk_B8);
+    owner->unk_B8 = 0;
+}
 #ifdef NON_MATCHING
 // Unmatched: pool and index use swapped saved registers.
 void func_001E6878(Recovered_SlotPool* pool) {

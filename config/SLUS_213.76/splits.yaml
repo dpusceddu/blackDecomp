@@ -1447,7 +1447,7 @@ splits:
   - {src: src/game/unsorted/tu_1e4e50.c, range: [0x1e4e50, 0x1e51c8], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1e4e50_1e51c8.c, range: [0x1e51c8, 0x1e62d0], note: flags or language differ}
   - {src: src/game/unsorted/tu_1e4e50_1e62d0.c, range: [0x1e62d0, 0x1e6650], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/unsorted/tu_1e4e50_1e6650.c, range: [0x1e6650, 0x1e7150], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1e4e50_1e6650.c, range: [0x1e6650, 0x1e7150], assembler: sn-min6, note: playback setup and teardown loops are six words including branch and delay slot}
   - {src: src/game/unsorted/tu_1e4e50_1e7150.c, range: [0x1e7150, 0x1e7588], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/unsorted/tu_1e4e50_1e7588.c, range: [0x1e7588, 0x1e75f0], flags: [-O2, -fno-schedule-insns, -G0], note: flags or language differ}
   - {src: src/game/unsorted/tu_1e4e50_1e6650.c, range: [0x1e75f0, 0x1e7600]}
