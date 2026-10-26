@@ -29,6 +29,9 @@ typedef struct Recovered_ScoredOwner {
     s8 queueCount;
 } Recovered_ScoredOwner;
 typedef char RecoveredScoredSlotSize[(sizeof(Recovered_ScoredSlot) == 0x1C) ? 1 : -1];
+extern void* D_0040F4D0;
+extern s32 func_00176C70(Recovered_ScoredOwner*, s8);
+extern s32 func_00176770(Recovered_ScoredOwner*, s32);
 
 s32 func_00176730(void *arg0, s32 arg1) {
     s32 temp_5;
@@ -75,8 +78,42 @@ s32 func_00176B50(Recovered_ScoredOwner* owner, f32 score) {
     }
     return selected;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176BB0);
+s32 func_00176BB0(Recovered_ScoredOwner* owner, s32 unused) {
+    f32* slotScore = &owner->slots[0].unk_14;
+    s8 index = 0;
+    s32 selected = -1;
+    s32 result;
+    f32 best = 0.0f;
+    do {
+        if (best <= *slotScore && func_00176C70(owner, index)) {
+            best = *slotScore;
+            selected = index;
+        }
+        slotScore = (f32*)((u32)slotScore + sizeof(Recovered_ScoredSlot));
+        index++;
+        result = index < 8;
+    } while (result);
+    if (selected >= 0) { result = func_00176770(owner, selected); }
+    return result;
+}
+#ifdef NON_MATCHING
+// Unmatched: slot-address registers and return branches differ.
+s32 func_00176C70(Recovered_ScoredOwner* owner, s8 index) {
+    s32 offset = index * 0x1C;
+    void* slotBase = (u8*)owner + offset;
+    void* subject;
+    s32 kind;
+    if (!M2C_FIELD(slotBase, u8*, 0xE8)) { return 0; }
+    subject = M2C_FIELD(M2C_FIELD(slotBase, void**, 0xD0), void**, 0x7C);
+    if (M2C_FIELD(D_0040F4D0, f32*, 0x20) - M2C_FIELD(subject, f32*, 0x2F4) < 3.0f) { return 0; }
+    if (M2C_FIELD(subject, s32*, 0x38C) == 0 || (kind = owner->slots[index].unk_08, kind == 0x20 || kind == 0x21)) {
+        return 1;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176C70);
+#endif
 
 void func_00176D00(void) {
 
