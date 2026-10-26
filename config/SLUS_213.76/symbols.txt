@@ -884,6 +884,7 @@ GetBlock__Q24Kaim19CPoolBasedAllocatorUi = 0x2E5E58; // type:func
 __Q24Kaim9CFreeListiUiPQ24Kaim10CAllocator = 0x2E5FB8; // type:func
 _$_Q24Kaim9CFreeList = 0x2E6740; // type:func
 MakeAvailable__Q24Kaim9CFreeListGQ34Kaimt8CVarList1ZPQ24Kaim14CFreeListBlock9CIterator = 0x2E69E8; // type:func
+TakeBlock__Q24Kaim9CFreeList = 0x2E6B60; // type:func
 _$_Q24Kaim14CBaseAllocator = 0x2E6D10; // type:func
 AllocateBlock__Q24Kaim10CAllocatorUiPPv = 0x2E6DD8; // type:func
 FindAny__Q24Kaim10CAllocatorUiPQ24Kaim14CBaseAllocator = 0x2E6E60; // type:func
