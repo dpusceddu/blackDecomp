@@ -1,11 +1,11 @@
 #include "include_asm.h"
+#include "game/aligned_buffer.h"
 #include "ps2/prelude.h"
 #include "game/timed_value_pool.h"
 
 extern u128 D_00443230;
 
 extern s32 func_00274FC8(s32);
-extern s32 func_00274F80(s32);
 extern s32 func_00274F60(s32);
 
 s32 func_00282100(void *arg0) {
@@ -39,9 +39,9 @@ s32 func_00282170(void *arg0) {
 s32 func_002821A8(s32 arg0, s32 arg1, s32 arg2) {
     switch (arg2) {                                 /* irregular */
     case 0:
-        return func_00274F80(arg0 + 0x1C);
+        return (s32)AlignedBuffer_Allocate((Recovered_AlignedBuffer*)(arg0 + 0x1C), arg1);
     case 1:
-        return func_00274F80(arg0 + 0x38);
+        return (s32)AlignedBuffer_Allocate((Recovered_AlignedBuffer*)(arg0 + 0x38), arg1);
     default:
         return 0;
     }

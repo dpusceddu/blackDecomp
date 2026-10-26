@@ -1,4 +1,5 @@
 #include "include_asm.h"
+#include "game/aligned_buffer.h"
 
 #include "game/frontend_resources.hpp"
 
@@ -73,14 +74,13 @@ void FrontendResourceTable::SetSelectedFlags(int unused, int flags) {
 }
 
 extern "C" int func_001080F0();
-extern "C" void func_00274F80(void*,void*);
 extern "C" void func_0035E7D8(void*);
 extern FrontendResourceTable D_0040F0F0;
 extern "C" void func_00107D20(void*);
 
 void FrontendResourceTable::ReleaseData(void* data) {
     if (retain || func_001080F0()) {
-        func_00274F80(selected,data);
+        AlignedBuffer_Allocate((Recovered_AlignedBuffer*)selected, (u32)data);
         return;
     }
     func_0035E7D8(data);
