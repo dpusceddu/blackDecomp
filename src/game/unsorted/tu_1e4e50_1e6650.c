@@ -190,7 +190,8 @@ s32 func_001E6B70(s32 arg0, void *arg1) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6B88);
+/* The meanings of these 64-bit keys are UNVERIFIED. */
+s32 func_001E6B88(void* owner, u64 key) { return key == 0x81F2D7A540000000UL || key == 0x8218186380000000UL; }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6BD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6C38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6E50);
