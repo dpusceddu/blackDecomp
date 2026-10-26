@@ -16,7 +16,7 @@ typedef struct {
     f32 unk_0c;
     f32 unk_10;
     f32 unk_14;
-} ActionState;
+} Recovered_ActionState;
 
 void func_001941A8(void **arg0) {
     func_00193980();
@@ -51,7 +51,7 @@ void func_00194420(void **state) {
 }
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_193978_1941a8", func_00194420);
-void func_00194490(ActionState *state) {
+void func_00194490(Recovered_ActionState *state) {
     void *owner;
     u8 *movement;
     func_00193988();

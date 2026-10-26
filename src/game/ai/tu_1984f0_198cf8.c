@@ -17,14 +17,14 @@ typedef struct {
     u8 unk_04[12];
     s128 position;
     u8 moving;
-} ActionMove;
+} Recovered_ActionMove;
 
 s32 func_00198CF8(s32 arg0) {
     return func_00193990(arg0, 0);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1984f0_198cf8", func_00198D18);
-void func_00198D40(ActionMove *action) {
+void func_00198D40(Recovered_ActionMove *action) {
     u8 *owner;
     func_001984F0(action);
     if (func_00193A08(action) == 0) {
