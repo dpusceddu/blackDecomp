@@ -2306,3 +2306,7 @@ AnimationAllocator_Set = 0x343ed0; // type:func alias
 AnimationAllocator_Get = 0x343f38; // type:func alias
 AnimationAllocator_Allocate = 0x343f48; // type:func alias
 AnimationAllocator_Free = 0x343f90; // type:func alias
+
+// Physics shape descriptor and default-frame initialization.
+PhysicsShape_InitializeHolder = 0x334268; // type:func alias
+PhysicsShape_InitializeAt = 0x3342d0; // type:func alias
