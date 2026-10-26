@@ -21,7 +21,9 @@ typedef struct {
     void* body; // Confirmed at +0xb4 by the exact RenderableState::Update body access.
     u8 unk_B8[0xC];
     s32 unk_C4; // Native actor category; the gameplay meaning of category 2 is unknown.
-    u8 unk_C8[0x248];
+    u8 unk_C8[0x230];
+    f32 unk_2F8; // UNVERIFIED: native creation writes FLT_MAX or 100.0; original field role is unknown.
+    u8 unk_2FC[0x14];
     f32 unk_310;
     f32 unk_314;
     u8 unk_318[0x14];
@@ -75,6 +77,7 @@ typedef struct {
 /* Only accessed spans are modeled; full actor/component extents remain unknown.
  * Existing exact 0x135e28/0x135ea8 accesses confirm mode and scalar-control fields;
  * 0x135c78 confirms the changed byte. Their broader gameplay roles remain open. */
+typedef char ManagedActor2F8Offset[(u32)&((Recovered_ManagedActor*)0)->unk_2F8 == 0x2F8 ? 1 : -1];
 typedef char ManagedActorBodyOffset[(u32)&((Recovered_ManagedActor*)0)->body == 0xB4 ? 1 : -1];
 typedef char ManagedActorControlModeOffset[(u32)&((Recovered_ManagedActor*)0)->unk_3A0 == 0x3A0 ? 1 : -1];
 typedef char ManagedActorControlChangedOffset[(u32)&((Recovered_ManagedActor*)0)->controlsChanged == 0x3AD ? 1 : -1];

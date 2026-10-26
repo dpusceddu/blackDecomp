@@ -1402,7 +1402,19 @@ splits:
   - {src: src/game/unsorted/tu_1cff78_1d4068.c, range: [0x1d5808, 0x1d5828]}
   - {src: src/game/unsorted/tu_1d5828.c, range: [0x1d5828, 0x1d5e40]}
   - {src: src/game/unsorted/tu_1d5e40.c, range: [0x1d5e40, 0x1d76e8]}
-  - {src: src/game/unsorted/tu_1d76e8.c, range: [0x1d76e8, 0x1d8df8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1d76e8.c, range: [0x1d76e8, 0x1d8560], note: Controller switch bodies own their C tables separately from neighboring ASM tables; original TU boundaries remain unknown}
+  - src: src/game/unsorted/tu_1d76e8_1d8560.c
+    range: [0x1d8560, 0x1d8728]
+    assembler: sn-min6
+    note: Native initialization has a six-word descending channel clear and Begin has a six-word copy; stock SN adds a seventh loop instruction. Keep the generated switch table in its own original slot among ASM tables. Original assembler provenance and TU boundaries are unknown.
+  - {src: src/game/unsorted/tu_1d76e8.c, range: [0x1d8728, 0x1d8ad0]}
+  - src: src/game/unsorted/tu_1d76e8_1d8ad0.c
+    range: [0x1d8ad0, 0x1d8bb8]
+    assembler: sn-min6
+    note: Native completion shares the initialization sibling's six-word descending channel clear; stock SN inserts a seventh loop instruction. Keep its generated switch table between the neighboring ASM tables. Original assembler provenance and TU boundaries are unknown.
+  - {src: src/game/unsorted/tu_1d76e8.c, range: [0x1d8bb8, 0x1d8cf8]}
+  - {src: src/game/unsorted/tu_1d76e8_1d8cf8.c, range: [0x1d8cf8, 0x1d8d68], note: Own generated switch table follows the neighboring ASM tables; original TU boundaries remain unknown}
+  - {src: src/game/unsorted/tu_1d76e8.c, range: [0x1d8d68, 0x1d8df8]}
   - {src: src/game/unsorted/tu_1d76e8_1d8df8.c, range: [0x1d8df8, 0x1d90f8], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/unsorted/tu_1d76e8.c, range: [0x1d90f8, 0x1d9100]}
   - {src: src/game/unsorted/tu_1d76e8_1d8df8.c, range: [0x1d9100, 0x1d9250]}
