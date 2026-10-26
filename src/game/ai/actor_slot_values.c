@@ -1,5 +1,5 @@
 #include "include_asm.h"
-#include "game/actor_slots.h"
+#include "game/ai/actor_slot_values.h"
 
 /* Actor-slot forwarding and value access. This file follows the existing
  * proposed split; the original source/TU identity remains unknown. */
