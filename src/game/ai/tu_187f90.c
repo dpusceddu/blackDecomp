@@ -15,6 +15,8 @@ extern void * D_0040F4D0;
 extern s32 func_00158088();
 extern s32 func_00173640(void **, f32);
 extern s32 func_00173610();
+extern void func_001A2CF0(void *);
+extern void func_00188B00(void *);
 
 void func_00187F90(s32 arg0) {
     func_00188238();
@@ -26,7 +28,25 @@ void func_00187F90(s32 arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_187f90", func_00187FD8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_187f90", func_00187FE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_187f90", func_001880D8);
+void func_001880D8(void *movement) {
+    void *attachment;
+    void *vtable;
+
+    if (M2C_FIELD(movement, u8 *, 0) != 0) {
+        M2C_FIELD(M2C_FIELD(movement, void **, 0x3AC), s8 *, 0x6CD) = 0;
+        M2C_FIELD(movement, u8 *, 0) = 0;
+        M2C_FIELD(movement, u8 *, 0x24) = 0;
+        if (M2C_FIELD(movement, void **, 0x3A8) != NULL) {
+            func_001A2CF0(M2C_FIELD(movement, void **, 0x3A8));
+            attachment = M2C_FIELD(movement, void **, 0x3A8);
+            vtable = M2C_FIELD(attachment, void **, 0x60);
+            M2C_FIELD(vtable, void (**)(void *), 0x2C)(
+                (s8 *) attachment + M2C_FIELD(vtable, s16 *, 0x28));
+            M2C_FIELD(movement, void **, 0x3A8) = NULL;
+        }
+        func_00188B00(movement);
+    }
+}
 
 void func_00188148(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 2) = arg1;

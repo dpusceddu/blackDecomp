@@ -5,6 +5,7 @@ extern s32 func_00193980();
 extern s32 func_00187FE0(s32, M2C_UNK);
 extern s32 func_001825B0(void *);
 extern void func_00193988(void);
+// UNVERIFIED: the return values of this helper and its callbacks.
 extern s32 func_001880D8(void *);
 extern void func_00173690(f32 *);
 extern void func_00173640(f32 *, f32);
