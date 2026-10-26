@@ -6,9 +6,21 @@ struct Recovered_AnimationIndexNode {
     int height;
     Recovered_AnimationIndexNode *parent, *left, *right;
 };
+typedef struct Recovered_AnimationIndexAllocatorVtable {
+    char unk_00[16];
+    short adjust;
+    short unk_12;
+    void (*release)(void*, Recovered_AnimationIndexNode*, int);
+} Recovered_AnimationIndexAllocatorVtable;
+typedef struct Recovered_AnimationIndexAllocator {
+    Recovered_AnimationIndexAllocatorVtable* table;
+} Recovered_AnimationIndexAllocator;
 typedef struct {
     Recovered_AnimationIndexNode* root;
+    int count;
+    Recovered_AnimationIndexAllocator* allocator;
 } Recovered_AnimationIndexTree;
+/* Only the tree count, allocator dispatch and node links used here are confirmed; other fields are UNVERIFIED. */
 /* Rotate the left child up, updating both heights and the parent link. */
 static inline void AnimationIndex_RotateRight(Recovered_AnimationIndexTree* tree, Recovered_AnimationIndexNode** slot) {
     Recovered_AnimationIndexNode* left = (*slot)->left;
