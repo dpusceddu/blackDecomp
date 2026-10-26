@@ -43,6 +43,12 @@ typedef char RecoveredKeyResourceSize[(sizeof(Recovered_KeyResource) == 0x10) ? 
 extern void func_00282100(void*);
 extern s32 func_002821A8(void*, s32, s32);
 extern void func_00282170(void*);
+extern void func_002808A0(void*);
+extern void func_001D8CF8(void*);
+extern s32 func_001E8A30(Recovered_KeyResourceOwner*, Recovered_KeyResource*, s32, s32);
+extern s32 func_001E8AF0(Recovered_KeyResourceOwner*);
+extern Recovered_KeyResource D_003BDA60[];
+extern s32 D_003F8CAC;
 
 s32 func_001E79F0(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 8) != 3) {
@@ -143,14 +149,46 @@ void func_001E8250(Recovered_ResourceList* owner) {
     } while (remaining >= 0);
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E82A8);
+#ifdef NON_MATCHING
+// Unmatched: state-test branches and returns are laid out differently.
+s32 func_001E8710(Recovered_KeyResourceOwner* owner) {
+    s32 state = owner->unk_00;
+    if (state != 1) {
+        if (state < 2) {
+            if (state != 0) { return 0; }
+            func_001E8A30(owner, D_003BDA60, D_003F8CAC, 0);
+            goto set_ready;
+        }
+        if (state != 2) { return 0; }
+    set_ready:
+        owner->unk_00 = 1;
+        return 1;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8710);
+#endif
 
 void func_001E8798(void) {
 
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E87A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8900);
+s32 func_001E8900(Recovered_KeyResourceOwner* owner) {
+    void* object;
+    void* table;
+    if (owner->unk_40 != 0) {
+        func_002808A0(D_0040F510);
+        object = owner->unk_40;
+        table = M2C_FIELD(object, void**, 0x1B0);
+        if (M2C_FIELD(table, s32(**)(void*), 0x1C)((u8*)object + M2C_FIELD(table, s16*, 0x18)) == 0) { return 0; }
+        func_001E8AF0(owner);
+        if (owner->unk_40 == owner->unk_44) { func_001D8CF8(owner->unk_34); }
+        owner->unk_40 = 0;
+    }
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8980);
 Recovered_KeyResource* func_001E89B0(Recovered_KeyResourceOwner* owner, u64 key) {
     s32 index;
