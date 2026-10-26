@@ -3,15 +3,15 @@
 
 #include "game/frontend_resources.hpp"
 
-extern "C" void func_00274F60(void*);
+extern "C" unsigned int func_00274F60(void*);
 extern "C" void func_00274F58(void*,int);
-extern "C" void func_00274F70(void*);
+extern "C" unsigned int func_00274F70(void*);
 extern "C" int func_00274FD8(void*,void*);
 extern "C" int func_00275340(void*);
 extern "C" float func_0029D950(float);
 
-void FrontendResourceTable::Release(int index) {
-    func_00274F60(&slots[index]);
+unsigned int FrontendResourceTable::Capacity(int index) {
+    return func_00274F60(&slots[index]);
 }
 
 int FrontendResourceTable::Find(void* resource) {
@@ -56,12 +56,12 @@ unsigned short FrontendResourceCache::ScaledCount(void* resource, float numerato
     return scaled;
 }
 
-void FrontendResourceTable::Select(int index) {
+unsigned int FrontendResourceTable::SelectBuffer(int index) {
     selectedIndex=index;
     FrontendResourceSlot* slot=&slots[index];
     selected=slot;
     func_00274F58(slot,0x80);
-    func_00274F70(selected);
+    return func_00274F70(selected);
 }
 
 void FrontendResourceTable::ClearSelection() {
@@ -69,40 +69,39 @@ void FrontendResourceTable::ClearSelection() {
     selectedIndex=-1;
 }
 
-void FrontendResourceTable::SetSelectedFlags(int unused, int flags) {
-    func_00274F58(selected,flags);
+void FrontendResourceTable::SetSelectedAlignment(int unused, unsigned int alignment) {
+    AlignedBuffer_SetAlignment((Recovered_AlignedBuffer*)selected, alignment);
 }
 
 extern "C" int func_001080F0();
-extern "C" void func_0035E7D8(void*);
+extern "C" void* func_0035E7D8(unsigned int bytes);
 extern FrontendResourceTable D_0040F0F0;
-extern "C" void func_00107D20(void*);
+extern "C" void* func_00107D20(unsigned int bytes);
 
-void FrontendResourceTable::ReleaseData(void* data) {
+void* FrontendResourceTable::Allocate(unsigned int bytes) {
     if (retain || func_001080F0()) {
-        AlignedBuffer_Allocate((Recovered_AlignedBuffer*)selected, (u32)data);
-        return;
+        return AlignedBuffer_Allocate((Recovered_AlignedBuffer*)selected, bytes);
     }
-    func_0035E7D8(data);
+    return func_0035E7D8(bytes);
 }
 
 void* FrontendResourceTable::GetSlotData(int index) {
     return slots[index].data;
 }
 
-void FrontendResourceTable::InstallPair(FrontendResourcePair* pair) {
-    SetCurrentFlags(pair->flags);
-    func_00107D20(pair->data);
+void* FrontendResourceTable::AllocateAligned(FrontendAllocationSpec* specification) {
+    SetAlignment(specification->alignment);
+    return func_00107D20(specification->bytes);
 }
 
-void FrontendResourceTable::SetCurrentFlags(int flags) {
-    func_00274F58(selected,flags);
+void FrontendResourceTable::SetAlignment(unsigned int alignment) {
+    AlignedBuffer_SetAlignment((Recovered_AlignedBuffer*)selected, alignment);
 }
 
-int FrontendResourceTable::CurrentStatus() { return selected->status; }
+unsigned int FrontendResourceTable::Alignment() { return selected->alignment; }
 
-extern "C" void func_00107CF8(void* data) { D_0040F0F0.ReleaseData(data); }
-extern "C" void func_00107D20(void* data) { D_0040F0F0.ReleaseData(data); }
+extern "C" void* func_00107CF8(unsigned int bytes) { return D_0040F0F0.Allocate(bytes); }
+extern "C" void* func_00107D20(unsigned int bytes) { return D_0040F0F0.Allocate(bytes); }
 extern "C" void func_00107D48() {}
 extern "C" void func_00107D50() {}
 
