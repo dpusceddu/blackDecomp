@@ -1,5 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/audio_playback_control.h"
+
+extern void func_00280908(void*, s32);
 
 extern s32 func_00324F98();
 
@@ -36,19 +39,19 @@ void func_001D84C8(s32 arg0, void *arg1) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D84D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D8560);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D8600);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D8728);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D8AD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D8BB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D8BC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D8CF8);
-
 s32 func_001D8D68(void) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D8D70);
+void AudioPlaybackControl_ClearChannelState(Recovered_AudioPlaybackControl* self) {
+    if (self->mode == 1) {
+        s32 i;
+        for (i = 0; i < self->channelCount; i++) func_00280908(self->channels[i], 0);
+    }
+}
 
 void func_001D8DE8(void) {
 
