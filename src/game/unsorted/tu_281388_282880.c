@@ -8,6 +8,28 @@ extern s32 func_002803F8();
 extern s32 func_00280528();
 extern s32 func_003178B8(M2C_UNK);
 extern s32 func_00280628();
+extern void *func_0031A9A0(s32, s32, s32, s32);
+extern void func_00280358(void *);
+extern void func_00280360(void *, void *);
+extern void *func_0035C6EC(void *, s32, u32);
+extern s32 func_00317888(void *);
+extern void func_003178C0(void *);
+
+typedef struct {
+    s32 values[3];
+} Recovered_SoundVector;
+
+typedef struct {
+    u8 unk_00[0x54];
+    Recovered_SoundVector vector;
+    u8 unk_60[0x24];
+    u32 flags;
+} Recovered_SoundListener; /* Field meanings UNVERIFIED. */
+
+typedef struct {
+    u8 unk_00[0x70];
+    Recovered_SoundListener *listener;
+} Recovered_SoundListenerOwner;
 
 void func_00282880(void) {
 
@@ -42,7 +64,24 @@ void func_00282AD8(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x103C) = 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282B60);
+void func_00282B60(Recovered_SoundListenerOwner *owner) {
+    owner->listener = func_0031A9A0(0, 4, 0, 0);
+    func_00280358(owner);
+}
+#ifdef NON_MATCHING
+// Unmatched: aggregate-copy register scheduling differs.
+s32 func_00282BA0(Recovered_SoundListenerOwner *owner, void *arg1) {
+    Recovered_SoundVector vector;
+    func_0035C6EC(&vector, 0, sizeof(vector));
+    {
+        Recovered_SoundListener *listener = owner->listener;
+        listener->vector = vector;
+    }
+    owner->listener->flags |= 2;
+    func_00280360(owner, arg1);
+    return 1;
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282BA0);
 
 void func_00282C18(void *arg0) {
@@ -75,7 +114,18 @@ void func_00282F48(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: indexed-store register allocation differs.
+void func_00282F80(Recovered_SoundListenerOwner **owners, s32 index, Recovered_SoundListenerOwner *owner) {
+    owners[index] = owner;
+    func_00317888(owner->listener);
+    if (index == 0) {
+        func_003178C0(owner->listener);
+    }
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282F80);
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282FD0);
 
 void func_002830E8(void *arg0, f32 fparg0) {
