@@ -82,7 +82,38 @@ Recovered_KeyEntry* func_001E51E0(Recovered_KeyOwner* owner, const u64* group_ke
     }
     return 0;
 }
+#ifdef NON_MATCHING
+// Unmatched: random conversion and floating-point scheduling differ.
+extern u32 D_0040EB30[2];
+static inline u32 NextTimingRandom(void) {
+    u32 first = D_0040EB30[0];
+    u32 second = D_0040EB30[1];
+    u32 next = (first << 16) + ((s32)first >> 16) + second;
+    D_0040EB30[1] = second + next;
+    D_0040EB30[0] = next;
+    return next;
+}
+
+void func_001E5270(void* unused, s32* indices, s32 count, s32 limit) {
+    u32 next = NextTimingRandom();
+    f32 scale = ((f32)((s32)((u32)limit - 1U)) + 1.0f) - 0.0000152587890625f;
+    s32* cursor;
+    s32 remaining;
+
+    indices[0] = (s32)(0.0f + (scale - 0.0f) * ((f32)next * 2.3283064365386963e-10f));
+    cursor = indices + 1;
+    if (count > 1) {
+        remaining = count - 1;
+        do {
+            *cursor = (s32)((u32)cursor[-1] + 1U) % count;
+            cursor++;
+            remaining--;
+        } while (remaining != 0);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5270);
+#endif
 #ifdef NON_MATCHING
 // Unmatched: loop padding and final argument scheduling differ.
 void func_001E5360(void* owner) {
