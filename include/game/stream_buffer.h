@@ -59,7 +59,7 @@ typedef char StreamPoolCountOffset[(u32) & ((Recovered_StreamBufferPool*)0)->buf
 void StreamBuffer_Initialize(Recovered_StreamBuffer* self, void* data, s32 bytes) __asm__("func_001D7BE0");
 s32 StreamBuffer_Prepare(Recovered_StreamBuffer* self, u64 key, Recovered_StreamRecord* record, s16 firstBlock,
                          s32 value, s32 mode);
-s32 StreamBuffer_TryReset(Recovered_StreamBuffer* self);
+s32 StreamBuffer_TryReset(Recovered_StreamBuffer* self) __asm__("func_001D7CC0");
 Recovered_StreamRecord* StreamBufferPool_FindRecord(Recovered_StreamBufferPool* self, s32 id);
 Recovered_StreamBuffer* StreamBufferPool_Acquire(Recovered_StreamBufferPool* self);
 void StreamBufferPool_Release(Recovered_StreamBufferPool* self, Recovered_StreamBuffer* buffer);
