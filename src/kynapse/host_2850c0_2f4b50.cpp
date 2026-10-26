@@ -54,8 +54,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031AC40);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031AC68);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031AC98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031ACC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031AD20);
 #ifdef NON_MATCHING
 /* Partial views; the owning class and the meaning of the flags are UNVERIFIED. */
 struct Recovered_KynapseBasisVector {
@@ -69,7 +67,15 @@ struct Recovered_KynapseBasisLarge {
 struct Recovered_KynapseBasisSmall {
     char unk_00[0x58];
     Recovered_KynapseBasisVector first, second, cross;
+    char unk_7c[0xc];
     unsigned int flags;
+};
+struct Recovered_KynapseBasisInput {
+    Recovered_KynapseBasisVector axis0;
+    int unk_0c;
+    Recovered_KynapseBasisVector axis1;
+    int unk_1c;
+    Recovered_KynapseBasisVector axis2;
 };
 static inline void RecomputeBasisCross(Recovered_KynapseBasisVector* out, const Recovered_KynapseBasisVector* a,
                                        const Recovered_KynapseBasisVector* b) {
@@ -77,9 +83,36 @@ static inline void RecomputeBasisCross(Recovered_KynapseBasisVector* out, const 
     out->z = a->x * b->y - a->y * b->x;
     out->y = a->z * b->x - a->x * b->z;
 }
-
+#endif
+#ifdef NON_MATCHING
+// Unmatched: vector-copy register scheduling differs.
+extern "C" Recovered_KynapseBasisLarge* func_0031ACC0(Recovered_KynapseBasisLarge* self, int,
+                                                      const Recovered_KynapseBasisInput* values) {
+    self->first = values->axis1;
+    self->second = values->axis2;
+    self->cross = values->axis0;
+    self->flags |= 0xc;
+    return self;
+}
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031ACC0);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: vector-copy register scheduling differs.
+extern "C" Recovered_KynapseBasisLarge* func_0031AD20(Recovered_KynapseBasisLarge* self, int,
+                                                      Recovered_KynapseBasisInput* values) {
+    values->axis1 = self->first;
+    values->axis2 = self->second;
+    values->axis0 = self->cross;
+    return self;
+}
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031AD20);
+#endif
+#ifdef NON_MATCHING
 // Unmatched: cross-product and return-register scheduling differ.
-extern "C" Recovered_KynapseBasisLarge* func_0031AD78(Recovered_KynapseBasisLarge* self, int, const Recovered_KynapseBasisVector* value) {
+extern "C" Recovered_KynapseBasisLarge* func_0031AD78(Recovered_KynapseBasisLarge* self, int,
+                                                      const Recovered_KynapseBasisVector* value) {
     self->first = *value;
     RecomputeBasisCross(&self->cross, &self->first, &self->second);
     self->flags |= 8;
@@ -91,7 +124,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031ADF0);
 #ifdef NON_MATCHING
 // Unmatched: cross-product and return-register scheduling differ.
-extern "C" Recovered_KynapseBasisLarge* func_0031AE18(Recovered_KynapseBasisLarge* self, int, const Recovered_KynapseBasisVector* value) {
+extern "C" Recovered_KynapseBasisLarge* func_0031AE18(Recovered_KynapseBasisLarge* self, int,
+                                                      const Recovered_KynapseBasisVector* value) {
     self->second = *value;
     RecomputeBasisCross(&self->cross, &self->first, &self->second);
     self->flags |= 4;
@@ -107,11 +141,35 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031B7D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031B800);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031B830);
+#ifdef NON_MATCHING
+// Unmatched: vector-copy register scheduling differs.
+extern "C" Recovered_KynapseBasisSmall* func_0031B858(Recovered_KynapseBasisSmall* self, int,
+                                                      const Recovered_KynapseBasisInput* values) {
+    self->first = values->axis1;
+    self->second = values->axis2;
+    self->cross = values->axis0;
+    self->flags |= 0xc;
+    return self;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031B858);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: vector-copy register scheduling differs.
+extern "C" Recovered_KynapseBasisSmall* func_0031B8B8(Recovered_KynapseBasisSmall* self, int,
+                                                      Recovered_KynapseBasisInput* values) {
+    values->axis1 = self->first;
+    values->axis2 = self->second;
+    values->axis0 = self->cross;
+    return self;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031B8B8);
+#endif
 #ifdef NON_MATCHING
 // Unmatched: cross-product and return-register scheduling differ.
-extern "C" Recovered_KynapseBasisSmall* func_0031B910(Recovered_KynapseBasisSmall* self, int, const Recovered_KynapseBasisVector* value) {
+extern "C" Recovered_KynapseBasisSmall* func_0031B910(Recovered_KynapseBasisSmall* self, int,
+                                                      const Recovered_KynapseBasisVector* value) {
     self->first = *value;
     RecomputeBasisCross(&self->cross, &self->first, &self->second);
     self->flags |= 8;
@@ -123,7 +181,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0031B988);
 #ifdef NON_MATCHING
 // Unmatched: cross-product and return-register scheduling differ.
-extern "C" Recovered_KynapseBasisSmall* func_0031B9B0(Recovered_KynapseBasisSmall* self, int, const Recovered_KynapseBasisVector* value) {
+extern "C" Recovered_KynapseBasisSmall* func_0031B9B0(Recovered_KynapseBasisSmall* self, int,
+                                                      const Recovered_KynapseBasisVector* value) {
     self->second = *value;
     RecomputeBasisCross(&self->cross, &self->first, &self->second);
     self->flags |= 4;
