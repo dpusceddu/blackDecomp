@@ -225,7 +225,27 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0032
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0032AD30);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0032AE70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0032B3B0);
+#ifdef NON_MATCHING
+/* Partial storage request; the owning type and the meanings of the counts are UNVERIFIED. */
+struct Recovered_KynapseBlockRequirement {
+    unsigned int size;
+    unsigned int alignment;
+};
+static inline unsigned int AlignBlockSize(unsigned int size) { return (size + 15) & ~15u; }
+// Unmatched: native storage descriptors and arithmetic scheduling differ.
+extern "C" Recovered_KynapseBlockRequirement* func_0032B860(Recovered_KynapseBlockRequirement* result,
+                                                            unsigned int count, unsigned int pairs) {
+    unsigned int size = 32 + 0xA0 * count;
+    size = AlignBlockSize(size) + 0x40 * count + 8 * pairs;
+    size = AlignBlockSize(size) + 0x40 * pairs;
+    size = AlignBlockSize(size) + 0x50 * pairs + 4 * count;
+    result->alignment = 16;
+    result->size = size;
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0032B860);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0032B920);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0032E710);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00331D70);
