@@ -3,14 +3,16 @@
 #include "ps2/prelude.h"
 
 /* Partial driver view. Only the mode word is confirmed by the game-side
- * accessor; the unused prefix and original type identity are UNVERIFIED. */
+ * accessor; all unaccessed storage, total extents and original type identity
+ * are UNVERIFIED. */
 typedef struct {
     u8 unk_00[0x6A4];
     s32 mode;
 } Recovered_AudioDriverState;
 
 /* Partial runtime tail shared by initialization and mode selection. The
- * unused prefixes and configuration-field semantics remain UNVERIFIED. */
+ * unaccessed storage (including unk_CBB0), total extents and
+ * configuration-field semantics remain UNVERIFIED. */
 typedef struct {
     u8 unk_00[0xCB9D];
     u8 unk_CB9D;
