@@ -11,6 +11,7 @@ extern s32 func_001848C0();
 extern Recovered_PlaybackServices* D_0040F510;
 extern void* func_001D8478(void*);
 extern void func_001D84C8(void*, void*);
+extern s32 D_003BD4D0;
 
 /* Partial slot pool; the capacity and slot meanings are UNVERIFIED. */
 typedef struct Recovered_SlotPool {
@@ -21,6 +22,22 @@ typedef struct Recovered_SlotPool {
     u16 unk_62;
 } Recovered_SlotPool;
 typedef char RecoveredSlotPointerIs32[(sizeof(void*) == 4) ? 1 : -1];
+
+/* Partial state initialized with a slot pool; other fields are UNVERIFIED. */
+typedef struct Recovered_PoolState {
+    s32 unk_00;
+    Recovered_SlotPool* unk_04;
+    s32 unk_08;
+    s32 unk_0C;
+    u8 unk_10[4];
+    u32 unk_14;
+    u8 unk_18[0xC];
+    s32 unk_24;
+    u8 unk_28[4];
+    f32 unk_2C;
+    s32 unk_30;
+    s32 unk_34;
+} Recovered_PoolState;
 
 /* Partial playback owner; field meanings outside the matched calls are UNVERIFIED. */
 typedef struct Recovered_PlaybackOwner {
@@ -137,7 +154,20 @@ void func_001E6A40(Recovered_SlotPool* pool, void* object) {
         } while (index < pool->unk_60);
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6A98);
+void func_001E6A98(Recovered_PoolState* state, u32 value) {
+    void* pools = D_0040F510->playbackPools.unk_4BD8;
+    Recovered_SlotPool* slot_pool = M2C_FIELD(pools, Recovered_SlotPool**, 4);
+    state->unk_14 = value;
+    state->unk_04 = slot_pool;
+    state->unk_24 = -1;
+    state->unk_2C = 0.5f;
+    state->unk_08 = 0;
+    state->unk_0C = 0;
+    D_003BD4D0 = 0;
+    state->unk_30 = 0;
+    state->unk_34 = 0;
+    state->unk_00 = 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6AF0);
 
 s32 func_001E6AF8(s32 arg0, void *arg1) {
