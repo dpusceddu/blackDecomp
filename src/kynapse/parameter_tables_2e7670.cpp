@@ -3,6 +3,7 @@
 #include "kynapse/parameter_tables.hpp"
 #ifdef NON_MATCHING
 #include "kynapse/graph/parameters.hpp"
+#include "kynapse/graph/team.hpp"
 #endif
 
 BufferSet::BufferSet()
@@ -271,4 +272,17 @@ bool ParameterViews::ConsumeGlobal(int index) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8FA0);
 #endif
+#ifdef NON_MATCHING
+// Unmatched: returned iterator copies and destruction differ from the native slot lookup.
+int ParameterTables::NextSlot() {
+    if (selected >= 0 && (unsigned int)selected >= gSlotOwner->slotCount) return -1;
+    unsigned int slot = order[selected++];
+    typedef Kaim::CVarList<Kaim::CEntity*> EntitySlots;
+    EntitySlots* entries = (EntitySlots*)gSlotOwner->table;
+    EntitySlots::CCell* entry = entries->At(slot).node;
+    if (entry->active) return slot;
+    return NextSlot();
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E90B8);
+#endif
