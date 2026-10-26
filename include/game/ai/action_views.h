@@ -11,8 +11,8 @@ typedef struct Recovered_ActionTimerPair {
     f32 unk_08;
 } Recovered_ActionTimerPair;
 
-typedef struct {
-    void *owner;
+typedef struct Recovered_ActionState {
+    void* owner;
     u8 unk_04[4];
     s32 unk_08;
     f32 unk_0c;
@@ -20,8 +20,8 @@ typedef struct {
     f32 unk_14;
 } Recovered_ActionState;
 
-typedef struct {
-    u8 *owner;
+typedef struct Recovered_ActionMove {
+    u8* owner;
     u8 unk_04[12];
     s128 position;
     u8 moving;
