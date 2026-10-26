@@ -121,12 +121,10 @@ float AnimationPlayback_RefreshSpan(PlaybackState* state, AnimationGraphNode* no
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00351030);
 
-#ifdef NON_MATCHING
-// Unmatched: native Boolean return temporary lifetime differs.
 int AnimationPlayback_IsTransitionActive(PlaybackState* state, int cursor) {
     PlaybackHistory* history = AnimationPlayback_PreviousHistory(state, cursor);
-    if (!history || !history->has_timing) return 0;
-    return (state->current - history->destination_coordinate) < history->timing_start + history->blend;
+    if (!history) return 0;
+    if (!history->has_timing) return 0;
+    if ((state->current - history->destination_coordinate) < history->timing_start + history->blend) return 1;
+    return 0;
 }
-#endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00351168);
