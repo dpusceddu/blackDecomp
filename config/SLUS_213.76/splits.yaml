@@ -2799,7 +2799,7 @@ splits:
   - {src: src/animation/tu_3420e8.c, range: [0x3420e8, 0x342a60]}
   - {src: src/animation/tu_342a60.cpp, range: [0x342a60, 0x3438d8]}
   - {src: src/animation/tu_3438d8.c, range: [0x3438d8, 0x343ed0]}
-  - {src: src/animation/tu_343ed0.c, range: [0x343ed0, 0x343fc8]}
+  - {src: src/animation/allocator.cpp, range: [0x343ed0, 0x343fc8]}
   - {src: src/animation/animation_math.cpp, range: [0x343fc8, 0x344118], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/animation/tu_343fc8_344118.c, range: [0x344118, 0x344178]}
   - {src: src/animation/vu0_micro_controls.cpp, range: [0x344178, 0x3441d0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
