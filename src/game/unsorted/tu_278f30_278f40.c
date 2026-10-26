@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_00278F30();
+extern s32 func_00278F30(s32);
 extern f32 func_002759E0(void *, const u16 *);
 
 typedef struct {
@@ -17,8 +17,8 @@ typedef struct {
     s8 alignment;
 } Recovered_TextLayout; /* Field meanings UNVERIFIED. */
 
-void func_00278F40(void) {
-    func_00278F30();
+void func_00278F40(void *data) {
+    func_00278F30((s32)data);
 }
 
 f32 func_00278F60(Recovered_TextLayout *layout) {
