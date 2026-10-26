@@ -1453,7 +1453,7 @@ splits:
   - {src: src/game/unsorted/tu_1e4e50_1e6650.c, range: [0x1e75f0, 0x1e7600]}
   - {src: src/game/unsorted/tu_1e4e50_1e7588.c, range: [0x1e7600, 0x1e7800]}
   - {src: src/game/unsorted/tu_1e4e50_1e7800.c, range: [0x1e7800, 0x1e79f0], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/unsorted/tu_1e4e50_1e79f0.c, range: [0x1e79f0, 0x1e8b38]}
+  - {src: src/game/unsorted/tu_1e4e50_1e79f0.c, range: [0x1e79f0, 0x1e8b38], assembler: sn-min6, note: resource list initialization loop is six words including branch and delay slot}
   - {src: src/game/unsorted/tu_1e8b38.c, range: [0x1e8b38, 0x1e8b60]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1e8b60, 0x1e9150]}
   - {src: src/game/unsorted/tu_1e9150.c, range: [0x1e9150, 0x1e9250]}

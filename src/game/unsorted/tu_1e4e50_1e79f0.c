@@ -8,6 +8,17 @@ extern s32 func_001D7BB8();
 extern void * func_0015BF38(s32);
 extern s32 func_001D63A8(s32, s32, void *);
 extern s32 func_001EFD30();
+extern s32 func_00284298(void*);
+
+/* Partial resource list and configuration; unaccessed fields are UNVERIFIED. */
+typedef struct Recovered_ResourceList {
+    u8 unk_00[0x80];
+    void* unk_80[48];
+    u8 unk_140[0x30];
+    u32 unk_170[15];
+    s32 unk_1AC;
+} Recovered_ResourceList;
+typedef char RecoveredResourcePointerIs32[(sizeof(void*) == 4) ? 1 : -1];
 
 s32 func_001E79F0(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 8) != 3) {
@@ -21,7 +32,8 @@ s32 func_001E79F0(void *arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E7A50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E7A58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E7E08);
+/* The meanings of the two 64-bit keys are UNVERIFIED. */
+s32 func_001E7E08(u64 key) { return key == 0x6D936D37E6000000UL || key == 0x6D936E1CC7C00000UL; }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E7E58);
 
 void func_001E80C0(s64 arg0, s32 *arg1) {
@@ -35,7 +47,31 @@ void func_001E80C0(s64 arg0, s32 *arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8120);
+void func_001E8120(Recovered_ResourceList* owner, const u32* values) {
+    s32 remaining = 47;
+    void** slot = &owner->unk_80[47];
+    owner->unk_170[4] = values[4];
+    owner->unk_170[5] = values[5];
+    owner->unk_170[6] = values[6];
+    owner->unk_170[0] = values[0];
+    owner->unk_170[3] = values[3];
+    owner->unk_170[9] = values[9];
+    owner->unk_170[8] = values[8];
+    owner->unk_170[1] = values[1];
+    owner->unk_170[2] = values[2];
+    owner->unk_170[7] = values[7];
+    owner->unk_170[10] = values[10];
+    owner->unk_170[11] = values[11];
+    owner->unk_170[12] = values[12];
+    owner->unk_170[13] = values[13];
+    owner->unk_170[14] = values[14];
+    do {
+        *slot = 0;
+        remaining--;
+        slot = (void**)((u32)slot - 4U);
+    } while (remaining >= 0);
+    owner->unk_1AC = 0;
+}
 
 s32 func_001E81C0(void *arg0) {
     s32 temp_3;
@@ -72,7 +108,16 @@ s32 func_001E8248(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8250);
+void func_001E8250(Recovered_ResourceList* owner) {
+    void** slot = owner->unk_80;
+    s32 remaining = 47;
+    do {
+        void* resource = *slot;
+        remaining--;
+        slot++;
+        if (resource != 0) { func_00284298(resource); }
+    } while (remaining >= 0);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E82A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8710);
 
