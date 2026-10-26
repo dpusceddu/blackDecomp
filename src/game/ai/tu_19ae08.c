@@ -4,10 +4,12 @@
 
 extern s32 func_00193980();
 extern s32 func_00193B98();
-extern s32 func_0019B0C0();
+extern void func_0019B0C0(RecoveredAIActionHeader*);
+extern s32 func_00188F10(void*);
+extern s32 func_00193A60(RecoveredAIActionHeader*, s32, f32);
 extern s32 func_00193988();
 
-s32 func_0019AE08(s32 arg0) {
+void func_0019AE08(s32 arg0) {
     func_00193980();
     M2C_FIELD(func_00193B98(arg0), f32 *, 0x44) = 0.5f;
     M2C_FIELD(func_00193B98(arg0), s32 *, 0x4C) = 0;
@@ -23,17 +25,45 @@ s32 func_0019AE08(s32 arg0) {
     M2C_FIELD(M2C_FIELD(arg0, u32 *, 0), s8 *, 0x104) = 1;
     M2C_FIELD(M2C_FIELD(arg0, u32 *, 0), s8 *, 0x110) = 1;
     M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, u32 *, 0), void **, 0x694), s8 *, 0x35) = 1;
-    return func_0019B0C0(arg0);
+    func_0019B0C0((RecoveredAIActionHeader*)arg0);
 }
 
 void func_0019AF20(void) {
     func_00193988();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_19ae08", func_0019AF40);
+void func_0019AF40(RecoveredAIActionHeader* self, s32 event, s32 value) {
+    switch (event) {
+    case 0x23:
+        if (value) {
+            func_00193A28(self, 0x16, 0);
+            return;
+        }
+        func_00193A60(self, 0, 10.0f);
+        /* fall through */
+    case 0x16:
+    case 8:
+        func_0019B0C0(self);
+        return;
+    case 0x24:
+        if (value) func_00193A28(self, 0x16, 0);
+        else func_0019B0C0(self);
+        return;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_19ae08", func_0019AFF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_19ae08", func_0019B0C0);
+void func_0019B0C0(RecoveredAIActionHeader* self) {
+    if (func_00188F10((u8*)self->brain + 0x150)) {
+        if (func_00193AF8(self)) {
+            func_00193A28(self, 0x23, 0);
+        } else {
+            func_00193A28(self, 0x24, 0);
+        }
+    } else {
+        func_00193A28(self, 0x16, 0);
+    }
+}
 
-void func_0019B130(void) {
-    func_0019B0C0();
+void func_0019B130(RecoveredAIActionHeader* self) {
+    func_0019B0C0(self);
 }
