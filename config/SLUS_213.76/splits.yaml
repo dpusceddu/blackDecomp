@@ -2720,7 +2720,8 @@ splits:
   - {src: src/rw_audio/tu_323ed0_328c50.c, range: [0x328c50, 0x328ce8]}
   - {src: src/rw_audio/tu_323ed0_328ce8.c, range: [0x328ce8, 0x328d58]}
   - {src: src/rw_audio/tu_323ed0_328d58.c, range: [0x328d58, 0x328e60]}
-  - {src: src/rw_audio/tu_323ed0_328e60.c, range: [0x328e60, 0x329078]}
+  - {src: src/rw_audio/tu_323ed0_328e60.c, range: [0x328e60, 0x328ff0]}
+  - {src: src/rw_audio/channel_mask.c, range: [0x328ff0, 0x329078], flags: [-O2, -G8, -snas], note: draft small-data mask compiler context}
   - {src: src/rw_audio/tu_323ed0_329078.c, range: [0x329078, 0x3291e0]}
   - {src: src/rw_audio/tu_323ed0_3291e0.c, range: [0x3291e0, 0x329710]}
   - {src: src/rw_audio/tu_323ed0_329710.c, range: [0x329710, 0x3298d8]}
