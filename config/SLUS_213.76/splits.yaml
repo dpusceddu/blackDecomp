@@ -1887,13 +1887,13 @@ splits:
   - {src: src/game/unsorted/tu_281388_2813a0.c, range: [0x2813a0, 0x2817c8], flags: [-O1, -G0, -snas]}
   - {src: src/game/unsorted/tu_281388_2817c8.c, range: [0x2817c8, 0x2818d0], flags: [-O2, -G0], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_2818d0.c, range: [0x2818d0, 0x2819e0], note: flags or language differ}
-  - {src: src/game/unsorted/tu_281388_2819e0.c, range: [0x2819e0, 0x281a38], flags: [-O2, -G0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_281388_2819e0.cpp, range: [0x2819e0, 0x281a38], flags: [-O2, -G0], assembler: sn-min6, note: Native entry-clear loop spans six words; sn-min6 removes the stock extra NOP; assembler provenance remains unverified}
   - {src: src/game/unsorted/tu_281388_2818d0.c, range: [0x281a38, 0x281a58]}
-  - {src: src/game/unsorted/tu_281388_2819e0.c, range: [0x281a58, 0x281b50]}
+  - {src: src/game/unsorted/tu_281388_2819e0.cpp, range: [0x281a58, 0x281b50]}
   - {src: src/game/unsorted/tu_281388_2818d0.c, range: [0x281b50, 0x281b88]}
-  - {src: src/game/unsorted/tu_281388_2819e0.c, range: [0x281b88, 0x281bb8]}
+  - {src: src/game/unsorted/tu_281388_2819e0.cpp, range: [0x281b88, 0x281bb8]}
   - {src: src/game/unsorted/tu_281388_2818d0.c, range: [0x281bb8, 0x281bf8]}
-  - {src: src/game/unsorted/tu_281388_2819e0.c, range: [0x281bf8, 0x281ee0]}
+  - {src: src/game/unsorted/tu_281388_2819e0.cpp, range: [0x281bf8, 0x281ee0]}
   - {src: src/game/unsorted/tu_281388_2818d0.c, range: [0x281ee0, 0x281f88]}
   - {src: src/game/unsorted/tu_281388_281f88.c, range: [0x281f88, 0x282100], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_282100.c, range: [0x282100, 0x282628], note: flags or language differ}

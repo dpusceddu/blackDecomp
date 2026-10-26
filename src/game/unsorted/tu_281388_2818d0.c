@@ -1,12 +1,12 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/resource_pool.hpp"
 #include "ps2/prototypes.h"
 
 extern s32 func_00284298(void *arg0);
 extern s32 func_00285190(void *arg0);
 extern s32 func_002819E0();
 extern s32 func_00280908(s32, s32);
-extern s32 func_002811E8();
 extern s32 func_002726D0();
 extern s32 func_00280E10();
 extern s64 func_00272580();
@@ -42,8 +42,8 @@ void func_00281988(s32 arg0, s32 arg1) {
 }
 
 
-void func_00281A38(s32 arg0, s32 arg1) {
-    func_002811E8(arg1);
+Recovered_FloatPair* FloatPairBank_GetOutput(Recovered_FloatPairBank* bank, s32 index) {
+    return FloatPairOutput_At(index);
 }
 
 

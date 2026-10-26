@@ -23,7 +23,7 @@ struct Recovered_PooledResource {
     virtual void Unknown0();
     virtual void Unknown1();
     virtual s32 TryReset();
-    virtual s32 IsActive();
+    virtual s32 IsActive(); // UNVERIFIED: this slot is used only by the Update draft.
 };
 struct Recovered_ResourcePoolEntry {
     Recovered_PooledResource* resource;
