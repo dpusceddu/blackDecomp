@@ -7,6 +7,7 @@ extern void* D_0040F4D0;
 extern s32 func_0012D158(void*, s32, s32);
 extern f32 func_0012D0D0(void*, f32, f32);
 extern s32 func_00138320(void*);
+extern f32 func_00138360(s32);
 
 extern void * D_0040F4BC;
 extern s32 D_003BD140;
@@ -35,13 +36,19 @@ s32 func_00137450(Recovered_ManagedActor* actor) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137450);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137490);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_001374F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137520);
+void func_001374F8(Recovered_ManagedActor* actor, s32 index) {
+    Actor_IndexedRecord(actor, index)->unk_4C = 0.0f;
+}
+/* The record address uses the low 16 bits; the table lookup receives the full index. */
+void func_00137520(Recovered_ManagedActor* actor, s32 index) {
+    Recovered_ActorIndexedControl* record = Actor_IndexedRecord(actor, index);
+    record->unk_4C = func_00138360(index);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137568);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137718);
 
-f32 func_001378F0(void *arg0) {
-    return M2C_FIELD(arg0, f32 *, 0xC0) * M2C_FIELD(D_0040F4BC, f32 *, 0x1660);
+f32 func_001378F0(Recovered_ManagedActor* actor) {
+    return actor->unk_C0 * M2C_FIELD(D_0040F4BC, f32 *, 0x1660);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137908);

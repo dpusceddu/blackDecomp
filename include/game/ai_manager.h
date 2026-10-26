@@ -25,7 +25,7 @@ typedef struct {
     u8 unk_B0[4];
     void* body; // Confirmed at +0xb4 by the exact RenderableState::Update body access.
     void* unk_B8; // UNVERIFIED: native control routing forwards this pointer; original role is unknown.
-    struct Recovered_ActorIndexedComponent* unk_BC; // UNVERIFIED: indexed scalar-control consumer remains a draft.
+    struct Recovered_ActorIndexedComponent* unk_BC; // Exact indexed scalar controls confirm this pointer; class identity is unknown.
     f32 unk_C0; // Exact 0x1378f0 scales this float; original units and gameplay role are unknown.
     s32 unk_C4; // Native actor category; the gameplay meaning of category 2 is unknown.
     u8 unk_C8[0x190];
