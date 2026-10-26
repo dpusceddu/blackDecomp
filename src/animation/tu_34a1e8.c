@@ -6,7 +6,36 @@ extern void func_00352958(void*, float, float, float);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A1E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A3C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A598);
+#ifdef NON_MATCHING
+/* Return-value meaning and complete vector type are UNVERIFIED. */
+typedef struct {
+    float x, y, z;
+} Recovered_AnimationVector3;
+// Unmatched: input/output pointer and register allocation differ.
+int func_0034A770(int source, int destination, int first, int end) {
+    int adjusted = -12;
+    int offset, count;
+    Recovered_AnimationVector3 *input, *output;
+    if (first < end) {
+        offset = first * 12;
+        count = end - first;
+        adjusted = first * -12 + source;
+        input = (Recovered_AnimationVector3*)(offset + adjusted);
+        output = (Recovered_AnimationVector3*)(offset + destination);
+        do {
+            --count;
+            output->x = input->x;
+            output->y = input->y;
+            output->z = input->z;
+            ++input;
+            ++output;
+        } while (count != 0);
+    }
+    return adjusted;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34a1e8", func_0034A770);
+#endif
 
 #include "ps2/recovered_types.h"
 extern s32 func_0034B128(void *, void *, s32, s32, s32, void *);
