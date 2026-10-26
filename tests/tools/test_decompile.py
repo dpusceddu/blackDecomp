@@ -38,7 +38,8 @@ class Decompile(unittest.TestCase):
                                      functions=None, defines=lambda: set())
         for target in (patch.object(decompile, 'ROOT', self.root), patch.object(decompile.S, 'ROOT', self.root),
                        patch.object(decompile.S, 'load_splits', return_value=[self.split]),
-                       patch.object(decompile, 'draft', return_value=(dict(size=8), {}, DRAFT, 'sig'))):
+                       patch.object(decompile, 'draft', return_value=(dict(size=8), {}, DRAFT, 'sig')),
+                       patch.object(decompile.preflight, 'require')):   # no game files or build in the synthetic checkout
             target.start()
             self.addCleanup(target.stop)
 
