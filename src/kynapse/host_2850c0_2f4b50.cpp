@@ -395,7 +395,24 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038D0B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038D2D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038D4C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038D8A8);
+/* Partial owner view; its identity and complete extent are UNVERIFIED. */
+typedef struct Recovered_KynapseOffsetChildOwner {
+    void* table;
+    void* unk_04;
+    Recovered_KynapseSmallElement* child;
+} Recovered_KynapseOffsetChildOwner;
+
+extern "C" int D_003E9C60;
+extern "C" void func_0038D8A8(Recovered_KynapseOffsetChildOwner* self, int flags) {
+    self->table = &D_003E9C60;
+    if (self->child) {
+        Recovered_KynapseSmallElement* child = self->child;
+        Recovered_KynapseSmallElementTable* table = child->table;
+        table->destroy((char*)child + table->adjustment, 3);
+    }
+    self->table = &D_003E0040;
+    if (flags & 1) D_003C87E0(self);
+}
 extern "C" int D_003E9A80;
 extern "C" void func_0038DD80(Recovered_KynapseSmallArrayOwner* self, int flags) {
     KynapseSmallArray_Destroy(self, flags, &D_003E9A80);
