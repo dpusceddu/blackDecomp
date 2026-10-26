@@ -224,7 +224,67 @@ loop_1:
     return var_3;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: live-array and selection-index registers differ.
+// UNVERIFIED: the ordering key and flag fields are only read by this draft.
+typedef struct {
+    u8 unk_00[0x70];
+    PS2GameObjectRecord* object;
+    f32 unk_74;
+    u8 unk_78;
+    u8 unk_79[3];
+    s32 state;
+} Recovered_CollisionCandidate;
+
+s32 func_00175C60(Recovered_CollisionCandidate** cursor) {
+    s32 best = -1;
+    s32 index = 0;
+    Recovered_CollisionCandidate** live = cursor;
+    do {
+        if ((*cursor)->state == 0)
+            return index;
+        index++;
+        cursor++;
+    } while (index < 16);
+
+    index = 0;
+    cursor = live;
+    do {
+        Recovered_CollisionCandidate* collision = *cursor;
+        if (collision->state == 4 && (best == -1 || collision->unk_74 < live[best]->unk_74))
+            best = index;
+        index++;
+        cursor++;
+    } while (index < 16);
+    if (best != -1)
+        return best;
+
+    index = 0;
+    cursor = live;
+    do {
+        Recovered_CollisionCandidate* collision = *cursor;
+        if (collision->unk_78 == 0 && (best == -1 || collision->unk_74 < live[best]->unk_74))
+            best = index;
+        index++;
+        cursor++;
+    } while (index < 16);
+    if (best != -1)
+        return best;
+
+    index = 0;
+    cursor = live;
+    do {
+        Recovered_CollisionCandidate* collision = *cursor;
+        if (best == -1 || collision->unk_74 < live[best]->unk_74)
+            best = index;
+        index++;
+        cursor++;
+    } while (index < 16);
+    return best;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175C60);
+#endif
 s32 func_00175DB8(Recovered_CollisionQueueStorage* storage, s32 group) {
     PS2CollisionQueue* queue = &storage->queue;
     PS2LiveCollision** live = queue->live;
