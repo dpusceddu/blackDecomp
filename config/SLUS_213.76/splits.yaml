@@ -825,7 +825,7 @@ splits:
   - {src: src/game/ai/tu_1891a8.c, range: [0x1891a8, 0x1891c0]}
   - {src: src/game/ai/tu_1891c0.c, range: [0x1891c0, 0x1894c8]}
   - {src: src/game/ai/tu_1894c8.c, range: [0x1894c8, 0x189550]}
-  - {src: src/game/ai/tu_189550.c, range: [0x189550, 0x18a380]}
+  - {src: src/game/ai/tu_189550.c, range: [0x189550, 0x18a380], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], note: "Native peer admission 0x1895c8 and saved-point refresh 0x18a238 perform VU XYZ subtraction and squared length; j-constrained helpers require the VU register bank."}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x18a380, 0x18a548]}
   - {src: src/game/ai/tu_18a548.c, range: [0x18a548, 0x18a5c0]}
   - {src: src/game/ai/tu_18a5c0.c, range: [0x18a5c0, 0x18aa18], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
