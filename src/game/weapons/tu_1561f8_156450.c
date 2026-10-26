@@ -77,6 +77,50 @@ extern void * D_0040F544;
 extern s32 func_00209FF8(void *, s32);
 extern s32 func_0027C278(s32);
 extern M2C_UNK D_003F4C40;
+extern void* D_0040F4D0;
+
+typedef struct Recovered_WeaponAimCandidate {
+    s128 point;
+    f32 projection;
+    f32 perpendicularSquared;
+    void* actor;
+} Recovered_WeaponAimCandidate;
+
+typedef struct Recovered_WeaponAimResult {
+    u8 unk_00[4];
+    void* actor;
+    u8 unk_08[0x18];
+    s128 point;
+    u8 unk_30[4];
+    f32 projection;
+    f32 perpendicularSquared;
+    u8 changed;
+} Recovered_WeaponAimResult;
+
+/* UNVERIFIED: complete record meaning and fields not accessed here. */
+typedef struct Recovered_WeaponHit {
+    s128 point;
+    s128 normal;
+    f32 fraction;
+    void* actor;
+    u32 mask;
+    u8 component;
+    u8 unk_2D[3];
+    s128 unk_30;
+} Recovered_WeaponHit;
+
+typedef struct Recovered_WeaponTrace {
+    s128 start;
+    s128 end;
+    u32 flags;
+    void* ignoredActor;
+    u8 unk_28;
+    u8 kind;
+    u8 unk_2A[6];
+    s128 hit[4];
+} Recovered_WeaponTrace;
+
+extern s32 func_00135138(void*, s128, s128, s32, Recovered_WeaponHit*, s32);
 
 s32 func_00156450(void *arg0) {
     void *temp_16;
@@ -92,6 +136,51 @@ s32 func_00156450(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_001564D0);
+#ifdef NON_MATCHING
+// Unmatched: actor and target pointer register allocation differs.
+void func_00156A20(const Recovered_WeaponAimCandidate* candidate) {
+    Recovered_WeaponAimResult* result;
+    void* actor = candidate->actor;
+    if (M2C_FIELD(actor, s32*, 0x3A4)) {
+        result = M2C_FIELD(D_0040F4D0, Recovered_WeaponAimResult**, 0x2D4);
+        if (result->actor) {
+            f32 previous = result->perpendicularSquared;
+            f32 next = candidate->perpendicularSquared;
+            if (!(next < previous)) return;
+        }
+        result->actor = actor;
+        result->point = candidate->point;
+        result->perpendicularSquared = candidate->perpendicularSquared;
+        result->changed = 1;
+        result->projection = candidate->projection;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_00156A20);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_00156A88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_00156CA0);
+s32 func_00156CA0(void* self, s32 unused, Recovered_WeaponTrace* trace) {
+    void* actor = M2C_FIELD(self, void**, 0x34);
+    s32 kind;
+    Recovered_WeaponHit hit;
+    if (!actor) return 1;
+    kind = M2C_FIELD(actor, s32*, 0xC4);
+    if (actor == trace->ignoredActor) return 1;
+    if (kind != 1) return 1;
+    if (!(trace->flags & 4)) return 1;
+    if (M2C_FIELD(actor, s32*, 0x38C)) return 1;
+    if (func_00135138(actor, trace->start, trace->end, 1, &hit, 1)) {
+        s128 first, second, third, fourth;
+        hit.actor = actor;
+        first = ((s128*)&hit)[0];
+        second = ((s128*)&hit)[1];
+        third = ((s128*)&hit)[2];
+        fourth = ((s128*)&hit)[3];
+        trace->kind = kind;
+        trace->hit[0] = first;
+        trace->hit[1] = second;
+        trace->hit[2] = third;
+        trace->hit[3] = fourth;
+    }
+    return 1;
+}
