@@ -3,8 +3,75 @@
 
 extern s32 func_001DD6C0();
 
+/* Partial playback controller; field meanings and resource types are UNVERIFIED. */
+typedef struct Recovered_PlaybackController {
+    void* playback;
+    u32 unk_04;
+    u32 unk_08;
+    f32 unk_0C;
+    f32 unk_10;
+    f32 unk_14;
+    f32 unk_18;
+    f32 unk_1C;
+    void* resources[2];
+    s32 state;
+} Recovered_PlaybackController;
+extern void* D_0040F510;
+extern void* func_001D8478(void*);
+extern s32 func_001D9450(void*, void*, s32);
+extern void func_001D97C8(void*, void*);
+extern void func_001D84C8(void*, void*);
+
+#ifdef NON_MATCHING
+// Unmatched: saved-register allocation differs for the two-resource loop.
+s32 func_001DAF20(Recovered_PlaybackController* owner, void* playback, u32 first, u32 second) {
+    void** resources;
+    void** resource;
+    s32 remaining;
+    s32 result;
+    remaining = 1;
+    resources = owner->resources;
+    owner->playback = playback;
+    resource = resources;
+    M2C_FIELD(playback, f32*, 0x34) = 1.0f;
+    M2C_FIELD(playback, f32*, 0x3C) = 1.0f;
+    owner->unk_04 = first;
+    owner->unk_08 = second;
+    do {
+        remaining--;
+        *resource = func_001D8478(M2C_FIELD(D_0040F510, void**, 0xCBD4));
+        resource++;
+    } while (remaining >= 0);
+    result = func_001D9450(owner->playback, resources, 2);
+    owner->state = 0;
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DAF20);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: setup and release-loop scheduling differ.
+s32 func_001DAFD0(Recovered_PlaybackController* owner) {
+    void** resource;
+    s32 remaining;
+    s32 result = 1;
+    if (owner->state == 0) { func_001D9450(owner->playback, 0, 0); }
+    resource = owner->resources;
+    remaining = 1;
+    func_001D97C8(M2C_FIELD(D_0040F510, void**, 0xCBDC), owner->playback);
+    owner->playback = 0;
+    do {
+        void* value;
+        remaining--;
+        value = *resource++;
+        func_001D84C8(M2C_FIELD(D_0040F510, void**, 0xCBD4), value);
+    } while (remaining >= 0);
+    owner->state = result;
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DAFD0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DB088);
 
 #include "ps2/recovered_types.h"
