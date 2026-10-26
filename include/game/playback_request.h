@@ -5,10 +5,15 @@
 /* Partial native views. The original class identity, complete allocations and
  * meanings of the numeric lifecycle states are not yet established. */
 typedef struct {
-    u8 unk_00[0x34];
+    u8 unk_00[0x28];
+    u64 poolKey; // UNVERIFIED: keyed pool consumers are not yet source-backed.
+    u32 unk_30;
     f32 unk_34;
     u8 unk_38[4];
     f32 unk_3C;
+    u8 unk_40[0x26];
+    u8 claimed; // UNVERIFIED: keyed pool consumers are not yet source-backed.
+    u8 unk_67;
 } Recovered_PlaybackState;
 
 /* Partial request interface recovered from native controller call sites.
