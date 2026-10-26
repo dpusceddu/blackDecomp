@@ -673,7 +673,7 @@ splits:
   - {src: src/game/unsorted/tu_174430_174740.c, range: [0x174740, 0x174858]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x174858, 0x174990]}
   - {src: src/game/unsorted/tu_174990.c, range: [0x174990, 0x1749c8]}
-  - {src: src/game/unsorted/tu_1749c8.c, range: [0x1749c8, 0x1755a0]}
+  - {src: src/game/unsorted/tu_1749c8.c, range: [0x1749c8, 0x1755a0], assembler: sn-min6}
   - {src: src/game/unsorted/tu_1755a0.c, range: [0x1755a0, 0x1755c8]}
   - {src: src/game/unsorted/tu_1755c8.c, range: [0x1755c8, 0x175620]}
   - {src: src/game/unsorted/tu_175620.c, range: [0x175620, 0x175668]}
