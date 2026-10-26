@@ -20,6 +20,30 @@ typedef struct Recovered_ResourceList {
 } Recovered_ResourceList;
 typedef char RecoveredResourcePointerIs32[(sizeof(void*) == 4) ? 1 : -1];
 
+/* Partial keyed resources; original object and field meanings are UNVERIFIED. */
+typedef struct Recovered_KeyResource {
+    u64 unk_00;
+    s32 unk_08;
+    s32 unk_0C;
+} Recovered_KeyResource;
+typedef struct Recovered_KeyResourceOwner {
+    s32 unk_00;
+    u8 unk_04[0x30];
+    void* unk_34;
+    u8 unk_38[8];
+    void* unk_40;
+    void* unk_44;
+    u8 unk_48[8];
+    Recovered_KeyResource* unk_50;
+    s32 unk_54;
+    Recovered_KeyResource* unk_58;
+    s32 unk_5C;
+} Recovered_KeyResourceOwner;
+typedef char RecoveredKeyResourceSize[(sizeof(Recovered_KeyResource) == 0x10) ? 1 : -1];
+extern void func_00282100(void*);
+extern s32 func_002821A8(void*, s32, s32);
+extern void func_00282170(void*);
+
 s32 func_001E79F0(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 8) != 3) {
         func_00280100(D_0040F510, M2C_FIELD(arg0, s32 *, 4));
@@ -128,6 +152,50 @@ void func_001E8798(void) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E87A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8900);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8980);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E89B0);
+Recovered_KeyResource* func_001E89B0(Recovered_KeyResourceOwner* owner, u64 key) {
+    s32 index;
+    if (owner->unk_50 != 0) {
+        for (index = 0; index < owner->unk_54; index++) {
+            if (owner->unk_50[index].unk_00 == key) { return &owner->unk_50[index]; }
+        }
+    }
+    if (owner->unk_58 != 0) {
+        for (index = 0; index < owner->unk_5C; index++) {
+            if (owner->unk_58[index].unk_00 == key) { return &owner->unk_58[index]; }
+        }
+    }
+    return 0;
+}
+#ifdef NON_MATCHING
+// Unmatched: the kind comparison uses a different temporary register.
+s32 func_001E8A30(Recovered_KeyResourceOwner* owner, Recovered_KeyResource* resources, s32 count, s32 kind) {
+    Recovered_KeyResource* entry;
+    func_00282100(M2C_FIELD(D_0040F510, void**, 0xCBF4));
+    if (kind == 1) {
+        owner->unk_58 = resources;
+        owner->unk_5C = count;
+    } else {
+        owner->unk_50 = resources;
+        owner->unk_54 = count;
+    }
+    entry = resources;
+    if (count > 0) {
+        do {
+            if (entry->unk_0C != 0) {
+                entry->unk_08 = func_002821A8(M2C_FIELD(D_0040F510, void**, 0xCBF4), entry->unk_0C, kind);
+            }
+            count--;
+            entry++;
+        } while (count != 0);
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8A30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e79f0", func_001E8AF0);
+#endif
+s32 func_001E8AF0(Recovered_KeyResourceOwner* owner) {
+    func_00282170(M2C_FIELD(D_0040F510, void**, 0xCBF4));
+    owner->unk_58 = 0;
+    owner->unk_5C = 0;
+    return 1;
+}
