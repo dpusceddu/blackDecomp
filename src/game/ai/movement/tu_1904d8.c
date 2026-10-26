@@ -1,24 +1,10 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/ai/movement_views.h"
 #include "game/ai/actor_slot_values.h"
 
-/* UNVERIFIED: the class identity and unused fields are unknown. */
-typedef struct Recovered_MovementObserver {
-    void* unk_00;
-    void* unk_04;
-    u8 unk_08[12];
-    void* unk_14;
-    u8 unk_18;
-} Recovered_MovementObserver;
 
 #ifdef NON_MATCHING
-/* UNVERIFIED: only the three native point components are observed. */
-typedef struct Recovered_MovementGoal {
-    u32 unk_00;
-    f32 x;
-    f32 y;
-    f32 z;
-} Recovered_MovementGoal;
 
 static inline s128 Movement_WidenPoint(f32 x, f32 y, f32 z) {
     s128 pair;

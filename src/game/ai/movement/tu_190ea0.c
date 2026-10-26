@@ -1,21 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/ai/movement_views.h"
 
-/* Partial view of this movement controller; class identity and extent are unknown. */
-typedef struct Recovered_MovementControl {
-    void* unk_00;
-    void* unk_04;
-    u8 unk_08[12];
-    u8 unk_14;
-    u8 unk_15;
-    u8 unk_16[10];
-    s128 unk_20;
-} Recovered_MovementControl;
 
-typedef union Recovered_MovementVector {
-    s128 native;
-    f32 lane[4];
-} Recovered_MovementVector;
 
 extern s32 func_0018E458();
 extern s32 func_00188F10(void*);
