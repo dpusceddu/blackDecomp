@@ -254,13 +254,16 @@ ObjectBase* CreateParameter28488C();
 
 
 struct Parameter2848B4 : ObjectBase {
-    unsigned char data[8];
+    // CEntityVisualAcuteness. UNVERIFIED: the first value's range semantics.
+    float range;
+    float angle;
     Parameter2848B4()
     {
-        float* value = (float*)data;
-        float t = gEngine ? gEngine->frameTime : kZero;
-        value[0] = t * 100.0f;
-        value[1] = 60.0f;
+        float t = 0.0f;
+        if (gEngine)
+            t = gEngine->frameTime;
+        range = t * 100.0f;
+        angle = 60.0f;
     }
     virtual ~Parameter2848B4();
     virtual const ClassInfoEntry* GetClassInfo() const;
