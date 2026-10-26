@@ -2130,7 +2130,7 @@ splits:
   - {src: src/kynapse/parameter_classes_2d7e08.cpp, range: [0x2d7e08, 0x2d7e78], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d7e08_2d7e78.c, range: [0x2d7e78, 0x2d7f90]}
   - {src: src/kynapse/parameter_classes_2d7f90.cpp, range: [0x2d7f90, 0x2d8000], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d7f90_2d8000.c, range: [0x2d8000, 0x2d8138]}
+  - {src: src/kynapse/tu_2d7f90_2d8000.cpp, range: [0x2d8000, 0x2d8138]}
   - {src: src/kynapse/parameter_classes_2d8138.cpp, range: [0x2d8138, 0x2d81a8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d8138_2d81a8.c, range: [0x2d81a8, 0x2d8200]}
   - {src: src/kynapse/parameter_changed_int.cpp, range: [0x2d8200, 0x2d8280], flags: [-O2, -G0, -snas, -fbyte-bool]}
@@ -2144,26 +2144,26 @@ splits:
   - {src: src/kynapse/parameter_assign_2d8770.cpp, range: [0x2d8770, 0x2d87e8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d86a8_2d8718.c, range: [0x2d87e8, 0x2d8828]}
   - {src: src/kynapse/parameter_classes_2d8828.cpp, range: [0x2d8828, 0x2d8890], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d8828_2d8890.c, range: [0x2d8890, 0x2d89b8]}
+  - {src: src/kynapse/tu_2d8828_2d8890.cpp, range: [0x2d8890, 0x2d89b8]}
   - {src: src/kynapse/parameter_classes_2d89b8.cpp, range: [0x2d89b8, 0x2d8a20], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d89b8_2d8a20.c, range: [0x2d8a20, 0x2d8b48]}
+  - {src: src/kynapse/tu_2d89b8_2d8a20.cpp, range: [0x2d8a20, 0x2d8b48]}
   - {src: src/kynapse/parameter_classes_2d8b48.cpp, range: [0x2d8b48, 0x2d8bb0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d8b48_2d8bb0.c, range: [0x2d8bb0, 0x2d8cd8]}
   - {src: src/kynapse/parameter_classes_2d8cd8.cpp, range: [0x2d8cd8, 0x2d8d40], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d8cd8_2d8d40.c, range: [0x2d8d40, 0x2d8e60]}
-  - {src: src/kynapse/tu_2d8e60.c, range: [0x2d8e60, 0x2d9000]}
+  - {src: src/kynapse/tu_2d8cd8_2d8d40.cpp, range: [0x2d8d40, 0x2d8e60]}
+  - {src: src/kynapse/tu_2d8e60.cpp, range: [0x2d8e60, 0x2d9000]}
   - {src: src/kynapse/parameter_classes_2d9000.cpp, range: [0x2d9000, 0x2d9068], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d9000_2d9068.c, range: [0x2d9068, 0x2d9190]}
-  - {src: src/kynapse/tu_2d9190.c, range: [0x2d9190, 0x2d9330]}
-  - {src: src/kynapse/tu_2d9330.c, range: [0x2d9330, 0x2d94c8]}
+  - {src: src/kynapse/tu_2d9000_2d9068.cpp, range: [0x2d9068, 0x2d9190]}
+  - {src: src/kynapse/tu_2d9190.cpp, range: [0x2d9190, 0x2d9330]}
+  - {src: src/kynapse/tu_2d9330.cpp, range: [0x2d9330, 0x2d94c8]}
   - {src: src/kynapse/parameter_classes_2d94c8.cpp, range: [0x2d94c8, 0x2d9540], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d94c8_2d9540.c, range: [0x2d9540, 0x2d9598]}
   - {src: src/kynapse/parameter_assign_2d9598.cpp, range: [0x2d9598, 0x2d9610], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d94c8_2d9540.c, range: [0x2d9610, 0x2d9650]}
   - {src: src/kynapse/parameter_classes_2d9650.cpp, range: [0x2d9650, 0x2d96b8], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d9650_2d96b8.c, range: [0x2d96b8, 0x2d97e0]}
-  - {src: src/kynapse/tu_2d97e0.c, range: [0x2d97e0, 0x2d99f8]}
-  - {src: src/kynapse/tu_2d99f8.c, range: [0x2d99f8, 0x2d9b98]}
+  - {src: src/kynapse/tu_2d9650_2d96b8.cpp, range: [0x2d96b8, 0x2d97e0]}
+  - {src: src/kynapse/tu_2d97e0.cpp, range: [0x2d97e0, 0x2d99f8]}
+  - {src: src/kynapse/tu_2d99f8.cpp, range: [0x2d99f8, 0x2d9b98]}
   - {src: src/kynapse/parameter_classes_2d9b98.cpp, range: [0x2d9b98, 0x2d9c08], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d9b98_2d9c08.c, range: [0x2d9c08, 0x2d9d20]}
   - {src: src/kynapse/parameter_classes_2d9d20.cpp, range: [0x2d9d20, 0x2d9d90], flags: [-O2, -G0, -snas, -fbyte-bool]}

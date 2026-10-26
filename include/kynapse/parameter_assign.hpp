@@ -15,7 +15,8 @@ struct ParameterRoot {
 };
 
 struct Triple {
-    int a, b, c;
+    // UNVERIFIED: meanings of the three float components.
+    float a, b, c;
     Triple& operator=(const Triple& o) { a = o.a; b = o.b; c = o.c; return *this; }
 };
 
@@ -38,12 +39,12 @@ PARAMETER_CLASS(ParamFlag)
 };
 
 PARAMETER_CLASS(ParamChangedMixed)
-    bool changed;
+    unsigned char changed;
     Triple triple;
-    char d;
-    void SetTriple(const Triple& value);
+    unsigned char d; // UNVERIFIED: meaning of the trailing byte.
+    void SetTriple(const Triple& value) { triple = value; changed = true; }
 
-    void SetD(char v);
+    void SetD(unsigned char v) { d = v; changed = true; }
 
 };
 
