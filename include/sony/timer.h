@@ -7,28 +7,33 @@
  * https://github.com/ps2dev/ps2sdk/blob/master/ee/kernel/src/timer.c */
 typedef u64 (*TimerAlarmHandler)(s32 id, u64 scheduled, u64 current, void* argument, void* interruptedPc);
 typedef struct Recovered_TimerCounter {
-    struct Recovered_TimerCounter* next;     // UNVERIFIED: not used by this batch.
-    struct Recovered_TimerCounter* previous; // UNVERIFIED: not used by this batch.
+    struct Recovered_TimerCounter* next;
+    struct Recovered_TimerCounter* previous;
     volatile u32 key;
     u32 mode;
     u64 baseTime;
-    u64 baseCount;             // UNVERIFIED: not used by this batch.
-    u64 scheduled;             // UNVERIFIED: only drafted handler setup uses this field.
-    TimerAlarmHandler handler; // UNVERIFIED: callback setup/dispatch remain drafts.
-    void* gp;                  // UNVERIFIED: architectural callback context in the setup draft.
-    void* argument;            // UNVERIFIED: callback setup/dispatch remain drafts.
+    u64 baseCount;
+    u64 scheduled;
+    TimerAlarmHandler handler;
+    void* gp;       // UNVERIFIED: architectural callback context in the setup draft.
+    void* argument; // UNVERIFIED: callback setup/dispatch remain drafts.
 } __attribute__((aligned(64))) Recovered_TimerCounter;
 
 typedef struct {
-    u8 unk_00[0x1C];
+    volatile u64 overflowCount;
+    s32 interruptHandler;
+    volatile u32 generation;
+    volatile u32 usedCounters;
+    Recovered_TimerCounter* freeCounters;
+    Recovered_TimerCounter* alarms;
     volatile s32 currentId;
 } Recovered_TimerState;
 
 typedef struct Recovered_AlarmNode {
     struct Recovered_AlarmNode* next;
-    volatile s32 counterId;    // UNVERIFIED: allocation/dispatch remain drafts.
-    TimerAlarmHandler handler; // UNVERIFIED: callback setup/dispatch remain drafts.
-    void* argument;            // UNVERIFIED: callback setup/dispatch remain drafts.
+    volatile s32 counterId;
+    TimerAlarmHandler handler;
+    void* argument;
 } Recovered_AlarmNode;
 
 typedef char TimerCounterStride[sizeof(Recovered_TimerCounter) == 0x40 ? 1 : -1];
@@ -56,4 +61,13 @@ void Timer_SetNextCompare(u64 current);
 extern Recovered_TimerState gTimerState;
 extern Recovered_AlarmNode gAlarmNodes[64];
 extern Recovered_AlarmNode* gFreeAlarmNodes;
+
+void Timer_WriteRegister(u32 address, u32 value);
+void Timer_WriteCount(u32 value);
+void Timer_WriteMode(u32 value);
+void Timer_WriteCompare(u32 value);
+s32 InitTimer(u32 requestedMode);
+s32 StartTimerSystemTime(void);
+s32 Timer_InterruptHandler(s32 cause, void* argument, void* interruptedPc);
+extern Recovered_TimerCounter gTimerCounters[128];
 #endif
