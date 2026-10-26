@@ -44,10 +44,10 @@ extern s32 func_0036B300(void* client);
 extern s32 func_0036B100(void* client, u32 operation, s32 asynchronous, void* packet, u32 bytes, void* output,
                          u32 outputBytes, void* callback, void* callbackArgument);
 
-// Unmatched: saved-register allocation and call setup differ; original return contract is UNVERIFIED.
+// Unmatched: call-argument scheduling differs; the native return contract is UNVERIFIED.
 void AudioCommandStream_Submit(Recovered_AudioCommandStream* self, s32 synchronous) {
+    s32 asynchronous = synchronous == 0;
     if (*self->commandCount) {
-        s32 asynchronous = synchronous == 0;
         void* client = self->client;
 
         func_0036B300(client);
