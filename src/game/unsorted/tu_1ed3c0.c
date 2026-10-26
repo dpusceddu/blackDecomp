@@ -1,9 +1,7 @@
 #include "include_asm.h"
-#include "ps2/prelude.h"
+#include "game/timed_value_pool.h"
 
-extern s32 func_00282290();
-
-s32 func_001ED3C0(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
-    func_00282290(arg0, arg1, arg2 & 0xFFFF, arg3);
+s32 func_001ED3C0(Recovered_TimedValuePool* self, Recovered_TimedValueAction** actions, u32 count, u32 value) {
+    TimedValuePool_SetActions(self, actions, (u16)count, value);
     return 1;
 }

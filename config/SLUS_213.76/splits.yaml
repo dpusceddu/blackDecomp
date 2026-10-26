@@ -1896,7 +1896,7 @@ splits:
   - {src: src/game/unsorted/tu_281388_2819e0.cpp, range: [0x281bf8, 0x281ee0]}
   - {src: src/game/unsorted/tu_281388_2818d0.c, range: [0x281ee0, 0x281f88]}
   - {src: src/game/unsorted/tu_281388_281f88.c, range: [0x281f88, 0x282100], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/unsorted/tu_281388_282100.c, range: [0x282100, 0x282628], note: flags or language differ}
+  - {src: src/game/unsorted/tu_281388_282100.c, range: [0x282100, 0x282628], assembler: sn-min6, note: Native initialization and callback-copy loops span six words; stock padding adds NOPs; assembler provenance remains unverified}
   - {src: src/game/unsorted/tu_281388_282628.c, range: [0x282628, 0x282880], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_282880.c, range: [0x282880, 0x2831a0], note: flags or language differ}
   - {src: src/game/unsorted/tu_281388_2831a0.c, range: [0x2831a0, 0x283648], flags: [-Os, -G0], note: flags or language differ}
