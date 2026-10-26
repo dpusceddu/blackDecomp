@@ -50,6 +50,16 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_0027556
 #include "ps2/recovered_types.h"
 extern u16 D_0040DE7A;
 extern s16 D_0040DE7C;
+extern void func_0028EED8(void* block);
+
+// UNVERIFIED: offsets and table roles are inferred from the asset fixup.
+typedef struct {
+    u32 unk_00;
+    u32 unk_04;
+    u8 unk_08[0x14];
+    u32 unk_1C;
+    u32 buckets[128];
+} Recovered_FontOffsets;
 
 void func_002756A8(s32 arg0, s32 arg1) {
     D_0040DE7A = (u16) arg0;
@@ -96,7 +106,23 @@ s32 func_002756C0(u16** output, const u16** input) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002756C0);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275748);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275878);
+u32 func_00275878(Recovered_FontOffsets* font) {
+    u32 index = 0;
+    u32* bucket = font->buckets;
+    u32 offset;
+    do {
+        index++;
+        *bucket += (u32)font;
+        bucket++;
+    } while (index < 128);
+    offset = font->unk_04;
+    if (offset != 0) {
+        font->unk_04 = offset + (u32)font;
+        func_0028EED8((void*)font->unk_04);
+    }
+    font->unk_1C += (u32)font;
+    return font->unk_1C;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002758E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002759E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275AD0);
