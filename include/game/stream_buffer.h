@@ -2,8 +2,8 @@
 #define GAME_STREAM_BUFFER_H
 #include "ps2/prelude.h"
 
-/* Partial native stream-buffer views. Accesses used only by the pending
- * prepare/reset/record-lookup drafts remain UNVERIFIED, as do original class
+/* Partial native stream-buffer views. Accesses without a full-image matched
+ * consumer remain UNVERIFIED, as do original class
  * identities, record meanings, numeric state meanings, unaccessed storage and
  * full extents. Initialization converts byte capacity to 2048-byte blocks;
  * the allocator packs three arguments and reads a 32-bit reply through the
