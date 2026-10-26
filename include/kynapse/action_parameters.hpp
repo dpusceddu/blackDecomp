@@ -39,4 +39,24 @@ struct SteeringAction : AuthoredActionParameter {
     SteeringAction& operator=(const ParameterRoot&) __asm__("func_002D8388");
 };
 
+struct ActivateAction : AuthoredActionParameter {
+    unsigned char requested;
+    void SetRequested(unsigned char value) { requested = value; changed = true; }
+    ActivateAction& operator=(const ParameterRoot&) __asm__("func_002D9C60");
+};
+
+struct TorsoRotateAction : AuthoredActionParameter {
+    // UNVERIFIED: which controls the two rotation values represent.
+    float primary, secondary;
+    void SetPrimary(float value) { primary = value; changed = true; }
+    void SetSecondary(float value) { secondary = value; changed = true; }
+    TorsoRotateAction& operator=(const ParameterRoot&) __asm__("func_002D9F78");
+};
+
+struct VerticalSpeedAction : AuthoredActionParameter {
+    float speed;
+    void SetSpeed(float value) { speed = value; changed = true; }
+    VerticalSpeedAction& operator=(const ParameterRoot&) __asm__("func_002DA108");
+};
+
 #endif
