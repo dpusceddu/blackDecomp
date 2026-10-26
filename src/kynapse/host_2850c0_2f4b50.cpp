@@ -4,6 +4,7 @@
 #include "kynapse/host_2850c0.hpp"
 #include "kynapse/array_cleanup.h"
 #include "kynapse/byte_matrix.h"
+#include "kynapse/callback_object.hpp"
 #include "kynapse/path_point_query.hpp"
 #include "ps2/recovered_types.h"
 #ifdef NON_MATCHING
@@ -359,20 +360,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0036
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00365BA0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00365F80);
 #ifdef NON_MATCHING
-// Partial callback object; the object identity and two callback signatures are UNVERIFIED.
-struct Recovered_CallbackObject {
-    unsigned int unk_00, unk_04, unk_08;
-    unsigned short flags;
-    short index;
-    unsigned int unk_10, unk_14, unk_18;
-    Recovered_CallbackObject* self;
-    void (*callback_20)();
-    int (*callback_24)(void*, void*, int);
-    void (*callback_28)();
-    void (*callback_2c)(void*);
-    char unk_30[0x24];
-    void* context;
-};
 extern "C" void func_0035D848();
 extern "C" int func_0035D8B0(void*, void*, int);
 extern "C" void func_0035D930();
@@ -399,7 +386,19 @@ extern "C" void func_00366090(Recovered_CallbackObject* object, int flags, int i
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00366090);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_003660E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_003660F8);
+extern "C" int func_0035D378(int);
+
+extern "C" void func_003660F8(Recovered_CallbackFamily* self)
+{
+    self->callback = func_0035D378;
+    self->count = 1;
+    func_00366090(&self->object[0], 4, 0, self);
+    func_00366090(&self->object[1], 9, 1, self);
+    func_00366090(&self->object[2], 10, 2, self);
+    self->objects = self->object;
+    self->object_count = 3;
+    self->unk_1d8 = 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00366188);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_003661B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_003662D0);
