@@ -25,8 +25,6 @@ void func_001941A8(void **arg0) {
     func_001825B0(*arg0 + 0x810);
 }
 
-// Unmatched: 001941F8: movement pointer lifetime and branch delay slot.
-#ifdef NON_MATCHING
 void func_001941F8(void **state) {
     void *owner;
     u8 *movement;
@@ -38,8 +36,6 @@ void func_001941F8(void **state) {
         func_001880D8(movement);
     }
 }
-#endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_193978_1941a8", func_001941F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_193978_1941a8", func_00194240);
 // Unmatched: 00194420: owner pointer register allocation.
 #ifdef NON_MATCHING
