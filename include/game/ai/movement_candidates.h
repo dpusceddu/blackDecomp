@@ -7,7 +7,8 @@
  * +0x24 and +0x40 fields remain unknown.
  * UNVERIFIED: unaccessed byte spans and total object extents are not confirmed. */
 typedef struct Recovered_MovementCandidate {
-    u8 unk_00[0x24];
+    s128 point;
+    u8 unk_10[0x14];
     s32 unk_24;
     u8 unk_28[4];
     struct Recovered_MovementCandidate* next;
