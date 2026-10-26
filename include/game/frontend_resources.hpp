@@ -144,7 +144,7 @@ struct FrontendScreenManager {
     int primaryPending;
 };
 
-struct FrontendSaveProfile { unsigned long words[239]; };
+#include "game/frontend/save_profile.hpp"
 struct FrontendSaveState {
     int state, reserved4, reserved8, mode;
     int loadState, profileState, saveState, overwriteState;

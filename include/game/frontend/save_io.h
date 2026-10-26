@@ -1,6 +1,9 @@
 #ifndef GAME_FRONTEND_SAVE_IO_H
 #define GAME_FRONTEND_SAVE_IO_H
 #include "ps2/prelude.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* Native asynchronous save-I/O view. The two information buffers have distinct
  * roles; only the directory entry's size and attribute accesses are identified.
@@ -64,4 +67,7 @@ s32 SaveIo_MapDeviceResult(Recovered_SaveIo* io, s32 status);
 s32 SaveIo_MapEntryResult(Recovered_SaveIo* io, s32 status, s32* output);
 s32 SaveIo_DispatchResult(Recovered_SaveIo* io, s32 command, s32 status, s32* output);
 s32 SaveIo_RefreshDevice(Recovered_SaveIo* io);
+#ifdef __cplusplus
+}
+#endif
 #endif
