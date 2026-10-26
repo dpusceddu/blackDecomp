@@ -30,9 +30,10 @@ s32 func_003509E0(s32 *arg0, s32 arg1, s32 arg2, s32 arg3, f32 fparg0, f32 fparg
 extern PlaybackHistory* AnimationPlayback_PreviousHistory(PlaybackState*, int) ANIMATION_FUNCTION(003502C0);
 extern float AnimationPlayback_ChangedSpan(void*, AnimationGraphNode*, AnimationParameters*, unsigned, float, float,
                                            float) ANIMATION_FUNCTION(0034EDB8);
+/* Float and integer argument interleaving is UNVERIFIED; the EE passes them in separate registers. */
 extern BkAnimationPoseHeaderPS2* AnimationPlayback_EvaluateMotion(PlaybackState*, AnimationGraphNode*,
-                                                                  AnimationParameters*, unsigned, int, int, float,
-                                                                  float, float) ANIMATION_FUNCTION(00350B30);
+                                                                  AnimationParameters*, float, float, unsigned, int,
+                                                                  int, float) ANIMATION_FUNCTION(00350B30);
 
 float Graph_Advance(TransitionTiming*, float, float, float) ANIMATION_FUNCTION(00350A50);
 
@@ -74,8 +75,6 @@ float AnimationGraph_ResolveScaledSpan(void* owner, AnimationGraphNode* node, An
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00350B30);
 
-#ifdef NON_MATCHING
-// Unmatched: native final argument scheduling differs.
 BkAnimationPoseHeaderPS2* AnimationPlayback_RootMotion(PlaybackState* state, AnimationGraphNode* node,
                                                        AnimationParameters* bank, float current, float previous,
                                                        unsigned flags, int historyCursor) {
@@ -86,10 +85,8 @@ BkAnimationPoseHeaderPS2* AnimationPlayback_RootMotion(PlaybackState* state, Ani
         AnimationPlayback_RefreshSpan(state, node, bank);
         current = AnimationPlayback_ChangedSpan(state, node, bank, flags, state->span, previousSpan, current);
     }
-    return AnimationPlayback_EvaluateMotion(state, node, bank, flags, historyCursor, 0, current, previous, state->span);
+    return AnimationPlayback_EvaluateMotion(state, node, bank, current, previous, flags, historyCursor, 0, state->span);
 }
-#endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_350140_3509e0", func_00350F28);
 
 #ifdef NON_MATCHING
 // Unmatched: four native NOPs around floating-point divisions are absent.
