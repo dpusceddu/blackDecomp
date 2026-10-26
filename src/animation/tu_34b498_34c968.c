@@ -5,9 +5,7 @@
 #include "animation/animation_parameters.h"
 #include "ps2/recovered_types.h"
 #include "animation/graph.h"
-#ifdef NON_MATCHING
 #include "animation/graph_runtime.h"
-#endif
 extern f32 * func_0034BC30(s32 *, Recovered_AnimationGraphNode *, Recovered_AnimationParameters *, u32, void *, s32, f32, f32, f32, f32, f32);
 extern s32 func_0034C8C8(void *, Recovered_AnimationGraphNode *, Recovered_AnimationParameters *);
 
@@ -47,7 +45,27 @@ float *AnimationGraph_PoseScale(void *owner, AnimationGraphNode *node, Animation
         AnimationPose_Scale(pose, scale[0], scale[1], scale[2]);
     return pose;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CAE8);
+float* func_0034CAE8(void* owner, AnimationGraphNode* node, AnimationParameters* bank, float current, float previous,
+                     unsigned int flags, float rate, float weight) {
+    AnimationGraphNode* child;
+    AnimationGraphNode* first;
+    AnimationGraphNode* second;
+    ClipView* clip;
+    if ((flags & 0x20) || node->childCount <= 0) return 0;
+    child = node->children[0];
+    if (!(flags & 8) && child) {
+        first = child->children[0];
+        if (first) {
+            second = first->children[0];
+            if (second) {
+                clip = (ClipView*)second->children[0];
+                if (clip) Clip_Events(clip, owner, current, previous, AnimationGraph_ReadSpan(node, bank), flags);
+            }
+        }
+    }
+    return AnimationGraph_EvaluateNode(owner, child, bank, current, previous, flags, rate, weight);
+}
+
 #ifdef NON_MATCHING
 // Unmatched: layer pose allocation and repeated span call ordering.
 float *Graph_ComposedLayers(void *owner, AnimationGraphNode *node, AnimationParameters *bank, float current,
