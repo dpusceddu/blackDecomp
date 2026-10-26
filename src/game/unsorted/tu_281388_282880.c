@@ -14,6 +14,13 @@ extern void func_00280360(void *, void *);
 extern void *func_0035C6EC(void *, s32, u32);
 extern s32 func_00317888(void *);
 extern void func_003178C0(void *);
+extern void *func_0031B540(s32, s32, s32);
+extern void func_00280500(void *);
+extern u32 func_003144A8(void *);
+extern void *func_00314488(void *, u32);
+extern void func_00285818(void *, void *, void *);
+extern s32 func_0027FBD8(void *);
+extern void func_00280748(void *, void *);
 
 typedef struct {
     s32 values[3];
@@ -31,6 +38,34 @@ typedef struct {
     Recovered_SoundListener *listener;
 } Recovered_SoundListenerOwner;
 
+typedef struct {
+    u8 unk_00[0x10];
+    u8 entries[0x1018];
+    u32 count;
+    u8 unk_102C[0xC];
+    void *bank;
+} Recovered_SoundBankContext;
+
+typedef struct {
+    u8 unk_00[0x7C];
+    f32 scalar;
+    u8 unk_80[8];
+    u32 flags;
+} Recovered_SoundEmitter;
+
+typedef struct {
+    u8 unk_00[0x1420];
+    Recovered_SoundEmitter *emitter;
+} Recovered_SoundEmitterContext;
+
+typedef struct {
+    u8 unk_00[0x10];
+    Recovered_SoundEmitterContext *context;
+    Recovered_SoundEmitter *emitter;
+} Recovered_SoundEmitterOwner; /* Fields UNVERIFIED. */
+
+extern void func_00282E70(Recovered_SoundEmitterOwner *, Recovered_SoundEmitterContext **);
+
 void func_00282880(void) {
 
 }
@@ -41,6 +76,24 @@ s32 func_00282888(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_002828A8);
+#ifdef NON_MATCHING
+// Unmatched: bank iteration register allocation differs.
+s32 func_00282A40(Recovered_SoundBankContext *self, void *arg1) {
+    u32 index = 0;
+    u8 *entry;
+    u32 count;
+    count = func_003144A8(self->bank);
+    entry = self->entries;
+    while (index < count) {
+        void *sound = func_00314488(self->bank, index);
+        index++;
+        func_00285818(entry, sound, arg1);
+        entry += 0x20;
+    }
+    self->count = count;
+    return func_0027FBD8(self);
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282A40);
 
 void func_00282AD8(void *arg0) {
@@ -96,6 +149,18 @@ void func_00282C18(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282C58);
+#ifdef NON_MATCHING
+// Unmatched: constant and argument scheduling differ.
+void func_00282E70(Recovered_SoundEmitterOwner *self, Recovered_SoundEmitterContext **context) {
+    self->emitter = func_0031B540(4, 0, 0);
+    (*context)->emitter = self->emitter;
+    self->emitter->scalar = 0.01f;
+    self->emitter->flags |= 0x10;
+    func_003178B8(3);
+    self->context = *context;
+    func_00280500(self);
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282E70);
 
 s32 func_00282EF8(void *arg0) {
@@ -136,5 +201,20 @@ void func_002830E8(void *arg0, f32 fparg0) {
     M2C_FIELD(temp_3, s32 *, 0x88) = (s32) (M2C_FIELD(temp_3, s32 *, 0x88) | 0x20);
 }
 
+#ifdef NON_MATCHING
+// Unmatched: field store and argument scheduling differ.
+void func_00283108(void *self, void *arg1) {
+    Recovered_SoundEmitterOwner *owner = (Recovered_SoundEmitterOwner *)((u8 *)self + 0xCB7C);
+    Recovered_SoundEmitterContext *context = *(Recovered_SoundEmitterContext **)((u8 *)self + 0xCBA8);
+    func_00282E70(owner, &context);
+    *(Recovered_SoundEmitterOwner **)((u8 *)arg1 + 8) = owner;
+    *(Recovered_SoundEmitterContext **)((u8 *)arg1 + 4) = *(Recovered_SoundEmitterContext **)((u8 *)self + 0xCBA8);
+    *(u8 *)((u8 *)arg1 + 0x2C) = *(u8 *)((u8 *)self + 0xCB9D);
+    *(s32 *)((u8 *)self + 0xCBB0) = 1;
+    *(s32 *)((u8 *)self + 0xCBAC) = 1;
+    func_00280748(self, arg1);
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00283108);
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00283198);
