@@ -26,7 +26,7 @@ typedef struct Recovered_ScoredOwner {
     u16 counts[46];
     Recovered_ScoredSlot slots[8];
     Recovered_ScoredQueueEntry queue[8];
-    u8 unk_230[0x10];
+    s32 recent[4];
     s8 queueCount;
 } Recovered_ScoredOwner;
 typedef char RecoveredScoredSlotSize[(sizeof(Recovered_ScoredSlot) == 0x1C) ? 1 : -1];
@@ -34,10 +34,11 @@ extern void* D_0040F4D0;
 extern s32 func_00176C70(Recovered_ScoredOwner*, s8);
 extern s32 func_00176770(Recovered_ScoredOwner*, s32);
 extern f32 func_00176D18(Recovered_ScoredOwner*, Recovered_ScoredSlot*);
-extern void func_00176DD0(Recovered_ScoredOwner*, Recovered_ScoredSlot*);
+extern f32 func_00176DD0(Recovered_ScoredOwner*, Recovered_ScoredSlot*);
 extern f32 func_00176D90(Recovered_ScoredOwner*, Recovered_ScoredSlot*);
 extern void func_00176AF0(Recovered_ScoredOwner*, Recovered_ScoredSlot*);
 extern s32 func_00176B50(Recovered_ScoredOwner*, f32);
+extern s32 func_00176E40(Recovered_ScoredOwner*, s32);
 
 s32 func_00176730(void *arg0, s32 arg1) {
     s32 temp_5;
@@ -179,6 +180,35 @@ void func_00176D10(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176D18);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176D90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176DD0);
+f32 func_00176DD0(Recovered_ScoredOwner* owner, Recovered_ScoredSlot* slot) {
+    f32 factor = 1.0f;
+    s32 value = slot->unk_04;
+    if (value != 0) {
+        s32 index = func_00176E40(owner, value);
+        if (index != -1) { factor = 1.0f - ((f32)index + 1.0f) * 0.25f; }
+    }
+    return factor;
+}
+#ifdef NON_MATCHING
+// Unmatched: the native loop starts one instruction later.
+s32 func_00176E40(Recovered_ScoredOwner* owner, s32 value) {
+    s8 found = -1;
+    s8 index;
+    if (value == 0) { return -1; }
+    index = 0;
+    if (owner->recent[index] == value) {
+        found = index;
+    } else {
+    next:
+        index++;
+        if (index < 4) {
+            if (owner->recent[index] != value) { goto next; }
+            found = index;
+        }
+    }
+    return found;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176E40);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176EA0);
