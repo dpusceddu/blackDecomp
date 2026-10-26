@@ -2489,7 +2489,7 @@ splits:
   - {src: src/kynapse/behaviors_sound.cpp, range: [0x30e560, 0x30e5a0]}
   - {src: src/kynapse/sound_pool_30e100.cpp, range: [0x30e5a0, 0x30e6b8]}
   - {src: src/kynapse/sound_pool_30e6b8.cpp, range: [0x30e6b8, 0x30e728], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/CSoundManager_30d160_30e728.c, range: [0x30e728, 0x30e988]}
+  - {src: src/kynapse/sound_pool_emit_draw.cpp, range: [0x30e728, 0x30e988]}
   - {src: src/kynapse/CSoundManager_30d160_30d1f8.c, range: [0x30e988, 0x30e9c8]}
   - {src: src/kynapse/tu_30e9c8.cpp, range: [0x30e9c8, 0x30ea38], flags: [-fno-function-sections, -x, c++, -O2, -G0, -snas, -fno-schedule-insns], data_ranges: [{end: '0x3ce59c', input: .data, kind: unwind, section: .data, start: '0x3ce544'}]}
   - {src: src/kynapse/factories_30ea38.cpp, range: [0x30ea38, 0x30eae0], flags: [-O2, -G0, -snas, -fbyte-bool]}
