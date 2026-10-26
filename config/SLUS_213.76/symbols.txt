@@ -2321,3 +2321,16 @@ AnimationAllocator_Free = 0x343f90; // type:func alias
 // Physics shape descriptor and default-frame initialization.
 PhysicsShape_InitializeHolder = 0x334268; // type:func alias
 PhysicsShape_InitializeAt = 0x3342d0; // type:func alias
+
+// Pose result cache lookup, buckets and arena management.
+AnimationPoseCache_Destroy = 0x342390; // type:func alias
+AnimationPoseCache_Reserve = 0x342478; // type:func alias
+AnimationPoseCache_Clear = 0x3425e0; // type:func alias
+AnimationPoseCache_Bucket = 0x3426a8; // type:func alias
+AnimationPoseCache_Find = 0x3426c8; // type:func alias
+AnimationPoseCache_InsertBucket = 0x342758; // type:func alias
+AnimationPoseCache_AllocateArena = 0x342788; // type:func alias
+AnimationPoseCache_EvictOldest = 0x3428c8; // type:func alias
+AnimationPoseCache_RemoveBucket = 0x342938; // type:func alias
+AnimationPoseCacheEntry_Construct = 0x3429b0; // type:func alias
+AnimationPoseCache_Hash = 0x3429e8; // type:func alias

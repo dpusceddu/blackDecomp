@@ -2797,7 +2797,7 @@ splits:
   - {src: src/game/unsorted/tu_341a00.cpp, range: [0x341a00, 0x341b98], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e9c8', input: .sbss, section: .sbss, start: '0x40e9b8'}, {end: '0x45eaa0', input: .bss, section: .bss, start: '0x45ea60'}]}
   - {src: src/game/unsorted/tu_341b98.cpp, range: [0x341b98, 0x341d20], flags: [-x, c++, -O2, -G8, -snas], data_ranges: [{end: '0x40e9d8', input: .sbss, section: .sbss, start: '0x40e9c8'}, {end: '0x45eae0', input: .bss, section: .bss, start: '0x45eaa0'}]}
   - {src: src/game/unsorted/tu_341d20.c, range: [0x341d20, 0x3420e8]}
-  - {src: src/animation/tu_3420e8.c, range: [0x3420e8, 0x342a60]}
+  - {src: src/animation/pose_result_cache.cpp, range: [0x3420e8, 0x342a60]}
   - {src: src/animation/tu_342a60.cpp, range: [0x342a60, 0x3438d8]}
   - {src: src/animation/tu_3438d8.c, range: [0x3438d8, 0x343ed0]}
   - {src: src/animation/allocator.cpp, range: [0x343ed0, 0x343fc8]}
