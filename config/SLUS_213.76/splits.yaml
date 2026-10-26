@@ -286,7 +286,7 @@ splits:
   - {src: src/game/camera/tu_135b80.c, range: [0x135b80, 0x135c08]}
   - {src: src/game/camera/tu_135c08.c, range: [0x135c08, 0x135c50]}
   - {src: src/game/camera/tu_135c50.c, range: [0x135c50, 0x135c78]}
-  - {src: src/game/camera/tu_135c78.c, range: [0x135c78, 0x135ed0], note: flags or language differ}
+  - {src: src/game/camera/tu_135c78.c, range: [0x135c78, 0x135ed0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], note: "Native axis test 0x135cc8 uses VU XYZ multiplication and dot sum; body-vector query 0x135d30 normalizes with VU scaling. Their j-constrained operations require the VU register bank."}
   - {src: src/game/camera/tu_135c78_135ed0.c, range: [0x135ed0, 0x136818], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/camera/tu_135c78_136818.c, range: [0x136818, 0x1368f0]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x1368f0, 0x136b30]}
