@@ -49,13 +49,27 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E69E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E6B60);
-#ifdef NON_MATCHING
 namespace Kaim {
-// Unmatched: container temporaries, cleanup visibility or register scheduling.
-CBaseAllocator *CPoolBasedAllocator::Resolve(unsigned int address) {if(address>=(unsigned int)buffer){if(address<(unsigned int)buffer+bytes){CBaseAllocator *p=Find((void*)address);if(p)return p;return this;}}return 0;}
+CBaseAllocator* CPoolBasedAllocator::Resolve(unsigned int address) {
+    if (address < (unsigned int)buffer || address >= (unsigned int)buffer + bytes) return 0;
+    CBaseAllocator* found = Find((void*)address);
+    return found ? found : this;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E7028);
-#endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E7090);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_allocator_cleanup", func_002E7220);
+
+CBaseAllocator* CFreeList::Resolve(unsigned int address) {
+    return pool.Resolve(address);
+}
+
+CBaseAllocator* CFreeListBlock::Resolve(unsigned int address) {
+    CBaseAllocator* found = CPoolBasedAllocator::Resolve(address);
+    if (found == this) {
+        --allocations;
+        if (!allocations) {
+            // The last allocation returns this block to the parent's available list.
+            used = 0;
+            parent->MakeAvailable(position);
+        }
+    }
+    return found;
+}
+}

@@ -1,19 +1,12 @@
 #include "include_asm.h"
 
 #include "kynapse/graph/nearest.hpp"
-
-#ifdef NON_MATCHING
-// Ported from an unpublished companion project.
 #include "kynapse/bound_buffers.hpp"
 
-// /SLUS_213.76 0x2eef88
 ObjectBase* CreateBoundBuffers(BufferOwner* bound)
 {
     return new BoundBuffers(bound);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EEF88);
-#endif
 
 #ifdef NON_MATCHING
 extern const char D_00407268[];
@@ -101,15 +94,39 @@ int Kaim::CFindNearestData::LoadFile(const void *path){
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF3D8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF6F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF7A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/graph_cfindnearestdata", func_002EF850);
+extern const Kaim::SearchGraph* CoordinateSortGraph __asm__("D_003CA804");
+extern "C" int CompareNodeX(const void*, const void*) __asm__("func_002EF6F0");
+extern "C" int CompareNodeY(const void*, const void*) __asm__("func_002EF7A0");
+extern "C" int CompareNodeZ(const void*, const void*) __asm__("func_002EF850");
+
+typedef char SortNodeStride[sizeof(Kaim::SearchNode) == 0x14 ? 1 : -1];
+typedef char SortPointerWidth[sizeof(void*) == 4 ? 1 : -1];
+
+extern "C" int CompareNodeX(const void* first, const void* second) {
+    float left = CoordinateSortGraph->GetNode(*(const unsigned int*)first)->x;
+    float right = CoordinateSortGraph->GetNode(*(const unsigned int*)second)->x;
+    if (left < right) return -1;
+    if (left > right) return 1;
+    return 0;
+}
+
+extern "C" int CompareNodeY(const void* first, const void* second) {
+    float left = CoordinateSortGraph->GetNode(*(const unsigned int*)first)->y;
+    float right = CoordinateSortGraph->GetNode(*(const unsigned int*)second)->y;
+    if (left < right) return -1;
+    if (left > right) return 1;
+    return 0;
+}
+
+extern "C" int CompareNodeZ(const void* first, const void* second) {
+    float left = CoordinateSortGraph->GetNode(*(const unsigned int*)first)->z;
+    float right = CoordinateSortGraph->GetNode(*(const unsigned int*)second)->z;
+    if (left < right) return -1;
+    if (left > right) return 1;
+    return 0;
+}
 
 Kaim::CFindNearestData::~CFindNearestData(){if(order)D_003C87E0(order);if(rank)D_003C87E0(rank);if(aux)D_003C87E0(aux);}
-extern Kaim::SearchGraph *D_003CA804;
-extern "C" int func_002EF6F0(const void *,const void *);
-extern "C" int func_002EF7A0(const void *,const void *);
-extern "C" int func_002EF850(const void *,const void *);
 extern "C" void func_0035EC50(void *,unsigned int,unsigned int,int (*)(const void *,const void *));
 
 int Kaim::CFindNearestData::Build()
@@ -130,10 +147,10 @@ int Kaim::CFindNearestData::Build()
         order[i + count] = i;
         order[i + count * 2] = i;
     }
-    D_003CA804 = graph;
-    func_0035EC50(order, count, 4, func_002EF6F0);
-    func_0035EC50(order + count, count, 4, func_002EF7A0);
-    func_0035EC50(order + count * 2, count, 4, func_002EF850);
+    CoordinateSortGraph = graph;
+    func_0035EC50(order, count, 4, CompareNodeX);
+    func_0035EC50(order + count, count, 4, CompareNodeY);
+    func_0035EC50(order + count * 2, count, 4, CompareNodeZ);
     for (int axis = 0; axis < 3; ++axis) {
         for (i = 0; i < count; ++i) {
             int k;
