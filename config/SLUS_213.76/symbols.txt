@@ -5,6 +5,13 @@
 # A line ending in `alias` (`// type:func alias`) is a readable name for documentation and tools. It never defines or
 # binds a symbol, so it cannot change linking; the function stays func_XXXXXXXX or its mangled name.
 entry = 0x100008; // type:func alias
+ActorControls_SetIndexedValue = 0x135C78; // type:func alias
+ActorControls_HasNegativeAxisDot = 0x135CC8; // type:func alias
+ActorControls_VectorDirection = 0x135D30; // type:func alias
+ActorControls_SubmitVectorEvent = 0x135DD8; // type:func alias
+ActorControls_UpdateMode = 0x135E28; // type:func alias
+ActorControls_ModeFromActor = 0x135E68; // type:func alias
+ActorControls_SetScalarPair = 0x135EA8; // type:func alias
 Transition_ClearFrame = 0x1031F8; // type:func
 Transition_ClearFrameCopy = 0x1032A8; // type:func
 Transition_FindGroup = 0x103358; // type:func
