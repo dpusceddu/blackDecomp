@@ -6,11 +6,18 @@
 typedef struct PlaybackHistory {
     void *node;
     void *bank;
-    u8 unknown_08[12];
+    /* UNVERIFIED meanings: source coordinate/span and transition timing start. */
+    f32 coordinate, span, timing_start;
     f32 blend;
     s32 mode, subtract_blend;
-    u8 unknown_20[8];
+    /* UNVERIFIED: destination coordinate and presence of copied timing data. */
+    f32 destination_coordinate;
+    s16 has_timing;
+    u8 unknown_26[2];
 } PlaybackHistory;
+typedef char PlaybackHistoryStride[sizeof(PlaybackHistory) == 0x28 ? 1 : -1];
+typedef char PlaybackHistoryBlendOffset[(u32)&((PlaybackHistory *)0)->blend == 0x14 ? 1 : -1];
+typedef char PlaybackHistoryTimingFlagOffset[(u32)&((PlaybackHistory *)0)->has_timing == 0x24 ? 1 : -1];
 typedef struct PlaybackState {
     s32 flags;
     void *collection;
