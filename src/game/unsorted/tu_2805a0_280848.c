@@ -5,6 +5,29 @@ extern void func_00281948(s32 arg0, s32 arg1);
 extern void *func_002842E8(void *);
 extern s32 func_00284298(void *);
 extern void func_00388E30(void *, s8);
+extern s32 func_002817C8(s32);
+
+typedef struct {
+    u8 unk_00[0x20];
+    s16 firstAdjustment;
+    u16 unk_22;
+    s32 (*first)(void *);
+    s16 secondAdjustment;
+    u16 unk_2A;
+    s32 (*second)(void *);
+} Recovered_TransitionVtable;
+
+typedef struct {
+    Recovered_TransitionVtable *vtable;
+    u8 unk_04[0x28];
+    u8 state;
+    u8 transition;
+} Recovered_TransitionState;
+
+typedef struct {
+    u8 unk_00[0xCBA0];
+    Recovered_TransitionVtable *vtable;
+} Recovered_AudioManager; /* Layout and state roles UNVERIFIED. */
 
 typedef struct {
     u8 unk_00[0x34];
@@ -33,8 +56,51 @@ u8 func_00280888(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2805a0_280848", func_00280898);
+#ifdef NON_MATCHING
+// Unmatched: virtual-call register allocation differs.
+s32 func_002808A0(Recovered_AudioManager *manager) {
+    Recovered_TransitionVtable *vtable = manager->vtable;
+    s16 adjustment = vtable->firstAdjustment;
+    s32 (*function)(void *) = vtable->first;
+    function((u8 *)manager + adjustment);
+    func_002817C8((s32)manager + 0xB308);
+    vtable = manager->vtable;
+    adjustment = vtable->secondAdjustment;
+    function = vtable->second;
+    return function((u8 *)manager + adjustment);
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2805a0_280848", func_002808A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2805a0_280848", func_00280908);
+
+void func_00280908(Recovered_TransitionState *self, s32 requested) {
+    u8 state = self->state;
+    switch (state) {
+    case 2:
+        if (requested == 0) {
+            self->state = 3;
+        }
+        break;
+    case 0: {
+        Recovered_TransitionVtable *vtable = self->vtable;
+        if (vtable->first((u8 *)self + vtable->firstAdjustment) != 0 && requested == 1) {
+            self->state = requested;
+        }
+        break;
+    }
+    case 3:
+        if (requested != 0) {
+            self->state = 1;
+            self->transition = 5 - self->transition;
+        }
+        break;
+    case 1:
+        if (requested != state) {
+            self->state = 3;
+            self->transition = 5 - self->transition;
+        }
+        break;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2805a0_280848", func_002809F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2805a0_280848", func_00280A08);
 s32 func_00280A38(Recovered_AudioPool *pool, Recovered_AudioResource **resources, s32 count) {
