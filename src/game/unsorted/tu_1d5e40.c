@@ -1,12 +1,12 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_00281B88(void *);
+extern void ResourcePool_Initialize(void*);
 extern s32 func_001D6230(void *, M2C_UNK, M2C_UNK);
 extern s32 func_001D76E8();
 extern s32 func_001D7BB8();
 extern s32 func_00281BB8();
-extern s32 func_00281E28(s32);
+extern void ResourcePool_Rebind(void*, void**, s32);
 extern s32 func_00280A80();
 extern void func_001D7128();
 extern s32 func_001F0620();
@@ -35,7 +35,7 @@ void func_001D5E58(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x1B4) = 0;
     M2C_FIELD(arg0, s32 *, 0x78) = 0;
     M2C_FIELD(arg0, s32 *, 0x8C) = 0;
-    func_00281B88(arg0 + 0x94);
+    ResourcePool_Initialize(arg0 + 0x94);
     func_001D6230(arg0, 0, 0);
 }
 
@@ -70,8 +70,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D617
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6230);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D62F8);
 
-void func_001D6388(s32 arg0) {
-    func_00281E28(arg0 + 0x94);
+void func_001D6388(s32 arg0, void** resources, s32 count) {
+    ResourcePool_Rebind((void*)(arg0 + 0x94), resources, count);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D63A8);

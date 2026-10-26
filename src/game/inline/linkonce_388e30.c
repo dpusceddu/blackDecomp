@@ -10,7 +10,7 @@ s32 func_00388E40(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4);
 }
 
-void func_00388E48(void *arg0, s8 arg1) {
+void ResourcePoolEntry_SetActive(void *arg0, s8 arg1) {
     M2C_FIELD(arg0, s8 *, 8) = arg1;
     M2C_FIELD(arg0, s32 *, 4) = 0;
 }
