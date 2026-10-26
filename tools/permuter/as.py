@@ -7,7 +7,7 @@ import sys
 import tempfile
 sys.path[:0] = [str(Path(__file__).resolve().parents[1]/d) for d in ('','build')]
 from cc import recipe
-from object_compile import environment
+from object_compile import compile_file, environment
 import assembler
 from asm_syntax import translate
 from elfobj import normalize_object, restore_gprel
@@ -37,8 +37,12 @@ def main():
             command = [str(base/'bin/wibo'), assembler.short_path(backend/'Ps2EeAs.exe'), '-O2',
                        next((f for f in flags if f.startswith('-G')), '-G0'), '-mabi=eabi', '-I','include','-o',a.o,str(source)]
         else:
-            command = [str(base/'compilers'/split.compiler/'ee/bin/as'),'-EL','-m5900','-I','include','-o',a.o,str(source)]
-        subprocess.run(command,env=env,check=True)
+            # The SN bundles do not contain ee/bin/as. Let the same driver as
+            # the source build select its default assembler and search paths.
+            compile_file(split.compiler, flags + ['-I', 'include'], str(source), a.o)
+            command = None
+        if command is not None:
+            subprocess.run(command,env=env,check=True)
     out = Path(a.o)
     out.write_bytes(restore_gprel(normalize_object(out.read_bytes())))
 
