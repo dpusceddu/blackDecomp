@@ -16,7 +16,7 @@ extern long Scan(Playback*,int) __asm__("func_00350650");
 extern void Accumulate(float) __asm__("func_0034ED88");
 extern float* Parameter(AnimationParameters*,int) __asm__("func_003500E0");
 extern Pose* RootMotion(Playback*,void*,void*,float,float,unsigned,short) __asm__("func_00350F28");
-extern void RefreshSpan(Playback*,void*,void*) __asm__("func_00351030");
+extern float RefreshSpan(Playback*,void*,void*) __asm__("func_00351030");
 extern float gSubtraction __asm__("D_003D4460"),gAccumulation __asm__("D_003D4464");
 }
 #endif
