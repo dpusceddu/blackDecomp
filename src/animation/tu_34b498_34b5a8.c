@@ -4,6 +4,7 @@
 #include "ps2/prelude.h"
 #include "animation/graph_runtime.h"
 #include "animation/graph.h"
+#include "ps2/ee_fpu.h"
 
 extern s32 func_00347430(s32, s32, s32);
 extern s32 func_0034B910();
@@ -184,7 +185,17 @@ float* func_0034BFE8(void* owner, AnimationGraphNode* node, AnimationParameters*
     previous = (AnimationGraph_ReadSpan(node, bank) - 1.0f) - previous;
     return Graph_Sequence(owner, node, bank, current, previous, flags ^ 2, rate, weight);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034C0C8);
+extern void func_0034EDA0(float);
+float Graph_ScaleTime(void* owner, AnimationGraphNode* node, unsigned int flags, float input, float rate, float time,
+                    float span) {
+    float result;
+    if (!(flags & 0x68)) {
+        result = rate * BkEeDividePipelineGuarded(time, input);
+        func_0034EDA0(BkEeDividePipelineGuarded(result - time, span));
+    } else
+        result = time;
+    return result;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034C128);
 #ifdef NON_MATCHING
 // Unmatched: func_0034B4E8 (192 bytes), flags: coordinate-boundary branch layout.
@@ -193,7 +204,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034
 // Unmatched: func_0034B910 (316 bytes), types: sequence state and floating call signatures.
 // Unmatched: func_0034BA50 (476 bytes), types: weighted selection and float-to-integer conversion.
 // Unmatched: func_0034BC30 (904 bytes), types: chooser callback and live floating arguments.
-// Unmatched: func_0034C0C8 (92 bytes), scheduling: two division hazard NOPs.
 // Unmatched: func_0034C128 (1712 bytes), types: graph blending state and stack temporaries.
 // Unmatched: func_0034C7D8 (188 bytes), scheduling: three instruction differences.
 float *AnimationGraph_PoseBoundControl(void *owner, AnimationGraphNode *node, AnimationParameters *bank,
