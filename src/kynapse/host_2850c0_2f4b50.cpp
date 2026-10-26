@@ -3,6 +3,7 @@
 // Ported from an unpublished companion project.
 #include "kynapse/host_2850c0.hpp"
 #include "kynapse/array_cleanup.h"
+#include "kynapse/byte_matrix.h"
 #include "ps2/recovered_types.h"
 #ifdef NON_MATCHING
 #include "game/classes/UnknownVtable_003DC838.hpp"
@@ -491,5 +492,10 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038
 
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00390F40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00391130);
+extern "C" int func_00391130(Recovered_KynapseByteMatrix* matrix, int row, int column, float* out) {
+    unsigned char value = matrix->values[row * matrix->row_stride + column];
+    if (value == 0xff) return 0;
+    *out = (float)value / matrix->divisor;
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_003912C0);
