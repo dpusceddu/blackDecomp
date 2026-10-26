@@ -51,7 +51,7 @@ typedef struct {
     u8 unk_CBB5[3];
     s32 unk_CBB8;
     u8 unk_CBBC[8];
-    // UNVERIFIED: SFX-specific roles at CBC4/CBCC, pending a matched SFX setter.
+    // Music and SFX gain fields are confirmed by the matched setters.
     f32 sfxMixGain;
     u32 unk_CBC8;
     f32 sfxGain;
