@@ -158,10 +158,52 @@ struct ActionStack {
     void ExpireTimers();
     void Update();
 };
+// Mode numbers remain native values; their gameplay meanings are not established.
+struct Recovered_ModeDescriptor {
+    Byte unk_00[0x20];
+    int mode;
+};
+struct Recovered_DispatchedModeData {
+    void* sequence;
+    Byte unk_04[8];
+    Byte enabled;
+    Byte unk_0D[3];
+};
+struct Recovered_DispatchedMode : Recovered_DispatchedModeData {
+    virtual void Unknown0();
+    virtual void Unknown1();
+    virtual void Unknown2();
+    virtual void Unknown3();
+    virtual void Enter(Recovered_ModeDescriptor* descriptor);
+    virtual void Leave();
+    virtual void Event(QueuedActionEvent* event);
+    virtual int Unknown7(void* argument);
+    virtual int Unknown8(void* argument);
+    virtual int Unknown9(void* argument);
+    virtual int Unknown10();
+    virtual int Unknown11();
+    virtual int Unknown12(void* argument);
+    virtual int Unknown13(void* argument);
+    virtual int Unknown14(void* argument);
+};
 struct ModeDispatcher {
-    Byte unknown00[0x50];
+    Byte unk_00[8];
+    Byte unk_08[12];
+    signed char unk_14; // UNVERIFIED: reset writes 1.
+    Byte paused;
+    Byte unk_16;
+    signed char unk_17; // UNVERIFIED: reset clears this byte.
+    int unk_18;
+    Brain* owner;
+    int active;
+    Recovered_DispatchedMode* modes[11];
+    Byte flags;
+    Byte unk_51[3];
     void Event(QueuedActionEvent* event);
 };
+typedef char ModeDispatcherSize[sizeof(ModeDispatcher) == 0x54 ? 1 : -1];
+typedef char ModeDispatcherActive[(unsigned)&((ModeDispatcher*)0)->active == 0x20 ? 1 : -1];
+typedef char ModeDispatcherFlags[(unsigned)&((ModeDispatcher*)0)->flags == 0x50 ? 1 : -1];
 // Xbox offsets are listed; the PS2 object has a 0x10 smaller prefix and every offset below is
 // 0x10 smaller there (checked at the controller 0x810, stall grace 0xcc0, stack 0xec0, formation
 // goal 0x1eb0 and generation 0x1fcc against PS2 code).
@@ -190,8 +232,7 @@ struct Brain {
     StallGrace stallGrace;          // 0xcd0
     Byte unknowncf4[0x2c];
     ModeDispatcher dispatcher;
-    Byte movementOverride;
-    Byte unknownd71[0x15f];
+    Byte unknownd74[0x15c];
     ActionStack stack;
     Byte unknown1710[0x7b0];
     FormationGoal formation;        // 0x1ec0
