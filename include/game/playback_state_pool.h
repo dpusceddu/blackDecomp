@@ -16,13 +16,13 @@ typedef struct {
     s32 stateCount;
     Recovered_ExtendedPlaybackState* extendedStates;
     s32 extendedStateCount;
-    // UNVERIFIED: constructor scratch accesses are not yet source-confirmed.
+    // Scratch accesses and allocation requests are confirmed by the matched constructor.
     s32 scratchBytes;
     void* scratch;
     s32 unk_18;
 } Recovered_PlaybackStatePool;
 
-/* Native constructor inputs have a 24-byte stride. Selector 5 uses
+/* Matched constructor inputs have a 24-byte stride. Selector 5 uses
  * (dataSize / 19) * 64 as its scratch requirement. UNVERIFIED: original field
  * meanings, format identities, input size units and unused byte 0x17. */
 typedef struct {

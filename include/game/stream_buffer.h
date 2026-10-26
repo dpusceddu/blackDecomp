@@ -8,10 +8,18 @@
  * full extents. Initialization converts byte capacity to 2048-byte blocks;
  * the allocator packs three arguments and reads a 32-bit reply through the
  * platform service. Its address space and ownership contract remain unknown. */
+/* Selected variants have an eight-byte stride in the matched controller poll.
+ * Only the count at 0x02 is interpreted by native preparation code; those
+ * preparation consumers remain drafts. Original identity, units, unused bytes
+ * and any relationship to the separate pool records are UNVERIFIED. */
 typedef struct {
-    u16 unk_00;
+    u8 unk_00[2];
     u16 blockCount;
-    u32 unk_04;
+    u8 unk_04[4];
+} Recovered_StreamRange;
+
+typedef struct {
+    u8 unk_00[8];
     s32 id;
     u32 unk_0C;
     u8 unk_10, unk_11, unk_12, unk_13;
@@ -21,7 +29,7 @@ typedef struct {
 typedef struct {
     u64 key;
     void* data;
-    Recovered_StreamRecord* record;
+    Recovered_StreamRange* record; // UNVERIFIED: binding is currently draft-backed.
     s32 unk_10;
     s32 state;
     s32 remaining;
@@ -50,6 +58,8 @@ typedef struct {
 } Recovered_StreamBufferPool;
 
 typedef char StreamBufferSize[sizeof(Recovered_StreamBuffer) == 0x28 ? 1 : -1];
+typedef char StreamRangeSize[sizeof(Recovered_StreamRange) == 8 ? 1 : -1];
+typedef char StreamRangeCountOffset[(u32) & ((Recovered_StreamRange*)0)->blockCount == 2 ? 1 : -1];
 typedef char StreamRecordSize[sizeof(Recovered_StreamRecord) == 0x18 ? 1 : -1];
 typedef char StreamBufferCapacityOffset[(u32) & ((Recovered_StreamBuffer*)0)->blockCapacity == 0x20 ? 1 : -1];
 typedef char StreamBufferClaimedOffset[(u32) & ((Recovered_StreamBuffer*)0)->claimed == 0x26 ? 1 : -1];
@@ -57,7 +67,7 @@ typedef char StreamPoolRecordsOffset[(u32) & ((Recovered_StreamBufferPool*)0)->r
 typedef char StreamPoolCountOffset[(u32) & ((Recovered_StreamBufferPool*)0)->bufferCount == 0x2D0 ? 1 : -1];
 
 void StreamBuffer_Initialize(Recovered_StreamBuffer* self, void* data, s32 bytes) __asm__("func_001D7BE0");
-s32 StreamBuffer_Prepare(Recovered_StreamBuffer* self, u64 key, Recovered_StreamRecord* record, s16 firstBlock,
+s32 StreamBuffer_Prepare(Recovered_StreamBuffer* self, u64 key, Recovered_StreamRange* record, s16 firstBlock,
                          s32 value, s32 mode);
 s32 StreamBuffer_TryReset(Recovered_StreamBuffer* self) __asm__("func_001D7CC0");
 Recovered_StreamRecord* StreamBufferPool_FindRecord(Recovered_StreamBufferPool* self, s32 id);
