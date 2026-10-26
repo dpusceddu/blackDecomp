@@ -6,7 +6,8 @@
 /* Partial PS2 views. The candidate accepts timed flags; the meanings of its
  * +0x24 and +0x40 fields remain unknown.
  * UNVERIFIED: unaccessed byte spans and total object extents are not confirmed. */
-/* UNVERIFIED: this native method slot is used by the selection draft. */
+/* The channel-selection update confirms this adjusted native method slot;
+ * its broader gameplay contract remains unknown. */
 typedef struct {
     u8 unk_00[8];
     s16 adjustment;
@@ -26,8 +27,8 @@ typedef struct Recovered_MovementCandidate {
 } Recovered_MovementCandidate;
 
 /* A proposed and a selected candidate share one channel. The two channel
- * indices have not yet been assigned gameplay names.
- * UNVERIFIED: channel state and selected-point source consumers remain drafts. */
+ * indices have not yet been assigned gameplay names. Selection and release
+ * confirm the accessed pointers and state bytes. */
 typedef struct {
     Recovered_MovementCandidate* proposed;
     Recovered_MovementCandidate* selected;
@@ -44,8 +45,8 @@ typedef struct {
     u8 unk_68[4];
     Recovered_MovementCandidateChannel channels[2];
     u8 unk_84[0xC];
-    s128 selectedPoint;
-    u8 selectedFlags[2];
+    s128 selectedPoint; // UNVERIFIED: captured-point consumers remain drafts.
+    u8 selectedFlags[2]; // UNVERIFIED: captured-flag consumers remain drafts.
     u8 unk_A2[2];
     void* owner;
 } Recovered_MovementCandidateList;
