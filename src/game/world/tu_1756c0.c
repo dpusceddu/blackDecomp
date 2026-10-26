@@ -4,6 +4,11 @@
 
 extern void func_00170740(PS2LiveCollision* collision);
 extern void func_00175EF8(PS2PendingCollision* pending);
+extern s32 func_00170D20(PS2LiveCollision* collision);
+extern s32 func_00175BB0(PS2CollisionQueue* queue, PS2GameObjectRecord* object);
+extern s32 func_00175BF0(void* queue, void* object);
+extern s32 func_00175C30(void* queue);
+extern void func_00175F10(void* pending, s32 object, s8 flag);
 extern void func_00170CD8(PS2LiveCollision* collision);
 extern void func_00170C90(PS2LiveCollision* collision);
 extern void func_001718D0(PS2LiveCollision* collision, PS2GameObjectRecord* object, s32 index);
@@ -70,7 +75,27 @@ s32 func_00175930(PS2CollisionQueue* queue) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175930);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175980);
+#ifdef NON_MATCHING
+// Unmatched: helper argument setup and flag width differ.
+void func_00175A00(PS2CollisionQueue* queue, PS2GameObjectRecord* object, s32 flag) {
+    s32 liveIndex = func_00175BB0(queue, object);
+    s32 pendingIndex;
+    if (liveIndex != -1) {
+        PS2LiveCollision** entry = &queue->live[liveIndex];
+        if (func_00170D20(*entry) != 0)
+            return;
+        func_00170740(*entry);
+    }
+    pendingIndex = func_00175BF0(queue, object);
+    if (pendingIndex == -1) {
+        s32 freeIndex = func_00175C30(queue);
+        if (freeIndex != pendingIndex)
+            func_00175F10(&queue->pending[freeIndex], (s32)object, (s8)flag);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175A00);
+#endif
 s32 func_00175AB8(PS2CollisionQueue* queue, PS2GameObjectRecord* object, s32 reset) {
     s32 index = 0;
     PS2PendingCollision* pending = queue->pending;
