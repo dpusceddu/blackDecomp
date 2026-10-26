@@ -372,12 +372,15 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038A838);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038A9D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038AAF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038B150);
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038B6B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038B840);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038BAD8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038BBB0);
 // The matched lookups confirm the name and count offsets; the remaining descriptor fields are UNVERIFIED.
+extern "C" PS2KaimClassRegistry* func_0038B098();
+extern "C" PS2KaimClassRegistry* func_0038E688();
+extern "C" PS2KaimClassRegistry* func_00390BC8();
 extern "C" PS2KaimClassRegistry* func_0038BD60();
 extern "C" PS2KaimClassRegistry* func_0038BDD8();
 extern "C" PS2KaimClassRegistry* func_0038B468();
@@ -393,6 +396,21 @@ static inline PS2KaimClassDescriptor* FindClass(PS2KaimClassRegistry* registry, 
     return 0;
 }
 
+extern "C" PS2KaimClassDescriptor* func_0038B150(const char* name) {
+    if (!name)
+        return 0;
+    return FindClass(func_0038B098(), name);
+}
+extern "C" PS2KaimClassDescriptor* func_0038EE80(const char* name) {
+    if (!name)
+        return 0;
+    return FindClass(func_0038E688(), name);
+}
+extern "C" PS2KaimClassDescriptor* func_00390CF8(const char* name) {
+    if (!name)
+        return 0;
+    return FindClass(func_00390BC8(), name);
+}
 extern "C" PS2KaimClassDescriptor* func_0038C098(const char* name) {
     if (!name) return 0;
     return FindClass(func_0038BD60(), name);
@@ -465,8 +483,8 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038E438);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038E910);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038EAA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038EE80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00390CF8);
+
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00390F40);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00391130);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_003912C0);
