@@ -16,7 +16,7 @@ typedef struct {
     u8 unk_00[0x70];
     Recovered_ManagedTransform transform;
     u8 unk_B0[0x14];
-    s32 unk_C4; // UNVERIFIED: the companion category predicate remains a draft.
+    s32 unk_C4; // Native actor category; the gameplay meaning of category 2 is unknown.
     u8 unk_C8[0x264];
     Recovered_ManagedSlot* managedSlot;
     u8 unk_330[0x74];

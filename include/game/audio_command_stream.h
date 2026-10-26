@@ -18,7 +18,7 @@ typedef struct {
     u32* writeCursor;
     s32 state;
     u32 unk_2874, unk_2878, unk_287C;
-    u8 unk_2880[12];
+    s32 cachedValues[3];
     u8 unk_288C, unk_288D, wide, unk_288F;
 } Recovered_AudioCommandStream;
 
@@ -32,14 +32,17 @@ typedef char AudioCommandPacketOffset[(u32)&((Recovered_AudioCommandStream*)0)->
 typedef char AudioCommandClientOffset[(u32)&((Recovered_AudioCommandStream*)0)->client == 0x2840 ? 1 : -1];
 typedef char AudioCommandCountOffset[(u32)&((Recovered_AudioCommandStream*)0)->commandCount == 0x2868 ? 1 : -1];
 typedef char AudioCommandStateOffset[(u32)&((Recovered_AudioCommandStream*)0)->state == 0x2870 ? 1 : -1];
+typedef char AudioCommandCachedValuesOffset[(u32)&((Recovered_AudioCommandStream*)0)->cachedValues == 0x2880 ? 1 : -1];
 typedef char AudioCommandWideOffset[(u32)&((Recovered_AudioCommandStream*)0)->wide == 0x288E ? 1 : -1];
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 u32* AudioCommandStream_Append(Recovered_AudioCommandStream* self, u32 operation, u32 payloadWords);
-u32* AudioCommandStream_SetValues(Recovered_AudioCommandStream* self, u32 firstValue, u32 secondValue,
-                                  u32 thirdValue, u32 wide);
+u32* AudioCommandStream_SetValues(Recovered_AudioCommandStream* self, u32 firstValue, u32 secondValue, u32 thirdValue,
+                                  u32 wide);
+void AudioCommandStream_SetCachedControls(Recovered_AudioCommandStream* self, u32 firstControl, u32 secondControl,
+                                          f32 firstValue, f32 secondValue, f32 thirdValue);
 // UNVERIFIED: original return contract; the recovered command wrappers discard it.
 void AudioCommandStream_Submit(Recovered_AudioCommandStream* self, s32 synchronous) __asm__("func_002867F0");
 #ifdef __cplusplus
