@@ -4,7 +4,8 @@
 #include "ps2/prelude.h"
 
 /* Partial PS2 views. The candidate accepts timed flags; the meanings of its
- * +0x24 and +0x40 fields remain unknown. */
+ * +0x24 and +0x40 fields remain unknown.
+ * UNVERIFIED: unaccessed byte spans and total object extents are not confirmed. */
 typedef struct Recovered_MovementCandidate {
     u8 unk_00[0x24];
     s32 unk_24;
