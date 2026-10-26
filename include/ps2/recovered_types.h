@@ -32,7 +32,7 @@ typedef struct RecoveredRouteNode RecoveredRouteNode;
 typedef struct RecoveredRouteRequest RecoveredRouteRequest;
 typedef struct RecoveredRouteStorage RecoveredRouteStorage;
 
-/* PS2AnimationExpression, 12 bytes: UNVERIFIED */
+/* PS2AnimationExpression, 12 bytes: accessed by the matched expression operators. */
 struct PS2AnimationExpression {
     u8 kind; /* 0x0 */
     char childCount; /* 0x1 */
