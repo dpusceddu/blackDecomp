@@ -7,6 +7,12 @@ extern s32 func_001F4E38(void*, void*, s32, s8*);
 extern s32 func_00275260(const char*, u16*, s32);
 extern s32 func_00275128(const u16*, void*, s32);
 extern s32 func_003848F8(u16*, const u16*, s32*, s32*, s32*);
+/* These call signatures and the output buffer layout remain UNVERIFIED. */
+extern void* D_0040F4D0;
+extern void* D_0040F4E8;
+extern void* func_00122900(void*, s8);
+extern s32 func_0012F880(void*, void*, s32, void*);
+extern s32 func_00160AA8(void*, s32);
 
 #ifdef NON_MATCHING
 // Unmatched: owner and target use swapped saved registers.
@@ -64,7 +70,20 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F541
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F5498);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F5770);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f4770", func_001F5850);
+s32 func_001F5850(void) {
+    s32 output[4];
+    void* progress = (u8*)D_0040F4D0 + 0x910;
+    void* level = func_00122900(D_0040F4E8, M2C_FIELD(D_0040F4D0, s8*, 0x5AAC));
+    s32 difficulty = M2C_FIELD(D_0040F0E0, s32*, 0x2014C);
+    s32 kind = func_0012F880(progress, level, difficulty, output);
+
+    switch (kind) {
+        case 0: return func_00160AA8((u8*)D_0040F4D0 + 0x8F0, (s8)M2C_FIELD(D_0040F0E0, s32*, 0x2014C));
+        case 2: return output[0];
+        case 1:
+        default: return 0;
+    }
+}
 
 void func_001F5928(void *arg0) {
     if (M2C_FIELD(D_0040F0E0, s32 *, 0x2014C) != 0) {
