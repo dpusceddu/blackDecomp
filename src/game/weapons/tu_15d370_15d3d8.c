@@ -1,12 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/weapons/trace_views.h"
 #include "game/weapons/shot.h"
 
 extern void func_0015D620(BkMovingShotPS2*);
-typedef struct Recovered_ShotClock {
-    u8 unk_00[0x20];
-    f32 time;
-} Recovered_ShotClock;
 extern Recovered_ShotClock* D_0040F4D0;
 
 void func_0015D3D8(void *arg0) {

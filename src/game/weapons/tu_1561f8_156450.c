@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/weapons/trace_views.h"
 
 /* Recovered_Instance: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
 typedef struct Recovered_Instance {
@@ -79,46 +80,9 @@ extern s32 func_0027C278(s32);
 extern M2C_UNK D_003F4C40;
 extern void* D_0040F4D0;
 
-typedef struct Recovered_WeaponAimCandidate {
-    s128 point;
-    f32 projection;
-    f32 perpendicularSquared;
-    void* actor;
-} Recovered_WeaponAimCandidate;
 
-typedef struct Recovered_WeaponAimResult {
-    u8 unk_00[4];
-    void* actor;
-    u8 unk_08[0x18];
-    s128 point;
-    u8 unk_30[4];
-    f32 projection;
-    f32 perpendicularSquared;
-    u8 changed;
-} Recovered_WeaponAimResult;
 
-/* UNVERIFIED: complete record meaning and fields not accessed here. */
-typedef struct Recovered_WeaponHit {
-    s128 point;
-    s128 normal;
-    f32 fraction;
-    void* actor;
-    u32 mask;
-    u8 component;
-    u8 unk_2D[3];
-    s128 unk_30;
-} Recovered_WeaponHit;
 
-typedef struct Recovered_WeaponTrace {
-    s128 start;
-    s128 end;
-    u32 flags;
-    void* ignoredActor;
-    u8 unk_28;
-    u8 kind;
-    u8 unk_2A[6];
-    s128 hit[4];
-} Recovered_WeaponTrace;
 
 extern s32 func_00135138(void*, s128, s128, s32, Recovered_WeaponHit*, s32);
 
