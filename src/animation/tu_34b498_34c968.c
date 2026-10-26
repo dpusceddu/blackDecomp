@@ -123,7 +123,6 @@ float *Graph_DifferenceLayers(void *owner, AnimationGraphNode *node, AnimationPa
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CE20);
 #endif
 #ifdef NON_MATCHING
-// Unmatched: func_0034CAE8 (272 bytes), types: clip-event callback argument order.
 // Unmatched: func_0034CC00 (544 bytes), types: clip/frame sampling context.
 // Unmatched: func_0034CE20 (544 bytes), types: clip/frame sampling context.
 // Unmatched: func_0034D040 (108 bytes), scheduling: weighted pose branch layout.
@@ -163,7 +162,20 @@ float *Graph_EventWeight(void *owner, AnimationGraphNode *node, AnimationParamet
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D0B0);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D1E0);
+extern float* func_00346510(void*, float*, float*, int);
+float* func_0034D1E0(void* owner, AnimationGraphNode* node, AnimationParameters* bank, float current, float previous,
+                     unsigned int flags, float rate, float weight) {
+    AnimationGraphNode *first, *second;
+    float secondTime;
+    float *a, *b;
+    if (node->childCount < 2) return 0;
+    second = node->children[1];
+    first = node->children[0];
+    secondTime = AnimationTime_Wrap(current, AnimationGraph_ReadSpan(second, bank));
+    a = AnimationGraph_EvaluateNode(owner, first, bank, current, previous, flags, rate, weight);
+    b = AnimationGraph_EvaluateNode(owner, second, bank, secondTime, previous, flags | 0x40, rate, weight);
+    return func_00346510(owner, a, b, flags);
+}
 #ifdef NON_MATCHING
 // Unmatched: repeat arithmetic scheduling and live span reads.
 float *Graph_RandomRepeat(void *owner, AnimationGraphNode *node, AnimationParameters *bank, float current,
@@ -234,7 +246,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D738);
 #ifdef NON_MATCHING
 // Unmatched: func_0034D0B0 (304 bytes), types: pose operation signatures.
-// Unmatched: func_0034D1E0 (288 bytes), types: dual-child pose operation signatures.
 // Unmatched: func_0034D300 (556 bytes), types: repeat state and live floating arguments.
 // Unmatched: func_0034D530 (516 bytes), types: inverse-control state and live floating arguments.
 // Unmatched: func_0034D738 (256 bytes), types: event and span call signatures.
