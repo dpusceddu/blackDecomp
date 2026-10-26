@@ -2205,7 +2205,7 @@ splits:
   - {src: src/kynapse/accessors_2dfbf8.cpp, range: [0x2dfb00, 0x2dfc38], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/owned_arrays_2dfc38.cpp, range: [0x2dfc38, 0x2dfdc8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/CActionAttributeClass_2dfb00_2dfdc8.c, range: [0x2dfdc8, 0x2dff10]}
-  - {src: src/kynapse/tu_2dff10.c, range: [0x2dff10, 0x2e0140]}
+  - {src: src/kynapse/tu_2dff10.cpp, range: [0x2dff10, 0x2e0140], data_ranges: [{start: '0x405fe8', end: '0x405ff0', section: .rodata, input: .rodata.behavior_class_key}]}
   - {src: src/kynapse/behaviors_factory.cpp, range: [0x2e0140, 0x2e1038], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6}
   - {src: src/kynapse/forwarders_2e1038.cpp, range: [0x2e1038, 0x2e1058], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2e0140_2e1058.c, range: [0x2e1058, 0x2e1078]}
