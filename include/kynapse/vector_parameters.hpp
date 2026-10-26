@@ -26,4 +26,9 @@ struct TorsoOrientationParameter : ParameterRoot {
     TorsoOrientationParameter& operator=(const ParameterRoot&) __asm__("func_002D9710");
 };
 
+struct HeadDirectionParameter : ParameterRoot {
+    Triple direction;
+    HeadDirectionParameter& operator=(const ParameterRoot&) __asm__("func_002D8C08");
+};
+
 #endif
