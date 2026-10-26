@@ -310,4 +310,18 @@ void AnimationGraph_BindPreorder(void *owner, AnimationGraphNode *node, Animatio
 }
 
 
+#ifdef NON_MATCHING
+#include "animation/graph_runtime.h"
+// Unmatched: direction and wrap branch ordering differ.
+int Graph_Crosses(unsigned int flags, float current, float previous, float span) {
+    int crossed = 0;
+    if ((flags & 0x10) && current == 0.0f) return 1;
+    if (((flags & 2) != 0) == ((flags & 1) != 0)) {
+        if (current < previous || (previous < 0.0f && current >= 0.0f)) crossed = 1;
+    } else if (previous < current)
+        crossed = 1;
+    return crossed;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498", func_0034B4E8);
+#endif
