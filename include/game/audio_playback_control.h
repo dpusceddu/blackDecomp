@@ -36,6 +36,8 @@ typedef char AudioPlaybackDescriptorOffset[(u32) & ((Recovered_AudioPlaybackCont
 typedef char AudioPlaybackVariantsOffset[(u32) & ((Recovered_AudioPlaybackDescriptor*)0)->variantData == 0x18 ? 1 : -1];
 
 void AudioPlaybackControl_Initialize(Recovered_AudioPlaybackControl* self);
+s32 AudioPlaybackControl_Begin(Recovered_AudioPlaybackControl* self, const u32* values, s32 count,
+                               Recovered_AudioPlaybackDescriptor* descriptor);
 s32 AudioPlaybackControl_PollFinished(Recovered_AudioPlaybackControl* self);
 void AudioPlaybackControl_RequestState2(Recovered_AudioPlaybackControl* self);
 void AudioPlaybackControl_ClearChannelState(Recovered_AudioPlaybackControl* self);
