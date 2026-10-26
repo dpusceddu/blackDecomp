@@ -17,6 +17,26 @@ extern s32 func_00319E28(s32, s32);
 extern f32 func_003106F0(s32, M2C_UNK, M2C_UNK);
 extern s32 func_00319DE0(s32, M2C_UNK);
 
+typedef struct {
+    u8 unk_00[0x30];
+    s32 *status;
+} Recovered_ProviderBackend;
+
+typedef struct {
+    u8 unk_00[0x8A];
+    u8 flags;
+} Recovered_ProviderVoice;
+
+typedef struct {
+    u8 unk_00[0x2C];
+    u8 state;
+    u8 unk_2D[3];
+    u16 flags;
+    u8 unk_32[2];
+    Recovered_ProviderVoice *voice;
+    Recovered_ProviderBackend *backend;
+} Recovered_ProviderState; /* Field roles UNVERIFIED. */
+
 void func_00283648(void) {
 
 }
@@ -35,8 +55,8 @@ void func_00283878(void) {
     func_00284298();
 }
 
-void func_00283898(void) {
-    func_002842E8();
+void func_00283898(void *arg0) {
+    func_002842E8(arg0);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_283648", func_002838B8);
@@ -113,10 +133,34 @@ s32 func_00284298(void *arg0) {
     return 1;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: status-result normalization and register allocation differ.
+s32 func_002842E8(Recovered_ProviderState *self) {
+    switch (self->state) {
+    case 0:
+    case 1:
+    case 3:
+        if (self->flags & 0x80) {
+            return (self->flags >> 8) & 1;
+        } else {
+            s32 status = *self->backend->status;
+            s32 active = 0;
+            if (status != 3) {
+                active = status != 1;
+            }
+            return active;
+        }
+    case 2:
+        return (self->flags & 8) != 0;
+    default:
+        return 0;
+    }
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_283648", func_002842E8);
 
 s32 func_00284378(void *arg0) {
-    if (func_002842E8() == 0) {
+    if (func_002842E8(arg0) == 0) {
         return 0;
     }
     return M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x38), void **, 0x30), s32 *, 0x14);
@@ -143,8 +187,8 @@ void func_00284648(void) {
     func_00285190();
 }
 
-void func_00284668(void) {
-    func_002851E0();
+void func_00284668(void *arg0) {
+    func_002851E0(arg0);
 }
 
 
@@ -232,7 +276,21 @@ s32 func_00285190(void *arg0) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_283648", func_002851E0);
+s32 func_002851E0(Recovered_ProviderState *self) {
+    switch (self->state) {
+    case 0:
+    case 1:
+    case 3:
+        if (self->flags & 0x80) {
+            return (self->flags >> 8) & 1;
+        }
+        return (self->voice->flags >> 1) & 1;
+    case 2:
+        return (self->flags >> 3) & 1;
+    default:
+        return 0;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_283648", func_00285258);
 
 s32 func_00285510(s32 arg0) {
