@@ -3,7 +3,7 @@
 
 struct ObjectBase;
 ObjectBase* CreateParameter2847AC();
-extern "C" void func_002DFEB0(void*, const char*, ObjectBase* (*)());
+extern "C" void* func_002DFEB0(void*, const char*, ObjectBase* (*)());
 extern char D_0044F8D8;
 extern void* D_0044F9E8;
 extern char D_003E3D38;

@@ -2,7 +2,7 @@
 #include "kynapse/parameter_assign.hpp"
 #include "ps2/prelude.h"
 
-extern "C" void func_002E4DC8(void*, const char*, ObjectBase* (*)());
+extern "C" void* func_002E4DC8(void*, const char*, ObjectBase* (*)());
 extern void* D_00450938;
 extern char D_003E4728;
 extern "C" void SetVisualAngle(ParamClamped*, float) __asm__("func_002D9970");
