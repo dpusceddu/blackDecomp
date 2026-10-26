@@ -5,12 +5,11 @@
 extern "C" void* func_001282D0(void*);
 struct FrontendResourceSlot {
     char opaque[0x14];
-    union { int status; unsigned int alignment; };
+    unsigned int alignment;
     char reserved18[8];
     void* data;
 };
 
-struct FrontendResourcePair { void* data; int flags; };
 struct FrontendAllocationSpec { unsigned int bytes, alignment; };
 
 struct FrontendResourceTable {
@@ -28,16 +27,8 @@ struct FrontendResourceTable {
     void* AllocateAligned(FrontendAllocationSpec* specification) __asm__("func_00107C98");
     void SetAlignment(unsigned int alignment) __asm__("func_00107CC8");
     unsigned int Alignment() __asm__("func_00107CE8");
-    // Existing declarations remain available while their callers are migrated.
-    void Select(int index) __asm__("func_00107AB8");
     void ClearSelection() __asm__("func_00107B08");
-    void SetSelectedFlags(int unused, int flags) __asm__("func_00107B78");
-    void ReleaseData(void* data) __asm__("func_00107C20");
     void* GetSlotData(int index) __asm__("func_00107C80");
-    void InstallPair(FrontendResourcePair* pair) __asm__("func_00107C98");
-    void SetCurrentFlags(int flags) __asm__("func_00107CC8");
-    int CurrentStatus() __asm__("func_00107CE8");
-    void Release(int index) __asm__("func_00107B98");
     int Find(void* resource) __asm__("func_00107BC0");
 };
 
