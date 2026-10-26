@@ -14,13 +14,30 @@ typedef struct Recovered_PlaybackController {
     f32 unk_18;
     f32 unk_1C;
     void* resources[2];
-    s32 state;
+    u32 state;
 } Recovered_PlaybackController;
 extern void* D_0040F510;
 extern void* func_001D8478(void*);
 extern s32 func_001D9450(void*, void*, s32);
 extern void func_001D97C8(void*, void*);
 extern void func_001D84C8(void*, void*);
+extern s32 func_001D92A0(void*, u64, s32, u32, u32, u32);
+/* Partial larger owner and transition payload; field meanings are UNVERIFIED. */
+typedef struct Recovered_PlaybackTransitionOwner {
+    u8 unk_00[0x1918];
+    f32 unk_1918;
+    f32 unk_191C;
+    f32 unk_1920;
+    f32 unk_1924;
+    s32 unk_1928;
+    s32 unk_192C;
+} Recovered_PlaybackTransitionOwner;
+typedef struct Recovered_PlaybackTransition {
+    u8 unk_00[0x0C];
+    f32 unk_0C;
+    s32 unk_10;
+} Recovered_PlaybackTransition;
+extern void* D_0040F0E0;
 
 #ifdef NON_MATCHING
 // Unmatched: saved-register allocation differs for the two-resource loop.
@@ -72,7 +89,28 @@ s32 func_001DAFD0(Recovered_PlaybackController* owner) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DAFD0);
 #endif
+#ifdef NON_MATCHING
+// Unmatched: state initialization uses a different temporary register.
+s32 func_001DB088(Recovered_PlaybackController* owner, const u64* key, s32 value, u32 flags) {
+    switch (owner->state) {
+        case 0:
+        case 2:
+            func_001D9450(owner->playback, owner->resources, 2);
+            owner->state = 3;
+            /* fallthrough */
+        case 3:
+            if (func_001D92A0(owner->playback, *key, value, owner->unk_04, owner->unk_08, flags) != 0) {
+                owner->state = 4;
+                case 4: return 1;
+            }
+        default:
+        case 1:
+        case 5: return 0;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DB088);
+#endif
 
 #include "ps2/recovered_types.h"
 extern s32 func_001DD3E0(void *);
@@ -136,7 +174,20 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DBF3
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC000);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC038);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC1A0);
+#ifdef NON_MATCHING
+// Unmatched: large-offset addressing and field-store scheduling differ.
+s32 func_001DC278(Recovered_PlaybackTransitionOwner* owner, Recovered_PlaybackTransition* transition) {
+    f32 previous = owner->unk_191C;
+    owner->unk_1920 = previous;
+    owner->unk_1918 = M2C_FIELD((u8*)D_0040F0E0 + 0x20120, f32*, 0x20);
+    owner->unk_1924 = transition->unk_0C - previous;
+    owner->unk_192C = 1;
+    owner->unk_1928 = transition->unk_10;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC278);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC2C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC448);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC498);
