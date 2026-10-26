@@ -400,7 +400,44 @@ extern "C" void func_003660F8(Recovered_CallbackFamily* self)
     self->unk_1d8 = 0;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00366188);
+#ifdef NON_MATCHING
+// The rest of the stream object and the copy helper's return type are UNVERIFIED.
+struct Recovered_BufferedInput {
+    unsigned char* cursor;
+    int available;
+};
+extern "C" unsigned char func_00366188(void*, void*, int);
+extern "C" int func_0035D5B8(Recovered_BufferedInput*, int);
+
+// Unmatched: register allocation and copy-loop scheduling differ.
+extern "C" unsigned int func_003661B8(void* destination, unsigned int size, unsigned int count,
+                                      Recovered_BufferedInput* file)
+{
+    unsigned int remaining = count * size;
+    if (remaining == 0)
+        return 0;
+    if (file->available < 0)
+        file->available = 0;
+    unsigned char* out = (unsigned char*)destination;
+    unsigned int total = remaining;
+    int available = file->available;
+    while ((unsigned int)available < remaining) {
+        remaining -= available;
+        func_00366188(out, file->cursor, available);
+        out += available;
+        file->cursor += available;
+        if (func_0035D5B8(file, size) != 0)
+            return (total - remaining) / size;
+        available = file->available;
+    }
+    func_00366188(out, file->cursor, remaining);
+    file->available -= remaining;
+    file->cursor += remaining;
+    return count;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_003661B8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_003662D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00367400);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00367F30);
