@@ -96,7 +96,7 @@ void AudioRuntime_SetMode(Recovered_AudioRuntime* self, s32 mode);
 extern "C" {
 #endif
 extern Recovered_AudioRuntime* AudioRuntime_Global __asm__("D_0040F510");
-f32 AudioVolumeCurve(f32 volume);
+f32 AudioVolumeCurve(f32 volume) __asm__("func_001D5CD8");
 void AudioRuntime_ApplySfxVolume(Recovered_AudioRuntime* self, f32 volume);
 void AudioRuntime_ApplyMusicVolume(Recovered_AudioRuntime* self, f32 volume);
 #ifdef __cplusplus
