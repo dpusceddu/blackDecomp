@@ -130,8 +130,9 @@ float *AnimationGraph_PoseWeight(void *owner, AnimationGraphNode *node, Animatio
     float current, float previous, unsigned int flags, float coefficient, float weight) {
     float scale;
     float *result;
+    float *parameters = node->parameters;
     if (node->childCount > 0) {
-        scale = node->parameters[0];
+        scale = parameters[0];
         result = AnimationPose_ApplyWeight(owner, AnimationGraph_EvaluateNode(owner, node->children[0], bank,
             current, previous, flags, coefficient, weight), flags, scale);
     } else result = 0;
@@ -262,13 +263,12 @@ float* func_0034D738(void* owner, AnimationGraphNode* node, AnimationParameters*
 // Unmatched: func_0034D0B0 (304 bytes), types: pose operation signatures.
 // Unmatched: func_0034D300 (556 bytes), types: repeat state and live floating arguments.
 // Unmatched: func_0034D530 (516 bytes), types: inverse-control state and live floating arguments.
-// Unmatched: func_0034D838 (180 bytes), register allocation: parameter-control temporaries.
+// Unmatched: func_0034D838 (180 bytes), final call argument scheduling differs.
 float *AnimationGraph_PoseBoundMaximum(void *owner, AnimationGraphNode *node, AnimationParameters *bank,
     float current, float previous, unsigned int flags, float coefficient, float weight) {
-    float *control = node->parameters;
     AnimationGraph_BindMaximumControl(owner, node, bank);
     return AnimationGraph_EvaluateControlled(owner, node, bank, flags, 0, current, previous,
-        *AnimationParameters_Get(bank, ((int *)control)[3]), coefficient, weight);
+        *AnimationParameters_Get(bank, ((AnimationControlBinding *)node->parameters)->parameter), coefficient, weight);
 }
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D838);
@@ -349,7 +349,7 @@ float AnimationGraph_ResolveSelectedSpan(void *owner, AnimationGraphNode *node, 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034DDD0);
 #endif
 #ifdef NON_MATCHING
-// Unmatched: func_0034E220 (264 bytes), scheduling: blend-span branch layout.
+// Unmatched: func_0034E220 (264 bytes), second-span register allocation differs.
 float AnimationGraph_ResolveBlendSpan(void *owner, AnimationGraphNode *node, AnimationParameters *bank,
     int interpolate, float weight) {
     float first, second;
@@ -362,9 +362,9 @@ float AnimationGraph_ResolveBlendSpan(void *owner, AnimationGraphNode *node, Ani
             return first;
         if (weight >= 1.0f)
             return second;
-        if (first == second)
-            return first;
-        return first + (second - first)*weight;
+        if (first != second)
+            return first + (second - first)*weight;
+        return first;
     }
     return first > second?first:second;
 }
