@@ -2,7 +2,7 @@
 #include "kynapse/action_parameters.hpp"
 #include "ps2/prelude.h"
 
-extern "C" void func_002DFEB0(void*, const char*, ObjectBase* (*)());
+extern "C" void* func_002DFEB0(void*, const char*, ObjectBase* (*)());
 extern void* D_0044F7B8;
 extern char D_003E3D38;
 

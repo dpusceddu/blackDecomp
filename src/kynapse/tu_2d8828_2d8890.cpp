@@ -2,7 +2,7 @@
 #include "kynapse/vector_parameters.hpp"
 #include "ps2/prelude.h"
 
-extern "C" void func_002E4DC8(void*, const char*, ObjectBase* (*)());
+extern "C" void* func_002E4DC8(void*, const char*, ObjectBase* (*)());
 extern void* D_0044FE48;
 extern char D_003E4728;
 

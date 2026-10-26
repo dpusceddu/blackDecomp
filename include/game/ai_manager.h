@@ -19,7 +19,11 @@ typedef struct {
     s32 unk_C4; // Native actor category; the gameplay meaning of category 2 is unknown.
     u8 unk_C8[0x264];
     Recovered_ManagedSlot* managedSlot;
-    u8 unk_330[0x74];
+    u8 unk_330[0x50];
+    s32 recordId; // UNVERIFIED: record-lookup source remains a draft.
+    u8 unk_384[8];
+    u32 invalid; // UNVERIFIED: registration guard source remains a draft.
+    u8 unk_390[0x14];
     u32 groupKey;
 } Recovered_ManagedActor;
 
