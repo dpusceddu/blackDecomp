@@ -10,6 +10,51 @@ static inline Game::Vec ActorYVector(f32 value) {
     Game::Store(point, Game::Make3(0.0f, value, 0.0f));
     return Game::Load(point);
 }
+#ifdef NON_MATCHING
+#include "game/weapons/instance.hpp"
+#include "ps2/vu0_lowering.h"
+
+static inline Game::Vec ActorHorizontalSquared(Game::Vec delta) {
+    Game::Vec zSquared;
+    asm("vmulz.z zv, deltav, deltavz\n\tvmulx.x deltav, deltav, deltavx\n\tvaddz.x deltav, deltav, zvz"
+        : "+j deltav"(delta), "=&j zv"(zSquared));
+    return delta;
+}
+static inline Game::Vec ActorBitsVector(s32 word) {
+    Game::Vec value;
+    asm("qmtc2.ni wordv, valuev" : "=j valuev"(value) : "r wordv"(word));
+    return value;
+}
+static inline s128 ActorVectorWords(Game::Vec value) {
+    s128 words;
+    asm("qmfc2.ni wordsv, valuev" : "=r wordsv"(words) : "j valuev"(value));
+    return words;
+}
+static inline Game::Vec ActorVectorFromWords(s128 words) {
+    Game::Vec value;
+    asm("qmtc2.ni wordsv, valuev" : "=j valuev"(value) : "r wordsv"(words));
+    return value;
+}
+static inline Game::Vec ActorFloatVector(f32 amount) {
+    s32 word; Game::Vec value;
+    asm("mfc1 %0, %1" : "=r"(word) : "f"(amount));
+    asm("qmtc2.ni wordv, valuev" : "=j valuev"(value) : "r wordv"(word));
+    return value;
+}
+static inline Game::Vec ActorRaiseY(Game::Vec point, Game::Vec scalar) {
+    Game::Vec sum;
+    asm("vaddx.y sumv, pointv, scalarvx" : "=j sumv"(sum) : "j pointv"(point), "j scalarv"(scalar));
+    asm("vaddy.y resultv, vf0, sumvy" : "+j resultv"(point) : "j sumv"(sum));
+    return point;
+}
+static inline Game::Vec ActorLowerY(Game::Vec point, Game::Vec scalar) {
+    asm("vsubx.y scalarv, pointv, scalarvx" : "+j scalarv"(scalar) : "j pointv"(point));
+    Game::Vec result = ActorVectorFromWords(ActorVectorWords(point));
+    asm("vaddy.y resultv, vf0, scalarvy" : "+j resultv"(result) : "j scalarv"(scalar));
+    return result;
+}
+#endif
+
 extern "C" {
 
 extern void* D_0040F4D0;
@@ -104,8 +149,32 @@ void func_00137B08(Recovered_ManagedActor* actor, u8 flag) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137B88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137CA0);
+#ifdef NON_MATCHING
+// Unmatched: vertical byte-result lowering and XZ helper scheduling differ.
+s32 func_00137E88(Recovered_ManagedActor* actor, s128 point, f32 margin) {
+    Game::Vec delta = Game::Sub3(point, actor->transform.position);
+    bool outside = actor->unk_2E8 < Game::Y(delta) || Game::Y(delta) < 0.0f;
+    if (outside) return 0;
+    f32 radius = actor->unk_318 * 0.5f + margin;
+    return !(radius * radius < __ee_vu_read_x(ActorHorizontalSquared(delta)));
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137E88);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: VU copy scheduling and the call delay slot differ.
+void func_00137F30(Recovered_ManagedActor* actor) {
+    Weapons::Hit hit;
+    Game::Vec center = ActorRaiseY(actor->transform.position, ActorFloatVector(actor->unk_2E8 * 0.5f));
+    s128 start = ActorVectorWords(center);
+    s128 end = ActorVectorWords(ActorLowerY(center, ActorBitsVector(0x40000000)));
+    if (Weapons::func_0012AE58((Weapons::Frame*)D_0040F4D0, start, end, 2, NULL, 0, &hit)) {
+        actor->unk_320 = hit.entity;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137F30);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137FB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_001381E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00138298);
