@@ -11,6 +11,33 @@ typedef struct {
     f32 unk_3C;
 } Recovered_PlaybackState;
 
+/* Partial request interface recovered from native controller call sites.
+ * UNVERIFIED: original identities, unused slots, full extents and the producer
+ * contract for prepare's full-width tag; the current producer draft uses only
+ * its low word. Signed this adjustments are part of each native method record. */
+typedef struct {
+    s16 thisAdjustment;
+    u16 unk_02;
+    void* (*function)(void* self);
+} Recovered_PlaybackInitializeMethod;
+typedef struct {
+    s16 thisAdjustment;
+    u16 unk_02;
+    s32 (*function)(void* self, const u32* values, s32 count, u64 tag);
+} Recovered_PlaybackPrepareMethod;
+typedef struct {
+    s16 thisAdjustment;
+    u16 unk_02;
+    s32 (*function)(void* self);
+} Recovered_PlaybackCompletionMethod;
+typedef struct {
+    u8 unk_00[8];
+    Recovered_PlaybackInitializeMethod initialize;
+    Recovered_PlaybackPrepareMethod prepare;
+    u8 unk_18[8];
+    Recovered_PlaybackCompletionMethod pollComplete;
+} Recovered_PlaybackRequestVtable;
+
 typedef struct {
     f32 scale;
     s32 state;
@@ -20,6 +47,7 @@ typedef struct {
     s32 valueCount;
     void* buffers[2]; // UNVERIFIED: pool operations remain drafts.
     s32 variant;      // UNVERIFIED: load request remains a draft.
+    const Recovered_PlaybackRequestVtable* vtable; // UNVERIFIED: controller consumers are pending.
 } Recovered_PlaybackRequest;
 
 typedef struct {
@@ -43,6 +71,9 @@ typedef struct {
     Recovered_PlaybackPools playbackPools;
 } Recovered_PlaybackServices;
 
+typedef char PlaybackRequestVtableOffset[(u32)&((Recovered_PlaybackRequest*)0)->vtable == 0x2C ? 1 : -1];
+typedef char PlaybackPrepareOffset[(u32)&((Recovered_PlaybackRequestVtable*)0)->prepare == 0x10 ? 1 : -1];
+typedef char PlaybackCompletionOffset[(u32)&((Recovered_PlaybackRequestVtable*)0)->pollComplete == 0x20 ? 1 : -1];
 typedef char PlaybackKeyWidth[sizeof(((Recovered_PlaybackRequest*)0)->key) == 8 ? 1 : -1];
 typedef char PlaybackKeyOffset[(u32) & ((Recovered_PlaybackRequest*)0)->key == 8 ? 1 : -1];
 typedef char PlaybackBuffersOffset[(u32) & ((Recovered_PlaybackRequest*)0)->buffers == 0x20 ? 1 : -1];
