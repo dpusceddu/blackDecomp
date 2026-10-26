@@ -4,8 +4,9 @@
 
 struct PS2AnimationExpression;
 
-/* Partial PS2 transition view. UNVERIFIED: field meanings, trigger conventions
- * and complete record extent; these accesses currently come from draft consumers.
+/* Partial PS2 transition view. Exact lookup and coordinate consumers confirm
+ * the source graph, condition, target graph and target coordinate accesses.
+ * UNVERIFIED: window/trigger conventions, timing roles and complete record extent.
  * Timing uses the existing graph transition view rather than a second layout. */
 typedef struct AnimationTransitionRecord {
     int source_graph;
