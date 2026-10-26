@@ -1,27 +1,75 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/timed_flag_queue.h"
 
-#include "ps2/recovered_types.h"
-
-s32 func_001777D0(void *arg0) {
-    s32 var_3;
-    void *var_2;
-
-    var_3 = 0x12B;
-    var_2 = arg0;
+/* The returned end cursor is retained; its caller contract is unknown. */
+void* TimedFlagQueue_Reset(Recovered_TimedFlagQueue* self) {
+    s32 remaining = 299;
+    Recovered_TimedFlagEntry* entry = self->entries;
     do {
-        M2C_FIELD(var_2, s32 *, 0) = 0;
-        var_3 -= 1;
-        M2C_FIELD(var_2, s32 *, 4) = 0;
-        var_2 = (void *) (((s8 *) var_2) + 8);
-    } while (var_3 >= 0);
-    M2C_FIELD(arg0, s32 *, 0x968) = 0;
-    M2C_FIELD(arg0, s32 *, 0x960) = 0;
-    M2C_FIELD(arg0, s32 *, 0x964) = 0;
-    return (s32) var_2;
+        entry->item = NULL;
+        remaining--;
+        entry->flags = 0;
+        entry++;
+    } while (remaining >= 0);
+    self->head = 0;
+    self->tail = 0;
+    self->count = 0;
+    return entry;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: flag-rejection branch and early epilogue restoration differ.
+s32 TimedFlagQueue_AddFlags(Recovered_TimedFlagQueue* self, Recovered_TimedFlagItem* item, u32 flags) {
+    Recovered_TimedFlagEntry* entry;
+    if (!TimedFlagItem_HasExpired(item)) {
+        if (!(item->previousFlags & flags)) goto enqueue;
+        return 0;
+    }
+    TimedFlagItem_ClearPreviousFlags(item);
+enqueue:
+    entry = TimedFlagQueue_Find(self, item);
+    if (entry == NULL) entry = TimedFlagQueue_Insert(self, item);
+    if (entry == NULL) return 0;
+    entry->flags |= flags;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_177148_1777d0", func_00177800);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_177148_1777d0", func_001778A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_177148_1777d0", func_00177930);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_177148_1777d0", func_001779E8);
+#endif
+
+Recovered_TimedFlagEntry* TimedFlagQueue_Insert(Recovered_TimedFlagQueue* self, Recovered_TimedFlagItem* item) {
+    if (!TimedFlagQueue_IsFull(self)) {
+        Recovered_TimedFlagEntry* entry = &self->entries[self->tail];
+        s32 next = (self->tail + 1) % 300;
+        self->count++;
+        self->tail = next;
+        /* Preserve the native wrap behavior, including the final allowed insert. */
+        if (next == self->head) self->head = (next + 1) % 300;
+        entry->item = item;
+        entry->flags = 0;
+        return entry;
+    }
+    return NULL;
+}
+
+Recovered_TimedFlagEntry* TimedFlagQueue_Pop(Recovered_TimedFlagQueue* self) {
+    Recovered_TimedFlagEntry* entry = TimedFlagQueue_Peek(self);
+    if (entry == NULL) return NULL;
+    self->head = (self->head + 1) % 300;
+    self->count--;
+    return entry;
+}
+
+Recovered_TimedFlagEntry* TimedFlagQueue_Find(Recovered_TimedFlagQueue* self, Recovered_TimedFlagItem* item) {
+    if (!TimedFlagQueue_IsEmpty(self)) {
+        s32 remaining = self->count;
+        s32 index = self->head;
+        while (--remaining != -1) {
+            Recovered_TimedFlagEntry* entry = &self->entries[index];
+            if (entry->item == item) return entry;
+            index = (index + 1) % 300;
+        }
+    }
+    return NULL;
+}

@@ -706,7 +706,7 @@ splits:
   - {src: src/game/unsorted/tu_177148_1771f0.c, range: [0x1771f0, 0x177238], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/unsorted/tu_177148_1771e0.c, range: [0x177238, 0x177258]}
   - {src: src/game/unsorted/tu_177148_1771f0.c, range: [0x177258, 0x1777d0]}
-  - {src: src/game/unsorted/tu_177148_1777d0.c, range: [0x1777d0, 0x177988], flags: [-O1, -G0, -snas], assembler: sn-min6}
+  - {src: src/game/unsorted/tu_177148_1777d0.c, range: [0x1777d0, 0x177988], flags: [-O2, -G0, -snas, -mno-check-zero-division], assembler: sn-min6}
   - {src: src/game/unsorted/tu_177148_1771e0.c, range: [0x177988, 0x1779e8]}
   - {src: src/game/unsorted/tu_177148_1777d0.c, range: [0x1779e8, 0x177a70]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x177a70, 0x177a98]}
