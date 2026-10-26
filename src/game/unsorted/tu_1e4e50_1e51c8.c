@@ -18,7 +18,9 @@ typedef struct Recovered_GridEntry {
 } Recovered_GridEntry;
 typedef struct Recovered_GridRow {
     Recovered_GridEntry entries[6];
-    u8 unk_108[0x88];
+    u8 unk_108[0x68];
+    u8 unk_170;
+    u8 unk_171[0x1F];
 } Recovered_GridRow;
 typedef struct Recovered_GridOwner {
     u8 unk_000[0xE0];
@@ -33,6 +35,8 @@ typedef struct Recovered_GridOwner {
 typedef char RecoveredGridEntrySize[(sizeof(Recovered_GridEntry) == 0x2C) ? 1 : -1];
 typedef char RecoveredGridRowSize[(sizeof(Recovered_GridRow) == 0x190) ? 1 : -1];
 extern s32 func_001E7448(Recovered_GridEntry*);
+extern void func_001E63B8(void*, u64, s32);
+extern u64 D_003F9208[7];
 extern void func_001E4F40(void*);
 extern void func_001E6A98(void*, u32);
 extern s32 func_00382348(void*, s32);
@@ -153,7 +157,20 @@ s32 func_001E5408(s32 arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5420);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5830);
+void func_001E5830(Recovered_GridOwner* owner) {
+    s32 key_index;
+    s32 row;
+    s32 remaining = M2C_FIELD(M2C_FIELD(D_0040F4D0, void**, 0x5AEC), s8*, 0x19);
+    for (key_index = 0; key_index < 7; key_index++) {
+        for (row = 0; row < 3; row++) {
+            if (owner->rows[row].unk_170) {
+                func_001E63B8(&owner->rows[row], D_003F9208[key_index], 0);
+                remaining--;
+                if (remaining == 0) { return; }
+            }
+        }
+    }
+}
 
 void func_001E5900(void *arg0) {
     if (M2C_FIELD(arg0, s32 *, 0x798) == 8) {
