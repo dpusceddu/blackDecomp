@@ -217,6 +217,48 @@ f32 func_002758E0(Recovered_FontOffsets* font, const u16* text) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002758E0);
 #endif
+#ifdef NON_MATCHING
+// Unmatched: glyph lookup control flow and register allocation differ.
+f32 func_002759E0(Recovered_FontOffsets *font, const u16 *text) {
+    const u16 *cursor;
+    Recovered_FontGlyph *glyph;
+    Recovered_FontGlyph *end;
+    f32 width;
+    u16 code;
+
+    if (*text != 0) {
+        code = *text;
+        cursor = text + 1;
+        glyph = (Recovered_FontGlyph *)font->buckets[code & 0x7F];
+        if (glyph->code != code) {
+            end = (Recovered_FontGlyph *)font->unk_1C;
+            if (glyph != end) {
+                do {
+                    glyph++;
+                } while (glyph->code != code && glyph != end);
+            }
+        }
+        width = glyph->unk_18;
+        if (*cursor != 0) {
+            do {
+                code = *cursor++;
+                glyph = (Recovered_FontGlyph *)font->buckets[code & 0x7F];
+                if (glyph->code != code) {
+                    end = (Recovered_FontGlyph *)font->unk_1C;
+                    if (glyph != end) {
+                        do {
+                            glyph++;
+                        } while (glyph->code != code && glyph != end);
+                    }
+                }
+                width += glyph->unk_18;
+            } while (*cursor != 0);
+        }
+        return width * font->unk_08;
+    }
+    return 0.0f;
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002759E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275AD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275DC0);
