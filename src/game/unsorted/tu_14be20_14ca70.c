@@ -1,16 +1,16 @@
 #include "include_asm.h"
+#include "game/aligned_buffer.h"
 #include "ps2/prelude.h"
 
 extern s32 func_00343ED0(void *);
-extern s32 func_00274F80(s32);
 
 void func_0014CA70(void *arg0) {
     func_00343ED0(M2C_FIELD(arg0, void **, 0x20));
     M2C_FIELD(arg0, void **, 0x20) = NULL;
 }
 
-void func_0014CAA0(s32 arg0) {
-    func_00274F80(arg0 + 4);
+void func_0014CAA0(s32 arg0, u32 bytes) {
+    AlignedBuffer_Allocate((Recovered_AlignedBuffer*)(arg0 + 4), bytes);
 }
 
 void func_0014CAC0(void) {

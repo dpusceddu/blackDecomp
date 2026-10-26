@@ -139,5 +139,60 @@ class GraphContracts(unittest.TestCase):
             run('ninja','-t','clean');run('ninja')
             self.assertTrue((root/b/'unit.o').exists())
 
+    def test_real_configure_rediscovers_renamed_sources(self):
+        # Cached preparation records must not make a removed source a fatal
+        # prerequisite before the split list can select its replacement.
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);b='build/SLUS_213.76'
+            for name in ('configure.py','tools/build/graph_io.py','tools/build/ninja_graph.py'):
+                path=root/name;path.parent.mkdir(parents=True,exist_ok=True)
+                shutil.copyfile(ROOT/name,path)
+            (root/'config').mkdir()
+            (root/'config/versions.json').write_text(json.dumps({'SLUS_213.76':{'boot':'SLUS_213.76'}}))
+            game=root/'orig/SLUS_213.76/SLUS_213.76';game.parent.mkdir(parents=True)
+            game.write_bytes(b'synthetic preflight fixture')
+            source=root/'src/unit.c';source.parent.mkdir()
+            source.write_text('first source')
+            selected=root/'config/source.json';selected.write_text(json.dumps('src/unit.c'))
+            writer=root/'tools/fixture.py'
+            writer.write_text('import sys,json\nfrom pathlib import Path\n'
+                'stage=sys.argv[1]\nb="build/SLUS_213.76"\n'
+                'if stage=="units":\n'
+                ' source=json.loads(Path("config/source.json").read_text())\n'
+                ' Path(source).read_text()\n'
+                ' Path(b+"/units.json").write_text(json.dumps(source))\n'
+                'if stage=="graph":\n'
+                ' source=json.loads(Path(b+"/units.json").read_text())\n'
+                ' manifest="rule unit\\n  command = python3 tools/object.py $in\\n"\n'
+                ' manifest+="build "+b+"/unit.o: unit "+source+"\\nbuild all: phony "+b+"/unit.o\\ndefault all\\n"\n'
+                ' Path(b+"/objects.ninja").write_text(manifest)\n'
+                ' Path(b+"/leaf_graph.json").write_text("[]")\n')
+            (root/'tools/object.py').write_text('import sys\nfrom pathlib import Path\n'
+                'Path("build/SLUS_213.76/unit.o").write_text(Path(sys.argv[1]).read_text())\n')
+            for name in ('extract','boundaries','split','support','functions','owners','units','placement','inventory','graph'):
+                contract=b+'/prepare/'+name+'.json'
+                reads=['tools/fixture.py']
+                writes=[contract]
+                if name=='units':reads+=['config/source.json','src/unit.c'];writes+=[b+'/units.json']
+                if name=='graph':reads+=[b+'/units.json'];writes+=[b+'/objects.ninja',b+'/leaf_graph.json']
+                dest=root/contract;dest.parent.mkdir(parents=True,exist_ok=True)
+                dest.write_text(json.dumps(dict(command=['tools/fixture.py',name],reads=reads,writes=writes)))
+            def run(*command):
+                result=subprocess.run(command,cwd=root,capture_output=True,text=True)
+                self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+            run(sys.executable,'tools/fixture.py','units')
+            run(sys.executable,'tools/fixture.py','graph')
+            run(sys.executable,'configure.py');run('ninja')
+            for name,explicit in (('src/unit.cpp',False),('src/renamed.cpp',True)):
+                replacement=root/name;source.rename(replacement);source=replacement
+                source.write_text(name)
+                selected.write_text(json.dumps(name))
+                if explicit:run(sys.executable,'configure.py')
+                run('ninja')
+                self.assertEqual((root/b/'unit.o').read_text(),name)
+                inventory=json.loads((root/b/'prepare/units.json').read_text())
+                self.assertIn(name,inventory['reads'])
+                self.assertNotIn('src/unit.c',inventory['reads'])
+
 
 if __name__=='__main__':unittest.main()

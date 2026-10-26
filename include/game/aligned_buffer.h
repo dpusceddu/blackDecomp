@@ -20,6 +20,7 @@ typedef char AlignedBufferCursor[(u32)&((Recovered_AlignedBuffer*)0)->cursor == 
 #ifdef __cplusplus
 extern "C" {
 #endif
+void AlignedBuffer_Initialize(Recovered_AlignedBuffer* self) __asm__("func_00274E40");
 s32 AlignedBuffer_Bind(Recovered_AlignedBuffer* self, void* buffer, u32 bytes);
 void AlignedBuffer_RestoreAllocatorHooks(void);
 void* AlignedBuffer_Allocate(Recovered_AlignedBuffer* self, u32 bytes);
