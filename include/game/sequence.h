@@ -41,8 +41,8 @@ typedef struct {
 
 typedef char SequenceEntryStride[sizeof(Recovered_SequenceEntry) == 8 ? 1 : -1];
 typedef char SequenceSlotStride[sizeof(Recovered_SequenceSlot) == 0x60 ? 1 : -1];
-typedef char SequenceActiveOffset[(u32)&((Recovered_SequenceState*)0)->active == 0x90 ? 1 : -1];
-typedef char SequenceSlotsOffset[(u32)&((Recovered_SequenceState*)0)->slots == 0x9C ? 1 : -1];
+typedef char SequenceActiveOffset[(u32) & ((Recovered_SequenceState*)0)->active == 0x90 ? 1 : -1];
+typedef char SequenceSlotsOffset[(u32) & ((Recovered_SequenceState*)0)->slots == 0x9C ? 1 : -1];
 
 s32 Sequence_ClassifyStorage(void* address);
 void Sequence_RemoveActor(void* self, void* actor);
