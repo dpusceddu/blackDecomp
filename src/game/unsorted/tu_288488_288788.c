@@ -7,6 +7,12 @@ extern s32 func_0035D728(char *, const char *, ...);
 extern void *func_00108328(void *, const char *);
 extern void *D_0040F4C4;
 extern const char D_00400818[], D_00400828[], D_00400830[], D_00400838[];
+extern void func_00272AA8(void *);
+extern s32 func_003822E0(void *, s32);
+extern s32 func_003822F8(void *, s32);
+extern void func_0028EED8(void *);
+extern void func_001AF930(void *);
+extern void func_00108540(void *, s32, void *, s32);
 
 typedef struct {
     u8 unk_00;
@@ -19,6 +25,17 @@ typedef struct {
     char name[0x20];
     void *textures[3];
 } Recovered_MuzzleTextures; /* Original structure and names UNVERIFIED. */
+
+typedef struct {
+    u8 unk_00[8];
+    s32 count;
+    void *entries;
+} Recovered_EffectArchive;
+
+typedef struct {
+    Recovered_EffectArchive *textures;
+    Recovered_EffectArchive *models;
+} Recovered_EffectPackage; /* Archive roles UNVERIFIED. */
 
 void func_00288788(void) {
 
@@ -68,5 +85,36 @@ s32 func_00288910(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288488_288788", func_00288920);
+#ifdef NON_MATCHING
+// Unmatched: model-archive loop register allocation differs.
+void func_00288930(Recovered_EffectPackage *package, s32 arg1) {
+    Recovered_EffectArchive *textures;
+    s32 textureIndex = 0;
+    textures = (Recovered_EffectArchive *)((u32)package->textures + (u32)package);
+    package->textures = textures;
+    package->models = (Recovered_EffectArchive *)((u32)package->models + (u32)package);
+    func_00272AA8(textures);
+    if (textures->count > 0) {
+        do {
+            func_0028EED8((void *)func_003822E0(textures, textureIndex));
+            textureIndex++;
+        } while (textureIndex < textures->count);
+    }
+    func_00108540(D_0040F4C4, 0, package->textures, 0);
+    {
+        s32 modelIndex = 0;
+        Recovered_EffectArchive *models = package->models;
+        func_00272AA8(models);
+        if (models->count > 0) {
+            do {
+                func_001AF930((void *)func_003822F8(models, modelIndex));
+                modelIndex++;
+            } while (modelIndex < models->count);
+        }
+    }
+    func_00108540(D_0040F4C4, 1, package->models, 0);
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288488_288788", func_00288930);
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288488_288788", func_00288A38);
