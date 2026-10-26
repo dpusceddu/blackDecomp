@@ -43,8 +43,9 @@ extern "C" void func_00334120(int initialize, int priority)
 struct Descriptor;
 
 namespace ShapeViews {
-struct ShapeType;
+typedef Descriptor ShapeType;
 struct Matrix { EeS128 right, up, at, position; };
+// UNVERIFIED: dimension/radius meanings and the complete shape interface.
 struct Shape {
     Matrix frame;
     float dimensions[3];
@@ -57,7 +58,7 @@ struct Holder { Shape* shape; };
 }
 using namespace ShapeViews;
 extern "C" {
-extern void* D_0048F6F0[6];
+extern const Descriptor* D_0048F6F0[6];
 extern Matrix* D_0040E438[];
 extern Descriptor D_003D1368, D_003D1468, D_003D1430, D_003D14A0, D_003D13A0;
 }
@@ -86,7 +87,7 @@ ConstantQuad D_0045CE50;
 ConstantQuad D_0045CE60;
 }
 
-// Pointer-to-member layout control; callback contracts remain opaque.
+// UNVERIFIED callback contracts; descriptor entries preserve native member-pointer layout.
 struct OpaqueShape {
  int F_0033B8D0(...) const __asm__("func_0033B8D0");
  int F_0033BBD8(...) const __asm__("func_0033BBD8");
@@ -129,6 +130,36 @@ Descriptor D_003D1468 __attribute__((section(".data.shape_3d1468"))) = {1, &Opaq
 Descriptor D_003D14A0 __attribute__((section(".data.shape_3d14a0"))) = {3, &OpaqueShape::F_0033F328, &OpaqueShape::F_00341670, &OpaqueShape::F_0033FF48, &OpaqueShape::F_0033FC38, &OpaqueShape::F_003411C8, D_0040A540, 0, 0};
 }
 
+#ifdef NON_MATCHING
+static inline void InitializeShape(Shape* shape, int kind) {
+    const ShapeType* type = D_0048F6F0[kind];
+    shape->unknown5c = 1;
+    shape->type = type;
+    shape->radius = 0;
+    shape->unknown50 = 0;
+    shape->unknown54 = 0;
+    shape->frame = *D_0040E438[0];
+}
+#endif
+
+extern "C" Shape* PhysicsShape_InitializeHolder(Holder*, int) __asm__("func_00334268");
+#ifdef NON_MATCHING
+// Unmatched: descriptor and default-frame loads have different register lifetimes.
+extern "C" Shape* PhysicsShape_InitializeHolder(Holder* holder, int kind) {
+    Shape* shape = holder->shape;
+    if (shape) InitializeShape(shape, kind);
+    return shape;
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_334120", func_00334268);
+
+extern "C" Shape* PhysicsShape_InitializeAt(Shape*, int) __asm__("func_003342D0");
+#ifdef NON_MATCHING
+// Unmatched: return-pointer copy and descriptor-load lifetimes differ.
+extern "C" Shape* PhysicsShape_InitializeAt(Shape* shape, int kind) {
+    if (shape) InitializeShape(shape, kind);
+    return shape;
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_334120", func_003342D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_334120", func_00334338);
