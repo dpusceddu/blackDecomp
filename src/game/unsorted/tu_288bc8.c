@@ -2,6 +2,14 @@
 #include "ps2/prelude.h"
 
 extern s32 func_00289398();
+extern void *func_0035C544(void *, const void *, u32);
+
+typedef struct {
+    void *vtable;
+    void *source;
+    u32 remaining;
+    const u8 *cursor;
+} Recovered_BoundedStream; /* Original stream identity UNVERIFIED. */
 extern M2C_UNK D_003E29A8;
 extern int D_003E0040;
 extern void (*D_003C87E0)(void *);
@@ -47,4 +55,10 @@ s32 func_00288C70(void *arg0, void *arg1) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288bc8", func_00288C90);
+u32 func_00288C90(Recovered_BoundedStream *stream, s32 unused, void *destination, u32 requested) {
+    u32 size = stream->remaining < requested ? stream->remaining : requested;
+    func_0035C544(destination, stream->cursor, size);
+    stream->cursor += size;
+    stream->remaining -= size;
+    return size;
+}
