@@ -1,8 +1,14 @@
 #!/usr/bin/env python3
-"""Best next work, from the automatic pipeline's results (build/auto.json) and the source units (tools/build/units.py).
+"""Best next work: the source files to claim next, and analyses from the automatic pipeline's results (build/auto.json).
 
-  next.py [near|types|identical|data|ee|all] [--top N] [--max-size N]
+  next.py [files|near|types|identical|data|ee|all] [--top N] [--max-size N] [--library L] [--repo OWNER/NAME]
 
+  files     (default) source files to work on next, skipping claimed ones: game first, then kynapse, animation and physics,
+            then the other libraries; within a library, the files with the most untried functions of tractable size
+            (at most the median size of all remaining functions, or --max-size). A file is claimed when an open pull
+            request of --repo (default: the GitHub repository of the `upstream` or `origin` remote; read with `gh`)
+            changes it or names it on a `Claims:` line of its description, unless it is a draft without updates for
+            7 days, or when another local worktree changes it.
   near      near misses by differing-instruction count, with what differs (registers, order, code, length)
   types     functions the pipeline could not compile or decompile for want of a type, grouped by what they need
   identical groups of assembly functions with identical bodies (candidates for one template or one shared source)
@@ -10,11 +16,12 @@
   ee        functions m2c cannot read (EE instructions), grouped by instruction
 Functions already provided by source units are left out everywhere.
 """
-import argparse, collections, json, re, struct, sys
+import argparse, collections, datetime, json, re, statistics, struct, subprocess, sys
 from pathlib import Path
 
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from units import load_units, ROOT
+import include_asm
 import preflight
 
 RESULTS = ROOT / 'build' / 'auto.json'
@@ -124,16 +131,115 @@ def ee(res, top, max_size):
         print('  %4d  %s' % (n, m))
 
 
+TIERS = {'game': 0, 'kynapse': 1, 'animation': 1, 'physics': 1}
+LAPSE = datetime.timedelta(days=7)
+
+
+def git(*args, cwd=ROOT):
+    r = subprocess.run(['git', *args], cwd=cwd, capture_output=True, text=True)
+    return r.stdout if r.returncode == 0 else ''
+
+
+def github_repo():
+    for remote in ('upstream', 'origin'):
+        m = re.search(r'github\.com[:/]([^/]+/[^/]+?)(?:\.git)?$', git('remote', 'get-url', remote).strip())
+        if m:
+            return m.group(1)
+    return None
+
+
+def pr_claims(repo):
+    """{path: '#123'} for the files that open pull requests change or name on a `Claims:` line; None with a reason when they cannot be read."""
+    if not repo:
+        return None, 'no GitHub remote (pass --repo OWNER/NAME)'
+    try:
+        r = subprocess.run(['gh', 'pr', 'list', '--repo', repo, '--state', 'open', '--limit', '500',
+                            '--json', 'number,isDraft,updatedAt,files,body'], capture_output=True, text=True, timeout=60)
+    except (OSError, subprocess.TimeoutExpired) as e:
+        return None, 'gh failed (%s)' % e
+    if r.returncode:
+        return None, 'gh failed (%s)' % (r.stderr.strip().splitlines() or ['?'])[-1]
+    now = datetime.datetime.now(datetime.timezone.utc)
+    claims = {}
+    for pr in json.loads(r.stdout):
+        updated = datetime.datetime.fromisoformat(pr['updatedAt'].replace('Z', '+00:00'))
+        if pr['isDraft'] and now - updated > LAPSE:
+            continue
+        paths = [f['path'] for f in pr.get('files') or []]
+        for line in (pr.get('body') or '').splitlines():
+            if line.strip().lower().startswith('claims:'):
+                paths += re.findall(r'src/\S+?\.(?:c|cpp)\b', line)
+        for path in paths:
+            claims[path] = '#%d' % pr['number']
+    return claims, None
+
+
+def worktree_claims():
+    """{path: worktree} for the files that other worktrees of this repository change against main."""
+    here, claims, tree = ROOT.resolve(), {}, None
+    for line in git('worktree', 'list', '--porcelain').splitlines() + ['']:
+        if line.startswith('worktree '):
+            tree = Path(line[9:]).resolve()
+        elif not line and tree and tree != here:
+            base = next((b for b in ('main', 'origin/main', 'upstream/main') if git('rev-parse', '--verify', '-q', b, cwd=tree)), None)
+            changed = git('diff', '--name-only', base + '...HEAD', cwd=tree).split() if base else []
+            changed += [l[3:] for l in git('status', '--porcelain', cwd=tree).splitlines()]
+            for path in changed:
+                claims[path] = tree.parent.name + '/' + tree.name
+            tree = None
+    return claims
+
+
+def files(top, max_size, library, repo):
+    units = load_units(variant='SLUS_213.76')
+    size = {f['addr']: f['size'] for u in units for f in u['functions']}
+    rows = []
+    for source, lib in sorted({(u['source'], u['library']) for u in units}):
+        if library and lib != library:
+            continue
+        text = (ROOT / source).read_text()
+        left = [include_asm.function_address(m.name) for m in include_asm.markers(text, set())]
+        untried = {include_asm.function_address(m.name) for m in include_asm.markers(text, {'NON_MATCHING'})}
+        left = [(a, size[a]) for a in left if a in size and size[a] > 8]  # 8-byte orphan pieces are not code
+        if left:
+            rows.append((source, lib, left, untried))
+    if not rows:
+        print('no remaining functions')
+        return
+    limit = max_size or statistics.median(s for _, _, left, _ in rows for _, s in left)
+    claims, problem = pr_claims(repo or github_repo())
+    if problem:
+        print('note: claims of open pull requests unknown: %s; only local worktrees are checked' % problem, file=sys.stderr)
+    claims = dict(claims or {}, **worktree_claims())
+    ranked, taken = [], 0
+    for source, lib, left, untried in rows:
+        if source in claims:
+            taken += 1
+            continue
+        easy = [(a, s) for a, s in left if s <= limit and a in untried]
+        if easy:
+            ranked.append((TIERS.get(lib, 2), -len(easy), -sum(s for _, s in easy), source, lib, len(left), easy))
+    ranked.sort()
+    print('files to work on next (tractable: untried functions of at most %d bytes; %d claimed files skipped):' % (limit, taken))
+    print('  %-48s %-9s %5s %9s %7s' % ('file', 'library', 'left', 'tractable', 'bytes'))
+    for _, _, _, source, lib, n, easy in ranked[:top]:
+        print('  %-48s %-9s %5d %9d %7d' % (source, lib, n, len(easy), sum(s for _, s in easy)))
+
+
 EE_VECTOR = re.compile(r'^(p(add|sub|cpy|ext|pac|mul|div|and|or|nor|xor|abs|min|max|lzc|sll|srl|sra|rot|ack|mfh|mth|mfl|mtl|ceq|cgt|inc|sat)[a-z0-9]*|lqc2|sqc2|qm[ft]c2.*|c[ft]c2|v[a-z0-9.]+|mf(sa|hi1|lo1)|mt(sa|sah|hi1|lo1)|madd1|mult1|multu1|div1|divu1|adda.*|suba.*|madda.*)$')
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('what', nargs='?', default='all', choices=['near', 'types', 'identical', 'families', 'data', 'ee', 'all'])
+    ap.add_argument('what', nargs='?', default='files', choices=['files', 'near', 'types', 'identical', 'families', 'data', 'ee', 'all'])
     ap.add_argument('--top', type=int, default=15)
     ap.add_argument('--max-size', type=int)
+    ap.add_argument('--library', help='files: only this library (game, kynapse, animation, physics, ...)')
+    ap.add_argument('--repo', help='files: GitHub repository whose open pull requests claim files (OWNER/NAME)')
     a = ap.parse_args()
     preflight.require()
+    if a.what == 'files':
+        return files(a.top, a.max_size, a.library, a.repo)
     if a.what == 'families':
         a.what = 'identical'
     res = load()

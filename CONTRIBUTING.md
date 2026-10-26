@@ -7,18 +7,19 @@ be committed. Terms are in the [glossary](docs/glossary.md).
 
 ## Picking work
 
-Open the objdiff unit list after `ninja objdiff`: it shows unit sizes and match percentages. Pick a coherent file with
-remaining code you can understand. `tools/next.py` adds analyses objdiff does not show: near-miss causes, missing types,
-identical bodies, owned-data obstacles and unsupported EE instructions. Claim the source file before editing it.
+`python3 tools/next.py` lists the files to work on next: game code first, files with the most untried functions of
+tractable size at the top, claimed files left out. The objdiff unit list shows unit sizes and match percentages, and
+`python3 tools/next.py near|types|identical|data|ee` adds analyses objdiff does not show (near-miss causes, missing types,
+identical bodies, owned-data obstacles, unsupported EE instructions). Claim the file before editing it.
 
-### Claiming a TU
+### Claiming a file
 
-Open an issue with the "Claim a TU" template naming the file (`src/<library>/<name>`, or the address from objdiff)
-before you start, so two people do not match the same file; say if you work on only some functions of it. The maintainer
-labels the issue "claimed" and you work on a branch of your own. A claim that shows no activity for a few weeks lapses (say so
-in the issue to release it earlier). Nothing in the repository records a claim, and the split list has no owner fields. Edit
-only the files you claimed; shared headers (`include/ps2/`) and `config/SLUS_213.76/splits.yaml` are small, reviewed changes.
-Pull requests do not touch `progress/` or the progress table of the README (see Commit rules).
+A claim is an open pull request: the files it changes, plus the ones named on a `Claims:` line of its description, are
+claimed. Open a draft pull request when you start (an empty commit is enough), with a line such as
+`Claims: src/game/ai/tu_18c260.c`, and push as you go; `tools/next.py` skips claimed files for everyone, and also files that
+your other local worktrees change, so several sessions on one machine do not collide. A draft without updates for 7 days
+lapses. Edit only the files you claimed; shared headers (`include/ps2/`) and `config/SLUS_213.76/splits.yaml` are small,
+reviewed changes. Pull requests do not touch `progress/` or the progress table of the README (see Commit rules).
 
 ## The matching workflow
 

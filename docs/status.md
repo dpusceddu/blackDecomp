@@ -27,7 +27,7 @@ leads, never proof of PS2 layouts.
 3. **One check for exactness**: `ninja` ends with `OK`. No per-function proof journals.
 4. **Automate the routine path**: m2c draft, compile flag variants, relocation-aware scoring, permuter, cloning of identical bodies
    ([pipeline.md](pipeline.md)). People spend their time on types, classes and the functions the pipeline cannot do.
-5. **Parallel by file.** Contributors work on different TUs at the same time (claimed by issue, see [CONTRIBUTING.md](../CONTRIBUTING.md)); every function belongs to exactly one file ([units.md](units.md)).
+5. **Parallel by file.** Contributors work on different TUs at the same time (claimed by pull request, see [CONTRIBUTING.md](../CONTRIBUTING.md#claiming-a-file)); every function belongs to exactly one file ([units.md](units.md)).
 6. **Private inputs stay private.** Game bytes, generated assembly and data, compilers and build output are ignored by Git.
 
 ## Toolchain facts

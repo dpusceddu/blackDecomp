@@ -2,7 +2,7 @@
 
 ## What this changes
 
-<!-- Which file(s) / functions / tool. Link the "Claim a TU" issue if there is one: "Closes #123". -->
+<!-- Which file(s) / functions / tool. Keep the "Claims:" line while the work is in progress. -->
 
 ## Checks
 

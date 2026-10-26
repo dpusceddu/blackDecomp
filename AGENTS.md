@@ -15,7 +15,7 @@ Short, neutral rules for coding assistants and the people directing them. They a
 - Keep committed text free of machine-specific details: host names, user names, absolute paths, network addresses and
   credentials belong only in `.local/`.
 - Check free disk space before unpacking disc images and process one image at a time.
-- Every function belongs to exactly one file (`python3 tools/where.py func_XXXXXXXX` names it); work on a TU only after claiming it in an issue (CONTRIBUTING.md, "Claiming a TU"). Names follow the "Naming" section of CONTRIBUTING.md: no `Mod`, `Campaign` or `Black` prefixes, placeholders until the evidence supports a name.
+- Every function belongs to exactly one file (`python3 tools/where.py func_XXXXXXXX` names it); work on a file only after claiming it (CONTRIBUTING.md, "Claiming a file"). Names follow the "Naming" section of CONTRIBUTING.md: no `Mod`, `Campaign` or `Black` prefixes, placeholders until the evidence supports a name.
 - Source layout: `src/<library>/<name>.c|cpp` (`src/game/<subsystem>/` for game code, see CONTRIBUTING.md; libraries: game, apt, kynapse, animation, physics, rw_core, rw_audio, sony,
   libc; link-once copies in `src/<library>/inline/`), one file per TU listing every function (recovered code, `INCLUDE_ASM` lines, drafts in `#ifdef NON_MATCHING` blocks). Headers follow the
   libraries in `include/<library>/` (shared helpers in `include/ps2/`). `tools/build/layout.py` has the naming rules.
@@ -34,3 +34,33 @@ Short, neutral rules for coding assistants and the people directing them. They a
   non-matching functions.
 - Format new C/C++ with `.clang-format`; do not reformat existing sources.
 - Commit without attribution lines. Do not push unless asked.
+
+## Work session
+
+When asked to "do a work session" (or to work on the decompilation without more detail), follow these steps. Several agents
+can run sessions at the same time, each in its own Git worktree and branch; the claims keep them apart.
+
+1. **Build.** Work in a worktree of your own on a branch from the current `main` (or `upstream/main`). Run `ninja`: it must
+   print `OK`. Save `build/SLUS_213.76/units.json` as `.local/session-baseline-units.json`; its functions with status
+   `source` are the protected set.
+2. **Pick.** Run `python3 tools/next.py` (game code first, claimed files skipped). Take the first file whose functions you
+   can understand, plus related files of the same family if they are unclaimed.
+3. **Claim.** Open a draft pull request at once, before the real work: an empty commit is enough, with a description line
+   `Claims: src/<file> [src/<file> ...]`. Without GitHub access, run only one session at a time and say so in the final
+   report.
+4. **Work by family.** Recover the shared types and layouts first (types decide most mismatches), then decompile all of the
+   family's tractable functions as one batch, build, compare in objdiff and iterate. About five builds per hypothesis per
+   function; then leave the draft in `#ifdef NON_MATCHING` with a one-line `// Unmatched:` note and move on. Use the
+   permuter only for near misses, with seeds that leave out unrelated `INCLUDE_ASM` bodies. A per-file flag or assembler
+   change in `splits.yaml` needs a concrete reason in the native code, in a `note:` on the entry; reject one that only
+   makes one function match by coincidence. No filler, padding or byte patches.
+5. **Commit.** Each commit leaves `ninja` printing `OK` and keeps every function of the protected set `source`. Commit per
+   file or small batch; push to the draft pull request. New headers of the family go in their own commits; a change to a
+   header that other files use goes alone in a commit whose message starts with `Shared:`.
+6. **Log.** Keep `.local/session.md` (ignored): per batch, functions and bytes matched, time per match, blockers; at the
+   top, a short handoff (current file, pending candidates, next target).
+7. **Stop** after about four hours, or earlier when two hours pass without a new match, the build breaks in a way you
+   cannot fix, or the claimed files have no tractable functions left. Finish the batch, push, and turn the draft into a
+   ready pull request whose description gives `ninja progress` before and after, the functions matched, the drafts left
+   and why, any per-file flags or tool fixes with their reasons, and that the work was done by an AI agent. A session that
+   continues later reads the handoff first.

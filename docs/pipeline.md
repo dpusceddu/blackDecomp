@@ -44,7 +44,7 @@ python3 tools/autodecomp.py clone                         # clone exact sources 
 python3 tools/autodecomp.py register                      # exact drafts -> their TU files (the INCLUDE_ASM line is replaced)
 python3 tools/autodecomp.py confirm                       # compile, link, put back the INCLUDE_ASM line of what does not place identically; ninja must say OK
 python3 tools/autodecomp.py report [--max-size N]         # outcome classes, failure reasons
-python3 tools/next.py [near|types|identical|data|ee]       # best next work
+python3 tools/next.py [files|near|types|identical|data|ee]  # best next work (files: what to claim next)
 ```
 
 ### Using decomp-permuter directly
