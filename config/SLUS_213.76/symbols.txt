@@ -945,6 +945,7 @@ Kaim_ParameterTables_Consume = 0x2E8AB8; // type:func alias
 Consume__15ParameterTablesiP8SlotUser = 0x2E8AB8; // type:func
 ConsumeList__15ParameterTablesiP9IndexUser = 0x2E8C50; // type:func
 ConsumeGlobal__14ParameterViewsi = 0x2E8FA0; // type:func
+NextSlot__15ParameterTables = 0x2E90B8; // type:func
 GetNameTable8__Fv = 0x2E91C0; // type:func
 GetNameTables__4Kaimv = 0x2E91C0; // type:func
 GetNameTables__Fv = 0x2E91C0; // type:func
