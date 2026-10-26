@@ -161,7 +161,7 @@ extern void func_003675A0(void); /* _EnableIntc */
 extern void func_003675B0(void); /* _DisableIntc */
 extern void func_003675C0(void); /* _EnableDmac */
 extern void func_003675D0(void); /* _DisableDmac */
-extern void func_003675E0(void); /* SetAlarm */
+extern void func_003675E0(void); /* Syscall252 */
 extern void func_00367660(void); /* CreateThread */
 extern void func_00367670(void); /* DeleteThread */
 extern void func_00367680(void); /* _StartThread */
