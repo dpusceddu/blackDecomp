@@ -31,9 +31,9 @@ typedef struct {
     const Recovered_AudioGainVtable* vtable;
 } Recovered_AudioGainTarget;
 
-/* UNVERIFIED: these state and stage interfaces are accessed by pending runtime
- * update/control drafts. Native method records establish the signed adjustment
- * and callback ABI, but original interface identities and slot meanings remain unknown. */
+/* Matched runtime update/control consumers confirm these access paths and the
+ * signed adjustment/callback records. Original interface identities, unknown
+ * slot meanings, unaccessed storage and full extents remain UNVERIFIED. */
 typedef struct {
     s16 thisAdjustment;
     u16 unk_02;
@@ -74,8 +74,8 @@ typedef struct {
 
 /* Partial runtime tail shared by initialization and mode selection. The
  * unaccessed storage (including unk_CBB0), total extents and
- * configuration-field semantics remain UNVERIFIED. New bank/stage/component
- * accesses at B308/CBA0/CBD4/CBDC/CBE0 await matched update/control consumers. */
+ * configuration-field semantics remain UNVERIFIED. Matched update/control
+ * consumers confirm bank/stage/component accesses at B308/CBA0/CBD4/CBDC/CBE0. */
 typedef struct {
     u8 unk_00[0xB308];
     Recovered_FloatPairBank pairBank;
@@ -93,7 +93,7 @@ typedef struct {
     u8 unk_CBBC[8];
     // Music and SFX gain fields are confirmed by the matched setters.
     f32 sfxMixGain;
-    f32 unk_CBC8; // UNVERIFIED: gain input used by the update draft.
+    f32 unk_CBC8; // UNVERIFIED: original gain setting and units.
     f32 sfxGain;
     f32 musicGain;
     void* unk_CBD4;
