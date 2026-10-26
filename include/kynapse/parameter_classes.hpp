@@ -21,7 +21,7 @@ struct ObjectBase {
 
 struct Engine {
     unsigned char unknown00[0x0c];
-    float frameTime;
+    float unitScale; // Scales parameter defaults; exact unit convention UNVERIFIED.
 };
 extern Engine* gEngine;
 
@@ -54,14 +54,13 @@ ObjectBase* CreateParameter2846C4();
 
 
 struct Parameter2846E4 : ObjectBase {
-    unsigned char data[4];
+    float width;
     Parameter2846E4()
     {
-        float* value = (float*)data;
+        float scale = 0.0f;
         if (gEngine)
-            *value = gEngine->frameTime * 0.7f;
-        else
-            *value = kZero * 0.7f;
+            scale = gEngine->unitScale;
+        width = scale * 0.7f;
     }
     virtual ~Parameter2846E4();
     virtual const ClassInfoEntry* GetClassInfo() const;
@@ -72,14 +71,13 @@ ObjectBase* CreateParameter2846E4();
 
 
 struct Parameter284708 : ObjectBase {
-    unsigned char data[4];
+    float length;
     Parameter284708()
     {
-        float* value = (float*)data;
+        float scale = 0.0f;
         if (gEngine)
-            *value = gEngine->frameTime * 0.7f;
-        else
-            *value = kZero * 0.7f;
+            scale = gEngine->unitScale;
+        length = scale * 0.7f;
     }
     virtual ~Parameter284708();
     virtual const ClassInfoEntry* GetClassInfo() const;
@@ -90,14 +88,13 @@ ObjectBase* CreateParameter284708();
 
 
 struct Parameter284728 : ObjectBase {
-    unsigned char data[4];
+    float maxSpeed;
     Parameter284728()
     {
-        float* value = (float*)data;
+        float scale = 0.0f;
         if (gEngine)
-            *value = gEngine->frameTime * 0.5f;
-        else
-            *value = kZero * 0.5f;
+            scale = gEngine->unitScale;
+        maxSpeed = scale * 0.5f;
     }
     virtual ~Parameter284728();
     virtual const ClassInfoEntry* GetClassInfo() const;
@@ -108,14 +105,13 @@ ObjectBase* CreateParameter284728();
 
 
 struct Parameter284748 : ObjectBase {
-    unsigned char data[4];
+    float height;
     Parameter284748()
     {
-        float* value = (float*)data;
+        float scale = 0.0f;
         if (gEngine)
-            *value = gEngine->frameTime * 1.8f;
-        else
-            *value = kZero * 1.8f;
+            scale = gEngine->unitScale;
+        height = scale * 1.8f;
     }
     virtual ~Parameter284748();
     virtual const ClassInfoEntry* GetClassInfo() const;
@@ -261,7 +257,7 @@ struct Parameter2848B4 : ObjectBase {
     {
         float t = 0.0f;
         if (gEngine)
-            t = gEngine->frameTime;
+            t = gEngine->unitScale;
         range = t * 100.0f;
         angle = 60.0f;
     }
