@@ -17,8 +17,9 @@ identical bodies, owned-data obstacles, unsupported EE instructions). Claim the 
 A claim is an open pull request: the files it changes, plus the ones named on a `Claims:` line of its description, are
 claimed. Open a draft pull request when you start (an empty commit is enough), with a line such as
 `Claims: src/game/ai/tu_18c260.c`, and push as you go; `tools/next.py` skips claimed files for everyone, and also files that
-your other local worktrees change, so several sessions on one machine do not collide. A draft without updates for 7 days
-lapses. Edit only the files you claimed; shared headers (`include/ps2/`) and `config/SLUS_213.76/splits.yaml` are small,
+your other local worktrees change, so several sessions on one machine do not collide. If two pull requests claim the same
+file, the lower number keeps it (`python3 tools/next.py claims` lists such files). A draft without updates for 48 hours
+lapses: push your work in progress, or comment, to keep it. Edit only the files you claimed; shared headers (`include/ps2/`) and `config/SLUS_213.76/splits.yaml` are small,
 reviewed changes. Pull requests do not touch `progress/` or the progress table of the README (see Commit rules).
 
 ## The matching workflow

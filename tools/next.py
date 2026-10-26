@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """Best next work: the source files to claim next, and analyses from the automatic pipeline's results (build/auto.json).
 
-  next.py [files|near|types|identical|data|ee|all] [--top N] [--max-size N] [--library L] [--repo OWNER/NAME]
+  next.py [files|claims|near|types|identical|data|ee|all] [--top N] [--max-size N] [--library L] [--repo OWNER/NAME] [--pick]
 
   files     (default) source files to work on next, skipping claimed ones: game first, then kynapse, animation and physics,
             then the other libraries; within a library, the files with the most untried functions of tractable size
             (at most the median size of all remaining functions, or --max-size). A file is claimed when an open pull
             request of --repo (default: the GitHub repository of the `upstream` or `origin` remote; read with `gh`)
             changes it or names it on a `Claims:` line of its description, unless it is a draft without updates for
-            7 days, or when another local worktree changes it.
+            48 hours, or when another local worktree changes it. --pick prints one file instead, drawn at random from the
+            first --top files (weighted by their tractable bytes), so sessions starting together rarely take the same one.
+  claims    files claimed by more than one open pull request; the lowest pull request number keeps the claim.
   near      near misses by differing-instruction count, with what differs (registers, order, code, length)
   types     functions the pipeline could not compile or decompile for want of a type, grouped by what they need
   identical groups of assembly functions with identical bodies (candidates for one template or one shared source)
@@ -16,7 +18,7 @@
   ee        functions m2c cannot read (EE instructions), grouped by instruction
 Functions already provided by source units are left out everywhere.
 """
-import argparse, collections, datetime, json, re, statistics, struct, subprocess, sys
+import argparse, collections, datetime, json, random, re, statistics, struct, subprocess, sys
 from pathlib import Path
 
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
@@ -132,7 +134,7 @@ def ee(res, top, max_size):
 
 
 TIERS = {'game': 0, 'kynapse': 1, 'animation': 1, 'physics': 1}
-LAPSE = datetime.timedelta(days=7)
+LAPSE = datetime.timedelta(hours=48)
 
 
 def git(*args, cwd=ROOT):
@@ -149,7 +151,7 @@ def github_repo():
 
 
 def pr_claims(repo):
-    """{path: '#123'} for the files that open pull requests change or name on a `Claims:` line; None with a reason when they cannot be read."""
+    """{path: [pull request numbers]} for the files that open pull requests change or name on a `Claims:` line; None with a reason when they cannot be read."""
     if not repo:
         return None, 'no GitHub remote (pass --repo OWNER/NAME)'
     try:
@@ -169,8 +171,8 @@ def pr_claims(repo):
         for line in (pr.get('body') or '').splitlines():
             if line.strip().lower().startswith('claims:'):
                 paths += re.findall(r'src/\S+?\.(?:c|cpp)\b', line)
-        for path in paths:
-            claims[path] = '#%d' % pr['number']
+        for path in set(paths):
+            claims.setdefault(path, []).append(pr['number'])
     return claims, None
 
 
@@ -190,7 +192,7 @@ def worktree_claims():
     return claims
 
 
-def files(top, max_size, library, repo):
+def files(top, max_size, library, repo, pick=False):
     units = load_units(variant='SLUS_213.76')
     size = {f['addr']: f['size'] for u in units for f in u['functions']}
     rows = []
@@ -220,10 +222,24 @@ def files(top, max_size, library, repo):
         if easy:
             ranked.append((TIERS.get(lib, 2), -len(easy), -sum(s for _, s in easy), source, lib, len(left), easy))
     ranked.sort()
+    if pick:
+        if ranked:
+            print(random.choices(ranked[:top], weights=[-r[2] for r in ranked[:top]])[0][3])
+        return
     print('files to work on next (tractable: untried functions of at most %d bytes; %d claimed files skipped):' % (limit, taken))
     print('  %-48s %-9s %5s %9s %7s' % ('file', 'library', 'left', 'tractable', 'bytes'))
     for _, _, _, source, lib, n, easy in ranked[:top]:
         print('  %-48s %-9s %5d %9d %7d' % (source, lib, n, len(easy), sum(s for _, s in easy)))
+
+
+def contested(repo):
+    claims, problem = pr_claims(repo or github_repo())
+    if problem:
+        raise SystemExit('claims of open pull requests unknown: %s' % problem)
+    both = {path: sorted(prs) for path, prs in claims.items() if len(prs) > 1 and path.startswith('src/')}
+    print('files claimed by more than one open pull request: %d (the first number keeps the claim)' % len(both))
+    for path, prs in sorted(both.items()):
+        print('  %-48s %s' % (path, ' '.join('#%d' % n for n in prs)))
 
 
 EE_VECTOR = re.compile(r'^(p(add|sub|cpy|ext|pac|mul|div|and|or|nor|xor|abs|min|max|lzc|sll|srl|sra|rot|ack|mfh|mth|mfl|mtl|ceq|cgt|inc|sat)[a-z0-9]*|lqc2|sqc2|qm[ft]c2.*|c[ft]c2|v[a-z0-9.]+|mf(sa|hi1|lo1)|mt(sa|sah|hi1|lo1)|madd1|mult1|multu1|div1|divu1|adda.*|suba.*|madda.*)$')
@@ -231,15 +247,18 @@ EE_VECTOR = re.compile(r'^(p(add|sub|cpy|ext|pac|mul|div|and|or|nor|xor|abs|min|
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('what', nargs='?', default='files', choices=['files', 'near', 'types', 'identical', 'families', 'data', 'ee', 'all'])
+    ap.add_argument('what', nargs='?', default='files', choices=['files', 'claims', 'near', 'types', 'identical', 'families', 'data', 'ee', 'all'])
     ap.add_argument('--top', type=int, default=15)
     ap.add_argument('--max-size', type=int)
     ap.add_argument('--library', help='files: only this library (game, kynapse, animation, physics, ...)')
-    ap.add_argument('--repo', help='files: GitHub repository whose open pull requests claim files (OWNER/NAME)')
+    ap.add_argument('--repo', help='files, claims: GitHub repository whose open pull requests claim files (OWNER/NAME)')
+    ap.add_argument('--pick', action='store_true', help='files: print one file, drawn at random from the first --top')
     a = ap.parse_args()
     preflight.require()
     if a.what == 'files':
-        return files(a.top, a.max_size, a.library, a.repo)
+        return files(a.top, a.max_size, a.library, a.repo, a.pick)
+    if a.what == 'claims':
+        return contested(a.repo)
     if a.what == 'families':
         a.what = 'identical'
     res = load()

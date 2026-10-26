@@ -43,11 +43,13 @@ can run sessions at the same time, each in its own Git worktree and branch; the 
 1. **Build.** Work in a worktree of your own on a branch from the current `main` (or `upstream/main`). Run `ninja`: it must
    print `OK`. Save `build/SLUS_213.76/units.json` as `.local/session-baseline-units.json`; its functions with status
    `source` are the protected set.
-2. **Pick.** Run `python3 tools/next.py` (game code first, claimed files skipped). Take the first file whose functions you
-   can understand, plus related files of the same family if they are unclaimed.
+2. **Pick.** Run `python3 tools/next.py --pick`: one unclaimed file, drawn at random from the best candidates (game code
+   first), so sessions that start together rarely collide. If its functions make no sense to you, pick again; add related
+   unclaimed files of the same family (`python3 tools/next.py` lists the candidates).
 3. **Claim.** Open a draft pull request at once, before the real work: an empty commit is enough, with a description line
-   `Claims: src/<file> [src/<file> ...]`. Without GitHub access, run only one session at a time and say so in the final
-   report.
+   `Claims: src/<file> [src/<file> ...]`. Then run `python3 tools/next.py claims`: if one of your files is listed with a
+   lower pull request number than yours, it was claimed first; drop it from your claim and pick again. Without GitHub
+   access, run only one session at a time and say so in the final report.
 4. **Work by family.** Recover the shared types and layouts first (types decide most mismatches), then decompile all of the
    family's tractable functions as one batch, build, compare in objdiff and iterate. About five builds per hypothesis per
    function; then leave the draft in `#ifdef NON_MATCHING` with a one-line `// Unmatched:` note and move on. Use the
