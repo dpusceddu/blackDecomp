@@ -67,8 +67,16 @@ typedef struct PlaybackAllocatorTable {
 #endif
     s16 free_adjust, unknown_12;
     void (*free)(void *, void *, s32);
+    /* UNVERIFIED: hook signatures/roles and complete table extent. Setup uses
+       these adjusted slots after installation and before removal. */
+    s16 install_adjust, unknown_1a;
+    void (*on_install)(void *);
+    s16 remove_adjust, unknown_22;
+    void (*on_remove)(void *);
 } PlaybackAllocatorTable;
 typedef struct PlaybackAllocator { PlaybackAllocatorTable *vtable; } PlaybackAllocator;
+typedef char PlaybackAllocatorInstallOffset[(u32)&((PlaybackAllocatorTable *)0)->on_install == 0x1c ? 1 : -1];
+typedef char PlaybackAllocatorRemoveOffset[(u32)&((PlaybackAllocatorTable *)0)->on_remove == 0x24 ? 1 : -1];
 typedef char PlaybackCursorOffset[(u32)&((PlaybackState *)0)->cursor == 0x1c8 ? 1 : -1];
 typedef char PlaybackBankOffset[(u32)&((PlaybackState *)0)->bank == 0x98c ? 1 : -1];
 typedef char PlaybackHandlerOffset[(u32)&((PlaybackState *)0)->pose_handler == 0x9c0 ? 1 : -1];
