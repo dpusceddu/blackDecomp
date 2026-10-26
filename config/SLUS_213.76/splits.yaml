@@ -2130,7 +2130,7 @@ splits:
   - {src: src/kynapse/parameter_classes_2d7e08.cpp, range: [0x2d7e08, 0x2d7e78], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d7e08_2d7e78.c, range: [0x2d7e78, 0x2d7f90]}
   - {src: src/kynapse/parameter_classes_2d7f90.cpp, range: [0x2d7f90, 0x2d8000], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d7f90_2d8000.c, range: [0x2d8000, 0x2d8138]}
+  - {src: src/kynapse/tu_2d7f90_2d8000.cpp, range: [0x2d8000, 0x2d8138]}
   - {src: src/kynapse/parameter_classes_2d8138.cpp, range: [0x2d8138, 0x2d81a8], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d8138_2d81a8.c, range: [0x2d81a8, 0x2d8200]}
   - {src: src/kynapse/parameter_changed_int.cpp, range: [0x2d8200, 0x2d8280], flags: [-O2, -G0, -snas, -fbyte-bool]}
