@@ -825,7 +825,7 @@ splits:
   - {src: src/game/ai/tu_1891a8.c, range: [0x1891a8, 0x1891c0]}
   - {src: src/game/ai/tu_1891c0.c, range: [0x1891c0, 0x1894c8]}
   - {src: src/game/ai/tu_1894c8.c, range: [0x1894c8, 0x189550]}
-  - {src: src/game/ai/tu_189550.c, range: [0x189550, 0x18a380]}
+  - {src: src/game/ai/tu_189550.c, range: [0x189550, 0x18a380], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], note: "Native peer admission 0x1895c8 and saved-point refresh 0x18a238 perform VU XYZ subtraction and squared length; j-constrained helpers require the VU register bank."}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x18a380, 0x18a548]}
   - {src: src/game/ai/tu_18a548.c, range: [0x18a548, 0x18a5c0]}
   - {src: src/game/ai/tu_18a5c0.c, range: [0x18a5c0, 0x18aa18], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
@@ -2148,7 +2148,7 @@ splits:
   - {src: src/kynapse/parameter_classes_2d89b8.cpp, range: [0x2d89b8, 0x2d8a20], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d89b8_2d8a20.cpp, range: [0x2d8a20, 0x2d8b48]}
   - {src: src/kynapse/parameter_classes_2d8b48.cpp, range: [0x2d8b48, 0x2d8bb0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d8b48_2d8bb0.c, range: [0x2d8bb0, 0x2d8cd8]}
+  - {src: src/kynapse/tu_2d8b48_2d8bb0.cpp, range: [0x2d8bb0, 0x2d8cd8]}
   - {src: src/kynapse/parameter_classes_2d8cd8.cpp, range: [0x2d8cd8, 0x2d8d40], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d8cd8_2d8d40.cpp, range: [0x2d8d40, 0x2d8e60]}
   - {src: src/kynapse/tu_2d8e60.cpp, range: [0x2d8e60, 0x2d9000]}
@@ -2165,15 +2165,15 @@ splits:
   - {src: src/kynapse/tu_2d97e0.cpp, range: [0x2d97e0, 0x2d99f8]}
   - {src: src/kynapse/tu_2d99f8.cpp, range: [0x2d99f8, 0x2d9b98]}
   - {src: src/kynapse/parameter_classes_2d9b98.cpp, range: [0x2d9b98, 0x2d9c08], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d9b98_2d9c08.c, range: [0x2d9c08, 0x2d9d20]}
+  - {src: src/kynapse/tu_2d9b98_2d9c08.cpp, range: [0x2d9c08, 0x2d9d20]}
   - {src: src/kynapse/parameter_classes_2d9d20.cpp, range: [0x2d9d20, 0x2d9d90], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d9d20_2d9d90.c, range: [0x2d9d90, 0x2d9de8]}
   - {src: src/kynapse/parameter_changed_pair.cpp, range: [0x2d9de8, 0x2d9e70], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/tu_2d9d20_2d9d90.c, range: [0x2d9e70, 0x2d9eb0]}
   - {src: src/kynapse/parameter_classes_2d9eb0.cpp, range: [0x2d9eb0, 0x2d9f20], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2d9eb0_2d9f20.c, range: [0x2d9f20, 0x2da040]}
+  - {src: src/kynapse/tu_2d9eb0_2d9f20.cpp, range: [0x2d9f20, 0x2da040]}
   - {src: src/kynapse/parameter_classes_2da040.cpp, range: [0x2da040, 0x2da0b0], flags: [-O2, -G0, -snas, -fbyte-bool]}
-  - {src: src/kynapse/tu_2da040_2da0b0.c, range: [0x2da0b0, 0x2da208]}
+  - {src: src/kynapse/tu_2da040_2da0b0.cpp, range: [0x2da0b0, 0x2da208]}
   - {src: src/kynapse/factories_2da208.cpp, range: [0x2da208, 0x2da2a0], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/kynapse/behaviors_pathmanager.cpp, range: [0x2da2a0, 0x2da920], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti]}
   - {src: src/kynapse/tu_2da208_2da920.c, range: [0x2da920, 0x2daa70]}
