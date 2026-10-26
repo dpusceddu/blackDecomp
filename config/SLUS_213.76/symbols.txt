@@ -1588,6 +1588,7 @@ Kaim_CAstarData_GetClassInfo = 0x393598; // type:func alias
 GetClassInfoOf5FA10__Fv = 0x393928; // type:func
 Kaim_CPathFinder_GetClassInfo = 0x393928; // type:func alias
 MarkDirtyNow__5Mover = 0x393940; // type:func
+NamedClassRegistry_FindByName = 0x393978; // type:func alias
 GetClassInfoOf66700__Fv = 0x394220; // type:func
 Kaim_CGapDynamicAvoidance_GetClassInfo = 0x394220; // type:func alias
 GetClassInfo__Q24Kaim9SoundPool = 0x394C10; // type:func
