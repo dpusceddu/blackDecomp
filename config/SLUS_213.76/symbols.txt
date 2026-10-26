@@ -2291,3 +2291,8 @@ AnimationGraph_ResolveScaledSpan = 0x350ac8; // type:func alias
 AnimationPlayback_RootMotion = 0x350f28; // type:func alias
 AnimationPlayback_RefreshSpan = 0x351030; // type:func alias
 AnimationPlayback_IsTransitionActive = 0x351168; // type:func alias
+
+// Joint pose overrides.
+AnimationInstance_AppendOverride = 0x3477f0; // type:func alias
+AnimationInstance_RemoveOverride = 0x347858; // type:func alias
+AnimationInstance_FindOverride = 0x3478f0; // type:func alias

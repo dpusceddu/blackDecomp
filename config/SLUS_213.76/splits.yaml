@@ -2806,7 +2806,7 @@ splits:
   - {src: src/animation/tu_3441d0_sample_bone.c, range: [0x3441d0, 0x345500]}
   - {src: src/animation/animation_lifecycle_345500.cpp, range: [0x345500, 0x3461d0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], assembler: sn-min6, data_ranges: [{end: '0x3d1e30', input: .data.animation_null_name, section: .data, start: '0x3d1e18'}, {end: '0x3d1e38', input: .data.animation_none_name, section: .data, start: '0x3d1e30'}, {end: '0x3d20cc', input: .data, kind: unwind, section: .data, start: '0x3d1e38'}, {end: '0x45f0c0', input: .bss, section: .bss, start: '0x45ecb0'}]}
   - {src: src/animation/tu_3461d0.cpp, range: [0x3461d0, 0x3477f0], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti, -fno-common], assembler: sn-min6, data_ranges: [{end: '0x3d20e4', input: .data.pose_cache, section: .data, start: '0x3d20d0'}, {end: '0x46a510', input: .bss, section: .bss, start: '0x45f0c0'}, {end: '0x3d247c', input: .data, kind: unwind, section: .data, start: '0x3d20e4'}], full_tu_context: true, unlinked_context_helpers: [func_00346230, func_00346668, func_00347280]}
-  - {src: src/animation/tu_3477f0.c, range: [0x3477f0, 0x347948]}
+  - {src: src/animation/joint_overrides.c, range: [0x3477f0, 0x347948]}
   - {src: src/animation/tu_347948.c, range: [0x347948, 0x347a28], note: flags or language differ}
   - {src: src/animation/tu_347948_347a28.c, range: [0x347a28, 0x347a50], assembler: sn-min6}
   - {src: src/animation/animation_instance_347a50.cpp, range: [0x347a50, 0x3485e8], flags: [-O2, -G0, -snas, -fbyte-bool, -fno-rtti], data_ranges: [{end: '0x3d2524', input: .data.animation_graph_mode, section: .data, start: '0x3d2520'}, {end: '0x3d2910', input: .data, kind: unwind, section: .data, start: '0x3d2524'}], rodata_type_splits: ['0x40a668']}
