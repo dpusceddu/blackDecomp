@@ -28,12 +28,40 @@ typedef struct Recovered_ChoiceOwner {
     void* selected;
     u8 unk_5C[0x10];
     f32 elapsed;
+    f32 priority;
+    u8 unk_74[0x0C];
 } Recovered_ChoiceOwner;
 typedef char RecoveredChoiceEntrySize[(sizeof(Recovered_ChoiceEntry) == 0xB0) ? 1 : -1];
 typedef char RecoveredChoiceGroupSize[(sizeof(Recovered_ChoiceGroup) == 0x28) ? 1 : -1];
+typedef char RecoveredChoiceOwnerSize[(sizeof(Recovered_ChoiceOwner) == 0x80) ? 1 : -1];
 extern void* D_0040F4D0;
 extern f32 func_001E1F18(void*);
 extern Recovered_ChoiceEntry* func_001E1788(void*, Recovered_ChoiceGroup*, s32, s32);
+/* Partial selection manager; the meaning of its state fields is UNVERIFIED. */
+typedef struct Recovered_ChoiceManager {
+    u8 unk_00[0x244];
+    s32 unk_244;
+    s32 unk_248;
+    s32 unk_24C;
+    u8 unk_250[0x10];
+    u8 unk_260;
+    u8 unk_261[3];
+    s32 unk_264;
+    Recovered_ChoiceOwner* objects;
+    Recovered_ChoiceOwner** ordered;
+    s32 count;
+    s32 unk_274;
+    s32 unk_278;
+    s32 unk_27C;
+    s32 unk_280;
+    s32 unk_284;
+    s32 unk_288;
+    u8 unk_28C;
+} Recovered_ChoiceManager;
+extern void* func_00107D20(s32);
+extern void func_001E1720(Recovered_ChoiceOwner*);
+extern void func_00280A08(void*);
+extern void func_001E2C68(void*, s32, s32);
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E1720);
 #ifdef NON_MATCHING
@@ -118,7 +146,34 @@ f32 func_001E1F28(void) {
     return D_003BD3A8;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E1F38);
+s32 func_001E1F38(Recovered_ChoiceManager* manager, s32 count) {
+    s32 index = 0;
+    manager->count = count;
+    manager->objects = func_00107D20((u32)count << 7);
+    manager->ordered = func_00107D20((u32)count * 4U);
+    if (manager->count > 0) {
+        do {
+            func_001E1720(&manager->objects[index]);
+            manager->ordered[index] = &manager->objects[index];
+            index++;
+        } while (index < manager->count);
+    }
+    func_00280A08(manager);
+    manager->unk_248 = 0;
+    manager->unk_24C = 0;
+    manager->unk_274 = 0;
+    manager->unk_278 = 0;
+    manager->unk_280 = 0;
+    manager->unk_264 = 0;
+    manager->unk_288 = 0;
+    manager->unk_27C = 0;
+    manager->unk_260 = 0;
+    func_001E2C68(manager, 0, 0);
+    manager->unk_28C = 0;
+    manager->unk_244 = 1;
+    manager->unk_284 = 0;
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E2020);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E2540);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E26D0);
