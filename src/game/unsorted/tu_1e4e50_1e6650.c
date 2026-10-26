@@ -12,6 +12,8 @@ extern Recovered_PlaybackServices* D_0040F510;
 extern void* func_001D8478(void*);
 extern void func_001D84C8(void*, void*);
 extern s32 D_003BD4D0;
+/* The callee return width is UNVERIFIED; this caller consumes its low byte. */
+extern s8 func_001E60A8(void*, u64);
 
 /* Partial slot pool; the capacity and slot meanings are UNVERIFIED. */
 typedef struct Recovered_SlotPool {
@@ -31,7 +33,9 @@ typedef struct Recovered_PoolState {
     s32 unk_0C;
     u8 unk_10[4];
     u32 unk_14;
-    u8 unk_18[0xC];
+    u8 unk_18[8];
+    u8 unk_20;
+    u8 unk_21[3];
     s32 unk_24;
     u8 unk_28[4];
     f32 unk_2C;
@@ -192,7 +196,17 @@ s32 func_001E6B70(s32 arg0, void *arg1) {
 
 /* The meanings of these 64-bit keys are UNVERIFIED. */
 s32 func_001E6B88(void* owner, u64 key) { return key == 0x81F2D7A540000000UL || key == 0x8218186380000000UL; }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6BD0);
+s32 func_001E6BD0(Recovered_PoolState* state, void* unused, u64 key) {
+    s8 found = func_001E60A8(state->unk_04, key);
+    state->unk_20 = found;
+    if (found & 0xFF) {
+        s32 allowed = ((u32)state->unk_00 - 3U) >= 2U;
+        if (allowed) { return 1; }
+    } else {
+        if (state->unk_00 == 0) { return 1; }
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6C38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6E50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E7078);
