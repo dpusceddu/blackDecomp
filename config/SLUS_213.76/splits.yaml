@@ -1795,9 +1795,9 @@ splits:
   - {src: src/game/unsorted/tu_26f258.c, range: [0x26f258, 0x26f2e0]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x26f2e0, 0x26f320]}
   - {src: src/game/unsorted/tu_26f320.c, range: [0x26f320, 0x26f440]}
-  - {src: src/game/unsorted/tu_26f440.c, range: [0x26f440, 0x26f580]}
+  - {src: src/game/ui/tu_26f440.c, range: [0x26f440, 0x26f580]}
   - {src: src/game/ui/tu_26f440_26f580.cpp, range: [0x26f580, 0x26f640]}
-  - {src: src/game/unsorted/tu_26f440.c, range: [0x26f640, 0x270138]}
+  - {src: src/game/ui/tu_26f440.c, range: [0x26f640, 0x270138]}
   - {src: src/game/unsorted/tu_270138.c, range: [0x270138, 0x271348]}
   - {src: src/game/unsorted/tu_271348.c, range: [0x271348, 0x271368]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x271368, 0x2715f0]}
