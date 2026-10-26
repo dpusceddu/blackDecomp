@@ -6,34 +6,52 @@
 /* Partial native views; original class identities and full actor allocations
  * are unknown. groupKey is the word compared when filtering peer records. */
 typedef struct {
-    u8 unk_00[0x30];
+    u8 unk_00[0x20];
+    s128 unk_20; // UNVERIFIED: native actor +0x90 vector consumer remains a draft.
     s128 position;
 } Recovered_ManagedTransform;
 
 typedef struct Recovered_ManagedSlot Recovered_ManagedSlot;
+struct Recovered_ManagedSlotDispatch;
 
 typedef struct {
     u8 unk_00[0x70];
     Recovered_ManagedTransform transform;
-    u8 unk_B0[0x14];
+    u8 unk_B0[4];
+    void* body; // Confirmed at +0xb4 by the exact RenderableState::Update body access.
+    u8 unk_B8[0xC];
     s32 unk_C4; // Native actor category; the gameplay meaning of category 2 is unknown.
-    u8 unk_C8[0x264];
+    u8 unk_C8[0x248];
+    f32 unk_310;
+    f32 unk_314;
+    u8 unk_318[0x14];
     Recovered_ManagedSlot* managedSlot;
     u8 unk_330[0x50];
     s32 recordId; // Actor-slot id used by record lookup.
     u8 unk_384[8];
-    u32 invalid; // UNVERIFIED: registration guard source remains a draft.
-    u8 unk_390[0x14];
+    u32 invalid; // UNVERIFIED: native state word; registration rejects nonzero, another guard skips 2.
+    u8 unk_390[0x10];
+    s32 unk_3A0;
     u32 groupKey;
+    u8 unk_3A8[5];
+    u8 controlsChanged;
+    u8 unk_3AE[6];
+    u8 unk_3B4;
+    u8 unk_3B5;
+    u8 unk_3B6;
+    u8 unk_3B7;
 } Recovered_ManagedActor;
 
 struct Recovered_ManagedSlot {
-    u8 unk_00[0x78];
+    u8 unk_00[0x50];
+    s128 unk_50; // UNVERIFIED: fallback vector consumer remains a draft.
+    u8 unk_60[0x18];
     u8 active;
     u8 unk_79[3];
     Recovered_ManagedActor* actor;
     s32 unk_80; // UNVERIFIED: query eligibility compares this native word with 1.
-    u8 unk_84[0xCC];
+    struct Recovered_ManagedSlotDispatch* dispatch84; // UNVERIFIED: adjusted virtual consumer remains a draft.
+    u8 unk_88[0xC8];
     Recovered_ActorRecords records;
     u8 unk_290[0x460];
     u8 events[0x5A4];
@@ -54,6 +72,13 @@ typedef struct {
     BkEffectRandomStatePS2 random;
 } Recovered_AIManager;
 
+/* Only accessed spans are modeled; full actor/component extents remain unknown.
+ * Existing exact 0x135e28/0x135ea8 accesses confirm mode and scalar-control fields;
+ * 0x135c78 confirms the changed byte. Their broader gameplay roles remain open. */
+typedef char ManagedActorBodyOffset[(u32)&((Recovered_ManagedActor*)0)->body == 0xB4 ? 1 : -1];
+typedef char ManagedActorControlModeOffset[(u32)&((Recovered_ManagedActor*)0)->unk_3A0 == 0x3A0 ? 1 : -1];
+typedef char ManagedActorControlChangedOffset[(u32)&((Recovered_ManagedActor*)0)->controlsChanged == 0x3AD ? 1 : -1];
+typedef char ManagedSlotDispatchOffset[(u32)&((Recovered_ManagedSlot*)0)->dispatch84 == 0x84 ? 1 : -1];
 typedef char ManagedActorSlotPointerOffset[(u32)&((Recovered_ManagedActor*)0)->managedSlot == 0x32C ? 1 : -1];
 typedef char ManagedSlotStride[sizeof(Recovered_ManagedSlot) == 0x1FD0 ? 1 : -1];
 typedef char ManagedSlotRecords[(u32) & ((Recovered_ManagedSlot*)0)->records == 0x150 ? 1 : -1];
