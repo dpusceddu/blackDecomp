@@ -2284,3 +2284,10 @@ AnimationPlayback_BeginGraph = 0x350570; // type:func alias
 AnimationPlayback_ScanTransitions = 0x350650; // type:func alias
 AnimationPlayback_FindTransition = 0x3507c0; // type:func alias
 AnimationPlayback_TryGraph = 0x350890; // type:func alias
+
+// Playback transition timing and span updates.
+Graph_Advance = 0x350a50; // type:func alias
+AnimationGraph_ResolveScaledSpan = 0x350ac8; // type:func alias
+AnimationPlayback_RootMotion = 0x350f28; // type:func alias
+AnimationPlayback_RefreshSpan = 0x351030; // type:func alias
+AnimationPlayback_IsTransitionActive = 0x351168; // type:func alias

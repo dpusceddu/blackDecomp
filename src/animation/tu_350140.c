@@ -125,7 +125,7 @@ float AnimationPlayback_TransitionCoordinate(PlaybackState* state, AnimationTran
     return state->current;
 }
 
-extern void AnimationPlayback_RefreshSpan(PlaybackState*, void*, void*) ANIMATION_FUNCTION(00351030);
+extern float AnimationPlayback_RefreshSpan(PlaybackState*, void*, void*) ANIMATION_FUNCTION(00351030);
 void AnimationPlayback_BindGraph(PlaybackState*, int) ANIMATION_FUNCTION(00350410);
 void AnimationPlayback_BindGraph(PlaybackState* state, int graphId) {
     AnimationGraphNode* graph = FindGraph(state, graphId);

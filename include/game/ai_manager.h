@@ -25,7 +25,9 @@ typedef struct {
     void* body; // Confirmed at +0xb4 by the exact RenderableState::Update body access.
     u8 unk_B8[0xC];
     s32 unk_C4; // Native actor category; the gameplay meaning of category 2 is unknown.
-    u8 unk_C8[0x230];
+    u8 unk_C8[0x190];
+    f32 unk_258; // UNVERIFIED: native flag setup randomizes this scalar; its gameplay role is unknown.
+    u8 unk_25C[0x9C];
     f32 unk_2F8; // UNVERIFIED: native creation writes FLT_MAX or 100.0; original field role is unknown.
     u8 unk_2FC[0x14];
     f32 unk_310;
@@ -41,7 +43,8 @@ typedef struct {
     u8 unk_390[0x10];
     s32 unk_3A0;
     u32 groupKey;
-    u8 unk_3A8[5];
+    u8 unk_3A8[4];
+    u8 unk_3AC; // UNVERIFIED: native flag setup writes this byte; its gameplay role is unknown.
     u8 controlsChanged;
     u8 unk_3AE[6];
     u8 unk_3B4;
@@ -49,6 +52,14 @@ typedef struct {
     u8 unk_3B6;
     u8 unk_3B7;
 } Recovered_ManagedActor;
+
+/* UNVERIFIED: only the parameterized creation draft accesses these query
+ * fields. Original class, gameplay roles and complete query extent are unknown. */
+typedef struct {
+    u8 unk_00[0x14];
+    f32 unk_14, unk_18, unk_1C;
+    u8 unk_20;
+} Recovered_ManagedSlotQuery;
 
 struct Recovered_ManagedSlot {
     u8 unk_00[0x50];
@@ -65,8 +76,15 @@ struct Recovered_ManagedSlot {
     u8 events[0x5A4];
     u8 query[0x125C];
     Recovered_ManagedSlot* freeNext;
-    u8 unk_1EF4[0xDC];
+    u8 unk_1EF4[0xD0];
+    u32 unk_1FC4; // UNVERIFIED: assigned by the parameterized creation draft; original role is unknown.
+    u32 unk_1FC8; // UNVERIFIED: assigned from a descriptor byte by the same draft.
+    u8 unk_1FCC[4];
 };
+
+static inline Recovered_ManagedSlotQuery* ManagedSlot_Query(Recovered_ManagedSlot* slot) {
+    return (Recovered_ManagedSlotQuery*)slot->query;
+}
 
 typedef struct {
     u8 unk_00[0xA48];
@@ -86,6 +104,8 @@ typedef struct {
 typedef char ManagedActor08Offset[(u32)&((Recovered_ManagedActor*)0)->unk_08 == 8 ? 1 : -1];
 typedef char ManagedActor0COffset[(u32)&((Recovered_ManagedActor*)0)->unk_0C == 0xC ? 1 : -1];
 typedef char ManagedActor324Offset[(u32)&((Recovered_ManagedActor*)0)->unk_324 == 0x324 ? 1 : -1];
+typedef char ManagedActor258Offset[(u32)&((Recovered_ManagedActor*)0)->unk_258 == 0x258 ? 1 : -1];
+typedef char ManagedActor3ACOffset[(u32)&((Recovered_ManagedActor*)0)->unk_3AC == 0x3AC ? 1 : -1];
 typedef char ManagedActor2F8Offset[(u32)&((Recovered_ManagedActor*)0)->unk_2F8 == 0x2F8 ? 1 : -1];
 typedef char ManagedActorBodyOffset[(u32)&((Recovered_ManagedActor*)0)->body == 0xB4 ? 1 : -1];
 typedef char ManagedActorControlModeOffset[(u32)&((Recovered_ManagedActor*)0)->unk_3A0 == 0x3A0 ? 1 : -1];
@@ -95,6 +115,10 @@ typedef char ManagedActorSlotPointerOffset[(u32)&((Recovered_ManagedActor*)0)->m
 typedef char ManagedSlotStride[sizeof(Recovered_ManagedSlot) == 0x1FD0 ? 1 : -1];
 typedef char ManagedSlotRecords[(u32) & ((Recovered_ManagedSlot*)0)->records == 0x150 ? 1 : -1];
 typedef char ManagedSlotEvents[(u32) & ((Recovered_ManagedSlot*)0)->events == 0x6F0 ? 1 : -1];
+typedef char ManagedSlotQuery14Offset[(u32)&((Recovered_ManagedSlotQuery*)0)->unk_14 == 0x14 ? 1 : -1];
+typedef char ManagedSlotQuery20Offset[(u32)&((Recovered_ManagedSlotQuery*)0)->unk_20 == 0x20 ? 1 : -1];
+typedef char ManagedSlot1FC4Offset[(u32)&((Recovered_ManagedSlot*)0)->unk_1FC4 == 0x1FC4 ? 1 : -1];
+typedef char ManagedSlot1FC8Offset[(u32)&((Recovered_ManagedSlot*)0)->unk_1FC8 == 0x1FC8 ? 1 : -1];
 typedef char ManagedSlotQuery[(u32) & ((Recovered_ManagedSlot*)0)->query == 0xC94 ? 1 : -1];
 typedef char ManagerSlots[(u32) & ((Recovered_AIManager*)0)->slots == 0x2B00 ? 1 : -1];
 typedef char ManagerRandom[(u32) & ((Recovered_AIManager*)0)->random == 0x22BC0 ? 1 : -1];
