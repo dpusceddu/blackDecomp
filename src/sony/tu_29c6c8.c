@@ -8,7 +8,7 @@ extern s32 func_0029B998(s32 index);
 extern s32 func_0029BA58(s32 index);
 extern s32 func_0036A038(const char* format, ...);
 extern void* func_0035C544(void* dest, const void* source, u32 size);
-extern void* func_0035C6EC(void* dest, s32 value, u32 size);
+extern void* memset(void* dest, s32 value, u32 size);
 extern void func_003680A0(void* start, void* end);
 
 s32 Pad2_Initialize(s32 unused) {
@@ -154,7 +154,7 @@ void Pad2_ClearPackets(s32 index) {
         packet->formatSize = 0;
         packet->payloadSize = 0;
         packet->available = 0;
-        func_0035C6EC(packet->data, 255, 32);
+        memset(packet->data, 255, 32);
         ++packet;
     } while (--count >= 0);
 }

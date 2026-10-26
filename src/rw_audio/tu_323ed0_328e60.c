@@ -3,9 +3,9 @@
 #include "ps2/prototypes.h"
 #include "rw_audio/sample.h"
 
-extern s32 func_0036D518();
+extern s32 DIntr();
 extern s32 (*D_003D113C)();
-extern s32 func_0036D568();
+extern s32 EIntr();
 extern void func_00329710();
 
 extern Recovered_AudioHandlePool D_0045C120;
@@ -19,14 +19,14 @@ void func_00328E60(s32 arg0) {
     u8 sp[8] __attribute__((aligned(16)));
 
     *(s32 *)(sp + 0) = arg0;
-    func_0036D518();
+    DIntr();
     if (D_003D113C != NULL) {
         D_003D113C(*(s32 *)(sp + 0));
-        func_0036D568();
+        EIntr();
         return;
     }
     func_00329710(&D_0045C120, sp);
-    func_0036D568();
+    EIntr();
 }
 
 void* AudioHandle_Resolve(u32 handle) {

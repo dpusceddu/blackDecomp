@@ -27,7 +27,7 @@ extern Recovered_TransitionContext* D_0040F0E0;
 extern void* D_0040F0E8;
 extern Recovered_TransitionServices* D_0040F544;
 extern u8 D_003F2520[];
-extern void* func_0035C6EC(void*, s32, u32);
+extern void* memset(void*, s32, u32);
 extern void* func_002A9108(void*, void*, s32);
 extern void func_00274540(void);
 extern void func_00107A00(void*);
@@ -45,7 +45,7 @@ extern void func_00103800(Recovered_TransitionContext*, s8);
 static inline void TransitionClearFrame(Recovered_TransitionContext* self) {
     BkRenderBufferPS2* buffer = &D_0040F4C0->buffers[0];
     u32 clearValue;
-    func_0035C6EC(&clearValue, 0, sizeof(clearValue));
+    memset(&clearValue, 0, sizeof(clearValue));
     func_002A9108(buffer->geometry, &clearValue, 3);
     func_00274540();
     if (self->unk_210CC) func_00107A00(D_0040F0E8);

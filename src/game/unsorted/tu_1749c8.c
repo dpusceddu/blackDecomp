@@ -8,7 +8,7 @@ extern void * func_00135550();
 extern s32 func_0018D3A0();
 extern void* func_00107D20();
 extern s32 func_001749E8();
-extern void func_00174C08();
+extern void Sequence_ShuffleIndices();
 extern s32 func_00183238(s32);
 extern s32 func_00173F18();
 extern s32 func_00183688();
@@ -18,7 +18,7 @@ extern s32 func_00173EE0();
 extern s32 func_00107BC0(void*, void*);
 extern u8 D_0040F0F0[];
 extern void* D_0040F4D4;
-extern s32 func_0016DEF0(void*, s32, s32);
+extern s32 AIManager_RandomInteger(void*, s32, s32);
 extern void func_00173E30(void*, s32, f32);
 extern s32 func_0018DDD8(void*);
 extern void func_00183618(void*, void*, void*);
@@ -106,8 +106,8 @@ void Sequence_ShuffleIndices(void* self, s8* order, s32 count) {
     if (count >= 2) {
         s32 last = count - 1;
         for (i = 0; i < 42; i++) {
-            s32 first = func_0016DEF0(D_0040F4D4, 0, last);
-            s32 second = func_0016DEF0(D_0040F4D4, 0, last);
+            s32 first = AIManager_RandomInteger(D_0040F4D4, 0, last);
+            s32 second = AIManager_RandomInteger(D_0040F4D4, 0, last);
             if (first != second) {
                 s8 saved = order[first];
                 order[first] = order[second];
@@ -144,7 +144,7 @@ s32 func_00174D48(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (temp_5 != 0) {
         temp_3 = M2C_FIELD(((M2C_FIELD(arg2, u8 *, 0x44) * 8) + M2C_FIELD(arg3, s32 *, 0x14)), u8 *, 4);
         M2C_FIELD(arg0, s32 *, 0x2C) = (s32) temp_3;
-        func_00174C08(arg0, temp_5, (s32) temp_3);
+        Sequence_ShuffleIndices(arg0, temp_5, (s32) temp_3);
     }
     return 1;
 }
@@ -327,7 +327,7 @@ s32 func_00175250(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (temp_5 != 0) {
         temp_3 = M2C_FIELD(((M2C_FIELD(arg2, u8 *, 0x27) * 8) + M2C_FIELD(arg3, s32 *, 0x14)), u8 *, 4);
         M2C_FIELD(arg0, s32 *, 0x2C) = (s32) temp_3;
-        func_00174C08(arg0, temp_5, (s32) temp_3);
+        Sequence_ShuffleIndices(arg0, temp_5, (s32) temp_3);
     }
     return 1;
 }
@@ -377,7 +377,7 @@ s32 func_001753B8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (temp_5 != 0) {
         temp_3 = M2C_FIELD(((M2C_FIELD(arg2, u8 *, 0x33) * 8) + M2C_FIELD(arg3, s32 *, 0x14)), u8 *, 4);
         M2C_FIELD(arg0, s32 *, 0x2C) = (s32) temp_3;
-        func_00174C08(arg0, temp_5, (s32) temp_3);
+        Sequence_ShuffleIndices(arg0, temp_5, (s32) temp_3);
     }
     return 1;
 }
@@ -427,7 +427,7 @@ s32 func_00175520(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     if (temp_5 != 0) {
         temp_3 = M2C_FIELD(((M2C_FIELD(arg2, u8 *, 0x2E) * 8) + M2C_FIELD(arg3, s32 *, 0x14)), u8 *, 4);
         M2C_FIELD(arg0, s32 *, 0x2C) = (s32) temp_3;
-        func_00174C08(arg0, temp_5, (s32) temp_3);
+        Sequence_ShuffleIndices(arg0, temp_5, (s32) temp_3);
     }
     return 1;
 }

@@ -22,7 +22,7 @@ extern s32 func_00178F18(void*);
 extern s32 func_001897E8(Recovered_ActorRecords*, s32, s32);
 extern void func_00188A40(void*, s32);
 void func_0018A790(Recovered_ActorRecords*, void*);
-void func_0018A8D8(Recovered_ActorRecords*, s32, void*);
+void ActorRecords_CopyPeerRecord(Recovered_ActorRecords*, s32, void*);
 
 void ActorRecords_ImportEligiblePeer(Recovered_ActorRecords* self) {
     if (!func_00188F10(self)) {
@@ -79,7 +79,7 @@ void func_0018A790(Recovered_ActorRecords* self, void* other) {
         Recovered_ActorRecord* record = (Recovered_ActorRecord*)((s8*)other + 0x150);
         s32 i;
         for (i = 0; i < 3; i++, record++) {
-            if (record->id != -1) func_0018A8D8(self, record->id, other);
+            if (record->id != -1) ActorRecords_CopyPeerRecord(self, record->id, other);
         }
     }
     if (self->current == -1) {
@@ -142,5 +142,5 @@ void ActorRecords_CopyPeerRecord(Recovered_ActorRecords* self, s32 id, void* oth
 }
 
 void func_0018A9C8(s32 arg0, s32 arg1, s32 arg2) {
-    func_0018A8D8((Recovered_ActorRecords*)arg0, func_001792B0(D_0040F4D4 + 0xFA8), (void*)arg2);
+    ActorRecords_CopyPeerRecord((Recovered_ActorRecords*)arg0, func_001792B0(D_0040F4D4 + 0xFA8), (void*)arg2);
 }

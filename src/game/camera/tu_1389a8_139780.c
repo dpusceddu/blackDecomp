@@ -9,9 +9,9 @@ extern s32 func_00107D20();
 extern void* D_0040F4D0;
 extern const f32 D_003F49BC;
 extern const f32 D_003F49C0;
-void func_001398E0(Recovered_SelectionPool*, Recovered_SelectionMember*);
-Recovered_SelectionMember* func_00139940(Recovered_SelectionPool*);
-f32 func_00139A70(Recovered_SelectionPool*, Recovered_SelectionMember*);
+void SelectionPool_Remove(Recovered_SelectionPool*, Recovered_SelectionMember*);
+Recovered_SelectionMember* SelectionPool_First(Recovered_SelectionPool*);
+f32 SelectionPool_Score(Recovered_SelectionPool*, Recovered_SelectionMember*);
 
 static inline Recovered_SelectionMember** SelectionSlot(Recovered_SelectionPool* self, s32 index) {
     return (Recovered_SelectionMember**)((u32)self->members + (index * 4));
@@ -49,7 +49,7 @@ s32 SelectionPool_Add(Recovered_SelectionPool* self, Recovered_SelectionMember* 
     s32 i;
     for (i = 0; i < self->capacity; i++) {
         if (self->members[i] == NULL) {
-            if (member->pool != NULL) func_001398E0(member->pool, member);
+            if (member->pool != NULL) SelectionPool_Remove(member->pool, member);
             member->pool = self;
             self->members[i] = member;
             self->count++;
@@ -85,11 +85,11 @@ Recovered_SelectionMember* func_00139980(Recovered_SelectionPool* self) {
     f32 best = D_003F49BC;
     s32 bestIndex = -1;
     s32 i;
-    if (self->flags == 0) return func_00139940(self);
+    if (self->flags == 0) return SelectionPool_First(self);
     for (i = 0; i < self->capacity; i++) {
         Recovered_SelectionMember* member = self->members[i];
         if (member != NULL && (!(self->flags & 4) || member->active)) {
-            f32 score = func_00139A70(self, member);
+            f32 score = SelectionPool_Score(self, member);
             if (best < score) {
                 best = score;
                 bestIndex = i;

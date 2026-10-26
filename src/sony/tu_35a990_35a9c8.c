@@ -4,7 +4,7 @@
 extern s32 func_0035B738();
 extern s32 func_0035B910();
 extern s32 func_0035BAE8();
-extern s32 func_0035B0E8();
+extern s32 MemoryCard_ReadCachedCluster();
 extern s32 func_0035AD50();
 
 void func_0035A9C8(void) {
@@ -20,7 +20,7 @@ void func_0035AA08(void) {
 }
 
 void func_0035B228(void) {
-    func_0035B0E8();
+    MemoryCard_ReadCachedCluster();
 }
 
 void func_0035B248(void) {
