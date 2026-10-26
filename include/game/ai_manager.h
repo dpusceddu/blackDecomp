@@ -31,15 +31,19 @@ typedef struct {
     u8 unk_C8[0x190];
     f32 unk_258; // Exact 0x137b08 writes a random integer minus a random float; gameplay role is unknown.
     u8 unk_25C[0x10];
-    void* unk_26C; // UNVERIFIED: native layer-entry predicate accesses a selector and pointer table here.
+    void* unk_26C; // Exact 0x137490 forwards this pointer; selector/table accesses remain UNVERIFIED drafts.
     u8 unk_270[0x34];
     void* unk_2A4; // UNVERIFIED: native slot-state predicate tests this pointer; original role is unknown.
-    u8 unk_2A8[0x50];
+    u8 unk_2A8[0x40];
+    f32 unk_2E8; // UNVERIFIED: native geometry drafts use this vertical bound; original role is unknown.
+    u8 unk_2EC[0xC];
     f32 unk_2F8; // UNVERIFIED: native creation writes FLT_MAX or 100.0; original field role is unknown.
     u8 unk_2FC[0x14];
     f32 unk_310;
     f32 unk_314;
-    u8 unk_318[0xC];
+    f32 unk_318; // UNVERIFIED: native horizontal-bound draft uses half this scalar; original role is unknown.
+    u8 unk_31C[4];
+    void* unk_320; // UNVERIFIED: native downward trace retains Hit +0x24 here; gameplay role is unknown.
     struct Recovered_ActorCreationDescriptor* unk_324; // UNVERIFIED: native creation retains its descriptor here.
     void* unk_328; // UNVERIFIED: native layer-kind predicate passes this record to the exact +4 getter.
     Recovered_ManagedSlot* managedSlot;
@@ -122,6 +126,9 @@ typedef char ManagedActor26COffset[(u32)&((Recovered_ManagedActor*)0)->unk_26C =
 typedef char ManagedActor2A4Offset[(u32)&((Recovered_ManagedActor*)0)->unk_2A4 == 0x2A4 ? 1 : -1];
 typedef char ManagedActor328Offset[(u32)&((Recovered_ManagedActor*)0)->unk_328 == 0x328 ? 1 : -1];
 typedef char ManagedSlot31Offset[(u32)&((Recovered_ManagedSlot*)0)->unk_31 == 0x31 ? 1 : -1];
+typedef char ManagedActor2E8Offset[(u32)&((Recovered_ManagedActor*)0)->unk_2E8 == 0x2E8 ? 1 : -1];
+typedef char ManagedActor318Offset[(u32)&((Recovered_ManagedActor*)0)->unk_318 == 0x318 ? 1 : -1];
+typedef char ManagedActor320Offset[(u32)&((Recovered_ManagedActor*)0)->unk_320 == 0x320 ? 1 : -1];
 typedef char ManagedActor2F8Offset[(u32)&((Recovered_ManagedActor*)0)->unk_2F8 == 0x2F8 ? 1 : -1];
 typedef char ManagedActorBodyOffset[(u32)&((Recovered_ManagedActor*)0)->body == 0xB4 ? 1 : -1];
 typedef char ManagedActorControlModeOffset[(u32)&((Recovered_ManagedActor*)0)->unk_3A0 == 0x3A0 ? 1 : -1];
