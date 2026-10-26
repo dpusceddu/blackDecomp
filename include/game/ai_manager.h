@@ -26,15 +26,19 @@ typedef struct {
     u8 unk_B8[0xC];
     s32 unk_C4; // Native actor category; the gameplay meaning of category 2 is unknown.
     u8 unk_C8[0x190];
-    f32 unk_258; // UNVERIFIED: native flag setup randomizes this scalar; its gameplay role is unknown.
-    u8 unk_25C[0x9C];
+    f32 unk_258; // Exact 0x137b08 writes a random integer minus a random float; gameplay role is unknown.
+    u8 unk_25C[0x10];
+    void* unk_26C; // UNVERIFIED: native layer-entry predicate accesses a selector and pointer table here.
+    u8 unk_270[0x34];
+    void* unk_2A4; // UNVERIFIED: native slot-state predicate tests this pointer; original role is unknown.
+    u8 unk_2A8[0x50];
     f32 unk_2F8; // UNVERIFIED: native creation writes FLT_MAX or 100.0; original field role is unknown.
     u8 unk_2FC[0x14];
     f32 unk_310;
     f32 unk_314;
     u8 unk_318[0xC];
     struct Recovered_ActorCreationDescriptor* unk_324; // UNVERIFIED: native creation retains its descriptor here.
-    u8 unk_328[4];
+    void* unk_328; // UNVERIFIED: native layer-kind predicate passes this record to the exact +4 getter.
     Recovered_ManagedSlot* managedSlot;
     u8 unk_330[0x50];
     s32 recordId; // Actor-slot id used by record lookup.
@@ -44,7 +48,7 @@ typedef struct {
     s32 unk_3A0;
     u32 groupKey;
     u8 unk_3A8[4];
-    u8 unk_3AC; // UNVERIFIED: native flag setup writes this byte; its gameplay role is unknown.
+    u8 unk_3AC; // Exact 0x137b08 confirms flag storage; its gameplay role is unknown.
     u8 controlsChanged;
     u8 unk_3AE[6];
     u8 unk_3B4;
@@ -62,7 +66,9 @@ typedef struct {
 } Recovered_ManagedSlotQuery;
 
 struct Recovered_ManagedSlot {
-    u8 unk_00[0x50];
+    u8 unk_00[0x31];
+    u8 unk_31; // UNVERIFIED: native slot-state predicate tests this byte; original role is unknown.
+    u8 unk_32[0x1E];
     s128 unk_50; // UNVERIFIED: fallback vector consumer remains a draft.
     u8 unk_60[0x18];
     u8 active;
@@ -106,6 +112,10 @@ typedef char ManagedActor0COffset[(u32)&((Recovered_ManagedActor*)0)->unk_0C == 
 typedef char ManagedActor324Offset[(u32)&((Recovered_ManagedActor*)0)->unk_324 == 0x324 ? 1 : -1];
 typedef char ManagedActor258Offset[(u32)&((Recovered_ManagedActor*)0)->unk_258 == 0x258 ? 1 : -1];
 typedef char ManagedActor3ACOffset[(u32)&((Recovered_ManagedActor*)0)->unk_3AC == 0x3AC ? 1 : -1];
+typedef char ManagedActor26COffset[(u32)&((Recovered_ManagedActor*)0)->unk_26C == 0x26C ? 1 : -1];
+typedef char ManagedActor2A4Offset[(u32)&((Recovered_ManagedActor*)0)->unk_2A4 == 0x2A4 ? 1 : -1];
+typedef char ManagedActor328Offset[(u32)&((Recovered_ManagedActor*)0)->unk_328 == 0x328 ? 1 : -1];
+typedef char ManagedSlot31Offset[(u32)&((Recovered_ManagedSlot*)0)->unk_31 == 0x31 ? 1 : -1];
 typedef char ManagedActor2F8Offset[(u32)&((Recovered_ManagedActor*)0)->unk_2F8 == 0x2F8 ? 1 : -1];
 typedef char ManagedActorBodyOffset[(u32)&((Recovered_ManagedActor*)0)->body == 0xB4 ? 1 : -1];
 typedef char ManagedActorControlModeOffset[(u32)&((Recovered_ManagedActor*)0)->unk_3A0 == 0x3A0 ? 1 : -1];

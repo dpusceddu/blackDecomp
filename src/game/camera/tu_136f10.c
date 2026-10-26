@@ -1,6 +1,11 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
+#include "game/actor/control_view.h"
+
+extern void* D_0040F4D0;
+extern s32 func_0012D158(void*, s32, s32);
+extern f32 func_0012D0D0(void*, f32, f32);
 
 extern void * D_0040F4BC;
 extern s32 D_003BD140;
@@ -42,7 +47,12 @@ s32 func_00137AE0(void *arg0) {
     return D_003BD140;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137B08);
+void func_00137B08(Recovered_ManagedActor* actor, u8 flag) {
+    s32 integer;
+    actor->unk_3AC = flag;
+    integer = func_0012D158(D_0040F4D0, -128, 0);
+    actor->unk_258 = integer - func_0012D0D0(D_0040F4D0, 0.6f, 0.9999f);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137B88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137CA0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137E88);
