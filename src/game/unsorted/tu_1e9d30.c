@@ -15,17 +15,54 @@ typedef struct Recovered_ModeOwner {
     u8 delay;
 } Recovered_ModeOwner;
 typedef struct Recovered_ModeEntry {
-    u8 unk_00[0x138];
+    f32 pairs[18][2];
+    f32 weights[18];
+    u8 flags[18];
+    u8 unk_EA;
+    u8 unk_EB[0x45];
+    u64 key;
     f32 expiry;
     u8 unk_13C;
     u8 unk_13D;
     u8 unk_13E[2];
 } Recovered_ModeEntry;
+typedef char RecoveredModeEntrySize[(sizeof(Recovered_ModeEntry) == 0x140) ? 1 : -1];
 extern void* D_0040F4D0;
 extern s32 func_001EA728(void*, u64, s32*);
 extern void func_001EA2D0(Recovered_ModeOwner*);
 
+#ifdef NON_MATCHING
+// Unmatched: mode-entry address calculations and store scheduling differ.
+s32 func_001E9D30(Recovered_ModeOwner* owner) {
+    Recovered_ModeEntry* entries = (Recovered_ModeEntry*)&D_0042A630;
+    s32 index = 0;
+    s32 result;
+    owner->active = 1;
+    owner->current = 0;
+    owner->delay = 0;
+    owner->previous = 0;
+    do {
+        Recovered_ModeEntry* entry = &entries[index];
+        s32 item;
+        entry->key = D_003F9410[index];
+        entry->unk_EA = 0;
+        entry->unk_13C = 0;
+        entry->unk_13D = 0;
+        entry->expiry = -1.0f;
+        for (item = 0; item < 18; item++) {
+            entry->pairs[item][0] = 1.0f;
+            entry->pairs[item][1] = 1.0f;
+            entry->weights[item] = 0.25f;
+            entry->flags[item] = 0;
+        }
+        index++;
+        result = index < 17;
+    } while (result);
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001E9D30);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001E9E08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001E9EE8);
 #ifdef NON_MATCHING
