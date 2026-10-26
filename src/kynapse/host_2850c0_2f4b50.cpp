@@ -3,6 +3,7 @@
 // Ported from an unpublished companion project.
 #include "kynapse/host_2850c0.hpp"
 #include "kynapse/array_cleanup.h"
+#include "ps2/recovered_types.h"
 #ifdef NON_MATCHING
 #include "game/classes/UnknownVtable_003DC838.hpp"
 #include "game/classes/UnknownVtable_003DC5F8.hpp"
@@ -376,12 +377,51 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038B840);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038BAD8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038BBB0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C098);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C138);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C1D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C278);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C438);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C4D8);
+// The matched lookups confirm the name and count offsets; the remaining descriptor fields are UNVERIFIED.
+extern "C" PS2KaimClassRegistry* func_0038BD60();
+extern "C" PS2KaimClassRegistry* func_0038BDD8();
+extern "C" PS2KaimClassRegistry* func_0038B468();
+extern "C" PS2KaimClassRegistry* func_0038BE50();
+extern "C" PS2KaimClassRegistry* func_0038C3E0();
+extern "C" PS2KaimClassRegistry* func_0038BA30();
+
+static inline PS2KaimClassDescriptor* FindClass(PS2KaimClassRegistry* registry, const char* name) {
+    int i;
+    for (i = 0; i < registry->count; ++i) {
+        if (strcmp(registry->slots[i]->name, name) == 0) return registry->slots[i];
+    }
+    return 0;
+}
+
+extern "C" PS2KaimClassDescriptor* func_0038C098(const char* name) {
+    if (!name) return 0;
+    return FindClass(func_0038BD60(), name);
+}
+extern "C" PS2KaimClassDescriptor* func_0038C138(const char* name) {
+    if (!name) return 0;
+    return FindClass(func_0038BDD8(), name);
+}
+extern "C" PS2KaimClassDescriptor* func_0038C1D8(const char* name) {
+    if (!name) return 0;
+    return FindClass(func_0038B468(), name);
+}
+extern "C" PS2KaimClassDescriptor* func_0038C278(const char* name) {
+    if (!name) return 0;
+    return FindClass(func_0038BE50(), name);
+}
+extern "C" PS2KaimClassDescriptor* func_0038C438(const char* name) {
+    if (!name) return 0;
+    return FindClass(func_0038C3E0(), name);
+}
+extern "C" PS2KaimClassDescriptor* func_0038C4D8(const char* name) {
+    if (!name) return 0;
+    return FindClass(func_0038BA30(), name);
+}
+
+
+
+
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C618);
 extern "C" int D_003E8EE8;
 extern "C" void func_0038CA50(Recovered_KynapseSmallArrayOwner* self, int flags) {
