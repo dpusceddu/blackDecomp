@@ -1,18 +1,14 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "game/playback_request.h"
+#include "game/playback_state_pool.h"
 
 extern Recovered_PlaybackServices* D_0040F510;
-extern Recovered_PlaybackState* func_001D9768(void*, s32);
-extern void* func_001D8478(void*);
-extern void func_001D97C8(void*, Recovered_PlaybackState*);
-extern void func_001D84C8(void*, void*);
 extern void func_001DD158(Recovered_PlaybackState*, Recovered_PlaybackParameters*);
 extern s32 func_001DD728(Recovered_PlaybackState*);
 extern s32 func_001DD3E0(Recovered_PlaybackState*);
 extern void func_001DD6C0(Recovered_PlaybackState*);
-extern void func_001D9450(Recovered_PlaybackState*, void**, s32);
-extern s32 func_001D92A0(Recovered_PlaybackState*, u64, s32, u32*, s32, s32);
+extern s32 func_001D92A0(Recovered_PlaybackState*, u64, Recovered_StreamRange*, u32*, s32, s32);
 extern void func_001DD5D8(Recovered_PlaybackState*, Recovered_PlaybackParameters*);
 
 static inline Recovered_PlaybackPools* PlaybackPools(void) { return &D_0040F510->playbackPools; }
@@ -37,17 +33,17 @@ void* PlaybackRequest_Reset(Recovered_PlaybackRequest* self) {
 
 #ifdef NON_MATCHING
 // Unmatched: global pool address and offset register assignment differ.
-s32 func_001D8E38(Recovered_PlaybackRequest* self, const u32* values, s32 count, s32 kind) {
+s32 func_001D8E38(Recovered_PlaybackRequest* self, const u32* values, s32 count, u64 poolKey) {
     s32 i;
-    void** buffer;
+    Recovered_StreamBuffer** buffer;
     switch (self->state) {
         case 0:
         case 10:
             self->valueCount = count;
             for (i = 0; i < self->valueCount; i++) self->values[i] = *values++;
-            self->playback = func_001D9768(PlaybackPools()->states, kind);
+            self->playback = PlaybackStatePool_AcquireExtended(PlaybackPools()->states, poolKey);
             buffer = self->buffers;
-            for (i = 1; i >= 0; i--, buffer++) *buffer = func_001D8478(PlaybackPools()->buffers);
+            for (i = 1; i >= 0; i--, buffer++) *buffer = StreamBufferPool_Acquire(PlaybackPools()->buffers);
             self->state = 3;
             /* fallthrough */
         case 3: return 1;
@@ -84,7 +80,7 @@ void PlaybackRequest_Update(Recovered_PlaybackRequest* self, Recovered_PlaybackP
 // Unmatched: pool-offset constant and cleanup-loop setup scheduling differ.
 s32 func_001D8FD8(Recovered_PlaybackRequest* self) {
     s32 i;
-    void** buffer;
+    Recovered_StreamBuffer** buffer;
     switch (self->state) {
         case 5:
         case 6:
@@ -101,11 +97,11 @@ s32 func_001D8FD8(Recovered_PlaybackRequest* self) {
         default:
             return 0;
         release:
-            func_001D97C8(PlaybackPools()->states, self->playback);
+            PlaybackStatePool_ReleaseExtended(PlaybackPools()->states, self->playback);
             self->playback = NULL;
             buffer = self->buffers;
             for (i = 1; i >= 0; i--, buffer++) {
-                func_001D84C8(PlaybackPools()->buffers, *buffer);
+                StreamBufferPool_Release(PlaybackPools()->buffers, *buffer);
                 *buffer = NULL;
             }
             for (i = 0; i < self->valueCount; i++) self->values[i] = 0;
@@ -122,7 +118,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8_1d8df8", func_
 
 #ifdef NON_MATCHING
 // Unmatched: switch return joins and predicate branch layout differ.
-s32 func_001D9100(Recovered_PlaybackRequest* self, u64 key, s32 variant) {
+s32 func_001D9100(Recovered_PlaybackRequest* self, u64 key, Recovered_StreamRange* variant) {
     switch (self->state) {
         case 5:
             if (self->variant == variant && self->key == key) goto complete;
@@ -132,7 +128,7 @@ s32 func_001D9100(Recovered_PlaybackRequest* self, u64 key, s32 variant) {
         case 8:
             self->key = key;
             self->variant = variant;
-            func_001D9450(self->playback, self->buffers, 2);
+            PlaybackState_SetBuffers(self->playback, self->buffers, 2);
             self->state = 4;
             /* fallthrough */
         case 4:
