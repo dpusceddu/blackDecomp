@@ -838,7 +838,7 @@ splits:
   - {src: src/game/ai/tu_18ade0.c, range: [0x18ade0, 0x18b168]}
   - {src: src/game/ai/movement/ai_movement_modes_18b168.cpp, range: [0x18b168, 0x18be60], flags: [-O2, -G0, -snas, -fbyte-bool]}
   - {src: src/game/ai/movement/tu_18be60.c, range: [0x18be60, 0x18beb0]}
-  - {src: src/game/ai/movement/tu_18be60_18beb0.c, range: [0x18beb0, 0x18c088]}
+  - {src: src/game/ai/movement/tu_18be60_18beb0.cpp, range: [0x18beb0, 0x18c088]}
   - {src: src/game/ai/movement/tu_18be60_18c088.c, range: [0x18c088, 0x18c168]}
   - {src: src/game/ai/movement/tu_18c168.c, range: [0x18c168, 0x18c178], flags: [-O1, -G0, -snas]}
   - {src: src/game/ai/movement/tu_18c178.c, range: [0x18c178, 0x18c1e0], flags: [-G0, -snas, -O2, -fno-schedule-insns], assembler: sn-min6}
