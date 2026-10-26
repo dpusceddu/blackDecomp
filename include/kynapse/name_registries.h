@@ -2,10 +2,12 @@
 #define KYNAPSE_NAME_REGISTRIES_H
 #include "ps2/prelude.h"
 
-/* Partial C views of the fixed-capacity registries. UNVERIFIED: record accesses
- * are currently used by draft lookups. Count offsets agree with exact lazy
- * singleton accessors. The 16-entry tables resolve pathfinder strategy objects;
- * their concrete interfaces and complete record sizes remain unknown. */
+/* Partial C views of the fixed-capacity registries. Exact class lookup confirms
+ * its record name at +8 and registry count at +0x400; exact lazy singleton
+ * accessors also confirm the count offsets. UNVERIFIED: complete record extents,
+ * inline name capacity and value-record accesses remain provisional. The
+ * 16-entry tables resolve pathfinder strategy objects; their concrete
+ * interfaces remain unknown. */
 typedef struct {
     u8 unk_00[8];
     char name[1]; // UNVERIFIED: inline name capacity is not established.
