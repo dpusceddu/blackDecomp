@@ -1,12 +1,12 @@
 #include "game/audio_playback_control.h"
 
-extern s32 func_001D9100(Recovered_PlaybackRequest*, u64, s32);
+extern s32 func_001D9100(Recovered_PlaybackRequest*, u64, Recovered_StreamRange*);
 
 s32 AudioPlaybackControl_PollFinished(Recovered_AudioPlaybackControl* self) {
     switch (self->state) {
         case 4:
             if (!func_001D9100(self->request, self->descriptor->key,
-                               (s32)((u8*)self->descriptor->variantData + self->variantIndex * 8)))
+                               self->descriptor->variantData + self->variantIndex))
                 break;
             self->state = 5;
         case 1:

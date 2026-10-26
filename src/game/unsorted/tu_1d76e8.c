@@ -43,7 +43,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D7BE
 #endif
 #ifdef NON_MATCHING
 // Unmatched: clamped-count reload and return joins differ.
-s32 StreamBuffer_Prepare(Recovered_StreamBuffer* self, u64 key, Recovered_StreamRecord* record, s16 firstBlock,
+s32 StreamBuffer_Prepare(Recovered_StreamBuffer* self, u64 key, Recovered_StreamRange* record, s16 firstBlock,
                          s32 value, s32 mode) {
     switch (self->state) {
         case 1:
