@@ -1,9 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_001880D8();
+extern void func_001880D8(void *);
 extern s32 func_00181028();
-extern s32 func_00180FE0();
+extern void func_00180FE0(void *);
 extern s32 func_00185F00();
 extern s32 func_00193A28();
 
@@ -11,14 +11,7 @@ void func_0019B638(void **arg0)
 {
   void *temp_3;
   void *new_var;
-  if (temp_3)
-  {
-    temp_3 = *arg0;
-  }
-  else
-  {
-    temp_3 = *arg0;
-  }
+  temp_3 = *arg0;
   new_var = temp_3 + 0x290;
   if ((M2C_FIELD(temp_3, u8 *, 0x290)) != 0)
   {
