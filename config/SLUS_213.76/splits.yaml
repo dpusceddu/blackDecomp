@@ -2876,7 +2876,9 @@ splits:
   - {src: src/sony/tu_3563a0.c, range: [0x3563a0, 0x35a5c0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/kynapse/host_2850c0_2f4b50.cpp, range: [0x35a5c0, 0x35a990]}
   - {src: src/sony/tu_35a990.c, range: [0x35a990, 0x35a9c8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: flags or language differ}
-  - {src: src/sony/tu_35a990_35a9c8.c, range: [0x35a9c8, 0x35ace0], note: flags or language differ}
+  - {src: src/sony/tu_35a990_35a9c8.c, range: [0x35a9c8, 0x35aa28], note: flags or language differ}
+  - {src: src/sony/memory_card_superblock.c, range: [0x35aa28, 0x35ac60], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
+  - {src: src/sony/memory_card_clusters.c, range: [0x35ac60, 0x35ace0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], assembler: gas-2.40}
   - {src: src/sony/tu_35a990_35ace0.c, range: [0x35ace0, 0x35b228], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_35a990_35a9c8.c, range: [0x35b228, 0x35b268]}
   - {src: src/sony/tu_35a990_35ace0.c, range: [0x35b268, 0x35b470]}

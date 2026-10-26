@@ -19,11 +19,6 @@ void func_0035AA08(void) {
     func_0035BAE8();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35a990_35a9c8", func_0035AA28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35a990_35a9c8", func_0035AB40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35a990_35a9c8", func_0035AC60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_35a990_35a9c8", func_0035ACA0);
-
 void func_0035B228(void) {
     func_0035B0E8();
 }
