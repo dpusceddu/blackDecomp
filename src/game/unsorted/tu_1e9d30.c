@@ -6,11 +6,52 @@ extern s32 func_001E9EE8();
 extern M2C_UNK D_0042A630;
 /* The meanings of these 17 keys are UNVERIFIED. */
 extern u64 D_003F9410[];
+/* Partial mode state and table entry; their meanings are UNVERIFIED. */
+typedef struct Recovered_ModeOwner {
+    u8 unk_00[0x90];
+    u32 active;
+    u32 previous;
+    s32 current;
+    u8 delay;
+} Recovered_ModeOwner;
+typedef struct Recovered_ModeEntry {
+    u8 unk_00[0x138];
+    f32 expiry;
+    u8 unk_13C;
+    u8 unk_13D;
+    u8 unk_13E[2];
+} Recovered_ModeEntry;
+extern void* D_0040F4D0;
+extern s32 func_001EA728(void*, u64, s32*);
+extern void func_001EA2D0(Recovered_ModeOwner*);
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001E9D30);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001E9E08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001E9EE8);
+#ifdef NON_MATCHING
+// Unmatched: countdown branch and delay-slot scheduling differ.
+s32 func_001EA200(Recovered_ModeOwner* owner) {
+    Recovered_ModeEntry* entries = (Recovered_ModeEntry*)&D_0042A630;
+    f32 now = M2C_FIELD(D_0040F4D0, f32*, 0x20);
+    s32 index;
+    s32 remaining;
+    for (index = 0; index < 17; index++) {
+        u32 bit = 1U << index;
+        if ((owner->active & bit) && entries[index].expiry > 0.0f && entries[index].expiry < now) {
+            owner->active &= ~bit;
+        }
+    }
+    if (owner->active != owner->previous || owner->delay == 0) {
+        func_001EA2D0(owner);
+        owner->previous = owner->active;
+    }
+    remaining = (s32)owner->delay - 1;
+    owner->delay = remaining;
+    return remaining;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA200);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA2D0);
 
 s32 func_001EA4F0(s32 arg0) {
@@ -35,7 +76,28 @@ void func_001EA518(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x90) = (s32) (M2C_FIELD(arg0, s32 *, 0x90) & ~(1 << arg1));
 }
 
+#ifdef NON_MATCHING
+// Unmatched: the lookup-failure branch is scheduled differently.
+s32 func_001EA580(Recovered_ModeOwner* owner, u64 key, s32 enabled) {
+    s32 index;
+    s32 result = func_001EA728(owner, key, &index);
+    if (result != 0) {
+        if (enabled != 0) {
+            u32 bit = 1U << index;
+            Recovered_ModeEntry* entry = &((Recovered_ModeEntry*)&D_0042A630)[index];
+            owner->active |= bit;
+            entry->expiry = -1.0f;
+            entry->unk_13D = 0;
+            return bit;
+        }
+        owner->active &= ~(1U << index);
+        return index;
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA580);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA620);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA628);
 s32 func_001EA728(void* owner, u64 key, s32* index) {
