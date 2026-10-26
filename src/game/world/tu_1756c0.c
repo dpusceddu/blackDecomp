@@ -4,6 +4,12 @@
 
 extern void func_00170740(PS2LiveCollision* collision);
 extern void func_00175EF8(PS2PendingCollision* pending);
+extern PS2GameObjectRecord* func_00129160(PS2GameObjectManager* manager, u64 name);
+extern void func_00272488(u64 name, char* text);
+extern void func_001A4F70(const char* format, ...);
+const char D_003F54A0[] = "Message to Level Designer\n"
+                           "Physics object %s tagged for Pathfinding collision has been removed without reexporting the world view\n"
+                           "Reexport the world view and save it to get rid of that message";
 extern s32 func_0014C570(PS2GameObjectRecord* object);
 extern void func_00175A00(PS2CollisionQueue* queue, PS2GameObjectRecord* object, s32 flag);
 extern s32 func_00170D20(PS2LiveCollision* collision);
@@ -76,7 +82,16 @@ s32 func_00175930(PS2CollisionQueue* queue) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175930);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175980);
+void func_00175980(PS2CollisionQueue* queue, u64 name, s32 flag) {
+    char nameText[16];
+    PS2GameObjectRecord* object = func_00129160((PS2GameObjectManager*)D_0040F4D0, name);
+    if (object != NULL) {
+        func_00175A00(queue, object, flag);
+    } else {
+        func_00272488(name, nameText);
+        func_001A4F70(D_003F54A0, nameText);
+    }
+}
 #ifdef NON_MATCHING
 // Unmatched: helper argument setup and flag width differ.
 void func_00175A00(PS2CollisionQueue* queue, PS2GameObjectRecord* object, s32 flag) {
