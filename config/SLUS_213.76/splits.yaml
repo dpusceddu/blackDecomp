@@ -514,7 +514,7 @@ splits:
   - {src: src/game/unsorted/tu_161ed0.c, range: [0x161ed0, 0x161f58]}
   - {src: src/game/unsorted/tu_161f58.cpp, range: [0x161f58, 0x162160]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x162160, 0x162258]}
-  - {src: src/game/unsorted/tu_162258.c, range: [0x162258, 0x1625e0]}
+  - {src: src/game/unsorted/tu_162258.c, range: [0x162258, 0x1625e0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/game/unsorted/tu_1625e0.c, range: [0x1625e0, 0x162600]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x162600, 0x162688]}
   - {src: src/game/unsorted/tu_162688.c, range: [0x162688, 0x1626d0]}
