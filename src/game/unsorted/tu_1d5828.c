@@ -1,5 +1,16 @@
 #include "include_asm.h"
-#include "game/audio_runtime.h"
+#include "game/frontend_options.h"
+
+// These two native call sites forward A0 to matched no-op producers.
+extern void func_001E8798_WithContext(void*) __asm__("func_001E8798");
+extern void func_001D96F0_WithContext(void*) __asm__("func_001D96F0");
+extern void func_001D7EE0(void*);
+extern void func_002807B0(Recovered_AudioRuntime*, f32, f32, f32, f32, f32);
+extern void func_00285C20(void*);
+extern void func_001E8250(void*);
+extern void func_00281948(Recovered_FloatPairBank*, s32);
+// This native caller also forwards a state value unused by the matched producer.
+extern void func_001D8D70_WithState(void*, s32) __asm__("func_001D8D70");
 
 extern f32 func_0029E688(f32 base, f32 exponent);
 extern void func_00384700(void* music, f32 gain);
@@ -14,9 +25,30 @@ s32 func_001D59C8(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5828", func_001D59E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5828", func_001D5B78);
+void AudioRuntime_Update(Recovered_AudioRuntime* self) {
+    func_001E8798_WithContext(self->mixer);
+    func_001D7EE0(self->unk_CBD4);
+    func_001D96F0_WithContext(self->unk_CBDC);
+    {
+        Recovered_AudioMixPreferences* settings = &FrontendOptions_Preferences->audioMix;
+        func_002807B0(self, self->sfxMixGain, self->unk_CBC8, settings->unk_20, settings->unk_1C, 1.0f);
+    }
+    func_00285C20(self->unk_CBE0);
+    self->vtable->unk_20.function((u8*)self + self->vtable->unk_20.thisAdjustment);
+    self->vtable->unk_28.function((u8*)self + self->vtable->unk_28.thisAdjustment);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5828", func_001D5C28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5828", func_001D5C30);
+void AudioRuntime_SetControlState(Recovered_AudioRuntime* self, s32 state) {
+    if (state == 1) {
+        if (self->mixer->unk_40) func_001E8250(self->mixer->unk_40);
+    }
+    func_00281948(&self->pairBank, state);
+    {
+        Recovered_AudioStateTarget* target = self->mixer->stateLink->target;
+        if (target) target->vtable->setState.function((u8*)target + target->vtable->setState.thisAdjustment, state);
+    }
+    func_001D8D70_WithState(self->mixer->music, state);
+}
 #ifdef NON_MATCHING
 // Unmatched: shared constants retain an extra saved floating-point register across powf.
 f32 AudioVolumeCurve(f32 volume) {
