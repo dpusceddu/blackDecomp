@@ -1418,7 +1418,8 @@ splits:
   - {src: src/game/unsorted/tu_1d76e8_1d8df8.c, range: [0x1d8df8, 0x1d90f8], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/unsorted/tu_1d76e8.c, range: [0x1d90f8, 0x1d9100]}
   - {src: src/game/unsorted/tu_1d76e8_1d8df8.c, range: [0x1d9100, 0x1d9250]}
-  - {src: src/game/unsorted/tu_1d76e8_1d9250.c, range: [0x1d9250, 0x1d96e8], flags: [-O1, -G0, -snas], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1d76e8_1d9250.c, range: [0x1d9250, 0x1d9450], flags: [-O1, -G0, -snas], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1d76e8_1d9450.c, range: [0x1d9450, 0x1d96e8], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: 'Both bodies reproduce native slot/definition pointer induction and second-pass scheduling under O2; two literal-19 DIVs omit zero guards; original flags and TU boundaries remain unknown'}
   - {src: src/game/unsorted/tu_1d76e8_1d96e8.c, range: [0x1d96e8, 0x1d97d0]}
   - {src: src/game/unsorted/tu_1d97d0.c, range: [0x1d97d0, 0x1daf20]}
   - {src: src/game/unsorted/tu_1daf20.c, range: [0x1daf20, 0x1dd728]}
