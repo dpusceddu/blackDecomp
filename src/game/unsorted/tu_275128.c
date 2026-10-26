@@ -56,10 +56,28 @@ extern void func_0028EED8(void* block);
 typedef struct {
     u32 unk_00;
     u32 unk_04;
-    u8 unk_08[0x14];
+    f32 unk_08;
+    u32 unk_0C;
+    f32 unk_10;
+    u8 unk_14[8];
     u32 unk_1C;
     u32 buckets[128];
 } Recovered_FontOffsets;
+
+// UNVERIFIED: glyph metrics and flags are inferred from the width draft.
+typedef struct {
+    u8 unk_00[8];
+    f32 unk_08;
+    u32 unk_0C;
+    f32 unk_10;
+    u32 unk_14;
+    f32 unk_18;
+    u16 code;
+    u8 unk_1E[2];
+    s32 unk_20;
+    u32 unk_24;
+} Recovered_FontGlyph;
+
 
 void func_002756A8(s32 arg0, s32 arg1) {
     D_0040DE7A = (u16) arg0;
@@ -123,7 +141,51 @@ u32 func_00275878(Recovered_FontOffsets* font) {
     font->unk_1C += (u32)font;
     return font->unk_1C;
 }
+#ifdef NON_MATCHING
+// Unmatched: glyph search loop allocation and branches differ.
+f32 func_002758E0(Recovered_FontOffsets* font, const u16* text) {
+    u16 firstCode = *text;
+    Recovered_FontGlyph* glyph = (Recovered_FontGlyph*)font->buckets[firstCode & 0x7F];
+    Recovered_FontGlyph* current = glyph;
+    f32 width;
+    if (glyph->code != firstCode) {
+        Recovered_FontGlyph* end = (Recovered_FontGlyph*)font->unk_1C;
+        if (glyph != end) {
+        firstLookup:
+            glyph++;
+            if (glyph->code != firstCode && glyph != end)
+                goto firstLookup;
+        }
+        current = glyph;
+    }
+    text++;
+    width = -current->unk_10;
+    if (*text != 0) {
+        do {
+            u16 code = *text++;
+            glyph = (Recovered_FontGlyph*)font->buckets[code & 0x7F];
+            width += current->unk_18;
+            if (glyph->code != code) {
+                Recovered_FontGlyph* end = (Recovered_FontGlyph*)font->unk_1C;
+                if (glyph != end) {
+                nextLookup:
+                    glyph++;
+                    if (glyph->code != code && glyph != end)
+                        goto nextLookup;
+                }
+            }
+            current = glyph;
+        } while (*text != 0);
+    }
+    if (current->unk_20 == 0)
+        width += current->unk_10 + current->unk_08;
+    else
+        width += current->unk_10 + current->unk_08 * font->unk_10;
+    return width * font->unk_08;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002758E0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002759E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275AD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275DC0);
