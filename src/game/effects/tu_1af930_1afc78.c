@@ -46,5 +46,40 @@ void *func_001AFF88(s32 context_address, s32 kind) {
     return M2C_FIELD(entry_address, void **, 0x214);
 }
 
+#ifdef NON_MATCHING
+// Unmatched: packed maximum and repeat-write scheduling differ.
+s32 func_001AFC80(BkActorTimerPS2* timer, BkActorAssetPS2* asset, s32 index) {
+    BkActorAssetRecordPS2* record = &asset->records[index];
+    timer->index = index;
+    timer->remaining = record->duration;
+    record = &asset->records[index];
+    timer->repeat = record->repeat;
+    if (timer->repeat < 1)
+        timer->repeat = 1;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1af930_1afc78", func_001AFC80);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: record-index register and address operand order differ; return contract is UNVERIFIED.
+void func_001AFD18(BkActorTimerPS2* timer, BkActorAssetPS2* asset, s32 stop) {
+    s32 firstIndex = timer->index;
+    if (firstIndex != -1) {
+        s32 nextIndex;
+        if (stop != 0)
+            timer->index = -1;
+        else {
+            BkActorAssetRecordPS2* record = (BkActorAssetRecordPS2*)(firstIndex * 0xD0 + (u32)asset->records);
+            timer->index = record->next;
+        }
+        nextIndex = timer->index;
+        if (nextIndex != -1) {
+            BkActorAssetRecordPS2* record = (BkActorAssetRecordPS2*)(nextIndex * 0xD0 + (u32)asset->records);
+            timer->remaining = record->duration;
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_1af930_1afc78", func_001AFD18);
+#endif
