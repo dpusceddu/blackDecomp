@@ -10,7 +10,8 @@ typedef struct {
     s32 mode;
 } Recovered_AudioDriverState;
 
-/* Gain-interface method records are native signed-this adjustments followed by
+/* The object-exact music setter confirms its gain/mixer access fields.
+ * Gain-interface method records are native signed-this adjustments followed by
  * a callback. Original interface identities, unaccessed storage and full extents
  * remain UNVERIFIED. */
 typedef struct {
@@ -50,6 +51,7 @@ typedef struct {
     u8 unk_CBB5[3];
     s32 unk_CBB8;
     u8 unk_CBBC[8];
+    // UNVERIFIED: SFX-specific roles at CBC4/CBCC, pending a matched SFX setter.
     f32 sfxMixGain;
     u32 unk_CBC8;
     f32 sfxGain;
