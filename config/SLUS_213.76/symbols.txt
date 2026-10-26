@@ -604,6 +604,10 @@ AudioPlaybackControl_ClearChannelState = 0x1D8D70; // type:func
 PlaybackRequest_Reset = 0x1D8DF8; // type:func
 PlaybackRequest_Update = 0x1D8F38; // type:func
 PlaybackRequest_Begin = 0x1D91F0; // type:func
+PlaybackStatePool_Acquire = 0x1D9700; // type:func
+PlaybackStatePool_Release = 0x1D9760; // type:func
+PlaybackStatePool_AcquireExtended = 0x1D9768; // type:func
+PlaybackStatePool_ReleaseExtended = 0x1D97C8; // type:func
 func_001EA580 = 0x1EA580; // type:func
 Reset__Q28Graphics13TimedEnvelope = 0x1ED8D0; // type:func
 Register__Q28Graphics13SoundEnvelopePCci = 0x1ED9C8; // type:func
@@ -2280,3 +2284,10 @@ AnimationPlayback_BeginGraph = 0x350570; // type:func alias
 AnimationPlayback_ScanTransitions = 0x350650; // type:func alias
 AnimationPlayback_FindTransition = 0x3507c0; // type:func alias
 AnimationPlayback_TryGraph = 0x350890; // type:func alias
+
+// Playback transition timing and span updates.
+Graph_Advance = 0x350a50; // type:func alias
+AnimationGraph_ResolveScaledSpan = 0x350ac8; // type:func alias
+AnimationPlayback_RootMotion = 0x350f28; // type:func alias
+AnimationPlayback_RefreshSpan = 0x351030; // type:func alias
+AnimationPlayback_IsTransitionActive = 0x351168; // type:func alias
