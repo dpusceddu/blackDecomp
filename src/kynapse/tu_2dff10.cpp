@@ -9,6 +9,7 @@ extern void (*memoryRelease)(void*);
 extern "C" int _stricmp(const char*, const char*) __asm__("func_00360838");
 
 namespace Kaim {
+// Partial PS2 interfaces: unobserved members remain UNVERIFIED.
 extern const char BehaviorClassKey[] __asm__("D_00405FE8");
 const char BehaviorClassKey[] __attribute__((section(".rodata.behavior_class_key"), aligned(4))) = "Class";
 
@@ -23,6 +24,7 @@ struct Factory {
 };
 
 struct FactoryProvider {
+    // UNVERIFIED: these two virtual operations are not called by this TU.
     virtual ~FactoryProvider();
     virtual void Slot1();
     virtual Factory* GetFactory();
