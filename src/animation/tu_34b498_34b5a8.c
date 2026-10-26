@@ -2,10 +2,8 @@
 
 /* Remaining drafts in animation/tu_34b498. */
 #include "ps2/prelude.h"
-#ifdef NON_MATCHING
 #include "animation/graph_runtime.h"
 #include "animation/graph.h"
-#endif
 
 extern s32 func_00347430(s32, s32, s32);
 extern s32 func_0034B910();
@@ -179,7 +177,13 @@ int Graph_ChooseWeighted(void *owner, AnimationGraphNode *node, AnimationParamet
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034BA50);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034BC30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034BFE8);
+float* func_0034BFE8(void* owner, AnimationGraphNode* node, AnimationParameters* bank, float current, float previous,
+                     unsigned int flags, float rate, float weight) {
+    if (node->childCount == 0) return 0;
+    current = (AnimationGraph_ReadSpan(node, bank) - 1.0f) - current;
+    previous = (AnimationGraph_ReadSpan(node, bank) - 1.0f) - previous;
+    return Graph_Sequence(owner, node, bank, current, previous, flags ^ 2, rate, weight);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034C0C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034C128);
 #ifdef NON_MATCHING
@@ -189,7 +193,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34b5a8", func_0034
 // Unmatched: func_0034B910 (316 bytes), types: sequence state and floating call signatures.
 // Unmatched: func_0034BA50 (476 bytes), types: weighted selection and float-to-integer conversion.
 // Unmatched: func_0034BC30 (904 bytes), types: chooser callback and live floating arguments.
-// Unmatched: func_0034BFE8 (224 bytes), types: control binding and floating arguments.
 // Unmatched: func_0034C0C8 (92 bytes), scheduling: two division hazard NOPs.
 // Unmatched: func_0034C128 (1712 bytes), types: graph blending state and stack temporaries.
 // Unmatched: func_0034C7D8 (188 bytes), scheduling: three instruction differences.
