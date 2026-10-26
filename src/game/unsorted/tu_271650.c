@@ -8,10 +8,18 @@ extern s32 func_0028F718(s32);
 extern s32 func_0028FA60(s32);
 extern void func_0028F3B0(void *, s32);
 extern void func_0028F408(void *);
-extern s32 func_002719D0(void *, s32);
+extern void func_0028F2C0(void *, u32 *, s32 *, u32 *, u32 *);
 
 typedef struct {
-    u8 unk_00[0x40];
+    u8 unk_00[0x18];
+    s16 beginAdjustment;
+    u16 unk_1A;
+    s32 (*begin)(void *, u32, s32);
+    u8 unk_20[8];
+    s16 resetAdjustment;
+    u16 unk_2A;
+    s32 (*reset)(void *, s32, s32);
+    u8 unk_30[0x10];
     s16 readyAdjustment;
     u16 unk_42;
     s32 (*ready)(void *);
@@ -33,6 +41,8 @@ typedef struct {
     u8 unk_6C[0x4C];
     u8 stream[1];
 } Recovered_StreamControl; /* Field roles UNVERIFIED. */
+
+extern void func_002719D0(Recovered_StreamControl *, s32);
 
 void func_00271650(void *arg0)
 {
@@ -95,7 +105,40 @@ s32 func_002719A8(s32 arg0) {
     return func_0028FA60(arg0 + 0xB8) <= 0xFFFF;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: device-call register selection and buffer scheduling differ.
+void func_002719D0(Recovered_StreamControl *self, s32 amount) {
+    u32 start, next, unused;
+    Recovered_StreamDevice *device;
+    Recovered_StreamDeviceVtable *vtable;
+    s32 ready;
+    s32 length;
+    if (self->pending != 0) return;
+    device = self->device;
+    vtable = device->vtable;
+    ready = vtable->ready((u8 *)device + vtable->readyAdjustment);
+    if (ready != 1 || self->active == 1) return;
+    func_0028F2C0(self->stream, &start, &length, &next, &unused);
+    start = (start & 0x0FFFFFFF) | 0x20000000;
+    next = (next & 0x0FFFFFFF) | 0x20000000;
+    amount <<= 16;
+    if (length >= amount) {
+        device = self->device;
+        vtable = device->vtable;
+        if (vtable->begin((u8 *)device + vtable->beginAdjustment, start, amount) <= 0) {
+            self->active = ready;
+            if (self->unk_43 != 0) {
+                device = self->device;
+                vtable = device->vtable;
+                vtable->reset((u8 *)device + vtable->resetAdjustment, 0, 0);
+            }
+        }
+        self->pending = amount;
+    }
+}
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_271650", func_002719D0);
+
 void func_00271AF0(Recovered_StreamControl *self) {
     if (self->pending > 0) {
         Recovered_StreamDevice *device = self->device;
