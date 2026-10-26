@@ -20,9 +20,9 @@ struct Recovered_ManagedSlotDispatch {
     void (*vectorEvent)(void*, s32, s128, f32, s32);
 };
 
-/* UNVERIFIED: indexed scalar-control methods remain drafts. Native index
- * multiplication establishes a 0x60 record stride; unknown spans and original
- * record/table/component identities remain unresolved. */
+/* Exact 0x1374f8/0x137520 confirm the 0x60 record stride, scalar at +0x4c
+ * and accessed table/component pointers. UNVERIFIED: unaccessed spans, original
+ * identities, gameplay roles and complete table/component extents. */
 typedef struct {
     u8 unk_00[0x4C];
     f32 unk_4C;
