@@ -37,6 +37,9 @@ typedef char RecoveredGridRowSize[(sizeof(Recovered_GridRow) == 0x190) ? 1 : -1]
 extern s32 func_001E7448(Recovered_GridEntry*);
 extern void func_001E63B8(void*, u64, s32);
 extern u64 D_003F9208[7];
+extern u64 D_003F92C0[];
+extern s32 func_001E6118(void*, u64);
+extern s32 func_001E6C38(void*, void*, u64);
 extern void func_001E4F40(void*);
 extern void func_001E6A98(void*, u32);
 extern s32 func_00382348(void*, s32);
@@ -263,6 +266,27 @@ void func_001E6088(void *arg0) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E60A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E60E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6118);
+#ifdef NON_MATCHING
+// Unmatched: register allocation differs and the key table is assembly-owned.
+s32 func_001E6150(void* owner, void* argument, s32 key_index) {
+    u64* key = &D_003F92C0[key_index];
+    if (func_001E6118(owner, *key) != 0) {
+        s32 index;
+        u8* state = (u8*)owner + 0x68;
+        for (index = 0; index < 2; index++) {
+            if (func_001E6C38(state, argument, *key) != 0) { return 1; }
+            state += 0x38;
+        }
+        return 0;
+    }
+    {
+        s32 result = 1;
+        if (func_001E6C38((u8*)owner + 0x68, argument, *key) == 0) { result = 0; }
+        return result;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6150);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6208);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6240);
