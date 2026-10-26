@@ -20,6 +20,7 @@ typedef struct Recovered_CatalogEntry {
     u64 key;
     u8 unk_08[0x18];
 } Recovered_CatalogEntry;
+typedef char RecoveredCatalogEntrySize[(sizeof(Recovered_CatalogEntry) == 0x20) ? 1 : -1];
 typedef struct Recovered_Catalog {
     u8 unk_00;
     u8 count;
@@ -35,6 +36,27 @@ typedef struct Recovered_DiscoveryOwner {
     Recovered_DiscoveryData* data;
 } Recovered_DiscoveryOwner;
 extern Recovered_Catalog** D_0040F4E0;
+typedef struct Recovered_DiscoverySlot {
+    s8 catalogIndex;
+} Recovered_DiscoverySlot;
+typedef struct Recovered_DiscoveryState {
+    u8 unk_00[0x2D0];
+    Recovered_DiscoverySlot** slots;
+    u8 unk_2D4[0x1E];
+    s8 count;
+} Recovered_DiscoveryState;
+extern Recovered_DiscoveryState* D_0040F4D0;
+extern s32 func_00122520(Recovered_DiscoveryOwner*, u64);
+/* The counters' meanings are UNVERIFIED. */
+typedef struct Recovered_Counters {
+    u8 unk_00[0x16];
+    s8 unk_16;
+    s8 unk_17;
+    s8 unk_18;
+    s8 unk_19;
+    s8 unk_1A;
+} Recovered_Counters;
+extern void* D_0040F0E0;
 
 void func_00121EF0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) | arg1);
@@ -86,7 +108,17 @@ s16 func_00122368(void **arg0, s32 arg1) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_00122478);
+void func_00122478(Recovered_DiscoveryOwner* owner) {
+    s32 index = 0;
+    s8 count = D_0040F4D0->count;
+    if (count > 0) {
+        do {
+            Recovered_DiscoverySlot* slot = D_0040F4D0->slots[index];
+            if (slot != 0) { func_00122520(owner, (*D_0040F4E0)->entries[slot->catalogIndex].key); }
+            index++;
+        } while (index < count);
+    }
+}
 #ifdef NON_MATCHING
 // Unmatched: catalog-search register allocation and loop scheduling differ.
 s32 func_00122520(Recovered_DiscoveryOwner* owner, u64 key) {
@@ -159,7 +191,25 @@ void func_001225B8(void **arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_00122658);
+#ifdef NON_MATCHING
+// Unmatched: mode branches and counter-load scheduling differ.
+s32 func_00122660(s32 owner) {
+    s32 mode = M2C_FIELD(D_0040F0E0, s32*, 0x2014C);
+    Recovered_Counters* counters;
+    switch (mode) {
+        case 3:
+            counters = (Recovered_Counters*)*D_0040F4DC;
+            return counters->unk_17 + counters->unk_18 + counters->unk_19 + counters->unk_1A + counters->unk_16;
+        case 1:
+        case 2:
+            counters = (Recovered_Counters*)*D_0040F4DC;
+            return counters->unk_17 + counters->unk_18 + counters->unk_19 + counters->unk_1A;
+        default: return 0;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_00122660);
+#endif
 
 void func_00122708(void *arg0) {
     M2C_FIELD(arg0, s32 *, 4) = func_00107D20(0x280);
