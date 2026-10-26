@@ -9,7 +9,7 @@
 typedef struct {
     u64 key;
     u8 unk_08[0x10];
-    void* variantData;
+    Recovered_StreamRange* variantData; // Eight-byte selection stride confirmed by the matched poll.
 } Recovered_AudioPlaybackDescriptor;
 
 typedef struct {
