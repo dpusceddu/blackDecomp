@@ -2,6 +2,7 @@
 
 #include "kynapse/graph/meta_entries.hpp"
 #include "kynapse/array_cleanup.h"
+#include "kynapse/graph_index.h"
 
 namespace Kaim {
 
@@ -25,8 +26,16 @@ template<> CMetaClass<UnknownMetaOwner,UnknownFactory>::CMetaClass(const char *s
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F2B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F2F0);
+extern "C" Recovered_KynapseGraphRecord* func_0038F2B0(Recovered_KynapseGraphIterator* it) {
+    Recovered_KynapseGraphIndexOwner* owner = it->owner;
+    if (it == &owner->end) return &owner->firstDefault;
+    return &owner->records[owner->firstIndices[it->index]];
+}
+extern "C" Recovered_KynapseGraphRecord* func_0038F2F0(Recovered_KynapseGraphIterator* it) {
+    Recovered_KynapseGraphIndexOwner* owner = it->owner;
+    if (it == &owner->end) return &owner->secondDefault;
+    return &owner->records[owner->secondIndices[it->index]];
+}
 extern "C" int D_003EBE60;
 extern "C" void func_0038F508(Recovered_KynapseSmallArrayOwner* self, int flags) {
     KynapseSmallArray_Destroy(self, flags, &D_003EBE60);
