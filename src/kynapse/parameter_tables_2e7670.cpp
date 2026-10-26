@@ -167,48 +167,38 @@ ParameterTables::ParameterTables()
     gCompare = CompareSets;
 }
 
-#ifdef NON_MATCHING
-// Unmatched: not compared to the original beyond its call and data references.
-int AddPeriodicName(const char *name) {
-    ParameterTables *tables=GetNameTables();
-    if(tables->countB<gTableSizeB) {
-        ((char**)tables->b10)[tables->countB++]=(char*)KaimAllocate(strlen(name)+1);
-        strcpy(((char**)tables->b10)[tables->countB-1],name);
-        return tables->countB-1;
-    }
-    return -1;
+typedef char NameArrayPointerWidth[sizeof(char*) == 4 ? 1 : -1];
+
+// Capture the insertion address before allocation can invoke an external allocator hook.
+int AddPeriodicName(const char* name) {
+    ParameterTables* tables = GetNameTables();
+    if (tables->countB >= gTableSizeB) return -1;
+    ++tables->countB;
+    char** namesEnd = (char**)(tables->countB * sizeof(char*) + (unsigned int)tables->b10);
+    namesEnd[-1] = (char*)KaimAllocate(strlen(name) + 1);
+    strcpy(((char**)tables->b10)[tables->countB - 1], name);
+    return tables->countB - 1;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8650);
-#endif
-#ifdef NON_MATCHING
-// Unmatched: name-array reference and allocation register scheduling.
-int AddAperiodicName(const char *name) {
-    ParameterTables *tables=GetNameTables();
-    if(tables->countA<gTableSizeA) {
-        ((char**)tables->a14)[tables->countA++]=(char*)KaimAllocate(strlen(name)+1);
-        strcpy(((char**)tables->a14)[tables->countA-1],name);
-        return tables->countA-1;
-    }
-    return -1;
+
+int AddAperiodicName(const char* name) {
+    ParameterTables* tables = GetNameTables();
+    if (tables->countA >= gTableSizeA) return -1;
+    ++tables->countA;
+    char** namesEnd = (char**)(tables->countA * sizeof(char*) + (unsigned int)tables->a14);
+    namesEnd[-1] = (char*)KaimAllocate(strlen(name) + 1);
+    strcpy(((char**)tables->a14)[tables->countA - 1], name);
+    return tables->countA - 1;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8740);
-#endif
-#ifdef NON_MATCHING
-// Unmatched: name-array reference and allocation register scheduling.
-int AddEstimatedName(const char *name) {
-    ParameterTables *tables=GetNameTables();
-    if(tables->countC<gTableSizeC) {
-        ((char**)tables->c18)[tables->countC++]=(char*)KaimAllocate(strlen(name)+1);
-        strcpy(((char**)tables->c18)[tables->countC-1],name);
-        return tables->countC-1;
-    }
-    return -1;
+
+int AddEstimatedName(const char* name) {
+    ParameterTables* tables = GetNameTables();
+    if (tables->countC >= gTableSizeC) return -1;
+    ++tables->countC;
+    char** namesEnd = (char**)(tables->countC * sizeof(char*) + (unsigned int)tables->c18);
+    namesEnd[-1] = (char*)KaimAllocate(strlen(name) + 1);
+    strcpy(((char**)tables->c18)[tables->countC - 1], name);
+    return tables->countC - 1;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/parameter_tables_2e7670", func_002E8830);
-#endif
 #ifdef NON_MATCHING
 // Unmatched: threshold CFG and register allocation.
 bool ParameterTables::Consume(int index,SlotUser *user) {
