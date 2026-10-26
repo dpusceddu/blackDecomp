@@ -847,7 +847,7 @@ splits:
   - {src: src/game/ai/movement/tu_18ce18.c, range: [0x18ce18, 0x18ce68]}
   - {src: src/game/ai/movement/tu_18ce68.c, range: [0x18ce68, 0x18ce78]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x18ce78, 0x18d148]}
-  - {src: src/game/ai/movement/tu_18d148.c, range: [0x18d148, 0x18d870]}
+  - {src: src/game/ai/movement/tu_18d148.cpp, range: [0x18d148, 0x18d870]}
   - {src: src/game/ai/vu0_matrix.cpp, range: [0x18d870, 0x18d978]}
   - {src: src/game/ai/movement/tu_18d978.c, range: [0x18d978, 0x18d9a0], flags: [-O1, -G0, -snas]}
   - {src: src/game/ai/movement/tu_18d9a0.c, range: [0x18d9a0, 0x18da40]}
