@@ -1,6 +1,7 @@
 #ifndef GAME_AUDIO_RUNTIME_H
 #define GAME_AUDIO_RUNTIME_H
 #include "ps2/prelude.h"
+#include "game/resource_pool.hpp"
 
 /* Partial driver view. Only the mode word is confirmed by the game-side
  * accessor; all unaccessed storage, total extents and original type identity
@@ -30,20 +31,59 @@ typedef struct {
     const Recovered_AudioGainVtable* vtable;
 } Recovered_AudioGainTarget;
 
+/* UNVERIFIED: these state and stage interfaces are accessed by pending runtime
+ * update/control drafts. Native method records establish the signed adjustment
+ * and callback ABI, but original interface identities and slot meanings remain unknown. */
 typedef struct {
-    u8 unk_00[0x34];
+    s16 thisAdjustment;
+    u16 unk_02;
+    void (*function)(void* self, s32 state);
+} Recovered_AudioStateMethod;
+typedef struct {
+    u8 unk_00[0x30];
+    Recovered_AudioStateMethod setState;
+} Recovered_AudioStateVtable;
+typedef struct {
+    u8 unk_00[0x50];
+    const Recovered_AudioStateVtable* vtable;
+} Recovered_AudioStateTarget;
+typedef struct {
+    u8 unk_00[0x10];
+    Recovered_AudioStateTarget* target;
+} Recovered_AudioStateLink;
+typedef struct {
+    s16 thisAdjustment;
+    u16 unk_02;
+    void (*function)(void* self);
+} Recovered_AudioStageMethod;
+typedef struct {
+    u8 unk_00[0x20];
+    Recovered_AudioStageMethod unk_20;
+    Recovered_AudioStageMethod unk_28;
+} Recovered_AudioRuntimeVtable;
+
+typedef struct {
+    u8 unk_00[0x2C];
+    Recovered_AudioStateLink* stateLink;
+    u32 unk_30;
     void* music;
     void* frontendSink;
     Recovered_AudioGainTarget* gainTarget;
+    void* unk_40;
 } Recovered_AudioMixer;
 
 /* Partial runtime tail shared by initialization and mode selection. The
  * unaccessed storage (including unk_CBB0), total extents and
- * configuration-field semantics remain UNVERIFIED. */
+ * configuration-field semantics remain UNVERIFIED. New bank/stage/component
+ * accesses at B308/CBA0/CBD4/CBDC/CBE0 await matched update/control consumers. */
 typedef struct {
-    u8 unk_00[0xCB9D];
+    u8 unk_00[0xB308];
+    Recovered_FloatPairBank pairBank;
+    u8 unk_CACC[0xD1];
     u8 unk_CB9D;
-    u8 unk_CB9E[10];
+    u8 unk_CB9E[2];
+    const Recovered_AudioRuntimeVtable* vtable;
+    u32 unk_CBA4;
     Recovered_AudioDriverState* driver;
     s32 mode;
     u32 unk_CBB0;
@@ -53,11 +93,13 @@ typedef struct {
     u8 unk_CBBC[8];
     // Music and SFX gain fields are confirmed by the matched setters.
     f32 sfxMixGain;
-    u32 unk_CBC8;
+    f32 unk_CBC8; // UNVERIFIED: gain input used by the update draft.
     f32 sfxGain;
     f32 musicGain;
-    u32 unk_CBD4;
+    void* unk_CBD4;
     Recovered_AudioMixer* mixer;
+    void* unk_CBDC;
+    void* unk_CBE0;
 } Recovered_AudioRuntime;
 
 typedef struct {
@@ -67,6 +109,10 @@ typedef struct {
     s32 unk_0C, unk_10, unk_14;
 } Recovered_AudioSetupCommand;
 
+typedef char AudioRuntimeBankOffset[(u32) & ((Recovered_AudioRuntime*)0)->pairBank == 0xB308 ? 1 : -1];
+typedef char AudioRuntimeVtableOffset[(u32) & ((Recovered_AudioRuntime*)0)->vtable == 0xCBA0 ? 1 : -1];
+typedef char AudioRuntimeStreamOffset[(u32) & ((Recovered_AudioRuntime*)0)->unk_CBE0 == 0xCBE0 ? 1 : -1];
+typedef char AudioStateTargetVtableOffset[(u32) & ((Recovered_AudioStateTarget*)0)->vtable == 0x50 ? 1 : -1];
 typedef char AudioRuntimeDriverOffset[(u32)&((Recovered_AudioRuntime*)0)->driver == 0xCBA8 ? 1 : -1];
 typedef char AudioRuntimeInitializedOffset[(u32)&((Recovered_AudioRuntime*)0)->initialized == 0xCBB4 ? 1 : -1];
 typedef char AudioRuntimeSfxGainOffset[(u32) & ((Recovered_AudioRuntime*)0)->sfxGain == 0xCBCC ? 1 : -1];
@@ -99,6 +145,9 @@ extern Recovered_AudioRuntime* AudioRuntime_Global __asm__("D_0040F510");
 f32 AudioVolumeCurve(f32 volume) __asm__("func_001D5CD8");
 void AudioRuntime_ApplySfxVolume(Recovered_AudioRuntime* self, f32 volume);
 void AudioRuntime_ApplyMusicVolume(Recovered_AudioRuntime* self, f32 volume);
+void AudioRuntime_Update(Recovered_AudioRuntime* self);
+// UNVERIFIED: state semantics; the native call forwards the same integer to several components.
+void AudioRuntime_SetControlState(Recovered_AudioRuntime* self, s32 state);
 #ifdef __cplusplus
 }
 #endif

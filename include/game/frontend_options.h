@@ -8,7 +8,9 @@
  * Matched option consumers confirm invert-look and crouch fields. Volume and
  * vibration fields remain UNVERIFIED until their draft consumers match. */
 typedef struct {
-    u8 unk_00[0x2015C];
+    u8 unk_00[0x2013C];
+    f32 unk_2013C, unk_20140; // UNVERIFIED: runtime update gain inputs.
+    u8 unk_20144[0x18];
     f32 sfxVolume;
     f32 musicVolume;
     u8 unk_20164;
