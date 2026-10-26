@@ -243,12 +243,25 @@ float *Graph_InverseControlScale(void *owner, AnimationGraphNode *node, Animatio
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D530);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034D738);
+float* func_0034D738(void* owner, AnimationGraphNode* node, AnimationParameters* bank, float current, float previous,
+                     unsigned int flags, float rate, float weight) {
+    AnimationControlBinding* control;
+    AnimationGraphNode* child;
+    float span, time;
+    if (node->childCount <= 0) return 0;
+    control = (AnimationControlBinding*)node->parameters;
+    child = node->children[0];
+    /* The control binding invokes this event again when it computes the parameter. */
+    AnimationEvents_Invoke(control->event, owner);
+    AnimationGraph_BindClampedControl(owner, node, bank);
+    span = AnimationGraph_ReadSpan(child, bank);
+    time = (span - 1.0f) * *AnimationParameters_Get(bank, control->parameter);
+    return AnimationGraph_EvaluateNode(owner, child, bank, time, time, flags, rate, weight);
+}
 #ifdef NON_MATCHING
 // Unmatched: func_0034D0B0 (304 bytes), types: pose operation signatures.
 // Unmatched: func_0034D300 (556 bytes), types: repeat state and live floating arguments.
 // Unmatched: func_0034D530 (516 bytes), types: inverse-control state and live floating arguments.
-// Unmatched: func_0034D738 (256 bytes), types: event and span call signatures.
 // Unmatched: func_0034D838 (180 bytes), register allocation: parameter-control temporaries.
 float *AnimationGraph_PoseBoundMaximum(void *owner, AnimationGraphNode *node, AnimationParameters *bank,
     float current, float previous, unsigned int flags, float coefficient, float weight) {
