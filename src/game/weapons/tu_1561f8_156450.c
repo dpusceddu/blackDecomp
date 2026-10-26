@@ -155,9 +155,8 @@ void func_00156A20(const Recovered_WeaponAimCandidate* candidate) {
         result->projection = candidate->projection;
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_00156A20);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_00156A20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1561f8_156450", func_00156A88);
 s32 func_00156CA0(void* self, s32 unused, Recovered_WeaponTrace* trace) {
     void* actor = M2C_FIELD(self, void**, 0x34);

@@ -33,9 +33,8 @@ s32 func_0015D3E0(BkMovingShotPS2* shot, void* weapon, s128 origin, s128 directi
     func_0015D620(shot);
     return 1;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_15d370_15d3d8", func_0015D3E0);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_15d370_15d3d8", func_0015D3E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_15d370_15d3d8", func_0015D440);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_15d370_15d3d8", func_0015D620);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_15d370_15d3d8", func_0015D750);
