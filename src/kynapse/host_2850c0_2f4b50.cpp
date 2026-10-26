@@ -375,7 +375,12 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038B6B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038B840);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038BAD8);
+extern "C" const char* func_002E3920(void*);
+extern "C" int func_0038BAD8(void*, void* config) {
+    if (config && func_002E3920(config) && *(const signed char*)func_002E3920(config) == '_')
+        return 1;
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038BBB0);
 // The matched lookups confirm the name and count offsets; the remaining descriptor fields are UNVERIFIED.
 extern "C" PS2KaimClassRegistry* func_0038B098();
