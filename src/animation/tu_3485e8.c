@@ -1,7 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_003486E0();
 extern s32 func_00352A30();
 
 s32 func_003485E8(u32 *arg0, u32 *arg1) {
@@ -16,9 +15,47 @@ s32 func_003485E8(u32 *arg0, u32 *arg1) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3485e8", func_00348610);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_3485e8", func_003486E0);
+/* Partial views; the middle record fields and the full key type are UNVERIFIED. */
+typedef struct Recovered_AnimationLookupRecord {
+    u32 key;
+    u32 unk_04[3];
+    int value;
+} Recovered_AnimationLookupRecord;
+typedef struct Recovered_AnimationLookupKey {
+    u32 key;
+    u32 unknown[3];
+} Recovered_AnimationLookupKey;
 
-void func_00348738(s32 arg0, s32 arg1, s32 arg2) {
+int func_00348610(u32* key, Recovered_AnimationLookupRecord* records, int count) {
+    int result = -1;
+    int lower = -1;
+    int upper = count;
+    if (upper != 0) {
+        do {
+            int middle = (lower + upper) >> 1;
+            if (func_003485E8(&records[middle].key, key) < 0)
+                lower = middle;
+            else
+                upper = middle;
+        } while (lower + 1 != upper);
+    }
+    if (upper < count) {
+        if (func_003485E8(&records[upper].key, key) == 0) result = upper;
+    }
+    return result;
+}
+int func_003486E0(int key, Recovered_AnimationLookupRecord* records, int count) {
+    Recovered_AnimationLookupKey query;
+    int found;
+    query.key = key;
+    query.unknown[0] = 0;
+    query.unknown[1] = 0;
+    query.unknown[2] = 0;
+    found = func_00348610(&query.key, records, count);
+    if (found != -1) return records[found].value;
+    return -1;
+}
+
+void func_00348738(s32 arg0, Recovered_AnimationLookupRecord* arg1, s32 arg2) {
     func_003486E0(func_00352A30(), arg1, arg2);
 }
