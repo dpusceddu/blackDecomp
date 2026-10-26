@@ -2300,3 +2300,9 @@ AnimationPlayback_IsTransitionActive = 0x351168; // type:func alias
 AnimationInstance_AppendOverride = 0x3477f0; // type:func alias
 AnimationInstance_RemoveOverride = 0x347858; // type:func alias
 AnimationInstance_FindOverride = 0x3478f0; // type:func alias
+
+// Animation allocator selection and dispatch.
+AnimationAllocator_Set = 0x343ed0; // type:func alias
+AnimationAllocator_Get = 0x343f38; // type:func alias
+AnimationAllocator_Allocate = 0x343f48; // type:func alias
+AnimationAllocator_Free = 0x343f90; // type:func alias
