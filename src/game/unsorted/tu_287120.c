@@ -21,7 +21,46 @@ extern void reloc_base_38(void *) __asm__("func_00287638");
 extern s32 func_00287600();
 extern void func_00287698();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287120);
+typedef struct Recovered_RelocationTable {
+    s32 recordCount;
+    u32 records;
+    u32 unk_08;
+    u32 unk_0c;
+    s32 pointerCount;
+    u32 pointers;
+    u32 unk_18;
+    u32 unk_1c;
+    u8 embedded[1];
+} Recovered_RelocationTable;
+
+extern void reloc_record(void *) __asm__("func_00287218");
+extern void reloc_embedded(void *) __asm__("func_00287600");
+
+void func_00287120(Recovered_RelocationTable *table) {
+    s32 i;
+    if (table->records) {
+        table->records += (u32)table;
+    }
+    if (table->unk_0c) {
+        table->unk_0c += (u32)table;
+    }
+    if (table->pointers) {
+        table->pointers += (u32)table;
+    }
+    if (table->unk_18) {
+        table->unk_18 += (u32)table;
+    }
+    for (i = 0; i < table->recordCount; i++) {
+        reloc_record((void *)(table->records + i * 16));
+    }
+    reloc_embedded(table->embedded);
+    for (i = 0; i < table->pointerCount; i++) {
+        u32 *pointer = (u32 *)(i * 8 + table->pointers);
+        if (*pointer) {
+            *pointer += (u32)table;
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287218);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287600);
 
