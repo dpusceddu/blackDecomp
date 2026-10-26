@@ -3,6 +3,7 @@
 #include "ps2/prototypes.h"
 #include "game/actor/control_view.h"
 #include "ps2/vu0.hpp"
+#include "game/actor/bone_cache.h"
 
 /* XYZ are (0, value, 0); W follows the shared native constructor. */
 static inline Game::Vec ActorYVector(f32 value) {
@@ -56,6 +57,13 @@ static inline Game::Vec ActorLowerY(Game::Vec point, Game::Vec scalar) {
 #endif
 
 extern "C" {
+extern s32 _stricmp(const char*, const char*);
+extern s32 func_00138298(Recovered_ActorBoneCache*, const char*);
+#ifdef NON_MATCHING
+extern const char* D_003BCE70[11];
+extern const f32 D_003F5128[4];
+extern void func_001415A8(void*, s32);
+#endif
 
 extern void* D_0040F4D0;
 extern s32 func_0012D158(void*, s32, s32);
@@ -176,8 +184,47 @@ void func_00137F30(Recovered_ManagedActor* actor) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137F30);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137FB8);
+#ifdef NON_MATCHING
+// Unmatched: the float-copy loop retains an extra delay-slot nop.
+s32 func_001381E0(Recovered_ActorBoneCache* cache) {
+    const char** name = D_003BCE70;
+    s32* index = cache->indices;
+    s32 remaining = 10;
+    do {
+        if (*name) *index = func_00138298(cache, *name);
+        ++index;
+        --remaining;
+        ++name;
+    } while (remaining >= 0);
+    if (cache->catalog) {
+        const f32* source = D_003F5128;
+        f32* target = cache->catalog->unk_28;
+        s32 remaining = 3;
+        do {
+            *target = *source;
+            --remaining;
+            ++source;
+            ++target;
+        } while (remaining >= 0);
+    }
+    cache->unk_38 = 0;
+    func_001415A8(cache->unk_3C, cache->unk_04);
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_001381E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00138298);
+#endif
+/* Native behavior returns index zero both for the first name and for no match. */
+s32 func_00138298(Recovered_ActorBoneCache* cache, const char* name) {
+    s32 index = 0;
+    if (cache->catalog->count > 0) {
+        do {
+            if (_stricmp(cache->catalog->names[index], name) == 0) return index;
+            ++index;
+        } while (index < cache->catalog->count);
+    }
+    return 0;
+}
 
 s32 func_00138320(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 4);
