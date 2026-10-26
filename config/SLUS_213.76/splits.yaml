@@ -621,7 +621,9 @@ splits:
   - {src: src/game/actor/actor_c4c8.cpp, range: [0x16cc88, 0x16ccf0]}
   - {src: src/game/unsorted/tu_16a720_16c708.c, range: [0x16ccf0, 0x16d7f0]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x16d7f0, 0x16dd68]}
-  - {src: src/game/unsorted/tu_16dd68.c, range: [0x16dd68, 0x16e660]}
+  - {src: src/game/unsorted/tu_16dd68.c, range: [0x16dd68, 0x16e008], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
+  - {src: src/game/ai/manager_vectors.c, range: [0x16e008, 0x16e2b8], flags: [-O2, -G0, -snas, -fno-schedule-insns, -mvu0-use-vf0-vf31], note: observed vector-broadcast scheduling recipe}
+  - {src: src/game/unsorted/tu_16dd68.c, range: [0x16e2b8, 0x16e660]}
   - {src: src/game/unsorted/tu_16e660.c, range: [0x16e660, 0x16e6b0]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x16e6b0, 0x16e728]}
   - {src: src/game/unsorted/tu_16e728.c, range: [0x16e728, 0x16e7a8]}
