@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/sound_bank_load.h"
 
 // UNVERIFIED: fields retain offsets until their roles are established.
 typedef struct {
@@ -27,6 +28,8 @@ typedef struct {
     s32 unk_04;
 } Recovered_SoundLoadSizes;
 
+extern s8 D_0040DEB8;
+extern s32 func_00280328(Recovered_SoundLoadPool* pool, const char* text);
 extern s32 _stricmp(const char* left, const char* right);
 extern void* func_0027FCF8(Recovered_SoundLoadSlot* slot, void* arg, s32 size);
 
@@ -36,8 +39,51 @@ s32 func_0027FE68(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27fcf8", func_0027FE70);
+s32 func_0027FE70(Recovered_SoundLoadPool* pool, const u32* value) {
+    Recovered_SoundLoadSlot* slot = pool->slots;
+    Recovered_SoundLoadSlot* end = pool->slots + 11;
+    do {
+        SoundBankLoad_Initialize((Recovered_SoundBankLoad*)slot);
+        slot++;
+    } while (slot < end);
+    pool->unk_B2C0 = *value;
+    pool->count = 0;
+    pool->unk_B2C8 = 1;
+    return func_00280328(pool, &D_0040DEB8);
+}
+#ifdef NON_MATCHING
+// Unmatched: size and index register allocation differs.
+s32 func_0027FF00(Recovered_SoundLoadPool* pool, u32 base, u32 unk_08, u32 secondaryBase,
+                    s32 useSecondary, const Recovered_SoundLoadSizes* sizes, u32 count) {
+    Recovered_SoundLoadSlot* slot = pool->slots;
+    u32 index = 0;
+    pool->count = count;
+    if (count != 0) {
+        do {
+            s32 size = sizes->unk_00;
+            s32 secondarySize = sizes->unk_04;
+            if (useSecondary) {
+                slot->unk_00 = base;
+                slot->unk_04 = size;
+                slot->unk_08 = secondaryBase;
+            } else {
+                slot->unk_00 = base;
+                slot->unk_04 = size;
+                slot->unk_08 = 0;
+            }
+            slot->unk_0C = secondarySize;
+            index++;
+            base += size;
+            secondaryBase += secondarySize;
+            slot++;
+            sizes++;
+        } while (index < pool->count);
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27fcf8", func_0027FF00);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27fcf8", func_0027FF70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27fcf8", func_0027FF78);
 
@@ -65,11 +111,13 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27fcf8", func_0028015
 Recovered_SoundLoadSlot* func_00280160(Recovered_SoundLoadPool* pool, const char* name) {
     u32 index = 0;
     if (pool->count != 0) {
+        char* slotName = (char*)pool + 0xFF0;
         Recovered_SoundLoadSlot* slot = pool->slots;
         do {
-            if (slot->unk_102D && _stricmp(slot->name, name) == 0)
+            if (slot->unk_102D && _stricmp(slotName, name) == 0)
                 return slot;
             index++;
+            slotName += sizeof(Recovered_SoundLoadSlot);
             slot++;
         } while (index < pool->count);
     }

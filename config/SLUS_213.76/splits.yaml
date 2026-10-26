@@ -1879,7 +1879,7 @@ splits:
   - {src: src/game/unsorted/tu_27d1d8_27f858.c, range: [0x27f858, 0x27fbc0]}
   - {src: src/game/unsorted/tu_27fbc0.c, range: [0x27fbc0, 0x27fbd8], flags: [-O1, -G0, -snas]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x27fbd8, 0x27fcf8]}
-  - {src: src/game/unsorted/tu_27fcf8.c, range: [0x27fcf8, 0x280358]}
+  - {src: src/game/unsorted/tu_27fcf8.c, range: [0x27fcf8, 0x280358], assembler: sn-min6, note: native six-instruction slot initialization loop; default assembler inserts an extra nop}
   - {src: src/game/unsorted/tu_280358.c, range: [0x280358, 0x280360]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280360, 0x2803f0]}
   - {src: src/game/unsorted/tu_2803f0.c, range: [0x2803f0, 0x280400]}
