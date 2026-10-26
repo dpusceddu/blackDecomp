@@ -8,12 +8,12 @@ typedef struct {
     s32 id;
     u8 unk_04;
     u8 unk_05;
-    u8 unk_06; // UNVERIFIED: getter remains a draft.
+    u8 unk_06; // Controls level rise and saved-point refresh; broader gameplay role remains unknown.
     u8 unk_07;
-    f32 bias; // UNVERIFIED: accumulation source remains a draft.
+    f32 bias; // Accumulated adjustment; its units and gameplay role remain unknown.
     f32 priority;
     f32 startTime;
-    f32 level; // UNVERIFIED: clamped rise/decay source remains a draft.
+    f32 level; // Clamped to [0, 1]; its broader gameplay role remains unknown.
     f32 selectionMetric; // Minimum selection is confirmed; units and broader role remain unknown.
     f32 unk_1C;
     s128 position;
