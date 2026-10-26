@@ -81,12 +81,11 @@ u8 ActorRecords_CurrentKindAllowed(Recovered_ActorRecords* self) {
 }
 
 f32 ActorRecords_ElapsedTime(Recovered_ActorRecords* self) {
-    if (M2C_FIELD(self->owner, u8*, 0xD27) && func_00189208(self) &&
-        !func_001891C0(self) && !func_00189490((s32)self)) {
+    if (M2C_FIELD(self->owner, u8*, 0xD27) && func_00189208(self) && !func_001891C0(self) &&
+        !func_00189490((s32)self)) {
         return 0.0f;
     }
-    return M2C_FIELD(D_0040F4D0, f32*, 0x20) -
-           ((Recovered_ActorRecord*)(self->current * 0x60 + (s32)self))->startTime;
+    return M2C_FIELD(D_0040F4D0, f32*, 0x20) - ((Recovered_ActorRecord*)(self->current * 0x60 + (s32)self))->startTime;
 }
 
 void * func_001893A0(void *arg0) {

@@ -98,9 +98,7 @@ void Sequence_RemoveActor(void* self, void* actor) {
     methods[7].call((s8*)self + methods[7].adjustment, actor);
 }
 
-void* func_00174BE8(s32 arg0, s32 arg1) {
-    return func_00107D20(arg1);
-}
+void* func_00174BE8(s32 arg0, s32 arg1) { return func_00107D20(arg1); }
 
 void Sequence_ShuffleIndices(void* self, s8* order, s32 count) {
     s32 i;
@@ -126,8 +124,8 @@ void func_00174CD8(s32 self, s32 table, s32 definition) {
     func_001749C8();
     entry = M2C_FIELD(definition, u8*, 0x44);
     if (entry != 0xFF) {
-        M2C_FIELD(self, void**, 0x28) = func_00174BE8(self,
-            M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
+        M2C_FIELD(self, void**, 0x28) =
+            func_00174BE8(self, M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
         return;
     }
     M2C_FIELD(self, void**, 0x28) = NULL;
@@ -309,8 +307,8 @@ void func_001751E0(s32 self, s32 table, s32 definition) {
     func_001749C8();
     entry = M2C_FIELD(definition, u8*, 0x27);
     if (entry != 0xFF) {
-        M2C_FIELD(self, void**, 0x28) = func_00174BE8(self,
-            M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
+        M2C_FIELD(self, void**, 0x28) =
+            func_00174BE8(self, M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
         return;
     }
     M2C_FIELD(self, void**, 0x28) = NULL;
@@ -359,8 +357,8 @@ void func_00175348(s32 self, s32 table, s32 definition) {
     func_001749C8();
     entry = M2C_FIELD(definition, u8*, 0x33);
     if (entry != 0xFF) {
-        M2C_FIELD(self, void**, 0x28) = func_00174BE8(self,
-            M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
+        M2C_FIELD(self, void**, 0x28) =
+            func_00174BE8(self, M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
         return;
     }
     M2C_FIELD(self, void**, 0x28) = NULL;
@@ -409,8 +407,8 @@ void func_001754B0(s32 self, s32 table, s32 definition) {
     func_001749C8();
     entry = M2C_FIELD(definition, u8*, 0x2E);
     if (entry != 0xFF) {
-        M2C_FIELD(self, void**, 0x28) = func_00174BE8(self,
-            M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
+        M2C_FIELD(self, void**, 0x28) =
+            func_00174BE8(self, M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
         return;
     }
     M2C_FIELD(self, void**, 0x28) = NULL;
