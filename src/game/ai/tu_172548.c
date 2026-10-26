@@ -1,12 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/ai/action_views.h"
 
-/* Partial timer view; its class identity and complete extent are unknown. */
-typedef struct Recovered_ActionTimerPair {
-    f32 unk_00; /* UNVERIFIED: only the initializer draft uses this field. */
-    f32 unk_04;
-    f32 unk_08;
-} Recovered_ActionTimerPair;
 
 extern s32 func_00176F00();
 extern s32 func_0017B6F8();

@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/ai/action_views.h"
 #include "game/ai_manager.h"
 
 extern s32 func_00177C90(s32, s32);
@@ -11,26 +12,7 @@ extern s32 func_00193990();
 extern s32 func_00199F70();
 extern s32 func_00193988();
 
-/* Partial action views; identities, extents and fields used only by drafts remain UNVERIFIED. */
-typedef struct Recovered_ActionTimers {
-    u8* owner;
-    u8 unk_04[12];
-    s128 unk_10;
-    f32 unk_20;
-    f32 unk_24;
-    f32 unk_28;
-    f32 unk_2C;
-    f32 unk_30;
-    f32 unk_34;
-    void* unk_38;
-    u8 unk_3C;
-} Recovered_ActionTimers;
 
-typedef struct Recovered_ActionPeer {
-    u8* owner;
-    u8 unk_04[4];
-    void* unk_08;
-} Recovered_ActionPeer;
 
 extern Recovered_AIManager* D_0040F4D4;
 extern void func_00173640(f32*, f32);

@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/ai/action_views.h"
 
 extern s32 func_00193988();
 extern void func_00193980(void);
@@ -8,12 +9,6 @@ extern s32 func_00180FE0();
 extern void func_001880D8(void *);
 extern s32 func_00185F00();
 
-/* Partial action view; class identity and full extent are unknown. */
-typedef struct Recovered_AIAction {
-    u8* owner;
-    u8 unk_04[4];
-    u8 unk_08;
-} Recovered_AIAction;
 extern void* func_00193B98(Recovered_AIAction*);
 extern s32 func_0019ACB8(Recovered_AIAction*);
 extern void func_00193A28(Recovered_AIAction*, u32, void*);

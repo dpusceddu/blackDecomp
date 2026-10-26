@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/ai/action_views.h"
 
 extern s32 func_00193990();
 extern void func_001984F0(void *);
@@ -12,12 +13,6 @@ extern s32 func_00176F00(void *);
 extern u8 func_00198E50(void *);
 extern u8 func_00182410(void *, s128, u8, u8);
 
-typedef struct {
-    u8 *owner;
-    u8 unk_04[12];
-    s128 position;
-    u8 moving;
-} Recovered_ActionMove;
 
 s32 func_00198CF8(s32 arg0) {
     return func_00193990(arg0, 0);
