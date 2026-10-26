@@ -13,7 +13,8 @@ typedef struct {
     u8 unk_08[4];
     f32 priority;
     f32 startTime;
-    u8 unk_14[8];
+    u8 unk_14[4];
+    f32 selectionMetric; // UNVERIFIED: minimum-metric selection remains a draft.
     f32 unk_1C;
     s128 position;
     s128 unk_30;
