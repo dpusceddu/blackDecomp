@@ -2,9 +2,9 @@
 #define GAME_AUDIO_PLAYBACK_CONTROL_H
 #include "game/playback_request.h"
 
-/* UNVERIFIED: partial controller/descriptor views pending matched consumers.
- * Original identities, numeric lifecycle-state meanings, channel ownership,
- * unused storage and total extents remain unknown. The native initializer clears
+/* Matched controller consumers confirm these access views. Original identities,
+ * numeric lifecycle-state meanings, channel ownership, unused storage and total
+ * extents remain UNVERIFIED. The native initializer clears
  * two channel slots; no additional input bounds are implied by this view. */
 typedef struct {
     u64 key;

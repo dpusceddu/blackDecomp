@@ -47,7 +47,7 @@ typedef struct {
     s32 valueCount;
     void* buffers[2]; // UNVERIFIED: pool operations remain drafts.
     s32 variant;      // UNVERIFIED: load request remains a draft.
-    const Recovered_PlaybackRequestVtable* vtable; // UNVERIFIED: controller consumers are pending.
+    const Recovered_PlaybackRequestVtable* vtable; // Confirmed by matched controller consumers.
 } Recovered_PlaybackRequest;
 
 typedef struct {

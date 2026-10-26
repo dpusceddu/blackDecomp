@@ -2262,3 +2262,14 @@ REG_GS_CSR = 0x12001000; // type:data alias
 REG_GS_IMR = 0x12001010; // type:data alias
 REG_GS_BUSDIR = 0x12001040; // type:data alias
 REG_GS_SIGLBLID = 0x12001080; // type:data alias
+
+// Playback history and graph transitions.
+AnimationPlayback_RecordHistory = 0x3501d8; // type:func alias
+AnimationPlayback_PreviousHistory = 0x3502c0; // type:func alias
+AnimationPlayback_TransitionCoordinate = 0x350308; // type:func alias
+AnimationPlayback_BindGraph = 0x350410; // type:func alias
+AnimationPlayback_ApplyTransition = 0x3504c8; // type:func alias
+AnimationPlayback_BeginGraph = 0x350570; // type:func alias
+AnimationPlayback_ScanTransitions = 0x350650; // type:func alias
+AnimationPlayback_FindTransition = 0x3507c0; // type:func alias
+AnimationPlayback_TryGraph = 0x350890; // type:func alias
