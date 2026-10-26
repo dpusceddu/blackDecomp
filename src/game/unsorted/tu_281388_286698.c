@@ -59,7 +59,28 @@ void AudioCommandStream_Submit(Recovered_AudioCommandStream* self, s32 synchrono
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_286698", func_002867F0);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_286698", func_00286878);
+extern f64 func_0029D5B0(f64 angle);
+
+// Write 48 kHz samples, retaining the unsigned phase for the next buffer.
+// UNVERIFIED: caller policy for nonfinite or out-of-range conversions.
+u32 AudioCommandStream_GenerateTone(Recovered_AudioCommandStream* self, s16* output, s32 count, u32 phase,
+                                    f32 frequency) {
+    f32 angularFrequency;
+    f32 sampleRate = 48000.0f;
+
+    if (frequency > 24000.0f) { frequency = 24000.0f; }
+    if (count > 0) {
+        s32 remaining = count;
+        angularFrequency = frequency * 6.28318530717958647692f;
+        do {
+            f32 angle = angularFrequency * (f32)phase / sampleRate;
+            --remaining;
+            phase++;
+            *output++ = (s32)(func_0029D5B0((f64)angle) * (0.7f * 32767.0f));
+        } while (remaining);
+    }
+    return phase;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_286698", func_00286990);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_286698", func_00286C10);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_286698", func_00286CA0);

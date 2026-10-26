@@ -22,7 +22,32 @@ s32 func_00286558(s32 arg0) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_286558", func_00286598);
+void AudioCommandStream_SetCachedControls(Recovered_AudioCommandStream* self, u32 firstControl, u32 secondControl,
+                                          f32 firstValue, f32 secondValue, f32 thirdValue) {
+    s32 first = (s32)(firstValue * 32767.0f);
+    s32 second = (s32)(secondValue * 32767.0f);
+    s32 third = (s32)(thirdValue * 32767.0f);
+    u32 mode = self->unk_2418 == 1;
+    u32* payload;
+
+    if (self->unk_288C == firstControl && self->unk_288D == secondControl && self->cachedValues[0] == first &&
+        self->cachedValues[1] == second && self->cachedValues[2] == third && self->unk_288F == mode) {
+        return;
+    }
+    self->unk_288C = firstControl;
+    self->unk_288D = secondControl;
+    self->cachedValues[0] = first;
+    self->cachedValues[1] = second;
+    self->cachedValues[2] = third;
+    self->unk_288F = mode;
+    payload = AudioCommandStream_Append(self, 0x60, 6);
+    payload[0] = self->unk_288C;
+    payload[1] = self->unk_288D;
+    payload[2] = self->cachedValues[0];
+    payload[3] = self->cachedValues[1];
+    payload[4] = self->cachedValues[2];
+    payload[5] = self->unk_288F;
+}
 
 u32* AudioCommandStream_Append(Recovered_AudioCommandStream* self, u32 operation, u32 payloadWords) {
     u32* cursor = self->writeCursor;
