@@ -1,18 +1,22 @@
 #ifndef GAME_PLAYBACK_REQUEST_H
 #define GAME_PLAYBACK_REQUEST_H
 #include "ps2/prelude.h"
+#include "game/stream_buffer.h"
 
 /* Partial native views. The original class identity, complete allocations and
  * meanings of the numeric lifecycle states are not yet established. */
 typedef struct {
-    u8 unk_00[0x28];
-    u64 poolKey; // UNVERIFIED: keyed pool consumers are not yet source-backed.
+    // UNVERIFIED: buffer accesses are not yet confirmed by matched consumers.
+    Recovered_StreamBuffer* buffers[4];
+    s32 bufferCount;
+    u8 unk_14[0x14];
+    u64 poolKey; // Confirmed by matched keyed pool acquisitions.
     u32 unk_30;
     f32 unk_34;
     u8 unk_38[4];
     f32 unk_3C;
     u8 unk_40[0x26];
-    u8 claimed; // UNVERIFIED: keyed pool consumers are not yet source-backed.
+    u8 claimed; // Confirmed by matched keyed pool acquisitions.
     u8 unk_67;
 } Recovered_PlaybackState;
 
@@ -50,7 +54,7 @@ typedef struct {
     Recovered_PlaybackState* playback;
     u32 values[2];
     s32 valueCount;
-    void* buffers[2]; // UNVERIFIED: pool operations remain drafts.
+    Recovered_StreamBuffer* buffers[2]; // UNVERIFIED: request pool operations remain drafts.
     s32 variant;      // UNVERIFIED: load request remains a draft.
     const Recovered_PlaybackRequestVtable* vtable; // Confirmed by matched controller consumers.
 } Recovered_PlaybackRequest;
