@@ -58,6 +58,12 @@ struct SearchGraph {
     void *syntheticGuard;
     int FindRoute(RouteBuffers *, SearchNode *, SearchNode *, void *) __asm__("func_002EE078");
     inline SearchNode *GetNode(unsigned int n) { if (n >= nodeCapacity) return 0; SearchNode *p = nodes+n; return p->id == (unsigned int)-1 ? 0 : p; }
+    inline SearchNode* GetNode(unsigned int index) const {
+        if (index >= nodeCapacity) return 0;
+        SearchNode* node = (SearchNode*)(index * sizeof(SearchNode) + (unsigned int)nodes);
+        if (node->id == (unsigned int)-1) node = 0;
+        return node;
+    }
     inline SearchEdge *GetEdge(unsigned int n) { if (n >= edgeCapacity) return 0; SearchEdge *p = edges+n; return p->index == -1 ? 0 : p; }
 };
 // These placeholders preserve the observed temporary policy lifetimes. Their

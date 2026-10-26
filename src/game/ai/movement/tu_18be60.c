@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/ai/movement_events.h"
 
 s32 func_0018BE60(s32 *arg0, void *arg1)
 {
@@ -29,4 +30,8 @@ void func_0018BE88(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18be60", func_0018BE90);
+s32 func_0018BE90(const Recovered_MovementEvent8* event, Recovered_MovementEvent8Output* output) {
+    output->payload = *event;
+    output->kind = event->kind;
+    return 1;
+}
