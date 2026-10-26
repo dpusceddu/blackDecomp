@@ -4,8 +4,6 @@
 extern s32 func_0032B9E0();
 extern s32 func_0032B9E0(M2C_UNK, M2C_UNK);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32b928", func_0032B928);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32b928", func_0032B9E0);
 #ifdef NON_MATCHING
 /* Offsets are observed; the full structure and semantic names are UNVERIFIED. */
 typedef struct Recovered_PhysicsPair {
@@ -21,6 +19,23 @@ typedef struct Recovered_PhysicsBlock {
     u32 unk18;
     void** slots;
 } Recovered_PhysicsBlock;
+// Unmatched: descriptor temporaries and alignment arithmetic schedule differently.
+void func_0032B928(Recovered_PhysicsBlock* block) {
+    u32 base = ((u32)block + 0x2f) & ~15u;
+    u32 afterEntries = base + block->count * 0xA0;
+    u32 first = (afterEntries + block->pairCount * 8 + 15) & ~15u;
+    u32 second = (first + block->pairCount * 0x40 + 15) & ~15u;
+    block->pairs = (Recovered_PhysicsPair*)afterEntries;
+    block->unk0c = (char*)first;
+    block->entries = (char*)base;
+    block->unk10 = (char*)second;
+    block->slots = (void**)(second + block->pairCount * 0x50);
+}
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32b928", func_0032B928);
+#endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_32b928", func_0032B9E0);
+#ifdef NON_MATCHING
 extern void func_0032B928(Recovered_PhysicsBlock*);
 extern void func_00332CB0(char**, int);
 // Unmatched: the pair initialization loop has an extra scheduling instruction.
