@@ -4,8 +4,8 @@
 #include "animation/animation_graph_node.h"
 #include "animation/animation_parameters.h"
 #include "ps2/recovered_types.h"
-#ifdef NON_MATCHING
 #include "animation/graph.h"
+#ifdef NON_MATCHING
 #include "animation/graph_runtime.h"
 #endif
 extern f32 * func_0034BC30(s32 *, Recovered_AnimationGraphNode *, Recovered_AnimationParameters *, u32, void *, s32, f32, f32, f32, f32, f32);
@@ -18,23 +18,18 @@ f32 * func_0034C968(s32 *arg0, void *arg1, s32 arg2, s32 arg3, f32 fparg0, f32 f
     return func_0034BC30(arg0, (Recovered_AnimationGraphNode *) arg1, arg2, arg3, func_0034C8C8, M2C_FIELD(temp_2, s32 *, 8), fparg0, fparg1, fparg2, M2C_FIELD(temp_2, f32 *, 0xC), fparg3);
 }
 
-#ifdef NON_MATCHING
-// Unmatched: func_0034C968 (48 bytes), scheduling: argument load order.
-// Unmatched: func_0034CA18 (80 bytes), scheduling: capped-time dispatch.
 float *AnimationGraph_PoseCappedTime(void *owner, AnimationGraphNode *node, AnimationParameters *bank,
     float current, float previous, unsigned int flags, float coefficient, float weight) {
     float time;
+    AnimationGraphNode *child;
     if (node->childCount <= 0)
         return 0;
     time = current + node->parameters[0];
+    child = node->children[0];
     if (time > node->parameters[1])
         time = node->parameters[1];
-    return AnimationGraph_EvaluateNode(owner, node->children[0], bank, time, previous, flags, coefficient,
-        weight);
+    return AnimationGraph_EvaluateNode(owner, child, bank, time, previous, flags, coefficient, weight);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/animation/tu_34b498_34c968", func_0034CA18);
-#endif
 #ifdef NON_MATCHING
 // Unmatched: func_0034CA68 (128 bytes), scheduling: scale-state stores and dispatch.
 float *AnimationGraph_PoseScale(void *owner, AnimationGraphNode *node, AnimationParameters *bank,
