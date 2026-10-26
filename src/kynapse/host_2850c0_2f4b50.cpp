@@ -2,6 +2,7 @@
 
 // Ported from an unpublished companion project.
 #include "kynapse/host_2850c0.hpp"
+#include "kynapse/array_cleanup.h"
 #ifdef NON_MATCHING
 #include "game/classes/UnknownVtable_003DC838.hpp"
 #include "game/classes/UnknownVtable_003DC5F8.hpp"
@@ -382,15 +383,27 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C438);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C4D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038C618);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038CA50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038CD28);
+extern "C" int D_003E8EE8;
+extern "C" void func_0038CA50(Recovered_KynapseSmallArrayOwner* self, int flags) {
+    KynapseSmallArray_Destroy(self, flags, &D_003E8EE8);
+}
+extern "C" int D_003E90A8;
+extern "C" void func_0038CD28(Recovered_KynapseSmallArrayOwner* self, int flags) {
+    KynapseSmallArray_Destroy(self, flags, &D_003E90A8);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038CF20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038D0B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038D2D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038D4C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038D8A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038DD80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038DFB8);
+extern "C" int D_003E9A80;
+extern "C" void func_0038DD80(Recovered_KynapseSmallArrayOwner* self, int flags) {
+    KynapseSmallArray_Destroy(self, flags, &D_003E9A80);
+}
+extern "C" int D_003E9B40;
+extern "C" void func_0038DFB8(Recovered_KynapseSmallArrayOwner* self, int flags) {
+    KynapseSmallArray_Destroy(self, flags, &D_003E9B40);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038E108);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038E438);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038E910);
