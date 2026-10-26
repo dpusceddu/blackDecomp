@@ -16,8 +16,8 @@ typedef struct BkAnimationInstancePS2 {
     float current, previous, span;
     EeU8 unknown20[0x10];
     BkAnimationPoseHeaderPS2 root;
-    /* Override instruction view3478F0: 12-byte records {pose pointer,bone s32,
-       flags u32}; no matched function yet proves that complete record contract. */
+    /* Exact override consumers confirm 12-byte records {pose pointer,bone s32,
+       flags u32}; pose ownership and individual flag meanings remain UNVERIFIED. */
     void *selectedMatrices, *matrixBase, *jointOverrides;
     EeS16 jointOverrideCount, maximumBones;
     float rootScale, inverseRootScale;

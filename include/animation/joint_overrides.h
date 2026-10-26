@@ -2,9 +2,8 @@
 #define BLACK_ANIMATION_JOINT_OVERRIDES_H
 #include "animation/instance.h"
 
-/* The exact append establishes the 12-byte stride and three field offsets.
- * UNVERIFIED: the pose/bone/flags meanings inferred from lookup/removal;
- * pose ownership and the individual flag bits remain unknown. */
+/* Exact append, lookup and removal confirm this 12-byte record and its fields.
+ * UNVERIFIED: pose ownership and the individual flag meanings. */
 typedef struct AnimationJointOverride {
     BkAnimationPoseHeaderPS2* pose;
     int bone;
