@@ -1,53 +1,104 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/audio_transfer.h"
+#include "game/playback_request.h"
 
-extern s32 func_001DACE0(void *arg0);
-extern s32 func_001DAD08(void *arg0);
+extern s32 func_001DA848(Recovered_AudioTransferChannel*);
+extern s32 func_001DAAD0(void*);
+extern s32 AudioTransferChannel_PollBusy(Recovered_AudioTransferChannel*);
+extern s32 AudioTransferGroup_IsBlockFinished(Recovered_AudioTransferGroup*, s32);
+extern u8* AudioTransferGroup_GetInputBlock(Recovered_AudioTransferGroup*, s32);
+extern void AudioTransferGroup_AdvanceBlock(Recovered_AudioTransferGroup*, s32);
+extern s32 AudioTransferGroup_IsFinalBlock(Recovered_AudioTransferGroup*, s32);
+/* These native consumers copy a 0xB0-byte parameter record. The shared view is
+ * partial; its unaccessed tail and original identity remain UNVERIFIED. */
+extern void func_001DA5C8(Recovered_AudioTransferChannel*, Recovered_PlaybackParameters*);
+extern void func_001DAB20(Recovered_AudioTransferChannel*, Recovered_PlaybackParameters*);
+extern void func_001DA8D8(Recovered_AudioTransferChannel*, void*, s32, s32);
+extern void func_001DACB0(void*);
+extern void func_001DAD60(void*, s32);
+extern s32 func_00324F98(void);
+
+extern s32 func_001DACE0(void* arg0);
+extern s32 func_001DAD08(void* arg0);
 extern s32 func_0031D528();
 extern s32 func_00284298(s32);
 extern s32 func_002842E8(s32);
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D97D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9990);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9AB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9B88);
+void AudioTransferGroup_Update(Recovered_AudioTransferGroup* self, Recovered_PlaybackParameters* parameters) {
+    s32 i;
+    for (i = 0; i < self->channelCount; i++) {
+        Recovered_AudioTransferChannel* channel = self->slots[i].channel;
+        func_001DA5C8(channel, parameters);
+        if (func_001DAAD0(channel)) {
+            u8* data;
+            AudioTransferGroup_AdvanceBlock(self, i);
+            data = AudioTransferGroup_GetInputBlock(self, i);
+            if (data) func_001DA8D8(channel, data, self->blockBytes, AudioTransferGroup_IsFinalBlock(self, i));
+        }
+    }
+}
+s32 AudioTransferGroup_TryReset(Recovered_AudioTransferGroup* self) {
+    s32 i;
+    for (i = 0; i < self->channelCount; i++) {
+        if (!func_001DA848(self->slots[i].channel)) return 0;
+    }
+    self->unk_28 = 0;
+    self->state = 4;
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9C00);
 
-s32 func_001D9C68(s32 arg0, s32 arg1)
-{
-  unsigned int new_var;
-  s32 temp_3;
-  if (func_001D9D00(arg0, arg1) != 0)
-  {
+u8* AudioTransferGroup_GetInputBlock(Recovered_AudioTransferGroup* self, s32 index) {
+    s32 blockBytes;
+    if (AudioTransferGroup_IsBlockFinished(self, index)) return 0;
+    blockBytes = self->blockBytes;
+    return self->data + blockBytes * self->slots[index].blockIndex + (blockBytes * self->blockCount) * index;
+}
+
+void AudioTransferGroup_AdvanceBlock(Recovered_AudioTransferGroup* self, s32 index) {
+    u8* counts = (u8*)self + 4;
+    s32* block;
+    counts += index * sizeof(Recovered_AudioTransferSlot);
+    block = (s32*)counts;
+    if (*block < self->blockCount) (*block)++;
+}
+
+s32 AudioTransferGroup_IsBlockFinished(Recovered_AudioTransferGroup* self, s32 index) {
+    return self->slots[index].blockIndex == self->blockCount;
+}
+
+s32 AudioTransferGroup_IsFinalBlock(Recovered_AudioTransferGroup* self, s32 index) {
+    if (self->final && self->slots[index].blockIndex == self->blockCount - 1) return 1;
     return 0;
-  }
-  temp_3 = M2C_FIELD(arg0, s32 *, 0x14);
-  new_var = (arg1 ^ 0) * 8;
-  return ((M2C_FIELD(arg0, s32 *, 0x10)) + (temp_3 * (*((s32 *) (((s8 *) (arg0 + new_var)) + 4))))) + ((temp_3 * (M2C_FIELD(arg0, s32 *, 0x24))) * arg1);
 }
-
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9CD0);
-
-s32 func_001D9D00(void *arg0, s32 arg1)
-{
-  s32 *new_var;
-  s8 *new_var2;
-  new_var = &(M2C_FIELD(arg0, s32 *, 0x24));
-  new_var2 = (s8 *) (arg0 + (arg1 * 8));
-  return (*((s32 *) (new_var2 + 4))) == (*new_var);
+s32 AudioTransferGroup_AllBlocksFinished(Recovered_AudioTransferGroup* self) {
+    s32 i;
+    for (i = 0; i < self->channelCount; i++) {
+        if (!AudioTransferGroup_IsBlockFinished(self, i)) return 0;
+    }
+    return 1;
 }
-
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9D20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9D58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9DC0);
+void AudioTransferGroup_ApplyParameters(Recovered_AudioTransferGroup* self, Recovered_PlaybackParameters* parameters) {
+    s32 i;
+    for (i = 0; i < self->channelCount; i++) func_001DAB20(self->slots[i].channel, parameters);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9E38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9E40);
+void AudioTransferGroup_ResetChannels(Recovered_AudioTransferGroup* self) {
+    s32 i;
+    for (i = 0; i < self->channelCount; i++) func_001DACB0(self->slots[i].channel);
+}
 
 void func_001D9EA8(void **arg0) {
     func_001DACE0(*arg0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9EC8);
+void AudioTransferGroup_SetTargetFlag(Recovered_AudioTransferGroup* self, s32 value) {
+    s32 i;
+    for (i = 0; i < self->channelCount; i++) func_001DAD60(self->slots[i].channel, value);
+}
 
 void func_001D9F40(void **arg0) {
     func_001DAD08(*arg0);
@@ -60,7 +111,29 @@ s32 func_001D9F60(void *arg0) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9F78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DA1C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DA5C8);
+#ifdef NON_MATCHING
+// Unmatched: reset call setup and independent field-store scheduling differ.
+s32 func_001DA848(Recovered_AudioTransferChannel* self) {
+    if (self->state != 11) {
+        if (self->pending) {
+            AudioTransferChannel_PollBusy(self);
+            if (!func_001DAAD0(self)) return 0;
+        }
+        if (self->handle) {
+            func_00284298(self->handle);
+            self->handle = 0;
+        }
+        self->input = 0;
+        self->state = 11;
+        self->inputBytes = 0;
+        self->outputBytes = 0;
+        self->final = 0;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DA848);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DA8D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DA940);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DA9C0);
@@ -75,7 +148,15 @@ s32 func_001DAAD0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0xC4) == 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DAAE0);
+/* The library status is global; its transfer ownership is UNVERIFIED. */
+s32 AudioTransferChannel_PollBusy(Recovered_AudioTransferChannel* self) {
+    if (func_00324F98()) return 1;
+    if (self->pending) {
+        self->pending = 0;
+        self->input = 0;
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DAB20);
 
 void func_001DACB0(void *arg0) {
