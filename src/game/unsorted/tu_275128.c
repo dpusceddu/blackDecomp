@@ -2,7 +2,38 @@
 #include "ps2/prelude.h"
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275128);
+#ifdef NON_MATCHING
+// Unmatched: decoder loop scheduling and owned lookup tables differ.
+extern const u8 D_00400578[];
+extern const u32 D_00400678[];
+void Text_CopyUtf8ToUtf16(const char* input, u16* destination, s32 capacity) {
+    const u8* source = (const u8*)input;
+    if (*source != 0 && capacity >= 2) {
+        do {
+            u8 extra = D_00400578[*source];
+            u32 code = 0;
+            switch (extra) {
+            case 3:
+                code = *source++ << 6;
+                /* fall through */
+            case 2:
+                code = (code + *source++) << 6;
+                /* fall through */
+            case 1:
+                code = (code + *source++) << 6;
+                /* fall through */
+            case 0:
+                code += *source++;
+            }
+            capacity--;
+            *destination++ = code - D_00400678[extra];
+        } while (*source != 0 && capacity >= 2);
+    }
+    *destination = 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275260);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275338);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275340);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275370);
