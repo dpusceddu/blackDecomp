@@ -10,6 +10,12 @@ extern const s128* func_00162570(Recovered_ActorBinding*);
 extern s128 func_00173488(void*);
 
 extern void* D_0040F4D0;
+
+extern void* D_0040F514;
+extern s32 func_001390F8(void*);
+extern Recovered_ManagedSlot* func_00178BC0(Recovered_ActorCreationScope*, s32, s32, u64,
+    Recovered_ActorCreationRequest*, Recovered_ActorCreationDescriptor*, u64, s32, u32, u32, s32, u32);
+
 extern Recovered_ManagedSlot* func_00178AE8(Recovered_ActorCreationScope*, s32, s32,
     Recovered_ActorCreationRequest*, Recovered_ActorCreationDescriptor*, void*, u64, u64);
 extern Recovered_ManagedSlot* func_00178978(Recovered_ActorCreationScope*, s32,
@@ -34,7 +40,6 @@ Recovered_ManagedActor* func_001788A8(Recovered_ActorCreationScope*,
     Recovered_ActorCreationRequest*, void*, u64, u32, u32, u32, u32);
 Recovered_ManagedActor* func_00178910(Recovered_ActorCreationScope*,
     Recovered_ActorCreationRequest*, void*, u64, u32, u32, u32, u32);
-
 
 /* Actor-slot forwarding and value access. This file follows the existing
  * proposed split; the original source/TU identity remains unknown. */
@@ -142,7 +147,20 @@ Recovered_ManagedActor* func_00178910(Recovered_ActorCreationScope* self, Recove
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/actor_slot_values", func_00178978);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/actor_slot_values", func_00178AE8);
+Recovered_ManagedSlot* func_00178AE8(Recovered_ActorCreationScope* self, s32 kind, s32 mode,
+    Recovered_ActorCreationRequest* request, Recovered_ActorCreationDescriptor* descriptor,
+    void* context, u64 key, u64 resourceKey) {
+    if (func_001390F8(D_0040F514)) {
+        Recovered_ManagedSlot* slot = func_00178BC0(self, kind, mode, key, request, descriptor,
+            resourceKey, 0, 0, 0, -1, 0);
+        if (slot) {
+            slot->actor->unk_2F8 = 3.4028234663852886e+38f; /* Largest finite native float. */
+            return slot;
+        }
+    }
+    return NULL;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/actor_slot_values", func_00178BC0);
 /* Return the position storage selected by the native slot tag. */
 const s128* func_00178D30(Recovered_ActorSlot* entry) {
