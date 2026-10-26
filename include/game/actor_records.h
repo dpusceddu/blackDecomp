@@ -10,10 +10,10 @@ typedef struct {
     u8 unk_05;
     u8 unk_06; // UNVERIFIED: getter remains a draft.
     u8 unk_07;
-    u8 unk_08[4];
+    f32 bias; // UNVERIFIED: accumulation source remains a draft.
     f32 priority;
     f32 startTime;
-    u8 unk_14[4];
+    f32 level; // UNVERIFIED: clamped rise/decay source remains a draft.
     f32 selectionMetric; // Minimum selection is confirmed; units and broader role remain unknown.
     f32 unk_1C;
     s128 position;
@@ -26,7 +26,9 @@ typedef struct {
 typedef struct {
     Recovered_ActorRecord records[3];
     s32 current;
-    u8 unk_124[0xC];
+    u32 actorMask;
+    f32 selectionTimer; // UNVERIFIED: selection consumer remains a draft.
+    s32 categoryFilter; // UNVERIFIED: actor-category filter source remains a draft.
     void* owner;
 } Recovered_ActorRecords;
 
