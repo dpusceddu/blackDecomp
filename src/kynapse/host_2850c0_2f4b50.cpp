@@ -4,6 +4,7 @@
 #include "kynapse/host_2850c0.hpp"
 #include "kynapse/array_cleanup.h"
 #include "kynapse/byte_matrix.h"
+#include "kynapse/path_point_query.hpp"
 #include "ps2/recovered_types.h"
 #ifdef NON_MATCHING
 #include "game/classes/UnknownVtable_003DC838.hpp"
@@ -498,4 +499,22 @@ extern "C" int func_00391130(Recovered_KynapseByteMatrix* matrix, int row, int c
     *out = (float)value / matrix->divisor;
     return 1;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_003912C0);
+extern "C" Recovered_KynapseDistanceWorld* D_003C9ED4;
+extern "C" int func_003912C0(void*, Recovered_KynapsePositionOwner* object, const Recovered_KynapsePathVector* point,
+                             int, unsigned char* reached, Recovered_KynapsePathVector* out) {
+    float threshold = 0.0f;
+    float x = point->x;
+    out->x = x;
+    float y = point->y;
+    out->y = y;
+    float z = point->z;
+    out->z = z;
+    Recovered_KynapsePathVector* position = &object->position;
+    Recovered_KynapsePathVector delta(position->x - x, position->y - y, position->z - z);
+    float distance = delta.SquaredLength();
+    if (D_003C9ED4) threshold = D_003C9ED4->distanceLimitSquared;
+    int inside = 1;
+    if (!(distance < threshold)) inside = 0;
+    if (inside) *reached = 1;
+    return 0;
+}
