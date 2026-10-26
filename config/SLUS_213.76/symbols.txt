@@ -5,6 +5,13 @@
 # A line ending in `alias` (`// type:func alias`) is a readable name for documentation and tools. It never defines or
 # binds a symbol, so it cannot change linking; the function stays func_XXXXXXXX or its mangled name.
 entry = 0x100008; // type:func alias
+ActorControls_SetIndexedValue = 0x135C78; // type:func alias
+ActorControls_HasNegativeAxisDot = 0x135CC8; // type:func alias
+ActorControls_VectorDirection = 0x135D30; // type:func alias
+ActorControls_SubmitVectorEvent = 0x135DD8; // type:func alias
+ActorControls_UpdateMode = 0x135E28; // type:func alias
+ActorControls_ModeFromActor = 0x135E68; // type:func alias
+ActorControls_SetScalarPair = 0x135EA8; // type:func alias
 Transition_ClearFrame = 0x1031F8; // type:func
 Transition_ClearFrameCopy = 0x1032A8; // type:func
 Transition_FindGroup = 0x103358; // type:func
@@ -1598,6 +1605,7 @@ Kaim_CAstarData_GetClassInfo = 0x393598; // type:func alias
 GetClassInfoOf5FA10__Fv = 0x393928; // type:func
 Kaim_CPathFinder_GetClassInfo = 0x393928; // type:func alias
 MarkDirtyNow__5Mover = 0x393940; // type:func
+NamedClassRegistry_FindByName = 0x393978; // type:func alias
 GetClassInfoOf66700__Fv = 0x394220; // type:func
 Kaim_CGapDynamicAvoidance_GetClassInfo = 0x394220; // type:func alias
 GetClassInfo__Q24Kaim9SoundPool = 0x394C10; // type:func

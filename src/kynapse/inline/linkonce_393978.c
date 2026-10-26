@@ -9,25 +9,19 @@ extern Recovered_NamedValueRegistry* func_00393740(void);
 extern Recovered_NamedValueRegistry* func_003937B8(void);
 extern s32 strcmp(const char*, const char*);
 
-#ifdef NON_MATCHING
-// Unmatched: loop-entry scheduling differs.
 Recovered_NamedClassRecord* func_00393978(const char* name) {
     Recovered_NamedClassRegistry* registry;
-    Recovered_NamedClassRecord** cursor;
-    Recovered_NamedClassRecord** resultSlot;
     s32 i;
-    if (!name) { return NULL; }
+    if (!name)
+        return NULL;
     registry = func_003935D8();
-    cursor = registry->slots;
-    resultSlot = registry->slots;
-    for (i = 0; i < registry->count; ++i, ++cursor, ++resultSlot) {
-        if (strcmp((*cursor)->name, name) == 0) { return *resultSlot; }
+    for (i = 0; i < registry->count; ++i) {
+        if (strcmp(registry->slots[i]->name, name) == 0)
+            return registry->slots[i];
     }
     return NULL;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/linkonce_393978", func_00393978);
-#endif
+
 
 #ifdef NON_MATCHING
 static inline void* FindNamedValue(Recovered_NamedValueRegistry* registry, const char* name) {

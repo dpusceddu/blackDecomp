@@ -7,7 +7,7 @@
  * are unknown. groupKey is the word compared when filtering peer records. */
 typedef struct {
     u8 unk_00[0x20];
-    s128 unk_20; // UNVERIFIED: native actor +0x90 vector consumer remains a draft.
+    s128 unk_20; // Native actor +0x90 axis; its broader role remains unknown.
     s128 position;
 } Recovered_ManagedTransform;
 
@@ -29,7 +29,7 @@ typedef struct {
     u8 unk_330[0x50];
     s32 recordId; // Actor-slot id used by record lookup.
     u8 unk_384[8];
-    u32 invalid; // UNVERIFIED: native state word; registration rejects nonzero, another guard skips 2.
+    u32 invalid; // Native state word: the vector callback skips 2; nonzero registration guard remains a draft.
     u8 unk_390[0x10];
     s32 unk_3A0;
     u32 groupKey;
@@ -50,7 +50,7 @@ struct Recovered_ManagedSlot {
     u8 unk_79[3];
     Recovered_ManagedActor* actor;
     s32 unk_80; // UNVERIFIED: query eligibility compares this native word with 1.
-    struct Recovered_ManagedSlotDispatch* dispatch84; // UNVERIFIED: adjusted virtual consumer remains a draft.
+    struct Recovered_ManagedSlotDispatch* dispatch84; // Adjusted vector-event dispatch; class identity remains unknown.
     u8 unk_88[0xC8];
     Recovered_ActorRecords records;
     u8 unk_290[0x460];
