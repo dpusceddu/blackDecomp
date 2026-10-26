@@ -94,9 +94,8 @@ dispatch:
         return;
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_19a930", func_0019AA20);
 #endif
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_19a930", func_0019AA20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_19a930", func_0019AB10);
 
 void func_0019AC18(void **arg0)
