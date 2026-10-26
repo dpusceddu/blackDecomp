@@ -62,6 +62,7 @@ extern void* func_00107D20(s32);
 extern void func_001E1720(Recovered_ChoiceOwner*);
 extern void func_00280A08(void*);
 extern void func_001E2C68(void*, s32, s32);
+extern f32 func_001E2540(Recovered_ChoiceManager*, Recovered_ChoiceOwner*, s128, s128);
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E1720);
 #ifdef NON_MATCHING
@@ -176,5 +177,39 @@ s32 func_001E1F38(Recovered_ChoiceManager* manager, s32 count) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E2020);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E2540);
+#ifdef NON_MATCHING
+// Unmatched: sorting-loop registers and pointer scheduling differ.
+s32 func_001E26D0(Recovered_ChoiceManager* manager, s128 first, s128 second) {
+    s32 index = 0;
+    s32 result;
+    s32 swapped;
+    for (index = 0; index < manager->count; index++) {
+        Recovered_ChoiceOwner* object = manager->ordered[index];
+        object->priority = func_001E2540(manager, object, first, second);
+    }
+    index = 0;
+    do {
+        result = (s32)((u32)manager->count - 1U);
+        swapped = 0;
+        if (result > 0) {
+            do {
+                Recovered_ChoiceOwner** pair = &manager->ordered[index];
+                Recovered_ChoiceOwner* left = pair[0];
+                Recovered_ChoiceOwner* right = pair[1];
+                index++;
+                if (left->priority < right->priority) {
+                    pair[0] = right;
+                    swapped = 1;
+                    manager->ordered[index] = left;
+                }
+                result = manager->count;
+            } while (index < (s32)((u32)result - 1U));
+        }
+        index = 0;
+    } while (swapped);
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E26D0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E27D8);
