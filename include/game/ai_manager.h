@@ -20,7 +20,7 @@ typedef struct {
     u8 unk_C8[0x264];
     Recovered_ManagedSlot* managedSlot;
     u8 unk_330[0x50];
-    s32 recordId; // UNVERIFIED: record-lookup source remains a draft.
+    s32 recordId; // Actor-slot id used by record lookup.
     u8 unk_384[8];
     u32 invalid; // UNVERIFIED: registration guard source remains a draft.
     u8 unk_390[0x14];
