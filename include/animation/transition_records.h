@@ -2,7 +2,7 @@
 #define BLACK_ANIMATION_TRANSITION_RECORDS_H
 #include "animation/graph_runtime.h"
 
-typedef struct PS2AnimationExpression PS2AnimationExpression;
+struct PS2AnimationExpression;
 
 /* Partial PS2 transition view. UNVERIFIED: field meanings, trigger conventions
  * and complete record extent; these accesses currently come from draft consumers.
@@ -11,7 +11,7 @@ typedef struct AnimationTransitionRecord {
     int source_graph;
     float window_start, window_end;
     int trigger;
-    PS2AnimationExpression* condition;
+    struct PS2AnimationExpression* condition;
     int target_graph;
     float target_coordinate;
     TransitionTiming timing;
