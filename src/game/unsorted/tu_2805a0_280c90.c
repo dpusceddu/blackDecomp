@@ -2,7 +2,7 @@
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
 
-extern s64 *func_00388E40(void *);
+extern s32 func_00388E40(void *);
 extern void func_00284298(void *);
 extern void func_0026F3C0(void *);
 extern void func_00382348(void *, s32);
@@ -51,7 +51,7 @@ void func_00280CD0(Recovered_AudioEntryList *list, s32 arg1) {
     Recovered_AudioEntry *entry = list->entries;
     while (index < list->count) {
         void *object = entry->object;
-        s64 *key = func_00388E40(object);
+        s64 *key = (s64 *)func_00388E40(object);
         if (key != 0 && *key == arg1) {
             func_00284298(object);
             entry->unk_08 = 0;
