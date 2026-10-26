@@ -1,6 +1,7 @@
 #include "include_asm.h"
 
 #include "kynapse/graph/meta_entries.hpp"
+#include "kynapse/array_cleanup.h"
 
 namespace Kaim {
 
@@ -26,6 +27,9 @@ template<> CMetaClass<UnknownMetaOwner,UnknownFactory>::CMetaClass(const char *s
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F2B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F2F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F508);
+extern "C" int D_003EBE60;
+extern "C" void func_0038F508(Recovered_KynapseSmallArrayOwner* self, int flags) {
+    KynapseSmallArray_Destroy(self, flags, &D_003EBE60);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_0038F668);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/inline/graph_meta_entries", func_00390640);
