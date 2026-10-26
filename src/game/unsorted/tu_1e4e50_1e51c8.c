@@ -33,6 +33,9 @@ typedef struct Recovered_GridOwner {
 typedef char RecoveredGridEntrySize[(sizeof(Recovered_GridEntry) == 0x2C) ? 1 : -1];
 typedef char RecoveredGridRowSize[(sizeof(Recovered_GridRow) == 0x190) ? 1 : -1];
 extern s32 func_001E7448(Recovered_GridEntry*);
+extern void func_001E4F40(void*);
+extern void func_001E6A98(void*, u32);
+extern s32 func_00382348(void*, s32);
 
 /* Partial keyed table; the entry and group meanings are UNVERIFIED. */
 typedef struct Recovered_KeyEntry {
@@ -80,7 +83,39 @@ Recovered_KeyEntry* func_001E51E0(Recovered_KeyOwner* owner, const u64* group_ke
     return 0;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5270);
+#ifdef NON_MATCHING
+// Unmatched: loop padding and final argument scheduling differ.
+void func_001E5360(void* owner) {
+    s32 remaining = 1;
+    u8* state;
+    s32* counters;
+    void* target;
+    s32 parameter;
+    func_001E4F40((u8*)owner + 0x79C);
+    state = (u8*)owner + 0x68;
+    func_001E4F40((u8*)owner + 0x7F0);
+    do {
+        func_001E6A98(state, (u32)owner + 0x79C);
+        remaining--;
+        state += 0x38;
+    } while (remaining >= 0);
+    target = (u8*)owner + 0x8D0;
+    remaining = 2;
+    counters = (s32*)((u8*)owner + 0x84C);
+    do {
+        *counters-- = 0;
+        remaining--;
+    } while (remaining >= 0);
+    M2C_FIELD(owner, s32*, 0x798) = 0;
+    parameter = 0x02B9D6F8;
+    M2C_FIELD(owner, s32*, 0x850) = 0;
+    M2C_FIELD(owner, s32*, 0x8A8) = 0;
+    M2C_FIELD(owner, s32*, 0x854) = 5;
+    func_00382348(target, parameter);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5360);
+#endif
 
 s32 func_001E5408(s32 arg0, s32 arg1) {
     return M2C_FIELD(((arg1 * 4) + ((s32) &D_003BD478)), s32 *, 0);
