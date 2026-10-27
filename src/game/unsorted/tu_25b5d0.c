@@ -2,6 +2,24 @@
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
 
+/* Partial views. Original type and field names are UNVERIFIED. */
+typedef struct SlotEntry {
+    void* owner;
+    u32 priority;
+} SlotEntry;
+typedef struct SlotList {
+    SlotEntry* entries;
+    void* unknown4;
+    void* unknown8;
+    s16 capacity;
+    s16 count;
+} SlotList;
+
+typedef char SlotEntrySize[sizeof(SlotEntry) == 8 ? 1 : -1];
+typedef char SlotListCountOffset[(u32)&((SlotList*)0)->count == 0xE ? 1 : -1];
+
+extern void func_0014C380(s32);
+
 extern s32 func_0025C4C8();
 extern s32 func_00136F10();
 extern s32 func_0025C798();
@@ -87,13 +105,37 @@ s32 func_0025CC48(s32 *arg0, s32 arg1) {
     return M2C_FIELD(((((s32) ((arg1 - *func_0032E320(*arg0)) * 0xBA2E8BA3) >> 4) * 4) + ((s32) &D_0043F3F0)), s32 *, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025CCA0);
+s32 func_0025CCA0(void* self, void* body) {
+    void** items = (void**)((u8*)self + 0x20);
+    s32 i;
+    for (i = 0; i < 2; i++, items++) {
+        if (M2C_FIELD(M2C_FIELD(*items, void**, 0xC), void**, 0x58) == body) return 1;
+    }
+    return 0;
+}
 
 void * func_0025CCD8(void *arg0, void *arg1) {
     return arg0 + (((s32) arg1 * 0x10) + 0x28);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025CCE8);
+s32 func_0025CCE8(void* self, void* slot) {
+    void* owner = M2C_FIELD(slot, void**, 0x30);
+    s32 type = M2C_FIELD(owner, s32*, 0xC4);
+    void* compound;
+    void* body;
+    s32 flags;
+    if (type == 1 || type == 2) return 9;
+    if (M2C_FIELD(owner, u8*, 0x13B)) return 8;
+    compound = M2C_FIELD(slot, void**, 0x34);
+    body = M2C_FIELD(M2C_FIELD(compound, void**, 0xC), void**, 0x58);
+    flags = M2C_FIELD(body, s32*, 0x8C);
+    if (flags & 1) return 6;
+    if (M2C_FIELD(slot, u16*, 0x40) & 0x40) return 7;
+    if ((flags >> 2) & 1) return M2C_FIELD(owner, u8*, 0x13A) ? 3 : 5;
+    if (type == 7) return 2;
+    if ((flags >> 1) & 1) return M2C_FIELD(owner, u8*, 0x13A) ? 1 : 4;
+    return 8;
+}
 
 s32 func_0025CDA0(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_2;
@@ -104,7 +146,14 @@ s32 func_0025CDA0(s32 arg0, s32 arg1, s32 arg2) {
     return ~M2C_FIELD(arg0, s32 *, 0x8B04) != 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025CDF0);
+s32 func_0025CDF0(void* self) {
+    u8* occupied = (u8*)self + 0x2960;
+    s32 i;
+    for (i = 0; i < 20; i++) {
+        if (occupied[i] == 0) return 1;
+    }
+    return 0;
+}
 
 void func_0025CE28(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x8B04) = -1;
@@ -151,7 +200,10 @@ void func_0025DAC0(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x3F) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025DAF0);
+void func_0025DAF0(void* self) {
+    func_0014C380(M2C_FIELD(self, s32*, 0x30));
+    M2C_FIELD(self, u8*, 0x3F) = 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025DB20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025DBA8);
 
@@ -225,7 +277,10 @@ void func_00263388(void *arg0) {
     M2C_FIELD(arg0, s16 *, 0xE) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_00263390);
+void func_00263390(SlotList* self, void* owner, s32 count, s32 first) {
+    s32 i;
+    for (i = first; i < first + count; i++) self->entries[i].owner = owner;
+}
 
 s32 func_002633D0(void *arg0) {
     return M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 8), void **, 0xC), s32 *, 0x58);
@@ -236,7 +291,17 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0026355
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_00263630);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_00263798);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_002638B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_00263908);
+s32 func_00263908(SlotList* self, s16 count, void* owner) {
+    s16 first = self->count;
+    s16 i;
+    if (self->capacity - first < count) return -1;
+    for (i = first; i < first + count; i++) {
+        self->entries[i].owner = owner;
+        self->entries[i].priority = 255;
+    }
+    self->count += count;
+    return first;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_002639A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_00263B70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_00263C58);
