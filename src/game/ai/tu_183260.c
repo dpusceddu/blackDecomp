@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
+#include "game/movement_history.h"
 
 extern void func_00181AD0(void *arg0, s32 arg1);
 extern s32 func_00160E70();
@@ -63,7 +64,7 @@ extern void func_00173640(f32*, f32);
 extern AiReactionTuning D_003F6350[];
 extern s32 func_00183FD8(void*, s32, s128, void*, f32);
 extern void func_001858A8(void*, s32, s128, f32, void*);
-extern void func_001840C8(void*, s32, s128, void*, s32, f32);
+extern void func_001840C8(Recovered_MovementHistory*, s32, s128, void*, s32, f32);
 extern void* D_0040F4D0;
 extern void* D_0040F4D4;
 extern const f32 D_003F5600, D_003F5604, D_003F6570[];
@@ -78,6 +79,18 @@ extern void* func_00172610(void*);
 extern s32 func_0018D608(void*);
 extern s32 func_0018BEB0(void*, void*);
 extern f32 func_001847B8(void*, f32, s32, s32, s32);
+extern f32 func_0018E0D0(void*);
+extern f32 func_0018E0F0(void*);
+
+#ifdef NON_MATCHING
+extern f32 func_0018DC48(void*);
+extern f32 func_0018DBC0(void*);
+extern f32 func_0018DEA0(void*, s32);
+extern void func_00173690(f32*);
+extern f32 D_003F6530[];
+extern void func_00185538(Recovered_MovementHistory*, s32, s32, s128, s32);
+extern void func_001855F8(Recovered_MovementHistory*, s128, s32, f32);
+#endif
 
 static inline u8 AiSelectionActive(void* state) {
     if (!state) return 0;
@@ -257,7 +270,53 @@ void func_00183910(s32 *arg0, s32 arg1) {
     *arg0 = arg1;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: cursor lifetimes, saved registers and native short-loop padding differ.
+s32 func_00183918(Recovered_MovementHistory* self) {
+    s32 i;
+    f32* timer;
+    f32 total;
+    f32* threshold;
+    f32* reset;
+    f32* weights;
+    s32* id;
+    f32* historyTimer;
+    M2C_FIELD(self, void**, 4) = NULL;
+    M2C_FIELD(self, void**, 0xC) = NULL;
+    M2C_FIELD(self, f32*, 8) = 3.402823466e+38f;
+    M2C_FIELD(self, f32*, 0x10) = func_0018DC48((u8*)self->owner + 0xC94);
+    M2C_FIELD(self, f32*, 0x14) = func_0018DBC0((u8*)self->owner + 0xC94);
+    M2C_FIELD(self, f32*, 0x1C) = -1.0f;
+    M2C_FIELD(self, f32*, 0x20) = 90.0f;
+    M2C_FIELD(self, f32*, 0x24) = 60.0f;
+    M2C_FIELD(self, f32*, 0x28) = 45.0f;
+    M2C_FIELD(self, f32*, 0x18) = -1.0f;
+    M2C_FIELD(self, s32*, 0x30) = 0;
+    timer = (f32*)((u8*)self + 0x34);
+    for (i = 2; i >= 0; i--, timer++) func_00173690(timer);
+    total = 0.0f;
+    historyTimer = &self->timer;
+    weights = D_003F6530;
+    threshold = self->thresholds;
+    reset = self->resetValues;
+    for (i = 0; i < 4; i++, weights++, threshold++, reset++) {
+        f32 value = func_0018DEA0((u8*)self->owner + 0xC94, i);
+        *reset = total + value * *weights;
+        total += value;
+        *threshold = total;
+    }
+    self->state = 0;
+    self->nextSampleId = -1;
+    M2C_FIELD(self, s32*, 0x40) = 0;
+    id = (s32*)((u8*)self + 0x104);
+    for (i = 4; i >= 0; i--, id -= 8) *id = -1;
+    self->mask = 0;
+    func_00173690(historyTimer);
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183918);
+#endif
 void func_00183EA8(void* self);
 
 void func_00183AA0(void* self) {
@@ -425,7 +484,36 @@ s32 func_00183FD8(void* self, s32 kind, s128 vector, void* actor, f32 scale) {
     }
     return 0;
 }
+#ifdef NON_MATCHING
+// Unmatched: the scalar maximum lowers to slt/movz instead of the native packed maximum and word extraction.
+void func_001840C8(Recovered_MovementHistory* self, s32 kind, s128 vector, void* actor, s32 changed, f32 scale) {
+    s32 minimum = D_003F6350[kind].minimumLevel;
+    f32 amount;
+    if (changed && minimum < 2) minimum = 2;
+    amount = D_003F6350[kind].secondaryLow +
+             (D_003F6350[kind].secondaryHigh - D_003F6350[kind].secondaryLow) * scale;
+    amount -= M2C_FIELD(self, f32*, 0x30);
+    if (amount > 0.0f) {
+        s32 level = self->state;
+        if (level < minimum) {
+            func_00185538(self, minimum, 0, vector, (s32)actor);
+        } else if (level < D_003F6350[kind].maximumLevel) {
+            f32 gain = D_003F6350[kind].multiplier;
+            f32 multiplier = func_0018DEA0((u8*)self->owner + 0xC94, level);
+            gain *= amount;
+            gain *= multiplier;
+            gain *= D_003F6530[self->state];
+            func_001855F8(self, vector, (s32)actor, gain);
+        }
+    }
+    if (amount > 0.0f) {
+        func_00183D28(self, kind, actor);
+        func_00183E00(self, kind, actor);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_001840C8);
+#endif
 
 void * func_00184238(void *arg0, void *arg1) {
     return (void *) ((func_00173610(arg0 + (((s32) arg1 * 4) + 0x34)) ^ 1) & 0xFF);
@@ -458,4 +546,24 @@ void func_001842C8(void* self, s128 vector, void* actor, f32 distance) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_001843C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00184550);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_001847B8);
+f32 func_001847B8(void* self, f32 distance, s32 kind, s32 useMultiplier, s32 level) {
+    f32 high, low;
+    if (level == 4) level = M2C_FIELD(self, s32*, 0x64);
+    low = D_003F6350[kind].nearDistance * D_003F6350[kind].nearDistance;
+    high = D_003F6350[kind].farDistance * D_003F6350[kind].farDistance;
+    if (useMultiplier) {
+        f32 multiplier;
+        if (level > 0) multiplier = func_0018E0D0((u8*)M2C_FIELD(self, void**, 0) + 0xC94);
+        else multiplier = func_0018E0F0((u8*)M2C_FIELD(self, void**, 0) + 0xC94);
+        low *= multiplier;
+        high *= multiplier;
+    }
+    if (distance < low) return 1.0f;
+    if (distance > high) return 0.0f;
+    distance -= low;
+    distance /= (high - low);
+    {
+        f32 clamped = __ee_max_s(distance, 0.0f);
+        return 1.0f - __ee_min_s(clamped, 1.0f);
+    }
+}
