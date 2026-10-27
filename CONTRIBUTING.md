@@ -8,8 +8,11 @@ build with the [README](README.md#get-started). Terms are in the [glossary](docs
 
 - **Evidence.** A function is `exact` (compiled from source, and the whole image stays byte-identical) or a `draft` (a
   `NON_MATCHING` block). Never describe a function as more than its level, and never demote an exact function to gain another.
-- **Validate according to impact.** Changes to recovered source, compiler recipes or committed build inputs must leave
-  `ninja` printing `OK` for USA retail (`SLUS_213.76`). Run `python3 tools/check_versions.py` (all five versions) when a
+- **Validate according to impact.** For recovered source, compiler recipes or committed build inputs, check affected
+  objects while iterating and require one full-image `ninja` check printing `OK` for USA retail (`SLUS_213.76`) before
+  submitting the final changes for review. Intermediate commits do not require full-image builds. Fix integration failures
+  and repeat the check as needed; run an earlier image build when diagnosing a concrete integration problem.
+  Run `python3 tools/check_versions.py` (all five versions) when a
   change affects binary construction shared by the regional builds, such as binary splitting, section layout, assembly
   normalization or linking. Helper-only changes (pickers, scratch compilation, configuration writers), docs and tests do
   not need image rebuilds when they leave committed build inputs and the production build path unchanged; use focused
@@ -60,15 +63,17 @@ draft without updates for 48 hours lapses: push your work in progress, or commen
 Each translation unit (TU) is one file that lists the functions it owns in address order: recovered functions in C or C++,
 the others as `INCLUDE_ASM` lines.
 
-1. `ninja` once (it prints `OK`), then `ninja objdiff`, and open the repository root in the
-   [objdiff](https://github.com/encounter/objdiff) GUI. Saving a TU file rebuilds its object and shows the diff.
+1. `python3 tools/setup.py` prepares metadata, assembly and `objdiff.json` without an image build. Open the repository root
+   in the [objdiff](https://github.com/encounter/objdiff) GUI. Saving a TU file rebuilds its object and shows the diff;
+   `ninja build/SLUS_213.76/objdiff/base/<unit>.o` does the same from the shell.
 2. Read the [matching handbook](docs/matching-handbook.md) before each TU: types, callee signatures and object lifetimes
    explain most mismatches. A function's assembly is `asm/SLUS_213.76/nonmatchings/<file>/func_XXXXXXXX.s`.
 3. Replace the `INCLUDE_ASM` line with C or C++. `python3 tools/decompile.py func_XXXXXXXX` prints an m2c draft with the
    project's context (`--write` puts it in place). For the last differing instructions, run
    [decomp-permuter](docs/pipeline.md#using-decomp-permuter-directly) on the function.
-4. `ninja` is the byte-exact check of the whole image: `OK`, or the file and function that differ, with the size and an
-   instruction diff.
+4. Iterate with object comparisons and commit small batches. Before submitting the final changes for review, run `ninja`
+   for the byte-exact check of the whole image: `OK`, or the file and function that differ, with the size and an instruction
+   diff. Object matches remain candidates until this passes; preserve every previously exact function.
 5. A function that compiles under another name (a C++ method) needs a line in `symbols.txt`
    (`Reset__4Game = 0x1b78d8; // type:func`). Code that needs other flags than the rest of its file gets a file of its own
    (`python3 tools/split_function.py func_XXXXXXXX [--cpp] [--flags "..."]`, see [docs/units.md](docs/units.md)).
@@ -182,11 +187,12 @@ Always welcome, as long as `ninja` prints `OK`:
 ## Checks and pull requests
 
 Choose checks according to the impact rule above; the image and progress commands apply to source and build-input changes.
-Run the relevant test suites for tool and build behavior changes.
+Run the image check once at the final revision before review, repeating it after fixes if it fails. Run the relevant test
+suites for tool and build behavior changes.
 
 ```sh
-ninja                                           # OK for SLUS_213.76
-ninja progress                                  # functions and code matched; put before/after in the pull request
+ninja                                           # final full-image check: OK for SLUS_213.76
+ninja progress                                  # final verified counts; compare with saved baseline units
 python3 -m unittest discover -s tests           # build and linker tests
 python3 -m unittest discover -s tests/tools     # tool tests
 ```

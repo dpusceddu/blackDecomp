@@ -50,18 +50,21 @@ Details of both measures: [docs/progress-reports.md](docs/progress-reports.md). 
 
 ## Get started
 
-You need your own copy of the game (USA, `SLUS_213.76`) and Linux x86-64; on Windows use WSL 2, elsewhere Docker
+You need your own copy of the game (USA, `SLUS_213.76`) and a Linux x86-64 shell. Native Linux with a Python virtual
+environment is the default; a user or harness can also provide the shell through WSL or a container
 ([docs/setup.md](docs/setup.md)).
 
 ```sh
 sudo apt install -y git ninja-build python3 python3-venv binutils-mipsel-linux-gnu libc6-i386 xz-utils
 git clone https://github.com/dpusceddu/blackDecomp.git && cd blackDecomp
 mkdir -p orig/SLUS_213.76 && cp /path/to/SLUS_213.76 orig/SLUS_213.76/
-python3 tools/setup.py    # Python packages in .venv, the pinned toolchain (SHA-256 checked), the build
+python3 tools/setup.py    # Python packages, pinned toolchain, assembly and objdiff metadata; no image build
 ```
 
-The first build takes about two minutes and ends with `OK  SLUS_213.76  SLUS_213.76  sha256 141b0520...`; running
-`tools/setup.py` again later only checks.
+Activate `.venv` if setup asks; subsequent commands use that environment. During matching, build individual units
+through objdiff or their Ninja targets. Run the full-image `ninja` check once
+before submitting the final changes for review; it must print `OK  SLUS_213.76`. `python3 tools/setup.py --build` is
+available when an explicit full-image smoke check is wanted.
 
 ## Contribute
 

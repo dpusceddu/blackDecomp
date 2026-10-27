@@ -7,6 +7,9 @@
   the build.
 - Build and compile only through `ninja` and the tools in `tools/`; never start the proprietary compilers or assemblers
   directly.
+- Use the execution environment or build command configured by the user or harness. The default is native Linux x86-64
+  with a Python virtual environment. Container startup and mounts belong to environment provisioning before the session;
+  do not construct ad hoc container exec commands during matching. Report a missing compiler environment if none is configured.
 - Keep scratch files in `.local/` or `build/` (both ignored). Check free disk space before unpacking disc images, and
   process one image at a time.
 - Commit without attribution lines. Do not push unless asked; a work session pushes to its own draft pull request.
@@ -21,7 +24,8 @@ and `data/`). Use the harness's isolation and coordination facilities for parall
 Split the processor between sessions (`ninja -j` with the core count divided by the number of sessions): the SN tools can
 stall under heavy load.
 
-1. **Build.** Run `python3 tools/setup.py`: it installs what is missing and builds, and must end with `Ready`.
+1. **Prepare.** Run `python3 tools/setup.py`: it checks dependencies and prepares assembly, metadata and `objdiff.json`
+   without compiling all objects or linking an image, and must end with `Ready`.
    Save `build/SLUS_213.76/units.json` as `.local/session-baseline-units.json`; its functions with status
    `source` are the protected set.
 2. **Pick.** Run `python3 tools/next.py --pick`: one unclaimed file, drawn at random from the best candidates (game code
@@ -34,18 +38,24 @@ stall under heavy load.
    lower pull request number than yours, it was claimed first; drop it from your claim and pick again. Without GitHub
    access, run only one session at a time and say so in the final report.
 4. **Work by family.** Recover the shared types and layouts first (types decide most mismatches), then decompile all of the
-   family's tractable functions as one batch, build, compare in objdiff and iterate. About five builds per hypothesis per
-   function; then leave the draft in `#ifdef NON_MATCHING` with a one-line `// Unmatched:` note and move on. Use the
-   permuter only for near misses, with seeds that leave out unrelated `INCLUDE_ASM` bodies. A per-file flag or assembler
+   family's tractable functions as one batch, compile the changed units, compare in objdiff and iterate. Use
+   `ninja build/SLUS_213.76/objdiff/base/<unit>.o` for each affected unit; this does not link the image. About five object
+   builds per hypothesis per function; then leave the draft in `#ifdef NON_MATCHING` with a one-line `// Unmatched:` note
+   and move on. Use the permuter only for near misses, with seeds that leave out unrelated `INCLUDE_ASM` bodies. A per-file flag or assembler
    change in `splits.yaml` needs a concrete reason in the native code, in a `note:` on the entry; reject one that only
    makes one function match by coincidence. No filler, padding or byte patches.
-5. **Commit.** Each commit leaves `ninja` printing `OK` and keeps every function of the protected set `source`. Commit per
-   file or small batch; push to the draft pull request. New headers of the family go in their own commits; a change to a
-   header that other files use goes alone in a commit whose message starts with `Shared:`.
-6. **Log.** Keep `.local/session.md` (ignored): per batch, functions and bytes matched, time per match, blockers; at the
-   top, a short handoff (current file, pending candidates, next target).
-7. **Stop** after about four hours, or earlier when two hours pass without a new match, the build breaks in a way you
-   cannot fix, or the claimed files have no tractable functions left. Finish the batch, push, and turn the draft into a
-   ready pull request whose description gives `ninja progress` before and after, the functions matched, the drafts left
-   and why, any per-file flags or tool fixes with their reasons, and that the work was done by an AI agent. A session that
-   continues later reads the handoff first.
+5. **Commit.** Keep every function of the protected set `source`, and check affected objects before committing. Commit per
+   file or small batch; push to the draft pull request. Object matches are candidates until the final full-image check.
+   New headers of the family go in their own commits; a change to a header that other files use goes alone in a commit
+   whose message starts with `Shared:`.
+6. **Log.** Keep `.local/session.md` (ignored): per batch, candidate functions and bytes matched in objdiff, time per
+   candidate, blockers; after the final image check, record the verified gains. At the top, keep a short handoff
+   (current file, pending candidates, next target).
+7. **Stop** after about four hours, or earlier when two hours pass without a new candidate matching in objdiff, the build
+   breaks in a way you cannot fix, or the claimed files have no tractable functions left. Finish the batch, then run one full-image `ninja`
+   check before marking the pull request ready for review. Fix failures and repeat the check as needed; earlier image
+   builds are for diagnosing concrete integration problems, not a per-function or per-commit requirement. Require `OK`
+   and verify that every protected function is still `source`. Run `ninja progress`, push, and turn the draft into a
+   ready pull request whose description gives baseline counts from the saved units and final verified progress, the
+   functions matched, the drafts left and why, any per-file flags or tool fixes with their reasons, and that the work was
+   done by an AI agent. A session that continues later reads the handoff first.

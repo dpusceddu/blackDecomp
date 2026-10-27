@@ -1,10 +1,10 @@
-# Reproducible build environment for the matching rebuild (Linux x86-64; on other hosts run it under
-# `docker run --platform linux/amd64`). The image contains the tools, not the game: mount your checkout, which holds
+# Optional environment provisioned by the user or harness before starting an agent (Linux x86-64).
+# Native Linux with a Python virtual environment is the default. This image contains build tools, not the agent or game: mount your checkout, which holds
 # orig/<GAMEID>/<GAMEID>, using tools/container.py (including linked-worktree Git paths).
 #
 #   docker build -t black-decomp .
 #   python3 tools/container.py
-#   (inside)  python3 configure.py && ninja
+#   (prepared shell)  python3 tools/setup.py
 FROM debian:bookworm-slim
 
 ENV DEBIAN_FRONTEND=noninteractive

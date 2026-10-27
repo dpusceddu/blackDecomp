@@ -22,7 +22,8 @@ only a diagnostic. Use the unit's compiler, flags and assembler. All compiler ex
    and scoring the caller's emitted body. Freeze the helper ABI and review float grouping before accepting a result.
 6. Before leaving a hard function, exhaust the applicable ladder and leave one precise `// Unmatched:` obstruction in
    source; keep variants/diffs in `build/`. Revisit compiler and search evidence before moving to another TU.
-7. Confirm the registration, then run `ninja` and `ninja progress`. Never demote previously exact work to
+7. Before submitting the session's final changes for review, confirm the registrations and run `ninja` and `ninja progress`.
+   Use object comparisons during the ladder; full-image builds are not required after each function, TU or commit. Never demote previously exact work to
    claim a gain. Review shared headers and `splits.yaml` changes with extra care: they affect every file.
 
 ## Verified recipes

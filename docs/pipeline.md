@@ -22,11 +22,11 @@ explicitly; it does not invent a general VU library. Every accepted result still
 and an identical full link. Microcode stays binary; SN cannot express special-register clobbers, so
 the documented micro/macro wrappers require hidden ACC/Q/I/flag state to be dead at their boundary.
 
-Drafts C for assembly functions with no per-function judgment and keeps what rebuilds byte-identically. Setup, once:
+Drafts C for assembly functions with no per-function judgment and keeps what rebuilds byte-identically. After preparing
+the environment with `python3 tools/setup.py`, install the optional permuter once:
 
 ```sh
-.venv/bin/pip install -r requirements.txt            # m2c (pinned git commit), pycparser, toml
-.venv/bin/python tools/autodecomp.py setup           # decomp-permuter at its pinned commit, into .venv/ (git clone)
+python3 tools/autodecomp.py setup                   # decomp-permuter at its pinned commit, into .venv/ (git clone)
 ```
 
 Drafting and scoring read and write text. Candidate compilation uses individual local toolchain invocations in the
@@ -42,14 +42,14 @@ python3 tools/autodecomp.py run --max-size 100 --status near --status mismatch -
 python3 tools/autodecomp.py permute --max-score 8         # decomp-permuter on near misses (one member per group of identical bodies)
 python3 tools/autodecomp.py clone                         # clone exact sources onto identical-body functions
 python3 tools/autodecomp.py register                      # exact drafts -> their TU files (the INCLUDE_ASM line is replaced)
-python3 tools/autodecomp.py confirm                       # compile, link, put back the INCLUDE_ASM line of what does not place identically; ninja must say OK
+python3 tools/autodecomp.py confirm                       # final integration gate after the batch; retries diagnose failures
 python3 tools/autodecomp.py report [--max-size N]         # outcome classes, failure reasons
 python3 tools/next.py [files|near|types|identical|data|ee]  # best next work (files: what to claim next)
 ```
 
 ### Using decomp-permuter directly
 
-Use the project's import wrapper and upstream decomp-permuter's `permuter.py` in Linux, WSL 2, or the project container. Install
+Use the project's import wrapper and upstream decomp-permuter's `permuter.py` directly in the prepared Linux environment. Install
 `cpp` in that environment (`apt install cpp` on Debian). `autodecomp.py setup` clones the pinned permuter into `.venv/`.
 Prepare a target and its per-file settings, then import your draft:
 

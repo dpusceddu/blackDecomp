@@ -2,6 +2,8 @@
 
 Use the Linux x86-64 setup in [README](../README.md). `configure.py` prepares the split image and writes an ordinary Ninja
 build. `ninja` compiles or assembles individual objects, links once, packs the retail ELF container and checks its SHA-256.
+During matching, prepare with `python3 tools/setup.py` and rebuild affected objdiff units. The full-image check below is
+the final review gate, repeated after fixes if it fails; intermediate commits do not need image builds.
 
 ```sh
 python3 configure.py
@@ -66,7 +68,8 @@ compiler context under separate context symbols and discard those inputs; their 
 
 ## Objdiff and drafts
 
-`ninja objdiff` writes `objdiff.json` and a comparison pair per source object. The GUI invokes
+`ninja objdiff.json` writes just the project. `ninja objdiff` additionally builds comparison pairs for all source objects;
+it is optional. The GUI invokes
 `ninja build/SLUS_213.76/objdiff/base/<unit>.o`, which builds only that file and its comparison view. It requires neither a
 link nor a fit check. The comparison base excludes included assembly, preserving honest source progress; the linked object
 contains it. `ninja progress` builds its report dependency too. `ninja report` regenerates the report from these views, and `tools/progress.py --check` checks agreement with
