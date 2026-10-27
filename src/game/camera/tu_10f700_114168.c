@@ -1,5 +1,15 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/effects/random_state.h"
+
+// Partial Game view; only the random-state placement is recovered here.
+typedef struct Recovered_GameRandomView {
+    u8 unk_0[0x5AD8];
+    BkEffectRandomStatePS2 random;
+} Recovered_GameRandomView;
+
+typedef char GameRandomOffset[(u32) & ((Recovered_GameRandomView*)0)->random == 0x5AD8 ? 1 : -1];
+typedef char GameRandomStateSize[sizeof(BkEffectRandomStatePS2) == 8 ? 1 : -1];
 
 extern s32 func_001B6CF8(s32, s32, M2C_UNK);
 extern s32 D_0040F4D8;
@@ -83,10 +93,31 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012C650);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012C790);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012CBA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D058);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D0D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D158);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D218);
+static inline u32 GameRandomStep(BkEffectRandomStatePS2* random) {
+    random->state = (random->state << 16) + ((s32)random->state >> 16);
+    random->state += random->accumulator;
+    random->accumulator += random->state;
+    return random->state;
+}
+
+static inline f32 GameRandomRange(Recovered_GameRandomView* self, f32 minimum, f32 maximum) {
+    f32 fraction = (f32)GameRandomStep(&self->random) * 2.3283064365386963e-10f;
+    return minimum + (maximum - minimum) * fraction;
+}
+
+f32 func_0012D058(Recovered_GameRandomView* self) {
+    return (f32)GameRandomStep(&self->random) * 2.3283064365386963e-10f;
+}
+f32 func_0012D0D0(Recovered_GameRandomView* self, f32 minimum, f32 maximum) {
+    return GameRandomRange(self, minimum, maximum);
+}
+s32 func_0012D158(Recovered_GameRandomView* self, s32 minimum, s32 maximum) {
+    return (s32)GameRandomRange(self, (f32)minimum, (f32)maximum + 1.0f - 0.0000152587890625f);
+}
+s32 func_0012D218(Recovered_GameRandomView* self, f32 probability) {
+    if (probability == 0.0f) return 0;
+    return func_0012D058(self) <= probability;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D270);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D310);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D3D0);
