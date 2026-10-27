@@ -3,6 +3,36 @@
 #include "game/timed_value_pool.h"
 #include "game/effects/damage_window.h"
 
+// Accessed attachment-pool and owner-row fields; original class identities remain UNVERIFIED.
+extern void* func_00107D20(u32);
+typedef struct {
+    void* children[8];
+    u8 unknown20[0x40];
+    void* resource;
+    u8 unknown64[0xC];
+} PoolEntry;
+typedef struct {
+    u16* indices;
+    u16* reverse;
+    u16 count, capacity;
+} IndexPool;
+static inline void InitializeReverse(IndexPool* indices, u16 capacity) {
+    indices->reverse = func_00107D20(capacity * 2);
+    indices->count = 0;
+    indices->capacity = capacity;
+}
+typedef char PoolEntryStride[sizeof(PoolEntry) == 0x70 ? 1 : -1];
+typedef char PoolEntryResourceOffset[(u32) & ((PoolEntry*)0)->resource == 0x60 ? 1 : -1];
+extern void* D_0040F510;
+extern void* func_001E69E8(void*);
+typedef struct {
+    void* resource;
+    s32 field4, field8;
+    u8 flag, unknownD[3];
+} OwnerRow;
+extern f32 D_003BD9DC, D_003BD9E0, D_003BD9E4, D_003BD9E8, D_003BD9EC, D_003BD9F0;
+extern f32 D_003BD9F4, D_003BD9F8, D_003BD9FC, D_003BDA00, D_003BDA04;
+
 /* Accessed slot layout; original field meanings remain UNVERIFIED. */
 typedef struct {
     u16 field0, field2, field4, field6;
@@ -272,7 +302,32 @@ void func_001B6188(void* base) {
     for (i = 0; i < 4; i++) { M2C_FIELD(base, u8*, 0x734 + i * 0xC20) = 0; }
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B61C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B6250);
+void func_001B6250(void* base) {
+    u16 i;
+    PoolEntry* entries = base;
+    s32* a = (s32*)((s8*)base + 0x2300);
+    s32* b = (s32*)((s8*)base + 0x2440);
+    s32* c = (s32*)((s8*)base + 0x2580);
+    IndexPool* indices = (IndexPool*)((s8*)base + 0x3440);
+    M2C_FIELD(base, s32*, 0x3450) = 0;
+    M2C_FIELD(base, u16*, 0x3458) = 0;
+    for (i = 0; i < 80; i++) {
+        PoolEntry* entry = entries + i;
+        u16 j;
+        for (j = 0; j < 8; j++) entry->children[j] = 0;
+        entry->resource = 0;
+        {
+            s32* pa = a + i;
+            s32* pb = b + i;
+            s32* pc = c + i;
+            *pa = 0;
+            *pb = 8;
+            *pc = -1;
+        }
+    }
+    M2C_FIELD(base, u16**, 0x3440) = func_00107D20(160);
+    InitializeReverse(indices, 80);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B6328);
 void func_001BEBA0(BkEffectDamageWindowsPS2* windows, void* effect, void* actor, f32 delay, f32 damage) {
     s16 i;
@@ -391,7 +446,23 @@ void func_001DD7C0(void* state, s32 flag) {
     s32 i = 0;
     for (; i < M2C_FIELD(state, s32*, 0x58); i++) { func_001D9EC8(M2C_FIELD(state, void**, 0x30 + i * 8), flag); }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001E45A8);
+void func_001E45A8(void* state) {
+    u32 i;
+    u8* flag = (u8*)state + 0x14;
+    for (i = 0; i < 2; i++) {
+        OwnerRow* row = (OwnerRow*)(flag - 12);
+        row->resource = func_001E69E8(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 4));
+        ((OwnerRow*)(flag - 12))->field4 = 0;
+        ((OwnerRow*)(flag - 12))->field8 = 0;
+        ((OwnerRow*)(flag - 12))->flag = 0;
+        flag += sizeof(OwnerRow);
+    }
+    {
+        void* owner = M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 4);
+        M2C_FIELD(state, s32*, 0) = 1;
+        M2C_FIELD(state, void**, 0x3C) = owner;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001E8B60);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001E9250);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001E9C68);
@@ -401,7 +472,22 @@ void func_001ED2C8(void* state, u64 value, s32 data) {
     M2C_FIELD(state, s32*, 8) = data;
     M2C_FIELD(state, s32*, 0x1C)++;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001ED2E8);
+f32 func_001ED2E8(void* unused, s32 kind) {
+    switch (kind) {
+        case 3: return D_003BD9DC;
+        case 4: return D_003BD9E0;
+        case 5: return D_003BD9E4;
+        case 6: return D_003BD9F0;
+        case 7: return D_003BD9E8;
+        case 8: return D_003BD9EC;
+        case 9: return D_003BD9F4;
+        case 10: return D_003BD9F8;
+        case 11: return D_003BD9FC;
+        case 12: return D_003BDA00;
+        case 13: return D_003BDA04;
+        default: return 0.0f;
+    }
+}
 void func_001ED3E0(TrackedPool* pool, u128 context, void* parameters, f32 elapsed) {
     s32 i;
     for (i = 0; i < pool->pool.count; i++) {
