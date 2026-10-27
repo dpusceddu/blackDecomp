@@ -21,21 +21,37 @@ typedef struct Recovered_PlaybackController {
 } Recovered_PlaybackController;
 extern Recovered_PlaybackServices* D_0040F510;
 extern s32 func_001D92A0(Recovered_PlaybackState*, u64, Recovered_StreamRange*, u32*, s32, u32);
-/* Partial larger owner and transition payload; field meanings are UNVERIFIED. */
+/* Native transition records have a 32-byte copy extent. Original identities,
+ * field meanings and complete owner allocation remain UNVERIFIED. */
+typedef struct Recovered_PlaybackTransition {
+    u64 key;
+    f32 unk_08, unk_0C;
+    s32 unk_10;
+    s16 unk_14;
+    u8 unk_16, active;
+    u64 unk_18;
+} Recovered_PlaybackTransition;
 typedef struct Recovered_PlaybackTransitionOwner {
     u8 unk_00[0x1918];
-    f32 unk_1918;
-    f32 unk_191C;
-    f32 unk_1920;
-    f32 unk_1924;
-    s32 unk_1928;
-    s32 unk_192C;
+    f32 unk_1918, unk_191C, unk_1920, unk_1924;
+    s32 unk_1928, unk_192C;
+    u32 state;
+    void* unk_1934;
+    u8 unk_1938[8];
+    Recovered_PlaybackTransition current, pending, previous;
+    u8 deferred, unk_19A1;
 } Recovered_PlaybackTransitionOwner;
-typedef struct Recovered_PlaybackTransition {
-    u8 unk_00[0x0C];
-    f32 unk_0C;
-    s32 unk_10;
-} Recovered_PlaybackTransition;
+/* A separate native producer supplies a signed selection halfword and three
+ * words at 0x14/0x18/0x1C; their original meanings remain UNVERIFIED. */
+typedef struct {
+    u8 unk_00[0x10];
+    s16 unk_10;
+    u8 unk_12[2];
+    f32 unk_14;
+    s32 unk_18;
+    f32 unk_1C;
+} Recovered_PlaybackDeferredInput;
+typedef char PlaybackTransitionCopyExtent[sizeof(Recovered_PlaybackTransition) == 0x20 ? 1 : -1];
 extern void* D_0040F0E0;
 
 static inline Recovered_AudioMixPreferences* MixPreferences(void) { return &FrontendOptions_Preferences->audioMix; }
@@ -177,7 +193,28 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DB5F
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DBA00);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DBDB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DBED8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DBF38);
+extern void* D_0040F4D0;
+extern u32 D_0040EAE4;
+void func_001DBF38(Recovered_PlaybackTransitionOwner* owner, Recovered_PlaybackDeferredInput* transition) {
+    if (transition->unk_10 >= 0 && (M2C_FIELD(D_0040F4D0, s8*, 0x5AAC) || D_0040EAE4 < 2)) {
+        owner->deferred = 1;
+        if (owner->pending.active) {
+            owner->previous = owner->pending;
+            owner->previous.active = 1;
+        } else if (owner->current.active) {
+            owner->previous = owner->current;
+            owner->previous.active = 1;
+        } else owner->previous.active = 0;
+        owner->pending.key = 0;
+        owner->pending.unk_10 = transition->unk_18;
+        owner->pending.unk_08 = transition->unk_1C;
+        owner->pending.unk_0C = transition->unk_14;
+        owner->pending.unk_14 = transition->unk_10;
+        owner->pending.active = 1;
+        M2C_FIELD(&owner->pending, u8*, 0x18) = 0;
+        owner->pending.unk_16 = 0;
+    }
+}
 extern void func_001DC038(void*, void*);
 void func_001DC000(void* owner) {
     if (M2C_FIELD(owner, u8*, 0x19A0)) {
@@ -187,7 +224,25 @@ void func_001DC000(void* owner) {
     }
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC038);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC1A0);
+extern u8 func_00103870(void*);
+extern s32 func_001DC278(Recovered_PlaybackTransitionOwner*, Recovered_PlaybackTransition*);
+s32 func_001DC1A0(Recovered_PlaybackTransitionOwner* owner, Recovered_PlaybackTransition* transition) {
+    s32 state = owner->state;
+    if (state != 6 && state != 8 && state != 9) {
+        if (!func_00103870(D_0040F0E0)) {
+            owner->state = 6;
+            owner->current = *transition;
+            owner->current.active = 1;
+            func_001DC278(owner, transition);
+            M2C_FIELD(M2C_FIELD(PlaybackPools()->unk_4BD8, void**, 0x24), u8*, 0x1E54) = transition->unk_16;
+            owner->unk_191C = transition->unk_0C;
+            owner->unk_1928 = transition->unk_10;
+            return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
 s32 func_001DC278(Recovered_PlaybackTransitionOwner* owner, Recovered_PlaybackTransition* transition) {
     f32 previous = owner->unk_191C;
     owner->unk_1918 = MixPreferences()->unk_20;
@@ -198,28 +253,7 @@ s32 func_001DC278(Recovered_PlaybackTransitionOwner* owner, Recovered_PlaybackTr
     return 1;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC2C0);
-s32 func_001DC448(void* owner) {
-    switch (M2C_FIELD(owner, u32*, 0x1930)) {
-        case 0:
-        case 1:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
-        case 14:
-        case 15:
-        default: break;
-        case 6: M2C_FIELD(owner, u32*, 0x1930) = 5; break;
-        case 10:
-        case 11: M2C_FIELD(owner, u32*, 0x1930) = 12;
-        case 7:
-        case 8:
-        case 9:
-        case 12:
-        case 13: return 0;
-    }
-    return 1;
-}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC498);
 
 /* Recovered_Vtable_003E26B8: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
@@ -274,12 +308,48 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC6E
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC790);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCC08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCCF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCDC0);
+extern void func_00272488(u64, s8*);
+extern void* func_00107CF8(u32);
+extern void func_001D97D0(Recovered_AudioTransferGroup*, u64, const s8*, s32, s32, s32, void*, s32, u8);
+typedef struct { Recovered_AudioTransferGroup* group; f32 scale; } PlaybackTransfer;
+void func_001DCDC0(Recovered_PlaybackState* self, u64 key, u32 value, s32 format, s32 bytes,
+                   void* scratch, s32 unknown, s8 count, s8 mode, u8 final) {
+    s8 name[16];
+    s32 i;
+    PlaybackTransfer* transfer;
+    Recovered_StreamBuffer** buffer;
+    self->unk_58 = count;
+    self->poolKey = key;
+    func_00272488(key, name);
+    for (i=0; i<13; i++) {
+        if (name[i] == ' ') { name[i] = 0; break; }
+    }
+    for (i=0; i<self->unk_58; i++) {
+        transfer = &((PlaybackTransfer*)((u8*)self+0x30))[i];
+        transfer->group = func_00107CF8(sizeof(Recovered_AudioTransferGroup));
+        func_001D97D0(transfer->group, self->poolKey, name, format, mode, bytes, scratch, unknown, final);
+        ((PlaybackTransfer*)((u8*)self+0x30))[i].scale = 0;
+    }
+    for (i=3; i>=0; i--) self->buffers[i] = 0;
+    self->unk_14 = 1;
+    self->unk_44 = 0;
+    self->unk_18 = value;
+    self->unk_40 = 0;
+    self->bufferCount = 0;
+    self->unk_60 = 0;
+    self->unk_50 = 0;
+    self->unk_4C = 0;
+    self->unk_54 = 0;
+    self->unk_62 = 0;
+    self->unk_64 = 0;
+    self->unk_65 = 0;
+    self->claimed = 0;
+    self->unk_48 = 0x8000 / count;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCF70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DD158);
 extern s32 AudioTransferGroup_TryReset(Recovered_AudioTransferGroup*);
 extern void* func_0035C6EC(void*, s32, u32);
-typedef struct { Recovered_AudioTransferGroup* group; f32 scale; } PlaybackTransfer;
 extern s32 func_001DD508(Recovered_PlaybackState*);
 s32 func_001DD3E0(Recovered_PlaybackState* self) {
     s32 i;
