@@ -1,9 +1,9 @@
 # Reproducible build environment for the matching rebuild (Linux x86-64; on other hosts run it under
 # `docker run --platform linux/amd64`). The image contains the tools, not the game: mount your checkout, which holds
-# orig/<GAMEID>/<GAMEID>, at /workspace.
+# orig/<GAMEID>/<GAMEID>, using tools/container.py (including linked-worktree Git paths).
 #
 #   docker build -t black-decomp .
-#   docker run --rm -it -v "$PWD":/workspace black-decomp
+#   python3 tools/container.py
 #   (inside)  python3 configure.py && ninja
 FROM debian:bookworm-slim
 

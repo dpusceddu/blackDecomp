@@ -18,9 +18,9 @@ OUTPUT = ROOT / 'docs' / 'tools.md'
 SECTIONS = [
     ('Everyday tools: working on a function', [
         'setup.py', 'next.py', 'brief.py', 'decompile.py', 'objdiff.py', 'trysrc.py', 'autodecomp.py', 'where.py', 'split_function.py', 'relocate_sources.py', 'permuter/prepare.py', 'permuter/cc.py',
-        'permuter/as.py']),
+        'permuter/as.py', 'permuter/import.py', 'permuter/abi.py']),
     ('Everyday tools: build, check and progress', [
-        'toolchain.py', 'compile.py', 'check_versions.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',
+        'container.py', 'toolchain.py', 'compile.py', 'check_versions.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',
         'badges.py', 'tools_index.py']),
     ('Build internals (`tools/build/`)', [
         'build/check_graph.py', 'build/graph_io.py', 'build/ninja_graph.py', 'build/prepare.py', 'build/inventory.py', 'build/object_graph.py', 'build/object_compile.py', 'build/unit_link.py', 'build/unit_compare.py', 'build/asm_syntax.py', 'build/split_objects.py',

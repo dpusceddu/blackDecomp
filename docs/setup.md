@@ -58,14 +58,18 @@ check all five, run `python3 tools/check_versions.py`.
 
 ```sh
 docker build --platform linux/amd64 -t black-decomp .
-docker run --rm -it --platform linux/amd64 -v "$PWD":/workspace black-decomp
+python3 tools/container.py
 # inside (the virtual environment is already on PATH): python3 configure.py && ninja
 ```
 
 `docker build` downloads the pinned compilers, assemblers and wibo from their public archives (SHA-256 checked), so it needs
 network access; the image contains no game files.
 
-With Podman, or on a host with SELinux (Fedora, RHEL), mount with `-v "$PWD":/workspace:Z`, or the container cannot read the checkout.
+`tools/container.py COMMAND [ARG ...]` also runs a single command. It mounts the checkout, Git metadata and registered
+worktrees at their original host paths, so linked worktrees can use Git and the shared-input symlinks made by `setup.py`.
+The active checkout and Git metadata are writable; sibling checkouts are read-only for claims and shared inputs. Start
+the container runtime first. Use `--dry-run` to inspect the mounts, `--engine podman` for Podman, and `--relabel` on
+SELinux hosts (shared `:z` labels). The launcher uses the existing image; rebuild it after toolchain changes.
 On Apple silicon this relies on the emulation of x86-64 Linux containers and has not been tested.
 
 **Binutils.** `ld` and `objcopy` for little-endian MIPS come from the distribution package `binutils-mipsel-linux-gnu`
