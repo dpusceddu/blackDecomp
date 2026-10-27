@@ -1,4 +1,3 @@
-#include "include_asm.h"
 #include "game/audio/sound_object_fields.h"
 
 extern "C" {
@@ -15,8 +14,52 @@ unsigned func_00286878(void*, short*, int, float, unsigned);
 void func_001F07B8(void*, float);
 
 extern unsigned char D_0040DA30;
+// SN omits extern object sizes at -O0; the assembler needs this byte's size for GP addressing.
+__asm__(".extern D_0040DA30, 1");
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/sound_object_state", func_001F03D0);
+struct SoundDataView {
+    unsigned char unknown00[0x28];
+    int bytes;
+    short samples[1];
+};
+extern "C" void func_002726D0(EeU64, void*);
+extern "C" int func_001D5EA8(void*, EeU64, EeU64, int, int);
+extern "C" void func_001F0F28(RecoveredSoundObject*, int, unsigned char);
+
+int func_001F03D0(register RecoveredSoundObject* self, EeU64 arg1, EeU64 arg2, void* data, int arg4, int arg5,
+                  unsigned char special) {
+    switch (self->field84) {
+        case 7:
+            func_002726D0(arg2, self->unknown64);
+            if (special) self->unknown64[0] = 0x53;
+            self->field410 = data;
+            D_0040DA30 = 0;
+            self->field1d0 = 0;
+            for (int i = 0; i < 2; i++) self->field1ec[i] = 0;
+            self->field1f4 = 0;
+            self->field414 = (int)((SoundDataView*)self->field410)->samples;
+            self->field1e4 = ((SoundDataView*)self->field410)->bytes;
+            self->field1e4 -= self->field1e4 % 128;
+            self->field1e8 = ((self->field414 + 127) / 128) * 128;
+            D_0040DA30 = 1;
+            self->field84 = 1;
+        case 1:
+            if (!func_001D5EA8(self, arg1, arg2, arg4, arg5)) break;
+        case 2:
+            func_001F0F28(self, 0, 0);
+            self->field84 = 3;
+        case 3:
+            return 1;
+            break; // The unoptimized native switch retains this case exit.
+        case 0:
+        case 4:
+        case 5:
+        case 6:
+        case 8:
+        default: break;
+    }
+    return 0;
+}
 
 int func_001F05D0(register RecoveredSoundObject* self) {
     return func_001D5F58(self);

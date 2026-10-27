@@ -1519,7 +1519,7 @@ splits:
   - {src: src/game/unsorted/tu_1effc8.c, range: [0x1effc8, 0x1f0320]}
   - {src: src/game/audio/sound_object_fields.c, range: [0x1f0320, 0x1f03c0], flags: [-O0, -G0, -snas, -fomit-frame-pointer], note: "Native unoptimized methods retain scalar parameter spills, unscheduled call delay slots and straight SP-based epilogues; the receiver remains in a saved register."}
   - {src: src/game/audio/sound_object_fields.c, range: [0x1f03c0, 0x1f03d0]}
-  - {src: src/game/audio/sound_object_state.cpp, range: [0x1f03d0, 0x1f05d0], flags: [-O0, -G8, -snas, -fomit-frame-pointer, -fbyte-bool], note: "Native parameter spills, unscheduled calls and redundant return joins establish unoptimized lowering; SP-based frames omit FP, the Boolean result retains byte extension, and the initialized history-update byte uses GP-relative accesses. The unrecovered neighboring initializer preserves the native byte-sized extern declaration for the shared small-data flag."}
+  - {src: src/game/audio/sound_object_state.cpp, range: [0x1f03d0, 0x1f05d0], flags: [-O0, -G8, -snas, -fomit-frame-pointer, -fbyte-bool], note: "Native parameter spills, unscheduled calls and redundant return joins establish unoptimized lowering; SP-based frames omit FP, the Boolean result retains byte extension, and the initialized history-update byte uses GP-relative accesses. A sized extern directive supplies the native one-byte flag metadata omitted by the compiler at -O0."}
   - {src: src/game/audio/sound_object_state.cpp, range: [0x1f05d0, 0x1f0620]}
   - {src: src/game/audio/sound_object_state.cpp, range: [0x1f0620, 0x1f0678]}
   - {src: src/game/audio/sound_object_state.cpp, range: [0x1f0678, 0x1f0770]}
@@ -1528,7 +1528,8 @@ splits:
   - {src: src/game/audio/sound_object_fields.c, range: [0x1f0810, 0x1f08e8]}
   - {src: src/game/audio/sound_object_fields.c, range: [0x1f08e8, 0x1f0958]}
   - {src: src/game/audio/sound_object_fields.c, range: [0x1f0958, 0x1f09c0]}
-  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x1f09c0, 0x1f0f28]}
+  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x1f09c0, 0x1f0c98]}
+  - {src: src/game/audio/sound_mix_callback.c, range: [0x1f0c98, 0x1f0f28], flags: [-O0, -G8, -snas, -fomit-frame-pointer], note: "Native callback spills all parameters, retains a stack loop index, uses GP-relative byte accesses and has an unscheduled SP-based epilogue; sized extern metadata preserves the one-byte flag."}
   - {src: src/game/audio/sound_object_state.cpp, range: [0x1f0f28, 0x1f1018]}
   - {src: src/game/audio/sound_object_state.cpp, range: [0x1f1018, 0x1f10b8]}
   - {src: src/game/audio/sound_object_state.cpp, range: [0x1f10b8, 0x1f1110]}
