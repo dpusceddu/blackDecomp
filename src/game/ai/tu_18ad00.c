@@ -2,7 +2,7 @@
 #include "ps2/prelude.h"
 
 extern s32 func_00164238(s32);
-extern s32 func_001640D0(s32, s32);
+extern s128 func_001640D0(s32, s32);
 
 void func_0018AD00(void *arg0) {
     s32 temp_5;
@@ -25,8 +25,8 @@ s32 func_0018AD30(void *arg0) {
     return var_2;
 }
 
-void func_0018AD60(void *arg0) {
-    func_001640D0(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 0));
+s128 func_0018AD60(void *arg0) {
+    return func_001640D0(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 0));
 }
 
 void func_0018AD80(void *arg0, s32 arg1) {

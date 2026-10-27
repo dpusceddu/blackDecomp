@@ -9,10 +9,6 @@ void func_00193978(void) {
 
 }
 
-void func_00193980(void) {
+void func_00193980(void* action, const void* event) {}
 
-}
-
-void func_00193988(void) {
-
-}
+void func_00193988(void* action) {}

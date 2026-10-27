@@ -1,7 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_0018DDD8();
+extern s32 func_0018DDD8(void*);
 
 f32 func_0018DEA0(s32 arg0, s32 arg1) {
     switch (arg1) {                                 /* irregular */
@@ -18,9 +18,7 @@ f32 func_0018DEA0(s32 arg0, s32 arg1) {
     }
 }
 
-s32 func_0018DF28(void) {
-    return func_0018DDD8() != 0;
-}
+s32 func_0018DF28(void* state) { return func_0018DDD8(state) != 0; }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_18dd88_18dea0", func_0018DF48);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_18dd88_18dea0", func_0018E020);
