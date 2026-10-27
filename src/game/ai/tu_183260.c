@@ -64,8 +64,29 @@ extern AiReactionTuning D_003F6350[];
 extern s32 func_00183FD8(void*, s32, s128, void*, f32);
 extern void func_001858A8(void*, s32, s128, f32, void*);
 extern void func_001840C8(void*, s32, s128, void*, s32, f32);
+extern void* D_0040F4D0;
+extern void* D_0040F4D4;
+extern const f32 D_003F5600, D_003F5604, D_003F6570[];
+extern void* func_00179258(void*, s32);
+extern s32 func_00178F18(void*);
+extern void func_00173F98(void*, s32);
+extern void func_001854B8(void*);
+extern s32 func_00137450(void*);
+extern s32 func_00184268(void*, s32);
+extern void* func_0013D400(void*);
+extern void* func_00172610(void*);
+extern s32 func_0018D608(void*);
+extern s32 func_0018BEB0(void*, void*);
+extern f32 func_001847B8(void*, f32, s32, s32, s32);
 
-const f32 D_003F6570[] = {30.0f, 1.5f, 10.0f, 0.0f};
+static inline u8 AiSelectionActive(void* state) {
+    if (!state) return 0;
+    {
+        u32 offset = M2C_FIELD(state, u8*, 0x19) * 4;
+        u32 base = (u32)state;
+        return M2C_FIELD(base + offset, void**, 0xC) != NULL;
+    }
+}
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183260);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183380);
@@ -237,8 +258,64 @@ void func_00183910(s32 *arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183918);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183AA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183BC0);
+void func_00183EA8(void* self);
+
+void func_00183AA0(void* self) {
+    func_00183EA8(self);
+    func_001854B8(self);
+    {
+        void* actor = (void*)func_00183500((u8*)M2C_FIELD(self, void**, 0) + 0x1EB0);
+        if (actor && func_00137450(actor) && func_00184268(self, 2)) {
+            func_00181AD0((u8*)M2C_FIELD(self, void**, 0) + 0xEC0, 15);
+        }
+    }
+    {
+        void* brain = M2C_FIELD(self, void**, 0);
+        void* actor = func_00172610(func_0013D400(brain));
+        if (actor && M2C_FIELD(actor, s32*, 0xC4) == 2 &&
+            !func_0018D608((u8*)M2C_FIELD(self, void**, 0) + 0xD10)) {
+            void* a = M2C_FIELD(actor, void**, 0x2A4);
+            void* b = M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void**, 0), void**, 0x7C), void**, 0x2A4);
+            if (a && b && M2C_FIELD(a, u8*, 0x108) != M2C_FIELD(b, u8*, 0x108)) {
+                void* events = (u8*)M2C_FIELD(self, void**, 0) + 0xEC0;
+                if (M2C_FIELD(a, u8*, 0x108)) func_00181AD0(events, 16);
+                else func_00181AD0(events, 17);
+            }
+        }
+    }
+    if (M2C_FIELD(self, void**, 4) && M2C_FIELD(M2C_FIELD(self, void**, 4), s32*, 0x38C)) {
+        M2C_FIELD(self, void**, 4) = NULL;
+        M2C_FIELD(self, f32*, 8) = D_003F5600;
+    }
+}
+
+const f32 D_003F5600 = 3.402823466e+38f;
+
+void func_00183BC0(void* self, s32 slot) {
+    void* entry = func_00179258((u8*)D_0040F4D4 + 0xFA8, slot);
+    if (func_00178F18(entry)) {
+        void* actor = M2C_FIELD(func_00179258((u8*)D_0040F4D4 + 0xFA8, slot), void**, 8);
+        s32 i;
+        if (actor == M2C_FIELD(self, void**, 4)) {
+            M2C_FIELD(self, void**, 4) = NULL;
+            M2C_FIELD(self, f32*, 8) = D_003F5604;
+        }
+        if (actor == M2C_FIELD(self, void**, 0xC)) M2C_FIELD(self, void**, 0xC) = NULL;
+        {
+            s32 empty = -1;
+            u8* cursor = self;
+            for (i = 4; i >= 0; i--, cursor += 0x20) {
+                if (M2C_FIELD(cursor, void**, 0x88) == actor) {
+                    M2C_FIELD(cursor, s32*, 0x84) = empty;
+                    M2C_FIELD(cursor, void**, 0x88) = NULL;
+                }
+            }
+        }
+    }
+    func_00173F98((u8*)self + 0x2C, slot);
+}
+
+const f32 D_003F5604 = 3.402823466e+38f;
 
 #include "ps2/recovered_types.h"
 extern M2C_UNK D_003F6540;
@@ -280,10 +357,38 @@ void func_00183D28(s32 arg0, s32 arg1, s32 arg2) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183E00);
+void func_00183E00(void* self, s32 kind, void* actor) {
+    switch (kind) {
+        case 7:
+        case 8:
+            if (func_00184268(self, 1)) {
+                s32 event[2] __attribute__((aligned(16)));
+                func_0018BEB0(event, actor);
+                func_00181B08((u8*)M2C_FIELD(self, void**, 0) + 0xEC0, event);
+            }
+        case 2:
+        case 3:
+        case 5:
+        case 6:
+        case 9:
+        case 11:
+            if (func_00184268(self, 0)) {
+                func_00181AD0((u8*)M2C_FIELD(self, void**, 0) + 0xEC0, 6);
+            }
+            break;
+        default: break;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183EA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183EA8);
-void func_00183EF8(void* self, s32 kind, s128 vector, void* actor, f32 scale) {
+
+void func_00183EA8(void* self) {
+    f32 value = M2C_FIELD(self, f32*, 0x30);
+    value -= ((value * 0.01f) * M2C_FIELD(D_0040F4D0, f32*, 0x1C)) * 30.0f;
+    M2C_FIELD(self, f32*, 0x30) = value;
+    M2C_FIELD(self, f32*, 0x30) = __ee_min_s(__ee_max_s(M2C_FIELD(self, f32*, 0x30), 0.0f), 1.0f);
+}
+
+void func_00183EF8(void* self, s32 kind, s128 vector, f32 scale, void* actor) {
     s32 changed;
     f32 value;
     if (scale <= 0.0f) return;
@@ -294,20 +399,63 @@ void func_00183EF8(void* self, s32 kind, s128 vector, void* actor, f32 scale) {
     value += __ee_max_s(scale * (D_003F6350[kind].gainLimit - value), 0.0f);
     M2C_FIELD(self, f32*, 0x30) = value;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00183FD8);
+s32 func_00183FD8(void* self, s32 kind, s128 vector, void* actor, f32 scale) {
+    f32 high = D_003F6350[kind].high;
+    f32 low = D_003F6350[kind].low;
+    f32 amount;
+    scale *= high - low;
+    amount = scale + low;
+    amount -= M2C_FIELD(self, f32*, 0x30);
+    if (amount > 0.0f) {
+        void* brain = M2C_FIELD(self, void**, 0);
+        void* object = M2C_FIELD(brain, void**, 0x7C);
+        void* state = M2C_FIELD(object, void**, 0x26C);
+        u8 active;
+        s32 event;
+        active = AiSelectionActive(state);
+        if (active) return 0;
+        event = func_00183C80(self, kind, actor, scale);
+        if (event) {
+            void* owner = M2C_FIELD(self, void**, 0);
+            void* vtable = M2C_FIELD(owner, void**, 0x84);
+            void (*callback)(void*, s32, s128, f32) = M2C_FIELD(vtable, void (**)(void*, s32, s128, f32), 0x34);
+            callback((u8*)owner + M2C_FIELD(vtable, s16*, 0x30), event, vector, amount);
+            return 1;
+        }
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_001840C8);
 
 void * func_00184238(void *arg0, void *arg1) {
     return (void *) ((func_00173610(arg0 + (((s32) arg1 * 4) + 0x34)) ^ 1) & 0xFF);
 }
 
+#ifdef NON_MATCHING
+// Unmatched: body matches; its owned timer table is separated from this file's other rodata by unrelated objects.
 s32 func_00184268(void* self, s32 index) {
     f32* timer = (f32*)((u8*)self + (index * 4 + 0x34));
     s32 expired = func_00173610(timer);
     func_00173640(timer, D_003F6570[index]);
     return expired;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_001842C8);
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00184268);
+#endif
+
+void func_001842C8(void* self, s128 vector, void* actor, f32 distance) {
+    s32 kind = 2;
+    f32 weight;
+    void* state = M2C_FIELD(actor, void**, 0x2A4);
+    if (M2C_FIELD(state, u8*, 0x108)) kind = 1;
+    weight = func_001847B8(self, distance, kind, 1, 4);
+    if (kind == 2 && M2C_FIELD(self, s32*, 0x64) > 0) {
+        if (func_001847B8(self, distance, 2, 1, 0) > 0.0f) kind = 3;
+    }
+    if (M2C_FIELD(actor, s32*, 0x3A4) ==
+        M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void**, 0), void**, 0x7C), s32*, 0x3A4)) weight *= 0.5f;
+    func_00183EF8(self, kind, vector, weight, actor);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_001843C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_00184550);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_183260", func_001847B8);
