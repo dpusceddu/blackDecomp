@@ -158,7 +158,7 @@ splits:
   - {src: src/game/unsorted/tu_1199d8_11c558.c, range: [0x11c558, 0x11c878], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/unsorted/tu_11c878.c, range: [0x11c878, 0x11c8c0], assembler: sn-min6}
   - {src: src/game/unsorted/tu_11c8c0.c, range: [0x11c8c0, 0x11c930]}
-  - {src: src/game/camera/tu_10f700_114168.c, range: [0x11c930, 0x11cd00]}
+  - {src: src/game/camera/controller_set.c, range: [0x11c930, 0x11cd00], flags: [-O2, -G8, -snas], assembler: sn-min6, note: "Native 0x11c930 uses a GP-relative byte load of D_0040D9A3; the 0x11c9c8 controller loop and 0x140ad0 descending-zero loop have six-word short-branch padding, one word shorter than the stock assembler."}
   - {src: src/game/unsorted/tu_11cd00.c, range: [0x11cd00, 0x11d358]}
   - {src: src/game/unsorted/tu_11d358.c, range: [0x11d358, 0x11de30]}
   - {src: src/game/unsorted/tu_11d358_11de30.c, range: [0x11de30, 0x11e2e0]}
@@ -255,9 +255,11 @@ splits:
   - {src: src/game/unsorted/tu_12d458_12eec8.c, range: [0x12eec8, 0x12eee8], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x12eee8, 0x12f058]}
   - {src: src/game/unsorted/tu_12f058.c, range: [0x12f058, 0x12f060]}
-  - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f060, 0x12f4e8]}
+  - {src: src/game/camera/record_bank.cpp, range: [0x12f060, 0x12f1b8], assembler: sn-min6, note: "C++ array construction retains the native zero-count constructor guard; its six-word dispatch-initialization loop has two padding NOPs (stock assembler adds a third). Original TU and assembler provenance remain unverified."}
+  - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f1b8, 0x12f4e8]}
   - {src: src/game/unsorted/tu_12f4e8.c, range: [0x12f4e8, 0x12f4f0]}
-  - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f4f0, 0x12fc78]}
+  - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f4f0, 0x12f740]}
+  - {src: src/game/camera/table_queries.c, range: [0x12f740, 0x12fc78], assembler: sn-min6, note: "Native 0x12f8c0 shares its failure return through a short backward branch with one padding NOP; the stock assembler inserts two. The table accessors keep the default compiler flags."}
   - {src: src/game/unsorted/tu_12fc78.c, range: [0x12fc78, 0x12fcc0]}
   - {src: src/game/unsorted/tu_12fcc0.c, range: [0x12fcc0, 0x12fe30], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/unsorted/tu_12fcc0_12fe30.c, range: [0x12fe30, 0x130640]}
@@ -332,7 +334,7 @@ splits:
   - {src: src/game/camera/tu_1409c0.cpp, range: [0x1409c0, 0x140a40], flags: [-x, c++, -O2, -G0, -snas, -mvu0-use-vf0-vf16]}
   - {src: src/game/camera/actor_input.cpp, range: [0x140a40, 0x140aa8]}
   - {src: src/game/camera/tu_140aa8.c, range: [0x140aa8, 0x140ad0]}
-  - {src: src/game/camera/tu_10f700_114168.c, range: [0x140ad0, 0x140ca0]}
+  - {src: src/game/camera/controller_set.c, range: [0x140ad0, 0x140ca0], note: "Controller initialization uses the same native six-word short-loop padding as the controller-set clear."}
   - {src: src/game/camera/tu_140ca0.c, range: [0x140ca0, 0x140cf8]}
   - {src: src/game/camera/actor_camera.cpp, range: [0x140cf8, 0x141168]}
   - {src: src/game/unsorted/tu_140ca0_141168.c, range: [0x141168, 0x1411a0], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
