@@ -196,6 +196,61 @@ Game::Vec func_001A71F8(Ps2Math::DirectionSource *source)
 }
 }
 
+static inline Game::Recovered_DispatchedMode* EmbeddedMode(Game::ModeDispatcher* self, unsigned int offset) {
+    return (Game::Recovered_DispatchedMode*)((unsigned char*)self + offset);
+}
+static inline Game::Recovered_DispatchedMode*& IndexedMode(Game::Recovered_DispatchedMode** base, int index) {
+    return base[index];
+}
+
+extern "C" {
+void func_0018AB80(ActiveBinding*, Game::Brain*);
+void func_0018AB88(ActiveBinding*);
+void func_0018E2E8(Game::Recovered_DispatchedMode*, Game::Brain*);
+int func_0018DF28(void*);
+int func_0018DDD8(void*);
+extern unsigned char* D_0040F4D4;
+}
+
+struct ActionPolicyFields {
+    int kind;
+    float unk_04;
+    unsigned char unk_08[0x18];
+    float unk_20;
+    unsigned char unk_24[4];
+    float unk_28;
+    unsigned char unk_2C[4];
+    float unk_30;
+    unsigned char unk_34[0x24];
+    int unk_58;
+    float unk_5C, unk_60;
+    unsigned char unk_64[4];
+    int unk_68, unk_6C, unk_70;
+    unsigned char unk_74[4];
+    unsigned char unk_78;
+    unsigned char unk_79[3];
+    int unk_7C;
+    float unk_80;
+    unsigned char unk_84[4];
+};
+struct PolicyBrainFlags {
+    unsigned char unk_00[0x104];
+    unsigned char unk_104;
+    unsigned char unk_105[0xB];
+    unsigned char unk_110;
+};
+struct PolicyRequestFlags {
+    unsigned char unk_00[0x35];
+    unsigned char unk_35;
+};
+typedef char PolicyFieldsSize[sizeof(ActionPolicyFields) == sizeof(Game::ActionPolicy) ? 1 : -1];
+
+extern "C" {
+ActionPolicyFields* func_00193B98(Game::Action*);
+void func_00193A60(Game::Action*, int, float);
+void func_00193A28(Game::Action*, unsigned int, int);
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -383,8 +438,61 @@ int func_0018CE78(const NameQuery* self, const char* name) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018CEE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018CFD8);
+extern "C" {
+void func_0018CEE0(Game::ModeDispatcher* self, Game::Brain* owner) {
+    int remaining = 10;
+    func_00183080((ByteState*)self);
+    self->owner = owner;
+    func_0018AB80((ActiveBinding*)self->unk_08, owner);
+    for (; remaining >= 0; remaining--) self->modes[remaining] = 0;
+    self->modes[0] = EmbeddedMode(self, 0x54);
+    self->modes[3] = EmbeddedMode(self, 0x68);
+    self->modes[2] = EmbeddedMode(self, 0x7C);
+    self->modes[1] = EmbeddedMode(self, 0x94);
+    self->modes[4] = EmbeddedMode(self, 0xA8);
+    self->modes[5] = EmbeddedMode(self, 0xC0);
+    self->modes[6] = EmbeddedMode(self, 0x104);
+    self->modes[7] = EmbeddedMode(self, 0x120);
+    self->modes[8] = EmbeddedMode(self, 0x13C);
+    self->modes[9] = EmbeddedMode(self, 0x160);
+    self->modes[10] = EmbeddedMode(self, 0x190);
+    Game::Recovered_DispatchedMode** mode = self->modes;
+    remaining = 10;
+    do {
+        func_0018E2E8(*mode, owner);
+        mode++;
+    } while (--remaining >= 0);
+}
+}
+
+extern "C" {
+int func_0018CFD8(Game::ModeDispatcher* self) {
+    int remaining = 10;
+    Game::Recovered_DispatchedMode** begin = self->modes;
+    func_001830A0((ByteState*)self);
+    Game::Recovered_DispatchedMode** mode = begin;
+    func_0018AB88((ActiveBinding*)self->unk_08);
+    self->flags = 16;
+    self->unk_14 = 1;
+    self->unk_16 = 1;
+    self->paused = 0;
+    self->unk_17 = 0;
+    self->unk_18 = 0;
+    do {
+        Game::Recovered_DispatchedMode* current = *mode++;
+        --remaining;
+        current->Unknown0();
+    } while (remaining >= 0);
+    self->active = func_0018DF28((unsigned char*)self->owner + 0xC94);
+    if (self->active == 1 && func_0018DDD8((unsigned char*)self->owner + 0xC94)) {
+        IndexedMode(begin, self->active)->Enter((Game::Recovered_ModeDescriptor*)(D_0040F4D4 + 0x22A00));
+    } else {
+        IndexedMode(begin, self->active)->Enter(0);
+    }
+    return 1;
+}
+}
+
 extern "C" {
 void func_0018D108(Game::ModeDispatcher* self) { self->modes[self->active]->Unknown1(); }
 }
@@ -494,9 +602,31 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197DA0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00198388);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001984C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019A798);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019B150);
+extern "C" {
+void func_0019B150(Game::Action* self) {
+    func_00193980(self);
+    func_00193B98(self)->kind = 2;
+    func_00193B98(self)->unk_7C = 1;
+    func_00193B98(self)->unk_80 = 15.0f;
+    ((PolicyBrainFlags*)self->brain)->unk_104 = 1;
+    ((PolicyBrainFlags*)self->brain)->unk_110 = 1;
+    func_00193A60(self, 1, 1.0f);
+    func_00193A28(self, 37, 0);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019B270);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019B320);
+extern "C" {
+void func_0019B320(Game::Action* self) {
+    func_00193980(self);
+    func_00193B98(self)->kind = 3;
+    func_00193B98(self)->unk_7C = 3;
+    func_00193B98(self)->unk_80 = 20.0f;
+    ((PolicyBrainFlags*)self->brain)->unk_104 = 1;
+    func_00193A28(self, 37, 0);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019B868);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019BE70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019C100);
