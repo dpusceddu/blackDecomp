@@ -108,5 +108,24 @@ class ObjectNormalization(unittest.TestCase):
         self.assertEqual(0x0A, struct.unpack_from('<I', fixed, 52 + 4)[0] >> 8)       # the symbol index stays
 
 
+class ComparisonSections(unittest.TestCase):
+    def test_only_the_selected_text_section_name_changes(self):
+        text = ('.section .text.00263360, "ax"\n'
+                'glabel func_00263360\njal func_00263360\n'
+                '.section .rodata.00263360, "a"\n.word func_00263360\n'
+                '.section .text.00263388, "ax"\n')
+        expected = text.replace('.section .text.00263360,', '.section .text.func_00263360,')
+        fixed = objdiff.comparison_text_section(text, 0x263360)
+        self.assertEqual(expected, fixed)
+        self.assertEqual(fixed, objdiff.comparison_text_section(fixed, 0x263360))
+
+    def test_section_directive_boundaries_and_spacing(self):
+        text = ('.section\t.text.00263360 \"ax\"\n'
+                '.section .text.002633600, "ax"\n'
+                '# .section .text.00263360, "ax"\n')
+        self.assertEqual(text.replace('.section\t.text.00263360 ', '.section\t.text.func_00263360 '),
+                         objdiff.comparison_text_section(text, 0x263360))
+
+
 if __name__ == '__main__':
     unittest.main()

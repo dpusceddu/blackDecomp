@@ -101,6 +101,18 @@ def local_data_symbols(texts, slots, sizes, known):
     return found
 
 
+def comparison_text_section(text, addr):
+    """Use the compiler view's canonical function-section name in target assembly.
+
+    objdiff checks defined callees' section names as well as their symbol names.
+    Renaming this comparison-only section preserves every instruction, relocation,
+    label and data section while equating GNU as's local calls with SN's calls.
+    """
+    old = '.text.%08X' % addr
+    new = '.text.func_%08X' % addr
+    return re.sub(r'(?m)^(\.section\s+)' + re.escape(old) + r'(?=[,\s]|$)',
+                  lambda m: m.group(1) + new, text)
+
 
 def unit_plan(slug):
     """One comparison unit for each ordinary source object."""
@@ -154,13 +166,15 @@ def build_view(spec_path, output):
         text = original.read_text()
         size = code_size(text,f['addr'],f['size'])
         texts.append(text)
-        lines += [numeric_names(text,constants), '.type %s, @function' % label, '.size %s, %d' % (label,size)]
+        target_text = numeric_names(text,constants)
         r = state['resolved'].get(str(f['addr']))
         if r and r['status']=='source':
             keep.add(r['section'])
             redefine[r['link_name']] = label
             if r['section'].startswith('.text.'):
                 renames[r['section']] = '.text.'+label
+                target_text = comparison_text_section(target_text, f['addr'])
+        lines += [target_text, '.type %s, @function' % label, '.size %s, %d' % (label,size)]
     # Retain compiler data, but remove assembly inputs and discarded context.
     keep.update(sec for sec in DATA_SECTIONS if source.section(sec))
     # A retained table may point into an included function through a local
