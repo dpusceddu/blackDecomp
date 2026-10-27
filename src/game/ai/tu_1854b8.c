@@ -16,7 +16,9 @@ typedef struct {
 
 typedef struct {
     void* owner;
-    u8 unk_04[0x3C];
+    u8 unk_04[0x28];
+    s32 mask;
+    u8 unk_30[0x10];
     f32 amount;
     f32 thresholds[4];
     f32 resetValues[4];
@@ -30,6 +32,7 @@ typedef struct {
 
 typedef char MovementSampleStride[sizeof(Recovered_MovementSample) == 0x20 ? 1 : -1];
 typedef char MovementHistorySamples[(u32)&((Recovered_MovementHistory*)0)->samples == 0x70 ? 1 : -1];
+typedef char MovementHistoryMask[(u32)&((Recovered_MovementHistory*)0)->mask == 0x2C ? 1 : -1];
 typedef char MovementHistoryTimer[(u32)&((Recovered_MovementHistory*)0)->timer == 0x114 ? 1 : -1];
 
 extern void* D_0040F4D0;
@@ -48,7 +51,7 @@ extern s32 func_001735E0(f32*);
 extern s32 func_00173610(f32*);
 
 extern s32 func_00181B08();
-extern s32 func_00173FB8(s32);
+extern s32 func_00173FB8(s32*, s32);
 
 /* Opaque owner storage may alias the clock handle; retain its fresh read. */
 #ifdef NON_MATCHING
@@ -204,8 +207,8 @@ s32 func_00185BA8(Recovered_MovementHistory* self) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185BA8);
 #endif
 
-void func_00185C38(s32 arg0) {
-    func_00173FB8(arg0 + 0x2C);
+s32 func_00185C38(Recovered_MovementHistory* self, s32 id) {
+    return func_00173FB8(&self->mask, id);
 }
 
 s32 func_00185C58(Recovered_MovementHistory* self) {
