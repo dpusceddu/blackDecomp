@@ -585,6 +585,43 @@ struct NativeControllerActive {
 typedef char SimpleGoalTimerOffset[(unsigned)&((SimpleGoalAction*)0)->timer == 0x24 ? 1 : -1];
 
 
+struct BrainTaskFlags {
+    unsigned char unk_00[0xD60];
+    unsigned char low : 4;
+    unsigned char flag : 1;
+};
+struct FormationStatus {
+    unsigned char unk_00[0x70];
+    void* first;
+    unsigned char unk_74[8];
+    void* second;
+};
+struct PointerAction {
+    Game::ActionBase base;
+    const Game::PositionArg* point;
+};
+static inline unsigned char TaskFlags(Game::Brain* brain) { return ((BrainTaskFlags*)brain)->flag; }
+static inline FormationStatus* FormationFor(Game::Brain* brain) {
+    return (FormationStatus*)((unsigned char*)brain + 0x90);
+}
+
+// UNVERIFIED query/route prefixes used by the category update.
+struct PolicyTaskQuery {
+    unsigned char unk_00[0x10C];
+    void* query;
+};
+struct PolicyRouteFlag {
+    unsigned char unk_00[0xD26];
+    unsigned char enabled;
+};
+extern "C" {
+int func_0018D768(Game::ModeDispatcher*, int);
+int func_0019CFC8(PointerAction*);
+int func_00185F18(FormationStatus*);
+int func_00178F18(Recovered_ActorSlot*);
+int func_00188F58(Recovered_ActorRecords*);
+}
+
 #ifdef NON_MATCHING
 // UNVERIFIED private identities; each view represents only native fields used by the drafts.
 struct PairedPositions {
@@ -610,25 +647,14 @@ static inline unsigned char TaskPending(TaskStatus* status) {
     if (status->unk_75 && (status->unk_A0 || status->unk_A1)) pending = 1;
     return pending;
 }
-struct BrainTaskFlags {
-    unsigned char unk_00[0xD60];
-    unsigned char low : 4;
-    unsigned char flag : 1;
-};
-static inline unsigned char TaskFlags(Game::Brain* brain) { return ((BrainTaskFlags*)brain)->flag; }
+
+
 static inline Recovered_MovementHistory* HistoryFor(void* owner) {
     return (Recovered_MovementHistory*)((unsigned char*)owner + 0x6F0);
 }
 static inline void* TaskControl(Game::Brain* brain) { return HistoryFor(brain); }
-struct FormationStatus {
-    unsigned char unk_00[0x70];
-    void* first;
-    unsigned char unk_74[8];
-    void* second;
-};
-static inline FormationStatus* FormationFor(Game::Brain* brain) {
-    return (FormationStatus*)((unsigned char*)brain + 0x90);
-}
+
+
 struct PointAction {
     Game::ActionBase base;
     Game::ActionTimer timer;
@@ -636,10 +662,7 @@ struct PointAction {
     Game::Position4 point;
     int unk_20;
 };
-struct PointerAction {
-    Game::ActionBase base;
-    const Game::PositionArg* point;
-};
+
 struct RouteChoice {
     unsigned char unk_00[0x754];
     int unk_754;
@@ -1699,7 +1722,50 @@ void func_0019CC80(CategoryPolicyAction* self, int kind) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CD90);
+extern "C" {
+void func_0019CD90(CategoryPolicyAction* self) {
+    int ready = 0;
+    int present = func_00188F10(RecordsFor(self->base.brain));
+    if (func_001829E8(&self->base.brain->controller) || !TaskFlags(self->base.brain)) ready = 1;
+    if (func_0019D1F0(self)) {
+        self->unk_19 = 1;
+        return;
+    }
+    if (!ready || (!self->query && TaskFlags(self->base.brain))) goto task;
+    if (!func_001735E0(&self->first) || func_00173610(&self->first)) {
+        if (present) {
+            int valid = func_0018AB08(RecordsFor(self->base.brain));
+            if (!func_00178F18(func_00188F80(RecordsFor(self->base.brain)))) valid = 1;
+            if ((valid || self->category == 3) &&
+                func_0018D768(&self->base.brain->dispatcher, func_00188F58(RecordsFor(self->base.brain))) &&
+                ((PolicyRouteFlag*)self->base.brain)->enabled) {
+                func_00193A28((Game::Action*)self, 52, 0);
+                return;
+            }
+        }
+        if (!func_001735E0(&self->second)) func_00173640(&self->second, 2.2f);
+        if (func_00173610(&self->second)) {
+            void* query = self->query;
+            if (query && ((PolicyQueryKind*)query)->kind == 3 && func_0018D330(&self->base.brain->dispatcher, query))
+                func_00177E70(self->query, self->base.brain);
+            self->query = 0;
+            self->active = 1;
+            func_00173690(&self->second);
+        }
+    }
+    return;
+task:
+    if (func_00185F18(FormationFor(self->base.brain))) {
+        if (self->active) {
+            void* query = ((PolicyTaskQuery*)self->base.brain)->query;
+            self->active = 0;
+            self->query = query;
+        }
+        if (self->query) func_0019CFC8((PointerAction*)self);
+    }
+}
+}
+
 #ifdef NON_MATCHING
 // Unmatched: the request and continuation failure returns join differently.
 extern "C" {
