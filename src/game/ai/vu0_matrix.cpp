@@ -737,6 +737,10 @@ extern "C" {
 float func_001891A8(Recovered_ActorRecords*);
 }
 
+extern "C" {
+float func_00180A10(void*);
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -1426,7 +1430,23 @@ int func_001967F8(Game::Action* self, const int* event) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001967F8);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196958);
+extern "C" {
+int func_00196958(Game::Action* self, const int* event) {
+    if (*event == 14) {
+        func_0018AD00(BindingFor(self->brain));
+        int available = func_0018AD30(BindingFor(self->brain));
+        Game::Brain* brain = self->brain;
+        if (available) {
+            func_0017E428(QueryFor(brain), func_0018AD60(BindingFor(brain)));
+            return 1;
+        }
+        func_0017E488(QueryFor(brain), func_00180A10((unsigned char*)brain + 0xB30));
+        return 1;
+    }
+    return 0;
+}
+}
+
 extern "C" {
 void func_001969E8(FollowAction* self) {
     if (func_00188F10(RecordsFor(self->base.brain))) {
@@ -1670,7 +1690,7 @@ void func_0019B868(Game::Action* self, const void* event) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019BE70);
 #ifdef NON_MATCHING
-// Unmatched: clock-scale constant and accumulator-clear scheduling differ.
+// Unmatched: clock-handle/scale setup and accumulator-clear scheduling differ.
 extern "C" {
 void func_0019C100(PointAction* self, const void* event) {
     func_00193980(self, event);
@@ -1678,8 +1698,9 @@ void func_0019C100(PointAction* self, const void* event) {
     if (!Movement(self->base.brain)->active) func_00187FE0(Movement(self->base.brain), 0);
     func_00188148(Movement(self->base.brain), 0);
     func_00173690(&self->timer);
+    Game::GameClock* clock = D_0040F4D0;
     self->unk_20 = 0;
-    Game::PositionArg point = func_001890D0(RecordsFor(self->base.brain), D_0040F4D0->frameDelta * 8.0f);
+    Game::PositionArg point = func_001890D0(RecordsFor(self->base.brain), clock->frameDelta * 8.0f);
     Game::Brain* brain = self->base.brain;
     Game::Store(self->point, point);
     func_00182320(&brain->controller, point, 0);
