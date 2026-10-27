@@ -121,6 +121,41 @@ extern s32 func_00142ED8(void*, s32, s32);
 extern void func_00137320(Recovered_ObserverOwner*);
 extern void func_00136B50(Recovered_ObserverOwner*);
 
+// Native resource table prefixes; unused spans and class identities remain UNVERIFIED.
+typedef struct Recovered_Resource18 {
+    u64 unk_0; // Catalog key; also consumed by the exact binding loop.
+    u64 unk_8;
+    s8 unk_10; // UNVERIFIED: spawn-by-catalog draft.
+    u8 unk_11[7];
+} Recovered_Resource18;
+typedef struct Recovered_Resource10 {
+    u64 unk_0, unk_8;
+} Recovered_Resource10;
+typedef struct Recovered_PoolResources {
+    u8 unk_0, unk_1, unk_2, unk_3, unk_4;
+    u8 unk_5[3];
+    Recovered_Resource18* unk_8;
+    Recovered_Resource18* unk_C;
+    Recovered_Resource10* unk_10;
+    u64* unk_14;
+    Recovered_Resource10* unk_18;
+} Recovered_PoolResources;
+typedef struct Recovered_ResourcePool {
+    u8 unk_0[0x5800];
+    void** unk_5800;
+    u8 unk_5804[0x40];
+    Recovered_PoolResources* unk_5844;
+} Recovered_ResourcePool;
+extern void* func_00108120(void*, u64);
+extern u8* D_0040F4C4;
+
+typedef char Resource18Stride[sizeof(Recovered_Resource18) == 0x18 ? 1 : -1];
+typedef char Resource10Stride[sizeof(Recovered_Resource10) == 0x10 ? 1 : -1];
+typedef char ResourcePoolDescriptorOffset[(u32) & ((Recovered_ResourcePool*)0)->unk_5844 == 0x5844 ? 1 : -1];
+typedef char ObserverSetupStride[sizeof(Recovered_ObserverSetupEntry) == 0x240 ? 1 : -1];
+typedef char ObserverControlOffset[(u32) & ((Recovered_ObserverOwner*)0)->unk_328 == 0x328 ? 1 : -1];
+typedef char ObserverSetupOffset[(u32) & ((Recovered_ObserverOwner*)0)->unk_330 == 0x330 ? 1 : -1];
+
 // Partial Game view; only the random-state placement is recovered here.
 typedef struct Recovered_GameRandomView {
     u8 unk_0[0x5AD8];
@@ -192,7 +227,7 @@ typedef struct Recovered_PoolDescriptor {
     u8 unk_0;
     u8 unk_1;
     u8 unk_2[2];
-    void* unk_4;
+    u8 unk_4[4];
     void* unk_8;
     void* unk_C;
 } Recovered_PoolDescriptor;
@@ -434,6 +469,74 @@ extern s32 func_00149AC8(s32);
 #include "game/weapons/state.h"
 #include "game/weapons/inventory.h"
 // Partial views used only by drafts; these fields remain UNVERIFIED.
+typedef struct Recovered_SpawnState {
+    u8 unk_0[0x18];
+    s32 unk_18;
+} Recovered_SpawnState;
+typedef struct Recovered_SpawnRecord {
+    u8 unk_0[0x34];
+    Recovered_SpawnState* unk_34;
+} Recovered_SpawnRecord;
+typedef struct Recovered_SpawnSlot {
+    u8 unk_0[0xB4];
+    Recovered_SpawnRecord* unk_B4;
+    u8 unk_B8[0x9D];
+    u8 unk_155;
+} Recovered_SpawnSlot;
+typedef struct Recovered_SpawnPool {
+    u8 unk_0[0x5800];
+    void** unk_5800;
+    u8 unk_5804[0x40];
+    Recovered_PoolResources* unk_5844;
+    u8 unk_5848[8];
+    s8 unk_5850;
+} Recovered_SpawnPool;
+typedef struct Recovered_SpawnDefinition {
+    u8 unk_0[0x60];
+    s16 unk_60;
+} Recovered_SpawnDefinition;
+extern void* D_0040F4CC;
+
+extern s32 func_0025CDA0(void*, s32*, s32);
+extern Recovered_SpawnSlot* func_00127550(Recovered_SpawnPool*);
+extern Recovered_SpawnDefinition* func_0015D248(void*, s8, s32);
+extern void func_0014EF58(Recovered_SpawnSlot*, s32, s32, void*, s32, s32, s32, s32);
+extern void func_00129108(void*, Recovered_SpawnSlot*, s32, s32, s32);
+extern void func_0025D860(Recovered_SpawnRecord*, s128);
+extern void func_0025D910(Recovered_SpawnRecord*, s128);
+extern void func_0025CE28(void*);
+
+extern void* func_001276B8(Recovered_SpawnPool*, s32);
+
+typedef struct Recovered_TransitionPose {
+    s128 unk_0[5];
+} Recovered_TransitionPose;
+typedef struct Recovered_PoseReceiverDispatch {
+    u8 unk_0[0x18];
+    s16 unk_18;
+    u16 unk_1A;
+    void (*unk_1C)(void*, Recovered_TransitionPose*);
+} Recovered_PoseReceiverDispatch;
+typedef struct Recovered_PoseReceiver {
+    Recovered_PoseReceiverDispatch* unk_0;
+} Recovered_PoseReceiver;
+typedef struct Recovered_PoseReceivers {
+    u8 unk_0[0x1C0];
+} Recovered_PoseReceivers;
+typedef struct Recovered_TransitionPoses {
+    u8 unk_0[0x20];
+    Recovered_TransitionPose unk_20;
+    Recovered_TransitionPose unk_70;
+    Recovered_PoseReceivers* unk_C0;
+    s32 unk_C4;
+    s32 unk_C8;
+} Recovered_TransitionPoses;
+extern void func_00118088(Recovered_TransitionPoses*);
+static inline void CopyTransitionPose(Recovered_TransitionPose* self, Recovered_TransitionPose* source) {
+    u32 saved = M2C_FIELD(self, u32*, 0x40);
+    *self = *source;
+    M2C_FIELD(self, u32*, 0x40) = saved;
+}
 typedef struct Recovered_MaskPair {
     s16 unk_0, unk_2, unk_4;
 } Recovered_MaskPair;
@@ -617,7 +720,20 @@ void func_00116918(Recovered_SlotTransition* self, s32 slot, s32 target, s32 arg
     self->unk_C0->unk_6F0 &= ~(1UL << slot);
     func_00110860(self->unk_C0, 2);
 }
+#ifdef NON_MATCHING
+// Unmatched: 80-byte copies keep the saved tail word in a register; native uses a stack temporary.
+s32 func_00116990(Recovered_TransitionPoses* self, Recovered_TransitionPose* source) {
+    Recovered_PoseReceiver* receiver;
+    func_00118088(self);
+    CopyTransitionPose(&self->unk_20, source);
+    CopyTransitionPose(&self->unk_70, source);
+    receiver = ((Recovered_PoseReceiver**)((u8*)self->unk_C0 + 0x1C0))[self->unk_C8];
+    receiver->unk_0->unk_1C((u8*)receiver + receiver->unk_0->unk_18, &self->unk_70);
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00116990);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00116A78);
 void func_00116E80(Recovered_TransitionQuery* self, void* value) {
     if (self->unk_20) {
@@ -658,11 +774,104 @@ s32 func_00126290(Recovered_SlotPool* self) {
     return 1;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126328);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001264C8);
+void func_001264C8(Recovered_ResourcePool* self, Recovered_PoolResources* descriptor) {
+    u8 i = 0;
+    s32 current = 0;
+    self->unk_5844 = descriptor;
+    self->unk_5800 = func_00107D20(
+        (descriptor->unk_0 + descriptor->unk_1 + descriptor->unk_2 + descriptor->unk_3 + descriptor->unk_4) * 4);
+    for (i = 0; i < self->unk_5844->unk_0; i++) {
+        void* resource = func_00108120(D_0040F4C4, self->unk_5844->unk_8[i].unk_8);
+        self->unk_5800[current++] = resource;
+    }
+    for (i = 0; i < self->unk_5844->unk_1; i++) {
+        void* resource = func_00108120(D_0040F4C4, self->unk_5844->unk_C[i].unk_8);
+        self->unk_5800[current++] = resource;
+    }
+    for (i = 0; i < self->unk_5844->unk_2; i++) {
+        void* resource = func_00108120(D_0040F4C4, self->unk_5844->unk_10[i].unk_0);
+        self->unk_5800[current++] = resource;
+    }
+    for (i = 0; i < self->unk_5844->unk_3; i++) {
+        void* resource = func_00108120(D_0040F4C4, self->unk_5844->unk_14[i]);
+        self->unk_5800[current++] = resource;
+    }
+    for (i = 0; i < self->unk_5844->unk_4; i++) {
+        void* resource = func_00108120(D_0040F4C4, self->unk_5844->unk_18[i].unk_8);
+        self->unk_5800[current++] = resource;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126710);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126978);
+#ifdef NON_MATCHING
+// Unmatched: inline catalog search, boolean setup and saved-register lifetimes differ.
+void func_00126980(Recovered_SpawnPool* self, s32 kind, u8 index, s32 arg3, s128 position, s128 direction) {
+    s32 token;
+    s32 created = func_0025CDA0(D_0040F4CC, &token, 2);
+    s32 capacity = 0;
+    Recovered_SpawnSlot* slot = func_00127550(self);
+    if (slot) {
+        u8 offset = 0;
+        s32 selected;
+        switch (kind) {
+            case 4: offset += self->unk_5844->unk_3;
+            case 3: offset += self->unk_5844->unk_2;
+            case 0: offset += self->unk_5844->unk_1;
+            case 1: offset += self->unk_5844->unk_0;
+        }
+        selected = offset + index;
+        if (kind == 2) {
+            s8 definitionIndex = FindCatalogItem(self->unk_5844->unk_8[index].unk_0);
+            capacity = func_0015D248(D_0040F4E0, definitionIndex, 0)->unk_60;
+        }
+        func_0014EF58(slot, kind, index, self->unk_5800[(u8)selected], arg3, capacity, 7, self->unk_5850);
+        func_00129108(D_0040F4D0, slot, created, created != 0, token);
+        if (created) {
+            func_0025D860(slot->unk_B4, position);
+            func_0025D910(slot->unk_B4, direction);
+            slot->unk_B4->unk_34->unk_18 = 13;
+        } else
+            slot->unk_155 = 1;
+    } else if (created)
+        func_0025CE28(D_0040F4CC);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126980);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: selected-index/result registers and activation-flag materialization differ (22 instructions).
+void func_00126BC8(Recovered_SpawnPool* self, s8 catalogIndex, s32 arg2, s128 position, s128 direction, s16 capacity) {
+    u8 selected = 0;
+    u8 i;
+    s32 token;
+    s32 created;
+    Recovered_SpawnSlot* slot;
+    for (i = 0; i < self->unk_5844->unk_0; i++) {
+        if (catalogIndex == self->unk_5844->unk_8[i].unk_10) {
+            selected = i;
+            break;
+        }
+    }
+    created = func_0025CDA0(D_0040F4CC, &token, 2);
+    func_001276B8(self, selected);
+    slot = func_00127550(self);
+    if (slot) {
+        u32 attach = 0;
+        func_0014EF58(slot, 2, selected, self->unk_5800[selected], arg2, capacity, 7, self->unk_5850);
+        attach = created ? 1 : 0;
+        func_00129108(D_0040F4D0, slot, created, attach, token);
+        if (created) {
+            func_0025D860(slot->unk_B4, position);
+            func_0025D910(slot->unk_B4, direction);
+            slot->unk_B4->unk_34->unk_18 = 13;
+        } else
+            slot->unk_155 = 1;
+    } else if (created)
+        func_0025CE28(D_0040F4CC);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126BC8);
+#endif
 #ifdef NON_MATCHING
 // Unmatched: pool/index lifetimes and notification argument scheduling differ (7 instructions).
 void func_00126D78(Recovered_SlotPool* self, Recovered_PoolSlot* slot, s32 notify) {
