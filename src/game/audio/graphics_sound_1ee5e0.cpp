@@ -1,8 +1,105 @@
 #include "include_asm.h"
 #include "game/aligned_buffer.h"
+#include "game/effects/random_state.h"
+#include "game/stream_buffer.h"
 
 #include "game/graphics/sound_envelopes.hpp"
 using namespace Graphics;
+
+// Partial native sound views; original class names and the unused fields are UNVERIFIED.
+struct Recovered_RandomSound {
+    unsigned char unknown00[0x248];
+    BkEffectRandomStatePS2 random;
+    int unknown250;
+    unsigned char unknown254[0x38];
+    float unknown28C;
+    unsigned char enabled, unknown291;
+};
+
+struct Recovered_SoundPlayback {
+    unsigned char pool[0x244];
+    int state;
+    Recovered_StreamBuffer* pending;
+    void* bank;
+    float gain;
+    unsigned char stereo;
+};
+typedef char SoundPlaybackStateOffset[(u32) & ((Recovered_SoundPlayback*)0)->state == 0x244 ? 1 : -1];
+
+struct Recovered_SoundBankSizes {
+    unsigned char unknown00[8];
+    int first, second;
+};
+
+// Only the fields used by these playback requests are modeled. Flag meanings,
+// untouched storage and the original parameter-class identity are UNVERIFIED.
+struct Recovered_SoundParameters {
+    unsigned char unknown00[0x50];
+    void* sound;
+    float gain;
+    int unknown58;
+    unsigned char unknown5C[4];
+    float pan;
+    unsigned char unknown64[0x24];
+    float unknown88, unknown8C, unknown90, unknown94, unknown98, unknown9C;
+    unsigned char unknownA0[4];
+    unsigned flags;
+    unsigned char kind, unknownA9, unknownAA, enabled;
+    unsigned char unknownAC[4];
+    Recovered_SoundParameters() : flags(0) {}
+};
+typedef char SoundParameterSize[sizeof(Recovered_SoundParameters) == 0xB0 ? 1 : -1];
+
+typedef void (*Recovered_SoundMixFunction)(void*, void*, void*, float, float, float);
+typedef void (*Recovered_SoundFinishFunction)(void*, void*, void*);
+typedef void (*Recovered_SoundNotifyFunction)(int, int, int, int, int, void*, int, void*);
+struct Recovered_SoundMixChannel {
+    Recovered_SoundMixFunction function;
+    void* context;
+};
+struct Recovered_SoundMixConfiguration {
+    void* first;
+    void* second;
+    Recovered_SoundMixChannel channels[4];
+    Recovered_SoundFinishFunction finish;
+    void* context;
+    Recovered_SoundNotifyFunction notify;
+    void* device;
+    unsigned char enabled;
+};
+typedef char SoundMixConfigurationSize[sizeof(Recovered_SoundMixConfiguration) == 0x3C ? 1 : -1];
+
+extern "C" {
+// Callback signatures and configuration field roles remain UNVERIFIED.
+void func_00285CC8(void*, void*, void*, float, float, float);
+void func_00285EE8(void*, void*, void*);
+void func_001D7100(int, int, int, int, int, void*, int, void*);
+int func_00285B60(void*, Recovered_SoundMixConfiguration*);
+void ConfigureSoundStream(void*, int, int, float, float, float) __asm__("func_00285C60");
+void func_00285C40(void*);
+void func_00285C80(void*);
+void* func_00285510(void*);
+void* func_00285548(void*);
+int func_00280A38(void*, void**, int);
+void* func_0027FCF8(void*, const EeU64*, int);
+void* func_00280BC0(void*);
+void func_00283E78(void*, Recovered_SoundParameters*, void*);
+extern float D_003BDA4C, D_003BDA50, D_003BDA54, D_003BDA58;
+Recovered_StreamBuffer* func_001D8478(void*);
+void func_001D84C8(void*, Recovered_StreamBuffer*);
+Recovered_SoundBankSizes* func_001E89B0(void*, EeU64);
+void* func_0027FF78(void*, const char*, int, void*, int, int, int, void*, int);
+void func_00382348(void*, int);
+int func_00280A08(void*);
+int func_00280B10(void*);
+int func_00280100(void*, void*);
+int func_0035D728(char*, const char*, ...);
+void func_001EF8D0(Recovered_SoundPlayback*, const char*);
+void func_001EF9C0(Recovered_SoundPlayback*, const char*);
+EeU64 func_002723B0(const char*);
+void func_00280CD0(void*, EeU64);
+extern const char D_003F8BD8[], D_003F8BE0[], D_003F8BE8[];
+}
 
 int LowHealthEnvelope::Begin(float value,unsigned useEndpoint)
 {
@@ -14,17 +111,224 @@ int LowHealthEnvelope::Begin(float value,unsigned useEndpoint)
     return 1;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: five instruction differences: byte-store scheduling and a repeated constant.
+extern "C" int func_001EE888(Recovered_RandomSound* self) {
+    func_00382348(&self->random, 0x2B9D6F8);
+    func_00280A08(self);
+    self->unknown250 = 0;
+    self->enabled = 1;
+    self->unknown28C = 0.0f;
+    self->unknown291 = 0;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EE888);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EF548);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EF710);
+#endif
+extern "C" int func_001EF548(Recovered_SoundPlayback* self, void** resources, int count, const char* name, int stereo,
+                             void* context) {
+    switch (self->state) {
+        case 0: self->state = 5;
+        case 5:
+            if (!func_00280A38(self, resources, count)) return 0;
+            self->pending = func_001D8478(*(void**)(SoundStateSource() + 0xCBD4));
+            self->state = 1;
+        case 1: {
+            Recovered_StreamBuffer* buffer = self->pending;
+            unsigned char* runtime = SoundStateSource();
+            void* data = buffer->data;
+            int bytes = buffer->blockCapacity << 11;
+            int first = func_001E89B0(*(void**)(runtime + 0xCBD8), 0x6C51001C37800000UL)->first;
+            int second = func_001E89B0(*(void**)(SoundStateSource() + 0xCBD8), 0x6C51001C37800000UL)->second;
+            self->bank = func_0027FF78(runtime, name, 0, data, bytes, first, second, context, 0);
+            if (!self->bank) return 0;
+            func_001D84C8(*(void**)(SoundStateSource() + 0xCBD4), self->pending);
+            self->state = 2;
+            self->stereo = stereo;
+            self->pending = 0;
+        }
+        case 2:
+        default: return 1;
+    }
+}
+extern "C" int func_001EF710(Recovered_SoundPlayback* self) {
+    switch (self->state) {
+        case 2: self->state = 3;
+        case 3:
+            if (!func_00280B10(self)) return 0;
+            self->state = 4;
+        case 4:
+            if (!func_00280100(D_0040F510, self->bank)) return 0;
+            self->bank = 0;
+            self->state = 5;
+        case 0: self->state = 5;
+        case 1:
+        case 5:
+        default: return 1;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EF7A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EF7B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EF808);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EF8D0);
+extern "C" void func_001EF7B0(Recovered_SoundPlayback* self, const char* name) {
+    char key[16];
+    func_0035D728(key, D_003F8BD8, name);
+    if (self->stereo) {
+        func_001EF9C0(self, key);
+    } else {
+        func_001EF8D0(self, key);
+    }
+}
+extern "C" void func_001EF808(Recovered_SoundPlayback* self, const char* name) {
+    char key[16];
+    func_0035D728(key, D_003F8BD8, name);
+    if (self->stereo) {
+        char left[16];
+        char right[16];
+        func_0035D728(left, D_003F8BE0, key);
+        func_0035D728(right, D_003F8BE8, key);
+        EeU64 leftKey = func_002723B0(left);
+        EeU64 rightKey = func_002723B0(right);
+        func_00280CD0(self, leftKey);
+        func_00280CD0(self, rightKey);
+    } else {
+        func_00280CD0(self, func_002723B0(key));
+    }
+}
+extern "C" void func_001EF8D0(Recovered_SoundPlayback* self, const char* name) {
+    Recovered_SoundParameters parameters;
+    EeU64 key = func_002723B0(name);
+    void* sound = func_0027FCF8(self->bank, &key, 0);
+    if (sound) {
+        parameters.sound = sound;
+        parameters.gain = 1.0f;
+        parameters.kind = 0x10;
+        parameters.flags = 0x85C;
+        parameters.pan = 0.0f;
+        parameters.unknown58 = 0;
+        if (SoundStateSource()[0xCB9D]) {
+            parameters.unknown88 = D_003BDA4C;
+            parameters.unknown8C = D_003BDA50;
+            parameters.unknown90 = D_003BDA4C;
+            parameters.unknown94 = D_003BDA54;
+            parameters.unknown98 = D_003BDA58;
+            parameters.unknown9C = D_003BDA58;
+            parameters.enabled = 1;
+            parameters.flags |= 0x800000;
+        }
+        func_00283E78(func_00280BC0(self), &parameters, 0);
+    }
+}
+#ifdef NON_MATCHING
+// Unmatched: flag reloads fold away and parameter-address lifetimes differ (49 instructions).
+extern "C" void func_001EF9C0(Recovered_SoundPlayback* self, const char* name) {
+    Recovered_SoundParameters leftParameters;
+    Recovered_SoundParameters rightParameters;
+    char left[16], right[16];
+    func_0035D728(left, D_003F8BE0, name);
+    func_0035D728(right, D_003F8BE8, name);
+    EeU64 leftKey = func_002723B0(left);
+    EeU64 rightKey = func_002723B0(right);
+    if (self->bank) {
+        void* leftSound = func_0027FCF8(self->bank, &leftKey, 0);
+        void* rightSound = func_0027FCF8(self->bank, &rightKey, 0);
+        float gain = self->gain;
+        leftParameters.flags = 0x84C;
+        rightParameters.sound = rightSound;
+        leftParameters.kind = 0x10;
+        leftParameters.sound = leftSound;
+        leftParameters.pan = -1.0f;
+        rightParameters.gain = gain;
+        leftParameters.gain = gain;
+        rightParameters.pan = 1.0f;
+        rightParameters.kind = 0x10;
+        rightParameters.flags = 0x84C;
+        leftParameters.unknown58 = 0;
+        leftParameters.flags |= 0x10;
+        rightParameters.unknown58 = 0;
+        rightParameters.flags |= 0x10;
+        if (SoundStateSource()[0xCB9D]) {
+            leftParameters.flags |= 0x800000;
+            rightParameters.unknown8C = D_003BDA50;
+            rightParameters.unknown90 = D_003BDA4C;
+            rightParameters.unknown94 = D_003BDA54;
+            rightParameters.unknown9C = D_003BDA58;
+            rightParameters.enabled = 1;
+            rightParameters.flags |= 0x800000;
+            leftParameters.unknown88 = D_003BDA4C;
+            leftParameters.unknown8C = D_003BDA50;
+            leftParameters.unknown90 = 0.0f;
+            leftParameters.unknown94 = D_003BDA54;
+            leftParameters.unknown98 = D_003BDA58;
+            leftParameters.unknown9C = 0.0f;
+            leftParameters.enabled = 1;
+            rightParameters.unknown88 = 0.0f;
+            rightParameters.unknown98 = 0.0f;
+        }
+        void* leftChannel = func_00280BC0(self);
+        void* rightChannel = func_00280BC0(self);
+        func_00283E78(leftChannel, &leftParameters, 0);
+        func_00283E78(rightChannel, &rightParameters, 0);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EF9C0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EFBA0);
+#ifdef NON_MATCHING
+// Unmatched: callback setup registers and failure-return join differ (37 instructions).
+extern "C" int func_001EFD30(unsigned char* self) {
+    Recovered_SoundMixConfiguration configuration;
+    configuration.first = 0;
+    configuration.second = 0;
+    configuration.channels[0].function = func_00285CC8;
+    unsigned char* stream = *(unsigned char**)(self + 0xCBE0);
+    configuration.finish = func_00285EE8;
+    configuration.channels[2].context = stream + 0xE0;
+    configuration.channels[2].function = func_00285CC8;
+    configuration.channels[1].context = stream + 0x70;
+    configuration.channels[3].context = stream + 0x150;
+    configuration.channels[0].context = stream;
+    configuration.channels[1].function = func_00285CC8;
+    configuration.channels[3].function = func_00285CC8;
+    configuration.context = 0;
+    configuration.notify = func_001D7100;
+    configuration.enabled = 1;
+    configuration.device = *(void**)(*(unsigned char**)(self + 0xCBD8) + 0xC);
+    if (!func_00285B60(stream, &configuration)) return 0;
+    ConfigureSoundStream(*(void**)(self + 0xCBE0), 1, 0, 1.0f, 1.0f, 1.0f);
+    func_00285C40(*(void**)(self + 0xCBE0));
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EFD30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001EFE70);
+#endif
+extern "C" int func_001EFE70(void* unused, int useEnvelope) {
+    Recovered_SoundMixConfiguration configuration;
+    func_00285C80(SoundFilter());
+    configuration.channels[0].function = func_00285CC8;
+    configuration.channels[0].context = SoundFilter();
+    configuration.channels[1].function = func_00285CC8;
+    configuration.channels[1].context = (unsigned char*)SoundFilter() + 0x70;
+    configuration.channels[2].function = func_00285CC8;
+    configuration.channels[2].context = (unsigned char*)SoundFilter() + 0xE0;
+    configuration.channels[3].function = func_00285CC8;
+    configuration.channels[3].context = (unsigned char*)SoundFilter() + 0x150;
+    configuration.finish = func_00285EE8;
+    configuration.context = 0;
+    configuration.notify = func_001D7100;
+    configuration.device = *(void**)((unsigned char*)*(void**)(SoundStateSource() + 0xCBD8) + 0xC);
+    configuration.enabled = 1;
+    if (useEnvelope) {
+        configuration.first = func_00285510(SoundStateSource() + 0xB308);
+        configuration.second = func_00285548(SoundStateSource() + 0xB308);
+    } else {
+        configuration.first = 0;
+        configuration.second = 0;
+    }
+    func_00285B60(SoundFilter(), &configuration);
+    ConfigureSoundStream(SoundFilter(), 1, 0, 1.0f, 1.0f, 1.0f);
+    func_00285C40(SoundFilter());
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001F09C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001F1110);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001F1220);
