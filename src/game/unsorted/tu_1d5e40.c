@@ -2,7 +2,7 @@
 #include "ps2/prelude.h"
 
 extern void ResourcePool_Initialize(void*);
-extern s32 func_001D6230(void *, M2C_UNK, M2C_UNK);
+extern void func_001D6230(void*, s32, s32);
 extern s32 func_001D76E8();
 extern s32 func_001D7BB8();
 extern s32 func_00281BB8();
@@ -36,7 +36,7 @@ typedef struct Recovered_ResourceOwner {
 extern s32 func_002842E8(void*);
 extern s32 func_00284298(void*);
 extern s32 func_001D7A60(void*);
-extern void func_00281C98(void*);
+extern s32 func_00281C98(void*);
 
 // Partial slot views; original identities and unused fields are UNVERIFIED.
 
@@ -50,15 +50,69 @@ typedef struct Recovered_ResourceSlots {
     Recovered_ResourceSlot slots[2];
 } Recovered_ResourceSlots;
 
+/* Partial controller access view; identities and unused storage are UNVERIFIED. */
 typedef struct Recovered_PlaybackSlot {
     u8 unk_00[0x90];
     u8 active;
     u8 unk_91[0x39F];
 } Recovered_PlaybackSlot;
 typedef struct Recovered_PlaybackSlots {
-    u8 unk_00[0x2C0];
+    u8 unk_00[0x2A8];
+    u64 key;
+    u64 savedKey;
+    u8 unk_2B8[8];
     Recovered_PlaybackSlot slots[6];
+    void* current;
+    void* saved;
+    void* alternate;
+    void* field1BEC;
+    void* field1BF0;
+    u8 unk_1BF4[0x34];
+    f32 time;
+    u8 unk_1C2C[0x18];
+    u8 active;
+    u8 savedActive;
+    u8 unk_1C46[2];
+    f32 gain;
 } Recovered_PlaybackSlots;
+typedef char PlaybackSlotsOffset[(u32) & ((Recovered_PlaybackSlots*)0)->slots == 0x2C0 ? 1 : -1];
+typedef char PlaybackCurrentOffset[(u32) & ((Recovered_PlaybackSlots*)0)->current == 0x1BE0 ? 1 : -1];
+typedef char PlaybackTimeOffset[(u32) & ((Recovered_PlaybackSlots*)0)->time == 0x1C28 ? 1 : -1];
+typedef char PlaybackActiveOffset[(u32) & ((Recovered_PlaybackSlots*)0)->active == 0x1C44 ? 1 : -1];
+
+extern void* D_0040F0E0;
+extern void* D_0040F510;
+extern void func_001EA518(void*, s32, s32);
+extern f32 func_001ED820(void*);
+extern void func_001F0F28(void*, s32, s32);
+extern void func_001F0678(void*);
+extern void func_001D7020(void*);
+extern void func_001D6E78(void*, void*, u64, s32);
+extern void ResourcePool_Update(void*);
+typedef struct Recovered_AudioParameters {
+    u8 unk_00[0x50];
+    void* source;
+    f32 gain;
+    f32 rate;
+    u8 unk_5C[4];
+    u32 unk_60;
+    u8 unk_64[0x24];
+    f32 field88, field8C, field90, field94, field98, field9C;
+    u32 unk_A0;
+    u32 flags;
+    u8 kind;
+    u8 unk_A9[2];
+    u8 fieldAB;
+    u8 unk_AC[4];
+} __attribute__((aligned(16))) Recovered_AudioParameters;
+typedef char AudioParametersSize[sizeof(Recovered_AudioParameters) == 0xB0 ? 1 : -1];
+extern s32 func_00283C38(void*, Recovered_AudioParameters*);
+
+typedef struct Recovered_TimeState {
+    u8 unk_00[0x20];
+    f32 time;
+} Recovered_TimeState;
+static inline Recovered_TimeState* TimeState_Get(void) { return (Recovered_TimeState*)((u8*)D_0040F0E0 + 0x20120); }
 
 s32 func_001D5E40(void) {
     return 0;
@@ -130,7 +184,14 @@ s32 func_001D5F58(Recovered_ResourceOwner* owner) {
         default: return 0;
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6038);
+void func_001D6038(Recovered_ResourceOwner* owner, s32 stamp) {
+    Recovered_AudioParameters params;
+    u32 index = 0;
+    owner->stamp = stamp;
+    ResourcePool_Update((u8*)owner + 0x94);
+    params.flags = 0;
+    for (; index < owner->count; index++) { func_00283C38(owner->entries[index].resource, &params); }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D60B8);
 Recovered_ResourceEntry* func_001D6178(Recovered_ResourceOwner* owner) {
     u32 index;
@@ -147,7 +208,17 @@ Recovered_ResourceEntry* func_001D6178(Recovered_ResourceOwner* owner) {
     oldest->stamp = owner->stamp;
     return oldest;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6230);
+void func_001D6230(void* self, s32 mode, s32 active) {
+    Recovered_ResourceOwner* owner = self;
+    u32 index;
+    if (active) {
+        for (index = 0; index < owner->count; index++) { M2C_FIELD(owner->entries[index].resource, u8*, 0x35) = 1; }
+        M2C_FIELD(self, f32*, 0x7C) = func_001ED820(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 0x2C));
+    } else {
+        for (index = 0; index < owner->count; index++) { M2C_FIELD(owner->entries[index].resource, u8*, 0x35) = 0; }
+        M2C_FIELD(self, f32*, 0x7C) = 1.0f;
+    }
+}
 void func_001D62F8(Recovered_ResourceOwner* owner, Recovered_ResourceEntry* entries, u32 count) {
     u32 index;
     for (index = 0; index < owner->count; index++) { func_00284298(owner->entries[index].resource); }
@@ -187,7 +258,14 @@ void func_001D6C48(void *arg0)
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6CB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6E70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6E78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6F90);
+void func_001D6F90(Recovered_PlaybackSlots* self) {
+    if (self->current == self->alternate) { func_001D6E78(self, self->saved, self->savedKey, self->savedActive); }
+    func_001F0678(self->current);
+    if (M2C_FIELD(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 0x24), u8*, 0x1E54) == 0) {
+        func_001D7020(self);
+    }
+    self->time = TimeState_Get()->time;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7020);
 
 void func_001D7100(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
@@ -199,8 +277,24 @@ void func_001D7100(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7128);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7198);
+void func_001D7128(Recovered_PlaybackSlots* self) {
+    s32 active = 1;
+    if (!((TimeState_Get()->time - self->time) <= 0.5f)) { active = 0; }
+    func_001EA518(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 8), 3, active);
+}
+void func_001D7198(Recovered_PlaybackSlots* self, s32 mode, s32 active) {
+    s32 count;
+    Recovered_PlaybackSlot* slot = self->slots;
+    for (count = 5; count >= 0; count--) {
+        func_001F0F28(slot, mode, active);
+        slot++;
+    }
+    if (active) {
+        self->gain = func_001ED820(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 0x2C));
+    } else {
+        self->gain = 0.0f;
+    }
+}
 
 void func_001D7238(void *arg0) {
     func_001F08E8(M2C_FIELD(arg0, s32 *, 0x1BE0));
@@ -242,8 +336,31 @@ void func_001D7338(s32 arg0, void *arg1) {
     M2C_FIELD(arg1, void **, 0x1C08) = func_001092F8();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7360);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D73D8);
+void func_001D7360(Recovered_PlaybackSlots* self, s32 active) {
+    if (active) {
+        void* current = self->current;
+        void* next = self->field1BF0;
+        if (current != next) {
+            self->saved = current;
+            self->savedKey = self->key;
+            func_001D6E78(self, next, 0x730544c7b701e000UL, 0);
+        }
+    } else {
+        func_001D6E78(self, self->saved, self->savedKey, 1);
+    }
+}
+void func_001D73D8(Recovered_PlaybackSlots* self) {
+    void* current = self->current;
+    void* next = self->alternate;
+    if (current != next) {
+        self->saved = current;
+        self->savedActive = self->active;
+        self->savedKey = self->key;
+        func_001D6E78(self, next, 0x73055bea7dc80000UL, 0);
+    }
+    func_001F0678(self->current);
+    self->time = TimeState_Get()->time;
+}
 void* func_001D7460(Recovered_ResourceSlots* self) {
     s32 index;
     for (index = 0; index < 2; index++) {
