@@ -514,6 +514,16 @@ struct QuadReset {
     int unk_40;
 };
 
+// UNVERIFIED motion-state identity; the accessed offsets are native.
+struct MotionState {
+    unsigned char unk_00[0x30];
+    Game::Position4 unk_30;
+    unsigned char unk_40[0x34];
+    int unk_74;
+    unsigned char unk_78[4];
+    unsigned char unk_7C, unk_7D, unk_7E, unk_7F, unk_80, unk_81;
+};
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -531,7 +541,17 @@ int func_0017C828(Value point, const Game::Position4* bounds) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00180090);
+extern "C" {
+void func_00180090(MotionState* self) {
+    Value zero = ZeroXYZ();
+    self->unk_74 = 0;
+    self->unk_7C = 0;
+    self->unk_7F = 0;
+    self->unk_81 = 0;
+    self->unk_30 = PositionFromValue(&zero);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001800B8);
 extern "C" {
 int func_001803E8(QueryState* self) {
@@ -657,7 +677,36 @@ void func_00187E08(ModeFamily* self, void* owner) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187EC8);
+extern "C" {
+int func_00187EC8(ModeFamily* self) {
+    FamilyMode** mode = self->modes;
+    int remaining = 5;
+    self->unk_00 = 0;
+    self->unk_02 = 0;
+    self->unk_18 = 0;
+    self->unk_1C = 5.0f;
+    self->unk_03 = 0;
+    self->unk_0C = 0;
+    self->unk_20 = 0;
+    self->enabled = self->unk_01 = 1;
+    self->index = -1;
+    func_00173690(&self->timer);
+    self->unk_3B0 = 5.0f;
+    self->unk_24 = 0;
+    self->unk_2C = 0;
+    self->unk_28 = 0;
+    do {
+        FamilyMode* item = *mode;
+        remaining--;
+        mode++;
+        item->Reset();
+    } while (remaining >= 0);
+    self->active = 0;
+    func_00173690(&self->finalTimer);
+    return 1;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00188B40);
 extern "C" {
 int func_00188B98(PoolState* self) {
