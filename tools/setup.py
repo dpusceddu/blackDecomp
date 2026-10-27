@@ -7,6 +7,8 @@ Steps, each skipped when already done (so it is safe to run again at the start o
   2. System tools: ninja, the little-endian MIPS binutils (or $BLACK_BINUTILS_PREFIX), the 32-bit loader, xz and git;
      a missing one stops with the apt command that installs it.
   3. Python packages of requirements.txt: in the active virtual environment, or in .venv (created when missing).
+     In a second worktree of the repository, .venv, the game directories in orig/ and build/toolchain/ are shared with the main worktree
+     (symbolic links), so another session costs only its own build.
   4. Your executable at orig/SLUS_213.76/SLUS_213.76 (the build checks its SHA-256).
   5. The pinned toolchain (tools/toolchain.py install --objdiff).
   6. configure.py and ninja, which must end with `OK  SLUS_213.76` (skipped with --no-build).
@@ -43,6 +45,35 @@ def has_modules(python):
     return subprocess.run([str(python), '-c', probe], cwd=ROOT).returncode == 0
 
 
+def main_worktree():
+    """The first worktree of this repository when it is not this one (several sessions on one machine), else None."""
+    r = subprocess.run(['git', 'worktree', 'list', '--porcelain'], cwd=ROOT, capture_output=True, text=True)
+    first = next((Path(l[9:]) for l in r.stdout.splitlines() if l.startswith('worktree ')), None)
+    return first if first and first.resolve() != ROOT.resolve() else None
+
+
+def share(main, name):
+    """Link name to the main worktree's copy when this worktree has none."""
+    here, there = ROOT / name, main / name
+    if not here.exists() and not here.is_symlink() and there.exists():
+        here.parent.mkdir(parents=True, exist_ok=True)
+        here.symlink_to(there.resolve(), target_is_directory=True)
+        print('    %s: shared with %s' % (name, main))
+
+
+def game_files(main):
+    """The untracked entries of the main worktree's orig/ (game files), at the level below the tracked placeholders."""
+    r = subprocess.run(['git', 'ls-files', 'orig'], cwd=ROOT, capture_output=True, text=True)
+    tracked, names = set(r.stdout.split()), []
+    for d in sorted(p for p in (main / 'orig').iterdir() if p.is_dir()):
+        rel = 'orig/' + d.name
+        if any(t.startswith(rel + '/') for t in tracked):
+            names += [rel + '/' + f.name for f in sorted(d.iterdir()) if rel + '/' + f.name not in tracked]
+        else:
+            names.append(rel)
+    return names
+
+
 def main():
     no_build = '--no-build' in sys.argv[1:]
     step('platform')
@@ -56,6 +87,12 @@ def main():
         missing.append('32-bit loader /lib/ld-linux.so.2 (libc6-i386)')
     if missing:
         stop('missing %s; on Debian or Ubuntu: %s' % (', '.join(missing), APT))
+
+    main = main_worktree()
+    if main:
+        step('sharing the environment, the game files and the toolchain with the main worktree')
+        for name in ['.venv', 'build/toolchain'] + game_files(main):
+            share(main, name)
 
     step('Python packages')
     python = Path(sys.executable)
