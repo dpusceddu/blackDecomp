@@ -16,22 +16,13 @@
 
 When asked to "do a work session" (or to work on the decompilation without more detail), follow these steps.
 
-**Use the supplied checkout.** Work in the directory provided by the user or harness, whether it is a normal clone or a
-worktree. Let the user or harness manage checkout creation; do not create another worktree just to start a session.
-Preserve the supplied starting revision, branch and existing changes. Create a branch only when needed to retain commits
-or open the session's pull request, following the harness's conventions.
-
-**Concurrent sessions need separate build directories.** A build writes `build/`, `asm/` and `data/` inside the checkout,
-so two active sessions must never build in the same directory. A normal checkout is fine for a single session. If another
-active session uses the same directory, arrange separate checkouts through the user or harness before building. Sessions can share their
-environment (system packages, container or toolbox). When the supplied checkout is a linked worktree, `tools/setup.py`
-can reuse the main checkout's `.venv`, game files and toolchain. `tools/next.py` skips files that other local worktrees
-change, and the claims keep sessions on different machines apart.
+**Parallel work.** Independent sessions must not overwrite each other's source edits or generated files (`build/`, `asm/`
+and `data/`). Use the harness's isolation and coordination facilities for parallel work.
 Split the processor between sessions (`ninja -j` with the core count divided by the number of sessions): the SN tools can
 stall under heavy load.
 
-1. **Build.** Check the supplied checkout's revision, branch and local changes. Run
-   `python3 tools/setup.py`: it installs what is missing and builds, and must end with `Ready`. Save `build/SLUS_213.76/units.json` as `.local/session-baseline-units.json`; its functions with status
+1. **Build.** Run `python3 tools/setup.py`: it installs what is missing and builds, and must end with `Ready`.
+   Save `build/SLUS_213.76/units.json` as `.local/session-baseline-units.json`; its functions with status
    `source` are the protected set.
 2. **Pick.** Run `python3 tools/next.py --pick`: one unclaimed file, drawn at random from the best candidates (game code
    first), so sessions that start together rarely collide. If its functions make no sense to you, pick again; add related

@@ -70,10 +70,8 @@ There are thousands of functions left, from small helpers to the game's core sys
 - **By hand:** [CONTRIBUTING.md](CONTRIBUTING.md) has the workflow (objdiff, claiming a file, naming, commit rules).
 - **With an AI agent:** open your fork in a coding agent and say *"Follow AGENTS.md and do a work session."* The agent
   picks an unclaimed file with `tools/next.py`, claims it with a draft pull request, matches what it can and hands the
-  pull request over for review. Agents use the checkout supplied by you or the harness, including an automatically created
-  worktree. Parallel sessions need separate checkout directories so their build outputs cannot collide. Much of the work
-  so far was done with AI coding agents under human direction; agents follow the same rules and evidence standard as
-  everyone else.
+  pull request over for review. Much of the work so far was done with AI coding agents under human direction; agents
+  follow the same rules and evidence standard as everyone else.
 
 Recovered types and names are as valuable as matches: a correct structure makes every function that uses it easier.
 
