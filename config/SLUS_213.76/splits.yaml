@@ -1871,7 +1871,7 @@ splits:
   - {src: src/game/unsorted/tu_27cf20.c, range: [0x27cf20, 0x27cf28]}
   - {src: src/game/unsorted/tu_27cf28.c, range: [0x27cf28, 0x27cf58], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x27cf58, 0x27d1d8]}
-  - {src: src/game/unsorted/tu_27d1d8.c, range: [0x27d1d8, 0x27f6d8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_27d1d8.c, range: [0x27d1d8, 0x27f6d8], flags: [-O2, -G0, -snas, -mno-check-zero-division, -mvu0-use-vf0-vf31], note: 'Native 0x27f640 remainder by 100 omits the zero guard; geometry bodies use allocatable VU0 registers. Original TU boundaries remain proposed.'}
   - {src: src/game/unsorted/tu_27d1d8_27f6d8.c, range: [0x27f6d8, 0x27f778], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/unsorted/tu_27d1d8.c, range: [0x27f778, 0x27f790]}
   - {src: src/game/unsorted/tu_27d1d8_27f6d8.c, range: [0x27f790, 0x27f818]}
