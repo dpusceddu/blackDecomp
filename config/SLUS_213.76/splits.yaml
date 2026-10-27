@@ -1849,7 +1849,7 @@ splits:
   - {src: src/game/unsorted/tu_2723b0.cpp, range: [0x2723b0, 0x272488]}
   - {src: src/game/unsorted/tu_272488.c, range: [0x272488, 0x272b58], note: flags or language differ}
   - {src: src/game/unsorted/tu_272488_272b58.c, range: [0x272b58, 0x272c18], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/unsorted/tu_272488_272c18.c, range: [0x272c18, 0x274e40]}
+  - {src: src/game/unsorted/tu_272488_272c18.c, range: [0x272c18, 0x274e40], assembler: sn-min6, note: "Native query and pool-list walks use six-word short loops; stock SN assembler adds an extra NOP."}
   - {src: src/game/unsorted/tu_274e40.c, range: [0x274e40, 0x274f80]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x274f80, 0x274fc8]}
   - {src: src/game/unsorted/tu_274fc8.c, range: [0x274fc8, 0x274fd8]}
