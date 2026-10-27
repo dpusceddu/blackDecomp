@@ -415,6 +415,62 @@ void func_001A1FE8(FormationAction*);
 void func_00173640(Game::ActionTimer*, float);
 }
 
+struct PausePointAction {
+    Game::ActionBase base;
+    unsigned char value;
+    unsigned char unk_09[7];
+    Game::Position4 point;
+};
+struct PointEvent {
+    int kind;
+    unsigned char unk_04[12];
+    Game::Position4 point;
+};
+
+// UNVERIFIED six-mode family; embedded extents follow the native table addresses.
+struct FamilyModeData {
+    void* owner;
+    unsigned char unk_04[0x5C];
+};
+struct FamilyMode : FamilyModeData {
+    virtual int Reset();
+};
+struct ModeFamily {
+    unsigned char unk_00, unk_01, unk_02, unk_03;
+    unsigned char unk_04[4];
+    int index, unk_0C;
+    Game::ActionTimer timer;
+    unsigned char enabled, unk_15[3];
+    int unk_18;
+    float unk_1C;
+    int unk_20;
+    unsigned char unk_24, unk_25[3];
+    int unk_28, unk_2C;
+    FamilyMode first;
+    unsigned char unk_94[0x6C];
+    FamilyMode second;
+    unsigned char unk_164[0xC];
+    FamilyMode third;
+    unsigned char unk_1D4[0x2C];
+    FamilyMode fourth;
+    unsigned char unk_264[0x2C];
+    FamilyMode fifth;
+    unsigned char unk_2F4[0x1C];
+    FamilyMode sixth;
+    unsigned char unk_374[0x1C];
+    FamilyMode* modes[6];
+    int active;
+    void* owner;
+    float unk_3B0;
+    Game::ActionTimer finalTimer;
+};
+typedef char FamilyModeSize[sizeof(FamilyMode) == 0x64 ? 1 : -1];
+typedef char FamilyTableOffset[(unsigned)&((ModeFamily*)0)->modes == 0x390 ? 1 : -1];
+
+extern "C" {
+void func_001A24B0(FamilyMode*, void*);
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -529,7 +585,35 @@ void func_00183238(VectorState* self) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00185D10);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187D78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187E08);
+extern "C" {
+void func_00187E08(ModeFamily* self, void* owner) {
+    FamilyMode** begin = self->modes;
+    int remaining = 5;
+    self->owner = owner;
+    FamilyMode** clear = begin + 5;
+    do {
+        *clear = 0;
+        remaining--;
+        clear--;
+    } while (remaining >= 0);
+    self->modes[0] = &self->first;
+    self->modes[1] = &self->second;
+    self->modes[2] = &self->third;
+    self->modes[3] = &self->fourth;
+    self->modes[4] = &self->fifth;
+    self->modes[5] = &self->sixth;
+    remaining = 5;
+    FamilyMode** mode = begin;
+    do {
+        FamilyMode* item = *mode;
+        mode++;
+        func_001A24B0(item, owner);
+        remaining--;
+    } while (remaining >= 0);
+    self->active = 0;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187EC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00188B40);
 extern "C" {
@@ -933,7 +1017,22 @@ void func_00197DA0(Game::Action* self) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00198388);
+extern "C" {
+void func_00198388(PausePointAction* self, const PointEvent* event) {
+    func_00193980(self, event);
+    if (event && event->kind == 7)
+        self->point = event->point;
+    else
+        Game::Store(self->point, Game::Load(self->base.brain->actor->position));
+    func_00193A60((Game::Action*)self, 0, func_0016DE70(D_0040F4D4, 2.5f, 3.0f));
+    func_001825B0(&self->base.brain->controller);
+    QueryState* query = QueryFor(self->base.brain);
+    self->value = query->controller->owner->unk_3AA;
+    query->controller->unk_30 = 1;
+    func_00188148(Movement(self->base.brain), 1);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001984C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019A798);
 extern "C" {
