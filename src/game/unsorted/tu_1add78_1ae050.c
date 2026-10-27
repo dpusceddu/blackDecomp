@@ -1,5 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/timed_value_pool.h"
+#include "game/effects/damage_window.h"
 
 /* Accessed slot layout; original field meanings remain UNVERIFIED. */
 typedef struct {
@@ -23,6 +25,38 @@ extern void* D_0040F4C0;
 void func_001B2BC0(BkEffectSlotPS2*);
 void func_001B2C40(BkEffectSlotPS2*);
 void func_001B2CD0(BkEffectSlotPS2*);
+
+// Partial native views; original identities and unused allocation extents remain UNVERIFIED.
+typedef struct {
+    s32 x, y;
+    u64 field8, field10, field18;
+} TextureBinding;
+typedef struct {
+    void* resource;
+    TextureBinding* binding;
+} MaterialBinding;
+extern void func_0026A6F0(void*);
+extern void func_0026A460(u64, u64, u64, u64, void*, s32);
+typedef struct {
+    s32 kind;
+    void* object;
+} TimedPair;
+typedef struct {
+    Recovered_TimedValuePool pool;
+    TimedPair pairs[128];
+} TrackedPool;
+static inline s32 EntryActive(f32 remaining) {
+    s32 result = 0;
+    if (remaining >= 0.0f) result = 1;
+    return result;
+}
+static inline Recovered_TimedValueEntry* EntryAt(Recovered_TimedValuePool* pool, s16 index) {
+    s32 byteOffset = index * sizeof(Recovered_TimedValueEntry);
+    return (Recovered_TimedValueEntry*)(byteOffset + (s32)pool->entries);
+}
+extern void func_002822C8(Recovered_TimedValuePool*, u128, void*, f32);
+typedef char TimedPairOffset[(u32) & ((TrackedPool*)0)->pairs == 0x1220 ? 1 : -1];
+extern void* D_0040F4D0;
 
 /* Scalar writes preserve the native stack temporary before its quadword copy. */
 typedef union {
@@ -158,7 +192,6 @@ s32 func_001B0A20(void* object) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B0D88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B0E00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B0F70);
 void func_001B2A78(BkEffectSlotPS2* slots) {
     u16 i;
     for (i = 0; i < 28; i++) { func_001B3CD8(slots + i); }
@@ -241,7 +274,21 @@ void func_001B6188(void* base) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B61C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B6250);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B6328);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001BEBA0);
+void func_001BEBA0(BkEffectDamageWindowsPS2* windows, void* effect, void* actor, f32 delay, f32 damage) {
+    s16 i;
+    f32 now = M2C_FIELD(D_0040F4D0, f32*, 0x20);
+    for (i = 0; i < 32; i++) {
+        BkEffectDamageWindowPS2* window = windows->records + i;
+        if (window->end <= now) {
+            window->effect = effect;
+            window->actor = actor;
+            window->begin = now + delay + M2C_FIELD(actor, f32*, 0x244);
+            window->end = window->begin + M2C_FIELD(actor, f32*, 0x248);
+            window->damage = damage;
+            return;
+        }
+    }
+}
 void func_001C1A68(void* out, void* input, void* data) {
     M2C_FIELD(out, void**, 8) = data;
     M2C_FIELD(out, void**, 4) = input;
@@ -324,7 +371,15 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001CF530);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001CF6C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001CF8C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001CFA58);
+void func_001CFA58(MaterialBinding* material) {
+    if (!material->binding) {
+        func_0026A6F0(material->resource);
+    } else {
+        TextureBinding* binding = material->binding;
+        u64 offset = (u32)(0x8000 - binding->x * 8) | ((u64)(u32)(0x8000 - binding->y * 8) << 32);
+        func_0026A460(binding->field8, binding->field10, offset, binding->field18, material->resource, 0);
+    }
+}
 void func_001CFB00(void* object) {
     func_001C2210(object);
     M2C_FIELD(object, u8*, 0x20) = 1;
@@ -347,9 +402,24 @@ void func_001ED2C8(void* state, u64 value, s32 data) {
     M2C_FIELD(state, s32*, 0x1C)++;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001ED2E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001ED3E0);
+void func_001ED3E0(TrackedPool* pool, u128 context, void* parameters, f32 elapsed) {
+    s32 i;
+    for (i = 0; i < pool->pool.count; i++) {
+        if ((u8)EntryActive(pool->pool.entries[i].remaining) && pool->pairs[i].kind && pool->pairs[i].kind == 1) {
+            pool->pool.entries[i].value = M2C_FIELD(pool->pairs[i].object, u128*, 0xA0);
+        }
+    }
+    func_002822C8(&pool->pool, context, parameters, elapsed);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001ED4A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001ED4F0);
+void func_001ED4F0(TrackedPool* pool) {
+    s32 i;
+    for (i = 0; i < pool->pool.count; i++) {
+        if ((u8)EntryActive(pool->pool.entries[i].remaining) == 1 && pool->pairs[i].kind == 1) {
+            EntryAt(&pool->pool, i)->remaining = -1.0f;
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001ED578);
 void func_001ED648(void* state) {
     void* active = M2C_FIELD(state, void**, 0x10);

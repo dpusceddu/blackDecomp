@@ -1212,7 +1212,7 @@ splits:
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1b0d88, 0x1b0f48]}
   - {src: src/game/effects/tu_1b0f48.c, range: [0x1b0f48, 0x1b0f50]}
   - {src: src/game/effects/tu_1b0f50.c, range: [0x1b0f50, 0x1b0f70]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1b0f70, 0x1b0fa8]}
+  - {src: src/game/effects/frame_history_lookup.c, range: [0x1b0f70, 0x1b0fa8], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: "Native frame-index modulus uses div/mfhi without a zero-divisor trap."}
   - {src: src/game/effects/tu_1b0fa8.c, range: [0x1b0fa8, 0x1b0fc0], flags: [-O1, -G0, -snas]}
   - {src: src/game/effects/tu_1b0fc0.c, range: [0x1b0fc0, 0x1b0fd0]}
   - {src: src/game/effects/tu_1b0fd0.c, range: [0x1b0fd0, 0x1b0ff8]}
