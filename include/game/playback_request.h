@@ -9,7 +9,7 @@ typedef struct {
     // Buffer slots/count are confirmed by the matched attachment routine.
     Recovered_StreamBuffer* buffers[4];
     s32 bufferCount;
-    // UNVERIFIED: execution fields pending matched consumers in the state TU.
+    // Execution offsets are confirmed by matched state consumers; original field meanings remain UNVERIFIED.
     s32 unk_14, unk_18, unk_1C;
     u64 unk_20;
     u64 poolKey; // Confirmed by matched keyed pool acquisitions.
@@ -75,6 +75,7 @@ typedef struct {
     u8 unk_A8, unk_A9, unk_AA, unk_AB;
     u32 unk_AC;
 } Recovered_PlaybackParameters __attribute__((aligned(16)));
+typedef char PlaybackParameterCopyExtent[sizeof(Recovered_PlaybackParameters) == 0xB0 ? 1 : -1];
 
 /* UNVERIFIED: accessed only by the pool-operation drafts. */
 typedef struct {

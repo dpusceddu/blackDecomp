@@ -52,6 +52,38 @@ typedef struct {
     f32 unk_1C;
 } Recovered_PlaybackDeferredInput;
 typedef char PlaybackTransitionCopyExtent[sizeof(Recovered_PlaybackTransition) == 0x20 ? 1 : -1];
+/* Full local owner view used by native initialization. The slot storage, loader
+ * payload, selected/fading roles and original class identity remain UNVERIFIED. */
+typedef struct {
+    u64 key;
+    u8 unk_08[0x0E];
+    s16 unk_16;
+    Recovered_StreamRange* ranges;
+} Recovered_PlaybackDefinition;
+typedef struct {
+    Recovered_PlaybackController controllers[2];
+    u8 handle[0x14];
+    void* references[4];
+    u32 unk_7C;
+    u8 slots[64][0x60];
+    u8 flags[64];
+    s8 path[0x40];
+    s32 referenceCount, controllerCount;
+    Recovered_StreamBuffer* loaderBuffer;
+    Recovered_PlaybackDefinition* definition;
+    Recovered_PlaybackController* selected;
+    Recovered_PlaybackController* fading;
+    f32 unk_1918, unk_191C, unk_1920, unk_1924;
+    s32 unk_1928, unk_192C;
+    u32 state;
+    void* resource;
+    u64 unk_1938;
+    Recovered_PlaybackTransition current, pending, previous;
+    u8 deferred, deferredReady;
+} Recovered_PlaybackOwner;
+typedef char Recovered_OwnerFlagsOffset[(u32) & ((Recovered_PlaybackOwner*)0)->flags == 0x1880 ? 1 : -1];
+typedef char Recovered_OwnerStateOffset[(u32) & ((Recovered_PlaybackOwner*)0)->state == 0x1930 ? 1 : -1];
+
 extern void* D_0040F0E0;
 
 static inline Recovered_AudioMixPreferences* MixPreferences(void) { return &FrontendOptions_Preferences->audioMix; }
@@ -188,10 +220,81 @@ s32 func_001DB4A0(s32 arg0) {
     return var_2;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DB4F0);
+extern void* func_0035C6EC(void*, s32, u32);
+extern void func_00280FE0(void*, void*);
+extern void func_001DC498(void*, s32, s32);
+s32 func_001DB4F0(Recovered_PlaybackOwner* owner) {
+    f32* expiry = (f32*)(owner->handle + 0x10);
+    u8* handle = owner->handle;
+    s32 i = 0;
+    s32 result = 1;
+    u8* flag;
+    func_0035C6EC(owner, 0, 0x58);
+    func_0035C6EC(owner->references, 0, 0x10);
+    owner->controllerCount = 0;
+    owner->referenceCount = 0;
+    owner->loaderBuffer = 0;
+    do {
+        func_00280FE0(handle, 0);
+        handle += 0x14;
+        *expiry = -1.0f;
+        i--;
+        expiry = (f32*)((u8*)expiry + 0x14);
+    } while (i >= 0);
+    i = 63;
+    func_001DC498(owner, 0, 0);
+    owner->unk_1918 = 0;
+    owner->current.unk_14 = -1;
+    owner->unk_191C = 0;
+    flag = owner->flags + 63;
+    owner->unk_1924 = 0;
+    owner->unk_192C = 0;
+    owner->pending.active = 0;
+    owner->current.active = 0;
+    owner->previous.active = 0;
+    do {
+        *flag = 0;
+        i--;
+        flag--;
+    } while (i >= 0);
+    owner->state = result;
+    return result;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DB5F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DBA00);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DBDB8);
+/* Partial loaded-definition view; unaccessed storage and original identity are UNVERIFIED. */
+
+extern u8* func_001DC610(void*);
+extern s32 func_001DC5A8(void*);
+extern s32 func_001DC6E8(void*);
+/* Native consumer view: this command's returned value is discarded. */
+extern void func_001EFE08(void*, void*, f32);
+extern u8 D_003F8D10[];
+s32 func_001DBDB8(void* owner) {
+    s32 i;
+    if (M2C_FIELD(owner, s32*, 0x1930) == 9) {
+        Recovered_PlaybackDefinition* definition = M2C_FIELD(owner, Recovered_PlaybackDefinition**, 0x190C);
+        if (!func_001DB088(M2C_FIELD(owner, Recovered_PlaybackController**, 0x1910), &definition->key,
+                           definition->ranges + M2C_FIELD(owner, s16*, 0x1954), M2C_FIELD(owner, u8*, 0x1958)))
+            return 0;
+        M2C_FIELD(owner, s32*, 0x1930) = 14;
+    }
+    for (i = 0; i < M2C_FIELD(owner, s32*, 0x1904); i++) {
+        if (!func_001DB140(&((Recovered_PlaybackController*)owner)[i])) return 0;
+    }
+    for (i = 0; i < M2C_FIELD(owner, s32*, 0x1904); i++) func_001DAFD0(&((Recovered_PlaybackController*)owner)[i]);
+    M2C_FIELD(owner, u8*, 0x1977) = 0;
+    M2C_FIELD(owner, u8*, 0x1957) = 0;
+    M2C_FIELD(owner, u8*, 0x1997) = 0;
+    func_001DC5A8(owner);
+    func_001DC610(owner);
+    func_001DC6E8(owner);
+    func_001EFE08(D_0040F510, D_003F8D10, 0);
+    M2C_FIELD(owner, s32*, 0x192C) = 0;
+    M2C_FIELD(owner, s32*, 0x1930) = 15;
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DBED8);
 extern void* D_0040F4D0;
 extern u32 D_0040EAE4;
@@ -204,7 +307,8 @@ void func_001DBF38(Recovered_PlaybackTransitionOwner* owner, Recovered_PlaybackD
         } else if (owner->current.active) {
             owner->previous = owner->current;
             owner->previous.active = 1;
-        } else owner->previous.active = 0;
+        } else
+            owner->previous.active = 0;
         owner->pending.key = 0;
         owner->pending.unk_10 = transition->unk_18;
         owner->pending.unk_08 = transition->unk_1C;
@@ -303,8 +407,6 @@ u8* func_001DC610(void* owner) {
     } while (i < 64);
     return flags + i;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC690);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC6E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC790);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCC08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCCF8);
@@ -312,25 +414,29 @@ extern void func_00272488(u64, s8*);
 extern void* func_00107CF8(u32);
 extern void func_001D97D0(Recovered_AudioTransferGroup*, u64, const s8*, s32, s32, s32, void*, s32, u8);
 typedef struct { Recovered_AudioTransferGroup* group; f32 scale; } PlaybackTransfer;
-void func_001DCDC0(Recovered_PlaybackState* self, u64 key, u32 value, s32 format, s32 bytes,
-                   void* scratch, s32 unknown, s8 count, s8 mode, u8 final) {
+static inline PlaybackTransfer* PlaybackTransfers(Recovered_PlaybackState* self) { return (PlaybackTransfer*)((u8*)self+0x30); }
+
+void func_001DCDC0(Recovered_PlaybackState* self, u64 key, u32 value, s32 format, s32 bytes, void* scratch, s32 unknown,
+                   s8 count, s8 mode, u8 final) {
     s8 name[16];
     s32 i;
     PlaybackTransfer* transfer;
-    Recovered_StreamBuffer** buffer;
     self->unk_58 = count;
     self->poolKey = key;
     func_00272488(key, name);
-    for (i=0; i<13; i++) {
-        if (name[i] == ' ') { name[i] = 0; break; }
+    for (i = 0; i < 13; i++) {
+        if (name[i] == ' ') {
+            name[i] = 0;
+            break;
+        }
     }
-    for (i=0; i<self->unk_58; i++) {
-        transfer = &((PlaybackTransfer*)((u8*)self+0x30))[i];
+    for (i = 0; i < self->unk_58; i++) {
+        transfer = &((PlaybackTransfer*)((u8*)self + 0x30))[i];
         transfer->group = func_00107CF8(sizeof(Recovered_AudioTransferGroup));
         func_001D97D0(transfer->group, self->poolKey, name, format, mode, bytes, scratch, unknown, final);
-        ((PlaybackTransfer*)((u8*)self+0x30))[i].scale = 0;
+        ((PlaybackTransfer*)((u8*)self + 0x30))[i].scale = 0;
     }
-    for (i=3; i>=0; i--) self->buffers[i] = 0;
+    for (i = 3; i >= 0; i--) self->buffers[i] = 0;
     self->unk_14 = 1;
     self->unk_44 = 0;
     self->unk_18 = value;
@@ -347,7 +453,68 @@ void func_001DCDC0(Recovered_PlaybackState* self, u64 key, u32 value, s32 format
     self->unk_48 = 0x8000 / count;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCF70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DD158);
+typedef struct { u8* data; s32 bytes; s32 final; } PlaybackInput;
+extern void func_001D9AB8(Recovered_AudioTransferGroup*, Recovered_PlaybackParameters*);
+extern s32 func_001D9D58(Recovered_AudioTransferGroup*);
+extern void func_001D9C00(Recovered_AudioTransferGroup*, PlaybackInput*);
+extern void func_001DD4C8(void*, s32);
+extern u8* func_001DD4D0(Recovered_PlaybackState*, s32);
+extern s32 func_001DD508(Recovered_PlaybackState*);
+static inline s32 AtEnd(Recovered_StreamBuffer* buffer) {
+    return buffer->firstBlock + buffer->unk_1C >= buffer->record->blockCount;
+}
+void func_001DD158(Recovered_PlaybackState* self, Recovered_PlaybackParameters* parameters) {
+    PlaybackInput input;
+    Recovered_PlaybackParameters copy;
+    s32 i;
+    copy.flags = 0;
+    copy = *parameters;
+    if (((s32)parameters->flags >> 12) & 1) self->unk_65 = parameters->unk_A9;
+    for (i = 0; i < self->unk_58; i++) {
+        copy.scale = PlaybackTransfers(self)[i].scale * parameters->scale;
+        copy.flags |= 8;
+        func_001D9AB8(PlaybackTransfers(self)[i].group, &copy);
+    }
+    switch (self->unk_14) {
+        case 5:
+        case 7:
+            if (func_001D9D58(PlaybackTransfers(self)[0].group)) {
+                Recovered_StreamBuffer* buffer = self->buffers[self->unk_4C];
+                s32 end = AtEnd(buffer);
+                if (end && !self->unk_65) {
+                    StreamBuffer_TryReset(buffer);
+                    self->unk_14 = 8;
+                } else {
+                    StreamBuffer_TryReset(self->buffers[self->unk_4C]);
+                    self->unk_14 = 6;
+                    self->unk_4C = (self->unk_4C + 1) % self->bufferCount;
+                    goto ready;
+                }
+            }
+            break;
+        case 6:
+        ready:
+            if ((self->buffers[self->unk_4C]->state ^ 4) == 0) {
+                func_001DD4C8(self, self->unk_4C);
+                for (i = 0; i < self->unk_58; i++) {
+                    s32 final;
+                    input.data = func_001DD4D0(self, i);
+                    input.bytes = self->unk_48;
+                    final = 0;
+                    if (!self->unk_65) {
+                        if (AtEnd(self->buffers[self->unk_4C])) final = 1;
+                    }
+                    input.final = final;
+                    func_001D9C00(PlaybackTransfers(self)[i].group, &input);
+                    self->unk_44 = self->buffers[self->unk_4C];
+                }
+                self->unk_14 = 7;
+            }
+            break;
+        default: break;
+    }
+    func_001DD508(self);
+}
 extern s32 AudioTransferGroup_TryReset(Recovered_AudioTransferGroup*);
 extern void* func_0035C6EC(void*, s32, u32);
 extern s32 func_001DD508(Recovered_PlaybackState*);
@@ -406,7 +573,7 @@ s32 func_001DD508(Recovered_PlaybackState* self) {
     return 1;
 }
 extern void func_001D9DC0(Recovered_AudioTransferGroup*, Recovered_PlaybackParameters*);
-static inline PlaybackTransfer* PlaybackTransfers(Recovered_PlaybackState* self) { return (PlaybackTransfer*)((u8*)self+0x30); }
+
 void func_001DD5D8(Recovered_PlaybackState* self, Recovered_PlaybackParameters* parameters) {
     Recovered_PlaybackParameters copy;
     s32 i;
