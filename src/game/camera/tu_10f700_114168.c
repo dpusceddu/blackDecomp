@@ -4,6 +4,52 @@
 #include "game/ai_manager.h"
 #include "game/actor_slots.h"
 
+// Partial configuration view; field meanings remain UNVERIFIED.
+typedef struct Recovered_ConfigFloat {
+    u8 unk_0[0x60];
+    f32 unk_60;
+} Recovered_ConfigFloat;
+typedef struct Recovered_ConfigIndirect {
+    u8 unk_0[4];
+    Recovered_ConfigFloat* unk_4;
+} Recovered_ConfigIndirect;
+typedef struct Recovered_SlotConfiguration {
+    u8 unk_0[0x10];
+    s128 unk_10;
+    u8 unk_20[0x14];
+    s8 unk_34;
+    u8 unk_35[0xB];
+    s32 unk_40;
+    s32 unk_44;
+    Recovered_ConfigIndirect* unk_48;
+    u8 unk_4C[4];
+    u64 unk_50;
+    u8 unk_58;
+} Recovered_SlotConfiguration;
+extern void func_0013EC38(void*, void*);
+extern void func_0018D9A0(void*, s32, s32, s8);
+extern void func_0018D9F0(void*, f32);
+extern void func_0017C9F8(void*, void*);
+extern void func_001804F8(void*, s128, f32);
+extern void func_00173FE8(u16*);
+extern void func_0018D410(void*, u64);
+extern s32 func_0018DCE0(void*);
+extern void func_00181AB0(void*, s32);
+extern void func_001856B0(void*, s32);
+extern void func_00185D10(void*);
+extern void func_00180F18(void*);
+extern void func_00188B98(void*);
+extern void func_00187EC8(void*);
+extern void func_00183918(void*);
+extern void func_00182078(void*);
+extern void func_0018AD88(void*);
+extern void func_00181F28(void*);
+extern void func_0018CFD8(void*);
+extern void func_0018C1E0(void*);
+extern void func_001831E0(void*);
+extern void func_00181348(void*);
+extern void func_0016ABA0(void*);
+
 // Partial Game view; only the random-state placement is recovered here.
 typedef struct Recovered_GameRandomView {
     u8 unk_0[0x5AD8];
@@ -714,7 +760,46 @@ void func_0013CF38(Recovered_ManagedSlot* self) {
     func_0017B260((u8*)self + 0x1F60, self);
     func_0016AB58((u8*)self + 0x1F90, 8);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D048);
+s32 func_0013D048(Recovered_ManagedSlot* self, void* owner, Recovered_SlotConfiguration* config) {
+    void* history;
+    void* goals;
+    void* actions;
+    void* configuration = (u8*)self + 0xC94;
+    func_0013EC38(self, owner);
+    func_0018D9A0(configuration, config->unk_40, config->unk_44, config->unk_34);
+    if (config->unk_40 == 0x27) func_0018D9F0(configuration, config->unk_48->unk_4->unk_60);
+    func_00185D10((u8*)self + 0x90);
+    history = self->events;
+    goals = (u8*)self + 0xD10;
+    func_00180F18((u8*)self + 0x140);
+    actions = (u8*)self + 0xEC0;
+    func_00188B98(&self->records);
+    func_00187EC8((u8*)self + 0x290);
+    func_0017C9F8((u8*)self + 0x650, configuration);
+    func_00183918(history);
+    func_00182078((u8*)self + 0x810);
+    func_001804F8((u8*)self + 0xB30, config->unk_10, 30.0f);
+    func_0018AD88((u8*)self + 0xCC0);
+    func_00181F28((u8*)self + 0xC80);
+    func_0018CFD8(goals);
+    func_0018C1E0((u8*)self + 0x1DA0);
+    func_001831E0((u8*)self + 0x1EB0);
+    func_00181348(actions);
+    M2C_FIELD(self, u8*, 0x1FC0) = 0;
+    M2C_FIELD(self, u32*, 0x1F98) = 0;
+    M2C_FIELD(self, u32*, 0x1F9C) = 0;
+    M2C_FIELD(self, u8*, 0x1FC1) = 0;
+    self->unk_1FC4 = 0;
+    self->unk_1FC8 = 0;
+    func_00173FE8((u16*)((u8*)self + 0x1EF8));
+    func_00173FE8((u16*)((u8*)self + 0x1EFA));
+    func_0016ABA0((u8*)self + 0x1F90);
+    if (config->unk_50) func_0018D410(goals, config->unk_50);
+    func_00181AB0(actions, func_0018DCE0(configuration));
+    func_001856B0(history, config->unk_58 ^ 1);
+    self->freeNext = NULL;
+    return 1;
+}
 void func_0013D7A0(Recovered_ManagedSlot* self, s32 id) {
     Recovered_ActorRecords* records = &self->records;
     if (records->actorMask & (1U << id)) func_00189B90(records, id);
