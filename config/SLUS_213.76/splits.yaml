@@ -1408,7 +1408,11 @@ splits:
   - {src: src/game/unsorted/tu_1cff78_1d4618.c, range: [0x1d5068, 0x1d5808]}
   - {src: src/game/unsorted/tu_1cff78_1d4068.c, range: [0x1d5808, 0x1d5828]}
   - {src: src/game/unsorted/tu_1d5828.c, range: [0x1d5828, 0x1d5e40]}
-  - {src: src/game/unsorted/tu_1d5e40.c, range: [0x1d5e40, 0x1d76e8]}
+  - {src: src/game/unsorted/tu_1d5e40.c, range: [0x1d5e40, 0x1d60b8], data_ranges: [{section: .rodata, input: .rodata.resource_click, start: 0x3f7678, end: 0x3f7680}]}
+  - {src: src/game/unsorted/tu_1d5e58_1d60b8.c, range: [0x1d60b8, 0x1d6178], flags: [-O2, -G8, -snas], note: "Native GP-relative load of byte D_0040D9F8 requires -G8; the remaining parameter setup is still draft-backed."}
+  - {src: src/game/unsorted/tu_1d5e40.c, range: [0x1d6178, 0x1d6e78]}
+  - {src: src/game/unsorted/tu_1d5e58_1d6e78.c, range: [0x1d6e78, 0x1d6f90], flags: [-O2, -G8, -snas], note: "Native GP-relative accesses to byte D_0040D9F9 require -G8; this caller passes complete 64-bit keys."}
+  - {src: src/game/unsorted/tu_1d5e40.c, range: [0x1d6f90, 0x1d76e8]}
   - {src: src/game/unsorted/tu_1d76e8.c, range: [0x1d76e8, 0x1d8560], note: Controller switch bodies own their C tables separately from neighboring ASM tables; original TU boundaries remain unknown}
   - src: src/game/unsorted/tu_1d76e8_1d8560.c
     range: [0x1d8560, 0x1d8728]
