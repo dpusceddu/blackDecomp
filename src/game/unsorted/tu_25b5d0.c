@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
+#include "ps2/vu0_math.h"
 
 /* Partial views. Original type and field names are UNVERIFIED. */
 typedef struct SlotEntry {
@@ -18,6 +19,55 @@ typedef struct SlotList {
 typedef char SlotEntrySize[sizeof(SlotEntry) == 8 ? 1 : -1];
 typedef char SlotListCountOffset[(u32)&((SlotList*)0)->count == 0xE ? 1 : -1];
 
+/* Partial native physics views; original names and unaccessed fields are UNVERIFIED. */
+typedef struct SolverView { u8 unknown0[0x380]; float scale; float inverseScale; } SolverView;
+typedef struct BodyView {
+    u8 unknown0[0x20];
+    BkVuVector linearStep;
+    BkVuVector angularStep;
+    u8 unknown40[0xC];
+    SolverView* solver;
+    u8 unknown50[0x3C];
+    s32 state;
+    BkVuVector unknown90;
+    BkVuVector unknownA0;
+} BodyView;
+
+typedef struct ChildView {
+    u8 unknown0[0x58];
+    BodyView* body;
+    u8 unknown5C[0x14];
+} ChildView;
+typedef struct CompoundView { u8 unknown0[8]; u32 count; ChildView* children; } CompoundView;
+typedef struct OwnerView { u8 unknown0[0x34]; CompoundView* compound; } OwnerView;
+typedef struct PoolView { u8 unknown0[0xC]; CompoundView* compound; } PoolView;
+
+/* Same native float-to-VU transport used by BkEffectScalePS2. */
+static inline BkVuVector ScaleXYZ(BkVuVector value, float scale) {
+    BkVuVector scalar;
+    __asm__("qmtc2.ni bitsv, scalarv" : "=j scalarv"(scalar) : "r bitsv"(scale));
+    return BkVuScaleXYZ(value, scalar);
+}
+
+
+/* Replace XYZ while preserving the destination's native fourth lane. */
+static inline BkVuVector AssignXYZ(BkVuVector old, BkVuVector value) {
+    __asm__("vmove.xyz targetv, valuev" : "+j targetv"(old) : "j valuev"(value));
+    return old;
+}
+
+
+extern void func_0032B700(CompoundView*);
+
+typedef char SolverScaleOffset[(u32)&((SolverView*)0)->scale == 0x380 ? 1 : -1];
+typedef char BodyStepOffset[(u32)&((BodyView*)0)->linearStep == 0x20 ? 1 : -1];
+typedef char BodySolverOffset[(u32)&((BodyView*)0)->solver == 0x4C ? 1 : -1];
+typedef char BodyStateOffset[(u32)&((BodyView*)0)->state == 0x8C ? 1 : -1];
+typedef char ChildStride[sizeof(ChildView) == 0x70 ? 1 : -1];
+
+typedef char BodyStride[sizeof(BodyView) == 0xB0 ? 1 : -1];
+
+extern void func_0032CB58(s32, s32, u32);
 extern void func_0014C380(s32);
 
 extern s32 func_0025C4C8();
@@ -98,8 +148,32 @@ void func_0025CAE8(s32 arg0, s32 arg1) {
     func_0025DA20(arg1);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025CB08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025CBA8);
+void func_0025CB08(s32* self, OwnerView* owner) {
+    func_0032CDE0(*self, (s32)owner->compound);
+    func_0032CB58(*self, (s32)owner->compound, 1);
+    {
+        BodyView* body = owner->compound->children->body;
+        body->state |= 8;
+    }
+    {
+        BodyView* body = owner->compound->children->body;
+        s32 index = body - *(BodyView**)func_0032E320(*self);
+        ((OwnerView**)&D_0043F3F0)[index] = owner;
+    }
+}
+void func_0025CBA8(s32* self, OwnerView* owner) {
+    func_0032CDE0(*self, (s32)owner->compound);
+    func_0032CB58(*self, (s32)owner->compound, 4);
+    {
+        BodyView* body = owner->compound->children->body;
+        body->state |= 8;
+    }
+    {
+        BodyView* body = owner->compound->children->body;
+        s32 index = body - *(BodyView**)func_0032E320(*self);
+        ((OwnerView**)&D_0043F3F0)[index] = owner;
+    }
+}
 
 s32 func_0025CC48(s32 *arg0, s32 arg1) {
     return M2C_FIELD(((((s32) ((arg1 - *func_0032E320(*arg0)) * 0xBA2E8BA3) >> 4) * 4) + ((s32) &D_0043F3F0)), s32 *, 0);
@@ -182,11 +256,34 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D09
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D110);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D240);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D510);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D840);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D860);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D8E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D910);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D990);
+void func_0025D840(OwnerView* self, BkVuVector value) {
+    BodyView* body = self->compound->children->body;
+    body->linearStep = AssignXYZ(body->linearStep, value);
+}
+void func_0025D860(OwnerView* self, BkVuVector value) {
+    CompoundView* compound = self->compound;
+    if ((compound->children->body->state >> 1) & 1) func_0032B700(compound);
+    {
+        BodyView* body = self->compound->children->body;
+        body->linearStep = AssignXYZ(body->linearStep, ScaleXYZ(value, body->solver->scale));
+    }
+}
+BkVuVector func_0025D8E0(OwnerView* self) {
+    BodyView* body = self->compound->children->body;
+    return ScaleXYZ(body->linearStep, body->solver->inverseScale);
+}
+void func_0025D910(OwnerView* self, BkVuVector value) {
+    CompoundView* compound = self->compound;
+    if ((compound->children->body->state >> 1) & 1) func_0032B700(compound);
+    {
+        BodyView* body = self->compound->children->body;
+        body->angularStep = AssignXYZ(body->angularStep, ScaleXYZ(value, body->solver->scale));
+    }
+}
+BkVuVector func_0025D990(OwnerView* self) {
+    BodyView* body = self->compound->children->body;
+    return ScaleXYZ(body->angularStep, body->solver->inverseScale);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025D9C0);
 
 s32 func_0025DA10(void *arg0) {
@@ -212,7 +309,10 @@ void func_0025DC80(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025DC98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025DD08);
+BkVuVector func_0025DD08(PoolView* self) {
+    BodyView* body = self->compound->children[1].body;
+    return ScaleXYZ(body->linearStep, body->solver->inverseScale);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025DD38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025E2D0);
 
