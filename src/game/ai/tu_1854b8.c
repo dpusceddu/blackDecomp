@@ -24,16 +24,13 @@ extern s32 func_00181B08();
 extern s32 func_00173FB8(s32*, s32);
 
 /* Opaque owner storage may alias the clock handle; retain its fresh read. */
-#ifdef NON_MATCHING
-// Unmatched: clock-handle and vector-argument lifetimes change with assembly-backed neighbors.
 void func_001854B8(void* self) {
+    s128 point;
     if (M2C_FIELD(self, s32*, 0x64) >= 2) func_0013DA60(M2C_FIELD(self, void**, 0));
+    point = D_004432A0;
     M2C_FIELD(self, f32*, 0x40) -= M2C_FIELD(D_0040F4D0, f32*, 0x1C);
-    func_001855F8(self, D_004432A0, 0, -M2C_FIELD(D_0040F4D0, f32*, 0x1C));
+    func_001855F8(self, point, 0, -M2C_FIELD(D_0040F4D0, f32*, 0x1C));
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_001854B8);
-#endif
 
 void func_00185530(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x68) = arg1;

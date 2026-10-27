@@ -531,6 +531,44 @@ Recovered_ActorSlot* func_00188F80(Recovered_ActorRecords*);
 void* func_00181F48(void*, Recovered_ManagedActor*, int, float, float);
 }
 
+// UNVERIFIED query class; its native kind is stored at +0x24.
+struct PolicyQueryKind {
+    unsigned char unk_00[0x24];
+    int kind;
+};
+struct PolicyInterval {
+    unsigned char unk_00[0x640];
+    float unk_640;
+};
+
+extern "C" {
+int func_0018D330(Game::ModeDispatcher*, void*);
+void func_00177E70(void*, Game::Brain*);
+int func_0019D1F0(CategoryPolicyAction*);
+short func_001580E0(void*);
+}
+
+// UNVERIFIED goal-action identity; only the native accessed members are represented.
+struct GoalPointAction {
+    Game::ActionBase base;
+    unsigned char unk_08[8];
+    Game::Position4 point;
+    float unk_20;
+    Game::Action* related;
+    Game::ActionTimer timer;
+    unsigned char alternate;
+};
+static inline unsigned char FailedByte(int result) { return result ^ 1; }
+typedef char GoalActionLimitOffset[(unsigned)&((GoalPointAction*)0)->unk_20 == 0x20 ? 1 : -1];
+typedef char GoalActionTimerOffset[(unsigned)&((GoalPointAction*)0)->timer == 0x28 ? 1 : -1];
+
+extern "C" {
+Game::Action* func_00181A90(Game::ActionStack*, int);
+Game::PositionArg func_00180A00(void*);
+int func_00182BA0(Game::Controller*, Game::PositionArg);
+int func_00182320(Game::Controller*, Game::PositionArg, int);
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -1233,7 +1271,38 @@ void func_00198388(PausePointAction* self, const PointEvent* event) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001984C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019A798);
+extern "C" {
+void func_0019A798(GoalPointAction* self, const TimedFlagEvent* event) {
+    Game::Action* action = (Game::Action*)self;
+    func_00193980(self, event);
+    self->alternate = 0;
+    if (event && event->kind == 3) self->alternate = event->value;
+    self->related = func_00181A90(&self->base.brain->stack, 55);
+    if (self->alternate) {
+        Game::Store(self->point, func_00180A00((unsigned char*)self->base.brain + 0xB30));
+        self->unk_20 = 1.0f;
+        func_001825B0(&self->base.brain->controller);
+    } else if (func_00188F10(RecordsFor(self->base.brain))) {
+        Game::Store(self->point, func_00189048(RecordsFor(self->base.brain)));
+        self->unk_20 = 3.3f * 3.3f;
+        func_001825B0(&self->base.brain->controller);
+    } else {
+        func_00193990(action, 0);
+        return;
+    }
+    if (FailedByte(func_00182BA0(&self->base.brain->controller, Game::Load(self->point)))) {
+        func_00193990(action, 0);
+        return;
+    }
+    func_00173640(&self->timer, 10.0f);
+    if (self->alternate) {
+        if (FailedByte(func_00182320(&self->base.brain->controller, Game::Load(self->point), 1)))
+            func_00193990(action, 0);
+    } else if (FailedByte(func_001823B0(&self->base.brain->controller, Game::Load(self->point), 1)))
+        func_00193990(action, 0);
+}
+}
+
 extern "C" {
 void func_0019B150(Game::Action* self, const void* event) {
     func_00193980(self, event);
@@ -1336,7 +1405,38 @@ int func_0019C968(CategoryPolicyAction* self, const void* event) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CAC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CC80);
+extern "C" {
+void func_0019CC80(CategoryPolicyAction* self, int kind) {
+    if (kind == 52) {
+        void* query = self->query;
+        if (query && ((PolicyQueryKind*)query)->kind == 3 && func_0018D330(&self->base.brain->dispatcher, query)) {
+            func_00177E70(self->query, self->base.brain);
+            self->query = 0;
+        }
+        if (func_0019D1F0(self)) {
+            self->unk_19 = 1;
+            return;
+        }
+        if (func_001580E0(((ActorParts::Owner*)self->base.brain->actor)->Action()) < 2)
+            func_00193A28((Game::Action*)self, 3, 0);
+        if (!self->active) {
+            self->query = 0;
+            self->active = 1;
+        }
+        int category = self->category;
+        if (category == 10 || category == 17) {
+            func_00173640(&self->first, ((PolicyInterval*)self->base.brain)->unk_640);
+            return;
+        }
+        if (category == 3) {
+            func_00173690(&self->first);
+            return;
+        }
+        func_00173690(&self->first);
+    }
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CD90);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CFC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019D080);
