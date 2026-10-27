@@ -706,6 +706,33 @@ void func_001A2368(FormationAction*);
 }
 #endif
 
+#ifdef NON_MATCHING
+
+// UNVERIFIED query payload; native category code reads mode +0x60 and value +0x68.
+struct PolicyQueryMotion {
+    unsigned char unk_00[0x24];
+    int kind;
+    unsigned char unk_28[0x38];
+    int mode;
+    unsigned char unk_64[4];
+    float value;
+};
+static inline int AnimationKind(AnimationState* animation) {
+    int* state = animation->unk_90;
+    if (state) return *state;
+    return 0;
+}
+extern "C" {
+float func_001891A8(Recovered_ActorRecords*);
+void func_0013D430(Game::Brain*, int);
+void func_0019CD90(CategoryPolicyAction*);
+int func_00188B08(MovementControl*);
+Game::PositionArg func_001890A8(Recovered_ActorRecords*);
+float func_00173678(Game::ActionTimer*);
+}
+
+#endif
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -1583,7 +1610,22 @@ void func_0019B150(Game::Action* self, const void* event) {
 }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: TaskPending byte masks, saved-owner setup and the final return join differ.
+extern "C" {
+int func_0019B270(Game::Action* self, const int* event) {
+    if (*event == 4) {
+        Game::Brain* brain = self->brain;
+        if (!TaskPending(StatusFor(brain)) && func_00188F10(RecordsFor(brain))) {
+            if (func_001891A8(RecordsFor(self->brain)) < 10.0f) func_00193990(self, 0);
+        }
+    }
+    return 0;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019B270);
+#endif
 extern "C" {
 void func_0019B320(Game::Action* self, const void* event) {
     func_00193980(self, event);
@@ -1689,7 +1731,46 @@ int func_0019C968(CategoryPolicyAction* self, const void* event) {
 }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: animation-kind initialization, owner reloads and mode-result register reuse differ.
+extern "C" {
+void func_0019CAC0(CategoryPolicyAction* self) {
+    if (self->unk_19) {
+        AnimationViews::Action notice;
+        notice.flag = 0;
+        notice.key = 0;
+        notice.mode = 0;
+        notice.value = 0;
+        notice.kind = 22;
+        ((AnimationViews::Owner*)((OwnerView*)self->base.brain->actor)->animation)->RequestAction(&notice);
+        int kind = AnimationKind(((OwnerView*)self->base.brain->actor)->animation);
+        int status = func_001A7DF0(((OwnerView*)self->base.brain->actor)->animation, 0, 12);
+        if (kind == 12 && status == 2) func_0013D430(self->base.brain, 41);
+    } else {
+        func_0019CD90(self);
+        if (self->query && func_001829E8(&self->base.brain->controller)) {
+            signed char update = func_00188B08(Movement(self->base.brain)) == 0;
+            if (func_00188F10(RecordsFor(self->base.brain))) {
+                Game::PositionArg point = func_001890A8(RecordsFor(self->base.brain));
+                func_0017E428(QueryFor(self->base.brain), point);
+            } else {
+                PolicyQueryMotion* query = (PolicyQueryMotion*)self->query;
+                if (query->kind == 3) {
+                    func_0017E488(QueryFor(self->base.brain), query->value);
+                    int mode = query->mode;
+                    update = mode == 0;
+                    if (mode == 2) update = func_00188B08(Movement(self->base.brain)) == 0;
+                }
+            }
+            if (func_001735E0(&self->first) && func_00173678(&self->first) > 0.7f) update = 1;
+            ((RequestFlagView*)self->base.brain->movement)->unk_30 = update;
+        }
+    }
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CAC0);
+#endif
 extern "C" {
 void func_0019CC80(CategoryPolicyAction* self, int kind) {
     if (kind == 52) {
