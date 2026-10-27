@@ -158,7 +158,7 @@ splits:
   - {src: src/game/unsorted/tu_1199d8_11c558.c, range: [0x11c558, 0x11c878], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/unsorted/tu_11c878.c, range: [0x11c878, 0x11c8c0], assembler: sn-min6}
   - {src: src/game/unsorted/tu_11c8c0.c, range: [0x11c8c0, 0x11c930]}
-  - {src: src/game/camera/tu_10f700_114168.c, range: [0x11c930, 0x11cd00]}
+  - {src: src/game/camera/controller_set.c, range: [0x11c930, 0x11cd00], flags: [-O2, -G8, -snas], assembler: sn-min6, note: "Native 0x11c930 uses a GP-relative byte load of D_0040D9A3; the 0x11c9c8 controller loop has six-word short-branch padding, one word shorter than the stock assembler."}
   - {src: src/game/unsorted/tu_11cd00.c, range: [0x11cd00, 0x11d358]}
   - {src: src/game/unsorted/tu_11d358.c, range: [0x11d358, 0x11de30]}
   - {src: src/game/unsorted/tu_11d358_11de30.c, range: [0x11de30, 0x11e2e0]}
