@@ -31,6 +31,7 @@ typedef struct Recovered_ChildDispatch {
     s16 unk_8;
     u16 unk_A;
     void (*unk_C)(void*);
+    // UNVERIFIED: the configuration draft alone consumes this dispatch entry.
     s16 unk_10;
     u16 unk_12;
     void (*unk_14)(void*, void*);
@@ -43,6 +44,7 @@ typedef struct Recovered_ControllerLifecycle {
     u8 unk_0[0x490];
     Recovered_ControllerChild* unk_490[9];
     s32 unk_4B4;
+    // UNVERIFIED: the remaining fields are consumed only by the configuration draft.
     s32 unk_4B8[9];
     s32 unk_4DC;
     u8 unk_4E0[8];

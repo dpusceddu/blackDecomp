@@ -73,6 +73,7 @@ s32 func_0012F8C0(void* self, s32 group, s16 value, s32* result) {
 }
 
 #ifdef NON_MATCHING
+// Partial draft-only view; these fields remain UNVERIFIED.
 typedef struct Recovered_ObjectiveCounts {
     u8 unk_0[8];
     s16 unk_8;
