@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Run commands in the Linux x86-64 container with linked-worktree Git paths accessible.
+"""Optional host launcher for a prepared Linux environment, provisioned by the user or harness before a session.
 
 Usage: python3 tools/container.py [--engine docker|podman] [--image black-decomp] [--relabel] [--dry-run] [COMMAND ...]
 Build the image first: docker build --platform linux/amd64 -t black-decomp .
-With no command, opens bash. The current checkout is writable; other registered
+With no command, opens bash; COMMAND can be the harness's installed agent entrypoint.
+The agent then runs project commands directly in that environment. The current checkout is writable; other registered
 worktrees are read-only for claims and shared inputs. Git metadata is writable.
 Paths retain their host locations so .git pointers and setup.py symlinks work.
 Use --relabel on SELinux hosts (shared :z labels, including Git metadata).

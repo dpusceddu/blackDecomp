@@ -13,6 +13,13 @@ from ninja_graph import escape
 ROOT=Path(__file__).resolve().parent
 
 
+def python_command():
+    """Respect an active environment; a host-side checkout venv may be incompatible with this shell."""
+    if sys.prefix != sys.base_prefix:
+        return sys.executable
+    return '.venv/bin/python' if (ROOT/'.venv/bin/python').is_file() else sys.executable
+
+
 def stages(slug, nm):
     result=[('extract',['tools/build/prepare.py','extract',slug]),
             ('boundaries',['tools/build/boundaries.py',slug]),
@@ -61,8 +68,8 @@ def main():
     if a.version not in versions:p.error('unknown version')
     slug=a.version;boot=versions[slug]['boot'];b='build/'+slug
     out=b+('-nm' if a.non_matching else '')
-    py='.venv/bin/python' if (ROOT/'.venv/bin/python').is_file() else 'python3'
-    header='ninja_required_version = 1.10\npy = '+py+'\n'
+    py=python_command()
+    header='ninja_required_version = 1.10\npy = '+shlex.quote(py).replace('$','$$')+'\n'
     preflight=f'''rule needexe
   command = $py tools/build/preflight.py exe {slug}
   generator = 1

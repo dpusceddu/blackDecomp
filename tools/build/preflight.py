@@ -24,7 +24,7 @@ def boot_name(slug):
         return slug
 
 
-def executable_problem(slug=DEFAULT_SLUG, then='run ninja first'):
+def executable_problem(slug=DEFAULT_SLUG, then='run python3 tools/setup.py first'):
     path = ROOT / 'orig' / slug / boot_name(slug)
     if path.is_file():
         return None
@@ -35,7 +35,7 @@ def executable_problem(slug=DEFAULT_SLUG, then='run ninja first'):
 def build_problem(slug=DEFAULT_SLUG, names=('placement.json',)):
     for name in names:
         if not (ROOT / 'build' / slug / name).is_file():
-            return 'the build has not run (build/%s/%s is missing): run ninja first.' % (slug, name)
+            return 'build preparation is missing (build/%s/%s is missing): run python3 tools/setup.py first.' % (slug, name)
     return None
 
 
@@ -55,9 +55,11 @@ def guard(main, slug=DEFAULT_SLUG):
         root = ROOT.as_posix() + '/'
         rel = name[len(root):] if name.startswith(root) else name
         if rel.startswith('orig/'):
-            raise SystemExit(executable_problem(slug) or '%s is missing: put the executable in orig/; run ninja first.' % rel)
+            raise SystemExit(executable_problem(slug) or '%s is missing: put the executable in orig/; run python3 tools/setup.py first.' % rel)
         if rel.startswith(('build/', 'asm/', 'data/')):
-            raise SystemExit('the build has not run (%s is missing): run ninja first.' % rel)
+            if rel.endswith(('.o', '.elf')):
+                raise SystemExit('%s is missing: run ninja %s.' % (rel, rel))
+            raise SystemExit('build preparation is missing (%s is missing): run python3 tools/setup.py first.' % rel)
         raise
 
 

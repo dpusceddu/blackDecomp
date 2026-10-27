@@ -59,7 +59,7 @@ def function_table(slug=DEFAULT_SLUG):
     path = build / 'placement.json'
     if path.exists():
         return [(f['addr'], f['end']) for f in json.loads(path.read_text())['functions']]
-    raise SystemExit('no function table: run ninja (or tools/build/split_objects.py %s --functions) first' % slug)
+    raise SystemExit('no function table: run ninja build/%s/functions.json after configuring that version' % slug)
 
 
 def write_function_table(slug, functions):

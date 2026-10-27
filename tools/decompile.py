@@ -5,10 +5,10 @@ Usage: decompile.py func_XXXXXXXX|0xADDRESS [--write] [--ctx ctx.c] [--raw]
 Prints the translation unit file and line holding the function's INCLUDE_ASM marker, then a C draft made by m2c with the
 project's context (recovered prototypes and layouts, EE preprocessing) and the mechanical cleaning that `autodecomp.py`
 applies; nothing is compiled here. With --write the marker line is replaced by the draft (declarations the draft needs are
-added after the file's #include lines); then run `ninja` and compare in objdiff (`ninja objdiff`, see CONTRIBUTING.md).
+added after the file's #include lines); then build that unit's comparison target in objdiff (see CONTRIBUTING.md).
 A function that already has a draft in an `#ifdef NON_MATCHING` block is replaced as a whole. --raw prints m2c's own output
 without the cleaning, which is also what you get when the cleaning gives up (the reason is printed).
-Needs one finished `ninja` (the per-function assembly under asm/) and `pip install -r requirements.txt` (m2c). The first
+Needs `python3 tools/setup.py` preparation (the per-function assembly under asm/) and its m2c dependency. The first
 run recovers the context from the committed headers and configuration (about a minute; it works on a fresh checkout) and
 writes it to the ignored build/auto/; later runs reuse build/auto/ctx.c. `python3 tools/autodecomp.py context --refresh` renews
 it after shared headers change. The only tracked file this tool ever changes is the translation unit file named by --write;
@@ -101,7 +101,7 @@ def main(argv=None):
     preflight.require(SLUG, build=('placement.json',))
     name = 'func_%08X' % addr
     if not (ROOT / 'asm' / SLUG / 'nonmatchings' / (name + '.s')).is_file():
-        raise SystemExit('%s: no assembly under asm/%s/nonmatchings; run `ninja` once first' % (name, SLUG))
+        raise SystemExit('%s: no assembly under asm/%s/nonmatchings; run `python3 tools/setup.py` first' % (name, SLUG))
     found = locate(addr)
     if found is None:
         raise SystemExit('%s is not an INCLUDE_ASM line of any source file: it is already recovered (pick another target in objdiff)' % name)
@@ -130,9 +130,9 @@ def main(argv=None):
     print(code, end='')
     if a.write:
         write(path, name, decls, code)
-        print('// wrote %s; now run `ninja`' % rel)
+        print('// wrote %s; rebuild this unit in objdiff' % rel)
     else:
-        print('// replace line %d of %s with this (or run again with --write), then run `ninja`' % (line, rel))
+        print('// replace line %d of %s with this (or run again with --write), then rebuild this unit in objdiff' % (line, rel))
     return 0
 
 

@@ -6,7 +6,7 @@
   tus.py validate    agreement between the signals, with the exception-frame and constructor-stub signals held out
   tus.py all         evidence + map + validate
 
-Everything is computed from the retail image (SLUS_213.76), the split in build/<GAME_ID>/ (run `ninja` first) and the
+Everything is computed from the retail image (SLUS_213.76), the split in build/<GAME_ID>/ (run `tools/setup.py` first) and the
 function inventory of the automatic pipeline (build/auto/inventory.json). Nothing here runs an SDK binary.
 
 Signals (docs/tus.md has the findings):

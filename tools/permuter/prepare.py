@@ -2,7 +2,7 @@
 """Write the assembly of one function in the plain form decomp-permuter's import.py reads.
 
 Usage: prepare.py func_XXXXXXXX|0xADDRESS      writes build/permuter/func_XXXXXXXX.s and prints the next commands
-The split assembly (asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s, after the first `ninja`) puts the code in a section
+The split assembly (asm/SLUS_213.76/nonmatchings/func_XXXXXXXX.s, after `tools/setup.py`) puts the code in a section
 named .text.<address>; import.py only recognizes a plain `.text` before `glabel`. The function's .lit4 constants, if it
 has any, are appended. Nothing else changes, so the permuter's target is the original code.
 """
@@ -20,7 +20,7 @@ ASM = ROOT / 'asm' / 'SLUS_213.76' / 'nonmatchings'
 def prepare(name):
     source = ASM / (name + '.s')
     if not source.is_file():
-        raise SystemExit('%s: no assembly under asm/SLUS_213.76/nonmatchings; run `ninja` once first' % name)
+        raise SystemExit('%s: no assembly under asm/SLUS_213.76/nonmatchings; run `python3 tools/setup.py` first' % name)
     text = re.sub(r'^\s*\.section\s+\.text\.[0-9A-Fa-f]+[^\n]*$', '.text', source.read_text(), flags=re.M)
     lit4 = ASM / (name + '.lit4.s')
     if lit4.is_file():

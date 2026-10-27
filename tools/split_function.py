@@ -7,9 +7,9 @@ compiler, flags or language. Ordinary matching edits stay in their existing file
 This tool transfers an assembly function's INCLUDE_ASM line and its
 stretch of the range in config/SLUS_213.76/splits.yaml) and creates a small file next to it, `tu_<address>.c` (`.cpp` with
 --cpp), that owns only that function, with the INCLUDE_ASM line, an entry with the given flags and compiler, and prints the next
-steps. Then `python3 tools/decompile.py func_XXXXXXXX --write` puts a draft in the new file and `ninja` checks it. Only functions
+steps. Then `python3 tools/decompile.py func_XXXXXXXX --write` puts a draft in the new file; compare its object in objdiff. Only functions
 that are still plain INCLUDE_ASM lines can be moved (move a draft or a definition by hand and fix the range with the same
-rule). `ninja` keeps printing OK throughout: nothing but the owner of the function changes.
+rule). The final full-image check must remain identical after the ownership transfer.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -82,7 +82,7 @@ def main(argv=None):
     verb = 'would move' if a.dry_run else 'moved'
     print('func_%08X %s from %s to %s' % (addr, verb, old, new))
     if not a.dry_run:
-        print('next: python3 tools/decompile.py func_%08X --write   (a draft into %s), then ninja' % (addr, new))
+        print('next: python3 tools/decompile.py func_%08X --write   (a draft into %s), then compare its object in objdiff' % (addr, new))
     return 0
 
 

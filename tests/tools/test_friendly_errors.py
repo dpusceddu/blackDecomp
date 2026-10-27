@@ -32,12 +32,12 @@ class Preflight(unittest.TestCase):
                 preflight.require()
             self.assertEqual(str(raised.exception),
                              'orig/SLUS_213.76/SLUS_213.76 is missing: put the executable of your copy of the game in orig/SLUS_213.76/ '
-                             '(see README.md); run ninja first.')
+                             '(see README.md); run python3 tools/setup.py first.')
             (Path(d) / 'orig' / 'SLUS_213.76').mkdir(parents=True)
             (Path(d) / 'orig' / 'SLUS_213.76' / 'SLUS_213.76').write_bytes(b'')
             with self.assertRaises(SystemExit) as raised:
                 preflight.require()
-            self.assertEqual(str(raised.exception), 'the build has not run (build/SLUS_213.76/placement.json is missing): run ninja first.')
+            self.assertEqual(str(raised.exception), 'build preparation is missing (build/SLUS_213.76/placement.json is missing): run python3 tools/setup.py first.')
             (Path(d) / 'build' / 'SLUS_213.76').mkdir(parents=True)
             (Path(d) / 'build' / 'SLUS_213.76' / 'placement.json').write_text('{}')
             preflight.require()                                   # nothing to complain about
@@ -51,10 +51,15 @@ class Preflight(unittest.TestCase):
                 return lambda: (Path(d) / name).read_bytes()
             with self.assertRaisesRegex(SystemExit, 'orig/SLUS_213.76/SLUS_213.76 is missing'):
                 preflight.guard(reads('orig/SLUS_213.76/SLUS_213.76'))
-            with self.assertRaisesRegex(SystemExit, r'the build has not run \(asm/SLUS_213.76/nonmatchings/x.s is missing\): run ninja first'):
+            with self.assertRaisesRegex(SystemExit, r'build preparation is missing \(asm/SLUS_213.76/nonmatchings/x.s is missing\): run python3 tools/setup.py first'):
                 preflight.guard(reads('asm/SLUS_213.76/nonmatchings/x.s'))
             with self.assertRaises(FileNotFoundError):            # any other missing file is a genuine error
                 preflight.guard(reads('src/nothing.c'))
+
+    def test_missing_compiled_output_requests_only_its_ninja_target(self):
+        with tempfile.TemporaryDirectory() as d, patch.object(preflight, 'ROOT', Path(d)):
+            with self.assertRaisesRegex(SystemExit, 'run ninja build/SLUS_213.76/obj/units/test.o'):
+                preflight.guard(lambda: (Path(d) / 'build/SLUS_213.76/obj/units/test.o').read_bytes())
 
 
 class Tools(unittest.TestCase):
@@ -73,7 +78,7 @@ class Tools(unittest.TestCase):
                     lines = result.stderr.strip().splitlines()
                     self.assertEqual(len(lines), 1, result.stderr)
                     self.assertIn('put the executable of your copy of the game in orig/SLUS_213.76/', lines[0])
-                    self.assertTrue(lines[0].endswith('run ninja first.'))
+                    self.assertTrue(lines[0].endswith('run python3 tools/setup.py first.'))
 
     def test_the_build_is_asked_for_once_the_executable_is_there(self):
         with tempfile.TemporaryDirectory() as d:
@@ -81,7 +86,7 @@ class Tools(unittest.TestCase):
             (root / 'orig' / 'SLUS_213.76').mkdir(parents=True)
             (root / 'orig' / 'SLUS_213.76' / 'SLUS_213.76').write_bytes(b'')
             result = self.run_tool(root, 'tools/next.py', 'near')
-            self.assertEqual(result.stderr.strip(), 'the build has not run (build/SLUS_213.76/placement.json is missing): run ninja first.')
+            self.assertEqual(result.stderr.strip(), 'build preparation is missing (build/SLUS_213.76/placement.json is missing): run python3 tools/setup.py first.')
 
     def test_help_needs_neither(self):
         with tempfile.TemporaryDirectory() as d:

@@ -10,7 +10,7 @@ Prints, for the file that owns the function (or the file given):
     data it references with any names from symbols.txt, an m2c draft with the project's context (as decompile.py), and its
     assembly without the address columns;
   - the other assembly functions of the file, by size.
-Needs one finished `ninja` (the assembly under asm/) and, for the drafts, `pip install -r requirements.txt` (m2c).
+Needs `python3 tools/setup.py` preparation (the assembly under asm/) and its installed m2c dependency; no image build.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -69,7 +69,7 @@ def main():
     a = ap.parse_args()
     preflight.require(SLUG, build=('placement.json',))
     if not ASM.is_dir():
-        raise SystemExit('no assembly under asm/%s/nonmatchings: run `ninja` once first' % SLUG)
+        raise SystemExit('no assembly under asm/%s/nonmatchings: run `python3 tools/setup.py` first' % SLUG)
     splits, symbols = S.load_splits(SLUG), S.load_symbols(SLUG)
     rows = S.parse_symbols((S.config_dir(SLUG) / 'symbols.txt').read_text())
     by_name = {n: addr for n, addr, _ in rows}

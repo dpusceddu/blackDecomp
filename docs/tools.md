@@ -11,7 +11,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 
 | Tool | Purpose |
 | --- | --- |
-| `tools/setup.py` | One command from a fresh checkout to a verified build: checks the system, installs what is missing, builds, checks OK. |
+| `tools/setup.py` | Prepare the environment, assembly and objdiff metadata for a matching session; optionally verify the full image. |
 | `tools/next.py` | Best next work: the source files to claim next, and analyses from the automatic pipeline's results (build/auto.json). |
 | `tools/brief.py` | Everything a work session needs about one source file, in one printout, so that it can start writing C at once. |
 | `tools/decompile.py` | Friendly front door for one function: an m2c draft, ready to replace its INCLUDE_ASM line, and where to put it. |
@@ -31,7 +31,6 @@ committed data. Tools import each other by bare module name; every tool puts `to
 
 | Tool | Purpose |
 | --- | --- |
-| `tools/container.py` | Run commands in the Linux x86-64 container with linked-worktree Git paths accessible. |
 | `tools/toolchain.py` | Local build toolchain: download, verify and unpack the pinned compilers, assemblers and wibo. |
 | `tools/compile.py` | Compile one source with a pinned local compiler (Linux x86-64). |
 | `tools/check_versions.py` | Rebuild every supported version and print OK or MISMATCH for each; run for releases or shared binary-construction changes. |
@@ -41,6 +40,12 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/progress.py` | Report how much of .text is provided by compiled source, overall and by library. |
 | `tools/badges.py` | Write the self-hosted progress badges (progress/), the per-library table of the README and the source facts of docs/status.md. |
 | `tools/tools_index.py` | Regenerate docs/tools.md, the index of the tools, from the docstring of every tool. |
+
+## Optional environment provisioning (user or harness)
+
+| Tool | Purpose |
+| --- | --- |
+| `tools/container.py` | Optional host launcher for a prepared Linux environment, provisioned by the user or harness before a session. |
 
 ## Build internals (`tools/build/`)
 
