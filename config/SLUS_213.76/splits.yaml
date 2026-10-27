@@ -365,7 +365,7 @@ splits:
   - {src: src/game/unsorted/game_methods.cpp, range: [0x149158, 0x149178]}
   - {src: src/game/actor/tu_1448c8_149120.c, range: [0x149178, 0x149608]}
   - {src: src/game/actor/actor_collision.cpp, range: [0x149608, 0x149ac8], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
-  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x149ac8, 0x14a8d0]}
+  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x149ac8, 0x14a8d0], assembler: sn-min6, note: "The native 0x163E08 member-clear loop is six words; stock SN adds a seventh padding word."}
   - {src: src/game/unsorted/tu_14a8d0.c, range: [0x14a8d0, 0x14a8f8]}
   - {src: src/game/unsorted/tu_14a8f8.c, range: [0x14a8f8, 0x14ac60], note: flags or language differ}
   - {src: src/game/unsorted/tu_14a8f8_14ac60.c, range: [0x14ac60, 0x14ac98], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
