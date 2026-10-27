@@ -584,6 +584,105 @@ struct NativeControllerActive {
 };
 typedef char SimpleGoalTimerOffset[(unsigned)&((SimpleGoalAction*)0)->timer == 0x24 ? 1 : -1];
 
+
+#ifdef NON_MATCHING
+// UNVERIFIED private identities; each view represents only native fields used by the drafts.
+struct PairedPositions {
+    unsigned char unk_00[0x4C0];
+    Game::Position4 points[2];
+};
+struct GatedTimingState {
+    unsigned char unk_00[0x14];
+    unsigned char enabled;
+    unsigned char unk_15[3];
+    float first, second;
+};
+static inline int Nonzero(int value) { return value != 0; }
+struct TaskStatus {
+    unsigned char unk_00[0x75];
+    unsigned char unk_75;
+    unsigned char unk_76[0x2A];
+    unsigned char unk_A0, unk_A1;
+};
+static inline TaskStatus* StatusFor(Game::Brain* brain) { return (TaskStatus*)((unsigned char*)brain + 0x90); }
+static inline unsigned char TaskPending(TaskStatus* status) {
+    int pending = 0;
+    if (status->unk_75 && (status->unk_A0 || status->unk_A1)) pending = 1;
+    return pending;
+}
+struct BrainTaskFlags {
+    unsigned char unk_00[0xD60];
+    unsigned char low : 4;
+    unsigned char flag : 1;
+};
+static inline unsigned char TaskFlags(Game::Brain* brain) { return ((BrainTaskFlags*)brain)->flag; }
+static inline Recovered_MovementHistory* HistoryFor(void* owner) {
+    return (Recovered_MovementHistory*)((unsigned char*)owner + 0x6F0);
+}
+static inline void* TaskControl(Game::Brain* brain) { return HistoryFor(brain); }
+struct FormationStatus {
+    unsigned char unk_00[0x70];
+    void* first;
+    unsigned char unk_74[8];
+    void* second;
+};
+static inline FormationStatus* FormationFor(Game::Brain* brain) {
+    return (FormationStatus*)((unsigned char*)brain + 0x90);
+}
+struct PointAction {
+    Game::ActionBase base;
+    Game::ActionTimer timer;
+    unsigned char unk_0C[4];
+    Game::Position4 point;
+    int unk_20;
+};
+struct PointerAction {
+    Game::ActionBase base;
+    const Game::PositionArg* point;
+};
+struct RouteChoice {
+    unsigned char unk_00[0x754];
+    int unk_754;
+};
+struct PhasePointAction {
+    Game::ActionBase base;
+    unsigned char unk_08[8];
+    Game::Position4 point;
+    int choice;
+    unsigned char unk_24[0xC];
+    Game::Position4 nextPoint;
+    int phase;
+};
+struct PhaseInterval {
+    float lower, upper;
+};
+struct FormationTransition {
+    unsigned char unk_00[0x30];
+    int active;
+};
+struct FormationTransitionResult {
+    unsigned char unk_00[0x40];
+    unsigned char active;
+};
+extern "C" {
+int func_001A6840(AnimationState*, int, int);
+int func_00178F18(Recovered_ActorSlot*);
+int func_00188F58(Recovered_ActorRecords*);
+int func_00185F00(TaskStatus*);
+int func_00185F18(FormationStatus*);
+const Game::PositionArg* func_00185FE8(FormationStatus*);
+int func_00177B68(void*, int);
+extern Game::GameClock* D_0040F4D0;
+Game::PositionArg func_001890D0(Recovered_ActorRecords*, float);
+extern PhaseInterval D_003F66F8;
+void func_00185538(Recovered_MovementHistory*, int, int, Game::PositionArg, int);
+FormationTransitionResult* func_001834E0(FormationTransition*);
+void func_00186E40(void*);
+int func_001A2090(FormationAction*);
+void func_001A2368(FormationAction*);
+}
+#endif
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -629,7 +728,24 @@ int func_001803E8(QueryState* self) {
 }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: animation-result joins and owner reload scheduling differ.
+extern "C" {
+int func_00180438(QueryState* self) {
+    if (self->unk_40) return 1;
+    if (!func_00173610(&self->timer)) return 1;
+    AnimationState* animation = self->controller->owner->animation;
+    int* state = animation->unk_94;
+    int kind = 0;
+    if (state) kind = *state;
+    if (kind == 10 && !func_001A6840(animation, 1, 0)) return 1;
+    unsigned int action = self->controller->owner->action->unk_D8;
+    return action - 25 < 2;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00180438);
+#endif
 extern "C" {
 int func_00181F28(InitialState* self) {
     self->unk_04 = 42;
@@ -707,7 +823,23 @@ void func_00183238(VectorState* self) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00185D10);
+#ifdef NON_MATCHING
+// Unmatched: the Y-masked vector copy adds VU moves and changes the loop allocation.
+extern "C" {
+float func_00187D78(const PairedPositions* self, const Game::Position4* position) {
+    Value point = Game::Load(*position);
+    float total = 0.1f;
+    for (unsigned char i = 0; i < 2; i++) {
+        Value delta = Game::Sub3(point, Game::Load(self->points[i]));
+        delta = Game::WithY(delta, Game::ZeroVec());
+        total += Ps2Math::VU0::Length3Word(delta);
+    }
+    return 1.0f / total;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187D78);
+#endif
 extern "C" {
 void func_00187E08(ModeFamily* self, void* owner) {
     FamilyMode** begin = self->modes;
@@ -767,7 +899,21 @@ int func_00187EC8(ModeFamily* self) {
 }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: native normalizes both operands then ANDs; the compiler selects MOVZ.
+extern "C" {
+void func_00188B40(GatedTimingState* self, float first, float second, int enabled) {
+    int combined = Nonzero(enabled) & Nonzero(self->enabled);
+    self->enabled = combined;
+    if (enabled == combined) {
+        self->first = first;
+        self->second = second;
+    }
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00188B40);
+#endif
 extern "C" {
 int func_00188B98(PoolState* self) {
     for (int i = 0; i < 3; i++) {
@@ -806,7 +952,24 @@ void func_0018AA18(Recovered_ActorRecords* self) {
 }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: the history and record fallback return paths merge differently.
+extern "C" {
+int func_0018AB08(Recovered_ActorRecords* self) {
+    int result = 0;
+    if (func_00188F10(self)) {
+        if (func_00178F18(func_00188F80(self))) {
+            Recovered_MovementHistory* state = HistoryFor(self->owner);
+            return func_00185C38(state, func_00188F58(self));
+        }
+        result = func_001891C0(self);
+    }
+    return result;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AB08);
+#endif
 extern "C" {
 void func_0018AB98(ActiveBinding* self) {
     self->active = 0;
@@ -1138,8 +1301,46 @@ void func_001964E8(Game::Action* self, const void* event) {
 }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: byte-result normalization and owner register scheduling differ.
+extern "C" {
+void func_00196578(Game::Action* self) {
+    if (func_00188F10(RecordsFor(self->brain))) {
+        Game::PositionArg point = func_00189048(RecordsFor(self->brain));
+        func_0017E428(QueryFor(self->brain), point);
+    }
+    Game::Brain* brain = self->brain;
+    if (!TaskPending(StatusFor(brain))) {
+        func_00193990(self, 1);
+        return;
+    }
+    if (!func_00184238(TaskControl(brain), 1) && func_00193AF8(self)) func_00193990(self, 1);
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196578);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: TaskPending returns use copies where native code retains two byte masks.
+extern "C" {
+void func_00196648(Game::Action* self, const void* event) {
+    func_00193980(self, event);
+    func_00193B98(self)->unk_84 = 2;
+    func_00193A60(self, 0, 1.5f);
+    if ((TaskFlags(self->brain)) && func_00185F00(StatusFor(self->brain)) && !TaskPending(StatusFor(self->brain))) {
+        func_00193A28(self, 10, 0);
+        return;
+    }
+    if (func_00188F10(RecordsFor(self->brain))) {
+        Game::PositionArg point = func_00189048(RecordsFor(self->brain));
+        func_0017E428(QueryFor(self->brain), point);
+    }
+    ((RequestFlagView*)self->brain->movement)->unk_30 = 1;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196648);
+#endif
 extern "C" {
 void func_00196758(Game::Action* self, unsigned int kind, int result) {
     if (kind == 10 || kind == 13) {
@@ -1156,7 +1357,21 @@ void func_00196758(Game::Action* self, unsigned int kind, int result) {
 }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: TaskPending returns use copies where native code retains two byte masks.
+extern "C" {
+int func_001967F8(Game::Action* self, const int* event) {
+    if (*event == 4 && (TaskFlags(self->brain)) && func_00185F00(StatusFor(self->brain)) &&
+        !TaskPending(StatusFor(self->brain))) {
+        func_00193A28(self, 10, 0);
+        return 1;
+    }
+    return 0;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001967F8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196958);
 extern "C" {
 void func_001969E8(FollowAction* self) {
@@ -1285,7 +1500,21 @@ void func_00198388(PausePointAction* self, const PointEvent* event) {
 }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: the event-kind tests and common result register join differ.
+extern "C" {
+int func_001984C8(void*, const int* event) {
+    int result = 0;
+    if (*event == 20)
+        result = 1;
+    else if (*event == 21)
+        result = 1;
+    return result;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001984C8);
+#endif
 extern "C" {
 void func_0019A798(GoalPointAction* self, const TimedFlagEvent* event) {
     Game::Action* action = (Game::Action*)self;
@@ -1371,7 +1600,25 @@ void func_0019B868(Game::Action* self, const void* event) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019BE70);
+#ifdef NON_MATCHING
+// Unmatched: clock-scale constant and phase-clear scheduling differ.
+extern "C" {
+void func_0019C100(PointAction* self, const void* event) {
+    func_00193980(self, event);
+    ((RequestFlagView*)self->base.brain->movement)->unk_30 = 0;
+    if (!Movement(self->base.brain)->active) func_00187FE0(Movement(self->base.brain), 0);
+    func_00188148(Movement(self->base.brain), 0);
+    func_00173690(&self->timer);
+    self->unk_20 = 0;
+    Game::PositionArg point = func_001890D0(RecordsFor(self->base.brain), D_0040F4D0->frameDelta * 8.0f);
+    Game::Brain* brain = self->base.brain;
+    Game::Store(self->point, point);
+    func_00182320(&brain->controller, point, 0);
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019C100);
+#endif
 extern "C" {
 void func_0019C210(TimerAction* self) {
     Game::PositionArg point = func_00189048(RecordsFor(self->base.brain));
@@ -1453,7 +1700,28 @@ void func_0019CC80(CategoryPolicyAction* self, int kind) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CD90);
+#ifdef NON_MATCHING
+// Unmatched: the request and continuation failure returns join differently.
+extern "C" {
+int func_0019CFC8(PointerAction* self) {
+    if (!func_00185F18(FormationFor(self->base.brain))) return 1;
+    ((RequestFlagView*)self->base.brain->movement)->unk_30 = 0;
+    Game::Brain* brain = self->base.brain;
+    int accepted;
+    if (((RouteChoice*)brain)->unk_754 > 0)
+        accepted = func_00182410(&brain->controller, *self->point, 0, 0);
+    else
+        accepted = func_00182320(&brain->controller, *self->point, 0);
+    if (!accepted) return 1;
+    if (!func_001829A8(&self->base.brain->controller)) return 1;
+    int result = 0;
+    if (func_001829E8(&self->base.brain->controller)) result = 1;
+    return result;
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CFC8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019D080);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019D1F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019D300);
@@ -1530,9 +1798,85 @@ void func_001A0738(TimerAction* self, const void* event) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A13F8);
+#ifdef NON_MATCHING
+// Unmatched: phase range-check layout and global interval-load scheduling differ.
+extern "C" {
+void func_001A1640(PhasePointAction* self) {
+    if (self->phase == 0) {
+        if (self->choice)
+            self->phase = 1;
+        else
+            self->phase = 2;
+        self->point = self->nextPoint;
+        func_00193A60((Game::Action*)self, 0, func_0016DE70(D_0040F4D4, D_003F66F8.lower, D_003F66F8.upper));
+        return;
+    }
+    if (self->phase >= 0 && self->phase < 3) {
+        Recovered_MovementHistory* history = HistoryFor(self->base.brain);
+        if (history->state < 2) func_00185538(history, 0, 0, Game::Load(D_004432A0), 0);
+        func_00193990((Game::Action*)self, 1);
+    }
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1640);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: the status failure and movement-success branches retain different joins.
+extern "C" {
+void func_001A1DE0(FormationAction* self) {
+    if (!func_00188F10(RecordsFor(self->base.brain))) {
+        func_00193990((Game::Action*)self, 0);
+        return;
+    }
+    {
+        if (func_00188350(Movement(self->base.brain))) {
+            func_00186E40((unsigned char*)self->base.brain + 0x90);
+            func_00193990((Game::Action*)self, 0);
+            return;
+        }
+        Game::Brain* brain = self->base.brain;
+        FormationTransition* transition = (FormationTransition*)((unsigned char*)brain + 0x1EB0);
+        if (Movement(brain)->unk_01 || (transition->active && func_001834E0(transition)->active)) {
+            func_00193990((Game::Action*)self, 1);
+            return;
+        }
+        func_001A2368(self);
+        if (!self->active) self->direction = func_001A2090(self);
+        ((Game::Permission*)Movement(self->base.brain))->SetAllowed(self->direction);
+        if (!self->direction) {
+            Game::PositionArg point = func_00189048(RecordsFor(self->base.brain));
+            func_0017E428(QueryFor(self->base.brain), point);
+        }
+        return;
+    }
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1DE0);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: direction normalization and separate flag constants have different lifetimes.
+extern "C" {
+void func_001A1EE0(FormationAction* self, const void* event) {
+    int direction = 0;
+    func_00193980(self, event);
+    func_00187FE0(Movement(self->base.brain), 0);
+    func_00173690(&self->grace);
+    func_00173690(&self->retry);
+    self->active = 0;
+    func_001A1FE8(self);
+    self->direction = 0;
+    self->active = 1;
+    ((RequestFlagView*)self->base.brain->movement)->unk_30 = 1;
+    MovementControl* movement = Movement(self->base.brain);
+    if (func_001891C0(RecordsFor(self->base.brain))) direction = ((OwnerView*)self->base.brain->actor)->unk_3AA != 0;
+    func_00188148(movement, direction);
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1EE0);
+#endif
 extern "C" {
 void func_001A1F98(Game::Action* self) {
     func_00193988(self);
@@ -1542,7 +1886,29 @@ void func_001A1F98(Game::Action* self) {
 }
 }
 
+#ifdef NON_MATCHING
+// Unmatched: the available-byte result and peer-result join allocate differently.
+extern "C" {
+void func_001A1FE8(FormationAction* self) {
+    unsigned char available = func_00185F18(FormationFor(self->base.brain));
+    self->available = available;
+    if (available) {
+        Game::PositionArg point = *func_00185FE8(FormationFor(self->base.brain));
+        Game::Brain* brain = self->base.brain;
+        Game::Store(self->point, point);
+        FormationStatus* status = FormationFor(brain);
+        void* peer = status->second;
+        int matches = 0;
+        if (peer == status->first) matches = func_00177B68(peer, func_00188F58(RecordsFor(brain))) != 0;
+        self->peer = matches;
+    } else
+        self->peer = 0;
+    func_00173640(&self->retry, 2.0f);
+}
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1FE8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A2090);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A21B0);
 extern "C" {
