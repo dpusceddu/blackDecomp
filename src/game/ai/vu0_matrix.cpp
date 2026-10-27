@@ -81,7 +81,7 @@ static inline BindingAnimation* Animation(ActiveBinding* self) {
 struct MovementControl;
 
 extern "C" {
-void func_00193980(Game::Action*);
+void func_00193980(void*, const void*);
 void func_00193988(Game::Action*);
 void func_00193A28(Game::Action*, unsigned int, int);
 void func_00173690(Game::ActionTimer*);
@@ -251,6 +251,71 @@ void func_00193A60(Game::Action*, int, float);
 void func_00193A28(Game::Action*, unsigned int, int);
 }
 
+static inline unsigned char& WaitActive(Game::Action* self) { return *(unsigned char*)&self->phase; }
+
+extern "C" {
+int func_001A7DF0(void*, int, int);
+void func_00193990(Game::Action*, unsigned char);
+int func_001829E8(Game::Controller*);
+unsigned char func_001829A8(Game::Controller*);
+void func_001825B0(Game::Controller*);
+}
+
+struct TimedFlagAction {
+    Game::ActionBase base;
+    Game::ActionTimer timer;
+    unsigned char value, pending;
+};
+struct TimedFlagEvent {
+    int kind;
+    unsigned char unk_04[4];
+    unsigned char value;
+};
+
+extern "C" {
+void func_00193980(void*, const void*);
+void func_00193990(Game::Action*, unsigned char);
+void func_00173640(Game::ActionTimer*, float);
+float func_0016DE70(void*, float, float);
+extern unsigned char* D_0040F4D4;
+}
+
+// UNVERIFIED class identities; these prefixes represent the accessed native fields.
+struct AnimationState {
+    unsigned char unk_00[0x90];
+    int* unk_90;
+    int* unk_94;
+};
+struct ActionState {
+    unsigned char unk_00[0xD8];
+    unsigned int unk_D8;
+};
+struct OwnerView {
+    unsigned char unk_00[0x2A4];
+    ActionState* action;
+    unsigned char unk_2A8[0x88];
+    AnimationState* animation;
+    unsigned char unk_334[0x75];
+    unsigned char unk_3A9, unk_3AA;
+};
+struct ControllerView {
+    unsigned char unk_00[0x30];
+    unsigned char unk_30;
+    unsigned char unk_31[0x4B];
+    OwnerView* owner;
+};
+struct QueryState {
+    unsigned char unk_00[0x14];
+    Game::ActionTimer timer;
+    unsigned char unk_18[0x28];
+    int unk_40;
+    ControllerView* controller;
+};
+
+typedef char QueryControllerOffset[(unsigned)&((QueryState*)0)->controller == 0x44 ? 1 : -1];
+typedef char OwnerAnimationOffset[(unsigned)&((OwnerView*)0)->animation == 0x330 ? 1 : -1];
+typedef char OwnerFlagOffset[(unsigned)&((OwnerView*)0)->unk_3A9 == 0x3A9 ? 1 : -1];
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -270,7 +335,22 @@ int func_0017C828(Value point, const Game::Position4* bounds) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00180090);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001800B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001803E8);
+extern "C" {
+int func_001803E8(QueryState* self) {
+    ControllerView* controller = self->controller;
+    OwnerView* owner = controller->owner;
+    unsigned char id = controller->unk_30;
+    int result = 0;
+    if (id == owner->unk_3A9 && id == owner->unk_3AA) {
+        int* state = owner->animation->unk_90;
+        int kind = 0;
+        if (state) kind = *state;
+        if (kind != 11) result = kind = 1;
+    }
+    return result;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00180438);
 extern "C" {
 int func_00181F28(InitialState* self) {
@@ -561,14 +641,26 @@ float func_0018DC48(const RangeSelection* self) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001951F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195950);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195A00);
+extern "C" {
+void func_00195A00(TimedFlagAction* self, const TimedFlagEvent* event) {
+    func_00193980(self, event);
+    if (event->kind != 5) {
+        func_00193990((Game::Action*)self, 0);
+        return;
+    }
+    self->value = event->value;
+    func_00173640(&self->timer, func_0016DE70(D_0040F4D4, 0.0f, 1.0f));
+    self->pending = 1;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195AA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195BC0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001962F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196428);
 extern "C" {
-void func_001964E8(Game::Action* self) {
-    func_00193980(self);
+void func_001964E8(Game::Action* self, const void* event) {
+    func_00193980(self, event);
     func_00187FE0(Movement(self->brain), 0);
     ((RequestFlagView*)self->brain->movement)->unk_30 = 0;
     func_001825B0(&self->brain->controller);
@@ -597,14 +689,43 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197678);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197858);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001979E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197AE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197C60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197DA0);
+extern "C" {
+void func_00197C60(Game::Action* self) {
+    void* animation = ((ActorParts::Owner*)self->brain->actor)->Animation();
+    if (WaitActive(self)) {
+        int status = func_001A7DF0(animation, 0, 3);
+        if (status == 2) {
+            func_00193990(self, 1);
+            return;
+        }
+        if (status == 3) {
+            func_00193990(self, 0);
+            return;
+        }
+    } else
+        WaitActive(self) = 1;
+}
+}
+
+extern "C" {
+void func_00197DA0(Game::Action* self) {
+    if (WaitActive(self)) {
+        if (func_001829E8(&self->brain->controller) || !func_001829A8(&self->brain->controller)) {
+            func_001825B0(&self->brain->controller);
+            ((RequestFlagView*)self->brain->movement)->unk_30 = 1;
+            WaitActive(self) = 0;
+        }
+    } else
+        ((RequestFlagView*)self->brain->movement)->unk_30 = 1;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00198388);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001984C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019A798);
 extern "C" {
-void func_0019B150(Game::Action* self) {
-    func_00193980(self);
+void func_0019B150(Game::Action* self, const void* event) {
+    func_00193980(self, event);
     func_00193B98(self)->kind = 2;
     func_00193B98(self)->unk_7C = 1;
     func_00193B98(self)->unk_80 = 15.0f;
@@ -617,8 +738,8 @@ void func_0019B150(Game::Action* self) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019B270);
 extern "C" {
-void func_0019B320(Game::Action* self) {
-    func_00193980(self);
+void func_0019B320(Game::Action* self, const void* event) {
+    func_00193980(self, event);
     func_00193B98(self)->kind = 3;
     func_00193B98(self)->unk_7C = 3;
     func_00193B98(self)->unk_80 = 20.0f;
