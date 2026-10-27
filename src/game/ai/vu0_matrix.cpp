@@ -1,7 +1,52 @@
 #include "include_asm.h"
 
 #include "ps2/matrix.hpp"
+#include "game/ai_action.hpp"
 using Ps2Math::VU0::Value;
+
+struct MovementControl;
+
+extern "C" {
+void func_00193980(Game::Action*);
+void func_00193988(Game::Action*);
+void func_00193A28(Game::Action*, unsigned int, int);
+void func_00173690(Game::ActionTimer*);
+void func_001880D8(MovementControl*);
+void func_00188148(MovementControl*, signed char);
+void func_00187FE0(MovementControl*, int);
+void func_001825B0(Game::Controller*);
+}
+
+struct MovementControl {
+    unsigned char active;
+};
+struct ActorFlagView {
+    unsigned char unk_00[0x3B8];
+    unsigned char unk_3B8;
+};
+struct RequestFlagView {
+    unsigned char unk_00[0x30];
+    unsigned char unk_30;
+};
+static inline MovementControl* Movement(Game::Brain* brain) {
+    return (MovementControl*)((unsigned char*)brain + 0x290);
+}
+
+extern "C" {
+int func_0018EB78(Game::Recovered_DispatchedMode*);
+}
+
+// UNVERIFIED class identity; extends the existing slot view without data members.
+struct DispatchSlots : Game::Recovered_DispatchedMode {
+    virtual int Unknown15(void*);
+    virtual void Unknown16(void*, unsigned int, Game::PositionArg);
+    virtual void Unknown17(void*);
+    virtual int Unknown18();
+};
+
+extern "C" {
+void* func_00183710(void*, signed char);
+}
 
 // UNVERIFIED class identities; only the accessed offsets are represented.
 struct InitialState {
@@ -130,7 +175,14 @@ int func_001830A0(ByteState* self) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00183110);
+extern "C" {
+void* func_00183110(ByteState* self) {
+    signed char next = func_00183748(self->unk_00, self->unk_05, self->unk_04);
+    if (next == self->unk_05) return 0;
+    return func_00183710(self->unk_00, next);
+}
+}
+
 extern "C" {
 int func_00183160(ByteState* self) {
     self->unk_06 = self->unk_05;
@@ -185,13 +237,37 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018C1E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018CE78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018CEE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018CFD8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018D108);
+extern "C" {
+void func_0018D108(Game::ModeDispatcher* self) { self->modes[self->active]->Unknown1(); }
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018D140);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018D870);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018D8A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018D8E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018D918);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018D950);
+extern "C" {
+int func_0018D870(Game::ModeDispatcher* self, void* argument) {
+    return ((DispatchSlots*)self->modes[self->active])->Unknown15(argument);
+}
+}
+
+extern "C" {
+void func_0018D8A8(Game::ModeDispatcher* self, void* argument, unsigned int flags, Game::PositionArg point) {
+    ((DispatchSlots*)self->modes[self->active])->Unknown16(argument, flags, point);
+}
+}
+
+extern "C" {
+void func_0018D8E0(Game::ModeDispatcher* self, void* argument) {
+    ((DispatchSlots*)self->modes[self->active])->Unknown17(argument);
+}
+}
+
+extern "C" {
+int func_0018D918(Game::ModeDispatcher* self) { return ((DispatchSlots*)self->modes[self->active])->Unknown18(); }
+}
+
+extern "C" {
+int func_0018D950(Game::ModeDispatcher* self) { return func_0018EB78(self->modes[self->active]); }
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018DB58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018DBC0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018DC48);
@@ -202,7 +278,15 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195AA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195BC0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001962F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196428);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001964E8);
+extern "C" {
+void func_001964E8(Game::Action* self) {
+    func_00193980(self);
+    func_00187FE0(Movement(self->brain), 0);
+    ((RequestFlagView*)self->brain->movement)->unk_30 = 0;
+    func_001825B0(&self->brain->controller);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196578);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196648);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196758);
@@ -211,7 +295,13 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196958);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001969E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196E58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197040);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001971A0);
+extern "C" {
+void func_001971A0(Game::Action* self) {
+    func_00193988(self);
+    if (*(unsigned char*)&self->payload) ((ActorFlagView*)self->brain->actor)->unk_3B8 = 0;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001971E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197460);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197638);
@@ -249,7 +339,15 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A13F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1640);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1DE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1EE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1F98);
+extern "C" {
+void func_001A1F98(Game::Action* self) {
+    func_00193988(self);
+    MovementControl* movement = Movement(self->brain);
+    if (movement->active) func_001880D8(movement);
+    func_00188148(Movement(self->brain), 0);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1FE8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A2090);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A21B0);
