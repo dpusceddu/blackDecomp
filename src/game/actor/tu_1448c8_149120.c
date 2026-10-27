@@ -20,7 +20,7 @@ s32 func_00149120(s32 *arg0, s32 arg1) {
 }
 
 #ifdef NON_MATCHING
-// Unmatched: the loop code differs; draft left when the session ended.
+// Unmatched: eight counter/accumulator register operands differ.
 s32 func_00149178(Recovered_ActorCountView *self) {
     s32 remaining = self->entryCount;
     s32 total = 0;
@@ -28,8 +28,10 @@ s32 func_00149178(Recovered_ActorCountView *self) {
         Recovered_ActorCountSourceEntry *entry = self->source->entries;
         do {
             s32 count = entry->count;
-            if (count) total += count;
-            else total += 1;
+            if (!count)
+                total += 1;
+            else
+                total += count;
             --remaining;
             ++entry;
         } while (remaining);
