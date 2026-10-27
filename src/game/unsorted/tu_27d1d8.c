@@ -3,11 +3,42 @@
 
 extern s32 D_003C0E04;
 
+/* Partial serialized view; the prefix and discriminator meaning are UNVERIFIED. */
+typedef struct {
+    u8 unk_00[0x20];
+    u32 dataOffset;
+    u32 recordsOffset;
+    u16 recordCount;
+    u16 unk_2A;
+    s32 unk_2C;
+} Recovered_RelocatableRecords;
+
+extern s32 func_0027F708(void *record);
+extern s32 func_0027F6D8(void *record);
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27d1d8", func_0027D1D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27d1d8", func_0027D7A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27d1d8", func_0027DD60);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27d1d8", func_0027E308);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27d1d8", func_0027E760);
+void func_0027E760(Recovered_RelocatableRecords *self) {
+    u16 i;
+
+    if (self->dataOffset) {
+        self->dataOffset = (u32)self + self->dataOffset;
+    }
+    if (self->recordsOffset) {
+        self->recordsOffset = (u32)self + self->recordsOffset;
+    }
+    if (self->unk_2C) {
+        for (i = 0; i < self->recordCount; i++) {
+            func_0027F708((void *)(self->recordsOffset + i * 16));
+        }
+    } else {
+        for (i = 0; i < self->recordCount; i++) {
+            func_0027F6D8((void *)(self->recordsOffset + i * 16));
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27d1d8", func_0027E820);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27d1d8", func_0027E900);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27d1d8", func_0027E988);
