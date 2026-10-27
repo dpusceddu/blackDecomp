@@ -1,5 +1,14 @@
 #include "include_asm.h"
 #include "game/graphics/audio_provider.hpp"
+struct KaimAllocator;
+extern KaimAllocator* gKaimAllocator __asm__("D_003C87E8");
+extern void (*gKaimAllocateHook)(void*, unsigned, unsigned) __asm__("D_003C87EC");
+#include "kynapse/alloc.hpp"
+extern char D_003E29F0[];
+struct SmallEffect {
+    void* vtable;
+    unsigned unknown04;
+};
 
 extern "C" void func_00287600(void*);
 extern "C" void func_00287618(void*);
@@ -22,33 +31,8 @@ struct RelocatableTable {
 extern "C" void func_00272730(void*);
 extern "C" void func_00286CA8(void*);
 
-// Partial parameter, graph and attachment access views; original class identities are UNVERIFIED.
-struct EffectParameter {
-    unsigned offset;
-    char unknown04[16];
-};
-struct EffectDefinition;
-struct EffectInstance {
-    unsigned index;
-    EffectDefinition* definition;
-};
-struct EffectDefinition {
-    char unknown00[24];
-    EffectParameter* parameters;
-    char unknown1c[28];
-    unsigned *sourceIndices, *targetIndices;
-    char unknown40[28];
-    EffectInstance embedded;
-    EffectParameter sourceDefault, targetDefault;
-};
-struct EffectGraph {
-    unsigned unknown00;
-    unsigned char* values;
-    unsigned long* rows;
-    char unknown0c[0x1698];
-    EffectInstance* history[32];
-    unsigned unknown1724, writeIndex;
-};
+#include "game/effects/dependency_graph.hpp"
+
 static inline EffectParameter* Source(EffectInstance* item) {
     if (item == &item->definition->embedded) return &item->definition->sourceDefault;
     return &item->definition->parameters[item->definition->sourceIndices[item->index]];
@@ -116,6 +100,49 @@ struct RelocatableResource {
     ResourceProperties properties;
     unsigned links[7];
 };
+
+struct ResourceResult {
+    char unknown00[0x30];
+};
+struct ResourceLookup {
+    int count;
+    void** keys;
+    signed char* kinds;
+    ResourceResult* results;
+};
+extern "C" int func_001AD2E8(void*, signed char, const char*);
+extern "C" void func_001AD098(ResourceResult*);
+
+struct EffectRecord {
+    char unknown00[0x30];
+    unsigned long mask;
+    char unknown38[0x28];
+};
+struct EffectCollection {
+    unsigned unknown00;
+    EffectRecord* records;
+    EffectInstance** instances;
+};
+struct EffectRepository {
+    char unknown00[0x70];
+    unsigned primaryCount, secondaryCount;
+    EffectCollection *primary, *secondary;
+};
+struct EffectSystem {
+    char unknown00[0x1140];
+    EffectRepository* repository;
+};
+extern EffectSystem* D_0040F4D4;
+static inline EffectSystem*& System() { return D_0040F4D4; }
+static inline EffectRecord* RecordAt(EffectRepository* self, unsigned i) {
+    if (i >= self->primaryCount) return &self->secondary->records[i - self->primaryCount];
+    return &self->primary->records[i];
+}
+static inline EffectInstance* InstanceAt(EffectRepository* self, unsigned i) {
+    if (i >= self->primaryCount) return self->secondary->instances[i - self->primaryCount];
+    return self->primary->instances[i];
+}
+static inline unsigned RecordCount(EffectRepository* self) { return self->primaryCount + self->secondaryCount; }
 
 #ifdef NON_MATCHING
 using namespace Graphics;
@@ -302,8 +329,23 @@ extern "C" void func_00288470(unsigned* self) {
     if (self[1]) self[1] += (unsigned)self;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00289DD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00289EC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00289F30);
+extern "C" SmallEffect* func_00289EC8(void) {
+    SmallEffect* self = (SmallEffect*)KaimAllocate(sizeof(SmallEffect));
+    self->vtable = D_003E29F0;
+    return self;
+}
+extern "C" int func_00289F30(EffectGraph* self, unsigned char* values, unsigned long* rows, void* other,
+                             void* context) {
+    self->rows = rows;
+    self->values = values;
+    self->cursor = (unsigned char*)self + 0x20e;
+    self->other = other;
+    self->context = context;
+    self->pending.Reset();
+    self->history.Reset();
+    self->unknown172c = 0;
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00289F78);
 extern "C" int func_0028A368(EffectGraph* self, unsigned char start, unsigned char end, unsigned depth) {
     if (start == end || start == 64) return 1;
@@ -336,7 +378,11 @@ extern "C" void func_0028A520(EffectGraph* self) {
         if (self->rows[i] & ((unsigned long)1 << 63)) func_0028A4D8(self, i);
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028A598);
+extern "C" unsigned char func_0028A598(void* self, EffectInstance* item) {
+    EffectObject* object = Object(item);
+    if (object) return Enabled(object, item);
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028A688);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028AFF8);
 extern "C" void func_0028B1F0(EffectGraph* self, EffectInstance* item) {
@@ -354,17 +400,95 @@ extern "C" void func_0028B2A8(EffectGraph* self, EffectInstance* item) {
     if (func_0028A368(self, from, to, 63)) {
         self->rows[from] |= (unsigned long)1 << 63;
         self->rows[to] |= (unsigned long)1 << 63;
-        self->writeIndex = (self->writeIndex + 1) & 31;
-        self->history[self->writeIndex] = item;
+        self->history.writeIndex = (self->history.writeIndex + 1) & 31;
+        self->history.entries[self->history.writeIndex] = item;
     }
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028B3E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028B3E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028B638);
+extern "C" int func_0028B638(EffectGraph* self, EffectParameter* from, EffectParameter* to, unsigned maskIndex,
+                             unsigned depth) {
+    unsigned long* saved = self->rows;
+    self->cache = *(EffectGraphRows*)saved;
+    self->rows = self->cache.rows;
+    unsigned long mask = (unsigned long)1 << maskIndex;
+    EffectRepository* repository = System()->repository;
+    for (unsigned i = 0; i < RecordCount(repository); i++) {
+        EffectRecord* record = RecordAt(repository, i);
+        if (record->mask & mask) {
+            EffectInstance* item = InstanceAt(repository, i);
+            EffectParameter* source = Source(item);
+            unsigned char start = self->values[source->offset];
+            EffectParameter* target = Target(item);
+            unsigned char end = self->values[target->offset];
+            self->rows[start] |= (unsigned long)1 << end;
+        }
+    }
+    int result = func_0028A368(self, self->values[from->offset], self->values[to->offset], depth);
+    self->rows = saved;
+    return result;
+}
+#ifdef NON_MATCHING
+struct SelectionEntry {
+    short unknown00, priority;
+    unsigned char kind, unknown05;
+};
+struct SelectionTable {
+    char unknown00[12];
+    unsigned short count, unknown0e;
+    SelectionEntry* entries;
+};
+extern unsigned D_0040EB30[2];
+static inline unsigned RandomWord() {
+    unsigned first = D_0040EB30[0], second = D_0040EB30[1];
+    unsigned next = (first << 16) + ((int)first >> 16) + second;
+    D_0040EB30[1] = second + next;
+    D_0040EB30[0] = next;
+    return next;
+}
+static inline int RandomChoice(int low, int high) {
+    float minimum = (float)low;
+    float maximum = (float)high + 1.0f - 0.0000152587890625f;
+    unsigned next = RandomWord();
+    float random = (float)next * 2.3283064365386963e-10f;
+    float span = maximum - minimum;
+    return (int)(minimum + span * random);
+}
+// Unmatched: nine instructions differ in unsigned random-result lifetime and store/branch scheduling.
+extern "C" SelectionEntry* func_0028BD80(SelectionTable* self, int kind) {
+    int best = 0x7fffffff;
+    SelectionEntry* result = 0;
+    for (unsigned i = 0; i < self->count; i++) {
+        bool haveBest = best <= 0x7ffffffe;
+        if (self->entries[i].priority == 0 && haveBest && RandomChoice(0, 1) == 0) continue;
+        SelectionEntry* entry = (SelectionEntry*)(i * sizeof(SelectionEntry) + (unsigned)self->entries);
+        if (best >= entry->priority && entry->kind == kind) {
+            best = entry->priority;
+            result = entry;
+        }
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028BD80);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028BEB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028BEC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028BF90);
+extern "C" void func_0028BEC0(ResourceLookup* self) {
+    int i;
+    if (self->results) self->results = (ResourceResult*)((unsigned)self->results + (unsigned)self);
+    if (self->keys) self->keys = (void**)((unsigned)self->keys + (unsigned)self);
+    if (self->kinds) self->kinds = (signed char*)((unsigned)self->kinds + (unsigned)self);
+    for (i = 0; i < self->count; i++) func_001AD098(&self->results[i]);
+    for (i = 0; i < self->count; i++) {
+        if (self->keys[i]) self->keys[i] = (void*)((unsigned)self->keys[i] + (unsigned)self);
+    }
+}
+extern "C" ResourceResult* func_0028BF90(ResourceLookup* self, const char* name) {
+    for (int i = 0; i < self->count; i++) {
+        if (func_001AD2E8(self->keys[i], self->kinds[i], name)) return self->results + i;
+    }
+    return 0;
+}
 extern "C" void func_0028C028(RelocatableResourceE0* self) {
     if (self->offset) self->offset += (unsigned)self;
 }
