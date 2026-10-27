@@ -6,6 +6,7 @@
 extern "C" {
 #include "game/actor_records.h"
 #include "game/actor_slots.h"
+#include "game/movement_history.h"
 }
 using Ps2Math::VU0::Value;
 

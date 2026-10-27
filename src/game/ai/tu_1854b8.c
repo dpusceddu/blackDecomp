@@ -3,37 +3,7 @@
 
 extern void func_0018BFE8(void*, s32, s128, s32);
 
-/* Partial state and its five remembered points. Threshold semantics remain
- * UNVERIFIED; only the accessed scalar fields are modeled here. */
-/* UNVERIFIED: cache layout is assembly-derived; its consumers remain drafts. */
-typedef struct {
-    s128 point; /* Native quadword alignment also fixes the sample-loop induction base. */
-    f32 timestamp; /* UNVERIFIED: currently accessed only by drafts. */
-    s32 id;
-    s32 value;
-    u8 unk_1C[4];
-} Recovered_MovementSample;
-
-typedef struct {
-    void* owner;
-    u8 unk_04[0x28];
-    s32 mask;
-    u8 unk_30[0x10];
-    f32 amount;
-    f32 thresholds[4];
-    f32 resetValues[4];
-    s32 state;
-    s32 requestedState;
-    u8 unk_6C[4];
-    Recovered_MovementSample samples[5]; /* UNVERIFIED: cache consumers remain drafts. */
-    s32 nextSampleId; /* UNVERIFIED: the allocator remains a draft. */
-    f32 timer;
-} Recovered_MovementHistory;
-
-typedef char MovementSampleStride[sizeof(Recovered_MovementSample) == 0x20 ? 1 : -1];
-typedef char MovementHistorySamples[(u32)&((Recovered_MovementHistory*)0)->samples == 0x70 ? 1 : -1];
-typedef char MovementHistoryMask[(u32)&((Recovered_MovementHistory*)0)->mask == 0x2C ? 1 : -1];
-typedef char MovementHistoryTimer[(u32)&((Recovered_MovementHistory*)0)->timer == 0x114 ? 1 : -1];
+#include "game/movement_history.h"
 
 extern void* D_0040F4D0;
 extern s128 D_004432A0;
@@ -143,7 +113,7 @@ s32 func_00185A70(Recovered_MovementHistory* self, s128 point, f32 minimumDistan
     for (i = 0; i < 5; ++i) {
         Recovered_MovementSample* sample = &self->samples[i];
         if (sample->id != -1 && (afterTime <= 0.0f || afterTime < sample->timestamp)) {
-            BkVuVector delta = BkVuSubXYZ(*(s128*)sample->point, point);
+            BkVuVector delta = BkVuSubXYZ(sample->point, point);
             f32 distanceSquared = __ee_vu_read_x(BkVuSumXYZ(BkVuMulXYZ(delta, delta), one));
             if (minimumDistanceSquared <= 0.0f || minimumDistanceSquared < distanceSquared) {
                 if (selected == -1 || distanceSquared < closest) {
