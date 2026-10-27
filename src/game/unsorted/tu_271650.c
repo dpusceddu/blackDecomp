@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "game/aligned_buffer.h"
+#include "game/stream_control.h"
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
 
@@ -9,38 +10,6 @@ extern s32 func_0028FA60(s32);
 extern void func_0028F3B0(void *, s32);
 extern void func_0028F408(void *);
 extern void func_0028F2C0(void *, u32 *, s32 *, u32 *, u32 *);
-
-typedef struct {
-    u8 unk_00[0x18];
-    s16 beginAdjustment;
-    u16 unk_1A;
-    s32 (*begin)(void *, u32, s32);
-    u8 unk_20[8];
-    s16 resetAdjustment;
-    u16 unk_2A;
-    s32 (*reset)(void *, s32, s32);
-    u8 unk_30[0x10];
-    s16 readyAdjustment;
-    u16 unk_42;
-    s32 (*ready)(void *);
-} Recovered_StreamDeviceVtable;
-
-typedef struct {
-    u8 unk_00[0x28];
-    Recovered_StreamDeviceVtable *vtable;
-} Recovered_StreamDevice;
-
-typedef struct {
-    u8 unk_00[0x43];
-    u8 unk_43;
-    u8 active;
-    u8 unk_45;
-    u8 unk_46[0x1E];
-    Recovered_StreamDevice *device;
-    s32 pending;
-    u8 unk_6C[0x4C];
-    u8 stream[1];
-} Recovered_StreamControl; /* Field roles UNVERIFIED. */
 
 extern void func_002719D0(Recovered_StreamControl *, s32);
 

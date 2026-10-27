@@ -1,15 +1,17 @@
-#include "include_asm.h"
-
-#ifdef NON_MATCHING
 #include "game/draft_views.hpp"
-namespace Game { namespace DraftViews {
+#include "game/stream_control.h"
+
+namespace Game {
+namespace DraftViews {
 
 void* SelectedRecord(void* object) {
-    if(Field<int>(object,0x120)!=0x1c)return 0;
-    int index=Field<signed char>(object,0x11d);
-    return index<0?0:static_cast<char*>(object)+index*0x18;
+    Recovered_StreamControl* self = static_cast<Recovered_StreamControl*>(object);
+    int index;
+    if (self->state != 0x1C || (index = self->selected) < 0) {
+        return 0;
+    }
+    return &self->records[index];
 }
-} }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2722d0", func_002722D0);
-#endif
+
+}
+}
