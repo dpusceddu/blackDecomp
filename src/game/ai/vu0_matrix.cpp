@@ -363,6 +363,34 @@ int func_00184238(void*, int);
 int func_00193AF8(Game::Action*);
 }
 
+// UNVERIFIED reset family; native slot and field offsets only.
+// The four-byte inherited payload precedes GNU's vptr.
+struct ResetData {
+    void* owner;
+};
+struct ResetMode : ResetData {
+    virtual int Reset();
+};
+struct ResetOwner {
+    unsigned char unk_00[0xF0];
+    ResetMode* modes[2];
+    int unk_F8;
+    unsigned char unk_FC[4];
+    int unk_100;
+};
+
+struct TimerAction {
+    Game::ActionBase base;
+    Game::ActionTimer timer;
+};
+
+extern "C" {
+int func_0017E770(QueryState*);
+int func_00173610(const Game::ActionTimer*);
+int func_00180438(QueryState*);
+void func_0017DB50(QueryState*, unsigned char);
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -547,7 +575,22 @@ void func_0018AC80(ActiveBinding* self, int active) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AD88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018C1E0);
+extern "C" {
+int func_0018C1E0(ResetOwner* self) {
+    ResetMode** mode = self->modes;
+    unsigned int count = 0;
+    do {
+        ResetMode* item = *mode;
+        count++;
+        mode++;
+        item->Reset();
+    } while (count < 2);
+    self->unk_F8 = 2;
+    self->unk_100 = -1;
+    return 1;
+}
+}
+
 extern "C" {
 int func_0018CE78(const NameQuery* self, const char* name) {
     const char* match;
@@ -687,7 +730,25 @@ float func_0018DC48(const RangeSelection* self) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001951F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195950);
+extern "C" {
+void func_00195950(TimedFlagAction* self) {
+    if (!self->pending) {
+        if (!func_00180438(QueryFor(self->base.brain))) {
+            func_001825B0(&self->base.brain->controller);
+            func_00193990((Game::Action*)self, 1);
+            return;
+        }
+    } else if (func_00173610(&self->timer)) {
+        func_0017DB50(QueryFor(self->base.brain), self->value);
+        self->pending = 0;
+    }
+    if (func_00188F10(RecordsFor(self->base.brain))) {
+        Game::PositionArg point = func_00189048(RecordsFor(self->base.brain));
+        func_0017E428(QueryFor(self->base.brain), point);
+    }
+}
+}
+
 extern "C" {
 void func_00195A00(TimedFlagAction* self, const TimedFlagEvent* event) {
     func_00193980(self, event);
@@ -701,7 +762,19 @@ void func_00195A00(TimedFlagAction* self, const TimedFlagEvent* event) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195AA8);
+extern "C" {
+void func_00195AA8(Game::Action* self) {
+    if (!func_0017E770(QueryFor(self->brain))) {
+        func_00193990(self, 1);
+        return;
+    }
+    if (func_00188F10(RecordsFor(self->brain))) {
+        Game::PositionArg point = func_00189048(RecordsFor(self->brain));
+        func_0017E428(QueryFor(self->brain), point);
+    }
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195BC0);
 extern "C" {
 void func_001962F0(Game::Action* self) {
@@ -793,7 +866,14 @@ void func_001971A0(Game::Action* self) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001971E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197460);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197638);
+extern "C" {
+void func_00197638(TimerAction* self, const void* event) {
+    func_00193980(self, event);
+    func_00193A28((Game::Action*)self, 31, 0);
+    func_00173690(&self->timer);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197678);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197858);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001979E0);
@@ -860,7 +940,16 @@ void func_0019B320(Game::Action* self, const void* event) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019B868);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019BE70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019C100);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019C210);
+extern "C" {
+void func_0019C210(TimerAction* self) {
+    Game::PositionArg point = func_00189048(RecordsFor(self->base.brain));
+    func_0017E428(QueryFor(self->base.brain), point);
+    if (func_001829E8(&self->base.brain->controller) || !func_001829A8(&self->base.brain->controller))
+        func_00193990((Game::Action*)self, 1);
+    if (func_00173610(&self->timer)) func_00193990((Game::Action*)self, 1);
+}
+}
+
 extern "C" {
 int func_0019C968(CategoryPolicyAction* self, const void* event) {
     Game::Action* action = (Game::Action*)self;
@@ -909,7 +998,19 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019D558);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019F590);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019FE28);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019FF20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A06C8);
+extern "C" {
+void func_001A06C8(TimerAction* self) {
+    if (func_00173610(&self->timer)) {
+        func_00193990((Game::Action*)self, 1);
+        return;
+    }
+    if (func_00188F10(RecordsFor(self->base.brain))) {
+        Game::Brain* brain = self->base.brain;
+        func_0017E428(QueryFor(brain), func_00189048(RecordsFor(brain)));
+    }
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A0738);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A13F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1640);
