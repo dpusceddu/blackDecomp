@@ -428,7 +428,6 @@ extern "C" int func_0028B638(EffectGraph* self, EffectParameter* from, EffectPar
     self->rows = saved;
     return result;
 }
-#ifdef NON_MATCHING
 struct SelectionEntry {
     short unknown00, priority;
     unsigned char kind, unknown05;
@@ -438,14 +437,17 @@ struct SelectionTable {
     unsigned short count, unknown0e;
     SelectionEntry* entries;
 };
-extern unsigned D_0040EB30[2];
-static inline unsigned RandomWord() {
-    unsigned first = D_0040EB30[0], second = D_0040EB30[1];
-    unsigned next = (first << 16) + ((int)first >> 16) + second;
-    D_0040EB30[1] = second + next;
-    D_0040EB30[0] = next;
-    return next;
-}
+struct RandomState {
+    unsigned first, second;
+    inline unsigned Next() {
+        unsigned next = (first << 16) + ((int)first >> 16) + second;
+        first = next;
+        second += next;
+        return first;
+    }
+};
+extern RandomState D_0040EB30;
+static inline unsigned RandomWord() { return D_0040EB30.Next(); }
 static inline int RandomChoice(int low, int high) {
     float minimum = (float)low;
     float maximum = (float)high + 1.0f - 0.0000152587890625f;
@@ -454,7 +456,6 @@ static inline int RandomChoice(int low, int high) {
     float span = maximum - minimum;
     return (int)(minimum + span * random);
 }
-// Unmatched: nine instructions differ in unsigned random-result lifetime and store/branch scheduling.
 extern "C" SelectionEntry* func_0028BD80(SelectionTable* self, int kind) {
     int best = 0x7fffffff;
     SelectionEntry* result = 0;
@@ -469,9 +470,6 @@ extern "C" SelectionEntry* func_0028BD80(SelectionTable* self, int kind) {
     }
     return result;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028BD80);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028BEB8);
 extern "C" void func_0028BEC0(ResourceLookup* self) {
     int i;
