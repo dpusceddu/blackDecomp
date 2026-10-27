@@ -3,6 +3,9 @@
 #include "ps2/matrix.hpp"
 #include "game/ai_action.hpp"
 #include "game/actor/state.hpp"
+extern "C" {
+#include "game/actor_records.h"
+}
 using Ps2Math::VU0::Value;
 
 struct RangeSelection {
@@ -93,6 +96,7 @@ void func_001825B0(Game::Controller*);
 
 struct MovementControl {
     unsigned char active;
+    unsigned char unk_01;
 };
 struct ActorFlagView {
     unsigned char unk_00[0x3B8];
@@ -212,26 +216,33 @@ int func_0018DDD8(void*);
 extern unsigned char* D_0040F4D4;
 }
 
+// UNVERIFIED policy identity; the native stores establish these field types.
 struct ActionPolicyFields {
     int kind;
     float unk_04;
     unsigned char unk_08[0x18];
     float unk_20;
-    unsigned char unk_24[4];
+    float unk_24;
     float unk_28;
     unsigned char unk_2C[4];
     float unk_30;
-    unsigned char unk_34[0x24];
+    float unk_34;
+    unsigned char unk_38[0x20];
     int unk_58;
     float unk_5C, unk_60;
     unsigned char unk_64[4];
-    int unk_68, unk_6C, unk_70;
+    int unk_68;
+    union {
+        int unk_6C;
+        float scalar_6C;
+    };
+    int unk_70;
     unsigned char unk_74[4];
     unsigned char unk_78;
     unsigned char unk_79[3];
     int unk_7C;
     float unk_80;
-    unsigned char unk_84[4];
+    int unk_84;
 };
 struct PolicyBrainFlags {
     unsigned char unk_00[0x104];
@@ -315,6 +326,42 @@ struct QueryState {
 typedef char QueryControllerOffset[(unsigned)&((QueryState*)0)->controller == 0x44 ? 1 : -1];
 typedef char OwnerAnimationOffset[(unsigned)&((OwnerView*)0)->animation == 0x330 ? 1 : -1];
 typedef char OwnerFlagOffset[(unsigned)&((OwnerView*)0)->unk_3A9 == 0x3A9 ? 1 : -1];
+
+// UNVERIFIED action identity; only accessed members are represented.
+struct CategoryPolicyAction {
+    Game::ActionBase base;
+    void* query;
+    Game::ActionTimer first, second;
+    int category;
+    unsigned char active, unk_19, unk_1A;
+};
+
+static inline Recovered_ActorRecords* RecordsFor(Game::Brain* brain) {
+    return (Recovered_ActorRecords*)((unsigned char*)brain + 0x150);
+}
+static inline QueryState* QueryFor(Game::Brain* brain) { return (QueryState*)((unsigned char*)brain + 0x650); }
+
+static inline unsigned char RouteGate(Game::Brain* brain) { return ((unsigned char*)brain)[0xD27]; }
+
+struct FollowAction {
+    Game::ActionBase base;
+    Game::Actor* target;
+};
+
+extern "C" {
+int func_00188F10(Recovered_ActorRecords*);
+int func_0018AB08(Recovered_ActorRecords*);
+Game::PositionArg func_00189048(Recovered_ActorRecords*);
+int func_0017E428(QueryState*, Game::PositionArg);
+void func_0017DB98(QueryState*, Game::PositionArg);
+unsigned char func_00188350(MovementControl*);
+int func_001829E8(Game::Controller*);
+float func_00189310(Recovered_ActorRecords*);
+void func_00193990(Game::Action*, unsigned char);
+void func_00193A60(Game::Action*, int, float);
+int func_00184238(void*, int);
+int func_00193AF8(Game::Action*);
+}
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
@@ -656,8 +703,42 @@ void func_00195A00(TimedFlagAction* self, const TimedFlagEvent* event) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195AA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195BC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001962F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196428);
+extern "C" {
+void func_001962F0(Game::Action* self) {
+    if (!func_00188F10(RecordsFor(self->brain)) || !func_0018AB08(RecordsFor(self->brain)) ||
+        func_00188350(Movement(self->brain))) {
+        func_00193990(self, 0);
+        return;
+    }
+    if (Movement(self->brain)->unk_01 || func_001829E8(&self->brain->controller)) {
+        func_00193990(self, 1);
+    } else {
+        Game::PositionArg point = func_00189048(RecordsFor(self->brain));
+        func_0017DB98(QueryFor(self->brain), point);
+    }
+}
+}
+
+extern "C" {
+void func_00196428(Game::Action* self) {
+    if (!func_00188F10(RecordsFor(self->brain))) {
+        func_00193990(self, 0);
+        return;
+    }
+    Game::PositionArg point = func_00189048(RecordsFor(self->brain));
+    func_0017E428(QueryFor(self->brain), point);
+    if (!RouteGate(self->brain) && func_00189310(RecordsFor(self->brain)) > 3.0f) {
+        func_00193990(self, 0);
+        return;
+    }
+    if (func_00188350(Movement(self->brain))) {
+        func_00193990(self, 0);
+        return;
+    }
+    if (Movement(self->brain)->unk_01) func_00193990(self, 1);
+}
+}
+
 extern "C" {
 void func_001964E8(Game::Action* self, const void* event) {
     func_00193980(self, event);
@@ -669,10 +750,38 @@ void func_001964E8(Game::Action* self, const void* event) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196578);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196648);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196758);
+extern "C" {
+void func_00196758(Game::Action* self, unsigned int kind, int result) {
+    if (kind == 10 || kind == 13) {
+        if (result) {
+            if (func_00188F10(RecordsFor(self->brain))) {
+                Game::PositionArg point = func_00189048(RecordsFor(self->brain));
+                func_0017E428(QueryFor(self->brain), point);
+            }
+            func_00193A60(self, 0, 1.5f);
+            ((RequestFlagView*)self->brain->movement)->unk_30 = 1;
+        } else
+            func_00193990(self, 0);
+    }
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001967F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196958);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001969E8);
+extern "C" {
+void func_001969E8(FollowAction* self) {
+    if (func_00188F10(RecordsFor(self->base.brain))) {
+        Game::PositionArg point = func_00189048(RecordsFor(self->base.brain));
+        func_0017DB98(QueryFor(self->base.brain), point);
+        if (func_001891C0(RecordsFor(self->base.brain))) {
+            func_00193990((Game::Action*)self, 1);
+            return;
+        }
+    }
+    if (self->target) func_0017DB98(QueryFor(self->base.brain), Game::Load(self->target->position));
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00196E58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197040);
 extern "C" {
@@ -752,7 +861,43 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019B868);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019BE70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019C100);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019C210);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019C968);
+extern "C" {
+int func_0019C968(CategoryPolicyAction* self, const void* event) {
+    Game::Action* action = (Game::Action*)self;
+    func_00193980(action, event);
+    func_00193B98(action)->unk_84 = 0;
+    func_00193B98(action)->unk_34 = 100.0f;
+    func_00193B98(action)->unk_24 = -25.0f;
+    func_00193B98(action)->unk_28 = 0.0f;
+    func_00193B98(action)->unk_30 = 0.0f;
+    func_00193B98(action)->unk_20 = 2.0f;
+    func_00193B98(action)->unk_68 = 0;
+    func_00193B98(action)->unk_5C = 0.0f;
+    func_00193B98(action)->unk_58 = 0;
+    func_00193B98(action)->unk_70 = 0;
+    func_00193B98(action)->scalar_6C = 5.0f;
+    func_00193B98(action)->unk_60 = 2.0f;
+    func_00193B98(action)->kind = 1;
+    ((PolicyBrainFlags*)action->brain)->unk_104 = 0;
+    ((PolicyBrainFlags*)action->brain)->unk_110 = 1;
+    func_00173690(&self->first);
+    func_00173690(&self->second);
+    signed char index = *(signed char*)((ActorParts::Owner*)action->brain->actor)->Action();
+    int category;
+    if (index == -1)
+        category = 0;
+    else
+        category = D_00414D54[index];
+    int result = 1;
+    self->category = category;
+    self->active = result;
+    self->query = 0;
+    self->unk_19 = 0;
+    self->unk_1A = 0;
+    return result;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CAC0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CC80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CD90);
