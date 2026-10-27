@@ -764,7 +764,7 @@ splits:
   - {src: src/game/ai/tu_17bbe0.c, range: [0x17bbe0, 0x17bbe8]}
   - {src: src/game/ai/tu_17bbe8.c, range: [0x17bbe8, 0x17bc18], assembler: sn-min6}
   - {src: src/game/ai/tu_17bc18.c, range: [0x17bc18, 0x17bdf0]}
-  - {src: src/game/ai/vu0_matrix.cpp, range: [0x17bdf0, 0x17c908], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
+  - {src: src/game/ai/vu0_matrix.cpp, range: [0x17bdf0, 0x17c908], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16], assembler: sn-min6, note: "Native reset loops at 0x187e38, 0x188bb0 and 0x18ada0 span six words; the stock assembler adds a seventh word."}
   - {src: src/game/ai/tu_17c908.c, range: [0x17c908, 0x17e5a8], note: flags or language differ}
   - {src: src/game/ai/tu_17c908_17e5a8.c, range: [0x17e5a8, 0x17e710], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/ai/tu_17c908_17e710.c, range: [0x17e710, 0x17ea70]}
