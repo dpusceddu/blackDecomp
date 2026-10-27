@@ -1,15 +1,31 @@
 #!/usr/bin/env python3
-"""Compile a hand-written or templated C source for one function and score it against the original.
+"""Compile a hand-written C/C++ source with its owning file's recipe and score it against the original.
 
-Usage: trysrc.py ADDR SOURCE.c [--flags "-O2 -G0 -snas"] [--quiet]
-The function in SOURCE must be named like the image's symbol (func_XXXXXXXX). Tries the pipeline's flag variants,
-prints the best score and the instruction diff (same format as `autodecomp.py show`). Exit status 0 when exact.
+Usage: trysrc.py ADDR SOURCE.c|cpp [--flags "-O2 -G0 -snas"] [--variants] [--quiet]
+The function in SOURCE must be named like the image's symbol (func_XXXXXXXX). Uses the owning file's compiler,
+flags and assembler by default; --flags replaces its flags, --variants explores the pipeline's flag sets.
+Infers C++ from the candidate or owner unless -x explicitly selects a language. Exit status 0 when exact.
 """
-import argparse, difflib, sys
+import argparse, difflib, shlex, sys
 from pathlib import Path
 
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 import preflight
+from splits import load_splits, group_splits
+
+
+def source_recipe(addr, source, flags=None, variants=False):
+    """(flags or None for pipeline variants, language) for a scratch candidate."""
+    owner = next((g[0] for g in group_splits(load_splits()) if any(s.start <= addr < s.end for s in g)), None)
+    if owner is None:
+        raise SystemExit('no source file owns 0x%x' % addr)
+    language = 'c++' if Path(source).suffix in ('.cpp', '.cc', '.cxx', '.C') or Path(owner.src).suffix == '.cpp' else 'c'
+    if variants:
+        return None, language
+    selected = list(flags) if flags is not None else owner.compile_flags()
+    if not any(f.startswith('--cc=') for f in selected):
+        selected.insert(0, '--cc=' + owner.compiler)
+    return selected, language
 
 
 def main():
@@ -17,14 +33,18 @@ def main():
     ap.add_argument('addr')
     ap.add_argument('source')
     ap.add_argument('--flags', help='only this flag set')
+    ap.add_argument('--variants', action='store_true', help="try the pipeline's flag variants instead of the owner's recipe")
     ap.add_argument('--quiet', action='store_true')
     a = ap.parse_args()
+    if a.flags is not None and a.variants:
+        ap.error('--flags and --variants are mutually exclusive')
     preflight.require()
     import autodecomp as A
     import rabbitizer
     f = next(x for x in A.load_inventory() if x['addr'] == int(a.addr, 16))
     src = Path(a.source).read_text()
-    d, flags, toks, note = A.try_source(f, src, a.flags.split() if a.flags else None)
+    flags, language = source_recipe(f['addr'], a.source, shlex.split(a.flags) if a.flags is not None else None, a.variants)
+    d, flags, toks, note = A.try_source(f, src, flags, language=language)
     if d is None:
         print('compile failed:', note)
         sys.exit(2)

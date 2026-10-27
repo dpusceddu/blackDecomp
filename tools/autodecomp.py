@@ -896,7 +896,8 @@ def worker_compile(jobs, tag='auto'):
     environment()   # fail before dispatch on an unsupported platform or missing toolchain
     def compile_one(job):
         key, src, flags, h = job
-        source = cache / (h+'.c')
+        language = next((flags[i+1] for i, f in enumerate(flags[:-1]) if f == '-x'), None)
+        source = cache / (h + ('.cpp' if language == 'c++' else '.c'))
         obj = cache / (h+'.o')
         source.write_text(src)
         cc, flags = split_cc(flags)
@@ -1576,10 +1577,12 @@ def cmd_setup(a):
     print('permuter at', PERMUTER_COMMIT, '; m2c:', M2C, M2C.exists())
 
 
-def try_source(f, src, flags=None):
+def try_source(f, src, flags=None, language=None):
     """Compile `src` (a source for function record `f`) with the pipeline's flag variants. Returns (differing, flags, tokens, note)
     of the best variant, or (None, None, None, message) when nothing compiles."""
-    sets = [flags] if flags else variants_for(f) + [x for x in extra_sets(f) if x not in variants_for(f)]
+    sets = [flags] if flags is not None else variants_for(f) + [x for x in extra_sets(f) if x not in variants_for(f)]
+    if language:
+        sets = [list(fl) if '-x' in fl else list(fl) + ['-x', language] for fl in sets]
     outs = worker_compile([((f['name'], i), src, fl) for i, fl in enumerate(sets)])
     orig = OrigImage()
     target = Target(f, orig)
