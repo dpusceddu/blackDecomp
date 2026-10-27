@@ -7,7 +7,7 @@ extern void func_0018BFE8(void*, s32, s128, s32);
  * UNVERIFIED; only the accessed scalar fields are modeled here. */
 /* UNVERIFIED: cache layout is assembly-derived; its consumers remain drafts. */
 typedef struct {
-    f32 point[4]; /* UNVERIFIED until a vector consumer is source-exact. */
+    s128 point; /* Native quadword alignment also fixes the sample-loop induction base. */
     f32 timestamp; /* UNVERIFIED: currently accessed only by drafts. */
     s32 id;
     s32 value;
@@ -160,8 +160,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185A70);
 #endif
 
 
-#ifdef NON_MATCHING
-// Unmatched: induction-address placement changes when neighboring loop bodies remain assembly.
 s32 func_00185B50(Recovered_MovementHistory* self, s32 id) {
     s32 i;
     for (i = 0; i < 5; ++i) {
@@ -169,20 +167,12 @@ s32 func_00185B50(Recovered_MovementHistory* self, s32 id) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185B50);
-#endif
-#ifdef NON_MATCHING
-// Unmatched: slot-address lifetime and native six-word loop padding differ.
 void func_00185B80(Recovered_MovementHistory* self, s32 id) {
     s32 i;
     for (i = 0; i < 5; ++i) {
         if (self->samples[i].id == id) self->samples[i].id = -1;
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_1854b8", func_00185B80);
-#endif
 #ifdef NON_MATCHING
 // Unmatched: loop peeling and cursor/selection lifetimes differ.
 s32 func_00185BA8(Recovered_MovementHistory* self) {
