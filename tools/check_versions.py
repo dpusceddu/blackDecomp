@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Rebuild every supported version and print OK or MISMATCH for each; run before a release or after changes to shared build tools.
+"""Rebuild every supported version and print OK or MISMATCH for each; run for releases or shared binary-construction changes.
 
 Usage: check_versions.py [GAME_ID ...]     default: all versions of config/versions.json, USA first
 For each version it runs `configure.py --version GAME_ID` and `ninja`, and prints one line per version:

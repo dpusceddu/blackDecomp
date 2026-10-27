@@ -63,7 +63,7 @@ are plainly named headers there, the others are defined in the one source file t
 The progress numbers are in the table of the [README](../README.md#progress), written by `ninja badges` (what a function is
 there, and how the image measure differs). Everything counted rebuilds byte-identical. Routine work checks USA only; the
 other four retail images (Europe, Europe/Australia, Korea, Japan) are checked with `tools/check_versions.py` before releases and
-after changes to shared build tools. Facts about the sources, written by `ninja badges`:
+after changes to shared binary construction (see the impact rule in CONTRIBUTING.md). Facts about the sources, written by `ninja badges`:
 
 <!-- facts:begin (tools/badges.py) -->
 

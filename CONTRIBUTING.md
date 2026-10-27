@@ -8,8 +8,12 @@ build with the [README](README.md#get-started). Terms are in the [glossary](docs
 
 - **Evidence.** A function is `exact` (compiled from source, and the whole image stays byte-identical) or a `draft` (a
   `NON_MATCHING` block). Never describe a function as more than its level, and never demote an exact function to gain another.
-- **The build stays identical.** Every commit leaves `ninja` printing `OK` for USA retail (`SLUS_213.76`). After changing
-  shared build tools, the linker or splitting code, also run `python3 tools/check_versions.py` (all five versions).
+- **Validate according to impact.** Changes to recovered source, compiler recipes or committed build inputs must leave
+  `ninja` printing `OK` for USA retail (`SLUS_213.76`). Run `python3 tools/check_versions.py` (all five versions) when a
+  change affects binary construction shared by the regional builds, such as binary splitting, section layout, assembly
+  normalization or linking. Helper-only changes (pickers, scratch compilation, configuration writers), docs and tests do
+  not need image rebuilds when they leave committed build inputs and the production build path unchanged; use focused
+  regression tests and relevant tool checks instead. A file's location under `tools/build/` alone does not require rebuilds.
 - **No shortcuts.** No filler, padding, byte patches or hand-written assembly to make something match. A per-file compiler
   flag or assembler in `config/SLUS_213.76/splits.yaml` needs a concrete reason in the native code, written in a `note:` on
   the entry; reject one that only makes a single function match by coincidence.
@@ -176,6 +180,9 @@ Always welcome, as long as `ninja` prints `OK`:
   path, including the `src:` entries in `splits.yaml` (`src/game/README.md` lists the directories).
 
 ## Checks and pull requests
+
+Choose checks according to the impact rule above; the image and progress commands apply to source and build-input changes.
+Run the relevant test suites for tool and build behavior changes.
 
 ```sh
 ninja                                           # OK for SLUS_213.76

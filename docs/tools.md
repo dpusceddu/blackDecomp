@@ -34,7 +34,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/container.py` | Run commands in the Linux x86-64 container with linked-worktree Git paths accessible. |
 | `tools/toolchain.py` | Local build toolchain: download, verify and unpack the pinned compilers, assemblers and wibo. |
 | `tools/compile.py` | Compile one source with a pinned local compiler (Linux x86-64). |
-| `tools/check_versions.py` | Rebuild every supported version and print OK or MISMATCH for each; run before a release or after changes to shared build tools. |
+| `tools/check_versions.py` | Rebuild every supported version and print OK or MISMATCH for each; run for releases or shared binary-construction changes. |
 | `tools/check_elf.py` | Compare a rebuilt executable with the target hash in config/<GAME_ID>/checksums.sha256. Build check, run by `ninja`. |
 | `tools/diffelf.py` | Compare two ELF files section by section (a debugging aid for the identical rebuild). Convenience script; binutils `readelf` and `objdump` work too. |
 | `tools/objdump.py` | Print the sections, symbols and relocations of a relocatable ELF object (reads the file only). Convenience script; binutils `mipsel-linux-gnu-objdump` and `readelf` work too. |
