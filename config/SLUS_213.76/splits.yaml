@@ -257,7 +257,8 @@ splits:
   - {src: src/game/unsorted/tu_12f058.c, range: [0x12f058, 0x12f060]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f060, 0x12f4e8]}
   - {src: src/game/unsorted/tu_12f4e8.c, range: [0x12f4e8, 0x12f4f0]}
-  - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f4f0, 0x12fc78]}
+  - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f4f0, 0x12f740]}
+  - {src: src/game/camera/table_queries.c, range: [0x12f740, 0x12fc78], assembler: sn-min6, note: "Native 0x12f8c0 shares its failure return through a short backward branch with one padding NOP; the stock assembler inserts two. The table accessors keep the default compiler flags."}
   - {src: src/game/unsorted/tu_12fc78.c, range: [0x12fc78, 0x12fcc0]}
   - {src: src/game/unsorted/tu_12fcc0.c, range: [0x12fcc0, 0x12fe30], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
   - {src: src/game/unsorted/tu_12fcc0_12fe30.c, range: [0x12fe30, 0x130640]}
