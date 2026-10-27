@@ -1317,7 +1317,8 @@ splits:
   - {src: src/game/unsorted/tu_1c22a0_1c2990.c, range: [0x1c2990, 0x1c29a0], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c22a0_1c29a0.c, range: [0x1c29a0, 0x1c2a18], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c22a0_1c2a18.c, range: [0x1c2a18, 0x1c2a48], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/unsorted/tu_1c22a0_1c2a48.c, range: [0x1c2a48, 0x1c2a68], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1c22a0_1c2a48.c, range: [0x1c2a48, 0x1c2a68], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31],
+     note: "Native VU0 arithmetic at 0x1c2eb0, 0x1c3020 and 0x1c31f8 uses allocatable j operands in the recovered helpers."}
   - {src: src/game/unsorted/tu_1c22a0_1c2a68.cpp, range: [0x1c2a68, 0x1c2a98], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_1c22a0_1c2a98.cpp, range: [0x1c2a98, 0x1c2ab0], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_1c22a0_1c2a48.c, range: [0x1c2ab0, 0x1c3278]}
