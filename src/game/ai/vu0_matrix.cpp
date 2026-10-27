@@ -2,15 +2,62 @@
 
 #include "ps2/matrix.hpp"
 using Ps2Math::VU0::Value;
+
+// UNVERIFIED class identities; only the accessed offsets are represented.
+struct InitialState {
+    int unk_00;
+    int unk_04;
+    int unk_08;
+    int unk_0C;
+    int unk_10;
+};
+struct ByteState {
+    void* unk_00;
+    unsigned char unk_04;
+    signed char unk_05;
+    signed char unk_06;
+};
+struct VectorState {
+    void* unk_00;
+    int unk_04, unk_08, unk_0C, unk_10;
+    unsigned char unk_14[12];
+    Game::Position4 unk_20;
+    int unk_30;
+};
+#define LOCAL_OFFSET(T, member) ((unsigned)(&((T*)0)->member))
+typedef char CursorIndexOffset[LOCAL_OFFSET(ByteState, unk_05) == 5 ? 1 : -1];
+typedef char VectorStorageOffset[LOCAL_OFFSET(VectorState, unk_20) == 0x20 ? 1 : -1];
+typedef char VectorTailOffset[LOCAL_OFFSET(VectorState, unk_30) == 0x30 ? 1 : -1];
+#undef LOCAL_OFFSET
+static inline Value SubtractY(Value a, Value b) {
+    Value difference;
+    asm("vsuby.y outputv, av, bvy" : "=j outputv"(difference) : "j av"(a), "j bv"(b));
+    return difference;
+}
+static inline float ComponentY(Value value) {
+    volatile Game::Position4 storage;
+    *(volatile Value*)&storage = value;
+    return storage.y;
+}
+static inline float ComponentZ(Value value) {
+    volatile Game::Position4 storage;
+    *(volatile Value*)&storage = value;
+    return storage.z;
+}
+
+extern "C" {
+signed char func_00183748(void*, signed char, unsigned char);
+void* func_0013D400(void*);
+}
 extern "C" {
 extern Ps2Math::VU0::Matrix4 D_00415830;
 extern char D_00415810;
-void func_0017C828(Value, const void *);
+int func_0017C828(Value, const Game::Position4*);
 
 void func_0017BDF0(Value point)
 {
     Value transformed=Ps2Math::VU0::TransformPoint(D_00415830.basis,point);
-    func_0017C828(transformed,&D_00415810);
+    func_0017C828(transformed,(const Game::Position4*)&D_00415810);
 }
 }
 
@@ -31,19 +78,95 @@ Game::Vec func_001A71F8(Ps2Math::DirectionSource *source)
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017C828);
+extern "C" {
+int func_0017C828(Value point, const Game::Position4* bounds) {
+    int inside = 0;
+    Value lower = Game::Load(bounds[1]);
+    float x = Ps2Math::VU0::ReadXWord(point);
+    if (Ps2Math::VU0::ReadXWord(lower) < x) {
+        Value upper = Game::Load(bounds[0]);
+        if (x < Ps2Math::VU0::ReadXWord(upper) && ComponentY(point) > 0.0f &&
+            ComponentY(point) < ComponentY(SubtractY(upper, lower)) && ComponentZ(lower) < ComponentZ(point) &&
+            ComponentZ(point) < ComponentZ(upper))
+            inside = 1;
+    }
+    return inside;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00180090);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001800B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001803E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00180438);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00181F28);
+extern "C" {
+int func_00181F28(InitialState* self) {
+    self->unk_04 = 42;
+    self->unk_08 = 0;
+    self->unk_0C = 0;
+    self->unk_10 = 0;
+    return 1;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00182078);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00183080);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001830A0);
+extern "C" {
+int func_00183080(ByteState* self) {
+    int success = 1;
+    self->unk_00 = 0;
+    self->unk_04 = success;
+    self->unk_05 = -success;
+    self->unk_06 = -success;
+    return success;
+}
+}
+
+extern "C" {
+int func_001830A0(ByteState* self) {
+    self->unk_00 = 0;
+    self->unk_04 = 1;
+    self->unk_05 = 0;
+    self->unk_06 = 0;
+    return 1;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00183110);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00183160);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001831E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00183238);
+extern "C" {
+int func_00183160(ByteState* self) {
+    self->unk_06 = self->unk_05;
+    signed char next = func_00183748(self->unk_00, self->unk_05, self->unk_04);
+    if (self->unk_05 < next)
+        self->unk_04 = 1;
+    else if (next < self->unk_05)
+        self->unk_04 = 0;
+    else
+        return 0;
+    self->unk_05 = next;
+    return 1;
+}
+}
+
+extern "C" {
+int func_001831E0(VectorState* self) {
+    self->unk_10 = 0;
+    Game::Store(self->unk_20, Game::Load(D_004432A0));
+    func_0013D400(self->unk_00);
+    self->unk_04 = -1;
+    self->unk_08 = -1;
+    self->unk_0C = self->unk_30 = 0;
+    return 1;
+}
+}
+
+extern "C" {
+void func_00183238(VectorState* self) {
+    self->unk_10 = 0;
+    Game::Store(self->unk_20, Game::Load(D_004432A0));
+    self->unk_08 = -1;
+    self->unk_30 = 0;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00185D10);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187D78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187E08);
