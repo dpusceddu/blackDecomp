@@ -1939,9 +1939,9 @@ splits:
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x283648, 0x284688], note: flags or language differ}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x284688, 0x2848a0]}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x2848a0, 0x2848a8]}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x2848a8, 0x284918]}
+  - {src: src/game/audio/audio_provider_vectors.cpp, range: [0x2848a8, 0x284918], flags: [-O2, -G0, -snas, -fno-schedule-insns], note: Native XYZ argument-spill copies keep alternating scalar loads and stores before the voice load; the first scheduler hoists that load and changes register allocation in both setters; original compiler flags remain unverified}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x284918, 0x284920]}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x284920, 0x284990]}
+  - {src: src/game/audio/audio_provider_vectors.cpp, range: [0x284920, 0x284990]}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x284990, 0x2849c0]}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x2849c0, 0x284a60]}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x284a60, 0x284ae8]}

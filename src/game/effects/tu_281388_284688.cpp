@@ -1,6 +1,122 @@
 #include "include_asm.h"
 #include "game/graphics/audio_provider.hpp"
 
+extern "C" void func_00287600(void*);
+extern "C" void func_00287618(void*);
+// Partial serialized-object view; only the offset words below are confirmed.
+struct RelocatableEffect {
+    unsigned unknown00[2];
+    unsigned field08, field0c, field10, field14, unknown18[2];
+    unsigned field20, field24, field28, field2c, field30, field34, field38, field3c, field40, field44, field48, field4c,
+        field50, field54, field58, field5c, field60, field64, field68;
+};
+
+struct RelocatableRecord {
+    unsigned first, second;
+};
+struct RelocatableTable {
+    unsigned unknown00[2];
+    int count;
+    RelocatableRecord** records;
+};
+extern "C" void func_00272730(void*);
+extern "C" void func_00286CA8(void*);
+
+// Partial parameter, graph and attachment access views; original class identities are UNVERIFIED.
+struct EffectParameter {
+    unsigned offset;
+    char unknown04[16];
+};
+struct EffectDefinition;
+struct EffectInstance {
+    unsigned index;
+    EffectDefinition* definition;
+};
+struct EffectDefinition {
+    char unknown00[24];
+    EffectParameter* parameters;
+    char unknown1c[28];
+    unsigned *sourceIndices, *targetIndices;
+    char unknown40[28];
+    EffectInstance embedded;
+    EffectParameter sourceDefault, targetDefault;
+};
+struct EffectGraph {
+    unsigned unknown00;
+    unsigned char* values;
+    unsigned long* rows;
+    char unknown0c[0x1698];
+    EffectInstance* history[32];
+    unsigned unknown1724, writeIndex;
+};
+static inline EffectParameter* Source(EffectInstance* item) {
+    if (item == &item->definition->embedded) return &item->definition->sourceDefault;
+    return &item->definition->parameters[item->definition->sourceIndices[item->index]];
+}
+static inline EffectParameter* Target(EffectInstance* item) {
+    if (item == &item->definition->embedded) return &item->definition->targetDefault;
+    return &item->definition->parameters[item->definition->targetIndices[item->index]];
+}
+extern "C" int func_0028A368(EffectGraph*, unsigned char, unsigned char, unsigned);
+
+static inline unsigned long Collect(EffectGraph* self, unsigned long mask) {
+    unsigned long result = 0;
+    unsigned char i = 0;
+    unsigned long bit = 1;
+    for (; i < 63; i++, bit <<= 1) {
+        if (mask & bit) result |= self->rows[i];
+    }
+    return result;
+}
+
+struct EffectLink {
+    EffectLink *next, *previous;
+};
+struct EffectOwner {
+    char unknown00[0x90];
+    EffectLink links;
+};
+struct EffectAttachment {
+    unsigned unknown00;
+    EffectOwner* owner;
+    EffectLink link;
+};
+extern "C" void func_002AA288(EffectOwner*);
+
+struct RelocatableResourceE0 {
+    char unknown00[0xe0];
+    unsigned offset;
+};
+
+// Partial resource record views; unknown bytes and original class identities are UNVERIFIED.
+struct ResourceEntryProperty {
+    unsigned unknown00, offset, unknown08[2];
+};
+struct ResourceEntry {
+    char unknown00[0x30];
+    ResourceEntryProperty property;
+};
+struct ResourceEntries {
+    unsigned count;
+    char unknown04[12];
+    ResourceEntry entries[1];
+};
+struct ResourceProperties {
+    char unknown00[0x38];
+    unsigned offset;
+    inline void Relocate(void* base) {
+        if (offset) offset += (unsigned)base;
+    }
+};
+struct RelocatableResource {
+    unsigned field00, field04, field08;
+    char unknown0c[24];
+    ResourceEntries* entries;
+    char unknown28[12];
+    ResourceProperties properties;
+    unsigned links[7];
+};
+
 #ifdef NON_MATCHING
 using namespace Graphics;
 using namespace Game;
@@ -47,18 +163,6 @@ float AudioProvider::Transition()
     }
     }return 1.0f;
 }
-// Unmatched: 23 differences: vector argument spill and local copy lifetime.
-void AudioProvider::SetPosition(Vec v)
-{
-    Position4 p;Store(p,v);Point3 value;value.x=p.x;value.y=p.y;value.z=p.z;voice->position=value;
-    if(voice->channel)func_00310590(voice->channel,0,1,&value);
-}
-// Unmatched: 23 differences: vector argument spill and local copy lifetime.
-void AudioProvider::SetVelocity(Vec v)
-{
-    Position4 p;Store(p,v);Point3 value;value.x=p.x;value.y=p.y;value.z=p.z;voice->velocity=value;
-    if(voice->channel)func_00310590(voice->channel,1,1,&value);
-}
 // Unmatched: 9 differences: floating register allocation and scheduling.
 void AudioProvider::SetGain(float value)
 {
@@ -86,8 +190,6 @@ bool AudioProvider::IsStopped()
 }
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00284688);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002848A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00284920);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002849C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00284A10);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00284AE8);
@@ -110,34 +212,152 @@ void func_00284B28(Graphics::AudioProvider *self, int value) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00286CA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00286DB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00287D08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00287D70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00287DF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00287E30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00287E88);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00287EC8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00288020);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00288078);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002880C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00288108);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00288150);
+extern "C" void func_00286DB8(RelocatableTable* self) {
+    func_00272730(self);
+    for (int i = 0; i < self->count; i++) {
+        RelocatableRecord* record = self->records[i];
+        record->first += (unsigned)self;
+        record->second += (unsigned)self;
+        func_00286CA8((void*)record->second);
+    }
+}
+extern "C" void func_00287D08(RelocatableEffect* self) {
+    func_00287600(self);
+    if (self->field08) self->field08 += (unsigned)self;
+    if (self->field0c) self->field0c += (unsigned)self;
+    if (self->field10) self->field10 += (unsigned)self;
+    if (self->field14) self->field14 += (unsigned)self;
+}
+extern "C" void func_00287D70(RelocatableEffect* self) {
+    func_00287618(self);
+    if (self->field20) self->field20 += (unsigned)self;
+    if (self->field24) self->field24 += (unsigned)self;
+    if (self->field28) self->field28 += (unsigned)self;
+    if (self->field2c) self->field2c += (unsigned)self;
+    if (self->field30) self->field30 += (unsigned)self;
+    if (self->field34) self->field34 += (unsigned)self;
+}
+extern "C" void func_00287DF8(RelocatableEffect* self) {
+    func_00287618(self);
+    if (self->field20) self->field20 += (unsigned)self;
+}
+extern "C" void func_00287E30(RelocatableEffect* self) {
+    func_00287618(self);
+    if (self->field20) self->field20 += (unsigned)self;
+}
+extern "C" void func_00287E88(RelocatableEffect* self) {
+    if (self->field30) self->field30 += (unsigned)self;
+}
+extern "C" void func_00287EC8(RelocatableEffect* self) {
+    func_00287618(self);
+    if (self->field20) self->field20 += (unsigned)self;
+    if (self->field24) self->field24 += (unsigned)self;
+    if (self->field28) self->field28 += (unsigned)self;
+    if (self->field2c) self->field2c += (unsigned)self;
+    if (self->field30) self->field30 += (unsigned)self;
+    if (self->field34) self->field34 += (unsigned)self;
+    if (self->field38) self->field38 += (unsigned)self;
+    if (self->field3c) self->field3c += (unsigned)self;
+    if (self->field40) self->field40 += (unsigned)self;
+    if (self->field44) self->field44 += (unsigned)self;
+    if (self->field48) self->field48 += (unsigned)self;
+    if (self->field4c) self->field4c += (unsigned)self;
+    if (self->field50) self->field50 += (unsigned)self;
+    if (self->field54) self->field54 += (unsigned)self;
+    if (self->field58) self->field58 += (unsigned)self;
+    if (self->field5c) self->field5c += (unsigned)self;
+    if (self->field60) self->field60 += (unsigned)self;
+    if (self->field64) self->field64 += (unsigned)self;
+    if (self->field68) self->field68 += (unsigned)self;
+}
+extern "C" void func_00288020(RelocatableEffect* self) {
+    func_00287618(self);
+    if (self->field20) self->field20 += (unsigned)self;
+    if (self->field24) self->field24 += (unsigned)self;
+    if (self->field28) self->field28 += (unsigned)self;
+}
+extern "C" void func_00288078(RelocatableEffect* self) {
+    func_00287618(self);
+    if (self->field20) self->field20 += (unsigned)self;
+    if (self->field24) self->field24 += (unsigned)self;
+}
+extern "C" void func_002880C0(RelocatableEffect* self) {
+    func_00287618(self);
+    if (self->field20) self->field20 += (unsigned)self;
+    if (self->field24) self->field24 += (unsigned)self;
+}
+extern "C" void func_00288108(RelocatableEffect* self) {
+    func_00287618(self);
+    if (self->field20) self->field20 += (unsigned)self;
+    if (self->field24) self->field24 += (unsigned)self;
+}
+extern "C" void func_00288150(RelocatableEffect* self) {
+    func_00287618(self);
+    if (self->field20) self->field20 += (unsigned)self;
+    if (self->field24) self->field24 += (unsigned)self;
+    if (self->field28) self->field28 += (unsigned)self;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002881A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00288470);
+extern "C" void func_00288470(unsigned* self) {
+    if (self[1]) self[1] += (unsigned)self;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00289DD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00289EC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00289F30);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00289F78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028A368);
+extern "C" int func_0028A368(EffectGraph* self, unsigned char start, unsigned char end, unsigned depth) {
+    if (start == end || start == 64) return 1;
+    unsigned long target = (unsigned long)1 << end;
+    unsigned long previous = 0;
+    unsigned long current = Collect(self, self->rows[start]);
+    for (unsigned i = 1; i < depth && previous != current; i++) {
+        if (current & target) return 1;
+        previous = current;
+        current = Collect(self, current);
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028A470);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028A478);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028A4D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028A520);
+extern "C" unsigned char func_0028A478(EffectGraph* self) {
+    for (unsigned char i = 0; i < 63; i++) {
+        if (!((unsigned char)(self->rows[i] >> i) & 1)) {
+            self->rows[i] = (unsigned long)1 << i;
+            return i;
+        }
+    }
+    return 255;
+}
+extern "C" void func_0028A4D8(EffectGraph* self, unsigned char index) {
+    unsigned long mask = ~((unsigned long)1 << index);
+    for (unsigned char i = 0; i < 63; i++) self->rows[i] &= mask;
+}
+extern "C" void func_0028A520(EffectGraph* self) {
+    for (unsigned char i = 0; i < 63; i++) {
+        if (self->rows[i] & ((unsigned long)1 << 63)) func_0028A4D8(self, i);
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028A598);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028A688);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028AFF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028B1F0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028B2A8);
+extern "C" void func_0028B1F0(EffectGraph* self, EffectInstance* item) {
+    EffectParameter* source = Source(item);
+    EffectParameter* target = Target(item);
+    unsigned char from = self->values[source->offset];
+    unsigned char to = self->values[target->offset];
+    self->rows[from] |= (unsigned long)1 << to;
+}
+extern "C" void func_0028B2A8(EffectGraph* self, EffectInstance* item) {
+    EffectParameter* source = Source(item);
+    EffectParameter* target = Target(item);
+    unsigned char from = self->values[source->offset];
+    unsigned char to = self->values[target->offset];
+    if (func_0028A368(self, from, to, 63)) {
+        self->rows[from] |= (unsigned long)1 << 63;
+        self->rows[to] |= (unsigned long)1 << 63;
+        self->writeIndex = (self->writeIndex + 1) & 31;
+        self->history[self->writeIndex] = item;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028B3E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028B3E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028B638);
@@ -145,8 +365,29 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028BEB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028BEC0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028BF90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028C028);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0028EED8);
+extern "C" void func_0028C028(RelocatableResourceE0* self) {
+    if (self->offset) self->offset += (unsigned)self;
+}
+extern "C" void func_0028EED8(RelocatableResource* self) {
+    ResourceProperties* properties = &self->properties;
+    if (self->field00) self->field00 += (unsigned)self;
+    if (self->field04) self->field04 += (unsigned)self;
+    if (self->field08) self->field08 += (unsigned)self;
+    if (self->entries) self->entries = (ResourceEntries*)((unsigned)self->entries + (unsigned)self);
+    properties->Relocate(self);
+    unsigned i;
+    unsigned* link = self->links;
+    for (i = 0; i < 7; i++, link++)
+        if (*link) self->links[i] = *link + (unsigned)self;
+    unsigned count = self->entries->count;
+    char* cursor = (char*)self->entries->entries;
+    for (i = 0; i < count; i++) {
+        cursor += 0x30;
+        ResourceEntryProperty* property = (ResourceEntryProperty*)cursor;
+        property->offset += (unsigned)self;
+        cursor += sizeof(ResourceEntryProperty);
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299038);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002991B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299230);
@@ -187,7 +428,23 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A8688);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A8860);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A8DA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002AF778);
+extern "C" void func_002AF778(EffectAttachment* self, EffectOwner* owner) {
+    if (self->owner) {
+        EffectLink* previous = self->link.previous;
+        EffectLink* next = self->link.next;
+        previous->next = next;
+        next->previous = previous;
+    }
+    self->owner = owner;
+    if (owner) {
+        EffectLink* first = owner->links.next;
+        first->previous = &self->link;
+        self->link.previous = &owner->links;
+        owner->links.next = &self->link;
+        self->link.next = first;
+        func_002AA288(owner);
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C0340);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C03F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C04F8);
