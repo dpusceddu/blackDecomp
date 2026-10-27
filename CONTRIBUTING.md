@@ -21,24 +21,25 @@ build with the [README](README.md#get-started). Terms are in the [glossary](docs
   flag or assembler in `config/SLUS_213.76/splits.yaml` needs a concrete reason in the native code, written in a `note:` on
   the entry; reject one that only makes a single function match by coincidence.
 - **One owner per function.** Every function belongs to exactly one file (`python3 tools/where.py func_XXXXXXXX`). Claim a
-  file before editing it and edit only what you claimed; shared headers (`include/ps2/`, headers other files use) and
-  `splits.yaml` are small, reviewed changes, in commits of their own.
+  file before editing it and edit only what you claimed. Keep shared-header and `splits.yaml` changes small and review
+  their affected consumers; include necessary headers and callers in a coherent change.
 - **Drafts** go only in `#ifdef NON_MATCHING` above the function's `INCLUDE_ASM` line, with a one-line `// Unmatched:` note
   saying what differs; no `#if 0` blocks or other draft macros.
-- **Only real work is committed**: source, drafts, headers, hand-edited configuration, docs and tests. Never commit game
+- **Only real work is committed**: source, drafts, headers, reviewed configuration, docs and tests. Never commit game
   data or anything generated from it (executables, disc contents, `asm/`, `build/`, `data/`, savestates, compilers, build
   output), nor `progress/` or the progress table of the README (`ninja badges` writes them after merging).
-- **Names, prototypes, types and layouts are source**, edited by hand and reviewed like code: `config/SLUS_213.76/symbols.txt`,
+- **Names, prototypes, types and layouts are reviewed source inputs**: `config/SLUS_213.76/symbols.txt`,
   `include/ps2/prototypes.h`, `include/ps2/recovered_types.h`, `include/<library>/`. Names need evidence (see
-  [Naming](#naming)); mark what no matched function confirms `UNVERIFIED`. Nothing may depend on data from outside the
-  repository: what you learn with Ghidra or IDA enters as edits to these files.
+  [Naming](#naming)); mark what no matched function confirms `UNVERIFIED`. Scripts may edit these inputs, but review
+  their diffs; no unreviewed bulk edits or build dependencies on external analysis databases. Findings from Ghidra or IDA
+  enter as edits to these files.
 - **No machine-specific details** in committed text: host names, user names, absolute paths, addresses, credentials. Local
   settings go in `.local/` (ignored).
-- **Style.** Format new C/C++ with `.clang-format`; never reformat existing sources (matching depends on their shape).
+- **Style.** Format new C/C++ with `.clang-format`; avoid unrelated formatting churn and preserve compiler-sensitive structure.
   Source layout: `src/<library>/<name>.c|cpp` (`src/game/<subsystem>/` for game code, link-once copies in
   `src/<library>/inline/`), one file per TU listing every function; headers in `include/<library>/`. Tools are stdlib-first
   Python with a purpose docstring and `--help`. Docs stay short and current; no per-function proof journals.
-- **Commits** are small and logical (one file or one tool change is ideal), with a clear message.
+- **Commits** are small, coherent and reviewable, with a clear message.
 
 ## Picking and claiming work
 
@@ -66,14 +67,14 @@ the others as `INCLUDE_ASM` lines.
 1. `python3 tools/setup.py` prepares metadata, assembly and `objdiff.json` without an image build. Open the repository root
    in the [objdiff](https://github.com/encounter/objdiff) GUI. Saving a TU file rebuilds its object and shows the diff;
    `ninja build/SLUS_213.76/objdiff/base/<unit>.o` does the same from the shell.
-2. Read the [matching handbook](docs/matching-handbook.md) before each TU: types, callee signatures and object lifetimes
-   explain most mismatches. A function's assembly is `asm/SLUS_213.76/nonmatchings/<file>/func_XXXXXXXX.s`.
+2. Inspect types, callee signatures and object lifetimes; the [matching handbook](docs/matching-handbook.md) has
+   diagnostic recipes for common mismatches. A function's assembly is `asm/SLUS_213.76/nonmatchings/<file>/func_XXXXXXXX.s`.
 3. Replace the `INCLUDE_ASM` line with C or C++. `python3 tools/decompile.py func_XXXXXXXX` prints an m2c draft with the
-   project's context (`--write` puts it in place). For the last differing instructions, run
-   [decomp-permuter](docs/pipeline.md#using-decomp-permuter-directly) on the function.
-4. Iterate with object comparisons and commit small batches. Before submitting the final changes for review, run `ninja`
-   for the byte-exact check of the whole image: `OK`, or the file and function that differ, with the size and an instruction
-   diff. Object matches remain candidates until this passes; preserve every previously exact function.
+   project's context (`--write` puts it in place). For near misses, consider
+   [decomp-permuter](docs/pipeline.md#using-decomp-permuter-directly) on the function, with seeds that leave out unrelated
+   `INCLUDE_ASM` bodies.
+4. Iterate with affected-object comparisons and commit small batches. Apply the [validation impact rule](#rules) before
+   review; object matches remain candidates until the required image check passes.
 5. A function that compiles under another name (a C++ method) needs a line in `symbols.txt`
    (`Reset__4Game = 0x1b78d8; // type:func`). Code that needs other flags than the rest of its file gets a file of its own
    (`python3 tools/split_function.py func_XXXXXXXX [--cpp] [--flags "..."]`, see [docs/units.md](docs/units.md)).
@@ -93,88 +94,17 @@ the others as `INCLUDE_ASM` lines.
 
 ## Naming
 
-Placeholders are named after an address (`func_00100258`, `D_0040F0E0`, `unk_10`; see the [glossary](docs/glossary.md)). A better
-name is a normal contribution, but only where the evidence supports it; the build must still print `OK`. The examples below were
-each tried on a scratch copy of the repository and give an identical build. Names are inside the compiler's symbols, so a
-rename that is not just a local variable touches `config/SLUS_213.76/symbols.txt`; keep that file ordered by address.
+Use names supported by evidence. RTTI names are original; aliases and descriptive names are working names, and Xbox names
+are not PS2 facts. Keep address/offset placeholders until a better name is justified. Mark layouts or fields not confirmed
+by matched code `UNVERIFIED`.
 
-### Where names come from
-
-1. **RTTI**: the executable names the classes that have run-time type information (the `Kaim::` classes and a few others) and
-   their base classes. These names are original; use them as they are (`Kaim::CBrain`). `ninja classes` writes the full list
-   with the virtual tables into the ignored `build/classes/`.
-2. **Aliases**: readable names found by analysis (`Name = 0x...; // type:func alias` in `symbols.txt`). They are working names,
-   not original ones, and never change the build.
-3. **Placeholders**: `func_<address>`, `D_<address>` and `unk_<offset>`, plus two generated ones: `UnknownVtable_<address>` for a
-   class known only by its virtual table (no type-info name; the class view lives in `include/game/classes/` under that name) and
-   `Function_<address>` for an unnamed virtual method in a generated class view. They are kept until a better name is justified.
-4. **Descriptive names** we choose for classes and namespaces that have no original name: plain English for what the code does
-   (`Weapons`, `WorldObjects`, `HideAgent`), never prefixed with `Mod`, `Campaign` or `Black`, and namespaces that hold only
-   partial layouts end in `Views`. Names such as `Fragment34FE10` or `KaimAvoidance` are scopes local to one file or group of files, not
-   class names. Do not take a name from the Xbox build as if it were a PS2 fact.
-
-### A readable name for a C function
-
-`func_00367460` is the BIOS call that sets the GS video mode, and `symbols.txt` has it as an alias. To make `SetGsCrt` the real
-name, rename the definition, turn the alias line into a bound-name line (drop `alias`) and update the prototype:
-
-```sh
-sed -i 's/^void func_00367460(void) {/void SetGsCrt(void) {/' src/sony/tu_367450.c
-sed -i 's|^SetGsCrt = 0x367460; // type:func alias|SetGsCrt = 0x367460; // type:func|' config/SLUS_213.76/symbols.txt
-sed -i 's|^extern void func_00367460(void); /\* SetGsCrt \*/|extern void SetGsCrt(void);|' include/ps2/prototypes.h
-ninja        # OK; assembly callers of func_00367460 still link, because the bound name is the address's name
-```
-
-A name used by other source files must be renamed there too (`grep -rn func_00367460 src include`).
-
-### A C++ method
-
-`func_002D5368` is a getter of the hide behaviour in `src/kynapse/hide_agent_2d3c90.cpp`; HideAgent is a class view in
-`include/kynapse/hide_agent.hpp`. Make it a method of the class: declare it in the class, define it with the class name, and bind
-the mangled name to the address.
-
-```cpp
-// include/kynapse/hide_agent.hpp, in struct HideAgent (namespace HideViews):
-const Vec3* CurrentPosition();
-
-// src/kynapse/hide_agent_2d3c90.cpp, in place of  extern "C" const Vec3 *func_002D5368(HideAgent *self) { ... }
-namespace HideViews {
-    const Vec3 *HideAgent::CurrentPosition() {
-        if (found) { if (fresh) return &destination; }
-        return &context->actor->position;
-    }
-}
-```
-
-```
-# config/SLUS_213.76/symbols.txt: GCC 2.95 mangling is  Method__<class path>  with <len><name> for each part,
-# Q<n> for a nested path:  HideViews::HideAgent::CurrentPosition()  ->  CurrentPosition__Q29HideViews9HideAgent
-CurrentPosition__Q29HideViews9HideAgent = 0x2D5368; // type:func
-```
-
-A method of a class in the global namespace is `Method__<len>Class` (`Reset__4Game`), a `const` method has `C` before the class
-(`Head__C10RouteQueue`), parameters follow the class (`i`, `f`, `Pv`, `P<len>Name`). If the binding is wrong, `ninja` reports `func_002D5368: no definition in object`. Inspect the compiled object
-with `python3 tools/objdump.py build/SLUS_213.76/obj/units/<unit>.o` and put its actual mangled name in `symbols.txt`. `python3 tools/where.py func_002D5368` finds the definition afterwards (it also understands
-`Class::Method`).
-
-### A type or struct rename with unk_ fields
-
-A recovered layout is a `Recovered_<Name>` struct with `unk_XX` fields named after the PS2 offset (`unk_118` is the field at
-0x118). When the class is known, drop the prefix and name the fields you understand; leave the others as they are:
-
-```sh
-grep -rn "Recovered_AnimationParameterBank\|unk_118" src include          # every use
-sed -i 's/Recovered_AnimationParameterBank/AnimationParameterBank/g; s/unk_118/activeCount/g' src/animation/tu_350140.c
-ninja        # OK
-```
-
-Renaming changes no bytes in C. For a C++ class or namespace it changes the mangled symbols that contain its name (the length
-prefix too: `Q29HideViews9HideAgent` becomes `Q210SearchView9HideAgent`), so search `symbols.txt` and the `__asm__("...")` labels
-for the old name and rewrite them together with the length. Mark a field `UNVERIFIED` when no matched function uses it.
+Renames must update definitions, callers, prototypes and affected bindings in `config/SLUS_213.76/symbols.txt` (ordered by
+address), including C++ mangled names and assembly labels. The [naming reference](docs/naming.md) covers conventions and
+worked examples. Validate according to the [impact rule](#rules).
 
 ## Cleanup work
 
-Always welcome, as long as `ninja` prints `OK`:
+Welcome under the [validation impact rule](#rules):
 
 - **Readable C++ for automatic drafts.** Many matched game, Kynapse, animation and physics functions are plain C named
   `func_XXXXXXXX`, although those libraries are C++. Turning them into methods of known classes, with real names and types,
@@ -186,9 +116,7 @@ Always welcome, as long as `ninja` prints `OK`:
 
 ## Checks and pull requests
 
-Choose checks according to the impact rule above; the image and progress commands apply to source and build-input changes.
-Run the image check once at the final revision before review, repeating it after fixes if it fails. Run the relevant test
-suites for tool and build behavior changes.
+Choose checks according to the [validation impact rule](#rules). Relevant commands:
 
 ```sh
 ninja                                           # final full-image check: OK for SLUS_213.76
@@ -206,7 +134,7 @@ was produced (by hand, with tools, or by an AI agent).
 ## Reference
 
 - For everyone: [docs/status.md](docs/status.md) (state and open problems), [docs/matching-handbook.md](docs/matching-handbook.md),
-  [docs/units.md](docs/units.md) (TU files and the split list), [docs/glossary.md](docs/glossary.md),
+  [docs/units.md](docs/units.md) (TU files and the split list), [docs/naming.md](docs/naming.md), [docs/glossary.md](docs/glossary.md),
   [docs/tools.md](docs/tools.md) (index of the tools), [docs/setup.md](docs/setup.md), [docs/modding.md](docs/modding.md).
 - For maintainers and build work: [docs/build.md](docs/build.md), [docs/pipeline.md](docs/pipeline.md),
   [docs/tus.md](docs/tus.md), [docs/inputs.md](docs/inputs.md), [docs/progress-reports.md](docs/progress-reports.md),

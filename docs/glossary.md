@@ -59,7 +59,7 @@ what a compiled function is called, so linking depends on it; an *alias* (`... /
 name and never changes the build. [build.md](build.md#symbols-and-progress)
 
 **UnknownVtable_<address>**: the placeholder name of a class that is known only by its virtual table; the class has no
-run-time type information name in the executable. [CONTRIBUTING.md](../CONTRIBUTING.md#where-names-come-from)
+run-time type information name in the executable. [naming.md](naming.md#where-names-come-from)
 
 **RTTI**: the run-time type information of GCC 2.95 in the executable: it names the classes that have it (the Kaim classes and a
 few others), their base classes and their virtual-table slots. [pipeline.md](pipeline.md)

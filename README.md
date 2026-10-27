@@ -58,11 +58,17 @@ git clone https://github.com/dpusceddu/blackDecomp.git && cd blackDecomp
 python3 tools/setup.py --provision  # once: native system packages, venv and pinned toolchain
 ```
 
-Start sessions in the prepared Python environment. Add your executable at `orig/SLUS_213.76/SLUS_213.76`, then run
-`python3 tools/setup.py` without `--provision`; it reuses installed dependencies and prepares that session's metadata.
-During matching, build individual units through objdiff or their Ninja targets. Run the full-image `ninja` check once
-before submitting the final changes for review; it must print `OK  SLUS_213.76`. `python3 tools/setup.py --build` is
-available when an explicit full-image smoke check is wanted.
+Add your executable at `orig/SLUS_213.76/SLUS_213.76`, then start each session with:
+
+```sh
+python3 tools/setup.py
+. .venv/bin/activate
+```
+
+Setup reuses installed dependencies and prepares that session's metadata. Activate the venv again in each fresh shell
+before running further project commands.
+Use the [matching workflow and validation impact rule](CONTRIBUTING.md) for subsequent work.
+`python3 tools/setup.py --build` is available for an explicit full-image setup smoke check.
 
 ## Contribute
 

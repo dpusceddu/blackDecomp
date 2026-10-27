@@ -106,13 +106,13 @@ matching rate. Code completion alone does not establish owned-data completion.
 5. **Data**: only part of the TUs have complete owned-data audits. Native CFI and shared pools still block several otherwise
    complete objects.
 6. **Names and counterparts**: working names (`alias` lines of `config/SLUS_213.76/symbols.txt`), recovered prototypes
-   (`include/ps2/prototypes.h`) and structures (`include/ps2/recovered_types.h`) are committed and edited by hand; no tool needs
-   outside analysis data. An Xbox-to-PS2 counterpart map is an optional input that this repository does not ship.
+   (`include/ps2/prototypes.h`) and structures (`include/ps2/recovered_types.h`) are reviewed source inputs; the build needs no
+   external analysis database. An Xbox-to-PS2 counterpart map is an optional input that this repository does not ship.
 
 ## Next steps
 
-1. Read the [matching handbook](matching-handbook.md) before each TU; reproduce its SN controls when changing a recipe.
-2. Keep protected exact statuses, owned-data audits and the durable offline permuter. Preserve the reviewed near misses.
+1. Use the [matching handbook](matching-handbook.md) to diagnose mismatches; its SN controls provide scoped evidence.
+2. Preserve protected exact statuses, owned-data evidence and reviewed near misses.
 3. Convert automatic drafts into readable C++ (names and types improve) as classes are recovered; keep every function either
    exact or `// Unmatched:`.
 4. Keep documentation current: this file, [history.md](history.md) (what happened), the other files in this directory

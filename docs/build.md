@@ -2,8 +2,8 @@
 
 Use the Linux x86-64 setup in [README](../README.md). `configure.py` prepares the split image and writes an ordinary Ninja
 build. `ninja` compiles or assembles individual objects, links once, packs the retail ELF container and checks its SHA-256.
-During matching, prepare with `python3 tools/setup.py` and rebuild affected objdiff units. The full-image check below is
-the final review gate, repeated after fixes if it fails; intermediate commits do not need image builds.
+Choose checks under the [validation impact rule](../CONTRIBUTING.md#rules). The commands below build an image and
+produce progress reports.
 
 ```sh
 python3 configure.py

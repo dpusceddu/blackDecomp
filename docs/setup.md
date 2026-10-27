@@ -37,7 +37,7 @@ python3 tools/setup.py --provision
 This explicit provisioning mode installs system packages using apt-get on Debian/Ubuntu or dnf on Fedora (sudo when
 needed), prepares `.venv` or the active Python environment, installs the pinned compiler/assembler tools and objdiff-cli,
 and verifies that the native MIPS linker supports `elf32ltsmip`. It does not need game files, prepare session metadata or
-build an image. Configure the harness to activate this Python environment and provide Git/GitHub access for later sessions.
+build an image. Provide Git/GitHub access for later sessions.
 Re-run provisioning when the system prerequisites or pinned Python requirements change.
 
 System prerequisites are Ninja, Git, xz, cpp, Python with venv/pip support, the 32-bit Linux loader, and GNU MIPS binutils
@@ -53,29 +53,32 @@ this executable: its linker has no little-endian MIPS emulation.
 ### Normal agent sessions
 
 Start the agent on the prepared Linux host, with its command and file tools using the same workspace. Add the boot
-executable of your own copy as `orig/SLUS_213.76/SLUS_213.76`. In the prepared Python environment, run:
+executable of your own copy as `orig/SLUS_213.76/SLUS_213.76`, then run:
 
 ```sh
 python3 tools/setup.py
+. .venv/bin/activate
 python3 tools/next.py --pick
 ```
 
-Normal setup never invokes a system package manager or a container runtime. It reuses installed dependencies and prepares
-assembly, the TU map and `objdiff.json` without compiling all objects or linking an image. Existing local worktrees can
-share `.venv`, the pinned toolchain and game inputs with the main checkout; generated build outputs stay local to each
-checkout. Missing system prerequisites produce the one-time provisioning instruction for the user or harness.
+Activate the venv before further project commands, repeating activation in each fresh shell. Setup creates or links
+the worktree's `.venv`; creating a worktree does not activate it automatically.
 
-During matching, build individual comparison objects. Before submitting source or build-input changes for review, run the
-final full-image `ninja` check. `--build` is also available for an explicitly requested setup smoke check; `--no-build`
-remains a compatibility alias for normal preparation. The final image check must print:
+Normal setup never invokes a system package manager or a container runtime. It creates `.local/` for session notes,
+reuses installed dependencies and prepares assembly, the TU map and `objdiff.json` without compiling all objects or linking
+an image. Existing local worktrees can share `.venv`, the pinned toolchain and game inputs with the main checkout;
+generated build outputs stay local to each checkout. Missing system prerequisites produce the one-time provisioning
+instruction for the user or harness.
+
+Follow the [validation impact rule](../CONTRIBUTING.md#rules) during matching. `--build` is available for an explicit setup
+smoke check; `--no-build` remains a compatibility alias for normal preparation. A successful image check prints:
 
 ```
 OK  SLUS_213.76  SLUS_213.76  sha256 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
 ```
 
-or a mismatch report identifying what needs fixing. Other retail versions are selected with
-`python3 configure.py --version GAME_ID`; `python3 tools/check_versions.py` checks all five when required by the impact
-rule in [CONTRIBUTING.md](../CONTRIBUTING.md#rules).
+A mismatch report identifies what needs fixing. Select other retail versions with `python3 configure.py --version GAME_ID`;
+`python3 tools/check_versions.py` checks all five.
 
 ### Other host environments
 

@@ -1,30 +1,24 @@
 # SN 1.36 matching handbook
 
-Read this before each TU. The acceptance test is an identical full image, including owned data; an instruction score is
-only a diagnostic. Use the unit's compiler, flags and assembler. All compiler execution goes through the per-object Ninja rule or
+Use this reference when diagnosing a mismatch. Choose experiments from the observed diff and available time; the recipes
+are evidence from particular controls, not a required sequence. Instruction scores are diagnostic; follow the
+[validation impact rule](../CONTRIBUTING.md#rules). Use the unit's compiler, flags and assembler through its Ninja rule or
 `compile.py` with the pinned toolchain in the Linux environment. Keep experiments and detailed results in ignored `build/`.
 
-## Whole-TU ladder
+## Diagnosing a mismatch
 
-1. Check `build/permuter/` for a better candidate. Note the TU's splits in `config/SLUS_213.76/splits.yaml` before editing. Inventory
-   every real function and its rodata/data/sdata/bss/exception tables from the generated `build/SLUS_213.76/tus.yaml`; uncertain boundaries stay
-   qualified. A code-complete TU is not data-complete until ownership is audited.
-2. Recover behavior, callee arity/return widths, field offsets, hidden results and cleanup edges first. Xbox source gives
-   algorithms and names, not PS2 layout proof. Matching work needs no recorded states.
-3. Compare the first divergent instructions with `tools/trysrc.py`, using the actual bindings for named C++ symbols.
-   Classify the obstruction below. Change one source feature, retain the best candidate, and compare the complete diff.
-   Equal opcode lists can hide wrong offsets or widths; they do not prove a register-only problem.
-4. Follow the relevant recipe through types, source evaluation order, scopes/temporaries, helper visibility, loop/case
-   shape, allocation and scheduling. There is no per-function compile cap. Do not spend a flag sweep repairing a wrong ABI.
-5. Submit every candidate with **1–29 differing instructions**, including status `mismatch`, to the permuter; larger
-   functions go first. Continue another function within the same TU. Distinguish instruction count from weighted score.
-   When the remaining instructions come from an inline helper, randomize that genuine helper while preserving its caller
-   and scoring the caller's emitted body. Freeze the helper ABI and review float grouping before accepting a result.
-6. Before leaving a hard function, exhaust the applicable ladder and leave one precise `// Unmatched:` obstruction in
-   source; keep variants/diffs in `build/`. Revisit compiler and search evidence before moving to another TU.
-7. Before submitting the session's final changes for review, confirm the registrations and run `ninja` and `ninja progress`.
-   Use object comparisons during the ladder; full-image builds are not required after each function, TU or commit. Never demote previously exact work to
-   claim a gain. Review shared headers and `splits.yaml` changes with extra care: they affect every file.
+Start with behavior, callee arity/return widths, field offsets, hidden results and cleanup edges. Xbox source can suggest
+algorithms and names, but does not prove PS2 layouts. Compare the first divergent instructions with `tools/trysrc.py`,
+using the actual bindings for named C++ symbols. Equal opcodes can hide wrong offsets, widths or relocations.
+
+Check saved candidates in `build/permuter/` when useful. Retain the best candidate and change one source feature at a time;
+types, evaluation order, scopes, helper visibility and loop shape are common causes. A flag sweep will not repair a wrong
+ABI. The permuter can help with near misses; focus it on the genuine function or inline helper and review its result.
+Save a precise `// Unmatched:` note and useful variants when moving on.
+
+Inspect the TU's splits and relevant data as needed. Before claiming a complete TU, audit every function and its owned
+rodata/data/sdata/bss/exception tables against `build/SLUS_213.76/tus.yaml`; qualify uncertain boundaries. Code completion
+does not establish data ownership. Review shared-header and `splits.yaml` changes across their consumers.
 
 ## Verified recipes
 
