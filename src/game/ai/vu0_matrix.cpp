@@ -5,6 +5,7 @@
 #include "game/actor/state.hpp"
 extern "C" {
 #include "game/actor_records.h"
+#include "game/actor_slots.h"
 }
 using Ps2Math::VU0::Value;
 
@@ -524,6 +525,11 @@ struct MotionState {
     unsigned char unk_7C, unk_7D, unk_7E, unk_7F, unk_80, unk_81;
 };
 
+extern "C" {
+Recovered_ActorSlot* func_00188F80(Recovered_ActorRecords*);
+void* func_00181F48(void*, Recovered_ManagedActor*, int, float, float);
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -725,7 +731,27 @@ int func_00188B98(PoolState* self) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018A380);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018A540);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AA18);
+extern "C" {
+void func_0018AA18(Recovered_ActorRecords* self) {
+    int category = TagCategory((signed char*)func_00188F80(self)->actor->unk_2A4);
+    if (category == 3) {
+        void* selection = (unsigned char*)self->owner + 0xC80;
+        Recovered_ManagedActor* actor = func_00188F80(self)->actor;
+        func_00181F48(selection, actor, 8, 0.0f, 1.0f);
+        return;
+    }
+    if (category == 10) {
+        void* selection = (unsigned char*)self->owner + 0xC80;
+        Recovered_ManagedActor* actor = func_00188F80(self)->actor;
+        func_00181F48(selection, actor, 7, 0.0f, 1.0f);
+        return;
+    }
+    void* selection = (unsigned char*)self->owner + 0xC80;
+    Recovered_ManagedActor* actor = func_00188F80(self)->actor;
+    func_00181F48(selection, actor, 6, 0.0f, 1.0f);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AB08);
 extern "C" {
 void func_0018AB98(ActiveBinding* self) {
@@ -946,7 +972,27 @@ float func_0018DC48(const RangeSelection* self) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001951F0);
+extern "C" {
+void func_001951F0(Game::Action* self) {
+    if (func_00188F10(RecordsFor(self->brain))) {
+        Game::Brain* brain = self->brain;
+        if (func_001823B0(&brain->controller, func_00189048(RecordsFor(brain)), 0)) {
+            if (func_001829E8(&self->brain->controller) || !func_001829A8(&self->brain->controller))
+                func_00193990(self, 0);
+        } else
+            goto fallback;
+    } else {
+    fallback:
+        func_001825B0(&self->brain->controller);
+        if (func_00188F10(RecordsFor(self->brain))) {
+            Game::PositionArg point = func_00189048(RecordsFor(self->brain));
+            func_0017DB98(QueryFor(self->brain), point);
+        }
+    }
+    if (func_00188F10(RecordsFor(self->brain)) && func_0018AB08(RecordsFor(self->brain))) func_00193990(self, 1);
+}
+}
+
 extern "C" {
 void func_00195950(TimedFlagAction* self) {
     if (!self->pending) {
