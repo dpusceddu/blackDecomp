@@ -7,9 +7,10 @@
   the build.
 - Build and compile only through `ninja` and the tools in `tools/`; never start the proprietary compilers or assemblers
   directly.
-- Use the execution environment or build command configured by the user or harness. The default is native Linux x86-64
-  with a Python virtual environment. Container startup and mounts belong to environment provisioning before the session;
-  do not construct ad hoc container exec commands during matching. Report a missing compiler environment if none is configured.
+- Sessions use native Linux x86-64, with system dependencies, a Python virtual environment and the pinned toolchain
+  provisioned once by the user or harness (`python3 tools/setup.py --provision`). Run project commands directly.
+  If prerequisites are missing, report the provisioning command; do not choose a container because an image happens to
+  be available, or manage container lifetimes and command prefixes during matching.
 - Keep scratch files in `.local/` or `build/` (both ignored). Check free disk space before unpacking disc images, and
   process one image at a time.
 - Commit without attribution lines. Do not push unless asked; a work session pushes to its own draft pull request.

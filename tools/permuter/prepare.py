@@ -17,6 +17,14 @@ ROOT = Path(__file__).resolve().parents[2]
 ASM = ROOT / 'asm' / 'SLUS_213.76' / 'nonmatchings'
 
 
+def objdump_command():
+    """Use the native binutils selected during setup, including distribution-specific prefixes."""
+    from toolchain import find_binutils
+    directory, prefix = find_binutils()
+    executable = str(directory / (prefix + 'objdump')) if directory else prefix + 'objdump'
+    return shlex.join([executable, '-drz', '-m', 'mips:5900'])
+
+
 def prepare(name):
     source = ASM / (name + '.s')
     if not source.is_file():
@@ -40,7 +48,7 @@ def prepare(name):
         compiler_command=shlex.join(['python3','tools/permuter/cc.py','--file',owner,'-Iinclude']+flags),
         assembler_command=shlex.join(['python3','tools/permuter/as.py','--file',owner]),
         asm_prelude_file='tools/permuter/prelude.inc',
-        objdump_command='mipsel-linux-gnu-objdump -drz -m mips:5900')
+        objdump_command=objdump_command())
     # Upstream's macro-preserving preprocessor also retains inline assembly as
     # literal pragmas. NULL's ordinary pointer type enables that standard path.
     settings.write_text('\n'.join(k+' = '+json.dumps(v) for k,v in commands.items())+

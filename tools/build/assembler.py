@@ -56,13 +56,14 @@ def selection(args):
             [x for x in args if not x.startswith('--assembler=')])
 
 
-def command(choice, args, source, output):
+def command(choice, args, source, output, env=None):
     if choice not in CHOICES:
         raise ValueError('unknown assembler configuration')
     small = next((x for x in reversed(args) if x.startswith('-G')), '-G0')
     common = [small, '-mabi=eabi', '-I', 'include']
     if choice.startswith('gas-2.40'):
-        return [shutil.which(os.environ.get('BLACK_BINUTILS_PREFIX', 'mipsel-linux-gnu-') + 'as') or TOOLCHAINS + '/binutils/root/usr/bin/mipsel-linux-gnu-as',
+        env = os.environ if env is None else env
+        return [shutil.which(env.get('BLACK_BINUTILS_PREFIX', 'mipsel-linux-gnu-') + 'as', path=env.get('PATH')) or TOOLCHAINS + '/binutils/root/usr/bin/mipsel-linux-gnu-as',
                 '-EL', '-march=r5900', '-O2',
                 '-mfix-r5900' if choice.endswith('-fix') else '-mno-fix-r5900',
                 *common, '-o', output, source]
@@ -98,7 +99,7 @@ def run_tool(command, env, timeout):
 def compile_with_assembler(prefix, args, source, output, env, timeout):
     choice, flags = selection(args)
     if choice == 'sn-min6':
-        assembler = command(choice, flags, output + '.s', output)
+        assembler = command(choice, flags, output + '.s', output, env=env)
         try:
             valid = hashlib.sha256(Path(assembler[1]).read_bytes()).hexdigest() == MIN6_SHA256
         except OSError:
@@ -113,7 +114,7 @@ def compile_with_assembler(prefix, args, source, output, env, timeout):
         p = run_tool(prefix + flags + ['-S', source, '-o', assembly], env, timeout)
         if p.returncode:
             return p
-        q = run_tool(command(choice, flags, assembly, output), env, timeout)
+        q = run_tool(command(choice, flags, assembly, output, env=env), env, timeout)
         q.stdout = p.stdout + q.stdout
         q.stderr = p.stderr + q.stderr
         return q

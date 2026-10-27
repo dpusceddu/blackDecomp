@@ -15,7 +15,8 @@
   "sha256": "13f86a2d618f0dbe67179d349625345eabf9b46450295cb4c904e49f6aff85af"
  },
  "binutils_prefixes": [
-  "mipsel-linux-gnu-"
+  "mipsel-linux-gnu-",
+  "mips64-linux-gnu-"
  ],
  "objdiff": {
   "version": "v3.8.2",

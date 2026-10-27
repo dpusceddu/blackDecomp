@@ -30,7 +30,7 @@ def main():
         source = Path(directory)/'input.s'
         source.write_text(text)
         if choice:
-            command = assembler.command(choice, flags, str(source), a.o)
+            command = assembler.command(choice, flags, str(source), a.o, env=env)
         elif sn:
             root = base/'compilers'/split.compiler/'lib/gcc-lib/ee'
             backend = next(p for p in sorted(root.iterdir()) if p.is_dir() and not p.name.startswith('.'))

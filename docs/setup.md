@@ -1,7 +1,7 @@
 # Setup in detail
 
-The short version is in the [README](../README.md#get-started). This page has the details: versions, platforms, optional containers
-and binutils.
+The short version is in the [README](../README.md#get-started). This page covers versions, one-time native provisioning,
+session preparation and binutils.
 
 ## Versions
 
@@ -20,76 +20,71 @@ source and the only one that routine work builds, measures and checks. The other
 and are checked before releases (`python3 tools/check_versions.py` configures and builds all five and prints `OK` or
 `MISMATCH` for each); their configurations stay committed. Source units are written for the USA version.
 
-## Execution environment
+## Native Linux, prepared once
 
-The default is native Linux x86-64 with Python dependencies in a virtual environment. Run project commands directly in
-that shell. A harness may provide the same environment inside a container; container startup, mounts and agent launch
-belong to environment provisioning before the session. The matching loop uses ordinary `python3` and `ninja` commands.
-An existing execution or build interface supplied by the harness can provide this backend; agents use that interface
-without managing its container or remote execution details.
+Run decompilation sessions on Linux x86-64 with a Python virtual environment and the pinned toolchain. The compilers are
+Windows programs run through [wibo](https://github.com/decompals/wibo) and 32-bit Linux programs; a Python venv on macOS
+cannot supply that Linux runtime.
 
-`python3 tools/setup.py` checks dependencies and prepares assembly, the TU map and the objdiff project without compiling
-all objects or linking an image. `--build` additionally verifies the full image; `--no-build` remains a compatibility alias
-for the default. This section is the manual version.
+### One-time provisioning (user or harness)
 
-You need the boot executable of your own copy (see [Versions](#versions)) as `orig/<GAME_ID>/<GAME_ID>`, for example
-`orig/SLUS_213.76/SLUS_213.76`, and a Linux x86-64 environment: the compilers are a Windows program (run through
-[wibo](https://github.com/decompals/wibo)) and 32-bit Linux programs.
-
-**Linux (Debian 12 or Ubuntu 22.04 and later)**
+With Python 3 and Git available, clone the repository on the Linux machine and run:
 
 ```sh
-sudo apt update && sudo apt install -y git ninja-build python3 python3-venv python3-pip binutils-mipsel-linux-gnu libc6-i386 xz-utils ca-certificates
-git clone https://github.com/dpusceddu/blackDecomp.git
-cd blackDecomp
-mkdir -p orig/SLUS_213.76 && cp /path/to/SLUS_213.76 orig/SLUS_213.76/
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-. .venv/bin/activate                      # from here on `python3` is the virtual environment's; every command in the documentation assumes it
-python3 tools/toolchain.py install --objdiff # pinned compilers, assemblers and wibo into build/toolchain (SHA-256 checked)
-python3 configure.py                      # default --version SLUS_213.76
-ninja objdiff.json                       # project only; individual objects build on demand
-python3 tools/build/tus.py map            # metadata only; no compiler or linker
+python3 tools/setup.py --provision
 ```
 
-In an already prepared container or as root there is no `sudo`: drop it from the first line. Build timings and the object
-architecture are in [build.md](build.md). Before submitting source or build-input changes for review, `ninja` performs the
-full-image check and must end with
+This explicit provisioning mode installs system packages using apt-get on Debian/Ubuntu or dnf on Fedora (sudo when
+needed), prepares `.venv` or the active Python environment, installs the pinned compiler/assembler tools and objdiff-cli,
+and verifies that the native MIPS linker supports `elf32ltsmip`. It does not need game files, prepare session metadata or
+build an image. Configure the harness to activate this Python environment and provide Git/GitHub access for later sessions.
+Re-run provisioning when the system prerequisites or pinned Python requirements change.
+
+System prerequisites are Ninja, Git, xz, cpp, Python with venv/pip support, the 32-bit Linux loader, and GNU MIPS binutils
+with little-endian linking support. Other Linux distributions can install those prerequisites manually. Debian/Ubuntu's
+package is `binutils-mipsel-linux-gnu`; Fedora's is `binutils-mips64-linux-gnu`. Setup and the toolchain recognize both
+prefixes automatically. `BLACK_BINUTILS_PREFIX` can select an explicitly provisioned compatible toolchain.
+
+GNU binutils 2.40 is the tested linker version. A distribution package with another version still has to pass the final
+byte-identical image check. To install that version separately, build GNU binutils 2.40 with `--target=mipsel-linux-gnu`
+and put its tools on PATH (or set `BLACK_BINUTILS_PREFIX`). The decompals `binutils-mips-ps2-decompals` prebuilt cannot link
+this executable: its linker has no little-endian MIPS emulation.
+
+### Normal agent sessions
+
+Start the agent on the prepared Linux host, with its command and file tools using the same workspace. Add the boot
+executable of your own copy as `orig/SLUS_213.76/SLUS_213.76`. In the prepared Python environment, run:
+
+```sh
+python3 tools/setup.py
+python3 tools/next.py --pick
+```
+
+Normal setup never invokes a system package manager or a container runtime. It reuses installed dependencies and prepares
+assembly, the TU map and `objdiff.json` without compiling all objects or linking an image. Existing local worktrees can
+share `.venv`, the pinned toolchain and game inputs with the main checkout; generated build outputs stay local to each
+checkout. Missing system prerequisites produce the one-time provisioning instruction for the user or harness.
+
+During matching, build individual comparison objects. Before submitting source or build-input changes for review, run the
+final full-image `ninja` check. `--build` is also available for an explicitly requested setup smoke check; `--no-build`
+remains a compatibility alias for normal preparation. The final image check must print:
 
 ```
 OK  SLUS_213.76  SLUS_213.76  sha256 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
 ```
 
-or with a section-by-section mismatch report. Another version: `python3 configure.py --version SLES_538.86` (and so on); to
-check all five, run `python3 tools/check_versions.py`.
+or a mismatch report identifying what needs fixing. Other retail versions are selected with
+`python3 configure.py --version GAME_ID`; `python3 tools/check_versions.py` checks all five when required by the impact
+rule in [CONTRIBUTING.md](../CONTRIBUTING.md#rules).
 
-**Windows**: use WSL 2 with Ubuntu and follow the Linux steps inside it (keep the checkout in the Linux file system).
+### Other host environments
 
-**Other hosts and optional containers**: a Python venv does not provide the Linux ABI required by the compilers. Have the
-user or harness provide a Linux x86-64 execution environment before starting decompilation. The Dockerfile is one optional
-way to provision its build tools; the harness supplies the agent or its execution shell. For manual host provisioning:
+Windows users can prepare a Linux x86-64 environment in WSL 2. On other hosts, provision a native Linux machine and run
+the agent there. Do not select or create a container merely because a prepared image is available.
 
-```sh
-docker build --platform linux/amd64 -t black-decomp .
-python3 tools/container.py
-# in the prepared shell (Python environment is on PATH): python3 tools/setup.py
-```
-
-`docker build` downloads the pinned compilers, assemblers and wibo from their public archives (SHA-256 checked), so it needs
-network access; the image contains no game files.
-
-`tools/container.py` is an optional host launcher for the user or harness, used once to open the environment. A `COMMAND`
-can be supplied as its entrypoint. It mounts the checkout, Git metadata and registered
-worktrees at their original host paths, so linked worktrees can use Git and the shared-input symlinks made by `setup.py`.
-The active checkout and Git metadata are writable; sibling checkouts are read-only for claims and shared inputs. Start
-the container runtime first. Use `--dry-run` to inspect the mounts, `--engine podman` for Podman, and `--relabel` on
-SELinux hosts (shared `:z` labels). The launcher uses the existing image; rebuild it after toolchain changes. Agents inside
-the environment run project commands directly and do not manage container lifetimes or prepend container exec commands.
-On Apple silicon this relies on the emulation of x86-64 Linux containers and has not been tested.
-
-**Binutils.** `ld` and `objcopy` for little-endian MIPS come from the distribution package `binutils-mipsel-linux-gnu`
-(Debian, Ubuntu; version 2.40 is the tested one). On a distribution without it, use Docker, or build GNU binutils 2.40 with
-`--target=mipsel-linux-gnu` and put the tools on `PATH` (or set `BLACK_BINUTILS_PREFIX`). The decompals
-`binutils-mips-ps2-decompals` prebuilt cannot link this executable: its `ld` has no little-endian MIPS emulation.
+The Dockerfile and `tools/container.py` remain optional deployment references for a harness that explicitly supplies its
+execution environment that way. They are outside the selected native workflow; ordinary agents do not manage container
+lifetimes, mounts, user mappings or exec prefixes.
 
 ## Repository layout
 

@@ -16,12 +16,12 @@ programs) is pinned in config/toolchain-local.json. Everything is verified by SH
   assemblers/<id>/...  assembler derivatives (patched Ps2EeAs.exe)
   bin/wibo             runs the Windows compilers on Linux x86-64
 
-The linker and binutils (mipsel-linux-gnu-ld, -objcopy) come from the distribution package binutils-mipsel-linux-gnu
-(version 2.40 tested), or from any GNU binutils built for a little-endian MIPS target whose tools start with
+The linker and binutils come from binutils-mipsel-linux-gnu on Debian/Ubuntu or binutils-mips64-linux-gnu on Fedora
+(version 2.40 tested), or from any GNU binutils with little-endian MIPS linking support whose tools start with
 $BLACK_BINUTILS_PREFIX. The decompals binutils-mips-ps2-decompals prebuilt is not usable: its ld only knows the big-endian
 MIPS emulation (`elf32ebmip`), but the executable is linked little-endian (`elf32ltsmip`).
 Nothing downloaded here is ever committed. The Sony compilers and the EE assembler are 32-bit Linux programs and the SN
-compiler is a Windows program, so the build needs Linux x86-64 (natively, in WSL or in the Dockerfile of this repository).
+compiler is a Windows program, so the build needs a prepared Linux x86-64 environment.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
@@ -196,7 +196,7 @@ def problems(base=None):
     if not (base / 'bin' / 'wibo').is_file():
         missing.append('wibo is not installed')
     if find_binutils(base)[0] is None:
-        missing.append('no MIPS linker found (install the distribution package binutils-mipsel-linux-gnu)')
+        missing.append('no MIPS linker found (have the user or harness run python3 tools/setup.py --provision once)')
     return missing
 
 
@@ -234,7 +234,7 @@ def main():
         return 0
     if a.command == 'install':
         if platform.system() != 'Linux' or platform.machine() not in ('x86_64', 'AMD64'):
-            print('note: this machine is %s/%s; the downloaded tools only run on Linux x86-64 (use WSL or the Dockerfile)'
+            print('note: this machine is %s/%s; the downloaded tools only run on a prepared Linux x86-64 host (docs/setup.md)'
                   % (platform.system(), platform.machine()), file=sys.stderr)
         for ident in settings()['compilers']:
             print('%-28s %s' % (ident, 'installed' if install_compiler(base, ident) else 'present'), flush=True)

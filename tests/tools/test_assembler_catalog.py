@@ -10,6 +10,14 @@ import assembler
 
 
 class CatalogRecipe(unittest.TestCase):
+    def test_gnu_assembler_uses_the_configured_native_environment(self):
+        env = {'BLACK_BINUTILS_PREFIX': 'mips64-linux-gnu-', 'PATH': '/native/bin'}
+        with patch.object(assembler.shutil, 'which', return_value='/native/bin/mips64-linux-gnu-as') as which:
+            command = assembler.command('gas-2.40', ['-G0'], 'source.s', 'out.o', env=env)
+        which.assert_called_once_with('mips64-linux-gnu-as', path='/native/bin')
+        self.assertEqual(command[0], '/native/bin/mips64-linux-gnu-as')
+        self.assertIn('-EL', command)
+
     def test_recipe_hash_matches_recorded_derivative(self):
         record = json.loads((Path(__file__).resolve().parents[2] /
                              'config/toolchain-assemblers.json').read_text())['assemblers'][0]
