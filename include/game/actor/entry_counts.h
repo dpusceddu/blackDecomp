@@ -21,12 +21,21 @@ typedef struct Recovered_ActorCountEntry {
     u8 unk_09[3];
 } Recovered_ActorCountEntry;
 
+typedef struct Recovered_ActorCountMatrix {
+    float elements[16];
+} Recovered_ActorCountMatrix;
+
 typedef struct Recovered_ActorCountView {
     u8 unk_000[0x118];
     Recovered_ActorCountSource *source;
-    u8 unk_11C[0x84];
+    u8 unk_11C[0x80];
+    Recovered_ActorCountMatrix* matrices;
     Recovered_ActorCountEntry *entries;
-    u8 unk_1A4[0x52];
+    s32* indices;
+    u8 unk_1A8[0x48];
+    s32 unk_1F0;
+    u8 unk_1F4;
+    u8 slotCount;
     u8 entryCount;
 } Recovered_ActorCountView;
 
