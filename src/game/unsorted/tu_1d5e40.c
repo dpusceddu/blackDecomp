@@ -485,11 +485,10 @@ extern void func_001D72B8(s32, void*);
 extern s32 func_00280B10(void*);
 extern s32 func_00280100(void*, void*);
 extern char D_0042A3D0[];
-// Unmatched: entry-loop setup, final reset stores and short-loop padding differ.
+// Unmatched: native short-loop padding and the final reset-store order differ.
 s32 func_001D6CB8(void* self) {
     s32 index;
     u8* slot;
-    Recovered_ResourceEntry* entry;
     switch (M2C_FIELD(self, s32*, 0x1C2C)) {
         case 9: M2C_FIELD(self, s32*, 0x1C2C) = 10;
         case 10:
@@ -501,16 +500,11 @@ s32 func_001D6CB8(void* self) {
                 func_001F03C0(slot);
                 slot += 0x430;
             }
-            index = 0;
-            if (M2C_FIELD(self, u32*, 0x29C)) {
-                entry = (Recovered_ResourceEntry*)((u8*)self + 0x284);
-                do {
-                    func_002818D0((u8*)D_0040F510 + 0xB308, entry->resource);
-                    entry->resource = 0;
-                    entry->stamp = 0;
-                    index++;
-                    entry++;
-                } while ((u32)index < M2C_FIELD(self, u32*, 0x29C));
+            for (index = 0; (u32)index < M2C_FIELD(self, u32*, 0x29C); index++) {
+                Recovered_ResourceEntry* entry = &((Recovered_ResourceEntry*)((u8*)self + 0x284))[index];
+                func_002818D0((u8*)D_0040F510 + 0xB308, entry->resource);
+                entry->resource = 0;
+                entry->stamp = 0;
             }
             func_001D7498((s32)self, M2C_FIELD(self, s32*, 0x1BF8));
             func_001D7498((s32)self, M2C_FIELD(self, s32*, 0x1BFC));
@@ -535,8 +529,8 @@ s32 func_001D6CB8(void* self) {
             M2C_FIELD(self, u64*, 0x2B0) = 0;
             M2C_FIELD(self, void**, 0x1C18) = 0;
             M2C_FIELD(self, s32*, 0x1C1C) = 0;
-            M2C_FIELD(self, u8*, 0x1C44) = 0;
             M2C_FIELD(self, void**, 0x1C0C) = 0;
+            M2C_FIELD(self, u8*, 0x1C44) = 0;
             D_0042A3D0[0] = 0;
     }
     return 1;
