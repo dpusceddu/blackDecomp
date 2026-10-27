@@ -56,6 +56,19 @@ typedef char CounterDefinitionOffset[(ACTION_OFFSET(CounterAction, definition) =
 typedef char CountdownDefinitionOffset[(ACTION_OFFSET(CountdownAction, definition) == 0x20) ? 1 : -1];
 #undef ACTION_OFFSET
 
+typedef struct GroupMember {u8 unk00[0xEC0]; u8 control;} GroupMember;
+typedef struct GroupView {u64 id; u8 unk08[0x10]; const char *name; GroupMember *members[16]; char sound[13]; u8 count;} GroupView;
+extern void func_00165AF8(void *);
+extern char *func_0035CBC0(char *,const char *);
+extern void func_00181AD0(void *,s32);
+typedef struct GlobalTime {u8 unk00[0x20]; float time;} GlobalTime;
+
+typedef struct SoundManager {u8 unk00[4]; void *player; u8 unk08[0x1C]; void *channel;} SoundManager;
+typedef struct GameSound {u8 unk00[0x4BD8]; SoundManager *sound;} GameSound;
+extern GameSound *D_0040F510;
+extern void func_001E6058(void *,float,float,float);
+extern void func_001E6088(void *);
+
 typedef struct Resource {
     u8 unk00[0x118];
     void *definition;
@@ -83,7 +96,7 @@ extern void func_00160E70(void *);
 extern void func_00280FE0(void *,void *);
 typedef struct ClockView {u8 unk00[0x20]; float time;} ClockView;
 extern ClockView *D_0040F0E0;
-typedef struct TimedDefinition {u8 unk00[0x28]; float duration;} TimedDefinition;
+typedef struct TimedDefinition {u8 unk00[0x28]; float duration; float x, y, z;} TimedDefinition;
 typedef struct TimedAction {u8 unk00[0x20]; TimedDefinition *definition; s32 state; float deadline;} TimedAction;
 
 
@@ -292,7 +305,26 @@ void func_00163AB8(ActionView *self, s32 arg) {
     func_00165BC8(self, arg);
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163AF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163B50);
+void func_00163B50(TimedAction *self) {
+    GlobalTime *clock=(GlobalTime *)((s8*)D_0040F0E0 + 0x20120);
+    float time=clock->time;
+    switch(self->state) {
+    case 1: break;
+    case 2: {
+        GameSound *game=(GameSound *)((s8*)D_0040F510+0x8000);
+        func_001E6058(game->sound->player,self->definition->x,self->definition->y,self->definition->z);
+        self->state=3;
+    }
+    case 3:
+        if(time<self->deadline) return;
+        {
+            GameSound *game=(GameSound *)((s8*)D_0040F510+0x8000);
+            func_001E6088(game->sound->player);
+            self->state=1;
+        }
+        break;
+    }
+}
 void func_00163C58(ActionView *self) {
     func_00160EF8(self);
     self->definition = NULL;
@@ -308,10 +340,41 @@ void func_00163C90(TimedAction *self) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163D08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163DB8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163E08);
+s32 func_00163E08(GroupView *self,u64 id,const char *name) {
+    s32 i;
+    func_00165AF8(self);
+    self->id=id;
+    self->name=name;
+    for(i=15;i>=0;i--) self->members[i]=NULL;
+    self->count=0;
+    func_0035CBC0(self->sound,self->name);
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163F30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163FD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00164078);
+void func_00163FD0(GroupView *self, GroupMember *member) {
+    s32 removed=0;
+    s32 i;
+    for(i=0;i<16;i++) {
+        if(self->members[i]==member) {
+            self->members[i]=NULL;
+            removed=1;
+            self->count--;
+            break;
+        }
+    }
+    if(removed) {
+        if(self->count<2) func_0035CBC0(self->sound,self->name);
+        func_00164078(self);
+    }
+}
+void func_00164078(GroupView *self) {
+    GroupMember **cursor=self->members;
+    s32 i=15;
+    do {
+        GroupMember *member=*cursor++;
+        if(member) func_00181AD0(&member->control,14);
+    } while(--i>=0);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001640D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001641A8);
 typedef struct GroupAction { u8 unk00[0x69]; u8 count; } GroupAction;
