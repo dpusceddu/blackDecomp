@@ -823,7 +823,6 @@ void func_0012EF68(Recovered_PairedBank* self) {
         }
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F060);
 void func_0012F1B8(Recovered_PairedBank* self) {
     s8 next = (self->unk_C + 1) % 2;
     if (self->unk_A[next]) {

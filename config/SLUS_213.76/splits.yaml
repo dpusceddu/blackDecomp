@@ -255,7 +255,8 @@ splits:
   - {src: src/game/unsorted/tu_12d458_12eec8.c, range: [0x12eec8, 0x12eee8], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x12eee8, 0x12f058]}
   - {src: src/game/unsorted/tu_12f058.c, range: [0x12f058, 0x12f060]}
-  - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f060, 0x12f4e8]}
+  - {src: src/game/camera/record_bank.cpp, range: [0x12f060, 0x12f1b8], assembler: sn-min6, note: "C++ array construction retains the native zero-count constructor guard; its six-word dispatch-initialization loop has two padding NOPs (stock assembler adds a third). Original TU and assembler provenance remain unverified."}
+  - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f1b8, 0x12f4e8]}
   - {src: src/game/unsorted/tu_12f4e8.c, range: [0x12f4e8, 0x12f4f0]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x12f4f0, 0x12f740]}
   - {src: src/game/camera/table_queries.c, range: [0x12f740, 0x12fc78], assembler: sn-min6, note: "Native 0x12f8c0 shares its failure return through a short backward branch with one padding NOP; the stock assembler inserts two. The table accessors keep the default compiler flags."}
