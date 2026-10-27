@@ -3,6 +3,9 @@
 #include "ps2/prototypes.h"
 
 #include "ps2/ee_types.h"
+#ifdef NON_MATCHING
+#include "game/effects/vu_math.h"
+#endif
 
 // Private command views; original class identities and unused fields are UNVERIFIED.
 
@@ -83,6 +86,44 @@ static inline void InitializeExtra(CommandExtra* const& fields, int mode, int va
     fields->end = end;
 }
 
+#ifdef NON_MATCHING
+// UNVERIFIED: rotation layouts and affine lowering have no matching callback yet.
+struct CommandRotation {
+    CommandVec2 pivot;
+    int texture;
+    float degrees;
+};
+struct CommandRotationExtra {
+    CommandVec2 start;
+    CommandVec2 end;
+    CommandRotation* rotation;
+    int variant;
+};
+
+static inline CommandVec2 ScaleCommandVector(const CommandVec2& v, float scale) {
+    CommandVec2 result(v.x * scale, v.y * scale);
+    return result;
+}
+
+struct CommandAffine {
+    CommandVec2 xAxis;
+    CommandVec2 yAxis;
+    CommandVec2 translation;
+
+    void Transform(CommandVec2* points) const {
+        for (int remaining = 3; remaining >= 0; --remaining, ++points) {
+            CommandVec2 result = translation;
+            result.x += xAxis.x * points->x;
+            result.y += xAxis.y * points->x;
+            result.x += yAxis.x * points->y;
+            result.y += yAxis.y * points->y;
+            *points = result;
+        }
+    }
+};
+
+#endif
+
 #define COMMAND_OFFSET(type, field) ((EeU32) & ((type*)0)->field)
 
 typedef char CheckVec2Size[sizeof(CommandVec2) == 8 ? 1 : -1];
@@ -106,6 +147,10 @@ extern int func_002667E8(int);
 extern int func_00266808(int, int);
 extern void func_00266D28(EeU128, const CommandVec2*, int, const CommandVec2*, CommandExtra*);
 extern CommandVec2 D_0043F8A8;
+#ifdef NON_MATCHING
+extern void func_002679E8(EeU128, const CommandVec2*, int, const CommandVec2*, const CommandVec2*);
+extern CommandVec2 D_0043F8B0;
+#endif
 extern float func_002758E0(void*, const unsigned short*);
 extern void func_00276698(CommandRecord*);
 extern void func_002767E8(CommandRecord*, CommandExtra*);
@@ -214,7 +259,39 @@ void func_00276960(void *arg0, s64 *arg1, s64 *arg2) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276978);
+#ifdef NON_MATCHING
+// Unmatched: native scalar VU trig input/readback, affine copies and loop scheduling differ.
+void func_00276980(CommandRecord* self, CommandExtra* raw) {
+    CommandRotationExtra* extra = (CommandRotationExtra*)raw;
+    CommandVec2 points[4];
+    CommandVec2 uv[4];
+    float radians = extra->rotation->degrees * 0.01745329238474369f;
+    BkEffectPointPS2 trig = BkEffectSpillPS2(BkEffectVUSinCosPS2(radians, radians));
+    CommandVec2 pivot = extra->rotation->pivot;
+    points[0] = CommandVec2(0.0f, 0.0f);
+    points[1] = CommandVec2(1.0f, 0.0f);
+    points[2] = CommandVec2(0.0f, 1.0f);
+    points[3] = CommandVec2(1.0f, 1.0f);
+    CommandAffine transform;
+    transform.xAxis = CommandVec2(trig.y * self->extent.x, -trig.x * self->extent.y);
+    transform.yAxis = CommandVec2(trig.x * self->extent.x, trig.y * self->extent.y);
+    transform.translation = ((pivot * self->extent) - ScaleCommandVector(transform.xAxis, pivot.x)) -
+                            ScaleCommandVector(transform.yAxis, pivot.y) + self->position;
+    transform.Transform(points);
+    uv[0] = extra->start;
+    uv[1] = CommandVec2(extra->end.x, extra->start.y);
+    uv[2] = CommandVec2(extra->start.x, extra->end.y);
+    uv[3] = extra->end;
+    if (extra->variant == 0) {
+        func_002667E8(extra->rotation->texture);
+    } else {
+        func_00266808(extra->rotation->texture, extra->variant);
+    }
+    func_002679E8(self->payload, &D_0043F8B0, 4, points, uv);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276980);
+#endif
 void func_00276DA8(CommandRecord* self, const CommandVec2* position, const CommandVec2* extent,
                    const CommandVec2* scale, EeU128 payload, int mode, const CommandVec2* start, const CommandVec2* end,
                    int value) {
@@ -224,7 +301,47 @@ void func_00276DA8(CommandRecord* self, const CommandVec2* position, const Comma
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276E58);
+#ifdef NON_MATCHING
+// Unmatched: native scalar VU trig input/readback, affine copies and loop scheduling differ.
+void func_00276E68(CommandRecord* self, CommandExtra* raw) {
+    CommandRotationExtra* extra = (CommandRotationExtra*)raw;
+    CommandVec2 points[4];
+    CommandVec2 uv[4];
+    points[0] = self->position;
+    points[3] = self->position + self->extent;
+    points[1] = CommandVec2(points[3].x, points[0].y);
+    points[2] = CommandVec2(points[0].x, points[3].y);
+    uv[0] = extra->start;
+    uv[1] = CommandVec2(extra->end.x, extra->start.y);
+    uv[2] = CommandVec2(extra->start.x, extra->end.y);
+    uv[3] = extra->end;
+    if (extra->rotation->degrees != 0.0f) {
+        CommandAffine transform;
+        transform.xAxis = CommandVec2(1.0f, 0.0f);
+        transform.yAxis = CommandVec2(0.0f, 1.0f);
+        transform.translation = CommandVec2(-extra->rotation->pivot.x, -extra->rotation->pivot.y);
+        transform.Transform(points);
+        float radians = extra->rotation->degrees * 0.01745329238474369f;
+        BkEffectPointPS2 trig = BkEffectSpillPS2(BkEffectVUSinCosPS2(radians, radians));
+        transform.xAxis = CommandVec2(trig.y, -trig.x);
+        transform.yAxis = CommandVec2(trig.x, trig.y);
+        transform.translation = CommandVec2(0.0f, 0.0f);
+        transform.Transform(points);
+        transform.xAxis = CommandVec2(1.0f, 0.0f);
+        transform.yAxis = CommandVec2(0.0f, 1.0f);
+        transform.translation = extra->rotation->pivot;
+        transform.Transform(points);
+    }
+    if (extra->variant == 0) {
+        func_002667E8(extra->rotation->texture);
+    } else {
+        func_00266808(extra->rotation->texture, extra->variant);
+    }
+    func_002679E8(self->payload, &D_0043F8B0, 4, points, uv);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276E68);
+#endif
 void func_00277400(CommandRecord* self, const CommandVec2* position, const CommandVec2* scale, EeU128 payload,
                    void* font, const unsigned short* text, void (*callback)(void), float height) {
     CommandTextExtra* extra = (CommandTextExtra*)((char*)self + 0x20);
