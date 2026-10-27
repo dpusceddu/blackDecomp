@@ -2,7 +2,81 @@
 
 #include "ps2/matrix.hpp"
 #include "game/ai_action.hpp"
+#include "game/actor/state.hpp"
 using Ps2Math::VU0::Value;
+
+struct RangeSelection {
+    Game::Brain* owner;
+    int kind;
+};
+
+extern "C" {
+extern int* D_00414D54;
+}
+static inline int TagCategory(const signed char* tag) {
+    signed char index = *tag;
+    if (index == -1) return 0;
+    return D_00414D54[index];
+}
+static inline int HasCategoryThree(const RangeSelection* selection) {
+    signed char* tag = (signed char*)((ActorParts::Owner*)selection->owner->actor)->Action();
+    int special = 0;
+    if (tag) {
+        int kind = TagCategory(tag);
+        special = kind == 3;
+    }
+    return special;
+}
+
+extern "C" {
+int func_0035CA74(const char*, const char*);
+}
+
+struct NameQuery {
+    unsigned char unk_00[0x30];
+    const char* first;
+    const char* second;
+    unsigned int mode;
+};
+
+
+
+struct PoolRecord {
+    int index;
+    unsigned char ordinal;
+    unsigned char unk_05[0x5B];
+};
+struct PoolState {
+    PoolRecord records[3];
+    int unk_120, unk_124;
+    Game::ActionTimer timer;
+    int unk_12C;
+    unsigned char unk_130[4];
+    unsigned char unk_134;
+};
+
+extern "C" {
+struct BindingPayload;
+void func_00163F30(BindingPayload*, ActorParts::Controller*);
+void func_00163FD0(BindingPayload*, ActorParts::Controller*);
+}
+
+struct BindingPayload {
+    unsigned char unk_00[0x5C];
+    unsigned char payload;
+};
+struct BindingAnimation {
+    unsigned char unk_00[0xCC];
+    void* payload;
+};
+struct ActiveBinding {
+    ActorParts::Controller* controller;
+    BindingPayload* target;
+    unsigned char active;
+};
+static inline BindingAnimation* Animation(ActiveBinding* self) {
+    return (BindingAnimation*)self->controller->OwnerRef()->Animation();
+}
 
 struct MovementControl;
 
@@ -224,17 +298,91 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187D78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187E08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00187EC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00188B40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00188B98);
+extern "C" {
+int func_00188B98(PoolState* self) {
+    for (int i = 0; i < 3; i++) {
+        self->records[i].index = -1;
+        self->records[i].ordinal = i;
+    }
+    self->unk_120 = -1;
+    self->unk_134 = 0;
+    self->unk_12C = 0;
+    self->unk_124 = 0;
+    func_00173690(&self->timer);
+    return 1;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018A380);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018A540);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AA18);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AB08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AB98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018ABE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AC80);
+extern "C" {
+void func_0018AB98(ActiveBinding* self) {
+    self->active = 0;
+    if (self->target) {
+        func_00163FD0(self->target, self->controller);
+        Animation(self)->payload = 0;
+        self->target = 0;
+    }
+}
+}
+
+extern "C" {
+void func_0018ABE8(ActiveBinding* self, BindingPayload* target) {
+    if (target) {
+        if (self->active) {
+            func_00163F30(target, self->controller);
+            Animation(self)->payload = &target->payload;
+        }
+    } else {
+        if (self->target && self->active) {
+            func_00163FD0(self->target, self->controller);
+            Animation(self)->payload = 0;
+            self->target = 0;
+        }
+    }
+    self->target = target;
+}
+}
+
+extern "C" {
+void func_0018AC80(ActiveBinding* self, int active) {
+    self->active = active;
+    if (active) {
+        if (self->target) {
+            func_00163F30(self->target, self->controller);
+            Animation(self)->payload = &self->target->payload;
+        }
+    } else {
+        if (self->target) {
+            func_00163FD0(self->target, self->controller);
+            Animation(self)->payload = 0;
+            self->target = 0;
+        }
+    }
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AD88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018C1E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018CE78);
+extern "C" {
+int func_0018CE78(const NameQuery* self, const char* name) {
+    const char* match;
+    switch (self->mode) {
+        case 1:
+        case 2: match = self->first; goto compare;
+        case 3:
+            match = self->second;
+        compare:
+            return func_0035CA74(name, match) == 0;
+        case 0:
+        case 4:
+        default: return 0;
+    }
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018CEE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018CFD8);
 extern "C" {
@@ -268,9 +416,41 @@ extern "C" {
 int func_0018D950(Game::ModeDispatcher* self) { return func_0018EB78(self->modes[self->active]); }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018DB58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018DBC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018DC48);
+extern "C" {
+float func_0018DB58(const RangeSelection* self) {
+    int kind = self->kind;
+    if (kind == 40) return 40.0f;
+    if (kind == 38 || kind == 41) return 7.0f;
+    float value = 13.0f;
+    if ((unsigned int)(kind - 36) >= 2) value = 50.0f;
+    return value;
+}
+}
+
+extern "C" {
+float func_0018DBC0(const RangeSelection* self) {
+    float value;
+    if (!HasCategoryThree(self)) {
+        value = 50.0f;
+        if (self->kind != 39) return 20.0f;
+    } else
+        value = 1000.0f;
+    return value;
+}
+}
+
+extern "C" {
+float func_0018DC48(const RangeSelection* self) {
+    float value;
+    if (!HasCategoryThree(self)) {
+        value = 100.0f;
+        if (self->kind != 39) return 50.0f;
+    } else
+        value = 1000.0f;
+    return value;
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001951F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195950);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00195A00);
