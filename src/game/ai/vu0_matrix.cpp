@@ -1259,7 +1259,33 @@ void func_0019B320(Game::Action* self, const void* event) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019B868);
+extern "C" {
+void func_0019B868(Game::Action* self, const void* event) {
+    int requestEnabled;
+    func_00193980(self, event);
+    ActionPolicyFields* policy = func_00193B98(self);
+    policy->unk_30 = 2.0f * policy->unk_30;
+    policy = func_00193B98(self);
+    policy->unk_20 = policy->unk_20 * 1.8f;
+    func_00193B98(self)->unk_28 = -25.0f;
+    func_00193B98(self)->unk_5C = 0.5f;
+    func_00193B98(self)->unk_70 = 0;
+    func_00193B98(self)->unk_6C = 0;
+    func_00193B98(self)->unk_58 = 0;
+    func_00193B98(self)->unk_60 = 1.0f;
+    func_00193B98(self)->unk_68 = 0;
+    func_00193B98(self)->unk_04 = 1.0f;
+    func_00193B98(self)->kind = 2;
+    func_00193B98(self)->unk_78 = 1;
+    ((PolicyBrainFlags*)self->brain)->unk_104 = 0;
+    requestEnabled = 1;
+    ((PolicyBrainFlags*)self->brain)->unk_110 = 1;
+    self->phase = 0;
+    ((PolicyRequestFlags*)self->brain->movement)->unk_35 = requestEnabled;
+    func_00193A28(self, 22, 0);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019BE70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019C100);
 extern "C" {
