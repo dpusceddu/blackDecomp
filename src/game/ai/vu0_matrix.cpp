@@ -2014,7 +2014,7 @@ void func_001A1640(PhasePointAction* self) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1640);
 #endif
 #ifdef NON_MATCHING
-// Unmatched: the status failure and movement-success branches retain different joins.
+// Unmatched: transition component address setup differs from the native add-before-load sequence.
 extern "C" {
 void func_001A1DE0(FormationAction* self) {
     if (!func_00188F10(RecordsFor(self->base.brain))) {
@@ -2028,8 +2028,9 @@ void func_001A1DE0(FormationAction* self) {
             return;
         }
         Game::Brain* brain = self->base.brain;
-        FormationTransition* transition = (FormationTransition*)((unsigned char*)brain + 0x1EB0);
-        if (Movement(brain)->unk_01 || (transition->active && func_001834E0(transition)->active)) {
+        if (Movement(brain)->unk_01 ||
+            (((FormationTransition*)((unsigned char*)brain + 0x1EB0))->active &&
+             func_001834E0((FormationTransition*)((unsigned char*)brain + 0x1EB0))->active)) {
             func_00193990((Game::Action*)self, 1);
             return;
         }
