@@ -12,8 +12,8 @@ from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / 'tools'))
-from permuter.abi import preserve_typedefs
+sys.path.insert(0, str(ROOT / 'tools/permuter'))
+from abi import preserve_typedefs
 
 
 def load_importer():

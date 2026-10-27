@@ -17,10 +17,10 @@ link (`ninja` ends with OK); `confirm` puts back the INCLUDE_ASM line of what do
 import argparse, base64, collections, difflib, hashlib, io, json, os, re, struct, subprocess, sys, tarfile, time, shutil
 from pathlib import Path
 
-sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
+sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint', 'permuter')]
 from elfinfo import Elf
 from build_telemetry import record as record_build
-from permuter.abi import preserve_typedefs
+from abi import preserve_typedefs
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = 'SLUS_213.76'
@@ -1532,6 +1532,8 @@ class Climb:
 
 def committed_form(text):
     """Source of an exact permuter result in the repository's form: prelude include instead of typedefs, macros back."""
+    if '#pragma _permuter' in text:
+        text = Climb.plain(text)
     text = re.sub(r'(?m)^\s*typedef char PermuterSize_(\w+)\[sizeof\(\1\) == 16 \? 1 : -1\];\s*$', '', text)
     text = re.sub(r'(?m)^\s*typedef\s+struct\s*\{\s*s64\s+v;\s*\}\s*__attribute__\(\(packed\)\)\s*M2C_U64;', '', text)
     # Only complete declarations of the shared prelude's aliases may disappear.

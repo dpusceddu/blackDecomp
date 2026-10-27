@@ -68,6 +68,16 @@ class Permuter(unittest.TestCase):
         self.assertNotIn('latedefine', result)
         self.assertEqual(result.count('typedef int s128'), 1)
 
+        # An initially exact seed can be adopted before any randomization.
+        # Its protected compiler declarations must survive that path too.
+        script = ('import sys; sys.path[:0]=sys.argv[1:]; import autodecomp as a; '
+                  'print(a.committed_form(sys.stdin.read()))')
+        committed = subprocess.run([sys.executable, '-c', script, str(ROOT / 'tools'), str(path)],
+                                   input=protected, text=True, capture_output=True, check=True).stdout
+        self.assertIn('typedef unsigned int EeU128 __attribute__((mode(__TI__)));', committed)
+        self.assertNotIn('PermuterSize_', committed)
+        self.assertNotIn('typedef int s128', committed)
+
     def test_stripped_known_wide_typedef_gets_a_failing_size_check(self):
         text = P.preserve_typedefs('typedef int u128;\nu128 f(u128 x) {return x;}')
         import base64
