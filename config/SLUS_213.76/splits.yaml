@@ -1839,8 +1839,10 @@ splits:
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x271368, 0x2715f0]}
   - {src: src/game/unsorted/tu_2715f0.c, range: [0x2715f0, 0x271610]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x271610, 0x271650]}
-  - {src: src/game/unsorted/tu_271650.c, range: [0x271650, 0x271be8], note: flags or language differ}
-  - {src: src/game/unsorted/tu_271650_271be8.cpp, range: [0x271be8, 0x2722b8], flags: [-O2, -G0]}
+  - {src: src/game/unsorted/tu_271650.c, range: [0x271650, 0x2719d0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_271650_2719d0.cpp, range: [0x2719d0, 0x271af0], note: C++ virtual dispatch reproduces the native device-call ABI}
+  - {src: src/game/unsorted/tu_271650.c, range: [0x271af0, 0x271be8]}
+  - {src: src/game/unsorted/tu_271650_271be8.cpp, range: [0x271be8, 0x2722b8], flags: [-O2, -G0, -snas], assembler: sn-min6, note: SN preserves the update division load delay; native record-release loops have six words}
   - {src: src/game/unsorted/tu_2722b8.c, range: [0x2722b8, 0x2722d0]}
   - {src: src/game/unsorted/tu_2722d0.cpp, range: [0x2722d0, 0x272300], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x272300, 0x272308]}
