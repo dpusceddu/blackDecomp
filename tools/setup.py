@@ -136,6 +136,7 @@ def main():
     step('platform')
     if platform.system() != 'Linux' or platform.machine() not in ('x86_64', 'AMD64'):
         stop('the toolchain needs a prepared Linux x86-64 shell; have the user or harness provide it (docs/setup.md)')
+    (ROOT / '.local').mkdir(exist_ok=True)
     if args.provision:
         provision_system()
 
