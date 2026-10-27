@@ -392,9 +392,10 @@ splits:
   - {src: src/game/unsorted/tu_14be20_14ca70.c, range: [0x14ca70, 0x14cc90]}
   - {src: src/game/unsorted/tu_14be20_14cc90.c, range: [0x14cc90, 0x14cd38]}
   - {src: src/game/unsorted/tu_14be20_14cd38.c, range: [0x14cd38, 0x14cdb8]}
-  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14cdb8, 0x14ce40]}
+  - {src: src/game/weapons/resource_state.cpp, range: [0x14cdb8, 0x14ce40], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], note: "C++ reuses Effects::IdentityXYZ; native identity and geometry operations require allocatable VF1-VF4 operands."}
   - {src: src/game/unsorted/tu_14ce40.c, range: [0x14ce40, 0x14ce68]}
-  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14ce68, 0x14d3b8]}
+  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14ce68, 0x14d358]}
+  - {src: src/game/weapons/resource_state.cpp, range: [0x14d358, 0x14d3b8]}
   - {src: src/game/unsorted/tu_14d3b8.c, range: [0x14d3b8, 0x14d420], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_14d3b8_14d420.c, range: [0x14d420, 0x14d4e0], note: flags or language differ}
   - {src: src/game/unsorted/tu_14d3b8_14d4e0.c, range: [0x14d4e0, 0x14d548], flags: [-O1, -G0, -snas], note: flags or language differ}
@@ -409,7 +410,9 @@ splits:
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14e018, 0x14e0f8]}
   - {src: src/game/unsorted/tu_14e0f8.c, range: [0x14e0f8, 0x14ec08]}
   - {src: src/game/unsorted/tu_14ec08.c, range: [0x14ec08, 0x14ec10]}
-  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14ec10, 0x14ede0]}
+  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14ec10, 0x14ec40]}
+  - {src: src/game/weapons/resource_state.cpp, range: [0x14ec40, 0x14ec90]}
+  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14ec90, 0x14ede0]}
   - {src: src/game/actor/actor_cb38_reset.cpp, range: [0x14ede0, 0x14eef0], flags: [-O2, -G0, -snas, -fno-schedule-insns]}
   - {src: src/game/actor/tu_14eef0.c, range: [0x14eef0, 0x14f348]}
   - {src: src/game/actor/tu_14f348.c, range: [0x14f348, 0x14f380]}
@@ -417,7 +420,8 @@ splits:
   - {src: src/game/unsorted/tu_14f380_14f490.c, range: [0x14f490, 0x14f668]}
   - {src: src/game/actor/actor_cb38.cpp, range: [0x14f668, 0x14f6f0]}
   - {src: src/game/unsorted/tu_14f380_14f490.c, range: [0x14f6f0, 0x14f7f8]}
-  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14f7f8, 0x14fa80]}
+  - {src: src/game/weapons/resource_state.cpp, range: [0x14f7f8, 0x14f888]}
+  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14f888, 0x14fa80]}
   - {src: src/game/weapons/actor_c388.cpp, range: [0x14fa80, 0x14fda0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
   - {src: src/game/unsorted/tu_14fda0.c, range: [0x14fda0, 0x14fda8]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x14fda8, 0x150738]}
