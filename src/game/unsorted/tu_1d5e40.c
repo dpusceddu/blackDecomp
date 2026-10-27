@@ -33,10 +33,32 @@ typedef struct Recovered_ResourceOwner {
     u8 unk_88[0x12C];
     void* playback;
 } Recovered_ResourceOwner;
-extern void* func_002842E8(void*);
-extern void func_00284298(void*);
+extern s32 func_002842E8(void*);
+extern s32 func_00284298(void*);
 extern s32 func_001D7A60(void*);
 extern void func_00281C98(void*);
+
+// Partial slot views; original identities and unused fields are UNVERIFIED.
+
+typedef struct Recovered_ResourceSlot {
+    void* resource;
+    u8 unk_04[0xB];
+    u8 active;
+} Recovered_ResourceSlot;
+typedef struct Recovered_ResourceSlots {
+    u8 unk_00[0x20];
+    Recovered_ResourceSlot slots[2];
+} Recovered_ResourceSlots;
+
+typedef struct Recovered_PlaybackSlot {
+    u8 unk_00[0x90];
+    u8 active;
+    u8 unk_91[0x39F];
+} Recovered_PlaybackSlot;
+typedef struct Recovered_PlaybackSlots {
+    u8 unk_00[0x2C0];
+    Recovered_PlaybackSlot slots[6];
+} Recovered_PlaybackSlots;
 
 s32 func_001D5E40(void) {
     return 0;
@@ -84,8 +106,6 @@ s32 func_001D5EA8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4) {
     }
 }
 
-#ifdef NON_MATCHING
-// Unmatched: the resource loop uses different saved registers.
 s32 func_001D5F58(Recovered_ResourceOwner* owner) {
     u32 index;
     switch (owner->state) {
@@ -95,64 +115,45 @@ s32 func_001D5F58(Recovered_ResourceOwner* owner) {
         case 2:
         case 3:
         case 4:
-            index = 0;
-            if (owner->count != 0) {
-                u32 offset = 0;
-                do {
-                    Recovered_ResourceEntry* entry = (Recovered_ResourceEntry*)((u8*)owner->entries + offset);
-                    index++;
-                    offset += sizeof(Recovered_ResourceEntry);
-                    func_00284298(entry->resource);
-                } while (index < owner->count);
-            }
+            for (index = 0; index < owner->count; index++) { func_00284298(owner->entries[index].resource); }
             if (func_001D7A60(owner->playback) != 0) {
                 M2C_FIELD(owner, void**, 0x78) = 0;
                 owner->state = 5;
                 owner->playback = 0;
                 case 5:
                     func_00281C98((u8*)owner + 0x94);
-                    owner->entries = 0;
-                    owner->state = 7;
                     owner->count = 0;
+                    owner->state = 7;
+                    owner->entries = 0;
                 case 7: return 1;
             }
         default: return 0;
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D5F58);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6038);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D60B8);
-#ifdef NON_MATCHING
-// Unmatched: the loop index and byte offset use swapped saved registers.
 Recovered_ResourceEntry* func_001D6178(Recovered_ResourceOwner* owner) {
-    u32 offset;
     u32 index;
     Recovered_ResourceEntry* oldest = owner->entries;
-    index = 0;
-    if (owner->count != 0) {
-        offset = 0;
-        do {
-            Recovered_ResourceEntry* entry = (Recovered_ResourceEntry*)((u8*)owner->entries + offset);
-            if (func_002842E8(entry->resource) == 0) {
-                entry->stamp = owner->stamp;
-                return entry;
-            }
-            index++;
-            offset += sizeof(Recovered_ResourceEntry);
-            oldest = entry->stamp < oldest->stamp ? entry : oldest;
-        } while (index < owner->count);
+    for (index = 0; index < owner->count; index++) {
+        Recovered_ResourceEntry* entry = &owner->entries[index];
+        if (func_002842E8(entry->resource) == 0) {
+            entry->stamp = owner->stamp;
+            return entry;
+        }
+        oldest = entry->stamp < oldest->stamp ? entry : oldest;
     }
     func_00284298(oldest->resource);
     oldest->stamp = owner->stamp;
     return oldest;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6178);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D6230);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D62F8);
+void func_001D62F8(Recovered_ResourceOwner* owner, Recovered_ResourceEntry* entries, u32 count) {
+    u32 index;
+    for (index = 0; index < owner->count; index++) { func_00284298(owner->entries[index].resource); }
+    owner->count = count;
+    owner->entries = entries;
+}
 
 void func_001D6388(s32 arg0, void** resources, s32 count) {
     ResourcePool_Rebind((void*)(arg0 + 0x94), resources, count);
@@ -209,7 +210,17 @@ void func_001D7258(void *arg0) {
     func_001F0958(M2C_FIELD(arg0, s32 *, 0x1BE0));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7278);
+Recovered_PlaybackSlot* func_001D7278(Recovered_PlaybackSlots* self) {
+    s32 index;
+    for (index = 0; index < 6; index++) {
+        Recovered_PlaybackSlot* slot = &self->slots[index];
+        if (slot->active == 0) {
+            slot->active = 1;
+            return slot;
+        }
+    }
+    return 0;
+}
 
 void func_001D72B8(s32 arg0, void *arg1) {
     M2C_FIELD(arg1, s8 *, 0x90) = 0;
@@ -233,7 +244,16 @@ void func_001D7338(s32 arg0, void *arg1) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7360);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D73D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7460);
+void* func_001D7460(Recovered_ResourceSlots* self) {
+    s32 index;
+    for (index = 0; index < 2; index++) {
+        if (self->slots[index].active == 0) {
+            self->slots[index].active = 1;
+            return self->slots[index].resource;
+        }
+    }
+    return 0;
+}
 
 void func_001D7498(s32 arg0, s32 arg1) {
     s32 var_3;
@@ -254,6 +274,15 @@ loop_1:
     goto loop_1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D74C8);
+void* func_001D74C8(Recovered_ResourceSlot* slots) {
+    s32 index;
+    for (index = 0; index < 2; index++) {
+        if (slots[index].active == 0) {
+            slots[index].active = 1;
+            return slots[index].resource;
+        }
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D7500);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5e40", func_001D75E0);
