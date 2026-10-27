@@ -10,8 +10,8 @@ typedef struct SlotEntry {
 } SlotEntry;
 typedef struct SlotList {
     SlotEntry* entries;
-    void* unknown4;
-    void* unknown8;
+    void* context;
+    void* compound;
     s16 capacity;
     s16 count;
 } SlotList;
@@ -104,9 +104,29 @@ extern void func_0025CEF8(OwnerView*, void*);
 extern void func_0025C870(void*, s32);
 extern void func_00388190(void*);
 extern s32 func_00152690(s32);
-extern void func_0025DB20(void*);
+extern void func_0025DB20(OwnerView*);
 extern s32* D_0040F4CC;
 
+static inline ChildView* ChildByOffset(ChildView* base, s32 offset) {
+    return (ChildView*)((u8*)base + offset);
+}
+static inline s32 CompoundCount(PoolView* self) { return self->compound->count; }
+static inline BodyView* CompoundBody(PoolView* self, s32 index) {
+    return ChildByOffset(self->compound->children, index * sizeof(ChildView))->body;
+}
+static inline float VectorY(BkVuVector value) {
+    union { BkVuVector vector; float lane[4]; } view;
+    view.vector = value;
+    return view.lane[1];
+}
+
+extern void func_0025DAC0(void*);
+extern s32 func_00260C70(void*, s32);
+extern void func_001A5B10(s32, s32);
+extern void func_00263558(SlotList*, s16);
+extern s32 func_00263360(void*, s32);
+
+extern void func_002611C8(void);
 extern void func_0014C380(s32);
 
 extern void func_0025C4C8(s32*, void*);
@@ -180,7 +200,7 @@ s32 func_0025C2C8(s32 arg0, s32 arg1) {
 
     temp_5 = M2C_FIELD(arg1, s32 *, 0x350);
     if (temp_5 != 0) {
-        func_0025C4C8(arg0, temp_5);
+        func_0025C4C8((s32*)arg0, (void*)temp_5);
     }
     func_00136F10(arg1, 1);
     temp_v0 = func_0025C798(arg0, M2C_FIELD(arg1, s32 *, 0xB4));
@@ -189,7 +209,27 @@ s32 func_0025C2C8(s32 arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025C320);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025C3B8);
+void func_0025C3B8(ResourcePoolView* self, void* motion, void* actor) {
+    CompoundView* compound;
+    s32 i;
+    if (func_0032E1B0(self->scene, M2C_FIELD(motion,void**,0xC)))
+        func_0032CDE0(self->scene, M2C_FIELD(motion,s32*,0xC));
+    func_00260C70(motion, M2C_FIELD(actor,s32*,0x30));
+    compound = M2C_FIELD(motion,CompoundView**,0xC);
+    func_0032CB58(self->scene,(s32)compound,4);
+    for (i = 0; i < (s32)compound->count; i++) ChildByOffset(compound->children, i * sizeof(ChildView))->body->state |= 8;
+    M2C_FIELD(M2C_FIELD(actor,void**,0x34),s32*,0x18) = 12;
+    func_0032B700(M2C_FIELD(motion,CompoundView**,0xC));
+    func_001A5B10(M2C_FIELD(M2C_FIELD(motion,void**,0),s32*,0x330),0);
+    {
+        u8* owner = M2C_FIELD(motion,u8**,0);
+        BkVuVector* frame = (BkVuVector*)(owner + 0x70);
+        M2C_FIELD(owner,BkVuVector*,0x150) = frame[0];
+        M2C_FIELD(owner,BkVuVector*,0x160) = frame[1];
+        M2C_FIELD(owner,BkVuVector*,0x170) = frame[2];
+        M2C_FIELD(owner,BkVuVector*,0x180) = frame[3];
+    }
+}
 void func_0025C4C8(s32* self, void* target) {
     u8* occupied = (u8*)self + 0x8B40;
     u8* slot = (u8*)self + 0x8B08;
@@ -266,7 +306,7 @@ s32 func_0025C910(ResourcePoolView* self, s32 priority) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025CA10);
 
 void func_0025CAE8(s32 arg0, s32 arg1) {
-    func_0025DA20(arg1);
+    func_0025DA20((OwnerView*)arg1);
 }
 
 void func_0025CB08(s32* self, OwnerView* owner) {
@@ -335,7 +375,7 @@ s32 func_0025CCE8(void* self, void* slot) {
 s32 func_0025CDA0(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_2;
 
-    temp_2 = func_0025C910(arg0, arg2);
+    temp_2 = func_0025C910((ResourcePoolView*)arg0, arg2);
     M2C_FIELD(arg0, s32 *, 0x8B04) = temp_2;
     M2C_FIELD(arg1, s32 *, 0) = temp_2;
     return ~M2C_FIELD(arg0, s32 *, 0x8B04) != 0;
@@ -450,14 +490,27 @@ void func_0025DAF0(void* self) {
     func_0014C380(M2C_FIELD(self, s32*, 0x30));
     M2C_FIELD(self, u8*, 0x3F) = 1;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025DB20);
+void func_0025DB20(OwnerView* self) {
+    if (M2C_FIELD(self->compound->children->body, s32*, 0xAC) == 10 && self->unknown3C[1]) {
+        if (VectorY(self->normal) >= 0.5f) {
+            func_0025DAC0(self);
+            func_0025CA10(D_0040F4CC,self);
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025DBA8);
 
 void func_0025DC80(void *arg0) {
     M2C_FIELD(M2C_FIELD(M2C_FIELD(M2C_FIELD(arg0, void **, 0x34), void **, 0xC), void **, 0x58), s32 *, 0xAC) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025DC98);
+s32 func_0025DC98(PoolView* self) {
+    s32 result = 1;
+    s32 count = CompoundCount(self);
+    s32 i;
+    for (i = 0; i < count && result; i++) result = result && ((CompoundBody(self, i)->state & 2) != 0);
+    return result;
+}
 BkVuVector func_0025DD08(PoolView* self) {
     BodyView* body = self->compound->children[1].body;
     return ScaleXYZ(body->linearStep, body->solver->inverseScale);
@@ -515,7 +568,17 @@ void func_002611C8(void) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_002611D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_00261C50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_00262668);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_002632B8);
+s32 func_002632B8(SlotList* self, s32 scene) {
+    s32 i;
+    void* shapes = M2C_FIELD(M2C_FIELD(M2C_FIELD(self->context,void**,4),void**,0),void**,0x40);
+    for (i = 0; i < self->capacity; i++) func_00263558(self, (s16)i);
+    {
+        void* vtable = M2C_FIELD(shapes,void**,0x20);
+        M2C_FIELD(vtable,void(**)(void*),0x18)((u8*)shapes + M2C_FIELD(vtable,s16*,0x14));
+    }
+    func_0032CB58(scene,(s32)self->compound,1);
+    return 1;
+}
 
 s32 func_00263360(void *arg0, s32 arg1) {
     func_0032CDE0(arg1, M2C_FIELD(arg0, s32 *, 8));
