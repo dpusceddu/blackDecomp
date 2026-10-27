@@ -90,77 +90,64 @@ void UnknownVtable_003DC130::Function_001652E0()
 }
 
 
-#ifdef NON_MATCHING
-#include "game/graphics/sound_envelopes.hpp"
-using namespace Graphics;
-// Unmatched: 5 instruction differences after original layout, EE clamp and helper-context probes.
-void SoundEnvelope::Release()
-{
-    state=3;
-    float now=SoundClock();
-    endpoint=low;
-    ratio=high/low;
-    deadline=now+release;
-}
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EDD80);
-#endif
-
-
-#ifdef NON_MATCHING
-#include "game/graphics/sound_envelopes.hpp"
-using namespace Graphics;
-// Unmatched: 8 instruction differences after original layout, EE clamp and helper-context probes.
-int DestructionEnvelope::Begin(float value,unsigned useEndpoint)
-{
-    if(!initialized)func_001ED9C8(this,D_003BDA14,0);
-    if(useEndpoint)endpoint=value;else endpoint=high;
-    state=1;
-    float now=SoundClock();
-    ratio=low/endpoint;
-    deadline=now+attack;
-    ActivateEnvelopeWithArguments(this,value,useEndpoint);
-    func_001EFE70(this,1);
-    return 1;
-}
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EDDE0);
-#endif
-
-#ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
 #include "ps2/prelude.h"
 using namespace Graphics;
-// Unmatched: 20 instruction differences after original layout, EE clamp and helper-context probes.
-void DestructionEnvelope::Update()
-{
-    if(state==1) {
-        progress=1.0f-(deadline-SoundClock())/attack;
-        level=endpoint*func_0029E688(ratio,__ee_min_s(progress,1.0f));
-        func_00286120(level,multiplier,SoundFilter());
-        func_001D7238(level,multiplier,gain,SoundObjects()[3]);
-        if(progress<1.0f)return;
-        func_001EDDB8(this);
-    } else if(state<2)return;else if(state==2) {} else if(state==3)goto releaseState;else return;
-    progress=1.0f-(deadline-SoundClock())/hold;
-    func_001D7238(level,multiplier,gain,SoundObjects()[3]);
-    if(progress<1.0f)return;
-    ((EnvelopeInterface *)this)->Release();
-releaseState:
-    progress=1.0f-(deadline-SoundClock())/release;
-    level=endpoint*func_0029E688(ratio,__ee_min_s(progress,1.0f));
-    func_00286120(level,multiplier,SoundFilter());
-    func_001D7238(level,multiplier,gain,SoundObjects()[3]);
-    if(!(progress<1.0f))state=0;
+
+void SoundEnvelope::Release() {
+    state = 3;
+    float now = SoundClock();
+    endpoint = low;
+    ratio = high / low;
+    deadline = now + release;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EDE98);
-#endif
+
+int DestructionEnvelope::Begin(float value, unsigned useEndpoint) {
+    if (!initialized) func_001ED9C8(this, D_003BDA14, 0);
+    if (useEndpoint)
+        endpoint = value;
+    else
+        endpoint = high;
+    state = 1;
+    float now = SoundClock();
+    ratio = low / endpoint;
+    deadline = now + attack;
+    ActivateEnvelopeWithArguments(this, value, useEndpoint);
+    func_001EFE70(this, 1);
+    return 1;
+}
+
+void DestructionEnvelope::Update() {
+    if (state == 1) {
+        progress = 1.0f - (deadline - SoundClock()) / attack;
+        level = endpoint * func_0029E688(ratio, __ee_min_s(progress, 1.0f));
+        func_00286120(level, multiplier, SoundFilter());
+        func_001D7238(level, multiplier, gain, SoundObjects()[3]);
+        if (progress < 1.0f) return;
+        func_001EDDB8(this);
+    } else if (state < 2)
+        return;
+    else if (state == 2) {
+    } else if (state == 3)
+        goto releaseState;
+    else
+        return;
+    progress = 1.0f - (deadline - SoundClock()) / hold;
+    func_001D7238(level, multiplier, gain, SoundObjects()[3]);
+    if (progress < 1.0f) return;
+    ((EnvelopeInterface*)this)->Release();
+releaseState:
+    progress = 1.0f - (deadline - SoundClock()) / release;
+    level = endpoint * func_0029E688(ratio, __ee_min_s(progress, 1.0f));
+    func_00286120(level, multiplier, SoundFilter());
+    func_001D7238(level, multiplier, gain, SoundObjects()[3]);
+    if (!(progress < 1.0f)) state = 0;
+}
 
 #ifdef NON_MATCHING
 #include "game/graphics/sound_envelopes.hpp"
 using namespace Graphics;
-// Unmatched: 6 instruction differences after original layout, EE clamp and helper-context probes.
+// Unmatched: 6 instruction differences; the global-address high part and offset use swapped saved registers.
 int DestructionEnvelope::Unregister()
 {
     state=0;
@@ -175,90 +162,103 @@ int DestructionEnvelope::Unregister()
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EE0B0);
 #endif
 
-
-#ifdef NON_MATCHING
-#include "game/graphics/sound_envelopes.hpp"
-#include "ps2/prelude.h"
-using namespace Graphics;
-// Unmatched: 18 instruction differences after original layout, EE clamp and helper-context probes.
 extern "C" float D_003BDA0C;
-extern "C" void func_001F07B8(float,void *);
-void TimedEnvelope::Update()
-{
-    if(state==1){
-        progress=1.0f-(deadline-SoundClock())/attack;
-        level=endpoint*func_0029E688(ratio,__ee_min_s(progress,1.0f));
-        func_00286120(level,multiplier,SoundFilter());
-        func_001D7238(level,multiplier,gain,SoundObjects()[3]);
-        func_001F07B8(progress*scale*D_003BDA0C,*(void **)((unsigned char *)SoundObjects()[3]+0x1be0));
-        if(progress<1.0f)return;
+extern "C" void func_001F07B8(float, void*);
+
+void TimedEnvelope::Update() {
+    if (state == 1) {
+        progress = 1.0f - (deadline - SoundClock()) / attack;
+        level = endpoint * func_0029E688(ratio, __ee_min_s(progress, 1.0f));
+        func_00286120(level, multiplier, SoundFilter());
+        func_001D7238(level, multiplier, gain, SoundObjects()[3]);
+        func_001F07B8(progress * scale * D_003BDA0C, *(void**)((unsigned char*)SoundObjects()[3] + 0x1be0));
+        if (progress < 1.0f) return;
         func_001EDDB8(this);
-    } else if(state<2)return;else if(state==2){}else if(state==3)goto releaseState;else return;
-    progress=1.0f-(deadline-SoundClock())/hold;
-    func_001D7238(level,multiplier,gain,SoundObjects()[3]);
-    func_001F07B8(scale*D_003BDA0C,*(void **)((unsigned char *)SoundObjects()[3]+0x1be0));
-    if(progress<1.0f)return;
+    } else if (state < 2)
+        return;
+    else if (state == 2) {
+    } else if (state == 3)
+        goto releaseState;
+    else
+        return;
+    progress = 1.0f - (deadline - SoundClock()) / hold;
+    func_001D7238(level, multiplier, gain, SoundObjects()[3]);
+    func_001F07B8(scale * D_003BDA0C, *(void**)((unsigned char*)SoundObjects()[3] + 0x1be0));
+    if (progress < 1.0f) return;
     Release();
 releaseState:
-    progress=1.0f-(deadline-SoundClock())/release;
-    level=endpoint*func_0029E688(ratio,__ee_min_s(progress,1.0f));
-    func_00286120(level,multiplier,SoundFilter());
-    func_001D7238(level,multiplier,gain,SoundObjects()[3]);
-    func_001F07B8((1.0f-progress)*scale*D_003BDA0C,*(void **)((unsigned char *)SoundObjects()[3]+0x1be0));
-    if(!(progress<1.0f))state=0;
+    progress = 1.0f - (deadline - SoundClock()) / release;
+    level = endpoint * func_0029E688(ratio, __ee_min_s(progress, 1.0f));
+    func_00286120(level, multiplier, SoundFilter());
+    func_001D7238(level, multiplier, gain, SoundObjects()[3]);
+    func_001F07B8((1.0f - progress) * scale * D_003BDA0C, *(void**)((unsigned char*)SoundObjects()[3] + 0x1be0));
+    if (!(progress < 1.0f)) state = 0;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EE298);
-#endif
 
 #ifdef NON_MATCHING
-#include "game/graphics/sound_envelopes.hpp"
-using namespace Graphics;
-// Unmatched: 20 instruction differences after original layout, EE clamp and helper-context probes.
-void LowHealthEnvelope::Reset()
-{
-    kind=3;high=24000.0f;low=200.0f;multiplier=1.2f;unknown2c=2.0f;gain=1.0f;
-    release=0.75f;enabled=1;blend=1.0f/3.0f;
-    state=0;mode=1;
-    channels[0]=1;channels[1]=1;channels[2]=1;channels[3]=1;channels[4]=1;channels[5]=1;
-    unknown4a=1;unknown4b=1;initialized=0;
+static inline void SetEnvelopeEnabled(EnvelopeFields* envelope, int value) { envelope->enabled = value; }
+
+// Unmatched: 16 instruction differences in float allocation and byte-store scheduling.
+void LowHealthEnvelope::Reset() {
+    kind = 3;
+    high = 24000.0f;
+    low = 200.0f;
+    multiplier = 1.2f;
+    unknown2c = 2.0f;
+    gain = 1.0f;
+    release = 0.75f;
+    SetEnvelopeEnabled(this, 1);
+    blend = 1.0f / 3.0f;
+    state = 0;
+    mode = 1;
+    channels[0] = 1;
+    channels[1] = 1;
+    channels[2] = 1;
+    channels[3] = 1;
+    channels[4] = 1;
+    channels[5] = 1;
+    unknown4a = 1;
+    unknown4b = 1;
+    initialized = 0;
 }
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EE540);
 #endif
 
+static inline float ClampEnvelopeLevel(float value, float low, float high) {
+    return __ee_min_s(__ee_max_s(value, low), high);
+}
 
-#ifdef NON_MATCHING
-#include "game/graphics/sound_envelopes.hpp"
-#include "ps2/prelude.h"
-using namespace Graphics;
-// Unmatched: 27 instruction differences after original layout, EE clamp and helper-context probes.
-void LowHealthEnvelope::Update()
-{
-    if(state==1)state=2;else if(state<2)return;else if(state==2){}else if(state==3)goto releaseState;else return;
+void LowHealthEnvelope::Update() {
+    float mix;
+    if (state == 1)
+        state = 2;
+    else if (state < 2)
+        return;
+    else if (state == 2) {
+    } else if (state == 3)
+        goto releaseState;
+    else
+        return;
     {
-        float mix;
-        if(1.0f<=Blend()){level=endpoint;mix=multiplier;}
-        else {
-            level=endpoint*func_0029E688(ratio,1.0f-Blend());
-            level=__ee_max_s(level,low);
-            level=__ee_min_s(level,endpoint);
-            mix=unknown2c+(multiplier-unknown2c)*Blend();
+        if (1.0f <= Blend()) {
+            level = endpoint;
+            mix = multiplier;
+        } else {
+            level = endpoint * func_0029E688(ratio, 1.0f - Blend());
+            level = ClampEnvelopeLevel(level, low, endpoint);
+            mix = unknown2c + (multiplier - unknown2c) * Blend();
         }
-        func_00286120(level,mix,SoundFilter());
-        func_001D7238(level,mix,gain,SoundObjects()[3]);
+        func_00286120(level, mix, SoundFilter());
+        func_001D7238(level, mix, gain, SoundObjects()[3]);
         return;
     }
 releaseState:
-    progress=1.0f-(deadline-SoundClock())/release;
-    level=endpoint*func_0029E688(ratio,__ee_min_s(progress,1.0f));
-    float mix=unknown2c+(multiplier-unknown2c)*progress;
-    func_00286120(level,mix,SoundFilter());
-    func_001D7238(level,mix,gain,SoundObjects()[3]);
-    if(progress<1.0f)return;
-    state=0;
+    progress = 1.0f - (deadline - SoundClock()) / release;
+    level = endpoint * func_0029E688(ratio, __ee_min_s(progress, 1.0f));
+    mix = unknown2c + (multiplier - unknown2c) * progress;
+    func_00286120(level, mix, SoundFilter());
+    func_001D7238(level, mix, gain, SoundObjects()[3]);
+    if (progress < 1.0f) return;
+    state = 0;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/game_methods", func_001EE678);
-#endif
-

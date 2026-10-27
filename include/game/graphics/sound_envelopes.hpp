@@ -52,8 +52,10 @@ void func_001D7258(float,void *);
 void func_002860D0(float,void *);
 }
 namespace Graphics {
-static inline void **SoundObjects() { return *(void ***)(D_0040F510+0xcbd8); }
-static inline void *SoundFilter() { return *(void **)(D_0040F510+0xcbe0); }
-static inline float SoundClock() { return *(float *)(D_0040F4D0+0x20); }
+static inline unsigned char* const& SoundStateSource() { return D_0040F510; }
+static inline void** SoundObjects() { return *(void***)(SoundStateSource() + 0xcbd8); }
+static inline void* SoundFilter() { return *(void**)(SoundStateSource() + 0xcbe0); }
+static inline unsigned char* const& SoundClockSource() { return D_0040F4D0; }
+static inline float SoundClock() { return *(float *)(SoundClockSource() + 0x20); }
 }
 #endif
