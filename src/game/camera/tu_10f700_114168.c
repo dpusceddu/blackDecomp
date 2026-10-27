@@ -2,6 +2,7 @@
 #include "ps2/prelude.h"
 #include "game/effects/random_state.h"
 #include "game/ai_manager.h"
+#include "game/actor_slots.h"
 
 // Partial Game view; only the random-state placement is recovered here.
 typedef struct Recovered_GameRandomView {
@@ -90,7 +91,7 @@ typedef struct Recovered_CameraRequest {
     s128 unk_10;
     u32 unk_20;
 } Recovered_CameraRequest;
-extern const s128 D_004432A0;
+extern s128 D_004432A0;
 
 typedef struct Recovered_IndirectView {
     u8 unk_0[0x328];
@@ -268,6 +269,40 @@ extern void func_00165C40(void*, Recovered_Record60*);
 extern void func_00130660(Recovered_Record14*);
 extern s32 func_00130678(Recovered_Record14*);
 
+typedef struct Recovered_PoolChoice {
+    s32 unk_0;
+    u8 unk_4[0x14];
+} Recovered_PoolChoice;
+typedef char PoolChoiceSize[sizeof(Recovered_PoolChoice) == 0x18 ? 1 : -1];
+
+extern void func_00181030(void*, Recovered_ManagedSlot*);
+extern void func_00185D08(void*, Recovered_ManagedSlot*);
+extern void func_00180F10(void*, Recovered_ManagedSlot*);
+extern void func_00188B90(void*, Recovered_ManagedSlot*);
+extern void func_00187E08(void*, Recovered_ManagedSlot*);
+extern void func_0017C9F0(void*, Recovered_ManagedSlot*);
+extern void func_00183910(void*, Recovered_ManagedSlot*);
+extern void func_00181FF0(void*, Recovered_ManagedSlot*);
+extern void func_001804D0(void*, Recovered_ManagedSlot*);
+extern void func_0018AD80(void*, Recovered_ManagedSlot*);
+extern void func_0018CEE0(void*, Recovered_ManagedSlot*);
+extern void func_00181F20(void*, Recovered_ManagedSlot*);
+extern void func_0018D978(void*, Recovered_ManagedSlot*);
+extern void func_0018C178(void*, Recovered_ManagedSlot*);
+extern void func_001831D8(void*, Recovered_ManagedSlot*);
+extern void func_0013EC10(Recovered_ManagedSlot*, s32);
+extern void func_00176EE0(void*);
+extern void func_0017B260(void*, Recovered_ManagedSlot*);
+extern void func_0016AB58(void*, s32);
+extern void func_00189B90(Recovered_ActorRecords*, s32);
+extern void func_00188A18(void*, s32);
+extern void func_00183BC0(void*, s32);
+extern void func_001815D8(void*, s32);
+extern Recovered_ActorSlot* func_00179258(Recovered_ActorSlotTable*, s32);
+extern s32 func_00178F18(Recovered_ActorSlot*);
+extern Recovered_ManagedSlot* func_00135550(Recovered_ManagedActor*);
+extern void func_00174018(u16*, void*);
+
 extern s32 func_001B6CF8(s32, s32, M2C_UNK);
 extern s32 D_0040F4D8;
 extern s32 func_00149AC8(s32);
@@ -311,14 +346,24 @@ void func_00114980(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00114988);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00115D38);
+void func_00115D38(Recovered_CameraRequest* self) {
+    self->unk_C = 0;
+    self->unk_4 = NULL;
+    self->unk_8 = 0.0f;
+    self->unk_10 = D_004432A0;
+    self->unk_20 = 0;
+}
 void func_00115D70(Recovered_CameraRequest* self, void* arg1, s128 arg2, f32 value) {
     self->unk_C = 1;
     self->unk_8 = value;
     self->unk_10 = arg2;
     self->unk_4 = arg1;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00115DA8);
+void func_00115DA8(Recovered_CameraRequest* self) {
+    self->unk_C = 0;
+    self->unk_10 = D_004432A0;
+    self->unk_20 = 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00115DC8);
 void func_001168E0(Recovered_SlotTransition* self, Recovered_SlotOwnerView* owner) {
     func_0027ACC8(self);
@@ -381,7 +426,18 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126E48);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126E50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126F08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126F10);
+u32 func_00126F10(Recovered_SlotPool* self, s32 value) {
+    u32 result = 0;
+    u8 i;
+    for (i = 0; i < self->unk_5844->unk_1; i++) {
+        Recovered_PoolChoice* choices = self->unk_5844->unk_C;
+        if (value == choices[i].unk_0) {
+            result = i;
+            break;
+        }
+    }
+    return result;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126F80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00127060);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012C650);
@@ -635,9 +691,45 @@ void func_0013CE08(Recovered_ManagerPredicate* self) {
     }
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013CED0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013CF38);
+void func_0013CF38(Recovered_ManagedSlot* self) {
+    func_00181030((u8*)self + 0xEC0, self);
+    func_00185D08((u8*)self + 0x90, self);
+    func_00180F10((u8*)self + 0x140, self);
+    func_00188B90((u8*)self + 0x150, self);
+    func_00187E08((u8*)self + 0x290, self);
+    func_0017C9F0((u8*)self + 0x650, self);
+    func_00183910((u8*)self + 0x6F0, self);
+    func_00181FF0((u8*)self + 0x810, self);
+    func_001804D0((u8*)self + 0xB30, self);
+    func_0018AD80((u8*)self + 0xCC0, self);
+    func_0018CEE0((u8*)self + 0xD10, self);
+    func_00181F20((u8*)self + 0xC80, self);
+    func_0018D978((u8*)self + 0xC94, self);
+    func_0018C178((u8*)self + 0x1DA0, self);
+    func_001831D8((u8*)self + 0x1EB0, self);
+    self->freeNext = NULL;
+    *(s32*)self->unk_1EF4 = -1;
+    func_0013EC10(self, 1);
+    func_00176EE0(self->unk_1FCC);
+    func_0017B260((u8*)self + 0x1F60, self);
+    func_0016AB58((u8*)self + 0x1F90, 8);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D048);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D7A0);
+void func_0013D7A0(Recovered_ManagedSlot* self, s32 id) {
+    Recovered_ActorRecords* records = &self->records;
+    if (records->actorMask & (1U << id)) func_00189B90(records, id);
+    func_00188A18((u8*)self + 0x290, id);
+    func_00183BC0(self->events, id);
+    func_001815D8((u8*)self + 0xEC0, id);
+    if (func_00178F18(func_00179258((Recovered_ActorSlotTable*)((u8*)D_0040F4D4 + 0xFA8), id))) {
+        Recovered_ManagedActor* actor = func_00179258((Recovered_ActorSlotTable*)((u8*)D_0040F4D4 + 0xFA8), id)->actor;
+        if (func_00135550(actor) && func_00135550(actor)->unk_80 == 1) {
+            Recovered_ManagedSlot* other = func_00135550(actor);
+            func_00174018((u16*)((u8*)self + 0x1EF8), other);
+            func_00174018((u16*)((u8*)self + 0x1EFA), other);
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D8D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D9A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00140AD0);
