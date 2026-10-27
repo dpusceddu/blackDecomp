@@ -56,7 +56,7 @@ def main(args):
         raise SystemExit('expected func_XXXXXXXX or an address')
     name = 'func_%08X' % int(m.group(1), 16)
     out = prepare(name)
-    print('wrote %s\nUse upstream import.py --no-prune --settings %s DRAFT.c %s (C++ parsing is a known limitation).' % (out.relative_to(ROOT),out.with_suffix('.toml').relative_to(ROOT),out.relative_to(ROOT)))
+    print('wrote %s\nUse python3 tools/permuter/import.py --settings %s DRAFT.c %s (C++ parsing is a known limitation).' % (out.relative_to(ROOT),out.with_suffix('.toml').relative_to(ROOT),out.relative_to(ROOT)))
     return 0
 
 

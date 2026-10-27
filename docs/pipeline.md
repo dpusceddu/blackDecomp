@@ -49,20 +49,23 @@ python3 tools/next.py [files|near|types|identical|data|ee]  # best next work (fi
 
 ### Using decomp-permuter directly
 
-Use upstream decomp-permuter's own `import.py` and `permuter.py` in Linux, WSL 2, or the project Docker container. Install
+Use the project's import wrapper and upstream decomp-permuter's `permuter.py` in Linux, WSL 2, or the project container. Install
 `cpp` in that environment (`apt install cpp` on Debian). `autodecomp.py setup` clones the pinned permuter into `.venv/`.
 Prepare a target and its per-file settings, then import your draft:
 
 ```sh
 python3 tools/permuter/prepare.py func_00105BC0
-python3 .venv/decomp-permuter/import.py --no-prune --settings build/permuter/func_00105BC0.toml \
+python3 tools/permuter/import.py --settings build/permuter/func_00105BC0.toml \
   src/game/ui/tu_105bc0.c build/permuter/func_00105BC0.s
-python3 .venv/decomp-permuter/permuter.py nonmatchings/func_00105BC0 -j 2
+python3 .venv/decomp-permuter/permuter.py build/permuter/nonmatchings/func_00105BC0 -j 2
 ```
 
 `tools/permuter/cc.py --file <source>` reads the file's compiler, flags and assembler from `splits.yaml` for each candidate.
 The generated import settings also select the owning file's target assembler and enable upstream's inline-assembly
-literal handling. `--no-prune` retains typedefs needed by those opaque helper bodies. There is no project permuter service or
+literal handling. The wrapper keeps scalar typedef attributes in opaque compiler declarations with parser-only views,
+and checks that `s128`, `u128`, `EeS128`, `EeU128` and other `mode(TI)` aliases are 16 bytes on every compile. Import must
+parse and compile successfully before searching. It always uses `--no-prune` to retain those declarations and opaque
+helper bodies. The automatic pipeline uses the same typedef protection. There is no project permuter service or
 search supervisor. Upstream C++ parsing is a known limitation; unsupported C++/EE constructs may need an upstream
 `PERM_IGNORE`/`PERM_PRETEND` parser view. Such a view must preserve the actual compiler input and ABI. Review improved
 candidates, copy them into the TU, inspect objdiff, and require `ninja` to print `OK` before claiming a match.

@@ -20,6 +20,7 @@ from pathlib import Path
 sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 'pipeline', 'maint')]
 from elfinfo import Elf
 from build_telemetry import record as record_build
+from permuter.abi import preserve_typedefs
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = 'SLUS_213.76'
@@ -1458,7 +1459,7 @@ def expand_macros(src):
             i = k + 1
     body = call(body, 'M2C_FIELD', lambda a: '(*(%s)((s8 *)(%s) + (%s)))' % (a[1], a[0], a[2]))
     body = call(body, 'M2C_BITWISE', lambda a: '((%s)(%s))' % (a[0], a[1]))
-    return body.replace('NULL', '((void *)0)')
+    return preserve_typedefs(body.replace('NULL', '((void *)0)'))
 
 
 def hamming(a, b):
@@ -1491,7 +1492,8 @@ class Climb:
 
     @staticmethod
     def plain(text):
-        return '\n'.join(l for l in text.split('\n') if not l.startswith('#pragma _permuter'))
+        from src.ast_util import process_pragmas
+        return process_pragmas(text)
 
     def generate(self, k):
         from src.candidate import Candidate
@@ -1500,7 +1502,7 @@ class Climb:
         first_error = None
         for i in range(k):
             try:
-                c = Candidate.from_source(self.src, EvalState(), self.f['name'], self.weights, rng_seed=self.rnd.randrange(1, 10 ** 12))
+                c = Candidate.from_source(preserve_typedefs(self.src), EvalState(), self.f['name'], self.weights, rng_seed=self.rnd.randrange(1, 10 ** 12))
                 for _ in range(self.rnd.choice((1, 1, 2, 3))):
                     c.randomize_ast()
                 self.cands[i] = c.get_source()
@@ -1529,6 +1531,7 @@ class Climb:
 
 def committed_form(text):
     """Source of an exact permuter result in the repository's form: prelude include instead of typedefs, macros back."""
+    text = re.sub(r'(?m)^\s*typedef char PermuterSize_(\w+)\[sizeof\(\1\) == 16 \? 1 : -1\];\s*$', '', text)
     text = re.sub(r'(?m)^\s*typedef\s+struct\s*\{\s*s64\s+v;\s*\}\s*__attribute__\(\(packed\)\)\s*M2C_U64;', '', text)
     # Only complete declarations of the shared prelude's aliases may disappear.
     # A user typedef can span many lines; dropping just its first line corrupts
