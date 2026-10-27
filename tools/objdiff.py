@@ -70,6 +70,16 @@ DATA_SECTIONS = ('.rodata', '.lit4', '.lit8', '.sdata', '.sbss', '.data', '.bss'
 DATA_NAME = re.compile(r'\bD_([0-9A-Fa-f]{8})\b')
 
 
+def comparison_text_sections(text):
+    """Use the base object's canonical code-section names in the target too.
+
+    Intra-object calls can relocate against a section rather than its function.
+    Objdiff compares that section identity even when the function names agree.
+    Only comparison assembly changes; the production inputs retain their names.
+    """
+    return re.sub(r'(?m)^(\s*\.section\s+\.text\.)([0-9A-F]{8})(?=[,\s])', r'\1func_\2', text)
+
+
 def data_slots(slug):
     """{unit name: {section: address}}: where the link places each data section of a compiled unit. The build renames them
     to `<section>.<ADDRESS>` (build/<GAME_ID>/plan.json); the address is that of the original data the unit replaces."""
@@ -154,6 +164,7 @@ def build_view(spec_path, output):
         text = original.read_text()
         size = code_size(text,f['addr'],f['size'])
         texts.append(text)
+        text = comparison_text_sections(text)
         lines += [numeric_names(text,constants), '.type %s, @function' % label, '.size %s, %d' % (label,size)]
         r = state['resolved'].get(str(f['addr']))
         if r and r['status']=='source':

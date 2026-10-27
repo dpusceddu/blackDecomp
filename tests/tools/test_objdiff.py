@@ -108,5 +108,27 @@ class ObjectNormalization(unittest.TestCase):
         self.assertEqual(0x0A, struct.unpack_from('<I', fixed, 52 + 4)[0] >> 8)       # the symbol index stays
 
 
+class ComparisonTextSections(unittest.TestCase):
+    def test_code_sections_agree_with_the_base_function_name(self):
+        text = asm(0x100230, 2, tail_labels=['D_00400000'])
+        result = objdiff.comparison_text_sections(text)
+        self.assertIn('.section .text.func_00100230, "ax"', result)
+        self.assertIn('glabel func_00100230', result)
+        self.assertEqual(text.split('glabel', 1)[1], result.split('glabel', 1)[1])
+
+    def test_data_section_names_and_literals_are_preserved(self):
+        text = ('.section .rodata.00400000, "a"\n'
+                '    .asciz ".section .text.00100230"\n'
+                '.section .text.func_00100230, "ax"\n')
+        self.assertEqual(text, objdiff.comparison_text_sections(text))
+
+    def test_multiple_functions_and_repeated_normalization(self):
+        text = asm(0x100230, 2) + asm(0x100240, 3)
+        result = objdiff.comparison_text_sections(text)
+        self.assertIn('.text.func_00100230', result)
+        self.assertIn('.text.func_00100240', result)
+        self.assertEqual(result, objdiff.comparison_text_sections(result))
+
+
 if __name__ == '__main__':
     unittest.main()
