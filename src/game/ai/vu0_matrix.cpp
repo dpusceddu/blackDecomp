@@ -3,6 +3,7 @@
 #include "ps2/matrix.hpp"
 #include "game/ai_action.hpp"
 #include "game/actor/state.hpp"
+#include "animation/views/owner.hpp"
 extern "C" {
 #include "game/actor_records.h"
 #include "game/actor_slots.h"
@@ -568,6 +569,20 @@ Game::PositionArg func_00180A00(void*);
 int func_00182BA0(Game::Controller*, Game::PositionArg);
 int func_00182320(Game::Controller*, Game::PositionArg, int);
 }
+
+// UNVERIFIED smaller goal action; native members end at timer +0x24.
+struct SimpleGoalAction {
+    Game::ActionBase base;
+    unsigned char unk_08[8];
+    Game::Position4 point;
+    float limit;
+    Game::ActionTimer timer;
+};
+struct NativeControllerActive {
+    unsigned char unk_00[0x40];
+    int active;
+};
+typedef char SimpleGoalTimerOffset[(unsigned)&((SimpleGoalAction*)0)->timer == 0x24 ? 1 : -1];
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
@@ -1460,7 +1475,29 @@ void func_0019F590(Game::Action* self) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019FE28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019FF20);
+extern "C" {
+void func_0019FF20(SimpleGoalAction* self, const void* event) {
+    func_00193980(self, event);
+    if (!func_00188F10(RecordsFor(self->base.brain))) {
+        func_00193990((Game::Action*)self, 0);
+        return;
+    }
+    {
+        Game::Store(self->point, func_00189048(RecordsFor(self->base.brain)));
+        self->limit = 1.0f;
+        func_001825B0(&self->base.brain->controller);
+        if (FailedByte(func_00182BA0(&self->base.brain->controller, Game::Load(self->point)))) {
+            func_00193990((Game::Action*)self, 0);
+            func_00173640(&self->timer, 10.0f);
+            return;
+        }
+        func_00173640(&self->timer, 10.0f);
+        func_001823B0(&self->base.brain->controller, Game::Load(self->point), 1);
+        return;
+    }
+}
+}
+
 extern "C" {
 void func_001A06C8(TimerAction* self) {
     if (func_00173610(&self->timer)) {
@@ -1474,7 +1511,24 @@ void func_001A06C8(TimerAction* self) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A0738);
+extern "C" {
+void func_001A0738(TimerAction* self, const void* event) {
+    func_00193980(self, event);
+    if (Movement(self->base.brain)->active) func_001880D8(Movement(self->base.brain));
+    NativeControllerActive* controller = (NativeControllerActive*)&self->base.brain->controller;
+    if (controller->active) func_001825B0((Game::Controller*)controller);
+    AnimationViews::Action notice;
+    notice.key = 0;
+    notice.kind = 23;
+    ((AnimationViews::Owner*)((OwnerView*)self->base.brain->actor)->animation)->RequestAction(&notice);
+    if (func_00188F10(RecordsFor(self->base.brain))) {
+        Game::Brain* brain = self->base.brain;
+        func_0017E428(QueryFor(brain), func_00189048(RecordsFor(brain)));
+    }
+    func_00173640(&self->timer, 2.3f);
+}
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A13F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1640);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001A1DE0);
