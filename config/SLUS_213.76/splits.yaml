@@ -1497,7 +1497,8 @@ splits:
   - {src: src/game/unsorted/tu_1ed478.c, range: [0x1ed478, 0x1ed4a0]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed4a0, 0x1ed640]}
   - {src: src/game/unsorted/tu_1ed640.c, range: [0x1ed640, 0x1ed648]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed648, 0x1ed820]}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed648, 0x1ed6b0]}
+  - {src: src/game/audio/envelope_selector.cpp, range: [0x1ed6b0, 0x1ed820]}
   - {src: src/game/unsorted/tu_1ed820.c, range: [0x1ed820, 0x1ed830]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed830, 0x1ed8d0]}
   - {src: src/game/unsorted/tu_1ed8d0.cpp, range: [0x1ed8d0, 0x1ed968]}
