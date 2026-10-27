@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "game/effects/asset.h"
+#include "game/actor_binding.h"
 
 extern s32 func_001B37C8();
 extern s32 D_0040F4D8;
@@ -9,7 +10,8 @@ extern s32 func_00165BC8();
 extern s32 func_00165B98();
 extern void func_00169BF0();
 
-/* Private partial views: matched accesses verify offsets, not original class identities or complete sizes. */
+/* Private partial views. Matched accesses confirm used offsets; unused and draft-only members,
+ * original identities and complete allocations remain UNVERIFIED. */
 typedef struct ActionView {
     u64 id;
     u8 unk08[8];
@@ -52,9 +54,9 @@ typedef struct CountdownAction {
     CountdownDefinition* definition;
 } CountdownAction;
 extern void func_00160E70(void*);
-extern void func_00160EA0(void*);
+extern s32 func_00160EA0(void*);
 extern void func_00160EF8(void*);
-extern void func_00165AF8(void*);
+extern s32 func_00165AF8(void*);
 
 #define ACTION_OFFSET(type, field) ((u32) & ((type*)0)->field)
 typedef char ActionIdWidth[(sizeof(((ActionView*)0)->id) == 8) ? 1 : -1];
@@ -76,7 +78,7 @@ typedef struct GroupView {
     char sound[13];
     u8 count;
 } GroupView;
-extern void func_00165AF8(void*);
+extern s32 func_00165AF8(void*);
 extern char* func_0035CBC0(char*, const char*);
 extern void func_00181AD0(void*, s32);
 typedef struct GlobalTime {
@@ -109,7 +111,9 @@ typedef struct CommandWeapon {
 } CommandWeapon;
 extern s32 func_001AFDA8(BkActorTimerPS2*);
 extern void* func_00147988(CommandWeapon*, s32);
-extern void* func_0014DE58(void*, void*, BkActorAssetPS2*, s32, void*, s32, s32, s32);
+struct Resource;
+struct ResourcePool;
+extern struct Resource* func_0014DE58(struct ResourcePool*, void*, BkActorAssetPS2*, s32, void*, s32, s32, s32);
 typedef struct InventoryPool {
     u8 objects[0x3600];
     s32 firstTypes[32];
@@ -118,10 +122,7 @@ typedef struct InventoryPool {
     u8 firstUsed[32];
     u8 secondUsed[16];
 } InventoryPool;
-typedef struct Definition {
-    u8 unk00[0x48];
-    s32* indices;
-} Definition;
+
 typedef struct WeaponRecord {
     u8 unk00[0x54];
     s32 kind;
@@ -197,6 +198,88 @@ typedef struct RegionAction {
     RegionDefinition* definition;
 } RegionAction;
 
+extern void func_00177DE0(void*, void*);
+extern void func_00177E60(void*, u128);
+extern void func_00177E68(void*, s32);
+extern void func_0012A280(void*, void*);
+typedef struct State {
+    u128 matrix[4];
+    u128 position;
+    u8 unk50[0x10];
+    u8 flag;
+} State;
+typedef struct Config {
+    u128 matrix[4];
+    u64 resourceId;
+    u64 id;
+} Config;
+typedef struct ResourceCore {
+    u64 id;
+    u8 unk08[0x58];
+    u128 local;
+    u128 matrix[4];
+    u32 unkB0;
+    void* unkB4;
+    void* holder;
+    u8 unkBC[8];
+    s32 kind;
+    u8 unkC8[0x39];
+    u8 flag101;
+    u8 unk102[0xE];
+    s32 unk110;
+    Config* config;
+    BkActorAssetPS2* definition;
+    void* owner;
+    State* state;
+    void* unk124;
+    void* unk128;
+    u8 fields[0xD];
+    u8 flag139, flag13A, flag13B, flag13C, flag13D, flag13E, flag13F;
+    u8 shape[0x60];
+    BkActorTimerPS2 timer;
+    s32 unk1AC, unk1B0, unk1B4;
+    u8 unk1B8[4];
+    u16 effect;
+    u8 unk1BE;
+    u8 flag1BF, flag1C0, flag1C1, flag1C2;
+} ResourceCore;
+typedef struct RecordView {
+    u8 unk00[0x58];
+    u16 flags;
+    u8 unk5A[0x56];
+    u128 local;
+} RecordView;
+extern void func_00150178(ResourceCore*, s32);
+extern void func_001AFC80(BkActorTimerPS2*, BkActorAssetPS2*, s32);
+extern RecordView* func_00151E60(ResourceCore*);
+extern BkActorAssetRecordPS2* func_001AFD80(BkActorTimerPS2*, BkActorAssetPS2*);
+extern s32 func_0014BD58(ResourceCore*);
+
+extern void func_0014BD18(ResourceCore*);
+extern void* D_0040F4C4;
+
+extern BkActorAssetPS2* func_00108120(void*, u64);
+extern s32 func_001AFBA8(BkActorAssetPS2*);
+extern void* func_00107CF8(s32);
+extern void func_0014CDB8(State*);
+extern void* func_003342D0(void*, s32);
+typedef struct AllocationRequest {
+    u32 size, alignment, unknown8, unknownC;
+} AllocationRequest;
+typedef struct StorageBlock {
+    void* memory;
+    u32 unknown4;
+} StorageBlock;
+extern AllocationRequest func_0032B860(s32, s32);
+extern void* func_00107C98(void*, AllocationRequest*);
+static inline void ResetRequest(AllocationRequest* request, u32 size, u32 alignment) {
+    request->size = size;
+    request->alignment = alignment;
+}
+extern void* func_0032BB28(StorageBlock*, s32, s32);
+extern void* func_00334268(StorageBlock*, s32);
+extern void func_001AFC78(BkActorTimerPS2*);
+
 typedef struct Resource {
     u8 unk00[0x118];
     void* definition;
@@ -208,7 +291,9 @@ typedef struct Resource {
     u8 active;
     u8 unk13E[0x92];
     u8 used;
-    u8 unk1D1[0xF];
+    u8 unk1D1[3];
+    u32 age;
+    u8 unk1D8[8];
 } Resource;
 typedef struct ResourcePool {
     Resource* items;
@@ -261,6 +346,30 @@ typedef struct TimedAction {
 
 extern s32 func_00165BC8(void *, s32);
 extern s32 func_00169EB8();
+
+#define VERIFY_OFFSET(type, field, expected)                                                                           \
+    typedef char Verify##type##field[((u32) & ((type*)0)->field == (expected)) ? 1 : -1]
+VERIFY_OFFSET(GroupView, members, 0x1C);
+VERIFY_OFFSET(GroupView, sound, 0x5C);
+VERIFY_OFFSET(GroupView, count, 0x69);
+VERIFY_OFFSET(WeaponView, definition, 0x118);
+VERIFY_OFFSET(WeaponView, indices, 0x1A4);
+VERIFY_OFFSET(WeaponView, count, 0x1F5);
+VERIFY_OFFSET(InventoryPool, firstTypes, 0x3600);
+VERIFY_OFFSET(InventoryPool, firstUsed, 0x3700);
+VERIFY_OFFSET(InventoryPool, secondUsed, 0x3720);
+VERIFY_OFFSET(BindingAction, binding, 0x90);
+VERIFY_OFFSET(BindingAction, definition, 0x94);
+VERIFY_OFFSET(RegionRecord, enabled, 0xDA);
+VERIFY_OFFSET(ResourceCore, matrix, 0x70);
+VERIFY_OFFSET(ResourceCore, fields, 0x12C);
+VERIFY_OFFSET(ResourceCore, shape, 0x140);
+VERIFY_OFFSET(ResourceCore, timer, 0x1A0);
+VERIFY_OFFSET(ResourceCore, effect, 0x1BC);
+typedef char VerifyRegionStride[sizeof(RegionRecord) == 0xF0 ? 1 : -1];
+typedef char VerifyAllocationRequirement[sizeof(AllocationRequest) == 16 ? 1 : -1];
+#undef VERIFY_OFFSET
+
 
 void func_00149AC8(void *arg0) {
     s32 var_16;
@@ -353,9 +462,65 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014EC10);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014EC90);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014F888);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014FDA8);
+void func_0014FDA8(ResourceCore* self, Config* config) {
+    StorageBlock buffer;
+    func_0014BD18(self);
+    self->unk110 = 0;
+    self->kind = 3;
+    if (config) {
+        self->config = config;
+        self->definition = func_00108120(D_0040F4C4, config->resourceId);
+        self->id = self->config->id;
+        if (func_001AFBA8(self->definition)) {
+            self->state = (State*)func_00107CF8(0x70);
+            func_0014CDB8(self->state);
+        }
+    } else {
+        self->config = NULL;
+        self->definition = NULL;
+        self->id = 0;
+    }
+    buffer.memory = NULL;
+    func_003342D0(self->shape, 5);
+    {
+        AllocationRequest request = func_0032B860(1, 0);
+        buffer.memory = func_00107C98(D_0040F0F0, &request);
+        self->unk128 = func_0032BB28(&buffer, 1, 0);
+        ResetRequest(&request, 0x60, 0x10);
+        buffer.memory = func_00107C98(D_0040F0F0, &request);
+        self->holder = func_00334268(&buffer, 4);
+        func_001AFC78(&self->timer);
+        self->flag13D = 0;
+        self->effect = 0xFFFF;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014FEE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00150068);
+void func_00150068(ResourceCore* self, BkActorAssetPS2* definition, s32 index, u128* matrix, s32 word, void* arg,
+                   s32 word0, s32 word1) {
+    func_0014BD58(self);
+    self->definition = definition;
+    self->matrix[0] = matrix[0];
+    self->matrix[1] = matrix[1];
+    self->matrix[2] = matrix[2];
+    self->matrix[3] = matrix[3];
+    func_00150178(self, index);
+    func_001AFC80(&self->timer, self->definition, index);
+    {
+        u128 local = func_00151E60(self)->local;
+        self->unk110 = word;
+        self->unk1AC = word0;
+        self->unk1B0 = word1;
+        self->unk1B4 = (s32)arg;
+        self->flag13B = 0;
+        self->flag1BF = 0;
+        self->flag1C0 = 0;
+        self->flag1C1 = 0;
+        self->flag101 = 0;
+        self->local = local;
+        self->flag13A = 1;
+    }
+    M2C_FIELD(func_001AFD80(&self->timer, self->definition), s32*, 0x30) = 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00150178);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001507E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00150B00);
@@ -389,7 +554,10 @@ s32 func_001550F0(u16* counts, s32 index) {
     }
     return 0;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00155178);
+u8 func_00155178(u16* counts, s32 index, u8 amount) {
+    counts = (u16*)((s8*)counts + index * 2);
+    return *counts / amount;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00155B08);
 void func_00155DC8(InventoryPool* self) {
     s8 i;
@@ -402,7 +570,21 @@ void func_00155DC8(InventoryPool* self) {
         self->secondTypes[i] = 0;
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00155E48);
+void func_00155E48(InventoryPool* self) {
+    s8 i;
+    for (i = 0; i < 32; i++) {
+        if (self->firstUsed[i] == 1) {
+            func_0012A280(D_0040F4D0, self->objects + i * 0x120);
+            self->firstUsed[i] = 0;
+        }
+    }
+    for (i = 0; i < 16; i++) {
+        if (self->secondUsed[i] == 1) {
+            func_0012A280(D_0040F4D0, self->objects + 0x2400 + i * 0x120);
+            self->secondUsed[i] = 0;
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00155F38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00156110);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00158E88);
@@ -425,8 +607,41 @@ void func_00162160(ActionView* self, s32 arg) {
     self->unk2C = 0;
     func_00165BC8(self, arg);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001621A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00162600);
+/* Descriptor +0x2E controls activation here; its original meaning is unknown. */
+static inline void BindingActive(Recovered_ActorBinding* self, Recovered_ActorBindingDescriptor* descriptor) {
+    if (M2C_FIELD(descriptor, u8*, 0x2E))
+        self->active = 1;
+    else
+        self->active = 0;
+}
+s32 func_001621A8(Recovered_ActorBinding* self, u64 id, Recovered_ActorBindingDescriptor* descriptor) {
+    func_00160EA0(self);
+    M2C_FIELD(self, u64*, 0) = id;
+    self->descriptor = descriptor;
+    self->current = NULL;
+    self->pending = NULL;
+    self->generation = 0;
+    BindingActive(self, descriptor);
+    M2C_FIELD(self, Recovered_ActorBindingDescriptor**, 0x18) = self->descriptor;
+    BindingActive(self, self->descriptor);
+    self->current = NULL;
+    self->pending = NULL;
+    self->generation = 0;
+    self->registration = -1;
+    self->position = self->descriptor->position;
+    return 1;
+}
+
+s32 func_00162600(BindingAction* self, u64 id, BindingDefinition* definition) {
+    func_00160EA0(self);
+    M2C_FIELD(self, u64*, 0) = id;
+    self->definition = definition;
+    func_00177DE0(self->child, self);
+    func_00177E60(self->child, self->definition->value);
+    func_00177E68(self->child, M2C_FIELD(self->definition, u8*, 0x20));
+    self->binding = NULL;
+    return 1;
+}
 s32 func_001626D0(BindingAction* self) {
     u128 value = self->definition->value;
     if (self->binding) return 0;
@@ -491,7 +706,14 @@ s32 func_001631B0(ActionView* self, u64 id, void* definition) {
     return 1;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163250);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001634D8);
+s32 func_001634D8(ActionView* self, u64 id, void* definition) {
+    func_00160EA0(self);
+    self->definition = definition;
+    self->data = definition;
+    self->enabled = 1;
+    self->id = id;
+    return 1;
+}
 void func_001635D0(EffectAction* self, s32 arg) {
     func_00160E70(self);
     self->unk38 = 0;
@@ -506,7 +728,14 @@ void func_00163AB8(ActionView* self, s32 arg) {
     self->state = 0;
     func_00165BC8(self, arg);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163AF8);
+s32 func_00163AF8(ActionView* self, u64 id, void* definition) {
+    func_00160EA0(self);
+    self->definition = definition;
+    self->data = definition;
+    self->enabled = 1;
+    self->id = id;
+    return 1;
+}
 void func_00163B50(TimedAction* self) {
     GlobalTime* clock = (GlobalTime*)((s8*)D_0040F0E0 + 0x20120);
     float time = clock->time;
@@ -540,7 +769,7 @@ void func_00163C90(TimedAction* self) {
     self->state = 2;
     self->deadline = time + duration;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163D08);
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163DB8);
 s32 func_00163E08(GroupView* self, u64 id, const char* name) {
     s32 i;

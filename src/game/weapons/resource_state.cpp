@@ -70,3 +70,36 @@ extern "C" void func_0014F838(ParticleState* self, int arg) {
     self->c = 0;
     func_0014B8E0(self, arg, 0);
 }
+
+extern "C" int func_00165AF8(void*);
+struct OrientationDefinition {
+    unsigned char unknown00[0x10];
+    Value point, first, second;
+    unsigned char enabled;
+};
+struct OrientationAction {
+    unsigned long id;
+    unsigned char unknown08[0x10];
+    OrientationDefinition* definition;
+    unsigned char unknown1C[4];
+    Value first, second;
+    Matrix world;
+    unsigned char enabled;
+};
+extern "C" int func_00163D08(OrientationAction* self, unsigned long id, OrientationDefinition* definition) {
+    func_00165AF8(self);
+    self->definition = definition;
+    self->id = id;
+    self->second = definition->second;
+    self->first = definition->first;
+    Effects::IdentityXYZ(self->world);
+    self->world.row[3] = self->definition->point;
+    self->enabled = self->definition->enabled != 0;
+    return 1;
+}
+
+typedef char VerifyStateSize[sizeof(ResourceState) == 0x70 ? 1 : -1];
+typedef char VerifyStateFlag[(unsigned)&((ResourceState*)0)->flag == 0x60 ? 1 : -1];
+typedef char VerifyParticlePoint[(unsigned)&((ParticleState*)0)->point == 0xF0 ? 1 : -1];
+typedef char VerifyParticleFlag[(unsigned)&((ParticleState*)0)->a == 0x116 ? 1 : -1];
+typedef char VerifyOrientationWorld[(unsigned)&((OrientationAction*)0)->world == 0x40 ? 1 : -1];

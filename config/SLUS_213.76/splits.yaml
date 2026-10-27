@@ -563,7 +563,7 @@ splits:
   - {src: src/game/unsorted/tu_163c28.c, range: [0x163c28, 0x163c58]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x163c58, 0x163cc8]}
   - {src: src/game/unsorted/tu_163cc8.c, range: [0x163cc8, 0x163d08]}
-  - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x163d08, 0x163da8]}
+  - {src: src/game/weapons/resource_state.cpp, range: [0x163d08, 0x163da8]}
   - {src: src/game/unsorted/game_methods.cpp, range: [0x163da8, 0x163db8]}
   - {src: src/game/weapons/tu_1448c8_149ac8.c, range: [0x163db8, 0x163dc0]}
   - {src: src/game/unsorted/tu_163dc0.c, range: [0x163dc0, 0x163de8]}
