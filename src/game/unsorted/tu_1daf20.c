@@ -52,7 +52,27 @@ typedef struct {
     f32 unk_1C;
 } Recovered_PlaybackDeferredInput;
 typedef char PlaybackTransitionCopyExtent[sizeof(Recovered_PlaybackTransition) == 0x20 ? 1 : -1];
-/* Full local owner view used by native initialization. The slot storage, loader
+/* Slot lookup views; original identities and unaccessed storage are UNVERIFIED. */
+typedef struct {
+    u128 position;
+    u8 unk_10[0x1C];
+    s32 id;
+    f32 time;
+    s32 index;
+} Recovered_PlaybackPosition;
+typedef struct {
+    u8 unk_00[0x18];
+    Recovered_PlaybackPosition* point;
+    u8 unk_1C[0x34];
+    s32 index;
+} Recovered_PlaybackMotion;
+typedef struct {
+    u8 unk_00[0x18];
+    Recovered_PlaybackPosition* point;
+    u8 unk_1C[0x44];
+} Recovered_PlaybackSlot;
+
+/* Expanded local owner view used by native initialization. The slot storage, loader
  * payload, selected/fading roles and original class identity remain UNVERIFIED. */
 typedef struct {
     u64 key;
@@ -65,7 +85,7 @@ typedef struct {
     u8 handle[0x14];
     void* references[4];
     u32 unk_7C;
-    u8 slots[64][0x60];
+    Recovered_PlaybackSlot slots[64];
     u8 flags[64];
     s8 path[0x40];
     s32 referenceCount, controllerCount;
@@ -295,7 +315,21 @@ s32 func_001DBDB8(void* owner) {
     M2C_FIELD(owner, s32*, 0x1930) = 15;
     return 1;
 }
+#ifdef NON_MATCHING
+// Unmatched: the loaded-definition reload and empty-loop setup differ (eight instructions).
+extern void* func_001092F8(void*);
+void func_001DBED8(void* input, void* owner) {
+    Recovered_PlaybackDefinition* definition;
+    s16 i;
+    M2C_FIELD(owner, Recovered_PlaybackDefinition**, 0x190C) = func_001092F8(input);
+    definition = M2C_FIELD(owner, Recovered_PlaybackDefinition**, 0x190C);
+    definition->ranges = (Recovered_StreamRange*)((u32)definition->ranges + (u8*)definition);
+    for (i = 0; i < definition->unk_16; i++) {}
+}
+
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DBED8);
+#endif
 extern void* D_0040F4D0;
 extern u32 D_0040EAE4;
 void func_001DBF38(Recovered_PlaybackTransitionOwner* owner, Recovered_PlaybackDeferredInput* transition) {
@@ -356,9 +390,86 @@ s32 func_001DC278(Recovered_PlaybackTransitionOwner* owner, Recovered_PlaybackTr
     owner->unk_192C = 1;
     return 1;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC2C0);
+#ifdef NON_MATCHING
+// Unmatched: both interpolation multiplications reverse their native operand order (two instructions).
+/* Native table entries have a 0x30-byte stride; their full identities are UNVERIFIED. */
+typedef struct { u8 unk_00[0x30]; } Recovered_PlaybackGainChannel;
+void func_001DC2C0(Recovered_PlaybackTransitionOwner* owner) {
+    switch ((u32)owner->unk_192C) {
+        case 0:
+        default: break;
+        case 1:
+        case 2: {
+            f32 now = MixPreferences()->unk_20;
+            f32 previous = owner->unk_1918;
+            f32 duration = owner->current.unk_08;
+            if (now < previous + duration) {
+                owner->unk_191C = owner->unk_1924;
+                owner->unk_191C *= (now - previous) / duration;
+                owner->unk_191C += owner->unk_1920;
+            } else {
+                owner->unk_192C = 3;
+                owner->unk_191C = owner->current.unk_0C;
+            }
+            func_001EFE08(D_0040F510, &((Recovered_PlaybackGainChannel*)D_003F8D10)[owner->unk_1928], owner->unk_191C);
+        }
+        case 3:
+            func_001EFE08(D_0040F510, &((Recovered_PlaybackGainChannel*)D_003F8D10)[owner->unk_1928], owner->unk_191C);
+            break;
+        case 4: {
+            f32 now = MixPreferences()->unk_20;
+            f32 previous = owner->unk_1918;
+            if (now < previous + 0.5f) {
+                owner->unk_191C = owner->unk_1924;
+                owner->unk_191C *= now - 2.0f * previous;
+                owner->unk_191C += owner->unk_1920;
+            } else {
+                owner->unk_191C = 0;
+                owner->unk_192C = 0;
+            }
+            func_001EFE08(D_0040F510, &((Recovered_PlaybackGainChannel*)D_003F8D10)[owner->unk_1928], owner->unk_191C);
+            break;
+        }
+    }
+}
 
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC2C0);
+#endif
+
+#ifdef NON_MATCHING
+// Unmatched: the controller end pointer lives across the reference loops, adding a saved register.
+extern f32 func_001ED820(void*);
+extern void func_00283B38(void*, f32);
+/* The callee forwards f12 to its own callee; both enabled and disabled paths supply it. */
+void func_001DC498(void* input, s32 unused, s32 enabled) {
+    Recovered_PlaybackOwner* owner = input;
+    Recovered_PlaybackController* controller;
+    f32 level;
+    s32 i;
+    if (enabled) {
+        level = func_001ED820(M2C_FIELD(PlaybackPools()->unk_4BD8, void**, 0x2C));
+        for (i = 0; i < owner->referenceCount; i++) {
+            func_00283B38(owner->references[i], level);
+            M2C_FIELD(owner->references[i], u8*, 0x35) = 1;
+        }
+    } else {
+        level = 0.0f;
+        for (i = 0; i < owner->referenceCount; i++) {
+            M2C_FIELD(owner->references[i], u8*, 0x35) = 0;
+            func_00283B38(owner->references[i], 0.0f);
+        }
+    }
+    controller = owner->controllers;
+    do {
+        func_001DB2F0(controller, level);
+        controller++;
+    } while ((s32)controller < (s32)(owner->controllers + 2));
+}
+
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC498);
+#endif
 
 /* Recovered_Vtable_003E26B8: accessed fields only, at their PS2 offsets (unk_XX); the size is unknown. */
 typedef struct Recovered_Vtable_003E26B8 {
@@ -409,7 +520,36 @@ u8* func_001DC610(void* owner) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DC790);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCC08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCCF8);
+s32 func_001DCCF8(Recovered_PlaybackOwner* owner, Recovered_PlaybackMotion* motion, u128* position, f32* time) {
+    u8* flags = owner->flags;
+    s32 current = motion->index;
+    s32 id = motion->point->id;
+    s32 nearest = 9999;
+    s32 selected = -1;
+    s32 i;
+
+    *time = 0;
+    for (i = 0; i < 64; i++) {
+        if (flags[i]) {
+            Recovered_PlaybackPosition* point = owner->slots[i].point;
+            if (point->id == id) {
+                s32 index = point->index;
+                if (index == current)
+                    *time = point->time;
+                else {
+                    if (current < index && (selected == -1 || index < nearest)) {
+                        selected = i;
+                        nearest = index;
+                    }
+                    if (index == 0 && selected == -1) selected = i;
+                }
+            }
+        }
+    }
+    *position = M2C_FIELD(M2C_FIELD((u8*)owner + selected * 0x60, Recovered_PlaybackPosition**, 0x98), u128*, 0);
+    return M2C_FIELD((u8*)owner + selected * 0x60, Recovered_PlaybackPosition**, 0x98)->index;
+}
+
 extern void func_00272488(u64, s8*);
 extern void* func_00107CF8(u32);
 extern void func_001D97D0(Recovered_AudioTransferGroup*, u64, const s8*, s32, s32, s32, void*, s32, u8);

@@ -1437,7 +1437,7 @@ splits:
   - {src: src/game/unsorted/tu_1dd728.c, range: [0x1dd728, 0x1dd748]}
   - {src: src/game/unsorted/tu_1dd748.cpp, range: [0x1dd748, 0x1dd7b8], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1dd7b8, 0x1dd838]}
-  - {src: src/game/unsorted/tu_1dd838.c, range: [0x1dd838, 0x1e09a8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1dd838.c, range: [0x1dd838, 0x1e09a8], assembler: sn-min6, note: "Native state reset clears two four-word arrays with six-word loops; the existing source loops are at least six words."}
   - {src: src/game/unsorted/tu_1dd838_1e09a8.c, range: [0x1e09a8, 0x1e1068], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/game/unsorted/tu_1dd838.c, range: [0x1e1068, 0x1e1100]}
   - {src: src/game/unsorted/tu_1dd838_1e09a8.c, range: [0x1e1100, 0x1e1240]}

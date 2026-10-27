@@ -1,5 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/playback_state_pool.h"
+#include "game/effects/random_state.h"
 
 extern s32 func_001DFC78();
 extern s32 func_001E0FE8(void *);
@@ -12,6 +14,31 @@ extern f32 func_001ED820(s32);
 extern void * D_0040F510;
 extern s8 func_00281120();
 extern f32 D_003BD390;
+extern void* D_0040F4D8;
+extern BkEffectRandomStatePS2 D_0040EB30;
+extern f32 func_001E1708(s32, s32);
+extern void func_001E0930(void*, void*, s32);
+extern s32 func_001DF028(void*, s128, s32, s32*);
+/* Matched requests have a 0x40-byte copy extent and an aligned quadword at +20.
+ * Original request identity, field meanings and unaccessed bytes are UNVERIFIED. */
+typedef struct {
+    s32 unk_00, unk_04;
+    f32 unk_08, unk_0C, unk_10;
+    u8 unk_14[0xC];
+    s128 unk_20;
+    s32 unk_30, unk_34, unk_38;
+    u32 unk_3C;
+} AudioRequest;
+typedef char AudioRequestExtent[sizeof(AudioRequest) == 0x40 ? 1 : -1];
+static inline Recovered_PlaybackPools* GameplayPools(void) {
+    return &((Recovered_PlaybackServices*)D_0040F510)->playbackPools;
+}
+/* Keep the state-member return form used by the native unsigned-to-float path. */
+static inline u32 NextAudioRandom(BkEffectRandomStatePS2* random) {
+    random->state = (random->state << 16) + ((s32)random->state >> 16) + random->accumulator;
+    random->accumulator += random->state;
+    return random->state;
+}
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DD838);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DD9C8);
@@ -30,19 +57,132 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DF02
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DF080);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DF278);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DF3D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DF4D0);
+void func_001DF4D0(void* owner, void* actor) {
+    AudioRequest request;
+    f32 second;
+    f32 first;
+    f32 random;
+    s32 kind;
+    s32 query;
+    void* manager;
+
+    request.unk_30 = 0;
+    request.unk_34 = 0;
+    first = func_001E1708(M2C_FIELD(GameplayPools()->unk_4BD8, s32*, 0x10), 1);
+    manager = M2C_FIELD(GameplayPools()->unk_4BD8, void**, 0x10);
+    kind = M2C_FIELD(M2C_FIELD(manager, void**, 0x2424), s32*, 0x10);
+    second = func_001E1708((s32)manager, 3);
+    query = func_001DF028(owner, M2C_FIELD(actor, s128*, 0x100), 1, NULL);
+    random = (f32)NextAudioRandom(&D_0040EB30);
+    request.unk_00 = kind;
+    request.unk_08 = first;
+    request.unk_0C = second;
+    request.unk_04 = query;
+    request.unk_10 = random * 2.3283064e-10f;
+    request.unk_20 = M2C_FIELD(actor, s128*, 0xA0);
+    request.unk_30 = 1;
+    request.unk_34 = 0;
+    request.unk_38 = 0;
+    func_001E0930(M2C_FIELD(GameplayPools()->unk_4BD8, void**, 0x10), &request, 0);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DF640);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DF7B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DF908);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DF9E0);
+extern u8 func_00148438(void*);
+extern u8 func_00152108(void*);
+s32 func_001DF9E0(void* arg0, void* arg1) {
+    u32 temp_3;
+    void* temp_4;
+    void* temp_4_2;
+
+    if (arg1 != NULL) {
+        temp_3 = M2C_FIELD(arg1, u32*, 0xC4);
+        switch (temp_3) {
+            case 1:
+            case 2:
+                return M2C_FIELD(
+                    M2C_FIELD(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 0x10), void**, 0x2424), s32*,
+                    0x10);
+            case 7:
+                return M2C_FIELD(
+                    M2C_FIELD(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 0x10), void**, 0x2424), s32*, 8);
+            case 4: return func_00148438(arg1);
+            case 3: return func_00152108(arg1);
+            case 0:
+                temp_4_2 = M2C_FIELD(arg1, void**, 0xBC);
+                if (temp_4_2 != NULL) {
+                    temp_4 = M2C_FIELD(M2C_FIELD(temp_4_2, void**, 0x40), void**, 0x34);
+                    if (temp_4 != NULL) { return (s32)M2C_FIELD(temp_4, u8*, 0xC); }
+                }
+                /* Duplicate return node #11. Try simplifying control flow for better match */
+                return 0;
+            default: return 0;
+        }
+    } else {
+        return 0;
+    }
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DFAB0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DFB20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DFC00);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DFC08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DFC78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DFD08);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DFE38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DFEB0);
+extern void func_001E1690(void*,s32,s32);
+void func_001DFE38(void* arg0) {
+    s32* var_2;
+    s32* var_2_2;
+    s32 var_3;
+
+    var_3 = 3;
+    M2C_FIELD(arg0, s32*, 0x2418) = 1;
+    M2C_FIELD(arg0, s32*, 0x2428) = 0;
+    var_2 = (s32*)(((s8*)arg0) + 0x2448);
+    M2C_FIELD(arg0, s32*, 0x2430) = 0;
+    M2C_FIELD(arg0, s32*, 0x241C) = 0;
+    M2C_FIELD(arg0, s32*, 0x2424) = 0;
+    do {
+        *var_2 = 0;
+        var_3 -= 1;
+        var_2 = (s32*)(((s8*)var_2) + -4);
+    } while (var_3 >= 0);
+    var_3 = 3;
+    var_2_2 = (s32*)(((s8*)arg0) + 0x2458);
+    do {
+        *var_2_2 = 0;
+        var_3 -= 1;
+        var_2_2 = (s32*)(((s8*)var_2_2) + -4);
+    } while (var_3 >= 0);
+    func_001E1690(arg0, 0, 0);
+}
+
+/* Partial input and record views; field meanings, original identities and unused storage are UNVERIFIED. */
+typedef struct {
+    u8 unk_00[0x100];
+    s128 unk_100;
+} IndirectActorData;
+typedef struct {
+    IndirectActorData* data;
+} IndirectActor;
+typedef struct {
+    IndirectActor* actor;
+    u8 unk_04[0xC];
+    s128 unk_10;
+    s32 unk_20;
+    s8 unk_24;
+} ActorAudioRecord;
+void func_001DFEB0(ActorAudioRecord* self, IndirectActor* actor, s32 value) {
+    IndirectActorData* data;
+    s128 position;
+    self->actor = actor;
+    data = actor->data;
+    position = data->unk_100;
+    self->unk_24 = value;
+    self->unk_10 = position;
+    self->unk_20 = 0;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DFED0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001E0028);
 
@@ -56,7 +196,7 @@ void func_001E0440(void *arg0) {
 #include "ps2/recovered_types.h"
 extern s32 func_00280100(s32, void *);
 extern void * D_0040F510;
-extern f32 func_001DFE38(void *);
+extern void func_001DFE38(void *);
 
 s32 func_001E0480(void *arg0) {
     s32 *var_16;
@@ -127,7 +267,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001E092
 
 #include "ps2/recovered_types.h"
 
-void func_001E0930(void *arg0, void *arg1, s32 arg2, s32 arg3) {
+void func_001E0930(void *arg0, void *arg1, s32 arg2) {
     u32 temp_3;
     void *temp_4;
     void *temp_4_2;
