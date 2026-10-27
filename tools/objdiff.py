@@ -163,6 +163,7 @@ def build_view(spec_path, output):
                 renames[r['section']] = '.text.'+label
     # Retain compiler data, but remove assembly inputs and discarded context.
     keep.update(sec for sec in DATA_SECTIONS if source.section(sec))
+    keep.update(item['input'] for item in spec['unit'].get('data_ranges', []))
     # A retained table may point into an included function through a local
     # section symbol. Keep that symbolic reference when removing assembly from
     # the comparison base: its public function entry denotes the same zero base.
