@@ -2,6 +2,7 @@
 #include "ps2/prelude.h"
 #include "game/timed_value_pool.h"
 #include "game/effects/damage_window.h"
+#include "game/graphics/resource_collection.h"
 
 // Accessed attachment-pool and owner-row fields; original class identities remain UNVERIFIED.
 extern void* func_00107D20(u32);
@@ -220,7 +221,28 @@ s32 func_001B0A20(void* object) {
     M2C_FIELD(object, f32*, 0x80) = zero;
     return 1;
 }
+#ifdef NON_MATCHING
+// Unmatched: Stock assembler pads the six-word loop; scalar stores are scheduled differently.
+void func_001B0D88(void* base) {
+    s32 i;
+    s32* history = (s32*)((s8*)base + 0x15C);
+    for (i = 31; i >= 0; i--) *history-- = 0;
+    M2C_FIELD(base, f32*, 0x164) = 15.0f;
+    M2C_FIELD(base, u8*, 0x178) = 1;
+    M2C_FIELD(base, u8*, 0xB0) = 12;
+    M2C_FIELD(base, f32*, 0x174) = 1.0f;
+    M2C_FIELD(base, s32*, 0x160) = 0;
+    M2C_FIELD(base, u8*, 0xA0) = 12;
+    M2C_FIELD(base, u8*, 0xA1) = 0;
+    M2C_FIELD(base, u8*, 0xD0) = 0;
+    M2C_FIELD(base, u8*, 0xD1) = 0;
+    M2C_FIELD(base, s32*, 0x168) = 66;
+    M2C_FIELD(base, s32*, 0x16C) = 66;
+    M2C_FIELD(base, s32*, 0x170) = 66;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B0D88);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B0E00);
 void func_001B2A78(BkEffectSlotPS2* slots) {
     u16 i;
@@ -301,7 +323,27 @@ void func_001B6188(void* base) {
     u8 i;
     for (i = 0; i < 4; i++) { M2C_FIELD(base, u8*, 0x734 + i * 0xC20) = 0; }
 }
+#ifdef NON_MATCHING
+// Unmatched: Flag-array pointer lifetimes and zero-store scheduling differ.
+void func_001B61C0(void* base, void* object) {
+    u8 i, j;
+    u8* a = (u8*)base + 0x1340;
+    u8* b = (u8*)base + 0x1343;
+    for (i = 0; i < 4; i++) {
+        if (M2C_FIELD(base, void**, i * 0xC20 + 0x730) == object) {
+            M2C_FIELD(base, u8*, i * 0xC20 + 0x734) = 0;
+            M2C_FIELD(base, void**, i * 0xC20 + 0x730) = 0;
+            for (j = 0; j < 3; j++) {
+                a[i * 0xC20 + j] = 0;
+                b[i * 0xC20 + j] = 0;
+            }
+            return;
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B61C0);
+#endif
 void func_001B6250(void* base) {
     u16 i;
     PoolEntry* entries = base;
@@ -328,7 +370,59 @@ void func_001B6250(void* base) {
     M2C_FIELD(base, u16**, 0x3440) = func_00107D20(160);
     InitializeReverse(indices, 80);
 }
+#ifdef NON_MATCHING
+extern s32 func_001B1518(PoolEntry*);
+// Unmatched: Release-loop constant/register allocation and final clock-store scheduling differ.
+s32 func_001B6328(void* base, void* owner) {
+    u16 i;
+    PoolEntry* entries = base;
+    s32* a = (s32*)((s8*)base + 0x2300);
+    s32* b = (s32*)((s8*)base + 0x2440);
+    s32* c = (s32*)((s8*)base + 0x2580);
+    for (i = 0; i < 80; i++) {
+        if (entries[i].resource) {
+            func_001B1518(entries + i);
+            {
+                s32* pa = a + i;
+                s32* pb = b + i;
+                s32* pc = c + i;
+                *pa = 0;
+                *pb = 8;
+                *pc = -1;
+            }
+        }
+    }
+    M2C_FIELD(base, u16*, 0x3458) = 0;
+    {
+        IndexPool* indices = (IndexPool*)((s8*)base + 0x3440);
+        s8* b = (s8*)base + 0x32C4;
+        s8* a = (s8*)base + 0x32C0;
+        s8* c = (s8*)base + 0x32C8;
+        for (i = 0; i < 32; i++) {
+            s32* pb = (s32*)(b + i * 12);
+            s32* pa = (s32*)(a + i * 12);
+            f32* pc = (f32*)(c + i * 12);
+            *pb = 0;
+            *pa = 0;
+            *pc = -1.0f;
+        }
+        M2C_FIELD(base, void**, 0x344C) = owner;
+        M2C_FIELD(base, void**, 0x3450) = M2C_FIELD(owner, void**, 0x873F0);
+        {
+            u16 j;
+            for (j = 0; j < indices->capacity; j++) {
+                indices->indices[j] = j;
+                indices->reverse[j] = j;
+            }
+            indices->count = 0;
+        }
+    }
+    M2C_FIELD(base, f32*, 0x3454) = M2C_FIELD(D_0040F4D0, f32*, 0x20) - M2C_FIELD(D_0040F4D0, f32*, 0x1C);
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001B6328);
+#endif
 void func_001BEBA0(BkEffectDamageWindowsPS2* windows, void* effect, void* actor, f32 delay, f32 damage) {
     s16 i;
     f32 now = M2C_FIELD(D_0040F4D0, f32*, 0x20);
@@ -385,9 +479,51 @@ s32 func_001C7D08(u64 frame, u64 scissor, u64 sourceFrame, u64 sourceScissor, u6
                          color);
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001C7DB8);
+#ifdef NON_MATCHING
+extern u64 func_001C7DB8(u64, u64, s32, s32, u64);
+// Unmatched: Masked frame-page updates retain different register lifetimes and scheduling.
+u64 func_001C8108(u64 sourceFrame, u64 destinationFrame, s32 flags, u32 height, u64 data) {
+    u64 result;
+    if (height >= 512) {
+        u64 first = func_001C7DB8(sourceFrame, destinationFrame, flags, 480, data);
+        {
+            u32 pageCount = 15 * ((u32)destinationFrame >> 16 & 0x3F);
+            u32 sourcePage = ((u32)sourceFrame & 0x1FF) + pageCount;
+            u32 destinationPage = ((u32)destinationFrame & 0x1FF) + pageCount;
+            sourceFrame = (sourceFrame & ~0x1FFUL) | (u64)sourcePage;
+            destinationFrame = (destinationFrame & ~0x1FFUL) | (u64)destinationPage;
+            func_001C7DB8(sourceFrame, destinationFrame, flags, height - 480, data);
+        }
+        result = first;
+    } else {
+        result = func_001C7DB8(sourceFrame, destinationFrame, flags, height, data);
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001C8108);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001C81F0);
+#ifdef NON_MATCHING
+extern u8 D_00440280[];
+extern void func_00270FD8(void*);
+extern void func_002707D8(void*, void*, f32, s32, s32, s32);
+// Unmatched: Global renderer-address lifetime and capacity-test lowering differ.
+void func_001C8478(BkResourceCollectionPS2* collection) {
+    u8* state = D_00440280;
+    s32 slot = M2C_FIELD(state, s32*, 0x2C0);
+    if (M2C_FIELD(state, s32*, 0x2DC) - M2C_FIELD(state, s32*, slot * 0x100 + 0xC4) < collection->total ||
+        M2C_FIELD(state, s32*, 0x2E8) - M2C_FIELD(state, s32*, slot * 0x100 + 0xC0) < collection->count) {
+        func_00270FD8(state);
+    }
+    {
+        s32 i;
+        for (i = 0; i < collection->count; i++) { func_002707D8(state, collection->items[i], 0.0f, 1, 0, 1); }
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001C8478);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001C8560);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001CAB20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001CADD8);
@@ -465,7 +601,37 @@ void func_001E45A8(void* state) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001E8B60);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001E9250);
+#ifdef NON_MATCHING
+extern s32 func_001EF710(void*);
+extern void func_002818D0(void*, void*);
+// Unmatched: Global sound-state address setup is scheduled after the loop iterators.
+s32 func_001E9C68(void* state) {
+    s32 status = M2C_FIELD(state, s32*, 0x1B4);
+    switch (status) {
+        case 3: M2C_FIELD(state, s32*, 0x1B4) = 4;
+        case 4: {
+            s32 i;
+            void** entry;
+            if (!func_001EF710(M2C_FIELD(state, void**, 0x1A0))) return 0;
+            entry = (void**)((u8*)state + 0x80);
+            for (i = 27; i >= 0; i--) {
+                if (*entry) {
+                    func_002818D0((u8*)D_0040F510 + 0xB308, *entry);
+                    *entry = 0;
+                }
+                entry++;
+            }
+            M2C_FIELD(state, s32*, 0x1B4) = 5;
+            break;
+        }
+        case 5: break;
+        default: break;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001E9C68);
+#endif
 void func_001ED2C8(void* state, u64 value, s32 data) {
     M2C_FIELD(state, s32*, 0x14) = 1;
     M2C_FIELD(state, u64*, 0) = value;
@@ -497,7 +663,18 @@ void func_001ED3E0(TrackedPool* pool, u128 context, void* parameters, f32 elapse
     }
     func_002822C8(&pool->pool, context, parameters, elapsed);
 }
+#ifdef NON_MATCHING
+// Unmatched: Paired metadata stores use different saved-register and address lifetimes.
+void func_001ED4A0(Recovered_TimedValuePool* pool, u128 value, f32 duration, s32 kind, void* object) {
+    s32 index = TimedValuePool_Add(pool, value, duration);
+    s32* type = (s32*)((u8*)pool + index * 8 + 0x1220);
+    void** owner = (void**)((u8*)pool + index * 8 + 0x1224);
+    *type = kind;
+    *owner = object;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001ED4A0);
+#endif
 void func_001ED4F0(TrackedPool* pool) {
     s32 i;
     for (i = 0; i < pool->pool.count; i++) {
