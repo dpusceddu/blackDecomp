@@ -10,6 +10,8 @@
             changes it or names it on a `Claims:` line of its description, unless it is a draft without updates for
             48 hours, or when another local worktree changes it. --pick prints one file instead, drawn at random from the
             first --top files (weighted by their tractable bytes), so sessions starting together rarely take the same one.
+            When both kinds are available, one pick in five revisits existing drafts, preferring saved near misses and
+            smaller drafts. The listing shows both kinds; saved scores are hints, not current matching evidence.
   claims    files claimed by more than one open pull request; the lowest pull request number keeps the claim.
   near      near misses by differing-instruction count, with what differs (registers, order, code, length)
   types     functions the pipeline could not compile or decompile for want of a type, grouped by what they need
@@ -213,23 +215,35 @@ def files(top, max_size, library, repo, pick=False):
     if problem:
         print('note: claims of open pull requests unknown: %s; only local worktrees are checked' % problem, file=sys.stderr)
     claims = dict(claims or {}, **worktree_claims())
-    ranked, taken = [], 0
+    results = {int(k, 16): v for k, v in json.loads(RESULTS.read_text()).items()} if RESULTS.exists() else {}
+    ranked, revisits, taken = [], [], 0
     for source, lib, left, untried in rows:
         if source in claims:
             taken += 1
             continue
         easy = [(a, s) for a, s in left if s <= limit and a in untried]
-        if easy:
-            ranked.append((TIERS.get(lib, 2), -len(easy), -sum(s for _, s in easy), source, lib, len(left), easy))
+        drafts = [(a, s) for a, s in left if s <= limit and a not in untried]
+        if easy or drafts:
+            row = (TIERS.get(lib, 2), -len(easy), -sum(s for _, s in easy), source, lib, len(left), easy, drafts)
+            ranked.append(row)
+            if drafts:
+                near_scores = [v['score'] for a, _ in drafts
+                               if (v := results.get(a, {})).get('status') == 'near'
+                               and isinstance(v.get('score'), (int, float))]
+                revisits.append((row, min(near_scores, default=float('inf')), min(s for _, s in drafts)))
     ranked.sort()
+    revisits.sort(key=lambda r: (r[0][0], r[1], r[2], r[0][3]))
     if pick:
-        if ranked:
-            print(random.choices(ranked[:top], weights=[-r[2] for r in ranked[:top]])[0][3])
+        fresh = [r for r in ranked if r[6]][:top]
+        if revisits and (not fresh or random.random() < 0.2):
+            print(random.choice(revisits[:top])[0][3])
+        elif fresh:
+            print(random.choices(fresh, weights=[-r[2] for r in fresh])[0][3])
         return
-    print('files to work on next (tractable: untried functions of at most %d bytes; %d claimed files skipped):' % (limit, taken))
-    print('  %-48s %-9s %5s %9s %7s' % ('file', 'library', 'left', 'tractable', 'bytes'))
-    for _, _, _, source, lib, n, easy in ranked[:top]:
-        print('  %-48s %-9s %5d %9d %7d' % (source, lib, n, len(easy), sum(s for _, s in easy)))
+    print('files to work on next (tractable: at most %d bytes; %d claimed files skipped; --pick revisits drafts 20%% of the time):' % (limit, taken))
+    print('  %-48s %-9s %5s %8s %7s %7s' % ('file', 'library', 'left', 'untried', 'drafts', 'bytes'))
+    for _, _, _, source, lib, n, easy, drafts in ranked[:top]:
+        print('  %-48s %-9s %5d %8d %7d %7d' % (source, lib, n, len(easy), len(drafts), sum(s for _, s in easy + drafts)))
 
 
 def contested(repo):
