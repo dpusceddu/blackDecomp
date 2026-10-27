@@ -1,6 +1,7 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 #include "game/effects/random_state.h"
+#include "game/ai_manager.h"
 
 // Partial Game view; only the random-state placement is recovered here.
 typedef struct Recovered_GameRandomView {
@@ -125,6 +126,147 @@ typedef char PoolDescriptorOffset[(u32) & ((Recovered_SlotPool*)0)->unk_5844 == 
 typedef char CameraRequestVectorOffset[(u32) & ((Recovered_CameraRequest*)0)->unk_10 == 0x10 ? 1 : -1];
 typedef char QuadRecordSize[sizeof(Recovered_QuadRecord) == 0x60 ? 1 : -1];
 typedef char SmallRecordSize[sizeof(Recovered_Record14) == 0x14 ? 1 : -1];
+
+typedef struct Recovered_RecordDispatch {
+    u8 unk_0[8];
+    s16 unk_8;
+    u16 unk_A;
+    void (*unk_C)(void*, f32);
+} Recovered_RecordDispatch;
+typedef struct Recovered_Record60 {
+    u64 unk_0;
+    u8 unk_8[8];
+    Recovered_RecordDispatch* unk_10;
+    u8 unk_14[0x4C];
+} Recovered_Record60;
+typedef struct Recovered_TimeView {
+    u8 unk_0[0x1C];
+    f32 unk_1C;
+} Recovered_TimeView;
+extern Recovered_TimeView* D_0040F4D0;
+extern void func_00130690(Recovered_Record14*, f32);
+typedef struct Recovered_RecordD0 {
+    u8 unk_0[0xC8];
+    u32 unk_C8;
+    u8 unk_CC[4];
+} Recovered_RecordD0;
+typedef struct Recovered_RecordOwner {
+    u8 unk_0[0x48];
+    Recovered_RecordD0* unk_48;
+    u8 unk_4C[0x1D];
+    s8 unk_69;
+} Recovered_RecordOwner;
+
+typedef struct Recovered_FrameDispatch {
+    u8 unk_0[8];
+    s16 unk_8;
+    u16 unk_A;
+    void (*unk_C)(void*, f32);
+    u8 unk_10[0x18];
+    s16 unk_28;
+    u16 unk_2A;
+    void (*unk_2C)(void*, f32);
+} Recovered_FrameDispatch;
+typedef struct Recovered_FrameObject {
+    u8 unk_0[0x1C];
+    f32 unk_1C;
+    u8 unk_20[0x20];
+    Recovered_FrameDispatch* unk_40;
+} Recovered_FrameObject;
+extern void* D_0040F530;
+extern void* D_0040F51C;
+extern void* D_0040F518;
+extern void func_0011A270(void*);
+extern void func_001F2828(void*, f32);
+extern void func_001F25A8(void*, f32);
+extern void func_0013BAC8(void*, f32);
+
+typedef struct Recovered_FrameState {
+    u8 unk_0[4];
+    s32 unk_4;
+    u8 unk_8[0x154];
+    u8 unk_15C;
+} Recovered_FrameState;
+extern Recovered_FrameState* D_0040F504;
+extern void* D_0040F0E0;
+extern void func_0011C0F0(Recovered_FrameState*);
+extern void func_001B1CB8(s32);
+extern void func_00103918(void*, s32);
+
+typedef struct Recovered_SubDispatch {
+    u8 unk_0[0x10];
+    s16 unk_10;
+    u16 unk_12;
+    void (*unk_14)(void*, f32);
+} Recovered_SubDispatch;
+typedef struct Recovered_SubObject {
+    u8 unk_0[0x14];
+    Recovered_SubDispatch* unk_14;
+} Recovered_SubObject;
+typedef struct Recovered_UpdateManager {
+    u8 unk_0[0xC];
+    Recovered_SubObject* unk_C;
+    u8 unk_10[4];
+    Recovered_SubObject* unk_14;
+} Recovered_UpdateManager;
+extern void func_001C22A0(void*, f32);
+
+extern Recovered_AIManager* D_0040F4D4;
+extern s32 func_001891C0(Recovered_ActorRecords*);
+extern void* func_0018A678(Recovered_ActorRecords*);
+extern s32 func_00178F28(void*);
+typedef struct Recovered_ManagerPredicate {
+    u8 unk_0[0x8B3];
+    u8 unk_8B3;
+} Recovered_ManagerPredicate;
+
+typedef struct Recovered_MaskRecord {
+    u8 unk_0[0x68];
+    u64 unk_68[12];
+    u8 unk_C8[8];
+} Recovered_MaskRecord;
+typedef struct Recovered_MaskOwner {
+    u8 unk_0[0x48];
+    Recovered_MaskRecord* unk_48;
+    u8 unk_4C[0x1D];
+    u8 unk_69;
+} Recovered_MaskOwner;
+typedef struct Recovered_CombinedMask {
+    u8 unk_0[0x370];
+    u64 unk_370;
+} Recovered_CombinedMask;
+
+typedef struct Recovered_PoseSourceA {
+    u8 unk_0[0x30];
+    void* unk_30;
+} Recovered_PoseSourceA;
+typedef struct Recovered_PoseSourceB {
+    u8 unk_0[0x50];
+    void* unk_50;
+} Recovered_PoseSourceB;
+typedef struct Recovered_PoseSources {
+    u8 unk_0[0x50];
+    Recovered_PoseSourceA* unk_50;
+    Recovered_PoseSourceB* unk_54;
+} Recovered_PoseSources;
+typedef struct Recovered_SavedPose {
+    u8 unk_0[0x70];
+    s128 unk_70[4];
+    u8 unk_B0[0xA0];
+    s128 unk_150[4];
+    u8 unk_190[0x1A0];
+    Recovered_PoseSources* unk_330;
+    u8 unk_334[0x1C];
+    void* unk_350;
+    u8 unk_354[0x5C];
+    u8 unk_3B0;
+    u8 unk_3B1;
+} Recovered_SavedPose;
+extern void func_00261C50(void*, void*, void*);
+
+extern void func_00165C40(void*, Recovered_Record60*);
+extern void func_00130660(Recovered_Record14*);
+extern s32 func_00130678(Recovered_Record14*);
 
 extern s32 func_001B6CF8(s32, s32, M2C_UNK);
 extern s32 D_0040F4D8;
@@ -274,9 +416,35 @@ s32 func_0012D218(Recovered_GameRandomView* self, f32 probability) {
     if (probability == 0.0f) return 0;
     return func_0012D058(self) <= probability;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D270);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D310);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012D3D0);
+void func_0012D270(Recovered_FrameObject* self, f32 time) {
+    void* component = (u8*)self + 0x30;
+    func_0011A270(D_0040F530);
+    func_001F2828(D_0040F51C, time);
+    func_001F25A8(D_0040F518, time);
+    func_0013BAC8(component, time);
+    self->unk_40->unk_C((u8*)component + self->unk_40->unk_8, time);
+    self->unk_40->unk_2C((u8*)component + self->unk_40->unk_28, time);
+}
+void func_0012D310(Recovered_FrameObject* self) {
+    func_0011C0F0(D_0040F504);
+    if (D_0040F504->unk_4 == 1) {
+        void* component = (u8*)self + 0x30;
+        self->unk_40->unk_C((u8*)component + self->unk_40->unk_8, self->unk_1C);
+    }
+    if (D_0040F504->unk_4 == 3) {
+        void* component = (u8*)self + 0x30;
+        self->unk_40->unk_C((u8*)component + self->unk_40->unk_8, self->unk_1C);
+        func_001B1CB8(D_0040F4D8);
+    }
+    if (D_0040F504->unk_15C) func_00103918(D_0040F0E0, 0);
+}
+void func_0012D3D0(Recovered_FrameObject* self) {
+    Recovered_SubObject* first = ((Recovered_UpdateManager*)D_0040F518)->unk_C;
+    first->unk_14->unk_14((u8*)first + first->unk_14->unk_10, self->unk_1C);
+    first = ((Recovered_UpdateManager*)D_0040F518)->unk_14;
+    first->unk_14->unk_14((u8*)first + first->unk_14->unk_10, self->unk_1C);
+    func_001C22A0((u8*)D_0040F4D8 + 0x83CA0, self->unk_1C);
+}
 void func_0012EEE8(Recovered_PairedBank* self) {
     s8 i;
     for (i = 0; i < 2; i++) {
@@ -292,7 +460,17 @@ s32 func_0012EF28(Recovered_PairedBank* self) {
     }
     return 1;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012EF68);
+void func_0012EF68(Recovered_PairedBank* self) {
+    f32 time = D_0040F4D0->unk_1C;
+    s8 group;
+    for (group = 0; group < 2; group++) {
+        s8 i;
+        for (i = 0; i < self->unk_8[group]; i++) {
+            Recovered_Record60* record = (Recovered_Record60*)(i * 0x60 + (u32)self->unk_0[group]);
+            record->unk_10->unk_C((u8*)record + record->unk_10->unk_8, time);
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F060);
 void func_0012F1B8(Recovered_PairedBank* self) {
     s8 next = (self->unk_C + 1) % 2;
@@ -302,7 +480,20 @@ void func_0012F1B8(Recovered_PairedBank* self) {
     }
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F208);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F2D8);
+s32 func_0012F2D8(Recovered_PairedBank* self, u64 id, void* result) {
+    s8 group;
+    for (group = 0; group < 2; group++) {
+        s8 i;
+        for (i = 0; i < self->unk_8[group]; i++) {
+            Recovered_Record60* record = (Recovered_Record60*)(i * 0x60 + (u32)self->unk_0[group]);
+            if (record->unk_0 == id) {
+                func_00165C40(result, record);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 void func_0012F388(Recovered_PairedBank* self) {
     s8 i;
     for (i = 0; i < 2; i++) {
@@ -318,8 +509,31 @@ s32 func_0012F3C8(Recovered_PairedBank* self) {
     }
     return 1;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F408);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F4F0);
+void func_0012F408(Recovered_PairedBank* self) {
+    f32 time = D_0040F4D0->unk_1C;
+    s8 group;
+    for (group = 0; group < 2; group++) {
+        s8 i;
+        for (i = 0; i < self->unk_8[group]; i++) { func_00130690(&((Recovered_Record14*)self->unk_0[group])[i], time); }
+    }
+}
+void func_0012F4F0(Recovered_PairedBank* self, s8 count) {
+    self->unk_C = (s8)(self->unk_C + 1) % 2;
+    if (count == 0) {
+        self->unk_A[self->unk_C] = 0;
+    } else {
+        s8 i;
+        void** destination;
+        self->unk_A[self->unk_C] = 1;
+        self->unk_8[self->unk_C] = count;
+        destination = &self->unk_0[self->unk_C];
+        *destination = func_00107D20(count * (s32)sizeof(Recovered_Record14));
+        for (i = 0; i < count; i++) {
+            func_00130660(&((Recovered_Record14*)self->unk_0[self->unk_C])[i]);
+            func_00130678(&((Recovered_Record14*)self->unk_0[self->unk_C])[i]);
+        }
+    }
+}
 void func_0012F610(Recovered_PairedBank* self) {
     s8 next = (self->unk_C + 1) % 2;
     if (self->unk_A[next]) {
@@ -327,8 +541,25 @@ void func_0012F610(Recovered_PairedBank* self) {
         self->unk_8[next] = 0;
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F660);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F6A8);
+s32 func_0012F660(Recovered_RecordOwner* self) {
+    s8 count = self->unk_69;
+    s8 i;
+    for (i = 0; i < count; i++) {
+        if (self->unk_48[i].unk_C8 != 0) return 1;
+    }
+    return 0;
+}
+static inline u8 SetIfEmpty(Recovered_Record14* record, u32 value) {
+    if (record->unk_0 != 0) return 0;
+    record->unk_0 = value;
+    return 1;
+}
+void func_0012F6A8(Recovered_PairedBank* self, u32 value) {
+    s8 i;
+    for (i = 0; i < self->unk_8[self->unk_C]; i++) {
+        if (SetIfEmpty(&((Recovered_Record14*)self->unk_0[self->unk_C])[i], value)) break;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F738);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F740);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F780);
@@ -371,9 +602,32 @@ s32 func_00135B60(Recovered_IndirectView* self) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001368F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00136BD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00136D60);
+void func_00136D60(Recovered_CombinedMask* self, Recovered_MaskOwner* source, s32 index) {
+    s32 i;
+    self->unk_370 = 0;
+    if (source->unk_69 != 0) {
+        for (i = 0; i < source->unk_69; i++) {
+            Recovered_MaskRecord* record =
+                (Recovered_MaskRecord*)((u32)source->unk_48 + i * sizeof(Recovered_MaskRecord));
+            self->unk_370 |= record->unk_68[index];
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00136DC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00136E88);
+void func_00136E88(Recovered_SavedPose* self, void* state) {
+    if (state) {
+        s128* pose = self->unk_70;
+        self->unk_150[0] = pose[0];
+        self->unk_150[1] = pose[1];
+        self->unk_150[2] = pose[2];
+        self->unk_150[3] = pose[3];
+        self->unk_3B0 = 1;
+        self->unk_3B1 = 0;
+    } else {
+        func_00261C50(self->unk_350, self->unk_330->unk_54->unk_50, self->unk_330->unk_50->unk_30);
+    }
+    self->unk_350 = state;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001386C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001387C8);
 void func_00139B68(Recovered_ArrayView* self) {
@@ -383,7 +637,17 @@ void func_00139B68(Recovered_ArrayView* self) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00139BA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013C868);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013CE08);
+void func_0013CE08(Recovered_ManagerPredicate* self) {
+    s8 i;
+    self->unk_8B3 = 0;
+    for (i = 0; i < 16; i++) {
+        Recovered_ManagedSlot* slot = &D_0040F4D4->slots[i];
+        if (slot->active && func_001891C0(&slot->records) && func_00178F28(func_0018A678(&slot->records))) {
+            self->unk_8B3 = 1;
+            break;
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013CED0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013CF38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D048);
