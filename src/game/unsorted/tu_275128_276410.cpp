@@ -28,6 +28,10 @@ struct CommandVec2 {
         CommandVec2 result(x - other.x, y - other.y);
         return result;
     }
+    CommandVec2 operator/(const CommandVec2& other) const {
+        CommandVec2 result(x / other.x, y / other.y);
+        return result;
+    }
     CommandVec2 operator+(const CommandVec2& other) const {
         CommandVec2 result(x + other.x, y + other.y);
         return result;
@@ -39,6 +43,12 @@ struct CommandExtra {
     int unk_10;
     int unk_14;
 };
+struct CommandTextExtra {
+    void* font;
+    const unsigned short* text;
+    float inverseAspect;
+};
+
 struct CommandRecord {
     CommandVec2 position;
     CommandVec2 extent;
@@ -64,6 +74,15 @@ struct CommandManager {
     CommandState* state;
 };
 
+static inline CommandExtra& Extra(CommandRecord* self) { return *(CommandExtra*)((char*)self + 0x20); }
+static inline void InitializeExtra(CommandExtra* const& fields, int mode, int value, const CommandVec2& start,
+                                   const CommandVec2& end) {
+    fields->unk_10 = mode;
+    fields->unk_14 = value;
+    fields->start = start;
+    fields->end = end;
+}
+
 #define COMMAND_OFFSET(type, field) ((EeU32) & ((type*)0)->field)
 
 typedef char CheckVec2Size[sizeof(CommandVec2) == 8 ? 1 : -1];
@@ -83,17 +102,24 @@ extern int func_00274018(int, int, int);
 extern void func_002740D8(void*, void*);
 extern void func_00273F30(CommandManager*, int, int, int, CommandState*, void*, int);
 extern void func_00266F50(EeU128, const CommandVec2*, int, const CommandVec2*);
-extern void func_002667E8(int);
-extern void func_00266808(int, int);
+extern int func_002667E8(int);
+extern int func_00266808(int, int);
 extern void func_00266D28(EeU128, const CommandVec2*, int, const CommandVec2*, CommandExtra*);
 extern CommandVec2 D_0043F8A8;
+extern float func_002758E0(void*, const unsigned short*);
 extern void func_00276698(CommandRecord*);
+extern void func_002767E8(CommandRecord*, CommandExtra*);
+extern void func_00276980(CommandRecord*, CommandExtra*);
+extern void func_00276E68(CommandRecord*, CommandExtra*);
 
 extern void func_002763B0(void *arg0);
 extern s32 func_002761A0(...);
 extern s32 func_00274040(void *);
-extern s32 func_00277400(...);
+extern void func_00277400(CommandRecord*, const CommandVec2*, const CommandVec2*, EeU128, void*,
+                          const unsigned short*, void (*)(void), float);
 extern void func_002778C8(...);
+extern void (*const D_00400408[])(void);
+
 
 void func_00276410(void *arg0) {
     func_002763B0(M2C_FIELD(arg0, void **, 0x14));
@@ -147,8 +173,20 @@ void func_00276610(CommandRecord* self, const CommandVec2* position, const Comma
     func_00276590(self, &(*position - (*extent * *scale)), extent, payload, (void (*)(void))func_00276698, 0x40, 0);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276698);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276728);
+void func_00276698(CommandRecord* self) {
+    CommandVec2 corners[2];
+    corners[0] = self->position;
+    corners[1] = self->position + self->extent;
+    func_00266F50(self->payload, &CommandVec2(0.0f, 0.0f), 1, corners);
+}
+void func_00276728(CommandRecord* self, const CommandVec2* position, const CommandVec2* scale,
+                   const CommandVec2* extent, EeU128 payload, int mode, const CommandVec2* start,
+                   const CommandVec2* end, int value) {
+    CommandExtra* extra = &Extra(self);
+    InitializeExtra(extra, mode, value, *start, *end);
+    func_00276590(self, &(*position - (*extent * *scale)), extent, payload, (void (*)(void))func_002767E8, 0x40, 0x18);
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_002767E0);
 void func_002767E8(CommandRecord* self, CommandExtra* extra) {
     CommandVec2 corners[2];
@@ -162,7 +200,13 @@ void func_002767E8(CommandRecord* self, CommandExtra* extra) {
     func_00266D28(self->payload, &D_0043F8A8, 1, corners, extra);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_002768B0);
+void func_002768B0(CommandRecord* self, const CommandVec2* position, const CommandVec2* extent,
+                   const CommandVec2* scale, EeU128 payload, int mode, const CommandVec2* start, const CommandVec2* end,
+                   int value) {
+    CommandExtra* extra = &Extra(self);
+    InitializeExtra(extra, mode, value, *start, *end);
+    func_00276590(self, &(*position - (*extent * *scale)), extent, payload, (void (*)(void))func_00276980, 0x40, 0x18);
+}
 
 void func_00276960(void *arg0, s64 *arg1, s64 *arg2) {
     M2C_FIELD(arg0, s64 *, 0x20) = (s64) *arg1;
@@ -171,15 +215,41 @@ void func_00276960(void *arg0, s64 *arg1, s64 *arg2) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276978);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276980);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276DA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276E58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276E68);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00277400);
-
-void func_00277510(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6, s32 arg7) {
-    func_00277400(arg0, arg1, arg2, arg3, arg4, arg5, (s32) func_002778C8, arg7);
+void func_00276DA8(CommandRecord* self, const CommandVec2* position, const CommandVec2* extent,
+                   const CommandVec2* scale, EeU128 payload, int mode, const CommandVec2* start, const CommandVec2* end,
+                   int value) {
+    CommandExtra* extra = &Extra(self);
+    InitializeExtra(extra, mode, value, *start, *end);
+    func_00276590(self, &(*position - (*extent * *scale)), extent, payload, (void (*)(void))func_00276E68, 0x40, 0x18);
 }
 
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276E58);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00276E68);
+void func_00277400(CommandRecord* self, const CommandVec2* position, const CommandVec2* scale, EeU128 payload,
+                   void* font, const unsigned short* text, void (*callback)(void), float height) {
+    CommandTextExtra* extra = (CommandTextExtra*)((char*)self + 0x20);
+    float aspect = func_002758E0(font, text);
+    CommandVec2 extent(aspect * height, height);
+    extra->font = font;
+    extra->text = text;
+    extra->inverseAspect = 1.0f / aspect;
+    func_00276590(self, &(*position - (extent * *scale)), &extent, payload, callback, 0x40, 0xc);
+}
+
+void func_00277510(CommandRecord* self, const CommandVec2* position, const CommandVec2* scale, EeU128 payload,
+                   void* font, const unsigned short* text, void (*unused)(void), float height) {
+    func_00277400(self, position, scale, payload, font, text, (void (*)(void))func_002778C8, height);
+}
+
+#ifdef NON_MATCHING
+// Unmatched: instructions match, but the owned callback table and adjacent string layout are unresolved.
+void func_00277530(CommandRecord* self, const CommandVec2* position, const CommandVec2* scale, EeU128 payload,
+                   void* font, const unsigned short* text, const CommandVec2* uvSize, int style, float height) {
+    func_00277400(self, position, scale, payload, font, text, D_00400408[style], height);
+    *(CommandVec2*)((char*)self + 0x30) = *uvSize / self->extent;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128_276410", func_00277530);
+#endif
 
 }
