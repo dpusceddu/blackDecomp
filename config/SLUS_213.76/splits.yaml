@@ -1841,7 +1841,7 @@ splits:
   - {src: src/game/unsorted/tu_275128.c, range: [0x275128, 0x276258], flags: [-O2, -G8], note: flags or language differ}
   - {src: src/game/unsorted/tu_275128_276258.c, range: [0x276258, 0x2763b0], note: flags or language differ}
   - {src: src/game/unsorted/tu_275128_2763b0.c, range: [0x2763b0, 0x276410], assembler: sn-min6, note: flags or language differ}
-  - {src: src/game/unsorted/tu_275128_276410.c, range: [0x276410, 0x2775a0]}
+  - {src: src/game/unsorted/tu_275128_276410.cpp, range: [0x276410, 0x2775a0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], assembler: sn-min6, note: Native vector temporaries require C++ lifetimes; the 0x276458 traversal and array-constructor loops have six-word bodies while stock snas inserts a seventh word; the rotation callbacks use VU0 VF1-VF8 and their drafts need allocatable j operands.}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x2775a0, 0x277b88]}
   - {src: src/game/unsorted/tu_277b88.c, range: [0x277b88, 0x277cb8]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x277cb8, 0x278b48]}
