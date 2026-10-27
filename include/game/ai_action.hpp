@@ -170,7 +170,8 @@ struct Recovered_DispatchedModeData {
     Byte unk_0D[3];
 };
 struct Recovered_DispatchedMode : Recovered_DispatchedModeData {
-    virtual void Unknown0();
+    // Reset slot; the result is unused by the dispatcher. Its native callbacks return scalar success.
+    virtual int Unknown0();
     virtual void Unknown1();
     virtual void Unknown2();
     virtual void Unknown3();
