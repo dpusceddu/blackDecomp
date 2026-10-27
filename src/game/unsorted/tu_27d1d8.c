@@ -94,12 +94,9 @@ static inline BkVuVector AddScalarW(BkVuVector a, BkVuVector scalar) {
     return result;
 }
 static inline s32 TinyDirection(f32 value) {
-    union {
-        f32 f;
-        u32 u;
-    } bits;
-    bits.f = value;
-    return (bits.u & 0x7F800000U) <= 0x37800000U;
+    u32 word;
+    __asm__("mfc1 %0, %1" : "=r"(word) : "f"(value));
+    return (word & 0x7F800000U) <= 0x37800000U;
 }
 static inline s32 Compare(f32 a, f32 b) {
     s32 result = 1;
@@ -140,7 +137,7 @@ void func_0027E760(Recovered_RelocatableRecords* self) {
     }
 }
 #ifdef NON_MATCHING
-// Unmatched: exponent-guard GPR allocation and the origin FPR lifetime differ.
+// Unmatched: exponent-guard GPR allocation differs in three instructions.
 s32 func_0027E820(void* unused, f32 start, f32 end, f32 lower, f32 upper, f32* entry, f32* exit) {
     f32 delta;
     f32 origin = start;
@@ -156,10 +153,11 @@ s32 func_0027E820(void* unused, f32 start, f32 end, f32 lower, f32 upper, f32* e
         near = (upper - origin) * start;
         far = (lower - origin) * start;
     }
-    hit = *entry <= far && near <= *exit;
+    origin = far;
+    hit = *entry <= origin && near <= *exit;
     if (hit) {
         *entry = __ee_max_s(*entry, near);
-        *exit = __ee_min_s(*exit, far);
+        *exit = __ee_min_s(*exit, origin);
     }
     return hit;
 }
