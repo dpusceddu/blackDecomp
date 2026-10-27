@@ -16,15 +16,21 @@
 
 When asked to "do a work session" (or to work on the decompilation without more detail), follow these steps.
 
-**Several sessions on one machine.** Each session needs its own Git worktree and branch: a build writes `build/`, `asm/`
-and `data/` inside the checkout, so two sessions must never build in the same one. Everything else is shared. The sessions
-can use the same environment (system packages, container or toolbox), and `tools/setup.py` links a new worktree's `.venv`,
-game files and toolchain to the main worktree's, so each extra session costs only its own first build (about two minutes).
-`tools/next.py` skips files that other local worktrees change, and the claims keep sessions on different machines apart.
+**Use the supplied checkout.** Work in the directory provided by the user or harness, whether it is a normal clone or a
+worktree. Let the user or harness manage checkout creation; do not create another worktree just to start a session.
+Preserve the supplied starting revision, branch and existing changes. Create a branch only when needed to retain commits
+or open the session's pull request, following the harness's conventions.
+
+**Concurrent sessions need separate build directories.** A build writes `build/`, `asm/` and `data/` inside the checkout,
+so two active sessions must never build in the same directory. A normal checkout is fine for a single session. If another
+active session uses the same directory, arrange separate checkouts through the user or harness before building. Sessions can share their
+environment (system packages, container or toolbox). When the supplied checkout is a linked worktree, `tools/setup.py`
+can reuse the main checkout's `.venv`, game files and toolchain. `tools/next.py` skips files that other local worktrees
+change, and the claims keep sessions on different machines apart.
 Split the processor between sessions (`ninja -j` with the core count divided by the number of sessions): the SN tools can
 stall under heavy load.
 
-1. **Build.** Work in a worktree of your own on a branch from the current `main` (or `upstream/main`). Run
+1. **Build.** Check the supplied checkout's revision, branch and local changes. Run
    `python3 tools/setup.py`: it installs what is missing and builds, and must end with `Ready`. Save `build/SLUS_213.76/units.json` as `.local/session-baseline-units.json`; its functions with status
    `source` are the protected set.
 2. **Pick.** Run `python3 tools/next.py --pick`: one unclaimed file, drawn at random from the best candidates (game code
