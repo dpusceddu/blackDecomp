@@ -471,6 +471,49 @@ extern "C" {
 void func_001A24B0(FamilyMode*, void*);
 }
 
+// UNVERIFIED mode interface; native slot 1 receives the actor. Keep its vptr before derived data.
+struct ActionModeInterface : Game::Recovered_DispatchedModeData {
+    virtual int Reset();
+    virtual void ActorEvent(Game::Actor*);
+};
+struct ActionModeView : ActionModeInterface {
+    unsigned char unk_14[0xC];
+    Game::Position4 point;
+};
+typedef char ActionModePointOffset[(unsigned)&((ActionModeView*)0)->point == 0x20 ? 1 : -1];
+static inline ActiveBinding* BindingFor(Game::Brain* brain) { return (ActiveBinding*)((unsigned char*)brain + 0xD18); }
+static inline float FourthWord(Game::PositionArg value) {
+    volatile Game::Position4 storage;
+    *(volatile Game::PositionArg*)&storage = value;
+    return storage.w;
+}
+
+extern "C" {
+void* func_001830D0(void*);
+void func_0018AD00(ActiveBinding*);
+int func_0018AD30(ActiveBinding*);
+Game::PositionArg func_0018AD60(ActiveBinding*);
+void func_0017E488(QueryState*, float);
+Game::PositionArg func_00183380(Game::FormationGoal*);
+int func_00182380(Game::Controller*, Game::PositionArg, int);
+int func_001823B0(Game::Controller*, Game::PositionArg, int);
+int func_00182410(Game::Controller*, Game::PositionArg, unsigned char, unsigned char);
+}
+
+static inline Value ZeroXYZ() {
+    Value value;
+    asm("vadd.xyz outputv, vf0, vf0" : "=j outputv"(value));
+    return value;
+}
+static inline Game::Position4 PositionFromValue(const Value* value) { return *(const Game::Position4*)value; }
+struct QuadReset {
+    int pairs[4][2];
+    Game::ActionTimer timer;
+    unsigned char unk_24[0xC];
+    Game::Position4 point;
+    int unk_40;
+};
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
 int func_0017C828(Value point, const Game::Position4* bounds) {
@@ -682,7 +725,24 @@ void func_0018AC80(ActiveBinding* self, int active) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0018AD88);
+extern "C" {
+int func_0018AD88(QuadReset* self) {
+    Value zero = ZeroXYZ();
+    int(*pair)[2] = self->pairs;
+    int remaining = 3;
+    do {
+        (*pair)[0] = 0;
+        remaining--;
+        (*pair)[1] = 0;
+        pair++;
+    } while (remaining >= 0);
+    self->point = PositionFromValue(&zero);
+    self->unk_40 = 0;
+    func_00173690(&self->timer);
+    return 1;
+}
+}
+
 extern "C" {
 int func_0018C1E0(ResetOwner* self) {
     ResetMode** mode = self->modes;
@@ -973,7 +1033,23 @@ void func_001971A0(Game::Action* self) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001971E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197460);
+extern "C" {
+void func_00197460(Game::Action* self) {
+    if (!func_001830D0(&self->brain->dispatcher)) {
+        func_00193990(self, 1);
+        return;
+    }
+    Game::Controller* controller;
+    if (func_001829E8(&self->brain->controller) || ((controller = &self->brain->controller), controller->publish)) {
+        ActionModeView* mode = (ActionModeView*)func_001830D0(&self->brain->dispatcher);
+        mode->ActorEvent(self->brain->actor);
+        func_00193990(self, 1);
+        return;
+    }
+    if (!func_001829A8(controller)) func_00193990(self, 0);
+}
+}
+
 extern "C" {
 void func_00197638(TimerAction* self, const void* event) {
     func_00193980(self, event);
@@ -984,8 +1060,35 @@ void func_00197638(TimerAction* self, const void* event) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197678);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197858);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_001979E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_00197AE0);
+extern "C" {
+int func_001979E0(Game::Action* self, const int* event) {
+    if (*event == 14) {
+        func_0018AD00(BindingFor(self->brain));
+        if (func_0018AD30(BindingFor(self->brain))) {
+            Game::Brain* brain = self->brain;
+            func_0017E428(QueryFor(brain), func_0018AD60(BindingFor(brain)));
+            return 1;
+        }
+        Game::PositionArg point = Game::Load(((ActionModeView*)func_001830D0(&self->brain->dispatcher))->point);
+        func_0017E488(QueryFor(self->brain), FourthWord(point));
+        return 1;
+    }
+    return 0;
+}
+}
+
+extern "C" {
+int func_00197AE0(Game::Action* self) {
+    Game::PositionArg point = func_00183380(&self->brain->formation);
+    Game::Brain* brain = self->brain;
+    Game::Vec delta = Game::Sub3(Game::Load(brain->actor->position), point);
+    float distanceSquared = Ps2Math::VU0::ReadXWord(Game::SumSquares3(delta));
+    if (distanceSquared < 10.0f) return func_00182380(&brain->controller, point, 0);
+    if (!(distanceSquared < 12.0f)) return func_00182410(&brain->controller, point, 0, 0);
+    return func_001823B0(&brain->controller, point, 0);
+}
+}
+
 extern "C" {
 void func_00197C60(Game::Action* self) {
     void* animation = ((ActorParts::Owner*)self->brain->actor)->Animation();
