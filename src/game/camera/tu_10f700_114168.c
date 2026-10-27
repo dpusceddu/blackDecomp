@@ -178,9 +178,15 @@ typedef struct Recovered_PoolSlot {
     Recovered_PoolDispatch* unk_10;
     u8 unk_14[0x128];
     u8 unk_13C;
-    u8 unk_13D[0x15];
+    u8 unk_13D[3];
+    s32 unk_140; // UNVERIFIED: pool release and weapon eligibility drafts.
+    u8 unk_144[4];
+    u8 unk_148; // UNVERIFIED: descriptor choice index.
+    u8 unk_149[9];
     u8 unk_152;
-    u8 unk_153[0xD];
+    u8 unk_153;
+    u8 unk_154; // UNVERIFIED: release marker.
+    u8 unk_155[0xB];
 } Recovered_PoolSlot;
 typedef struct Recovered_PoolDescriptor {
     u8 unk_0;
@@ -424,6 +430,124 @@ extern s32 func_001B6CF8(s32, s32, M2C_UNK);
 extern s32 D_0040F4D8;
 extern s32 func_00149AC8(s32);
 
+#ifdef NON_MATCHING
+#include "game/weapons/state.h"
+#include "game/weapons/inventory.h"
+// Partial views used only by drafts; these fields remain UNVERIFIED.
+typedef struct Recovered_MaskPair {
+    s16 unk_0, unk_2, unk_4;
+} Recovered_MaskPair;
+typedef struct Recovered_MaskPayload {
+    u8 unk_0[0x30];
+} Recovered_MaskPayload;
+typedef struct Recovered_MaskInputs {
+    u8 unk_0[0x1C];
+    Recovered_MaskPayload* unk_1C;
+    Recovered_MaskPair* unk_20;
+    s32 unk_24;
+} Recovered_MaskInputs;
+typedef struct Recovered_MaskRender {
+    u8 unk_0[0x70];
+    s128 unk_70[4];
+    u8 unk_B0[0x220];
+    u8 unk_2D0[0x84];
+    u8* unk_354;
+    u8* unk_358;
+    u8 unk_35C[0x14];
+    u64 unk_370;
+} Recovered_MaskRender;
+extern u8* D_0040F4C0;
+extern void func_001B0740(void*, Recovered_MaskRender*, s128*);
+extern void* func_001AF738(void*, void*, void*, void*, void*, void*, u8, s32, f32);
+
+extern void func_00136D60(Recovered_CombinedMask*, Recovered_MaskOwner*, s32);
+#include "game/camera/selection_pool.h"
+typedef struct Recovered_SelectionActor {
+    Recovered_SelectionMember member;
+    u8 unk_3B0[0x10];
+} Recovered_SelectionActor;
+typedef struct Recovered_SelectionOwner {
+    u8 unk_0[0x90];
+    Recovered_SelectionActor unk_90[32];
+    u8 unk_7890[0x100];
+    Recovered_SelectionPool unk_7990[4];
+    u8 unk_79D0[0xB44];
+    s32 unk_8514;
+    u8 unk_8518[4];
+    s32 unk_851C;
+    s32 unk_8520;
+} Recovered_SelectionOwner;
+typedef struct Recovered_SelectionGate {
+    u8 unk_0[0x138];
+    u8 unk_138, unk_139;
+} Recovered_SelectionGate;
+extern u8* D_0040F4C4;
+extern void* D_0040F540;
+extern s32 func_00143700(void*);
+extern s32 func_001397F8(Recovered_SelectionPool*);
+extern s32 func_00139838(Recovered_SelectionPool*, Recovered_SelectionMember*);
+static inline u8 SelectionBlocked(Recovered_SelectionGate* self) {
+    u8 result = 0;
+    if (self->unk_138 || self->unk_139) result = 1;
+    return result;
+}
+typedef struct Recovered_Record12 {
+    f32 unk_0, unk_4;
+    u8 unk_8, unk_9, unk_A, unk_B;
+} Recovered_Record12;
+static inline void SetDimensions(Recovered_SmallArray* self, s8 index, f32 x, f32 y, s32 arg3, s32 arg4, u8 arg5) {
+    ((Recovered_Record12*)self->unk_0)[index].unk_4 = y;
+    ((Recovered_Record12*)self->unk_0)[index].unk_0 = x;
+    ((Recovered_Record12*)self->unk_0)[index].unk_9 = arg4;
+    ((Recovered_Record12*)self->unk_0)[index].unk_8 = arg3;
+    ((Recovered_Record12*)self->unk_0)[index].unk_A = arg5;
+}
+
+typedef struct Recovered_WeaponChoice {
+    s32 unk_0;
+    u8 unk_4[0x14];
+} Recovered_WeaponChoice;
+typedef struct Recovered_InventoryQuery {
+    BkInventoryPS2 inventory;
+    u8 unk_1C[8];
+    BkWeaponControllerPS2* unk_24;
+} Recovered_InventoryQuery;
+extern Recovered_SlotPool* D_0040F4E4;
+extern BkWeaponDefinitionPS2* func_0015D228(void*, s32);
+extern u16 func_00155198(BkInventoryPS2*);
+extern s16 func_001580E0(BkWeaponControllerPS2*);
+extern s32 func_00155178(BkInventoryPS2*, s32, u8);
+extern void func_00129240(void*, Recovered_PoolSlot*, s32);
+extern void func_001F2958(void*, s32, s32, s32, s32);
+extern s32 func_00130640(Recovered_QuadRecord*, u64, s128);
+typedef struct Recovered_RequestEntry {
+    u32 unk_0;
+    u8 unk_4[8];
+} Recovered_RequestEntry;
+typedef struct Recovered_RequestState {
+    u8 unk_0[0xB0];
+    u32 unk_B0;
+    u8 unk_B4[0x4C];
+    s8 unk_100;
+    u8 unk_101;
+    u8 unk_102;
+} Recovered_RequestState;
+typedef struct Recovered_ObserverArray {
+    u8 unk_0[0x25C];
+    void* unk_25C[8];
+    u8 unk_27C[0x54];
+    u8 unk_2D0[1]; // Payload prefix; its complete extent is unknown.
+} Recovered_ObserverArray;
+extern void func_00142F80(void*, s32, void*);
+typedef struct Recovered_ThreeSlots {
+    u8 unk_0[0xC];
+    void* unk_C[3];
+    u8 unk_18;
+    u8 unk_19;
+    u8 unk_1A;
+} Recovered_ThreeSlots;
+#endif
+
 void func_00114168(void) {
 
 }
@@ -539,9 +663,47 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126978);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126980);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126BC8);
+#ifdef NON_MATCHING
+// Unmatched: pool/index lifetimes and notification argument scheduling differ (7 instructions).
+void func_00126D78(Recovered_SlotPool* self, Recovered_PoolSlot* slot, s32 notify) {
+    if (slot->unk_152 & 8) {
+        func_001F2958(D_0040F51C, 0, slot->unk_140, slot->unk_148, 0);
+        slot->unk_154 = 1;
+    } else {
+        Recovered_PoolSlot* current = self->unk_0;
+        s8 i = 0;
+        do {
+            if (current == slot) {
+                self->unk_5804[i] = 0;
+                if (notify) func_001F2958(D_0040F51C, 0, current->unk_140, current->unk_148, 0);
+                current->unk_154 = 1;
+                break;
+            }
+            current++;
+            i++;
+        } while (i < 64);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126D78);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126E48);
+#ifdef NON_MATCHING
+// Unmatched: dispatch and iterator setup use different registers (7 instructions).
+void func_00126E50(Recovered_SlotPool* self) {
+    s8 i;
+    for (i = 0; i < 64; i++) {
+        Recovered_PoolSlot* slot = &self->unk_0[i];
+        if (self->unk_5804[i] == 1 && (slot->unk_152 & 4)) {
+            func_00129240(D_0040F4D0, slot, 0);
+            slot->unk_10->unk_24((u8*)slot + slot->unk_10->unk_20);
+            self->unk_5804[i] = 0;
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126E50);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126F08);
 u32 func_00126F10(Recovered_SlotPool* self, s32 value) {
     u32 result = 0;
@@ -555,7 +717,23 @@ u32 func_00126F10(Recovered_SlotPool* self, s32 value) {
     }
     return result;
 }
+#ifdef NON_MATCHING
+// Unmatched: inventory and catalog address loads are scheduled differently (7 instructions).
+s32 func_00126F80(void* self, Recovered_PoolSlot* slot) {
+    if (slot->unk_140 == 1) {
+        Recovered_InventoryQuery* inventory = (Recovered_InventoryQuery*)((u8*)D_0040F4D0 + 0x2B0);
+        s32 kind = ((Recovered_WeaponChoice*)D_0040F4E4->unk_5844->unk_C)[slot->unk_148].unk_0;
+        BkWeaponDefinitionPS2* definition = func_0015D228(D_0040F4E0, inventory->unk_24->weaponId);
+        if (kind == 7 && !func_00155198(&inventory->inventory)) return 1;
+        if (definition->reserveIndex == kind && !func_001580E0(inventory->unk_24)) {
+            if (!func_00155178(&inventory->inventory, kind, (u8)definition->capacity)) return 1;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126F80);
+#endif
 void func_00127060(Recovered_BindingPool* self) {
     s8 i;
     for (i = 0; i < self->unk_5844->unk_0; i++) {
@@ -653,7 +831,21 @@ void func_0012F1B8(Recovered_PairedBank* self) {
         self->unk_8[next] = 0;
     }
 }
+#ifdef NON_MATCHING
+// Unmatched: count-view capture and loop setup scheduling differ (15 instructions).
+void func_0012F208(Recovered_PairedBank* self, u64 id, s128 value) {
+    if (self->unk_8[self->unk_C] > 0) {
+        s8* counts = self->unk_8;
+        s8 i = 0;
+        do {
+            if (func_00130640(&((Recovered_QuadRecord*)self->unk_0[self->unk_C])[i], id, value)) break;
+            i++;
+        } while (i < counts[self->unk_C]);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012F208);
+#endif
 s32 func_0012F2D8(Recovered_PairedBank* self, u64 id, void* result) {
     s8 group;
     for (group = 0; group < 2; group++) {
@@ -748,14 +940,41 @@ s32 func_00130678(Recovered_Record14* self) {
     self->unk_4 = 0;
     return 1;
 }
+#ifdef NON_MATCHING
+// Unmatched: table address lifetime, stores and return joins differ (18 instructions).
+s32 func_001306D0(Recovered_RequestState* self, void* arg1, s8 index) {
+    if (!self->unk_102) {
+        func_0013EC38(self, arg1);
+        self->unk_102 = 1;
+        self->unk_B0 = ((Recovered_RequestEntry*)((u8*)D_0040F0E0 + 0x21060))[index].unk_0;
+        self->unk_100 = index;
+        return 1;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001306D0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00131EF0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00132188);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00132610);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001327F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001334E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00133BA0);
+#ifdef NON_MATCHING
+// Unmatched: iterator advance and countdown exchange two instruction positions.
+void func_00133E60(Recovered_ObserverArray* self, s32 kind) {
+    void** cursor = self->unk_25C;
+    s32 count = 7;
+    do {
+        void* observer = *cursor++;
+        count--;
+        if (observer) func_00142F80(observer, kind, self->unk_2D0);
+    } while (count >= 0);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00133E60);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00135580);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00135940);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00135A38);
@@ -765,7 +984,33 @@ s32 func_00135B60(Recovered_IndirectView* self) {
     return 0;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001368F0);
+#ifdef NON_MATCHING
+// Unmatched: mask/payload iterator strength reduction and saved-register allocation differ.
+void func_00136BD0(Recovered_MaskRender* self, Recovered_MaskOwner* source, s32 mask, s32 flag, s128* transform) {
+    Recovered_MaskInputs* inputs = (Recovered_MaskInputs*)source;
+    s32 i;
+    if (transform == NULL) transform = self->unk_70;
+    func_001B0740(D_0040F4C0 + 0xCBE0, self, transform);
+    func_00136D60((Recovered_CombinedMask*)self, source, mask);
+    for (i = 0; i < inputs->unk_24; i++) {
+        if (self->unk_370 & (1 << i)) {
+            Recovered_MaskPair* pair = (Recovered_MaskPair*)((u8*)inputs->unk_20 + i * 6);
+            Recovered_MaskPayload* payload = &inputs->unk_1C[i];
+            u8* left = self->unk_354 + pair->unk_0;
+            u8* right = self->unk_358 + pair->unk_2;
+            u8 kind = *left;
+            if ((u32)(kind - 5) < 3) {
+                func_001AF738(D_0040F4C0 + 0x14, payload, left, right, self->unk_2D0, transform, flag ^ 1,
+                              (s8)kind != 7, 0.0f);
+            } else {
+                func_001AF738(D_0040F4C0 + 0x14, payload, left, right, NULL, transform, flag ^ 1, (s8)kind != 4, 0.0f);
+            }
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00136BD0);
+#endif
 void func_00136D60(Recovered_CombinedMask* self, Recovered_MaskOwner* source, s32 index) {
     s32 i;
     self->unk_370 = 0;
@@ -792,7 +1037,37 @@ void func_00136E88(Recovered_SavedPose* self, void* state) {
     }
     self->unk_350 = state;
 }
+#ifdef NON_MATCHING
+// Unmatched: byte predicate narrowing and selection-pool pointer capture differ (4 instructions).
+s32 func_001386C8(Recovered_SelectionOwner* self) {
+    if (SelectionBlocked((Recovered_SelectionGate*)(D_0040F4C4 + 0xA00))) return 0;
+    if (!func_00143700(D_0040F540)) return 0;
+    {
+        Recovered_SelectionActor* actor = self->unk_90;
+        Recovered_SelectionPool** marker = &actor->member.pool;
+        Recovered_SelectionPool* pool = &self->unk_7990[0];
+        s32 count;
+        func_001397F8(pool);
+        count = 31;
+        func_001397F8(&self->unk_7990[1]);
+        func_001397F8(&self->unk_7990[2]);
+        func_001397F8(&self->unk_7990[3]);
+        do {
+            *marker = NULL;
+            func_00139838(pool, &actor->member);
+            actor++;
+            count--;
+            marker = (Recovered_SelectionPool**)((u8*)marker + 0x3C0);
+        } while (count >= 0);
+        self->unk_8520 = 3;
+        self->unk_8514 = 1;
+        self->unk_851C = 0;
+        return 1;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001386C8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001387C8);
 void func_00139B68(Recovered_ArrayView* self) {
     s32 i;
@@ -912,14 +1187,32 @@ void func_0013D7A0(Recovered_ManagedSlot* self, s32 id) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D8D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D9A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001415A8);
+#ifdef NON_MATCHING
+// Unmatched: inline search joins and destination address lifetimes differ (19 instructions).
+void func_00142AB8(Recovered_SmallArray* self, s32 width, s32 height, s32 arg3, s32 arg4, u8 arg5, u64 id) {
+    f32 x = 1.02f / width;
+    f32 y = 1.02f / height;
+    SetDimensions(self, FindCatalogItem(id), x, y, arg3, arg4, arg5);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00142AB8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00142B90);
 void func_00142E30(Recovered_SmallArray* self, s8 count) {
     self->unk_4 = count;
     self->unk_0 = func_00107D20(count * 12);
     func_0035C6EC(self->unk_0, 0, self->unk_4 * 12);
 }
+#ifdef NON_MATCHING
+// Unmatched: scalar maximum does not lower to the native pmaxw/pextlw pair.
+void func_00143590(Recovered_ThreeSlots* self, void* value, u8 index) {
+    u32 selected = index == 0xFF ? self->unk_19 : index;
+    if (selected < 3) self->unk_C[selected] = value;
+    self->unk_1A = self->unk_1A > selected + 1 ? self->unk_1A : selected + 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00143590);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001444A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001448C8);
 

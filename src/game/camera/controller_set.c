@@ -122,4 +122,40 @@ void func_00140AD0(Recovered_ControllerLifecycle* self) {
     }
     self->unk_4B4 = -1;
 }
+#ifdef NON_MATCHING
+// Unmatched: dispatch pointer and callback occupy exchanged registers (4 instructions).
+s32 func_00140BB8(Recovered_ControllerLifecycle* self, Recovered_ManagedActor* owner) {
+    s32* pending;
+    s32 count;
+    s32 empty = -1;
+    func_0013EC38(self, owner);
+    pending = self->unk_4B8;
+    count = 8;
+    do {
+        Recovered_ControllerChild* child = *(Recovered_ControllerChild**)((u8*)pending - 0x28);
+        s16 adjust = child->unk_4C->unk_10;
+        void (*callback)(void*, void*) = child->unk_4C->unk_14;
+        count--;
+        callback((u8*)child + adjust, self);
+        *pending++ = empty;
+    } while (count >= 0);
+    self->unk_4B4 = -1;
+    func_00173690(self->unk_4E0);
+    self->unk_4DC = 0;
+    if (func_00135550(owner) == NULL)
+        self->unk_4E8 = 0;
+    else {
+        s32 mode = func_00135550(owner)->unk_80;
+        if (mode == 1) {
+            if (func_00185C58(func_00135550(owner)->events))
+                self->unk_4E8 = mode;
+            else
+                self->unk_4E8 = 2;
+        } else
+            self->unk_4E8 = 0;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/controller_set", func_00140BB8);
+#endif
