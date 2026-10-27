@@ -63,3 +63,6 @@ s32 func_0011C9C8(Recovered_ControllerSet* self) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/controller_set", func_0011CA20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/controller_set", func_0011CA28);
+
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/controller_set", func_00140AD0);
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/controller_set", func_00140BB8);
