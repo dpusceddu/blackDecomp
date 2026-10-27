@@ -660,7 +660,7 @@ struct PointAction {
     Game::ActionTimer timer;
     unsigned char unk_0C[4];
     Game::Position4 point;
-    int unk_20;
+    float unk_20;
 };
 
 struct RouteChoice {
@@ -732,6 +732,10 @@ float func_00173678(Game::ActionTimer*);
 }
 
 #endif
+
+extern "C" {
+float func_001891A8(Recovered_ActorRecords*);
+}
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0017BE40);
 extern "C" {
@@ -1666,7 +1670,7 @@ void func_0019B868(Game::Action* self, const void* event) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019BE70);
 #ifdef NON_MATCHING
-// Unmatched: clock-scale constant and phase-clear scheduling differ.
+// Unmatched: clock-scale constant and accumulator-clear scheduling differ.
 extern "C" {
 void func_0019C100(PointAction* self, const void* event) {
     func_00193980(self, event);
@@ -1889,7 +1893,27 @@ void func_0019F590(Game::Action* self) {
 }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019FE28);
+extern "C" {
+void func_0019FE28(SimpleGoalAction* self) {
+    if (func_001891A8(RecordsFor(self->base.brain)) < 1.0f) {
+        func_001825B0(&self->base.brain->controller);
+        func_00193990((Game::Action*)self, 1);
+    }
+    Game::Vec delta = Game::Sub3(Game::Load(self->point), Game::Load(self->base.brain->actor->position));
+    float distanceSquared = Ps2Math::VU0::ReadXWord(Game::SumSquares3(delta));
+    if (distanceSquared < 1.0f) {
+        func_001825B0(&self->base.brain->controller);
+        func_00193990((Game::Action*)self, 1);
+    }
+    if (func_00173610(&self->timer)) {
+        func_001825B0(&self->base.brain->controller);
+        func_00193990((Game::Action*)self, 1);
+    }
+    Game::Brain* brain = self->base.brain;
+    func_0017E428(QueryFor(brain), func_00189048(RecordsFor(brain)));
+}
+}
+
 extern "C" {
 void func_0019FF20(SimpleGoalAction* self, const void* event) {
     func_00193980(self, event);
