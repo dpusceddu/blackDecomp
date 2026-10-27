@@ -2,6 +2,7 @@
 import sys
 import tempfile
 import unittest
+import yaml
 from pathlib import Path
 from unittest.mock import patch
 
@@ -96,6 +97,101 @@ class Splits(unittest.TestCase):
         import yaml
         back = yaml.safe_load('[' + line[2:] + ']')[0]
         self.assertEqual(back['range'], [0x100, 0x200])
+
+    def test_complete_list_survives_rewrite(self):
+        text = '''# hand-edited header
+variant: SLUS_213.76
+defaults: {flags: [-O2, -G0]}
+splits:
+  - {src: src/a.c, range: [0x100, 0x200]}
+  - {src: src/b.cpp, range: [0x200, 0x300],
+     flags: [-O1, -G0], note: "schedule, registers: keep both",
+     data_ranges: [{section: .rodata, range: [0x400, 0x410]}]}
+  - src: src/c.c
+    range: [0x300, 0x400]
+    note: >-
+      a folded note, with commas
+      and a second line
+metadata: {keep: true}
+# tail comment
+'''
+        head, entries, tail = S.split_entries(text)
+        self.assertEqual(len(entries), 3)
+        output = S.join_entries(head, entries, tail)
+        self.assertEqual(yaml.safe_load(output), yaml.safe_load(text))
+        self.assertTrue(output.startswith('# hand-edited header\n'))
+        self.assertTrue(output.endswith('# tail comment\n'))
+
+    def test_committed_list_round_trips_without_losing_any_entry(self):
+        text = (S.config_dir() / 'splits.yaml').read_text()
+        head, entries, tail = S.split_entries(text)
+        self.assertEqual(entries, yaml.safe_load(text)['splits'])
+        self.assertEqual(yaml.safe_load(S.join_entries(head, entries, tail)), yaml.safe_load(text))
+        for entry in entries:
+            self.assertEqual(yaml.safe_load(S.format_split(entry))[0], entry)
+
+    def test_notes_are_safe_inside_flow_mapping(self):
+        for note in ('a, b', 'a: b, c', 'a # comment', 'a\nb', '{a, b}', '"quoted", \\path'):
+            with self.subTest(note=note):
+                entry = dict(src='src/a.c', range=[1, 2], note=note)
+                self.assertEqual(yaml.safe_load(S.format_split(entry))[0], entry)
+
+    def test_validation_rejects_lost_fields_and_overlap_before_save(self):
+        head, entries, tail = S.split_entries(SPLITS)
+        entries[0]['note'] = 'force this entry to be rendered'
+        before = self.path.read_bytes()
+        with patch.object(S, 'format_split', return_value='- {src: lost.c, range: [1, 2]}'):
+            with self.assertRaisesRegex(ValueError, 'preserve'):
+                self.path.write_text(S.join_entries(head, entries, tail))
+        self.assertEqual(self.path.read_bytes(), before)
+        with self.assertRaisesRegex(ValueError, 'overlapping'):
+            S.join_entries(head, entries + [dict(src='overlap.c', range=[0x100001, 0x100004])], tail)
+        with self.assertRaisesRegex(ValueError, 'unknown keys'):
+            S.join_entries(head, [dict(src='a.c', range=[1, 2], unsupported='must survive')], tail)
+
+    def test_atomic_save_keeps_original_on_validation_or_replace_failure(self):
+        head, entries, tail = S.split_entries(SPLITS)
+        entries[0]['note'] = 'changed, but complete'
+        before = self.path.read_bytes()
+        with patch.object(S.os, 'replace', side_effect=OSError('cannot replace')):
+            with self.assertRaises(OSError):
+                S.write_entries(self.path, head, entries, tail)
+        self.assertEqual(self.path.read_bytes(), before)
+        self.assertEqual(list(self.path.parent.glob('.splits-*')), [])
+        S.write_entries(self.path, head, entries, tail)
+        self.assertEqual(yaml.safe_load(self.path.read_text())['splits'], entries)
+
+    def test_empty_list_can_be_restored(self):
+        for text in ('variant: SLUS_213.76\nsplits: []\n', 'variant: SLUS_213.76\nsplits:\n  []\n'):
+            head, entries, tail = S.split_entries(text)
+            output = S.join_entries(head, entries + [dict(src='a.c', range=[1, 2])], tail)
+            self.assertEqual(len(yaml.safe_load(output)['splits']), 1)
+
+    def test_split_function_preserves_unrelated_committed_entries(self):
+        import split_function as F
+        import tu_files as T
+        text = (S.config_dir() / 'splits.yaml').read_text()
+        original = yaml.safe_load(text)['splits']
+        owner = next(e for e in original if e['range'][1] - e['range'][0] >= 0x30)
+        addr, end = owner['range'][0] + 8, owner['range'][0] + 16
+        root = Path(self.dir.name)
+        config = root / 'config' / S.DEFAULT_SLUG
+        config.mkdir(parents=True)
+        path = config / 'splits.yaml'
+        path.write_text(text)
+        source = root / owner['src']
+        source.parent.mkdir(parents=True)
+        source.write_text(T.marker(addr, owner['src']) + '\n')
+        with patch.object(S, 'ROOT', root), patch.object(F, 'ROOT', root), patch.object(T, 'ROOT', root), \
+             patch.object(U, 'function_table', return_value=[(addr, end)]), \
+             patch.object(T, 'unique_path', return_value='src/game/split_test.cpp'):
+            new, _ = F.split_function(addr, cpp=True)
+        after = yaml.safe_load(path.read_text())['splits']
+        self.assertEqual(len(after), len(original) + 2)
+        self.assertEqual([e for e in after if e['src'] not in (owner['src'], new)],
+                         [e for e in original if e['src'] != owner['src']])
+        self.assertIn(T.marker(addr, new), (root / new).read_text())
+        self.assertNotIn('func_%08X' % addr, source.read_text())
 
 
 class Derive(unittest.TestCase):

@@ -26,8 +26,11 @@ import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
+import copy
+import os
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 import yaml
@@ -238,12 +241,23 @@ def format_symbols(rows):
 
 def flow(value):
     """Compact one-line YAML for a scalar, list or mapping (hex for ints listed in `HEX`)."""
-    return yaml.safe_dump(value, default_flow_style=True, width=1 << 30).strip().removesuffix('\n...').strip()
+    # A scalar that is safe in block YAML (notably a note containing commas)
+    # is not necessarily safe inside the flow mapping emitted below.
+    rendered = yaml.safe_dump(value, default_flow_style=True, width=1 << 30).strip().removesuffix('\n...').strip()
+    if isinstance(value, str):
+        try:
+            if yaml.safe_load('{value: ' + rendered + '}') == {'value': value}:
+                return rendered
+        except yaml.YAMLError:
+            pass
+        rendered = yaml.safe_dump(value, default_style='"', width=1 << 30).strip()
+    return rendered
 
 
 def format_split(entry):
     """One `- {src: ..., range: [0x.., 0x..], ...}` line; ranges and data addresses in hex."""
-    parts = ['src: %s' % entry['src'], 'range: [0x%06x, 0x%06x]' % tuple(num(v) for v in entry['range'])]
+    Split(entry, {})  # reject unknown keys instead of silently discarding them
+    parts = ['src: %s' % flow(entry['src']), 'range: [0x%06x, 0x%06x]' % tuple(num(v) for v in entry['range'])]
     for key in ('compiler', 'flags', 'assembler'):
         if key in entry:
             parts.append('%s: %s' % (key, flow(entry[key])))
@@ -321,19 +335,79 @@ def check_ownership(splits, read=None, table=None, complete=False):
 
 # ------------------------------------------------------------------------------------- moving a function between files
 
+class SplitHead(list):
+    """Header lines plus original entry text, so unrelated entries keep their formatting and comments."""
+
+    def __init__(self, lines, originals):
+        super().__init__(lines)
+        self.originals = originals
+
+
 def split_entries(text):
-    """(head lines, [entry dict, ...], tail lines) of a splits.yaml text; the entries are the one-line `- {src: ...}` items."""
+    """Read every YAML entry, including multiline flow and block mappings.
+
+    Node marks delimit the list; line-shaped regexes must never decide which
+    entries survive a rewrite. Reject layouts we cannot safely rewrite.
+    """
+    data = yaml.safe_load(text)
+    root = yaml.compose(text)
+    if not isinstance(data, dict) or not isinstance(data.get('splits'), list):
+        raise ValueError('expected a splits sequence')
+    nodes = [v for k, v in root.value if k.value == 'splits']
+    if len(nodes) != 1 or (nodes[0].flow_style and data['splits']):
+        raise ValueError('expected one block-style splits sequence')
+    node = nodes[0]
+    entries = data['splits']
+    for entry in entries:
+        Split(entry, data.get('defaults') or {})
     lines = text.split('\n')
-    idx = [i for i, line in enumerate(lines) if line.startswith('  - {')]
-    entries = [yaml.safe_load('[' + lines[i].strip()[2:] + ']')[0] for i in idx]
-    first, last = (idx[0], idx[-1] + 1) if idx else (len(lines), len(lines))
-    return lines[:first], entries, lines[last:]
+    if not entries:
+        key = next(k for k, v in root.value if k.value == 'splits')
+        return SplitHead(lines[:key.start_mark.line] + ['splits:'], {}), [], lines[node.end_mark.line + 1:]
+    first, last = node.start_mark.line, node.end_mark.line
+    starts = [n.start_mark.line for n in node.value] + [last]
+    originals = {id(e): (copy.deepcopy(e), lines[lo:hi]) for e, lo, hi in zip(entries, starts, starts[1:])}
+    return SplitHead(lines[:first], originals), entries, lines[last:]
 
 
 def join_entries(head, entries, tail):
     """The inverse of split_entries; the entries are written ordered by range."""
     ordered = sorted(entries, key=lambda e: (num(e['range'][0]), num(e['range'][1])))
-    return '\n'.join(head + ['  ' + format_split(e) for e in ordered] + tail)
+    body = []
+    for entry in ordered:
+        original, lines = getattr(head, 'originals', {}).get(id(entry), (None, None))
+        body.extend(lines if original == entry else ['  ' + format_split(entry)])
+    body = body or ['  []']
+    text = '\n'.join(head + body + tail)
+    # Validate the complete rendering before callers can save it. Equality
+    # checks counts and every field, including notes and nested data options.
+    skeleton = yaml.safe_load('\n'.join(head + ['  []'] + tail))
+    expected = dict(skeleton, splits=ordered)
+    actual = yaml.safe_load(text)
+    if actual != expected:
+        raise ValueError('split rewrite did not preserve all entries and fields')
+    splits = [Split(e, actual.get('defaults') or {}) for e in actual['splits']]
+    group_splits(splits)
+    ranges = sorted((s.start, s.end) for s in splits)
+    if any(lo < prev_hi for (_, prev_hi), (lo, _) in zip(ranges, ranges[1:])):
+        raise ValueError('split rewrite contains overlapping ranges')
+    return text
+
+
+def write_entries(path, head, entries, tail):
+    """Validate before saving, then atomically replace the split file (never truncate it in place)."""
+    path = Path(path)
+    text = join_entries(head, entries, tail)
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode='w', dir=path.parent, prefix='.splits-', delete=False) as output:
+            temporary = Path(output.name)
+            os.chmod(temporary, path.stat().st_mode)
+            output.write(text)
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
 
 
 def carve_range(entries, addr, end):

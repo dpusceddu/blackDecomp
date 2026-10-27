@@ -27,7 +27,6 @@ import layout
 
 ROOT = S.ROOT
 ASM_DIR = 'asm/SLUS_213.76/nonmatchings'
-SPLIT_LINE = re.compile(r'^\s*- \{src: (\S+), range: \[(0x[0-9a-f]+)')
 
 
 def asm_directory(source):
@@ -56,21 +55,16 @@ def insert_declarations(text, decls):
 
 def insert_split_line(text, line, start):
     """Insert a split-list entry keeping the list ordered by start address."""
-    lines = text.split('\n')
-    for i, l in enumerate(lines):
-        m = SPLIT_LINE.match(l)
-        if m and int(m.group(2), 16) > start:
-            lines.insert(i, line)
-            return '\n'.join(lines)
-    at = max((i for i, l in enumerate(lines) if SPLIT_LINE.match(l)), default=len(lines) - 1) + 1
-    lines.insert(at, line)
-    return '\n'.join(lines)
+    head, entries, tail = S.split_entries(text)
+    entry, = S.yaml.safe_load(line)
+    if S.num(entry['range'][0]) != start:
+        raise ValueError('inserted split has the wrong start address')
+    return S.join_entries(head, entries + [entry], tail)
 
 
 def remove_split_line(text, src, start):
-    lines = text.split('\n')
-    keep = [l for l in lines if not ((m := SPLIT_LINE.match(l)) and m.group(1) == src and int(m.group(2), 16) == start)]
-    return '\n'.join(keep)
+    head, entries, tail = S.split_entries(text)
+    return S.join_entries(head, [e for e in entries if not (e['src'] == src and S.num(e['range'][0]) == start)], tail)
 
 
 def release_function(addr, slug=S.DEFAULT_SLUG):
@@ -83,6 +77,7 @@ def release_function(addr, slug=S.DEFAULT_SLUG):
         raise KeyError('no file owns func_%08X' % addr)
     src = owner['src']
     entries, options = S.carve_range(entries, addr, ends[addr])
+    S.join_entries(head, entries, tail)  # validate before editing source
     record = dict(src=src, end=ends[addr], options=options, text=None)
     path = ROOT / src
     text = path.read_text()
@@ -93,7 +88,7 @@ def release_function(addr, slug=S.DEFAULT_SLUG):
         path.write_text(text)
     if options is not None:                               # the file owns nothing any more
         path.unlink()
-    split_file.write_text(S.join_entries(head, entries, tail))
+    S.write_entries(split_file, head, entries, tail)
     return record
 
 
@@ -102,7 +97,7 @@ def restore_function(addr, record, slug=S.DEFAULT_SLUG):
     split_file = S.config_dir(slug) / 'splits.yaml'
     head, entries, tail = S.split_entries(split_file.read_text())
     entries = S.adopt_range(entries, record['src'], addr, record['end'], record.get('options'))
-    split_file.write_text(S.join_entries(head, entries, tail))
+    S.write_entries(split_file, head, entries, tail)
     path = ROOT / record['src']
     if record.get('text') is not None:
         if record.get('options') is not None:
@@ -171,7 +166,7 @@ def add_function(addr, code, decls, compiler, flags, symbol=None, single=False, 
         (ROOT / path).parent.mkdir(parents=True, exist_ok=True)
         (ROOT / path).write_text(body)
         head, entries, tail = S.split_entries(split_file.read_text())
-        split_file.write_text(S.join_entries(head, entries + [entry], tail))
+        S.write_entries(split_file, head, entries + [entry], tail)
         record.update(path=path, created=entry)
     if symbol and symbol != 'func_%08X' % addr:
         rows = [(n, a, k or 'func') for n, a, k in S.parse_symbols((S.config_dir(slug) / 'symbols.txt').read_text())]

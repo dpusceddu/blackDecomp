@@ -64,7 +64,7 @@ def split_function(addr, cpp=False, flags=None, compiler=None, dry_run=False):
         entry['flags'] = flags
     split_file = S.config_dir(SLUG) / 'splits.yaml'
     head, entries, tail = S.split_entries(split_file.read_text())
-    split_file.write_text(S.join_entries(head, entries + [entry], tail))
+    S.write_entries(split_file, head, entries + [entry], tail)
     (ROOT / new).write_text(HEADER + tu_files.marker(addr, new) + '\n')
     return new, split.src
 
