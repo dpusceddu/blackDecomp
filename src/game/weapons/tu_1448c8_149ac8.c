@@ -370,6 +370,141 @@ typedef char VerifyRegionStride[sizeof(RegionRecord) == 0xF0 ? 1 : -1];
 typedef char VerifyAllocationRequirement[sizeof(AllocationRequest) == 16 ? 1 : -1];
 #undef VERIFY_OFFSET
 
+#ifdef NON_MATCHING
+/* Remaining partial views are UNVERIFIED until a matched consumer confirms them. */
+extern u8 D_003BCB08[9], D_003F42F0[3];
+extern void* D_0040F4C0;
+typedef struct OwnerState {
+    u8 unk00[0x60];
+    u8 flag;
+} OwnerState;
+typedef struct OwnerLink {
+    u8 unk00[0x84];
+    WeaponView* weapon;
+} OwnerLink;
+typedef struct Owner {
+    u8 unk00[0x40];
+    OwnerLink* link;
+} Owner;
+extern u8 func_0014C888(Owner*, u64);
+typedef struct ParameterDefinition {
+    u8 unk00[0x10];
+    u128 value;
+    u8 enabled;
+} ParameterDefinition;
+typedef struct ParameterAction {
+    u64 id;
+    u8 unk08[0x10];
+    ParameterDefinition* data;
+    u8 enabled;
+    u8 unk1D[3];
+    ParameterDefinition* definition;
+} ParameterAction;
+
+extern void func_0016E728(void*, u128, s32);
+typedef struct ResourceDefinition {
+    u8 unk00[0x48];
+    char name[8];
+    u8 enabled;
+} ResourceDefinition;
+typedef struct ResourceAction {
+    u64 id;
+    u8 unk08[0x10];
+    ResourceDefinition* data;
+    u8 enabled;
+    u8 unk1D[0x13];
+    ResourceDefinition* definition;
+    void* resource;
+    s32 state;
+    s32 unk3C;
+} ResourceAction;
+
+extern void* func_00280200(void*, const char*, s32);
+typedef struct ActorState {
+    u8 unk00[0xC4];
+    s32 state;
+} ActorState;
+typedef struct ActorRef {
+    u32 unk00;
+    ActorState* actor;
+} ActorRef;
+typedef struct ManagedFlagSlot {
+    u8 unk00[0xD26];
+    u8 enabled;
+} ManagedFlagSlot;
+typedef struct ManagedRef {
+    u64 id;
+} ManagedRef;
+typedef struct ManagedList {
+    u8 unk00[0x79A4];
+    s32 count;
+    u8 unk79A8[4];
+    ManagedRef** items;
+} ManagedList;
+extern ManagedList* D_0040F514;
+typedef struct ManagedDefinition {
+    u8 unk00[8];
+    u64* ids;
+    u8 count;
+    u8 enabled;
+} ManagedDefinition;
+typedef struct ManagedAction {
+    u8 unk00[0x20];
+    ManagedDefinition* definition;
+} ManagedAction;
+extern ManagedFlagSlot* func_00135550(ManagedRef*);
+typedef struct AmbientDefinition {
+    float a, b, c;
+    u8 unk0C[4];
+    u128 vector;
+} AmbientDefinition;
+typedef struct AmbientAction {
+    u64 id;
+    u8 unk08[0x18];
+    AmbientDefinition* definition;
+} AmbientAction;
+
+extern void func_001B0C10(void*, u128, float, float, float);
+typedef struct ChannelDefinition {
+    u8 unk00[0x20];
+    s32 values[3];
+} ChannelDefinition;
+typedef struct ChannelAction {
+    u8 unk00[0x131];
+    u8 enable;
+    u8 unk132[2];
+    ChannelDefinition* definition;
+} ChannelAction;
+extern s64 func_001EC768(void*);
+extern void func_001EC778(void*, s64, s32);
+extern void func_001EC858(void*, s64, s32);
+static inline SoundManager* CurrentSoundManager(void) {
+    GameSound* game = (GameSound*)((s8*)D_0040F510 + 0x8000);
+    return game->sound;
+}
+static inline void* CurrentChannel(void) { return CurrentSoundManager()->channel; }
+static inline void DefaultFields(ResourceCore* self) {
+    s32 i;
+    for (i = 0; i < 9; i++) {
+        u8* source = (u8*)(i + (s8*)D_003BCB08);
+        u8* destination = (u8*)((s8*)(self->fields + 1) + i);
+        *destination = *source;
+    }
+    self->fields[0xA] = D_003F42F0[0];
+    self->fields[0xB] = D_003F42F0[1];
+    self->fields[0xC] = D_003F42F0[2];
+    self->flag139 = 0;
+}
+extern u32 D_003C0E04;
+extern void* D_0040F4CC;
+extern void func_00152148(Resource*);
+extern void func_0025CE28(void*);
+
+extern s32 func_0012C790(void*, u128, u8*);
+extern void func_00125CD8(ResourceCore*);
+extern void func_0014CE00(State*);
+
+#endif
 
 void func_00149AC8(void *arg0) {
     s32 var_16;
@@ -419,8 +554,38 @@ void func_00149BE8(s32 arg0, s32 arg1, s32 arg2)
   return (s32) (arg1 + new_var);
 }
 
+#ifdef NON_MATCHING
+// Unmatched: selected-record multiply allocation differs; callee result type remains UNVERIFIED.
+void func_00149C18(WeaponView* self, Owner* owner) {
+    s32 selected = -1;
+    s32 i;
+    self->owner = owner;
+    owner->link->weapon = self;
+    for (i = 0; i < self->count; i++) {
+        if (self->definition->indices[i] == -1) selected = i;
+    }
+    ((OwnerState*)self->state)->flag = func_0014C888(owner, self->definition->records[selected].id);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00149C18);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: record-predicate lowering and selected-record lifetimes differ.
+s32 func_00149CA0(WeaponView* self) {
+    s32 selected = -1;
+    s32 i;
+    WeaponDefinition* definition = self->definition;
+    if (definition->kind >= 8) return 0;
+    for (i = 0; i < self->count; i++) {
+        if (definition->indices[i] == -1) selected = i;
+        if (definition->records[i].kind == 3 || definition->records[i].kind == 6 || definition->records[i].kind == 5)
+            return 0;
+    }
+    return (definition->records[selected].flags58 & 0x200) && !(definition->records[selected].flags5A & 0x20);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00149CA0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00149D58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014A410);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014A438);
@@ -432,7 +597,22 @@ s32 func_0014A560(void) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014A568);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014A650);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014A6A0);
+#ifdef NON_MATCHING
+// Unmatched: query normalization and fallback-byte loop scheduling differ.
+s32 func_0014BD58(ResourceCore* self) {
+    func_00125CD8(self);
+    self->flag101 = 0;
+    self->unkB4 = NULL;
+    self->unk124 = NULL;
+    if (self->state) func_0014CE00(self->state);
+    if ((u8)(func_0012C790(D_0040F4D0, self->matrix[3], self->fields) ^ 1)) DefaultFields(self);
+    self->flag13F = 0;
+    self->flag13E = 1;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014BD58);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014CE68);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DA80);
 void func_0014DB90(ResourcePool* self) {
@@ -445,7 +625,38 @@ void func_0014DC18(ResourcePool* self) {
     s32 i;
     for (i = 0; i < self->count; i++) func_001507B8(&self->items[i]);
 }
+#ifdef NON_MATCHING
+// Unmatched: the world pointer load moves ahead of the native cleanup stores.
+s32 func_0014DC78(ResourcePool* self) {
+    s32 selected = -1;
+    s32 i;
+    for (i = 0; i < self->count; i++)
+        if (!self->items[i].used) selected = i;
+    if (selected == -1) {
+        u32 age = D_003C0E04 - 2;
+        for (i = 0; i < self->count; i++) {
+            u32 candidate = self->items[i].age;
+            if (candidate < age) {
+                age = candidate;
+                selected = i;
+            }
+        }
+    }
+    if (selected != -1 && self->items[selected].used) {
+        Resource* item;
+        func_00152148(&self->items[selected]);
+        item = (Resource*)(selected * 0x1E0 + (u32)self->items);
+        item->active = 0;
+        item->owner = NULL;
+        item->link = NULL;
+        func_00129240(D_0040F4D0, &self->items[selected], 0);
+        self->items[selected].used = 0;
+    }
+    return selected;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DC78);
+#endif
 void* func_0014DD98(void* pool, void* arg, CommandWeapon* weapon, s32 index, s32 kind) {
     BkActorAssetPS2* definition = weapon->definition;
     s32 record = func_001AFDA8(&weapon->timers[index]);
@@ -456,9 +667,64 @@ void* func_0014DD98(void* pool, void* arg, CommandWeapon* weapon, s32 index, s32
     }
     return NULL;
 }
+#ifdef NON_MATCHING
+// Unmatched: failure joins and activation argument lifetimes differ.
+Resource* func_0014DE58(ResourcePool* self, void* arg, BkActorAssetPS2* definition, s32 index, void* matrix, s32 word0,
+                        s32 word1, s32 kind) {
+    s32 slot = func_0014DC78(self);
+    Resource* item;
+    if (slot != -1) {
+        item = &self->items[slot];
+        if (item) {
+            func_00150068((ResourceCore*)item, definition, index, matrix, 0, arg, word0, word1);
+            item->used = 1;
+            item->age = D_003C0E04;
+            func_00129108(D_0040F4D0, item, 1, 0, kind);
+            return item;
+        }
+    } else if (kind != -1)
+        func_0025CE28(D_0040F4CC);
+    return NULL;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DE58);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: pool-search count captures and link-clear scheduling differ.
+void func_0014DF68(ResourcePool* self, Resource* item) {
+    s32 i = 0;
+    Resource* target = item;
+    for (; i < self->count; i++)
+        if (&self->items[i] == target) break;
+    if (i < self->count) {
+        item->active = 0;
+        item->owner = NULL;
+        item->link = NULL;
+        func_00129240(D_0040F4D0, item, 0);
+        self->items[i].used = 0;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DF68);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: the world pointer load moves ahead of the native cleanup stores.
+void func_0014E018(ResourcePool* self, s32 definition, s32 arg) {
+    s32 i;
+    for (i = 0; i < self->count; i++) {
+        if (self->items[i].used && func_00107BC0(D_0040F0F0, self->items[i].definition) == definition) {
+            Resource* item = (Resource*)(i * 0x1E0 + (u32)self->items);
+            item->active = 0;
+            item->owner = NULL;
+            item->link = NULL;
+            func_00129240(D_0040F4D0, &self->items[i], arg);
+            self->items[i].used = 0;
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014E018);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014EC10);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014EC90);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014F888);
@@ -494,7 +760,39 @@ void func_0014FDA8(ResourceCore* self, Config* config) {
         self->effect = 0xFFFF;
     }
 }
+#ifdef NON_MATCHING
+// Unmatched: matrix/config capture, fallback-byte loop and flag-store scheduling differ.
+s32 func_0014FEE0(ResourceCore* self) {
+    func_0014BD58(self);
+    self->flag13A = 0;
+    self->unk1B4 = 3;
+    self->flag13C = 0;
+    self->flag1C1 = 0;
+    self->flag1C2 = 0;
+    self->flag139 = 0;
+    self->id = self->config->id;
+    self->matrix[0] = self->config->matrix[0];
+    self->matrix[1] = self->config->matrix[1];
+    self->matrix[2] = self->config->matrix[2];
+    self->matrix[3] = self->config->matrix[3];
+    if ((u8)(func_0012C790(D_0040F4D0, self->matrix[3], self->fields) ^ 1)) DefaultFields(self);
+    func_00150178(self, 0);
+    func_001AFC80(&self->timer, self->definition, 0);
+    self->local = func_00151E60(self)->local;
+    self->unk1AC = (s32)self->definition->strings;
+    self->unk1B0 = (s32)self->definition->unknown40;
+    self->flag1BF = 0;
+    self->flag1C0 = 0;
+    self->flag13B = (func_00151E60(self)->flags >> 9) & 1;
+    self->flag13A = (func_00151E60(self)->flags >> 8) & 1;
+    if (self->effect != 0xFFFF) func_001B37C8((s8*)D_0040F4D8 + 0x33C40, self->effect);
+    self->flag101 = 0;
+    self->flag1C1 = 0;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014FEE0);
+#endif
 void func_00150068(ResourceCore* self, BkActorAssetPS2* definition, s32 index, u128* matrix, s32 word, void* arg,
                    s32 word0, s32 word1) {
     func_0014BD58(self);
@@ -525,7 +823,29 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001507E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00150B00);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00152A50);
+#ifdef NON_MATCHING
+// Unmatched: index capture and output-pointer lifetimes differ.
+void func_00153448(ResourceGroups* self, ResourceRef** items, s32 count) {
+    if (items) {
+        if (self->first == NULL) {
+            self->first = items;
+            self->firstCount = count;
+        } else {
+            self->second = items;
+            self->secondCount = count;
+        }
+        if (count > 0) {
+            do {
+                s32 index = self->nextIndex++;
+                ResourceRef* item = *items++;
+                item->index = index;
+            } while (--count);
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00153448);
+#endif
 void func_001534A8(ResourceGroups* self, ResourceRef** items) {
     s32 i;
     if (items) {
@@ -587,7 +907,15 @@ void func_00155E48(InventoryPool* self) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00155F38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00156110);
+#ifdef NON_MATCHING
+// Unmatched: the selected actor remains in the result register across the null join.
+ActorState* func_00158E88(ActorRef* self) {
+    ActorState* actor = self->actor;
+    return actor && actor->state == 1 ? actor : NULL;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00158E88);
+#endif
 void func_00161DF0(RegionAction* self) {
     s32 i;
     for (i = 0; i < self->definition->count; i++) {
@@ -659,7 +987,27 @@ s32 func_00162758(ActionView* self, u64 id, void* definition) {
     self->data = definition;
     return 1;
 }
+#ifdef NON_MATCHING
+// Unmatched: manager-address captures and nested iterator lifetimes differ.
+void func_001627D0(ManagedAction* self) {
+    s32 i;
+    for (i = 0; i < self->definition->count;) {
+        s32 next = i + 1;
+        u64 id = self->definition->ids[i];
+        s32 j;
+        for (j = 0; j < D_0040F514->count; j++) {
+            ManagedRef* ref = D_0040F514->items[j];
+            if (ref && id == ref->id) {
+                ManagedFlagSlot* actor = func_00135550(ref);
+                if (actor) actor->enabled = self->definition->enabled != 0;
+            }
+        }
+        i = next;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001627D0);
+#endif
 s32 func_001628E8(ActionView* self, u64 id, void* definition) {
     func_00160EA0(self);
     self->definition = definition;
@@ -667,7 +1015,24 @@ s32 func_001628E8(ActionView* self, u64 id, void* definition) {
     self->data = definition;
     return 1;
 }
+#ifdef NON_MATCHING
+// Unmatched: manager-address captures and nested iterator lifetimes differ.
+void func_00162960(ManagedAction* self) {
+    s32 i;
+    for (i = 0; i < self->definition->count;) {
+        s32 next = i + 1;
+        u64 id = self->definition->ids[i];
+        s32 j;
+        for (j = 0; j < D_0040F514->count; j++) {
+            ManagedRef* ref = D_0040F514->items[j];
+            if (ref && id == ref->id) func_00135550(ref);
+        }
+        i = next;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00162960);
+#endif
 s32 func_00162A60(ActionView* self, u64 id, void* definition, void* arg) {
     func_00160EA0(self);
     self->state = (s32)definition;
@@ -698,14 +1063,38 @@ s32 func_001630E8(ActionView* self, u64 id, void* definition) {
     self->definition = definition;
     return 1;
 }
+#ifdef NON_MATCHING
+// Unmatched: ambient-manager capture and final float argument scheduling differ.
+void func_00163158(AmbientAction* self) {
+    u64 id = self->id;
+    if (M2C_FIELD(D_0040F4D0, u64*, 0x5C90) != id) {
+        M2C_FIELD(D_0040F4D0, u64*, 0x5C90) = id;
+        func_001B0C10((s8*)D_0040F4C0 + 0xD290, self->definition->vector, self->definition->a, self->definition->b,
+                      self->definition->c);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163158);
+#endif
 s32 func_001631B0(ActionView* self, u64 id, void* definition) {
     func_00160EA0(self);
     self->id = id;
     self->definition = definition;
     return 1;
 }
+#ifdef NON_MATCHING
+// Unmatched: the retained-definition store and manager-address setup are reordered.
+s32 func_00163250(ParameterAction* self, u64 id, ParameterDefinition* definition) {
+    func_00160EA0(self);
+    self->id = id;
+    self->definition = definition;
+    self->data = definition;
+    func_0016E728(D_0040F4D4, definition->value, definition->enabled != 0);
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163250);
+#endif
 s32 func_001634D8(ActionView* self, u64 id, void* definition) {
     func_00160EA0(self);
     self->definition = definition;
@@ -722,7 +1111,28 @@ void func_001635D0(EffectAction* self, s32 arg) {
     func_00280FE0(self->child, NULL);
     func_00165BC8(self, arg);
 }
+#ifdef NON_MATCHING
+// Unmatched: resource lookup argument setup and initial field-store scheduling differ.
+s32 func_00163628(ResourceAction* self, u64 id, ResourceDefinition* definition) {
+    func_00160EA0(self);
+    self->unk3C = 0;
+    self->resource = NULL;
+    self->data = definition;
+    self->id = id;
+    self->definition = definition;
+    self->resource = func_00280200(D_0040F510, definition->name, 0);
+    if (self->definition->enabled) {
+        self->state = 7;
+    } else {
+        self->state = 1;
+        self->unk3C = 0;
+    }
+    self->enabled = 1;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163628);
+#endif
 void func_00163AB8(ActionView* self, s32 arg) {
     func_00160E70(self);
     self->state = 0;
@@ -781,7 +1191,23 @@ s32 func_00163E08(GroupView* self, u64 id, const char* name) {
     func_0035CBC0(self->sound, self->name);
     return 1;
 }
+#ifdef NON_MATCHING
+// Unmatched: body matches, but the native owned literal run is 24 bytes versus 16 naturally emitted bytes.
+void func_00163F30(GroupView* self, GroupMember* member) {
+    s32 i;
+    for (i = 0; i < 16; i++) {
+        if (self->members[i] == NULL) {
+            self->members[i] = member;
+            self->count++;
+            break;
+        }
+    }
+    if (self->count >= 2) __builtin_strcpy(self->sound, "SH_AR_S_016");
+    func_00164078(self);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163F30);
+#endif
 void func_00163FD0(GroupView* self, GroupMember* member) {
     s32 removed = 0;
     s32 i;
@@ -820,7 +1246,46 @@ s32 func_00164238(GroupAction* self) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00164268);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00164548);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00164900);
+#ifdef NON_MATCHING
+// Unmatched: the second and third enabled-channel loads exchange two temporary registers.
+void func_00164F50(ChannelAction* self) {
+    if (self->enable) {
+        {
+            void* channel = CurrentChannel();
+            s64 id = func_001EC768(channel);
+            func_001EC778(channel, id, self->definition->values[0]);
+        }
+        {
+            void* channel = CurrentChannel();
+            s64 id = func_001EC768(channel);
+            func_001EC778(channel, id, self->definition->values[1]);
+        }
+        {
+            void* channel = CurrentChannel();
+            s64 id = func_001EC768(channel);
+            func_001EC778(channel, id, self->definition->values[2]);
+        }
+    } else {
+        {
+            void* channel = CurrentChannel();
+            s64 id = func_001EC768(channel);
+            func_001EC858(channel, id, self->definition->values[0]);
+        }
+        {
+            void* channel = CurrentChannel();
+            s64 id = func_001EC768(channel);
+            func_001EC858(channel, id, self->definition->values[1]);
+        }
+        {
+            void* channel = CurrentChannel();
+            s64 id = func_001EC768(channel);
+            func_001EC858(channel, id, self->definition->values[2]);
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00164F50);
+#endif
 
 void func_001650B8(void *arg0, s32 arg1) {
     func_00165AE0();
