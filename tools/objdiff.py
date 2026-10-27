@@ -80,6 +80,41 @@ def comparison_text_sections(text):
     return re.sub(r'(?m)^(\s*\.section\s+\.text\.)([0-9A-F]{8})(?=[,\s])', r'\1func_\2', text)
 
 
+def comparison_symbol_names(symbols, redefine, function_addresses):
+    """Canonical renames and relocation redirects for per-unit C++ bindings.
+
+    An undefined canonical name may already be present because included assembly
+    calls the same function. Merge references into that symbol instead of leaving
+    the compiler's address-qualified alias unmatched.
+    """
+    redefine = dict(redefine)
+    by_name = {s['name']: i for i, s in enumerate(symbols)}
+    for symbol in symbols:
+        match = re.fullmatch(r'(.+)\$([0-9A-F]+)', symbol['name'])
+        if match and symbol['name'] not in redefine:
+            address = int(match[2], 16)
+            name = ('func_%08X' if address in function_addresses else 'D_%08X') % address
+            if name not in by_name:
+                redefine[symbol['name']] = name
+            elif not symbol['shndx']:
+                redefine[symbol['name']] = name
+                redefine[name] = name
+    groups = {}
+    for old, new in redefine.items():
+        groups.setdefault(new, []).append(old)
+    redirects = {}
+    for new, old_names in groups.items():
+        if len(old_names) < 2:
+            continue
+        primary = next((n for n in old_names if symbols[by_name[n]]['shndx']),
+                       new if new in old_names else old_names[0])
+        for name in old_names:
+            if name != primary:
+                redirects[by_name[name]] = by_name[primary]
+                del redefine[name]
+    return {old: new for old, new in redefine.items() if old != new}, redirects
+
+
 def data_slots(slug):
     """{unit name: {section: address}}: where the link places each data section of a compiled unit. The build renames them
     to `<section>.<ADDRESS>` (build/<GAME_ID>/plan.json); the address is that of the original data the unit replaces."""
@@ -202,27 +237,7 @@ def build_view(spec_path, output):
         if s['flags'] & 2 and s['name'] not in keep:
             args += ['--remove-section='+s['name']]
     # Original-name references and per-unit compiler bindings share canonical names.
-    for s in symbols:
-        m = re.fullmatch(r'(.+)\$([0-9A-F]+)',s['name'])
-        if m and s['name'] not in redefine:
-            addr = int(m[2],16)
-            name = ('func_%08X' if any(f['addr']==addr for f in placement['functions']) else 'D_%08X') % addr
-            if name not in present:
-                redefine[s['name']] = name
-    # Several C++ declarations can bind the same original function. objcopy
-    # rejects duplicate rename targets, so first merge their relocation uses.
-    groups = {}
-    for old,new in redefine.items():
-        groups.setdefault(new,[]).append(old)
-    redirects = {}
-    for new,old_names in groups.items():
-        if len(old_names)<2:
-            continue
-        primary = next((n for n in old_names if symbols[by_name[n]]['shndx']),old_names[0])
-        for name in old_names:
-            if name!=primary:
-                redirects[by_name[name]]=by_name[primary]
-                del redefine[name]
+    redefine, redirects = comparison_symbol_names(symbols, redefine, {f['addr'] for f in placement['functions']})
     if redirects:
         data=bytearray(output.read_bytes())
         for relocation in source.sections:
