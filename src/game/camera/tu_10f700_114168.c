@@ -50,6 +50,77 @@ extern void func_001831E0(void*);
 extern void func_00181348(void*);
 extern void func_0016ABA0(void*);
 
+// Private catalog and observer views; unused spans remain UNVERIFIED.
+typedef struct Recovered_CatalogItem {
+    u64 unk_0;
+    u8 unk_8[0x18];
+} Recovered_CatalogItem;
+typedef struct Recovered_Catalog {
+    u8 unk_0;
+    u8 unk_1;
+    u8 unk_2[2];
+    Recovered_CatalogItem* unk_4;
+} Recovered_Catalog;
+typedef struct Recovered_PoolBinding {
+    u64 unk_0;
+    u8 unk_8[8];
+    s8 unk_10;
+    u8 unk_11[7];
+} Recovered_PoolBinding;
+typedef struct Recovered_BindingDescriptor {
+    u8 unk_0;
+    u8 unk_1[7];
+    Recovered_PoolBinding* unk_8;
+} Recovered_BindingDescriptor;
+typedef struct Recovered_BindingPool {
+    u8 unk_0[0x5844];
+    Recovered_BindingDescriptor* unk_5844;
+} Recovered_BindingPool;
+extern Recovered_Catalog** D_0040F4E0;
+static inline s32 FindCatalogItem(u64 id) {
+    Recovered_Catalog* self = *D_0040F4E0;
+    s8 i = 0;
+    u8 count = self->unk_1;
+    if (count) {
+        Recovered_CatalogItem* item = self->unk_4;
+        do {
+            if (item->unk_0 == id) return i;
+            item++;
+            i++;
+        } while (i < count);
+    }
+    return -1;
+}
+
+// Private catalog and observer views; unused spans remain UNVERIFIED.
+typedef struct Recovered_ObserverSetupEntry {
+    u8 unk_0[0x30];
+    s32 unk_30[8];
+    u8 unk_50[0x1F0];
+} Recovered_ObserverSetupEntry;
+typedef struct Recovered_ObserverControl {
+    u8 unk_0[0x38];
+    s32 unk_38;
+} Recovered_ObserverControl;
+typedef struct Recovered_ObserverOwner {
+    u8 unk_0[0x25C];
+    void* unk_25C[8];
+    u8 unk_27C[0xAC];
+    Recovered_ObserverControl* unk_328;
+    u8 unk_32C[4];
+    Recovered_ObserverSetupEntry* unk_330;
+    u8 unk_334[0x79];
+    u8 unk_3AD;
+} Recovered_ObserverOwner;
+extern u8* D_0040F50C;
+extern void* D_0040F514;
+extern s32 func_00138C68(void*);
+extern s32 func_00138C50(void*);
+extern void func_00138338(Recovered_ObserverControl*, s32);
+extern s32 func_00142ED8(void*, s32, s32);
+extern void func_00137320(Recovered_ObserverOwner*);
+extern void func_00136B50(Recovered_ObserverOwner*);
+
 // Partial Game view; only the random-state placement is recovered here.
 typedef struct Recovered_GameRandomView {
     u8 unk_0[0x5AD8];
@@ -485,7 +556,12 @@ u32 func_00126F10(Recovered_SlotPool* self, s32 value) {
     return result;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00126F80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00127060);
+void func_00127060(Recovered_BindingPool* self) {
+    s8 i;
+    for (i = 0; i < self->unk_5844->unk_0; i++) {
+        self->unk_5844->unk_8[i].unk_10 = FindCatalogItem(self->unk_5844->unk_8[i].unk_0);
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012C650);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012C790);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0012CBA0);
@@ -724,7 +800,25 @@ void func_00139B68(Recovered_ArrayView* self) {
     for (i = 0; i < self->unk_4; i++) self->unk_C[i] = NULL;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00139BA8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013C868);
+void func_0013C868(Recovered_ObserverOwner* self, s32 index) {
+    Recovered_ObserverSetupEntry* entry = (Recovered_ObserverSetupEntry*)(D_0040F50C + 0x470 + index * 0x240);
+    s32* source = entry->unk_30;
+    void** destination = self->unk_25C;
+    s32 count = 7;
+    s32 first = func_00138C68(D_0040F514);
+    func_00138338(self->unk_328, func_00138C50(D_0040F514));
+    self->unk_328->unk_38 = first;
+    self->unk_3AD = 0;
+    do {
+        if (*destination) func_00142ED8(*destination, *source, 0);
+        source++;
+        count--;
+        destination++;
+    } while (count >= 0);
+    func_00137320(self);
+    func_00136B50(self);
+    self->unk_330 = entry;
+}
 void func_0013CE08(Recovered_ManagerPredicate* self) {
     s8 i;
     self->unk_8B3 = 0;
