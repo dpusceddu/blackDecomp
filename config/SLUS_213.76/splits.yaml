@@ -1336,7 +1336,9 @@ splits:
   - {src: src/game/unsorted/tu_1c5f48.c, range: [0x1c6a68, 0x1c6aa0]}
   - {src: src/game/unsorted/tu_1c5f48_1c6aa0.c, range: [0x1c6aa0, 0x1c6ab8], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c5f48_1c6ab8.c, range: [0x1c6ab8, 0x1c79d0]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c79d0, 0x1c8550]}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c79d0, 0x1c8420]}
+  - {src: src/game/unsorted/tu_1c8420.c, range: [0x1c8420, 0x1c8478], assembler: sn-min6, note: "Native duplicate-search loop is six words; stock SN assembler inserts a seventh."}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c8478, 0x1c8550]}
   - {src: src/game/unsorted/tu_1c8550.c, range: [0x1c8550, 0x1c8560]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c8560, 0x1c88c8]}
   - {src: src/game/unsorted/tu_1c88c8.c, range: [0x1c88c8, 0x1cab20]}
