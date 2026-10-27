@@ -16,6 +16,7 @@ typedef struct DrawDefinition {
     unsigned char unk_20[1];
 } DrawDefinition;
 
+/* The native constructors store scalar lanes before loading each quadword. */
 typedef union DrawVectorTemporary {
     volatile float f[4];
     s128 bits;
@@ -54,11 +55,10 @@ extern void func_001C2EA8(int*, int);
 
 static inline float DrawZero(void) { return 0.0f; }
 
-
-void func_001C2A48(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0) = 0x70002000;
-    M2C_FIELD(arg0, s32 *, 4) = 0x70002800;
-    M2C_FIELD(arg0, s32 *, 8) = 0;
+void func_001C2A48(ScratchpadBuffers* self) {
+    self->addresses[0] = 0x70002000;
+    self->addresses[1] = 0x70002800;
+    self->currentIndex = 0;
 }
 
 void func_001C2AB0(DrawObjectView* self, DrawDefinition* definition) {
@@ -86,14 +86,15 @@ void func_001C2AB0(DrawObjectView* self, DrawDefinition* definition) {
         for (; i < definition->count; ++i) { func_001C2EA8(&self->slots[i], (int)&definition->records[i]); }
     }
 }
+
 int func_001C2BC0(DrawObjectView* self) {
     DrawVectorTemporary temp;
     s128 first, second;
     func_001D5048((char*)self + 0x10);
-    temp.f[0] = 0.012000000104308128f;
+    temp.f[0] = 0.012f;
     temp.f[1] = DrawZero();
-    temp.f[2] = 0.00800000037997961f;
-    temp.f[3] = 0.012256000190973282f;
+    temp.f[2] = 0.008f;
+    temp.f[3] = 0.012256f;
     first = temp.bits;
     temp.f[0] = 1.0f;
     temp.f[1] = DrawZero();
@@ -167,4 +168,22 @@ s128 func_001C31E0(s128 **arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c2a48", func_001C31F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c2a48", func_001C31F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c2a48", func_001C3228);
+typedef struct DrawParameterView {
+    char unk_00[0x10];
+    float value;
+} DrawParameterView;
+typedef struct DrawActorView {
+    char unk_00[0x58];
+    void* target;
+    char unk_5c[0x28];
+    float value;
+} DrawActorView;
+extern void func_001C3DC0(DrawParameterView*, float, float*, float*);
+extern void* func_002A9240(void*, float);
+void func_001C3228(DrawParameterView* self, DrawActorView* actor, float value) {
+    float result, unused;
+    self->value = value;
+    func_001C3DC0(self, value, &result, &unused);
+    actor->value = result;
+    func_002A9240(actor->target, result);
+}
