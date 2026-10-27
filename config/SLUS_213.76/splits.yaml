@@ -1429,7 +1429,7 @@ splits:
   - {src: src/game/unsorted/tu_1d76e8_1d9450.c, range: [0x1d9450, 0x1d96e8], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: 'Both bodies reproduce native slot/definition pointer induction and second-pass scheduling under O2; two literal-19 DIVs omit zero guards; original flags and TU boundaries remain unknown'}
   - {src: src/game/unsorted/tu_1d76e8_1d96e8.c, range: [0x1d96e8, 0x1d97d0]}
   - {src: src/game/unsorted/tu_1d97d0.c, range: [0x1d97d0, 0x1daf20]}
-  - {src: src/game/unsorted/tu_1daf20.c, range: [0x1daf20, 0x1dd728]}
+  - {src: src/game/unsorted/tu_1daf20.c, range: [0x1daf20, 0x1dd728], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: "Native buffer-index and block-stride divisions omit zero-division checks."}
   - {src: src/game/unsorted/tu_1dd728.c, range: [0x1dd728, 0x1dd748]}
   - {src: src/game/unsorted/tu_1dd748.cpp, range: [0x1dd748, 0x1dd7b8], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1dd7b8, 0x1dd838]}

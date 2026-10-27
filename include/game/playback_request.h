@@ -9,13 +9,19 @@ typedef struct {
     // Buffer slots/count are confirmed by the matched attachment routine.
     Recovered_StreamBuffer* buffers[4];
     s32 bufferCount;
-    u8 unk_14[0x14];
+    // UNVERIFIED: execution fields pending matched consumers in the state TU.
+    s32 unk_14, unk_18, unk_1C;
+    u64 unk_20;
     u64 poolKey; // Confirmed by matched keyed pool acquisitions.
     u32 unk_30;
     f32 unk_34;
-    u8 unk_38[4];
+    u32 unk_38;
     f32 unk_3C;
-    u8 unk_40[0x26];
+    Recovered_StreamRange* unk_40;
+    Recovered_StreamBuffer* unk_44;
+    s32 unk_48, unk_4C, unk_50, unk_54, unk_58, unk_5C;
+    s16 unk_60, unk_62;
+    u8 unk_64, unk_65;
     u8 claimed; // Confirmed by matched keyed pool acquisitions.
     u8 unk_67;
 } Recovered_PlaybackState;
@@ -65,7 +71,10 @@ typedef struct {
     u32 unk_58;
     u8 unk_5C[0x48];
     u32 flags;
-} Recovered_PlaybackParameters;
+    // Native parameter transport copies eleven aligned quadwords.
+    u8 unk_A8, unk_A9, unk_AA, unk_AB;
+    u32 unk_AC;
+} Recovered_PlaybackParameters __attribute__((aligned(16)));
 
 /* UNVERIFIED: accessed only by the pool-operation drafts. */
 typedef struct {
