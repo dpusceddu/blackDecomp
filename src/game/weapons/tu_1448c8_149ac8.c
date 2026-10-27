@@ -56,6 +56,37 @@ typedef char CounterDefinitionOffset[(ACTION_OFFSET(CounterAction, definition) =
 typedef char CountdownDefinitionOffset[(ACTION_OFFSET(CountdownAction, definition) == 0x20) ? 1 : -1];
 #undef ACTION_OFFSET
 
+typedef struct Resource {
+    u8 unk00[0x118];
+    void *definition;
+    void *owner;
+    void *link;
+    u8 unk124[0xC];
+    s32 index;
+    u8 unk134[9];
+    u8 active;
+    u8 unk13E[0x92];
+    u8 used;
+    u8 unk1D1[0xF];
+} Resource;
+typedef struct ResourcePool {Resource *items; s32 count;} ResourcePool;
+typedef struct ResourceRef {u8 unk00[0x18]; Resource *resource; u8 unk1C[0x114]; s32 index;} ResourceRef;
+typedef struct ResourceGroups {ResourceRef **first; ResourceRef **second; s32 firstCount; s32 secondCount; s32 nextIndex;} ResourceGroups;
+extern void *D_0040F4D0;
+extern u8 D_0040F0F0[];
+extern void func_00129240(void *, Resource *, s32);
+extern void func_001507B8(Resource *);
+extern s32 func_00107BC0(void *, void *);
+typedef char ResourceStride[(sizeof(Resource) == 0x1E0) ? 1 : -1];
+typedef struct EffectAction {u8 unk00[0x20]; u8 child[0x14]; s32 unk34; s32 unk38; s32 unk3C;} EffectAction;
+extern void func_00160E70(void *);
+extern void func_00280FE0(void *,void *);
+typedef struct ClockView {u8 unk00[0x20]; float time;} ClockView;
+extern ClockView *D_0040F0E0;
+typedef struct TimedDefinition {u8 unk00[0x28]; float duration;} TimedDefinition;
+typedef struct TimedAction {u8 unk00[0x20]; TimedDefinition *definition; s32 state; float deadline;} TimedAction;
+
+
 
 extern s32 func_00165BC8(void *, s32);
 extern s32 func_00169EB8();
@@ -116,8 +147,16 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014CE68);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014D358);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DA80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DB90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DC18);
+void func_0014DB90(ResourcePool *self) {
+    s32 i;
+    for (i=0;i<self->count;i++) {
+        if (self->items[i].used) func_00129240(D_0040F4D0, &self->items[i], 0);
+    }
+}
+void func_0014DC18(ResourcePool *self) {
+    s32 i;
+    for (i=0;i<self->count;i++) func_001507B8(&self->items[i]);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DC78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DD98);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0014DE58);
@@ -137,7 +176,20 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00150B00);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00152A50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00153448);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001534A8);
+void func_001534A8(ResourceGroups *self, ResourceRef **items) {
+    s32 i;
+    if(items) {
+        if(items==self->first) {
+            for (i=0;i<self->firstCount;i++) func_00129240(D_0040F4D0,self->first[i]->resource,1);
+            self->first=NULL;
+            self->firstCount=0;
+        } else {
+            for (i=0;i<self->secondCount;i++) func_00129240(D_0040F4D0,self->second[i]->resource,1);
+            self->second=NULL;
+            self->secondCount=0;
+        }
+    }
+}
 s32 func_001550C0(u16 *counts, s32 index, u8 amount) {
     counts = (u16 *)((s8 *)counts + index * 2);
     if (*counts < amount) return 0;
@@ -186,9 +238,30 @@ s32 func_001628E8(ActionView *self, u64 id, void *definition) {
     return 1;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00162960);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00162A60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00162D10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00162F28);
+s32 func_00162A60(ActionView *self, u64 id, void *definition, void *arg) {
+    func_00160EA0(self);
+    self->state = (s32)definition;
+    self->id = id;
+    self->definition = arg;
+    self->data = definition;
+    return 1;
+}
+s32 func_00162D10(ActionView *self, u64 id, void *definition, void *arg) {
+    func_00160EA0(self);
+    self->state = (s32)definition;
+    self->id = id;
+    self->definition = arg;
+    self->data = definition;
+    return 1;
+}
+s32 func_00162F28(ActionView *self, u64 id, void *definition, void *arg) {
+    func_00160EA0(self);
+    self->state = (s32)definition;
+    self->id = id;
+    self->definition = arg;
+    self->data = definition;
+    return 1;
+}
 s32 func_001630E8(ActionView *self, u64 id, void *definition) {
     func_00160EA0(self);
     self->id = id;
@@ -204,7 +277,14 @@ s32 func_001631B0(ActionView *self, u64 id, void *definition) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163250);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001634D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001635D0);
+void func_001635D0(EffectAction *self,s32 arg) {
+    func_00160E70(self);
+    self->unk38=0;
+    self->unk3C=0;
+    self->unk34=0;
+    func_00280FE0(self->child,NULL);
+    func_00165BC8(self,arg);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163628);
 void func_00163AB8(ActionView *self, s32 arg) {
     func_00160E70(self);
@@ -219,7 +299,13 @@ void func_00163C58(ActionView *self) {
     self->state = 5;
     self->data = NULL;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163C90);
+void func_00163C90(TimedAction *self) {
+    ClockView *clock=(ClockView *)((s8 *)D_0040F0E0 + 0x20120);
+    float time=clock->time;
+    float duration=self->definition->duration;
+    self->state=2;
+    self->deadline=time+duration;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163D08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163DB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00163E08);
