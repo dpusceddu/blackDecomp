@@ -635,13 +635,6 @@ typedef struct Recovered_RequestState {
     u8 unk_101;
     u8 unk_102;
 } Recovered_RequestState;
-typedef struct Recovered_ObserverArray {
-    u8 unk_0[0x25C];
-    void* unk_25C[8];
-    u8 unk_27C[0x54];
-    u8 unk_2D0[1]; // Payload prefix; its complete extent is unknown.
-} Recovered_ObserverArray;
-extern void func_00142F80(void*, s32, void*);
 typedef struct Recovered_ThreeSlots {
     u8 unk_0[0xC];
     void* unk_C[3];
@@ -650,6 +643,14 @@ typedef struct Recovered_ThreeSlots {
     u8 unk_1A;
 } Recovered_ThreeSlots;
 #endif
+
+typedef struct Recovered_ObserverArray {
+    u8 unk_0[0x25C];
+    void* unk_25C[8];
+    u8 unk_27C[0x54];
+    u8 unk_2D0[1]; // Payload prefix; its complete extent is unknown.
+} Recovered_ObserverArray;
+extern void func_00142F80(void*, s32, void*);
 
 void func_00114168(void) {
 
@@ -1169,20 +1170,15 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001327F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001334E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00133BA0);
-#ifdef NON_MATCHING
-// Unmatched: iterator advance and countdown exchange two instruction positions.
 void func_00133E60(Recovered_ObserverArray* self, s32 kind) {
     void** cursor = self->unk_25C;
     s32 count = 7;
     do {
         void* observer = *cursor++;
-        count--;
         if (observer) func_00142F80(observer, kind, self->unk_2D0);
+        count--;
     } while (count >= 0);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00133E60);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00135580);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00135940);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00135A38);
