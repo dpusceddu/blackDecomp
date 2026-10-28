@@ -45,8 +45,27 @@ s32 func_00188F10(Recovered_ActorRecords* self) {
     return ~self->current != 0;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: loop load and branch placement differ.
+s32 func_00188F20(Recovered_ActorRecords* self) {
+    s32 cursor = (s32)self;
+    s32 end = cursor + sizeof(self->records);
+    s32 value = *(s32*)cursor;
+    do {
+        cursor += sizeof(Recovered_ActorRecord);
+        if (value != -1) return 1;
+        if (cursor >= end) break;
+        value = *(s32*)cursor;
+    } while (1);
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_188bf8", func_00188F20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_188bf8", func_00188F58);
+#endif
+s32 func_00188F58(Recovered_ActorRecords* self) {
+    if (self->current >= 0) return self->records[self->current].id;
+    return -1;
+}
 
 Recovered_ActorSlot* func_00188F80(Recovered_ActorRecords* self) {
     return ActorSlotTable_GetEntry((Recovered_ActorSlotTable*)((u8*)D_0040F4D4 + 0xFA8),
