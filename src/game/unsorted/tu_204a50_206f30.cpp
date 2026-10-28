@@ -55,12 +55,20 @@ extern "C" s32 func_00204F30(void*);
 extern "C" void func_00103800(void*, s8);
 extern "C" void func_001227A8(s32*);
 extern "C" s32 func_00207B80(FrontendStatisticsPanel*);
-extern "C" void func_00208140(void*, f32);
+extern "C" void func_00208140(FrontendStatisticsPanel*, f32);
 extern "C" s32 func_00124A70(void*);
 extern "C" s32 func_00124CA8(void*);
 extern "C" void func_001034B0(void*, void*);
 extern s32* D_0040F4E8;
 extern s32* D_0040F4C0;
+
+extern void* D_0040F510;
+extern u8 D_0043D988[5], D_0043D9D8[5];
+extern s8 D_0043D9D0[5];
+extern "C" void func_001EED98(void*, s32, f32);
+extern "C" void* func_00275448(void*, s32, s32, s32);
+extern "C" s32 func_00208C60(void*, f32);
+extern u16 D_003BDD10[5][256];
 
 // The native table has a no-op first slot and Initialize at byte 0x10.
 // UNVERIFIED: first slot's original signature and base-class field meanings.
@@ -89,7 +97,8 @@ extern "C" s32 func_00205AA0(void* self) {
     return 1;
 }
 extern "C" void func_00205B68(void* self) {
-    func_00208140(M2C_FIELD(self, void**, 0x64), FrontendDelta((FrontendClock*)((s8*)D_0040F0E0 + 0x20120)));
+    func_00208140(M2C_FIELD(self, FrontendStatisticsPanel**, 0x64),
+                  FrontendDelta((FrontendClock*)((s8*)D_0040F0E0 + 0x20120)));
     if (func_00124A70(M2C_FIELD(D_0040F0E0, void**, 0x21060)) ||
         func_00124CA8(M2C_FIELD(D_0040F0E0, void**, 0x21060))) {
         void* context = D_0040F0E0;
@@ -155,7 +164,7 @@ struct FrontendTextObject : FrontendFrameHeader {
         scale = s;
     }
     void SetHeight(f32 value) { height = targetHeight = value; }
-    void SetColor(s128 value) { color = targetColor = value; }
+    void SetColor(const s128& value) { color = targetColor = value; }
 #endif
     FrontendTextObject() : FrontendFrameHeader(D_003E0C90) {}
 };
@@ -173,7 +182,7 @@ struct FrontendSpriteObject : FrontendFrameHeader {
         scale = s;
     }
     void SetExtent(const FrontendVec2& value) { extent = targetExtent = value; }
-    void SetColor(s128 value) { color = targetColor = value; }
+    void SetColor(const s128& value) { color = targetColor = value; }
     void SetUV(const FrontendVec2& start, const FrontendVec2& end) {
         uv[0] = start;
         uv[1] = end;
@@ -186,8 +195,7 @@ struct FrontendSpriteObject : FrontendFrameHeader {
     FrontendSpriteObject() : FrontendFrameHeader(D_003E0C10) {}
 };
 struct FrontendStatisticsPanel {
-    // UNVERIFIED: counters accessed only by the setup draft.
-    s32 state;
+    f32 countdown;
     f32 elapsed, time;
     s16 count0, count1;
     s8 count2;
@@ -257,23 +265,18 @@ FrontendVec2 D_00438E38[5] = {FrontendVec2(500, 140), FrontendVec2(500, 180), Fr
                               FrontendVec2(500, 260), FrontendVec2(500, 300)};
 #ifdef NON_MATCHING
 extern void* D_0040F4C4;
-extern void* D_0040F510;
 extern const char* D_003BE714;
 extern const char* D_003BE710;
-extern u16 D_0043D990[32], D_003BDD10[5][256];
+extern u16 D_0043D990[32];
 extern const u16 D_003BDCD0[];
-extern s8 D_0043D988[5], D_0043D9D8[5], D_0043D9D0[5];
 extern "C" const char* func_00103358(void*, s32);
 extern "C" u16* func_002753F0(u16*, const u16*);
 extern "C" s32 func_00207610(void*, s32, s32, s32, s32);
 extern "C" void* func_00108328(void*, const char*);
-extern "C" void func_001EED98(void*, s32, f32);
-extern "C" void* func_00275448(void*, s32, s32, s32);
-extern "C" s32 func_00208C60(void*, f32);
 // Unmatched: setter argument lifetimes, loop scheduling and register allocation differ.
 extern "C" s32 func_00207B80(FrontendStatisticsPanel* self) {
     s8 i = 0;
-    self->state = 0;
+    self->countdown = 0;
     self->elapsed = 0;
     self->time = 0;
     self->count0 = 0;
@@ -343,3 +346,183 @@ extern "C" s32 func_00207B80(FrontendStatisticsPanel* self) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f30", func_00207B80);
 #endif
+
+extern void** D_0040F4DC;
+extern "C" void* func_00122780(void*, s32);
+extern "C" void func_002072A0(void*);
+extern "C" void func_002072E0(void*, f32);
+extern "C" void func_002076A8(void*);
+extern "C" void func_002076F8(void*, f32);
+extern "C" void func_00208AF8(void*, s32);
+static inline void StatisticsSound(s32 id) {
+    void* sound = (s8*)D_0040F510 + 0x8000;
+    func_001EED98(M2C_FIELD(M2C_FIELD(sound, void**, 0x4BD8), void**, 0x30), id, 0.0f);
+}
+static inline s32 StatisticsLabelFinished(const FrontendTextObject* label) {
+    u8 finished = 1;
+    if (!(label->remaining <= 0.0f)) finished = 0;
+    return finished;
+}
+static inline void StatisticsSpritePosition(FrontendSpriteObject* sprite, const FrontendVec2& position) {
+    sprite->position = sprite->targetPosition = position;
+    sprite->scale = D_00438E10;
+}
+static inline void StatisticsSpriteColor(FrontendSpriteObject* sprite, s128 color) {
+    sprite->color = sprite->targetColor = color;
+}
+static inline void StatisticsValuePosition(FrontendTextObject* text, const FrontendVec2& position) {
+    text->position = text->targetPosition = position;
+    text->scale = D_00438D40;
+}
+static inline void StatisticsValueColor(FrontendTextObject* text, s128 color) {
+    text->color = text->targetColor = color;
+}
+extern "C" void func_00208140(FrontendStatisticsPanel* self, f32 delta) {
+    s8 i = 0;
+    void* comparison = func_00122780(D_0040F4E8, 0);
+    for (; i < 5; i++) {
+        if (i && !D_0043D988[i] && D_0043D988[i - 1] && (u8)StatisticsLabelFinished(&self->labels[i - 1])) {
+            if (D_0043D9D0[i - 1] == 0) {
+                D_0043D9D0[i - 1] = 1;
+                StatisticsSound(10);
+                StatisticsSpritePosition(&self->sprites[i - 1], D_00438E38[i - 1]);
+                StatisticsSpriteColor(&self->sprites[i - 1], D_00438E00);
+                func_002072A0(&self->sprites[i - 1]);
+                if (i == 2) {
+                    {
+                        FrontendSpriteObject* array = self->sprites;
+                        void* sprite = (s8*)array + 0x360;
+                        M2C_FIELD(sprite, s64*, 0x48) = D_00438E38[1].bits;
+                        M2C_FIELD(sprite, s64*, 0x40) = M2C_FIELD(array, s64*, 0x3A8);
+                        M2C_FIELD(sprite, s64*, 0x50) = D_00438E10.bits;
+                    }
+                    {
+                        FrontendSpriteObject* array = self->sprites;
+                        void* sprite = (s8*)array + 0x360;
+                        M2C_FIELD(sprite, s128*, 0x30) = D_00438E00;
+                        M2C_FIELD(sprite, s128*, 0x20) = M2C_FIELD(array, s128*, 0x390);
+                    }
+                    func_002072A0(&self->sprites[6]);
+                }
+            } else if (D_0043D9D0[i - 1] == 2) {
+                {
+                    void* label = (void*)(i * 0x80 + (u32)self->labels);
+                    M2C_FIELD(label, f32*, 0x74) = 0.6f;
+                    M2C_FIELD(label, f32*, 0x78) = 0.6f;
+                }
+                StatisticsSound(7);
+                D_0043D988[i] = 1;
+            }
+        }
+        func_002076F8(&self->labels[i], delta);
+    }
+    if (D_0043D9D0[3] == 2 && (u8)StatisticsLabelFinished(&self->labels[4]) && D_0043D9D0[4] == 0) {
+        D_0043D9D0[4] = 1;
+        StatisticsSound(10);
+        StatisticsSpritePosition(&self->sprites[i - 1], D_00438E38[i - 1]);
+        StatisticsSpriteColor(&self->sprites[i - 1], D_00438E00);
+        func_002072A0(&self->sprites[i - 1]);
+    }
+    for (i = 0; i < 5; i++) {
+        if (D_0043D9D0[i] == 1) {
+            self->countdown -= delta;
+            if (self->countdown <= 0.0f) {
+                self->countdown = 0.01f;
+                switch (i) {
+                    case 0:
+                        StatisticsValuePosition(&self->values[i], D_00438DC0[i]);
+                        ++self->count2;
+                        if (self->count2 >= M2C_FIELD(comparison, s8*, 0x15)) {
+                            StatisticsValueColor(&self->values[i], D_00438DB0);
+                            func_00208AF8(self, i);
+                        }
+                        func_00275448(D_003BDD10[i], self->count2, 0, 0);
+                        StatisticsSound(9);
+                        D_0043D9D0[i] = 2;
+                        break;
+                    case 1: {
+                        StatisticsValuePosition(&self->values[i], D_00438DC0[i]);
+                        if (M2C_FIELD(comparison, f32*, 4) <= self->elapsed) {
+                            StatisticsValueColor(&self->values[i], D_00438DA0);
+                            if (!D_0043D9D8[i]) {
+                                M2C_FIELD(i * 0x90 + M2C_FIELD(self, u32*, 0x24), s64*, 0x330) = D_00438E18.bits;
+                                M2C_FIELD(i * 0x90 + M2C_FIELD(self, u32*, 0x24), s128*, 0x300) = D_00438DF0;
+                                {
+                                    void* sprite = (void*)(i * 0x90 + M2C_FIELD(self, u32*, 0x24) + 0x2D0);
+                                    M2C_FIELD(sprite, f32*, 0x7C) = 0.2f;
+                                    M2C_FIELD(sprite, f32*, 0x80) = 0.2f;
+                                }
+                                StatisticsSound(10);
+                                D_0043D9D8[i] = 1;
+                            }
+                        }
+                        f32 total = M2C_FIELD(*D_0040F4DC, f32*, 4);
+                        f32 step = total / 20.0f;
+                        if (self->elapsed < total - step) {
+                            self->elapsed += step;
+                            if ((s32)self->elapsed & 3) StatisticsSound(8);
+                            func_00208C60(D_003BDD10[i], self->elapsed);
+                        } else if (self->elapsed + 1.0f < total) {
+                            self->elapsed = total;
+                            func_00208C60(D_003BDD10[i], total);
+                        } else {
+                            StatisticsSound(9);
+                            D_0043D9D0[i] = 2;
+                        }
+                        break;
+                    }
+                    case 2:
+                        StatisticsValuePosition(&self->values[i], D_00438DC0[i]);
+                        if (self->count0 >=
+                            (s16)(M2C_FIELD(comparison, u16*, 0x1C) + M2C_FIELD(comparison, u16*, 0x1E))) {
+                            StatisticsValueColor(&self->values[i], D_00438DB0);
+                            func_00208AF8(self, i);
+                        }
+                        if (self->count0 <
+                            (s16)(M2C_FIELD(*D_0040F4DC, u16*, 0x1C) + M2C_FIELD(*D_0040F4DC, u16*, 0x1E))) {
+                            ++self->count0;
+                            func_00275448(D_003BDD10[i], self->count0, 0, 0);
+                            if (self->count0 % 10 == 0) StatisticsSound(8);
+                        } else {
+                            StatisticsSound(9);
+                            D_0043D9D0[i] = 2;
+                        }
+                        break;
+                    case 3:
+                        StatisticsValuePosition(&self->values[i], D_00438DC0[i]);
+                        if (self->count1 >= (s16)M2C_FIELD(comparison, u16*, 0x1E)) {
+                            StatisticsValueColor(&self->values[i], D_00438DB0);
+                            func_00208AF8(self, i);
+                        }
+                        if (self->count1 < M2C_FIELD(*D_0040F4DC, s16*, 0x1E)) {
+                            ++self->count1;
+                            func_00275448(D_003BDD10[i], self->count1, 0, 0);
+                            if (self->count1 % 10 != 0) StatisticsSound(8);
+                        } else {
+                            StatisticsSound(9);
+                            D_0043D9D0[i] = 2;
+                        }
+                        break;
+                    case 4:
+                        StatisticsValuePosition(&self->values[i], D_00438DC0[i]);
+                        if (M2C_FIELD(comparison, f32*, 0xC) <= self->time) {
+                            StatisticsValueColor(&self->values[i], D_00438DB0);
+                            func_00208AF8(self, i);
+                        }
+                        if (self->time < M2C_FIELD(*D_0040F4DC, f32*, 0xC)) {
+                            self->time += 1.0f;
+                            func_00208C60(D_003BDD10[i], self->time);
+                            if ((s32)self->time & 3) StatisticsSound(8);
+                        } else {
+                            StatisticsSound(9);
+                            D_0043D9D0[i] = 2;
+                        }
+                        break;
+                }
+            }
+        }
+        func_002076A8(&self->values[i]);
+        func_002076F8(&self->values[i], delta);
+    }
+    for (i = 0; i < 10; i++) func_002072E0(&self->sprites[i], delta);
+}

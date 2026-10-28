@@ -155,7 +155,6 @@ s32 func_00207938(void *arg0)
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00207970);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00208140);
 static inline const s64* FrontendSlotPosition(s32 index) { return &D_00438E38[index]; }
 void func_00208AF8(void* self, s32 index) {
     u8* initialized = (s8)index + D_0043D9D8;
