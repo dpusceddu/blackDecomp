@@ -1,5 +1,5 @@
 """The objdiff project file: one unit per object, a category per library, assembly-backed functions excluded from source progress."""
-import json, struct, sys, tempfile, unittest
+import json, os, struct, sys, tempfile, unittest
 from pathlib import Path
 from unittest.mock import patch
 
@@ -81,6 +81,58 @@ class UnitMapping(unittest.TestCase):
             self.assertEqual(len(plan),1)
             self.assertEqual([1,2],[f['addr'] for f in plan[0]['functions']])
             self.assertFalse(plan[0]['complete'])
+
+    def test_comparison_keeps_explicit_source_data_with_its_function(self):
+        sections = [dict(name='.text.func_00100000', index=1, flags=2, type=1, size=8),
+                    dict(name='.rodata.click', index=2, flags=2, type=1, size=8),
+                    dict(name='.rodata.00400008', index=3, flags=2, type=1, size=8)]
+        symbol = dict(name='func_00100000', shndx=1, value=0, type=2)
+        function = dict(addr=0x100000, size=8, status='source')
+        unit = dict(functions=[function], data_ranges=[dict(section='.rodata', input='.rodata.click',
+                                                          start=0x400000, end=0x400008)])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            build = root / 'build/SLUS_213.76'
+            raw = build / 'obj/units/test.o'
+            raw.parent.mkdir(parents=True)
+            raw.write_bytes(b'compiled object')
+            Path(str(raw) + '.json').write_text(json.dumps(dict(resolved={str(0x100000): dict(
+                status='source', section=sections[0]['name'], link_name=symbol['name'])})))
+            (build / 'placement.json').write_text(json.dumps(dict(functions=[function])))
+            spec = root / 'spec.json'
+            spec.write_text(json.dumps(dict(name='units/test', unit=unit)))
+            original = root / 'asm/SLUS_213.76/nonmatchings/func_00100000.s'
+            original.parent.mkdir(parents=True)
+            original.write_text(asm(0x100000, 2, padding=0))
+
+            def run(command, **kwargs):
+                if '-o' in command:
+                    Path(command[command.index('-o') + 1]).write_bytes(b'target object')
+
+            previous = Path.cwd()
+            try:
+                os.chdir(root)
+                with patch.object(objdiff, 'ROOT', root), patch.object(objdiff, 'Elf') as elf, \
+                        patch.object(objdiff, 'environment', return_value=(root, {'BLACK_BINUTILS_PREFIX': 'mips-'})), \
+                        patch('progress.orphan_pieces', return_value=set()), \
+                        patch.object(elfobj, 'undefine_dropped', return_value=(b'compiled object', [])) as dropped, \
+                        patch.object(elfobj, 'literal_as_gprel', side_effect=lambda data: data), \
+                        patch.object(elfobj, 'copy_header_flags', side_effect=lambda data, _: data), \
+                        patch.object(objdiff.subprocess, 'run', side_effect=run) as commands:
+                    elf.return_value.sections = sections
+                    elf.return_value.symbols.return_value = [symbol]
+                    elf.return_value.section.side_effect = lambda name: next(
+                        (section for section in sections if section['name'] == name), None)
+                    objdiff.build_view('spec.json', 'build/SLUS_213.76/objdiff/base/test.o')
+                retained = dropped.call_args.args[1]
+                self.assertIn('.text.func_00100000', retained)
+                self.assertIn('.rodata.click', retained)
+                self.assertNotIn('.rodata.00400008', retained)
+                copy_command = commands.call_args_list[0].args[0]
+                self.assertNotIn('--remove-section=.rodata.click', copy_command)
+                self.assertIn('--remove-section=.rodata.00400008', copy_command)
+            finally:
+                os.chdir(previous)
 
 
 def elf_object(entries, flags=0x20920001):
