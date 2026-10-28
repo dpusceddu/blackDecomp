@@ -71,7 +71,26 @@ s32 func_00214508(s32 arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_002145E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00214A20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00214B90);
+extern void* func_00103358(void*, s32);
+extern s32 func_001034B0(void*, void*);
+s32 func_00214B90(void) {
+    void* group = func_00103358(D_0040F0E0, M2C_FIELD(D_0040F0E0, u8*, 0x2020C));
+    u8 i = 0;
+    s32 result;
+    if (M2C_FIELD(group, u8*, 0x21)) {
+        do {
+            u8* item = (u8*)((i * 0x60) + M2C_FIELD(group, s32*, 0x18));
+            if (M2C_FIELD(item, u8*, 0x58) == M2C_FIELD(D_0040F0E0, u8*, 0x2020E)) {
+                result = func_001034B0(D_0040F0E0, (u8*)D_0040F0E0 + 0x20FA0);
+                goto done;
+            }
+            i++;
+        } while (i < M2C_FIELD(group, u8*, 0x21));
+    }
+    result = func_001034B0(D_0040F0E0, (u8*)D_0040F0E0 + 0x20FD8);
+done:
+    return result;
+}
 s32 func_00214C48(const s8* text) {
     s32 i = 0;
     do {
