@@ -47,7 +47,11 @@ s32 func_00161350(void) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_00161370);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_00161378);
 // Partial action view; original class and fields are UNVERIFIED.
-typedef struct { u64 id; char unknown08[0x18]; void* data; } ActionInitView;
+typedef struct {
+    u64 id;
+    char unknown08[0x18];
+    void* data;
+} ActionInitView;
 
 s32 func_00161418(ActionInitView* self, u64 id, void* data) {
     func_00160EA0(self);
@@ -65,8 +69,14 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_
 #ifdef NON_MATCHING
 // Unmatched: clock and manager address lifetimes differ.
 // Partial native storage views; field meanings are UNVERIFIED.
-typedef struct { u128 vector; float field10, field14, field18; } ActionNativeDataDraft;
-typedef struct { char unknown00[0x5c80]; u64 value; } ActionClockDraft;
+typedef struct {
+    u128 vector;
+    float field10, field14, field18;
+} ActionNativeDataDraft;
+typedef struct {
+    char unknown00[0x5c80];
+    u64 value;
+} ActionClockDraft;
 extern void* D_0040F528;
 extern void func_0016B5E0(void*, ActionNativeDataDraft*);
 void func_00161488(ActionInitView* self) {
@@ -101,8 +111,14 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_
 #ifdef NON_MATCHING
 // Unmatched: clock and manager address lifetimes differ.
 // Partial native storage views; field meanings are UNVERIFIED.
-typedef struct { u128 vector; float field10; } ActionScalarDataDraft;
-typedef struct { char unknown00[0x5c88]; u64 value; } ActionClock2Draft;
+typedef struct {
+    u128 vector;
+    float field10;
+} ActionScalarDataDraft;
+typedef struct {
+    char unknown00[0x5c88];
+    u64 value;
+} ActionClock2Draft;
 extern void func_0016B590(void*, ActionScalarDataDraft*);
 void func_00161558(ActionInitView* self) {
     ActionClock2Draft* clock = (ActionClock2Draft*)D_0040F4D0;
@@ -125,16 +141,20 @@ s32 func_001615A8(ActionInitView* self, u64 id, void* data) {
     return 1;
 }
 // Partial action data view; field meanings are UNVERIFIED.
-typedef struct { u64 id; s32 value; s8 mode; } ActionModeData;
+typedef struct {
+    u64 id;
+    s32 value;
+    s8 mode;
+} ActionModeData;
 extern void func_00160808(void*, u64, s32);
 extern void func_00160898(void*, u64, s32);
 
 void func_001615F0(ActionInitView* self) {
     ActionModeData* data = (ActionModeData*)self->data;
     switch (data->mode) {
-    case 0: func_00160808(D_0040F4D0 + 0x8f0, data->id, 1); break;
-    case 1: func_00160898(D_0040F4D0 + 0x8f0, data->id, data->value); break;
-    case 2: return;
+        case 0: func_00160808(D_0040F4D0 + 0x8f0, data->id, 1); break;
+        case 1: func_00160898(D_0040F4D0 + 0x8f0, data->id, data->value); break;
+        case 2: return;
     }
 }
 s32 func_00161660(ActionInitView* self, u64 id, void* data) {
@@ -145,10 +165,22 @@ s32 func_00161660(ActionInitView* self, u64 id, void* data) {
 }
 // Partial manager views; original type and method names are UNVERIFIED.
 typedef void (*ActionManagerCallback)(void*, s32, s32);
-typedef struct { s16 adjustment, unknown02; ActionManagerCallback callback; } ActionManagerEntry;
-typedef struct { char unknown00[0x40]; ActionManagerEntry action; } ActionManagerTable;
-typedef struct { char unknown00[8]; ActionManagerTable* table; } ActionManagerView;
-typedef struct { char unknown00[0x21070]; ActionManagerView* manager; } ActionSystemView;
+typedef struct {
+    s16 adjustment, unknown02;
+    ActionManagerCallback callback;
+} ActionManagerEntry;
+typedef struct {
+    char unknown00[0x40];
+    ActionManagerEntry action;
+} ActionManagerTable;
+typedef struct {
+    char unknown00[8];
+    ActionManagerTable* table;
+} ActionManagerView;
+typedef struct {
+    char unknown00[0x21070];
+    ActionManagerView* manager;
+} ActionSystemView;
 extern ActionSystemView* D_0040F0E0;
 
 void func_001616A8(ActionInitView* self) {
@@ -167,9 +199,21 @@ s32 func_00161730(ActionInitView* self, u64 id, void* data) {
     return 1;
 }
 // Partial action and camera views; field meanings are UNVERIFIED.
-typedef struct { char unknown00[0x94]; s32 value; char unknown98; u8 field99; } ActionCameraData;
-typedef struct { char unknown00[0x1c]; s8 state; char unknown1d[3]; ActionCameraData* data; } ActionCameraView;
-typedef struct { u64 id; } ActionCameraRecord;
+typedef struct {
+    char unknown00[0x94];
+    s32 value;
+    char unknown98;
+    u8 field99;
+} ActionCameraData;
+typedef struct {
+    char unknown00[0x1c];
+    s8 state;
+    char unknown1d[3];
+    ActionCameraData* data;
+} ActionCameraView;
+typedef struct {
+    u64 id;
+} ActionCameraRecord;
 extern ActionCameraRecord** D_0040F4BC;
 extern void* D_0040F4F4;
 extern void func_00168618(void*, s32, s32, s32);
@@ -185,9 +229,7 @@ void func_00161778(ActionCameraView* self) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_00161808);
 
-void func_00161920(void) {
-    func_00160E70();
-}
+void func_00161920(void) { func_00160E70(); }
 
 // Partial action view; the duplicated pointer's role is UNVERIFIED.
 typedef struct {
@@ -212,18 +254,55 @@ s32 func_00161990(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_001619B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_001619B8);
+// Partial managed-actor views; field meanings are UNVERIFIED.
+typedef struct {
+    char unknown00[0x1fc0];
+    u8 flag;
+} ActionListActor;
+typedef struct {
+    u64 id;
+} ActionListRef;
+typedef struct {
+    char unknown00[0x79a4];
+    s32 count;
+    char unknown79a8[4];
+    ActionListRef** items;
+} ActionListManager;
+typedef struct {
+    u64* ids;
+    u8 count;
+} ActionListData;
+typedef struct {
+    char unknown00[0x20];
+    ActionListData* data;
+} ActionListView;
+extern ActionListManager* D_0040F514;
+extern ActionListActor* func_00135550(ActionListRef*);
+
+void func_001619B8(ActionListView* self) {
+    s32 i;
+    for (i = 0; i < self->data->count;) {
+        s32 next = i + 1;
+        u64 id = self->data->ids[i];
+        s32 j;
+        j = 0;
+        if (D_0040F514->count > 0) do {
+                ActionListRef* ref = D_0040F514->items[j];
+                if (ref && id == ref->id) {
+                    ActionListActor* actor = func_00135550(ref);
+                    if (actor) actor->flag = 1;
+                }
+            } while (++j < D_0040F514->count);
+        i = next;
+    }
+}
 
 s32 func_00161CB8(void) {
     func_00160ED8();
     return 1;
 }
 
-
-void func_00161D58(void) {
-    func_00160E70();
-}
-
+void func_00161D58(void) { func_00160E70(); }
 
 s32 func_00161DC8(void) {
     func_00160ED8();
