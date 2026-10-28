@@ -45,7 +45,43 @@ s32 func_00161350(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_00161370);
+#ifdef NON_MATCHING
+// Unmatched: call argument load scheduling differs.
+// Partial action and vtable views; field meanings are UNVERIFIED.
+typedef struct {
+    char unknown00[0x20];
+    u64 id;
+    char unknown28[0x18];
+    f32 field40, field44;
+} ActionEffectDataDraft;
+typedef struct {
+    s16 adjustment, unknown02;
+    void (*callback)(void*, s32);
+} ActionEffectEntryDraft;
+typedef struct {
+    char unknown00[0x10];
+    ActionEffectEntryDraft entry;
+} ActionEffectTableDraft;
+typedef struct {
+    char unknown00[0x10];
+    ActionEffectTableDraft* table;
+    char unknown14[0xc];
+    ActionEffectDataDraft* data;
+    char unknown24[0x2c];
+    u128 field50, field60;
+} ActionEffectViewDraft;
+extern void func_0012C428(void*, u128, u128, u64, s32, s32, s32, s32, s32, f32, f32);
+
+void func_00161378(ActionEffectViewDraft* self, s32 arg) {
+    ActionEffectDataDraft* data = self->data;
+    s32 flag = 0;
+    if (data->field44 > 0.1f) flag = 1;
+    func_0012C428(D_0040F4D0, self->field60, self->field50, data->id, 1, 0, 0, flag, 0, data->field40, data->field44);
+    self->table->entry.callback((char*)self + self->table->entry.adjustment, arg);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_00161378);
+#endif
 // Partial action view; original class and fields are UNVERIFIED.
 typedef struct {
     u64 id;
@@ -227,7 +263,89 @@ void func_00161778(ActionCameraView* self) {
         self->state = 0;
     }
 }
+#ifdef NON_MATCHING
+// Unmatched: identifier and vector copy scheduling differ.
+// Partial action, argument and camera views; field meanings are UNVERIFIED.
+typedef struct {
+    char unknown00[0x20];
+    u64 id;
+    char unknown28[8];
+    u128 vectors[4];
+    f32 field70;
+    u16 field74;
+    char unknown76[2];
+    f32 field78;
+    s32 field7c;
+    f32 field80, field84, field88, field8c;
+    s32 field90;
+    char unknown94[4];
+    u8 field98, field99, field9a, field9b;
+} ActionSetupDataDraft;
+typedef struct {
+    char unknown00[0x1c];
+    u8 state;
+    char unknown1d[3];
+    ActionSetupDataDraft* data;
+} ActionSetupViewDraft;
+typedef struct {
+    void* value;
+    f32 field04;
+    u8 flag08, flag09;
+    s32 type;
+    u16 field10;
+    f32 field14;
+    s32 field18;
+    f32 field1c, field20, field24, field28;
+} ActionSetupArgsDraft;
+typedef struct {
+    s16 adjustment, unknown02;
+    void (*callback)(void*, s32, ActionSetupArgsDraft*);
+} ActionSetupEntryDraft;
+typedef struct {
+    char unknown00[0x20];
+    ActionSetupEntryDraft entry;
+} ActionSetupTableDraft;
+typedef struct {
+    char unknown00[0x14];
+    ActionSetupTableDraft* table;
+} ActionSetupCameraDraft;
+
+void func_00161808(ActionSetupViewDraft* self) {
+    ActionSetupDataDraft* data = self->data;
+    u64 id;
+    u128 vectors[4];
+    ActionSetupArgsDraft args;
+    vectors[0] = data->vectors[0];
+    id = data->id;
+    vectors[1] = data->vectors[1];
+    vectors[2] = data->vectors[2];
+    vectors[3] = data->vectors[3];
+    args.field04 = data->field70;
+    args.flag08 = data->field9a == 1;
+    args.flag09 = data->field9b == 1;
+    args.field10 = data->field74;
+    args.field14 = data->field78;
+    args.field18 = data->field7c;
+    args.field1c = data->field80;
+    args.field20 = data->field84;
+    args.field24 = data->field88;
+    args.field28 = data->field8c;
+    if (!id) {
+        args.value = vectors;
+        args.type = 1;
+    } else {
+        args.value = &id;
+        args.type = 2;
+    }
+    ((ActionSetupCameraDraft*)D_0040F4BC)
+        ->table->entry.callback((char*)D_0040F4BC + ((ActionSetupCameraDraft*)D_0040F4BC)->table->entry.adjustment, 7,
+                                &args);
+    func_00168618(D_0040F4F4, self->data->field90, self->data->field98, 0);
+    self->state = 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_00161808);
+#endif
 
 void func_00161920(void) { func_00160E70(); }
 
