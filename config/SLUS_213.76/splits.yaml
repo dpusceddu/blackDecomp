@@ -2050,7 +2050,7 @@ splits:
   - {src: src/game/effects/tu_29b500_29bbc8.cpp, range: [0x29bbc8, 0x29bcc0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony status wrapper uses 64-bit saved-register stores and Sony compiler ABI}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29bcc0, 0x29bfe8]}
   - {src: src/game/effects/tu_29b500_29bfe8.cpp, range: [0x29bfe8, 0x29c110], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29c110, 0x29c138]}
+  - {src: src/game/effects/tu_29b500_29c110.c, range: [0x29c110, 0x29c138], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony C variadic prologue saves the seven argument registers as 64-bit values}
   - {src: src/sony/tu_29c138.c, range: [0x29c138, 0x29c1d8], note: flags or language differ}
   - {src: src/sony/tu_29c138_29c1d8.c, range: [0x29c1d8, 0x29c6c8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_29c6c8.c, range: [0x29c6c8, 0x29cee8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
