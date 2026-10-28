@@ -13,11 +13,11 @@ extern void *func_00107D20(u32);
 
 #ifdef NON_MATCHING
 // Unmatched: allocation loop and return scheduling differ.
-void *func_00165BC8(void *arg0, u8 arg1) {
+void *func_00165BC8(void *arg0, s32 arg1) {
     s32 i;
     void *result;
-    M2C_FIELD(arg0, u8 *, 0xC) = arg1;
-    if (arg1 == 0) {
+    M2C_FIELD(arg0, u8 *, 0xC) = (u8) arg1;
+    if ((u8) arg1 == 0) {
         M2C_FIELD(arg0, void **, 8) = 0;
         return 0;
     }
@@ -37,7 +37,30 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00166808);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00167000);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00167208);
+extern void func_00167AA8(void *, void *, s64);
+
+#ifdef NON_MATCHING
+// Unmatched: loop scheduling and registers differ.
+s32 func_00167A10(void *arg0, void *arg1, void *arg2) {
+    s32 i;
+    u8 result = M2C_FIELD(arg1, u8 *, 0xE);
+    if (result == 0 && arg2 != 0) {
+        i = 0;
+        if (M2C_FIELD(arg2, u8 *, 4) != 0) {
+            do {
+                s64 *entry = (s64 *) (M2C_FIELD(arg2, s32 *, 0) + i * 8);
+                i++;
+                func_00167AA8(arg0, arg1, *entry);
+            } while (i < M2C_FIELD(arg2, u8 *, 4));
+        }
+        result = 1;
+        M2C_FIELD(arg1, u8 *, 0xE) = 1;
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00167A10);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00167AA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00168618);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00169898);
