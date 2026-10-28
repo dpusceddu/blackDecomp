@@ -13,7 +13,29 @@ void func_0027ACC8(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027ACD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B148);
+extern void func_002AC568(void*);
+extern void func_002AA340(void*);
+extern void func_002AF778(void*, void*);
+extern s32 func_002A9178(void*);
+#ifdef NON_MATCHING
+// Unmatched: argument and store scheduling differ.
+s32 func_0027B260(void* self) {
+    s32 result;
+    func_002AC568(M2C_FIELD(self, void**, 0x60));
+    func_002AC568(M2C_FIELD(self, void**, 0x64));
+    func_002AA340(M2C_FIELD(self, void**, 0x5C));
+    func_002AF778(M2C_FIELD(self, void**, 0x58), 0);
+    result = func_002A9178(M2C_FIELD(self, void**, 0x58));
+    M2C_FIELD(self, void**, 0x68) = 0;
+    M2C_FIELD(self, void**, 0x60) = 0;
+    M2C_FIELD(self, void**, 0x64) = 0;
+    M2C_FIELD(self, void**, 0x58) = 0;
+    M2C_FIELD(self, void**, 0x5C) = 0;
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B260);
+#endif
 
 s32 func_0027B2C8(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x6C) = -1.0f;
@@ -58,7 +80,7 @@ void func_0027B648(void *arg0, s32 arg1, s32 arg2)
 }
 
 // UNVERIFIED: original record and ring identities, and unused fields.
-typedef struct { u8 unknown[0x1E]; u8 occupied, unknown1F; } Recovered_RingRecord;
+typedef struct { s32 key; u8 unknown04[0x1A]; u8 occupied, unknown1F; } Recovered_RingRecord;
 typedef struct { s32 cursor, used; Recovered_RingRecord* records; s32 capacity; } Recovered_RecordRing;
 s32 func_0027B688(Recovered_RecordRing* ring) {
     s32 index = ring->cursor;
@@ -93,7 +115,32 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B950);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BA60);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BA68);
+#ifdef NON_MATCHING
+// Unmatched: loop register allocation differs.
+s32 func_0027BAE8(void* object, s32 key) {
+    Recovered_RecordRing* ring = object;
+    s32 used = ring->used;
+    s32 seen = 0;
+    s32 i = 0;
+    if (used > 0) {
+        s32 capacity = ring->capacity;
+        if (capacity > 0) {
+            Recovered_RingRecord* record = ring->records;
+            do {
+                if (record->occupied) {
+                    seen++;
+                    if (record->key == key) return (s32)record;
+                }
+                record++;
+                i++;
+            } while (seen < used && i < capacity);
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BAE8);
+#endif
 // UNVERIFIED: original type and callback identity.
 typedef struct { u8 unknown[0x10]; s16 adjustment; u16 unknown12; void (*callback)(void*, s32); } Recovered_RingVtable;
 typedef struct { u8 unknown[0x10]; Recovered_RingVtable* vtable; } Recovered_RingOwner;
@@ -135,6 +182,6 @@ void func_0027BC58(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BC60);
 
-void func_0027BD00(void) {
-    func_0027BB98();
+void func_0027BD00(Recovered_RecordRing* ring, Recovered_RingRecord* record) {
+    func_0027BB98(ring, record);
 }
