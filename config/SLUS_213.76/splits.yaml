@@ -900,7 +900,9 @@ splits:
   - {src: src/game/ai/movement/tu_18dd88_18f4e8.c, range: [0x18f4e8, 0x18f6a8]}
   - {src: src/game/ai/movement/tu_18dd88_18f6a8.c, range: [0x18f6a8, 0x18f730]}
   - {src: src/game/ai/movement/tu_18dd88_18f730.c, range: [0x18f730, 0x18f7c8]}
-  - {src: src/game/ai/movement/tu_18f7c8.c, range: [0x18f7c8, 0x190428]}
+  - {src: src/game/ai/movement/tu_18f7c8.c, range: [0x18f7c8, 0x18f910], data_ranges: [{section: .rodata, input: .rodata, start: 0x3f5750, end: 0x3f5800}]}
+  - {src: src/game/ai/movement/tu_18f7c8_18f910.c, range: [0x18f910, 0x18fb40], flags: [-O2, -G0, -snas], assembler: sn-min6, note: The five-entry clearing loop has six instructions including assembler-inserted NOPs}
+  - {src: src/game/ai/movement/tu_18f7c8.c, range: [0x18fb40, 0x190428]}
   - {src: src/game/ai/movement/tu_18dd88_18f730.c, range: [0x190428, 0x1904d8]}
   - {src: src/game/ai/movement/tu_1904d8.c, range: [0x1904d8, 0x1909f8]}
   - {src: src/game/ai/movement/tu_1909f8.c, range: [0x1909f8, 0x190a00]}
@@ -1408,7 +1410,9 @@ splits:
   - {src: src/game/unsorted/tu_1cfcf8.c, range: [0x1cfcf8, 0x1cfe50]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1cfe50, 0x1cff78]}
   - {src: src/game/unsorted/tu_1cff78.c, range: [0x1cff78, 0x1d3078], note: flags or language differ}
-  - {src: src/game/unsorted/tu_1cff78_1d3078.c, range: [0x1d3078, 0x1d4030], flags: [-O2, -G1], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1cff78_1d3078.c, range: [0x1d3078, 0x1d3ea0], flags: [-O2, -G1], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1cff78_1d3ea0.c, range: [0x1d3ea0, 0x1d3fc0], flags: [-O2, -G1, -snas], note: SN assembler preserves transfer delay slots in the coordinate loop}
+  - {src: src/game/unsorted/tu_1cff78_1d3078.c, range: [0x1d3fc0, 0x1d4030]}
   - {src: src/game/unsorted/tu_1cff78_1d4030.c, range: [0x1d4030, 0x1d4068], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1cff78_1d4068.c, range: [0x1d4068, 0x1d4618], note: flags or language differ}
   - {src: src/game/unsorted/tu_1cff78_1d4618.c, range: [0x1d4618, 0x1d4c78], flags: [-O2, -G1]}
@@ -1470,7 +1474,7 @@ splits:
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1e45a8, 0x1e4650]}
   - {src: src/game/unsorted/tu_1e4650.c, range: [0x1e4650, 0x1e4e50]}
   - {src: src/game/unsorted/tu_1e4e50.c, range: [0x1e4e50, 0x1e51c8], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/unsorted/tu_1e4e50_1e51c8.c, range: [0x1e51c8, 0x1e62d0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1e4e50_1e51c8.c, range: [0x1e51c8, 0x1e62d0], data_ranges: [{section: .rodata, input: .rodata, start: 0x3f9240, end: 0x3f9290}], note: flags or language differ}
   - {src: src/game/unsorted/tu_1e4e50_1e62d0.c, range: [0x1e62d0, 0x1e6650], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1e4e50_1e6650.c, range: [0x1e6650, 0x1e7150], assembler: sn-min6, note: playback setup and teardown loops are six words including branch and delay slot}
   - {src: src/game/unsorted/tu_1e4e50_1e7150.c, range: [0x1e7150, 0x1e7588], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}

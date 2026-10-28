@@ -18,7 +18,9 @@ typedef struct Recovered_GridEntry {
 } Recovered_GridEntry;
 typedef struct Recovered_GridRow {
     Recovered_GridEntry entries[6];
-    u8 unk_108[0x68];
+    u8 unk_108[0x58];
+    u64 key;
+    u8 unk_168[8];
     u8 unk_170;
     u8 unk_171[0x1F];
 } Recovered_GridRow;
@@ -185,7 +187,16 @@ void func_001E5900(void *arg0) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5940);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5AF0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5AF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5CB0);
+/* UNVERIFIED: the four queued values and their meaning are unknown. */
+typedef struct Recovered_GridQueue {
+    u8 unk_000[0x784];
+    s32 entries[4];
+    u32 count;
+} Recovered_GridQueue;
+
+void func_001E5CB0(Recovered_GridQueue* self, s32 item) {
+    if (self->count < 4) self->entries[self->count++] = item;
+}
 
 s32 func_001E5CD8(void) {
     return 1;
@@ -215,7 +226,13 @@ void func_001E5D80(s32 arg0, void *arg1) {
     M2C_FIELD(arg1, s8 *, 0x170) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5D88);
+Recovered_GridRow* func_001E5D88(Recovered_GridOwner* owner, u64 key) {
+    u32 i;
+    for (i = 0; i < 3; i++) {
+        if (owner->rows[i].key == key) return &owner->rows[i];
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5DC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5DD0);
 #ifdef NON_MATCHING
@@ -254,7 +271,31 @@ void func_001E6050(void) {
 
 }
 
+#ifdef NON_MATCHING
+/* UNVERIFIED: partial view of the current and previous coordinates. */
+typedef struct Recovered_GridPosition {
+    u8 unk_000[0x8AC];
+    f32 current[3];
+    u8 unk_8B8[4];
+    u8 changed;
+    u8 unk_8BD[3];
+    f32 previous[3];
+} Recovered_GridPosition;
+
+// Unmatched: the first coordinate store is scheduled later than the reference.
+void func_001E6058(Recovered_GridPosition* self, f32 x, f32 y, f32 z) {
+    f32 oldX = self->current[0], oldY = self->current[1], oldZ = self->current[2];
+    self->previous[0] = oldX;
+    self->previous[1] = oldY;
+    self->previous[2] = oldZ;
+    self->current[2] = z;
+    self->current[0] = x;
+    self->current[1] = y;
+    self->changed = 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6058);
+#endif
 
 void func_001E6088(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x8AC) = (f32) M2C_FIELD(arg0, f32 *, 0x8C0);
@@ -263,9 +304,36 @@ void func_001E6088(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x8BC) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E60A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E60E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6118);
+s32 func_001E60A8(void* unused, u64 key) {
+    s32 i;
+    for (i = 0; i < 7; i++) {
+        if (key == D_003F9208[i]) return 1;
+    }
+    return 0;
+}
+const u64 D_003F9240[6] = {
+    0x87C4F55F40000000ULL, 0x81F2D7A540000000ULL, 0x87EA361D80000000ULL,
+    0x8218186380000000ULL, 0x5F2B660780000000ULL, 0x6C1EE82BC0000000ULL,
+};
+const u64 D_003F9270[4] = {
+    0x81F2D7A540000000ULL, 0x8218186380000000ULL,
+    0x87C4F55F40000000ULL, 0x87EA361D80000000ULL,
+};
+
+s32 func_001E60E0(void* unused, u64 key) {
+    s32 i;
+    for (i = 0; i < 4; i++) {
+        if (key == D_003F9270[i]) return 1;
+    }
+    return 0;
+}
+s32 func_001E6118(void* unused, u64 key) {
+    s32 i;
+    for (i = 0; i < 6; i++) {
+        if (key == D_003F9240[i]) return 1;
+    }
+    return 0;
+}
 #ifdef NON_MATCHING
 // Unmatched: register allocation differs and the key table is assembly-owned.
 s32 func_001E6150(void* owner, void* argument, s32 key_index) {
@@ -288,5 +356,23 @@ s32 func_001E6150(void* owner, void* argument, s32 key_index) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6150);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6208);
+/* UNVERIFIED: only the channel byte and pointer array are described. */
+typedef struct Recovered_GridChannel {
+    u8 unk_00[0x35];
+    u8 value;
+} Recovered_GridChannel;
+typedef struct Recovered_GridChannels {
+    u8 unk_000[0x844];
+    Recovered_GridChannel* channels[2];
+} Recovered_GridChannels;
+
+void func_001E6208(Recovered_GridChannels* self, u32 kind, s32 value) {
+    Recovered_GridChannel** channel = self->channels;
+    u32 i = 0;
+    do {
+        if (*channel) (*channel)->value = value;
+        channel++;
+        i++;
+    } while (i < 2);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6240);
