@@ -123,4 +123,23 @@ void func_001FABD8(void* self) {
     }
     M2C_FIELD(self, s32*, 0x210) = 3;
 }
+#ifdef NON_MATCHING
+// Unmatched: boolean normalization differs.
+extern void func_00200BB0(void*, f32);
+s32 func_001FAC00(void* self, f32 delta) {
+    void* entry = M2C_FIELD(self, void**, 0x218);
+    if (entry) {
+        u8 done;
+        func_00200BB0(entry, delta);
+        done = M2C_FIELD(M2C_FIELD(self, void**, 0x218), f32*, 0x5C) <= 0.0f;
+        if (!done) {
+            M2C_FIELD(self, s8*, 0x21C) = 1;
+            return 0;
+        }
+    }
+    M2C_FIELD(self, s8*, 0x21C) = 0;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FAC00);
+#endif
