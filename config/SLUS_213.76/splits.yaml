@@ -605,7 +605,7 @@ splits:
   - {src: src/game/actor/actor_event_fanout.cpp, range: [0x165b00, 0x165b88]}
   - {src: src/game/actor/tu_1650b8_165af8.c, range: [0x165b88, 0x165b98]}
   - {src: src/game/actor/actor_event_fanout.cpp, range: [0x165b98, 0x165bb0]}
-  - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x165bb0, 0x165c40], flags: [-O1, -G0, -snas], note: flags or language differ}
+  - {src: src/game/actor/tu_165bb0.c, range: [0x165bb0, 0x165c40], flags: [-O1, -G0, -snas], note: Constructor store scheduling requires O1; the remaining actor helpers reproduce native O2 loops and scheduling.}
   - {src: src/game/actor/tu_165c40.c, range: [0x165c40, 0x165cc0]}
   - {src: src/game/actor/tu_165cc0.c, range: [0x165cc0, 0x165de8], flags: [-O1, -G0, -snas]}
   - {src: src/game/actor/tu_165de8.c, range: [0x165de8, 0x165df0]}
