@@ -40,5 +40,16 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D5A
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D848);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D948);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011DA58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011DC80);
+extern s32 func_0011DA58(void*, s128, void*, void*, void*);
+s32 func_0011DC80(void* self, s128 vec, void* a, void* b, void* c) {
+    u32 i = 0;
+    if (M2C_FIELD(self, u32*, 0)) {
+        do {
+            u8* entry = M2C_FIELD(self, u8**, 4) + (i << 6);
+            if (M2C_FIELD(entry, s32*, 0) == 4 && func_0011DA58(entry + 0x10, vec, a, b, c)) return 1;
+            i++;
+        } while (i < M2C_FIELD(self, u32*, 0));
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011DD48);
