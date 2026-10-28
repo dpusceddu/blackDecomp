@@ -11,6 +11,7 @@ from graph_io import write_text, python_inputs
 from ninja_graph import escape
 
 ROOT=Path(__file__).resolve().parent
+SLUG='SLUS_213.76'
 
 
 def python_command():
@@ -20,20 +21,18 @@ def python_command():
     return '.venv/bin/python' if (ROOT/'.venv/bin/python').is_file() else sys.executable
 
 
-def stages(slug, nm):
-    result=[('extract',['tools/build/prepare.py','extract',slug]),
+def stages(nm):
+    slug=SLUG
+    return [('extract',['tools/build/prepare.py','extract',slug]),
             ('boundaries',['tools/build/boundaries.py',slug]),
             ('split',['tools/build/prepare.py','split',slug]),
             ('support',['tools/build/link_support.py',slug]),
-            ('functions',['tools/build/split_objects.py',slug,'--functions'])]
-    if slug=='SLUS_213.76':
-        result += [('owners',['tools/build/linkonce_owners.py','--write']),
-                   ('units',['tools/build/units.py',slug])]
-    result += [('placement',['tools/build/split_objects.py',slug])]
-    if slug=='SLUS_213.76':
-        result += [('inventory',['tools/build/inventory.py'])]
-    result += [('graph',['tools/build/object_graph.py',slug]+(['--non-matching'] if nm else []))]
-    return result
+            ('functions',['tools/build/split_objects.py',slug,'--functions']),
+            ('owners',['tools/build/linkonce_owners.py','--write']),
+            ('units',['tools/build/units.py',slug]),
+            ('placement',['tools/build/split_objects.py',slug]),
+            ('inventory',['tools/build/inventory.py']),
+            ('graph',['tools/build/object_graph.py',slug]+(['--non-matching'] if nm else []))]
 
 
 def stage_rules(records, py):
@@ -60,13 +59,11 @@ def stage_rules(records, py):
 
 def main():
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--version',default='SLUS_213.76')
     p.add_argument('--non-matching',action='store_true')
     p.add_argument('--from-ninja',action='store_true',help=argparse.SUPPRESS)
     a=p.parse_args()
     versions=json.loads((ROOT/'config/versions.json').read_text())
-    if a.version not in versions:p.error('unknown version')
-    slug=a.version;boot=versions[slug]['boot'];b='build/'+slug
+    slug=SLUG;boot=versions[slug]['boot'];b='build/'+slug
     out=b+('-nm' if a.non_matching else '')
     py=python_command()
     header='ninja_required_version = 1.10\npy = '+shlex.quote(py).replace('$','$$')+'\n'
@@ -78,7 +75,7 @@ build orig/{slug}/{boot}: needexe
     have=(ROOT/'orig'/slug/boot).is_file()
     records=[]
     if have:
-        for name,command in stages(slug,a.non_matching):
+        for name,command in stages(a.non_matching):
             path=out+'/prepare/'+name+'.json'
             if not (ROOT/path).is_file():
                 # The first configure discovers dynamic splat/partition outputs.
@@ -102,7 +99,7 @@ build orig/{slug}/{boot}: needexe
     else:
         text=header+preflight+f'build all: phony orig/{slug}/{boot}\ndefault all\n'
         dependencies=[];graph=None
-    command=[py,'configure.py','--from-ninja','--version',slug]+(['--non-matching'] if a.non_matching else [])
+    command=[py,'configure.py','--from-ninja']+(['--non-matching'] if a.non_matching else [])
     outputs=['build.ninja']+([graph,out+'/bootstrap.ninja'] if have else [])
     source_inputs=['configure.py','config/versions.json','orig/'+slug+'/'+boot]+python_inputs('configure.py')
     text+='rule reconfigure\n  command = '+shlex.join(command)+'\n  generator = 1\n  restat = 1\n'

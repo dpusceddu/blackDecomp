@@ -6,12 +6,13 @@
   files     (default) source files to work on next, skipping claimed ones: game first, then kynapse, animation and physics,
             then the other libraries; within a library, the files with the most untried functions of tractable size
             (at most the median size of all remaining functions, or --max-size). A file is claimed when an open pull
-            request of --repo (default: the GitHub repository of the `upstream` or `origin` remote; read with `gh`)
+            request of --repo (default: dpusceddu/blackDecomp, including in forks; read with `gh`)
             changes it or names it on a `Claims:` line of its description, unless it is a draft without updates for
             48 hours, or when another local worktree changes it. --pick prints one file instead, drawn at random from the
             first --top files (weighted by their tractable bytes), so sessions starting together rarely take the same one.
             When both kinds are available, one pick in five revisits existing drafts, preferring saved near misses and
             smaller drafts. The listing shows both kinds; saved scores are hints, not current matching evidence.
+            If GitHub claims cannot be read, selection stops; unknown ownership is not available work.
   claims    files claimed by more than one open pull request; the lowest pull request number keeps the claim.
   near      near misses by differing-instruction count, with what differs (registers, order, code, length)
   types     functions the pipeline could not compile or decompile for want of a type, grouped by what they need
@@ -27,6 +28,7 @@ sys.path[:0] = [str(Path(__file__).resolve().parent / d) for d in ('', 'build', 
 from units import load_units, ROOT
 import include_asm
 import preflight
+from github import REPOSITORY
 
 RESULTS = ROOT / 'build' / 'auto.json'
 GLOBAL = re.compile(r'\bD_[0-9A-F]{6,8}\b')
@@ -144,14 +146,6 @@ def git(*args, cwd=ROOT):
     return r.stdout if r.returncode == 0 else ''
 
 
-def github_repo():
-    for remote in ('upstream', 'origin'):
-        m = re.search(r'github\.com[:/]([^/]+/[^/]+?)(?:\.git)?$', git('remote', 'get-url', remote).strip())
-        if m:
-            return m.group(1)
-    return None
-
-
 def pr_claims(repo):
     """{path: [pull request numbers]} for the files that open pull requests change or name on a `Claims:` line; None with a reason when they cannot be read."""
     if not repo:
@@ -165,7 +159,15 @@ def pr_claims(repo):
         return None, 'gh failed (%s)' % (r.stderr.strip().splitlines() or ['?'])[-1]
     now = datetime.datetime.now(datetime.timezone.utc)
     claims = {}
-    for pr in json.loads(r.stdout):
+    try:
+        prs = json.loads(r.stdout)
+    except ValueError:
+        return None, 'gh returned invalid JSON; retry after checking GitHub access'
+    if not isinstance(prs, list):
+        return None, 'gh returned an invalid pull-request list; retry after checking GitHub access'
+    if len(prs) >= 500:
+        return None, 'claim lookup reached its 500-pull-request limit; cannot establish ownership safely'
+    for pr in prs:
         updated = datetime.datetime.fromisoformat(pr['updatedAt'].replace('Z', '+00:00'))
         if pr['isDraft'] and now - updated > LAPSE:
             continue
@@ -195,6 +197,10 @@ def worktree_claims():
 
 
 def files(top, max_size, library, repo, pick=False):
+    claims, problem = pr_claims(repo or REPOSITORY)
+    if problem:
+        raise SystemExit('claims of open pull requests unknown: %s; fix GitHub access before selecting work' % problem)
+    claims = dict(claims, **worktree_claims())
     units = load_units(variant='SLUS_213.76')
     size = {f['addr']: f['size'] for u in units for f in u['functions']}
     rows = []
@@ -211,10 +217,6 @@ def files(top, max_size, library, repo, pick=False):
         print('no remaining functions')
         return
     limit = max_size or statistics.median(s for _, _, left, _ in rows for _, s in left)
-    claims, problem = pr_claims(repo or github_repo())
-    if problem:
-        print('note: claims of open pull requests unknown: %s; only local worktrees are checked' % problem, file=sys.stderr)
-    claims = dict(claims or {}, **worktree_claims())
     results = {int(k, 16): v for k, v in json.loads(RESULTS.read_text()).items()} if RESULTS.exists() else {}
     ranked, revisits, taken = [], [], 0
     for source, lib, left, untried in rows:
@@ -247,7 +249,7 @@ def files(top, max_size, library, repo, pick=False):
 
 
 def contested(repo):
-    claims, problem = pr_claims(repo or github_repo())
+    claims, problem = pr_claims(repo or REPOSITORY)
     if problem:
         raise SystemExit('claims of open pull requests unknown: %s' % problem)
     both = {path: sorted(prs) for path, prs in claims.items() if len(prs) > 1 and path.startswith('src/')}
@@ -261,7 +263,7 @@ EE_VECTOR = re.compile(r'^(p(add|sub|cpy|ext|pac|mul|div|and|or|nor|xor|abs|min|
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument('what', nargs='?', default='files', choices=['files', 'claims', 'near', 'types', 'identical', 'families', 'data', 'ee', 'all'])
+    ap.add_argument('what', nargs='?', default='files', choices=['files', 'claims', 'near', 'types', 'identical', 'data', 'ee', 'all'])
     ap.add_argument('--top', type=int, default=15)
     ap.add_argument('--max-size', type=int)
     ap.add_argument('--library', help='files: only this library (game, kynapse, animation, physics, ...)')
@@ -273,8 +275,6 @@ def main():
         return files(a.top, a.max_size, a.library, a.repo, a.pick)
     if a.what == 'claims':
         return contested(a.repo)
-    if a.what == 'families':
-        a.what = 'identical'
     res = load()
     if not res:
         raise SystemExit('no results: run tools/autodecomp.py run first')

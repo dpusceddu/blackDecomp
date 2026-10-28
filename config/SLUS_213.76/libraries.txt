@@ -1,7 +1,7 @@
 # Which library each stretch of .text belongs to: `START END library`, half-open, sorted. Edited by hand.
 #   library: the directory under src/ that holds the code (game, apt, rw_core, kynapse, rw_audio, physics, animation, sony, libc),
 #   or `linkonce` for the block of compiler-emitted inline and template copies behind the regular code (docs/build.md#link-once-copies).
-# Evidence: strings, link order, exception-frame groups, RTTI (docs/tus.md). `game` is the default for what no library claims.
+# Evidence: strings, link order, exception-frame groups, RTTI (docs/units.md). `game` is the default for what no library claims.
 # The owner of each link-once copy is not listed here: the build computes it into build/SLUS_213.76/inline_owners.txt
 # (tools/build/linkonce_owners.py), and a source file in src/<library>/inline/ is that library's by its directory.
 0x100000 0x218370 game

@@ -42,7 +42,7 @@ as partly or not matching without it:
 - **Numeric names** such as `%lo(D_10F00)`, where the original holds a number and no relocation, are replaced by the number in
   the target.
 
-`ninja report` runs `objdiff-cli report generate` and prints the totals; they are the headline figures of the README table
+`ninja report` runs `objdiff-cli report generate` and prints the totals; they are the headline figures of the progress table in [status.md](status.md#progress)
 (written by `ninja badges`, which fails if they disagree with a current report). A *function* there is what objdiff counts: the
 orphan `<instruction>; nop` pieces between functions are not functions, and *code* is matched function bytes over total
 function bytes, without alignment padding. The image measure of `ninja progress` counts the same matched functions over all
@@ -67,17 +67,29 @@ Other differences in what is measured:
 
 When the numbers move apart again after a change to `tools/objdiff.py`, compare the per-function match percentages in
 `report.json` with the functions `ninja progress` counts (`tools/build/units.py`, status `source`); a function that is exact in the
-image but below 100 % in the report points at a normalization rule that is missing. `tests/tools/test_objdiff.py` covers
-the unit and function mapping with a small split list.
+image but below 100 % in the report points at a normalization rule that is missing. `python3 tools/progress.py --check` enforces agreement after the report is regenerated.
 
-To work on a function, open the repository root as an objdiff project (objdiff GUI: Project, Open), pick the unit and the
-function, edit the source file, and objdiff rebuilds the unit's object and shows the diff. The build command is `ninja build/SLUS_213.76/objdiff/base/<unit>.o`: one object and its comparison view, without a
-full link or size check. Run `ninja objdiff` to prepare the project. An ignored `.local/objdiff.json` can override
+## Comparing one file from an agent
+
+The pinned objdiff CLI can produce a JSON diff without a GUI. Build one comparison pair, then read it in one-shot mode
+(the output option is required to avoid the interactive terminal):
+
+```sh
+ninja build/SLUS_213.76/objdiff/base/<unit>.o
+build/toolchain/bin/objdiff-cli diff -p . -u <library>/<unit> -o build/function-diff.json --format json-pretty
+```
+
+Use the full unit `name` from `objdiff.json` for `-u`, including its library prefix; the object path omits that prefix.
+It need not equal the source path. One-shot mode reads existing objects and does
+not build them. The result includes instructions, relocations and match percentages. Full reports use `ninja report`.
+The options are documented in [objdiff v3.8.2](https://github.com/encounter/objdiff/blob/v3.8.2/objdiff-cli/src/cmd/diff.rs).
+
+An optional objdiff GUI can open the repository root and rebuild on save. `.local/objdiff.json` can override
 `custom_make` and `custom_args`; the default is ordinary Ninja.
 
 ## Publishing
 
-The README badges and table are written by `ninja badges` (`tools/badges.py`) from the code measure of `ninja progress`,
+The README badges and the table in [status.md](status.md#progress) are written by `ninja badges` (`tools/badges.py`) from the code measure of `ninja progress`,
 which equals this report and needs no extra download. The two badge files are committed under `progress/` and
 served by shields.io from the repository (the per-library badges go to the ignored `build/SLUS_213.76/badges/`). The objdiff report (`build/SLUS_213.76/report.json`) stays available for any
 tool that reads it.

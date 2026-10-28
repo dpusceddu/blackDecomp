@@ -1,8 +1,9 @@
 # Contributing
 
-This file is the rulebook for everyone, people and AI agents alike (agents also read [AGENTS.md](AGENTS.md)). A contribution
-is a recovered function, a better type or name, a tool fix or documentation. You need your own copy of the game; set up the
-build with the [README](README.md#get-started). Terms are in the [glossary](docs/glossary.md).
+Contributions use an AI coding agent under human direction. Start with the [README](README.md#contribute-with-an-ai-agent);
+[AGENTS.md](AGENTS.md) defines the session procedure. This file defines the standards for the resulting contribution:
+recovered functions, better types and names, tooling or documentation. The person submitting the pull request remains
+responsible for reviewing its changes and verification. Terms are in the [glossary](docs/glossary.md).
 
 ## Rules
 
@@ -12,9 +13,7 @@ build with the [README](README.md#get-started). Terms are in the [glossary](docs
   objects while iterating and require one full-image `ninja` check printing `OK` for USA retail (`SLUS_213.76`) before
   submitting the final changes for review. Intermediate commits do not require full-image builds. Fix integration failures
   and repeat the check as needed; run an earlier image build when diagnosing a concrete integration problem.
-  Run `python3 tools/check_versions.py` (all five versions) when a
-  change affects binary construction shared by the regional builds, such as binary splitting, section layout, assembly
-  normalization or linking. Helper-only changes (pickers, scratch compilation, configuration writers), docs and tests do
+  Helper-only changes (pickers, scratch compilation, configuration writers), docs and tests do
   not need image rebuilds when they leave committed build inputs and the production build path unchanged; use focused
   regression tests and relevant tool checks instead. A file's location under `tools/build/` alone does not require rebuilds.
 - **No shortcuts.** No filler, padding, byte patches or hand-written assembly to make something match. A per-file compiler
@@ -27,7 +26,7 @@ build with the [README](README.md#get-started). Terms are in the [glossary](docs
   saying what differs; no `#if 0` blocks or other draft macros.
 - **Only real work is committed**: source, drafts, headers, reviewed configuration, docs and tests. Never commit game
   data or anything generated from it (executables, disc contents, `asm/`, `build/`, `data/`, savestates, compilers, build
-  output), nor `progress/` or the progress table of the README (`ninja badges` writes them after merging).
+  output), nor `progress/` or the generated sections of `docs/status.md` (`ninja badges` writes them after merging).
 - **Names, prototypes, types and layouts are reviewed source inputs**: `config/SLUS_213.76/symbols.txt`,
   `include/ps2/prototypes.h`, `include/ps2/recovered_types.h`, `include/<library>/`. Names need evidence (see
   [Naming](#naming)); mark what no matched function confirms `UNVERIFIED`. Scripts may edit these inputs, but review
@@ -40,6 +39,11 @@ build with the [README](README.md#get-started). Terms are in the [glossary](docs
   `src/<library>/inline/`), one file per TU listing every function; headers in `include/<library>/`. Tools are stdlib-first
   Python with a purpose docstring and `--help`. Docs stay short and current; no per-function proof journals.
 - **Commits** are small, coherent and reviewable, with a clear message.
+- **Tests** stay small and focus on complete workflows and costly failures: lost source, incorrect ownership, false
+  progress and broken builds. The byte-identical image check is the main correctness gate. Routine helper changes do
+  not automatically need new tests; add a regression only when it protects a concrete failure the existing checks miss.
+  Prefer real inputs to elaborate mocks; avoid exhaustive helper cases and assertions about internal call sequences.
+- **Compatibility** is not a requirement: remove obsolete options and code paths rather than keeping aliases or shims.
 
 ## Picking and claiming work
 
@@ -54,19 +58,27 @@ drafts with their notes, and for each target its callers, callees, data, an m2c 
 ### Claiming a file
 
 A claim is an open pull request: the files it changes, plus the ones named on a `Claims:` line of its description, are
-claimed. Open a draft pull request when you start (an empty commit is enough), with a line such as
+claimed. Open a draft pull request against `dpusceddu/blackDecomp` when you start (an empty commit is enough), with a line such as
 `Claims: src/game/ai/tu_18c260.c`, and push as you go. `tools/next.py` skips claimed files, and files that your other local
 worktrees change. If two pull requests claim the same file, the lower number keeps it (`python3 tools/next.py claims`). A
 draft without updates for 48 hours lapses: push your work in progress, or comment, to keep it.
+
+The picker stops if it cannot read GitHub claims. In a fork, push the session branch to your writable remote, then use
+`gh pr create --repo dpusceddu/blackDecomp --base main --head OWNER:BRANCH --draft --title "..." --body-file .local/claim.md`.
+The body must include `Claims: ...`, the model identifier, reasoning effort and person directing the work
+(see [PR requirements](#checks-and-pull-requests)). Keep the actual owner, branch and human identity in the PR, not in
+committed documentation. Use `--repo dpusceddu/blackDecomp` for later
+PR commands too. Successfully push and open the claim, then recheck `python3 tools/next.py claims` before source edits;
+if an earlier PR has claimed the file, choose another file. Authentication alone does not prove push access.
 
 ## The matching loop
 
 Each translation unit (TU) is one file that lists the functions it owns in address order: recovered functions in C or C++,
 the others as `INCLUDE_ASM` lines.
 
-1. `python3 tools/setup.py` prepares metadata, assembly and `objdiff.json` without an image build. Open the repository root
-   in the [objdiff](https://github.com/encounter/objdiff) GUI. Saving a TU file rebuilds its object and shows the diff;
-   `ninja build/SLUS_213.76/objdiff/base/<unit>.o` does the same from the shell.
+1. Session setup prepares metadata, assembly and `objdiff.json` without an image build.
+   `ninja build/SLUS_213.76/objdiff/base/<unit>.o` rebuilds one comparison object; use objdiff's CLI to inspect the
+   differences ([commands and report format](docs/progress-reports.md)). A GUI is optional.
 2. Inspect types, callee signatures and object lifetimes; the [matching handbook](docs/matching-handbook.md) has
    diagnostic recipes for common mismatches. A function's assembly is `asm/SLUS_213.76/nonmatchings/<file>/func_XXXXXXXX.s`.
 3. Replace the `INCLUDE_ASM` line with C or C++. `python3 tools/decompile.py func_XXXXXXXX` prints an m2c draft with the
@@ -121,15 +133,17 @@ Choose checks according to the [validation impact rule](#rules). Relevant comman
 ```sh
 ninja                                           # final full-image check: OK for SLUS_213.76
 ninja progress                                  # final verified counts; compare with saved baseline units
-python3 -m unittest discover -s tests           # build and linker tests
-python3 -m unittest discover -s tests/tools     # tool tests
+python3 -m unittest discover -s tests           # workflow and build regressions
 ```
 
 Tests need no game files. To inspect a build: `tools/diffelf.py REF BUILT` diffs two executables, `tools/objdump.py` prints
 an object's sections, symbols and relocations, and the ordinary `mipsel-linux-gnu-objdump` works too.
 
-Whoever opens a pull request is responsible for it: read the diff, run the checks, and say in the description how the change
-was produced (by hand, with tools, or by an AI agent).
+Whoever opens a pull request is responsible for it: read the diff and run the checks. Every PR description, including a
+draft claim, must include `Model:`, `Reasoning effort:` and `Directed by:`. Use the exact configured model identifier and
+reasoning setting when available; write `not exposed` for a setting the harness does not expose, rather than guessing.
+If multiple models or reasoning settings contributed, list each and its role. Keep these fields current as the work
+continues. Agent use is assumed and needs no separate disclosure.
 
 ## Reference
 
@@ -137,7 +151,7 @@ was produced (by hand, with tools, or by an AI agent).
   [docs/units.md](docs/units.md) (TU files and the split list), [docs/naming.md](docs/naming.md), [docs/glossary.md](docs/glossary.md),
   [docs/tools.md](docs/tools.md) (index of the tools), [docs/setup.md](docs/setup.md), [docs/modding.md](docs/modding.md).
 - For maintainers and build work: [docs/build.md](docs/build.md), [docs/pipeline.md](docs/pipeline.md),
-  [docs/tus.md](docs/tus.md), [docs/inputs.md](docs/inputs.md), [docs/progress-reports.md](docs/progress-reports.md),
+  [docs/inputs.md](docs/inputs.md), [docs/progress-reports.md](docs/progress-reports.md),
   [docs/history.md](docs/history.md).
 
 ## License

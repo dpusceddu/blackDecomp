@@ -141,7 +141,7 @@ def main():
         graph.add('progress',['tools/progress.py',slug,'--check'],[progress],shared+[tus,report,str(out/'linked.elf')]+original_asm,console=True)
         graph.add('progress_alias',None,['progress'],[progress])
         badge_files=[str(build/'badges'/(x+'.json')) for x in ('game','kynapse','rw_core','rw_audio','animation','physics','apt','sony','libc')]
-        graph.add('badges',['tools/badges.py',slug,'--no-progress'],badge_files+['progress/code.json','progress/functions.json','README.md','docs/status.md'],
+        graph.add('badges',['tools/badges.py',slug,'--no-progress'],badge_files+['progress/code.json','progress/functions.json','docs/status.md'],
                   [progress]+shared+[tus]+[u['source'] for u in units],generator=True,console=True)
         graph.add('badges_alias',None,['badges'],badge_files)
     write_if_changed(out/'leaf_graph.json',json.dumps(graph.edges,indent=1)+'\n')

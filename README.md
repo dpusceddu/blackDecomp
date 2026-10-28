@@ -1,103 +1,75 @@
 # Black (PS2) decompilation
 
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
-[![Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/code.json)](#progress)
-[![Functions](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/functions.json)](#progress)
+[![Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/code.json)](docs/status.md#progress)
+[![Functions](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/functions.json)](docs/status.md#progress)
 
-A matching decompilation of *Black* (Criterion Games, 2006) for the PlayStation 2: readable C and C++ that the original
-compilers turn back into the exact bytes of the retail game.
+A byte-matching decompilation of *Black* (Criterion Games, 2006): readable C and C++ that compiles back into the exact
+bytes of the original PlayStation 2 executable.
 
-*Black* never had a PC release or a remaster. Its source code would make native ports, mods, new weapons and effects,
-better graphics and preservation possible. This project rebuilds that source, function by function, and proves every step.
+Beyond preservation, we hope to make extensive changes to the game easier to develop and maintain, including projects
+such as a virtual reality mod. Readable source verified against the original executable should provide a rigorous
+foundation for that work, though the practical benefits remain to be demonstrated.
 
-## What exists today
+We target PS2 because its build does not use whole-game optimization: the compiler optimized individual source files
+rather than the entire game together. That lets us reconstruct and verify manageable pieces without first recovering
+the whole game. [Compiler and translation-unit evidence](docs/units.md#recovering-original-translation-units).
 
-- **A byte-identical rebuild.** `ninja` rebuilds the USA executable byte for byte from recovered source plus the assembly
-  of the functions not yet recovered. The other four retail versions rebuild too.
-- **Half of the functions in C and C++.** They have recovered names, structures and classes rather than raw addresses.
-  The [table](#progress) has the numbers per library.
-- **A base for mods now.** The rebuild is *shiftable*: code can grow, shrink or move, and the linker fixes every reference
-  ([docs/modding.md](docs/modding.md)).
+## Contribute with an AI agent
 
-**What "exact" means here.** A function counts only when it is compiled from source with the original compilers (SN
-Systems GCC 2.95 and Sony's EE GCC) and the whole linked executable is still byte-identical. Functions kept as assembly,
-including assembly written by hand, never count. The figures follow [objdiff](https://github.com/encounter/objdiff), the
-measure [decomp.dev](https://decomp.dev) uses, and anyone with the game can reproduce them with `ninja progress`.
+An AI coding agent is the only supported contribution workflow. You provide:
 
-## Progress
+- Your own USA PS2 copy of the game (`SLUS_213.76`), as an ISO or an extracted boot executable.
+- A Linux **x86-64** shell with Git and Python 3, accessible to the agent. Windows users can use WSL 2; on other hosts,
+  run the agent on a Linux x86-64 machine.
+- GitHub CLI (`gh`) authenticated to GitHub, and Git access to push a branch to this repository or your fork and open
+  pull requests here. Set your Git author name and email too.
+- Permission for one-time dependency installation, and network access for tool downloads and GitHub.
 
-<!-- progress:begin (tools/badges.py) -->
+Clone this repository, put your ISO in `orig/`, and open the checkout in your coding agent. Tell it:
 
-| Library | Functions matched | Share | Code matched (bytes) | Share |
-| --- | ---: | ---: | ---: | ---: |
-| game | 3,877 / 6,437 | 60.2 % | 298,092 / 1,453,676 | 20.5 % |
-| kynapse | 1,351 / 1,557 | 86.8 % | 146,764 / 303,420 | 48.4 % |
-| rw_core | 89 / 381 | 23.4 % | 5,140 / 179,516 | 2.9 % |
-| rw_audio | 310 / 674 | 46.0 % | 22,824 / 106,632 | 21.4 % |
-| animation | 259 / 377 | 68.7 % | 33,900 / 76,944 | 44.1 % |
-| physics | 95 / 184 | 51.6 % | 12,056 / 77,680 | 15.5 % |
-| apt | 235 / 705 | 33.3 % | 13,000 / 277,148 | 4.7 % |
-| sony | 321 / 703 | 45.7 % | 15,836 / 140,092 | 11.3 % |
-| libc | 76 / 209 | 36.4 % | 4,084 / 69,952 | 5.8 % |
-| **Total** | **6,613 / 11,227** | **58.9 %** | **551,696 / 2,685,060** | **20.5 %** |
+> Read AGENTS.md and do a work session.
 
-Functions as objdiff counts them: 6,613 of 11,227 (58.9 %); code: 551,696 of 2,685,060 bytes (20.55 %). Image measure (`ninja progress`): 6,613 of 11,899 function starts and 562,776 of 2,715,464 bytes (20.72 %), which includes the 672 orphan pieces and the alignment padding.
+The agent handles setup, claims a file through a draft pull request, recovers and verifies code, and submits its work for
+review. You do not need to choose functions, operate a compiler or learn the build system first. Review the changes and
+the agent's verification report before handing the pull request over.
 
-<!-- progress:end -->
+An extracted executable goes at `orig/SLUS_213.76/SLUS_213.76`. If the ISO lives elsewhere, tell the agent its path; setup
+accepts `--iso PATH`. [Setup reference and troubleshooting](docs/setup.md).
 
-Details of both measures: [docs/progress-reports.md](docs/progress-reports.md). What is hard and what is next:
-[docs/status.md](docs/status.md).
+## How it works
 
-## Get started
+The project already rebuilds the complete executable byte for byte. Functions not yet recovered are assembled from your
+copy of the game; recovered C and C++ gradually replace them in the same build.
 
-You need your own copy of the game (USA, `SLUS_213.76`) and a native Linux x86-64 environment prepared once by the user
-or harness ([docs/setup.md](docs/setup.md)).
+For each claimed file, the agent reads the assembly and its callers, reconstructs types and behavior, and compiles a
+candidate with the original toolchain. [objdiff](https://github.com/encounter/objdiff) compares its instructions and
+relocations with the original. Small object builds make iteration quick; a complete byte-identical rebuild verifies the
+final source changes, including linking and data placement. Unfinished attempts remain drafts, and existing matches
+must be preserved.
 
-```sh
-git clone https://github.com/dpusceddu/blackDecomp.git && cd blackDecomp
-python3 tools/setup.py --provision  # once: native system packages, venv and pinned toolchain
-```
+This is the established matching-decompilation workflow used by projects such as
+[Super Mario 64](https://github.com/n64decomp/sm64), developed long before AI coding agents. Our agents carry out the
+investigation and iteration; the compiler and binary comparisons supply the checks. Matching bytes do not uniquely
+recover the original source text or names, so readable code and evidence for names and types remain part of review.
 
-Add your executable at `orig/SLUS_213.76/SLUS_213.76`, then start each session with:
+See [progress and open problems](docs/status.md), the [contribution standards](CONTRIBUTING.md), and the
+[matching handbook](docs/matching-handbook.md). The rebuild also supports [modifications](docs/modding.md).
 
-```sh
-python3 tools/setup.py
-. .venv/bin/activate
-```
-
-Setup reuses installed dependencies and prepares that session's metadata. Activate the venv again in each fresh shell
-before running further project commands.
-Use the [matching workflow and validation impact rule](CONTRIBUTING.md) for subsequent work.
-`python3 tools/setup.py --build` is available for an explicit full-image setup smoke check.
-
-## Contribute
-
-There are thousands of functions left, from small helpers to the game's core systems.
-
-- **By hand:** [CONTRIBUTING.md](CONTRIBUTING.md) has the workflow (objdiff, claiming a file, naming, commit rules).
-- **With an AI agent:** open your fork in a coding agent and say *"Follow AGENTS.md and do a work session."* The agent
-  picks an unclaimed file with `tools/next.py`, claims it with a draft pull request, matches what it can and hands the
-  pull request over for review. Much of the work so far was done with AI coding agents under human direction; agents
-  follow the same rules and evidence standard as everyone else.
-
-Recovered types and names are as valuable as matches: a correct structure makes every function that uses it easier.
-
-## Legal
-
-This repository contains no game assets and no game code: no disc contents, executables, disassembly or compiler output.
-You need your own copy of the game and extract the executable yourself. The build downloads the third-party compilers from
-their public archives on your machine; they are not redistributed here. The game, its code and its assets belong to their
-owners. The first recovered sources came from the author's earlier, unpublished project
-([docs/history.md](docs/history.md#where-the-first-sources-came-from)).
-
-## License
-
-[CC0 1.0](LICENSE): the contributors' own work here (source, tools, documentation) is dedicated to the public domain.
-
-## Acknowledgments
-
-[splat](https://github.com/ethteck/splat), [spimdisasm](https://github.com/Decompollaborate/spimdisasm),
+We build on [splat](https://github.com/ethteck/splat),
+[spimdisasm](https://github.com/Decompollaborate/spimdisasm),
 [rabbitizer](https://github.com/Decompollaborate/rabbitizer), [m2c](https://github.com/matt-kempster/m2c),
-[decomp-permuter](https://github.com/simonlindholm/decomp-permuter), [objdiff](https://github.com/encounter/objdiff),
-[wibo](https://github.com/decompals/wibo), the [decomp.me compilers](https://github.com/decompme/compilers) archives, and
-the decompilation projects whose methods this one follows ([docs/matching-handbook.md](docs/matching-handbook.md)).
+[decomp-permuter](https://github.com/simonlindholm/decomp-permuter), objdiff,
+[wibo](https://github.com/decompals/wibo), and the [decomp.me compiler archives](https://github.com/decompme/compilers).
+
+## Legal and license
+
+No leaked source code has been used in this project. The reconstructed game source comes from decompilation and reverse
+engineering of game binaries, including the author's [earlier Xbox reconstruction work](docs/history.md#where-the-first-sources-came-from).
+
+You must supply your own copy of the game. Original executables, disc contents, assets, generated disassembly and compiler
+output are excluded from this repository. The build downloads third-party compilers to your machine; they are not
+redistributed here. *Black* and its original assets belong to their respective owners.
+
+The contributors' work here (reconstructed source, tools and documentation) is dedicated to the public domain under
+[CC0 1.0](LICENSE). This dedication does not grant rights to the original game or third-party tools.

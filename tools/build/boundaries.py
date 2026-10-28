@@ -17,7 +17,7 @@ orphan pairs   After the end of a function (`jr $ra` and its delay slot, plus an
                function end and is itself unreferenced; the run stays a function of its own (assembly only). A real
                function may begin with such a pair too (`mtc1 $0, $f1; nop`) and then looks like the last orphan of a run.
                Such starts are listed by hand in config/<GAME_ID>/explicit_boundaries.txt, each behind a `// explicit: <reason>` line
-               (four on USA retail, none on the others); the scan treats them as known function starts, ends the run there,
+               (four on USA retail); the scan treats them as known function starts, ends the run there,
                and the generated file contains them too.
 
 ctor list      The linker's __CTOR_LIST__ in .data (a count word, that many pointers into .text, a zero) holds the address of every

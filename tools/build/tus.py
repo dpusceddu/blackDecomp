@@ -9,7 +9,7 @@
 Everything is computed from the retail image (SLUS_213.76), the split in build/<GAME_ID>/ (run `tools/setup.py` first) and the
 function inventory of the automatic pipeline (build/auto/inventory.json). Nothing here runs an SDK binary.
 
-Signals (docs/tus.md has the findings):
+Signals (docs/units.md has the findings):
   eh        Exception/unwind frames in .data. Each object file compiled with exceptions has one CIE and one FDE per function
             (the CIE of an object with a .gcc_except_table carries the address of its table). The FDEs of a group are
             contiguous in .text, so a group is exactly one object file, or in the link-once area one inline-function section.
@@ -21,8 +21,6 @@ Signals (docs/tus.md has the findings):
             and statics (.bss, .sbss, .sdata, .data) whose linker order is violated by functions in between (inversions).
   calls     Call edges and data items shared by neighbouring functions.
   orphan    Unreferenced `<instruction>; nop` pieces between functions (boundaries.py).
-  shift     Functions whose code differs between USA and the PAL/Korean/Japanese builds only in immediates.
-  xbuild    Adjacency of functions in the USA beta and demo builds.
 """
 import argparse, bisect, collections, json, re, struct, sys
 from itertools import accumulate
@@ -34,7 +32,6 @@ import boundaries
 
 ROOT = Path(__file__).resolve().parents[2]
 SLUG = 'SLUS_213.76'
-BETA, DEMO = 'SLUS_000.00', 'SLUS_291.80'   # earlier USA builds, kept only in the disc survey (orig/survey/)
 CIE_SIMPLE = bytes.fromhex('100000000000000001000178400c1d0009401f00')
 DATA_SECTIONS = ('.rodata', '.lit4', '.gcc_except_table', '.data', '.sdata', '.sbss', '.bss')
 HARD_SECTIONS = ('.rodata', '.lit4', '.gcc_except_table')
@@ -386,65 +383,6 @@ class Relations:
                     out.edges[kind].append((a, b))
         out.cover = {k: list(accumulate(v)) for k, v in out.arr.items()}
         return out
-
-
-# ---------------------------------------------------------------------------------------------------------- cross-build signals
-def build_signals(img):
-    """Adjacency of USA-retail functions in the other builds, from 12-word shingles of immediate-masked code.
-    Returns {slug: {gap word index: 'cont'|'break'}} for the beta and demo, and {function index: 'same'|'shifted'|'other'}
-    for the PAL/Korean/Japanese builds (shifted = identical apart from immediates such as struct offsets)."""
-    from inputs import mask_text
-    K = 12
-    cache = ROOT / 'build' / img.slug / 'tus_xbuild.json'
-    if cache.exists():
-        return json.loads(cache.read_text())
-    rs, rl = mask_text(list(img.words))
-    out = {'adjacency': {}, 'shift': {}}
-    for slug in (BETA, DEMO, 'SLES_540.30', 'SLES_538.86', 'SLKA_253.72', 'SLPM_663.54'):
-        path = ROOT / 'orig' / slug / slug
-        if not path.exists():       # beta and demo executables come from the disc survey (tools/maint/discs.py)
-            path = ROOT / 'orig/survey' / slug / 'files' / slug
-        if not path.exists():
-            continue
-        e = Elf(path.read_bytes())
-        t = e.section('.text')
-        ow = struct.unpack('<%dI' % (t['size'] // 4), e.content(t))
-        os_, ol = mask_text(list(ow))
-        hb, dup = {}, set()
-        for j in range(len(ol) - K + 1):
-            h = hash(tuple(ol[j:j + K]))
-            if h in hb:
-                dup.add(h)
-            else:
-                hb[h] = j
-        ha = collections.Counter(hash(tuple(rl[i:i + K])) for i in range(len(rl) - K + 1))
-        m = {}
-        for i in range(len(rl) - K + 1):
-            h = hash(tuple(rl[i:i + K]))
-            if ha[h] == 1 and h in hb and h not in dup:
-                m[i] = hb[h]
-        if slug in (BETA, DEMO):
-            adj = {}
-            for i in img.real[1:]:
-                w = (img.F[i] - img.tbase) >> 2
-                left = next(((m[j], j) for j in range(w - K, max(w - K - 48, -1), -1) if j in m), None)
-                right = next(((m[j], j) for j in range(w, w + 48) if j in m), None)
-                adj[str(w)] = 'unk' if not left or not right else 'cont' if left[0] - left[1] == right[0] - right[1] else 'break'
-            out['adjacency'][slug] = adj
-        else:
-            sh = {}
-            for i in range(img.N):
-                a, b = (img.F[i] - img.tbase) >> 2, (img.END[i] - img.tbase) >> 2
-                diag = next((m[j] - j for j in range(a, max(a + 1, b - K + 1)) if j in m), None)
-                if diag is None or a + diag < 0 or b + diag > len(ow):
-                    sh[str(i)] = 'other'
-                    continue
-                same = all(ow[a + diag + k] == img.words[a + k] or os_[a + diag + k] == rs[a + k] for k in range(b - a))
-                loose = all(ol[a + diag + k] == rl[a + k] for k in range(b - a))
-                sh[str(i)] = 'same' if same else 'shifted' if loose else 'other'
-            out['shift'][slug] = sh
-    cache.write_text(json.dumps(out))
-    return out
 
 
 # ---------------------------------------------------------------------------------------------------------- segmentation
@@ -845,14 +783,14 @@ def write_map(img, tus, libs_found, path):
             d['data'] = {k: rng(lo, hi) for k, (lo, hi) in t['data'].items()}
         out.append(d)
     doc['tus'] = out
-    text = '# TU map of the retail image, generated by tools/build/tus.py (see docs/tus.md). Generated, not committed: change the evidence\n' \
+    text = '# TU map of the retail image, generated by tools/build/tus.py (see docs/units.md). Generated, not committed: change the evidence\n' \
            '# rules or config/tus_overrides.yaml and run `python3 tools/build/tus.py map`.\n'
     text += yaml.safe_dump(doc, sort_keys=False, default_flow_style=None, width=200)
     Path(path).write_text(text)
 
 
 # ---------------------------------------------------------------------------------------------------------- evidence report
-def gap_signals(img, rel, libs, xb):
+def gap_signals(img, rel, libs):
     """Boolean signals per gap position of img.real (before the link-once area)."""
     R, n = img.real, len(img.real)
     linkpos = next(p for p in range(n) if img.F[R[p]] >= img.linkonce_start)
@@ -878,12 +816,6 @@ def gap_signals(img, rel, libs, xb):
         if last is not None and last[1] != st[p]:
             sig['style_change'].update(range(last[0] + 1, p + 1))
         last = (p, st[p])
-    for slug in xb['adjacency']:
-        adj = xb['adjacency'][slug]
-        sig['break_' + ('beta' if slug == BETA else 'demo')] = {p for p in P if adj.get(str((img.F[R[p]] - img.tbase) >> 2)) == 'break'}
-    sh = xb['shift'].get('SLKA_253.72', {})
-    sig['shift_change'] = {p for p in P if sh.get(str(R[p - 1])) in ('same', 'shifted') and sh.get(str(R[p])) in ('same', 'shifted')
-                           and sh.get(str(R[p - 1])) != sh.get(str(R[p]))}
     return sig, linkpos
 
 
@@ -894,8 +826,7 @@ def pct(a, b):
 def validate(img, out=print):
     rel = Relations(img)
     libs = detect_libs(img)
-    xb = build_signals(img)
-    sig, linkpos = gap_signals(img, rel, libs, xb)
+    sig, linkpos = gap_signals(img, rel, libs)
     n = len(img.real)
     allgaps = set(range(1, linkpos))
     truth = sig['eh_cut'] | sig['ctor_end']
@@ -951,13 +882,7 @@ def validate(img, out=print):
     out('   -> orphan runs are %s likely inside an object that is certainly one object as at an isolated gap: they do not mark boundaries.'
         % ('as' if abs(len(sig['join_hard'] & sig['orphan_run']) / max(len(sig['join_hard']), 1) - len(sig['isolated'] & sig['orphan_run']) / max(len(sig['isolated']), 1)) < 0.02 else 'not as'))
     out('')
-    out('5. Cross-build and style signals: rate at certain boundaries vs inside objects')
-    for name in [k for k in sig if k.startswith('break_') or k in ('shift_change', 'style_change', 'lib_change')]:
-        g = sig[name]
-        out('   %-14s at boundaries %s (%d of %d)   inside unwind groups %s (%d of %d)' % (
-            name, pct(len(g & truth), len(truth)), len(g & truth), len(truth), pct(len(g & inside), len(inside)), len(g & inside), len(inside)))
-    out('')
-    out('6. Alignment: address of the first function of known objects vs the first function after a gap inside an object')
+    out('5. Alignment: address of the first function of known objects vs the first function after a gap inside an object')
     for m in (16, 32, 64, 128):
         starts = [img.F[img.real[p]] for p in truth]
         inner = [img.F[img.real[p]] for p in inside]
@@ -965,7 +890,7 @@ def validate(img, out=print):
             m, pct(sum(1 for a in starts if a % m == 0), len(starts)), len(starts), pct(sum(1 for a in inner if a % m == 0), len(inner)), len(inner)))
     out('   .text between functions: the original assembler/linker pad to 8 only (no larger steps at object starts); .data frames start at 4')
     out('')
-    out('7. Library hulls (functions that use a library string; style of the functions in the hull)')
+    out('6. Library hulls (functions that use a library string; style of the functions in the hull)')
     for name, v in sorted(libs.items(), key=lambda kv: kv[1]['lo']):
         fs = [i for i in img.real if v['lo'] <= i <= v['hi']]
         st = collections.Counter(img.style[i] for i in fs)

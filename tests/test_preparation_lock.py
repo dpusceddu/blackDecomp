@@ -6,7 +6,7 @@ import sys
 import tempfile
 import unittest
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 WORKER = '''
 import sys
 sys.path.insert(0, sys.argv[1])

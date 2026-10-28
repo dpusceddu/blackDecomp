@@ -5,7 +5,7 @@ import sys
 import tempfile
 import time
 import unittest
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]/'tools/build'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]/'tools/build'))
 from assembler import run_tool
 
 

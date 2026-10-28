@@ -151,8 +151,7 @@ def _inputs(slug, units=None):
 
 
 def load_units(path=None, variant=None, refresh=False, facts=True):
-    """Units of the version (default SLUS_213.76), cached in build/<slug>/units.json. The addresses are those of the USA
-    retail image: another `variant` has no split list and no units."""
+    """USA source units, cached in build/SLUS_213.76/units.json; addresses refer to the retail executable."""
     slug = variant or DEFAULT_SLUG
     split_list = S.config_dir(slug) / 'splits.yaml'
     if not split_list.exists():

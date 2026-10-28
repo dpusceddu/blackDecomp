@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the self-hosted progress badges (progress/), the per-library table of the README and the source facts of docs/status.md.
+"""Write the self-hosted progress badges (progress/) and the progress table and source facts in docs/status.md.
 
 Metric source: `tools/progress.py --libraries`, which computes objdiff's definition of code, matched function bytes /
 total function bytes, from the function extents tools/objdiff.py uses (no padding, no orphan pieces). The figures need only
@@ -11,9 +11,9 @@ numbers that disagree with it. Libraries are by address (tools/build/layout.py);
 Usage: badges.py [SLUG]       runs progress.py (default SLUS_213.76 only), then writes
          progress/code.json, progress/functions.json   shields.io endpoint files (share of code bytes / of functions)
          build/<GAME_ID>/badges/<library>.json        the same for one library (ignored)
-       and refreshes the table and the two measures between the progress markers of README.md and the facts about the
+       and refreshes the table and the two measures between the progress markers of docs/status.md and the facts about the
        sources between the facts markers of docs/status.md. Every progress number in the documentation comes from here.
-Maintainer tool: contributors do not commit progress/ or these two files (the maintainer regenerates them after merging, so
+Maintainer tool: contributors do not commit progress/ or the generated status sections (the maintainer regenerates them after merging, so
 pull requests never conflict on them). The output has no timestamps, so an unchanged progress leaves Git clean.
 """
 import sys as _sys
@@ -147,19 +147,14 @@ def main():
     dump(out / 'functions.json', badge('functions', pct(total['matched_functions'], total['functions'])))
     for name, r in libs.items():
         dump(libraries / ('%s.json' % name), badge(name, pct(r['matched_bytes'], r['bytes'])))
-    readme = ROOT / 'README.md'
-    new = replace_between(readme.read_text(), md)
-    if new is None:
-        print('note: README.md has no progress markers; table not updated', file=sys.stderr)
-    else:
-        write_if_changed(readme, new)
     status = ROOT / 'docs' / 'status.md'
-    if status.exists():
-        new = replace_between(status.read_text(), source_facts(slug), FACTS_BEGIN, FACTS_END)
-        if new is None:
-            print('note: docs/status.md has no facts markers; facts not updated', file=sys.stderr)
-        else:
-            write_if_changed(status, new)
+    new = replace_between(status.read_text(), md)
+    if new is None:
+        raise SystemExit('docs/status.md has no progress markers; cannot publish progress')
+    new = replace_between(new, source_facts(slug), FACTS_BEGIN, FACTS_END)
+    if new is None:
+        raise SystemExit('docs/status.md has no facts markers; cannot publish source facts')
+    write_if_changed(status, new)
     print('code %.1f %%  functions %.1f %%  (%d/%d functions, %d/%d bytes)' % (
         pct(total['matched_bytes'], total['bytes']), pct(total['matched_functions'], total['functions']),
         total['matched_functions'], total['functions'], total['matched_bytes'], total['bytes']))

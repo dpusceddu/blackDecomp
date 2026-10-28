@@ -5,20 +5,20 @@ generated.** Files here are reviewed source inputs, edited manually or with scri
 matched entries to `splits.yaml` and `symbols.txt`. The production build does not write this directory. Derived outputs go
 through `ninja` into ignored `build/` and are never committed (list at the end).
 
-## Shared by all versions
+## Project configuration
 
 | File | What it is |
 | --- | --- |
-| `versions.json` | The five supported releases: region, boot executable name, executable and disc image hashes |
+| `versions.json` | USA retail input metadata: boot executable name, executable and disc image hashes |
 | `tus_overrides.yaml` | Reviewed corrections that `tools/build/tus.py map` applies on top of its evidence when `ninja` generates the translation-unit map |
 | `toolchain-compilers.json` | Pinned compiler archives (URLs, SHA-256) that `tools/toolchain.py` downloads |
 | `toolchain-assemblers.json` | Pinned assembler hashes, including the patched `ps2eeas` |
 | `toolchain-binutils.json` | Pinned Debian binutils packages for MIPS |
 | `toolchain-local.json` | Pinned `wibo` release used to run the Windows tools |
 
-## Per version, `config/<GAME_ID>/`
+## USA build inputs, `config/SLUS_213.76/`
 
-Every version has `checksums.sha256`. Only `SLUS_213.76` has recovered source, so only it has the rest.
+These files describe the USA retail executable and its recovered source.
 
 | File | What it is |
 | --- | --- |
@@ -48,8 +48,6 @@ Every version has `checksums.sha256`. Only `SLUS_213.76` has recovered source, s
 | `build/auto/inventory.json` | `tools/build/inventory.py` | TU map and progress |
 | `build/classes/include/` | `tools/maint/class_skeletons.py` (explicit class-recovery command; see docs/pipeline.md) | reference when writing a class view |
 | `build/SLUS_213.76/badges/` | `tools/badges.py` | nothing (the two committed files in `progress/` are what the README reads) |
-
-The survey of the disc images (`tools/maint/inputs.py`) writes its dump to `build/survey/` and `.local/`.
 
 The active build's `graph.json`, source-stage inventories (`prepare/*.json`) and per-edge I/O contracts (`io/*.json`) make
 these dependencies explicit. Run `python3 tools/build/check_graph.py --ninja` to check them. Depfiles and Ninja's own state

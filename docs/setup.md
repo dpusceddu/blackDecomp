@@ -1,116 +1,74 @@
-# Setup in detail
+# Setup reference
 
-The short version is in the [README](../README.md#get-started). This page covers versions, one-time native provisioning,
-session preparation and binutils.
-
-## Versions
-
-Each version is identified by the game ID of its boot executable (`SYSTEM.CNF`, `BOOT2`).
-
-| Game ID | Region | SHA-256 of the executable | Rebuild matches | Recovered source |
-| --- | --- | --- | --- | --- |
-| `SLUS_213.76` | USA | `141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c` | yes | see the [README](../README.md#progress) |
-| `SLES_538.86` | Europe | `bbed3444a22d28b7fdc641e15a1759b6ece1c9cbc5a13331586025ff8fc2b948` | yes, from assembly | none yet |
-| `SLES_540.30` | Europe, Australia | `7e6f25966389656a9bdc534c2514a3a56f205054ee66b43c27a18b111add309f` | yes, from assembly | none yet |
-| `SLKA_253.72` | Korea | `fb59440b00444ff64be1436fd757452c3eead9e560532fad74e4d05e913a6b94` | yes, from assembly | none yet |
-| `SLPM_663.54` | Japan | `bf70d92152237eae6908e973d44dde8ce49d9e7e32b34e9b7ad41f79ad569f43` | yes, from assembly | none yet |
-
-"Rebuild matches" means `ninja` reproduces the executable byte for byte. `SLUS_213.76` is the only version with recovered
-source and the only one that routine work builds, measures and checks. The other four are rebuilt from their own assembly
-and are checked before releases (`python3 tools/check_versions.py` configures and builds all five and prints `OK` or
-`MISMATCH` for each); their configurations stay committed. Source units are written for the USA version.
+The supported contribution workflow is in the [README](../README.md#contribute-with-an-ai-agent).
+[AGENTS.md](../AGENTS.md) owns the session procedure; this page covers environment preparation and troubleshooting.
 
 ## Native Linux, prepared once
 
-Run decompilation sessions on Linux x86-64 with a Python virtual environment and the pinned toolchain. The compilers are
-Windows programs run through [wibo](https://github.com/decompals/wibo) and 32-bit Linux programs; a Python venv on macOS
-cannot supply that Linux runtime.
+Use Linux x86-64 with Git and Python 3. Windows users can use WSL 2; other hosts need a Linux x86-64 machine accessible
+to the agent. The pinned compilers include Windows programs run through [wibo](https://github.com/decompals/wibo) and
+32-bit Linux programs. A macOS venv does not provide that runtime.
 
-### One-time provisioning (user or harness)
-
-With Python 3 and Git available, clone the repository on the Linux machine and run:
+With permission to install dependencies, the user or harness runs:
 
 ```sh
 python3 tools/setup.py --provision
 ```
 
-This explicit provisioning mode installs system packages using apt-get on Debian/Ubuntu or dnf on Fedora (sudo when
-needed), prepares `.venv` or the active Python environment, installs the pinned compiler/assembler tools and objdiff-cli,
-and verifies that the native MIPS linker supports `elf32ltsmip`. It does not need game files, prepare session metadata or
-build an image. Provide Git/GitHub access for later sessions.
-Re-run provisioning when the system prerequisites or pinned Python requirements change.
+Provisioning installs system packages through apt-get on Debian/Ubuntu or dnf on Fedora (sudo when needed), prepares
+`.venv` or the active Python environment, installs the pinned toolchain and objdiff-cli, and checks that the native
+MIPS linker supports `elf32ltsmip`. It needs no game files or GitHub login and builds no image. Re-run it when system
+prerequisites or pinned requirements change.
 
-System prerequisites are Ninja, Git, xz, cpp, Python with venv/pip support, the 32-bit Linux loader, and GNU MIPS binutils
-with little-endian linking support. Other Linux distributions can install those prerequisites manually. Debian/Ubuntu's
-package is `binutils-mipsel-linux-gnu`; Fedora's is `binutils-mips64-linux-gnu`. Setup and the toolchain recognize both
-prefixes automatically. `BLACK_BINUTILS_PREFIX` can select an explicitly provisioned compatible toolchain.
+Other distributions must provide Ninja, Git, GitHub CLI (`gh`), xz, cpp, Python with venv/pip support, the 32-bit Linux
+loader, and GNU MIPS binutils. Setup recognizes `mipsel-linux-gnu-` (Debian/Ubuntu) and `mips64-linux-gnu-` (Fedora);
+`BLACK_BINUTILS_PREFIX` selects another compatible installation.
 
-GNU binutils 2.40 is the tested linker version. A distribution package with another version still has to pass the final
-byte-identical image check. To install that version separately, build GNU binutils 2.40 with `--target=mipsel-linux-gnu`
-and put its tools on PATH (or set `BLACK_BINUTILS_PREFIX`). The decompals `binutils-mips-ps2-decompals` prebuilt cannot link
-this executable: its linker has no little-endian MIPS emulation.
+GNU binutils 2.40 is the tested linker. Other versions must still pass the final byte-identical image check. A separate
+2.40 installation can use `--target=mipsel-linux-gnu` and PATH or `BLACK_BINUTILS_PREFIX`. The decompals
+`binutils-mips-ps2-decompals` prebuilt lacks the required little-endian linker emulation.
 
-### Normal agent sessions
+The Dockerfile and `tools/container.py` are deployment references for harnesses explicitly supplied that way. Ordinary
+sessions use their provided Linux shell and do not manage containers.
 
-Start the agent on the prepared Linux host, with its command and file tools using the same workspace. Add the boot
-executable of your own copy as `orig/SLUS_213.76/SLUS_213.76`, then run:
+## Game input
+
+Put one USA retail ISO in `orig/`, or pass its path:
 
 ```sh
-python3 tools/setup.py
-. .venv/bin/activate
-python3 tools/next.py --pick
+python3 tools/setup.py --iso /path/to/your/game.iso
 ```
 
-Activate the venv before further project commands, repeating activation in each fresh shell. Setup creates or links
-the worktree's `.venv`; creating a worktree does not activate it automatically.
+Setup reads `SYSTEM.CNF`, identifies the boot executable, checks that it is USA retail (`SLUS_213.76`), and verifies its
+SHA-256 against `config/versions.json` before saving `orig/SLUS_213.76/SLUS_213.76`. It extracts no assets, preserves the
+ISO, and refuses to overwrite an existing different executable. With multiple ISOs in `orig/`, pass `--iso` explicitly.
+Only uncompressed ISO images are auto-detected; unpack compressed archives first.
 
-Normal setup never invokes a system package manager or a container runtime. It creates `.local/` for session notes,
-reuses installed dependencies and prepares assembly, the TU map and `objdiff.json` without compiling all objects or linking
-an image. Existing local worktrees can share `.venv`, the pinned toolchain and game inputs with the main checkout;
-generated build outputs stay local to each checkout. Missing system prerequisites produce the one-time provisioning
-instruction for the user or harness.
+An already extracted boot executable at that path works too and is verified on each setup. A valid existing executable
+takes precedence over auto-detected ISOs. Game inputs and generated files remain ignored by Git. See [game input](inputs.md) for the expected executable metadata.
 
-Setup serializes metadata preparation across linked worktrees of the same Git repository; a cold or refreshed
-recovery context uses the same lock, while a valid cached context does not wait. Other repositories and ordinary
-matching builds remain independent. The lock coordinates these tools only, and does not limit manually launched
-preparation commands. If a setup process is forcibly killed, its child processes may continue after its lock is released.
+## GitHub access
 
-Follow the [validation impact rule](../CONTRIBUTING.md#rules) during matching. `--build` is available for an explicit setup
-smoke check; `--no-build` remains a compatibility alias for normal preparation. A successful image check prints:
+Authenticate `gh` for github.com and configure a Git author name and email. `python3 tools/github.py` checks Git identity,
+GitHub authentication and read access to `dpusceddu/blackDecomp`. Normal setup runs these checks before preparing metadata.
+They do not establish push permission: the agent must successfully push its branch and open its draft claim before editing.
 
-```
-OK  SLUS_213.76  SLUS_213.76  sha256 141b05209570458af9c8e27ab1911f258da6353909d813cd572df026254ffe4c
-```
+The picker always reads claims from `dpusceddu/blackDecomp`, including in forks. A deliberate `--repo OWNER/NAME` override
+is available for separate projects. Pull requests for this project must explicitly target the main repository, as described
+in [claiming a file](../CONTRIBUTING.md#claiming-a-file). If claims cannot be read, selection stops.
 
-A mismatch report identifies what needs fixing. Select other retail versions with `python3 configure.py --version GAME_ID`;
-`python3 tools/check_versions.py` checks all five.
+## Session preparation
 
-### Other host environments
+Normal `python3 tools/setup.py` reuses the environment, checks contribution access and game input, and prepares assembly,
+the TU map and `objdiff.json` without compiling all objects or linking. It never invokes a system package manager.
+Activate the selected venv before further commands, including in each fresh shell; the checkout default is
+`. .venv/bin/activate`. An already active environment takes priority.
 
-Windows users can prepare a Linux x86-64 environment in WSL 2. On other hosts, provision a native Linux machine and run
-the agent there. Do not select or create a container merely because a prepared image is available.
+Linked worktrees can share `.venv`, the pinned toolchain and extracted game inputs with the main checkout; generated
+outputs remain local. Metadata preparation is serialized across linked worktrees. Ordinary matching builds and other
+repositories remain independent. A forcibly killed setup process can leave children running after its lock is released.
 
-The Dockerfile and `tools/container.py` remain optional deployment references for a harness that explicitly supplies its
-execution environment that way. They are outside the selected native workflow; ordinary agents do not manage container
-lifetimes, mounts, user mappings or exec prefixes.
-
-## Repository layout
-
-```
-configure.py          writes build.ninja (and picks the version)
-config/<GAME_ID>/     per-version expected SHA-256; SLUS_213.76 also has splits.yaml (source files, address ranges, flags), symbols.txt
-                      (names), libraries.txt (which library each stretch of .text is), explicit boundaries; the splat
-                      configuration, ELF layout, TU map and the like are generated into build/ (config/README.md)
-config/               versions.json, tus_overrides.yaml, toolchain pins, shared data
-orig/<GAME_ID>/       your executable goes here (ignored by Git)
-src/<library>/        (src/game/ has subsystem directories) one file per translation unit: recovered functions as C/C++, the rest as INCLUDE_ASM lines, drafts in
-                      #ifdef NON_MATCHING blocks (game, kynapse, animation, physics, rw_core, rw_audio, apt, sony, libc);
-                      compiler-emitted inline and template copies are in src/<library>/inline/ (docs/build.md#link-once-copies)
-include/<library>/    headers per library, include/ps2/ for helpers shared by all
-tools/                the everyday tools (decompile, where, split_function, objdiff, progress, toolchain, ...); tools/build/ (internals `ninja` runs),
-                      tools/pipeline/ (automatic pipeline), tools/maint/ (maintainer and analysis)
-progress/             the two badge files the README reads, written by `ninja badges` (the maintainer commits them)
-docs/                 build, translation unit files and split list, pipeline, TU map, matching handbook, status, history
-tests/                tests that need no game files
-asm/ build/ data/     generated (asm/<GAME_ID>/nonmatchings/ holds the assembly of every function), ignored
-```
+`--build` additionally builds and verifies the full image.
+The final image check prints `OK` and its SHA-256. Missing prerequisites report the provisioning command; missing GitHub
+access or unsuitable game input gives an actionable error. Follow the [validation impact rule](../CONTRIBUTING.md#rules)
+for subsequent work.

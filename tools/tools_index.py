@@ -17,10 +17,10 @@ OUTPUT = ROOT / 'docs' / 'tools.md'
 
 SECTIONS = [
     ('Everyday tools: working on a function', [
-        'setup.py', 'next.py', 'brief.py', 'decompile.py', 'objdiff.py', 'trysrc.py', 'autodecomp.py', 'where.py', 'split_function.py', 'relocate_sources.py', 'permuter/prepare.py', 'permuter/cc.py',
+        'setup.py', 'github.py', 'next.py', 'brief.py', 'decompile.py', 'objdiff.py', 'trysrc.py', 'autodecomp.py', 'where.py', 'split_function.py', 'relocate_sources.py', 'permuter/prepare.py', 'permuter/cc.py',
         'permuter/as.py', 'permuter/import.py', 'permuter/abi.py']),
     ('Everyday tools: build, check and progress', [
-        'toolchain.py', 'compile.py', 'check_versions.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',
+        'toolchain.py', 'compile.py', 'check_elf.py', 'diffelf.py', 'objdump.py', 'progress.py',
         'badges.py', 'tools_index.py']),
     ('Optional environment provisioning (user or harness)', ['container.py']),
     ('Build internals (`tools/build/`)', [
@@ -36,7 +36,7 @@ SECTIONS = [
         'pipeline/compiler_dumps.py']),
     ('Maintainer and analysis tools (`tools/maint/`)', [
         'maint/class_skeletons.py', 'maint/rtti_evidence.py',
-        'maint/shift_test.py', 'maint/handbook_controls.py', 'maint/symbols.py', 'maint/discs.py', 'maint/iso.py', 'maint/inputs.py']),
+        'maint/shift_test.py', 'maint/handbook_controls.py', 'maint/iso.py']),
 ]
 NOTES = {
     'check_elf.py': 'Build check, run by `ninja`.',

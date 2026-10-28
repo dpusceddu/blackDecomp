@@ -4,7 +4,7 @@ One line per term. Longer explanations are in the files linked at the end of eac
 
 **TU** (translation unit): the source file (and its headers) that one compiler run turned into one object of the original
 program. The TU map (`build/SLUS_213.76/tus.yaml`, written by `ninja tus`) is our estimate of the original TUs; our source files
-follow it where the evidence allows. [tus.md](tus.md)
+follow it where the evidence allows. [units.md](units.md#recovering-original-translation-units)
 
 **split**: an entry of `config/SLUS_213.76/splits.yaml`: a source file, the address range of the functions it owns, and the
 compiler flags. Every function is owned by exactly one split. [units.md](units.md)
@@ -17,7 +17,7 @@ original bytes (yet); its `#else` branch keeps the `INCLUDE_ASM` line, so the no
 function in such a block is a *draft*; a function without an `INCLUDE_ASM` marker is *exact*. [CONTRIBUTING.md](../CONTRIBUTING.md)
 
 **exact / draft**: the two evidence levels of a function: byte-identical in the full image, or a readable draft that is not.
-[status.md](status.md)
+[CONTRIBUTING.md](../CONTRIBUTING.md#rules)
 
 **orphan piece**: an eight-byte `<one instruction>; nop` fragment between two functions. It is not code of either neighbour,
 stays assembly, and is not a function in the objdiff count. [build.md](build.md#objects-and-includes)
@@ -30,14 +30,14 @@ and live in `src/<library>/inline/`. [build.md](build.md#link-once-copies)
 modified (the base for modding), not only reproduced. [build.md](build.md#objects-and-includes)
 
 **SN 1.36**: the compiler of the game, SN Systems' build 1.36 of GCC 2.95.3 for the EE (`ee-gcc2.95.3-136`); run with
-`-O2 -G0 -snas`. [status.md](status.md#toolchain-facts)
+`-O2 -G0 -snas`. [build.md](build.md#toolchain-facts)
 
 **-snas**: the compiler option that makes the SN driver write the object with SN's own assembler (Ps2EeAs) instead of passing
-the assembly to GNU `as`. [status.md](status.md#toolchain-facts)
+the assembly to GNU `as`. [build.md](build.md#toolchain-facts)
 
 **sn-min6**: a per-unit assembler recipe: a two-byte patched copy of Ps2EeAs 1.9.25.758 that pads short backward-branch loops
 to six words. It reproduces the bytes of the units that use it; it is not a recovered rule about the original build.
-[tus.md](tus.md#assemblers-and-short-loop-padding)
+[units.md](units.md#assemblers-and-short-loop-padding)
 
 **objdiff code measure**: the headline figure of the README: matched function bytes divided by total function bytes, as objdiff
 measures them (padding and orphan pieces excluded); it equals `ninja report`. [progress-reports.md](progress-reports.md)

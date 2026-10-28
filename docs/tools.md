@@ -12,6 +12,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | Tool | Purpose |
 | --- | --- |
 | `tools/setup.py` | Prepare the environment, assembly and objdiff metadata for a matching session; optionally verify the full image. |
+| `tools/github.py` | Check Git identity and GitHub access for contribution sessions against the main repository. |
 | `tools/next.py` | Best next work: the source files to claim next, and analyses from the automatic pipeline's results (build/auto.json). |
 | `tools/brief.py` | Everything a work session needs about one source file, in one printout, so that it can start writing C at once. |
 | `tools/decompile.py` | Friendly front door for one function: an m2c draft, ready to replace its INCLUDE_ASM line, and where to put it. |
@@ -33,12 +34,11 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | --- | --- |
 | `tools/toolchain.py` | Local build toolchain: download, verify and unpack the pinned compilers, assemblers and wibo. |
 | `tools/compile.py` | Compile one source with a pinned local compiler (Linux x86-64). |
-| `tools/check_versions.py` | Rebuild every supported version and print OK or MISMATCH for each; run for releases or shared binary-construction changes. |
 | `tools/check_elf.py` | Compare a rebuilt executable with the target hash in config/<GAME_ID>/checksums.sha256. Build check, run by `ninja`. |
 | `tools/diffelf.py` | Compare two ELF files section by section (a debugging aid for the identical rebuild). Convenience script; binutils `readelf` and `objdump` work too. |
 | `tools/objdump.py` | Print the sections, symbols and relocations of a relocatable ELF object (reads the file only). Convenience script; binutils `mipsel-linux-gnu-objdump` and `readelf` work too. |
 | `tools/progress.py` | Report how much of .text is provided by compiled source, overall and by library. |
-| `tools/badges.py` | Write the self-hosted progress badges (progress/), the per-library table of the README and the source facts of docs/status.md. |
+| `tools/badges.py` | Write the self-hosted progress badges (progress/) and the progress table and source facts in docs/status.md. |
 | `tools/tools_index.py` | Regenerate docs/tools.md, the index of the tools, from the docstring of every tool. |
 
 ## Optional environment provisioning (user or harness)
@@ -110,8 +110,5 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/maint/rtti_evidence.py` | Recover legacy GCC RTTI initialization evidence without executing target code. |
 | `tools/maint/shift_test.py` | Audit relocation movement in an edited build using the linked symbol address map. |
 | `tools/maint/handbook_controls.py` | Verify handbook recipes with isolated SN 1.36 retail controls and perturbations. |
-| `tools/maint/symbols.py` | Dump symbols and debug data from every ELF kept under orig/ and estimate transfer to USA retail. |
-| `tools/maint/discs.py` | Phase 0: unpack each disc image one at a time and keep only executables and debug candidates. |
 | `tools/maint/iso.py` | Minimal ISO 9660 reader for plain ISO (2048) and raw CD images (MODE1/MODE2, 2352). |
-| `tools/maint/inputs.py` | Phase 0 triage of every procured disc variant (run tools/maint/discs.py first). |
 

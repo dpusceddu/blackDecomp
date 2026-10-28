@@ -13,6 +13,19 @@ ninja report
 python3 tools/progress.py --check
 ```
 
+## Toolchain facts
+
+| Piece | Choice |
+| --- | --- |
+| Compilers | `ee-gcc2.95.3-136` (SN build 1.36) with `-O2 -G0 -snas` for game, Kynapse, animation, physics, RenderWare Core/Audio, apt, libc stdio; `ee-gcc2.9-991111-01 -O2 -G0` (SN driver, GNU assembler) for the Sony libraries (`sd` saves: libipu/libmpeg, libdbc, libdma, libm, libcdvd, libmc2, libkernl, libstdc++ type info, libgs) |
+| Scoped scalar exception | three audio getters use Sony `ee-gcc2.96` with `-mno-handle-ee-div-pipeline-bug`; measured divide controls scope this choice without identifying the original whole-TU compiler |
+| Per-TU flag variants | `-O1`, `-G8` where gp-relative small data is used, `-fno-schedule-insns`, `-fbyte-bool`, `-fno-rtti`, `-x c++`, `-ffunction-sections` (merged TUs), `-mvu0-use-vf0-vf31` / `-vf16` (VU0 inline helpers) |
+| Assemblers | untouched compiler assembler (`-snas`) by default; `--assembler=sn-min6` (hash-guarded derivative of Ps2EeAs 1.9.25.758 that pads short loops to six words, reproduced by `tools/build/patch_ps2eeas.py`) on verified units only; `gas-2.40`, `gas-2.40-fix`, `sony-2.9`, `sn-2.73a` are explicit experiments. The splits that select `assembler: sn-min6` in `config/SLUS_213.76/splits.yaml` use it because it reproduces their bytes, not because a recovered rule says the original used it: treat that choice as weak evidence ([open problem 4](status.md#open-problems)) |
+| Assembly files | Per-file assembler from `splits.yaml`, through real INCLUDE_ASM; fixed words and symbolic relocation records handle assembler quirks |
+| Linker | mainline GNU `ld` 2.40 (`binutils-mipsel-linux-gnu`), explicitly ordered ordinary input sections; `tools/build/pack_elf.py` writes the retail container (`e_flags 0x20924001`) |
+| Everything else | splat/spimdisasm/rabbitizer split, Ninja, m2c (`-t mipsee-gcc-c`), decomp-permuter; names, prototypes and types are committed, hand-maintained files (`config/SLUS_213.76/symbols.txt`, `include/ps2/`) |
+| Running the tools | the compilers are decomp.me archives pinned by SHA-256 (`config/toolchain-*.json`); the Windows programs run under wibo, the Sony tools are 32-bit Linux programs (`tools/toolchain.py`, [build.md](build.md)) |
+
 ## Objects and includes
 
 All 2,732 USA source files in `splits.yaml` use real INCLUDE_ASM, with no code fallback objects. Each produces one object, `build/<version>/obj/units/<unit>.o`. It contains its recovered C/C++
@@ -22,8 +35,7 @@ and its original assembly. `INCLUDE_ASM` is an assembler `.include`, for example
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90_201518", func_00201960);
 ```
 
-Generated assembly stays ignored. A version without recovered source assembles its text segment from its own assembly;
-it does not create one object per function. Data and shared constant runs have their own assembly objects. The existing
+Generated assembly stays ignored. Data and shared constant runs have their own assembly objects. The existing
 ownership analysis keeps compiler-owned constants, exception tables and explicitly reconstructed data in their original
 positions. The label reader remains useful to source-editing and ownership tools; it does not substitute assembly objects
 for source-unit functions.

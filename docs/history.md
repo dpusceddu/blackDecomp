@@ -1,7 +1,7 @@
 # History
 
 How the project got where it is, in phases, with the findings that still shape the work. Progress numbers are not repeated
-here: they are in the table of the [README](../README.md#progress). The current state is in [status.md](status.md); terms are in
+here: they are in the table in [status.md](status.md#progress). The current state is in [status.md](status.md); terms are in
 the [glossary](glossary.md).
 
 ## Where the first sources came from
@@ -10,17 +10,16 @@ The first recovered sources were written by the author of this repository in a s
 reconstructs the Xbox build of the game. They were imported once into this repository as the starting point (Kynapse
 functions and a few game functions that are exact on PS2 as well); the importers are not part of it, and the imported files
 keep a header comment naming their origin. Everything since was written, matched and checked here against the PS2 executable.
+These sources were reconstructed through decompilation and reverse engineering, without using leaked source code.
 
 ## Phase 0: inputs ([inputs.md](inputs.md))
 
-Nine disc images were triaged. No executable has symbols, debug sections or compiler banners. The PAL, Korean and Japanese
-retail builds are the USA code plus small changes (member offsets shift by 0x80 in about a fifth of the code); the beta and
-the demos are earlier builds and only give naming and ordering hints. The USA retail executable became the target. SN GCC
-2.95.3 build 1.36 (`ee-gcc2.95.3-136`, `-O2 -G0 -snas`) is the game compiler.
+The USA retail executable (`SLUS_213.76`) is the target. It has no symbols, debug information or compiler banners.
+SN GCC 2.95.3 build 1.36 (`ee-gcc2.95.3-136`, `-O2 -G0 -snas`) is the game compiler.
 
 ## Phase 1: identical rebuild
 
-`ninja` rebuilds the boot ELF byte for byte, for all five retail images. Facts that shaped the design:
+`ninja` rebuilds the USA retail boot ELF byte for byte. Facts that shaped the design:
 
 - GNU `ld` cannot write the retail container, so `tools/build/pack_elf.py` re-packs the linked sections; DVP overlays and
   `.vutext`/`.vudata` are extracted payloads.
@@ -39,11 +38,11 @@ the demos are earlier builds and only give naming and ordering hints. The USA re
 - An earlier analysis of the executable listed about 9,900 functions; splat finds more starts. Its names are `alias` lines in
   `config/SLUS_213.76/symbols.txt`, its signatures live in `include/ps2/prototypes.h`.
 
-## Phase 3: translation units ([tus.md](tus.md))
+## Phase 3: translation units ([units.md](units.md#recovering-original-translation-units))
 
 `tools/build/tus.py` combines unwind-frame groups (exact object boundaries), the constructor list (certain TU ends), library
 strings and code style, data-order joins and call edges into the TU map, with library ranges, compiler and flags. Orphan
-pieces, alignment and cross-build shifts do not mark boundaries. The Sony libraries match with `ee-gcc2.9-991111-01 -O2 -G0`
+pieces and alignment do not mark boundaries. The Sony libraries match with `ee-gcc2.9-991111-01 -O2 -G0`
 and never with SN 1.36.
 
 ## Phase 4: automatic pipeline ([pipeline.md](pipeline.md))

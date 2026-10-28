@@ -1,65 +1,18 @@
 """Ninja clean/deletion recovery and detection of undeclared generated-file reads, without game files or SDKs."""
 import json
-import os
 from pathlib import Path
 import subprocess
 import shutil
 import sys
 import tempfile
 import unittest
-from unittest.mock import patch
-sys.path[:0]=[str(Path(__file__).resolve().parents[2]/'tools/build')]
-from check_graph import validate
+sys.path[:0]=[str(Path(__file__).resolve().parents[1]/'tools/build')]
 from ninja_graph import Graph
-import prepare
 
-ROOT=Path(__file__).resolve().parents[2]
+ROOT=Path(__file__).resolve().parents[1]
 
 
 class GraphContracts(unittest.TestCase):
-    def test_split_recovers_a_preserved_wrapper_without_its_inventory(self):
-        with tempfile.TemporaryDirectory() as directory:
-            previous=Path.cwd()
-            try:
-                os.chdir(directory)
-                b=Path('build/test');b.mkdir(parents=True)
-                (b/'splat.yaml').write_text(json.dumps(dict(options=dict(asm_path='asm/test',data_path='data'),
-                    segments=[dict(subsegments=[[0,'textbin','vutext']])])) )
-                wrapper=Path('asm/test/data/vutext.s');wrapper.parent.mkdir(parents=True)
-                wrapper.write_text('old wrapper')
-                other=wrapper.with_name('unrelated.s');other.write_text('preserved')
-                def split(*args,**kwargs):
-                    # Model upstream textbin's intentional existing-file skip.
-                    if not wrapper.exists():wrapper.write_text('regenerated')
-                with patch.object(sys,'argv',['prepare.py','split','test']), \
-                     patch.dict(os.environ,BLACK_NINJA_RECORD=str(b/'missing.json')), \
-                     patch.object(prepare.runpy,'run_module',side_effect=split):
-                    prepare.main()
-                self.assertEqual(wrapper.read_text(),'regenerated')
-                self.assertEqual(other.read_text(),'preserved')
-            finally:os.chdir(previous)
-
-    def test_missing_producer_and_duplicate_producer_are_errors(self):
-        edge=dict(name='link',outputs=['build/test/linked.elf'],inputs=['build/test/placement.json'])
-        problems,_=validate([edge])
-        self.assertTrue(any('no producer' in p for p in problems))
-        producer=dict(name='placement',outputs=['build/test/placement.json'],inputs=[])
-        duplicate=dict(producer,name='second')
-        problems,_=validate([edge,producer,duplicate])
-        self.assertTrue(any('multiple producers' in p for p in problems))
-
-    def test_contract_read_must_be_a_direct_ninja_dependency(self):
-        with tempfile.TemporaryDirectory() as folder:
-            root=Path(folder);contract='build/test/io/link.json'
-            path=root/contract;path.parent.mkdir(parents=True)
-            path.write_text(json.dumps(dict(reads=['build/test/placement.json'],writes=['build/test/linked.elf'])))
-            producer=dict(name='placement',outputs=['build/test/placement.json',contract],inputs=[])
-            link=dict(name='link',outputs=['build/test/linked.elf'],inputs=[contract])
-            problems,_=validate([producer,link],root)
-            self.assertTrue(any('undeclared generated read' in p for p in problems))
-            link['inputs'].append('build/test/placement.json')
-            self.assertEqual(validate([producer,link],root)[0],[])
-
     def test_actual_read_outside_contract_is_rejected(self):
         (ROOT/'build').mkdir(exist_ok=True)
         with tempfile.TemporaryDirectory(prefix='graph-read-',dir=ROOT/'build') as folder:

@@ -1,39 +1,43 @@
 #!/usr/bin/env python3
 """Prepare the environment, assembly and objdiff metadata for a matching session; optionally verify the full image.
 
-Usage: python3 tools/setup.py [--provision | --build]
+Usage: python3 tools/setup.py [--provision | --build] [--iso PATH]
 The user or harness runs --provision once on a native Linux host to install system prerequisites, Python dependencies and
 the pinned toolchain. It needs no game files and does not generate assembly or build an image.
 Normal agent sessions omit it: they reuse the installed environment and prepare their local metadata.
 Steps, each skipped when already done (so it is safe to run again at the start of every session):
   1. Linux x86-64 (natively, in WSL 2 or in the repository's Dockerfile); anything else stops with what to use instead.
-  2. System tools: ninja, the little-endian MIPS binutils (or $BLACK_BINUTILS_PREFIX), the 32-bit loader, xz and git;
+  2. System tools: ninja, the little-endian MIPS binutils (or $BLACK_BINUTILS_PREFIX), the 32-bit loader, xz, git and gh;
      a missing one stops with the one-time provisioning command. Ordinary sessions do not install system packages.
+     Normal sessions also check Git identity and authenticated GitHub access to the main repository.
   3. Python packages of requirements.txt: in the active virtual environment, or in .venv (created when missing).
      An active virtual environment takes priority. In another worktree, the game directories in orig/ and build/toolchain/
      can be shared with the main worktree (symbolic links); .venv is shared only when no environment is active.
-  4. Your executable at orig/SLUS_213.76/SLUS_213.76 (skipped by --provision; the image check verifies its SHA-256).
+  4. Verify your USA executable at orig/SLUS_213.76/SLUS_213.76, or extract it from --iso PATH or one ISO in orig/.
+     --provision skips game input. ISO extraction preserves the image and checks the executable before saving it.
   5. The pinned toolchain (tools/toolchain.py install --objdiff).
-  6. configure.py, `ninja objdiff.json` and the TU map: generate metadata and assembly without compiling all objects or linking.
-     --provision stops before this step. --build also verifies the full image; --no-build is the default preparation.
+  6. configure.py, `ninja objdiff.json` and the TU map prepare metadata and assembly without compiling all objects or linking.
+     --provision stops before this step. --build also verifies the full image; normal setup only prepares metadata.
 Then it prints the next step of a work session. Stdlib only, so it runs before anything is installed.
 """
 import sys as _sys
 if __name__ == '__main__' and _sys.argv[1:2] in (['-h'], ['--help']):
     print(__doc__.strip())
     raise SystemExit(0)
-import argparse, json, os, platform, shutil, subprocess, sys
+import argparse, hashlib, json, os, platform, re, shutil, subprocess, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tools'))
 from preparation_lock import preparation_lock
+from github import contribution_problem
+from maint.iso import Iso
 SLUG = 'SLUS_213.76'
 MODULES = ('yaml', 'splat', 'spimdisasm', 'rabbitizer', 'm2c', 'pycparser')
 PACKAGES = {
-    'apt-get': ['git', 'ninja-build', 'python3', 'python3-venv', 'python3-pip', 'python3-dev', 'build-essential',
+    'apt-get': ['git', 'gh', 'ninja-build', 'python3', 'python3-venv', 'python3-pip', 'python3-dev', 'build-essential',
                 'binutils-mipsel-linux-gnu', 'libc6-i386', 'xz-utils', 'cpp', 'ca-certificates'],
-    'dnf': ['git', 'ninja-build', 'python3', 'python3-pip', 'python3-devel', 'gcc', 'make',
+    'dnf': ['git', 'gh', 'ninja-build', 'python3', 'python3-pip', 'python3-devel', 'gcc', 'make',
             'binutils-mips64-linux-gnu', 'glibc.i686', 'xz', 'cpp', 'ca-certificates'],
 }
 
@@ -103,15 +107,12 @@ def share(main, name):
 
 
 def game_files(main):
-    """The untracked entries of the main worktree's orig/ (game files), at the level below the tracked placeholders."""
-    r = subprocess.run(['git', 'ls-files', 'orig'], cwd=ROOT, capture_output=True, text=True)
-    tracked, names = set(r.stdout.split()), []
-    for d in sorted(p for p in (main / 'orig').iterdir() if p.is_dir()):
-        rel = 'orig/' + d.name
-        if any(t.startswith(rel + '/') for t in tracked):
-            names += [rel + '/' + f.name for f in sorted(d.iterdir()) if rel + '/' + f.name not in tracked]
-        else:
-            names.append(rel)
+    """Share dropped-in ISOs and the USA executable from the main worktree."""
+    names = ['orig/' + p.name for p in sorted((main / 'orig').glob('*'))
+             if p.is_file() and p.suffix.lower() == '.iso']
+    executable = 'orig/%s/%s' % (SLUG, SLUG)
+    if (main / executable).is_file():
+        names.append(executable)
     return names
 
 
@@ -129,13 +130,72 @@ def prepare(python, build=False):
         run(python, 'tools/check_elf.py', SLUG, 'build/%s/%s.elf' % (SLUG, SLUG))
 
 
+def prepare_game(image=None):
+    """Validate the USA executable, or import only its verified boot executable from an ISO."""
+    expected = json.loads((ROOT / 'config/versions.json').read_text())[SLUG]
+    dest = ROOT / 'orig' / SLUG / expected['boot']
+
+    def verify(data):
+        if hashlib.sha256(data).hexdigest() != expected['executable_sha256']:
+            stop('executable checksum mismatch; provide an unmodified USA retail copy (%s)' % SLUG)
+
+    if image is None and dest.is_file():
+        verify(dest.read_bytes())
+        return
+    if image is None:
+        images = sorted(p for p in (ROOT / 'orig').glob('*') if p.is_file() and p.suffix.lower() == '.iso')
+        if len(images) > 1:
+            stop('multiple ISOs in orig/; choose your USA copy with --iso PATH')
+        if not images:
+            stop('put your USA game ISO in orig/, pass --iso PATH, or put its executable at orig/%s/%s' % (SLUG, SLUG))
+        image = images[0]
+    try:
+        with Iso(image) as disc:
+            cnf = disc.find('SYSTEM.CNF')
+            if cnf['dir'] or cnf['size'] > 65536:
+                raise ValueError('Invalid SYSTEM.CNF')
+            config = disc.read(cnf['lba'], cnf['size'])
+            boot = re.search(rb'^\s*BOOT2\s*=\s*cdrom0:[\\/]*([^;\s]+)', config, re.I | re.M)
+            if not boot:
+                raise ValueError('SYSTEM.CNF has no BOOT2 executable')
+            name = boot.group(1).decode('ascii').replace('\\', '/')
+            if name.rsplit('/', 1)[-1].upper() != expected['boot']:
+                stop('ISO is not USA retail (%s); provide your unmodified USA copy' % SLUG)
+            record = disc.find(name)
+            if record['dir'] or record['size'] > 32 << 20:
+                raise ValueError('Invalid boot executable size')
+            data = disc.read(record['lba'], record['size'])
+    except (OSError, ValueError) as error:
+        stop('cannot import ISO: %s' % error)
+    verify(data)
+    if dest.exists() or dest.is_symlink():
+        if dest.is_file() and dest.read_bytes() == data:
+            return
+        stop('an executable already exists at orig/%s/%s; move it aside before importing another' % (SLUG, SLUG))
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    # Publish a complete verified file, without overwriting another session's input or a shared worktree symlink.
+    with tempfile.NamedTemporaryFile(dir=dest.parent, prefix='.import-', delete=False) as tmp:
+        temporary = Path(tmp.name)
+        try:
+            tmp.write(data)
+            tmp.flush()
+            os.link(temporary, dest)
+        except FileExistsError:
+            stop('another session supplied the executable; rerun setup to verify it')
+        finally:
+            temporary.unlink(missing_ok=True)
+    print('    imported verified %s from ISO; original image preserved' % SLUG)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     mode = ap.add_mutually_exclusive_group()
     mode.add_argument('--build', action='store_true', help='also build and verify the full image')
-    mode.add_argument('--no-build', action='store_true', help='prepare only (the default; kept for compatibility)')
     mode.add_argument('--provision', action='store_true', help='provision the native host once, without game files or image builds')
+    ap.add_argument('--iso', type=Path, metavar='PATH', help='import your USA boot executable from a game ISO (otherwise look in orig/)')
     args = ap.parse_args()
+    if args.provision and args.iso:
+        ap.error('--iso is for session setup; --provision needs no game input')
     step('platform')
     if platform.system() != 'Linux' or platform.machine() not in ('x86_64', 'AMD64'):
         stop('the toolchain needs a prepared Linux x86-64 shell; have the user or harness provide it (docs/setup.md)')
@@ -145,7 +205,7 @@ def main():
 
     step('system tools')
     prefix = binutils_prefix()
-    required = ['ninja', 'git', 'xz', 'cpp'] + [prefix + t for t in ('ld', 'as', 'objcopy', 'objdump')]
+    required = ['ninja', 'git', 'gh', 'xz', 'cpp'] + [prefix + t for t in ('ld', 'as', 'objcopy', 'objdump')]
     missing = [t for t in required if not shutil.which(t)]
     if not Path('/lib/ld-linux.so.2').exists():
         missing.append('32-bit loader /lib/ld-linux.so.2 (libc6-i386)')
@@ -153,6 +213,11 @@ def main():
         stop('missing %s; have the user or harness run python3 tools/setup.py --provision once (docs/setup.md)' % ', '.join(missing))
     if args.provision:
         verify_native_linker(prefix)
+    else:
+        step('Git identity and GitHub access')
+        problem = contribution_problem(ROOT)
+        if problem:
+            stop(problem)
 
     main = main_worktree()
     if main:
@@ -174,8 +239,7 @@ def main():
 
     if not args.provision:
         step('game executable')
-        if not (ROOT / 'orig' / SLUG / SLUG).is_file():
-            stop('put the executable of your copy of the game (USA) at orig/%s/%s' % (SLUG, SLUG))
+        prepare_game(args.iso)
 
     step('toolchain')
     run(python, 'tools/toolchain.py', 'install', '--objdiff')
@@ -183,7 +247,7 @@ def main():
     hint = ' Activate the environment first: . .venv/bin/activate.' if not os.environ.get('VIRTUAL_ENV') and \
         python.parent.parent.resolve() == (ROOT / '.venv').resolve() else ''
     if args.provision:
-        print('\nNative environment ready.%s Add your game executable, then run python3 tools/setup.py for the session.' % hint)
+        print('\nNative environment ready.%s Supply your USA ISO in orig/ (or its executable), authenticate gh, then run python3 tools/setup.py.' % hint)
         return 0
 
     prepare(python, build=args.build)

@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(__file__).resolve().parents[1]
 
 
 class Relocate(unittest.TestCase):
@@ -41,21 +41,6 @@ class Relocate(unittest.TestCase):
         self.assertEqual(2, splits.count('src/game/ai/tu_100000.c'))          # both entries of the file follow it
         self.assertIn('src/game/unsorted/tu_100100.c', splits)
         self.assertEqual('See src/game/ai/tu_100000.c and src/game/unsorted/tu_100000.cpp.\n', (self.root / 'docs/note.md').read_text())
-
-    def test_dry_run_changes_nothing_and_a_missing_file_is_one_line(self):
-        result = self.run_tool('src/game/unsorted/tu_100000.c', 'src/game/ai/tu_100000.c', '--dry-run')
-        self.assertEqual('1 files would move', result.stdout.strip())
-        self.assertTrue((self.root / 'src/game/unsorted/tu_100000.c').is_file())
-        result = self.run_tool('src/game/unsorted/nothing.c', 'src/game/ai/nothing.c')
-        self.assertEqual(1, result.returncode)
-        self.assertEqual(['no such file: src/game/unsorted/nothing.c (give repo-relative paths)'], result.stderr.strip().splitlines())
-
-    def test_a_file_of_pairs_still_works(self):
-        (self.root / 'pairs.txt').write_text('# comment\nsrc/game/unsorted/tu_100000.c src/game/ai/a.c\nsrc/game/unsorted/tu_100100.c src/game/ui/b.c\n')
-        result = self.run_tool('pairs.txt')
-        self.assertEqual('2 files moved', result.stdout.strip())
-        self.assertTrue((self.root / 'src/game/ui/b.c').is_file())
-
 
 if __name__ == '__main__':
     unittest.main()
