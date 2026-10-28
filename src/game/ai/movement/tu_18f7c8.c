@@ -2,6 +2,28 @@
 #include "ps2/prelude.h"
 #include "game/actor_slots.h"
 
+/* UNVERIFIED: partial configuration view for the actor key lookup and event modes. */
+typedef struct Recovered_MovementEventConfig {
+    u8 pad[0x20];
+    s32 eventA;
+    u8 pad2[4];
+    s32 values[5];
+    s32 eventB;
+    u64 *keys;
+    u8 pad3[0x34];
+    f32 delay;
+    u8 enabled;
+    u8 pad4;
+    u8 counts[5];
+    u8 timedCount;
+    u8 count;
+} Recovered_MovementEventConfig;
+typedef struct Recovered_MovementEventResource {
+    u8 pad[0x28];
+    Recovered_MovementEventConfig *config;
+} Recovered_MovementEventResource;
+
+
 /* UNVERIFIED: partial layouts inferred from the accesses below. */
 typedef struct Recovered_MovementEventActor {
     u8 pad[0x380];
@@ -10,7 +32,9 @@ typedef struct Recovered_MovementEventActor {
 typedef struct Recovered_MovementEventOwner {
     u8 pad[0x7C];
     Recovered_MovementEventActor *actor;
-    u8 pad2[0xC90];
+    u8 pad2[0x91];
+    u8 disabled;
+    u8 pad3[0xBFE];
     u8 data[1];
 } Recovered_MovementEventOwner;
 typedef struct Recovered_MovementEventState {
@@ -23,9 +47,7 @@ typedef struct Recovered_MovementEventState {
     u8 pad3[4];
     f32 time;
     struct Recovered_MovementModeResource *resource;
-    u8 count;
-    u8 pad4[3];
-    u8 flag;
+    u8 count, configured, mode, pending, flag;
 } Recovered_MovementEventState;
 typedef struct Recovered_MovementEvent {
     u8 pad[0x24];
@@ -43,8 +65,45 @@ extern s32 func_00185C38();
 extern s32 func_001897E8();
 extern s32 func_00180A00(s32);
 extern s32 func_0018E4C0();
+extern void func_0018E338(Recovered_MovementEventState *);
+extern s32 func_00180BC0(void *);
+extern void func_0016ABA8(void *, s32, u8, void *);
+extern s32 func_00176F00(void *);
+extern void func_00190020(Recovered_MovementEventState *);
+extern void func_0018FC18();
+extern s32 func_00188F10(void *);
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018F7C8);
+static inline s32 MovementReady(Recovered_MovementEventState *self) {
+    s32 movementReady = func_00180BC0((u8 *)self->owner + 0xB30);
+    u8 disabled = self->owner->disabled;
+    s32 ready = 0;
+    if (movementReady || disabled) ready = 1;
+    return ready;
+}
+
+void func_0018F7C8(Recovered_MovementEventState *self) {
+    Recovered_MovementEventConfig *config;
+    func_0018E338(self);
+    config = self->eventResource->config;
+    if (!self->pending && config->enabled) {
+        s32 ready = MovementReady(self);
+        self->pending = ready;
+        if ((u8)ready)
+            func_0016ABA8((u8 *)self->owner + 0x1F90, config->eventA, config->enabled, self->owner->actor);
+    }
+    if ((u8)func_00176F00((u8 *)self->owner + 0x1FCC)) {
+        if (self->configured >= 2) func_00190020(self);
+        if (self->current) func_0018FC18(self);
+    }
+    if (!func_00188F10((u8 *)self->owner + 0x150)) {
+        if (config->delay < M2C_FIELD(D_0040F4D0, f32 *, 0x20) - self->time) {
+            func_0016ABA8((u8 *)self->owner + 0x1F90, config->eventB, config->timedCount, self->owner->actor);
+            self->time = M2C_FIELD(D_0040F4D0, f32 *, 0x20);
+        }
+    } else {
+        self->time = M2C_FIELD(D_0040F4D0, f32 *, 0x20);
+    }
+}
 
 void func_0018FB40(void *arg0) {
     func_0018E488();
@@ -108,21 +167,6 @@ void func_0018FC18(Recovered_MovementBatchState *self) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018FC18);
 #endif
-/* UNVERIFIED: partial configuration view for the actor key lookup and event modes. */
-typedef struct Recovered_MovementEventConfig {
-    u8 pad[0x28];
-    s32 values[5];
-    u8 pad2[4];
-    u64 *keys;
-    u8 pad3[0x3A];
-    u8 counts[5];
-    u8 pad4;
-    u8 count;
-} Recovered_MovementEventConfig;
-typedef struct Recovered_MovementEventResource {
-    u8 pad[0x28];
-    Recovered_MovementEventConfig *config;
-} Recovered_MovementEventResource;
 
 s32 func_0018FCB8(Recovered_MovementEventState *self, s32 index) {
     Recovered_ActorSlot entry = *ActorSlotTable_GetEntry((Recovered_ActorSlotTable *)(D_0040F4D4 + 0xFA8), index);
@@ -183,8 +227,6 @@ void func_0018FE30(void *arg0) {
 s32 func_0018FE50(void) {
     return 1;
 }
-
-extern void func_0016ABA8(void *, s32, u8, void *);
 
 s32 func_0018FE58(Recovered_MovementEventState *self, u32 mode) {
     Recovered_MovementEventConfig *config = self->eventResource->config;
