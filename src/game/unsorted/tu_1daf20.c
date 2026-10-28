@@ -393,7 +393,9 @@ s32 func_001DC278(Recovered_PlaybackTransitionOwner* owner, Recovered_PlaybackTr
 #ifdef NON_MATCHING
 // Unmatched: both interpolation multiplications reverse their native operand order (two instructions).
 /* Native table entries have a 0x30-byte stride; their full identities are UNVERIFIED. */
-typedef struct { u8 unk_00[0x30]; } Recovered_PlaybackGainChannel;
+typedef struct {
+    u8 unk_00[0x30];
+} Recovered_PlaybackGainChannel;
 void func_001DC2C0(Recovered_PlaybackTransitionOwner* owner) {
     switch ((u32)owner->unk_192C) {
         case 0:
@@ -553,8 +555,13 @@ s32 func_001DCCF8(Recovered_PlaybackOwner* owner, Recovered_PlaybackMotion* moti
 extern void func_00272488(u64, s8*);
 extern void* func_00107CF8(u32);
 extern void func_001D97D0(Recovered_AudioTransferGroup*, u64, const s8*, s32, s32, s32, void*, s32, u8);
-typedef struct { Recovered_AudioTransferGroup* group; f32 scale; } PlaybackTransfer;
-static inline PlaybackTransfer* PlaybackTransfers(Recovered_PlaybackState* self) { return (PlaybackTransfer*)((u8*)self+0x30); }
+typedef struct {
+    Recovered_AudioTransferGroup* group;
+    f32 scale;
+} PlaybackTransfer;
+static inline PlaybackTransfer* PlaybackTransfers(Recovered_PlaybackState* self) {
+    return (PlaybackTransfer*)((u8*)self + 0x30);
+}
 
 void func_001DCDC0(Recovered_PlaybackState* self, u64 key, u32 value, s32 format, s32 bytes, void* scratch, s32 unknown,
                    s8 count, s8 mode, u8 final) {
@@ -593,7 +600,11 @@ void func_001DCDC0(Recovered_PlaybackState* self, u64 key, u32 value, s32 format
     self->unk_48 = 0x8000 / count;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1daf20", func_001DCF70);
-typedef struct { u8* data; s32 bytes; s32 final; } PlaybackInput;
+typedef struct {
+    u8* data;
+    s32 bytes;
+    s32 final;
+} PlaybackInput;
 extern void func_001D9AB8(Recovered_AudioTransferGroup*, Recovered_PlaybackParameters*);
 extern s32 func_001D9D58(Recovered_AudioTransferGroup*);
 extern void func_001D9C00(Recovered_AudioTransferGroup*, PlaybackInput*);

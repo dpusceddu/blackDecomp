@@ -77,7 +77,7 @@ typedef struct {
 } Recovered_PlaybackParameters __attribute__((aligned(16)));
 typedef char PlaybackParameterCopyExtent[sizeof(Recovered_PlaybackParameters) == 0xB0 ? 1 : -1];
 
-/* UNVERIFIED: accessed only by the pool-operation drafts. */
+/* Partial native service/pool view. Original class identities and unaccessed storage are UNVERIFIED. */
 typedef struct {
     u8 unk_00[0x4BD4];
     void* buffers;
