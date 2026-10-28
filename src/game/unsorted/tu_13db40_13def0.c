@@ -2,6 +2,8 @@
 #include "ps2/prelude.h"
 
 extern s32 func_0013ED98();
+extern s32 func_0013EC38(void* self, void* actor);
+extern void* D_0040F0E0;
 
 s32 func_0013DEF0(void *arg0)
 {
@@ -105,4 +107,17 @@ s32 func_0013F0A8(s32 arg0)
   return temp_v0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_13db40_13def0", func_0013F0D8);
+s32 func_0013F0D8(void* self, s8 index, void* actor) {
+    s32 base;
+    s32 offset;
+
+    if (M2C_FIELD(self, u8*, 0x9D)) return 1;
+
+    func_0013EC38(self, actor);
+    base = (s32)D_0040F0E0 + 0x21060;
+    offset = index * 12;
+    M2C_FIELD(self, void**, 0x98) = M2C_FIELD(base + offset, void**, 0);
+    M2C_FIELD(self, s8*, 0x9C) = index;
+    M2C_FIELD(self, u8*, 0x9D) = 1;
+    return 1;
+}
