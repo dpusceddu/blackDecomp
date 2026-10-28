@@ -810,7 +810,13 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002697E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269820);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269880);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002698F8);
+// UNVERIFIED: original type and virtual callback identity.
+struct Recovered_NotifyVtable { u8 unknown[0x30]; s16 adjustment; u16 unknown32; int (*notify)(void*, int); };
+struct Recovered_NotifyObject { u8 unknown[0x18]; int active; u8 unknown1C[0xC]; Recovered_NotifyVtable* vtable; };
+extern "C" int func_002698F8(Recovered_NotifyObject* self) {
+    if (!self->active) return 0;
+    return self->vtable->notify((char*)self + self->vtable->adjustment, 0);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269940);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269AB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269CC8);
