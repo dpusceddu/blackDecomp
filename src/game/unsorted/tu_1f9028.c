@@ -29,7 +29,28 @@ void func_001F9980(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0xB90) = 1;
 }
 
+extern void func_001F1E58(void*, void*);
+extern void func_00278F00(void*, s32, s32);
+extern s32 D_003F9C50;
+extern s32 D_0040F518;
+#ifdef NON_MATCHING
+// Unmatched: loop counter initialization is scheduled after the first call.
+s32 func_001F9990(void* self) {
+    s32* slot = (s32*)((u8*)self + 0xB20);
+    s8 i = 0;
+    func_001F1E58(self, &D_003F9C50);
+    do {
+        func_00278F00((void*)(M2C_FIELD(self, s8*, 0x12) * 0xA8 + D_0040F518 + 0x40),
+                      M2C_FIELD(self, s16*, 0x10) + 1, *slot);
+        *slot = 0;
+        i++;
+        slot++;
+    } while (i < 0x16);
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9990);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9A40);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9AF8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9BE0);
@@ -48,7 +69,16 @@ void func_001F9EB0(void *arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9EF8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FA130);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FA3A8);
+extern void func_001F1E20(void*, void*);
+extern s32 D_003F9C80;
+s32 func_001FA3A8(void* self) {
+    func_001F1E20(self, &D_003F9C80);
+    func_00278F00((void*)(M2C_FIELD(self, s8*, 0x12) * 0xA8 + D_0040F518 + 0x40), M2C_FIELD(self, s16*, 0x10), M2C_FIELD(self, s32*, 0xA0));
+    M2C_FIELD(self, s32*, 0xA0) = 0;
+    func_00278F00((void*)(M2C_FIELD(self, s8*, 0x12) * 0xA8 + D_0040F518 + 0x40), M2C_FIELD(self, s16*, 0x10), M2C_FIELD(self, s32*, 0xA4));
+    M2C_FIELD(self, s32*, 0xA4) = 0;
+    return 1;
+}
 void func_001FA438(void* self) {
     func_001F9980((u8*)self + 0xC0);
     M2C_FIELD(self, s32*, 0xEA8) = 1;
