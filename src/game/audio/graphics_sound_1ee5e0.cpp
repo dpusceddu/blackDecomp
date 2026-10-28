@@ -575,7 +575,16 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D348);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D4E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00224270);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00224590);
+// UNVERIFIED: original identities and callback semantics.
+struct Recovered_ResetVtable { u8 unknown[0x10]; s16 adjustment; u16 unknown12; void (*reset)(void*); };
+struct Recovered_ResetObject { int unknown; Recovered_ResetVtable* vtable; };
+struct Recovered_ResetOwner { u8 unknown[0x2C]; Recovered_ResetObject* object; };
+extern "C" Recovered_ResetObject* D_0043DF40;
+extern "C" void func_00224590() {
+    Recovered_ResetObject* object = ((Recovered_ResetOwner*)D_0043DF68)->object;
+    if (object) object->vtable->reset((char*)object + object->vtable->adjustment);
+    ((Recovered_ResetOwner*)D_0043DF68)->object = D_0043DF40;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002245F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00224788);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002249E0);
@@ -643,17 +652,16 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022DC80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022DD88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022DE90);
-extern "C" Recovered_StackObject* D_0043DF40;
 extern "C" void func_0022DF90(Recovered_ObjectStack* self) {
     int index = self->count;
-    Recovered_StackObject* object = D_0043DF40;
+    Recovered_StackObject* object = (Recovered_StackObject*)D_0043DF40;
     self->objects[index] = object;
     self->count = index + 1;
     object->vtable->invoke((char*)object + object->vtable->adjustment);
 }
 extern "C" void func_0022DFE0(Recovered_ObjectStack* self) {
     int index = self->count;
-    Recovered_StackObject* object = D_0043DF40;
+    Recovered_StackObject* object = (Recovered_StackObject*)D_0043DF40;
     self->objects[index] = object;
     self->count = index + 1;
     object->vtable->invoke((char*)object + object->vtable->adjustment);
