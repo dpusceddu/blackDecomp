@@ -110,7 +110,17 @@ void func_001D83D0(Recovered_StreamRecordInput* self, Recovered_StreamBufferPool
     Recovered_StreamRecord* record = StreamBufferPool_FindRecord(pool, id);
     record->unk_10 = 0;
 }
+#ifdef NON_MATCHING
+// Unmatched: return-address reload is scheduled before the first byte store.
+void func_001D83F8(Recovered_StreamRecordInput* self, Recovered_StreamBufferPool* pool) {
+    s32 id = self->id;
+    Recovered_StreamRecord* record = StreamBufferPool_FindRecord(pool, id);
+    record->unk_11 = 0;
+    record->unk_12 = 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D83F8);
+#endif
 Recovered_StreamRecord* StreamBufferPool_FindRecord(Recovered_StreamBufferPool* self, s32 id) {
     Recovered_StreamRecord* result = 0;
     s32 i;

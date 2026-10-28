@@ -185,7 +185,16 @@ void func_001E5900(void *arg0) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5940);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5AF0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5AF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5CB0);
+/* UNVERIFIED: the four queued values and their meaning are unknown. */
+typedef struct Recovered_GridQueue {
+    u8 unk_000[0x784];
+    s32 entries[4];
+    u32 count;
+} Recovered_GridQueue;
+
+void func_001E5CB0(Recovered_GridQueue* self, s32 item) {
+    if (self->count < 4) self->entries[self->count++] = item;
+}
 
 s32 func_001E5CD8(void) {
     return 1;
@@ -263,7 +272,13 @@ void func_001E6088(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x8BC) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E60A8);
+s32 func_001E60A8(void* unused, u64 key) {
+    s32 i;
+    for (i = 0; i < 7; i++) {
+        if (key == D_003F9208[i]) return 1;
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E60E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6118);
 #ifdef NON_MATCHING
