@@ -71,7 +71,36 @@ s32 func_00377A20(void* self, void* arg1, s32 index) {
     if (!(M2C_FIELD(info, u8*, 0x18) & 4)) result /= M2C_FIELD(info, u8*, 0xD);
     return result;
 }
+#ifdef NON_MATCHING
+// Unmatched: register allocation and division scheduling differ.
+u32 func_00377AC8(void* self) {
+    u32 result = 0;
+    u32 i = 0;
+    u32 offset = 0;
+    void* current = M2C_FIELD(self, void**, 0x148);
+    void* header = M2C_FIELD(self, void**, 0x124);
+    u8* entry = M2C_FIELD(header, u8**, 0x18);
+    if (M2C_FIELD(header, u32*, 0x14)) {
+        do {
+            u32 count = M2C_FIELD(M2C_FIELD(current, u32**, 0xC), u32*, i * 4);
+            if (offset < count) {
+                u32 quotient, remainder;
+                offset = count;
+                quotient = offset % M2C_FIELD(entry, u32*, 0x20);
+                func_00318478(quotient, 0xFFFFFFFFU / M2C_FIELD(entry, u32*, 0x20), &remainder, &quotient);
+                quotient++;
+                if (result < quotient) result = quotient;
+            }
+            header = M2C_FIELD(self, void**, 0x124);
+            i++;
+            entry += 0x28;
+        } while (i < M2C_FIELD(header, u32*, 0x14));
+    }
+    return result == 1 ? 0xFFFFFFFFU : result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377AC8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377BD8);
 // UNVERIFIED: original buffer type and identity.
 typedef struct { u8 data[0x2000]; s32 occupied; } Recovered_ScratchBuffer;
