@@ -32,7 +32,21 @@ finish:
     return 1;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4720);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E49D0);
+extern void* func_001E51E0(void*, const u64*, const u64*);
+extern void* func_0028BD80(void*, s32);
+extern s32 D_003BD470;
+void* func_001E49D0(void* self, u32 index) {
+    void* table = M2C_FIELD(self, void**, 0x48);
+    void* result = NULL;
+    if (index < M2C_FIELD(table, u8*, 8)) {
+        u8* item = M2C_FIELD(table, u8**, 0xC) + index * 0x10;
+        u64 key = 0x4DFF8E5600000000ULL;
+        void* choice = func_0028BD80(func_001E51E0(M2C_FIELD(self, void**, 0x44), (u64*)item, &key), M2C_FIELD(item, s32*, 8));
+        M2C_FIELD(choice, s16*, 2) = D_003BD470++;
+        result = M2C_FIELD(M2C_FIELD(self, void**, 0x4C), u8**, 0x18) + M2C_FIELD(choice, u16*, 0) * 8;
+    }
+    return result;
+}
 void* func_001E4A78(void* self, s32 key) {
     u8* entry = (u8*)self + 8;
     u8* selected = entry;
