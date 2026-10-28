@@ -58,7 +58,19 @@ s32 func_00377968(void* self, s32 key) {
     return 0;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377A10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377A20);
+extern void func_00318478(u32, u32, u32*, u32*);
+s32 func_00377A20(void* self, void* arg1, s32 index) {
+    u32 sp[2];
+    void* entry = M2C_FIELD(M2C_FIELD(self, void**, 0x124), u8**, 0x18) + index * 0x28;
+    u32 size = M2C_FIELD(entry, u32*, 0x20) / M2C_FIELD(entry, u16*, 0x1A) * M2C_FIELD(entry, s32*, 0xC);
+    u32 result = M2C_FIELD(arg1, s32*, 4) * size;
+    void* info;
+    func_00318478(M2C_FIELD(arg1, u32*, 8), size, &sp[0], &sp[1]);
+    info = M2C_FIELD(entry, void**, 0x14);
+    result += sp[0];
+    if (!(M2C_FIELD(info, u8*, 0x18) & 4)) result /= M2C_FIELD(info, u8*, 0xD);
+    return result;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377AC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377BD8);
 // UNVERIFIED: original buffer type and identity.
