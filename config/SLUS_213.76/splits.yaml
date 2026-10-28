@@ -894,7 +894,9 @@ splits:
   - {src: src/game/ai/movement/tu_18dd88_18f4e8.c, range: [0x18f4e8, 0x18f6a8]}
   - {src: src/game/ai/movement/tu_18dd88_18f6a8.c, range: [0x18f6a8, 0x18f730]}
   - {src: src/game/ai/movement/tu_18dd88_18f730.c, range: [0x18f730, 0x18f7c8]}
-  - {src: src/game/ai/movement/tu_18f7c8.c, range: [0x18f7c8, 0x190428], data_ranges: [{section: .rodata, input: .rodata, start: 0x3f5750, end: 0x3f5800}]}
+  - {src: src/game/ai/movement/tu_18f7c8.c, range: [0x18f7c8, 0x18f910], data_ranges: [{section: .rodata, input: .rodata, start: 0x3f5750, end: 0x3f5800}]}
+  - {src: src/game/ai/movement/tu_18f7c8_18f910.c, range: [0x18f910, 0x18fb40], flags: [-O2, -G0, -snas], assembler: sn-min6, note: The five-entry clearing loop has six instructions including assembler-inserted NOPs}
+  - {src: src/game/ai/movement/tu_18f7c8.c, range: [0x18fb40, 0x190428]}
   - {src: src/game/ai/movement/tu_18dd88_18f730.c, range: [0x190428, 0x1904d8]}
   - {src: src/game/ai/movement/tu_1904d8.c, range: [0x1904d8, 0x1909f8]}
   - {src: src/game/ai/movement/tu_1909f8.c, range: [0x1909f8, 0x190a00]}

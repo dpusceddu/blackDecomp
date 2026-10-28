@@ -45,7 +45,6 @@ extern s32 func_00180A00(s32);
 extern s32 func_0018E4C0();
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018F7C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_0018F910);
 
 void func_0018FB40(void *arg0) {
     func_0018E488();
@@ -150,7 +149,7 @@ typedef struct Recovered_MovementTargetState {
     u8 pad[0x28];
     void *target;
 } Recovered_MovementTargetState;
-extern s32 Allowed__Q28Graphics12MovementCorel(Recovered_MovementTargetState *, s64);
+extern s64 Allowed__Q28Graphics12MovementCorel(Recovered_MovementTargetState *, s64);
 extern s32 func_0018E680(Recovered_MovementTargetState *, s128, void *);
 
 // Unmatched: return joins and branch placement differ.
