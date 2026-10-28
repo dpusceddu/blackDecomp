@@ -747,7 +747,14 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271478);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271480);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271558);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271610);
+extern "C" void func_002715F0();
+extern "C" void func_003675E0(u32, void (*)(), int);
+extern "C" void func_00367780();
+extern "C" void func_00271610(u32 arg0) {
+    int thread = func_00367750();
+    func_003675E0(arg0 & 0xFFFF, func_002715F0, thread);
+    func_00367780();
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00272300);
 void* AlignedBuffer_Allocate(Recovered_AlignedBuffer* self, u32 bytes) {
     u32 cursor = (u32)self->cursor - 1;
@@ -779,7 +786,22 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00278AD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027BD20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027BDC0);
+// UNVERIFIED: original type and untouched fields.
+struct Recovered_DisplayDefaults { int mode; float rate; u8 unknown08[8]; float scale; };
+extern "C" Recovered_DisplayDefaults* D_003C0DF0;
+#ifdef NON_MATCHING
+// Unmatched: float constant load scheduling differs.
+extern "C" void func_0027C2F8(Recovered_DisplayDefaults* self) {
+    float rate = 20.0f;
+    float scale = 0.5f;
+    D_003C0DF0 = self;
+    self->rate = rate;
+    self->scale = scale;
+    self->mode = 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C2F8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C370);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C3F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CEA8);
