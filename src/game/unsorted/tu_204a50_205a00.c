@@ -7,10 +7,10 @@ extern void * D_003BDCC8;
 extern s32 * func_00107D20(s32);
 extern M2C_UNK D_003E0CA8;
 extern s32 * func_00107CF8(void *);
-extern s32 func_00204FF0(void *, void *);
-extern s32 func_00207978(void *);
+extern void func_00204FF0(void *, void *);
+extern void func_00207978(void *);
 
-s32 func_00205A00(void *arg0) {
+void func_00205A00(void *arg0) {
     s32 *temp_2;
     s32 *var_3;
     s32 var_4;
@@ -29,8 +29,5 @@ s32 func_00205A00(void *arg0) {
     M2C_FIELD(arg0, s32 **, 0x64) = func_00107CF8((void *)0x2C);
     func_00204FF0(M2C_FIELD(arg0, s32 **, 0x60), arg0);
     func_00204FF0((s32 *) (((s8 *) M2C_FIELD(arg0, s32 **, 0x60)) + 0x1C), arg0);
-    return func_00207978(M2C_FIELD(arg0, s32 **, 0x64));
+    func_00207978(M2C_FIELD(arg0, s32 **, 0x64));
 }
-
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_205a00", func_00205AA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_205a00", func_00205B68);

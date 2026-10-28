@@ -1624,14 +1624,21 @@ splits:
   - {src: src/game/unsorted/tu_204a50_205830.c, range: [0x205830, 0x205878], flags: [-O2, -G0, -snas, -fno-schedule-insns2]}
   - {src: src/game/unsorted/tu_204a50_205878.c, range: [0x205878, 0x205980]}
   - {src: src/game/unsorted/tu_204a50_205980.c, range: [0x205980, 0x205a00]}
-  - {src: src/game/unsorted/tu_204a50_205a00.c, range: [0x205a00, 0x205bf0], flags: [-O2, -G0, -snas, -fno-schedule-insns2], assembler: sn-min6, note: flags or language differ}
+  - {src: src/game/unsorted/tu_204a50_205a00.c, range: [0x205a00, 0x205aa0], flags: [-O2, -G0, -snas, -fno-schedule-insns2], assembler: sn-min6, note: flags or language differ}
+  - {src: src/game/unsorted/tu_204a50_206f30.cpp, range: [0x205aa0, 0x205bf0], flags: [-O2, -G0, -snas, -mno-check-zero-division], assembler: sn-min6, data_ranges: [{end: '0x438e60', input: .bss, section: .bss, start: '0x438c10'}], externs: {__builtin_new: '0x107cf8'}, note: Both signed remainder-by-10 sequences omit zero-division checks (-mno-check-zero-division). Inherited virtual dispatch and reference temporaries recover the lifecycle callbacks. Native text-array and two-UV constructors use six-word loops (sn-min6). C++ temporaries preserve quadword captures and lifetimes; typed globals recover static initialization and its 592-byte BSS range. Scalar new binds to the verified native allocation wrapper.}
   - {src: src/game/unsorted/tu_204a50_205bf0.c, range: [0x205bf0, 0x205c50], note: flags or language differ}
   - {src: src/game/unsorted/tu_204a50_205c50.c, range: [0x205c50, 0x205ca0], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_204a50_205ca0.c, range: [0x205ca0, 0x206a28], note: flags or language differ}
   - {src: src/game/unsorted/tu_204a50_206a28.c, range: [0x206a28, 0x206b28], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_204a50_206b28.c, range: [0x206b28, 0x206b58], note: flags or language differ}
   - {src: src/game/unsorted/tu_204a50_206b58.c, range: [0x206b58, 0x206f08], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
-  - {src: src/game/unsorted/tu_204a50_206f08.c, range: [0x206f08, 0x209318]}
+  - {src: src/game/unsorted/tu_204a50_206f08.c, range: [0x206f08, 0x206f30]}
+  - {src: src/game/unsorted/tu_204a50_206f30.cpp, range: [0x206f30, 0x207110]}
+  - {src: src/game/unsorted/tu_204a50_206f08.c, range: [0x207110, 0x207978]}
+  - {src: src/game/unsorted/tu_204a50_206f30.cpp, range: [0x207978, 0x208af8]}
+  - {src: src/game/unsorted/tu_204a50_206f08.c, range: [0x208af8, 0x208d00]}
+  - {src: src/game/unsorted/tu_204a50_206f30.cpp, range: [0x208d00, 0x2092d8]}
+  - {src: src/game/unsorted/tu_204a50_206f08.c, range: [0x2092d8, 0x209318]}
   - {src: src/game/unsorted/tu_209318.c, range: [0x209318, 0x209340]}
   - {src: src/game/unsorted/tu_209340.c, range: [0x209340, 0x209378]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x209378, 0x2094a8]}

@@ -146,6 +146,36 @@ def local_data_symbols(texts, slots, sizes, known):
     return found
 
 
+def target_data_symbols(texts, slots, sizes, symbols, sections):
+    """Describe typed native-address data labels in the comparison target.
+
+    An original label can encompass several constants. Preserve its bytes while
+    giving each source object its declared extent, only when its section offset
+    agrees with the encoded original address. This also exposes adjacent labels
+    that no original instruction references.
+    """
+    anchors = {int(match[2], 16): match[1] for text in texts
+               for match in re.finditer(r'^dlabel\s+(D_([0-9A-Fa-f]{8}))\s*$', text, re.M)}
+    lines = []
+    for symbol in symbols:
+        match = re.fullmatch(r'D_([0-9A-Fa-f]{8})', symbol['name'])
+        if not match or symbol['type'] != 1 or not 0 < symbol['shndx'] < len(sections):
+            continue
+        section = sections[symbol['shndx']]['name']
+        address = int(match[1], 16)
+        if (section not in slots or address != slots[section] + symbol['value'] or not symbol['size']
+                or symbol['value'] + symbol['size'] > sizes.get(section, 0)):
+            continue
+        candidates = [a for a in anchors if slots[section] <= a <= address]
+        if not candidates:
+            continue
+        anchor = max(candidates)
+        name = symbol['name']
+        if address not in anchors:
+            lines += ['.globl ' + name, '.equ %s, %s + %d' % (name, anchors[anchor], address - anchor)]
+        lines += ['.type %s, @object' % name, '.size %s, %d' % (name, symbol['size'])]
+    return lines
+
 
 def unit_plan(slug):
     """One comparison unit for each ordinary source object."""
@@ -255,6 +285,14 @@ def build_view(spec_path, output):
              if any(state['resolved'].get(str(addr),{}).get('status')=='source' for a,b,addr in intervals)}
     sizes = {s['name']:s['size'] for s in source.sections}
     local = local_data_symbols(texts,slots,sizes,present | set(redefine.values()))
+    typed_data = target_data_symbols(texts, slots, sizes, symbols, source.sections)
+    lines += typed_data
+    typed_names = {line.split()[1].rstrip(',') for line in typed_data if line.startswith('.type ')}
+    for section, address in slots.items():
+        if any(symbol['name'] == 'D_%08X' % address and symbol['name'] in typed_names
+               and source.sections[symbol['shndx']]['name'] == section and symbol['value'] == 0
+               for symbol in symbols):
+            args += ['--rename-section=%s=%s.%08X' % (section, section, address)]
     args += ['--add-symbol=%s=%s:%d,global,object' % (n,sec,off) for n,(sec,off) in local.items()]
     subprocess.run(args+[str(output)],env=env,check=True)
     output.write_bytes(elfobj.literal_as_gprel(output.read_bytes()))
