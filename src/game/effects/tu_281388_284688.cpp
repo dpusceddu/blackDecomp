@@ -695,7 +695,25 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029D4C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7930);
+#ifdef NON_MATCHING
+// Unmatched: floating-point allocation and scheduling differ.
+// Partial vector and matrix views; the original types are UNVERIFIED.
+struct TransformVectorDraft { float x, y, z; };
+struct TransformMatrixDraft { float row[4][4]; };
+extern "C" TransformVectorDraft* func_002A7B18(TransformVectorDraft* out, const TransformVectorDraft* v,
+                                              const TransformMatrixDraft* m) {
+    float ax = v->x * m->row[0][0], ay = v->x * m->row[0][1], az = v->x * m->row[0][2];
+    float bx = v->y * m->row[1][0], by = v->y * m->row[1][1], bz = v->y * m->row[1][2];
+    float cx = v->z * m->row[2][0], cy = v->z * m->row[2][1], cz = v->z * m->row[2][2];
+    float x = (ax + bx) + cx, y = (ay + by) + cy, z = (az + bz) + cz;
+    out->x = x + m->row[3][0];
+    out->y = y + m->row[3][1];
+    out->z = z + m->row[3][2];
+    return out;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7B18);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7BB0);
 #ifdef NON_MATCHING
 // Unmatched: floating-point register allocation and instruction scheduling differ.
