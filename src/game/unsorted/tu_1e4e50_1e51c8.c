@@ -263,7 +263,31 @@ void func_001E6050(void) {
 
 }
 
+#ifdef NON_MATCHING
+/* UNVERIFIED: partial view of the current and previous coordinates. */
+typedef struct Recovered_GridPosition {
+    u8 unk_000[0x8AC];
+    f32 current[3];
+    u8 unk_8B8[4];
+    u8 changed;
+    u8 unk_8BD[3];
+    f32 previous[3];
+} Recovered_GridPosition;
+
+// Unmatched: the first coordinate store is scheduled later than the reference.
+void func_001E6058(Recovered_GridPosition* self, f32 x, f32 y, f32 z) {
+    f32 oldX = self->current[0], oldY = self->current[1], oldZ = self->current[2];
+    self->previous[0] = oldX;
+    self->previous[1] = oldY;
+    self->previous[2] = oldZ;
+    self->current[2] = z;
+    self->current[0] = x;
+    self->current[1] = y;
+    self->changed = 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6058);
+#endif
 
 void func_001E6088(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x8AC) = (f32) M2C_FIELD(arg0, f32 *, 0x8C0);
@@ -279,8 +303,29 @@ s32 func_001E60A8(void* unused, u64 key) {
     }
     return 0;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E60E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6118);
+const u64 D_003F9240[6] = {
+    0x87C4F55F40000000ULL, 0x81F2D7A540000000ULL, 0x87EA361D80000000ULL,
+    0x8218186380000000ULL, 0x5F2B660780000000ULL, 0x6C1EE82BC0000000ULL,
+};
+const u64 D_003F9270[4] = {
+    0x81F2D7A540000000ULL, 0x8218186380000000ULL,
+    0x87C4F55F40000000ULL, 0x87EA361D80000000ULL,
+};
+
+s32 func_001E60E0(void* unused, u64 key) {
+    s32 i;
+    for (i = 0; i < 4; i++) {
+        if (key == D_003F9270[i]) return 1;
+    }
+    return 0;
+}
+s32 func_001E6118(void* unused, u64 key) {
+    s32 i;
+    for (i = 0; i < 6; i++) {
+        if (key == D_003F9240[i]) return 1;
+    }
+    return 0;
+}
 #ifdef NON_MATCHING
 // Unmatched: register allocation differs and the key table is assembly-owned.
 s32 func_001E6150(void* owner, void* argument, s32 key_index) {
