@@ -743,7 +743,18 @@ extern "C" void func_0022E590(Recovered_ObjectStack* self, u8** cursor) {
     self->count = count + 1;
     object->vtable->invoke((char*)object + object->vtable->adjustment);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E5F8);
+extern "C" void func_0022E5F8(Recovered_ObjectStack* self, u8** cursor) {
+    u8* bytes = *cursor;
+    unsigned low = *bytes++;
+    unsigned high = *bytes++;
+    *cursor = bytes;
+    unsigned index = low | (high << 8);
+    int count = self->count;
+    Recovered_StackObject* object = self->lookup[index];
+    self->objects[count] = object;
+    self->count = count + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E670);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E798);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E958);
