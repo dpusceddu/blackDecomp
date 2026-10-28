@@ -29,8 +29,6 @@ s32 func_00206F08(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00206F28);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00206F30);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00207020);
 s32 func_00207110(void* self, const void* scale, const void* position) {
     f32 extent[2];
     void* command;

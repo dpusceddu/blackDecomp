@@ -1629,7 +1629,9 @@ splits:
   - {src: src/game/unsorted/tu_204a50_206a28.c, range: [0x206a28, 0x206b28], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_204a50_206b28.c, range: [0x206b28, 0x206b58], note: flags or language differ}
   - {src: src/game/unsorted/tu_204a50_206b58.c, range: [0x206b58, 0x206f08], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
-  - {src: src/game/unsorted/tu_204a50_206f08.c, range: [0x206f08, 0x209318]}
+  - {src: src/game/unsorted/tu_204a50_206f08.c, range: [0x206f08, 0x206f30]}
+  - {src: src/game/unsorted/tu_204a50_206f30.cpp, range: [0x206f30, 0x207110], note: "C++ vector/color temporaries reproduce native constructor stores, quadword captures and shared temporary stack lifetimes."}
+  - {src: src/game/unsorted/tu_204a50_206f08.c, range: [0x207110, 0x209318]}
   - {src: src/game/unsorted/tu_209318.c, range: [0x209318, 0x209340]}
   - {src: src/game/unsorted/tu_209340.c, range: [0x209340, 0x209378]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x209378, 0x2094a8]}
