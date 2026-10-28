@@ -165,9 +165,23 @@ void func_002156F8(void)
   D_003BE84C = 3;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00215740);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00215788);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_002157C8);
+extern void func_0010B238(s32);
+extern void func_0010B2A8(s32);
+void func_00215740(void) {
+    func_00105258((u8*)D_0040F0E0 + 0x20220);
+    func_0010B238(D_0040F4F0);
+    D_003BE84C = 2;
+}
+void func_00215788(void) {
+    func_00105258((u8*)D_0040F0E0 + 0x20220);
+    func_0010B2A8(D_0040F4F0);
+    D_003BE84C = 0;
+}
+void func_002157C8(void) {
+    func_00105258((u8*)D_0040F0E0 + 0x20220);
+    func_0010B2C0(D_0040F4F0, 0);
+    D_003BE84C = 4;
+}
 
 void func_00215810(void)
 {
