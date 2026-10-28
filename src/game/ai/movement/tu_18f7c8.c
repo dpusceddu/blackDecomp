@@ -272,7 +272,55 @@ s32 func_0018FFC0(void *arg0, s32 *arg1) {
     return 0;
 }
 
+#ifdef NON_MATCHING
+extern s32 func_0018DDD8(void *);
+extern void func_001A4F70(const char *);
+extern const char D_003F5768[];
+extern s32 func_00188F20(void *);
+extern s32 func_00188C38(void *, s32);
+extern s32 func_001893B8(void *, s32);
+extern void func_00173640(void *, f32);
+extern s32 func_00173610(void *);
+extern void func_001901E0(Recovered_MovementEventState *, u8);
+
+// Unmatched: indexed address operand order and loop scheduling differ.
+void func_00190020(Recovered_MovementEventState *self) {
+    s32 best = -1;
+    u8 selected = 5;
+    s32 *choices;
+    void *timer;
+    u8 i;
+    if (func_0018DDD8((u8 *)self->owner + 0xc94)) {
+        func_001A4F70(D_003F5768);
+        return;
+    }
+    choices = self->choices;
+    timer = self->pad3;
+    if (func_00188F20((u8 *)self->owner + 0x150)) {
+        for (i = 0; i < 5; i++) {
+            if (choices[i]) {
+                s32 score = 0;
+                if (func_00188C38((u8 *)self->owner + 0x150, choices[i])) score = 50;
+                score += func_001893B8((u8 *)self->owner + 0x150, choices[i]);
+                if (best < score) { best = score; selected = i; }
+            }
+        }
+    }
+    if (selected < 5 && best > 0) {
+        func_00173640(timer, 20.0f);
+        self->mode = selected;
+    } else if (func_00173610(timer)) {
+        func_00173640(timer, 20.0f);
+        do {
+            self->mode++;
+            if (self->mode >= 5) self->mode = 0;
+        } while (!choices[self->mode]);
+    }
+    if (choices[self->mode] != self->current) func_001901E0(self, self->mode);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/movement/tu_18f7c8", func_00190020);
+#endif
 
 const char D_003F5768[] = "Message to Level Designer :\n"
                           "Never give a teammate a firesector with multiple volumes!\n"
