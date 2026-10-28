@@ -17,6 +17,8 @@ extern void* D_0040F0E0;
 extern s32* D_0040F4C0;
 extern s128 D_00438CE0;
 extern void func_00276610(void*, const void*, const void*, const void*, s128);
+extern void* func_00275448(void*, s32, s32, s32);
+extern s32 func_00384CF0(void*, const void*, const void*, const void*);
 
 static inline void SetFrontendVec2(f32* value, f32 x, f32 y) {
     value[0] = x;
@@ -116,7 +118,19 @@ s32 func_00208BF0(void* self) {
     return 1;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00208C58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00208C60);
+// Native adjacent constants; the SDK marker's original owner and identifier are UNVERIFIED.
+const u16 D_003FA270[] = {'%', '1', ':', '%', '2', 0};
+const char D_003FA280[] = "DirtyXSDK";
+
+s32 func_00208C60(void* destination, f32 time) {
+    u16 minutes[8];
+    u16 seconds[8];
+    s32 wholeMinutes = (s32)(time / 60.0f);
+    s32 remaining = (s32)(time - (f32)wholeMinutes * 60.0f);
+    func_00275448(minutes, wholeMinutes, 1, 0);
+    func_00275448(seconds, remaining, 2, 0);
+    return func_00384CF0(destination, D_003FA270, minutes, seconds);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00208D00);
 
 void func_002092B8(void) {
