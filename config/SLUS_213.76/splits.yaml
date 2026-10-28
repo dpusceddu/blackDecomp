@@ -2034,7 +2034,8 @@ splits:
   - {src: src/sony/tu_293e90_296468.c, range: [0x296468, 0x2964c0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_293e90_2962f0.c, range: [0x2964c0, 0x298dc8]}
   - {src: src/sony/tu_293e90_296468.c, range: [0x298dc8, 0x299038]}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x299038, 0x299f48]}
+  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x299038, 0x299ea8]}
+  - {src: src/game/effects/tu_299ea8.c, range: [0x299ea8, 0x299f48], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony DMA routine uses 64-bit register saves and a C tail call}
   - {src: src/sony/tu_299f48.c, range: [0x299f48, 0x29b050], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_299f48_29b050.c, range: [0x29b050, 0x29b0a8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_29b0a8.c, range: [0x29b0a8, 0x29b1d0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
@@ -2045,7 +2046,11 @@ splits:
   - {src: src/game/effects/tu_29b500_29b7f8.cpp, range: [0x29b7f8, 0x29b868], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29b868, 0x29b998]}
   - {src: src/game/effects/tu_29b500_29b998.cpp, range: [0x29b998, 0x29ba58], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29ba58, 0x29c138]}
+  - {src: src/game/effects/tu_29b500_29ba58.cpp, range: [0x29ba58, 0x29bbc8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
+  - {src: src/game/effects/tu_29b500_29bbc8.cpp, range: [0x29bbc8, 0x29bcc0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony status wrapper uses 64-bit saved-register stores and Sony compiler ABI}
+  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29bcc0, 0x29bfe8]}
+  - {src: src/game/effects/tu_29b500_29bfe8.cpp, range: [0x29bfe8, 0x29c110], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
+  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29c110, 0x29c138]}
   - {src: src/sony/tu_29c138.c, range: [0x29c138, 0x29c1d8], note: flags or language differ}
   - {src: src/sony/tu_29c138_29c1d8.c, range: [0x29c1d8, 0x29c6c8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_29c6c8.c, range: [0x29c6c8, 0x29cee8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}

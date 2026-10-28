@@ -527,16 +527,92 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299BA0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299C70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299D90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299EA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B1D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B558);
+#ifdef NON_MATCHING
+// Unmatched: six instruction-order differences with the Sony compiler; this unit uses the SN compiler.
+// Partial socket and RPC buffer views; field meanings are UNVERIFIED.
+struct SocketParamsDraft {
+    int a, b, c, d, e;
+    unsigned char name[16];
+};
+struct RpcBufferDraft {
+    int a, b, c, d, e;
+    unsigned char name[16];
+    int result, arg1, arg2;
+};
+extern int D_003C1570, D_00445D80;
+extern char D_004438C0[];
+extern RpcBufferDraft D_004439C0;
+extern "C" int func_0036B100(void*, unsigned, int, void*, int, void*, int, int, int);
+extern "C" int func_003678A0(int);
+extern "C" int func_00367880(int);
+extern "C" void func_0029C110(const char*, ...);
+extern "C" int func_0029B868(SocketParamsDraft* params, int arg1, int arg2) {
+    if (!D_003C1570) return 0;
+    func_003678A0(D_00445D80);
+    RpcBufferDraft* buf = &D_004439C0;
+    buf->a = params->a;
+    buf->arg1 = arg1;
+    buf->arg2 = arg2;
+    buf->b = params->b;
+    buf->c = params->c;
+    buf->d = params->d;
+    buf->e = params->e;
+    for (int i = 0; i < 16; ++i) buf->name[i] = params->name[i];
+    if (func_0036B100(D_004438C0, 0x80001301, 0, &D_004439C0, 0x90, &D_004439C0, 0x90, 0, 0) < 0) {
+        func_0029C110("sceDbcCreateSocket: rpc error\n");
+        func_00367880(D_00445D80);
+        return 0;
+    }
+    int result = buf->result;
+    func_00367880(D_00445D80);
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B868);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029BA58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029BBC8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029BCC0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029BCE0);
+#ifdef NON_MATCHING
+// Unmatched: the buffer-index addition has reversed operands under the Sony compiler.
+struct SendBufferDraft {
+    int a, b, count;
+    unsigned char bytes[0x2080];
+};
+extern char D_00443910[];
+extern SendBufferDraft D_00443A80;
+extern int D_00445D80;
+extern "C" int func_003678A0(int);
+extern "C" int func_00367880(int);
+extern "C" int func_0036B300(void*);
+extern "C" int func_0036B100(void*, unsigned, int, void*, int, void*, int, int, int);
+extern "C" void func_0029C110(const char*, ...);
+extern "C" int func_0029BE90(int a, int b, int* count, const unsigned char* bytes, int callback) {
+    if (*count > 0x2080) {
+        func_0029C110("libdbc: SendData3 data length too long [%d]\n", *count);
+        return 0;
+    }
+    func_003678A0(D_00445D80);
+    if (func_0036B300(D_00443910) == 1) {
+        func_0029C110("dbcman : SendData3 BUSY\n");
+        func_00367880(D_00445D80);
+        return 0;
+    }
+    D_00443A80.a = a;
+    D_00443A80.b = b;
+    D_00443A80.count = *count;
+    for (int i = 0; i < *count; i++) D_00443A80.bytes[i] = bytes[i];
+    if (func_0036B100(D_00443910, 0x8000131c, 1, &D_00443A80, 0x2090, &D_00443A80, 0x2090, callback, 0) < 0) {
+        func_00367880(D_00445D80);
+        return 0;
+    }
+    func_00367880(D_00445D80);
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029BE90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029BFE8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029C110);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029D4C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7930);
