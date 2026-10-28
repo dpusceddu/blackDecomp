@@ -72,23 +72,6 @@ void func_00172700(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172708);
-#ifdef NON_MATCHING
-// Unmatched: native short loop has one fewer assembler NOP.
-s32 func_001727C0(f32* self) {
-    f32* value;
-    s32 count;
-    if (!func_00172548(self)) return 0;
-    value = (f32*)((u8*)self + 0x4C);
-    count = 3;
-    do {
-        *value = 0.0f;
-        count--;
-        value--;
-    } while (count >= 0);
-    return 1;
-}
-#endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_001727C0);
 
 s32 func_00172818(void) {
     return 1;

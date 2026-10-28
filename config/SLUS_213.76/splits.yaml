@@ -657,7 +657,9 @@ splits:
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x1721e8, 0x1723e8]}
   - {src: src/game/unsorted/tu_1723e8.c, range: [0x1723e8, 0x172518]}
   - {src: src/game/unsorted/tu_172518.c, range: [0x172518, 0x172548]}
-  - {src: src/game/ai/tu_172548.c, range: [0x172548, 0x172f60], note: flags or language differ}
+  - {src: src/game/ai/tu_172548.c, range: [0x172548, 0x1727c0], note: flags or language differ}
+  - {src: src/game/ai/tu_172548_1727c0.c, range: [0x1727c0, 0x172818], flags: [-O2, -G0, -snas], assembler: sn-min6, note: short timer reset loop requires original branch scheduling}
+  - {src: src/game/ai/tu_172548.c, range: [0x172818, 0x172f60]}
   - {src: src/game/ai/tu_172548_172f60.c, range: [0x172f60, 0x173190], flags: [-Os, -G0], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/ai/tu_172548.c, range: [0x173190, 0x173198]}
   - {src: src/game/ai/tu_172548_172f60.c, range: [0x173198, 0x173450]}
