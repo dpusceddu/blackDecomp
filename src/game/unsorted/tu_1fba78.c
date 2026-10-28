@@ -15,12 +15,37 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fba78", func_001FBD9
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fba78", func_001FC188);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fba78", func_001FC280);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fba78", func_001FC320);
+#ifdef NON_MATCHING
+// Unmatched: clamp branch and definition-field load width differ.
+// Partial state and definition views; original types and field meanings are UNVERIFIED.
+typedef struct {
+    char unknown00[0x158];
+    f32 limit, current;
+    char unknown160[0x35];
+    s8 index;
+} WeaponScaleStateDraft;
+typedef struct {
+    char unknown00[0x60];
+    s32 value;
+} WeaponScaleDefinitionDraft;
+extern void* D_0040F4E0;
+extern WeaponScaleDefinitionDraft* func_0015D248(void*, s32, s32);
+extern s32 func_001FC558(void*, s32, s32);
+
+s32 func_001FC400(WeaponScaleStateDraft* self, u16 amount) {
+    WeaponScaleDefinitionDraft* definition = func_0015D248(D_0040F4E0, self->index, 0);
+    f32 ratio = self->current / self->limit;
+    if (ratio > 1.0f) ratio = 1.0f;
+    return func_001FC558(self, (s32)(amount * ratio) & 0xffff, definition->value & 0xffff);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fba78", func_001FC400);
+#endif
 
 #include "ps2/recovered_types.h"
-extern s32 func_001FC558(void *, s32, s32);
+extern s32 func_001FC558(void*, s32, s32);
 
-s32 func_001FC490(void *arg0) {
+s32 func_001FC490(void* arg0) {
     f32 var_f1;
 
     var_f1 = M2C_FIELD(arg0, f32 *, 0x15C) / M2C_FIELD(arg0, f32 *, 0x158);
