@@ -584,7 +584,7 @@ using AptViews::D_003BFAF8;
 using AptViews::D_0043DEE0;
 using AptViews::D_0043DF40;
 struct AptOperandStack {
-    int count, capacity;
+    int count, unknown04;
     Value** values;
 };
 extern "C" {
@@ -866,191 +866,475 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229F40);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022A1C0);
 #ifdef NON_MATCHING
-namespace AptInterpreterDraft {
-struct AptCallState {
-    AptOperandStack stack, frames, unused18, scopes;
-    unsigned unknown30, unknown34;
-    Value** lookup;
-};
-struct AptCallContext {
-    unsigned unknown00;
-    Value* receiver;
-    unsigned unknown08[2];
-    Value* constructor;
-};
-extern "C" {
-void func_00253FF0(void*, const char*);
-int func_00360838(const char*, const char*);
-Value* LookupCallProperty(void*, Value*, int, void*, int, int, int) __asm__("func_0021E420");
-int func_0024F440(Value*);
-void func_0021EA58(void*, Value*, Value*, int);
-extern Value* D_0043DF48;
-extern char D_003FD498, D_003FD4B0, D_003FD4B8, D_003FD4C0;
-}
-struct CallText {
-    Token* token;
-    CallText() : token(&D_003BFAF8) { ++token->refs; }
-    CallText(const char* text) { func_00253FF0(this, text); }
-    CallText& operator=(const CallText& other) {
-        ++other.token->refs;
-        if (!--token->refs) func_00250198(D_0043DEE0, token, *(unsigned short*)((char*)token + 4) + 9);
-        token = other.token;
-        return *this;
-    }
-    ~CallText() {
-        if (!--token->refs) func_00250198(D_0043DEE0, token, *(unsigned short*)((char*)token + 4) + 9);
-    }
-    inline const char* Data() const { return token->text; }
-    inline int Equals(const char* text) const { return func_00360838(Data(), text) == 0; }
-};
-static inline void PushValue(AptOperandStack* stack, Value* value) {
-    int count = stack->count;
-    stack->values[count] = value;
-    stack->count = count + 1;
-    value->AddRef();
-}
-static inline void PopValue(AptOperandStack* stack) {
-    if (stack->count > 0) {
-        stack->values[stack->count - 1]->Release();
-        --stack->count;
-    }
-}
-// Unmatched: string temporaries, stack spills and call-path scheduling differ.
-extern "C" void func_0022A440(void* rawSelf, void* rawContext) {
-    AptCallState* self = (AptCallState*)rawSelf;
-    AptCallContext* context = (AptCallContext*)rawContext;
-    Value* receiver = 0;
-    int framePushed = 0;
-    int count = self->stack.count;
-    Value* countValue = self->stack.values[count - 3];
-    Value* target = self->stack.values[count - 2];
-    Value* nameValue = self->stack.values[count - 1];
-    Value* callee = target;
-    int argc = func_0024C300(countValue);
-    CallText name;
-    if (nameValue == (Value*)D_0043DF40) {
-        name = CallText(&D_003FD498);
-        receiver = target;
-        if ((unsigned char)IsAptType(target, 28)) receiver = *(Value**)((char*)target + 0x1C);
-    } else
-        func_0024C6D0(nameValue, &name);
-    if (((target->flags >> 4) & 1) ^ 1) {
-        int number = argc + 3;
-        if (self->stack.count >= number) {
-            for (int i = 1; i <= number; ++i) self->stack.values[self->stack.count - i]->Release();
-            self->stack.count -= number;
+namespace AptCallDraft {
+// UNVERIFIED: original interpreter types, stack-local layout and call-site interfaces.
+typedef struct Recovered_ObjectStack {
+    s32 unk_0;
+    u8 unk_4[4];
+    s32 unk_8;
+    u8 unk_C[36];
+    void* unk_30;
+    u8 unk_34[4];
+    s32 unk_38;
+} Recovered_ObjectStack;
+// Symbol aliases isolate this provisional value view from the typed APT interfaces.
+extern "C" s32 Call_func_0024C300(s32*) __asm__("func_0024C300");
+extern "C" u16 Call_D_003BFAF8 __asm__("D_003BFAF8");
+extern "C" s32* Call_D_0043DF40 __asm__("D_0043DF40");
+extern "C" void Call_func_00253FF0(void*, s8*) __asm__("func_00253FF0");
+extern "C" s8 Call_D_003FD498 __asm__("D_003FD498");
+extern "C" void Call_func_00250198(void*, u16*, s32) __asm__("func_00250198");
+extern "C" void* Call_D_0043DEE0 __asm__("D_0043DEE0");
+extern "C" void Call_func_0024C6D0(s32*, void*) __asm__("func_0024C6D0");
+extern "C" s32* Call_func_0021E420(Recovered_ObjectStack*, s32*, s32, void*, s32, s32, s32) __asm__("func_0021E420");
+extern "C" s32 Call_func_00360838(s8*, const char*) __asm__("func_00360838");
+extern "C" s8 Call_D_003FD4B0 __asm__("D_003FD4B0");
+extern "C" s32 Call_func_0024F440(void*) __asm__("func_0024F440");
+extern "C" s32* Call_D_0043DF48 __asm__("D_0043DF48");
+extern "C" void Call_func_0021EA58(void*, s32*, s32*, s32) __asm__("func_0021EA58");
+extern "C" M2C_UNK Call_D_003FD4B8 __asm__("D_003FD4B8");
+extern "C" M2C_UNK Call_D_003FD4C0 __asm__("D_003FD4C0");
+
+// Unmatched: string cleanup and temporary lifetimes change scheduling and register allocation.
+extern "C" void func_0022A440(void* self, void* callContext) {
+    s32 didPushScope;
+    s32* countValue;
+    void* scopeStack;
+    u16* nameToken;
+    u16* temporaryToken;
+    void (*temp_5_13)(void*);
+    void (*temp_5_15)(void*);
+    void (*temp_5_16)(void*);
+    void (*temp_5_2)(void*);
+    void (*temp_5_7)(void*);
+    void (*temp_5_8)(void*);
+    void (*temp_5_9)(void*);
+    const char* temp_5_5;
+    s32* nameValue;
+    s32* temp_16_2;
+    s32* operandObject;
+    s32* temp_2;
+    s32* temp_3_8;
+    s32* temp_4_4;
+    s32* temp_5_3;
+    s32* var_16_3;
+    s32* thisValue;
+    s32* functionValue;
+    s32 temp_18;
+    s32 temp_2_10;
+    s32 temp_2_11;
+    s32 temp_2_13;
+    s32 temp_2_15;
+    s32 temp_2_4;
+    s32 temp_2_7;
+    s32 temp_2_8;
+    s32 temp_2_9;
+    s32 temp_3;
+    s32 temp_3_11;
+    s32 temp_3_14;
+    s32 temp_3_17;
+    s32 temp_3_18;
+    s32 temp_3_3;
+    s32 temp_3_4;
+    s32 temp_3_6;
+    s32 temp_3_7;
+    s32 temp_4_3;
+    s32 temp_4_5;
+    s32 temp_4_6;
+    s32 temp_4_7;
+    s32 temp_5;
+    s32 temp_5_10;
+    s32 temp_5_11;
+    s32 temp_5_6;
+    s32 temp_6_6;
+    s32 var_16;
+    s32 var_16_2;
+    s32 var_18;
+    s32 var_18_2;
+    s32 argumentCount;
+    s32 var_4;
+    s32 var_5;
+    s32 var_5_2;
+    s32 var_5_3;
+    s32 var_5_5;
+    s32 var_5_6;
+    s32 var_6;
+    s32 var_6_2;
+    s32 var_7;
+    u16 temp_2_16;
+    u16 temp_2_2;
+    u16 temp_2_3;
+    u16 var_2;
+    u32 temp_3_13;
+    u32 temp_3_19;
+    u32 temp_4;
+    u32 temp_4_2;
+    void* temp_18_2;
+    void* temp_23;
+    void* temp_2_12;
+    void* temp_2_14;
+    void* temp_2_17;
+    void* temp_2_18;
+    void* temp_2_19;
+    void* temp_2_20;
+    void* temp_2_5;
+    void* temp_2_6;
+    void* temp_3_10;
+    void* temp_3_12;
+    void* temp_3_15;
+    void* temp_3_16;
+    void* temp_3_20;
+    void* temp_3_21;
+    void* temp_3_22;
+    void* temp_3_23;
+    void* temp_3_2;
+    void* temp_3_5;
+    void* temp_3_9;
+    void* temp_5_12;
+    void* temp_5_14;
+    void* temp_5_4;
+    void* temp_6;
+    void* temp_6_2;
+    void* temp_6_3;
+    void* temp_6_4;
+    void* temp_6_5;
+    void* temp_6_7;
+    void* temp_6_8;
+    void* temp_7;
+    void* var_2_2;
+    void* var_5_4;
+    functionValue = 0;
+    temp_3 = *((s32*)(((s8*)self) + 0));
+    didPushScope = 0;
+    temp_5 = *((s32*)(((s8*)self) + 8));
+    temp_2 = *((s32**)(((s8*)(((temp_3 - 2) * 4) + temp_5)) + (-4)));
+    countValue = temp_2;
+    operandObject = *((s32**)(((s8*)(((temp_3 - 1) * 4) + temp_5)) + (-4)));
+    nameValue = *((s32**)(((s8*)((temp_3 * 4) + temp_5)) + (-4)));
+    thisValue = operandObject;
+    argumentCount = Call_func_0024C300(temp_2);
+    nameToken = &Call_D_003BFAF8;
+    Call_D_003BFAF8 += 1;
+    if (nameValue == Call_D_0043DF40) {
+        Call_func_00253FF0(&temporaryToken, &Call_D_003FD498);
+        *((u16*)(((s8*)(temporaryToken)) + 0)) += 1;
+        temp_2_2 = (*((u16*)(((s8*)(nameToken)) + 0))) - 1;
+        *((u16*)(((s8*)(nameToken)) + 0)) = temp_2_2;
+        if (!(temp_2_2 & 0xFFFF)) {
+            Call_func_00250198(Call_D_0043DEE0, nameToken, (*((u16*)(((s8*)(nameToken)) + 4))) + 9);
         }
-        int index = self->stack.count;
-        self->stack.values[index] = (Value*)D_0043DF40;
-        self->stack.count = index + 1;
-        return;
-    }
-    PushValue(&self->scopes, context->receiver);
-    PopValue(&self->stack);
-    if (self->stack.count > 0) --self->stack.count;
-    if (self->stack.count > 0) --self->stack.count;
-    if (!receiver || receiver == (Value*)D_0043DF40) receiver = LookupCallProperty(self, target, 0, &name, 1, 1, 0);
-    if ((!receiver || (((receiver->flags >> 4) & 1) ^ 1)) && (name.Equals("apply") || name.Equals("call"))) {
-        receiver = target;
-        if (!(unsigned char)IsAptType(countValue, 7) && !(unsigned char)IsAptType(countValue, 6)) {
-            callee = countValue;
-            argc = func_0024C300(self->stack.values[self->stack.count - 1]);
-            if (argc >= 2) {
-                Value* value = self->stack.values[self->stack.count - 2];
-                if (value) callee = ((value->flags >> 4) & 1) ? value : countValue;
-                PopValue(&self->stack);
-                --argc;
-            }
-            PopValue(&self->stack);
-        } else {
-            if (argc > 0) {
-                Value* value = self->stack.values[self->stack.count - 1];
-                callee = value && ((value->flags >> 4) & 1) ? value : (Value*)D_0043DF40;
-                PopValue(&self->stack);
-                --argc;
-            } else
-                callee = (Value*)D_0043DF40;
+        nameToken = temporaryToken;
+        temp_2_3 = (*((u16*)(((s8*)(temporaryToken)) + 0))) - 1;
+        *((u16*)(((s8*)(temporaryToken)) + 0)) = temp_2_3;
+        if (!(temp_2_3 & 0xFFFF)) {
+            Call_func_00250198(Call_D_0043DEE0, temporaryToken, (*((u16*)(((s8*)(temporaryToken)) + 4))) + 9);
         }
-        if (name.Equals("apply")) {
-            Value* array = self->stack.values[self->stack.count - 1];
-            if ((unsigned char)IsAptType(array, 22)) {
-                PopValue(&self->stack);
-                int i = *(int*)((char*)array + 0x28) - 1;
-                argc += i;
-                for (; i >= 0; --i) PushValue(&self->stack, (*(Value***)((char*)array + 0x20))[i]);
+        temp_4 = *((u32*)(((s8*)operandObject) + 0));
+        var_5 = 0;
+        if ((temp_4 >> 0x19) == 0x1C) { var_5 = (((s32)temp_4) >> 4) & 1; }
+        functionValue = operandObject;
+        if (var_5 & 0xFF) { functionValue = *((s32**)(((s8*)operandObject) + 0x1C)); }
+    } else {
+        Call_func_0024C6D0(nameValue, &nameToken);
+    }
+    if (!((((((s32)(*((u32*)(((s8*)operandObject) + 0)))) >> 4) & 1) ^ 1) != 0)) {
+        temp_3_4 = *((s32*)(((s8*)self) + 0x24));
+        temp_2_5 = (void*)(((s8*)self) + 0x24);
+        scopeStack = temp_2_5;
+        temp_5_3 = *((s32**)(((s8*)callContext) + 4));
+        *((s32**)(((s8*)((temp_3_4 * 4) + (*((s32*)(((s8*)temp_2_5) + 8))))) + 0)) = temp_5_3;
+        *((s32*)(((s8*)self) + 0x24)) = (s32)(temp_3_4 + 1);
+        temp_2_6 = *((void**)(((s8*)temp_5_3) + 4));
+        (*((void (**)(void*))(((s8*)temp_2_6) + 0xC)))((void*)(((s8*)temp_5_3) + (*((s16*)(((s8*)temp_2_6) + 8)))));
+        temp_2_7 = *((s32*)(((s8*)self) + 0));
+        if (temp_2_7 > 0) {
+            temp_5_4 = *((void**)(((s8*)((temp_2_7 * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)));
+            temp_3_5 = *((void**)(((s8*)temp_5_4) + 4));
+            (*((void (**)(void*))(((s8*)temp_3_5) + 0x14)))(
+                (void*)(((s8*)temp_5_4) + (*((s16*)(((s8*)temp_3_5) + 0x10)))));
+            temp_3_6 = *((s32*)(((s8*)self) + 0));
+            temp_2_8 = temp_3_6 - 1;
+            *((s32*)(((s8*)self) + 0)) = temp_2_8;
+            if (temp_2_8 > 0) {
+                temp_2_9 = temp_3_6 - 2;
+                *((s32*)(((s8*)self) + 0)) = temp_2_9;
+                if (temp_2_9 > 0) { *((s32*)(((s8*)self) + 0)) = (s32)(temp_3_6 - 3); }
             }
         }
-    }
-    int allow = 1;
-    if (callee->Slot5()) {
-        Value* frameValue = callee;
-        if (self->frames.count == 0) {
-            if (callee == context->constructor) {
-                CallText key(&D_003FD4B0);
-                frameValue = LookupCallProperty(self, context->receiver, 0, &key, 1, 1, 0);
-            }
-        } else {
-            Value* current = self->frames.values[self->frames.count - 1];
-            if ((!(unsigned char)IsAptObject(callee) || *(Value**)((char*)callee + 0x44) != current) &&
-                callee != current) {
-                void* prototype = current->Payload();
-                while (prototype) {
-                    current = *(Value**)((char*)prototype + 8);
-                    if (!current) break;
-                    if (current == callee) {
-                        allow = 0;
-                        break;
+        if ((functionValue == 0) || (functionValue == Call_D_0043DF40)) {
+            functionValue = Call_func_0021E420((Recovered_ObjectStack*)self, operandObject, 0, &nameToken, 1, 1, 0);
+        }
+        temp_5_5 = "apply";
+        if (((functionValue == 0) || ((((((s32)(*functionValue)) >> 4) & 1) ^ 1) != 0)) &&
+            ((Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), temp_5_5) == 0) ||
+             (Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), "call") == 0))) {
+            functionValue = operandObject;
+            temp_3_7 = *((s32*)(((s8*)(countValue)) + 0));
+            temp_4_2 = ((u32)temp_3_7) >> 0x19;
+            var_5_2 = 0;
+            if (temp_4_2 == 7) { var_5_2 = (temp_3_7 >> 4) & 1; }
+            if (var_5_2 & 0xFF) {
+            block_32:
+                if (argumentCount > 0) {
+                    temp_2_11 = *((s32*)(((s8*)self) + 0));
+                    temp_3_11 = *((s32*)(((s8*)self) + 8));
+                    temp_4_4 = *((s32**)(((s8*)((temp_2_11 * 4) + temp_3_11)) + (-4)));
+                    if (((*((s32**)(((s8*)((temp_2_11 * 4) + temp_3_11)) + (-4)))) == 0) ||
+                        ((thisValue = temp_4_4, (((((s32)(*temp_4_4)) >> 4) & 1) ^ 1) != 0))) {
+                        thisValue = Call_D_0043DF40;
                     }
-                    prototype = current->Payload();
+                    if (temp_2_11 > 0) {
+                        temp_6_4 = *((void**)(((s8*)((temp_2_11 * 4) + temp_3_11)) + (-4)));
+                        temp_3_12 = *((void**)(((s8*)temp_6_4) + 4));
+                        temp_5_9 = *((void (**)(void*))(((s8*)temp_3_12) + 0x14));
+                        temp_5_9((void*)(((s8*)temp_6_4) + (*((s16*)(((s8*)temp_3_12) + 0x10)))));
+                        *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - 1);
+                    }
+                    argumentCount -= 1;
+                } else {
+                    thisValue = Call_D_0043DF40;
+                }
+
+            } else {
+                var_5_3 = 0;
+                if (temp_4_2 == 6) { var_5_3 = (temp_3_7 >> 4) & 1; }
+                if (!(var_5_3 & 0xFF)) {
+                    thisValue = countValue;
+                    argumentCount = Call_func_0024C300(
+                        *((s32**)(((s8*)(((*((s32*)(((s8*)self) + 0))) * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4))));
+                    if (argumentCount >= 2) {
+                        temp_4_3 = *((s32*)(((s8*)self) + 0));
+                        temp_5_6 = *((s32*)(((s8*)self) + 8));
+                        temp_3_8 = *((s32**)(((s8*)(((temp_4_3 - 1) * 4) + temp_5_6)) + (-4)));
+                        if (temp_3_8 != 0) { thisValue = ((((s32)(*temp_3_8)) >> 4) & 1) ? (temp_3_8) : (countValue); }
+                        if (temp_4_3 > 0) {
+                            temp_6_2 = *((void**)(((s8*)((temp_4_3 * 4) + temp_5_6)) + (-4)));
+                            temp_3_9 = *((void**)(((s8*)temp_6_2) + 4));
+                            temp_5_7 = *((void (**)(void*))(((s8*)temp_3_9) + 0x14));
+                            temp_5_7((void*)(((s8*)temp_6_2) + (*((s16*)(((s8*)temp_3_9) + 0x10)))));
+                            *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - 1);
+                        }
+                        argumentCount -= 1;
+                    }
+                    temp_2_10 = *((s32*)(((s8*)self) + 0));
+                    if (temp_2_10 > 0) {
+                        temp_6_3 = *((void**)(((s8*)((temp_2_10 * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)));
+                        temp_3_10 = *((void**)(((s8*)temp_6_3) + 4));
+                        temp_5_8 = *((void (**)(void*))(((s8*)temp_3_10) + 0x14));
+                        temp_5_8((void*)(((s8*)temp_6_3) + (*((s16*)(((s8*)temp_3_10) + 0x10)))));
+                        *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - 1);
+                    }
+                } else {
+                    goto block_32;
+                }
+            }
+            if (Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), temp_5_5) == 0) {
+                temp_5_10 = *((s32*)(((s8*)self) + 0));
+                temp_18_2 = *((void**)(((s8*)((temp_5_10 * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)));
+                temp_3_13 = *((u32*)(((s8*)temp_18_2) + 0));
+                var_6 = 0;
+                if ((temp_3_13 >> 0x19) == 0x16) { var_6 = (((s32)temp_3_13) >> 4) & 1; }
+                if (var_6 & 0xFF) {
+                    if (temp_5_10 > 0) {
+                        temp_2_12 = *((void**)(((s8*)temp_18_2) + 4));
+                        (*((void (**)(void*))(((s8*)temp_2_12) + 0x14)))(
+                            (void*)(((s8*)temp_18_2) + (*((s16*)(((s8*)temp_2_12) + 0x10)))));
+                        *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - 1);
+                    }
+                    temp_2_13 = (*((s32*)(((s8*)temp_18_2) + 0x28))) - 1;
+                    var_16_2 = temp_2_13;
+                    argumentCount += temp_2_13;
+                    if (var_16_2 >= 0) {
+                        do {
+                            temp_3_14 = var_16_2 * 4;
+                            temp_4_5 = *((s32*)(((s8*)self) + 0));
+                            var_16_2 -= 1;
+                            temp_5_11 = *((s32*)(((s8*)self) + 8));
+                            temp_6_5 = *((void**)(((s8*)(temp_3_14 + (*((s32*)(((s8*)temp_18_2) + 0x20))))) + 0));
+                            *((void**)(((s8*)((temp_4_5 * 4) + temp_5_11)) + 0)) = temp_6_5;
+                            *((s32*)(((s8*)self) + 0)) = (s32)(temp_4_5 + 1);
+                            temp_2_14 = *((void**)(((s8*)temp_6_5) + 4));
+                            (*((void (**)(void*))(((s8*)temp_2_14) + 0xC)))(
+                                (void*)(((s8*)temp_6_5) + (*((s16*)(((s8*)temp_2_14) + 8)))));
+                        } while (var_16_2 >= 0);
+                    }
                 }
             }
         }
-        if (allow == 1) {
-            framePushed = 1;
-            if ((unsigned char)IsAptType(frameValue, 27)) *(unsigned*)((char*)frameValue + 0x1C) |= 0x200;
-            PushValue(&self->frames, frameValue);
+        temp_3_15 = *((void**)(((s8*)thisValue) + 4));
+        var_18 = 1;
+        if ((*((s32(**)(void*))(((s8*)temp_3_15) + 0x34)))(
+                (void*)(((s8*)thisValue) + (*((s16*)(((s8*)temp_3_15) + 0x30))))) != 0) {
+            temp_2_15 = *((s32*)(((s8*)self) + 0xC));
+            var_16_3 = thisValue;
+            temp_23 = (void*)(((s8*)self) + 0xC);
+            if (temp_2_15 == 0) {
+                if (thisValue == (*((s32**)(((s8*)callContext) + 0x10)))) {
+                    Call_func_00253FF0(&temporaryToken, &Call_D_003FD4B0);
+                    var_16_3 = Call_func_0021E420((Recovered_ObjectStack*)self, *((s32**)(((s8*)callContext) + 4)), 0,
+                                                  &temporaryToken, 1, 1, 0);
+                    temp_2_16 = (*((u16*)(((s8*)(temporaryToken)) + 0))) - 1;
+                    *((u16*)(((s8*)(temporaryToken)) + 0)) = temp_2_16;
+                    if (!(temp_2_16 & 0xFFFF)) {
+                        Call_func_00250198(Call_D_0043DEE0, temporaryToken,
+                                           (*((u16*)(((s8*)(temporaryToken)) + 4))) + 9);
+                    }
+                }
+            } else {
+                temp_6_6 = *((s32*)(((s8*)thisValue) + 0));
+                var_7 = 0;
+                var_5_4 = *((void**)(((s8*)((temp_2_15 * 4) + (*((s32*)(((s8*)temp_23) + 8))))) + (-4)));
+                if (((u32)((((u32)temp_6_6) >> 0x19) - 0xC)) < 8U) { var_7 = (temp_6_6 >> 4) & 1; }
+                if (((!(var_7 & 0xFF)) || ((*((void**)(((s8*)thisValue) + 0x44))) != var_5_4)) &&
+                    (thisValue != var_5_4)) {
+                loop_68:
+                    temp_3_16 = *((void**)(((s8*)var_5_4) + 4));
+
+                    var_2_2 = (*((void* (**)(void*))(((s8*)temp_3_16) + 0x24)))(
+                        (void*)(((s8*)var_5_4) + (*((s16*)(((s8*)temp_3_16) + 0x20)))));
+                loop_69:
+                    if (var_2_2 != 0) {
+                        var_5_4 = *((void**)(((s8*)var_2_2) + 8));
+                        var_2_2 = 0;
+                        if (var_5_4 != 0) {
+                            if (var_5_4 == thisValue) {
+                                var_18 = 0;
+                            } else {
+                                var_2_2 = 0;
+                                if (var_5_4 != 0) { goto loop_68; }
+                                goto loop_69;
+                            }
+                        } else {
+                            goto loop_69;
+                        }
+                    }
+                }
+            }
+            if (var_18 == 1) {
+                temp_4_6 = *((s32*)(((s8*)var_16_3) + 0));
+                didPushScope = 1;
+                var_5_5 = 0;
+                if ((((u32)temp_4_6) >> 0x19) == 0x1B) { var_5_5 = (temp_4_6 >> 4) & 1; }
+                if (var_5_5 & 0xFF) {
+                    *((s32*)(((s8*)var_16_3) + 0x1C)) = (s32)((*((s32*)(((s8*)var_16_3) + 0x1C))) | 0x200);
+                }
+                temp_3_17 = *((s32*)(((s8*)self) + 0xC));
+                *((s32**)(((s8*)((temp_3_17 * 4) + (*((s32*)(((s8*)temp_23) + 8))))) + 0)) = var_16_3;
+                *((s32*)(((s8*)self) + 0xC)) = (s32)(temp_3_17 + 1);
+                temp_2_17 = *((void**)(((s8*)var_16_3) + 4));
+                (*((void (**)(void*))(((s8*)temp_2_17) + 0xC)))(
+                    (void*)(((s8*)var_16_3) + (*((s16*)(((s8*)temp_2_17) + 8)))));
+            }
         }
-    }
-    int retained = 0;
-    if ((((unsigned)callee->flags >> 6) & 0xFFF) == 1) {
-        retained = 1;
-        callee->AddRef();
-    }
-    if (func_0024F440(callee)) {
-        if (callee == D_0043DF48) callee = self->scopes.values[self->scopes.count - 2];
-        if (callee == context->constructor) {
-            int special = 0;
-            if ((((unsigned)receiver->flags >> 25) - 43) < 3) special = (receiver->flags >> 4) & 1;
-            if (special & 0xFF) {
-                Value* saved = *(Value**)((char*)receiver + 0x20);
-                *(Value**)((char*)receiver + 0x20) = context->receiver;
-                func_0021EA58(self, callee, receiver, argc);
-                *(Value**)((char*)receiver + 0x20) = saved;
-            } else
-                func_0021EA58(self, callee, receiver, argc);
-        } else
-            func_0021EA58(self, callee, receiver, argc);
-    } else
-        func_0021EA58(self, callee, receiver, argc);
-    if (framePushed == 1) {
-        Value* frame = self->frames.values[self->frames.count - 1];
-        if ((unsigned char)IsAptType(frame, 27)) *(unsigned*)((char*)frame + 0x1C) &= ~0x200;
-        self->frames.values[self->frames.count - 1]->Release();
-        --self->frames.count;
-    }
-    if (retained) callee->Release();
-    if (self->stack.values[self->stack.count - 1] != (Value*)D_0043DF40) {
-        if ((unsigned char)IsAptType(callee, 22)) {
-            if (name.Equals(&D_003FD4B8) || name.Equals(&D_003FD4C0))
-                self->stack.values[self->stack.count - 1]->Release();
+        var_18_2 = 0;
+        if (((((u32)(*((s32*)(((s8*)thisValue) + 0)))) >> 6) & 0xFFF) == 1) {
+            temp_2_18 = *((void**)(((s8*)thisValue) + 4));
+            var_18_2 = 1;
+            (*((void (**)(void*))(((s8*)temp_2_18) + 0xC)))(
+                (void*)(((s8*)thisValue) + (*((s16*)(((s8*)temp_2_18) + 8)))));
         }
+        if (Call_func_0024F440(thisValue) != 0) {
+            if (thisValue == Call_D_0043DF48) {
+                thisValue = *((
+                    s32**)(((s8*)((((*((s32*)(((s8*)self) + 0x24))) - 1) * 4) + (*((s32*)(((s8*)(scopeStack)) + 8))))) +
+                           (-4)));
+            }
+            if (thisValue == (*((s32**)(((s8*)callContext) + 0x10)))) {
+                temp_3_18 = *((s32*)(((s8*)functionValue) + 0));
+                var_4 = 0;
+                if (((u32)((((u32)temp_3_18) >> 0x19) - 0x2B)) < 3U) { var_4 = (temp_3_18 >> 4) & 1; }
+                if (var_4 & 0xFF) {
+                    temp_16_2 = *((s32**)(((s8*)functionValue) + 0x20));
+                    *((s32**)(((s8*)functionValue) + 0x20)) = (s32*)(*((s32**)(((s8*)callContext) + 4)));
+                    Call_func_0021EA58(self, thisValue, functionValue, argumentCount);
+                    *((s32**)(((s8*)functionValue) + 0x20)) = temp_16_2;
+                } else {
+                    goto block_91;
+                }
+            } else {
+            block_91:
+                Call_func_0021EA58(self, thisValue, functionValue, argumentCount);
+            }
+        } else {
+            Call_func_0021EA58(self, thisValue, functionValue, argumentCount);
+        }
+        temp_7 = (void*)(((s8*)self) + 0xC);
+        if ((didPushScope) == 1) {
+            temp_5_12 =
+                *((void**)(((s8*)(((*((s32*)(((s8*)self) + 0xC))) * 4) + (*((s32*)(((s8*)temp_7) + 8))))) + (-4)));
+            temp_3_19 = *((u32*)(((s8*)temp_5_12) + 0));
+            var_6_2 = 0;
+            if ((temp_3_19 >> 0x19) == 0x1B) { var_6_2 = (((s32)temp_3_19) >> 4) & 1; }
+            if (var_6_2 & 0xFF) {
+                *((s32*)(((s8*)temp_5_12) + 0x1C)) = (s32)((*((s32*)(((s8*)temp_5_12) + 0x1C))) & (~0x200));
+            }
+            temp_6_7 =
+                *((void**)(((s8*)(((*((s32*)(((s8*)self) + 0xC))) * 4) + (*((s32*)(((s8*)temp_7) + 8))))) + (-4)));
+            temp_3_20 = *((void**)(((s8*)temp_6_7) + 4));
+            temp_5_13 = *((void (**)(void*))(((s8*)temp_3_20) + 0x14));
+            temp_5_13((void*)(((s8*)temp_6_7) + (*((s16*)(((s8*)temp_3_20) + 0x10)))));
+            *((s32*)(((s8*)self) + 0xC)) = (s32)((*((s32*)(((s8*)self) + 0xC))) - 1);
+        }
+        if (var_18_2 != 0) {
+            temp_2_19 = *((void**)(((s8*)thisValue) + 4));
+            (*((void (**)(void*))(((s8*)temp_2_19) + 0x14)))(
+                (void*)(((s8*)thisValue) + (*((s16*)(((s8*)temp_2_19) + 0x10)))));
+        }
+        if ((*((void**)(((s8*)(((*((s32*)(((s8*)self) + 0))) * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)))) !=
+            Call_D_0043DF40) {
+            temp_4_7 = *((s32*)(((s8*)thisValue) + 0));
+            var_5_6 = 0;
+            if ((((u32)temp_4_7) >> 0x19) == 0x16) { var_5_6 = (temp_4_7 >> 4) & 1; }
+            if (var_5_6 & 0xFF) {
+                if ((Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), (const char*)&Call_D_003FD4B8) == 0) ||
+                    (Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), (const char*)&Call_D_003FD4C0) == 0)) {
+                    temp_5_14 =
+                        *((void**)(((s8*)(((*((s32*)(((s8*)self) + 0))) * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)));
+                    temp_3_21 = *((void**)(((s8*)temp_5_14) + 4));
+                    (*((void (**)(void*))(((s8*)temp_3_21) + 0x14)))(
+                        (void*)(((s8*)temp_5_14) + (*((s16*)(((s8*)temp_3_21) + 0x10)))));
+                }
+            }
+        }
+        temp_6_8 =
+            *((void**)(((s8*)(((*((s32*)(((s8*)self) + 0x24))) * 4) + (*((s32*)(((s8*)(scopeStack)) + 8))))) + (-4)));
+        temp_3_22 = *((void**)(((s8*)temp_6_8) + 4));
+        temp_5_15 = *((void (**)(void*))(((s8*)temp_3_22) + 0x14));
+        temp_5_15((void*)(((s8*)temp_6_8) + (*((s16*)(((s8*)temp_3_22) + 0x10)))));
+        *((s32*)(((s8*)self) + 0x24)) = (s32)((*((s32*)(((s8*)self) + 0x24))) - 1);
+        temp_3_23 = *((void**)(((s8*)operandObject) + 4));
+        temp_5_16 = *((void (**)(void*))(((s8*)temp_3_23) + 0x14));
+        temp_5_16((void*)(((s8*)operandObject) + (*((s16*)(((s8*)temp_3_23) + 0x10)))));
+        temp_2_20 = *((void**)(((s8*)(countValue)) + 4));
+        (*((void (**)(void*))(((s8*)temp_2_20) + 0x14)))(
+            (void*)(((s8*)(countValue)) + (*((s16*)(((s8*)temp_2_20) + 0x10)))));
+    } else {
+        temp_18 = argumentCount + 3;
+        if ((*((s32*)(((s8*)self) + 0))) >= temp_18) {
+            var_16 = 1;
+            if (temp_18 > 0) {
+            loop_113:
+                temp_2_4 = ((*((s32*)(((s8*)self) + 0))) - var_16) * 4;
+
+                var_16 += 1;
+                temp_6 = *((void**)(((s8*)(temp_2_4 + (*((s32*)(((s8*)self) + 8))))) + 0));
+                temp_3_2 = *((void**)(((s8*)temp_6) + 4));
+                temp_5_2 = *((void (**)(void*))(((s8*)temp_3_2) + 0x14));
+                temp_5_2((void*)(((s8*)temp_6) + (*((s16*)(((s8*)temp_3_2) + 0x10)))));
+                if (temp_18 >= var_16) { goto loop_113; }
+            }
+            *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - temp_18);
+        }
+        temp_3_3 = *((s32*)(((s8*)self) + 0));
+        *((s32**)(((s8*)((temp_3_3 * 4) + (*((s32*)(((s8*)self) + 8))))) + 0)) = Call_D_0043DF40;
+        *((s32*)(((s8*)self) + 0)) = (s32)(temp_3_3 + 1);
     }
-    self->scopes.values[self->scopes.count - 1]->Release();
-    --self->scopes.count;
-    target->Release();
-    countValue->Release();
+    var_2 = (*((u16*)(((s8*)(nameToken)) + 0))) - 1;
+    *((u16*)(((s8*)(nameToken)) + 0)) = var_2;
+    if (!(var_2 & 0xFFFF)) { Call_func_00250198(Call_D_0043DEE0, nameToken, (*((u16*)(((s8*)(nameToken)) + 4))) + 9); }
 }
-} // namespace AptInterpreterDraft
+
+} // namespace AptCallDraft
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022A440);
 #endif
