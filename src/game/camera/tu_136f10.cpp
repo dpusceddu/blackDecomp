@@ -226,7 +226,22 @@ void *func_00138378(s32 arg0)
   return (new_var << 6) + (&D_004147C0);
 }
 
+#ifdef NON_MATCHING
+// Unmatched: strings and jump table change read-only data placement.
+struct __attribute__((packed)) Four { char chars[4]; };
+void func_00138390(void* self, Four* out, int kind) {
+    if (kind == 43) kind = *(int*)((char*)self + 4);
+    switch (kind) {
+    case 42: *out = *(const Four*)"ET_"; break;
+    case 40: *out = *(const Four*)"SD_"; break;
+    case 38: *out = *(const Four*)"SK_"; break;
+    case 29: case 30: case 31: *out = *(const Four*)"TM_"; break;
+    default: *out = *(const Four*)"SH_"; break;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00138390);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00138468);
 
 void func_00138470(void *arg0, void *arg1) {
