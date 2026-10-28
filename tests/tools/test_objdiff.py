@@ -108,5 +108,58 @@ class ObjectNormalization(unittest.TestCase):
         self.assertEqual(0x0A, struct.unpack_from('<I', fixed, 52 + 4)[0] >> 8)       # the symbol index stays
 
 
+class ComparisonTextSections(unittest.TestCase):
+    def test_code_sections_agree_with_the_base_function_name(self):
+        text = asm(0x100230, 2, tail_labels=['D_00400000'])
+        result = objdiff.comparison_text_sections(text)
+        self.assertIn('.section .text.func_00100230, "ax"', result)
+        self.assertIn('glabel func_00100230', result)
+        self.assertEqual(text.split('glabel', 1)[1], result.split('glabel', 1)[1])
+
+    def test_data_section_names_and_literals_are_preserved(self):
+        text = ('.section .rodata.00400000, "a"\n'
+                '    .asciz ".section .text.00100230"\n'
+                '.section .text.func_00100230, "ax"\n')
+        self.assertEqual(text, objdiff.comparison_text_sections(text))
+
+    def test_multiple_functions_and_repeated_normalization(self):
+        text = asm(0x100230, 2) + asm(0x100240, 3)
+        result = objdiff.comparison_text_sections(text)
+        self.assertIn('.text.func_00100230', result)
+        self.assertIn('.text.func_00100240', result)
+        self.assertEqual(result, objdiff.comparison_text_sections(result))
+
+
+class ComparisonSymbolNames(unittest.TestCase):
+    def symbol(self, name, section=0):
+        return dict(name=name, shndx=section)
+
+    def test_an_assembly_reference_and_undefined_compiler_alias_share_the_canonical_symbol(self):
+        symbols = [self.symbol('strcmp$35CA74'), self.symbol('func_0035CA74')]
+        renames, redirects = objdiff.comparison_symbol_names(symbols, {}, {0x35CA74})
+        self.assertEqual({}, renames)
+        self.assertEqual({0: 1}, redirects)
+
+    def test_an_absent_canonical_symbol_is_renamed(self):
+        symbols = [self.symbol('strcmp$35CA74')]
+        self.assertEqual(({'strcmp$35CA74': 'func_0035CA74'}, {}),
+                         objdiff.comparison_symbol_names(symbols, {}, {0x35CA74}))
+
+    def test_multiple_bindings_keep_the_defined_source_function(self):
+        symbols = [self.symbol('Method$100230', 3), self.symbol('Other$100230')]
+        source_names = {'Method$100230': 'func_00100230'}
+        self.assertEqual((source_names, {1: 0}),
+                         objdiff.comparison_symbol_names(symbols, source_names, {0x100230}))
+
+    def test_an_existing_defined_canonical_symbol_is_preserved(self):
+        symbols = [self.symbol('Other$100230'), self.symbol('func_00100230', 2)]
+        self.assertEqual(({}, {0: 1}), objdiff.comparison_symbol_names(symbols, {}, {0x100230}))
+
+    def test_data_bindings_and_unrelated_names_stay_distinct(self):
+        symbols = [self.symbol('buffer$400000'), self.symbol('plain_name')]
+        self.assertEqual(({'buffer$400000': 'D_00400000'}, {}),
+                         objdiff.comparison_symbol_names(symbols, {}, set()))
+
+
 if __name__ == '__main__':
     unittest.main()

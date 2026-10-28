@@ -6,6 +6,7 @@
 #include "kynapse/byte_matrix.h"
 #include "kynapse/callback_object.hpp"
 #include "kynapse/path_point_query.hpp"
+#include "game/effects/dependency_graph.hpp"
 #include "ps2/recovered_types.h"
 #ifdef NON_MATCHING
 #include "game/classes/UnknownVtable_003DC838.hpp"
@@ -579,8 +580,10 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00388D80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00388D98);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00388E10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00388ED0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00388F48);
+extern "C" unsigned char func_00388ED0(EffectGraph* self, unsigned char index) {
+    return !((unsigned char)(self->rows[index] >> index) & 1);
+}
+extern "C" int func_00388F48(void* self, EffectInstance* item) { return Enabled((EffectObject*)self, item); }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00389060);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_00389208);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/kynapse/host_2850c0_2f4b50", func_0038A490);
