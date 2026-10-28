@@ -213,5 +213,37 @@ class ComparisonSymbolNames(unittest.TestCase):
                          objdiff.comparison_symbol_names(symbols, {}, set()))
 
 
+class TargetDataSymbols(unittest.TestCase):
+    def sections(self):
+        return [dict(name=''), dict(name='.rodata')]
+
+    def symbol(self, name, offset, size):
+        return dict(name=name, value=offset, size=size, shndx=1, type=1)
+
+    def test_split_label_extents_and_unreferenced_neighbor_preserve_original_bytes(self):
+        text = 'dlabel D_00400000\n.word 0x12345678\n.word 0xabcdef00\nenddlabel D_00400000\n'
+        symbols = [self.symbol('D_00400000', 0, 4), self.symbol('D_00400004', 4, 4)]
+        result = objdiff.target_data_symbols([text], {'.rodata': 0x400000}, {'.rodata': 8},
+                                            symbols, self.sections())
+        self.assertEqual(['.type D_00400000, @object', '.size D_00400000, 4',
+                          '.globl D_00400004', '.equ D_00400004, D_00400000 + 4',
+                          '.type D_00400004, @object', '.size D_00400004, 4'], result)
+
+    def test_wrong_offsets_unplaced_data_and_oversized_objects_are_not_normalized(self):
+        text = 'dlabel D_00400000\nenddlabel D_00400000\n'
+        for symbol in [self.symbol('D_00400004', 0, 4), self.symbol('D_00400000', 0, 12),
+                       self.symbol('D_00400000', 0, 0), self.symbol('other_name', 0, 4)]:
+            self.assertEqual([], objdiff.target_data_symbols([text], {'.rodata': 0x400000},
+                             {'.rodata': 8}, [symbol], self.sections()))
+        self.assertEqual([], objdiff.target_data_symbols([text], {}, {'.rodata': 8},
+                         [self.symbol('D_00400000', 0, 4)], self.sections()))
+
+    def test_existing_neighbor_anchor_is_not_redefined(self):
+        text = 'dlabel D_00400000\nenddlabel D_00400000\ndlabel D_00400004\nenddlabel D_00400004\n'
+        self.assertEqual(['.type D_00400004, @object', '.size D_00400004, 4'],
+                         objdiff.target_data_symbols([text], {'.rodata': 0x400000}, {'.rodata': 8},
+                         [self.symbol('D_00400004', 4, 4)], self.sections()))
+
+
 if __name__ == '__main__':
     unittest.main()

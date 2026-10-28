@@ -37,6 +37,8 @@ as partly or not matching without it:
 - **Data the unit owns** (a compiler-local `.rodata`/`.lit4` constant) gets a symbol at the original address name, so
   `%hi(D_003F7150)` in the original and `.rodata+0x8` in the object compare equal; `R_MIPS_LITERAL` relocations (compiler
   `.lit4` access) are retyped `R_MIPS_GPREL16` as in the split assembly.
+- **Exported data** with address names gets its source size and matching section name when its compiled offset agrees
+  with the native address. Adjacent constants can split a broad original label without changing target data bytes.
 - **Numeric names** such as `%lo(D_10F00)`, where the original holds a number and no relocation, are replaced by the number in
   the target.
 
