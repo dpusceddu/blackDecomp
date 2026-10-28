@@ -57,7 +57,21 @@ void func_0027B648(void *arg0, s32 arg1, s32 arg2)
   func_0035C6EC(arg1, 0, arg2 << 5);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B688);
+// UNVERIFIED: original record and ring identities, and unused fields.
+typedef struct { u8 unknown[0x1E]; u8 occupied, unknown1F; } Recovered_RingRecord;
+typedef struct { s32 cursor, used; Recovered_RingRecord* records; s32 capacity; } Recovered_RecordRing;
+s32 func_0027B688(Recovered_RecordRing* ring) {
+    s32 index = ring->cursor;
+    Recovered_RingRecord* records = ring->records;
+    if (records[index].occupied) {
+        do {
+            index++;
+            if (index >= ring->capacity) index = 0;
+        } while (records[index].occupied);
+    }
+    ring->cursor = index;
+    return index;
+}
 
 s32 func_0027B6D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     s32 temp_18;
@@ -81,7 +95,15 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BA68);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BAE8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BB50);
+#ifdef NON_MATCHING
+// Unmatched: section is eight bytes shorter despite matching instructions.
+s32 func_0027BB98(Recovered_RecordRing* ring, Recovered_RingRecord* record) {
+    record->occupied = 0;
+    return --ring->used;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BB98);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BBB8);
 
 void func_0027BC38(void) {
