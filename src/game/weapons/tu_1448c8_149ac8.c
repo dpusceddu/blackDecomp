@@ -428,6 +428,8 @@ typedef struct ActorRef {
     u32 unk00;
     ActorState* actor;
 } ActorRef;
+#endif
+// Partial managed-actor views; original types and field meanings are UNVERIFIED.
 typedef struct ManagedFlagSlot {
     u8 unk00[0xD26];
     u8 enabled;
@@ -453,6 +455,7 @@ typedef struct ManagedAction {
     ManagedDefinition* definition;
 } ManagedAction;
 extern ManagedFlagSlot* func_00135550(ManagedRef*);
+#ifdef NON_MATCHING
 typedef struct AmbientDefinition {
     float a, b, c;
     u8 unk0C[4];
@@ -987,27 +990,23 @@ s32 func_00162758(ActionView* self, u64 id, void* definition) {
     self->data = definition;
     return 1;
 }
-#ifdef NON_MATCHING
-// Unmatched: manager-address captures and nested iterator lifetimes differ.
 void func_001627D0(ManagedAction* self) {
     s32 i;
     for (i = 0; i < self->definition->count;) {
         s32 next = i + 1;
         u64 id = self->definition->ids[i];
         s32 j;
-        for (j = 0; j < D_0040F514->count; j++) {
-            ManagedRef* ref = D_0040F514->items[j];
-            if (ref && id == ref->id) {
-                ManagedFlagSlot* actor = func_00135550(ref);
-                if (actor) actor->enabled = self->definition->enabled != 0;
-            }
-        }
+        j = 0;
+        if (D_0040F514->count > 0) do {
+                ManagedRef* ref = D_0040F514->items[j];
+                if (ref && id == ref->id) {
+                    ManagedFlagSlot* actor = func_00135550(ref);
+                    if (actor) actor->enabled = self->definition->enabled != 0;
+                }
+            } while (++j < D_0040F514->count);
         i = next;
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_001627D0);
-#endif
 s32 func_001628E8(ActionView* self, u64 id, void* definition) {
     func_00160EA0(self);
     self->definition = definition;
@@ -1015,24 +1014,20 @@ s32 func_001628E8(ActionView* self, u64 id, void* definition) {
     self->data = definition;
     return 1;
 }
-#ifdef NON_MATCHING
-// Unmatched: manager-address captures and nested iterator lifetimes differ.
 void func_00162960(ManagedAction* self) {
     s32 i;
     for (i = 0; i < self->definition->count;) {
         s32 next = i + 1;
         u64 id = self->definition->ids[i];
         s32 j;
-        for (j = 0; j < D_0040F514->count; j++) {
-            ManagedRef* ref = D_0040F514->items[j];
-            if (ref && id == ref->id) func_00135550(ref);
-        }
+        j = 0;
+        if (D_0040F514->count > 0) do {
+                ManagedRef* ref = D_0040F514->items[j];
+                if (ref && id == ref->id) func_00135550(ref);
+            } while (++j < D_0040F514->count);
         i = next;
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00162960);
-#endif
 s32 func_00162A60(ActionView* self, u64 id, void* definition, void* arg) {
     func_00160EA0(self);
     self->state = (s32)definition;
