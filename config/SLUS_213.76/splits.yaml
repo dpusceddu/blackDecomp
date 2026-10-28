@@ -1584,7 +1584,9 @@ splits:
   - {src: src/game/unsorted/tu_1f4770.cpp, range: [0x1f4770, 0x1f4d30]}
   - {src: src/game/unsorted/tu_1f4770.c, range: [0x1f4d30, 0x1f59c0]}
   - {src: src/game/unsorted/tu_1f59c0.c, range: [0x1f59c0, 0x1f59e8]}
-  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f59e8, 0x1f7b90]}
+  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f59e8, 0x1f79a8]}
+  - {src: src/game/unsorted/tu_1f5f58_1f79a8.cpp, range: [0x1f79a8, 0x1f7a18], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: "Native remainder by 20 omits the division-by-zero guard."}
+  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f7a18, 0x1f7b90]}
   - {src: src/game/unsorted/tu_1f7b90.c, range: [0x1f7b90, 0x1f7bd8], assembler: sn-min6}
   - {src: src/game/unsorted/tu_1f7bd8.c, range: [0x1f7bd8, 0x1f7c48]}
   - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f7c48, 0x1f81d8]}
