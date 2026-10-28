@@ -53,7 +53,20 @@ void func_001E4AC8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = 3;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4AD8);
+extern s32 func_001DD728(void*);
+extern void func_001DD6C0(void*);
+void func_001E4AD8(void* self) {
+    s32 state = M2C_FIELD(self, s32*, 4);
+    if (state < 5) {
+      if (state > 0) {
+        if (func_001DD728(M2C_FIELD(M2C_FIELD(self, void**, 0x28), void**, 0xB8))) {
+            func_001DD6C0(M2C_FIELD(M2C_FIELD(self, void**, 0x28), void**, 0xB8));
+        }
+        M2C_FIELD(self, s32*, 4) = 5;
+      }
+    }
+}
+
 
 s32 func_001E4B38(void *arg0) {
     s32 temp_3;
