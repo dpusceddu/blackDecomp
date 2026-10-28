@@ -4,9 +4,8 @@
 extern s32 func_002050B0();
 extern s32 func_00278F00();
 extern void * D_003BDCC8;
-extern s32 func_00204FF0();
+extern void func_00204FF0(void*, void*);
 extern void func_00276728(void*, const void*, const void*, const void*, s128, s32, const void*, const void*, s32);
-extern s32 func_00208D00(M2C_UNK, M2C_UNK);
 extern s32 D_003BE718;
 extern s32 func_0020D188(s32);
 extern s32 D_0040F544;
@@ -17,8 +16,64 @@ extern void* D_0040F0E0;
 extern s32* D_0040F4C0;
 extern s128 D_00438CE0;
 extern void func_00276610(void*, const void*, const void*, const void*, s128);
+extern u8 D_0043D9D8[5];
+extern s64 D_00438E38[5];
+extern s64 D_00438E10, D_00438E18, D_00438E20;
+extern s128 D_00438DF0, D_00438E00;
 extern void* func_00275448(void*, s32, s32, s32);
 extern s32 func_00384CF0(void*, const void*, const void*, const void*);
+
+/* Private access views confirmed by command consumers; original class names,
+ * unaccessed fields and the statistics panel's complete extent are UNVERIFIED. */
+typedef union {
+    struct {
+        f32 x, y;
+    };
+    s64 bits;
+} FrontendVec2;
+
+typedef struct {
+    u8 unk_00[8];
+    void* manager;
+    s32 handle;
+    u8 unk_10[0x10];
+    s128 color, targetColor;
+    FrontendVec2 position, targetPosition, scale, extent, targetExtent, uvStart, uvEnd;
+    s32 index;
+    f32 remaining, duration;
+    void* command;
+    s32 mode;
+} FrontendSprite;
+
+typedef struct {
+    u8 unk_00[8];
+    void* manager;
+    s32 handle;
+    u8 unk_10[0x10];
+    s128 color, targetColor;
+    FrontendVec2 position, targetPosition, scale, uvSize;
+    const u16* text;
+    s32 index, style;
+    f32 height, targetHeight, remaining, duration;
+    void* command;
+} FrontendText;
+
+typedef struct {
+    // UNVERIFIED: these counters are accessed only by the statistics setup draft.
+    s32 state;
+    f32 elapsed, time;
+    s16 count0, count1;
+    s8 count2;
+    u8 unk_11[3];
+    FrontendText* labels;
+    FrontendText* values;
+    void* resources[2]; // UNVERIFIED
+    FrontendSprite* sprites;
+    FrontendText* title;
+} FrontendStatistics;
+
+typedef char FrontendSpriteStride[sizeof(FrontendSprite) == 0x90 ? 1 : -1];
+typedef char FrontendTextStride[sizeof(FrontendText) == 0x80 ? 1 : -1];
 
 static inline void SetFrontendVec2(f32* value, f32 x, f32 y) {
     value[0] = x;
@@ -51,19 +106,19 @@ s32 func_002071C8(void *arg0) {
     return 1;
 }
 
-void func_002071F8(void) {
-    func_00204FF0();
+void func_002071F8(void* self, void* manager) {
+    func_00204FF0(self, manager);
 }
 
-s32 func_00207218(void* self, s32 index, s32 arg2, s32 arg3, s32 arg4) {
+s32 func_00207218(FrontendSprite* self, s32 index, s32 arg2, s32 arg3, s32 arg4) {
     void* command;
     func_00205000(self, arg2, arg3, arg4);
-    M2C_FIELD(self, s32*, 0x78) = index;
-    M2C_FIELD(self, s32*, 0x7C) = 0;
-    command = func_00278EC0(M2C_FIELD(self, void**, 8), index, M2C_FIELD(self, s32*, 0xC));
-    M2C_FIELD(self, void**, 0x84) = command;
-    func_00276728(command, (s8*)self + 0x40, (s8*)self + 0x50, (s8*)self + 0x58, M2C_FIELD(self, s128*, 0x20),
-                  M2C_FIELD(self, s32*, 0x88), (s8*)self + 0x68, (s8*)self + 0x70, 0);
+    self->index = index;
+    self->remaining = 0;
+    command = func_00278EC0(self->manager, index, self->handle);
+    self->command = command;
+    func_00276728(command, &self->position, &self->scale, &self->extent, self->color, self->mode, &self->uvStart,
+                  &self->uvEnd, 0);
     return 1;
 }
 
@@ -73,8 +128,8 @@ void func_002072A0(void *arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_002072E0);
 
-void func_002075F0(void) {
-    func_00204FF0();
+void func_002075F0(void* self, void* manager) {
+    func_00204FF0(self, manager);
 }
 
 s32 func_00207610(void* self, s32 index, s32 arg2, s32 arg3, s32 arg4) {
@@ -89,10 +144,9 @@ s32 func_00207610(void* self, s32 index, s32 arg2, s32 arg3, s32 arg4) {
                   M2C_FIELD(self, const u16**, 0x60), (s8*)self + 0x58, M2C_FIELD(self, s32*, 0x68));
     return 1;
 }
-void func_002076A8(void* self) {
-    func_00277530(M2C_FIELD(self, void**, 0x7C), M2C_FIELD(self, f32*, 0x6C), (s8*)self + 0x40, (s8*)self + 0x50,
-                  M2C_FIELD(self, s128*, 0x20), M2C_FIELD(D_0040F0E0, void**, 0x2107C),
-                  M2C_FIELD(self, const u16**, 0x60), (s8*)self + 0x58, M2C_FIELD(self, s32*, 0x68));
+void func_002076A8(FrontendText* self) {
+    func_00277530(self->command, self->height, &self->position, &self->scale, self->color,
+                  M2C_FIELD(D_0040F0E0, void**, 0x2107C), self->text, &self->uvSize, self->style);
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_002076F8);
 
@@ -106,15 +160,49 @@ s32 func_00207938(void *arg0)
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00207970);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00207978);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00207B80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00208140);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00208AF8);
-s32 func_00208BF0(void* self) {
-    s8 i;
-    for (i = 0; i < 5; i++) {
-        func_00207938((s8*)M2C_FIELD(self, void**, 0x14) + i * 0x80);
+static inline const s64* FrontendSlotPosition(s32 index) { return &D_00438E38[index]; }
+void func_00208AF8(void* self, s32 index) {
+    u8* initialized = (s8)index + D_0043D9D8;
+    if (*initialized == 0) {
+        s32 offset = (s8)index * 0x90;
+        s64 position = *FrontendSlotPosition((s8)index);
+        {
+            void* item = (void*)(offset + M2C_FIELD(self, u32*, 0x24) + 0x2D0);
+            M2C_FIELD(item, s64*, 0x48) = position;
+            M2C_FIELD(item, s64*, 0x40) = position;
+            M2C_FIELD(item, s64*, 0x50) = D_00438E10;
+        }
+        {
+            void* item = (void*)(offset + M2C_FIELD(self, u32*, 0x24) + 0x2D0);
+            {
+                s64 extent = D_00438E18;
+                M2C_FIELD(item, s64*, 0x60) = extent;
+                M2C_FIELD(item, s64*, 0x58) = extent;
+            }
+        }
+        {
+            void* item = (void*)(offset + M2C_FIELD(self, u32*, 0x24) + 0x2D0);
+            {
+                s128 color = D_00438DF0;
+                M2C_FIELD(item, s128*, 0x30) = color;
+                M2C_FIELD(item, s128*, 0x20) = color;
+            }
+        }
+        M2C_FIELD(offset + M2C_FIELD(self, u32*, 0x24), s64*, 0x330) = D_00438E20;
+        M2C_FIELD(offset + M2C_FIELD(self, u32*, 0x24), s128*, 0x300) = D_00438E00;
+        {
+            void* item = (void*)(offset + M2C_FIELD(self, u32*, 0x24) + 0x2D0);
+            M2C_FIELD(item, f32*, 0x7C) = 0.2f;
+            M2C_FIELD(item, f32*, 0x80) = 0.2f;
+        }
+        *initialized = 1;
     }
+}
+s32 func_00208BF0(FrontendStatistics* self) {
+    s8 i;
+    for (i = 0; i < 5; i++) { func_00207938(&self->labels[i]); }
     return 1;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00208C58);
@@ -131,11 +219,7 @@ s32 func_00208C60(void* destination, f32 time) {
     func_00275448(seconds, remaining, 2, 0);
     return func_00384CF0(destination, D_003FA270, minutes, seconds);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f08", func_00208D00);
 
-void func_002092B8(void) {
-    func_00208D00(1, 0xFFFF);
-}
 
 void func_002092D8(s32 arg0) {
     D_003BE718 = arg0;
