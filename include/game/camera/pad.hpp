@@ -12,7 +12,7 @@ struct ControllerInterface : ControllerBase {
     virtual void UpdateMotors();
     virtual void SetFeedback(EeU8);
     virtual bool Open(unsigned, unsigned);
-    virtual bool Close();
+    virtual void Close();
 };
 struct Controller : ControllerInterface {
 
@@ -75,7 +75,7 @@ virtual void Update();
 virtual void UpdateMotors();
 virtual void SetFeedback(EeU8 enabled);
 virtual bool Open(unsigned int backendHandle, unsigned int portIndex);
-virtual bool Close();
+virtual void Close();
 unsigned char Button(unsigned index) const; bool Pressed(unsigned index) const; bool Released(unsigned index) const; float Pressure(unsigned index) const; int Rumble(unsigned enabled); float Smooth(float value,float step); int Reset();};}
 typedef char check_field_C[(((int)&((Graphics::Controller*)0)->connected)==12)?1:-1];
 typedef char check_opaque_E[(((int)&((Graphics::Controller*)0)->previousStates)==14)?1:-1];

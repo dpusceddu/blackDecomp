@@ -59,18 +59,19 @@ void Graphics::Controller::UpdateMotors() {
                 }
                 commands.first.flags = flags;
                 func_0029D4C0(func_0026C9E0(this->backend, this->port), 1, &commands.first.command, 2,
-                             &commands.first.flags);
+                              &commands.first.flags);
                 this->field_46 = this->field_47;
                 this->field_48 = this->field_49;
             }
         } else if ((this->field_46 != 0) || (this->field_48 != 0)) {
             commands.second.command = 3;
             commands.second.flags = 0;
-            func_0029D4C0(func_0026C9E0(this->backend, this->port), 1, &commands.second.command, 2, &commands.second.flags);
+            func_0029D4C0(func_0026C9E0(this->backend, this->port), 1, &commands.second.command, 2,
+                          &commands.second.flags);
             this->field_49 = 0;
             this->field_46 = 0;
             this->field_48 = 0;
-clearMotor:
+        clearMotor:
             this->field_47 = 0;
         }
     }
@@ -95,12 +96,10 @@ float Controller::Smooth(float value, float step) {
     return value;
 }
 
-extern "C" void func_0026CBA8(PadBackend*, int);
-
 void PadBackend::Poll() {
     int i = 0;
-    func_0026CBA8(this, 0);
-    if (!singlePort) func_0026CBA8(this, 1);
+    PollPort(0);
+    if (!singlePort) PollPort(1);
     Controller** it = controllers;
     do {
         if (*it) (*it)->Update();

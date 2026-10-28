@@ -3,6 +3,15 @@
 #define BLACK_GRAPHICS_PAD_BACKEND_HPP
 #include "game/camera/pad.hpp"
 namespace Graphics {
+// The packed 32-byte copy and port offset are confirmed; other field meanings are UNVERIFIED.
+struct PadOpenParameters {
+    int unknown00;
+    int port;
+    EeU8 unknown08[24];
+} __attribute__((packed));
+typedef char PadOpenParametersSize[sizeof(PadOpenParameters) == 32 ? 1 : -1];
+typedef char PadOpenParametersPort[(int)&((PadOpenParameters*)0)->port == 4 ? 1 : -1];
+
 // PS2 access prefix. Interface identity, unused fields and full allocation are unverified.
 struct PadBackend {
     EeU8 unknown00[0x40];

@@ -7,15 +7,8 @@ int func_0029C6C8(int);
 int func_0029C708(const void*, void*);
 }
 
-// The packed 32-byte copy and port offset are confirmed; other field meanings are UNVERIFIED.
-struct PadOpenParameters {
-    int unknown00;
-    int port;
-    EeU8 unknown08[24];
-} __attribute__((packed));
-
 // Shared with PollPort; its native storage remains assembly-backed.
-extern const PadOpenParameters defaultPadParameters __asm__("D_004001D0");
+extern const Graphics::PadOpenParameters defaultPadParameters __asm__("D_004001D0");
 
 using namespace Graphics;
 
@@ -25,7 +18,7 @@ void PadBackend::Initialize(unsigned single) {
     singlePort = single;
     EeU8* buffer = buffers[0];
     count = 0;
-    EeU8 (*data)[32] = packets;
+    EeU8(*data)[32] = packets;
     feedback = 0;
     int* current = state;
     int i = 1;
