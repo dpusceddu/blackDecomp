@@ -914,7 +914,27 @@ void* AlignedBuffer_Allocate(Recovered_AlignedBuffer* self, u32 bytes) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00275000);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00275060);
+// UNVERIFIED: original table and record identities.
+struct Recovered_SearchTable { u8 unknown[8]; int count; int** entries; };
+#ifdef NON_MATCHING
+// Unmatched: search branch layout and register allocation differ.
+extern "C" void* func_002750B8(Recovered_SearchTable* self, int key) {
+    int high = self->count - 1;
+    int low = 0;
+    while (high >= low) {
+        int mid = low + (high - low) / 2;
+        int* entry = self->entries[mid];
+        if (key < *entry) high = mid - 1;
+        else {
+            low = mid + 1;
+            if (*entry >= key) return entry + 1;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002750B8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002775A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002778C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00277940);
