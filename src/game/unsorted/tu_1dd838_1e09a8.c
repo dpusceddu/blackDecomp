@@ -105,7 +105,24 @@ s32 func_001E0FE8(void* self) {
     } while (again);
     return again;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838_1e09a8", func_001E1100);
+extern void func_0028B928(void*);
+extern void func_0028BB68(void*, s32);
+extern void func_0028BB80(void*, u32);
+extern s32 func_001E11F8(void*, f32);
+extern s32 func_001E1240(s32, void*);
+void* func_001E1100(Recovered_EffectRequest* out, void* self, void* entry) {
+    Recovered_EffectRequest request;
+    void* definition;
+    func_0028B928(&request);
+    definition = M2C_FIELD(self, void**, 0x2424);
+    request.data[0] = M2C_FIELD(M2C_FIELD(definition, u32**, 0x30), u32*, M2C_FIELD(entry, s32*, 0) * 4);
+    request.data[1] = M2C_FIELD(M2C_FIELD(definition, u32**, 0x30), u32*, M2C_FIELD(entry, s32*, 4) * 4);
+    func_0028BB68(&request, (1 << func_001E11F8(self, M2C_FIELD(entry, f32*, 8))) & 0xFF);
+    func_0028BB80(&request, (1 << func_001E11F8(self, M2C_FIELD(entry, f32*, 0xC))) & 0xFF);
+    { u8 flag = (1 << func_001E1240((s32)self, entry)) & 0xFF; M2C_FIELD(&request, u8*, 0xF) = flag; }
+    *out = request;
+    return out;
+}
 #ifdef NON_MATCHING
 // Unmatched: loop return-path scheduling differs.
 extern f32 D_003BD390[];
