@@ -68,7 +68,16 @@ void func_0016AC98(void) {
     func_00160E70();
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016ACB8);
+extern void func_00160EA0(void *);
+
+s32 func_0016ACB8(void *arg0, s64 arg1, s32 arg2, s32 arg3) {
+    func_00160EA0(arg0);
+    M2C_FIELD(arg0, s32 *, 0x24) = arg2;
+    M2C_FIELD(arg0, s64 *, 0) = arg1;
+    M2C_FIELD(arg0, s32 *, 0x20) = arg3;
+    M2C_FIELD(arg0, s32 *, 0x18) = arg2;
+    return 1;
+}
 
 s32 func_0016AD18(void) {
     func_00160ED8();
@@ -89,7 +98,20 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B4F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B590);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B5E0);
+extern s32 func_0016B788(void);
+extern s32 func_001D4618(void);
+
+#ifdef NON_MATCHING
+// Unmatched: return-path branch and epilogue scheduling differ.
+s32 func_0016B630(void) {
+    if (func_0016B788()) {
+        return func_001D4618();
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B630);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B668);
 
 void func_0016B670(void *arg0) {
