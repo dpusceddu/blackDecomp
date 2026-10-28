@@ -211,4 +211,15 @@ extern "C" unsigned char func_001936C0(Recovered_EffectTarget* self, EffectVecto
         return 0;
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001938C0);
+// UNVERIFIED: policy field meanings and original type.
+struct Recovered_PolicyDefaults { unsigned words[34]; };
+extern "C" const Recovered_PolicyDefaults D_003F6638 __attribute__((section(".rodata.policy_defaults"))) = {{
+    0x00000000, 0x3F800000, 0x00000000, 0x3FC00000, 0x40000000, 0x3F800000, 0x3F800000, 0x00000000,
+    0x3F800000, 0xC2480000, 0x40000000, 0xC1C80000, 0x3FC00000, 0x00000000, 0x4019999A, 0x3E99999A,
+    0x3F800000, 0x3F800000, 0x00000000, 0x3F800000, 0x3F19999A, 0x3F800000, 0x4019999A, 0x3DCCCCCD,
+    0x40000000, 0x00000000, 0x3F800000, 0x3DCCCCCD, 0x00000000, 0x3F800000, 0x00000000, 0x00000000,
+    0xBF800000, 0x00000001
+}};
+extern "C" void func_001938C0(Recovered_PolicyDefaults* self) {
+    *self = D_003F6638;
+}

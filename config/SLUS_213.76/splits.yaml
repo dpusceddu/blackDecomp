@@ -873,7 +873,7 @@ splits:
   - {src: src/game/unsorted/tu_18dd88_18e150.c, range: [0x18e150, 0x18e208]}
   - {src: src/game/unsorted/tu_18dd88_18e208.c, range: [0x18e208, 0x18e2e8]}
   - {src: src/game/unsorted/tu_18dd88_18e2e8.c, range: [0x18e2e8, 0x18e4c0]}
-  - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18e4c0, 0x18e578]}
+  - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18e4c0, 0x18e578], data_ranges: [{section: .rodata, input: .rodata.policy_defaults, start: '0x3f6638', end: '0x3f66c0'}], note: policy initializer owns its 136-byte default table}
   - {src: src/game/unsorted/tu_18dd88_18e578.c, range: [0x18e578, 0x18e7c0]}
   - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18e7c0, 0x18eb78]}
   - {src: src/game/unsorted/tu_18dd88_18e578.c, range: [0x18eb78, 0x18ebe0]}
