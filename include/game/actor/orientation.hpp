@@ -22,6 +22,7 @@ struct OrientationState {
 
     int Initialize();
     int Begin(void *actor);
+    int SetTarget(EeS128 value, float firstScalar, float secondScalar, unsigned char lock);
     int Attach(void *actor) __asm__("func_0013EC38");
 };
 }

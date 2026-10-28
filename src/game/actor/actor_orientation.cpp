@@ -37,6 +37,17 @@ int OrientationState::Begin(void *actor)
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_orientation", func_0013DC00);
+int OrientationState::SetTarget(EeS128 value, float firstScalar, float secondScalar, unsigned char lock) {
+    target = value;
+    elapsed = 0;
+    active = 1;
+    scalarB0 = firstScalar;
+    scalarB4 = secondScalar;
+    locked = lock;
+    changed = 1;
+    previousState = state;
+    state = 1;
+    return 1;
+}
 
 }
