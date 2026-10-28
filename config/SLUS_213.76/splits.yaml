@@ -1842,7 +1842,7 @@ splits:
   - {src: src/game/camera/graphics_input_access.cpp, range: [0x26bf60, 0x26bff0]}
   - {src: src/game/camera/tu_26baf8_26bea0.c, range: [0x26bff0, 0x26c100]}
   - {src: src/game/camera/graphics_controller_update.cpp, range: [0x26c100, 0x26c798]}
-  - {src: src/game/camera/graphics_input_access.cpp, range: [0x26c798, 0x26c8d0]}
+  - {src: src/game/camera/pad_backend_initialize.cpp, range: [0x26c798, 0x26c8d0], assembler: sn-min6, note: "The two-controller clearing loop has native six-instruction short-loop padding."}
   - {src: src/game/camera/tu_26baf8_26c8d0.c, range: [0x26c8d0, 0x26c8e0]}
   - {src: src/game/camera/graphics_input_access.cpp, range: [0x26c8e0, 0x26ca00]}
   - {src: src/game/camera/tu_26baf8_26c8d0.c, range: [0x26ca00, 0x26ca20]}
