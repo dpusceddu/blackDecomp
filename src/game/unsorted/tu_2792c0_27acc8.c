@@ -47,7 +47,19 @@ void func_0027B2E0(void *arg0, void *arg1) {
     M2C_FIELD(arg1, void **, 0x30) = arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B2F0);
+extern f32 func_0029DD08(f32);
+extern void func_002A91D8(void*, f32*);
+void func_0027B2F0(void* self, f32 angle) {
+    f32 x = func_0029DD08(angle * 0.5f * 0.017453292f) * M2C_FIELD(self, f32*, 0x70);
+    f32* values = (f32*)((u8*)self + 0x48);
+    f32 y = x / M2C_FIELD(self, f32*, 0x74);
+    M2C_FIELD(self, f32*, 0x48) = x;
+    values[1] = y;
+    M2C_FIELD(self, f32*, 0x54) = 1.0f / y;
+    M2C_FIELD(self, f32*, 0x50) = 1.0f / M2C_FIELD(self, f32*, 0x48);
+    func_002A91D8(M2C_FIELD(self, void**, 0x58), values);
+    M2C_FIELD(self, f32*, 0x6C) = angle;
+}
 
 void func_0027B388(void *arg0, f32 fparg0) {
     M2C_FIELD(arg0, f32 *, 0x74) = fparg0;
