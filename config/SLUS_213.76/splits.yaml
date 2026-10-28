@@ -1590,7 +1590,9 @@ splits:
   - {src: src/game/unsorted/tu_1f4770.cpp, range: [0x1f4770, 0x1f4d30]}
   - {src: src/game/unsorted/tu_1f4770.c, range: [0x1f4d30, 0x1f59c0]}
   - {src: src/game/unsorted/tu_1f59c0.c, range: [0x1f59c0, 0x1f59e8]}
-  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f59e8, 0x1f7b90]}
+  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f59e8, 0x1f79a8]}
+  - {src: src/game/unsorted/tu_1f5f58_1f79a8.cpp, range: [0x1f79a8, 0x1f7a18], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: "Native remainder by 20 omits the division-by-zero guard."}
+  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f7a18, 0x1f7b90]}
   - {src: src/game/unsorted/tu_1f7b90.c, range: [0x1f7b90, 0x1f7bd8], assembler: sn-min6}
   - {src: src/game/unsorted/tu_1f7bd8.c, range: [0x1f7bd8, 0x1f7c48]}
   - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f7c48, 0x1f81d8]}
@@ -2051,14 +2053,25 @@ splits:
   - {src: src/sony/tu_293e90_296468.c, range: [0x296468, 0x2964c0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_293e90_2962f0.c, range: [0x2964c0, 0x298dc8]}
   - {src: src/sony/tu_293e90_296468.c, range: [0x298dc8, 0x299038]}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x299038, 0x299f48]}
+  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x299038, 0x299ea8]}
+  - {src: src/game/effects/tu_299ea8.c, range: [0x299ea8, 0x299f48], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony DMA routine uses 64-bit register saves and a C tail call}
   - {src: src/sony/tu_299f48.c, range: [0x299f48, 0x29b050], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_299f48_29b050.c, range: [0x29b050, 0x29b0a8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_29b0a8.c, range: [0x29b0a8, 0x29b1d0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29b1d0, 0x29b2c8]}
   - {src: src/sony/tu_29b2c8.c, range: [0x29b2c8, 0x29b500]}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29b500, 0x29c138]}
-  - {src: src/sony/tu_29c138.c, range: [0x29c138, 0x29c1d8], note: flags or language differ}
+  - {src: src/game/effects/tu_29b500.cpp, range: [0x29b500, 0x29b558], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
+  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29b558, 0x29b7f8]}
+  - {src: src/game/effects/tu_29b500_29b7f8.cpp, range: [0x29b7f8, 0x29b868], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
+  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29b868, 0x29b998]}
+  - {src: src/game/effects/tu_29b500_29b998.cpp, range: [0x29b998, 0x29ba58], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
+  - {src: src/game/effects/tu_29b500_29ba58.cpp, range: [0x29ba58, 0x29bbc8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
+  - {src: src/game/effects/tu_29b500_29bbc8.cpp, range: [0x29bbc8, 0x29bcc0], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony status wrapper uses 64-bit saved-register stores and Sony compiler ABI}
+  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x29bcc0, 0x29bfe8]}
+  - {src: src/game/effects/tu_29b500_29bfe8.cpp, range: [0x29bfe8, 0x29c110], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony RPC wrapper uses 64-bit saved-register stores and Sony compiler ABI}
+  - {src: src/game/effects/tu_29b500_29c110.c, range: [0x29c110, 0x29c138], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony C variadic prologue saves the seven argument registers as 64-bit values}
+  - {src: src/sony/tu_29c138_2.c, range: [0x29c138, 0x29c1a8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: Sony DMA synchronization uses 64-bit callee-save registers}
+  - {src: src/sony/tu_29c138.c, range: [0x29c1a8, 0x29c1d8], note: flags or language differ}
   - {src: src/sony/tu_29c138_29c1d8.c, range: [0x29c1d8, 0x29c6c8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_29c6c8.c, range: [0x29c6c8, 0x29cee8], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0]}
   - {src: src/sony/tu_29cee8.c, range: [0x29cee8, 0x29d108], compiler: ee-gcc2.9-991111-01, flags: [-O2, -G0], note: flags or language differ}

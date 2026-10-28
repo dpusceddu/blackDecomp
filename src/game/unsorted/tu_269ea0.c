@@ -25,15 +25,50 @@ s32 func_0026A450(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_269ea0", func_0026A460);
+#ifdef NON_MATCHING
+// Unmatched: packed-field construction and argument scheduling differ.
+// Partial texture views; the original structures and field meanings are UNVERIFIED.
+typedef struct {
+    char unknown00[0xc];
+    s32 width, height;
+} TextureDimensionsDraft;
+typedef struct {
+    TextureDimensionsDraft* dimensions;
+    char unknown04[8];
+    s32 width, height;
+    char unknown14[8];
+    s16 x, y;
+} TextureRegionDraft;
+typedef struct {
+    char unknown00[0x60];
+    TextureRegionDraft* texture;
+} TextureLinkDraft;
+typedef struct {
+    char unknown00[0x58];
+    TextureLinkDraft* link;
+} TextureOwnerDraft;
+extern u64 D_0040DFD0, D_0040DFC8, D_0040DFE0;
+extern void func_0026A460(u64, u64, u64, u64, void*, void*);
+
+void func_0026A6F0(TextureOwnerDraft* self) {
+    TextureRegionDraft* texture = self->link->texture;
+    u16 x = texture->x, y = texture->y;
+    u64 region = (u64)(x & 0x7ff) | ((u64)(texture->width + (s16)x - 1) << 16) | ((u64)(y & 0x7ff) << 32) |
+                 ((u64)(texture->height + (s16)y - 1) << 48);
+    f32 dimensions[2];
+    dimensions[0] = (f32)texture->dimensions->width;
+    dimensions[1] = (f32)texture->dimensions->height;
+    func_0026A460(D_0040DFD0, D_0040DFC8, D_0040DFE0, region, self, dimensions);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_269ea0", func_0026A6F0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_269ea0", func_0026A7A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_269ea0", func_0026A840);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_269ea0", func_0026A8D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_269ea0", func_0026A998);
 
-void func_0026AA60(s8 arg0) {
-    D_0040DE74 = arg0;
-}
+void func_0026AA60(s8 arg0) { D_0040DE74 = arg0; }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_269ea0", func_0026AA68);
 #ifdef NON_MATCHING

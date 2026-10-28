@@ -188,13 +188,11 @@ s32 Pad2_HasNewFrame(s32 index) {
     return 1;
 }
 
-#ifdef NON_MATCHING
-// Unmatched: format index and packed-bit cursor use opposite registers.
 s32 Pad2_BuildFieldMap(const u8* presence, Recovered_Pad2Field* fields) {
     s32 presenceBit = 0;
     s32 byteOffset = 0;
-    s32 bitOffset = 0;
     s32 index;
+    s32 bitOffset = 0;
     for (index = 0; index < 40; ++index) {
         if ((*presence >> presenceBit) & 1) {
             fields->present = 1;
@@ -223,7 +221,4 @@ s32 Pad2_BuildFieldMap(const u8* presence, Recovered_Pad2Field* fields) {
     }
     return 1;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c6c8", func_0029CE30);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/sony/tu_29c6c8", func_0029CEE0);
