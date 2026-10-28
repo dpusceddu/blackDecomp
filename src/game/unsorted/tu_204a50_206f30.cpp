@@ -1,3 +1,4 @@
+#include "include_asm.h"
 #include "ps2/prelude.h"
 extern "C" void func_00275260(const char*, u16*, s32);
 extern "C" void func_00277510(void*, const void*, f32, const void*, s128, void*, const u16*);
@@ -6,7 +7,17 @@ extern u16 D_0043CB88[256];
 extern u16 D_0043CD88[256];
 // Private access views; original class names and unaccessed fields remain UNVERIFIED.
 struct FrontendVec2 {
-    float x, y;
+    union {
+        struct {
+            f32 x, y;
+        };
+        s64 bits;
+    };
+    FrontendVec2(const FrontendVec2& value) { bits = value.bits; }
+    FrontendVec2& operator=(const FrontendVec2& value) {
+        bits = value.bits;
+        return *this;
+    }
     FrontendVec2() {}
     FrontendVec2(float x0, float y0) : x(x0), y(y0) {}
 };
@@ -38,6 +49,53 @@ struct FrontendTitlePanel {
     u8 unk_34[4];
     FrontendVec2 secondPosition;
 };
+
+struct FrontendStatisticsPanel;
+extern "C" s32 func_00204F30(void*);
+extern "C" void func_00103800(void*, s8);
+extern "C" void func_001227A8(s32*);
+extern "C" s32 func_00207B80(FrontendStatisticsPanel*);
+extern "C" void func_00208140(void*, f32);
+extern "C" s32 func_00124A70(void*);
+extern "C" s32 func_00124CA8(void*);
+extern "C" void func_001034B0(void*, void*);
+extern s32* D_0040F4E8;
+extern s32* D_0040F4C0;
+
+// The native table has a no-op first slot and Initialize at byte 0x10.
+// UNVERIFIED: first slot's original signature and base-class field meanings.
+struct FrontendSolidBase {
+    u8 unk00[0x14];
+    virtual void Unknown0();
+    virtual s32 Initialize(const FrontendVec2&, const FrontendVec2&);
+};
+struct FrontendSolid : FrontendSolidBase {
+    void* command;
+};
+typedef char FrontendSolidStride[sizeof(FrontendSolid) == 0x1C ? 1 : -1];
+struct FrontendClock {
+    u8 unk00[0x1C];
+    f32 delta;
+};
+static inline f32 FrontendDelta(const FrontendClock* clock) { return clock->delta; }
+
+extern "C" s32 func_00205AA0(void* self) {
+    func_00204F30(self);
+    func_00103800(D_0040F0E0, 1);
+    func_001227A8(D_0040F4E8);
+    func_00207B80(M2C_FIELD(self, FrontendStatisticsPanel**, 0x64));
+    M2C_FIELD(self, FrontendSolid**, 0x60)->Initialize(FrontendVec2(0, 0), FrontendVec2(0, 0));
+    M2C_FIELD(self, FrontendSolid**, 0x60)[1].Initialize(FrontendVec2(0, 1), FrontendVec2(0, (f32)D_0040F4C0[1]));
+    return 1;
+}
+extern "C" void func_00205B68(void* self) {
+    func_00208140(M2C_FIELD(self, void**, 0x64), FrontendDelta((FrontendClock*)((s8*)D_0040F0E0 + 0x20120)));
+    if (func_00124A70(M2C_FIELD(D_0040F0E0, void**, 0x21060)) ||
+        func_00124CA8(M2C_FIELD(D_0040F0E0, void**, 0x21060))) {
+        void* context = D_0040F0E0;
+        func_001034B0(context, (s8*)context + 0x20220);
+    }
+}
 
 extern "C" {
 void func_00206F30(FrontendTitlePanel* self, const char* text, s32 selected) {
@@ -91,6 +149,14 @@ struct FrontendTextObject : FrontendFrameHeader {
     s32 index, style;
     f32 height, targetHeight, remaining, duration;
     void* command;
+#ifdef NON_MATCHING
+    void SetPosition(const FrontendVec2& p, const FrontendVec2& s) {
+        position = targetPosition = p;
+        scale = s;
+    }
+    void SetHeight(f32 value) { height = targetHeight = value; }
+    void SetColor(s128 value) { color = targetColor = value; }
+#endif
     FrontendTextObject() : FrontendFrameHeader(D_003E0C90) {}
 };
 struct FrontendSpriteObject : FrontendFrameHeader {
@@ -101,10 +167,31 @@ struct FrontendSpriteObject : FrontendFrameHeader {
     f32 remaining, duration;
     void* command;
     s32 mode;
+#ifdef NON_MATCHING
+    void SetPosition(const FrontendVec2& p, const FrontendVec2& s) {
+        position = targetPosition = p;
+        scale = s;
+    }
+    void SetExtent(const FrontendVec2& value) { extent = targetExtent = value; }
+    void SetColor(s128 value) { color = targetColor = value; }
+    void SetUV(const FrontendVec2& start, const FrontendVec2& end) {
+        uv[0] = start;
+        uv[1] = end;
+    }
+    void Initialize(s32 index, s32 first, s32 count, s32 last) {
+        s16 delta = M2C_FIELD(table, s16*, 0x10);
+        M2C_FIELD(table, s32(**)(void*, s32, s32, s32, s32), 0x14)((s8*)this + delta, index, first, count, last);
+    }
+#endif
     FrontendSpriteObject() : FrontendFrameHeader(D_003E0C10) {}
 };
 struct FrontendStatisticsPanel {
-    u8 unk00[0x14];
+    // UNVERIFIED: counters accessed only by the setup draft.
+    s32 state;
+    f32 elapsed, time;
+    s16 count0, count1;
+    s8 count2;
+    u8 unk11[3];
     FrontendTextObject* labels;
     FrontendTextObject* values;
     void* resource[2];
@@ -168,3 +255,91 @@ FrontendVec2 D_00438E20(30, 30);
 FrontendVec2 D_00438E28[2] = {FrontendVec2(0, 0), FrontendVec2(1, 1)};
 FrontendVec2 D_00438E38[5] = {FrontendVec2(500, 140), FrontendVec2(500, 180), FrontendVec2(500, 220),
                               FrontendVec2(500, 260), FrontendVec2(500, 300)};
+#ifdef NON_MATCHING
+extern void* D_0040F4C4;
+extern void* D_0040F510;
+extern const char* D_003BE714;
+extern const char* D_003BE710;
+extern u16 D_0043D990[32], D_003BDD10[5][256];
+extern const u16 D_003BDCD0[];
+extern s8 D_0043D988[5], D_0043D9D8[5], D_0043D9D0[5];
+extern "C" const char* func_00103358(void*, s32);
+extern "C" u16* func_002753F0(u16*, const u16*);
+extern "C" s32 func_00207610(void*, s32, s32, s32, s32);
+extern "C" void* func_00108328(void*, const char*);
+extern "C" void func_001EED98(void*, s32, f32);
+extern "C" void* func_00275448(void*, s32, s32, s32);
+extern "C" s32 func_00208C60(void*, f32);
+// Unmatched: setter argument lifetimes, loop scheduling and register allocation differ.
+extern "C" s32 func_00207B80(FrontendStatisticsPanel* self) {
+    s8 i = 0;
+    self->state = 0;
+    self->elapsed = 0;
+    self->time = 0;
+    self->count0 = 0;
+    self->count1 = 0;
+    self->count2 = 0;
+    func_00275260(func_00103358(D_0040F0E0, M2C_FIELD(D_0040F0E0, u8*, 0x2020C)), D_0043D990, 32);
+    func_002753F0(D_0043D990, D_003BDCD0);
+    self->title->text = D_0043D990;
+    self->title->uvSize = D_00438D48;
+    self->title->style = 1;
+    self->title->SetPosition(FrontendVec2((f32)D_0040F4C0[0] * 0.5f, 50), D_00438D10);
+    self->title->SetHeight(30);
+    self->title->SetColor(D_00438D00);
+    func_00207610(self->title, 1, 2, 30, 30);
+    for (; i < 5; i++) {
+        self->labels[i].text = D_0043CF88[i];
+        self->labels[i].uvSize = D_00438D48;
+        self->labels[i].style = 1;
+        self->labels[i].SetPosition(D_00438D50[i], D_00438D40);
+        self->labels[i].SetHeight(23);
+        self->labels[i].SetColor(D_00438D20);
+        func_00207610(&self->labels[i], 1, 2, 30, 30);
+        self->labels[i].targetPosition = D_00438D78[i];
+        self->labels[i].targetHeight = 23;
+        self->labels[i].targetColor = D_00438D30;
+        D_0043D988[i] = 0;
+        D_0043D9D8[i] = 0;
+    }
+    for (i = 0; i < 5; i++) {
+        D_003BDD10[i][0] = '0';
+        self->values[i].text = D_003BDD10[i];
+        self->values[i].uvSize = D_00438D48;
+        self->values[i].style = 1;
+        self->values[i].SetPosition(D_00438CF0, D_00438CF8);
+        self->values[i].SetHeight(23);
+        self->values[i].SetColor(D_00438DA0);
+        if (i == 1) {
+            self->values[1].targetColor = D_00438DB0;
+            self->values[1].color = self->values[1].targetColor;
+        }
+        func_00207610(&self->values[i], 1, 2, 30, 30);
+        D_0043D9D0[i] = 0;
+    }
+    self->resource[0] = func_00108328(D_0040F4C4, D_003BE714);
+    self->resource[1] = func_00108328(D_0040F4C4, D_003BE710);
+    for (i = 0; i < 10; i++) {
+        self->sprites[i].mode = (s32)self->resource[(s8)(i / 5)];
+        self->sprites[i].SetPosition(D_00438CF0, D_00438CF8);
+        self->sprites[i].SetExtent(D_00438E20);
+        self->sprites[i].SetColor(D_00438DF0);
+        self->sprites[i].SetUV(D_00438E28[0], D_00438E28[1]);
+        self->sprites[i].Initialize(1, 2, 30, 30);
+    }
+    self->labels[0].duration = 0.6f;
+    self->labels[0].remaining = 0.6f;
+    func_001EED98(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 0x30), 0, 0.0f);
+    func_001EED98(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 0x30), 7, 0.0f);
+    D_0043D988[0] = 1;
+    func_00275448(D_003BDD10[0], self->count2, 0, 0);
+    func_00208C60(D_003BDD10[1], self->elapsed);
+    func_00275448(D_003BDD10[2], self->count0, 0, 0);
+    func_00275448(D_003BDD10[3], self->count1, 0, 0);
+    func_00208C60(D_003BDD10[4], self->time);
+    return 1;
+}
+
+#else
+INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_206f30", func_00207B80);
+#endif
