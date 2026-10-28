@@ -6,10 +6,10 @@ namespace ActorParts {
 
 extern "C" {
 extern EeS128 D_004432A0;
-int func_0013EC10(OrientationState* self, int mode);
+void func_0013EC10(OrientationState* self, int mode);
 }
 
-int OrientationState::Initialize() {
+void OrientationState::Initialize() {
     target = D_004432A0;
     scalarB0 = 5.0f;
     scalarB4 = 5.0f;
@@ -20,7 +20,7 @@ int OrientationState::Initialize() {
     state = 0;
     previousState = 0;
     elapsed = 0;
-    return func_0013EC10(this, 4);
+    func_0013EC10(this, 4);
 }
 
 int OrientationState::Begin(void *actor)

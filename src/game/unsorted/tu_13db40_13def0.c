@@ -1,9 +1,10 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_0013ED98();
+extern void func_0013ED98(void* self);
 extern s32 func_0013EC38(void* self, void* actor);
 extern void* D_0040F0E0;
+extern s128 D_004432A0;
 
 s32 func_0013DEF0(void *arg0)
 {
@@ -26,15 +27,43 @@ void func_0013DF38(void) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_13db40_13def0", func_0013DF58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_13db40_13def0", func_0013EB00);
 
-s32 func_0013EC10(s32 arg0, s32 arg1) {
+void func_0013EC10(void* arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x80) = arg1;
     M2C_FIELD(arg0, s32 *, 0x7C) = 0;
     M2C_FIELD(arg0, s8 *, 0x78) = 0;
-    return func_0013ED98(arg0);
+    func_0013ED98(arg0);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_13db40_13def0", func_0013EC38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_13db40_13def0", func_0013ED98);
+
+void func_0013ED98(void* self) {
+    M2C_FIELD(self, s32*, 0xC) = 0;
+    M2C_FIELD(self, s32*, 8) = 0;
+    M2C_FIELD(self, s32*, 0) = 0;
+    M2C_FIELD(self, s32*, 4) = 0;
+    M2C_FIELD(self, s32*, 0x10) = 0;
+    M2C_FIELD(self, s128*, 0x50) = D_004432A0;
+    M2C_FIELD(self, s128*, 0x60) = D_004432A0;
+    M2C_FIELD(self, s128*, 0x20) = D_004432A0;
+    M2C_FIELD(self, s8*, 0x3D) = 1;
+    M2C_FIELD(self, s32*, 0x70) = 0;
+    M2C_FIELD(self, s8*, 0x30) = 0;
+    M2C_FIELD(self, s8*, 0x31) = 0;
+    M2C_FIELD(self, s8*, 0x32) = 0;
+    M2C_FIELD(self, s8*, 0x33) = 0;
+    M2C_FIELD(self, s8*, 0x34) = 0;
+    M2C_FIELD(self, s8*, 0x35) = 0;
+    M2C_FIELD(self, s8*, 0x36) = 0;
+    M2C_FIELD(self, s8*, 0x37) = 0;
+    M2C_FIELD(self, s8*, 0x38) = 0;
+    M2C_FIELD(self, s8*, 0x39) = 0;
+    M2C_FIELD(self, s8*, 0x3B) = 0;
+    M2C_FIELD(self, s8*, 0x3C) = 0;
+    M2C_FIELD(self, s32*, 0x44) = 0;
+    M2C_FIELD(self, s32*, 0x48) = 0;
+    M2C_FIELD(self, s32*, 0x40) = 0;
+    M2C_FIELD(self, s32*, 0x4C) = 0;
+}
 
 void func_0013EE20(void) {
 
@@ -96,15 +125,10 @@ void func_0013EF10(void *arg0, s128 arg1, s32 arg2) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_13db40_13def0", func_0013EF28);
 
-s32 func_0013F0A8(s32 arg0)
-{
-  s32 temp_v0;
-  if (1)
-  {
-    temp_v0 = func_0013EC10(arg0, 0);
-  }
-  M2C_FIELD(arg0, s8 *, 0x9D) = (M2C_FIELD(arg0, s32 *, 0x98) = 0);
-  return temp_v0;
+void func_0013F0A8(void* self) {
+    func_0013EC10(self, 0);
+    M2C_FIELD(self, s32*, 0x98) = 0;
+    M2C_FIELD(self, s8*, 0x9D) = 0;
 }
 
 s32 func_0013F0D8(void* self, s8 index, void* actor) {
