@@ -605,7 +605,15 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00228BC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229370);
 // UNVERIFIED: original types and callback semantics.
-struct Recovered_StackVtable { u8 unknown[8]; s16 adjustment; u16 unknown0A; void (*invoke)(void*); };
+struct Recovered_StackVtable {
+    u8 unknown[8];
+    s16 adjustment;
+    u16 unknown0A;
+    void (*invoke)(void*);
+    s16 releaseAdjustment;
+    u16 unknown12;
+    void (*release)(void*);
+};
 struct Recovered_StackObject { int unknown; Recovered_StackVtable* vtable; };
 struct Recovered_ObjectStack {
     int count, unknown;
@@ -666,7 +674,18 @@ extern "C" void func_0022DFE0(Recovered_ObjectStack* self) {
     self->count = index + 1;
     object->vtable->invoke((char*)object + object->vtable->adjustment);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E030);
+extern "C" void func_00225030(void*, void*);
+extern "C" void func_0022A440(void*, void*);
+extern "C" void func_00252B10(AptViews::PendingValues*);
+extern "C" void func_0022E030(Recovered_ObjectStack* self, void* arg) {
+    func_00225030(self, arg);
+    if (self->count > 0) {
+        Recovered_StackObject* object = self->objects[self->count - 1];
+        object->vtable->release((char*)object + object->vtable->releaseAdjustment);
+        self->count--;
+    }
+    if (AptViews::D_003BE8E0->count != 0 && self->count == 0) func_00252B10(AptViews::D_003BE8E0);
+}
 extern "C" void func_00223678(void*, void*);
 extern "C" void func_00252B10(AptViews::PendingValues*);
 extern "C" void func_00225030(void*, void*);
@@ -675,7 +694,15 @@ extern "C" void func_0022E0B8(void** self, void* arg) {
     func_00223678(self, arg);
     if (AptViews::D_003BE8E0->count != 0 && *self == 0) func_00252B10(AptViews::D_003BE8E0);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E120);
+extern "C" void func_0022E120(Recovered_ObjectStack* self, void* arg) {
+    func_0022A440(self, arg);
+    if (self->count > 0) {
+        Recovered_StackObject* object = self->objects[self->count - 1];
+        object->vtable->release((char*)object + object->vtable->releaseAdjustment);
+        self->count--;
+    }
+    if (AptViews::D_003BE8E0->count != 0 && self->count == 0) func_00252B10(AptViews::D_003BE8E0);
+}
 extern "C" void func_0022A440(void*, void*);
 extern "C" void func_0022E1A8(void** self, void* arg) {
     func_0022A440(self, arg);
