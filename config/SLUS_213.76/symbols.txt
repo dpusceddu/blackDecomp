@@ -60,6 +60,7 @@ SelectionPool_Remove = 0x1398E0; // type:func
 SelectionPool_First = 0x139940; // type:func
 SelectionPool_Score = 0x139A70; // type:func
 RegistryOf__4GamePQ24Game5Brain = 0x13D3F0; // type:func
+Initialize__Q210ActorParts16OrientationState = 0x13DB40; // type:func
 Begin__Q210ActorParts16OrientationStatePv = 0x13DBA0; // type:func
 Update__Q210ActorParts10Controller = 0x13DD68; // type:func
 func_0013EE68 = 0x13EE68; // type:func
