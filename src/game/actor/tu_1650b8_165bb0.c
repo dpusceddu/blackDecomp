@@ -1,51 +1,71 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00165DF0);
 extern void* D_0040F4D0;
+typedef s32 (*EarlyUpdate)(void*, s128, void*);
+#define UPDATE_TYPE_THREE_BANK(listOffset, countOffset)                                                                 \
+    if (M2C_FIELD(self, s32*, listOffset)) {                                                                            \
+        for (i = 0; i < M2C_FIELD(self, u16*, countOffset); i++) {                                                      \
+            s32 offset = i * 4;                                                                                         \
+            void* entry = M2C_FIELD(offset + M2C_FIELD(self, s32*, listOffset), void**, 0);                             \
+            if (M2C_FIELD(entry, u8*, 0x11C) && M2C_FIELD(entry, s32*, 0x120) == 3) {                                   \
+                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                          \
+                M2C_FIELD(vtable, EarlyUpdate*, 0xA4)((char*)entry + M2C_FIELD(vtable, s16*, 0xA0), frame, clock);      \
+            }                                                                                                           \
+        }                                                                                                               \
+    }
+
+void func_00165DF0(void* self, s128 frame) {
+    s32 i;
+    void* clock = (char*)D_0040F4D0 + 0x30;
+    UPDATE_TYPE_THREE_BANK(0x48, 0);
+    UPDATE_TYPE_THREE_BANK(0x4C, 2);
+}
+#undef UPDATE_TYPE_THREE_BANK
+
 extern void func_00174578(void*);
 typedef s32 (*WideUpdate)(void*, s128, void*);
 typedef void (*FloatUpdate)(void*, f32);
 typedef void (*ResetUpdate)(void*);
 /* Calls reload the bank entry before clearing its flag because updates can move it. */
-#define WIDE(P, C, F, S)                                                                                             \
-    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
-        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
-            s32 offset = i * 4;                                                                                      \
-            void* entry = M2C_FIELD(offset + M2C_FIELD(self, s32*, P), void**, 0);                                   \
-            if (M2C_FIELD(entry, u8*, F) && (!S || M2C_FIELD(entry, s32*, 0x120) != 3)) {                            \
-                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                       \
-                if (M2C_FIELD(vtable, WideUpdate*, 0x9C)((char*)entry + M2C_FIELD(vtable, s16*, 0x98), frame, clock)) \
-                    M2C_FIELD(M2C_FIELD(offset + M2C_FIELD(self, s32*, P), void**, 0), u8*, F) = 0;                  \
-            }                                                                                                        \
-        }                                                                                                            \
+#define WIDE(P, C, F, S)                                                                                                \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                     \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                                \
+            s32 offset = i * 4;                                                                                         \
+            void* entry = M2C_FIELD(offset + M2C_FIELD(self, s32*, P), void**, 0);                                      \
+            if (M2C_FIELD(entry, u8*, F) && (!S || M2C_FIELD(entry, s32*, 0x120) != 3)) {                               \
+                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                          \
+                if (M2C_FIELD(vtable, WideUpdate*, 0x9C)((char*)entry + M2C_FIELD(vtable, s16*, 0x98), frame, clock))   \
+                    M2C_FIELD(M2C_FIELD(offset + M2C_FIELD(self, s32*, P), void**, 0), u8*, F) = 0;                     \
+            }                                                                                                           \
+        }                                                                                                               \
     }
-#define TICK(P, C, F)                                                                                                \
-    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
-        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
-            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, P), void**, 0);                                    \
-            if (M2C_FIELD(entry, u8*, F)) {                                                                          \
-                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                       \
-                M2C_FIELD(vtable, FloatUpdate*, 0xC)((char*)entry + M2C_FIELD(vtable, s16*, 8), dt);                 \
-            }                                                                                                        \
-        }                                                                                                            \
+#define TICK(P, C, F)                                                                                                   \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                     \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                                \
+            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, P), void**, 0);                                       \
+            if (M2C_FIELD(entry, u8*, F)) {                                                                             \
+                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                          \
+                M2C_FIELD(vtable, FloatUpdate*, 0xC)((char*)entry + M2C_FIELD(vtable, s16*, 8), dt);                    \
+            }                                                                                                           \
+        }                                                                                                               \
     }
-#define RESET(P, C)                                                                                                  \
-    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
-        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
-            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, P), void**, 0);                                    \
-            if (M2C_FIELD(entry, u8*, 0x1C)) {                                                                       \
-                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                       \
-                M2C_FIELD(vtable, ResetUpdate*, 0x2C)((char*)entry + M2C_FIELD(vtable, s16*, 0x28));                 \
-            }                                                                                                        \
-        }                                                                                                            \
+#define RESET(P, C)                                                                                                     \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                     \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                                \
+            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, P), void**, 0);                                       \
+            if (M2C_FIELD(entry, u8*, 0x1C)) {                                                                          \
+                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                          \
+                M2C_FIELD(vtable, ResetUpdate*, 0x2C)((char*)entry + M2C_FIELD(vtable, s16*, 0x28));                    \
+            }                                                                                                           \
+        }                                                                                                               \
     }
-#define DIRECT(P, C)                                                                                                 \
-    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
-        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
-            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, P), void**, 0);                                    \
-            if (entry) func_00174578(entry);                                                                         \
-        }                                                                                                            \
+#define DIRECT(P, C)                                                                                                    \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                     \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                                \
+            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, P), void**, 0);                                       \
+            if (entry) func_00174578(entry);                                                                            \
+        }                                                                                                               \
     }
 void func_00165F30(void* self, s128 frame, f32 dt) {
     s32 i;
@@ -76,17 +96,50 @@ void func_00165F30(void* self, s128 frame, f32 dt) {
 #undef RESET
 #undef DIRECT
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00167000);
+/* Detach the bank before releasing its non-null entries. */
+void func_00167000(void* self, void* list) {
+    s32 remaining;
+    s32 count;
+    void* vtable;
+    void* entry;
+    void** cursor;
+
+    if (list == M2C_FIELD(self, void**, 0x68)) {
+        count = M2C_FIELD(self, u16*, 0x10);
+        M2C_FIELD(self, void**, 0x68) = NULL;
+        M2C_FIELD(self, u16*, 0x10) = 0;
+    } else {
+        count = M2C_FIELD(self, u16*, 0x12);
+        M2C_FIELD(self, void**, 0x6C) = NULL;
+        M2C_FIELD(self, u16*, 0x12) = 0;
+    }
+    if (list != NULL) {
+        cursor = list;
+        if (count != 0) {
+            remaining = count;
+            do {
+                entry = *cursor;
+                if (entry != NULL) {
+                    vtable = M2C_FIELD(entry, void**, 0x10);
+                    M2C_FIELD(vtable, s32 (**)(void*), 0x24)((void*)((s8*)entry + M2C_FIELD(vtable, s16*, 0x20)));
+                }
+                remaining -= 1;
+                cursor = (void**)((s8*)cursor + 4);
+            } while (remaining != 0);
+        }
+    }
+}
+
 extern void func_00167A10(void*, void*, void*);
 /* Binding descriptors occur at different offsets in each bank family. */
-#define VISIT(P, C, F)                                                                                               \
-    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
-        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
-            offset = i * 4;                                                                                          \
-            listBase = M2C_FIELD(self, s32*, P);                                                                     \
-            entry = M2C_FIELD(offset + listBase, void**, 0);                                                         \
-            func_00167A10(self, entry, M2C_FIELD(entry, void**, F));                                                 \
-        }                                                                                                            \
+#define VISIT(P, C, F)                                                                                                  \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                     \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                                \
+            offset = i * 4;                                                                                             \
+            listBase = M2C_FIELD(self, s32*, P);                                                                        \
+            entry = M2C_FIELD(offset + listBase, void**, 0);                                                            \
+            func_00167A10(self, entry, M2C_FIELD(entry, void**, F));                                                    \
+        }                                                                                                               \
     }
 void func_00167208(void* self) {
     s32 i, offset, listBase;
