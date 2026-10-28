@@ -944,19 +944,13 @@ extern "C" void func_0027C2F8(Recovered_DisplayDefaults* self) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C2F8);
 #endif
-extern "C" int func_00275260(const char*, u16*, int);
-extern "C" u16 func_00275DC0(void*, u16*, s128, float, float, float);
-#ifdef NON_MATCHING
-// Unmatched: vector argument move scheduling differs.
-extern "C" int func_0027C370(void** self, const char* text, s128 vector, float a, float b, float c) {
+extern "C" void func_00275260(const char*, u16*, int);
+extern "C" void func_00275DC0(void*, float, float, float, const u16*, s128);
+extern "C" void func_0027C370(void** self, const char* text, s128 vector, float a, float b, float c) {
     u16 buffer[256];
-    int result = func_00275260(text, buffer, 0x100);
-    if (!*self) return result;
-    return func_00275DC0(*self, buffer, vector, a, b, c);
+    func_00275260(text, buffer, 0x100);
+    if (*self) func_00275DC0(*self, a, b, c, buffer, vector);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C370);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C3F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CEA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CF58);
