@@ -18,7 +18,9 @@ typedef struct Recovered_GridEntry {
 } Recovered_GridEntry;
 typedef struct Recovered_GridRow {
     Recovered_GridEntry entries[6];
-    u8 unk_108[0x68];
+    u8 unk_108[0x58];
+    u64 key;
+    u8 unk_168[8];
     u8 unk_170;
     u8 unk_171[0x1F];
 } Recovered_GridRow;
@@ -224,7 +226,13 @@ void func_001E5D80(s32 arg0, void *arg1) {
     M2C_FIELD(arg1, s8 *, 0x170) = 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5D88);
+Recovered_GridRow* func_001E5D88(Recovered_GridOwner* owner, u64 key) {
+    u32 i;
+    for (i = 0; i < 3; i++) {
+        if (owner->rows[i].key == key) return &owner->rows[i];
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5DC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E5DD0);
 #ifdef NON_MATCHING
