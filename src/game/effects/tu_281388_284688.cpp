@@ -809,9 +809,13 @@ extern "C" int func_002C8438(unsigned* out, const unsigned char* in, int type) {
     case 0x500:
         *out = (in[2] << 16) | (in[1] << 8) | in[0] | ((in[3] * 0x808081u) & 0xff000000u);
         break;
-    case 0x600:
-        *out = in[0] | ((in[1] << 8) | 0x80000000u) | (in[2] << 16);
+    case 0x600: {
+        unsigned b = in[2];
+        unsigned r = in[0];
+        unsigned g = (in[1] << 8) | 0x80000000u;
+        *out = r | g | (b << 16);
         break;
+    }
     default: return 0;
     }
     return 1;
@@ -819,42 +823,36 @@ extern "C" int func_002C8438(unsigned* out, const unsigned char* in, int type) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C8438);
 #endif
-#ifdef NON_MATCHING
-// Unmatched: byte stores are scheduled in a different order.
 extern "C" int func_002C8530(unsigned char* out, const unsigned* in, int type) {
     unsigned value = *in;
     switch (type & 0xf00) {
-        case 0:
-        case 0x100:
-            out[2] = (value >> 7) & 0xf8;
-            out[1] = (value >> 2) & 0xf8;
-            out[0] = value << 3;
-            if (value & 0x8000)
-                out[3] = 0xff;
-            else
-                out[3] = 0;
-            break;
-        case 0x500:
-            out[2] = value >> 16;
-            out[1] = value >> 8;
-            out[0] = value;
-            out[3] = (value & 0xff000000u) / 0x808080u;
-            break;
-        case 0x600: {
-            unsigned b = value >> 16;
-            unsigned g = value >> 8;
-            out[1] = g;
-            out[3] = 0xff;
-            out[2] = b;
-            out[0] = value;
-        } break;
-        default: return 0;
+    case 0:
+    case 0x100:
+        out[2] = (value >> 7) & 0xf8;
+        out[1] = (value >> 2) & 0xf8;
+        out[0] = value << 3;
+        if (value & 0x8000) out[3] = 0xff;
+        else out[3] = 0;
+        break;
+    case 0x500:
+        out[2] = value >> 16;
+        out[1] = value >> 8;
+        out[0] = value;
+        out[3] = (value & 0xff000000u) / 0x808080u;
+        break;
+    case 0x600: {
+        unsigned b = value >> 16;
+        unsigned g = value >> 8;
+        out[1] = g;
+        out[2] = b;
+        out[0] = value;
+        out[3] = 0xff;
+        break;
+    }
+    default: return 0;
     }
     return 1;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C8530);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C8618);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002CB3D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002CB660);
