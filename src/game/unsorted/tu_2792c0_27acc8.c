@@ -94,7 +94,14 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BA60);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BA68);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BAE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BB50);
+// UNVERIFIED: original type and callback identity.
+typedef struct { u8 unknown[0x10]; s16 adjustment; u16 unknown12; void (*callback)(void*, s32); } Recovered_RingVtable;
+typedef struct { u8 unknown[0x10]; Recovered_RingVtable* vtable; } Recovered_RingOwner;
+extern s32 func_0027BAE8(void*, s32);
+void func_0027BB50(Recovered_RingOwner* self, s32 arg) {
+    s32 result = func_0027BAE8(self, arg);
+    if (result) self->vtable->callback((u8*)self + self->vtable->adjustment, result);
+}
 #ifdef NON_MATCHING
 // Unmatched: section is eight bytes shorter despite matching instructions.
 s32 func_0027BB98(Recovered_RecordRing* ring, Recovered_RingRecord* record) {
