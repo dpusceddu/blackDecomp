@@ -43,7 +43,7 @@ int func_001EDB80(void *);
 // Scoped caller view: Begin preserves its FP/selector arguments; the matched
 // callee itself ignores them. This does not establish semantic parameters.
 int ActivateEnvelopeWithArguments(void *,float,unsigned) __asm__("func_001EDB80");
-void func_001EFE70(void *,int);
+int func_001EFE70(void *,int);
 void func_001EDDB8(void *);
 float func_0029E688(float,float);
 void func_00286120(float,float,void *);

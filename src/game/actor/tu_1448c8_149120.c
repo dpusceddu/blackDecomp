@@ -20,7 +20,7 @@ s32 func_00149120(s32 *arg0, s32 arg1) {
 }
 
 #ifdef NON_MATCHING
-// Unmatched: the loop code differs; draft left when the session ended.
+// Unmatched: eight counter/accumulator register operands differ.
 s32 func_00149178(Recovered_ActorCountView *self) {
     s32 remaining = self->entryCount;
     s32 total = 0;
@@ -28,8 +28,10 @@ s32 func_00149178(Recovered_ActorCountView *self) {
         Recovered_ActorCountSourceEntry *entry = self->source->entries;
         do {
             s32 count = entry->count;
-            if (count) total += count;
-            else total += 1;
+            if (!count)
+                total += 1;
+            else
+                total += count;
             --remaining;
             ++entry;
         } while (remaining);
@@ -55,29 +57,14 @@ s32 func_001491B8(Recovered_ActorCountView *self, s32 index, s32 *count) {
     return total;
 }
 
-#ifdef NON_MATCHING
-// Unmatched: compiles to 72 bytes instead of 80.
-s32 func_00149210(Recovered_ActorCountView *self, s32 index) {
+s32 func_00149210(Recovered_ActorCountView* self, s32 index) {
+    s32 total = 0;
     s32 i;
-    s32 total;
-    u8 count;
-
-    count = self->entryCount;
-    total = 0;
-    i = 0;
-    if (count) {
-        u8 *entry = &self->entries->count;
-        do {
-            total += *entry;
-            if (index < total) return i;
-            ++i;
-            entry += 0xC;
-        } while (i < count);
+    for (i = 0; i < self->entryCount; ++i) {
+        total += self->entries[i].count;
+        if (index < total) return i;
     }
     return -1;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1448c8_149120", func_00149210);
-#endif
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1448c8_149120", func_00149260);

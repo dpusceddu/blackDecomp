@@ -26,9 +26,10 @@ Recovered_PhysicsScratchRequirement* func_0033B610(Recovered_PhysicsScratchRequi
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_33afb0", func_0033B680);
 
-void func_0033B688(void *arg0) {
+s32 func_0033B688(void* arg0) {
     func_0033AFB0();
-    func_003398D8(M2C_FIELD(arg0, s32 *, 0x30), M2C_FIELD(arg0, s32 *, 0x34), M2C_FIELD(arg0, s32 *, 0x2C), M2C_FIELD(arg0, s32 *, 0x18), M2C_FIELD(arg0, s32 *, 0x28), M2C_FIELD(arg0, f32 *, 0x14));
+    return func_003398D8(M2C_FIELD(arg0, s32*, 0x30), M2C_FIELD(arg0, s32*, 0x34), M2C_FIELD(arg0, s32*, 0x2C),
+                         M2C_FIELD(arg0, s32*, 0x18), M2C_FIELD(arg0, s32*, 0x28), M2C_FIELD(arg0, f32*, 0x14));
 }
 
 void func_0033B6C8(void) {

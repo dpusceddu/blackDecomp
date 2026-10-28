@@ -1,5 +1,5 @@
 """The objdiff project file: one unit per object, a category per library, assembly-backed functions excluded from source progress."""
-import json, struct, sys, tempfile, unittest
+import json, os, struct, sys, tempfile, unittest
 from pathlib import Path
 from unittest.mock import patch
 
@@ -82,6 +82,58 @@ class UnitMapping(unittest.TestCase):
             self.assertEqual([1,2],[f['addr'] for f in plan[0]['functions']])
             self.assertFalse(plan[0]['complete'])
 
+    def test_comparison_keeps_explicit_source_data_with_its_function(self):
+        sections = [dict(name='.text.func_00100000', index=1, flags=2, type=1, size=8),
+                    dict(name='.rodata.click', index=2, flags=2, type=1, size=8),
+                    dict(name='.rodata.00400008', index=3, flags=2, type=1, size=8)]
+        symbol = dict(name='func_00100000', shndx=1, value=0, type=2)
+        function = dict(addr=0x100000, size=8, status='source')
+        unit = dict(functions=[function], data_ranges=[dict(section='.rodata', input='.rodata.click',
+                                                          start=0x400000, end=0x400008)])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            build = root / 'build/SLUS_213.76'
+            raw = build / 'obj/units/test.o'
+            raw.parent.mkdir(parents=True)
+            raw.write_bytes(b'compiled object')
+            Path(str(raw) + '.json').write_text(json.dumps(dict(resolved={str(0x100000): dict(
+                status='source', section=sections[0]['name'], link_name=symbol['name'])})))
+            (build / 'placement.json').write_text(json.dumps(dict(functions=[function])))
+            spec = root / 'spec.json'
+            spec.write_text(json.dumps(dict(name='units/test', unit=unit)))
+            original = root / 'asm/SLUS_213.76/nonmatchings/func_00100000.s'
+            original.parent.mkdir(parents=True)
+            original.write_text(asm(0x100000, 2, padding=0))
+
+            def run(command, **kwargs):
+                if '-o' in command:
+                    Path(command[command.index('-o') + 1]).write_bytes(b'target object')
+
+            previous = Path.cwd()
+            try:
+                os.chdir(root)
+                with patch.object(objdiff, 'ROOT', root), patch.object(objdiff, 'Elf') as elf, \
+                        patch.object(objdiff, 'environment', return_value=(root, {'BLACK_BINUTILS_PREFIX': 'mips-'})), \
+                        patch('progress.orphan_pieces', return_value=set()), \
+                        patch.object(elfobj, 'undefine_dropped', return_value=(b'compiled object', [])) as dropped, \
+                        patch.object(elfobj, 'literal_as_gprel', side_effect=lambda data: data), \
+                        patch.object(elfobj, 'copy_header_flags', side_effect=lambda data, _: data), \
+                        patch.object(objdiff.subprocess, 'run', side_effect=run) as commands:
+                    elf.return_value.sections = sections
+                    elf.return_value.symbols.return_value = [symbol]
+                    elf.return_value.section.side_effect = lambda name: next(
+                        (section for section in sections if section['name'] == name), None)
+                    objdiff.build_view('spec.json', 'build/SLUS_213.76/objdiff/base/test.o')
+                retained = dropped.call_args.args[1]
+                self.assertIn('.text.func_00100000', retained)
+                self.assertIn('.rodata.click', retained)
+                self.assertNotIn('.rodata.00400008', retained)
+                copy_command = commands.call_args_list[0].args[0]
+                self.assertNotIn('--remove-section=.rodata.click', copy_command)
+                self.assertIn('--remove-section=.rodata.00400008', copy_command)
+            finally:
+                os.chdir(previous)
+
 
 def elf_object(entries, flags=0x20920001):
     """A minimal ELF32 little-endian object: a header and one SHT_REL section holding the relocation entries."""
@@ -108,23 +160,57 @@ class ObjectNormalization(unittest.TestCase):
         self.assertEqual(0x0A, struct.unpack_from('<I', fixed, 52 + 4)[0] >> 8)       # the symbol index stays
 
 
-class ComparisonSections(unittest.TestCase):
-    def test_only_the_selected_text_section_name_changes(self):
-        text = ('.section .text.00263360, "ax"\n'
-                'glabel func_00263360\njal func_00263360\n'
-                '.section .rodata.00263360, "a"\n.word func_00263360\n'
-                '.section .text.00263388, "ax"\n')
-        expected = text.replace('.section .text.00263360,', '.section .text.func_00263360,')
-        fixed = objdiff.comparison_text_section(text, 0x263360)
-        self.assertEqual(expected, fixed)
-        self.assertEqual(fixed, objdiff.comparison_text_section(fixed, 0x263360))
+class ComparisonTextSections(unittest.TestCase):
+    def test_code_sections_agree_with_the_base_function_name(self):
+        text = asm(0x100230, 2, tail_labels=['D_00400000'])
+        result = objdiff.comparison_text_sections(text)
+        self.assertIn('.section .text.func_00100230, "ax"', result)
+        self.assertIn('glabel func_00100230', result)
+        self.assertEqual(text.split('glabel', 1)[1], result.split('glabel', 1)[1])
 
-    def test_section_directive_boundaries_and_spacing(self):
-        text = ('.section\t.text.00263360 \"ax\"\n'
-                '.section .text.002633600, "ax"\n'
-                '# .section .text.00263360, "ax"\n')
-        self.assertEqual(text.replace('.section\t.text.00263360 ', '.section\t.text.func_00263360 '),
-                         objdiff.comparison_text_section(text, 0x263360))
+    def test_data_section_names_and_literals_are_preserved(self):
+        text = ('.section .rodata.00400000, "a"\n'
+                '    .asciz ".section .text.00100230"\n'
+                '.section .text.func_00100230, "ax"\n')
+        self.assertEqual(text, objdiff.comparison_text_sections(text))
+
+    def test_multiple_functions_and_repeated_normalization(self):
+        text = asm(0x100230, 2) + asm(0x100240, 3)
+        result = objdiff.comparison_text_sections(text)
+        self.assertIn('.text.func_00100230', result)
+        self.assertIn('.text.func_00100240', result)
+        self.assertEqual(result, objdiff.comparison_text_sections(result))
+
+
+class ComparisonSymbolNames(unittest.TestCase):
+    def symbol(self, name, section=0):
+        return dict(name=name, shndx=section)
+
+    def test_an_assembly_reference_and_undefined_compiler_alias_share_the_canonical_symbol(self):
+        symbols = [self.symbol('strcmp$35CA74'), self.symbol('func_0035CA74')]
+        renames, redirects = objdiff.comparison_symbol_names(symbols, {}, {0x35CA74})
+        self.assertEqual({}, renames)
+        self.assertEqual({0: 1}, redirects)
+
+    def test_an_absent_canonical_symbol_is_renamed(self):
+        symbols = [self.symbol('strcmp$35CA74')]
+        self.assertEqual(({'strcmp$35CA74': 'func_0035CA74'}, {}),
+                         objdiff.comparison_symbol_names(symbols, {}, {0x35CA74}))
+
+    def test_multiple_bindings_keep_the_defined_source_function(self):
+        symbols = [self.symbol('Method$100230', 3), self.symbol('Other$100230')]
+        source_names = {'Method$100230': 'func_00100230'}
+        self.assertEqual((source_names, {1: 0}),
+                         objdiff.comparison_symbol_names(symbols, source_names, {0x100230}))
+
+    def test_an_existing_defined_canonical_symbol_is_preserved(self):
+        symbols = [self.symbol('Other$100230'), self.symbol('func_00100230', 2)]
+        self.assertEqual(({}, {0: 1}), objdiff.comparison_symbol_names(symbols, {}, {0x100230}))
+
+    def test_data_bindings_and_unrelated_names_stay_distinct(self):
+        symbols = [self.symbol('buffer$400000'), self.symbol('plain_name')]
+        self.assertEqual(({'buffer$400000': 'D_00400000'}, {}),
+                         objdiff.comparison_symbol_names(symbols, {}, set()))
 
 
 if __name__ == '__main__':

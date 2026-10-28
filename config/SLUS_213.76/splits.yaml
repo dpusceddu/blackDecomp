@@ -356,7 +356,9 @@ splits:
   - {src: src/game/actor/tu_1448c8_145fb0.c, range: [0x145fb0, 0x146a28]}
   - {src: src/game/actor/actor_reset.cpp, range: [0x146a28, 0x146af0]}
   - {src: src/game/actor/actor_entries_1448c8.cpp, range: [0x146af0, 0x146bf8], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16, -fbyte-bool]}
-  - {src: src/game/actor/tu_1448c8_146bf8.c, range: [0x146bf8, 0x1476d0]}
+  - {src: src/game/actor/tu_1448c8_146bf8.c, range: [0x146bf8, 0x147140]}
+  - {src: src/game/actor/tu_1448c8_147140.c, range: [0x147140, 0x1471e0], flags: [-O2, -G8, -snas], assembler: sony-2.9, note: "Native gp-relative byte load; Sony assembler honors the sized extern under G8 where SN emits an absolute load."}
+  - {src: src/game/actor/tu_1448c8_146bf8.c, range: [0x1471e0, 0x1476d0]}
   - {src: src/game/actor/tu_1448c8_1476d0.c, range: [0x1476d0, 0x147988]}
   - {src: src/game/actor/tu_1448c8_147988.c, range: [0x147988, 0x1479b8]}
   - {src: src/game/actor/tu_1448c8_1479b8.c, range: [0x1479b8, 0x148430]}
@@ -1212,7 +1214,7 @@ splits:
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1b0d88, 0x1b0f48]}
   - {src: src/game/effects/tu_1b0f48.c, range: [0x1b0f48, 0x1b0f50]}
   - {src: src/game/effects/tu_1b0f50.c, range: [0x1b0f50, 0x1b0f70]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1b0f70, 0x1b0fa8]}
+  - {src: src/game/effects/frame_history_lookup.c, range: [0x1b0f70, 0x1b0fa8], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: "Native frame-index modulus uses div/mfhi without a zero-divisor trap."}
   - {src: src/game/effects/tu_1b0fa8.c, range: [0x1b0fa8, 0x1b0fc0], flags: [-O1, -G0, -snas]}
   - {src: src/game/effects/tu_1b0fc0.c, range: [0x1b0fc0, 0x1b0fd0]}
   - {src: src/game/effects/tu_1b0fd0.c, range: [0x1b0fd0, 0x1b0ff8]}
@@ -1336,7 +1338,9 @@ splits:
   - {src: src/game/unsorted/tu_1c5f48.c, range: [0x1c6a68, 0x1c6aa0]}
   - {src: src/game/unsorted/tu_1c5f48_1c6aa0.c, range: [0x1c6aa0, 0x1c6ab8], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c5f48_1c6ab8.c, range: [0x1c6ab8, 0x1c79d0]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c79d0, 0x1c8550]}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c79d0, 0x1c8420]}
+  - {src: src/game/unsorted/tu_1c8420.c, range: [0x1c8420, 0x1c8478], assembler: sn-min6, note: "Native duplicate-search loop is six words; stock SN assembler inserts a seventh."}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c8478, 0x1c8550]}
   - {src: src/game/unsorted/tu_1c8550.c, range: [0x1c8550, 0x1c8560]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c8560, 0x1c88c8]}
   - {src: src/game/unsorted/tu_1c88c8.c, range: [0x1c88c8, 0x1cab20]}
@@ -1408,7 +1412,11 @@ splits:
   - {src: src/game/unsorted/tu_1cff78_1d4618.c, range: [0x1d5068, 0x1d5808]}
   - {src: src/game/unsorted/tu_1cff78_1d4068.c, range: [0x1d5808, 0x1d5828]}
   - {src: src/game/unsorted/tu_1d5828.c, range: [0x1d5828, 0x1d5e40]}
-  - {src: src/game/unsorted/tu_1d5e40.c, range: [0x1d5e40, 0x1d76e8]}
+  - {src: src/game/unsorted/tu_1d5e40.c, range: [0x1d5e40, 0x1d60b8], data_ranges: [{section: .rodata, input: .rodata.resource_click, start: 0x3f7678, end: 0x3f7680}]}
+  - {src: src/game/unsorted/tu_1d5e58_1d60b8.c, range: [0x1d60b8, 0x1d6178], flags: [-O2, -G8, -snas], note: "Native GP-relative load of byte D_0040D9F8 requires -G8; the remaining parameter setup is still draft-backed."}
+  - {src: src/game/unsorted/tu_1d5e40.c, range: [0x1d6178, 0x1d6e78]}
+  - {src: src/game/unsorted/tu_1d5e58_1d6e78.c, range: [0x1d6e78, 0x1d6f90], flags: [-O2, -G8, -snas], note: "Native GP-relative accesses to byte D_0040D9F9 require -G8; this caller passes complete 64-bit keys."}
+  - {src: src/game/unsorted/tu_1d5e40.c, range: [0x1d6f90, 0x1d76e8]}
   - {src: src/game/unsorted/tu_1d76e8.c, range: [0x1d76e8, 0x1d8560], note: Controller switch bodies own their C tables separately from neighboring ASM tables; original TU boundaries remain unknown}
   - src: src/game/unsorted/tu_1d76e8_1d8560.c
     range: [0x1d8560, 0x1d8728]
@@ -1429,11 +1437,15 @@ splits:
   - {src: src/game/unsorted/tu_1d76e8_1d9450.c, range: [0x1d9450, 0x1d96e8], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: 'Both bodies reproduce native slot/definition pointer induction and second-pass scheduling under O2; two literal-19 DIVs omit zero guards; original flags and TU boundaries remain unknown'}
   - {src: src/game/unsorted/tu_1d76e8_1d96e8.c, range: [0x1d96e8, 0x1d97d0]}
   - {src: src/game/unsorted/tu_1d97d0.c, range: [0x1d97d0, 0x1daf20]}
-  - {src: src/game/unsorted/tu_1daf20.c, range: [0x1daf20, 0x1dd728]}
+  - {src: src/game/unsorted/tu_1daf20.c, range: [0x1daf20, 0x1dc448], flags: [-O2, -G0, -snas, -mno-check-zero-division], assembler: sn-min6, note: "Native index/stride divisions omit zero checks; the state initializer clears four buffer slots with a six-word loop."}
+  - {src: src/game/unsorted/tu_1daf20_1dc448.c, range: [0x1dc448, 0x1dc498], note: "Separate source input keeps the native switch table at 0x3f7b90; the original TU boundary is unverified."}
+  - {src: src/game/unsorted/tu_1daf20.c, range: [0x1dc498, 0x1dc690]}
+  - {src: src/game/unsorted/tu_1daf20_1dc690.cpp, range: [0x1dc690, 0x1dc790], flags: [-O2, -G0, -snas, -fno-exceptions], assembler: sn-min6, note: "Array-reference flag access preserves the two native base lifetimes; the clear loop is six words. This isolated input owns no unwind data; original TU boundary remains unverified."}
+  - {src: src/game/unsorted/tu_1daf20.c, range: [0x1dc790, 0x1dd728]}
   - {src: src/game/unsorted/tu_1dd728.c, range: [0x1dd728, 0x1dd748]}
   - {src: src/game/unsorted/tu_1dd748.cpp, range: [0x1dd748, 0x1dd7b8], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1dd7b8, 0x1dd838]}
-  - {src: src/game/unsorted/tu_1dd838.c, range: [0x1dd838, 0x1e09a8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1dd838.c, range: [0x1dd838, 0x1e09a8], assembler: sn-min6, data_ranges: [{section: .rodata, input: .rodata.audio_request_keys, start: '0x3f9190', end: '0x3f91b0'}], note: "Native state reset clears two four-word arrays with six-word loops; the existing source loops are at least six words. The explicit range owns four native 64-bit membership keys."}
   - {src: src/game/unsorted/tu_1dd838_1e09a8.c, range: [0x1e09a8, 0x1e1068], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/game/unsorted/tu_1dd838.c, range: [0x1e1068, 0x1e1100]}
   - {src: src/game/unsorted/tu_1dd838_1e09a8.c, range: [0x1e1100, 0x1e1240]}
@@ -1495,7 +1507,8 @@ splits:
   - {src: src/game/unsorted/tu_1ed478.c, range: [0x1ed478, 0x1ed4a0]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed4a0, 0x1ed640]}
   - {src: src/game/unsorted/tu_1ed640.c, range: [0x1ed640, 0x1ed648]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed648, 0x1ed820]}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed648, 0x1ed6b0]}
+  - {src: src/game/audio/envelope_selector.cpp, range: [0x1ed6b0, 0x1ed820]}
   - {src: src/game/unsorted/tu_1ed820.c, range: [0x1ed820, 0x1ed830]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed830, 0x1ed8d0]}
   - {src: src/game/unsorted/tu_1ed8d0.cpp, range: [0x1ed8d0, 0x1ed968]}
@@ -1839,8 +1852,10 @@ splits:
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x271368, 0x2715f0]}
   - {src: src/game/unsorted/tu_2715f0.c, range: [0x2715f0, 0x271610]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x271610, 0x271650]}
-  - {src: src/game/unsorted/tu_271650.c, range: [0x271650, 0x271be8], note: flags or language differ}
-  - {src: src/game/unsorted/tu_271650_271be8.c, range: [0x271be8, 0x2722b8], flags: [-O2, -G0]}
+  - {src: src/game/unsorted/tu_271650.c, range: [0x271650, 0x2719d0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_271650_2719d0.cpp, range: [0x2719d0, 0x271af0], note: C++ virtual dispatch reproduces the native device-call ABI}
+  - {src: src/game/unsorted/tu_271650.c, range: [0x271af0, 0x271be8]}
+  - {src: src/game/unsorted/tu_271650_271be8.cpp, range: [0x271be8, 0x2722b8], flags: [-O2, -G0, -snas], assembler: sn-min6, note: SN preserves the update division load delay; native record-release loops have six words}
   - {src: src/game/unsorted/tu_2722b8.c, range: [0x2722b8, 0x2722d0]}
   - {src: src/game/unsorted/tu_2722d0.cpp, range: [0x2722d0, 0x272300], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x272300, 0x272308]}
@@ -1849,7 +1864,7 @@ splits:
   - {src: src/game/unsorted/tu_2723b0.cpp, range: [0x2723b0, 0x272488]}
   - {src: src/game/unsorted/tu_272488.c, range: [0x272488, 0x272b58], note: flags or language differ}
   - {src: src/game/unsorted/tu_272488_272b58.c, range: [0x272b58, 0x272c18], flags: [-O1, -G0, -snas], note: flags or language differ}
-  - {src: src/game/unsorted/tu_272488_272c18.c, range: [0x272c18, 0x274e40]}
+  - {src: src/game/unsorted/tu_272488_272c18.c, range: [0x272c18, 0x274e40], assembler: sn-min6, note: "Native query and pool-list walks use six-word short loops; stock SN assembler adds an extra NOP."}
   - {src: src/game/unsorted/tu_274e40.c, range: [0x274e40, 0x274f80]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x274f80, 0x274fc8]}
   - {src: src/game/unsorted/tu_274fc8.c, range: [0x274fc8, 0x274fd8]}
@@ -1939,9 +1954,9 @@ splits:
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x283648, 0x284688], note: flags or language differ}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x284688, 0x2848a0]}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x2848a0, 0x2848a8]}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x2848a8, 0x284918]}
+  - {src: src/game/audio/audio_provider_vectors.cpp, range: [0x2848a8, 0x284918], flags: [-O2, -G0, -snas, -fno-schedule-insns], note: Native XYZ argument-spill copies keep alternating scalar loads and stores before the voice load; the first scheduler hoists that load and changes register allocation in both setters; original compiler flags remain unverified}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x284918, 0x284920]}
-  - {src: src/game/effects/tu_281388_284688.cpp, range: [0x284920, 0x284990]}
+  - {src: src/game/audio/audio_provider_vectors.cpp, range: [0x284920, 0x284990]}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x284990, 0x2849c0]}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x2849c0, 0x284a60]}
   - {src: src/game/unsorted/tu_281388_283648.c, range: [0x284a60, 0x284ae8]}
