@@ -527,7 +527,39 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299BA0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299C70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299D90);
+#ifdef NON_MATCHING
+// Unmatched: branch joins and loop alignment differ with the Sony C compiler.
+// Partial decoder view; names and unobserved fields are UNVERIFIED.
+struct DecodeViewDraft {
+    char unknown00[0x14c];
+    int state;
+    char unknown150[0x34];
+    int kind, enabled;
+    char unknown18c[8];
+    int option;
+    char unknown198[4];
+    int first[3], second[3];
+};
+extern "C" int func_00298B78(DecodeViewDraft*, int);
+extern "C" void func_0029B1D0(DecodeViewDraft* self) {
+    int count;
+    if (self->state) {
+        if (self->option) count = self->enabled ? 3 : 2;
+        else count = 1;
+    } else {
+        if (self->kind == 3) count = self->option ? 3 : 2;
+        else count = 1;
+    }
+    for (int i = 0; i < count; i++) {
+        self->first[i] = func_00298B78(self, 0x10);
+        func_00298B78(self, 1);
+        self->second[i] = func_00298B78(self, 0x10);
+        func_00298B78(self, 1);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B1D0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B558);
 #ifdef NON_MATCHING
 // Unmatched: six instruction-order differences with the Sony compiler; this unit uses the SN compiler.
