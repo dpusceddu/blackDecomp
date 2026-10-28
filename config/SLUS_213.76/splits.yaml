@@ -1214,7 +1214,7 @@ splits:
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1b0d88, 0x1b0f48]}
   - {src: src/game/effects/tu_1b0f48.c, range: [0x1b0f48, 0x1b0f50]}
   - {src: src/game/effects/tu_1b0f50.c, range: [0x1b0f50, 0x1b0f70]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1b0f70, 0x1b0fa8]}
+  - {src: src/game/effects/frame_history_lookup.c, range: [0x1b0f70, 0x1b0fa8], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: "Native frame-index modulus uses div/mfhi without a zero-divisor trap."}
   - {src: src/game/effects/tu_1b0fa8.c, range: [0x1b0fa8, 0x1b0fc0], flags: [-O1, -G0, -snas]}
   - {src: src/game/effects/tu_1b0fc0.c, range: [0x1b0fc0, 0x1b0fd0]}
   - {src: src/game/effects/tu_1b0fd0.c, range: [0x1b0fd0, 0x1b0ff8]}
@@ -1338,7 +1338,9 @@ splits:
   - {src: src/game/unsorted/tu_1c5f48.c, range: [0x1c6a68, 0x1c6aa0]}
   - {src: src/game/unsorted/tu_1c5f48_1c6aa0.c, range: [0x1c6aa0, 0x1c6ab8], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1c5f48_1c6ab8.c, range: [0x1c6ab8, 0x1c79d0]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c79d0, 0x1c8550]}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c79d0, 0x1c8420]}
+  - {src: src/game/unsorted/tu_1c8420.c, range: [0x1c8420, 0x1c8478], assembler: sn-min6, note: "Native duplicate-search loop is six words; stock SN assembler inserts a seventh."}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c8478, 0x1c8550]}
   - {src: src/game/unsorted/tu_1c8550.c, range: [0x1c8550, 0x1c8560]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1c8560, 0x1c88c8]}
   - {src: src/game/unsorted/tu_1c88c8.c, range: [0x1c88c8, 0x1cab20]}
@@ -1505,7 +1507,8 @@ splits:
   - {src: src/game/unsorted/tu_1ed478.c, range: [0x1ed478, 0x1ed4a0]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed4a0, 0x1ed640]}
   - {src: src/game/unsorted/tu_1ed640.c, range: [0x1ed640, 0x1ed648]}
-  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed648, 0x1ed820]}
+  - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed648, 0x1ed6b0]}
+  - {src: src/game/audio/envelope_selector.cpp, range: [0x1ed6b0, 0x1ed820]}
   - {src: src/game/unsorted/tu_1ed820.c, range: [0x1ed820, 0x1ed830]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1ed830, 0x1ed8d0]}
   - {src: src/game/unsorted/tu_1ed8d0.cpp, range: [0x1ed8d0, 0x1ed968]}
