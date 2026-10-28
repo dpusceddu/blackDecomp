@@ -27,12 +27,13 @@ extern s32 func_0016A4C0(void *, s32);
 extern void func_00168618(void *, void *, s32, s32);
 extern void *D_0040F4F4;
 
-#ifdef NON_MATCHING
-// Unmatched: return-path branch and epilogue scheduling differ.
 s32 func_0016AA78(void *arg0, s32 arg1, s32 arg2) {
     s32 result = func_0016A4C0(arg0, arg1);
     if (M2C_FIELD(arg0, u8 *, 0x11D)) {
-        if (result == 0) {
+        if (result != 0) {
+            return 0;
+        }
+        {
             void *data;
             M2C_FIELD(arg0, u8 *, 0x11C) = 0;
             data = M2C_FIELD(arg0, void **, 0x160);
@@ -45,9 +46,6 @@ s32 func_0016AA78(void *arg0, s32 arg1, s32 arg2) {
     }
     return 0;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016AA78);
-#endif
 
 s32 func_0016AB18(void) {
     func_0016A778();
@@ -185,17 +183,12 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_
 extern s32 func_0016B788(void);
 extern s32 func_001D4618(void);
 
-#ifdef NON_MATCHING
-// Unmatched: return-path branch and epilogue scheduling differ.
 s32 func_0016B630(void) {
-    if (func_0016B788()) {
-        return func_001D4618();
+    if (!func_0016B788()) {
+        return 0;
     }
-    return 0;
+    return func_001D4618();
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B630);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B668);
 
 void func_0016B670(void *arg0) {
