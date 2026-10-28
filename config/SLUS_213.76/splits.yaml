@@ -513,7 +513,8 @@ splits:
   - {src: src/game/weapons/tu_15d370_15d3d8.c, range: [0x15d850, 0x15d870]}
   - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d870, 0x15d958]}
   - {src: src/game/unsorted/tu_15d958_2.c, range: [0x15d958, 0x15ef48], flags: [-O2, -G0, -snas, -fstrict-aliasing], note: "Native bank counts and pointers load before vtable stores; strict aliasing recovers those disjoint accesses. Isolated loader draft retains protected action-bank source recipes."}
-  - {src: src/game/unsorted/tu_15d958.c, range: [0x15ef48, 0x160e70], note: flags or language differ}
+  - {src: src/game/unsorted/tu_15d958_15ef48.c, range: [0x15ef48, 0x15fdc0], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: "Native modulo-three DIV has no divide-by-zero guard. Separate initializer draft preserves the surrounding action-bank source recipes."}
+  - {src: src/game/unsorted/tu_15d958.c, range: [0x15fdc0, 0x160e70], note: flags or language differ}
   - {src: src/game/unsorted/tu_15d958_160e70.c, range: [0x160e70, 0x160ea0], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_15d958_160ea0.c, range: [0x160ea0, 0x161aa8], note: flags or language differ}
   - {src: src/game/unsorted/tu_15d958_161aa8.c, range: [0x161aa8, 0x161cb8], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
