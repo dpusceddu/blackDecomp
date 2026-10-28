@@ -2,13 +2,130 @@
 #include "ps2/prelude.h"
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00165DF0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00165F30);
+extern void* D_0040F4D0;
+extern void func_00174578(void*);
+typedef s32 (*WideUpdate)(void*, s128, void*);
+typedef void (*FloatUpdate)(void*, f32);
+typedef void (*ResetUpdate)(void*);
+/* Calls reload the bank entry before clearing its flag because updates can move it. */
+#define WIDE(P, C, F, S)                                                                                             \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
+            s32 offset = i * 4;                                                                                      \
+            void* entry = M2C_FIELD(offset + M2C_FIELD(self, s32*, P), void**, 0);                                   \
+            if (M2C_FIELD(entry, u8*, F) && (!S || M2C_FIELD(entry, s32*, 0x120) != 3)) {                            \
+                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                       \
+                if (M2C_FIELD(vtable, WideUpdate*, 0x9C)((char*)entry + M2C_FIELD(vtable, s16*, 0x98), frame, clock)) \
+                    M2C_FIELD(M2C_FIELD(offset + M2C_FIELD(self, s32*, P), void**, 0), u8*, F) = 0;                  \
+            }                                                                                                        \
+        }                                                                                                            \
+    }
+#define TICK(P, C, F)                                                                                                \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
+            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, P), void**, 0);                                    \
+            if (M2C_FIELD(entry, u8*, F)) {                                                                          \
+                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                       \
+                M2C_FIELD(vtable, FloatUpdate*, 0xC)((char*)entry + M2C_FIELD(vtable, s16*, 8), dt);                 \
+            }                                                                                                        \
+        }                                                                                                            \
+    }
+#define RESET(P, C)                                                                                                  \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
+            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, P), void**, 0);                                    \
+            if (M2C_FIELD(entry, u8*, 0x1C)) {                                                                       \
+                void* vtable = M2C_FIELD(entry, void**, 0x10);                                                       \
+                M2C_FIELD(vtable, ResetUpdate*, 0x2C)((char*)entry + M2C_FIELD(vtable, s16*, 0x28));                 \
+            }                                                                                                        \
+        }                                                                                                            \
+    }
+#define DIRECT(P, C)                                                                                                 \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
+            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, P), void**, 0);                                    \
+            if (entry) func_00174578(entry);                                                                         \
+        }                                                                                                            \
+    }
+void func_00165F30(void* self, s128 frame, f32 dt) {
+    s32 i;
+    void* clock = (char*)D_0040F4D0 + 0x30;
+    WIDE(0x48, 0, 0x11C, 1);
+    WIDE(0x4C, 2, 0x11C, 1);
+    TICK(0x58, 8, 0x18);
+    TICK(0x5C, 0xA, 0x18);
+    RESET(0x68, 0x10);
+    RESET(0x6C, 0x12);
+    TICK(0xC8, 0x40, 0x1C);
+    TICK(0xCC, 0x42, 0x1C);
+    RESET(0x70, 0x14);
+    RESET(0x74, 0x16);
+    DIRECT(0x78, 0x18);
+    DIRECT(0x7C, 0x1A);
+    WIDE(0x80, 0x1C, 0x130, 0);
+    WIDE(0x84, 0x1E, 0x130, 0);
+    WIDE(0x88, 0x24, 0x11C, 0);
+    WIDE(0x8C, 0x26, 0x11C, 0);
+    WIDE(0x90, 0x28, 0x11C, 0);
+    WIDE(0x94, 0x2A, 0x11C, 0);
+    WIDE(0x98, 0x2C, 0x11C, 0);
+    WIDE(0x9C, 0x2E, 0x11C, 0);
+}
+#undef WIDE
+#undef TICK
+#undef RESET
+#undef DIRECT
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00166808);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00167000);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00167208);
+extern void func_00167A10(void*, void*, void*);
+/* Binding descriptors occur at different offsets in each bank family. */
+#define VISIT(P, C, F)                                                                                               \
+    if (M2C_FIELD(self, s32*, P)) {                                                                                  \
+        for (i = 0; i < M2C_FIELD(self, u16*, C); i++) {                                                             \
+            offset = i * 4;                                                                                          \
+            listBase = M2C_FIELD(self, s32*, P);                                                                     \
+            entry = M2C_FIELD(offset + listBase, void**, 0);                                                         \
+            func_00167A10(self, entry, M2C_FIELD(entry, void**, F));                                                 \
+        }                                                                                                            \
+    }
+void func_00167208(void* self) {
+    s32 i, offset, listBase;
+    void* entry;
+    VISIT(0x48, 0, 0x118);
+    VISIT(0x4C, 2, 0x118);
+    VISIT(0x58, 8, 0x20);
+    VISIT(0x5C, 0xA, 0x20);
+    VISIT(0x60, 0xC, 0x18);
+    VISIT(0x64, 0xE, 0x18);
+    VISIT(0x50, 4, 0x1C);
+    VISIT(0x54, 6, 0x1C);
+    VISIT(0x68, 0x10, 0x18);
+    VISIT(0x6C, 0x12, 0x18);
+    VISIT(0x70, 0x14, 0x18);
+    VISIT(0x74, 0x16, 0x18);
+    VISIT(0x78, 0x18, 0x20);
+    VISIT(0x7C, 0x1A, 0x20);
+    VISIT(0x88, 0x24, 0x118);
+    VISIT(0x8C, 0x26, 0x118);
+    VISIT(0x90, 0x28, 0x118);
+    VISIT(0x94, 0x2A, 0x118);
+    VISIT(0x98, 0x2C, 0x118);
+    VISIT(0x9C, 0x2E, 0x118);
+    VISIT(0xA0, 0x20, 0x110);
+    VISIT(0xA4, 0x22, 0x110);
+    VISIT(0xA8, 0x30, 0x18);
+    VISIT(0xAC, 0x32, 0x18);
+    VISIT(0xB0, 0x34, 0x13C);
+    VISIT(0xB4, 0x36, 0x13C);
+    VISIT(0xD0, 0x44, 0x118);
+    VISIT(0xD4, 0x46, 0x118);
+}
+#undef VISIT
+
 extern void func_00167AA8(void *, void *, s64);
 
-s32 func_00167A10(void *arg0, void *arg1, void *arg2) {
+void func_00167A10(void *arg0, void *arg1, void *arg2) {
     s32 i;
     u8 result = M2C_FIELD(arg1, u8 *, 0xE);
     if (result == 0 && arg2 != 0) {
@@ -20,10 +137,8 @@ s32 func_00167A10(void *arg0, void *arg1, void *arg2) {
                 func_00167AA8(arg0, arg1, *entry);
             } while (i < M2C_FIELD(arg2, u8 *, 4));
         }
-        result = 1;
         M2C_FIELD(arg1, u8 *, 0xE) = 1;
     }
-    return result;
 }
 extern void func_00165C40(void*, s32);
 extern s32 func_0012F2D8(void*, u64, void*);
