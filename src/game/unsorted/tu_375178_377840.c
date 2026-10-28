@@ -3,8 +3,8 @@
 #include "ps2/prototypes.h"
 
 extern s32 func_003753E0();
-extern s32 func_003778D8();
-extern s32 func_00377968();
+extern s32 func_003778D8(void*, const char*);
+extern s32 func_00377968(void*, s32);
 extern s32 func_0031D268(void *, M2C_UNK, M2C_UNK);
 extern s32 func_0037B1D0();
 extern s32 func_0037B220(s32);
@@ -15,16 +15,48 @@ void func_00377840(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377860);
 
-void func_00377868(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x14C) = (s32) (M2C_FIELD(M2C_FIELD(arg0, void **, 0x124), s32 *, 0x10) + (func_003778D8() << 5));
+void func_00377868(void *arg0, const char* name) {
+    M2C_FIELD(arg0, s32 *, 0x14C) = (s32) (M2C_FIELD(M2C_FIELD(arg0, void **, 0x124), s32 *, 0x10) + (func_003778D8(arg0, name) << 5));
 }
 
-void func_003778A0(void *arg0) {
-    M2C_FIELD(arg0, s32 *, 0x14C) = (s32) (M2C_FIELD(M2C_FIELD(arg0, void **, 0x124), s32 *, 0x10) + (func_00377968() << 5));
+void func_003778A0(void *arg0, s32 key) {
+    M2C_FIELD(arg0, s32 *, 0x14C) = (s32) (M2C_FIELD(M2C_FIELD(arg0, void **, 0x124), s32 *, 0x10) + (func_00377968(arg0, key) << 5));
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_003778D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377968);
+extern s32 func_00316400(void*, const char*);
+s32 func_003778D8(void* self, const char* name) {
+    u32 i = 0;
+    void* header = M2C_FIELD(self, void**, 0x124);
+    if (M2C_FIELD(header, u32*, 0xC)) {
+        u32 table = M2C_FIELD(header, u32*, 0x10);
+        do {
+            void* record = M2C_FIELD((i << 5) + table, void**, 0);
+            if (record && func_00316400(record, name) == 0) return i;
+            header = M2C_FIELD(self, void**, 0x124);
+            i++;
+            if (i >= M2C_FIELD(header, u32*, 0xC)) break;
+            table = M2C_FIELD(header, u32*, 0x10);
+        } while (1);
+    }
+    return 0;
+}
+// UNVERIFIED: original service table and callback identity.
+typedef struct { u8 unknown[0xE8]; s32 (*compare)(s32, s32); } Recovered_CompareService;
+extern Recovered_CompareService D_00449438;
+s32 func_00377968(void* self, s32 key) {
+    u32 i = 0;
+    void* header = M2C_FIELD(self, void**, 0x124);
+    if (M2C_FIELD(header, u32*, 0xC)) {
+        Recovered_CompareService* service = &D_00449438;
+        do {
+            s32 record = M2C_FIELD((i << 5) + M2C_FIELD(header, u32*, 0x10), s32*, 4);
+            if (record && service->compare(record, key) == 0) return i;
+            i++;
+            header = M2C_FIELD(self, void**, 0x124);
+        } while (i < M2C_FIELD(header, u32*, 0xC));
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377A10);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377A20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377840", func_00377AC8);
