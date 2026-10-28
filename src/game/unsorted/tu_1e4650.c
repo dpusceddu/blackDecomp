@@ -4,7 +4,20 @@
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4650);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4720);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E49D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4A78);
+void* func_001E4A78(void* self, s32 key) {
+    u8* entry = (u8*)self + 8;
+    u8* selected = entry;
+    u32 i = 0;
+    do {
+        i++;
+        if (M2C_FIELD(entry, s32*, 8) == key) {
+            return M2C_FIELD(M2C_FIELD(entry, void**, 0), s32*, 0x14) == 4 ? selected : NULL;
+        }
+        selected += 0x10;
+        entry += 0x10;
+    } while (i < 2);
+    return NULL;
+}
 
 void func_001E4AC8(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x28) = arg1;
