@@ -737,7 +737,136 @@ extern "C" EffectVector3* func_002A7D50(EffectVector3* out, const EffectVector3*
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7D50);
 #endif
+#ifdef NON_MATCHING
+#include "rw_core/camera.h"
+// UNVERIFIED: complete camera/frame identities, bounds contents and original helper names.
+namespace CameraFrustumDraft {
+struct FrustumVector {
+    float x, y, z;
+};
+struct FrustumMatrixRow {
+    FrustumVector v;
+    unsigned flags;
+};
+struct FrustumMatrix {
+    FrustumMatrixRow right, up, at, pos;
+};
+struct FrustumFrame {
+    char unknown[0x50];
+    FrustumMatrix matrix;
+};
+struct FrustumPlane {
+    FrustumVector normal;
+    float distance;
+    char closestX, closestY, closestZ, unknown13;
+};
+struct FrustumCamera {
+    RwCameraPS2 prefix;
+    FrustumPlane planes[6];
+    FrustumVector bounds[2];
+    FrustumVector corners[8];
+};
+typedef char FrustumOffset[(unsigned)&((FrustumCamera*)0)->planes == 0x94 ? 1 : -1];
+typedef char FrustumCornersOffset[(unsigned)&((FrustumCamera*)0)->corners == 0x124 ? 1 : -1];
+static inline void Scale(FrustumVector* o, const FrustumVector* a, float s) {
+    o->x = a->x * s;
+    o->y = a->y * s;
+    o->z = a->z * s;
+}
+static inline void Add(FrustumVector* o, const FrustumVector* a, const FrustumVector* b) {
+    o->x = a->x + b->x;
+    o->y = a->y + b->y;
+    o->z = a->z + b->z;
+}
+static inline void Sub(FrustumVector* o, const FrustumVector* a, const FrustumVector* b) {
+    o->x = a->x - b->x;
+    o->y = a->y - b->y;
+    o->z = a->z - b->z;
+}
+static inline void IncScaled(FrustumVector* o, const FrustumVector* a, float s) {
+    o->x += a->x * s;
+    o->y += a->y * s;
+    o->z += a->z * s;
+}
+static inline void Cross(FrustumVector* o, const FrustumVector* a, const FrustumVector* b) {
+    float x = a->y * b->z - a->z * b->y;
+    float y = a->z * b->x - a->x * b->z;
+    float z = a->x * b->y - a->y * b->x;
+    o->x = x;
+    o->y = y;
+    o->z = z;
+}
+static inline float Dot(const FrustumVector* a, const FrustumVector* b) {
+    return a->x * b->x + a->y * b->y + a->z * b->z;
+}
+static inline void Normalize(FrustumVector* o) {
+    float scale = __ee_sqrt_s(Dot(o, o));
+    if (scale > 0.0f) scale = 1.0f / scale;
+    Scale(o, o, scale);
+}
+static inline void SetPlane(FrustumPlane* o, const FrustumVector* point) {
+    o->distance = Dot(point, &o->normal);
+    o->closestX = ((*(int*)&o->normal.x) >> 31) + 1;
+    o->closestY = ((*(int*)&o->normal.y) >> 31) + 1;
+    o->closestZ = ((*(int*)&o->normal.z) >> 31) + 1;
+}
+// Unmatched: vector temporary lifetimes, floating-point allocation and loop scheduling differ.
+extern "C" void func_002A7DD0(FrustumCamera* camera) {
+    FrustumVector a, b, x, y, offset;
+    FrustumMatrix* m = &((FrustumFrame*)camera->prefix.frame)->matrix;
+    FrustumVector* c = camera->corners;
+    FrustumPlane* p = camera->planes;
+    Scale(&offset, &m->right.v, -camera->prefix.view_offset[0]);
+    IncScaled(&offset, &m->up.v, camera->prefix.view_offset[1]);
+    Scale(&x, &m->right.v, camera->prefix.view_window[0]);
+    Add(&a, &m->at.v, &x);
+    Scale(&y, &m->up.v, camera->prefix.view_window[1]);
+    Add(&a, &a, &y);
+    Scale(&x, &x, 2.0f);
+    Scale(&y, &y, 2.0f);
+    c[0] = a;
+    Sub(&a, &a, &x);
+    c[1] = a;
+    Sub(&a, &a, &y);
+    c[2] = a;
+    Add(&a, &a, &x);
+    c[3] = a;
+    for (int i = 0; i < 4; ++i) {
+        Sub(&a, &c[i], &offset);
+        Add(&c[i], &offset, &m->pos.v);
+        IncScaled(&c[i], &a, camera->prefix.near_plane);
+        Add(&c[i + 4], &offset, &m->pos.v);
+        IncScaled(&c[i + 4], &a, camera->prefix.far_plane);
+    }
+    p[0].normal = m->at.v;
+    SetPlane(&p[0], &c[4]);
+    p[1].normal.x = -p[0].normal.x;
+    p[1].normal.y = -p[0].normal.y;
+    p[1].normal.z = -p[0].normal.z;
+    SetPlane(&p[1], &c[0]);
+    Sub(&a, &c[1], &c[5]);
+    Sub(&b, &c[6], &c[5]);
+    Cross(&p[2].normal, &a, &b);
+    Normalize(&p[2].normal);
+    SetPlane(&p[2], &c[1]);
+    Sub(&b, &c[4], &c[5]);
+    Cross(&p[3].normal, &b, &a);
+    Normalize(&p[3].normal);
+    SetPlane(&p[3], &c[1]);
+    Sub(&a, &c[3], &c[7]);
+    Sub(&b, &c[4], &c[7]);
+    Cross(&p[4].normal, &a, &b);
+    Normalize(&p[4].normal);
+    SetPlane(&p[4], &c[3]);
+    Sub(&b, &c[6], &c[7]);
+    Cross(&p[5].normal, &b, &a);
+    Normalize(&p[5].normal);
+    SetPlane(&p[5], &c[3]);
+}
+} // namespace CameraFrustumDraft
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7DD0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A8688);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A8860);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A8DA0);
