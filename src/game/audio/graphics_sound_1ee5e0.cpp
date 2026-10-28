@@ -724,8 +724,23 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0026ED40);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0026F0B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0026F190);
+extern "C" u8 D_0040DEB2;
+extern "C" s32 D_003C0E00;
+extern "C" s32 func_0029D000();
+#ifdef NON_MATCHING
+// Unmatched: initial global load and branch use different scheduling and registers.
+extern "C" s32 func_0026F2E0() {
+    if (D_0040DEB2 != 0) return D_003C0E00;
+    return func_0029D000() == 2;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0026F2E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271368);
+#endif
+extern "C" int func_00367750();
+extern "C" void func_00271368(int priority) {
+    int thread = func_00367750();
+    func_003676F0(thread, priority + 1);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271398);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271400);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271408);
