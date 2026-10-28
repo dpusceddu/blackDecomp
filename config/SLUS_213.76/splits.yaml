@@ -1702,7 +1702,7 @@ splits:
   - {src: src/game/unsorted/tu_2094b0_2133c0.c, range: [0x2133c0, 0x2134f0]}
   - {src: src/game/unsorted/tu_2094b0_2134f0.c, range: [0x2134f0, 0x2134f8]}
   - {src: src/game/unsorted/graphics_bindings.cpp, range: [0x2134f8, 0x214408], flags: [-O2, -G0]}
-  - {src: src/game/unsorted/tu_2094b0_214408.c, range: [0x214408, 0x214cf8], note: constants of assembly functions interleave}
+  - {src: src/game/unsorted/tu_2094b0_214408.c, range: [0x214408, 0x214cf8], assembler: sn-min6, note: "Constants of assembly functions interleave; the 0x214c48 short backward branch uses the native six-word hazard spacing."}
   - {src: src/game/unsorted/tu_2094b0_214cf8.cpp, range: [0x214cf8, 0x215028]}
   - {src: src/game/unsorted/tu_2094b0_214408.c, range: [0x215028, 0x215250]}
   - {src: src/game/unsorted/tu_2094b0_214cf8.cpp, range: [0x215250, 0x2156b0]}

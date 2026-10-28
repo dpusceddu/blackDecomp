@@ -72,7 +72,21 @@ s32 func_00214508(s32 arg0) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_002145E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00214A20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00214B90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00214C48);
+s32 func_00214C48(const s8* text) {
+    s32 i = 0;
+    do {
+        s8 c = *text;
+        if (!c) return 0;
+        if (c != '-' && (i == 4 || i == 9 || i == 14)) return 0;
+        if (i != 4 && i != 9 && i != 14) {
+            u8 c2 = *text;
+            if ((u32)(c2 - 'A') >= 26 && (u32)(c2 - 'a') >= 26 && (u32)(c2 - '0') >= 10) return 0;
+        }
+        i++;
+        text++;
+    } while (i < 19);
+    return 1;
+}
 
 void func_00215028(void) {
     u8 temp_2;
