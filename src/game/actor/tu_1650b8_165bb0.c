@@ -170,9 +170,27 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00174040);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001740A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00174858);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00174930);
+void func_00174930(void* state, void* entry) {
+    s32 i;
+    for (i = 0; i < M2C_FIELD(M2C_FIELD(state, void**, 0), u8*, 0x34); i++) {
+        void** slot = (void**)(i * 4 + M2C_FIELD(state, u32*, 4));
+        if (entry == *slot) {
+            M2C_FIELD(state, u8*, 8)++;
+            *slot = 0;
+        }
+    }
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00176310);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00176EE0);
+extern void* D_0040F4D4;
+
+void func_00176EE0(void* output) {
+    void* state = D_0040F4D4;
+    s32 value = M2C_FIELD(state, s32*, 0xA40);
+    M2C_FIELD(output, s32*, 0) = value;
+    M2C_FIELD(state, s32*, 0xA40) = value + 1;
+}
+
 typedef struct {
     s32 unk_00, unk_04, unk_08, unk_0C;
     s8 pending;
@@ -190,7 +208,23 @@ void func_00176FB0(Recovered_PairState* state, s32 first, s32 second) {
     }
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00176FE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00176FF0);
+typedef struct {
+    s32 flags;
+    f32 channels[4][2];
+} Recovered_Channels;
+
+s32 func_00176FF0(Recovered_Channels* state) {
+    s32 i;
+    state->flags = 0;
+    for (i = 0; i < 2; i++) {
+        state->channels[0][i] = 1.0f;
+        state->channels[1][i] = 1.0f;
+        state->channels[2][i] = 1.0f;
+        state->channels[3][i] = 1.0f;
+    }
+    return 1;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00177030);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001770E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00177A70);
@@ -207,7 +241,6 @@ s32 func_00177B48(void* state, s32 bit) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00177C90);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00177D10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001793C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00179B60);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00179BD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_0017A9F8);
@@ -218,5 +251,14 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001A7F88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001A80F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001A8168);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001A8300);
+void func_001A8300(void* base) {
+    u32* offsets = (u32*)((u32)base + M2C_FIELD(base, u32*, 0));
+    while (*offsets) {
+        u32* entry = (u32*)((u32)base + *offsets);
+        *entry = *entry + (u32)base;
+        offsets++;
+    }
+    offsets = (u32*)((u32)base + M2C_FIELD(base, u32*, 0));
+    *offsets = 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001A8350);
