@@ -95,5 +95,23 @@ s32 func_001E4B38(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4B70);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4CA0);
+extern void* D_0040F510;
+extern void func_001E6A40(void*, void*);
+s32 func_001E4CA0(void* self) {
+    u8* slot = (u8*)self + 8;
+    u32 i = 0;
+    s32 again;
+    do {
+        void* value = M2C_FIELD(slot, void**, 0);
+        if (value) {
+            func_001E6A40(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 4), value);
+            M2C_FIELD(slot, void**, 0) = NULL;
+        }
+        i++;
+        again = i < 2;
+        slot += 0x10;
+    } while (again);
+    M2C_FIELD(self, s32*, 0) = 0;
+    return again;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4D28);
