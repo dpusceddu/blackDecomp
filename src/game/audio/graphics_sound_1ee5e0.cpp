@@ -810,7 +810,17 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D020);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D098);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D0D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D118);
+// UNVERIFIED: original table identity and unused fields.
+struct Recovered_OffsetEntry { s64 key; s32 offset; s32 unknown; };
+struct Recovered_OffsetTable { u8 unknown[8]; Recovered_OffsetEntry* entries; };
+extern "C" void* func_0027D118(Recovered_OffsetTable* self, s64 key) {
+    Recovered_OffsetEntry* entry = self->entries;
+    while (entry->key != 0) {
+        if (entry->key == key) return (char*)self + entry->offset;
+        entry++;
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D158);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D198);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027FBD8);
