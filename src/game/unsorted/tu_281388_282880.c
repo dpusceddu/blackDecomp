@@ -93,8 +93,9 @@ s32 func_00282A40(Recovered_SoundBankContext *self, void *arg1) {
     self->count = count;
     return func_0027FBD8(self);
 }
-#endif
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282A40);
+#endif
 
 void func_00282AD8(void *arg0) {
     u32 var_18;
@@ -134,8 +135,9 @@ s32 func_00282BA0(Recovered_SoundListenerOwner *owner, void *arg1) {
     func_00280360(owner, arg1);
     return 1;
 }
-#endif
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282BA0);
+#endif
 
 void func_00282C18(void *arg0) {
     s32 temp_4;
@@ -160,8 +162,9 @@ void func_00282E70(Recovered_SoundEmitterOwner *self, Recovered_SoundEmitterCont
     self->context = *context;
     func_00280500(self);
 }
-#endif
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282E70);
+#endif
 
 s32 func_00282EF8(void *arg0) {
     func_00280528();
@@ -179,26 +182,21 @@ void func_00282F48(void *arg0) {
     M2C_FIELD(arg0, s32 *, 0x14) = 0;
 }
 
-#ifdef NON_MATCHING
-// Unmatched: indexed-store register allocation differs.
 void func_00282F80(Recovered_SoundListenerOwner **owners, s32 index, Recovered_SoundListenerOwner *owner) {
-    owners[index] = owner;
+    owners += index;
+    *owners = owner;
     func_00317888(owner->listener);
-    if (index == 0) {
-        func_003178C0(owner->listener);
-    }
+    if (index == 0) { func_003178C0(owner->listener); }
 }
-#endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282F80);
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00282FD0);
 
-void func_002830E8(void *arg0, f32 fparg0) {
-    void *temp_3;
+void func_002830E8(void* arg0, f32 fparg0) {
+    void* temp_3;
 
-    M2C_FIELD(M2C_FIELD(arg0, void **, 0x14), f32 *, 0x80) = fparg0;
-    temp_3 = M2C_FIELD(arg0, void **, 0x14);
-    M2C_FIELD(temp_3, s32 *, 0x88) = (s32) (M2C_FIELD(temp_3, s32 *, 0x88) | 0x20);
+    M2C_FIELD(M2C_FIELD(arg0, void**, 0x14), f32*, 0x80) = fparg0;
+    temp_3 = M2C_FIELD(arg0, void**, 0x14);
+    M2C_FIELD(temp_3, s32*, 0x88) = (s32)(M2C_FIELD(temp_3, s32*, 0x88) | 0x20);
 }
 
 #ifdef NON_MATCHING
@@ -214,7 +212,8 @@ void func_00283108(void *self, void *arg1) {
     *(s32 *)((u8 *)self + 0xCBAC) = 1;
     func_00280748(self, arg1);
 }
-#endif
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00283108);
+#endif
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_282880", func_00283198);
