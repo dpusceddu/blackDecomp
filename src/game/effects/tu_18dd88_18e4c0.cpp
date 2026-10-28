@@ -169,7 +169,26 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001948A0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00190CB8);
+// UNVERIFIED: original type and untouched fields.
+struct Recovered_EffectEvent {
+    void* owner;
+    unsigned char* brain;
+    unsigned char unknown08[12];
+    unsigned char active;
+};
+extern "C" void func_0018E338(void*);
+extern "C" unsigned char func_00180BC0(void*);
+extern "C" void EffectQueueAdd(void*, int, int, int) __asm__("func_0016ABA8");
+extern "C" void func_00190CB8(Recovered_EffectEvent* self) {
+    func_0018E338(self);
+    unsigned char* data = *(unsigned char**)((unsigned char*)self->owner + 0x30);
+    if (!self->active) {
+        self->active = func_00180BC0(self->brain + 0xB30);
+        if (self->active && data[0x2C]) {
+            EffectQueueAdd(self->brain + 0x1F90, *(int*)(data + 0x20), data[0x2C], *(int*)(self->brain + 0x7C));
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00190D30);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00193608);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001936C0);
