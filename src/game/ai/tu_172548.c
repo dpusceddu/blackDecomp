@@ -96,8 +96,31 @@ s32 func_00172C00(s32 arg0, s32 arg1, s32 arg2)
   return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172C18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172C50);
+s32 func_00172C18(void* self, s32 value) {
+    s32* entry = (s32*)((u8*)self + 0x64);
+    s32 i = 0;
+    do {
+        i++;
+        if (*entry != value) {
+            entry++;
+        } else {
+            *entry = 0;
+            return 1;
+        }
+    } while (i < 4);
+    return 0;
+}
+s32 func_00172C50(void* self, s32 value) {
+    s32* entry = (s32*)((u8*)self + 0x64);
+    s32 i = 0;
+    do {
+        s32 current = *entry;
+        i++;
+        if (current && current == value) return 1;
+        entry++;
+    } while (i < 4);
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548", func_00172C88);
 s32 func_00172E28(void* self, s32 kind) {
     switch (kind) {
