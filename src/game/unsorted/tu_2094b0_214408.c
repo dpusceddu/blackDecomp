@@ -195,7 +195,18 @@ void func_00215810(void)
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00215858);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00215980);
+extern s32 func_0035E750(s32);
+extern void func_0010B2F0(s32);
+extern void func_0010B308(s32);
+void func_00215980(s32 arg0) {
+    s32 value = func_0035E750(arg0) != 0;
+    if (value != M2C_FIELD(D_0040F0E0, u8*, 0x20164)) {
+        func_00105258((u8*)D_0040F0E0 + 0x20220);
+        if (value) func_0010B2F0(D_0040F4F0);
+        else func_0010B308(D_0040F4F0);
+        D_003BE84C = 7;
+    }
+}
 
 void func_00215A00(void) {
     func_0010B608(D_0040F4F0, D_003BE850);
@@ -253,4 +264,18 @@ s32 func_00215EC8(s32 arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00215F80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00216258);
+extern s32 func_0020B988(void*, s32);
+extern void func_001F2838(s32, s8, s32);
+extern s32 D_0040F51C;
+extern void* D_0040F510;
+extern void* D_0040F0E4;
+extern void func_001D8DF0(void*);
+extern void func_00103818(void*);
+extern void func_001005A0(void*);
+void func_00216258(void) {
+    func_0020B988(D_0040F544, 4);
+    func_001F2838(D_0040F51C, 0, 6);
+    func_001D8DF0(M2C_FIELD(M2C_FIELD(D_0040F510, void**, 0xCBD8), void**, 0x34));
+    func_00103818(D_0040F0E0);
+    func_001005A0(D_0040F0E4);
+}
