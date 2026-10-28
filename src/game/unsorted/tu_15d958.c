@@ -6,7 +6,6 @@ extern s32 D_0040F51C;
 extern s32 func_00108818();
 extern s32 D_0040F4C4;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958", func_0015D958);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958", func_0015EF48);
 extern s32 func_00167108(s32, s32);
 extern s32 D_0040F4F4;
