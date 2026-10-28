@@ -1402,7 +1402,9 @@ splits:
   - {src: src/game/unsorted/tu_1cfcf8.c, range: [0x1cfcf8, 0x1cfe50]}
   - {src: src/game/unsorted/tu_1add78_1ae050.c, range: [0x1cfe50, 0x1cff78]}
   - {src: src/game/unsorted/tu_1cff78.c, range: [0x1cff78, 0x1d3078], note: flags or language differ}
-  - {src: src/game/unsorted/tu_1cff78_1d3078.c, range: [0x1d3078, 0x1d4030], flags: [-O2, -G1], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1cff78_1d3078.c, range: [0x1d3078, 0x1d3ea0], flags: [-O2, -G1], note: flags or language differ}
+  - {src: src/game/unsorted/tu_1cff78_1d3ea0.c, range: [0x1d3ea0, 0x1d3fc0], flags: [-O2, -G1, -snas], note: SN assembler preserves transfer delay slots in the coordinate loop}
+  - {src: src/game/unsorted/tu_1cff78_1d3078.c, range: [0x1d3fc0, 0x1d4030]}
   - {src: src/game/unsorted/tu_1cff78_1d4030.c, range: [0x1d4030, 0x1d4068], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_1cff78_1d4068.c, range: [0x1d4068, 0x1d4618], note: flags or language differ}
   - {src: src/game/unsorted/tu_1cff78_1d4618.c, range: [0x1d4618, 0x1d4c78], flags: [-O2, -G1]}
