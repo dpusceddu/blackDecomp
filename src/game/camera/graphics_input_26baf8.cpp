@@ -2,11 +2,10 @@
 
 #include "game/camera/pad.hpp"
 using namespace Graphics;
-extern "C" int func_0026BCF8(Controller *,unsigned);
 extern "C" int func_0026BC88(float,Controller *);
 
 int Controller::Reset() {
-    if(Connected()){func_0026BCF8(this,0);func_0026BC88(0.0f,this);}
+    if(Connected()){Rumble(0);func_0026BC88(0.0f,this);}
     else{field_46=0;field_47=0;field_48=0;field_49=0;}
     field_4A=1;
     int i=0;

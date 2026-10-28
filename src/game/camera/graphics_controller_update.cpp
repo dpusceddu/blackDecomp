@@ -9,7 +9,6 @@ extern int func_0026CA00(void *, void *);
 extern float func_0026C030(void *, int, int, int, int);
 extern int func_0029CB50(int, int, int);
 extern float func_0026C098(void *, int, int, int, int);
-extern float func_0026BF60(void *, float, float);
 }
 
 void Graphics::Controller::Update() {
@@ -87,7 +86,7 @@ void Graphics::Controller::Update() {
                     this->maxStep1 = 0.25f;
                 }
             }
-            smoothPositive1 = func_0026BF60(this, this->rawAxis1, this->maxStep1);
+            smoothPositive1 = Smooth(this->rawAxis1, this->maxStep1);
             this->axis1Negative = 0.0f;
             this->rawAxis1 = smoothPositive1;
             this->axis1Positive = smoothPositive1;
@@ -101,7 +100,7 @@ void Graphics::Controller::Update() {
                     this->maxStep1 = 0.25f;
                 }
             }
-            smoothNegative1 = func_0026BF60(this, this->rawAxis1, this->maxStep1);
+            smoothNegative1 = Smooth(this->rawAxis1, this->maxStep1);
             negative1 = -smoothNegative1;
             this->axis1Positive = 0.0f;
             this->rawAxis1 = smoothNegative1;
@@ -118,7 +117,7 @@ void Graphics::Controller::Update() {
                     this->maxStep0 = 0.25f;
                 }
             }
-            smoothPositive0 = func_0026BF60(this, this->rawAxis0, this->maxStep0);
+            smoothPositive0 = Smooth(this->rawAxis0, this->maxStep0);
             this->axis0Negative = 0.0f;
             this->rawAxis0 = smoothPositive0;
             this->axis0Positive = smoothPositive0;
@@ -132,7 +131,7 @@ void Graphics::Controller::Update() {
                     this->maxStep0 = 0.25f;
                 }
             }
-            smoothNegative0 = func_0026BF60(this, this->rawAxis0, this->maxStep0);
+            smoothNegative0 = Smooth(this->rawAxis0, this->maxStep0);
             negative0 = -smoothNegative0;
             this->axis0Positive = 0.0f;
             this->rawAxis0 = smoothNegative0;
@@ -149,7 +148,7 @@ void Graphics::Controller::Update() {
                     this->maxStep3 = 0.25f;
                 }
             }
-            smoothPositive3 = func_0026BF60(this, this->rawAxis3, this->maxStep3);
+            smoothPositive3 = Smooth(this->rawAxis3, this->maxStep3);
             this->axis3Negative = 0.0f;
             this->rawAxis3 = smoothPositive3;
             this->axis3Positive = smoothPositive3;
@@ -163,7 +162,7 @@ void Graphics::Controller::Update() {
                     this->maxStep3 = 0.25f;
                 }
             }
-            smoothNegative3 = func_0026BF60(this, this->rawAxis3, this->maxStep3);
+            smoothNegative3 = Smooth(this->rawAxis3, this->maxStep3);
             negative3 = -smoothNegative3;
             this->axis3Positive = 0.0f;
             this->rawAxis3 = smoothNegative3;
@@ -180,7 +179,7 @@ void Graphics::Controller::Update() {
                     this->maxStep2 = 0.25f;
                 }
             }
-            smoothPositive2 = func_0026BF60(this, this->rawAxis2, this->maxStep2);
+            smoothPositive2 = Smooth(this->rawAxis2, this->maxStep2);
             this->axis2Negative = 0.0f;
             this->rawAxis2 = smoothPositive2;
             this->axis2Positive = smoothPositive2;
@@ -194,7 +193,7 @@ void Graphics::Controller::Update() {
                     this->maxStep2 = 0.25f;
                 }
             }
-            smoothNegative2 = func_0026BF60(this, this->rawAxis2, this->maxStep2);
+            smoothNegative2 = Smooth(this->rawAxis2, this->maxStep2);
             negative2 = -smoothNegative2;
             this->axis2Positive = 0.0f;
             this->rawAxis2 = smoothNegative2;
