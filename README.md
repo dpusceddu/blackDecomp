@@ -30,18 +30,18 @@ measure [decomp.dev](https://decomp.dev) uses, and anyone with the game can repr
 
 | Library | Functions matched | Share | Code matched (bytes) | Share |
 | --- | ---: | ---: | ---: | ---: |
-| game | 3,714 / 6,437 | 57.7 % | 273,480 / 1,453,676 | 18.8 % |
+| game | 3,877 / 6,437 | 60.2 % | 298,092 / 1,453,676 | 20.5 % |
 | kynapse | 1,351 / 1,557 | 86.8 % | 146,764 / 303,420 | 48.4 % |
-| rw_core | 86 / 381 | 22.6 % | 4,680 / 179,516 | 2.6 % |
+| rw_core | 89 / 381 | 23.4 % | 5,140 / 179,516 | 2.9 % |
 | rw_audio | 310 / 674 | 46.0 % | 22,824 / 106,632 | 21.4 % |
 | animation | 259 / 377 | 68.7 % | 33,900 / 76,944 | 44.1 % |
 | physics | 95 / 184 | 51.6 % | 12,056 / 77,680 | 15.5 % |
-| apt | 223 / 705 | 31.6 % | 11,892 / 277,148 | 4.3 % |
-| sony | 309 / 703 | 44.0 % | 13,800 / 140,092 | 9.9 % |
+| apt | 235 / 705 | 33.3 % | 13,000 / 277,148 | 4.7 % |
+| sony | 321 / 703 | 45.7 % | 15,836 / 140,092 | 11.3 % |
 | libc | 76 / 209 | 36.4 % | 4,084 / 69,952 | 5.8 % |
-| **Total** | **6,423 / 11,227** | **57.2 %** | **523,480 / 2,685,060** | **19.5 %** |
+| **Total** | **6,613 / 11,227** | **58.9 %** | **551,696 / 2,685,060** | **20.5 %** |
 
-Functions as objdiff counts them: 6,423 of 11,227 (57.2 %); code: 523,480 of 2,685,060 bytes (19.50 %). Image measure (`ninja progress`): 6,423 of 11,899 function starts and 534,192 of 2,715,464 bytes (19.67 %), which includes the 672 orphan pieces and the alignment padding.
+Functions as objdiff counts them: 6,613 of 11,227 (58.9 %); code: 551,696 of 2,685,060 bytes (20.55 %). Image measure (`ninja progress`): 6,613 of 11,899 function starts and 562,776 of 2,715,464 bytes (20.72 %), which includes the 672 orphan pieces and the alignment padding.
 
 <!-- progress:end -->
 
