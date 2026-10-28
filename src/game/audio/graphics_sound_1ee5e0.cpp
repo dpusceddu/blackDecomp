@@ -469,7 +469,20 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001FCA20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002041F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00204450);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002048D0);
+// UNVERIFIED: original type and fields other than the observed offsets.
+struct Recovered_SoundDispatch {
+    u8 unknown00[0x10];
+    s16 index;
+    s8 bank;
+    u8 unknown13[5];
+    s32 value;
+};
+extern "C" s32 D_0040F518;
+extern "C" void func_00278F00(void*, s32, s32);
+extern "C" int func_002048D0(Recovered_SoundDispatch* self) {
+    func_00278F00((void*)(self->bank * 0xA8 + D_0040F518 + 0x40), self->index, self->value);
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00209378);
 // UNVERIFIED: original type and fields other than state.
 struct Recovered_StateA30 { char unknown[0xA30]; int state; };
