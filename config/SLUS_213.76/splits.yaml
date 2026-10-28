@@ -327,7 +327,9 @@ splits:
   - {src: src/game/actor/actor_state_update.cpp, range: [0x13dd68, 0x13def0]}
   - {src: src/game/unsorted/tu_13db40_13def0.c, range: [0x13def0, 0x13f160]}
   - {src: src/game/camera/actor_13db40.cpp, range: [0x13f160, 0x13f290], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
-  - {src: src/game/camera/tu_13db40_13f290.c, range: [0x13f290, 0x13ffa0]}
+  - {src: src/game/camera/tu_13db40_13f290.c, range: [0x13f290, 0x13ffa0],
+     data_ranges: [{section: .rodata, input: .rodata.003F4A08, start: 0x3f4a08, end: 0x3f4ab0}],
+     note: "The Controls_PS2 registration owns six native strings in label order, each aligned to eight bytes."}
   - {src: src/game/camera/actor_input.cpp, range: [0x13ffa0, 0x140008]}
   - {src: src/game/camera/actor_13db40.cpp, range: [0x140008, 0x140048]}
   - {src: src/game/camera/tu_13db40_140048.c, range: [0x140048, 0x1409c0]}
