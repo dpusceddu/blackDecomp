@@ -4,26 +4,24 @@
 
 namespace ActorParts {
 
-#ifdef NON_MATCHING
-// Unmatched: 0x13db40 original class/helper allocation and control-flow context.
-// Unmatched: 0x13dc00 original class/helper allocation and control-flow context.
-// Unmatched: 0x13df58 original matrix copy/product, axis-angle and rigid inverse inline contracts.
-// Unmatched: 0x13eb00 original class/helper allocation and control-flow context.
-// Unmatched: 0x13ec38 mutable vector normalization and persistent dot temporaries.
-// Unmatched: 0x13ed98 original class/helper allocation and control-flow context.
-// Unmatched: 0x13ef28 original vector value/cross/dot allocation.
-// Unmatched: 0x13f0d8 original class/helper allocation and control-flow context.
-// Unmatched: 0x13f328 original class/helper allocation and control-flow context.
-// Unmatched: 0x13f3e0 mixed registration argument order and original field scheduling.
-// Unmatched: 0x13f618 original pad/weapon call context, input predicate and stack temporary lifetimes.
-// Unmatched: 0x140068 narrow scalar-to-VU and normalization/member allocation.
-// Unmatched: 0x140468 original class/helper allocation and control-flow context.
-// Unmatched: 0x1404a8 original FPU curve/helper and smoothing temporary scheduling.
-// Unmatched: 0x1407c8 matrix copy/inverse and VU component scheduling.
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_orientation", func_0013DB40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/actor_orientation", func_0013DC00);
-#endif
+extern "C" {
+extern EeS128 D_004432A0;
+void func_0013EC10(OrientationState* self, int mode);
+}
+
+void OrientationState::Initialize() {
+    target = D_004432A0;
+    scalarB0 = 5.0f;
+    scalarB4 = 5.0f;
+    active = 0;
+    locked = 0;
+    started = 0;
+    changed = 1;
+    state = 0;
+    previousState = 0;
+    elapsed = 0;
+    func_0013EC10(this, 4);
+}
 
 int OrientationState::Begin(void *actor)
 {
@@ -38,9 +36,18 @@ int OrientationState::Begin(void *actor)
     started = 1;
     return 1;
 }
-// Unmatched: 0013DB40 initialization retains aggregate-load and scalar scheduling differences.
-// Unmatched: 0013DC00 target assignment retains seven scalar/byte lifetime differences.
-// Unmatched: 0013DF58 turn interpolation needs original matrix copy/axis-angle helper contracts.
-// Unmatched: 0013EB00 look-at needs the original matrix/vector temporary stores.
-// Unmatched: 0013EC38 actor attachment retains vector normalization and persistent-dot temporary differences.
+
+int OrientationState::SetTarget(EeS128 value, float firstScalar, float secondScalar, unsigned char lock) {
+    target = value;
+    elapsed = 0;
+    active = 1;
+    scalarB0 = firstScalar;
+    scalarB4 = secondScalar;
+    locked = lock;
+    changed = 1;
+    previousState = state;
+    state = 1;
+    return 1;
+}
+
 }

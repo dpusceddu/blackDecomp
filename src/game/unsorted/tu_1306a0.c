@@ -1,12 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_0013EC10();
+extern void func_0013EC10(void* self, s32 mode);
 
-s32 func_001306A0(s32 arg0) {
-    s32 temp_v0;
-
-    temp_v0 = func_0013EC10(arg0, 0);
-    M2C_FIELD(arg0, s8 *, 0x102) = 0;
-    return temp_v0;
+void func_001306A0(void* self) {
+    func_0013EC10(self, 0);
+    M2C_FIELD(self, s8*, 0x102) = 0;
 }
