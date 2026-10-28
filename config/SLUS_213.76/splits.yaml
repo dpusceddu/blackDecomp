@@ -1803,7 +1803,7 @@ splits:
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x259950, 0x2599d8]}
   - {src: src/game/unsorted/tu_2599d8.c, range: [0x2599d8, 0x259da8]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x259da8, 0x25b5d0]}
-  - {src: src/game/unsorted/tu_25b5d0.c, range: [0x25b5d0, 0x265c38]}
+  - {src: src/game/unsorted/tu_25b5d0.c, range: [0x25b5d0, 0x265c38], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], assembler: sn-min6, note: "Native VU0 XYZ scaling and assignment preserve body payload lanes; the initializer has three six-word countdown loops, reproduced by sn-min6."}
   - {src: src/game/unsorted/tu_265c38.c, range: [0x265c38, 0x268a50], note: flags or language differ}
   - {src: src/game/unsorted/tu_265c38_268a50.c, range: [0x268a50, 0x268ac8], flags: [-O2, -G8, -snas]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x268ac8, 0x268c68]}
