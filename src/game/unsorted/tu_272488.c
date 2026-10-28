@@ -1,10 +1,44 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
+extern u64 func_00290AC0(u64, u64);
+extern u64 func_002904F0(u64, u64);
+#ifdef NON_MATCHING
+// Unmatched: digit decoding branches and register allocation differ.
+void func_00272488(u64 name, char* output) {
+    s32 i = 11;
+    do {
+        s8 digit = (s8)func_00290AC0(name, 40);
+        s8 character;
+        if (digit == 39) character = '_';
+        else if (digit >= 13) character = digit + 0x34;
+        else if (digit >= 3) character = digit + 0x2D;
+        else if (digit == 2) character = '/';
+        else if (digit == 1) character = '-';
+        else character = digit == 0 ? ' ' : 0;
+        output[i] = character;
+        i--;
+        name = func_002904F0(name, 40);
+    } while (i >= 0);
+    output[12] = 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272488);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272580);
+#endif
+extern u64 D_00400510[];
+u64 func_00272580(u64 name, s32 first, s32 last) {
+    if (first > 0) name = func_00290AC0(name, D_00400510[12 - first]);
+    if (last < 11) name -= func_00290AC0(name, D_00400510[11 - last]);
+    return name;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_00272610);
+u64 func_00272610(u64 first, u64 second) {
+    s32 i = 0;
+    while (i < 12 && func_00290AC0(first, D_00400510[i + 1]) == 0) i++;
+    if (i == 0) return first;
+    if (i == 12) return second;
+    return first + func_002904F0(second, D_00400510[12 - i]);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_002726C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_002726D0);
 // UNVERIFIED: original header identity and fields before the count.
