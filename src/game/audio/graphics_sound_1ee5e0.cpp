@@ -948,8 +948,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C3F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CEA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CF58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CF78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D020);
 
 // UNVERIFIED: original types and callback semantics.
 struct Recovered_CommandVtable {
@@ -960,6 +958,33 @@ struct Recovered_CommandVtable {
 };
 struct Recovered_CommandTarget { u8 unknown[12]; Recovered_CommandVtable* vtable; };
 struct Recovered_CommandSender { Recovered_CommandTarget* target; int value; };
+// UNVERIFIED: original table identity and unused fields.
+struct Recovered_OffsetEntry { s64 key; s32 offset; s32 unknown; };
+struct Recovered_OffsetTable { u8 unknown[8]; Recovered_OffsetEntry* entries; };
+struct Recovered_CommandTable { Recovered_CommandTarget* target; int value; Recovered_OffsetEntry* entries; int count; float scale; };
+extern "C" void func_0027CF78(Recovered_CommandTable* self, int value, Recovered_OffsetEntry* entries, int count) {
+    self->value = value;
+    self->count = count;
+    self->entries = entries;
+    self->target = 0;
+    self->scale = -1.0f;
+    Recovered_OffsetEntry* current = entries;
+    while (current->key) {
+        Recovered_CommandTarget* target = (Recovered_CommandTarget*)((char*)self + current->offset);
+        *(s64*)target = current->key;
+        *(float*)((char*)target + 8) = -1.0f;
+        current++;
+        target->vtable->dispatch((char*)target + target->vtable->adjustment, 0, self->value, 0, 0);
+    }
+}
+extern "C" void func_0027D020(Recovered_CommandTable* self) {
+    Recovered_OffsetEntry* entry = self->entries;
+    while (entry->key) {
+        Recovered_CommandTarget* target = (Recovered_CommandTarget*)((char*)self + entry->offset);
+        entry++;
+        target->vtable->dispatch((char*)target + target->vtable->adjustment, 1, self->value, 0, 0);
+    }
+}
 extern "C" void func_0027D098(Recovered_CommandSender* self) {
     Recovered_CommandTarget* target = self->target;
     if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 4, self->value, 0, 0);
@@ -968,9 +993,6 @@ extern "C" void func_0027D0D8(Recovered_CommandSender* self, int a, int b) {
     Recovered_CommandTarget* target = self->target;
     if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 5, self->value, a, b);
 }
-// UNVERIFIED: original table identity and unused fields.
-struct Recovered_OffsetEntry { s64 key; s32 offset; s32 unknown; };
-struct Recovered_OffsetTable { u8 unknown[8]; Recovered_OffsetEntry* entries; };
 extern "C" void* func_0027D118(Recovered_OffsetTable* self, s64 key) {
     Recovered_OffsetEntry* entry = self->entries;
     while (entry->key != 0) {
