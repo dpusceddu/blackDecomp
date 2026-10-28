@@ -34,7 +34,10 @@ void func_001F9EB0(void *arg0) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9EF8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FA130);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FA3A8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FA438);
+void func_001FA438(void* self) {
+    func_001F9980((u8*)self + 0xC0);
+    M2C_FIELD(self, s32*, 0xEA8) = 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FA468);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FA4D8);
 
@@ -42,6 +45,22 @@ s32 func_001FAB98(void) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FABA0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FABD8);
+void func_001FABA0(void* self) {
+    s32 value = M2C_FIELD(self, u8*, 0x214) + 1;
+    M2C_FIELD(self, u8*, 0x214) = value;
+    if ((s8)value >= 4) {
+        M2C_FIELD(self, u8*, 0x214) = 3;
+        return;
+    }
+    M2C_FIELD(self, s32*, 0x210) = 1;
+}
+void func_001FABD8(void* self) {
+    s32 value = M2C_FIELD(self, u8*, 0x214) - 1;
+    M2C_FIELD(self, u8*, 0x214) = value;
+    if ((s8)value < 0) {
+        M2C_FIELD(self, u8*, 0x214) = 0;
+        return;
+    }
+    M2C_FIELD(self, s32*, 0x210) = 3;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FAC00);
