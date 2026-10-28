@@ -19,6 +19,11 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377cd0", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377cd0", func_003785A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377cd0", func_00378668);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377cd0", func_003786E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377cd0", func_00378770);
+s32 func_00378770(s32 arg0, void* arg1) {
+    M2C_FIELD(arg1, s32*, 0) = 0;
+    M2C_FIELD(arg1, s32*, 4) = 0;
+    M2C_FIELD(arg1, s32*, 8) = 0;
+    return arg0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377cd0", func_00378788);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_375178_377cd0", func_00378898);

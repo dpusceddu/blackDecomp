@@ -13,7 +13,29 @@ void func_0027ACC8(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027ACD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B148);
+extern void func_002AC568(void*);
+extern void func_002AA340(void*);
+extern void func_002AF778(void*, void*);
+extern s32 func_002A9178(void*);
+#ifdef NON_MATCHING
+// Unmatched: argument and store scheduling differ.
+s32 func_0027B260(void* self) {
+    s32 result;
+    func_002AC568(M2C_FIELD(self, void**, 0x60));
+    func_002AC568(M2C_FIELD(self, void**, 0x64));
+    func_002AA340(M2C_FIELD(self, void**, 0x5C));
+    func_002AF778(M2C_FIELD(self, void**, 0x58), 0);
+    result = func_002A9178(M2C_FIELD(self, void**, 0x58));
+    M2C_FIELD(self, void**, 0x68) = 0;
+    M2C_FIELD(self, void**, 0x60) = 0;
+    M2C_FIELD(self, void**, 0x64) = 0;
+    M2C_FIELD(self, void**, 0x58) = 0;
+    M2C_FIELD(self, void**, 0x5C) = 0;
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B260);
+#endif
 
 s32 func_0027B2C8(void *arg0) {
     M2C_FIELD(arg0, f32 *, 0x6C) = -1.0f;
@@ -25,7 +47,19 @@ void func_0027B2E0(void *arg0, void *arg1) {
     M2C_FIELD(arg1, void **, 0x30) = arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B2F0);
+extern f32 func_0029DD08(f32);
+extern void func_002A91D8(void*, f32*);
+void func_0027B2F0(void* self, f32 angle) {
+    f32 x = func_0029DD08(angle * 0.5f * 0.017453292f) * M2C_FIELD(self, f32*, 0x70);
+    f32* values = (f32*)((u8*)self + 0x48);
+    f32 y = x / M2C_FIELD(self, f32*, 0x74);
+    M2C_FIELD(self, f32*, 0x48) = x;
+    values[1] = y;
+    M2C_FIELD(self, f32*, 0x54) = 1.0f / y;
+    M2C_FIELD(self, f32*, 0x50) = 1.0f / M2C_FIELD(self, f32*, 0x48);
+    func_002A91D8(M2C_FIELD(self, void**, 0x58), values);
+    M2C_FIELD(self, f32*, 0x6C) = angle;
+}
 
 void func_0027B388(void *arg0, f32 fparg0) {
     M2C_FIELD(arg0, f32 *, 0x74) = fparg0;
@@ -57,7 +91,21 @@ void func_0027B648(void *arg0, s32 arg1, s32 arg2)
   func_0035C6EC(arg1, 0, arg2 << 5);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B688);
+// UNVERIFIED: original record and ring identities, and unused fields.
+typedef struct { s32 key; u8 unknown04[0x1A]; u8 occupied, unknown1F; } Recovered_RingRecord;
+typedef struct { s32 cursor, used; Recovered_RingRecord* records; s32 capacity; } Recovered_RecordRing;
+s32 func_0027B688(Recovered_RecordRing* ring) {
+    s32 index = ring->cursor;
+    Recovered_RingRecord* records = ring->records;
+    if (records[index].occupied) {
+        do {
+            index++;
+            if (index >= ring->capacity) index = 0;
+        } while (records[index].occupied);
+    }
+    ring->cursor = index;
+    return index;
+}
 
 s32 func_0027B6D8(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5) {
     s32 temp_18;
@@ -78,11 +126,88 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B880);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B950);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BA60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BA68);
+extern char* func_0035CBC0(char*, const char*);
+extern char* func_0035C7A4(char*, const char*);
+extern s32 func_0035CCD8(const char*);
+extern char D_0040DE88[];
+extern s32 func_0027C278(char*);
+s32 func_0027BA68(const char* base, const char* path, const char* name) {
+    char buffer[512];
+    func_0035CBC0(buffer, base);
+    func_0035C7A4(buffer, path);
+    if (buffer[func_0035CCD8(buffer) - 1] != '/') func_0035C7A4(buffer, D_0040DE88);
+    func_0035C7A4(buffer, name);
+    return func_0027C278(buffer);
+}
+#ifdef NON_MATCHING
+// Unmatched: loop register allocation differs.
+s32 func_0027BAE8(void* object, s32 key) {
+    Recovered_RecordRing* ring = object;
+    s32 used = ring->used;
+    s32 seen = 0;
+    s32 i = 0;
+    if (used > 0) {
+        s32 capacity = ring->capacity;
+        if (capacity > 0) {
+            Recovered_RingRecord* record = ring->records;
+            do {
+                if (record->occupied) {
+                    seen++;
+                    if (record->key == key) return (s32)record;
+                }
+                record++;
+                i++;
+            } while (seen < used && i < capacity);
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BAE8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BB50);
+#endif
+// UNVERIFIED: original type and callback identity.
+typedef struct { u8 unknown[0x10]; s16 adjustment; u16 unknown12; void (*callback)(void*, s32); } Recovered_RingVtable;
+typedef struct { u8 unknown[0x10]; Recovered_RingVtable* vtable; } Recovered_RingOwner;
+extern s32 func_0027BAE8(void*, s32);
+void func_0027BB50(Recovered_RingOwner* self, s32 arg) {
+    s32 result = func_0027BAE8(self, arg);
+    if (result) self->vtable->callback((u8*)self + self->vtable->adjustment, result);
+}
+#ifdef NON_MATCHING
+// Unmatched: section is eight bytes shorter despite matching instructions.
+s32 func_0027BB98(Recovered_RecordRing* ring, Recovered_RingRecord* record) {
+    record->occupied = 0;
+    return --ring->used;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BB98);
+#endif
+extern void func_0027C0B8(void*);
+#ifdef NON_MATCHING
+// Unmatched: large-offset address formation and loop registers differ.
+void func_0027BBB8(void* self) {
+    s32* entry;
+    s32 count;
+    func_0027B648(self, (s32)((u8*)self + 0xC20), 0xFA0);
+    M2C_FIELD(self, u8*, 0xC1C) = 0;
+    M2C_FIELD(self, s32*, 0x20110) = 0;
+    entry = (s32*)((u8*)self + 0x20034);
+    count = 9;
+    do {
+        entry[-5] = 0;
+        count--;
+        entry[-4] = 0;
+        entry[-3] = 0;
+        entry[-1] = 0;
+        entry[-2] = 0;
+        entry[0] = 0;
+        entry += 6;
+    } while (count >= 0);
+    func_0027C0B8((u8*)self + 0x14);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BBB8);
+#endif
 
 void func_0027BC38(void) {
 
@@ -106,6 +231,6 @@ void func_0027BC58(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BC60);
 
-void func_0027BD00(void) {
-    func_0027BB98();
+void func_0027BD00(Recovered_RecordRing* ring, Recovered_RingRecord* record) {
+    func_0027BB98(ring, record);
 }

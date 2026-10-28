@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+extern void func_00383208(void*);
 
 extern M2C_UNK D_003DC348;
 extern M2C_UNK D_003DAFD0;
@@ -67,7 +68,56 @@ void * func_00382BF0(void *arg0) {
     return arg0;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: loop registers and setup scheduling differ.
+void func_00382C70(void* self, s32 unused) {
+    u8* header = (u8*)self + 0x14;
+    s32 offset;
+    u32 i;
+    s32 cursor;
+    offset = M2C_FIELD(header, s32*, 0);
+    if (offset) {
+        M2C_FIELD(header, s32*, 0) = offset + (s32)header;
+        i = 0;
+        if (M2C_FIELD(header, u8*, 0xC)) {
+            cursor = 0;
+            do {
+                i++;
+                func_00383208((void*)(M2C_FIELD(header, s32*, 0) + cursor));
+                cursor += 0x60;
+            } while (i < M2C_FIELD(header, u8*, 0xC));
+        }
+    }
+    offset = M2C_FIELD(header, s32*, 4);
+    if (offset) {
+        M2C_FIELD(header, s32*, 4) = offset + (s32)header;
+        i = 0;
+        if (M2C_FIELD(header, u8*, 0xD)) {
+            cursor = 0;
+            do {
+                i++;
+                func_00383208((void*)(M2C_FIELD(header, s32*, 4) + cursor));
+                cursor += 0x60;
+            } while (i < M2C_FIELD(header, u8*, 0xD));
+        }
+    }
+    offset = M2C_FIELD(header, s32*, 8);
+    if (offset) {
+        M2C_FIELD(header, s32*, 8) = offset + (s32)header;
+        i = 0;
+        if (M2C_FIELD(header, u8*, 0xE)) {
+            cursor = 0;
+            do {
+                i++;
+                func_00383208((void*)(M2C_FIELD(header, s32*, 8) + cursor));
+                cursor += 0x60;
+            } while (i < M2C_FIELD(header, u8*, 0xE));
+        }
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_382500", func_00382C70);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_382500", func_00382D60);
 
 void * func_00383068(void *arg0) {
@@ -81,7 +131,7 @@ void * func_00383068(void *arg0) {
 }
 
 
-void func_00383208(void) {
+void func_00383208(void* unused) {
     func_00287118();
 }
 

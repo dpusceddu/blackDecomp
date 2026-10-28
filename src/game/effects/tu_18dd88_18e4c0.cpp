@@ -132,13 +132,6 @@ Vec MovementCore::AlternateTarget()
     return result;
 }
 
-// Unmatched: 2 instruction differences in helper lifetime, allocation or scheduling.
-float ActionWeight::Score(unsigned char *event)
-{
-    if(*(int *)(event+0x24)==4&&func_00174FB0(value))return 1.0f;
-    return 0.0f;
-}
-
 // Unmatched: policy Update retains 13 instruction differences in completion-branch layout.
 void MovementPolicy::Update()
 {
@@ -165,12 +158,67 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018EBE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018EF70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018F100);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018F2A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001948A0);
 #endif
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00190CB8);
+extern "C" long func_00174FB0(void*);
+extern "C" float func_0018F2A0(void** self, unsigned char* event) {
+    void* value = *self;
+    if (*(int*)(event + 0x24) == 4 && func_00174FB0(value)) return 1.0f;
+    return 0.0f;
+}
+
+// UNVERIFIED: original type and untouched fields.
+struct Recovered_EffectEvent {
+    void* owner;
+    unsigned char* brain;
+    unsigned char unknown08[12];
+    unsigned char active;
+};
+extern "C" void func_0018E338(void*);
+extern "C" unsigned char func_00180BC0(void*);
+extern "C" void EffectQueueAdd(void*, int, int, int) __asm__("func_0016ABA8");
+extern "C" void func_00190CB8(Recovered_EffectEvent* self) {
+    func_0018E338(self);
+    unsigned char* data = *(unsigned char**)((unsigned char*)self->owner + 0x30);
+    if (!self->active) {
+        self->active = func_00180BC0(self->brain + 0xB30);
+        if (self->active && data[0x2C]) {
+            EffectQueueAdd(self->brain + 0x1F90, *(int*)(data + 0x20), data[0x2C], *(int*)(self->brain + 0x7C));
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00190D30);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00193608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001936C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001938C0);
+typedef int EffectVector128 __attribute__((mode(TI)));
+// UNVERIFIED: original type and untouched fields.
+struct Recovered_EffectTarget { unsigned char unknown00[0x10]; EffectVector128 target; unsigned char unknown20[0x10]; unsigned state; };
+extern "C" unsigned char func_001936C0(Recovered_EffectTarget* self, EffectVector128 target) {
+    switch (self->state) {
+    case 1:
+    case 4:
+    case 5:
+    case 7:
+        self->target = target;
+        return 1;
+    case 0:
+    case 2:
+    case 3:
+    case 6:
+    case 8:
+    default:
+        return 0;
+    }
+}
+// UNVERIFIED: policy field meanings and original type.
+struct Recovered_PolicyDefaults { unsigned words[34]; };
+extern "C" const Recovered_PolicyDefaults D_003F6638 __attribute__((section(".rodata.policy_defaults"))) = {{
+    0x00000000, 0x3F800000, 0x00000000, 0x3FC00000, 0x40000000, 0x3F800000, 0x3F800000, 0x00000000,
+    0x3F800000, 0xC2480000, 0x40000000, 0xC1C80000, 0x3FC00000, 0x00000000, 0x4019999A, 0x3E99999A,
+    0x3F800000, 0x3F800000, 0x00000000, 0x3F800000, 0x3F19999A, 0x3F800000, 0x4019999A, 0x3DCCCCCD,
+    0x40000000, 0x00000000, 0x3F800000, 0x3DCCCCCD, 0x00000000, 0x3F800000, 0x00000000, 0x00000000,
+    0xBF800000, 0x00000001
+}};
+extern "C" void func_001938C0(Recovered_PolicyDefaults* self) {
+    *self = D_003F6638;
+}

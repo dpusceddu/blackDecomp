@@ -184,36 +184,6 @@ void func_00137F30(Recovered_ManagedActor* actor) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137F30);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00137FB8);
-#ifdef NON_MATCHING
-// Unmatched: the float-copy loop retains an extra delay-slot nop.
-s32 func_001381E0(Recovered_ActorBoneCache* cache) {
-    const char** name = D_003BCE70;
-    s32* index = cache->indices;
-    s32 remaining = 10;
-    do {
-        if (*name) *index = func_00138298(cache, *name);
-        ++index;
-        --remaining;
-        ++name;
-    } while (remaining >= 0);
-    if (cache->catalog) {
-        const f32* source = D_003F5128;
-        f32* target = cache->catalog->unk_28;
-        s32 remaining = 3;
-        do {
-            *target = *source;
-            --remaining;
-            ++source;
-            ++target;
-        } while (remaining >= 0);
-    }
-    cache->unk_38 = 0;
-    func_001415A8(cache->unk_3C, cache->unk_04);
-    return 1;
-}
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_001381E0);
-#endif
 /* Native behavior returns index zero both for the first name and for no match. */
 s32 func_00138298(Recovered_ActorBoneCache* cache, const char* name) {
     s32 index = 0;
@@ -256,7 +226,22 @@ void *func_00138378(s32 arg0)
   return (new_var << 6) + (&D_004147C0);
 }
 
+#ifdef NON_MATCHING
+// Unmatched: strings and jump table change read-only data placement.
+struct __attribute__((packed)) Four { char chars[4]; };
+void func_00138390(void* self, Four* out, int kind) {
+    if (kind == 43) kind = *(int*)((char*)self + 4);
+    switch (kind) {
+    case 42: *out = *(const Four*)"ET_"; break;
+    case 40: *out = *(const Four*)"SD_"; break;
+    case 38: *out = *(const Four*)"SK_"; break;
+    case 29: case 30: case 31: *out = *(const Four*)"TM_"; break;
+    default: *out = *(const Four*)"SH_"; break;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00138390);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_136f10", func_00138468);
 
 void func_00138470(void *arg0, void *arg1) {

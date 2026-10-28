@@ -296,7 +296,9 @@ splits:
   - {src: src/game/camera/tu_136b50.c, range: [0x136b50, 0x136ba8]}
   - {src: src/game/camera/tu_136ba8.c, range: [0x136ba8, 0x136bd0]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x136bd0, 0x136f10]}
-  - {src: src/game/camera/tu_136f10.cpp, range: [0x136f10, 0x1386c8], note: "Native paired Y-vector construction at 0x137490 uses canonical C++ storage helpers; original TU and language are unverified."}
+  - {src: src/game/camera/tu_136f10.cpp, range: [0x136f10, 0x1381e0], note: Native paired Y-vector construction at 0x137490 uses canonical C++ storage helpers; original TU and language are unverified.}
+  - {src: src/game/camera/tu_136f10_1381e0.cpp, range: [0x1381e0, 0x138298], flags: [-O2, -G0, -snas], assembler: sn-min6, data_ranges: [{section: .rodata, input: .rodata.bone_defaults, start: '0x3f5128', end: '0x3f5138'}], note: short default-scalar copy loop requires original branch scheduling and owns four defaults}
+  - {src: src/game/camera/tu_136f10.cpp, range: [0x138298, 0x1386c8]}
   - {src: src/game/camera/tu_10f700_114168.c, range: [0x1386c8, 0x138970]}
   - {src: src/game/camera/tu_138970.c, range: [0x138970, 0x1389a0]}
   - {src: src/game/camera/tu_1389a0.c, range: [0x1389a0, 0x1389a8]}
@@ -659,7 +661,9 @@ splits:
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x1721e8, 0x1723e8]}
   - {src: src/game/unsorted/tu_1723e8.c, range: [0x1723e8, 0x172518]}
   - {src: src/game/unsorted/tu_172518.c, range: [0x172518, 0x172548]}
-  - {src: src/game/ai/tu_172548.c, range: [0x172548, 0x172f60], note: flags or language differ}
+  - {src: src/game/ai/tu_172548.c, range: [0x172548, 0x1727c0], note: flags or language differ}
+  - {src: src/game/ai/tu_172548_1727c0.c, range: [0x1727c0, 0x172818], flags: [-O2, -G0, -snas], assembler: sn-min6, note: short timer reset loop requires original branch scheduling}
+  - {src: src/game/ai/tu_172548.c, range: [0x172818, 0x172f60]}
   - {src: src/game/ai/tu_172548_172f60.c, range: [0x172f60, 0x173190], flags: [-Os, -G0], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/ai/tu_172548.c, range: [0x173190, 0x173198]}
   - {src: src/game/ai/tu_172548_172f60.c, range: [0x173198, 0x173450]}
@@ -873,7 +877,7 @@ splits:
   - {src: src/game/unsorted/tu_18dd88_18e150.c, range: [0x18e150, 0x18e208]}
   - {src: src/game/unsorted/tu_18dd88_18e208.c, range: [0x18e208, 0x18e2e8]}
   - {src: src/game/unsorted/tu_18dd88_18e2e8.c, range: [0x18e2e8, 0x18e4c0]}
-  - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18e4c0, 0x18e578]}
+  - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18e4c0, 0x18e578], data_ranges: [{section: .rodata, input: .rodata.policy_defaults, start: '0x3f6638', end: '0x3f66c0'}], note: policy initializer owns its 136-byte default table}
   - {src: src/game/unsorted/tu_18dd88_18e578.c, range: [0x18e578, 0x18e7c0]}
   - {src: src/game/effects/tu_18dd88_18e4c0.cpp, range: [0x18e7c0, 0x18eb78]}
   - {src: src/game/unsorted/tu_18dd88_18e578.c, range: [0x18eb78, 0x18ebe0]}
@@ -1707,7 +1711,7 @@ splits:
   - {src: src/game/unsorted/tu_2094b0_2133c0.c, range: [0x2133c0, 0x2134f0]}
   - {src: src/game/unsorted/tu_2094b0_2134f0.c, range: [0x2134f0, 0x2134f8]}
   - {src: src/game/unsorted/graphics_bindings.cpp, range: [0x2134f8, 0x214408], flags: [-O2, -G0]}
-  - {src: src/game/unsorted/tu_2094b0_214408.c, range: [0x214408, 0x214cf8], note: constants of assembly functions interleave}
+  - {src: src/game/unsorted/tu_2094b0_214408.c, range: [0x214408, 0x214cf8], assembler: sn-min6, note: "Constants of assembly functions interleave; the 0x214c48 short backward branch uses the native six-word hazard spacing."}
   - {src: src/game/unsorted/tu_2094b0_214cf8.cpp, range: [0x214cf8, 0x215028]}
   - {src: src/game/unsorted/tu_2094b0_214408.c, range: [0x215028, 0x215250]}
   - {src: src/game/unsorted/tu_2094b0_214cf8.cpp, range: [0x215250, 0x2156b0]}
@@ -1871,7 +1875,9 @@ splits:
   - {src: src/game/unsorted/tu_272308.c, range: [0x272308, 0x272328]}
   - {src: src/game/unsorted/tu_272328.c, range: [0x272328, 0x2723b0]}
   - {src: src/game/unsorted/tu_2723b0.cpp, range: [0x2723b0, 0x272488]}
-  - {src: src/game/unsorted/tu_272488.c, range: [0x272488, 0x272b58], note: flags or language differ}
+  - {src: src/game/unsorted/tu_272488.c, range: [0x272488, 0x2726d0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_272488_2726d0.c, range: [0x2726d0, 0x272730], flags: [-O2, -G0, -snas], assembler: sn-min6, note: short trailing-space loop requires original branch scheduling}
+  - {src: src/game/unsorted/tu_272488.c, range: [0x272730, 0x272b58]}
   - {src: src/game/unsorted/tu_272488_272b58.c, range: [0x272b58, 0x272c18], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_272488_272c18.c, range: [0x272c18, 0x274e40], assembler: sn-min6, note: "Native query and pool-list walks use six-word short loops; stock SN assembler adds an extra NOP."}
   - {src: src/game/unsorted/tu_274e40.c, range: [0x274e40, 0x274f80]}
@@ -1930,7 +1936,9 @@ splits:
   - {src: src/game/unsorted/tu_280358.c, range: [0x280358, 0x280360]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280360, 0x2803f0]}
   - {src: src/game/unsorted/tu_2803f0.c, range: [0x2803f0, 0x280400]}
-  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280400, 0x2805a0]}
+  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280400, 0x280500]}
+  - {src: src/game/audio/tu_280500.cpp, range: [0x280500, 0x280528], flags: [-O2, -G0, -snas], assembler: sn-min6, note: short initialization loop requires original branch scheduling}
+  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280528, 0x2805a0]}
   - {src: src/game/unsorted/tu_2805a0.c, range: [0x2805a0, 0x280748]}
   - {src: src/game/unsorted/tu_2805a0_280748.c, range: [0x280748, 0x2807b0]}
   - {src: src/game/unsorted/tu_2805a0_2807b0.c, range: [0x2807b0, 0x280808]}

@@ -98,8 +98,8 @@ void AudioTransferGroup_ResetChannels(Recovered_AudioTransferGroup* self) {
     for (i = 0; i < self->channelCount; i++) func_001DACB0(self->slots[i].channel);
 }
 
-void func_001D9EA8(void **arg0) {
-    func_001DACE0(*arg0);
+s32 func_001D9EA8(void **arg0) {
+    return func_001DACE0(*arg0);
 }
 
 void AudioTransferGroup_SetTargetFlag(Recovered_AudioTransferGroup* self, s32 value) {

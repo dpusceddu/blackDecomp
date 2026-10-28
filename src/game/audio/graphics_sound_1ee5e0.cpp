@@ -4,6 +4,7 @@
 #include "game/stream_buffer.h"
 #include "game/audio_runtime.h"
 #include "game/frontend_resources.hpp"
+#include "apt/apt_value.hpp"
 
 #include "game/graphics/sound_envelopes.hpp"
 using namespace Graphics;
@@ -465,18 +466,102 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001F1258);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001FC6C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001FC820);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001FC9A8);
+extern "C" s128 D_0042C4F0;
+extern "C" char D_0042C7C8, D_0042C770;
+extern "C" void func_002765B0(void*, void*, void*);
+// UNVERIFIED: array bounds and original type are inferred from field offsets.
+struct Recovered_CommandContainer {
+    u8 pad[0xE8];
+    void* records[8];
+    void* values[37];
+    u8 flags[1];
+};
+extern "C" void func_001FC9A8(Recovered_CommandContainer* object, s16 index) {
+    object->flags[index] = 0;
+    *(float*)((char*)object->values[index] + 0xC) = 0.1f;
+    *(s128*)((char*)object->records[index] + 0x10) = D_0042C4F0;
+    func_002765B0(object->records[index], &D_0042C7C8, &D_0042C770);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001FCA20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002041F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00204450);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002048D0);
+// UNVERIFIED: original type and fields other than the observed offsets.
+struct Recovered_SoundDispatch {
+    u8 unknown00[0x10];
+    s16 index;
+    s8 bank;
+    u8 unknown13[5];
+    s32 value;
+};
+extern "C" s32 D_0040F518;
+extern "C" void func_00278F00(void*, s32, s32);
+extern "C" int func_002048D0(Recovered_SoundDispatch* self) {
+    func_00278F00((void*)(self->bank * 0xA8 + D_0040F518 + 0x40), self->index, self->value);
+    return 1;
+}
+extern "C" FrontendResourceTable D_0040F0F0;
+extern "C" void* func_00107D20(u32);
+extern "C" void func_00275000(void*, void*, s32);
+#ifdef NON_MATCHING
+// Unmatched: call setup and saved-register scheduling differ.
+extern "C" u32 func_00209378(void* object) {
+    int selected = D_0040F0F0.selectedIndex;
+    D_0040F0F0.ClearSelection();
+    D_0040F0F0.SelectBuffer(15);
+    func_00275000(object, func_00107D20(0x1000), 0x1000);
+    func_00275000((char*)object + 0x518, func_00107D20(0xA000), 0xA000);
+    D_0040F0F0.ClearSelection();
+    u32 result = D_0040F0F0.SelectBuffer(selected);
+    *(int*)((char*)object + 0xA30) = 1;
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00209378);
+#endif
+// UNVERIFIED: original type and fields other than state.
+struct Recovered_StateA30 { char unknown[0xA30]; int state; };
+#ifdef NON_MATCHING
+// Unmatched: section is eight bytes shorter despite matching instructions.
+extern "C" int func_00209430(Recovered_StateA30* object) {
+    switch (object->state) {
+    case 1:
+    case 0x38:
+        object->state = 2;
+    case 2:
+        object->state = 0x1C;
+    case 0x1C:
+        break;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00209430);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00209490);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00218898);
+extern "C" void* D_0043DF68;
+extern "C" void* D_0043DF74;
+extern "C" const char D_003FCEA0[];
+extern "C" void func_00232638(void*);
+extern "C" int func_00249810(void*, int, const char*);
+#ifdef NON_MATCHING
+// Unmatched: owned read-only data placement changes the linked image.
+extern "C" void func_0021AFE0() {
+    func_00232638(D_0043DF68);
+    if (D_0043DF74 != 0) {
+        func_00249810(D_0043DF74, 0, D_003FCEA0);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021AFE0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021B020);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021B048);
+extern "C" unsigned char D_003FD110[];
+extern "C" int func_0021B048(void* object) {
+    unsigned type = *(unsigned*)object >> 25;
+    if (type == 0x25) return *(int*)((char*)object + 0xC);
+    return D_003FD110[type];
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021BB00);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021BDB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021BEE8);
@@ -490,7 +575,16 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D348);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D4E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00224270);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00224590);
+// UNVERIFIED: original identities and callback semantics.
+struct Recovered_ResetVtable { u8 unknown[0x10]; s16 adjustment; u16 unknown12; void (*reset)(void*); };
+struct Recovered_ResetObject { int unknown; Recovered_ResetVtable* vtable; };
+struct Recovered_ResetOwner { u8 unknown[0x2C]; Recovered_ResetObject* object; };
+extern "C" Recovered_ResetObject* D_0043DF40;
+extern "C" void func_00224590() {
+    Recovered_ResetObject* object = ((Recovered_ResetOwner*)D_0043DF68)->object;
+    if (object) object->vtable->reset((char*)object + object->vtable->adjustment);
+    ((Recovered_ResetOwner*)D_0043DF68)->object = D_0043DF40;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002245F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00224788);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002249E0);
@@ -510,7 +604,30 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00227830);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00228BC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229370);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229700);
+// UNVERIFIED: original types and callback semantics.
+struct Recovered_StackVtable {
+    u8 unknown[8];
+    s16 adjustment;
+    u16 unknown0A;
+    void (*invoke)(void*);
+    s16 releaseAdjustment;
+    u16 unknown12;
+    void (*release)(void*);
+};
+struct Recovered_StackObject { int unknown; Recovered_StackVtable* vtable; };
+struct Recovered_ObjectStack {
+    int count, unknown;
+    Recovered_StackObject** objects;
+    u8 unknown0C[0x2C];
+    Recovered_StackObject** lookup;
+};
+extern "C" void func_00229700(Recovered_ObjectStack* self) {
+    int index = self->count;
+    Recovered_StackObject* object = self->objects[index - 1];
+    self->objects[index] = object;
+    self->count = index + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229748);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002297C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229BB0);
@@ -543,18 +660,101 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022DC80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022DD88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022DE90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022DF90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022DFE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E030);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E0B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E120);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E1A8);
+extern "C" void func_0022DF90(Recovered_ObjectStack* self) {
+    int index = self->count;
+    Recovered_StackObject* object = (Recovered_StackObject*)D_0043DF40;
+    self->objects[index] = object;
+    self->count = index + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
+extern "C" void func_0022DFE0(Recovered_ObjectStack* self) {
+    int index = self->count;
+    Recovered_StackObject* object = (Recovered_StackObject*)D_0043DF40;
+    self->objects[index] = object;
+    self->count = index + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
+extern "C" void func_00225030(void*, void*);
+extern "C" void func_0022A440(void*, void*);
+extern "C" void func_00252B10(AptViews::PendingValues*);
+extern "C" void func_0022E030(Recovered_ObjectStack* self, void* arg) {
+    func_00225030(self, arg);
+    if (self->count > 0) {
+        Recovered_StackObject* object = self->objects[self->count - 1];
+        object->vtable->release((char*)object + object->vtable->releaseAdjustment);
+        self->count--;
+    }
+    if (AptViews::D_003BE8E0->count != 0 && self->count == 0) func_00252B10(AptViews::D_003BE8E0);
+}
+extern "C" void func_00223678(void*, void*);
+extern "C" void func_00252B10(AptViews::PendingValues*);
+extern "C" void func_00225030(void*, void*);
+extern "C" void func_0022E0B8(void** self, void* arg) {
+    func_00225030(self, arg);
+    func_00223678(self, arg);
+    if (AptViews::D_003BE8E0->count != 0 && *self == 0) func_00252B10(AptViews::D_003BE8E0);
+}
+extern "C" void func_0022E120(Recovered_ObjectStack* self, void* arg) {
+    func_0022A440(self, arg);
+    if (self->count > 0) {
+        Recovered_StackObject* object = self->objects[self->count - 1];
+        object->vtable->release((char*)object + object->vtable->releaseAdjustment);
+        self->count--;
+    }
+    if (AptViews::D_003BE8E0->count != 0 && self->count == 0) func_00252B10(AptViews::D_003BE8E0);
+}
+extern "C" void func_0022A440(void*, void*);
+extern "C" void func_0022E1A8(void** self, void* arg) {
+    func_0022A440(self, arg);
+    func_00223678(self, arg);
+    if (AptViews::D_003BE8E0->count != 0 && *self == 0) func_00252B10(AptViews::D_003BE8E0);
+}
+// UNVERIFIED: source descriptor and constructor parameter meanings.
+struct Recovered_StackInput { int unknown; void* data; int size; };
+extern "C" char D_0043DC18[];
+extern "C" Recovered_StackObject* func_0021E420(Recovered_ObjectStack*, void*, int, void*, int, int, int);
+#ifdef NON_MATCHING
+// Unmatched: global address and offset are folded into one relocation.
+extern "C" void func_0022E210(Recovered_ObjectStack* self, Recovered_StackInput* input) {
+    Recovered_StackObject* object = func_0021E420(self, input->data, input->size, D_0043DC18 + 0x290, 1, 1, 0);
+    int index = self->count;
+    self->objects[index] = object;
+    self->count = index + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E210);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E288);
+#endif
+extern "C" Recovered_StackObject* D_003BFABC;
+extern "C" void func_0022E288(Recovered_ObjectStack* self) {
+    int index = self->count;
+    Recovered_StackObject* object = D_003BFABC;
+    self->objects[index] = object;
+    self->count = index + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E2D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E3E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E590);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E5F8);
+extern "C" void func_0022E590(Recovered_ObjectStack* self, u8** cursor) {
+    u8 index = *(*cursor)++;
+    int count = self->count;
+    Recovered_StackObject* object = self->lookup[index];
+    self->objects[count] = object;
+    self->count = count + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
+extern "C" void func_0022E5F8(Recovered_ObjectStack* self, u8** cursor) {
+    u8* bytes = *cursor;
+    unsigned low = *bytes++;
+    unsigned high = *bytes++;
+    *cursor = bytes;
+    unsigned index = low | (high << 8);
+    int count = self->count;
+    Recovered_StackObject* object = self->lookup[index];
+    self->objects[count] = object;
+    self->count = count + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E670);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E798);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E958);
@@ -621,7 +821,13 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002697E0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269820);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269880);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002698F8);
+// UNVERIFIED: original type and virtual callback identity.
+struct Recovered_NotifyVtable { u8 unknown[0x30]; s16 adjustment; u16 unknown32; int (*notify)(void*, int); };
+struct Recovered_NotifyObject { u8 unknown[0x18]; int active; u8 unknown1C[0xC]; Recovered_NotifyVtable* vtable; };
+extern "C" int func_002698F8(Recovered_NotifyObject* self) {
+    if (!self->active) return 0;
+    return self->vtable->notify((char*)self + self->vtable->adjustment, 0);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269940);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269AB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00269CC8);
@@ -640,15 +846,57 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0026ED40);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0026F0B0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0026F190);
+extern "C" u8 D_0040DEB2;
+extern "C" s32 D_003C0E00;
+extern "C" s32 func_0029D000();
+#ifdef NON_MATCHING
+// Unmatched: initial global load and branch use different scheduling and registers.
+extern "C" s32 func_0026F2E0() {
+    if (D_0040DEB2 != 0) return D_003C0E00;
+    return func_0029D000() == 2;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0026F2E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271368);
+#endif
+extern "C" int func_00367750();
+extern "C" void func_00271368(int priority) {
+    int thread = func_00367750();
+    func_003676F0(thread, priority + 1);
+}
+// UNVERIFIED: original thread descriptor identity and untouched fields.
+struct Recovered_ThreadDescriptor { int unknown; void* entry; void* stack; int stackSize; void* gp; int priority; };
+extern "C" char D_004157F0[];
+extern "C" int func_00367660(Recovered_ThreadDescriptor*);
+extern "C" void func_00368738(int, void*);
+#ifdef NON_MATCHING
+// Unmatched: stack frame size and instruction scheduling differ.
+extern "C" int func_00271398(void* entry, void* arg, void* stack, int stackSize, int priority) {
+    Recovered_ThreadDescriptor desc;
+    desc.entry = entry;
+    desc.stack = stack;
+    desc.stackSize = stackSize;
+    desc.gp = D_004157F0;
+    desc.priority = priority + 1;
+    int thread = func_00367660(&desc);
+    func_00368738(thread, arg);
+    return thread;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271398);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271400);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271408);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271478);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271480);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271558);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271610);
+extern "C" void func_002715F0();
+extern "C" void func_003675E0(u32, void (*)(), int);
+extern "C" void func_00367780();
+extern "C" void func_00271610(u32 arg0) {
+    int thread = func_00367750();
+    func_003675E0(arg0 & 0xFFFF, func_002715F0, thread);
+    func_00367780();
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00272300);
 void* AlignedBuffer_Allocate(Recovered_AlignedBuffer* self, u32 bytes) {
     u32 cursor = (u32)self->cursor - 1;
@@ -666,7 +914,27 @@ void* AlignedBuffer_Allocate(Recovered_AlignedBuffer* self, u32 bytes) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00275000);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00275060);
+// UNVERIFIED: original table and record identities.
+struct Recovered_SearchTable { u8 unknown[8]; int count; int** entries; };
+#ifdef NON_MATCHING
+// Unmatched: search branch layout and register allocation differ.
+extern "C" void* func_002750B8(Recovered_SearchTable* self, int key) {
+    int high = self->count - 1;
+    int low = 0;
+    while (high >= low) {
+        int mid = low + (high - low) / 2;
+        int* entry = self->entries[mid];
+        if (key < *entry) high = mid - 1;
+        else {
+            low = mid + 1;
+            if (*entry >= key) return entry + 1;
+        }
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002750B8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002775A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002778C8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00277940);
@@ -680,24 +948,98 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00278AD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027BD20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027BDC0);
+// UNVERIFIED: original type and untouched fields.
+struct Recovered_DisplayDefaults { int mode; float rate; u8 unknown08[8]; float scale; };
+extern "C" Recovered_DisplayDefaults* D_003C0DF0;
+#ifdef NON_MATCHING
+// Unmatched: float constant load scheduling differs.
+extern "C" void func_0027C2F8(Recovered_DisplayDefaults* self) {
+    float rate = 20.0f;
+    float scale = 0.5f;
+    D_003C0DF0 = self;
+    self->rate = rate;
+    self->scale = scale;
+    self->mode = 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C2F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C370);
+#endif
+extern "C" void func_00275260(const char*, u16*, int);
+extern "C" void func_00275DC0(void*, float, float, float, const u16*, s128);
+extern "C" void func_0027C370(void** self, const char* text, s128 vector, float a, float b, float c) {
+    u16 buffer[256];
+    func_00275260(text, buffer, 0x100);
+    if (*self) func_00275DC0(*self, a, b, c, buffer, vector);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027C3F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CEA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CF58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CF78);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D020);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D098);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D0D8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D118);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D158);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D198);
+
+// UNVERIFIED: original types and callback semantics.
+struct Recovered_CommandVtable {
+    u8 unknown[8];
+    s16 adjustment;
+    u16 unknown0A;
+    void (*dispatch)(void*, int, int, int, int);
+};
+struct Recovered_CommandTarget { u8 unknown[12]; Recovered_CommandVtable* vtable; };
+struct Recovered_CommandSender { Recovered_CommandTarget* target; int value; };
+// UNVERIFIED: original table identity and unused fields.
+struct Recovered_OffsetEntry { s64 key; s32 offset; s32 unknown; };
+struct Recovered_OffsetTable { u8 unknown[8]; Recovered_OffsetEntry* entries; };
+struct Recovered_CommandTable { Recovered_CommandTarget* target; int value; Recovered_OffsetEntry* entries; int count; float scale; };
+extern "C" void func_0027CF78(Recovered_CommandTable* self, int value, Recovered_OffsetEntry* entries, int count) {
+    self->value = value;
+    self->count = count;
+    self->entries = entries;
+    self->target = 0;
+    self->scale = -1.0f;
+    Recovered_OffsetEntry* current = entries;
+    while (current->key) {
+        Recovered_CommandTarget* target = (Recovered_CommandTarget*)((char*)self + current->offset);
+        *(s64*)target = current->key;
+        *(float*)((char*)target + 8) = -1.0f;
+        current++;
+        target->vtable->dispatch((char*)target + target->vtable->adjustment, 0, self->value, 0, 0);
+    }
+}
+extern "C" void func_0027D020(Recovered_CommandTable* self) {
+    Recovered_OffsetEntry* entry = self->entries;
+    while (entry->key) {
+        Recovered_CommandTarget* target = (Recovered_CommandTarget*)((char*)self + entry->offset);
+        entry++;
+        target->vtable->dispatch((char*)target + target->vtable->adjustment, 1, self->value, 0, 0);
+    }
+}
+extern "C" void func_0027D098(Recovered_CommandSender* self) {
+    Recovered_CommandTarget* target = self->target;
+    if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 4, self->value, 0, 0);
+}
+extern "C" void func_0027D0D8(Recovered_CommandSender* self, int a, int b) {
+    Recovered_CommandTarget* target = self->target;
+    if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 5, self->value, a, b);
+}
+extern "C" void* func_0027D118(Recovered_OffsetTable* self, s64 key) {
+    Recovered_OffsetEntry* entry = self->entries;
+    while (entry->key != 0) {
+        if (entry->key == key) return (char*)self + entry->offset;
+        entry++;
+    }
+    return 0;
+}
+extern "C" void func_0027D158(Recovered_CommandSender* self, int a, int b) {
+    Recovered_CommandTarget* target = self->target;
+    if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 2, self->value, a, b);
+}
+extern "C" void func_0027D198(Recovered_CommandSender* self, int a, int b) {
+    Recovered_CommandTarget* target = self->target;
+    if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 3, self->value, a, b);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027FBD8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00280360);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00280400);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00280448);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002804F8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00280500);
 extern "C" int func_00280528(Recovered_SoundObjectList* self, u32 count) {
     self->count = count;
     for (u32 i = 0; i < count; i++) {

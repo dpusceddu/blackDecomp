@@ -4,7 +4,24 @@
 extern void * func_0011D498();
 extern s32 func_001A7188();
 
+#ifdef NON_MATCHING
+// Unmatched: Boolean result uses a different register and join.
+extern u8 D_003F4150[];
+extern void* D_0040F4E0;
+extern void* func_0015D210(void*, s32);
+s32 func_0011D358(s32 unused, s32 key, s32 index, f32 value) {
+    s32 result;
+    if (value > 100.0f) return 0;
+    result = 0;
+    if (D_003F4150[index]) {
+            void* row = func_0015D210(D_0040F4E0, (s8)key);
+            { u8 enabled = M2C_FIELD(M2C_FIELD(row, void**, 0xC), u8*, 0x15) != 0; result = enabled; }
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D358);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D3C8);
 
 void func_0011D430(void *arg0, s32 arg1) {
@@ -40,5 +57,28 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D5A
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D848);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D948);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011DA58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011DC80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011DD48);
+extern s32 func_0011DA58(void*, s128, void*, void*, void*);
+s32 func_0011DC80(void* self, s128 vec, void* a, void* b, void* c) {
+    u32 i = 0;
+    if (M2C_FIELD(self, u32*, 0)) {
+        do {
+            u8* entry = M2C_FIELD(self, u8**, 4) + (i << 6);
+            if (M2C_FIELD(entry, s32*, 0) == 4 && func_0011DA58(entry + 0x10, vec, a, b, c)) return 1;
+            i++;
+        } while (i < M2C_FIELD(self, u32*, 0));
+    }
+    return 0;
+}
+extern void* D_0040F4D0;
+extern void* func_0012BD98(void*, s32);
+s32 func_0011DD48(void* unused, s128 vec, void* a, void* b, void* c) {
+    void* region = func_0012BD98(D_0040F4D0, M2C_FIELD(D_0040F4D0, s32*, 0x5AB0));
+    if (region && M2C_FIELD(region, u8*, 0x38)) {
+        if (func_0011DC80(M2C_FIELD(M2C_FIELD(region, void**, 0xC), void**, 0x38), vec, a, b, c)) return 1;
+    }
+    region = func_0012BD98(D_0040F4D0, M2C_FIELD(D_0040F4D0, s32*, 0x5AB0) + 1);
+    if (region && M2C_FIELD(region, u8*, 0x38)) {
+        if (func_0011DC80(M2C_FIELD(M2C_FIELD(region, void**, 0xC), void**, 0x38), vec, a, b, c)) return 1;
+    }
+    return 0;
+}
