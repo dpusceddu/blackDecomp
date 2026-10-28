@@ -573,7 +573,55 @@ extern "C" int func_0029B868(SocketParamsDraft* params, int arg1, int arg2) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B868);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029BCC0);
+#ifdef NON_MATCHING
+// Unmatched: control-flow joins and register allocation differ with the Sony compiler.
+// Buffer and client field meanings are UNVERIFIED.
+struct RpcRequestDraft {
+    int a, b, count;
+    unsigned char bytes[0x80];
+    char padding[0x34];
+};
+struct RpcClientDraft {
+    char data[0x28];
+};
+extern int D_00445D80, D_003C1574;
+extern RpcRequestDraft D_00445B40[2];
+extern RpcClientDraft D_00443938[2];
+extern "C" int func_003678A0(int);
+extern "C" int func_00367880(int);
+extern "C" int func_0036B300(void*);
+extern "C" int func_0036B100(void*, unsigned, int, void*, int, void*, int, int, int);
+extern "C" void func_0029C110(const char*, ...);
+extern "C" int func_0029BCE0(int a, unsigned command, int* count, const unsigned char* data) {
+    if (*count > 0x80) {
+        func_0029C110("libdbc: SendData2 data length too long [%d]\n", *count);
+        return 0;
+    }
+    func_003678A0(D_00445D80);
+    D_003C1574++;
+    if (D_003C1574 >= 2) D_003C1574 = 0;
+    RpcRequestDraft* buf = &D_00445B40[D_003C1574];
+    buf->a = a;
+    buf->b = command;
+    buf->count = *count;
+    for (int i = 0; i < *count; i++) buf->bytes[i] = data[i];
+    if (func_0036B300(&D_00443938[D_003C1574]) == 1) {
+        func_0029C110("dbcman : SendData2 BUSY\n");
+        func_00367880(D_00445D80);
+        return 0;
+    }
+    if (func_0036B100(&D_00443938[D_003C1574], command, 1, &D_00445B40[D_003C1574], 0x90, &D_00445B40[D_003C1574], 0x90,
+                      0, 0) < 0) {
+        func_0029C110("sceDbcSendData2: rpc error\n");
+        func_00367880(D_00445D80);
+        return 0;
+    }
+    func_00367880(D_00445D80);
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029BCE0);
+#endif
 #ifdef NON_MATCHING
 // Unmatched: the buffer-index addition has reversed operands under the Sony compiler.
 struct SendBufferDraft {
@@ -661,9 +709,53 @@ extern "C" void func_002AF778(EffectAttachment* self, EffectOwner* owner) {
         func_002AA288(owner);
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C0340);
+// Partial resource view; the surrounding layout and field meanings are UNVERIFIED.
+struct ResourceAccessView {
+    char unknown00[8];
+    int value;
+    char unknown0c[0x15];
+    unsigned char flags21, flags22, flags23;
+};
+extern "C" void func_002CD640(ResourceAccessView*);
+extern "C" int func_002C0340(int* out, ResourceAccessView* resource, unsigned flags) {
+    if (resource->flags23 & 0x60) {
+        if (!(resource->flags21 & 0x80)) {
+            if ((flags & 1) && !(resource->flags21 & 0x40)) func_002CD640(resource);
+            *out = resource->value;
+            if (flags & 1) resource->flags22 |= 0x10;
+            if (flags & 2) resource->flags22 |= 8;
+            return 1;
+        }
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C03F8);
+#ifdef NON_MATCHING
+// Unmatched: GP-relative access and branch layout differ under -G8.
+struct ResourceQueryDraft {
+    char unknown00[4];
+    int valid;
+    char unknown08[0x1b];
+    unsigned char flags23;
+};
+extern unsigned D_0040E688;
+extern "C" int func_002C04F8(int* out, ResourceQueryDraft* resource) {
+    unsigned char* ptr = (unsigned char*)((unsigned)resource + D_0040E688);
+    if (resource->valid) {
+        if (resource->flags23 & 0x80) {
+            if (ptr)
+                *out = 1 + (ptr[0x16] >> 2);
+            else
+                *out = 1;
+        } else
+            *out = 1;
+        return 1;
+    }
+    return 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C04F8);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C0558);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C05F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C0670);
@@ -675,8 +767,63 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C7760);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C7C20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C7FB0);
+#ifdef NON_MATCHING
+// Unmatched: byte-load ordering and register allocation differ.
+extern "C" int func_002C8438(unsigned* out, const unsigned char* in, int type) {
+    switch (type & 0xf00) {
+    case 0:
+    case 0x100:
+        *out = ((in[2] << 7) & 0x7c00) | ((in[1] << 2) & 0x3e0) | (in[0] >> 3) | ((in[3] << 8) & 0x8000);
+        break;
+    case 0x500:
+        *out = (in[2] << 16) | (in[1] << 8) | in[0] | ((in[3] * 0x808081u) & 0xff000000u);
+        break;
+    case 0x600:
+        *out = in[0] | ((in[1] << 8) | 0x80000000u) | (in[2] << 16);
+        break;
+    default: return 0;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C8438);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: byte stores are scheduled in a different order.
+extern "C" int func_002C8530(unsigned char* out, const unsigned* in, int type) {
+    unsigned value = *in;
+    switch (type & 0xf00) {
+        case 0:
+        case 0x100:
+            out[2] = (value >> 7) & 0xf8;
+            out[1] = (value >> 2) & 0xf8;
+            out[0] = value << 3;
+            if (value & 0x8000)
+                out[3] = 0xff;
+            else
+                out[3] = 0;
+            break;
+        case 0x500:
+            out[2] = value >> 16;
+            out[1] = value >> 8;
+            out[0] = value;
+            out[3] = (value & 0xff000000u) / 0x808080u;
+            break;
+        case 0x600: {
+            unsigned b = value >> 16;
+            unsigned g = value >> 8;
+            out[1] = g;
+            out[3] = 0xff;
+            out[2] = b;
+            out[0] = value;
+        } break;
+        default: return 0;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C8530);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002C8618);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002CB3D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002CB660);
