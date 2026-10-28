@@ -4,6 +4,7 @@
 #include "game/stream_buffer.h"
 #include "game/audio_runtime.h"
 #include "game/frontend_resources.hpp"
+#include "apt/apt_value.hpp"
 
 #include "game/graphics/sound_envelopes.hpp"
 using namespace Graphics;
@@ -658,9 +659,21 @@ extern "C" void func_0022DFE0(Recovered_ObjectStack* self) {
     object->vtable->invoke((char*)object + object->vtable->adjustment);
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E030);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E0B8);
+extern "C" void func_00223678(void*, void*);
+extern "C" void func_00252B10(AptViews::PendingValues*);
+extern "C" void func_00225030(void*, void*);
+extern "C" void func_0022E0B8(void** self, void* arg) {
+    func_00225030(self, arg);
+    func_00223678(self, arg);
+    if (AptViews::D_003BE8E0->count != 0 && *self == 0) func_00252B10(AptViews::D_003BE8E0);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E120);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E1A8);
+extern "C" void func_0022A440(void*, void*);
+extern "C" void func_0022E1A8(void** self, void* arg) {
+    func_0022A440(self, arg);
+    func_00223678(self, arg);
+    if (AptViews::D_003BE8E0->count != 0 && *self == 0) func_00252B10(AptViews::D_003BE8E0);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E210);
 extern "C" Recovered_StackObject* D_003BFABC;
 extern "C" void func_0022E288(Recovered_ObjectStack* self) {
