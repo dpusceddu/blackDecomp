@@ -356,7 +356,9 @@ splits:
   - {src: src/game/actor/tu_1448c8_145fb0.c, range: [0x145fb0, 0x146a28]}
   - {src: src/game/actor/actor_reset.cpp, range: [0x146a28, 0x146af0]}
   - {src: src/game/actor/actor_entries_1448c8.cpp, range: [0x146af0, 0x146bf8], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16, -fbyte-bool]}
-  - {src: src/game/actor/tu_1448c8_146bf8.c, range: [0x146bf8, 0x1476d0]}
+  - {src: src/game/actor/tu_1448c8_146bf8.c, range: [0x146bf8, 0x147140]}
+  - {src: src/game/actor/tu_1448c8_147140.c, range: [0x147140, 0x1471e0], flags: [-O2, -G8, -snas], assembler: sony-2.9, note: "Native gp-relative byte load; Sony assembler honors the sized extern under G8 where SN emits an absolute load."}
+  - {src: src/game/actor/tu_1448c8_146bf8.c, range: [0x1471e0, 0x1476d0]}
   - {src: src/game/actor/tu_1448c8_1476d0.c, range: [0x1476d0, 0x147988]}
   - {src: src/game/actor/tu_1448c8_147988.c, range: [0x147988, 0x1479b8]}
   - {src: src/game/actor/tu_1448c8_1479b8.c, range: [0x1479b8, 0x148430]}
