@@ -113,9 +113,75 @@ void func_0027C990(s32 arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27c410", func_0027C9A0);
+extern int func_00369FF0(char*, int, const char*, ...);
+#ifdef NON_MATCHING
+// Unmatched: saved-register initialization and scheduling differ.
+// Partial driver and resource views; original identities and method names are UNVERIFIED.
+typedef struct OpenResourceDraft OpenResourceDraft;
+typedef struct OpenDriverDraft OpenDriverDraft;
+typedef OpenResourceDraft* (*GetOpenResourceDraft)(void*, unsigned);
+typedef int (*OpenCanUseDraft)(void*);
+typedef int (*OpenResourceCallbackDraft)(void*, OpenDriverDraft*, const char*, unsigned);
+typedef struct {
+    short delta, pad;
+    GetOpenResourceDraft call;
+} OpenGetEntryDraft;
+typedef struct {
+    char gap[0x18];
+    OpenGetEntryDraft get;
+} OpenDriverDraftTable;
+typedef struct {
+    short delta, pad;
+    OpenResourceCallbackDraft call;
+} OpenCallEntryDraft;
+typedef struct {
+    short delta, pad;
+    OpenCanUseDraft call;
+} OpenCanEntryDraft;
+typedef struct {
+    char gap[8];
+    OpenCallEntryDraft open;
+    char gap10[0x30];
+    OpenCanEntryDraft can;
+} OpenResourceDraftTable;
+struct OpenDriverDraft {
+    char gap[0x104];
+    int error;
+    unsigned count;
+    char gap10c[4];
+    OpenDriverDraftTable* table;
+};
+struct OpenResourceDraft {
+    char gap[0x24];
+    int state;
+    OpenResourceDraftTable* table;
+};
+extern const char D_00400398[];
+OpenResourceDraft* func_0027CAB8(OpenDriverDraft* driver, const char* name, unsigned mode) {
+    int i;
+    OpenResourceDraft* result = 0;
+    char path[256];
+    for (i = 0; i < driver->count; ++i) {
+        OpenResourceDraft* r = driver->table->get.call((char*)driver + driver->table->get.delta, i);
+        if (!r->table->can.call((char*)r + r->table->can.delta)) {
+            result = r;
+            break;
+        }
+    }
+    if (!result)
+        driver->error = 3;
+    else {
+        func_00369FF0(path, 256, D_00400398, driver, name);
+        driver->error = result->table->open.call((char*)result + result->table->open.delta, driver, path, mode);
+        if (driver->error) result = 0;
+    }
+    if (result) result->state = 2;
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27c410", func_0027CAB8);
+#endif
 extern const char D_00400388[];
-extern int func_00369FF0(char*, int, const char*, const char*);
 
 s32 func_0027CBC0(char* out, const char* name) {
     return func_00369FF0(out, 256, D_00400388, name);
@@ -129,7 +195,7 @@ typedef struct {
     char unknown18[0x48];
     void* resource;
 } FileOpenHandleDraft;
-extern void* func_0027CAB8(s32, const char*, u32);
+
 s32 func_0027CBE8(void* unused, FileOpenHandleDraft* self, const char* name, u32 flags) {
     u32 mode = flags & 1;
     s32 driver;
@@ -139,7 +205,7 @@ s32 func_0027CBE8(void* unused, FileOpenHandleDraft* self, const char* name, u32
     mode |= flags & 16;
     driver = func_0027C778(name);
     if (driver) {
-        self->resource = func_0027CAB8(driver, name, mode);
+        self->resource = func_0027CAB8((OpenDriverDraft*)driver, name, mode);
         if (self->resource) {
             self->position = 0;
             return 1;
