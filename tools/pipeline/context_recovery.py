@@ -14,12 +14,14 @@ import json
 import os
 import re
 import struct
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
+from preparation_lock import preparation_lock
 VERSION = 10
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
@@ -1171,11 +1173,26 @@ def fingerprint(root=ROOT):
 
 def recover(inv=None, root=ROOT, refresh=False, cache=None):
     cache = Path(cache) if cache else root / 'build/auto/context.json'
-    stamp = fingerprint(root)
-    if not refresh and cache.exists():
-        old = json.loads(cache.read_text())
-        if old.get('fingerprint') == stamp and old.get('version') == VERSION:
+
+    def cached(stamp):
+        if not refresh and cache.exists():
+            old = json.loads(cache.read_text())
+            if old.get('fingerprint') == stamp and old.get('version') == VERSION:
+                return old
+        return None
+
+    old = cached(fingerprint(root))
+    if old is not None:
+        return old
+    with preparation_lock(root):
+        stamp = fingerprint(root)
+        old = cached(stamp)
+        if old is not None:
             return old
+        return _recover(inv, root, cache, stamp)
+
+
+def _recover(inv, root, cache, stamp):
     if inv is None:
         from autodecomp import load_inventory
         inv = load_inventory()
@@ -1249,7 +1266,14 @@ def recover(inv=None, root=ROOT, refresh=False, cache=None):
                   source_conflicts=conflicts, layouts=layouts, counterpart_leads=leads,
                   vtables={str(k): v for k, v in vtables.items()})
     cache.parent.mkdir(parents=True, exist_ok=True)
-    cache.write_text(json.dumps(result, indent=2) + '\n')
+    # Readers can check a warm cache without waiting for a refresh. Publish atomically.
+    with tempfile.NamedTemporaryFile(mode='w', dir=cache.parent, delete=False) as output:
+        try:
+            output.write(json.dumps(result, indent=2) + '\n')
+            output.close()
+            os.replace(output.name, cache)
+        finally:
+            Path(output.name).unlink(missing_ok=True)
     return result
 
 

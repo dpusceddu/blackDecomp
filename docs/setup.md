@@ -70,6 +70,11 @@ an image. Existing local worktrees can share `.venv`, the pinned toolchain and g
 generated build outputs stay local to each checkout. Missing system prerequisites produce the one-time provisioning
 instruction for the user or harness.
 
+Setup serializes metadata preparation across linked worktrees of the same Git repository; a cold or refreshed
+recovery context uses the same lock, while a valid cached context does not wait. Other repositories and ordinary
+matching builds remain independent. The lock coordinates these tools only, and does not limit manually launched
+preparation commands. If a setup process is forcibly killed, its child processes may continue after its lock is released.
+
 Follow the [validation impact rule](../CONTRIBUTING.md#rules) during matching. `--build` is available for an explicit setup
 smoke check; `--no-build` remains a compatibility alias for normal preparation. A successful image check prints:
 

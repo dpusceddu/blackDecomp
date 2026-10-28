@@ -1,11 +1,13 @@
 """Host-only analyses of authored synthetic instructions; no compiler is run here."""
 import importlib.util
 import sys
+import tempfile
+from unittest.mock import patch
 import unittest
 from pathlib import Path
 
 TOOLS = Path(__file__).resolve().parents[2] / 'tools'
-sys.path.insert(0, str(TOOLS))
+sys.path[:0] = [str(TOOLS), str(TOOLS / 'pipeline')]
 import context_recovery as cr
 
 
@@ -690,6 +692,37 @@ class ScalarPointeeTests(unittest.TestCase):
         analysis=cr.analyze_function(f)
         rows=[(parent,off,size,typ,f['addr'],pc) for slot,parent,off,size,typ,pc in analysis['nested']]
         self.assertEqual(cr.refine_scalar_pointees(self.field(),rows)[0]['type'],'s32 *')
+
+
+class RecoveryCacheTests(unittest.TestCase):
+    def test_warm_cache_does_not_lock(self):
+        import json
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            cache = root / 'context.json'
+            value = {'version': cr.VERSION, 'fingerprint': 'stamp'}
+            cache.write_text(json.dumps(value))
+            with patch.object(cr, 'fingerprint', return_value='stamp'), \
+                 patch.object(cr, 'preparation_lock', side_effect=AssertionError('warm cache locked')):
+                self.assertEqual(cr.recover(root=root, cache=cache), value)
+
+    def test_cache_rechecked_after_waiting(self):
+        import json
+        from contextlib import contextmanager
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            cache = root / 'context.json'
+            value = {'version': cr.VERSION, 'fingerprint': 'stamp'}
+
+            @contextmanager
+            def locked(_root):
+                cache.write_text(json.dumps(value))
+                yield
+
+            with patch.object(cr, 'fingerprint', return_value='stamp'), \
+                 patch.object(cr, 'preparation_lock', locked), \
+                 patch.object(cr, '_recover', side_effect=AssertionError('cache was not rechecked')):
+                self.assertEqual(cr.recover(root=root, cache=cache), value)
 
 
 if __name__ == '__main__':

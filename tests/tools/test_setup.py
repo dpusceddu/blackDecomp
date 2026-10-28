@@ -1,5 +1,6 @@
 """Session preparation generates metadata by default and uses the active Python environment."""
 import importlib.util
+from contextlib import contextmanager
 from pathlib import Path
 import shlex
 import shutil
@@ -52,6 +53,24 @@ class Preparation(unittest.TestCase):
             self.assertTrue((root / 'build/SLUS_213.76/tus.yaml').is_file())
             self.assertFalse(image.exists())
             self.assertFalse((root / 'verified.stamp').exists())
+
+    def test_full_image_build_runs_after_lock_is_released(self):
+        held = False
+        commands = []
+
+        @contextmanager
+        def lock(_root):
+            nonlocal held
+            held = True
+            yield
+            held = False
+
+        def run(*args):
+            commands.append((args, held))
+
+        with patch.object(S, 'preparation_lock', lock), patch.object(S, 'run', run):
+            S.prepare(sys.executable, build=True)
+        self.assertEqual([held for _, held in commands], [True, True, True, False, False])
 
     def test_explicit_build_also_verifies_an_up_to_date_image(self):
         with tempfile.TemporaryDirectory() as folder:

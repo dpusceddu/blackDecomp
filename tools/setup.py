@@ -26,6 +26,8 @@ import argparse, json, os, platform, shutil, subprocess, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'tools'))
+from preparation_lock import preparation_lock
 SLUG = 'SLUS_213.76'
 MODULES = ('yaml', 'splat', 'spimdisasm', 'rabbitizer', 'm2c', 'pycparser')
 PACKAGES = {
@@ -116,9 +118,10 @@ def game_files(main):
 def prepare(python, build=False):
     """Prepare comparison metadata; full-image compilation and verification are opt-in."""
     step('comparison metadata and assembly')
-    run(python, 'configure.py')
-    run('ninja', 'objdiff.json')
-    run(python, 'tools/build/tus.py', 'map')
+    with preparation_lock(ROOT):
+        run(python, 'configure.py')
+        run('ninja', 'objdiff.json')
+        run(python, 'tools/build/tus.py', 'map')
     if build:
         step('full-image verification')
         run('ninja')
