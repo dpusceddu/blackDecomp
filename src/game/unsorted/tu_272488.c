@@ -40,7 +40,6 @@ u64 func_00272610(u64 first, u64 second) {
     return first + func_002904F0(second, D_00400510[12 - i]);
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_002726C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_272488", func_002726D0);
 // UNVERIFIED: original header identity and fields before the count.
 typedef struct { u8 unknown[8]; s32 count; u32* entries; } Recovered_OffsetList;
 void func_00272730(Recovered_OffsetList* self) {

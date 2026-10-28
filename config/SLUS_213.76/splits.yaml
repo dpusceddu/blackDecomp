@@ -1866,7 +1866,9 @@ splits:
   - {src: src/game/unsorted/tu_272308.c, range: [0x272308, 0x272328]}
   - {src: src/game/unsorted/tu_272328.c, range: [0x272328, 0x2723b0]}
   - {src: src/game/unsorted/tu_2723b0.cpp, range: [0x2723b0, 0x272488]}
-  - {src: src/game/unsorted/tu_272488.c, range: [0x272488, 0x272b58], note: flags or language differ}
+  - {src: src/game/unsorted/tu_272488.c, range: [0x272488, 0x2726d0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_272488_2726d0.c, range: [0x2726d0, 0x272730], flags: [-O2, -G0, -snas], assembler: sn-min6, note: short trailing-space loop requires original branch scheduling}
+  - {src: src/game/unsorted/tu_272488.c, range: [0x272730, 0x272b58]}
   - {src: src/game/unsorted/tu_272488_272b58.c, range: [0x272b58, 0x272c18], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_272488_272c18.c, range: [0x272c18, 0x274e40], assembler: sn-min6, note: "Native query and pool-list walks use six-word short loops; stock SN assembler adds an extra NOP."}
   - {src: src/game/unsorted/tu_274e40.c, range: [0x274e40, 0x274f80]}
