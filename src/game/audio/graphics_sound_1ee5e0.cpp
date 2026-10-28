@@ -498,7 +498,25 @@ extern "C" int func_002048D0(Recovered_SoundDispatch* self) {
     func_00278F00((void*)(self->bank * 0xA8 + D_0040F518 + 0x40), self->index, self->value);
     return 1;
 }
+extern "C" FrontendResourceTable D_0040F0F0;
+extern "C" void* func_00107D20(u32);
+extern "C" void func_00275000(void*, void*, s32);
+#ifdef NON_MATCHING
+// Unmatched: call setup and saved-register scheduling differ.
+extern "C" u32 func_00209378(void* object) {
+    int selected = D_0040F0F0.selectedIndex;
+    D_0040F0F0.ClearSelection();
+    D_0040F0F0.SelectBuffer(15);
+    func_00275000(object, func_00107D20(0x1000), 0x1000);
+    func_00275000((char*)object + 0x518, func_00107D20(0xA000), 0xA000);
+    D_0040F0F0.ClearSelection();
+    u32 result = D_0040F0F0.SelectBuffer(selected);
+    *(int*)((char*)object + 0xA30) = 1;
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00209378);
+#endif
 // UNVERIFIED: original type and fields other than state.
 struct Recovered_StateA30 { char unknown[0xA30]; int state; };
 #ifdef NON_MATCHING
@@ -520,7 +538,22 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00209490);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00218898);
+extern "C" void* D_0043DF68;
+extern "C" void* D_0043DF74;
+extern "C" const char D_003FCEA0[];
+extern "C" void func_00232638(void*);
+extern "C" int func_00249810(void*, int, const char*);
+#ifdef NON_MATCHING
+// Unmatched: owned read-only data placement changes the linked image.
+extern "C" void func_0021AFE0() {
+    func_00232638(D_0043DF68);
+    if (D_0043DF74 != 0) {
+        func_00249810(D_0043DF74, 0, D_003FCEA0);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021AFE0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021B020);
 extern "C" unsigned char D_003FD110[];
 extern "C" int func_0021B048(void* object) {
