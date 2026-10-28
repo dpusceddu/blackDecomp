@@ -1,12 +1,27 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_001F1C08();
+extern void func_001F1C08(void*);
 extern void func_00200A68(void *arg0);
-extern s32 func_001F9028(void *);
-extern s32 func_001FA468(void *);
+extern void func_001F9028(void *);
+extern void func_001FA468(void *);
 
+#ifdef NON_MATCHING
+// Unmatched: address-add operand order differs.
+void func_001F9028(void* self) {
+    u8 i = 0;
+    s32* slots = (s32*)((u8*)self + 0xB20);
+    func_001F1C08(self);
+    M2C_FIELD(self, s32*, 0xB90) = 0;
+    do {
+        func_00200A68((u8*)self + ((i << 7) + 0x20));
+        slots[i] = 0;
+        i++;
+    } while (i < 0x16);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9028);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9098);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F92A0);
 
@@ -22,7 +37,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9DC
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001F9DE8);
 
 void func_001F9EB0(void *arg0) {
-    func_001F1C08();
+    func_001F1C08(arg0);
     M2C_FIELD(arg0, s32 *, 0xA0) = 0;
     M2C_FIELD(arg0, s32 *, 0xA4) = 0;
     func_00200A68(arg0 + 0x20);
@@ -38,7 +53,22 @@ void func_001FA438(void* self) {
     func_001F9980((u8*)self + 0xC0);
     M2C_FIELD(self, s32*, 0xEA8) = 1;
 }
+#ifdef NON_MATCHING
+// Unmatched: address-add operand order differs.
+void func_001FA468(void* self) {
+    u8 i = 0;
+    s32* slots = (s32*)((u8*)self + 0x1F0);
+    func_001F1C08(self);
+    do {
+        func_00200A68((u8*)self + ((i << 7) + 0x70));
+        slots[i] = 0;
+        i++;
+    } while (i < 3);
+    M2C_FIELD(self, s32*, 0x218) = 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FA468);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f9028", func_001FA4D8);
 
 s32 func_001FAB98(void) {
