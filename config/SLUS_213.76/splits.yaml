@@ -512,7 +512,9 @@ splits:
   - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d758, 0x15d850]}
   - {src: src/game/weapons/tu_15d370_15d3d8.c, range: [0x15d850, 0x15d870]}
   - {src: src/game/weapons/weapons_tu_15d370.cpp, range: [0x15d870, 0x15d958]}
-  - {src: src/game/unsorted/tu_15d958.c, range: [0x15d958, 0x160e70], note: flags or language differ}
+  - {src: src/game/unsorted/tu_15d958_2.c, range: [0x15d958, 0x15ef48], flags: [-O2, -G0, -snas, -fstrict-aliasing], note: "Native bank counts and pointers load before vtable stores; strict aliasing recovers those disjoint accesses. Isolated loader draft retains protected action-bank source recipes."}
+  - {src: src/game/unsorted/tu_15d958_15ef48.c, range: [0x15ef48, 0x15fdc0], flags: [-O2, -G0, -snas, -mno-check-zero-division], note: "Native modulo-three DIV has no divide-by-zero guard. Separate initializer draft preserves the surrounding action-bank source recipes."}
+  - {src: src/game/unsorted/tu_15d958.c, range: [0x15fdc0, 0x160e70], note: flags or language differ}
   - {src: src/game/unsorted/tu_15d958_160e70.c, range: [0x160e70, 0x160ea0], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_15d958_160ea0.c, range: [0x160ea0, 0x161aa8], note: flags or language differ}
   - {src: src/game/unsorted/tu_15d958_161aa8.c, range: [0x161aa8, 0x161cb8], flags: [-G0, -snas, -O2, -fno-schedule-insns]}
@@ -605,11 +607,12 @@ splits:
   - {src: src/game/actor/actor_event_fanout.cpp, range: [0x165b00, 0x165b88]}
   - {src: src/game/actor/tu_1650b8_165af8.c, range: [0x165b88, 0x165b98]}
   - {src: src/game/actor/actor_event_fanout.cpp, range: [0x165b98, 0x165bb0]}
-  - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x165bb0, 0x165c40], flags: [-O1, -G0, -snas], note: flags or language differ}
+  - {src: src/game/actor/tu_165bb0.c, range: [0x165bb0, 0x165c40], flags: [-O1, -G0, -snas], note: Constructor store scheduling requires O1; the remaining actor helpers reproduce native O2 loops and scheduling.}
   - {src: src/game/actor/tu_165c40.c, range: [0x165c40, 0x165cc0]}
   - {src: src/game/actor/tu_165cc0.c, range: [0x165cc0, 0x165de8], flags: [-O1, -G0, -snas]}
   - {src: src/game/actor/tu_165de8.c, range: [0x165de8, 0x165df0]}
-  - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x165df0, 0x166c00]}
+  - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x165df0, 0x166808]}
+  - {src: src/game/actor/tu_166808.c, range: [0x166808, 0x166c00], flags: [-O2, -G8, -snas], assembler: sony-2.9, note: native flag uses GPREL and Sony scheduling preserves the first bank load interlock and short-loop NOPs}
   - {src: src/game/actor/tu_166c00.c, range: [0x166c00, 0x167000], flags: [-O1, -G0, -snas]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x167000, 0x167088]}
   - {src: src/game/actor/tu_167088.c, range: [0x167088, 0x167208], flags: [-O1, -G0, -snas]}
@@ -745,7 +748,7 @@ splits:
   - {src: src/game/ai/tu_178f18.c, range: [0x178f18, 0x178f28], assembler: sn-min6}
   - {src: src/game/ai/tu_178f18_178f28.cpp, range: [0x178f28, 0x178f50], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/ai/tu_178f18.c, range: [0x178f50, 0x1793c0]}
-  - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x1793c0, 0x1793e8]}
+  - {src: src/game/actor/tu_1793c0.c, range: [0x1793c0, 0x1793e8], assembler: sn-min6, note: Native short loop has two interlock NOPs; the stock assembler inserts a third.}
   - {src: src/game/unsorted/tu_1793e8.c, range: [0x1793e8, 0x1793f8]}
   - {src: src/game/unsorted/tu_1793f8.c, range: [0x1793f8, 0x179400]}
   - {src: src/game/unsorted/tu_179400.c, range: [0x179400, 0x1794a0], note: flags or language differ}

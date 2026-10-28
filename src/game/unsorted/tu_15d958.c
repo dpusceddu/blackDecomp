@@ -6,9 +6,77 @@ extern s32 D_0040F51C;
 extern s32 func_00108818();
 extern s32 D_0040F4C4;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958", func_0015D958);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958", func_0015EF48);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958", func_0015FDC0);
+extern s32 func_00167108(s32, s32);
+extern s32 D_0040F4F4;
+extern s32 func_00166F80(s32, s32);
+extern s32 func_00166FA0(s32, s32);
+extern s32 func_00166FC0(s32, s32);
+extern s32 func_00166FE0(s32, s32);
+extern void func_00167000(void*, void*);
+extern s32 func_00167088(s32, s32);
+extern s32 func_00167128(s32, s32);
+extern s32 func_001670A8(s32, s32);
+extern s32 func_001670C8(s32, s32);
+extern s32 func_001670E8(s32, s32);
+extern s32 func_00167168(s32, s32);
+extern s32 func_00167188(s32, s32);
+extern s32 func_001671A8(s32, s32);
+extern s32 func_001671C8(s32, s32);
+extern s32 func_001671E8(s32, s32);
+extern s32 func_00166F60(s32, s32);
+extern s32 func_00167148(s32, s32);
+
+typedef s32 (*ReleaseCall)(void*);
+#define RELEASE_ACTION_BANK(listOffset, countOffset)                                                                 \
+    for (i = 0; i < M2C_FIELD(self, s32*, countOffset); i++) {                                                         \
+        s32 offset = i * 4;                                                                                          \
+        void* entry = M2C_FIELD(offset + M2C_FIELD(self, s32*, listOffset), void**, 0);                                \
+        void* vtable = M2C_FIELD(entry, void**, 0x10);                                                                 \
+        M2C_FIELD(vtable, ReleaseCall*, 0x24)((char*)entry + M2C_FIELD(vtable, s16*, 0x20));                            \
+    }
+
+s32 func_0015FDC0(void* self) {
+    s32 i;
+    RELEASE_ACTION_BANK(0x8, 0xC);
+    RELEASE_ACTION_BANK(0x10, 0x50);
+    RELEASE_ACTION_BANK(0x18, 0x58);
+    RELEASE_ACTION_BANK(0x14, 0x54);
+    RELEASE_ACTION_BANK(0x1C, 0x5C);
+    RELEASE_ACTION_BANK(0x20, 0x60);
+    RELEASE_ACTION_BANK(0x24, 0x64);
+    RELEASE_ACTION_BANK(0x2C, 0x68);
+    RELEASE_ACTION_BANK(0x30, 0x6C);
+    RELEASE_ACTION_BANK(0x34, 0x70);
+    RELEASE_ACTION_BANK(0x38, 0x74);
+    RELEASE_ACTION_BANK(0x3C, 0x7C);
+    RELEASE_ACTION_BANK(0x40, 0x84);
+    RELEASE_ACTION_BANK(0, 0x4);
+    RELEASE_ACTION_BANK(0x44, 0x88);
+    RELEASE_ACTION_BANK(0x48, 0x8C);
+    RELEASE_ACTION_BANK(0x4C, 0x90);
+    func_00167108(D_0040F4F4, M2C_FIELD(self, s32*, 0x24));
+    func_00166F80(D_0040F4F4, M2C_FIELD(self, s32*, 8));
+    func_00166FA0(D_0040F4F4, M2C_FIELD(self, s32*, 0x14));
+    func_00166FC0(D_0040F4F4, M2C_FIELD(self, s32*, 0x10));
+    func_00166FE0(D_0040F4F4, M2C_FIELD(self, s32*, 0x18));
+    func_00167000((void*)D_0040F4F4, M2C_FIELD(self, void**, 0x1C));
+    func_00167088(D_0040F4F4, M2C_FIELD(self, s32*, 0x20));
+    func_00167128(D_0040F4F4, M2C_FIELD(self, s32*, 0x2C));
+    func_001670A8(D_0040F4F4, M2C_FIELD(self, s32*, 0x30));
+    func_001670C8(D_0040F4F4, M2C_FIELD(self, s32*, 0x34));
+    func_001670E8(D_0040F4F4, M2C_FIELD(self, s32*, 0x38));
+    func_00167168(D_0040F4F4, M2C_FIELD(self, s32*, 0x40));
+    func_00167188(D_0040F4F4, M2C_FIELD(self, s32*, 0));
+    func_001671A8(D_0040F4F4, M2C_FIELD(self, s32*, 0x3C));
+    func_001671C8(D_0040F4F4, M2C_FIELD(self, s32*, 0x44));
+    func_001671E8(D_0040F4F4, M2C_FIELD(self, s32*, 0x48));
+    func_00166F60(D_0040F4F4, M2C_FIELD(self, s32*, 0x4C));
+    func_00167148(D_0040F4F4, M2C_FIELD(self, s32*, 0x94));
+    return 1;
+}
+
+#undef RELEASE_ACTION_BANK
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958", func_00160398);
 // Partial action-list views; field meanings are UNVERIFIED.
 typedef struct {

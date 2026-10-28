@@ -1391,7 +1391,134 @@ void func_0013D7A0(Recovered_ManagedSlot* self, s32 id) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D8D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_0013D9A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001415A8);
+extern void func_00142AB8(Recovered_SmallArray*, s32, s32, s32, s32, u8, u64);
+
+/* Preset cases retain the native catalog order and all 64 bits of each ID. */
+s32 func_001415A8(Recovered_SmallArray* self, s32 preset) {
+    switch (preset) {
+        case 36:
+            func_00142AB8(self, 2, 1, 0, 0, 0U, 0x544614B7182C0000UL);
+            func_00142AB8(self, 2, 1, 0, 0, 0U, 0x5446135779860000UL);
+            func_00142AB8(self, 1, 1, 0, 0, 0U, 0x5446143910FD0000UL);
+            func_00142AB8(self, 2, 2, 0, 0, 0U, 0x5446151EBC278000UL);
+            func_00142AB8(self, 2, 2, 0, 0, 0U, 0x544614FCFFAE0000UL);
+            func_00142AB8(self, 3, 3, 0, 0, 0U, 0x5446152380DB8000UL);
+            func_00142AB8(self, 3, 3, 0, 0, 0U, 0x544614411FFA0000UL);
+            func_00142AB8(self, 3, 3, 0, 0, 0U, 0x5446152331830000UL);
+            func_00142AB8(self, 4, 3, 0, 0, 0U, 0x544614A4487F8000UL);
+            func_00142AB8(self, 4, 4, 0, 0, 0U, 0x5446127AD7970000UL);
+            func_00142AB8(self, 4, 4, 0, 0, 0U, 0x5446127297C60000UL);
+            func_00142AB8(self, 4, 4, 0, 0, 0U, 0x5446142A5B1E8000UL);
+            func_00142AB8(self, 3, 3, 0, 0, 0U, 0x54461388E61C8000UL);
+            func_00142AB8(self, 1, 1, 0, 0, 0U, 0x54461524B8230000UL);
+            func_00142AB8(self, 4, 4, 0, 0, 0, 0x5446129C3E9D8000UL);
+            break;
+        case 37:
+            func_00142AB8(self, 3, 2, 1, 1, 0U, 0x544614B7182C0000UL);
+            func_00142AB8(self, 3, 2, 1, 1, 0U, 0x5446135779860000UL);
+            func_00142AB8(self, 1, 1, 1, 1, 0U, 0x5446143910FD0000UL);
+            func_00142AB8(self, 3, 3, 1, 1, 0U, 0x5446151EBC278000UL);
+            func_00142AB8(self, 3, 3, 1, 1, 0U, 0x544614FCFFAE0000UL);
+            func_00142AB8(self, 5, 5, 1, 1, 0U, 0x5446152380DB8000UL);
+            func_00142AB8(self, 5, 5, 1, 1, 0U, 0x544614411FFA0000UL);
+            func_00142AB8(self, 5, 5, 1, 1, 0U, 0x5446152331830000UL);
+            func_00142AB8(self, 7, 7, 1, 1, 0U, 0x544614A4487F8000UL);
+            func_00142AB8(self, 9, 9, 1, 1, 0U, 0x5446127AD7970000UL);
+            func_00142AB8(self, 9, 9, 1, 1, 0U, 0x5446127297C60000UL);
+            func_00142AB8(self, 9, 9, 1, 1, 0U, 0x5446142A5B1E8000UL);
+            func_00142AB8(self, 6, 6, 1, 1, 0U, 0x54461388E61C8000UL);
+            func_00142AB8(self, 1, 1, 1, 1, 0U, 0x54461524B8230000UL);
+            func_00142AB8(self, 9, 9, 1, 1, 0, 0x5446129C3E9D8000UL);
+            break;
+        case 38:
+            func_00142AB8(self, 8, 8, 1, 0, 1U, 0x544614B7182C0000UL);
+            func_00142AB8(self, 7, 7, 1, 0, 1U, 0x5446135779860000UL);
+            func_00142AB8(self, 2, 2, 1, 0, 0U, 0x5446143910FD0000UL);
+            func_00142AB8(self, 0xB, 0xB, 1, 0, 2U, 0x5446151EBC278000UL);
+            func_00142AB8(self, 0xD, 0xD, 1, 0, 2U, 0x544614FCFFAE0000UL);
+            func_00142AB8(self, 0x1E, 0x1E, 1, 0, 2U, 0x5446152380DB8000UL);
+            func_00142AB8(self, 0x1E, 0x1E, 1, 0, 2U, 0x544614411FFA0000UL);
+            func_00142AB8(self, 0x1E, 0x1E, 1, 0, 2U, 0x5446152331830000UL);
+            func_00142AB8(self, 0x1E, 0x1E, 1, 0, 2U, 0x544614A4487F8000UL);
+            func_00142AB8(self, 0x1E, 0x1E, 1, 0, 2U, 0x5446127AD7970000UL);
+            func_00142AB8(self, 0x1E, 0x1E, 1, 0, 2U, 0x5446127297C60000UL);
+            func_00142AB8(self, 0x1E, 0x1E, 1, 0, 2U, 0x5446142A5B1E8000UL);
+            func_00142AB8(self, 0x10, 0x10, 1, 0, 2U, 0x54461388E61C8000UL);
+            func_00142AB8(self, 1, 1, 1, 0, 0U, 0x54461524B8230000UL);
+            func_00142AB8(self, 30, 30, 1, 0, 0, 0x5446129C3E9D8000UL);
+            break;
+        case 39:
+            func_00142AB8(self, 2, 2, 0, 0, 0U, 0x544614B7182C0000UL);
+            func_00142AB8(self, 2, 2, 0, 0, 0U, 0x5446135779860000UL);
+            func_00142AB8(self, 1, 1, 0, 0, 0U, 0x5446143910FD0000UL);
+            func_00142AB8(self, 3, 3, 0, 0, 0U, 0x5446151EBC278000UL);
+            func_00142AB8(self, 3, 3, 0, 0, 0U, 0x544614FCFFAE0000UL);
+            func_00142AB8(self, 5, 5, 0, 0, 0U, 0x5446152380DB8000UL);
+            func_00142AB8(self, 7, 7, 0, 0, 0U, 0x544614411FFA0000UL);
+            func_00142AB8(self, 5, 5, 0, 0, 0U, 0x5446152331830000UL);
+            func_00142AB8(self, 5, 5, 0, 0, 0U, 0x544614A4487F8000UL);
+            func_00142AB8(self, 9, 9, 0, 0, 0U, 0x5446127AD7970000UL);
+            func_00142AB8(self, 9, 9, 0, 0, 0U, 0x5446127297C60000UL);
+            func_00142AB8(self, 9, 9, 0, 0, 0U, 0x5446142A5B1E8000UL);
+            func_00142AB8(self, 6, 6, 0, 0, 0U, 0x54461388E61C8000UL);
+            func_00142AB8(self, 1, 1, 0, 0, 0U, 0x54461524B8230000UL);
+            func_00142AB8(self, 9, 9, 0, 0, 0, 0x5446129C3E9D8000UL);
+            break;
+        case 40:
+            func_00142AB8(self, 0x10, 1, 1, 1, 2U, 0x544614B7182C0000UL);
+            func_00142AB8(self, 0xE, 1, 1, 1, 2U, 0x5446135779860000UL);
+            func_00142AB8(self, 3, 1, 1, 1, 2U, 0x5446143910FD0000UL);
+            func_00142AB8(self, 0x16, 1, 1, 1, 4U, 0x5446151EBC278000UL);
+            func_00142AB8(self, 0x1A, 1, 1, 1, 4U, 0x544614FCFFAE0000UL);
+            func_00142AB8(self, 0x3C, 1, 1, 1, 4U, 0x5446152380DB8000UL);
+            func_00142AB8(self, 0x3C, 1, 1, 1, 4U, 0x544614411FFA0000UL);
+            func_00142AB8(self, 0x3C, 1, 1, 1, 4U, 0x5446152331830000UL);
+            func_00142AB8(self, 0x3C, 2, 1, 1, 6U, 0x544614A4487F8000UL);
+            func_00142AB8(self, 0x3C, 2, 1, 1, 6U, 0x5446127AD7970000UL);
+            func_00142AB8(self, 0x3C, 2, 1, 1, 6U, 0x5446127297C60000UL);
+            func_00142AB8(self, 0x3C, 1, 1, 1, 5U, 0x5446142A5B1E8000UL);
+            func_00142AB8(self, 0x20, 1, 1, 1, 4U, 0x54461388E61C8000UL);
+            func_00142AB8(self, 1, 1, 1, 1, 0U, 0x54461524B8230000UL);
+            func_00142AB8(self, 60, 2, 1, 1, 4, 0x5446129C3E9D8000UL);
+            break;
+        case 41:
+            func_00142AB8(self, 3, 2, 0, 0, 0U, 0x544614B7182C0000UL);
+            func_00142AB8(self, 2, 2, 0, 0, 0U, 0x5446135779860000UL);
+            func_00142AB8(self, 1, 1, 0, 0, 0U, 0x5446143910FD0000UL);
+            func_00142AB8(self, 5, 5, 0, 0, 0U, 0x5446151EBC278000UL);
+            func_00142AB8(self, 7, 7, 0, 0, 0U, 0x544614FCFFAE0000UL);
+            func_00142AB8(self, 0xE, 0xE, 0, 0, 0U, 0x5446152380DB8000UL);
+            func_00142AB8(self, 0xE, 0xE, 0, 0, 0U, 0x544614411FFA0000UL);
+            func_00142AB8(self, 0xE, 0xE, 0, 0, 0U, 0x5446152331830000UL);
+            func_00142AB8(self, 0xE, 0xE, 0, 0, 0U, 0x544614A4487F8000UL);
+            func_00142AB8(self, 0xE, 0xE, 0, 0, 0U, 0x5446127AD7970000UL);
+            func_00142AB8(self, 0xE, 0xE, 0, 0, 0U, 0x5446127297C60000UL);
+            func_00142AB8(self, 0xE, 0xE, 0, 0, 0U, 0x5446142A5B1E8000UL);
+            func_00142AB8(self, 0xA, 0xA, 0, 0, 0U, 0x54461388E61C8000UL);
+            func_00142AB8(self, 1, 1, 0, 0, 0U, 0x54461524B8230000UL);
+            func_00142AB8(self, 14, 14, 0, 0, 0, 0x5446129C3E9D8000UL);
+            break;
+        case 42:
+            func_00142AB8(self, 5, 5, 1, 1, 2U, 0x544614B7182C0000UL);
+            func_00142AB8(self, 5, 5, 1, 1, 2U, 0x5446135779860000UL);
+            func_00142AB8(self, 2, 2, 1, 1, 0U, 0x5446143910FD0000UL);
+            func_00142AB8(self, 0xA, 0xA, 1, 1, 6U, 0x5446151EBC278000UL);
+            func_00142AB8(self, 0xD, 0xD, 1, 1, 6U, 0x544614FCFFAE0000UL);
+            func_00142AB8(self, 0x14, 0x14, 1, 1, 6U, 0x5446152380DB8000UL);
+            func_00142AB8(self, 0x14, 0x14, 1, 1, 6U, 0x544614411FFA0000UL);
+            func_00142AB8(self, 0x14, 0x14, 1, 1, 6U, 0x5446152331830000UL);
+            func_00142AB8(self, 0x14, 0x14, 1, 1, 6U, 0x544614A4487F8000UL);
+            func_00142AB8(self, 0x14, 0x14, 1, 1, 6U, 0x5446127AD7970000UL);
+            func_00142AB8(self, 0x14, 0x14, 1, 1, 6U, 0x5446127297C60000UL);
+            func_00142AB8(self, 0x14, 0x14, 1, 1, 6U, 0x5446142A5B1E8000UL);
+            func_00142AB8(self, 0xF, 0xF, 1, 1, 6U, 0x54461388E61C8000UL);
+            func_00142AB8(self, 1, 1, 1, 1, 0U, 0x54461524B8230000UL);
+            func_00142AB8(self, 0x14, 0x14, 1, 1, 0U, 0x5446129C3E9D8000UL);
+            break;
+    }
+    return 1;
+}
+
 #ifdef NON_MATCHING
 // Unmatched: inline search joins and destination address lifetimes differ (19 instructions).
 void func_00142AB8(Recovered_SmallArray* self, s32 width, s32 height, s32 arg3, s32 arg4, u8 arg5, u64 id) {

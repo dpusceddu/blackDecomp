@@ -36,7 +36,7 @@ void func_001AE5A0(BkActorRenderPS2 *actor) {
     func_0026A6F0(actor->resource);
 }
 
-void func_001AE5C8(void) {
+void func_001AE5C8(BkActorRenderPS2* actor) {
     func_0026A7A0();
 }
 
