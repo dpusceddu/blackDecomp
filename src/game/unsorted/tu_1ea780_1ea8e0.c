@@ -56,7 +56,25 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EBEB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EBF68);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EBFC0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EC060);
+extern void* D_0040F4D0;
+void func_001EC060(void* self, s128 value, s32 arg2, s32 arg3, f32 delay, f32 duration) {
+    u8* entry = self;
+    u8* end = entry + 0x300;
+    f32 time = M2C_FIELD(D_0040F4D0, f32*, 0x20);
+    do {
+        if (M2C_FIELD(entry, u8*, 0x400) == 0) {
+            f32 start = time + delay;
+            M2C_FIELD(entry, u8*, 0x400) = 1;
+            M2C_FIELD(entry, s128*, 0x3E0) = value;
+            M2C_FIELD(entry, s32*, 0x3F0) = arg2;
+            M2C_FIELD(entry, s32*, 0x3F4) = arg3;
+            M2C_FIELD(entry, f32*, 0x3F8) = start;
+            M2C_FIELD(entry, f32*, 0x3FC) = start + duration;
+            return;
+        }
+        entry += 0x30;
+    } while ((s32)entry < (s32)end);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EC0B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EC158);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EC248);
