@@ -58,7 +58,34 @@ s32 func_001E0E70(void* self) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838_1e09a8", func_001E0E70);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838_1e09a8", func_001E0F28);
+// UNVERIFIED: request type identity; the observed copy covers 16 bytes.
+typedef struct { u32 data[4]; } Recovered_EffectRequest;
+extern void* func_001E1100(Recovered_EffectRequest*, void*, void*);
+extern s32 func_001E0820(void*, Recovered_EffectRequest*, void*, s32);
+s32 func_001E0F28(void* self) {
+    u32 count = M2C_FIELD(self, u32*, 0x2410);
+    u32 i = 0;
+    if (count) {
+        s32 one = 1;
+        u8* entry = (u8*)self + 0xD0;
+        do {
+            if (!M2C_FIELD(entry, u8*, 0x44)) {
+                Recovered_EffectRequest request;
+                Recovered_EffectRequest temporary;
+                s32 result;
+                func_001E1100(&temporary, self, entry);
+                request = temporary;
+                result = func_001E0820(self, &request, entry, one);
+                M2C_FIELD(entry, s32*, 0x40) = result;
+                if (result < 0) M2C_FIELD(entry, u8*, 0x44) = one;
+            }
+            i++;
+            count = i < M2C_FIELD(self, u32*, 0x2410);
+            entry += 0x50;
+        } while (count);
+    }
+    return count;
+}
 extern void func_001E16E0(void*);
 s32 func_001E0FE8(void* self) {
     u8* entry = (u8*)self + 0x14D0;
