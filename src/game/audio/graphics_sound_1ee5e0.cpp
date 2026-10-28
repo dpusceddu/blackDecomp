@@ -573,7 +573,122 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021CC78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D188);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D348);
+#ifdef NON_MATCHING
+#include "apt/apt_pool.hpp"
+// UNVERIFIED: interpreter views, non-native cases and recovered helper interfaces.
+namespace AptInterpreterDraft {
+using namespace AptViews;
+using AptViews::D_003BE8E0;
+using AptViews::D_003BFAE4;
+using AptViews::D_003BFAF8;
+using AptViews::D_0043DEE0;
+using AptViews::D_0043DF40;
+struct AptOperandStack {
+    int count, capacity;
+    Value** values;
+};
+extern "C" {
+extern AptOperandStack D_0043DB68;
+extern unsigned char D_0040A991[];
+void func_00250198(void*, Token*, int);
+float func_0024C410(Value*);
+int func_0024C300(Value*);
+int func_00253358(void*, char, int);
+int func_0035C4B0(const void*, const void*, int);
+void func_0024C6D0(Value*, void*);
+unsigned long func_00364DA8(const char*, char**, int);
+int func_0021ADA8();
+}
+struct NumericText {
+    Token* token;
+    NumericText() : token(&D_003BFAF8) { ++token->refs; }
+    ~NumericText() {
+        if (!--token->refs) func_00250198(D_0043DEE0, token, *(unsigned short*)((char*)token + 4) + 9);
+    }
+    inline const char* Data() const { return token->text; }
+    inline unsigned short Length() const { return *(unsigned short*)((char*)token + 2); }
+};
+static inline int IsAptType(Value* v, unsigned kind) {
+    int result = 0;
+    if (((unsigned)v->flags >> 25) == kind) result = (v->flags >> 4) & 1;
+    return result;
+}
+static inline int IsAptObject(Value* v) {
+    int result = 0;
+    if ((((unsigned)v->flags >> 25) - 12) < 8) result = (v->flags >> 4) & 1;
+    return result;
+}
+static inline int IsAptText(Value* v) {
+    int result = 0;
+    unsigned kind = (unsigned)v->flags >> 25;
+    if (kind == 1 || kind == 42) {
+        if (!(((v->flags >> 4) & 1) ^ 1)) result = 1;
+    }
+    return result;
+}
+static inline unsigned char TextIsNotNumber(Value* v) {
+    NumericText text;
+    func_0024C6D0(v, &text);
+    if (text.Length() == 0) return 1;
+    if (text.Data()[0] == '0') {
+        char* end;
+        if (text.Length() >= 3 && text.Data()[1] == 'x') {
+            func_00364DA8(text.Data(), &end, 16);
+            if (*end == 0) return 0;
+        }
+    }
+    int dot = 0;
+    char last = text.Data()[text.Length() - 1];
+    if (last != '-' && last != '+' && last != 'e' && last != '.' && !(D_0040A991[last] & 4)) return 1;
+    char first = text.Data()[0];
+    if (first != '.' && first != '-' && first != '+' && !(D_0040A991[first] & 4)) return 1;
+    for (int i = 1; i < text.Length(); ++i) {
+        char c = text.Data()[i];
+        if (c == '.' && !dot) {
+            dot = 1;
+            continue;
+        }
+        if (c == 'e' && i != 1) {
+            if (i == 2 && (text.Data()[0] == '+' || text.Data()[0] == '-')) return 1;
+            if (i + 1 < text.Length()) {
+                char n = text.Data()[i + 1];
+                if (n == '-' || n == '+' || (D_0040A991[n] & 4)) {
+                    ++i;
+                    continue;
+                }
+                return 1;
+            }
+            continue;
+        }
+        if (!(D_0040A991[c] & 4)) return 1;
+    }
+    return 0;
+}
+static inline unsigned char AptIsNotNumber(Value* v) {
+    if (((unsigned char)IsAptType(v, 7)) || ((unsigned char)IsAptType(v, 6))) return 0;
+    if (((unsigned char)IsAptText(v))) return TextIsNotNumber(v);
+    if ((((v->flags >> 4) & 1) ^ 1) || (((unsigned)v->flags >> 25) == 3)) return func_0021ADA8() == 7;
+    return 1;
+}
+static inline PooledValue* AptBooleanValue(Value* v) {
+    if (((unsigned char)IsAptType(v, 5))) return Boolean(*(unsigned char*)((char*)v + 8));
+    if (((unsigned char)IsAptType(v, 6)) || ((unsigned char)IsAptType(v, 7))) return Boolean(func_0024C410(v) != 0.0f);
+    return Boolean(0);
+}
+// Unmatched: pooled Boolean paths and numeric-text cleanup are laid out differently.
+extern "C" Value* func_0021D4E0(void* unused, int present) {
+    if (!present) return (Value*)D_0043DF40;
+    Value* v = D_0043DB68.values[D_0043DB68.count - 1];
+    if (((unsigned char)IsAptObject(v)) || ((unsigned char)IsAptType(v, 27))) return (Value*)Boolean(1);
+    if (v == (Value*)D_0043DF40) return (Value*)Boolean(0);
+    if (((unsigned char)IsAptType(v, 6)) || ((unsigned char)IsAptType(v, 7))) return (Value*)AptBooleanValue(v);
+    if (AptIsNotNumber(v)) return (Value*)Boolean(0);
+    return (Value*)Boolean(func_0024C410(v) != 0.0f);
+}
+} // namespace AptInterpreterDraft
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D4E0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00224270);
 // UNVERIFIED: original identities and callback semantics.
 struct Recovered_ResetVtable { u8 unknown[0x10]; s16 adjustment; u16 unknown12; void (*reset)(void*); };
@@ -601,7 +716,124 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00226060);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002263A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00226BB0);
+#ifdef NON_MATCHING
+namespace AptInterpreterDraft {
+static inline unsigned char AptNumber(Value* v) {
+    return (unsigned char)IsAptType(v, 7) || (unsigned char)IsAptType(v, 6);
+}
+static inline unsigned char AptScalar(Value* v) {
+    return AptNumber(v) || (unsigned char)IsAptType(v, 5) || (unsigned char)IsAptText(v);
+}
+static inline Token* AptTextToken(Value* v) {
+    Value* base = v;
+    if (((unsigned)v->flags >> 25) != 1) base = *(Value**)((char*)v + 0x20);
+    return *(Token**)((char*)base + 8);
+}
+static inline unsigned char AptSameTokens(Token* a, Token* b) {
+    unsigned char result = 0;
+    int length = *(unsigned short*)((char*)a + 2);
+    if (length == *(unsigned short*)((char*)b + 2) && (a == b || func_0035C4B0(a->text, b->text, length) == 0))
+        result = 1;
+    return result;
+}
+static inline unsigned char AptFloating(Value* v) {
+    unsigned char result = 0;
+    if ((unsigned char)IsAptText(v) || (unsigned char)IsAptType(v, 6)) {
+        if ((unsigned char)IsAptType(v, 6))
+            result = 1;
+        else {
+            Value* base = v;
+            if (((unsigned)v->flags >> 25) != 1) base = *(Value**)((char*)v + 0x20);
+            if (func_00253358((char*)base + 8, '.', 0) != -1) result = 1;
+        }
+    }
+    return result;
+}
+static inline void AptPopTwo(AptOperandStack* stack) {
+    if (stack->count >= 2) {
+        int i = 1;
+        do {
+            stack->values[stack->count - i]->Release();
+            ++i;
+        } while (i <= 2);
+        stack->count -= 2;
+    }
+}
+static inline void AptPushBoolean(AptOperandStack* stack, unsigned char result) {
+    Value* value = (Value*)Boolean(result);
+    int count = stack->count;
+    stack->values[count] = value;
+    stack->count = count + 1;
+    value->AddRef();
+}
+// Unmatched: numeric conversion lifetimes, reference cleanup and register allocation differ.
+extern "C" void func_00227830(AptOperandStack* stack) {
+    int result = 0;
+    Value* right = stack->values[stack->count - 1];
+    Value* left = stack->values[stack->count - 2];
+    if (((unsigned)right->flags >> 25) == 19) right = (Value*)D_0043DF40;
+    if (((unsigned)left->flags >> 25) == 19) left = (Value*)D_0043DF40;
+    if (func_0021ADA8() == 7) {
+        int missing = ((right->flags >> 4) & 1) ^ 1;
+        if (!((left->flags >> 4) & 1)) ++missing;
+        if (missing > 0) {
+            AptPopTwo(stack);
+            AptPushBoolean(stack, missing == 2);
+            return;
+        }
+    }
+    if ((AptScalar(right) && AptScalar(left)) || ((unsigned)right->flags >> 25) == ((unsigned)left->flags >> 25)) {
+        if (((right->flags >> 4) & 1) ^ 1)
+            result = 1;
+        else if ((unsigned char)IsAptType(right, 7) && (unsigned char)IsAptType(left, 7)) {
+            int rightInteger = func_0024C300(right);
+            result = rightInteger == func_0024C300(left);
+        } else if ((unsigned char)IsAptType(right, 6) && (unsigned char)IsAptType(left, 6)) {
+            float rightReal = func_0024C410(right);
+            result = rightReal == func_0024C410(left);
+        } else if ((unsigned char)IsAptText(right) && (unsigned char)IsAptText(left)) {
+            Token* l = AptTextToken(left);
+            Token* r = AptTextToken(right);
+            if (AptSameTokens(l, r)) result = 1;
+        } else if ((AptNumber(right) && !AptIsNotNumber(left)) || (AptNumber(left) && !AptIsNotNumber(right))) {
+            int rightFloat = AptFloating(right);
+            int leftFloat = AptFloating(left);
+            if ((unsigned char)IsAptType(right, 7)) {
+                int rightInteger = func_0024C300(right);
+                if (leftFloat)
+                    result = fabsf((float)rightInteger - func_0024C410(left)) < 0.001f;
+                else
+                    result = func_0024C300(left) == rightInteger;
+            } else if ((unsigned char)IsAptType(left, 7)) {
+                int leftInteger = func_0024C300(left);
+                if (rightFloat)
+                    result = fabsf(func_0024C410(right) - (float)leftInteger) < 0.001f;
+                else
+                    result = func_0024C300(right) == leftInteger;
+            } else {
+                float rightReal = func_0024C410(right);
+                result = fabsf(rightReal - func_0024C410(left)) < 0.001f;
+            }
+        } else if ((unsigned char)IsAptText(right) && !(unsigned char)IsAptType(left, 5)) {
+            NumericText r, l;
+            func_0024C6D0(right, &r);
+            func_0024C6D0(left, &l);
+            result = AptSameTokens(r.token, l.token);
+        } else if ((unsigned char)IsAptType(right, 5) && !(unsigned char)IsAptText(left)) {
+            int rightInteger = func_0024C300(right);
+            result = rightInteger == func_0024C300(left);
+        } else
+            result = right == left;
+    } else if (((right->flags >> 4) & 1) ^ 1) {
+        if (!((left->flags >> 4) & 1)) result = 1;
+    }
+    AptPopTwo(stack);
+    AptPushBoolean(stack, result != 0);
+}
+} // namespace AptInterpreterDraft
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00227830);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00228BC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229370);
 // UNVERIFIED: original types and callback semantics.
@@ -633,7 +865,195 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229BB0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229F40);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022A1C0);
+#ifdef NON_MATCHING
+namespace AptInterpreterDraft {
+struct AptCallState {
+    AptOperandStack stack, frames, unused18, scopes;
+    unsigned unknown30, unknown34;
+    Value** lookup;
+};
+struct AptCallContext {
+    unsigned unknown00;
+    Value* receiver;
+    unsigned unknown08[2];
+    Value* constructor;
+};
+extern "C" {
+void func_00253FF0(void*, const char*);
+int func_00360838(const char*, const char*);
+Value* LookupCallProperty(void*, Value*, int, void*, int, int, int) __asm__("func_0021E420");
+int func_0024F440(Value*);
+void func_0021EA58(void*, Value*, Value*, int);
+extern Value* D_0043DF48;
+extern char D_003FD498, D_003FD4B0, D_003FD4B8, D_003FD4C0;
+}
+struct CallText {
+    Token* token;
+    CallText() : token(&D_003BFAF8) { ++token->refs; }
+    CallText(const char* text) { func_00253FF0(this, text); }
+    CallText& operator=(const CallText& other) {
+        ++other.token->refs;
+        if (!--token->refs) func_00250198(D_0043DEE0, token, *(unsigned short*)((char*)token + 4) + 9);
+        token = other.token;
+        return *this;
+    }
+    ~CallText() {
+        if (!--token->refs) func_00250198(D_0043DEE0, token, *(unsigned short*)((char*)token + 4) + 9);
+    }
+    inline const char* Data() const { return token->text; }
+    inline int Equals(const char* text) const { return func_00360838(Data(), text) == 0; }
+};
+static inline void PushValue(AptOperandStack* stack, Value* value) {
+    int count = stack->count;
+    stack->values[count] = value;
+    stack->count = count + 1;
+    value->AddRef();
+}
+static inline void PopValue(AptOperandStack* stack) {
+    if (stack->count > 0) {
+        stack->values[stack->count - 1]->Release();
+        --stack->count;
+    }
+}
+// Unmatched: string temporaries, stack spills and call-path scheduling differ.
+extern "C" void func_0022A440(void* rawSelf, void* rawContext) {
+    AptCallState* self = (AptCallState*)rawSelf;
+    AptCallContext* context = (AptCallContext*)rawContext;
+    Value* receiver = 0;
+    int framePushed = 0;
+    int count = self->stack.count;
+    Value* countValue = self->stack.values[count - 3];
+    Value* target = self->stack.values[count - 2];
+    Value* nameValue = self->stack.values[count - 1];
+    Value* callee = target;
+    int argc = func_0024C300(countValue);
+    CallText name;
+    if (nameValue == (Value*)D_0043DF40) {
+        name = CallText(&D_003FD498);
+        receiver = target;
+        if ((unsigned char)IsAptType(target, 28)) receiver = *(Value**)((char*)target + 0x1C);
+    } else
+        func_0024C6D0(nameValue, &name);
+    if (((target->flags >> 4) & 1) ^ 1) {
+        int number = argc + 3;
+        if (self->stack.count >= number) {
+            for (int i = 1; i <= number; ++i) self->stack.values[self->stack.count - i]->Release();
+            self->stack.count -= number;
+        }
+        int index = self->stack.count;
+        self->stack.values[index] = (Value*)D_0043DF40;
+        self->stack.count = index + 1;
+        return;
+    }
+    PushValue(&self->scopes, context->receiver);
+    PopValue(&self->stack);
+    if (self->stack.count > 0) --self->stack.count;
+    if (self->stack.count > 0) --self->stack.count;
+    if (!receiver || receiver == (Value*)D_0043DF40) receiver = LookupCallProperty(self, target, 0, &name, 1, 1, 0);
+    if ((!receiver || (((receiver->flags >> 4) & 1) ^ 1)) && (name.Equals("apply") || name.Equals("call"))) {
+        receiver = target;
+        if (!(unsigned char)IsAptType(countValue, 7) && !(unsigned char)IsAptType(countValue, 6)) {
+            callee = countValue;
+            argc = func_0024C300(self->stack.values[self->stack.count - 1]);
+            if (argc >= 2) {
+                Value* value = self->stack.values[self->stack.count - 2];
+                if (value) callee = ((value->flags >> 4) & 1) ? value : countValue;
+                PopValue(&self->stack);
+                --argc;
+            }
+            PopValue(&self->stack);
+        } else {
+            if (argc > 0) {
+                Value* value = self->stack.values[self->stack.count - 1];
+                callee = value && ((value->flags >> 4) & 1) ? value : (Value*)D_0043DF40;
+                PopValue(&self->stack);
+                --argc;
+            } else
+                callee = (Value*)D_0043DF40;
+        }
+        if (name.Equals("apply")) {
+            Value* array = self->stack.values[self->stack.count - 1];
+            if ((unsigned char)IsAptType(array, 22)) {
+                PopValue(&self->stack);
+                int i = *(int*)((char*)array + 0x28) - 1;
+                argc += i;
+                for (; i >= 0; --i) PushValue(&self->stack, (*(Value***)((char*)array + 0x20))[i]);
+            }
+        }
+    }
+    int allow = 1;
+    if (callee->Slot5()) {
+        Value* frameValue = callee;
+        if (self->frames.count == 0) {
+            if (callee == context->constructor) {
+                CallText key(&D_003FD4B0);
+                frameValue = LookupCallProperty(self, context->receiver, 0, &key, 1, 1, 0);
+            }
+        } else {
+            Value* current = self->frames.values[self->frames.count - 1];
+            if ((!(unsigned char)IsAptObject(callee) || *(Value**)((char*)callee + 0x44) != current) &&
+                callee != current) {
+                void* prototype = current->Payload();
+                while (prototype) {
+                    current = *(Value**)((char*)prototype + 8);
+                    if (!current) break;
+                    if (current == callee) {
+                        allow = 0;
+                        break;
+                    }
+                    prototype = current->Payload();
+                }
+            }
+        }
+        if (allow == 1) {
+            framePushed = 1;
+            if ((unsigned char)IsAptType(frameValue, 27)) *(unsigned*)((char*)frameValue + 0x1C) |= 0x200;
+            PushValue(&self->frames, frameValue);
+        }
+    }
+    int retained = 0;
+    if ((((unsigned)callee->flags >> 6) & 0xFFF) == 1) {
+        retained = 1;
+        callee->AddRef();
+    }
+    if (func_0024F440(callee)) {
+        if (callee == D_0043DF48) callee = self->scopes.values[self->scopes.count - 2];
+        if (callee == context->constructor) {
+            int special = 0;
+            if ((((unsigned)receiver->flags >> 25) - 43) < 3) special = (receiver->flags >> 4) & 1;
+            if (special & 0xFF) {
+                Value* saved = *(Value**)((char*)receiver + 0x20);
+                *(Value**)((char*)receiver + 0x20) = context->receiver;
+                func_0021EA58(self, callee, receiver, argc);
+                *(Value**)((char*)receiver + 0x20) = saved;
+            } else
+                func_0021EA58(self, callee, receiver, argc);
+        } else
+            func_0021EA58(self, callee, receiver, argc);
+    } else
+        func_0021EA58(self, callee, receiver, argc);
+    if (framePushed == 1) {
+        Value* frame = self->frames.values[self->frames.count - 1];
+        if ((unsigned char)IsAptType(frame, 27)) *(unsigned*)((char*)frame + 0x1C) &= ~0x200;
+        self->frames.values[self->frames.count - 1]->Release();
+        --self->frames.count;
+    }
+    if (retained) callee->Release();
+    if (self->stack.values[self->stack.count - 1] != (Value*)D_0043DF40) {
+        if ((unsigned char)IsAptType(callee, 22)) {
+            if (name.Equals(&D_003FD4B8) || name.Equals(&D_003FD4C0))
+                self->stack.values[self->stack.count - 1]->Release();
+        }
+    }
+    self->scopes.values[self->scopes.count - 1]->Release();
+    --self->scopes.count;
+    target->Release();
+    countValue->Release();
+}
+} // namespace AptInterpreterDraft
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022A440);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022AE88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022B0A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022B290);
