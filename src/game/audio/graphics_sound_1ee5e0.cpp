@@ -808,8 +808,24 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CF58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027CF78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D020);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D098);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D0D8);
+
+// UNVERIFIED: original types and callback semantics.
+struct Recovered_CommandVtable {
+    u8 unknown[8];
+    s16 adjustment;
+    u16 unknown0A;
+    void (*dispatch)(void*, int, int, int, int);
+};
+struct Recovered_CommandTarget { u8 unknown[12]; Recovered_CommandVtable* vtable; };
+struct Recovered_CommandSender { Recovered_CommandTarget* target; int value; };
+extern "C" void func_0027D098(Recovered_CommandSender* self) {
+    Recovered_CommandTarget* target = self->target;
+    if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 4, self->value, 0, 0);
+}
+extern "C" void func_0027D0D8(Recovered_CommandSender* self, int a, int b) {
+    Recovered_CommandTarget* target = self->target;
+    if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 5, self->value, a, b);
+}
 // UNVERIFIED: original table identity and unused fields.
 struct Recovered_OffsetEntry { s64 key; s32 offset; s32 unknown; };
 struct Recovered_OffsetTable { u8 unknown[8]; Recovered_OffsetEntry* entries; };
@@ -821,8 +837,14 @@ extern "C" void* func_0027D118(Recovered_OffsetTable* self, s64 key) {
     }
     return 0;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D158);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027D198);
+extern "C" void func_0027D158(Recovered_CommandSender* self, int a, int b) {
+    Recovered_CommandTarget* target = self->target;
+    if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 2, self->value, a, b);
+}
+extern "C" void func_0027D198(Recovered_CommandSender* self, int a, int b) {
+    Recovered_CommandTarget* target = self->target;
+    if (target) target->vtable->dispatch((char*)target + target->vtable->adjustment, 3, self->value, a, b);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0027FBD8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00280360);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00280400);
