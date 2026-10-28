@@ -597,7 +597,12 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 // UNVERIFIED: original types and callback semantics.
 struct Recovered_StackVtable { u8 unknown[8]; s16 adjustment; u16 unknown0A; void (*invoke)(void*); };
 struct Recovered_StackObject { int unknown; Recovered_StackVtable* vtable; };
-struct Recovered_ObjectStack { int count, unknown; Recovered_StackObject** objects; };
+struct Recovered_ObjectStack {
+    int count, unknown;
+    Recovered_StackObject** objects;
+    u8 unknown0C[0x2C];
+    Recovered_StackObject** lookup;
+};
 extern "C" void func_00229700(Recovered_ObjectStack* self) {
     int index = self->count;
     Recovered_StackObject* object = self->objects[index - 1];
@@ -657,10 +662,24 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E120);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E1A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E210);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E288);
+extern "C" Recovered_StackObject* D_003BFABC;
+extern "C" void func_0022E288(Recovered_ObjectStack* self) {
+    int index = self->count;
+    Recovered_StackObject* object = D_003BFABC;
+    self->objects[index] = object;
+    self->count = index + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E2D8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E3E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E590);
+extern "C" void func_0022E590(Recovered_ObjectStack* self, u8** cursor) {
+    u8 index = *(*cursor)++;
+    int count = self->count;
+    Recovered_StackObject* object = self->lookup[index];
+    self->objects[count] = object;
+    self->count = count + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E5F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E670);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E798);
