@@ -709,7 +709,22 @@ extern "C" void func_0022E1A8(void** self, void* arg) {
     func_00223678(self, arg);
     if (AptViews::D_003BE8E0->count != 0 && *self == 0) func_00252B10(AptViews::D_003BE8E0);
 }
+// UNVERIFIED: source descriptor and constructor parameter meanings.
+struct Recovered_StackInput { int unknown; void* data; int size; };
+extern "C" char D_0043DC18[];
+extern "C" Recovered_StackObject* func_0021E420(Recovered_ObjectStack*, void*, int, void*, int, int, int);
+#ifdef NON_MATCHING
+// Unmatched: global address and offset are folded into one relocation.
+extern "C" void func_0022E210(Recovered_ObjectStack* self, Recovered_StackInput* input) {
+    Recovered_StackObject* object = func_0021E420(self, input->data, input->size, D_0043DC18 + 0x290, 1, 1, 0);
+    int index = self->count;
+    self->objects[index] = object;
+    self->count = index + 1;
+    object->vtable->invoke((char*)object + object->vtable->adjustment);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022E210);
+#endif
 extern "C" Recovered_StackObject* D_003BFABC;
 extern "C" void func_0022E288(Recovered_ObjectStack* self) {
     int index = self->count;
@@ -831,7 +846,27 @@ extern "C" void func_00271368(int priority) {
     int thread = func_00367750();
     func_003676F0(thread, priority + 1);
 }
+// UNVERIFIED: original thread descriptor identity and untouched fields.
+struct Recovered_ThreadDescriptor { int unknown; void* entry; void* stack; int stackSize; void* gp; int priority; };
+extern "C" char D_004157F0[];
+extern "C" int func_00367660(Recovered_ThreadDescriptor*);
+extern "C" void func_00368738(int, void*);
+#ifdef NON_MATCHING
+// Unmatched: stack frame size and instruction scheduling differ.
+extern "C" int func_00271398(void* entry, void* arg, void* stack, int stackSize, int priority) {
+    Recovered_ThreadDescriptor desc;
+    desc.entry = entry;
+    desc.stack = stack;
+    desc.stackSize = stackSize;
+    desc.gp = D_004157F0;
+    desc.priority = priority + 1;
+    int thread = func_00367660(&desc);
+    func_00368738(thread, arg);
+    return thread;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271398);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271400);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271408);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00271478);
