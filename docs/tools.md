@@ -51,6 +51,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 
 | Tool | Purpose |
 | --- | --- |
+| `tools/preparation_lock.py` | Serialize expensive preparation across worktrees of the same Git repository. |
 | `tools/build/check_graph.py` | Check unique producers, direct generated-input dependencies and recovery of every generated file. |
 | `tools/build/graph_io.py` | Record generator files or enforce a Ninja edge's declared generated-file reads and writes. |
 | `tools/build/ninja_graph.py` | Construct Ninja edges and their generated-file I/O contracts from the same dependency lists. |
