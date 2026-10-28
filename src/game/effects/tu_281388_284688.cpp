@@ -529,7 +529,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299D90);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_00299EA8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B1D0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B500);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B558);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B7F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0029B868);
@@ -545,7 +544,28 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7930);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7B18);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7BB0);
+#ifdef NON_MATCHING
+// Unmatched: floating-point register allocation and instruction scheduling differ.
+struct EffectVector3 {
+    float x, y, z;
+};
+struct EffectMatrixRows {
+    float row[3][4];
+};
+extern "C" EffectVector3* func_002A7D50(EffectVector3* out, const EffectVector3* v, const EffectMatrixRows* m) {
+    float x = v->x, y = v->y, z = v->z;
+    float ax = x * m->row[0][0], ay = x * m->row[0][1], az = x * m->row[0][2];
+    float bx = y * m->row[1][0], by = y * m->row[1][1], bz = y * m->row[1][2];
+    float cx = z * m->row[2][0], cy = z * m->row[2][1], cz = z * m->row[2][2];
+    float rx = cx + (ax + bx), ry = cy + (ay + by), rz = cz + (az + bz);
+    out->x = rx;
+    out->y = ry;
+    out->z = rz;
+    return out;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7D50);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A7DD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A8688);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002A8860);
@@ -601,5 +621,19 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002CDEA0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002CDF70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002CE010);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002CE0B8);
+// Partial global state view; its class and unobserved fields are UNVERIFIED.
+struct EffectGlobalState {
+    int flag;
+    char unknown04[20];
+    int state;
+};
+extern EffectGlobalState D_003C4080;
+
+extern "C" int func_002CE0B8(unsigned value) {
+    if (D_003C4080.state == -1) {
+        D_003C4080.flag = value < 1;
+        return 1;
+    }
+    return 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002CE0E8);
