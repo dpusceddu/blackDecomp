@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "game/aligned_buffer.h"
+#include "game/stream_control.h"
 #include "ps2/prelude.h"
 #include "ps2/prototypes.h"
 
@@ -8,88 +9,79 @@ extern s32 func_0028F718(s32);
 extern s32 func_0028FA60(s32);
 extern void func_0028F3B0(void *, s32);
 extern void func_0028F408(void *);
-extern void func_0028F2C0(void *, u32 *, s32 *, u32 *, u32 *);
-
-typedef struct {
-    u8 unk_00[0x18];
-    s16 beginAdjustment;
-    u16 unk_1A;
-    s32 (*begin)(void *, u32, s32);
-    u8 unk_20[8];
-    s16 resetAdjustment;
-    u16 unk_2A;
-    s32 (*reset)(void *, s32, s32);
-    u8 unk_30[0x10];
-    s16 readyAdjustment;
-    u16 unk_42;
-    s32 (*ready)(void *);
-} Recovered_StreamDeviceVtable;
-
-typedef struct {
-    u8 unk_00[0x28];
-    Recovered_StreamDeviceVtable *vtable;
-} Recovered_StreamDevice;
-
-typedef struct {
-    u8 unk_00[0x43];
-    u8 unk_43;
-    u8 active;
-    u8 unk_45;
-    u8 unk_46[0x1E];
-    Recovered_StreamDevice *device;
-    s32 pending;
-    u8 unk_6C[0x4C];
-    u8 stream[1];
-} Recovered_StreamControl; /* Field roles UNVERIFIED. */
 
 extern void func_002719D0(Recovered_StreamControl *, s32);
 
-void func_00271650(void *arg0)
-{
-  void *new_var;
-  M2C_FIELD(arg0, s32 *, 0) = 0;
-  new_var = arg0;
-  if (new_var && new_var)
-  {
-  }
-  M2C_FIELD(new_var, s32 *, 4) = -1;
-  M2C_FIELD(new_var, s32 *, 8) = -1;
+#ifdef NON_MATCHING
+#include "ps2/ee_types.h"
+extern EeU128* D_0040E5F0;
+extern void func_002B3D88(s32, s32);
+
+/* Native 64-bit pair transport, as used by the other packet builders. */
+static inline EeU128 PackStreamPacket(u64 high, u64 low) {
+    EeU128 packet;
+    __asm__("pcpyld pv, hv, lv" : "=r pv"(packet) : "r hv"(high), "r lv"(low));
+    return packet;
+}
+#endif
+
+void func_00271650(Recovered_StreamRecord* self) {
+    self->buffer = 0;
+    self->unk_04 = -1;
+    self->unk_08 = -1;
 }
 
-void * func_00271668(void *arg0, void *arg1, void *arg2, void *arg3, void *arg4) {
-    s32 temp_3;
-    s32 temp_7;
+s32 func_00271668(Recovered_StreamRecord* self, Recovered_AlignedBuffer* allocator, s32 width, s32 height, s32 value) {
+    s32 columns = width / 4;
+    s32 rows = height / 4;
+    self->unk_14 = value;
+    self->unk_0C = width;
+    self->unk_10 = height;
+    self->unk_04 = columns;
+    self->unk_08 = rows;
+    if (width != columns * 4) self->unk_04 = columns + 1;
+    if (height != rows * 4) self->unk_08 += 1;
+    self->buffer = AlignedBuffer_Allocate(allocator, (u32)(self->unk_0C * self->unk_10) << 10);
+    return 1;
+}
 
-    temp_7 = (s32) (((s32) arg2 > -1) ? arg2 : (arg2 + 3)) >> 2;
-    temp_3 = (s32) (((s32) arg3 > -1) ? arg3 : (arg3 + 3)) >> 2;
-    M2C_FIELD(arg0, void **, 0x14) = arg4;
-    M2C_FIELD(arg0, void **, 0xC) = arg2;
-    M2C_FIELD(arg0, void **, 0x10) = arg3;
-    M2C_FIELD(arg0, s32 *, 4) = temp_7;
-    M2C_FIELD(arg0, s32 *, 8) = temp_3;
-    if (arg2 != (temp_7 * 4)) {
-        M2C_FIELD(arg0, s32 *, 4) = (s32) (temp_7 + 1);
+void func_00271710(Recovered_StreamRecord* self) {
+    self->buffer = 0;
+    self->unk_04 = -1;
+    self->unk_08 = -1;
+}
+
+#ifdef NON_MATCHING
+// Unmatched: quadword commoning and packet-cursor register lifetimes differ.
+void func_00271728(Recovered_StreamRecord* self, s32 row, s32 column) {
+    u8* source = (u8*)self->buffer + (((row << 2) * self->unk_10) << 10) + (column << 12);
+    EeU128* packet;
+    s32 i;
+    func_002B3D88(0, 0x20);
+    packet = D_0040E5F0;
+    *packet++ = PackStreamPacket((((u64)0xA000 << 28) | 0x8000) << 19, 0x10000004);
+    *packet++ = PackStreamPacket(14, ((u64)0x8000 << 45) | 0x8003);
+    *packet++ = PackStreamPacket(0x50, ((u64)self->unk_14 << 32) | ((u64)0x8000 << 33));
+    *packet++ = PackStreamPacket(0x52, ((u64)0x8000 << 23) | 0x10);
+    *packet++ = PackStreamPacket(6, (u64)self->unk_14 | 0x18004000 | ((u64)0xC000 << 17));
+    for (i = 0; i < 4; ++i) {
+        *packet++ = PackStreamPacket((((u64)0xA000 << 28) | 0x8000) << 19, 0x10000004);
+        *packet++ = PackStreamPacket(14, ((u64)0x8000 << 45) | 0x8002);
+        *packet++ = PackStreamPacket(0x51, (u64)(i << 4) << 32);
+        *packet++ = PackStreamPacket(0x53, 0);
+        *packet++ = PackStreamPacket(0, ((u64)0x8000 << 44) | 0x100 | (i == 3 ? 0x8000 : 0));
+        *packet++ = PackStreamPacket((((u64)0xA000 << 22) | 0x8000) << 25,
+                                   ((u64)(u32)source << 32) | 0x30000100);
+        source += self->unk_10 << 10;
     }
-    if (arg3 != (temp_3 * 4)) {
-        M2C_FIELD(arg0, s32 *, 8) = (s32) (M2C_FIELD(arg0, s32 *, 8) + 1);
-    }
-    M2C_FIELD(arg0, void **, 0) = AlignedBuffer_Allocate(arg1, (u32) (((s32) M2C_FIELD(arg0, void **, 0xC) * (s32) M2C_FIELD(arg0, void **, 0x10)) << 0xA));
-    return (void *)1;
+    *packet++ = PackStreamPacket((((u64)0xA000 << 29) | 0x8000) << 18, 0x10000002);
+    *packet++ = PackStreamPacket(14, ((u64)0x8000 << 45) | 0x8001);
+    *packet++ = PackStreamPacket(0x3F, 0);
+    D_0040E5F0 = packet;
 }
-
-void func_00271710(void *arg0)
-{
-  void *new_var;
-  M2C_FIELD(arg0, s32 *, 0) = 0;
-  new_var = arg0;
-  if (new_var && new_var)
-  {
-  }
-  M2C_FIELD(new_var, s32 *, 4) = -1;
-  M2C_FIELD(new_var, s32 *, 8) = -1;
-}
-
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_271650", func_00271728);
+#endif
 
 s32 func_00271968(s32 arg0, s32 arg1, s32 arg2) {
     func_0028F618(arg2 + 0xB8);
@@ -104,40 +96,6 @@ s32 func_00271988(s32 arg0, s32 arg1, s32 arg2) {
 s32 func_002719A8(s32 arg0) {
     return func_0028FA60(arg0 + 0xB8) <= 0xFFFF;
 }
-
-#ifdef NON_MATCHING
-// Unmatched: device-call register selection and buffer scheduling differ.
-void func_002719D0(Recovered_StreamControl *self, s32 amount) {
-    u32 start, next, unused;
-    Recovered_StreamDevice *device;
-    Recovered_StreamDeviceVtable *vtable;
-    s32 ready;
-    s32 length;
-    if (self->pending != 0) return;
-    device = self->device;
-    vtable = device->vtable;
-    ready = vtable->ready((u8 *)device + vtable->readyAdjustment);
-    if (ready != 1 || self->active == 1) return;
-    func_0028F2C0(self->stream, &start, &length, &next, &unused);
-    start = (start & 0x0FFFFFFF) | 0x20000000;
-    next = (next & 0x0FFFFFFF) | 0x20000000;
-    amount <<= 16;
-    if (length >= amount) {
-        device = self->device;
-        vtable = device->vtable;
-        if (vtable->begin((u8 *)device + vtable->beginAdjustment, start, amount) <= 0) {
-            self->active = ready;
-            if (self->unk_43 != 0) {
-                device = self->device;
-                vtable = device->vtable;
-                vtable->reset((u8 *)device + vtable->resetAdjustment, 0, 0);
-            }
-        }
-        self->pending = amount;
-    }
-}
-#endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_271650", func_002719D0);
 
 void func_00271AF0(Recovered_StreamControl *self) {
     if (self->pending > 0) {
