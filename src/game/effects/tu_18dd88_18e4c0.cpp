@@ -191,5 +191,24 @@ extern "C" void func_00190CB8(Recovered_EffectEvent* self) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00190D30);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_00193608);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001936C0);
+typedef int EffectVector128 __attribute__((mode(TI)));
+// UNVERIFIED: original type and untouched fields.
+struct Recovered_EffectTarget { unsigned char unknown00[0x10]; EffectVector128 target; unsigned char unknown20[0x10]; unsigned state; };
+extern "C" unsigned char func_001936C0(Recovered_EffectTarget* self, EffectVector128 target) {
+    switch (self->state) {
+    case 1:
+    case 4:
+    case 5:
+    case 7:
+        self->target = target;
+        return 1;
+    case 0:
+    case 2:
+    case 3:
+    case 6:
+    case 8:
+    default:
+        return 0;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001938C0);
