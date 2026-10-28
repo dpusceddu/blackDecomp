@@ -62,11 +62,12 @@ void func_00287120(Recovered_RelocationTable *table) {
     }
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287218);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287600);
-
-void func_00287618(void) {
-    func_00287600();
+void reloc_embedded(void* address) {
+    u32* offset = (u32*)address;
+    if (*offset) *offset += (u32)address;
 }
+
+void func_00287618(void) { func_00287600(); }
 
 void func_00287638(void) {
     func_00287618();
@@ -130,40 +131,55 @@ void func_00287800(Recovered_RelocatableObject *object) {
     func_00287698(object);
 }
 
-void func_00287820(Recovered_RelocatableObject *object) {
-    func_00287698(object);
+void func_00287820(Recovered_RelocatableObject* object) { func_00287698(object); }
+
+// Partial relocation view; the pointed-to data is UNVERIFIED.
+typedef struct {
+    u32 offset00, unknown04, offset08;
+} Recovered_RelocationPair;
+
+void func_00287840(Recovered_RelocationPair* self) {
+    reloc_embedded(self);
+    if (self->offset08) self->offset08 += (u32)self;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287840);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287878);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_002878B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_002878E8);
-
-void func_00287920(void) {
-    func_00287600();
+void func_00287878(Recovered_RelocationPair* self) {
+    reloc_embedded(self);
+    if (self->offset08) self->offset08 += (u32)self;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287940);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_287120", func_00287978);
-void func_002879B0(Recovered_RelocatableObject *object) {
+void func_002878B0(Recovered_RelocationPair* self) {
+    reloc_embedded(self);
+    if (self->offset08) self->offset08 += (u32)self;
+}
+
+void func_002878E8(Recovered_RelocationPair* self) {
+    reloc_embedded(self);
+    if (self->offset08) self->offset08 += (u32)self;
+}
+
+void func_00287920(void) { func_00287600(); }
+
+void func_00287940(Recovered_RelocationPair* self) {
+    reloc_embedded(self);
+    if (self->offset08) self->offset08 += (u32)self;
+}
+
+void func_00287978(Recovered_RelocationPair* self) {
+    reloc_embedded(self);
+    if (self->offset08) self->offset08 += (u32)self;
+}
+void func_002879B0(Recovered_RelocatableObject* object) {
     reloc_base_18(object);
-    if (object->unk_90 != 0) {
-        object->unk_90 += (u32)object;
-    }
-    if (object->unk_94 != 0) {
-        object->unk_94 += (u32)object;
-    }
+    if (object->unk_90 != 0) { object->unk_90 += (u32)object; }
+    if (object->unk_94 != 0) { object->unk_94 += (u32)object; }
 }
 
-void func_002879F8(void) {
-    func_00287638();
-}
+void func_002879F8(void) { func_00287638(); }
 
-void func_00287A18(Recovered_RelocatableObject *object) {
+void func_00287A18(Recovered_RelocatableObject* object) {
     reloc_base_38(object);
-    if (object->unk_50 != 0) {
-        object->unk_50 += (u32)object;
-    }
+    if (object->unk_50 != 0) { object->unk_50 += (u32)object; }
     if (object->unk_54 != 0) {
         object->unk_54 += (u32)object;
     }
