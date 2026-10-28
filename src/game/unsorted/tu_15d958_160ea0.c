@@ -143,14 +143,46 @@ s32 func_00161660(ActionInitView* self, u64 id, void* data) {
     self->data = data;
     return 1;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_001616A8);
+// Partial manager views; original type and method names are UNVERIFIED.
+typedef void (*ActionManagerCallback)(void*, s32, s32);
+typedef struct { s16 adjustment, unknown02; ActionManagerCallback callback; } ActionManagerEntry;
+typedef struct { char unknown00[0x40]; ActionManagerEntry action; } ActionManagerTable;
+typedef struct { char unknown00[8]; ActionManagerTable* table; } ActionManagerView;
+typedef struct { char unknown00[0x21070]; ActionManagerView* manager; } ActionSystemView;
+extern ActionSystemView* D_0040F0E0;
+
+void func_001616A8(ActionInitView* self) {
+    if (*(s8*)self->data == 0) {
+        ActionManagerView* manager = D_0040F0E0->manager;
+        manager->table->action.callback((char*)manager + manager->table->action.adjustment, 0, 1);
+    } else {
+        ActionManagerView* manager = D_0040F0E0->manager;
+        manager->table->action.callback((char*)manager + manager->table->action.adjustment, 0, 0);
+    }
+}
 s32 func_00161730(ActionInitView* self, u64 id, void* data) {
     func_00160EA0(self);
     self->id = id;
     self->data = data;
     return 1;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_00161778);
+// Partial action and camera views; field meanings are UNVERIFIED.
+typedef struct { char unknown00[0x94]; s32 value; char unknown98; u8 field99; } ActionCameraData;
+typedef struct { char unknown00[0x1c]; s8 state; char unknown1d[3]; ActionCameraData* data; } ActionCameraView;
+typedef struct { u64 id; } ActionCameraRecord;
+extern ActionCameraRecord** D_0040F4BC;
+extern void* D_0040F4F4;
+extern void func_00168618(void*, s32, s32, s32);
+
+void func_00161778(ActionCameraView* self) {
+    u64 id = 0x6d6123044330fccfUL;
+    ActionCameraRecord* record = *D_0040F4BC;
+    if (record) id = record->id;
+    if (id != 0x594c3cc765b41051UL) {
+        func_00168618(D_0040F4F4, self->data->value, self->data->field99, 0);
+        self->state = 0;
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_15d958_160ea0", func_00161808);
 
 void func_00161920(void) {
