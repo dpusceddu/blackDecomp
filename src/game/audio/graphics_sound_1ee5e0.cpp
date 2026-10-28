@@ -465,7 +465,22 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001F1258);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001FC6C0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001FC820);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001FC9A8);
+extern "C" s128 D_0042C4F0;
+extern "C" char D_0042C7C8, D_0042C770;
+extern "C" void func_002765B0(void*, void*, void*);
+// UNVERIFIED: array bounds and original type are inferred from field offsets.
+struct Recovered_CommandContainer {
+    u8 pad[0xE8];
+    void* records[8];
+    void* values[37];
+    u8 flags[1];
+};
+extern "C" void func_001FC9A8(Recovered_CommandContainer* object, s16 index) {
+    object->flags[index] = 0;
+    *(float*)((char*)object->values[index] + 0xC) = 0.1f;
+    *(s128*)((char*)object->records[index] + 0x10) = D_0042C4F0;
+    func_002765B0(object->records[index], &D_0042C7C8, &D_0042C770);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_001FCA20);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002041F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00204450);
