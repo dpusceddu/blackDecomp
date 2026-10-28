@@ -4,7 +4,24 @@
 extern void * func_0011D498();
 extern s32 func_001A7188();
 
+#ifdef NON_MATCHING
+// Unmatched: Boolean result uses a different register and join.
+extern u8 D_003F4150[];
+extern void* D_0040F4E0;
+extern void* func_0015D210(void*, s32);
+s32 func_0011D358(s32 unused, s32 key, s32 index, f32 value) {
+    s32 result;
+    if (value > 100.0f) return 0;
+    result = 0;
+    if (D_003F4150[index]) {
+            void* row = func_0015D210(D_0040F4E0, (s8)key);
+            { u8 enabled = M2C_FIELD(M2C_FIELD(row, void**, 0xC), u8*, 0x15) != 0; result = enabled; }
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D358);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11d358", func_0011D3C8);
 
 void func_0011D430(void *arg0, s32 arg1) {
