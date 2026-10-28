@@ -132,13 +132,6 @@ Vec MovementCore::AlternateTarget()
     return result;
 }
 
-// Unmatched: 2 instruction differences in helper lifetime, allocation or scheduling.
-float ActionWeight::Score(unsigned char *event)
-{
-    if(*(int *)(event+0x24)==4&&func_00174FB0(value))return 1.0f;
-    return 0.0f;
-}
-
 // Unmatched: policy Update retains 13 instruction differences in completion-branch layout.
 void MovementPolicy::Update()
 {
@@ -165,9 +158,15 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018EBE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018EF70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018F100);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_0018F2A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_18dd88_18e4c0", func_001948A0);
 #endif
+
+extern "C" long func_00174FB0(void*);
+extern "C" float func_0018F2A0(void** self, unsigned char* event) {
+    void* value = *self;
+    if (*(int*)(event + 0x24) == 4 && func_00174FB0(value)) return 1.0f;
+    return 0.0f;
+}
 
 // UNVERIFIED: original type and untouched fields.
 struct Recovered_EffectEvent {
