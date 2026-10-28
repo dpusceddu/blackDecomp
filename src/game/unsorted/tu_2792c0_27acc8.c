@@ -126,7 +126,19 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B880);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027B950);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BA60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BA68);
+extern char* func_0035CBC0(char*, const char*);
+extern char* func_0035C7A4(char*, const char*);
+extern s32 func_0035CCD8(const char*);
+extern char D_0040DE88[];
+extern s32 func_0027C278(char*);
+s32 func_0027BA68(const char* base, const char* path, const char* name) {
+    char buffer[512];
+    func_0035CBC0(buffer, base);
+    func_0035C7A4(buffer, path);
+    if (buffer[func_0035CCD8(buffer) - 1] != '/') func_0035C7A4(buffer, D_0040DE88);
+    func_0035C7A4(buffer, name);
+    return func_0027C278(buffer);
+}
 #ifdef NON_MATCHING
 // Unmatched: loop register allocation differs.
 s32 func_0027BAE8(void* object, s32 key) {
