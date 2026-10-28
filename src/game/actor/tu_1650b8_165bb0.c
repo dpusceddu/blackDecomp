@@ -109,7 +109,126 @@ void func_00167AA8(void* self, void* output, s64 key) {
 
 #undef COLLECT_BINDINGS
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00168618);
+extern void* D_0040F514;
+typedef void (*BindingAction)(void*, s32);
+
+/* The two nullable banks skip empty entries. All other banks require populated
+ * entries. Reload the bank's entry after each matching key before dispatch. */
+#define DISPATCH_BANK(listOffset, countOffset, skipNull)                                                     \
+    if (M2C_FIELD(self, s32*, listOffset)) {                                                                 \
+        for (i = 0; i < M2C_FIELD(self, u16*, countOffset); i++) {                                            \
+            s64* node = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, listOffset), s64**, 0);                        \
+            if (!skipNull || node) {                                                                       \
+                key = *node;                                                                              \
+                if (count > 0) {                                                                          \
+                    const s64* cursor = keys;                                                             \
+                    remaining = count;                                                                    \
+                    do {                                                                                  \
+                        if (key == *cursor) {                                                             \
+                            void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, listOffset), void**, 0);   \
+                            void* vtable = M2C_FIELD(entry, void**, 0x10);                                  \
+                            M2C_FIELD(vtable, BindingAction*, 0x1C)(                                       \
+                                (char*)entry + M2C_FIELD(vtable, s16*, 0x18), mode);                        \
+                        }                                                                                 \
+                        remaining--;                                                                      \
+                        cursor++;                                                                         \
+                    } while (remaining);                                                                  \
+                }                                                                                         \
+            }                                                                                             \
+        }                                                                                                 \
+    }
+
+void func_00168618(void* self, const s64* keys, s32 count, s32 mode) {
+    s32 i, remaining;
+    s64 key;
+    if (count) {
+        DISPATCH_BANK(0x48, 0, 0);
+        DISPATCH_BANK(0x4C, 2, 0);
+        DISPATCH_BANK(0x78, 0x18, 0);
+        DISPATCH_BANK(0x7C, 0x1A, 0);
+        DISPATCH_BANK(0x68, 0x10, 0);
+        DISPATCH_BANK(0x6C, 0x12, 0);
+        DISPATCH_BANK(0x70, 0x14, 0);
+        DISPATCH_BANK(0x74, 0x16, 0);
+        DISPATCH_BANK(0x58, 8, 0);
+        DISPATCH_BANK(0x5C, 0xA, 0);
+        DISPATCH_BANK(0x60, 0xC, 0);
+        DISPATCH_BANK(0x64, 0xE, 0);
+        DISPATCH_BANK(0x50, 4, 0);
+        DISPATCH_BANK(0x54, 6, 0);
+        i = 0;
+        if (M2C_FIELD(D_0040F514, s32*, 0x79A4) > 0) {
+            do {
+                void* entry = M2C_FIELD(i * 4 + M2C_FIELD(D_0040F514, s32*, 0x79AC), void**, 0);
+                if (entry) {
+                    key = M2C_FIELD(entry, s64*, 0);
+                    if (count > 0) {
+                        const s64* cursor = keys;
+                        remaining = count;
+                        do {
+                            if (key == *cursor) {
+                                void* vtable = M2C_FIELD(entry, void**, 0x10);
+                                M2C_FIELD(vtable, BindingAction*, 0x1C)(
+                                    (char*)entry + M2C_FIELD(vtable, s16*, 0x18), mode);
+                            }
+                            remaining--;
+                            cursor++;
+                        } while (remaining);
+                    }
+                }
+                i++;
+            } while (i < M2C_FIELD(D_0040F514, s32*, 0x79A4));
+        }
+        DISPATCH_BANK(0x88, 0x24, 0);
+        DISPATCH_BANK(0x8C, 0x26, 0);
+        DISPATCH_BANK(0x90, 0x28, 0);
+        DISPATCH_BANK(0x94, 0x2A, 0);
+        DISPATCH_BANK(0x98, 0x2C, 0);
+        DISPATCH_BANK(0x9C, 0x2E, 0);
+        DISPATCH_BANK(0xA0, 0x20, 0);
+        DISPATCH_BANK(0xA4, 0x22, 0);
+        DISPATCH_BANK(0xA8, 0x30, 1);
+        DISPATCH_BANK(0xAC, 0x32, 1);
+        DISPATCH_BANK(0xB0, 0x34, 0);
+        DISPATCH_BANK(0xB4, 0x36, 0);
+        DISPATCH_BANK(0xB8, 0x38, 0);
+        DISPATCH_BANK(0xBC, 0x3A, 0);
+        DISPATCH_BANK(0xC0, 0x3C, 0);
+        DISPATCH_BANK(0xC4, 0x3E, 0);
+        {
+            s32 base = (s32)D_0040F4E4;
+            u8* active = (u8*)(base + 0x5804);
+            i = 0;
+            do {
+                if (active[i]) {
+                    key = M2C_FIELD(i * 0x160 + base, s64*, 0);
+                    if (count > 0) {
+                        const s64* cursor;
+                        void* entry;
+                        remaining = count;
+                        cursor = keys;
+                        do {
+                            /* Keep the receiver construction with each key dispatch;
+                             * hoisting it changes the native address lifetimes. */
+                            entry = (void*)(i * 0x160 + base);
+                            if (key == *cursor) {
+                                void* vtable = M2C_FIELD(entry, void**, 0x10);
+                                M2C_FIELD(vtable, BindingAction*, 0x1C)(
+                                    (char*)entry + M2C_FIELD(vtable, s16*, 0x18), mode);
+                            }
+                            remaining--;
+                            cursor++;
+                        } while (remaining);
+                    }
+                }
+                i++;
+            } while (i < 64);
+        }
+    }
+}
+
+#undef DISPATCH_BANK
+
 #ifdef NON_MATCHING
 // Unmatched: setup copies and cursor registers differ (17 instructions under O2).
 void* func_00169898(void* state, s64 key) {
