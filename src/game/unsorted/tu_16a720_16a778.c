@@ -125,7 +125,40 @@ s32 func_0016AD18(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016AD38);
+typedef struct {
+    u8 pad[0x20];
+    void *list;
+    void *filter;
+} LookupContext;
+
+#ifdef NON_MATCHING
+// Unmatched: loop result registers differ.
+s32 func_0016AD40(LookupContext *ctx) {
+    s32 i = 0;
+    s32 result = (s32) ctx->list;
+    if (M2C_FIELD(result, s32 *, 0x64) > 0) {
+        do {
+            void *filter = ctx->filter;
+            s32 j = 0;
+            void *entry = M2C_FIELD(M2C_FIELD(ctx->list, s32 *, 0x24) + i * 4, void **, 0);
+            if (M2C_FIELD(filter, u8 *, 4) != 0) {
+                do {
+                    if (M2C_FIELD(entry, s64 *, 0) == M2C_FIELD(M2C_FIELD(filter, s32 *, 0) + j * 8, s64 *, 0)) {
+                        M2C_FIELD(entry, s8 *, 0x2B) = M2C_FIELD(filter, u8 *, 8) != 0;
+                    }
+                    filter = ctx->filter;
+                    j++;
+                } while (j < M2C_FIELD(filter, u8 *, 4));
+            }
+            i++;
+            result = i < M2C_FIELD(ctx->list, s32 *, 0x64);
+        } while (result != 0);
+    }
+    return result;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016AD40);
+#endif
 
 void func_0016ADE0(void) {
     func_0016B670();
@@ -196,7 +229,26 @@ void func_0016B670(void *arg0) {
     func_001C31F8();
 }
 
+#ifdef NON_MATCHING
+// Unmatched: 128-bit initialization and stack scheduling differ.
+s32 func_0016B690(void *arg0) {
+    switch (M2C_FIELD(arg0, s32 *, 0x48)) {
+    case 1:
+    case 0x37: {
+        s128 zero = 0;
+        M2C_FIELD(arg0, s32 *, 0x48) = 0x1C;
+        M2C_FIELD(arg0, s128 *, 0x30) = zero;
+        M2C_FIELD(arg0, f32 *, 0x40) = 0.1f;
+        M2C_FIELD(arg0, f32 *, 0x44) = 100.0f;
+    }
+    case 0x1C:
+        break;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B690);
+#endif
 
 void func_0016B710(void *arg0) {
     func_001C3228(M2C_FIELD(arg0, f32 *, 0x44));
