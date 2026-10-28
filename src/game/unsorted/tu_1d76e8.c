@@ -92,9 +92,24 @@ s32 StreamBuffer_TryReset(Recovered_StreamBuffer* self) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D7CC0);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D7D40);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D7EC8);
+s32 func_001D7EC8(Recovered_StreamBufferPool* self) {
+    self->unk_2CC = 0;
+    self->unk_2D4 = 2;
+    self->unk_2C8 = 0;
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D7EE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D83D0);
+/* UNVERIFIED: only the record ID of this input is known. */
+typedef struct Recovered_StreamRecordInput {
+    u8 unk_00[0x10];
+    s32 id;
+} Recovered_StreamRecordInput;
+
+void func_001D83D0(Recovered_StreamRecordInput* self, Recovered_StreamBufferPool* pool) {
+    s32 id = self->id;
+    Recovered_StreamRecord* record = StreamBufferPool_FindRecord(pool, id);
+    record->unk_10 = 0;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d76e8", func_001D83F8);
 Recovered_StreamRecord* StreamBufferPool_FindRecord(Recovered_StreamBufferPool* self, s32 id) {
     Recovered_StreamRecord* result = 0;
