@@ -1,7 +1,36 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4650);
+extern s32 func_001E51C8(void*, s32);
+extern void func_001E4D28(void*);
+extern void* func_001E4A78(void*, s32);
+s32 func_001E4650(void* self, void* source, s32 arg2) {
+    s32 state = M2C_FIELD(self, s32*, 0);
+    if (state == 1) goto initialize;
+    if (state < 2) return 1;
+    if (state == 2) goto update;
+    if (state == 3) goto finish;
+    return 1;
+initialize:
+        M2C_FIELD(self, s32*, 0x38) = 0;
+        M2C_FIELD(self, s32*, 0x34) = 0;
+        M2C_FIELD(self, s32*, 0x30) = 0;
+        M2C_FIELD(self, s32*, 0x2C) = 0;
+        M2C_FIELD(self, s32*, 0x40) = 0;
+        M2C_FIELD(self, s32*, 0x28) = 0;
+        M2C_FIELD(self, s32*, 4) = 0;
+        M2C_FIELD(self, void**, 0x44) = source;
+        M2C_FIELD(self, s32*, 0x4C) = M2C_FIELD(source, s32*, 0x4C);
+        M2C_FIELD(self, s32*, 0x48) = func_001E51C8(source, arg2);
+        M2C_FIELD(self, s32*, 0) = 2;
+update:
+        func_001E4D28(self);
+        if (!func_001E4A78(self, M2C_FIELD(self, s32*, 0x34))) return 0;
+        M2C_FIELD(self, s32*, 0) = 3;
+finish:
+        func_001E4D28(self);
+    return 1;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E4720);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4650", func_001E49D0);
 void* func_001E4A78(void* self, s32 key) {
