@@ -1,8 +1,8 @@
 # Black (PS2) decompilation
 
 [![License: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-lightgrey.svg)](LICENSE)
-[![Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/code.json)](docs/status.md#progress)
-[![Functions](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/functions.json)](docs/status.md#progress)
+![Code](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/code.json)
+![Functions](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/dpusceddu/blackDecomp/main/progress/functions.json)
 
 A byte-matching decompilation of *Black* (Criterion Games, 2006): readable C and C++ that compiles back into the exact
 bytes of the original PlayStation 2 executable.
@@ -11,9 +11,9 @@ Beyond preservation, we hope to make extensive changes to the game easier to dev
 such as a virtual reality mod. Readable source verified against the original executable should provide a rigorous
 foundation for that work, though the practical benefits remain to be demonstrated.
 
-We target PS2 because its build does not use whole-game optimization: the compiler optimized individual source files
-rather than the entire game together. That lets us reconstruct and verify manageable pieces without first recovering
-the whole game. [Compiler and translation-unit evidence](docs/units.md#recovering-original-translation-units).
+We target PS2 because its build compiles source files separately, without whole-game optimization. This makes byte
+matching more tractable: optimizations across source files can make a function's machine code depend on code elsewhere
+in the game.
 
 ## Contribute with an AI agent
 
@@ -35,7 +35,7 @@ review. You do not need to choose functions, operate a compiler or learn the bui
 the agent's verification report before handing the pull request over.
 
 An extracted executable goes at `orig/SLUS_213.76/SLUS_213.76`. If the ISO lives elsewhere, tell the agent its path; setup
-accepts `--iso PATH`. [Setup reference and troubleshooting](docs/setup.md).
+accepts `--iso PATH`.
 
 ## How it works
 
@@ -53,9 +53,6 @@ This is the established matching-decompilation workflow used by projects such as
 investigation and iteration; the compiler and binary comparisons supply the checks. Matching bytes do not uniquely
 recover the original source text or names, so readable code and evidence for names and types remain part of review.
 
-See [progress and open problems](docs/status.md), the [contribution standards](CONTRIBUTING.md), and the
-[matching handbook](docs/matching-handbook.md). The rebuild also supports [modifications](docs/modding.md).
-
 We build on [splat](https://github.com/ethteck/splat),
 [spimdisasm](https://github.com/Decompollaborate/spimdisasm),
 [rabbitizer](https://github.com/Decompollaborate/rabbitizer), [m2c](https://github.com/matt-kempster/m2c),
@@ -65,7 +62,7 @@ We build on [splat](https://github.com/ethteck/splat),
 ## Legal and license
 
 No leaked source code has been used in this project. The reconstructed game source comes from decompilation and reverse
-engineering of game binaries, including the author's [earlier Xbox reconstruction work](docs/history.md#where-the-first-sources-came-from).
+engineering of game binaries, including the author's earlier Xbox reconstruction work.
 
 You must supply your own copy of the game. Original executables, disc contents, assets, generated disassembly and compiler
 output are excluded from this repository. The build downloads third-party compilers to your machine; they are not
