@@ -25,7 +25,90 @@ s32 func_00167A10(void *arg0, void *arg1, void *arg2) {
     }
     return result;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00167AA8);
+extern void func_00165C40(void*, s32);
+extern s32 func_0012F2D8(void*, u64, void*);
+extern void* D_0040F4E4;
+extern void* D_0040F538;
+
+/* Each bank has a separate native pointer/count pair. Keep the shared scan
+ * temporaries across banks; callbacks may change the bank storage and counts. */
+#define COLLECT_BINDINGS(listOffset, countOffset, skipNull)                        \
+    if (M2C_FIELD(self, void***, listOffset)) {                                    \
+        i = 0;                                                                   \
+        if (M2C_FIELD(self, u16*, countOffset)) {                                  \
+            do {                                                                 \
+                offset = i * 4;                                                  \
+                listBase = M2C_FIELD(self, s32*, listOffset);                      \
+                entry = M2C_FIELD(offset + listBase, u64**, 0);                    \
+                if (!skipNull || entry) {                                        \
+                    value = *entry;                                              \
+                    if (value == key) func_00165C40(output, (s32)entry);           \
+                }                                                                \
+                i++;                                                             \
+            } while (i < M2C_FIELD(self, u16*, countOffset));                      \
+        }                                                                        \
+    }
+
+void func_00167AA8(void* self, void* output, s64 key) {
+    u8* pool;
+    u8* active;
+    s32 i, offset;
+    u64 value;
+    s32 listBase;
+    u64* entry;
+    COLLECT_BINDINGS(0x48, 0x0, 0);
+    COLLECT_BINDINGS(0x4C, 0x2, 0);
+    COLLECT_BINDINGS(0x58, 0x8, 0);
+    COLLECT_BINDINGS(0x5C, 0xA, 0);
+    COLLECT_BINDINGS(0x60, 0xC, 0);
+    COLLECT_BINDINGS(0x64, 0xE, 0);
+    COLLECT_BINDINGS(0x50, 0x4, 0);
+    COLLECT_BINDINGS(0x54, 0x6, 0);
+    COLLECT_BINDINGS(0x68, 0x10, 0);
+    COLLECT_BINDINGS(0x6C, 0x12, 0);
+    COLLECT_BINDINGS(0xC8, 0x40, 0);
+    COLLECT_BINDINGS(0xCC, 0x42, 0);
+    COLLECT_BINDINGS(0x70, 0x14, 0);
+    COLLECT_BINDINGS(0x74, 0x16, 0);
+    COLLECT_BINDINGS(0xC0, 0x3C, 0);
+    COLLECT_BINDINGS(0xC4, 0x3E, 0);
+    COLLECT_BINDINGS(0x78, 0x18, 0);
+    COLLECT_BINDINGS(0x7C, 0x1A, 0);
+    pool = D_0040F4E4;
+    active = pool + 0x5804;
+    {
+        u8* entry = pool;
+        i = 0;
+        do {
+            if (active[i]) {
+                value = M2C_FIELD(entry, u64*, 0);
+                if (value == key) func_00165C40(output, (s32)entry);
+            }
+            i++;
+            entry += 0x160;
+        } while (i < 64);
+    }
+    func_0012F2D8(D_0040F538, key, output);
+    COLLECT_BINDINGS(0x88, 0x24, 0);
+    COLLECT_BINDINGS(0x8C, 0x26, 0);
+    COLLECT_BINDINGS(0x90, 0x28, 0);
+    COLLECT_BINDINGS(0x94, 0x2A, 0);
+    COLLECT_BINDINGS(0x98, 0x2C, 0);
+    COLLECT_BINDINGS(0x9C, 0x2E, 0);
+    COLLECT_BINDINGS(0xA0, 0x20, 0);
+    COLLECT_BINDINGS(0xA4, 0x22, 0);
+    COLLECT_BINDINGS(0xA8, 0x30, 1);
+    COLLECT_BINDINGS(0xAC, 0x32, 1);
+    COLLECT_BINDINGS(0xB0, 0x34, 0);
+    COLLECT_BINDINGS(0xB4, 0x36, 0);
+    COLLECT_BINDINGS(0xB8, 0x38, 0);
+    COLLECT_BINDINGS(0xBC, 0x3A, 0);
+    COLLECT_BINDINGS(0xD0, 0x44, 0);
+    COLLECT_BINDINGS(0xD4, 0x46, 0);
+}
+
+#undef COLLECT_BINDINGS
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00168618);
 #ifdef NON_MATCHING
 // Unmatched: setup copies and cursor registers differ (17 instructions under O2).
