@@ -182,7 +182,32 @@ s32 func_0027BB98(Recovered_RecordRing* ring, Recovered_RingRecord* record) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BB98);
 #endif
+extern void func_0027C0B8(void*);
+#ifdef NON_MATCHING
+// Unmatched: large-offset address formation and loop registers differ.
+void func_0027BBB8(void* self) {
+    s32* entry;
+    s32 count;
+    func_0027B648(self, (s32)((u8*)self + 0xC20), 0xFA0);
+    M2C_FIELD(self, u8*, 0xC1C) = 0;
+    M2C_FIELD(self, s32*, 0x20110) = 0;
+    entry = (s32*)((u8*)self + 0x20034);
+    count = 9;
+    do {
+        entry[-5] = 0;
+        count--;
+        entry[-4] = 0;
+        entry[-3] = 0;
+        entry[-1] = 0;
+        entry[-2] = 0;
+        entry[0] = 0;
+        entry += 6;
+    } while (count >= 0);
+    func_0027C0B8((u8*)self + 0x14);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2792c0_27acc8", func_0027BBB8);
+#endif
 
 void func_0027BC38(void) {
 
