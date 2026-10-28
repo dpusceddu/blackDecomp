@@ -348,5 +348,23 @@ s32 func_001E6150(void* owner, void* argument, s32 key_index) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6150);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6208);
+/* UNVERIFIED: only the channel byte and pointer array are described. */
+typedef struct Recovered_GridChannel {
+    u8 unk_00[0x35];
+    u8 value;
+} Recovered_GridChannel;
+typedef struct Recovered_GridChannels {
+    u8 unk_000[0x844];
+    Recovered_GridChannel* channels[2];
+} Recovered_GridChannels;
+
+void func_001E6208(Recovered_GridChannels* self, u32 kind, s32 value) {
+    Recovered_GridChannel** channel = self->channels;
+    u32 i = 0;
+    do {
+        if (*channel) (*channel)->value = value;
+        channel++;
+        i++;
+    } while (i < 2);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e51c8", func_001E6240);
