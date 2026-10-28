@@ -27,7 +27,7 @@ s32 func_0027C460(s32 arg0, s32 arg1) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27c410", func_0027C498);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27c410", func_0027C770);
-extern void func_0035D1A0(char*, const char*, int);
+extern char* func_0035D1A0(char*, const char*, int);
 extern int func_00360938(const char*, const char*, int);
 
 s32 func_0027C778(const char* name) {
@@ -112,7 +112,51 @@ void func_0027C990(s32 arg0) {
     D_003C0DFC = arg0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_27c410", func_0027C9A0);
+// Partial initialization views; original type and method names are UNVERIFIED.
+typedef struct { char unknown00[0x18]; s32 field18; } DriverInitResource;
+typedef DriverInitResource* (*DriverGetResource)(void*, u32);
+typedef struct { s16 adjustment, unknown02; DriverGetResource callback; } DriverGetEntry;
+typedef struct { char unknown00[0x18]; DriverGetEntry get; } DriverInitTable;
+typedef struct {
+    char unknown00[0x38];
+    s32 field38;
+    char unknown3c[0x24];
+    void* resource;
+    char unknown64[0xc];
+} DriverInitHandle;
+typedef struct {
+    char text[0x100];
+    s32 active, error;
+    u32 count;
+    DriverInitHandle* handles;
+    DriverInitTable* table;
+} DriverInitView;
+extern const char D_0040DE70[];
+extern s32 func_0027CBC0(char*, const char*);
+
+s32 func_0027C9A0(DriverInitView* self, u32 count, const char* prefix) {
+    u32 i;
+    self->count = count;
+    self->error = 0;
+    self->active = 1;
+    if (prefix) {
+        if (D_003C0DF4 >= 2) {
+            self->error = 1;
+            return 0;
+        }
+        D_0040EBA0[D_003C0DF4] = (s32)self;
+        func_0035D1A0(D_0049A798[D_003C0DF4], prefix, 4);
+        D_003C0DF4++;
+    }
+    for (i = 0; i < self->count; i++) {
+        DriverInitResource* resource = self->table->get.callback((char*)self + self->table->get.adjustment, i);
+        resource->field18 = 0;
+        self->handles[i].resource = 0;
+        self->handles[i].field38 = 1;
+    }
+    func_0027CBC0(self->text, D_0040DE70);
+    return 1;
+}
 extern int func_00369FF0(char*, int, const char*, ...);
 #ifdef NON_MATCHING
 // Unmatched: saved-register initialization and scheduling differ.
