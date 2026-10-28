@@ -609,7 +609,8 @@ splits:
   - {src: src/game/actor/tu_165c40.c, range: [0x165c40, 0x165cc0]}
   - {src: src/game/actor/tu_165cc0.c, range: [0x165cc0, 0x165de8], flags: [-O1, -G0, -snas]}
   - {src: src/game/actor/tu_165de8.c, range: [0x165de8, 0x165df0]}
-  - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x165df0, 0x166c00]}
+  - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x165df0, 0x166808]}
+  - {src: src/game/actor/tu_166808.c, range: [0x166808, 0x166c00], flags: [-O2, -G8, -snas], assembler: sony-2.9, note: native flag uses GPREL and Sony scheduling preserves the first bank load interlock and short-loop NOPs}
   - {src: src/game/actor/tu_166c00.c, range: [0x166c00, 0x167000], flags: [-O1, -G0, -snas]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x167000, 0x167088]}
   - {src: src/game/actor/tu_167088.c, range: [0x167088, 0x167208], flags: [-O1, -G0, -snas]}

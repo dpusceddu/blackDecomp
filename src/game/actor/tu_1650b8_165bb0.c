@@ -76,7 +76,6 @@ void func_00165F30(void* self, s128 frame, f32 dt) {
 #undef RESET
 #undef DIRECT
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00166808);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00167000);
 extern void func_00167A10(void*, void*, void*);
 /* Binding descriptors occur at different offsets in each bank family. */
