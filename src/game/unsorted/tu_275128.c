@@ -35,8 +35,32 @@ void Text_CopyUtf8ToUtf16(const char* input, u16* destination, s32 capacity) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275260);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275338);
+#ifdef NON_MATCHING
+// Unmatched: loop branch scheduling differs.
+s32 func_00275340(const u16* text) {
+    s32 count = 0;
+    while (*text) {
+        text++;
+        count++;
+    }
+    return count;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275340);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: load and loop branch scheduling differ.
+u16* func_00275370(u16* destination, const u16* source) {
+    while (1) {
+        *destination = *source;
+        if (!*source++) break;
+        destination++;
+    }
+    return destination;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275370);
+#endif
 #ifdef NON_MATCHING
 // Unmatched: copy-loop scheduling and temporary registers differ.
 u16* func_00275398(u16* destination, s32 capacity, const u16* source) {
@@ -46,8 +70,7 @@ u16* func_00275398(u16* destination, s32 capacity, const u16* source) {
     if ((u32)destination < (u32)end) {
         do {
             value = *source++;
-            if (value == 0)
-                return destination;
+            if (value == 0) return destination;
             destination++;
             value = *source;
             *destination = value;
@@ -258,11 +281,68 @@ f32 func_002759E0(Recovered_FontOffsets *font, const u16 *text) {
     }
     return 0.0f;
 }
-#endif
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002759E0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275AD0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275DC0);
+#ifdef NON_MATCHING
+// Unmatched: argument move scheduling differs.
+extern void func_00275DC0(Recovered_FontOffsets*, f32, f32, f32, const u16*, u128);
+void func_00276110(Recovered_FontOffsets* font, f32 x, f32 y, f32 scale, const u16* text, u128 color, f32 alignment) {
+    f32 width = func_002758E0(font, text);
+    func_00275DC0(font, x - (scale * width) * alignment, y, scale, text, color);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00276110);
+#endif
+#ifdef NON_MATCHING
+// Unmatched: initialization store scheduling differs.
+// Partial text settings view; field meanings are UNVERIFIED.
+typedef union {
+    u128 value;
+    f32 components[4];
+} TextSettingsVectorDraft;
+typedef struct {
+    s32 field00, field04;
+    f32 field08, field0c;
+    TextSettingsVectorDraft vector;
+} TextSettingsDraft;
+void func_002761A0(TextSettingsDraft* self) {
+    TextSettingsVectorDraft vector;
+    vector.components[0] = 1.0f;
+    vector.components[1] = 1.0f;
+    vector.components[2] = 1.0f;
+    vector.components[3] = 1.0f;
+    self->field00 = 0;
+    self->field04 = 0;
+    self->field08 = 1.0f;
+    self->vector = vector;
+    self->field0c = 1.0f;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002761A0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002761E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_002761E8);
+// Partial command views; the original class and unused fields are UNVERIFIED.
+typedef struct {
+    u64 position, extent;
+    u128 payload;
+    char unknown20[0x28];
+    void* owner;
+} TextCommandRecord;
+typedef struct {
+    char unknown00[0x40];
+    s32 pool;
+} TextCommandState;
+extern s32 func_002740E8();
+
+TextCommandRecord* func_002761E8(TextCommandState* self, u64* position, u64* extent, u128 payload) {
+    char* node = (char*)func_002740E8(&self->pool);
+    TextCommandRecord* result = (TextCommandRecord*)(node + 8);
+    result->owner = self;
+    result->position = *position;
+    result->extent = *extent;
+    result->payload = payload;
+    return result;
+}
