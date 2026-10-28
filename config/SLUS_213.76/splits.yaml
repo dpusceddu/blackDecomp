@@ -1921,7 +1921,9 @@ splits:
   - {src: src/game/unsorted/tu_280358.c, range: [0x280358, 0x280360]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280360, 0x2803f0]}
   - {src: src/game/unsorted/tu_2803f0.c, range: [0x2803f0, 0x280400]}
-  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280400, 0x2805a0]}
+  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280400, 0x280500]}
+  - {src: src/game/audio/tu_280500.cpp, range: [0x280500, 0x280528], flags: [-O2, -G0, -snas], assembler: sn-min6, note: short initialization loop requires original branch scheduling}
+  - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280528, 0x2805a0]}
   - {src: src/game/unsorted/tu_2805a0.c, range: [0x2805a0, 0x280748]}
   - {src: src/game/unsorted/tu_2805a0_280748.c, range: [0x280748, 0x2807b0]}
   - {src: src/game/unsorted/tu_2805a0_2807b0.c, range: [0x2807b0, 0x280808]}
