@@ -67,10 +67,10 @@ after changes to shared binary construction (see the impact rule in CONTRIBUTING
 
 <!-- facts:begin (tools/badges.py) -->
 
-- The split list has 3,741 entries for 2,758 source files; 2,670 of the files hold recovered functions.
-- 5,476 functions are still `INCLUDE_ASM` lines (one per function, in the one file that owns it).
-- 291 files contain 767 `#ifdef NON_MATCHING` blocks (drafts that do not match yet, plus blocks that only carry includes and notes).
-- 90 split entries select `assembler: sn-min6`.
+- The split list has 3,773 entries for 2,776 source files; 2,694 of the files hold recovered functions.
+- 5,286 functions are still `INCLUDE_ASM` lines (one per function, in the one file that owns it).
+- 311 files contain 841 `#ifdef NON_MATCHING` blocks (drafts that do not match yet, plus blocks that only carry includes and notes).
+- 98 split entries select `assembler: sn-min6`.
 - The TU map has 3,036 translation units; confidence of its boundaries by bytes of `.text`: `exact` 14.5 %, `high` 2.9 %, `medium` 52.8 %, `low` 29.8 %.
 
 <!-- facts:end -->
