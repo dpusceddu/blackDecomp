@@ -5,6 +5,7 @@ import json
 import os
 from pathlib import Path
 import platform
+import re
 import shutil
 import subprocess
 import sys
@@ -65,6 +66,33 @@ def compile_file(compiler, flags, source, output):
         path.write_bytes(restore_gprel(normalize_object(path.read_bytes())))
 
 
+def generated_function_aliases(functions, defined):
+    """Bind explicit address names for SN's randomly suffixed I/D wrappers.
+
+    A unit must request _GLOBAL_$I$ADDRESS or _GLOBAL_$D$ADDRESS for its own
+    function. Select exactly one defined function of that compiler role; ordinary
+    symbols and units without this opt-in retain exact-name resolution.
+    """
+    aliases = {}
+    for function in functions:
+        for name in function.get('candidates', [function['symbol']]):
+            match = re.fullmatch(r'_GLOBAL_\$([ID])\$([0-9A-F]{8})', name)
+            if not match:
+                continue
+            if int(match[2], 16) != function['addr']:
+                raise ValueError('generated wrapper address disagrees with %s' % name)
+            if name in defined:
+                continue
+            prefix = '_GLOBAL_$%s$' % match[1]
+            matches = [symbol['name'] for symbol in defined.values()
+                       if symbol['type'] == 2 and symbol['name'].startswith(prefix)]
+            if len(matches) != 1:
+                raise ValueError('%s: expected one compiler-generated %s wrapper, found %d' %
+                                 (name, match[1], len(matches)))
+            aliases[name] = matches[0]
+    return aliases
+
+
 def finish_object(spec, output):
     """Normalize symbol visibility and discard only inputs without an original slot."""
     path = Path(output)
@@ -74,6 +102,8 @@ def finish_object(spec, output):
     defined = {s['name']: s for s in symbols if 0 < s['shndx'] < len(elf.sections)}
     resolved, keep, renames, externs = {}, set(), {}, {}
     unit = spec['unit']
+    generated = generated_function_aliases(unit['functions'], defined)
+    defined.update({name: defined[actual] for name, actual in generated.items()})
     for f in unit['functions']:
         name = next((n for n in f.get('candidates', [f['symbol']]) + ['func_%08X' % f['addr']] if n in defined), None)
         if name is None:
@@ -82,8 +112,9 @@ def finish_object(spec, output):
         sec = elf.sections[sym['shndx']]['name']
         keep.add(sec)
         link_name = name if name.startswith('func_') else '%s$%X' % (name, f['addr'])
-        if name != link_name:
-            renames[name] = link_name
+        actual_name = generated.get(name, name)
+        if actual_name != link_name:
+            renames[actual_name] = link_name
         resolved[str(f['addr'])] = dict(symbol=name, link_name=link_name, section=sec, size=sym['size'],
                                          value=sym['value'], status='asm' if '__nonmatching_func_%08X' % f['addr'] in defined else 'source')
     # Included assembly owns explicitly named constant sections. The compiler's

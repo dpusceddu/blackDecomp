@@ -95,6 +95,11 @@ another TU). Add a line when the build says a symbol has no address, or when a f
 A line ending in `alias` (`// type:func alias`) is only a readable name and never affects the build
 ([build.md](build.md#symbols-and-progress)).
 
+SN gives compiler-generated static I/D wrappers a random filename suffix. A binding such as
+`_GLOBAL_$I$002092B8 = 0x2092B8; // type:func` explicitly selects the unit's sole generated I wrapper;
+`$D$` selects a destructor wrapper. The address must agree, and missing or ambiguous wrappers fail.
+The object compiler renames symbols and their relocations without changing code.
+
 ## What the build does with it
 
 The build compiles each file once with real assembler includes. `object_compile.py` normalizes SN objects and records
