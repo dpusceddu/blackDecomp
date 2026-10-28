@@ -4,6 +4,7 @@
 
 #ifdef NON_MATCHING
 // Unmatched: counter spills, mode gating and virtual-call scheduling differ.
+/* UNVERIFIED offset views and call interfaces; original type names are unknown. */
 
 typedef struct Recovered_ActionInitView {
     s64 unk_0;

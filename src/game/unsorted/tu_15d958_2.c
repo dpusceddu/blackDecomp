@@ -4,12 +4,12 @@
 
 #ifdef NON_MATCHING
 // Unmatched: the second external-loop counter uses a different load/copy sequence.
-/* Working by-value key layout; the original type name is unknown. */
+/* UNVERIFIED by-value key view; the original type name is unknown. */
 typedef struct ActionKey {
     unsigned long value;
 } ActionKey;
 
-/* Provisional offset views; original class and field names are unknown. */
+/* UNVERIFIED offset views; original class and field names are unknown. */
 typedef struct Recovered_ActionView {
     u64 unk_0;
     u8 unk_8[16];
