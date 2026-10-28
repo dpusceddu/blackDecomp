@@ -471,12 +471,35 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00204450);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002048D0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00209378);
+// UNVERIFIED: original type and fields other than state.
+struct Recovered_StateA30 { char unknown[0xA30]; int state; };
+#ifdef NON_MATCHING
+// Unmatched: section is eight bytes shorter despite matching instructions.
+extern "C" int func_00209430(Recovered_StateA30* object) {
+    switch (object->state) {
+    case 1:
+    case 0x38:
+        object->state = 2;
+    case 2:
+        object->state = 0x1C;
+    case 0x1C:
+        break;
+    }
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00209430);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00209490);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00218898);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021AFE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021B020);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021B048);
+extern "C" unsigned char D_003FD110[];
+extern "C" int func_0021B048(void* object) {
+    unsigned type = *(unsigned*)object >> 25;
+    if (type == 0x25) return *(int*)((char*)object + 0xC);
+    return D_003FD110[type];
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021BB00);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021BDB8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021BEE8);
