@@ -53,9 +53,10 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EBC88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EBD88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EBEB0);
+extern s32 func_001EC5C8(void*);
+extern void* func_001EBEB8(void*, s32, s32);
 #ifdef NON_MATCHING
 // Unmatched: register allocation differs.
-extern s32 func_001EC5C8(void*);
 void* func_001EBEB8(void* self, s32 threshold, s32 unused) {
     void* best = NULL;
     s32 i = 0;
@@ -114,7 +115,22 @@ void func_001EC060(void* self, s128 value, s32 arg2, s32 arg3, f32 delay, f32 du
         entry += 0x30;
     } while ((s32)entry < (s32)end);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EC0B8);
+extern void* func_001EC600(void*, void*, s128);
+void func_001EC0B8(void* self, s128 value, s32 unused) {
+    s32 i = M2C_FIELD(self, s32*, 0x1E38);
+    void* entry = NULL;
+    void* found;
+    while (i < M2C_FIELD(self, s32*, 0x1E30)) {
+        entry = (u8*)self + (i * 0x28 + 0x80);
+        if (M2C_FIELD(entry, s32*, 0x14) == 3 && M2C_FIELD(entry, s32*, 0x10) == 1) break;
+        i++;
+        entry = NULL;
+    }
+    if (entry) {
+        found = func_001EBEB8(self, 1, i);
+        if (found) func_001EC600(found, entry, value);
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EC158);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EC248);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EC330);
