@@ -168,31 +168,6 @@ void func_0016ADE0(void) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016AE08);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016AFB0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B118);
-extern s32 func_001D4630(s128, f32, f32);
-extern s32 func_001D4858(void);
-extern u8 D_0040D9B3;
-extern s32 func_001D4A50(s32, f32);
-extern s32 func_001D4998(void);
-
-#ifdef NON_MATCHING
-// Unmatched: global access uses different small-data addressing.
-s32 func_0016B4F8(s32 arg0, s128 arg1) {
-    func_001D4630(arg1, 0.0f, 0.0f);
-    func_001D4858();
-    if (D_0040D9B3 != 0) {
-        func_001D4A50(3, 0.0f);
-        func_001D4A50(4, 0.0f);
-        func_001D4A50(5, 0.0f);
-    } else {
-        func_001D4A50(0, 0.0f);
-        func_001D4A50(1, 0.0f);
-        func_001D4A50(2, 0.0f);
-    }
-    return func_001D4998();
-}
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B4F8);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16a720_16a778", func_0016B590);
 extern s32 D_0040F0E0;
 

@@ -627,7 +627,9 @@ splits:
   - {src: src/game/actor/actor_c4c8.cpp, range: [0x169f38, 0x16a250]}
   - {src: src/game/actor/tu_16a250.cpp, range: [0x16a250, 0x16a720]}
   - {src: src/game/actor/actor_bf48.cpp, range: [0x16a720, 0x16a778], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
-  - {src: src/game/unsorted/tu_16a720_16a778.c, range: [0x16a778, 0x16b778], note: flags or language differ}
+  - {src: src/game/unsorted/tu_16a720_16a778.c, range: [0x16a778, 0x16b4f8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_16a720_16b4f8.c, range: [0x16b4f8, 0x16b590], flags: [-O2, -G8, -snas], assembler: sony-2.9, note: "Native D_0040D9B3 byte access uses GPREL; Sony assembly preserves the single GP-relative load."}
+  - {src: src/game/unsorted/tu_16a720_16a778.c, range: [0x16b590, 0x16b778]}
   - {src: src/game/unsorted/tu_16a720_16b778.c, range: [0x16b778, 0x16b788], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_16a720_16b788.c, range: [0x16b788, 0x16c220], note: flags or language differ}
   - {src: src/game/unsorted/tu_16a720_16c220.c, range: [0x16c220, 0x16c700], flags: [-O2, -G1], note: flags or language differ}
@@ -698,7 +700,10 @@ splits:
   - {src: src/game/unsorted/tu_175620.c, range: [0x175620, 0x175668]}
   - {src: src/game/unsorted/tu_175668.c, range: [0x175668, 0x1756b0]}
   - {src: src/game/unsorted/tu_1756b0.c, range: [0x1756b0, 0x1756c0]}
-  - {src: src/game/world/tu_1756c0.c, range: [0x1756c0, 0x176310]}
+  - {src: src/game/world/collision_queue_init.c, range: [0x1756c0, 0x175750], assembler: sn-min6, note: "Native pending-reset loop has two short-branch interlock NOPs; stock SN inserts three."}
+  - {src: src/game/world/tu_1756c0.c, range: [0x175750, 0x175930]}
+  - {src: src/game/world/collision_queue_init.c, range: [0x175930, 0x175980], note: Native live-reset loop also spans six words}
+  - {src: src/game/world/tu_1756c0.c, range: [0x175980, 0x176310]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x176310, 0x176448]}
   - {src: src/game/unsorted/tu_176448.c, range: [0x176448, 0x176460], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_176448_176460.c, range: [0x176460, 0x176730], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}

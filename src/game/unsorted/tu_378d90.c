@@ -90,18 +90,15 @@ s32 func_0037B220(AudioResourceDraft* self) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_378d90", func_0037B220);
 #endif
-#ifdef NON_MATCHING
-// Unmatched: return branch scheduling differs.
 s32 func_0037B288(void* self, void* list) {
+    s32 result;
     if (M2C_FIELD(self, s32*, 8) == 5) {
         void* voice = (void*)func_0037B988(self, list, 0);
-        return func_003230F0(voice, M2C_FIELD(voice, s32*, 0x80), 3);
-    }
-    return 0;
+        result = func_003230F0(voice, M2C_FIELD(voice, s32*, 0x80), 3);
+    } else
+        result = 0;
+    return result;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_378d90", func_0037B288);
-#endif
 
 s32 func_0037B2D0(s32 arg0, s32 arg1, s32 arg2) {
     void *temp_2;
@@ -132,7 +129,6 @@ s32 func_0037B8E8(s32 arg0, s32 arg1) {
     return func_00323188(arg0, M2C_FIELD(arg0, s32 *, 0x40), 2, arg1);
 }
 
-#ifdef NON_MATCHING
 // Partial linked-list and parameter views; field meanings are UNVERIFIED.
 typedef struct AudioNodeDraft {
     struct AudioNodeDraft* next;
@@ -149,11 +145,11 @@ typedef struct {
 } AudioListDraft;
 typedef struct {
     char unknown00[0x18];
-    f32 values[1];
+    f32 values[0]; /* Trailing parameter values; allocation covers list->count entries. */
 } AudioParamsDraft;
-extern void func_003231D0(void*, s32, s32, f32);
+/* Forwards the parameter callback result; its original result type is UNVERIFIED. */
+extern s32 func_003231D0(void*, s32, s32, f32);
 
-// Unmatched: loop comparison register differs.
 void func_0037B910(AudioListOwnerDraft* self, AudioListDraft* list, AudioParamsDraft* data) {
     AudioNodeDraft* node = self->first;
     u32 i;
@@ -162,9 +158,7 @@ void func_0037B910(AudioListOwnerDraft* self, AudioListDraft* list, AudioParamsD
         node = node->next;
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_378d90", func_0037B910);
-#endif
+
 #ifdef NON_MATCHING
 // Unmatched: traversal loop shape and register allocation differ.
 typedef struct AudioLinkDraft {

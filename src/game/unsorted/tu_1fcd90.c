@@ -48,7 +48,63 @@ void func_001FD230(void* self) {
     func_001FAC78((void*)(((s8*)self) + 0xE0), 0.5f);
 }
 
+#ifdef NON_MATCHING
+// Unmatched: key-copy registers and the final byte-test scheduling differ.
+/* Native field layout and original class identities remain UNVERIFIED. */
+extern void* D_0040F4D0;
+extern s32* D_00414D54;
+extern s32 func_001F1C10(void*, s32, s32, s32, s32, s32, s32);
+extern s32 func_001FD8F0(void*, s32, s32, s32);
+extern s32 func_001FDAD0(void*, s32);
+extern s32 func_001FAE18(void*, s32, s32, s32);
+static inline u8 FrontendPayloadKind(u8* ptr) {
+    if (ptr) return *ptr;
+    return 0xFF;
+}
+s32 func_001FD298(void* self, s8 index, s32 first, s32 second) {
+    s32 categoryValue;
+    s8 category;
+    s8 current;
+    u8* definition;
+    u32 previous;
+    u8 kind;
+    void* firstState;
+    void* secondState;
+
+    M2C_FIELD(self, s8*, 0x2D8) = (s8)index;
+    M2C_FIELD(self, s32*, 0x2E0) =
+        (s32)M2C_FIELD(M2C_FIELD(M2C_FIELD(D_0040F4D0, void**, 0x2D4), void**, 0xF4), s8*, 0x20);
+    definition = M2C_FIELD(((void*)(((s8)index * 0x8C0) + ((s8*)D_0040F4D0))), u8**, 0x2D4);
+    kind = FrontendPayloadKind(definition);
+    M2C_FIELD(self, s8*, 0x2D9) = 0;
+    M2C_FIELD(self, s8*, 0x2DA) = 0;
+    M2C_FIELD(self, s8*, 0x2DB) = 0;
+    M2C_FIELD(self, s8*, 0x2DC) = 0;
+    M2C_FIELD(self, u8*, 0x2DD) = kind;
+    func_001F1C10(self, 2, 3, 0, (s32)(s8)index, first, second);
+    firstState = (void*)(((s8*)self) + 0x30);
+    func_001FD8F0(firstState, (s32)(s8)index, first, second);
+    category = (s8)M2C_FIELD(self, u8*, 0x2DD);
+    if (category == -1) {
+        categoryValue = 0;
+    } else {
+        categoryValue = D_00414D54[category];
+    }
+    func_001FDAD0(firstState, categoryValue);
+    secondState = (void*)(((s8*)self) + 0xE0);
+    M2C_FIELD(self, u64*, 0x2D0) = (u64)*M2C_FIELD(self, u64**, 0x30);
+    func_001FAE18(secondState, (s32)(s8)index, first, second);
+    previous = M2C_FIELD(secondState, u8*, 0x195);
+    current = (s8)M2C_FIELD(self, u8*, 0x2DD);
+    M2C_FIELD(secondState, u8*, 0x196) = previous;
+    M2C_FIELD(secondState, u8*, 0x195) = (u8)current;
+    if ((s8)previous == 0) { M2C_FIELD(secondState, u8*, 0x196) = (u8)current; }
+    return 1;
+}
+
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD298);
+#endif
 
 void func_001FD3E8(void *arg0) {
     if (M2C_FIELD(arg0, u8 *, 0x2DB) == 0) {
