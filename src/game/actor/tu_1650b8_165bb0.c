@@ -1,5 +1,6 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/actor_slots.h"
 
 extern void* D_0040F4D0;
 typedef s32 (*EarlyUpdate)(void*, s128, void*);
@@ -485,7 +486,22 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_0016D958);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_0016DB58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_0016DC80);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_0016E6B0);
+extern void func_00179B60(void*, void*);
+extern s32 func_0016FAB0(void*, void*);
+/* UNVERIFIED: surrounding manager layout and remaining removal interfaces. */
+s32 func_0016E6B0(void* self, void* actor) {
+    s32 index = M2C_FIELD(actor, s32*, 0x380);
+    s32 result;
+    if (index != -1) {
+        ActorSlotTable_Remove((Recovered_ActorSlotTable*)((char*)self + 0xFA8), index);
+        M2C_FIELD(actor, s32*, 0x380) = -1;
+        func_00179B60((char*)self + 0x1144, actor);
+        result = func_0016FAB0((char*)self + 0x22B28, actor);
+    } else {
+        result = 0;
+    }
+    return result;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_0016E7A8);
 extern s128 D_004432A0;
 void func_0016E7F8(void* arg0) {
