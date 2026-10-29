@@ -28,8 +28,10 @@ s32 func_00179698(Recovered_ActorChannelOwner* self, s32 channel) { return self-
 s32 func_001796B0(Recovered_ActorChannelOwner* self, s32 channel) { return self->values->values18[channel]; }
 s32 func_001796C8(Recovered_ActorChannelOwner* self, s32 channel) { return self->values->values20[channel]; }
 
-void func_001796E0(void* arg0) {
-    if (M2C_FIELD(arg0, u8*, 0x74) != 0) { func_00179960(M2C_FIELD(arg0, s32*, 0x70)); }
+void func_001796E0(void *arg0) {
+    if (M2C_FIELD(arg0, u8 *, 0x74) != 0) {
+        func_00179960(M2C_FIELD(arg0, s32 *, 0x70));
+    }
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_179400_179640", func_001797B8);

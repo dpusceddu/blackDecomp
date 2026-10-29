@@ -407,23 +407,17 @@ void* func_0025C6B8(void* self, s32 priority, s32 requested) {
     *occupied = 1;
     return (u8*)self + (slot * 0x50 + 0x50);
 }
-#ifdef NON_MATCHING
-// Unmatched: Two setup instructions are scheduled in the opposite order.
 void* func_0025C758(ResourcePoolView* self) {
-    OwnerView* slot = self->temporary;
-    u8* occupied = self->temporaryOccupied;
     s32 i;
-    for (i = 0; i < 20; i++, slot++, occupied++) {
-        if (*occupied == 0) {
-            *occupied = 1;
-            return slot;
+    for (i = 0; i < 20; i++) {
+        if (self->temporaryOccupied[i] == 0) {
+            self->temporaryOccupied[i] = 1;
+            return &self->temporary[i];
         }
     }
     return 0;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_25b5d0", func_0025C758);
-#endif
+
 #ifdef NON_MATCHING
 // Unmatched: The slot-address setup and loop-invariant multiply constant are scheduled differently.
 s32 func_0025C798(ResourcePoolView* self, OwnerView* target) {
