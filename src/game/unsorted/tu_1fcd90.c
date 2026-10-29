@@ -9,8 +9,22 @@ extern s32 func_001F1F08();
 extern s32 func_001F1E20();
 extern M2C_UNK D_003F9DD8;
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FCD90);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FCDB8);
+/* Native clock component offset; its original type is UNVERIFIED. */
+extern void* D_0040F0E0;
+void func_001FCD90(void* self) {
+    void* clock = (u8*)D_0040F0E0 + 0x20120;
+    f32 time = M2C_FIELD(clock, f32*, 0x20);
+    M2C_FIELD(self, s32*, 0x134) = 1;
+    M2C_FIELD(self, f32*, 0x130) = time;
+}
+
+void func_001FCDB8(void* self) {
+    void* clock = (u8*)D_0040F0E0 + 0x20120;
+    f32 time = M2C_FIELD(clock, f32*, 0x20);
+    M2C_FIELD(self, s32*, 0x13C) = 1;
+    M2C_FIELD(self, f32*, 0x138) = time;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FCDE0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FCFE8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90", func_001FD178);

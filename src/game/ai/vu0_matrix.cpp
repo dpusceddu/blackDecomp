@@ -1892,7 +1892,76 @@ int func_0019CFC8(PointerAction* self) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019CFC8);
 #endif
+#ifdef NON_MATCHING
+/* UNVERIFIED request identity; native point and flag offsets are +0x10 and +0x20. */
+struct CategoryPointEvent {
+    int kind;
+    int unknown04;
+    Game::Point3 point;
+};
+struct CategoryPointRequest {
+    int kind;
+    void* table;
+    Game::Position4 point;
+    unsigned char flag;
+};
+extern unsigned char D_003DF4B8[];
+extern "C" void func_001939E0(Game::Action*);
+typedef char CategoryPointRequestSize[sizeof(CategoryPointRequest) == 0x30 ? 1 : -1];
+// Unmatched: request-store scheduling and the shared cleanup branch delay slot differ.
+extern "C" int func_0019D080(CategoryPolicyAction* self, const CategoryPointEvent* event) {
+    int pending;
+    if (self->unk_19) return 0;
+    switch (event->kind) {
+        case 10: func_00193A28((Game::Action*)self, 22, 0); return 1;
+        case 20: {
+            CategoryPointRequest request;
+            Game::Position4 point;
+            Game::Store(point, Game::Make3(event->point.x, event->point.y, event->point.z));
+            request.point = point;
+            request.kind = 2;
+            request.table = D_003DF4B8;
+            request.flag = 0;
+            func_00193A28((Game::Action*)self, 8, (int)&request);
+            break;
+        }
+        case 4:
+            if (self->query && ((PolicyQueryKind*)self->query)->kind == 3 &&
+                func_0018D330(&self->base.brain->dispatcher, self->query)) {
+                func_00177E70(self->query, self->base.brain);
+                pending = 1;
+                goto release;
+            }
+            break;
+        case 19:
+            if (func_0019D1F0(self)) {
+                func_001939E0((Game::Action*)self);
+                self->unk_19 = 1;
+                return 1;
+            }
+            break;
+        case 11:
+            pending = 2;
+        release:
+            self->query = NULL;
+            self->unk_1A = pending;
+            break;
+        case 7:
+            if (!self->query) {
+                if (self->unk_1A)
+                    self->unk_1A--;
+                else
+                    self->active = 1;
+            }
+            break;
+        default: break;
+    }
+    return 0;
+}
+
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019D080);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019D1F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019D300);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/vu0_matrix", func_0019D558);
