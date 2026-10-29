@@ -756,7 +756,11 @@ splits:
   - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179640, 0x179668]}
   - {src: src/game/unsorted/tu_179400_179668.cpp, range: [0x179668, 0x179680], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_179400_179680.cpp, range: [0x179680, 0x179698], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
-  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179698, 0x179b40]}
+  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179698, 0x179708]}
+  - {src: src/game/unsorted/tu_179400_179708.c, range: [0x179708, 0x1797b8], assembler: sn-min6, note: "Native record-constructor loop has two short-branch interlock NOPs; the stock SN assembler inserts three."}
+  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x1797b8, 0x179800]}
+  - {src: src/game/unsorted/tu_179400_179800.cpp, range: [0x179800, 0x179960]}
+  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179960, 0x179b40]}
   - {src: src/game/unsorted/tu_179b40.c, range: [0x179b40, 0x179b60]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x179b60, 0x179c60]}
   - {src: src/game/ai/navigation/ai_movement_modes_179c60.cpp, range: [0x179c60, 0x179c88], flags: [-O2, -G0, -snas, -fbyte-bool]}

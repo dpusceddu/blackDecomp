@@ -104,16 +104,11 @@ f32 func_00176AE0(void) {
     return 0.0f;
 }
 
-#ifdef NON_MATCHING
-// Unmatched: the first score move is scheduled before the call's delay slot.
 void func_00176AF0(Recovered_ScoredOwner* owner, Recovered_ScoredSlot* slot) {
     f32 value = func_00176D18(owner, slot);
     func_00176DD0(owner, slot);
     slot->unk_14 = value * func_00176D90(owner, slot);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176AF0);
-#endif
 s32 func_00176B50(Recovered_ScoredOwner* owner, f32 score) {
     f32* slotScore = &owner->slots[0].unk_14;
     s32 selected = -1;
@@ -179,7 +174,21 @@ void func_00176D10(void) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176D18);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_176448_176730", func_00176D90);
+extern const f32 D_003F6260[42];
+/* Native category weights; original category names are unknown. */
+f32 func_00176D90(Recovered_ScoredOwner* owner, Recovered_ScoredSlot* slot) {
+    s32 kind = M2C_FIELD(slot, s32*, 8);
+    f32 factor = 0.0f;
+    if (kind != M2C_FIELD(owner, s32*, 0xC) && kind != M2C_FIELD(M2C_FIELD(slot, void**, 0), s32*, 0xC84)) {
+        factor = D_003F6260[kind];
+    }
+    return factor;
+}
+
+const f32 D_003F6260[42] = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.7f, 0.7f, 0.6f, 0.6f, 0.0f, 0.5f, 0.9f, 0.5f, 0.5f,
+                            0.5f, 0.3f, 0.5f, 0.9f, 0.9f, 0.2f, 0.8f, 0.8f, 0.7f, 0.4f, 0.3f, 0.4f, 0.4f, 0.4f,
+                            0.6f, 0.6f, 0.9f, 0.9f, 1.0f, 1.0f, 0.4f, 0.8f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f, 0.4f};
+
 f32 func_00176DD0(Recovered_ScoredOwner* owner, Recovered_ScoredSlot* slot) {
     f32 factor = 1.0f;
     s32 value = slot->unk_04;
