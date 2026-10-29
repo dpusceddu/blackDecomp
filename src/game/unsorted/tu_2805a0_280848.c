@@ -103,21 +103,6 @@ void func_00280908(Recovered_TransitionState *self, s32 requested) {
     }
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2805a0_280848", func_002809F0);
-#ifdef NON_MATCHING
-// Unmatched: loop comparison and branch scheduling differ.
-void func_00280A08(Recovered_AudioPool* pool) {
-    Recovered_AudioPoolEntry* entry = pool->entries;
-    Recovered_AudioPoolEntry* end = entry + 48;
-    do {
-        entry->resource = NULL;
-        entry->active = 0;
-        entry++;
-    } while (entry < end);
-    pool->count = 0;
-}
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2805a0_280848", func_00280A08);
-#endif
 s32 func_00280A38(Recovered_AudioPool *pool, Recovered_AudioResource **resources, s32 count) {
     Recovered_AudioPoolEntry *entry;
     s32 index = 0;

@@ -1906,7 +1906,9 @@ splits:
   - {src: src/game/unsorted/tu_275068.c, range: [0x275068, 0x275090]}
   - {src: src/game/unsorted/tu_275090.c, range: [0x275090, 0x2750b8]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x2750b8, 0x275128]}
-  - {src: src/game/unsorted/tu_275128.c, range: [0x275128, 0x276258], flags: [-O2, -G8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_275128.c, range: [0x275128, 0x275340], flags: [-O2, -G8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_275128_275340.c, range: [0x275340, 0x275398], assembler: sn-min6, note: "Native UTF-16 scan and copy loops span six words; stock SN inserts a seventh interlock word."}
+  - {src: src/game/unsorted/tu_275128.c, range: [0x275398, 0x276258]}
   - {src: src/game/unsorted/tu_275128_276258.c, range: [0x276258, 0x2763b0], note: flags or language differ}
   - {src: src/game/unsorted/tu_275128_2763b0.c, range: [0x2763b0, 0x276410], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/unsorted/tu_275128_276410.cpp, range: [0x276410, 0x2775a0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], assembler: sn-min6, note: Native vector temporaries require C++ lifetimes; the 0x276458 traversal and array-constructor loops have six-word bodies while stock snas inserts a seventh word; the rotation callbacks use VU0 VF1-VF8 and their drafts need allocatable j operands.}
@@ -1961,7 +1963,9 @@ splits:
   - {src: src/game/unsorted/tu_2805a0_280748.c, range: [0x280748, 0x2807b0]}
   - {src: src/game/unsorted/tu_2805a0_2807b0.c, range: [0x2807b0, 0x280808]}
   - {src: src/game/unsorted/tu_2805a0_280808.c, range: [0x280808, 0x280848]}
-  - {src: src/game/unsorted/tu_2805a0_280848.c, range: [0x280848, 0x280c90]}
+  - {src: src/game/unsorted/tu_2805a0_280848.c, range: [0x280848, 0x280a08]}
+  - {src: src/game/unsorted/tu_2805a0_280a08.c, range: [0x280a08, 0x280a38], assembler: sn-min6, note: "Native six-word short loop; stock SN inserts a seventh interlock word."}
+  - {src: src/game/unsorted/tu_2805a0_280848.c, range: [0x280a38, 0x280c90]}
   - {src: src/game/unsorted/tu_2805a0_280c90.c, range: [0x280c90, 0x280e10]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280e10, 0x280fe0]}
   - {src: src/game/unsorted/tu_280fe0.c, range: [0x280fe0, 0x281010]}
