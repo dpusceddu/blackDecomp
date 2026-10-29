@@ -471,9 +471,42 @@ void* func_00169920(void* state, s64 key) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00169920);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001699A8);
+/* Each bank entry supplies the callback object at +0x20. Form its native 32-bit address before converting it. */
+extern void func_00177EE8(void*, s32, s32);
+void func_001699A8(void* self, void* actor) {
+    s32 i;
+    s32 bit = M2C_FIELD(actor, s32*, 0x380);
+    s32 mask = 1 << bit;
+    if (M2C_FIELD(self, void**, 0x70)) {
+        for (i = 0; i < M2C_FIELD(self, u16*, 0x14); ++i) {
+            s32 address = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, 0x70), s32*, 0);
+            void* entry = (void*)(address + 0x20);
+            if (M2C_FIELD(entry, s32*, 0x64) & mask) func_00177EE8(entry, bit, 0);
+        }
+    }
+    if (M2C_FIELD(self, void**, 0x74)) {
+        for (i = 0; i < M2C_FIELD(self, u16*, 0x16); ++i) {
+            s32 address = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, 0x74), s32*, 0);
+            void* entry = (void*)(address + 0x20);
+            if (M2C_FIELD(entry, s32*, 0x64) & mask) func_00177EE8(entry, bit, 0);
+        }
+    }
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00169A98);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00169AA0);
+/* UNVERIFIED: original bank identities and virtual callback name. */
+extern s32 func_001626D0(void*);
+void func_00169AA0(void* self) {
+    u16 i;
+    for (i = 0; i < M2C_FIELD(self, u16*, 0x14); ++i)
+        func_001626D0(M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, 0x70), void**, 0));
+    for (i = 0; i < M2C_FIELD(self, u16*, 0x16); ++i)
+        func_001626D0(M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, 0x74), void**, 0));
+    for (i = 0; i < M2C_FIELD(self, u16*, 0x38); ++i) {
+        void* entry = M2C_FIELD(i * 4 + M2C_FIELD(self, s32*, 0xB8), void**, 0);
+        void* vt = M2C_FIELD(entry, void**, 0x10);
+        M2C_FIELD(vt, void (**)(void*), 0x2C)((char*)entry + M2C_FIELD(vt, s16*, 0x28));
+    }
+}
 void func_00169B88(void* state) {
     s32 i;
     for (i = 0; i < M2C_FIELD(state, u16*, 0x44); i++) {
@@ -552,7 +585,19 @@ void func_0016EB28(Recovered_ActorPool* pool, void* entry) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00171ED0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001721E8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001722A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00174040);
+extern void* D_0040F4D4;
+/* The native mask query returns a signed 16-bit value. */
+static inline s16 ActorMaskBitValue(const u16* mask, s32 bit) { return *mask & (1U << bit); }
+
+/* UNVERIFIED: original mask/container class and full manager layout. */
+void* func_00174040(u16* mask) {
+    s32 i;
+    if (*(s16*)mask == 0) return NULL;
+    for (i = 0; i < 16; ++i) {
+        if (ActorMaskBitValue(mask, i)) return (char*)D_0040F4D4 + (i * 0x1FD0 + 0x2B00);
+    }
+    return NULL;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001740A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00174858);
 void func_00174930(void* state, void* entry) {
