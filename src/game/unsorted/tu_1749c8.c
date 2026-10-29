@@ -27,7 +27,8 @@ extern void func_00178398(Recovered_SequenceSlot*);
 extern void func_00178350(Recovered_SequenceSlot*, s128, f32);
 extern u8 D_003DFFC8[];
 
-void func_001749C8(void) {
+/* Callers retain the receiver through this base hook; its body does not inspect it. */
+void func_001749C8(void* unusedReceiver) {
     func_00165AE0();
 }
 
@@ -117,22 +118,15 @@ void Sequence_ShuffleIndices(void* self, s8* order, s32 count) {
     }
 }
 
-#ifdef NON_MATCHING
-// Unmatched: record-index lifetime and saved-register allocation differ.
 void func_00174CD8(s32 self, s32 table, s32 definition) {
-    u8 entry;
-    func_001749C8();
-    entry = M2C_FIELD(definition, u8*, 0x44);
-    if (entry != 0xFF) {
-        M2C_FIELD(self, void**, 0x28) =
-            func_00174BE8(self, M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
+    func_001749C8((void*)self);
+    if (M2C_FIELD(definition, u8*, 0x44) != 0xFF) {
+        M2C_FIELD(self, void**, 0x28) = func_00174BE8(
+            self, M2C_FIELD((M2C_FIELD(definition, u8*, 0x44) * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
         return;
     }
     M2C_FIELD(self, void**, 0x28) = NULL;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1749c8", func_00174CD8);
-#endif
 
 s32 func_00174D48(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_5;
@@ -153,8 +147,8 @@ s32 func_00174DC8(void) {
     return 1;
 }
 
-void func_00174DD0(void) {
-    func_001749C8();
+void func_00174DD0(void* self) {
+    func_001749C8((void*)self);
 }
 
 s32 Sequence_InitializeSlots(Recovered_SequenceState* self, s64 owner, void* definition, s32 table) {
@@ -266,17 +260,12 @@ void func_00174FF0(Recovered_SequenceState* self) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1749c8", func_00174FF0);
 #endif
 
-#ifdef NON_MATCHING
-// Unmatched: saved-register setup scheduling differs.
 void func_00175090(s32 self, s32 table, s32 definition) {
-    func_001749C8();
+    func_001749C8((void*)self);
     M2C_FIELD(self, s32*, 0x48) = definition;
     func_00183618((void*)(self + 0x28), (void*)table, (void*)definition);
     func_001736B0((void*)(self + 0x50));
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1749c8", func_00175090);
-#endif
 
 s32 func_001750E8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     func_001749E8(arg0, 3, arg1, arg2, arg3);
@@ -300,22 +289,15 @@ void func_001751A0(s32 arg0, void *arg1) {
     func_00173EE0(arg0 + 0x50, arg1);
 }
 
-#ifdef NON_MATCHING
-// Unmatched: record-index lifetime and saved-register allocation differ.
 void func_001751E0(s32 self, s32 table, s32 definition) {
-    u8 entry;
-    func_001749C8();
-    entry = M2C_FIELD(definition, u8*, 0x27);
-    if (entry != 0xFF) {
-        M2C_FIELD(self, void**, 0x28) =
-            func_00174BE8(self, M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
+    func_001749C8((void*)self);
+    if (M2C_FIELD(definition, u8*, 0x27) != 0xFF) {
+        M2C_FIELD(self, void**, 0x28) = func_00174BE8(
+            self, M2C_FIELD((M2C_FIELD(definition, u8*, 0x27) * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
         return;
     }
     M2C_FIELD(self, void**, 0x28) = NULL;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1749c8", func_001751E0);
-#endif
 
 s32 func_00175250(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_5;
@@ -336,8 +318,8 @@ s32 func_001752D0(void) {
     return 1;
 }
 
-void func_001752D8(void) {
-    func_001749C8();
+void func_001752D8(void* self) {
+    func_001749C8((void*)self);
 }
 
 s32 func_001752F8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -350,22 +332,15 @@ s32 func_00175340(void) {
     return 1;
 }
 
-#ifdef NON_MATCHING
-// Unmatched: record-index lifetime and saved-register allocation differ.
 void func_00175348(s32 self, s32 table, s32 definition) {
-    u8 entry;
-    func_001749C8();
-    entry = M2C_FIELD(definition, u8*, 0x33);
-    if (entry != 0xFF) {
-        M2C_FIELD(self, void**, 0x28) =
-            func_00174BE8(self, M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
+    func_001749C8((void*)self);
+    if (M2C_FIELD(definition, u8*, 0x33) != 0xFF) {
+        M2C_FIELD(self, void**, 0x28) = func_00174BE8(
+            self, M2C_FIELD((M2C_FIELD(definition, u8*, 0x33) * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
         return;
     }
     M2C_FIELD(self, void**, 0x28) = NULL;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1749c8", func_00175348);
-#endif
 
 s32 func_001753B8(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_5;
@@ -386,8 +361,8 @@ s32 func_00175438(void) {
     return 1;
 }
 
-void func_00175440(void) {
-    func_001749C8();
+void func_00175440(void* self) {
+    func_001749C8((void*)self);
 }
 
 s32 func_00175460(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
@@ -400,22 +375,15 @@ s32 func_001754A8(void) {
     return 1;
 }
 
-#ifdef NON_MATCHING
-// Unmatched: record-index lifetime and saved-register allocation differ.
 void func_001754B0(s32 self, s32 table, s32 definition) {
-    u8 entry;
-    func_001749C8();
-    entry = M2C_FIELD(definition, u8*, 0x2E);
-    if (entry != 0xFF) {
-        M2C_FIELD(self, void**, 0x28) =
-            func_00174BE8(self, M2C_FIELD((entry * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
+    func_001749C8((void*)self);
+    if (M2C_FIELD(definition, u8*, 0x2E) != 0xFF) {
+        M2C_FIELD(self, void**, 0x28) = func_00174BE8(
+            self, M2C_FIELD((M2C_FIELD(definition, u8*, 0x2E) * 8) + M2C_FIELD(table, s32*, 0x14), u8*, 4));
         return;
     }
     M2C_FIELD(self, void**, 0x28) = NULL;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1749c8", func_001754B0);
-#endif
 
 s32 func_00175520(s32 arg0, s32 arg1, s32 arg2, s32 arg3) {
     s32 temp_5;

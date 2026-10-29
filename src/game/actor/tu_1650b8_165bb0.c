@@ -671,8 +671,38 @@ s32 func_00177B48(void* state, s32 bit) {
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00177C90);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00177D10);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00179B60);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_00179BD0);
+extern void* D_0040F4D4;
+extern s32 func_0018B490(void*, void*);
+/* Native callbacks may change the manager; reload it for each of the sixteen slots. */
+void func_00179B60(void* unusedReceiver, void* actor) {
+    s32 offset;
+    s32 remaining;
+    offset = 0x2B00;
+    remaining = 15;
+    do {
+        void* manager = D_0040F4D4;
+        --remaining;
+        func_0018B490((char*)manager + offset + 0xCC0, actor);
+        offset += 0x1FD0;
+    } while (remaining >= 0);
+}
+extern void** D_003C87E8;
+extern void (*D_003C87EC)(void*, u32, u32);
+extern void* func_002FB558(void*);
+extern void func_002FB1C8(void*, s32);
+/* UNVERIFIED: original allocator, route-buffer and surrounding state class names. */
+void func_00179BD0(void* self, s32 value) {
+    void* storage = NULL;
+    void* methods = *D_003C87E8;
+    u32 tag = M2C_FIELD(methods, u32(**)(void*, u32, void**), 0x34)((char*)D_003C87E8 + M2C_FIELD(methods, s16*, 0x30),
+                                                                    0x28, &storage);
+    void* buffers;
+    if (D_003C87EC) D_003C87EC(storage, 0x28, tag);
+    buffers = func_002FB558(storage);
+    M2C_FIELD(self, void**, 0x50) = buffers;
+    func_002FB1C8(buffers, 0x32);
+    M2C_FIELD(self, s32*, 0) = value;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_0017A9F8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_0017AB40);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_0017AED8);
@@ -691,4 +721,23 @@ void func_001A8300(void* base) {
     offsets = (u32*)((u32)base + M2C_FIELD(base, u32*, 0));
     *offsets = 0;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/actor/tu_1650b8_165bb0", func_001A8350);
+/* UNVERIFIED: original collection identity and source callback semantics. */
+typedef struct {
+    u8 unknown00[8];
+    void* delegate;
+    void* pending[8];
+    s32 count;
+} Recovered_PendingSourceCollection;
+extern void func_00345FD8(void*, void*);
+void func_001A8350(Recovered_PendingSourceCollection* self, void* source) {
+    void* delegate = self->delegate;
+    if (delegate) {
+        func_00345FD8(source, delegate);
+    } else {
+        s32 count = self->count;
+        if (count < 8) {
+            self->pending[count] = source;
+            self->count = count + 1;
+        }
+    }
+}
