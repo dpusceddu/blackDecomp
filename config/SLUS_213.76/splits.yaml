@@ -1600,7 +1600,8 @@ splits:
   - {src: src/game/unsorted/tu_1f2db0.c, range: [0x1f2db0, 0x1f2df8], flags: [-Os, -G0]}
   - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f2df8, 0x1f2ea8]}
   - {src: src/game/unsorted/tu_1f2ea8.c, range: [0x1f2ea8, 0x1f36e8]}
-  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f36e8, 0x1f42a0]}
+  - {src: src/game/unsorted/tu_1f36e8.cpp, range: [0x1f36e8, 0x1f3948], assembler: sn-min6, note: "Native empty array-construction loops have six-word short-branch separation; the stock assembler inserts one extra NOP. C++ array construction and explicit float-pair copying recover the native allocation and copy loops."}
+  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f3948, 0x1f42a0]}
   - {src: src/game/unsorted/tu_1f42a0.c, range: [0x1f42a0, 0x1f42c8]}
   - {src: src/game/unsorted/tu_1f42c8.c, range: [0x1f42c8, 0x1f44b8]}
   - {src: src/game/unsorted/tu_1f44b8.c, range: [0x1f44b8, 0x1f44c0]}

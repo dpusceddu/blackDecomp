@@ -72,7 +72,6 @@ extern "C" void func_001F2D08(void* self, signed char index, int value) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F2D08);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F2DF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F36E8);
 // Partial native command views; original class identities and unused fields are UNVERIFIED.
 extern "C" s32 func_001F1C10(void*, s32, s32, s32, s32, s32, s32);
 struct OverlayLayerRecord {
