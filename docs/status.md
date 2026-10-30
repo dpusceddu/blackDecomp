@@ -9,7 +9,7 @@ and the [README](../README.md) for the project and contribution workflow.
 
 | Library | Functions matched | Share | Code matched (bytes) | Share |
 | --- | ---: | ---: | ---: | ---: |
-| game | 3,900 / 6,437 | 60.6 % | 319,380 / 1,453,676 | 22.0 % |
+| game | 3,960 / 6,437 | 61.5 % | 329,860 / 1,453,676 | 22.7 % |
 | kynapse | 1,351 / 1,557 | 86.8 % | 146,764 / 303,420 | 48.4 % |
 | rw_core | 89 / 381 | 23.4 % | 5,140 / 179,516 | 2.9 % |
 | rw_audio | 310 / 674 | 46.0 % | 22,824 / 106,632 | 21.4 % |
@@ -18,9 +18,9 @@ and the [README](../README.md) for the project and contribution workflow.
 | apt | 235 / 705 | 33.3 % | 13,000 / 277,148 | 4.7 % |
 | sony | 321 / 703 | 45.7 % | 15,836 / 140,092 | 11.3 % |
 | libc | 76 / 209 | 36.4 % | 4,084 / 69,952 | 5.8 % |
-| **Total** | **6,636 / 11,227** | **59.1 %** | **572,984 / 2,685,060** | **21.3 %** |
+| **Total** | **6,696 / 11,227** | **59.6 %** | **583,464 / 2,685,060** | **21.7 %** |
 
-Functions as objdiff counts them: 6,636 of 11,227 (59.1 %); code: 572,984 of 2,685,060 bytes (21.34 %). Image measure (`ninja progress`): 6,636 of 11,899 function starts and 584,112 of 2,715,464 bytes (21.51 %), which includes the 672 orphan pieces and the alignment padding.
+Functions as objdiff counts them: 6,696 of 11,227 (59.6 %); code: 583,464 of 2,685,060 bytes (21.73 %). Image measure (`ninja progress`): 6,696 of 11,899 function starts and 594,704 of 2,715,464 bytes (21.90 %), which includes the 672 orphan pieces and the alignment padding.
 
 <!-- progress:end -->
 
@@ -29,10 +29,10 @@ and their agreement with objdiff. Source and translation-unit facts from the sam
 
 <!-- facts:begin (tools/badges.py) -->
 
-- The split list has 3,776 entries for 2,781 source files; 2,697 of the files hold recovered functions.
-- 5,263 functions are still `INCLUDE_ASM` lines (one per function, in the one file that owns it).
-- 315 files contain 843 `#ifdef NON_MATCHING` blocks (drafts that do not match yet, plus blocks that only carry includes and notes).
-- 99 split entries select `assembler: sn-min6`.
+- The split list has 3,802 entries for 2,796 source files; 2,711 of the files hold recovered functions.
+- 5,203 functions are still `INCLUDE_ASM` lines (one per function, in the one file that owns it).
+- 319 files contain 830 `#ifdef NON_MATCHING` blocks (drafts that do not match yet, plus blocks that only carry includes and notes).
+- 107 split entries select `assembler: sn-min6`.
 - The TU map has 3,036 translation units; confidence of its boundaries by bytes of `.text`: `exact` 14.5 %, `high` 2.9 %, `medium` 52.8 %, `low` 29.8 %.
 
 <!-- facts:end -->
