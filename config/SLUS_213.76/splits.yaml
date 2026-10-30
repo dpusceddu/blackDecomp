@@ -686,9 +686,9 @@ splits:
   - {src: src/game/ai/tu_172548_172f60.c, range: [0x173198, 0x173450]}
   - {src: src/game/ai/tu_172548_173450.c, range: [0x173450, 0x1735e0], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/ai/tu_172548.c, range: [0x1735e0, 0x173658]}
-  - {src: src/game/ai/tu_172548_173658.c, range: [0x173658, 0x173678]}
+  - {src: src/game/ai/tu_172548_173658.c, range: [0x173658, 0x173678], assembler: sn-min6, note: "Native 1739E0 has a six-word empty constructor loop; 173D38 also omits stock padding on its backward jump to a return tail."}
   - {src: src/game/ai/tu_172548.c, range: [0x173678, 0x1736b8]}
-  - {src: src/game/ai/tu_172548_173658.c, range: [0x1736b8, 0x173f58]}
+  - {src: src/game/ai/tu_172548_173658.c, range: [0x1736b8, 0x173f58], note: "Native 1739E0 has a six-word empty constructor loop; 173D38 also omits stock padding on its backward jump to a return tail."}
   - {src: src/game/ai/tu_173f58.c, range: [0x173f58, 0x173f80], flags: [-O1, -G0, -snas]}
   - {src: src/game/ai/tu_173f80.c, range: [0x173f80, 0x173fb8]}
   - {src: src/game/ai/tu_173fb8.c, range: [0x173fb8, 0x173fe8]}
