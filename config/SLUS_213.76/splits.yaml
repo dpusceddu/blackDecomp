@@ -148,7 +148,7 @@ splits:
   - {src: src/game/unsorted/tu_116f60_1178d8.c, range: [0x1178d8, 0x117930]}
   - {src: src/game/unsorted/tu_116f60_117930.c, range: [0x117930, 0x118078]}
   - {src: src/game/unsorted/tu_116f60_118078.c, range: [0x118078, 0x118158]}
-  - {src: src/game/unsorted/tu_116f60_118158.c, range: [0x118158, 0x118240]}
+  - {src: src/game/unsorted/tu_116f60_118158.c, range: [0x118158, 0x118240], assembler: sn-min6, note: "Native 0x118210 places one LQ between the float divisor load and DIV.S; stock SN inserts an extra interlock NOP, while sn-min6 and Sony both preserve the native two-slot load distance. The elapsed getter and timer setter also remain exact."}
   - {src: src/game/unsorted/tu_116f60_118240.c, range: [0x118240, 0x118290]}
   - {src: src/game/unsorted/tu_116f60_118290.c, range: [0x118290, 0x118320]}
   - {src: src/game/unsorted/tu_116f60_118320.c, range: [0x118320, 0x118410]}
