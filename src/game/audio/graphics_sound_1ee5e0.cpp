@@ -573,7 +573,122 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021CC78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D188);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D348);
+#ifdef NON_MATCHING
+#include "apt/apt_pool.hpp"
+// UNVERIFIED: interpreter views, non-native cases and recovered helper interfaces.
+namespace AptInterpreterDraft {
+using namespace AptViews;
+using AptViews::D_003BE8E0;
+using AptViews::D_003BFAE4;
+using AptViews::D_003BFAF8;
+using AptViews::D_0043DEE0;
+using AptViews::D_0043DF40;
+struct AptOperandStack {
+    int count, unknown04;
+    Value** values;
+};
+extern "C" {
+extern AptOperandStack D_0043DB68;
+extern unsigned char D_0040A991[];
+void func_00250198(void*, Token*, int);
+float func_0024C410(Value*);
+int func_0024C300(Value*);
+int func_00253358(void*, char, int);
+int func_0035C4B0(const void*, const void*, int);
+void func_0024C6D0(Value*, void*);
+unsigned long func_00364DA8(const char*, char**, int);
+int func_0021ADA8();
+}
+struct NumericText {
+    Token* token;
+    NumericText() : token(&D_003BFAF8) { ++token->refs; }
+    ~NumericText() {
+        if (!--token->refs) func_00250198(D_0043DEE0, token, *(unsigned short*)((char*)token + 4) + 9);
+    }
+    inline const char* Data() const { return token->text; }
+    inline unsigned short Length() const { return *(unsigned short*)((char*)token + 2); }
+};
+static inline int IsAptType(Value* v, unsigned kind) {
+    int result = 0;
+    if (((unsigned)v->flags >> 25) == kind) result = (v->flags >> 4) & 1;
+    return result;
+}
+static inline int IsAptObject(Value* v) {
+    int result = 0;
+    if ((((unsigned)v->flags >> 25) - 12) < 8) result = (v->flags >> 4) & 1;
+    return result;
+}
+static inline int IsAptText(Value* v) {
+    int result = 0;
+    unsigned kind = (unsigned)v->flags >> 25;
+    if (kind == 1 || kind == 42) {
+        if (!(((v->flags >> 4) & 1) ^ 1)) result = 1;
+    }
+    return result;
+}
+static inline unsigned char TextIsNotNumber(Value* v) {
+    NumericText text;
+    func_0024C6D0(v, &text);
+    if (text.Length() == 0) return 1;
+    if (text.Data()[0] == '0') {
+        char* end;
+        if (text.Length() >= 3 && text.Data()[1] == 'x') {
+            func_00364DA8(text.Data(), &end, 16);
+            if (*end == 0) return 0;
+        }
+    }
+    int dot = 0;
+    char last = text.Data()[text.Length() - 1];
+    if (last != '-' && last != '+' && last != 'e' && last != '.' && !(D_0040A991[last] & 4)) return 1;
+    char first = text.Data()[0];
+    if (first != '.' && first != '-' && first != '+' && !(D_0040A991[first] & 4)) return 1;
+    for (int i = 1; i < text.Length(); ++i) {
+        char c = text.Data()[i];
+        if (c == '.' && !dot) {
+            dot = 1;
+            continue;
+        }
+        if (c == 'e' && i != 1) {
+            if (i == 2 && (text.Data()[0] == '+' || text.Data()[0] == '-')) return 1;
+            if (i + 1 < text.Length()) {
+                char n = text.Data()[i + 1];
+                if (n == '-' || n == '+' || (D_0040A991[n] & 4)) {
+                    ++i;
+                    continue;
+                }
+                return 1;
+            }
+            continue;
+        }
+        if (!(D_0040A991[c] & 4)) return 1;
+    }
+    return 0;
+}
+static inline unsigned char AptIsNotNumber(Value* v) {
+    if (((unsigned char)IsAptType(v, 7)) || ((unsigned char)IsAptType(v, 6))) return 0;
+    if (((unsigned char)IsAptText(v))) return TextIsNotNumber(v);
+    if ((((v->flags >> 4) & 1) ^ 1) || (((unsigned)v->flags >> 25) == 3)) return func_0021ADA8() == 7;
+    return 1;
+}
+static inline PooledValue* AptBooleanValue(Value* v) {
+    if (((unsigned char)IsAptType(v, 5))) return Boolean(*(unsigned char*)((char*)v + 8));
+    if (((unsigned char)IsAptType(v, 6)) || ((unsigned char)IsAptType(v, 7))) return Boolean(func_0024C410(v) != 0.0f);
+    return Boolean(0);
+}
+// Unmatched: pooled Boolean paths and numeric-text cleanup are laid out differently.
+extern "C" Value* func_0021D4E0(void* unused, int present) {
+    if (!present) return (Value*)D_0043DF40;
+    Value* v = D_0043DB68.values[D_0043DB68.count - 1];
+    if (((unsigned char)IsAptObject(v)) || ((unsigned char)IsAptType(v, 27))) return (Value*)Boolean(1);
+    if (v == (Value*)D_0043DF40) return (Value*)Boolean(0);
+    if (((unsigned char)IsAptType(v, 6)) || ((unsigned char)IsAptType(v, 7))) return (Value*)AptBooleanValue(v);
+    if (AptIsNotNumber(v)) return (Value*)Boolean(0);
+    return (Value*)Boolean(func_0024C410(v) != 0.0f);
+}
+} // namespace AptInterpreterDraft
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0021D4E0);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00224270);
 // UNVERIFIED: original identities and callback semantics.
 struct Recovered_ResetVtable { u8 unknown[0x10]; s16 adjustment; u16 unknown12; void (*reset)(void*); };
@@ -601,7 +716,124 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00226060);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_002263A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00226BB0);
+#ifdef NON_MATCHING
+namespace AptInterpreterDraft {
+static inline unsigned char AptNumber(Value* v) {
+    return (unsigned char)IsAptType(v, 7) || (unsigned char)IsAptType(v, 6);
+}
+static inline unsigned char AptScalar(Value* v) {
+    return AptNumber(v) || (unsigned char)IsAptType(v, 5) || (unsigned char)IsAptText(v);
+}
+static inline Token* AptTextToken(Value* v) {
+    Value* base = v;
+    if (((unsigned)v->flags >> 25) != 1) base = *(Value**)((char*)v + 0x20);
+    return *(Token**)((char*)base + 8);
+}
+static inline unsigned char AptSameTokens(Token* a, Token* b) {
+    unsigned char result = 0;
+    int length = *(unsigned short*)((char*)a + 2);
+    if (length == *(unsigned short*)((char*)b + 2) && (a == b || func_0035C4B0(a->text, b->text, length) == 0))
+        result = 1;
+    return result;
+}
+static inline unsigned char AptFloating(Value* v) {
+    unsigned char result = 0;
+    if ((unsigned char)IsAptText(v) || (unsigned char)IsAptType(v, 6)) {
+        if ((unsigned char)IsAptType(v, 6))
+            result = 1;
+        else {
+            Value* base = v;
+            if (((unsigned)v->flags >> 25) != 1) base = *(Value**)((char*)v + 0x20);
+            if (func_00253358((char*)base + 8, '.', 0) != -1) result = 1;
+        }
+    }
+    return result;
+}
+static inline void AptPopTwo(AptOperandStack* stack) {
+    if (stack->count >= 2) {
+        int i = 1;
+        do {
+            stack->values[stack->count - i]->Release();
+            ++i;
+        } while (i <= 2);
+        stack->count -= 2;
+    }
+}
+static inline void AptPushBoolean(AptOperandStack* stack, unsigned char result) {
+    Value* value = (Value*)Boolean(result);
+    int count = stack->count;
+    stack->values[count] = value;
+    stack->count = count + 1;
+    value->AddRef();
+}
+// Unmatched: numeric conversion lifetimes, reference cleanup and register allocation differ.
+extern "C" void func_00227830(AptOperandStack* stack) {
+    int result = 0;
+    Value* right = stack->values[stack->count - 1];
+    Value* left = stack->values[stack->count - 2];
+    if (((unsigned)right->flags >> 25) == 19) right = (Value*)D_0043DF40;
+    if (((unsigned)left->flags >> 25) == 19) left = (Value*)D_0043DF40;
+    if (func_0021ADA8() == 7) {
+        int missing = ((right->flags >> 4) & 1) ^ 1;
+        if (!((left->flags >> 4) & 1)) ++missing;
+        if (missing > 0) {
+            AptPopTwo(stack);
+            AptPushBoolean(stack, missing == 2);
+            return;
+        }
+    }
+    if ((AptScalar(right) && AptScalar(left)) || ((unsigned)right->flags >> 25) == ((unsigned)left->flags >> 25)) {
+        if (((right->flags >> 4) & 1) ^ 1)
+            result = 1;
+        else if ((unsigned char)IsAptType(right, 7) && (unsigned char)IsAptType(left, 7)) {
+            int rightInteger = func_0024C300(right);
+            result = rightInteger == func_0024C300(left);
+        } else if ((unsigned char)IsAptType(right, 6) && (unsigned char)IsAptType(left, 6)) {
+            float rightReal = func_0024C410(right);
+            result = rightReal == func_0024C410(left);
+        } else if ((unsigned char)IsAptText(right) && (unsigned char)IsAptText(left)) {
+            Token* l = AptTextToken(left);
+            Token* r = AptTextToken(right);
+            if (AptSameTokens(l, r)) result = 1;
+        } else if ((AptNumber(right) && !AptIsNotNumber(left)) || (AptNumber(left) && !AptIsNotNumber(right))) {
+            int rightFloat = AptFloating(right);
+            int leftFloat = AptFloating(left);
+            if ((unsigned char)IsAptType(right, 7)) {
+                int rightInteger = func_0024C300(right);
+                if (leftFloat)
+                    result = fabsf((float)rightInteger - func_0024C410(left)) < 0.001f;
+                else
+                    result = func_0024C300(left) == rightInteger;
+            } else if ((unsigned char)IsAptType(left, 7)) {
+                int leftInteger = func_0024C300(left);
+                if (rightFloat)
+                    result = fabsf(func_0024C410(right) - (float)leftInteger) < 0.001f;
+                else
+                    result = func_0024C300(right) == leftInteger;
+            } else {
+                float rightReal = func_0024C410(right);
+                result = fabsf(rightReal - func_0024C410(left)) < 0.001f;
+            }
+        } else if ((unsigned char)IsAptText(right) && !(unsigned char)IsAptType(left, 5)) {
+            NumericText r, l;
+            func_0024C6D0(right, &r);
+            func_0024C6D0(left, &l);
+            result = AptSameTokens(r.token, l.token);
+        } else if ((unsigned char)IsAptType(right, 5) && !(unsigned char)IsAptText(left)) {
+            int rightInteger = func_0024C300(right);
+            result = rightInteger == func_0024C300(left);
+        } else
+            result = right == left;
+    } else if (((right->flags >> 4) & 1) ^ 1) {
+        if (!((left->flags >> 4) & 1)) result = 1;
+    }
+    AptPopTwo(stack);
+    AptPushBoolean(stack, result != 0);
+}
+} // namespace AptInterpreterDraft
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00227830);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00228BC8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229370);
 // UNVERIFIED: original types and callback semantics.
@@ -633,7 +865,479 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", fun
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229BB0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_00229F40);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022A1C0);
+#ifdef NON_MATCHING
+namespace AptCallDraft {
+// UNVERIFIED: original interpreter types, stack-local layout and call-site interfaces.
+typedef struct Recovered_ObjectStack {
+    s32 unk_0;
+    u8 unk_4[4];
+    s32 unk_8;
+    u8 unk_C[36];
+    void* unk_30;
+    u8 unk_34[4];
+    s32 unk_38;
+} Recovered_ObjectStack;
+// Symbol aliases isolate this provisional value view from the typed APT interfaces.
+extern "C" s32 Call_func_0024C300(s32*) __asm__("func_0024C300");
+extern "C" u16 Call_D_003BFAF8 __asm__("D_003BFAF8");
+extern "C" s32* Call_D_0043DF40 __asm__("D_0043DF40");
+extern "C" void Call_func_00253FF0(void*, s8*) __asm__("func_00253FF0");
+extern "C" s8 Call_D_003FD498 __asm__("D_003FD498");
+extern "C" void Call_func_00250198(void*, u16*, s32) __asm__("func_00250198");
+extern "C" void* Call_D_0043DEE0 __asm__("D_0043DEE0");
+extern "C" void Call_func_0024C6D0(s32*, void*) __asm__("func_0024C6D0");
+extern "C" s32* Call_func_0021E420(Recovered_ObjectStack*, s32*, s32, void*, s32, s32, s32) __asm__("func_0021E420");
+extern "C" s32 Call_func_00360838(s8*, const char*) __asm__("func_00360838");
+extern "C" s8 Call_D_003FD4B0 __asm__("D_003FD4B0");
+extern "C" s32 Call_func_0024F440(void*) __asm__("func_0024F440");
+extern "C" s32* Call_D_0043DF48 __asm__("D_0043DF48");
+extern "C" void Call_func_0021EA58(void*, s32*, s32*, s32) __asm__("func_0021EA58");
+extern "C" M2C_UNK Call_D_003FD4B8 __asm__("D_003FD4B8");
+extern "C" M2C_UNK Call_D_003FD4C0 __asm__("D_003FD4C0");
+
+// Unmatched: string cleanup and temporary lifetimes change scheduling and register allocation.
+extern "C" void func_0022A440(void* self, void* callContext) {
+    s32 didPushScope;
+    s32* countValue;
+    void* scopeStack;
+    u16* nameToken;
+    u16* temporaryToken;
+    void (*temp_5_13)(void*);
+    void (*temp_5_15)(void*);
+    void (*temp_5_16)(void*);
+    void (*temp_5_2)(void*);
+    void (*temp_5_7)(void*);
+    void (*temp_5_8)(void*);
+    void (*temp_5_9)(void*);
+    const char* temp_5_5;
+    s32* nameValue;
+    s32* temp_16_2;
+    s32* operandObject;
+    s32* temp_2;
+    s32* temp_3_8;
+    s32* temp_4_4;
+    s32* temp_5_3;
+    s32* var_16_3;
+    s32* thisValue;
+    s32* functionValue;
+    s32 temp_18;
+    s32 temp_2_10;
+    s32 temp_2_11;
+    s32 temp_2_13;
+    s32 temp_2_15;
+    s32 temp_2_4;
+    s32 temp_2_7;
+    s32 temp_2_8;
+    s32 temp_2_9;
+    s32 temp_3;
+    s32 temp_3_11;
+    s32 temp_3_14;
+    s32 temp_3_17;
+    s32 temp_3_18;
+    s32 temp_3_3;
+    s32 temp_3_4;
+    s32 temp_3_6;
+    s32 temp_3_7;
+    s32 temp_4_3;
+    s32 temp_4_5;
+    s32 temp_4_6;
+    s32 temp_4_7;
+    s32 temp_5;
+    s32 temp_5_10;
+    s32 temp_5_11;
+    s32 temp_5_6;
+    s32 temp_6_6;
+    s32 var_16;
+    s32 var_16_2;
+    s32 var_18;
+    s32 var_18_2;
+    s32 argumentCount;
+    s32 var_4;
+    s32 var_5;
+    s32 var_5_2;
+    s32 var_5_3;
+    s32 var_5_5;
+    s32 var_5_6;
+    s32 var_6;
+    s32 var_6_2;
+    s32 var_7;
+    u16 temp_2_16;
+    u16 temp_2_2;
+    u16 temp_2_3;
+    u16 var_2;
+    u32 temp_3_13;
+    u32 temp_3_19;
+    u32 temp_4;
+    u32 temp_4_2;
+    void* temp_18_2;
+    void* temp_23;
+    void* temp_2_12;
+    void* temp_2_14;
+    void* temp_2_17;
+    void* temp_2_18;
+    void* temp_2_19;
+    void* temp_2_20;
+    void* temp_2_5;
+    void* temp_2_6;
+    void* temp_3_10;
+    void* temp_3_12;
+    void* temp_3_15;
+    void* temp_3_16;
+    void* temp_3_20;
+    void* temp_3_21;
+    void* temp_3_22;
+    void* temp_3_23;
+    void* temp_3_2;
+    void* temp_3_5;
+    void* temp_3_9;
+    void* temp_5_12;
+    void* temp_5_14;
+    void* temp_5_4;
+    void* temp_6;
+    void* temp_6_2;
+    void* temp_6_3;
+    void* temp_6_4;
+    void* temp_6_5;
+    void* temp_6_7;
+    void* temp_6_8;
+    void* temp_7;
+    void* var_2_2;
+    void* var_5_4;
+    functionValue = 0;
+    temp_3 = *((s32*)(((s8*)self) + 0));
+    didPushScope = 0;
+    temp_5 = *((s32*)(((s8*)self) + 8));
+    temp_2 = *((s32**)(((s8*)(((temp_3 - 2) * 4) + temp_5)) + (-4)));
+    countValue = temp_2;
+    operandObject = *((s32**)(((s8*)(((temp_3 - 1) * 4) + temp_5)) + (-4)));
+    nameValue = *((s32**)(((s8*)((temp_3 * 4) + temp_5)) + (-4)));
+    thisValue = operandObject;
+    argumentCount = Call_func_0024C300(temp_2);
+    nameToken = &Call_D_003BFAF8;
+    Call_D_003BFAF8 += 1;
+    if (nameValue == Call_D_0043DF40) {
+        Call_func_00253FF0(&temporaryToken, &Call_D_003FD498);
+        *((u16*)(((s8*)(temporaryToken)) + 0)) += 1;
+        temp_2_2 = (*((u16*)(((s8*)(nameToken)) + 0))) - 1;
+        *((u16*)(((s8*)(nameToken)) + 0)) = temp_2_2;
+        if (!(temp_2_2 & 0xFFFF)) {
+            Call_func_00250198(Call_D_0043DEE0, nameToken, (*((u16*)(((s8*)(nameToken)) + 4))) + 9);
+        }
+        nameToken = temporaryToken;
+        temp_2_3 = (*((u16*)(((s8*)(temporaryToken)) + 0))) - 1;
+        *((u16*)(((s8*)(temporaryToken)) + 0)) = temp_2_3;
+        if (!(temp_2_3 & 0xFFFF)) {
+            Call_func_00250198(Call_D_0043DEE0, temporaryToken, (*((u16*)(((s8*)(temporaryToken)) + 4))) + 9);
+        }
+        temp_4 = *((u32*)(((s8*)operandObject) + 0));
+        var_5 = 0;
+        if ((temp_4 >> 0x19) == 0x1C) { var_5 = (((s32)temp_4) >> 4) & 1; }
+        functionValue = operandObject;
+        if (var_5 & 0xFF) { functionValue = *((s32**)(((s8*)operandObject) + 0x1C)); }
+    } else {
+        Call_func_0024C6D0(nameValue, &nameToken);
+    }
+    if (!((((((s32)(*((u32*)(((s8*)operandObject) + 0)))) >> 4) & 1) ^ 1) != 0)) {
+        temp_3_4 = *((s32*)(((s8*)self) + 0x24));
+        temp_2_5 = (void*)(((s8*)self) + 0x24);
+        scopeStack = temp_2_5;
+        temp_5_3 = *((s32**)(((s8*)callContext) + 4));
+        *((s32**)(((s8*)((temp_3_4 * 4) + (*((s32*)(((s8*)temp_2_5) + 8))))) + 0)) = temp_5_3;
+        *((s32*)(((s8*)self) + 0x24)) = (s32)(temp_3_4 + 1);
+        temp_2_6 = *((void**)(((s8*)temp_5_3) + 4));
+        (*((void (**)(void*))(((s8*)temp_2_6) + 0xC)))((void*)(((s8*)temp_5_3) + (*((s16*)(((s8*)temp_2_6) + 8)))));
+        temp_2_7 = *((s32*)(((s8*)self) + 0));
+        if (temp_2_7 > 0) {
+            temp_5_4 = *((void**)(((s8*)((temp_2_7 * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)));
+            temp_3_5 = *((void**)(((s8*)temp_5_4) + 4));
+            (*((void (**)(void*))(((s8*)temp_3_5) + 0x14)))(
+                (void*)(((s8*)temp_5_4) + (*((s16*)(((s8*)temp_3_5) + 0x10)))));
+            temp_3_6 = *((s32*)(((s8*)self) + 0));
+            temp_2_8 = temp_3_6 - 1;
+            *((s32*)(((s8*)self) + 0)) = temp_2_8;
+            if (temp_2_8 > 0) {
+                temp_2_9 = temp_3_6 - 2;
+                *((s32*)(((s8*)self) + 0)) = temp_2_9;
+                if (temp_2_9 > 0) { *((s32*)(((s8*)self) + 0)) = (s32)(temp_3_6 - 3); }
+            }
+        }
+        if ((functionValue == 0) || (functionValue == Call_D_0043DF40)) {
+            functionValue = Call_func_0021E420((Recovered_ObjectStack*)self, operandObject, 0, &nameToken, 1, 1, 0);
+        }
+        temp_5_5 = "apply";
+        if (((functionValue == 0) || ((((((s32)(*functionValue)) >> 4) & 1) ^ 1) != 0)) &&
+            ((Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), temp_5_5) == 0) ||
+             (Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), "call") == 0))) {
+            functionValue = operandObject;
+            temp_3_7 = *((s32*)(((s8*)(countValue)) + 0));
+            temp_4_2 = ((u32)temp_3_7) >> 0x19;
+            var_5_2 = 0;
+            if (temp_4_2 == 7) { var_5_2 = (temp_3_7 >> 4) & 1; }
+            if (var_5_2 & 0xFF) {
+            block_32:
+                if (argumentCount > 0) {
+                    temp_2_11 = *((s32*)(((s8*)self) + 0));
+                    temp_3_11 = *((s32*)(((s8*)self) + 8));
+                    temp_4_4 = *((s32**)(((s8*)((temp_2_11 * 4) + temp_3_11)) + (-4)));
+                    if (((*((s32**)(((s8*)((temp_2_11 * 4) + temp_3_11)) + (-4)))) == 0) ||
+                        ((thisValue = temp_4_4, (((((s32)(*temp_4_4)) >> 4) & 1) ^ 1) != 0))) {
+                        thisValue = Call_D_0043DF40;
+                    }
+                    if (temp_2_11 > 0) {
+                        temp_6_4 = *((void**)(((s8*)((temp_2_11 * 4) + temp_3_11)) + (-4)));
+                        temp_3_12 = *((void**)(((s8*)temp_6_4) + 4));
+                        temp_5_9 = *((void (**)(void*))(((s8*)temp_3_12) + 0x14));
+                        temp_5_9((void*)(((s8*)temp_6_4) + (*((s16*)(((s8*)temp_3_12) + 0x10)))));
+                        *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - 1);
+                    }
+                    argumentCount -= 1;
+                } else {
+                    thisValue = Call_D_0043DF40;
+                }
+
+            } else {
+                var_5_3 = 0;
+                if (temp_4_2 == 6) { var_5_3 = (temp_3_7 >> 4) & 1; }
+                if (!(var_5_3 & 0xFF)) {
+                    thisValue = countValue;
+                    argumentCount = Call_func_0024C300(
+                        *((s32**)(((s8*)(((*((s32*)(((s8*)self) + 0))) * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4))));
+                    if (argumentCount >= 2) {
+                        temp_4_3 = *((s32*)(((s8*)self) + 0));
+                        temp_5_6 = *((s32*)(((s8*)self) + 8));
+                        temp_3_8 = *((s32**)(((s8*)(((temp_4_3 - 1) * 4) + temp_5_6)) + (-4)));
+                        if (temp_3_8 != 0) { thisValue = ((((s32)(*temp_3_8)) >> 4) & 1) ? (temp_3_8) : (countValue); }
+                        if (temp_4_3 > 0) {
+                            temp_6_2 = *((void**)(((s8*)((temp_4_3 * 4) + temp_5_6)) + (-4)));
+                            temp_3_9 = *((void**)(((s8*)temp_6_2) + 4));
+                            temp_5_7 = *((void (**)(void*))(((s8*)temp_3_9) + 0x14));
+                            temp_5_7((void*)(((s8*)temp_6_2) + (*((s16*)(((s8*)temp_3_9) + 0x10)))));
+                            *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - 1);
+                        }
+                        argumentCount -= 1;
+                    }
+                    temp_2_10 = *((s32*)(((s8*)self) + 0));
+                    if (temp_2_10 > 0) {
+                        temp_6_3 = *((void**)(((s8*)((temp_2_10 * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)));
+                        temp_3_10 = *((void**)(((s8*)temp_6_3) + 4));
+                        temp_5_8 = *((void (**)(void*))(((s8*)temp_3_10) + 0x14));
+                        temp_5_8((void*)(((s8*)temp_6_3) + (*((s16*)(((s8*)temp_3_10) + 0x10)))));
+                        *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - 1);
+                    }
+                } else {
+                    goto block_32;
+                }
+            }
+            if (Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), temp_5_5) == 0) {
+                temp_5_10 = *((s32*)(((s8*)self) + 0));
+                temp_18_2 = *((void**)(((s8*)((temp_5_10 * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)));
+                temp_3_13 = *((u32*)(((s8*)temp_18_2) + 0));
+                var_6 = 0;
+                if ((temp_3_13 >> 0x19) == 0x16) { var_6 = (((s32)temp_3_13) >> 4) & 1; }
+                if (var_6 & 0xFF) {
+                    if (temp_5_10 > 0) {
+                        temp_2_12 = *((void**)(((s8*)temp_18_2) + 4));
+                        (*((void (**)(void*))(((s8*)temp_2_12) + 0x14)))(
+                            (void*)(((s8*)temp_18_2) + (*((s16*)(((s8*)temp_2_12) + 0x10)))));
+                        *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - 1);
+                    }
+                    temp_2_13 = (*((s32*)(((s8*)temp_18_2) + 0x28))) - 1;
+                    var_16_2 = temp_2_13;
+                    argumentCount += temp_2_13;
+                    if (var_16_2 >= 0) {
+                        do {
+                            temp_3_14 = var_16_2 * 4;
+                            temp_4_5 = *((s32*)(((s8*)self) + 0));
+                            var_16_2 -= 1;
+                            temp_5_11 = *((s32*)(((s8*)self) + 8));
+                            temp_6_5 = *((void**)(((s8*)(temp_3_14 + (*((s32*)(((s8*)temp_18_2) + 0x20))))) + 0));
+                            *((void**)(((s8*)((temp_4_5 * 4) + temp_5_11)) + 0)) = temp_6_5;
+                            *((s32*)(((s8*)self) + 0)) = (s32)(temp_4_5 + 1);
+                            temp_2_14 = *((void**)(((s8*)temp_6_5) + 4));
+                            (*((void (**)(void*))(((s8*)temp_2_14) + 0xC)))(
+                                (void*)(((s8*)temp_6_5) + (*((s16*)(((s8*)temp_2_14) + 8)))));
+                        } while (var_16_2 >= 0);
+                    }
+                }
+            }
+        }
+        temp_3_15 = *((void**)(((s8*)thisValue) + 4));
+        var_18 = 1;
+        if ((*((s32(**)(void*))(((s8*)temp_3_15) + 0x34)))(
+                (void*)(((s8*)thisValue) + (*((s16*)(((s8*)temp_3_15) + 0x30))))) != 0) {
+            temp_2_15 = *((s32*)(((s8*)self) + 0xC));
+            var_16_3 = thisValue;
+            temp_23 = (void*)(((s8*)self) + 0xC);
+            if (temp_2_15 == 0) {
+                if (thisValue == (*((s32**)(((s8*)callContext) + 0x10)))) {
+                    Call_func_00253FF0(&temporaryToken, &Call_D_003FD4B0);
+                    var_16_3 = Call_func_0021E420((Recovered_ObjectStack*)self, *((s32**)(((s8*)callContext) + 4)), 0,
+                                                  &temporaryToken, 1, 1, 0);
+                    temp_2_16 = (*((u16*)(((s8*)(temporaryToken)) + 0))) - 1;
+                    *((u16*)(((s8*)(temporaryToken)) + 0)) = temp_2_16;
+                    if (!(temp_2_16 & 0xFFFF)) {
+                        Call_func_00250198(Call_D_0043DEE0, temporaryToken,
+                                           (*((u16*)(((s8*)(temporaryToken)) + 4))) + 9);
+                    }
+                }
+            } else {
+                temp_6_6 = *((s32*)(((s8*)thisValue) + 0));
+                var_7 = 0;
+                var_5_4 = *((void**)(((s8*)((temp_2_15 * 4) + (*((s32*)(((s8*)temp_23) + 8))))) + (-4)));
+                if (((u32)((((u32)temp_6_6) >> 0x19) - 0xC)) < 8U) { var_7 = (temp_6_6 >> 4) & 1; }
+                if (((!(var_7 & 0xFF)) || ((*((void**)(((s8*)thisValue) + 0x44))) != var_5_4)) &&
+                    (thisValue != var_5_4)) {
+                loop_68:
+                    temp_3_16 = *((void**)(((s8*)var_5_4) + 4));
+
+                    var_2_2 = (*((void* (**)(void*))(((s8*)temp_3_16) + 0x24)))(
+                        (void*)(((s8*)var_5_4) + (*((s16*)(((s8*)temp_3_16) + 0x20)))));
+                loop_69:
+                    if (var_2_2 != 0) {
+                        var_5_4 = *((void**)(((s8*)var_2_2) + 8));
+                        var_2_2 = 0;
+                        if (var_5_4 != 0) {
+                            if (var_5_4 == thisValue) {
+                                var_18 = 0;
+                            } else {
+                                var_2_2 = 0;
+                                if (var_5_4 != 0) { goto loop_68; }
+                                goto loop_69;
+                            }
+                        } else {
+                            goto loop_69;
+                        }
+                    }
+                }
+            }
+            if (var_18 == 1) {
+                temp_4_6 = *((s32*)(((s8*)var_16_3) + 0));
+                didPushScope = 1;
+                var_5_5 = 0;
+                if ((((u32)temp_4_6) >> 0x19) == 0x1B) { var_5_5 = (temp_4_6 >> 4) & 1; }
+                if (var_5_5 & 0xFF) {
+                    *((s32*)(((s8*)var_16_3) + 0x1C)) = (s32)((*((s32*)(((s8*)var_16_3) + 0x1C))) | 0x200);
+                }
+                temp_3_17 = *((s32*)(((s8*)self) + 0xC));
+                *((s32**)(((s8*)((temp_3_17 * 4) + (*((s32*)(((s8*)temp_23) + 8))))) + 0)) = var_16_3;
+                *((s32*)(((s8*)self) + 0xC)) = (s32)(temp_3_17 + 1);
+                temp_2_17 = *((void**)(((s8*)var_16_3) + 4));
+                (*((void (**)(void*))(((s8*)temp_2_17) + 0xC)))(
+                    (void*)(((s8*)var_16_3) + (*((s16*)(((s8*)temp_2_17) + 8)))));
+            }
+        }
+        var_18_2 = 0;
+        if (((((u32)(*((s32*)(((s8*)thisValue) + 0)))) >> 6) & 0xFFF) == 1) {
+            temp_2_18 = *((void**)(((s8*)thisValue) + 4));
+            var_18_2 = 1;
+            (*((void (**)(void*))(((s8*)temp_2_18) + 0xC)))(
+                (void*)(((s8*)thisValue) + (*((s16*)(((s8*)temp_2_18) + 8)))));
+        }
+        if (Call_func_0024F440(thisValue) != 0) {
+            if (thisValue == Call_D_0043DF48) {
+                thisValue = *((
+                    s32**)(((s8*)((((*((s32*)(((s8*)self) + 0x24))) - 1) * 4) + (*((s32*)(((s8*)(scopeStack)) + 8))))) +
+                           (-4)));
+            }
+            if (thisValue == (*((s32**)(((s8*)callContext) + 0x10)))) {
+                temp_3_18 = *((s32*)(((s8*)functionValue) + 0));
+                var_4 = 0;
+                if (((u32)((((u32)temp_3_18) >> 0x19) - 0x2B)) < 3U) { var_4 = (temp_3_18 >> 4) & 1; }
+                if (var_4 & 0xFF) {
+                    temp_16_2 = *((s32**)(((s8*)functionValue) + 0x20));
+                    *((s32**)(((s8*)functionValue) + 0x20)) = (s32*)(*((s32**)(((s8*)callContext) + 4)));
+                    Call_func_0021EA58(self, thisValue, functionValue, argumentCount);
+                    *((s32**)(((s8*)functionValue) + 0x20)) = temp_16_2;
+                } else {
+                    goto block_91;
+                }
+            } else {
+            block_91:
+                Call_func_0021EA58(self, thisValue, functionValue, argumentCount);
+            }
+        } else {
+            Call_func_0021EA58(self, thisValue, functionValue, argumentCount);
+        }
+        temp_7 = (void*)(((s8*)self) + 0xC);
+        if ((didPushScope) == 1) {
+            temp_5_12 =
+                *((void**)(((s8*)(((*((s32*)(((s8*)self) + 0xC))) * 4) + (*((s32*)(((s8*)temp_7) + 8))))) + (-4)));
+            temp_3_19 = *((u32*)(((s8*)temp_5_12) + 0));
+            var_6_2 = 0;
+            if ((temp_3_19 >> 0x19) == 0x1B) { var_6_2 = (((s32)temp_3_19) >> 4) & 1; }
+            if (var_6_2 & 0xFF) {
+                *((s32*)(((s8*)temp_5_12) + 0x1C)) = (s32)((*((s32*)(((s8*)temp_5_12) + 0x1C))) & (~0x200));
+            }
+            temp_6_7 =
+                *((void**)(((s8*)(((*((s32*)(((s8*)self) + 0xC))) * 4) + (*((s32*)(((s8*)temp_7) + 8))))) + (-4)));
+            temp_3_20 = *((void**)(((s8*)temp_6_7) + 4));
+            temp_5_13 = *((void (**)(void*))(((s8*)temp_3_20) + 0x14));
+            temp_5_13((void*)(((s8*)temp_6_7) + (*((s16*)(((s8*)temp_3_20) + 0x10)))));
+            *((s32*)(((s8*)self) + 0xC)) = (s32)((*((s32*)(((s8*)self) + 0xC))) - 1);
+        }
+        if (var_18_2 != 0) {
+            temp_2_19 = *((void**)(((s8*)thisValue) + 4));
+            (*((void (**)(void*))(((s8*)temp_2_19) + 0x14)))(
+                (void*)(((s8*)thisValue) + (*((s16*)(((s8*)temp_2_19) + 0x10)))));
+        }
+        if ((*((void**)(((s8*)(((*((s32*)(((s8*)self) + 0))) * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)))) !=
+            Call_D_0043DF40) {
+            temp_4_7 = *((s32*)(((s8*)thisValue) + 0));
+            var_5_6 = 0;
+            if ((((u32)temp_4_7) >> 0x19) == 0x16) { var_5_6 = (temp_4_7 >> 4) & 1; }
+            if (var_5_6 & 0xFF) {
+                if ((Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), (const char*)&Call_D_003FD4B8) == 0) ||
+                    (Call_func_00360838((s8*)((u16*)(((s8*)(nameToken)) + 8)), (const char*)&Call_D_003FD4C0) == 0)) {
+                    temp_5_14 =
+                        *((void**)(((s8*)(((*((s32*)(((s8*)self) + 0))) * 4) + (*((s32*)(((s8*)self) + 8))))) + (-4)));
+                    temp_3_21 = *((void**)(((s8*)temp_5_14) + 4));
+                    (*((void (**)(void*))(((s8*)temp_3_21) + 0x14)))(
+                        (void*)(((s8*)temp_5_14) + (*((s16*)(((s8*)temp_3_21) + 0x10)))));
+                }
+            }
+        }
+        temp_6_8 =
+            *((void**)(((s8*)(((*((s32*)(((s8*)self) + 0x24))) * 4) + (*((s32*)(((s8*)(scopeStack)) + 8))))) + (-4)));
+        temp_3_22 = *((void**)(((s8*)temp_6_8) + 4));
+        temp_5_15 = *((void (**)(void*))(((s8*)temp_3_22) + 0x14));
+        temp_5_15((void*)(((s8*)temp_6_8) + (*((s16*)(((s8*)temp_3_22) + 0x10)))));
+        *((s32*)(((s8*)self) + 0x24)) = (s32)((*((s32*)(((s8*)self) + 0x24))) - 1);
+        temp_3_23 = *((void**)(((s8*)operandObject) + 4));
+        temp_5_16 = *((void (**)(void*))(((s8*)temp_3_23) + 0x14));
+        temp_5_16((void*)(((s8*)operandObject) + (*((s16*)(((s8*)temp_3_23) + 0x10)))));
+        temp_2_20 = *((void**)(((s8*)(countValue)) + 4));
+        (*((void (**)(void*))(((s8*)temp_2_20) + 0x14)))(
+            (void*)(((s8*)(countValue)) + (*((s16*)(((s8*)temp_2_20) + 0x10)))));
+    } else {
+        temp_18 = argumentCount + 3;
+        if ((*((s32*)(((s8*)self) + 0))) >= temp_18) {
+            var_16 = 1;
+            if (temp_18 > 0) {
+            loop_113:
+                temp_2_4 = ((*((s32*)(((s8*)self) + 0))) - var_16) * 4;
+
+                var_16 += 1;
+                temp_6 = *((void**)(((s8*)(temp_2_4 + (*((s32*)(((s8*)self) + 8))))) + 0));
+                temp_3_2 = *((void**)(((s8*)temp_6) + 4));
+                temp_5_2 = *((void (**)(void*))(((s8*)temp_3_2) + 0x14));
+                temp_5_2((void*)(((s8*)temp_6) + (*((s16*)(((s8*)temp_3_2) + 0x10)))));
+                if (temp_18 >= var_16) { goto loop_113; }
+            }
+            *((s32*)(((s8*)self) + 0)) = (s32)((*((s32*)(((s8*)self) + 0))) - temp_18);
+        }
+        temp_3_3 = *((s32*)(((s8*)self) + 0));
+        *((s32**)(((s8*)((temp_3_3 * 4) + (*((s32*)(((s8*)self) + 8))))) + 0)) = Call_D_0043DF40;
+        *((s32*)(((s8*)self) + 0)) = (s32)(temp_3_3 + 1);
+    }
+    var_2 = (*((u16*)(((s8*)(nameToken)) + 0))) - 1;
+    *((u16*)(((s8*)(nameToken)) + 0)) = var_2;
+    if (!(var_2 & 0xFFFF)) { Call_func_00250198(Call_D_0043DEE0, nameToken, (*((u16*)(((s8*)(nameToken)) + 4))) + 9); }
+}
+
+} // namespace AptCallDraft
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022A440);
+#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022AE88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022B0A0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/audio/graphics_sound_1ee5e0", func_0022B290);
