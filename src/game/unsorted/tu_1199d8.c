@@ -1,15 +1,15 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern void func_0011C878();
+extern s32 func_0011C878(s32);
 extern s32 func_0011C8C0();
 extern s32 func_0011C930();
 extern s32 func_0011C9C8();
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1199d8", func_001199D8);
 
-void func_0011A0A8(void) {
-    func_0011C878();
+void func_0011A0A8(void* self) {
+    func_0011C878((s32)self);
 }
 
 s32 func_0011A0C8(void) {
@@ -55,7 +55,7 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1199d8", func_0011ABA
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1199d8", func_0011AF50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1199d8", func_0011AFB0);
 
-void func_0011BF20(void) {
+void func_0011BF20(void* unused) {
 
 }
 

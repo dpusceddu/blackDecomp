@@ -16,7 +16,9 @@ splits:
   - {src: src/game/unsorted/tu_100288.c, range: [0x100288, 0x100338]}
   - {src: src/game/unsorted/tu_100338.c, range: [0x100338, 0x1004b0]}
   - {src: src/game/unsorted/tu_1004b0.c, range: [0x1004b0, 0x100518]}
-  - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x1031a0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x1020c0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_100518_1020c0.cpp, range: [0x1020c0, 0x102930], flags: [-O2, -G0, -snas, -fno-exceptions], assembler: sn-min6, note: "Native empty constructor arrays use six-word loop separation; external member constructors have no exception cleanup or unwind paths."}
+  - {src: src/game/unsorted/tu_100518.c, range: [0x102930, 0x1031a0]}
   - {src: src/game/unsorted/tu_100518_1031a0.c, range: [0x1031a0, 0x103800], assembler: sn-min6, flags: [-O2, -G0, -snas, -fno-builtin]}
   - {src: src/game/unsorted/tu_100518.c, range: [0x103800, 0x103818]}
   - {src: src/game/unsorted/tu_103818.c, range: [0x103818, 0x103908]}

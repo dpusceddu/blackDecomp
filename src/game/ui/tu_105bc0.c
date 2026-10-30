@@ -38,7 +38,7 @@ void func_00105CE8(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0", func_00105CF0);
 
-void func_00106008(void) {
+void func_00106008(void* unused) {
 
 }
 

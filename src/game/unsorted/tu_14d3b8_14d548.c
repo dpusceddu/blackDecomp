@@ -41,6 +41,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14d3b8_14d548", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14d3b8_14d548", func_0014D7F0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_14d3b8_14d548", func_0014D8E8);
 
-void func_0014D908(void) {
+void func_0014D908(void* unused) {
 
 }
