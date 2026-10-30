@@ -49,7 +49,6 @@ void func_0011CDA8(void* pool, void* actor, void* target, s32 kind, s128 positio
         ActivateSelectedChild(controller);
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11cd00", func_0011CE98);
 void func_0011CFD8(void* pool, void* actor) {
     void* controller = func_0011D090(pool, actor);
     if (controller == NULL) {

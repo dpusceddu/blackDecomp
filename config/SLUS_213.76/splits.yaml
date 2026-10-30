@@ -159,7 +159,9 @@ splits:
   - {src: src/game/unsorted/tu_11c878.c, range: [0x11c878, 0x11c8c0], assembler: sn-min6}
   - {src: src/game/unsorted/tu_11c8c0.c, range: [0x11c8c0, 0x11c930]}
   - {src: src/game/camera/controller_set.c, range: [0x11c930, 0x11cd00], flags: [-O2, -G8, -snas], assembler: sn-min6, note: "Native 0x11c930 uses a GP-relative byte load of D_0040D9A3; the 0x11c9c8 controller loop and 0x140ad0 descending-zero loop have six-word short-branch padding, one word shorter than the stock assembler."}
-  - {src: src/game/unsorted/tu_11cd00.c, range: [0x11cd00, 0x11d200]}
+  - {src: src/game/unsorted/tu_11cd00.c, range: [0x11cd00, 0x11ce98]}
+  - {src: src/game/unsorted/tu_11cd00_11ce98.cpp, range: [0x11ce98, 0x11cfd8], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], note: "Native XYZ distance uses VU0 subtract, square, sum and square root; the shared C++ vector helpers require allocatable VU registers."}
+  - {src: src/game/unsorted/tu_11cd00.c, range: [0x11cfd8, 0x11d200]}
   - {src: src/game/unsorted/tu_11cd00_11d200.cpp, range: [0x11d200, 0x11d358], flags: [-O2, -G0, -snas, -fbyte-bool], note: "Native weapon-availability bool uses byte conversion before ANDI 0xff; word-bool lowering replaces its branch sequence with SLTU. C++ preserves the two-stage random-state member updates."}
   - {src: src/game/unsorted/tu_11d358.c, range: [0x11d358, 0x11de30]}
   - {src: src/game/unsorted/tu_11d358_11de30.c, range: [0x11de30, 0x11e2e0]}
