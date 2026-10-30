@@ -589,8 +589,8 @@ extern void* D_0040F540;
 extern s32 func_00143700(void*);
 extern s32 func_001397F8(Recovered_SelectionPool*);
 extern s32 func_00139838(Recovered_SelectionPool*, Recovered_SelectionMember*);
-static inline u8 SelectionBlocked(Recovered_SelectionGate* self) {
-    u8 result = 0;
+static inline s32 SelectionBlocked(Recovered_SelectionGate* self) {
+    s32 result = 0;
     if (self->unk_138 || self->unk_139) result = 1;
     return result;
 }
@@ -1243,9 +1243,9 @@ void func_00136E88(Recovered_SavedPose* self, void* state) {
     self->unk_350 = state;
 }
 #ifdef NON_MATCHING
-// Unmatched: byte predicate narrowing and selection-pool pointer capture differ (4 instructions).
+// Unmatched: selection-pool address is computed in the saved register rather than copied from the receiver.
 s32 func_001386C8(Recovered_SelectionOwner* self) {
-    if (SelectionBlocked((Recovered_SelectionGate*)(D_0040F4C4 + 0xA00))) return 0;
+    if ((u8)SelectionBlocked((Recovered_SelectionGate*)(D_0040F4C4 + 0xA00))) return 0;
     if (!func_00143700(D_0040F540)) return 0;
     {
         Recovered_SelectionActor* actor = self->unk_90;
@@ -1545,7 +1545,6 @@ void func_00143590(Recovered_ThreeSlots* self, void* value, u8 index) {
 #else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_00143590);
 #endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001444A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_10f700_114168", func_001448C8);
 
 s32 func_00144E00(s32 arg0) {

@@ -20,6 +20,36 @@ Inspect the TU's splits and relevant data as needed. Before claiming a complete 
 rodata/data/sdata/bss/exception tables against `build/SLUS_213.76/tus.yaml`; qualify uncertain boundaries. Code completion
 does not establish data ownership. Review shared-header and `splits.yaml` changes across their consumers.
 
+## Bounded source experiments
+
+For a family of related functions, resolve shared layout and ABI questions first: receiver arguments, result widths,
+array strides and aggregate lifetimes. Verify those findings against callers and existing exact consumers before
+spending builds on statement order. A small mismatch is not necessarily a cheap target.
+
+Check previous hypotheses, then compare a seed and a small set of explicit alternatives in one invocation:
+
+```sh
+python3 tools/trysrc.py 001033A0 --history
+python3 tools/trysrc.py 001033A0 build/seed.c build/loop-*.c --hypothesis 'shared loop index'
+```
+
+Each input must contain the target and its needed declarations/helpers; it can also be a complete TU with
+`--non-matching`. The runner loads ownership and bindings once, uses each input's C/C++ language and the owner's actual
+compiler/assembler recipe, and batches compilation through the existing cache. `--flags` is an explicit recipe control;
+it does not justify retaining those flags. `--symbol` selects a compiled symbol with a different name.
+
+The output lists each score and the number of distinct instruction outputs, then shows only the best candidate's changed
+instructions (`--quiet` suppresses the diff). Under `build/experiments/ADDR/`, every run preserves all candidate sources,
+its best source/object/diff and a JSON record with the hypothesis, source/header/recipe/context hashes and failures.
+Later hypotheses cannot overwrite an earlier run's best. History is diagnostic: reruns refresh scores, with compilation
+reused only through the existing worker cache. Changed sources, headers, recipes, bindings or target context distinguish
+the recorded experiments. No history entry changes a source owner or counts as progress.
+
+Reassess after about five object builds without useful improvement. In particular, several source variants producing the
+same instructions are evidence to try another hypothesis, rather than more variations of the same expression. Keep
+object comparisons inside this loop and verify a coherent batch with the full retail-image check. Check earlier when
+ownership, owned data or shared interfaces introduce a concrete integration question.
+
 ## Verified recipes
 
 These are scoped controls, not promises that a rewrite will improve another function. Reproduce the retail checks with

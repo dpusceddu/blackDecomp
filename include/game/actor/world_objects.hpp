@@ -44,7 +44,8 @@ struct Region {char unknown00[8];int id;void* geometry;void* data;char unknown14
 struct ActorNode {char unknown00[0x34];ObjectActor* actor;};
 struct QueryMaterial {char unknown00[4];unsigned flags;};
 typedef Weapons::WorldCollision QueryHit;
-struct ClosestHit {Position4 point,normal;float fraction;unsigned unknown24,mask,unknown2c;Position4 extra[2];};
+// Closest-hit result view; unused fields remain UNVERIFIED.
+struct ClosestHit {Position4 point,normal;float fraction;unsigned unknown24,mask,unknown2c;Position4 extra;};
 typedef Weapons::WorldCollision TraceHit;
 struct FrameConfig {char unknown00[0x20208];int playerCount;};
 class World {public:

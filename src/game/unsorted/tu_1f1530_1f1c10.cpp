@@ -1,4 +1,7 @@
 #include "include_asm.h"
+#include "ps2/prelude.h"
+
+extern "C" u8* D_0040F518;
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F7C48);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F8138);
@@ -55,7 +58,6 @@ struct OverlayClockDraft {
     char unknown00[0x1c];
     float time;
 };
-extern "C" void* D_0040F518;
 extern "C" OverlayClockDraft* D_0040F4D0;
 
 extern "C" void func_001F2D08(void* self, signed char index, int value) {
@@ -70,8 +72,36 @@ extern "C" void func_001F2D08(void* self, signed char index, int value) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F2D08);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F2DF8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F36E8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F3948);
+// Partial native command views; original class identities and unused fields are UNVERIFIED.
+extern "C" s32 func_001F1C10(void*, s32, s32, s32, s32, s32, s32);
+struct OverlayLayerRecord {
+    s32 flags;
+    u8 opaque[12];
+};
+struct OverlayCommandList {
+    u8 unknown00[0x2C];
+    OverlayLayerRecord* layers;
+    void SetFlags(s32 index, s32 flags) { layers[index].flags = flags; }
+};
+static inline OverlayCommandList* OverlayCommands(s8 index) {
+    u32 address = index * 0xA8 + (u32)D_0040F518;
+    return (OverlayCommandList*)(address + 0x40);
+}
+extern "C" s32 func_001F3948(void* self, s32 index, s32 a, s32 b) {
+    s32 resource = M2C_FIELD(D_0040F518, s32*, 0x234);
+    func_001F1C10(self, 2, 40, 0, (s8)index, a, b);
+    OverlayCommands(M2C_FIELD(self, s8*, 0x12))->SetFlags(M2C_FIELD(self, s16*, 0x10) + 1, 2);
+    s8 i;
+    for (i = 0; i < 40; i++) M2C_FIELD(M2C_FIELD(self, u8**, 0x1C) + i * 0x10, s32*, 8) = resource;
+    for (i = 0; i < 40; i++) M2C_FIELD(self, u8**, 0x24)[i] = 0;
+    for (i = 0; i < 8; i++) {
+        M2C_FIELD(self, u8**, 0x28)[i] = 0;
+        for (s8 j = 0; j < 10; j++) M2C_FIELD(M2C_FIELD(self, u8**, 0x20) + i * 0x20, s32**, 0)[j] = 0;
+    }
+    M2C_FIELD(self, s32*, 0x2C) = 0;
+    return 1;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F3AA0);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1f1530_1f1c10", func_001F3EE8);
 #ifdef NON_MATCHING

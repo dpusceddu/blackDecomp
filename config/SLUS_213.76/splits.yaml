@@ -16,7 +16,9 @@ splits:
   - {src: src/game/unsorted/tu_100288.c, range: [0x100288, 0x100338]}
   - {src: src/game/unsorted/tu_100338.c, range: [0x100338, 0x1004b0]}
   - {src: src/game/unsorted/tu_1004b0.c, range: [0x1004b0, 0x100518]}
-  - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x1031a0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x1020c0], note: flags or language differ}
+  - {src: src/game/unsorted/tu_100518_1020c0.cpp, range: [0x1020c0, 0x102930], flags: [-O2, -G0, -snas, -fno-exceptions], assembler: sn-min6, note: "Native empty constructor arrays use six-word loop separation; external member constructors have no exception cleanup or unwind paths."}
+  - {src: src/game/unsorted/tu_100518.c, range: [0x102930, 0x1031a0]}
   - {src: src/game/unsorted/tu_100518_1031a0.c, range: [0x1031a0, 0x103800], assembler: sn-min6, flags: [-O2, -G0, -snas, -fno-builtin]}
   - {src: src/game/unsorted/tu_100518.c, range: [0x103800, 0x103818]}
   - {src: src/game/unsorted/tu_103818.c, range: [0x103818, 0x103908]}
@@ -159,7 +161,10 @@ splits:
   - {src: src/game/unsorted/tu_11c878.c, range: [0x11c878, 0x11c8c0], assembler: sn-min6}
   - {src: src/game/unsorted/tu_11c8c0.c, range: [0x11c8c0, 0x11c930]}
   - {src: src/game/camera/controller_set.c, range: [0x11c930, 0x11cd00], flags: [-O2, -G8, -snas], assembler: sn-min6, note: "Native 0x11c930 uses a GP-relative byte load of D_0040D9A3; the 0x11c9c8 controller loop and 0x140ad0 descending-zero loop have six-word short-branch padding, one word shorter than the stock assembler."}
-  - {src: src/game/unsorted/tu_11cd00.c, range: [0x11cd00, 0x11d358]}
+  - {src: src/game/unsorted/tu_11cd00.c, range: [0x11cd00, 0x11ce98]}
+  - {src: src/game/unsorted/tu_11cd00_11ce98.cpp, range: [0x11ce98, 0x11cfd8], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], note: "Native XYZ distance uses VU0 subtract, square, sum and square root; the shared C++ vector helpers require allocatable VU registers."}
+  - {src: src/game/unsorted/tu_11cd00.c, range: [0x11cfd8, 0x11d200]}
+  - {src: src/game/unsorted/tu_11cd00_11d200.cpp, range: [0x11d200, 0x11d358], flags: [-O2, -G0, -snas, -fbyte-bool], note: "Native weapon-availability bool uses byte conversion before ANDI 0xff; word-bool lowering replaces its branch sequence with SLTU. C++ preserves the two-stage random-state member updates."}
   - {src: src/game/unsorted/tu_11d358.c, range: [0x11d358, 0x11de30]}
   - {src: src/game/unsorted/tu_11d358_11de30.c, range: [0x11de30, 0x11e2e0]}
   - {src: src/game/unsorted/tu_11d358_11e2e0.c, range: [0x11e2e0, 0x11e488]}
@@ -235,13 +240,19 @@ splits:
   - {src: src/game/world/tu_127118.cpp, range: [0x129240, 0x12a0d8]}
   - {src: src/game/unsorted/tu_127118_12a0d8.c, range: [0x12a0d8, 0x12a310], flags: [-G0, -snas, -O2, -fno-schedule-insns], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/world/tu_127118.cpp, range: [0x12a310, 0x12a480]}
-  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a480, 0x12aaf8], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a480, 0x12a4d8], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
+  - {src: src/game/unsorted/tu_127118_12a4d8.cpp, range: [0x12a4d8, 0x12a5f8], flags: [-O2, -G0, -snas], note: "Native subsystem stores interleave with the next allocation arguments; retain default post-allocation instruction scheduling."}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a5f8, 0x12a7c0]}
+  - {src: src/game/unsorted/tu_127118_12a7c0.cpp, range: [0x12a7c0, 0x12a918], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], note: "Native ray-length test and endpoint stores use allocatable VU0 registers; retain default post-allocation scheduling."}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a918, 0x12aaf8]}
   - {src: src/game/world/tu_127118.cpp, range: [0x12aaf8, 0x12ab28]}
-  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ab28, 0x12ae00]}
+  - {src: src/game/unsorted/tu_127118_12ab28.cpp, range: [0x12ab28, 0x12ab90], flags: [-O2, -G0, -snas], note: "Native visitor result setup occupies the branch delay slots; this wrapper retains default post-allocation instruction scheduling."}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ab90, 0x12ae00]}
   - {src: src/game/unsorted/tu_127118_12ae00.cpp, range: [0x12ae00, 0x12ae58], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ae58, 0x12b2a8]}
   - {src: src/game/world/tu_127118.cpp, range: [0x12b2a8, 0x12b328]}
-  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12b328, 0x12bd98]}
+  - {src: src/game/unsorted/tu_127118_12b328.cpp, range: [0x12b328, 0x12b448], flags: [-O2, -G0, -snas], assembler: sn-min6, note: "Native collision result constructs three sixteen-byte vector slots with a six-word empty-constructor loop; retain default post-allocation scheduling."}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12b448, 0x12bd98]}
   - {src: src/game/world/tu_127118.cpp, range: [0x12bd98, 0x12bdc8]}
   - {src: src/game/unsorted/tu_127118_12bdc8.c, range: [0x12bdc8, 0x12c0e8], note: flags or language differ}
   - {src: src/game/unsorted/tu_127118_12c0e8.c, range: [0x12c0e8, 0x12c650], flags: [-O1, -G0, -snas]}
@@ -355,7 +366,8 @@ splits:
   - {src: src/game/unsorted/tu_1435d0_1435f8.c, range: [0x1435f8, 0x143fd8], note: flags or language differ}
   - {src: src/game/unsorted/tu_1435d0_143fd8.c, range: [0x143fd8, 0x144038], flags: [-Os, -G0], note: flags or language differ}
   - {src: src/game/unsorted/tu_1435d0_144038.c, range: [0x144038, 0x1444a8]}
-  - {src: src/game/camera/tu_10f700_114168.c, range: [0x1444a8, 0x145240]}
+  - {src: src/game/camera/tu_1444a8.cpp, range: [0x1444a8, 0x1448c8], assembler: sn-min6, note: "Native empty array constructors have six-word short-branch separation. C++ new[] reproduces the observed construction loops without artificial empty C loops."}
+  - {src: src/game/camera/tu_10f700_114168.c, range: [0x1448c8, 0x145240]}
   - {src: src/game/actor/actor_entries.cpp, range: [0x145240, 0x145fb0]}
   - {src: src/game/actor/tu_1448c8_145fb0.c, range: [0x145fb0, 0x146a28]}
   - {src: src/game/actor/actor_reset.cpp, range: [0x146a28, 0x146af0]}
@@ -1597,7 +1609,8 @@ splits:
   - {src: src/game/unsorted/tu_1f2db0.c, range: [0x1f2db0, 0x1f2df8], flags: [-Os, -G0]}
   - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f2df8, 0x1f2ea8]}
   - {src: src/game/unsorted/tu_1f2ea8.c, range: [0x1f2ea8, 0x1f36e8]}
-  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f36e8, 0x1f42a0]}
+  - {src: src/game/unsorted/tu_1f36e8.cpp, range: [0x1f36e8, 0x1f3948], assembler: sn-min6, note: "Native empty array-construction loops have six-word short-branch separation; the stock assembler inserts one extra NOP. C++ array construction and explicit float-pair copying recover the native allocation and copy loops."}
+  - {src: src/game/unsorted/tu_1f1530_1f1c10.cpp, range: [0x1f3948, 0x1f42a0]}
   - {src: src/game/unsorted/tu_1f42a0.c, range: [0x1f42a0, 0x1f42c8]}
   - {src: src/game/unsorted/tu_1f42c8.c, range: [0x1f42c8, 0x1f44b8]}
   - {src: src/game/unsorted/tu_1f44b8.c, range: [0x1f44b8, 0x1f44c0]}

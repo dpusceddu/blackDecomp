@@ -17,7 +17,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/brief.py` | Everything a work session needs about one source file, in one printout, so that it can start writing C at once. |
 | `tools/decompile.py` | Friendly front door for one function: an m2c draft, ready to replace its INCLUDE_ASM line, and where to put it. |
 | `tools/objdiff.py` | Generate a per-object objdiff project, build one comparison view, or write a fresh report. |
-| `tools/trysrc.py` | Compile a hand-written C/C++ source with its owning file's recipe and score it against the original. |
+| `tools/trysrc.py` | Batch source experiments with the owning recipe, changed-instruction diffs and a local hypothesis history. |
 | `tools/autodecomp.py` | Automatic decompilation: m2c -> clean -> compile variants -> score -> permuter -> register as source units. |
 | `tools/where.py` | Name the source file that owns a function, and the line where it is: assembly, draft or source. |
 | `tools/split_function.py` | Give one assembly function a source file of its own: the way to put a function in a file with other flags or another language. |
