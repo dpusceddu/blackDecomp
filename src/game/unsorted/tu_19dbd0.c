@@ -1,5 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+extern void func_00193980(void *, const void *);
+extern void* func_00193B98(void *);
+extern s32 func_00187FE0(void *, s32);
+extern void func_00173658(f32 *);
 
 
 extern f32 func_0019EF08(void *, f32);
@@ -36,7 +40,41 @@ extern s32 func_0019DFE8();
 extern s32 func_0019DF50(void *);
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_19dbd0", func_0019DBD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_19dbd0", func_0019DD08);
+void func_0019DD08(void* self, const void* event) {
+    int enabled;
+    func_00193980(self, event);
+    M2C_FIELD(func_00193B98(self), f32*, 0x5C) = -5.0f;
+    M2C_FIELD(func_00193B98(self), f32*, 0x60) = 5.0f;
+    M2C_FIELD(func_00193B98(self), s32*, 0x6C) = 0;
+    M2C_FIELD(func_00193B98(self), s32*, 0x70) = 0;
+    M2C_FIELD(func_00193B98(self), s32*, 0x74) = 0;
+    M2C_FIELD(func_00193B98(self), f32*, 0x1C) = -1.0f;
+    M2C_FIELD(func_00193B98(self), f32*, 0x18) = 1.0f;
+    M2C_FIELD(func_00193B98(self), f32*, 8) = -2.0f;
+    M2C_FIELD(func_00193B98(self), f32*, 0x10) = 4.0f;
+    M2C_FIELD(func_00193B98(self), f32*, 0xC) = 2.0f;
+    M2C_FIELD(func_00193B98(self), f32*, 0x14) = -3.0f;
+    M2C_FIELD(func_00193B98(self), s32*, 0x3C) = 0;
+    M2C_FIELD(func_00193B98(self), s32*, 0x40) = 0;
+    M2C_FIELD(func_00193B98(self), s32*, 0x4C) = 0;
+    M2C_FIELD(func_00193B98(self), s32*, 0x50) = 0;
+    M2C_FIELD(func_00193B98(self), f32*, 0x54) = 1.0f;
+    M2C_FIELD(func_00193B98(self), f32*, 4) = -1.0f;
+    enabled = 1;
+    M2C_FIELD(M2C_FIELD(self, void**, 0), u8*, 0x104) = enabled;
+    M2C_FIELD(func_00193B98(self), s32*, 0) = 2;
+    M2C_FIELD(func_00193B98(self), s32*, 0x7C) = enabled;
+    func_00187FE0((void*)(((s8*)M2C_FIELD(self, void**, 0)) + 0x290), 0);
+    M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void**, 0), void**, 0x694), s8*, 0x30) = 0;
+    M2C_FIELD(self, u32*, 0x40) = 2;
+    func_00173640((f32*)((u8*)self + 0x30), func_0019EEA0(self, func_0016DE70(D_0040F4D4, 1.0f, 2.0f)));
+    func_00173658((f32*)((u8*)self + 0x34));
+    func_00173658((f32*)((u8*)self + 0x3C));
+    func_00173640((f32*)((u8*)self + 0x38), 10.0f);
+    M2C_FIELD(self, u8*, 0x46) = 0;
+    M2C_FIELD(self, u8*, 0x45) = 0;
+    func_0019EE30(self);
+}
 
 void func_0019DF10(void **arg0)
 {

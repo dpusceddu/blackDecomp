@@ -2,12 +2,12 @@
 #include "ps2/prelude.h"
 
 #include "ps2/recovered_types.h"
-extern s32 func_00173640(f32 *, f32);
+extern void func_00173640(f32*, f32);
 extern s32 D_00415710[];
 extern s32 D_00415790[];
 
-s32 func_00173658(f32 *arg0) {
-    return func_00173640(arg0, 0.0f);
+void func_00173658(f32* timer) {
+    func_00173640(timer, 0.0f);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_001736B8);
