@@ -627,7 +627,9 @@ splits:
   - {src: src/game/actor/actor_c4c8.cpp, range: [0x169f38, 0x16a250]}
   - {src: src/game/actor/tu_16a250.cpp, range: [0x16a250, 0x16a720]}
   - {src: src/game/actor/actor_bf48.cpp, range: [0x16a720, 0x16a778], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf16]}
-  - {src: src/game/unsorted/tu_16a720_16a778.c, range: [0x16a778, 0x16b778], note: flags or language differ}
+  - {src: src/game/unsorted/tu_16a720_16a778.c, range: [0x16a778, 0x16b4f8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_16a720_16b4f8.c, range: [0x16b4f8, 0x16b590], flags: [-O2, -G8, -snas], assembler: sony-2.9, note: "Native D_0040D9B3 byte access uses GPREL; Sony assembly preserves the single GP-relative load."}
+  - {src: src/game/unsorted/tu_16a720_16a778.c, range: [0x16b590, 0x16b778]}
   - {src: src/game/unsorted/tu_16a720_16b778.c, range: [0x16b778, 0x16b788], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_16a720_16b788.c, range: [0x16b788, 0x16c220], note: flags or language differ}
   - {src: src/game/unsorted/tu_16a720_16c220.c, range: [0x16c220, 0x16c700], flags: [-O2, -G1], note: flags or language differ}
@@ -698,7 +700,10 @@ splits:
   - {src: src/game/unsorted/tu_175620.c, range: [0x175620, 0x175668]}
   - {src: src/game/unsorted/tu_175668.c, range: [0x175668, 0x1756b0]}
   - {src: src/game/unsorted/tu_1756b0.c, range: [0x1756b0, 0x1756c0]}
-  - {src: src/game/world/tu_1756c0.c, range: [0x1756c0, 0x176310]}
+  - {src: src/game/world/collision_queue_init.c, range: [0x1756c0, 0x175750], assembler: sn-min6, note: "Native pending-reset loop has two short-branch interlock NOPs; stock SN inserts three."}
+  - {src: src/game/world/tu_1756c0.c, range: [0x175750, 0x175930]}
+  - {src: src/game/world/collision_queue_init.c, range: [0x175930, 0x175980], note: Native live-reset loop also spans six words}
+  - {src: src/game/world/tu_1756c0.c, range: [0x175980, 0x176310]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x176310, 0x176448]}
   - {src: src/game/unsorted/tu_176448.c, range: [0x176448, 0x176460], flags: [-O1, -G0, -snas], note: flags or language differ}
   - {src: src/game/unsorted/tu_176448_176460.c, range: [0x176460, 0x176730], flags: [-G0, -snas, -O2, -fno-schedule-insns], note: flags or language differ}
@@ -756,7 +761,11 @@ splits:
   - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179640, 0x179668]}
   - {src: src/game/unsorted/tu_179400_179668.cpp, range: [0x179668, 0x179680], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_179400_179680.cpp, range: [0x179680, 0x179698], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
-  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179698, 0x179b40]}
+  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179698, 0x179708]}
+  - {src: src/game/unsorted/tu_179400_179708.c, range: [0x179708, 0x1797b8], assembler: sn-min6, note: "Native record-constructor loop has two short-branch interlock NOPs; the stock SN assembler inserts three."}
+  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x1797b8, 0x179800]}
+  - {src: src/game/unsorted/tu_179400_179800.cpp, range: [0x179800, 0x179960]}
+  - {src: src/game/unsorted/tu_179400_179640.c, range: [0x179960, 0x179b40]}
   - {src: src/game/unsorted/tu_179b40.c, range: [0x179b40, 0x179b60]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x179b60, 0x179c60]}
   - {src: src/game/ai/navigation/ai_movement_modes_179c60.cpp, range: [0x179c60, 0x179c88], flags: [-O2, -G0, -snas, -fbyte-bool]}
@@ -1897,7 +1906,9 @@ splits:
   - {src: src/game/unsorted/tu_275068.c, range: [0x275068, 0x275090]}
   - {src: src/game/unsorted/tu_275090.c, range: [0x275090, 0x2750b8]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x2750b8, 0x275128]}
-  - {src: src/game/unsorted/tu_275128.c, range: [0x275128, 0x276258], flags: [-O2, -G8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_275128.c, range: [0x275128, 0x275340], flags: [-O2, -G8], note: flags or language differ}
+  - {src: src/game/unsorted/tu_275128_275340.c, range: [0x275340, 0x275398], assembler: sn-min6, note: "Native UTF-16 scan and copy loops span six words; stock SN inserts a seventh interlock word."}
+  - {src: src/game/unsorted/tu_275128.c, range: [0x275398, 0x276258]}
   - {src: src/game/unsorted/tu_275128_276258.c, range: [0x276258, 0x2763b0], note: flags or language differ}
   - {src: src/game/unsorted/tu_275128_2763b0.c, range: [0x2763b0, 0x276410], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/unsorted/tu_275128_276410.cpp, range: [0x276410, 0x2775a0], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], assembler: sn-min6, note: Native vector temporaries require C++ lifetimes; the 0x276458 traversal and array-constructor loops have six-word bodies while stock snas inserts a seventh word; the rotation callbacks use VU0 VF1-VF8 and their drafts need allocatable j operands.}
@@ -1952,7 +1963,9 @@ splits:
   - {src: src/game/unsorted/tu_2805a0_280748.c, range: [0x280748, 0x2807b0]}
   - {src: src/game/unsorted/tu_2805a0_2807b0.c, range: [0x2807b0, 0x280808]}
   - {src: src/game/unsorted/tu_2805a0_280808.c, range: [0x280808, 0x280848]}
-  - {src: src/game/unsorted/tu_2805a0_280848.c, range: [0x280848, 0x280c90]}
+  - {src: src/game/unsorted/tu_2805a0_280848.c, range: [0x280848, 0x280a08]}
+  - {src: src/game/unsorted/tu_2805a0_280a08.c, range: [0x280a08, 0x280a38], assembler: sn-min6, note: "Native six-word short loop; stock SN inserts a seventh interlock word."}
+  - {src: src/game/unsorted/tu_2805a0_280848.c, range: [0x280a38, 0x280c90]}
   - {src: src/game/unsorted/tu_2805a0_280c90.c, range: [0x280c90, 0x280e10]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x280e10, 0x280fe0]}
   - {src: src/game/unsorted/tu_280fe0.c, range: [0x280fe0, 0x281010]}

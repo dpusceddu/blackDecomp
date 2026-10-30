@@ -14,8 +14,9 @@ extern s32 func_00174158(RecoveredRouteStorage *, RecoveredRouteNode *, Recovere
 extern void func_00175980(PS2CollisionQueue *, u64, s32); /* GameCollisionQueue_QueueByName */
 extern s32 func_00175BB0(PS2CollisionQueue *, PS2GameObjectRecord *); /* GameCollisionQueue_FindLive */
 extern s32 func_00175BF0(PS2CollisionQueue *, PS2GameObjectRecord *); /* GameCollisionQueue_FindPending */
-extern s32 func_00175C30(PS2CollisionQueue *); /* GameCollisionQueue_FindFree */
-extern void func_00175F10(PS2PendingCollision *, PS2GameObjectRecord *, u8); /* GameCollisionQueue_SetPending */
+extern s32 func_00175C30(PS2CollisionQueue*,
+                         PS2GameObjectRecord*); /* GameCollisionQueue_FindFree; object argument unused */
+extern void func_00175F10(PS2PendingCollision*, PS2GameObjectRecord*, s32); /* GameCollisionQueue_SetPending */
 extern void func_00179C60(void *); /* RouteRequest_Clear */
 extern void func_00179C88(void *); /* RouteRequest_Pump */
 extern void func_00179CD0(void *); /* RouteRequest_PointCount */

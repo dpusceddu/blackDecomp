@@ -370,10 +370,7 @@ typedef char VerifyRegionStride[sizeof(RegionRecord) == 0xF0 ? 1 : -1];
 typedef char VerifyAllocationRequirement[sizeof(AllocationRequest) == 16 ? 1 : -1];
 #undef VERIFY_OFFSET
 
-#ifdef NON_MATCHING
-/* Remaining partial views are UNVERIFIED until a matched consumer confirms them. */
-extern u8 D_003BCB08[9], D_003F42F0[3];
-extern void* D_0040F4C0;
+/* Partial owner views; original identities remain UNVERIFIED. */
 typedef struct OwnerState {
     u8 unk00[0x60];
     u8 flag;
@@ -387,6 +384,10 @@ typedef struct Owner {
     OwnerLink* link;
 } Owner;
 extern u8 func_0014C888(Owner*, u64);
+#ifdef NON_MATCHING
+/* Remaining partial views are UNVERIFIED until a matched consumer confirms them. */
+extern u8 D_003BCB08[9], D_003F42F0[3];
+extern void* D_0040F4C0;
 typedef struct ParameterDefinition {
     u8 unk00[0x10];
     u128 value;
@@ -557,8 +558,6 @@ void func_00149BE8(s32 arg0, s32 arg1, s32 arg2)
   return (s32) (arg1 + new_var);
 }
 
-#ifdef NON_MATCHING
-// Unmatched: selected-record multiply allocation differs; callee result type remains UNVERIFIED.
 void func_00149C18(WeaponView* self, Owner* owner) {
     s32 selected = -1;
     s32 i;
@@ -567,11 +566,12 @@ void func_00149C18(WeaponView* self, Owner* owner) {
     for (i = 0; i < self->count; i++) {
         if (self->definition->indices[i] == -1) selected = i;
     }
-    ((OwnerState*)self->state)->flag = func_0014C888(owner, self->definition->records[selected].id);
+    {
+        s32 offset = selected * sizeof(WeaponRecord);
+        WeaponRecord* record = (WeaponRecord*)((u8*)self->definition->records + offset);
+        ((OwnerState*)self->state)->flag = func_0014C888(owner, record->id);
+    }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00149C18);
-#endif
 #ifdef NON_MATCHING
 // Unmatched: record-predicate lowering and selected-record lifetimes differ.
 s32 func_00149CA0(WeaponView* self) {

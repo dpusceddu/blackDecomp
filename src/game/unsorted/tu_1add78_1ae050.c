@@ -663,18 +663,12 @@ void func_001ED3E0(TrackedPool* pool, u128 context, void* parameters, f32 elapse
     }
     func_002822C8(&pool->pool, context, parameters, elapsed);
 }
-#ifdef NON_MATCHING
-// Unmatched: Paired metadata stores use different saved-register and address lifetimes.
 void func_001ED4A0(Recovered_TimedValuePool* pool, u128 value, f32 duration, s32 kind, void* object) {
     s32 index = TimedValuePool_Add(pool, value, duration);
-    s32* type = (s32*)((u8*)pool + index * 8 + 0x1220);
-    void** owner = (void**)((u8*)pool + index * 8 + 0x1224);
-    *type = kind;
-    *owner = object;
+    TrackedPool* tracked = (TrackedPool*)pool;
+    tracked->pairs[index].kind = kind;
+    tracked->pairs[index].object = object;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001ED4A0);
-#endif
 void func_001ED4F0(TrackedPool* pool) {
     s32 i;
     for (i = 0; i < pool->pool.count; i++) {

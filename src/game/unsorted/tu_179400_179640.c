@@ -12,9 +12,21 @@ void * func_00179650(void *arg0, s32 arg1) {
     return M2C_FIELD(M2C_FIELD(arg0, void **, 0x70), s32 *, 0x2C) + (arg1 * 0x50);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_179400_179640", func_00179698);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_179400_179640", func_001796B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_179400_179640", func_001796C8);
+/* Partial native views: three pairs of words, queried at channel 1 by the actor manager.
+ * Original class identities and the meaning of each pair are UNVERIFIED. */
+typedef struct {
+    u8 unknown00[0x10];
+    s32 values10[2];
+    s32 values18[2];
+    s32 values20[2];
+} Recovered_ActorChannelValues;
+typedef struct {
+    u8 unknown00[0x70];
+    Recovered_ActorChannelValues* values;
+} Recovered_ActorChannelOwner;
+s32 func_00179698(Recovered_ActorChannelOwner* self, s32 channel) { return self->values->values10[channel]; }
+s32 func_001796B0(Recovered_ActorChannelOwner* self, s32 channel) { return self->values->values18[channel]; }
+s32 func_001796C8(Recovered_ActorChannelOwner* self, s32 channel) { return self->values->values20[channel]; }
 
 void func_001796E0(void *arg0) {
     if (M2C_FIELD(arg0, u8 *, 0x74) != 0) {
@@ -22,10 +34,15 @@ void func_001796E0(void *arg0) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_179400_179640", func_00179708);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_179400_179640", func_001797B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_179400_179640", func_001797E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_179400_179640", func_00179800);
+s32 func_001797E0(void* self) {
+    M2C_FIELD(self, s32*, 0x30) = 0;
+    M2C_FIELD(self, s32*, 0x28) = 0;
+    M2C_FIELD(self, s8*, 0x35) = 0;
+    M2C_FIELD(self, s8*, 0x36) = 0;
+    M2C_FIELD(self, s8*, 0x37) = 0;
+    return 1;
+}
 
 void func_00179960(void *arg0, s32 arg1) {
     s32 var_17;

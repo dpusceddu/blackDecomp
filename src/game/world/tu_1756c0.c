@@ -15,8 +15,8 @@ extern void func_00175A00(PS2CollisionQueue* queue, PS2GameObjectRecord* object,
 extern s32 func_00170D20(PS2LiveCollision* collision);
 extern s32 func_00175BB0(PS2CollisionQueue* queue, PS2GameObjectRecord* object);
 extern s32 func_00175BF0(void* queue, void* object);
-extern s32 func_00175C30(void* queue);
-extern void func_00175F10(void* pending, s32 object, s8 flag);
+extern s32 func_00175C30(PS2CollisionQueue* queue, PS2GameObjectRecord* object);
+extern void func_00175F10(PS2PendingCollision* pending, PS2GameObjectRecord* object, s32 flag);
 extern void func_00170CD8(PS2LiveCollision* collision);
 extern void func_00170C90(PS2LiveCollision* collision);
 extern void func_001718D0(PS2LiveCollision* collision, PS2GameObjectRecord* object, s32 index);
@@ -25,7 +25,7 @@ extern void * D_0040F4D0;
 extern s32 func_0012A7C0(void *);
 extern s32 func_0012AE58(void *);
 
-// UNVERIFIED: the final fields are only accessed by the initializer draft.
+// Accessed storage prefix; original class identity remains UNVERIFIED.
 typedef struct {
     PS2CollisionQueue queue;
     u8 unk_280[4];
@@ -33,55 +33,8 @@ typedef struct {
     s32 unk_288;
 } Recovered_CollisionQueueStorage;
 
-#ifdef NON_MATCHING
-// Unmatched: an extra instruction remains in the pending-reset loop.
-s32 func_001756C0(Recovered_CollisionQueueStorage* storage, PS2LiveCollision** source) {
-    PS2CollisionQueue* queue = &storage->queue;
-    PS2LiveCollision** current = queue->live;
-    PS2PendingCollision* pending;
-    s32 remaining = 15;
-    do {
-        PS2LiveCollision* collision = *source;
-        remaining--;
-        source++;
-        *current = collision;
-        func_00170740(collision);
-        current++;
-    } while (remaining >= 0);
-    pending = queue->pending;
-    remaining = 47;
-    do {
-        func_00175EF8(pending);
-        remaining--;
-        pending++;
-    } while (remaining >= 0);
-    storage->unk_284 = 0;
-    storage->unk_288 = 0;
-    return 1;
-}
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_001756C0);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175750);
-#ifdef NON_MATCHING
-// Unmatched: loop branch and delay-slot scheduling differ.
-s32 func_00175930(PS2CollisionQueue* queue) {
-    PS2LiveCollision** current = queue->live;
-    PS2LiveCollision* collision = *current;
-    s32 remaining = 15;
-    do {
-        remaining--;
-        current++;
-        func_00170C90(collision);
-        if (remaining < 0)
-            break;
-        collision = *current;
-    } while (1);
-    return 1;
-}
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175930);
-#endif
+
 void func_00175980(PS2CollisionQueue* queue, u64 name, s32 flag) {
     char nameText[16];
     PS2GameObjectRecord* object = func_00129160((PS2GameObjectManager*)D_0040F4D0, name);
@@ -92,8 +45,6 @@ void func_00175980(PS2CollisionQueue* queue, u64 name, s32 flag) {
         func_001A4F70(D_003F54A0, nameText);
     }
 }
-#ifdef NON_MATCHING
-// Unmatched: helper argument setup and flag width differ.
 void func_00175A00(PS2CollisionQueue* queue, PS2GameObjectRecord* object, s32 flag) {
     s32 liveIndex = func_00175BB0(queue, object);
     s32 pendingIndex;
@@ -105,14 +56,10 @@ void func_00175A00(PS2CollisionQueue* queue, PS2GameObjectRecord* object, s32 fl
     }
     pendingIndex = func_00175BF0(queue, object);
     if (pendingIndex == -1) {
-        s32 freeIndex = func_00175C30(queue);
-        if (freeIndex != pendingIndex)
-            func_00175F10(&queue->pending[freeIndex], (s32)object, (s8)flag);
+        s32 freeIndex = func_00175C30(queue, object);
+        if (freeIndex != pendingIndex) func_00175F10(&queue->pending[freeIndex], object, flag);
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175A00);
-#endif
 s32 func_00175AB8(PS2CollisionQueue* queue, PS2GameObjectRecord* object, s32 reset) {
     s32 index = 0;
     PS2PendingCollision* pending = queue->pending;
@@ -206,11 +153,11 @@ block_8:
     return -1;
 }
 
-s32 func_00175C30(void *arg0) {
+s32 func_00175C30(PS2CollisionQueue* arg0, PS2GameObjectRecord* unused) {
     s32 var_3;
     u8 *var_4;
 
-    var_4 = arg0 + 0x40;
+    var_4 = (u8*)arg0 + 0x40;
     var_3 = 0;
 loop_1:
     if (*var_4 != 0) {
@@ -339,10 +286,10 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175E80);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175EF8);
 
-void func_00175F10(void *arg0, s32 arg1, s8 arg2) {
+void func_00175F10(PS2PendingCollision* arg0, PS2GameObjectRecord* arg1, s32 arg2) {
     M2C_FIELD(arg0, s8 *, 1) = arg2;
     M2C_FIELD(arg0, s8 *, 0) = 1;
-    M2C_FIELD(arg0, s32 *, 4) = arg1;
+    M2C_FIELD(arg0, PS2GameObjectRecord**, 4) = arg1;
     M2C_FIELD(arg0, f32 *, 8) = (f32) M2C_FIELD(D_0040F4D0, f32 *, 0x20);
 }
 

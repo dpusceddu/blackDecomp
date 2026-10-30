@@ -35,32 +35,7 @@ void Text_CopyUtf8ToUtf16(const char* input, u16* destination, s32 capacity) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275260);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275338);
-#ifdef NON_MATCHING
-// Unmatched: loop branch scheduling differs.
-s32 func_00275340(const u16* text) {
-    s32 count = 0;
-    while (*text) {
-        text++;
-        count++;
-    }
-    return count;
-}
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275340);
-#endif
-#ifdef NON_MATCHING
-// Unmatched: load and loop branch scheduling differ.
-u16* func_00275370(u16* destination, const u16* source) {
-    while (1) {
-        *destination = *source;
-        if (!*source++) break;
-        destination++;
-    }
-    return destination;
-}
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_275128", func_00275370);
-#endif
+
 #ifdef NON_MATCHING
 // Unmatched: copy-loop scheduling and temporary registers differ.
 u16* func_00275398(u16* destination, s32 capacity, const u16* source) {
