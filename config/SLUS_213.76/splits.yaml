@@ -242,7 +242,8 @@ splits:
   - {src: src/game/world/tu_127118.cpp, range: [0x12a310, 0x12a480]}
   - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a480, 0x12aaf8], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
   - {src: src/game/world/tu_127118.cpp, range: [0x12aaf8, 0x12ab28]}
-  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ab28, 0x12ae00]}
+  - {src: src/game/unsorted/tu_127118_12ab28.cpp, range: [0x12ab28, 0x12ab90], flags: [-O2, -G0, -snas], note: "Native visitor result setup occupies the branch delay slots; this wrapper retains default post-allocation instruction scheduling."}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ab90, 0x12ae00]}
   - {src: src/game/unsorted/tu_127118_12ae00.cpp, range: [0x12ae00, 0x12ae58], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ae58, 0x12b2a8]}
   - {src: src/game/world/tu_127118.cpp, range: [0x12b2a8, 0x12b328]}
