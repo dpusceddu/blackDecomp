@@ -93,6 +93,20 @@ it. `build/auto/context.json` keeps evidence, unresolved arities and conflicts. 
 independent on the EE. Caller counts and register-use constraints are lower bounds; the original order of mixed
 parameters is unknown without a signature. Xbox types remain leads and never establish PS2 field offsets.
 
+To inspect the existing evidence for a function and its immediate native callees:
+
+```sh
+python3 tools/pipeline/context_recovery.py --function func_001444A8 --callees
+```
+
+Repeat `--function` for more targets. JSON output includes source declarations with paths and quality, source conflicts,
+register constraints and return consumption. A cold or stale cache is refreshed automatically; progress goes to stderr.
+`source_evidence.matched_owner` means the selected declaration came from a matched owner's context, which can include
+headers; it does not uniquely prove the original C++ type. Unknown aggregate returns and constructor ABIs remain explicit
+limitations. Conflicting aggregate-return and explicit-output-pointer views may describe the same physical ABI and require
+manual review. Register leftovers and caller argument counts alone do not prove returns or unused parameters.
+This command only updates the ignored analysis cache; it never changes committed source or counts a new match.
+
 A recovered layout is a struct `Recovered_<Name>` whose fields are named after their PS2 offsets (`unk_30`, with `unk_4[45]` for a gap)
 and cover the accessed prefix only, not the allocation size. A committed layout is ordinary source: it is defined in the one
 source file that uses it, or, when several files share it, in a plainly named header under `include/<library>/` (the sources include
@@ -104,6 +118,7 @@ ignored `build/auto/` (`context.json` lists each layout's `verified_by` function
 function; it is a starting point for the layout you commit, never a replacement for it. Normal drafts declare referenced callees individually so
 speculative signatures do not conflict with unrelated definitions. When several runs share a checkout,
 `AUTODECOMP_FREEZE_CONTEXT=1` consumes the already exported context; a missing context is an error.
+Ordinary `decompile.py` drafting checks freshness; it does not enable freezing automatically.
 
 No tool rewrites a committed header: `decompile.py`, `autodecomp.py` and the build only write under `build/auto/` (the m2c
 context: `context.json`, `ctx*.c`, `recovered_layouts.c`) from the committed headers, sources and configuration, which is all a

@@ -22,7 +22,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 from preparation_lock import preparation_lock
-VERSION = 10
+VERSION = 11
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -64,6 +64,7 @@ def split_params(text):
 
 
 def type_spelling(text):
+    text = re.sub(r'\bextern\s+"C(?:\+\+)?"', '', text)
     text = re.sub(r'\b(const|volatile|register|extern|static|inline|virtual|__inline__|__stdcall|__cdecl|__thiscall|__fastcall)\b', '', text)
     return ' '.join(text.split()).strip()
 
@@ -345,6 +346,12 @@ def demangle_method(symbol):
     return '::'.join(scopes + [method])
 
 
+def source_evidence(seed):
+    """Keep the source view visible even when its physical ABI is unresolved."""
+    return dict(declaration=seed['raw'], path=seed['source'], matched_owner=seed['matched'],
+                quality=seed['quality'], abi_uncertainty=seed.get('abi_uncertainty', []))
+
+
 def source_seeds(root=ROOT, matched_only=False):
     from units import load_units, dependencies
     seeds, evidence, parsed, texts = {}, [], {}, {}
@@ -413,7 +420,8 @@ def source_seeds(root=ROOT, matched_only=False):
                      this_usage=bool(d.get('implicit_this') or re.search(r'\(\s*[^,]*\b(this|self)\b', d['raw'])))
             previous = seeds.get(addr)
             if previous and (previous['ret'], previous['params']) != (s['ret'], s['params']):
-                evidence.append(dict(addr=addr, kind='source-conflict', signatures=[previous['raw'], s['raw']]))
+                evidence.append(dict(addr=addr, kind='source-conflict',
+                                     declarations=[source_evidence(previous), source_evidence(s)]))
             if not previous or s['quality'] > previous['quality']:
                 seeds[addr] = s
     return seeds, evidence
@@ -921,6 +929,8 @@ def recover_signatures(inv, analysis, seeds):
                    surface_abi_ambiguity=surface_seeds.get(a, {}).get('abi_uncertainty', []),
                    ret_class=seed.get('retclass') if seed else None)
         row['live_register_slots'] = live_slots[a]
+        if a in surface_seeds:
+            row['source_evidence'] = source_evidence(surface_seeds[a])
         row['syscall'] = analysis[a].get('syscall', False)
         row['return_evidence'] = dict(direct_types=direct_returns[a],
                                      consumed_banks=sorted({bank for _, bank, _ in return_consumers[a]}),
@@ -1289,11 +1299,56 @@ def write_build_context(result, root=None):
     (auto / 'recovered_layouts.c').write_text('\n'.join(ctx) + '\n')
 
 
+def function_address(value):
+    try:
+        return int(value.removeprefix('func_'), 16)
+    except ValueError:
+        raise argparse.ArgumentTypeError('expected a hexadecimal address or func_XXXXXXXX') from None
+
+
+def focused_report(result, addresses, callees=False, inv=None):
+    """Select existing signature evidence, optionally including immediate native callees."""
+    selected = set(addresses)
+    missing = selected - {int(a) for a in result['signatures']}
+    if missing:
+        raise ValueError('no recovered signature for ' + ', '.join('func_%08X' % a for a in sorted(missing)))
+    calls = []
+    if callees:
+        if inv is None:
+            from autodecomp import load_inventory
+            inv = load_inventory()
+        for f in inv:
+            if f['addr'] not in addresses:
+                continue
+            for pc, dest, tail in sorted(analyze_function(f)['calls'], key=lambda call: call[0]):
+                calls.append(dict(caller='func_%08X' % f['addr'], pc='0x%08X' % (f['addr'] + 4*pc),
+                                  callee='func_%08X' % dest if dest is not None else None, tail=tail))
+                if str(dest) in result['signatures']:
+                    selected.add(dest)
+    return dict(signatures={'func_%08X' % a: result['signatures'][str(a)] for a in sorted(selected)},
+                source_conflicts=[c for c in result['source_conflicts'] if c['addr'] in selected], calls=calls)
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--refresh', action='store_true')
-    ap.add_argument('--report', action='store_true', help='report the recovery only, write nothing')
+    ap.add_argument('--report', action='store_true', help='report recovery without exporting layout declarations; may refresh the cache')
+    ap.add_argument('--function', action='append', type=function_address,
+                    help='show existing evidence for this function as JSON; repeat for more functions')
+    ap.add_argument('--callees', action='store_true', help='include immediate native callees with --function')
     args = ap.parse_args()
+    if args.callees and not args.function:
+        ap.error('--callees requires --function')
+    if args.function:
+        import contextlib
+        with contextlib.redirect_stdout(sys.stderr):
+            result = recover(refresh=args.refresh)
+        try:
+            report = focused_report(result, args.function, args.callees)
+        except ValueError as error:
+            ap.error(str(error))
+        print(json.dumps(report, indent=2))
+        return
     result = recover(refresh=args.refresh)
     if not args.report:
         write_build_context(result)
