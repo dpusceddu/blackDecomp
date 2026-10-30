@@ -63,7 +63,66 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518", func_0010200
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518", func_00102080);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518", func_00102930);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518", func_00102BD0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518", func_00102F68);
+extern void func_001D5C30(void*, s32);
+extern void* D_0040F510;
+extern s8** D_0040F4DC;
+extern void func_001078F0(void*, s32);
+extern void func_0020AE20(void*);
+extern s8* D_0040F544;
+extern s32 func_001038A8(void*);
+extern void* D_0040F4D0;
+extern void func_0027F858(void*);
+extern void func_0027F818(void*);
+
+static inline void ApplyFrameState(void* self) {
+    if (M2C_FIELD(self, s64*, 0x21090) == 0x200000002LL) {
+        M2C_FIELD(self, s32*, 0x21094) = M2C_FIELD(self, s32*, 0x21090) = 1;
+    } else
+        M2C_FIELD(self, s32*, 0x21090) = M2C_FIELD(self, s32*, 0x21094);
+}
+
+void func_00102F68(void* arg0) {
+    s32 temp_3;
+    s32 temp_3_2;
+
+    M2C_FIELD(arg0, s32*, 0x2109C) = (s32)M2C_FIELD(arg0, s32*, 0x21098);
+    ApplyFrameState(arg0);
+    temp_3 = M2C_FIELD(arg0, s32*, 0x21088);
+    if (temp_3 == 1) {
+        M2C_FIELD(arg0, s8*, 0x210C8) = 1;
+        func_001D5C30(D_0040F510, 1);
+        **D_0040F4DC = 0;
+        func_001078F0(D_0040F0E8, 1);
+        if (M2C_FIELD(arg0, u8*, 0x210CB) != 0) { func_0020AE20(D_0040F544); }
+        M2C_FIELD(arg0, s32*, 0x21088) = 0;
+    } else if (temp_3 == 2) {
+        M2C_FIELD(arg0, s8*, 0x210C8) = 0;
+        func_001D5C30(D_0040F510, 0);
+        **D_0040F4DC = 1;
+        func_001078F0(D_0040F0E8, 0);
+        M2C_FIELD(arg0, s32*, 0x21088) = 0;
+    }
+    temp_3_2 = M2C_FIELD(arg0, s32*, 0x2108C);
+    if (temp_3_2 == 1) {
+        M2C_FIELD(arg0, s8*, 0x210C9) = 1;
+        func_001D5C30(D_0040F510, 1);
+        **D_0040F4DC = 0;
+        M2C_FIELD(arg0, s32*, 0x2108C) = 0;
+    } else if (temp_3_2 == 2) {
+        M2C_FIELD(arg0, s8*, 0x210C9) = 0;
+        func_001D5C30(D_0040F510, 0);
+        **D_0040F4DC = 1;
+        M2C_FIELD(arg0, s32*, 0x2108C) = 0;
+    }
+    if ((func_001038A8(arg0) != 0) && (M2C_FIELD(D_0040F4D0, u8*, 0x28) != 0)) {
+        func_0027F858(D_0040F4D0);
+    } else if (func_001038A8(arg0) == 0) {
+        if (M2C_FIELD(D_0040F4D0, u8*, 0x28) == 0) {
+            if (M2C_FIELD(arg0, s32*, 0x2109C) != 3) { func_0027F818(D_0040F4D0); }
+        }
+    }
+}
+
 
 s32 func_00103158(void *arg0)
 {

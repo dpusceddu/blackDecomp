@@ -5,7 +5,7 @@
 extern s32 func_001536B0(s32);
 extern s32 func_00105228();
 extern void * D_0040F0E0;
-extern s32 func_0026CA20();
+extern void func_0026CA20(void*, s32);
 extern s32 func_00107AB8();
 extern s32 func_00107B08();
 
@@ -95,12 +95,9 @@ void func_001078D8(s32 arg0, s8 arg1) {
     M2C_FIELD((arg0 + arg1), s8 *, 0x79D) = 1;
 }
 
-s32 func_001078F0(s32 arg0, s32 arg1, s32 arg2) {
-    s32 temp_v0;
-
-    temp_v0 = func_0026CA20(arg0, arg1);
-    M2C_FIELD(arg0, s8 *, 0x79C) = (s8) arg1;
-    return temp_v0;
+void func_001078F0(void* controller, s32 enabled) {
+    func_0026CA20(controller, enabled);
+    M2C_FIELD(controller, u8*, 0x79C) = enabled;
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/tu_105bc0_106ed8", func_00107928);
