@@ -5,7 +5,7 @@
 extern s32 * func_00139060(void *, s64 *);
 extern s32 func_00139980(void *);
 extern s32 func_00139838(void *, s64 *);
-extern s32 func_001354E0(s64 *, void *);
+extern void func_001354E0(void*, void*);
 extern s32 func_0025C2C8(void *, s64 *);
 extern void * D_0040F4CC;
 extern s32 func_00135EA8(s64 *, f32, f32);

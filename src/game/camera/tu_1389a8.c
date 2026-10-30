@@ -8,7 +8,7 @@ extern void * func_00139980();
 extern s32 func_00139838();
 extern s32 func_001327F0();
 extern s32 func_0013EC38();
-extern s32 func_001354E0();
+extern void func_001354E0(void*, void*);
 extern s32 func_0025C210();
 extern s32 D_0040F4CC;
 extern s32 func_0012A158();

@@ -70,7 +70,32 @@ void func_0011CFD8(void* pool, void* actor) {
         ActivateSelectedChild(controller);
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11cd00", func_0011D090);
+extern void* func_0011D1D0(void*);
+extern s32 func_0011D200(void*, void*);
+extern s32 func_00136F10(void*, s32);
+extern s32 func_00140BB8(void*, void*);
+extern void func_001354E0(void*, void*);
+extern s32 func_00138F08(void*, void*);
+extern s32 func_001A6E58(void*);
+extern s32 func_00141418(void*);
+void* func_0011D090(void* arg0, void* arg1) {
+    void* temp_2;
+    s32 temp_2_2;
+
+    temp_2 = func_0011D1D0(arg0);
+    if (temp_2 == NULL) { return NULL; }
+    temp_2_2 = func_0011D200(arg0, arg1);
+    if (temp_2_2 != 0) { M2C_FIELD(arg0, void**, 4) = arg1; }
+    func_00136F10(arg1, 1);
+    M2C_FIELD(M2C_FIELD(M2C_FIELD(arg1, void**, 0xB4), void**, 0x34), s32*, 0x18) = 7;
+    func_00140BB8(temp_2, arg1);
+    func_001354E0(arg1, temp_2);
+    func_00138F08(D_0040F514, arg1);
+    func_001A6E58(M2C_FIELD(arg1, void**, 0x330));
+    if (temp_2_2 != 0) { func_00141418(temp_2); }
+    return temp_2;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11cd00", func_0011D158);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_11cd00", func_0011D1C8);
 

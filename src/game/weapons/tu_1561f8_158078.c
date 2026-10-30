@@ -24,8 +24,8 @@ s32 func_00158098(void *arg0) {
     return var_4;
 }
 
-void func_001580C0(void *arg0) {
-    func_0015A938(((BkWeaponControllerPS2*)arg0)->primary);
+s32 func_001580C0(void *arg0) {
+    return func_0015A938(((BkWeaponControllerPS2*)arg0)->primary);
 }
 
 s16 func_001580E0(void *arg0) {
