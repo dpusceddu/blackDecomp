@@ -15,7 +15,7 @@ extern void func_001895C8(Recovered_ActorRecords*, Recovered_ManagedSlot*, Recov
 extern void func_001794B0(void*, s8);
 extern void func_00175DB8(void*, s32);
 extern void func_0017BCD8(void*, s32);
-extern void func_00289698(void*, void*);
+extern s32 func_00289698(void*, void*);
 extern s32 func_0018DDD8(void*);
 extern Recovered_AIManager* D_0040F4D4;
 extern const f32 D_003F534C;
@@ -104,7 +104,6 @@ void AIManager_SetSelection(Recovered_AIManager* self, s32 selection) {
     selected = AIManager_TryGetSelection(self, 1);
     func_00289698(manager->sink, selected);
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16dd68", func_0016E430);
 Recovered_ManagedSlot* AIManager_FindNearestEligibleSlot(Recovered_AIManager* self, s128 position) {
     Recovered_ManagedSlot* slot = self->slots;
     u8* query = slot->query;

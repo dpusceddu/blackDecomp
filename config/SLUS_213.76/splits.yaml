@@ -652,7 +652,9 @@ splits:
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x16d7f0, 0x16dd68]}
   - {src: src/game/unsorted/tu_16dd68.c, range: [0x16dd68, 0x16e008], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31]}
   - {src: src/game/ai/manager_vectors.c, range: [0x16e008, 0x16e2b8], flags: [-O2, -G0, -snas, -fno-schedule-insns, -mvu0-use-vf0-vf31], note: observed vector-broadcast scheduling recipe}
-  - {src: src/game/unsorted/tu_16dd68.c, range: [0x16e2b8, 0x16e660]}
+  - {src: src/game/unsorted/tu_16dd68.c, range: [0x16e2b8, 0x16e430]}
+  - {src: src/game/unsorted/tu_16dd68_16e430.c, range: [0x16e430, 0x16e588], flags: [-O2, -G0, -snas], assembler: sn-min6, note: "Native member reset loop at 16E4B0 is six words including one NOP; stock SN adds a second padding NOP."}
+  - {src: src/game/unsorted/tu_16dd68.c, range: [0x16e588, 0x16e660]}
   - {src: src/game/unsorted/tu_16e660.c, range: [0x16e660, 0x16e6b0]}
   - {src: src/game/actor/tu_1650b8_165bb0.c, range: [0x16e6b0, 0x16e728]}
   - {src: src/game/unsorted/tu_16e728.c, range: [0x16e728, 0x16e7a8]}
