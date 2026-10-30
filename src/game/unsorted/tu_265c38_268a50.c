@@ -2,7 +2,7 @@
 #include "ps2/prelude.h"
 
 extern u8 D_0040E597;
-extern s32 func_00268928();
+extern void func_00268928(void);
 extern u8 D_0040E598;
 extern u8 D_0040E599;
 

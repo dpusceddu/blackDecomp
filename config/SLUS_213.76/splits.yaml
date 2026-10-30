@@ -358,7 +358,8 @@ splits:
   - {src: src/game/unsorted/tu_1435d0_1435f8.c, range: [0x1435f8, 0x143fd8], note: flags or language differ}
   - {src: src/game/unsorted/tu_1435d0_143fd8.c, range: [0x143fd8, 0x144038], flags: [-Os, -G0], note: flags or language differ}
   - {src: src/game/unsorted/tu_1435d0_144038.c, range: [0x144038, 0x1444a8]}
-  - {src: src/game/camera/tu_10f700_114168.c, range: [0x1444a8, 0x145240]}
+  - {src: src/game/camera/tu_1444a8.cpp, range: [0x1444a8, 0x1448c8], assembler: sn-min6, note: "Native empty array constructors have six-word short-branch separation. C++ new[] reproduces the observed construction loops without artificial empty C loops."}
+  - {src: src/game/camera/tu_10f700_114168.c, range: [0x1448c8, 0x145240]}
   - {src: src/game/actor/actor_entries.cpp, range: [0x145240, 0x145fb0]}
   - {src: src/game/actor/tu_1448c8_145fb0.c, range: [0x145fb0, 0x146a28]}
   - {src: src/game/actor/actor_reset.cpp, range: [0x146a28, 0x146af0]}

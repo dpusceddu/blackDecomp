@@ -2,7 +2,7 @@
 #include "ps2/prelude.h"
 #include "game/effects/asset.h"
 
-void func_001AFC78(void) {}
+void func_001AFC78(BkActorTimerPS2 *unused) {}
 
 s32 func_001AFCC8(void) {
     return 1;

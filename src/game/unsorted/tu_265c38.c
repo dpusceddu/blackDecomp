@@ -3,12 +3,13 @@
 
 extern s32 func_00266808();
 
-#ifdef NON_MATCHING
-/* Native quadword packet storage; original producer and packet type identities are UNVERIFIED. */
 extern u128 D_00440EF0[];
 extern u8* D_00442ED0;
 extern u32* D_00442ED4;
 extern s32 D_00442ED8;
+
+#ifdef NON_MATCHING
+/* Native quadword packet storage; original producer and packet type identities are UNVERIFIED. */
 extern u128* D_0040E5F0;
 extern void func_002B3D88(u32, s32);
 
@@ -67,7 +68,54 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_265c38", func_00265DA
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_265c38", func_00266088);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_265c38", func_002662A8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_265c38", func_002664A0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_265c38", func_00266698);
+
+extern s32 D_00442EE8;
+extern s32 D_0040E690;
+extern void func_00268928(void);
+extern s128 D_00443030;
+extern s128 D_00443100;
+extern s128 D_00443110;
+extern s128 D_00443120;
+extern s128 D_00443130;
+extern s128 D_00443140;
+
+void func_00266698(void) {
+    s32 count;
+    u8* second;
+    u8* third;
+    u8* first;
+    u8* fourth;
+
+    D_00442EE8 = D_0040E690;
+    D_00442ED0 = (u8*)D_00440EF0;
+    D_00442ED4 = NULL;
+    D_00442ED8 = 0xC;
+    func_00268928();
+    if (D_00442ED8 != 0xB) {
+        if ((s32)D_00442ED0 & 0xF) { D_00442ED0 = (u8*)(((s8*)D_00442ED0) + 8); }
+        D_00442ED8 = 0xB;
+        M2C_FIELD(D_00442ED0, s128*, 0) = D_00443030;
+        D_00442ED4 = (u32*)D_00442ED0;
+        D_00442ED0 = (u8*)(((s8*)D_00442ED0) + 0x10);
+    }
+    M2C_FIELD(D_00442ED0, s128*, 0) = D_00443100;
+    first = D_00442ED0;
+    D_00442ED0 = (u8*)(((s8*)first) + 0x10);
+    M2C_FIELD(first, s128*, 0x10) = (s128)D_00443110;
+    second = D_00442ED0;
+    D_00442ED0 = (u8*)(((s8*)second) + 0x10);
+    M2C_FIELD(second, s128*, 0x10) = (s128)D_00443120;
+    third = D_00442ED0;
+    D_00442ED0 = (u8*)(((s8*)third) + 0x10);
+    M2C_FIELD(third, s128*, 0x10) = (s128)D_00443130;
+    fourth = D_00442ED0;
+    D_00442ED0 = (u8*)(((s8*)fourth) + 0x10);
+    M2C_FIELD(fourth, s128*, 0x10) = (s128)D_00443140;
+    D_00442ED0 = (u8*)(((s8*)D_00442ED0) + 0x10);
+    count = *D_00442ED4 + 5;
+    *D_00442ED4 = count;
+    return;
+}
 
 s32 func_002667E8(s32 arg0) {
     return func_00266808(arg0, 0);
