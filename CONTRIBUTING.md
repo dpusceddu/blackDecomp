@@ -81,12 +81,17 @@ the others as `INCLUDE_ASM` lines.
    differences ([commands and report format](docs/progress-reports.md)). A GUI is optional.
 2. Inspect types, callee signatures and object lifetimes; the [matching handbook](docs/matching-handbook.md) has
    diagnostic recipes for common mismatches. A function's assembly is `asm/SLUS_213.76/nonmatchings/<file>/func_XXXXXXXX.s`.
+   For a related family, establish shared field layouts, receiver arguments and return widths before tuning individual
+   instruction order; recheck the other consumers when changing a shared interface.
 3. Replace the `INCLUDE_ASM` line with C or C++. `python3 tools/decompile.py func_XXXXXXXX` prints an m2c draft with the
    project's context (`--write` puts it in place). For near misses, consider
    [decomp-permuter](docs/pipeline.md#using-decomp-permuter-directly) on the function, with seeds that leave out unrelated
    `INCLUDE_ASM` bodies.
-4. Iterate with affected-object comparisons and commit small batches. Apply the [validation impact rule](#rules) before
-   review; object matches remain candidates until the required image check passes.
+4. Iterate with affected-object comparisons and commit small batches. Use `tools/trysrc.py ADDR SOURCE... --hypothesis TEXT`
+   to compare explicit source variants together; consult `tools/trysrc.py ADDR --history` before repeating a hypothesis.
+   Apply the [validation impact rule](#rules) to each coherent batch before review; object matches remain candidates until
+   the required image check passes. Run an earlier image check for an ownership transfer, data-placement uncertainty or
+   a shared-interface change affecting existing exact functions.
 5. A function that compiles under another name (a C++ method) needs a line in `symbols.txt`
    (`Reset__4Game = 0x1b78d8; // type:func`). Code that needs other flags than the rest of its file gets a file of its own
    (`python3 tools/split_function.py func_XXXXXXXX [--cpp] [--flags "..."]`, see [docs/units.md](docs/units.md)).

@@ -35,6 +35,8 @@ from pathlib import Path
 
 import yaml
 
+SAFE_LOADER = getattr(yaml, 'CSafeLoader', yaml.SafeLoader)
+
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SLUG = 'SLUS_213.76'
 DEFAULT_COMPILER = 'ee-gcc2.95.3-136'
@@ -102,7 +104,7 @@ def load_splits(slug=DEFAULT_SLUG, path=None):
     path = Path(path) if path else config_dir(slug) / 'splits.yaml'
     if not path.exists():
         return []
-    data = yaml.safe_load(path.read_text()) or {}
+    data = yaml.load(path.read_text(), Loader=SAFE_LOADER) or {}
     defaults = data.get('defaults') or {}
     return [Split(e, defaults) for e in data.get('splits') or []]
 
