@@ -251,7 +251,8 @@ splits:
   - {src: src/game/unsorted/tu_127118_12ae00.cpp, range: [0x12ae00, 0x12ae58], flags: [-O2, -G0, -snas, -fno-exceptions, -fno-rtti]}
   - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ae58, 0x12b2a8]}
   - {src: src/game/world/tu_127118.cpp, range: [0x12b2a8, 0x12b328]}
-  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12b328, 0x12bd98]}
+  - {src: src/game/unsorted/tu_127118_12b328.cpp, range: [0x12b328, 0x12b448], flags: [-O2, -G0, -snas], assembler: sn-min6, note: "Native collision result constructs three sixteen-byte vector slots with a six-word empty-constructor loop; retain default post-allocation scheduling."}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12b448, 0x12bd98]}
   - {src: src/game/world/tu_127118.cpp, range: [0x12bd98, 0x12bdc8]}
   - {src: src/game/unsorted/tu_127118_12bdc8.c, range: [0x12bdc8, 0x12c0e8], note: flags or language differ}
   - {src: src/game/unsorted/tu_127118_12c0e8.c, range: [0x12c0e8, 0x12c650], flags: [-O1, -G0, -snas]}

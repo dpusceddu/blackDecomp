@@ -21,7 +21,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012AB90);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012AE58);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B0E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B328);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B448);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B720);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_127118_12a480", func_0012B950);

@@ -1,32 +1,27 @@
-#include "include_asm.h"
 #include "ps2/prelude.h"
 
-#ifdef NON_MATCHING
-// Unmatched: two descriptor-call argument moves exchange the branch delay slot.
 // Native allocation and ABI views; original class names remain UNVERIFIED.
-struct AllocationRequest {
-    u32 bytes, alignment;
-};
-struct StorageBlock {
-    void* memory;
-    u32 unknown4;
-};
+#include "physics/scene.hpp"
+#include "game/frontend_resources.hpp"
+typedef PhysicsStorageRequirement AllocationRequest;
+typedef PhysicsStorageBlock StorageBlock;
 extern "C" void* D_0040F4C4;
-extern "C" u8 D_0040F0F0[], D_003D12C8[];
+extern FrontendResourceTable D_0040F0F0;
+extern "C" u8 D_003D12C8[];
 extern "C" void func_0014BD18(void*);
 extern "C" void* func_00108120(void*, u64);
 extern "C" void* func_00107D20(u32);
 extern "C" void* func_00107CF8(u32);
 extern "C" bool func_001AFBA8(void*);
 extern "C" void func_0014CDB8(void*);
-extern "C" void func_00107CC8(void*, u32);
 extern "C" s32 func_00149178(void*);
 extern "C" s32 func_00149CA0(void*);
 extern "C" s32 func_00263908(void*, s16, void*);
 extern "C" AllocationRequest* func_0032B860(AllocationRequest*, u32, u32);
-extern "C" void* func_00107C98(void*, AllocationRequest*);
 extern "C" void* func_0032BB28(StorageBlock*, u32, u32);
-extern "C" void* func_003349C0(AllocationRequest*, s32, void*, s32);
+// SN returns the sixteen-byte requirement through its hidden output pointer.
+extern "C" AllocationRequest ListRequirements(s32, void*, s32) __asm__("func_003349C0");
+inline void* operator new(unsigned int, void* memory) { return memory; }
 extern "C" void* func_003349E0(StorageBlock*, u32, s32, s32);
 extern "C" void* func_00334268(StorageBlock*, s32);
 extern "C" void func_001AFC78(void*);
@@ -36,7 +31,7 @@ template <unsigned Size> struct ActorArraySlot {
     static void* operator new[](u32 bytes) { return func_00107D20(bytes); }
 };
 static inline void ResetRequest(AllocationRequest* request, u32 size, u32 alignment) {
-    request->bytes = size;
+    request->size = size;
     request->alignment = alignment;
 }
 extern "C" void func_001444A8(void* self, void* definition, void* shared) {
@@ -77,8 +72,8 @@ extern "C" void func_001444A8(void* self, void* definition, void* shared) {
     M2C_FIELD(self, void**, 0x1C0) = func_00107D20(M2C_FIELD(M2C_FIELD(self, void**, 0x118), u32*, 0x44));
     AllocationRequest request;
     request.alignment = 16;
-    request.bytes = 96;
-    func_00107CC8(D_0040F0F0, 16);
+    request.size = 96;
+    D_0040F0F0.SetAlignment(16);
     void* shapes = new ActorArraySlot<0x60>[M2C_FIELD(M2C_FIELD(self, void**, 0x118), u8*, 0x68)];
     M2C_FIELD(self, void**, 0x1B8) = 0;
     M2C_FIELD(self, void**, 0xB8) = 0;
@@ -96,13 +91,13 @@ extern "C" void func_001444A8(void* self, void* definition, void* shared) {
         StorageBlock storage;
         storage.memory = 0;
         func_0032B860(&request, 1, 0);
-        storage.memory = func_00107C98(D_0040F0F0, &request);
+        storage.memory = D_0040F0F0.AllocateAligned((FrontendAllocationSpec*)&request);
         M2C_FIELD(self, void**, 0x128) = func_0032BB28(&storage, 1, 0);
-        func_003349C0(&request, total, D_003D12C8, 0x40);
-        storage.memory = func_00107C98(D_0040F0F0, &request);
+        new (&request) AllocationRequest(ListRequirements(total, D_003D12C8, 0x40));
+        storage.memory = D_0040F0F0.AllocateAligned((FrontendAllocationSpec*)&request);
         void* list = func_003349E0(&storage, total, (s32)D_003D12C8, 0x40);
         ResetRequest(&request, 96, 16);
-        storage.memory = func_00107C98(D_0040F0F0, &request);
+        storage.memory = D_0040F0F0.AllocateAligned((FrontendAllocationSpec*)&request);
         void* holder = func_00334268(&storage, 5);
         M2C_FIELD(self, void**, 0xB8) = holder;
         M2C_FIELD(holder, void**, 0x40) = list;
@@ -128,7 +123,3 @@ extern "C" void func_001444A8(void* self, void* definition, void* shared) {
         }
     }
 }
-
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/camera/tu_1444a8", func_001444A8);
-#endif

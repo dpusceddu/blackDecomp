@@ -7,6 +7,7 @@ extern s32 func_00334870(M2C_UNK, M2C_UNK);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_334870", func_00334870);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/physics/tu_334870", func_003349B8);
 
+// Physical ABI view: arg0 is the hidden output buffer for an allocation requirement.
 void * func_003349C0(void *arg0, s32 arg1, void *unusedType, s32 unusedOffset) {
     M2C_FIELD(arg0, s32 *, 4) = 0x10;
     M2C_FIELD(arg0, s32 *, 0) = (s32) ((arg1 * 0x60) + 0x40);
