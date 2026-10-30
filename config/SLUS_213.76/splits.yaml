@@ -240,7 +240,11 @@ splits:
   - {src: src/game/world/tu_127118.cpp, range: [0x129240, 0x12a0d8]}
   - {src: src/game/unsorted/tu_127118_12a0d8.c, range: [0x12a0d8, 0x12a310], flags: [-G0, -snas, -O2, -fno-schedule-insns], assembler: sn-min6, note: flags or language differ}
   - {src: src/game/world/tu_127118.cpp, range: [0x12a310, 0x12a480]}
-  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a480, 0x12aaf8], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a480, 0x12a4d8], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
+  - {src: src/game/unsorted/tu_127118_12a4d8.cpp, range: [0x12a4d8, 0x12a5f8], flags: [-O2, -G0, -snas], note: "Native subsystem stores interleave with the next allocation arguments; retain default post-allocation instruction scheduling."}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a5f8, 0x12a7c0]}
+  - {src: src/game/unsorted/tu_127118_12a7c0.cpp, range: [0x12a7c0, 0x12a918], flags: [-O2, -G0, -snas, -mvu0-use-vf0-vf31], note: "Native ray-length test and endpoint stores use allocatable VU0 registers; retain default post-allocation scheduling."}
+  - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12a918, 0x12aaf8]}
   - {src: src/game/world/tu_127118.cpp, range: [0x12aaf8, 0x12ab28]}
   - {src: src/game/unsorted/tu_127118_12ab28.cpp, range: [0x12ab28, 0x12ab90], flags: [-O2, -G0, -snas], note: "Native visitor result setup occupies the branch delay slots; this wrapper retains default post-allocation instruction scheduling."}
   - {src: src/game/unsorted/tu_127118_12a480.c, range: [0x12ab90, 0x12ae00]}
