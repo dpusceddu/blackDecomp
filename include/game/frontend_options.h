@@ -5,8 +5,8 @@
 /* Native frontend command registration identifies these options. These are
  * partial access views, not complete original classes; all unaccessed storage,
  * original identities and full extents remain UNVERIFIED.
- * Matched option consumers confirm invert-look and crouch fields. Volume and
- * vibration fields remain UNVERIFIED until their draft consumers match. */
+ * Matched option consumers confirm invert-look, crouch and both volume fields.
+ * The vibration field remains UNVERIFIED until its draft consumer matches. */
 /* The matched runtime update addresses both gains through this common
  * subobject. Original setting names, units, unaccessed storage and full extents
  * remain UNVERIFIED. */
