@@ -456,7 +456,6 @@ typedef struct ManagedAction {
     ManagedDefinition* definition;
 } ManagedAction;
 extern ManagedFlagSlot* func_00135550(ManagedRef*);
-#ifdef NON_MATCHING
 typedef struct AmbientDefinition {
     float a, b, c;
     u8 unk0C[4];
@@ -480,13 +479,14 @@ typedef struct ChannelAction {
     ChannelDefinition* definition;
 } ChannelAction;
 extern s64 func_001EC768(void*);
-extern void func_001EC778(void*, s64, s32);
+extern void* func_001EC778(void*, s64, s32);
 extern void func_001EC858(void*, s64, s32);
 static inline SoundManager* CurrentSoundManager(void) {
     GameSound* game = (GameSound*)((s8*)D_0040F510 + 0x8000);
     return game->sound;
 }
 static inline void* CurrentChannel(void) { return CurrentSoundManager()->channel; }
+#ifdef NON_MATCHING
 static inline void DefaultFields(ResourceCore* self) {
     s32 i;
     for (i = 0; i < 9; i++) {
@@ -1266,8 +1266,6 @@ s32 func_00164238(GroupAction* self) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00164268);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00164548);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00164900);
-#ifdef NON_MATCHING
-// Unmatched: the second and third enabled-channel loads exchange two temporary registers.
 void func_00164F50(ChannelAction* self) {
     if (self->enable) {
         {
@@ -1303,9 +1301,6 @@ void func_00164F50(ChannelAction* self) {
         }
     }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/weapons/tu_1448c8_149ac8", func_00164F50);
-#endif
 
 void func_001650B8(void *arg0, s32 arg1) {
     func_00165AE0();
