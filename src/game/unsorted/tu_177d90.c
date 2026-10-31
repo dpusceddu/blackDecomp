@@ -1,7 +1,9 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+extern s32 func_001735E0(f32*);
+extern s32 func_00173610(f32*);
 
-extern s32 func_00173640(void *, f32);
+extern void func_00173640(f32*, f32);
 extern s32 func_0017B8A8();
 extern void * D_0040F4D4;
 extern s32 func_00177C78();
@@ -28,10 +30,15 @@ void func_00177E68(void *arg0, s32 arg1) {
 
 void func_00177E70(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x58) = arg1;
-    func_00173640(arg0 + 0x5C, 5.0f);
+    func_00173640((f32*)((u8*)arg0 + 0x5C), 5.0f);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_177d90", func_00177E98);
+s32 func_00177E98(void* self) {
+ f32* timer=(f32*)((u8*)self+0x5c);
+ if(!func_001735E0(timer))return 0;
+ if(func_00173610(timer))return 0;
+ return M2C_FIELD(self,s32*,0x58);
+}
 
 void func_00177EE8(void *arg0, s32 arg1, s32 arg2) {
     s32 temp_3;

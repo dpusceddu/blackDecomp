@@ -8,8 +8,8 @@ extern void *func_00108328(void *, const char *);
 extern void *D_0040F4C4;
 extern const char D_00400818[], D_00400828[], D_00400830[], D_00400838[];
 extern void func_00272AA8(void *);
-extern s32 func_003822E0(void *, s32);
-extern s32 func_003822F8(void *, s32);
+extern void* func_003822E0(void *, s32);
+extern void* func_003822F8(void *, s32);
 extern void func_0028EED8(void *);
 extern void func_001AF930(void *);
 extern void func_00108540(void *, s32, void *, s32);
@@ -76,8 +76,9 @@ s32 func_002887F8(Recovered_MuzzleTextures *muzzle) {
     } while (index < 3);
     return 0;
 }
-#endif
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288488_288788", func_002887F8);
+#endif
 
 s32 func_00288910(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0x10D) = 1;
@@ -85,36 +86,50 @@ s32 func_00288910(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288488_288788", func_00288920);
-#ifdef NON_MATCHING
-// Unmatched: model-archive loop register allocation differs.
-void func_00288930(Recovered_EffectPackage *package, s32 arg1) {
-    Recovered_EffectArchive *textures;
-    s32 textureIndex = 0;
-    textures = (Recovered_EffectArchive *)((u32)package->textures + (u32)package);
-    package->textures = textures;
-    package->models = (Recovered_EffectArchive *)((u32)package->models + (u32)package);
+void func_00288930(Recovered_EffectPackage* self) {
+    s32 textureIndex = 0, modelIndex;
+    Recovered_EffectArchive *textures, *models;
+    textures = (Recovered_EffectArchive*)((u32)self->textures + (u32)self);
+    self->textures = textures;
+    self->models = (Recovered_EffectArchive*)((u32)self->models + (u32)self);
     func_00272AA8(textures);
-    if (textures->count > 0) {
-        do {
-            func_0028EED8((void *)func_003822E0(textures, textureIndex));
-            textureIndex++;
-        } while (textureIndex < textures->count);
-    }
-    func_00108540(D_0040F4C4, 0, package->textures, 0);
-    {
-        s32 modelIndex = 0;
-        Recovered_EffectArchive *models = package->models;
-        func_00272AA8(models);
-        if (models->count > 0) {
-            do {
-                func_001AF930((void *)func_003822F8(models, modelIndex));
-                modelIndex++;
-            } while (modelIndex < models->count);
-        }
-    }
-    func_00108540(D_0040F4C4, 1, package->models, 0);
+    for (; textureIndex < textures->count; ++textureIndex) func_0028EED8(func_003822E0(textures, textureIndex));
+    modelIndex = 0;
+    func_00108540(D_0040F4C4, 0, self->textures, 0);
+    models = self->models;
+    func_00272AA8(models);
+    for (; modelIndex < models->count; ++modelIndex) func_001AF930(func_003822F8(models, modelIndex));
+    func_00108540(D_0040F4C4, 1, self->models, 0);
 }
-#endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288488_288788", func_00288930);
-
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_288488_288788", func_00288A38);
+// Partial native resource header; original class identity remains UNVERIFIED.
+typedef struct SectionResourceView {
+    u8 unknown[0x1C];
+    u32 field1C, field20, field24, field28, field2C, field30, field34, field38, field3C, field40;
+} SectionResourceView;
+void func_00288A38(SectionResourceView* self) {
+    s32 i = 0;
+    void* list = (void*)(self->field1C + (u32)self);
+    self->field24 += (u32)self;
+    self->field1C = (u32)list;
+    self->field20 += (u32)self;
+    self->field28 += (u32)self;
+    self->field2C += (u32)self;
+    self->field30 += (u32)self;
+    self->field34 += (u32)self;
+    self->field38 += (u32)self;
+    self->field3C += (u32)self;
+    self->field40 += (u32)self;
+    func_00272AA8(list);
+    for (; i < M2C_FIELD(list, s32*, 8); ++i) func_0028EED8(func_003822E0(list, i));
+    i = 0;
+    func_00108540(D_0040F4C4, 0, (void*)self->field1C, 0);
+    list = (void*)self->field20;
+    func_00272AA8(list);
+    for (; i < M2C_FIELD(list, s32*, 8); ++i) func_001AF930(func_003822F8(list, i));
+    func_00108540(D_0040F4C4, 1, (void*)self->field20, 0);
+    func_00272AA8((void*)self->field24);
+    func_00272AA8((void*)self->field28);
+    func_00272AA8((void*)self->field2C);
+    func_00272AA8((void*)self->field30);
+    func_00272AA8((void*)self->field34);
+}

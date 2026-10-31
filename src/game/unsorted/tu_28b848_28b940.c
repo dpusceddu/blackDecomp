@@ -1,7 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-void func_0028B940(void) {
+// Empty element initializer retains its unused native receiver.
+void func_0028B940(void *element) {
 
 }
 

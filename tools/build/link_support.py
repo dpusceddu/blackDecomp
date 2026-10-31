@@ -61,6 +61,8 @@ def main():
             prev = [x for x in defined[sec[0]] if x[0] <= a]
             if not prev:
                 raise SystemExit('no preceding symbol for %s in %s' % (name, sec[0]))
+            if prev[-1] == (a, name):
+                continue  # Already defined; a self-alias would override a source-owned definition.
             ld.append('%s = %s + 0x%X;' % (name, prev[-1][1], a - prev[-1][0]))
             kinds['rel'] += 1
         elif any(a == hi for _, _, hi in secs):

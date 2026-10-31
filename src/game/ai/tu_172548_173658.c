@@ -2,29 +2,24 @@
 #include "ps2/prelude.h"
 
 #include "ps2/recovered_types.h"
-extern s32 func_00173640(f32 *, f32);
-extern s32 D_00415710;
-extern s32 D_00415790;
+extern void func_00173640(f32*, f32);
+extern s32 D_00415710[];
+extern s32 D_00415790[];
 
-s32 func_00173658(f32 *arg0) {
-    return func_00173640(arg0, 0.0f);
+void func_00173658(f32* timer) {
+    func_00173640(timer, 0.0f);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_001736B8);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173748);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_001739E0);
-#ifdef NON_MATCHING
-// Unmatched: table selection branch layout differs.
 s32 func_00173D38(void* self, s32 index) {
-    s32 kind = M2C_FIELD(self, s32*, 0x14);
-    s32* table;
-    if (kind == 2) table = &D_00415710;
-    else if (kind == 3) table = &D_00415790;
-    else return index - 1;
-    return *(s32*)((u8*)table + index * 32);
+    switch (M2C_FIELD(self, s32*, 0x14)) {
+        case 2: return D_00415710[index * 8];
+        case 3: return D_00415790[index * 8];
+        default: return index - 1;
+    }
 }
-#endif
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173D38);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173D80);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_172548_173658", func_00173E18);
 
