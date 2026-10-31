@@ -67,7 +67,7 @@ def absolute_symbols(slug):
 
 
 DATA_SECTIONS = ('.rodata', '.lit4', '.lit8', '.sdata', '.sbss', '.data', '.bss', '.gcc_except_table')
-DATA_NAME = re.compile(r'\bD_([0-9A-Fa-f]{8})\b')
+DATA_NAME = re.compile(r'\b(?:D_|jtbl_)([0-9A-Fa-f]{8})\b')
 
 
 def comparison_text_sections(text):
@@ -131,8 +131,8 @@ def data_slots(slug):
 
 def local_data_symbols(texts, slots, sizes, known):
     """{name: (section, offset)} for the data the unit's own functions refer to by address name (`D_003F7150`) that the
-    compiler keeps in a section of the unit's object: the object has no symbol there, so its reference would read
-    `.rodata+0x8`, which objdiff does not equate with the original's name."""
+    compiler keeps in a section of the unit's object, including native `jtbl_` labels. Without that symbol, its reference
+    would read `.rodata+0x8`, which objdiff does not equate with the original's name."""
     found = {}
     for text in texts:
         for m in DATA_NAME.finditer(text):
@@ -288,12 +288,15 @@ def build_view(spec_path, output):
     typed_data = target_data_symbols(texts, slots, sizes, symbols, source.sections)
     lines += typed_data
     typed_names = {line.split()[1].rstrip(',') for line in typed_data if line.startswith('.type ')}
+    data_renames = {}
     for section, address in slots.items():
-        if any(symbol['name'] == 'D_%08X' % address and symbol['name'] in typed_names
+        table_at_start = local.get('jtbl_%08X' % address) == (section, 0)
+        if table_at_start or any(symbol['name'] == 'D_%08X' % address and symbol['name'] in typed_names
                and source.sections[symbol['shndx']]['name'] == section and symbol['value'] == 0
                for symbol in symbols):
-            args += ['--rename-section=%s=%s.%08X' % (section, section, address)]
-    args += ['--add-symbol=%s=%s:%d,global,object' % (n,sec,off) for n,(sec,off) in local.items()]
+            data_renames[section] = '%s.%08X' % (section, address)
+            args += ['--rename-section=%s=%s' % (section, data_renames[section])]
+    args += ['--add-symbol=%s=%s:%d,global,object' % (n,data_renames.get(sec,sec),off) for n,(sec,off) in local.items()]
     subprocess.run(args+[str(output)],env=env,check=True)
     output.write_bytes(elfobj.literal_as_gprel(output.read_bytes()))
     target = output.parent.parent/'target'/output.name
