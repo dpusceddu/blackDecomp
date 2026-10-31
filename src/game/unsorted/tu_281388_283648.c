@@ -43,9 +43,8 @@ extern void func_00328180(void*, f32);
 extern s32 func_00328108(s32, s32);
 extern s32 func_00281198();
 extern s32 func_00319C70(M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK, M2C_UNK);
-extern s32 func_00285258();
+extern s32 func_00285258(void*, void*);
 extern s32 func_00284BF0(void*, void*, void*);
-extern s32 func_002851E0();
 extern s32 func_00319E28(s32, s32);
 extern f32 func_003106F0(s32, M2C_UNK, M2C_UNK);
 extern void func_00319DE0(void*, s32);
@@ -69,6 +68,7 @@ typedef struct {
     Recovered_ProviderVoice *voice;
     Recovered_ProviderBackend *backend;
 } Recovered_ProviderState; /* Field roles UNVERIFIED. */
+extern s32 func_002851E0(Recovered_ProviderState*);
 
 // The native spatial hook carries a kind byte and six float parameters.
 // This backend ignores them; the original class and parameter names are UNVERIFIED.
@@ -423,8 +423,8 @@ void func_002843B0(void *arg0, void *arg1) {
     M2C_FIELD(arg0, u8 *, 0x32) = (u8) M2C_FIELD(arg1, u8 *, 0x1C);
 }
 
-s32 func_00284408(void) {
-    func_00285258();
+s32 func_00284408(void* self, void* parameters) {
+    func_00285258(self, parameters);
     return 1;
 }
 
@@ -745,7 +745,91 @@ s32 func_002851E0(Recovered_ProviderState *self) {
         return 0;
     }
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_283648", func_00285258);
+s32 func_00285258(void* arg0, void* arg1) {
+    s32 temp_2;
+    void* temp_2_10;
+    void* temp_2_11;
+    void* temp_2_4;
+    void* temp_2_5;
+    void* spatialTable;
+    void* temp_2_7;
+    void* otherSpatialTable;
+    void* temp_2_9;
+    void* temp_3;
+    void* temp_5;
+    void* spatial;
+
+    if (func_002851E0(arg0) != 0) {
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 3) & 1) {
+            M2C_FIELD(arg0, f32*, 0x10) = (f32)M2C_FIELD(arg1, f32*, 0x54);
+        }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 5) & 1) {
+            M2C_FIELD(arg0, f32*, 0x14) = (f32)M2C_FIELD(arg1, f32*, 0x5C);
+        }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 0xE) & 1) {
+            M2C_FIELD(arg0, f32*, 0x18) = (f32)M2C_FIELD(arg1, f32*, 0x64);
+        }
+        temp_5 = M2C_FIELD(arg0, void**, 4);
+        temp_3 = M2C_FIELD(temp_5, void**, 0x10);
+        temp_2 = M2C_FIELD(temp_3, s32(**)(void*), 0xC)((void*)(((s8*)temp_5) + M2C_FIELD(temp_3, s16*, 8)));
+        if (temp_2 != 0) {
+            if ((u8)M2C_FIELD(arg1, s32*, 0xA4) & 1) { SetProviderPosition(arg0, M2C_FIELD(arg1, s128*, 0x30)); }
+            if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 1) & 1) {
+                SetProviderDirection(arg0, M2C_FIELD(arg1, s128*, 0x40));
+            }
+            if (M2C_FIELD(arg1, u8*, 0xA5) & 1) {
+                temp_2_4 = M2C_FIELD(arg0, void**, 0);
+                M2C_FIELD(temp_2_4, void (**)(void*, f32), 0x6C)((void*)(((s8*)arg0) + M2C_FIELD(temp_2_4, s16*, 0x68)),
+                                                                 M2C_FIELD(arg1, f32*, 0x74));
+            }
+            if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 9) & 1) {
+                temp_2_5 = M2C_FIELD(arg0, void**, 0);
+                M2C_FIELD(temp_2_5, void (**)(void*, f32), 0x74)((void*)(((s8*)arg0) + M2C_FIELD(temp_2_5, s16*, 0x70)),
+                                                                 M2C_FIELD(arg1, f32*, 0x70));
+            }
+            if (ProviderFlag(M2C_FIELD(arg1, u8*, 0xA6), 7) != 0) {
+                spatialTable = M2C_FIELD(arg0, void**, 0);
+                spatial = (void*)(((s8*)arg1) + 0x88);
+                M2C_FIELD(spatialTable, void (**)(void*, f32, f32, f32, f32, f32, f32, u8),
+                          0x44)((void*)(((s8*)arg0) + M2C_FIELD(M2C_FIELD(arg0, void**, 0), s16*, 0x40)),
+                                M2C_FIELD(arg1, f32*, 0x88), M2C_FIELD(spatial, f32*, 8), M2C_FIELD(spatial, f32*, 4),
+                                M2C_FIELD(spatial, f32*, 0xC), M2C_FIELD(spatial, f32*, 0x10),
+                                M2C_FIELD(spatial, f32*, 0x14), M2C_FIELD(arg1, u8*, 0xAB));
+            }
+        } else {
+            if ((M2C_FIELD(arg1, s32*, 0xA4) >> 6) & 1) {
+                temp_2_7 = M2C_FIELD(arg0, void**, 0);
+                M2C_FIELD(temp_2_7, void (**)(void*, f32), 0x64)((void*)(((s8*)arg0) + M2C_FIELD(temp_2_7, s16*, 0x60)),
+                                                                 M2C_FIELD(arg1, f32*, 0x60));
+            }
+            if (ProviderFlag(M2C_FIELD(arg1, u8*, 0xA6), 7) != 0) {
+                otherSpatialTable = M2C_FIELD(arg0, void**, 0);
+                spatial = (void*)(((s8*)arg1) + 0x88);
+                M2C_FIELD(otherSpatialTable, void (**)(void*, f32, f32, f32, f32, f32, f32, u8), 0x44)(
+                    (void*)(((s8*)arg0) + M2C_FIELD(otherSpatialTable, s16*, 0x40)), M2C_FIELD(arg1, f32*, 0x88),
+                    M2C_FIELD(spatial, f32*, 8), M2C_FIELD(spatial, f32*, 4), M2C_FIELD(spatial, f32*, 0xC),
+                    M2C_FIELD(spatial, f32*, 0x10), M2C_FIELD(spatial, f32*, 0x14), M2C_FIELD(arg1, u8*, 0xAB));
+            }
+        }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 4) & 1) {
+            temp_2_9 = M2C_FIELD(arg0, void**, 0);
+            M2C_FIELD(temp_2_9, void (**)(void*, f32), 0x5C)((void*)(((s8*)arg0) + M2C_FIELD(temp_2_9, s16*, 0x58)),
+                                                             M2C_FIELD(arg1, f32*, 0x58));
+        }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 0xD) & 1) { func_00281200(arg0, M2C_FIELD(arg1, f32*, 0x6C)); }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 0x13) & 1) {
+            temp_2_10 = M2C_FIELD(arg0, void**, 0);
+            M2C_FIELD(temp_2_10, void (**)(void*, f32), 0x8C)((void*)(((s8*)arg0) + M2C_FIELD(temp_2_10, s16*, 0x88)),
+                                                              M2C_FIELD(arg1, f32*, 0x84));
+        }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 0x12) & 1) {
+            temp_2_11 = M2C_FIELD(arg0, void**, 0);
+            M2C_FIELD(temp_2_11, void (**)(void*, f32), 0x8C)((void*)(((s8*)arg0) + M2C_FIELD(temp_2_11, s16*, 0x88)),
+                                                              M2C_FIELD(arg1, f32*, 0x80));
+        }
+    }
+    return 1;
+}
 
 s32 func_00285510(s32 arg0) {
     s32 var_3;
