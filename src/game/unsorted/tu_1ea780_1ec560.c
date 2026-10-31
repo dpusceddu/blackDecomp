@@ -48,4 +48,18 @@ s32 func_001EC5C8(void *arg0)
   return var_5;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ec560", func_001EC600);
+extern void func_001DD6C0(void*);
+s32 func_001EC600(void* self, void* entry, s128 value) {
+    switch (M2C_FIELD(self, s32*, 0x28)) {
+        case 1:
+        case 4: func_001DD6C0(M2C_FIELD(self, void**, 0x1C)); M2C_FIELD(self, s32*, 0x28) = 2;
+        case 2:
+        case 3:
+            M2C_FIELD(self, s128*, 0) = value;
+            M2C_FIELD(self, void**, 0x24) = entry;
+            M2C_FIELD(entry, s32*, 0x14) = 4;
+            break;
+        default: break;
+    }
+    return 1;
+}

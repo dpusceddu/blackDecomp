@@ -19,7 +19,7 @@ typedef struct Recovered_SlotUser {
 #include "ps2/recovered_types.h"
 extern void * func_0016EAD0(void *);
 extern void * func_0016FB18(s32, s32);
-extern s32 func_00171CA8(void *, void *);
+extern void func_00171CA8(void *, void *);
 extern u8 func_002E1248(Recovered_Notifiable *, Recovered_SlotUser *);
 extern s8 * D_003C9ED4;
 
@@ -33,4 +33,16 @@ s32 func_0016FA50(s32 arg0, void *arg1) {
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_16eb80_16fa50", func_0016FAB0);
+/* Pool contents are managed by the lookup and release helpers. */
+typedef struct Recovered_ActorPool Recovered_ActorPool;
+extern void func_0016EB28(Recovered_ActorPool*, void*);
+extern u8 func_002E1280(void*, s32);
+
+s32 func_0016FAB0(s32 self, void* actor) {
+    void* component = M2C_FIELD(actor, void**, 0x34C);
+    func_0016EB28((Recovered_ActorPool*)func_0016FB18(self, M2C_FIELD(actor, s32*, 0xC4)), component);
+    func_00171CA8(component, NULL);
+    M2C_FIELD(actor, void**, 0x34C) = NULL;
+    func_002E1280(D_003C9ED4, (s32)component);
+    return 1;
+}

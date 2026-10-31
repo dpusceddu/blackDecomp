@@ -124,7 +124,137 @@ s32 func_00189BF8(Recovered_ActorRecords* self, s32 id) {
     return (self->actorMask & (1U << id)) != 0;
 }
 
+#ifdef NON_MATCHING
+// Unmatched: scalar/vector temporary allocation and branch scheduling differ (53 instructions).
+#include "game/actor_slots.h"
+#include "ps2/vu0_lowering.h"
+
+extern Recovered_AIManager* D_0040F4D4;
+extern void* D_0040F4D0;
+extern const f32 D_003F6580[];
+extern const f32* func_0018E1B0(void*);
+extern void* func_00135550(void*);
+extern s32 func_00188F10(Recovered_ActorRecords*);
+extern s32 func_00188F58(Recovered_ActorRecords*);
+extern s128 func_00189070(Recovered_ActorRecords*, Recovered_ActorRecord*);
+extern s128 func_0018D918(void*);
+extern s32 func_0018DDD8(void*);
+extern s32 func_00173370(void*, s32, void*);
+extern s32 func_00178F18(Recovered_ActorSlot*);
+extern f32 func_0018E210(void*, void*);
+
+static inline s32 ActorPriorityIsOld(f32 value) { return value > 0.5f; }
+static inline u8 ActorPriorityIsTiny(f32 value) { return value < 2.3283064e-10f; }
+
+void func_00189C10(Recovered_ActorRecords* self, Recovered_ActorRecord* record) {
+    f32 weight, amount;
+    s32 state, filter;
+    f32 score = 0.0f;
+    const f32* weights = func_0018E1B0((u8*)self->owner + 0xC94);
+    s32 old = 0;
+    if (record->id == -1) {
+        weight = weights[0];
+        record->priority = weight;
+        return;
+    }
+    if (record->bias > 0.0f) {
+        weight = weights[1];
+        amount = (__ee_min_s(__ee_max_s(record->bias / 100.0f, 0.0f), 1.0f) * 0.7f) + 0.3f;
+        score = amount * weight + 0.0f;
+    }
+    if (record->unk_06) {
+        weight = weights[2];
+        score += weight;
+    }
+    if (record->unk_05) {
+        weight = weights[3];
+        amount = ((1.0f -
+                   __ee_min_s(__ee_max_s((M2C_FIELD(D_0040F4D0, f32*, 0x20) - record->startTime) / 5.0f, 0.0f), 1.0f)) *
+                  0.7f) +
+                 0.3f;
+        score += amount * weight;
+    }
+    weight = weights[10];
+    if (weight != 0.0f) {
+        f32 age = M2C_FIELD(D_0040F4D0, f32*, 0x20) - record->unk_1C;
+        old = ActorPriorityIsOld(age);
+        if (old) score += weight * __ee_min_s(__ee_max_s((age - 0.5f) * 0.5f, 0.0f), 1.0f);
+    }
+    amount = 1.0f - __ee_min_s(__ee_max_s(record->selectionMetric / 30.0f, 0.0f), 1.0f);
+    if (old)
+        weight = weights[5];
+    else
+        weight = weights[4];
+    score += weight * amount;
+    state = ActorSlotTable_GetEntry((Recovered_ActorSlotTable*)((u8*)D_0040F4D4 + 0xFA8), record->id)->state;
+    weight = D_003F6580[state];
+    score += weight;
+    if (state == 0) {
+        Recovered_ManagedActor* actor;
+        actor = ActorSlotTable_GetEntry((Recovered_ActorSlotTable*)((u8*)D_0040F4D4 + 0xFA8), record->id)->actor;
+        weight = weights[7];
+        if (weight != 0.0f && M2C_FIELD(func_00135550(actor), s32*, 0x80) == 1) {
+            Recovered_ActorRecords* records = (Recovered_ActorRecords*)((u8*)func_00135550(actor) + 0x150);
+            if (func_00188F10(records) &&
+                func_00188F58(records) == M2C_FIELD(M2C_FIELD(self->owner, void**, 0x7C), s32*, 0x380))
+                score += weight;
+        }
+    }
+    weight = weights[8];
+    if (weight != 0.0f) {
+        BkVuVector target = func_00189070(self, record);
+        BkVuVector one = BkVuOneX();
+        BkVuVector position = M2C_FIELD(M2C_FIELD(self->owner, void**, 0x7C), s128*, 0xA0);
+        BkVuVector delta = BkVuSubXYZ(target, position);
+        BkVuVector squared = BkVuMulXYZ(delta, delta);
+        BkVuVector sum = BkVuLowerSumXYZ(squared, squared, one);
+        f32 factor;
+        u8 tiny = ActorPriorityIsTiny(__ee_vu_read_x(sum));
+        if (tiny)
+            factor = 1.0f;
+        else {
+            BkVuVector direction, forward, product;
+            squared = BkVuLowerMulXYZ(sum, delta, delta);
+            direction = BkVuNormalizeXYZ(delta, BkVuLowerSumXYZ(squared, squared, one));
+            forward = func_0018D918((u8*)self->owner + 0xD10);
+            product = BkVuMulXYZ(forward, direction);
+            factor = __ee_min_s(
+                __ee_max_s(__ee_vu_read_x(BkVuLowerSumXYZ(product, product, BkVuLowerOneX(forward))), 0.0f), 1.0f);
+        }
+        score += weight * factor;
+    }
+    weight = weights[9];
+    if (weight != 0.0f && func_0018DDD8((u8*)self->owner + 0xC94) &&
+        func_00173370((u8*)D_0040F4D4 + 0x22800, record->id, M2C_FIELD(self->owner, void**, 0x7C)))
+        score += weight;
+    weight = weights[11];
+    if (weight != 0.0f && record->id == func_00188F58(self)) score += weight;
+    weight = weights[12];
+    if (weight != 0.0f &&
+        func_00178F18(ActorSlotTable_GetEntry((Recovered_ActorSlotTable*)((u8*)D_0040F4D4 + 0xFA8), record->id))) {
+        void* policy = (u8*)self->owner + 0xC94;
+        score += weight *
+                 func_0018E210(
+                     policy,
+                     ActorSlotTable_GetEntry((Recovered_ActorSlotTable*)((u8*)D_0040F4D4 + 0xFA8), record->id)->actor);
+    }
+    filter = self->categoryFilter;
+    switch (filter) {
+        case 0:
+        case 1:
+        case 2: break;
+        case 3:
+            if (ActorSlotTable_GetEntry((Recovered_ActorSlotTable*)((u8*)D_0040F4D4 + 0xFA8), record->id)->state == 2)
+                score += 100000.0f;
+            break;
+        default: break;
+    }
+    record->priority = score;
+}
+
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_189550", func_00189C10);
+#endif
 
 void func_0018A118(Recovered_ActorRecords* self, Recovered_ActorRecord* record) {
     if (record->id != -1) {

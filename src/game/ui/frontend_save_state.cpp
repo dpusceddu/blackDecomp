@@ -5,7 +5,7 @@
 extern "C" int func_0010BC00() { return 1; }
 extern "C" void func_0010BC08() {}
 
-extern "C" int func_0010B5B0(FrontendSaveState *);
+extern "C" void func_0010B5B0(FrontendSaveState *);
 void FrontendSaveState::Finish() {
   complete = 1;
   func_0010B5B0(this);
@@ -150,8 +150,8 @@ extern char *D_0040F4EC;
 int func_001050A8(...);
 int func_0010B338(...);
 int func_0010B3A8(...);
-int func_0010B4D8(...);
-int func_0010B5B0(...);
+void func_0010B4D8(...);
+void func_0010B5B0(...);
 int func_0010B630(...);
 int func_0010B6B8(...);
 int func_0010B7A0(...);
@@ -388,8 +388,8 @@ extern "C" {
 extern char *D_0040F4EC;
 int func_0010B338(...);
 int func_0010B3A8(...);
-int func_0010B4D8(...);
-int func_0010B5B0(...);
+void func_0010B4D8(...);
+void func_0010B5B0(...);
 int func_0010B630(...);
 int func_0010B6B8(...);
 int func_0010B7A0(...);
@@ -681,10 +681,10 @@ int func_0010B200(...);
 int func_0010B2C0(...);
 int func_0010B338(...);
 int func_0010B3A8(...);
-int func_0010B4D8(...);
+void func_0010B4D8(...);
 int func_0010B530(...);
 int func_0010B590(...);
-int func_0010B5B0(...);
+void func_0010B5B0(...);
 int func_0010B630(...);
 int func_0010B6B8(...);
 int func_0010B7A0(...);
@@ -1178,8 +1178,8 @@ extern char **D_0040F53C;
 int func_0010B200(...);
 int func_0010B338(...);
 int func_0010B3A8(...);
-int func_0010B4D8(...);
-int func_0010B5B0(...);
+void func_0010B4D8(...);
+void func_0010B5B0(...);
 int func_0010B6B8(...);
 int func_0010B7A0(...);
 int func_0010B7F0(...);
@@ -1548,10 +1548,10 @@ int func_00108A70(...);
 int func_0010B238(...);
 int func_0010B338(...);
 int func_0010B3A8(...);
-int func_0010B4D8(...);
+void func_0010B4D8(...);
 int func_0010B530(...);
 int func_0010B590(...);
-int func_0010B5B0(...);
+void func_0010B5B0(...);
 int func_0010B6B8(...);
 int func_00122B10(...);
 int func_00124DA8(...);
@@ -1712,8 +1712,6 @@ void FrontendSaveState::Delete()
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010E0F0);
 #endif
 
-#ifdef NON_MATCHING
-// Unmatched: func_0010E498: two instructions in the item-count comparison.
 #include "game/frontend_resources.hpp"
 extern "C" {
 extern char *D_0040F0E0;
@@ -1721,55 +1719,50 @@ extern char *D_0040F4EC;
 int func_0010B338(FrontendSaveState *, const char *);
 void func_0010B3A8(FrontendSaveState *, const char *, const char *,
                    const char *, const char *);
-int func_0010B4D8(FrontendSaveState *, int);
+void func_0010B4D8(FrontendSaveState *, int);
 void func_0010B5B0(FrontendSaveState *);
 void func_00215028(void *);
 }
 void FrontendSaveState::Enable() {
-  switch (enableState) {
-  case 0:
-    if (((unsigned char *)D_0040F0E0)[0x20164] != 1) {
-      func_0010B5B0(this);
-      enableState = 1;
-      break;
+    switch (enableState) {
+        case 0:
+            if (((unsigned char*)D_0040F0E0)[0x20164] != 1) {
+                func_0010B5B0(this);
+                enableState = 1;
+                break;
+            }
+            enableState = 2;
+            break;
+        case 1:
+            if (!waiting) {
+                func_0010B338(this, text[34]);
+                func_0010B3A8(this, text[43], text[44], 0, 0);
+                selected = 1;
+                if (itemCount <= selected) selected = 0;
+                func_0010B4D8(this, 2);
+                break;
+            }
+            if (choice == 0) {
+                ((unsigned char*)D_0040F0E0)[0x20164] = 1;
+                func_00215028(D_0040F0E0 + 0x20258);
+                if (D_0040F4EC[8]) {
+                    func_0010B5B0(this);
+                    saveState = 0;
+                    mode = 3;
+                    break;
+                }
+            } else if (choice != 1)
+                break;
+            enableState = 2;
+            break;
+        case 2:
+            complete = 1;
+            func_0010B5B0(this);
+            break;
     }
-    enableState = 2;
-    break;
-  case 1:
-    if (!waiting) {
-      func_0010B338(this, text[34]);
-      func_0010B3A8(this, text[43], text[44], 0, 0);
-      selected = 1;
-      if (itemCount <= 1)
-        selected = 0;
-      func_0010B4D8(this, 2);
-      break;
-    }
-    if (choice == 0) {
-      ((unsigned char *)D_0040F0E0)[0x20164] = 1;
-      func_00215028(D_0040F0E0 + 0x20258);
-      if (D_0040F4EC[8]) {
-        func_0010B5B0(this);
-        saveState = 0;
-        mode = 3;
-        break;
-      }
-    } else if (choice != 1)
-      break;
-    enableState = 2;
-    break;
-  case 2:
-    complete = 1;
-    func_0010B5B0(this);
-    break;
-  }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010E498);
-#endif
 
-#ifdef NON_MATCHING
-// Unmatched: func_0010E5F0: two instructions in the item-count comparison.
+
 #include "game/frontend_resources.hpp"
 extern "C" {
 extern char *D_0040F0E0;
@@ -1777,46 +1770,43 @@ extern char *D_0040F4EC;
 int func_0010B338(FrontendSaveState *, const char *);
 void func_0010B3A8(FrontendSaveState *, const char *, const char *,
                    const char *, const char *);
-int func_0010B4D8(FrontendSaveState *, int);
+void func_0010B4D8(FrontendSaveState *, int);
 void func_0010B5B0(FrontendSaveState *);
 void func_00215028(void *);
 }
 void FrontendSaveState::Disable() {
-  switch (disableState) {
-  case 0:
-    if (((unsigned char *)D_0040F0E0)[0x20164] != 0) {
-      func_0010B5B0(this);
-      disableState = 1;
-      break;
+    switch (disableState) {
+        case 0:
+            if (((unsigned char*)D_0040F0E0)[0x20164] != 0) {
+                func_0010B5B0(this);
+                disableState = 1;
+                break;
+            }
+            disableState = 2;
+            break;
+        case 1:
+            if (!waiting) {
+                func_0010B338(this, text[35]);
+                func_0010B3A8(this, text[43], text[44], 0, 0);
+                selected = 1;
+                if (itemCount <= selected) selected = 0;
+                func_0010B4D8(this, 2);
+                break;
+            }
+            if (choice == 0) {
+                ((unsigned char*)D_0040F0E0)[0x20164] = 0;
+                func_00215028(D_0040F0E0 + 0x20258);
+            } else if (choice != 1)
+                break;
+            disableState = 2;
+            break;
+        case 2:
+            complete = 1;
+            func_0010B5B0(this);
+            break;
     }
-    disableState = 2;
-    break;
-  case 1:
-    if (!waiting) {
-      func_0010B338(this, text[35]);
-      func_0010B3A8(this, text[43], text[44], 0, 0);
-      selected = 1;
-      if (itemCount <= 1)
-        selected = 0;
-      func_0010B4D8(this, 2);
-      break;
-    }
-    if (choice == 0) {
-      ((unsigned char *)D_0040F0E0)[0x20164] = 0;
-      func_00215028(D_0040F0E0 + 0x20258);
-    } else if (choice != 1)
-      break;
-    disableState = 2;
-    break;
-  case 2:
-    complete = 1;
-    func_0010B5B0(this);
-    break;
-  }
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ui/frontend_save_state", func_0010E5F0);
-#endif
+
 
 #ifdef NON_MATCHING
 // Unmatched: func_0010E740: nested switch control flow and callback signatures.
@@ -1827,10 +1817,10 @@ extern char **D_0040F53C;
 int func_0010B238(...);
 int func_0010B338(...);
 int func_0010B3A8(...);
-int func_0010B4D8(...);
+void func_0010B4D8(...);
 int func_0010B530(...);
 int func_0010B590(...);
-int func_0010B5B0(...);
+void func_0010B5B0(...);
 int func_0010B6B8(...);
 int func_00215D68(...);
 }
