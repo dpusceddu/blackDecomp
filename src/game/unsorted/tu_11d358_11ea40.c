@@ -12,14 +12,7 @@ s32 func_0011EA48(s32 arg0) {
     return func_0011D430(arg0, 6);
 }
 
-/* Matches the action layout consumed by AnimationViews::Owner::RequestAction.
- * Original gameplay meanings of the key, mode and flag values remain UNVERIFIED. */
-typedef struct {
-    s32 kind, key;
-    f32 value;
-    s32 mode;
-    u8 flag;
-} Recovered_AnimationAction;
+#include "game/animation_action.h"
 extern void* func_0011D498(void*);
 extern s64 func_001A7DF0(void*, s32, s32);
 extern u8 func_00135CC8(void*);

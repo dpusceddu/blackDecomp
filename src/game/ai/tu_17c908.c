@@ -3,8 +3,29 @@
 
 extern s32 func_0017E770();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017C908);
+static inline f32 NormalizeDegrees(f32 angle) {
+    f32 temp_f2;
+    if (angle < 0.0f) {
+        temp_f2 = -angle;
+        angle = -(temp_f2 - ((f32)(s32)(temp_f2 / 360.0f) * 360.0f));
+    } else {
+        angle = angle - ((f32)(s32)(angle / 360.0f) * 360.0f);
+    }
+    if (angle < -180.0f) {
+        angle += 360.0f;
 
+    }
+
+    else if (angle > 180.0f) {
+        angle -= 360.0f;
+    }
+
+    return angle;
+}
+
+f32 func_0017C908(f32 current, f32 target, f32 fraction) {
+    return current + NormalizeDegrees(target - current) * fraction;
+}
 void func_0017C9F0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x44) = arg1;
 }
@@ -27,26 +48,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017DB98);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017DE50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017E428);
 extern s32 func_00180078(void*);
-
-static inline f32 NormalizeDegrees(f32 angle) {
-    f32 temp_f2;
-    if (angle < 0.0f) {
-        temp_f2 = -angle;
-        angle = -(temp_f2 - ((f32)(s32)(temp_f2 / 360.0f) * 360.0f));
-    } else {
-        angle = angle - ((f32)(s32)(angle / 360.0f) * 360.0f);
-    }
-    if (angle < -180.0f) {
-        angle += 360.0f;
-
-    }
-
-    else if (angle > 180.0f) {
-        angle -= 360.0f;
-    }
-
-    return angle;
-}
 
 void func_0017E488(void* self, f32 angle) {
     if (func_00180078(self)) {
