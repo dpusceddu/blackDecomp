@@ -40,10 +40,42 @@ def marker(addr, source=None):
     return include_asm.marker_line('func_%08X' % addr, asm_directory(source) if source else ASM_DIR)
 
 
+def declaration_blocks(decls):
+    """Keep complete types, prototypes and inline definitions together during insertion."""
+    source = '\n'.join(decls)
+    mask = include_asm.blank_comments(source)
+    mask = re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'',
+                  lambda m: ''.join('\n' if c == '\n' else ' ' for c in m.group()), mask)
+    block, prefix = [], ''
+    braces = parentheses = 0
+    function = False
+    for line, plain in zip(source.split('\n'), mask.split('\n')):
+        block.append(line)
+        for char in plain:
+            if char == '{' and braces == 0:
+                function = bool(re.search(r'\)\s*$', prefix)) and '=' not in prefix
+            braces += (char == '{') - (char == '}')
+            parentheses += (char == '(') - (char == ')')
+            prefix += char
+        if braces == parentheses == 0 and (plain.strip().endswith(';') or function
+                                          or plain.lstrip().startswith('#') or not plain.strip()):
+            yield '\n'.join(block)
+            block, prefix, function = [], '', False
+        else:
+            prefix += '\n'
+    if block:
+        yield '\n'.join(block)
+
+
 def insert_declarations(text, decls):
-    """Add declaration lines (those not already present) after the file's leading #include lines."""
+    """Add missing complete declarations after the file's leading #include lines."""
     lines = text.split('\n')
-    new = [d for d in decls if d.strip() and d not in lines]
+    new = []
+    present = text
+    for block in declaration_blocks(decls):
+        if block.strip() and block.strip() not in present:
+            new.extend(block.split('\n'))
+            present += '\n' + block
     if not new:
         return text
     at = 0
