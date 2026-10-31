@@ -29,7 +29,42 @@ s32 * func_00382E78(s32 *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_382500_382e78", func_00382EE0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_382500_382e78", func_00382F90);
+extern const u8 D_003E0348[];
+extern const u8 D_003E0608[];
+extern const u8 D_003E0648[];
+extern const u8 D_003E06C8[];
+extern const u8 D_003E0688[];
+extern const u8 D_003E05C8[];
+extern const u8 D_003E0588[];
+extern const u8 D_003E0548[];
+extern const u8 D_003E0488[];
+extern const u8 D_003E0508[];
+extern const u8 D_003E04C8[];
+extern const u8 D_003E0448[];
+extern const u8 D_003E0408[];
+extern const u8 D_003E03C8[];
+extern const u8 D_003E0388[];
+
+// Embedded component vtable initialization; original class identities are UNVERIFIED.
+void* func_00382F90(void* self) {
+    M2C_FIELD(self, const void**, 4) = D_003E0648;
+    M2C_FIELD(self, const void**, 8) = D_003E06C8;
+    M2C_FIELD(self, const void**, 0xC) = D_003E0688;
+    M2C_FIELD(self, const void**, 0x10) = D_003E0608;
+    M2C_FIELD(self, const void**, 0x60) = D_003E0608;
+    M2C_FIELD(self, const void**, 0xB0) = D_003E05C8;
+    M2C_FIELD(self, const void**, 0x100) = D_003E0588;
+    M2C_FIELD(self, const void**, 0x150) = D_003E0548;
+    M2C_FIELD(self, const void**, 0x1A0) = D_003E0488;
+    M2C_FIELD(self, const void**, 0x1F0) = D_003E0508;
+    M2C_FIELD(self, const void**, 0x1F8) = D_003E04C8;
+    M2C_FIELD(self, const void**, 0x1FC) = D_003E0448;
+    M2C_FIELD(self, const void**, 0x200) = D_003E0408;
+    M2C_FIELD(self, const void**, 0x204) = D_003E03C8;
+    M2C_FIELD(self, const void**, 0x208) = D_003E0388;
+    M2C_FIELD(self, const void**, 0x210) = D_003E0348;
+    return self;
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_382500_382e78", func_003830D0);
 extern const u8 D_003DFC70[];
 extern const u8 D_003DEE48[];
