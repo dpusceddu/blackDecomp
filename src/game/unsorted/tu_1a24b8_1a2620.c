@@ -27,5 +27,25 @@ void func_001A2698(s32 arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a24b8_1a2620", func_001A26C0);
+
+
+void func_001A26C0(void* self) {
+    s32 phase;
+    void* afterMethods;
+    void* beforeMethods;
+
+    beforeMethods = M2C_FIELD(self, void**, 0x60);
+    M2C_FIELD(beforeMethods, void (**)(void*, s32), 0x54)((void*)(((s8*)self) + M2C_FIELD(beforeMethods, s16*, 0x50)),
+                                                          M2C_FIELD(self, s32*, 0x54));
+    phase = M2C_FIELD(self, s32*, 0x54);
+    switch (phase) { /* irregular */
+        case 0: M2C_FIELD(self, s32*, 0x54) = 1; break;
+        case 2: M2C_FIELD(self, s32*, 0x54) = 0; break;
+        case 1: M2C_FIELD(self, s32*, 0x54) = 2; break;
+    }
+    afterMethods = M2C_FIELD(self, void**, 0x60);
+    M2C_FIELD(afterMethods, void (**)(void*, s32), 0x44)((void*)(((s8*)self) + M2C_FIELD(afterMethods, s16*, 0x40)),
+                                                         M2C_FIELD(self, s32*, 0x54));
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1a24b8_1a2620", func_001A2750);

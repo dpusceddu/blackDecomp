@@ -122,7 +122,8 @@ struct DispatchSlots : Game::Recovered_DispatchedMode {
     virtual int Unknown15(void*);
     virtual void Unknown16(void*, unsigned int, Game::PositionArg);
     virtual void Unknown17(void*);
-    virtual int Unknown18();
+    // The priority update consumes all XYZ lanes of this result.
+    virtual Game::PositionResult Unknown18();
 };
 
 extern "C" {
@@ -1215,7 +1216,7 @@ void func_0018D8E0(Game::ModeDispatcher* self, void* argument) {
 }
 
 extern "C" {
-int func_0018D918(Game::ModeDispatcher* self) { return ((DispatchSlots*)self->modes[self->active])->Unknown18(); }
+Game::PositionResult func_0018D918(Game::ModeDispatcher* self) { return ((DispatchSlots*)self->modes[self->active])->Unknown18(); }
 }
 
 extern "C" {

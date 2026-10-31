@@ -15,4 +15,12 @@ void Action::RequestSuccessor(unsigned int kind, int argument)
 }  // namespace Game
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/ai_action_stack_193a28", func_00193A58);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/ai_action_stack_193a28", func_00193A60);
+extern "C" void func_00193A60(Game::Action* action, int restart, float interval) {
+    Game::CompletionRecord* record = action->Record();
+    record->timer.Start(interval);
+    if (restart) {
+        record->interval = interval;
+        return;
+    }
+    record->interval = -1.0f;
+}
