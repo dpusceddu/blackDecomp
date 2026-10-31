@@ -172,26 +172,22 @@ void func_001035D0(Recovered_TransitionContext* self) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518_1031a0", func_001035D0);
 #endif
 
-#ifdef NON_MATCHING
-// Unmatched: service pointer reload is hoisted across current/pending stores.
 s32 func_001036F0(Recovered_TransitionContext* self) {
+    void* current;
     Recovered_TransitionState* pending = self->pending;
     Recovered_TransitionVirtual* methods = pending->methods;
     if (!methods[1].call((s8*)pending + methods[1].adjustment)) return 0;
     func_0020B988(D_0040F544, 5);
     func_0020B988(D_0040F544, 6);
-    self->current = self->pending;
-    self->pending = NULL;
+    current = M2C_FIELD(self, void**, 0x21074);
+    M2C_FIELD(self, void**, 0x21074) = NULL;
+    M2C_FIELD(self, void**, 0x21070) = current;
     {
         Recovered_TransitionServices* services = D_0040F544;
-        if (services->active && self->current == &self->defaultState) func_00103800(self, 1);
+        if (services->active && current == &self->defaultState) func_00103800(self, 1);
     }
     return 1;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518_1031a0", func_001036F0);
-#endif
-
 s32 Transition_PollCurrent(Recovered_TransitionContext* self) {
     Recovered_TransitionState* current = self->current;
     Recovered_TransitionVirtual* methods = current->methods;
