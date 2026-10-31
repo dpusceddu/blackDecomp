@@ -9,6 +9,7 @@ Prints, for the file that owns the function (or the file given):
     functions; at most --top of them, in address order): size, callees and callers with their owner file and state, the
     data it references with any names from symbols.txt, an m2c draft with the project's context (as decompile.py), and its
     assembly without the address columns;
+  - a contract audit of existing declarations for each target and its native callees;
   - the other assembly functions of the file, by size.
 Needs `python3 tools/setup.py` preparation (the assembly under asm/) and its installed m2c dependency; no image build.
 """
@@ -134,6 +135,12 @@ def main():
     limit = a.max_size or statistics.median(s for x, s in sizes.items() if x not in done and s > 8)
     targets = [x for x in sorted(left if a.drafts else untried) if 8 < sizes.get(x, 0) <= limit][:a.top]
     print('\n## targets (%s, at most %d bytes): %d shown' % ('all assembly' if a.drafts else 'untried', limit, len(targets)))
+    if targets:
+        import autodecomp as A, context_recovery as cr
+        from trysrc import symbol_bindings
+        evidence = cr.recover()
+        bindings = symbol_bindings(symbols, entries[0])
+        dependencies = A.compile_dependencies(text)
     for x in targets:
         name = 'func_%08X' % x
         print('\n### %s, %d bytes%s' % (name, sizes[x], ('  names: ' + ', '.join(names[x])) if names.get(x) else ''))
@@ -149,6 +156,7 @@ def main():
         for d in dict.fromkeys(DATA.findall(asm)):
             d_addr = address(d, by_name) if not d.startswith('D_') else int(d[2:], 16)
             print('  data    %-28s %s' % (d, ', '.join(names.get(d_addr, [])) if d_addr is not None else ''))
+        cr.print_audit(cr.audit_candidate(evidence, [x], text, target, bindings, dependencies))
         if not a.no_draft:
             import io, contextlib, decompile
             try:

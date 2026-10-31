@@ -10,8 +10,8 @@ A function that already has a draft in an `#ifdef NON_MATCHING` block is replace
 without the cleaning, which is also what you get when the cleaning gives up (the reason is printed).
 Needs `python3 tools/setup.py` preparation (the per-function assembly under asm/) and its m2c dependency. The first
 run recovers the context from the committed headers and configuration (about a minute; it works on a fresh checkout) and
-writes it to the ignored build/auto/; later runs reuse build/auto/ctx.c. `python3 tools/autodecomp.py context --refresh` renews
-it after shared headers change. The only tracked file this tool ever changes is the translation unit file named by --write;
+writes it to the ignored build/auto/; later runs validate and reuse the recovery cache, refreshing it when inputs change.
+`python3 tools/autodecomp.py context --refresh` forces a refresh. The only tracked file this tool ever changes is the translation unit file named by --write;
 the committed headers under include/ are hand-maintained source and are never rewritten here.
 """
 import sys as _sys
@@ -51,11 +51,6 @@ def locate(addr):
 
 def draft(addr, ctx):
     """(function record, m2c result, cleaned source or None, note). The note is the signature, or why cleaning gave up."""
-    import os
-    auto = ROOT / 'build' / 'auto'
-    if all((auto / n).is_file() for n in ('context.json', 'ctx.c', 'recovered_layouts.c')):
-        # reuse the recovered context of the last run instead of recovering it again (a minute)
-        os.environ.setdefault('AUTODECOMP_FREEZE_CONTEXT', '1')
     import autodecomp as A
     inventory = A.load_inventory()
     f = next((x for x in inventory if x['addr'] == addr), None)

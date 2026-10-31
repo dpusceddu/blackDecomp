@@ -9,12 +9,15 @@ can verify it.
 """
 import argparse
 import collections
+import contextlib
 import hashlib
 import json
+import importlib.metadata
 import os
 import re
 import struct
 import tempfile
+import time
 from dataclasses import dataclass
 from pathlib import Path
 import sys
@@ -22,7 +25,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[2]
 sys.path[:0] = [str(ROOT / 'tools' / d) for d in ('', 'build', 'pipeline', 'maint')]
 from preparation_lock import preparation_lock
-VERSION = 10
+VERSION = 12
 POINTER_ALIASES = set()
 CLASS_NAMES = set()
 NAMESPACE_NAMES = set()
@@ -64,6 +67,7 @@ def split_params(text):
 
 
 def type_spelling(text):
+    text = re.sub(r'\bextern\s+"C(?:\+\+)?"', '', text)
     text = re.sub(r'\b(const|volatile|register|extern|static|inline|virtual|__inline__|__stdcall|__cdecl|__thiscall|__fastcall)\b', '', text)
     return ' '.join(text.split()).strip()
 
@@ -236,7 +240,7 @@ def parse_declarations(text, aliases=None):
     Unsupported declarators are retained as unknown instead of guessed as int. GNU asm aliases
     and the *_FUNCTION(address) aliases used by PS2 headers are recognized before preprocessing.
     """
-    text = COMMENT.sub('', text)
+    text = COMMENT.sub(lambda m: ''.join('\n' if c == '\n' else ' ' for c in m.group()), text)
     aliases = aliases or ScopedAliases([text])
     type_scopes, _ = lexical_type_scopes(text)
     scopes, depths = lexical_class_scopes(text)
@@ -306,7 +310,9 @@ def parse_declarations(text, aliases=None):
             body = text[begin:k - 1]
         qualified_name = '::'.join((*type_scope, short))
         result.append(dict(name=name, qualified_name=qualified_name, short=short, cls=cls, ret=ret, retclass=retclass, params=ps,
-                           address=address, body=body, abi_uncertainty=uncertainty, implicit_this=implicit_this, raw=left + ' ' + name + '(' + params + ')'))
+                           address=address, body=body, definition=stop.group() == '{',
+                           line=text.count('\n', 0, m.start(2)) + 1, abi_uncertainty=uncertainty,
+                           implicit_this=implicit_this, raw=left + ' ' + name + '(' + params + ')'))
     return result
 
 
@@ -345,24 +351,57 @@ def demangle_method(symbol):
     return '::'.join(scopes + [method])
 
 
+def source_evidence(seed):
+    """Keep the source view visible even when its physical ABI is unresolved."""
+    return dict(declaration=seed['raw'], path=seed['source'], matched_owner=seed['matched'],
+                quality=seed['quality'], definition=seed.get('definition', False),
+                owner_definition=seed.get('owner_definition', False), line=seed.get('line'),
+                abi_uncertainty=seed.get('abi_uncertainty', []))
+
+
+TYPE_SETS = (POINTER_ALIASES, CLASS_NAMES, NAMESPACE_NAMES, STATIC_METHODS)
+
+
+def register_type_names(text):
+    text = COMMENT.sub('', text)
+    CLASS_NAMES.update(re.findall(r'\b(?:class|struct)\s+(\w+)', text))
+    NAMESPACE_NAMES.update(re.findall(r'\bnamespace\s+(\w+)', text))
+    for cm in re.finditer(r'\b(?:class|struct)\s+(\w+)[^;{]*\{', text):
+        begin, depth, end = cm.end(), 1, cm.end()
+        while end < len(text) and depth:
+            depth += text[end] == '{'
+            depth -= text[end] == '}'
+            end += 1
+        STATIC_METHODS.update((cm.group(1), method) for method in re.findall(r'\bstatic\s+[^;{}]*?\b(\w+)\s*\(', text[begin:end-1]))
+    POINTER_ALIASES.update(re.findall(r'typedef\s+[^;]+?\(\s*\*\s*(\w+)\s*\)', text, re.S))
+    POINTER_ALIASES.update(re.findall(r'typedef\s+[^;()]+?\*\s*(\w+)\s*;', text))
+
+
+@contextlib.contextmanager
+def declaration_environment(texts):
+    """Candidate lookup must not depend on earlier recovery or another candidate."""
+    saved = [set(names) for names in TYPE_SETS]
+    try:
+        for names in TYPE_SETS:
+            names.clear()
+        for text in texts:
+            register_type_names(text)
+        yield
+    finally:
+        for names, previous in zip(TYPE_SETS, saved):
+            names.clear()
+            names.update(previous)
+
+
 def source_seeds(root=ROOT, matched_only=False):
     from units import load_units, dependencies
     seeds, evidence, parsed, texts = {}, [], {}, {}
     units = load_units(variant='SLUS_213.76')
+    for names in TYPE_SETS:
+        names.clear()
     for p in (root / 'include').rglob('*'):
         if p.suffix in ('.h', '.hpp'):
-            text = COMMENT.sub('', p.read_text())
-            CLASS_NAMES.update(re.findall(r'\b(?:class|struct)\s+(\w+)', text))
-            NAMESPACE_NAMES.update(re.findall(r'\bnamespace\s+(\w+)', text))
-            for cm in re.finditer(r'\b(?:class|struct)\s+(\w+)[^;{]*\{', text):
-                begin, depth, end = cm.end(), 1, cm.end()
-                while end < len(text) and depth:
-                    depth += text[end] == '{'
-                    depth -= text[end] == '}'
-                    end += 1
-                STATIC_METHODS.update((cm.group(1), method) for method in re.findall(r'\bstatic\s+[^;{}]*?\b(\w+)\s*\(', text[begin:end-1]))
-            POINTER_ALIASES.update(re.findall(r'typedef\s+[^;]+?\(\s*\*\s*(\w+)\s*\)', text, re.S))
-            POINTER_ALIASES.update(re.findall(r'typedef\s+[^;()]+?\*\s*(\w+)\s*;', text))
+            register_type_names(p.read_text())
     for u in units:
         paths = [str(p) for p in dependencies(u['source'])]
         for path in paths:
@@ -402,7 +441,7 @@ def source_seeds(root=ROOT, matched_only=False):
                     evidence.append(dict(addr=addr, kind='source-overload-ambiguous', symbol=symbol))
                     continue
             # A definition resolves parameter names that the declaration omits.
-            candidates.sort(key=lambda x: (bool(x[1]['body']), x[0] == u['source']), reverse=True)
+            candidates.sort(key=lambda x: (x[1]['definition'], x[0] == u['source']), reverse=True)
             if not candidates:
                 continue
             p, d = candidates[0]
@@ -410,10 +449,12 @@ def source_seeds(root=ROOT, matched_only=False):
             # are lower-quality than an authored signature or field-use evidence.
             quality = 4 if matched and not (u.get('origin') == 'auto' or 'auto/' in u['source']) else (1.5 if matched else 1.75)
             s = dict(d, source=p, matched=matched, quality=quality, symbol=symbol,
+                     owner_definition=matched and p == u['source'] and d['definition'],
                      this_usage=bool(d.get('implicit_this') or re.search(r'\(\s*[^,]*\b(this|self)\b', d['raw'])))
             previous = seeds.get(addr)
             if previous and (previous['ret'], previous['params']) != (s['ret'], s['params']):
-                evidence.append(dict(addr=addr, kind='source-conflict', signatures=[previous['raw'], s['raw']]))
+                evidence.append(dict(addr=addr, kind='source-conflict',
+                                     declarations=[source_evidence(previous), source_evidence(s)]))
             if not previous or s['quality'] > previous['quality']:
                 seeds[addr] = s
     return seeds, evidence
@@ -525,6 +566,37 @@ def variadic_register_saves(f):
     return dict(fixed_gpr=min(gpr) - 4,
                 saves={pc: reg for reg, (pc, _) in gpr.items()} |
                       {pc: 32 + reg for reg, (pc, _) in fp.items()})
+
+
+def argument_width_requirements(f):
+    """Prove full-width incoming payload stores in the straight-line entry prefix.
+
+    Stack homing and partial-width MMI operations do not prove a source width.
+    Follow only POR (a full 128-bit copy); scalar copies may truncate upper bits.
+    """
+    import rabbitizer
+    original = {reg: reg - 4 for reg in range(4, 12)}
+    widths, stack = [], {29}
+    for pc, word in enumerate(f['words']):
+        x = rabbitizer.Instruction(word, f['addr'] + 4*pc, rabbitizer.InstrCategory.R5900)
+        if x.isBranch() or x.isJump() or x.isFunctionCall():
+            break
+        op = x.getOpcodeName()
+        rs, rt, rd = word >> 21 & 31, word >> 16 & 31, word >> 11 & 31
+        if op in ('sd', 'sq') and rs not in stack and rt in original:
+            widths.append((original[rt], 16 if op == 'sq' else 8, pc))
+        copied = original.get(rt if rs == 0 else rs) if op == 'por' and (rs == 0 or rt == 0) else None
+        stack_copy = ((op in ('addu', 'daddu', 'or', 'por') and (rs == 0 or rt == 0)
+                       and (rt if rs == 0 else rs) in stack)
+                      or (op in ('addiu', 'daddiu') and rs in stack))
+        for reg in effects(x)[1]:
+            original.pop(reg, None)
+            stack.discard(reg)
+        if stack_copy:
+            stack.add(rt if op in ('addiu', 'daddiu') else rd)
+        if copied is not None and rd:
+            original[rd] = copied
+    return widths
 
 
 def analyze_function(f):
@@ -670,7 +742,7 @@ def analyze_function(f):
                 emit_call(i, delayed, True)
         # Unresolved computed jumps end this path; never scan their unreachable tail linearly.
     return dict(uses=uses, fields=fields, calls=calls, returns=returns, nested=nested,
-                return_consumers=return_consumers, syscall=any(x.getOpcodeName() == 'syscall' for x in ins))
+                return_consumers=return_consumers, argument_widths=argument_width_requirements(f), syscall=any(x.getOpcodeName() == 'syscall' for x in ins))
 
 
 def ft_register(w):
@@ -921,7 +993,15 @@ def recover_signatures(inv, analysis, seeds):
                    surface_abi_ambiguity=surface_seeds.get(a, {}).get('abi_uncertainty', []),
                    ret_class=seed.get('retclass') if seed else None)
         row['live_register_slots'] = live_slots[a]
+        if a in surface_seeds:
+            row['source_evidence'] = source_evidence(surface_seeds[a])
         row['syscall'] = analysis[a].get('syscall', False)
+        row['native_width_requirements'] = [dict(slot=slot, bytes=size, pc='0x%08X' % (a + 4*pc))
+                                            for slot, size, pc in analysis[a].get('argument_widths', [])]
+        row['native_argument_uses'] = [dict(slot=n + (8 if kind == 'farg' else 0), type=typ,
+                                                pc='0x%08X' % (a + 4*pc))
+                                       for kind, n, typ, pc in sorted(analysis[a]['uses'])
+                                       if kind in ('arg', 'farg') and typ != 'used']
         row['return_evidence'] = dict(direct_types=direct_returns[a],
                                      consumed_banks=sorted({bank for _, bank, _ in return_consumers[a]}),
                                      consumers=len(return_consumers[a]), gpr_demand=a in gpr_demand)
@@ -1157,8 +1237,10 @@ def counterpart_dir(root=ROOT):
 
 
 def fingerprint(root=ROOT):
-    h = hashlib.sha256()
-    paths = [Path(__file__), root / 'config/SLUS_213.76/splits.yaml', root / 'build/SLUS_213.76/placement.json']
+    h = hashlib.sha256(native_version().encode())
+    paths = [Path(__file__), root / 'config/SLUS_213.76/splits.yaml', root / 'build/SLUS_213.76/placement.json',
+             root / 'config/SLUS_213.76/symbols.txt', root / 'build/SLUS_213.76/unit_facts.json',
+             root / 'build/auto/inventory.json', root / 'orig/SLUS_213.76/SLUS_213.76']
     paths += sorted((root / 'src').rglob('*.[ch]')) + sorted((root / 'src').rglob('*.cpp'))
     paths += sorted((root / 'include').rglob('*.h')) + sorted((root / 'include').rglob('*.hpp'))
     other = counterpart_dir(root)
@@ -1167,18 +1249,107 @@ def fingerprint(root=ROOT):
     paths += sorted((other / 'src').rglob('*.cpp'))
     for p in paths:
         if p.is_file():
-            h.update(p.read_bytes())
+            h.update(str(p.relative_to(root) if p.is_relative_to(root) else p.name).encode() + b'\0')
+            h.update(p.read_bytes() + b'\0')
     return h.hexdigest()
+
+
+def atomic_json(path, result):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.NamedTemporaryFile(mode='w', dir=path.parent, delete=False) as output:
+        try:
+            json.dump(result, output, separators=(',', ':'))
+            output.write('\n')
+            output.close()
+            os.replace(output.name, path)
+        finally:
+            Path(output.name).unlink(missing_ok=True)
+
+
+def native_version():
+    # Conservative invalidation: any change in this analyzer or its decoder.
+    return hashlib.sha256(Path(__file__).read_bytes()).hexdigest() + ':' + importlib.metadata.version('rabbitizer')
+
+
+def native_key(function):
+    return hashlib.sha256(json.dumps([function['addr'], function['words'], function['rel']],
+                                     sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def inventory_fingerprint(inv):
+    return hashlib.sha256(json.dumps([native_version(), [(f.get('name'), native_key(f)) for f in inv]],
+                                     separators=(',', ':')).encode()).hexdigest()
+
+
+def encode_analysis(analysis):
+    def value(v):
+        return [sorted(v.origins, key=repr), sorted(v.types)]
+    return dict(**{k: sorted(analysis[k], key=repr) for k in ('uses', 'fields', 'nested', 'return_consumers')},
+                calls=[[key, [value(v) for v in values]] for key, values in analysis['calls'].items()],
+                returns=[[value(g), value(f)] for g, f in sorted(analysis['returns'], key=repr)],
+                argument_widths=analysis['argument_widths'], syscall=analysis['syscall'])
+
+
+def decode_analysis(row):
+    def freeze(x):
+        return tuple(freeze(v) for v in x) if isinstance(x, list) else x
+    def value(v):
+        return Value(frozenset(freeze(v[0])), frozenset(v[1]))
+    return dict(**{k: set(freeze(row[k])) for k in ('uses', 'fields', 'nested', 'return_consumers')},
+                calls={tuple(key): tuple(value(v) for v in values) for key, values in row['calls']},
+                returns={(value(g), value(f)) for g, f in row['returns']},
+                argument_widths=[tuple(v) for v in row['argument_widths']], syscall=row['syscall'])
+
+
+def native_analysis(inv, cache, refresh=False):
+    """Caller holds preparation_lock. Source edits never invalidate native entries."""
+    started = time.monotonic()
+    version = native_version()
+    old = {}
+    if not refresh and cache.exists():
+        try:
+            record = json.loads(cache.read_text())
+            if record.get('version') == version:
+                old = record['functions']
+        except (OSError, ValueError, KeyError):
+            pass                         # disposable cache; rebuild after interruption/corruption
+    analysis, entries, reused = {}, {}, 0
+    for index, f in enumerate(inv):
+        address, key = str(f['addr']), native_key(f)
+        entry = old.get(address, {})
+        if entry.get('fingerprint') == key:
+            try:
+                analysis[f['addr']] = decode_analysis(entry['analysis'])
+                reused += 1
+            except (KeyError, TypeError, ValueError):
+                entry = {}
+        if f['addr'] not in analysis:
+            analysis[f['addr']] = analyze_function(f)
+            entry = dict(fingerprint=key, analysis=encode_analysis(analysis[f['addr']]))
+        entries[address] = entry
+        if (index + 1) % 2000 == 0:
+            print('context: native %d/%d (%d reused)' % (index + 1, len(inv), reused), flush=True)
+    if reused != len(inv) or len(old) != len(entries):
+        atomic_json(cache, dict(version=version, functions=entries))
+    print('context: native %d reused, %d analyzed in %.2fs' %
+          (reused, len(inv) - reused, time.monotonic() - started), flush=True)
+    return analysis
 
 
 def recover(inv=None, root=ROOT, refresh=False, cache=None):
     cache = Path(cache) if cache else root / 'build/auto/context.json'
 
+    native_stamp = inventory_fingerprint(inv) if inv is not None else None
+
     def cached(stamp):
         if not refresh and cache.exists():
-            old = json.loads(cache.read_text())
-            if old.get('fingerprint') == stamp and old.get('version') == VERSION:
-                return old
+            try:
+                old = json.loads(cache.read_text())
+                if (old.get('fingerprint') == stamp and old.get('version') == VERSION
+                        and (native_stamp is None or old.get('native_fingerprint') == native_stamp)):
+                    return old
+            except (OSError, ValueError):
+                pass
         return None
 
     old = cached(fingerprint(root))
@@ -1189,19 +1360,17 @@ def recover(inv=None, root=ROOT, refresh=False, cache=None):
         old = cached(stamp)
         if old is not None:
             return old
-        return _recover(inv, root, cache, stamp)
+        return _recover(inv, root, cache, stamp, refresh)
 
 
-def _recover(inv, root, cache, stamp):
+def _recover(inv, root, cache, stamp, refresh):
     if inv is None:
         from autodecomp import load_inventory
         inv = load_inventory()
-    print('context: analyze %d PS2 functions (including all sizes)' % len(inv), flush=True)
-    analysis = {}
-    for index, f in enumerate(inv):
-        analysis[f['addr']] = analyze_function(f)
-        if (index + 1) % 2000 == 0:
-            print('context: analyzed %d/%d' % (index + 1, len(inv)), flush=True)
+        stamp = fingerprint(root)          # inventory preparation may have updated its cache
+    native_stamp = inventory_fingerprint(inv)
+    analysis = native_analysis(inv, cache.with_name(cache.stem + '-native.json'), refresh)
+    started = time.monotonic()
     seeds, conflicts = source_seeds(root)
     signatures, links = recover_signatures(inv, analysis, seeds)
     layouts, vtables = recover_layouts(inv, analysis, seeds, signatures, root)
@@ -1262,18 +1431,13 @@ def _recover(inv, root, cache, stamp):
                    typed_returns=sum(s['ret'] != 'unknown' for s in signatures.values()),
                    layouts=len(layouts), verified_layouts=sum(bool(v['verified_by']) for v in layouts.values()),
                    vtable_groups=len(vtables), counterpart_leads=len(leads), counterpart_source_leads=sum(bool(x['source_leads']) for rows in leads.values() for x in rows))
-    result = dict(version=VERSION, fingerprint=stamp, summary=summary, signatures={str(k): v for k, v in signatures.items()},
+    result = dict(version=VERSION, fingerprint=stamp, native_fingerprint=native_stamp,
+                  native_calls={str(a): [list(k) for k in data['calls']] for a, data in analysis.items()},
+                  summary=summary, signatures={str(k): v for k, v in signatures.items()},
                   source_conflicts=conflicts, layouts=layouts, counterpart_leads=leads,
                   vtables={str(k): v for k, v in vtables.items()})
-    cache.parent.mkdir(parents=True, exist_ok=True)
-    # Readers can check a warm cache without waiting for a refresh. Publish atomically.
-    with tempfile.NamedTemporaryFile(mode='w', dir=cache.parent, delete=False) as output:
-        try:
-            output.write(json.dumps(result, indent=2) + '\n')
-            output.close()
-            os.replace(output.name, cache)
-        finally:
-            Path(output.name).unlink(missing_ok=True)
+    atomic_json(cache, result)
+    print('context: source recovery and propagation in %.2fs' % (time.monotonic() - started), flush=True)
     return result
 
 
@@ -1289,11 +1453,184 @@ def write_build_context(result, root=None):
     (auto / 'recovered_layouts.c').write_text('\n'.join(ctx) + '\n')
 
 
+def function_address(value):
+    try:
+        return int(value.removeprefix('func_'), 16)
+    except ValueError:
+        raise argparse.ArgumentTypeError('expected a hexadecimal address or func_XXXXXXXX') from None
+
+
+def focused_report(result, addresses, callees=False, inv=None):
+    """Select existing signature evidence, optionally including immediate native callees."""
+    selected = set(addresses)
+    missing = selected - {int(a) for a in result['signatures']}
+    if missing:
+        raise ValueError('no recovered signature for ' + ', '.join('func_%08X' % a for a in sorted(missing)))
+    calls = []
+    if callees:
+        native_calls = result.get('native_calls')
+        if native_calls is None:
+            if inv is None:
+                from autodecomp import load_inventory
+                inv = load_inventory()
+            native_calls = {str(f['addr']): list(analyze_function(f)['calls']) for f in inv if f['addr'] in addresses}
+        for address in addresses:
+            for pc, dest, tail in sorted(native_calls.get(str(address), []), key=lambda call: call[0]):
+                calls.append(dict(caller='func_%08X' % address, pc='0x%08X' % (address + 4*pc),
+                                  callee='func_%08X' % dest if dest is not None else None, tail=tail))
+                if str(dest) in result['signatures']:
+                    selected.add(dest)
+    return dict(signatures={'func_%08X' % a: result['signatures'][str(a)] for a in sorted(selected)},
+                source_conflicts=[c for c in result['source_conflicts'] if c['addr'] in selected], calls=calls)
+
+
+def audit_candidate(result, addresses, source, path, bindings=None, dependencies=None, callees=True):
+    """Compare a candidate's actual declarations with scoped source and native evidence.
+
+    Findings are advisory, never automatic edits or evidence of a match. The source
+    parser is deliberately conservative about overloads and aggregate ABI uncertainty.
+    dependencies must be the compiler worker's quoted-header closure.
+    """
+    report = focused_report(result, addresses, callees=callees)
+    dependencies = dependencies or {}
+    texts = {str(path): source, **{str(p): data.decode() if isinstance(data, bytes) else data
+                                 for p, data in dependencies.items()}}
+    aliases = ScopedAliases(texts.values())
+    declarations = []
+    with declaration_environment(texts.values()):
+        for filename, text in texts.items():
+            declarations.extend(dict(d, path=filename) for d in parse_declarations(text, aliases=aliases))
+    names = collections.defaultdict(set)
+    for symbol, address in (bindings or {}).items():
+        names[symbol].add(address)
+        method = demangle_method(symbol)
+        if method:
+            names[method].add(address)
+        elif '__F' in symbol:
+            names[symbol.split('__F')[0]].add(address)
+    # An asm alias on a prototype also binds the later definition of that name.
+    for d in declarations:
+        if d['address'] is not None:
+            names[d['qualified_name']].add(d['address'])
+            names[d['name']].add(d['address'])
+    selected = {function_address(name) for name in report['signatures']}
+    findings, checked, unresolved = [], 0, 0
+    seen = set()
+    for d in declarations:
+        numeric = re.fullmatch(r'func_([0-9A-Fa-f]{8})', d['name'])
+        targets = ({d['address']} if d['address'] is not None else
+                   {int(numeric[1], 16)} if numeric else names[d['qualified_name']] | names[d['name']])
+        relevant = targets & selected
+        if not relevant:
+            unresolved += not bool(targets)
+            continue
+        location = dict(path=d['path'], line=d['line'], declaration=d['raw'])
+        def finding(kind, level, message, evidence):
+            item = dict(function='func_%08X' % address, kind=kind, level=level,
+                        candidate=location, message=message, evidence=evidence)
+            key = json.dumps(item, sort_keys=True)
+            if key not in seen:
+                findings.append(item)
+                seen.add(key)
+        for address in sorted(relevant):
+            row = report['signatures']['func_%08X' % address]
+            checked += 1
+            uncertainty = list(d['abi_uncertainty'])
+            if any(t == 'unknown' for t, _ in d['params']):
+                uncertainty.append('unresolved parameter type or aggregate ABI')
+            # Old GCC demangling supplies owners, not overload parameter encodings.
+            overloads = {(other['ret'], tuple(other['params'])) for other in declarations
+                         if other['qualified_name'] == d['qualified_name']}
+            if len(targets) != 1 or ('::' in d['qualified_name'] and len(overloads) > 1):
+                uncertainty.append('overloaded or ambiguous symbol binding')
+            if uncertainty or row.get('syscall'):
+                finding('unresolved-contract', 'review', 'Contract comparison needs manual ABI review.',
+                        dict(uncertainty=uncertainty, syscall=row.get('syscall', False)))
+                continue
+            expected = row.get('source_evidence', {})
+            params = [typ for typ, _ in d['params']]
+            source_contract = (expected.get('owner_definition') and expected.get('quality', 0) >= 2
+                               and not expected.get('abi_uncertainty'))
+            if source_contract:
+                if (d['ret'], params) != (row['ret'], row['params']):
+                    finding('exact-source-contract', 'warning',
+                            'Declaration disagrees with the exact owner definition; review the shared contract.',
+                            dict(source=expected, expected_return=row['ret'], expected_parameters=row['params'],
+                                 candidate_return=d['ret'], candidate_parameters=params))
+            slots = dict(abi_slots(d['params']))
+            for use in row.get('native_width_requirements', []):
+                typ = slots.get(use['slot'])
+                if typ in WIDTH and WIDTH[typ] < use['bytes']:
+                    finding('native-argument-width', 'warning',
+                            'Declared argument is narrower than a full-width native payload store.',
+                            dict(**use, candidate_type=typ, candidate_bytes=WIDTH[typ]))
+            evidence = row.get('return_evidence', {})
+            if not source_contract and d['ret'] != 'void' and not evidence.get('consumers'):
+                finding('return-unobserved', 'review',
+                        'No observed native caller consumes this result; this does not prove a void return.', evidence)
+            elif not source_contract and d['ret'] == 'void' and evidence.get('consumers'):
+                finding('return-consumed', 'review',
+                        'Native callers consume the result register; confirm the intended return contract.', evidence)
+    return dict(version=1, context_fingerprint=result.get('fingerprint'),
+                native_fingerprint=result.get('native_fingerprint'),
+                source_sha256=hashlib.sha256(source.encode()).hexdigest(),
+                dependencies={p: hashlib.sha256(text.encode()).hexdigest() for p, text in texts.items() if p != str(path)},
+                functions=sorted(report['signatures']), source_conflicts=report['source_conflicts'], declarations_checked=checked,
+                unresolved_declarations=unresolved, findings=findings,
+                limitations=['Conservative source parser; conditional declarations are not preprocessed.',
+                             'Indirect calls, overloads, unknown aggregates and stack arguments need manual review.',
+                             'Register leftovers, unused results and object scores do not prove source types.'])
+
+
+def print_audit(report, prefix='  '):
+    print('%scontract audit: %d declarations, %d warnings, %d review leads' %
+          (prefix, report['declarations_checked'], sum(f['level'] == 'warning' for f in report['findings']),
+           sum(f['level'] == 'review' for f in report['findings'])))
+    for f in report['findings']:
+        c = f['candidate']
+        print('%s  %s %s %s:%s [%s]: %s' %
+              (prefix, f['level'], f['function'], c['path'], c['line'], f['kind'], f['message']))
+        if f['kind'] == 'exact-source-contract':
+            expected = f['evidence']['source']
+            print('%s    candidate: %s' % (prefix, c['declaration']))
+            print('%s    exact: %s:%s %s' %
+                  (prefix, expected['path'], expected['line'], expected['declaration']))
+        elif f['kind'] == 'native-argument-width':
+            use = f['evidence']
+            print('%s    slot %d: declared %d bytes; native store %d bytes at %s' %
+                  (prefix, use['slot'], use['candidate_bytes'], use['bytes'], use['pc']))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument('--refresh', action='store_true')
-    ap.add_argument('--report', action='store_true', help='report the recovery only, write nothing')
+    ap.add_argument('--refresh', action='store_true', help='recompute both native analysis and source evidence')
+    ap.add_argument('--audit', type=Path, help='audit candidate declarations and quoted headers with --function')
+    ap.add_argument('--report', action='store_true', help='report recovery without exporting layout declarations; may refresh the cache')
+    ap.add_argument('--function', action='append', type=function_address,
+                    help='show existing evidence for this function as JSON; repeat for more functions')
+    ap.add_argument('--callees', action='store_true', help='include immediate native callees with --function')
     args = ap.parse_args()
+    if (args.callees or args.audit) and not args.function:
+        ap.error('--callees and --audit require --function')
+    if args.function:
+        import contextlib
+        with contextlib.redirect_stdout(sys.stderr):
+            result = recover(refresh=args.refresh)
+        try:
+            report = focused_report(result, args.function, args.callees)
+            if args.audit:
+                from autodecomp import compile_dependencies
+                from splits import load_splits, load_symbols
+                owner = next((s for s in load_splits() if s.start <= args.function[0] < s.end), None)
+                from trysrc import symbol_bindings
+                bindings = symbol_bindings(load_symbols(), owner) if owner else {}
+                source = args.audit.read_text()
+                report['audit'] = audit_candidate(result, args.function, source, args.audit, bindings,
+                                                   compile_dependencies(source), args.callees)
+        except (ValueError, OSError) as error:
+            ap.error(str(error))
+        print(json.dumps(report, indent=2))
+        return
     result = recover(refresh=args.refresh)
     if not args.report:
         write_build_context(result)
