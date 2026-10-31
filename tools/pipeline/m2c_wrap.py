@@ -213,6 +213,8 @@ MipseeArch.asm_patterns = [
 MipseeArch.instrs_destination_first = dict(MipseeArch.instrs_destination_first)
 MipseeArch.instrs_destination_first['sqrt.libc.fictive'] = MipseeArch.instrs_destination_first['sqrt.s']
 MipseeArch.instrs_destination_first['sqrt.s'] = lambda a: fn_op('__ee_sqrt_s', [as_f32(a.reg(1))], Type.f32())
+MipseeArch.instrs_destination_first['max.s'] = lambda a: fn_op('__ee_max_s', [as_f32(a.reg(1)), as_f32(a.reg(2))], Type.f32())
+MipseeArch.instrs_destination_first['min.s'] = lambda a: fn_op('__ee_min_s', [as_f32(a.reg(1)), as_f32(a.reg(2))], Type.f32())
 
 if os.environ.get('AUTODECOMP_VU0'):
     import vu0_m2c

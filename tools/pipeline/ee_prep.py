@@ -142,9 +142,6 @@ def placeholder(pre, op, sp, args):
     nop = '%snop' % pre
     if op in ('ei', 'di'):
         return ['%sjal%s__ee_%s' % (pre, sp, op), nop]
-    if op in ('max.s', 'min.s') and len(a) == 3 and all(x.startswith('$f') for x in a):
-        return ['%smov.s%s$f12, %s' % (pre, sp, a[1]), '%smov.s%s$f14, %s' % (pre, sp, a[2]),
-                '%sjal%s__ee_%s' % (pre, sp, op.replace('.', '_')), nop, '%smov.s%s%s, $f0' % (pre, sp, a[0])]
     if op == 'mfc0' and len(a) == 2 and a[1].startswith('$') and a[1][1:].isdigit():
         return ['%sjal%s__ee_mfc0_%s' % (pre, sp, a[1][1:]), nop, '%sdaddu%s%s, $2, $0' % (pre, sp, a[0])]
     if op == 'mtc0' and len(a) == 2 and a[1].startswith('$') and a[1][1:].isdigit():
