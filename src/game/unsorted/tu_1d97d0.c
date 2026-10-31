@@ -117,7 +117,98 @@ s32 func_001D9F60(void *arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001D9F78);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DA1C8);
+#ifdef NON_MATCHING
+extern s32 func_00284378(void*);
+extern s32 func_00384708(void*, s32);
+extern s32 func_001DAAE0(Recovered_AudioTransferChannel*);
+extern void* D_0040F510;
+extern s32 func_00283C38(void*, void*);
+// Partial parameter operations; original class and spatial field identities are UNVERIFIED.
+static inline u64 TransferParameterBit(u64 value, u32 bit) { return (value >> bit) & 1; }
+static inline void WriteTransferSpatial(Recovered_PlaybackParameters* self, f32 a, f32 b, f32 c, f32 d, f32 e, f32 f,
+                                        u8 kind) {
+    M2C_FIELD(self, f32*, 0x88) = a;
+    M2C_FIELD(self, f32*, 0x8C) = c;
+    M2C_FIELD(self, f32*, 0x90) = b;
+    M2C_FIELD(self, f32*, 0x94) = d;
+    M2C_FIELD(self, f32*, 0x98) = e;
+    M2C_FIELD(self, f32*, 0x9C) = f;
+    self->unk_AB = kind;
+}
+static inline void SetTransferSpatial(Recovered_PlaybackParameters* self, f32 a, f32 b, f32 c, f32 d, f32 e, f32 f,
+                                      u8 kind) {
+    WriteTransferSpatial(self, a, b, c, d, e, f, kind);
+    self->flags |= 0x800000;
+}
+// Unmatched: one presence-word load is scheduled after the scalar constant (three instructions).
+void func_001DA5C8(Recovered_AudioTransferChannel* arg0, Recovered_PlaybackParameters* arg1) {
+    Recovered_PlaybackParameters local;
+    void* spatial;
+    f32 var_f0;
+    s32 temp_2_2;
+    s32 var_2_3;
+    u32 temp_2;
+    u64 temp_3;
+
+    local.flags = 0;
+    local = *arg1;
+    temp_2 = func_00284378(M2C_FIELD(arg0, void**, 0xB0));
+    M2C_FIELD(arg0, s32*, 0xE8) = temp_2;
+    temp_2_2 = func_00384708(arg0, (s32)temp_2);
+    if (M2C_FIELD(arg0, s32*, 0xEC) != temp_2_2) {
+        M2C_FIELD(arg0, s32*, 0xEC) = temp_2_2;
+        M2C_FIELD(arg0, s32*, 0xF0) += 1;
+    }
+    if (M2C_FIELD(arg0, u8*, 0xFB) != 0) {
+        if (temp_2_2 == M2C_FIELD(arg0, s32*, 0xD4)) { M2C_FIELD(arg0, u8*, 0xFC) = 1; }
+    } else {
+        local.unk_A9 = 1;
+        local.flags |= 0x1000;
+    }
+    if ((M2C_FIELD(arg0, u8*, 0xFC) != 0) && (temp_2_2 != M2C_FIELD(arg0, s32*, 0xD4))) { func_001DACB0(arg0); }
+    if ((M2C_FIELD(arg0, s32*, 0xD0) != temp_2_2) && (func_001DAAE0(arg0) == 0)) {
+        if (M2C_FIELD(arg0, void**, 0xC4) != 0) {
+            func_001DA9C0(arg0);
+        } else if (M2C_FIELD(arg0, u8*, 0xFB) != 0) {
+            func_001DAA68(arg0);
+        }
+    }
+    if (M2C_FIELD(arg0, void**, 0xB0) != NULL) {
+        temp_3 = M2C_FIELD(arg0, u8*, 0xFD);
+        if ((temp_3 == 1) && (TransferParameterBit(M2C_FIELD(arg1, u8*, 0xA6), 7) == temp_3)) {
+            spatial = (u8*)arg1 + 0x88;
+            if (M2C_FIELD(arg0, u8*, 0xFE) != 0) {
+                if (M2C_FIELD(D_0040F510, u8*, 0xCB9D) != 0) {
+                    SetTransferSpatial(&local, M2C_FIELD(arg1, f32*, 0x88), M2C_FIELD(spatial, f32*, 0x8) * 0.0f,
+                                       M2C_FIELD(spatial, f32*, 0x4), M2C_FIELD(spatial, f32*, 0xC),
+                                       M2C_FIELD(spatial, f32*, 0x10), M2C_FIELD(spatial, f32*, 0x14) * 0.0f,
+                                       M2C_FIELD(arg1, u8*, 0xAB));
+                } else {
+                    var_f0 = -1.0f;
+                    goto block_29;
+                }
+            } else if (M2C_FIELD(D_0040F510, u8*, 0xCB9D) != 0) {
+                SetTransferSpatial(&local, M2C_FIELD(arg1, f32*, 0x88) * 0.0f, M2C_FIELD(spatial, f32*, 0x8),
+                                   M2C_FIELD(spatial, f32*, 0x4), M2C_FIELD(spatial, f32*, 0xC),
+                                   M2C_FIELD(spatial, f32*, 0x10) * 0.0f, M2C_FIELD(spatial, f32*, 0x14),
+                                   M2C_FIELD(arg1, u8*, 0xAB));
+            } else {
+                var_2_3 = local.flags;
+                var_f0 = 1.0f;
+                goto scalar_store;
+            block_29:
+                var_2_3 = local.flags;
+            scalar_store:
+                local.flags = var_2_3 | 0x40;
+                M2C_FIELD(&local, f32*, 0x60) = var_f0;
+            }
+        }
+        func_00283C38(M2C_FIELD(arg0, void**, 0xB0), &local);
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DA5C8);
+#endif
 #ifdef NON_MATCHING
 // Unmatched: reset call setup and independent field-store scheduling differ.
 s32 func_001DA848(Recovered_AudioTransferChannel* self) {
@@ -220,7 +311,60 @@ s32 AudioTransferChannel_PollBusy(Recovered_AudioTransferChannel* self) {
     }
     return 0;
 }
+#ifdef NON_MATCHING
+extern s32 func_00283E78(void*, void*, void*);
+// Unmatched: flag-word register allocation and the final scalar store order differ (19 instructions).
+void func_001DAB20(Recovered_AudioTransferChannel* arg0, Recovered_PlaybackParameters* arg1) {
+    Recovered_PlaybackParameters local;
+    void* spatial;
+    f32 var_f0;
+    s32 temp_7;
+    s32 temp_8;
+    s32 var_2_2;
+
+    local.flags = 0;
+    local = *arg1;
+    temp_7 = local.flags;
+    temp_8 = temp_7 | 0x1004;
+    M2C_FIELD(&local, void**, 0x50) = ((u8*)arg0 + 0x90);
+    local.unk_A9 = 1;
+    local.flags = temp_8;
+    if (M2C_FIELD(arg0, u8*, 0xFD) != 0) {
+        spatial = (u8*)arg1 + 0x88;
+        if (M2C_FIELD(arg0, u8*, 0xFE) != 0) {
+            if (M2C_FIELD(D_0040F510, u8*, 0xCB9D) != 0) {
+                var_2_2 = temp_8 | 0x800000;
+                WriteTransferSpatial(&local, M2C_FIELD(arg1, f32*, 0x88), M2C_FIELD(spatial, f32*, 0x8) * 0.0f,
+                                     M2C_FIELD(spatial, f32*, 0x4), M2C_FIELD(spatial, f32*, 0xC),
+                                     M2C_FIELD(spatial, f32*, 0x10), M2C_FIELD(spatial, f32*, 0x14) * 0.0f,
+                                     M2C_FIELD(arg1, u8*, 0xAB));
+                goto block_9;
+            }
+            var_f0 = -1.0f;
+            goto block_11;
+        }
+        if (M2C_FIELD(D_0040F510, u8*, 0xCB9D) != 0) {
+            var_2_2 = temp_8 | 0x800000;
+            WriteTransferSpatial(&local, M2C_FIELD(arg1, f32*, 0x88) * 0.0f, M2C_FIELD(spatial, f32*, 0x8),
+                                 M2C_FIELD(spatial, f32*, 0x4), M2C_FIELD(spatial, f32*, 0xC),
+                                 M2C_FIELD(spatial, f32*, 0x10) * 0.0f, M2C_FIELD(spatial, f32*, 0x14),
+                                 M2C_FIELD(arg1, u8*, 0xAB));
+        block_9:
+            local.flags = var_2_2;
+        } else {
+            var_f0 = 1.0f;
+        block_11:
+            local.flags = temp_7 | 0x1044;
+            M2C_FIELD(&local, f32*, 0x60) = var_f0;
+        }
+    }
+    M2C_FIELD(M2C_FIELD(arg0, void**, 0xB0), s8*, 0x34) = 1;
+    func_00283E78(M2C_FIELD(arg0, void**, 0xB0), &local, (void*)(((s8*)D_0040F510) + 0xCB7C));
+}
+
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d97d0", func_001DAB20);
+#endif
 
 void func_001DACB0(void *arg0) {
     M2C_FIELD(arg0, s8 *, 0xFA) = 0;
