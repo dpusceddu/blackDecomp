@@ -26,4 +26,33 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017DB50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017DB98);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017DE50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017E428);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017E488);
+extern s32 func_00180078(void*);
+
+static inline f32 NormalizeDegrees(f32 angle) {
+    f32 temp_f2;
+    if (angle < 0.0f) {
+        temp_f2 = -angle;
+        angle = -(temp_f2 - ((f32)(s32)(temp_f2 / 360.0f) * 360.0f));
+    } else {
+        angle = angle - ((f32)(s32)(angle / 360.0f) * 360.0f);
+    }
+    if (angle < -180.0f) {
+        angle += 360.0f;
+
+    }
+
+    else if (angle > 180.0f) {
+        angle -= 360.0f;
+    }
+
+    return angle;
+}
+
+void func_0017E488(void* self, f32 angle) {
+    if (func_00180078(self)) {
+        f32 value = NormalizeDegrees(angle);
+        M2C_FIELD(self, s8*, 0x7F) = 1;
+        M2C_FIELD(self, f32*, 0x54) = value;
+        M2C_FIELD(self, f32*, 0x50) = value;
+    }
+}
