@@ -324,7 +324,6 @@ extern "C" void func_00288150(RelocatableEffect* self) {
     if (self->field24) self->field24 += (unsigned)self;
     if (self->field28) self->field28 += (unsigned)self;
 }
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/effects/tu_281388_284688", func_002881A8);
 extern "C" void func_00288470(unsigned* self) {
     if (self[1]) self[1] += (unsigned)self;
 }
