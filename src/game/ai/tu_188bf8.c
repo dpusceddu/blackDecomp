@@ -2,6 +2,21 @@
 #include "game/actor_slots.h"
 
 extern Recovered_AIManager* D_0040F4D4;
+s32 func_00188F10(Recovered_ActorRecords*);
+extern s32 func_001848B8(void*);
+extern s32 func_00189740(Recovered_ActorRecords*, Recovered_ManagedActor*, s32);
+extern void func_0018A548(s32*);
+extern void func_0018A5C0(Recovered_ActorRecords*);
+extern void func_0018A118(Recovered_ActorRecords*, Recovered_ActorRecord*);
+extern void func_00188A40(void*, s32);
+extern s32 func_00173610(f32*);
+extern void func_00173640(f32*, f32);
+extern void func_0018AA18(Recovered_ActorRecords*);
+extern void* func_00181F48(void*, Recovered_ManagedActor*, s32, f32, f32);
+extern s32 func_0018DCD0(void*);
+extern s32 func_0016E318(Recovered_AIManager*, Recovered_ManagedActor*, Recovered_ManagedSlot*);
+extern void func_0018A380(Recovered_ActorRecords*);
+
 extern const s128* func_00178D30(Recovered_ActorSlot*);
 extern s128 func_00178E60(Recovered_ActorSlot*);
 /* The region transforms the actor's position and half-height before testing
@@ -39,7 +54,62 @@ s32 func_00188C38(Recovered_ActorRecords* self, const void* region) {
     return 0;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_188bf8", func_00188D08);
+void func_00188D08(Recovered_ActorRecords* self) {
+    f32 priority;
+    f32 bestPriority;
+    Recovered_ActorRecord* record;
+    s32 hadSelection;
+    s32 selectedActor;
+    s32 index;
+    s32 best;
+    u8 pending;
+    void* destination;
+    void* selection;
+
+    hadSelection = func_00188F10(self);
+    selectedActor = func_001848B8((void*)(((s8*)self->owner) + 0x6F0));
+    if (selectedActor != 0) { func_00189740(self, (Recovered_ManagedActor*)selectedActor, 1); }
+    bestPriority = -1.0f;
+    func_0018A548((s32*)self);
+    best = -1;
+    index = 0;
+    func_0018A5C0(self);
+    record = self->records;
+    do {
+        func_0018A118(self, record);
+        priority = record->priority;
+        if (bestPriority < priority) {
+            bestPriority = priority;
+            best = index;
+        }
+        index += 1;
+        record++;
+    } while (index < 3);
+    if (best != -1) {
+        if ((best != self->current && func_00173610(&self->selectionTimer)) || self->current == -1) {
+            func_00173640(&self->selectionTimer, 2.0f);
+            self->current = best;
+            destination = (void*)(((s8*)self->owner) + 0x290);
+            func_00188A40(destination, func_00188F80(self)->index);
+            if (ActorSlot_IsState0(func_00188F80(self)) != 0) { func_0018AA18(self); }
+        }
+    } else {
+        self->current = best;
+        func_00188A40((void*)(((s8*)self->owner) + 0x290), -1);
+    }
+    if ((hadSelection == 0) && (func_00188F10(self) != 0) && (ActorSlot_IsState0(func_00188F80(self)) != 0)) {
+        selection = (void*)(((s8*)self->owner) + 0xC80);
+        func_00181F48(selection, func_00188F80(self)->actor, 0xE, 0.0f, 1.0f);
+        if (func_0018DCD0((void*)(((s8*)self->owner) + 0xC94)) != 0) {
+            func_0016E318(D_0040F4D4, func_00188F80(self)->actor, self->owner);
+        }
+    }
+    pending = self->unk_134;
+    if (pending != 0) {
+        func_0018A380(self);
+        self->unk_134 = 0U;
+    }
+}
 
 s32 func_00188F10(Recovered_ActorRecords* self) {
     return ~self->current != 0;

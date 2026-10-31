@@ -4,7 +4,7 @@
 #include "game/playback_state_pool.h"
 
 extern void * func_001E51E0();
-extern s32 func_001E63B8();
+extern void* func_001E63B8(void*, u64, s32);
 extern void * D_0040F4D0;
 extern s32 func_00135550();
 extern s32 func_001848C0();
@@ -229,26 +229,76 @@ s32 func_001E6BD0(Recovered_PoolState* state, void* unused, u64 key) {
     return 0;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6C38);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E6E50);
-#ifdef NON_MATCHING
-// Unmatched: random-value conversion and load scheduling differ.
+extern void func_001E5830(void*);
+extern s32 func_001E6610(void*);
+extern void func_001E7078(Recovered_TimedObject*);
+extern s32 func_001E7118(void*);
+
+static inline u32 NextPlaybackRandom(Recovered_RandomState* random) {
+    random->unk_00 = (random->unk_00 << 16) + ((s32)random->unk_00 >> 16) + random->unk_04;
+    random->unk_04 += random->unk_00;
+    return random->unk_00;
+}
+
+void func_001E6E50(void* self) {
+    s32 stop;
+    u32 random;
+    f32 sample;
+    void* voice;
+    if (!func_001E6B70((s32)self, M2C_FIELD(self, void**, 8))) M2C_FIELD(self, u32*, 0) = 0;
+    switch (M2C_FIELD(self, u32*, 0)) {
+        case 0: func_001E5830(M2C_FIELD(self, void**, 4)); return;
+        case 2:
+            voice = M2C_FIELD(self, void**, 8);
+            if (!func_001E6650(M2C_FIELD(voice, void**, 0x348), (s32)voice, M2C_FIELD(self, s64*, 0x18),
+                               M2C_FIELD(self, s32*, 0x24)))
+                return;
+            if (func_001E6B88(self, M2C_FIELD(self, u64*, 0x18)))
+                M2C_FIELD(&D_003BD4D0, f32*, 0) = M2C_FIELD(D_0040F4D0, f32*, 0x20);
+            stop = 0;
+            random = NextPlaybackRandom(&D_0040EB30);
+            sample = (f32)random;
+            if (M2C_FIELD(M2C_FIELD(self, void**, 4), f32*, 0x8B4) < sample * 2.3283064e-10f ||
+                M2C_FIELD(self, s32*, 0x24) >= M2C_FIELD(self, s32*, 0x28) ||
+                !func_001E6B70((s32)self, M2C_FIELD(self, void**, 0xC)))
+                stop = 1;
+            if (stop) goto stop_playback;
+            M2C_FIELD(self, u32*, 0) = 3;
+            M2C_FIELD(self, s32*, 0x24)++;
+        case 3:
+            if (!func_001E6B70((s32)self, M2C_FIELD(self, void**, 0xC))) {
+            stop_playback:
+                M2C_FIELD(self, u32*, 0) = 4;
+                return;
+            }
+            func_001E63B8(M2C_FIELD(M2C_FIELD(self, void**, 0xC), void**, 0x348), M2C_FIELD(self, s64*, 0x18),
+                          M2C_FIELD(self, s32*, 0x24));
+            if (!func_001E6610(M2C_FIELD(M2C_FIELD(self, void**, 8), void**, 0x348))) {
+                void* previousVoice = M2C_FIELD(self, void**, 8);
+                void* nextVoice = M2C_FIELD(self, void**, 0xC);
+                M2C_FIELD(self, u32*, 0) = 2;
+                M2C_FIELD(self, void**, 0xC) = previousVoice;
+                M2C_FIELD(self, void**, 8) = nextVoice;
+            }
+            return;
+        case 4:
+            if (func_001E6610(M2C_FIELD(M2C_FIELD(self, void**, 8), void**, 0x348))) return;
+            if (!M2C_FIELD(self, u8*, 0x20)) func_001E7078((Recovered_TimedObject*)self);
+            M2C_FIELD(self, u32*, 0) = 5;
+        case 5:
+            func_001E5830(M2C_FIELD(self, void**, 4));
+            if (func_001E7118(self)) M2C_FIELD(self, u32*, 0) = 0;
+    }
+}
+
 void func_001E7078(Recovered_TimedObject* object) {
     Recovered_TimingRange* range = object->unk_04;
     f32 base = range->unk_8AC;
     f32 width = range->unk_8B0;
-    u32 first = D_0040EB30.unk_00;
-    u32 second = D_0040EB30.unk_04;
-    u32 next = (first << 16) + ((s32)first >> 16) + second;
-    f32 converted;
-    D_0040EB30.unk_04 = second + next;
-    D_0040EB30.unk_00 = next;
-    converted = (f32)next;
-    object->unk_34 = base + width * (converted * 2.3283064365386963e-10f);
-    object->unk_30 = M2C_FIELD(D_0040F4D0, f32*, 0x20);
+    f32 converted = (f32)NextPlaybackRandom(&D_0040EB30);
+    M2C_FIELD(object, f32*, 0x34) = base + width * (converted * 2.3283064365386963e-10f);
+    M2C_FIELD(object, f32*, 0x30) = M2C_FIELD(D_0040F4D0, f32*, 0x20);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e4e50_1e6650", func_001E7078);
-#endif
 
 s32 func_001E7118(void *arg0) {
     s32 var_5;

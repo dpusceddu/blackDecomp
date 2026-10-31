@@ -44,7 +44,8 @@ void func_00172638(void) {
 
 }
 
-s32 func_00172640(Recovered_ActionTimerPair* self) {
+/* The movement update supplies its actor context; this timer test does not use it. */
+s32 func_00172640(Recovered_ActionTimerPair* self, void* actor) {
     f32* timer = &self->unk_04;
     s32 result;
     if (func_00173610(timer)) {

@@ -1,10 +1,11 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/ai/action_views.h"
 
 extern s32 func_00188238();
 extern s32 func_00188780(s32);
 extern s32 func_001884E0(s32);
-extern s32 func_00188358(s32);
+extern void func_00188358(void *);
 extern s32 func_001580E0();
 extern s32 * func_00179258();
 extern s32 D_0040F4D4;
@@ -17,6 +18,12 @@ extern s32 func_00173640(void **, f32);
 extern s32 func_00173610();
 extern void func_001A2CF0(void *);
 extern void func_00188B00(void *);
+extern void* func_0013D400(void*);
+extern s32 func_001580C0(void*);
+extern s32 func_00172640(Recovered_ActionTimerPair*, void*);
+extern void func_00158EA8(void*, s16);
+extern s32 func_0018D768(void*, void*);
+extern void func_00181AD0(void*, s32);
 
 void func_00187F90(s32 arg0) {
     func_00188238();
@@ -59,7 +66,52 @@ u8 func_00188350(void *arg0) {
     return M2C_FIELD(arg0, u8 *, 0x24);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_187f90", func_00188358);
+void func_00188358(void* movement) {
+    void* actor;
+    void* definition;
+    s32 ready;
+    u8 complete;
+    void* actionTimers;
+    void* methods;
+    void* attachment;
+
+    complete = M2C_FIELD(movement, u8*, 1);
+    if (complete == 0) {
+        actionTimers = func_0013D400(M2C_FIELD(movement, void**, 0x3AC));
+        definition = func_0015D2A8(
+            D_0040F4E0, (s32)*M2C_FIELD(M2C_FIELD(M2C_FIELD(movement, void**, 0x3AC), void**, 0x7C), s8**, 0x2A4));
+        ready = func_001580C0(M2C_FIELD(M2C_FIELD(M2C_FIELD(movement, void**, 0x3AC), void**, 0x7C), void**, 0x2A4));
+        if ((u32)(M2C_FIELD(movement, s32*, 0xC) - 1) < 3U) {
+            if ((ready != 0) || (M2C_FIELD(movement, f32*, 4) > 2.0f)) { M2C_FIELD(movement, u8*, 1) = 1U; }
+        } else if (ready != 0) {
+            if ((M2C_FIELD(definition, u8*, 0x10) == 0) ||
+                (func_00172640(actionTimers, M2C_FIELD(movement, void**, 0x3AC)) != 0)) {
+                attachment = M2C_FIELD(movement, void**, 0x3A8);
+                M2C_FIELD(movement, u8*, 1) = 1U;
+                if (attachment != NULL) {
+                    methods = M2C_FIELD(attachment, void**, 0x60);
+                    M2C_FIELD(methods, void (**)(void*),
+                              0x34)((void*)(((s8*)attachment) + M2C_FIELD(methods, s16*, 0x30)));
+                }
+            } else {
+                func_00158EA8(M2C_FIELD(M2C_FIELD(M2C_FIELD(movement, void**, 0x3AC), void**, 0x7C), void**, 0x2A4), 2);
+                M2C_FIELD(movement, s32*, 0x20) = func_001580E0(
+                    M2C_FIELD(M2C_FIELD(M2C_FIELD(movement, void**, 0x3AC), void**, 0x7C), void**, 0x2A4));
+            }
+        }
+        if (func_0018D768((void*)(((s8*)M2C_FIELD(movement, void**, 0x3AC)) + 0xD10), M2C_FIELD(movement, void**, 8)) ==
+            0) {
+            M2C_FIELD(movement, u8*, 1) = 1U;
+        }
+        complete = M2C_FIELD(movement, u8*, 1);
+        if (complete != 0) {
+            func_00181AD0((void*)(((s8*)M2C_FIELD(movement, void**, 0x3AC)) + 0xEC0), 8);
+            actor = M2C_FIELD(M2C_FIELD(movement, void**, 0x3AC), void**, 0x7C);
+            M2C_FIELD(M2C_FIELD(actor, void**, 0x2A4), f32*, 0xE4) = 1.0f;
+        }
+    }
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_187f90", func_001884E0);
 
 void func_001886E0(void *arg0) {

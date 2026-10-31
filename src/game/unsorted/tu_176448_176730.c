@@ -165,11 +165,12 @@ void func_00176D00(void) {
 
 }
 
-void func_00176D08(void) {
+/* Playback updates supply these arguments; the retail hooks have empty bodies. */
+void func_00176D08(void* manager, void* value, s32 arg2, s32 arg3) {
 
 }
 
-void func_00176D10(void) {
+void func_00176D10(void* manager) {
 
 }
 
