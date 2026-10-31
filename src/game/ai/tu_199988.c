@@ -47,8 +47,9 @@ void func_00199C40(Recovered_ActionTimers* self) {
     self->unk_10 = M2C_FIELD(M2C_FIELD(actor, void**, 0x7C), s128*, 0x90);
     self->unk_3C = 0;
 }
-#endif
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_199988", func_00199C40);
+#endif
 #ifdef NON_MATCHING
 // Unmatched: pointer register allocation differs.
 void func_00199D20(Recovered_ActionTimers* self) {
@@ -73,9 +74,40 @@ void func_00199D20(Recovered_ActionTimers* self) {
         M2C_FIELD(M2C_FIELD(owner, void**, 0x7C), u8*, 0x3AF) = 0;
     }
 }
-#endif
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_199988", func_00199D20);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_199988", func_00199D90);
+#endif
+extern s32 func_0017EA70(void*);
+extern void func_0017DB18(void*);
+
+void func_00199D90(Recovered_ActionTimers* self, s32 event, s32 value) {
+    f32* timer;
+    u8 enabled;
+
+    switch (event) { /* irregular */
+        case 0x3A:
+            timer = &self->unk_34;
+            func_00173640(timer, AIManager_RandomRange(D_0040F4D4, 2.0f, 4.0f));
+            func_00173640((f32*)&self->unk_28, 0.0f);
+            if (value != 0) {
+                enabled = self->unk_3C ^ 1;
+                self->unk_3C = enabled;
+                if (enabled != 0) { func_00173640(timer, 1.0f); }
+            } else {
+                func_00173640((f32*)&self->unk_24, 0.0f);
+            }
+            return;
+        case 0x39:
+            func_00173640((f32*)&self->unk_28, AIManager_RandomRange(D_0040F4D4, 2.0f, 3.0f));
+            func_00173640((f32*)&self->unk_24, 0.0f);
+            break;
+        case 0x38:
+            func_00173640((f32*)&self->unk_24, AIManager_RandomRange(D_0040F4D4, 1.0f, 1.5f));
+            if (value || func_0017EA70((u8*)self->owner + 0x650)) { func_0017DB18((u8*)self->owner + 0x650); }
+            break;
+    }
+}
+
 
 void func_00199F08(void *arg0) {
     s32 temp_4;

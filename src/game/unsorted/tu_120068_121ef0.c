@@ -57,12 +57,76 @@ typedef struct Recovered_Counters {
     s8 unk_1A;
 } Recovered_Counters;
 extern void* D_0040F0E0;
+extern void func_00106698(void*);
+extern f32 func_0013C980(void*);
+extern s32 func_00122120(void*);
+extern void func_001F2918(s32, s8, s32);
+extern s32 D_0040F51C;
 
 void func_00121EF0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 4) = (s32) (M2C_FIELD(arg0, s32 *, 4) | arg1);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_00121F00);
+void func_00121F00(void* state) {
+    f32 adjusted;
+    f32 current;
+    s32 enabled;
+    s32 count;
+    u8 level;
+    void* stats;
+    void* active;
+    void* counters;
+    void* player;
+
+    active = M2C_FIELD(D_0040F0E0, void**, 0x21070);
+    if (active == ((void*)(((s8*)D_0040F0E0) + 0x20FA0))) { func_00106698(active); }
+    M2C_FIELD(state, s8*, 0xC) = 1;
+    count = M2C_FIELD(state, u16*, 0xE) + 1;
+    M2C_FIELD(state, u16*, 0xE) = count;
+    if ((s16)count >= 4) {
+        func_00121EF0(state, 0x1000);
+        counters = M2C_FIELD(state, void**, 0);
+        if (M2C_FIELD(counters, s16*, 0x12) < (s16)M2C_FIELD(state, u16*, 0xE)) {
+            M2C_FIELD(counters, s16*, 0x12) = (s16)M2C_FIELD(state, u16*, 0xE);
+        }
+    } else if ((s16)count == 3) {
+        func_00121EF0(state, 0x800);
+    } else if ((s16)count == 2) {
+        func_00121EF0(state, 0x400);
+    }
+    if (func_0013C980((void*)(((s8*)D_0040F4D0) + 0x30)) > 1.6f) { func_00121EF0(state, 0x100); }
+    if (M2C_FIELD(state, s32*, 4) == 0) {
+        stats = M2C_FIELD(state, void**, 0);
+        M2C_FIELD(stats, u16*, 0x1C) = (u16)(M2C_FIELD(stats, u16*, 0x1C) + 1);
+        player = (void*)(((s8*)D_0040F4D0) + 0x30);
+        current = M2C_FIELD(player, f32*, 0x4E4);
+        enabled = 1;
+        if (!(current >= 1.0f)) { enabled = 0; }
+        if (enabled & 0xFF) {
+            /* Native inlined update: the delta is zero and both lower thresholds are 1.0f. */
+            adjusted = current + 0.0f;
+            M2C_FIELD(player, f32*, 0x4E4) = adjusted;
+            if ((adjusted >= 1.0f) && (adjusted < 1.0f)) {
+                M2C_FIELD(player, f32*, 0x4E4) = 1.3f;
+            } else if (M2C_FIELD(player, f32*, 0x4E4) >= 2.0f) {
+                M2C_FIELD(player, f32*, 0x4E4) = 2.0f;
+                if (M2C_FIELD(player, u8*, 0x8B1) == 0) {
+                    level = M2C_FIELD(player, u8*, 0x8A0);
+                    if (level < 3U) {
+                        M2C_FIELD(player, u8*, 0x8A0) = (u8)(level + 1);
+                        M2C_FIELD(player, u8*, 0x8B1) = 1U;
+                        M2C_FIELD(player, f32*, 0x4E4) = 1.3f;
+                    }
+                }
+            }
+        }
+    } else {
+        func_00122120(state);
+    }
+    func_001F2918(D_0040F51C, 0, M2C_FIELD(state, s32*, 4));
+    M2C_FIELD(state, s32*, 4) = 0;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_120068_121ef0", func_00122120);
 
 s16 func_00122368(void **arg0, s32 arg1) {

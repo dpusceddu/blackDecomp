@@ -1,5 +1,14 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+#include "game/playback_request.h"
+
+extern s32 func_001DD728(Recovered_PlaybackState*);
+extern s32 func_001DD3E0(Recovered_PlaybackState*);
+extern s32 func_001DCF70(Recovered_PlaybackState*, s32, u32*, s32, s32*, s32);
+extern s32 func_001ED108(void*);
+extern void func_001DD5D8(Recovered_PlaybackState*, Recovered_PlaybackParameters*);
+extern void func_001DD158(Recovered_PlaybackState*, Recovered_PlaybackParameters*);
+
 
 #include "ps2/recovered_types.h"
 extern s32 func_001EAA20(void *, s32, s32, void *, u16);
@@ -48,7 +57,49 @@ s32 func_001EAB60(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EB4C0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EB838);
+void func_001EB838(void* self, Recovered_PlaybackParameters* parameters) {
+    void* next;
+    void* owner;
+    void* active;
+    Recovered_PlaybackState* state;
+    switch (M2C_FIELD(self, s32*, 0x28)) {
+        case 1:
+            if (func_001DD728(M2C_FIELD(self, Recovered_PlaybackState**, 0x1C))) {
+                func_001DD158(M2C_FIELD(self, Recovered_PlaybackState**, 0x1C), parameters);
+                return;
+            }
+            M2C_FIELD(self, s32*, 0x28) = 2;
+        case 2:
+            if (!func_001DD3E0(M2C_FIELD(self, Recovered_PlaybackState**, 0x1C))) return;
+            M2C_FIELD(M2C_FIELD(self, void**, 0x20), s32*, 0x14) = 0;
+            M2C_FIELD(self, s32*, 0x28) = 3;
+            M2C_FIELD(self, void**, 0x20) = 0;
+        case 3:
+            next = M2C_FIELD(self, void**, 0x24);
+            if (!next) return;
+            owner = M2C_FIELD(next, void**, 0x18);
+            M2C_FIELD(owner, s32*, 0xC)--;
+            active = M2C_FIELD(self, void**, 0x24);
+            M2C_FIELD(self, void**, 0x24) = 0;
+            M2C_FIELD(self, void**, 0x20) = active;
+            M2C_FIELD(active, s32*, 0x14) = 6;
+            M2C_FIELD(self, s32*, 0x28) = 4;
+        case 4:
+            if (func_001DCF70(M2C_FIELD(self, Recovered_PlaybackState**, 0x1C),
+                              M2C_FIELD(M2C_FIELD(self, void**, 0x20), s32*, 0xC), (u32*)((u8*)self + 0x14),
+                              M2C_FIELD(self, s32*, 0x30) + 1, (s32*)((u8*)self + 0x10), M2C_FIELD(self, s32*, 0x2C))) {
+                parameters->unk_A8 = func_001ED108(self);
+                parameters->unk_A9 = 0;
+                parameters->flags |= 0x1800;
+                state = M2C_FIELD(self, Recovered_PlaybackState**, 0x1C);
+                state->unk_34 = 1.0f;
+                state->unk_3C = 1.0f;
+                func_001DD5D8(M2C_FIELD(self, Recovered_PlaybackState**, 0x1C), parameters);
+                M2C_FIELD(self, s32*, 0x28) = 1;
+            }
+    }
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EB998);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EBC88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ea8e0", func_001EBD88);

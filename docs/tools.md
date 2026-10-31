@@ -26,7 +26,7 @@ committed data. Tools import each other by bare module name; every tool puts `to
 | `tools/permuter/cc.py` | Per-file compile command for decomp-permuter's import.py, using splits.yaml. |
 | `tools/permuter/as.py` | Assemble a decomp-permuter target with its owning file's assembler from splits.yaml. |
 | `tools/permuter/import.py` | Import a permuter seed while preserving PS2 scalar typedef attributes and checking 128-bit widths. |
-| `tools/permuter/abi.py` | Preserve PS2 scalar typedef attributes across decomp-permuter parser round trips. |
+| `tools/permuter/abi.py` | Preserve PS2 typedef attributes across decomp-permuter parser round trips. |
 
 ## Everyday tools: build, check and progress
 

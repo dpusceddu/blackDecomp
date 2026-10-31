@@ -3,7 +3,7 @@
 
 extern s32 func_00249958(s32, s32);
 extern s32 func_002487E0(s32);
-extern s32 func_0024B3B0();
+extern void* func_0024B3B0(const char*);
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ce90", func_0024CE90);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ce90", func_0024E078);
@@ -44,8 +44,8 @@ void func_0024F790(void *arg0) {
     func_002487E0(arg0 + 8);
 }
 
-void func_0024F7B0(void) {
-    func_0024B3B0();
+void* func_0024F7B0(const char* text) {
+    return func_0024B3B0(text);
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/apt/tu_24ce90", func_0024F7D0);
