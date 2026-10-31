@@ -1564,7 +1564,8 @@ splits:
   - {src: src/game/unsorted/game_methods.cpp, range: [0x1ee678, 0x1ee850]}
   - {src: src/game/audio/tu_1ed9c8_1eddb8.c, range: [0x1ee850, 0x1ee888]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x1ee888, 0x1ee8d8]}
-  - {src: src/game/unsorted/tu_1ee8d8.c, range: [0x1ee8d8, 0x1ef508]}
+  - {src: src/game/unsorted/tu_1ee8d8_2.c, range: [0x1ee8d8, 0x1eeb00], data_ranges: [{section: .rodata, input: .rodata.003F8B00, start: 0x3f8b00, end: 0x3f8b60}], flags: [-O2, -G1, -snas], assembler: sony-2.9, note: "Native one-byte D_0040DA29 uses GPREL while word globals D_003C09E8 and D_003BDA08 retain absolute HI/LO accesses, requiring a threshold below four bytes. G1 preserves that split; Sony assembly honors the sized byte extern where SN emits an absolute load."}
+  - {src: src/game/unsorted/tu_1ee8d8.c, range: [0x1eeb00, 0x1ef508]}
   - {src: src/game/unsorted/tu_1ef508.c, range: [0x1ef508, 0x1ef548]}
   - {src: src/game/audio/graphics_sound_1ee5e0.cpp, range: [0x1ef548, 0x1ef6f0]}
   - {src: src/game/unsorted/tu_1ef6f0.c, range: [0x1ef6f0, 0x1ef710]}
