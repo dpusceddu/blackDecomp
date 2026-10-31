@@ -28,7 +28,7 @@ extern void func_001D8D70_WithState(void*, s32) __asm__("func_001D8D70");
 extern f32 func_0029E688(f32 base, f32 exponent);
 extern void func_00384700(void* music, f32 gain);
 
-extern s32 func_001EFBA0();
+extern s32 func_001EFBA0(void*);
 
 #ifdef NON_MATCHING
 // Unmatched: gain-store scheduling and two table-count load registers differ.
@@ -86,8 +86,9 @@ s32 func_001D5828(void* self) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5828", func_001D5828);
 #endif
 
-s32 func_001D59C8(void) {
-    func_001EFBA0();
+// Native boot callers forward the audio runtime receiver through this wrapper.
+s32 func_001D59C8(void* runtime) {
+    func_001EFBA0(runtime);
     return 1;
 }
 

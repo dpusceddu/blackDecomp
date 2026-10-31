@@ -18,7 +18,8 @@ splits:
   - {src: src/game/unsorted/tu_1004b0.c, range: [0x1004b0, 0x100518]}
   - {src: src/game/unsorted/tu_100518.c, range: [0x100518, 0x1020c0], note: flags or language differ}
   - {src: src/game/unsorted/tu_100518_1020c0.cpp, range: [0x1020c0, 0x102930], flags: [-O2, -G0, -snas, -fno-exceptions], assembler: sn-min6, note: "Native empty constructor arrays use six-word loop separation; external member constructors have no exception cleanup or unwind paths."}
-  - {src: src/game/unsorted/tu_100518.c, range: [0x102930, 0x1031a0]}
+  - {src: src/game/unsorted/tu_100518_102930.c, range: [0x102930, 0x102bd0], flags: [-O2, -G1, -snas, --assembler=sn-min6], data_ranges: [{section: .sdata, input: .sdata, start: 0x40d985, end: 0x40d986}], note: "Native one-byte readiness flag is GP-relative while word globals are absolute (G1); defining its verified zero byte in native .sdata gives SN section ownership. Native one-element boot loop is six words including a post-call NOP (sn-min6)."}
+  - {src: src/game/unsorted/tu_100518.c, range: [0x102bd0, 0x1031a0]}
   - {src: src/game/unsorted/tu_100518_1031a0.c, range: [0x1031a0, 0x103800], assembler: sn-min6, flags: [-O2, -G0, -snas, -fno-builtin]}
   - {src: src/game/unsorted/tu_100518.c, range: [0x103800, 0x103818]}
   - {src: src/game/unsorted/tu_103818.c, range: [0x103818, 0x103908]}
@@ -819,7 +820,7 @@ splits:
   - {src: src/game/ai/tu_1804f8_180ae0.c, range: [0x180ae0, 0x180cc8]}
   - {src: src/game/ai/tu_1804f8_180cc8.c, range: [0x180cc8, 0x180ed8]}
   - {src: src/game/ai/tu_1804f8_180ed8.c, range: [0x180ed8, 0x181028]}
-  - {src: src/game/ai/tu_1804f8_181028.c, range: [0x181028, 0x181418], flags: [-O2, -G0, -snas, --assembler=sn-min6], note: "Native descending component-table clear uses a six-word loop with one BGEZ interlock; stock SN inserts another NOP."}
+  - {src: src/game/ai/tu_1804f8_181028.c, range: [0x181028, 0x181418], flags: [-O2, -G0, -snas, --assembler=sn-min6], note: "Native descending component-table clear is six words with two NOPs before BGEZ; stock SN inserts a third."}
   - {src: src/game/ai/tu_1804f8_181418.c, range: [0x181418, 0x1815d8]}
   - {src: src/game/ai/ai_action_1815d8.cpp, range: [0x1815d8, 0x181660]}
   - {src: src/game/ai/ai_action_stack_181660.cpp, range: [0x181660, 0x181960]}
