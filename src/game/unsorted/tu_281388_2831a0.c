@@ -42,20 +42,18 @@ void AudioRuntime_SetMode(Recovered_AudioRuntime* self, s32 mode) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_2831a0", func_00283200);
 #endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_2831a0", func_002832A0);
-#ifdef NON_MATCHING
-// Unmatched: operation selection remains a branch instead of native MOVZ (12 differences).
-extern f32 func_00281198(void* self);
-extern s32 func_00327F20(s32 driver, s32* operation, s32 arg2, s32 arg3, s32 arg4);
-void AudioVoice_Initialize(Recovered_AudioVoice* self, void* unused1, s32 driver, s32 alternate,
-                           void* unused4, void* unused5, s32 kind) {
+extern f32 func_00281198(void*);
+extern s32 func_00327F20(s32, s32, s32, s32, s32);
+void AudioVoice_Initialize(Recovered_AudioVoice*, void*, s32, s32, void*, void*, s32) __asm__("func_002835C8");
+void AudioVoice_Initialize(Recovered_AudioVoice* self, void* unused1, s32 driver, s32 alternate, void* unused4,
+                           void* unused5, s32 kind) {
     s32 operation;
+    s32 handle;
     func_00281198(self);
-    operation = alternate ? 0x16 : 0x15;
-    self->kind = kind;
-    self->unk_34 = 0;
-    self->handle = func_00327F20(driver, &operation, 0, 0, 0);
-    self->unk_35 = 0;
+    M2C_FIELD(self, u8*, 0x32) = kind;
+    M2C_FIELD(self, u8*, 0x34) = 0;
+    M2C_FIELD(&operation, s32*, 0) = (alternate == 0) ? 0x15 : 0x16;
+    handle = func_00327F20(driver, (s32)&operation, 0, 0, 0);
+    M2C_FIELD(self, s32*, 0x38) = handle;
+    M2C_FIELD(self, u8*, 0x35) = 0;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_2831a0", func_002835C8);
-#endif

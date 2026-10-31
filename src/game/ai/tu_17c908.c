@@ -3,8 +3,29 @@
 
 extern s32 func_0017E770();
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017C908);
+static inline f32 NormalizeDegrees(f32 angle) {
+    f32 temp_f2;
+    if (angle < 0.0f) {
+        temp_f2 = -angle;
+        angle = -(temp_f2 - ((f32)(s32)(temp_f2 / 360.0f) * 360.0f));
+    } else {
+        angle = angle - ((f32)(s32)(angle / 360.0f) * 360.0f);
+    }
+    if (angle < -180.0f) {
+        angle += 360.0f;
 
+    }
+
+    else if (angle > 180.0f) {
+        angle -= 360.0f;
+    }
+
+    return angle;
+}
+
+f32 func_0017C908(f32 current, f32 target, f32 fraction) {
+    return current + NormalizeDegrees(target - current) * fraction;
+}
 void func_0017C9F0(void *arg0, s32 arg1) {
     M2C_FIELD(arg0, s32 *, 0x44) = arg1;
 }
@@ -25,5 +46,22 @@ void func_0017DB18(void *arg0) {
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017DB50);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017DB98);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017DE50);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017E428);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/ai/tu_17c908", func_0017E488);
+extern s32 func_00180078(void*);
+extern f32 func_0017F298(void*, s128, s128, f32);
+void func_0017E428(void* self, s128 target) {
+    if (func_00180078(self)) {
+        f32 angle = func_0017F298(self, M2C_FIELD(M2C_FIELD(M2C_FIELD(self, void**, 0x44), void**, 0x7c), s128*, 0xa0),
+                                  target, M2C_FIELD(self, f32*, 0x54));
+        M2C_FIELD(self, u8*, 0x7f) = 1;
+        M2C_FIELD(self, f32*, 0x54) = angle;
+        M2C_FIELD(self, f32*, 0x50) = angle;
+    }
+}
+void func_0017E488(void* self, f32 angle) {
+    if (func_00180078(self)) {
+        f32 value = NormalizeDegrees(angle);
+        M2C_FIELD(self, s8*, 0x7F) = 1;
+        M2C_FIELD(self, f32*, 0x54) = value;
+        M2C_FIELD(self, f32*, 0x50) = value;
+    }
+}

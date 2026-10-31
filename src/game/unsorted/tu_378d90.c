@@ -1,6 +1,47 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
+// Partial resource views; original types and field meanings are UNVERIFIED.
+typedef struct {
+    u8 unk_0[8];
+    s32 unk_8;
+    u32 unk_C;
+    u32 unk_10;
+    void* unk_14;
+    void* unk_18;
+    void* unk_1C;
+    void* unk_20;
+    void* unk_24;
+    u32 unk_28;
+    u32 unk_2C;
+    u32 unk_30;
+    f32 unk_34;
+    s32 unk_38;
+    u8 unk_3C[4];
+    u32 unk_40;
+    u32 unk_44;
+    u32 unk_48;
+    u32 unk_4C;
+    u32 unk_50;
+    u32 unk_54;
+    u32 unk_58;
+    s32 flags;
+    char unknown60[8];
+    s32 field68;
+    char unknown6c[4];
+    s32 field70;
+    char unknown74[0xd4];
+    s32 field148, field14c, field150;
+} AudioResourceDraft;
+extern AudioResourceDraft* func_0037B318(AudioResourceDraft*, void*, void*, s32, s32, s32, s32, s32);
+extern s32 func_00379658(AudioResourceDraft*, s32*, s32*);
+extern void func_0037B470(AudioResourceDraft*, s32*, s32*);
+extern s32 func_003230F0(void*, s32, s32);
+
+extern void* func_0031D178(void*, s32*);
+extern s32 func_0032A488(void*);
+extern s32* func_0037B518(void*, void*);
+
 extern s32 func_00311CA0(M2C_UNK *);
 extern M2C_UNK D_0048EC20;
 extern s32 func_0037B988();
@@ -51,22 +92,6 @@ INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_378d90", func_0037A16
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_378d90", func_0037A478);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_378d90", func_0037AE38);
 #ifdef NON_MATCHING
-// Partial resource views; original types and field meanings are UNVERIFIED.
-typedef struct {
-    char unknown00[0x5c];
-    s32 flags;
-    char unknown60[8];
-    s32 field68;
-    char unknown6c[4];
-    s32 field70;
-    char unknown74[0xd4];
-    s32 field148, field14c, field150;
-} AudioResourceDraft;
-extern AudioResourceDraft* func_0037B318(AudioResourceDraft*, void*, void*, s32, s32, s32, s32, s32);
-extern s32 func_00379658(AudioResourceDraft*, s32*, s32*);
-extern void func_0037B470(AudioResourceDraft*, s32*, s32*);
-extern s32 func_003230F0(void*, s32, s32);
-
 // Unmatched: initial argument move differs.
 AudioResourceDraft* func_0037B1D0(AudioResourceDraft* self, s32 a, s32 b, s32 c, s32 d, s32 e) {
     AudioResourceDraft* result = func_0037B318(self, &self->field68, &self->field70, a, b, c, d, e);
@@ -108,7 +133,42 @@ s32 func_0037B2D0(s32 arg0, s32 arg1, s32 arg2) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_378d90", func_0037B310);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_378d90", func_0037B318);
+AudioResourceDraft* func_0037B318(AudioResourceDraft* self, void* state, void* input, s32 a, s32 b, s32 c, s32 d,
+                                  s32 e) {
+    void** first;
+    void** second;
+
+    if ((func_0031D178(self, NULL) != NULL) && (func_0031D178(&self->unk_0[4], NULL) != NULL) &&
+        (func_0031D178(self->unk_3C, NULL) != NULL)) {
+        M2C_FIELD(state, s32*, 4) = M2C_FIELD(state, s32*, 0) = 0;
+        func_0032A488(input);
+        first = &self->unk_18;
+        second = &self->unk_20;
+        self->unk_18 = first;
+        self->unk_1C = first;
+        self->unk_20 = second;
+        self->unk_24 = second;
+        self->unk_28 = (u32)func_0037B518;
+        self->unk_38 = 1;
+        self->unk_34 = 1.0f;
+        self->unk_8 = 6;
+        self->unk_48 = (u32)a;
+        self->unk_44 = 0x20;
+        self->unk_4C = (u32)b;
+        self->unk_50 = (u32)c;
+        self->unk_54 = (u32)d;
+        self->unk_58 = (u32)e;
+        self->unk_2C = (u32)self;
+        self->unk_30 = 0;
+        self->unk_C = 0;
+        self->unk_14 = NULL;
+        self->unk_40 = 0;
+        self->unk_10 = 0;
+        self->flags = 0;
+        return self;
+    }
+    return NULL;
+}
 
 void func_0037B450(void) {
     func_0037B608();

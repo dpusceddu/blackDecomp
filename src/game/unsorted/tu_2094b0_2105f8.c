@@ -1,6 +1,9 @@
 #include "include_asm.h"
 #include "game/frontend_options.h"
 
+void FrontendOptions_SetSfxVolume(const char* value) __asm__("func_002106B8");
+void FrontendOptions_SetMusicVolume(const char* value) __asm__("func_00210748");
+
 extern s32 func_0035E750(const char* value);
 extern void func_001EF7B0(void* sink, s32 id);
 // This caller retains an unused F13 argument; the matched producer consumes channel and F12.
@@ -35,32 +38,24 @@ s32 func_002105F8(s32 arg0) {
     return 1;
 }
 
-#ifdef NON_MATCHING
-// Unmatched: preference reloads and gain forwarding differ.
 void FrontendOptions_SetSfxVolume(const char* value) {
     void** frontendSinkSlot;
     D_003BE7E4 = func_0035E750(value);
     frontendSinkSlot = &AudioRuntime_Global->mixer->frontendSink;
     func_001EF7B0(*frontendSinkSlot, D_003BE7EC);
-    FrontendOptions_Preferences->sfxVolume = (f32)D_003BE7E4 / 100.0f;
-    AudioRuntime_ApplySfxVolume(AudioRuntime_Global, FrontendOptions_Preferences->sfxVolume);
+    M2C_FIELD(FrontendOptions_Preferences, f32*, 0x2015C) = (f32)D_003BE7E4 / 100.0f;
+    AudioRuntime_ApplySfxVolume(AudioRuntime_Global, M2C_FIELD(FrontendOptions_Preferences, f32*, 0x2015C));
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_2105f8", func_002106B8);
-#endif
-#ifdef NON_MATCHING
-// Unmatched: preference reloads and gain forwarding differ.
+
 void FrontendOptions_SetMusicVolume(const char* value) {
     void** frontendSinkSlot;
     D_003BE7E8 = func_0035E750(value);
     frontendSinkSlot = &AudioRuntime_Global->mixer->frontendSink;
     func_001EF7B0(*frontendSinkSlot, D_003BE7EC);
-    FrontendOptions_Preferences->musicVolume = (f32)D_003BE7E8 / 100.0f;
-    AudioRuntime_ApplyMusicVolume(AudioRuntime_Global, FrontendOptions_Preferences->musicVolume);
+    M2C_FIELD(FrontendOptions_Preferences, f32*, 0x20160) = (f32)D_003BE7E8 / 100.0f;
+    AudioRuntime_ApplyMusicVolume(AudioRuntime_Global, M2C_FIELD(FrontendOptions_Preferences, f32*, 0x20160));
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_2105f8", func_00210748);
-#endif
+
 void FrontendOptions_SetInvertLook(const char* value) {
     void** frontendSinkSlot;
     s32 enabled = func_0035E750(value);

@@ -1,25 +1,24 @@
-#include "include_asm.h"
-
-#ifdef NON_MATCHING
 #include "game/draft_views.hpp"
-namespace Game { namespace DraftViews {
+#include "ps2/prelude.h"
 
-int RefreshAtCoordinates(void* object,const int* coordinates) {
-    PrepareCoordinates(object,coordinates);
-    void* context=Field<void*>(Field<void*>(effects,0xd540),0x58);
-    void* position=Field<void*>(context,0x60);
-    int previousX=Field<int>(position,0xc);
-    Field<int>(position,0xc)=coordinates[0];
-    int previousY=Field<int>(position,0x10);
-    Field<int>(Field<void*>(context,0x60),0x10)=coordinates[1];
-    PublishCoordinates(effects+0xcfd0,context);
-    SetEffectMode(effects+0x14,3);
-    Field<int>(Field<void*>(context,0x60),0xc)=previousX;
-    Field<int>(Field<void*>(context,0x60),0x10)=previousY;
-    PublishCoordinates(effects+0xcfd0,context);
-    return FinishCoordinates(object);
+namespace Game {
+namespace DraftViews {
+
+void RefreshAtCoordinates(void* object, const int* coordinates) {
+    PrepareCoordinates(object, coordinates);
+    void* context = M2C_FIELD(M2C_FIELD(effects, void**, 0xd540), void**, 0x58);
+    void* position = M2C_FIELD(context, void**, 0x60);
+    int previousX = M2C_FIELD(position, int*, 0xc);
+    M2C_FIELD(position, int*, 0xc) = coordinates[0];
+    int previousY = M2C_FIELD(position, int*, 0x10);
+    M2C_FIELD(M2C_FIELD(context, void**, 0x60), int*, 0x10) = coordinates[1];
+    PublishCoordinates(effects + 0xcfd0, context);
+    SetEffectMode(effects + 0x14, 3);
+    M2C_FIELD(M2C_FIELD(context, void**, 0x60), int*, 0xc) = previousX;
+    M2C_FIELD(M2C_FIELD(context, void**, 0x60), int*, 0x10) = previousY;
+    PublishCoordinates(effects + 0xcfd0, context);
+    FinishCoordinates(object);
 }
-} }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c1a98", func_001C1A98);
-#endif
+
+} // namespace DraftViews
+} // namespace Game

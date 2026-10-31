@@ -36,6 +36,7 @@ typedef char RecoveredChoiceGroupSize[(sizeof(Recovered_ChoiceGroup) == 0x28) ? 
 typedef char RecoveredChoiceOwnerSize[(sizeof(Recovered_ChoiceOwner) == 0x80) ? 1 : -1];
 extern void* D_0040F4D0;
 extern f32 func_001E1F18(void*);
+extern void func_001E1EA8(void*);
 extern Recovered_ChoiceEntry* func_001E1788(void*, Recovered_ChoiceGroup*, s32, s32);
 /* Partial selection manager; the meaning of its state fields is UNVERIFIED. */
 typedef struct Recovered_ChoiceManager {
@@ -97,7 +98,40 @@ Recovered_ChoiceEntry* func_001E1840(void* owner, u64 key, s32 kind, s32 selecti
     return 0;
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E18B0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e1720", func_001E1A70);
+void func_001E1A70(void* self, f32 dt) {
+    s32 state;
+
+    state = M2C_FIELD(self, s32*, 0x5C);
+    switch (state) {
+        case 5:
+            if (M2C_FIELD(self, f32*, 0x68) <= 0.0f) {
+                func_001E1EA8(self);
+                M2C_FIELD(self, s8*, 0x79) = 1;
+            }
+            M2C_FIELD(self, f32*, 0x68) = (f32)(M2C_FIELD(self, f32*, 0x68) - dt);
+            return;
+        case 3:
+        case 4:
+            if ((M2C_FIELD(self, f32*, 0x64) <= 0.0f) && (M2C_FIELD(self, u8*, 0x7C) == 0)) {
+                if (M2C_FIELD(self, f32*, 0x68) <= 0.0f) {
+                    func_001E1EA8(self);
+                } else {
+                    M2C_FIELD(self, s32*, 0x5C) = 5;
+                }
+            }
+            M2C_FIELD(self, u8*, 0x7C) = 0U;
+            if (M2C_FIELD(self, f32*, 0x68) <= 0.0f) {
+                M2C_FIELD(self, s8*, 0x79) = 1;
+                M2C_FIELD(self, f32*, 0x68) = (f32)M2C_FIELD(M2C_FIELD(self, void**, 0x58), f32*, 0x94);
+            }
+            M2C_FIELD(self, f32*, 0x68) = (f32)(M2C_FIELD(self, f32*, 0x68) - dt);
+            M2C_FIELD(self, f32*, 0x64) = (f32)(M2C_FIELD(self, f32*, 0x64) - dt);
+            /* fallthrough */
+        default:
+        case 2:
+        case 6: return;
+    }
+}
 
 s32 func_001E1BA0(void *arg0) {
     func_0035C6EC(arg0 + 0x20, 0, 0x28);

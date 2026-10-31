@@ -113,9 +113,7 @@ void func_001EA518(void *arg0, s32 arg1, s32 arg2) {
     M2C_FIELD(arg0, s32 *, 0x90) = (s32) (M2C_FIELD(arg0, s32 *, 0x90) & ~(1 << arg1));
 }
 
-#ifdef NON_MATCHING
-// Unmatched: the lookup-failure branch is scheduled differently.
-s32 func_001EA580(Recovered_ModeOwner* owner, u64 key, s32 enabled) {
+void func_001EA580(Recovered_ModeOwner* owner, u64 key, s32 enabled) {
     s32 index;
     s32 result = func_001EA728(owner, key, &index);
     if (result != 0) {
@@ -125,16 +123,14 @@ s32 func_001EA580(Recovered_ModeOwner* owner, u64 key, s32 enabled) {
             owner->active |= bit;
             entry->expiry = -1.0f;
             entry->unk_13D = 0;
-            return bit;
+            return;
         }
         owner->active &= ~(1U << index);
-        return index;
+        return;
     }
-    return result;
+    return;
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA580);
-#endif
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA620);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1e9d30", func_001EA628);
 s32 func_001EA728(void* owner, u64 key, s32* index) {

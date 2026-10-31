@@ -258,32 +258,21 @@ s32 func_00175DB8(Recovered_CollisionQueueStorage* storage, s32 group) {
     } while (more);
     return more;
 }
-#ifdef NON_MATCHING
-// Unmatched: live-pointer and queue registers differ.
 void func_00175E80(PS2CollisionQueue* queue) {
-    PS2LiveCollision** current;
-    PS2LiveCollision* collision;
-    PS2GameObjectRecord* object;
-    s32 remaining;
-    current = queue->live;
-    remaining = 15;
-    collision = *current;
-loop:
-    remaining--;
-    current++;
-    object = collision->object;
-    if (object != NULL) {
-        func_00170740(collision);
-        func_00175A00(queue, object, 0);
-    }
-    if (remaining >= 0) {
-        collision = *current;
-        goto loop;
-    }
+    PS2LiveCollision** current = queue->live;
+    s32 remaining = 15;
+    do {
+        PS2LiveCollision* collision = *current;
+        PS2GameObjectRecord* object;
+        remaining--;
+        current++;
+        object = collision->object;
+        if (object != NULL) {
+            func_00170740(collision);
+            func_00175A00(queue, object, 0);
+        }
+    } while (remaining >= 0);
 }
-#else
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175E80);
-#endif
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/world/tu_1756c0", func_00175EF8);
 
 void func_00175F10(PS2PendingCollision* arg0, PS2GameObjectRecord* arg1, s32 arg2) {
