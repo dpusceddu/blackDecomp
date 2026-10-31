@@ -27,9 +27,10 @@ typedef struct {
     Recovered_ActorRecord records[3];
     s32 current;
     u32 actorMask;
-    f32 selectionTimer; // UNVERIFIED: selection consumer remains a draft.
+    f32 selectionTimer; // Selection changes are gated by this timer.
     s32 categoryFilter; // UNVERIFIED: actor-category filter source remains a draft.
     void* owner;
+    u8 unk_134; // Triggers the deferred update; its gameplay meaning remains unknown.
 } Recovered_ActorRecords;
 
 typedef char ActorRecordStride[sizeof(Recovered_ActorRecord) == 0x60 ? 1 : -1];
