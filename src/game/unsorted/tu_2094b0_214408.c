@@ -227,7 +227,33 @@ void func_00215810(void)
   D_003BE84C = 5;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_214408", func_00215858);
+#include "game/frontend/profile_settings.h"
+extern void* func_0010F280(void*);
+extern void* D_0040F4EC;
+extern s32 func_0035C4B0(const void*, const void*, u32);
+extern void func_001050A8(void*, const char*);
+extern void** D_0040F53C;
+
+void func_00215858(void) {
+    /* Native LD/SD copies preserve the full 0xBC-byte value at eight-byte alignment. */
+    typedef struct FrontendProfileSettings ProfileValue __attribute__((aligned(8)));
+    ProfileValue value;
+    void* temp_3;
+    value = *(ProfileValue*)((u8*)func_0010F280(D_0040F4EC) + 8);
+    if (func_0035C4B0(D_0040F0E0 + 0x2014C, &value, sizeof(value)) == 0) {
+        func_001050A8(D_0040F0E0 + 0x20220, NULL);
+        return;
+    }
+    temp_3 = *D_0040F53C;
+    if ((temp_3 != NULL) && (M2C_FIELD(temp_3, u8*, 0x6A5) == 0)) {
+        func_00105258(D_0040F0E0 + 0x20220);
+        func_0010B2C0(D_0040F4F0, 0);
+        D_003BE84C = 6;
+        return;
+    }
+    func_001050A8(D_0040F0E0 + 0x20220, NULL);
+}
+
 extern s32 func_0035E750(s32);
 extern void func_0010B2F0(s32);
 extern void func_0010B308(s32);

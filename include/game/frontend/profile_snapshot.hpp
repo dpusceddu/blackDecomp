@@ -2,15 +2,8 @@
 #define GAME_FRONTEND_PROFILE_SNAPSHOT_HPP
 
 // PS2 settings and profile views, recovered from save/load assignments.
-struct FrontendProfileSettings {
-    int sound, music, control;
-    float sensitivity, vertical, horizontal;
-    unsigned char enabled, option19, reserved1a, option1b, option1c;
-    char reserved1d[7];
-    unsigned char option24;
-    char reserved25[3];
-    int progress[37];
-};
+#include "game/frontend/profile_settings.h"
+
 struct FrontendProfileData {
     int count;
     char reserved4[0x6a1];
@@ -43,6 +36,5 @@ struct FrontendProfileSnapshot {
     void Apply() __asm__("func_0010F470");
     void Remember() __asm__("func_0010F620");
 };
-typedef char FrontendProfileSettingsSize[(sizeof(FrontendProfileSettings)==0xbc)?1:-1];
 typedef char FrontendProfileDataSize[(sizeof(FrontendProfileData)==0x6a8)?1:-1];
 #endif
