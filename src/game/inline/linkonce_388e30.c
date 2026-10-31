@@ -20,7 +20,8 @@ void *func_00388E58(void *arg0, s32 arg1) {
     return M2C_FIELD(((arg1 * 0x10) + M2C_FIELD(arg0, s32 *, 0xC)), void **, 8);
 }
 
-void func_00388E70(void) {
+// Empty record initializer retains the native caller-supplied receiver.
+void func_00388E70(void *record) {
 
 }
 

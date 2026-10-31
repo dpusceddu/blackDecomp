@@ -2045,7 +2045,8 @@ splits:
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x287ec8, 0x2881a8]}
   - {src: src/game/effects/tu_2881a8.cpp, range: [0x2881a8, 0x288470], flags: [-O2, -G0, -snas, --assembler=sn-min6], note: "Native short initialization loop uses one SLT-to-BNE interlock instruction; stock SN inserts another NOP."}
   - {src: src/game/effects/tu_281388_284688.cpp, range: [0x288470, 0x288488]}
-  - {src: src/game/unsorted/tu_288488.c, range: [0x288488, 0x288788], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
+  - {src: src/game/unsorted/tu_288488_2.c, range: [0x288488, 0x2886d0], note: "Native default O2 interleaves receiver capture with saved-register stores and fills JAL delay slots with registry LUI; adjacent 2886D0 requires its separate no-schedule-insns2 store order."}
+  - {src: src/game/unsorted/tu_288488.c, range: [0x2886d0, 0x288788], flags: [-O2, -G0, -snas, -fno-schedule-insns2], note: flags or language differ}
   - {src: src/game/unsorted/tu_288488_288788.c, range: [0x288788, 0x288bc8]}
   - {src: src/game/unsorted/tu_288bc8.c, range: [0x288bc8, 0x288cf8], note: flags or language differ}
   - {src: src/game/unsorted/tu_288bc8_288cf8.c, range: [0x288cf8, 0x288d08], flags: [-O1, -G0, -snas], note: flags or language differ}
