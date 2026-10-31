@@ -261,10 +261,14 @@ def recovered_context(refresh=False):
     return RECOVERED
 
 
+HEADER_PROTOTYPE = re.compile(r'^extern\s+[^;{}]*?\b(func_[0-9A-F]{8})\s*\([^;{}]*;', re.M)
+
+
 def header_declarations():
     """Keep authored pointee names and parameter spellings available to every consumer."""
-    return {m.group(1): line for line in HEADER.read_text().splitlines()
-            if line.startswith('extern ') and (m := re.search(r'\b(func_[0-9A-F]{8})\(', line))} if HEADER.exists() else {}
+    import context_recovery as cr
+    return {m.group(1): ' '.join(m.group().split())
+            for m in HEADER_PROTOTYPE.finditer(cr.COMMENT.sub('', HEADER.read_text()))} if HEADER.exists() else {}
 
 
 def return_abi(typ):
@@ -339,15 +343,17 @@ def write_context(refresh=False):
            'typedef int s32; typedef unsigned int u32; typedef long s64; typedef unsigned long u64;',
            'typedef float f32; typedef double f64;']
     declared = header_declarations()
+    import context_recovery as cr
     for header in (TYPES_HEADER, HEADER):
         if not header.exists():
             continue
-        for line in header.read_text().split('\n'):
-            if line.startswith('#') or line.startswith('typedef char assert_') or line.startswith('/*') or line.startswith(' *'):
-                continue
-            match = re.search(r'\bfunc_([0-9A-F]{8})\(', line) if line.startswith('extern ') else None
-            row = context['signatures'].get(str(int(match.group(1), 16))) if match else None
-            if row:
+        text = cr.COMMENT.sub('', header.read_text())
+        # Remove the entire declaration, including continuation lines. Keep any
+        # unmodelled declarations on one line for the alternative contexts too.
+        text = HEADER_PROTOTYPE.sub(lambda m: '' if str(int(m.group(1)[5:], 16)) in context['signatures']
+                                    else ' '.join(m.group().split()), text)
+        for line in text.split('\n'):
+            if line.startswith('#') or line.startswith('typedef char assert_'):
                 continue
             out.append(line)
     known = set(re.findall(r'\b(func_[0-9A-F]{8})\(', '\n'.join(out)))

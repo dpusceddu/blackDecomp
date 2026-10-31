@@ -12,7 +12,9 @@ inferred from each input or its owner unless -x selects a language explicitly.
 The compiled function defaults to the image symbol; --symbol overrides it.
 
 Sources, scores, context hashes and the best source/object/diff of each run stay
-under build/experiments/ADDR/. History is diagnostic and never reused as proof.
+under build/experiments/ADDR/. Each distinct candidate is audited against exact
+source contracts and proven native widths; structured findings stay with the run.
+Warnings are advisory and never alter candidates or scores. History is diagnostic and never reused as proof.
 Compilation uses the existing dependency-aware worker cache. No sources are
 adopted and no progress is recorded. An object match still needs source review
 and the full-image check. Exit 0: an object match; 1: near misses; 2: no score.
@@ -87,7 +89,7 @@ def changed_instructions(want, got, start):
     return '\n'.join(lines) + ('\n' if lines else '')
 
 
-def run_batch(function, candidates, context, bindings, hypothesis, output, symbol=None):
+def run_batch(function, candidates, context, bindings, hypothesis, output, symbol=None, audits=None):
     """Compile and score all variants together, then preserve the complete experiment under a content hash."""
     import autodecomp as A
     original = A.OrigImage()
@@ -102,6 +104,8 @@ def run_batch(function, candidates, context, bindings, hypothesis, output, symbo
                    target_sha256=json_hash(dict(words=function['words'], rel=function['rel'])),
                    image_sha256=digest(original.e.data))
     identity = dict(context=context, hypothesis=hypothesis, attempts=attempts, symbol=symbol or function['name'])
+    if audits is not None:
+        identity['contract_audits'] = audits
     compiled = A.worker_compile(jobs, tag='trysrc')
     results, best, best_tokens = [], None, None
     for index, (path, source, flags) in enumerate(candidates):
@@ -150,6 +154,26 @@ def run_batch(function, candidates, context, bindings, hypothesis, output, symbo
     return record, directory, previous
 
 
+def audit_candidates(function, candidates, bindings, inventory, symbol=None):
+    """Recover evidence once, audit each distinct source once across all flag variants."""
+    import autodecomp as A
+    import context_recovery as cr
+    evidence = cr.recover(inv=inventory)
+    bindings = dict(bindings)
+    if symbol:
+        bindings[symbol] = function['addr']
+    audits = {}
+    for path, source, _ in candidates:
+        key = json_hash([str(path), digest(source.encode())])
+        if key not in audits:
+            audit = cr.audit_candidate(evidence, [function['addr']], source, path, bindings,
+                                       A.compile_dependencies(source))
+            audits[key] = dict(source=str(path), report=audit)
+            print('Contract evidence for %s:' % path)
+            cr.print_audit(audit)
+    return audits
+
+
 def history(addr, output):
     records = [json.loads(p.read_text()) for p in (output / ('%08X' % addr)).glob('*/results.json')]
     for record in sorted(records, key=lambda r: r['created']):
@@ -187,7 +211,8 @@ def main(argv=None):
         ap.error('--flags and --variants are mutually exclusive')
     preflight.require()
     import autodecomp as A
-    function = next((f for f in A.load_inventory() if f['addr'] == args.addr), None)
+    inventory = A.load_inventory()
+    function = next((f for f in inventory if f['addr'] == args.addr), None)
     if function is None:
         ap.error('address is not in the function inventory')
     groups = group_splits(load_splits())
@@ -217,9 +242,11 @@ def main(argv=None):
             candidates.append((path, source, flags))
     context = dict(owner=owner.src, owner_sha256=digest((ROOT / owner.src).read_bytes()),
                    tools={p: digest((ROOT / p).read_bytes()) for p in (
-                       'tools/trysrc.py', 'tools/autodecomp.py', 'tools/compile.py', 'tools/build/assembler.py',
+                       'tools/trysrc.py', 'tools/pipeline/context_recovery.py', 'tools/autodecomp.py', 'tools/compile.py', 'tools/build/assembler.py',
                        'tools/build/object_compile.py', 'tools/build/elfinfo.py', 'tools/build/constant_relocs.py')})
-    record, directory, previous = run_batch(function, candidates, context, bindings, args.hypothesis, args.output, args.symbol)
+    audits = audit_candidates(function, candidates, bindings, inventory, args.symbol)
+    record, directory, previous = run_batch(function, candidates, context, bindings, args.hypothesis,
+                                             args.output, args.symbol, audits=audits)
     print('%s: %s (%d variants)' % (function['name'], args.hypothesis, len(record['results'])))
     if previous:
         print('This batch was already recorded with the same sources and context; scores have been refreshed.')

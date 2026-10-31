@@ -93,6 +93,47 @@ it. `build/auto/context.json` keeps evidence, unresolved arities and conflicts. 
 independent on the EE. Caller counts and register-use constraints are lower bounds; the original order of mixed
 parameters is unknown without a signature. Xbox types remain leads and never establish PS2 field offsets.
 
+Native analysis is cached separately in `build/auto/context-native.json`, keyed per function by address, instruction words
+and relocations, with analyzer and decoder invalidation. Source/header edits refresh source evidence, signatures and layouts
+while reusing native analysis. Binary or boundary changes recompute the affected functions. Explicit `--refresh` recomputes
+both layers. Both caches are disposable and published atomically under the preparation lock; timing output reports reuse.
+
+To inspect the existing evidence for a function and its immediate native callees:
+
+```sh
+python3 tools/pipeline/context_recovery.py --function func_001444A8 --callees
+```
+
+Repeat `--function` for more targets. JSON output includes source declarations with paths and quality, source conflicts,
+register constraints and return consumption. A cold or stale cache is refreshed automatically; progress goes to stderr.
+`source_evidence.matched_owner` means the selected declaration came from a matched owner's context, which can include
+headers; it does not uniquely prove the original C++ type. Unknown aggregate returns and constructor ABIs remain explicit
+limitations. Conflicting aggregate-return and explicit-output-pointer views may describe the same physical ABI and require
+manual review. Register leftovers and caller argument counts alone do not prove returns or unused parameters.
+This command only updates the ignored analysis cache; it never changes committed source or counts a new match.
+
+Audit a candidate's declarations and its quoted-header closure against the target and immediate native callees:
+
+```sh
+python3 tools/pipeline/context_recovery.py --function func_001C1A98 --callees --audit build/candidate.cpp
+```
+
+`brief.py` includes the audit for existing source declarations; `trysrc.py` audits each distinct candidate once across its
+flag variants and saves structured findings in `results.json` under `contract_audits`. Source and dependency hashes plus
+context fingerprints tie findings to the experiment. Findings never change sources, compiler inputs, scores or progress.
+
+Warnings identify disagreement with an exact owner definition or a declaration narrower than a native full-width payload
+store. Width evidence follows direct incoming registers and full-width copies in the straight-line entry prefix, excluding
+stack homing and partial-width packed operations. Review extension rules before changing a type. The audit reports
+unobserved or consumed return registers as review leads: an ignored pointer result does not establish void, and an
+incidental register value does not establish a return. `source_evidence.owner_definition` distinguishes an exact definition
+from a declaration merely visible in a matched owner's headers. Source contracts establish consistency, not unique original
+C++ types; pointer-versus-integer distinctions can share a machine ABI.
+
+This is a conservative source parser, not a preprocessor: inactive conditional declarations can appear, and unresolved
+aliases, overloads, aggregate ABIs, indirect calls and stack arguments need manual review. No automatic signature trials or
+rewriting are performed. Detailed native observations and source conflicts remain in the focused evidence report.
+
 A recovered layout is a struct `Recovered_<Name>` whose fields are named after their PS2 offsets (`unk_30`, with `unk_4[45]` for a gap)
 and cover the accessed prefix only, not the allocation size. A committed layout is ordinary source: it is defined in the one
 source file that uses it, or, when several files share it, in a plainly named header under `include/<library>/` (the sources include
@@ -104,6 +145,7 @@ ignored `build/auto/` (`context.json` lists each layout's `verified_by` function
 function; it is a starting point for the layout you commit, never a replacement for it. Normal drafts declare referenced callees individually so
 speculative signatures do not conflict with unrelated definitions. When several runs share a checkout,
 `AUTODECOMP_FREEZE_CONTEXT=1` consumes the already exported context; a missing context is an error.
+Ordinary `decompile.py` drafting checks freshness; it does not enable freezing automatically.
 
 No tool rewrites a committed header: `decompile.py`, `autodecomp.py` and the build only write under `build/auto/` (the m2c
 context: `context.json`, `ctx*.c`, `recovered_layouts.c`) from the committed headers, sources and configuration, which is all a
