@@ -42,4 +42,29 @@ s32 func_001C28A0(void *arg0) {
     return M2C_FIELD(arg0, s32 *, 0x34) == 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1c22a0_1c2798", func_001C28B0);
+extern s32 func_001C29C0(void*, const s32*);
+extern void* D_0040F4C0;
+extern void func_001C88C8(void*, void*);
+extern void func_001AF768(s32, s32);
+extern void func_001C2A18(void*);
+
+void func_001C28B0(void* object, const s32* coordinates) {
+    s32 previousX;
+    s32 previousY;
+    void* context;
+    void* position;
+
+    func_001C29C0(object, coordinates);
+    context = M2C_FIELD(M2C_FIELD(D_0040F4C0, void**, 0xD540), void**, 0x58);
+    position = M2C_FIELD(context, void**, 0x60);
+    previousX = M2C_FIELD(position, s32*, 0xC);
+    M2C_FIELD(position, s32*, 0xC) = (s32)M2C_FIELD(coordinates, s32*, 0);
+    previousY = M2C_FIELD(position, s32*, 0x10);
+    M2C_FIELD(M2C_FIELD(context, void**, 0x60), s32*, 0x10) = (s32)M2C_FIELD(coordinates, s32*, 4);
+    func_001C88C8((void*)(((s8*)D_0040F4C0) + 0xCFD0), context);
+    func_001AF768((s32)((void*)(((s8*)D_0040F4C0) + 0x14)), 4);
+    M2C_FIELD(M2C_FIELD(context, void**, 0x60), s32*, 0xC) = previousX;
+    M2C_FIELD(M2C_FIELD(context, void**, 0x60), s32*, 0x10) = previousY;
+    func_001C88C8((void*)(((s8*)D_0040F4C0) + 0xCFD0), context);
+    func_001C2A18(object);
+}
