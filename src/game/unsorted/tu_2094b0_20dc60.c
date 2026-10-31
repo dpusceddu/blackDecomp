@@ -66,14 +66,39 @@ void func_0020DD98(M2C_UNK *arg0, void *arg1) {
     func_0020DE78(arg0, sp);
 }
 
+#ifdef NON_MATCHING
+// Unmatched: buffer-growth receiver setup occupies a different call delay slot (2 instructions).
+extern s32 func_0020DB58(void*, const char*);
+void func_0020DE28(s32* self, const char* text) {
+    func_0020DC60(self, func_0020DB58(self, text));
+    func_00275260(text, M2C_FIELD(self, void**, 4), self[0]);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_20dc60", func_0020DE28);
+#endif
 
 void func_0020DE78(s32 *arg0, void *arg1) {
     func_0020DC60(arg0, func_00275340(arg1));
     func_00275398(M2C_FIELD(arg0, s32 *, 4), M2C_FIELD(arg0, s32 *, 0), arg1);
 }
 
+#ifdef NON_MATCHING
+// Unmatched: native stack reservation and all argument-home offsets are 16 bytes larger (17 instructions).
+extern s32* func_00369FB8(void*, s32, const char*, void*);
+
+void func_0020DEC8(s32* self, const char* format, ...) {
+    char buffer[256];
+    /* MIPS EABI: unnamed GP arguments begin in the remaining eight-byte register homes. */
+    char* args = (char*)__builtin_next_arg(format);
+    s32 namedRegisters = __builtin_args_info(2);
+    if (namedRegisters < 8) args -= (8 - namedRegisters) * 8;
+    func_00369FB8(buffer, 256, format, args);
+    func_0020DE28(self, buffer);
+}
+
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_2094b0_20dc60", func_0020DEC8);
+#endif
 
 s32 func_0020DF30(void) {
     func_0020DC20();
