@@ -42,7 +42,13 @@ void func_001FE000(void* arg0) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90_1fdf28", func_001FE068);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90_1fdf28", func_001FE380);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90_1fdf28", func_001FFDC8);
+s32 func_001FFDC8(void *arg0) {
+    func_00278F00((M2C_FIELD(arg0, s8*, 0x12) * 0xA8) + D_0040F518 + 0x40, M2C_FIELD(arg0, s16*, 0x10) + 1, M2C_FIELD(arg0, s32*, 0x18));
+    func_00278F00((M2C_FIELD(arg0, s8*, 0x12) * 0xA8) + D_0040F518 + 0x40, M2C_FIELD(arg0, s16*, 0x10) + 1, M2C_FIELD(arg0, s32*, 0x1C));
+    func_00278F00((M2C_FIELD(arg0, s8*, 0x12) * 0xA8) + D_0040F518 + 0x40, (s32) M2C_FIELD(arg0, s16*, 0x10), M2C_FIELD(arg0, s32*, 0x20));
+    return 1;
+}
+
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90_1fdf28", func_001FFE70);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90_1fdf28", func_001FFF88);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1fcd90_1fdf28", func_001FFF90);
