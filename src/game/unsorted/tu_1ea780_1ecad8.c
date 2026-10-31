@@ -67,7 +67,66 @@ void func_001ECAF8(void* self) {
         if (M2C_FIELD(self, f32*, 0x1E50) < M2C_FIELD(clock, f32*, 0x20)) { M2C_FIELD(self, u8*, 0x1E55) = 0U; }
     }
 }
+#ifdef NON_MATCHING
+// Unmatched: entry-search layout and saved register allocation differ (22 instructions).
+extern void* func_001EBEB8(void*, s32);
+extern s32 func_001EC600(void*, void*, s128);
+extern void func_001EC330(void*, f32);
+extern f32 func_001DD748(void*);
+static inline u8 PlaybackEntryHasStateFour(void* slot) {
+    void* associated = M2C_FIELD(slot, void**, 0x24);
+    if (!associated) return 0;
+    if (M2C_FIELD(associated, s32*, 0x14) == 4) return 1;
+    return 0;
+}
+void func_001ECD50(void* self) {
+    void* entry;
+    s32 index;
+    if (M2C_FIELD(self, u8*, 0x1E56)) {
+        s32 activate;
+        if (M2C_FIELD(self, u8*, 0x1E57) != 1 || M2C_FIELD(self, s32*, 0x1DE0) >= M2C_FIELD(self, s32*, 0x1DE4)) {
+            s32 more;
+            s32 count = M2C_FIELD(self, s32*, 0x1E30);
+            index = M2C_FIELD(self, s32*, 0x1E38);
+            activate = 1;
+            entry = NULL;
+            more = index < count;
+            while (more) {
+                void* candidate = (u8*)self + 0x80 + index * 0x28;
+                if (M2C_FIELD(candidate, s32*, 0x14) == 3 &&
+                    M2C_FIELD(candidate, s32*, 0x10) == M2C_FIELD(self, s32*, 0x1DE0)) {
+                    entry = candidate;
+                    break;
+                }
+                ++index;
+                more = index < count;
+            }
+            if (entry) {
+                void* slot = func_001EBEB8(self, M2C_FIELD(self, s32*, 0x1DE0));
+                if (slot) {
+                    activate = 0;
+                    func_001EC600(slot, entry, M2C_FIELD(self, s128*, 0x1DD0));
+                }
+            } else {
+                for (index = 0; index < M2C_FIELD(self, s32*, 0x1E28); ++index) {
+                    entry = (u8*)self + index * 0x40;
+                    if ((PlaybackEntryHasStateFour(entry) == 1) ||
+                        (M2C_FIELD(entry, s32*, 0x28) == 1 && func_001DD748(M2C_FIELD(entry, void**, 0x1C)) <= 0.15f)) {
+                        activate = 0;
+                    }
+                }
+            }
+        } else {
+            activate = 1;
+        }
+        if (activate) func_001EC330(self, M2C_FIELD(self, f32*, 0x1E4C));
+        M2C_FIELD(self, u8*, 0x1E56) = 0;
+    }
+    M2C_FIELD(self, u8*, 0x1E57) = 0;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1ea780_1ecad8", func_001ECD50);
+#endif
 
 
 s32 func_001ECEF8(void* arg0, s32 arg1, s32 arg2) {
