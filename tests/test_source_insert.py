@@ -28,14 +28,15 @@ class SourceInsertionWorkflow(unittest.TestCase):
                              'INCLUDE_ASM("fixture", func_00100010);\n'
                              'INCLUDE_ASM("fixture", func_00100020);\n')
             for name in ('func_00100010', 'func_00100020'):
-                body = f's32 {name}(Second* self) {{ return Consume(ReadValue(self), self->count); }}'
-                source = '\n'.join((header, first, second, helper, prototype, body))
+                body = f's32 {name}(Second* self) {{ return Consume(ReadValue(self), self->count) + value; }}'
+                source = '\n'.join((header, first, second, 's32 value;', helper, prototype, body))
                 declarations, code = decompile.split_draft(name, source)
                 decompile.write(owner, name, declarations, code)
             result = owner.read_text()
             for block in (header, first, second, helper, prototype, existing):
                 self.assertEqual(result.count(block), 1, block)
             self.assertNotIn('INCLUDE_ASM', result)
+            self.assertEqual(result.count('\ns32 value;\n'), 1)
             self.assertIn('s32 func_00100010(Second* self)', result)
             self.assertIn('s32 func_00100020(Second* self)', result)
 

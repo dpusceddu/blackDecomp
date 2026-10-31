@@ -71,11 +71,11 @@ def insert_declarations(text, decls):
     """Add missing complete declarations after the file's leading #include lines."""
     lines = text.split('\n')
     new = []
-    present = text
+    present = {block.strip() for block in declaration_blocks(lines)}
     for block in declaration_blocks(decls):
         if block.strip() and block.strip() not in present:
             new.extend(block.split('\n'))
-            present += '\n' + block
+            present.add(block.strip())
     if not new:
         return text
     at = 0
