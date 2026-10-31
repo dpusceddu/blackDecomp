@@ -61,7 +61,6 @@ M2C_UNK * func_00101FB0(void) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518", func_00102000);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518", func_00102080);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518", func_00102930);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_100518", func_00102BD0);
 extern void func_001D5C30(void*, s32);
 extern void* D_0040F510;

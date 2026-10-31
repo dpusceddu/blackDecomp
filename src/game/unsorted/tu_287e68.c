@@ -1,8 +1,8 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
 
-extern s32 func_00287600();
+extern void func_00287600(void*);
 
-void func_00287E68(void) {
-    func_00287600();
+void func_00287E68(void* payload) {
+    func_00287600(payload);
 }

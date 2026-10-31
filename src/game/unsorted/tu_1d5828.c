@@ -1,6 +1,19 @@
 #include "include_asm.h"
 #include "game/frontend_options.h"
 
+// Partial callback call surfaces; original interface names and unconsumed
+// scalar initialization result are UNVERIFIED.
+
+extern u8 D_0042A250[];
+extern void func_00282B60(void*);
+extern s32 func_0027FF00(void*, u32, u32, u32, s32, void*, u32);
+extern u8 D_0042A350[];
+extern s32 func_001EFD30(u8*);
+extern s32 func_001D7EC8(void*);
+// Native caller forwards this receiver to an existing producer that returns 1.
+extern s32 func_001D96E8_WithContext(void*) __asm__("func_001D96E8");
+extern s32 func_001E8710(void*);
+
 // These two native call sites forward A0 to matched no-op producers.
 extern void func_001E8798_WithContext(void*) __asm__("func_001E8798");
 extern void func_001D96F0_WithContext(void*) __asm__("func_001D96F0");
@@ -15,16 +28,127 @@ extern void func_001D8D70_WithState(void*, s32) __asm__("func_001D8D70");
 extern f32 func_0029E688(f32 base, f32 exponent);
 extern void func_00384700(void* music, f32 gain);
 
-extern s32 func_001EFBA0();
+extern s32 func_001EFBA0(void*);
 
+#ifdef NON_MATCHING
+// Unmatched: gain-store scheduling and two table-count load registers differ.
+extern u8 D_0040F0F0[];
+extern void *D_003BD284, *D_003BD280;
+extern u8 D_003F8C60[], D_003F8C10[];
+extern s32 D_003F8CA8, D_003F8C58;
+extern void* func_00107C80(void*, s32);
+extern u32 func_00107B98(void*, s32);
+extern void* func_00107CF8(u32);
+extern void* func_00107D20(u32);
+extern s32 func_001E82A8(void*);
+extern s32 func_001D7D40(void*, s32);
+extern void func_001D94F8(void*, void*, s32, void*, s32);
+extern void func_001EFE60(void*);
+s32 func_001D5828(void* self) {
+    u32* sizes;
+    u32 index, bytes;
+    s32 second;
+    D_003BD284 = func_00107C80(D_0040F0F0, 19);
+    D_003BD280 = (u8*)D_003BD284 + func_00107B98(D_0040F0F0, 19);
+    M2C_FIELD(self, f32*, 0xCBC8) = 1.0f;
+    M2C_FIELD(self, f32*, 0xCBC4) = 1.0f;
+    M2C_FIELD(self, void**, 0xCBE0) = func_00107CF8(0x2A80);
+    M2C_FIELD(self, void**, 0xCBF4) = func_00107CF8(0x58);
+    M2C_FIELD(self, void**, 0xCBD8) = func_00107CF8(0x60);
+    M2C_FIELD(self, void**, 0xCBD4) = func_00107CF8(0x2D8);
+    M2C_FIELD(self, void**, 0xCBDC) = func_00107CF8(0x1C);
+    func_001E82A8(M2C_FIELD(self, void**, 0xCBD8));
+    func_001D7D40(M2C_FIELD(self, void**, 0xCBD4), 35);
+    func_001D94F8(M2C_FIELD(self, void**, 0xCBDC), D_003F8C60, D_003F8CA8, D_003F8C10, D_003F8C58);
+    M2C_FIELD(self, u32*, 0xCBE4) = 0;
+    M2C_FIELD(self, u32*, 0xCBE8) = 0;
+    sizes = (u32*)D_0042A350;
+    index = 0;
+    do {
+        ++index;
+        M2C_FIELD(self, u32*, 0xCBE4) += sizes[0];
+        second = sizes[1];
+        sizes += 2;
+        M2C_FIELD(self, u32*, 0xCBE8) += second;
+    } while (index < 11);
+    bytes = M2C_FIELD(self, u32*, 0xCBE4);
+    M2C_FIELD(self, void**, 0xCBEC) = 0;
+    M2C_FIELD(self, void**, 0xCBF0) = 0;
+    if (bytes) M2C_FIELD(self, void**, 0xCBEC) = func_00107D20(bytes);
+    bytes = M2C_FIELD(self, u32*, 0xCBE8);
+    if (bytes) M2C_FIELD(self, void**, 0xCBF0) = func_00107D20(bytes);
+    func_001EFE60(self);
+    M2C_FIELD(self, s32*, 0xCBC0) = 0;
+    M2C_FIELD(self, s32*, 0xCBFC) = 1;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5828", func_001D5828);
+#endif
 
-s32 func_001D59C8(void) {
-    func_001EFBA0();
+// Native boot callers forward the audio runtime receiver through this wrapper.
+s32 func_001D59C8(void* runtime) {
+    func_001EFBA0(runtime);
     return 1;
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5828", func_001D59E8);
+s32 func_001D59E8(void* self) {
+    void* currentListener;
+    void* listener;
+    s16 thisAdjustment;
+    s32 complete;
+    u32 state;
+    u32 index;
+    u32 listenerIndex;
+    void* backend;
+    void* methods;
+    void* initializationMethods;
+    void* backendAgain;
+
+    state = M2C_FIELD(self, u32*, 0xCBC0);
+    complete = 0;
+    switch (state) {
+        case 0:
+            listener = D_0042A250;
+            backend = (void*)(((s8*)self) + 0xCB7C);
+            listenerIndex = 0;
+            do {
+                func_00282B60(listener);
+                methods = M2C_FIELD(backend, void**, 0xC);
+                index = listenerIndex;
+                currentListener = listener;
+                listenerIndex += 1;
+                listener = (void*)(((s8*)listener) + 0x80);
+                M2C_FIELD(methods, void (**)(void*, u32, void*),
+                          0x1C)((void*)(((s8*)backend) + M2C_FIELD(methods, s16*, 0x18)), index, currentListener);
+            } while (listenerIndex < 2U);
+            backendAgain = (void*)(((s8*)self) + 0xCB7C);
+            initializationMethods = M2C_FIELD(backendAgain, void**, 0xC);
+            thisAdjustment = M2C_FIELD(initializationMethods, s16*, 8);
+            M2C_FIELD(initializationMethods, s32(**)(void*, s32), 0xC)((void*)(((s8*)backendAgain) + thisAdjustment),
+                                                                       1);
+            func_0027FF00((void*)self, M2C_FIELD(self, u32*, 0xCBEC), M2C_FIELD(self, u32*, 0xCBE4),
+                          M2C_FIELD(self, u32*, 0xCBF0), M2C_FIELD(self, s32*, 0xCBE8), &D_0042A350, 0xBU);
+            M2C_FIELD(self, u32*, 0xCBC0) = 9U;
+            /* fallthrough */
+        case 9:
+            if (!func_001EFD30((u8*)self)) break;
+            M2C_FIELD(self, u32*, 0xCBC0) = 2;
+        case 2:
+            if (!func_001D7EC8(M2C_FIELD(self, void**, 0xCBD4))) break;
+            M2C_FIELD(self, u32*, 0xCBC0) = 3;
+        case 3:
+            if (!func_001D96E8_WithContext(M2C_FIELD(self, void**, 0xCBDC))) break;
+            M2C_FIELD(self, u32*, 0xCBC0) = 8;
+        case 8:
+            if (!func_001E8710(M2C_FIELD(self, void**, 0xCBD8))) break;
+            M2C_FIELD(self, u32*, 0xCBC0) = 10;
+        case 10:
+        default: complete = 1; break;
+    }
+    AudioRuntime_Update((Recovered_AudioRuntime*)self);
+    return complete;
+}
 void AudioRuntime_Update(Recovered_AudioRuntime* self) {
     func_001E8798_WithContext(self->mixer);
     func_001D7EE0(self->unk_CBD4);
