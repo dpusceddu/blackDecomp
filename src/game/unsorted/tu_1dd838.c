@@ -6,6 +6,7 @@
 extern void func_001DFC78(void);
 extern s32 func_001E0FE8(void *);
 extern s32 func_001DEEB8();
+extern void func_001DD9C8(void*, void*, s128);
 extern s32 func_001E0D28();
 extern s32 func_001E0F28(void *);
 extern s32 func_001E0E70(void *);
@@ -44,7 +45,48 @@ static inline u32 NextAudioRandom(BkEffectRandomStatePS2* random) {
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DD838);
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DD9C8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DDE78);
+void func_001DDE78(void* owner, void* input, void* actor) {
+    Recovered_AudioRequest request;
+    f32 second;
+    f32 first;
+    f32 random;
+    s32 selector;
+    s32 status;
+    s32 kind;
+    s32 id;
+    void* component;
+    void* manager;
+
+    request.unk_30 = 0;
+    request.unk_34 = 0;
+    status = func_001DE520(owner, actor);
+    first = func_001E1708(M2C_FIELD(GameplayPools()->unk_4BD8, s32*, 0x10), 0);
+    manager = M2C_FIELD(GameplayPools()->unk_4BD8, void**, 0x10);
+    selector = M2C_FIELD(M2C_FIELD(manager, void**, 0x2424), s32*, 8);
+    second = func_001DFB20(owner, M2C_FIELD(input, void**, 0x24));
+    component = M2C_FIELD(input, void**, 0x24);
+    if ((component != NULL) && (kind = M2C_FIELD(component, s32*, 0xC4), (((u32)(kind - 1) < 2U) != 0))) {
+        if (kind == 2) {
+            id = M2C_FIELD(M2C_FIELD(M2C_FIELD(GameplayPools()->unk_4BD8, void**, 0x10), void**, 0x2424), s32*, 0x14);
+        } else {
+            id = M2C_FIELD(M2C_FIELD(M2C_FIELD(GameplayPools()->unk_4BD8, void**, 0x10), void**, 0x2424), s32*, 0x10);
+        }
+    } else {
+        id = (s32)M2C_FIELD(input, u8*, 0x28);
+    }
+    func_001DD9C8(owner, actor, M2C_FIELD(input, s128*, 0));
+    random = (f32)NextAudioRandom(&D_0040EB30);
+    request.unk_00 = selector;
+    request.unk_04 = id;
+    request.unk_08 = first;
+    request.unk_10 = random * 2.3283064e-10f;
+    request.unk_20 = M2C_FIELD(input, s128*, 0);
+    request.unk_0C = second;
+    request.unk_34 = status;
+    request.unk_30 = 4;
+    request.unk_38 = 0;
+    func_001E0930(M2C_FIELD(GameplayPools()->unk_4BD8, void**, 0x10), &request, 1);
+}
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1dd838", func_001DE070);
 void func_001DE078(void* owner, s128 value, void* input, void* actor) {
     Recovered_AudioRequest request;
