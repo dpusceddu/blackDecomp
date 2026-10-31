@@ -58,4 +58,20 @@ void func_002052A0(void *arg0, s32 arg1) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_2052a0", func_002053E0);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_204a50_2052a0", func_00205798);
+extern void func_00103800(void*, s8);
+extern void* D_0040F0E0;
+/* Native query returns 0 or 1; this caller normalizes the low byte. */
+extern s32 func_0026BBF8(void*, u32);
+extern s32 func_001249F8(s32, s32);
+extern void* D_0040F524;
+
+void func_00205798(void) {
+    s32 temp_16;
+
+    func_00103800(D_0040F0E0, 1);
+    temp_16 = M2C_FIELD(D_0040F0E0, s32*, 0x21060);
+    if (func_0026BBF8(M2C_FIELD(temp_16, void**, 0xC), func_001249F8(temp_16, 9)) & 0xFF) {
+        func_002052A0(D_0040F524, 0);
+    }
+}
+
