@@ -11,11 +11,11 @@ s32 func_0011E2E0(s32 arg0) {
 
 #ifdef NON_MATCHING
 #include "game/animation_action.h"
-// Unmatched: action kind and mode constant lifetimes and store scheduling differ (five instructions).
 extern void* func_0011D498(void*);
 extern s32 func_0011DFC0(void*);
 extern s32 func_00136F10(void*, s32);
 extern void func_001A6330(void*, const Recovered_AnimationAction*);
+// Unmatched: action kind and mode constant lifetimes and store scheduling differ (five instructions).
 void func_0011E300(void* self, s32 key, s32 flag) {
     Recovered_AnimationAction action;
     void* actor = func_0011D498(self);
