@@ -27,7 +27,7 @@ extern f32 func_0019EEA0(void *, f32);
 extern s32 func_0016DFB0(void *, f32);
 
 extern s32 func_00193988();
-extern s32 func_001880D8();
+extern void func_001880D8(void *);
 extern s32 func_001823B0();
 extern s32 func_001829A8();
 extern s32 func_001829E8(void *);
@@ -39,7 +39,51 @@ extern s32 func_001863A0();
 extern s32 func_0019DFE8();
 extern s32 func_0019DF50(void *);
 
+#ifdef NON_MATCHING
+// Unmatched: three actor-load/base-register differences after the movement goal call.
+extern s32 func_00188F10(void*);
+extern s32 func_0018AB08(void*);
+extern f32 func_00189310(void*);
+extern void func_00193990(void*, u8);
+extern void func_0019E380(void**);
+extern s128 func_00189048(void*);
+extern void* func_001893A0(void*);
+extern s32 func_0017E428(void*, s128);
+extern s32 func_00187FE0(void*, s32);
+extern void func_0019EC00(void*);
+extern void func_0019E510(void*);
+void func_0019DBD0(void* self) {
+    s128 position;
+    void* actor;
+    if (!func_00188F10((u8*)M2C_FIELD(self, void**, 0) + 0x150) ||
+        (!func_0018AB08((u8*)M2C_FIELD(self, void**, 0) + 0x150) &&
+         func_00189310((u8*)M2C_FIELD(self, void**, 0) + 0x150) > 6.0f)) {
+        func_00193990(self, 0);
+        return;
+    }
+    if (M2C_FIELD(M2C_FIELD(self, void**, 0), u8*, 0x291)) {
+        func_0019E380(self);
+        return;
+    }
+    if (func_0018AB08((u8*)M2C_FIELD(self, void**, 0) + 0x150)) {
+        position = func_00189048((u8*)M2C_FIELD(self, void**, 0) + 0x150);
+        func_0017E428((u8*)M2C_FIELD(self, void**, 0) + 0x650, position);
+        actor = M2C_FIELD(self, void**, 0);
+        if (!M2C_FIELD(actor, u8*, 0x290)) func_00187FE0((u8*)actor + 0x290, 0);
+    } else if (func_00189310((u8*)M2C_FIELD(self, void**, 0) + 0x150) < 1.98f) {
+        void* point = func_001893A0((u8*)M2C_FIELD(self, void**, 0) + 0x150);
+        func_0017E428((u8*)M2C_FIELD(self, void**, 0) + 0x650, M2C_FIELD(point, s128*, 0));
+        actor = M2C_FIELD(self, void**, 0);
+        if (!M2C_FIELD(actor, u8*, 0x290)) func_00187FE0((u8*)actor + 0x290, 0);
+    } else {
+        func_001880D8((u8*)M2C_FIELD(self, void**, 0) + 0x290);
+    }
+    func_0019EC00(self);
+    func_0019E510(self);
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_19dbd0", func_0019DBD0);
+#endif
 void func_0019DD08(void* self, const void* event) {
     int enabled;
     func_00193980(self, event);

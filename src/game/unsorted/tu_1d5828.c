@@ -30,7 +30,61 @@ extern void func_00384700(void* music, f32 gain);
 
 extern s32 func_001EFBA0();
 
+#ifdef NON_MATCHING
+// Unmatched: gain-store scheduling and two table-count load registers differ.
+extern u8 D_0040F0F0[];
+extern void *D_003BD284, *D_003BD280;
+extern u8 D_003F8C60[], D_003F8C10[];
+extern s32 D_003F8CA8, D_003F8C58;
+extern void* func_00107C80(void*, s32);
+extern u32 func_00107B98(void*, s32);
+extern void* func_00107CF8(u32);
+extern void* func_00107D20(u32);
+extern s32 func_001E82A8(void*);
+extern s32 func_001D7D40(void*, s32);
+extern void func_001D94F8(void*, void*, s32, void*, s32);
+extern void func_001EFE60(void*);
+s32 func_001D5828(void* self) {
+    u32* sizes;
+    u32 index, bytes;
+    s32 second;
+    D_003BD284 = func_00107C80(D_0040F0F0, 19);
+    D_003BD280 = (u8*)D_003BD284 + func_00107B98(D_0040F0F0, 19);
+    M2C_FIELD(self, f32*, 0xCBC8) = 1.0f;
+    M2C_FIELD(self, f32*, 0xCBC4) = 1.0f;
+    M2C_FIELD(self, void**, 0xCBE0) = func_00107CF8(0x2A80);
+    M2C_FIELD(self, void**, 0xCBF4) = func_00107CF8(0x58);
+    M2C_FIELD(self, void**, 0xCBD8) = func_00107CF8(0x60);
+    M2C_FIELD(self, void**, 0xCBD4) = func_00107CF8(0x2D8);
+    M2C_FIELD(self, void**, 0xCBDC) = func_00107CF8(0x1C);
+    func_001E82A8(M2C_FIELD(self, void**, 0xCBD8));
+    func_001D7D40(M2C_FIELD(self, void**, 0xCBD4), 35);
+    func_001D94F8(M2C_FIELD(self, void**, 0xCBDC), D_003F8C60, D_003F8CA8, D_003F8C10, D_003F8C58);
+    M2C_FIELD(self, u32*, 0xCBE4) = 0;
+    M2C_FIELD(self, u32*, 0xCBE8) = 0;
+    sizes = (u32*)D_0042A350;
+    index = 0;
+    do {
+        ++index;
+        M2C_FIELD(self, u32*, 0xCBE4) += sizes[0];
+        second = sizes[1];
+        sizes += 2;
+        M2C_FIELD(self, u32*, 0xCBE8) += second;
+    } while (index < 11);
+    bytes = M2C_FIELD(self, u32*, 0xCBE4);
+    M2C_FIELD(self, void**, 0xCBEC) = 0;
+    M2C_FIELD(self, void**, 0xCBF0) = 0;
+    if (bytes) M2C_FIELD(self, void**, 0xCBEC) = func_00107D20(bytes);
+    bytes = M2C_FIELD(self, u32*, 0xCBE8);
+    if (bytes) M2C_FIELD(self, void**, 0xCBF0) = func_00107D20(bytes);
+    func_001EFE60(self);
+    M2C_FIELD(self, s32*, 0xCBC0) = 0;
+    M2C_FIELD(self, s32*, 0xCBFC) = 1;
+    return 1;
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1d5828", func_001D5828);
+#endif
 
 s32 func_001D59C8(void) {
     func_001EFBA0();

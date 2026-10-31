@@ -600,7 +600,214 @@ void func_001E45A8(void* state) {
     }
 }
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001E8B60);
+#ifdef NON_MATCHING
+// Unmatched: resource-loop setup scheduling and a few register choices differ.
+// Accessed sound-manager layout; original classes and unused array extents are UNVERIFIED.
+typedef struct SoundResourceManagerView {
+    s8 counts[3];
+    u8 pad3;
+    void* primary[16];
+    void* single44[1];
+    void* secondary[8];
+    void* fixed68[4];
+    void* single78[2];
+    void* tertiary[50];
+    void* pair148[2];
+    void* fixed150[4];
+    void* fixed160[4];
+    void* components[17];
+    s32 state;
+} SoundResourceManagerView;
+
+extern s32 func_001E5940(void*);
+extern s32 func_001ED6B0(void*);
+extern s32 func_001D8AD0(void*);
+extern void func_002818D0(void*, void*);
+extern void* D_0040F510;
+extern s32 func_001EF710(void*);
+extern s32 func_001EED58(void*);
+extern s32 func_001EA898(s32);
+extern s32 func_001E79F0(void*);
+extern s32 func_001EBC88(void*);
+extern void func_00281908(void*, void*);
+extern s32 func_001DBDB8(void*);
+extern s32 func_001E3BB0(void*);
+extern s32 func_001E2B48(void*);
+extern s32 func_001E0480(void*);
+extern s32 func_001D6CB8(void*);
+extern s32 func_001EA4F0(s32);
+extern s32 func_001E8248(void*);
+
+s32 func_001E9250(SoundResourceManagerView* self) {
+    void** cursor;
+    s32 index;
+    switch (self->state) {
+        case 0:
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+        case 7:
+        case 8:
+        case 9:
+        case 10:
+        case 17:
+        case 18: self->state = 23;
+        case 23:
+            if (!func_001E5940(self->components[0])) return 0;
+            self->state = 19;
+        case 19:
+            if (!func_001ED6B0(self->components[10])) return 0;
+            self->state = 20;
+        case 20:
+            if (!func_001D8AD0(self->components[14])) return 0;
+            cursor = self->pair148;
+            index = 1;
+            do {
+                --index;
+                func_002818D0((u8*)D_0040F510 + 0xB308, *cursor);
+                *cursor = 0;
+                ++cursor;
+            } while (index >= 0);
+            self->state = 21;
+        case 21:
+            if (!func_001EF710(self->components[12])) return 0;
+            self->state = 22;
+        case 22:
+            if (!func_001EED58(self->components[11])) return 0;
+            index = 0;
+            if (self->counts[2] > 0) {
+                cursor = self->tertiary;
+                do {
+                    void* resource = *cursor;
+                    if (resource) {
+                        func_002818D0((u8*)D_0040F510 + 0xB308, resource);
+                        *cursor = 0;
+                    }
+                    ++cursor;
+                    ++index;
+                } while (index < self->counts[2]);
+            }
+            self->state = 24;
+        case 24:
+            if (!func_001EA898((s32)self->components[9])) return 0;
+            self->state = 25;
+        case 25:
+            if (!func_001E79F0(self->components[5])) return 0;
+            self->state = 26;
+        case 26:
+            if (!func_001EBC88(self->components[8])) return 0;
+            cursor = self->single78;
+            index = 0;
+            do {
+                void* resource = *cursor;
+                if (resource) {
+                    func_002818D0((u8*)D_0040F510 + 0xB308, resource);
+                    *cursor = 0;
+                }
+                ++cursor;
+                --index;
+            } while (index >= 0);
+            cursor = self->fixed150;
+            index = 3;
+            do {
+                void* resource = *cursor;
+                if (resource) {
+                    func_00281908((u8*)D_0040F510 + 0xB308, resource);
+                    *cursor = 0;
+                }
+                ++cursor;
+                --index;
+            } while (index >= 0);
+            self->state = 27;
+        case 27:
+            if (!func_001DBDB8(self->components[7])) return 0;
+            cursor = self->fixed68;
+            index = 3;
+            do {
+                void* resource = *cursor;
+                if (resource) {
+                    func_002818D0((u8*)D_0040F510 + 0xB308, resource);
+                    *cursor = 0;
+                }
+                ++cursor;
+                --index;
+            } while (index >= 0);
+            self->state = 28;
+        case 28:
+            if (!func_001E3BB0(self->components[6])) return 0;
+            index = 0;
+            if (self->counts[1] > 0) {
+                cursor = self->secondary;
+                do {
+                    void* resource = *cursor;
+                    if (resource) {
+                        func_002818D0((u8*)D_0040F510 + 0xB308, resource);
+                        *cursor = 0;
+                    }
+                    ++cursor;
+                    ++index;
+                } while (index < self->counts[1]);
+            }
+            self->state = 29;
+        case 29:
+            if (!func_001E2B48(self->components[4])) return 0;
+            index = 0;
+            if (self->counts[0] > 0) {
+                cursor = self->primary;
+                do {
+                    void* resource = *cursor;
+                    if (resource) {
+                        func_002818D0((u8*)D_0040F510 + 0xB308, resource);
+                        *cursor = 0;
+                    }
+                    ++cursor;
+                    ++index;
+                } while (index < self->counts[0]);
+            }
+            self->state = 30;
+        case 30:
+            if (!func_001E0480(self->components[3])) return 0;
+            self->state = 31;
+        case 31:
+            if (!func_001D6CB8(self->components[2])) return 0;
+            cursor = self->single44;
+            index = 0;
+            do {
+                void* resource = *cursor;
+                if (resource) {
+                    func_002818D0((u8*)D_0040F510 + 0xB308, resource);
+                    *cursor = 0;
+                }
+                ++cursor;
+                --index;
+            } while (index >= 0);
+            cursor = self->fixed160;
+            index = 3;
+            do {
+                void* resource = *cursor;
+                if (resource) {
+                    func_00281908((u8*)D_0040F510 + 0xB308, resource);
+                    *cursor = 0;
+                }
+                ++cursor;
+                --index;
+            } while (index >= 0);
+            self->state = 32;
+        case 32:
+            if (!func_001EA4F0((s32)self->components[1])) return 0;
+            self->state = 33;
+        case 33:
+            if (!func_001E8248(self)) return 0;
+            self->state = 34;
+        case 34: return 1;
+        case 35:
+        default: return 0;
+    }
+}
+#else
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_1add78_1ae050", func_001E9250);
+#endif
 #ifdef NON_MATCHING
 extern s32 func_001EF710(void*);
 extern void func_002818D0(void*, void*);
