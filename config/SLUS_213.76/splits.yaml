@@ -819,7 +819,7 @@ splits:
   - {src: src/game/ai/tu_1804f8_180ae0.c, range: [0x180ae0, 0x180cc8]}
   - {src: src/game/ai/tu_1804f8_180cc8.c, range: [0x180cc8, 0x180ed8]}
   - {src: src/game/ai/tu_1804f8_180ed8.c, range: [0x180ed8, 0x181028]}
-  - {src: src/game/ai/tu_1804f8_181028.c, range: [0x181028, 0x181418]}
+  - {src: src/game/ai/tu_1804f8_181028.c, range: [0x181028, 0x181418], flags: [-O2, -G0, -snas, --assembler=sn-min6], note: "Native descending component-table clear uses a six-word loop with one BGEZ interlock; stock SN inserts another NOP."}
   - {src: src/game/ai/tu_1804f8_181418.c, range: [0x181418, 0x1815d8]}
   - {src: src/game/ai/ai_action_1815d8.cpp, range: [0x1815d8, 0x181660]}
   - {src: src/game/ai/ai_action_stack_181660.cpp, range: [0x181660, 0x181960]}
