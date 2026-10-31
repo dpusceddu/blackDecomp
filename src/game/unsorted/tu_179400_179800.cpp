@@ -30,7 +30,7 @@ typedef struct {
 extern "C" void* func_0016FA38(void);
 extern "C" void* func_002F5C10(void*);
 extern u8 D_003DFFE0[];
-extern "C" s32 func_00289480(void*, void*);
+extern "C" void func_00289480(void*, void*);
 extern "C" Bound* func_002F0A00(void*, void*);
 extern "C" s32 func_002EF1A0(void*, void*);
 extern "C" void func_00179800(State* self, Definition* definition) {

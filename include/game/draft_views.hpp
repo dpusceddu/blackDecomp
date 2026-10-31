@@ -9,9 +9,9 @@ template<class T> inline T& Field(void* object,int offset) {
 
 extern char* effects __asm__("D_0040F4C0");
 extern int PrepareCoordinates(void*,const int*) __asm__("func_001C1BB8");
-extern int PublishCoordinates(void*,void*) __asm__("func_001C88C8");
-extern int SetEffectMode(void*,int) __asm__("func_001AF768");
-extern int FinishCoordinates(void*) __asm__("func_001C1C10");
+extern void PublishCoordinates(void*,void*) __asm__("func_001C88C8");
+extern void SetEffectMode(void*,int) __asm__("func_001AF768");
+extern void FinishCoordinates(void*) __asm__("func_001C1C10");
 extern int ActorVisited(void*,void*,void*) __asm__("func_00128120");
 extern int PlaybackScale(void*) __asm__("func_001D9F60");
 extern int PlaybackLength(void*) __asm__("func_001D9F40");
@@ -20,7 +20,7 @@ extern void* PendingWeaponAction(void*) __asm__("func_00158078");
 extern int MovementReady(void*) __asm__("func_0017E968");
 extern int MovementEnabled(void*) __asm__("func_0017E860");
 
-int RefreshAtCoordinates(void*,const int*) __asm__("func_001C1A98");
+void RefreshAtCoordinates(void*,const int*) __asm__("func_001C1A98");
 unsigned CurrentBuffer(void*) __asm__("func_001C2A98");
 float PlaybackInterval(void*) __asm__("func_001DD748");
 void UpdateLinkedItems(void*,float) __asm__("func_001F1608");
