@@ -1,12 +1,14 @@
 #include "include_asm.h"
 #include "ps2/prelude.h"
+extern void func_00283C10(void*, f32);
+extern void func_00283C18(void*, f32);
 extern s32 func_00281238(void*, void*, void*);
 extern void func_00283B10(void*, void*);
 extern u8 D_00443180[];
 extern void func_00283AC8(void*, s128);
 extern void func_00283B80(void*, f32);
 extern void func_00283B90(void*, f32);
-extern void func_00283648(void*, u8, f32, f32, f32, f32, f32, f32);
+extern void func_00283648(void*, f32, f32, f32, f32, f32, f32, u8);
 extern void func_00283B60(void*, f32);
 extern void func_00283B38(void*, f32);
 extern void func_00283BC0(void*, s32);
@@ -28,7 +30,7 @@ typedef struct ProviderVector3 {
     f32 x, y, z;
 } ProviderVector3;
 
-extern s32 func_00283C38();
+extern s32 func_00283C38(void*, void*);
 extern s32 func_00283E78(void*, void*, void*);
 extern s32 func_002842E8();
 extern s32 func_00328140(void *, s32);
@@ -66,13 +68,9 @@ typedef struct {
 
 // The native spatial hook carries a kind byte and six float parameters.
 // This backend ignores them; the original class and parameter names are UNVERIFIED.
-void func_00283648(void* self, u8 kind, f32 a, f32 b, f32 c, f32 d, f32 e, f32 f) {
+void func_00283648(void* self, f32 a, f32 b, f32 c, f32 d, f32 e, f32 f, u8 kind) {}
 
-}
-
-void func_00283650(void) {
-    func_00283C38();
-}
+void func_00283650(void* self, void* parameters) { func_00283C38(self, parameters); }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_283648", func_00283670);
 
@@ -89,7 +87,14 @@ void func_00283898(void *arg0) {
 }
 
 INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_283648", func_002838B8);
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_283648", func_00283A78);
+void func_00283A78(void* self, s128 position) {
+    ProviderVector3 output;
+    f32* values = (f32*)&position;
+    output.x = values[0];
+    output.y = values[1];
+    output.z = values[2];
+    *(ProviderVector3*)((u8*)M2C_FIELD(self, void**, 0x38) + 0x68) = output;
+}
 
 void func_00283AC0(void) {
 
@@ -158,7 +163,56 @@ void func_00283C18(void *arg0, f32 value) {
     func_00328180(M2C_FIELD(arg0, void **, 0x38), value);
 }
 
-INCLUDE_ASM("asm/SLUS_213.76/nonmatchings/game/unsorted/tu_281388_283648", func_00283C38);
+s32 func_00283C38(void* arg0, void* arg1) {
+    s32 temp_3_2;
+    void* temp_2;
+    void* temp_2_3;
+    void* temp_3;
+    void* temp_5;
+
+    if (func_002842E8((Recovered_ProviderState*)arg0) != 0) {
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 3) & 1) {
+            M2C_FIELD(arg0, f32*, 0x10) = (f32)M2C_FIELD(arg1, f32*, 0x54);
+        }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 5) & 1) {
+            M2C_FIELD(arg0, f32*, 0x14) = (f32)M2C_FIELD(arg1, f32*, 0x5C);
+        }
+        temp_5 = M2C_FIELD(arg0, void**, 4);
+        temp_3 = M2C_FIELD(temp_5, void**, 0x10);
+        if (M2C_FIELD(temp_3, s32(**)(void*), 0xC)((void*)(((s8*)temp_5) + M2C_FIELD(temp_3, s16*, 8))) != 0) {
+            if ((u8)M2C_FIELD(arg1, s32*, 0xA4) & 1) { SetProviderPosition(arg0, M2C_FIELD(arg1, s128*, 0x30)); }
+            if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 1) & 1) { func_00283AC8(arg0, M2C_FIELD(arg1, s128*, 0x40)); }
+            if (M2C_FIELD(arg1, u8*, 0xA5) & 1) { func_00283B80(arg0, M2C_FIELD(arg1, f32*, 0x74)); }
+            if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 9) & 1) { func_00283B90(arg0, M2C_FIELD(arg1, f32*, 0x70)); }
+            if (ProviderFlag(M2C_FIELD(arg1, u8*, 0xA6), 7) != 0) {
+                temp_2_3 = (void*)(((s8*)arg1) + 0x88);
+                func_00283648(arg0, M2C_FIELD(arg1, f32*, 0x88), M2C_FIELD(temp_2_3, f32*, 8),
+                              M2C_FIELD(temp_2_3, f32*, 4), M2C_FIELD(temp_2_3, f32*, 12),
+                              M2C_FIELD(temp_2_3, f32*, 16), M2C_FIELD(temp_2_3, f32*, 20), M2C_FIELD(arg1, u8*, 0xAB));
+            }
+        } else {
+            if (ProviderFlag(M2C_FIELD(arg1, u8*, 0xA5), 7) != 0) { func_00283C10(arg0, M2C_FIELD(arg1, f32*, 0x7C)); }
+            temp_3_2 = M2C_FIELD(arg1, s32*, 0xA4);
+            if ((temp_3_2 >> 0x10) & 1) {
+                func_00283C18(arg0, M2C_FIELD(arg1, f32*, 0x78));
+            } else if ((temp_3_2 >> 6) & 1) {
+                func_00283B60(arg0, M2C_FIELD(arg1, f32*, 0x60));
+            }
+            if (ProviderFlag(M2C_FIELD(arg1, u8*, 0xA6), 7) != 0) {
+                temp_2 = (void*)(((s8*)arg1) + 0x88);
+                func_00283648(arg0, M2C_FIELD(arg1, f32*, 0x88), M2C_FIELD(temp_2, f32*, 8), M2C_FIELD(temp_2, f32*, 4),
+                              M2C_FIELD(temp_2, f32*, 12), M2C_FIELD(temp_2, f32*, 16), M2C_FIELD(temp_2, f32*, 20),
+                              M2C_FIELD(arg1, u8*, 0xAB));
+            }
+        }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 4) & 1) { func_00283B38(arg0, M2C_FIELD(arg1, f32*, 0x58)); }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 0xE) & 1) {
+            M2C_FIELD(arg0, f32*, 0x18) = (f32)M2C_FIELD(arg1, f32*, 0x64);
+        }
+        if (((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 0xD) & 1) { func_00281200(arg0, M2C_FIELD(arg1, f32*, 0x6C)); }
+    }
+    return 1;
+}
 s32 func_00283E78(void* arg0, void* arg1, void* arg2) {
     f32 var_f0;
     f32 var_f0_2;
@@ -230,9 +284,9 @@ s32 func_00283E78(void* arg0, void* arg1, void* arg2) {
                     selected = (u8*)defaults + 0x88;
                     kind = M2C_FIELD(defaults, u8*, 0xAB);
                 }
-                func_00283648(arg0, kind, M2C_FIELD(selected, f32*, 0), M2C_FIELD(selected, f32*, 8),
+                func_00283648(arg0, M2C_FIELD(selected, f32*, 0), M2C_FIELD(selected, f32*, 8),
                               M2C_FIELD(selected, f32*, 4), M2C_FIELD(selected, f32*, 12),
-                              M2C_FIELD(selected, f32*, 16), M2C_FIELD(selected, f32*, 20));
+                              M2C_FIELD(selected, f32*, 16), M2C_FIELD(selected, f32*, 20), kind);
             }
         } else {
             if (((M2C_FIELD(arg1, s32*, 0xA4) >> 6) & 1)) {
@@ -250,9 +304,9 @@ s32 func_00283E78(void* arg0, void* arg1, void* arg2) {
                     selected = (u8*)defaults + 0x88;
                     kind = M2C_FIELD(defaults, u8*, 0xAB);
                 }
-                func_00283648(arg0, kind, M2C_FIELD(selected, f32*, 0), M2C_FIELD(selected, f32*, 8),
+                func_00283648(arg0, M2C_FIELD(selected, f32*, 0), M2C_FIELD(selected, f32*, 8),
                               M2C_FIELD(selected, f32*, 4), M2C_FIELD(selected, f32*, 12),
-                              M2C_FIELD(selected, f32*, 16), M2C_FIELD(selected, f32*, 20));
+                              M2C_FIELD(selected, f32*, 16), M2C_FIELD(selected, f32*, 20), kind);
             }
         }
         if ((((s32)M2C_FIELD(arg1, s32*, 0xA4) >> 4) & 1)) {
